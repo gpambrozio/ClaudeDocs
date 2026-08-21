@@ -291,8 +291,7 @@ cURL
 
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/rbac_groups?limit=20" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13"
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ```shiki
@@ -327,8 +326,7 @@ cURL
 
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13"
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ###  Create a group
@@ -345,7 +343,6 @@ cURL
 curl -X POST "https://api.anthropic.com/v1/organizations/rbac_groups" \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13" \
   -d '{"name": "Engineering"}'
 ```
 
@@ -377,7 +374,6 @@ cURL
 curl -X POST "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn" \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13" \
   -d '{"name": "Platform Engineering"}'
 ```
 
@@ -393,8 +389,7 @@ cURL
 
 ```shiki
 curl -X DELETE "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13"
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ```shiki
@@ -418,8 +413,7 @@ cURL
 
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn/members?limit=100" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13"
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ```shiki
@@ -454,7 +448,6 @@ cURL
 curl -X POST "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn/members" \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13" \
   -d '{"user_id": "user_01AbCdEfGhIjKlMnOpQrSt"}'
 ```
 
@@ -482,8 +475,7 @@ cURL
 
 ```shiki
 curl -X DELETE "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn/members/user_01AbCdEfGhIjKlMnOpQrSt" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13"
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ```shiki
@@ -512,8 +504,7 @@ cURL
 
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/rbac_roles?limit=20" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13"
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ```shiki
@@ -546,8 +537,7 @@ cURL
 
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/rbac_roles/rbac_role_01CdEfGhIjKlMnOpQrStUv" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13"
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ###  List a role's permissions
@@ -564,8 +554,7 @@ cURL
 
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/rbac_roles/rbac_role_01CdEfGhIjKlMnOpQrStUv/permissions?limit=20" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13"
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ```shiki

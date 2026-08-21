@@ -26,7 +26,7 @@ go get github.com/anthropics/anthropic-sdk-go
 
 ##  Requirements
 
-This library requires Go 1.23+.
+This library requires Go 1.24+.
 
 ##  Usage
 
@@ -437,12 +437,12 @@ helper, which wraps any `io.Reader` with the appropriate file name and content t
 ```shiki
 // A file from the file system
 file, err := os.Open("/path/to/file.json")
-anthropic.BetaFileUploadParams{
+anthropic.FileUploadParams{
 	File: anthropic.File(file, "custom-name.json", "application/json"),
 }
 
 // A file from a string
-anthropic.BetaFileUploadParams{
+anthropic.FileUploadParams{
 	File: anthropic.File(strings.NewReader("my file contents"), "custom-name.json", "application/json"),
 }
 ```

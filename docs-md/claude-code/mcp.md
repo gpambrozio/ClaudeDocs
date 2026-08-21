@@ -225,7 +225,14 @@ A `disabledMcpjsonServers` entry in any settings file still rejects the server.
 
 #### [​](#server-status-detail) Server status detail
 
-In `/mcp`, a server’s menu, and the [`/plugin`](plugins.md) manager, a remote (HTTP or SSE) server you’ve used before can show a `cached` status such as `cached 2h ago · connects on first use · 5 tools`. Claude Code loaded the server’s tool list from a previous session instead of connecting at startup, and it connects the server the first time Claude calls one of its tools. The tools are available from your first message, so you don’t need to do anything. To make every server connect at startup instead, set [`MCP_DISCOVERY_CACHE=0`](env-vars.md). The discovery cache and its `cached` status require Claude Code v2.1.221 or later.
+In `/mcp`, including a server’s menu there, and in the [`/plugin`](plugins.md) manager, a remote HTTP or SSE server you’ve used before can show a `cached` status such as `cached 2h ago · connects on first use · 5 tools`. Claude Code loaded the server’s tool list from its discovery cache, saved in a previous session, instead of connecting at startup, and Claude Code connects the server the first time Claude calls one of the server’s tools. The tools are available from your first message, so you don’t need to do anything. The discovery cache and its `cached` status require Claude Code v2.1.221 or later.
+The discovery cache is off by default unless a gradual rollout has enabled it for your account. Set [`MCP_DISCOVERY_CACHE=1`](env-vars.md) to turn it on, or `0` to keep it off even when the rollout has enabled it. Before v2.1.238, the cache was on by default.
+Two actions in a server’s menu in `/mcp` also affect that server’s cache entry:
+
+- **Reconnect**: on a `cached` server, Claude Code connects it now rather than on its first tool call and keeps the entry. On a connected or failed server, Claude Code reconnects it and also discards the entry.
+- **Clear authentication**: Claude Code revokes the server’s authentication and also discards the entry.
+
+After discarding the entry, Claude Code fetches the server’s tool list from the server instead of from the cache.
 When a server’s status is `✘ Failed to connect`, `claude mcp list` appends the failure detail to that status line, and `claude mcp get <name>` shows it on an `Issue:` line: the HTTP status or error code, plus any error text the server returned. The server’s detail view in `/mcp` includes the same server-reported text in its `Issue:` row. Claude Code redacts credential-like text from this detail and never includes the expanded server URL, which can carry secrets. Claude Code appends no detail to a `✘ Connection error` status, because the exception text it would print there can embed that URL. Before v2.1.219, both commands showed only the bare failure status, without the status code or the server’s error text.
 A remote server whose configuration has an empty `url` shows as `not configured` in `/mcp`, in `claude mcp list`, and in the [`/plugin`](plugins.md) manager, and Claude Code doesn’t attempt to connect to it. A plugin can include a placeholder entry like this for a connector you configure later, so Claude Code doesn’t report it as an error or a setup issue. The server’s detail view in `/mcp` reads `No URL configured for this server`; set the entry’s `url` to connect it. Before v2.1.208, Claude Code reported an empty `url` as a configuration issue with a prompt to reconnect.
 
@@ -257,10 +264,38 @@ When you toggle a server, Claude Code records your choice per project in `~/.cla
 Claude Code consults exactly one of the two lists for each server, so neither list overrides the other. If you add a regular server to `enabledMcpServers`, or a default-off built-in server to `disabledMcpServers`, Claude Code ignores the entry.
 `disabledMcpServers` and `enabledMcpServers` are unrelated to [`enabledMcpjsonServers` and `disabledMcpjsonServers`](settings.md), which control approval of servers defined in a project’s `.mcp.json` file.
 
+### [​](#mcp-client-runtimes) MCP client runtimes
+
+Claude Code connects to MCP servers through one of two client runtimes. The v1 runtime is built on MCP TypeScript SDK 1.x. The v2 runtime is the same code on [MCP TypeScript SDK 2.0](https://ts.sdk.modelcontextprotocol.io/v2/), which adds MCP protocol revision 2026-07-28. The rest of this page applies to both.
+On Claude Code v2.1.232 or later, Claude Code uses the v2 runtime. It picks a runtime each time you start it and keeps it until you exit. It uses v1 when you run it:
+
+- On Amazon Bedrock, Claude Platform on AWS, Google Cloud’s Agent Platform, or Microsoft Foundry, unless a host platform that embeds Claude Code sets [`CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`](env-vars.md)
+- Signed in through a [Claude apps gateway](claude-apps-gateway.md)
+- With [feature-flag fetching off](env-vars.md)
+
+On v2, Claude Code also:
+
+- Asks HTTP, claude.ai connector, and stdio servers whether they support the newer revision, and uses it with those that do. It connects to every other server as v1 does.
+- Receives `list_changed` notifications from servers on the newer revision over a [stream it holds open](#notification-streams-on-the-v2-runtime).
+- Doesn’t register a [channel](#push-messages-with-channels) server that connects on the newer revision, because that revision can’t carry channel messages.
+- Fails an [MCP OAuth sign-in](#authenticate-with-remote-mcp-servers) whose authorization response names an unexpected issuer.
+
+Anthropic can keep a specific server on the earlier protocol, or off that stream, with a feature flag Claude Code fetches. In a [Claude Code on the web](cloud-environments.md) session, Claude Code asks its MCP connectors only if you set `MCP_PROTOCOL_NEGOTIATION` to `auto`.
+To pick the runtime yourself, set [`MCP_SDK_GENERATION`](env-vars.md) to `v1` or `v2`. To decide whether Claude Code asks, set [`MCP_PROTOCOL_NEGOTIATION`](env-vars.md) to `auto` or `legacy`. Where Claude Code uses v1 by default, pinning `v2` doesn’t make it ask, so set `auto` too.
+
 ### [​](#dynamic-tool-updates) Dynamic tool updates
 
 Claude Code supports MCP `list_changed` notifications, allowing MCP servers to dynamically update their available tools, prompts, and resources without requiring you to disconnect and reconnect. When an MCP server sends a `list_changed` notification, Claude Code automatically refreshes the available capabilities from that server.
 If a refresh request fails, Claude Code keeps the server’s previously discovered tools, prompts, and resources until a later refresh succeeds. Before v2.1.214, a transient error during the refresh replaced the server’s tools, prompts, and resources with an empty list.
+
+#### [​](#notification-streams-on-the-v2-runtime) Notification streams on the v2 runtime
+
+On the [v2 runtime](#mcp-client-runtimes), Claude Code receives `list_changed` notifications from a server on the newer protocol revision over a stream it holds open. When the stream closes, Claude Code reopens it, with two limits:
+
+- **The stream closes again within 10 seconds**: Claude Code reopens it up to three times, then stops for that connection.
+- **The stream stays open longer than 10 seconds, then closes**, as streams to serverless hosts commonly do: after five reopens in an hour, Claude Code waits about six hours before the next one.
+
+Until the stream reopens, you keep the server’s last fetched tools, prompts, and resources. To pick up its changes sooner, reconnect the server from `/mcp`.
 
 ### [​](#automatic-reconnection) Automatic reconnection
 
@@ -272,6 +307,7 @@ The capability discovery requests that run after a successful connection, such a
 ### [​](#push-messages-with-channels) Push messages with channels
 
 An MCP server can also push messages directly into your session so Claude can react to external events like CI results, monitoring alerts, or chat messages. To enable this, your server declares the `claude/channel` capability and you opt it in with the `--channels` flag at startup. See [Channels](channels.md) to use an officially supported channel, or [Channels reference](channels-reference.md) to build your own.
+On the [v2 runtime](#mcp-client-runtimes), a channel server that negotiates MCP protocol revision 2026-07-28 can’t deliver channel messages, so Claude Code doesn’t register it as a channel. Setting [`MCP_PROTOCOL_NEGOTIATION`](env-vars.md) to `legacy` keeps it on the earlier handshake, along with every other server in the process.
 
 Tips:
 
@@ -349,7 +385,7 @@ Or inline in `plugin.json`:
 **Plugin MCP features**:
 
 - **Automatic lifecycle**: servers connect and disconnect at these points:
-  - At session startup, Claude Code connects the servers for enabled plugins automatically. In `/mcp`, a remote (HTTP or SSE) plugin server you’ve used before can show the [`cached` status](#managing-your-servers) instead; Claude Code connects it when Claude first calls one of its tools
+  - At session startup, Claude Code connects the servers for enabled plugins automatically. In `/mcp`, a remote (HTTP or SSE) plugin server you’ve used before can show the [`cached` status](#server-status-detail) instead; Claude Code connects it when Claude first calls one of its tools
   - If you enable or disable a plugin during a session, run `/reload-plugins` to connect or disconnect its MCP servers. When you reload, Claude Code keeps the live connections of plugin servers whose configuration is unchanged, and does the same when you [replace the session’s MCP server list](agent-sdk/typescript.md) from the Agent SDK without naming them
   - In [web sessions](claude-code-on-the-web.md), an MCP call to a plugin server that isn’t connected yet, such as right after an idle session wakes, starts the server on demand and waits for it to connect
 - **Path placeholders**: `${CLAUDE_PLUGIN_ROOT}` resolves to the plugin’s installation directory, `${CLAUDE_PLUGIN_DATA}` to its [persistent state](plugins-reference.md) directory, and `${CLAUDE_PROJECT_DIR}` to the stable project root. Substitution applies to:
@@ -757,11 +793,12 @@ The command can also be inline:
 **Requirements:**
 
 - The command must write a JSON object of string key-value pairs to stdout
-- The command runs in a shell with a 10-second timeout, from the session’s current working directory. Use an absolute path or a command on `PATH` for the script
+- Claude Code runs the command in a shell and gives up on it after 10 seconds
+- Claude Code picks the command’s working directory by [where you configured the server](#where-the-helper-runs), so give the script as an absolute path or put it on `PATH`
 - Dynamic headers override any static `headers` with the same name
 
-The helper runs fresh on each connection, at session start and on reconnect. There is no caching, so your script is responsible for any token reuse.
-If a tool call returns `401 Unauthorized` or `403 Forbidden`, Claude Code automatically re-runs the helper, reconnects with the fresh headers, and retries the call once. Claude Code marks the server as needing authentication in `/mcp` only if that retry also fails.
+Claude Code runs the helper fresh on each connection, at session start and on reconnect, once the [trust rule for project and local-scope servers](#trust-a-folder-before-its-headershelper-runs) lets it run. It doesn’t cache the result, so your script is responsible for any token reuse.
+If a tool call returns `401 Unauthorized` or `403 Forbidden`, Claude Code automatically re-runs the helper under the same rule, reconnects with the fresh headers, and retries the call once. Claude Code marks the server as needing authentication in `/mcp` only if that retry also fails.
 Claude Code sets these environment variables when executing the helper:
 
 | Variable | Value |
@@ -771,10 +808,39 @@ Claude Code sets these environment variables when executing the helper:
 | `CLAUDE_PLUGIN_ROOT` | the plugin’s root directory. Set only when a [plugin](plugins-reference.md) provides the server |
 
 Use these to write a single helper script that serves multiple MCP servers.
-For a plugin-provided server, the helper also runs with its working directory set to the plugin root, so a relative `headersHelper` path resolves inside the plugin directory rather than against the session’s working directory. Requires Claude Code v2.1.195 or later.
-A plugin-provided `headersHelper` can’t reference the plugin’s [`${user_config.*}`](plugins-reference.md) values, because the command runs through a shell. Claude Code reports the server as misconfigured with an [error](errors.md) and doesn’t substitute the value. Put `${user_config.KEY}` in the server’s `headers` field instead, which isn’t shell-parsed, or have the helper script read the value from its own environment or a config file. Before v2.1.207, `headersHelper` substituted `${user_config.*}` values.
+A plugin-provided `headersHelper` can’t reference the plugin’s [`${user_config.*}`](plugins-reference.md) values, because the command runs through a shell. Claude Code reports the server as misconfigured with an [error](errors.md) and doesn’t substitute the value. Put `${user_config.KEY}` in the server’s `headers` field instead, which isn’t shell-parsed, or have the helper script read the value from a config file. Before v2.1.207, `headersHelper` substituted `${user_config.*}` values.
 
-`headersHelper` executes arbitrary shell commands. When defined at project or local scope, Claude Code runs it under the same [workspace trust rule as hooks in settings files](permissions.md), so it runs in a `-p` session in a folder you’ve never trusted.
+#### [​](#where-the-helper-runs) Where the helper runs
+
+Claude Code picks the `headersHelper` command’s working directory from the configuration that declares the server. A `cd` later in the session doesn’t move it. Each row below gives the directory that a relative path in your `headersHelper` command resolves against.
+
+| Where you configured the server | Working directory |
+| --- | --- |
+| A [plugin](plugins-reference.md) | The plugin’s root directory. Requires Claude Code v2.1.195 or later |
+| A project `.mcp.json`, a [local-scope](#local-scope) server, an agent file in your project, a server from the SDK’s `mcpServers` option or `setMcpServers()` method, or [`--mcp-config`](cli-reference.md) | The directory you started Claude Code in |
+| [User scope](#user-scope), [managed MCP](managed-mcp.md), a [claude.ai connector](#use-mcp-servers-from-claude-ai), or an agent file from outside your project, including one from an `--add-dir` directory | Your configuration directory, `~/.claude` unless you set [`CLAUDE_CONFIG_DIR`](env-vars.md) |
+
+Before v2.1.238, Claude Code also ran the helpers of user-scope, managed, and claude.ai connector servers, and of agent files from outside your project, from the directory you started it in.
+
+#### [​](#which-variables-a-helper-can-read) Which variables a helper can read
+
+A `headersHelper` that a repository or plugin supplies is a command you didn’t write, so Claude Code runs it without the credential variables from your environment, such as `ANTHROPIC_API_KEY`. Where you configured the server decides whether this applies:
+
+- **Removed**: a server in a project `.mcp.json` or in a plugin, and an inline server in an agent file from your project or from an `--add-dir` directory
+- **Not removed**: a server at [user](#user-scope) or [local scope](#local-scope), in [managed MCP](managed-mcp.md), from a [claude.ai connector](#use-mcp-servers-from-claude-ai), or supplied by the SDK or [`--mcp-config`](cli-reference.md), and an inline server in an agent file from `~/.claude/agents/`, from managed settings, or passed with `--agents`
+
+Apart from Git’s `GIT_CONFIG_KEY_<n>` variables, Claude Code removes every variable from your environment whose name has `TOKEN`, `SECRET`, `PASSWORD`, `PASSWD`, `PASSPHRASE`, `KEY`, `AUTH`, `COOKIE`, `PAT`, `DSN`, `CREDENTIAL`, or `CREDENTIALS` as one of its underscore-separated parts, in either letter case, such as `ANTHROPIC_API_KEY` or `MY_REGISTRY_TOKEN`. Claude Code also removes a fixed list of credential variables whose names don’t follow that pattern, such as `ANTHROPIC_CUSTOM_HEADERS`.
+When this applies to your helper, have the script read its credential from a file or a credential store. If the server’s `url` [expands one of these variables](#environment-variable-expansion-in-mcp-json), the `CLAUDE_CODE_MCP_SERVER_URL` value the helper receives has that part replaced with `REDACTED` as well.
+
+#### [​](#trust-a-folder-before-its-headershelper-runs) Trust a folder before its headersHelper runs
+
+Claude Code executes a `headersHelper` as an arbitrary shell command. For a server in a project `.mcp.json` or at [local scope](#local-scope), it runs the helper only after you accept the [trust dialog](permissions.md) for the folder you started the session in. Before v2.1.238, a `claude -p` or SDK session ran these helpers without checking trust, and an interactive session ran them once you had trusted a parent folder.
+
+- **Trust that doesn’t count**: a parent folder’s trust, and the automatic trust a `claude -p` or SDK session gets for [hooks in settings files](permissions.md)
+- **Until you trust the folder**: Claude Code connects the server with its static `headers` alone. In a `claude -p` or SDK session it also prints one [`headersHelper not run`](errors.md) line per server to stderr, telling you how to grant the trust.
+- **Trust without a dialog**: set `projects["<path>"].hasTrustDialogAccepted` to `true` in `~/.claude.json`. `<path>` is the folder [Project allow rules and workspace trust](permissions.md) says Claude Code keys the trust on.
+
+Claude Code applies the same rule to a server declared inline in an [agent file](sub-agents.md), checking where that agent file came from: your project, for a file in its `.claude/agents/` directory, or an `--add-dir` directory. Until you [trust that project or directory itself](permissions.md), Claude Code doesn’t load the server at all, so its helper never runs either.
 
 ## [​](#add-mcp-servers-from-json-configuration) Add MCP servers from JSON configuration
 
@@ -1104,11 +1170,6 @@ Tool search keeps MCP context usage low by deferring tool definitions until Clau
 
 Tool search isn’t supported on Microsoft Foundry [deployments hosted on Azure](build-with-claude/claude-in-microsoft-foundry.md), which reject it server-side: Claude Code detects the rejection and loads MCP tools upfront for that deployment instead. [`ENABLE_TOOL_SEARCH`](#configure-tool-search) can’t override this, since the rejection comes from the deployment itself.
 
-### [​](#how-it-works) How it works
-
-Tool search is enabled by default. MCP tools are deferred rather than loaded into context upfront, and Claude uses a search tool to discover relevant ones when a task needs them. Only the tools Claude actually uses enter context. From your perspective, MCP tools work exactly as before.
-If you prefer threshold-based loading, set `ENABLE_TOOL_SEARCH=auto`. Claude Code then loads every schema upfront while the definitions it would otherwise defer total less than 10% of the context window, and defers every one of those definitions once they reach 10%. See [Configure tool search](#configure-tool-search) for all options.
-
 ### [​](#for-mcp-server-authors) For MCP server authors
 
 If you’re building an MCP server, the server instructions field becomes more useful with tool search enabled. Server instructions help Claude understand when to search for your tools, similar to how [skills](skills.md) work.
@@ -1178,7 +1239,7 @@ The following `.mcp.json` entry exempts one HTTP server while leaving other serv
 ```
 
 The `alwaysLoad` field is available on all server types. An MCP server can also mark individual tools as always-loaded by including `"anthropic/alwaysLoad": true` in the tool’s `_meta` object, which has the same effect for that tool only.
-Setting `alwaysLoad: true` also makes startup wait for the server’s tools, capped at the standard 5-second connect timeout, since they must be present when the first prompt is built. A remote server with a valid [`cached` entry](#managing-your-servers) supplies its tools from the cache without connecting, so it doesn’t hold startup. Other servers connect in the background by default; set [`MCP_CONNECTION_NONBLOCKING=0`](env-vars.md) to make startup wait for them too.
+Setting `alwaysLoad: true` also makes startup wait for the server’s tools, capped at the standard 5-second connect timeout, since they must be present when the first prompt is built. A remote server with a valid [`cached` entry](#server-status-detail) supplies its tools from the cache without connecting, so it doesn’t hold startup. Other servers connect in the background by default; set [`MCP_CONNECTION_NONBLOCKING=0`](env-vars.md) to make startup wait for them too.
 
 ## [​](#use-mcp-prompts-as-commands) Use MCP prompts as commands
 

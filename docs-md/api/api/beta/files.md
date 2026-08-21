@@ -32,19 +32,7 @@ DELETE/v1/files/{file\_id}
 
 
 
-BetaFileScope object { id, type } 
-
-id: string
-
-The ID of the scoping resource (e.g., the session ID).
-
-type: "session"
-
-The type of scope (e.g., `"session"`).
-
-
-
-DeletedFile object { id, type } 
+BetaDeletedFile object { id, type } 
 
 id: string
 
@@ -60,7 +48,7 @@ For file deletion, this is always `"file_deleted"`.
 
 
 
-FileMetadata object { id, created\_at, filename, 5 more } 
+BetaFileMetadata object { id, created\_at, filename, 5 more } 
 
 
 
@@ -103,6 +91,18 @@ Whether the file can be downloaded.
 scope: optional [BetaFileScope](api/beta/files.md) { id, type }  or null
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
+
+id: string
+
+The ID of the scoping resource (e.g., the session ID).
+
+type: "session"
+
+The type of scope (e.g., `"session"`).
+
+
+
+BetaFileScope object { id, type } 
 
 id: string
 

@@ -22,7 +22,7 @@ content-type: application/json
 
 Each feature's documentation states the exact beta name to send. The [API overview](api/overview.md) lists the APIs currently in beta.
 
-The following examples show the same request with cURL, the `ant` CLI, and the SDKs. The SDKs take beta names in the `betas` parameter and send the `anthropic-beta` header for you:
+The following examples show the same request with cURL, the `ant` CLI, and the SDKs, using the [context editing](build-with-claude/context-editing.md) beta as the example. The SDKs take beta names in the `betas` parameter and send the `anthropic-beta` header for you:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -35,7 +35,7 @@ response = client.beta.messages.create(
     model="claude-opus-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude"}],
-    betas=["files-api-2025-04-14"],
+    betas=["context-management-2025-06-27"],
 )
 
 print(response.content)

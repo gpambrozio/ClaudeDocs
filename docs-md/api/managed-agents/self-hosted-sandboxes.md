@@ -100,7 +100,7 @@ Always-on (ant CLI)Always-on (SDK)Webhook-triggered (SDK)
    For Linux environments, download the release binary directly.
 
    ```shiki
-   VERSION=1.22.1
+   VERSION=1.26.1
    OS=$(uname -s | tr '[:upper:]' '[:lower:]')
    case $(uname -m) in
      x86_64) ARCH=amd64 ;;
@@ -136,7 +136,7 @@ Always-on (ant CLI)Always-on (SDK)Webhook-triggered (SDK)
 
    ```inline-block
    FROM your-base-image
-   ARG ANT_VERSION=1.22.1
+   ARG ANT_VERSION=1.26.1
    ARG TARGETARCH
    RUN ARCH=$([ "$TARGETARCH" = "arm64" ] && echo arm64 || echo amd64) && \
        curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${ANT_VERSION}/ant_${ANT_VERSION}_linux_${ARCH}.tar.gz" \
@@ -181,7 +181,7 @@ The SDK provides three helpers at different levels of control. `EnvironmentWorke
 - **`EnvironmentWorker`:** the out-of-the-box worker. Handles polling, setup, and execution end to end.
   - `.run()`: runs indefinitely, picking up sessions as they arrive.
   - `.handle_item()`: handles a single claimed work item and exits. Pass the work, session, and environment identifiers explicitly, or let it read the `ANTHROPIC_*` variables that `ant beta:worker poll --on-work` sets for the process it spawns. To let the session mount its [memory stores](#use-memory-stores), also pass the work item's `secret` as `work_secret` (`workSecret` in TypeScript, `WorkSecret` in Go) or set `ANTHROPIC_WORK_SECRET`; `ant beta:worker poll --on-work` does not set that variable, so read the secret from the work item JSON it writes to your script's standard input, as shown in [Run one sandbox per session](#run-one-sandbox-per-session).
-  - `memory_sync_interval` (`memorySyncIntervalMs` in TypeScript, `MemorySyncInterval` in Go) and `memory_sync_deletes` (`memoryRemoteDeletes`, `MemorySyncDeletes`): how often attached memory stores reconcile with the server while the session runs, and whether files the agent deletes locally are also deleted from the store. See [Configure sync](#configure-sync) for units, defaults, and how to disable memory support.
+  - `memory_sync_interval` (`memorySyncIntervalMs` in TypeScript, `MemorySyncInterval` in Go) and `memory_sync_deletions` (`memorySyncDeletions`, `MemorySyncDeletions`): how often attached memory stores reconcile with the server while the session runs, and whether files the agent deletes locally are also deleted from the store. See [Configure sync](#configure-sync) for units, defaults, and how to disable memory support.
 - **`work.poller()`:** polls the work queue on your behalf and gives you each claimed session. Use this when you want to decide what happens for each session, for example launching a sandbox rather than running tools in-process.
   - `drain`: whether to stop polling once the queue is empty rather than waiting for new work.
   - `block_ms`: how long to wait for work to arrive before returning, in milliseconds. Must be between 1 and 999 (per-poll wait; the helper re-polls automatically). Pass `null` (`None` in Python, `param.Null[int64]()` in Go) for a non-blocking check; omitting the parameter uses the default 999 ms long-poll.
@@ -408,7 +408,7 @@ The sandbox image also needs a writable `/mnt/memory` (see [Prepare the host](#p
 Two `EnvironmentWorker` options control memory behavior:
 
 - **`memory_sync_interval`** (Python, in seconds; `memorySyncIntervalMs` in TypeScript, in milliseconds; `MemorySyncInterval` in Go, a duration): how often attached stores reconcile with the server while the session runs. Defaults to 15 seconds; the minimum is 5 seconds. A shorter interval narrows the window in which another session sees stale memories, at the cost of more memory store requests. `None` in Python, `null` in TypeScript, or a negative duration in Go disables memory support entirely: the worker neither downloads nor syncs stores, and a session with memory stores attached runs without them even though its system prompt still describes them, so disable memory support only on workers whose sessions attach no memory stores. While memory support is enabled, a work item that arrives without a per-session `secret` for a session with attached stores fails rather than running without memory (see [Troubleshoot memory mounts](#troubleshoot-memory-mounts)).
-- **`memory_sync_deletes`** (`memoryRemoteDeletes` in TypeScript, `MemorySyncDeletes` in Go): whether a file the agent deletes locally is also deleted from the store. The value is one of `"enabled"` (the default), `"log_only"`, or `"disabled"` in Python and TypeScript, and one of the constants `environments.MemorySyncDeletesEnabled` (the zero value), `environments.MemorySyncDeletesLogOnly`, or `environments.MemorySyncDeletesDisabled` in Go. When enabled, the worker deletes the memory from the store once a later sync confirms the file is still gone; in log-only mode it runs the same checks but only logs what it would have deleted, which lets you watch what your workers would delete before you trust the enabled mode; when disabled, it never deletes from the store. Uploads and downloads are unaffected by this setting.
+- **`memory_sync_deletions`** (`memorySyncDeletions` in TypeScript, `MemorySyncDeletions` in Go): whether a file the agent deletes locally is also deleted from the store. The value is one of `"enabled"` (the default), `"log_only"`, or `"disabled"` in Python and TypeScript, and one of the constants `environments.MemorySyncDeletionsEnabled` (the zero value), `environments.MemorySyncDeletionsLogOnly`, or `environments.MemorySyncDeletionsDisabled` in Go. When enabled, the worker deletes the memory from the store once a later sync confirms the file is still gone; in log-only mode it runs the same checks but only logs what it would have deleted, which lets you watch what your workers would delete before you trust the enabled mode; when disabled, it never deletes from the store. Uploads and downloads are unaffected by this setting.
 
 Set these options where you construct the worker, whether through the `EnvironmentWorker` constructor or, in Python and TypeScript, the `client.beta.environments.work.worker()` factory that the webhook handler uses.
 
@@ -425,7 +425,7 @@ worker = EnvironmentWorker(
     environment_key=environment_key,
     workdir="/workspace",
     memory_sync_interval=10,  # seconds
-    memory_sync_deletes="log_only",
+    memory_sync_deletions="log_only",
 )
 ```
 

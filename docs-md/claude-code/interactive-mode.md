@@ -7,10 +7,10 @@ Keyboard shortcuts may vary by platform and terminal. In [fullscreen rendering](
 | Shortcut | Description | Context |
 | --- | --- | --- |
 | `Ctrl+C` | Interrupt, or clear input | Interrupts a running operation. If nothing is running, the first press clears the prompt input and a second press exits Claude Code |
-| `Ctrl+X Ctrl+K` | Stop all running [background subagents](sub-agents.md) in this session. Press twice within 3 seconds to confirm | Subagent control |
+| `Ctrl+X Ctrl+K` | Stop all running [background subagents](sub-agents.md) in this session, and turn off [artifact auto-replies](artifacts.md) for the rest of it. Press twice within 3 seconds to confirm | Subagent control |
 | `Ctrl+D` | Exit Claude Code session | The first press shows a confirmation hint and a second press within 800ms exits. When the prompt has text, `Ctrl+D` deletes the character after the cursor instead |
 | `Ctrl+G` or `Ctrl+X Ctrl+E` | Open in default text editor | Edit your prompt or custom response in your default text editor. `Ctrl+X Ctrl+E` is the readline-native binding. Turn on **Show last response in external editor** in `/config` to prepend Claude’s previous reply as `#`-commented context above your prompt; Claude Code strips the comment block when you save |
-| `Ctrl+L` | Redraw screen | Forces a full terminal redraw, keeping input and conversation history. Use this to recover if the display becomes garbled or partially blank. In [fullscreen rendering](fullscreen.md), if you press `Ctrl+L` once, Claude Code redraws the screen and also shows a hint that pressing it again runs `/clear`. If you press it twice within two seconds, Claude Code runs `/clear` and starts a new conversation |
+| `Ctrl+L` | Redraw screen | Forces a full terminal redraw, keeping input and conversation history. Use this to recover if the display becomes garbled or partially blank |
 | `Ctrl+O` | Toggle transcript viewer | Shows detailed tool usage and execution, with a timestamp and the model used on each assistant message. Also expands MCP calls, which collapse to a single line like “Called slack 3 times” by default |
 | `Ctrl+R` | Reverse search command history | Search through previous commands interactively |
 | `Ctrl+V` or `Cmd+V` (iTerm2) or `Alt+V` (Windows and WSL) | Paste image from clipboard | Inserts an `[Image #N]` chip at the cursor so you can reference it positionally in your prompt. On WSL, both `Ctrl+V` and `Alt+V` are bound; use `Alt+V` if your terminal intercepts `Ctrl+V` |
@@ -19,10 +19,11 @@ Keyboard shortcuts may vary by platform and terminal. In [fullscreen rendering](
 | `Ctrl+S` | Stash or restore prompt | With text in the input, stashes it and clears the prompt. Pressed again on an empty prompt, restores the stashed text, cursor position, and pasted content |
 | `Ctrl+Z` | Suspend Claude Code | Unix only. Suspends the process to your shell; run `fg` to resume |
 | `Left/Right arrows` | Cycle through dialog tabs | Navigate between tabs in permission dialogs and menus |
+| `Tab` | Accept an autocomplete suggestion, or add a comment to a permission answer | While autocomplete suggestions are showing in the prompt input, accepts the selected suggestion. On most permission prompts, with **Yes** or **No** focused, opens a comment field on that option, and pressing it again closes the field. See [add a comment when you answer a permission prompt](permissions.md) |
 | `Up/Down arrows` or `Ctrl+P`/`Ctrl+N` | Move cursor or navigate command history | When the input spans more than one visual row, whether wrapped or multiline, first moves the cursor within the prompt. Once the cursor is on the first or last visual row, pressing again navigates command history. While you have messages queued, `Up` from the first row instead [takes them back](#take-back-what-you-queued) |
-| `Esc` | Interrupt Claude, or close a dialog | Stop the current response or tool call mid-turn so you can redirect. Claude keeps the work done so far. If you have [messages queued](#queue-messages-while-claude-works), Claude Code sends them next. When a dialog such as a permission prompt is open, `Esc` closes the dialog rather than interrupting Claude |
+| `Esc` | Interrupt Claude, or close a dialog | Stop the current response or tool call mid-turn so you can redirect. Claude keeps the work done so far. If you have [messages queued](#queue-messages-while-claude-works), Claude Code sends them next. When a dialog is open, `Esc` closes the dialog. On a permission prompt, `Esc` declines the action, the same as [**No** without a comment](permissions.md) |
 | `Esc` + `Esc` | Clear input draft, or rewind | When the prompt input contains text, double `Esc` clears it and saves the draft to history so `Up` recalls it. When the input is empty, double `Esc` opens the [rewind menu](checkpointing.md) to restore or summarize code and conversation from a previous point |
-| `Shift+Tab`, or `Alt+M` on Windows when the Node or Bun runtime doesn’t enable VT input mode | Cycle permission modes | Cycle through `default` (labeled Manual in the mode indicator), `acceptEdits`, `plan`, and, when available, `bypassPermissions` and then `auto`. From `auto`, the first press switches to `default`. See [permission modes](permission-modes.md). |
+| `Shift+Tab`, or `Alt+M` on Windows when the Node or Bun runtime doesn’t enable VT input mode | Cycle permission modes | Cycle through `default` (labeled Manual in the mode indicator), `acceptEdits`, `plan`, and, when available, `bypassPermissions` and then `auto`. From `auto`, the first press switches to `default`. See [permission modes](permission-modes.md). On a file permission prompt, the same key closes an open [comment field](permissions.md). With no field open, it selects the option that allows the action for the rest of the session, when the prompt offers that option |
 | `Option+P` (macOS) or `Alt+P` (Windows/Linux) | Switch model | Switch models without clearing your prompt |
 | `Option+T` (macOS) or `Alt+T` (Windows/Linux) | Toggle extended thinking | Enable or disable extended thinking mode. Has no effect on Fable 5, which always uses extended thinking. Works on macOS without configuring Option as Meta |
 | `Option+O` (macOS) or `Alt+O` (Windows/Linux) | Toggle fast mode | Enable or disable [fast mode](fast-mode.md) |
@@ -35,12 +36,25 @@ Keyboard shortcuts may vary by platform and terminal. In [fullscreen rendering](
 | `Ctrl+E` | Move cursor to end of current line | In multiline input, moves to the end of the current logical line |
 | `Ctrl+K` | Delete to end of line | Stores deleted text for pasting |
 | `Ctrl+U` | Delete from cursor to line start | Stores deleted text for pasting. Repeat to clear across lines in multiline input. On macOS, terminal emulators including iTerm2 and Terminal.app map `Cmd+Backspace` to this shortcut |
-| `Ctrl+W` | Delete previous word | Stores deleted text for pasting. On macOS, `Option+Delete` also deletes the previous word, and on Windows, `Ctrl+Backspace` does |
+| `Ctrl+W` | Delete previous word | Stores deleted text for pasting. On macOS, `Option+Delete` deletes the previous word, and on Windows, `Ctrl+Backspace` does. To make `Ctrl+W` delete back to the previous whitespace instead, [set `keybindingFlavor` to `"readline"`](#make-ctrl-w-delete-back-to-whitespace) |
 | `Ctrl+Y` | Paste deleted text | Paste text deleted with `Ctrl+K`, `Ctrl+U`, or `Ctrl+W` |
 | `Alt+Y` (after `Ctrl+Y`) | Cycle paste history | After pasting, cycle through previously deleted text. Requires [Option as Meta](#keyboard-shortcuts) on macOS |
 | `Alt+B` | Move cursor back one word | Word navigation. Requires [Option as Meta](#keyboard-shortcuts) on macOS |
 | `Alt+F` | Move cursor forward one word | Word navigation. Requires [Option as Meta](#keyboard-shortcuts) on macOS |
 | `Ctrl+_` or `Ctrl+Shift+-` | Undo last input edit | Restores the previous input text and cursor position |
+
+### [​](#make-ctrl-w-delete-back-to-whitespace) Make Ctrl+W delete back to whitespace
+
+By default, `Ctrl+W` deletes the previous word, stopping at punctuation such as `/`. Set [`keybindingFlavor`](settings.md) to `"readline"` to make `Ctrl+W` delete back to the previous whitespace instead, as Bash does. The default value is `"classic"`. Requires Claude Code v2.1.238 or later.
+Add the setting to `~/.claude/settings.json`:
+
+```shiki
+{
+  "keybindingFlavor": "readline"
+}
+```
+
+To confirm, type `fix the bug in src/utils/foo.ts` in the prompt and press `Ctrl+W`. Claude Code removes `src/utils/foo.ts`. Under `"classic"` it removes only `foo.ts`.
 
 ### [​](#theme-and-display) Theme and display
 
@@ -331,6 +345,7 @@ Claude Code also skips individual suggestions in several situations, including:
 - After the first turn of a conversation, in some sessions
 - The previous response ended in an error
 - While you’re in plan mode
+- Your account is close to or at its usage limit. To keep suggestions on until you reach the limit, set [`CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION`](env-vars.md) to `true`. Before v2.1.238, Claude Code skipped them near the limit even with the variable set to `true`
 - In an [agent team](agent-teams.md), in teammates’ sessions by default. The lead’s session shows suggestions
 
 In print mode, Claude Code doesn’t generate suggestions by default. Pass [`--prompt-suggestions`](cli-reference.md) with `-p "<prompt>" --output-format stream-json --verbose` to have Claude Code emit a `prompt_suggestion` message after each turn that generates one. The generator skips very short conversations and cold prompt caches here too, so a single short `-p` query can emit none.
@@ -341,7 +356,7 @@ To disable prompt suggestions entirely, use any of the following:
 
 - Turn off **Prompt suggestions** in `/config`
 - Set [`promptSuggestionEnabled`](settings.md) to `false` in your settings file
-- Set the `CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION` environment variable to `false`, which takes precedence over the setting:
+- Set the [`CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION`](env-vars.md) environment variable to `false`, which takes precedence over the setting:
 
   ```shiki
   export CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION=false

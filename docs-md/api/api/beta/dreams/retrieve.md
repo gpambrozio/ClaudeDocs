@@ -30,7 +30,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more
 
 One of the following:
 
@@ -78,6 +78,8 @@ One of the following:
 
 "user-profiles-2026-03-24"
 
+"user-profiles-2026-08-18"
+
 "advisor-tool-2026-03-01"
 
 "managed-agents-2026-04-01"
@@ -104,9 +106,9 @@ One of the following:
 
 
 
-BetaDream object { id, archived\_at, created\_at, 10 more } 
+BetaDream object { id, archived\_at, created\_at, 11 more } 
 
-An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output\_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
 id: string
 
@@ -142,7 +144,7 @@ One of the following:
 
 BetaDreamMemoryStoreInput object { memory\_store\_id, type } 
 
-An input memory store the dream reads from. The dream never mutates this store.
+An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output\_behavior {type: "update\_existing"} the job consolidates this store in place.
 
 memory\_store\_id: string
 
@@ -168,7 +170,7 @@ Model identifier and configuration applied to every pipeline stage. Same wire sh
 
 id: string
 
-Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
 
 
@@ -181,6 +183,32 @@ One of the following:
 "standard"
 
 "fast"
+
+
+
+output\_behavior: [BetaOutputBehavior](api/beta/dreams.md)
+
+The default destination: the job creates a new output memory store as a clone of the memory\_store input and writes the consolidated memories into it. The input store is never mutated.
+
+One of the following:
+
+
+
+BetaOutputBehaviorCreateNew object { type } 
+
+The default destination: the job creates a new output memory store as a clone of the memory\_store input and writes the consolidated memories into it. The input store is never mutated.
+
+type: "create\_new"
+
+
+
+BetaOutputBehaviorUpdateExisting object { memory\_store\_id, type } 
+
+The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory\_store input, so the job consolidates the store in place.
+
+memory\_store\_id: string
+
+type: "update\_existing"
 
 
 
@@ -270,6 +298,9 @@ Response 200
     "id": "x",
     "speed": "standard"
   },
+  "output_behavior": {
+    "type": "create_new"
+  },
   "outputs": [
     {
       "memory_store_id": "memory_store_id",
@@ -314,6 +345,9 @@ Response 200
   "model": {
     "id": "x",
     "speed": "standard"
+  },
+  "output_behavior": {
+    "type": "create_new"
   },
   "outputs": [
     {

@@ -31,7 +31,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # List Anthropic-managed Skills
-ant beta:skills list --source anthropic
+ant skills list --source anthropic
 ```
 
 You see the following Skills: `pptx`, `xlsx`, `docx`, and `pdf`.
@@ -48,10 +48,9 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 # Create a message with the PowerPoint Skill
-response = client.beta.messages.create(
+response = client.messages.create(
     model="claude-opus-5",
     max_tokens=16000,
-    betas=["skills-2025-10-02"],
     container={
         "skills": [{"type": "anthropic", "skill_id": "pptx", "version": "latest"}]
     },
@@ -100,7 +99,7 @@ for block in response.content:
 if file_id:
     # Download the file and save it
     output_path = Path(tempfile.gettempdir()) / "renewable_energy.pptx"
-    file_content = client.beta.files.download(file_id=file_id)
+    file_content = client.files.download(file_id=file_id)
     file_content.write_to_file(output_path)
     print(f"Presentation saved to {output_path}")
 ```
@@ -116,10 +115,9 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-response = client.beta.messages.create(
+response = client.messages.create(
     model="claude-opus-5",
     max_tokens=16000,
-    betas=["skills-2025-10-02"],
     container={
         "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
     },
@@ -140,10 +138,9 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-response = client.beta.messages.create(
+response = client.messages.create(
     model="claude-opus-5",
     max_tokens=16000,
-    betas=["skills-2025-10-02"],
     container={
         "skills": [{"type": "anthropic", "skill_id": "docx", "version": "latest"}]
     },
@@ -164,10 +161,9 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-response = client.beta.messages.create(
+response = client.messages.create(
     model="claude-opus-5",
     max_tokens=16000,
-    betas=["skills-2025-10-02"],
     container={
         "skills": [{"type": "anthropic", "skill_id": "pdf", "version": "latest"}]
     },
@@ -197,7 +193,7 @@ Learn how to use Agent Skills to extend Claude's capabilities through the API.
 
 
 
-[Create custom Skills](api/skills/create-skill.md)
+[Create custom Skills](api/skills/create.md)
 
 Upload your own Skills for specialized tasks.
 

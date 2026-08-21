@@ -71,7 +71,7 @@ RUBRIC = """# DCF Model Rubric
 """
 Path("/tmp/rubric.md").write_text(RUBRIC)
 
-rubric = client.beta.files.upload(file=Path("/tmp/rubric.md"))
+rubric = client.files.upload(file=Path("/tmp/rubric.md"))
 print(f"Uploaded rubric: {rubric.id}")
 ```
 
@@ -214,7 +214,7 @@ for outcome in session.outcome_evaluations:
 
 ##  Retrieve deliverables
 
-The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Once the session is idle, fetch them through the [Files API](build-with-claude/files.md) scoped to the session.
+The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Once the session is idle, fetch them through the [Files API](build-with-claude/files.md) scoped to the session. Filtering by `scope_id` requires the `managed-agents-2026-04-01` beta header on the list request, so the SDK and CLI examples make that call through the `beta` namespace and pass the header explicitly.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -229,7 +229,7 @@ for file in files:
 
 # Download a file
 if files.data:
-    content = client.beta.files.download(files.data[0].id)
+    content = client.files.download(files.data[0].id)
     content.write_to_file("/tmp/output.txt")
 ```
 

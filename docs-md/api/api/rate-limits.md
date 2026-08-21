@@ -24,7 +24,7 @@ The API enforces service-configured limits at the organization level, but you ma
 
 ##  Spend limits
 
-Each of the Start, Build, and Scale tiers carries a monthly spend cap, which is the maximum your organization can spend on the API each calendar month. Once you reach your tier's spend cap, API usage pauses until the next month unless you request a higher limit. You can view your organization's monthly spend cap and set your own limit on the [Billing](/settings/billing) page.
+Each of the Start, Build, and Scale tiers carries a monthly spend cap, which is the maximum your organization can spend on the API each calendar month. You can view your organization's monthly spend cap and set your own limit on the [Billing](/settings/billing) page.
 
 | Usage tier | Monthly spend cap |
 | --- | --- |
@@ -33,6 +33,32 @@ Each of the Start, Build, and Scale tiers carries a monthly spend cap, which is 
 | Scale | $200,000 USD |
 
 Organizations on the Custom tier have no monthly spend cap; limits are arranged with their account team.
+
+###  Reaching your spend cap
+
+Once you reach your tier's spend cap, API usage pauses until 00
+
+UTC on the first day of the next month, unless you request a higher limit sooner. While usage is paused, API requests return HTTP 429:
+
+```shiki
+{
+  "type": "error",
+  "error": {
+    "type": "rate_limit_error",
+    "message": "You have reached your API usage limits: your organization has crossed its monthly API usage threshold, set based on your organization's API tier. You will regain access on 2026-09-01 at 00:00 UTC.",
+    "details": { "error_code": "enforced_spend_limit_reached" }
+  },
+  "request_id": "req_018EeWyXxfu5pfWkrYcMdjWG"
+}
+```
+
+
+
+- The error type is `rate_limit_error`, the same as for a rate limit, but the response has no `retry-after` header. Retrying, including the SDKs' automatic retries, fails until access resumes.
+- On the Messages API, `error.details.error_code` is `enforced_spend_limit_reached`. Use it to tell this response apart from a rate limit.
+- Moving to a higher tier restores access; see [Requesting higher limits](#requesting-higher-limits).
+
+###  Setting your own spend limit
 
 You can also set your own spend limit below your tier's cap to control costs:
 
@@ -51,6 +77,10 @@ You can also set your own spend limit below your tier's cap to control costs:
    Adjust your spend limit
 
    Enter a new value. Your spend limit cannot exceed your current tier's cap.
+
+When usage reaches a spend limit you set, requests return HTTP 400 with error type `invalid_request_error`. The message begins `You have reached your specified API usage limits`, or `You have reached your specified workspace API usage limits` for a workspace limit, and states when access resumes. Raise or remove the limit to restore access sooner.
+
+Limits on the [Claude Code workspace](manage-claude/workspaces.md) are checked separately: Claude Code requests over that workspace's limit can instead receive a 429 that carries a `retry-after` header.
 
 ##  Rate limits
 
@@ -168,7 +198,7 @@ The following headers are returned:
 
 | Header | Description |
 | --- | --- |
-| `retry-after` | The number of seconds to wait until you can retry the request. Earlier retries will fail. |
+| `retry-after` | The number of seconds to wait until you can retry the request. Earlier retries will fail. Not sent with the spend-cap 429 (see [Reaching your spend cap](#reaching-your-spend-cap)). |
 | `anthropic-ratelimit-requests-limit` | The maximum number of requests allowed within any rate limit period. |
 | `anthropic-ratelimit-requests-remaining` | The number of requests remaining before being rate limited. |
 | `anthropic-ratelimit-requests-reset` | The time when the request rate limit will be fully replenished, provided in RFC 3339 format. |

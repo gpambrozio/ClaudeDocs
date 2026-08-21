@@ -17,20 +17,18 @@ To learn how to author custom skills, see [Agent Skills](agents-and-tools/agent-
 
 A custom skill is a directory containing a `SKILL.md` file plus any supporting files, uploaded to your workspace as a zip archive or as individual files. Creating the skill returns the `skill_*` ID you reference when attaching it to an agent. Anthropic pre-built skills are already available in every workspace and don't require this step. To use only pre-built skills, skip to [Attach skills to an agent](#attach-skills-to-an-agent).
 
-The Skills API doesn't require a beta header. The cURL example still sends `anthropic-beta: skills-2025-10-02`, and the CLI and SDK `beta` commands add it automatically; requests that include it continue to work unchanged.
-
-These examples omit the optional `display_title` field, so the skill's title is derived from `SKILL.md`. An explicitly passed `display_title` must be unique among the custom skills in your workspace.
+These examples omit the optional `display_name` field, so the skill's display name is derived from the `name` field in `SKILL.md`. An explicit `display_name` can be up to 255 characters and doesn't need to be unique within your workspace.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-ant beta:skills create \
+ant skills create \
   --file example_skill.zip
 ```
 
-To list, retrieve, delete, and version custom skills, see [Managing custom skills](build-with-claude/skills-guide.md). For the full request and response schemas, see the [Create Skill API reference](api/beta/skills/create.md). Skill bundles upload directly to the Skills API rather than through the [Files API](build-with-claude/files.md).
+To list, retrieve, delete, and version custom skills, see [Managing custom skills](build-with-claude/skills-guide.md). For the full request and response schemas, see the [Create Skill API reference](api/skills/create.md). Skill bundles upload directly to the Skills API rather than through the [Files API](build-with-claude/files.md).
 
 ##  Attach skills to an agent
 
@@ -49,7 +47,14 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-ant beta:agents create <<'YAML'
+ant beta:agents create < agent.yaml
+```
+
+agent.yaml
+
+
+
+```shiki
 name: Financial Analyst
 model: claude-opus-5
 system: You are a financial analysis agent.
@@ -59,7 +64,6 @@ skills:
   - type: custom
     skill_id: skill_01AbCdEfGhIjKlMnOpQrStUv
     version: latest
-YAML
 ```
 
 ##  Load skills from a GitHub repository

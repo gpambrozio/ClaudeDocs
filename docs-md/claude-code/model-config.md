@@ -68,13 +68,20 @@ In interactive sessions, Claude Code shows a consent prompt before a Fable 5 req
 - Mid-session, Claude Code continues the turn on your default model.
 
 After you choose to continue on Fable 5 using usage credits, Claude Code doesn’t show the prompt again.
+In a session with [Remote Control](remote-control.md) connected, a [background session](agent-view.md), or an [agent team](agent-teams.md) teammate’s session, nobody may be at the terminal, so Claude Code holds the mid-session consent prompt for the [`dialogExpiry`](settings.md) deadline, five minutes by default. If nobody has answered by the deadline, Claude Code ends the turn without sending the request and adds a notice to the transcript, which the Remote Control client also shows. Your model selection is unchanged, and Claude Code asks for consent again on your next message.
+What you can do while the prompt is waiting depends on the session:
+
+- With Remote Control connected or in a teammate’s session, press any key at the terminal to cancel the deadline, and Claude Code waits for your answer.
+- In a background session, answer before the deadline.
+- If you send a new message from the remote client before anyone has typed at the terminal, Claude Code ends the turn the same way, and your new message starts the next turn. After someone types at the terminal, Claude Code keeps waiting for the answer and queues your new message behind it.
+
 In [non-interactive mode](headless.md) with the `-p` flag and through the Agent SDK, Claude Code never shows the consent prompt. When a Fable 5 request there would bill to usage credits, Claude Code bills it without asking.
 
 ### [​](#setting-your-model) Setting your model
 
 You can configure your model in several ways, listed in order of priority:
 
-1. **During session**: use `/model <alias|name>` to switch immediately, or run `/model` with no argument to open the picker. The picker asks for confirmation when the conversation has prior output, since the next response re-reads the full history without cached context
+1. **During session**: use `/model <alias|name>` to switch immediately, or run `/model` with no argument to open the picker. See [when Claude Code asks you to confirm the switch](prompt-caching.md)
 2. **At startup**: launch with `claude --model <alias|name>`
 3. **Environment variable**: set `ANTHROPIC_MODEL=<alias|name>`
 4. **Settings**: configure permanently in your settings file using the `model` field

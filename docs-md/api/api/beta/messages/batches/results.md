@@ -36,7 +36,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more
 
 One of the following:
 
@@ -83,6 +83,8 @@ One of the following:
 "output-300k-2026-03-24"
 
 "user-profiles-2026-03-24"
+
+"user-profiles-2026-08-18"
 
 "advisor-tool-2026-03-01"
 
@@ -405,7 +407,7 @@ type: "redacted\_thinking"
 
 
 
-BetaToolUseBlock object { id, input, name, 2 more } 
+BetaToolUseBlock object { id, input, name, 3 more } 
 
 id: string
 
@@ -448,6 +450,10 @@ BetaServerToolCaller20260120 object { tool\_id, type } 
 tool\_id: string
 
 type: "code\_execution\_20260120"
+
+toolset\_name: optional string or null
+
+For a toolset member tool\_use, the toolset family.
 
 
 

@@ -316,6 +316,8 @@ Common batch workloads include enriching a dataset with information from the web
 
 Fix the most common tool-use errors with symptom-to-fix diagnostic tables.
 
+
+
 [Web search tool](agents-and-tools/tool-use/web-search-tool.md)
 
 Search the web and cite results.

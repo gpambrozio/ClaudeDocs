@@ -69,14 +69,22 @@ export ANTHROPIC_API_KEY="your-api-key-here"
    
 
    ```shiki
-   AGENT_ID=$(ant beta:agents create \
-     --name "Coding Assistant" \
-     --model '{id: claude-opus-5}' \
-     --system "You are a helpful coding assistant. Write clean, well-documented code." \
-     --tool '{type: agent_toolset_20260401}' \
-     --transform id --raw-output)
+   AGENT_ID=$(ant beta:agents create --transform id --raw-output < coding-assistant.agent.yaml)
 
    echo "Agent ID: $AGENT_ID"
+   ```
+
+   coding-assistant.agent.yaml
+
+   
+
+   ```shiki
+   name: Coding Assistant
+   model:
+     id: claude-opus-5
+   system: You are a helpful coding assistant. Write clean, well-documented code.
+   tools:
+     - type: agent_toolset_20260401
    ```
 
    The `agent_toolset_20260401` tool type enables the full set of pre-built agent tools (bash, file operations, web search, and more). See [Tools](managed-agents/tools.md) for the complete list and per-tool configuration options.
@@ -93,12 +101,21 @@ export ANTHROPIC_API_KEY="your-api-key-here"
    
 
    ```shiki
-   ENVIRONMENT_ID=$(ant beta:environments create \
-     --name "quickstart-env" \
-     --config '{type: cloud, networking: {type: unrestricted}}' \
-     --transform id --raw-output)
+   ENVIRONMENT_ID=$(ant beta:environments create --transform id --raw-output < quickstart.environment.yaml)
 
    echo "Environment ID: $ENVIRONMENT_ID"
+   ```
+
+   quickstart.environment.yaml
+
+   
+
+   ```shiki
+   name: quickstart-env
+   config:
+     type: cloud
+     networking:
+       type: unrestricted
    ```
 
    Save the returned `environment.id`. You'll reference it in every session you create.

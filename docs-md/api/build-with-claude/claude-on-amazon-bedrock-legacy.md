@@ -175,6 +175,7 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 - Claude Managed Agents
 - Server-side fallback (the [`fallbacks` parameter](build-with-claude/refusals-and-fallback.md); use the [client-side fallback pattern](build-with-claude/refusals-and-fallback.md) instead)
 - Automatic prompt caching (the [top-level `cache_control` field](build-with-claude/prompt-caching.md); use [explicit cache breakpoints](build-with-claude/prompt-caching.md) instead)
+- [Computer use](agents-and-tools/tool-use/computer-use-tool.md) and [browser use](agents-and-tools/tool-use/browser-use-tool.md) toolsets (`computer_toolset_20260801` and `browser_toolset_20260801` are not currently available on Amazon Bedrock; the beta computer use tool versions remain available)
 
 ###  PDF support on Bedrock
 

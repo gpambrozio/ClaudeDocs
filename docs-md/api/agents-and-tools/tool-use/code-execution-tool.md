@@ -113,7 +113,7 @@ If you want Claude to run code for a borderline request, ask explicitly (for exa
 
 ###  Upload and analyze your own files
 
-To analyze your own data files (such as CSV, Excel, or images), upload them through the Files API and reference them in your request:
+To analyze your own data files (such as CSV, Excel, or images), upload them through the Files API and reference them in your request.
 
 The Python environment can process various file types uploaded through the Files API, including:
 
@@ -138,12 +138,11 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 # Upload a file
-file_object = client.beta.files.upload(file=Path("data.csv"))
+file_object = client.files.upload(file=Path("data.csv"))
 
 # Use the file_id with code execution
-response = client.beta.messages.create(
+response = client.messages.create(
     model="claude-opus-5",
-    betas=["files-api-2025-04-14"],
     max_tokens=4096,
     messages=[
         {
@@ -172,9 +171,8 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = Anthropic()
 
 # Request code execution that creates files
-response = client.beta.messages.create(
+response = client.messages.create(
     model="claude-opus-5",
-    betas=["files-api-2025-04-14"],
     max_tokens=4096,
     messages=[
         {
@@ -186,7 +184,7 @@ response = client.beta.messages.create(
 )
 
 # Extract file IDs from the response
-def extract_file_ids(response: BetaMessage) -> list[str]:
+def extract_file_ids(response: Message) -> list[str]:
     file_ids: list[str] = []
     for item in response.content:
         if item.type == "bash_code_execution_tool_result":
@@ -198,8 +196,8 @@ def extract_file_ids(response: BetaMessage) -> list[str]:
 
 # Download the created files
 for file_id in extract_file_ids(response):
-    file_metadata = client.beta.files.retrieve_metadata(file_id)
-    file_content = client.beta.files.download(file_id)
+    file_metadata = client.files.retrieve_metadata(file_id)
+    file_content = client.files.download(file_id)
     file_content.write_to_file(file_metadata.filename)
     print(f"Downloaded: {file_metadata.filename}")
 ```
@@ -616,7 +614,7 @@ To upgrade, update the tool type in your API requests:
 
 ##  Data retention
 
-Code execution runs in server-side sandbox containers. Container data, including execution artifacts, uploaded files, and outputs, is retained for up to 30 days. This retention applies to all data processed within the container environment. Files that code execution creates in the [Files API](build-with-claude/files.md) (retrievable with `client.beta.files.download()`) persist until explicitly deleted.
+Code execution runs in server-side sandbox containers. Container data, including execution artifacts, uploaded files, and outputs, is retained for up to 30 days. This retention applies to all data processed within the container environment. Files that code execution creates in the [Files API](build-with-claude/files.md) (retrievable with `client.files.download()`) persist until explicitly deleted.
 
 For ZDR eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
 

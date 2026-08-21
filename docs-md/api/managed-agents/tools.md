@@ -202,7 +202,14 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-ant beta:agents create <<'YAML'
+ant beta:agents create < agent.yaml
+```
+
+agent.yaml
+
+
+
+```shiki
 name: Weather Agent
 model: claude-opus-5
 tools:
@@ -218,7 +225,6 @@ tools:
           description: City name
       required:
         - location
-YAML
 ```
 
 Once you've defined custom tools on the agent, the agent invokes them during a session.

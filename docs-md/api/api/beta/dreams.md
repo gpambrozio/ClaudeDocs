@@ -32,9 +32,9 @@ POST/v1/dreams/{dream\_id}/archive
 
 
 
-BetaDream object { id, archived\_at, created\_at, 10 more } 
+BetaDream object { id, archived\_at, created\_at, 11 more } 
 
-An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output\_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
 id: string
 
@@ -70,7 +70,7 @@ One of the following:
 
 BetaDreamMemoryStoreInput object { memory\_store\_id, type } 
 
-An input memory store the dream reads from. The dream never mutates this store.
+An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output\_behavior {type: "update\_existing"} the job consolidates this store in place.
 
 memory\_store\_id: string
 
@@ -96,7 +96,7 @@ Model identifier and configuration applied to every pipeline stage. Same wire sh
 
 id: string
 
-Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
 
 
@@ -109,6 +109,32 @@ One of the following:
 "standard"
 
 "fast"
+
+
+
+output\_behavior: [BetaOutputBehavior](api/beta/dreams.md)
+
+The default destination: the job creates a new output memory store as a clone of the memory\_store input and writes the consolidated memories into it. The input store is never mutated.
+
+One of the following:
+
+
+
+BetaOutputBehaviorCreateNew object { type } 
+
+The default destination: the job creates a new output memory store as a clone of the memory\_store input and writes the consolidated memories into it. The input store is never mutated.
+
+type: "create\_new"
+
+
+
+BetaOutputBehaviorUpdateExisting object { memory\_store\_id, type } 
+
+The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory\_store input, so the job consolidates the store in place.
+
+memory\_store\_id: string
+
+type: "update\_existing"
 
 
 
@@ -176,7 +202,7 @@ type: string
 
 BetaDreamInput = [BetaDreamMemoryStoreInput](api/beta/dreams.md) { memory\_store\_id, type }  or [BetaDreamSessionsInput](api/beta/dreams.md) { session\_ids, type } 
 
-An input memory store the dream reads from. The dream never mutates this store.
+An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output\_behavior {type: "update\_existing"} the job consolidates this store in place.
 
 One of the following:
 
@@ -184,7 +210,7 @@ One of the following:
 
 BetaDreamMemoryStoreInput object { memory\_store\_id, type } 
 
-An input memory store the dream reads from. The dream never mutates this store.
+An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output\_behavior {type: "update\_existing"} the job consolidates this store in place.
 
 memory\_store\_id: string
 
@@ -204,7 +230,7 @@ type: "sessions"
 
 BetaDreamMemoryStoreInput object { memory\_store\_id, type } 
 
-An input memory store the dream reads from. The dream never mutates this store.
+An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output\_behavior {type: "update\_existing"} the job consolidates this store in place.
 
 memory\_store\_id: string
 
@@ -228,7 +254,7 @@ Model identifier and configuration applied to every pipeline stage. Same wire sh
 
 id: string
 
-Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
 
 
@@ -250,7 +276,7 @@ Model identifier and configuration applied to every pipeline stage.
 
 id: string
 
-Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
 
 
@@ -323,6 +349,50 @@ Total uncached input tokens consumed across every pipeline stage.
 output\_tokens: number
 
 Total output tokens generated across every pipeline stage.
+
+
+
+BetaOutputBehavior = [BetaOutputBehaviorCreateNew](api/beta/dreams.md) { type }  or [BetaOutputBehaviorUpdateExisting](api/beta/dreams.md) { memory\_store\_id, type } 
+
+The default destination: the job creates a new output memory store as a clone of the memory\_store input and writes the consolidated memories into it. The input store is never mutated.
+
+One of the following:
+
+
+
+BetaOutputBehaviorCreateNew object { type } 
+
+The default destination: the job creates a new output memory store as a clone of the memory\_store input and writes the consolidated memories into it. The input store is never mutated.
+
+type: "create\_new"
+
+
+
+BetaOutputBehaviorUpdateExisting object { memory\_store\_id, type } 
+
+The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory\_store input, so the job consolidates the store in place.
+
+memory\_store\_id: string
+
+type: "update\_existing"
+
+
+
+BetaOutputBehaviorCreateNew object { type } 
+
+The default destination: the job creates a new output memory store as a clone of the memory\_store input and writes the consolidated memories into it. The input store is never mutated.
+
+type: "create\_new"
+
+
+
+BetaOutputBehaviorUpdateExisting object { memory\_store\_id, type } 
+
+The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory\_store input, so the job consolidates the store in place.
+
+memory\_store\_id: string
+
+type: "update\_existing"
 
 ---
 

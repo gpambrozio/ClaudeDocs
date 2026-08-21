@@ -166,7 +166,7 @@ Deliver the variables through the `env` block of a [managed settings file](setti
 ```
 
 Add the conditional variables from the table to the same `env` block. A managed `ANTHROPIC_BASE_URL` is enforced and cannot be overridden by a developer’s shell export, since Claude Code applies it over the process environment and lower-precedence settings.
-Do not include `forceLoginMethod` or `forceLoginOrgUUID` in managed settings alongside a gateway credential. On Claude Code v2.1.146 and later, either key, with any value, blocks `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, and `apiKeyHelper` at startup, so developers see `This machine's managed settings require a first-party login` and cannot proceed. 
+Do not include `forceLoginMethod` or `forceLoginOrgUUID` in managed settings alongside a gateway credential. Either key, with any value, blocks `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, and `apiKeyHelper` at startup, so developers see `This machine's managed settings require a first-party login` and cannot proceed.
 [Server-managed settings](server-managed-settings.md) delivery requires a direct connection to `api.anthropic.com`, so it does not reach gateway-routed sessions. Gateway deployments use this file-based managed settings path, which enforces the same keys.
 For the credential, distribute one [`apiKeyHelper`](llm-gateway-connect.md) command in the managed settings file as shown above; the command authenticates to your secrets store as the local developer, so each machine receives its own key. Alternatively, deliver each developer their key through your existing secrets process and have them set `ANTHROPIC_AUTH_TOKEN` themselves.
 Some environments need separate delivery:

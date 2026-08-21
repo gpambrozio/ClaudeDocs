@@ -68,7 +68,8 @@ Built-in tools that Claude invokes through `tool_use`. Server-side tools are run
 | Feature | Description | ZDR | Availability |
 | --- | --- | --- | --- |
 | [Bash](agents-and-tools/tool-use/bash-tool.md) | Execute bash commands and scripts to interact with the system shell and perform command-line operations. | ZDR eligible | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA) |
-| [Computer use](agents-and-tools/tool-use/computer-use-tool.md) | Control computer interfaces by taking screenshots and issuing mouse and keyboard commands. | ZDR eligible | Claude API (Beta)  Bedrock (Beta)  Claude Platform on AWS (Beta)  Google Cloud (Beta)  Microsoft Foundry (Beta) |
+| [Browser use](agents-and-tools/tool-use/browser-use-tool.md) | Navigate, read, and interact with webpages in your own browser environment. | ZDR eligible | Claude API (GA) |
+| [Computer use](agents-and-tools/tool-use/computer-use-tool.md) | Control computer interfaces by taking screenshots and issuing mouse and keyboard commands. | ZDR eligible | Claude API (GA)  Bedrock (Beta)  Claude Platform on AWS (Beta)  Google Cloud (Beta)  Microsoft Foundry (Beta) |
 | [Memory](agents-and-tools/tool-use/memory-tool.md) | Enable Claude to store and retrieve information across conversations. Build knowledge bases over time, maintain project context, and learn from past interactions. | ZDR eligible | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA) |
 | [Text editor](agents-and-tools/tool-use/text-editor-tool.md) | Create and edit text files with a built-in text editor interface for file manipulation tasks. | ZDR eligible | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA) |
 

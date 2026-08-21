@@ -11,7 +11,7 @@ The Anthropic Java SDK provides convenient access to the Claude API from applica
 GradleMaven
 
 ```shiki
-implementation("com.anthropic:anthropic-java:2.53.0")
+implementation("com.anthropic:anthropic-java:2.57.0")
 ```
 
 
@@ -472,8 +472,8 @@ The SDK defines methods that accept files through the `MultipartField` class:
 
 ```shiki
 import com.anthropic.core.MultipartField;
-import com.anthropic.models.beta.files.FileMetadata;
-import com.anthropic.models.beta.files.FileUploadParams;
+import com.anthropic.models.files.FileMetadata;
+import com.anthropic.models.files.FileUploadParams;
 
 FileUploadParams params = FileUploadParams.builder()
   .file(
@@ -484,7 +484,7 @@ FileUploadParams params = FileUploadParams.builder()
   )
   .build();
 
-FileMetadata fileMetadata = client.beta().files().upload(params);
+FileMetadata fileMetadata = client.files().upload(params);
 ```
 
 
@@ -493,8 +493,8 @@ Or from an `InputStream`:
 
 ```shiki
 import com.anthropic.core.MultipartField;
-import com.anthropic.models.beta.files.FileMetadata;
-import com.anthropic.models.beta.files.FileUploadParams;
+import com.anthropic.models.files.FileMetadata;
+import com.anthropic.models.files.FileUploadParams;
 
 FileUploadParams params = FileUploadParams.builder()
   .file(
@@ -506,7 +506,7 @@ FileUploadParams params = FileUploadParams.builder()
   )
   .build();
 
-FileMetadata fileMetadata = client.beta().files().upload(params);
+FileMetadata fileMetadata = client.files().upload(params);
 ```
 
 
@@ -515,8 +515,8 @@ Or from in-memory bytes:
 
 ```shiki
 import com.anthropic.core.MultipartField;
-import com.anthropic.models.beta.files.FileMetadata;
-import com.anthropic.models.beta.files.FileUploadParams;
+import com.anthropic.models.files.FileMetadata;
+import com.anthropic.models.files.FileUploadParams;
 
 FileUploadParams params = FileUploadParams.builder()
   .file(
@@ -528,7 +528,7 @@ FileUploadParams params = FileUploadParams.builder()
   )
   .build();
 
-FileMetadata fileMetadata = client.beta().files().upload(params);
+FileMetadata fileMetadata = client.files().upload(params);
 ```
 
 
@@ -540,7 +540,7 @@ The SDK defines methods that return binary responses for API responses that aren
 ```shiki
 import com.anthropic.core.http.HttpResponse;
 
-HttpResponse response = client.beta().files().download("file_abc123");
+HttpResponse response = client.files().download("file_abc123");
 ```
 
 
@@ -550,7 +550,7 @@ To save the response content to a file:
 ```shiki
 import com.anthropic.core.http.HttpResponse;
 
-try (HttpResponse response = client.beta().files().download(params)) {
+try (HttpResponse response = client.files().download(params)) {
     Files.copy(
         response.body(),
         Paths.get(path),
@@ -569,7 +569,7 @@ Or transfer the response content to any `OutputStream`:
 ```shiki
 import com.anthropic.core.http.HttpResponse;
 
-try (HttpResponse response = client.beta().files().download(params)) {
+try (HttpResponse response = client.files().download(params)) {
     response.body().transferTo(Files.newOutputStream(Paths.get(path)));
 } catch (Exception e) {
     IO.println("Something went wrong!");
@@ -1232,14 +1232,11 @@ Beta features are available before general release to get early feedback and tes
 
 You can access most beta API features through the `beta()` method on the client. To enable a particular beta feature, add the appropriate [beta header](api/beta-headers.md) with `.addBeta()` when building the message params.
 
-For example, to use the [Files API](build-with-claude/files.md):
+For example, to enable [context editing](build-with-claude/context-editing.md):
 
 ```shiki
 import com.anthropic.models.beta.AnthropicBeta;
-import com.anthropic.models.beta.messages.BetaContentBlockParam;
 import com.anthropic.models.beta.messages.BetaMessage;
-import com.anthropic.models.beta.messages.BetaRequestDocumentBlock;
-import com.anthropic.models.beta.messages.BetaTextBlockParam;
 import com.anthropic.models.beta.messages.MessageCreateParams;
 // ...
 void main() {
@@ -1249,16 +1246,8 @@ void main() {
         MessageCreateParams.builder()
             .model(Model.CLAUDE_OPUS_5)
             .maxTokens(1024L)
-            .addBeta(AnthropicBeta.FILES_API_2025_04_14)
-            .addUserMessageOfBetaContentBlockParams(List.of(
-                BetaContentBlockParam.ofText(
-                    BetaTextBlockParam.builder()
-                        .text("Please summarize this document for me.")
-                        .build()),
-                BetaContentBlockParam.ofDocument(
-                    BetaRequestDocumentBlock.builder()
-                        .fileSource("file_abc123")
-                        .build())))
+            .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
+            .addUserMessage("Hello, Claude")
             .build());
 }
 ```

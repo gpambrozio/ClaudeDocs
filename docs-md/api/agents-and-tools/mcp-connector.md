@@ -536,7 +536,7 @@ print(response)
 file_resource = await mcp_client.read_resource(
     uri="file:///path/to/data.json",
 )
-uploaded = await client.beta.files.upload(
+uploaded = await client.files.upload(
     file=mcp_resource_to_file(file_resource),
 )
 print(uploaded.id)

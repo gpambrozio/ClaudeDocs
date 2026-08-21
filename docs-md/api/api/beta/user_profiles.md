@@ -32,7 +32,7 @@ POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
 
 
-BetaUserProfile object { id, created\_at, metadata, 6 more } 
+BetaUserProfile object { id, created\_at, metadata, 7 more } 
 
 id: string
 
@@ -45,20 +45,6 @@ A timestamp in RFC 3339 format
 metadata: map[string]
 
 Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-
-
-relationship: "external" or "resold" or "internal"
-
-How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
-One of the following:
-
-"external"
-
-"resold"
-
-"internal"
 
 
 
@@ -88,13 +74,39 @@ updated\_at: string
 
 A timestamp in RFC 3339 format
 
+
+
+access\_type: optional "application" or "passthrough"
+
+How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+One of the following:
+
+"application"
+
+"passthrough"
+
 external\_id: optional string or null
 
 Platform's own identifier for this user. Not enforced unique.
 
 name: optional string or null
 
-Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+Real-world name of the entity this profile represents (company or individual). For a resold-to company (`access_type` `passthrough`, or `relationship` `resold` under the `user-profiles-2026-03-24` header) this is that company's name.
+
+
+
+relationship: optional "external" or "resold" or "internal"
+
+How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+One of the following:
+
+"external"
+
+"resold"
+
+"internal"
 
 
 

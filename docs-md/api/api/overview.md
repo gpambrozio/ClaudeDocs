@@ -25,8 +25,8 @@ The Claude API includes the following APIs:
 - **[Message Batches API](api/messages/batches/create.md)**: Process large volumes of Messages requests asynchronously with 50% cost reduction (`POST /v1/messages/batches`)
 - **[Token Counting API](api/messages-count-tokens.md)**: Count tokens in a message before sending to manage costs and rate limits (`POST /v1/messages/count_tokens`)
 - **[Models API](api/models/list.md)**: List available Claude models and their details (`GET /v1/models`)
-- **[Files API](api/beta/files/upload.md)**: Upload and manage files for use across multiple API calls (`POST /v1/files`, `GET /v1/files`)
-- **[Skills API](api/skills/create-skill.md)**: Create and manage custom agent skills (`POST /v1/skills`, `GET /v1/skills`)
+- **[Files API](api/files/upload.md)**: Upload and manage files for use across multiple API calls (`POST /v1/files`, `GET /v1/files`)
+- **[Skills API](api/skills/create.md)**: Create and manage custom agent skills (`POST /v1/skills`, `GET /v1/skills`)
 
 **Beta:**
 

@@ -15,9 +15,19 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-ant beta:environments create \
-  --name "python-dev" \
-  --config '{type: cloud, networking: {type: unrestricted}}'
+ant beta:environments create < python-dev.environment.yaml
+```
+
+python-dev.environment.yaml
+
+
+
+```shiki
+name: python-dev
+config:
+  type: cloud
+  networking:
+    type: unrestricted
 ```
 
 Use a unique, descriptive `name` so you can tell environments apart.
@@ -47,7 +57,14 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-ant beta:environments create <<'YAML'
+ant beta:environments create < environment.yaml
+```
+
+environment.yaml
+
+
+
+```shiki
 name: data-analysis
 config:
   type: cloud
@@ -60,7 +77,6 @@ config:
       - express
   networking:
     type: unrestricted
-YAML
 ```
 
 Supported package managers:
@@ -90,7 +106,14 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-ant beta:environments create <<'YAML'
+ant beta:environments create < environment.yaml
+```
+
+environment.yaml
+
+
+
+```shiki
 name: api-access
 config:
   type: cloud
@@ -100,7 +123,6 @@ config:
       - api.example.com
     allow_mcp_servers: true
     allow_package_managers: true
-YAML
 ```
 
 When using `limited` networking:

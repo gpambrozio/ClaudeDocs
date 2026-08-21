@@ -29,6 +29,11 @@ A worktree is a fresh checkout, so initialize your development environment there
 You can also ask Claude to “work in a worktree” during a session, and it creates one with the [`EnterWorktree`](tools-reference.md) tool. Once in a worktree, Claude can switch directly to another one under `.claude/worktrees/` by calling `EnterWorktree` with the target path; the previous worktree stays on disk untouched.
 When Claude enters a path outside the repository’s `.claude/worktrees/` directory, Claude Code asks for your approval first, because the move takes the session’s working directory, write access, and project configuration such as `CLAUDE.md` and settings to that location. An `EnterWorktree` [permission rule](permissions.md) or choosing “don’t ask again” doesn’t suppress this prompt; only `bypassPermissions` mode skips it. Before v2.1.206, Claude could enter any existing worktree path without asking.
 
+**Hook paths don’t follow the worktree.** After Claude enters a worktree, Claude Code keeps `${CLAUDE_PROJECT_DIR}` in your [hooks](hooks.md) where it was and passes the worktree path to them a different way:
+
+- **`${CLAUDE_PROJECT_DIR}` stays put**: it still points at the project root where the session started, so a hook command such as `${CLAUDE_PROJECT_DIR}/.claude/hooks/check-style.sh` still runs the script in the main checkout.
+- **`cwd` follows Claude**: the `cwd` field in the hook’s [input JSON](hooks.md) is the worktree root, and it moves again when Claude runs `cd`. Read it when a hook needs the worktree path.
+
 ## [​](#clean-up-worktrees) Clean up worktrees
 
 When you exit an interactive worktree session, Claude checks the worktree for work that removal would delete: changed or untracked files, and new commits.
@@ -62,7 +67,7 @@ Claude Code applies four checks:
 - **File edits**: Claude Code blocks an `Edit`, `Write`, or `NotebookEdit` that targets a path in the main checkout.
 - **Command working directory**: Claude Code blocks a Bash, PowerShell, or Monitor command whose working directory resolves to the main checkout, or whose working directory it can’t verify stays outside it.
 - **Git redirects**: Claude Code blocks a Bash or Monitor command that redirects git into the main checkout. The redirect can come through `git -C`, `--git-dir`, a `GIT_DIR` or `GIT_WORK_TREE` variable, or a `cd` into the main checkout before running git.
-- **Command shape**: Claude Code blocks a Bash or Monitor command it can’t verify stays inside the worktree. The block applies even when the command runs no git at all. Claude Code refuses shell constructs it can’t statically trace, such as brace expansion and heredocs with unquoted delimiters. It tells Claude to break the command into plain, separate commands. You can’t turn this check off.
+- **Command shape**: Claude Code blocks a Bash or Monitor command it can’t verify stays inside the worktree, even when the command runs no git at all. Claude Code refuses shell constructs it can’t trace without running them, such as brace expansion and heredocs with unquoted delimiters. Claude Code tells Claude how to rewrite the refused command, such as splitting it into plain, separate commands. You can’t turn this check off.
 
 The checks apply to the repository you launched Claude Code from. They also cover the main checkout a linked worktree is linked from. For PowerShell commands, Claude Code applies only the working-directory check.
 Claude sees each refusal as a tool error that names the worktree and says how to proceed.

@@ -12,7 +12,7 @@ Claude Sonnet 5 is the next generation of Anthropic's Sonnet model family. It is
 | --- | --- | --- |
 | Claude Sonnet 5 | `claude-sonnet-5` | The best combination of speed and intelligence |
 
-Claude Sonnet 5 supports the [1M token context window](build-with-claude/context-windows.md) by default (1M tokens is both the default and the maximum; there is no smaller context variant), 128k max output tokens, [adaptive thinking](build-with-claude/thinking.md), and the same set of tools and platform features as Claude Sonnet 4.6, except [Priority Tier](api/service-tiers.md), which is not available on Claude Sonnet 5.
+Claude Sonnet 5 supports the [1M token context window](build-with-claude/context-windows.md) by default (1M tokens is both the default and the maximum; there is no smaller context variant), 128k max output tokens, [adaptive thinking](build-with-claude/thinking.md), and the same set of tools and platform features as Claude Sonnet 4.6, except [Priority Tier](api/service-tiers.md), which is not available on Claude Sonnet 5. On the Claude API, Claude Sonnet 5 also supports the [browser use tool](agents-and-tools/tool-use/browser-use-tool.md) and the generally available `computer_toolset_20260801` version of the [computer use tool](agents-and-tools/tool-use/computer-use-tool.md), neither of which Claude Sonnet 4.6 supports; the earlier `computer_20251124` version is still accepted on both models. To upgrade an existing integration, see [Migrate from `computer_20251124`](agents-and-tools/tool-use/computer-use-tool.md).
 
 For complete pricing and specs, see the [models overview](about-claude/models/overview.md).
 
@@ -67,7 +67,7 @@ The largest gains over Claude Sonnet 4.6 are in coding and agentic tasks. For be
 
 ##  Cybersecurity safeguards
 
-Claude Sonnet 5 is the first Sonnet-tier model with real-time cybersecurity safeguards. Requests that involve prohibited or high-risk cybersecurity topics may be refused. Refusals return as a successful HTTP 200 response with `stop_reason: "refusal"`, not an error. See [Safeguards, warnings, and appeals](https://support.claude.com/en/articles/8241253-safeguards-warnings-and-appeals) for background.
+Claude Sonnet 5 is the first Sonnet-tier model with real-time cybersecurity safeguards. Requests that involve prohibited or high-risk cybersecurity topics may be refused. Refusals return as a successful HTTP 200 response with `stop_reason: "refusal"`, not an error. See [Real-time cyber safeguards on Claude Opus and Sonnet](https://support.claude.com/en/articles/14604842-real-time-cyber-safeguards-on-claude-opus-and-sonnet) for what the safeguards block and how legitimate security work can apply to the Cyber Verification Program.
 
 ##  Pricing
 

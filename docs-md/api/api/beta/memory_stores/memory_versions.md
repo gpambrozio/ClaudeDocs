@@ -24,7 +24,7 @@ POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id
 
 
 
-BetaManagedAgentsActor = [BetaManagedAgentsSessionActor](api/beta/memory_stores/memory_versions.md) { session\_id, type }  or [BetaManagedAgentsAPIActor](api/beta/memory_stores/memory_versions.md) { api\_key\_id, type }  or [BetaManagedAgentsUserActor](api/beta/memory_stores/memory_versions.md) { type, user\_id } 
+BetaManagedAgentsActor = [BetaManagedAgentsSessionActor](api/beta/memory_stores/memory_versions.md) { session\_id, type }  or [BetaManagedAgentsAPIActor](api/beta/memory_stores/memory_versions.md) { api\_key\_id, type }  or [BetaManagedAgentsUserActor](api/beta/memory_stores/memory_versions.md) { type, user\_id }  or [BetaManagedAgentsServiceAccountActor](api/beta/memory_stores/memory_versions.md) { service\_account\_id, type } 
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
@@ -65,6 +65,18 @@ type: "user\_actor"
 user\_id: string
 
 ID of the user who performed the write (a `user_...` value).
+
+
+
+BetaManagedAgentsServiceAccountActor object { service\_account\_id, type } 
+
+Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+service\_account\_id: string
+
+ID of the service account that performed the write (a `svac_...` value).
+
+type: "service\_account\_actor"
 
 
 
@@ -172,6 +184,18 @@ user\_id: string
 
 ID of the user who performed the write (a `user_...` value).
 
+
+
+BetaManagedAgentsServiceAccountActor object { service\_account\_id, type } 
+
+Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+service\_account\_id: string
+
+ID of the service account that performed the write (a `svac_...` value).
+
+type: "service\_account\_actor"
+
 path: optional string or null
 
 The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
@@ -226,6 +250,18 @@ ID of the user who performed the write (a `user_...` value).
 
 
 
+BetaManagedAgentsServiceAccountActor object { service\_account\_id, type } 
+
+Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+service\_account\_id: string
+
+ID of the service account that performed the write (a `svac_...` value).
+
+type: "service\_account\_actor"
+
+
+
 BetaManagedAgentsMemoryVersionOperation = "created" or "modified" or "deleted"
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
@@ -237,6 +273,18 @@ One of the following:
 "modified"
 
 "deleted"
+
+
+
+BetaManagedAgentsServiceAccountActor object { service\_account\_id, type } 
+
+Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+service\_account\_id: string
+
+ID of the service account that performed the write (a `svac_...` value).
+
+type: "service\_account\_actor"
 
 
 

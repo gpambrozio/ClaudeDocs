@@ -260,11 +260,11 @@ type: "search\_result\_location"
 
 
 
-ImageBlockParam object { source, type, cache\_control } 
+ImageBlockParam object { source, type, cache\_control, transformations } 
 
 
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }  or [FileImageSource](api/messages.md) { file\_id, type } 
 
 One of the following:
 
@@ -298,6 +298,14 @@ type: "url"
 
 url: string
 
+
+
+FileImageSource object { file\_id, type } 
+
+file\_id: string
+
+type: "file"
+
 type: "image"
 
 
@@ -329,11 +337,29 @@ One of the following:
 
 
 
+transformations: optional [ImageTransformationsParam](api/messages.md) { oversized\_image }  or null
+
+Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+
+
+oversized\_image: optional "downsize" or "error"
+
+What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+One of the following:
+
+"downsize"
+
+"error"
+
+
+
 DocumentBlockParam object { source, type, cache\_control, 3 more } 
 
 
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url } 
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or 2 more
 
 One of the following:
 
@@ -534,11 +560,11 @@ type: "search\_result\_location"
 
 
 
-ImageBlockParam object { source, type, cache\_control } 
+ImageBlockParam object { source, type, cache\_control, transformations } 
 
 
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }  or [FileImageSource](api/messages.md) { file\_id, type } 
 
 One of the following:
 
@@ -572,6 +598,14 @@ type: "url"
 
 url: string
 
+
+
+FileImageSource object { file\_id, type } 
+
+file\_id: string
+
+type: "file"
+
 type: "image"
 
 
@@ -601,6 +635,24 @@ One of the following:
 
 "1h"
 
+
+
+transformations: optional [ImageTransformationsParam](api/messages.md) { oversized\_image }  or null
+
+Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+
+
+oversized\_image: optional "downsize" or "error"
+
+What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+One of the following:
+
+"downsize"
+
+"error"
+
 type: "content"
 
 
@@ -610,6 +662,14 @@ URLPDFSource object { type, url } 
 type: "url"
 
 url: string
+
+
+
+FileDocumentSource object { file\_id, type } 
+
+file\_id: string
+
+type: "file"
 
 type: "document"
 
@@ -880,7 +940,7 @@ type: "redacted\_thinking"
 
 
 
-ToolUseBlockParam object { id, input, name, 3 more } 
+ToolUseBlockParam object { id, input, name, 4 more } 
 
 id: string
 
@@ -951,9 +1011,13 @@ tool\_id: string
 
 type: "code\_execution\_20260120"
 
+toolset\_name: optional string or null
+
+For a toolset member tool\_use, the toolset family this member belongs to.
+
 
 
-ToolResultBlockParam object { tool\_use\_id, type, cache\_control, 2 more } 
+ToolResultBlockParam object { tool\_use\_id, type, cache\_control, 3 more } 
 
 tool\_use\_id: string
 
@@ -988,7 +1052,7 @@ One of the following:
 
 
 
-content: optional string or array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
+content: optional string or array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control, transformations }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 3 more
 
 One of the following:
 
@@ -996,7 +1060,7 @@ string
 
 
 
-array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
+array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control, transformations }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 3 more
 
 One of the following:
 
@@ -1159,11 +1223,11 @@ type: "search\_result\_location"
 
 
 
-ImageBlockParam object { source, type, cache\_control } 
+ImageBlockParam object { source, type, cache\_control, transformations } 
 
 
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }  or [FileImageSource](api/messages.md) { file\_id, type } 
 
 One of the following:
 
@@ -1197,6 +1261,14 @@ type: "url"
 
 url: string
 
+
+
+FileImageSource object { file\_id, type } 
+
+file\_id: string
+
+type: "file"
+
 type: "image"
 
 
@@ -1225,6 +1297,24 @@ One of the following:
 "5m"
 
 "1h"
+
+
+
+transformations: optional [ImageTransformationsParam](api/messages.md) { oversized\_image }  or null
+
+Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+
+
+oversized\_image: optional "downsize" or "error"
+
+What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+One of the following:
+
+"downsize"
+
+"error"
 
 
 
@@ -1432,7 +1522,7 @@ DocumentBlockParam object { source, type, cache\_control, 3 more } 
 
 
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url } 
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or 2 more
 
 One of the following:
 
@@ -1633,11 +1723,11 @@ type: "search\_result\_location"
 
 
 
-ImageBlockParam object { source, type, cache\_control } 
+ImageBlockParam object { source, type, cache\_control, transformations } 
 
 
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }  or [FileImageSource](api/messages.md) { file\_id, type } 
 
 One of the following:
 
@@ -1671,6 +1761,14 @@ type: "url"
 
 url: string
 
+
+
+FileImageSource object { file\_id, type } 
+
+file\_id: string
+
+type: "file"
+
 type: "image"
 
 
@@ -1700,6 +1798,24 @@ One of the following:
 
 "1h"
 
+
+
+transformations: optional [ImageTransformationsParam](api/messages.md) { oversized\_image }  or null
+
+Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+
+
+oversized\_image: optional "downsize" or "error"
+
+What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+One of the following:
+
+"downsize"
+
+"error"
+
 type: "content"
 
 
@@ -1709,6 +1825,14 @@ URLPDFSource object { type, url } 
 type: "url"
 
 url: string
+
+
+
+FileDocumentSource object { file\_id, type } 
+
+file\_id: string
+
+type: "file"
 
 type: "document"
 
@@ -1786,7 +1910,169 @@ One of the following:
 
 "1h"
 
+
+
+BrowserStateBlockParam object { tabs, type, cache\_control, state\_changes } 
+
+The caller's browser state after a browser toolset member call —
+the full inventory of open tabs, which tab is active, and any side
+effects (tabs opened, download state changes) the call produced.
+
+At most one per `tool_result`, only on a non-error result answering a
+browser toolset member `tool_use`. The server renders the
+model-visible text from it; the model never sees the raw fields.
+
+
+
+tabs: array of [BrowserStateTabEntry](api/messages.md) { tab\_id, title, url, active } 
+
+All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+maxItems100
+
+tab\_id: string
+
+The caller-assigned identifier for this tab, unique within the inventory.
+
+title: string
+
+The title of the page the tab is showing. May be empty.
+
+url: string
+
+The URL of the page the tab is showing. May be empty.
+
+active: optional boolean
+
+Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+type: "browser\_state"
+
+
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+
+One of the following:
+
+"5m"
+
+"1h"
+
+
+
+state\_changes: optional array of [BrowserStateChange](api/messages.md) or null
+
+Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+maxItems200
+
+minItems1
+
+One of the following:
+
+
+
+BrowserStateChangeTabOpened object { tab\_id, type } 
+
+A tab this call's execution opened that remains open at its end —
+the creation delta of the `tabs` inventory, not an event log.
+
+Carries only the `tab_id`; the tab's `title` and `url` live on its
+`tabs` entry, which must include the same `tab_id`. A tab opened
+during a failed call gets no deferred `tab_opened`; it simply appears
+in the next result's `tabs` inventory.
+
+tab\_id: string
+
+The `tab_id` of the opened tab, present in `tabs`.
+
+type: "tab\_opened"
+
+
+
+BrowserStateChangeDownloadStarted object { download\_id, type, url } 
+
+A file download that started during this call.
+
+download\_id: string
+
+The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+type: "download\_started"
+
+url: string
+
+The final post-redirect URL the download was served from.
+
+
+
+BrowserStateChangeDownloadCompleted object { download\_id, type, url, 2 more } 
+
+A file download that finished during this call, reported with the
+same `download_id` as its `download_started` — or without a prior
+`download_started`, when the download finished during the call that
+started it (at most one state change per `download_id` per result).
+
+download\_id: string
+
+The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+type: "download\_completed"
+
+url: string
+
+The final post-redirect URL the download was served from.
+
+path: optional string or null
+
+Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+size\_bytes: optional number or null
+
+The completed download's size.
+
+
+
+BrowserStateChangeDownloadFailed object { download\_id, type, url, error } 
+
+A file download that failed — or was cancelled — during this call.
+
+download\_id: string
+
+The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+type: "download\_failed"
+
+url: string
+
+The final post-redirect URL the download was served from.
+
+error: optional string or null
+
+The failure or cancellation detail, when known.
+
 is\_error: optional boolean
+
+toolset\_name: optional string or null
+
+For a toolset member tool\_result, the toolset family of the paired tool\_use.
 
 
 
@@ -2042,7 +2328,7 @@ content: [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3
 
 
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url } 
+source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or 2 more
 
 One of the following:
 
@@ -2243,11 +2529,11 @@ type: "search\_result\_location"
 
 
 
-ImageBlockParam object { source, type, cache\_control } 
+ImageBlockParam object { source, type, cache\_control, transformations } 
 
 
 
-source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url } 
+source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }  or [FileImageSource](api/messages.md) { file\_id, type } 
 
 One of the following:
 
@@ -2281,6 +2567,14 @@ type: "url"
 
 url: string
 
+
+
+FileImageSource object { file\_id, type } 
+
+file\_id: string
+
+type: "file"
+
 type: "image"
 
 
@@ -2310,6 +2604,24 @@ One of the following:
 
 "1h"
 
+
+
+transformations: optional [ImageTransformationsParam](api/messages.md) { oversized\_image }  or null
+
+Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+
+
+oversized\_image: optional "downsize" or "error"
+
+What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+One of the following:
+
+"downsize"
+
+"error"
+
 type: "content"
 
 
@@ -2319,6 +2631,14 @@ URLPDFSource object { type, url } 
 type: "url"
 
 url: string
+
+
+
+FileDocumentSource object { file\_id, type } 
+
+file\_id: string
+
+type: "file"
 
 type: "document"
 
@@ -2851,203 +3171,6 @@ Files uploaded via this block will be available in the container's input directo
 file\_id: string
 
 type: "container\_upload"
-
-
-
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
-
-Create a cache control breakpoint at this content block.
-
-type: "ephemeral"
-
-
-
-ttl: optional "5m" or "1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-"5m"
-
-"1h"
-
-
-
-MidConversationSystemBlockParam object { content, type, cache\_control } 
-
-System instructions that appear mid-conversation.
-
-Use this block to provide or update system-level instructions at a specific
-point in the conversation, rather than only via the top-level `system` parameter.
-
-
-
-content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations } 
-
-System instruction text blocks.
-
-text: string
-
-type: "text"
-
-
-
-cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
-
-Create a cache control breakpoint at this content block.
-
-type: "ephemeral"
-
-
-
-ttl: optional "5m" or "1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-"5m"
-
-"1h"
-
-
-
-citations: optional array of [TextCitationParam](api/messages.md) or null
-
-One of the following:
-
-
-
-CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more } 
-
-cited\_text: string
-
-document\_index: number
-
-document\_title: string or null
-
-end\_char\_index: number
-
-start\_char\_index: number
-
-type: "char\_location"
-
-
-
-CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more } 
-
-cited\_text: string
-
-document\_index: number
-
-document\_title: string or null
-
-end\_page\_number: number
-
-start\_page\_number: number
-
-type: "page\_location"
-
-
-
-CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more } 
-
-
-
-cited\_text: string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-document\_index: number
-
-document\_title: string or null
-
-
-
-end\_block\_index: number
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-start\_block\_index: number
-
-0-based index of the first cited block in the source's `content` array.
-
-type: "content\_block\_location"
-
-
-
-CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more } 
-
-cited\_text: string
-
-encrypted\_index: string
-
-title: string or null
-
-type: "web\_search\_result\_location"
-
-url: string
-
-
-
-CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
-
-
-
-cited\_text: string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-end\_block\_index: number
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-search\_result\_index: number
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-source: string
-
-start\_block\_index: number
-
-0-based index of the first cited block in the source's `content` array.
-
-title: string or null
-
-type: "search\_result\_location"
-
-type: "mid\_conv\_system"
 
 
 
@@ -4030,6 +4153,503 @@ When true, guarantees schema validation on tool names and inputs
 
 
 
+BrowserToolset20260801 object { type, allowed\_callers, cache\_control, configs } 
+
+The browser toolset: a single `tools[]` entry (carrying no
+`name`) that declares the browser tool family. The model is served
+the family's tool with any members disabled via `configs` removed
+from its schema.
+
+type: "browser\_toolset\_20260801"
+
+
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
+
+One of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+"code\_execution\_20260521"
+
+
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+
+One of the following:
+
+"5m"
+
+"1h"
+
+
+
+configs: optional [BrowserToolsetConfigs](api/messages.md) { close\_tab, double\_click, file\_upload, 28 more }  or null
+
+Per-member configuration for `browser_toolset_20260801`: one
+optional field per member tool, keyed by the member name — the same
+name the member's `tool_use` blocks carry. Every member is an
+accepted key, and a member's defaults apply wherever its key is
+absent. Unknown keys are rejected: the field set is this toolset
+version's complete member set.
+
+
+
+close\_tab: optional [BrowserCloseTabConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`close_tab`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+double\_click: optional [BrowserDoubleClickConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`double_click`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+file\_upload: optional [BrowserFileUploadConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`file_upload`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+find: optional [BrowserFindConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`find`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+form\_input: optional [BrowserFormInputConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`form_input`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+get\_page\_text: optional [BrowserGetPageTextConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`get_page_text`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+hold\_key: optional [BrowserHoldKeyConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`hold_key`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+hover: optional [BrowserHoverConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`hover`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+javascript\_exec: optional [BrowserJavascriptExecConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`javascript_exec`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+key: optional [BrowserKeyConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`key`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+left\_click: optional [BrowserLeftClickConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`left_click`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+left\_click\_drag: optional [BrowserLeftClickDragConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`left_click_drag`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+left\_mouse\_down: optional [BrowserLeftMouseDownConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`left_mouse_down`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+left\_mouse\_up: optional [BrowserLeftMouseUpConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`left_mouse_up`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+list\_tabs: optional [BrowserListTabsConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`list_tabs`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+middle\_click: optional [BrowserMiddleClickConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`middle_click`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+mouse\_move: optional [BrowserMouseMoveConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`mouse_move`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+navigate: optional [BrowserNavigateConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`navigate`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+new\_tab: optional [BrowserNewTabConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`new_tab`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+read\_console: optional [BrowserReadConsoleConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`read_console`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+read\_network: optional [BrowserReadNetworkConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`read_network`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+read\_page: optional [BrowserReadPageConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`read_page`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+right\_click: optional [BrowserRightClickConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`right_click`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+screenshot: optional [BrowserScreenshotConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`screenshot`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+scroll: optional [BrowserScrollConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`scroll`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+scroll\_to: optional [BrowserScrollToConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`scroll_to`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+switch\_tab: optional [BrowserSwitchTabConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`switch_tab`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+triple\_click: optional [BrowserTripleClickConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`triple_click`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+type: optional [BrowserTypeConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`type`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+wait: optional [BrowserWaitConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`wait`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+zoom: optional [BrowserZoomConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`zoom`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
 MemoryTool20250818 object { name, type, allowed\_callers, 4 more } 
 
 
@@ -4092,6 +4712,311 @@ input\_examples: optional array of map[unknown]
 strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
+
+
+
+ComputerToolset20260801 object { type, allowed\_callers, cache\_control, configs } 
+
+The computer toolset: a single `tools[]` entry (carrying no
+`name`) that declares the computer tool family. The model is
+served the family's tool with any members disabled via `configs`
+removed from its schema. Every member is enabled by default, zoom
+included. The single-tool options `display_number` and
+`enable_zoom` are not fields of a toolset entry — it carries only
+`type`, `configs`, and `cache_control`; zoom is controlled
+via `configs.zoom.enabled`.
+
+type: "computer\_toolset\_20260801"
+
+
+
+allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120" or "code\_execution\_20260521"
+
+One of the following:
+
+"direct"
+
+"code\_execution\_20250825"
+
+"code\_execution\_20260120"
+
+"code\_execution\_20260521"
+
+
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }  or null
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+
+One of the following:
+
+"5m"
+
+"1h"
+
+
+
+configs: optional [ComputerToolsetConfigs](api/messages.md) { cursor\_position, double\_click, hold\_key, 14 more }  or null
+
+Per-member configuration for `computer_toolset_20260801`: one
+optional field per member tool, keyed by the member name — the same
+name the member's `tool_use` blocks carry. Every member is an
+accepted key, and a member's defaults apply wherever its key is
+absent. Unknown keys are rejected: the field set is this toolset
+version's complete member set.
+
+
+
+cursor\_position: optional [ComputerCursorPositionConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`cursor_position`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+double\_click: optional [ComputerDoubleClickConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`double_click`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+hold\_key: optional [ComputerHoldKeyConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`hold_key`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+key: optional [ComputerKeyConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`key`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+left\_click: optional [ComputerLeftClickConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`left_click`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+left\_click\_drag: optional [ComputerLeftClickDragConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`left_click_drag`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+left\_mouse\_down: optional [ComputerLeftMouseDownConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`left_mouse_down`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+left\_mouse\_up: optional [ComputerLeftMouseUpConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`left_mouse_up`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+middle\_click: optional [ComputerMiddleClickConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`middle_click`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+mouse\_move: optional [ComputerMouseMoveConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`mouse_move`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+right\_click: optional [ComputerRightClickConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`right_click`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+screenshot: optional [ComputerScreenshotConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`screenshot`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+scroll: optional [ComputerScrollConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`scroll`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+triple\_click: optional [ComputerTripleClickConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`triple_click`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+type: optional [ComputerTypeConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`type`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+wait: optional [ComputerWaitConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`wait`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+
+
+zoom: optional [ComputerZoomConfig](api/messages.md) { defer\_loading, enabled }  or null
+
+`zoom`'s config overrides.
+
+defer\_loading: optional boolean or null
+
+Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+enabled: optional boolean or null
+
+Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
 
 
@@ -5139,7 +6064,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
               "role": "user"
             }
           ],
-          "model": "claude-opus-4-6",
+          "model": "claude-opus-5",
           "system": [
             {
               "text": "Today'\''s date is 2024-06-01.",

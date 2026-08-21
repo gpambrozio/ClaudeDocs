@@ -15,7 +15,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-file = client.beta.files.upload(file=Path("data.csv"))
+file = client.files.upload(file=Path("data.csv"))
 print(f"File ID: {file.id}")
 ```
 
@@ -96,7 +96,7 @@ client.beta.sessions.resources.delete(resource.id, session_id=session.id)
 
 ##  Listing and downloading session files
 
-Use the [Files API](build-with-claude/files.md) to list files scoped to a session and download them.
+Use the [Files API](build-with-claude/files.md) to list files scoped to a session and download them. Filtering by `scope_id` requires the `managed-agents-2026-04-01` beta header, so the list examples use the `beta` files namespace and pass that header explicitly.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -112,7 +112,7 @@ for file in files:
     print(file.id, file.filename)
 
 # Download a file
-content = client.beta.files.download(files.data[0].id)
+content = client.files.download(files.data[0].id)
 content.write_to_file("output.txt")
 ```
 

@@ -17,11 +17,18 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-VAULT_ID=$(ant beta:vaults create \
-  --display-name "Alice" \
-  --metadata '{external_user_id: usr_abc123}' \
-  --transform id --raw-output)
+VAULT_ID=$(ant beta:vaults create --transform id --raw-output < alice.vault.yaml)
 echo "$VAULT_ID"  # "vlt_01ABC..."
+```
+
+alice.vault.yaml
+
+
+
+```shiki
+display_name: Alice
+metadata:
+  external_user_id: usr_abc123
 ```
 
 The response is the full vault record:

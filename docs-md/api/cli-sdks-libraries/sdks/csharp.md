@@ -371,11 +371,11 @@ These methods return `HttpResponse`:
 
 ```shiki
 using System;
-using Anthropic.Models.Beta.Files;
+using Anthropic.Models.Files;
 
 FileDownloadParams parameters = new() { FileID = "file_id" };
 
-var response = await client.Beta.Files.Download(parameters);
+var response = await client.Files.Download(parameters);
 
 Console.WriteLine(response);
 ```
@@ -387,7 +387,7 @@ To save the response content to a file, or any [`Stream`](https://learn.microsof
 ```shiki
 using System.IO;
 
-using var response = await client.Beta.Files.Download(parameters);
+using var response = await client.Files.Download(parameters);
 using var contentStream = await response.ReadAsStream();
 using var fileStream = File.Open(path, FileMode.OpenOrCreate);
 await contentStream.CopyToAsync(fileStream); // Or any other Stream

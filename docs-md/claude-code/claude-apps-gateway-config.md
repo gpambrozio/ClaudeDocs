@@ -603,26 +603,26 @@ If you don’t deploy Claude Desktop, leave `desktop` out of your policies entir
 
 #### [​](#precedence-with-other-managed-sources) Precedence with other managed sources
 
-If a device also has a local `managed-settings.json` or MDM-delivered policy, the managed sources don’t merge, with two per-key exceptions while no [policy helper](settings.md) is supplying managed settings, since a helper’s output replaces the managed sources entirely:
+If a device also has a local `managed-settings.json` or MDM-delivered policy, the managed sources don’t merge, with two per-key exceptions:
 
 - The `env` block, in Claude Code v2.1.223 or later
 - The [cross-source lock keys](settings.md)
 
 Both are covered in the list later in this section. The highest-priority source provides all policy settings, ranked in this order with highest priority first:
 
-1. The [policy helper](settings.md)
-2. Gateway-delivered settings
-3. MDM, via the HKLM registry on Windows or a plist on macOS
-4. The `managed-settings.json` file
-5. The HKCU registry, on Windows only
+1. Gateway-delivered settings
+2. MDM, via the HKLM registry on Windows or a plist on macOS
+3. The `managed-settings.json` file
+4. The HKCU registry, on Windows only
 
+When an MDM or file-based source wins and configures a [`policyHelper`](settings.md), the helper’s output replaces that source and neither per-key exception applies. A `policyHelper` in those sources doesn’t run while the gateway delivers a non-empty configuration.
 Embedding hosts such as [Claude Desktop](desktop.md) can supply policy through the SDK `managedSettings` option. Whether it applies depends on the machine’s managed configuration:
 
 - On machines with an admin-deployed managed source, it is ignored unless the highest-priority source opts in with [`parentSettingsBehavior: "merge"`](settings.md).
-- It is never merged while a [`policyHelper`](settings.md) is configured.
+- It is never merged when an MDM or file-based source wins and configures a [`policyHelper`](settings.md).
 - When merged, it passes through a restrictive-only allowlist. [Restrict parent settings](claude-apps-gateway.md) lists which allow-direction settings still apply without the `allowManaged*Only` locks.
 
-The following keys are honored when any admin source above the user-writable HKCU tier sets them, regardless of which source provides the rest of the policy. When a [`policyHelper`](settings.md) is configured, its output is the only source these checks read:
+The following keys are honored when any admin source above the user-writable HKCU tier sets them, regardless of which source provides the rest of the policy. When an MDM or file-based source wins and configures a [`policyHelper`](settings.md), the helper’s output is the only source these checks read:
 
 - `sandbox.network.allowManagedDomainsOnly` and `sandbox.filesystem.allowManagedReadPathsOnly`: when locked, the corresponding allowlists are unioned across sources
 - [`allowAllClaudeAiMcps`](settings.md): allow-only override for the claude.ai MCP server allowlist

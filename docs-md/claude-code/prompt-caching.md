@@ -22,7 +22,7 @@ The prefix-match rule explains most of the behaviors on this page. [Plan mode](p
 Two settings aren’t part of the prompt text at all, so they don’t appear in the layer table, but both are part of the cache key:
 
 - **Model**: each model has its own cache. Switching models recomputes the entire request even when the content is identical. See [Switching models](#switching-models) below.
-- **Effort level**: each effort level has its own cache for the same model. Changing it mid-session recomputes the entire request, and Claude Code asks you to confirm before applying the change. See [Changing effort level](#changing-effort-level) below.
+- **Effort level**: each effort level has its own cache for the same model. Changing effort mid-session recomputes the entire request. See [Changing effort level](#changing-effort-level) below.
 
 Pick your model and effort level at the top of a session, then save `/compact` for natural breaks between tasks. The fewer changes you make mid-task, the higher your cache hit rate.
 
@@ -55,12 +55,18 @@ These actions cause the next request to miss part or all of the cache. You see a
 ### [​](#switching-models) Switching models
 
 Each model has its own cache. Switching with [`/model`](model-config.md) means the next request reads the entire conversation history with no cache hits, even though the content is identical.
+When you run `/model` at the terminal, Claude Code asks you to confirm the switch only while the current cache hasn’t expired. Whether the cache has expired depends on how long it has been since Claude Code last sent a request in this conversation or Claude last responded:
+
+- **Less than one [cache TTL](#cache-lifetime) ago**: the cache is still warm.
+- **One cache TTL or longer ago**: the cache has already expired, so Claude Code switches without asking.
+
+Before v2.1.238, Claude Code didn’t check the cache TTL and asked even after the cache had expired.
 The [`opusplan` model setting](model-config.md) resolves to Opus during plan mode and Sonnet during execution, so each plan-mode toggle is a model switch and starts a fresh cache.
 [Automatic model fallback](model-config.md) on Fable 5 and Opus 5 is also a model switch. When a safety classifier flags a request and the flagged category has a fallback model, Claude Code re-runs the request on that model and the session continues there.
 
 ### [​](#changing-effort-level) Changing effort level
 
-The cache is keyed by [effort level](model-config.md) as well as model, so switching with `/effort` means the next request reads the entire conversation history with no cache hits. Once a conversation has started, Claude Code shows a confirmation dialog before applying an effort change that would invalidate the cache. A change that resolves to the same level already in effect, such as setting the model’s default explicitly, skips the dialog and keeps the cache.
+The cache is keyed by [effort level](model-config.md) as well as model, so switching with `/effort` means the next request reads the entire conversation history with no cache hits. Changing effort follows the same confirmation as [switching models](#switching-models). When a change resolves to the same level already in effect, such as setting the model’s default explicitly, Claude Code keeps the cache and applies the change without asking.
 
 ### [​](#turning-on-fast-mode) Turning on fast mode
 

@@ -81,7 +81,7 @@ Your signed BAA is the official source of truth for which features are covered. 
 
 
 
-The error message lists the non-eligible features detected in the request; remove them and retry. The phrase "without Zero Data Retention" is the API's own wording and does not change the resolution.
+The error message lists the non-eligible features detected in the request; remove them and retry. The phrase "without Zero Data Retention" is the API's own wording and does not change the resolution. Client-side tools whose Details column in the [feature eligibility table](#feature-eligibility) says they are not blocked are accepted but remain outside HIPAA readiness.
 
 ###  Getting started with HIPAA readiness
 
@@ -103,7 +103,7 @@ There are two ways to set up HIPAA-ready API access. Most organizations can enab
 
    Enablement takes effect immediately
 
-   HIPAA readiness controls are applied to your organization as soon as you accept. Once HIPAA readiness is enabled for your organization, the configuration is permanent and cannot be disabled by an administrator. The API automatically enforces feature restrictions, returning an error for requests that use non-eligible features. See [HIPAA error handling](#hipaa-error-handling).
+   HIPAA readiness controls are applied to your organization as soon as you accept. Once HIPAA readiness is enabled for your organization, the configuration is permanent and cannot be disabled by an administrator. The API automatically enforces feature restrictions, returning an error for requests that use non-eligible features. See [HIPAA error handling](#hipaa-error-handling) for the error and the client-side tool exception.
 
 ####  Contact sales (custom BAA)
 
@@ -159,7 +159,7 @@ Each eligibility column uses three values:
 
 - **Yes:** The feature is fully eligible under the arrangement. For ZDR, "Yes" also assumes you are using a model that does not require 30-day data retention; [Covered Models](#model-specific-data-retention-requirements) are not available under ZDR regardless of feature eligibility.
 - **Yes (qualified):** Your prompts and Claude's outputs are not stored, but a bounded technical artifact (named in the Details column) is retained briefly for the feature to function. See [How Anthropic approaches data retention](#how-anthropic-approaches-data-retention) for the commitments that govern these features.
-- **No:** The feature is not eligible. Under HIPAA readiness, the API blocks requests that include a "No" feature and returns a `400` error. Under ZDR, the API does **not** block these features; using one is a choice to step outside your ZDR arrangement for that specific data, and the feature's own documented retention policy applies. Features marked "No" for ZDR are typically stateful (they store jobs, files, or container state), which is why they cannot be zero-retention.
+- **No:** The feature is not eligible. Under HIPAA readiness, the API blocks requests that include a "No" feature and returns a `400` error, unless the feature's Details column says otherwise. Under ZDR, the API does **not** block these features; using one is a choice to step outside your ZDR arrangement for that specific data, and the feature's own documented retention policy applies. Features marked "No" for ZDR are typically stateful (they store jobs, files, or container state), which is why they cannot be zero-retention.
 
 | Feature | Endpoint | ZDR eligible | HIPAA eligible | Details |
 | --- | --- | --- | --- | --- |
@@ -169,11 +169,12 @@ Each eligibility column uses three values:
 | [Agent skills](agents-and-tools/agent-skills/overview.md) | `/v1/messages` (with `skills`) / `/v1/skills` | No | No | Skill data retained per standard policy. See [Agent skills](agents-and-tools/agent-skills/overview.md). |
 | [Bash tool](agents-and-tools/tool-use/bash-tool.md) | `/v1/messages` (with `bash` tool) | Yes | Yes | Client-side tool executed in your environment. |
 | [Batch processing](build-with-claude/batch-processing.md) | `/v1/messages/batches` | No | No | 29-day retention; async storage required. See [Batch processing](build-with-claude/batch-processing.md). |
+| [Browser use](agents-and-tools/tool-use/browser-use-tool.md) | `/v1/messages` (with `browser` toolset) | Yes | No | Client-side tool. Anthropic does not run browser actions or retain page content beyond standard API handling. Not covered under HIPAA readiness; requests that include the browser use tool are not blocked. See [Browser use](agents-and-tools/tool-use/browser-use-tool.md). |
 | [Cache diagnostics](build-with-claude/cache-diagnostics.md) | `/v1/messages` (with `diagnostics`) | Yes (qualified) | No | Your prompts and Claude's outputs are not stored. A fingerprint of cryptographic hashes and token-count estimates is retained briefly to enable comparison against the next request. See [Cache diagnostics](build-with-claude/cache-diagnostics.md). |
 | [Citations](build-with-claude/citations.md) | `/v1/messages` | Yes | Yes |  |
 | [Claude Managed Agents](managed-agents/overview.md) | `/v1/agents`, `/v1/sessions`, `/v1/environments` | No | No | Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including [Self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md). |
 | [Code execution](agents-and-tools/tool-use/code-execution-tool.md) | `/v1/messages` (with `code_execution` tool) | No | No | Container data retained up to 30 days. See [Code execution](agents-and-tools/tool-use/code-execution-tool.md). |
-| [Computer use](agents-and-tools/tool-use/computer-use-tool.md) | `/v1/messages` (with `computer` tool) | Yes | Yes | Client-side tool where screenshots and files are captured and stored in your environment, not by Anthropic. See [Computer use](agents-and-tools/tool-use/computer-use-tool.md). |
+| [Computer use](agents-and-tools/tool-use/computer-use-tool.md) | `/v1/messages` (with `computer` toolset or tool) | Yes | Yes | Client-side tool where screenshots and files are captured and stored in your environment, not by Anthropic. See [Computer use](agents-and-tools/tool-use/computer-use-tool.md). |
 | [Context editing](build-with-claude/context-editing.md) | `/v1/messages` (with `context_management`) | Yes | No | Context edits (tool use clearing and thinking clearing) are applied in real time. |
 | [Context management (compaction)](build-with-claude/compaction.md) | `/v1/messages` (with `context_management`) | Yes | No | Server-side compaction results are returned and round-tripped statelessly through the API response. |
 | [Data residency](manage-claude/data-residency.md) | `/v1/messages` (with `inference_geo`) | Yes | Yes |  |
@@ -195,7 +196,7 @@ Each eligibility column uses three values:
 | [Thinking](build-with-claude/thinking.md) | `/v1/messages` (with `thinking`) | Yes | Yes |  |
 | [Token counting](build-with-claude/token-counting.md) | `/v1/messages/count_tokens` | Yes | Yes | Count tokens before sending requests. |
 | [Tool search](agents-and-tools/tool-use/tool-search-tool.md) | `/v1/messages` (with `tool_search` tool) | Yes | No | Server-side tool executed by Anthropic; the tool definitions in the request are searched in memory per call and nothing is stored after the response. |
-| [Web fetch](agents-and-tools/tool-use/web-fetch-tool.md) | `/v1/messages` (with `web_fetch` tool) | Yes | No | Fetched web content returned in the API response. [Dynamic filtering](agents-and-tools/tool-use/web-search-tool.md) is not eligible for ZDR or HIPAA. Website publishers may retain request data (such as fetched URLs and request metadata) according to their own policies. |
+| [Web fetch](agents-and-tools/tool-use/web-fetch-tool.md) | `/v1/messages` (with `web_fetch` tool) | Yes | No | Fetched web content returned in the API response. [Dynamic filtering](agents-and-tools/tool-use/web-fetch-tool.md) is not eligible for ZDR or HIPAA. Website publishers may retain request data (such as fetched URLs and request metadata) according to their own policies. |
 | [Web search](agents-and-tools/tool-use/web-search-tool.md) | `/v1/messages` (with `web_search` tool) | Yes | Yes | Real-time web search results returned in the API response. [Dynamic filtering](agents-and-tools/tool-use/web-search-tool.md) is not eligible for ZDR or HIPAA. |
 
 ##  Retention regardless of arrangement
@@ -238,7 +239,7 @@ Even with ZDR or HIPAA arrangements in place, Anthropic may retain data where re
 - [Structured outputs](build-with-claude/structured-outputs.md)
 - [Prompt caching](build-with-claude/prompt-caching.md)
 - [Batch processing](build-with-claude/batch-processing.md)
-- [Files API reference](api/beta/files/upload.md)
+- [Files API reference](api/files/upload.md)
 - [Trust Center](https://trust.anthropic.com/resources)
 
 Was this page helpful?

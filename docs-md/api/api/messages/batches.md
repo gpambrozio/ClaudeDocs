@@ -308,7 +308,7 @@ The format and length of IDs may change over time.
 
 
 
-container: [Container](api/messages.md) { id, expires\_at }  or null
+container: [Container](api/messages.md) { id, expires\_at, skills }  or null
 
 Information about the container used in the request (for the code execution tool)
 
@@ -319,6 +319,32 @@ Identifier for the container used in this request
 expires\_at: string
 
 The time at which the container will expire.
+
+
+
+skills: array of [ContainerSkill](api/messages.md) { skill\_id, type, version }  or null
+
+Skills loaded in the container
+
+skill\_id: string
+
+Skill ID
+
+
+
+type: "anthropic" or "custom"
+
+Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+
+One of the following:
+
+"anthropic"
+
+"custom"
+
+version: string
+
+Skill version or 'latest' for most recent version
 
 
 
@@ -537,7 +563,7 @@ type: "redacted\_thinking"
 
 
 
-ToolUseBlock object { id, caller, input, 2 more } 
+ToolUseBlock object { id, caller, input, 3 more } 
 
 id: string
 
@@ -580,6 +606,10 @@ input: map[unknown]
 name: string
 
 type: "tool\_use"
+
+toolset\_name: optional string or null
+
+For a toolset member tool\_use, the toolset family.
 
 
 
@@ -1609,7 +1639,7 @@ The format and length of IDs may change over time.
 
 
 
-container: [Container](api/messages.md) { id, expires\_at }  or null
+container: [Container](api/messages.md) { id, expires\_at, skills }  or null
 
 Information about the container used in the request (for the code execution tool)
 
@@ -1620,6 +1650,32 @@ Identifier for the container used in this request
 expires\_at: string
 
 The time at which the container will expire.
+
+
+
+skills: array of [ContainerSkill](api/messages.md) { skill\_id, type, version }  or null
+
+Skills loaded in the container
+
+skill\_id: string
+
+Skill ID
+
+
+
+type: "anthropic" or "custom"
+
+Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+
+One of the following:
+
+"anthropic"
+
+"custom"
+
+version: string
+
+Skill version or 'latest' for most recent version
 
 
 
@@ -1838,7 +1894,7 @@ type: "redacted\_thinking"
 
 
 
-ToolUseBlock object { id, caller, input, 2 more } 
+ToolUseBlock object { id, caller, input, 3 more } 
 
 id: string
 
@@ -1881,6 +1937,10 @@ input: map[unknown]
 name: string
 
 type: "tool\_use"
+
+toolset\_name: optional string or null
+
+For a toolset member tool\_use, the toolset family.
 
 
 
@@ -2860,7 +2920,7 @@ The format and length of IDs may change over time.
 
 
 
-container: [Container](api/messages.md) { id, expires\_at }  or null
+container: [Container](api/messages.md) { id, expires\_at, skills }  or null
 
 Information about the container used in the request (for the code execution tool)
 
@@ -2871,6 +2931,32 @@ Identifier for the container used in this request
 expires\_at: string
 
 The time at which the container will expire.
+
+
+
+skills: array of [ContainerSkill](api/messages.md) { skill\_id, type, version }  or null
+
+Skills loaded in the container
+
+skill\_id: string
+
+Skill ID
+
+
+
+type: "anthropic" or "custom"
+
+Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+
+One of the following:
+
+"anthropic"
+
+"custom"
+
+version: string
+
+Skill version or 'latest' for most recent version
 
 
 
@@ -3089,7 +3175,7 @@ type: "redacted\_thinking"
 
 
 
-ToolUseBlock object { id, caller, input, 2 more } 
+ToolUseBlock object { id, caller, input, 3 more } 
 
 id: string
 
@@ -3132,6 +3218,10 @@ input: map[unknown]
 name: string
 
 type: "tool\_use"
+
+toolset\_name: optional string or null
+
+For a toolset member tool\_use, the toolset family.
 
 
 

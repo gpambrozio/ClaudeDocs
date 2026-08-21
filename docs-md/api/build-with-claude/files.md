@@ -4,7 +4,7 @@
 
 
 
-The Files API lets you upload and manage files to use with the Claude API without re-uploading content with each request. This is particularly useful when using the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) to provide inputs (for example, datasets and documents) and then download outputs (for example, charts). You can [explore the API reference directly](api/beta/files/upload.md), in addition to this guide.
+The Files API lets you upload and manage files to use with the Claude API without re-uploading content with each request. This is particularly useful when using the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) to provide inputs (for example, datasets and documents) and then download outputs (for example, charts). You can [explore the API reference directly](api/files/upload.md), in addition to this guide.
 
 ##  File type support
 
@@ -30,7 +30,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-uploaded = client.beta.files.upload(
+uploaded = client.files.upload(
     file=("document.pdf", open("/path/to/document.pdf", "rb"), "application/pdf"),
 )
 file_id = uploaded.id
@@ -67,7 +67,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-response = client.beta.messages.create(
+response = client.messages.create(
     model="claude-opus-5",
     max_tokens=1024,
     messages=[
@@ -85,7 +85,6 @@ response = client.beta.messages.create(
             ],
         }
     ],
-    betas=["files-api-2025-04-14"],
 )
 print(response)
 ```
@@ -191,7 +190,7 @@ for block in response.content:
 
 ####  List files
 
-Retrieve a list of your uploaded files. The endpoint is paginated: each request returns up to `limit` files (20 by default, and at most 1,000), and the response's `next_page` cursor fetches the next page when passed back as the `page` parameter. Files are ordered newest first. See the [List Files API reference](api/beta/files/list.md). The SDKs return the first page and provide auto-pagination helpers. The CLI example bounds the total with `--max-items`:
+Retrieve a list of your uploaded files. The endpoint is paginated: each request returns up to `limit` files (20 by default, and at most 1,000), and the response's `next_page` cursor fetches the next page when passed back as the `page` parameter. Files are ordered newest first. See the [List Files API reference](api/files/list.md). The SDKs return the first page and provide auto-pagination helpers. The CLI example bounds the total with `--max-items`:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -199,13 +198,11 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 client = anthropic.Anthropic()
-files = client.beta.files.list()
+files = client.files.list()
 print(files)
 ```
 
 To check a known set of files in one request instead of paging, pass up to 100 file IDs as `ids[]` query parameters. An `ids[]` request always returns a single page (`next_page` is `null`), and any ID that does not resolve to a file in your workspace is silently omitted from `data`; compare the returned IDs against the requested IDs to detect misses. `ids[]` cannot be combined with `page` or `limit`.
-
-The `page` parameter, the `next_page` cursor, and the `ids[]` filter apply to requests sent without the `anthropic-beta: files-api-2025-04-14` header. The preceding examples send it (the SDKs and CLI add it for `beta.files` calls), so they receive the earlier list format described in the note under [How to use the Files API](#how-to-use-the-files-api).
 
 ####  Get file metadata
 
@@ -216,7 +213,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-file = client.beta.files.retrieve_metadata(file_id)
+file = client.files.retrieve_metadata(file_id)
 print(file)
 ```
 
@@ -229,7 +226,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-client.beta.files.delete(file_id)
+client.files.delete(file_id)
 ```
 
 ###  Downloading a file
@@ -241,7 +238,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-file_content = client.beta.files.download(file_id)
+file_content = client.files.download(file_id)
 
 file_content.write_to_file("downloaded_file.txt")
 ```
@@ -320,7 +317,7 @@ File content used in Messages requests is priced as input tokens.
 
 ###  Rate limits
 
-File-related API calls are limited to approximately 500 requests per minute. To request a higher limit, [contact sales](/cdn-cgi/l/email-protection#087b69646d7b4869667c607a6778616b266b6765).
+File-related API calls are limited to approximately 500 requests per minute. To request a higher limit, [contact sales](/cdn-cgi/l/email-protection#d7a4b6bbb2a497b6b9a3bfa5b8a7beb4f9b4b8ba).
 
 ##  Next steps
 

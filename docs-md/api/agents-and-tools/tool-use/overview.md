@@ -4,7 +4,7 @@
 
 
 
-Tool use lets Claude call functions that you define or that Anthropic provides. Claude determines when to call a tool based on the user's request and the tool's description. It then returns a structured call that your application executes (client tools) or that Anthropic executes (server tools).
+Tool use (also called function calling) lets Claude call functions that you define or that Anthropic provides. Claude determines when to call a tool based on the user's request and the tool's description. It then returns a structured call that your application executes (client tools) or that Anthropic executes (server tools).
 
 Here's a minimal example using a server tool, the [Web search tool](agents-and-tools/tool-use/web-search-tool.md), which Anthropic executes for you:
 
@@ -165,9 +165,15 @@ View and modify text files to debug, fix, and improve code.
 
 Take screenshots and control the mouse and keyboard in a desktop environment.
 
+[Browser use tool](agents-and-tools/tool-use/browser-use-tool.md)
+
+Navigate, read, and interact with webpages in your own browser environment.
+
 ###  Server tools
 
 Server tools run on Anthropic's infrastructure, with no handler code in your application. See [Server tools](agents-and-tools/tool-use/server-tools.md) for the mechanics they share.
+
+
 
 [Web search tool](agents-and-tools/tool-use/web-search-tool.md)
 

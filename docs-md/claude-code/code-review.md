@@ -133,7 +133,7 @@ If a review is already running on that PR, the request is queued until the in-pr
 Code Review reads two files from your repository to guide what it flags. They differ in how strongly they influence the review:
 
 - **`CLAUDE.md`**: shared project instructions that Claude Code uses for all tasks, not just reviews. Code Review reads it as project context and flags newly introduced violations as nits.
-- **`REVIEW.md`**: review-only instructions, injected directly into every agent in the review pipeline as highest priority. Use it to change what gets flagged, at what severity, and how findings are reported.
+- **`REVIEW.md`**: review-only instructions, given to the agents that find and verify findings and consulted by the agents that rank and report them. Use it to say what your team wants flagged, at what severity, and how findings are reported.
 
 ### [​](#claude-md) CLAUDE.md
 
@@ -143,8 +143,8 @@ For review-specific guidance that you don’t want applied to general Claude Cod
 
 ### [​](#review-md) REVIEW.md
 
-`REVIEW.md` is a file at your repository root that overrides how Code Review behaves on your repo. Its contents are injected into the system prompt of every agent in the review pipeline as the highest-priority instruction block, taking precedence over the default review guidance.
-Because it’s pasted verbatim, `REVIEW.md` is plain instructions: [`@` import syntax](memory.md) is not expanded, and referenced files are not read into the prompt. Put the rules you want enforced directly in the file.
+`REVIEW.md` is a file at your repository root that tailors Code Review to your repo. The agents in the review pipeline that find and verify findings receive its contents as your repository’s review instructions, alongside Code Review’s default review guidance, and the agents that rank and report findings consult it before settling severity and writing the review.
+The agents read the file’s text as-is, so `REVIEW.md` is plain instructions: [`@` import syntax](memory.md) is not expanded, and referenced files are not read along with it. Put the rules you want enforced directly in the file.
 
 #### [​](#what-you-can-tune) What you can tune
 
@@ -152,7 +152,7 @@ Because it’s pasted verbatim, `REVIEW.md` is plain instructions: [`@` import s
 **Severity**: redefine what 🔴 Important means for your repo. The default calibration targets production code; a docs repo, a config repo, or a prototype might want a much narrower definition. State explicitly which classes of finding are Important and which are Nit at most. You can also escalate in the other direction, for example treating any `CLAUDE.md` violation as Important rather than the default nit.
 **Nit volume**: cap how many 🟡 Nit comments a single review posts. Prose and config files can be polished forever. A cap like “report at most five nits, mention the rest as a count in the summary” keeps reviews actionable.
 **Skip rules**: list paths, branch patterns, and finding categories where Claude should post no findings. Common candidates are generated code, lockfiles, vendored dependencies, and machine-authored branches, along with anything your CI already enforces like linting or spellcheck. For paths that warrant some review but not full scrutiny, set a higher bar instead of skipping entirely: “in `scripts/`, only report if near-certain and severe.”
-**Repo-specific checks**: add rules you want flagged on every PR, like “new API routes must have an integration test.” Because `REVIEW.md` is injected as highest priority, these land more reliably than the same rules in a long `CLAUDE.md`.
+**Repo-specific checks**: add rules you want flagged on every PR, like “new API routes must have an integration test.” Because `REVIEW.md` reaches every finding and verification agent directly, these land more reliably than the same rules in a long `CLAUDE.md`.
 **Verification bar**: require evidence before a class of finding is posted. For example, “behavior claims need a `file:line` citation in the source, not an inference from naming” cuts false positives that would otherwise cost the author a round trip.
 **Re-review convergence**: tell Claude how to behave when a PR has already been reviewed. A rule like “after the first review, suppress new nits and post Important findings only” stops a one-line fix from reaching round seven on style alone.
 **Summary shape**: ask for the review body to open with a one-line tally such as `2 factual, 4 style`, and to lead with “no factual issues” when that’s the case. The author wants to know the shape of the work before the details.
@@ -346,6 +346,7 @@ The command was named `/simplify` before v2.1.147, when it applied fixes by defa
 - [GitLab CI/CD](gitlab-ci-cd.md): self-hosted Claude integration for GitLab pipelines
 - [Memory](memory.md): how `CLAUDE.md` files work across Claude Code
 - [Analytics](analytics.md): track Claude Code usage beyond code review
+- [How Anthropic secures its AI-native software development lifecycle](https://claude.com/blog/how-anthropic-secures-its-ai-native-software-development-lifecycle): how automated review fits as one layer of Anthropic’s secure development process
 
 ---
 

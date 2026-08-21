@@ -75,11 +75,6 @@ Claude Code includes `/deep-research` as a built-in workflow:
 ### [​](#watch-the-run) Watch the run
 
 Workflows run in the background, so the session stays responsive while agents work. Run `/workflows` at any time to list running and completed workflows, then select one to open its progress view.
-
-```shiki
-/workflows
-```
-
 The progress view shows each phase with its agent counts, token totals, and elapsed time. The footer lists the key for each action:
 
 | Key | Action |

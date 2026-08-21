@@ -35,15 +35,22 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-agent=$(ant beta:agents create \
-  --name "Coding Assistant" \
-  --model '{id: claude-opus-5}' \
-  --system "You are a helpful coding agent." \
-  --tool '{type: agent_toolset_20260401}' \
-  --format json)
+agent=$(ant beta:agents create --format json < coding-assistant.agent.yaml)
 
 AGENT_ID=$(jq -r '.id' <<< "$agent")
-AGENT_VERSION=$(jq -r '.version' <<< "$agent")
+```
+
+coding-assistant.agent.yaml
+
+
+
+```shiki
+name: Coding Assistant
+model:
+  id: claude-opus-5
+system: You are a helpful coding agent.
+tools:
+  - type: agent_toolset_20260401
 ```
 
 The response echoes your configuration and adds `id`, `type`, `version`, `created_at`, `updated_at`, and `archived_at` fields, and fills in `model` fields you omit, such as `effort`, with their defaults. The `version` starts at 1 and increments each time an update changes the agent.
@@ -94,13 +101,21 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-agent=$(ant beta:agents create \
-  --name "Geo-pinned assistant" \
-  --model '{id: claude-opus-5, inference_geo: us}' \
-  --system "You are a helpful assistant." \
-  --format json)
+agent=$(ant beta:agents create --format json < geo-pinned.agent.yaml)
 
 echo "Inference geo: $(jq -r '.model.inference_geo' <<< "$agent")"
+```
+
+geo-pinned.agent.yaml
+
+
+
+```shiki
+name: Geo-pinned assistant
+model:
+  id: claude-opus-5
+  inference_geo: us
+system: You are a helpful assistant.
 ```
 
 An `inference_geo` pin is validated against the workspace's [`allowed_inference_geos`](manage-claude/data-residency.md) when the agent is saved, when a session is created from it, and on every turn the session serves. If the workspace allowlist narrows so a pin is no longer allowed, new sessions can't be created from the agent and running sessions refuse further turns; pins are never exempted, because workspaces rely on them for compliance and data residency.
@@ -116,10 +131,20 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-ant beta:agents update \
-  --agent-id "$AGENT_ID" \
-  --version "$AGENT_VERSION" \
-  --system "You are a helpful coding agent. Always write tests."
+ant beta:agents update --agent-id "$AGENT_ID" < coding-assistant.agent.yaml
+```
+
+coding-assistant.agent.yaml
+
+
+
+```shiki
+name: Coding Assistant
+model:
+  id: claude-opus-5
+system: You are a helpful coding agent. Always write tests.
+tools:
+  - type: agent_toolset_20260401
 ```
 
 The preceding example supplies `version` from the create response, so the update only applies if nothing else has changed the agent since you read it. To apply an update unconditionally, omit `version` from the request:

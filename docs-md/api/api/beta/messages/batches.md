@@ -563,7 +563,7 @@ type: "redacted\_thinking"
 
 
 
-BetaToolUseBlock object { id, input, name, 2 more } 
+BetaToolUseBlock object { id, input, name, 3 more } 
 
 id: string
 
@@ -606,6 +606,10 @@ BetaServerToolCaller20260120 object { tool\_id, type } 
 tool\_id: string
 
 type: "code\_execution\_20260120"
+
+toolset\_name: optional string or null
+
+For a toolset member tool\_use, the toolset family.
 
 
 
@@ -3075,7 +3079,7 @@ type: "redacted\_thinking"
 
 
 
-BetaToolUseBlock object { id, input, name, 2 more } 
+BetaToolUseBlock object { id, input, name, 3 more } 
 
 id: string
 
@@ -3118,6 +3122,10 @@ BetaServerToolCaller20260120 object { tool\_id, type } 
 tool\_id: string
 
 type: "code\_execution\_20260120"
+
+toolset\_name: optional string or null
+
+For a toolset member tool\_use, the toolset family.
 
 
 
@@ -5537,7 +5545,7 @@ type: "redacted\_thinking"
 
 
 
-BetaToolUseBlock object { id, input, name, 2 more } 
+BetaToolUseBlock object { id, input, name, 3 more } 
 
 id: string
 
@@ -5580,6 +5588,10 @@ BetaServerToolCaller20260120 object { tool\_id, type } 
 tool\_id: string
 
 type: "code\_execution\_20260120"
+
+toolset\_name: optional string or null
+
+For a toolset member tool\_use, the toolset family.
 
 
 

@@ -8,14 +8,14 @@
 
 The API follows a predictable HTTP error code format:
 
-- 400 - `invalid_request_error`: There was an issue with the format or content of your request. This error type may also be used for other 4XX status codes not listed in this section.
+- 400 - `invalid_request_error`: There was an issue with the format or content of your request. This error type may also be used for other 4XX status codes not listed in this section. The API also returns a 400 when usage reaches an organization or workspace [spend limit you set](api/rate-limits.md), except limits on the [Claude Code workspace](manage-claude/workspaces.md), which can return a 429 instead.
 - 401 - `authentication_error`: There's an issue with your API key (for example, it's malformed, revoked, or expired; see [Key expiration](manage-claude/authentication.md)). On Claude Platform on AWS, this can also indicate a problem with your AWS credentials or SigV4 signature.
 - 402 - `billing_error`: There's an issue with your billing or payment information. Check your payment details in the [Claude Console](https://platform.claude.com), or in AWS Marketplace if you're using Claude Platform on AWS.
 - 403 - `permission_error`: Your API key does not have permission to use the specified resource. Check your organization's access and workspace settings in the [Claude Console](https://platform.claude.com).
 - 404 - `not_found_error`: The requested resource was not found. Check the endpoint path and any resource IDs in the request URL.
 - 409 - `conflict_error`: The request conflicts with the current state of a resource. For example, the resource was modified concurrently, or a value that must be unique is already in use. Resolve the conflict, then retry the request.
 - 413 - `request_too_large`: Request exceeds the maximum allowed number of bytes. See [Request size limits](#request-size-limits) for per-endpoint maximums.
-- 429 - `rate_limit_error`: Your account has hit a rate limit.
+- 429 - `rate_limit_error`: Your organization has hit a [rate limit](api/rate-limits.md), reached its usage tier's monthly spend cap, or reached a spend limit on the Claude Code workspace. A tier spend-cap 429 has no `retry-after` header and keeps failing until access resumes; see [Reaching your spend cap](api/rate-limits.md) for how to recognize it.
 - 500 - `api_error`: An unexpected error has occurred internal to Anthropic's systems. Retry the request with exponential backoff; if the error persists, contact support with the [request ID](#request-id).
 - 504 - `timeout_error`: The request timed out while processing. Consider using the [streaming Messages API](build-with-claude/streaming.md) for long-running requests. See [Long requests](#long-requests) for more options.
 - 529 - `overloaded_error`: The API is temporarily overloaded.

@@ -836,13 +836,6 @@ From here:
 - To connect to external MCP servers (filesystem, GitHub, Slack) instead of building your own, see [Connect MCP servers](agent-sdk/mcp.md).
 - To control which tools run automatically versus requiring approval, see [Configure permissions](agent-sdk/permissions.md).
 
-## [​](#related-documentation) Related documentation
-
-- [TypeScript SDK Reference](agent-sdk/typescript.md)
-- [Python SDK Reference](agent-sdk/python.md)
-- [MCP Documentation](https://modelcontextprotocol.io)
-- [SDK Overview](agent-sdk/overview.md)
-
 ---
 
 *Copyright © Anthropic. All rights reserved.*

@@ -263,7 +263,11 @@ Claude Code skips a file in a project, user, or managed `agents` directory, or i
 - **A `name` but no `description`**: Claude Code skips the file and writes the reason to the debug log.
 - **YAML that doesn’t parse**: Claude Code reads no fields from the file, skips it, and writes the parse error to the debug log.
 
-To see the debug log, run Claude Code with `--debug`. A [plugin subagent](plugins-reference.md) whose frontmatter has no `name` or doesn’t parse still loads, under its filename.
+To see the debug log, run Claude Code with `--debug`.
+A [plugin subagent](plugins-reference.md) whose frontmatter has no `name` or doesn’t parse still loads, under its filename.
+
+##### Check an `agents` directory before a session
+
 To find files in an `agents` directory whose frontmatter doesn’t parse, run `claude plugin validate` against the directory, for example `.claude/agents` or `~/.claude/agents`. Claude Code checks only [the directory you name](plugin-marketplaces.md), and doesn’t flag a file whose frontmatter parses but has no `name`. Requires Claude Code v2.1.233 or later.
 
 ### [​](#choose-a-model) Choose a model
@@ -371,14 +375,14 @@ The `Agent(agent_type)` allowlist syntax applies only to an agent running as the
 
 #### [​](#scope-mcp-servers-to-a-subagent) Scope MCP servers to a subagent
 
-Use the `mcpServers` field to give a subagent access to [MCP](mcp.md) servers that aren’t available in the main conversation. Inline servers defined here are connected when the subagent starts and disconnected when it finishes. String references share the parent session’s connection.
+Use the `mcpServers` field to give a subagent access to [MCP](mcp.md) servers that aren’t available in the main conversation. Inline servers defined here are connected when the subagent starts, subject to the [trust rule for the agent file’s folder](#inline-server-trust), and disconnected when it finishes. String references share the parent session’s connection.
 
 The `mcpServers` field applies in both contexts where an agent file can run:
 
 - As a subagent, spawned through the Agent tool or an @-mention
 - As the main session, launched with [`--agent`](#invoke-subagents-explicitly) or the `agent` setting
 
-When the agent is the main session, inline server definitions connect at startup alongside servers from [`.mcp.json`](mcp.md) and settings files. In `/mcp`, a remote (HTTP or SSE) server you’ve used before can show the [`cached` status](mcp.md) instead; Claude Code connects it when Claude first calls one of its tools.
+When the agent is the main session, inline server definitions connect at startup alongside servers from [`.mcp.json`](mcp.md) and settings files, under the same [trust rule for the agent file’s folder](#inline-server-trust). In `/mcp`, a remote (HTTP or SSE) server you’ve used before can show the [`cached` status](mcp.md) instead; Claude Code connects it when Claude first calls one of its tools.
 
 Each entry in the list is either an inline server definition or a string referencing an MCP server already configured in your session:
 
@@ -401,6 +405,17 @@ Use the Playwright tools to navigate, screenshot, and interact with pages.
 
 Inline definitions use the same schema as `.mcp.json` server entries, keyed by the server name, and support the `stdio`, `http`, `sse`, and `ws` types.
 To keep an MCP server out of the main conversation entirely and avoid its tool descriptions consuming context there, define it inline here rather than in `.mcp.json`. The subagent gets the tools; the parent conversation doesn’t.
+Claude Code loads an inline server from an agent file in your project’s `.claude/agents/` directory, or in an `--add-dir` directory’s `.claude/agents/`, only after you [trust the folder the agent file came from](permissions.md). Before v2.1.238, Claude Code loaded these servers without checking trust.
+
+- **Trust that doesn’t count**: a parent folder’s trust, and the automatic trust a `-p` or SDK session gets for [hooks in settings files](permissions.md)
+- **Until then**: Claude Code skips every inline server in that agent file and writes the exact `projects["<path>"].hasTrustDialogAccepted` key for `~/.claude.json` to the debug log
+- **`--add-dir` directories**: a directory outside your trusted workspace’s repository needs its own trust entry, since its `.claude/agents/` files don’t inherit your workspace’s trust
+
+Claude Code loads two kinds of server without checking trust for the folder the agent file came from:
+
+- A name that references a server you already configured
+- An inline server in an agent file from `~/.claude/agents/`, in one you pass with `--agents` or the SDK `agents` option, or in one that managed settings supplies
+
 As of v2.1.153, the MCP restrictions that apply to the main session also cover servers declared in subagent frontmatter:
 
 - [`--strict-mcp-config`](cli-reference.md) and [`--bare`](cli-reference.md)

@@ -16,9 +16,30 @@ Claude Code uses a tiered permission system to balance power and safety. The tab
 
 When you choose “Yes, and don’t ask again” and the approval saves permanently, such as for a Bash command or a WebFetch domain, Claude Code saves the rule to `.claude/settings.local.json` at the root of the git repository, resolved through [worktrees](worktrees.md) to the main checkout. The rule applies to future sessions anywhere in that repository, including sessions started in subdirectories and in worktrees. A file-modification approval isn’t saved to the file: as the table shows, it lasts until the session ends. Outside a git repository, and when the repository root is your home directory, Claude Code saves the rule in the directory you started it from.
 Before v2.1.211, Claude Code always saved the rule in the starting directory, so an approval granted in a worktree or subdirectory didn’t apply to the rest of the repository. Rules that earlier versions saved in a subdirectory or worktree still apply to sessions started there.
-Sometimes a permission prompt offers only a one-time approval, with no “don’t ask again” option and no option to allow the action for the rest of the session. Claude Code offers those options only when the prompt can show you everything they would allow, so a rule you save from a prompt covers only what its option named. Claude Code leaves the options out when the command or edit is too large to show in full, or when the option’s label can’t fit every command or path the rule would cover. Approve the action once, or add the rule yourself in [`/permissions`](#manage-permissions).
+Sometimes a permission prompt offers only a one-time approval, with no “don’t ask again” option and no option to allow the action for the rest of the session. Claude Code offers those options only when the prompt can show you everything they would allow, so a rule you save from a prompt covers only what its option named.
+When the directory you started Claude Code in is what makes the option’s label too long, Claude Code shortens it in the label, replacing your home directory with `~` and then the end of the path with `…`, and keeps the option. You still save the same rule. Claude Code leaves the options out in three cases:
+
+- **Command or edit:** too large to show in full.
+- **Commands or paths the rule would cover:** the label can’t fit them all.
+- **Starting directory too long, not shortened:** it contains characters Claude Code can’t display safely, or even its start doesn’t fit.
+
+Approve the action once, or add the rule yourself in [`/permissions`](#manage-permissions).
 On a Bash or PowerShell permission prompt, press `Ctrl+E` to show an explanation of the command: what it does, why Claude is running it, and what could go wrong, labeled **Low risk**, **Med risk**, or **High risk**. Claude Code sends the command and Claude’s own description of the call to the model to generate the explanation only when you press `Ctrl+E`, not on every prompt. Showing the explanation doesn’t run the command; press `Ctrl+E` again to hide it.
 To turn the shortcut off, set [`permissionExplainerEnabled`](settings.md) to `false` in `~/.claude.json`.
+
+### [​](#add-a-comment-when-you-answer-a-permission-prompt) Add a comment when you answer a permission prompt
+
+You can attach a note to Claude when you approve or deny a single action. On most permission prompts, including Bash, PowerShell, file, and MCP tool prompts, move to **Yes** or **No** and press `Tab` to open a comment field on that option. WebFetch and browser prompts don’t offer the field. The options that allow the action for the rest of the session or save a rule don’t take one either.
+With the field open, type the comment and then press one of these keys:
+
+- `Enter`: submits your answer with the comment attached. If you leave the field empty, Claude Code submits the answer without a comment.
+- `Tab`: closes the field without answering. Claude Code keeps the text you typed and still sends it if you answer with that option.
+- `Shift+Tab`: on a file prompt, such as an Edit or Write prompt, closes the field the same as `Tab`. Before v2.1.235, pressing `Shift+Tab` inside the field instead selected the option that allows the action for the rest of the session, so Claude Code approved the action for the rest of the session and discarded the comment.
+
+Claude Code delivers the comment differently depending on how you answered:
+
+- **Yes**: Claude Code runs the action, then sends your comment to Claude after the result.
+- **No**: Claude Code sends your comment to Claude as the reason for the denial, and Claude continues working. If you select **No** without a comment on a prompt from the main conversation, Claude Code stops the turn.
 
 ## [​](#manage-permissions) Manage permissions
 
@@ -383,7 +404,8 @@ To change the session’s primary working directory instead of adding another, u
 ### [​](#additional-directories-grant-file-access-not-configuration) Additional directories grant file access, not configuration
 
 Adding a directory extends where Claude can read and edit files. It doesn’t make that directory a full configuration root: most `.claude/` configuration is not discovered from additional directories, though a few types are loaded as exceptions.
-These exceptions apply only to directories added with the `--add-dir` flag or the `/add-dir` command. Directories listed in `permissions.additionalDirectories` in a settings file grant file access only and don’t load any of the configuration below.
+These exceptions apply only to directories added with the `--add-dir` flag or the `/add-dir` command, including directories the Agent SDK adds through the flag. Directories listed in `permissions.additionalDirectories` in a settings file grant file access only and don’t load any of the configuration below.
+The Agent SDK’s [`additionalDirectories`](agent-sdk/typescript.md) option in TypeScript and [`add_dirs`](agent-sdk/python.md) option in Python receive the exceptions too, even though the TypeScript option shares its name with the settings key. The SDK passes each entry to Claude Code as `--add-dir`, so those directories behave like flag-added directories. Skills, commands, and subagents from any flag-added directory load through the `project` [setting source](agent-sdk/claude-code-features.md), so they don’t load when you exclude that source with [`--setting-sources`](cli-reference.md) on the CLI or `settingSources` in the SDK, and [bare mode](headless.md) skips the commands and subagents among them.
 The following configuration types are loaded from `--add-dir` directories:
 
 | Configuration | Loaded from `--add-dir` |
@@ -476,9 +498,15 @@ Claude Code shows the trust dialog in interactive sessions only. A `claude -p` r
 
 ### [​](#when-your-local-settings-file-needs-trust) When your local settings file needs trust
 
-`.claude/settings.local.json` is normally your own file, so its allow rules and additional directories apply without the trust step. Claude Code treats the file as repository-supplied instead, and holds its rules until you trust the folder, when the file is tracked in git or `.claude` is a symlink.
-Claude Code runs git to tell the two apart, and it runs git in a folder only after you accept a trust dialog for that folder or for a parent directory whose trust extends to it, or in a `-p` or SDK session, which counts as accepted. Until then it holds the file’s rules like project settings, with one exception: in your own configuration home, meaning your home directory or any directory whose `.claude` subdirectory you’ve set as [`CLAUDE_CONFIG_DIR`](env-vars.md), the file applies right away without running git. Once the check has run, an untracked file, or one in a directory that isn’t inside a git repository, applies even though you haven’t trusted that exact folder.
-Versions 2.1.196 through 2.1.199 held the file’s rules in your configuration home and outside git repositories too, and printed the [`this workspace has not been trusted`](errors.md) warning there. Before v2.1.207, an untracked file applied before you accepted the dialog.
+`.claude/settings.local.json` is normally your own file, so Claude Code applies its allow rules and additional directories without the trust step. When the file is tracked in git, or `.claude` is a symlink, Claude Code treats it as repository-supplied instead and holds its rules until you trust the folder.
+Claude Code runs git to tell the two apart, and it runs git only once you’ve trusted the folder: you accepted the trust dialog for it or for a parent directory whose trust extends to it, or you’re in a `-p` or SDK session, which counts as accepted. Until then, where you started Claude Code decides what happens to the file’s rules:
+
+- **In your configuration home:** Claude Code applies that folder’s `.claude/settings.local.json` right away without running git. Your configuration home is your home directory, or a directory whose `.claude` subdirectory you’ve set as [`CLAUDE_CONFIG_DIR`](env-vars.md). If that `CLAUDE_CONFIG_DIR` directory sits inside a git repository and Claude Code [keeps your local settings at the repository root](settings.md) instead, it holds the rules like anywhere else.
+- **Anywhere else:** Claude Code holds the file’s rules like project settings. Once the check has run, Claude Code applies the rules of an untracked file, or of a file in a directory outside any git repository, even though you haven’t trusted that exact folder.
+
+The configuration-home exception skips only the trust step. `~/.claude/settings.local.json` is still [local scope](settings.md), so Claude Code reads it only in sessions you start in your home directory itself, not in every project. To apply permission rules across all your projects, add them to your user settings instead: `~/.claude/settings.json`, or `$CLAUDE_CONFIG_DIR/settings.json` when `CLAUDE_CONFIG_DIR` is set.
+
+On versions 2.1.196 through 2.1.199, Claude Code held the file’s rules in your configuration home and outside git repositories too, and printed the [`this workspace has not been trusted`](errors.md) warning there. Before v2.1.207, Claude Code applied an untracked file’s rules before you accepted the dialog.
 
 ### [​](#what-runs-before-you-trust-a-folder) What runs before you trust a folder
 
@@ -489,13 +517,15 @@ Each row is one kind of content a repository can supply. The columns are the two
 | [Hooks](hooks.md) in settings files, the [`env`](settings.md) block and helper commands such as [`apiKeyHelper`](settings.md), and a project skill’s [hooks](hooks.md) and [`allowed-tools`](skills.md) | Used | Used. Workspace trust never gates a skill’s `allowed-tools` in any session |
 | `permissions.allow` rules and `additionalDirectories` in `.claude/settings.json` | Not used until you accept the trust dialog, which appears again listing them | Not used. Claude Code prints a [`this workspace has not been trusted`](errors.md) warning to stderr |
 | Frontmatter hooks in a project [subagent](sub-agents.md), a project [`@skills-dir` plugin](plugins-reference.md), and [`extraKnownMarketplaces`](settings.md) entries from the repository or an `--add-dir` directory | Not used, and no dialog is offered | Not used |
-| Servers in `.mcp.json`, including ones the repository [approves in its own settings](mcp.md), and any [`headersHelper`](mcp.md) they define, which runs when its server connects | Claude Code asks you before connecting them. The repository’s own approvals don’t count | Connected without asking, approved or not. The SDK loads them only when `settingSources` includes project settings. `claude mcp list` in the same folder still reports such a server as pending |
+| Inline [`mcpServers`](sub-agents.md) in the frontmatter of a subagent from the repository or an `--add-dir` directory | Not used, and no dialog is offered | Not used |
+| Servers in `.mcp.json`, including ones the repository [approves in its own settings](mcp.md) | Claude Code asks you before connecting them. The repository’s own approvals don’t count | Connected without asking, approved or not. The SDK loads them only when `settingSources` includes project settings. `claude mcp list` in the same folder still reports such a server as pending |
+| A [`headersHelper`](mcp.md) on a server in `.mcp.json` | Not run until you accept the trust dialog, which appears again naming where the helper is declared. Claude Code connects the server with its static `headers` alone until then | Not run. Claude Code connects the server with its static `headers` alone and prints a [`headersHelper not run`](errors.md) line per server to stderr |
 
-For the rows that need this exact folder trusted and offer no dialog, trust it by hand: set `projects["<path>"].hasTrustDialogAccepted` to `true` in `~/.claude.json`, where `<path>` is the repository root, or the folder itself outside a repository. The debug log line for a skipped subagent hook and the stderr warning for skipped allow rules both print the exact key.
+For the rows that need this exact folder trusted, trust it by hand: set `projects["<path>"].hasTrustDialogAccepted` to `true` in `~/.claude.json`, where `<path>` is the repository root, or the folder itself outside a repository. Claude Code prints the exact key in the debug log line for a skipped subagent hook or inline MCP server, in the stderr warning for skipped allow rules, and in the `headersHelper not run` line for a skipped helper.
 Before you run `claude -p` in a repository you didn’t write, decide what it may run on your machine:
 
 - Pass `--setting-sources user`, or set the SDK’s `settingSources` without project settings, so Claude Code reads neither the project’s settings files nor its `.mcp.json`
-- Start with [`--bare`](headless.md) so Claude Code reads no hooks, skills, plugins, or `.mcp.json` servers from the project. The project’s `env` block and helpers such as `awsAuthRefresh` in its settings files still apply, and Claude Code reads `apiKeyHelper` only from `--settings`
+- Start with [`--bare`](headless.md) so Claude Code reads no hooks, skills, custom commands, subagents, plugins, or `.mcp.json` servers from the project. The project’s `env` block and helpers such as `awsAuthRefresh` in its settings files still apply, and Claude Code reads `apiKeyHelper` only from `--settings`
 - Pass `--settings '{"disableAllHooks": true}'` to [turn hooks off](hooks.md) for that run. Setting it in your user settings alone isn’t enough, because the repository’s project settings take precedence over yours and can set it back to `false`
 - Add a [`disabledMcpjsonServers`](settings.md) entry to reject a `.mcp.json` server by name in every session type
 

@@ -30,7 +30,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more
 
 One of the following:
 
@@ -77,6 +77,8 @@ One of the following:
 "output-300k-2026-03-24"
 
 "user-profiles-2026-03-24"
+
+"user-profiles-2026-08-18"
 
 "advisor-tool-2026-03-01"
 
@@ -130,7 +132,7 @@ Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omi
 
 model: optional [BetaManagedAgentsModel](api/beta/agents.md) or [BetaManagedAgentsModelConfigParams](api/beta/agents.md) { id, effort, inference\_geo, speed } 
 
-Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
 One of the following:
 
@@ -1188,7 +1190,7 @@ Response 200
     "foo": "bar"
   },
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "claude-opus-5",
     "effort": {
       "type": "low"
     },
@@ -1268,7 +1270,7 @@ Response 200
     "foo": "bar"
   },
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "claude-opus-5",
     "effort": {
       "type": "low"
     },

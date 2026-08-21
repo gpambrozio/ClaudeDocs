@@ -330,9 +330,9 @@ created\_at: string
 
 RFC 3339 timestamp when environment was created
 
-description: string
+description: string or null
 
-User-provided description for the environment
+User-provided description for the environment; null when unset
 
 metadata: map[string]
 

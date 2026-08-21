@@ -594,6 +594,8 @@ Detect and handle refusal stop reasons in streaming responses, and retry refused
 
 Ground Claude's responses in your source documents. Citations return the exact passages that support each claim, so you can verify answers and surface sources to your users.
 
+
+
 [Web search tool](agents-and-tools/tool-use/web-search-tool.md)
 
 Give Claude access to current web content with cited sources, optional dynamic filtering, and domain controls.

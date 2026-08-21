@@ -179,7 +179,7 @@ print(message.content)
 
 ####  Option 3: Files API
 
-For PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use the [Files API](build-with-claude/files.md). These examples send the `anthropic-beta: files-api-2025-04-14` header, which the API accepts but doesn't require:
+For PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use the [Files API](build-with-claude/files.md):
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -190,13 +190,12 @@ client = anthropic.Anthropic()
 
 # Upload the PDF file
 with open("/path/to/document.pdf", "rb") as f:
-    file_upload = client.beta.files.upload(file=("document.pdf", f, "application/pdf"))
+    file_upload = client.files.upload(file=("document.pdf", f, "application/pdf"))
 
 # Use the uploaded file in a message
-message = client.beta.messages.create(
+message = client.messages.create(
     model="claude-opus-5",
     max_tokens=1024,
-    betas=["files-api-2025-04-14"],
     messages=[
         {
             "role": "user",

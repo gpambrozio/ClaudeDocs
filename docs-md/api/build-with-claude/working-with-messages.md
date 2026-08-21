@@ -264,6 +264,10 @@ Give Claude tools to call external services and APIs from within the Messages AP
 
 Control desktop computer environments with the Messages API.
 
+[Browser use tool](agents-and-tools/tool-use/browser-use-tool.md)
+
+Let Claude navigate, read, and interact with webpages in a browser you run.
+
 
 
 [Structured outputs](build-with-claude/structured-outputs.md)

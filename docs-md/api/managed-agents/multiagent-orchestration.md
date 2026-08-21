@@ -35,7 +35,14 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-ant beta:agents create <<YAML
+ant beta:agents create < coordinator.agent.yaml
+```
+
+coordinator.agent.yaml
+
+
+
+```shiki
 name: Engineering Lead
 model: claude-opus-5
 system: You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.
@@ -45,10 +52,9 @@ multiagent:
   type: coordinator
   agents:
     - type: agent
-      id: $REVIEWER_AGENT_ID
+      id: $REVIEWER_AGENT_ID # replace before running command
     - type: agent
-      id: $TEST_WRITER_AGENT_ID
-YAML
+      id: $TEST_WRITER_AGENT_ID # replace before running command
 ```
 
 `multiagent.agents` can accept any of the following:
