@@ -4,7 +4,7 @@
 
 
 
-The Activity Feed records every authentication, chat, file, project, administrative, and platform action that occurs in your organization, in reverse chronological order. Activities are queryable within 1 minute of occurring and are retained for 6 years.
+The Activity Feed records authentication, chat, file, project, administrative, and platform activity across your organization and returns it in reverse chronological order. Activities are queryable within 1 minute of occurring and are retained for 6 years.
 
 cURL
 
@@ -30,7 +30,7 @@ Response
       "organization_uuid": "abcdef01-2345-6789-abcd-ef0123456789",
       "actor": {
         "type": "user_actor",
-        "email_address": "[email protected]",
+        "email_address": "user@example.com",
         "user_id": "user_01TuVwXyZaBcDeFgH2JkLmN4",
         "ip_address": "192.0.2.34",
         "user_agent": "Mozilla/5.0..."
@@ -152,10 +152,12 @@ The `actor` field is a discriminated union. The `type` discriminator tells you w
 | --- | --- | --- |
 | `user_actor` | A signed-in claude.ai or Claude Console user took the action. | `email_address`, `user_id`, `ip_address`, `user_agent` |
 | `api_actor` | A request called the Claude API or the Compliance API with a customer-issued API key. Compliance API calls produce this actor type for both Compliance Access Keys and Admin API keys. | `api_key_id`, `ip_address`, `user_agent` |
-| `admin_api_key_actor` | An organization admin used an Admin API key to manage users, invites, workspaces, or API keys. | `admin_api_key_id` |
+| `admin_api_key_actor` | An organization admin used an Admin API key to manage users, invites, workspaces, or API keys. | `admin_api_key_id`, `ip_address`, `user_agent` |
 | `unauthenticated_user_actor` | An action occurred before sign-in completed, for example `sso_login_initiated`. | `unauthenticated_email_address`, `ip_address`, `user_agent` |
 | `anthropic_actor` | Anthropic acted on the organization, for example through internal tooling. | `email_address` (always `null`; present for shape consistency with `user_actor`, because Anthropic operators are not represented by individual email) |
 | `scim_directory_sync_actor` | An identity provider (such as Okta, Microsoft Entra ID, or JumpCloud) pushed a change through SCIM directory sync. | `workos_event_id`, `directory_id`, `idp_connection_type` (nullable; for example `OktaSCIMV2`, `AzureSCIMV2`) |
+
+A `claude_*_viewed` activity means a Claude app loaded content, not that a person viewed it. Types such as `claude_chat_viewed`, `claude_file_viewed`, and `claude_project_viewed` are recorded each time a Claude app loads the chat, file, or project from Anthropic's servers. Repeated loads are not deduplicated. The web, desktop, and mobile apps load content at different moments, sometimes in the background, and can display a cached copy without loading it. Counts of these activities vary by platform as a result, and they do not correspond to messages sent or screens viewed.
 
 ##  Next steps
 

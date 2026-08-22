@@ -41,9 +41,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-ant beta:sessions create \
-  --agent "$AGENT_ID" \
-  --environment-id "$ENVIRONMENT_ID"
+ant beta:sessions create --agent "$AGENT_ID" --environment-id "$ENVIRONMENT_ID"
 ```
 
 ##  Configuration options
@@ -83,12 +81,12 @@ Supported package managers:
 
 | Field | Package manager | Example |
 | --- | --- | --- |
-| `apt` | System packages (apt-get) | `"ffmpeg"` |
-| `cargo` | Rust (cargo) | `"ripgrep@14.0.0"` |
+| `apt` | System packages (apt-get) | `"graphviz"` |
+| `cargo` | Rust (cargo) | `"hyperfine@1.18.0"` |
 | `gem` | Ruby (gem) | `"rails:7.1.0"` |
 | `go` | Go modules | `"golang.org/x/tools/cmd/goimports@latest"` |
 | `npm` | Node.js (npm) | `"express@4.18.0"` |
-| `pip` | Python (pip) | `"pandas==2.2.0"` |
+| `pip` | Python (pip) | `"sqlalchemy==2.0.30"` |
 
 ###  Networking
 
@@ -159,7 +157,7 @@ ant beta:environments delete --environment-id "$ENVIRONMENT_ID"
 
 ##  Pre-installed runtimes
 
-Cloud sandboxes include common runtimes out of the box. See [Cloud sandbox reference](managed-agents/cloud-sandboxes-reference.md) for the full list of pre-installed languages, databases, and utilities.
+Cloud sandboxes include common language runtimes, databases, and command-line tools out of the box. See [Cloud sandbox reference](managed-agents/cloud-sandboxes-reference.md) for the full list.
 
 ##  Next steps
 

@@ -46,8 +46,8 @@ You are not billed for a request that is refused before any output is generated.
 
 Claude Fable 5 and Claude Mythos 5 both become available on June 9, 2026:
 
-- **Claude Fable 5** is generally available on the Claude API, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md).
-- **Claude Mythos 5** is not generally available: it is offered in limited availability to approved customers in [Project Glasswing](https://anthropic.com/glasswing). For access, contact your Anthropic, AWS, or Google Cloud account team. Customers without access to Claude Mythos 5 can use Claude Fable 5, which is generally available and offers the same capabilities.
+- **Claude Fable 5** is available on the Claude API, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md).
+- **Claude Mythos 5** is offered only to approved customers in [Project Glasswing](https://anthropic.com/glasswing). For access, contact your Anthropic, AWS, or Google Cloud account team. Customers without access to Claude Mythos 5 can use Claude Fable 5, which does not require access approval and offers the same capabilities.
 
 Claude Fable 5 and Claude Mythos 5 carry 30-day data retention and are not available under zero data retention: both are designated [Covered Models](https://support.claude.com/en/articles/15425695). See [Model-specific data retention requirements](manage-claude/api-and-data-retention.md).
 

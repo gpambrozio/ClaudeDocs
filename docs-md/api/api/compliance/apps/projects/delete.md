@@ -1,77 +1,106 @@
 # Delete project
 
-Copy page
+Loading
 
-
+Loading
 
-# Delete project
+Loading
 
-DELETE/v1/compliance/apps/projects/{project\_id}
+Loading
 
-Delete a project for compliance purposes.
+Loading
 
-Hard-deletes the project and all its associated data including:
+Loading
 
-- All project documents and files
-- All role assignments
-- Knowledge base (if RAG is enabled)
-- Sync sources
+Loading
 
-Project must have no attached chats - returns 409 if chats exist.
+Loading
 
-##### Path ParametersExpand Collapse
+Loading
 
-project\_id: string
+Loading
 
-The project ID (tagged ID, e.g., claude\_proj\_abc123)
+Loading
 
-##### Header ParametersExpand Collapse
+Loading
 
-"x-api-key": optional string
+Loading
 
-##### ReturnsExpand Collapse
+Loading
 
-id: string
+Loading
 
-The ID of the Claude project that was deleted
+Loading
 
-type: optional "claude\_project\_deleted"
+Loading
 
-Constant string confirming deletion.
+Loading
 
-Delete project
+Loading
 
-
+Loading
 
-```shiki
-curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
-    -X DELETE \
-    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
-```
+Loading
 
-Response 200
+Loading
 
-
+Loading
 
-```shiki
-{
-  "id": "id",
-  "type": "claude_project_deleted"
-}
-```
+Loading
 
-##### Returns Examples
+Loading
 
-Response 200
+Loading
 
-
+Loading
 
-```shiki
-{
-  "id": "id",
-  "type": "claude_project_deleted"
-}
-```
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
 
 ---
 

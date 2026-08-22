@@ -60,7 +60,7 @@ Filter by Workspace ID.
 
 
 
-data: array of [APIKey](api/$shared.md) { id, created\_at, created\_by, 7 more } 
+data: array of APIKey { id, created\_at, created\_by, 7 more } 
 
 id: string
 

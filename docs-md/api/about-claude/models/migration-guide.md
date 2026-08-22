@@ -6,7 +6,7 @@
 
 ##  Migrating to Claude Mythos 5 and Claude Fable 5
 
-[Claude Fable 5](about-claude/models/introducing-claude-fable-5-and-claude-mythos-5.md) is Anthropic's most capable widely released model, generally available on the Claude API, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). [Claude Mythos 5](https://anthropic.com/glasswing) shares the same capabilities and is offered in limited availability to approved customers in Project Glasswing.
+[Claude Fable 5](about-claude/models/introducing-claude-fable-5-and-claude-mythos-5.md) is Anthropic's most capable widely released model, available on the Claude API, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). [Claude Mythos 5](https://anthropic.com/glasswing) shares the same capabilities and is offered only to approved customers in Project Glasswing.
 
 The baseline settings shared by `claude-fable-5` and `claude-mythos-5`:
 
@@ -18,13 +18,13 @@ The baseline settings shared by `claude-fable-5` and `claude-mythos-5`:
 
 Where the two models diverge:
 
-- **Availability:** Claude Fable 5 is generally available. Claude Mythos 5 is available only to approved customers in [Project Glasswing](https://anthropic.com/glasswing).
+- **Availability:** Claude Fable 5 does not require access approval. Claude Mythos 5 is available only to approved customers in [Project Glasswing](https://anthropic.com/glasswing).
 - **Safety classifiers:** Claude Fable 5 runs safety classifiers that can decline requests with `stop_reason: "refusal"`. Claude Mythos 5 does not include these classifiers. See [Refusals and fallback](build-with-claude/refusals-and-fallback.md).
 - **Priority Tier:** [Priority Tier](api/service-tiers.md) is supported on Claude Fable 5 but not on Claude Mythos 5.
 
 ###  Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Mythos Preview
 
-[Claude Mythos 5](https://anthropic.com/glasswing) is the access-gated successor to [Claude Mythos Preview](https://anthropic.com/glasswing), the invitation-only research preview. [Claude Fable 5](about-claude/models/introducing-claude-fable-5-and-claude-mythos-5.md) is the generally available model with the same capabilities, and the changes in this section apply equally to both targets.
+[Claude Mythos 5](https://anthropic.com/glasswing) is the access-gated successor to [Claude Mythos Preview](https://anthropic.com/glasswing), the invitation-only research preview. [Claude Fable 5](about-claude/models/introducing-claude-fable-5-and-claude-mythos-5.md) offers the same capabilities and does not require access approval. The changes in this section apply equally to both targets.
 
 Migration is mostly drop-in. Claude Mythos 5 and Claude Fable 5 use the same [Messages API](build-with-claude/working-with-messages.md) and the same [tool use](agents-and-tools/tool-use/overview.md) patterns as Claude Mythos Preview, and token counts are roughly unchanged because all three models use the same tokenizer. The key changes to check are the features that are no longer available (listed in the next section) and thinking output. If you migrate to Claude Fable 5, also plan for safety classifier refusals, which Claude Mythos Preview and Claude Mythos 5 do not have; see [Refusals and fallback](build-with-claude/refusals-and-fallback.md).
 
@@ -36,7 +36,7 @@ For the Claude Mythos Preview retirement timeline, see [Model deprecations](abou
 model = "claude-mythos-preview"  # Before
 model = "claude-mythos-5"  # After
 
-# Or, for the generally available model with the same capabilities:
+# Or, for the model with the same capabilities and no access approval requirement:
 model = "claude-fable-5"  # After
 ```
 
@@ -87,7 +87,7 @@ model = "claude-fable-5"  # After
 
 ####  Migration checklist
 
-- Update the model name from `claude-mythos-preview` to `claude-mythos-5`, or to `claude-fable-5` for the generally available model.
+- Update the model name from `claude-mythos-preview` to `claude-mythos-5`, or to `claude-fable-5`, which offers the same capabilities and does not require access approval.
 - Remove manual extended thinking configuration (`thinking: {type: "enabled", budget_tokens: N}`). Adaptive thinking is always on, and no `thinking` field is required.
 - Remove any `thinking: {type: "disabled"}` configuration. Disabling thinking returns an error on `claude-mythos-5` and `claude-fable-5`.
 - Remove `budget_tokens`. It has no direct replacement: thinking is adaptive, and the `effort` parameter is a separate output-level control, not a thinking budget.
@@ -300,7 +300,7 @@ These are not required but will improve your experience:
 
 ###  Migrating to Claude Opus 5 from Claude Opus 4.7
 
-Claude Opus 5 should have strong out-of-the-box performance on existing Claude Opus 4.7 prompts and evals, at the same pricing of $5 per million input tokens and $25 per million output tokens. It supports the same set of features as Claude Opus 4.7, including the [1M token context window](build-with-claude/context-windows.md), [128k max output tokens](about-claude/models/overview.md), [adaptive thinking](build-with-claude/thinking.md), [prompt caching](build-with-claude/prompt-caching.md), [batch processing](build-with-claude/batch-processing.md), the [Files API](build-with-claude/files.md), [PDF support](build-with-claude/pdf-support.md), [vision](build-with-claude/vision.md), and server-side and client-side [tools](agents-and-tools/tool-use/overview.md), with two exceptions: [web fetch](agents-and-tools/tool-use/web-fetch-tool.md) is not available on Claude Opus 5, and [Priority Tier](api/service-tiers.md) is not supported on Claude Opus 5. It also adds [mid-conversation system messages](build-with-claude/mid-conversation-system-messages.md) and publicly documents [refusal stop details](build-with-claude/refusals-and-fallback.md). On the Claude API, Claude Opus 5 also supports [computer use](agents-and-tools/tool-use/computer-use-tool.md) as the generally available `computer_toolset_20260801` toolset and the [browser use tool](agents-and-tools/tool-use/browser-use-tool.md) for tasks inside webpages, neither of which Claude Opus 4.7 supports; existing integrations on the earlier `computer_20251124` version continue to work unchanged on both models. To upgrade an existing integration, see [Migrate from `computer_20251124`](agents-and-tools/tool-use/computer-use-tool.md).
+Claude Opus 5 should have strong out-of-the-box performance on existing Claude Opus 4.7 prompts and evals, at the same pricing of $5 per million input tokens and $25 per million output tokens. It supports the same set of features as Claude Opus 4.7, including the [1M token context window](build-with-claude/context-windows.md), [128k max output tokens](about-claude/models/overview.md), [adaptive thinking](build-with-claude/thinking.md), [prompt caching](build-with-claude/prompt-caching.md), [batch processing](build-with-claude/batch-processing.md), the [Files API](build-with-claude/files.md), [PDF support](build-with-claude/pdf-support.md), [vision](build-with-claude/vision.md), and server-side and client-side [tools](agents-and-tools/tool-use/overview.md), with two exceptions: [web fetch](agents-and-tools/tool-use/web-fetch-tool.md) is not available on Claude Opus 5, and [Priority Tier](api/service-tiers.md) is not supported on Claude Opus 5. It also adds [mid-conversation system messages](build-with-claude/mid-conversation-system-messages.md) and publicly documents [refusal stop details](build-with-claude/refusals-and-fallback.md). On the Claude API, Claude Opus 5 also supports [computer use](agents-and-tools/tool-use/computer-use-tool.md) as the stable `computer_toolset_20260801` toolset and the [browser use tool](agents-and-tools/tool-use/browser-use-tool.md) for tasks inside webpages, neither of which Claude Opus 4.7 supports; existing integrations on the earlier `computer_20251124` version continue to work unchanged on both models. To upgrade an existing integration, see [Migrate from `computer_20251124`](agents-and-tools/tool-use/computer-use-tool.md).
 
 ####  Update your model name
 
@@ -364,7 +364,7 @@ model = "claude-opus-5"  # After
 
 The following items are not breaking changes; they describe behavior differences worth checking after you swap the model ID.
 
-1. **Sampling parameters (unchanged):** Setting `temperature`, `top_p`, or `top_k` to a non-default value returns a 400 error on Claude Opus 5, the same as on Claude Opus 4.7. The SDK request types still define these fields for compatibility with earlier models, so code that sets them type-checks, but the API rejects the request server-side. If you removed these parameters when migrating to Opus 4.7, no further changes are needed.
+1. **Sampling parameters (unchanged):** Setting `temperature`, `top_p`, or `top_k` to a non-default value returns a 400 error on Claude Opus 5, the same as on Claude Opus 4.7. Most SDKs still define these fields for compatibility with earlier models, so code that sets them type-checks even though the API rejects the request. The Python SDK (v1.0 and later) does not define them, and passing them raises a `TypeError`. If you removed these parameters when migrating to Opus 4.7, no further changes are needed.
 2. **Effort default is `high`:** The [effort parameter](build-with-claude/effort.md) default on Claude Opus 5 is `high` on the Claude API and Claude Code. If you already set effort explicitly, your setting is unchanged.
 3. **Effort levels recalibrated:** The token allocation behind each effort level changes on Claude Opus 5 compared to Claude Opus 4.7, and Claude Opus 5 supports the full set of effort levels (`low`, `medium`, `high`, `xhigh`, `max`). Run a fresh effort sweep on your own evals rather than carrying over a setting tuned for Claude Opus 4.7. `low` and `medium` effort are worth testing as cost and latency controls, and test `max` effort where maximum capability matters more than token spend. If you run at `xhigh` or `max` effort, set a large `max_tokens` so the model has room to think and act; start at 64k tokens and tune from there. See [Effort](build-with-claude/effort.md).
 4. **1M context window is the default:** Claude Opus 5 serves the full 1M token [context window](build-with-claude/context-windows.md) by default with no beta header and no long-context premium. If your client passes a context-window beta header for compatibility with older models, you can remove it on Claude Opus 5.
@@ -414,7 +414,7 @@ Claude Opus 5 should have strong out-of-the-box performance on existing Claude O
 - [Vision](build-with-claude/vision.md)
 - Server-side and client-side [tools](agents-and-tools/tool-use/overview.md) ([bash](agents-and-tools/tool-use/bash-tool.md), [code execution](agents-and-tools/tool-use/code-execution-tool.md), [computer use](agents-and-tools/tool-use/computer-use-tool.md), [text editor](agents-and-tools/tool-use/text-editor-tool.md), [web search](agents-and-tools/tool-use/web-search-tool.md), [MCP connector](agents-and-tools/mcp-connector.md), [memory](agents-and-tools/tool-use/memory-tool.md))
 
-Two exceptions: [web fetch](agents-and-tools/tool-use/web-fetch-tool.md) is not available on Claude Opus 5, and [Priority Tier](api/service-tiers.md) is not supported on Claude Opus 5. On the Claude API, Claude Opus 5 also supports [computer use](agents-and-tools/tool-use/computer-use-tool.md) as the generally available `computer_toolset_20260801` toolset and the [browser use tool](agents-and-tools/tool-use/browser-use-tool.md) for tasks inside webpages, neither of which Claude Opus 4.6 or earlier Opus models support; existing integrations on the earlier `computer_20251124` version continue to work unchanged on Claude Opus 5. To upgrade an existing integration, see [Migrate from `computer_20251124`](agents-and-tools/tool-use/computer-use-tool.md).
+Two exceptions: [web fetch](agents-and-tools/tool-use/web-fetch-tool.md) is not available on Claude Opus 5, and [Priority Tier](api/service-tiers.md) is not supported on Claude Opus 5. On the Claude API, Claude Opus 5 also supports [computer use](agents-and-tools/tool-use/computer-use-tool.md) as the stable `computer_toolset_20260801` toolset and the [browser use tool](agents-and-tools/tool-use/browser-use-tool.md) for tasks inside webpages, neither of which Claude Opus 4.6 or earlier Opus models support; existing integrations on the earlier `computer_20251124` version continue to work unchanged on Claude Opus 5. To upgrade an existing integration, see [Migrate from `computer_20251124`](agents-and-tools/tool-use/computer-use-tool.md).
 
 ####  Update your model name
 
@@ -464,7 +464,7 @@ model = "claude-opus-5"  # After
    Adaptive thinking is steerable through prompting and the [effort parameter](build-with-claude/effort.md); see [Choosing an effort level](#choosing-an-effort-level).
 2. **Thinking on by default:** On Claude Opus 4.6 and Claude Opus 4.7, requests without a `thinking` field run without thinking; on Claude Opus 5, the same requests run with [adaptive thinking](build-with-claude/thinking.md). `max_tokens` remains a hard limit on total output, thinking plus response text, so revisit it for workloads that ran without thinking. To preserve the old behavior, pass `thinking: {type: "disabled"}`, subject to the effort cap in the next item; note that with thinking disabled the model can occasionally emit tool calls as plain text or include internal XML tags in its visible output, so prefer lower effort levels with thinking enabled where you can, and see [Running with thinking disabled](build-with-claude/prompt-engineering/prompting-claude-opus-5.md) for mitigations where you can't.
 3. **Disabling thinking is capped at `high` effort:** You can turn thinking off with `thinking: {type: "disabled"}`, but only at an [effort](build-with-claude/effort.md) level of `high` or below. A request that combines `thinking: {type: "disabled"}` with effort `xhigh` or `max` returns a 400 error on Claude Opus 5, enforced on each request. Audit requests that disable thinking before you migrate: re-enable thinking or lower the effort to `high` or below.
-4. **Sampling parameters removed:** Setting `temperature`, `top_p`, or `top_k` to any non-default value on Claude Opus 4.7 or later models, including Claude Opus 5, returns a 400 error. The safest migration path is to omit these parameters entirely from request payloads. Prompting is the recommended way to guide model behavior on Claude Opus 5. If you were using `temperature = 0` for determinism, note that it never guaranteed identical outputs on prior models.
+4. **Sampling parameters removed:** Setting `temperature`, `top_p`, or `top_k` to any non-default value on Claude Opus 4.7 or later models, including Claude Opus 5, returns a 400 error. The Python SDK (v1.0 and later) does not define them, and passing them raises a `TypeError`. The safest migration path is to omit these parameters entirely from request payloads. Prompting is the recommended way to guide model behavior on Claude Opus 5. If you were using `temperature = 0` for determinism, note that it never guaranteed identical outputs on prior models.
 5. **Thinking content omitted by default:** Thinking blocks still appear in the response stream on Claude Opus 4.7 and later models, but their `thinking` field is empty unless you explicitly opt in. This is a silent change from Claude Opus 4.6, where the default was to return summarized thinking text. To restore summarized thinking content, set `thinking.display` to `"summarized"`:
 
    PythonTypeScriptC#GoJavaPHPRuby
@@ -629,11 +629,11 @@ These changes improve your experience on Claude Opus 4.7 and later models. Items
    )
    ```
 
-   Note that the migration also moves from `client.beta.messages.create` to `client.messages.create`. Adaptive thinking and effort are GA features and do not require the beta SDK namespace or any beta headers.
-2. **Remove effort beta header:** The effort parameter is now GA. Remove `betas=["effort-2025-11-24"]` from your requests.
-3. **Remove fine-grained tool streaming beta header:** Fine-grained tool streaming is now GA. Remove `betas=["fine-grained-tool-streaming-2025-05-14"]` from your requests.
+   Note that the migration also moves from `client.beta.messages.create` to `client.messages.create`. Adaptive thinking and effort do not require the beta SDK namespace or any beta headers.
+2. **Remove effort beta header:** The effort parameter does not require a beta header. Remove `betas=["effort-2025-11-24"]` from your requests.
+3. **Remove fine-grained tool streaming beta header:** Fine-grained tool streaming does not require a beta header. Remove `betas=["fine-grained-tool-streaming-2025-05-14"]` from your requests.
 4. **Remove interleaved thinking beta header:** Adaptive thinking automatically enables interleaved thinking on Claude Opus 4.7, Opus 4.6, and Sonnet 4.6. Remove `betas=["interleaved-thinking-2025-05-14"]` from your requests. The header is still functional on Sonnet 4.6 with manual extended thinking, but manual mode is deprecated.
-5. **Migrate to output\_config.format:** If using structured outputs, update `output_format={...}` to `output_config={"format": {...}}`. The old parameter remains functional but is deprecated and will be removed in a future model release.
+5. **Migrate to output\_config.format:** If using structured outputs, update `output_format={...}` to `output_config={"format": {...}}`. The API still accepts the deprecated `output_format` parameter, but it will be removed in a future model release. The Python SDK (v1.0 and later) does not accept `output_format={...}` on `client.beta.messages.create()` or `count_tokens()`. The `output_format=Model` argument of the `parse()` and `stream()` helpers is unchanged.
 
 ####  Migrating from Claude 4.1 or earlier
 
@@ -655,7 +655,7 @@ model = "claude-opus-5"  # After
 
 1. **Remove sampling parameters**
 
-   Starting with Claude Opus 4.7, setting `temperature`, `top_p`, or `top_k` to any non-default value returns a 400 error. The safest migration path is to omit these parameters entirely from requests, and to use prompting to guide the model's behavior. If you were using `temperature = 0` for determinism, note that it never guaranteed identical outputs.
+   Starting with Claude Opus 4.7, setting `temperature`, `top_p`, or `top_k` to any non-default value returns a 400 error. The Python SDK (v1.0 and later) does not define them, and passing them raises a `TypeError`. The safest migration path is to omit these parameters entirely from requests, and to use prompting to guide the model's behavior. If you were using `temperature = 0` for determinism, note that it never guaranteed identical outputs.
 
    PythonTypeScriptC#GoJavaPHPRuby
 
@@ -742,7 +742,7 @@ model = "claude-opus-5"  # After
 - **BREAKING:** Remove assistant message prefills (returns 400 error); use structured outputs or `output_config.format` instead
 - **BREAKING on Opus 4.7:** Replace `thinking: {type: "enabled", budget_tokens: N}` with `thinking: {type: "adaptive"}` plus the [effort parameter](build-with-claude/effort.md) (returns 400 on Opus 4.7)
 - Verify tool call JSON parsing uses a standard JSON parser
-- Remove `effort-2025-11-24` beta header (effort is now GA)
+- Remove `effort-2025-11-24` beta header (the effort parameter does not require it)
 - Remove `fine-grained-tool-streaming-2025-05-14` beta header
 - Remove `interleaved-thinking-2025-05-14` beta header (adaptive thinking enables interleaved thinking automatically)
 - Migrate `output_format` to `output_config.format` (if applicable)
@@ -772,7 +772,7 @@ model = "claude-opus-5"  # After
 
 1. **Pricing:** Claude Opus 5 is priced at $5 per million input tokens and $25 per million output tokens. Claude Sonnet 5 is priced at $2/$10 per million input/output tokens. See [Claude pricing](about-claude/pricing.md) for complete pricing.
 2. **Disabling thinking is capped at `high` effort:** On Claude Sonnet 5, `thinking: {type: "disabled"}` is accepted at any effort level. On Claude Opus 5, it is accepted only at an [effort](build-with-claude/effort.md) level of `high` or below; a request that combines `thinking: {type: "disabled"}` with effort `xhigh` or `max` returns a 400 error, enforced on each request. Audit requests that disable thinking before you migrate.
-3. **Mid-conversation system messages:** Claude Opus 5 accepts `role: "system"` messages immediately after a user turn in the `messages` array (subject to [placement rules](build-with-claude/mid-conversation-system-messages.md)); Claude Sonnet 5 does not. If you maintain code paths that rebuild the full message history to update instructions, you can simplify them and preserve [prompt cache](build-with-claude/prompt-caching.md) hits on earlier turns.
+3. **Mid-conversation system messages:** Claude Opus 5 accepts `role: "system"` messages immediately after a user turn in the `messages` array (subject to [placement rules](build-with-claude/mid-conversation-system-messages.md)). This feature is not available on Claude Sonnet 5; use the top-level `system` field instead. If you maintain code paths that rebuild the full message history to update instructions, you can simplify them and preserve [prompt cache](build-with-claude/prompt-caching.md) hits on earlier turns.
 4. **Web fetch is not available:** The [web fetch](agents-and-tools/tool-use/web-fetch-tool.md) tool is available on Claude Sonnet 5 but not on Claude Opus 5.
 
 ####  Migration checklist
@@ -788,7 +788,7 @@ model = "claude-opus-5"  # After
 
 Claude Sonnet 5 offers the best combination of speed and intelligence in the Claude model family. It builds on Claude Sonnet 4.6.
 
-Claude Sonnet 5 is a drop-in upgrade for Claude Sonnet 4.6, priced at $2/$10 USD per million input/output tokens; see [Pricing](about-claude/pricing.md) for details. There are two breaking API changes for code already running on Claude Sonnet 4.6: manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) and sampling parameters (`temperature`, `top_p`, `top_k`) set to non-default values are no longer accepted and return a 400 error. Use [adaptive thinking](build-with-claude/thinking.md) with the [effort parameter](build-with-claude/effort.md) instead. Claude Sonnet 5 supports the same set of features as Claude Sonnet 4.6, including the [1M token context window](build-with-claude/context-windows.md), [adaptive thinking](build-with-claude/thinking.md), [prompt caching](build-with-claude/prompt-caching.md), [batch processing](build-with-claude/batch-processing.md), the [Files API](build-with-claude/files.md), [PDF support](build-with-claude/pdf-support.md), [vision](build-with-claude/vision.md), and the full set of server-side and client-side [tools](agents-and-tools/tool-use/overview.md). On the Claude API, Claude Sonnet 5 also supports [computer use](agents-and-tools/tool-use/computer-use-tool.md) as the generally available `computer_toolset_20260801` toolset and the [browser use tool](agents-and-tools/tool-use/browser-use-tool.md) for tasks inside webpages, neither of which Claude Sonnet 4.6 supports; existing integrations on the earlier `computer_20251124` version continue to work unchanged on both models. To upgrade an existing integration, see [Migrate from `computer_20251124`](agents-and-tools/tool-use/computer-use-tool.md). [Priority Tier](api/service-tiers.md) is not available on Claude Sonnet 5. Claude Sonnet 5 also uses a new tokenizer.
+Claude Sonnet 5 is a drop-in upgrade for Claude Sonnet 4.6, priced at $2/$10 USD per million input/output tokens; see [Pricing](about-claude/pricing.md) for details. There are two breaking API changes for code already running on Claude Sonnet 4.6: manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) and sampling parameters (`temperature`, `top_p`, `top_k`) set to non-default values are no longer accepted and return a 400 error. Use [adaptive thinking](build-with-claude/thinking.md) with the [effort parameter](build-with-claude/effort.md) instead. Claude Sonnet 5 supports the same set of features as Claude Sonnet 4.6, including the [1M token context window](build-with-claude/context-windows.md), [adaptive thinking](build-with-claude/thinking.md), [prompt caching](build-with-claude/prompt-caching.md), [batch processing](build-with-claude/batch-processing.md), the [Files API](build-with-claude/files.md), [PDF support](build-with-claude/pdf-support.md), [vision](build-with-claude/vision.md), and the full set of server-side and client-side [tools](agents-and-tools/tool-use/overview.md). On the Claude API, Claude Sonnet 5 also supports [computer use](agents-and-tools/tool-use/computer-use-tool.md) as the stable `computer_toolset_20260801` toolset and the [browser use tool](agents-and-tools/tool-use/browser-use-tool.md) for tasks inside webpages, neither of which Claude Sonnet 4.6 supports; existing integrations on the earlier `computer_20251124` version continue to work unchanged on both models. To upgrade an existing integration, see [Migrate from `computer_20251124`](agents-and-tools/tool-use/computer-use-tool.md). [Priority Tier](api/service-tiers.md) is not available on Claude Sonnet 5. Claude Sonnet 5 also uses a new tokenizer.
 
 ###  Migrating to Claude Sonnet 5 from Claude Sonnet 4.6
 

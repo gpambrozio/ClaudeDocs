@@ -8,7 +8,7 @@ System instructions normally live in the top-level `system` field, ahead of ever
 
 Mid-conversation system messages close that gap. You append a `{"role": "system"}` message at the point in the conversation where the new instruction becomes relevant, instead of editing the top-level `system` field. The cached prefix stays the same, so the next request still reads it from cache, and the new instruction is still applied as a system instruction rather than as ordinary user text.
 
-This page covers two features: mid-conversation system messages, which are generally available, and [mid-conversation tool changes](#mid-conversation-tool-changes), a beta introduced with Claude Opus 5 that applies the same approach to the `tools` array.
+This page covers two features: mid-conversation system messages, and [mid-conversation tool changes](#mid-conversation-tool-changes), a beta introduced with Claude Opus 5 that applies the same approach to the `tools` array.
 
 ##  Mid-conversation tool changes
 

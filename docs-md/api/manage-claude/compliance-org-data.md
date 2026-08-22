@@ -92,7 +92,7 @@ Response
     {
       "id": "user_01XyDMpzjS89pFZXqSFUBDr6",
       "full_name": "Priya Sharma",
-      "email": "[email protected]",
+      "email": "priya@example.com",
       "organization_role": "admin",
       "created_at": "2025-06-01T10:00:00Z"
     }
@@ -211,7 +211,7 @@ Response
   "data": [
     {
       "user_id": "user_01XyDMpzjS89pFZXqSFUBDr6",
-      "email": "[email protected]",
+      "email": "priya@example.com",
       "created_at": "2025-06-01T10:00:00Z",
       "updated_at": "2025-06-15T14:30:00Z"
     }

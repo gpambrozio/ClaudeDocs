@@ -96,7 +96,9 @@ client.beta.sessions.resources.delete(resource.id, session_id=session.id)
 
 ##  Listing and downloading session files
 
-Use the [Files API](build-with-claude/files.md) to list files scoped to a session and download them. Filtering by `scope_id` requires the `managed-agents-2026-04-01` beta header, so the list examples use the `beta` files namespace and pass that header explicitly.
+Use the [Files API](build-with-claude/files.md) to list files scoped to a session and download them. Files the agent writes to `/mnt/session/outputs/` appear in the list shortly after the agent finishes writing them, sometimes a few seconds after the session goes idle. If an output file you expect is missing, list again after a short delay; once it appears in the list, its upload has finished.
+
+Filtering by `scope_id` requires the `managed-agents-2026-04-01` beta header, so the list examples use the `beta` files namespace and pass that header explicitly.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -132,6 +134,7 @@ The agent can work with any file type, including:
 - If you omit `mount_path`, the file is placed at `/mnt/session/uploads/<file_id>`
 - Parent directories are created automatically
 - Paths should be absolute (starting with `/`)
+- Files the agent writes to `/mnt/session/outputs/` become available through the Files API, scoped to the session; see [Listing and downloading session files](#listing-and-downloading-session-files)
 
 Was this page helpful?
 

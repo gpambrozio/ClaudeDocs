@@ -32,7 +32,7 @@ The minimum cacheable prompt length on Claude Opus 5 is 512 tokens, down from 1,
 
 ###  Fast mode
 
-[Fast mode](build-with-claude/fast-mode.md) (research preview) is available for Claude Opus 5 on the Claude API only; it is not currently available on Amazon Bedrock, Google Cloud, or Microsoft Foundry. Fast mode for Claude Opus 5 is priced at $10 USD per million input tokens and $50 USD per million output tokens. See [Fast mode](build-with-claude/fast-mode.md) for access, supported models, and pricing.
+[Fast mode](build-with-claude/fast-mode.md) (research preview) is available for Claude Opus 5 on the Claude API only; it is not currently available on Amazon Bedrock, Claude Platform on AWS, Google Cloud, or Microsoft Foundry. Fast mode for Claude Opus 5 is priced at $10 USD per million input tokens and $50 USD per million output tokens. See [Fast mode](build-with-claude/fast-mode.md) for access, supported models, and pricing.
 
 ##  Behavior changes
 
@@ -77,7 +77,7 @@ Thinking is [on by default](#thinking-on-by-default) on Claude Opus 5, so no `th
 
 ###  Disabling thinking requires effort `high` or below
 
-On Claude Opus 5, `thinking: {"type": "disabled"}` is accepted only when the effort level is `high` or below. Setting `thinking: {"type": "disabled"}` with effort `xhigh` or `max` returns a 400 error. This is generally available behavior on Claude Opus 5 onward, enforced on each request, and it is a breaking change from Claude Opus 4.8, where disabling thinking was independent of the effort level. If you disable thinking at high effort levels today, either keep thinking disabled and set effort to `high` or below, or keep the effort level and remove the `thinking` field.
+On Claude Opus 5, `thinking: {"type": "disabled"}` is accepted only when the effort level is `high` or below. Setting `thinking: {"type": "disabled"}` with effort `xhigh` or `max` returns a 400 error. This rule is enforced on every request to Claude Opus 5 and later models. It is a breaking change from Claude Opus 4.8, where disabling thinking was independent of the effort level. If you disable thinking at high effort levels today, either keep thinking disabled and set effort to `high` or below, or keep the effort level and remove the `thinking` field.
 
 With thinking disabled, Claude Opus 5 can occasionally write a tool call into its text output instead of emitting a `tool_use` block, or include internal XML tags in its visible response. Where possible, keep thinking enabled and control token cost with lower effort levels; for integrations that must keep thinking disabled, see [Running with thinking disabled](build-with-claude/prompt-engineering/prompting-claude-opus-5.md) for prompting mitigations.
 
@@ -112,7 +112,7 @@ See [Pricing](about-claude/pricing.md) for complete pricing, including batch pro
 Claude Opus 5 is available on:
 
 - **Claude API:** available to all customers, as `claude-opus-5`.
-- **AWS:** available through [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), as `anthropic.claude-opus-5`. Claude Opus 5 is also reachable through the `InvokeModel` API on `bedrock-runtime`, served by the same infrastructure; the [Claude on Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock-legacy.md) integration does not include it in its ARN-versioned model ID table.
+- **AWS:** available through [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), as `anthropic.claude-opus-5`, and through [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md). On Amazon Bedrock, Claude Opus 5 is also reachable through the `InvokeModel` API on `bedrock-runtime`, served by the same infrastructure; the [Claude on Amazon Bedrock (legacy)](build-with-claude/claude-on-amazon-bedrock-legacy.md) integration does not include it in its ARN-versioned model ID table.
 - **Google Cloud:** available through [Claude on Google Cloud](build-with-claude/claude-on-vertex-ai.md), as `claude-opus-5`.
 - **Microsoft Foundry:** available through [Claude in Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md).
 

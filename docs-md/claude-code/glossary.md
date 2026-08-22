@@ -146,7 +146,7 @@ Learn more: [Model Context Protocol](mcp.md)
 
 ### [​](#mcp-tool-search) MCP Tool Search
 
-A context-saving mechanism that defers MCP tool schemas until needed. Only tool names load at startup; Claude fetches the full schema on demand when it decides to use a specific tool. This keeps idle MCP servers from consuming much context.
+A context-saving mechanism that defers MCP tool schemas until needed. Only tool names and server instructions load at startup; Claude fetches the full schema on demand when it decides to use a specific tool. This keeps idle MCP servers from consuming much context.
 Learn more: [Scale with MCP Tool Search](mcp.md)
 
 ## [​](#n) N

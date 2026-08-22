@@ -139,12 +139,12 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 import base64
-import httpx
+import httpx2
 
 # First, load and encode the PDF
 pdf_url = "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
 pdf_data = base64.standard_b64encode(
-    httpx.get(pdf_url, follow_redirects=True).content
+    httpx2.get(pdf_url, follow_redirects=True).content
 ).decode("utf-8")
 
 # Alternative: Load from a local file
@@ -276,12 +276,12 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 import base64
-import httpx
+import httpx2
 
 # First, load and encode the PDF
 pdf_url = "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
 pdf_data = base64.standard_b64encode(
-    httpx.get(pdf_url, follow_redirects=True).content
+    httpx2.get(pdf_url, follow_redirects=True).content
 ).decode("utf-8")
 
 # Create a message with the cached document
@@ -324,12 +324,12 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 import base64
-import httpx
+import httpx2
 
 # First, load and encode the PDF
 pdf_url = "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
 pdf_data = base64.standard_b64encode(
-    httpx.get(pdf_url, follow_redirects=True).content
+    httpx2.get(pdf_url, follow_redirects=True).content
 ).decode("utf-8")
 
 # Create a batch of requests that use the document

@@ -1,105 +1,106 @@
 # Get project document content
 
-Copy page
+Loading
 
-
+Loading
 
-# Get project document content
+Loading
 
-GET/v1/compliance/apps/projects/documents/{document\_id}
+Loading
 
-Get detailed information for a specific project document.
+Loading
 
-##### Path ParametersExpand Collapse
+Loading
 
-document\_id: string
+Loading
 
-The document ID (tagged ID, e.g., claude\_proj\_doc\_abc123)
+Loading
 
-##### Header ParametersExpand Collapse
+Loading
 
-"x-api-key": optional string
+Loading
 
-##### ReturnsExpand Collapse
+Loading
 
-id: string
+Loading
 
-Project document identifier (tagged ID)
+Loading
 
-content: string
+Loading
 
-Document text content
+Loading
 
-created\_at: string
+Loading
 
-Document creation timestamp
+Loading
 
-filename: string
+Loading
 
-Document filename
+Loading
 
-
+Loading
 
-user: object { id, email\_address }  or null
+Loading
 
-The user who created a project or project document.
+Loading
 
-Fields that reference this type are null when the creator's account has
-been deleted or the creator is no longer a member of an organization the
-key may read.
+Loading
 
-id: string
+Loading
 
-User identifier (tagged ID)
+Loading
 
-email\_address: string
+Loading
 
-User's email address
+Loading
 
-Get project document content
+Loading
 
-
+Loading
 
-```shiki
-curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID \
-    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
-```
+Loading
 
-Response 200
+Loading
 
-
+Loading
 
-```shiki
-{
-  "id": "claude_proj_doc_01Qr8StUvWxYzAbCdEfGhJjK",
-  "content": "# Design notes\n\n- Item one\n- Item two\n",
-  "created_at": "2025-03-12T18:22:41.123456Z",
-  "filename": "design-notes.txt",
-  "user": {
-    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-    "email_address": "jane.doe@example.com"
-  }
-}
-```
+Loading
 
-##### Returns Examples
+Loading
 
-Response 200
+Loading
 
-
+Loading
 
-```shiki
-{
-  "id": "claude_proj_doc_01Qr8StUvWxYzAbCdEfGhJjK",
-  "content": "# Design notes\n\n- Item one\n- Item two\n",
-  "created_at": "2025-03-12T18:22:41.123456Z",
-  "filename": "design-notes.txt",
-  "user": {
-    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-    "email_address": "jane.doe@example.com"
-  }
-}
-```
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
 
 ---
 

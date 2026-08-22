@@ -23,7 +23,7 @@ On Pro, Max, and Team plans, Claude Code starts sessions in [auto mode](permissi
 | `ExitWorktree` | Exits a worktree session and returns to the original directory. Not available to subagents that already run in their own working directory, such as with [`isolation: worktree`](sub-agents.md) | No |
 | `Glob` | Finds files based on pattern matching. See [Glob tool behavior](#glob-tool-behavior) | No |
 | `Grep` | Searches for patterns in file contents. See [Grep tool behavior](#grep-tool-behavior) | No |
-| `ListAgents` | Lists the agents Claude can message with `SendMessage`, apart from [agent team](agent-teams.md) teammates, which Claude reaches through the team’s roster: subagents in the session, your other local Claude Code sessions, and, while this session is connected to [Remote Control](remote-control.md), your [Claude Code on the web](claude-code-on-the-web.md) sessions and your Remote Control sessions on other machines. Backs the `/list-agents` command. See [cross-session messaging](cross-session-messaging.md). Requires Claude Code v2.1.224 or later, and appears only in sessions where [cross-session messaging is enabled](cross-session-messaging.md) | No |
+| `ListAgents` | Lists the agents Claude can message with `SendMessage`: subagents in the session, [agent team](agent-teams.md) teammates, your other local Claude Code sessions, and, while this session is connected to [Remote Control](remote-control.md), your [Claude Code on the web](claude-code-on-the-web.md) sessions and your Remote Control sessions on other machines. Backs the `/list-agents` command. See [cross-session messaging](cross-session-messaging.md). Requires Claude Code v2.1.224 or later, and appears only in sessions where [cross-session messaging is enabled](cross-session-messaging.md). Teammate rows and the first line showing this session’s own name require v2.1.239 or later | No |
 | `ListMcpResourcesTool` | Lists resources exposed by connected [MCP servers](mcp.md) | No |
 | `LSP` | Code intelligence via language servers: jump to definitions, find references, report type errors and warnings. See [LSP tool behavior](#lsp-tool-behavior) | No |
 | `Monitor` | Runs a command in the background and feeds each output line back to Claude, so it can react to log entries, file changes, or polled status mid-conversation. Can also open a WebSocket and treat each incoming message as an event. See [Monitor tool](#monitor-tool) | Yes |
@@ -57,7 +57,7 @@ On Pro, Max, and Team plans, Claude Code starts sessions in [auto mode](permissi
 
 For the most part, Claude decides when to use these tools and you don’t need to name them yourself when interacting with Claude. You reference tool names directly when defining permissions and other configuration:
 
-- in [`permissions.allow` and `permissions.deny`](settings.md) in settings, and the `/permissions` interface
+- in [`permissions.allow`](settings-reference.md) and [`permissions.deny`](settings-reference.md) in settings, and the `/permissions` interface
 - in the `--allowedTools` and `--disallowedTools` [CLI flags](cli-reference.md)
 - in the Agent SDK’s [`allowedTools` and `disallowedTools`](agent-sdk/permissions.md) options
 - in a [subagent’s `tools` or `disallowedTools`](sub-agents.md) frontmatter
@@ -110,7 +110,7 @@ When you answer by typing your own text, Claude Code relays the answer with neut
 
 ### [​](#question-auto-continue-timeout) Question auto-continue timeout
 
-Questions stay open until you answer them. If you want a question you leave unanswered to eventually close and let Claude continue without you, set the [`askUserQuestionTimeout`](settings.md) setting to `60s`, `5m`, or `10m`, either in your user `settings.json` or from the **Question auto-continue timeout** row in `/config`.
+Questions stay open until you answer them. If you want a question you leave unanswered to eventually close and let Claude continue without you, set the [`askUserQuestionTimeout`](settings-reference.md) setting to `60s`, `5m`, or `10m`, either in your user `settings.json` or from the **Question auto-continue timeout** row in `/config`.
 After a question sits that long with no input, the dialog closes on its own: it submits any options you’d already selected and tells Claude you may be away from your keyboard, so Claude proceeds on its own judgment and can re-ask later. You see a countdown for the last 20 seconds. Press any key to restart the timer; on terminals that report focus, switching to the window restarts it too.
 The timeout applies only to `AskUserQuestion`’s multiple-choice questions; permission prompts, including plan approval, never auto-resolve on idle.
 
@@ -288,7 +288,7 @@ A WebSocket watch takes a `ws` input in place of `command`, and a single Monitor
 
 The `timeout_ms` and `persistent` inputs behave the same as they do for a command: the watch ends at the deadline unless `persistent` is set, and `TaskStop` cancels it early.
 Opening a WebSocket prompts for approval; in [auto mode](permission-modes.md) the classifier decides instead. The prompt doesn’t offer an option to skip future prompts for the same host.
-Claude Code denies URLs that point at a private, link-local, or cloud-metadata address, including hostnames that resolve to one. It also denies hosts in `sandbox.network.deniedDomains`, and when [`allowManagedDomainsOnly`](settings.md) is set in managed settings, any host outside the managed allowlist.
+Claude Code denies URLs that point at a private, link-local, or cloud-metadata address, including hostnames that resolve to one. It also denies hosts in `sandbox.network.deniedDomains`, and when [`allowManagedDomainsOnly`](settings-reference.md) is set in managed settings, any host outside the managed allowlist.
 
 ## [​](#notebookedit-tool-behavior) NotebookEdit tool behavior
 
@@ -306,7 +306,7 @@ Permission rules use the `Edit(...)` path format. A rule like `Edit(notebooks/**
 The PowerShell tool lets Claude run PowerShell commands natively. On Windows, this means commands run in PowerShell instead of routing through Git Bash. How the tool becomes available depends on your platform:
 
 - **Windows without Git Bash**: the tool is enabled automatically.
-- **Windows with Git Bash installed**: the tool is rolling out progressively.
+- **Windows with Git Bash installed**: the tool is on by default for claude.ai and Console accounts; set `CLAUDE_CODE_USE_POWERSHELL_TOOL=1` to enable it in Amazon Bedrock, Google Cloud’s Agent Platform, and Microsoft Foundry sessions, or `0` to turn it off.
 - **Linux, macOS, and WSL**: the tool is opt-in.
 
 Your [PreToolUse hooks](hooks.md) receive the tool’s command string in `tool_input.command`, with the same fields as the Bash tool.
@@ -324,7 +324,7 @@ Set `CLAUDE_CODE_USE_POWERSHELL_TOOL=1` in your environment or in `settings.json
 }
 ```
 
-On Windows, set the variable to `0` to opt out of the rollout. On Linux, macOS, and WSL, the tool requires PowerShell 7 or later: install `pwsh` and ensure it is on your `PATH`.
+On Windows, set the variable to `0` to turn the tool off. On Linux, macOS, and WSL, the tool requires PowerShell 7 or later: install `pwsh` and ensure it is on your `PATH`.
 On Windows, Claude Code auto-detects `pwsh.exe` for PowerShell 7+ with a fallback to `powershell.exe` for PowerShell 5.1. When the tool is enabled, Claude treats PowerShell as the primary shell. The Bash tool remains available for POSIX scripts when Git Bash is installed.
 Claude Code spawns PowerShell with `-ExecutionPolicy Bypass` at process scope only, so `.ps1` scripts and module imports work on default Windows installs without changing the machine’s policy. Process-scope bypass doesn’t override Group Policy `MachinePolicy` or `UserPolicy`, so enterprise policies still apply. To respect the machine’s effective execution policy instead, set `CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY=1`.
 
@@ -332,7 +332,7 @@ Claude Code spawns PowerShell with `-ExecutionPolicy Bypass` at process scope on
 
 Three additional settings control where PowerShell is used:
 
-- `"defaultShell": "powershell"` in [`settings.json`](settings.md): routes interactive `!` commands through PowerShell. Requires the PowerShell tool to be enabled.
+- `"defaultShell": "powershell"` in [`settings.json`](settings-reference.md): routes interactive `!` commands through PowerShell. Requires the PowerShell tool to be enabled.
 - `"shell": "powershell"` on individual [command hooks](hooks.md): runs that hook in PowerShell. Hooks spawn PowerShell directly, so this works regardless of `CLAUDE_CODE_USE_POWERSHELL_TOOL`.
 - `shell: powershell` in [skill frontmatter](skills.md): runs `` !`command` `` blocks in PowerShell. Requires the PowerShell tool to be enabled.
 

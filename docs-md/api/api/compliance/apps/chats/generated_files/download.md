@@ -1,35 +1,106 @@
 # Download a Claude-generated file
 
-Copy page
+Loading
 
-
+Loading
 
-# Download a Claude-generated file
+Loading
 
-GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}/content
+Loading
 
-Downloads the binary content of a file the assistant created via tool use.
+Loading
 
-##### Path ParametersExpand Collapse
+Loading
 
-claude\_gen\_file\_id: string
+Loading
 
-The generated-file id (e.g., 'claude\_gen\_file\_abc123') as returned in `chat_messages[].generated_files[].id` from GET /apps/chats/{claude\_chat\_id}/messages.
+Loading
 
-##### Header ParametersExpand Collapse
+Loading
 
-"x-api-key": optional string
+Loading
 
-Download a Claude-generated file
+Loading
 
-
+Loading
 
-```shiki
-curl https://api.anthropic.com/v1/compliance/apps/chats/generated-files/$CLAUDE_GEN_FILE_ID/content \
-    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
-```
+Loading
 
-##### Returns Examples
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
 
 ---
 

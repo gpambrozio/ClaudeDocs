@@ -48,9 +48,7 @@ Percentage of assigned seats with activity on the requested day (`DAU / assigned
 
 ending\_at: string
 
-End time in UTC of aggregation period (e.g. 2026-01-16T00:00
-
-)
+End time in UTC of aggregation period (e.g. 2026-01-16T00:00:00Z)
 
 monthly\_active\_user\_count: number
 
@@ -66,9 +64,7 @@ Number of pending invitations to join the organization. Null when the response i
 
 starting\_at: string
 
-Start time in UTC of aggregation period (e.g. 2026-01-15T00:00
-
-)
+Start time in UTC of aggregation period (e.g. 2026-01-15T00:00:00Z)
 
 weekly\_active\_user\_count: number
 

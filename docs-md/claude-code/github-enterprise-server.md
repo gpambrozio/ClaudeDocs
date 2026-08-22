@@ -138,7 +138,7 @@ See [Create and distribute a plugin marketplace](plugin-marketplaces.md) for the
 
 ### [​](#pre-register-ghes-marketplaces-with-managed-settings) Pre-register GHES marketplaces with managed settings
 
-The `extraKnownMarketplaces` setting pre-registers a marketplace so developers get it without manual setup. It works from [any settings file](settings.md), including a repository’s `.claude/settings.json`; managed settings deliver it organization-wide:
+The `extraKnownMarketplaces` setting pre-registers a marketplace so developers get it without manual setup. It works from [any settings file](settings-reference.md), including a repository’s `.claude/settings.json`; managed settings deliver it organization-wide:
 
 ```shiki
 {
@@ -158,11 +158,11 @@ Claude Code installs these marketplaces locally: it registers each entry and clo
 - **Use a full git URL.** The `owner/repo` shorthand always resolves to github.com and cannot reference a GHES host.
 - **Prefer HTTPS URLs.** SSH clones fail on machines that do not already trust your GHES host key. An HTTPS URL with your organization’s standard git credential helper works on any machine with credentials configured.
 - **Confirm each machine can clone from your GHES host.** If a machine lacks credentials, the marketplace is registered but never installed, and its plugins report as not found instead of prompting for credentials.
-- **Confirm the setting reaches each machine.** A managed settings file only takes effect on machines it’s deployed to, for example through your device management system. See [managed settings](settings.md) for file locations.
+- **Confirm the setting reaches each machine.** A managed settings file only takes effect on machines it’s deployed to, for example through your device management system. See [Deploy managed settings](managed-settings.md) for file locations.
 
 ### [​](#allowlist-ghes-marketplaces-in-managed-settings) Allowlist GHES marketplaces in managed settings
 
-If your organization uses [managed settings](settings.md) to restrict which marketplaces developers can add, use the `hostPattern` source type to allow all marketplaces from your GHES instance without enumerating each repository. See [settings files](settings.md) for file locations on each platform. Add the JSON to your `managed-settings.json` file or equivalent MDM policy:
+If your organization uses [managed settings](settings.md) to restrict which marketplaces developers can add, use the `hostPattern` source type to allow all marketplaces from your GHES instance without enumerating each repository. See [Delivery mechanisms](managed-settings.md) for file locations on each platform. Add the JSON to your `managed-settings.json` file or equivalent MDM policy:
 
 ```shiki
 {
@@ -175,7 +175,7 @@ If your organization uses [managed settings](settings.md) to restrict which mark
 }
 ```
 
-See the [strictKnownMarketplaces](settings.md) and [extraKnownMarketplaces](settings.md) settings reference for the complete schema.
+See the [strictKnownMarketplaces](settings-reference.md) and [extraKnownMarketplaces](settings-reference.md) settings reference for the complete schema.
 
 ## [​](#limitations) Limitations
 

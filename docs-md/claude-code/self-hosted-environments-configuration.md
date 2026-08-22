@@ -356,7 +356,7 @@ When Anthropic’s control plane supplies a session with [Claude Code hooks](hoo
 
 - **Where they land**: the runner writes each supplied hook script to a reserved `hooks/.ccr-launcher/` subdirectory of the session’s config directory and registers the scripts in a separate settings file it passes to the session with `--settings`, leaving the seeded `settings.json` and your own scripts at `hooks/<name>` untouched. The runner recreates the reserved subdirectory for each session and doesn’t seed host content at `~/.claude/hooks/.ccr-launcher/` into sessions.
 - **Who authors them**: the control plane populates the scripts from fixed constants in its own deployment, never from per-session or third-party input.
-- **What still governs them**: hooks delivered through `--settings` enter the ordinary merged hook configuration, not the managed tier, so your managed settings still apply. `disableAllHooks` disables them, and they are not among the categories [`allowManagedHooksOnly`](settings.md) keeps loaded.
+- **What still governs them**: hooks delivered through `--settings` enter the ordinary merged hook configuration, not the managed tier, so your managed settings still apply. `disableAllHooks` disables them, and they are not among the categories [`allowManagedHooksOnly`](settings-reference.md) keeps loaded.
 
 ### [​](#repository-committed-permission-rules) Repository-committed permission rules
 

@@ -15,7 +15,7 @@ Context editing allows you to selectively clear specific content from conversati
 | Approach | Where it runs | Strategies | How it works |
 | --- | --- | --- | --- |
 | **Server-side** | API | Tool result clearing (`clear_tool_uses_20250919`) Thinking block clearing (`clear_thinking_20251015`) | Applied before the prompt reaches Claude. Clears specific content from conversation history. Each strategy can be configured independently. |
-| **Client-side** | SDK | Compaction | Available in [Python, TypeScript, and Ruby SDKs](cli-sdks-libraries/overview.md) when using [`tool_runner`](agents-and-tools/tool-use/tool-runner.md). Generates a summary and replaces full conversation history. See [Client-side compaction](#client-side-compaction-sdk). |
+| **Client-side** | SDK | Compaction | Available in [TypeScript and Ruby SDKs](cli-sdks-libraries/overview.md) when using [`tool_runner`](agents-and-tools/tool-use/tool-runner.md). Generates a summary and replaces full conversation history. See [Client-side compaction](#client-side-compaction-sdk). |
 
 ##  Server-side strategies
 
@@ -403,25 +403,6 @@ Add `compaction_control` to your `tool_runner` call to enable automatic summariz
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
-Python
-
-
-
-```shiki
-client = anthropic.Anthropic()
-
-runner = client.beta.messages.tool_runner(
-    model="claude-opus-5",
-    max_tokens=1024,
-    tools=[read_file],
-    messages=[{"role": "user", "content": "What's in config.json?"}],
-    compaction_control={"enabled": True, "context_token_threshold": 100000},
-)
-
-for message in runner:
-    print(f"Tokens used: {message.usage.input_tokens}")
-```
-
 ####  What occurs during compaction
 
 As the conversation grows, the message history accumulates:
@@ -480,88 +461,17 @@ The threshold determines when compaction occurs. A lower threshold means more fr
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
-Python
-
-
-
-```shiki
-client = anthropic.Anthropic()
-
-runner = client.beta.messages.tool_runner(
-    model="claude-opus-5",
-    max_tokens=1024,
-    tools=[read_file],
-    messages=[{"role": "user", "content": "What's in config.json?"}],
-    # Lower values compact more often; raise to 150000 when the task needs more context
-    compaction_control={"enabled": True, "context_token_threshold": 50000},
-)
-
-for message in runner:
-    print(f"Tokens used: {message.usage.input_tokens}")
-```
-
 ####  Using a different model for summaries
 
 You can use a faster or cheaper model for generating summaries:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
-Python
-
-
-
-```shiki
-client = anthropic.Anthropic()
-
-runner = client.beta.messages.tool_runner(
-    model="claude-opus-5",
-    max_tokens=1024,
-    tools=[read_file],
-    messages=[{"role": "user", "content": "What's in config.json?"}],
-    compaction_control={
-        "enabled": True,
-        "context_token_threshold": 100000,
-        "model": "claude-haiku-4-5",
-    },
-)
-
-for message in runner:
-    print(f"Tokens used: {message.usage.input_tokens}")
-```
-
 ####  Custom summary prompts
 
 You can provide a custom prompt for domain-specific needs. Your prompt should instruct Claude to wrap its summary in `<summary></summary>` tags.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
-
-Python
-
-
-
-```shiki
-client = anthropic.Anthropic()
-
-runner = client.beta.messages.tool_runner(
-    model="claude-opus-5",
-    max_tokens=1024,
-    tools=[read_file],
-    messages=[{"role": "user", "content": "What's in config.json?"}],
-    compaction_control={
-        "enabled": True,
-        "context_token_threshold": 100000,
-        "summary_prompt": """Summarize the research conducted so far, including:
-- Sources consulted and key findings
-- Questions answered and remaining unknowns
-- Recommended next steps
-
-Wrap your summary in <summary></summary> tags.""",
-    },
-)
-
-for message in runner:
-    print(f"Tokens used: {message.usage.input_tokens}")
-```
 
 ###  Default summary prompt
 
@@ -616,23 +526,6 @@ When the SDK triggers compaction while a tool use response is pending, it remove
 Understanding when compaction triggers helps you tune thresholds and verify expected behavior.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
-
-The Python SDK logs compaction events at the INFO level. Enable the `anthropic.lib.tools` logger:
-
-Python
-
-
-
-```shiki
-import logging
-
-logging.basicConfig(level=logging.INFO)
-logging.getLogger("anthropic.lib.tools").setLevel(logging.INFO)
-
-# Logs will show:
-# INFO: Token usage 105000 has exceeded the threshold of 100000. Performing compaction.
-# INFO: Compaction complete. New token usage: 2500
-```
 
 ###  When to use compaction
 

@@ -188,7 +188,7 @@ One of the following:
 
 version: string
 
-Skill version or 'latest' for most recent version
+The resolved version: a skill version ID for custom skills.
 
 
 

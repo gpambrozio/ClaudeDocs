@@ -60,7 +60,7 @@ After signing in, claude.ai/code prompts you to connect GitHub. Follow the promp
 
 Confirm your Default environment
 
-When you finish connecting GitHub, onboarding creates a [cloud environment](cloud-environments.md) named **Default** for you; if onboarding shows an environment form instead, keep its defaults to create the same **Default** environment. The environment controls what network access Claude has during sessions and what runs when a new session is created. **Default** uses [`Trusted` network access](cloud-environments.md): sessions reach [common package registries](cloud-environments.md) and other allowlisted domains, and nothing else through the session’s network. See [Installed tools](cloud-environments.md) for what’s available without any configuration.For a first project, the **Default** environment works as is. To change its network access, add environment variables, or run a [setup script](cloud-environments.md) before sessions start, [edit it or create additional environments](cloud-environments.md).
+If you don’t have an environment yet, onboarding creates a [cloud environment](cloud-environments.md) named **Default** for you when you finish connecting GitHub; if onboarding shows an environment form instead, keep its defaults to create the same **Default** environment. The environment controls what network access Claude has during sessions and what runs when a new session is created. **Default** uses [`Trusted` network access](cloud-environments.md): sessions reach [common package registries](cloud-environments.md) and other allowlisted domains, and nothing else through the session’s network. See [Installed tools](cloud-environments.md) for what’s available without any configuration.For a first project, the **Default** environment works as is. To change its network access, add environment variables, or run a [setup script](cloud-environments.md) before sessions start, [edit it or create additional environments](cloud-environments.md).
 
 ### [​](#connect-from-your-terminal) Connect from your terminal
 
@@ -193,7 +193,7 @@ Enterprise organizations may need an Owner to enable Claude Code on the web. Con
 
 If `/web-setup` responds with “Not signed in to Claude. Run /login first.”, the CLI doesn’t have a valid claude.ai sign-in. This can also happen when a previous sign-in has expired. Run `/login`, sign in with your claude.ai account, then run `/web-setup` again.
 
-### [​](#/web-setup-shows-“no-commands-match”-or-“unknown-command”) `/web-setup` shows “No commands match” or “Unknown command”
+### [​](#web-setup-shows-no-commands-match-or-unknown-command) `/web-setup` shows “No commands match” or “Unknown command”
 
 `/web-setup` runs inside the Claude Code CLI, not your shell. Launch `claude` first, then type `/web-setup` at the prompt.
 If you typed it inside Claude Code and the command menu shows `No commands match "/web-setup"`, or submitting it returns `Unknown command: /web-setup`, the command is hidden because a requirement isn’t met. The cause is usually that you’re authenticated with an API key or third-party provider instead of a claude.ai subscription. Run `/login` to sign in with your claude.ai account. Team and Enterprise Owners can also [disable `/web-setup`](claude-code-on-the-web.md) for their organization, which hides the command. In that case, use the browser flow above instead.

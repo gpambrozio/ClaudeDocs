@@ -9,13 +9,13 @@ Sessions are saved continuously to [local transcript files](#export-and-locate-s
 
 | Command | What it does |
 | --- | --- |
-| `claude --continue` | Resumes the most recent session in the current directory |
+| `claude --continue` | Resumes the most recent interactive session in the current directory |
 | `claude --resume` | Opens the [session picker](#use-the-session-picker) |
 | `claude --resume <name>` | Resumes the named session directly |
 | `claude --from-pr <number>` | Opens the session picker filtered to sessions linked to that pull request |
 | `/resume` | Switches to a different conversation from inside an active session |
 
-Sessions created with [`claude -p`](headless.md) or the [Agent SDK](agent-sdk/overview.md) don’t appear in the session picker, but you can still resume one by passing its session ID to `claude --resume <session-id>`.
+Claude Code leaves sessions created with [`claude -p`](headless.md) or the [Agent SDK](agent-sdk/overview.md) out of the session picker and out of `claude --continue`. You can still resume one by passing its session ID to `claude --resume <session-id>`. With `claude --continue`, Claude Code also skips [background sessions](agent-view.md) and [sessions whose first prompt was `/loop`](#where-the-session-picker-looks). When you run [`claude -p --continue`](headless.md), Claude Code includes `-p`, SDK, and `/loop` sessions and still skips background sessions.
 You can run `claude --resume <session-id>` from any directory: Claude Code looks for the ID in the current project directory and its git worktrees first, then in every other project on this machine, so it finds a session that started elsewhere or moved with [`/cd`](commands.md). The cross-project search resolves the ID only when exactly one other project holds a transcript with messages for it, so a hand-copied duplicate makes Claude Code report not-found rather than resume an arbitrary copy. If no stored session matches the ID, Claude Code reports `No conversation found with session ID: <session-id>`. Before v2.1.223, the lookup stopped at the current project directory and its git worktrees, so you had to resume from the directory the session last worked in.
 
 ### [​](#what-a-resumed-session-restores) What a resumed session restores
@@ -26,7 +26,7 @@ A resumed session restores the conversation along with the state saved in it:
 - Model: the session continues on the model it was using. The model isn’t restored when it has been retired or isn’t allowed by `availableModels`, when a `--model` flag or `ANTHROPIC_MODEL`-family environment variable picks one at launch, or on providers that use provider-specific deployment IDs, such as [Amazon Bedrock, Google Cloud’s Agent Platform, and Microsoft Foundry](third-party-integrations.md); see [model configuration](model-config.md) for the resolution order.
 - Agent: a session started with [`--agent`](sub-agents.md) or the `agent` setting continues as that agent, keeping its system prompt, tool restrictions, and model. Pass `--agent` when resuming to pick a different one. Claude Code looks for the agent in two places: the session’s original directory, provided you have [trusted that workspace](permissions.md), and then the directory you resume from, so a project-scoped agent still loads when you resume from another directory. If Claude Code doesn’t find the agent in either place, the session resumes with the default tools and system prompt and shows a [warning naming the agent](errors.md).
 - Permission mode: the mode the session was in, with these exceptions. Pass `--permission-mode` to override the restored mode.
-  - `plan` and `bypassPermissions` are never restored; a session that was in one of them resumes in the mode a new session would start in. To [bypass permissions](permission-modes.md) again, enable it at launch with one of its launch flags or `permissions.defaultMode: "bypassPermissions"` in [settings](settings.md)
+  - `plan` and `bypassPermissions` are never restored; a session that was in one of them resumes in the mode a new session would start in. To [bypass permissions](permission-modes.md) again, enable it at launch with one of its launch flags or `permissions.defaultMode: "bypassPermissions"` in [settings](settings-reference.md)
   - `auto` is restored only when your account still meets the [auto mode requirements](permission-modes.md)
   - Manual is restored as Manual when a new session would start in auto mode from the [built-in default](permission-modes.md); when a `defaultMode` from a settings file [takes effect](permission-modes.md), the session resumes in that mode instead
 - Active goal: a [goal](goal.md) that was still active when the session ended carries over; its turn count, timer, and token-spend baseline reset.
@@ -53,7 +53,7 @@ Claude Code stores sessions per project directory. By default the session picker
 - Sessions started elsewhere that added the current directory with `/add-dir`
 
 Use `Ctrl+W` to widen to all worktrees of the repository or `Ctrl+A` to widen to every project on this machine.
-Sessions whose first prompt was a [`/loop`](scheduled-tasks.md) command don’t appear in the picker; running `/loop` later in a conversation doesn’t hide the session. Before v2.1.211, a `/loop` run early in a conversation hid the session from the picker permanently.
+Sessions whose first prompt was a [`/loop`](scheduled-tasks.md) command don’t appear in the picker, and `claude --continue` skips them too. Running `/loop` later in a conversation doesn’t hide the session. Before v2.1.211, a `/loop` run early in a conversation hid the session from the picker permanently.
 From v2.1.169, moving a session with [`/cd`](commands.md) relocates it to the new directory’s project storage, so it appears in that directory’s picker afterward. As of v2.1.196, a moved session stays out of the old directory’s picker even after a crash or forced exit. On earlier versions, it could also reappear in the old directory’s list after an exit that wasn’t clean when the old path contained special characters such as underscores.
 When you select a session from another worktree of the same repository, Claude Code resumes it in place. When you select a session from an unrelated project, Claude Code copies a `cd` and resume command to your clipboard instead.
 Resuming by name resolves across the current repository and its worktrees. Both forms look for an exact match and resume it directly even if it lives in a different worktree:
@@ -72,7 +72,7 @@ Give sessions descriptive names so they’re findable in the session picker and 
 | At startup | `claude -n auth-refactor` |
 | During a session | `/rename auth-refactor`. The name also appears on the prompt bar |
 | From the session picker | Highlight a session and press `Ctrl+R` |
-| On plan accept | Accepting a plan in [plan mode](permission-modes.md) names the session from the plan content unless you’ve already set one |
+| On plan accept | Accepting a plan in [plan mode](permission-modes.md) gives the session a generated title based on the plan unless you’ve already named it |
 | From claude.ai or the Claude app | Rename a [Remote Control session](remote-control.md); Claude Code applies the same name in the CLI. Requires Claude Code v2.1.221 or later |
 | From the desktop app | Rename a session in the [desktop app](desktop.md) |
 
@@ -84,9 +84,10 @@ In three cases Claude Code doesn’t rename the duplicate, so you can still see 
 - It doesn’t check the `--name` of a [background](agent-view.md) or `-p` session at startup.
 - It can’t rename a session on an earlier version of Claude Code.
 
-Interactive sessions you never name still get a default display name when they start. Requires Claude Code v2.1.196 or later. The default combines the working directory’s name with a two-character suffix, for example `my-app-3f`, and identifies the session in listings of running sessions, such as [agent view](agent-view.md) and `claude agents --json` output.
-The default isn’t a resume handle: `claude --resume <name>`, `/resume <name>`, and the session picker match only names you set. Naming the session replaces the default.
-If you don’t name a session, Claude Code generates a session title for it: a short summary of your first prompt, written by a background request to the small/fast model, normally a Haiku-class model. Naming the session with `--name` or `/rename` replaces the generated title. You see the generated title in the [session picker](#use-the-session-picker) and in the statusline [`session_name`](statusline.md) field when no name is set; like the default display name, it isn’t a resume handle.
+Sessions you don’t name still get two labels that Claude Code assigns. Only the generated title works as a resume handle:
+
+- Default display name: interactive sessions you never name still get a default display name when they start. Requires Claude Code v2.1.196 or later. The default combines the working directory’s name with a two-character suffix, for example `my-app-3f`, and identifies the session in listings of running sessions, such as [agent view](agent-view.md) and `claude agents --json` output. The default isn’t a resume handle. If you pass it to `claude --resume` or `/resume`, Claude Code doesn’t find the session. Naming the session replaces the default in those listings, and so does accepting a plan.
+- Generated title: if you don’t name a session, Claude Code generates a session title for it. The title is a short summary of your first prompt, written by a background request to the small/fast model, normally a Haiku-class model. Accepting a plan replaces it with a title based on the plan. Naming the session replaces the generated title. You see the first-prompt title in the [session picker](#use-the-session-picker) and in the statusline [`session_name`](statusline.md) field when no name is set. The plan title shows in the same two places and also in the listings of running sessions, where it takes the place of the default display name. You can pass either title to `claude --resume` or `/resume`, and Claude Code resolves it the same way as a name you set.
 
 ## [​](#use-the-session-picker) Use the session picker
 
@@ -176,7 +177,7 @@ The location, retention, and write behavior are configurable:
 | --- | --- | --- |
 | Move storage off `~/.claude` | [`CLAUDE_CONFIG_DIR`](env-vars.md) | Environment variable |
 | [Name the `<project>` directory yourself](#name-the-project-directory-yourself) | [`CLAUDE_CODE_PROJECT_DIR_NAME`](env-vars.md) | Environment variable |
-| Change the 30-day retention | [`cleanupPeriodDays`](settings.md) | `settings.json` |
+| Change the 30-day retention | [`cleanupPeriodDays`](settings-reference.md) | `settings.json` |
 | Suppress transcript writes in all modes | [`CLAUDE_CODE_SKIP_PROMPT_HISTORY`](env-vars.md) | Environment variable |
 | Suppress writes for one non-interactive run | [`--no-session-persistence`](cli-reference.md) | CLI flag with `claude -p` |
 

@@ -20,7 +20,7 @@ Claude Code supports a range of restriction levels. Each pattern uses one or bot
 | **Disable MCP** | No servers load, apart from the [VS Code extension’s own in-process server](#exclusive-control-with-managed-mcp-json) | `managed-mcp.json` with an empty server map |
 | **Fixed deployment** | Every user gets the same servers and can’t add others | `managed-mcp.json` with the servers you want |
 | **Approved catalog** | Publish a list of approved servers; users add the ones they want, anything else is blocked | `allowedMcpServers` + `allowManagedMcpServersOnly: true` |
-| **Plugin servers only** | Servers can only come from plugins; users can’t add their own | [`strictPluginOnlyCustomization`](settings.md) with `mcp` in the list |
+| **Plugin servers only** | Servers can only come from plugins; users can’t add their own | [`strictPluginOnlyCustomization`](settings-reference.md) with `mcp` in the list |
 | **Soft allowlist** | Enforce an allowlist that users can broaden in their own settings | `allowedMcpServers` without `allowManagedMcpServersOnly` |
 | **Denylist only** | Block known-bad servers, allow everything else | `deniedMcpServers` |
 | **No restrictions** | Users add anything | Don’t deploy any managed MCP configuration |
@@ -133,7 +133,7 @@ Leaving `allowedMcpServers` unset is different from setting it to an empty array
 | `allowedMcpServers` | All servers allowed | No servers allowed | Only matching servers allowed |
 | `deniedMcpServers` | No servers blocked | No servers blocked | Matching servers blocked |
 
-See [Invalid entries in managed settings](settings.md) for what happens when an entry fails schema validation.
+See [Invalid entries in managed settings](managed-settings.md) for what happens when an entry fails schema validation.
 
 A `serverName` entry, in either list, is not a security control. The name is the label a user assigns when running `claude mcp add` or editing a config file, not the underlying server, so a user can call any server `github`. For claude.ai connectors the name is the display name returned by claude.ai, which can change. To enforce which servers actually run, add `serverCommand` or `serverUrl` entries.
 

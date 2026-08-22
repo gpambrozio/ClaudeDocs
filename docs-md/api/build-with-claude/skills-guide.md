@@ -371,8 +371,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-ant skills retrieve \
-  --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv
+ant skills retrieve --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv
 ```
 
 ###  Deleting a Skill
@@ -384,8 +383,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-ant skills delete \
-  --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv >/dev/null
+ant skills delete --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv >/dev/null
 ```
 
 ###  Versioning

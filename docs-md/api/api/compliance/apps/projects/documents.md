@@ -1,133 +1,62 @@
 # Documents
 
-Copy page
+Loading
 
-
+Loading
 
-# Documents
+Loading
 
-##### [Get project document content](api/compliance/apps/projects/documents/retrieve.md)
+Loading
 
-GET/v1/compliance/apps/projects/documents/{document\_id}
+Loading
 
-##### [Get project document metadata](api/compliance/apps/projects/documents/metadata.md)
+Loading
 
-GET/v1/compliance/apps/projects/documents/{document\_id}/metadata
+Loading
 
-##### [Delete project document](api/compliance/apps/projects/documents/delete.md)
+Loading
 
-DELETE/v1/compliance/apps/projects/documents/{document\_id}
+Loading
 
-##### ModelsExpand Collapse
+Loading
 
-
+Loading
 
-DocumentRetrieveResponse object { id, content, created\_at, 2 more } 
+Loading
 
-Project document information for compliance responses.
+Loading
 
-id: string
+Loading
 
-Project document identifier (tagged ID)
+Loading
 
-content: string
+Loading
 
-Document text content
+Loading
 
-created\_at: string
+Loading
 
-Document creation timestamp
+Loading
 
-filename: string
+Loading
 
-Document filename
+Loading
 
-
+Loading
 
-user: object { id, email\_address }  or null
+Loading
 
-The user who created a project or project document.
+Loading
 
-Fields that reference this type are null when the creator's account has
-been deleted or the creator is no longer a member of an organization the
-key may read.
+Loading
 
-id: string
+Loading
 
-User identifier (tagged ID)
+Loading
 
-email\_address: string
+Loading
 
-User's email address
-
-
-
-DocumentMetadataResponse object { id, claude\_project\_id, created\_at, 5 more } 
-
-Project document metadata for GET /v1/compliance/apps/projects/documents/{document\_id}/metadata.
-
-Returns metadata only. Use the sibling endpoint (without `/metadata`)
-to fetch the document text content.
-
-id: string
-
-Project document identifier (tagged ID)
-
-claude\_project\_id: string
-
-The project this document belongs to
-
-created\_at: string
-
-Document creation timestamp
-
-filename: string
-
-Document filename
-
-md5: string
-
-Lowercase hex MD5 of the document content (UTF-8 encoded). Matches the `content` field returned by the sibling content endpoint.
-
-mime\_type: "text/plain"
-
-MIME type of the document content, always plain text
-
-size\_bytes: number
-
-Size in bytes of the document content (UTF-8 encoded)
-
-
-
-user: object { id, email\_address }  or null
-
-The user who created a project or project document.
-
-Fields that reference this type are null when the creator's account has
-been deleted or the creator is no longer a member of an organization the
-key may read.
-
-id: string
-
-User identifier (tagged ID)
-
-email\_address: string
-
-User's email address
-
-
-
-DocumentDeleteResponse object { id, type } 
-
-Response for deleting a project document.
-
-id: string
-
-The ID of the project document that was deleted
-
-type: "claude\_project\_document\_deleted"
-
-Constant string confirming deletion.
+Loading
 
 ---
 

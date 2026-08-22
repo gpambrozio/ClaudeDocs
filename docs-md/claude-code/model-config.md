@@ -68,7 +68,7 @@ In interactive sessions, Claude Code shows a consent prompt before a Fable 5 req
 - Mid-session, Claude Code continues the turn on your default model.
 
 After you choose to continue on Fable 5 using usage credits, Claude Code doesn’t show the prompt again.
-In a session with [Remote Control](remote-control.md) connected, a [background session](agent-view.md), or an [agent team](agent-teams.md) teammate’s session, nobody may be at the terminal, so Claude Code holds the mid-session consent prompt for the [`dialogExpiry`](settings.md) deadline, five minutes by default. If nobody has answered by the deadline, Claude Code ends the turn without sending the request and adds a notice to the transcript, which the Remote Control client also shows. Your model selection is unchanged, and Claude Code asks for consent again on your next message.
+In a session with [Remote Control](remote-control.md) connected, a [background session](agent-view.md), or an [agent team](agent-teams.md) teammate’s session, nobody may be at the terminal, so Claude Code holds the mid-session consent prompt for the [`dialogExpiry`](settings-reference.md) deadline, five minutes by default. If nobody has answered by the deadline, Claude Code ends the turn without sending the request and adds a notice to the transcript, which the Remote Control client also shows. Your model selection is unchanged, and Claude Code asks for consent again on your next message.
 What you can do while the prompt is waiting depends on the session:
 
 - With Remote Control connected or in a teammate’s session, press any key at the terminal to cancel the deadline, and Claude Code waits for your answer.
@@ -98,7 +98,7 @@ The `--model` flag and `ANTHROPIC_MODEL` environment variable apply only to the 
 Prices in the `/model` picker appear when Claude Code talks to the Anthropic API, directly or through an [LLM gateway](llm-gateway.md) that proxies it, and the price on a row is the price of the model that row selects. On [third-party providers](third-party-integrations.md) such as Amazon Bedrock and on the [Claude apps gateway](claude-apps-gateway.md), your provider or gateway determines what you pay, so picker rows show no price. The price is a display label only; it doesn’t affect which model a row selects or what your provider bills. Before v2.1.206, [Claude Platform on AWS](claude-platform-on-aws.md) and gateway sessions showed Anthropic list prices, and a row could show the price of a different model than the one it selected.
 Resumed sessions started with `claude --resume`, `--continue`, or the `/resume` picker keep the model they were using when the transcript was saved, regardless of the current `model` setting. If the restored model has been retired or is excluded by [`availableModels`](#restrict-model-selection), the session falls through to the normal precedence order. This prevents another session’s `/model` choice from changing the model on resume. On providers that use provider-specific deployment IDs rather than Anthropic model IDs, such as Amazon Bedrock, Google Cloud’s Agent Platform, and Microsoft Foundry, the transcript model isn’t restored at all and the session resolves its model through the normal precedence order.
 A model you pick for the new launch with `--model` or `ANTHROPIC_MODEL` still takes precedence over the restored model. As of v2.1.195, so does an [`ANTHROPIC_DEFAULT_OPUS_MODEL`](#environment-variables) family variable. [`ANTHROPIC_DEFAULT_MODEL`](#set-a-default-model-for-new-sessions) can too, under the conditions listed in its section.
-When the active model at startup comes from project or managed settings rather than your own selection, the startup header shows which settings file set it. Run `/model` to override; the project or managed setting reapplies on the next launch. On platforms that embed Claude Code and set [`CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`](env-vars.md), the host’s model configuration takes precedence over managed model settings, while a managed `availableModels` allowlist stays in force unless the host supplies its own; the key-level enumeration is under [Settings precedence](settings.md).
+When the active model at startup comes from project or managed settings rather than your own selection, the startup header shows which settings file set it. Run `/model` to override; the project or managed setting reapplies on the next launch. On platforms that embed Claude Code and set [`CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`](env-vars.md), the host’s model configuration takes precedence over managed model settings, while a managed `availableModels` allowlist stays in force unless the host supplies its own; [Exceptions to managed settings precedence](settings.md) says which keys and variables the host overrides.
 When a model switch is requested through the [Agent SDK](agent-sdk/overview.md) `setModel()` method or by an app such as the [Desktop app](desktop.md) that runs the Claude Code CLI for you, Claude Code checks that the string is one it recognizes before saving it. This check requires Claude Code v2.1.200 or later. On the Anthropic API, Claude Code recognizes:
 
 - a model alias
@@ -155,8 +155,8 @@ When a new session would start on the variable’s model, a session you resume w
 
 ## [​](#restrict-model-selection) Restrict model selection
 
-Enterprise administrators can use `availableModels` in [managed or policy settings](settings.md) to restrict which models users can select. Entries match a model family such as `sonnet`, a version prefix such as `claude-sonnet-4-5`, or a full model ID such as `claude-sonnet-4-5-20250929`.
-On platforms that embed Claude Code and set [`CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`](env-vars.md), the host’s model configuration takes precedence over managed model settings, while a managed `availableModels` allowlist stays in force unless the host supplies its own; the key-level enumeration is under [Settings precedence](settings.md).
+Enterprise administrators can use `availableModels` in [managed or policy settings](managed-settings.md) to restrict which models users can select. Entries match a model family such as `sonnet`, a version prefix such as `claude-sonnet-4-5`, or a full model ID such as `claude-sonnet-4-5-20250929`.
+On platforms that embed Claude Code and set [`CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`](env-vars.md), the host’s model configuration takes precedence over managed model settings, while a managed `availableModels` allowlist stays in force unless the host supplies its own; [Exceptions to managed settings precedence](settings.md) says which keys and variables the host overrides.
 When `availableModels` is set, the allowlist applies everywhere a user can specify a model:
 
 - **Main session model**: `/model`, the `--model` flag, the `ANTHROPIC_MODEL` environment variable, the `model` setting, [`ANTHROPIC_DEFAULT_MODEL`](#set-a-default-model-for-new-sessions), and the model restored when [resuming a session](#setting-your-model)
@@ -201,12 +201,12 @@ Every surface enforces the allowlist it receives. Which delivery mechanism reach
 | Delivery mechanism | CLI and IDE | Desktop local sessions | Web, mobile, and cloud sessions | Agent SDK and non-interactive | Cowork |
 | --- | --- | --- | --- | --- | --- |
 | [Server-managed settings](server-managed-settings.md) from the admin console | Enforced | Enforced | Enforced | Enforced | Not delivered |
-| [MDM or managed settings files](settings.md) | Enforced | Enforced | Not delivered in Anthropic-hosted environments; in [self-hosted environments](self-hosted-environments.md), enforced from the runner image when server-managed settings deliver no keys | Enforced | Enforced where deployed |
+| [MDM or managed settings files](managed-settings.md) | Enforced | Enforced | Not delivered in Anthropic-hosted environments; in [self-hosted environments](self-hosted-environments.md), enforced from the runner image when server-managed settings deliver no keys | Enforced | Enforced where deployed |
 
 - Cloud sessions, on [Claude Code on the web](claude-code-on-the-web.md) or in the Desktop app, run on Anthropic-managed VMs by default: settings deployed to your device do not reach them, so deliver the allowlist through server-managed settings. Sessions your organization routes to a [self-hosted environment](self-hosted-environments.md) run on your own compute and fall back to the managed settings file in the runner image when your organization delivers no server-managed settings; when both exist, the server-managed payload takes precedence, with the per-key `env` merge exception described in [settings precedence](server-managed-settings.md). A mid-session model switch in a cloud session is rejected when the requested model is excluded by the allowlist. Server-side rejection at session creation applies to [organization model restrictions](#organization-model-restrictions), not the `availableModels` settings key.
 - Cowork, the agentic-work tab in the Claude Desktop app, is not a Claude Code surface and does not receive server-managed settings by design. A managed settings file applies to Cowork sessions when it is present where the session runs; remote Cowork sessions run on Anthropic-managed VMs, where a device-deployed file is not present.
 - Sessions on [third-party providers](server-managed-settings.md) such as Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, and [Claude Platform on AWS](claude-platform-on-aws.md) do not receive server-managed settings, so deliver the allowlist through MDM or managed settings files there.
-- Server-managed delivery also requires the session to authenticate with an organization login or a directly configured API key. Fleets that generate keys only through an [`apiKeyHelper`](settings.md) script should deliver the allowlist through MDM or managed settings files.
+- Server-managed delivery also requires the session to authenticate with an [eligible login or key](server-managed-settings.md). Fleets that generate keys only through an [`apiKeyHelper`](settings-reference.md) script should deliver the allowlist through MDM or managed settings files.
 - The Desktop Code tab also hosts [SSH sessions](desktop.md), which read the managed settings file from the remote host they run on. See [Desktop managed settings](desktop.md).
 - The model pickers on claude.ai and in the Desktop app hide or grey out models excluded by your organization’s allowlist. The picker state is a convenience for users; enforcement happens in the session.
 
@@ -228,7 +228,7 @@ Set `enforceAvailableModels: true` alongside a non-empty `availableModels` in ma
 
 The Default option resolves to the account-type default, or to the [organization default model](#organization-default-model) when an admin has set one. When that model is not in the allowlist, the Default option instead resolves to the first `availableModels` entry that names an allowed, available model, and the `/model` picker’s Default row shows that model. This applies everywhere the default is reached: session startup, selecting Default in `/model`, the `"default"` keyword in [fallback model chains](#fallback-model-chains), and the fallback used when an excluded selection is dropped.
 `enforceAvailableModels` remaps the Default option only when `availableModels` is non-empty. With `availableModels: []`, the Default model for the account type remains usable, so the setting cannot lock users out of every model. When `availableModels` is non-empty but no entry resolves to an allowed and available model, enforcement is skipped and Default resolves to the account-type default, with a warning visible only under `--debug`. Keep at least one guaranteed-available entry in the list to avoid this.
-Deploy both keys in the [highest-precedence managed source](settings.md): these keys don’t merge across managed sources, so a pair placed in a managed settings file is ignored when the admin console delivers any settings.
+Deploy both keys in the [highest-precedence managed source](managed-settings.md): these keys don’t merge across managed sources, so a pair placed in a managed settings file is ignored when the admin console delivers any settings.
 
 ### [​](#control-the-model-users-run-on) Control the model users run on
 
@@ -268,7 +268,7 @@ When the [Amazon Bedrock Mantle endpoint](amazon-bedrock.md) is enabled, entries
 
 Organization admins on Claude Enterprise plans restrict which models members can run by disabling individual models in the claude.ai admin console. This restriction is delivered with the account’s entitlements when Claude Code authenticates, separate from any `availableModels` list in settings, and the server enforces the same restriction independently when a session is created. Requires Claude Code v2.1.187 or later.
 The restriction applies when a member signs in or uses their own API key. Organization-scoped credentials, such as organization service keys, are not tied to a user, so the restriction does not apply to them.
-The Claude Console has no model restriction control. Organizations without a Claude Enterprise plan, including those whose members authenticate through the Anthropic API, restrict models with [`availableModels`](#restrict-model-selection) in [managed settings](settings.md) instead, adding [`enforceAvailableModels`](#enforce-the-allowlist-for-the-default-model) to cover the Default option. These settings are enforced by Claude Code itself, not by the server.
+The Claude Console has no model restriction control. Organizations without a Claude Enterprise plan, including those whose members authenticate through the Anthropic API, restrict models with [`availableModels`](#restrict-model-selection) in [managed settings](managed-settings.md) instead, adding [`enforceAvailableModels`](#enforce-the-allowlist-for-the-default-model) to cover the Default option. These settings are enforced by Claude Code itself, not by the server.
 A restricted model is hidden from the `/model` picker. Selecting it by name with `--model`, the `ANTHROPIC_MODEL` environment variable, or the `model` setting shows the notice `Model "<name>" is restricted by your organization's settings. Using <model> instead.` and the session starts on an allowed model. Typing `/model <name>` for a restricted model is rejected with `Model '<name>' is restricted by your organization's settings. Run /model to choose a different model.` and the session keeps its current model.
 A [model family alias](#restrict-model-selection) such as `opus` resolves to the newest version of its family that the organization permits, with the same substitution notice. `/model <alias>` is rejected only when every version of its family is restricted; an alias set with `--model`, `ANTHROPIC_MODEL`, or the `model` setting is still replaced at startup in that case. Before v2.1.205, a family alias was substituted or rejected based on its newest released version alone, even when an older version was allowed.
 Restrictions apply org-wide or per role:
@@ -287,7 +287,7 @@ The Default row in the `/model` picker shows the organization default’s name w
 The organization default is a starting point, not a restriction. These selections take precedence over it:
 
 - the `--model` flag and the `ANTHROPIC_MODEL` environment variable
-- a `model` value in [managed settings](settings.md) or supplied through `--settings`
+- a `model` value in [managed settings](managed-settings.md) or supplied through `--settings`
 - a `model` value in your user, project, or local settings, including a model you save with `/model`
 
 Admins can also configure the organization default to override user selection. With override on, it takes precedence over the `model` value in user, project, and local settings, so a model you save with `/model` applies for the current session and the organization default returns on the next launch. When your selection differs, `/model` shows `Your organization's default (<model>) applies on restart`. The `--model` flag, `ANTHROPIC_MODEL`, managed settings, and `--settings` still take precedence even with override on. Override is available to a limited set of organizations; ask your Anthropic account team about availability.
@@ -301,7 +301,7 @@ The organization default passes through these restriction checks before it is ad
 - an organization default that isn’t available to your account at all, such as Fable 5 under [zero data retention](zero-data-retention.md), is skipped, and the Default option resolves as it would [without an organization default](#default-model-setting)
 
 As of v2.1.199, when the organization default is a different model family from your account type’s usual default, the `/model` picker keeps a separate row for that usual family, so you can still switch to it for a session. In v2.1.196 through v2.1.198 that row is missing from the picker.
-The organization default reaches only sessions authenticated with the Anthropic API. To set a default anywhere else, including [LLM gateway](llm-gateway.md) deployments, use the `model` key in [managed settings](settings.md) instead.
+The organization default reaches only sessions authenticated with the Anthropic API. To set a default anywhere else, including [LLM gateway](llm-gateway.md) deployments, use the `model` key in [managed settings](managed-settings.md) instead.
 
 ## [​](#organization-effort-limits) Organization effort limits
 
@@ -383,7 +383,7 @@ To check whether customizations are the trigger, start a session with `claude --
 
 #### [​](#ask-before-switching) Ask before switching
 
-To decide what happens each time a request is flagged, rather than switching automatically, run `/config` and turn off **Switch models when a message is flagged**, or set [`switchModelsOnFlag`](settings.md) to `false` in your settings file. A flagged request then pauses the session with two options: switch to the fallback model, or edit the prompt and retry on the current model.
+To decide what happens each time a request is flagged, rather than switching automatically, run `/config` and turn off **Switch models when a message is flagged**, or set [`switchModelsOnFlag`](settings-reference.md) to `false` in your settings file. A flagged request then pauses the session with two options: switch to the fallback model, or edit the prompt and retry on the current model.
 Some cases behave differently:
 
 - When the flagged category has no fallback model, such as a biology flag on Opus 5, Claude Code doesn’t show the prompt and the request ends with the refusal.
@@ -425,12 +425,12 @@ When you first run Fable 5, Opus 4.8, or Opus 4.7, Claude Code applies that mode
 A level you pick from the effort control on a phone or browser connected through [Remote Control](remote-control.md) applies to that session only.
 
 A level set with `/effort` in [non-interactive mode](headless.md), with the `-p` flag, applies to the current session only and isn’t saved as your default. It also can’t release the model-default hold: while the hold is in force, a non-interactive `/effort` reports `Not applied`, so pass `--effort` at launch instead.
-The `/effort` menu also offers `ultracode`. Ultracode is a Claude Code setting rather than a model effort level: it sends `xhigh` to the model and additionally has Claude orchestrate [dynamic workflows](workflows.md) for substantive tasks. It applies to the current session only.
+The `/effort` menu also offers `ultracode`. Ultracode is a Claude Code setting rather than a model effort level: it sends `xhigh` to the model and additionally has Claude orchestrate [dynamic workflows](workflows.md) for substantive tasks. For where it can be set persistently, see the [`ultracode`](settings-reference.md) setting.
 You can turn on ultracode through any of the following:
 
 - **`/effort`**: run `/effort ultracode`, or select it from the menu
 - **`--effort` flag**: launch with `claude --effort ultracode`, which starts the session at `xhigh` effort with ultracode on
-- **`--settings` or an Agent SDK control request**: pass `"ultracode": true`. An [`applyFlagSettings()`](agent-sdk/typescript.md) request also accepts `effortLevel: "ultracode"`
+- **`ultracode` setting**: set [`"ultracode": true`](settings-reference.md) in a settings file, with `--settings`, or in an Agent SDK control request. An [`applyFlagSettings()`](agent-sdk/typescript.md) request also accepts `effortLevel: "ultracode"`
 
 Passing `ultracode` to the `--effort` flag or the Agent SDK `effortLevel` value requires Claude Code v2.1.203 or later. Before v2.1.203, `--effort ultracode` printed `Unknown --effort value 'ultracode'` and the session started at the default effort.
 The persisted `effortLevel` setting and the `CLAUDE_CODE_EFFORT_LEVEL` environment variable don’t accept `ultracode`. When `CLAUDE_CODE_EFFORT_LEVEL` is set to a level other than `xhigh`, requests run at that level and ultracode’s workflow orchestration stays inactive. Selecting ultracode then shows a warning that the environment variable overrides effort for the session.
@@ -447,7 +447,7 @@ Each level trades token spend against capability. The default suits most coding 
 | `high` | Balances token usage and intelligence. The default on every model except Opus 4.7 |
 | `xhigh` | Deeper reasoning at higher token spend. The default on Opus 4.7 |
 | `max` | Can improve performance on demanding tasks but may show diminishing returns and is prone to overthinking. Test before adopting broadly |
-| `ultracode` | A Claude Code setting that plans a [dynamic workflow](workflows.md) for each substantive task with `xhigh` per-message reasoning. Session-only |
+| `ultracode` | A Claude Code setting that plans a [dynamic workflow](workflows.md) for each substantive task with `xhigh` per-message reasoning |
 
 The effort scale is calibrated per model, so the same level name does not represent the same underlying value across models.
 
@@ -463,12 +463,12 @@ You can change effort through any of the following:
 - **In `/model`**: use left/right arrow keys to adjust the effort slider when selecting a model
 - **`--effort` flag**: pass a level name to set it for a single session when launching Claude Code
 - **Environment variable**: set `CLAUDE_CODE_EFFORT_LEVEL` to a level name or `auto`
-- **Settings**: set `effortLevel` to `low`, `medium`, `high`, or `xhigh` in your settings file. `max` and `ultracode` are [session-only](#adjust-effort-level) and are not accepted here
+- **Settings**: set `effortLevel` to `low`, `medium`, `high`, or `xhigh` in your settings file. `max` isn’t accepted here, and `ultracode` has its own [`ultracode`](settings-reference.md) key
 - **From a connected device**: in a [Remote Control](remote-control.md) session, pick a level from the effort control on your phone or in your browser. The level applies to the current session only. Requires Claude Code v2.1.234 or later
 - **Skill and subagent frontmatter**: set `effort` in a [skill](skills.md) or [subagent](sub-agents.md) markdown file to override the effort level when that skill or subagent runs
 
 The environment variable takes precedence over all other methods, then your configured level, then the model default. Frontmatter effort applies when that skill or subagent is active, overriding the session level but not the environment variable.
-The `effortLevel` key in [managed settings](settings.md) is a starting default, not enforcement: users can change it for a session with `/effort` or `--effort`, and the managed value re-asserts as the default in new sessions.
+The `effortLevel` key in [managed settings](managed-settings.md) is a starting default, not enforcement: users can change it for a session with `/effort` or `--effort`, and the managed value re-asserts as the default in new sessions.
 The effort slider appears in `/model` when a supported model is selected. The current effort level is also shown in the session header next to the model name, for example “with low effort”, so you can confirm which setting is active without opening `/model`. The footer also briefly shows the effort level at startup and when it changes.
 
 #### [​](#adaptive-reasoning-and-fixed-thinking-budgets) Adaptive reasoning and fixed thinking budgets
@@ -538,7 +538,7 @@ The auto-compact window is how full the context window can get before Claude Cod
 
 You can set the auto-compact window in three places:
 
-- **For this session and later ones**: run `/autocompact` with a value, like `/autocompact 500k`. Claude Code saves it to your user settings as [`autoCompactWindow`](settings.md) and applies it to the current session; if a higher-priority [settings scope](settings.md) such as managed settings sets the key, the command saves your value but the session keeps that scope’s window, and the command says so. Run `/autocompact auto` to return to the window tuned for your model.
+- **For this session and later ones**: run `/autocompact` with a value, like `/autocompact 500k`. Claude Code saves it to your user settings as [`autoCompactWindow`](settings-reference.md) and applies it to the current session; if a higher-priority [settings scope](settings.md) such as managed settings sets the key, the command saves your value but the session keeps that scope’s window, and the command says so. Run `/autocompact auto` to return to the window tuned for your model.
 - **For one launch**: pass [`--autocompact`](cli-reference.md) when starting Claude Code. The flag overrides your saved setting for that launch without changing it, and `claude --autocompact auto` runs the session at the tuned window even if your saved setting has a value. Unlike `/autocompact`, the flag isn’t preempted by a higher-priority settings scope such as managed settings.
 - **In scripts and cloud environments**: set [`CLAUDE_CODE_AUTO_COMPACT_WINDOW`](env-vars.md). While it’s set, it takes precedence over the command, the flag, and the setting, and `/autocompact` reports the override instead of changing the window.
 
@@ -637,7 +637,7 @@ The `[1m]` suffix applies the 1M context window to all usage of the `opus` and `
 - Only append `[1m]` when the underlying model [supports 1M context](build-with-claude/context-windows.md).
 - The suffix is read per variable, not per model. On Amazon Bedrock, Google Cloud’s Agent Platform, and Microsoft Foundry, a model ID without `[1m]` in one variable uses 200K context even if another variable sets the same model with the suffix. Sonnet 5 always runs with the 1M window on these providers and never needs the suffix.
 
-An `availableModels` allowlist delivered through [MDM or a managed settings file](settings.md) still applies when using third-party providers; [server-managed settings are not delivered there](server-managed-settings.md). Filtering matches on a model alias such as `opus`, a version prefix such as `claude-opus-4-8`, or the full provider-form model ID. Provider-specific prefixes such as `us.anthropic.` are not stripped, so to allow a specific model, list the same provider-form ID the picker shows, or map it through [`modelOverrides`](#override-model-ids-per-version). Any `[1m]` suffix is stripped from both the allowlist entry and the requested model before matching.
+An `availableModels` allowlist delivered through [MDM or a managed settings file](managed-settings.md) still applies when using third-party providers; [server-managed settings are not delivered there](server-managed-settings.md). Filtering matches on a model alias such as `opus`, a version prefix such as `claude-opus-4-8`, or the full provider-form model ID. Provider-specific prefixes such as `us.anthropic.` are not stripped, so to allow a specific model, list the same provider-form ID the picker shows, or map it through [`modelOverrides`](#override-model-ids-per-version). Any `[1m]` suffix is stripped from both the allowlist entry and the requested model before matching.
 
 ### [​](#customize-pinned-model-display-and-capabilities) Customize pinned model display and capabilities
 
@@ -674,7 +674,7 @@ export ANTHROPIC_DEFAULT_OPUS_MODEL_SUPPORTED_CAPABILITIES='effort,xhigh_effort,
 
 ### [​](#override-model-ids-per-version) Override model IDs per version
 
-On platforms that embed Claude Code and set [`CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`](env-vars.md), the host’s model configuration takes precedence over managed model settings, while a managed `availableModels` allowlist stays in force unless the host supplies its own; the key-level enumeration is under [Settings precedence](settings.md).
+On platforms that embed Claude Code and set [`CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`](env-vars.md), the host’s model configuration takes precedence over managed model settings, while a managed `availableModels` allowlist stays in force unless the host supplies its own; [Exceptions to managed settings precedence](settings.md) says which keys and variables the host overrides.
 The family-level environment variables above configure one model ID per family alias. If you need to map several versions within the same family to distinct provider IDs, use the `modelOverrides` setting instead.
 `modelOverrides` maps individual Anthropic model IDs to the provider-specific strings that Claude Code sends to your provider’s API. When a user selects a mapped model in the `/model` picker, Claude Code uses your configured value instead of the built-in default.
 This lets enterprise administrators route each model version to a specific Amazon Bedrock inference profile ARN, Google Cloud’s Agent Platform version name, or Microsoft Foundry deployment name for governance, cost allocation, or regional routing.
@@ -695,7 +695,7 @@ To stop the `[claude-code:unrecognized_model]` [diagnostic line](errors.md) for 
 Overrides replace the built-in model IDs that back each entry in the `/model` picker. On Amazon Bedrock, `modelOverrides` entries take precedence over any inference profiles that Claude Code discovers automatically at startup. Claude Code passes values that are already provider-native, such as Amazon Bedrock inference profile ARNs or Microsoft Foundry deployment names, to the provider as-is.
 Overrides also apply when you pass an Anthropic model ID directly through `--model`, the `ANTHROPIC_MODEL` environment variable, or an `ANTHROPIC_DEFAULT_*_MODEL` environment variable. On Amazon Bedrock, Google Cloud’s Agent Platform, and [Mantle](amazon-bedrock.md), an Anthropic model ID with no `modelOverrides` entry resolves to the same provider-specific ID as the `/model` picker row for that version, when the provider supports that version. Mantle supports a subset of versions. For an Anthropic model ID outside that subset, Claude Code sends the raw ID to Mantle without mapping it, unless a `modelOverrides` entry covers it. Before v2.1.200, `--model` and the environment-variable values reached the provider as-is without going through the override map.
 `modelOverrides` works alongside `availableModels`. The allowlist is evaluated against the Anthropic model ID, not the override value, so an entry like `"opus"` in `availableModels` continues to match even when Opus versions are mapped to ARNs. When `enforceAvailableModels` is set in managed settings, the enforced Default resolves through `modelOverrides` from the [highest-precedence managed source](server-managed-settings.md) only. An admin’s mapping, such as a version pinned to an inference profile ARN, is honored in the enforced Default. Overrides from user or project settings do not affect it.
-When `availableModels` is set in [managed settings](settings.md), only `modelOverrides` from that managed source apply to an Anthropic model ID passed directly through `--model` or the environment variables above. Claude Code ignores overrides in user or project settings for those IDs, and never resolves an ID the managed list excludes through `modelOverrides` from any settings source. This managed-source restriction requires Claude Code v2.1.200 or later. See [Restrict model selection](#restrict-model-selection) for how blocked IDs are handled.
+When `availableModels` is set in [managed settings](managed-settings.md), only `modelOverrides` from that managed source apply to an Anthropic model ID passed directly through `--model` or the environment variables above. Claude Code ignores overrides in user or project settings for those IDs, and never resolves an ID the managed list excludes through `modelOverrides` from any settings source. This managed-source restriction requires Claude Code v2.1.200 or later. See [Restrict model selection](#restrict-model-selection) for how blocked IDs are handled.
 
 ### [​](#prompt-caching-configuration) Prompt caching configuration
 

@@ -122,12 +122,12 @@ CLIPython
 ```shiki
 import anthropic
 import base64
-import httpx
+import httpx2
 
 # Option 1: Base64-encoded image
 image_url = "https://platform.claude.com/docs/images/vision-example.jpg"
 image_media_type = "image/jpeg"
-image_data = base64.standard_b64encode(httpx.get(image_url).content).decode("utf-8")
+image_data = base64.standard_b64encode(httpx2.get(image_url).content).decode("utf-8")
 
 message = anthropic.Anthropic().messages.create(
     model="claude-opus-5",

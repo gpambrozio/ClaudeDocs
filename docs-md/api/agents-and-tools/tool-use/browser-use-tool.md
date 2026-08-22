@@ -12,7 +12,7 @@ With browser use, Claude reads and acts on live webpages, so everything a page s
 
 ##  Quick start
 
-The browser use tool is generally available on the Claude API with no beta header: add one entry of type `browser_toolset_20260801`, with no `name`, to the `tools` array of a [Messages API](api/messages/create.md) request.
+The browser use tool is available on the Claude API with no beta header: add one entry of type `browser_toolset_20260801`, with no `name`, to the `tools` array of a [Messages API](api/messages/create.md) request.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 

@@ -24,8 +24,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-ant skills create \
-  --file example_skill.zip
+ant skills create --file example_skill.zip
 ```
 
 To list, retrieve, delete, and version custom skills, see [Managing custom skills](build-with-claude/skills-guide.md). For the full request and response schemas, see the [Create Skill API reference](api/skills/create.md). Skill bundles upload directly to the Skills API rather than through the [Files API](build-with-claude/files.md).

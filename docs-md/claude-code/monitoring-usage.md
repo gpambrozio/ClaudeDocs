@@ -34,7 +34,7 @@ For full configuration options, see the [OpenTelemetry specification](https://gi
 
 ## [​](#administrator-configuration) Administrator configuration
 
-Administrators can configure OpenTelemetry settings for all users through the [managed settings file](settings.md). See the [settings precedence](settings.md) for more information about how settings are applied.
+Administrators can configure OpenTelemetry settings for all users through the [managed settings file](managed-settings.md). See the [settings precedence](settings.md) for more information about how settings are applied.
 Example managed settings configuration:
 
 ```shiki
@@ -59,7 +59,7 @@ When you set an `OTEL_EXPORTER_OTLP_*` variable in managed settings, Claude Code
 - **Endpoints**: when you set `OTEL_EXPORTER_OTLP_ENDPOINT`, Claude Code removes every developer-set per-signal endpoint. Developers can’t point one signal at a different collector, so you don’t need to also set the per-signal endpoint variables in managed settings.
 - **Protocols**: when you set `OTEL_EXPORTER_OTLP_PROTOCOL`, Claude Code removes every developer-set per-signal protocol.
 - **Credentials**: when you set `OTEL_EXPORTER_OTLP_HEADERS`, `OTEL_EXPORTER_OTLP_CLIENT_KEY`, or `OTEL_EXPORTER_OTLP_CLIENT_CERTIFICATE`, Claude Code removes the developer-set per-signal versions of that variable, plus every developer-set endpoint variable, generic or per-signal, since those credentials would otherwise reach a collector the managed settings didn’t choose.
-- **Exporter selectors**: `OTEL_METRICS_EXPORTER`, `OTEL_LOGS_EXPORTER`, and the beta `OTEL_TRACES_EXPORTER` follow normal per-key precedence. A developer’s setting can still disable a signal or switch it to the console exporter, so set the selectors in managed settings too if you need them locked. Across [admin sources](settings.md), `OTEL_LOGS_EXPORTER` follows the [telemetry unit](server-managed-settings.md) while the other two selectors merge per key. Requires Claude Code v2.1.223 or later.
+- **Exporter selectors**: `OTEL_METRICS_EXPORTER`, `OTEL_LOGS_EXPORTER`, and the beta `OTEL_TRACES_EXPORTER` follow normal per-key precedence. A developer’s setting can still disable a signal or switch it to the console exporter, so set the selectors in managed settings too if you need them locked. Across [admin sources](managed-settings.md), `OTEL_LOGS_EXPORTER` follows the [telemetry unit](server-managed-settings.md) while the other two selectors merge per key. Requires Claude Code v2.1.223 or later.
 
 Claude Code doesn’t remove per-signal variables that you set in managed settings itself, so you can route one signal to a different collector by setting its variable there, as the [SIEM example](#send-events-to-a-siem) does. If you set a per-signal credential there, Claude Code removes the developer-set endpoint for that signal.
 This removal behavior changes where telemetry is delivered, not what Claude Code collects.
@@ -1029,9 +1029,9 @@ Logged when a session quality survey is shown or answered. See [Session quality 
 
 #### [​](#retention-sweep-event) Retention sweep event
 
-Logged once per run of the retention cleanup sweep, which deletes [session transcripts and other application data](claude-directory.md) older than the [`cleanupPeriodDays`](settings.md) setting. Claude Code runs the sweep in the background at most once per session, and a run that deletes nothing still emits the event. If Claude Code ran the sweep in any session on the same machine in the last 24 hours, it delays this session’s sweep by at least 10 minutes, so a session that exits sooner emits nothing. When you run `claude -p` with `--bare`, Claude Code doesn’t run the sweep and emits nothing.
+Logged once per run of the retention cleanup sweep, which deletes [session transcripts and other application data](claude-directory.md) older than the [`cleanupPeriodDays`](settings-reference.md) setting. Claude Code runs the sweep in the background at most once per session, and a run that deletes nothing still emits the event. If Claude Code ran the sweep in any session on the same machine in the last 24 hours, it delays this session’s sweep by at least 10 minutes, so a session that exits sooner emits nothing. When you run `claude -p` with `--bare`, Claude Code doesn’t run the sweep and emits nothing.
 Like every OTel event on this page, it goes only to the telemetry backend you configure. Requires Claude Code v2.1.227 or later.
-When Claude Code can’t safely determine the retention period, it pauses the sweep and emits the event with `result` set to `"skipped"` and a `skip_reason`. When [managed settings](server-managed-settings.md) set `cleanupPeriodDays`, the managed value pins the retention period and the sweep runs even when a settings file in a lower-priority scope is broken or invalid; a managed settings file that itself can’t be read or parsed still pauses the sweep. The deletion counter attributes are present only when `result` is `"complete"`.
+When Claude Code can’t safely determine the retention period, it pauses the sweep and emits the event with `result` set to `"skipped"` and a `skip_reason`. When [managed settings](server-managed-settings.md) set `cleanupPeriodDays`, the managed value pins the retention period and the sweep runs even when a settings file in a lower-priority scope is broken or invalid. When `managed-settings.json` itself can’t be read or parsed, Claude Code still pauses the sweep unless the [managed source it selects](server-managed-settings.md) supplies `cleanupPeriodDays` from elsewhere, such as server-managed settings or a `managed-settings.d/` drop-in beside the broken file. The deletion counter attributes are present only when `result` is `"complete"`.
 **Event Name**: `claude_code.retention_sweep`
 **Attributes**:
 

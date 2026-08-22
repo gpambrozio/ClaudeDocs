@@ -145,7 +145,7 @@ and attach logs/session.log to it
 
 Three restrictions apply to uploads:
 
-- **Permissions**: Claude can upload a file only when the session is allowed to read it, so [permission rules](settings.md) that deny `Read` access to a file also block uploading it.
+- **Permissions**: Claude can upload a file only when the session is allowed to read it, so [permission rules](settings-reference.md) that deny `Read` access to a file also block uploading it.
 - **Size**: a single upload can include up to 10 MB of files in total.
 - **Hard links**: Claude refuses files that have multiple hard links, which is common inside package-manager stores like `node_modules`. Copy the file and upload the copy.
 

@@ -202,7 +202,7 @@ Claude supports JPEG, PNG, GIF, and WebP images (`image/jpeg`, `image/png`, `ima
 
 Claude views images in patches instead of pixels. Each patch is a 28×28-pixel block of the image, referred to as a visual token. An image, therefore, costs `⌈width / 28⌉ × ⌈height / 28⌉` visual tokens.
 
-Each model has a maximum native image resolution, expressed as a long-edge limit and a visual-token limit. Images larger than either limit are downscaled before processing; see [How Claude resizes and pads images](build-with-claude/vision-coordinates.md) for the exact rule. The exception is screenshots and zoom images that you return to the [computer use](agents-and-tools/tool-use/computer-use-tool.md) and [browser use](agents-and-tools/tool-use/browser-use-tool.md) toolsets: the API rejects a `tool_result` image that exceeds the model's limits with a validation error instead of downscaling it, so resize those images in your application before returning them.
+Each model has a maximum native image resolution, expressed as a long-edge limit and a visual-token limit. Images larger than either limit are downscaled before processing; see [How Claude resizes and pads images](build-with-claude/vision-coordinates.md) for the exact rule. The exception is screenshots and zoom images that you return to the [computer use](agents-and-tools/tool-use/computer-use-tool.md) and [browser use](agents-and-tools/tool-use/browser-use-tool.md) toolsets: the API rejects a `tool_result` image that exceeds the model's limits with a validation error instead of downscaling it, so resize those images in your application before returning them. To have any other oversized image rejected with an error instead of downscaled, set the image block's [`transformations` field](build-with-claude/vision-coordinates.md).
 
 | Resolution tier | Models | Max long edge | Max visual tokens |
 | --- | --- | --- | --- |
@@ -234,7 +234,7 @@ When providing images to Claude, keep the following in mind for best results:
 
 - **Image clarity:** Ensure images are clear and not too blurry or pixelated.
 - **Text:** If the image contains important text, make sure it's legible and not too small. Avoid cropping out key visual context solely to enlarge the text.
-- **Resizing:** Take into account that your image might be resized if it is too large (see [Resolution and token cost](#evaluate-image-size)); this might, for example, make text less legible. Consider pre-resizing your images, cropping them, or both.
+- **Resizing:** Take into account that your image might be resized if it is too large (see [Resolution and token cost](#evaluate-image-size)); this might, for example, make text less legible. Consider pre-resizing your images, cropping them, or both. To have an oversized image rejected with an error instead of resized (important for [coordinate workflows](build-with-claude/vision-coordinates.md)), mark the image block with [`"oversized_image": "error"`](build-with-claude/vision-coordinates.md).
 - **Image compression:** Compressing images before sending them, using a lossy format such as JPEG or WebP (lossy mode), can reduce latency by reducing the size of requests. However, this can introduce artifacts that are detrimental to model performance, especially when multiple compression passes are applied. For example, heavy JPEG compression can make text difficult to read. Confirm your compression settings are appropriate for the task by inspecting the actual images sent to the API.
 
 ---

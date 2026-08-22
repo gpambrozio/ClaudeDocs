@@ -18,7 +18,7 @@ This page covers the web product itself:
 
 ## [​](#cloud-environments) Cloud environments
 
-Every cloud session runs in a [cloud environment](cloud-environments.md), the saved configuration that controls network access, environment variables, and setup scripts. When you onboard, Claude Code sets up a **Default** environment with [**Trusted** network access](cloud-environments.md). See [The Default environment](cloud-environments.md) for how it’s created and how sessions choose an environment when you have more than one.
+Every cloud session runs in a [cloud environment](cloud-environments.md), the saved configuration that controls network access, environment variables, and setup scripts. If you don’t have an environment yet when you onboard, Claude Code sets up a **Default** environment with [**Trusted** network access](cloud-environments.md). See [The Default environment](cloud-environments.md) for how it’s created and how sessions choose an environment when you have more than one.
 The same environments apply wherever you start a cloud session: the web, the terminal, [Claude Tag](https://claude.com/docs/claude-tag/overview), [routines](routines.md), and the mobile and Desktop apps. Claude Tag channel sessions use [organization-shared environments](cloud-environments.md) only.
 See [Configure cloud environments](cloud-environments.md) to change what an environment allows, set variables, or add a setup script, and [Installed tools](cloud-environments.md) for what sessions include without any configuration.
 
@@ -305,7 +305,7 @@ Before relying on cloud sessions for a workflow, account for these constraints:
 - [Ultrareview](ultrareview.md): run a deep multi-agent code review in a cloud sandbox
 - [Routines](routines.md): automate work on a schedule, via API call, or in response to GitHub events
 - [Hooks configuration](hooks.md): run scripts at session lifecycle events
-- [Settings reference](settings.md): all configuration options
+- [Settings reference](settings-reference.md): all configuration options
 - [Security](security.md): isolation guarantees and data handling
 - [Data usage](data-usage.md): what Anthropic retains from cloud sessions
 - [Claude Tag](https://claude.com/docs/claude-tag/overview): an organization-managed @Claude in Slack that runs on the same cloud infrastructure

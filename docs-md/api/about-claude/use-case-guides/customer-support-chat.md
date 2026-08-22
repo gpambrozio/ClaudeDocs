@@ -9,7 +9,7 @@
 To follow this guide, you need:
 
 - A Claude API key (set as the `ANTHROPIC_API_KEY` environment variable)
-- Python 3.9 or later
+- Python 3.10 or later
 
 Install the required packages:
 

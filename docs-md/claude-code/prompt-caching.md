@@ -35,8 +35,17 @@ Caching happens server-side, in whichever infrastructure serves your model. Wher
 - **Microsoft Foundry**: depends on the deployment’s [hosting option](build-with-claude/claude-in-microsoft-foundry.md). Hosted on Azure deployments are served on Azure infrastructure; Hosted on Anthropic deployments are served on Anthropic’s infrastructure
 - **Custom `ANTHROPIC_BASE_URL` or [LLM gateway](llm-gateway.md)**: the cache lives wherever your requests are forwarded, and whether caching works depends on the gateway
 
-System context that Claude Code appends mid-conversation, such as file-change notices, is cached on Amazon Bedrock and its [Mantle endpoint](amazon-bedrock.md), Google Cloud’s Agent Platform, and Microsoft Foundry the same way it is on the Claude API. Before v2.1.211, these providers billed that appended system context as uncached input tokens on every request.
-When your requests pass through an [LLM gateway](llm-gateway.md) or a custom `ANTHROPIC_BASE_URL`, Claude Code marks that appended system context for caching the same way, and whether the cache takes effect depends on the gateway. If the gateway rejects the [cache breakpoint](build-with-claude/prompt-caching.md) on that block, Claude Code retries the request without it and leaves that block uncached for the rest of the conversation.
+Claude Code also appends system context mid-conversation, such as file-change notices. Whether that block is cached depends on how your requests reach the provider.
+At the provider’s own endpoint, Amazon Bedrock and its [Mantle endpoint](amazon-bedrock.md), Google Cloud’s Agent Platform, and Microsoft Foundry cache the block the same way the Claude API does. For Bedrock, Mantle, and Agent Platform, that means their base-URL variables are unset. For Foundry, it means `ANTHROPIC_FOUNDRY_BASE_URL` is unset or points at your resource’s `services.ai.azure.com` host, the standard [Microsoft Foundry setup](microsoft-foundry.md). Before v2.1.211, these providers billed the block as uncached input tokens on every request.
+Claude Code doesn’t mark the block for caching, so it shows up as uncached input on every request, in any of these setups:
+
+- [`ANTHROPIC_BEDROCK_BASE_URL`](env-vars.md), `ANTHROPIC_VERTEX_BASE_URL`, or `ANTHROPIC_BEDROCK_MANTLE_BASE_URL` set to any value, even the provider’s own endpoint
+- `ANTHROPIC_FOUNDRY_BASE_URL` pointing at a host outside `services.ai.azure.com`, such as a gateway
+- [`ANTHROPIC_AWS_BASE_URL`](env-vars.md) set to any value on [Claude Platform on AWS](claude-platform-on-aws.md), including a custom-region endpoint
+- An [LLM gateway](llm-gateway.md) or a custom `ANTHROPIC_BASE_URL`
+- A [Claude apps gateway](claude-apps-gateway.md) session
+
+Claude Code keeps the conversation’s own [cache breakpoints](build-with-claude/prompt-caching.md) in place, so a gateway that forwards them still caches your conversation. Before v2.1.237, Claude Code marked the block for caching through gateways too, and a gateway that silently removed the marker left the entire conversation billed as uncached input on every turn.
 For what each provider stores and processes, see [data usage](data-usage.md). Wherever the cache lives, entries expire after a period of inactivity, and [Cache lifetime](#cache-lifetime) below covers the TTL and how to extend it.
 
 ## [​](#actions-that-invalidate-the-cache) Actions that invalidate the cache
@@ -55,11 +64,7 @@ These actions cause the next request to miss part or all of the cache. You see a
 ### [​](#switching-models) Switching models
 
 Each model has its own cache. Switching with [`/model`](model-config.md) means the next request reads the entire conversation history with no cache hits, even though the content is identical.
-When you run `/model` at the terminal, Claude Code asks you to confirm the switch only while the current cache hasn’t expired. Whether the cache has expired depends on how long it has been since Claude Code last sent a request in this conversation or Claude last responded:
-
-- **Less than one [cache TTL](#cache-lifetime) ago**: the cache is still warm.
-- **One cache TTL or longer ago**: the cache has already expired, so Claude Code switches without asking.
-
+When you run `/model` at the terminal, Claude Code asks you to confirm the switch only while the cache is still warm. The cache stays warm for one [cache TTL](#cache-lifetime) after Claude Code last sent a request in this conversation or Claude last responded. Once that time passes, the cache has expired, so Claude Code switches without asking.
 Before v2.1.238, Claude Code didn’t check the cache TTL and asked even after the cache had expired.
 The [`opusplan` model setting](model-config.md) resolves to Opus during plan mode and Sonnet during execution, so each plan-mode toggle is a model switch and starts a fresh cache.
 [Automatic model fallback](model-config.md) on Fable 5 and Opus 5 is also a model switch. When a safety classifier flags a request and the flagged category has a fallback model, Claude Code re-runs the request on that model and the session continues there.
@@ -118,7 +123,7 @@ When you disable a plugin you enabled earlier in the session, Claude Code restor
 
 ### [​](#denying-an-entire-tool) Denying an entire tool
 
-Adding a bare tool name like `Bash` or `WebFetch` as a [deny rule](permissions.md) removes that tool from Claude’s context entirely. Built-in tool definitions load into the system prompt layer, so adding or removing one of these rules mid-session invalidates the cache. Claude Code applies the change on the next request, even one in the middle of a turn, whether you add the rule through `/permissions` or by [editing a settings file directly](settings.md).
+Adding a bare tool name like `Bash` or `WebFetch` as a [deny rule](permissions.md) removes that tool from Claude’s context entirely. Claude Code loads built-in tool definitions into the system prompt layer, so adding or removing one of these rules mid-session invalidates the cache. Claude Code applies the change on the next request, whether you add the rule through `/permissions` or by [editing a settings file directly](settings.md). That includes a rule you add through `/permissions` in the middle of a turn.
 Only a deny rule that matches in the tool-name position has this effect: a bare tool name, the equivalent `Bash(*)` form, or a [tool-name glob](permissions.md) like `"*"`. A glob that matches only MCP tools, such as `"mcp__*"`, removes those tools the same way but leaves the cache intact when the matched tools are [deferred](#connecting-or-disconnecting-an-mcp-server), the default, since deferred definitions were never in the cached prefix. Scoped deny rules like `Bash(rm *)`, and all allow and ask rules, don’t change which tools Claude sees. Claude Code checks them when Claude attempts a call, leaving the prefix intact.
 
 ### [​](#compacting-the-conversation) Compacting the conversation
@@ -196,7 +201,7 @@ On Amazon Bedrock, prompt caching support, minimum cacheable prefix length, and 
 
 ### [​](#override-the-ttl) Override the TTL
 
-Set `FORCE_PROMPT_CACHING_5M=1` to force the five-minute TTL regardless of authentication. This is useful when you’re debugging cache behavior, comparing the two TTLs, or overriding an `ENABLE_PROMPT_CACHING_1H` set in [managed settings](settings.md).
+Set `FORCE_PROMPT_CACHING_5M=1` to force the five-minute TTL regardless of authentication. This is useful when you’re debugging cache behavior, comparing the two TTLs, or overriding an `ENABLE_PROMPT_CACHING_1H` set in [managed settings](managed-settings.md).
 
 ## [​](#cache-scope) Cache scope
 
@@ -234,7 +239,7 @@ Disabling caching is occasionally useful when debugging caching behavior with a 
 | `DISABLE_PROMPT_CACHING_OPUS` | Disable for Opus only |
 | `DISABLE_PROMPT_CACHING_FABLE` | Disable for Fable only |
 
-To set caching policy across an organization, put any of these or the [TTL variables](#cache-lifetime) in the `env` block of [managed settings](settings.md). For normal use, leave caching enabled.
+To set caching policy across an organization, put any of these or the [TTL variables](#cache-lifetime) in the `env` block of [managed settings](managed-settings.md). For normal use, leave caching enabled.
 
 ## [​](#related-resources) Related resources
 

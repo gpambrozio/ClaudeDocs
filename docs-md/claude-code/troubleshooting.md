@@ -31,7 +31,7 @@ Claude Code is designed to work with most development environments, but may cons
 3. Consider adding large build directories to your `.gitignore` file
 4. Restart with [`claude --safe-mode`](cli-reference.md) to check whether a plugin, MCP server, or hook is the source. It disables all customizations for the session; if usage drops, see [Debug your configuration](debug-your-config.md) to find which one
 
-If memory usage stays high after these steps, run `/heapdump` to write two files to `~/Desktop`: a JavaScript heap snapshot named `<session-id>.heapsnapshot` and a memory breakdown named `<session-id>-diagnostics.json`. The command doesn’t appear in the command menu; type it in full. On Linux without a Desktop folder, the files are written to your home directory.
+If memory usage stays high after these steps, run `/heapdump` to write two files to `~/Desktop`: a JavaScript heap snapshot named `<session-id>.heapsnapshot` and a memory breakdown named `<session-id>-diagnostics.json`. Claude Code [hides the command from the command menu](commands.md); type it in full. On Linux without a Desktop folder, the files are written to your home directory.
 
 The `.heapsnapshot` file contains every string in the process, including your full conversation and credentials. Don’t attach it to a public issue or share it.
 
@@ -102,7 +102,7 @@ pacman -S ripgrep
 winget install BurntSushi.ripgrep.MSVC
 ```
 
-Then set `USE_BUILTIN_RIPGREP` to `0`, either in your shell [environment](env-vars.md) or in the `env` block of your [`settings.json`](settings.md):
+Then set `USE_BUILTIN_RIPGREP` to `0`, either in your shell [environment](env-vars.md) or in the `env` block of your [`settings.json`](settings-reference.md):
 
 ```shiki
 {

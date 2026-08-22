@@ -47,7 +47,7 @@ For Ghostty, Kitty, and other terminals, look for an Option-as-Alt or Option-as-
 ## [​](#get-a-terminal-bell-or-notification) Get a terminal bell or notification
 
 When Claude finishes a task or pauses for a permission prompt, and you appear to be away from the terminal, it fires a notification event. See [when each notification type fires](hooks.md) for the exact timing. Surfacing this as a terminal bell or desktop notification lets you switch to other work while a long task runs.
-By default Claude Code sends a desktop notification only in Ghostty, Kitty, and iTerm2. In other terminals, set [`preferredNotifChannel`](settings.md) to `"terminal_bell"` to ring the terminal bell instead, or configure a [Notification hook](#play-a-sound-with-a-notification-hook) for a custom sound or command. The following settings entry turns on the terminal bell:
+By default Claude Code sends a desktop notification only in Ghostty, Kitty, and iTerm2. In other terminals, set [`preferredNotifChannel`](settings-reference.md) to `"terminal_bell"` to ring the terminal bell instead, or configure a [Notification hook](#play-a-sound-with-a-notification-hook) for a custom sound or command. The following settings entry turns on the terminal bell:
 
 ~/.claude/settings.json
 
@@ -94,7 +94,7 @@ The example below plays a system sound on macOS. The linked guide has desktop no
 
 ## [​](#configure-tmux) Configure tmux
 
-When Claude Code runs inside tmux, two things break by default: Shift+Enter submits instead of inserting a newline, and desktop notifications and the [progress bar](settings.md) never reach the outer terminal. Add these lines to `~/.tmux.conf`, then run `tmux source-file ~/.tmux.conf` to apply them to the running server:
+When Claude Code runs inside tmux, two things break by default: Shift+Enter submits instead of inserting a newline, and desktop notifications and the [progress bar](settings-reference.md) never reach the outer terminal. Add these lines to `~/.tmux.conf`, then run `tmux source-file ~/.tmux.conf` to apply them to the running server:
 
 ~/.tmux.conf
 
@@ -288,7 +288,7 @@ $env:CLAUDE_CODE_NO_FLICKER = "1"; claude
 
 When you paste more than 800 characters or more than two lines into the prompt, Claude Code collapses the input to a placeholder such as `[Pasted text #1 +120 lines]` so the input box stays usable. The full content is still sent to Claude when you submit.
 Claude Code keeps the collapsed content under `~/.claude/paste-cache/`, so when you recall a prompt from [command history](interactive-mode.md) and resubmit it, Claude Code sends the full pasted content again, including in a later session, until the retention sweep removes the cache file.
-Claude Code deletes cache files older than [`cleanupPeriodDays`](settings.md), following the [retention sweep rules](claude-directory.md), so a recalled prompt can reference pasted text that no longer exists. When you submit such a prompt, Claude Code never sends the literal `[Pasted text #N]` string, and shows a notification naming the missing paste:
+Claude Code deletes cache files older than [`cleanupPeriodDays`](settings-reference.md), following the [retention sweep rules](claude-directory.md), so a recalled prompt can reference pasted text that no longer exists. When you submit such a prompt, Claude Code never sends the literal `[Pasted text #N]` string, and shows a notification naming the missing paste:
 
 - In a plain prompt with text remaining, Claude Code removes the placeholder and sends the remaining text.
 - In a [shell mode](interactive-mode.md) command or a `/` command, where the removal would change what runs, and in any prompt the removal leaves empty, Claude Code cancels the submission and keeps the original text in the input, with the placeholder still in it. Delete the placeholder or edit the command, then resubmit.
@@ -297,7 +297,7 @@ The VS Code integrated terminal can drop characters from very large pastes befor
 
 ## [​](#edit-prompts-with-vim-keybindings) Edit prompts with Vim keybindings
 
-Claude Code includes a Vim-style editing mode for the prompt input. Enable it through `/config` → Editor mode, or by setting [`editorMode`](settings.md) to `"vim"` in `~/.claude/settings.json`. Set Editor mode back to `normal` to turn it off.
+Claude Code includes a Vim-style editing mode for the prompt input. Enable it through `/config` → Editor mode, or by setting [`editorMode`](settings-reference.md) to `"vim"` in `~/.claude/settings.json`. Set Editor mode back to `normal` to turn it off.
 Vim mode supports a subset of NORMAL- and VISUAL-mode motions and operators, such as `hjkl` navigation, `v`/`V` selection, and `d`/`c`/`y` with text objects. See the [Vim editor mode reference](interactive-mode.md) for the full key table.
 Vim motions aren’t remappable through the keybindings file. To map a two-key INSERT-mode sequence such as `jj` to Escape, set [`vimInsertModeRemaps`](interactive-mode.md) in your user settings.
 Pressing Enter still submits your prompt in INSERT mode, unlike standard Vim. Use `o` or `O` in NORMAL mode, or Ctrl+J, to insert a newline instead.

@@ -22,9 +22,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
 starting\_at: string
 
-Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00
-
-.
+Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
 
 
 
@@ -341,7 +339,7 @@ Get Per-User Cost
 ```shiki
 curl https://api.anthropic.com/v1/organizations/analytics/user_cost_report \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
 Response 200

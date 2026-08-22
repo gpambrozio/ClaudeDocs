@@ -1,88 +1,62 @@
 # Attachments
 
-Copy page
+Loading
 
-
+Loading
 
-# Attachments
+Loading
 
-##### [List project attachments](api/compliance/apps/projects/attachments/list.md)
+Loading
 
-GET/v1/compliance/apps/projects/{project\_id}/attachments
+Loading
 
-##### ModelsExpand Collapse
+Loading
 
-
+Loading
 
-AttachmentListResponse = object { id, created\_at, filename, 4 more }  or object { id, created\_at, filename, 3 more } 
+Loading
 
-File attachment reference for compliance responses.
+Loading
 
-One of the following:
+Loading
 
-
+Loading
 
-ComplianceProjectFileReference object { id, created\_at, filename, 4 more } 
+Loading
 
-File attachment reference for compliance responses.
+Loading
 
-id: string
+Loading
 
-File identifier (e.g., 'claude\_file\_abcd')
+Loading
 
-created\_at: string
+Loading
 
-Creation timestamp (RFC 3339 format)
+Loading
 
-filename: string
+Loading
 
-Display name of the file (e.g., 'document.pdf')
+Loading
 
-md5: string or null
+Loading
 
-Lowercase hex MD5 of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
+Loading
 
-mime\_type: string
+Loading
 
-MIME type of the file's preferred downloadable variant when one is recorded, else 'application/octet-stream'. Use the per-file `/metadata` endpoint for the authoritative value.
+Loading
 
-size\_bytes: number or null
+Loading
 
-Size in bytes of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
+Loading
 
-type: "project\_file"
+Loading
 
-Discriminator marking this as a binary file
+Loading
 
-
+Loading
 
-ComplianceProjectDocReference object { id, created\_at, filename, 3 more } 
-
-Project document attachment reference for compliance responses.
-
-id: string
-
-Project document identifier (e.g., 'claude\_proj\_doc\_abcd')
-
-created\_at: string
-
-Creation timestamp (RFC 3339 format)
-
-filename: string
-
-Display name of the document (e.g., 'document.txt')
-
-mime\_type: "text/plain"
-
-MIME type of the project document, always set to plain text
-
-type: "project\_doc"
-
-Discriminator marking this as a plain text document
-
-updated\_at: string or null
-
-Last-modified timestamp of the document. Reserved for future use — currently always null.
+Loading
 
 ---
 

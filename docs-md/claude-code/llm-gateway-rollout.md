@@ -24,7 +24,7 @@ Whichever product provides the gateway, it must:
 - **Stream responses**: pass server-sent events through as they arrive, including keep-alive pings, instead of buffering the whole response; [streaming](llm-gateway-protocol.md) covers what buffering or stripped pings break
 - **Route Claude model names**: map each name developers use to an upstream model. Claude Code sends a model name such as `claude-sonnet-4-6` in each request; in most gateway products the mapping is a model list or routing table in the gateway’s own configuration
 - **Forward headers and body unchanged**: pass `anthropic-beta`, `anthropic-version`, and the request body through in both directions; the [feature pass-through table](llm-gateway-protocol.md) maps each to the feature that breaks without it
-- **Return upstream errors unmodified**: Claude Code’s automatic recovery matches on error wording, so wrapping errors in the gateway’s own envelope breaks it
+- **Return upstream errors unmodified**: Claude Code’s automatic recovery matches on error wording, so wrapping errors in the gateway’s own envelope breaks it, unless the envelope’s message carries one of the `capability_rejected:` tokens a [Claude apps gateway substitutes for cloud providers’ error wording](claude-apps-gateway-config.md)
 - **Exempt the path from request-body WAF inspection**: Claude Code prompts carry source code and XML-style tags that match cross-site-scripting body rules; a WAF in front of the gateway returns `403` on real sessions while short test requests pass
 
 Optionally, serve `GET /v1/models` so Claude Code can populate the model picker from your gateway with [model discovery](llm-gateway-protocol.md).
@@ -135,7 +135,7 @@ A wrong or unreachable base URL produces a different symptom: Claude Code [retri
 
 ### [​](#distribute-the-configuration) Distribute the configuration
 
-Every developer machine needs the gateway address and a credential. You can distribute them centrally through [managed settings](settings.md), so developers configure nothing, or hand developers the values to set themselves.
+Every developer machine needs the gateway address and a credential. You can distribute them centrally through [managed settings](managed-settings.md), so developers configure nothing, or hand developers the values to set themselves.
 
 #### [​](#what-to-distribute) What to distribute
 
@@ -154,7 +154,7 @@ The same set of variables applies whichever path you choose. Most rollouts only 
 
 #### [​](#distribute-through-managed-settings) Distribute through managed settings
 
-Deliver the variables through the `env` block of a [managed settings file](settings.md), pushed by MDM, registry policy, or configuration management:
+Deliver the variables through the `env` block of a [managed settings file](managed-settings.md), pushed by MDM, registry policy, or configuration management:
 
 ```shiki
 {
@@ -173,7 +173,7 @@ Some environments need separate delivery:
 
 - The desktop app reads gateway routing from its third-party inference configuration, not from managed settings; deploy that file through MDM alongside managed settings so desktop sessions route through the gateway too. See the [desktop third-party configuration docs](https://claude.com/docs/third-party/claude-desktop/configuration) and the [desktop gateway docs](https://claude.com/docs/third-party/claude-desktop/gateway)
 - CI runners need `ANTHROPIC_BASE_URL` and the credential set in the [runner’s environment](llm-gateway-connect.md)
-- WSL on managed Windows machines reads the Windows managed settings only when [`wslInheritsWindowsSettings`](settings.md) is `true`
+- WSL on managed Windows machines reads the Windows managed settings only when [`wslInheritsWindowsSettings`](settings-reference.md) is `true`
 
 #### [​](#hand-developers-the-values-to-set-themselves) Hand developers the values to set themselves
 
@@ -237,7 +237,8 @@ When sizing per-key rate limits, account for the client [retrying transient fail
 
 - [Connect Claude Code to an LLM gateway](llm-gateway-connect.md): the developer-facing setup steps, with per-surface configuration and a troubleshooting table you can hand to developers
 - [Gateway protocol reference](llm-gateway-protocol.md): the wire contract for gateway operators, covering endpoints, headers to forward, and the feature pass-through table
-- [Settings files and precedence](settings.md): how managed, project, and user settings combine, and where the managed file goes on each platform
+- [Which value Claude Code uses](settings.md): how managed, project, and user settings combine
+- [Delivery mechanisms](managed-settings.md): where the managed file goes on each platform
 - [Set up Claude Code for your organization](admin-setup.md): the wider rollout this gateway is one part of, including policy enforcement, usage visibility, and data handling
 
 ---

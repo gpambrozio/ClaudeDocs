@@ -28,9 +28,7 @@ UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid wit
 
 filter: optional array of string
 
-Filters as 'dimension
-
-', e.g. filter[]=rbac\_group\_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: project\_id, rbac\_group\_id, user\_id. Value forms: project\_id takes a tagged project id (claude\_proj\_...); rbac\_group\_id takes the tagged id (rbac\_group\_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); user\_id takes a tagged user id (user\_...), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
+Filters as 'dimension:value', e.g. filter[]=rbac\_group\_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: project\_id, rbac\_group\_id, user\_id. Value forms: project\_id takes a tagged project id (claude\_proj\_...); rbac\_group\_id takes the tagged id (rbac\_group\_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); user\_id takes a tagged user id (user\_...), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
 
 
 
@@ -155,7 +153,7 @@ Get Chat Project Usage
 ```shiki
 curl https://api.anthropic.com/v1/organizations/analytics/apps/chat/projects \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
 Response 200

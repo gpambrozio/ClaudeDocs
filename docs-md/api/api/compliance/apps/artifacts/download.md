@@ -1,37 +1,106 @@
 # Download artifact content
 
-Copy page
+Loading
 
-
+Loading
 
-# Download artifact content
+Loading
 
-GET/v1/compliance/apps/artifacts/{artifact\_version\_id}/content
+Loading
 
-Download the content of an artifact version for compliance purposes.
+Loading
 
-Returns the full text content of the artifact version.
+Loading
 
-##### Path ParametersExpand Collapse
+Loading
 
-artifact\_version\_id: string
+Loading
 
-The artifact version ID (tagged ID, e.g., claude\_artifact\_version\_abc123)
+Loading
 
-##### Header ParametersExpand Collapse
+Loading
 
-"x-api-key": optional string
+Loading
 
-Download artifact content
+Loading
 
-
+Loading
 
-```shiki
-curl https://api.anthropic.com/v1/compliance/apps/artifacts/$ARTIFACT_VERSION_ID/content \
-    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
-```
+Loading
 
-##### Returns Examples
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
 
 ---
 

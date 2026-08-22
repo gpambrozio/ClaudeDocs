@@ -82,12 +82,12 @@ cURLPythonTypeScriptGoJavaC#CLIPHPRuby
 
 ```shiki
 import os
-import httpx
+import httpx2
 import anthropic
 from anthropic import WorkloadIdentityCredentials
 
 def fetch_okta_token() -> str:
-    response = httpx.post(
+    response = httpx2.post(
         f"{os.environ['OKTA_ISSUER']}/v1/token",
         data={
             "grant_type": "client_credentials",

@@ -134,7 +134,7 @@ Use this approach when you want full VM isolation without provisioning infrastru
 
 Individual developers can opt into any of the sandboxing approaches on this page. What an organization can enforce, and with which tools, depends on the approach:
 
-- **Built-in Bash sandbox**: the only approach Claude Code enforces itself. Deliver the `sandbox` settings keys through [managed settings](settings.md), either as a file managed by your MDM or through [server-managed settings](server-managed-settings.md) on Claude.ai. See [Enforce sandboxing with managed settings](sandboxing.md) for the keys to deploy and how to keep developers from widening the policy.
+- **Built-in Bash sandbox**: the only approach Claude Code enforces itself. Deliver the `sandbox` settings keys through [managed settings](managed-settings.md), either as a file managed by your MDM or through [server-managed settings](server-managed-settings.md) on Claude.ai. See [Enforce sandboxing with managed settings](sandboxing.md) for the keys to deploy and how to keep developers from widening the policy.
 - **Dev containers**: commit the [example dev container](devcontainer.md) to your repositories to standardize the environment across a team. This is a convention rather than an enforcement boundary, because Claude Code does not require a container. If developers should not be able to run Claude Code outside it, enforce that with your organization’s device management or software allowlisting tools.
 - **Custom containers and VMs**: distribute Claude Code through the approved image and use your organization’s device management or software allowlisting tools to prevent installation outside it.
 
@@ -146,7 +146,7 @@ These pages cover configuration and policy details for the sandboxing approaches
 - [Dev container](devcontainer.md): the preconfigured Docker development container
 - [Security](security.md): the full Claude Code security model
 - [Secure deployment](agent-sdk/secure-deployment.md): isolation guidance for Agent SDK applications
-- [Settings](settings.md): all sandbox configuration keys, including managed settings delivery
+- [Settings](settings-reference.md): all sandbox configuration keys, including managed settings delivery
 
 ---
 

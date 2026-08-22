@@ -3,7 +3,7 @@
 Agent teams are experimental and disabled by default. Enable them by setting `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` in your [settings.json](settings.md) or environment. Without that variable, no team is set up at session start, no team directories are written, and Claude does not spawn or propose teammates. Agent teams have [known limitations](#limitations) around session resumption, task coordination, and shutdown behavior.
 
 Agent teams let you coordinate multiple Claude Code instances working together. One session acts as the team lead, coordinating work, assigning tasks, and synthesizing results. Teammates work independently, each in its own context window, and communicate directly with each other.
-Unlike [subagents](sub-agents.md), which run within a single session and can only report back to the main agent, you can also interact with individual teammates directly without going through the lead.
+Unlike [subagents](sub-agents.md), which run within a single session, you can also interact with individual teammates directly without going through the lead.
 
 This page describes agent teams as of v2.1.178. With `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` set, spawning a teammate no longer needs a setup step, and cleanup happens automatically when the session exits. Before v2.1.178, you asked Claude to create and name a team first, and Claude used the `TeamCreate` and `TeamDelete` tools to set it up and remove it. Both tools no longer exist. The `team_name` input on the Agent tool is accepted but ignored, and the `team_name` field in `TaskCreated`, `TaskCompleted`, and `TeammateIdle` [hook payloads](hooks.md) carries the session-derived name and is deprecated.
 
@@ -20,16 +20,16 @@ Agent teams add coordination overhead and use significantly more tokens than a s
 
 ### [​](#compare-with-subagents) Compare with subagents
 
-Both agent teams and [subagents](sub-agents.md) let you parallelize work, but they operate differently. Choose based on whether your workers need to communicate with each other. For separate sessions that pass messages to each other without a team, see [cross-session messaging](cross-session-messaging.md).
+Both agent teams and [subagents](sub-agents.md) let you parallelize work, but they operate differently. For separate sessions that pass messages to each other without a team, see [cross-session messaging](cross-session-messaging.md).
 
 ![Diagram comparing subagent and agent team architectures. Subagents are spawned by the main agent, do work, and report results back. Agent teams coordinate through a shared task list, with teammates communicating directly with each other.](https://mintcdn.com/claude-code/nsvRFSDNfpSU5nT7/images/subagents-vs-agent-teams-light.png?fit=max&auto=format&n=nsvRFSDNfpSU5nT7&q=85&s=2f8db9b4f3705dd3ab931fbe2d96e42a)![Diagram comparing subagent and agent team architectures. Subagents are spawned by the main agent, do work, and report results back. Agent teams coordinate through a shared task list, with teammates communicating directly with each other.](https://mintcdn.com/claude-code/nsvRFSDNfpSU5nT7/images/subagents-vs-agent-teams-dark.png?fit=max&auto=format&n=nsvRFSDNfpSU5nT7&q=85&s=d573a037540f2ada6a9ae7d8285b46fd)
 
-Subagents only report results back to the main agent and never talk to each other. In agent teams, teammates share a task list, claim work, and communicate directly with each other.
+Subagents report results back to the main agent. In agent teams, teammates share a task list, claim work, and communicate directly with each other.
 
 |  | Subagents | Agent teams |
 | --- | --- | --- |
 | **Context** | Own context window; results return to the caller | Own context window; fully independent |
-| **Communication** | Report results back to the main agent only | Teammates message each other directly |
+| **Communication** | Return a result to the caller. Subagents that Claude named when it spawned them can also [message each other](sub-agents.md) | Teammates message each other directly |
 | **Coordination** | Main agent manages all work | Self-coordination through messages, plus a shared task list for [agents that have the Task tools](tools-reference.md) |
 | **Best for** | Focused tasks where only the result matters | Complex work requiring discussion and collaboration |
 | **Token cost** | Lower: results summarized back to main context | Higher: each teammate is a separate Claude instance |
@@ -91,7 +91,7 @@ Agent teams support two display modes:
 
 The default is `"in-process"`. Before v2.1.179 the default was `"auto"`, so upgraded sessions that previously opened split panes now stay in one terminal unless you set the mode explicitly. Set `"auto"` to enable split panes when you’re already running inside a tmux session, or when your terminal is iTerm2 with the `it2` CLI installed, falling back to in-process otherwise. The `"tmux"` setting enables split-pane mode and auto-detects whether to use tmux or iTerm2 based on your terminal.
 As of v2.1.186, set `"iterm2"` to use iTerm2 native split panes explicitly. This mode requires the [`it2` CLI](https://github.com/mkusaka/it2) and shows an error with the install command if `it2` is missing. The setup prompt that offers to install `it2` or switch to tmux appears under `"auto"` or `"tmux"` when your terminal is iTerm2 and tmux is available as a fallback.
-To override the default, set [`teammateMode`](settings.md) in `~/.claude/settings.json`:
+To override the default, set [`teammateMode`](settings-reference.md) in `~/.claude/settings.json`:
 
 ```shiki
 {
@@ -211,7 +211,7 @@ Teams and tasks are stored locally under a session-derived name. The name is `se
 - **Team config**: `~/.claude/teams/{team-name}/config.json`
 - **Task list**: `~/.claude/tasks/{team-name}/`
 
-Claude Code generates both of these automatically at session startup and updates them as teammates join, go idle, or leave. The team config directory is removed when the session ends. The task list directory persists locally and is never uploaded, so resumed sessions keep their tasks. Retention is governed by the same [`cleanupPeriodDays`](settings.md) you already control for session transcripts, following the [retention sweep rules](claude-directory.md).
+Claude Code generates both of these automatically at session startup and updates them as teammates join, go idle, or leave. The team config directory is removed when the session ends. The task list directory persists locally and is never uploaded, so resumed sessions keep their tasks. Retention is governed by the same [`cleanupPeriodDays`](settings-reference.md) you already control for session transcripts, following the [retention sweep rules](claude-directory.md).
 The team config holds runtime state such as session IDs and tmux pane IDs, so don’t edit it by hand or pre-author it: your changes are overwritten on the next state update.
 To define reusable teammate roles, use [subagent definitions](#use-subagent-definitions-for-teammates) instead.
 The team config contains a `members` array with each member’s name and agent ID. The lead’s entry always carries the agent type `team-lead`. A teammate’s entry carries whatever agent type the lead named when spawning it, whether a [built-in type](sub-agents.md) or a [subagent definition](#use-subagent-definitions-for-teammates), and omits the field when the lead named none. Teammates can read this file to discover other team members.
@@ -429,7 +429,6 @@ Explore related approaches for parallel work and delegation:
 
 - **Lightweight delegation**: [subagents](sub-agents.md) spawn helper agents for research or verification within your session, better for tasks that don’t need inter-agent coordination
 - **Manual parallel sessions**: [Git worktrees](worktrees.md) let you run multiple Claude Code sessions yourself without automated team coordination
-- **Compare approaches**: see the [subagent vs agent team](features-overview.md) comparison for a side-by-side breakdown
 
 ---
 

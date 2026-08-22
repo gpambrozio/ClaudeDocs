@@ -63,39 +63,28 @@ In a large codebase, a single CLAUDE.md at the repository root tends to either g
 Claude Code loads every [CLAUDE.md](memory.md) file from your working directory and every parent directory at launch, then loads each subdirectory’s file on demand when it reads files there. A root file sets repository-wide rules and each subdirectory adds its own.
 A common split is two levels:
 
-- **Root `CLAUDE.md`**: instructions that apply everywhere, such as coding standards, commit conventions, and repository layout
+- **Root `CLAUDE.md`**: instructions that apply everywhere, such as coding standards and commit conventions
 - **Per-subdirectory `CLAUDE.md`**: conventions specific to that area’s stack. In a monorepo that’s one per package. In a large single tree it’s one per subsystem such as `src/db/` or `src/api/`
 
 Commit these files to the repository so teammates inherit them. Each directory’s owner typically maintains its file.
-The root `CLAUDE.md` orients Claude to the repository structure:
+To trim a file that is already checked in, run the [`/doctor` checkup](memory.md). The root `CLAUDE.md` holds the rules that apply in every package:
 
 CLAUDE.md
 
 ```shiki
-This is a monorepo with three packages under packages/:
-
-- packages/api: Node.js REST API with Express, TypeScript, and PostgreSQL
-- packages/web: React frontend with Vite, TypeScript, and TailwindCSS
-- packages/shared: shared TypeScript utilities used by both api and web
-
-Run commands from the package directory, not the monorepo root.
-Each package has its own tsconfig.json, package.json, and test suite.
+Run package scripts from the package directory, not the monorepo root.
+Prefix commit subjects with the package name, for example `api: add rate limiting`.
+Never edit files under packages/*/generated/. Run `npm run codegen` in the package instead.
 ```
 
-Each subdirectory’s `CLAUDE.md`, here `packages/api/CLAUDE.md`, adds context specific to that area’s stack:
+Each subdirectory’s `CLAUDE.md`, here `packages/api/CLAUDE.md`, adds the conventions specific to that area:
 
 packages/api/CLAUDE.md
 
 ```shiki
-This package is the REST API server.
-
-- Run tests: `npm test` (uses Vitest)
-- Run dev server: `npm run dev` (port 3001)
-- Database migrations: `npm run migrate`
-- Environment variables: copy `.env.example` to `.env`
-
-API routes are in src/routes/. Each route file exports an Express router.
-Database queries use Knex in src/db/. Never write raw SQL strings in route handlers.
+Copy `.env.example` to `.env` before running anything. Tests and the dev server fail without it.
+Write database queries with the Knex query builder. Never put raw SQL strings in route handlers.
+Never edit a migration after it has merged. Add a new migration instead.
 ```
 
 When you start Claude from `packages/api/`, it loads both `packages/api/CLAUDE.md` and the root `CLAUDE.md`. Claude sees the local instructions alongside the repository-wide rules, with no instructions from `packages/web/` in context. The same holds for any subdirectory in a non-monorepo tree. To confirm which files loaded, run `/context` and check the list under **Memory files**.
@@ -151,12 +140,12 @@ Instructions are only part of what ends up in Claude’s context. File reads are
 ### [​](#block-reads-of-generated-and-vendored-code) Block reads of generated and vendored code
 
 Claude’s content searches respect `.gitignore` by default, so paths already listed there, such as `node_modules/`, `dist/`, and `build/`, stay out of search results without additional configuration.
-For paths that are checked in, such as a vendored SDK or committed generated code, add `Read` deny rules in `permissions.deny` to block Claude from opening those files even when a search lists them.
+For paths that are checked in, such as a vendored SDK or committed generated code, add `Read` deny rules in `permissions.deny` to block Claude from opening those files.
 The deny rules can cover everyone working in the repository, only you, or every session on the machine, depending on which settings file you put them in:
 
 - **Everyone working in the repository**: commit the rules to `.claude/settings.json`. Like other project settings on this page, that file loads only from your starting directory, so place it at the repository root if you start Claude there, or in each package’s `.claude/` if you start from subdirectories.
-- **Yourself only**: use `.claude/settings.local.json` at the repository root, which loads in every CLI session inside the repository regardless of starting directory. Relative patterns like the example’s `Read(./vendor/**)` still [anchor at the directory you start Claude Code from](permissions.md), so if you start sessions from subdirectories, write the rules in this file as `//`-absolute paths, such as `Read(//absolute/path/to/repo/vendor/**)`. Before v2.1.211, `.claude/settings.local.json` also loaded only from the starting directory.
-- **Everyone, enforced in every session**: set the rules in [managed settings](settings.md), which user and project settings cannot override.
+- **Yourself only**: use `.claude/settings.local.json` at the repository root, which loads in every CLI session inside the repository regardless of starting directory, except in the cases where Claude Code [keeps the local file in the starting directory](settings.md), such as on Windows. Relative patterns like the example’s `Read(./vendor/**)` still [anchor at the directory you start Claude Code from](permissions.md), so if you start sessions from subdirectories, write the rules in this file as `//`-absolute paths, such as `Read(//absolute/path/to/repo/vendor/**)`. Before v2.1.211, `.claude/settings.local.json` also loaded only from the starting directory.
+- **Everyone, enforced in every session**: set the rules in [managed settings](managed-settings.md), which user and project settings cannot override.
 
 The example below blocks build artifacts and a vendored SDK:
 
@@ -175,7 +164,8 @@ The example below blocks build artifacts and a vendored SDK:
 }
 ```
 
-Deny rules cover Claude’s built-in file tools and recognized Bash file commands, including `cat`, `head`, `grep`, and `find`, when a denied path is passed as an argument. They do not filter denied paths out of a recursive search’s output, and they do not cover arbitrary subprocesses that open files themselves. For the full pattern syntax, see [Read and Edit permission rules](permissions.md).
+Deny rules cover Claude’s built-in file tools and recognized Bash file commands, including `cat`, `head`, `grep`, and `find`, when a denied path is passed as an argument. Claude Code also makes a best-effort attempt to leave denied paths out of the results of the built-in Grep and Glob tools. Claude still sees denied paths in the output of a Bash search such as `grep -r` or `find`.
+Deny rules don’t cover subprocesses that open files themselves. For the full pattern syntax, see [Read and Edit permission rules](permissions.md).
 
 ### [​](#reduce-file-reads-with-code-intelligence) Reduce file reads with code intelligence
 
@@ -191,7 +181,7 @@ If the install fails, match the message Claude Code reports:
 - `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
 - The plugin is [not found in the marketplace](discover-plugins.md): check the plugin name.
 
-To enable a plugin for everyone in the repository rather than installing it yourself, add it to the [`enabledPlugins` project setting](settings.md).
+To enable a plugin for everyone in the repository rather than installing it yourself, add it to the [`enabledPlugins` project setting](settings-reference.md).
 Code intelligence plugins require the language’s language server binary on each developer’s machine. See [which binary each language requires](discover-plugins.md). Installing from the official marketplace requires network access to GitHub, where the marketplace is hosted. On a restricted network, [add the marketplace from an internal Git host or local path](discover-plugins.md) instead.
 This pairs well with `claudeMdExcludes` and the `Read` deny rules above. Those keep irrelevant content out of context, and code intelligence keeps Claude from reading through what remains to locate a definition.
 
@@ -247,7 +237,7 @@ This creates a symlink from each worktree’s `node_modules/` back to the main r
 
 The `sparsePaths` and `symlinkDirectories` settings are read from your starting directory before the worktree is created. After creation, the session’s working directory is the worktree root, not the subdirectory you launched from. Project settings inside the worktree therefore load from the worktree root’s `.claude/settings.json`, the checked-out copy of the repository root’s file. Put any other settings you need inside worktrees, such as permission rules or hooks, in the repository root’s `.claude/settings.json`.
 
-For the full worktree settings reference, see [Worktree settings](settings.md).
+For the full worktree settings reference, see [Worktree settings](settings-reference.md).
 
 ### [​](#grant-access-across-packages-or-repositories) Grant access across packages or repositories
 
@@ -446,7 +436,7 @@ The configuration above controls what Claude sees. When a single change touches 
 Two techniques help keep a cross-package change consistent:
 
 - **Give Claude the whole change in one session**: handing over the shared edit and its call sites together keeps the decisions behind each edit consistent, rather than re-deriving them per package
-- **Save the plan to a file before editing**: [plan first](best-practices.md) and ask Claude to write the plan to a markdown file in the repository. A long cross-package session [compacts its context](context-window.md) along the way, and the saved plan survives where conversation history may not
+- **Plan before editing**: [plan first](best-practices.md) in [plan mode](permission-modes.md), and Claude writes the plan to a file. A long cross-package session [compacts its context](context-window.md) along the way. Claude Code re-injects the plan file after each compaction, so the plan survives where conversation history may not
 
 ## [​](#next-steps) Next steps
 

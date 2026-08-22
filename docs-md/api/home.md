@@ -43,7 +43,7 @@ Pick the developer surface that matches your approach, and the infrastructure th
 
 Direct model access. You construct every turn, manage conversation state, and write your own tool loop.
 
-[Quickstart](get-started.md)[API reference](api/messages/create.md)[Client SDKs](api/client-sdks.md)
+[Quickstart](get-started.md)[API reference](api/messages/create.md)[Client SDKs](cli-sdks-libraries/overview.md)
 
 ### Managed Agents
 
@@ -77,7 +77,7 @@ MessagesManaged Agents
 
    [Choose a model](about-claude/models/overview.md)
 
-   [Install an SDK](api/client-sdks.md)
+   [Install an SDK](cli-sdks-libraries/overview.md)
 
    [Try the API in Playground](/playground)
 2. 2

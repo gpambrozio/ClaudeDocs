@@ -122,8 +122,7 @@ Always-on (ant CLI)Always-on (SDK)Webhook-triggered (SDK)
    `ant beta:worker poll` claims work items assigned to the environment, downloads skills, executes tool calls in the working directory, and posts results back. It reads `ANTHROPIC_ENVIRONMENT_KEY` and `ANTHROPIC_ENVIRONMENT_ID` from the environment.
 
    ```shiki
-   ant beta:worker poll \
-     --workdir "/workspace"
+   ant beta:worker poll --workdir "/workspace"
    ```
 
    
@@ -168,8 +167,7 @@ Always-on (ant CLI)Always-on (SDK)Webhook-triggered (SDK)
    Start the poller pointing at the script:
 
    ```shiki
-   ant beta:worker poll \
-     --on-work ./spawn.sh
+   ant beta:worker poll --on-work ./spawn.sh
    ```
 
    
@@ -186,7 +184,7 @@ The SDK provides three helpers at different levels of control. `EnvironmentWorke
   - `drain`: whether to stop polling once the queue is empty rather than waiting for new work.
   - `block_ms`: how long to wait for work to arrive before returning, in milliseconds. Must be between 1 and 999 (per-poll wait; the helper re-polls automatically). Pass `null` (`None` in Python, `param.Null[int64]()` in Go) for a non-blocking check; omitting the parameter uses the default 999 ms long-poll.
   - `reclaim_older_than_ms`: re-claim work items that were claimed but never acknowledged within this many milliseconds.
-  - `auto_stop` (`autoStop` in TypeScript, `AutoStop` in Go): whether to post a stop signal for each work item once your loop body finishes with it. Turn it off when the process you launch for the session, rather than the loop body, runs the work item to completion.
+  - `auto_stop` (`autoStop` in TypeScript, `AutoStop` in Go): whether to post a stop signal for each work item once your loop body finishes with it. Turn it off whenever whatever runs the work item posts the stop itself: `handle_item()` does, so set it to false when you hand claimed items to `handle_item()` as the webhook handlers on this page do, and so does a sandbox you launch that owns the stop call.
 - **`client.beta.sessions.events.tool_runner()`:** runs tool calls for a single session, given the session ID and a tool list. Use when you've already claimed the work and only need the execution layer.
 
 Use the work poller directly when you want to launch your own per-session process, for example spinning up a sandbox for each claimed session:
@@ -342,7 +340,7 @@ sudo mkdir -p /mnt/memory && sudo chown "$USER" /mnt/memory
 Do not create the per-store directories yourself. The worker creates each store's `mount_path` directory (for example, `/mnt/memory/user-preferences`) when a session starts, refuses to start the session's work if something already exists at that path, and removes the directory when the session ends. Two operating rules follow:
 
 - **Run one session per filesystem when sessions attach the same store.** Two sessions cannot mount the same store on one host at the same time, because both need the same path. Giving each session its own sandbox, as described in [Run one sandbox per session](#run-one-sandbox-per-session), satisfies this rule.
-- **Stop workers gracefully.** When you stop a worker while a session runs, `EnvironmentWorker` uploads the session's changed memory files and removes its store directories only if it is cancelled rather than killed: a killed process runs no teardown, and the worker does not install signal handlers itself. Wire SIGTERM and SIGINT to cancellation in the process that runs it: abort the `signal` you pass to the worker in TypeScript, cancel the context in Go, and in Python cancel the task that runs `run()` or `handle_item()` from a signal handler. Then stop workers with SIGTERM and give them at least 30 seconds to exit before any hard kill, because the final upload can take that long. If a worker is killed before its teardown runs, remove the leftover store directory under `/mnt/memory/` before the next session that attaches that store; any edits in it that had not synced are lost.
+- **Stop workers gracefully.** When you stop a worker while a session runs, `EnvironmentWorker` uploads the session's changed memory files and removes its store directories only if it is cancelled rather than killed: a killed process runs no teardown, and the worker does not install signal handlers itself. Wire SIGTERM and SIGINT to cancellation in the process that runs it: abort the `signal` you pass to the worker in TypeScript, cancel the context in Go, and in Python cancel the task that runs `run()` or `handle_item()`. Do that from a signal handler when your worker is the process, as the standalone workers on this page do, or from your server's own shutdown hook when the worker runs inside a webhook handler, which must not take over the server's signals. Then stop workers with SIGTERM and give them at least 30 seconds to exit before any hard kill, because the final upload can take that long. If a worker is killed before its teardown runs, remove the leftover store directory under `/mnt/memory/` before the next session that attaches that store; any edits in it that had not synced are lost.
 
 ###  Run one sandbox per session
 
@@ -431,7 +429,7 @@ worker = EnvironmentWorker(
 
 ###  Read-only stores and conflicts
 
-For a store attached with `access: "read_only"`, the `write` and `edit` tools refuse to change files inside its directory, and the worker never uploads anything from it. Changes made through `bash` are not blocked locally: they are never synced to the store, and the next remote change to that memory overwrites them. If you need the local copy itself to stay unchanged during the session, disable the `bash` tool for that agent; do not mount the store path read-only, because the worker itself must create the directory and write the downloaded memories into it.
+For a store attached with `access: "read_only"`, the `write` and `edit` tools refuse to change files inside its directory, and the worker never uploads anything from it. Changes made through `bash`, or through a custom tool or MCP server you serve from the sandbox, are not blocked locally: they are never synced to the store, and the next remote change to that memory overwrites them. If you need the local copy itself to stay unchanged during the session, disable the `bash` tool for that agent and give it no custom tool that writes to the sandbox's filesystem; do not mount the store path read-only, because the worker itself must create the directory and write the downloaded memories into it.
 
 Conflicts resolve in favor of the store. When the agent changes a memory file that also changed in the store since the session last synced it, the worker keeps the store's version at the next sync, overwrites the local file with it, and logs a warning; the `write` and `edit` tools themselves succeed and no error reaches the agent. If the agent's change still applies, it can re-read the file after the sync and make the change again.
 

@@ -18,7 +18,7 @@ This matters since LLM performance degrades as context fills. When the context w
 Give Claude a check it can run: tests, a build, a screenshot to compare. It’s the difference between a session you watch and one you walk away from.
 
 Claude stops when the work looks done. Without a check it can run, “looks done” is the only signal available, and you become the verification loop: every mistake waits for you to notice it. Give Claude something that produces a pass or fail, and the loop closes on its own. Claude does the work, runs the check, reads the result, and iterates until the check passes.
-The check is anything that returns a signal Claude can read in the conversation: a test suite, a build exit code, a linter, a script that diffs output against a fixture, or a [browser screenshot](chrome.md) compared against a design.
+The check is anything that returns a signal Claude can read in the conversation: a test suite, a build exit code, a linter, a script that diffs output against a fixture, or a [browser screenshot](chrome.md) compared against a design. Run [`/verify`](skills.md) yourself after Claude’s check passes to confirm the change against the running app.
 
 | Strategy | Before | After |
 | --- | --- | --- |
@@ -167,8 +167,8 @@ Keep it concise. For each line, ask: *“Would removing this cause Claude to mak
 | Developer environment quirks (required env vars) | File-by-file descriptions of the codebase |
 | Common gotchas or non-obvious behaviors | Self-evident practices like “write clean code” |
 
-If Claude keeps doing something you don’t want despite having a rule against it, the file is probably too long and the rule is getting lost. If Claude asks you questions that are answered in CLAUDE.md, the phrasing might be ambiguous. Treat CLAUDE.md like code: review it when things go wrong, prune it regularly, and test changes by observing whether Claude’s behavior actually shifts.
-You can tune instructions by adding emphasis (e.g., “IMPORTANT” or “YOU MUST”) to improve adherence. Check CLAUDE.md into git so your team can contribute. The file compounds in value over time.
+If Claude keeps doing something you don’t want despite having a rule against it, the file is probably too long and the rule is getting lost. If Claude asks you questions that are answered in CLAUDE.md, the phrasing might be ambiguous. Treat CLAUDE.md like code: review it when things go wrong, prune it regularly, and test changes by observing whether Claude’s behavior actually shifts. For a checked-in CLAUDE.md, run [`/doctor`](commands.md) and Claude proposes cuts for content it can derive from the codebase.
+If Claude keeps skipping one instruction, add emphasis such as “IMPORTANT” to that line alone. If you emphasize many lines, none of them stands out. Check CLAUDE.md into git so your team can contribute. The file compounds in value over time.
 CLAUDE.md files can import additional files using `@path/to/import` syntax. For import rules and where CLAUDE.md files can live, see [CLAUDE.md files](memory.md).
 
 ### [​](#configure-permissions) Configure permissions
@@ -377,7 +377,7 @@ Checkpoints only track changes made through Claude’s file editing tools. Chang
 
 Name sessions with `/rename` and treat them like branches: each workstream gets its own persistent context.
 
-Claude Code saves conversations locally, so when a task spans multiple sittings you don’t have to re-explain the context. Run `claude --continue` to pick up the most recent session, or `claude --resume` to choose from a list. Give sessions descriptive names like `oauth-migration` so you can find them later. See [Manage sessions](sessions.md) for the full set of resume, branch, and naming controls.
+Claude Code saves conversations locally, so when a task spans multiple sittings you don’t have to re-explain the context. Run [`claude --continue`](sessions.md) to pick up where you left off, or `claude --resume` to choose from a list. Give sessions descriptive names like `oauth-migration` so you can find them later. See [Manage sessions](sessions.md) for the full set of resume, branch, and naming controls.
 
 ---
 
@@ -413,7 +413,8 @@ Pick the parallel approach that fits how much coordination you want to do yourse
 - [Worktrees](worktrees.md): run separate CLI sessions in isolated git checkouts so edits don’t collide
 - [Desktop app](desktop.md): manage multiple local sessions visually, each in its own worktree
 - [Claude Code on the web](claude-code-on-the-web.md): run sessions in the cloud, on Anthropic-managed infrastructure by default
-- [Agent teams](agent-teams.md): automated coordination of multiple sessions with shared tasks, messaging, and a team lead
+- [Agent view](agent-view.md): research preview. Run `claude agents` to dispatch sessions that keep running in the background and watch them from one screen
+- [Agent teams](agent-teams.md): experimental and disabled by default. Automated coordination of multiple sessions with shared tasks, messaging, and a team lead
 
 Beyond parallelizing work, multiple sessions enable quality-focused workflows. A fresh context improves code review since Claude won’t be biased toward code it just wrote.
 For example, use a Writer/Reviewer pattern:
@@ -430,7 +431,7 @@ You can do something similar with tests: have one Claude write tests, then anoth
 
 Loop through tasks calling `claude -p` for each. Use `--allowedTools` to scope permissions for batch operations.
 
-For large migrations or analyses, you can distribute work across many parallel Claude invocations:
+For large migrations or analyses, you can distribute work across many parallel Claude invocations. In a git repository, run [`/batch <instruction>`](commands.md) to have Claude split the change across 5 to 30 subagents. Each subagent works in its own worktree and opens a pull request. To drive the fan-out from your own script instead, loop over `claude -p`:
 
 1
 
@@ -486,7 +487,7 @@ every requirement is implemented, the listed edge cases have tests, and
 nothing outside the task's scope changed. Report gaps, not style preferences.
 ```
 
-Because the reviewer runs as a subagent, the implementing session receives the gaps directly and can fix them and re-review without you copying findings between windows. For longer autonomous runs, an [agent team](agent-teams.md) can keep this loop going across many tasks while you spot-check the recorded findings.
+Because the reviewer runs as a subagent, the implementing session receives the gaps directly and can fix them and re-review without you copying findings between windows.
 
 A reviewer prompted to find gaps will usually report some, even when the work is sound, because that is what it was asked to do. Chasing every finding leads to over-engineering: extra abstraction layers, defensive code, and tests for cases that can’t happen. Tell the reviewer to flag only gaps that affect correctness or the stated requirements, and treat the rest as optional.
 

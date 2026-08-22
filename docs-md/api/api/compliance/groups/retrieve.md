@@ -1,106 +1,103 @@
 # Get Compliance Group
 
-Loading
+Copy page
 
-Loading
+
 
-Loading
+# Get Compliance Group
 
-Loading
+GET/v1/compliance/groups/{group\_id}
 
-Loading
+Get Compliance Group
 
-Loading
+##### Path ParametersExpand Collapse
 
-Loading
+group\_id: string
 
-Loading
+The group ID (tagged ID, e.g., rbac\_group\_abc123)
 
-Loading
+##### Header ParametersExpand Collapse
 
-Loading
+"x-api-key": optional string
 
-Loading
+##### ReturnsExpand Collapse
 
-Loading
+id: string
 
-Loading
+Group identifier (tagged ID)
 
-Loading
+created\_at: string or null
 
-Loading
+Group creation timestamp (ISO 8601)
 
-Loading
+description: string
 
-Loading
+Group description
 
-Loading
+name: string
 
-Loading
+Group name
 
-Loading
+roles: array of string or null
 
-Loading
+Role IDs assigned to this group.
 
-Loading
+source\_type: string
 
-Loading
+How the group was created ('direct' or 'scim')
 
-Loading
+updated\_at: string or null
 
-Loading
+Group last-updated timestamp (ISO 8601)
 
-Loading
+Get Compliance Group
 
-Loading
+
 
-Loading
+```shiki
+curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
 
-Loading
+Response 200
 
-Loading
+
 
-Loading
+```shiki
+{
+  "id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+  "created_at": "2025-03-12T18:22:41.123456",
+  "description": "All members of the engineering organization",
+  "name": "Engineering Team",
+  "roles": [
+    "rbac_role_01SGBg3kEnZrdsVR2QmyJbvD",
+    "rbac_role_01HtCd4mFoAseWS3RnzKcwE7"
+  ],
+  "source_type": "scim",
+  "updated_at": "2025-03-14T09:05:17.456789"
+}
+```
 
-Loading
+##### Returns Examples
 
-Loading
+Response 200
 
-Loading
+
 
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
+```shiki
+{
+  "id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+  "created_at": "2025-03-12T18:22:41.123456",
+  "description": "All members of the engineering organization",
+  "name": "Engineering Team",
+  "roles": [
+    "rbac_role_01SGBg3kEnZrdsVR2QmyJbvD",
+    "rbac_role_01HtCd4mFoAseWS3RnzKcwE7"
+  ],
+  "source_type": "scim",
+  "updated_at": "2025-03-14T09:05:17.456789"
+}
+```
 
 ---
 

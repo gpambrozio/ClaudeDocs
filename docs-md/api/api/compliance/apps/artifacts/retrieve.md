@@ -1,108 +1,106 @@
 # Get artifact metadata
 
-Copy page
+Loading
 
-
+Loading
 
-# Get artifact metadata
+Loading
 
-GET/v1/compliance/apps/artifacts/{artifact\_version\_id}
+Loading
 
-Returns metadata for an artifact version, without the content body.
+Loading
 
-Use the sibling `/content` endpoint to fetch the artifact text. The
-`md5` and `size_bytes` fields here are computed over the UTF-8
-encoding of that text, so a DLP consumer can dedupe or match hashes
-without downloading every artifact.
+Loading
 
-##### Path ParametersExpand Collapse
+Loading
 
-artifact\_version\_id: string
+Loading
 
-The artifact version ID (tagged ID, e.g., claude\_artifact\_version\_abc123)
+Loading
 
-##### Header ParametersExpand Collapse
+Loading
 
-"x-api-key": optional string
+Loading
 
-##### ReturnsExpand Collapse
+Loading
 
-id: string
+Loading
 
-Artifact ID e.g. 'claude\_artifact\_abc123'
+Loading
 
-artifact\_type: string or null
+Loading
 
-MIME-like artifact type e.g. 'application/vnd.ant.code'
+Loading
 
-claude\_chat\_id: string
+Loading
 
-The chat this artifact belongs to
+Loading
 
-created\_at: string
+Loading
 
-Artifact version creation timestamp
+Loading
 
-md5: string
+Loading
 
-Lowercase hex MD5 of the artifact content (UTF-8 encoded). Matches the `content` field returned by the sibling `/content` endpoint.
+Loading
 
-size\_bytes: number
+Loading
 
-Size in bytes of the artifact content (UTF-8 encoded)
+Loading
 
-title: string or null
+Loading
 
-Artifact title
+Loading
 
-version\_id: string
+Loading
 
-Artifact version ID e.g. 'claude\_artifact\_version\_abc123'
+Loading
 
-Get artifact metadata
+Loading
 
-
+Loading
 
-```shiki
-curl https://api.anthropic.com/v1/compliance/apps/artifacts/$ARTIFACT_VERSION_ID \
-    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
-```
+Loading
 
-Response 200
+Loading
 
-
+Loading
 
-```shiki
-{
-  "id": "id",
-  "artifact_type": "artifact_type",
-  "claude_chat_id": "claude_chat_id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "md5": "md5",
-  "size_bytes": 0,
-  "title": "title",
-  "version_id": "version_id"
-}
-```
+Loading
 
-##### Returns Examples
+Loading
 
-Response 200
+Loading
 
-
+Loading
 
-```shiki
-{
-  "id": "id",
-  "artifact_type": "artifact_type",
-  "claude_chat_id": "claude_chat_id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "md5": "md5",
-  "size_bytes": 0,
-  "title": "title",
-  "version_id": "version_id"
-}
-```
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
 
 ---
 

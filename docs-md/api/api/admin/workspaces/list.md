@@ -40,7 +40,7 @@ minimum1
 
 
 
-data: array of [Workspace](api/$shared.md) { id, archived\_at, compartment\_id, 7 more } 
+data: array of Workspace { id, archived\_at, compartment\_id, 7 more } 
 
 id: string
 

@@ -110,6 +110,23 @@ Failover on `404` requires gateway v2.1.198 or later. Earlier releases returned 
 Multiple upstreams of the same provider must set a distinct `name:`.
 Amazon Bedrock, Claude Platform on AWS, Google Cloud’s Agent Platform, and Microsoft Foundry clients are built once at startup, and their SDKs refresh credentials internally, so rotating cloud credentials doesn’t require a restart. Static Anthropic API keys and bearers are read at startup; see [Anthropic API](#anthropic-api).
 
+#### [​](#upstream-error-messages) Upstream error messages
+
+The gateway returns one upstream’s error response, or its own `502`, depending on how the upstreams answered:
+
+- **An upstream returned a status the gateway doesn’t [fail over](#multiple-upstreams) on**: that upstream’s response. The gateway tries no further upstreams.
+- **Every upstream the gateway tried failed in a way it [fails over on](#multiple-upstreams)**: the last `429`. When none returned a `429`, the gateway prefers, in order, the last `401` or `403`, the last `404`, and the last `501`. When none returned any of those, the gateway’s own `502`, `all upstreams failed (N attempted)`, where N counts every entry in [`upstreams`](#upstreams), including entries the gateway skipped because they don’t serve the requested model.
+
+When the gateway returns an upstream’s response, it keeps the upstream’s status code. Whether it keeps the upstream’s message depends on the provider. An Anthropic API upstream’s error body reaches the developer unchanged.
+The Amazon Bedrock, Claude Platform on AWS, Google Cloud’s Agent Platform, and Microsoft Foundry upstreams can name your account IDs, role ARNs, and project IDs in their error text. The gateway records that full text in the [operational log](claude-apps-gateway-deploy.md). What the developer sees from those upstreams depends on the rejection:
+
+- `400` or `413` in Anthropic’s standard error envelope: the upstream’s own message, such as `prompt is too long`. Claude Platform on AWS, Agent Platform, and Microsoft Foundry return this envelope for model API rejections.
+- `400` or `413` in the provider’s own shape: a `capability_rejected:` token. When the gateway can’t classify the rejection, `upstream rejected the request` on a `400` or `request too large for this upstream` on a `413`.
+- Any other status: generic per-status copy, such as `upstream rate limit exceeded` on a `429`.
+
+For example, the gateway replaces Amazon Bedrock’s `Input is too long for requested model.` with `capability_rejected: prompt_too_long`. Claude Code [compacts automatically](errors.md) on that token, as it does on `prompt is too long`.
+Keeping a cloud upstream’s `400` or `413` message, or replacing it with a `capability_rejected:` token, requires gateway v2.1.233 or later.
+
 #### [​](#anthropic-api) Anthropic API
 
 The minimal Anthropic upstream is an API key from the [Claude Console](https://platform.claude.com):
@@ -497,7 +514,7 @@ Before v2.1.232, the gateway started with these values. Each value had this effe
 Each `cli` value is a complete Claude Code `managed-settings.json` document, the same schema you would deploy via MDM or `/etc/claude-code/managed-settings.json`, expressed here as YAML. The CLI applies the delivered document at the managed tier, above user and project settings.
 The gateway validates each document against the CLI’s settings schema at boot, so an unrecognized top-level key or a recognized key with a malformed value fails boot with an error naming every offending key. Deliberately open parts of the schema still accept arbitrary values, because newer clients may recognize entries the gateway’s schema doesn’t. These open keys are `env`, `pluginConfigs`, and keys nested under `permissions`.
 Because validation uses the schema bundled with the gateway’s installed version, putting a top-level settings key introduced by a newer Claude Code release into managed config requires upgrading the gateway first. Smoke-test a new policy on one client before rolling it out.
-The full key reference is in [Claude Code settings](settings.md). The keys most operators reach for first:
+The full key reference is in [Claude Code settings](settings-reference.md). The keys most operators reach for first:
 
 ```shiki
 managed:
@@ -553,7 +570,7 @@ Claude Code applies some delivered `env` variables without showing the developer
 [Environment variables and the approval dialog](server-managed-settings.md) has the details, including four privacy toggles whose delivered value decides whether they need approval. Before v2.1.218, Claude Code applied fewer variables without asking the developer, so more delivered variables triggered the dialog.
 The gateway’s [telemetry](#telemetry) configuration pushes `OTEL_EXPORTER_OTLP_ENDPOINT`, so setting `telemetry.forward_to` triggers the dialog on each interactive client. The dialog protects the developer’s machine from a compromised or hostile gateway, not the organization from the developer.
 A non-interactive run with the `-p` flag can’t show the dialog. It applies the pushed settings for that run only and doesn’t record them as approved, so the developer’s next interactive session still shows the dialog. Before v2.1.207, a non-interactive run saved the settings as approved and no later interactive session showed the dialog for them.
-If a developer declines, Claude Code exits rather than applying the policy. Pushing a new hook, or any env var that triggers the dialog, to a broad policy therefore means an approval prompt on every matching developer’s next startup.
+If a developer declines, Claude Code exits that session rather than applying the policy. When you push a new hook, or any env var that triggers the dialog, to a broad policy, Claude Code therefore shows the dialog to every matching developer. It shows the dialog in a running session on the next hourly poll, and otherwise at the developer’s next startup.
 The `cli` key was named `settings` in earlier releases. That spelling is still accepted as an alias, but new deployments should use `cli`.
 
 #### [​](#claude-desktop-overlay) Claude Desktop overlay
@@ -603,37 +620,8 @@ If you don’t deploy Claude Desktop, leave `desktop` out of your policies entir
 
 #### [​](#precedence-with-other-managed-sources) Precedence with other managed sources
 
-If a device also has a local `managed-settings.json` or MDM-delivered policy, the managed sources don’t merge, with two per-key exceptions:
-
-- The `env` block, in Claude Code v2.1.223 or later
-- The [cross-source lock keys](settings.md)
-
-Both are covered in the list later in this section. The highest-priority source provides all policy settings, ranked in this order with highest priority first:
-
-1. Gateway-delivered settings
-2. MDM, via the HKLM registry on Windows or a plist on macOS
-3. The `managed-settings.json` file
-4. The HKCU registry, on Windows only
-
-When an MDM or file-based source wins and configures a [`policyHelper`](settings.md), the helper’s output replaces that source and neither per-key exception applies. A `policyHelper` in those sources doesn’t run while the gateway delivers a non-empty configuration.
-Embedding hosts such as [Claude Desktop](desktop.md) can supply policy through the SDK `managedSettings` option. Whether it applies depends on the machine’s managed configuration:
-
-- On machines with an admin-deployed managed source, it is ignored unless the highest-priority source opts in with [`parentSettingsBehavior: "merge"`](settings.md).
-- It is never merged when an MDM or file-based source wins and configures a [`policyHelper`](settings.md).
-- When merged, it passes through a restrictive-only allowlist. [Restrict parent settings](claude-apps-gateway.md) lists which allow-direction settings still apply without the `allowManaged*Only` locks.
-
-The following keys are honored when any admin source above the user-writable HKCU tier sets them, regardless of which source provides the rest of the policy. When an MDM or file-based source wins and configures a [`policyHelper`](settings.md), the helper’s output is the only source these checks read:
-
-- `sandbox.network.allowManagedDomainsOnly` and `sandbox.filesystem.allowManagedReadPathsOnly`: when locked, the corresponding allowlists are unioned across sources
-- [`allowAllClaudeAiMcps`](settings.md): allow-only override for the claude.ai MCP server allowlist
-- `sandbox.bwrapPath` and `sandbox.socatPath`: filesystem paths to the [sandbox](sandboxing.md) helper binaries
-- [`sandbox.ripgrep`](settings.md): the `ripgrep` binary the sandbox uses
-- [`forceRemoteSettingsRefresh`](server-managed-settings.md): blocks startup until remote managed settings are freshly fetched, so an MDM or file policy that sets it is honored even when a cached remote payload that lacks the key is the highest-priority source
-- `env`: each variable comes from the highest-priority admin source that defines it, and lower admin sources fill in variables the higher sources leave unset. The telemetry unit and credential-paired routing variables follow their own rules; see [Per-key exceptions across managed sources](server-managed-settings.md). Requires Claude Code v2.1.223 or later
-
-Every other key, including `disableBypassPermissionsMode`, comes from the highest-priority source only. One [parent-settings](claude-apps-gateway.md) check reads every admin source: when any admin source sets `allowManagedPermissionRulesOnly`, Claude Code drops parent-supplied permission allow rules and `additionalDirectories`. The key’s effect on the developer’s own rules still follows the highest-priority source.
-A `forceLoginOrgUUID` or `allowedMcpServers` value in the highest-priority admin source blocks a parent-supplied one and is the value Claude Code enforces. A value in a non-winning admin source neither applies nor blocks the parent’s. Before v2.1.223, a value in any admin source blocked the parent’s.
-See [Settings precedence](settings.md) for the same rules on the settings page.
+If a device also has an MDM-delivered policy or a local `managed-settings.json`, Claude Code doesn’t merge the managed sources: gateway-delivered settings rank first, so the local sources supply the policy only when the gateway delivers no policy key. [Precedence within the managed tier](managed-settings.md) on the managed settings page has the full ranking and the [keys Claude Code reads from every admin source](managed-settings.md) regardless of which source it selected, such as the sandbox lock keys, `forceRemoteSettingsRefresh`, and the per-variable `env` merge. A [`policyHelper`](settings-reference.md) configured in an MDM profile or the managed settings file runs only when the gateway delivers no settings; the entry says what its output replaces.
+Embedding hosts such as [Claude Desktop](desktop.md) can supply policy through the SDK `managedSettings` option. [Parent settings from embedding hosts](managed-settings.md) says when Claude Code applies it, and [Restrict parent settings](claude-apps-gateway.md) lists which allow-direction settings still apply without the `allowManaged*Only` locks.
 Gateway policies apply to every Claude Code invocation on the machine, including non-interactive `claude -p` runs and sessions spawned by the Agent SDK. If the gateway is unreachable at startup, signed-in sessions exit with an error rather than running without their policy.
 
 At boot, the gateway rejects `mcpServers` inside a policy’s `cli` block. You can’t distribute MCP servers per group to Claude Code clients; deploy MCP servers via the file-based `managed-mcp.json` on each device or let developers add them locally. You can deliver Claude Desktop’s `managedMcpServers` setting to Claude Desktop clients through a policy’s `desktop` block. To set it, you need Claude Code v2.1.232 or later on the gateway server.
@@ -846,7 +834,7 @@ telemetry:
 
 ## [​](#client-side-managed-settings) Client-side managed settings
 
-Everything above configures the gateway server. You point developer machines at the gateway separately, on each device, through Claude Code’s [managed settings](settings.md). The gateway can’t push the login keys itself, because they’re what tell the client where the gateway is.
+Everything above configures the gateway server. You point developer machines at the gateway separately, on each device, through Claude Code’s [managed settings](managed-settings.md). The gateway can’t push the login keys itself, because they’re what tell the client where the gateway is.
 For the CLI, set these keys in the per-OS `managed-settings.json`. The two login keys route each developer’s `/login` to your gateway:
 
 ```shiki
@@ -868,7 +856,7 @@ Deploy the `managed-settings.json` file to each device, typically via your MDM p
 
 A registry policy on Windows or a managed-preferences plist on macOS replaces the `managed-settings.json` file rather than merging with it, apart from the [exception keys and cross-source checks above](#precedence-with-other-managed-sources). All three keys in this snippet follow the highest-priority-source rule, so fleets that deliver policy through Group Policy or configuration profiles must put all three in that mechanism instead.
 For Claude Desktop, set the `bootstrapUrl` key in Claude Desktop’s own [managed configuration](https://claude.com/docs/third-party/claude-desktop/configuration) to `<listen.public_url>/user/bootstrap`. The sign-in flow and per-group policy then match the CLI’s once a policy opts in server-side with a `desktop` key; without the opt-in, `/user/bootstrap` returns 404. See [Claude Desktop overlay](#claude-desktop-overlay) for the server-side half.
-`forceLoginGatewayUrl`, and the `"gateway"` value of `forceLoginMethod`, are honored only from the admin-controlled managed tier. A developer setting them in their own `~/.claude/settings.json` has no effect.
+[`forceLoginGatewayUrl`](settings-reference.md), and the `"gateway"` value of [`forceLoginMethod`](settings-reference.md), are honored only from a managed source on the machine: `managed-settings.json`, the macOS plist or Windows HKLM registry, or a policy helper. A developer setting them in their own `~/.claude/settings.json` has no effect, and neither does setting them in the gateway payload.
 
 ## [​](#related) Related
 

@@ -30,9 +30,7 @@ UTC date in YYYY-MM-DD format. End of the date range (exclusive). Data is typica
 
 filter: optional array of string
 
-Filters as 'dimension
-
-'. Only rbac\_group\_id is supported (e.g. filter[]=rbac\_group\_id:<id>); repeat the param to OR across groups. Scopes the whole day series to members of the matching group(s), re-aggregated from member-level activity — org-wide seat/invite fields and the adoption rates derived from them are null on scoped rows. rbac\_group\_id accepts the tagged id (rbac\_group\_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each UTC day (time-of-usage attribution). At most 100 entries.
+Filters as 'dimension:value'. Only rbac\_group\_id is supported (e.g. filter[]=rbac\_group\_id:<id>); repeat the param to OR across groups. Scopes the whole day series to members of the matching group(s), re-aggregated from member-level activity — org-wide seat/invite fields and the adoption rates derived from them are null on scoped rows. rbac\_group\_id accepts the tagged id (rbac\_group\_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each UTC day (time-of-usage attribution). At most 100 entries.
 
 ##### ReturnsExpand Collapse
 
@@ -72,9 +70,7 @@ Percentage of assigned seats with activity on the requested day (`DAU / assigned
 
 ending\_at: string
 
-End time in UTC of aggregation period (e.g. 2026-01-16T00:00
-
-)
+End time in UTC of aggregation period (e.g. 2026-01-16T00:00:00Z)
 
 monthly\_active\_user\_count: number
 
@@ -90,9 +86,7 @@ Number of pending invitations to join the organization. Null when the response i
 
 starting\_at: string
 
-Start time in UTC of aggregation period (e.g. 2026-01-15T00:00
-
-)
+Start time in UTC of aggregation period (e.g. 2026-01-15T00:00:00Z)
 
 weekly\_active\_user\_count: number
 
@@ -173,7 +167,7 @@ Get Activity Summaries
 ```shiki
 curl https://api.anthropic.com/v1/organizations/analytics/summaries \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
 Response 200

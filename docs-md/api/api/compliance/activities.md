@@ -73563,9 +73563,7 @@ user\_agent: optional string or null
 
 service\_name: string
 
-The org service name (e.g., 'external
-
-')
+The org service name (e.g., 'external:my-service')
 
 id: optional string
 
@@ -73806,9 +73804,7 @@ user\_agent: optional string or null
 
 service\_name: string
 
-The org service name (e.g., 'external
-
-')
+The org service name (e.g., 'external:my-service')
 
 id: optional string
 

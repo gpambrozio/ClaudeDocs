@@ -18,12 +18,11 @@ For administration and governance, see the [Admin API](manage-claude/admin-api.m
 
 ##  Feature availability
 
-Features on the Claude Platform are assigned one of the following availability classifications per platform (shown in the Availability column of each following table). Not all features pass through every stage. A feature may enter at any classification and may skip stages.
+The Availability column in each of the following tables lists the platforms that offer a feature. A platform listed without a label offers the feature as stable, fully supported, and recommended for production use, with no beta header and with standard API [versioning](api/versioning.md) guarantees. A label after a platform name marks one of the following classifications on that platform. Not all features pass through every stage, and a feature may enter at any stage or skip stages.
 
 | Classification | Description |
 | --- | --- |
 | **Beta** | Preview features used for gathering feedback and iterating on a less mature use case. Availability may be limited, including through sign-up requirements or waitlists, and may not be publicly announced.    Features may change significantly or be discontinued based on feedback. Not guaranteed for ongoing production use. Breaking changes are possible with notice, and some platform-specific limitations may apply. Beta features on the Claude API and [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) have a [beta header](api/beta-headers.md). |
-| **Generally available (GA)** | Feature is stable, fully supported, and recommended for production use. Should not have a beta header or other indicator that the feature is in a preview state. Covered by standard API [versioning](api/versioning.md) guarantees. |
 | **Deprecated** | Feature is still functional but no longer recommended. A migration path and removal timeline are provided. |
 | **Retired** | Feature is no longer available. |
 
@@ -37,18 +36,18 @@ The ZDR column indicates whether a feature is available under a Zero Data Retent
 
 | Feature | Description | Zero Data Retention (ZDR) | Availability |
 | --- | --- | --- | --- |
-| [Context windows](build-with-claude/context-windows.md) | Up to 1M tokens for processing large documents, extensive code bases, and long conversations. | ZDR eligible | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA) |
-| [Adaptive thinking](build-with-claude/thinking.md) | Let Claude dynamically decide when and how much to think. The only thinking mode on Claude 4.7 and later models. Use the effort parameter to control thinking depth. | ZDR eligible | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA) |
-| [Batch processing](build-with-claude/batch-processing.md) | Process large volumes of requests asynchronously for cost savings. Send batches with a large number of queries per batch. Batch API calls cost 50% less than standard API calls. | Not ZDR eligible | Claude API (GA)  Claude Platform on AWS (GA) |
-| [Citations](build-with-claude/citations.md) | Ground Claude's responses in source documents. With Citations, Claude can provide detailed references to the exact sentences and passages it uses to generate responses, leading to more verifiable, trustworthy outputs. | ZDR eligible | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA) |
-| [Data residency](manage-claude/data-residency.md) | Control where model inference runs using geographic controls. Specify `"global"` or `"us"` routing per request through the `inference_geo` parameter. | ZDR eligible | Claude API (GA)  Claude Platform on AWS (GA) |
-| [Effort](build-with-claude/effort.md) | Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency. | ZDR eligible | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA) |
+| [Context windows](build-with-claude/context-windows.md) | Up to 1M tokens for processing large documents, extensive code bases, and long conversations. | ZDR eligible | Claude API  Bedrock  Claude Platform on AWS  Google Cloud  Microsoft Foundry |
+| [Adaptive thinking](build-with-claude/thinking.md) | Let Claude dynamically decide when and how much to think. The only thinking mode on Claude 4.7 and later models. Use the effort parameter to control thinking depth. | ZDR eligible | Claude API  Bedrock  Claude Platform on AWS  Google Cloud  Microsoft Foundry |
+| [Batch processing](build-with-claude/batch-processing.md) | Process large volumes of requests asynchronously for cost savings. Send batches with a large number of queries per batch. Batch API calls cost 50% less than standard API calls. | Not ZDR eligible | Claude API  Claude Platform on AWS |
+| [Citations](build-with-claude/citations.md) | Ground Claude's responses in source documents. With Citations, Claude can provide detailed references to the exact sentences and passages it uses to generate responses, leading to more verifiable, trustworthy outputs. | ZDR eligible | Claude API  Bedrock  Claude Platform on AWS  Google Cloud  Microsoft Foundry |
+| [Data residency](manage-claude/data-residency.md) | Control where model inference runs using geographic controls. Specify `"global"` or `"us"` routing per request through the `inference_geo` parameter. | ZDR eligible | Claude API  Claude Platform on AWS |
+| [Effort](build-with-claude/effort.md) | Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency. | ZDR eligible | Claude API  Bedrock  Claude Platform on AWS  Google Cloud  Microsoft Foundry |
 | [Fallback credit](build-with-claude/fallback-credit.md) | Avoid paying the prompt-cache cost twice when you retry a refused request on another model. The refusal carries a credit token, and echoing it on the retry bills the retry as though the conversation had been on the new model all along. Message Batches results do not include fallback credit tokens. | Not ZDR eligible\* | Claude API (Beta)  Bedrock (Beta)  Claude Platform on AWS (Beta)  Google Cloud (Beta)  Microsoft Foundry (Beta) |
-| [PDF support](build-with-claude/pdf-support.md) | Process and analyze text and visual content from PDF documents. | ZDR eligible | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA) |
-| [Search results](build-with-claude/search-results.md) | Enable natural citations for RAG applications by providing search results with proper source attribution. Achieve web search-quality citations for custom knowledge bases and tools. | ZDR eligible | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA) |
+| [PDF support](build-with-claude/pdf-support.md) | Process and analyze text and visual content from PDF documents. | ZDR eligible | Claude API  Bedrock  Claude Platform on AWS  Google Cloud  Microsoft Foundry |
+| [Search results](build-with-claude/search-results.md) | Enable natural citations for RAG applications by providing search results with proper source attribution. Achieve web search-quality citations for custom knowledge bases and tools. | ZDR eligible | Claude API  Bedrock  Claude Platform on AWS  Google Cloud  Microsoft Foundry |
 | [Server-side fallback](build-with-claude/refusals-and-fallback.md) | Retry a refused request inside a single API call. Use the `"default"` mode to apply Anthropic's recommended fallback models, or name up to three models of your own; when the requested model declines, the API runs the next model in the chain on the same request. The `fallbacks` parameter is not available in the Message Batches API. | Not ZDR eligible\* | Claude API (Beta) |
-| [Structured outputs](build-with-claude/structured-outputs.md) | Guarantee schema conformance with two approaches: JSON outputs for structured data responses, and strict tool use for validated tool inputs. | [ZDR eligible (qualified)](build-with-claude/structured-outputs.md)\* | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA)† |
-| [Thinking](build-with-claude/thinking.md) | Enhanced reasoning capabilities for complex tasks, providing transparency into Claude's step-by-step thought process before delivering its final answer. | ZDR eligible | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA) |
+| [Structured outputs](build-with-claude/structured-outputs.md) | Guarantee schema conformance with two approaches: JSON outputs for structured data responses, and strict tool use for validated tool inputs. | [ZDR eligible (qualified)](build-with-claude/structured-outputs.md)\* | Claude API  Bedrock  Claude Platform on AWS  Google Cloud  Microsoft Foundry† |
+| [Thinking](build-with-claude/thinking.md) | Enhanced reasoning capabilities for complex tasks, providing transparency into Claude's step-by-step thought process before delivering its final answer. | ZDR eligible | Claude API  Bedrock  Claude Platform on AWS  Google Cloud  Microsoft Foundry |
 
 ##  Tools
 
@@ -59,19 +58,19 @@ Built-in tools that Claude invokes through `tool_use`. Server-side tools are run
 | Feature | Description | ZDR | Availability |
 | --- | --- | --- | --- |
 | [Advisor tool](agents-and-tools/tool-use/advisor-tool.md) | Pair a faster executor model with a higher-intelligence advisor model that provides strategic guidance mid-generation for long-horizon agentic workloads. | ZDR eligible | Claude API (Beta)  Claude Platform on AWS (Beta) |
-| [Code execution](agents-and-tools/tool-use/code-execution-tool.md) | Run code in a sandboxed environment for advanced data analysis, calculations, and file processing. Free when used with web search or web fetch. | Not ZDR eligible | Claude API (GA)  Claude Platform on AWS (GA)  Microsoft Foundry (GA)† |
-| [Web fetch](agents-and-tools/tool-use/web-fetch-tool.md) | Retrieve full content from specified web pages and PDF documents for in-depth analysis. | ZDR eligible\* | Claude API (GA)  Claude Platform on AWS (GA)  Microsoft Foundry (GA)† |
-| [Web search](agents-and-tools/tool-use/web-search-tool.md) | Augment Claude's comprehensive knowledge with current, real-world data from across the web. | ZDR eligible\* | Claude API (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA)† |
+| [Code execution](agents-and-tools/tool-use/code-execution-tool.md) | Run code in a sandboxed environment for advanced data analysis, calculations, and file processing. Free when used with web search or web fetch. | Not ZDR eligible | Claude API  Claude Platform on AWS  Microsoft Foundry† |
+| [Web fetch](agents-and-tools/tool-use/web-fetch-tool.md) | Retrieve full content from specified web pages and PDF documents for in-depth analysis. | ZDR eligible\* | Claude API  Claude Platform on AWS  Microsoft Foundry† |
+| [Web search](agents-and-tools/tool-use/web-search-tool.md) | Augment Claude's comprehensive knowledge with current, real-world data from across the web. | ZDR eligible\* | Claude API  Claude Platform on AWS  Google Cloud  Microsoft Foundry† |
 
 ###  Client-side tools
 
 | Feature | Description | ZDR | Availability |
 | --- | --- | --- | --- |
-| [Bash](agents-and-tools/tool-use/bash-tool.md) | Execute bash commands and scripts to interact with the system shell and perform command-line operations. | ZDR eligible | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA) |
-| [Browser use](agents-and-tools/tool-use/browser-use-tool.md) | Navigate, read, and interact with webpages in your own browser environment. | ZDR eligible | Claude API (GA) |
-| [Computer use](agents-and-tools/tool-use/computer-use-tool.md) | Control computer interfaces by taking screenshots and issuing mouse and keyboard commands. | ZDR eligible | Claude API (GA)  Bedrock (Beta)  Claude Platform on AWS (Beta)  Google Cloud (Beta)  Microsoft Foundry (Beta) |
-| [Memory](agents-and-tools/tool-use/memory-tool.md) | Enable Claude to store and retrieve information across conversations. Build knowledge bases over time, maintain project context, and learn from past interactions. | ZDR eligible | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA) |
-| [Text editor](agents-and-tools/tool-use/text-editor-tool.md) | Create and edit text files with a built-in text editor interface for file manipulation tasks. | ZDR eligible | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA) |
+| [Bash](agents-and-tools/tool-use/bash-tool.md) | Execute bash commands and scripts to interact with the system shell and perform command-line operations. | ZDR eligible | Claude API  Bedrock  Claude Platform on AWS  Google Cloud  Microsoft Foundry |
+| [Browser use](agents-and-tools/tool-use/browser-use-tool.md) | Navigate, read, and interact with webpages in your own browser environment. | ZDR eligible | Claude API |
+| [Computer use](agents-and-tools/tool-use/computer-use-tool.md) | Control computer interfaces by taking screenshots and issuing mouse and keyboard commands. | ZDR eligible | Claude API  Bedrock (Beta)  Claude Platform on AWS (Beta)  Google Cloud (Beta)  Microsoft Foundry (Beta) |
+| [Memory](agents-and-tools/tool-use/memory-tool.md) | Enable Claude to store and retrieve information across conversations. Build knowledge bases over time, maintain project context, and learn from past interactions. | ZDR eligible | Claude API  Bedrock  Claude Platform on AWS  Google Cloud  Microsoft Foundry |
+| [Text editor](agents-and-tools/tool-use/text-editor-tool.md) | Create and edit text files with a built-in text editor interface for file manipulation tasks. | ZDR eligible | Claude API  Bedrock  Claude Platform on AWS  Google Cloud  Microsoft Foundry |
 
 ##  Tool infrastructure
 
@@ -79,11 +78,11 @@ Infrastructure that supports discovering, orchestrating, and scaling tool use.
 
 | Feature | Description | ZDR | Availability |
 | --- | --- | --- | --- |
-| [Agent Skills](agents-and-tools/agent-skills/overview.md) | Extend Claude's capabilities with Skills. Use pre-built Skills (PowerPoint, Excel, Word, PDF) or create custom Skills with instructions and scripts. Skills use progressive disclosure to efficiently manage context. | Not ZDR eligible | Claude API (GA)  Claude Platform on AWS (Beta)  Microsoft Foundry (Beta)† |
-| [Fine-grained tool streaming](agents-and-tools/tool-use/fine-grained-tool-streaming.md) | Stream tool use parameters without buffering/JSON validation, reducing latency for receiving large parameters. | ZDR eligible | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA) |
+| [Agent Skills](agents-and-tools/agent-skills/overview.md) | Extend Claude's capabilities with Skills. Use pre-built Skills (PowerPoint, Excel, Word, PDF) or create custom Skills with instructions and scripts. Skills use progressive disclosure to efficiently manage context. | Not ZDR eligible | Claude API  Claude Platform on AWS (Beta)  Microsoft Foundry (Beta)† |
+| [Fine-grained tool streaming](agents-and-tools/tool-use/fine-grained-tool-streaming.md) | Stream tool use parameters without buffering/JSON validation, reducing latency for receiving large parameters. | ZDR eligible | Claude API  Bedrock  Claude Platform on AWS  Google Cloud  Microsoft Foundry |
 | [MCP connector](agents-and-tools/mcp-connector.md) | Connect to remote [MCP](mcp.md) servers directly from the Messages API without a separate MCP client. | Not ZDR eligible | Claude API (Beta)  Claude Platform on AWS (Beta)  Microsoft Foundry (Beta)† |
-| [Programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md) | Enable Claude to call your tools programmatically from within code execution containers, reducing latency and token consumption for multi-tool workflows. | Not ZDR eligible | Claude API (GA)  Claude Platform on AWS (GA)  Microsoft Foundry (GA)† |
-| [Tool search](agents-and-tools/tool-use/tool-search-tool.md) | Scale to thousands of tools by dynamically discovering and loading tools on-demand using regex- and BM25-based search, optimizing context usage and improving tool selection accuracy. | ZDR eligible | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA)† |
+| [Programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md) | Enable Claude to call your tools programmatically from within code execution containers, reducing latency and token consumption for multi-tool workflows. | Not ZDR eligible | Claude API  Claude Platform on AWS  Microsoft Foundry† |
+| [Tool search](agents-and-tools/tool-use/tool-search-tool.md) | Scale to thousands of tools by dynamically discovering and loading tools on-demand using regex- and BM25-based search, optimizing context usage and improving tool selection accuracy. | ZDR eligible | Claude API  Bedrock  Claude Platform on AWS  Google Cloud  Microsoft Foundry† |
 
 ##  Context management
 
@@ -93,10 +92,10 @@ Infrastructure for controlling and optimizing Claude's context window.
 | --- | --- | --- | --- |
 | [Compaction](build-with-claude/compaction.md) | Server-side context summarization for long-running conversations. When context approaches the window limit, the API automatically summarizes earlier parts of the conversation. | ZDR eligible | Claude API (Beta)  Bedrock (Beta)  Claude Platform on AWS (Beta)  Google Cloud (Beta)  Microsoft Foundry (Beta) |
 | [Context editing](build-with-claude/context-editing.md) | Automatically manage conversation context with configurable strategies. Supports clearing tool results when approaching token limits and managing thinking blocks in extended thinking conversations. | ZDR eligible | Claude API (Beta)  Bedrock (Beta)  Claude Platform on AWS (Beta)  Google Cloud (Beta)  Microsoft Foundry (Beta) |
-| [Automatic prompt caching](build-with-claude/prompt-caching.md) | Simplify prompt caching to a single API parameter. The system automatically caches the last cacheable block in your request, moving the cache point forward as conversations grow. | ZDR eligible | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA) |
-| [Prompt caching (5m)](build-with-claude/prompt-caching.md) | Provide Claude with more background knowledge and example outputs to reduce costs and latency. | ZDR eligible | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA) |
-| [Prompt caching (1hr)](build-with-claude/prompt-caching.md) | Extended 1-hour cache duration for less frequently accessed but important context, complementing the standard 5-minute cache. | ZDR eligible | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA) |
-| [Token counting](build-with-claude/token-counting.md) | Token counting enables you to determine the number of tokens in a message before sending it to Claude, helping you make informed decisions about your prompts and usage. | ZDR eligible | Claude API (GA)  Bedrock (GA)  Claude Platform on AWS (GA)  Google Cloud (GA)  Microsoft Foundry (GA) |
+| [Automatic prompt caching](build-with-claude/prompt-caching.md) | Simplify prompt caching to a single API parameter. The system automatically caches the last cacheable block in your request, moving the cache point forward as conversations grow. | ZDR eligible | Claude API  Bedrock  Claude Platform on AWS  Google Cloud  Microsoft Foundry |
+| [Prompt caching (5m)](build-with-claude/prompt-caching.md) | Provide Claude with more background knowledge and example outputs to reduce costs and latency. | ZDR eligible | Claude API  Bedrock  Claude Platform on AWS  Google Cloud  Microsoft Foundry |
+| [Prompt caching (1hr)](build-with-claude/prompt-caching.md) | Extended 1-hour cache duration for less frequently accessed but important context, complementing the standard 5-minute cache. | ZDR eligible | Claude API  Bedrock  Claude Platform on AWS  Google Cloud  Microsoft Foundry |
+| [Token counting](build-with-claude/token-counting.md) | Token counting enables you to determine the number of tokens in a message before sending it to Claude, helping you make informed decisions about your prompts and usage. | ZDR eligible | Claude API  Bedrock  Claude Platform on AWS  Google Cloud  Microsoft Foundry |
 
 ##  Files and assets
 
@@ -104,7 +103,7 @@ Manage files and assets for use with Claude.
 
 | Feature | Description | ZDR | Availability |
 | --- | --- | --- | --- |
-| [Files API](build-with-claude/files.md) | Upload and manage files to use with Claude without re-uploading content with each request. Supports PDFs, images, and text files. | Not ZDR eligible | Claude API (GA)  Claude Platform on AWS (Beta)  Microsoft Foundry (Beta)† |
+| [Files API](build-with-claude/files.md) | Upload and manage files to use with Claude without re-uploading content with each request. Supports PDFs, images, and text files. | Not ZDR eligible | Claude API  Claude Platform on AWS (Beta)  Microsoft Foundry (Beta)† |
 
 \* **Structured outputs:** Your prompts and Claude's outputs are not stored. Only JSON schemas are cached, for up to 24 hours since last use. **Web search and web fetch:** ZDR-eligible except when [dynamic filtering](agents-and-tools/tool-use/web-search-tool.md) is enabled. **Fallback credit and server-side fallback:** The features retain no message content, but both handle refusals from Claude Fable 5, which [is not available under ZDR](manage-claude/api-and-data-retention.md). See [ZDR details](manage-claude/api-and-data-retention.md).
 

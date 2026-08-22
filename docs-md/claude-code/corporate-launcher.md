@@ -4,7 +4,7 @@ Some organizations require every process on a workstation to start through a man
 `CLAUDE_CODE_PROCESS_WRAPPER` starts every process Claude Code launches from its own binary through your launcher: the background service, every session it hosts in [agent view](agent-view.md), and Claude Code’s relaunches after an update. Set it to your launcher’s absolute path, and Claude Code runs the launcher with the Claude Code command as its arguments.
 A launcher that wraps the `claude` command on your `PATH` can’t reach these processes, because they start from the binary’s direct path without looking up `claude`.
 
-`CLAUDE_CODE_PROCESS_WRAPPER` requires Claude Code v2.1.208 or later. Earlier versions ignore the variable and start every process unwrapped. The equivalent [`processWrapper` setting](settings.md) requires v2.1.210 or later. Earlier versions ignore it as an unknown key, apply no launcher, and report no error.After deploying either form, use the [Verify step](#set-up-the-launcher) to confirm the running version applies it.
+`CLAUDE_CODE_PROCESS_WRAPPER` requires Claude Code v2.1.208 or later. Earlier versions ignore the variable and start every process unwrapped. The equivalent [`processWrapper` setting](settings-reference.md) requires v2.1.210 or later. Earlier versions ignore it as an unknown key, apply no launcher, and report no error.After deploying either form, use the [Verify step](#set-up-the-launcher) to confirm the running version applies it.
 
 ## [​](#what-the-launcher-covers) What the launcher covers
 
@@ -56,7 +56,7 @@ If you previously replaced the `~/.local/bin/claude` symlink with your launcher,
 
 Set CLAUDE\_CODE\_PROCESS\_WRAPPER in settings
 
-Set the variable in the `env` block of a settings file so the detached background service inherits it. A shell `export` isn’t enough: the background service starts on demand, outlives your shell, and never re-reads shell profiles.For one machine, add it to `~/.claude/settings.json`. To deploy it to every machine in your organization, put the same block in [managed settings](permissions.md):
+Set the variable in the `env` block of a settings file so the detached background service inherits it. A shell `export` isn’t enough: the background service starts on demand, outlives your shell, and never re-reads shell profiles.For one machine, add it to `~/.claude/settings.json`. To deploy it to every machine in your organization, put the same block in [managed settings](managed-settings.md):
 
 ```shiki
 {
@@ -66,7 +66,7 @@ Set the variable in the `env` block of a settings file so the detached backgroun
 }
 ```
 
-When more than one source sets the variable, the managed settings value overrides both `~/.claude/settings.json` and a value exported in the shell, so users can’t point self-spawns at a different launcher.The [`processWrapper` setting](settings.md) carries the same value as a named, top-level settings key. Set it when your organization pushes settings as individual keys rather than an `env` block. The `processWrapper` setting requires Claude Code v2.1.210 or later. The following settings file sets the same launcher through the key:
+When more than one source sets the variable, the managed settings value overrides both `~/.claude/settings.json` and a value exported in the shell, so users can’t point self-spawns at a different launcher.The [`processWrapper` setting](settings-reference.md) carries the same value as a named, top-level settings key. Set it when your organization pushes settings as individual keys rather than an `env` block. The `processWrapper` setting requires Claude Code v2.1.210 or later. The following settings file sets the same launcher through the key:
 
 ```shiki
 {
@@ -74,7 +74,7 @@ When more than one source sets the variable, the managed settings value override
 }
 ```
 
-`CLAUDE_CODE_PROCESS_WRAPPER` takes precedence when both are set.Because `processWrapper` is a named setting, an organization that delivers it through [remote managed settings](settings.md) sees it listed on the [security approval dialog](server-managed-settings.md) alongside the other settings that run administrator-supplied executables.Project and local settings can’t configure the launcher. A file committed to a repository must not be able to put a binary in front of every Claude Code process on the machine, so Claude Code ignores `CLAUDE_CODE_PROCESS_WRAPPER` in `.claude/settings.json` or `.claude/settings.local.json` with a warning in the [debug log](troubleshooting.md), and never reads the `processWrapper` key from those files.
+`CLAUDE_CODE_PROCESS_WRAPPER` takes precedence when both are set.Because `processWrapper` is a named setting, an organization that delivers it through [remote managed settings](managed-settings.md) sees it listed on the [security approval dialog](server-managed-settings.md) alongside the other settings that run administrator-supplied executables.Project and local settings can’t configure the launcher. A file committed to a repository must not be able to put a binary in front of every Claude Code process on the machine, so Claude Code ignores `CLAUDE_CODE_PROCESS_WRAPPER` in `.claude/settings.json` or `.claude/settings.local.json` with a warning in the [debug log](troubleshooting.md), and never reads the `processWrapper` key from those files.
 
 3
 

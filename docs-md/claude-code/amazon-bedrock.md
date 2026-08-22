@@ -29,7 +29,7 @@ In the [Amazon Bedrock console](https://console.aws.amazon.com/bedrock/), open t
 
 Start Claude Code and choose Amazon Bedrock
 
-Run `claude`. At the login prompt, select **3rd-party platform**, then **Amazon Bedrock**. If you’re already signed in and see the chat prompt instead, run `/setup-bedrock` to open the wizard. The command works when typed even though it isn’t listed in the command menu until Bedrock is configured.
+Run `claude`. At the login prompt, select **3rd-party platform**, then **Amazon Bedrock**. If you’re already signed in and see the chat prompt instead, run `/setup-bedrock` to open the wizard. Until `CLAUDE_CODE_USE_BEDROCK=1` is set, Claude Code [hides the command from the command menu](commands.md); type it in full.
 
 3
 
@@ -253,7 +253,7 @@ When a user selects one of these versions in `/model`, Claude Code calls Amazon 
 When Claude Code starts with Amazon Bedrock configured, it verifies that the models it intends to use are accessible in your account.
 If you have pinned a model version that is older than the current Claude Code default, and your account can invoke the newer version, Claude Code prompts you to update the pin. Accepting writes the new model ID to your [user settings file](settings.md) and restarts Claude Code. Declining is remembered until the next default version change. Pins that point to an [application inference profile ARN](#map-each-model-version-to-an-inference-profile) are skipped, since those are managed by your administrator.
 If you have not pinned a model and the current default is unavailable in your account, Claude Code falls back for the current session and shows a notice. It tries earlier versions of the default model first and, when the default is an Opus model and no Opus version is available, falls back to the default Sonnet model. The fallback is not persisted. Enable the newer model in your Amazon Bedrock account or [pin a version](#4-pin-model-versions) to make the choice permanent.
-When you start the session on a specific Sonnet or Opus version, for example with `--model`, `ANTHROPIC_MODEL`, or the [`model` setting](settings.md), that version acts as the session’s pinned default for the matching `sonnet` or `opus` alias. Claude Code skips the availability check for the built-in default your model replaces and starts on the model you configured, with no fallback notice.
+When you start the session on a specific Sonnet or Opus version, for example with `--model`, `ANTHROPIC_MODEL`, or the [`model` setting](settings-reference.md), that version acts as the session’s pinned default for the matching `sonnet` or `opus` alias. Claude Code skips the availability check for the built-in default your model replaces and starts on the model you configured, with no fallback notice.
 Model aliases such as `opus` don’t act as pins, and neither does a model ID Claude Code doesn’t recognize, such as an application inference profile ARN.
 
 ## [​](#cross-region-inference-profile-prefixes) Cross-region inference profile prefixes

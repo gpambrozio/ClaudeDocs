@@ -8,7 +8,7 @@ SSO, SCIM provisioning, and seat assignment are configured at the Claude account
 | Decision | What you’re choosing | Reference |
 | --- | --- | --- |
 | [Choose your API provider](#choose-your-api-provider) | Where Claude Code authenticates and how it’s billed | [Authentication](authentication.md), [Amazon Bedrock](amazon-bedrock.md), [Google Cloud’s Agent Platform](google-vertex-ai.md), [Microsoft Foundry](microsoft-foundry.md) |
-| [Decide how settings reach devices](#decide-how-settings-reach-devices) | How managed policy reaches developer machines | [Server-managed settings](server-managed-settings.md), [Settings files](settings.md) |
+| [Decide how settings reach devices](#decide-how-settings-reach-devices) | How managed policy reaches developer machines | [Server-managed settings](server-managed-settings.md), [Delivery mechanisms](managed-settings.md) |
 | [Decide what to enforce](#decide-what-to-enforce) | Which tools, commands, and integrations are allowed | [Permissions](permissions.md), [Sandboxing](sandboxing.md) |
 | [Set up usage visibility](#set-up-usage-visibility) | How you track spend and adoption | [Analytics](analytics.md), [Monitoring](monitoring-usage.md), [Costs](costs.md) |
 | [Review data handling](#review-data-handling) | Data retention and compliance posture | [Data usage](data-usage.md), [Security](security.md) |
@@ -31,12 +31,7 @@ Proxy and firewall requirements in [Network configuration](network-config.md) ap
 
 ## [​](#decide-how-settings-reach-devices) Decide how settings reach devices
 
-Managed settings define organization policy. Claude Code checks the four sources in the table below in priority order and applies the first one that returns a non-empty configuration, with two exceptions:
-
-- Claude Code honors a small set of [cross-source lock keys](settings.md), such as the sandbox allowlist locks, when any admin-controlled source sets them.
-- Claude Code [merges the `env` block per key across the admin-controlled sources](server-managed-settings.md), apart from the telemetry-unit and credential-paired routing exceptions covered there. Only admin-controlled sources contribute to the merge, developer-writable settings can’t, and [`CLAUDE_CODE_DISABLE_ADMIN_ENV_UNION=1`](env-vars.md) restores the winner-only composition. Requires Claude Code v2.1.223 or later.
-
-When an MDM or file-based source wins and configures a [`policyHelper`](settings.md), the helper’s output is the only managed configuration Claude Code reads: the lock-key checks read it alone, and no per-key `env` merge happens.
+Managed settings define organization policy. Claude Code checks the four sources in the table below in priority order and applies the first one that delivers at least one policy key. [Which managed source Claude Code uses](managed-settings.md) covers what still applies from the other sources and what a policy helper changes; the table is the decision map.
 
 | Mechanism | Delivery | Priority | Platforms |
 | --- | --- | --- | --- |
@@ -46,9 +41,9 @@ When an MDM or file-based source wins and configures a [`policyHelper`](settings
 | Windows user registry | `HKCU\SOFTWARE\Policies\ClaudeCode` | Lowest | Windows only |
 
 Server-managed settings reach devices at authentication time and refresh hourly during active sessions, with no endpoint infrastructure. Delivery through the claude.ai admin console requires a Claude for Teams or Enterprise plan. Deployments on Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry can get the same remote delivery by running a [Claude apps gateway](claude-apps-gateway.md), or use one of the file-based or OS-level mechanisms instead.
-If your organization mixes providers, configure [server-managed settings](server-managed-settings.md) for claude.ai users plus a [file-based or plist/registry fallback](settings.md) so other users still receive managed policy.
+If your organization mixes providers, configure [server-managed settings](server-managed-settings.md) for claude.ai users plus a [file-based or plist/registry fallback](managed-settings.md) so other users still receive managed policy.
 The plist and HKLM registry locations work with any provider and resist tampering because they require admin privileges to write. The Windows user registry at HKCU is writable without elevation, so treat it as a convenience default rather than an enforcement channel.
-By default, WSL reads only the Linux file path at `/etc/claude-code`. To extend your Windows registry and `C:\Program Files\ClaudeCode` policy to WSL on the same machine, set [`wslInheritsWindowsSettings: true`](settings.md) in either of those admin-only Windows sources.
+By default, WSL reads only the Linux file path at `/etc/claude-code`. To extend your Windows registry and `C:\Program Files\ClaudeCode` policy to WSL on the same machine, set [`wslInheritsWindowsSettings: true`](settings-reference.md) in either of those admin-only Windows sources.
 Whichever mechanism you choose, managed values take precedence over user and project settings, apart from a few security-sensitive [exceptions](settings.md). Array settings such as `permissions.allow` and `permissions.deny` merge entries from all sources, so developers can extend managed lists but not remove from them. For `fallbackModel` and `availableModels`, the managed value replaces lower layers rather than merging.
 
 ### [​](#wsl-sessions-in-claude-code-desktop) WSL sessions in Claude Code Desktop
@@ -74,14 +69,15 @@ Managed settings can lock down tools, sandbox execution, restrict MCP servers an
 | [Managed policy CLAUDE.md](memory.md) | Org-wide instructions loaded in every session, can’t be excluded | File at the managed policy path |
 | [MCP server control](managed-mcp.md) | Restrict which MCP servers users can add or connect to, or deploy a fixed set | `allowedMcpServers`, `deniedMcpServers`, `allowManagedMcpServersOnly`, or a deployed `managed-mcp.json` file |
 | [Plugin marketplace control](plugin-marketplaces.md) | Restrict which marketplace sources users can add and install from, reject the CLI flags that sideload plugins, agents, and MCP servers for a single run, block [`command` plugin sources](plugin-marketplaces.md), and allowlist which marketplaces’ plugins can be suggested | `strictKnownMarketplaces`, `blockedMarketplaces`, `disableSideloadFlags`, `disableCommandPluginSources`, `pluginSuggestionMarketplaces` |
-| [Customization lockdown](settings.md) | Block skills, agents, hooks, and MCP servers from user and project sources, so they can only come from plugins or managed settings | `strictPluginOnlyCustomization` |
-| [Hook restrictions](settings.md) | Restrict which hooks run and restrict HTTP hook URLs; see [Hook configuration](settings.md) for the full effect list | `allowManagedHooksOnly`, `allowedHttpHookUrls` |
-| [Login enforcement](settings.md) | Restrict login to a specific method or Anthropic organization. The method restriction applies across the terminal, VS Code extension, Agent SDK, `claude setup-token`, and `/install-github-app`; Claude Code verifies the organization for claude.ai account logins in the terminal, VS Code extension, and Agent SDK, and doesn’t check it for Claude Console logins or for [gateway](claude-apps-gateway.md) sign-in. Before v2.1.212, only terminal logins applied either key. When set, sessions authenticated by `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or `apiKeyHelper` are blocked at startup; cloud provider sessions aren’t affected | `forceLoginMethod`, `forceLoginOrgUUID` |
+| [Customization lockdown](settings-reference.md) | Block skills, agents, hooks, and MCP servers from user and project sources, so they can only come from plugins or managed settings | `strictPluginOnlyCustomization` |
+| [Hook restrictions](settings-reference.md) | Restrict which hooks run and restrict HTTP hook URLs; see [what runs under `allowManagedHooksOnly`](settings-reference.md) for the full effect list | `allowManagedHooksOnly`, `allowedHttpHookUrls` |
+| [Login enforcement](settings-reference.md) | Restrict login to a specific method or Anthropic organization. The method restriction applies across the VS Code extension, Agent SDK, `claude setup-token`, and `/install-github-app`, and the terminal’s interactive login screen, reached by `/login` or first-run onboarding, pre-selects the method without enforcing it; Claude Code verifies the organization for claude.ai account logins in the terminal, VS Code extension, and Agent SDK, and doesn’t check it for Claude Console logins or for [gateway](claude-apps-gateway.md) sign-in. Before v2.1.212, only terminal logins applied either key. When set, sessions authenticated by `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or `apiKeyHelper` are blocked at startup; cloud provider sessions aren’t affected | `forceLoginMethod`, `forceLoginOrgUUID` |
 | [Disable agent view](agent-view.md) | Turn off `claude agents`, `--bg`, `/background`, and the on-demand supervisor | `disableAgentView` |
 | [Configure the corporate launcher](corporate-launcher.md) | Prefix the [background-agent supervisor](agent-view.md), its workers, and the [other covered background processes](corporate-launcher.md) with a required corporate launcher instead of turning agent view off | `processWrapper` |
 | [Model restrictions](model-config.md) | `availableModels` filters which models appear in the picker. Adding `enforceAvailableModels` also constrains the auto-selected default model. See [surface coverage](model-config.md) for how this setting reaches the CLI, web, and IDE | `availableModels`, `enforceAvailableModels` |
-| [Version floor](settings.md) | Prevent auto-update from installing below an org-wide minimum | `minimumVersion` |
-| [Required version range](settings.md) | Refuse to start at all when the running version is outside an org-approved range. Stronger than `minimumVersion`, which only blocks downgrades | `requiredMinimumVersion`, `requiredMaximumVersion` |
+| [Version floor](settings-reference.md) | Prevent auto-update from installing below an org-wide minimum | `minimumVersion` |
+| [Required version range](settings-reference.md) | Refuse to start at all when the running version is outside an org-approved range. Stronger than `minimumVersion`, which only blocks downgrades | `requiredMinimumVersion`, `requiredMaximumVersion` |
+| [Telemetry opt-out](data-usage.md) | Turn off Anthropic-bound usage metrics, error reports, and surveys on every device | `env` with `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` set to `1`; the linked section lists the per-category variables |
 
 Organizations whose members authenticate through claude.ai or the Anthropic API can also govern models without deploying settings: [organization model restrictions](model-config.md) disable individual models, an [organization default model](model-config.md) sets which model new sessions start on, and [organization effort limits](model-config.md) cap effort levels per role. All three controls require a Claude Enterprise plan. Model restrictions and effort limits are enforced server-side; the default model is a starting point that users can change, unless the organization enforces it. Enforcement is available to a limited set of organizations; ask your Anthropic account team about availability. None of these controls reach sessions on Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, or [Claude Platform on AWS](claude-platform-on-aws.md); on those providers, use `availableModels` above for restrictions and the `model` key in managed settings for a default.
 [Claude Code on the web](claude-code-on-the-web.md) has its own admin surface: on the Cloud environments page in admin settings, owners and admins create [organization-shared environments](cloud-environments.md) that set the [network access level](cloud-environments.md), environment variables, and setup script for members’ cloud sessions. Owners and admins choose the organization’s default environment separately, at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code).
@@ -115,7 +111,7 @@ If you need request-level audit logging or to route traffic by data sensitivity,
 
 ## [​](#verify-and-onboard) Verify and onboard
 
-After configuring managed settings, have a developer run `/status` inside Claude Code. On the **Status** tab, the `Setting sources` line shows `Enterprise managed settings` followed by the source in parentheses, one of `(remote)`, `(plist)`, `(HKLM)`, `(HKCU)`, or `(file)`. See [Verify active settings](settings.md).
+After configuring managed settings, have a developer run `/status` inside Claude Code. On the **Status** tab, the `Setting sources` line shows `Enterprise managed settings` followed by the source that won in parentheses; [Verify enforcement](managed-settings.md) lists the labels.
 Share these resources to help developers get started:
 
 - [Quickstart](quickstart.md): first-session walkthrough from install to working with a project
@@ -135,7 +131,8 @@ If a developer sees “You haven’t been added to your organization yet,” the
 With provider and delivery mechanism chosen, move on to detailed configuration:
 
 - [Server-managed settings](server-managed-settings.md): deliver managed policy from the Claude admin console
-- [Settings reference](settings.md): every setting key, file location, and precedence rule
+- [Settings reference](settings-reference.md): every setting key, with where it goes and an example
+- [Which value Claude Code uses](settings.md): the precedence rules across managed, project, local, and user settings
 - [Monorepos and large repos](large-codebases.md): per-directory configuration patterns for organizations deploying into a monorepo
 - [Amazon Bedrock](amazon-bedrock.md), [Google Cloud’s Agent Platform](google-vertex-ai.md), [Microsoft Foundry](microsoft-foundry.md): provider-specific deployment
 - [Claude Enterprise Administrator Guide](https://claude.com/resources/tutorials/claude-enterprise-administrator-guide): SSO, SCIM, seat management, and rollout playbook

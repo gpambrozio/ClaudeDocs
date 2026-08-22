@@ -29,7 +29,7 @@ Claude Code exits with code 0 on success and a non-zero code when the run fails,
 
 Add `--bare` to reduce startup time by skipping auto-discovery of hooks, skills, custom commands, [subagents](sub-agents.md), plugins, MCP servers, auto memory, and CLAUDE.md. Without it, `claude -p` loads the same [context](how-claude-code-works.md) an interactive session would, including anything configured in the working directory or `~/.claude`.
 Bare mode is useful for CI and scripts where you need the same result on every machine. A hook in a teammate’s `~/.claude` or an MCP server in the project’s `.mcp.json` won’t run, because bare mode never reads them. A directory you name with `--add-dir` is a partial exception: bare mode loads skills from its `.claude/skills/` folder, but still skips its `.claude/commands/` and `.claude/agents/` folders. [Skills from additional directories](skills.md) covers what does and doesn’t load.
-Without `--bare`, Claude Code runs the hooks in a project’s `.claude/settings.json` even in a folder you’ve never trusted, because a `-p` session shows no workspace trust dialog. It also connects the servers in the project’s `.mcp.json`, because a `-p` session can’t show the per-server approval prompt either. [What runs before you trust a folder](permissions.md) covers each kind of repository content under `-p` and how to keep it out.
+Without `--bare`, a `-p` session runs the hooks in a project’s `.claude/settings.json` and connects the servers in its `.mcp.json`, even in a folder you’ve never trusted. A `-p` session shows no workspace trust dialog and no per-server approval prompt. [What runs before you trust a folder](permissions.md) covers each kind of repository content under `-p` and how to keep it out.
 This example runs a one-off summarize task in bare mode and pre-approves the Read tool so the call completes without a permission prompt. Set `ANTHROPIC_API_KEY` before running it, because bare mode doesn’t use your subscription login:
 
 ```shiki
@@ -249,7 +249,7 @@ claude -p "Look at my staged changes and create an appropriate commit" \
   --allowedTools "Bash(git diff *),Bash(git log *),Bash(git status *),Bash(git commit *)"
 ```
 
-The `--allowedTools` flag uses [permission rule syntax](settings.md). The trailing  `*` enables prefix matching, so `Bash(git diff *)` allows any command starting with `git diff`. The space before `*` is important: without it, `Bash(git diff*)` would also match `git diff-index`.
+The `--allowedTools` flag uses [permission rule syntax](settings-reference.md). The trailing  `*` enables prefix matching, so `Bash(git diff *)` allows any command starting with `git diff`. The space before `*` is important: without it, `Bash(git diff*)` would also match `git diff-index`.
 
 User-invoked [skills](skills.md) and custom commands work in `-p` mode: include `/skill-name` in the prompt string and Claude Code expands it before running. Built-in commands that only run in the terminal interface, such as `/login`, aren’t available in `-p` mode. `/model`, `/effort`, `/fast`, `/color`, and `/rename` accept the value as an argument, for example `/model sonnet`, and `/mcp` with no argument prints a text summary of server status; these forms require Claude Code v2.1.205 or later and follow each command’s [availability notes](commands.md). To change a setting from a `-p` invocation, pass `key=value` to `/config`, for example `/config thinking=false`.
 
@@ -268,7 +268,7 @@ See [system prompt flags](cli-reference.md) for more options including `--system
 
 ### [​](#continue-conversations) Continue conversations
 
-Use `--continue` to continue the most recent conversation, or `--resume` with a session ID to continue a specific conversation. This example runs a review, then sends follow-up prompts:
+Use `--continue` to continue the most recent conversation, or `--resume` with a session ID to continue a specific conversation. `--continue` skips [background sessions](sessions.md). This example runs a review, then sends follow-up prompts:
 
 ```shiki
 # First request

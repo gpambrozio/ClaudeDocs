@@ -314,7 +314,7 @@ Claude Code applies four safety behaviors across sessions:
 
 - Before archiving any session, Claude asks you first. You see the approval card in every permission mode, including Auto and Bypass permissions.
 - Through this surface, Claude can’t send cross-session messages from a session nobody is watching, such as a scheduled-task run, and can’t deliver messages into one.
-- Claude Code checks each message from this surface against the receiving session’s [inbound controls](cross-session-messaging.md), even when the receiving session doesn’t have [cross-session messaging](cross-session-messaging.md) itself. If you set [`crossSessionInbound`](settings.md) to `refuse` in the receiving session, Claude Code drops messages from this surface. Claude Code reports the refusal to the Claude desktop app. Before v2.1.234, Claude Code dropped every message from this surface to a receiving session without cross-session messaging.
+- Claude Code checks each message from this surface against the receiving session’s [inbound controls](cross-session-messaging.md), even when the receiving session doesn’t have [cross-session messaging](cross-session-messaging.md) itself. If you set [`crossSessionInbound`](settings-reference.md) to `refuse` in the receiving session, Claude Code drops messages from this surface. Claude Code reports the refusal to the Claude desktop app. Before v2.1.234, Claude Code dropped every message from this surface to a receiving session without cross-session messaging.
 - Claude Code quotes each incoming message and attributes it to the session that sent it, and Claude still follows the receiving session’s own permission settings when acting on one.
 
 Claude can also suggest new sessions. When it notices something worth fixing that’s out of scope for the current task, it offers the work as a task chip in the chat. Click the chip to start that work in a new session with its own worktree; Claude continues your current session uninterrupted.
@@ -362,7 +362,7 @@ Personal skills in `~/.claude/skills/` apply to local sessions; an [SSH](#ssh-se
 
 [Plugins](plugins.md) are reusable packages that add skills, agents, hooks, MCP servers, and LSP configurations to Claude Code. You can install plugins from the desktop app without using the terminal.
 For local and [SSH](#ssh-sessions) sessions, click the **+** button next to the prompt box and select **Plugins** to see your installed plugins and their skills. To add a plugin, select **Add plugin** from the submenu to open the plugin browser, which shows available plugins from your configured [marketplaces](plugin-marketplaces.md) including the official Anthropic marketplace. Select **Manage plugins** to enable, disable, or uninstall plugins.
-Plugins can be scoped to your user account, a specific project, or local-only. If your organization manages plugins centrally, those plugins are available in desktop sessions the same way they are in the CLI. The plugin browser is not available in cloud sessions, and plugins you install from the desktop app aren’t available for cloud sessions; to use a plugin in a cloud session, declare it in the repository’s `.claude/settings.json` under [`enabledPlugins`](settings.md) so it [installs at session start](cloud-environments.md). Plugins aren’t available in WSL sessions. For the full plugin reference including creating your own plugins, see [plugins](plugins.md).
+Plugins can be scoped to your user account, a specific project, or local-only. If your organization manages plugins centrally, those plugins are available in desktop sessions the same way they are in the CLI. The plugin browser is not available in cloud sessions, and plugins you install from the desktop app aren’t available for cloud sessions; to use a plugin in a cloud session, declare it in the repository’s `.claude/settings.json` under [`enabledPlugins`](settings-reference.md) so it [installs at session start](cloud-environments.md). Plugins aren’t available in WSL sessions. For the full plugin reference including creating your own plugins, see [plugins](plugins.md).
 
 ### [​](#configure-preview-servers) Configure preview servers
 
@@ -578,8 +578,8 @@ The remote machine must run Linux or macOS. Desktop installs Claude Code on the 
 
 #### [​](#pre-configure-ssh-connections-for-your-team) Pre-configure SSH connections for your team
 
-Administrators can distribute SSH connections to team members by adding `sshConfigs` to a [managed settings](settings.md) file. Connections defined this way appear in each user’s environment dropdown automatically and are shown as managed, so users can select them but cannot edit or delete them in the app.
-The following example pre-configures a single connection that opens in `~/projects` on the remote host:
+Administrators can distribute SSH connections to team members by adding `sshConfigs` to a [managed settings](managed-settings.md) file. Connections defined this way appear in each user’s environment dropdown automatically and are shown as managed, so users can select them but cannot edit or delete them in the app.
+The following example pre-configures a single connection:
 
 ```shiki
 {
@@ -589,18 +589,17 @@ The following example pre-configures a single connection that opens in `~/projec
       "name": "Shared Dev VM",
       "sshHost": "user@dev.example.com",
       "sshPort": 22,
-      "sshIdentityFile": "~/.ssh/id_ed25519",
-      "startDirectory": "~/projects"
+      "sshIdentityFile": "~/.ssh/id_ed25519"
     }
   ]
 }
 ```
 
-Each entry requires `id`, `name`, and `sshHost`. The `sshPort`, `sshIdentityFile`, and `startDirectory` fields are optional. Users can also add `sshConfigs` to their own `~/.claude/settings.json`, which is where connections added through the dialog are stored.
+Each entry requires `id`, `name`, and `sshHost`. The `sshPort` and `sshIdentityFile` fields are optional. Users can also add `sshConfigs` to their own `~/.claude/settings.json`, which is where connections added through the dialog are stored.
 
 #### [​](#restrict-which-ssh-hosts-users-can-connect-to) Restrict which SSH hosts users can connect to
 
-Administrators can limit Desktop’s SSH sessions to an approved set of hosts by adding `sshHostAllowlist` to a [managed settings](settings.md) file. When set, users can only connect to hosts whose resolved hostname matches one of the patterns. Set it to an empty array to disable SSH sessions entirely.
+Administrators can limit Desktop’s SSH sessions to an approved set of hosts by adding `sshHostAllowlist` to a [managed settings](managed-settings.md) file. When set, users can only connect to hosts whose resolved hostname matches one of the patterns. Set it to an empty array to disable SSH sessions entirely.
 The following example allows connections to any host under `devboxes.example.com` and to a single named bastion host:
 
 ```shiki
@@ -627,7 +626,7 @@ These settings are configured through the [admin settings console](https://claud
 
 ### [​](#managed-settings) Managed settings
 
-Managed settings override project and user settings and apply to Claude Code sessions in Desktop. You can set these keys in your organization’s [managed settings](settings.md) file or push them remotely through the admin console.
+Managed settings override project and user settings and apply to Claude Code sessions in Desktop. You can set these keys in your organization’s [managed settings](managed-settings.md) file or push them remotely through the admin console.
 
 | Key | Description |
 | --- | --- |
@@ -643,12 +642,12 @@ Managed settings override project and user settings and apply to Claude Code ses
 
 Which managed settings reach a Desktop session depends on where that session runs. Model restrictions such as [`availableModels`](model-config.md) are enforced in Desktop’s Claude Code sessions the same way as in the terminal CLI; see [surface coverage](model-config.md).
 
-- **Local sessions on this machine**: a managed settings file deployed to disk applies. Managed settings pushed remotely through the admin console also reach these sessions on Anthropic’s API when the session authenticates with an organization login or a directly configured API key, following the same [settings precedence](settings.md) as the terminal CLI.
+- **Local sessions on this machine**: a managed settings file deployed to disk applies. Managed settings pushed remotely through the admin console also reach these sessions on Anthropic’s API when the session authenticates with an [eligible login or key](server-managed-settings.md), following the same [settings precedence](settings.md) as the terminal CLI.
 - **[Cloud sessions](#cloud-sessions)**: receive [server-managed settings](server-managed-settings.md); device-deployed files don’t reach them, because they run on Anthropic-managed VMs. Sessions routed to a [self-hosted environment](self-hosted-environments.md) fall back to the managed settings file in the runner image when server-managed settings deliver no keys, per [settings precedence](server-managed-settings.md).
 - **[SSH sessions](#ssh-sessions)**: the session reads the managed settings file from the remote host. Desktop itself reads `sshConfigs` and `sshHostAllowlist` from the local machine’s managed settings when creating the connection.
 
 `permissions.disableBypassPermissionsMode` and `disableAutoMode` also work in user and project settings, but placing them in managed settings prevents users from overriding them.
-For the complete list of managed-only settings including `allowManagedPermissionRulesOnly` and `allowManagedHooksOnly`, see [managed-only settings](permissions.md).
+For the permission, plugin, and delivery keys only a managed source can set, see [Keys only managed settings can set](managed-settings.md).
 
 ### [​](#device-management-policies) Device management policies
 
@@ -782,7 +781,7 @@ This table compares core capabilities between the CLI and Desktop. For a full li
 
 ### [​](#what’s-not-available-in-desktop) What’s not available in Desktop
 
-The following features are only available in the CLI or VS Code extension, except where noted:
+The following features aren’t available in Desktop, except where noted:
 
 - **Third-party providers**: Desktop connects to Anthropic’s API by default. To route Desktop through a gateway, or to run the Code tab on Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, or a self-hosted LLM gateway, follow the links in the [Third-party providers row](#feature-comparison).
 - **Linux (beta)**: Computer Use isn’t yet available in the Linux desktop app. See [Claude Desktop on Linux](desktop-linux.md).

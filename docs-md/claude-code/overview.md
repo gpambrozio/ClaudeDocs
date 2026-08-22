@@ -4,7 +4,7 @@ Claude Code is an AI-powered coding assistant that helps you build features, fix
 
 ## [​](#get-started) Get started
 
-Claude Code runs on several surfaces: the terminal, IDE extensions, a desktop app, and the web. Choose one from the tabs below to get started. Most surfaces require a [Claude subscription](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=overview_pricing) or [Anthropic Console](https://console.anthropic.com/) account. The Terminal CLI and VS Code also support [third-party providers](third-party-integrations.md).
+Claude Code runs on several surfaces: the terminal, IDE extensions, a desktop app, and the web. Choose one from the tabs below to get started. Most surfaces require a [Claude subscription](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=overview_pricing) or [Anthropic Console](https://platform.claude.com/) account. The Terminal CLI, VS Code, and JetBrains also support [third-party providers](third-party-integrations.md).
 
 - Terminal
 - VS Code
@@ -77,6 +77,7 @@ A standalone app for running Claude Code outside your IDE or terminal. Review di
 - [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code&utm_medium=docs) (Intel and Apple Silicon)
 - [Windows](https://claude.ai/api/desktop/win32/x64/setup/latest/redirect?utm_source=claude_code&utm_medium=docs) (x64)
 - [Windows ARM64](https://claude.ai/api/desktop/win32/arm64/setup/latest/redirect?utm_source=claude_code&utm_medium=docs)
+- On Ubuntu or Debian, where the app is in beta, install it with apt by following the [Linux install instructions](desktop-linux.md)
 
 After installing, launch Claude, sign in, and click the **Code** tab to start coding. A [paid subscription](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=overview_desktop_pricing) is required.[Learn more about the desktop app →](desktop-quickstart.md)
 
@@ -116,9 +117,9 @@ The [Model Context Protocol (MCP)](mcp.md) is an open standard for connecting AI
 
 Customize with instructions, skills, and hooks
 
-[`CLAUDE.md`](memory.md) is a markdown file you add to your project root that Claude Code reads at the start of every session. Use it to set coding standards, architecture decisions, preferred libraries, and review checklists. Claude also builds [auto memory](memory.md) as it works, saving learnings like build commands and debugging insights across sessions without you writing anything.Create [skills](skills.md) to package repeatable workflows your team can share, like `/review-pr` or `/deploy-staging`.[Hooks](hooks.md) let you run shell commands before or after Claude Code actions, like auto-formatting after every file edit or running lint before a commit.
+[`CLAUDE.md`](memory.md) is a markdown file you add to your project root that Claude Code reads at the start of every session. Use it to set coding standards, architecture decisions, preferred libraries, and review checklists. Claude also builds [auto memory](memory.md) as it works, saving learnings across sessions without you writing anything.Create [skills](skills.md) to package repeatable workflows your team can share, like `/review-pr` or `/deploy-staging`.[Hooks](hooks.md) let you run shell commands before or after Claude Code actions, like auto-formatting after every file edit or running lint before a commit.
 
-Run agent teams and build custom agents
+Run agents in parallel and build custom agents
 
 Spawn [multiple Claude Code agents](sub-agents.md) that work on different parts of a task simultaneously. A lead agent coordinates the work, assigns subtasks, and merges results.To run several full sessions in parallel and watch them from one screen, use [background agents](agent-view.md). For fully custom workflows, the [Agent SDK](agent-sdk/overview.md) lets you build your own agents powered by Claude Code’s tools and capabilities, with full control over orchestration, tool access, and permissions.
 
@@ -159,7 +160,7 @@ Sessions aren’t tied to a single surface. Move work between them as your conte
 
 ## [​](#use-claude-code-everywhere) Use Claude Code everywhere
 
-Each [surface](glossary.md) connects to the same underlying Claude Code engine, so your CLAUDE.md files, settings, and MCP servers work across all of them.
+Each [surface](glossary.md) connects to the same underlying Claude Code engine, so your repo’s CLAUDE.md files, settings, and MCP servers work across all of them.
 Beyond the [Terminal](quickstart.md), [VS Code](vs-code.md), [JetBrains](jetbrains.md), [Desktop](desktop.md), and [Web](claude-code-on-the-web.md) surfaces above, Claude Code integrates with CI/CD, chat, and browser workflows:
 
 | I want to… | Best option |

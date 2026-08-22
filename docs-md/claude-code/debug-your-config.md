@@ -30,7 +30,7 @@ CLAUDE.md and permissions solve different problems. CLAUDE.md tells Claude how y
 Settings merge across managed, user, project, and local scopes. Managed settings apply first when present. Among the rest, the closer scope overrides the broader one in the order local, then project, then user. Some settings can also be set by command-line flags or [environment variables](env-vars.md), which act as another override layer. When a setting doesn’t seem to apply, the value you set is usually being overridden by another scope or an environment variable.
 Run [`/doctor`](commands.md) to find invalid settings files.
 From the terminal, `claude doctor` prints read-only installation and settings diagnostics without starting a session.
-Run `/status` to see which settings sources are active, including whether managed settings are in effect. To understand which scope wins for a given key, see [How scopes interact](settings.md).
+Run `/status` to see which settings sources are active, including whether managed settings are in effect. To understand which scope Claude Code uses for a given key, see [Settings precedence](settings.md).
 
 ## [​](#check-mcp-servers) Check MCP servers
 
@@ -49,7 +49,7 @@ If the hook appears but doesn’t fire, the matcher is the usual cause. Check it
 
 - The `matcher` field is a single string that uses `|` to match multiple tool names, for example `"Edit|Write"`. A `,` separator is equivalent, so `"Edit,Write"` matches the same tools. Before v2.1.191, a comma fell through to regex evaluation and the matcher never matched, so use `|` if you aren’t on v2.1.191 yet.
 - A misspelled tool name produces a matcher that matches nothing, so the hook fails silently.
-- An array value is a schema error: Claude Code shows a settings error notice and rejects the whole user, project, or local settings file, `claude doctor` reports the validation failure, and no hook from that file appears in `/hooks`. In [managed settings](settings.md), only the invalid entry is stripped and the file’s other hooks still apply.
+- An array value is a schema error: Claude Code shows a settings error notice and rejects the whole user, project, or local settings file, `claude doctor` reports the validation failure, and no hook from that file appears in `/hooks`. In [managed settings](managed-settings.md), Claude Code drops the whole `hooks` key from the file that contains the array, so none of that file’s hooks apply. The file’s other settings still apply, and `claude doctor` lists the dropped key.
 
 Edits to `settings.json` take effect in the running session after a brief file-stability delay. You don’t need to restart. If `/hooks` still shows the old definition a few seconds after saving, run `/hooks` again to refresh the view.
 If `/hooks` shows the hook but it still does not fire, the next step is to watch hook evaluation live. Start a session with `claude --debug` and trigger the tool call. The debug log records each event, which matchers were checked, and the hook’s exit code and output. See [Debug hooks](hooks.md) for the log format and [hooks troubleshooting](hooks-guide.md) for common failure patterns.
@@ -100,7 +100,7 @@ Most configuration surprises trace back to a small set of location and syntax ru
 For full reference on each configuration surface, see the dedicated page:
 
 - **[`.claude` directory reference](claude-directory.md)**: every config file location and what reads it
-- **[Settings](settings.md)**: precedence order and the full key list
+- **[Settings](settings.md)**: which file to use and which value Claude Code uses; the [settings reference](settings-reference.md) has the full key list
 - **[Hooks reference](hooks.md)**: event names, payloads, and `--debug` output format
 - **[MCP](mcp.md)**: server configuration, approval, and `/mcp` output
 - **[Troubleshoot installation and login](troubleshoot-install.md)**: `command not found`, PATH, and authentication problems

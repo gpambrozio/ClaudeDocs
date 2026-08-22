@@ -73,7 +73,7 @@ Response
       "workspace_id": "wrkspc_01SvYKoWVRVHoEbwESNvzYdR",
       "user": {
         "id": "user_01GpKpLmNoPqRsTuVwXyZaBc",
-        "email_address": "[email protected]"
+        "email_address": "engineer@example.com"
       },
       "product_surface": "cowork",
       "created_at": "2026-07-09T14:02:11Z"
@@ -292,7 +292,7 @@ Response
       "organization_uuid": "91012d09-e48b-438e-a489-1bebfd8fa6f9",
       "user": {
         "id": "user_01XyDMpzjS89pFZXqSFUBDr6",
-        "email_address": "[email protected]"
+        "email_address": "user@example.com"
       },
       "agent_id": null,
       "started_by_user": null,
@@ -309,7 +309,7 @@ Response
       "agent_id": "cagt_01MnPqRsTuVwXyZaBcDeFgH8",
       "started_by_user": {
         "id": "user_01XyDMpzjS89pFZXqSFUBDr6",
-        "email_address": "[email protected]"
+        "email_address": "user@example.com"
       },
       "status": "archived",
       "created_at": "2026-06-28T09:15:22Z",

@@ -9,7 +9,7 @@ The same environments apply wherever you start a cloud session: [Claude Code on 
 
 ## [​](#the-default-environment) The Default environment
 
-Onboarding sets up the **Default** environment for you, whether you connect through [the web](web-quickstart.md) or a CLI flow such as `/web-setup`; if web onboarding shows an environment form instead of creating the environment, keep the form’s defaults to get the same **Default** environment. **Default** carries no configuration of its own:
+If you don’t have an environment yet, onboarding sets up the **Default** environment for you, whether you connect through [the web](web-quickstart.md) or a CLI flow such as `/web-setup`; if web onboarding shows an environment form instead of creating the environment, keep the form’s defaults to get the same **Default** environment. **Default** carries no configuration of its own:
 
 - [**Trusted** network access](#access-levels): sessions reach package registries and other [allowlisted domains](#default-allowed-domains), and nothing else through the session’s network.
 - No other configuration: **Default** defines no environment variables or setup script, so sessions start with just the [pre-installed tools](#installed-tools).
@@ -59,7 +59,7 @@ Anyone who uses the environment can read the values, and cloud environments have
 ### [​](#select-an-environment-from-the-cli) Select an environment from the CLI
 
 Run `/remote-env` in your terminal to choose the default environment for cloud sessions you create from the CLI, such as [`claude --cloud`](claude-code-on-the-web.md). The command opens a picker of your existing environments and saves your choice to the `remote.defaultEnvironmentId` key in your [user settings](settings.md), so it applies in every project on your machine until you change it, unless the same key is set at a higher-precedence [settings layer](settings.md), such as a repo’s project settings.
-A [self-hosted environment](self-hosted-environments.md) ID, which has the form `ccpool_...`, follows a stricter source rule. See [`remote.defaultEnvironmentId`](settings.md) for the settings layers Claude Code honors it from.
+A [self-hosted environment](self-hosted-environments.md) ID, which has the form `ccpool_...`, follows a stricter source rule. See [`remote.defaultEnvironmentId`](settings-reference.md) for the settings layers Claude Code honors it from.
 `/remote-env` only sets the default: it doesn’t start a session, and it can’t add or edit environments. Manage them at [claude.ai/code](https://claude.ai/code).
 
 ### [​](#archive-an-environment) Archive an environment
@@ -175,17 +175,17 @@ Cloud sessions come with common language runtimes, build tools, and databases pr
 | **Python** | Python 3.x with pip, poetry, uv, black, mypy, pytest, ruff |
 | **Node.js** | 20, 21, and 22, with npm, yarn, pnpm, bun¹, eslint, prettier, chromedriver |
 | **Ruby** | 3.1, 3.2, 3.3 with gem, bundler, rbenv |
-| **PHP** | 8.4 with Composer |
+| **PHP** | 8.3 with Composer |
 | **Java** | OpenJDK 21 with Maven and Gradle |
-| **Go** | latest stable with module support |
+| **Go** | Go with module support |
 | **Rust** | rustc and cargo |
 | **C/C++** | GCC, Clang, cmake, ninja, conan |
 | **Docker** | docker, dockerd, docker compose |
 | **Databases** | PostgreSQL 16, Redis 7.0 |
-| **Utilities** | git, jq, yq, ripgrep, tmux, vim, nano |
+| **Utilities** | git, gh, jq, yq, ripgrep, tmux, vim, nano |
 
 ¹ Bun is installed but has known [proxy compatibility issues](#install-dependencies-with-a-sessionstart-hook) for package fetching.
-For exact versions, ask Claude to run `check-tools` in a cloud session. It’s a shell command installed on the session VM, not a slash command; you ask Claude because [Claude runs all VM commands for you](#run-tests-start-services-and-add-packages).
+To get the versions of most of the tools in this table, ask Claude to run `check-tools` in a cloud session. It’s a shell command installed on the session VM, not a slash command; you ask Claude because [Claude runs all VM commands for you](#run-tests-start-services-and-add-packages). For a tool it doesn’t report, such as Ruby, PHP, bun, PostgreSQL, or Redis, ask Claude to run the tool’s own version command, for example `psql --version`.
 Node.js versions are installed at `/opt/node20`, `/opt/node21`, and `/opt/node22`, with 22 on `PATH` by default. To work with a different version, ask Claude to prepend that version’s `bin` directory, such as `/opt/node20/bin`, to `PATH`.
 Toolchains outside this list, such as the .NET SDK, aren’t pre-installed even when their package registries are on the [default allowlist](#default-allowed-domains). Install them with a [setup script](#setup-scripts).
 
@@ -194,29 +194,17 @@ Toolchains outside this list, such as the .NET SDK, aren’t pre-installed even 
 Cloud sessions include built-in GitHub tools that let Claude read issues, list pull requests, fetch diffs, and post comments without any setup. These tools authenticate through the [GitHub proxy](#github-proxy) using whichever method you configured under [GitHub authentication options](claude-code-on-the-web.md), so your token never enters the container.
 You can set `GH_TOKEN` or `GITHUB_TOKEN` yourself in [environment settings](#set-environment-variables), or leave both unset and let the [GitHub proxy](#github-proxy) authenticate for you:
 
-- If you set a token, it passes through to the container unchanged, so your scripts, and GitHub’s [`gh` CLI](https://cli.github.com) if you install it, use it directly.
+- If you set a token, it passes through to the container unchanged, so your scripts and GitHub’s [`gh` CLI](https://cli.github.com) use it directly.
 - If you set neither and the [GitHub proxy](#github-proxy) is handling authentication for your session, both variables read as the placeholder string `proxy-injected` in the commands Claude runs, and the proxy substitutes your real credentials on outbound GitHub requests. `gh` works without a token of your own, but a script that reads `GITHUB_TOKEN` directly gets the placeholder, not a usable token.
 
 A token you set is an ordinary environment variable, so anyone who uses the environment can read it; the proxy path keeps the credential out of the environment configuration and the session VM.
 To check which case applies to your session, ask Claude to run `echo $GH_TOKEN`.
-GitHub’s [`gh` CLI](https://cli.github.com) isn’t pre-installed. If you need a `gh` command the built-in tools don’t cover, like `gh release` or `gh workflow run`, install and authenticate it yourself:
-
-1
-
-Install gh in your setup script
-
-Add `apt update && apt install -y gh` to your [setup script](#setup-scripts).
-
-2
-
-Provide a token if the proxy is not handling authentication
-
-If `echo $GH_TOKEN` prints `proxy-injected`, the [GitHub proxy](#github-proxy) authenticates `gh` for you and this step is unnecessary. Otherwise, add a `GH_TOKEN` environment variable to your [environment settings](#set-environment-variables) with a GitHub personal access token; like any environment variable, it’s readable by anyone who uses the environment, so scope the token narrowly. `gh` reads `GH_TOKEN` automatically, so you don’t need to run `gh auth login`.
+GitHub’s [`gh` CLI](https://cli.github.com) is pre-installed. If you need a `gh` command the built-in tools don’t cover, like `gh release` or `gh workflow run`, ask Claude to run it. `gh` reads `GH_TOKEN` automatically, so you don’t need to run `gh auth login`.
 
 ### [​](#link-output-back-to-the-session) Link output back to the session
 
 Each cloud session has a transcript URL on claude.ai, and the session can read its own ID from the `CLAUDE_CODE_REMOTE_SESSION_ID` environment variable. Use this to put a traceable link in PR bodies, commit messages, Slack posts, or generated reports so a reviewer can open the run that produced them.
-Commits that Claude creates in a cloud session include a `Claude-Session: <url>` git trailer, and PR bodies include the session URL on its own line. This requires v2.1.179 or later. To omit the trailer and the PR-body link, set [`attribution.sessionUrl`](settings.md) to `false`. The setting requires v2.1.182 or later.
+Commits that Claude creates in a cloud session include a `Claude-Session: <url>` git trailer, and PR bodies include the session URL on its own line. This requires v2.1.179 or later. To omit the trailer and the PR-body link, set [`attribution.sessionUrl`](settings-reference.md) to `false`. The setting requires v2.1.182 or later.
 To include the session link in something other than a commit or PR, such as a Slack message Claude posts or a report file it writes, have Claude run the following command and use its output. The command converts the `cse_` prefix in the environment variable’s value to the `session_` prefix that the transcript URL expects:
 
 ```shiki
@@ -265,11 +253,11 @@ The VM may stop tasks that need significantly more memory, such as large build j
 A setup script is a Bash script that runs when a new cloud session starts, before Claude Code launches. Use setup scripts to install dependencies, configure tools, or fetch anything the session needs that isn’t pre-installed.
 Scripts run as root on Ubuntu 24.04, so `apt install` and most language package managers work.
 To add a setup script, open the environment settings dialog and enter your script in the **Setup script** field.
-This example installs GitHub’s [`gh` CLI](https://cli.github.com), which isn’t pre-installed.
+This example installs [ShellCheck](https://www.shellcheck.net/), which isn’t pre-installed.
 
 ```shiki
 #!/bin/bash
-apt update && apt install -y gh
+apt update && apt install -y shellcheck
 ```
 
 ### [​](#script-requirements) Script requirements
@@ -297,7 +285,7 @@ Setup scripts and SessionStart hooks run in a fixed order when a cloud session s
 
 |  | Setup scripts | SessionStart hooks |
 | --- | --- | --- |
-| **Where you configure them** | The environment dialog at [claude.ai/code](https://claude.ai/code) | A [settings file](settings.md) such as your repo’s `.claude/settings.json`; see [What carries over from your setup](#what-carries-over-from-your-setup) for which files reach a cloud session |
+| **Where you configure them** | The environment dialog at [claude.ai/code](https://claude.ai/code), or the **Cloud environments** admin page for [shared environments](#organization-shared-environments) | A [settings file](settings.md) such as your repo’s `.claude/settings.json`; see [What carries over from your setup](#what-carries-over-from-your-setup) for which files reach a cloud session |
 | **When they run** | Before Claude Code launches, skipped when a [cached environment](#environment-caching) exists | After Claude Code launches, on every session including resumed |
 | **Where they run** | Cloud sessions only | Local and cloud sessions |
 

@@ -71,7 +71,7 @@ See the [Create Deployment reference](api/beta/deployments/create.md) for full p
 
 - **Expression:** Standard POSIX cron (`minute hour day-of-month month day-of-week`). You can generate and validate these cron expressions in the [Claude Console](https://platform.claude.com/workspaces/default/deployments).
 - **Timezone:** IANA timezone identifier (for example, `"America/Los_Angeles"`).
-- **DST:** Cron schedules use literal wall-clock matching, so `"0 20 * * *"` in `America/New_York` fires at 8PM local time regardless of whether EST or EDT is in effect.
+- **DST:** Cron schedules use literal wall-clock matching, so `"0 20 * * *"` in `America/New_York` fires at 8:00 PM local time regardless of whether EST or EDT is in effect.
 
 ###  Set a budget on each run
 

@@ -1,35 +1,106 @@
 # Download file content
 
-Copy page
+Loading
 
-
+Loading
 
-# Download file content
+Loading
 
-GET/v1/compliance/apps/chats/files/{claude\_file\_id}/content
+Loading
 
-Downloads the binary content of a file referenced in chat messages.
+Loading
 
-##### Path ParametersExpand Collapse
+Loading
 
-claude\_file\_id: string
+Loading
 
-The file ID (tagged ID, e.g., claude\_file\_abc123)
+Loading
 
-##### Header ParametersExpand Collapse
+Loading
 
-"x-api-key": optional string
+Loading
 
-Download file content
+Loading
 
-
+Loading
 
-```shiki
-curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID/content \
-    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
-```
+Loading
 
-##### Returns Examples
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
+
+Loading
 
 ---
 

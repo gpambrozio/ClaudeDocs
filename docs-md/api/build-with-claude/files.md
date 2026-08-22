@@ -317,7 +317,7 @@ File content used in Messages requests is priced as input tokens.
 
 ###  Rate limits
 
-File-related API calls are limited to approximately 500 requests per minute. To request a higher limit, [contact sales](/cdn-cgi/l/email-protection#d7a4b6bbb2a497b6b9a3bfa5b8a7beb4f9b4b8ba).
+File-related API calls are limited to approximately 500 requests per minute. To request a higher limit, [contact sales](mailto:sales@anthropic.com).
 
 ##  Next steps
 

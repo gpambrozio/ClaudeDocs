@@ -1,60 +1,62 @@
 # Generated Files
 
-Copy page
+Loading
 
-
+Loading
 
-# Generated Files
+Loading
 
-##### [Get Claude-generated file metadata](api/compliance/apps/chats/generated_files/retrieve.md)
+Loading
 
-GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}
+Loading
 
-##### [Download a Claude-generated file](api/compliance/apps/chats/generated_files/download.md)
+Loading
 
-GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}/content
+Loading
 
-##### ModelsExpand Collapse
+Loading
 
-
+Loading
 
-GeneratedFileRetrieveResponse object { id, claude\_chat\_id, created\_at, 4 more } 
+Loading
 
-Metadata for GET /v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}.
+Loading
 
-Returns metadata only. Use the sibling `/content` endpoint to download
-the bytes. The owning chat is included since the id is opaque; to find the
-specific message that produced the file, fetch
-`/v1/compliance/apps/chats/{claude_chat_id}/messages` and match on
-`generated_files[].id`.
+Loading
 
-id: string
+Loading
 
-Opaque generated-file id, e.g. 'claude\_gen\_file\_abc123'.
+Loading
 
-claude\_chat\_id: string
+Loading
 
-The chat this generated file belongs to
+Loading
 
-created\_at: string or null
+Loading
 
-File creation timestamp, when available
+Loading
 
-filename: string
+Loading
 
-Display name of the generated file
+Loading
 
-md5: string or null
+Loading
 
-Lowercase hex MD5 of the stored file. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes.
+Loading
 
-mime\_type: string or null
+Loading
 
-MIME type of the stored file, when available
+Loading
 
-size\_bytes: number or null
+Loading
 
-Size in bytes of the stored file, when available
+Loading
+
+Loading
+
+Loading
+
+Loading
 
 ---
 

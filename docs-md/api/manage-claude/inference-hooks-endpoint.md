@@ -78,7 +78,7 @@ An example request body:
   "actor": {
     "type": "user",
     "id": "user_01AbCdEfGhIjKlMnOpQrStUv",
-    "email_address": "[email protected]"
+    "email_address": "alice@example.com"
   },
   "source": {
     "application": "claude-ai"

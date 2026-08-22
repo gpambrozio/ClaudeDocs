@@ -12,6 +12,8 @@ Webhook events return the event `type` and `id`, not the full object. When you r
 
 Session eventsVault eventsAgent eventsDeployment eventsDeployment run eventsEnvironment eventsMemory store events
 
+Some of these events are named differently from the matching events on the session's [event stream](managed-agents/events-and-streaming.md). For example, the stream's `session.status_idle` and `session.status_running` correspond to the `session.status_idled` and `session.status_run_started` webhook events.
+
 | Event | Trigger |
 | --- | --- |
 | `session.status_run_started` | Agent execution started. This triggers at every session status transition to `running`. |

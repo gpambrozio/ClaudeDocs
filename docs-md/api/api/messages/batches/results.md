@@ -102,7 +102,7 @@ One of the following:
 
 version: string
 
-Skill version or 'latest' for most recent version
+The resolved version: a skill version ID for custom skills.
 
 
 
@@ -1231,11 +1231,11 @@ MessageBatchErroredResult object { error, type } 
 
 
 
-error: [ErrorResponse](api/$shared.md) { error, request\_id, type } 
+error: ErrorResponse { error, request\_id, type } 
 
 
 
-error: [ErrorObject](api/$shared.md)
+error: ErrorObject
 
 One of the following:
 

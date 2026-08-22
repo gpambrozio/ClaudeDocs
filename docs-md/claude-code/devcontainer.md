@@ -63,7 +63,7 @@ If the browser sign-in completes but the callback never reaches the container, c
 
 ## [​](#persist-authentication-and-settings-across-rebuilds) Persist authentication and settings across rebuilds
 
-By default, the container’s home directory is discarded on rebuild, so engineers must sign in again each time. Claude Code stores its authentication token, user settings, and session history under the [`~/.claude`](claude-directory.md) directory. It stores your OAuth account, personal MCP servers, and per-project trust in [`~/.claude.json`](settings.md), a separate file outside that directory, so mounting a volume at `~/.claude` alone doesn’t keep you signed in. Mount a named volume at `~/.claude` and set [`CLAUDE_CONFIG_DIR`](env-vars.md) to the same path so Claude Code writes `.claude.json` inside the volume.
+By default, the container’s home directory is discarded on rebuild, so engineers must sign in again each time. Claude Code stores its authentication token, user settings, and session history under the [`~/.claude`](claude-directory.md) directory. It stores your OAuth account, personal MCP servers, and per-project trust in [`~/.claude.json`](settings-reference.md), a separate file outside that directory, so mounting a volume at `~/.claude` alone doesn’t keep you signed in. Mount a named volume at `~/.claude` and set [`CLAUDE_CONFIG_DIR`](env-vars.md) to the same path so Claude Code writes `.claude.json` inside the volume.
 The following example mounts the volume and sets `CLAUDE_CONFIG_DIR` for a container whose `remoteUser` is `node`:
 
 devcontainer.json
@@ -94,7 +94,7 @@ RUN mkdir -p /etc/claude-code
 COPY managed-settings.json /etc/claude-code/managed-settings.json
 ```
 
-Because the Dockerfile lives in the repository, anyone with write access can change or remove this step. For policy that engineers cannot bypass by editing repository files, deliver managed settings through [server-managed settings](server-managed-settings.md) or your MDM instead. See [managed settings files](settings.md) for the available keys and the other delivery paths.
+Because the Dockerfile lives in the repository, anyone with write access can change or remove this step. For policy that engineers cannot bypass by editing repository files, deliver managed settings through [server-managed settings](server-managed-settings.md) or your MDM instead. See [managed settings files](managed-settings.md) for the available keys and the other delivery paths.
 To set [environment variables](env-vars.md) that apply to every Claude Code session in the container, add them to `containerEnv` in your `devcontainer.json`. The following example opts out of telemetry and error reporting and prevents Claude Code from auto-updating after install:
 
 devcontainer.json
@@ -120,7 +120,7 @@ The reference container includes an [`init-firewall.sh`](https://github.com/anth
 
 Because the container runs Claude Code as a non-root user and confines command execution to the container, you can pass `--dangerously-skip-permissions` for unattended operation. The CLI rejects this flag when launched as root, so confirm `remoteUser` is set to a non-root account.
 Skipping permission prompts removes your opportunity to review tool calls before they run. Claude can still modify any file in the bind-mounted workspace, which appears directly on your host, and reach anything the container’s network policy allows. Pair this flag with the [network egress restrictions](#restrict-network-egress) above to limit what a bypassed session can reach.
-If you want fewer prompts without disabling safety checks, consider [auto mode](permission-modes.md) instead, which has a classifier review actions before they run. To prevent engineers from using `--dangerously-skip-permissions` at all, set `permissions.disableBypassPermissionsMode` to `"disable"` in [managed settings](settings.md).
+If you want fewer prompts without disabling safety checks, consider [auto mode](permission-modes.md) instead, which has a classifier review actions before they run. To prevent engineers from using `--dangerously-skip-permissions` at all, set `permissions.disableBypassPermissionsMode` to `"disable"` in [managed settings](settings-reference.md).
 
 ## [​](#try-the-reference-container) Try the reference container
 

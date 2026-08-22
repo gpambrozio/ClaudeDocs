@@ -11,7 +11,7 @@ Loading every tool definition up front causes two problems as a tool library gro
 - **Context bloat:** A typical multiserver setup (GitHub, Slack, Sentry, Grafana, and Splunk) can consume ~55k tokens in definitions before Claude does any work. Tool search typically reduces this by over 85 percent, loading only the 3–5 tools Claude needs for a given request.
 - **Tool selection accuracy:** Claude's ability to pick the right tool degrades once you exceed 30–50 available tools. Because tool search loads only a focused set of relevant tools on demand, selection accuracy stays high even across thousands of tools.
 
-Tool search is generally available on the Claude API. For supported models, see [Model compatibility](#model-compatibility).
+For the models that support tool search, see [Model compatibility](#model-compatibility).
 
 Tool search runs as a server-side tool, but you can also implement your own client-side tool search. See [Custom tool search implementation](#custom-tool-search-implementation) for details.
 

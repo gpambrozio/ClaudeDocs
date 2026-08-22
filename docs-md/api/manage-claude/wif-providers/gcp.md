@@ -29,7 +29,7 @@ CLI
 
 ```shiki
 gcloud run deploy my-service \
-  --service-account [email protected]
+  --service-account inference-worker@my-project.iam.gserviceaccount.com
 ```
 
 Inside the workload, the metadata server returns a signed identity token on demand. Request it with the `audience` you intend to register on the Anthropic side, and include `format=full` so the response carries the `email` claim:
@@ -63,7 +63,7 @@ The decoded token payload looks like this:
   "aud": "https://api.anthropic.com",
   "sub": "104892...",
   "azp": "104892...",
-  "email": "[email protected]",
+  "email": "inference-worker@my-project.iam.gserviceaccount.com",
   "email_verified": true,
   "exp": 1775527120
 }
@@ -101,7 +101,7 @@ The wizard creates these resources for you. Use the following values whether you
     "audience": "https://api.anthropic.com",
     "claims": {
       "sub": "104892101234567890123",
-      "email": "[email protected]"
+      "email": "inference-worker@my-project.iam.gserviceaccount.com"
     }
   },
   "target": {

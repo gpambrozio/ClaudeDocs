@@ -1,192 +1,62 @@
 # Projects
 
-Copy page
+Loading
 
-
+Loading
 
-# Projects
+Loading
 
-##### [List projects](api/compliance/apps/projects/list.md)
+Loading
 
-GET/v1/compliance/apps/projects
+Loading
 
-##### [Get project details](api/compliance/apps/projects/retrieve.md)
+Loading
 
-GET/v1/compliance/apps/projects/{project\_id}
+Loading
 
-##### [Delete project](api/compliance/apps/projects/delete.md)
+Loading
 
-DELETE/v1/compliance/apps/projects/{project\_id}
+Loading
 
-##### ModelsExpand Collapse
+Loading
 
-
+Loading
 
-ProjectListResponse object { id, created\_at, deleted\_at, 6 more } 
+Loading
 
-Project information for compliance responses.
+Loading
 
-id: string
+Loading
 
-Project identifier (tagged ID)
+Loading
 
-created\_at: string
+Loading
 
-Project creation timestamp
+Loading
 
-deleted\_at: string or null
+Loading
 
-Timestamp when the project was deleted by an end user, or null otherwise
+Loading
 
-is\_private: boolean
+Loading
 
-If false, the project is visible to all organization members; if true the project is accessible only to the creator and specified collaborators
+Loading
 
-name: string
+Loading
 
-Project name
+Loading
 
-organization\_uuid: string
+Loading
 
-Organization UUID this project belongs to
+Loading
 
-updated\_at: string
+Loading
 
-Project last update timestamp
+Loading
 
-
+Loading
 
-user: object { id, email\_address }  or null
-
-The user who created a project or project document.
-
-Fields that reference this type are null when the creator's account has
-been deleted or the creator is no longer a member of an organization the
-key may read.
-
-id: string
-
-User identifier (tagged ID)
-
-email\_address: string
-
-User's email address
-
-organization\_id: string⁠Deprecated
-
-Organization identifier (tagged ID)
-
-
-
-ProjectRetrieveResponse object { id, attachments\_count, chats\_count, 10 more } 
-
-Detailed project information for compliance responses.
-
-id: string
-
-Project identifier (tagged ID)
-
-attachments\_count: number
-
-Number of attachments contained within this project
-
-chats\_count: number
-
-Number of chats contained within this project
-
-created\_at: string
-
-Project creation timestamp
-
-deleted\_at: string or null
-
-Timestamp when the project was deleted by an end user, or null otherwise
-
-description: string
-
-Project description
-
-instructions: string
-
-Project's custom instructions / prompt
-
-is\_private: boolean
-
-If false, the project is visible to all organization members; if true the project is accessible only to the creator and specified collaborators
-
-name: string
-
-Project name
-
-organization\_uuid: string
-
-Organization UUID this project belongs to
-
-updated\_at: string
-
-Project last update timestamp
-
-
-
-user: object { id, email\_address }  or null
-
-The user who created a project or project document.
-
-Fields that reference this type are null when the creator's account has
-been deleted or the creator is no longer a member of an organization the
-key may read.
-
-id: string
-
-User identifier (tagged ID)
-
-email\_address: string
-
-User's email address
-
-organization\_id: string⁠Deprecated
-
-Organization identifier (tagged ID)
-
-
-
-ProjectDeleteResponse object { id, type } 
-
-Response for deleting a Claude project.
-
-id: string
-
-The ID of the Claude project that was deleted
-
-type: optional "claude\_project\_deleted"
-
-Constant string confirming deletion.
-
-#### ProjectsAttachments
-
-##### [List project attachments](api/compliance/apps/projects/attachments/list.md)
-
-GET/v1/compliance/apps/projects/{project\_id}/attachments
-
-#### ProjectsCollaborators
-
-##### [List project collaborators](api/compliance/apps/projects/collaborators/list.md)
-
-GET/v1/compliance/apps/projects/{project\_id}/collaborators
-
-#### ProjectsDocuments
-
-##### [Get project document content](api/compliance/apps/projects/documents/retrieve.md)
-
-GET/v1/compliance/apps/projects/documents/{document\_id}
-
-##### [Get project document metadata](api/compliance/apps/projects/documents/metadata.md)
-
-GET/v1/compliance/apps/projects/documents/{document\_id}/metadata
-
-##### [Delete project document](api/compliance/apps/projects/documents/delete.md)
-
-DELETE/v1/compliance/apps/projects/documents/{document\_id}
+Loading
 
 ---
 

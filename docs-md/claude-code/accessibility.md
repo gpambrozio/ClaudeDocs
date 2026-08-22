@@ -12,7 +12,7 @@ Pick the method that matches how often you use a screen reader:
 - For sessions started from one shell: set the `CLAUDE_AX_SCREEN_READER` environment variable to `1`. In Bash or Zsh, run `export CLAUDE_AX_SCREEN_READER=1`. In PowerShell, run `$env:CLAUDE_AX_SCREEN_READER = "1"`. Add that line to your shell profile to keep it for future shells.
 - For every session on the machine: add `"axScreenReader": true` to your user [settings file](settings.md). The setting applies in any terminal, including the VS Code integrated terminal.
 
-If you combine methods, Claude Code applies the [`--ax-screen-reader`](cli-reference.md) flag over the [`CLAUDE_AX_SCREEN_READER`](env-vars.md) environment variable, and the variable over the [`axScreenReader`](settings.md) setting.
+If you combine methods, Claude Code applies the [`--ax-screen-reader`](cli-reference.md) flag over the [`CLAUDE_AX_SCREEN_READER`](env-vars.md) environment variable, and the variable over the [`axScreenReader`](settings-reference.md) setting.
 If you use Claude Code over SSH, set the environment variable or setting on the remote machine where Claude Code runs.
 The first line Claude Code prints confirms the mode: `[Screen Reader Mode: on via flag]`, `[Screen Reader Mode: on via env]`, or `[Screen Reader Mode: on via settings]`.
 
@@ -28,13 +28,13 @@ The table lists each accessibility option, whether you set it as a flag, an envi
 | --- | --- | --- |
 | [`--ax-screen-reader`](cli-reference.md) | Flag | Screen reader mode for one session. |
 | [`CLAUDE_AX_SCREEN_READER`](env-vars.md) | Environment variable | Screen reader mode for sessions started from the shell where you set it. |
-| [`axScreenReader`](settings.md) | Setting | Screen reader mode for every session when `true`. |
+| [`axScreenReader`](settings-reference.md) | Setting | Screen reader mode for every session when `true`. |
 | [`CLAUDE_AX_STARTUP_QUIET_MS`](env-vars.md) | Environment variable | How long Claude Code waits after the confirmation line before it draws the first prompt in screen reader mode. Requires Claude Code v2.1.217 or later. |
 | [`CLAUDE_AX_PREPARK_MS`](env-vars.md) | Environment variable | How long Claude Code waits, with the cursor at the start of the line, before it writes a new or changed line in screen reader mode. Requires Claude Code v2.1.233 or later. |
 | [`CLAUDE_CODE_ACCESSIBILITY`](env-vars.md) | Environment variable | A terminal cursor that stays visible for screen magnifiers such as macOS Zoom when you set it to `1`. The cursor follows the input caret and, on Claude Code v2.1.218 or later, the highlighted row in menus and panels such as `/config` and `/plugin`. |
-| [`prefersReducedMotion`](settings.md) | Setting | Reduced or no spinners, shimmer, and other animations when `true`. |
-| [`theme`](settings.md) | Setting | The interface colors, including the colorblind-friendly `dark-daltonized` and `light-daltonized` themes. You can also pick one with [`/theme`](commands.md). |
-| [`preferredNotifChannel`](settings.md) | Setting | With the value `"terminal_bell"`, a terminal bell outside screen reader mode when Claude is waiting on you. |
+| [`prefersReducedMotion`](settings-reference.md) | Setting | Reduced or no spinners, shimmer, and other animations when `true`. |
+| [`theme`](settings-reference.md) | Setting | The interface colors, including the colorblind-friendly `dark-daltonized` and `light-daltonized` themes. You can also pick one with [`/theme`](commands.md). |
+| [`preferredNotifChannel`](settings-reference.md) | Setting | With the value `"terminal_bell"`, a terminal bell outside screen reader mode when Claude is waiting on you. |
 
 ## [​](#what-your-screen-reader-hears) What your screen reader hears
 
@@ -45,7 +45,7 @@ In screen reader mode, Claude Code writes flat text:
 - No redraws of content that hasn’t changed. Progress spinners render as static text
 - Tables in Claude’s replies read as `Header: value` sentences instead of a box-character grid
 
-Claude Code leaves everything it prints in your terminal’s scrollback, so you can re-read earlier turns with your screen reader’s review commands or your terminal’s search. Claude Code ignores the [`tui` setting](settings.md) in screen reader mode. Apart from the attached background sessions listed under [Known limitations](#known-limitations), it prints scrolling text instead of [fullscreen rendering](fullscreen.md).
+Claude Code leaves everything it prints in your terminal’s scrollback, so you can re-read earlier turns with your screen reader’s review commands or your terminal’s search. Claude Code ignores the [`tui` setting](settings-reference.md) in screen reader mode. Apart from the attached background sessions listed under [Known limitations](#known-limitations), it prints scrolling text instead of [fullscreen rendering](fullscreen.md).
 Claude Code also waits at two points so your screen reader can keep up:
 
 - After Claude Code prints the confirmation line, it waits 3 seconds before it draws the prompt, so your screen reader can finish the line. Press any key to end the wait. To change the length of the wait, set [`CLAUDE_AX_STARTUP_QUIET_MS`](env-vars.md).
@@ -104,7 +104,7 @@ In screen reader mode, Claude Code rings the terminal bell when it needs your at
 - A prompt or dialog needs your answer, such as a permission prompt
 - A tool that ran longer than 5 seconds finishes
 
-The bell is your terminal’s standard alert. To silence it, change the bell setting in your terminal application. Outside screen reader mode, set [`preferredNotifChannel`](settings.md) to `"terminal_bell"` to get a [similar bell](terminal-config.md) when Claude is waiting on you.
+The bell is your terminal’s standard alert. To silence it, change the bell setting in your terminal application. Outside screen reader mode, set [`preferredNotifChannel`](settings-reference.md) to `"terminal_bell"` to get a [similar bell](terminal-config.md) when Claude is waiting on you.
 
 ## [​](#known-limitations) Known limitations
 

@@ -1,7 +1,7 @@
 # Recommend plugins for your org
 
 If you operate a plugin marketplace for your organization, you can have Claude Code suggest specific plugins to users based on what they are working on. Add a `relevance` block to a plugin’s entry in `marketplace.json`, then allowlist the marketplace in managed settings. When a user’s session matches one of the declared signals, Claude Code surfaces an install suggestion for that plugin.
-Marketplace-declared suggestions are opt-in per marketplace through [managed settings](settings.md). No marketplace’s `relevance` declarations produce suggestions until an administrator adds it to the allowlist, including the official Anthropic marketplace. Claude Code also includes one built-in suggestion that is independent of this allowlist; that tip and all marketplace-declared tips are disabled when [`spinnerTipsEnabled`](settings.md) is set to `false`.
+Marketplace-declared suggestions are opt-in per marketplace through [managed settings](managed-settings.md). No marketplace’s `relevance` declarations produce suggestions until an administrator adds it to the allowlist, including the official Anthropic marketplace. Claude Code also includes one built-in suggestion that is independent of this allowlist; that tip and all marketplace-declared tips are disabled when [`spinnerTipsEnabled`](settings-reference.md) is set to `false`.
 This feature requires Claude Code v2.1.152 or later. Older clients ignore the `relevance` field.
 This page is for marketplace operators and enterprise administrators. If you are looking to install plugins, see [Discover and install plugins](discover-plugins.md).
 
@@ -89,7 +89,7 @@ Claude Code ignores unknown fields under `relevance` and `relevance.signals` at 
 
 ## [​](#enable-suggestions-in-managed-settings) Enable suggestions in managed settings
 
-Declaring `relevance` in `marketplace.json` is not enough on its own. An administrator must allowlist the marketplace in [managed settings](settings.md) before its suggestions appear to users.
+Declaring `relevance` in `marketplace.json` is not enough on its own. An administrator must allowlist the marketplace in [managed settings](managed-settings.md) before its suggestions appear to users.
 Add the marketplace name to `pluginSuggestionMarketplaces`. For any marketplace other than the official Anthropic marketplace, also declare the marketplace source in the same managed settings, either as that name’s entry in `extraKnownMarketplaces` or as an entry in `strictKnownMarketplaces`. The allowlisted name is ignored if the marketplace registered on the machine came from a different source. This prevents an unrelated source from registering under an allowlisted name to have its plugins suggested across your org.
 The following `managed-settings.json` registers an org marketplace from a GitHub repository and enables its suggestions:
 
@@ -147,7 +147,7 @@ The validator reports unknown keys under `relevance` and `relevance.signals` as 
 
 - [Create and distribute a plugin marketplace](plugin-marketplaces.md): build the marketplace that hosts your plugins
 - [Recommend your plugin from your CLI](plugin-hints.md): prompt users from your own CLI instead of from Claude Code’s session signals
-- [Settings](settings.md): full reference for `pluginSuggestionMarketplaces` and `extraKnownMarketplaces`
+- [Settings reference](settings-reference.md): `pluginSuggestionMarketplaces` and `extraKnownMarketplaces`
 
 ---
 
