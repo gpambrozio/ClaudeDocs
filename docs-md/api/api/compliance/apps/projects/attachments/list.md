@@ -1,106 +1,180 @@
 # List project attachments
 
-Loading
+Copy page
 
-Loading
+
 
-Loading
+# List project attachments
 
-Loading
+GET/v1/compliance/apps/projects/{project\_id}/attachments
 
-Loading
+List files and documents attached to a project.
 
-Loading
+List files and project documents attached to the project referenced by project\_id.
+This includes the IDs of attached files, and attached project documents.
 
-Loading
+The raw binary content of attached files can be downloaded using the
+GET /v1/compliance/apps/chats/files/{claude\_file\_id}/content endpoint.
 
-Loading
+The text content of attached project documents can be fetched using the
+GET /v1/compliance/apps/projects/documents/{claude\_proj\_doc\_id} endpoint.
 
-Loading
+##### Path ParametersExpand Collapse
 
-Loading
+project\_id: string
 
-Loading
+The project ID (tagged ID, e.g., claude\_proj\_abc123)
 
-Loading
+##### Query ParametersExpand Collapse
 
-Loading
+limit: optional number
 
-Loading
+Maximum results (default: 20, max: 100)
 
-Loading
+page: optional string
 
-Loading
+Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
-Loading
+##### Header ParametersExpand Collapse
 
-Loading
+"x-api-key": optional string
 
-Loading
+##### ReturnsExpand Collapse
 
-Loading
+
 
-Loading
+data: array of object { id, created\_at, filename, 4 more }  or object { id, created\_at, filename, 3 more } 
 
-Loading
+List of attachments sorted chronologically by created\_at, tie break by id
 
-Loading
+One of the following:
 
-Loading
+
 
-Loading
+ComplianceProjectFileReference object { id, created\_at, filename, 4 more } 
 
-Loading
+File attachment reference for compliance responses.
 
-Loading
+id: string
 
-Loading
+File identifier (e.g., 'claude\_file\_abcd')
 
-Loading
+created\_at: string
 
-Loading
+Creation timestamp (RFC 3339 format)
 
-Loading
+filename: string
 
-Loading
+Display name of the file (e.g., 'document.pdf')
 
-Loading
+md5: string or null
 
-Loading
+Lowercase hex MD5 of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
 
-Loading
+mime\_type: string
 
-Loading
+MIME type of the file's preferred downloadable variant when one is recorded, else 'application/octet-stream'. Use the per-file `/metadata` endpoint for the authoritative value.
 
-Loading
+size\_bytes: number or null
 
-Loading
+Size in bytes of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
 
-Loading
+type: "project\_file"
 
-Loading
+Discriminator marking this as a binary file
 
-Loading
+
 
-Loading
+ComplianceProjectDocReference object { id, created\_at, filename, 3 more } 
 
-Loading
+Project document attachment reference for compliance responses.
 
-Loading
+id: string
 
-Loading
+Project document identifier (e.g., 'claude\_proj\_doc\_abcd')
 
-Loading
+created\_at: string
 
-Loading
+Creation timestamp (RFC 3339 format)
 
-Loading
+filename: string
 
-Loading
+Display name of the document (e.g., 'document.txt')
 
-Loading
+mime\_type: "text/plain"
 
-Loading
+MIME type of the project document, always set to plain text
+
+type: "project\_doc"
+
+Discriminator marking this as a plain text document
+
+updated\_at: string or null
+
+Last-modified timestamp of the document. Reserved for future use — currently always null.
+
+has\_more: boolean
+
+Whether more records exist beyond the current result set
+
+next\_page: string or null
+
+To get the next page, use the 'next\_page' from the current response as the 'page' in your next request
+
+List project attachments
+
+
+
+```shiki
+curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachments \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+Response 200
+
+
+
+```shiki
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "filename": "filename",
+      "md5": "md5",
+      "mime_type": "mime_type",
+      "size_bytes": 0,
+      "type": "project_file"
+    }
+  ],
+  "has_more": true,
+  "next_page": "next_page"
+}
+```
+
+##### Returns Examples
+
+Response 200
+
+
+
+```shiki
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "filename": "filename",
+      "md5": "md5",
+      "mime_type": "mime_type",
+      "size_bytes": 0,
+      "type": "project_file"
+    }
+  ],
+  "has_more": true,
+  "next_page": "next_page"
+}
+```
 
 ---
 

@@ -1,62 +1,78 @@
 # Roles
 
-Loading
+Copy page
 
-Loading
+
 
-Loading
+# Roles
 
-Loading
+##### [List Compliance Roles](api/compliance/organizations/roles/list.md)
 
-Loading
+GET/v1/compliance/organizations/{org\_uuid}/roles
 
-Loading
+##### [Get Compliance Role](api/compliance/organizations/roles/retrieve.md)
 
-Loading
+GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}
 
-Loading
+##### ModelsExpand Collapse
 
-Loading
+
 
-Loading
+RoleListResponse object { id, created\_at, description, 2 more } 
 
-Loading
+Role information for compliance responses.
 
-Loading
+id: string
 
-Loading
+Role identifier (tagged ID)
 
-Loading
+created\_at: string or null
 
-Loading
+Role creation timestamp (ISO 8601)
 
-Loading
+description: string
 
-Loading
+Role description
 
-Loading
+name: string
 
-Loading
+Role name
 
-Loading
+updated\_at: string or null
 
-Loading
+Role last-updated timestamp (ISO 8601)
 
-Loading
+
 
-Loading
+RoleRetrieveResponse object { id, created\_at, description, 2 more } 
 
-Loading
+Role information for compliance responses.
 
-Loading
+id: string
 
-Loading
+Role identifier (tagged ID)
 
-Loading
+created\_at: string or null
 
-Loading
+Role creation timestamp (ISO 8601)
 
-Loading
+description: string
+
+Role description
+
+name: string
+
+Role name
+
+updated\_at: string or null
+
+Role last-updated timestamp (ISO 8601)
+
+#### RolesPermissions
+
+##### [List Compliance Role Permissions](api/compliance/organizations/roles/permissions/list.md)
+
+GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}/permissions
 
 ---
 

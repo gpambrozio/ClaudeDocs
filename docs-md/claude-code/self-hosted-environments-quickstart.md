@@ -11,7 +11,7 @@ By the end you’ll have an environment on the [**Cloud environments** admin pag
 
 The claude.ai side needs:
 
-- **Allow self-hosted environments** turned on by an [Owner or admin](cloud-environments.md) on the [**Cloud environments** admin page](https://claude.ai/admin-settings/cloud-environments); the **New** button doesn’t appear until it is. If you don’t hold the role, someone who does can create the environment and hand you its secret; the runner and terminal steps on this page need no claude.ai role, and where a step checks status in the admin UI, the runner’s own log lines give you the same signal.
+- **Allow self-hosted environments** turned on by an [Owner](cloud-environments.md) on the [**Cloud environments** admin page](https://claude.ai/admin-settings/cloud-environments); the **New** button doesn’t appear until it is. If you don’t hold the role, someone who does can create the environment and hand you its secret; the runner and terminal steps on this page need no claude.ai role, and where a step checks status in the admin UI, the runner’s own log lines give you the same signal.
 - A [GitHub connection](claude-code-on-the-web.md) for your organization, so developers can pick repositories when they start sessions.
 
 ### [​](#host-and-network) Host and network
@@ -38,7 +38,7 @@ A ready host prints the runner’s usage text, listing flags such as `--environm
 
 ## [​](#set-up-an-environment-and-runner) Set up an environment and runner
 
-Claude Code includes a guided setup: an interactive Claude Code session that walks you through creating the environment in the admin UI, starts a local runner with the secret file you save, confirms that the runner registers, and writes a cheat sheet to `./runner-setup/CHEAT-SHEET.md`. Run it on a machine where you’ve signed in with `claude auth login` using an account that holds an Owner or admin role; it isn’t available with API keys or third-party model providers. On hosts where an interactive session isn’t possible, use the manual steps below instead. Confirm the [version check](#software-on-the-runner-host) passed first: on versions older than 2.1.224, this command starts an ordinary Claude session with the words as the prompt instead of the guided setup. To start the guided setup, run the setup subcommand and follow the prompts:
+Claude Code includes a guided setup: an interactive Claude Code session that walks you through creating the environment in the admin UI, starts a local runner with the secret file you save, confirms that the runner registers, and writes a cheat sheet to `./runner-setup/CHEAT-SHEET.md`. Run it on a machine where you’ve signed in with `claude auth login` using an account that holds an Owner role; it isn’t available with API keys or third-party model providers. On hosts where an interactive session isn’t possible, use the manual steps below instead. Confirm the [version check](#software-on-the-runner-host) passed first: on versions older than 2.1.224, this command starts an ordinary Claude session with the words as the prompt instead of the guided setup. To start the guided setup, run the setup subcommand and follow the prompts:
 
 ```shiki
 claude self-hosted-runner setup

@@ -459,6 +459,7 @@ Claude Code turns some features on through feature flags it fetches from Anthrop
 
 - [Start sessions in auto mode by default](permission-modes.md) on Pro, Max, and Team plans; Claude Code starts your sessions in Manual instead
 - Have the VS Code extension [read settings files for the starting permission mode](permission-modes.md)
+- Run [`/auto-mode-setup`](auto-mode-config.md) to draft `autoMode.environment` entries
 - Use [Remote Control](remote-control.md)
 - Send or receive [cross-session messages](cross-session-messaging.md)
 - Run [`claude import` or the `/import` command](cli-reference.md)

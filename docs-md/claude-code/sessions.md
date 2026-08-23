@@ -201,6 +201,8 @@ Once you’ve named a config directory’s project directory, keep launching wit
 
 ## [​](#see-also) See also
 
+These pages cover related session and parallelism mechanics:
+
 - [Worktrees](worktrees.md): run isolated parallel sessions on separate branches
 - [Checkpointing](checkpointing.md): rewind code and conversation to an earlier point
 - [Context window](context-window.md): what fills context and what survives compaction

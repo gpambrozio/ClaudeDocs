@@ -288,7 +288,7 @@ A cloud session, on [Claude Code on the web](claude-code-on-the-web.md) or from 
 
 - **Shared project settings** (`.claude/settings.json`): read, because the file is part of the clone. Commit a setting there to apply it in cloud sessions.
 - **User and project local settings** (`~/.claude/settings.json` and `.claude/settings.local.json`): not read. Both stay on your machine, and the local file isn’t in the clone.
-- **Managed settings**: only [server-managed settings](server-managed-settings.md) reach a cloud session; a `managed-settings.json` file or MDM profile on your device doesn’t. A [self-hosted environment](self-hosted-environments.md) reads the managed settings file in its runner image only when server-managed settings deliver no keys; see [settings precedence](server-managed-settings.md) on that page.
+- **Managed settings**: only [server-managed settings](server-managed-settings.md) reach a cloud session; a `managed-settings.json` file or MDM profile on your device doesn’t. A [self-hosted environment](self-hosted-environments.md) reads the managed settings file in its runner image only when server-managed settings deliver no keys, apart from the [keys Claude Code reads from every admin source](managed-settings.md); see [settings precedence](server-managed-settings.md).
 - **`/config`**: on the web, opens the Claude Code section of your claude.ai settings instead of changing a value. To change a setting for a cloud session, set an [environment variable](cloud-environments.md) on the environment or commit the key to the repository’s `.claude/settings.json`.
 
 [What carries over from your setup](cloud-environments.md) lists the rest: `CLAUDE.md`, skills, MCP servers, plugins, and credentials.

@@ -136,7 +136,7 @@ You can also allow specific commands in `.claude/settings.json` so Claude doesn�
 
 ## [​](#work-effectively-with-claude-code) Work effectively with Claude Code
 
-These tips help you get better results from Claude Code.
+These tips help you get better results from Claude Code. For more on specific prompts, verification, and planning, see [Best practices](best-practices.md).
 
 ### [​](#ask-claude-code-for-help) Ask Claude Code for help
 
@@ -169,40 +169,6 @@ You can redirect Claude at any point without waiting for the turn to finish or s
 
 - **Press `Esc`** to stop Claude immediately. The running tool call is canceled and Claude waits for your next instruction. If you have messages queued, Claude Code [sends them next](interactive-mode.md).
 - **Type a correction and press `Enter`** to send it without stopping the running tool. Claude reads it as soon as the current action completes and adjusts before deciding its next step.
-
-### [​](#be-specific-upfront) Be specific upfront
-
-The more precise your initial prompt, the fewer corrections you’ll need. Reference specific files, mention constraints, and point to example patterns.
-
-```shiki
-The checkout flow is broken for users with expired cards.
-Check src/payments/ for the issue, especially token refresh.
-Write a failing test first, then fix it.
-```
-
-Vague prompts work, but you’ll spend more time steering. Specific prompts like the one above often succeed on the first attempt.
-
-### [​](#give-claude-something-to-verify-against) Give Claude something to verify against
-
-Claude performs better when it can check its own work. Include test cases, paste screenshots of expected UI, or define the output you want.
-
-```shiki
-Implement validateEmail. Test cases: 'user@example.com' → true,
-'invalid' → false, 'user@.com' → false. Run the tests after.
-```
-
-For visual work, paste a screenshot of the design and ask Claude to compare its implementation against it.
-
-### [​](#explore-before-implementing) Explore before implementing
-
-For complex problems, separate research from coding. Press `Shift+Tab` until the status bar shows `⏸ plan mode on`, then ask Claude to analyze the codebase first:
-
-```shiki
-Read src/auth/ and understand how we handle sessions.
-Then create a plan for adding OAuth support.
-```
-
-Review the plan, refine it through conversation, then let Claude implement. This two-phase approach produces better results than jumping straight to code.
 
 ### [​](#delegate-don’t-dictate) Delegate, don’t dictate
 

@@ -1,106 +1,203 @@
 # List remote sessions
 
-Loading
+Copy page
 
-Loading
+
 
-Loading
+# List remote sessions
 
-Loading
+GET/v1/compliance/apps/sessions/remote
 
-Loading
+List remote sessions (Cowork sessions that run in Anthropic-managed
+cloud environments) across the organizations the key may read.
 
-Loading
+Each entry carries session metadata only; retrieve a session's
+transcript from the messages endpoint. By default the list spans every
+such organization; pass up to 500 `organization_ids[]` values to
+narrow it. Pass 1 to 10 `user_ids[]` values to scope the
+list to specific users: that filter matches the session's owning user,
+so agent-owned sessions are excluded whenever it is set. Bound results
+in time with the `created_at` range parameters (`created_at.gte`,
+`created_at.gt`, `created_at.lt`, `created_at.lte`; RFC 3339). There
+is no `updated_at` filter.
 
-Loading
+Results are sorted newest first by `created_at`, with at most `limit`
+sessions per page (default 100, maximum 500). Pagination is
+forward-only: pass the response's `next_page` value back as `page` to
+retrieve the next page, and stop when `next_page` is null.
 
-Loading
+##### Query ParametersExpand Collapse
 
-Loading
+
 
-Loading
+created\_at: optional object { gt, gte, lt, lte } 
 
-Loading
+gt: optional string
 
-Loading
+Filter remote sessions created after this time (RFC 3339 format)
 
-Loading
+gte: optional string
 
-Loading
+Filter remote sessions created at or after this time (RFC 3339 format)
 
-Loading
+lt: optional string
 
-Loading
+Filter remote sessions created before this time (RFC 3339 format)
 
-Loading
+lte: optional string
 
-Loading
+Filter remote sessions created at or before this time (RFC 3339 format)
 
-Loading
+limit: optional number
 
-Loading
+Maximum results (default: 100, max: 500)
 
-Loading
+organization\_ids: optional array of string
 
-Loading
+Filter to specific child organization identifiers. Omit to enumerate every child organization the key may read.
 
-Loading
+page: optional string
 
-Loading
+Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
-Loading
+user\_ids: optional array of string
 
-Loading
+Filter to sessions owned by specific users (max 10 per request). Agent-owned sessions are excluded when this filter is set.
 
-Loading
+##### Header ParametersExpand Collapse
 
-Loading
+"x-api-key": optional string
 
-Loading
+##### ReturnsExpand Collapse
 
-Loading
+
 
-Loading
+data: array of object { id, agent\_id, claude\_project\_id, 7 more } 
 
-Loading
+id: string
 
-Loading
+Remote session identifier
 
-Loading
+agent\_id: string or null
 
-Loading
+Identifier of the automated agent that owns the session. Null for user-owned sessions. At most one of `user` and `agent_id` is set.
 
-Loading
+claude\_project\_id: string or null
 
-Loading
+ID of the project the session is bound to. Null when the session has no project binding.
 
-Loading
+created\_at: string
 
-Loading
+When the session was created (RFC 3339, UTC)
 
-Loading
+organization\_uuid: string
 
-Loading
+UUID of the organization the session belongs to
 
-Loading
+product\_surface: string or null
 
-Loading
+The Claude product the session was created from. Currently `cowork_remote`, for Cowork sessions started on claude.ai web or mobile. More values will appear as other surfaces launch, so treat any unrecognized value as an unclassified surface rather than an error. Null for sessions created before this field was recorded, for surfaces that do not stamp it, and for unrecognized tag values.
 
-Loading
+
 
-Loading
+started\_by\_user: object { id, email\_address }  or null
 
-Loading
+A user associated with a remote session.
 
-Loading
+id: string
 
-Loading
+User identifier
 
-Loading
+email\_address: string or null
 
-Loading
+User's email address. Null when the user is no longer a member of an organization the key may read — `id` remains set so attribution is preserved. The messages endpoint does not resolve email addresses; this field is always null there.
 
-Loading
+status: string
+
+Session lifecycle state. One of `active`, `paused`, `archived`, or `failed` — the lifecycle states the owning product surface exposes — plus `pending`, a brief transient state that resolves before any transcript content exists. The list endpoint includes `pending`; the messages endpoint returns 404 for it. Deleted sessions are not returned on either endpoint. Treat unrecognized values as an unknown state rather than an error.
+
+updated\_at: string
+
+When the session was last modified (RFC 3339, UTC)
+
+
+
+user: object { id, email\_address }  or null
+
+A user associated with a remote session.
+
+id: string
+
+User identifier
+
+email\_address: string or null
+
+User's email address. Null when the user is no longer a member of an organization the key may read — `id` remains set so attribution is preserved. The messages endpoint does not resolve email addresses; this field is always null there.
+
+next\_page: string or null
+
+Opaque page token; pass as `page` to retrieve the next page. Null when no rows exist after this page. Treat this value as opaque; do not parse or store it long-term, as the format may change without notice.
+
+List remote sessions
+
+
+
+```shiki
+curl https://api.anthropic.com/v1/compliance/apps/sessions/remote \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+Response 200
+
+
+
+```shiki
+{
+  "data": [
+    {
+      "id": "cse_01A0000000000000000000000",
+      "organization_uuid": "00000000-0000-0000-0000-000000000000",
+      "user": {
+        "id": "user_01A0000000000000000000000",
+        "email_address": "user@example.com"
+      },
+      "status": "active",
+      "created_at": "2026-01-02T03:04:05.000000Z",
+      "updated_at": "2026-01-02T03:04:05.000000Z",
+      "product_surface": "cowork_remote",
+      "claude_project_id": "claude_proj_01Nm7PqRsTuVwXyZaBcDeFgH"
+    }
+  ],
+  "next_page": "page_AAE..."
+}
+```
+
+##### Returns Examples
+
+Response 200
+
+
+
+```shiki
+{
+  "data": [
+    {
+      "id": "cse_01A0000000000000000000000",
+      "organization_uuid": "00000000-0000-0000-0000-000000000000",
+      "user": {
+        "id": "user_01A0000000000000000000000",
+        "email_address": "user@example.com"
+      },
+      "status": "active",
+      "created_at": "2026-01-02T03:04:05.000000Z",
+      "updated_at": "2026-01-02T03:04:05.000000Z",
+      "product_surface": "cowork_remote",
+      "claude_project_id": "claude_proj_01Nm7PqRsTuVwXyZaBcDeFgH"
+    }
+  ],
+  "next_page": "page_AAE..."
+}
+```
 
 ---
 

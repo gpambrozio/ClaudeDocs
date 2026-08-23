@@ -1,106 +1,70 @@
 # Delete project document
 
-Loading
+Copy page
 
-Loading
+
 
-Loading
+# Delete project document
 
-Loading
+DELETE/v1/compliance/apps/projects/documents/{document\_id}
 
-Loading
+Delete a project document for compliance purposes.
 
-Loading
+Hard-deletes the project document permanently.
 
-Loading
+##### Path ParametersExpand Collapse
 
-Loading
+document\_id: string
 
-Loading
+The document ID (tagged ID, e.g., claude\_proj\_doc\_abc123)
 
-Loading
+##### Header ParametersExpand Collapse
 
-Loading
+"x-api-key": optional string
 
-Loading
+##### ReturnsExpand Collapse
 
-Loading
+id: string
 
-Loading
+The ID of the project document that was deleted
 
-Loading
+type: "claude\_project\_document\_deleted"
 
-Loading
+Constant string confirming deletion.
 
-Loading
+Delete project document
 
-Loading
+
 
-Loading
+```shiki
+curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID \
+    -X DELETE \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
 
-Loading
+Response 200
 
-Loading
+
 
-Loading
+```shiki
+{
+  "id": "id",
+  "type": "claude_project_document_deleted"
+}
+```
 
-Loading
+##### Returns Examples
 
-Loading
+Response 200
 
-Loading
+
 
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
+```shiki
+{
+  "id": "id",
+  "type": "claude_project_document_deleted"
+}
+```
 
 ---
 

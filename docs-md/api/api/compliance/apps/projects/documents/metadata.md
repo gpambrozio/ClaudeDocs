@@ -1,106 +1,128 @@
 # Get project document metadata
 
-Loading
+Copy page
 
-Loading
+
 
-Loading
+# Get project document metadata
 
-Loading
+GET/v1/compliance/apps/projects/documents/{document\_id}/metadata
 
-Loading
+Returns metadata for a project document, without the content body.
 
-Loading
+Use the sibling `GET /v1/compliance/apps/projects/documents/{document_id}`
+endpoint to fetch the document text. The `md5` and `size_bytes`
+fields here are computed over the UTF-8 encoding of that text, so a DLP
+consumer can dedupe or match hashes without downloading every document.
 
-Loading
+##### Path ParametersExpand Collapse
 
-Loading
+document\_id: string
 
-Loading
+The document ID (tagged ID, e.g., claude\_proj\_doc\_abc123)
 
-Loading
+##### Header ParametersExpand Collapse
 
-Loading
+"x-api-key": optional string
 
-Loading
+##### ReturnsExpand Collapse
 
-Loading
+id: string
 
-Loading
+Project document identifier (tagged ID)
 
-Loading
+claude\_project\_id: string
 
-Loading
+The project this document belongs to
 
-Loading
+created\_at: string
 
-Loading
+Document creation timestamp
 
-Loading
+filename: string
 
-Loading
+Document filename
 
-Loading
+md5: string
 
-Loading
+Lowercase hex MD5 of the document content (UTF-8 encoded). Matches the `content` field returned by the sibling content endpoint.
 
-Loading
+mime\_type: "text/plain"
 
-Loading
+MIME type of the document content, always plain text
 
-Loading
+size\_bytes: number
 
-Loading
+Size in bytes of the document content (UTF-8 encoded)
 
-Loading
+
 
-Loading
+user: object { id, email\_address }  or null
 
-Loading
+The user who created a project or project document.
 
-Loading
+Fields that reference this type are null when the creator's account has
+been deleted or the creator is no longer a member of an organization the
+key may read.
 
-Loading
+id: string
 
-Loading
+User identifier (tagged ID)
 
-Loading
+email\_address: string
 
-Loading
+User's email address
 
-Loading
+Get project document metadata
 
-Loading
+
 
-Loading
+```shiki
+curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID/metadata \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
 
-Loading
+Response 200
 
-Loading
+
 
-Loading
+```shiki
+{
+  "id": "id",
+  "claude_project_id": "claude_project_id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "filename": "filename",
+  "md5": "md5",
+  "mime_type": "text/plain",
+  "size_bytes": 0,
+  "user": {
+    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "email_address": "jane.doe@example.com"
+  }
+}
+```
 
-Loading
+##### Returns Examples
 
-Loading
+Response 200
 
-Loading
+
 
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
+```shiki
+{
+  "id": "id",
+  "claude_project_id": "claude_project_id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "filename": "filename",
+  "md5": "md5",
+  "mime_type": "text/plain",
+  "size_bytes": 0,
+  "user": {
+    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "email_address": "jane.doe@example.com"
+  }
+}
+```
 
 ---
 

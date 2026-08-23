@@ -1,106 +1,153 @@
 # Get project details
 
-Loading
+Copy page
 
-Loading
+
 
-Loading
+# Get project details
 
-Loading
+GET/v1/compliance/apps/projects/{project\_id}
 
-Loading
+Get detailed information for a specific project.
 
-Loading
+##### Path ParametersExpand Collapse
 
-Loading
+project\_id: string
 
-Loading
+The project ID (tagged ID, e.g., claude\_proj\_abc123)
 
-Loading
+##### Header ParametersExpand Collapse
 
-Loading
+"x-api-key": optional string
 
-Loading
+##### ReturnsExpand Collapse
 
-Loading
+id: string
 
-Loading
+Project identifier (tagged ID)
 
-Loading
+attachments\_count: number
 
-Loading
+Number of attachments contained within this project
 
-Loading
+chats\_count: number
 
-Loading
+Number of chats contained within this project
 
-Loading
+created\_at: string
 
-Loading
+Project creation timestamp
 
-Loading
+deleted\_at: string or null
 
-Loading
+Timestamp when the project was deleted by an end user, or null otherwise
 
-Loading
+description: string
 
-Loading
+Project description
 
-Loading
+instructions: string
 
-Loading
+Project's custom instructions / prompt
 
-Loading
+is\_private: boolean
 
-Loading
+If false, the project is visible to all organization members; if true the project is accessible only to the creator and specified collaborators
 
-Loading
+name: string
 
-Loading
+Project name
 
-Loading
+organization\_uuid: string
 
-Loading
+Organization UUID this project belongs to
 
-Loading
+updated\_at: string
 
-Loading
+Project last update timestamp
 
-Loading
+
 
-Loading
+user: object { id, email\_address }  or null
 
-Loading
+The user who created a project or project document.
 
-Loading
+Fields that reference this type are null when the creator's account has
+been deleted or the creator is no longer a member of an organization the
+key may read.
 
-Loading
+id: string
 
-Loading
+User identifier (tagged ID)
 
-Loading
+email\_address: string
 
-Loading
+User's email address
 
-Loading
+organization\_id: string⁠Deprecated
 
-Loading
+Organization identifier (tagged ID)
 
-Loading
+Get project details
 
-Loading
+
 
-Loading
+```shiki
+curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
 
-Loading
+Response 200
 
-Loading
+
 
-Loading
+```shiki
+{
+  "id": "claude_proj_01Nm7PqRsTuVwXyZaBcDeFgH",
+  "attachments_count": 3,
+  "chats_count": 14,
+  "created_at": "2025-03-12T18:22:41.123456Z",
+  "deleted_at": "2019-12-27T18:11:19.117Z",
+  "description": "Planning and research for the Q3 launch",
+  "instructions": "Focus on concise, actionable answers.",
+  "is_private": true,
+  "name": "Q3 Product Launch",
+  "organization_id": "org_015eofRkKpogX7uDKUyvBTph",
+  "organization_uuid": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
+  "updated_at": "2025-03-14T09:05:17.456789Z",
+  "user": {
+    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "email_address": "jane.doe@example.com"
+  }
+}
+```
 
-Loading
+##### Returns Examples
 
-Loading
+Response 200
+
+
+
+```shiki
+{
+  "id": "claude_proj_01Nm7PqRsTuVwXyZaBcDeFgH",
+  "attachments_count": 3,
+  "chats_count": 14,
+  "created_at": "2025-03-12T18:22:41.123456Z",
+  "deleted_at": "2019-12-27T18:11:19.117Z",
+  "description": "Planning and research for the Q3 launch",
+  "instructions": "Focus on concise, actionable answers.",
+  "is_private": true,
+  "name": "Q3 Product Launch",
+  "organization_id": "org_015eofRkKpogX7uDKUyvBTph",
+  "organization_uuid": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
+  "updated_at": "2025-03-14T09:05:17.456789Z",
+  "user": {
+    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "email_address": "jane.doe@example.com"
+  }
+}
+```
 
 ---
 
