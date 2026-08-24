@@ -1,22 +1,10 @@
 # Claude Code settings reference
 
-[Back to index](#all-settings)
-
 This reference page lists each key Claude Code reads from a settings file, plus the [short group of keys](#global-config-settings) it keeps in `~/.claude.json` instead. To pick a file, or check precedence, start with [Claude Code settings](settings.md).
 
 ## [​](#all-settings) All settings
 
 Every key below links to its entry. Scope lists the [files](settings.md) it can go in: `User` is `~/.claude/settings.json`, `Project` is `.claude/settings.json`, `Local` is `.claude/settings.local.json`, and `Managed` is [what your organization deploys](managed-settings.md). `Any file` means all four, and `Global config` means [`~/.claude.json`](#global-config-settings).
-
-/
-
-Topic: All topics▼
-
-Scope: All scopes▼
-
-Sort byKeyTopicScope
-
-210 settings
 
 | Key | Description | Topic | Scope |
 | --- | --- | --- | --- |

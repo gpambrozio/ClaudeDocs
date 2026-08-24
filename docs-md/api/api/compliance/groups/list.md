@@ -1,106 +1,137 @@
 # List Compliance Groups
 
-Loading
+Copy page
 
-Loading
+
 
-Loading
+# List Compliance Groups
 
-Loading
+GET/v1/compliance/groups
 
-Loading
+List Compliance Groups
 
-Loading
+##### Query ParametersExpand Collapse
 
-Loading
+limit: optional number
 
-Loading
+Maximum results (default: 500, max: 1000)
 
-Loading
+name\_prefix: optional string
 
-Loading
+Filter groups by name prefix
 
-Loading
+page: optional string
 
-Loading
+Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
-Loading
+##### Header ParametersExpand Collapse
 
-Loading
+"x-api-key": optional string
 
-Loading
+##### ReturnsExpand Collapse
 
-Loading
+
 
-Loading
+data: array of object { id, created\_at, description, 4 more } 
 
-Loading
+List of groups
 
-Loading
+id: string
 
-Loading
+Group identifier (tagged ID)
 
-Loading
+created\_at: string or null
 
-Loading
+Group creation timestamp (ISO 8601)
 
-Loading
+description: string
 
-Loading
+Group description
 
-Loading
+name: string
 
-Loading
+Group name
 
-Loading
+roles: array of string or null
 
-Loading
+Role IDs assigned to this group.
 
-Loading
+source\_type: string
 
-Loading
+How the group was created ('direct' or 'scim')
 
-Loading
+updated\_at: string or null
 
-Loading
+Group last-updated timestamp (ISO 8601)
 
-Loading
+has\_more: boolean
 
-Loading
+Whether more records exist beyond the current result set
 
-Loading
+next\_page: string or null
 
-Loading
+Token to retrieve the next page. Use this as the 'page' parameter in your next request
 
-Loading
+List Compliance Groups
 
-Loading
+
 
-Loading
+```shiki
+curl https://api.anthropic.com/v1/compliance/groups \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
 
-Loading
+Response 200
 
-Loading
+
 
-Loading
+```shiki
+{
+  "data": [
+    {
+      "id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+      "created_at": "2025-03-12T18:22:41.123456",
+      "description": "All members of the engineering organization",
+      "name": "Engineering Team",
+      "roles": [
+        "rbac_role_01SGBg3kEnZrdsVR2QmyJbvD",
+        "rbac_role_01HtCd4mFoAseWS3RnzKcwE7"
+      ],
+      "source_type": "scim",
+      "updated_at": "2025-03-14T09:05:17.456789"
+    }
+  ],
+  "has_more": true,
+  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
+}
+```
 
-Loading
+##### Returns Examples
 
-Loading
+Response 200
 
-Loading
+
 
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
+```shiki
+{
+  "data": [
+    {
+      "id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+      "created_at": "2025-03-12T18:22:41.123456",
+      "description": "All members of the engineering organization",
+      "name": "Engineering Team",
+      "roles": [
+        "rbac_role_01SGBg3kEnZrdsVR2QmyJbvD",
+        "rbac_role_01HtCd4mFoAseWS3RnzKcwE7"
+      ],
+      "source_type": "scim",
+      "updated_at": "2025-03-14T09:05:17.456789"
+    }
+  ],
+  "has_more": true,
+  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
+}
+```
 
 ---
 

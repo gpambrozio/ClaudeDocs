@@ -1,106 +1,69 @@
 # Delete chat
 
-Loading
+Copy page
 
-Loading
+
 
-Loading
+# Delete chat
 
-Loading
+DELETE/v1/compliance/apps/chats/{claude\_chat\_id}
 
-Loading
+Permanently deletes a chat and all associated messages and
+files. This is a destructive operation that cannot be undone.
 
-Loading
+##### Path ParametersExpand Collapse
 
-Loading
+claude\_chat\_id: string
 
-Loading
+The chat ID (tagged ID, e.g., claude\_chat\_abc123)
 
-Loading
+##### Header ParametersExpand Collapse
 
-Loading
+"x-api-key": optional string
 
-Loading
+##### ReturnsExpand Collapse
 
-Loading
+id: string
 
-Loading
+The ID of the Claude chat that was deleted
 
-Loading
+type: optional "claude\_chat\_deleted"
 
-Loading
+Constant string confirming deletion
 
-Loading
+Delete chat
 
-Loading
+
 
-Loading
+```shiki
+curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID \
+    -X DELETE \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
 
-Loading
+Response 200
 
-Loading
+
 
-Loading
+```shiki
+{
+  "id": "claude_chat_abc123",
+  "type": "claude_chat_deleted"
+}
+```
 
-Loading
+##### Returns Examples
 
-Loading
+Response 200
 
-Loading
+
 
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
-
-Loading
+```shiki
+{
+  "id": "claude_chat_abc123",
+  "type": "claude_chat_deleted"
+}
+```
 
 ---
 
