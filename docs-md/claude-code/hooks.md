@@ -240,7 +240,7 @@ Where you define a hook determines its scope:
 | [Skill](skills.md) frontmatter | The rest of the session once the skill is invoked. See [Hooks in skills and agents](#hooks-in-skills-and-agents) | Yes, defined in the skill file |
 | [Subagent](sub-agents.md) frontmatter | While that subagent is running | Yes, defined in the subagent file |
 
-Cloud sessions on [Claude Code on the web](claude-code-on-the-web.md) don’t read your local `~/.claude/settings.json`; hooks there come from the repo and from your organization’s server-managed settings. See [what carries over from your setup](cloud-environments.md) for which files reach a cloud session.
+Cloud sessions on [Claude Code on the web](claude-code-on-the-web.md) don’t read your local `~/.claude/settings.json`; hooks there come from the repo and from your organization’s server-managed settings. In a [self-hosted environment](self-hosted-environments-configuration.md), Claude Code also runs the hooks the operator seeded from the runner host’s `~/.claude/`, and it runs the hooks in the runner image’s managed settings file when neither [server-managed settings nor an MDM-delivered Claude Code policy](settings.md) supplies the managed tier. See [what carries over from your setup](cloud-environments.md) for which files reach a cloud session.
 For details on settings file resolution, see [settings](settings.md).
 Hooks from settings files, managed policy settings, and plugins also run inside [subagents](sub-agents.md). When a subagent calls a tool, tool events such as `PreToolUse` and `PostToolUse` fire the same configured hooks as in the main conversation, and the input carries the `agent_id` and `agent_type` [common input fields](#common-input-fields) that identify the subagent.
 Enterprise administrators can use `allowManagedHooksOnly` to restrict which hooks run:
@@ -248,6 +248,7 @@ Enterprise administrators can use `allowManagedHooksOnly` to restrict which hook
 - Your user, project, local, and plugin hooks are blocked. Hooks from plugins force-enabled in managed settings `enabledPlugins` are exempt
 - Claude Code also narrows your [`statusLine`](statusline.md), [`fileSuggestion`](settings-reference.md), and [`subagentStatusLine`](statusline.md) settings to managed settings
 - Claude Code also disables plugins with a [`command` source](plugin-marketplaces.md), including plugins force-enabled in managed settings `enabledPlugins`, unless [`disableCommandPluginSources`](settings-reference.md) is explicitly set to `false`
+- Claude Code also blocks marketplace [`headersHelper` commands](plugin-marketplaces.md) unless [`disableCommandPluginSources`](settings-reference.md) is explicitly set to `false`, except for a marketplace that managed settings themselves declare
 
 See [what runs under `allowManagedHooksOnly`](settings-reference.md).
 Hook entries merge across settings levels rather than replacing each other: user, project, and local settings add their own hooks without removing managed ones, and the [`disableAllHooks`](#disable-or-remove-hooks) setting can’t disable managed hooks from outside managed settings.
@@ -279,7 +280,7 @@ Each event type matches on a different field:
 | `SessionStart` | how the session started | `startup`, `resume`, `clear`, `compact`, `fork` |
 | `Setup` | which CLI flag triggered setup | `init`, `maintenance` |
 | `SessionEnd` | why the session ended | `clear`, `resume`, `logout`, `prompt_input_exit`, `other` |
-| `Notification` | notification type | `permission_prompt`, `idle_prompt`, `auth_success`, `elicitation_dialog`, `elicitation_url_dialog`, `elicitation_complete`, `elicitation_response`, `agent_needs_input`, `agent_completed` |
+| `Notification` | notification type | `permission_prompt`, `idle_prompt`, `auth_success`, `elicitation_dialog`, `elicitation_url_dialog`, `elicitation_complete`, `elicitation_response`, `agent_needs_input`, `agent_completed`, `quota_auto_resume_fired`, `quota_auto_resume_stale`, `quota_auto_resume_disabled` |
 | `SubagentStart` | agent type | `general-purpose`, `Explore`, `Plan`, custom agent names, or plugin-scoped names like `^my-plugin:reviewer$` |
 | `PreCompact`, `PostCompact` | what triggered compaction | `manual`, `auto` |
 | `SubagentStop` | agent type | same values as `SubagentStart` |
@@ -637,7 +638,7 @@ Selecting a hook opens a detail view showing its event, matcher, type, source fi
 
 To remove a hook, delete its entry from the settings JSON file.
 To temporarily disable all hooks without removing them, set `"disableAllHooks": true` in your settings file. Claude Code reads the value left after [settings precedence](settings.md) applies, so a `"disableAllHooks": false` in a project’s `.claude/settings.json` overrides a `true` in your user settings. To turn hooks off for one run whatever the project’s settings say, pass `--settings '{"disableAllHooks": true}'`, which takes precedence over project and local settings. There is no way to disable an individual hook while keeping it in the configuration.
-The `disableAllHooks` setting respects the managed settings hierarchy. If an administrator has configured hooks through managed policy settings, `disableAllHooks` set in user, project, or local settings can’t disable those managed hooks. Only `disableAllHooks` set at the managed settings level can disable managed hooks.
+The `disableAllHooks` setting respects the managed settings hierarchy. If an administrator has configured hooks through managed policy settings, `disableAllHooks` set in user, project, or local settings can’t disable those managed hooks. Only `disableAllHooks` set at the managed settings level can disable managed hooks. For the full reach of each level, see [`disableAllHooks`](settings-reference.md).
 Direct edits to hooks in settings files are normally picked up automatically by the file watcher.
 
 ## [​](#hook-input-and-output) Hook input and output
@@ -2010,13 +2011,17 @@ You receive these hook events even with desktop notifications turned off: the `p
 | `elicitation_response` | An MCP elicitation response is sent back to the server |
 | `agent_needs_input` | A background session starts waiting on your input. Fires only while [agent view](agent-view.md) is open in a terminal |
 | `agent_completed` | A background session finishes or fails. Fires only while [agent view](agent-view.md) is open in a terminal |
+| `quota_auto_resume_fired` | Claude Code continues your task after a claude.ai usage limit paused it: at the reset, or sooner when something you do in Claude Code during the wait, such as adding usage credits, upgrading your plan, or switching models, makes usage available again, with the [model-setting exception](interactive-mode.md) |
+| `quota_auto_resume_stale` | A claude.ai usage limit reset while your computer slept for more than about 30 minutes. Claude Code waits for you to press `Enter` instead of continuing. After a shorter sleep it continues and fires `quota_auto_resume_fired` instead |
+| `quota_auto_resume_disabled` | Claude Code ends its wait for a claude.ai usage limit without continuing your task: [`autoContinueAtUsageLimit`](settings-reference.md) turned off or the reset moved more than 24 hours away during a wait Claude Code started on its own, the continued task kept hitting the limit, or the continuation was blocked before it reached the model. Doesn’t fire when you press `Esc` or `Ctrl+C`, or pick **Don’t continue automatically** |
 
 The `agent_needs_input` and `agent_completed` types require Claude Code v2.1.198 or later.
+The `quota_auto_resume_fired`, `quota_auto_resume_stale`, and `quota_auto_resume_disabled` types require Claude Code v2.1.234 or later.
 
 The `permission_prompt`, `idle_prompt`, `elicitation_dialog`, and `elicitation_url_dialog` types share their timing with desktop notifications, so in terminal sessions you only see them when you appear to be away from the terminal:
 
 - Expect `permission_prompt` once you haven’t typed for about six seconds. The timer starts when the permission prompt appears, and each keystroke defers it. To run a hook immediately on every permission ask, use [PermissionRequest](#permissionrequest) instead.
-- Expect `idle_prompt` about 60 seconds after Claude finishes responding, and only if you haven’t typed since.
+- Expect `idle_prompt` about 60 seconds after Claude finishes responding, and only if you haven’t typed since. Claude Code doesn’t send `idle_prompt` while it waits for a claude.ai usage limit to reset. When the wait ends on its own, one of the `quota_auto_resume_*` types fires instead.
 - Expect `elicitation_dialog` for an elicitation form, or `elicitation_url_dialog` for a browser URL request, once you haven’t typed for about six seconds. Both share the same six-second gate as `permission_prompt`: the timer starts when the dialog appears, and each keystroke defers it.
 
 Claude Code times `permission_prompt` differently in sessions where it sends permission requests to the Agent SDK’s [`canUseTool` callback](agent-sdk/user-input.md), which is how Claude Desktop and the VS Code extension host Claude Code:

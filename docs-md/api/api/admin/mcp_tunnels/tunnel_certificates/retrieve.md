@@ -14,55 +14,73 @@ GET/v1/organizations/tunnels/{tunnel\_id}/certificates/{certificate\_id}
 
 Retrieve a single certificate registered on a tunnel by ID.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-tunnel\_id: string
+tunnel\_id: string
 
 ID of the Tunnel.
 
-certificate\_id: string
+certificate\_id: string
 
 ID of the Tunnel Certificate.
 
-##### Header ParametersExpand Collapse
+##### Headers
 
-"anthropic-beta": array of "mcp-tunnels-2026-05-19"
+"anthropic-beta": array of "mcp-tunnels-2026-05-19"
 
 Required for all Tunnel endpoints.
 
-##### ReturnsExpand Collapse
+##### Returns
 
-id: string
+id: string
 
 ID of the Tunnel Certificate.
 
-archived\_at: string or null
+
+
+archived\_at: string or null
 
 RFC 3339 datetime string indicating when the certificate was archived, or
 `null` if it is not archived.
 
-created\_at: string
+formatdate-time
+
+
+
+created\_at: string
 
 RFC 3339 datetime string indicating when the certificate was registered.
 
-expires\_at: string or null
+formatdate-time
+
+
+
+expires\_at: string or null
 
 RFC 3339 datetime string indicating when the certificate expires, or
 `null` if it does not expire.
 
-fingerprint: string
+formatdate-time
+
+fingerprint: string
 
 The certificate's SHA-256 fingerprint, as a lowercase hex string.
 
-tunnel\_id: string
+tunnel\_id: string
 
 ID of the Tunnel this certificate is registered against.
 
-type: "tunnel\_certificate"
+
+
+type: "tunnel\_certificate"
 
 Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
-Get Tunnel Certificate
+defaulttunnel\_certificate
+
+### Get Tunnel Certificate
+
+cURL
 
 
 

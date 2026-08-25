@@ -12,253 +12,109 @@ GET/v1/environments/{environment\_id}
 
 Retrieve a specific environment by ID.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-environment\_id: string
+environment\_id: string
 
-##### Header ParametersExpand Collapse
+##### Headers
 
 
 
-"anthropic-beta": optional array of [AnthropicBeta](api/beta.md)
+"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-string
+string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more
 
 One of the following:
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24"
 
-"prompt-caching-2024-07-31"
+"prompt-caching-2024-07-31"
 
-"computer-use-2024-10-22"
+"computer-use-2024-10-22"
 
-"computer-use-2025-01-24"
+"computer-use-2025-01-24"
 
-"pdfs-2024-09-25"
+"pdfs-2024-09-25"
 
-"token-counting-2024-11-01"
+"token-counting-2024-11-01"
 
-"token-efficient-tools-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"output-128k-2025-02-19"
+"output-128k-2025-02-19"
 
-"files-api-2025-04-14"
+"files-api-2025-04-14"
 
-"mcp-client-2025-04-04"
+"mcp-client-2025-04-04"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-11-20"
 
-"dev-full-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"interleaved-thinking-2025-05-14"
+"interleaved-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"code-execution-2025-05-22"
 
-"extended-cache-ttl-2025-04-11"
+"extended-cache-ttl-2025-04-11"
 
-"context-1m-2025-08-07"
+"context-1m-2025-08-07"
 
-"context-management-2025-06-27"
+"context-management-2025-06-27"
 
-"model-context-window-exceeded-2025-08-26"
+"model-context-window-exceeded-2025-08-26"
 
-"skills-2025-10-02"
+"skills-2025-10-02"
 
-"fast-mode-2026-02-01"
+"fast-mode-2026-02-01"
 
-"output-300k-2026-03-24"
+"output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
+"user-profiles-2026-03-24"
 
-"user-profiles-2026-08-18"
+"user-profiles-2026-08-18"
 
-"advisor-tool-2026-03-01"
+"advisor-tool-2026-03-01"
 
-"managed-agents-2026-04-01"
+"managed-agents-2026-04-01"
 
-"cache-diagnosis-2026-04-07"
+"cache-diagnosis-2026-04-07"
 
-"dreaming-2026-04-21"
+"dreaming-2026-04-21"
 
-"thinking-token-count-2026-05-13"
+"thinking-token-count-2026-05-13"
 
-"server-side-fallback-2026-06-01"
+"server-side-fallback-2026-06-01"
 
-"server-side-fallback-2026-07-01"
+"server-side-fallback-2026-07-01"
 
-"fallback-credit-2026-06-01"
+"fallback-credit-2026-06-01"
 
-"fallback-credit-2026-07-01"
+"fallback-credit-2026-07-01"
 
-"agent-memory-2026-07-22"
+"agent-memory-2026-07-22"
 
-"mid-conversation-tool-changes-2026-07-01"
+"mid-conversation-tool-changes-2026-07-01"
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-BetaEnvironment object { id, archived\_at, config, 7 more } 
+BetaEnvironment object{ id, archived\_at, config, 7 more }
 
 Unified Environment resource for both cloud and self-hosted environments.
 
-id: string
+### Get Environment
 
-Environment identifier (e.g., 'env\_...')
+cURL
 
-archived\_at: string or null
-
-RFC 3339 timestamp when environment was archived, or null if not archived
-
-
-
-config: [BetaCloudConfig](api/beta/environments.md) { networking, packages, type }  or [BetaSelfHostedConfig](api/beta/environments.md) { type } 
-
-Environment configuration (either Anthropic Cloud or self-hosted)
-
-One of the following:
-
-
-
-BetaCloudConfig object { networking, packages, type } 
-
-`cloud` environment configuration.
-
-
-
-networking: [BetaUnrestrictedNetwork](api/beta/environments.md) { type }  or [BetaLimitedNetwork](api/beta/environments.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
-
-Network configuration policy.
-
-One of the following:
-
-
-
-BetaUnrestrictedNetwork object { type } 
-
-Unrestricted network access.
-
-type: "unrestricted"
-
-Network policy type
-
-
-
-BetaLimitedNetwork object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
-
-Limited network access.
-
-allow\_mcp\_servers: boolean
-
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
-
-allow\_package\_managers: boolean
-
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
-
-allowed\_hosts: array of string
-
-Specifies domains the container can reach.
-
-type: "limited"
-
-Network policy type
-
-
-
-packages: [BetaPackages](api/beta/environments.md) { apt, cargo, gem, 4 more } 
-
-Package manager configuration.
-
-apt: array of string
-
-Ubuntu/Debian packages to install
-
-cargo: array of string
-
-Rust packages to install
-
-gem: array of string
-
-Ruby packages to install
-
-go: array of string
-
-Go packages to install
-
-npm: array of string
-
-Node.js packages to install
-
-pip: array of string
-
-Python packages to install
-
-type: optional "packages"
-
-Package configuration type
-
-type: "cloud"
-
-Environment type
-
-
-
-BetaSelfHostedConfig object { type } 
-
-Configuration for self-hosted environments.
-
-type: "self\_hosted"
-
-Environment type
-
-created\_at: string
-
-RFC 3339 timestamp when environment was created
-
-description: string or null
-
-User-provided description for the environment; null when unset
-
-metadata: map[string]
-
-User-provided metadata key-value pairs
-
-name: string
-
-Human-readable name for the environment
-
-type: "environment"
-
-The type of object (always 'environment')
-
-updated\_at: string
-
-RFC 3339 timestamp when environment was last updated
-
-
-
-scope: optional "organization" or "account"
-
-The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
-
-One of the following:
-
-"organization"
-
-"account"
-
-Get Environment
-
-cURL
+
 
 ```shiki
 curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID \

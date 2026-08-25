@@ -10,69 +10,77 @@ GET/v1/organizations/users/{user\_id}
 
 For Claude Enterprise organizations, this endpoint's availability is in beta.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-User object { id, added\_at, email, 3 more } 
+User object{ id, added\_at, email, 3 more }
 
-id: string
+id: string
 
 ID of the User.
 
-added\_at: string
+
+
+added\_at: string
 
 RFC 3339 datetime string indicating when the User joined the Organization.
 
-email: string
+formatdate-time
+
+email: string
 
 Email of the User.
 
-name: string
+name: string
 
 Name of the User.
 
 
 
-role: "admin" or "billing" or "claude\_code\_user" or 6 more
+role: "admin" or "billing" or "claude\_code\_user" or 6 more
 
 Organization role of the User.
 
 One of the following:
 
-"admin"
+"admin"
 
-"billing"
+"billing"
 
-"claude\_code\_user"
+"claude\_code\_user"
 
-"developer"
+"developer"
 
-"managed"
+"managed"
 
-"membership\_admin"
+"membership\_admin"
 
-"owner"
+"owner"
 
-"primary\_owner"
+"primary\_owner"
 
-"user"
+"user"
 
 
 
-type: "user"
+type: "user"
 
 Object type.
 
 For Users, this is always `"user"`.
 
-Get User
+defaultuser
+
+### Get User
+
+cURL
 
 
 

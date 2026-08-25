@@ -10,27 +10,29 @@ GET/v1/organizations/api\_keys
 
 List API Keys
 
-##### Query ParametersExpand Collapse
+##### Query parameters
 
-after\_id: optional string
+after\_id: optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-before\_id: optional string
+before\_id: optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-created\_by\_user\_id: optional string
+created\_by\_user\_id: optional string
 
 Filter by the ID of the User who created the object.
 
 
 
-limit: optional number
+limit: optional number
 
 Number of items to return per page.
 
 Defaults to `20`. Ranges from `1` to `1000`.
+
+default20
 
 maximum1000
 
@@ -38,129 +40,141 @@ minimum1
 
 
 
-status: optional "active" or "archived" or "expired" or "inactive"
+status: optional "active" or "archived" or "expired" or "inactive"
 
 Filter by API key status.
 
 One of the following:
 
-"active"
+"active"
 
-"archived"
+"archived"
 
-"expired"
+"expired"
 
-"inactive"
+"inactive"
 
-workspace\_id: optional string
+workspace\_id: optional string
 
 Filter by Workspace ID.
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-data: array of APIKey { id, created\_at, created\_by, 7 more } 
+data: array of [APIKey](api/http/$shared.md) { id, created\_at, created\_by, 7 more }
 
-id: string
+id: string
 
 ID of the API key.
 
-created\_at: string
+
+
+created\_at: string
 
 RFC 3339 datetime string indicating when the API Key was created.
 
+formatdate-time
+
 
 
-created\_by: object { id, type }  or null
+created\_by: object{ id, type } or null
 
 The ID and type of the actor that created the API key, or `null` when the
 creator is not recorded (legacy, workload-identity-federated, or
 system-created keys).
 
-id: string
+id: string
 
 ID of the actor that created the object.
 
-type: string
+type: string
 
 Type of the actor that created the object.
 
-expires\_at: string or null
+
+
+expires\_at: string or null
 
 RFC 3339 datetime string indicating when the API Key expires, or `null` if it never expires.
 
-name: string
+formatdate-time
+
+name: string
 
 Name of the API key.
 
-partial\_key\_hint: string or null
+partial\_key\_hint: string or null
 
 Partially redacted hint for the API key.
 
 
 
-principal: object { id, type }  or null
+principal: object{ id, type } or null
 
 The ID and type of the principal the API key acts as, or `null` if the key is not bound to a principal.
 
-id: string
+id: string
 
 ID of the principal the API key acts as: a User ID (`user_...`) when the type is `user`, or a Service Account ID (`svac_...`) when the type is `service_account`.
 
 
 
-type: "service\_account" or "user"
+type: "service\_account" or "user"
 
 Type of the principal the API key acts as.
 
 One of the following:
 
-"service\_account"
+"service\_account"
 
-"user"
+"user"
 
 
 
-status: "active" or "archived" or "expired" or "inactive"
+status: "active" or "archived" or "expired" or "inactive"
 
 Status of the API key.
 
 One of the following:
 
-"active"
+"active"
 
-"archived"
+"archived"
 
-"expired"
+"expired"
 
-"inactive"
+"inactive"
 
 
 
-type: "api\_key"
+type: "api\_key"
 
 Object type.
 
 For API Keys, this is always `"api_key"`.
 
-workspace\_id: string or null
+defaultapi\_key
+
+workspace\_id: string or null
 
 ID of the Workspace associated with the API key, or `null` if the API key belongs to the default Workspace.
 
-first\_id: string or null
+first\_id: string or null
 
 First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
-has\_more: boolean
+has\_more: boolean
 
 Indicates if there are more results in the requested page direction.
 
-last\_id: string or null
+last\_id: string or null
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
-List API Keys
+### List API Keys
+
+cURL
 
 
 

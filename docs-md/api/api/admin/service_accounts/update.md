@@ -16,102 +16,58 @@ Setting `organization_role` to `admin` (even when unchanged) requires an
 interactive credential (a user OAuth token or a Console session). Admin
 API keys are not accepted.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-service\_account\_id: string
+service\_account\_id: string
 
 ID of the service account to update.
 
-##### Header ParametersExpand Collapse
+##### Headers
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
 To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-##### Body ParametersJSONExpand Collapse
-
-description: optional string or null
-
-Replaces the description. Omit to leave unchanged; send `null` to clear (the field is stored as an empty string).
+##### Body
 
 
 
-organization\_role: optional "admin" or "developer" or null
+description: optional string or null
+
+Replaces the description. Omit to leave unchanged; send `null` to clear (the field is stored as an empty string).
+
+maxLength2000
+
+
+
+organization\_role: optional "admin" or "developer" or null
 
 Replaces the org-level role. Omit or send `null` to leave unchanged.
 
 One of the following:
 
-"admin"
+"admin"
 
-"developer"
+"developer"
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-ServiceAccount object { id, archived\_at, archived\_by\_actor\_id, 8 more } 
+ServiceAccount object{ id, archived\_at, archived\_by\_actor\_id, 8 more }
 
 Named non-human identity within the caller's organization.
 
 A service account is a pure identity: name + org. Authorization lives on
 whatever references it (federation rules).
 
-id: string
+### Update Service Account
 
-Tagged ID of the service account.
-
-archived\_at: string or null
-
-If set, this service account is archived.
-
-archived\_by\_actor\_id: string or null
-
-Tagged ID (`user_`/`svac_`) of the actor that archived this service account.
-
-created\_at: string
-
-When this service account was created.
-
-created\_by\_actor\_id: string or null
-
-Tagged ID (`user_`/`svac_`) of the actor that created this service account.
-
-description: string or null
-
-Optional free-text description.
-
-name: string
-
-Admin-chosen slug identifier.
-
-
-
-organization\_role: "admin" or "developer"
-
-Org-level role. A federation rule may only be created or retargeted to grant `org:admin` scope when this is `admin`. A rule granting `org:admin` whose target is later demoted to `developer` is rejected at token exchange. Rules granting `org:admin` are managed in the Console.
-
-One of the following:
-
-"admin"
-
-"developer"
-
-type: "service\_account"
-
-updated\_at: string
-
-When this service account was last updated.
-
-updated\_by\_actor\_id: string or null
-
-Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
-
-Update Service Account
+cURL
 
 
 

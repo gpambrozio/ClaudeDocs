@@ -820,7 +820,7 @@ A `CLAUDE.md` file at the plugin root is not loaded as project context. Plugins 
 | **MCP servers** | `.mcp.json` | MCP server definitions |
 | **LSP servers** | `.lsp.json` | Language server configurations |
 | **Monitors** | `monitors/monitors.json` | Background monitor configurations |
-| **Executables** | `bin/` | Executables added to the Bash tool’s `PATH`. Files here are invokable as bare commands in any Bash tool call while the plugin is enabled |
+| **Executables** | `bin/` | Executables added to the Bash tool’s `PATH` and invokable as bare commands while the plugin is enabled. You can’t include this directory in a plugin you [distribute through claude.ai organization settings](plugin-marketplaces.md) |
 | **Settings** | `settings.json` | Default configuration applied when the plugin is enabled. Only the [`agent`](sub-agents.md) and [`subagentStatusLine`](statusline.md) keys are supported |
 
 ---
@@ -898,7 +898,7 @@ claude plugin install <plugin> [options]
 | --- | --- | --- |
 | `-s, --scope <scope>` | Installation scope: `user`, `project`, or `local` | `user` |
 | `--config <key=value>` | Set a [`userConfig`](#user-configuration) option declared in the plugin’s manifest. Repeat the flag to set multiple options |  |
-| `-y, --yes` | Accept the command that a plugin with a [`command` source](plugin-marketplaces.md) runs, without the confirmation prompt. Claude Code still prints the command first. Required when stdin or stdout isn’t a TTY. Has no effect inside a Claude Code session, so run the command from your own terminal |  |
+| `-y, --yes` | Accept a command the plugin’s marketplace declares, without the confirmation prompt: the command that produces a plugin with a [`command` source](plugin-marketplaces.md), or the [`headersHelper`](plugin-marketplaces.md) that authenticates an archive download. Accepting a `headersHelper` requires Claude Code v2.1.238 or later. Claude Code still prints the command first. Required when stdin or stdout isn’t a TTY. Has no effect inside a Claude Code session, so run the command from your own terminal |  |
 | `-h, --help` | Display help for command |  |
 
 Scope determines which settings file the installed plugin is added to. For example, `--scope project` writes to `enabledPlugins` in .claude/settings.json, making the plugin available to everyone who clones the project repository.
@@ -1018,7 +1018,7 @@ claude plugin update <plugin> [options]
 | Option | Description | Default |
 | --- | --- | --- |
 | `-s, --scope <scope>` | Scope to update: `user`, `project`, `local`, or `managed` | `user` |
-| `-y, --yes` | Accept the command that a plugin with a [`command` source](plugin-marketplaces.md) runs, without the confirmation prompt. Claude Code still prints the command first. Required when stdin or stdout isn’t a TTY. Has no effect inside a Claude Code session, so run the command from your own terminal |  |
+| `-y, --yes` | Accept a command the plugin’s marketplace declares, without the confirmation prompt: the command that produces a plugin with a [`command` source](plugin-marketplaces.md), or the [`headersHelper`](plugin-marketplaces.md) that authenticates an archive download. Accepting a `headersHelper` requires Claude Code v2.1.238 or later. Claude Code still prints the command first. Required when stdin or stdout isn’t a TTY. Has no effect inside a Claude Code session, so run the command from your own terminal |  |
 | `-h, --help` | Display help for command |  |
 
 ---

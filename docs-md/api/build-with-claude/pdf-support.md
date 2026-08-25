@@ -29,7 +29,7 @@ Because PDF support relies on Claude's vision capabilities, it is subject to the
 
 ###  Supported platforms and models
 
-All [active models](about-claude/models/overview.md) support PDF processing. For PDF support through Amazon Bedrock's Converse API, see [Amazon Bedrock PDF support](#amazon-bedrock-pdf-support).
+All [active models](models/overview.md) support PDF processing. For PDF support through Amazon Bedrock's Converse API, see [Amazon Bedrock PDF support](#amazon-bedrock-pdf-support).
 
 ###  Amazon Bedrock PDF support
 

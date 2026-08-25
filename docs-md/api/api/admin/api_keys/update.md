@@ -10,125 +10,47 @@ POST/v1/organizations/api\_keys/{api\_key\_id}
 
 Update API Key
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-api\_key\_id: string
+api\_key\_id: string
 
 ID of the API key.
 
-##### Body ParametersJSONExpand Collapse
-
-name: optional string or null
-
-Name of the API key.
+##### Body
 
 
 
-status: optional "active" or "archived" or "inactive" or null
+name: optional string or null
+
+Name of the API key.
+
+maxLength500
+
+minLength1
+
+
+
+status: optional "active" or "archived" or "inactive" or null
 
 Status of the API key.
 
 One of the following:
 
-"active"
+"active"
 
-"archived"
+"archived"
 
-"inactive"
+"inactive"
 
-##### ReturnsExpand Collapse
-
-
-
-APIKey object { id, created\_at, created\_by, 7 more } 
-
-id: string
-
-ID of the API key.
-
-created\_at: string
-
-RFC 3339 datetime string indicating when the API Key was created.
+##### Returns
 
 
 
-created\_by: object { id, type }  or null
+APIKey object{ id, created\_at, created\_by, 7 more }
 
-The ID and type of the actor that created the API key, or `null` when the
-creator is not recorded (legacy, workload-identity-federated, or
-system-created keys).
+### Update API Key
 
-id: string
-
-ID of the actor that created the object.
-
-type: string
-
-Type of the actor that created the object.
-
-expires\_at: string or null
-
-RFC 3339 datetime string indicating when the API Key expires, or `null` if it never expires.
-
-name: string
-
-Name of the API key.
-
-partial\_key\_hint: string or null
-
-Partially redacted hint for the API key.
-
-
-
-principal: object { id, type }  or null
-
-The ID and type of the principal the API key acts as, or `null` if the key is not bound to a principal.
-
-id: string
-
-ID of the principal the API key acts as: a User ID (`user_...`) when the type is `user`, or a Service Account ID (`svac_...`) when the type is `service_account`.
-
-
-
-type: "service\_account" or "user"
-
-Type of the principal the API key acts as.
-
-One of the following:
-
-"service\_account"
-
-"user"
-
-
-
-status: "active" or "archived" or "expired" or "inactive"
-
-Status of the API key.
-
-One of the following:
-
-"active"
-
-"archived"
-
-"expired"
-
-"inactive"
-
-
-
-type: "api\_key"
-
-Object type.
-
-For API Keys, this is always `"api_key"`.
-
-workspace\_id: string or null
-
-ID of the Workspace associated with the API key, or `null` if the API key belongs to the default Workspace.
-
-Update API Key
+cURL
 
 
 

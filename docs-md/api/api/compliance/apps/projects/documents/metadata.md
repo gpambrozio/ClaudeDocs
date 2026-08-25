@@ -15,49 +15,57 @@ endpoint to fetch the document text. The `md5` and `size_bytes`
 fields here are computed over the UTF-8 encoding of that text, so a DLP
 consumer can dedupe or match hashes without downloading every document.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-document\_id: string
+document\_id: string
 
 The document ID (tagged ID, e.g., claude\_proj\_doc\_abc123)
 
-##### Header ParametersExpand Collapse
+##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
-##### ReturnsExpand Collapse
+##### Returns
 
-id: string
+id: string
 
 Project document identifier (tagged ID)
 
-claude\_project\_id: string
+claude\_project\_id: string
 
 The project this document belongs to
 
-created\_at: string
+
+
+created\_at: string
 
 Document creation timestamp
 
-filename: string
+formatdate-time
+
+filename: string
 
 Document filename
 
-md5: string
+md5: string
 
 Lowercase hex MD5 of the document content (UTF-8 encoded). Matches the `content` field returned by the sibling content endpoint.
 
-mime\_type: "text/plain"
+
+
+mime\_type: "text/plain"
 
 MIME type of the document content, always plain text
 
-size\_bytes: number
+defaulttext/plain
+
+size\_bytes: number
 
 Size in bytes of the document content (UTF-8 encoded)
 
 
 
-user: object { id, email\_address }  or null
+user: object{ id, email\_address } or null
 
 The user who created a project or project document.
 
@@ -65,15 +73,17 @@ Fields that reference this type are null when the creator's account has
 been deleted or the creator is no longer a member of an organization the
 key may read.
 
-id: string
+id: string
 
 User identifier (tagged ID)
 
-email\_address: string
+email\_address: string
 
 User's email address
 
-Get project document metadata
+### Get project document metadata
+
+cURL
 
 
 

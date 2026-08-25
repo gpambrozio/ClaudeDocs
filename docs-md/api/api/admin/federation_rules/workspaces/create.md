@@ -19,53 +19,63 @@ Archived rules are rejected with 400. OAuth callers may only manage rules whose
 `oauth_scope` is `workspace:developer` or `workspace:inference`; other
 scopes require a Console session. Admin API keys are not accepted.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-federation\_rule\_id: string
+federation\_rule\_id: string
 
 ID of the federation rule.
 
-##### Header ParametersExpand Collapse
+##### Headers
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
 To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-##### Body ParametersJSONExpand Collapse
+##### Body
 
-workspace\_id: string
+workspace\_id: string
 
 Tagged ID of the workspace to enable this rule for.
 
-##### ReturnsExpand Collapse
+##### Returns
 
-created\_at: string
+
+
+created\_at: string
 
 When this workspace was enabled for the rule.
 
-created\_by\_actor\_id: string or null
+formatdate-time
+
+created\_by\_actor\_id: string or null
 
 Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
 
-federation\_rule\_id: string
+federation\_rule\_id: string
 
 Tagged ID of the federation rule.
 
-type: "federation\_rule\_workspace"
+
 
-workspace\_id: string
+type: "federation\_rule\_workspace"
+
+defaultfederation\_rule\_workspace
+
+workspace\_id: string
 
 Tagged ID of the workspace this rule is enabled for.
 
-workspace\_name: string or null
+workspace\_name: string or null
 
 Workspace display name. Populated when listing; null in the enable response.
 
-Add Federation Rule Workspace
+### Add Federation Rule Workspace
+
+cURL
 
 
 

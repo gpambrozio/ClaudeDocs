@@ -18,7 +18,7 @@ The [token counting](api/messages-count-tokens.md) endpoint accepts the same str
 
 ###  Supported models
 
-All [active models](about-claude/models/overview.md) support token counting, including Claude Opus 5 and Claude Sonnet 5.
+All [active models](models/overview.md) support token counting, including Claude Opus 5 and Claude Sonnet 5.
 
 ###  Count tokens in basic messages
 

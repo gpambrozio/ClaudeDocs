@@ -16,33 +16,37 @@ Message Batches can only be deleted once they've finished processing. If you'd l
 
 Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-message\_batch\_id: string
-
-ID of the Message Batch.
-
-##### ReturnsExpand Collapse
-
-
-
-DeletedMessageBatch object { id, type } 
-
-id: string
+message\_batch\_id: string
 
 ID of the Message Batch.
 
+##### Returns
+
 
 
-type: "message\_batch\_deleted"
+DeletedMessageBatch object{ id, type }
+
+id: string
+
+ID of the Message Batch.
+
+
+
+type: "message\_batch\_deleted"
 
 Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
 
-Delete a Message Batch
+defaultmessage\_batch\_deleted
 
-cURL
+### Delete a Message Batch
+
+cURL
+
+
 
 ```shiki
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \

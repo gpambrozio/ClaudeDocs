@@ -12,19 +12,21 @@ GET/v1/skills
 
 List Skills
 
-##### Query ParametersExpand Collapse
+##### Query parameters
 
 
 
-limit: optional number
+limit: optional number
 
 Number of results to return per page.
 
 Maximum value is 100. Defaults to 20.
 
+default20
+
 
 
-page: optional string
+page: optional string
 
 Pagination token for fetching a specific page of results.
 
@@ -32,7 +34,7 @@ Pass the value from a previous response's `next_page` field to get the next page
 
 
 
-source: optional string
+source: optional string
 
 Filter skills by source.
 
@@ -41,115 +43,115 @@ If provided, only skills from the specified source will be returned:
 - `"custom"`: only return user-created skills
 - `"anthropic"`: only return Anthropic-created skills
 
-##### Header ParametersExpand Collapse
+##### Headers
 
 
 
-"anthropic-beta": optional array of [AnthropicBeta](api/beta.md)
+"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-string
+string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more
 
 One of the following:
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24"
 
-"prompt-caching-2024-07-31"
+"prompt-caching-2024-07-31"
 
-"computer-use-2024-10-22"
+"computer-use-2024-10-22"
 
-"computer-use-2025-01-24"
+"computer-use-2025-01-24"
 
-"pdfs-2024-09-25"
+"pdfs-2024-09-25"
 
-"token-counting-2024-11-01"
+"token-counting-2024-11-01"
 
-"token-efficient-tools-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"output-128k-2025-02-19"
+"output-128k-2025-02-19"
 
-"files-api-2025-04-14"
+"files-api-2025-04-14"
 
-"mcp-client-2025-04-04"
+"mcp-client-2025-04-04"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-11-20"
 
-"dev-full-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"interleaved-thinking-2025-05-14"
+"interleaved-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"code-execution-2025-05-22"
 
-"extended-cache-ttl-2025-04-11"
+"extended-cache-ttl-2025-04-11"
 
-"context-1m-2025-08-07"
+"context-1m-2025-08-07"
 
-"context-management-2025-06-27"
+"context-management-2025-06-27"
 
-"model-context-window-exceeded-2025-08-26"
+"model-context-window-exceeded-2025-08-26"
 
-"skills-2025-10-02"
+"skills-2025-10-02"
 
-"fast-mode-2026-02-01"
+"fast-mode-2026-02-01"
 
-"output-300k-2026-03-24"
+"output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
+"user-profiles-2026-03-24"
 
-"user-profiles-2026-08-18"
+"user-profiles-2026-08-18"
 
-"advisor-tool-2026-03-01"
+"advisor-tool-2026-03-01"
 
-"managed-agents-2026-04-01"
+"managed-agents-2026-04-01"
 
-"cache-diagnosis-2026-04-07"
+"cache-diagnosis-2026-04-07"
 
-"dreaming-2026-04-21"
+"dreaming-2026-04-21"
 
-"thinking-token-count-2026-05-13"
+"thinking-token-count-2026-05-13"
 
-"server-side-fallback-2026-06-01"
+"server-side-fallback-2026-06-01"
 
-"server-side-fallback-2026-07-01"
+"server-side-fallback-2026-07-01"
 
-"fallback-credit-2026-06-01"
+"fallback-credit-2026-06-01"
 
-"fallback-credit-2026-07-01"
+"fallback-credit-2026-07-01"
 
-"agent-memory-2026-07-22"
+"agent-memory-2026-07-22"
 
-"mid-conversation-tool-changes-2026-07-01"
+"mid-conversation-tool-changes-2026-07-01"
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-data: array of object { id, created\_at, display\_title, 4 more } 
+data: array of object{ id, created\_at, display\_title, 4 more }
 
 List of skills.
 
 
 
-id: string
+id: string
 
 Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
-created\_at: string
+created\_at: string
 
 ISO 8601 timestamp of when the skill was created.
 
 
 
-display\_title: string or null
+display\_title: string or null
 
 Display title for the skill.
 
@@ -157,7 +159,7 @@ This is a human-readable label that is not included in the prompt sent to the mo
 
 
 
-latest\_version: string or null
+latest\_version: string or null
 
 The latest version identifier for the skill.
 
@@ -165,7 +167,7 @@ This represents the most recent version of the skill that has been created.
 
 
 
-source: string
+source: string
 
 Source of the skill.
 
@@ -176,19 +178,21 @@ This may be one of the following values:
 
 
 
-type: string
+type: string
 
 Object type.
 
 For Skills, this is always `"skill"`.
 
-updated\_at: string
+defaultskill
+
+updated\_at: string
 
 ISO 8601 timestamp of when the skill was last updated.
 
 
 
-has\_more: boolean
+has\_more: boolean
 
 Whether there are more results available.
 
@@ -196,15 +200,17 @@ If `true`, there are additional results that can be fetched using the `next_page
 
 
 
-next\_page: string or null
+next\_page: string or null
 
 Token for fetching the next page of results.
 
 If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
 
-List Skills
+### List Skills
 
-cURL
+cURL
+
+
 
 ```shiki
 curl https://api.anthropic.com/v1/skills \

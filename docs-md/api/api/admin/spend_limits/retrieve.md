@@ -10,91 +10,21 @@ GET/v1/organizations/spend\_limits/{spend\_limit\_id}
 
 Retrieve a spend limit by ID.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-spend\_limit\_id: string
+spend\_limit\_id: string
 
 ID of the Spend Limit.
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-SpendLimit object { id, amount, created\_at, 5 more } 
+SpendLimit object{ id, amount, created\_at, 5 more }
 
-id: string
+### Get Spend Limit
 
-amount: string or null
-
-Limit amount as a non-negative integer decimal string in the minor unit of `currency` (cents for USD): "50000" is $500.00. `null` means no numeric cap is configured at this scope — see the effective report for whether a limit applies.
-
-created\_at: string
-
-currency: string
-
-ISO 4217 code of the organization's billing currency; the unit for `amount`.
-
-
-
-period: "daily" or "monthly" or "weekly"
-
-One of the following:
-
-"daily"
-
-"monthly"
-
-"weekly"
-
-
-
-scope: object { type, user\_id }  or object { seat\_tier, type }  or object { rbac\_group\_id, type }  or 2 more
-
-One of the following:
-
-
-
-User object { type, user\_id } 
-
-type: "user"
-
-user\_id: string
-
-
-
-SeatTier object { seat\_tier, type } 
-
-seat\_tier: string
-
-type: "seat\_tier"
-
-
-
-RbacGroup object { rbac\_group\_id, type } 
-
-rbac\_group\_id: string
-
-type: "rbac\_group"
-
-
-
-OrganizationService object { service, type } 
-
-service: string
-
-type: "organization\_service"
-
-
-
-Organization object { type } 
-
-type: "organization"
-
-type: "spend\_limit"
-
-updated\_at: string
-
-Get Spend Limit
+cURL
 
 
 

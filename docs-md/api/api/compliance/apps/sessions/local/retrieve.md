@@ -15,53 +15,71 @@ with `user.email_address` resolved the same way. Retention is
 enforced when the response is served: a session whose every
 inference call has aged out returns 404.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-local\_session\_id: string
+local\_session\_id: string
 
-##### Header ParametersExpand Collapse
+##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
-##### ReturnsExpand Collapse
+##### Returns
 
-id: string
+id: string
 
 Local session identifier, prefixed `clls_`. Unique within the parent organization. Treat as an opaque string; the format may change without notice.
 
-created\_at: string
+
+
+created\_at: string
 
 Timestamp of the session's first retained inference call (RFC 3339, UTC). When a session's activity spans the child organization's retention boundary, calls older than the boundary are no longer reflected, so this value is the timestamp of the earliest retained call: always strictly after the boundary, never the boundary itself.
 
-organization\_uuid: string
+formatdate-time
+
+organization\_uuid: string
 
 UUID of the child organization the session belongs to
 
-product\_surface: string or null
+product\_surface: string or null
 
 The product the session ran in: `cowork` for Cowork sessions in Claude Desktop, or `claude_code` for Claude Code sessions. New values appear as coverage expands; treat unrecognized values as opaque. `null` when the surface was not recorded.
 
-type: "compliance\_local\_session"
+
+
+type: "compliance\_local\_session"
+
+defaultcompliance\_local\_session
 
 
 
-user: object { id, email\_address } 
+updated\_at: string
+
+Timestamp of the session's last retained inference call (RFC 3339, UTC). Always at or after `created_at`. When a session's activity spans the child organization's retention boundary, calls older than the boundary are no longer reflected — but because retention removes only the oldest calls, this value (unlike `created_at`) is unaffected until the entire session has aged out. On the list endpoint this value is a lower bound: for a session still active at a page or `created_at.lt` window boundary it can momentarily lag the session's true last activity. Retrieving the session, or its messages, always reflects the exact latest retained call.
+
+formatdate-time
+
+
+
+user: object{ id, email\_address }
 
 The authenticated user at the time of the session. Always set; `user.id` is always populated. `user.email_address` is null when the user's account has been deleted or the user is no longer a member of an organization the key may read.
 
-id: string
+id: string
 
 User identifier (tagged ID, prefixed `user_`). Always set, so attribution survives after the user's account is deleted or the user leaves the organizations the key may read.
 
-email\_address: string or null
+email\_address: string or null
 
 User's email address. Null when the user's account has been deleted or the user is no longer a member of an organization the key may read. The messages endpoint does not resolve email addresses; this field is always null there.
 
-workspace\_id: string or null
+workspace\_id: string or null
 
 Workspace identifier (tagged ID, prefixed `wrkspc_`). Null for sessions not attributed to a workspace.
 
-Retrieve a local session
+### Retrieve a local session
+
+cURL
 
 
 
@@ -85,7 +103,8 @@ Response 200
     "email_address": "engineer@example.com"
   },
   "product_surface": "cowork",
-  "created_at": "2026-07-09T14:02:11Z"
+  "created_at": "2026-07-09T14:02:11Z",
+  "updated_at": "2026-07-09T15:47:33Z"
 }
 ```
 
@@ -106,7 +125,8 @@ Response 200
     "email_address": "engineer@example.com"
   },
   "product_surface": "cowork",
-  "created_at": "2026-07-09T14:02:11Z"
+  "created_at": "2026-07-09T14:02:11Z",
+  "updated_at": "2026-07-09T15:47:33Z"
 }
 ```
 

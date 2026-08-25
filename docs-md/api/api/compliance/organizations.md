@@ -1,62 +1,62 @@
 # Organizations
 
-Loading
+Copy page
 
-Loading
+
 
-Loading
+# Organizations
 
-Loading
+##### [List organizations](api/http/compliance/organizations/list.md)
 
-Loading
+GET/v1/compliance/organizations
 
-Loading
+##### Models
 
-Loading
+
 
-Loading
+OrganizationListResponse object{ created\_at, name, uuid }
 
-Loading
+Information about an organization.
 
-Loading
+created\_at: string
 
-Loading
+Organization creation time (RFC 3339 format)
 
-Loading
+name: string
 
-Loading
+Organization name
 
-Loading
+uuid: string
 
-Loading
+Unique identifier for the organization (UUID format)
 
-Loading
+#### Organizations[Users](api/http/compliance/organizations/users.md)
 
-Loading
+##### [List organization users](api/http/compliance/organizations/users/list.md)
 
-Loading
+GET/v1/compliance/organizations/{org\_uuid}/users
 
-Loading
+#### Organizations[Roles](api/http/compliance/organizations/roles.md)
 
-Loading
+##### [List Compliance Roles](api/http/compliance/organizations/roles/list.md)
 
-Loading
+GET/v1/compliance/organizations/{org\_uuid}/roles
 
-Loading
+##### [Get Compliance Role](api/http/compliance/organizations/roles/retrieve.md)
 
-Loading
+GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}
 
-Loading
+#### OrganizationsRoles[Permissions](api/http/compliance/organizations/roles/permissions.md)
 
-Loading
+##### [List Compliance Role Permissions](api/http/compliance/organizations/roles/permissions/list.md)
 
-Loading
+GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}/permissions
 
-Loading
+#### Organizations[Settings](api/http/compliance/organizations/settings.md)
 
-Loading
+##### [Get effective organization settings](api/http/compliance/organizations/settings/retrieve.md)
 
-Loading
+GET/v1/compliance/organizations/{organization\_id}/settings
 
 ---
 

@@ -12,69 +12,81 @@ Retrieve an RBAC Group by ID.
 
 The RBAC Groups API is in beta and available to Claude Enterprise organizations only. Requests must send the `ce-user-management-2026-07-13` value in the `anthropic-beta` header.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-group\_id: string
+group\_id: string
 
 ID of the RBAC Group.
 
-##### Header ParametersExpand Collapse
+##### Headers
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
 To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-RbacGroup object { id, created\_at, name, 4 more } 
+RbacGroup object{ id, created\_at, name, 4 more }
 
-id: string
+id: string
 
 ID of the RBAC Group.
 
-created\_at: string
+
+
+created\_at: string
 
 RFC 3339 timestamp of when the RBAC Group was created.
 
-name: string
+formatdate-time
+
+name: string
 
 Name of the RBAC Group. Not uniqueness-enforced.
 
-roles: array of string or null
+roles: array of string or null
 
 RBAC Role IDs attached to this RBAC Group. Role attachment is managed in the admin settings and is read-only on this API. `null` means role data was temporarily unavailable — retry to distinguish from an empty list.
 
 
 
-source\_type: "direct" or "scim"
+source\_type: "direct" or "scim"
 
 How the RBAC Group was created: `"direct"` for groups created directly (for example, in the organization's admin settings), `"scim"` for groups provisioned by the identity provider.
 
 One of the following:
 
-"direct"
+"direct"
 
-"scim"
+"scim"
 
 
 
-type: "rbac\_group"
+type: "rbac\_group"
 
 Object type.
 
 For RBAC Groups, this is always `"rbac_group"`.
 
-updated\_at: string
+defaultrbac\_group
+
+
+
+updated\_at: string
 
 RFC 3339 timestamp of when the RBAC Group was last updated.
 
-Get RBAC Group
+formatdate-time
+
+### Get RBAC Group
+
+cURL
 
 
 

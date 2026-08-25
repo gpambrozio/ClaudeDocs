@@ -12,75 +12,93 @@ Update an RBAC Group's name. Groups provisioned by an identity provider (source 
 
 The RBAC Groups API is in beta and available to Claude Enterprise organizations only. Requests must send the `ce-user-management-2026-07-13` value in the `anthropic-beta` header.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-group\_id: string
+group\_id: string
 
 ID of the RBAC Group.
 
-##### Header ParametersExpand Collapse
+##### Headers
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
 To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-##### Body ParametersJSONExpand Collapse
-
-name: optional string or null
-
-Name of the RBAC Group. Not uniqueness-enforced.
-
-##### ReturnsExpand Collapse
+##### Body
 
 
 
-RbacGroup object { id, created\_at, name, 4 more } 
-
-id: string
-
-ID of the RBAC Group.
-
-created\_at: string
-
-RFC 3339 timestamp of when the RBAC Group was created.
-
-name: string
+name: optional string or null
 
 Name of the RBAC Group. Not uniqueness-enforced.
 
-roles: array of string or null
+maxLength255
+
+minLength1
+
+##### Returns
+
+
+
+RbacGroup object{ id, created\_at, name, 4 more }
+
+id: string
+
+ID of the RBAC Group.
+
+
+
+created\_at: string
+
+RFC 3339 timestamp of when the RBAC Group was created.
+
+formatdate-time
+
+name: string
+
+Name of the RBAC Group. Not uniqueness-enforced.
+
+roles: array of string or null
 
 RBAC Role IDs attached to this RBAC Group. Role attachment is managed in the admin settings and is read-only on this API. `null` means role data was temporarily unavailable — retry to distinguish from an empty list.
 
 
 
-source\_type: "direct" or "scim"
+source\_type: "direct" or "scim"
 
 How the RBAC Group was created: `"direct"` for groups created directly (for example, in the organization's admin settings), `"scim"` for groups provisioned by the identity provider.
 
 One of the following:
 
-"direct"
+"direct"
 
-"scim"
+"scim"
 
 
 
-type: "rbac\_group"
+type: "rbac\_group"
 
 Object type.
 
 For RBAC Groups, this is always `"rbac_group"`.
 
-updated\_at: string
+defaultrbac\_group
+
+
+
+updated\_at: string
 
 RFC 3339 timestamp of when the RBAC Group was last updated.
 
-Update RBAC Group
+formatdate-time
+
+### Update RBAC Group
+
+cURL
 
 
 

@@ -12,25 +12,25 @@ DELETE/v1/skills/{skill\_id}
 
 Delete Skill
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
 
 
-skill\_id: string
+skill\_id: string
 
 Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-DeletedSkill object { id, type } 
+DeletedSkill object{ id, type }
 
 
 
-id: string
+id: string
 
 Unique identifier for the skill.
 
@@ -38,15 +38,19 @@ The format and length of IDs may change over time.
 
 
 
-type: "skill\_deleted"
+type: "skill\_deleted"
 
 Deleted object type.
 
 For Skills, this is always `"skill_deleted"`.
 
-Delete Skill
+defaultskill\_deleted
 
-cURL
+### Delete Skill
+
+cURL
+
+
 
 ```shiki
 curl https://api.anthropic.com/v1/skills/$SKILL_ID \

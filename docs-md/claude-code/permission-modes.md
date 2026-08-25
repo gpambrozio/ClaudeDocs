@@ -148,15 +148,7 @@ The JetBrains plugin runs Claude Code in the IDE terminal, so switching permissi
 - **Auto**: appears when your account meets the [auto mode requirements](#eliminate-prompts-with-auto-mode)
 - **Bypass permissions**: requires the **Allow bypass permissions mode** toggle in Desktop settings on Pro and Max plans; on Team and Enterprise plans, organization policy controls it instead
 
-The Cowork tab doesn’t use these modes. Cowork has its own permission modes, enabled separately, and the Cowork tab shows no mode selector at all until a mode beyond its default is enabled for your account. See the [Cowork docs](https://claude.com/docs/cowork/overview).For desktop-specific details, see [Choose a permission mode](desktop.md) in the Desktop guide.**As a default**: set `defaultMode` in [settings](settings.md). The desktop app reads the same settings files as the CLI and applies the permission mode to new local sessions.A mode you pick in the mode selector is remembered per folder and takes precedence over `defaultMode` for that folder. Plan is the exception: picking it applies to the current session only.This example sets Plan mode as the default for new local sessions:
-
-```shiki
-{
-  "permissions": {
-    "defaultMode": "plan"
-  }
-}
-```
+The Cowork tab doesn’t use these modes. Cowork has its own permission modes, enabled separately, and the Cowork tab shows no mode selector at all until a mode beyond its default is enabled for your account. See the [Cowork docs](https://claude.com/docs/cowork/overview).For desktop-specific details, see [Choose a permission mode](desktop.md) in the Desktop guide.**As a default**: set `defaultMode` in [settings](settings.md). The desktop app reads the same settings files as the CLI and applies the permission mode to new local sessions.A mode you pick in the mode selector is remembered per folder and takes precedence over `defaultMode` for that folder. Plan is the exception: picking it applies to the current session only.For where `defaultMode` goes in a settings file, see the example under [Start in a different permission mode](#start-in-a-different-mode).
 
 Use the mode dropdown next to the prompt box on [claude.ai/code](https://claude.ai/code) or in the mobile app. Permission prompts appear in claude.ai for approval. Which modes appear depends on where the session runs:
 
@@ -210,15 +202,7 @@ Accepting a plan also gives the session a [generated title](sessions.md) based o
 
 ### [​](#set-plan-mode-as-the-default) Set plan mode as the default
 
-To make plan mode the default for a project’s terminal sessions, set `defaultMode` in `.claude/settings.json`. Conversations the [VS Code extension](vs-code.md) starts don’t read project settings for the starting permission mode. There, set `claudeCode.initialPermissionMode` to `plan` in your VS Code user settings instead. This example sets the project default:
-
-```shiki
-{
-  "permissions": {
-    "defaultMode": "plan"
-  }
-}
-```
+To make plan mode the default for a project’s terminal sessions, set `defaultMode` to `plan` in `.claude/settings.json`, placed as the example under [Start in a different permission mode](#start-in-a-different-mode) shows. Conversations the [VS Code extension](vs-code.md) starts don’t read project settings for the starting permission mode. There, set `claudeCode.initialPermissionMode` to `plan` in your VS Code user settings instead.
 
 ## [​](#eliminate-prompts-with-auto-mode) Eliminate permission prompts with auto mode
 
@@ -238,7 +222,7 @@ Auto mode is available only when your account meets all of these requirements:
 - **Provider**: available by default on the Anthropic API, Claude Platform on AWS, Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, and signed-in Claude apps gateway sessions.
 
 If Claude Code reports auto mode as unavailable, one of these requirements is unmet; this is not a transient outage. A separate message that names a model and says auto mode “cannot determine the safety” of an action means a classifier request failed; that failure is usually transient, but on Amazon Bedrock it can repeat until your account can invoke the named model. See the [error reference](errors.md) for the causes and what to do.
-If you set `defaultMode: "auto"` in [settings](settings-reference.md) and a terminal session starts in Manual mode with no error, the setting is likely in `.claude/settings.json` or `.claude/settings.local.json`. In Claude Code v2.1.142 and later, `auto` doesn’t take effect from those files. Move it to `~/.claude/settings.json`. For a conversation the VS Code extension started, check the extension’s own list in [Switch permission modes](#switch-permission-modes) instead.
+If you set `defaultMode: "auto"` in [settings](settings-reference.md) and a terminal session starts in Manual mode with no error, the setting is likely in `.claude/settings.json` or `.claude/settings.local.json`. `auto` doesn’t take effect from those files. Move it to `~/.claude/settings.json`. For a conversation the VS Code extension started, check the extension’s own list in [Switch permission modes](#switch-permission-modes) instead.
 
 ### [​](#enable-auto-mode-on-bedrock-agent-platform-or-foundry) Auto mode on Bedrock, Agent Platform, or Foundry
 

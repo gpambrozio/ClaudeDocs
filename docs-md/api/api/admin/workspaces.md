@@ -6,73 +6,73 @@
 
 # Workspaces
 
-##### [Create Workspace](api/admin/workspaces/create.md)
+##### [Create Workspace](api/http/admin/workspaces/create.md)
 
 POST/v1/organizations/workspaces
 
-##### [Get Workspace](api/admin/workspaces/retrieve.md)
+##### [Get Workspace](api/http/admin/workspaces/retrieve.md)
 
 GET/v1/organizations/workspaces/{workspace\_id}
 
-##### [List Workspaces](api/admin/workspaces/list.md)
+##### [List Workspaces](api/http/admin/workspaces/list.md)
 
 GET/v1/organizations/workspaces
 
-##### [Update Workspace](api/admin/workspaces/update.md)
+##### [Update Workspace](api/http/admin/workspaces/update.md)
 
 POST/v1/organizations/workspaces/{workspace\_id}
 
-##### [Archive Workspace](api/admin/workspaces/archive.md)
+##### [Archive Workspace](api/http/admin/workspaces/archive.md)
 
 POST/v1/organizations/workspaces/{workspace\_id}/archive
 
-#### WorkspacesMembers
+#### Workspaces[Members](api/http/admin/workspaces/members.md)
 
-##### [Create Workspace Member](api/admin/workspaces/members/create.md)
+##### [Create Workspace Member](api/http/admin/workspaces/members/create.md)
 
 POST/v1/organizations/workspaces/{workspace\_id}/members
 
-##### [Get Workspace Member](api/admin/workspaces/members/retrieve.md)
+##### [Get Workspace Member](api/http/admin/workspaces/members/retrieve.md)
 
 GET/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
-##### [List Workspace Members](api/admin/workspaces/members/list.md)
+##### [List Workspace Members](api/http/admin/workspaces/members/list.md)
 
 GET/v1/organizations/workspaces/{workspace\_id}/members
 
-##### [Update Workspace Member](api/admin/workspaces/members/update.md)
+##### [Update Workspace Member](api/http/admin/workspaces/members/update.md)
 
 POST/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
-##### [Delete Workspace Member](api/admin/workspaces/members/delete.md)
+##### [Delete Workspace Member](api/http/admin/workspaces/members/delete.md)
 
 DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
-#### WorkspacesRate Limits
+#### Workspaces[Rate Limits](api/http/admin/workspaces/rate_limits.md)
 
-##### [List Workspace Rate Limits](api/admin/workspaces/rate_limits/list.md)
+##### [List Workspace Rate Limits](api/http/admin/workspaces/rate_limits/list.md)
 
 GET/v1/organizations/workspaces/{workspace\_id}/rate\_limits
 
-#### WorkspacesService Accounts
+#### Workspaces[Service Accounts](api/http/admin/workspaces/service_accounts.md)
 
-##### [Create Service Account Workspace Member](api/admin/workspaces/service_accounts/create.md)
+##### [Create Service Account Workspace Member](api/http/admin/workspaces/service_accounts/create.md)
 
 POST/v1/organizations/workspaces/{workspace\_id}/service\_accounts
 
-##### [Get Service Account Workspace Member](api/admin/workspaces/service_accounts/retrieve.md)
+##### [Get Service Account Workspace Member](api/http/admin/workspaces/service_accounts/retrieve.md)
 
 GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
 
-##### [List Service Account Workspace Members](api/admin/workspaces/service_accounts/list.md)
+##### [List Service Account Workspace Members](api/http/admin/workspaces/service_accounts/list.md)
 
 GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts
 
-##### [Update Service Account Workspace Member](api/admin/workspaces/service_accounts/update.md)
+##### [Update Service Account Workspace Member](api/http/admin/workspaces/service_accounts/update.md)
 
 POST/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
 
-##### [Delete Service Account Workspace Member](api/admin/workspaces/service_accounts/delete.md)
+##### [Delete Service Account Workspace Member](api/http/admin/workspaces/service_accounts/delete.md)
 
 DELETE/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
 

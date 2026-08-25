@@ -4,7 +4,7 @@
 
 
 
-This guide covers the prompting and scaffolding patterns specific to Claude Fable 5 and Claude Mythos 5. For the model's capabilities, API changes, pricing, and availability, see [Introducing Claude Fable 5 and Claude Mythos 5](about-claude/models/introducing-claude-fable-5-and-claude-mythos-5.md). For techniques that apply across all current Claude models, see [Prompting best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
+This guide covers the prompting and scaffolding patterns specific to Claude Fable 5 and Claude Mythos 5. For the model's capabilities, API changes, pricing, and availability, see [Introducing Claude Fable 5 and Claude Mythos 5](models/fable-5/introducing-claude-fable-5-and-claude-mythos-5.md). For techniques that apply across all current Claude models, see [Prompting best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
 Claude Fable 5 takes on problems that were previously too complex, long-running, or ambiguous for prior models, and is particularly effective at end-to-end work that takes a person hours, days, or weeks to complete. The teams seeing the best outcomes apply Claude Fable 5 to their hardest unsolved problems; testing it only on simpler workloads tends to undersell its capability range. It also performs reliably on more straightforward tasks.
 

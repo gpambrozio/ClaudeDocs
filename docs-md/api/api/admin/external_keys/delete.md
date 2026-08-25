@@ -12,21 +12,31 @@ Delete an external key config.
 
 The request is rejected if any workspace still references this config.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-external\_key\_id: string
+
+
+external\_key\_id: string
 
 ID of the External Key.
 
-##### ReturnsExpand Collapse
+maxLength2048
 
-id: string
+##### Returns
+
+id: string
 
 ID of the deleted External Key.
 
-type: "external\_key\_deleted"
+
 
-Delete External Key
+type: "external\_key\_deleted"
+
+defaultexternal\_key\_deleted
+
+### Delete External Key
+
+cURL
 
 
 

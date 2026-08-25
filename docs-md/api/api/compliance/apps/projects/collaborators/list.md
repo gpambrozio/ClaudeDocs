@@ -15,31 +15,39 @@ are returned as a discriminated union on `type` — an individual user, an
 RBAC group, the whole organization, or all holders of an organization-level
 role.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-project\_id: string
+project\_id: string
 
 The project ID (tagged ID, e.g., claude\_proj\_abc123)
 
-##### Query ParametersExpand Collapse
-
-limit: optional number
-
-Maximum results (default: 20, max: 100)
-
-page: optional string
-
-Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
-
-##### Header ParametersExpand Collapse
-
-"x-api-key": optional string
-
-##### ReturnsExpand Collapse
+##### Query parameters
 
 
 
-data: array of object { granted\_at, role, type, user\_id }  or object { granted\_at, group\_id, role, type }  or object { granted\_at, organization\_uuid, role, type }  or object { granted\_at, organization\_role, role, type } 
+limit: optional number
+
+Maximum results (default: 20, max: 100)
+
+default20
+
+maximum100
+
+minimum1
+
+page: optional string
+
+Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
+
+##### Headers
+
+"x-api-key": optional string
+
+##### Returns
+
+
+
+data: array of object{ granted\_at, role, type, user\_id } or object{ granted\_at, group\_id, role, type } or object{ granted\_at, organization\_uuid, role, type } or object{ granted\_at, organization\_role, role, type }
 
 List of collaborators sorted chronologically by granted\_at, tie break by the underlying role-assignment UUID
 
@@ -47,149 +55,183 @@ One of the following:
 
 
 
-ComplianceProjectUserCollaborator object { granted\_at, role, type, user\_id } 
+ComplianceProjectUserCollaborator object{ granted\_at, role, type, user\_id }
 
 An individual user granted a role on a project.
 
-granted\_at: string
+
+
+granted\_at: string
 
 When this collaborator was granted access (RFC 3339 format)
 
+formatdate-time
+
 
 
-role: "admin" or "editor" or "owner" or "viewer"
+role: "admin" or "editor" or "owner" or "viewer"
 
 Role granted on the project
 
 One of the following:
 
-"admin"
+"admin"
 
-"editor"
+"editor"
 
-"owner"
+"owner"
 
-"viewer"
+"viewer"
 
-type: "user"
+
+
+type: "user"
 
 Discriminator marking this as an individual user collaborator
 
-user\_id: string or null
+defaultuser
+
+user\_id: string or null
 
 Identifier of the user granted access (tagged ID), or null if their account has since been deleted
 
 
 
-ComplianceProjectGroupCollaborator object { granted\_at, group\_id, role, type } 
+ComplianceProjectGroupCollaborator object{ granted\_at, group\_id, role, type }
 
 An RBAC group granted a role on a project.
 
-granted\_at: string
+
+
+granted\_at: string
 
 When this collaborator was granted access (RFC 3339 format)
 
-group\_id: string
+formatdate-time
+
+group\_id: string
 
 Identifier of the group granted access (tagged ID)
 
 
 
-role: "admin" or "editor" or "owner" or "viewer"
+role: "admin" or "editor" or "owner" or "viewer"
 
 Role granted on the project
 
 One of the following:
 
-"admin"
+"admin"
 
-"editor"
+"editor"
 
-"owner"
+"owner"
 
-"viewer"
-
-type: "group"
-
-Discriminator marking this as a group collaborator
+"viewer"
 
 
 
-ComplianceProjectOrganizationCollaborator object { granted\_at, organization\_uuid, role, type } 
+type: "group"
+
+Discriminator marking this as a group collaborator
+
+defaultgroup
+
+
+
+ComplianceProjectOrganizationCollaborator object{ granted\_at, organization\_uuid, role, type }
 
 An entire organization granted a role on a project.
 
-granted\_at: string
+
+
+granted\_at: string
 
 When this collaborator was granted access (RFC 3339 format)
 
-organization\_uuid: string
+formatdate-time
+
+organization\_uuid: string
 
 UUID of the organization granted access
 
 
 
-role: "admin" or "editor" or "owner" or "viewer"
+role: "admin" or "editor" or "owner" or "viewer"
 
 Role granted on the project
 
 One of the following:
 
-"admin"
+"admin"
 
-"editor"
+"editor"
 
-"owner"
+"owner"
 
-"viewer"
-
-type: "organization"
-
-Discriminator marking this as an organization-wide grant
+"viewer"
 
 
 
-ComplianceProjectOrganizationRoleCollaborator object { granted\_at, organization\_role, role, type } 
+type: "organization"
+
+Discriminator marking this as an organization-wide grant
+
+defaultorganization
+
+
+
+ComplianceProjectOrganizationRoleCollaborator object{ granted\_at, organization\_role, role, type }
 
 All holders of an organization-level role granted a role on a project.
 
-granted\_at: string
+
+
+granted\_at: string
 
 When this collaborator was granted access (RFC 3339 format)
 
-organization\_role: string
+formatdate-time
+
+organization\_role: string
 
 The organization-level role whose holders are granted access
 
 
 
-role: "admin" or "editor" or "owner" or "viewer"
+role: "admin" or "editor" or "owner" or "viewer"
 
 Role granted on the project
 
 One of the following:
 
-"admin"
+"admin"
 
-"editor"
+"editor"
 
-"owner"
+"owner"
 
-"viewer"
+"viewer"
 
-type: "organization\_role"
+
+
+type: "organization\_role"
 
 Discriminator marking this as a grant to all organization members holding a specific org-level role
 
-has\_more: boolean
+defaultorganization\_role
+
+has\_more: boolean
 
 Whether more records exist beyond the current result set
 
-next\_page: string or null
+next\_page: string or null
 
 To get the next page, use the 'next\_page' from the current response as the 'page' in your next request
 
-List project collaborators
+### List project collaborators
+
+cURL
 
 
 

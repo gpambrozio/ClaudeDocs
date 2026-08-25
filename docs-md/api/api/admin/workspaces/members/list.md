@@ -10,87 +10,93 @@ GET/v1/organizations/workspaces/{workspace\_id}/members
 
 List Workspace Members
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the Workspace.
 
-##### Query ParametersExpand Collapse
+##### Query parameters
 
-after\_id: optional string
+after\_id: optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-before\_id: optional string
+before\_id: optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
 
 
-limit: optional number
+limit: optional number
 
 Number of items to return per page.
 
 Defaults to `20`. Ranges from `1` to `1000`.
 
+default20
+
 maximum1000
 
 minimum1
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-data: array of [WorkspaceMember](api/admin/workspaces/members.md) { type, user\_id, workspace\_id, workspace\_role } 
+data: array of [WorkspaceMember](api/http/admin/workspaces/members.md) { type, user\_id, workspace\_id, workspace\_role }
 
 
 
-type: "workspace\_member"
+type: "workspace\_member"
 
 Object type.
 
 For Workspace Members, this is always `"workspace_member"`.
 
-user\_id: string
+defaultworkspace\_member
+
+user\_id: string
 
 ID of the User.
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the Workspace.
 
 
 
-workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
+workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
 
 Role of the Workspace Member.
 
 One of the following:
 
-"workspace\_admin"
+"workspace\_admin"
 
-"workspace\_billing"
+"workspace\_billing"
 
-"workspace\_developer"
+"workspace\_developer"
 
-"workspace\_restricted\_developer"
+"workspace\_restricted\_developer"
 
-"workspace\_user"
+"workspace\_user"
 
-first\_id: string or null
+first\_id: string or null
 
 First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
-has\_more: boolean
+has\_more: boolean
 
 Indicates if there are more results in the requested page direction.
 
-last\_id: string or null
+last\_id: string or null
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
-List Workspace Members
+### List Workspace Members
+
+cURL
 
 
 

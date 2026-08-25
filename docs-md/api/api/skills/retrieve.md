@@ -12,95 +12,27 @@ GET/v1/skills/{skill\_id}
 
 Get Skill
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
 
 
-skill\_id: string
+skill\_id: string
 
 Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-Skill object { id, created\_at, display\_name, 4 more } 
+Skill object{ id, created\_at, display\_name, 4 more }
 
-
+### Get Skill
 
-id: string
+cURL
 
-Unique identifier for the skill.
-
-The format and length of IDs may change over time.
-
-created\_at: string
-
-ISO 8601 timestamp of when the skill was created.
-
-display\_name: string
-
-Human-readable, single-line label for the Skill. Maximum 255 characters.
-Always set: derived from the SKILL.md frontmatter `name` when omitted at
-creation. Not unique.
-
-latest\_version\_id: string
-
-ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
-
-
-
-source: [SkillSource](api/skills.md) { type } 
-
-Where the Skill comes from.
-
-Possible values:
-
-- `"custom"`: authored by the platform user; private to their workspace
-- `"anthropic"`: published by Anthropic; shared and read-only
-- `"anthropic_example"`: Anthropic-published sample Skill
-- `"plugin"`: resolved from an installed plugin
-
-
-
-type: "custom" or "anthropic" or "anthropic\_example" or "plugin"
-
-Where the Skill comes from.
-
-Possible values:
-
-- `"custom"`: authored by the platform user; private to their workspace
-- `"anthropic"`: published by Anthropic; shared and read-only
-- `"anthropic_example"`: Anthropic-published sample Skill
-- `"plugin"`: resolved from an installed plugin
-
-One of the following:
-
-"custom"
-
-"anthropic"
-
-"anthropic\_example"
-
-"plugin"
-
-
-
-type: "skill"
-
-Object type.
-
-For Skills, this is always `"skill"`.
-
-updated\_at: string
-
-ISO 8601 timestamp of when the skill was last updated.
-
-Get Skill
-
-cURL
+
 
 ```shiki
 curl https://api.anthropic.com/v1/skills/$SKILL_ID \

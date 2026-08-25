@@ -12,51 +12,57 @@ Retrieves metadata for a file referenced in chat messages, without
 downloading the file content. Use the sibling `/content` endpoint to
 download the bytes.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-claude\_file\_id: string
+claude\_file\_id: string
 
 The file ID (tagged ID, e.g., claude\_file\_abc123)
 
-##### Header ParametersExpand Collapse
+##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
-##### ReturnsExpand Collapse
+##### Returns
 
-id: string
+id: string
 
 File ID
 
-claude\_chat\_ids: array of string
+claude\_chat\_ids: array of string
 
 Chats this file is attached to. A file can be referenced by messages across multiple chats.
 
-created\_at: string
+
+
+created\_at: string
 
 File creation timestamp
 
-filename: string or null
+formatdate-time
+
+filename: string or null
 
 Display name of the file, if set
 
-md5: string or null
+md5: string or null
 
 Lowercase hex MD5 of the file's preferred downloadable variant, as recorded at upload time. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes; when the two disagree, the header is authoritative.
 
-message\_ids: array of string
+message\_ids: array of string
 
 Chat message IDs this file is attached to. A file can be referenced by multiple messages.
 
-mime\_type: string or null
+mime\_type: string or null
 
 MIME type of the file's preferred downloadable variant (e.g. 'application/pdf'). May be null for files with no downloadable content (e.g. code-interpreter outputs).
 
-size\_bytes: number or null
+size\_bytes: number or null
 
 Size in bytes of the file's preferred downloadable variant, if known
 
-Get file metadata
+### Get file metadata
+
+cURL
 
 
 

@@ -10,65 +10,77 @@ GET/v1/compliance/apps/projects/{project\_id}
 
 Get detailed information for a specific project.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-project\_id: string
+project\_id: string
 
 The project ID (tagged ID, e.g., claude\_proj\_abc123)
 
-##### Header ParametersExpand Collapse
+##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
-##### ReturnsExpand Collapse
+##### Returns
 
-id: string
+id: string
 
 Project identifier (tagged ID)
 
-attachments\_count: number
+attachments\_count: number
 
 Number of attachments contained within this project
 
-chats\_count: number
+chats\_count: number
 
 Number of chats contained within this project
 
-created\_at: string
+
+
+created\_at: string
 
 Project creation timestamp
 
-deleted\_at: string or null
-
-Timestamp when the project was deleted by an end user, or null otherwise
-
-description: string
-
-Project description
-
-instructions: string
-
-Project's custom instructions / prompt
-
-is\_private: boolean
-
-If false, the project is visible to all organization members; if true the project is accessible only to the creator and specified collaborators
-
-name: string
-
-Project name
-
-organization\_uuid: string
-
-Organization UUID this project belongs to
-
-updated\_at: string
-
-Project last update timestamp
+formatdate-time
 
 
 
-user: object { id, email\_address }  or null
+deleted\_at: string or null
+
+Timestamp when the project was deleted by an end user, or null otherwise
+
+formatdate-time
+
+description: string
+
+Project description
+
+instructions: string
+
+Project's custom instructions / prompt
+
+is\_private: boolean
+
+If false, the project is visible to all organization members; if true the project is accessible only to the creator and specified collaborators
+
+name: string
+
+Project name
+
+organization\_uuid: string
+
+Organization UUID this project belongs to
+
+
+
+updated\_at: string
+
+Project last update timestamp
+
+formatdate-time
+
+
+
+user: object{ id, email\_address } or null
 
 The user who created a project or project document.
 
@@ -76,19 +88,21 @@ Fields that reference this type are null when the creator's account has
 been deleted or the creator is no longer a member of an organization the
 key may read.
 
-id: string
+id: string
 
 User identifier (tagged ID)
 
-email\_address: string
+email\_address: string
 
 User's email address
 
-organization\_id: string⁠Deprecated
+organization\_id: string⁠Deprecated
 
 Organization identifier (tagged ID)
 
-Get project details
+### Get project details
+
+cURL
 
 
 

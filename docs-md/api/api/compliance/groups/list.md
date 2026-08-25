@@ -10,69 +10,83 @@ GET/v1/compliance/groups
 
 List Compliance Groups
 
-##### Query ParametersExpand Collapse
-
-limit: optional number
-
-Maximum results (default: 500, max: 1000)
-
-name\_prefix: optional string
-
-Filter groups by name prefix
-
-page: optional string
-
-Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
-
-##### Header ParametersExpand Collapse
-
-"x-api-key": optional string
-
-##### ReturnsExpand Collapse
+##### Query parameters
 
 
 
-data: array of object { id, created\_at, description, 4 more } 
+limit: optional number
+
+Maximum results (default: 500, max: 1000)
+
+default500
+
+maximum1000
+
+minimum1
+
+
+
+name\_prefix: optional string
+
+Filter groups by name prefix
+
+default""
+
+page: optional string
+
+Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
+
+##### Headers
+
+"x-api-key": optional string
+
+##### Returns
+
+
+
+data: array of object{ id, created\_at, description, 4 more }
 
 List of groups
 
-id: string
+id: string
 
 Group identifier (tagged ID)
 
-created\_at: string or null
+created\_at: string or null
 
 Group creation timestamp (ISO 8601)
 
-description: string
+description: string
 
 Group description
 
-name: string
+name: string
 
 Group name
 
-roles: array of string or null
+roles: array of string or null
 
 Role IDs assigned to this group.
 
-source\_type: string
+source\_type: string
 
 How the group was created ('direct' or 'scim')
 
-updated\_at: string or null
+updated\_at: string or null
 
 Group last-updated timestamp (ISO 8601)
 
-has\_more: boolean
+has\_more: boolean
 
 Whether more records exist beyond the current result set
 
-next\_page: string or null
+next\_page: string or null
 
 Token to retrieve the next page. Use this as the 'page' parameter in your next request
 
-List Compliance Groups
+### List Compliance Groups
+
+cURL
 
 
 

@@ -6,31 +6,31 @@
 
 # Sessions
 
-#### SessionsLocal
+#### Sessions[Local](api/http/compliance/apps/sessions/local.md)
 
-##### [List local sessions](api/compliance/apps/sessions/local/list.md)
+##### [List local sessions](api/http/compliance/apps/sessions/local/list.md)
 
 GET/v1/compliance/apps/sessions/local
 
-##### [Retrieve a local session](api/compliance/apps/sessions/local/retrieve.md)
+##### [Retrieve a local session](api/http/compliance/apps/sessions/local/retrieve.md)
 
 GET/v1/compliance/apps/sessions/local/{local\_session\_id}
 
-#### SessionsLocalMessages
+#### SessionsLocal[Messages](api/http/compliance/apps/sessions/local/messages.md)
 
-##### [Retrieve local session messages](api/compliance/apps/sessions/local/messages/list.md)
+##### [Retrieve local session messages](api/http/compliance/apps/sessions/local/messages/list.md)
 
 GET/v1/compliance/apps/sessions/local/{local\_session\_id}/messages
 
-#### SessionsRemote
+#### Sessions[Remote](api/http/compliance/apps/sessions/remote.md)
 
-##### [List remote sessions](api/compliance/apps/sessions/remote/list.md)
+##### [List remote sessions](api/http/compliance/apps/sessions/remote/list.md)
 
 GET/v1/compliance/apps/sessions/remote
 
-#### SessionsRemoteMessages
+#### SessionsRemote[Messages](api/http/compliance/apps/sessions/remote/messages.md)
 
-##### [Retrieve remote session messages](api/compliance/apps/sessions/remote/messages/list.md)
+##### [Retrieve remote session messages](api/http/compliance/apps/sessions/remote/messages/list.md)
 
 GET/v1/compliance/apps/sessions/remote/{claude\_remote\_session\_id}/messages
 

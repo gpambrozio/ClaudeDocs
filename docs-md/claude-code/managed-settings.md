@@ -99,6 +99,7 @@ When two files set the same key, Claude Code combines them by these rules:
 - **Nested blocks**, such as `env` or `sandbox`: the two blocks merge key by key, and each key inside follows these same rules
 - **`fallbackModel`**: the later chain replaces the earlier one whole
 - **[`extraKnownMarketplaces`](settings-reference.md)**: a later entry with the same name replaces the earlier one whole
+- **[`modelPicker`](settings-reference.md)**: the later lineup replaces the earlier one whole
 
 ## [​](#which-managed-source-claude-code-uses) Which managed source Claude Code uses
 
@@ -229,7 +230,7 @@ The table covers the permission, plugin, and delivery controls. For any key not 
 | [`allowManagedPermissionRulesOnly`](settings-reference.md) | Only managed permission rules apply; the entry lists every source it ignores |
 | [`blockedMarketplaces`](settings-reference.md) | Blocklist of marketplace sources. Blocked sources are checked before downloading, so they never touch the filesystem. See [managed marketplace restrictions](plugin-marketplaces.md) |
 | [`channelsEnabled`](settings-reference.md) | Allow [channels](channels.md) for the organization. See [enterprise controls](channels.md) for the default on each plan |
-| [`disableCommandPluginSources`](settings-reference.md) | When `true`, blocks [`command` plugin sources](plugin-marketplaces.md) entirely, so the marketplace-declared command never runs. When unset, follows `allowManagedHooksOnly`. Requires Claude Code v2.1.229 or later |
+| [`disableCommandPluginSources`](settings-reference.md) | When `true`, blocks [`command` plugin sources](plugin-marketplaces.md) entirely, so the marketplace-declared command never runs. Also blocks marketplace [`headersHelper` commands](plugin-marketplaces.md), except for a marketplace that managed settings themselves declare. When unset, follows `allowManagedHooksOnly`. Requires Claude Code v2.1.229 or later, and the `headersHelper` block requires v2.1.238 or later |
 | [`disableSideloadFlags`](settings-reference.md) | Reject the `--plugin-dir`, `--plugin-url`, `--agents`, and `--mcp-config` flags at startup. In cloud sessions, Claude Code drops the MCP servers the server delivered through `--mcp-config`, other than in-process `type: "sdk"` entries, and starts the session. Requires Claude Code v2.1.193 or later |
 | [`forceRemoteSettingsRefresh`](settings-reference.md) | When `true`, blocks CLI startup until remote managed settings are freshly fetched and exits if the fetch fails. See [fail-closed enforcement](server-managed-settings.md) |
 | [`parentSettingsBehavior`](settings-reference.md) | Whether host-supplied parent settings merge under the managed policy |

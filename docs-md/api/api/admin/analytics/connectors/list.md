@@ -19,23 +19,35 @@ parameter descriptions list the supported dimensions. Available to
 organizations on a Claude Enterprise plan. Requires an API key with the
 `read:analytics` scope.
 
-##### Query ParametersExpand Collapse
-
-date: optional string
-
-UTC date in YYYY-MM-DD format. The day to get connector usage for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
-
-ending\_date: optional string
-
-UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with starting\_date. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after starting\_date.
-
-filter: optional array of string
-
-Filters as 'dimension:value', e.g. filter[]=rbac\_group\_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: connector\_name, product, rbac\_group\_id, user\_id. Value forms: connector\_name matches case-insensitively, a display name such as 'GitHub MCP' also matches its normalized stored form ('github'), and for rows whose connector\_name is an opaque connector id the connector's display name (connector\_display\_name) also matches; product is one of chat, claude\_code, cowork, or office\_agent; rbac\_group\_id takes the tagged id (rbac\_group\_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); user\_id takes a tagged user id (user\_...), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
+##### Query parameters
 
 
 
-group\_by: optional array of "product" or "rbac\_group\_id" or "user\_id"
+date: optional string
+
+UTC date in YYYY-MM-DD format. The day to get connector usage for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
+
+formatdate
+
+
+
+ending\_date: optional string
+
+UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with starting\_date. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after starting\_date.
+
+formatdate
+
+
+
+filter: optional array of string
+
+Filters as 'dimension:value', e.g. filter[]=rbac\_group\_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: connector\_name, product, rbac\_group\_id, user\_id. Value forms: connector\_name matches case-insensitively, a display name such as 'GitHub MCP' also matches its normalized stored form ('github'), and for rows whose connector\_name is an opaque connector id the connector's display name (connector\_display\_name) also matches; product is one of chat, claude\_code, cowork, or office\_agent; rbac\_group\_id takes the tagged id (rbac\_group\_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); user\_id takes a tagged user id (user\_...), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
+
+maxItems100
+
+
+
+group\_by: optional array of "product" or "rbac\_group\_id" or "user\_id"
 
 Dimensions to break results out by (e.g. group\_by[]=user\_id). Supported on this endpoint: product, rbac\_group\_id, user\_id. Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via next\_page; an unsupported dimension returns 400. rbac\_group\_id attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
 
@@ -43,181 +55,61 @@ maxItems100
 
 One of the following:
 
-"product"
+"product"
 
-"rbac\_group\_id"
+"rbac\_group\_id"
 
-"user\_id"
-
-limit: optional number
-
-Number of results per page (1-1000, default 100).
+"user\_id"
 
 
 
-order: optional "asc" or "desc"
+limit: optional number
+
+Number of results per page (1-1000, default 100).
+
+minimum1
+
+maximum1000
+
+
+
+order: optional "asc" or "desc"
 
 Sort direction: 'asc' or 'desc'. Defaults to 'asc' for the endpoint's sort column and to 'desc' when order\_by names a metric (a top-N ranking). Applies to order\_by, or to the endpoint's default sort field when order\_by is omitted.
 
 One of the following:
 
-"asc"
+"asc"
 
-"desc"
+"desc"
 
-order\_by: optional string
+order\_by: optional string
 
 Sort field. Restricted to the endpoint's sort column plus its rankable metrics (metrics default to descending; a few metrics rank in date-range mode only, per the endpoint's documented orderable set).
 
-page: optional string
+page: optional string
 
 Opaque cursor from a previous response's next\_page field.
 
-starting\_date: optional string
+
+
+starting\_date: optional string
 
 UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either date or starting\_date, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
-##### ReturnsExpand Collapse
+formatdate
+
+##### Returns
 
 
 
-ConnectorUsage object { data, next\_page } 
+ConnectorUsage object{ data, next\_page }
 
 Response for GET /v1/organizations/analytics/connectors.
 
-
+### Get Connector Usage
 
-data: array of object { chat\_metrics, claude\_code\_metrics, connector\_name, 13 more } 
-
-
-
-chat\_metrics: object { distinct\_conversation\_connector\_used\_count } 
-
-Claude.ai activity metrics for a single connector on a given day.
-
-distinct\_conversation\_connector\_used\_count: number or null
-
-Number of distinct conversations in which the connector was used. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
-
-
-
-claude\_code\_metrics: object { distinct\_session\_connector\_used\_count } 
-
-Claude Code activity metrics for a single connector on a given day.
-
-distinct\_session\_connector\_used\_count: number or null
-
-Number of distinct Claude Code sessions in which the connector was used. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
-
-connector\_name: string
-
-Name of the connector. Some rows carry an opaque connector id here instead of a readable name; connector\_display\_name holds the resolved name for those rows.
-
-
-
-cowork\_metrics: object { distinct\_session\_connector\_used\_count } 
-
-Cowork activity metrics for a single connector on a given day.
-
-distinct\_session\_connector\_used\_count: number or null
-
-Number of distinct Cowork sessions in which the connector was used. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
-
-distinct\_user\_count: number
-
-Number of distinct users who used the connector on the requested day, or, in date-range mode, over the requested window — recomputed as an exact distinct count over the window's per-member daily rows, never a sum of per-day values.
-
-
-
-office\_metrics: object { excel, outlook, powerpoint, word } 
-
-Office Agent activity metrics for a single connector on a given day, broken out by Office product.
-
-
-
-excel: [ConnectorOfficeProductMetrics](api/admin/analytics.md) { distinct\_session\_connector\_used\_count } 
-
-Office Agent activity metrics for a single connector on a given day within one Office product.
-
-distinct\_session\_connector\_used\_count: number or null
-
-Number of distinct Office Agent sessions in which the connector was used. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
-
-
-
-outlook: [ConnectorOfficeProductMetrics](api/admin/analytics.md) { distinct\_session\_connector\_used\_count } 
-
-Office Agent activity metrics for a single connector on a given day within one Office product.
-
-distinct\_session\_connector\_used\_count: number or null
-
-Number of distinct Office Agent sessions in which the connector was used. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
-
-
-
-powerpoint: [ConnectorOfficeProductMetrics](api/admin/analytics.md) { distinct\_session\_connector\_used\_count } 
-
-Office Agent activity metrics for a single connector on a given day within one Office product.
-
-distinct\_session\_connector\_used\_count: number or null
-
-Number of distinct Office Agent sessions in which the connector was used. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
-
-
-
-word: [ConnectorOfficeProductMetrics](api/admin/analytics.md) { distinct\_session\_connector\_used\_count } 
-
-Office Agent activity metrics for a single connector on a given day within one Office product.
-
-distinct\_session\_connector\_used\_count: number or null
-
-Number of distinct Office Agent sessions in which the connector was used. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
-
-connector\_display\_name: optional string or null
-
-Human-readable display name for rows whose connector\_name is an opaque connector id rather than a readable name, resolved at request time from the organization's connectors (including connectors that have since been removed). connector\_name remains the row's stable key for sorting and pagination, and filter[]=connector\_name:<value> also matches these rows by display name. Display names are not unique, and the same connector's claude.ai usage can appear under a separate row with a readable connector\_name. Null when connector\_name is already a readable name, when the id cannot be resolved to one of the organization's connectors, or when display-name resolution is not enabled for this organization.
-
-individual\_auth\_distinct\_user\_count: optional number or null
-
-Number of distinct users whose use of this connector on the requested day ran on their own individual credential, connected through their own consent flow. Companion bucket to managed\_auth\_distinct\_user\_count, which carries the measurement, attribution, and null rules. Users whose requests used no stored credential count in neither bucket.
-
-managed\_auth\_distinct\_user\_count: optional number or null
-
-Number of distinct users whose use of this connector on the requested day ran on Enterprise Managed Auth (an organization-managed credential provisioned through the organization's identity provider), read from the token record each request used. Null, never 0, when managed-auth reporting is not enabled for the organization, the value cannot be attributed to the row, no credentialed requests and no managed-token mint events (a managed credential being provisioned for a user's use of the connector) were observed that day, or the day predates 2026-07-01, the first day the backing data exists (forward-only data, no backfill). When credentialed requests or mint events were observed and attributed, both managed-auth fields populate, reporting 0 for a bucket with no users; the two counts are independent, not a partition — a user whose requests that day used both kinds of credential counts in both. Mint events carry user but not surface attribution, so they count as observed auth activity on user\_id and rbac\_group\_id cuts — attributed to the user the credential was provisioned for — but never on a cut that references product (group or filter). Date-range rollup mode (starting\_date/ending\_date) computes both fields exactly over the window — distinct users with at least one qualifying day — when the whole window starts on or after 2026-07-01, with the null-versus-0 and mint-event rules applying with the window in place of the day; a range starting earlier reports every managed-auth field as null, never a partial-window value.
-
-product: optional string or null
-
-Product that produced this row's activity: one of chat, claude\_code, cowork, or office\_agent (the canonical Cost & Usage product naming; an office\_agent row's per-surface breakdown is in its office\_metrics). On /plugins only cowork and claude\_code occur (the only surfaces with plugin attribution); /artifacts and /apps/chat/projects do not support the product dimension (a product `group_by[]` or `filter[]` there is rejected). Present only when the request grouped by product.
-
-rbac\_group\_id: optional string or null
-
-Tagged RBAC group identifier (`rbac_group_...`), matching the spend-limits API spelling. Present only when the request grouped by `rbac_group_id`.
-
-rbac\_group\_name: optional string or null
-
-Resolved RBAC group display name, alongside `rbac_group_id` when name resolution is available. Null if the group has been deleted or its name could not be resolved; `rbac_group_id` remains the stable key.
-
-read\_call\_count: optional number or null
-
-Number of connector tool calls on the requested day whose trusted read-only annotation marked them read-only. Call count, not distinct users. Every call recorded on a classified surface lands in exactly one of read\_call\_count, write\_call\_count, or unclassified\_call\_count, so the three sum to the day's classified calls. Classification is forward-only per surface: claude.ai from 2026-06-01, Claude Code from 2026-05-30, Claude in Office from 2026-05-29, Cowork from 2026-06-02 (Cowork clients predating annotation forwarding land in unclassified\_call\_count). Null, never 0, when the value cannot be stated: the read/write split is not enabled for this organization, or the day predates 2026-05-29. For a date-range total, sum the per-day values, but treat a window that extends before 2026-05-29 as null rather than summing only its covered days — date-range rollup mode (starting\_date/ending\_date) applies both rules server-side.
-
-unclassified\_call\_count: optional number or null
-
-Number of connector tool calls on the requested day with no trusted read-only annotation — the annotation is optional in the MCP spec and is discarded when connector access controls are active, so unclassified calls are common. This field shows how much of the day's classified activity the read/write split actually covers. Call count, not distinct users. One of the three call-classification buckets; see read\_call\_count for the per-surface data-start dates, null conditions, and date-range guidance.
-
-user\_id: optional string or null
-
-Tagged user identifier (e.g. `user_...`). Present only when the request grouped by `user_id`.
-
-write\_call\_count: optional number or null
-
-Number of connector tool calls on the requested day whose trusted read-only annotation marked them not read-only. Call count, not distinct users. One of the three call-classification buckets; see read\_call\_count for the per-surface data-start dates, null conditions, and date-range guidance.
-
-next\_page: string or null
-
-Opaque cursor for the next page, or null if no more results
-
-Get Connector Usage
+cURL
 
 
 

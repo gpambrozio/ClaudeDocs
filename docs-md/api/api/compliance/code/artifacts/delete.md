@@ -17,27 +17,33 @@ Returns 404 for Artifacts that don't exist or belong to another parent
 organization. Returns 404 on a repeated delete of an already-deleted
 Artifact.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-artifact\_id: string
+artifact\_id: string
 
 The Artifact ID (tagged ID, e.g., cart\_abc123)
 
-##### Header ParametersExpand Collapse
+##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
-##### ReturnsExpand Collapse
+##### Returns
 
-id: string
+id: string
 
 The ID of the Artifact that was deleted
 
-type: "code\_artifact\_deleted"
+
+
+type: "code\_artifact\_deleted"
 
 Constant string confirming deletion
 
-Delete Code Artifact
+defaultcode\_artifact\_deleted
+
+### Delete Code Artifact
+
+cURL
 
 
 

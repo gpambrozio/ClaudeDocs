@@ -14,111 +14,45 @@ Upsert keyed on (scope, period): setting a limit that already exists
 overwrites it in place. Only `scope.type: "user"` is accepted; seat-tier,
 group, and organization-level defaults are configured in claude.ai.
 
-##### Body ParametersJSONExpand Collapse
+##### Body
 
-amount: string or null
+amount: string or null
 
 Limit amount as a non-negative integer decimal string in the minor unit of the organization's billing currency (cents for USD): "50000" is $500.00. `null` sets an explicit no-limit override for this scope and `period` only — each period resolves independently, so caps for other periods still apply.
 
 
 
-scope: object { type, user\_id } 
-
-type: "user"
-
-user\_id: string
+scope: object{ type, user\_id }
 
 
 
-period: optional "daily" or "monthly" or "weekly"
+type: "user"
+
+defaultuser
+
+user\_id: string
+
+
+
+period: optional "daily" or "monthly" or "weekly"
 
 One of the following:
 
-"daily"
+"daily"
 
-"monthly"
+"monthly"
 
-"weekly"
+"weekly"
 
-##### ReturnsExpand Collapse
-
-
-
-SpendLimit object { id, amount, created\_at, 5 more } 
-
-id: string
-
-amount: string or null
-
-Limit amount as a non-negative integer decimal string in the minor unit of `currency` (cents for USD): "50000" is $500.00. `null` means no numeric cap is configured at this scope — see the effective report for whether a limit applies.
-
-created\_at: string
-
-currency: string
-
-ISO 4217 code of the organization's billing currency; the unit for `amount`.
+##### Returns
 
 
 
-period: "daily" or "monthly" or "weekly"
+SpendLimit object{ id, amount, created\_at, 5 more }
 
-One of the following:
+### Set Spend Limit
 
-"daily"
-
-"monthly"
-
-"weekly"
-
-
-
-scope: object { type, user\_id }  or object { seat\_tier, type }  or object { rbac\_group\_id, type }  or 2 more
-
-One of the following:
-
-
-
-User object { type, user\_id } 
-
-type: "user"
-
-user\_id: string
-
-
-
-SeatTier object { seat\_tier, type } 
-
-seat\_tier: string
-
-type: "seat\_tier"
-
-
-
-RbacGroup object { rbac\_group\_id, type } 
-
-rbac\_group\_id: string
-
-type: "rbac\_group"
-
-
-
-OrganizationService object { service, type } 
-
-service: string
-
-type: "organization\_service"
-
-
-
-Organization object { type } 
-
-type: "organization"
-
-type: "spend\_limit"
-
-updated\_at: string
-
-Set Spend Limit
+cURL
 
 
 

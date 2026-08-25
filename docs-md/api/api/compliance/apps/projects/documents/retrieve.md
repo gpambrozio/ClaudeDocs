@@ -10,37 +10,41 @@ GET/v1/compliance/apps/projects/documents/{document\_id}
 
 Get detailed information for a specific project document.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-document\_id: string
+document\_id: string
 
 The document ID (tagged ID, e.g., claude\_proj\_doc\_abc123)
 
-##### Header ParametersExpand Collapse
+##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
-##### ReturnsExpand Collapse
+##### Returns
 
-id: string
+id: string
 
 Project document identifier (tagged ID)
 
-content: string
+content: string
 
 Document text content
 
-created\_at: string
+
+
+created\_at: string
 
 Document creation timestamp
 
-filename: string
+formatdate-time
+
+filename: string
 
 Document filename
 
 
 
-user: object { id, email\_address }  or null
+user: object{ id, email\_address } or null
 
 The user who created a project or project document.
 
@@ -48,15 +52,17 @@ Fields that reference this type are null when the creator's account has
 been deleted or the creator is no longer a member of an organization the
 key may read.
 
-id: string
+id: string
 
 User identifier (tagged ID)
 
-email\_address: string
+email\_address: string
 
 User's email address
 
-Get project document content
+### Get project document content
+
+cURL
 
 
 

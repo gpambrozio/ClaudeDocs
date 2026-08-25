@@ -8,43 +8,43 @@ cURL
 
 # Skills
 
-##### [Create Skill](api/beta/skills/create.md)
+##### [Create Skill](api/http/beta/skills/create.md)
 
 POST/v1/skills
 
-##### [List Skills](api/beta/skills/list.md)
+##### [List Skills](api/http/beta/skills/list.md)
 
 GET/v1/skills
 
-##### [Get Skill](api/beta/skills/retrieve.md)
+##### [Get Skill](api/http/beta/skills/retrieve.md)
 
 GET/v1/skills/{skill\_id}
 
-##### [Delete Skill](api/beta/skills/delete.md)
+##### [Delete Skill](api/http/beta/skills/delete.md)
 
 DELETE/v1/skills/{skill\_id}
 
-##### ModelsExpand Collapse
+##### Models
 
 
 
-SkillCreateResponse object { id, created\_at, display\_title, 4 more } 
+SkillCreateResponse object{ id, created\_at, display\_title, 4 more }
 
 
 
-id: string
+id: string
 
 Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
-created\_at: string
+created\_at: string
 
 ISO 8601 timestamp of when the skill was created.
 
 
 
-display\_title: string or null
+display\_title: string or null
 
 Display title for the skill.
 
@@ -52,7 +52,7 @@ This is a human-readable label that is not included in the prompt sent to the mo
 
 
 
-latest\_version: string or null
+latest\_version: string or null
 
 The latest version identifier for the skill.
 
@@ -60,7 +60,7 @@ This represents the most recent version of the skill that has been created.
 
 
 
-source: string
+source: string
 
 Source of the skill.
 
@@ -71,35 +71,37 @@ This may be one of the following values:
 
 
 
-type: string
+type: string
 
 Object type.
 
 For Skills, this is always `"skill"`.
 
-updated\_at: string
+defaultskill
+
+updated\_at: string
 
 ISO 8601 timestamp of when the skill was last updated.
 
 
 
-SkillListResponse object { id, created\_at, display\_title, 4 more } 
+SkillListResponse object{ id, created\_at, display\_title, 4 more }
 
 
 
-id: string
+id: string
 
 Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
-created\_at: string
+created\_at: string
 
 ISO 8601 timestamp of when the skill was created.
 
 
 
-display\_title: string or null
+display\_title: string or null
 
 Display title for the skill.
 
@@ -107,7 +109,7 @@ This is a human-readable label that is not included in the prompt sent to the mo
 
 
 
-latest\_version: string or null
+latest\_version: string or null
 
 The latest version identifier for the skill.
 
@@ -115,7 +117,7 @@ This represents the most recent version of the skill that has been created.
 
 
 
-source: string
+source: string
 
 Source of the skill.
 
@@ -126,35 +128,37 @@ This may be one of the following values:
 
 
 
-type: string
+type: string
 
 Object type.
 
 For Skills, this is always `"skill"`.
 
-updated\_at: string
+defaultskill
+
+updated\_at: string
 
 ISO 8601 timestamp of when the skill was last updated.
 
 
 
-SkillRetrieveResponse object { id, created\_at, display\_title, 4 more } 
+SkillRetrieveResponse object{ id, created\_at, display\_title, 4 more }
 
 
 
-id: string
+id: string
 
 Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
-created\_at: string
+created\_at: string
 
 ISO 8601 timestamp of when the skill was created.
 
 
 
-display\_title: string or null
+display\_title: string or null
 
 Display title for the skill.
 
@@ -162,7 +166,7 @@ This is a human-readable label that is not included in the prompt sent to the mo
 
 
 
-latest\_version: string or null
+latest\_version: string or null
 
 The latest version identifier for the skill.
 
@@ -170,7 +174,7 @@ This represents the most recent version of the skill that has been created.
 
 
 
-source: string
+source: string
 
 Source of the skill.
 
@@ -181,23 +185,25 @@ This may be one of the following values:
 
 
 
-type: string
+type: string
 
 Object type.
 
 For Skills, this is always `"skill"`.
 
-updated\_at: string
+defaultskill
+
+updated\_at: string
 
 ISO 8601 timestamp of when the skill was last updated.
 
 
 
-SkillDeleteResponse object { id, type } 
+SkillDeleteResponse object{ id, type }
 
 
 
-id: string
+id: string
 
 Unique identifier for the skill.
 
@@ -205,31 +211,33 @@ The format and length of IDs may change over time.
 
 
 
-type: string
+type: string
 
 Deleted object type.
 
 For Skills, this is always `"skill_deleted"`.
 
-#### SkillsVersions
+defaultskill\_deleted
 
-##### [Create Skill Version](api/beta/skills/versions/create.md)
+#### Skills[Versions](api/http/beta/skills/versions.md)
+
+##### [Create Skill Version](api/http/beta/skills/versions/create.md)
 
 POST/v1/skills/{skill\_id}/versions
 
-##### [List Skill Versions](api/beta/skills/versions/list.md)
+##### [List Skill Versions](api/http/beta/skills/versions/list.md)
 
 GET/v1/skills/{skill\_id}/versions
 
-##### [Download Skill Version Content](api/beta/skills/versions/download.md)
+##### [Download Skill Version Content](api/http/beta/skills/versions/download.md)
 
 GET/v1/skills/{skill\_id}/versions/{version}/content
 
-##### [Get Skill Version](api/beta/skills/versions/retrieve.md)
+##### [Get Skill Version](api/http/beta/skills/versions/retrieve.md)
 
 GET/v1/skills/{skill\_id}/versions/{version}
 
-##### [Delete Skill Version](api/beta/skills/versions/delete.md)
+##### [Delete Skill Version](api/http/beta/skills/versions/delete.md)
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
 

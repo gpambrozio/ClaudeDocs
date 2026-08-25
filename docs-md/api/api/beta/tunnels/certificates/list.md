@@ -14,151 +14,169 @@ The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tun
 
 Lists the certificates registered on a tunnel. Archived certificates are excluded unless include\_archived is set.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-tunnel\_id: string
+tunnel\_id: string
 
-##### Query ParametersExpand Collapse
+##### Query parameters
 
-include\_archived: optional boolean
+include\_archived: optional boolean
 
 Whether to include archived certificates in the results. Defaults to false.
 
-limit: optional number
+
+
+limit: optional number
 
 Maximum number of certificates to return per page. Defaults to 20, maximum 1000.
 
-page: optional string
+formatint32
+
+page: optional string
 
 Opaque pagination cursor from a previous `list_tunnel_certificates` response.
 
-##### Header ParametersExpand Collapse
+##### Headers
 
 
 
-"anthropic-beta": optional array of [AnthropicBeta](api/beta.md)
+"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-string
+string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more
 
 One of the following:
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24"
 
-"prompt-caching-2024-07-31"
+"prompt-caching-2024-07-31"
 
-"computer-use-2024-10-22"
+"computer-use-2024-10-22"
 
-"computer-use-2025-01-24"
+"computer-use-2025-01-24"
 
-"pdfs-2024-09-25"
+"pdfs-2024-09-25"
 
-"token-counting-2024-11-01"
+"token-counting-2024-11-01"
 
-"token-efficient-tools-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"output-128k-2025-02-19"
+"output-128k-2025-02-19"
 
-"files-api-2025-04-14"
+"files-api-2025-04-14"
 
-"mcp-client-2025-04-04"
+"mcp-client-2025-04-04"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-11-20"
 
-"dev-full-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"interleaved-thinking-2025-05-14"
+"interleaved-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"code-execution-2025-05-22"
 
-"extended-cache-ttl-2025-04-11"
+"extended-cache-ttl-2025-04-11"
 
-"context-1m-2025-08-07"
+"context-1m-2025-08-07"
 
-"context-management-2025-06-27"
+"context-management-2025-06-27"
 
-"model-context-window-exceeded-2025-08-26"
+"model-context-window-exceeded-2025-08-26"
 
-"skills-2025-10-02"
+"skills-2025-10-02"
 
-"fast-mode-2026-02-01"
+"fast-mode-2026-02-01"
 
-"output-300k-2026-03-24"
+"output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
+"user-profiles-2026-03-24"
 
-"user-profiles-2026-08-18"
+"user-profiles-2026-08-18"
 
-"advisor-tool-2026-03-01"
+"advisor-tool-2026-03-01"
 
-"managed-agents-2026-04-01"
+"managed-agents-2026-04-01"
 
-"cache-diagnosis-2026-04-07"
+"cache-diagnosis-2026-04-07"
 
-"dreaming-2026-04-21"
+"dreaming-2026-04-21"
 
-"thinking-token-count-2026-05-13"
+"thinking-token-count-2026-05-13"
 
-"server-side-fallback-2026-06-01"
+"server-side-fallback-2026-06-01"
 
-"server-side-fallback-2026-07-01"
+"server-side-fallback-2026-07-01"
 
-"fallback-credit-2026-06-01"
+"fallback-credit-2026-06-01"
 
-"fallback-credit-2026-07-01"
+"fallback-credit-2026-07-01"
 
-"agent-memory-2026-07-22"
+"agent-memory-2026-07-22"
 
-"mid-conversation-tool-changes-2026-07-01"
+"mid-conversation-tool-changes-2026-07-01"
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-data: array of [BetaTunnelCertificate](api/beta/tunnels/certificates.md) { id, archived\_at, created\_at, 4 more } 
+data: array of [BetaTunnelCertificate](api/http/beta/tunnels/certificates.md) { id, archived\_at, created\_at, 4 more }
 
 List of certificates, ordered by created\_at descending.
 
-id: string
+id: string
 
 Unique identifier for the certificate, prefixed with `tcrt_`.
 
-archived\_at: string or null
+
+
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
-created\_at: string
+formatdate-time
+
+
+
+created\_at: string
 
 A timestamp in RFC 3339 format
 
-expires\_at: string or null
+formatdate-time
+
+
+
+expires\_at: string or null
 
 A timestamp in RFC 3339 format
 
-fingerprint: string
+formatdate-time
+
+fingerprint: string
 
 Lowercase hex SHA-256 fingerprint of the certificate's DER encoding.
 
-tunnel\_id: string
+tunnel\_id: string
 
 ID of the tunnel the certificate is registered against.
 
-type: "tunnel\_certificate"
+type: "tunnel\_certificate"
 
-next\_page: string or null
+next\_page: string or null
 
 Pagination cursor for the next page, or null if no more results.
 
-List Tunnel Certificates
+### List Tunnel Certificates
 
-cURL
+cURL
+
+
 
 ```shiki
 curl https://api.anthropic.com/v1/tunnels/$TUNNEL_ID/certificates \

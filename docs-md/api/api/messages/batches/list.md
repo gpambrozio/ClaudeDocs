@@ -14,57 +14,71 @@ List all Message Batches within a Workspace. Most recently created batches are r
 
 Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-##### Query ParametersExpand Collapse
+##### Query parameters
 
-after\_id: optional string
+after\_id: optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-before\_id: optional string
+before\_id: optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
 
 
-limit: optional number
+limit: optional number
 
 Number of items to return per page.
 
 Defaults to `20`. Ranges from `1` to `1000`.
 
+default20
+
 maximum1000
 
 minimum1
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-data: array of [MessageBatch](api/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more } 
+data: array of [MessageBatch](api/http/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 
 
-id: string
+id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-archived\_at: string or null
+
+
+archived\_at: string or null
 
 RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-cancel\_initiated\_at: string or null
-
-RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
-
-created\_at: string
-
-RFC 3339 datetime string representing the time at which the Message Batch was created.
+formatdate-time
 
 
 
-ended\_at: string or null
+cancel\_initiated\_at: string or null
+
+RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+
+formatdate-time
+
+
+
+created\_at: string
+
+RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+formatdate-time
+
+
+
+ended\_at: string or null
 
 RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
@@ -72,27 +86,31 @@ Processing ends when every request in a Message Batch has either succeeded, erro
 
 formatdate-time
 
-expires\_at: string
+
+
+expires\_at: string
 
 RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
+formatdate-time
+
 
 
-processing\_status: "in\_progress" or "canceling" or "ended"
+processing\_status: "in\_progress" or "canceling" or "ended"
 
 Processing status of the Message Batch.
 
 One of the following:
 
-"in\_progress"
+"in\_progress"
 
-"canceling"
+"canceling"
 
-"ended"
+"ended"
 
 
 
-request\_counts: [MessageBatchRequestCounts](api/messages/batches.md) { canceled, errored, expired, 2 more } 
+request\_counts: [MessageBatchRequestCounts](api/http/messages/batches.md) { canceled, errored, expired, 2 more }
 
 Tallies requests within the Message Batch, categorized by their status.
 
@@ -100,43 +118,55 @@ Requests start as `processing` and move to one of the other statuses only once p
 
 
 
-canceled: number
+canceled: number
 
 Number of requests in the Message Batch that have been canceled.
 
 This is zero until processing of the entire Message Batch has ended.
 
+default0
+
 
 
-errored: number
+errored: number
 
 Number of requests in the Message Batch that encountered an error.
 
 This is zero until processing of the entire Message Batch has ended.
 
+default0
+
 
 
-expired: number
+expired: number
 
 Number of requests in the Message Batch that have expired.
 
 This is zero until processing of the entire Message Batch has ended.
 
-processing: number
-
-Number of requests in the Message Batch that are processing.
+default0
 
 
 
-succeeded: number
+processing: number
+
+Number of requests in the Message Batch that are processing.
+
+default0
+
+
+
+succeeded: number
 
 Number of requests in the Message Batch that have completed successfully.
 
 This is zero until processing of the entire Message Batch has ended.
 
+default0
+
 
 
-results\_url: string or null
+results\_url: string or null
 
 URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
@@ -144,27 +174,31 @@ Results in the file are not guaranteed to be in the same order as requests. Use 
 
 
 
-type: "message\_batch"
+type: "message\_batch"
 
 Object type.
 
 For Message Batches, this is always `"message_batch"`.
 
-first\_id: string or null
+defaultmessage\_batch
+
+first\_id: string or null
 
 First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
-has\_more: boolean
+has\_more: boolean
 
 Indicates if there are more results in the requested page direction.
 
-last\_id: string or null
+last\_id: string or null
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
-List Message Batches
+### List Message Batches
 
-cURL
+cURL
+
+
 
 ```shiki
 curl https://api.anthropic.com/v1/messages/batches \

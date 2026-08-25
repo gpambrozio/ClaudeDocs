@@ -20,79 +20,93 @@ can be derived. Memberships are returned only while
 the service account is active; an archived service account returns an
 empty list.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-service\_account\_id: string
+service\_account\_id: string
 
 ID of the service account.
 
-##### Query ParametersExpand Collapse
-
-limit: optional number
-
-Number of results per page.
-
-page: optional string
-
-Opaque cursor from a previous response's `next_page`.
-
-##### Header ParametersExpand Collapse
+##### Query parameters
 
 
 
-"anthropic-beta": optional array of string
+limit: optional number
+
+Number of results per page.
+
+default20
+
+maximum100
+
+minimum1
+
+page: optional string
+
+Opaque cursor from a previous response's `next_page`.
+
+##### Headers
+
+
+
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
 To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-data: array of object { created\_by\_actor\_id, implicit, service\_account\_id, 3 more } 
+data: array of object{ created\_by\_actor\_id, implicit, service\_account\_id, 3 more }
 
-created\_by\_actor\_id: string or null
+created\_by\_actor\_id: string or null
 
 Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
 
-implicit: boolean or null
+implicit: boolean or null
 
 True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace\_user and cannot be removed.
 
-service\_account\_id: string
+service\_account\_id: string
 
 Tagged service account ID (`svac_...`).
 
-type: "service\_account\_workspace\_member"
+
 
-workspace\_id: string
+type: "service\_account\_workspace\_member"
+
+defaultservice\_account\_workspace\_member
+
+workspace\_id: string
 
 Tagged workspace ID (`wrkspc_...`).
 
 
 
-workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
+workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
 
 Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
 
 One of the following:
 
-"workspace\_admin"
+"workspace\_admin"
 
-"workspace\_billing"
+"workspace\_billing"
 
-"workspace\_developer"
+"workspace\_developer"
 
-"workspace\_restricted\_developer"
+"workspace\_restricted\_developer"
 
-"workspace\_user"
+"workspace\_user"
 
-next\_page: string or null
+next\_page: string or null
 
 Opaque cursor for the next page, or null if no more results.
 
-List Workspaces For Service Account
+### List Workspaces For Service Account
+
+cURL
 
 
 

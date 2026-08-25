@@ -12,7 +12,7 @@ To use the OpenAI SDK compatibility feature, you'll need to:
 2. Change the following
    - Update your base URL to point to the Claude API
    - Replace your API key with a [Claude API key](/settings/keys)
-   - Update your model name to use a [Claude model](about-claude/models/overview.md)
+   - Update your model name to use a [Claude model](models/overview.md)
 3. Review the following sections for what features are supported
 
 ###  Quick start example

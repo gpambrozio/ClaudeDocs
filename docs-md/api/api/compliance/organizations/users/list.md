@@ -1,106 +1,157 @@
 # List organization users
 
-Loading
+Copy page
 
-Loading
+
 
-Loading
+# List organization users
 
-Loading
+GET/v1/compliance/organizations/{org\_uuid}/users
 
-Loading
+List current user members of an organization.
 
-Loading
+##### Path parameters
 
-Loading
+org\_uuid: string
 
-Loading
+The organization UUID
 
-Loading
+##### Query parameters
 
-Loading
+
 
-Loading
+limit: optional number
 
-Loading
+Maximum results (default: 500, max: 1000)
 
-Loading
+default500
 
-Loading
+maximum1000
 
-Loading
+minimum1
 
-Loading
+page: optional string
 
-Loading
+Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
-Loading
+##### Headers
 
-Loading
+"x-api-key": optional string
 
-Loading
+##### Returns
 
-Loading
+
 
-Loading
+data: array of object{ id, created\_at, email, 2 more }
 
-Loading
+List of current organization members sorted by organization join date ascending
 
-Loading
+id: string
 
-Loading
+User identifier (tagged ID)
 
-Loading
+
 
-Loading
+created\_at: string
 
-Loading
+User account creation timestamp
 
-Loading
+formatdate-time
 
-Loading
+email: string
 
-Loading
+User's current email address
 
-Loading
+full\_name: string
 
-Loading
+User's current full name
 
-Loading
+
 
-Loading
+organization\_role: "admin" or "billing" or "claude\_code\_user" or 6 more
 
-Loading
+User's built-in role within the organization. This is distinct from any custom RBAC roles that may also be assigned.
 
-Loading
+One of the following:
 
-Loading
+"admin"
 
-Loading
+"billing"
 
-Loading
+"claude\_code\_user"
 
-Loading
+"developer"
 
-Loading
+"managed"
 
-Loading
+"membership\_admin"
 
-Loading
+"owner"
 
-Loading
+"primary\_owner"
 
-Loading
+"user"
 
-Loading
+has\_more: boolean
 
-Loading
+Whether more records exist beyond the current result set
 
-Loading
+next\_page: string or null
 
-Loading
+Token to retrieve the next page. Use this as the 'page' parameter in your next request
 
-Loading
+### List organization users
+
+cURL
+
+
+
+```shiki
+curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/users \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+Response 200
+
+
+
+```shiki
+{
+  "data": [
+    {
+      "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "created_at": "2025-03-12T18:22:41.123456Z",
+      "email": "jane.doe@example.com",
+      "full_name": "Jane Doe",
+      "organization_role": "admin"
+    }
+  ],
+  "has_more": true,
+  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
+}
+```
+
+##### Returns Examples
+
+Response 200
+
+
+
+```shiki
+{
+  "data": [
+    {
+      "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "created_at": "2025-03-12T18:22:41.123456Z",
+      "email": "jane.doe@example.com",
+      "full_name": "Jane Doe",
+      "organization_role": "admin"
+    }
+  ],
+  "has_more": true,
+  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
+}
+```
 
 ---
 

@@ -12,27 +12,33 @@ Delete a project document for compliance purposes.
 
 Hard-deletes the project document permanently.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-document\_id: string
+document\_id: string
 
 The document ID (tagged ID, e.g., claude\_proj\_doc\_abc123)
 
-##### Header ParametersExpand Collapse
+##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
-##### ReturnsExpand Collapse
+##### Returns
 
-id: string
+id: string
 
 The ID of the project document that was deleted
 
-type: "claude\_project\_document\_deleted"
+
+
+type: "claude\_project\_document\_deleted"
 
 Constant string confirming deletion.
 
-Delete project document
+defaultclaude\_project\_document\_deleted
+
+### Delete project document
+
+cURL
 
 
 

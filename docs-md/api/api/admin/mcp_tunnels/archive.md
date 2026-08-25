@@ -19,53 +19,67 @@ operation, the hostname is retired and never re-allocated, and the
 tunnel token is invalidated. Retrying against an already-archived
 tunnel returns the existing record unchanged.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-tunnel\_id: string
+tunnel\_id: string
 
 ID of the Tunnel.
 
-##### Header ParametersExpand Collapse
+##### Headers
 
-"anthropic-beta": array of "mcp-tunnels-2026-05-19"
+"anthropic-beta": array of "mcp-tunnels-2026-05-19"
 
 Required for all Tunnel endpoints.
 
-##### ReturnsExpand Collapse
+##### Returns
 
-id: string
+id: string
 
 ID of the Tunnel.
 
-archived\_at: string or null
+
+
+archived\_at: string or null
 
 RFC 3339 datetime string indicating when the Tunnel was archived, or
 `null` if it is not archived.
 
-created\_at: string
+formatdate-time
+
+
+
+created\_at: string
 
 RFC 3339 datetime string indicating when the Tunnel was created.
 
-display\_name: string or null
+formatdate-time
+
+display\_name: string or null
 
 Human-readable name for the Tunnel (1–255 characters), or `null` if unset.
 
-domain: string
+domain: string
 
 Anthropic-assigned hostname for the Tunnel. MCP server URLs whose host is a
 subdomain of this value are routed through the Tunnel. Globally unique and
 never reused, even after the Tunnel is archived.
 
-type: "tunnel"
+
+
+type: "tunnel"
 
 Object type. Always `tunnel` for Tunnels.
 
-workspace\_id: string or null
+defaulttunnel
+
+workspace\_id: string or null
 
 ID of the Workspace this Tunnel belongs to, or `null` for the default
 Workspace. Immutable after creation.
 
-Archive Tunnel
+### Archive Tunnel
+
+cURL
 
 
 

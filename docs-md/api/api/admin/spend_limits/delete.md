@@ -14,19 +14,25 @@ The member falls back to any inherited spend limit at that period.
 Seat-tier, group, and organization-level rows cannot be deleted via
 this endpoint.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-spend\_limit\_id: string
+spend\_limit\_id: string
 
 ID of the Spend Limit.
 
-##### ReturnsExpand Collapse
+##### Returns
 
-id: string
+id: string
 
-type: "spend\_limit\_deleted"
+
 
-Delete Spend Limit
+type: "spend\_limit\_deleted"
+
+defaultspend\_limit\_deleted
+
+### Delete Spend Limit
+
+cURL
 
 
 

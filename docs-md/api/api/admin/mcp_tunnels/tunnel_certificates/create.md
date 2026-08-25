@@ -19,58 +19,80 @@ when it terminates the inner TLS session. The PEM body must contain
 exactly one X.509 certificate and no private-key material. A tunnel
 holds at most two non-archived certificates.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-tunnel\_id: string
+tunnel\_id: string
 
 ID of the Tunnel.
 
-##### Header ParametersExpand Collapse
+##### Headers
 
-"anthropic-beta": array of "mcp-tunnels-2026-05-19"
+"anthropic-beta": array of "mcp-tunnels-2026-05-19"
 
 Required for all Tunnel endpoints.
 
-##### Body ParametersJSONExpand Collapse
+##### Body
 
-ca\_certificate\_pem: string
+
+
+ca\_certificate\_pem: string
 
 PEM-encoded X.509 CA certificate. Must contain exactly one certificate and
 no private-key material.
 
-##### ReturnsExpand Collapse
+maxLength8192
 
-id: string
+##### Returns
+
+id: string
 
 ID of the Tunnel Certificate.
 
-archived\_at: string or null
+
+
+archived\_at: string or null
 
 RFC 3339 datetime string indicating when the certificate was archived, or
 `null` if it is not archived.
 
-created\_at: string
+formatdate-time
+
+
+
+created\_at: string
 
 RFC 3339 datetime string indicating when the certificate was registered.
 
-expires\_at: string or null
+formatdate-time
+
+
+
+expires\_at: string or null
 
 RFC 3339 datetime string indicating when the certificate expires, or
 `null` if it does not expire.
 
-fingerprint: string
+formatdate-time
+
+fingerprint: string
 
 The certificate's SHA-256 fingerprint, as a lowercase hex string.
 
-tunnel\_id: string
+tunnel\_id: string
 
 ID of the Tunnel this certificate is registered against.
 
-type: "tunnel\_certificate"
+
+
+type: "tunnel\_certificate"
 
 Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
-Create Tunnel Certificate
+defaulttunnel\_certificate
+
+### Create Tunnel Certificate
+
+cURL
 
 
 

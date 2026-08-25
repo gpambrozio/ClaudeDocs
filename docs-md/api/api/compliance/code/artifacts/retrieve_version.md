@@ -21,21 +21,23 @@ but the body terminates early — an aborted chunked transfer is the
 only truncation signal for encoded content. `Content-MD5` is emitted
 only for identity-stored content; validate against it when present.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-artifact\_id: string
+artifact\_id: string
 
 The Artifact ID (tagged ID, e.g., cart\_abc123)
 
-version\_id: string
+version\_id: string
 
 Opaque version identifier from the Artifact's `versions` list
 
-##### Header ParametersExpand Collapse
+##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
-Download Code Artifact Version Content
+### Download Code Artifact Version Content
+
+cURL
 
 
 
@@ -43,8 +45,6 @@ Download Code Artifact Version Content
 curl https://api.anthropic.com/v1/compliance/apps/code/artifacts/$ARTIFACT_ID/versions/$VERSION_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
-
-##### Returns Examples
 
 ---
 

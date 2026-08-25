@@ -6,123 +6,121 @@
 
 # Apps
 
-#### AppsChats
+#### Apps[Chats](api/http/compliance/apps/chats.md)
 
-##### [List chats](api/compliance/apps/chats/list.md)
+##### [List chats](api/http/compliance/apps/chats/list.md)
 
 GET/v1/compliance/apps/chats
 
-##### [Delete chat](api/compliance/apps/chats/delete.md)
+##### [Delete chat](api/http/compliance/apps/chats/delete.md)
 
 DELETE/v1/compliance/apps/chats/{claude\_chat\_id}
 
-#### AppsChatsMessages
+#### AppsChats[Messages](api/http/compliance/apps/chats/messages.md)
 
-##### [Get chat messages](api/compliance/apps/chats/messages/list.md)
+##### [Get chat messages](api/http/compliance/apps/chats/messages/list.md)
 
 GET/v1/compliance/apps/chats/{claude\_chat\_id}/messages
 
-#### AppsChatsFiles
+#### AppsChats[Files](api/http/compliance/apps/chats/files.md)
 
-##### [Get file metadata](api/compliance/apps/chats/files/retrieve.md)
+##### [Get file metadata](api/http/compliance/apps/chats/files/retrieve.md)
 
 GET/v1/compliance/apps/chats/files/{claude\_file\_id}
 
-##### [Delete file](api/compliance/apps/chats/files/delete.md)
+##### [Delete file](api/http/compliance/apps/chats/files/delete.md)
 
 DELETE/v1/compliance/apps/chats/files/{claude\_file\_id}
 
-##### [Download file content](api/compliance/apps/chats/files/download.md)
+##### [Download file content](api/http/compliance/apps/chats/files/download.md)
 
 GET/v1/compliance/apps/chats/files/{claude\_file\_id}/content
 
-#### AppsChatsGenerated Files
+#### AppsChats[Generated Files](api/http/compliance/apps/chats/generated_files.md)
 
-##### [Get Claude-generated file metadata](api/compliance/apps/chats/generated_files/retrieve.md)
+##### [Get Claude-generated file metadata](api/http/compliance/apps/chats/generated_files/retrieve.md)
 
 GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}
 
-##### [Download a Claude-generated file](api/compliance/apps/chats/generated_files/download.md)
+##### [Download a Claude-generated file](api/http/compliance/apps/chats/generated_files/download.md)
 
 GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}/content
 
-#### AppsProjects
+#### Apps[Projects](api/http/compliance/apps/projects.md)
 
-##### [List projects](api/compliance/apps/projects/list.md)
+##### [List projects](api/http/compliance/apps/projects/list.md)
 
 GET/v1/compliance/apps/projects
 
-##### [Get project details](api/compliance/apps/projects/retrieve.md)
+##### [Get project details](api/http/compliance/apps/projects/retrieve.md)
 
 GET/v1/compliance/apps/projects/{project\_id}
 
-##### [Delete project](api/compliance/apps/projects/delete.md)
+##### [Delete project](api/http/compliance/apps/projects/delete.md)
 
 DELETE/v1/compliance/apps/projects/{project\_id}
 
-#### AppsProjectsAttachments
+#### AppsProjects[Attachments](api/http/compliance/apps/projects/attachments.md)
 
-##### [List project attachments](api/compliance/apps/projects/attachments/list.md)
+##### [List project attachments](api/http/compliance/apps/projects/attachments/list.md)
 
 GET/v1/compliance/apps/projects/{project\_id}/attachments
 
-#### AppsProjectsCollaborators
+#### AppsProjects[Collaborators](api/http/compliance/apps/projects/collaborators.md)
 
-##### [List project collaborators](api/compliance/apps/projects/collaborators/list.md)
+##### [List project collaborators](api/http/compliance/apps/projects/collaborators/list.md)
 
 GET/v1/compliance/apps/projects/{project\_id}/collaborators
 
-#### AppsProjectsDocuments
+#### AppsProjects[Documents](api/http/compliance/apps/projects/documents.md)
 
-##### [Get project document content](api/compliance/apps/projects/documents/retrieve.md)
+##### [Get project document content](api/http/compliance/apps/projects/documents/retrieve.md)
 
 GET/v1/compliance/apps/projects/documents/{document\_id}
 
-##### [Get project document metadata](api/compliance/apps/projects/documents/metadata.md)
+##### [Get project document metadata](api/http/compliance/apps/projects/documents/metadata.md)
 
 GET/v1/compliance/apps/projects/documents/{document\_id}/metadata
 
-##### [Delete project document](api/compliance/apps/projects/documents/delete.md)
+##### [Delete project document](api/http/compliance/apps/projects/documents/delete.md)
 
 DELETE/v1/compliance/apps/projects/documents/{document\_id}
 
-#### AppsArtifacts
+#### Apps[Artifacts](api/http/compliance/apps/artifacts.md)
 
-##### [Get artifact metadata](api/compliance/apps/artifacts/retrieve.md)
+##### [Get artifact metadata](api/http/compliance/apps/artifacts/retrieve.md)
 
 GET/v1/compliance/apps/artifacts/{artifact\_version\_id}
 
-##### [Download artifact content](api/compliance/apps/artifacts/download.md)
+##### [Download artifact content](api/http/compliance/apps/artifacts/download.md)
 
 GET/v1/compliance/apps/artifacts/{artifact\_version\_id}/content
 
-#### AppsSessions
+#### AppsSessions[Local](api/http/compliance/apps/sessions/local.md)
 
-#### AppsSessionsLocal
-
-##### [List local sessions](api/compliance/apps/sessions/local/list.md)
+##### [List local sessions](api/http/compliance/apps/sessions/local/list.md)
 
 GET/v1/compliance/apps/sessions/local
 
-##### [Retrieve a local session](api/compliance/apps/sessions/local/retrieve.md)
+##### [Retrieve a local session](api/http/compliance/apps/sessions/local/retrieve.md)
 
 GET/v1/compliance/apps/sessions/local/{local\_session\_id}
 
-#### AppsSessionsLocalMessages
+#### AppsSessionsLocal[Messages](api/http/compliance/apps/sessions/local/messages.md)
 
-##### [Retrieve local session messages](api/compliance/apps/sessions/local/messages/list.md)
+##### [Retrieve local session messages](api/http/compliance/apps/sessions/local/messages/list.md)
 
 GET/v1/compliance/apps/sessions/local/{local\_session\_id}/messages
 
-#### AppsSessionsRemote
+#### AppsSessions[Remote](api/http/compliance/apps/sessions/remote.md)
 
-##### [List remote sessions](api/compliance/apps/sessions/remote/list.md)
+##### [List remote sessions](api/http/compliance/apps/sessions/remote/list.md)
 
 GET/v1/compliance/apps/sessions/remote
 
-#### AppsSessionsRemoteMessages
+#### AppsSessionsRemote[Messages](api/http/compliance/apps/sessions/remote/messages.md)
 
-##### [Retrieve remote session messages](api/compliance/apps/sessions/remote/messages/list.md)
+##### [Retrieve remote session messages](api/http/compliance/apps/sessions/remote/messages/list.md)
 
 GET/v1/compliance/apps/sessions/remote/{claude\_remote\_session\_id}/messages
 

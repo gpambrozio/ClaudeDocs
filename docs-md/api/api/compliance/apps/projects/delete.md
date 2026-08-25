@@ -19,27 +19,33 @@ Hard-deletes the project and all its associated data including:
 
 Project must have no attached chats - returns 409 if chats exist.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-project\_id: string
+project\_id: string
 
 The project ID (tagged ID, e.g., claude\_proj\_abc123)
 
-##### Header ParametersExpand Collapse
+##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
-##### ReturnsExpand Collapse
+##### Returns
 
-id: string
+id: string
 
 The ID of the Claude project that was deleted
 
-type: optional "claude\_project\_deleted"
+
+
+type: optional "claude\_project\_deleted"
 
 Constant string confirming deletion.
 
-Delete project
+defaultclaude\_project\_deleted
+
+### Delete project
+
+cURL
 
 
 

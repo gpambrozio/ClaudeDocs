@@ -8,7 +8,7 @@ cURL
 
 # Versions
 
-##### [List Agent Versions](api/beta/agents/versions/list.md)
+##### [List Agent Versions](api/http/beta/agents/versions/list.md)
 
 GET/v1/agents/{agent\_id}/versions
 

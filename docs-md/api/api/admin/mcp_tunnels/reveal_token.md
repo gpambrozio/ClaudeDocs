@@ -19,34 +19,40 @@ Repeated calls return the same value until the token is rotated.
 Exposed as `POST` so the token does not appear in intermediary
 access logs.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-tunnel\_id: string
+tunnel\_id: string
 
 ID of the Tunnel.
 
-##### Header ParametersExpand Collapse
+##### Headers
 
-"anthropic-beta": array of "mcp-tunnels-2026-05-19"
+"anthropic-beta": array of "mcp-tunnels-2026-05-19"
 
 Required for all Tunnel endpoints.
 
-##### ReturnsExpand Collapse
+##### Returns
 
-id: string
+id: string
 
 Stable identifier for the current token value. Changes when the token is
 rotated.
 
-tunnel\_token: string
+tunnel\_token: string
 
 The tunnel's connection token.
 
-type: "tunnel\_token"
+
+
+type: "tunnel\_token"
 
 Object type. Always `tunnel_token` for Tunnel Tokens.
 
-Reveal Tunnel Token
+defaulttunnel\_token
+
+### Reveal Tunnel Token
+
+cURL
 
 
 

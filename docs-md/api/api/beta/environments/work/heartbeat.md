@@ -14,153 +14,159 @@ Note: these endpoints are called automatically by the pre-built environment work
 
 Record a heartbeat for a work item to maintain the lease.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-environment\_id: string
+environment\_id: string
 
-work\_id: string
+work\_id: string
 
-##### Query ParametersExpand Collapse
+##### Query parameters
 
-desired\_ttl\_seconds: optional number
+desired\_ttl\_seconds: optional number
 
 Desired TTL in seconds
 
-expected\_last\_heartbeat: optional string
+expected\_last\_heartbeat: optional string
 
 Expected last\_heartbeat for conditional update (optimistic concurrency). Use literal 'NO\_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last\_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
 
-##### Header ParametersExpand Collapse
+##### Headers
 
 
 
-"anthropic-beta": optional array of [AnthropicBeta](api/beta.md)
+"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-string
+string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more
 
 One of the following:
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24"
 
-"prompt-caching-2024-07-31"
+"prompt-caching-2024-07-31"
 
-"computer-use-2024-10-22"
+"computer-use-2024-10-22"
 
-"computer-use-2025-01-24"
+"computer-use-2025-01-24"
 
-"pdfs-2024-09-25"
+"pdfs-2024-09-25"
 
-"token-counting-2024-11-01"
+"token-counting-2024-11-01"
 
-"token-efficient-tools-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"output-128k-2025-02-19"
+"output-128k-2025-02-19"
 
-"files-api-2025-04-14"
+"files-api-2025-04-14"
 
-"mcp-client-2025-04-04"
+"mcp-client-2025-04-04"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-11-20"
 
-"dev-full-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"interleaved-thinking-2025-05-14"
+"interleaved-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"code-execution-2025-05-22"
 
-"extended-cache-ttl-2025-04-11"
+"extended-cache-ttl-2025-04-11"
 
-"context-1m-2025-08-07"
+"context-1m-2025-08-07"
 
-"context-management-2025-06-27"
+"context-management-2025-06-27"
 
-"model-context-window-exceeded-2025-08-26"
+"model-context-window-exceeded-2025-08-26"
 
-"skills-2025-10-02"
+"skills-2025-10-02"
 
-"fast-mode-2026-02-01"
+"fast-mode-2026-02-01"
 
-"output-300k-2026-03-24"
+"output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
+"user-profiles-2026-03-24"
 
-"user-profiles-2026-08-18"
+"user-profiles-2026-08-18"
 
-"advisor-tool-2026-03-01"
+"advisor-tool-2026-03-01"
 
-"managed-agents-2026-04-01"
+"managed-agents-2026-04-01"
 
-"cache-diagnosis-2026-04-07"
+"cache-diagnosis-2026-04-07"
 
-"dreaming-2026-04-21"
+"dreaming-2026-04-21"
 
-"thinking-token-count-2026-05-13"
+"thinking-token-count-2026-05-13"
 
-"server-side-fallback-2026-06-01"
+"server-side-fallback-2026-06-01"
 
-"server-side-fallback-2026-07-01"
+"server-side-fallback-2026-07-01"
 
-"fallback-credit-2026-06-01"
+"fallback-credit-2026-06-01"
 
-"fallback-credit-2026-07-01"
+"fallback-credit-2026-07-01"
 
-"agent-memory-2026-07-22"
+"agent-memory-2026-07-22"
 
-"mid-conversation-tool-changes-2026-07-01"
+"mid-conversation-tool-changes-2026-07-01"
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-BetaSelfHostedWorkHeartbeatResponse object { last\_heartbeat, lease\_extended, state, 2 more } 
+BetaSelfHostedWorkHeartbeatResponse object{ last\_heartbeat, lease\_extended, state, 2 more }
 
 Response after recording a heartbeat for a work item.
 
-last\_heartbeat: string
+last\_heartbeat: string
 
 RFC 3339 timestamp of the actual heartbeat from DB
 
-lease\_extended: boolean
+lease\_extended: boolean
 
 Whether the heartbeat succeeded in extending the lease
 
 
 
-state: "queued" or "starting" or "active" or 2 more
+state: "queued" or "starting" or "active" or 2 more
 
 Current state of the work item (active/stopping/stopped)
 
 One of the following:
 
-"queued"
+"queued"
 
-"starting"
+"starting"
 
-"active"
+"active"
 
-"stopping"
+"stopping"
 
-"stopped"
+"stopped"
 
-ttl\_seconds: number
+ttl\_seconds: number
 
 Effective TTL applied to the lease
 
-type: "work\_heartbeat"
+
+
+type: "work\_heartbeat"
 
 The type of response
 
-Record Heartbeat
+defaultwork\_heartbeat
 
-cURL
+### Record Heartbeat
+
+cURL
+
+
 
 ```shiki
 curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID/heartbeat \

@@ -6,117 +6,67 @@
 
 # Chats
 
-##### [List chats](api/compliance/apps/chats/list.md)
+##### [List chats](api/http/compliance/apps/chats/list.md)
 
 GET/v1/compliance/apps/chats
 
-##### [Delete chat](api/compliance/apps/chats/delete.md)
+##### [Delete chat](api/http/compliance/apps/chats/delete.md)
 
 DELETE/v1/compliance/apps/chats/{claude\_chat\_id}
 
-##### ModelsExpand Collapse
+##### Models
 
 
 
-ChatListResponse object { id, created\_at, deleted\_at, 8 more } 
+ChatListResponse object{ id, created\_at, deleted\_at, 8 more }
 
 Chat metadata for listing chats (without messages).
 
-id: string
-
-Chat ID
-
-created\_at: string
-
-Creation timestamp
-
-deleted\_at: string or null
-
-Deletion timestamp if deleted
-
-href: string
-
-URL to view this chat in claude.ai
-
-model: string or null
-
-Model selected for this chat (e.g. 'claude-opus-4-7'). May be null for legacy chats that never had a model recorded.
-
-name: string
-
-Chat name/title
-
-organization\_uuid: string
-
-Organization UUID this chat belongs to
-
-project\_id: string or null
-
-Project ID this chat belongs to
-
-updated\_at: string
-
-Last update timestamp
-
 
 
-user: object { id, email\_address }  or null
-
-User information for compliance responses.
-
-id: string
-
-User identifier
-
-email\_address: string
-
-User's email address
-
-organization\_id: string⁠Deprecated
-
-Organization ID this chat belongs to
-
-
-
-ChatDeleteResponse object { id, type } 
+ChatDeleteResponse object{ id, type }
 
 Response for deleting a Claude chat.
 
-id: string
+id: string
 
 The ID of the Claude chat that was deleted
 
-type: optional "claude\_chat\_deleted"
+
+
+type: optional "claude\_chat\_deleted"
 
 Constant string confirming deletion
 
-#### ChatsMessages
+defaultclaude\_chat\_deleted
 
-##### [Get chat messages](api/compliance/apps/chats/messages/list.md)
+#### Chats[Messages](api/http/compliance/apps/chats/messages.md)
+
+##### [Get chat messages](api/http/compliance/apps/chats/messages/list.md)
 
 GET/v1/compliance/apps/chats/{claude\_chat\_id}/messages
 
-#### ChatsFiles
+#### Chats[Files](api/http/compliance/apps/chats/files.md)
 
-##### [Get file metadata](api/compliance/apps/chats/files/retrieve.md)
+##### [Get file metadata](api/http/compliance/apps/chats/files/retrieve.md)
 
 GET/v1/compliance/apps/chats/files/{claude\_file\_id}
 
-##### [Delete file](api/compliance/apps/chats/files/delete.md)
+##### [Delete file](api/http/compliance/apps/chats/files/delete.md)
 
 DELETE/v1/compliance/apps/chats/files/{claude\_file\_id}
 
-##### [Download file content](api/compliance/apps/chats/files/download.md)
+##### [Download file content](api/http/compliance/apps/chats/files/download.md)
 
 GET/v1/compliance/apps/chats/files/{claude\_file\_id}/content
 
-#### ChatsGenerated Files
+#### Chats[Generated Files](api/http/compliance/apps/chats/generated_files.md)
 
-##### [Get Claude-generated file metadata](api/compliance/apps/chats/generated_files/retrieve.md)
+##### [Get Claude-generated file metadata](api/http/compliance/apps/chats/generated_files/retrieve.md)
 
 GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}
 
-##### [Download a Claude-generated file](api/compliance/apps/chats/generated_files/download.md)
+##### [Download a Claude-generated file](api/http/compliance/apps/chats/generated_files/download.md)
 
 GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}/content
 

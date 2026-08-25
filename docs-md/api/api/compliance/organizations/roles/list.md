@@ -1,106 +1,131 @@
 # List Compliance Roles
 
-Loading
+Copy page
 
-Loading
+
 
-Loading
+# List Compliance Roles
 
-Loading
+GET/v1/compliance/organizations/{org\_uuid}/roles
 
-Loading
+List Compliance Roles
 
-Loading
+##### Path parameters
 
-Loading
+org\_uuid: string
 
-Loading
+The organization UUID
 
-Loading
+##### Query parameters
 
-Loading
+
 
-Loading
+limit: optional number
 
-Loading
+Maximum results (default: 500, max: 1000)
 
-Loading
+default500
 
-Loading
+maximum1000
 
-Loading
+minimum1
 
-Loading
+page: optional string
 
-Loading
+Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
-Loading
+##### Headers
 
-Loading
+"x-api-key": optional string
 
-Loading
+##### Returns
 
-Loading
+
 
-Loading
+data: array of object{ id, created\_at, description, 2 more }
 
-Loading
+List of roles
 
-Loading
+id: string
 
-Loading
+Role identifier (tagged ID)
 
-Loading
+created\_at: string or null
 
-Loading
+Role creation timestamp (ISO 8601)
 
-Loading
+description: string
 
-Loading
+Role description
 
-Loading
+name: string
 
-Loading
+Role name
 
-Loading
+updated\_at: string or null
 
-Loading
+Role last-updated timestamp (ISO 8601)
 
-Loading
+has\_more: boolean
 
-Loading
+Whether more records exist beyond the current result set
 
-Loading
+next\_page: string or null
 
-Loading
+Token to retrieve the next page. Use this as the 'page' parameter in your next request
 
-Loading
+### List Compliance Roles
 
-Loading
+cURL
 
-Loading
+
 
-Loading
+```shiki
+curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/roles \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
 
-Loading
+Response 200
 
-Loading
+
 
-Loading
+```shiki
+{
+  "data": [
+    {
+      "id": "rbac_role_01SGBg3kEnZrdsVR2QmyJbvD",
+      "created_at": "2025-03-12T18:22:41.123456",
+      "description": "Full administrative access to organization settings and members",
+      "name": "Organization Admin",
+      "updated_at": "2025-03-14T09:05:17.456789"
+    }
+  ],
+  "has_more": true,
+  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
+}
+```
 
-Loading
+##### Returns Examples
 
-Loading
+Response 200
 
-Loading
+
 
-Loading
-
-Loading
-
-Loading
-
-Loading
+```shiki
+{
+  "data": [
+    {
+      "id": "rbac_role_01SGBg3kEnZrdsVR2QmyJbvD",
+      "created_at": "2025-03-12T18:22:41.123456",
+      "description": "Full administrative access to organization settings and members",
+      "name": "Organization Admin",
+      "updated_at": "2025-03-14T09:05:17.456789"
+    }
+  ],
+  "has_more": true,
+  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
+}
+```
 
 ---
 

@@ -16,75 +16,105 @@ List the certificates registered on a tunnel.
 
 Archived certificates are excluded unless `include_archived` is set.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-tunnel\_id: string
+tunnel\_id: string
 
 ID of the Tunnel.
 
-##### Query ParametersExpand Collapse
+##### Query parameters
 
-include\_archived: optional boolean
+
+
+include\_archived: optional boolean
 
 Include archived certificates in the results. Archived certificates are
 excluded by default.
 
-limit: optional number
+defaultfalse
+
+
+
+limit: optional number
 
 Maximum number of certificates to return.
 
-page: optional string
+default20
+
+maximum1000
+
+minimum1
+
+page: optional string
 
 A tunnel has at most two active certificates, so this list is not
 paginated.
 
-##### Header ParametersExpand Collapse
+##### Headers
 
-"anthropic-beta": array of "mcp-tunnels-2026-05-19"
+"anthropic-beta": array of "mcp-tunnels-2026-05-19"
 
 Required for all Tunnel endpoints.
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-data: array of object { id, archived\_at, created\_at, 4 more } 
+data: array of object{ id, archived\_at, created\_at, 4 more }
 
-id: string
+id: string
 
 ID of the Tunnel Certificate.
 
-archived\_at: string or null
+
+
+archived\_at: string or null
 
 RFC 3339 datetime string indicating when the certificate was archived, or
 `null` if it is not archived.
 
-created\_at: string
+formatdate-time
+
+
+
+created\_at: string
 
 RFC 3339 datetime string indicating when the certificate was registered.
 
-expires\_at: string or null
+formatdate-time
+
+
+
+expires\_at: string or null
 
 RFC 3339 datetime string indicating when the certificate expires, or
 `null` if it does not expire.
 
-fingerprint: string
+formatdate-time
+
+fingerprint: string
 
 The certificate's SHA-256 fingerprint, as a lowercase hex string.
 
-tunnel\_id: string
+tunnel\_id: string
 
 ID of the Tunnel this certificate is registered against.
 
-type: "tunnel\_certificate"
+
+
+type: "tunnel\_certificate"
 
 Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
-next\_page: string or null
+defaulttunnel\_certificate
+
+next\_page: string or null
 
 Opaque cursor for the next page, or `null` if there are no more results.
 
-List Tunnel Certificates
+### List Tunnel Certificates
+
+cURL
 
 
 

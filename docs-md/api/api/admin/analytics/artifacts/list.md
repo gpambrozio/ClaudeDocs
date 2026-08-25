@@ -15,19 +15,27 @@ Returns the full (artifact\_type, is\_shared) cube for the organization;
 can be broken out per member or per RBAC group via group\_by[], and scoped
 via filter[]. Requires an API key with the `read:analytics` scope.
 
-##### Query ParametersExpand Collapse
-
-date: string
-
-UTC date in YYYY-MM-DD format. The day to get artifact activity for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
-
-filter: optional array of string
-
-Filters as 'dimension:value', e.g. filter[]=rbac\_group\_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: artifact\_type, is\_shared, rbac\_group\_id, user\_id. Value forms: artifact\_type is a canonical artifact MIME type (e.g. text/markdown) or 'other'; is\_shared is 'true' or 'false'; rbac\_group\_id takes the tagged id (rbac\_group\_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); user\_id takes a tagged user id (user\_...), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
+##### Query parameters
 
 
 
-group\_by: optional array of "rbac\_group\_id" or "user\_id"
+date: string
+
+UTC date in YYYY-MM-DD format. The day to get artifact activity for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
+
+formatdate
+
+
+
+filter: optional array of string
+
+Filters as 'dimension:value', e.g. filter[]=rbac\_group\_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: artifact\_type, is\_shared, rbac\_group\_id, user\_id. Value forms: artifact\_type is a canonical artifact MIME type (e.g. text/markdown) or 'other'; is\_shared is 'true' or 'false'; rbac\_group\_id takes the tagged id (rbac\_group\_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); user\_id takes a tagged user id (user\_...), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
+
+maxItems100
+
+
+
+group\_by: optional array of "rbac\_group\_id" or "user\_id"
 
 Dimensions to break results out by: user\_id and/or rbac\_group\_id. The ungrouped artifact-type cube is finite and returned in full; grouped queries multiply the cube and paginate via next\_page. rbac\_group\_id attributes a user to every group they held at any point during the requested UTC day, so grouped rows are not an exclusive partition. At most 100 entries.
 
@@ -35,23 +43,29 @@ maxItems100
 
 One of the following:
 
-"rbac\_group\_id"
+"rbac\_group\_id"
 
-"user\_id"
-
-limit: optional number
-
-Maximum rows to return (1-1000, default 100). The ungrouped artifact-type cube is finite and returned in full; limit is the page size only when group\_by[] multiplies the cube.
-
-page: optional string
-
-Opaque cursor from a previous response's next\_page field. Only valid with group\_by[] — the ungrouped cube is never paginated.
-
-##### ReturnsExpand Collapse
+"user\_id"
 
 
 
-ArtifactUsage object { data, next\_page } 
+limit: optional number
+
+Maximum rows to return (1-1000, default 100). The ungrouped artifact-type cube is finite and returned in full; limit is the page size only when group\_by[] multiplies the cube.
+
+minimum1
+
+maximum1000
+
+page: optional string
+
+Opaque cursor from a previous response's next\_page field. Only valid with group\_by[] — the ungrouped cube is never paginated.
+
+##### Returns
+
+
+
+ArtifactUsage object{ data, next\_page }
 
 Response for GET /v1/organizations/analytics/artifacts.
 
@@ -60,51 +74,9 @@ finite and returned in full. Grouped queries (`group_by[]` on `user_id` /
 `rbac_group_id`) multiply the cube and paginate like the other analytics
 list endpoints.
 
-
+### Get Artifact Activity
 
-data: array of object { artifact\_type, artifacts\_created\_count, distinct\_user\_count, 6 more } 
-
-artifact\_type: string
-
-Canonical artifact MIME type (e.g. text/markdown, application/vnd.ant.react, image/svg+xml), or 'other'.
-
-artifacts\_created\_count: number
-
-Number of artifacts created in this bucket on the requested day
-
-distinct\_user\_count: number
-
-Number of distinct users who created artifacts in this bucket on the requested day
-
-is\_shared: boolean
-
-Whether the artifacts in this bucket have ever been shared.
-
-published\_artifacts\_created\_count: number
-
-Number of those artifacts that have been published
-
-product: optional string or null
-
-Product that produced this row's activity: one of chat, claude\_code, cowork, or office\_agent (the canonical Cost & Usage product naming; an office\_agent row's per-surface breakdown is in its office\_metrics). On /plugins only cowork and claude\_code occur (the only surfaces with plugin attribution); /artifacts and /apps/chat/projects do not support the product dimension (a product `group_by[]` or `filter[]` there is rejected). Present only when the request grouped by product.
-
-rbac\_group\_id: optional string or null
-
-Tagged RBAC group identifier (`rbac_group_...`), matching the spend-limits API spelling. Present only when the request grouped by `rbac_group_id`.
-
-rbac\_group\_name: optional string or null
-
-Resolved RBAC group display name, alongside `rbac_group_id` when name resolution is available. Null if the group has been deleted or its name could not be resolved; `rbac_group_id` remains the stable key.
-
-user\_id: optional string or null
-
-Tagged user identifier (e.g. `user_...`). Present only when the request grouped by `user_id`.
-
-next\_page: optional string or null
-
-Cursor for the next page of a grouped query; always null for the ungrouped artifact-type cube, which is returned in full.
-
-Get Artifact Activity
+cURL
 
 
 

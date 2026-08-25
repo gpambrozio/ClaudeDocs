@@ -6,15 +6,15 @@
 
 # API Keys
 
-##### [Retrieve API Key (Admin API)](api/admin/api_keys/retrieve.md)
+##### [Retrieve API Key (Admin API)](api/http/admin/api_keys/retrieve.md)
 
 GET/v1/organizations/api\_keys/{api\_key\_id}
 
-##### [List API Keys](api/admin/api_keys/list.md)
+##### [List API Keys](api/http/admin/api_keys/list.md)
 
 GET/v1/organizations/api\_keys
 
-##### [Update API Key](api/admin/api_keys/update.md)
+##### [Update API Key](api/http/admin/api_keys/update.md)
 
 POST/v1/organizations/api\_keys/{api\_key\_id}
 

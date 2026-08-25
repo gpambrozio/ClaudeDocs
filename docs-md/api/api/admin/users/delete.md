@@ -10,27 +10,31 @@ DELETE/v1/organizations/users/{user\_id}
 
 For Claude Enterprise organizations, this endpoint's availability is in beta.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 
-##### ReturnsExpand Collapse
+##### Returns
 
-id: string
+id: string
 
 ID of the User.
 
 
 
-type: "user\_deleted"
+type: "user\_deleted"
 
 Deleted object type.
 
 For Users, this is always `"user_deleted"`.
 
-Remove User
+defaultuser\_deleted
+
+### Remove User
+
+cURL
 
 
 

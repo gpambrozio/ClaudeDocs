@@ -14,121 +14,171 @@ Returns one row per (member, period) the member resolves a spend limit
 for, with the `source` scope the spend limit was inherited from.
 Paginates by member, so a member's periods never split across pages.
 
-##### Query ParametersExpand Collapse
-
-limit: optional number
-
-page: optional string
-
-period: optional array of string
-
-user\_ids: optional array of string
-
-##### ReturnsExpand Collapse
+##### Query parameters
 
 
 
-data: array of [SpendSummary](api/admin/spend_limits.md) { actor, amount, currency, 5 more } 
+limit: optional number
+
+default20
+
+maximum1000
+
+minimum1
+
+page: optional string
 
 
 
-actor: object { deleted, email\_address, name, 2 more } 
+period: optional array of string
+
+maxItems3
+
+
+
+user\_ids: optional array of string
+
+maxItems100
+
+##### Returns
+
+
+
+data: array of [SpendSummary](api/http/admin/spend_limits.md) { actor, amount, currency, 5 more }
+
+
+
+actor: object{ deleted, email\_address, name, 2 more }
 
 A user within the organization. `name` and `email_address` are
 null when the underlying account is unavailable or has been deleted;
 `deleted` is true only for deleted accounts.
 
-deleted: boolean
+
 
-email\_address: string or null
+deleted: boolean
 
-name: string or null
+defaultfalse
 
-type: "user\_actor"
+email\_address: string or null
 
-user\_id: string
+name: string or null
 
-amount: string or null
+
+
+type: "user\_actor"
+
+defaultuser\_actor
+
+user\_id: string
+
+amount: string or null
 
 Effective limit amount as a non-negative integer decimal string in the minor unit of `currency` (cents for USD). `null` means no limit applies for this row's `period` — each period resolves independently, so another period may still cap this member.
 
-currency: string
+currency: string
 
 ISO 4217 code of the organization's billing currency; the unit for `amount` and `period_to_date_spend`.
 
 
 
-period: "daily" or "monthly" or "weekly"
+period: "daily" or "monthly" or "weekly"
 
 One of the following:
 
-"daily"
+"daily"
 
-"monthly"
+"monthly"
 
-"weekly"
+"weekly"
 
-period\_to\_date\_spend: string
+period\_to\_date\_spend: string
 
 The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
 
 
-scope: object { type, user\_id } 
-
-type: "user"
-
-user\_id: string
+scope: object{ type, user\_id }
 
 
 
-source: object { type, user\_id }  or object { seat\_tier, type }  or object { rbac\_group\_id, type }  or 2 more
+type: "user"
+
+defaultuser
+
+user\_id: string
+
+
+
+source: object{ type, user\_id } or object{ seat\_tier, type } or object{ rbac\_group\_id, type } or 2 more
 
 One of the following:
 
 
 
-User object { type, user\_id } 
-
-type: "user"
-
-user\_id: string
+User object{ type, user\_id }
 
 
 
-SeatTier object { seat\_tier, type } 
+type: "user"
 
-seat\_tier: string
+defaultuser
 
-type: "seat\_tier"
-
-
-
-RbacGroup object { rbac\_group\_id, type } 
-
-rbac\_group\_id: string
-
-type: "rbac\_group"
+user\_id: string
 
 
 
-OrganizationService object { service, type } 
+SeatTier object{ seat\_tier, type }
 
-service: string
-
-type: "organization\_service"
+seat\_tier: string
 
 
 
-Organization object { type } 
+type: "seat\_tier"
 
-type: "organization"
+defaultseat\_tier
 
-spend\_limit\_id: string
+
 
-next\_page: string or null
+RbacGroup object{ rbac\_group\_id, type }
 
-List Effective Spend Limits
+rbac\_group\_id: string
+
+
+
+type: "rbac\_group"
+
+defaultrbac\_group
+
+
+
+OrganizationService object{ service, type }
+
+service: string
+
+
+
+type: "organization\_service"
+
+defaultorganization\_service
+
+
+
+Organization object{ type }
+
+
+
+type: "organization"
+
+defaultorganization
+
+spend\_limit\_id: string
+
+next\_page: string or null
+
+### List Effective Spend Limits
+
+cURL
 
 
 

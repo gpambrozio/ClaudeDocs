@@ -6,7 +6,7 @@
 
 Claude can provide detailed citations when answering questions about documents, helping you track and verify the sources behind each response.
 
-All [active models](about-claude/models/overview.md) support citations.
+All [active models](models/overview.md) support citations.
 
 The following example shows how to enable citations on a plain text document with the Messages API:
 

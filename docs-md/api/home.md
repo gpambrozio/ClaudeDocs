@@ -75,7 +75,7 @@ MessagesManaged Agents
 
    [Get API key](/settings/keys)
 
-   [Choose a model](about-claude/models/overview.md)
+   [Choose a model](models/overview.md)
 
    [Install an SDK](cli-sdks-libraries/overview.md)
 
@@ -136,7 +136,7 @@ Choose the right model for your use case.
 
 Most capable
 
-### [Fable 5](about-claude/models/overview.md)
+### [Fable 5](models/fable-5/overview.md)
 
 claude-fable-5
 
@@ -144,7 +144,7 @@ Highest capability for the most demanding reasoning and long-horizon agentic wor
 
 Advanced
 
-### [Opus 5](about-claude/models/overview.md)
+### [Opus 5](models/opus-5/overview.md)
 
 claude-opus-5
 
@@ -152,7 +152,7 @@ Excellent for complex analysis, coding, and creative tasks requiring deep reason
 
 Best balance
 
-### [Sonnet 5](about-claude/models/overview.md)
+### [Sonnet 5](models/sonnet-5/overview.md)
 
 claude-sonnet-5
 
@@ -160,7 +160,7 @@ Ideal balance of intelligence and speed for most production workloads.
 
 Fastest
 
-### [Haiku 4.5](about-claude/models/overview.md)
+### [Haiku 4.5](models/haiku-4-5/overview.md)
 
 claude-haiku-4-5
 

@@ -12,15 +12,19 @@ For Claude Enterprise organizations, this endpoint's availability is in beta.
 
 On plans that draw members from a finite pool of purchased seats, the invite automatically consumes a seat from the lowest tier with availability; there is no seat-tier parameter. When no seat is free the request fails with a 400 error rather than purchasing a seat.
 
-##### Body ParametersJSONExpand Collapse
-
-email: string
-
-Email of the User.
+##### Body
 
 
 
-role: "billing" or "claude\_code\_user" or "developer" or 2 more
+email: string
+
+Email of the User.
+
+formatemail
+
+
+
+role: "billing" or "claude\_code\_user" or "developer" or 2 more
 
 Role for the invited User.
 
@@ -28,101 +32,33 @@ The accepted values depend on the organization type. Console and API organizatio
 
 One of the following:
 
-"billing"
+"billing"
 
-"claude\_code\_user"
+"claude\_code\_user"
 
-"developer"
+"developer"
 
-"managed"
+"managed"
 
-"user"
+"user"
 
-rbac\_group\_ids: optional array of string
+
+
+rbac\_group\_ids: optional array of string
 
 RBAC group IDs to assign to the User when the Invite is accepted. A non-empty array is accepted only for a Claude Enterprise organization with RBAC groups (beta), and requires the key to carry the `write:rbac_groups` scope.
 
-##### ReturnsExpand Collapse
+maxItems100
+
+##### Returns
 
 
 
-Invite object { id, accepted\_at, email, 6 more } 
+Invite object{ id, accepted\_at, email, 6 more }
 
-id: string
+### Create Invite
 
-ID of the Invite.
-
-accepted\_at: string or null
-
-RFC 3339 datetime string indicating when the Invite was accepted, or null.
-
-email: string
-
-Email of the User being invited.
-
-expires\_at: string
-
-RFC 3339 datetime string indicating when the Invite expires.
-
-invited\_at: string
-
-RFC 3339 datetime string indicating when the Invite was created.
-
-rbac\_group\_ids: array of string
-
-RBAC group IDs recorded on the Invite (beta, Claude Enterprise organizations), to be assigned to the User when the Invite is accepted. `[]` when none.
-
-
-
-role: "admin" or "billing" or "claude\_code\_user" or 6 more
-
-Organization role of the User.
-
-One of the following:
-
-"admin"
-
-"billing"
-
-"claude\_code\_user"
-
-"developer"
-
-"managed"
-
-"membership\_admin"
-
-"owner"
-
-"primary\_owner"
-
-"user"
-
-
-
-status: "accepted" or "deleted" or "expired" or "pending"
-
-Status of the Invite.
-
-One of the following:
-
-"accepted"
-
-"deleted"
-
-"expired"
-
-"pending"
-
-
-
-type: "invite"
-
-Object type.
-
-For Invites, this is always `"invite"`.
-
-Create Invite
+cURL
 
 
 

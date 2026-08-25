@@ -12,45 +12,51 @@ Remove a User from an RBAC Group. Membership of groups provisioned by an identit
 
 The RBAC Groups API is in beta and available to Claude Enterprise organizations only. Requests must send the `ce-user-management-2026-07-13` value in the `anthropic-beta` header.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-group\_id: string
+group\_id: string
 
 ID of the RBAC Group.
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 
-##### Header ParametersExpand Collapse
+##### Headers
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
 To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-RbacGroupMemberDeleted object { group\_id, type, user\_id } 
+RbacGroupMemberDeleted object{ group\_id, type, user\_id }
 
-group\_id: string
+group\_id: string
 
 ID of the RBAC Group.
 
-type: "rbac\_group\_member\_deleted"
+
+
+type: "rbac\_group\_member\_deleted"
 
 Deleted object type. For RBAC Group Members, this is always `"rbac_group_member_deleted"`.
 
-user\_id: string
+defaultrbac\_group\_member\_deleted
+
+user\_id: string
 
 ID of the User.
 
-Remove RBAC Group Member
+### Remove RBAC Group Member
+
+cURL
 
 
 

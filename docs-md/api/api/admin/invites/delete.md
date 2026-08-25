@@ -10,27 +10,31 @@ DELETE/v1/organizations/invites/{invite\_id}
 
 For Claude Enterprise organizations, this endpoint's availability is in beta.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-invite\_id: string
+invite\_id: string
 
 ID of the Invite.
 
-##### ReturnsExpand Collapse
+##### Returns
 
-id: string
+id: string
 
 ID of the Invite.
 
 
 
-type: "invite\_deleted"
+type: "invite\_deleted"
 
 Deleted object type.
 
 For Invites, this is always `"invite_deleted"`.
 
-Delete Invite
+defaultinvite\_deleted
+
+### Delete Invite
+
+cURL
 
 
 

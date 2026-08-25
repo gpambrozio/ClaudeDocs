@@ -12,259 +12,109 @@ POST/v1/dreams/{dream\_id}/archive
 
 Archive a Dream
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-dream\_id: string
+dream\_id: string
 
-##### Header ParametersExpand Collapse
+##### Headers
 
 
 
-"anthropic-beta": optional array of [AnthropicBeta](api/beta.md)
+"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-string
+string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more
 
 One of the following:
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24"
 
-"prompt-caching-2024-07-31"
+"prompt-caching-2024-07-31"
 
-"computer-use-2024-10-22"
+"computer-use-2024-10-22"
 
-"computer-use-2025-01-24"
+"computer-use-2025-01-24"
 
-"pdfs-2024-09-25"
+"pdfs-2024-09-25"
 
-"token-counting-2024-11-01"
+"token-counting-2024-11-01"
 
-"token-efficient-tools-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"output-128k-2025-02-19"
+"output-128k-2025-02-19"
 
-"files-api-2025-04-14"
+"files-api-2025-04-14"
 
-"mcp-client-2025-04-04"
+"mcp-client-2025-04-04"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-11-20"
 
-"dev-full-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"interleaved-thinking-2025-05-14"
+"interleaved-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"code-execution-2025-05-22"
 
-"extended-cache-ttl-2025-04-11"
+"extended-cache-ttl-2025-04-11"
 
-"context-1m-2025-08-07"
+"context-1m-2025-08-07"
 
-"context-management-2025-06-27"
+"context-management-2025-06-27"
 
-"model-context-window-exceeded-2025-08-26"
+"model-context-window-exceeded-2025-08-26"
 
-"skills-2025-10-02"
+"skills-2025-10-02"
 
-"fast-mode-2026-02-01"
+"fast-mode-2026-02-01"
 
-"output-300k-2026-03-24"
+"output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
+"user-profiles-2026-03-24"
 
-"user-profiles-2026-08-18"
+"user-profiles-2026-08-18"
 
-"advisor-tool-2026-03-01"
+"advisor-tool-2026-03-01"
 
-"managed-agents-2026-04-01"
+"managed-agents-2026-04-01"
 
-"cache-diagnosis-2026-04-07"
+"cache-diagnosis-2026-04-07"
 
-"dreaming-2026-04-21"
+"dreaming-2026-04-21"
 
-"thinking-token-count-2026-05-13"
+"thinking-token-count-2026-05-13"
 
-"server-side-fallback-2026-06-01"
+"server-side-fallback-2026-06-01"
 
-"server-side-fallback-2026-07-01"
+"server-side-fallback-2026-07-01"
 
-"fallback-credit-2026-06-01"
+"fallback-credit-2026-06-01"
 
-"fallback-credit-2026-07-01"
+"fallback-credit-2026-07-01"
 
-"agent-memory-2026-07-22"
+"agent-memory-2026-07-22"
 
-"mid-conversation-tool-changes-2026-07-01"
+"mid-conversation-tool-changes-2026-07-01"
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-BetaDream object { id, archived\_at, created\_at, 11 more } 
+BetaDream object{ id, archived\_at, created\_at, 11 more }
 
 An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output\_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
-id: string
+### Archive a Dream
 
-archived\_at: string or null
+cURL
 
-A timestamp in RFC 3339 format
-
-created\_at: string
-
-A timestamp in RFC 3339 format
-
-ended\_at: string or null
-
-A timestamp in RFC 3339 format
-
-
-
-error: [BetaDreamError](api/beta/dreams.md) { message, type }  or null
-
-Failure detail for a Dream whose `status` is `failed`.
-
-message: string
-
-type: string
-
-
-
-inputs: array of [BetaDreamInput](api/beta/dreams.md)
-
-One of the following:
-
-
-
-BetaDreamMemoryStoreInput object { memory\_store\_id, type } 
-
-An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output\_behavior {type: "update\_existing"} the job consolidates this store in place.
-
-memory\_store\_id: string
-
-type: "memory\_store"
-
-
-
-BetaDreamSessionsInput object { session\_ids, type } 
-
-Input session transcripts the dream reads.
-
-session\_ids: array of string
-
-type: "sessions"
-
-instructions: string or null
-
-
-
-model: [BetaDreamModelConfig](api/beta/dreams.md) { id, speed } 
-
-Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
-
-id: string
-
-Model identifier, e.g. "claude-opus-5". 1-256 characters.
-
-
-
-speed: optional "standard" or "fast"
-
-Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-One of the following:
-
-"standard"
-
-"fast"
-
-
-
-output\_behavior: [BetaOutputBehavior](api/beta/dreams.md)
-
-The default destination: the job creates a new output memory store as a clone of the memory\_store input and writes the consolidated memories into it. The input store is never mutated.
-
-One of the following:
-
-
-
-BetaOutputBehaviorCreateNew object { type } 
-
-The default destination: the job creates a new output memory store as a clone of the memory\_store input and writes the consolidated memories into it. The input store is never mutated.
-
-type: "create\_new"
-
-
-
-BetaOutputBehaviorUpdateExisting object { memory\_store\_id, type } 
-
-The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory\_store input, so the job consolidates the store in place.
-
-memory\_store\_id: string
-
-type: "update\_existing"
-
-
-
-outputs: array of [BetaDreamOutput](api/beta/dreams.md) { memory\_store\_id, type } 
-
-memory\_store\_id: string
-
-type: "memory\_store"
-
-session\_id: string or null
-
-
-
-status: [BetaDreamStatus](api/beta/dreams.md)
-
-Lifecycle status of a Dream.
-
-One of the following:
-
-"pending"
-
-"running"
-
-"completed"
-
-"failed"
-
-"canceled"
-
-type: "dream"
-
-
-
-usage: [BetaDreamUsage](api/beta/dreams.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, output\_tokens } 
-
-Cumulative token usage for the dream across every pipeline stage.
-
-cache\_creation\_input\_tokens: number
-
-Total tokens used to create prompt-cache entries (sum of all TTL tiers).
-
-cache\_read\_input\_tokens: number
-
-Total tokens read from prompt cache.
-
-input\_tokens: number
-
-Total uncached input tokens consumed across every pipeline stage.
-
-output\_tokens: number
-
-Total output tokens generated across every pipeline stage.
-
-Archive a Dream
-
-cURL
+
 
 ```shiki
 curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \

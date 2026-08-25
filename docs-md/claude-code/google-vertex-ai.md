@@ -118,7 +118,8 @@ If a region value isn’t shaped like a region or location name, Claude Code tre
 - `VERTEX_REGION_CLAUDE_*`: Claude Code falls back to `CLOUD_ML_REGION`.
 - `CLOUD_ML_REGION`: Claude Code falls back to `us-east5`.
 
-[Prompt caching](prompt-caching.md) is enabled automatically. To disable it, set `DISABLE_PROMPT_CACHING=1`. To request a 1-hour cache TTL instead of the 5-minute default, set `ENABLE_PROMPT_CACHING_1H=1`; cache writes with a 1-hour TTL are billed at a higher rate. For heightened rate limits, contact Google Cloud support. When using Google Cloud’s Agent Platform, the `/logout` command is unavailable since authentication is handled through Google Cloud credentials.
+[Prompt caching](prompt-caching.md) is enabled automatically. To disable it, set `DISABLE_PROMPT_CACHING=1`. To request a 1-hour cache TTL instead of the 5-minute default, set `ENABLE_PROMPT_CACHING_1H=1`; cache writes with a 1-hour TTL are billed at a higher rate. To set different TTLs for your main conversation and for the requests Claude Code makes outside it, [choose the TTL yourself](prompt-caching.md).
+To raise your rate limits, contact Google Cloud support. When using Google Cloud’s Agent Platform, the `/logout` command is unavailable since authentication is handled through Google Cloud credentials.
 Claude Code decides between [MCP tool search](mcp.md) and upfront loading by model generation:
 
 - **Claude Opus 4.5, Sonnet 4.5, Haiku 4.5, and later**: Claude Code enables tool search by default.

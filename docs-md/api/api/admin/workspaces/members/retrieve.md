@@ -10,57 +10,61 @@ GET/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 Get Workspace Member
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the Workspace.
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-WorkspaceMember object { type, user\_id, workspace\_id, workspace\_role } 
+WorkspaceMember object{ type, user\_id, workspace\_id, workspace\_role }
 
 
 
-type: "workspace\_member"
+type: "workspace\_member"
 
 Object type.
 
 For Workspace Members, this is always `"workspace_member"`.
 
-user\_id: string
+defaultworkspace\_member
+
+user\_id: string
 
 ID of the User.
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the Workspace.
 
 
 
-workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
+workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
 
 Role of the Workspace Member.
 
 One of the following:
 
-"workspace\_admin"
+"workspace\_admin"
 
-"workspace\_billing"
+"workspace\_billing"
 
-"workspace\_developer"
+"workspace\_developer"
 
-"workspace\_restricted\_developer"
+"workspace\_restricted\_developer"
 
-"workspace\_user"
+"workspace\_user"
 
-Get Workspace Member
+### Get Workspace Member
+
+cURL
 
 
 

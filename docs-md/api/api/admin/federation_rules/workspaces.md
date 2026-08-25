@@ -6,83 +6,103 @@
 
 # Workspaces
 
-##### [List Federation Rule Workspaces](api/admin/federation_rules/workspaces/list.md)
+##### [List Federation Rule Workspaces](api/http/admin/federation_rules/workspaces/list.md)
 
 GET/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
 
-##### [Add Federation Rule Workspace](api/admin/federation_rules/workspaces/create.md)
+##### [Add Federation Rule Workspace](api/http/admin/federation_rules/workspaces/create.md)
 
 POST/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
 
-##### [Remove Federation Rule Workspace](api/admin/federation_rules/workspaces/delete.md)
+##### [Remove Federation Rule Workspace](api/http/admin/federation_rules/workspaces/delete.md)
 
 DELETE/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces/{workspace\_id}
 
-##### ModelsExpand Collapse
+##### Models
 
 
 
-WorkspaceListResponse object { created\_at, created\_by\_actor\_id, federation\_rule\_id, 3 more } 
+WorkspaceListResponse object{ created\_at, created\_by\_actor\_id, federation\_rule\_id, 3 more }
 
-created\_at: string
+
+
+created\_at: string
 
 When this workspace was enabled for the rule.
 
-created\_by\_actor\_id: string or null
+formatdate-time
+
+created\_by\_actor\_id: string or null
 
 Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
 
-federation\_rule\_id: string
+federation\_rule\_id: string
 
 Tagged ID of the federation rule.
 
-type: "federation\_rule\_workspace"
+
 
-workspace\_id: string
+type: "federation\_rule\_workspace"
+
+defaultfederation\_rule\_workspace
+
+workspace\_id: string
 
 Tagged ID of the workspace this rule is enabled for.
 
-workspace\_name: string or null
+workspace\_name: string or null
 
 Workspace display name. Populated when listing; null in the enable response.
 
 
 
-WorkspaceCreateResponse object { created\_at, created\_by\_actor\_id, federation\_rule\_id, 3 more } 
+WorkspaceCreateResponse object{ created\_at, created\_by\_actor\_id, federation\_rule\_id, 3 more }
 
-created\_at: string
+
+
+created\_at: string
 
 When this workspace was enabled for the rule.
 
-created\_by\_actor\_id: string or null
+formatdate-time
+
+created\_by\_actor\_id: string or null
 
 Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
 
-federation\_rule\_id: string
+federation\_rule\_id: string
 
 Tagged ID of the federation rule.
 
-type: "federation\_rule\_workspace"
+
 
-workspace\_id: string
+type: "federation\_rule\_workspace"
+
+defaultfederation\_rule\_workspace
+
+workspace\_id: string
 
 Tagged ID of the workspace this rule is enabled for.
 
-workspace\_name: string or null
+workspace\_name: string or null
 
 Workspace display name. Populated when listing; null in the enable response.
 
 
 
-WorkspaceDeleteResponse object { federation\_rule\_id, type, workspace\_id } 
+WorkspaceDeleteResponse object{ federation\_rule\_id, type, workspace\_id }
 
-federation\_rule\_id: string
+federation\_rule\_id: string
 
 Tagged ID of the federation rule.
 
-type: "federation\_rule\_workspace\_deleted"
+
 
-workspace\_id: string
+type: "federation\_rule\_workspace\_deleted"
+
+defaultfederation\_rule\_workspace\_deleted
+
+workspace\_id: string
 
 Tagged ID of the workspace named in the delete request. Removal is idempotent.
 

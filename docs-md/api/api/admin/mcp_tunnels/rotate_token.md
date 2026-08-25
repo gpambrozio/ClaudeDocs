@@ -18,40 +18,50 @@ Established connections are not severed by rotation; a connector
 restarted after rotation must use the new value. An optional
 `reason` is captured for operational context.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-tunnel\_id: string
+tunnel\_id: string
 
 ID of the Tunnel.
 
-##### Header ParametersExpand Collapse
+##### Headers
 
-"anthropic-beta": array of "mcp-tunnels-2026-05-19"
+"anthropic-beta": array of "mcp-tunnels-2026-05-19"
 
 Required for all Tunnel endpoints.
 
-##### Body ParametersJSONExpand Collapse
+##### Body
 
-reason: optional string or null
+
+
+reason: optional string or null
 
 Optional free-text reason for the rotation, recorded for audit.
 
-##### ReturnsExpand Collapse
+maxLength1024
 
-id: string
+##### Returns
+
+id: string
 
 Stable identifier for the current token value. Changes when the token is
 rotated.
 
-tunnel\_token: string
+tunnel\_token: string
 
 The tunnel's connection token.
 
-type: "tunnel\_token"
+
+
+type: "tunnel\_token"
 
 Object type. Always `tunnel_token` for Tunnel Tokens.
 
-Rotate Tunnel Token
+defaulttunnel\_token
+
+### Rotate Tunnel Token
+
+cURL
 
 
 

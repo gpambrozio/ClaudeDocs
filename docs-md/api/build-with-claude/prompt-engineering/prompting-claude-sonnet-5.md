@@ -4,7 +4,7 @@
 
 
 
-This guide covers the prompting patterns specific to Claude Sonnet 5. For the model's capabilities and API changes, see [What's new in Claude Sonnet 5](about-claude/models/whats-new-sonnet-5.md). For techniques that apply across all current Claude models, see [Prompting best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
+This guide covers the prompting patterns specific to Claude Sonnet 5. For the model's capabilities and API changes, see [What's new in Claude Sonnet 5](models/sonnet-5/whats-new-sonnet-5.md). For techniques that apply across all current Claude models, see [Prompting best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
 Claude Sonnet 5 has particular strengths in coding and agentic tasks. It performs well out of the box on existing Claude Sonnet 4.6 prompts. The patterns in this guide cover the behaviors that most often require tuning.
 

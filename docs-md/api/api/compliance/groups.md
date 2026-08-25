@@ -6,87 +6,87 @@
 
 # Groups
 
-##### [List Compliance Groups](api/compliance/groups/list.md)
+##### [List Compliance Groups](api/http/compliance/groups/list.md)
 
 GET/v1/compliance/groups
 
-##### [Get Compliance Group](api/compliance/groups/retrieve.md)
+##### [Get Compliance Group](api/http/compliance/groups/retrieve.md)
 
 GET/v1/compliance/groups/{group\_id}
 
-##### ModelsExpand Collapse
+##### Models
 
 
 
-GroupListResponse object { id, created\_at, description, 4 more } 
+GroupListResponse object{ id, created\_at, description, 4 more }
 
 Group information for compliance responses.
 
-id: string
+id: string
 
 Group identifier (tagged ID)
 
-created\_at: string or null
+created\_at: string or null
 
 Group creation timestamp (ISO 8601)
 
-description: string
+description: string
 
 Group description
 
-name: string
+name: string
 
 Group name
 
-roles: array of string or null
+roles: array of string or null
 
 Role IDs assigned to this group.
 
-source\_type: string
+source\_type: string
 
 How the group was created ('direct' or 'scim')
 
-updated\_at: string or null
+updated\_at: string or null
 
 Group last-updated timestamp (ISO 8601)
 
 
 
-GroupRetrieveResponse object { id, created\_at, description, 4 more } 
+GroupRetrieveResponse object{ id, created\_at, description, 4 more }
 
 Group information for compliance responses.
 
-id: string
+id: string
 
 Group identifier (tagged ID)
 
-created\_at: string or null
+created\_at: string or null
 
 Group creation timestamp (ISO 8601)
 
-description: string
+description: string
 
 Group description
 
-name: string
+name: string
 
 Group name
 
-roles: array of string or null
+roles: array of string or null
 
 Role IDs assigned to this group.
 
-source\_type: string
+source\_type: string
 
 How the group was created ('direct' or 'scim')
 
-updated\_at: string or null
+updated\_at: string or null
 
 Group last-updated timestamp (ISO 8601)
 
-#### GroupsMembers
+#### Groups[Members](api/http/compliance/groups/members.md)
 
-##### [List Compliance Group Members](api/compliance/groups/members/list.md)
+##### [List Compliance Group Members](api/http/compliance/groups/members/list.md)
 
 GET/v1/compliance/groups/{group\_id}/members
 

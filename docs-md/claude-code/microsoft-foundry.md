@@ -97,6 +97,8 @@ For current and legacy model IDs, see [Models overview](about-claude/models/over
 export ENABLE_PROMPT_CACHING_1H=1
 ```
 
+To set different TTLs for your main conversation and for the requests Claude Code makes outside it, [choose the TTL yourself](prompt-caching.md).
+
 ### [​](#5-run-claude-code) 5. Run Claude Code
 
 With the environment variables set, start Claude Code from your project directory:

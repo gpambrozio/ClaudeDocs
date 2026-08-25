@@ -106,7 +106,7 @@ print(next(block.text for block in message.content if block.type == "text"))
 
 ##  Supported models
 
-Model IDs in Claude in Amazon Bedrock carry an `anthropic.` provider prefix. Model capabilities and behaviors are documented on the [Models overview](about-claude/models/overview.md) page.
+Model IDs in Claude in Amazon Bedrock carry an `anthropic.` provider prefix. Model capabilities and behaviors are documented on the [Models overview](models/overview.md) page.
 
 | Model | Model ID | Access |
 | --- | --- | --- |

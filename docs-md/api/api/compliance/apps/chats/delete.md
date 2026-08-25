@@ -11,27 +11,33 @@ DELETE/v1/compliance/apps/chats/{claude\_chat\_id}
 Permanently deletes a chat and all associated messages and
 files. This is a destructive operation that cannot be undone.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-claude\_chat\_id: string
+claude\_chat\_id: string
 
 The chat ID (tagged ID, e.g., claude\_chat\_abc123)
 
-##### Header ParametersExpand Collapse
+##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
-##### ReturnsExpand Collapse
+##### Returns
 
-id: string
+id: string
 
 The ID of the Claude chat that was deleted
 
-type: optional "claude\_chat\_deleted"
+
+
+type: optional "claude\_chat\_deleted"
 
 Constant string confirming deletion
 
-Delete chat
+defaultclaude\_chat\_deleted
+
+### Delete chat
+
+cURL
 
 
 

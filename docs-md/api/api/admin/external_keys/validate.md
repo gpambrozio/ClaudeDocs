@@ -15,33 +15,43 @@ KMS key and waits up to 30 seconds for the result. The response status is
 `success` if the roundtrip succeeded, or `failure` with an error
 message if it failed or timed out.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-external\_key\_id: string
+
+
+external\_key\_id: string
 
 ID of the External Key.
 
-##### ReturnsExpand Collapse
+maxLength2048
 
-error: string or null
+##### Returns
+
+error: string or null
 
 Error message when status is `failure`. Null otherwise.
 
 
 
-status: "failure" or "success"
+status: "failure" or "success"
 
 `success` — encrypt/decrypt roundtrip succeeded. `failure` — the roundtrip failed or timed out; see `error`.
 
 One of the following:
 
-"failure"
+"failure"
 
-"success"
+"success"
 
-type: "external\_key\_validation"
+
 
-Validate External Key
+type: "external\_key\_validation"
+
+defaultexternal\_key\_validation
+
+### Validate External Key
+
+cURL
 
 
 

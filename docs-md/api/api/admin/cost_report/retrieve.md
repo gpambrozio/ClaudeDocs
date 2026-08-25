@@ -10,179 +10,80 @@ GET/v1/organizations/cost\_report
 
 Get Cost Report
 
-##### Query ParametersExpand Collapse
+##### Query parameters
 
-starting\_at: string
+
+
+starting\_at: string
 
 Time buckets that start on or after this RFC 3339 timestamp will be returned.
 Each time bucket will be snapped to the start of the minute/hour/day in UTC.
 
-bucket\_width: optional "1d"
-
-Time granularity of the response data.
-
-ending\_at: optional string
-
-Time buckets that end before this RFC 3339 timestamp will be returned.
+formatdate-time
 
 
 
-group\_by: optional array of "description" or "workspace\_id"
+bucket\_width: optional "1d"
+
+Time granularity of the response data.
+
+default1d
+
+
+
+ending\_at: optional string
+
+Time buckets that end before this RFC 3339 timestamp will be returned.
+
+formatdate-time
+
+
+
+group\_by: optional array of "description" or "workspace\_id"
 
 Group by any subset of the available options.
 
 One of the following:
 
-"description"
+"description"
 
-"workspace\_id"
-
-limit: optional number
-
-Maximum number of time buckets to return in the response.
-
-page: optional string
-
-Optionally set to the `next_page` token from the previous response.
-
-##### Header ParametersExpand Collapse
+"workspace\_id"
 
 
 
-"anthropic-beta": optional array of string
+limit: optional number
+
+Maximum number of time buckets to return in the response.
+
+default7
+
+maximum31
+
+minimum1
+
+page: optional string
+
+Optionally set to the `next_page` token from the previous response.
+
+##### Headers
+
+
+
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
 To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-CostReport object { data, has\_more, next\_page } 
+CostReport object{ data, has\_more, next\_page }
 
-
+### Get Cost Report
 
-data: array of object { ending\_at, results, starting\_at } 
-
-List of time buckets for this page, oldest first: one per `bucket_width` interval, including intervals with no costs (their `results` list is empty). A page holds at most `limit` buckets.
-
-ending\_at: string
-
-End of the time bucket (exclusive) in RFC 3339 format.
-
-
-
-results: array of object { amount, context\_window, cost\_type, 7 more } 
-
-List of cost items for this time bucket. There may be multiple items if one or more `group_by[]` parameters are specified.
-
-amount: string
-
-Cost amount in lowest currency units (e.g. cents) as a decimal string. For example, `"123.45"` in `"USD"` represents `$1.23`.
-
-
-
-context\_window: "0-200k" or "200k-1M" or null
-
-Input context window used. `null` if not grouping by description or for non-token costs.
-
-One of the following:
-
-"0-200k"
-
-"200k-1M"
-
-
-
-cost\_type: "code\_execution" or "session\_usage" or "tokens" or "web\_search" or null
-
-Type of cost. `null` if not grouping by description.
-
-One of the following:
-
-"code\_execution"
-
-"session\_usage"
-
-"tokens"
-
-"web\_search"
-
-currency: string
-
-Currency code for the cost amount. Currently always `"USD"`.
-
-description: string or null
-
-Description of the cost item. `null` if not grouping by description.
-
-
-
-inference\_geo: "global" or "not\_available" or "us" or null
-
-Inference geo used matching requests' `inference_geo` parameter if set, otherwise the workspace's `default_inference_geo`.
-For models that do not support specifying `inference_geo` the value is `"not_available"`. Always `null` if not grouping by inference geo.
-
-One of the following:
-
-"global"
-
-"not\_available"
-
-"us"
-
-model: string or null
-
-Model name used. `null` if not grouping by description or for non-token costs.
-
-
-
-service\_tier: "batch" or "standard" or null
-
-Service tier used. `null` if not grouping by description or for non-token costs.
-
-One of the following:
-
-"batch"
-
-"standard"
-
-
-
-token\_type: "cache\_creation.ephemeral\_1h\_input\_tokens" or "cache\_creation.ephemeral\_5m\_input\_tokens" or "cache\_read\_input\_tokens" or 2 more or null
-
-Type of token. `null` if not grouping by description or for non-token costs.
-
-One of the following:
-
-"cache\_creation.ephemeral\_1h\_input\_tokens"
-
-"cache\_creation.ephemeral\_5m\_input\_tokens"
-
-"cache\_read\_input\_tokens"
-
-"output\_tokens"
-
-"uncached\_input\_tokens"
-
-workspace\_id: string or null
-
-ID of the Workspace this cost is associated with. `null` if not grouping by workspace or for the default workspace.
-
-starting\_at: string
-
-Start of the time bucket (inclusive) in RFC 3339 format.
-
-has\_more: boolean
-
-Indicates if there are more results.
-
-next\_page: string or null
-
-Opaque cursor for the next page, or `null` when `has_more` is false. Pass it as the `page` parameter in the next request.
-
-Get Cost Report
+cURL
 
 
 

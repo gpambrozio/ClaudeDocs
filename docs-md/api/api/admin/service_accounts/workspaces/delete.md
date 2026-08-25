@@ -19,39 +19,45 @@ to the implicit `workspace_user` membership. Archived workspaces return
 400. Requires an OAuth bearer or Console session; Admin API keys are not
 accepted.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-service\_account\_id: string
+service\_account\_id: string
 
 ID of the service account.
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the workspace.
 
-##### Header ParametersExpand Collapse
+##### Headers
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
 To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-##### ReturnsExpand Collapse
+##### Returns
 
-service\_account\_id: string
+service\_account\_id: string
 
 Tagged service account ID (`svac_...`) named in the delete request. Removal is idempotent; see the endpoint description for the implicit-membership no-op.
 
-type: "service\_account\_workspace\_member\_deleted"
+
 
-workspace\_id: string
+type: "service\_account\_workspace\_member\_deleted"
+
+defaultservice\_account\_workspace\_member\_deleted
+
+workspace\_id: string
 
 Tagged workspace ID (`wrkspc_...`) named in the delete request.
 
-Remove Workspace From Service Account
+### Remove Workspace From Service Account
+
+cURL
 
 
 

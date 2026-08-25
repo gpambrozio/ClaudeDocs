@@ -86,7 +86,7 @@ Prompt caching introduces a new pricing structure. The following table shows the
 
 ##  Supported models
 
-Prompt caching (both automatic and explicit) is supported on all [active Claude models](about-claude/models/overview.md).
+Prompt caching (both automatic and explicit) is supported on all [active Claude models](models/overview.md).
 
 ---
 

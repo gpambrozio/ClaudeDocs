@@ -101,7 +101,7 @@ Once you're comfortable with the basics, explore further:
 
 
 
-[Models overview](about-claude/models/overview.md)
+[Models overview](models/overview.md)
 
 Compare Claude models by capability and cost.
 

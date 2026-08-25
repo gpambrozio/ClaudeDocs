@@ -404,11 +404,11 @@ See [IAM policies](#iam-policies) for policy examples.
 
 ###  Managing workspaces
 
-Create additional workspaces, rename a workspace, or archive a workspace from the AWS Console **Workspaces** page or with the [Admin API](manage-claude/admin-api.md) workspace endpoints. A new workspace is bound to the AWS region of the endpoint you call to create it (see [Workspace scoping](#workspace-scoping)). The Claude Console Workspaces page is read-only.
+Create additional workspaces, rename a workspace, or archive a workspace from the AWS Console **Workspaces** page or with the [Admin API](manage-claude/admin-api.md) workspace endpoints. A new workspace is bound to the AWS region of the endpoint you call to create it (see [Workspace scoping](#workspace-scoping)). With the Admin role, you can also create, rename, and archive workspaces from the Claude Console **Workspaces** page.
 
 ##  Using the Claude Console
 
-Claude Platform on AWS uses the standard Claude Console at [platform.claude.com](https://platform.claude.com). When you sign in from the AWS Console, an **Account managed by AWS** indicator appears in the bottom-left of the Claude Console sidebar and the Console scopes to your Claude Platform on AWS organization. It provides usage analytics, cost breakdowns, rate limit visibility, workspace visibility, and pages for managing files, Agent Skills, batch jobs, and Claude Managed Agents resources (agents, sessions, environments, credential vaults, memory stores, and webhooks).
+Claude Platform on AWS uses the standard Claude Console at [platform.claude.com](https://platform.claude.com). When you sign in from the AWS Console, an **Account managed by AWS** indicator appears in the bottom-left of the Claude Console sidebar and the Console scopes to your Claude Platform on AWS organization. It provides usage analytics, cost breakdowns, rate limit visibility, workspace management, and pages for managing files, Agent Skills, batch jobs, and Claude Managed Agents resources (agents, sessions, environments, credential vaults, memory stores, and webhooks).
 
 ###  Signing in
 
@@ -430,7 +430,7 @@ The **Through AWS gateway** column indicates whether the page reads and writes d
 | **Usage** | Yes | No | View token usage by model, workspace, and dimension. Data can take a few minutes to appear after a request. |
 | **Cost** | Yes | No | View cost breakdowns by model and workspace. AWS Cost Explorer shows the aggregated [Claude Consumption Unit (CCU)](#billing) line item. |
 | **Rate limits** | Yes | No | View rate limits (read-only). Tier increases go through your Anthropic account representative; see [Rate limits and quotas](#rate-limits-and-quotas). |
-| **Workspaces** | Yes | No | View per-region workspaces (read-only) and set per-workspace [spend limits](#spend-limits). |
+| **Workspaces** | Yes | Yes (except spend limits) | View per-region workspaces. With the Admin role, you can also create, rename, and archive workspaces, and set per-workspace [spend limits](#spend-limits). |
 | **Files** | Yes | Yes | View and manage uploaded files. |
 | **Skills** | Yes | Yes | View and manage Agent Skills. |
 | **Batches** | Yes | Yes | View and manage batch processing jobs. |
@@ -476,7 +476,7 @@ The Start, Build, and Scale usage tiers each carry a monthly spend cap; see the 
 You can also set your own monthly spend limits below the cap, after adding at least one recipient under **Email recipients** on the Billing page:
 
 - **Organization spend limit:** Go to [Settings > Billing](/settings/billing) in the [Claude Console](#using-the-claude-console) to set a monthly spend limit.
-- **Workspace spend limits:** Select a workspace under [Settings > Workspaces](/settings/workspaces) and open its **Spend limits** page. Workspace details are otherwise read-only in the Claude Console on Claude Platform on AWS.
+- **Workspace spend limits:** Select a workspace under [Settings > Workspaces](/settings/workspaces) and open its **Spend limits** page.
 
 When usage reaches a limit you set, requests fail with HTTP 400 (see the [spend limit error](api/rate-limits.md)) until 00:00 UTC on the first day of the next month, or until you raise or remove the limit.
 

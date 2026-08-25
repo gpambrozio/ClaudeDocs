@@ -12,50 +12,54 @@ POST/v1/skills/{skill\_id}/versions
 
 Create Skill Version
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
 
 
-skill\_id: string
+skill\_id: string
 
 Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
-##### Body ParametersForm DataExpand Collapse
+##### Body (form-data)
 
 
 
-files: array of string
+files: array of string
 
 Files to upload for the skill.
 
 All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-SkillVersion object { id, created\_at, description, 3 more } 
+SkillVersion object{ id, created\_at, description, 3 more }
 
-id: string
+id: string
 
 Unique identifier for this Skill Version. The id addresses the version in
 paths and pins it in references.
 
-created\_at: string
+
+
+created\_at: string
 
 ISO 8601 timestamp of when the skill was created.
 
+formatdate-time
+
 
 
-description: string
+description: string
 
 Description of the skill version.
 
 This is extracted from the SKILL.md file in the skill upload.
 
-name: string
+name: string
 
 The Skill's immutable kebab-case slug, set at creation from the first
 upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
@@ -64,7 +68,7 @@ of the Skill's mounted files and the base name of a downloaded archive.
 
 
 
-skill\_id: string
+skill\_id: string
 
 Unique identifier for the skill.
 
@@ -72,15 +76,19 @@ The format and length of IDs may change over time.
 
 
 
-type: "skill\_version"
+type: "skill\_version"
 
 Object type.
 
 For Skill Versions, this is always `"skill_version"`.
 
-Create Skill Version
+defaultskill\_version
 
-cURL
+### Create Skill Version
+
+cURL
+
+
 
 ```shiki
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions \

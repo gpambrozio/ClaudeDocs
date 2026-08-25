@@ -287,7 +287,7 @@ def get_session_messages(
 | `session_id` | `str` | Session identifier |
 | `message` | `Any` | Raw message content |
 | `parent_tool_use_id` | `str | None` | For subagent messages, the id of the spawning `Agent` tool-use block. `None` for main-session messages and older sessions |
-| `parent_agent_id` | `str | None` | For messages from a [nested subagent](sub-agents.md), the agent id of the parent subagent. `None` for main-session messages, top-level subagent messages, and older sessions |
+| `parent_agent_id` | `str | None` | For messages from a [nested subagent](sub-agents.md), the agent id of the parent subagent. `None` for main-session messages, top-level subagent messages, and older sessions. Requires Python Agent SDK 0.2.140 or later |
 
 #### [​](#example-4) Example
 
@@ -796,15 +796,15 @@ class ClaudeAgentOptions:
 | `user` | `str | None` | `None` | User identifier |
 | `include_partial_messages` | `bool` | `False` | Include partial message streaming events. When enabled, [`StreamEvent`](#streamevent) messages are yielded |
 | `include_hook_events` | `bool` | `False` | Include hook lifecycle events in the message stream as `HookEventMessage` objects |
-| `forward_subagent_text` | `bool` | `False` | Forward subagent text and thinking blocks in the message stream. By default only subagent `tool_use` and `tool_result` blocks are emitted |
+| `forward_subagent_text` | `bool` | `False` | Forward subagent text and thinking blocks in the message stream. By default only subagent `tool_use` and `tool_result` blocks are emitted. Requires Python Agent SDK 0.2.140 or later |
 | `fork_session` | `bool` | `False` | When resuming with `resume`, fork to a new session ID instead of continuing the original session |
-| `resume_session_at` | `str | None` | `None` | When resuming, load the conversation only up to and including the message with this UUID. Use with `resume`, and usually `fork_session`, to branch from an earlier point |
-| `resume_drops_turn` | `str | None` | `None` | UUID of the user prompt whose turn a `resume_session_at` truncation discards. When set, the CLI refuses the resume if the discarded range holds entries not attributable to that turn. Requires Claude Code v2.1.223 or later; the bundled CLI satisfies this |
+| `resume_session_at` | `str | None` | `None` | When resuming, load the conversation only up to and including the message with this UUID. Use with `resume`, and usually `fork_session`, to branch from an earlier point. Requires Python Agent SDK 0.2.137 or later |
+| `resume_drops_turn` | `str | None` | `None` | UUID of the user prompt whose turn a `resume_session_at` truncation discards. When set, the CLI refuses the resume if the discarded range holds entries not attributable to that turn. Requires Python Agent SDK 0.2.137 or later and Claude Code v2.1.223 or later; the CLI bundled with those SDK versions satisfies the Claude Code requirement |
 | `agents` | `dict[str, AgentDefinition] | None` | `None` | Programmatically defined subagents |
 | `plugins` | `list[SdkPluginConfig]` | `[]` | Load custom plugins from local paths. See [Plugins](agent-sdk/plugins.md) for details |
 | `sandbox` | [`SandboxSettings`](#sandboxsettings)  `| None` | `None` | Configure sandbox behavior programmatically. See [Sandbox settings](#sandboxsettings) for details |
 | `setting_sources` | `list[SettingSource] | None` | `None` (CLI defaults: all sources) | Control which filesystem settings to load. Pass `[]` to disable user, project, and local settings. Endpoint-managed policy loads regardless; server-managed settings are fetched when the session authenticates with an organization credential on an [eligible configuration](server-managed-settings.md). See [Use Claude Code features](agent-sdk/claude-code-features.md) |
-| `skills` | `list[str] | Literal["all"] | None` | `None` | Skills available to the session. Pass `"all"` to enable every discovered skill, or a list of skill names. Pass exact names only. The SDK rejects malformed and wildcard-form names with a `ValueError` before starting the Claude Code process. When set, the SDK adds the Skill tool to `allowed_tools` automatically. If you also pass `tools`, include `"Skill"` in that list. See [Skills](agent-sdk/skills.md) |
+| `skills` | `list[str] | Literal["all"] | None` | `None` | Skills available to the session. Pass `"all"` to enable every discovered skill, or a list of skill names. Pass exact names only. The SDK rejects malformed and wildcard-form names with a `ValueError` before starting the Claude Code process; this check requires Python Agent SDK 0.2.129 or later. When set, the SDK adds the Skill tool to `allowed_tools` automatically. If you also pass `tools`, include `"Skill"` in that list. See [Skills](agent-sdk/skills.md) |
 | `max_thinking_tokens` | `int | None` | `None` | *Deprecated* - Maximum tokens for thinking blocks. Use `thinking` instead |
 | `thinking` | [`ThinkingConfig`](#thinkingconfig)  `| None` | `None` | Controls extended thinking behavior. Takes precedence over `max_thinking_tokens` |
 | `effort` | [`EffortLevel`](#effortlevel)  `| None` | `None` | Effort level for thinking depth. See [adjust the effort level](model-config.md) |
@@ -1434,7 +1434,7 @@ class UserMessage:
 | `uuid` | `str | None` | Unique message identifier |
 | `parent_tool_use_id` | `str | None` | Tool use ID if this message is a tool result response |
 | `tool_use_result` | `dict[str, Any] | None` | Tool result data if applicable |
-| `origin` | `MessageOrigin | None` | Provenance of this message, populated on injected turns such as task notifications and peer messages. `None` when the CLI didn’t attribute it |
+| `origin` | `MessageOrigin | None` | Provenance of this message, populated on injected turns such as task notifications and peer messages. `None` when the CLI didn’t attribute it. Requires Python Agent SDK 0.2.137 or later |
 
 ### [​](#assistantmessage) `AssistantMessage`
 
@@ -1530,7 +1530,7 @@ Several fields carry diagnostic detail about how the conversation ended:
 - `result`: text of the final assistant message on `subtype="success"`, or `None` on the `error_*` subtypes. When `subtype="success"` and `is_error=True`, this holds the API error string if one is available but can be empty, so check `api_error_status` and the preceding `AssistantMessage` content for detail.
 - `errors`: loop-level error strings such as the max-turns message. Populated only on the `error_*` subtypes.
 - `terminal_reason`: why the query loop ended, such as `"completed"`, `"max_turns"`, `"api_error"`, `"aborted_streaming"`, or `"aborted_tools"`. A value of `"aborted_streaming"` or `"aborted_tools"` means the turn was aborted before completing. Common causes are [`interrupt()`](#claudesdkclient) and a permission callback returning [`PermissionResultDeny`](#permissionresultdeny) with `interrupt=True`. `None` on CLI versions that predate the field, on results that bypassed the query loop such as local slash commands, or on synthesized error results emitted when the session fails fatally. Mirrors the TypeScript SDK’s [`SDKResultMessage.terminal_reason`](agent-sdk/typescript.md), which lists the full set of values.
-- `origin`: origin of the user message that triggered this turn. In [streaming input mode](agent-sdk/streaming-vs-single-mode.md), check this to tell the result of your own prompt, where `origin` is `None` or `{"kind": "human"}`, from the result of an injected turn such as a background-task notification.
+- `origin`: origin of the user message that triggered this turn. In [streaming input mode](agent-sdk/streaming-vs-single-mode.md), check this to tell the result of your own prompt, where `origin` is `None` or `{"kind": "human"}`, from the result of an injected turn such as a background-task notification. Requires Python Agent SDK 0.2.137 or later.
 
 The `usage` dict covers the main agent loop only and excludes subagent and other nested or auxiliary model calls. In [streaming input mode](agent-sdk/streaming-vs-single-mode.md), the values are per-turn. Prefer `model_usage` for token and cost accounting. The `usage` dict contains the following keys when present:
 
@@ -1631,7 +1631,7 @@ class RateLimitInfo:
 
 ### [​](#conversationresetmessage) `ConversationResetMessage`
 
-Emitted when the conversation is replaced without ending the connection, such as after `/clear`. See [Track costs in streaming input mode](agent-sdk/cost-tracking.md) for how a reset affects the running totals on later `ResultMessage` objects.
+Emitted when the conversation is replaced without ending the connection, such as after `/clear`. See [Track costs in streaming input mode](agent-sdk/cost-tracking.md) for how a reset affects the running totals on later `ResultMessage` objects. Requires Python Agent SDK 0.2.137 or later.
 
 ```shiki
 @dataclass

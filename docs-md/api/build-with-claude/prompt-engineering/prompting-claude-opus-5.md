@@ -4,7 +4,7 @@
 
 
 
-This guide covers the prompting patterns specific to Claude Opus 5. For the model's capabilities and API changes, see [What's new in Claude Opus 5](about-claude/models/whats-new-opus-5.md). For techniques that apply across all current Claude models, see [Prompting best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
+This guide covers the prompting patterns specific to Claude Opus 5. For the model's capabilities and API changes, see [What's new in Claude Opus 5](models/opus-5/whats-new-opus-5.md). For techniques that apply across all current Claude models, see [Prompting best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
 Claude Opus 5 is built for complex agentic coding and enterprise work, with particular strengths in long-horizon agentic tasks. It performs well out of the box on existing Claude Opus 4.8 prompts. The following patterns cover the behaviors that most often require tuning.
 

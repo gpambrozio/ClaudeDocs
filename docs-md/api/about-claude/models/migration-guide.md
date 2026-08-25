@@ -6,7 +6,7 @@
 
 ##  Migrating to Claude Mythos 5 and Claude Fable 5
 
-[Claude Fable 5](about-claude/models/introducing-claude-fable-5-and-claude-mythos-5.md) is Anthropic's most capable widely released model, available on the Claude API, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). [Claude Mythos 5](https://anthropic.com/glasswing) shares the same capabilities and is offered only to approved customers in Project Glasswing.
+[Claude Fable 5](models/fable-5/introducing-claude-fable-5-and-claude-mythos-5.md) is Anthropic's most capable widely released model, available on the Claude API, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). [Claude Mythos 5](https://anthropic.com/glasswing) shares the same capabilities and is offered only to approved customers in Project Glasswing.
 
 The baseline settings shared by `claude-fable-5` and `claude-mythos-5`:
 
@@ -24,7 +24,7 @@ Where the two models diverge:
 
 ###  Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Mythos Preview
 
-[Claude Mythos 5](https://anthropic.com/glasswing) is the access-gated successor to [Claude Mythos Preview](https://anthropic.com/glasswing), the invitation-only research preview. [Claude Fable 5](about-claude/models/introducing-claude-fable-5-and-claude-mythos-5.md) offers the same capabilities and does not require access approval. The changes in this section apply equally to both targets.
+[Claude Mythos 5](https://anthropic.com/glasswing) is the access-gated successor to [Claude Mythos Preview](https://anthropic.com/glasswing), the invitation-only research preview. [Claude Fable 5](models/fable-5/introducing-claude-fable-5-and-claude-mythos-5.md) offers the same capabilities and does not require access approval. The changes in this section apply equally to both targets.
 
 Migration is mostly drop-in. Claude Mythos 5 and Claude Fable 5 use the same [Messages API](build-with-claude/working-with-messages.md) and the same [tool use](agents-and-tools/tool-use/overview.md) patterns as Claude Mythos Preview, and token counts are roughly unchanged because all three models use the same tokenizer. The key changes to check are the features that are no longer available (listed in the next section) and thinking output. If you migrate to Claude Fable 5, also plan for safety classifier refusals, which Claude Mythos Preview and Claude Mythos 5 do not have; see [Refusals and fallback](build-with-claude/refusals-and-fallback.md).
 
@@ -98,7 +98,7 @@ model = "claude-fable-5"  # After
 
 ###  Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Opus 5
 
-Claude Fable 5 and Claude Mythos 5 use the same [Messages API](build-with-claude/working-with-messages.md) and the same [tool use](agents-and-tools/tool-use/overview.md) patterns as Claude Opus 5, with the same [1M token context window](build-with-claude/context-windows.md) by default and the same [128k max output tokens](about-claude/models/overview.md). The prefill and sampling-parameter restrictions, and the thinking display behavior, carry over from Claude Opus 5 unchanged. The changes to check are always-on thinking, pricing, Priority Tier, and data retention.
+Claude Fable 5 and Claude Mythos 5 use the same [Messages API](build-with-claude/working-with-messages.md) and the same [tool use](agents-and-tools/tool-use/overview.md) patterns as Claude Opus 5, with the same [1M token context window](build-with-claude/context-windows.md) by default and the same [128k max output tokens](models/overview.md). The prefill and sampling-parameter restrictions, and the thinking display behavior, carry over from Claude Opus 5 unchanged. The changes to check are always-on thinking, pricing, Priority Tier, and data retention.
 
 ####  Update your model name
 
@@ -128,7 +128,7 @@ model = "claude-mythos-5"  # After
 
 ###  Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Opus 4.8
 
-Migration is mostly drop-in. Claude Fable 5 and Claude Mythos 5 use the same [Messages API](build-with-claude/working-with-messages.md) and the same [tool use](agents-and-tools/tool-use/overview.md) patterns as Claude Opus 4.8, with the same [1M token context window](build-with-claude/context-windows.md) by default and the same [128k max output tokens](about-claude/models/overview.md). Token counts are roughly unchanged because the models use the same tokenizer. The key changes to check are always-on [adaptive thinking](build-with-claude/thinking.md), thinking output, safety classifier refusals (Claude Fable 5 only), and pricing.
+Migration is mostly drop-in. Claude Fable 5 and Claude Mythos 5 use the same [Messages API](build-with-claude/working-with-messages.md) and the same [tool use](agents-and-tools/tool-use/overview.md) patterns as Claude Opus 4.8, with the same [1M token context window](build-with-claude/context-windows.md) by default and the same [128k max output tokens](models/overview.md). Token counts are roughly unchanged because the models use the same tokenizer. The key changes to check are always-on [adaptive thinking](build-with-claude/thinking.md), thinking output, safety classifier refusals (Claude Fable 5 only), and pricing.
 
 ####  Update your model name
 
@@ -209,7 +209,7 @@ The items in this section describe the API and behavior differences worth checki
 
 Claude Opus 5 is a step-change improvement over Claude Opus 4.8, strong on deep reasoning, agentic and long-horizon tasks, and test-time compute scaling. For behavioral differences and model-specific prompting patterns, see [Prompting Claude Opus 5](build-with-claude/prompt-engineering/prompting-claude-opus-5.md).
 
-Claude Opus 5 is a drop-in upgrade for Claude Opus 4.8 at the same pricing of $5 per million input tokens and $25 per million output tokens; see [Claude pricing](about-claude/pricing.md). There are two breaking changes for code already running on Claude Opus 4.8, covered under Breaking changes below. Claude Opus 5 supports the same set of features as Claude Opus 4.8, including the [1M token context window](build-with-claude/context-windows.md) (the default, with no beta header), [128k max output tokens](about-claude/models/overview.md), [adaptive thinking](build-with-claude/thinking.md), [prompt caching](build-with-claude/prompt-caching.md), [batch processing](build-with-claude/batch-processing.md), the [Files API](build-with-claude/files.md), [PDF support](build-with-claude/pdf-support.md), [vision](build-with-claude/vision.md), and server-side and client-side [tools](agents-and-tools/tool-use/overview.md), with two exceptions: [web fetch](agents-and-tools/tool-use/web-fetch-tool.md) is not available on Claude Opus 5, and [Priority Tier](api/service-tiers.md) is not supported on Claude Opus 5. See each tool page for model availability.
+Claude Opus 5 is a drop-in upgrade for Claude Opus 4.8 at the same pricing of $5 per million input tokens and $25 per million output tokens; see [Claude pricing](about-claude/pricing.md). There are two breaking changes for code already running on Claude Opus 4.8, covered under Breaking changes below. Claude Opus 5 supports the same set of features as Claude Opus 4.8, including the [1M token context window](build-with-claude/context-windows.md) (the default, with no beta header), [128k max output tokens](models/overview.md), [adaptive thinking](build-with-claude/thinking.md), [prompt caching](build-with-claude/prompt-caching.md), [batch processing](build-with-claude/batch-processing.md), the [Files API](build-with-claude/files.md), [PDF support](build-with-claude/pdf-support.md), [vision](build-with-claude/vision.md), and server-side and client-side [tools](agents-and-tools/tool-use/overview.md), with two exceptions: [web fetch](agents-and-tools/tool-use/web-fetch-tool.md) is not available on Claude Opus 5, and [Priority Tier](api/service-tiers.md) is not supported on Claude Opus 5. See each tool page for model availability.
 
 ###  Migrating to Claude Opus 5 from Claude Opus 4.8
 
@@ -300,7 +300,7 @@ These are not required but will improve your experience:
 
 ###  Migrating to Claude Opus 5 from Claude Opus 4.7
 
-Claude Opus 5 should have strong out-of-the-box performance on existing Claude Opus 4.7 prompts and evals, at the same pricing of $5 per million input tokens and $25 per million output tokens. It supports the same set of features as Claude Opus 4.7, including the [1M token context window](build-with-claude/context-windows.md), [128k max output tokens](about-claude/models/overview.md), [adaptive thinking](build-with-claude/thinking.md), [prompt caching](build-with-claude/prompt-caching.md), [batch processing](build-with-claude/batch-processing.md), the [Files API](build-with-claude/files.md), [PDF support](build-with-claude/pdf-support.md), [vision](build-with-claude/vision.md), and server-side and client-side [tools](agents-and-tools/tool-use/overview.md), with two exceptions: [web fetch](agents-and-tools/tool-use/web-fetch-tool.md) is not available on Claude Opus 5, and [Priority Tier](api/service-tiers.md) is not supported on Claude Opus 5. It also adds [mid-conversation system messages](build-with-claude/mid-conversation-system-messages.md) and publicly documents [refusal stop details](build-with-claude/refusals-and-fallback.md). On the Claude API, Claude Opus 5 also supports [computer use](agents-and-tools/tool-use/computer-use-tool.md) as the stable `computer_toolset_20260801` toolset and the [browser use tool](agents-and-tools/tool-use/browser-use-tool.md) for tasks inside webpages, neither of which Claude Opus 4.7 supports; existing integrations on the earlier `computer_20251124` version continue to work unchanged on both models. To upgrade an existing integration, see [Migrate from `computer_20251124`](agents-and-tools/tool-use/computer-use-tool.md).
+Claude Opus 5 should have strong out-of-the-box performance on existing Claude Opus 4.7 prompts and evals, at the same pricing of $5 per million input tokens and $25 per million output tokens. It supports the same set of features as Claude Opus 4.7, including the [1M token context window](build-with-claude/context-windows.md), [128k max output tokens](models/overview.md), [adaptive thinking](build-with-claude/thinking.md), [prompt caching](build-with-claude/prompt-caching.md), [batch processing](build-with-claude/batch-processing.md), the [Files API](build-with-claude/files.md), [PDF support](build-with-claude/pdf-support.md), [vision](build-with-claude/vision.md), and server-side and client-side [tools](agents-and-tools/tool-use/overview.md), with two exceptions: [web fetch](agents-and-tools/tool-use/web-fetch-tool.md) is not available on Claude Opus 5, and [Priority Tier](api/service-tiers.md) is not supported on Claude Opus 5. It also adds [mid-conversation system messages](build-with-claude/mid-conversation-system-messages.md) and publicly documents [refusal stop details](build-with-claude/refusals-and-fallback.md). On the Claude API, Claude Opus 5 also supports [computer use](agents-and-tools/tool-use/computer-use-tool.md) as the stable `computer_toolset_20260801` toolset and the [browser use tool](agents-and-tools/tool-use/browser-use-tool.md) for tasks inside webpages, neither of which Claude Opus 4.7 supports; existing integrations on the earlier `computer_20251124` version continue to work unchanged on both models. To upgrade an existing integration, see [Migrate from `computer_20251124`](agents-and-tools/tool-use/computer-use-tool.md).
 
 ####  Update your model name
 
@@ -405,7 +405,7 @@ These are not required but will improve your experience:
 Claude Opus 5 should have strong out-of-the-box performance on existing Claude Opus 4.6 prompts and evals at the same pricing, but there are a handful of behavioral and API changes worth knowing about as you migrate. Most of these changes took effect in Claude Opus 4.7; two more, thinking on by default and an effort cap on disabling thinking, take effect on Claude Opus 5. All of them are covered below, so this section is complete for code coming straight from Claude Opus 4.6. Claude Opus 5 supports the same set of features as Claude Opus 4.6, including:
 
 - [1M token context window](build-with-claude/context-windows.md) at standard API pricing with no long-context premium
-- [128k max output tokens](about-claude/models/overview.md)
+- [128k max output tokens](models/overview.md)
 - [Adaptive thinking](build-with-claude/thinking.md)
 - [Prompt caching](build-with-claude/prompt-caching.md)
 - [Batch processing](build-with-claude/batch-processing.md)
@@ -757,7 +757,7 @@ model = "claude-opus-5"  # After
 
 ###  Migrating to Claude Opus 5 from Claude Sonnet 5
 
-Claude Opus 5 and Claude Sonnet 5 share the same API surface: both run with [adaptive thinking](build-with-claude/thinking.md) on by default, both default the [effort parameter](build-with-claude/effort.md) to `high` on the Claude API and Claude Code, both serve a [1M token context window](build-with-claude/context-windows.md) by default with [128k max output tokens](about-claude/models/overview.md), and neither supports [Priority Tier](api/service-tiers.md). Manual extended thinking and non-default sampling parameters return a 400 error on both models, as does assistant prefill.
+Claude Opus 5 and Claude Sonnet 5 share the same API surface: both run with [adaptive thinking](build-with-claude/thinking.md) on by default, both default the [effort parameter](build-with-claude/effort.md) to `high` on the Claude API and Claude Code, both serve a [1M token context window](build-with-claude/context-windows.md) by default with [128k max output tokens](models/overview.md), and neither supports [Priority Tier](api/service-tiers.md). Manual extended thinking and non-default sampling parameters return a 400 error on both models, as does assistant prefill.
 
 ####  Update your model name
 
@@ -772,7 +772,7 @@ model = "claude-opus-5"  # After
 
 1. **Pricing:** Claude Opus 5 is priced at $5 per million input tokens and $25 per million output tokens. Claude Sonnet 5 is priced at $2/$10 per million input/output tokens. See [Claude pricing](about-claude/pricing.md) for complete pricing.
 2. **Disabling thinking is capped at `high` effort:** On Claude Sonnet 5, `thinking: {type: "disabled"}` is accepted at any effort level. On Claude Opus 5, it is accepted only at an [effort](build-with-claude/effort.md) level of `high` or below; a request that combines `thinking: {type: "disabled"}` with effort `xhigh` or `max` returns a 400 error, enforced on each request. Audit requests that disable thinking before you migrate.
-3. **Mid-conversation system messages:** Claude Opus 5 accepts `role: "system"` messages immediately after a user turn in the `messages` array (subject to [placement rules](build-with-claude/mid-conversation-system-messages.md)). This feature is not available on Claude Sonnet 5; use the top-level `system` field instead. If you maintain code paths that rebuild the full message history to update instructions, you can simplify them and preserve [prompt cache](build-with-claude/prompt-caching.md) hits on earlier turns.
+3. **Mid-conversation system messages:** Claude Opus 5 accepts `role: "system"` messages immediately after a user turn in the `messages` array (subject to [placement rules](build-with-claude/mid-conversation-system-messages.md)). This feature is not available on Claude Sonnet 5. If you maintain code paths that rebuild the full message history to update instructions, you can simplify them and preserve [prompt cache](build-with-claude/prompt-caching.md) hits on earlier turns.
 4. **Web fetch is not available:** The [web fetch](agents-and-tools/tool-use/web-fetch-tool.md) tool is available on Claude Sonnet 5 but not on Claude Opus 5.
 
 ####  Migration checklist
@@ -897,7 +897,7 @@ If you are migrating from Claude Sonnet 4.5 or an earlier Sonnet model directly 
 
 ###  Migrating to Claude Sonnet 5 from Claude Haiku 4.5
 
-Claude Haiku 4.5 and Claude Sonnet 5 differ more at the API level than adjacent models within one class: Claude Haiku 4.5 uses manual [extended thinking](build-with-claude/extended-thinking.md) (off by default), a 200k token context window, and up to 64k output tokens, while Claude Sonnet 5 runs with [adaptive thinking](build-with-claude/thinking.md) on by default, serves a [1M token context window](build-with-claude/context-windows.md) by default, and supports up to [128k output tokens](about-claude/models/overview.md).
+Claude Haiku 4.5 and Claude Sonnet 5 differ more at the API level than adjacent models within one class: Claude Haiku 4.5 uses manual [extended thinking](build-with-claude/extended-thinking.md) (off by default), a 200k token context window, and up to 64k output tokens, while Claude Sonnet 5 runs with [adaptive thinking](build-with-claude/thinking.md) on by default, serves a [1M token context window](build-with-claude/context-windows.md) by default, and supports up to [128k output tokens](models/overview.md).
 
 ####  Update your model name
 
@@ -934,7 +934,7 @@ model = "claude-sonnet-5"  # After
 
 Claude Haiku 4.5 is the fastest and most intelligent Haiku model with near-frontier performance, delivering premium model quality for interactive applications and high-volume processing.
 
-For a complete overview of capabilities, see the [models overview](about-claude/models/overview.md).
+For a complete overview of capabilities, see the [models overview](models/overview.md).
 
 ###  Migrating to Claude Haiku 4.5 from Claude Haiku 3.5 and earlier Haiku models
 
@@ -950,7 +950,7 @@ model = "claude-haiku-4-5-20251001"  # After
 
 **Review new rate limits:** Haiku 4.5 has separate rate limits from Haiku 3.5. See [Rate limits](api/rate-limits.md) documentation for details.
 
-**Explore new capabilities:** See the [models overview](about-claude/models/overview.md) for details on context awareness, increased output capacity (64k tokens), higher intelligence, and improved speed.
+**Explore new capabilities:** See the [models overview](models/overview.md) for details on context awareness, increased output capacity (64k tokens), higher intelligence, and improved speed.
 
 ####  Breaking changes
 
@@ -986,7 +986,7 @@ These breaking changes apply when migrating from Claude 3.x Haiku models.
 ##  Get help
 
 - Check the [API documentation](api/overview.md) for detailed specifications
-- Review [model capabilities](about-claude/models/overview.md) for performance comparisons
+- Review [model capabilities](models/overview.md) for performance comparisons
 - Review [API release notes](release-notes/api.md) for API updates
 - Contact support if you encounter any issues during migration
 

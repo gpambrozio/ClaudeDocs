@@ -10,21 +10,21 @@ POST/v1/organizations/workspaces/{workspace\_id}
 
 Update Workspace
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-workspace\_id: string
+workspace\_id: string
 
-##### Body ParametersJSONExpand Collapse
+##### Body
 
 
 
-data\_residency: optional object { allowed\_inference\_geos, default\_inference\_geo }  or null
+data\_residency: optional object{ allowed\_inference\_geos, default\_inference\_geo } or null
 
 Data residency configuration for the workspace.
 
 
 
-allowed\_inference\_geos: optional array of "global" or "us" or "unrestricted" or null
+allowed\_inference\_geos: optional array of "global" or "us" or "unrestricted" or null
 
 Permitted inference geo values. Use 'unrestricted' to allow all geos, or a list of specific geos.
 
@@ -32,104 +32,29 @@ One of the following:
 
 
 
-array of "global" or "us"
+array of "global" or "us"
 
 One of the following:
 
-"global"
+"global"
 
-"us"
+"us"
 
-"unrestricted"
+"unrestricted"
 
 
 
-default\_inference\_geo: optional "global" or "us" or null
+default\_inference\_geo: optional "global" or "us" or null
 
 Default inference geo applied when requests omit the parameter. Must be a member of allowed\_inference\_geos unless allowed\_inference\_geos is `"unrestricted"`.
 
 One of the following:
 
-"global"
+"global"
 
-"us"
+"us"
 
-external\_key\_id: optional string
-
-ID of the customer-managed encryption key (CMEK) configuration to use for this
-Workspace. Setting this field requires CMEK to be enabled for your
-organization. When set, data stored for this Workspace is encrypted with the
-referenced key. Create key configurations with the External Keys API. This
-field is write-once: once a key is attached to a Workspace it cannot be
-detached or replaced. To rotate key material, rotate the underlying key on
-your cloud KMS; the `external_key_id` stays the same.
-
-name: optional string
-
-Name of the Workspace.
-
-tags: optional map[string] or null
-
-User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
-
-##### ReturnsExpand Collapse
-
-
-
-Workspace object { id, archived\_at, compartment\_id, 7 more } 
-
-id: string
-
-ID of the Workspace.
-
-archived\_at: string or null
-
-RFC 3339 datetime string indicating when the Workspace was archived, or `null` if the Workspace is not archived.
-
-compartment\_id: string
-
-Identifier for this Workspace's encryption compartment. When you configure a
-customer-managed encryption key (CMEK) on AWS, reference this value in your
-KMS key-policy condition so the key is scoped to this compartment. On GCP and
-Azure, Anthropic enforces the compartment binding automatically; you do not
-need to reference this value in your key configuration. See the CMEK integration guide for the
-required key configuration, including the value used during key validation.
-
-created\_at: string
-
-RFC 3339 datetime string indicating when the Workspace was created.
-
-
-
-data\_residency: object { allowed\_inference\_geos, default\_inference\_geo, workspace\_geo } 
-
-Data residency configuration.
-
-
-
-allowed\_inference\_geos: array of string or "unrestricted"
-
-Permitted inference geo values. 'unrestricted' means all geos are allowed.
-
-One of the following:
-
-array of string
-
-"unrestricted"
-
-default\_inference\_geo: string
-
-Default inference geo applied when requests omit the parameter.
-
-workspace\_geo: string
-
-Geographic region for workspace data storage. Immutable after creation.
-
-display\_color: string
-
-Hex color code representing the Workspace in the Anthropic Console.
-
-external\_key\_id: string or null
+external\_key\_id: optional string
 
 ID of the customer-managed encryption key (CMEK) configuration to use for this
 Workspace. Setting this field requires CMEK to be enabled for your
@@ -139,23 +64,29 @@ field is write-once: once a key is attached to a Workspace it cannot be
 detached or replaced. To rotate key material, rotate the underlying key on
 your cloud KMS; the `external_key_id` stays the same.
 
-name: string
+
+
+name: optional string
 
 Name of the Workspace.
 
-tags: map[string]
+maxLength40
+
+minLength1
+
+tags: optional map[string] or null
 
 User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
+##### Returns
+
 
 
-type: "workspace"
+Workspace object{ id, archived\_at, compartment\_id, 7 more }
 
-Object type.
+### Update Workspace
 
-For Workspaces, this is always `"workspace"`.
-
-Update Workspace
+cURL
 
 
 

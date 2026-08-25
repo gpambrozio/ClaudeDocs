@@ -8,139 +8,69 @@ cURL
 
 # User Profiles
 
-##### [Create User Profile](api/beta/user_profiles/create.md)
+##### [Create User Profile](api/http/beta/user_profiles/create.md)
 
 POST/v1/user\_profiles
 
-##### [List User Profiles](api/beta/user_profiles/list.md)
+##### [List User Profiles](api/http/beta/user_profiles/list.md)
 
 GET/v1/user\_profiles
 
-##### [Get User Profile](api/beta/user_profiles/retrieve.md)
+##### [Get User Profile](api/http/beta/user_profiles/retrieve.md)
 
 GET/v1/user\_profiles/{user\_profile\_id}
 
-##### [Update User Profile](api/beta/user_profiles/update.md)
+##### [Update User Profile](api/http/beta/user_profiles/update.md)
 
 POST/v1/user\_profiles/{user\_profile\_id}
 
-##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
+##### [Create Enrollment URL](api/http/beta/user_profiles/create_enrollment_url.md)
 
 POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
-##### ModelsExpand Collapse
+##### Models
 
 
 
-BetaUserProfile object { id, created\_at, metadata, 7 more } 
+BetaUserProfile object{ id, created\_at, metadata, 7 more }
 
-id: string
+
 
-Unique identifier for this user profile, prefixed `uprof_`.
+BetaUserProfileEnrollmentURL object{ expires\_at, type, url }
 
-created\_at: string
+
+
+expires\_at: string
 
 A timestamp in RFC 3339 format
 
-metadata: map[string]
+formatdate-time
 
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-
-
-trust\_grants: map[[BetaUserProfileTrustGrant](api/beta/user_profiles.md) { status } ]
-
-Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-
-
-status: "active" or "pending" or "rejected"
-
-Status of the trust grant.
-
-One of the following:
-
-"active"
-
-"pending"
-
-"rejected"
-
-type: "user\_profile"
-
-Object type. Always `user_profile`.
-
-updated\_at: string
-
-A timestamp in RFC 3339 format
-
-
-
-access\_type: optional "application" or "passthrough"
-
-How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
-
-One of the following:
-
-"application"
-
-"passthrough"
-
-external\_id: optional string or null
-
-Platform's own identifier for this user. Not enforced unique.
-
-name: optional string or null
-
-Real-world name of the entity this profile represents (company or individual). For a resold-to company (`access_type` `passthrough`, or `relationship` `resold` under the `user-profiles-2026-03-24` header) this is that company's name.
-
-
-
-relationship: optional "external" or "resold" or "internal"
-
-How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
-One of the following:
-
-"external"
-
-"resold"
-
-"internal"
-
-
-
-BetaUserProfileEnrollmentURL object { expires\_at, type, url } 
-
-expires\_at: string
-
-A timestamp in RFC 3339 format
-
-type: "enrollment\_url"
+type: "enrollment\_url"
 
 Object type. Always `enrollment_url`.
 
-url: string
+url: string
 
 Enrollment URL to send to the end user. Valid until `expires_at`.
 
 
 
-BetaUserProfileTrustGrant object { status } 
+BetaUserProfileTrustGrant object{ status }
 
 
 
-status: "active" or "pending" or "rejected"
+status: "active" or "pending" or "rejected"
 
 Status of the trust grant.
 
 One of the following:
 
-"active"
+"active"
 
-"pending"
+"pending"
 
-"rejected"
+"rejected"
 
 ---
 

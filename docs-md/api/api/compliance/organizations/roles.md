@@ -6,71 +6,71 @@
 
 # Roles
 
-##### [List Compliance Roles](api/compliance/organizations/roles/list.md)
+##### [List Compliance Roles](api/http/compliance/organizations/roles/list.md)
 
 GET/v1/compliance/organizations/{org\_uuid}/roles
 
-##### [Get Compliance Role](api/compliance/organizations/roles/retrieve.md)
+##### [Get Compliance Role](api/http/compliance/organizations/roles/retrieve.md)
 
 GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}
 
-##### ModelsExpand Collapse
+##### Models
 
 
 
-RoleListResponse object { id, created\_at, description, 2 more } 
+RoleListResponse object{ id, created\_at, description, 2 more }
 
 Role information for compliance responses.
 
-id: string
+id: string
 
 Role identifier (tagged ID)
 
-created\_at: string or null
+created\_at: string or null
 
 Role creation timestamp (ISO 8601)
 
-description: string
+description: string
 
 Role description
 
-name: string
+name: string
 
 Role name
 
-updated\_at: string or null
+updated\_at: string or null
 
 Role last-updated timestamp (ISO 8601)
 
 
 
-RoleRetrieveResponse object { id, created\_at, description, 2 more } 
+RoleRetrieveResponse object{ id, created\_at, description, 2 more }
 
 Role information for compliance responses.
 
-id: string
+id: string
 
 Role identifier (tagged ID)
 
-created\_at: string or null
+created\_at: string or null
 
 Role creation timestamp (ISO 8601)
 
-description: string
+description: string
 
 Role description
 
-name: string
+name: string
 
 Role name
 
-updated\_at: string or null
+updated\_at: string or null
 
 Role last-updated timestamp (ISO 8601)
 
-#### RolesPermissions
+#### Roles[Permissions](api/http/compliance/organizations/roles/permissions.md)
 
-##### [List Compliance Role Permissions](api/compliance/organizations/roles/permissions/list.md)
+##### [List Compliance Role Permissions](api/http/compliance/organizations/roles/permissions/list.md)
 
 GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}/permissions
 

@@ -10,29 +10,37 @@ GET/v1/organizations/me
 
 Retrieve information about the organization associated with the authenticated API key.
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-Organization object { id, name, type } 
+Organization object{ id, name, type }
 
-id: string
+
+
+id: string
 
 ID of the Organization.
 
-name: string
+formatuuid
+
+name: string
 
 Name of the Organization.
 
 
 
-type: "organization"
+type: "organization"
 
 Object type.
 
 For Organizations, this is always `"organization"`.
 
-Get Current Organization
+defaultorganization
+
+### Get Current Organization
+
+cURL
 
 
 

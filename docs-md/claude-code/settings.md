@@ -210,9 +210,10 @@ For a few security-sensitive keys, Claude Code honors a stricter value from a lo
 
 ### [​](#lists-merge-instead-of-overriding) Lists merge instead of overriding
 
-When you set the same list key, such as `permissions.allow`, in more than one file, Claude Code combines the lists instead of picking one, so each file can add entries without removing another file’s. Two list keys follow their own rules:
+When you set the same list key, such as `permissions.allow`, in more than one file, Claude Code combines the lists instead of picking one, so each file can add entries without removing another file’s. Three keys that hold model lists follow their own rules:
 
 - [`fallbackModel`](settings-reference.md) is an ordered chain where position carries meaning, so Claude Code takes the whole value from the highest-precedence file that defines it.
+- [`modelPicker`](settings-reference.md) holds one ordered list of rows plus a replace flag, so Claude Code never merges rows from two sources. It takes the whole value from the highest of managed settings, `--settings`, and user settings that defines it, and ignores the key in project and local settings. Requires Claude Code v2.1.242 or later.
 - [`availableModels`](settings-reference.md): when the [highest-precedence managed source](managed-settings.md) defines it, Claude Code applies that list as-is and ignores entries you add in user, project, or local settings, unless an app that embeds Claude Code supplies its own model list; see [Exceptions to managed settings precedence](#exceptions-to-managed-settings-precedence). Across non-managed scopes Claude Code merges the arrays as usual.
 
 ### [​](#precedence-examples) Precedence examples
@@ -259,7 +260,7 @@ Managed sources reach a running session on the schedule in the [delivery table](
 
 Two things keep a key in `.claude/settings.json` from applying for everyone who clones it:
 
-- **Claude Code ignores the key in a repository file.** Look for `User, local, or managed`, `User or managed`, `Managed`, or `Global config` in the Scope column of the [All settings](settings-reference.md) index; those keys never apply from the shared file, and `Global config` keys apply only from `~/.claude.json`.
+- **Claude Code ignores the key in a repository file.** Look for `User, local, or managed`, `User or managed`, `Managed`, or `Global config` in the Scope column of the [All settings](settings-reference.md) index; those keys never apply from the shared file, apart from [`autoContinueAtUsageLimit`](settings-reference.md), which a repository file can still switch off: while the file sets the key and no user, `--settings`, or managed value does, Claude Code reads the setting as off. `Global config` keys apply only from `~/.claude.json`.
 - **The key waits for trust.** `permissions.allow` rules, `permissions.additionalDirectories`, `extraKnownMarketplaces`, and most [`env`](settings-reference.md) values apply only after each teammate [trusts the folder](permissions.md). Until then they still see prompts and don’t get plugins from a marketplace the file declares. `deny` and `ask` rules apply right away.
 
 #### [​](#permission-rules-combine-differently-than-you-expected) Permission rules combine differently than you expected

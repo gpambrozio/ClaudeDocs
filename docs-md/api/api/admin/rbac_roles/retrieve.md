@@ -12,53 +12,65 @@ Retrieve an RBAC Role by ID.
 
 The RBAC Roles API is in beta and available to Claude Enterprise organizations only. Requests must send the `ce-user-management-2026-07-13` value in the `anthropic-beta` header.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-role\_id: string
+role\_id: string
 
 ID of the RBAC Role.
 
-##### Header ParametersExpand Collapse
+##### Headers
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
 To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-RbacRole object { id, created\_at, name, 2 more } 
+RbacRole object{ id, created\_at, name, 2 more }
 
-id: string
+id: string
 
 ID of the RBAC Role.
 
-created\_at: string
+
+
+created\_at: string
 
 RFC 3339 datetime string indicating when the RBAC Role was created.
 
-name: string
+formatdate-time
+
+name: string
 
 Name of the RBAC Role.
 
 
 
-type: "rbac\_role"
+type: "rbac\_role"
 
 Object type.
 
 For RBAC Roles, this is always `"rbac_role"`.
 
-updated\_at: string
+defaultrbac\_role
+
+
+
+updated\_at: string
 
 RFC 3339 datetime string indicating when the RBAC Role was last updated.
 
-Get RBAC Role
+formatdate-time
+
+### Get RBAC Role
+
+cURL
 
 
 

@@ -11,27 +11,33 @@ DELETE/v1/compliance/apps/chats/files/{claude\_file\_id}
 Permanently deletes a specific file. This is a destructive
 operation that cannot be undone.
 
-##### Path ParametersExpand Collapse
+##### Path parameters
 
-claude\_file\_id: string
+claude\_file\_id: string
 
 The file ID (tagged ID, e.g., claude\_file\_abc123)
 
-##### Header ParametersExpand Collapse
+##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
-##### ReturnsExpand Collapse
+##### Returns
 
-id: string
+id: string
 
 The ID of the file that was deleted
 
-type: optional "claude\_file\_deleted"
+
+
+type: optional "claude\_file\_deleted"
 
 Constant string confirming deletion
 
-Delete file
+defaultclaude\_file\_deleted
+
+### Delete file
+
+cURL
 
 
 

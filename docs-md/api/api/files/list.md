@@ -12,83 +12,115 @@ GET/v1/files
 
 List Files
 
-##### Query ParametersExpand Collapse
+##### Query parameters
 
-ids: optional array of string
+ids: optional array of string
 
 Restrict the result set to Files whose `id` is in this list. At most 100 entries (after de-duplication). Mutually exclusive with `page` and `limit`. When supplied, the response is always a single page (`next_page` is null). IDs that do not resolve to a visible File — including deleted Files — are silently omitted.
 
 
 
-limit: optional number
+limit: optional number
 
 Number of items to return per page.
 
 Defaults to `20`. Ranges from `1` to `1000`.
 
+default20
+
 maximum1000
 
 minimum1
 
-page: optional string
+page: optional string
 
 Opaque page cursor returned in a prior list response's `next_page`. Prefixed `page_`.
 
-##### ReturnsExpand Collapse
+##### Returns
 
 
 
-data: array of [FileMetadata](api/files.md) { id, created\_at, filename, 5 more } 
+data: array of [FileMetadata](api/http/files.md) { id, created\_at, filename, 5 more }
 
 List of file metadata objects.
 
 
 
-id: string
+id: string
 
 Unique object identifier.
 
 The format and length of IDs may change over time.
 
-created\_at: string
+
+
+created\_at: string
 
 RFC 3339 datetime string representing when the file was created.
 
-filename: string
-
-Original filename of the uploaded file.
-
-mime\_type: string
-
-MIME type of the file.
-
-size\_bytes: number
-
-Size of the file in bytes.
+formatdate-time
 
 
 
-type: "file"
+filename: string
+
+Original filename of the uploaded file.
+
+maxLength500
+
+minLength1
+
+
+
+mime\_type: string
+
+MIME type of the file.
+
+maxLength255
+
+minLength1
+
+
+
+size\_bytes: number
+
+Size of the file in bytes.
+
+minimum0
+
+
+
+type: "file"
 
 Object type.
 
 For files, this is always `"file"`.
 
-downloadable: optional boolean
+
+
+downloadable: optional boolean
 
 Whether the file can be downloaded.
 
-expires\_at: optional string or null
+defaultfalse
+
+
+
+expires\_at: optional string or null
 
 RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
 
-next\_page: optional string or null
+formatdate-time
+
+next\_page: optional string or null
 
 Opaque cursor for the next page. Supply as `?page=` to fetch the next page; null when there are no more results.
 
-List Files
+### List Files
 
-cURL
+cURL
+
+
 
 ```shiki
 curl https://api.anthropic.com/v1/files \

@@ -93,7 +93,7 @@ Build a localized support chatbot using a language-constrained system prompt.
 
 
 
-[Models overview](about-claude/models/overview.md)
+[Models overview](models/overview.md)
 
 Compare model tiers to balance multilingual quality against cost and latency.
 

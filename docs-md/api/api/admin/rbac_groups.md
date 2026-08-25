@@ -6,99 +6,111 @@
 
 # RBAC Groups
 
-##### [List RBAC Groups](api/admin/rbac_groups/list.md)
+##### [List RBAC Groups](api/http/admin/rbac_groups/list.md)
 
 GET/v1/organizations/rbac\_groups
 
-##### [Get RBAC Group](api/admin/rbac_groups/retrieve.md)
+##### [Get RBAC Group](api/http/admin/rbac_groups/retrieve.md)
 
 GET/v1/organizations/rbac\_groups/{group\_id}
 
-##### [Create RBAC Group](api/admin/rbac_groups/create.md)
+##### [Create RBAC Group](api/http/admin/rbac_groups/create.md)
 
 POST/v1/organizations/rbac\_groups
 
-##### [Update RBAC Group](api/admin/rbac_groups/update.md)
+##### [Update RBAC Group](api/http/admin/rbac_groups/update.md)
 
 POST/v1/organizations/rbac\_groups/{group\_id}
 
-##### [Delete RBAC Group](api/admin/rbac_groups/delete.md)
+##### [Delete RBAC Group](api/http/admin/rbac_groups/delete.md)
 
 DELETE/v1/organizations/rbac\_groups/{group\_id}
 
-##### ModelsExpand Collapse
+##### Models
 
 
 
-RbacGroup object { id, created\_at, name, 4 more } 
+RbacGroup object{ id, created\_at, name, 4 more }
 
-id: string
+id: string
 
 ID of the RBAC Group.
 
-created\_at: string
+
+
+created\_at: string
 
 RFC 3339 timestamp of when the RBAC Group was created.
 
-name: string
+formatdate-time
+
+name: string
 
 Name of the RBAC Group. Not uniqueness-enforced.
 
-roles: array of string or null
+roles: array of string or null
 
 RBAC Role IDs attached to this RBAC Group. Role attachment is managed in the admin settings and is read-only on this API. `null` means role data was temporarily unavailable — retry to distinguish from an empty list.
 
 
 
-source\_type: "direct" or "scim"
+source\_type: "direct" or "scim"
 
 How the RBAC Group was created: `"direct"` for groups created directly (for example, in the organization's admin settings), `"scim"` for groups provisioned by the identity provider.
 
 One of the following:
 
-"direct"
+"direct"
 
-"scim"
+"scim"
 
 
 
-type: "rbac\_group"
+type: "rbac\_group"
 
 Object type.
 
 For RBAC Groups, this is always `"rbac_group"`.
 
-updated\_at: string
-
-RFC 3339 timestamp of when the RBAC Group was last updated.
+defaultrbac\_group
 
 
 
-RbacGroupDeleted object { id, type } 
+updated\_at: string
 
-id: string
+RFC 3339 timestamp of when the RBAC Group was last updated.
+
+formatdate-time
+
+
+
+RbacGroupDeleted object{ id, type }
+
+id: string
 
 ID of the RBAC Group.
 
 
 
-type: "rbac\_group\_deleted"
+type: "rbac\_group\_deleted"
 
 Deleted object type.
 
 For RBAC Groups, this is always `"rbac_group_deleted"`.
 
-#### RBAC GroupsMembers
+defaultrbac\_group\_deleted
 
-##### [List RBAC Group Members](api/admin/rbac_groups/members/list.md)
+#### RBAC Groups[Members](api/http/admin/rbac_groups/members.md)
+
+##### [List RBAC Group Members](api/http/admin/rbac_groups/members/list.md)
 
 GET/v1/organizations/rbac\_groups/{group\_id}/members
 
-##### [Add RBAC Group Member](api/admin/rbac_groups/members/create.md)
+##### [Add RBAC Group Member](api/http/admin/rbac_groups/members/create.md)
 
 POST/v1/organizations/rbac\_groups/{group\_id}/members
 
-##### [Remove RBAC Group Member](api/admin/rbac_groups/members/delete.md)
+##### [Remove RBAC Group Member](api/http/admin/rbac_groups/members/delete.md)
 
 DELETE/v1/organizations/rbac\_groups/{group\_id}/members/{user\_id}
 

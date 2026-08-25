@@ -6,112 +6,43 @@
 
 # Artifacts
 
-##### [List Code Artifacts](api/compliance/code/artifacts/list.md)
+##### [List Code Artifacts](api/http/compliance/code/artifacts/list.md)
 
 GET/v1/compliance/apps/code/artifacts
 
-##### [Download Code Artifact Version Content](api/compliance/code/artifacts/retrieve_version.md)
+##### [Download Code Artifact Version Content](api/http/compliance/code/artifacts/retrieve_version.md)
 
 GET/v1/compliance/apps/code/artifacts/{artifact\_id}/versions/{version\_id}
 
-##### [Delete Code Artifact](api/compliance/code/artifacts/delete.md)
+##### [Delete Code Artifact](api/http/compliance/code/artifacts/delete.md)
 
 DELETE/v1/compliance/apps/code/artifacts/{artifact\_id}
 
-##### ModelsExpand Collapse
+##### Models
 
 
 
-ArtifactListResponse object { id, organization\_uuid, owner\_user\_id, 5 more } 
+ArtifactListResponse object{ id, organization\_uuid, owner\_user\_id, 5 more }
 
 A hosted site published via Claude Code.
 
-id: string
-
-Artifact identifier (tagged ID)
-
-organization\_uuid: string
-
-Organization UUID this Artifact belongs to
-
-owner\_user\_id: string or null
-
-Artifact owner's user identifier (tagged ID), or null for Artifacts published by an agent session rather than a user account. When set, it survives after the owner's account is deleted or the owner leaves every organization under the parent.
-
-published\_version\_id: string or null
-
-Identifier of the version a non-owner viewer would render when `read_mode` permits them — the version the owner has pinned for non-owner readers if one is pinned, otherwise the owner's latest. When `read_mode` is `owner` no non-owner renders any version; the field still reports which version would be served were read\_mode widened.
-
 
 
-read\_mode: "org" or "owner" or "public" or "users"
-
-Who can view this Artifact: only its owner, a named set of users, every member of its organization, or anyone on the internet (`public`)
-
-One of the following:
-
-"org"
-
-"owner"
-
-"public"
-
-"users"
-
-updated\_at: string or null
-
-Artifact last update timestamp, or null for Artifacts published before this field was recorded
-
-
-
-user: object { id, email\_address }  or null
-
-The user who owns a Code Artifact.
-
-Fields that reference this type are null when the Artifact was
-published by an agent session rather than a user account, when the
-owner's account has been deleted, or when the owner is no longer a
-member of an organization the key may read.
-
-id: string
-
-User identifier (tagged ID)
-
-email\_address: string
-
-User's email address
-
-
-
-versions: array of object { id, created\_at, name } 
-
-Up to roughly 20 most-recently-published versions of this Artifact (older versions are not retained). Metadata only — use `GET /v1/compliance/apps/code/artifacts/{artifact_id}/versions/{version_id}` to download a version's content.
-
-id: string
-
-Opaque version identifier
-
-created\_at: string or null
-
-When this version was published
-
-name: string
-
-Artifact title at this version. Falls back to the version identifier when the title for an older version is no longer retained.
-
-
-
-ArtifactDeleteResponse object { id, type } 
+ArtifactDeleteResponse object{ id, type }
 
 Response for deleting a Code Artifact.
 
-id: string
+id: string
 
 The ID of the Artifact that was deleted
 
-type: "code\_artifact\_deleted"
+
+
+type: "code\_artifact\_deleted"
 
 Constant string confirming deletion
+
+defaultcode\_artifact\_deleted
 
 ---
 
