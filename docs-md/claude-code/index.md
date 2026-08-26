@@ -79,7 +79,7 @@ A standalone app for running Claude Code outside your IDE or terminal. Review di
 - [Windows ARM64](https://claude.ai/api/desktop/win32/arm64/setup/latest/redirect?utm_source=claude_code&utm_medium=docs)
 - On Ubuntu or Debian, where the app is in beta, install it with apt by following the [Linux install instructions](desktop-linux.md)
 
-After installing, launch Claude, sign in, and click the **Code** tab to start coding. A [paid subscription](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=overview_desktop_pricing) is required.[Learn more about the desktop app →](desktop-quickstart.md)
+After installing, launch Claude, sign in, and click the **Code** tab to start coding. The app includes Claude Code, so you don’t need to install the CLI separately. A [paid subscription](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=overview_desktop_pricing) is required.[Learn more about the desktop app →](desktop-quickstart.md)
 
 Run Claude Code in your browser with no local setup. Kick off long-running tasks and check back when they’re done, work on repos you don’t have locally, or run multiple tasks in parallel. Available on desktop browsers and [the Claude app for iOS and Android](mobile.md).Start coding at [claude.ai/code](https://claude.ai/code).[Get started on the web →](web-quickstart.md)
 

@@ -4,7 +4,7 @@
 
 
 
-This guide covers the prompting patterns specific to Claude Opus 4.8. For the API changes involved in moving from Claude Opus 4.8 to the latest Opus model, see [Migrating to Claude Opus 5 from Claude Opus 4.8](about-claude/models/migration-guide.md). For techniques that apply across all current Claude models, see [Prompting best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
+This guide covers the prompting patterns specific to Claude Opus 4.8. For the API changes involved in moving from Claude Opus 4.8 to the latest Opus model, see [Migrating to Claude Opus 5 from Claude Opus 4.8](models/opus-5/migration-guide.md). For techniques that apply across all current Claude models, see [Prompting best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
 Claude Opus 4.8 has particular strengths in long-horizon agentic work, knowledge work, vision, and memory tasks. It performs well out of the box on existing Claude Opus 4.7 prompts. The following patterns cover the behaviors that most often require tuning.
 

@@ -60,13 +60,14 @@ The built-in default depends on how you run Claude Code, on your plan, and on wh
 | How you run Claude Code | Built-in starting permission mode |
 | --- | --- |
 | Any settings file sets `disableAutoMode` to `"disable"` | `default` |
-| [Feature-flag fetching](env-vars.md) is off, or this is your [first session after you install Claude Code or upgrade to a version that adds this default](env-vars.md) | `default` |
+| [Feature-flag fetching](env-vars.md) is off | `default` |
+| Your [first session after you install Claude Code or upgrade](env-vars.md) to a version that adds this default, unless a non-interactive session picks the flags up in time | `default` |
 | `claude -p` or the [Agent SDK](agent-sdk/permissions.md) | `default` |
 | Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry, [Claude Platform on AWS](claude-platform-on-aws.md), or a signed-in [Claude apps gateway](claude-apps-gateway.md) session | `default` |
 | A Pro, Max, or Team plan, in a terminal or through the [VS Code extension](vs-code.md) | `auto` |
 | An Enterprise plan or a Claude Console API key | `default` |
 
-In those same two cases, feature-flag fetching off or the first session after an install or upgrade, the VS Code extension ignores every settings file when choosing the starting permission mode and uses `default`.
+When feature-flag fetching is off, or in a [first session after an install or upgrade](env-vars.md) where the flags haven’t arrived yet, the VS Code extension ignores every settings file when choosing the starting permission mode.
 When the flag, a settings file, or the built-in default selects `auto` but auto mode isn’t available to the session, Claude Code starts the session in Manual instead. Auto mode is unavailable when a settings file [turns it off](#eliminate-prompts-with-auto-mode) or the model doesn’t support it.
 The first time the built-in default starts one of your sessions in auto mode, Claude Code shows a notice that links to this page:
 

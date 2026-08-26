@@ -705,7 +705,7 @@ For detailed migration steps, see the [Migration guide](about-claude/models/migr
 
 ###  Migrating to Claude Sonnet 5 from Claude Sonnet 4.5 or earlier
 
-See [Migrating to Claude Sonnet 5 from Claude Sonnet 4.5 or earlier](about-claude/models/migration-guide.md) in the migration guide, which covers the effort default change and the removal of manual extended thinking (`budget_tokens`).
+See [Migrating to Claude Sonnet 5 from Claude Sonnet 4.5 or earlier](models/sonnet-5/migration-guide.md) in the migration guide, which covers the effort default change and the removal of manual extended thinking (`budget_tokens`).
 
 ##  Next steps
 

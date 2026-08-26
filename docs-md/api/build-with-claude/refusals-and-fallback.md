@@ -370,7 +370,7 @@ How SDK middleware works, including the refusal-fallback helper.
 
 
 
-[Migration guide](about-claude/models/migration-guide.md)
+[Migration guide](models/fable-5/migration-guide.md)
 
 Move an existing application to Claude Fable 5.
 

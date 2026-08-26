@@ -102,7 +102,7 @@ Only correct an earlier statement when the error would change the user's code, c
 
 ##  Running with thinking disabled
 
-Claude Opus 5 runs with [thinking](build-with-claude/thinking.md) on by default, and thinking can be disabled only at [effort](build-with-claude/effort.md) `high` or below; see the [migration guide](about-claude/models/migration-guide.md). With thinking disabled, two artifacts can occasionally appear in the model's visible output. The primary mitigation for both is to keep thinking enabled and control token cost with lower effort levels instead of disabling thinking: for most tasks, thinking enabled at `low` effort performs better than thinking disabled at similar cost.
+Claude Opus 5 runs with [thinking](build-with-claude/thinking.md) on by default, and thinking can be disabled only at [effort](build-with-claude/effort.md) `high` or below; see the [migration guide](models/opus-5/migration-guide.md). With thinking disabled, two artifacts can occasionally appear in the model's visible output. The primary mitigation for both is to keep thinking enabled and control token cost with lower effort levels instead of disabling thinking: for most tasks, thinking enabled at `low` effort performs better than thinking disabled at similar cost.
 
 **Tool calls as text.** With thinking disabled, the model occasionally writes a tool call into its user-facing text instead of emitting a structured `tool_use` block. The turn completes normally and the call never runs, and in agentic loops the leaked text stays in the conversation history, so later turns are affected as well. This is most common on tool-heavy workloads such as search.
 

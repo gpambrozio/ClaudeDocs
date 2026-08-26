@@ -98,7 +98,6 @@ Each tab lists what is unavailable or partially supported on that provider, with
 - [Desktop](desktop.md): only via [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
 - [Auto mode](auto-mode-config.md): Sonnet 5, Opus 4.7 or later, and Fable 5 only
 - [`/loop`](scheduled-tasks.md): explicit intervals only
-- [`/code-review`](code-review.md): runs when you type it; Claude doesn’t start it on its own
 - [Zero Data Retention](zero-data-retention.md): subject to your AWS agreement
 
 **Alternatives:** for scheduling, use [`/loop`](scheduled-tasks.md) with an explicit interval instead of `/schedule`. For cloud sessions, use [GitHub Actions](github-actions.md) or [GitLab CI/CD](gitlab-ci-cd.md). For web lookups, use the [WebFetch tool](tools-reference.md) with a specific URL.
@@ -106,7 +105,6 @@ Each tab lists what is unavailable or partially supported on that provider, with
 **Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription), plus [fast mode](fast-mode.md), [Advisor](advisor.md), [Channels](channels.md), [cross-session messaging](cross-session-messaging.md), [GitHub Actions](github-actions.md), the [analytics dashboard](analytics.md), [server-managed settings](server-managed-settings.md), and the [`/design-sync`, `/import`, and `/radio` commands](commands.md).**Available where Amazon Bedrock is not:** [web search](tools-reference.md).**Partial support:**
 
 - [`/loop`](scheduled-tasks.md): explicit intervals only
-- [`/code-review`](code-review.md): runs when you type it; Claude doesn’t start it on its own
 
 **Alternatives:** for scheduling, use [`/loop`](scheduled-tasks.md) with an explicit interval instead of `/schedule`. For cloud sessions, use [GitLab CI/CD](gitlab-ci-cd.md).
 
@@ -116,7 +114,6 @@ Each tab lists what is unavailable or partially supported on that provider, with
 - [Web search](tools-reference.md): Claude 4 models and later
 - [Auto mode](auto-mode-config.md): Sonnet 5, Opus 4.7 or later, and Fable 5 only
 - [`/loop`](scheduled-tasks.md): explicit intervals only
-- [`/code-review`](code-review.md): runs when you type it; Claude doesn’t start it on its own
 - [Zero Data Retention](zero-data-retention.md): subject to your Google Cloud agreement
 
 **Alternatives:** for scheduling, use [`/loop`](scheduled-tasks.md) with an explicit interval instead of `/schedule`. For cloud sessions, use [GitHub Actions](github-actions.md) or [GitLab CI/CD](gitlab-ci-cd.md).
@@ -127,7 +124,6 @@ Each tab lists what is unavailable or partially supported on that provider, with
 - [Web search](tools-reference.md): [deployments hosted on Anthropic](build-with-claude/claude-in-microsoft-foundry.md) only
 - [Auto mode](auto-mode-config.md): Sonnet 5, Opus 4.7 or later, and Fable 5 only
 - [`/loop`](scheduled-tasks.md): explicit intervals only
-- [`/code-review`](code-review.md): runs when you type it; Claude doesn’t start it on its own
 - [Zero Data Retention](zero-data-retention.md): subject to your Azure agreement
 
 **Alternatives:** for scheduling, use [`/loop`](scheduled-tasks.md) with an explicit interval instead of `/schedule`. For cloud sessions, use [GitHub Actions](github-actions.md).

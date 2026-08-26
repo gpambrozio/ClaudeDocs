@@ -309,12 +309,6 @@ The review runs in the background by default; before v2.1.218, it ran inside you
 ### [​](#let-claude-start-the-review) Let Claude start the review
 
 Claude can start `/code-review` on its own. Ask it to review your changes in plain language and it can run the skill without you typing the command, and a [scheduled task](scheduled-tasks.md) with `/code-review` as its prompt runs the review.
-Exceptions include the following sessions, where `/code-review` runs only when you type it yourself and a scheduled `/code-review` reaches Claude as plain text instead of running the review:
-
-- **Cloud providers**: sessions on Amazon Bedrock, Claude Platform on AWS, Google Cloud’s Agent Platform, or Microsoft Foundry, unless a host platform that embeds Claude Code sets [`CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`](env-vars.md)
-- **Claude apps gateway**: sessions that connect through the [Claude apps gateway](claude-apps-gateway.md)
-- **Privacy environment variables**: sessions that opt out of telemetry or feature-flag fetching with [`DISABLE_TELEMETRY`, `DO_NOT_TRACK`, `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`, or `DISABLE_GROWTHBOOK`](env-vars.md)
-
 A scheduled task never launches the [cloud review](#escalate-to-ultrareview), so schedule `/code-review` without the `ultra` argument.
 To stop both Claude and scheduled tasks from starting the review while keeping `/code-review` available for you to type, add a [`skillOverrides`](skills.md) entry to a [settings file](settings.md) such as `~/.claude/settings.json`:
 
@@ -326,7 +320,7 @@ To stop both Claude and scheduled tasks from starting the review while keeping `
 }
 ```
 
-From v2.1.215 through v2.1.222, Claude never started `/code-review` on its own in any configuration.
+Before v2.1.246, Claude started `/code-review` on its own only where a feature flag fetched from Anthropic turned it on. In [sessions that don’t fetch feature flags](env-vars.md), `/code-review` ran only when you typed it, and a scheduled `/code-review` reached Claude as plain text.
 
 ### [​](#escalate-to-ultrareview) Escalate to ultrareview
 

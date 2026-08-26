@@ -131,7 +131,7 @@ model = "claude-opus-4-8"  # Before
 model = "claude-opus-5"  # After
 ```
 
-Then review the two [behavior changes](#behavior-changes): thinking is on by default, and disabling thinking with effort `xhigh` or `max` returns a 400 error. See the [migration guide](about-claude/models/migration-guide.md) for step-by-step instructions.
+Then review the two [behavior changes](#behavior-changes): thinking is on by default, and disabling thinking with effort `xhigh` or `max` returns a 400 error. See the [migration guide](models/opus-5/migration-guide.md) for step-by-step instructions.
 
 ##  Next steps
 

@@ -62,6 +62,7 @@ Every key below links to its entry. Scope lists the [files](settings.md) it can 
 | [`disableClaudeAiConnectors`](#disableclaudeaiconnectors) | Turn off [claude.ai connectors](mcp.md) so Claude Code doesn’t fetch them | MCP | Any file |
 | [`disableCommandPluginSources`](#disablecommandpluginsources) | Block [plugins](plugins.md) that install by running a marketplace-declared command | Plugins and skills | Managed |
 | [`disableDeepLinkRegistration`](#disabledeeplinkregistration) | Stop Claude Code from registering the [`claude-cli://` handler](deep-links.md) | Remote, desktop, and notifications | Any file |
+| [`disableDesktopLocalSessions`](#disabledesktoplocalsessions) | Turn off [Desktop Code sessions](desktop.md) that run on the device, leaving SSH to other hosts and cloud | Remote, desktop, and notifications | Managed |
 | [`disabledMcpjsonServers`](#disabledmcpjsonservers) | Reject specific servers from a project’s [`.mcp.json`](mcp.md) | MCP | Any file |
 | [`disableMobileSimulatorTools`](#disablemobilesimulatortools) | Block Claude’s tools in the [desktop](desktop.md) iOS Simulator pane | Tools | Managed |
 | [`disableRemoteControl`](#disableremotecontrol) | Turn off [Remote Control](remote-control.md) everywhere it can start | Remote, desktop, and notifications | Any file |
@@ -4398,6 +4399,27 @@ settings.json
   "disableDeepLinkRegistration": "disable"
 }
 ```
+
+### [​](#disabledesktoplocalsessions) `disableDesktopLocalSessions`
+
+Turn off Code sessions that run on the device in the [desktop app](desktop.md), for deployments where developers should work on remote machines over SSH. In the Code tab, the **Local** environment stays in the environment dropdown but is grayed out and can’t be selected, with a tooltip saying your organization turned it off; on Windows the WSL entry is grayed out the same way, though whether WSL sessions run on a managed device at all is [governed separately](admin-setup.md). New sessions default to the first [SSH connection](desktop.md) if one is configured, and the app refuses to start or resume a session on the device, including an SSH connection back to the same machine. SSH sessions to other hosts and cloud sessions are unaffected. The desktop app reads this key; the terminal CLI ignores it.
+
+- **Scope**: [`Managed`](#scopes)
+- **Type**: Boolean; only the JSON Boolean `true` takes effect
+  - `true`: the desktop app offers no on-device Code sessions; existing local sessions stay listed but can’t continue
+  - `false`: local sessions stay available
+- **Default**: unset, so local sessions are available
+
+managed-settings.json
+
+```shiki
+{
+  "disableDesktopLocalSessions": true
+}
+```
+
+The desktop app ignores any other value, and a value that isn’t a Boolean, such as the string `"true"` or `1`, also logs a warning. Pair it with [`sshConfigs`](#sshconfigs) so users land on a working connection, and with [`sshHostAllowlist`](#sshhostallowlist) to limit which hosts they can reach. See [Local sessions on managed devices](desktop.md).
+Claude Desktop supplies Code sessions with policy derived from your desktop configuration, for example the egress allowlist, filesystem sandbox, and MCP restrictions in third-party deployments. Claude Code ignores those parent settings whenever an [admin source](managed-settings.md) is present: server-managed settings, an MDM or OS-level policy, or a managed settings file. Deploying this key through one of those on a device that had none before, as in third-party deployments, therefore stops the desktop-derived policies from applying. [Let an embedding host add policy](managed-settings.md) covers when parent settings can still merge; this holds for any key you deploy that way, not only this one.
 
 ### [​](#disableremotecontrol) `disableRemoteControl`
 

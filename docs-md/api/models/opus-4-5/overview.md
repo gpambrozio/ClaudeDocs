@@ -92,7 +92,7 @@ Platforms
 
 ##  Resources
 
-[Migrate to Claude Opus 5](about-claude/models/migration-guide.md)
+[Migrate to Claude Opus 5](models/opus-5/migration-guide.md)
 
 What changes when moving from Claude Opus 4.6 and earlier Opus models to Claude Opus 5.
 

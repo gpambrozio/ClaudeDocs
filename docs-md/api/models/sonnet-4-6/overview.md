@@ -92,7 +92,7 @@ Platforms
 
 ##  Resources
 
-[Migrate to Claude Sonnet 5](about-claude/models/migration-guide.md)
+[Migrate to Claude Sonnet 5](models/sonnet-5/migration-guide.md)
 
 What changes when moving from Claude Sonnet 4.6 to Claude Sonnet 5.
 
