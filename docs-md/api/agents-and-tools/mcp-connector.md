@@ -676,9 +676,7 @@ The previous version of the MCP connector included tool configuration directly i
 
 |  |  |
 | --- | --- |
-| Supported platforms | - Claude APIBeta - Claude Platform on AWSBeta - Microsoft Foundry[1](#compat-fn-1)Beta |
-
-1. On [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md), the MCP connector requires a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md). [↩](#compat-fnref-1)
+| Supported platforms | - Claude APIBeta - Claude Platform on AWSBeta - Microsoft FoundryBeta |
 
 Was this page helpful?
 

@@ -107,7 +107,7 @@ For the full feature list with Google Cloud availability, see [Features overview
 - [Messages API](api/messages/create.md)
 - [Prompt caching](build-with-claude/prompt-caching.md)
 - [Thinking](build-with-claude/thinking.md)
-- [Tool use](agents-and-tools/tool-use/overview.md), including the [Bash tool](agents-and-tools/tool-use/bash-tool.md), [Computer use tool](agents-and-tools/tool-use/computer-use-tool.md), [Memory tool](agents-and-tools/tool-use/memory-tool.md), and [Text editor tool](agents-and-tools/tool-use/text-editor-tool.md)
+- [Tool use](agents-and-tools/tool-use/overview.md), including the [Bash tool](agents-and-tools/tool-use/bash-tool.md), [Browser use tool](agents-and-tools/tool-use/browser-use-tool.md), [Computer use tool](agents-and-tools/tool-use/computer-use-tool.md), [Memory tool](agents-and-tools/tool-use/memory-tool.md), and [Text editor tool](agents-and-tools/tool-use/text-editor-tool.md)
 - [Web search tool](agents-and-tools/tool-use/web-search-tool.md)
 - [Citations](build-with-claude/citations.md)
 - [Structured outputs](build-with-claude/structured-outputs.md)
@@ -120,7 +120,6 @@ For the full feature list with Google Cloud availability, see [Features overview
 - API endpoints (Message Batches, Models, Admin, Compliance, Usage and Cost)
 - Claude Managed Agents
 - Server-side fallback (the [`fallbacks` parameter](build-with-claude/refusals-and-fallback.md); use the [client-side fallback pattern](build-with-claude/refusals-and-fallback.md) instead)
-- [Computer use](agents-and-tools/tool-use/computer-use-tool.md) and [browser use](agents-and-tools/tool-use/browser-use-tool.md) toolsets (`computer_toolset_20260801` and `browser_toolset_20260801` are not currently available on Google Cloud; the beta computer use tool versions remain available)
 
 ###  Context window
 

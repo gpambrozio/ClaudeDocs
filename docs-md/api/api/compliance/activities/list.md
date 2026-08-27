@@ -18,7 +18,7 @@ compliance activities that can be filtered by various criteria.
 
 
 
-activity\_types: optional array of "abuse\_decision\_received" or "account\_deleted" or "admin\_api\_key\_created" or 474 more
+activity\_types: optional array of "abuse\_decision\_received" or "account\_deleted" or "admin\_api\_key\_created" or 480 more
 
 Filter activities by type. See the response `data` schema for the additional fields each type returns. Cannot be combined with `exclude_activity_types[]`.
 
@@ -196,6 +196,14 @@ A Claude Code session's settings were updated.
 
 An attempt to access an artifact failed.
 
+"claude\_artifact\_commented"
+
+Comment activity on a published artifact: a comment was added, a thread's resolved state was changed, or a thread was deleted. The actor is the user who performed the action; the comment text itself is stored with the artifact and is not part of this record.
+
+"claude\_artifact\_comments\_viewed"
+
+An artifact's comments were viewed.
+
 "claude\_artifact\_created"
 
 An artifact was created.
@@ -338,7 +346,7 @@ A Claude Code Security scan project was shared with the organization or made pri
 
 "claude\_code\_security\_scan\_run\_updated"
 
-A single Claude Code Security scan run was archived or unarchived.
+A single Claude Code Security scan run was archived, unarchived, or resumed after a billing pause.
 
 "claude\_code\_security\_scan\_schedule\_deleted"
 
@@ -411,6 +419,10 @@ Command was deleted.
 "claude\_command\_replaced"
 
 Command was replaced.
+
+"claude\_enterprise\_upgrade\_credit\_updated"
+
+An organization admin cancelled, or turned back on, the monthly usage credit the organization receives for upgrading from the Team plan to the Enterprise plan, together with the recurring monthly charge that accompanies it.
 
 "claude\_file\_access\_failed"
 
@@ -1314,11 +1326,11 @@ Organization users were listed.
 
 "org\_work\_across\_apps\_disabled"
 
-Organization Work Across Apps was disabled.
+The organization's "Let Claude work across apps" setting was turned off.
 
 "org\_work\_across\_apps\_enabled"
 
-Organization Work Across Apps was enabled.
+The organization's "Let Claude work across apps" setting was turned on.
 
 "organization\_address\_updated"
 
@@ -1459,6 +1471,18 @@ A workspace's clearance program assignment was created or updated.
 "platform\_cost\_report\_viewed"
 
 The cost report was viewed.
+
+"platform\_dream\_archived"
+
+A Dream (asynchronous memory-consolidation job) was archived.
+
+"platform\_dream\_cancelled"
+
+A Dream (asynchronous memory-consolidation job) was cancelled before it completed.
+
+"platform\_dream\_created"
+
+A Dream (asynchronous memory-consolidation job) was created.
 
 "platform\_federated\_authentication"
 
@@ -2012,7 +2036,7 @@ formatdate-time
 
 
 
-exclude\_activity\_types: optional array of "abuse\_decision\_received" or "account\_deleted" or "admin\_api\_key\_created" or 474 more
+exclude\_activity\_types: optional array of "abuse\_decision\_received" or "account\_deleted" or "admin\_api\_key\_created" or 480 more
 
 Exclude activities of these types. Cannot be combined with `activity_types[]`.
 
@@ -2190,6 +2214,14 @@ A Claude Code session's settings were updated.
 
 An attempt to access an artifact failed.
 
+"claude\_artifact\_commented"
+
+Comment activity on a published artifact: a comment was added, a thread's resolved state was changed, or a thread was deleted. The actor is the user who performed the action; the comment text itself is stored with the artifact and is not part of this record.
+
+"claude\_artifact\_comments\_viewed"
+
+An artifact's comments were viewed.
+
 "claude\_artifact\_created"
 
 An artifact was created.
@@ -2332,7 +2364,7 @@ A Claude Code Security scan project was shared with the organization or made pri
 
 "claude\_code\_security\_scan\_run\_updated"
 
-A single Claude Code Security scan run was archived or unarchived.
+A single Claude Code Security scan run was archived, unarchived, or resumed after a billing pause.
 
 "claude\_code\_security\_scan\_schedule\_deleted"
 
@@ -2405,6 +2437,10 @@ Command was deleted.
 "claude\_command\_replaced"
 
 Command was replaced.
+
+"claude\_enterprise\_upgrade\_credit\_updated"
+
+An organization admin cancelled, or turned back on, the monthly usage credit the organization receives for upgrading from the Team plan to the Enterprise plan, together with the recurring monthly charge that accompanies it.
 
 "claude\_file\_access\_failed"
 
@@ -3308,11 +3344,11 @@ Organization users were listed.
 
 "org\_work\_across\_apps\_disabled"
 
-Organization Work Across Apps was disabled.
+The organization's "Let Claude work across apps" setting was turned off.
 
 "org\_work\_across\_apps\_enabled"
 
-Organization Work Across Apps was enabled.
+The organization's "Let Claude work across apps" setting was turned on.
 
 "organization\_address\_updated"
 
@@ -3453,6 +3489,18 @@ A workspace's clearance program assignment was created or updated.
 "platform\_cost\_report\_viewed"
 
 The cost report was viewed.
+
+"platform\_dream\_archived"
+
+A Dream (asynchronous memory-consolidation job) was archived.
+
+"platform\_dream\_cancelled"
+
+A Dream (asynchronous memory-consolidation job) was cancelled before it completed.
+
+"platform\_dream\_created"
+
+A Dream (asynchronous memory-consolidation job) was created.
 
 "platform\_federated\_authentication"
 
@@ -3998,7 +4046,7 @@ Alias for `actor_ids[]`, for consistency with other compliance routes. If both a
 
 
 
-data: optional array of object{ actor, decision, id, 5 more } or object{ actor, id, created\_at, 3 more } or object{ actor, admin\_api\_key\_id, scopes, 5 more } or 474 more
+data: optional array of object{ actor, decision, id, 5 more } or object{ actor, id, created\_at, 3 more } or object{ actor, admin\_api\_key\_id, scopes, 5 more } or 480 more
 
 List of activity records. Each element's `type` field identifies which activity it is and which additional fields are present.
 
@@ -4069,6 +4117,18 @@ Activity logged when a new API key is created.
 ClaudeArtifactAccessFailed object{ actor, id, claude\_artifact\_id, 6 more }
 
 An attempt to access an artifact failed.
+
+
+
+ClaudeArtifactCommented object{ actor, claude\_artifact\_id, comment\_action, 8 more }
+
+Comment activity on a published artifact: a comment was added, a thread's resolved state was changed, or a thread was deleted. The actor is the user who performed the action; the comment text itself is stored with the artifact and is not part of this record.
+
+
+
+ClaudeArtifactCommentsViewed object{ actor, claude\_artifact\_id, id, 5 more }
+
+An artifact's comments were viewed.
 
 
 
@@ -4482,7 +4542,7 @@ A Claude Code Security scan project was shared with the organization or made pri
 
 ClaudeCodeSecurityScanRunUpdated object{ action, actor, scan\_id, 5 more }
 
-A single Claude Code Security scan run was archived or unarchived.
+A single Claude Code Security scan run was archived, unarchived, or resumed after a billing pause.
 
 
 
@@ -4573,6 +4633,12 @@ A user's Claude Code plugin selections — which plugins are installed and enabl
 ClaudeCodeUserSettingsUpdated object{ actor, deleted\_all, id, 10 more }
 
 A user's synced Claude Code settings were updated or deleted on Anthropic servers.
+
+
+
+ClaudeEnterpriseUpgradeCreditUpdated object{ action, actor, id, 4 more }
+
+An organization admin cancelled, or turned back on, the monthly usage credit the organization receives for upgrading from the Team plan to the Enterprise plan, together with the recurring monthly charge that accompanies it.
 
 
 
@@ -5033,7 +5099,7 @@ A request proceeded without Inference hooks inspection because a verdict could n
 
 
 
-IntegrationUserConnected object{ actor, id, created\_at, 6 more }
+IntegrationUserConnected object{ actor, id, created\_at, 7 more }
 
 User connected to an integration.
 
@@ -5740,13 +5806,13 @@ Organization users were listed.
 
 OrgWorkAcrossAppsDisabled object{ actor, id, created\_at, 5 more }
 
-Organization Work Across Apps was disabled.
+The organization's "Let Claude work across apps" setting was turned off.
 
 
 
 OrgWorkAcrossAppsEnabled object{ actor, id, created\_at, 5 more }
 
-Organization Work Across Apps was enabled.
+The organization's "Let Claude work across apps" setting was turned on.
 
 
 
@@ -5963,6 +6029,24 @@ A workspace's clearance program assignment was created or updated.
 PlatformCostReportViewed object{ actor, id, created\_at, 3 more }
 
 The cost report was viewed.
+
+
+
+PlatformDreamArchived object{ actor, dream\_id, id, 5 more }
+
+A Dream (asynchronous memory-consolidation job) was archived.
+
+
+
+PlatformDreamCancelled object{ actor, dream\_id, id, 5 more }
+
+A Dream (asynchronous memory-consolidation job) was cancelled before it completed.
+
+
+
+PlatformDreamCreated object{ actor, dream\_id, id, 5 more }
+
+A Dream (asynchronous memory-consolidation job) was created.
 
 
 

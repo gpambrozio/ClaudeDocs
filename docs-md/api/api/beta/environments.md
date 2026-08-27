@@ -114,7 +114,7 @@ Permits outbound access to MCP server endpoints configured on the agent, beyond 
 
 allow\_package\_managers: optional boolean or null
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
 
 allowed\_hosts: optional array of string or null
 
@@ -165,6 +165,8 @@ BetaPackagesParams object{ apt, cargo, gem, 4 more }
 Specify packages (and optionally their versions) available in this environment.
 
 When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
 
 apt: optional array of string or null
 

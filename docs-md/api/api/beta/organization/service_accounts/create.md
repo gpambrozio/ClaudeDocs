@@ -1,0 +1,228 @@
+# Create Service Account
+
+Copy page
+
+
+
+cURL
+
+# Create Service Account
+
+POST/v1/organizations/service\_accounts
+
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+
+Create a service account.
+
+A service account is a named workload identity that federation rules
+target. `organization_role` is `developer` (default) or `admin`; a rule
+may only be created or retargeted to grant `org:admin` scope when the
+target's `organization_role` is `admin`. Creating an `admin`-role service
+account requires an interactive credential (a user OAuth token or a
+Console session) — a workload may only create `developer`-role service
+accounts.
+
+##### Headers
+
+
+
+"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+
+Optional header to specify the beta version(s) you want to use.
+
+One of the following:
+
+string
+
+
+
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
+
+One of the following:
+
+"message-batches-2024-09-24"
+
+"prompt-caching-2024-07-31"
+
+"computer-use-2024-10-22"
+
+"computer-use-2025-01-24"
+
+"pdfs-2024-09-25"
+
+"token-counting-2024-11-01"
+
+"token-efficient-tools-2025-02-19"
+
+"output-128k-2025-02-19"
+
+"files-api-2025-04-14"
+
+"mcp-client-2025-04-04"
+
+"mcp-client-2025-11-20"
+
+"dev-full-thinking-2025-05-14"
+
+"interleaved-thinking-2025-05-14"
+
+"code-execution-2025-05-22"
+
+"extended-cache-ttl-2025-04-11"
+
+"context-1m-2025-08-07"
+
+"context-management-2025-06-27"
+
+"model-context-window-exceeded-2025-08-26"
+
+"skills-2025-10-02"
+
+"fast-mode-2026-02-01"
+
+"output-300k-2026-03-24"
+
+"user-profiles-2026-03-24"
+
+"user-profiles-2026-08-18"
+
+"advisor-tool-2026-03-01"
+
+"managed-agents-2026-04-01"
+
+"cache-diagnosis-2026-04-07"
+
+"dreaming-2026-04-21"
+
+"thinking-token-count-2026-05-13"
+
+"server-side-fallback-2026-06-01"
+
+"server-side-fallback-2026-07-01"
+
+"fallback-credit-2026-06-01"
+
+"fallback-credit-2026-07-01"
+
+"agent-memory-2026-07-22"
+
+"mid-conversation-tool-changes-2026-07-01"
+
+"compact-2026-01-12"
+
+"computer-use-2025-11-24"
+
+"mcp-tunnels-2026-06-22"
+
+"structured-outputs-2025-11-13"
+
+"task-budgets-2026-03-13"
+
+"thinking-display-updates-2026-08-18"
+
+"ce-user-management-2026-07-13"
+
+##### Body
+
+
+
+name: string
+
+Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
+
+maxLength255
+
+minLength1
+
+
+
+description: optional string or null
+
+Optional free-text description.
+
+maxLength2000
+
+
+
+organization\_role: optional "admin" or "developer"
+
+Org-level role. Defaults to `developer`.
+
+One of the following:
+
+"admin"
+
+"developer"
+
+##### Returns
+
+
+
+BetaServiceAccount object{ id, archived\_at, archived\_by\_actor\_id, 8 more }
+
+Named non-human identity within the caller's organization.
+
+A service account is a pure identity: name + org. Authorization lives on
+whatever references it (federation rules).
+
+### Create Service Account
+
+cURL
+
+
+
+```shiki
+curl https://api.anthropic.com/v1/organizations/service_accounts \
+    -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -d '{
+          "name": "ci-deploy-bot"
+        }'
+```
+
+Response 200
+
+
+
+```shiki
+{
+  "id": "svac_01SDCCSbTxrXDpWc1phhtcfK",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "archived_by_actor_id": "archived_by_actor_id",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "created_by_actor_id": "created_by_actor_id",
+  "description": "description",
+  "name": "ci-deploy-bot",
+  "organization_role": "admin",
+  "type": "service_account",
+  "updated_at": "2024-10-30T23:58:27.427722Z",
+  "updated_by_actor_id": "updated_by_actor_id"
+}
+```
+
+##### Returns Examples
+
+Response 200
+
+
+
+```shiki
+{
+  "id": "svac_01SDCCSbTxrXDpWc1phhtcfK",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "archived_by_actor_id": "archived_by_actor_id",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "created_by_actor_id": "created_by_actor_id",
+  "description": "description",
+  "name": "ci-deploy-bot",
+  "organization_role": "admin",
+  "type": "service_account",
+  "updated_at": "2024-10-30T23:58:27.427722Z",
+  "updated_by_actor_id": "updated_by_actor_id"
+}
+```
+
+---
+
+*Copyright © Anthropic. All rights reserved.*

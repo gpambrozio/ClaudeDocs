@@ -93,7 +93,15 @@ Subagent worktrees use the same [base branch](#choose-the-base-branch) as `--wor
 
 ### [​](#clean-up-subagent-and-background-session-worktrees) Clean up subagent and background-session worktrees
 
-A periodic sweep removes worktrees that Claude created for subagents and [background sessions](agent-view.md) once they are older than your [`cleanupPeriodDays`](settings-reference.md) setting, following the [retention sweep rules](claude-directory.md). The sweep skips a worktree that still holds work: changed or untracked files, or unpushed commits. It never removes worktrees you create with `--worktree`.
+Claude Code runs a periodic sweep that removes worktrees that Claude created for subagents and [background sessions](agent-view.md) once they are older than your [`cleanupPeriodDays`](settings-reference.md) setting, following the [retention sweep rules](claude-directory.md).
+When you [background](agent-view.md) a `--worktree` session, its worktree becomes a background-session worktree that the sweep can remove. The sweep leaves a worktree in place in these cases:
+
+- The worktree still holds work: changed or untracked files, or unpushed commits.
+- Claude Code can’t determine which filter drivers the repository config defines, in any of the [three cases that also block worktree creation](#git-lfs-content-is-missing-from-a-worktree-claude-code-created).
+- The worktree belongs to a `--worktree` session you haven’t backgrounded, whatever its age.
+- You created the worktree yourself with `git worktree add`, even if you then ran a `--worktree <name>` session in it and backgrounded that session.
+
+Claude Code writes a marker into the git metadata of every worktree it creates with git, and the sweep keeps any worktree without one, including a worktree a [`WorktreeCreate` hook](#non-git-version-control) created. Before v2.1.246, the sweep didn’t check for the marker, and could remove a worktree you created yourself when an old background-session record pointed at it.
 While an agent is running, Claude runs `git worktree lock` on its worktree so that concurrent cleanup cannot remove it. The lock is released when the agent finishes.
 The sweep also releases a lock Claude Code set for a session whose process has exited, so a killed background session doesn’t leave its worktree permanently locked. The sweep never releases a lock you set yourself with `git worktree lock`. Before v2.1.210, a lock left by a killed session stayed in place until you ran `git worktree unlock`.
 To clean up a worktree that the sweep keeps, run `git worktree remove`, adding `--force` if the worktree has uncommitted changes or untracked files.
@@ -258,6 +266,17 @@ When Claude Code can’t enter the worktree directory at startup, it prints an e
 ### [​](#worktree-creation-fails-on-a-symlinked-path) Worktree creation fails on a symlinked path
 
 Claude Code refuses to create a worktree when `.claude`, `.claude/worktrees`, or the worktree directory itself is a symlink, and the error names the symlinked path. Remove the symlink and retry. Before v2.1.212, if the repository already contained a committed symlink at one of those paths, worktree creation followed it and could create files outside the repository.
+
+### [​](#git-lfs-content-is-missing-from-a-worktree-claude-code-created) Git LFS files are pointer files in a worktree Claude Code created
+
+If you set up [Git LFS](https://git-lfs.com) with `git lfs install --local`, a worktree that Claude Code creates contains LFS pointer files instead of the real files. The `--local` flag writes the LFS filter into the repository’s own `.git/config` rather than your global git config. A plain `git lfs install` writes to your global config and isn’t affected. The same applies to any other [filter driver](https://git-scm.com/docs/gitattributes) defined in the repository’s own config.
+Claude Code skips the repository’s own filter drivers when it creates a worktree because a filter driver is a shell command, and anything that can write to the repository, including Claude, could have put one there. Before v2.1.247, Claude Code ran those drivers during worktree creation.
+To get the real files, run `git lfs pull` inside the worktree.
+In three rare cases, Claude Code can’t tell which filter drivers the repository’s config defines, and creates no worktree at all. Match the error to its fix:
+
+- **`Could not read the repository git config to neutralize filter drivers`**: Claude Code couldn’t read the repository’s `.git/config`, for example because of its permissions. Fix that and retry.
+- **`The repository git config defines a filter driver whose name cannot be neutralized (contains "=" or a newline)`**: rename or remove that filter driver in `.git/config` and retry.
+- **`The repository git config has a conditional include (includeIf)`**: move the settings the `includeIf` in `.git/config` pulls in directly into that file, remove the `includeIf`, and retry. An `includeIf` in your global git config doesn’t trigger this.
 
 ### [​](#claude-code-refuses-to-use-a-worktree) Claude Code refuses to use a worktree
 

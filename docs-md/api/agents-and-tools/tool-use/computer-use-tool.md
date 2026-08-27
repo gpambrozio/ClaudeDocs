@@ -731,10 +731,10 @@ Let Claude navigate, read, and interact with webpages in your own browser enviro
 |  |  |
 | --- | --- |
 | Supported models | - Fable 5 - Mythos 5 - Opus 4.8 and 5 - Sonnet 5 |
-| Supported platforms | - Claude API - Claude Platform on AWSBeta - Amazon BedrockBeta - Google CloudBeta - Microsoft FoundryBeta |
+| Supported platforms | - Claude API - Claude Platform on AWSBeta - Amazon BedrockBeta - Google Cloud - Microsoft FoundryBeta |
 
 - Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5 support computer use only through the earlier `computer_20251124` tool version, which requires a beta header; see [Earlier tool versions](#earlier-tool-versions).
-- Platforms other than the Claude API currently offer only the [earlier beta tool versions](#earlier-tool-versions).
+- Platforms other than the Claude API and Google Cloud currently offer only the [earlier beta tool versions](#earlier-tool-versions).
 
 Was this page helpful?
 

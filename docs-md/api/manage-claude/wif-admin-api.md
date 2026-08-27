@@ -12,7 +12,7 @@ Every request on this page authenticates with an OAuth bearer token that carries
 
 ###  Interactive (your terminal)
 
-Log in with the [`ant` CLI](cli-sdks-libraries/cli/quickstart.md) under a dedicated profile, requesting the `org:admin` scope (see [Admin access](cli-sdks-libraries/cli/authentication.md)), then export the bearer token:
+Log in with the [`ant` CLI](cli-sdks-libraries/cli/quickstart.md) under a dedicated profile, requesting the `org:admin` scope (see [Admin access](cli-sdks-libraries/cli/authentication.md)), then export the bearer token. Logging in with `--profile admin` stores the `org:admin` credential under its own profile name and also makes it the CLI's active profile, and the exported variable applies to every SDK and CLI call in that shell; so use a shell you reserve for administration, unset the variable when you are done, and switch the CLI back with `ant profile activate default`:
 
 CLI
 
@@ -20,10 +20,12 @@ CLI
 
 ```shiki
 ant auth login --profile admin --scope "org:admin"
-export ANTHROPIC_OAUTH_TOKEN=$(ant auth print-credentials --profile admin --access-token)
+export ANTHROPIC_AUTH_TOKEN=$(ant auth print-credentials --profile admin --access-token)
 ```
 
 Interactive tokens are short-lived; if requests start returning 401, re-run the export command (it refreshes the token automatically).
+
+The SDKs and the `ant` CLI read `ANTHROPIC_AUTH_TOKEN` automatically; leave `ANTHROPIC_API_KEY` unset in the same shell, because these endpoints reject API keys and some clients prefer the key when both are set.
 
 ###  Workload (CI and automation)
 
@@ -42,12 +44,28 @@ One Console-created rule is enough to put the rest of your federation configurat
 
    Exchange the workload's identity token
 
-   At runtime, the workload exchanges the JWT from its identity provider for a short-lived `org:admin` bearer token using the same [token exchange](manage-claude/workload-identity-federation.md) as any other federated workload.
+   A workload that uses one of the SDKs or the `ant` CLI does not perform the exchange itself. Point the client at the rule with the federation environment variables and construct it with no arguments, exactly as for inference in [Construct the SDK client](manage-claude/workload-identity-federation.md); the client exchanges the identity token on the first request and, before the resulting access token expires, re-reads the identity token and exchanges it again:
+
+   ```shiki
+   export ANTHROPIC_FEDERATION_RULE_ID=fdrl_...        # the org:admin rule from step 1
+   export ANTHROPIC_ORGANIZATION_ID=00000000-0000-0000-0000-000000000000
+   export ANTHROPIC_SERVICE_ACCOUNT_ID=svac_...       # the rule's target service account
+   export ANTHROPIC_IDENTITY_TOKEN_FILE=/path/to/jwt  # or ANTHROPIC_IDENTITY_TOKEN
+   # ANTHROPIC_WORKSPACE_ID is required only if the rule is enabled for all
+   # workspaces or more than one; the org:admin endpoints ignore the binding.
+   unset ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN       # both take precedence over federation
+   ```
+
+   
+
+   The `ant` CLI reads the same variables, or takes `--federation-rule`, `--organization-id`, `--service-account-id`, and `--identity-token-file` flags. For a workload that runs more than one `ant` command, use a [federation profile](manage-claude/wif-reference.md) rather than flags or environment variables: with flags or variables the CLI exchanges the identity token again in every process, and identity tokens that carry a `jti` claim (GitHub Actions tokens do) are accepted only once, so a second command would be rejected; a profile is also the only way to give the CLI a `workspace_id` for the exchange when the rule is enabled for all workspaces or more than one, because unlike the SDKs the CLI does not pass `ANTHROPIC_WORKSPACE_ID` or `--workspace-id` into the exchange. Every SDK also accepts the same settings as explicit constructor arguments, shown per language in [Construct the SDK client](manage-claude/workload-identity-federation.md). See [Environment variables](manage-claude/wif-reference.md) and [Credential precedence](manage-claude/wif-reference.md) for the full list and ordering.
+
+   A workload that calls the API with curl exchanges the JWT for a short-lived `org:admin` bearer token itself, using the same [token exchange](manage-claude/workload-identity-federation.md) as any other federated workload, and sends it in the `authorization: Bearer` header.
 3. 3
 
    Manage issuers and workspace-scoped rules through the API
 
-   With the minted token in `ANTHROPIC_OAUTH_TOKEN`, the workload creates and manages your federation configuration using the endpoints on this page.
+   With the client configured (or, for curl, the minted token in `ANTHROPIC_AUTH_TOKEN`), the workload creates and manages your federation configuration using the endpoints on this page.
 
 For the operations a workload-minted token can and cannot perform, see [Permissions and constraints](#permissions-and-constraints). If you already created issuers, service accounts, or rules with the **Connect workload** wizard, list them with the following endpoints and import them into your infrastructure-as-code state instead of recreating them.
 
@@ -55,14 +73,19 @@ For the operations a workload-minted token can and cannot perform, see [Permissi
 
 All endpoints live under `https://api.anthropic.com/v1/organizations/`. Every request to the federation and service-account endpoints needs the API version header and the bearer token:
 
-cURL
+In the SDKs these endpoints are `client.beta.organization.service_accounts`, `client.beta.organization.federation.issuers`, and `client.beta.organization.federation.rules` (`ant beta:organization:service-accounts`, `federation:issuers`, and `federation:rules` in the CLI). The SDK and CLI examples construct the default client, which sends the bearer token from `ANTHROPIC_AUTH_TOKEN`, or, in an automated workload, performs the federation exchange itself as described in [Bootstrap a workload to manage WIF](#bootstrap-a-workload-to-manage-wif). SDK list methods fetch further pages on demand, so `limit` sets the page size; the PHP and Ruby examples read one page.
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/service_accounts" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+client = anthropic.Anthropic()
+
+service_accounts = client.beta.organization.service_accounts.list()
+
+for service_account in service_accounts:
+    print(f"{service_account.id}: {service_account.name}")
 ```
 
 Admin API keys are not accepted on these endpoints; the Admin API page's `x-api-key` examples do not apply here.
@@ -71,30 +94,53 @@ Admin API keys are not accepted on these endpoints; the Admin API page's `x-api-
 
 A [service account](manage-claude/workload-identity-federation.md) (`svac_...`) is the non-human identity that a federated token acts as. Set `organization_role` to `developer`.
 
-cURL
+Create a service account:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-# Create a service account
-curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/service_accounts" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
-  -H "content-type: application/json" \
-  -d '{
-    "name": "inference-worker",
-    "organization_role": "developer"
-  }'
+client = anthropic.Anthropic()
 
-# List service accounts
-curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/service_accounts?limit=20" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+service_account = client.beta.organization.service_accounts.create(
+    name="inference-worker", organization_role="developer"
+)
 
-# Archive a service account
-curl --fail-with-body -sS -X POST "https://api.anthropic.com/v1/organizations/service_accounts/svac_.../archive" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+print(f"id: {service_account.id}")
+print(f"name: {service_account.name}")
+```
+
+List service accounts:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+client = anthropic.Anthropic()
+
+service_accounts = client.beta.organization.service_accounts.list(limit=20)
+
+for service_account in service_accounts:
+    print(f"{service_account.id}: {service_account.name}")
+```
+
+Archive a service account:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+client = anthropic.Anthropic()
+
+service_account = client.beta.organization.service_accounts.archive(
+    "svac_01ABCDEFabcdef0123456789XY"
+)
+
+print(f"id: {service_account.id}")
+print(f"archived_at: {service_account.archived_at}")
 ```
 
 The create endpoint returns the new service account:
@@ -126,31 +172,56 @@ A [federation issuer](manage-claude/workload-identity-federation.md) (`fdis_...`
 | `{"type": "explicit_url", "url": "..."}` | Point at a JWKS endpoint directly. |
 | `{"type": "inline", "keys": [...]}` | Upload the key set for providers that are not reachable from the public internet. |
 
-cURL
+Register an issuer. This example registers GitHub Actions with JWKS discovery:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-# Register an issuer (GitHub Actions, with JWKS discovery)
-curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/federation_issuers" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
-  -H "content-type: application/json" \
-  -d '{
-    "name": "github-actions",
-    "issuer_url": "https://token.actions.githubusercontent.com",
-    "jwks": {"type": "discovery"}
-  }'
+client = anthropic.Anthropic()
 
-# List issuers
-curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/federation_issuers?limit=20" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+issuer = client.beta.organization.federation.issuers.create(
+    name="github-actions",
+    issuer_url="https://token.actions.githubusercontent.com",
+    jwks={"type": "discovery"},
+)
 
-# Archive an issuer
-curl --fail-with-body -sS -X POST "https://api.anthropic.com/v1/organizations/federation_issuers/fdis_.../archive" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+print(f"id: {issuer.id}")
+print(f"name: {issuer.name}")
+print(f"issuer_url: {issuer.issuer_url}")
+```
+
+List issuers:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+client = anthropic.Anthropic()
+
+issuers = client.beta.organization.federation.issuers.list(limit=20)
+
+for issuer in issuers:
+    print(f"{issuer.id}: {issuer.name}")
+```
+
+Archive an issuer:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+client = anthropic.Anthropic()
+
+issuer = client.beta.organization.federation.issuers.archive(
+    "fdis_01ABCDEFabcdef0123456789XY"
+)
+
+print(f"id: {issuer.id}")
+print(f"archived_at: {issuer.archived_at}")
 ```
 
 To read or update a single issuer, use `GET` and `POST` on `/v1/organizations/federation_issuers/{issuer_id}`. An OAuth caller cannot update an issuer that backs a rule whose `oauth_scope` is anything other than `workspace:developer` or `workspace:inference`; see [Permissions and constraints](#permissions-and-constraints).
@@ -161,41 +232,67 @@ For complete parameter details and response schemas, see the [Federation issuers
 
 A [federation rule](manage-claude/workload-identity-federation.md) (`fdrl_...`) binds an issuer to a service account: JWTs from the issuer that satisfy the rule's match conditions can mint tokens that act as the rule's target. The `workspace_id` in the create request enables the rule in that workspace at creation; add more workspaces later through the `/federation_rules/{rule_id}/workspaces` sub-resource. Either `workspace_id` or `applies_to_all_workspaces: true` is required on create.
 
-cURL
+Create a rule. This example lets GitHub Actions deploys from the main branch act as the service account:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-# Create a rule (GitHub Actions deploys from the main branch)
-curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/federation_rules" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
-  -H "content-type: application/json" \
-  -d '{
-    "name": "gha-deploy",
-    "issuer_id": "fdis_...",
-    "match": {
-      "subject_prefix": "repo:my-org/my-repo:ref:refs/heads/main",
-      "claims": {"repository_owner": "my-org"}
-    },
-    "target": {
-      "type": "service_account",
-      "service_account_id": "svac_..."
-    },
-    "workspace_id": "wrkspc_...",
-    "oauth_scope": "workspace:developer",
-    "token_lifetime_seconds": 600
-  }'
+client = anthropic.Anthropic()
 
-# List rules, optionally filtered by issuer
-curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/federation_rules?issuer_id=fdis_..." \
-  -H "anthropic-version: 2023-06-01" \
-  -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+rule = client.beta.organization.federation.rules.create(
+    name="gha-deploy",
+    issuer_id="fdis_01ABCDEFabcdef0123456789XY",
+    match={
+        "subject_prefix": "repo:my-org/my-repo:ref:refs/heads/main",
+        "claims": {"repository_owner": "my-org"},
+    },
+    target={
+        "type": "service_account",
+        "service_account_id": "svac_01ABCDEFabcdef0123456789XY",
+    },
+    workspace_id="wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+    oauth_scope="workspace:developer",
+    token_lifetime_seconds=600,
+)
 
-# Archive a rule
-curl --fail-with-body -sS -X POST "https://api.anthropic.com/v1/organizations/federation_rules/fdrl_.../archive" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+print(f"id: {rule.id}")
+print(f"name: {rule.name}")
+```
+
+List rules, optionally filtered by issuer:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+client = anthropic.Anthropic()
+
+rules = client.beta.organization.federation.rules.list(
+    issuer_id="fdis_01ABCDEFabcdef0123456789XY"
+)
+
+for rule in rules:
+    print(f"{rule.id}: {rule.name}")
+```
+
+Archive a rule:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+client = anthropic.Anthropic()
+
+rule = client.beta.organization.federation.rules.archive(
+    "fdrl_01ABCDEFabcdef0123456789XY"
+)
+
+print(f"id: {rule.id}")
+print(f"archived_at: {rule.archived_at}")
 ```
 
 The list endpoint returns a page of rules and the cursor for the next page:

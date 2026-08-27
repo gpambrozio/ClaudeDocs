@@ -102,7 +102,9 @@ Add a specifier in parentheses to match specific tool uses:
 
 ### [​](#match-by-input-parameter) Match by input parameter
 
-Deny and ask rules can match a top-level input parameter on any tool with `Tool(param:value)`. The rule matches when Claude calls the tool with that parameter set to that exact value. An allow rule for one parameter value wouldn’t establish that the call is safe overall, so allow rules continue to use each tool’s own specifier syntax. This works for any scalar parameter the tool accepts:
+Deny and ask rules can match a top-level input parameter on any built-in tool with `Tool(param:value)`.
+To match a parameter on an MCP tool, pass a deny rule with [`--disallowedTools`](cli-reference.md). When Claude Code loads a settings file, it skips any `mcp__` rule that has parentheses. Claude Code lists the skipped rule in the invalid-settings dialog when an interactive session starts, and in [`claude doctor`](debug-your-config.md) output.
+A parameter rule matches when Claude calls the tool with that parameter set to that exact value. An allow rule for one parameter value wouldn’t establish that the call is safe overall, so allow rules continue to use each tool’s own specifier syntax. This works for any scalar parameter the tool accepts:
 
 | Rule | Matches |
 | --- | --- |
@@ -290,8 +292,9 @@ A `/path` pattern anchors at a directory associated with the settings source tha
 | Local settings at `.claude/settings.local.json` | `<original cwd>/path` |
 | User settings at `~/.claude/settings.json` | `~/.claude/path` |
 | A file passed with `--settings <file>` | `<directory of file>/path` |
-| CLI flags, `/permissions`, or session rules | `<original cwd>/path` |
+| CLI flags or session rules | `<original cwd>/path` |
 
+A rule you add through `/permissions` follows the row for the settings file you save it to.
 Local settings rules anchor at the directory you started Claude Code from, not at the repository root where Claude Code [stores the file](#permission-system) in v2.1.211 and later. In a session started at the repository root, the two directories are the same; in a [worktree](worktrees.md) session, a shared rule such as `Edit(/src/**)` matches that worktree’s own `src/` directory.
 A deny rule such as `Read(/secrets/**)` in user settings blocks `~/.claude/secrets/**`, not a `secrets` directory in your project. To write a rule in user settings that applies inside every project, use a `//` absolute path or a `~/` home-relative path instead.
 On Windows, paths are normalized to POSIX form before matching. `C:\Users\alice` becomes `/c/Users/alice`, so use `//c/**/.env` to match `.env` files anywhere on that drive. To match across all drives, use `//**/.env`.
@@ -527,9 +530,9 @@ Each row is one kind of content a repository can supply. The columns are the two
 | [Hooks](hooks.md) in settings files, the [`env`](settings-reference.md) block and helper commands such as [`apiKeyHelper`](settings-reference.md), and a project skill’s [hooks](hooks.md) and [`allowed-tools`](skills.md) | Used | Used. Workspace trust never gates a skill’s `allowed-tools` in any session |
 | `permissions.allow` rules and `additionalDirectories` in `.claude/settings.json` | Not used until you accept the trust dialog, which appears again listing them | Not used. Claude Code prints a [`this workspace has not been trusted`](errors.md) warning to stderr |
 | Frontmatter hooks in a project [subagent](sub-agents.md), a project [`@skills-dir` plugin](plugins-reference.md), and [`extraKnownMarketplaces`](settings-reference.md) entries from the repository or an `--add-dir` directory | Not used, and no dialog is offered | Not used |
-| Inline [`mcpServers`](sub-agents.md) in the frontmatter of a subagent from the repository or an `--add-dir` directory | Not used, and no dialog is offered | Not used |
+| Inline [`mcpServers`](sub-agents.md) in the frontmatter of a subagent from the repository or an `--add-dir` directory. Before v2.1.238, Claude Code loaded these servers in both situations | Not used, and no dialog is offered | Not used |
 | Servers in `.mcp.json`, including ones the repository [approves in its own settings](mcp.md) | Claude Code asks you before connecting them. The repository’s own approvals don’t count | Connected without asking, approved or not. The SDK loads them only when `settingSources` includes project settings. `claude mcp list` in the same folder still reports such a server as pending |
-| A [`headersHelper`](mcp.md) on a server in `.mcp.json` | Not run until you accept the trust dialog, which appears again naming where the helper is declared. Claude Code connects the server with its static `headers` alone until then | Not run. Claude Code connects the server with its static `headers` alone and prints a [`headersHelper not run`](errors.md) line per server to stderr |
+| A [`headersHelper`](mcp.md) on a server in `.mcp.json`. Before v2.1.238, Claude Code ran the helper in both situations | Not run until you accept the trust dialog, which appears again naming where the helper is declared. Claude Code connects the server with its static `headers` alone until then | Not run. Claude Code connects the server with its static `headers` alone and prints a [`headersHelper not run`](errors.md) line per server to stderr |
 
 For the rows that need this exact folder trusted, trust it by hand: set `projects["<path>"].hasTrustDialogAccepted` to `true` in `~/.claude.json`, where `<path>` is the repository root, or the folder itself outside a repository. Claude Code prints the exact key in the debug log line for a skipped subagent hook or inline MCP server, in the stderr warning for skipped allow rules, and in the `headersHelper not run` line for a skipped helper.
 Before you run `claude -p` in a repository you didn’t write, decide what it may run on your machine:

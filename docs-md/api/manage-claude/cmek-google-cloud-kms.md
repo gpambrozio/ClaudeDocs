@@ -151,22 +151,25 @@ Claude PlatformClaude Enterprise
 
    Create an external key configuration through the Admin API, using the resource name from the Note the full key resource name step under Encryption key setup.
 
-   ```shiki
-   curl -sS https://api.anthropic.com/v1/organizations/external_keys \
-     -H "x-api-key: <anthropic-admin-api-key>" \
-     -H "anthropic-version: 2023-06-01" \
-     -H "content-type: application/json" \
-     -d '{
-       "display_name": "<friendly-name>",
-       "geo": "us",
-       "provider_config": {
-         "type": "gcp",
-         "key_name": "projects/<your-project-id>/locations/<region>/keyRings/<your-keyring-name>/cryptoKeys/<your-key-name>"
-       }
-     }'
-   ```
+   cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
    
+
+   ```shiki
+   client = anthropic.Anthropic()
+
+   external_key = client.beta.organization.external_keys.create(
+       display_name="<friendly-name>",
+       geo="us",
+       provider_config={
+           "type": "gcp",
+           "key_name": "projects/<your-project-id>/locations/<region>/keyRings/<your-keyring-name>/cryptoKeys/<your-key-name>",
+       },
+   )
+
+   print(f"id: {external_key.id}")
+   print(f"display_name: {external_key.display_name}")
+   ```
 
    The response contains the external key ID:
 
@@ -185,15 +188,18 @@ Claude PlatformClaude Enterprise
 
    Trigger an encrypt and decrypt round-trip against your key.
 
-   ```shiki
-   curl -sS -X POST https://api.anthropic.com/v1/organizations/external_keys/ekey_<id>/validate \
-     -H "x-api-key: <anthropic-admin-api-key>" \
-     -H "anthropic-version: 2023-06-01" \
-     -H "content-type: application/json" \
-     -d '{}'
-   ```
+   cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
    
+
+   ```shiki
+   client = anthropic.Anthropic()
+
+   validation = client.beta.organization.external_keys.validate("ekey_<id>")
+
+   print(f"status: {validation.status}")
+   print(f"error: {validation.error}")
+   ```
 
    A successful response looks like this:
 
@@ -214,17 +220,20 @@ Claude PlatformClaude Enterprise
 
    Once the key is validated, attach it to a new workspace before you send any requests to that workspace. For a workspace that already receives requests, the key can take [up to a day to take effect](manage-claude/cmek.md).
 
-   ```shiki
-   curl -sS -X POST https://api.anthropic.com/v1/organizations/workspaces/<workspace-id> \
-     -H "x-api-key: <anthropic-admin-api-key>" \
-     -H "anthropic-version: 2023-06-01" \
-     -H "content-type: application/json" \
-     -d '{
-       "external_key_id": "ekey_<id>"
-     }'
-   ```
+   cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
    
+
+   ```shiki
+   client = anthropic.Anthropic()
+
+   workspace = client.beta.organization.workspaces.update(
+       "<workspace-id>", external_key_id="ekey_<id>"
+   )
+
+   print(f"id: {workspace.id}")
+   print(f"external_key_id: {workspace.external_key_id}")
+   ```
 
 ##  Terraform
 

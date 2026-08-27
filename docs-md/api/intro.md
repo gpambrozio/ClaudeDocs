@@ -63,7 +63,7 @@ Anthropic provides developer tools to help you build and scale applications with
 
 [Developer Console](/)
 
-Explore and understand the API in your browser with Playground.
+Explore and understand the API in your browser with playground.
 
 
 

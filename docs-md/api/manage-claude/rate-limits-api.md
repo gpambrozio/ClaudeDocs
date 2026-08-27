@@ -12,18 +12,26 @@ Use this API to:
 - **Power internal alerting:** Compare usage data from the [Usage and Cost API](manage-claude/usage-cost-api.md) against your configured limits.
 - **Audit workspace configuration:** Verify that workspace overrides match what your provisioning automation expects.
 
+The SDK and CLI examples on this page construct the default client, which reads the Admin API key from the `ANTHROPIC_API_KEY` environment variable. The SDKs expose these endpoints as `client.beta.organization.rate_limits` and `client.beta.organization.workspaces.rate_limits`; the Python, TypeScript, C#, Go, and Java list methods return an iterator that follows `next_page` for you, while the PHP, Ruby, and curl examples read one page.
+
 ##  Quick start
 
 List the rate limits configured for your organization:
 
-cURL
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-curl "https://api.anthropic.com/v1/organizations/rate_limits" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+client = anthropic.Anthropic()
+
+rate_limits = client.beta.organization.rate_limits.list()
+
+for group in rate_limits:
+    models = f" ({', '.join(group.models)})" if group.models else ""
+    print(f"{group.group_type}{models}")
+    for limit in group.limits:
+        print(f"  {limit.type}: {limit.value}")
 ```
 
 ##  Organization rate limits
@@ -41,14 +49,20 @@ For complete parameter details and response schemas, see the [Organization Rate 
 
 ###  List all organization rate limits
 
-cURL
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-curl "https://api.anthropic.com/v1/organizations/rate_limits" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+client = anthropic.Anthropic()
+
+rate_limits = client.beta.organization.rate_limits.list()
+
+for group in rate_limits:
+    models = f" ({', '.join(group.models)})" if group.models else ""
+    print(f"{group.group_type}{models}")
+    for limit in group.limits:
+        print(f"  {limit.type}: {limit.value}")
 ```
 
 ```shiki
@@ -97,14 +111,20 @@ curl "https://api.anthropic.com/v1/organizations/rate_limits" \
 
 Pass any model ID or alias as the `model` query parameter to return only the entry that contains it:
 
-cURL
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-curl "https://api.anthropic.com/v1/organizations/rate_limits?model=claude-opus-5" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+client = anthropic.Anthropic()
+
+rate_limits = client.beta.organization.rate_limits.list(model="claude-opus-5")
+
+for group in rate_limits:
+    models = f" ({', '.join(group.models)})" if group.models else ""
+    print(f"{group.group_type}{models}")
+    for limit in group.limits:
+        print(f"  {limit.type}: {limit.value}")
 ```
 
 If the model string doesn't match any group, the endpoint returns a 404 error. The `model` parameter is supported on the organization endpoint only; the workspace endpoint doesn't accept it.
@@ -121,14 +141,22 @@ The response only includes overrides, so anything missing from it is inherited f
 
 For complete parameter details and response schemas, see the [Workspace Rate Limits API reference](api/admin/workspaces/rate_limits/list.md).
 
-cURL
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ/rate_limits" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+client = anthropic.Anthropic()
+
+rate_limits = client.beta.organization.workspaces.rate_limits.list(
+    "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+)
+
+for group in rate_limits:
+    models = f" ({', '.join(group.models)})" if group.models else ""
+    print(f"{group.group_type}{models}")
+    for limit in group.limits:
+        print(f"  {limit.type}: {limit.value}")
 ```
 
 ```shiki
@@ -169,14 +197,20 @@ curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA
 
 Both endpoints accept an optional `group_type` query parameter that restricts the response to a single category:
 
-cURL
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-curl "https://api.anthropic.com/v1/organizations/rate_limits?group_type=batch" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+client = anthropic.Anthropic()
+
+rate_limits = client.beta.organization.rate_limits.list(group_type="batch")
+
+for group in rate_limits:
+    models = f" ({', '.join(group.models)})" if group.models else ""
+    print(f"{group.group_type}{models}")
+    for limit in group.limits:
+        print(f"  {limit.type}: {limit.value}")
 ```
 
 Valid values are `model_group`, `batch`, `token_count`, `files`, `skills`, and `web_search`.

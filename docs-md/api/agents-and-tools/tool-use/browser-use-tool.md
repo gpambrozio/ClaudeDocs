@@ -12,7 +12,7 @@ With browser use, Claude reads and acts on live webpages, so everything a page s
 
 ##  Quick start
 
-The browser use tool is available on the Claude API with no beta header: add one entry of type `browser_toolset_20260801`, with no `name`, to the `tools` array of a [Messages API](api/messages/create.md) request.
+The browser use tool is available on the Claude API and [Google Cloud](build-with-claude/claude-on-vertex-ai.md): add one entry of type `browser_toolset_20260801`, with no `name`, to the `tools` array of a [Messages API](api/messages/create.md) request.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -695,7 +695,7 @@ The API validates the toolset entry and every member `tool_use` and `tool_result
 
 ##  Limitations
 
-- **Platform availability:** Browser use is available on the Claude API only.
+- **Platform availability:** Browser use is available on the Claude API and [Google Cloud](build-with-claude/claude-on-vertex-ai.md).
 - **Whole-input streaming only:** When you stream, each member's `input` arrives as one complete `input_json_delta` ([Client toolsets](agents-and-tools/tool-use/tool-reference.md)).
 - **Element references are best-effort:** Highly dynamic pages (virtualized lists, canvas-rendered interfaces, pages that re-render on scroll) might not expose stable references, and Claude falls back to screenshots and coordinate clicks there.
 - **`read_console` and `read_network` depend on your browser automation:** They report only what it can capture, and only from the moment it attached to a tab.
@@ -739,7 +739,7 @@ Browse client toolsets and every other Anthropic-provided tool, with their versi
 |  |  |
 | --- | --- |
 | Supported models | - Fable 5 - Mythos 5 - Opus 4.8 and 5 - Sonnet 5 |
-| Supported platforms | - Claude API |
+| Supported platforms | - Claude API - Google Cloud |
 
 Was this page helpful?
 

@@ -95,7 +95,7 @@ A setting whose enforced value is a single true/false flag.
 
 
 
-name: "ai\_powered\_artifacts\_enabled" or "api\_workbench\_feedback\_collection\_enabled" or "artifact\_connectors\_enabled" or 44 more
+name: "ai\_powered\_artifacts\_enabled" or "api\_workbench\_feedback\_collection\_enabled" or "artifact\_connectors\_enabled" or 52 more
 
 One of the following:
 
@@ -140,6 +140,22 @@ One of the following:
 "claude\_design\_enabled"
 
 "claude\_in\_slack\_enabled"
+
+"claude\_science\_custom\_connectors\_enabled"
+
+"claude\_science\_custom\_skills\_enabled"
+
+"claude\_science\_enabled"
+
+"claude\_science\_managed\_network\_allowlist\_enabled"
+
+"claude\_science\_memory\_enabled"
+
+"claude\_science\_modal\_enabled"
+
+"claude\_science\_scientific\_model\_endpoints\_enabled"
+
+"claude\_science\_ssh\_hosts\_enabled"
 
 "code\_execution\_enabled"
 

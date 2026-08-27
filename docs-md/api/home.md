@@ -79,7 +79,7 @@ MessagesManaged Agents
 
    [Install an SDK](cli-sdks-libraries/overview.md)
 
-   [Try the API in Playground](/playground)
+   [Try the API in playground](/playground)
 2. 2
 
    ### Build
@@ -134,37 +134,39 @@ Models
 
 Choose the right model for your use case.
 
-Most capable
+![](/images/dashboard-discovery/head.svg)
 
 ### [Fable 5](models/fable-5/overview.md)
 
-claude-fable-5
+Most capableResearchMulti-day tasks
 
-Highest capability for the most demanding reasoning and long-horizon agentic work.
+Next-generation intelligence for long-running agents
 
-Advanced
+![](/images/dashboard-discovery/cursor.svg)
 
 ### [Opus 5](models/opus-5/overview.md)
 
-claude-opus-5
+New
 
-Excellent for complex analysis, coding, and creative tasks requiring deep reasoning.
+Complex projectsAgentsCoding
 
-Best balance
+For complex agentic coding and enterprise work
+
+![](/images/dashboard-discovery/bubble.svg)
 
 ### [Sonnet 5](models/sonnet-5/overview.md)
 
-claude-sonnet-5
+Everyday tasksWritingCost-efficient
 
-Ideal balance of intelligence and speed for most production workloads.
+The best combination of speed and intelligence
 
-Fastest
+![](/images/dashboard-discovery/bird.svg)
 
 ### [Haiku 4.5](models/haiku-4-5/overview.md)
 
-claude-haiku-4-5
+FastestLowest costHigh volume
 
-Lightning-fast responses for high-volume, latency-sensitive applications.
+The fastest model with near-frontier intelligence
 
 Resources
 

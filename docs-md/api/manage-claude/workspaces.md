@@ -34,7 +34,7 @@ Members can have different roles in each workspace, allowing fine-grained access
 
 | Role | Permissions |
 | --- | --- |
-| Workspace User | Use Playground only |
+| Workspace User | Use playground only |
 | Workspace Limited Developer | Create and manage API keys, use the API. Cannot access session tracing views or download files. |
 | Workspace Developer | Create and manage API keys, use the API |
 | Workspace Admin | Full control over workspace settings and members |
@@ -111,61 +111,112 @@ To archive a workspace, click the ellipsis menu (**...**) and select **Archive**
 
 Programmatically manage workspaces using the [Admin API](manage-claude/admin-api.md).
 
-cURL
+The following SDK and CLI examples construct the default client, which reads the Admin API key from the `ANTHROPIC_API_KEY` environment variable; the SDKs expose these endpoints under `client.beta.organization.workspaces`. SDK list methods fetch further pages on demand, so `limit` sets the page size; the PHP, Ruby, and curl examples return one page.
+
+Create a workspace:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-# Create a workspace
-curl -X POST "https://api.anthropic.com/v1/organizations/workspaces" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -d '{"name": "Production"}'
+client = anthropic.Anthropic()
 
-# List workspaces
-curl "https://api.anthropic.com/v1/organizations/workspaces?limit=10&include_archived=false" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
+workspace = client.beta.organization.workspaces.create(name="Production")
 
-# Archive a workspace
-curl -X POST "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/archive" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
+print(f"id: {workspace.id}")
+print(f"name: {workspace.name}")
+```
+
+List workspaces:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+client = anthropic.Anthropic()
+
+workspaces = client.beta.organization.workspaces.list(limit=10, include_archived=False)
+
+for workspace in workspaces:
+    print(f"{workspace.id}: {workspace.name}")
+```
+
+Archive a workspace:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+client = anthropic.Anthropic()
+
+workspace = client.beta.organization.workspaces.archive(
+    "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+)
+
+print(f"id: {workspace.id}")
+print(f"archived_at: {workspace.archived_at}")
 ```
 
 For complete parameter details and response schemas, see the [Workspaces API reference](api/admin/workspaces/retrieve.md).
 
 ###  Managing workspace members
 
-Add, update, or remove members from a workspace:
+Add a member to a workspace:
 
-cURL
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-# Add a member to a workspace
-curl -X POST "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -d '{
-    "user_id": "user_xxx",
-    "workspace_role": "workspace_developer"
-  }'
+client = anthropic.Anthropic()
 
-# Update a member's role
-curl -X POST "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members/{user_id}" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -d '{"workspace_role": "workspace_admin"}'
+member = client.beta.organization.workspaces.members.add(
+    "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+    user_id="user_01XyDMpzjS89pFZXqSFUBDr6",
+    workspace_role="workspace_developer",
+)
 
-# Remove a member from a workspace
-curl -X DELETE "https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members/{user_id}" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
+print(f"user_id: {member.user_id}")
+print(f"workspace_role: {member.workspace_role}")
+```
+
+Update a member's role:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+client = anthropic.Anthropic()
+
+member = client.beta.organization.workspaces.members.update(
+    "user_01XyDMpzjS89pFZXqSFUBDr6",
+    workspace_id="wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+    workspace_role="workspace_admin",
+)
+
+print(f"user_id: {member.user_id}")
+print(f"workspace_role: {member.workspace_role}")
+```
+
+Remove a member from a workspace:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+client = anthropic.Anthropic()
+
+removed_member = client.beta.organization.workspaces.members.remove(
+    "user_01XyDMpzjS89pFZXqSFUBDr6",
+    workspace_id="wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+)
+
+print(f"user_id: {removed_member.user_id}")
 ```
 
 For complete parameter details, see the [Workspace Members API reference](api/admin/workspaces/members/retrieve.md).

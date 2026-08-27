@@ -42,29 +42,36 @@ See the [terminal quickstart](quickstart.md), [Desktop app](desktop.md), or [Rem
 
 ## [​](#connect-github) Connect GitHub
 
-Setup is a one-time process. If you already use the GitHub CLI, you can [do this from your terminal](#connect-from-your-terminal) instead of the browser.
+Connecting GitHub is a one-time step. If you already use the GitHub CLI, you can [do this from your terminal](#connect-from-your-terminal) instead of the browser.
+
+On Team and Enterprise plans, the **Sign in with GitHub** step works only after an [Owner](server-managed-settings.md) of your Claude organization turns on the GitHub connector at [**Admin settings > Connectors**](https://claude.ai/admin-settings/connectors). Until then, that step shows “GitHub access is required for Claude Code on the web” instead of a sign-in button. After the connector is on, reload [claude.ai/code](https://claude.ai/code) and start again from the first step. A second toggle, [Quick web setup](claude-code-on-the-web.md) at [**Admin settings > Claude Code**](https://claude.ai/admin-settings/claude-code), is optional: with it on, `/web-setup` works and onboarding creates the environment for members.
 
 1
 
 Visit claude.ai/code
 
-Go to [claude.ai/code](https://claude.ai/code) and sign in with your Anthropic account.
+Go to [claude.ai/code](https://claude.ai/code) and sign in with your claude.ai account. On macOS or Windows, the first screen offers the Claude Code desktop app and other ways to install Claude Code. To stay in the browser, click **Continue on web** at the bottom of the page.
 
 2
 
-Install the Claude GitHub App
+Sign in with GitHub
 
-After signing in, claude.ai/code prompts you to connect GitHub. Follow the prompt to install the Claude GitHub App and grant it access to your repositories. Cloud sessions work with existing GitHub repositories, so to start a new project, [create an empty repository on GitHub](https://github.com/new) first.
+After you sign in, claude.ai/code prompts you to connect GitHub. Follow the prompt, and claude.ai/code sends you to GitHub’s authorization page. Approve the authorization request, and GitHub returns you to claude.ai/code. Cloud sessions work with existing GitHub repositories and can reach any repository your GitHub account can see. To start a new project, [create an empty repository on GitHub](https://github.com/new) first.When Quick web setup is off, which it is by default on Team and Enterprise plans, claude.ai/code then asks you to install the Claude GitHub App on your repositories unless it’s already installed. Install it if you want [Auto-fix](claude-code-on-the-web.md), which lets Claude respond to CI failures and review comments on pull requests in those repositories; otherwise click **Skip**. Either way, sessions can reach the same repositories.
 
 3
 
-Confirm your Default environment
+Set up your Default environment
 
-If you don’t have an environment yet, onboarding creates a [cloud environment](cloud-environments.md) named **Default** for you when you finish connecting GitHub; if onboarding shows an environment form instead, keep its defaults to create the same **Default** environment. The environment controls what network access Claude has during sessions and what runs when a new session is created. **Default** uses [`Trusted` network access](cloud-environments.md): sessions reach [common package registries](cloud-environments.md) and other allowlisted domains, and nothing else through the session’s network. See [Installed tools](cloud-environments.md) for what’s available without any configuration.For a first project, the **Default** environment works as is. To change its network access, add environment variables, or run a [setup script](cloud-environments.md) before sessions start, [edit it or create additional environments](cloud-environments.md).
+A [cloud environment](cloud-environments.md) is the saved configuration that controls what network access Claude has during sessions and what runs when a session starts. What happens after you connect GitHub depends on your plan:
+
+- **Pro and Max**: onboarding creates an environment named **Default** for you.
+- **Team and Enterprise**: onboarding shows a **Create your first cloud environment** form. Leave the prefilled name and network access unchanged and click **Create & finish** to create the **Default** environment. If an Owner has turned on [Quick web setup](claude-code-on-the-web.md), onboarding creates **Default** for you instead.
+
+**Default** uses [`Trusted` network access](cloud-environments.md): sessions reach [common package registries](cloud-environments.md) and other allowlisted domains, and nothing else through the session’s network. See [Installed tools](cloud-environments.md) for what’s available without any configuration.For a first project, the **Default** environment works as is. To change its network access, add environment variables, or run a [setup script](cloud-environments.md) before sessions start, [edit it or create additional environments](cloud-environments.md).
 
 ### [​](#connect-from-your-terminal) Connect from your terminal
 
-If you already use the GitHub CLI (`gh`), you can set up Claude Code on the web without opening a browser. This requires the [Claude Code CLI](quickstart.md). `/web-setup` reads your local `gh` token, links it to your Claude account, and creates a default cloud environment if you don’t have one.
+If you already use the GitHub CLI (`gh`), you can set up Claude Code on the web without opening a browser. This requires the [Claude Code CLI](quickstart.md). `/web-setup` reads your local `gh` token, links it to your claude.ai account, and creates the **Default** cloud environment if you don’t have one. On Team and Enterprise plans, `/web-setup` is available only after an Owner turns on [Quick web setup](claude-code-on-the-web.md).
 
 Organizations with [Zero Data Retention](zero-data-retention.md) enabled cannot use `/web-setup` or other cloud session features. If the GitHub CLI isn’t installed or authenticated, `/web-setup` opens the browser onboarding flow instead.
 
@@ -196,12 +203,8 @@ If `/web-setup` responds with “Not signed in to Claude. Run /login first.”, 
 ### [​](#web-setup-shows-no-commands-match-or-unknown-command) `/web-setup` shows “No commands match” or “Unknown command”
 
 `/web-setup` runs inside the Claude Code CLI, not your shell. Launch `claude` first, then type `/web-setup` at the prompt.
-If you typed it inside Claude Code and the command menu shows `No commands match "/web-setup"`, or submitting it returns `Unknown command: /web-setup`, the command is hidden because a requirement isn’t met. The cause is usually that you’re authenticated with an API key or third-party provider instead of a claude.ai subscription. Run `/login` to sign in with your claude.ai account. Team and Enterprise Owners can also [disable `/web-setup`](claude-code-on-the-web.md) for their organization, which hides the command. In that case, use the browser flow above instead.
-On Team and Enterprise plans, the command is also hidden when any of the following apply:
-
-- an administrator has disabled Claude Code on the web for your organization
-- an administrator has disabled the [Quick web setup toggle](claude-code-on-the-web.md)
-- your Enterprise organization has [Zero Data Retention](zero-data-retention.md) enabled, which makes Claude Code on the web unavailable
+If you typed it inside Claude Code and the command menu shows `No commands match "/web-setup"`, or submitting it returns `Unknown command: /web-setup`, the command is hidden because a requirement isn’t met. The cause is usually that you’re authenticated with an API key or third-party provider instead of a claude.ai subscription. Run `/login` to sign in with your claude.ai account.
+On Team and Enterprise plans, the command is hidden by default: the [Quick web setup toggle](claude-code-on-the-web.md) is off until an Owner turns it on. While it’s off, [connect GitHub from the browser](#connect-github) instead. The command is also hidden when an administrator has disabled Claude Code on the web for your organization, or when your Enterprise organization has [Zero Data Retention](zero-data-retention.md) enabled, which makes Claude Code on the web unavailable.
 
 ### [​](#”could-not-create-a-cloud-environment”-or-“no-cloud-environment-available”-when-using-cloud) ”Could not create a cloud environment” or “No cloud environment available” when using `--cloud`
 

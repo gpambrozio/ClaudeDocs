@@ -44,7 +44,7 @@ For proxies requiring advanced authentication (NTLM, Kerberos, etc.), consider u
 
 ## [​](#ca-certificate-store) CA certificate store
 
-By default, Claude Code trusts both its bundled Mozilla CA certificates and your operating system’s certificate store. Reading the OS store requires a runtime with `tls.getCACertificates`: the native installer always has it, and npm installs need Node 22.15 or later. On older Node versions, only the bundled set and `NODE_EXTRA_CA_CERTS` apply. Enterprise TLS-inspection proxies such as CrowdStrike Falcon and Zscaler work without additional configuration when their root certificate is installed in the OS trust store and the runtime can read it.
+By default, Claude Code trusts both its bundled Mozilla CA certificates and your operating system’s certificate store. Reading the OS store requires a runtime with `tls.getCACertificates`: the native installer always has it, and npm installs need Node 22.15 or later. On older Node versions, only the bundled set and `NODE_EXTRA_CA_CERTS` apply. Enterprise TLS-inspection proxies work without additional configuration when their root certificate is installed in the OS trust store and the runtime can read it.
 `CLAUDE_CODE_CERT_STORE` accepts a comma-separated list of sources. Recognized values are `bundled` for the Mozilla CA set shipped with Claude Code and `system` for the operating system trust store. The default is `bundled,system`.
 To trust only the bundled Mozilla CA set:
 
@@ -164,7 +164,7 @@ Configure the timers with these variables, each detailed in the [environment var
 - `CLAUDE_BYTE_STREAM_IDLE_TIMEOUT_MS` sets the byte-level watchdog’s timeout alone, clamped to between 10 seconds and 30 minutes, and takes precedence over `CLAUDE_STREAM_IDLE_TIMEOUT_MS` for that watchdog.
 - `API_FORCE_IDLE_TIMEOUT` set to `0` turns the body idle timeout off, and set to `1` turns it on for every provider. The watchdogs run independently of it, so to let a stream pause longer than their thresholds, also raise or disable them.
 
-When a timer aborts a stalled stream, Claude Code handles it like any other mid-stream failure: it retries, keeps completed output with an [incomplete-response notice](errors.md), or ends the turn, depending on where the response stood.
+When a watchdog aborts a stalled stream, Claude Code treats it as a mid-stream failure: depending on how far the response had got, it retries the request or ends the turn with an error, keeps the completed output and shows an [incomplete-response notice](errors.md), or ends the turn normally. [Automatic retries](errors.md) says where each outcome applies. In a [non-interactive session](headless.md), Claude Code may first prompt Claude to continue the cut-off response; [that notice’s entry](errors.md) says when it does and when you still see the notice.
 
 ## [​](#network-access-requirements) Network access requirements
 
@@ -193,6 +193,11 @@ If you install Claude Code through npm or manage your own binary distribution, e
 The two Datadog intake hosts carry only optional operational telemetry, and setting [`CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`](env-vars.md) disables both. Sessions on third-party providers never send to these hosts, even when a platform sets [`CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`](env-vars.md) and telemetry metrics default on. See [Telemetry services](data-usage.md) for everything Claude Code sends and how to disable it before finalizing your allowlist.
 When using [Amazon Bedrock](amazon-bedrock.md), [Google Cloud’s Agent Platform](google-vertex-ai.md), [Microsoft Foundry](microsoft-foundry.md), or a signed-in [Claude apps gateway](claude-apps-gateway.md) session, model traffic and authentication go to your provider or gateway instead of `api.anthropic.com`, `claude.ai`, or `platform.claude.com`. The WebFetch tool still calls `api.anthropic.com` for its [domain safety check](data-usage.md) unless you set `skipWebFetchPreflight: true` in [settings](settings.md).
 When routing through an [LLM gateway](llm-gateway.md) with [`ANTHROPIC_BASE_URL`](llm-gateway-connect.md), the [fast mode](fast-mode.md) availability check still calls `api.anthropic.com` rather than the gateway base URL. The check does honor a configured HTTP proxy, so where a network block is the cause, an allowlist entry for `api.anthropic.com` in the proxy is the fix. A network block fails the check only where the host is unreachable even through the proxy, and fast mode then reports a connectivity error. The same connectivity error appears when the check presents a gateway-issued credential that Anthropic rejects; allowlisting doesn’t help there, since nothing is blocked. See [use fast mode behind proxies and LLM gateways](fast-mode.md) for the variables that restore it.
+
+### [​](#organization-ip-allowlists-and-proxy-egress) Organization IP allowlists and proxy egress
+
+If your organization has [IP allowlisting](https://support.claude.com/en/articles/13200993-restrict-access-to-claude-with-ip-allowlisting) enabled for Claude, route `bridge.claudeusercontent.com` through the same proxy egress as `claude.ai` and `api.anthropic.com`, for example by placing it in the same Zscaler app segment or Netskope steering policy. If you can’t route it that way, add the egress address your proxy uses for that host to your organization’s IP allowlist, but only when that address is dedicated to your organization: a shared proxy egress range also admits the proxy vendor’s other customers.
+Anthropic checks connections to `bridge.claudeusercontent.com` against your organization’s IP allowlist using the address they arrive from. If your proxy sends traffic for that host out through an address that isn’t on that allowlist, Claude Code can’t connect to the [Claude in Chrome](chrome.md) extension even though the rest of Claude Code works.
 
 ### [​](#github-allow-lists-and-firewalls) GitHub allow lists and firewalls
 

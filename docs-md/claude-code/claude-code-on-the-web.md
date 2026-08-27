@@ -18,7 +18,7 @@ This page covers the web product itself:
 
 ## [​](#cloud-environments) Cloud environments
 
-Every cloud session runs in a [cloud environment](cloud-environments.md), the saved configuration that controls network access, environment variables, and setup scripts. If you don’t have an environment yet when you onboard, Claude Code sets up a **Default** environment with [**Trusted** network access](cloud-environments.md). See [The Default environment](cloud-environments.md) for how it’s created and how sessions choose an environment when you have more than one.
+Every cloud session runs in a [cloud environment](cloud-environments.md), the saved configuration that controls network access, environment variables, and setup scripts. If you don’t have an environment yet, onboarding sets up a **Default** environment with [**Trusted** network access](cloud-environments.md), either by creating it for you or by asking you to create it. See [The Default environment](cloud-environments.md) for which of those happens on your plan and how sessions choose an environment when you have more than one.
 The same environments apply wherever you start a cloud session: the web, the terminal, [Claude Tag](https://claude.com/docs/claude-tag/overview), [routines](routines.md), and the mobile and Desktop apps. Claude Tag channel sessions use [organization-shared environments](cloud-environments.md) only.
 See [Configure cloud environments](cloud-environments.md) to change what an environment allows, set variables, or add a setup script, and [Installed tools](cloud-environments.md) for what sessions include without any configuration.
 
@@ -34,7 +34,7 @@ Cloud sessions need access to your GitHub repositories to clone code and push br
 With either method, a cloud session can access any repository the connecting GitHub account can see, not just the repositories the Claude GitHub App is installed on. App installation enables PR webhooks for [Auto-fix](#auto-fix-pull-requests); it is not a session-level access control. To restrict which repositories your team can reach from cloud sessions, restrict access on GitHub itself, for example by limiting team or repository membership for the connected GitHub accounts.
 
 Either method works. [`/schedule`](routines.md) checks for either form of access and prompts you to run `/web-setup` if neither is configured. See [Connect from your terminal](web-quickstart.md) for the `/web-setup` walkthrough.
-Team and Enterprise Owners can disable `/web-setup` with the Quick web setup toggle at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code).
+Quick web setup is an organization setting that lets members connect GitHub with `/web-setup`, skips the Claude GitHub App install prompt during browser onboarding, and has browser onboarding create the [**Default** environment](cloud-environments.md) for them instead of showing the environment form. On Team and Enterprise plans it’s off by default, which hides `/web-setup`. An [Owner](server-managed-settings.md) turns it on with the **Quick web setup** toggle at [**Admin settings > Claude Code**](https://claude.ai/admin-settings/claude-code).
 
 Organizations with [Zero Data Retention](zero-data-retention.md) enabled can’t use `/web-setup` or other cloud session features.
 
@@ -227,7 +227,7 @@ You will be asked to confirm before a session is deleted.
 
 Claude can watch a pull request and automatically respond to CI failures and review comments. Claude subscribes to GitHub activity on the PR, and when a check fails or a reviewer leaves a comment, Claude investigates and pushes a fix if one is clear.
 
-Auto-fix requires the Claude GitHub App to be installed on your repository. If you haven’t already, install it from the [GitHub App page](https://github.com/apps/claude) or when prompted during [setup](web-quickstart.md).
+Auto-fix requires the Claude GitHub App to be installed on your repository. If you haven’t already, install it from the [GitHub App page](https://github.com/apps/claude).
 
 There are a few ways to turn on auto-fix depending on where the PR came from and what device you’re using:
 

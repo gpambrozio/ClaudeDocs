@@ -84,6 +84,7 @@ Every key below links to its entry. Scope lists the [files](settings.md) it can 
 | [`fallbackModel`](#fallbackmodel) | Name [backup models](model-config.md) for when the primary is overloaded | Model and responses | Any file |
 | [`fastMode`](#fastmode) | Turn [fast mode](fast-mode.md) on for sessions where it’s available | Model and responses | Any file |
 | [`fastModePerSessionOptIn`](#fastmodepersessionoptin) | Require people to turn [fast mode](fast-mode.md) on each session | Model and responses | Any file |
+| [`feedbackDrafts`](#feedbackdrafts) | Control whether Claude queues [feedback drafts](tools-reference.md) for you to review | Privacy and telemetry | User or managed |
 | [`feedbackSurveyRate`](#feedbacksurveyrate) | Change how often the [session quality survey](data-usage.md) appears | Privacy and telemetry | Any file |
 | [`fileCheckpointingEnabled`](#filecheckpointingenabled) | Turn off or on the file snapshots that [`/rewind`](checkpointing.md) restores | Memory and context | Any file |
 | [`fileSuggestion`](#filesuggestion) | Supply [`@` file autocomplete](interactive-mode.md) from your own command | Interface and terminal | Any file |
@@ -185,7 +186,7 @@ Every key below links to its entry. Scope lists the [files](settings.md) it can 
 | [`skipWebFetchPreflight`](#skipwebfetchpreflight) | Skip the [WebFetch hostname check](tools-reference.md) when Anthropic is unreachable | Privacy and telemetry | Any file |
 | [`spellcheck`](#spellcheck) | Underline misspelled words in the prompt input with a [spell checker](interactive-mode.md) you install | Interface and terminal | User or managed |
 | [`spinnerTipsEnabled`](#spinnertipsenabled) | Hide tips in the spinner while Claude works | Interface and terminal | Any file |
-| [`spinnerTipsOverride`](#spinnertipsoverride) | Replace or extend spinner tips with your own strings | Interface and terminal | Any file |
+| [`spinnerTipsOverride`](#spinnertipsoverride) | Add your own tips to the spinner rotation, or replace the built-in tips | Interface and terminal | Any file |
 | [`spinnerVerbs`](#spinnerverbs) | Add or replace the verbs shown while a turn runs | Interface and terminal | Any file |
 | [`sshConfigs`](#sshconfigs) | Add [SSH connections](desktop.md) to the Desktop environment dropdown | Remote, desktop, and notifications | User or managed |
 | [`sshHostAllowlist`](#sshhostallowlist) | Limit which hosts [Desktop SSH sessions](desktop.md) can reach | Remote, desktop, and notifications | Managed |
@@ -2638,24 +2639,62 @@ settings.json
 
 ### [​](#spinnertipsoverride) `spinnerTipsOverride`
 
-Replace or extend the [spinner tips](#spinnertipsenabled), the short hints Claude Code rotates through while Claude works, with your own strings, such as a team reminder to run a review skill. Set `excludeDefault` to `true` and list at least one tip to show only your tips; when it’s `false` or absent, or `tips` is empty, Claude Code keeps the built-in tips and adds yours.
+Add your own tips to the [spinner tips](#spinnertipsenabled) that Claude Code shows while Claude works, or replace the built-in tips with yours. Claude Code puts your tips in the same rotation as the built-in ones: it picks the tip that has gone unshown the longest, skips tips still in their cooldown, and breaks ties by priority.
+If you set [`spinnerTipsEnabled`](#spinnertipsenabled) to `false`, Claude Code hides all tips, yours included.
 
-- **Scope**: [`Any file`](#scopes)
-- **Type**: object with a `tips` array of strings and an optional `excludeDefault` Boolean
+- **Scope**: [`Any file`](#scopes). Claude Code honors tip objects, `tipsFile`, `label`, and `excludeDefault` from user settings, the `--settings` flag, and managed settings; from project and local settings it reads plain string tips only.
+- **Type**: object with `tips`, `tipsFile`, `label`, and `excludeDefault` fields, each optional
 - **Default**: unset, so Claude Code shows only the built-in tips
 
-This example replaces the built-in tips with a single tip of your own:
+Tip objects, `tipsFile`, `label`, and the Scope line’s rule that project and local settings contribute plain strings only require Claude Code v2.1.247 or later. On earlier versions, a project or local file’s `excludeDefault` applies too.
+Each `tips` entry is a plain string or an object with these fields:
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `id` | Yes | Up to 64 letters, digits, `.`, `_`, or `-`. Claude Code keys the tip’s show history on it, so the tip’s cooldown survives reordering the list. Of two entries with the same id, Claude Code uses the first |
+| `text` | Yes | The tip, one line of up to 500 characters. Claude Code strips ANSI escapes and control characters and collapses whitespace |
+| `cooldownSessions` | No | Sessions Claude Code waits before showing the tip again, `0` to `1000`, default `0` |
+| `priority` | No | Order among tips that have gone unshown equally long, higher first, `-10` to `10`, default `0` |
+
+Claude Code reads a plain string as a tip with those defaults and a position-based id, so its show history resets when you reorder the list. Give a tip an `id` to keep its history across edits.
+Claude Code reads at most 200 tips across `tips` and `tipsFile`, and drops an invalid entry with a debug warning instead of rejecting the settings file.
+Use the remaining fields to name a tips file, set the prefix, and hide the built-in tips:
+
+- `tipsFile`: an absolute or `~/` path to a local JSON file holding an array of the same entries, or an object with a `tips` array, up to 256 KB. Claude Code reads the file once per process, so it loads your edits at the next start. You can’t set it through [server-managed settings](server-managed-settings.md); deploy inline `tips` there, or deploy the path in an on-disk `managed-settings.json`.
+- `label`: the prefix Claude Code shows before tips from user, `--settings`, and managed settings, up to 40 characters. The default is `Tip`, the same prefix as the built-in tips, and tips from project and local settings always use it.
+- `excludeDefault`: set it to `true` to hide the built-in tips and show only yours. When Claude Code can’t load any of your tips, for example because `tipsFile` doesn’t exist or every entry is invalid, it keeps the built-in rotation instead of an empty spinner.
+
+When more than one settings file sets the key, Claude Code shows tips from all of them and takes `tipsFile`, `label`, and `excludeDefault` from whichever of managed settings, the `--settings` flag, and user settings is the highest-precedence one that sets each.
+This example, in your user settings, adds a plain string tip and an object tip to the rotation under the `Acme tip` prefix:
 
 settings.json
 
 ```shiki
 {
   "spinnerTipsOverride": {
-    "excludeDefault": true,
-    "tips": ["Run /review before opening a PR"]
+    "label": "Acme tip",
+    "tips": [
+      "Run /review before opening a PR",
+      {
+        "id": "gateway-errors",
+        "text": "Seeing 5xx errors? Check the gateway status page first",
+        "cooldownSessions": 5,
+        "priority": 2
+      }
+    ]
   }
 }
 ```
+
+Each field in the example changes one thing about how Claude Code shows the tips:
+
+- `label`: Claude Code shows both tips as `Acme tip: ...` instead of `Tip: ...`.
+- The plain string: Claude Code gives it the defaults, so it can come up again in the very next session.
+- `id`: Claude Code keys the second tip’s show history on `gateway-errors`, so its cooldown still applies after you add or reorder tips.
+- `cooldownSessions`: after Claude Code shows the `gateway-errors` tip, it doesn’t show that tip again until five sessions later.
+- `priority`: when the `gateway-errors` tip and another tip have gone unshown for the same number of sessions, for example when neither has been shown yet, Claude Code shows `gateway-errors` first. The plain string has the default priority, `0`.
+
+While Claude works, Claude Code shows your tips in the spinner with your prefix, such as `Acme tip: Run /review before opening a PR`.
 
 ### [​](#spinnerverbs) `spinnerVerbs`
 
@@ -4886,7 +4925,7 @@ The desktop app ignores any other value, and a value that isn’t a Boolean, suc
 
 ## [​](#privacy-and-telemetry) Privacy and telemetry
 
-Control how long Claude Code keeps session data and what it sends. The switches that turn off usage metrics and error reports are environment variables, not settings keys: set `DISABLE_TELEMETRY`, `DISABLE_ERROR_REPORTING`, or `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` in the [`env`](#env) key or in the shell. [Telemetry services](data-usage.md) says what each one stops. The session survey is the exception: [`feedbackSurveyRate`](#feedbacksurveyrate) below turns it off from a settings file.
+Control how long Claude Code keeps session data and what it sends. The switches that turn off usage metrics and error reports are environment variables, not settings keys: set `DISABLE_TELEMETRY`, `DISABLE_ERROR_REPORTING`, or `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` in the [`env`](#env) key or in the shell. [Telemetry services](data-usage.md) says what each one stops. Two exceptions turn off from a settings file: [`feedbackDrafts`](#feedbackdrafts) below for Claude-drafted feedback, and [`feedbackSurveyRate`](#feedbacksurveyrate) below for the session survey.
 
 ### [​](#cleanupperioddays) `cleanupPeriodDays`
 
@@ -4905,6 +4944,28 @@ settings.json
 ```
 
 Setting `0` fails validation, so pick a large value such as `3650` for long retention. To stop Claude Code from writing transcripts at all, see [Plaintext storage](claude-directory.md).
+
+### [​](#feedbackdrafts) `feedbackDrafts`
+
+Control [Claude-drafted feedback](tools-reference.md): whether Claude can queue feedback drafts for you to review, and whether Claude Code shows a card when Claude queues one.
+
+- **Scope**: [`User or managed`](#scopes)
+- **Type**: string, one of `"notify"`, `"quiet"`, or `"off"`
+  - `"notify"`: Claude Code shows a card above the prompt when Claude queues a draft, up to [three cards in a session](tools-reference.md) by default
+  - `"quiet"`: Claude drafts without a card. You see the count of queued drafts in the prompt footer and review them in `/feedback`
+  - `"off"`: Claude Code removes the SendFeedback tool, so Claude can’t queue drafts
+- **Default**: `"notify"`
+- **Per-session overrides**: [`CLAUDE_CODE_SEND_FEEDBACK`](env-vars.md) set to `0` turns the feature off for one session
+
+settings.json
+
+```shiki
+{
+  "feedbackDrafts": "quiet"
+}
+```
+
+Appears in `/config` as **Claude-drafted feedback**, which writes this key to your user settings. You see the `/config` row only in sessions [where Claude can draft feedback](tools-reference.md); setting `"off"` doesn’t hide it, so you can turn the feature back on from the same row. A value in managed settings takes precedence over your user setting, so when an administrator sets this key, the row shows the managed value and changing it has no effect. Claude Code ignores this key in project and local settings.
 
 ### [​](#feedbacksurveyrate) `feedbackSurveyRate`
 

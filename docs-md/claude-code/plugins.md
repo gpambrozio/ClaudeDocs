@@ -131,7 +131,7 @@ description: Greet the user with a personalized message
 Greet the user named "$ARGUMENTS" warmly and ask how you can help them today. Make the greeting personal and encouraging.
 ```
 
-Run `/reload-plugins` to pick up the changes. The skills count in the summary covers only `commands/` directories, so it can report `0 skills` even though the skill you just edited reloaded. Then try the skill with your name:
+Run `/reload-plugins` to pick up the changes. Then try the skill with your name:
 
 ```shiki
 /my-first-plugin:hello Alex
