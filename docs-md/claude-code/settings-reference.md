@@ -11,7 +11,7 @@ Every key below links to its entry. Scope lists the [files](settings.md) it can 
 | [`advisorModel`](#advisormodel) | Pick which model answers when Claude asks the [advisor tool](advisor.md) | Model and responses | Any file |
 | [`agent`](#agent) | Start every session as a named [subagent](sub-agents.md) with its prompt, tools, and model | Agents, sessions, and worktrees | Any file |
 | [`agentPushNotifEnabled`](#agentpushnotifenabled) | Let Claude send a [push notification to your phone](remote-control.md) when it decides to | Remote, desktop, and notifications | Any file |
-| [`allowAllClaudeAiMcps`](#allowallclaudeaimcps) | Load [claude.ai connectors](mcp.md) alongside a deployed [`managed-mcp.json`](managed-mcp.md) | MCP | Managed |
+| [`allowAllClaudeAiMcps`](#allowallclaudeaimcps) | Load the [claude.ai connectors](mcp.md) Claude Code fetches itself alongside a deployed [`managed-mcp.json`](managed-mcp.md) | MCP | Managed |
 | [`allowedChannelPlugins`](#allowedchannelplugins) | Replace the default allowlist of [channel plugins](channels.md) that can push messages | Plugins and skills | Managed |
 | [`allowedHttpHookUrls`](#allowedhttphookurls) | Limit which URLs [HTTP hooks](hooks.md) can target | Hooks and automation | Any file |
 | [`allowedMcpServers`](#allowedmcpservers) | Allowlist which [MCP servers](mcp.md) people can use | MCP | Any file |
@@ -50,12 +50,12 @@ Every key below links to its entry. Scope lists the [files](settings.md) it can 
 | [`companyAnnouncements`](#companyannouncements) | Show your organization’s announcements at startup | Interface and terminal | Any file |
 | [`crossSessionInbound`](#crosssessioninbound) | Choose whether Claude Code delivers [messages from your other sessions](cross-session-messaging.md), shows a notice without delivering them, or refuses them | Agents, sessions, and worktrees | Any file |
 | [`defaultShell`](#defaultshell) | Choose whether Bash or PowerShell runs the shell commands you type with the [`!` prefix](interactive-mode.md) | Interface and terminal | Any file |
-| [`deniedMcpServers`](#deniedmcpservers) | Block specific [MCP servers](mcp.md) in every scope | MCP | Any file |
+| [`deniedMcpServers`](#deniedmcpservers) | Block specific [MCP servers](mcp.md) by URL, command, or name | MCP | Any file |
 | [`dialogExpiry`](#dialogexpiry) | Set how long Claude Code waits for [Remote Control](remote-control.md) or an SDK host to answer a forwarded dialog before it cancels the dialog | Interface and terminal | User or managed |
 | [`diffTool`](#difftool) | Choose whether Claude’s proposed file changes open in the [VS Code](vs-code.md) or [JetBrains](jetbrains.md) diff viewer or stay in the terminal | Global config settings | Global config |
 | [`disableAgentView`](#disableagentview) | Turn off background agents and [agent view](agent-view.md) | Agents, sessions, and worktrees | Any file |
 | [`disableAllHooks`](#disableallhooks) | Turn off [hooks](hooks.md), a custom [status line](statusline.md), and a custom [`@` file suggestion](interactive-mode.md) command at once | Hooks and automation | Any file |
-| [`disableArtifact`](#disableartifact) | Turn the [Artifact tool](artifacts.md) off for everyone; use `enableArtifact` for yourself | Remote, desktop, and notifications | Any file |
+| [`disableArtifact`](#disableartifact) | Deprecated; use `enableArtifact` to turn the [Artifact tool](artifacts.md) off | Remote, desktop, and notifications | Any file |
 | [`disableAutoMode`](#disableautomode) | Remove [auto mode](permission-modes.md) from the permission mode cycle | Permission settings | Any file |
 | [`disableBrowserExternalNavigation`](#disablebrowserexternalnavigation) | Limit the [desktop](desktop.md) Browser pane to localhost for people and Claude | Tools | Managed |
 | [`disableBundledSkills`](#disablebundledskills) | Turn off the [skills](skills.md) and [workflows](workflows.md) included with Claude Code | Plugins and skills | Any file |
@@ -73,7 +73,7 @@ Every key below links to its entry. Scope lists the [files](settings.md) it can 
 | [`effortLevel`](#effortlevel) | Save the [`/effort` level](model-config.md) so future sessions reason more or less deeply | Model and responses | Any file |
 | [`emojiCompletionEnabled`](#emojicompletionenabled) | Turn off [`:shortcode:` emoji suggestions and replacement](interactive-mode.md) in the prompt input | Interface and terminal | Any file |
 | [`enableAllProjectMcpServers`](#enableallprojectmcpservers) | Approve every server in project [`.mcp.json`](mcp.md) files without a prompt | MCP | Any file |
-| [`enableArtifact`](#enableartifact) | Turn the [Artifact tool](artifacts.md) on or off for yourself | Remote, desktop, and notifications | User or managed |
+| [`enableArtifact`](#enableartifact) | Turn the [Artifact tool](artifacts.md) off with a `false` in any file; no file can turn it back on | Remote, desktop, and notifications | Any file |
 | [`enabledMcpjsonServers`](#enabledmcpjsonservers) | Approve specific servers from a project’s [`.mcp.json`](mcp.md) | MCP | Any file |
 | [`enabledPlugins`](#enabledplugins) | Turn individual [plugins](plugins.md) on or off per scope | Plugins and skills | Any file |
 | [`enableWorkflows`](#enableworkflows) | Turn [dynamic workflows](workflows.md) on or off against your plan’s default | Hooks and automation | Any file |
@@ -102,10 +102,12 @@ Every key below links to its entry. Scope lists the [files](settings.md) it can 
 | [`isolatePeerMachines`](#isolatepeermachines) | Ask you before Claude [messages one of your sessions on another machine](cross-session-messaging.md) | Agents, sessions, and worktrees | Any file |
 | [`keybindingFlavor`](#keybindingflavor) | Make `Ctrl+W` [delete back to the previous whitespace](interactive-mode.md), as Bash does | Interface and terminal | Any file |
 | [`language`](#language) | Have Claude respond in a language other than English | Model and responses | Any file |
+| [`managedSourcesBehavior`](#managedsourcesbehavior) | Compose every [managed source](managed-settings.md) you deploy instead of using the highest-priority one alone | Enterprise and managed settings | Managed |
 | [`minimumVersion`](#minimumversion) | Keep [auto-updates](setup.md) from installing anything below a version | Updates and versioning | Any file |
 | [`model`](#model) | Change the [model](model-config.md) Claude Code starts with | Model and responses | Any file |
 | [`modelOverrides`](#modeloverrides) | [Map model IDs](model-config.md) to your provider’s IDs, such as Bedrock ARNs | Model and responses | Any file |
 | [`modelPicker`](#modelpicker) | Choose which models the [`/model` picker](model-config.md) lists, in your own order and with your own labels | Model and responses | User or managed |
+| [`modelPricing`](#modelpricing) | Report spend at your organization’s contracted rates instead of list price | Model and responses | Managed |
 | [`otelHeadersHelper`](#otelheadershelper) | Generate rotating [OpenTelemetry](monitoring-usage.md) headers with your own command | Authentication and providers | Any file |
 | [`outputStyle`](#outputstyle) | Change Claude’s role, tone, and output format with an [output style](output-styles.md) | Model and responses | Any file |
 | [`parentSettingsBehavior`](#parentsettingsbehavior) | Apply or drop restrictions an [SDK or IDE host](managed-settings.md) passes when you deploy [managed settings](managed-settings.md) | Enterprise and managed settings | Managed |
@@ -500,6 +502,53 @@ An [`availableModels`](#availablemodels) allowlist still applies to these rows. 
 
 Claude Code drops a row it can’t parse and keeps the rest. See [Fix a broken settings file](settings.md).
 
+### [​](#modelpricing) `modelPricing`
+
+Report spend at the rates your organization pays instead of list price. Set it when your organization has contracted rates, so the dollar figures developers see match your bill. Claude Code applies the rates in `/usage`, the [status line](statusline.md), the Agent SDK’s `total_cost_usd`, the [`--max-budget-usd`](cli-reference.md) limit, and the [OpenTelemetry](monitoring-usage.md) cost metric and events. You supply the rates: Claude Code doesn’t read them from your contract or the Claude Console. Requires Claude Code v2.1.242 or later.
+
+- **Scope**: [`Managed`](#scopes). Deploy the key through server-managed settings, an MDM policy, a `managed-settings.json` file, or a [policy helper](managed-settings.md). Claude Code ignores it in user, project, and local settings, in `--settings`, and on Windows in the user-writable [HKCU registry](managed-settings.md). With server-managed settings, each session reports costs at list price until that session’s [settings fetch](server-managed-settings.md) has confirmed the setting. A host application that embeds Claude Code and sets [`CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`](env-vars.md) can supply a table of its own through the SDK [`managedSettings`](agent-sdk/typescript.md) option, which Claude Code uses only when no managed source sets the key and only in Claude Code v2.1.246 or later.
+- **Type**: object with an optional `multiplier` and an optional `overrides` map
+- **Default**: unset, so Claude Code reports list price unless a host application supplies a table
+
+This example sets contracted rates for Sonnet 4.6 and then reduces every figure, the Sonnet row included, by 15%. Set `multiplier` alone for a flat discount, `overrides` alone for per-model rates, or both:
+
+managed-settings.json
+
+```shiki
+{
+  "modelPricing": {
+    "multiplier": 0.85,
+    "overrides": {
+      "claude-sonnet-4-6": {
+        "input": 2.4,
+        "output": 12,
+        "cacheRead": 0.24,
+        "cacheWrite": 3
+      }
+    }
+  }
+}
+```
+
+For the steps, including how to confirm the rates are in effect, see [Report spend at your contracted rates](costs.md).
+
+#### [​](#fields-for-modelpricing) Fields for `modelPricing`
+
+| Field | Type | What it does |
+| --- | --- | --- |
+| `multiplier` | number greater than 0 and at most 1 | Scales every cost Claude Code computes, whether or not an `overrides` row covers it |
+| `overrides` | map of model ID to a rate object with `input`, `output`, `cacheRead`, and `cacheWrite`, each 0 to 10000 | The USD-per-million-token rates for that model, all four required. `cacheWrite` covers both five-minute and one-hour cache writes. See [Which models a row applies to](#which-models-a-modelpricing-row-applies-to) |
+
+Claude Code uses a row’s rates exactly as you wrote them, without adding the fast-mode surcharge or the [US-only-inference rate](about-claude/pricing.md). If you also set `multiplier`, Claude Code applies it on top of the row’s rates. Claude Code drops a row with a rate it can’t parse, or a `multiplier` it can’t parse, and keeps the rest; see [Fix a broken settings file](settings.md).
+
+#### [​](#which-models-a-modelpricing-row-applies-to) Which models a `modelPricing` row applies to
+
+Claude Code decides which models a row applies to from the row’s key:
+
+- **A built-in model’s ID**: a key Claude Code itself uses for a built-in model, whether that key is the model’s own ID, such as `claude-sonnet-4-6`, or its Bedrock, Agent Platform, or Foundry ID. Claude Code applies the row to every dated snapshot ID and provider-specific ID of that model.
+- **Any other key**: a key that isn’t a built-in model’s ID, such as a gateway model alias. Claude Code applies the row to that one ID only. When a model ID matches one of your keys exactly and also falls under a row keyed by a built-in model’s ID, Claude Code uses the exact match.
+- **A Bedrock application inference profile**: once Claude Code has resolved the profile to the model it routes to, through your [`modelOverrides`](#modeloverrides) map or the [`bedrock:GetInferenceProfile` lookup](amazon-bedrock.md), Claude Code applies that model’s row to the profile.
+
 ### [​](#outputstyle) `outputStyle`
 
 Select an [output style](output-styles.md) by name. An output style is a saved set of instructions that Claude Code adds to the system prompt to change Claude’s role, tone, and output format, such as the built-in Explanatory and Learning styles or one you wrote yourself.
@@ -633,11 +682,11 @@ Decide what Claude can do without asking, which permission mode a session starts
 
 ### [​](#allowmanagedpermissionrulesonly) `allowManagedPermissionRulesOnly`
 
-Make managed settings the only source of `allow`, `ask`, and `deny` permission rules. Claude Code then ignores rules in user, project, local, and `--settings` files, ignores `--allowedTools`, hides the always-allow choices in permission prompts, and stops saving new rules.
+Make managed settings the only source of `allow`, `ask`, and `deny` permission rules. Claude Code then ignores rules in user, project, local, and `--settings` files, ignores `--allowedTools`, hides the always-allow choices in permission prompts, and stops saving new rules. When [parent settings from an embedding host](managed-settings.md) apply, Claude Code treats them as part of the managed tier: it keeps their `deny` and `ask` rules and drops their `allow` rules and `additionalDirectories`.
 
 - **Scope**: [`Managed`](#scopes)
 - **Type**: Boolean
-  - `true`: managed settings are the only source of `allow`, `ask`, and `deny` rules; Claude Code ignores rules from other files and `--allowedTools`, hides always-allow choices, and stops saving new rules
+  - `true`: managed settings are the only source of `allow`, `ask`, and `deny` rules; Claude Code ignores rules from other files and `--allowedTools`, drops the `allow` rules and `additionalDirectories` of any host-supplied parent settings that apply while keeping their `deny` and `ask` rules, hides always-allow choices, and stops saving new rules
   - `false`: Claude Code applies permission rules from user, project, local, and `--settings` files in addition to the managed ones
 - **Default**: unset, so Claude Code applies permission rules from user, project, and local settings and from `--settings`, in addition to the managed ones
 
@@ -977,7 +1026,7 @@ settings.json
 }
 ```
 
-Boolean keys take the value from the highest-precedence settings file that sets them, so a managed `enabled` or `failIfUnavailable` overrides anything a developer sets. Array keys merge across every settings file, so a developer can append entries; see [Keep developers from widening the policy](sandboxing.md) for the managed-only locks. To require the sandbox for an organization, see [Enforce sandboxing with managed settings](sandboxing.md).
+Claude Code takes a Boolean key’s value from the highest-precedence settings file that sets it, so a managed `enabled` or `failIfUnavailable` overrides anything a developer sets. It merges array keys across every settings file the session loads, so a developer can append entries; see [Keep developers from widening the policy](sandboxing.md) for the managed-only locks. To require the sandbox for an organization, see [Enforce sandboxing with managed settings](sandboxing.md).
 
 ### [​](#sandbox-enabled) `sandbox.enabled`
 
@@ -1069,7 +1118,7 @@ settings.json
 }
 ```
 
-Excluded commands still go through the regular permission flow. Exclusion is a convenience, not a security boundary: prefer [`filesystem.allowWrite`](#sandbox-filesystem-allowwrite) when a tool only needs to write somewhere specific. Entries merge across every settings file, and there is no managed-only lock for this list, so keep a managed list narrow.
+Excluded commands still go through the regular permission flow. Exclusion is a convenience, not a security boundary: prefer [`filesystem.allowWrite`](#sandbox-filesystem-allowwrite) when a tool only needs to write somewhere specific. Claude Code merges entries across every settings file the session loads, and there is no managed-only lock for this list, so keep a managed list narrow.
 
 ### [​](#sandbox-allowunsandboxedcommands) `sandbox.allowUnsandboxedCommands`
 
@@ -1119,7 +1168,9 @@ settings.json
 }
 ```
 
-Claude Code enforces these lists at the OS sandbox boundary, so they apply to every subprocess a sandboxed command starts, such as `kubectl`, `terraform`, or `npm`, not only to Claude’s file tools. Your [permission rules](sandboxing.md) feed the same lists: `Edit` allow and deny rules join `allowWrite` and `denyWrite`, `Read` deny rules join `denyRead`, and `WebFetch(domain:...)` allow and deny rules join the [`network`](#sandbox-network) domain lists. Every list merges across settings files. When you edit a list during a session, Claude Code [applies the change to the running session](settings.md).
+Claude Code enforces these lists at the OS sandbox boundary, so they apply to every subprocess a sandboxed command starts, such as `kubectl`, `terraform`, or `npm`, not only to Claude’s file tools. Claude Code adds your [permission rules](sandboxing.md) to the same lists: `Edit` allow and deny rules to `allowWrite` and `denyWrite`, `Read` deny rules to `denyRead`, and `WebFetch(domain:...)` allow and deny rules to the [`network`](#sandbox-network) domain lists.
+Unless a managed-only lock is set, Claude Code merges every list across the settings files the session loads. [`allowManagedReadPathsOnly`](#sandbox-filesystem-allowmanagedreadpathsonly) limits `allowRead` to entries from managed settings, and [`allowManagedDomainsOnly`](#sandbox-network-allowmanageddomainsonly) does the same for allowed domains.
+[Configure sandboxing](sandboxing.md) covers sources you exclude with `--setting-sources`. When you edit a list during a session, Claude Code [applies the change to the running session](settings.md).
 
 #### [​](#sandbox-path-prefixes) Sandbox path prefixes
 
@@ -1160,7 +1211,7 @@ settings.json
 }
 ```
 
-Entries merge across every settings file: user, project, local, and managed paths combine rather than replace each other, and Claude Code adds the paths from your `Edit(...)` allow permission rules. An `allowWrite` entry can’t lift a [protected path](sandboxing.md).
+Claude Code merges entries across every settings file the session loads: user, project, local, and managed paths combine rather than replace each other, and Claude Code adds the paths from your `Edit(...)` allow permission rules. An `allowWrite` entry can’t lift a [protected path](sandboxing.md).
 
 ### [​](#sandbox-filesystem-denywrite) `sandbox.filesystem.denyWrite`
 
@@ -1184,7 +1235,7 @@ settings.json
 }
 ```
 
-Entries merge across every settings file, and Claude Code adds the paths from your `Edit(...)` deny permission rules.
+Claude Code merges entries across every settings file the session loads, and adds the paths from your `Edit(...)` deny permission rules.
 
 ### [​](#sandbox-filesystem-denyread) `sandbox.filesystem.denyRead`
 
@@ -1206,7 +1257,7 @@ settings.json
 }
 ```
 
-Entries merge across every settings file, and Claude Code adds the paths from your `Read(...)` deny permission rules. When [`filesystem.disabled`](#sandbox-filesystem-disabled) is `true`, Claude Code doesn’t enforce these entries.
+Claude Code merges entries across every settings file the session loads, and adds the paths from your `Read(...)` deny permission rules. When [`filesystem.disabled`](#sandbox-filesystem-disabled) is `true`, Claude Code doesn’t enforce these entries.
 
 ### [​](#sandbox-filesystem-allowread) `sandbox.filesystem.allowRead`
 
@@ -1231,16 +1282,16 @@ settings.json
 }
 ```
 
-Place a `.` entry in project settings: it resolves to the project root there and to `~/.claude` in user settings. Entries merge across every settings file unless [`allowManagedReadPathsOnly`](#sandbox-filesystem-allowmanagedreadpathsonly) is set.
+Place a `.` entry in project settings: it resolves to the project root there and to `~/.claude` in user settings. Claude Code merges entries across every settings file the session loads unless [`allowManagedReadPathsOnly`](#sandbox-filesystem-allowmanagedreadpathsonly) is set.
 
 ### [​](#sandbox-filesystem-allowmanagedreadpathsonly) `sandbox.filesystem.allowManagedReadPathsOnly`
 
-Honor only the [`allowRead`](#sandbox-filesystem-allowread) entries that come from managed settings, so developers can’t re-open read access to paths your organization blocked. `denyRead` entries still merge from every settings file.
+Honor only the [`allowRead`](#sandbox-filesystem-allowread) entries that come from managed settings, so developers can’t re-open read access to paths your organization blocked. Claude Code still merges `denyRead` entries from every settings file the session loads.
 
 - **Scope**: [`Managed`](#scopes)
 - **Type**: Boolean
   - `true`: Claude Code honors only the `allowRead` entries from managed settings
-  - `false`: `allowRead` entries merge from every settings file
+  - `false`: `allowRead` entries merge from every settings file the session loads
 - **Default**: `false`
 
 This blocks reads of the home directory, re-opens `~/work`, and stops developers from re-opening anything else:
@@ -1446,7 +1497,7 @@ Linux and WSL2 only.
 
 Declare the credential files and environment variables to [protect from sandboxed commands](sandboxing.md). Each entry names a file `path` or a variable `name` and a `mode`: `deny` hides the credential inside the sandbox, and `mask` shows sandboxed commands a placeholder while the [sandbox proxy](sandboxing.md) substitutes the real value on outbound requests. Claude Code protects only the entries you list; there is no built-in credential deny list. Requires Claude Code v2.1.187 or later.
 
-- **Scope**: [`Any file`](#scopes). `deny` entries merge from every scope, and Claude Code honors `mask` entries, `allowPlaintextInject`, `awsPairs`, and `sigv4` only from user settings, managed settings, and the `--settings` flag.
+- **Scope**: [`Any file`](#scopes). Claude Code honors `mask` entries, `allowPlaintextInject`, `awsPairs`, and `sigv4` only from user settings, managed settings, and the `--settings` flag.
 - **Type**: object with `files`, `envVars`, `allowPlaintextInject`, `awsPairs`, and `sigv4`
 - **Default**: unset, so no credentials are protected
 
@@ -1502,7 +1553,8 @@ settings.json
 }
 ```
 
-Paths use the same [prefixes](#sandbox-path-prefixes) as the `sandbox.filesystem.*` settings, and Claude Code merges the arrays from every settings scope. `mask` substitution runs only through the sandbox proxy, so set [`sandbox.network.tlsTerminate`](#sandbox-network-tlsterminate), or [`allowPlaintextInject`](#sandbox-credentials-allowplaintextinject) for plain-HTTP test networks. `mask` applies to a single file, so list each credential file individually. Claude Code accepts but ignores the `mask` fields on a `deny` entry. [Mask credential files](sandboxing.md) covers which settings sources are honored and when an entry falls back to `deny`. Requires Claude Code v2.1.187 or later; `mask` entries require v2.1.221 or later.
+Paths use the same [prefixes](#sandbox-path-prefixes) as the `sandbox.filesystem.*` settings, and Claude Code merges the arrays from every settings scope the session loads. [Protect credentials](sandboxing.md) covers what still applies from sources you exclude with `--setting-sources`. Requires Claude Code v2.1.187 or later; `mask` entries require v2.1.221 or later.
+`mask` substitution runs only through the sandbox proxy, so set [`sandbox.network.tlsTerminate`](#sandbox-network-tlsterminate), or [`allowPlaintextInject`](#sandbox-credentials-allowplaintextinject) for plain-HTTP test networks. `mask` applies to a single file, so list each credential file individually. Claude Code accepts but ignores the `mask` fields on a `deny` entry. [Mask credential files](sandboxing.md) covers which settings sources are honored and when an entry falls back to `deny`.
 
 #### [​](#mask-fields-for-files) Mask fields for files
 
@@ -1565,7 +1617,8 @@ settings.json
 }
 ```
 
-The `name` must start with a letter or underscore and contain only letters, digits, and underscores. Claude Code merges the arrays from every settings scope, and `deny` takes precedence when the same variable appears with both modes. `mask` substitution runs only through the sandbox proxy, so set [`sandbox.network.tlsTerminate`](#sandbox-network-tlsterminate), or [`allowPlaintextInject`](#sandbox-credentials-allowplaintextinject) for plain-HTTP test networks; see [Mask environment variables](sandboxing.md). Claude Code accepts but ignores the `mask` fields on a `deny` entry. Requires Claude Code v2.1.187 or later; `mask` entries require v2.1.199 or later.
+The `name` must start with a letter or underscore and contain only letters, digits, and underscores. Claude Code merges the arrays from every settings scope the session loads, and applies `deny` when the same variable appears with both modes. [Protect credentials](sandboxing.md) covers what still applies from sources you exclude with `--setting-sources`. Requires Claude Code v2.1.187 or later; `mask` entries require v2.1.199 or later.
+`mask` substitution runs only through the sandbox proxy, so set [`sandbox.network.tlsTerminate`](#sandbox-network-tlsterminate), or [`allowPlaintextInject`](#sandbox-credentials-allowplaintextinject) for plain-HTTP test networks; see [Mask environment variables](sandboxing.md). Claude Code accepts but ignores the `mask` fields on a `deny` entry.
 
 #### [​](#mask-fields-for-environment-variables) Mask fields for environment variables
 
@@ -1848,7 +1901,7 @@ settings.json
 }
 ```
 
-Claude Code merges this list from every settings source even when `allowManagedDomainsOnly` is set, so a developer can always tighten the deny list. For IPv6 literals, see [IPv6 addresses in domain lists](sandboxing.md).
+Claude Code merges this list from every settings source the session loads even when `allowManagedDomainsOnly` is set, so a developer can always tighten the deny list. For IPv6 literals, see [IPv6 addresses in domain lists](sandboxing.md).
 
 ### [​](#sandbox-network-strictallowlist) `sandbox.network.strictAllowlist`
 
@@ -1899,7 +1952,7 @@ managed-settings.json
 }
 ```
 
-Denied domains still merge from every source. See [Keep developers from widening the policy](sandboxing.md).
+Denied domains still merge from every source the session loads. See [Keep developers from widening the policy](sandboxing.md).
 
 ### [​](#sandbox-network-httpproxyport) `sandbox.network.httpProxyPort`
 
@@ -2119,6 +2172,7 @@ settings.json
 - From user settings, `--settings`, and managed settings: at startup, and again in the running session when a saved change alters the merged `env`.
 - From project and local settings: after you trust the workspace, or at startup in `-p` mode, which never shows the trust dialog, and again when a saved change alters the merged `env`.
 - Variables Claude Code classifies as safe, such as model selection, timeouts and limits, feature toggles, and telemetry settings: at startup from every settings file.
+- After you [move the session with `/cd`](permissions.md) on v2.1.246 or later: the new directory’s project and local `env` values, on top of the previous directory’s.
 
 #### [​](#variables-claude-code-ignores-in-env) Variables Claude Code ignores in `env`
 
@@ -2126,6 +2180,7 @@ settings.json
 - Identity variables that Claude Code’s hosting environments own, such as `CLAUDE_CODE_REMOTE` and `CLAUDE_CODE_ACCOUNT_UUID`, are ignored from every file.
 - [`CLAUDE_CODE_MESSAGING_SOCKET` and `CLAUDE_CODE_MESSAGING_TOKEN`](env-vars.md), which Claude Code exports itself, are ignored from every file. Ignoring the socket variable requires Claude Code v2.1.224 or later, and ignoring the token requires v2.1.228 or later.
 - [`CLAUDE_CODE_PROJECT_DIR_NAME`](sessions.md), which Claude Code reads from the launch environment only, is ignored from every file; requires v2.1.234 or later.
+- [`CLAUDE_CODE_RESTRICTED`](env-vars.md), which Claude Code reads from the launch environment only, is ignored from every file.
 
 ### [​](#filecheckpointingenabled) `fileCheckpointingEnabled`
 
@@ -3963,8 +4018,8 @@ Load the [claude.ai connectors](mcp.md) Claude Code fetches itself alongside a d
 - **Scope**: [`Managed`](#scopes). Users can’t re-enable connectors that exclusive control suppressed.
 - **Type**: Boolean
   - `true`: Claude Code loads the claude.ai connectors alongside a deployed `managed-mcp.json`
-  - `false`: a deployed `managed-mcp.json` takes exclusive control of MCP servers and suppresses claude.ai connectors
-- **Default**: `false`, so a deployed `managed-mcp.json` suppresses claude.ai connectors
+  - `false`: a deployed `managed-mcp.json` takes exclusive control of MCP servers and suppresses the claude.ai connectors [Claude Code fetches itself](mcp.md)
+- **Default**: `false`, so a deployed `managed-mcp.json` suppresses the claude.ai connectors Claude Code fetches itself
 
 managed-settings.json
 
@@ -3974,11 +4029,11 @@ managed-settings.json
 }
 ```
 
-[`allowedMcpServers`](#allowedmcpservers) and [`deniedMcpServers`](#deniedmcpservers) still apply to the connectors this key loads. Connectors delivered to [cloud sessions](claude-code-on-the-web.md) stay suppressed. See [Allow claude.ai connectors alongside the managed set](managed-mcp.md).
+[`allowedMcpServers`](#allowedmcpservers) and [`deniedMcpServers`](#deniedmcpservers) still apply to the connectors this key loads. Connectors delivered to a [cloud session](claude-code-on-the-web.md) whose host carries a `managed-mcp.json`, such as a self-hosted runner, stay suppressed. See [Allow claude.ai connectors alongside the managed set](managed-mcp.md).
 
 ### [​](#allowedmcpservers) `allowedMcpServers`
 
-Allowlist the MCP servers people can use. Claude Code blocks any server that doesn’t match an entry, whichever settings file or `.mcp.json` defined it, including servers from `managed-mcp.json`. Built-in servers such as Claude in Chrome, IDE-provided servers, and servers the CLI itself configures are exempt from the allowlist; the denylist still applies to them.
+Allowlist the MCP servers people can use. Claude Code blocks any server that doesn’t match an entry wherever it’s defined, including plugin servers, servers passed with `--mcp-config`, and servers from `managed-mcp.json`. Built-in servers such as Claude in Chrome, the `ide` server Claude Code connects to in a running [VS Code](vs-code.md) or [JetBrains](jetbrains.md) IDE, and servers the CLI itself configures are exempt from the allowlist, and the denylist still applies to them. In-process `type: "sdk"` servers, which the [app that started the session registers](mcp.md), are exempt from both lists.
 
 - **Scope**: [`Any file`](#scopes). Entries from every file merge into one allowlist unless [`allowManagedMcpServersOnly`](#allowmanagedmcpserversonly) is set. Deploy it in managed settings to enforce it.
 - **Type**: array of objects, each with exactly one key: `serverName`, a string limited to letters, numbers, hyphens, and underscores; `serverCommand`, an array of the command and its arguments matched exactly; or `serverUrl`, a URL pattern with `*` wildcards
@@ -4025,7 +4080,7 @@ Users can still add MCP servers of their own; only servers that match the manage
 
 ### [​](#deniedmcpservers) `deniedMcpServers`
 
-Block specific MCP servers. Claude Code refuses to load a matching server in every scope, including servers from `managed-mcp.json` and [claude.ai connectors](mcp.md).
+Block specific MCP servers. Claude Code refuses to load a matching server wherever it’s defined, including plugin servers, servers passed with `--mcp-config`, servers from `managed-mcp.json`, and the claude.ai connectors [it fetches itself](mcp.md). In-process `type: "sdk"` servers, which the app that started the session registers, are exempt.
 
 - **Scope**: [`Any file`](#scopes). Entries from every file merge into one denylist, and [`allowManagedMcpServersOnly`](#allowmanagedmcpserversonly) doesn’t change that. Deploy it in managed settings to enforce it.
 - **Type**: array of objects, each with exactly one key: `serverName`, any non-empty string, so a claude.ai connector’s display name such as `"claude.ai Slack"` works; `serverCommand`, an array of the command and its arguments matched exactly; or `serverUrl`, a URL pattern with `*` wildcards
@@ -4045,11 +4100,11 @@ The denylist takes precedence over [`allowedMcpServers`](#allowedmcpservers), so
 
 ### [​](#disableclaudeaiconnectors) `disableClaudeAiConnectors`
 
-Turn off [claude.ai MCP connectors](mcp.md) so Claude Code neither fetches nor connects them. A `true` in any settings file applies: a checked-in project `.claude/settings.json` can opt a repository out of cloud connectors, but a project-level `false` can’t override a user- or managed-level `true`. Requires Claude Code v2.1.182 or later.
+Turn off the [claude.ai MCP connectors](mcp.md) [Claude Code fetches itself](mcp.md), so it neither fetches nor connects them. A `true` in any settings file applies: a checked-in project `.claude/settings.json` can opt a repository out of those connectors, but a project-level `false` can’t override a user- or managed-level `true`. Requires Claude Code v2.1.182 or later.
 
 - **Scope**: [`Any file`](#scopes)
 - **Type**: Boolean
-  - `true`: Claude Code neither fetches nor connects claude.ai MCP connectors
+  - `true`: Claude Code neither fetches nor connects those connectors
   - `false`: the same as unset; Claude Code fetches your connectors unless another settings file or `ENABLE_CLAUDEAI_MCP_SERVERS` turns them off
 - **Default**: `false`, so Claude Code fetches your connectors
 - **Per-session overrides**: [`ENABLE_CLAUDEAI_MCP_SERVERS`](env-vars.md) set to `false` turns connectors off for one session; whichever of the two turns them off, the other can’t turn them back on
@@ -4165,6 +4220,8 @@ settings.json
 ```
 
 Claude Code reads managed settings first, then the `--settings` flag, then user settings, and applies the first value found. `refuse` is stricter than `hold`, and `hold` is stricter than `accept`. When none of the trusted sources sets a value, a project or local `hold` or `refuse` still applies, replacing the per-message default. In sessions with cross-session messaging, this key appears in `/config` as **Messages from your other sessions**, which writes it to user settings; the row requires Claude Code v2.1.232 or later, and Claude Code hides it while the `--settings` flag or managed settings set the key.
+Claude Code [warns](errors.md) when you set a value it doesn’t recognize. While that value is present in a user, project, local, or `--settings` file, Claude Code holds inbound messages, even when a source that takes precedence sets `accept`. A `refuse` that another source sets still applies. Fix or remove the value to clear the hold.
+When the unrecognized value is in [managed settings](managed-settings.md), Claude Code instead treats it as `refuse` until an administrator fixes it. Before v2.1.248, Claude Code ignored an unrecognized value without warning.
 
 ### [​](#disableagentview) `disableAgentView`
 
@@ -4403,15 +4460,16 @@ Claude Code never shows the recap in non-interactive mode.
 
 ### [​](#disableartifact) `disableArtifact`
 
-Turn off the [Artifact](artifacts.md) tool, which publishes session output as a private web page on claude.ai, for everyone your settings reach, such as an organization through managed settings. To turn the tool off just for yourself, use [`enableArtifact`](#enableartifact) instead, which the **Artifacts** toggle in `/config` writes to your user settings.
-Don’t put either key in a project’s `.claude/settings.json`: Claude Code ignores `enableArtifact` there, and a `disableArtifact` there is overridden by any higher-precedence file rather than acting as a lock.
+Deprecated, and replaced by [`enableArtifact`](#enableartifact). Claude Code still honors `disableArtifact: true` as equivalent to `enableArtifact: false`, and ignores `disableArtifact: false`.
+
+Use [`enableArtifact`](#enableartifact) instead to turn off the [Artifact](artifacts.md) tool, which publishes session output as a private web page on claude.ai. When you turn the **Artifacts** row off in `/config`, Claude Code writes `enableArtifact` to your user settings and clears this key.
 
 - **Scope**: [`Any file`](#scopes)
 - **Type**: Boolean
-  - `true`: Claude Code turns off the Artifact tool for everyone your settings reach
-  - `false`: the Artifact tool follows `enableArtifact` and your account’s availability
-- **Default**: `false`
-- **Per-session overrides**: [`CLAUDE_CODE_DISABLE_ARTIFACT`](env-vars.md) set to `1` turns the tool off for one session; whichever of the two turns it off, the other can’t turn it back on
+  - `true`: Claude Code turns the Artifact tool off for every session the file applies to, and no other file turns it back on. Before v2.1.242, a higher-precedence file could override a lower file’s `true` rather than the key acting as a lock
+  - `false`: ignored; to leave the tool on, remove the key
+- **Default**: unset, so the tool follows your account’s [availability](artifacts.md)
+- **Per-session overrides**: [`CLAUDE_CODE_DISABLE_ARTIFACT`](env-vars.md) set to `1` turns the tool off for one session
 
 settings.json
 
@@ -4421,7 +4479,7 @@ settings.json
 }
 ```
 
-A managed `disableArtifact` takes precedence over a user’s [`enableArtifact`](#enableartifact) choice.
+[Disable artifacts](artifacts.md) lists every way to turn the tool off.
 
 ### [​](#disabledeeplinkregistration) `disableDeepLinkRegistration`
 
@@ -4441,7 +4499,7 @@ settings.json
 
 ### [​](#disabledesktoplocalsessions) `disableDesktopLocalSessions`
 
-Turn off Code sessions that run on the device in the [desktop app](desktop.md), for deployments where developers should work on remote machines over SSH. In the Code tab, the **Local** environment stays in the environment dropdown but is grayed out and can’t be selected, with a tooltip saying your organization turned it off; on Windows the WSL entry is grayed out the same way, though whether WSL sessions run on a managed device at all is [governed separately](admin-setup.md). New sessions default to the first [SSH connection](desktop.md) if one is configured, and the app refuses to start or resume a session on the device, including an SSH connection back to the same machine. SSH sessions to other hosts and cloud sessions are unaffected. The desktop app reads this key; the terminal CLI ignores it.
+Turn off Code sessions that run on the device in the [desktop app](desktop.md), for deployments where developers should work on remote machines over SSH. In the Code tab, the **Local** environment stays in the environment dropdown but is grayed out and can’t be selected, with a tooltip saying your organization turned it off; on Windows the WSL entry is grayed out the same way, though whether WSL sessions run on a managed device at all is [governed separately](admin-setup.md). New sessions default to the first [SSH connection](desktop.md) if one is configured, and the app refuses to start or resume a session on the device, including an SSH connection back to the same machine. SSH sessions to other hosts and cloud sessions are unaffected. The desktop app reads this key; the terminal CLI ignores it. Requires Claude Desktop v1.37937.0 or later.
 
 - **Scope**: [`Managed`](#scopes)
 - **Type**: Boolean; only the JSON Boolean `true` takes effect
@@ -4480,13 +4538,13 @@ settings.json
 
 ### [​](#enableartifact) `enableArtifact`
 
-Turn the [Artifact](artifacts.md) tool on or off for yourself. When unset, the default follows the feature’s [availability](artifacts.md) for your account. The **Artifacts** row in `/config` writes this key, so you don’t usually edit it by hand. To turn artifacts off for everyone from managed settings, use [`disableArtifact`](#disableartifact) instead. Requires Claude Code v2.1.196 or later.
+Turn off the [Artifact](artifacts.md) tool, which publishes session output as a private web page on claude.ai. When you turn the **Artifacts** row off in `/config`, Claude Code writes this key to your user settings, so you don’t usually edit it by hand. Requires Claude Code v2.1.196 or later.
 
-- **Scope**: [`User or managed`](#scopes). Claude Code ignores the key in project and local settings so that a repository you clone can’t turn the tool on for you.
+- **Scope**: [`Any file`](#scopes). Every file can turn the tool off, and none can turn it back on.
 - **Type**: Boolean
-  - `true`: Claude Code turns the Artifact tool on for you where it’s available for your account
-  - `false`: Claude Code turns the Artifact tool off for you
-- **Default**: unset, so the tool follows your account’s availability
+  - `false`: Claude Code turns the Artifact tool off for every session the file applies to
+  - `true`: the same as leaving the key unset, because it never overrides a `false` from another file, from [`CLAUDE_CODE_DISABLE_ARTIFACT`](env-vars.md), or from your organization’s [admin setting](artifacts.md)
+- **Default**: unset, so the tool follows your account’s [availability](artifacts.md)
 
 settings.json
 
@@ -4496,7 +4554,7 @@ settings.json
 }
 ```
 
-A managed [`disableArtifact`](#disableartifact) and your organization’s [admin setting](artifacts.md) take precedence over this key. Requires Claude Code v2.1.196 or later.
+While a source other than your own user settings keeps the tool turned off, Claude Code hides the **Artifacts** row in `/config`, because turning it on there wouldn’t change anything. [Disable artifacts](artifacts.md) lists every way to turn the tool off. Before v2.1.242, Claude Code ignored this key in project and local settings, and a file higher in the [precedence stack](settings.md) could turn the tool back on over a lower file’s off.
 
 ### [​](#inputneedednotifenabled) `inputNeededNotifEnabled`
 
@@ -5051,6 +5109,43 @@ managed-settings.json
 
 Set it in an MDM profile or the managed settings file to enforce fail-closed startup before the first server payload arrives. Claude Code applies the check only in sessions that fetch server-managed settings, so a session that [doesn’t fetch them](server-managed-settings.md) starts without waiting. The `claude auth` subcommands are exempt, so users can re-authenticate when expired credentials are why the fetch fails. See [Enforce fail-closed startup](server-managed-settings.md).
 
+### [​](#managedsourcesbehavior) `managedSourcesBehavior`
+
+Choose whether Claude Code applies only the highest-priority [managed source](managed-settings.md) your organization delivers, or combines every admin source it delivers. By default Claude Code takes the highest-priority source that carries a [policy key](managed-settings.md) and ignores the rest. A policy key is any settings key other than this one and `wslInheritsWindowsSettings`. So once server-managed settings or an MDM policy deliver a policy key, a `managed-settings.json` file contributes only the [keys Claude Code reads from every admin source](managed-settings.md). With `"merge"`, every admin source you deliver contributes its keys to one combined policy. Requires Claude Code v2.1.242 or later.
+Set `"merge"` only where every source [ranked](managed-settings.md) below your highest one is under an administrator’s control, because Claude Code then adds entries from a lower source, such as `permissions.allow` rules, to the policy.
+
+- **Scope**: [`Managed`](#scopes). Claude Code reads this key from the highest-priority source that carries either this key or a policy key, and ignores this key in every source ranked lower, so a lower source can’t opt itself into combining with the source above it. Neither the Windows HKCU registry nor [parent settings from an embedding host](managed-settings.md) take part in the merge.
+- **Type**: string, one of:
+  - `"first-wins"`: the highest-priority source that carries a policy key supplies the policy, and lower sources contribute only the [keys Claude Code reads from every admin source](managed-settings.md)
+  - `"merge"`: every admin source you deliver contributes its keys, combined by the rules below
+- **Default**: `"first-wins"`
+
+Deliver the key in the highest-priority source you deploy. A machine that never receives server-managed settings needs the key in its MDM profile too, because Claude Code reads the key from the highest-priority source that carries it or a policy key. A `managed-settings.json` file is the lowest-ranked admin source, so `"merge"` set there has no source below it to combine with. In server-managed settings, the key looks like this:
+
+```shiki
+{
+  "managedSourcesBehavior": "merge"
+}
+```
+
+Under `"merge"`, Claude Code combines each key by its kind. This table gives the rule for each kind; the restriction allowlist and highest-source-only rows name every key they cover, and the other rows give examples:
+
+| Kind of key | How Claude Code combines it | Keys |
+| --- | --- | --- |
+| Lists | Combines entries from every source | [`permissions.allow`](#permissions-allow), [`sandbox.network.allowedDomains`](#sandbox-network-alloweddomains), and other list keys |
+| Locks | Applies the strictest value any source sets. When no source sets a strict value, applies a looser value only from the highest source | [`allowManagedPermissionRulesOnly`](#allowmanagedpermissionrulesonly), [`permissions.disableBypassPermissionsMode`](#permissions-disablebypasspermissionsmode), and other boolean or enum locks |
+| Restriction allowlists | Takes the list whole from the highest source that sets it, without adding entries from lower sources. When the highest source doesn’t set one, takes it whole from the next source down | [`availableModels`](#availablemodels), [`allowedMcpServers`](#allowedmcpservers), [`strictKnownMarketplaces`](#strictknownmarketplaces), [`allowedChannelPlugins`](#allowedchannelplugins), and the [`fallbackModel`](#fallbackmodel) chain |
+| Read from the highest-priority source only | Reads the key only from the highest-priority source that carries a policy key, so a lower source’s value is ignored even when the highest source sets none | [`apiKeyHelper`](#apikeyhelper), [`awsAuthRefresh`](#awsauthrefresh), [`awsCredentialExport`](#awscredentialexport), [`gcpAuthRefresh`](#gcpauthrefresh), [`otelHeadersHelper`](#otelheadershelper), `proxyAuthHelper`, [`forceLoginOrgUUID`](#forceloginorguuid), [`forceLoginMethod`](#forceloginmethod), [`forceLoginGatewayUrl`](#forcelogingatewayurl), [`parentSettingsBehavior`](#parentsettingsbehavior), [`modelPicker`](#modelpicker), [`permissions.defaultMode`](#permissions-defaultmode) |
+| `env` | [Merges per variable across admin sources](managed-settings.md), under both `"first-wins"` and `"merge"` | [`env`](#env) |
+| Every other key | Takes the value from the highest source that sets it | [`cleanupPeriodDays`](#cleanupperioddays), [`model`](#model) |
+
+Two of those keys add a condition of their own:
+
+- **[`modelOverrides`](#modeloverrides)**: pairs with `availableModels`. Claude Code takes `modelOverrides` from the highest source that sets it, unless a higher source sets `availableModels` without `modelOverrides`. In that case it ignores `modelOverrides` from every source.
+- **[`forceLoginGatewayUrl`](#forcelogingatewayurl) and the `"gateway"` value of [`forceLoginMethod`](#forceloginmethod)**: Claude Code honors them only when the highest source is an MDM policy or a managed settings file, so under server-managed settings neither applies.
+
+To confirm which sources combined on a machine, run `/status` and [read the `Setting sources` line](managed-settings.md).
+
 ### [​](#parentsettingsbehavior) `parentSettingsBehavior`
 
 Choose whether Claude Code applies managed settings supplied by an embedding host process, such as the Agent SDK or an IDE extension, when an admin-deployed managed tier is also present. With `"first-wins"`, Claude Code drops the host-supplied settings; with `"merge"`, it applies them under the admin tier through a restrictive-only filter. Set `"merge"` when a host needs to pass its own restrictions to the sessions it launches, for example Claude Desktop delivering a gateway’s egress allowlist.
@@ -5167,11 +5262,11 @@ managed-settings.json
 
 ### [​](#wslinheritswindowssettings) `wslInheritsWindowsSettings`
 
-Have Claude Code on WSL read managed settings from the Windows policy chain, with HKLM and the Windows managed settings file taking priority over `/etc/claude-code` and HKCU below it. While the chain is on, Claude Code reads `/etc/claude-code` only when no managed settings file or drop-in under `C:\Program Files\ClaudeCode\` delivers a policy key other than `wslInheritsWindowsSettings` itself. Set it to extend the policy you already deploy on Windows to WSL sessions on the same machine, so they follow the same rules as host sessions. Claude Code honors it only when set in the HKLM registry key or in a managed settings file or drop-in under `C:\Program Files\ClaudeCode\`, both of which require Windows admin to write.
+Have Claude Code on WSL read managed settings from the Windows policy chain, with HKLM and the Windows managed settings file taking priority over `/etc/claude-code` and HKCU below it. While the chain is on, Claude Code reads `/etc/claude-code` only when no managed settings file or drop-in under `C:\Program Files\ClaudeCode\` delivers a [policy key](managed-settings.md). Set it to extend the policy you already deploy on Windows to WSL sessions on the same machine, so they follow the same rules as host sessions. Claude Code honors it only when set in the HKLM registry key or in a managed settings file or drop-in under `C:\Program Files\ClaudeCode\`, both of which require Windows admin to write.
 
 - **Scope**: [`Managed`](#scopes). In an admin-controlled Windows source.
 - **Type**: Boolean
-  - `true`: Claude Code on WSL reads managed settings from the Windows policy chain, and reads `/etc/claude-code` only when no managed settings file or drop-in under `C:\Program Files\ClaudeCode\` delivers a policy key other than `wslInheritsWindowsSettings`
+  - `true`: Claude Code on WSL reads managed settings from the Windows policy chain, and reads `/etc/claude-code` only when no managed settings file or drop-in under `C:\Program Files\ClaudeCode\` delivers a [policy key](managed-settings.md)
   - `false`: WSL reads only `/etc/claude-code`
 - **Default**: `false`, so WSL reads only `/etc/claude-code`
 

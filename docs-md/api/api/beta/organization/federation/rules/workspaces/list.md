@@ -8,7 +8,7 @@ cURL
 
 # List Federation Rule Workspaces
 
-GET/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
+GET/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -183,6 +183,8 @@ Workspace display name. Populated when listing; null in the enable response.
 next\_page: string or null
 
 Opaque cursor for the next page; null when there are no more results.
+
+
 
 ### List Federation Rule Workspaces
 

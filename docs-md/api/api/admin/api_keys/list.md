@@ -6,7 +6,7 @@
 
 # List API Keys
 
-GET/v1/organizations/api\_keys
+GET/v1/organizations/api\_keys
 
 List API Keys
 
@@ -62,7 +62,7 @@ Filter by Workspace ID.
 
 
 
-data: array of [APIKey](api/http/$shared.md) { id, created\_at, created\_by, 7 more }
+data: array of [APIKey](api/http/$shared.md) { id, created\_at, created\_by, 8 more }
 
 id: string
 
@@ -88,9 +88,17 @@ id: string
 
 ID of the actor that created the object.
 
-type: string
+
+
+type: "service\_account" or "user"
 
 Type of the actor that created the object.
+
+One of the following:
+
+"service\_account"
+
+"user"
 
 
 
@@ -110,25 +118,79 @@ Partially redacted hint for the API key.
 
 
 
-principal: object{ id, type } or null
+principal: object{ type, user\_id } or object{ service\_account\_id, type } or null
 
-The ID and type of the principal the API key acts as, or `null` if the key is not bound to a principal.
-
-id: string
-
-ID of the principal the API key acts as: a User ID (`user_...`) when the type is `user`, or a Service Account ID (`svac_...`) when the type is `service_account`.
-
-
-
-type: "service\_account" or "user"
-
-Type of the principal the API key acts as.
+The principal the API key acts as (a User or a Service Account), or `null` if the API key is not bound to a principal.
 
 One of the following:
 
-"service\_account"
+
 
-"user"
+UserActor object{ type, user\_id }
+
+
+
+type: "user\_actor"
+
+Principal type. Always `"user_actor"` for a User.
+
+defaultuser\_actor
+
+user\_id: string
+
+ID of the User the API key acts as.
+
+
+
+ServiceAccountActor object{ service\_account\_id, type }
+
+service\_account\_id: string
+
+ID of the Service Account the API key acts as.
+
+
+
+type: "service\_account\_actor"
+
+Principal type. Always `"service_account_actor"` for a Service Account.
+
+defaultservice\_account\_actor
+
+
+
+scope: object{ type } or object{ type, workspace\_id }
+
+Where the API key belongs: its Workspace (`{"type": "workspace", "workspace_id": "wrkspc_..."}`, with the Workspace's real ID even when it is the organization's default Workspace), or the organization (`{"type": "organization"}`) for a principal-bound API key that has no Workspace.
+
+One of the following:
+
+
+
+Organization object{ type }
+
+
+
+type: "organization"
+
+Scope type. Always `"organization"`: the API key has no Workspace. Only a principal-bound API key can have this scope.
+
+defaultorganization
+
+
+
+Workspace object{ type, workspace\_id }
+
+
+
+type: "workspace"
+
+Scope type. Always `"workspace"`: the API key belongs to one Workspace.
+
+defaultworkspace
+
+workspace\_id: string
+
+ID of the Workspace the API key belongs to. Unlike the deprecated top-level `workspace_id`, this is the Workspace's real ID even for the organization's default Workspace.
 
 
 
@@ -156,9 +218,13 @@ For API Keys, this is always `"api_key"`.
 
 defaultapi\_key
 
-workspace\_id: string or null
+
 
-ID of the Workspace associated with the API key, or `null` if the API key belongs to the default Workspace.
+workspace\_id: string or null⁠Deprecated
+
+Deprecated: use `scope` instead. ID of the Workspace associated with the API key, or `null` if the API key belongs to the default Workspace. Also `null` for a principal-bound API key that has no Workspace; `scope` tells the two apart.
+
+Use `scope` instead. `workspace\_id` is `null` both for an API key in the default Workspace and for a principal-bound API key that has no Workspace.
 
 first\_id: string or null
 
@@ -171,6 +237,8 @@ Indicates if there are more results in the requested page direction.
 last\_id: string or null
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
+
+
 
 ### List API Keys
 
@@ -202,8 +270,12 @@ Response 200
       "name": "Developer Key",
       "partial_key_hint": "sk-ant-api03-R2D...igAA",
       "principal": {
-        "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-        "type": "user"
+        "type": "user_actor",
+        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      },
+      "scope": {
+        "type": "workspace",
+        "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
       },
       "status": "active",
       "type": "api_key",
@@ -236,8 +308,12 @@ Response 200
       "name": "Developer Key",
       "partial_key_hint": "sk-ant-api03-R2D...igAA",
       "principal": {
-        "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-        "type": "user"
+        "type": "user_actor",
+        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      },
+      "scope": {
+        "type": "workspace",
+        "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
       },
       "status": "active",
       "type": "api_key",

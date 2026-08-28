@@ -8,7 +8,7 @@ cURL
 
 # List Dreams
 
-GET/v1/dreams
+GET/v1/dreams
 
 List Dreams
 
@@ -365,6 +365,8 @@ Total output tokens generated across every pipeline stage.
 formatint32
 
 next\_page: string or null
+
+
 
 ### List Dreams
 

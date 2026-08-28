@@ -8,7 +8,7 @@ cURL
 
 # Create Environment
 
-POST/v1/environments
+POST/v1/environments
 
 Create a new environment with the specified configuration.
 
@@ -182,6 +182,8 @@ One of the following:
 BetaEnvironment object{ id, archived\_at, config, 7 more }
 
 Unified Environment resource for both cloud and self-hosted environments.
+
+
 
 ### Create Environment
 

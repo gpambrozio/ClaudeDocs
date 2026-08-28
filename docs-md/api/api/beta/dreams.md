@@ -10,23 +10,23 @@ cURL
 
 ##### [Create a Dream](api/http/beta/dreams/create.md)
 
-POST/v1/dreams
+POST/v1/dreams
 
 ##### [List Dreams](api/http/beta/dreams/list.md)
 
-GET/v1/dreams
+GET/v1/dreams
 
 ##### [Get a Dream](api/http/beta/dreams/retrieve.md)
 
-GET/v1/dreams/{dream\_id}
+GET/v1/dreams/{dream\_id}
 
 ##### [Cancel a Dream](api/http/beta/dreams/cancel.md)
 
-POST/v1/dreams/{dream\_id}/cancel
+POST/v1/dreams/{dream\_id}/cancel
 
 ##### [Archive a Dream](api/http/beta/dreams/archive.md)
 
-POST/v1/dreams/{dream\_id}/archive
+POST/v1/dreams/{dream\_id}/archive
 
 ##### Models
 

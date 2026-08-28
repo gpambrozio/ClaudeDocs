@@ -8,7 +8,7 @@ cURL
 
 # Delete Credential
 
-DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
+DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
 Delete Credential
 
@@ -131,6 +131,8 @@ id: string
 Unique identifier of the deleted credential.
 
 type: "vault\_credential\_deleted"
+
+
 
 ### Delete Credential
 

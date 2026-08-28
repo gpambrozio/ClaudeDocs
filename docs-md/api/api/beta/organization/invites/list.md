@@ -8,7 +8,7 @@ cURL
 
 # List Invites
 
-GET/v1/organizations/invites
+GET/v1/organizations/invites
 
 List the organization's invites.
 
@@ -171,6 +171,8 @@ Indicates if there are more results in the requested page direction.
 last\_id: string or null
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
+
+
 
 ### List Invites
 

@@ -6,7 +6,7 @@
 
 # Delete Workspace Member
 
-DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 Delete Workspace Member
 
@@ -39,6 +39,8 @@ ID of the User.
 workspace\_id: string
 
 ID of the Workspace.
+
+
 
 ### Delete Workspace Member
 

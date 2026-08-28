@@ -6,7 +6,7 @@
 
 # List Code Artifacts
 
-GET/v1/compliance/apps/code/artifacts
+GET/v1/compliance/apps/code/artifacts
 
 List Claude Code Artifacts owned by organizations under the parent
 organization.
@@ -191,6 +191,8 @@ Whether `next_page` is set. May be true for a page whose next page is empty — 
 next\_page: string or null
 
 Token to retrieve the next page. Use this as the 'page' parameter in your next request
+
+
 
 ### List Code Artifacts
 

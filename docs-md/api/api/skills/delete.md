@@ -8,7 +8,7 @@ cURL
 
 # Delete Skill
 
-DELETE/v1/skills/{skill\_id}
+DELETE/v1/skills/{skill\_id}
 
 Delete Skill
 
@@ -45,6 +45,8 @@ Deleted object type.
 For Skills, this is always `"skill_deleted"`.
 
 defaultskill\_deleted
+
+
 
 ### Delete Skill
 

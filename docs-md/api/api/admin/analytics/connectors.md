@@ -8,7 +8,7 @@
 
 ##### [Get Connector Usage](api/http/admin/analytics/connectors/list.md)
 
-GET/v1/organizations/analytics/connectors
+GET/v1/organizations/analytics/connectors
 
 ##### Models
 

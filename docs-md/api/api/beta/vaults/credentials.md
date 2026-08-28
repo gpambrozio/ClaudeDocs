@@ -10,31 +10,31 @@ cURL
 
 ##### [Create Credential](api/http/beta/vaults/credentials/create.md)
 
-POST/v1/vaults/{vault\_id}/credentials
+POST/v1/vaults/{vault\_id}/credentials
 
 ##### [List Credentials](api/http/beta/vaults/credentials/list.md)
 
-GET/v1/vaults/{vault\_id}/credentials
+GET/v1/vaults/{vault\_id}/credentials
 
 ##### [Get Credential](api/http/beta/vaults/credentials/retrieve.md)
 
-GET/v1/vaults/{vault\_id}/credentials/{credential\_id}
+GET/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
 ##### [Update Credential](api/http/beta/vaults/credentials/update.md)
 
-POST/v1/vaults/{vault\_id}/credentials/{credential\_id}
+POST/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
 ##### [Delete Credential](api/http/beta/vaults/credentials/delete.md)
 
-DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
+DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
 ##### [Archive Credential](api/http/beta/vaults/credentials/archive.md)
 
-POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/archive
+POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/archive
 
 ##### [Validate Credential](api/http/beta/vaults/credentials/mcp_oauth_validate.md)
 
-POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
+POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
 
 ##### Models
 

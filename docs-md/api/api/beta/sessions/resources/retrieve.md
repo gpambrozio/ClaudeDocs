@@ -8,7 +8,7 @@ cURL
 
 # Get Session Resource
 
-GET/v1/sessions/{session\_id}/resources/{resource\_id}
+GET/v1/sessions/{session\_id}/resources/{resource\_id}
 
 Get Session Resource
 
@@ -157,6 +157,8 @@ formatdate-time
 BetaManagedAgentsMemoryStoreResource object{ memory\_store\_id, type, access, 4 more }
 
 A memory store attached to an agent session.
+
+
 
 ### Get Session Resource
 

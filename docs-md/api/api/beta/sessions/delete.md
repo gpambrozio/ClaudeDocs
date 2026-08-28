@@ -8,7 +8,7 @@ cURL
 
 # Delete Session
 
-DELETE/v1/sessions/{session\_id}
+DELETE/v1/sessions/{session\_id}
 
 Delete Session
 
@@ -127,6 +127,8 @@ Confirmation that a `session` has been permanently deleted.
 id: string
 
 type: "session\_deleted"
+
+
 
 ### Delete Session
 

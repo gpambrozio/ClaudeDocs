@@ -8,7 +8,7 @@ cURL
 
 # List Organization Rate Limits
 
-GET/v1/organizations/rate\_limits
+GET/v1/organizations/rate\_limits
 
 List Messages API rate limits for your organization.
 
@@ -16,9 +16,9 @@ Each entry corresponds to one rate-limit group (either a model family
 or an API-surface category such as the Files API or Message Batches)
 and contains the set of limiter values that apply to it.
 
-This endpoint currently returns every matching entry in a single page
-regardless of `limit`; follow `next_page` so that clients keep working
-when pagination is enabled.
+When `limit` is omitted, every matching entry is returned in a single
+page; when `limit` truncates the result, follow `next_page` to fetch
+the remaining entries.
 
 ##### Query parameters
 
@@ -48,7 +48,7 @@ limit: optional number
 
 Maximum number of items to return per page. Ranges from `1` to `1000`.
 
-Accepted for request-shape compatibility and currently ignored: every entry is returned in a single page.
+When omitted, every remaining entry is returned in a single page and `next_page` is `null`.
 
 maximum1000
 
@@ -122,7 +122,9 @@ defaultrate\_limit
 
 next\_page: string or null
 
-Token to provide in as `page` in the subsequent request to retrieve the next page of data.
+Opaque cursor for the next page of results, or `null` when no entries remain beyond this response.
+
+
 
 ### List Organization Rate Limits
 

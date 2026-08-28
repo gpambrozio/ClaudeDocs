@@ -8,7 +8,7 @@ cURL
 
 # Get External Key
 
-GET/v1/organizations/external\_keys/{external\_key\_id}
+GET/v1/organizations/external\_keys/{external\_key\_id}
 
 Retrieve a single external key config in the caller's organization by ID.
 
@@ -33,6 +33,8 @@ CMEK external key config belonging to the caller's organization.
 Configs are organization-scoped. Workspaces attach to a config; once any
 workspace references it, the provider fields become effectively immutable
 (existing encrypted data needs the config for decrypt).
+
+
 
 ### Get External Key
 

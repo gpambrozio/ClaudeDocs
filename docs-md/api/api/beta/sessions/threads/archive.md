@@ -8,7 +8,7 @@ cURL
 
 # Archive Session Thread
 
-POST/v1/sessions/{session\_id}/threads/{thread\_id}/archive
+POST/v1/sessions/{session\_id}/threads/{thread\_id}/archive
 
 Archive Session Thread
 
@@ -125,6 +125,8 @@ One of the following:
 BetaManagedAgentsSessionThread object{ id, agent, archived\_at, 8 more }
 
 An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
+
+
 
 ### Archive Session Thread
 

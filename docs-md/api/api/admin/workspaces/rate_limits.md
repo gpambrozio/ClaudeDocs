@@ -8,7 +8,7 @@
 
 ##### [List Workspace Rate Limits](api/http/admin/workspaces/rate_limits/list.md)
 
-GET/v1/organizations/workspaces/{workspace\_id}/rate\_limits
+GET/v1/organizations/workspaces/{workspace\_id}/rate\_limits
 
 ##### Models
 

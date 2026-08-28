@@ -8,7 +8,7 @@ cURL
 
 # List Sessions
 
-GET/v1/sessions
+GET/v1/sessions
 
 List Sessions
 
@@ -423,6 +423,8 @@ Opaque cursor for the next page. Null when no more results.
 prev\_page: optional string or null
 
 Opaque cursor for the previous page. Null when on the first page. Pass as the `page` parameter to navigate backward.
+
+
 
 ### List Sessions
 

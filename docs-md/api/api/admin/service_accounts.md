@@ -8,23 +8,23 @@
 
 ##### [Create Service Account](api/http/admin/service_accounts/create.md)
 
-POST/v1/organizations/service\_accounts
+POST/v1/organizations/service\_accounts
 
 ##### [Get Service Account](api/http/admin/service_accounts/retrieve.md)
 
-GET/v1/organizations/service\_accounts/{service\_account\_id}
+GET/v1/organizations/service\_accounts/{service\_account\_id}
 
 ##### [List Service Accounts](api/http/admin/service_accounts/list.md)
 
-GET/v1/organizations/service\_accounts
+GET/v1/organizations/service\_accounts
 
 ##### [Update Service Account](api/http/admin/service_accounts/update.md)
 
-POST/v1/organizations/service\_accounts/{service\_account\_id}
+POST/v1/organizations/service\_accounts/{service\_account\_id}
 
 ##### [Archive Service Account](api/http/admin/service_accounts/archive.md)
 
-POST/v1/organizations/service\_accounts/{service\_account\_id}/archive
+POST/v1/organizations/service\_accounts/{service\_account\_id}/archive
 
 ##### Models
 
@@ -41,15 +41,15 @@ whatever references it (federation rules).
 
 ##### [Add Workspace To Service Account](api/http/admin/service_accounts/workspaces/create.md)
 
-POST/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
+POST/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
 
 ##### [List Workspaces For Service Account](api/http/admin/service_accounts/workspaces/list.md)
 
-GET/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
+GET/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
 
 ##### [Remove Workspace From Service Account](api/http/admin/service_accounts/workspaces/delete.md)
 
-DELETE/v1/organizations/service\_accounts/{service\_account\_id}/workspaces/{workspace\_id}
+DELETE/v1/organizations/service\_accounts/{service\_account\_id}/workspaces/{workspace\_id}
 
 ---
 

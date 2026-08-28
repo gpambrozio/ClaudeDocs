@@ -6,7 +6,7 @@
 
 # Get chat messages
 
-GET/v1/compliance/apps/chats/{claude\_chat\_id}/messages
+GET/v1/compliance/apps/chats/{claude\_chat\_id}/messages
 
 Retrieves message history and file metadata for a specific chat.
 
@@ -477,6 +477,8 @@ User's email address
 organization\_id: string⁠Deprecated
 
 Organization ID this chat belongs to
+
+
 
 ### Get chat messages
 

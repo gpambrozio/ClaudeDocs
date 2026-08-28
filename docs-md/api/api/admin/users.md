@@ -8,19 +8,19 @@
 
 ##### [Get User](api/http/admin/users/retrieve.md)
 
-GET/v1/organizations/users/{user\_id}
+GET/v1/organizations/users/{user\_id}
 
 ##### [List Users](api/http/admin/users/list.md)
 
-GET/v1/organizations/users
+GET/v1/organizations/users
 
 ##### [Update User](api/http/admin/users/update.md)
 
-POST/v1/organizations/users/{user\_id}
+POST/v1/organizations/users/{user\_id}
 
 ##### [Remove User](api/http/admin/users/delete.md)
 
-DELETE/v1/organizations/users/{user\_id}
+DELETE/v1/organizations/users/{user\_id}
 
 ##### Models
 

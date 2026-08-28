@@ -6,7 +6,7 @@
 
 # Remove Workspace From Service Account
 
-DELETE/v1/organizations/service\_accounts/{service\_account\_id}/workspaces/{workspace\_id}
+DELETE/v1/organizations/service\_accounts/{service\_account\_id}/workspaces/{workspace\_id}
 
 Remove a service account from a workspace.
 
@@ -54,6 +54,8 @@ defaultservice\_account\_workspace\_member\_deleted
 workspace\_id: string
 
 Tagged workspace ID (`wrkspc_...`) named in the delete request.
+
+
 
 ### Remove Workspace From Service Account
 

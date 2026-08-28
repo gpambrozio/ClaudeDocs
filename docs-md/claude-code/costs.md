@@ -10,7 +10,7 @@ This page covers how to [track your costs](#track-your-costs), [manage costs for
 
 The Session block in `/usage` shows API token usage and is intended for API users. Claude Max and Pro subscribers have usage included in their subscription, so the session cost figure isn’t relevant for billing purposes. Subscribers see plan usage bars, activity stats, and a usage breakdown on the same screen.
 
-The Session block at the top of `/usage` shows detailed token usage statistics for your current session. Claude Code computes the dollar figure locally from token counts priced at standard list rates, so it doesn’t reflect promotional pricing or contracted discounts and may differ from your actual bill. For authoritative billing, see the Usage page in the [Claude Console](https://platform.claude.com/usage).
+The Session block at the top of `/usage` shows detailed token usage statistics for your current session. Claude Code computes the dollar figure locally from token counts at list price, unless a [`modelPricing`](settings-reference.md) table is in effect. An administrator sets one in your organization’s managed settings so the figure uses your contracted rates, and while a table is in effect the `Total cost` line carries the note `at your organization's configured rates`. The figure is an estimate, so for authoritative billing see the Usage page in the [Claude Console](https://platform.claude.com/usage).
 
 ```shiki
 Total cost:            $0.55
@@ -33,6 +33,15 @@ On a Pro, Max, Team, or Enterprise plan, `/usage` also shows a breakdown of what
 
 Press `d` or `w` to switch between the last 24 hours and the last 7 days. The figures are approximate and computed from local session history on this machine, so usage from other devices or claude.ai is not included.
 In the [VS Code extension](vs-code.md), the attribution shares and behavior flags appear in the Account & usage dialog with a Day and Week toggle, without the Loops rows. Requires Claude Code v2.1.174 or later.
+
+#### [​](#check-your-usage-credits-spend) Check your usage-credits spend
+
+`/usage` also shows a usage-credits row while [usage credits](#add-usage-credits-to-your-subscription) are on. What the row shows depends on your plan:
+
+- **Pro and Max**: your spend for the current month, measured against your monthly spend limit when you have set one. When you haven’t set a limit, the row shows `Unlimited` and no spend figure.
+- **Team and Enterprise**: your own spend for the current month, measured against any [limit your organization set](#claude-for-teams-and-enterprise) that applies to you. A limit that covers the whole organization doesn’t appear in the row. When you have no limit of your own, the row shows your spend with no limit beside it. While usage credits are off for you, `/usage` shows no usage-credits row.
+
+When you have a spend limit, the row appears as soon as usage credits are on and shows 0% until you first spend usage credits. Before v2.1.236, `/usage` showed the row only on Pro and Max plans, and a row with a spend limit stayed hidden until you had spent something.
 
 #### [​](#when-the-usage-request-fails) When the usage request fails
 
@@ -70,6 +79,30 @@ The table maps each setup to where you see spend, where you cap it, and how you 
 | [Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry](#cloud-providers) | Your cloud billing console | Your cloud’s budget controls | [OpenTelemetry](monitoring-usage.md) or an [LLM gateway](llm-gateway.md) |
 
 [OpenTelemetry export](monitoring-usage.md) works on every setup and is the only option that streams per-user token and cost metrics into your own observability stack in near real time.
+
+### [​](#report-spend-at-your-contracted-rates) Report spend at your contracted rates
+
+By default, Claude Code computes every cost figure it shows developers at list price, so if your organization pays contracted rates, the figures in `/usage`, the status line, and OpenTelemetry don’t match your bill. To make them match, set the [`modelPricing`](settings-reference.md) managed setting to your rates. The setting changes what Claude Code reports, not what Anthropic charges. Requires Claude Code v2.1.242 or later.
+
+1
+
+Take the rates from your contract
+
+Enter the per-million-token rates from your contract. Claude Code doesn’t fetch them from the Claude Console, so update the setting when the contract changes.
+
+2
+
+Write the setting
+
+Set `multiplier` for a flat percentage off list price, list each model’s four per-token rates under `overrides`, or do both. The [`modelPricing` entry](settings-reference.md) has the shape and a paste-ready example.
+
+3
+
+Deploy it through managed settings
+
+Deliver it as [managed settings](managed-settings.md): server-managed settings, an MDM policy, `managed-settings.json`, or a [policy helper](managed-settings.md). Claude Code ignores the key in user, project, and local settings and in `--settings`.
+
+To confirm the rates are in effect, run `/usage` in a session that has [received the managed settings](managed-settings.md): the Session block’s `Total cost` line carries the note `at your organization's configured rates`. The figures are still estimates, not an invoice. The per-million-token prices in the `/model` picker stay at list price.
 
 ### [​](#claude-for-teams-and-enterprise) Claude for Teams and Enterprise
 

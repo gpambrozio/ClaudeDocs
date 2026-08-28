@@ -8,7 +8,7 @@ cURL
 
 # Add Session Resource
 
-POST/v1/sessions/{session\_id}/resources
+POST/v1/sessions/{session\_id}/resources
 
 Add Session Resource
 
@@ -169,6 +169,8 @@ updated\_at: string
 A timestamp in RFC 3339 format
 
 formatdate-time
+
+
 
 ### Add Session Resource
 

@@ -6,7 +6,7 @@
 
 # Get effective organization settings
 
-GET/v1/compliance/organizations/{organization\_id}/settings
+GET/v1/compliance/organizations/{organization\_id}/settings
 
 Retrieve the effective settings for an organization.
 
@@ -397,6 +397,8 @@ defaultdata\_retention
 type: optional "effective\_organization\_settings"
 
 defaulteffective\_organization\_settings
+
+
 
 ### Get effective organization settings
 

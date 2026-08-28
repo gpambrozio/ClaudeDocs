@@ -8,7 +8,7 @@ cURL
 
 # Create Skill Version
 
-POST/v1/skills/{skill\_id}/versions
+POST/v1/skills/{skill\_id}/versions
 
 Create Skill Version
 
@@ -83,6 +83,8 @@ Object type.
 For Skill Versions, this is always `"skill_version"`.
 
 defaultskill\_version
+
+
 
 ### Create Skill Version
 

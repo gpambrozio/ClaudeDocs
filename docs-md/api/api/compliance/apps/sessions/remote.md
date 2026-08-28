@@ -8,7 +8,7 @@
 
 ##### [List remote sessions](api/http/compliance/apps/sessions/remote/list.md)
 
-GET/v1/compliance/apps/sessions/remote
+GET/v1/compliance/apps/sessions/remote
 
 ##### Models
 
@@ -26,7 +26,7 @@ messages endpoint to retrieve a session's transcript.
 
 ##### [Retrieve remote session messages](api/http/compliance/apps/sessions/remote/messages/list.md)
 
-GET/v1/compliance/apps/sessions/remote/{claude\_remote\_session\_id}/messages
+GET/v1/compliance/apps/sessions/remote/{claude\_remote\_session\_id}/messages
 
 ---
 

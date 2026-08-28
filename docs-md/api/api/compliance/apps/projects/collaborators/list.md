@@ -6,7 +6,7 @@
 
 # List project collaborators
 
-GET/v1/compliance/apps/projects/{project\_id}/collaborators
+GET/v1/compliance/apps/projects/{project\_id}/collaborators
 
 List the users, groups, and organization-wide grants on a project.
 
@@ -228,6 +228,8 @@ Whether more records exist beyond the current result set
 next\_page: string or null
 
 To get the next page, use the 'next\_page' from the current response as the 'page' in your next request
+
+
 
 ### List project collaborators
 

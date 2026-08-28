@@ -8,7 +8,7 @@ cURL
 
 # Create Tunnel
 
-POST/v1/tunnels
+POST/v1/tunnels
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
@@ -163,6 +163,8 @@ domain: string
 Anthropic-assigned hostname for the tunnel. MCP server URLs whose host is a subdomain of this value are routed through the tunnel. Globally unique and never reused, even after the tunnel is archived.
 
 type: "tunnel"
+
+
 
 ### Create Tunnel
 

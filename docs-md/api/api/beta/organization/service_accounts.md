@@ -10,23 +10,23 @@ cURL
 
 ##### [Create Service Account](api/http/beta/organization/service_accounts/create.md)
 
-POST/v1/organizations/service\_accounts
+POST/v1/organizations/service\_accounts
 
 ##### [List Service Accounts](api/http/beta/organization/service_accounts/list.md)
 
-GET/v1/organizations/service\_accounts
+GET/v1/organizations/service\_accounts
 
 ##### [Get Service Account](api/http/beta/organization/service_accounts/retrieve.md)
 
-GET/v1/organizations/service\_accounts/{service\_account\_id}
+GET/v1/organizations/service\_accounts/{service\_account\_id}
 
 ##### [Update Service Account](api/http/beta/organization/service_accounts/update.md)
 
-POST/v1/organizations/service\_accounts/{service\_account\_id}
+POST/v1/organizations/service\_accounts/{service\_account\_id}
 
 ##### [Archive Service Account](api/http/beta/organization/service_accounts/archive.md)
 
-POST/v1/organizations/service\_accounts/{service\_account\_id}/archive
+POST/v1/organizations/service\_accounts/{service\_account\_id}/archive
 
 ##### Models
 
@@ -87,15 +87,15 @@ One of the following:
 
 ##### [Add Workspace To Service Account](api/http/beta/organization/service_accounts/workspaces/add.md)
 
-POST/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
+POST/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
 
 ##### [List Workspaces For Service Account](api/http/beta/organization/service_accounts/workspaces/list.md)
 
-GET/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
+GET/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
 
 ##### [Remove Workspace From Service Account](api/http/beta/organization/service_accounts/workspaces/remove.md)
 
-DELETE/v1/organizations/service\_accounts/{service\_account\_id}/workspaces/{workspace\_id}
+DELETE/v1/organizations/service\_accounts/{service\_account\_id}/workspaces/{workspace\_id}
 
 ---
 

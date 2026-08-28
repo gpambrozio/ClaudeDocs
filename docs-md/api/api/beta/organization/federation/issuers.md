@@ -10,23 +10,23 @@ cURL
 
 ##### [Create Federation Issuer](api/http/beta/organization/federation/issuers/create.md)
 
-POST/v1/organizations/federation\_issuers
+POST/v1/organizations/federation\_issuers
 
 ##### [List Federation Issuers](api/http/beta/organization/federation/issuers/list.md)
 
-GET/v1/organizations/federation\_issuers
+GET/v1/organizations/federation\_issuers
 
 ##### [Get Federation Issuer](api/http/beta/organization/federation/issuers/retrieve.md)
 
-GET/v1/organizations/federation\_issuers/{federation\_issuer\_id}
+GET/v1/organizations/federation\_issuers/{federation\_issuer\_id}
 
 ##### [Update Federation Issuer](api/http/beta/organization/federation/issuers/update.md)
 
-POST/v1/organizations/federation\_issuers/{federation\_issuer\_id}
+POST/v1/organizations/federation\_issuers/{federation\_issuer\_id}
 
 ##### [Archive Federation Issuer](api/http/beta/organization/federation/issuers/archive.md)
 
-POST/v1/organizations/federation\_issuers/{federation\_issuer\_id}/archive
+POST/v1/organizations/federation\_issuers/{federation\_issuer\_id}/archive
 
 ##### Models
 

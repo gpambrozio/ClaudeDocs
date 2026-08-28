@@ -8,15 +8,15 @@
 
 ##### [List Code Artifacts](api/http/compliance/code/artifacts/list.md)
 
-GET/v1/compliance/apps/code/artifacts
+GET/v1/compliance/apps/code/artifacts
 
 ##### [Download Code Artifact Version Content](api/http/compliance/code/artifacts/retrieve_version.md)
 
-GET/v1/compliance/apps/code/artifacts/{artifact\_id}/versions/{version\_id}
+GET/v1/compliance/apps/code/artifacts/{artifact\_id}/versions/{version\_id}
 
 ##### [Delete Code Artifact](api/http/compliance/code/artifacts/delete.md)
 
-DELETE/v1/compliance/apps/code/artifacts/{artifact\_id}
+DELETE/v1/compliance/apps/code/artifacts/{artifact\_id}
 
 ##### Models
 

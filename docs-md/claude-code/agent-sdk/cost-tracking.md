@@ -3,7 +3,7 @@
 The Claude Agent SDK provides detailed token usage information for each interaction with Claude. This guide explains how to properly track usage and understand cost reporting, especially when dealing with parallel tool uses and multi-step conversations.
 For complete API documentation, see the [TypeScript SDK reference](agent-sdk/typescript.md) and [Python SDK reference](agent-sdk/python.md).
 
-The `total_cost_usd` and `costUSD` fields are client-side estimates, not authoritative billing data. The SDK computes them locally from a price table bundled at build time, so they can drift from what you are actually billed when:
+The `total_cost_usd` and `costUSD` fields are client-side estimates, not authoritative billing data. The SDK computes them locally from a price table bundled at build time, unless a [`modelPricing`](settings-reference.md) table is in effect. They can drift from what you are actually billed when:
 
 - pricing changes
 - the installed SDK version does not recognize a model
@@ -71,6 +71,7 @@ The three result-level fields differ in what they count when the agent spawns [s
 | `total_cost_usd` | Included. Counts subagent requests alongside the top-level loop |
 | `modelUsage` / `model_usage` | Included. Counts subagent requests alongside the top-level loop, broken down by model |
 
+In [single message input mode](agent-sdk/streaming-vs-single-mode.md), when background subagents are still running at the end of the final turn, Claude Code waits for them, up to the cap described in [background tasks at exit](headless.md), before emitting the result. The result’s `total_cost_usd`, `duration_api_ms`, and `modelUsage`, or `model_usage` in Python, include the work done during that wait.
 The following examples iterate over the message stream from a `query()` call and print the total cost when the `result` message arrives:
 
 TypeScript
@@ -165,6 +166,7 @@ console.log(`Output tokens: ${resultOutputTokens}`);
 ### [​](#break-down-usage-per-model) Break down usage per model
 
 The result message includes [`modelUsage`](agent-sdk/typescript.md), a map of model name to per-model token counts and cost. This is useful when you run multiple models (for example, Haiku for subagents and Opus for the main agent) and want to see where tokens are going.
+Each entry’s `costBasis` says which price table priced that model’s latest request: `list` for list price, `managed` for a [`modelPricing`](settings-reference.md) table, or `unknown` when neither matched the model ID. The field requires Claude Code v2.1.246 or later.
 The following example runs a query and prints the cost and token breakdown for each model used:
 
 ```shiki

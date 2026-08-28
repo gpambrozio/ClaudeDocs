@@ -8,7 +8,7 @@ cURL
 
 # Stream Session Thread Events
 
-GET/v1/sessions/{session\_id}/threads/{thread\_id}/stream
+GET/v1/sessions/{session\_id}/threads/{thread\_id}/stream
 
 Stream Session Thread Events
 
@@ -149,6 +149,8 @@ BetaManagedAgentsStreamSessionThreadEvents = [BetaManagedAgentsUserMessageEvent]
 Server-sent event in a single thread's stream.
 
 One of the following:
+
+
 
 ### Stream Session Thread Events
 

@@ -8,15 +8,15 @@
 
 ##### [List RBAC Group Members](api/http/admin/rbac_groups/members/list.md)
 
-GET/v1/organizations/rbac\_groups/{group\_id}/members
+GET/v1/organizations/rbac\_groups/{group\_id}/members
 
 ##### [Add RBAC Group Member](api/http/admin/rbac_groups/members/create.md)
 
-POST/v1/organizations/rbac\_groups/{group\_id}/members
+POST/v1/organizations/rbac\_groups/{group\_id}/members
 
 ##### [Remove RBAC Group Member](api/http/admin/rbac_groups/members/delete.md)
 
-DELETE/v1/organizations/rbac\_groups/{group\_id}/members/{user\_id}
+DELETE/v1/organizations/rbac\_groups/{group\_id}/members/{user\_id}
 
 ##### Models
 

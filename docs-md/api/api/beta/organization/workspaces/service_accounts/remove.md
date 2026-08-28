@@ -8,7 +8,7 @@ cURL
 
 # Delete Service Account Workspace Member
 
-DELETE/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
+DELETE/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -145,6 +145,8 @@ defaultservice\_account\_workspace\_member\_deleted
 workspace\_id: string
 
 Tagged workspace ID (`wrkspc_...`) named in the delete request.
+
+
 
 ### Delete Service Account Workspace Member
 

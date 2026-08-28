@@ -6,7 +6,7 @@
 
 # List remote sessions
 
-GET/v1/compliance/apps/sessions/remote
+GET/v1/compliance/apps/sessions/remote
 
 List remote sessions (Cowork sessions that run in Anthropic-managed
 cloud environments) across the organizations the key may read.
@@ -177,6 +177,8 @@ User's email address. Null when the user is no longer a member of an organizatio
 next\_page: string or null
 
 Opaque page token; pass as `page` to retrieve the next page. Null when no rows exist after this page. Treat this value as opaque; do not parse or store it long-term, as the format may change without notice.
+
+
 
 ### List remote sessions
 

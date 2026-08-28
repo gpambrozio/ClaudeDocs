@@ -6,7 +6,7 @@
 
 # Get file metadata
 
-GET/v1/compliance/apps/chats/files/{claude\_file\_id}
+GET/v1/compliance/apps/chats/files/{claude\_file\_id}
 
 Retrieves metadata for a file referenced in chat messages, without
 downloading the file content. Use the sibling `/content` endpoint to
@@ -59,6 +59,8 @@ MIME type of the file's preferred downloadable variant (e.g. 'application/pdf').
 size\_bytes: number or null
 
 Size in bytes of the file's preferred downloadable variant, if known
+
+
 
 ### Get file metadata
 

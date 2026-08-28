@@ -8,7 +8,7 @@ cURL
 
 # Create a Dream
 
-POST/v1/dreams
+POST/v1/dreams
 
 Create a Dream
 
@@ -227,6 +227,8 @@ type: "update\_existing"
 BetaDream object{ id, archived\_at, created\_at, 11 more }
 
 An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output\_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+
+
 
 ### Create a Dream
 

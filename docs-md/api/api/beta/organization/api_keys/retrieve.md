@@ -8,7 +8,7 @@ cURL
 
 # Get API Key
 
-GET/v1/organizations/api\_keys/{api\_key\_id}
+GET/v1/organizations/api\_keys/{api\_key\_id}
 
 Get API Key
 
@@ -23,6 +23,8 @@ ID of the API key.
 
 
 BetaAPIKey object{ id, created\_at, created\_by, 8 more }
+
+
 
 ### Get API Key
 

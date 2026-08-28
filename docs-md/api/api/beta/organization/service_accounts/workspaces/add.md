@@ -8,7 +8,7 @@ cURL
 
 # Add Workspace To Service Account
 
-POST/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
+POST/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -194,6 +194,8 @@ One of the following:
 "workspace\_restricted\_developer"
 
 "workspace\_user"
+
+
 
 ### Add Workspace To Service Account
 

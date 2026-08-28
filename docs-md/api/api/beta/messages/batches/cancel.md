@@ -8,7 +8,7 @@ cURL
 
 # Cancel a Message Batch
 
-POST/v1/messages/batches/{message\_batch\_id}/cancel
+POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 Batches may be canceled any time before processing ends. Once cancellation is initiated, the batch enters a `canceling` state, at which time the system may complete any in-progress, non-interruptible requests before finalizing cancellation.
 
@@ -127,6 +127,8 @@ One of the following:
 
 
 BetaMessageBatch object{ id, archived\_at, cancel\_initiated\_at, 7 more }
+
+
 
 ### Cancel a Message Batch
 

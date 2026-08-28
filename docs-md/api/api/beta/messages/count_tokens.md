@@ -8,7 +8,7 @@ cURL
 
 # Count tokens in a Message
 
-POST/v1/messages/count\_tokens
+POST/v1/messages/count\_tokens
 
 Count the number of tokens in a Message.
 
@@ -1141,6 +1141,8 @@ The original token count before context management was applied
 input\_tokens: number
 
 The total number of tokens across the provided list of messages, system prompt, and tools.
+
+
 
 ### Count tokens in a Message
 

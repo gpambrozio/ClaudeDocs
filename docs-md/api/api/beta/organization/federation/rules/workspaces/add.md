@@ -8,7 +8,7 @@ cURL
 
 # Add Federation Rule Workspace
 
-POST/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
+POST/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -170,6 +170,8 @@ Tagged ID of the workspace this rule is enabled for.
 workspace\_name: string or null
 
 Workspace display name. Populated when listing; null in the enable response.
+
+
 
 ### Add Federation Rule Workspace
 

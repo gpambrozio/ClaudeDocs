@@ -8,7 +8,7 @@ cURL
 
 # Delete a memory
 
-DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 Delete a memory
 
@@ -137,6 +137,8 @@ id: string
 ID of the deleted memory (a `mem_...` value).
 
 type: "memory\_deleted"
+
+
 
 ### Delete a memory
 

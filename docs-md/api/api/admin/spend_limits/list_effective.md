@@ -6,7 +6,7 @@
 
 # List Effective Spend Limits
 
-GET/v1/organizations/spend\_limits/effective
+GET/v1/organizations/spend\_limits/effective
 
 List each member's effective spend limit and period-to-date spend.
 
@@ -20,6 +20,8 @@ Paginates by member, so a member's periods never split across pages.
 
 limit: optional number
 
+Maximum number of members per page. A member's period rows never split across pages, so a page may carry more rows than this. Defaults to `20`.
+
 default20
 
 maximum1000
@@ -28,15 +30,29 @@ minimum1
 
 page: optional string
 
+Opaque cursor from a previous response's `next_page` field.
+
 
 
-period: optional array of string
+period: optional array of "daily" or "monthly" or "weekly"
+
+Restrict the report to these limit periods. Omit to return one row per period each member resolves a spend limit for.
 
 maxItems3
+
+One of the following:
+
+"daily"
+
+"monthly"
+
+"weekly"
 
 
 
 user\_ids: optional array of string
+
+Restrict the report to these members, by tagged user ID (`user_...`). At most 100 entries.
 
 maxItems100
 
@@ -58,19 +74,29 @@ null when the underlying account is unavailable or has been deleted;
 
 deleted: boolean
 
+True only when the underlying account has been deleted.
+
 defaultfalse
 
 email\_address: string or null
 
+The user's email address. Null when the account is unavailable or has been deleted.
+
 name: string or null
+
+The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
 
 
 
 type: "user\_actor"
 
+Actor type. Always `user_actor`.
+
 defaultuser\_actor
 
 user\_id: string
+
+Tagged ID of the user.
 
 amount: string or null
 
@@ -83,6 +109,8 @@ ISO 4217 code of the organization's billing currency; the unit for `amount` and 
 
 
 period: "daily" or "monthly" or "weekly"
+
+Period this row's effective limit and spend are reported for.
 
 One of the following:
 
@@ -100,17 +128,25 @@ The member's spend so far in the current period, as a non-negative decimal strin
 
 scope: object{ type, user\_id }
 
+Scope selecting a single member of the organization.
+
 
 
 type: "user"
+
+Scope type. Always `user` for this scope.
 
 defaultuser
 
 user\_id: string
 
+Tagged ID of the member the spend limit applies to.
+
 
 
 source: object{ type, user\_id } or object{ seat\_tier, type } or object{ rbac\_group\_id, type } or 2 more
+
+Scope selecting a single member of the organization.
 
 One of the following:
 
@@ -118,13 +154,19 @@ One of the following:
 
 User object{ type, user\_id }
 
+Scope selecting a single member of the organization.
+
 
 
 type: "user"
 
+Scope type. Always `user` for this scope.
+
 defaultuser
 
 user\_id: string
+
+Tagged ID of the member the spend limit applies to.
 
 
 
@@ -176,6 +218,8 @@ spend\_limit\_id: string
 
 next\_page: string or null
 
+
+
 ### List Effective Spend Limits
 
 cURL
@@ -201,7 +245,7 @@ Response 200
         "email_address": "email_address",
         "name": "name",
         "type": "user_actor",
-        "user_id": "user_id"
+        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
       },
       "amount": "50000",
       "currency": "USD",
@@ -209,11 +253,11 @@ Response 200
       "period_to_date_spend": "12050.5",
       "scope": {
         "type": "user",
-        "user_id": "user_id"
+        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
       },
       "source": {
         "type": "user",
-        "user_id": "user_id"
+        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
       },
       "spend_limit_id": "spend_limit_id"
     }
@@ -237,7 +281,7 @@ Response 200
         "email_address": "email_address",
         "name": "name",
         "type": "user_actor",
-        "user_id": "user_id"
+        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
       },
       "amount": "50000",
       "currency": "USD",
@@ -245,11 +289,11 @@ Response 200
       "period_to_date_spend": "12050.5",
       "scope": {
         "type": "user",
-        "user_id": "user_id"
+        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
       },
       "source": {
         "type": "user",
-        "user_id": "user_id"
+        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
       },
       "spend_limit_id": "spend_limit_id"
     }

@@ -8,7 +8,7 @@
 
 ##### [Get Current Organization](api/http/admin/organizations/me.md)
 
-GET/v1/organizations/me
+GET/v1/organizations/me
 
 ##### Models
 

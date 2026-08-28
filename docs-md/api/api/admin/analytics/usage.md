@@ -8,11 +8,11 @@
 
 ##### [Get Token Usage Over Time](api/http/admin/analytics/usage/list.md)
 
-GET/v1/organizations/analytics/usage\_report
+GET/v1/organizations/analytics/usage\_report
 
 ##### [Get Per-User Token Usage](api/http/admin/analytics/usage/list_by_user.md)
 
-GET/v1/organizations/analytics/user\_usage\_report
+GET/v1/organizations/analytics/user\_usage\_report
 
 ##### Models
 

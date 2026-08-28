@@ -8,7 +8,7 @@ cURL
 
 # Get User
 
-GET/v1/organizations/users/{user\_id}
+GET/v1/organizations/users/{user\_id}
 
 Retrieve a member of the organization by user ID.
 
@@ -79,6 +79,8 @@ Object type.
 For Users, this is always `"user"`.
 
 defaultuser
+
+
 
 ### Get User
 

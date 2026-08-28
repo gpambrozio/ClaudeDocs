@@ -6,7 +6,7 @@
 
 # Approve Spend Limit Increase Request
 
-POST/v1/organizations/spend\_limit\_increase\_requests/{spend\_limit\_increase\_request\_id}/approve
+POST/v1/organizations/spend\_limit\_increase\_requests/{spend\_limit\_increase\_request\_id}/approve
 
 Approve a pending spend limit increase request.
 
@@ -57,19 +57,29 @@ null when the underlying account is unavailable or has been deleted;
 
 deleted: boolean
 
+True only when the underlying account has been deleted.
+
 defaultfalse
 
 email\_address: string or null
 
+The user's email address. Null when the account is unavailable or has been deleted.
+
 name: string or null
+
+The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
 
 
 
 type: "user\_actor"
 
+Actor type. Always `user_actor`.
+
 defaultuser\_actor
 
 user\_id: string
+
+Tagged ID of the user.
 
 
 
@@ -117,19 +127,29 @@ null when the underlying account is unavailable or has been deleted;
 
 deleted: boolean
 
+True only when the underlying account has been deleted.
+
 defaultfalse
 
 email\_address: string or null
 
+The user's email address. Null when the account is unavailable or has been deleted.
+
 name: string or null
+
+The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
 
 
 
 type: "user\_actor"
 
+Actor type. Always `user_actor`.
+
 defaultuser\_actor
 
 user\_id: string
+
+Tagged ID of the user.
 
 
 
@@ -149,11 +169,13 @@ defaultscoped\_api\_key\_actor
 
 spend\_limit: [SpendLimit](api/http/admin/spend_limits.md) { id, amount, created\_at, 5 more }
 
+A configured spend limit: a cap on metered spend for one scope and period.
+
 
 
 spend\_summary: [SpendSummary](api/http/admin/spend_limits.md) { actor, amount, currency, 5 more } or null
 
-Per-member effective-limit report row (GET /spend\_limits/effective).
+Per-member effective-limit report row (`GET /spend_limits/effective`).
 
 
 
@@ -172,6 +194,8 @@ One of the following:
 type: "spend\_limit\_increase\_request"
 
 defaultspend\_limit\_increase\_request
+
+
 
 ### Approve Spend Limit Increase Request
 
@@ -202,7 +226,7 @@ Response 200
     "email_address": "email_address",
     "name": "name",
     "type": "user_actor",
-    "user_id": "user_id"
+    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
   },
   "created_at": "2019-12-27T18:11:19.117Z",
   "period": "monthly",
@@ -212,7 +236,7 @@ Response 200
     "email_address": "email_address",
     "name": "name",
     "type": "user_actor",
-    "user_id": "user_id"
+    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
   },
   "spend_limit": {
     "id": "id",
@@ -222,7 +246,7 @@ Response 200
     "period": "monthly",
     "scope": {
       "type": "user",
-      "user_id": "user_id"
+      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
     },
     "type": "spend_limit",
     "updated_at": "2019-12-27T18:11:19.117Z"
@@ -233,7 +257,7 @@ Response 200
       "email_address": "email_address",
       "name": "name",
       "type": "user_actor",
-      "user_id": "user_id"
+      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
     },
     "amount": "50000",
     "currency": "USD",
@@ -241,11 +265,11 @@ Response 200
     "period_to_date_spend": "12050.5",
     "scope": {
       "type": "user",
-      "user_id": "user_id"
+      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
     },
     "source": {
       "type": "user",
-      "user_id": "user_id"
+      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
     },
     "spend_limit_id": "spend_limit_id"
   },
@@ -268,7 +292,7 @@ Response 200
     "email_address": "email_address",
     "name": "name",
     "type": "user_actor",
-    "user_id": "user_id"
+    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
   },
   "created_at": "2019-12-27T18:11:19.117Z",
   "period": "monthly",
@@ -278,7 +302,7 @@ Response 200
     "email_address": "email_address",
     "name": "name",
     "type": "user_actor",
-    "user_id": "user_id"
+    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
   },
   "spend_limit": {
     "id": "id",
@@ -288,7 +312,7 @@ Response 200
     "period": "monthly",
     "scope": {
       "type": "user",
-      "user_id": "user_id"
+      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
     },
     "type": "spend_limit",
     "updated_at": "2019-12-27T18:11:19.117Z"
@@ -299,7 +323,7 @@ Response 200
       "email_address": "email_address",
       "name": "name",
       "type": "user_actor",
-      "user_id": "user_id"
+      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
     },
     "amount": "50000",
     "currency": "USD",
@@ -307,11 +331,11 @@ Response 200
     "period_to_date_spend": "12050.5",
     "scope": {
       "type": "user",
-      "user_id": "user_id"
+      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
     },
     "source": {
       "type": "user",
-      "user_id": "user_id"
+      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
     },
     "spend_limit_id": "spend_limit_id"
   },

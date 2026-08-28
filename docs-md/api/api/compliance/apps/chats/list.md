@@ -6,7 +6,7 @@
 
 # List chats
 
-GET/v1/compliance/apps/chats
+GET/v1/compliance/apps/chats
 
 Lists chat metadata with filtering capabilities for targeted
 compliance review. Results are sorted chronologically (time ascending)
@@ -234,6 +234,8 @@ Whether more records exist beyond the current result set
 last\_id: string or null
 
 Opaque pagination cursor for the last chat in the current result set. Pass as `after_id` on the next request to page forwards. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
+
+
 
 ### List chats
 

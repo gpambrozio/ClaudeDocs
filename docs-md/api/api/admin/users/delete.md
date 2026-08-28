@@ -6,9 +6,9 @@
 
 # Remove User
 
-DELETE/v1/organizations/users/{user\_id}
+DELETE/v1/organizations/users/{user\_id}
 
-For Claude Enterprise organizations, this endpoint's availability is in beta.
+Remove a member from the organization.
 
 ##### Path parameters
 
@@ -31,6 +31,8 @@ Deleted object type.
 For Users, this is always `"user_deleted"`.
 
 defaultuser\_deleted
+
+
 
 ### Remove User
 

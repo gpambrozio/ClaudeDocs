@@ -8,43 +8,33 @@
 
 ##### [Create External Key](api/http/admin/external_keys/create.md)
 
-POST/v1/organizations/external\_keys
+POST/v1/organizations/external\_keys
 
 ##### [List External Keys](api/http/admin/external_keys/list.md)
 
-GET/v1/organizations/external\_keys
+GET/v1/organizations/external\_keys
 
 ##### [Get External Key](api/http/admin/external_keys/retrieve.md)
 
-GET/v1/organizations/external\_keys/{external\_key\_id}
+GET/v1/organizations/external\_keys/{external\_key\_id}
 
 ##### [Update External Key](api/http/admin/external_keys/update.md)
 
-POST/v1/organizations/external\_keys/{external\_key\_id}
+POST/v1/organizations/external\_keys/{external\_key\_id}
 
 ##### [Delete External Key](api/http/admin/external_keys/delete.md)
 
-DELETE/v1/organizations/external\_keys/{external\_key\_id}
+DELETE/v1/organizations/external\_keys/{external\_key\_id}
 
 ##### [Validate External Key](api/http/admin/external_keys/validate.md)
 
-POST/v1/organizations/external\_keys/{external\_key\_id}/validate
+POST/v1/organizations/external\_keys/{external\_key\_id}/validate
 
 ##### Models
 
 
 
 ExternalKeyCreateResponse object{ id, attachment, created\_at, 5 more }
-
-CMEK external key config belonging to the caller's organization.
-
-Configs are organization-scoped. Workspaces attach to a config; once any
-workspace references it, the provider fields become effectively immutable
-(existing encrypted data needs the config for decrypt).
-
-
-
-ExternalKeyListResponse object{ id, attachment, created\_at, 5 more }
 
 CMEK external key config belonging to the caller's organization.
 
@@ -65,6 +55,16 @@ workspace references it, the provider fields become effectively immutable
 
 
 ExternalKeyUpdateResponse object{ id, attachment, created\_at, 5 more }
+
+CMEK external key config belonging to the caller's organization.
+
+Configs are organization-scoped. Workspaces attach to a config; once any
+workspace references it, the provider fields become effectively immutable
+(existing encrypted data needs the config for decrypt).
+
+
+
+ExternalKeyListResponse object{ id, attachment, created\_at, 5 more }
 
 CMEK external key config belonging to the caller's organization.
 

@@ -8,7 +8,7 @@ cURL
 
 # List Agents
 
-GET/v1/agents
+GET/v1/agents
 
 List Agents
 
@@ -291,6 +291,8 @@ formatint32
 next\_page: optional string or null
 
 Opaque cursor for the next page. Null when no more results.
+
+
 
 ### List Agents
 

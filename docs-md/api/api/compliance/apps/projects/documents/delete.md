@@ -6,7 +6,7 @@
 
 # Delete project document
 
-DELETE/v1/compliance/apps/projects/documents/{document\_id}
+DELETE/v1/compliance/apps/projects/documents/{document\_id}
 
 Delete a project document for compliance purposes.
 
@@ -35,6 +35,8 @@ type: "claude\_project\_document\_deleted"
 Constant string confirming deletion.
 
 defaultclaude\_project\_document\_deleted
+
+
 
 ### Delete project document
 

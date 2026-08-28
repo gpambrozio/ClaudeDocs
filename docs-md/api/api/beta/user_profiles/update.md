@@ -8,7 +8,7 @@ cURL
 
 # Update User Profile
 
-POST/v1/user\_profiles/{user\_profile\_id}
+POST/v1/user\_profiles/{user\_profile\_id}
 
 Update User Profile
 
@@ -173,6 +173,8 @@ One of the following:
 
 
 BetaUserProfile object{ id, created\_at, metadata, 7 more }
+
+
 
 ### Update User Profile
 

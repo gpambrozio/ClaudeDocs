@@ -8,7 +8,7 @@ cURL
 
 # Record Heartbeat
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
+POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
@@ -175,6 +175,8 @@ type: "work\_heartbeat"
 The type of response
 
 defaultwork\_heartbeat
+
+
 
 ### Record Heartbeat
 

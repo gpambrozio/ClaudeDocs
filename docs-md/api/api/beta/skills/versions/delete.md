@@ -8,7 +8,7 @@ cURL
 
 # Delete Skill Version
 
-DELETE/v1/skills/{skill\_id}/versions/{version}
+DELETE/v1/skills/{skill\_id}/versions/{version}
 
 Delete Skill Version
 
@@ -26,9 +26,9 @@ The format and length of IDs may change over time.
 
 version: string
 
-Version identifier for the skill.
+Identifies the skill version by its version ID.
 
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
 ##### Headers
 
@@ -134,21 +134,24 @@ One of the following:
 
 
 
+BetaDeletedSkillVersion object{ id, type }
+
 id: string
 
-Version identifier for the skill.
-
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+Unique identifier for this Skill Version. The id addresses the version in
+paths and pins it in references.
 
 
 
-type: string
+type: "skill\_version\_deleted"
 
 Deleted object type.
 
 For Skill Versions, this is always `"skill_version_deleted"`.
 
 defaultskill\_version\_deleted
+
+
 
 ### Delete Skill Version
 
@@ -160,7 +163,6 @@ cURL
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
-    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -170,8 +172,8 @@ Response 200
 
 ```shiki
 {
-  "id": "1759178010641129",
-  "type": "type"
+  "id": "id",
+  "type": "skill_version_deleted"
 }
 ```
 
@@ -183,8 +185,8 @@ Response 200
 
 ```shiki
 {
-  "id": "1759178010641129",
-  "type": "type"
+  "id": "id",
+  "type": "skill_version_deleted"
 }
 ```
 

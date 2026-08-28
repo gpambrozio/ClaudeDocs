@@ -10,15 +10,15 @@ cURL
 
 ##### [Add Workspace To Service Account](api/http/beta/organization/service_accounts/workspaces/add.md)
 
-POST/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
+POST/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
 
 ##### [List Workspaces For Service Account](api/http/beta/organization/service_accounts/workspaces/list.md)
 
-GET/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
+GET/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
 
 ##### [Remove Workspace From Service Account](api/http/beta/organization/service_accounts/workspaces/remove.md)
 
-DELETE/v1/organizations/service\_accounts/{service\_account\_id}/workspaces/{workspace\_id}
+DELETE/v1/organizations/service\_accounts/{service\_account\_id}/workspaces/{workspace\_id}
 
 ##### Models
 

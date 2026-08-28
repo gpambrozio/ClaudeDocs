@@ -8,7 +8,7 @@ cURL
 
 # Validate Credential
 
-POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
+POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
 
 Validate Credential
 
@@ -125,6 +125,8 @@ One of the following:
 BetaManagedAgentsCredentialValidation object{ credential\_id, has\_refresh\_token, mcp\_probe, 5 more }
 
 Result of live-probing a credential against its configured MCP server.
+
+
 
 ### Validate Credential
 

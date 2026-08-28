@@ -6,7 +6,7 @@
 
 # Create Federation Issuer
 
-POST/v1/organizations/federation\_issuers
+POST/v1/organizations/federation\_issuers
 
 Register an OIDC issuer that Anthropic will trust for workload identity
 federation in your organization.
@@ -145,6 +145,8 @@ Registered external OIDC identity provider.
 
 Records an external IdP the organization trusts for the RFC 7523
 jwt-bearer grant. The `issuer_url` must match the JWT `iss` claim exactly.
+
+
 
 ### Create Federation Issuer
 

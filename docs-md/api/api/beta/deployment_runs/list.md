@@ -8,7 +8,7 @@ cURL
 
 # List Deployment Runs
 
-GET/v1/deployment\_runs
+GET/v1/deployment\_runs
 
 List Deployment Runs
 
@@ -459,6 +459,8 @@ type: "deployment\_run"
 next\_page: optional string or null
 
 Opaque cursor for the next page. Null when no more results.
+
+
 
 ### List Deployment Runs
 

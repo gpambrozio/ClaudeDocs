@@ -6,7 +6,7 @@
 
 # Download artifact content
 
-GET/v1/compliance/apps/artifacts/{artifact\_version\_id}/content
+GET/v1/compliance/apps/artifacts/{artifact\_version\_id}/content
 
 Download the content of an artifact version for compliance purposes.
 
@@ -21,6 +21,8 @@ The artifact version ID (tagged ID, e.g., claude\_artifact\_version\_abc123)
 ##### Headers
 
 "x-api-key": optional string
+
+
 
 ### Download artifact content
 

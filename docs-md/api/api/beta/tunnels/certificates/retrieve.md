@@ -8,7 +8,7 @@ cURL
 
 # Get Tunnel Certificate
 
-GET/v1/tunnels/{tunnel\_id}/certificates/{certificate\_id}
+GET/v1/tunnels/{tunnel\_id}/certificates/{certificate\_id}
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
@@ -165,6 +165,8 @@ tunnel\_id: string
 ID of the tunnel the certificate is registered against.
 
 type: "tunnel\_certificate"
+
+
 
 ### Get Tunnel Certificate
 

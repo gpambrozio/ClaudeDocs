@@ -6,7 +6,7 @@
 
 # Retrieve local session messages
 
-GET/v1/compliance/apps/sessions/local/{local\_session\_id}/messages
+GET/v1/compliance/apps/sessions/local/{local\_session\_id}/messages
 
 Read one local session's transcript, oldest-first by default.
 
@@ -357,6 +357,8 @@ User's email address. Null when the user's account has been deleted or the user 
 workspace\_id: string or null
 
 Workspace identifier (tagged ID, prefixed `wrkspc_`). Null for sessions not attributed to a workspace.
+
+
 
 ### Retrieve local session messages
 

@@ -4,8 +4,6 @@ The Agent SDK spawns and supervises a `claude` CLI subprocess that owns a shell,
 This page covers self-hosting on your own infrastructure. For deployable Dockerfiles and Kubernetes manifests, see the [hosting cookbook](https://github.com/anthropics/claude-cookbooks/tree/main/claude_agent_sdk/hosting).
 If you do not need infrastructure control, custom isolation, or your own data plane, consider [Managed Agents](managed-agents/overview.md) instead: a hosted REST API where Anthropic runs the agent and the sandbox, so your application sends events and streams back results with no hosting infrastructure to operate.
 
-For security hardening beyond basic sandboxing, including network controls, credential management, and isolation options, see [Secure Deployment](agent-sdk/secure-deployment.md).
-
 ## [​](#the-subprocess-model) The subprocess model
 
 Every hosting decision on this page follows from how the SDK runs the agent. When your code calls `query()`, the SDK spawns a separate `claude` CLI process and talks to it over stdio. That subprocess owns the shell, the working directory, and the JSONL session transcripts on local disk.
@@ -130,8 +128,6 @@ async def main():
 asyncio.run(main())
 ```
 
-See [Session storage](agent-sdk/session-storage.md) for the full `SessionStore` interface and reference adapters.
-
 ### [​](#multi-agent-container) Multi-agent container
 
 Run multiple SDK subprocesses inside one container. Best for agents that must collaborate closely, for example multi-agent simulations where the agents interact with each other in a shared environment.
@@ -231,7 +227,7 @@ Anthropic token cost typically dominates container infrastructure cost by an ord
 Default SDK behavior reads settings and `CLAUDE.md` memory files from the filesystem. In a shared container that serves multiple tenants, those files can leak one tenant’s context into another tenant’s session.
 To isolate tenants inside a shared container:
 
-- Pass `settingSources: []` in TypeScript or `setting_sources=[]` in Python so no filesystem settings load.
+- Pass `settingSources: []` in TypeScript or `setting_sources=[]` in Python to skip user, project, and local settings.
 - Set `CLAUDE_CODE_DISABLE_AUTO_MEMORY=1` in `env`. [Auto memory](memory.md) at `~/.claude/projects/<project>/memory/` loads into the system prompt regardless of `settingSources`. See [What settingSources does not control](agent-sdk/claude-code-features.md) for the other inputs that load unconditionally.
 - Point `CLAUDE_CONFIG_DIR` at a per-tenant directory so tenants do not share the `~/.claude.json` global config. When each config directory serves one working directory and you don’t share a [`SessionStore`](agent-sdk/session-storage.md) across tenants, you can also set [`CLAUDE_CODE_PROJECT_DIR_NAME`](sessions.md) in `env` to keep the transcript paths under it short. Requires TypeScript Agent SDK v0.3.234 or later, or Python Agent SDK v0.2.140 or later.
 - Use a per-tenant working directory. Pass `cwd` explicitly on every `query()` call.
@@ -291,8 +287,6 @@ async def main():
 asyncio.run(main())
 ```
 
-For per-tenant network controls, see [Secure Deployment](agent-sdk/secure-deployment.md).
-
 ## [​](#known-limitations) Known limitations
 
 Plan around these in your deployment design.
@@ -303,6 +297,14 @@ Plan around these in your deployment design.
 | Memory growth over long sessions | Cap session length or recycle subprocesses periodically. See [Scaling and concurrency](#scaling-and-concurrency). |
 | Large parallel-subagent fanouts can hit rate limits | Break work into smaller batches rather than issuing one wide dispatch. |
 | No per-subagent wall-clock deadline | Cap each [subagent](agent-sdk/subagents.md) with `maxTurns` in its `AgentDefinition`. For background subagents only, `CLAUDE_ASYNC_AGENT_STALL_TIMEOUT_MS` sets a stall watchdog that fires when a `run_in_background` subagent stops producing output; it is not a total-runtime deadline. |
+
+## [​](#troubleshoot-deployment-failures) Troubleshoot deployment failures
+
+Use this section when an agent that works on your machine fails in a deployed service. Each item below names a failure and links the entry that covers it:
+
+- **CLI not found at service start**: in Python, a container or service manager runs your application with a different `PATH` than your shell, so an install that works locally isn’t visible to the process. In TypeScript, the image build skipped the SDK’s optional dependencies, or `pathToClaudeCodeExecutable` points at a file that doesn’t exist in the image. See [Claude Code not found](agent-sdk/troubleshooting.md).
+- **CLI present in the image but won’t launch**: Claude Code can’t start from a binary that doesn’t match the container’s architecture or libc, or from a file that lost its execute permission in the image build. See [Failed to start Claude Code](agent-sdk/troubleshooting.md).
+- **Claude Code process exits mid-run**: the error your application receives depends on the SDK language and on whether the CLI reported an error result first. The entries under [CLI process exit](agent-sdk/troubleshooting.md) cover each message.
 
 ## [​](#next-steps) Next steps
 

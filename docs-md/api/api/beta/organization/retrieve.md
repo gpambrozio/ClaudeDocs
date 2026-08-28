@@ -8,7 +8,7 @@ cURL
 
 # Get Current Organization
 
-GET/v1/organizations/me
+GET/v1/organizations/me
 
 Retrieve information about the organization associated with the authenticated API key.
 
@@ -39,6 +39,8 @@ Object type.
 For Organizations, this is always `"organization"`.
 
 defaultorganization
+
+
 
 ### Get Current Organization
 

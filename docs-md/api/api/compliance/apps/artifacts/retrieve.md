@@ -6,7 +6,7 @@
 
 # Get artifact metadata
 
-GET/v1/compliance/apps/artifacts/{artifact\_version\_id}
+GET/v1/compliance/apps/artifacts/{artifact\_version\_id}
 
 Returns metadata for an artifact version, without the content body.
 
@@ -62,6 +62,8 @@ Artifact title
 version\_id: string
 
 Artifact version ID e.g. 'claude\_artifact\_version\_abc123'
+
+
 
 ### Get artifact metadata
 

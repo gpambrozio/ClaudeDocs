@@ -6,27 +6,17 @@
 
 # Get RBAC Group
 
-GET/v1/organizations/rbac\_groups/{group\_id}
+GET/v1/organizations/rbac\_groups/{group\_id}
 
 Retrieve an RBAC Group by ID.
 
-The RBAC Groups API is in beta and available to Claude Enterprise organizations only. Requests must send the `ce-user-management-2026-07-13` value in the `anthropic-beta` header.
+The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ##### Path parameters
 
 group\_id: string
 
 ID of the RBAC Group.
-
-##### Headers
-
-
-
-"anthropic-beta": optional array of string
-
-Optional header to specify the beta version(s) you want to use.
-
-To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
 ##### Returns
 
@@ -83,6 +73,8 @@ updated\_at: string
 RFC 3339 timestamp of when the RBAC Group was last updated.
 
 formatdate-time
+
+
 
 ### Get RBAC Group
 

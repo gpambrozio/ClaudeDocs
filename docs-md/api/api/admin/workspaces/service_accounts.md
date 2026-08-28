@@ -8,23 +8,23 @@
 
 ##### [Create Service Account Workspace Member](api/http/admin/workspaces/service_accounts/create.md)
 
-POST/v1/organizations/workspaces/{workspace\_id}/service\_accounts
+POST/v1/organizations/workspaces/{workspace\_id}/service\_accounts
 
 ##### [Get Service Account Workspace Member](api/http/admin/workspaces/service_accounts/retrieve.md)
 
-GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
+GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
 
 ##### [List Service Account Workspace Members](api/http/admin/workspaces/service_accounts/list.md)
 
-GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts
+GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts
 
 ##### [Update Service Account Workspace Member](api/http/admin/workspaces/service_accounts/update.md)
 
-POST/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
+POST/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
 
 ##### [Delete Service Account Workspace Member](api/http/admin/workspaces/service_accounts/delete.md)
 
-DELETE/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
+DELETE/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
 
 ##### Models
 
@@ -38,7 +38,7 @@ Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
 
 implicit: boolean or null
 
-True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace\_user and cannot be removed.
+True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
 
 service\_account\_id: string
 
@@ -78,7 +78,7 @@ ServiceAccountRetrieveResponse object{ created\_by\_actor\_id, implicit, service
 
 
 
-ServiceAccountListResponse object{ created\_by\_actor\_id, implicit, service\_account\_id, 3 more }
+ServiceAccountUpdateResponse object{ created\_by\_actor\_id, implicit, service\_account\_id, 3 more }
 
 created\_by\_actor\_id: string or null
 
@@ -86,7 +86,7 @@ Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
 
 implicit: boolean or null
 
-True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace\_user and cannot be removed.
+True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
 
 service\_account\_id: string
 
@@ -122,7 +122,7 @@ One of the following:
 
 
 
-ServiceAccountUpdateResponse object{ created\_by\_actor\_id, implicit, service\_account\_id, 3 more }
+ServiceAccountListResponse object{ created\_by\_actor\_id, implicit, service\_account\_id, 3 more }
 
 created\_by\_actor\_id: string or null
 
@@ -130,7 +130,7 @@ Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
 
 implicit: boolean or null
 
-True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace\_user and cannot be removed.
+True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
 
 service\_account\_id: string
 

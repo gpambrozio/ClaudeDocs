@@ -8,7 +8,7 @@ cURL
 
 # Update Work Item
 
-POST/v1/environments/{environment\_id}/work/{work\_id}
+POST/v1/environments/{environment\_id}/work/{work\_id}
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
@@ -137,6 +137,8 @@ Work resource representing a unit of work in a self-hosted environment.
 Work items are queued when sessions are created or when long-dormant sessions
 receive new messages. The environment worker polls for work to execute in a
 self-hosted sandbox.
+
+
 
 ### Update Work Item
 

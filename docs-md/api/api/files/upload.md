@@ -8,7 +8,7 @@ cURL
 
 # Upload File
 
-POST/v1/files
+POST/v1/files
 
 Upload File
 
@@ -105,6 +105,8 @@ expires\_at: optional string or null
 RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
 
 formatdate-time
+
+
 
 ### Upload File
 

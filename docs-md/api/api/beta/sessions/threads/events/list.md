@@ -8,7 +8,7 @@ cURL
 
 # List Session Thread Events
 
-GET/v1/sessions/{session\_id}/threads/{thread\_id}/events
+GET/v1/sessions/{session\_id}/threads/{thread\_id}/events
 
 List Session Thread Events
 
@@ -707,6 +707,8 @@ Periodic snapshot of the session's cumulative usage and tracked list cost.
 next\_page: optional string or null
 
 Opaque cursor for the next page. Null when no more results.
+
+
 
 ### List Session Thread Events
 

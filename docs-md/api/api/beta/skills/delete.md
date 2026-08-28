@@ -8,7 +8,7 @@ cURL
 
 # Delete Skill
 
-DELETE/v1/skills/{skill\_id}
+DELETE/v1/skills/{skill\_id}
 
 Delete Skill
 
@@ -126,6 +126,10 @@ One of the following:
 
 
 
+BetaDeletedSkill object{ id, type }
+
+
+
 id: string
 
 Unique identifier for the skill.
@@ -134,13 +138,15 @@ The format and length of IDs may change over time.
 
 
 
-type: string
+type: "skill\_deleted"
 
 Deleted object type.
 
 For Skills, this is always `"skill_deleted"`.
 
 defaultskill\_deleted
+
+
 
 ### Delete Skill
 
@@ -152,7 +158,6 @@ cURL
 curl https://api.anthropic.com/v1/skills/$SKILL_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
-    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -163,7 +168,7 @@ Response 200
 ```shiki
 {
   "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type"
+  "type": "skill_deleted"
 }
 ```
 
@@ -176,7 +181,7 @@ Response 200
 ```shiki
 {
   "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type"
+  "type": "skill_deleted"
 }
 ```
 

@@ -232,13 +232,6 @@ async def main():
 asyncio.run(main())
 ```
 
-**Benefits:**
-
-- Full type inference (TypeScript) and type hints (Python)
-- Runtime validation with `safeParse()` or `model_validate()`
-- Better error messages
-- Composable, reusable schemas
-
 ## [​](#output-format-configuration) Output format configuration
 
 The `outputFormat` (TypeScript) or `output_format` (Python) option accepts an object with:
@@ -375,7 +368,7 @@ When an error occurs, the result message has a `subtype` indicating what went wr
 | `success` | Output was generated and validated successfully |
 | `error_max_structured_output_retries` | No valid output remained after multiple attempts (validation failures, or a model-fallback retraction with no successful retry) |
 
-A result can also end with subtype `success` but no `structured_output` value, for example when the run completes without the agent producing a structured output. Treat that case as a failure as well. The example below treats a result as successful only when the `subtype` is `success` and `structured_output` is present, and handles every other result as a failure:
+A result can also end with subtype `success` but no `structured_output` value, for example when the run completes without the agent producing a structured output. Treat that case as a failure as well. The troubleshooting entry [structured\_output is None but the result says success](agent-sdk/troubleshooting.md) covers this case. The example below treats a result as successful only when the `subtype` is `success` and `structured_output` is present, and handles every other result as a failure:
 
 TypeScript
 

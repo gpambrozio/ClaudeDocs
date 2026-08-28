@@ -6,7 +6,7 @@
 
 # List Federation Issuers
 
-GET/v1/organizations/federation\_issuers
+GET/v1/organizations/federation\_issuers
 
 List federation issuers in your organization.
 
@@ -225,6 +225,8 @@ Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
 next\_page: string or null
 
 Opaque cursor for the next page, or null if no more results.
+
+
 
 ### List Federation Issuers
 

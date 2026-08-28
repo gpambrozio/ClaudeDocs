@@ -8,7 +8,7 @@ cURL
 
 # Archive Session
 
-POST/v1/sessions/{session\_id}/archive
+POST/v1/sessions/{session\_id}/archive
 
 Archive Session
 
@@ -123,6 +123,8 @@ One of the following:
 BetaManagedAgentsSession object{ id, agent, archived\_at, 14 more }
 
 A Managed Agents `session`.
+
+
 
 ### Archive Session
 

@@ -8,7 +8,7 @@ cURL
 
 # Get Invite
 
-GET/v1/organizations/invites/{invite\_id}
+GET/v1/organizations/invites/{invite\_id}
 
 Retrieve an invite by ID.
 
@@ -23,6 +23,8 @@ ID of the Invite.
 
 
 BetaOrganizationInvite object{ id, accepted\_at, email, 6 more }
+
+
 
 ### Get Invite
 

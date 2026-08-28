@@ -10,19 +10,19 @@ cURL
 
 ##### [List Users](api/http/beta/organization/users/list.md)
 
-GET/v1/organizations/users
+GET/v1/organizations/users
 
 ##### [Get User](api/http/beta/organization/users/retrieve.md)
 
-GET/v1/organizations/users/{user\_id}
+GET/v1/organizations/users/{user\_id}
 
 ##### [Update User](api/http/beta/organization/users/update.md)
 
-POST/v1/organizations/users/{user\_id}
+POST/v1/organizations/users/{user\_id}
 
 ##### [Remove User](api/http/beta/organization/users/remove.md)
 
-DELETE/v1/organizations/users/{user\_id}
+DELETE/v1/organizations/users/{user\_id}
 
 ##### Models
 

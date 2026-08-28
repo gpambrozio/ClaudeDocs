@@ -6,7 +6,7 @@
 
 # Set Spend Limit
 
-POST/v1/organizations/spend\_limits
+POST/v1/organizations/spend\_limits
 
 Set a per-user spend limit override.
 
@@ -24,13 +24,19 @@ Limit amount as a non-negative integer decimal string in the minor unit of the o
 
 scope: object{ type, user\_id }
 
+Scope selecting a single member of the organization.
+
 
 
 type: "user"
 
+Scope type. Always `user` for this scope.
+
 defaultuser
 
 user\_id: string
+
+Tagged ID of the member the spend limit applies to.
 
 
 
@@ -50,6 +56,10 @@ One of the following:
 
 SpendLimit object{ id, amount, created\_at, 5 more }
 
+A configured spend limit: a cap on metered spend for one scope and period.
+
+
+
 ### Set Spend Limit
 
 cURL
@@ -65,7 +75,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limits \
           "amount": "50000",
           "scope": {
             "type": "user",
-            "user_id": "user_id"
+            "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
           },
           "period": "monthly"
         }'
@@ -84,7 +94,7 @@ Response 200
   "period": "monthly",
   "scope": {
     "type": "user",
-    "user_id": "user_id"
+    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
   },
   "type": "spend_limit",
   "updated_at": "2019-12-27T18:11:19.117Z"
@@ -106,7 +116,7 @@ Response 200
   "period": "monthly",
   "scope": {
     "type": "user",
-    "user_id": "user_id"
+    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
   },
   "type": "spend_limit",
   "updated_at": "2019-12-27T18:11:19.117Z"

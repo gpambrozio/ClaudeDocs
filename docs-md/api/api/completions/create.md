@@ -8,7 +8,7 @@ cURL
 
 # Create a Text Completion
 
-POST/v1/complete
+POST/v1/complete
 
 [Legacy] Create a Text Completion.
 
@@ -323,6 +323,8 @@ Completion object{ id, completion, model, 2 more }
 
 
 Completion object{ id, completion, model, 2 more }
+
+
 
 ### Create a Text Completion
 

@@ -8,7 +8,7 @@
 
 ##### [List organizations](api/http/compliance/organizations/list.md)
 
-GET/v1/compliance/organizations
+GET/v1/compliance/organizations
 
 ##### Models
 
@@ -34,29 +34,29 @@ Unique identifier for the organization (UUID format)
 
 ##### [List organization users](api/http/compliance/organizations/users/list.md)
 
-GET/v1/compliance/organizations/{org\_uuid}/users
+GET/v1/compliance/organizations/{org\_uuid}/users
 
 #### Organizations[Roles](api/http/compliance/organizations/roles.md)
 
 ##### [List Compliance Roles](api/http/compliance/organizations/roles/list.md)
 
-GET/v1/compliance/organizations/{org\_uuid}/roles
+GET/v1/compliance/organizations/{org\_uuid}/roles
 
 ##### [Get Compliance Role](api/http/compliance/organizations/roles/retrieve.md)
 
-GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}
+GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}
 
 #### OrganizationsRoles[Permissions](api/http/compliance/organizations/roles/permissions.md)
 
 ##### [List Compliance Role Permissions](api/http/compliance/organizations/roles/permissions/list.md)
 
-GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}/permissions
+GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}/permissions
 
 #### Organizations[Settings](api/http/compliance/organizations/settings.md)
 
 ##### [Get effective organization settings](api/http/compliance/organizations/settings/retrieve.md)
 
-GET/v1/compliance/organizations/{organization\_id}/settings
+GET/v1/compliance/organizations/{organization\_id}/settings
 
 ---
 

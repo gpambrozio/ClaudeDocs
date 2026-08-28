@@ -8,7 +8,7 @@ cURL
 
 # List Federation Issuers
 
-GET/v1/organizations/federation\_issuers
+GET/v1/organizations/federation\_issuers
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -319,6 +319,8 @@ Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
 next\_page: string or null
 
 Opaque cursor for the next page, or null if no more results.
+
+
 
 ### List Federation Issuers
 

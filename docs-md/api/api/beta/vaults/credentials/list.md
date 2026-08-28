@@ -8,7 +8,7 @@ cURL
 
 # List Credentials
 
-GET/v1/vaults/{vault\_id}/credentials
+GET/v1/vaults/{vault\_id}/credentials
 
 List Credentials
 
@@ -239,6 +239,8 @@ Human-readable name for the credential.
 next\_page: optional string or null
 
 Pagination token for the next page, or null if no more results.
+
+
 
 ### List Credentials
 

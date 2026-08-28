@@ -8,7 +8,7 @@ cURL
 
 # Get Agent
 
-GET/v1/agents/{agent\_id}
+GET/v1/agents/{agent\_id}
 
 Get Agent
 
@@ -133,6 +133,8 @@ One of the following:
 BetaManagedAgentsAgent object{ id, archived\_at, created\_at, 12 more }
 
 A Managed Agents `agent`.
+
+
 
 ### Get Agent
 

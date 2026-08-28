@@ -8,7 +8,7 @@ cURL
 
 # Create External Key
 
-POST/v1/organizations/external\_keys
+POST/v1/organizations/external\_keys
 
 Create an external key config owned by the caller's organization.
 
@@ -103,6 +103,8 @@ CMEK external key config belonging to the caller's organization.
 Configs are organization-scoped. Workspaces attach to a config; once any
 workspace references it, the provider fields become effectively immutable
 (existing encrypted data needs the config for decrypt).
+
+
 
 ### Create External Key
 

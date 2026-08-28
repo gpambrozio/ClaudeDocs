@@ -8,7 +8,7 @@
 
 ##### [Retrieve remote session messages](api/http/compliance/apps/sessions/remote/messages/list.md)
 
-GET/v1/compliance/apps/sessions/remote/{claude\_remote\_session\_id}/messages
+GET/v1/compliance/apps/sessions/remote/{claude\_remote\_session\_id}/messages
 
 ##### Models
 

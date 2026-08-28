@@ -8,7 +8,7 @@ cURL
 
 # Create Agent
 
-POST/v1/agents
+POST/v1/agents
 
 Create Agent
 
@@ -329,6 +329,8 @@ type: "custom"
 BetaManagedAgentsAgent object{ id, archived\_at, created\_at, 12 more }
 
 A Managed Agents `agent`.
+
+
 
 ### Create Agent
 

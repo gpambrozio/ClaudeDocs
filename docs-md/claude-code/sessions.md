@@ -25,14 +25,40 @@ A resumed session restores the conversation along with the state saved in it:
 - Conversation history: the full history, including tool calls and results.
 - Model: the session continues on the model it was using. The model isn’t restored when it has been retired or isn’t allowed by `availableModels`, when a `--model` flag or `ANTHROPIC_MODEL`-family environment variable picks one at launch, or on providers that use provider-specific deployment IDs, such as [Amazon Bedrock, Google Cloud’s Agent Platform, and Microsoft Foundry](third-party-integrations.md); see [model configuration](model-config.md) for the resolution order.
 - Agent: a session started with [`--agent`](sub-agents.md) or the `agent` setting continues as that agent, keeping its system prompt, tool restrictions, and model. Pass `--agent` when resuming to pick a different one. Claude Code looks for the agent in two places: the session’s original directory, provided you have [trusted that workspace](permissions.md), and then the directory you resume from, so a project-scoped agent still loads when you resume from another directory. If Claude Code doesn’t find the agent in either place, the session resumes with the default tools and system prompt and shows a [warning naming the agent](errors.md).
-- Permission mode: the mode the session was in, with these exceptions. Pass `--permission-mode` to override the restored mode.
-  - `plan` and `bypassPermissions` are never restored; a session that was in one of them resumes in the mode a new session would start in. To [bypass permissions](permission-modes.md) again, enable it at launch with one of its launch flags or `permissions.defaultMode: "bypassPermissions"` in [settings](settings-reference.md)
-  - `auto` is restored only when your account still meets the [auto mode requirements](permission-modes.md)
-  - Manual is restored as Manual when a new session would start in auto mode from the [built-in default](permission-modes.md); when a `defaultMode` from a settings file [takes effect](permission-modes.md), the session resumes in that mode instead
+- Permission mode: if you resume from a terminal with `claude --continue`, `claude --resume <session-id>`, or `claude --resume <name>` when the name matches one session, without `-p`, Claude Code restores the permission mode the session was in, except in the cases in [permission mode on resume](#permission-mode-on-resume), which also covers the session picker, `/resume`, and resuming with `claude -p`. Pass `--permission-mode` or `--dangerously-skip-permissions` to override the restored mode.
 - Active goal: a [goal](goal.md) that was still active when the session ended carries over; its turn count, timer, and token-spend baseline reset.
 - Scheduled tasks: [tasks that haven’t expired](scheduled-tasks.md) are restored. Background Bash and monitor tasks aren’t.
 
 Not every configuration flag from the original launch is restored. If the session depended on `--mcp-config`, `--settings`, `--plugin-dir`, `--fallback-model`, or directories added with `--add-dir`, pass them again when you resume; directories added mid-session with `/add-dir` aren’t restored either, though the session picker still uses them to locate the session. The standard settings files, such as `settings.json` and `settings.local.json`, are re-read at launch, so configuration that lives in them doesn’t need to be passed again.
+
+#### [​](#permission-mode-on-resume) Permission mode on resume
+
+Which permission mode Claude Code starts a resumed session in depends on how you resume:
+
+- Terminal: `claude --continue`, `claude --resume <session-id>`, or `claude --resume <name>` when the name matches one session, without `-p`. Claude Code restores the permission mode the session was in, except in the cases in the table. Pass `--permission-mode` or `--dangerously-skip-permissions` to override the restored mode.
+- Non-interactive: `claude -p --resume` or `claude -p --continue`. Claude Code starts the run in the permission mode a new `claude -p` run would start in, except that a session that ended in plan mode resumes in plan mode under the [conditions below](#resume-in-plan-mode-with-p).
+- VS Code: the extension’s conversation panel. The table covers only a conversation that ended in plan mode; for the rest, see [resume past conversations](vs-code.md).
+- Session picker at launch: a session you select from the [session picker](#use-the-session-picker), whether you opened it with `claude --resume` alone, `claude --from-pr`, or a name that matches more than one session. Claude Code doesn’t restore the stored permission mode. It starts the session in the permission mode it would start a new session in from the same command line.
+- `/resume` inside a session, with or without an argument: Claude Code doesn’t restore the stored permission mode. The conversation you switch to continues in the permission mode your current session is in.
+
+Restoring plan mode on the non-interactive and VS Code paths requires Claude Code v2.1.246 or later. Each row names the permission mode the session ended in, which of the terminal, non-interactive, and VS Code paths you resume it by, and the permission mode Claude Code starts the resumed session in.
+
+| Session ended in | How you resume | Permission mode after you resume |
+| --- | --- | --- |
+| `bypassPermissions` | Terminal | The permission mode a new session would start in. To [bypass permissions](permission-modes.md) again, enable it at launch with one of its launch flags or `permissions.defaultMode: "bypassPermissions"` in [settings](settings-reference.md) |
+| `plan` | Terminal | The permission mode a new session would start in |
+| `auto` | Terminal | `auto`, only when your account still meets the [auto mode requirements](permission-modes.md) |
+| Manual | Terminal | Manual when a new session would start in auto mode from the [built-in default](permission-modes.md). When a `defaultMode` from a settings file [takes effect](permission-modes.md), Claude Code starts the resumed session in that mode instead |
+| `plan` | Non-interactive, under the [conditions below](#resume-in-plan-mode-with-p) | Plan mode |
+| Any mode | Non-interactive, in any other case | The permission mode a new `claude -p` run would start in |
+| `plan` | VS Code | Plan mode, with [the exceptions on the VS Code page](vs-code.md) |
+
+A `claude -p --resume` or `claude -p --continue` run resumes in plan mode only when all four conditions hold:
+
+- You pass [`--permission-prompt-tool`](cli-reference.md), so that Claude Code can present the plan for approval
+- You don’t pass `--permission-mode` or `--dangerously-skip-permissions`
+- You don’t pass `--fork-session`
+- The run isn’t started through [channels](channels.md)
 
 ### [​](#resume-from-a-summary) Resume from a summary
 

@@ -8,7 +8,7 @@ cURL
 
 # Download Skill Version Content
 
-GET/v1/skills/{skill\_id}/versions/{version}/content
+GET/v1/skills/{skill\_id}/versions/{version}/content
 
 Download a skill version's content as a zip archive.
 
@@ -26,9 +26,9 @@ The format and length of IDs may change over time.
 
 version: string
 
-Version identifier for the skill.
+Identifies the skill version by its version ID.
 
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
 ##### Headers
 
@@ -130,6 +130,8 @@ One of the following:
 
 "ce-user-management-2026-07-13"
 
+
+
 ### Download Skill Version Content
 
 cURL
@@ -139,7 +141,6 @@ cURL
 ```shiki
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION/content \
     -H 'anthropic-version: 2023-06-01' \
-    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 

@@ -18,33 +18,31 @@ The use of CMEK is optional. Eligible organizations can **opt in** to use custom
 
 ##  How it works
 
-Only Organization Admins (on Claude Platform) or Owners and the Primary Owner (on Claude Enterprise) can configure CMEK. On Claude Platform, CMEK is scoped per workspace and configured with the Admin API. On Claude Enterprise, CMEK is scoped per organization and configured in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls). On either product, CMEK protects data written after your key takes effect. Existing data (prior chats, files, and sessions) remains encrypted with Anthropic-managed keys and is not re-encrypted under your key.
+Only Organization Admins (on Claude Platform; the Admin role on Claude Platform on AWS) or Owners and the Primary Owner (on Claude Enterprise) can configure CMEK. On Claude Platform, CMEK is scoped per workspace and configured with the Admin API (on Claude Platform on AWS, in the Claude Console or through the IAM-authorized external key and workspace endpoints). On Claude Enterprise, CMEK is scoped per organization and configured in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls). On either product, CMEK protects data written after your key takes effect. Existing data (prior chats, files, and sessions) remains encrypted with Anthropic-managed keys and is not re-encrypted under your key.
 
 On Claude Platform, Anthropic recommends attaching your key to a new workspace before you send any requests to that workspace. If you attach a key to a workspace that already receives requests, your key can take up to a day to take effect. Data written before then, like existing data, is encrypted with Anthropic-managed keys and is not re-encrypted.
 
 CMEK configuration events appear in the [Compliance API Activity Feed](manage-claude/compliance-activity-feed.md). The key operations Anthropic performs against your key (such as wrapping and unwrapping data keys) do not appear in the Compliance API; they appear in your cloud provider's audit logs.
 
-Anthropic calls your key management service from its standard public IP range. If you restrict access to your key management service by IP, allow the addresses listed in [IP addresses](api/ip-addresses.md).
+Anthropic calls your key management service from its standard public IP range. If you restrict access to your key management service by IP, allow the addresses listed in [IP addresses](api/ip-addresses.md). On Claude Platform on AWS, don't rely on IP-based restrictions for your key; scope access with the key policy described in the [AWS KMS guide](manage-claude/cmek-aws-kms.md) instead.
 
 ##  Prerequisites
 
 - Permissions to create encryption keys and manage key access in the account, project, or subscription that will host the encryption key.
-- An Organization Admin role in the Claude Console on Claude Platform, or an Owner or Primary Owner role on Claude Enterprise.
+- An Organization Admin role in the Claude Console on Claude Platform (the Admin role on Claude Platform on AWS), or an Owner or Primary Owner role on Claude Enterprise.
 - Data retention configuration: CMEK is allowed with [Zero data retention (ZDR)](manage-claude/api-and-data-retention.md) for both Claude Platform and Claude Enterprise.
 
 ##  Availability and regions
 
-CMEK is currently available in US regions only, and all encryption operations are processed in US regions.
-
-On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), CMEK is available with AWS KMS keys only; Google Cloud KMS and Azure Key Vault keys cannot be registered. Create and attach keys in the Claude Console; the `external_keys` API endpoints are not currently available on Claude Platform on AWS. There is no separate validation step: the key is implicitly validated when you attach it to a workspace (the attach call performs an encrypt/decrypt round), so a key policy problem surfaces at attach time rather than at registration. The key must be in the same AWS region as the workspace it is attached to.
-
-For minimal latency, choose a region close to Anthropic's US infrastructure:
+Except on Claude Platform on AWS (covered at the end of this section), CMEK is currently available in US regions only, and all encryption operations are processed in US regions. For minimal latency, choose a region close to Anthropic's US infrastructure:
 
 | Provider | Recommended regions |
 | --- | --- |
 | AWS | `us-east-2` |
 | Google Cloud | `us-central1`, `us-east5` |
 | Azure | `northcentralus`, `eastus2` |
+
+On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), CMEK is available with AWS KMS keys only; Google Cloud KMS and Azure Key Vault keys cannot be registered. These region recommendations do not apply there: the key must be a single-region KMS key in the same AWS account and region as the workspace it is attached to, and its key policy must grant access to an AWS service principal rather than Anthropic's IAM role; see [Set up CMEK on Claude Platform on AWS](manage-claude/cmek-aws-kms.md). Register and attach keys in the Claude Console; the external key endpoints are also available on Claude Platform on AWS, authorized through [IAM actions](api/claude-platform-on-aws-iam-actions.md). There is no separate validation step: the key is implicitly validated when you attach it to a workspace (the attach call performs an encrypt/decrypt round), so a key policy problem surfaces at attach time rather than at registration.
 
 ##  What CMEK protects
 
@@ -150,7 +148,7 @@ Follow the guide for the key management service you use.
 
 [AWS KMS](manage-claude/cmek-aws-kms.md)
 
-Create an AWS KMS key with a cross-account key policy, then register and validate it.
+Create an AWS KMS key with a key policy that grants Anthropic access, then register it.
 
 [Google Cloud KMS](manage-claude/cmek-google-cloud-kms.md)
 

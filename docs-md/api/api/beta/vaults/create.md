@@ -8,7 +8,7 @@ cURL
 
 # Create Vault
 
-POST/v1/vaults
+POST/v1/vaults
 
 Create Vault
 
@@ -173,6 +173,8 @@ updated\_at: string
 A timestamp in RFC 3339 format
 
 formatdate-time
+
+
 
 ### Create Vault
 

@@ -8,7 +8,7 @@ cURL
 
 # List memory stores
 
-GET/v1/memory\_stores
+GET/v1/memory\_stores
 
 List memory stores
 
@@ -199,6 +199,8 @@ Arbitrary key-value tags for your own bookkeeping (such as the end user a store 
 next\_page: optional string or null
 
 Opaque cursor for the next page (a `page_...` value). Pass as `page` on the next request. `null` when there are no more results.
+
+
 
 ### List memory stores
 

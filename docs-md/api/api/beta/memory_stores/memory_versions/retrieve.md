@@ -8,7 +8,7 @@ cURL
 
 # Retrieve a memory version
 
-GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}
+GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}
 
 Retrieve a memory version
 
@@ -139,6 +139,8 @@ One of the following:
 BetaManagedAgentsMemoryVersion object{ id, created\_at, memory\_id, 10 more }
 
 A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
+
+
 
 ### Retrieve a memory version
 

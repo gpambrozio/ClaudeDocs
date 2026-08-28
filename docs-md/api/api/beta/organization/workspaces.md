@@ -10,23 +10,23 @@ cURL
 
 ##### [List Workspaces](api/http/beta/organization/workspaces/list.md)
 
-GET/v1/organizations/workspaces
+GET/v1/organizations/workspaces
 
 ##### [Create Workspace](api/http/beta/organization/workspaces/create.md)
 
-POST/v1/organizations/workspaces
+POST/v1/organizations/workspaces
 
 ##### [Get Workspace](api/http/beta/organization/workspaces/retrieve.md)
 
-GET/v1/organizations/workspaces/{workspace\_id}
+GET/v1/organizations/workspaces/{workspace\_id}
 
 ##### [Update Workspace](api/http/beta/organization/workspaces/update.md)
 
-POST/v1/organizations/workspaces/{workspace\_id}
+POST/v1/organizations/workspaces/{workspace\_id}
 
 ##### [Archive Workspace](api/http/beta/organization/workspaces/archive.md)
 
-POST/v1/organizations/workspaces/{workspace\_id}/archive
+POST/v1/organizations/workspaces/{workspace\_id}/archive
 
 ##### Models
 
@@ -218,51 +218,51 @@ One of the following:
 
 ##### [List Workspace Rate Limits](api/http/beta/organization/workspaces/rate_limits/list.md)
 
-GET/v1/organizations/workspaces/{workspace\_id}/rate\_limits
+GET/v1/organizations/workspaces/{workspace\_id}/rate\_limits
 
 #### Workspaces[Members](api/http/beta/organization/workspaces/members.md)
 
 ##### [List Workspace Members](api/http/beta/organization/workspaces/members/list.md)
 
-GET/v1/organizations/workspaces/{workspace\_id}/members
+GET/v1/organizations/workspaces/{workspace\_id}/members
 
 ##### [Create Workspace Member](api/http/beta/organization/workspaces/members/add.md)
 
-POST/v1/organizations/workspaces/{workspace\_id}/members
+POST/v1/organizations/workspaces/{workspace\_id}/members
 
 ##### [Get Workspace Member](api/http/beta/organization/workspaces/members/retrieve.md)
 
-GET/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+GET/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 ##### [Update Workspace Member](api/http/beta/organization/workspaces/members/update.md)
 
-POST/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+POST/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 ##### [Delete Workspace Member](api/http/beta/organization/workspaces/members/remove.md)
 
-DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 #### Workspaces[Service Accounts](api/http/beta/organization/workspaces/service_accounts.md)
 
 ##### [List Service Account Workspace Members](api/http/beta/organization/workspaces/service_accounts/list.md)
 
-GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts
+GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts
 
 ##### [Create Service Account Workspace Member](api/http/beta/organization/workspaces/service_accounts/add.md)
 
-POST/v1/organizations/workspaces/{workspace\_id}/service\_accounts
+POST/v1/organizations/workspaces/{workspace\_id}/service\_accounts
 
 ##### [Get Service Account Workspace Member](api/http/beta/organization/workspaces/service_accounts/retrieve.md)
 
-GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
+GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
 
 ##### [Update Service Account Workspace Member](api/http/beta/organization/workspaces/service_accounts/update.md)
 
-POST/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
+POST/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
 
 ##### [Delete Service Account Workspace Member](api/http/beta/organization/workspaces/service_accounts/remove.md)
 
-DELETE/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
+DELETE/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
 
 ---
 

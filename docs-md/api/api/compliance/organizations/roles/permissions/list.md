@@ -6,7 +6,7 @@
 
 # List Compliance Role Permissions
 
-GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}/permissions
+GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}/permissions
 
 List Compliance Role Permissions
 
@@ -69,6 +69,8 @@ Whether more records exist beyond the current result set
 next\_page: string or null
 
 Token to retrieve the next page. Use this as the 'page' parameter in your next request
+
+
 
 ### List Compliance Role Permissions
 

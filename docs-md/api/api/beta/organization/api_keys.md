@@ -10,15 +10,15 @@ cURL
 
 ##### [List API Keys](api/http/beta/organization/api_keys/list.md)
 
-GET/v1/organizations/api\_keys
+GET/v1/organizations/api\_keys
 
 ##### [Get API Key](api/http/beta/organization/api_keys/retrieve.md)
 
-GET/v1/organizations/api\_keys/{api\_key\_id}
+GET/v1/organizations/api\_keys/{api\_key\_id}
 
 ##### [Update API Key](api/http/beta/organization/api_keys/update.md)
 
-POST/v1/organizations/api\_keys/{api\_key\_id}
+POST/v1/organizations/api\_keys/{api\_key\_id}
 
 ##### Models
 

@@ -6,21 +6,11 @@
 
 # Create RBAC Group
 
-POST/v1/organizations/rbac\_groups
+POST/v1/organizations/rbac\_groups
 
 Create an RBAC Group in the Claude Enterprise tenant. Groups created via the API have source type `"direct"`.
 
-The RBAC Groups API is in beta and available to Claude Enterprise organizations only. Requests must send the `ce-user-management-2026-07-13` value in the `anthropic-beta` header.
-
-##### Headers
-
-
-
-"anthropic-beta": optional array of string
-
-Optional header to specify the beta version(s) you want to use.
-
-To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
+The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ##### Body
 
@@ -89,6 +79,8 @@ updated\_at: string
 RFC 3339 timestamp of when the RBAC Group was last updated.
 
 formatdate-time
+
+
 
 ### Create RBAC Group
 

@@ -6,7 +6,7 @@
 
 # Retrieve remote session messages
 
-GET/v1/compliance/apps/sessions/remote/{claude\_remote\_session\_id}/messages
+GET/v1/compliance/apps/sessions/remote/{claude\_remote\_session\_id}/messages
 
 Retrieve one remote session's transcript: user prompts, assistant
 responses, and tool calls and results. Thinking blocks and images are
@@ -328,6 +328,8 @@ User identifier
 email\_address: string or null
 
 User's email address. Null when the user is no longer a member of an organization the key may read — `id` remains set so attribution is preserved. The messages endpoint does not resolve email addresses; this field is always null there.
+
+
 
 ### Retrieve remote session messages
 

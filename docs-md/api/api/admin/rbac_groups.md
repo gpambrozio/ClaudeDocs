@@ -8,23 +8,23 @@
 
 ##### [List RBAC Groups](api/http/admin/rbac_groups/list.md)
 
-GET/v1/organizations/rbac\_groups
+GET/v1/organizations/rbac\_groups
 
 ##### [Get RBAC Group](api/http/admin/rbac_groups/retrieve.md)
 
-GET/v1/organizations/rbac\_groups/{group\_id}
+GET/v1/organizations/rbac\_groups/{group\_id}
 
 ##### [Create RBAC Group](api/http/admin/rbac_groups/create.md)
 
-POST/v1/organizations/rbac\_groups
+POST/v1/organizations/rbac\_groups
 
 ##### [Update RBAC Group](api/http/admin/rbac_groups/update.md)
 
-POST/v1/organizations/rbac\_groups/{group\_id}
+POST/v1/organizations/rbac\_groups/{group\_id}
 
 ##### [Delete RBAC Group](api/http/admin/rbac_groups/delete.md)
 
-DELETE/v1/organizations/rbac\_groups/{group\_id}
+DELETE/v1/organizations/rbac\_groups/{group\_id}
 
 ##### Models
 
@@ -104,15 +104,15 @@ defaultrbac\_group\_deleted
 
 ##### [List RBAC Group Members](api/http/admin/rbac_groups/members/list.md)
 
-GET/v1/organizations/rbac\_groups/{group\_id}/members
+GET/v1/organizations/rbac\_groups/{group\_id}/members
 
 ##### [Add RBAC Group Member](api/http/admin/rbac_groups/members/create.md)
 
-POST/v1/organizations/rbac\_groups/{group\_id}/members
+POST/v1/organizations/rbac\_groups/{group\_id}/members
 
 ##### [Remove RBAC Group Member](api/http/admin/rbac_groups/members/delete.md)
 
-DELETE/v1/organizations/rbac\_groups/{group\_id}/members/{user\_id}
+DELETE/v1/organizations/rbac\_groups/{group\_id}/members/{user\_id}
 
 ---
 

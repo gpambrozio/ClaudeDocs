@@ -8,7 +8,7 @@
 
 ##### [Retrieve local session messages](api/http/compliance/apps/sessions/local/messages/list.md)
 
-GET/v1/compliance/apps/sessions/local/{local\_session\_id}/messages
+GET/v1/compliance/apps/sessions/local/{local\_session\_id}/messages
 
 ##### Models
 

@@ -10,19 +10,19 @@ cURL
 
 ##### [Create Tunnel Certificate](api/http/beta/tunnels/certificates/create.md)
 
-POST/v1/tunnels/{tunnel\_id}/certificates
+POST/v1/tunnels/{tunnel\_id}/certificates
 
 ##### [Get Tunnel Certificate](api/http/beta/tunnels/certificates/retrieve.md)
 
-GET/v1/tunnels/{tunnel\_id}/certificates/{certificate\_id}
+GET/v1/tunnels/{tunnel\_id}/certificates/{certificate\_id}
 
 ##### [List Tunnel Certificates](api/http/beta/tunnels/certificates/list.md)
 
-GET/v1/tunnels/{tunnel\_id}/certificates
+GET/v1/tunnels/{tunnel\_id}/certificates
 
 ##### [Archive Tunnel Certificate](api/http/beta/tunnels/certificates/archive.md)
 
-POST/v1/tunnels/{tunnel\_id}/certificates/{certificate\_id}/archive
+POST/v1/tunnels/{tunnel\_id}/certificates/{certificate\_id}/archive
 
 ##### Models
 

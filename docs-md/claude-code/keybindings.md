@@ -456,7 +456,7 @@ These shortcuts cannot be rebound:
 | Ctrl+C | Hardcoded interrupt/cancel |
 | Ctrl+D | Hardcoded exit |
 | Ctrl+M | Claude Code always receives it as Enter |
-| Ctrl+[ | Claude Code always receives it as Escape |
+| Ctrl+[ | Claude Code always receives it as Escape. In terminals that use the Kitty keyboard protocol, this requires v2.1.242 or later |
 | Ctrl+I | Claude Code always receives it as Tab |
 | Ctrl+H | Sends the ASCII backspace byte. [How Claude Code reads it on Windows](terminal-config.md) depends on your terminal and the [`CLAUDE_CODE_BS_AS_CTRL_BACKSPACE`](env-vars.md) environment variable |
 | Caps Lock | Not delivered to terminal applications |

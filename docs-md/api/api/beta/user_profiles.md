@@ -10,23 +10,23 @@ cURL
 
 ##### [Create User Profile](api/http/beta/user_profiles/create.md)
 
-POST/v1/user\_profiles
+POST/v1/user\_profiles
 
 ##### [List User Profiles](api/http/beta/user_profiles/list.md)
 
-GET/v1/user\_profiles
+GET/v1/user\_profiles
 
 ##### [Get User Profile](api/http/beta/user_profiles/retrieve.md)
 
-GET/v1/user\_profiles/{user\_profile\_id}
+GET/v1/user\_profiles/{user\_profile\_id}
 
 ##### [Update User Profile](api/http/beta/user_profiles/update.md)
 
-POST/v1/user\_profiles/{user\_profile\_id}
+POST/v1/user\_profiles/{user\_profile\_id}
 
 ##### [Create Enrollment URL](api/http/beta/user_profiles/create_enrollment_url.md)
 
-POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
+POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
 ##### Models
 

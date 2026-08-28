@@ -25,7 +25,7 @@ The ARN region is always populated and matches the region the workspace is bound
 
 ##  Actions
 
-The service defines 66 actions. Actions follow the AWS `VerbNoun` convention and use verb discipline so that `Get*` and `List*` wildcards produce a clean read-only boundary.
+The service defines 71 actions. Actions follow the AWS `VerbNoun` convention and use verb discipline so that `Get*` and `List*` wildcards produce a clean read-only boundary.
 
 ###  Inference
 
@@ -155,6 +155,16 @@ The service defines 66 actions. Actions follow the AWS `VerbNoun` convention and
 | `UpdateWorkspace` | `POST /v1/organizations/workspaces/{id}` |
 | `ArchiveWorkspace` | `POST /v1/organizations/workspaces/{id}/archive` |
 
+###  Encryption keys
+
+| Action | Routes authorized |
+| --- | --- |
+| `RegisterKey` | `POST /v1/organizations/external_keys` |
+| `GetKey` | `GET /v1/organizations/external_keys/{id}` |
+| `ListKeys` | `GET /v1/organizations/external_keys` |
+| `UpdateKey` | `POST /v1/organizations/external_keys/{id}` |
+| `DisableKey` | `DELETE /v1/organizations/external_keys/{id}` |
+
 ###  Compliance
 
 | Action | Routes authorized |
@@ -179,7 +189,7 @@ The service defines 66 actions. Actions follow the AWS `VerbNoun` convention and
 
 ##  Route-to-action mapping
 
-The following table lists every route on Claude Platform on AWS and the IAM action required to call it. Each IAM action also authorizes requests that use the `anthropic-beta` header; beta variants of a route do not require a separate IAM action. CloudTrail classifies each action as either a Data event (high-volume, data-plane operations) or a Management event (control-plane operations). Vault and webhook actions are classified as Management events because they hold secrets (vault credentials and webhook signing secrets) and benefit from default-on audit logging. Workspace and compliance actions are also classified as Management events because they are organization-scoped control-plane operations. All other actions, including inference, batch, model, file, skill, user profile, and the remaining Claude Managed Agents actions, are classified as Data events.
+The following table lists every route on Claude Platform on AWS and the IAM action required to call it. Each IAM action also authorizes requests that use the `anthropic-beta` header; beta variants of a route do not require a separate IAM action. CloudTrail classifies each action as either a Data event (high-volume, data-plane operations) or a Management event (control-plane operations). Vault and webhook actions are classified as Management events because they hold secrets (vault credentials and webhook signing secrets) and benefit from default-on audit logging. Workspace, external key, and compliance actions are also classified as Management events because they are organization-scoped control-plane operations. All other actions, including inference, batch, model, file, skill, user profile, and the remaining Claude Managed Agents actions, are classified as Data events.
 
 | Method | Route | IAM action | CloudTrail event type |
 | --- | --- | --- | --- |
@@ -216,6 +226,11 @@ The following table lists every route on Claude Platform on AWS and the IAM acti
 | `GET` | `/v1/organizations/workspaces/{id}` | `GetWorkspace` | Management |
 | `POST` | `/v1/organizations/workspaces/{id}` | `UpdateWorkspace` | Management |
 | `POST` | `/v1/organizations/workspaces/{id}/archive` | `ArchiveWorkspace` | Management |
+| `POST` | `/v1/organizations/external_keys` | `RegisterKey` | Management |
+| `GET` | `/v1/organizations/external_keys` | `ListKeys` | Management |
+| `GET` | `/v1/organizations/external_keys/{id}` | `GetKey` | Management |
+| `POST` | `/v1/organizations/external_keys/{id}` | `UpdateKey` | Management |
+| `DELETE` | `/v1/organizations/external_keys/{id}` | `DisableKey` | Management |
 | `GET` | `/v1/compliance/activities` | `ListComplianceActivities` | Management |
 | `POST` | `/v1/agents` | `CreateAgent` | Data |
 | `GET` | `/v1/agents` | `ListAgents` | Data |
@@ -298,7 +313,7 @@ AWS provides five managed policies for Claude Platform on AWS. All managed polic
 | `AnthropicLimitedAccess` | All `AnthropicInferenceAccess` actions, plus all Claude Managed Agents actions (agents, sessions, environments, vaults, memory stores, webhooks, and self-hosted environment work) |
 | `AnthropicSelfHostedEnvironmentAccess` | `GetEnvironment`, `ProcessEnvironmentWork`, `GetSession`, `UpdateSession`, `GetSkill`, `CallWithBearerToken` |
 
-`AnthropicInferenceAccess` is the narrowest managed policy sufficient to run inference. It covers both synchronous and batch inference and, through the `Get*` and `List*` wildcards, grants read access to every API resource in the namespace, including Claude Managed Agents (CMA) resources (agents, sessions, environments, vaults, memory stores, and webhooks). This includes file content download through `GetFile` (see the [Files](#files) note), skill content download through `GetSkill` (see the [Skills](#skills) note), and memory contents through `GetMemoryStore`. Vault credential secrets and webhook signing secrets are not exposed: those fields are write-only and are never returned by `GetVault` or `GetWebhook` (see [Authenticate with vaults](managed-agents/vaults.md)). `AnthropicInferenceAccess` does not grant file creation or deletion, skill management, user profile management, workspace mutation, or any Claude Managed Agents write action (create, update, archive, delete, process, or rotate). To exclude CMA reads, replace `AnthropicInferenceAccess` with a custom policy that enumerates only the specific non-CMA actions you need.
+`AnthropicInferenceAccess` is the narrowest managed policy sufficient to run inference. It covers both synchronous and batch inference and, through the `Get*` and `List*` wildcards, grants read access to every API resource in the namespace, including Claude Managed Agents (CMA) resources (agents, sessions, environments, vaults, memory stores, and webhooks). This includes file content download through `GetFile` (see the [Files](#files) note), skill content download through `GetSkill` (see the [Skills](#skills) note), and memory contents through `GetMemoryStore`. Vault credential secrets and webhook signing secrets are not exposed: those fields are write-only and are never returned by `GetVault` or `GetWebhook` (see [Authenticate with vaults](managed-agents/vaults.md)). `AnthropicInferenceAccess` does not grant file creation or deletion, skill management, user profile management, workspace mutation, encryption key management, or any Claude Managed Agents write action (create, update, archive, delete, process, or rotate). To exclude CMA reads, replace `AnthropicInferenceAccess` with a custom policy that enumerates only the specific non-CMA actions you need.
 
 `AnthropicLimitedAccess` includes all Claude Managed Agents actions in addition to inference actions.
 

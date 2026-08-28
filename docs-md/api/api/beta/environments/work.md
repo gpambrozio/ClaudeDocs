@@ -10,35 +10,35 @@ cURL
 
 ##### [Get Work Item](api/http/beta/environments/work/retrieve.md)
 
-GET/v1/environments/{environment\_id}/work/{work\_id}
+GET/v1/environments/{environment\_id}/work/{work\_id}
 
 ##### [Poll for Work](api/http/beta/environments/work/poll.md)
 
-GET/v1/environments/{environment\_id}/work/poll
+GET/v1/environments/{environment\_id}/work/poll
 
 ##### [Acknowledge Work](api/http/beta/environments/work/ack.md)
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/ack
+POST/v1/environments/{environment\_id}/work/{work\_id}/ack
 
 ##### [Record Heartbeat](api/http/beta/environments/work/heartbeat.md)
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
+POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
 
 ##### [Stop Work](api/http/beta/environments/work/stop.md)
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/stop
+POST/v1/environments/{environment\_id}/work/{work\_id}/stop
 
 ##### [List Work Items](api/http/beta/environments/work/list.md)
 
-GET/v1/environments/{environment\_id}/work
+GET/v1/environments/{environment\_id}/work
 
 ##### [Update Work Item](api/http/beta/environments/work/update.md)
 
-POST/v1/environments/{environment\_id}/work/{work\_id}
+POST/v1/environments/{environment\_id}/work/{work\_id}
 
 ##### [Get Queue Statistics](api/http/beta/environments/work/stats.md)
 
-GET/v1/environments/{environment\_id}/work/stats
+GET/v1/environments/{environment\_id}/work/stats
 
 ##### Models
 

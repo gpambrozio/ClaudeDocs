@@ -6,7 +6,7 @@
 
 # Delete External Key
 
-DELETE/v1/organizations/external\_keys/{external\_key\_id}
+DELETE/v1/organizations/external\_keys/{external\_key\_id}
 
 Delete an external key config.
 
@@ -33,6 +33,8 @@ ID of the deleted External Key.
 type: "external\_key\_deleted"
 
 defaultexternal\_key\_deleted
+
+
 
 ### Delete External Key
 

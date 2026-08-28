@@ -8,7 +8,7 @@ cURL
 
 # Get File Metadata
 
-GET/v1/files/{file\_id}
+GET/v1/files/{file\_id}
 
 Get File Metadata
 
@@ -122,7 +122,9 @@ One of the following:
 
 
 
-BetaFileMetadata object{ id, created\_at, filename, 5 more }
+BetaFileMetadata object{ id, created\_at, filename, 6 more }
+
+
 
 ### Get File Metadata
 
@@ -133,7 +135,6 @@ cURL
 ```shiki
 curl https://api.anthropic.com/v1/files/$FILE_ID \
     -H 'anthropic-version: 2023-06-01' \
-    -H 'anthropic-beta: files-api-2025-04-14' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -150,6 +151,7 @@ Response 200
   "size_bytes": 102400,
   "type": "file",
   "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z",
   "scope": {
     "id": "id",
     "type": "session"
@@ -172,6 +174,7 @@ Response 200
   "size_bytes": 102400,
   "type": "file",
   "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z",
   "scope": {
     "id": "id",
     "type": "session"

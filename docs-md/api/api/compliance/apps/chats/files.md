@@ -8,15 +8,15 @@
 
 ##### [Get file metadata](api/http/compliance/apps/chats/files/retrieve.md)
 
-GET/v1/compliance/apps/chats/files/{claude\_file\_id}
+GET/v1/compliance/apps/chats/files/{claude\_file\_id}
 
 ##### [Delete file](api/http/compliance/apps/chats/files/delete.md)
 
-DELETE/v1/compliance/apps/chats/files/{claude\_file\_id}
+DELETE/v1/compliance/apps/chats/files/{claude\_file\_id}
 
 ##### [Download file content](api/http/compliance/apps/chats/files/download.md)
 
-GET/v1/compliance/apps/chats/files/{claude\_file\_id}/content
+GET/v1/compliance/apps/chats/files/{claude\_file\_id}/content
 
 ##### Models
 

@@ -6,11 +6,11 @@
 
 # List RBAC Groups
 
-GET/v1/organizations/rbac\_groups
+GET/v1/organizations/rbac\_groups
 
 List RBAC Groups in the Claude Enterprise tenant.
 
-The RBAC Groups API is in beta and available to Claude Enterprise organizations only. Requests must send the `ce-user-management-2026-07-13` value in the `anthropic-beta` header.
+The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ##### Query parameters
 
@@ -31,16 +31,6 @@ minimum1
 page: optional string
 
 Optionally set to the `next_page` token from the previous response.
-
-##### Headers
-
-
-
-"anthropic-beta": optional array of string
-
-Optional header to specify the beta version(s) you want to use.
-
-To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
 ##### Returns
 
@@ -105,6 +95,8 @@ Indicates if there are more results in the requested page direction.
 next\_page: string or null
 
 Token to provide in as `page` in the subsequent request to retrieve the next page of data.
+
+
 
 ### List RBAC Groups
 

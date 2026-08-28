@@ -6,7 +6,7 @@
 
 # Update Service Account
 
-POST/v1/organizations/service\_accounts/{service\_account\_id}
+POST/v1/organizations/service\_accounts/{service\_account\_id}
 
 Update a service account.
 
@@ -64,6 +64,8 @@ Named non-human identity within the caller's organization.
 
 A service account is a pure identity: name + org. Authorization lives on
 whatever references it (federation rules).
+
+
 
 ### Update Service Account
 

@@ -6,7 +6,7 @@
 
 # Get Compliance Group
 
-GET/v1/compliance/groups/{group\_id}
+GET/v1/compliance/groups/{group\_id}
 
 Get Compliance Group
 
@@ -49,6 +49,8 @@ How the group was created ('direct' or 'scim')
 updated\_at: string or null
 
 Group last-updated timestamp (ISO 8601)
+
+
 
 ### Get Compliance Group
 

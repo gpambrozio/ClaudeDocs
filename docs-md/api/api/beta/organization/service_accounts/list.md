@@ -8,7 +8,7 @@ cURL
 
 # List Service Accounts
 
-GET/v1/organizations/service\_accounts
+GET/v1/organizations/service\_accounts
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -219,6 +219,8 @@ Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
 next\_page: string or null
 
 Opaque cursor for the next page, or null if no more results.
+
+
 
 ### List Service Accounts
 

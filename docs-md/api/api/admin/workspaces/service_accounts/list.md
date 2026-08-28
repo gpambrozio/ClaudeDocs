@@ -6,7 +6,7 @@
 
 # List Service Account Workspace Members
 
-GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts
+GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts
 
 List the service accounts that are members of a workspace.
 
@@ -63,7 +63,7 @@ Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
 
 implicit: boolean or null
 
-True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace\_user and cannot be removed.
+True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
 
 service\_account\_id: string
 
@@ -100,6 +100,8 @@ One of the following:
 next\_page: string or null
 
 Opaque cursor for the next page, or null if no more results.
+
+
 
 ### List Service Account Workspace Members
 

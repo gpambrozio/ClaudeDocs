@@ -6,9 +6,9 @@
 
 # Get Invite
 
-GET/v1/organizations/invites/{invite\_id}
+GET/v1/organizations/invites/{invite\_id}
 
-For Claude Enterprise organizations, this endpoint's availability is in beta.
+Retrieve an invite by ID.
 
 ##### Path parameters
 
@@ -21,6 +21,8 @@ ID of the Invite.
 
 
 Invite object{ id, accepted\_at, email, 6 more }
+
+
 
 ### Get Invite
 

@@ -1,6 +1,6 @@
 ##  Compare models
 
-If you're unsure which model to use, start with [Claude Opus 5](models/opus-5/overview.md) for complex agentic coding and enterprise work; for the highest available capability, use [Claude Fable 5](models/fable-5/overview.md). All current models support text and image input, text output, multilingual capabilities, vision, and tool use; each model’s page lists the platforms it is available on.
+If you're unsure which model to use, start with [Claude Opus 5](models/opus-5/overview.md) for complex agentic coding and enterprise work; for the highest available capability, use [Claude Fable 5](models/fable-5/overview.md). All current models support text and image input, text output, multilingual capabilities, vision, and tool use; each model's page lists the platforms it is available on.
 
 | Feature | [Claude Fable 5](models/fable-5/overview.md)Next-generation intelligence for long-running agents | [Claude Opus 5](models/opus-5/overview.md)For complex agentic coding and enterprise work | [Claude Sonnet 5](models/sonnet-5/overview.md)The best combination of speed and intelligence | [Claude Haiku 4.5](models/haiku-4-5/overview.md)The fastest model with near-frontier intelligence |
 | --- | --- | --- | --- | --- |

@@ -8,7 +8,7 @@ cURL
 
 # Archive Credential
 
-POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/archive
+POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/archive
 
 Archive Credential
 
@@ -125,6 +125,8 @@ One of the following:
 BetaManagedAgentsCredential object{ id, archived\_at, auth, 6 more }
 
 A credential stored in a vault. Sensitive fields are never returned in responses.
+
+
 
 ### Archive Credential
 

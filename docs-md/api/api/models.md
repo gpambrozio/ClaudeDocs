@@ -10,11 +10,11 @@ cURL
 
 ##### [List Models](api/http/models/list.md)
 
-GET/v1/models
+GET/v1/models
 
 ##### [Get a Model](api/http/models/retrieve.md)
 
-GET/v1/models/{model\_id}
+GET/v1/models/{model\_id}
 
 ##### Models
 

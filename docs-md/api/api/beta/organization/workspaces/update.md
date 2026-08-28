@@ -8,7 +8,7 @@ cURL
 
 # Update Workspace
 
-POST/v1/organizations/workspaces/{workspace\_id}
+POST/v1/organizations/workspaces/{workspace\_id}
 
 Update Workspace
 
@@ -95,6 +95,8 @@ User-defined tags as string key-value pairs. Keys may not begin with `anthropic`
 
 
 BetaWorkspace object{ id, archived\_at, compartment\_id, 7 more }
+
+
 
 ### Update Workspace
 

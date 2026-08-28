@@ -6,7 +6,7 @@
 
 # Delete file
 
-DELETE/v1/compliance/apps/chats/files/{claude\_file\_id}
+DELETE/v1/compliance/apps/chats/files/{claude\_file\_id}
 
 Permanently deletes a specific file. This is a destructive
 operation that cannot be undone.
@@ -34,6 +34,8 @@ type: optional "claude\_file\_deleted"
 Constant string confirming deletion
 
 defaultclaude\_file\_deleted
+
+
 
 ### Delete file
 

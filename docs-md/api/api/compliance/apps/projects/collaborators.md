@@ -8,7 +8,7 @@
 
 ##### [List project collaborators](api/http/compliance/apps/projects/collaborators/list.md)
 
-GET/v1/compliance/apps/projects/{project\_id}/collaborators
+GET/v1/compliance/apps/projects/{project\_id}/collaborators
 
 ##### Models
 

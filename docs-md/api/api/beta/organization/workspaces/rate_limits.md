@@ -10,7 +10,7 @@ cURL
 
 ##### [List Workspace Rate Limits](api/http/beta/organization/workspaces/rate_limits/list.md)
 
-GET/v1/organizations/workspaces/{workspace\_id}/rate\_limits
+GET/v1/organizations/workspaces/{workspace\_id}/rate\_limits
 
 ##### Models
 

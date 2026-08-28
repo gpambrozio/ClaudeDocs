@@ -8,7 +8,7 @@ cURL
 
 # Get Environment
 
-GET/v1/environments/{environment\_id}
+GET/v1/environments/{environment\_id}
 
 Retrieve a specific environment by ID.
 
@@ -123,6 +123,8 @@ One of the following:
 BetaEnvironment object{ id, archived\_at, config, 7 more }
 
 Unified Environment resource for both cloud and self-hosted environments.
+
+
 
 ### Get Environment
 

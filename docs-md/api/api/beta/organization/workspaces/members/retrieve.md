@@ -8,7 +8,7 @@ cURL
 
 # Get Workspace Member
 
-GET/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+GET/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 Get Workspace Member
 
@@ -63,6 +63,8 @@ One of the following:
 "workspace\_restricted\_developer"
 
 "workspace\_user"
+
+
 
 ### Get Workspace Member
 

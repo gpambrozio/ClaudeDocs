@@ -8,7 +8,7 @@ cURL
 
 # Create Credential
 
-POST/v1/vaults/{vault\_id}/credentials
+POST/v1/vaults/{vault\_id}/credentials
 
 Create Credential
 
@@ -221,6 +221,8 @@ Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys
 BetaManagedAgentsCredential object{ id, archived\_at, auth, 6 more }
 
 A credential stored in a vault. Sensitive fields are never returned in responses.
+
+
 
 ### Create Credential
 

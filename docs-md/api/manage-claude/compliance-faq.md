@@ -26,9 +26,9 @@
 
 ### Does the Activity Feed include prompt or message content?
 
-### Do Cowork and Claude Code sessions appear in the Compliance API?
+### Do Cowork, Claude Code, Claude Science, and Claude for Microsoft 365 sessions appear in the Compliance API?
 
-### What do Cowork and Claude Code session transcripts include?
+### What do Cowork, Claude Code, Claude Science, and Claude for Microsoft 365 session transcripts include?
 
 ### How does session coverage compare with OpenTelemetry logging (OTEL) for Cowork and Claude Code?
 

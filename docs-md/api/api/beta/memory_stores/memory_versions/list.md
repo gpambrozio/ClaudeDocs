@@ -8,7 +8,7 @@ cURL
 
 # List memory versions
 
-GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions
+GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions
 
 List memory versions
 
@@ -279,6 +279,8 @@ One of the following:
 next\_page: optional string or null
 
 Opaque cursor for the next page (a `page_...` value), or `null` if there are no more results. Pass as `page` on the next request.
+
+
 
 ### List memory versions
 

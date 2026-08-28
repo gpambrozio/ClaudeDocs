@@ -10,23 +10,23 @@ cURL
 
 ##### [Create a memory](api/http/beta/memory_stores/memories/create.md)
 
-POST/v1/memory\_stores/{memory\_store\_id}/memories
+POST/v1/memory\_stores/{memory\_store\_id}/memories
 
 ##### [List memories](api/http/beta/memory_stores/memories/list.md)
 
-GET/v1/memory\_stores/{memory\_store\_id}/memories
+GET/v1/memory\_stores/{memory\_store\_id}/memories
 
 ##### [Retrieve a memory](api/http/beta/memory_stores/memories/retrieve.md)
 
-GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### [Update a memory](api/http/beta/memory_stores/memories/update.md)
 
-POST/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+POST/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### [Delete a memory](api/http/beta/memory_stores/memories/delete.md)
 
-DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### Models
 

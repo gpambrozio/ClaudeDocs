@@ -8,7 +8,7 @@ cURL
 
 # List Skills
 
-GET/v1/skills
+GET/v1/skills
 
 List Skills
 
@@ -142,6 +142,8 @@ next\_page: string or null
 Token for fetching the next page of results.
 
 If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
+
+
 
 ### List Skills
 

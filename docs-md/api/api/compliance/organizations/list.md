@@ -6,7 +6,7 @@
 
 # List organizations
 
-GET/v1/compliance/organizations
+GET/v1/compliance/organizations
 
 List organizations under the parent organization.
 
@@ -63,6 +63,8 @@ Whether more records exist beyond the current result set
 next\_page: optional string or null
 
 Token to retrieve the next page. Use this as the 'page' parameter in your next request
+
+
 
 ### List organizations
 

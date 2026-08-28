@@ -6,7 +6,7 @@
 
 # Get Federation Issuer
 
-GET/v1/organizations/federation\_issuers/{federation\_issuer\_id}
+GET/v1/organizations/federation\_issuers/{federation\_issuer\_id}
 
 Retrieve a federation issuer by its ID (`fdis_...`).
 
@@ -36,6 +36,8 @@ Registered external OIDC identity provider.
 
 Records an external IdP the organization trusts for the RFC 7523
 jwt-bearer grant. The `issuer_url` must match the JWT `iss` claim exactly.
+
+
 
 ### Get Federation Issuer
 

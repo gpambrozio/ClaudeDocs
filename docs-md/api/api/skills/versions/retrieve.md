@@ -8,7 +8,7 @@ cURL
 
 # Get Skill Version
 
-GET/v1/skills/{skill\_id}/versions/{version}
+GET/v1/skills/{skill\_id}/versions/{version}
 
 Get Skill Version
 
@@ -81,6 +81,8 @@ Object type.
 For Skill Versions, this is always `"skill_version"`.
 
 defaultskill\_version
+
+
 
 ### Get Skill Version
 

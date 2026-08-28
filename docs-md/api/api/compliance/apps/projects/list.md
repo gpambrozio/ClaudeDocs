@@ -6,7 +6,7 @@
 
 # List projects
 
-GET/v1/compliance/apps/projects
+GET/v1/compliance/apps/projects
 
 Lists project metadata with filtering capabilities. Results
 are sorted chronologically (time ascending) by created\_at.
@@ -190,6 +190,8 @@ Whether more records exist beyond the current result set
 next\_page: string or null
 
 Token to retrieve the next page. Use this as the 'page' parameter in your next request
+
+
 
 ### List projects
 

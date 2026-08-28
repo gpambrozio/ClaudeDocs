@@ -6,7 +6,7 @@
 
 # Get Workspace
 
-GET/v1/organizations/workspaces/{workspace\_id}
+GET/v1/organizations/workspaces/{workspace\_id}
 
 Get Workspace
 
@@ -21,6 +21,8 @@ ID of the Workspace.
 
 
 Workspace object{ id, archived\_at, compartment\_id, 7 more }
+
+
 
 ### Get Workspace
 

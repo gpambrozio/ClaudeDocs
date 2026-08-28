@@ -6,7 +6,7 @@
 
 # Update Workspace Member
 
-POST/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+POST/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 Update Workspace Member
 
@@ -81,6 +81,8 @@ One of the following:
 "workspace\_restricted\_developer"
 
 "workspace\_user"
+
+
 
 ### Update Workspace Member
 

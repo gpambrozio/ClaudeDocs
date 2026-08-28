@@ -8,7 +8,7 @@ cURL
 
 # Remove Federation Rule Workspace
 
-DELETE/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces/{workspace\_id}
+DELETE/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces/{workspace\_id}
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -144,6 +144,8 @@ defaultfederation\_rule\_workspace\_deleted
 workspace\_id: string
 
 Tagged ID of the workspace named in the delete request. Removal is idempotent.
+
+
 
 ### Remove Federation Rule Workspace
 

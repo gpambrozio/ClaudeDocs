@@ -10,11 +10,11 @@ cURL
 
 ##### [Create a Message](api/http/beta/messages/create.md)
 
-POST/v1/messages
+POST/v1/messages
 
 ##### [Count tokens in a Message](api/http/beta/messages/count_tokens.md)
 
-POST/v1/messages/count\_tokens
+POST/v1/messages/count\_tokens
 
 ##### Models
 
@@ -2259,7 +2259,7 @@ formatdate-time
 
 
 
-skills: array of [BetaSkill](api/http/beta/messages.md) { skill\_id, type, version } or null
+skills: array of [BetaContainerSkill](api/http/beta/messages.md) { skill\_id, type, version } or null
 
 Skills loaded in the container
 
@@ -2340,6 +2340,44 @@ One of the following:
 version: optional string
 
 Skill version or 'latest' for most recent version
+
+maxLength64
+
+minLength1
+
+
+
+BetaContainerSkill object{ skill\_id, type, version }
+
+A skill that was loaded in a container (response model).
+
+
+
+skill\_id: string
+
+Skill ID
+
+maxLength64
+
+minLength1
+
+
+
+type: "anthropic" or "custom"
+
+Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+
+One of the following:
+
+"anthropic"
+
+"custom"
+
+
+
+version: string
+
+The resolved version: a skill version ID for custom skills.
 
 maxLength64
 
@@ -3415,44 +3453,6 @@ The `signature` for this thinking block: an opaque value used to verify that the
 type: "signature\_delta"
 
 defaultsignature\_delta
-
-
-
-BetaSkill object{ skill\_id, type, version }
-
-A skill that was loaded in a container (response model).
-
-
-
-skill\_id: string
-
-Skill ID
-
-maxLength64
-
-minLength1
-
-
-
-type: "anthropic" or "custom"
-
-Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
-
-One of the following:
-
-"anthropic"
-
-"custom"
-
-
-
-version: string
-
-The resolved version: a skill version ID for custom skills.
-
-maxLength64
-
-minLength1
 
 
 
@@ -4599,27 +4599,27 @@ One of the following:
 
 ##### [Create a Message Batch](api/http/beta/messages/batches/create.md)
 
-POST/v1/messages/batches
+POST/v1/messages/batches
 
 ##### [Retrieve a Message Batch](api/http/beta/messages/batches/retrieve.md)
 
-GET/v1/messages/batches/{message\_batch\_id}
+GET/v1/messages/batches/{message\_batch\_id}
 
 ##### [List Message Batches](api/http/beta/messages/batches/list.md)
 
-GET/v1/messages/batches
+GET/v1/messages/batches
 
 ##### [Cancel a Message Batch](api/http/beta/messages/batches/cancel.md)
 
-POST/v1/messages/batches/{message\_batch\_id}/cancel
+POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 ##### [Delete a Message Batch](api/http/beta/messages/batches/delete.md)
 
-DELETE/v1/messages/batches/{message\_batch\_id}
+DELETE/v1/messages/batches/{message\_batch\_id}
 
 ##### [Retrieve Message Batch results](api/http/beta/messages/batches/results.md)
 
-GET/v1/messages/batches/{message\_batch\_id}/results
+GET/v1/messages/batches/{message\_batch\_id}/results
 
 ---
 

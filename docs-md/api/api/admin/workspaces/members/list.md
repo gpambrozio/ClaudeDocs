@@ -6,7 +6,7 @@
 
 # List Workspace Members
 
-GET/v1/organizations/workspaces/{workspace\_id}/members
+GET/v1/organizations/workspaces/{workspace\_id}/members
 
 List Workspace Members
 
@@ -93,6 +93,8 @@ Indicates if there are more results in the requested page direction.
 last\_id: string or null
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
+
+
 
 ### List Workspace Members
 

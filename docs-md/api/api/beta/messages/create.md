@@ -8,7 +8,7 @@ cURL
 
 # Create a Message
 
-POST/v1/messages
+POST/v1/messages
 
 Send a structured list of input messages with text and/or image content, and the model will generate the next message in the conversation.
 
@@ -1391,6 +1391,8 @@ BetaMessage object{ id, container, content, 9 more }
 BetaRawMessageStreamEvent = [BetaRawMessageStartEvent](api/http/beta/messages.md) { message, type } or [BetaRawMessageDeltaEvent](api/http/beta/messages.md) { context\_management, delta, type, usage } or [BetaRawMessageStopEvent](api/http/beta/messages.md) { type } or 3 more
 
 One of the following:
+
+
 
 ### Create a Message
 

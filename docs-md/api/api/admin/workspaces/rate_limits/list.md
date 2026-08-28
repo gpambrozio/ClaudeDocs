@@ -6,7 +6,7 @@
 
 # List Workspace Rate Limits
 
-GET/v1/organizations/workspaces/{workspace\_id}/rate\_limits
+GET/v1/organizations/workspaces/{workspace\_id}/rate\_limits
 
 List rate-limit overrides configured for a workspace.
 
@@ -115,6 +115,8 @@ ID of the Workspace this override applies to.
 next\_page: string or null
 
 Token to provide in as `page` in the subsequent request to retrieve the next page of data.
+
+
 
 ### List Workspace Rate Limits
 

@@ -8,15 +8,15 @@
 
 ##### [Get project document content](api/http/compliance/apps/projects/documents/retrieve.md)
 
-GET/v1/compliance/apps/projects/documents/{document\_id}
+GET/v1/compliance/apps/projects/documents/{document\_id}
 
 ##### [Get project document metadata](api/http/compliance/apps/projects/documents/metadata.md)
 
-GET/v1/compliance/apps/projects/documents/{document\_id}/metadata
+GET/v1/compliance/apps/projects/documents/{document\_id}/metadata
 
 ##### [Delete project document](api/http/compliance/apps/projects/documents/delete.md)
 
-DELETE/v1/compliance/apps/projects/documents/{document\_id}
+DELETE/v1/compliance/apps/projects/documents/{document\_id}
 
 ##### Models
 
@@ -66,15 +66,6 @@ User's email address
 
 
 
-DocumentMetadataResponse object{ id, claude\_project\_id, created\_at, 5 more }
-
-Project document metadata for GET /v1/compliance/apps/projects/documents/{document\_id}/metadata.
-
-Returns metadata only. Use the sibling endpoint (without `/metadata`)
-to fetch the document text content.
-
-
-
 DocumentDeleteResponse object{ id, type }
 
 Response for deleting a project document.
@@ -90,6 +81,15 @@ type: "claude\_project\_document\_deleted"
 Constant string confirming deletion.
 
 defaultclaude\_project\_document\_deleted
+
+
+
+DocumentMetadataResponse object{ id, claude\_project\_id, created\_at, 5 more }
+
+Project document metadata for GET /v1/compliance/apps/projects/documents/{document\_id}/metadata.
+
+Returns metadata only. Use the sibling endpoint (without `/metadata`)
+to fetch the document text content.
 
 ---
 

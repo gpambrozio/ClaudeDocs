@@ -6,7 +6,7 @@
 
 # Get project document metadata
 
-GET/v1/compliance/apps/projects/documents/{document\_id}/metadata
+GET/v1/compliance/apps/projects/documents/{document\_id}/metadata
 
 Returns metadata for a project document, without the content body.
 
@@ -80,6 +80,8 @@ User identifier (tagged ID)
 email\_address: string
 
 User's email address
+
+
 
 ### Get project document metadata
 

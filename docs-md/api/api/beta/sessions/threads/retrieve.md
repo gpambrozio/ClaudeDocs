@@ -8,7 +8,7 @@ cURL
 
 # Get Session Thread
 
-GET/v1/sessions/{session\_id}/threads/{thread\_id}
+GET/v1/sessions/{session\_id}/threads/{thread\_id}
 
 Get Session Thread
 
@@ -125,6 +125,8 @@ One of the following:
 BetaManagedAgentsSessionThread object{ id, agent, archived\_at, 8 more }
 
 An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
+
+
 
 ### Get Session Thread
 

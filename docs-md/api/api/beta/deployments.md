@@ -10,35 +10,35 @@ cURL
 
 ##### [Create Deployment](api/http/beta/deployments/create.md)
 
-POST/v1/deployments
+POST/v1/deployments
 
 ##### [List Deployments](api/http/beta/deployments/list.md)
 
-GET/v1/deployments
+GET/v1/deployments
 
 ##### [Get Deployment](api/http/beta/deployments/retrieve.md)
 
-GET/v1/deployments/{deployment\_id}
+GET/v1/deployments/{deployment\_id}
 
 ##### [Update Deployment](api/http/beta/deployments/update.md)
 
-POST/v1/deployments/{deployment\_id}
+POST/v1/deployments/{deployment\_id}
 
 ##### [Archive Deployment](api/http/beta/deployments/archive.md)
 
-POST/v1/deployments/{deployment\_id}/archive
+POST/v1/deployments/{deployment\_id}/archive
 
 ##### [Run Deployment Now](api/http/beta/deployments/run.md)
 
-POST/v1/deployments/{deployment\_id}/run
+POST/v1/deployments/{deployment\_id}/run
 
 ##### [Pause Deployment](api/http/beta/deployments/pause.md)
 
-POST/v1/deployments/{deployment\_id}/pause
+POST/v1/deployments/{deployment\_id}/pause
 
 ##### [Unpause Deployment](api/http/beta/deployments/unpause.md)
 
-POST/v1/deployments/{deployment\_id}/unpause
+POST/v1/deployments/{deployment\_id}/unpause
 
 ##### Models
 

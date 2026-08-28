@@ -8,7 +8,7 @@ cURL
 
 # Archive Vault
 
-POST/v1/vaults/{vault\_id}/archive
+POST/v1/vaults/{vault\_id}/archive
 
 Archive Vault
 
@@ -161,6 +161,8 @@ updated\_at: string
 A timestamp in RFC 3339 format
 
 formatdate-time
+
+
 
 ### Archive Vault
 

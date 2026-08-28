@@ -6,7 +6,7 @@
 
 # Update Federation Rule
 
-POST/v1/organizations/federation\_rules/{federation\_rule\_id}
+POST/v1/organizations/federation\_rules/{federation\_rule\_id}
 
 Partially update a federation rule.
 
@@ -162,6 +162,8 @@ than one). For rules enabled via `workspace_ids` or
 of that workspace (it is implicitly a member of the default workspace);
 rules carrying only the legacy `workspace_id` binding do not enforce
 this.
+
+
 
 ### Update Federation Rule
 

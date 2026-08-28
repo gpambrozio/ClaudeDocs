@@ -8,7 +8,7 @@
 
 ##### [Query compliance activities](api/http/compliance/activities/list.md)
 
-GET/v1/compliance/activities
+GET/v1/compliance/activities
 
 ##### Models
 

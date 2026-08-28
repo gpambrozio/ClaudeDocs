@@ -8,7 +8,7 @@
 
 ##### [Get Activity Summaries](api/http/admin/analytics/retrieve_summaries.md)
 
-GET/v1/organizations/analytics/summaries
+GET/v1/organizations/analytics/summaries
 
 ##### Models
 
@@ -22,7 +22,7 @@ Response for GET /v1/organizations/analytics/summaries.
 
 AnalyticsUser object{ id, email\_address, type }
 
-User identifier.
+A user in the organization, identified by tagged id and email address.
 
 id: string
 
@@ -34,7 +34,7 @@ Email address of the user
 
 
 
-type: optional "user"
+type: "user"
 
 Object type. Always `user`.
 
@@ -46,7 +46,7 @@ AnalyticsUserActor object{ deleted, email, name, 2 more }
 
 deleted: boolean
 
-True when the user is no longer a member of the organization or its associated organizations: either their membership was removed (for example, deprovisioned via your identity provider) or the account itself has been deleted. The flag reflects organization membership, not account status. `name` and `email` stay populated for removed members; `name` is `"Deleted User"` and `email` null when the account has been deleted. The `user_id` is still populated for reconciliation.
+True when the account has been deleted, or when the user is no longer a member of the organization or its associated organizations (for example, their membership was removed or they were deprovisioned via your identity provider). `email` stays populated for removed users and is null when the account has been deleted. `name` follows the rules described on that field. The `user_id` is still populated for reconciliation.
 
 email: string or null
 
@@ -54,7 +54,7 @@ The user's email address, including for users who are no longer members of the o
 
 name: string or null
 
-The user's current name, including for users who are no longer members of the organization or its associated organizations. Null when the user has not set a name. Returns `"Deleted User"` when the account itself has been deleted. Rows for system-minted service accounts render the service name (for example, `"Claude Security"` for usage by Anthropic's security-patching service) or null.
+The user's full name. Null when the user has not set a name. Returns `"Deleted User"` when the account itself has been deleted, or when the user is no longer a member of the organization or its associated organizations and the organization has chosen to hide the names of removed users. Otherwise, the name stays populated for removed users. Rows for system-minted service accounts render the service name (for example, `"Claude Security"` for usage by Anthropic's security-patching service) or null.
 
 type: "user\_actor"
 
@@ -132,57 +132,57 @@ Number of tool proposals rejected
 
 ##### [Get Token Usage Over Time](api/http/admin/analytics/usage/list.md)
 
-GET/v1/organizations/analytics/usage\_report
+GET/v1/organizations/analytics/usage\_report
 
 ##### [Get Per-User Token Usage](api/http/admin/analytics/usage/list_by_user.md)
 
-GET/v1/organizations/analytics/user\_usage\_report
+GET/v1/organizations/analytics/user\_usage\_report
 
 #### Analytics[Cost](api/http/admin/analytics/cost.md)
 
 ##### [Get Cost Over Time](api/http/admin/analytics/cost/list.md)
 
-GET/v1/organizations/analytics/cost\_report
+GET/v1/organizations/analytics/cost\_report
 
 ##### [Get Per-User Cost](api/http/admin/analytics/cost/list_by_user.md)
 
-GET/v1/organizations/analytics/user\_cost\_report
+GET/v1/organizations/analytics/user\_cost\_report
 
 #### Analytics[Users](api/http/admin/analytics/users.md)
 
 ##### [List User Activity](api/http/admin/analytics/users/list.md)
 
-GET/v1/organizations/analytics/users
+GET/v1/organizations/analytics/users
 
 #### Analytics[Skills](api/http/admin/analytics/skills.md)
 
 ##### [Get Skill Usage](api/http/admin/analytics/skills/list.md)
 
-GET/v1/organizations/analytics/skills
+GET/v1/organizations/analytics/skills
 
 #### Analytics[Connectors](api/http/admin/analytics/connectors.md)
 
 ##### [Get Connector Usage](api/http/admin/analytics/connectors/list.md)
 
-GET/v1/organizations/analytics/connectors
+GET/v1/organizations/analytics/connectors
 
 #### Analytics[Chat Projects](api/http/admin/analytics/chat_projects.md)
 
 ##### [Get Chat Project Usage](api/http/admin/analytics/chat_projects/list.md)
 
-GET/v1/organizations/analytics/apps/chat/projects
+GET/v1/organizations/analytics/apps/chat/projects
 
 #### Analytics[Plugins](api/http/admin/analytics/plugins.md)
 
 ##### [Get Plugin Usage](api/http/admin/analytics/plugins/list.md)
 
-GET/v1/organizations/analytics/plugins
+GET/v1/organizations/analytics/plugins
 
 #### Analytics[Artifacts](api/http/admin/analytics/artifacts.md)
 
 ##### [Get Artifact Activity](api/http/admin/analytics/artifacts/list.md)
 
-GET/v1/organizations/analytics/artifacts
+GET/v1/organizations/analytics/artifacts
 
 ---
 

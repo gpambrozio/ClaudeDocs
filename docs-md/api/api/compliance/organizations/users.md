@@ -8,7 +8,7 @@
 
 ##### [List organization users](api/http/compliance/organizations/users/list.md)
 
-GET/v1/compliance/organizations/{org\_uuid}/users
+GET/v1/compliance/organizations/{org\_uuid}/users
 
 ##### Models
 

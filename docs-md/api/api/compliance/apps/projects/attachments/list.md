@@ -6,7 +6,7 @@
 
 # List project attachments
 
-GET/v1/compliance/apps/projects/{project\_id}/attachments
+GET/v1/compliance/apps/projects/{project\_id}/attachments
 
 List files and documents attached to a project.
 
@@ -152,6 +152,8 @@ Whether more records exist beyond the current result set
 next\_page: string or null
 
 To get the next page, use the 'next\_page' from the current response as the 'page' in your next request
+
+
 
 ### List project attachments
 

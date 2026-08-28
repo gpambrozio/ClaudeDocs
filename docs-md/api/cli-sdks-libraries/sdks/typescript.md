@@ -55,7 +55,7 @@ for (const block of message.content) {
 
 
 
-For authentication options including Workload Identity Federation, see [Authentication](manage-claude/authentication.md).
+For authentication options including Workload Identity Federation, see [Authentication](manage-claude/authentication.md). If your API key is a [personal or service account key](manage-claude/authentication.md) with access to multiple workspaces, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](manage-claude/authentication.md) shows the per-request option for this SDK.
 
 ##  Request and response types
 

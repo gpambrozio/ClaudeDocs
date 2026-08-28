@@ -8,7 +8,7 @@ cURL
 
 # Delete File
 
-DELETE/v1/files/{file\_id}
+DELETE/v1/files/{file\_id}
 
 Delete File
 
@@ -37,6 +37,8 @@ Deleted object type.
 For file deletion, this is always `"file_deleted"`.
 
 defaultfile\_deleted
+
+
 
 ### Delete File
 

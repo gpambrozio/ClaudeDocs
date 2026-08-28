@@ -8,7 +8,7 @@ cURL
 
 # List User Profiles
 
-GET/v1/user\_profiles
+GET/v1/user\_profiles
 
 List User Profiles
 
@@ -231,6 +231,8 @@ One of the following:
 next\_page: string or null
 
 Cursor for the next page, or `null` when there are no more results.
+
+
 
 ### List User Profiles
 

@@ -8,7 +8,7 @@ cURL
 
 # Update a memory
 
-POST/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+POST/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 Update a memory
 
@@ -167,6 +167,8 @@ Expected `content_sha256` of the stored memory (64 lowercase hexadecimal charact
 BetaManagedAgentsMemory object{ id, content\_sha256, content\_size\_bytes, 7 more }
 
 A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+
 
 ### Update a memory
 

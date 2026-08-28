@@ -122,7 +122,7 @@ Claude Code keeps your vim mode and cursor position when you toggle the [transcr
 
 | Command | Action | From mode |
 | --- | --- | --- |
-| `Esc` | Enter NORMAL mode | INSERT, VISUAL |
+| `Esc` or `Ctrl+[` | Enter NORMAL mode. In terminals that use the Kitty keyboard protocol, `Ctrl+[` requires v2.1.242 or later | INSERT, VISUAL |
 | `i` | Insert before cursor | NORMAL |
 | `I` | Insert at beginning of line | NORMAL |
 | `a` | Insert after cursor | NORMAL |
@@ -180,6 +180,7 @@ In vim NORMAL mode, if the cursor is at the beginning or end of input and can’
 | `dd` | Delete line |
 | `D` | Delete to end of line |
 | `dw`/`de`/`db` | Delete word/to end/back |
+| `df{char}`/`dt{char}` | Delete to and including, or up to, the next occurrence of a character |
 | `cc` | Change line |
 | `C` | Change to end of line |
 | `cw`/`ce`/`cb` | Change word/to end/back |
@@ -317,7 +318,7 @@ Type a message and press `Enter` while Claude is working. Claude Code queues the
 
 When a queued entry reaches Claude depends on what you queued.
 
-- Messages: if you queue a message while Claude is running tool calls, Claude Code passes it to Claude as soon as those tool calls finish, within the same turn. When the turn ends, Claude Code sends the messages that are still queued as the next turn, each as a separate message
+- Messages: if you queue a message while Claude is running tool calls, Claude Code passes it to Claude as soon as those tool calls finish, within the same turn. When the turn ends with messages still queued, Claude Code sends only the oldest as the next turn. The rest stay queued and follow the same rule: Claude Code passes them to Claude when that turn’s tool calls finish, or sends the next oldest as the turn after
 - Commands and shell commands: Claude Code holds them until the turn ends, then runs them one at a time
 
 Press `Esc` to interrupt the turn instead. Claude Code keeps what you queued and sends it right away.
@@ -342,7 +343,7 @@ Claude Code generates each of these next-prompt suggestions with a background re
 In interactive mode, Claude Code leaves prompt suggestions off by default and hides the **Prompt suggestions** toggle in `/config` when it doesn’t evaluate feature flags. That happens in these cases:
 
 - You use Amazon Bedrock, Claude Platform on AWS, Google Cloud’s Agent Platform, or Microsoft Foundry as the model provider, unless a host platform that embeds Claude Code sets [`CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`](env-vars.md) to a true value such as `1`
-- You are signed in to a [Claude apps gateway](claude-apps-gateway.md)
+- You are signed in to a [Claude apps gateway](claude-apps-gateway.md), or a managed settings file, MDM profile, or policy helper on your machine requires gateway sign-in with [`forceLoginMethod: "gateway"`](settings-reference.md), even before you sign in
 - You set [`CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`, `DISABLE_TELEMETRY`, `DO_NOT_TRACK`, or `DISABLE_GROWTHBOOK`](env-vars.md) to a value that turns off feature-flag evaluation
 
 Outside those cases, if you start a session before Claude Code has ever fetched feature flags, such as your first session after installing on a slow network, Claude Code can also leave suggestions off and hide the **Prompt suggestions** toggle for that session. It shows them starting with the next session after a fetch succeeds.
@@ -500,7 +501,7 @@ Once the answer appears, the overlay accepts these keys.
 | `f` | Start a [forked subagent](sub-agents.md) that inherits the parent conversation plus this question and answer, so it can continue with full tool access. You stay in the current session and find the fork in the [panel below your prompt](sub-agents.md). Available in local sessions only |
 | `x` | Clear the list of earlier `/btw` exchanges shown above the current answer |
 
-`/btw` is the inverse of a [subagent](sub-agents.md): it sees your full conversation but has no tools. Use `/btw` to ask about what Claude already knows from this session; use a subagent to go find out something new.
+`/btw` sees your full conversation but has no tools. A [subagent](sub-agents.md) has tools and starts from the prompt it receives, or, for a [fork](sub-agents.md), from a copy of this conversation. Use `/btw` to ask about what Claude already knows from this session; use a subagent to go find out something new.
 
 ## [​](#task-list) Task list
 

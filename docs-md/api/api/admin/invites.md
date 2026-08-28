@@ -8,19 +8,19 @@
 
 ##### [Create Invite](api/http/admin/invites/create.md)
 
-POST/v1/organizations/invites
+POST/v1/organizations/invites
 
 ##### [Get Invite](api/http/admin/invites/retrieve.md)
 
-GET/v1/organizations/invites/{invite\_id}
+GET/v1/organizations/invites/{invite\_id}
 
 ##### [List Invites](api/http/admin/invites/list.md)
 
-GET/v1/organizations/invites
+GET/v1/organizations/invites
 
 ##### [Delete Invite](api/http/admin/invites/delete.md)
 
-DELETE/v1/organizations/invites/{invite\_id}
+DELETE/v1/organizations/invites/{invite\_id}
 
 ##### Models
 

@@ -8,7 +8,7 @@ cURL
 
 # Create Federation Rule
 
-POST/v1/organizations/federation\_rules
+POST/v1/organizations/federation\_rules
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -248,6 +248,8 @@ than one). For rules enabled via `workspace_ids` or
 of that workspace (it is implicitly a member of the default workspace);
 rules carrying only the legacy `workspace_id` binding do not enforce
 this.
+
+
 
 ### Create Federation Rule
 

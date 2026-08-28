@@ -6,7 +6,7 @@
 
 # Download a Claude-generated file
 
-GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}/content
+GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}/content
 
 Downloads the binary content of a file the assistant created via tool use.
 
@@ -19,6 +19,8 @@ The generated-file id (e.g., 'claude\_gen\_file\_abc123') as returned in `chat_m
 ##### Headers
 
 "x-api-key": optional string
+
+
 
 ### Download a Claude-generated file
 

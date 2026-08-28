@@ -6,7 +6,7 @@
 
 # Get Service Account
 
-GET/v1/organizations/service\_accounts/{service\_account\_id}
+GET/v1/organizations/service\_accounts/{service\_account\_id}
 
 Retrieve a service account by its ID (`svac_...`).
 
@@ -36,6 +36,8 @@ Named non-human identity within the caller's organization.
 
 A service account is a pure identity: name + org. Authorization lives on
 whatever references it (federation rules).
+
+
 
 ### Get Service Account
 

@@ -8,7 +8,7 @@ cURL
 
 # Stream Events
 
-GET/v1/sessions/{session\_id}/events/stream
+GET/v1/sessions/{session\_id}/events/stream
 
 Stream Events
 
@@ -147,6 +147,8 @@ BetaManagedAgentsStreamSessionEvents = [BetaManagedAgentsUserMessageEvent](api/h
 Server-sent event in the session stream.
 
 One of the following:
+
+
 
 ### Stream Events
 

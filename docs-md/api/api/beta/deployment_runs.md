@@ -10,11 +10,11 @@ cURL
 
 ##### [List Deployment Runs](api/http/beta/deployment_runs/list.md)
 
-GET/v1/deployment\_runs
+GET/v1/deployment\_runs
 
 ##### [Get Deployment Run](api/http/beta/deployment_runs/retrieve.md)
 
-GET/v1/deployment\_runs/{deployment\_run\_id}
+GET/v1/deployment\_runs/{deployment\_run\_id}
 
 ##### Models
 

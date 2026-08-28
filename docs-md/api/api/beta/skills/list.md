@@ -8,7 +8,7 @@ cURL
 
 # List Skills
 
-GET/v1/skills
+GET/v1/skills
 
 List Skills
 
@@ -20,9 +20,13 @@ limit: optional number
 
 Number of results to return per page.
 
-Maximum value is 100. Defaults to 20.
+Ranges from `1` to `1000`. Defaults to `20`.
 
 default20
+
+minimum1
+
+maximum1000
 
 
 
@@ -147,7 +151,7 @@ One of the following:
 
 
 
-data: array of object{ id, created\_at, display\_title, 4 more }
+data: array of [BetaSkill](api/http/beta/skills.md) { id, created\_at, display\_name, 4 more }
 
 List of skills.
 
@@ -159,40 +163,63 @@ Unique identifier for the skill.
 
 The format and length of IDs may change over time.
 
+
+
 created\_at: string
 
 ISO 8601 timestamp of when the skill was created.
 
-
+formatdate-time
 
-display\_title: string or null
+display\_name: string
 
-Display title for the skill.
+Human-readable, single-line label for the Skill. Maximum 255 characters.
+Always set: derived from the SKILL.md frontmatter `name` when omitted at
+creation. Not unique.
 
-This is a human-readable label that is not included in the prompt sent to the model.
+latest\_version\_id: string
 
-
-
-latest\_version: string or null
-
-The latest version identifier for the skill.
-
-This represents the most recent version of the skill that has been created.
+ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
 
 
 
-source: string
+source: [BetaSkillSource](api/http/beta/skills.md) { type }
 
-Source of the skill.
+Where the Skill comes from.
 
-This may be one of the following values:
+Possible values:
 
-- `"custom"`: the skill was created by a user
-- `"anthropic"`: the skill was created by Anthropic
+- `"custom"`: authored by the platform user; private to their workspace
+- `"anthropic"`: published by Anthropic; shared and read-only
+- `"anthropic_example"`: Anthropic-published sample Skill
+- `"plugin"`: resolved from an installed plugin
 
 
 
-type: string
+type: "custom" or "anthropic" or "anthropic\_example" or "plugin"
+
+Where the Skill comes from.
+
+Possible values:
+
+- `"custom"`: authored by the platform user; private to their workspace
+- `"anthropic"`: published by Anthropic; shared and read-only
+- `"anthropic_example"`: Anthropic-published sample Skill
+- `"plugin"`: resolved from an installed plugin
+
+One of the following:
+
+"custom"
+
+"anthropic"
+
+"anthropic\_example"
+
+"plugin"
+
+
+
+type: "skill"
 
 Object type.
 
@@ -200,17 +227,13 @@ For Skills, this is always `"skill"`.
 
 defaultskill
 
+
+
 updated\_at: string
 
 ISO 8601 timestamp of when the skill was last updated.
 
-
-
-has\_more: boolean
-
-Whether there are more results available.
-
-If `true`, there are additional results that can be fetched using the `next_page` token.
+formatdate-time
 
 
 
@@ -219,6 +242,8 @@ next\_page: string or null
 Token for fetching the next page of results.
 
 If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
+
+
 
 ### List Skills
 
@@ -229,7 +254,6 @@ cURL
 ```shiki
 curl https://api.anthropic.com/v1/skills \
     -H 'anthropic-version: 2023-06-01' \
-    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
@@ -243,15 +267,16 @@ Response 200
     {
       "id": "skill_01JAbcdefghijklmnopqrstuvw",
       "created_at": "2024-10-30T23:58:27.427722Z",
-      "display_title": "My Custom Skill",
-      "latest_version": "1759178010641129",
-      "source": "custom",
-      "type": "type",
+      "display_name": "display_name",
+      "latest_version_id": "latest_version_id",
+      "source": {
+        "type": "custom"
+      },
+      "type": "skill",
       "updated_at": "2024-10-30T23:58:27.427722Z"
     }
   ],
-  "has_more": true,
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+  "next_page": "next_page"
 }
 ```
 
@@ -267,15 +292,16 @@ Response 200
     {
       "id": "skill_01JAbcdefghijklmnopqrstuvw",
       "created_at": "2024-10-30T23:58:27.427722Z",
-      "display_title": "My Custom Skill",
-      "latest_version": "1759178010641129",
-      "source": "custom",
-      "type": "type",
+      "display_name": "display_name",
+      "latest_version_id": "latest_version_id",
+      "source": {
+        "type": "custom"
+      },
+      "type": "skill",
       "updated_at": "2024-10-30T23:58:27.427722Z"
     }
   ],
-  "has_more": true,
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+  "next_page": "next_page"
 }
 ```
 

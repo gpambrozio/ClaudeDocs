@@ -10,23 +10,23 @@ cURL
 
 ##### [List Service Account Workspace Members](api/http/beta/organization/workspaces/service_accounts/list.md)
 
-GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts
+GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts
 
 ##### [Create Service Account Workspace Member](api/http/beta/organization/workspaces/service_accounts/add.md)
 
-POST/v1/organizations/workspaces/{workspace\_id}/service\_accounts
+POST/v1/organizations/workspaces/{workspace\_id}/service\_accounts
 
 ##### [Get Service Account Workspace Member](api/http/beta/organization/workspaces/service_accounts/retrieve.md)
 
-GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
+GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
 
 ##### [Update Service Account Workspace Member](api/http/beta/organization/workspaces/service_accounts/update.md)
 
-POST/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
+POST/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
 
 ##### [Delete Service Account Workspace Member](api/http/beta/organization/workspaces/service_accounts/remove.md)
 
-DELETE/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
+DELETE/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
 
 ##### Models
 

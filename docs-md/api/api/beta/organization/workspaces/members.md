@@ -10,23 +10,23 @@ cURL
 
 ##### [List Workspace Members](api/http/beta/organization/workspaces/members/list.md)
 
-GET/v1/organizations/workspaces/{workspace\_id}/members
+GET/v1/organizations/workspaces/{workspace\_id}/members
 
 ##### [Create Workspace Member](api/http/beta/organization/workspaces/members/add.md)
 
-POST/v1/organizations/workspaces/{workspace\_id}/members
+POST/v1/organizations/workspaces/{workspace\_id}/members
 
 ##### [Get Workspace Member](api/http/beta/organization/workspaces/members/retrieve.md)
 
-GET/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+GET/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 ##### [Update Workspace Member](api/http/beta/organization/workspaces/members/update.md)
 
-POST/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+POST/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 ##### [Delete Workspace Member](api/http/beta/organization/workspaces/members/remove.md)
 
-DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 ##### Models
 

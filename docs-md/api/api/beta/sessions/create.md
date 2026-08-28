@@ -8,7 +8,7 @@ cURL
 
 # Create Session
 
-POST/v1/sessions
+POST/v1/sessions
 
 Create Session
 
@@ -305,6 +305,8 @@ Vault IDs for stored credentials the agent can use during the session.
 BetaManagedAgentsSession object{ id, agent, archived\_at, 14 more }
 
 A Managed Agents `session`.
+
+
 
 ### Create Session
 

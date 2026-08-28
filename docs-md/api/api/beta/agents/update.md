@@ -8,7 +8,7 @@ cURL
 
 # Update Agent
 
-POST/v1/agents/{agent\_id}
+POST/v1/agents/{agent\_id}
 
 Update Agent
 
@@ -339,6 +339,8 @@ formatint32
 BetaManagedAgentsAgent object{ id, archived\_at, created\_at, 12 more }
 
 A Managed Agents `agent`.
+
+
 
 ### Update Agent
 

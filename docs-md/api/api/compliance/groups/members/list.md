@@ -6,7 +6,7 @@
 
 # List Compliance Group Members
 
-GET/v1/compliance/groups/{group\_id}/members
+GET/v1/compliance/groups/{group\_id}/members
 
 List Compliance Group Members
 
@@ -69,6 +69,8 @@ Whether more records exist beyond the current result set
 next\_page: string or null
 
 Token to retrieve the next page. Use this as the 'page' parameter in your next request
+
+
 
 ### List Compliance Group Members
 

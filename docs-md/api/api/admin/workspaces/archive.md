@@ -6,7 +6,7 @@
 
 # Archive Workspace
 
-POST/v1/organizations/workspaces/{workspace\_id}/archive
+POST/v1/organizations/workspaces/{workspace\_id}/archive
 
 Archive Workspace
 
@@ -19,6 +19,8 @@ workspace\_id: string
 
 
 Workspace object{ id, archived\_at, compartment\_id, 7 more }
+
+
 
 ### Archive Workspace
 

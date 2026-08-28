@@ -123,7 +123,7 @@ The `oauth_scope` you set on a federation rule determines which Claude API endpo
 
 | Scope | Grants access to |
 | --- | --- |
-| `workspace:developer` | All non-administrative Claude API endpoints in the rule's workspace: [Messages](api/messages.md) (including streaming and token counting), [Models](api/models-list.md), [Managed Agents](managed-agents/overview.md) and their sessions, [Files](build-with-claude/files.md), and [Skills](build-with-claude/skills-guide.md). This matches the access an API key issued for the same workspace has. |
+| `workspace:developer` | All non-administrative Claude API endpoints in the rule's workspace: [Messages](api/messages.md) (including streaming and token counting), [Models](api/models-list.md), [Managed Agents](managed-agents/overview.md) and their sessions, [Files](build-with-claude/files.md), and [Skills](build-with-claude/skills-guide.md). This matches the access a workspace API key in the same workspace has. |
 | `workspace:inference` | The inference endpoints in the rule's workspace: [Messages](api/messages.md) (including streaming and token counting), [Models](api/models-list.md), and the [OpenAI-compatible chat endpoint](cli-sdks-libraries/libraries/openai-sdk.md). Use this for workloads that only need to call Claude and never need to manage Files, Skills, or other resources. |
 | `workspace:manage_tunnels` | The [MCP tunnels API](agents-and-tools/mcp-tunnels/reference.md): create, list, and get tunnels, register and archive CA certificates, reveal and rotate the tunnel token, and archive tunnels. The Console's create-tunnel modal window locks this scope when you create a rule from it. |
 | `org:admin` | Full access to the [Admin API](manage-claude/admin-api.md) (organization members, invites, workspaces, API keys, and the rest). An OAuth `org:admin` token can only create or modify rules scoped to `workspace:developer` or `workspace:inference`, and cannot update an issuer that backs a rule with any other scope; see the [constraints](manage-claude/wif-admin-api.md). |
@@ -174,6 +174,7 @@ URL validation failures return `400 invalid_request_error` with the field name a
 | Signing algorithm | Only asymmetric algorithms (RSA and ECDSA families: ES256, ES384, ES512, RS256, RS384, RS512, PS256, PS384, PS512) are accepted. HMAC (`HS256`, `HS384`, `HS512`) and `none` are rejected. |
 | Key ID | The JWT header must carry a `kid` that matches a key in the issuer's JWKS. Tokens without `kid` are rejected. |
 | Required claims | `sub` must be present. `iat` must be present and not in the future. `exp` must be present and in the future. |
+| Single use | An assertion that carries a `jti` claim can be exchanged only once per issuer: repeating an exchange with the same `jti` is rejected as a replay. The issuer's `check_jti` field (enabled by default) controls this check; assertions without a `jti` claim are not subject to it. See the [Federation issuers API reference](api/admin/federation_issuers.md). |
 | Maximum lifetime | The token's lifetime (`exp` minus `iat`) must not exceed the issuer's configured maximum (1 hour by default, configurable for each issuer in the Claude Console). |
 | Clock skew | A 30-second leeway is applied to `exp`, `nbf`, and `iat`. |
 
@@ -236,6 +237,8 @@ Every assertion denial returns the same opaque `401` `authentication_error` with
 ##  Troubleshoot a failed exchange
 
 A `401` `authentication_error` response is intentionally opaque and its message is always `Authentication failed`; the deny reason is recorded in the authentication history, not in the response.
+
+One common opaque failure is a replayed assertion: an assertion that carries a `jti` claim can be [exchanged only once](#jwt-verification), so a workload that re-sends the same JWT (a retry loop, or a refresh that re-reads an unrotated token) is rejected on the second exchange. The authentication history page shows these attempts with the reason `jti_reused`; the fix is to mint a fresh assertion for each exchange.
 
 If you still need to debug from the JWT itself, work through these checks in order:
 

@@ -6,7 +6,7 @@
 
 # Create Service Account
 
-POST/v1/organizations/service\_accounts
+POST/v1/organizations/service\_accounts
 
 Create a service account.
 
@@ -71,6 +71,8 @@ Named non-human identity within the caller's organization.
 
 A service account is a pure identity: name + org. Authorization lives on
 whatever references it (federation rules).
+
+
 
 ### Create Service Account
 

@@ -8,7 +8,7 @@ cURL
 
 # Delete Invite
 
-DELETE/v1/organizations/invites/{invite\_id}
+DELETE/v1/organizations/invites/{invite\_id}
 
 Delete a pending invite.
 
@@ -33,6 +33,8 @@ Deleted object type.
 For Invites, this is always `"invite_deleted"`.
 
 defaultinvite\_deleted
+
+
 
 ### Delete Invite
 

@@ -10,19 +10,19 @@ cURL
 
 ##### [Create Skill](api/http/skills/create.md)
 
-POST/v1/skills
+POST/v1/skills
 
 ##### [List Skills](api/http/skills/list.md)
 
-GET/v1/skills
+GET/v1/skills
 
 ##### [Get Skill](api/http/skills/retrieve.md)
 
-GET/v1/skills/{skill\_id}
+GET/v1/skills/{skill\_id}
 
 ##### [Delete Skill](api/http/skills/delete.md)
 
-DELETE/v1/skills/{skill\_id}
+DELETE/v1/skills/{skill\_id}
 
 ##### Models
 
@@ -83,19 +83,19 @@ One of the following:
 
 ##### [Create Skill Version](api/http/skills/versions/create.md)
 
-POST/v1/skills/{skill\_id}/versions
+POST/v1/skills/{skill\_id}/versions
 
 ##### [List Skill Versions](api/http/skills/versions/list.md)
 
-GET/v1/skills/{skill\_id}/versions
+GET/v1/skills/{skill\_id}/versions
 
 ##### [Get Skill Version](api/http/skills/versions/retrieve.md)
 
-GET/v1/skills/{skill\_id}/versions/{version}
+GET/v1/skills/{skill\_id}/versions/{version}
 
 ##### [Delete Skill Version](api/http/skills/versions/delete.md)
 
-DELETE/v1/skills/{skill\_id}/versions/{version}
+DELETE/v1/skills/{skill\_id}/versions/{version}
 
 ---
 

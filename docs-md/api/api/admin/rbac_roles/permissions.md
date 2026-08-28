@@ -8,7 +8,7 @@
 
 ##### [List RBAC Role Permissions](api/http/admin/rbac_roles/permissions/list.md)
 
-GET/v1/organizations/rbac\_roles/{role\_id}/permissions
+GET/v1/organizations/rbac\_roles/{role\_id}/permissions
 
 ##### Models
 

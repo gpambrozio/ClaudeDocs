@@ -6,7 +6,7 @@
 
 # Delete Spend Limit
 
-DELETE/v1/organizations/spend\_limits/{spend\_limit\_id}
+DELETE/v1/organizations/spend\_limits/{spend\_limit\_id}
 
 Delete a per-user spend limit override.
 
@@ -29,6 +29,8 @@ id: string
 type: "spend\_limit\_deleted"
 
 defaultspend\_limit\_deleted
+
+
 
 ### Delete Spend Limit
 

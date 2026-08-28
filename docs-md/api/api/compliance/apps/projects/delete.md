@@ -6,7 +6,7 @@
 
 # Delete project
 
-DELETE/v1/compliance/apps/projects/{project\_id}
+DELETE/v1/compliance/apps/projects/{project\_id}
 
 Delete a project for compliance purposes.
 
@@ -42,6 +42,8 @@ type: optional "claude\_project\_deleted"
 Constant string confirming deletion.
 
 defaultclaude\_project\_deleted
+
+
 
 ### Delete project
 

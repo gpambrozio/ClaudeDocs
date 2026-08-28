@@ -8,7 +8,7 @@ cURL
 
 # Create Enrollment URL
 
-POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
+POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
 Create Enrollment URL
 
@@ -137,6 +137,8 @@ Object type. Always `enrollment_url`.
 url: string
 
 Enrollment URL to send to the end user. Valid until `expires_at`.
+
+
 
 ### Create Enrollment URL
 

@@ -8,21 +8,21 @@
 
 ##### [List Federation Rule Workspaces](api/http/admin/federation_rules/workspaces/list.md)
 
-GET/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
+GET/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
 
 ##### [Add Federation Rule Workspace](api/http/admin/federation_rules/workspaces/create.md)
 
-POST/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
+POST/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
 
 ##### [Remove Federation Rule Workspace](api/http/admin/federation_rules/workspaces/delete.md)
 
-DELETE/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces/{workspace\_id}
+DELETE/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces/{workspace\_id}
 
 ##### Models
 
 
 
-WorkspaceListResponse object{ created\_at, created\_by\_actor\_id, federation\_rule\_id, 3 more }
+WorkspaceCreateResponse object{ created\_at, created\_by\_actor\_id, federation\_rule\_id, 3 more }
 
 
 
@@ -56,7 +56,7 @@ Workspace display name. Populated when listing; null in the enable response.
 
 
 
-WorkspaceCreateResponse object{ created\_at, created\_by\_actor\_id, federation\_rule\_id, 3 more }
+WorkspaceListResponse object{ created\_at, created\_by\_actor\_id, federation\_rule\_id, 3 more }
 
 
 

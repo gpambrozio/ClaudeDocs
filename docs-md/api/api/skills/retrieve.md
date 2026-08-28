@@ -8,7 +8,7 @@ cURL
 
 # Get Skill
 
-GET/v1/skills/{skill\_id}
+GET/v1/skills/{skill\_id}
 
 Get Skill
 
@@ -27,6 +27,8 @@ The format and length of IDs may change over time.
 
 
 Skill object{ id, created\_at, display\_name, 4 more }
+
+
 
 ### Get Skill
 

@@ -10,15 +10,15 @@ cURL
 
 ##### [List memory versions](api/http/beta/memory_stores/memory_versions/list.md)
 
-GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions
+GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions
 
 ##### [Retrieve a memory version](api/http/beta/memory_stores/memory_versions/retrieve.md)
 
-GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}
+GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}
 
 ##### [Redact a memory version](api/http/beta/memory_stores/memory_versions/redact.md)
 
-POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}/redact
+POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}/redact
 
 ##### Models
 

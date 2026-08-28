@@ -8,15 +8,15 @@
 
 ##### [Add Workspace To Service Account](api/http/admin/service_accounts/workspaces/create.md)
 
-POST/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
+POST/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
 
 ##### [List Workspaces For Service Account](api/http/admin/service_accounts/workspaces/list.md)
 
-GET/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
+GET/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
 
 ##### [Remove Workspace From Service Account](api/http/admin/service_accounts/workspaces/delete.md)
 
-DELETE/v1/organizations/service\_accounts/{service\_account\_id}/workspaces/{workspace\_id}
+DELETE/v1/organizations/service\_accounts/{service\_account\_id}/workspaces/{workspace\_id}
 
 ##### Models
 
@@ -30,7 +30,7 @@ Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
 
 implicit: boolean or null
 
-True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace\_user and cannot be removed.
+True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
 
 service\_account\_id: string
 
@@ -74,7 +74,7 @@ Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
 
 implicit: boolean or null
 
-True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace\_user and cannot be removed.
+True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
 
 service\_account\_id: string
 

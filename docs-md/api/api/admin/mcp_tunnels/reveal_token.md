@@ -8,7 +8,7 @@
 
 Deprecated
 
-POST/v1/organizations/tunnels/{tunnel\_id}/reveal\_token
+POST/v1/organizations/tunnels/{tunnel\_id}/reveal\_token
 
 **Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](api/beta/tunnels.md) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
@@ -49,6 +49,8 @@ type: "tunnel\_token"
 Object type. Always `tunnel_token` for Tunnel Tokens.
 
 defaulttunnel\_token
+
+
 
 ### Reveal Tunnel Token
 

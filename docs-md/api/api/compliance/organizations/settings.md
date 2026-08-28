@@ -8,7 +8,7 @@
 
 ##### [Get effective organization settings](api/http/compliance/organizations/settings/retrieve.md)
 
-GET/v1/compliance/organizations/{organization\_id}/settings
+GET/v1/compliance/organizations/{organization\_id}/settings
 
 ##### Models
 

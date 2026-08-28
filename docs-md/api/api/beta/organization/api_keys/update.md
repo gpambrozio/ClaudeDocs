@@ -8,7 +8,7 @@ cURL
 
 # Update API Key
 
-POST/v1/organizations/api\_keys/{api\_key\_id}
+POST/v1/organizations/api\_keys/{api\_key\_id}
 
 Update API Key
 
@@ -49,6 +49,8 @@ One of the following:
 
 
 BetaAPIKey object{ id, created\_at, created\_by, 8 more }
+
+
 
 ### Update API Key
 

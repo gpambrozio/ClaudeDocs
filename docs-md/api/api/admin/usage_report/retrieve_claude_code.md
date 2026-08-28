@@ -6,7 +6,7 @@
 
 # Get Claude Code Usage Report
 
-GET/v1/organizations/usage\_report/claude\_code
+GET/v1/organizations/usage\_report/claude\_code
 
 Retrieve daily aggregated usage metrics for Claude Code users.
 Enables organizations to analyze developer productivity and build custom dashboards.
@@ -20,6 +20,8 @@ starting\_at: string
 UTC date in YYYY-MM-DD format. Returns metrics for this single day only.
 
 pattern^\d{4}-\d{2}-\d{2}$
+
+formatdate
 
 
 
@@ -42,6 +44,8 @@ Opaque cursor token from previous response's `next_page` field.
 
 
 ClaudeCodeUsageReport object{ data, has\_more, next\_page }
+
+
 
 ### Get Claude Code Usage Report
 
@@ -85,7 +89,7 @@ Response 200
             "amount": 186,
             "currency": "USD"
           },
-          "model": "claude-opus-4-8",
+          "model": "claude-opus-5",
           "tokens": {
             "cache_creation": 2340,
             "cache_read": 8790,
@@ -167,7 +171,7 @@ Response 200
             "amount": 186,
             "currency": "USD"
           },
-          "model": "claude-opus-4-8",
+          "model": "claude-opus-5",
           "tokens": {
             "cache_creation": 2340,
             "cache_read": 8790,

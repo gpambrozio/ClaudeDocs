@@ -6,7 +6,7 @@
 
 # Remove Federation Rule Workspace
 
-DELETE/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces/{workspace\_id}
+DELETE/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces/{workspace\_id}
 
 Disable a federation rule for a workspace.
 
@@ -50,6 +50,8 @@ defaultfederation\_rule\_workspace\_deleted
 workspace\_id: string
 
 Tagged ID of the workspace named in the delete request. Removal is idempotent.
+
+
 
 ### Remove Federation Rule Workspace
 

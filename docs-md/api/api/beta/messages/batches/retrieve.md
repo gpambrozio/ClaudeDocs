@@ -8,7 +8,7 @@ cURL
 
 # Retrieve a Message Batch
 
-GET/v1/messages/batches/{message\_batch\_id}
+GET/v1/messages/batches/{message\_batch\_id}
 
 This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
 
@@ -125,6 +125,8 @@ One of the following:
 
 
 BetaMessageBatch object{ id, archived\_at, cancel\_initiated\_at, 7 more }
+
+
 
 ### Retrieve a Message Batch
 

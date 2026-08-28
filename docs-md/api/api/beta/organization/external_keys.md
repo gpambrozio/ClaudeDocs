@@ -10,27 +10,27 @@ cURL
 
 ##### [Create External Key](api/http/beta/organization/external_keys/create.md)
 
-POST/v1/organizations/external\_keys
+POST/v1/organizations/external\_keys
 
 ##### [List External Keys](api/http/beta/organization/external_keys/list.md)
 
-GET/v1/organizations/external\_keys
+GET/v1/organizations/external\_keys
 
 ##### [Get External Key](api/http/beta/organization/external_keys/retrieve.md)
 
-GET/v1/organizations/external\_keys/{external\_key\_id}
+GET/v1/organizations/external\_keys/{external\_key\_id}
 
 ##### [Update External Key](api/http/beta/organization/external_keys/update.md)
 
-POST/v1/organizations/external\_keys/{external\_key\_id}
+POST/v1/organizations/external\_keys/{external\_key\_id}
 
 ##### [Delete External Key](api/http/beta/organization/external_keys/delete.md)
 
-DELETE/v1/organizations/external\_keys/{external\_key\_id}
+DELETE/v1/organizations/external\_keys/{external\_key\_id}
 
 ##### [Validate External Key](api/http/beta/organization/external_keys/validate.md)
 
-POST/v1/organizations/external\_keys/{external\_key\_id}/validate
+POST/v1/organizations/external\_keys/{external\_key\_id}/validate
 
 ##### Models
 

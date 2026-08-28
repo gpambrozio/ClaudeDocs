@@ -8,11 +8,11 @@
 
 ##### [List RBAC Roles](api/http/admin/rbac_roles/list.md)
 
-GET/v1/organizations/rbac\_roles
+GET/v1/organizations/rbac\_roles
 
 ##### [Get RBAC Role](api/http/admin/rbac_roles/retrieve.md)
 
-GET/v1/organizations/rbac\_roles/{role\_id}
+GET/v1/organizations/rbac\_roles/{role\_id}
 
 ##### Models
 
@@ -58,7 +58,7 @@ formatdate-time
 
 ##### [List RBAC Role Permissions](api/http/admin/rbac_roles/permissions/list.md)
 
-GET/v1/organizations/rbac\_roles/{role\_id}/permissions
+GET/v1/organizations/rbac\_roles/{role\_id}/permissions
 
 ---
 

@@ -10,6 +10,8 @@ cURL
 
 ##### [Unwrap](api/http/beta/webhooks/unwrap.md)
 
+##### [Parse Unverified](api/http/beta/webhooks/parse_unverified.md)
+
 ##### Models
 
 
@@ -687,32 +689,6 @@ organization\_id: string
 type: "vault.deleted"
 
 workspace\_id: string
-
-
-
-UnwrapWebhookEvent object{ id, created\_at, data, type }
-
-id: string
-
-Unique event identifier for idempotency.
-
-
-
-created\_at: string
-
-RFC 3339 timestamp when the event occurred.
-
-formatdate-time
-
-
-
-data: [BetaWebhookEventData](api/http/beta/webhooks.md)
-
-One of the following:
-
-type: "event"
-
-Object type. Always `event` for webhook payloads.
 
 ---
 

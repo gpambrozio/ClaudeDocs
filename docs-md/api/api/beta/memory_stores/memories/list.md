@@ -8,7 +8,7 @@ cURL
 
 # List memories
 
-GET/v1/memory\_stores/{memory\_store\_id}/memories
+GET/v1/memory\_stores/{memory\_store\_id}/memories
 
 List memories
 
@@ -185,6 +185,8 @@ type: "memory\_prefix"
 next\_page: optional string or null
 
 Opaque cursor for the next page (a `page_...` value), or `null` if there are no more results. Pass as `page` on the next request.
+
+
 
 ### List memories
 

@@ -6,9 +6,9 @@
 
 # Delete Invite
 
-DELETE/v1/organizations/invites/{invite\_id}
+DELETE/v1/organizations/invites/{invite\_id}
 
-For Claude Enterprise organizations, this endpoint's availability is in beta.
+Delete a pending invite.
 
 ##### Path parameters
 
@@ -31,6 +31,8 @@ Deleted object type.
 For Invites, this is always `"invite_deleted"`.
 
 defaultinvite\_deleted
+
+
 
 ### Delete Invite
 

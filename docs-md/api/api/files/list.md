@@ -8,7 +8,7 @@ cURL
 
 # List Files
 
-GET/v1/files
+GET/v1/files
 
 List Files
 
@@ -115,6 +115,8 @@ formatdate-time
 next\_page: optional string or null
 
 Opaque cursor for the next page. Supply as `?page=` to fetch the next page; null when there are no more results.
+
+
 
 ### List Files
 

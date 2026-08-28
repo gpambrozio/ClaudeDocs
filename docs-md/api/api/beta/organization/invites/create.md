@@ -8,7 +8,7 @@ cURL
 
 # Create Invite
 
-POST/v1/organizations/invites
+POST/v1/organizations/invites
 
 Invite a user to join the organization by email.
 
@@ -57,6 +57,8 @@ maxItems100
 
 
 BetaOrganizationInvite object{ id, accepted\_at, email, 6 more }
+
+
 
 ### Create Invite
 

@@ -8,7 +8,7 @@ cURL
 
 # Create Workspace Member
 
-POST/v1/organizations/workspaces/{workspace\_id}/members
+POST/v1/organizations/workspaces/{workspace\_id}/members
 
 Create Workspace Member
 
@@ -81,6 +81,8 @@ One of the following:
 "workspace\_restricted\_developer"
 
 "workspace\_user"
+
+
 
 ### Create Workspace Member
 

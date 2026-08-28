@@ -8,7 +8,7 @@ cURL
 
 # Delete a Message Batch
 
-DELETE/v1/messages/batches/{message\_batch\_id}
+DELETE/v1/messages/batches/{message\_batch\_id}
 
 Delete a Message Batch.
 
@@ -41,6 +41,8 @@ Deleted object type.
 For Message Batches, this is always `"message_batch_deleted"`.
 
 defaultmessage\_batch\_deleted
+
+
 
 ### Delete a Message Batch
 

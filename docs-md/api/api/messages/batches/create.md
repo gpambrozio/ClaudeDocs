@@ -8,7 +8,7 @@ cURL
 
 # Create a Message Batch
 
-POST/v1/messages/batches
+POST/v1/messages/batches
 
 Send a batch of Message creation requests.
 
@@ -1055,6 +1055,8 @@ minimum0
 
 
 MessageBatch object{ id, archived\_at, cancel\_initiated\_at, 7 more }
+
+
 
 ### Create a Message Batch
 

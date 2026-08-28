@@ -8,7 +8,7 @@ cURL
 
 # List Deployments
 
-GET/v1/deployments
+GET/v1/deployments
 
 List Deployments
 
@@ -445,6 +445,8 @@ type: "limit"
 next\_page: optional string or null
 
 Opaque cursor for the next page. Null when no more results.
+
+
 
 ### List Deployments
 

@@ -6,9 +6,9 @@
 
 # Create Invite
 
-POST/v1/organizations/invites
+POST/v1/organizations/invites
 
-For Claude Enterprise organizations, this endpoint's availability is in beta.
+Invite a user to join the organization by email.
 
 On plans that draw members from a finite pool of purchased seats, the invite automatically consumes a seat from the lowest tier with availability; there is no seat-tier parameter. When no seat is free the request fails with a 400 error rather than purchasing a seat.
 
@@ -28,7 +28,7 @@ role: "billing" or "claude\_code\_user" or "developer" or 2 more
 
 Role for the invited User.
 
-The accepted values depend on the organization type. Console and API organizations accept `user`, `developer`, `billing`, and `claude_code_user`; `admin` cannot be assigned through the API. Claude Enterprise organizations (beta) accept `user` and `managed`.
+The accepted values depend on the organization type. Console and API organizations accept `user`, `developer`, `billing`, and `claude_code_user`; `admin` cannot be assigned through the API. Claude Enterprise organizations accept `user` and `managed`.
 
 One of the following:
 
@@ -46,7 +46,7 @@ One of the following:
 
 rbac\_group\_ids: optional array of string
 
-RBAC group IDs to assign to the User when the Invite is accepted. A non-empty array is accepted only for a Claude Enterprise organization with RBAC groups (beta), and requires the key to carry the `write:rbac_groups` scope.
+RBAC group IDs to assign to the User when the Invite is accepted. A non-empty array is accepted only for a Claude Enterprise organization with RBAC groups, and requires the key to carry the `write:rbac_groups` scope.
 
 maxItems100
 
@@ -55,6 +55,8 @@ maxItems100
 
 
 Invite object{ id, accepted\_at, email, 6 more }
+
+
 
 ### Create Invite
 

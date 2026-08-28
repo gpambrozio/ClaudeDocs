@@ -8,7 +8,7 @@ cURL
 
 # Get Vault
 
-GET/v1/vaults/{vault\_id}
+GET/v1/vaults/{vault\_id}
 
 Get Vault
 
@@ -161,6 +161,8 @@ updated\_at: string
 A timestamp in RFC 3339 format
 
 formatdate-time
+
+
 
 ### Get Vault
 

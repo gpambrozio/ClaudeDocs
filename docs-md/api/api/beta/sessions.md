@@ -10,27 +10,27 @@ cURL
 
 ##### [Create Session](api/http/beta/sessions/create.md)
 
-POST/v1/sessions
+POST/v1/sessions
 
 ##### [List Sessions](api/http/beta/sessions/list.md)
 
-GET/v1/sessions
+GET/v1/sessions
 
 ##### [Get Session](api/http/beta/sessions/retrieve.md)
 
-GET/v1/sessions/{session\_id}
+GET/v1/sessions/{session\_id}
 
 ##### [Update Session](api/http/beta/sessions/update.md)
 
-POST/v1/sessions/{session\_id}
+POST/v1/sessions/{session\_id}
 
 ##### [Delete Session](api/http/beta/sessions/delete.md)
 
-DELETE/v1/sessions/{session\_id}
+DELETE/v1/sessions/{session\_id}
 
 ##### [Archive Session](api/http/beta/sessions/archive.md)
 
-POST/v1/sessions/{session\_id}/archive
+POST/v1/sessions/{session\_id}/archive
 
 ##### Models
 
@@ -574,61 +574,61 @@ Event sent by the client providing the result of an agent-toolset tool execution
 
 ##### [List Events](api/http/beta/sessions/events/list.md)
 
-GET/v1/sessions/{session\_id}/events
+GET/v1/sessions/{session\_id}/events
 
 ##### [Send Events](api/http/beta/sessions/events/send.md)
 
-POST/v1/sessions/{session\_id}/events
+POST/v1/sessions/{session\_id}/events
 
 ##### [Stream Events](api/http/beta/sessions/events/stream.md)
 
-GET/v1/sessions/{session\_id}/events/stream
+GET/v1/sessions/{session\_id}/events/stream
 
 #### Sessions[Resources](api/http/beta/sessions/resources.md)
 
 ##### [Add Session Resource](api/http/beta/sessions/resources/add.md)
 
-POST/v1/sessions/{session\_id}/resources
+POST/v1/sessions/{session\_id}/resources
 
 ##### [List Session Resources](api/http/beta/sessions/resources/list.md)
 
-GET/v1/sessions/{session\_id}/resources
+GET/v1/sessions/{session\_id}/resources
 
 ##### [Get Session Resource](api/http/beta/sessions/resources/retrieve.md)
 
-GET/v1/sessions/{session\_id}/resources/{resource\_id}
+GET/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### [Update Session Resource](api/http/beta/sessions/resources/update.md)
 
-POST/v1/sessions/{session\_id}/resources/{resource\_id}
+POST/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### [Delete Session Resource](api/http/beta/sessions/resources/delete.md)
 
-DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
+DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 
 #### Sessions[Threads](api/http/beta/sessions/threads.md)
 
 ##### [List Session Threads](api/http/beta/sessions/threads/list.md)
 
-GET/v1/sessions/{session\_id}/threads
+GET/v1/sessions/{session\_id}/threads
 
 ##### [Get Session Thread](api/http/beta/sessions/threads/retrieve.md)
 
-GET/v1/sessions/{session\_id}/threads/{thread\_id}
+GET/v1/sessions/{session\_id}/threads/{thread\_id}
 
 ##### [Archive Session Thread](api/http/beta/sessions/threads/archive.md)
 
-POST/v1/sessions/{session\_id}/threads/{thread\_id}/archive
+POST/v1/sessions/{session\_id}/threads/{thread\_id}/archive
 
 #### SessionsThreads[Events](api/http/beta/sessions/threads/events.md)
 
 ##### [List Session Thread Events](api/http/beta/sessions/threads/events/list.md)
 
-GET/v1/sessions/{session\_id}/threads/{thread\_id}/events
+GET/v1/sessions/{session\_id}/threads/{thread\_id}/events
 
 ##### [Stream Session Thread Events](api/http/beta/sessions/threads/events/stream.md)
 
-GET/v1/sessions/{session\_id}/threads/{thread\_id}/stream
+GET/v1/sessions/{session\_id}/threads/{thread\_id}/stream
 
 ---
 

@@ -8,7 +8,7 @@ cURL
 
 # Delete a memory store
 
-DELETE/v1/memory\_stores/{memory\_store\_id}
+DELETE/v1/memory\_stores/{memory\_store\_id}
 
 Delete a memory store
 
@@ -129,6 +129,8 @@ id: string
 ID of the deleted memory store (a `memstore_...` identifier). The store and all its memories and versions are no longer retrievable.
 
 type: "memory\_store\_deleted"
+
+
 
 ### Delete a memory store
 

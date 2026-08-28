@@ -8,7 +8,7 @@ cURL
 
 # Create Workspace
 
-POST/v1/organizations/workspaces
+POST/v1/organizations/workspaces
 
 Create Workspace
 
@@ -159,6 +159,8 @@ User-defined tags as string key-value pairs. Keys may not begin with `anthropic`
 
 
 BetaWorkspace object{ id, archived\_at, compartment\_id, 7 more }
+
+
 
 ### Create Workspace
 

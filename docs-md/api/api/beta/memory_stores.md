@@ -10,27 +10,27 @@ cURL
 
 ##### [Create a memory store](api/http/beta/memory_stores/create.md)
 
-POST/v1/memory\_stores
+POST/v1/memory\_stores
 
 ##### [List memory stores](api/http/beta/memory_stores/list.md)
 
-GET/v1/memory\_stores
+GET/v1/memory\_stores
 
 ##### [Retrieve a memory store](api/http/beta/memory_stores/retrieve.md)
 
-GET/v1/memory\_stores/{memory\_store\_id}
+GET/v1/memory\_stores/{memory\_store\_id}
 
 ##### [Update a memory store](api/http/beta/memory_stores/update.md)
 
-POST/v1/memory\_stores/{memory\_store\_id}
+POST/v1/memory\_stores/{memory\_store\_id}
 
 ##### [Delete a memory store](api/http/beta/memory_stores/delete.md)
 
-DELETE/v1/memory\_stores/{memory\_store\_id}
+DELETE/v1/memory\_stores/{memory\_store\_id}
 
 ##### [Archive a memory store](api/http/beta/memory_stores/archive.md)
 
-POST/v1/memory\_stores/{memory\_store\_id}/archive
+POST/v1/memory\_stores/{memory\_store\_id}/archive
 
 ##### Models
 
@@ -98,37 +98,37 @@ Arbitrary key-value tags for your own bookkeeping (such as the end user a store 
 
 ##### [Create a memory](api/http/beta/memory_stores/memories/create.md)
 
-POST/v1/memory\_stores/{memory\_store\_id}/memories
+POST/v1/memory\_stores/{memory\_store\_id}/memories
 
 ##### [List memories](api/http/beta/memory_stores/memories/list.md)
 
-GET/v1/memory\_stores/{memory\_store\_id}/memories
+GET/v1/memory\_stores/{memory\_store\_id}/memories
 
 ##### [Retrieve a memory](api/http/beta/memory_stores/memories/retrieve.md)
 
-GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### [Update a memory](api/http/beta/memory_stores/memories/update.md)
 
-POST/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+POST/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### [Delete a memory](api/http/beta/memory_stores/memories/delete.md)
 
-DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 #### Memory Stores[Memory Versions](api/http/beta/memory_stores/memory_versions.md)
 
 ##### [List memory versions](api/http/beta/memory_stores/memory_versions/list.md)
 
-GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions
+GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions
 
 ##### [Retrieve a memory version](api/http/beta/memory_stores/memory_versions/retrieve.md)
 
-GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}
+GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}
 
 ##### [Redact a memory version](api/http/beta/memory_stores/memory_versions/redact.md)
 
-POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}/redact
+POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}/redact
 
 ---
 

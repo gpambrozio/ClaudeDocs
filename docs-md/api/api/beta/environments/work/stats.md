@@ -8,7 +8,7 @@ cURL
 
 # Get Queue Statistics
 
-GET/v1/environments/{environment\_id}/work/stats
+GET/v1/environments/{environment\_id}/work/stats
 
 Get statistics about the work queue for an environment.
 
@@ -153,6 +153,8 @@ defaultwork\_queue\_stats
 workers\_polling: number or null
 
 Number of workers that have polled for work in the last 30 seconds. Requires worker\_id to be sent with poll requests.
+
+
 
 ### Get Queue Statistics
 

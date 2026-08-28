@@ -6,17 +6,18 @@
 
 # Get Activity Summaries
 
-GET/v1/organizations/analytics/summaries
+GET/v1/organizations/analytics/summaries
 
 Get organization-wide activity summaries for a date range.
 
-Returns one entry per day in [starting\_date, ending\_date). Data is
-typically available with a 1-day lag and may be revised by a few percent
-over the following days: when ending\_date is omitted it defaults to the
-most recent available day + 1, so the last entry covers the most recent
-available day. The series can be scoped to an RBAC group via
-filter[]=rbac\_group\_id:<id>. Available to organizations on a Claude
-Enterprise plan. Requires an API key with the `read:analytics` scope.
+Returns one entry per day from `starting_date` (inclusive) to `ending_date`
+(exclusive). Data is typically available with a 1-day lag and may be
+revised by a few percent over the following days: when `ending_date` is
+omitted it defaults to the most recent available day + 1, so the last
+entry covers the most recent available day. The series can be scoped to
+an RBAC group via `filter[]=rbac_group_id:{id}`. Available to
+organizations on a Claude Enterprise plan. Requires an API key with the
+`read:analytics` scope.
 
 ##### Query parameters
 
@@ -40,7 +41,7 @@ formatdate
 
 filter: optional array of string
 
-Filters as 'dimension:value'. Only rbac\_group\_id is supported (e.g. filter[]=rbac\_group\_id:<id>); repeat the param to OR across groups. Scopes the whole day series to members of the matching group(s), re-aggregated from member-level activity — org-wide seat/invite fields and the adoption rates derived from them are null on scoped rows. rbac\_group\_id accepts the tagged id (rbac\_group\_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each UTC day (time-of-usage attribution). At most 100 entries.
+Filters as `dimension:value`. Only `rbac_group_id` is supported (e.g. `filter[]=rbac_group_id:{id}`); repeat the param to OR across groups. Scopes the whole day series to members of the matching group(s), re-aggregated from member-level activity — org-wide seat/invite fields and the adoption rates derived from them are null on scoped rows. `rbac_group_id` accepts the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each UTC day (time-of-usage attribution). At most 100 entries.
 
 maxItems100
 
@@ -51,6 +52,8 @@ maxItems100
 ActivitySummary object{ summaries }
 
 Response for GET /v1/organizations/analytics/summaries.
+
+
 
 ### Get Activity Summaries
 
@@ -78,11 +81,11 @@ Response 200
       "cowork_weekly_active_user_count": 0,
       "daily_active_user_count": 0,
       "daily_adoption_rate": 0,
-      "ending_at": "ending_at",
+      "ending_at": "2019-12-27T18:11:19.117Z",
       "monthly_active_user_count": 0,
       "monthly_adoption_rate": 0,
       "pending_invite_count": 0,
-      "starting_at": "starting_at",
+      "starting_at": "2019-12-27T18:11:19.117Z",
       "weekly_active_user_count": 0,
       "weekly_adoption_rate": 0,
       "chat_daily_active_user_count": 0,
@@ -122,11 +125,11 @@ Response 200
       "cowork_weekly_active_user_count": 0,
       "daily_active_user_count": 0,
       "daily_adoption_rate": 0,
-      "ending_at": "ending_at",
+      "ending_at": "2019-12-27T18:11:19.117Z",
       "monthly_active_user_count": 0,
       "monthly_adoption_rate": 0,
       "pending_invite_count": 0,
-      "starting_at": "starting_at",
+      "starting_at": "2019-12-27T18:11:19.117Z",
       "weekly_active_user_count": 0,
       "weekly_adoption_rate": 0,
       "chat_daily_active_user_count": 0,

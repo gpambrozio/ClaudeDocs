@@ -6,9 +6,9 @@
 
 # List Users
 
-GET/v1/organizations/users
+GET/v1/organizations/users
 
-For Claude Enterprise organizations, this endpoint's availability is in beta.
+List the organization's members.
 
 ##### Query parameters
 
@@ -48,7 +48,7 @@ roles: optional array of string
 
 Filter to items whose `role` equals one of the supplied values. Repeatable; values are OR'ed together.
 
-Accepted values depend on the organization type: Console and API organizations accept `user`, `developer`, `billing`, `admin`, and `claude_code_user`; Claude Enterprise organizations (beta) accept `user`, `owner`, `primary_owner`, `membership_admin`, and `managed`.
+Accepted values depend on the organization type: Console and API organizations accept `user`, `developer`, `billing`, `admin`, and `claude_code_user`; Claude Enterprise organizations accept `user`, `owner`, `primary_owner`, `membership_admin`, and `managed`.
 
 ##### Returns
 
@@ -123,6 +123,8 @@ Indicates if there are more results in the requested page direction.
 last\_id: string or null
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
+
+
 
 ### List Users
 

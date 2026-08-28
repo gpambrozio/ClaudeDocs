@@ -8,7 +8,7 @@
 
 ##### [List Organization Rate Limits](api/http/admin/rate_limits/list.md)
 
-GET/v1/organizations/rate\_limits
+GET/v1/organizations/rate\_limits
 
 ##### Models
 

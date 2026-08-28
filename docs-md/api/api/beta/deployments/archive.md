@@ -8,7 +8,7 @@ cURL
 
 # Archive Deployment
 
-POST/v1/deployments/{deployment\_id}/archive
+POST/v1/deployments/{deployment\_id}/archive
 
 Archive Deployment
 
@@ -123,6 +123,8 @@ One of the following:
 BetaManagedAgentsDeployment object{ id, agent, archived\_at, 14 more }
 
 A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+
 
 ### Archive Deployment
 

@@ -10,19 +10,19 @@ cURL
 
 ##### [Create Invite](api/http/beta/organization/invites/create.md)
 
-POST/v1/organizations/invites
+POST/v1/organizations/invites
 
 ##### [List Invites](api/http/beta/organization/invites/list.md)
 
-GET/v1/organizations/invites
+GET/v1/organizations/invites
 
 ##### [Get Invite](api/http/beta/organization/invites/retrieve.md)
 
-GET/v1/organizations/invites/{invite\_id}
+GET/v1/organizations/invites/{invite\_id}
 
 ##### [Delete Invite](api/http/beta/organization/invites/delete.md)
 
-DELETE/v1/organizations/invites/{invite\_id}
+DELETE/v1/organizations/invites/{invite\_id}
 
 ##### Models
 

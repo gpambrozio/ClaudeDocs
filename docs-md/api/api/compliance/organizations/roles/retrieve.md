@@ -6,7 +6,7 @@
 
 # Get Compliance Role
 
-GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}
+GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}
 
 Get Compliance Role
 
@@ -45,6 +45,8 @@ Role name
 updated\_at: string or null
 
 Role last-updated timestamp (ISO 8601)
+
+
 
 ### Get Compliance Role
 

@@ -6,7 +6,7 @@
 
 # Get Spend Limit
 
-GET/v1/organizations/spend\_limits/{spend\_limit\_id}
+GET/v1/organizations/spend\_limits/{spend\_limit\_id}
 
 Retrieve a spend limit by ID.
 
@@ -21,6 +21,10 @@ ID of the Spend Limit.
 
 
 SpendLimit object{ id, amount, created\_at, 5 more }
+
+A configured spend limit: a cap on metered spend for one scope and period.
+
+
 
 ### Get Spend Limit
 
@@ -47,7 +51,7 @@ Response 200
   "period": "monthly",
   "scope": {
     "type": "user",
-    "user_id": "user_id"
+    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
   },
   "type": "spend_limit",
   "updated_at": "2019-12-27T18:11:19.117Z"
@@ -69,7 +73,7 @@ Response 200
   "period": "monthly",
   "scope": {
     "type": "user",
-    "user_id": "user_id"
+    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
   },
   "type": "spend_limit",
   "updated_at": "2019-12-27T18:11:19.117Z"

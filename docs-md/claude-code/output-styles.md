@@ -92,8 +92,8 @@ Output style files support these frontmatter fields:
 
 Output styles directly modify Claude Code’s system prompt.
 
-- Claude Code adds each output style’s custom instructions to the end of the system prompt.
-- All output styles trigger reminders for Claude to adhere to the output style instructions during the conversation.
+- Claude Code adds the output style’s custom instructions to the system prompt.
+- When you [select a style other than Default](#change-your-output-style), Claude Code also reminds Claude of the style during the conversation.
 - Custom output styles leave out Claude Code’s built-in software engineering instructions, such as how to scope changes, write comments, and verify work, unless `keep-coding-instructions` is set to `true`.
 
 Output styles apply to the main conversation only: a [subagent runs its own system prompt](sub-agents.md), so styles don’t change how subagents respond. A [fork](sub-agents.md) is the exception, because it inherits the parent’s full system prompt.

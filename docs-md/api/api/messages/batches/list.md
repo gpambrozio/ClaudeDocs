@@ -8,7 +8,7 @@ cURL
 
 # List Message Batches
 
-GET/v1/messages/batches
+GET/v1/messages/batches
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
@@ -193,6 +193,8 @@ Indicates if there are more results in the requested page direction.
 last\_id: string or null
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
+
+
 
 ### List Message Batches
 

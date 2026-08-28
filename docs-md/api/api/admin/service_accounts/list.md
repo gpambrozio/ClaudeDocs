@@ -6,7 +6,7 @@
 
 # List Service Accounts
 
-GET/v1/organizations/service\_accounts
+GET/v1/organizations/service\_accounts
 
 List service accounts in the caller's organization.
 
@@ -125,6 +125,8 @@ Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
 next\_page: string or null
 
 Opaque cursor for the next page, or null if no more results.
+
+
 
 ### List Service Accounts
 

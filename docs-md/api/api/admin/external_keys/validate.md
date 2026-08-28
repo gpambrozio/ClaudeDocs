@@ -6,7 +6,7 @@
 
 # Validate External Key
 
-POST/v1/organizations/external\_keys/{external\_key\_id}/validate
+POST/v1/organizations/external\_keys/{external\_key\_id}/validate
 
 Validate an external key config against the customer's KMS.
 
@@ -48,6 +48,8 @@ One of the following:
 type: "external\_key\_validation"
 
 defaultexternal\_key\_validation
+
+
 
 ### Validate External Key
 

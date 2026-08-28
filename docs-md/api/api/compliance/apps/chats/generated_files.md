@@ -8,11 +8,11 @@
 
 ##### [Get Claude-generated file metadata](api/http/compliance/apps/chats/generated_files/retrieve.md)
 
-GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}
+GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}
 
 ##### [Download a Claude-generated file](api/http/compliance/apps/chats/generated_files/download.md)
 
-GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}/content
+GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}/content
 
 ##### Models
 

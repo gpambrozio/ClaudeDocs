@@ -8,7 +8,7 @@
 
 ##### [List project attachments](api/http/compliance/apps/projects/attachments/list.md)
 
-GET/v1/compliance/apps/projects/{project\_id}/attachments
+GET/v1/compliance/apps/projects/{project\_id}/attachments
 
 ##### Models
 

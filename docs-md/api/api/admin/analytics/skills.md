@@ -8,7 +8,7 @@
 
 ##### [Get Skill Usage](api/http/admin/analytics/skills/list.md)
 
-GET/v1/organizations/analytics/skills
+GET/v1/organizations/analytics/skills
 
 ##### Models
 

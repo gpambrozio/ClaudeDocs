@@ -6,7 +6,7 @@
 
 # Retrieve API Key (Admin API)
 
-GET/v1/organizations/api\_keys/{api\_key\_id}
+GET/v1/organizations/api\_keys/{api\_key\_id}
 
 Retrieve information about a single API key in your organization, looked up by its ID. This Admin API endpoint requires an Admin API key, is intended for programmatic key management, and never returns the key's secret value. To view or create your own API keys, go to [API keys](https://platform.claude.com/settings/keys) in the Claude Console.
 
@@ -20,7 +20,9 @@ ID of the API key.
 
 
 
-APIKey object{ id, created\_at, created\_by, 7 more }
+APIKey object{ id, created\_at, created\_by, 8 more }
+
+
 
 ### Retrieve API Key (Admin API)
 
@@ -50,8 +52,12 @@ Response 200
   "name": "Developer Key",
   "partial_key_hint": "sk-ant-api03-R2D...igAA",
   "principal": {
-    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-    "type": "user"
+    "type": "user_actor",
+    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+  },
+  "scope": {
+    "type": "workspace",
+    "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
   },
   "status": "active",
   "type": "api_key",
@@ -77,8 +83,12 @@ Response 200
   "name": "Developer Key",
   "partial_key_hint": "sk-ant-api03-R2D...igAA",
   "principal": {
-    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-    "type": "user"
+    "type": "user_actor",
+    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+  },
+  "scope": {
+    "type": "workspace",
+    "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
   },
   "status": "active",
   "type": "api_key",

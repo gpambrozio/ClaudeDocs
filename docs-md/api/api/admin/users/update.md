@@ -6,9 +6,9 @@
 
 # Update User
 
-POST/v1/organizations/users/{user\_id}
+POST/v1/organizations/users/{user\_id}
 
-For Claude Enterprise organizations, this endpoint's availability is in beta.
+Update a member's organization role.
 
 ##### Path parameters
 
@@ -24,7 +24,7 @@ role: "billing" or "claude\_code\_user" or "developer" or 2 more
 
 New role for the User.
 
-The accepted values depend on the organization type. Console and API organizations accept `user`, `developer`, `billing`, and `claude_code_user`; `admin` cannot be assigned through the API. Claude Enterprise organizations (beta) accept `user` and `managed`.
+The accepted values depend on the organization type. Console and API organizations accept `user`, `developer`, `billing`, and `claude_code_user`; `admin` cannot be assigned through the API. Claude Enterprise organizations accept `user` and `managed`.
 
 One of the following:
 
@@ -99,6 +99,8 @@ Object type.
 For Users, this is always `"user"`.
 
 defaultuser
+
+
 
 ### Update User
 

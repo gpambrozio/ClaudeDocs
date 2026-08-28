@@ -6,7 +6,7 @@
 
 # Get Service Account Workspace Member
 
-GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
+GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
 
 Retrieve a service account's membership in a workspace.
 
@@ -45,7 +45,7 @@ Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
 
 implicit: boolean or null
 
-True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace\_user and cannot be removed.
+True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
 
 service\_account\_id: string
 
@@ -78,6 +78,8 @@ One of the following:
 "workspace\_restricted\_developer"
 
 "workspace\_user"
+
+
 
 ### Get Service Account Workspace Member
 

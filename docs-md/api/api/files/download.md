@@ -8,7 +8,7 @@ cURL
 
 # Download File
 
-GET/v1/files/{file\_id}/content
+GET/v1/files/{file\_id}/content
 
 Download File
 
@@ -17,6 +17,8 @@ Download File
 file\_id: string
 
 ID of the File.
+
+
 
 ### Download File
 

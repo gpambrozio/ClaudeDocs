@@ -8,7 +8,7 @@ cURL
 
 # Send Events
 
-POST/v1/sessions/{session\_id}/events
+POST/v1/sessions/{session\_id}/events
 
 Send Events
 
@@ -231,6 +231,8 @@ type: "system.message"
 BetaManagedAgentsSendSessionEvents object{ data }
 
 Events that were successfully sent to the session.
+
+
 
 ### Send Events
 

@@ -10,23 +10,23 @@ cURL
 
 ##### [Create Agent](api/http/beta/agents/create.md)
 
-POST/v1/agents
+POST/v1/agents
 
 ##### [List Agents](api/http/beta/agents/list.md)
 
-GET/v1/agents
+GET/v1/agents
 
 ##### [Get Agent](api/http/beta/agents/retrieve.md)
 
-GET/v1/agents/{agent\_id}
+GET/v1/agents/{agent\_id}
 
 ##### [Update Agent](api/http/beta/agents/update.md)
 
-POST/v1/agents/{agent\_id}
+POST/v1/agents/{agent\_id}
 
 ##### [Archive Agent](api/http/beta/agents/archive.md)
 
-POST/v1/agents/{agent\_id}/archive
+POST/v1/agents/{agent\_id}/archive
 
 ##### Models
 
@@ -846,7 +846,7 @@ Configuration override for the write tool.
 
 ##### [List Agent Versions](api/http/beta/agents/versions/list.md)
 
-GET/v1/agents/{agent\_id}/versions
+GET/v1/agents/{agent\_id}/versions
 
 ---
 

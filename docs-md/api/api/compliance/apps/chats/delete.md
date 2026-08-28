@@ -6,7 +6,7 @@
 
 # Delete chat
 
-DELETE/v1/compliance/apps/chats/{claude\_chat\_id}
+DELETE/v1/compliance/apps/chats/{claude\_chat\_id}
 
 Permanently deletes a chat and all associated messages and
 files. This is a destructive operation that cannot be undone.
@@ -34,6 +34,8 @@ type: optional "claude\_chat\_deleted"
 Constant string confirming deletion
 
 defaultclaude\_chat\_deleted
+
+
 
 ### Delete chat
 

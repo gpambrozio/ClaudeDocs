@@ -10,10 +10,6 @@ The Claude Agent SDK supports two distinct input modes for interacting with agen
 Streaming input mode is the **preferred** way to use the Claude Agent SDK. It provides full access to the agent’s capabilities and enables rich, interactive experiences.
 It allows the agent to operate as a long lived process that takes in user input, handles interruptions, surfaces permission requests, and handles session management.
 
-### [​](#how-it-works) How It Works
-
-Environment/File SystemTools/HooksClaude AgentYour ApplicationEnvironment/File SystemTools/HooksClaude AgentYour ApplicationSession stays alivePersistent file systemstate maintainedInitialize with AsyncGeneratorYield Message 1Execute toolsRead filesFile contentsWrite/Edit filesSuccess/ErrorStream partial responseStream more content...Complete Message 1Yield Message 2 + ImageProcess image & executeAccess filesystemOperation resultsStream response 2Queue Message 3Interrupt/CancelHandle interruption
-
 ### [​](#benefits) Benefits
 
 In streaming input mode, you work in a persistent session with these capabilities:

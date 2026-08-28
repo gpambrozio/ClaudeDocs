@@ -10,23 +10,23 @@ cURL
 
 ##### [Add Session Resource](api/http/beta/sessions/resources/add.md)
 
-POST/v1/sessions/{session\_id}/resources
+POST/v1/sessions/{session\_id}/resources
 
 ##### [List Session Resources](api/http/beta/sessions/resources/list.md)
 
-GET/v1/sessions/{session\_id}/resources
+GET/v1/sessions/{session\_id}/resources
 
 ##### [Get Session Resource](api/http/beta/sessions/resources/retrieve.md)
 
-GET/v1/sessions/{session\_id}/resources/{resource\_id}
+GET/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### [Update Session Resource](api/http/beta/sessions/resources/update.md)
 
-POST/v1/sessions/{session\_id}/resources/{resource\_id}
+POST/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### [Delete Session Resource](api/http/beta/sessions/resources/delete.md)
 
-DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
+DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### Models
 

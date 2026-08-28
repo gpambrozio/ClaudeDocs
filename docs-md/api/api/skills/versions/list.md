@@ -8,7 +8,7 @@ cURL
 
 # List Skill Versions
 
-GET/v1/skills/{skill\_id}/versions
+GET/v1/skills/{skill\_id}/versions
 
 List Skill Versions
 
@@ -103,6 +103,8 @@ next\_page: string or null
 Token for fetching the next page of results.
 
 If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
+
+
 
 ### List Skill Versions
 

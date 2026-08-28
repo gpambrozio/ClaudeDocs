@@ -8,7 +8,7 @@ cURL
 
 # List External Keys
 
-GET/v1/organizations/external\_keys
+GET/v1/organizations/external\_keys
 
 List external key configs in the caller's organization.
 
@@ -162,6 +162,8 @@ formatdate-time
 next\_page: string or null
 
 Opaque cursor for the next page, or null if no more results. Pass as `?page=` to fetch the next page.
+
+
 
 ### List External Keys
 

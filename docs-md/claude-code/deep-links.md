@@ -11,7 +11,7 @@ Because a deep link is a URL, you can put one anywhere a link can go:
 
 This page covers how to [build a link](#build-a-link), [embed one in a runbook or trigger it from the shell](#examples), and [manage or disable handler registration](#registration-and-supported-platforms) on each platform.
 
-## [​](#how-it-works) How it works
+## [​](#how-deep-links-work) How deep links work
 
 The `claude-cli://` prefix is a custom URL scheme that Claude Code registers with your operating system, similar to how `mailto:` links open your email client. When you click a deep link:
 
@@ -105,6 +105,8 @@ The built-in `open` command passes the URL to the registered `claude-cli://` han
 open "claude-cli://open?repo=acme/payments&q=review%20open%20PRs"
 ```
 
+On success, a new terminal window opens with Claude Code running and the prompt pre-filled.
+
 Most desktop environments provide `xdg-open`, which passes the URL to the registered handler:
 
 ```shiki
@@ -124,6 +126,8 @@ In `cmd.exe`, `start` treats its first quoted argument as a window title, so pas
 ```shiki
 start "" "claude-cli://open?repo=acme/payments&q=review%20open%20PRs"
 ```
+
+On success, a new terminal window opens with Claude Code running and the prompt pre-filled.
 
 ## [​](#registration-and-supported-platforms) Registration and supported platforms
 

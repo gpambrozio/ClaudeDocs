@@ -8,7 +8,7 @@
 
 ##### [Get Plugin Usage](api/http/admin/analytics/plugins/list.md)
 
-GET/v1/organizations/analytics/plugins
+GET/v1/organizations/analytics/plugins
 
 ##### Models
 

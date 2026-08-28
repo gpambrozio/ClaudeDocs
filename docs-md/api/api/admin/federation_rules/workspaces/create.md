@@ -6,7 +6,7 @@
 
 # Add Federation Rule Workspace
 
-POST/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
+POST/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
 
 Enable a federation rule for a workspace.
 
@@ -72,6 +72,8 @@ Tagged ID of the workspace this rule is enabled for.
 workspace\_name: string or null
 
 Workspace display name. Populated when listing; null in the enable response.
+
+
 
 ### Add Federation Rule Workspace
 

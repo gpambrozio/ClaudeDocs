@@ -8,7 +8,7 @@ cURL
 
 # Archive Agent
 
-POST/v1/agents/{agent\_id}/archive
+POST/v1/agents/{agent\_id}/archive
 
 Archive Agent
 
@@ -123,6 +123,8 @@ One of the following:
 BetaManagedAgentsAgent object{ id, archived\_at, created\_at, 12 more }
 
 A Managed Agents `agent`.
+
+
 
 ### Archive Agent
 

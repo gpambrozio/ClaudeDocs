@@ -8,7 +8,7 @@
 
 ##### [Get Cost Report](api/http/admin/cost_report/retrieve.md)
 
-GET/v1/organizations/cost\_report
+GET/v1/organizations/cost\_report
 
 ##### Models
 

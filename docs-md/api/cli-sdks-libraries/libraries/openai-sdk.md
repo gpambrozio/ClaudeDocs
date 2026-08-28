@@ -12,12 +12,13 @@ To use the OpenAI SDK compatibility feature, you'll need to:
 2. Change the following
    - Update your base URL to point to the Claude API
    - Replace your API key with a [Claude API key](/settings/keys)
+   - If your key is a [personal or service account key](manage-claude/authentication.md) with access to multiple workspaces, also send the `anthropic-workspace-id` header on every request (for example, `default_headers` in the Python SDK or `defaultHeaders` in TypeScript); see [Select a workspace](manage-claude/authentication.md)
    - Update your model name to use a [Claude model](models/overview.md)
 3. Review the following sections for what features are supported
 
 ###  Quick start example
 
-PythonTypeScript
+PythonTypeScriptC#GoJavaPHPRuby
 
 
 
@@ -65,9 +66,9 @@ Most of the inputs to the OpenAI SDK clearly map directly to Anthropic’s API p
 
 ###  Thinking support
 
-You can enable [thinking](build-with-claude/thinking.md) by adding the `thinking` parameter. On current models thinking is adaptive, with Claude deciding when and how deeply to think, and on Claude 5 models it is on by default; manually configured extended thinking is a legacy mode. While thinking improves Claude's reasoning for complex tasks, the OpenAI SDK doesn't return Claude's detailed thought process. For full thinking features, including access to Claude's step-by-step reasoning output, use the native Claude API.
+You can enable [thinking](build-with-claude/thinking.md) by adding the `thinking` parameter. On current models thinking is adaptive, with Claude deciding when and how deeply to think, and on Claude 5 models it is on by default; manually configured extended thinking is a legacy mode. Although thinking improves Claude's reasoning for complex tasks, the OpenAI SDK doesn't return Claude's detailed thought process. For full thinking features, including access to Claude's step-by-step reasoning output, use the native Claude API.
 
-PythonTypeScript
+PythonTypeScriptC#GoJavaPHPRuby
 
 
 

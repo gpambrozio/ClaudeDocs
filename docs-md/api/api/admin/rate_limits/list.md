@@ -6,7 +6,7 @@
 
 # List Organization Rate Limits
 
-GET/v1/organizations/rate\_limits
+GET/v1/organizations/rate\_limits
 
 List Messages API rate limits for your organization.
 
@@ -105,6 +105,8 @@ defaultrate\_limit
 next\_page: string or null
 
 Token to provide in as `page` in the subsequent request to retrieve the next page of data.
+
+
 
 ### List Organization Rate Limits
 

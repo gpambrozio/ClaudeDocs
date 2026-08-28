@@ -8,11 +8,11 @@
 
 ##### [Get artifact metadata](api/http/compliance/apps/artifacts/retrieve.md)
 
-GET/v1/compliance/apps/artifacts/{artifact\_version\_id}
+GET/v1/compliance/apps/artifacts/{artifact\_version\_id}
 
 ##### [Download artifact content](api/http/compliance/apps/artifacts/download.md)
 
-GET/v1/compliance/apps/artifacts/{artifact\_version\_id}/content
+GET/v1/compliance/apps/artifacts/{artifact\_version\_id}/content
 
 ##### Models
 

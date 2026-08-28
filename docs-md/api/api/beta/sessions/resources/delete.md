@@ -8,7 +8,7 @@ cURL
 
 # Delete Session Resource
 
-DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
+DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 
 Delete Session Resource
 
@@ -129,6 +129,8 @@ Confirmation of resource deletion.
 id: string
 
 type: "session\_resource\_deleted"
+
+
 
 ### Delete Session Resource
 

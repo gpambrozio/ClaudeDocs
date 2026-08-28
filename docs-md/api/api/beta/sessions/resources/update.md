@@ -8,7 +8,7 @@ cURL
 
 # Update Session Resource
 
-POST/v1/sessions/{session\_id}/resources/{resource\_id}
+POST/v1/sessions/{session\_id}/resources/{resource\_id}
 
 Update Session Resource
 
@@ -169,6 +169,8 @@ formatdate-time
 BetaManagedAgentsMemoryStoreResource object{ memory\_store\_id, type, access, 4 more }
 
 A memory store attached to an agent session.
+
+
 
 ### Update Session Resource
 

@@ -8,7 +8,7 @@ cURL
 
 # List API Keys
 
-GET/v1/organizations/api\_keys
+GET/v1/organizations/api\_keys
 
 List API Keys
 
@@ -239,6 +239,8 @@ Indicates if there are more results in the requested page direction.
 last\_id: string or null
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
+
+
 
 ### List API Keys
 

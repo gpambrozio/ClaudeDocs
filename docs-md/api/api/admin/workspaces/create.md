@@ -6,7 +6,7 @@
 
 # Create Workspace
 
-POST/v1/organizations/workspaces
+POST/v1/organizations/workspaces
 
 Create Workspace
 
@@ -36,7 +36,7 @@ minLength1
 
 data\_residency: optional object{ allowed\_inference\_geos, default\_inference\_geo, workspace\_geo } or null
 
-Data residency configuration for the workspace. If omitted, defaults to workspace\_geo=`"us"`, allowed\_inference\_geos=`"unrestricted"`, and default\_inference\_geo=`"global"`.
+Data residency configuration for the workspace. If omitted, defaults to `workspace_geo: "us"`, `allowed_inference_geos: "unrestricted"`, and `default_inference_geo: "global"`.
 
 
 
@@ -62,7 +62,7 @@ One of the following:
 
 default\_inference\_geo: optional "global" or "us" or null
 
-Default inference geo applied when requests omit the parameter. Defaults to 'global' if omitted. Must be a member of allowed\_inference\_geos unless allowed\_inference\_geos is `"unrestricted"`.
+Default inference geo applied when requests omit the parameter. Defaults to 'global' if omitted. Must be a member of `allowed_inference_geos` unless `allowed_inference_geos` is `"unrestricted"`.
 
 One of the following:
 
@@ -93,6 +93,8 @@ User-defined tags as string key-value pairs. Keys may not begin with `anthropic`
 
 
 Workspace object{ id, archived\_at, compartment\_id, 7 more }
+
+
 
 ### Create Workspace
 

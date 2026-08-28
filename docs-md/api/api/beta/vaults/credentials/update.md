@@ -8,7 +8,7 @@ cURL
 
 # Update Credential
 
-POST/v1/vaults/{vault\_id}/credentials/{credential\_id}
+POST/v1/vaults/{vault\_id}/credentials/{credential\_id}
 
 Update Credential
 
@@ -205,6 +205,8 @@ Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omi
 BetaManagedAgentsCredential object{ id, archived\_at, auth, 6 more }
 
 A credential stored in a vault. Sensitive fields are never returned in responses.
+
+
 
 ### Update Credential
 

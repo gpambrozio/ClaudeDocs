@@ -8,7 +8,7 @@
 
 ##### [List Compliance Role Permissions](api/http/compliance/organizations/roles/permissions/list.md)
 
-GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}/permissions
+GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}/permissions
 
 ##### Models
 

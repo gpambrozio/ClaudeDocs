@@ -8,7 +8,7 @@
 
 ##### [List Compliance Group Members](api/http/compliance/groups/members/list.md)
 
-GET/v1/compliance/groups/{group\_id}/members
+GET/v1/compliance/groups/{group\_id}/members
 
 ##### Models
 

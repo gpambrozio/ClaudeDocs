@@ -6,7 +6,7 @@
 
 # Delete Code Artifact
 
-DELETE/v1/compliance/apps/code/artifacts/{artifact\_id}
+DELETE/v1/compliance/apps/code/artifacts/{artifact\_id}
 
 Permanently deletes a Code Artifact and all its versions. This is a
 destructive operation that cannot be undone. A 200 response means the
@@ -40,6 +40,8 @@ type: "code\_artifact\_deleted"
 Constant string confirming deletion
 
 defaultcode\_artifact\_deleted
+
+
 
 ### Delete Code Artifact
 

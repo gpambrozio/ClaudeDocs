@@ -8,7 +8,7 @@ cURL
 
 # Update Vault
 
-POST/v1/vaults/{vault\_id}
+POST/v1/vaults/{vault\_id}
 
 Update Vault
 
@@ -177,6 +177,8 @@ updated\_at: string
 A timestamp in RFC 3339 format
 
 formatdate-time
+
+
 
 ### Update Vault
 

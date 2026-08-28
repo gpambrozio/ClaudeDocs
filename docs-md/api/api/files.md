@@ -10,23 +10,23 @@ cURL
 
 ##### [Upload File](api/http/files/upload.md)
 
-POST/v1/files
+POST/v1/files
 
 ##### [List Files](api/http/files/list.md)
 
-GET/v1/files
+GET/v1/files
 
 ##### [Download File](api/http/files/download.md)
 
-GET/v1/files/{file\_id}/content
+GET/v1/files/{file\_id}/content
 
 ##### [Get File Metadata](api/http/files/retrieve_metadata.md)
 
-GET/v1/files/{file\_id}
+GET/v1/files/{file\_id}
 
 ##### [Delete File](api/http/files/delete.md)
 
-DELETE/v1/files/{file\_id}
+DELETE/v1/files/{file\_id}
 
 ##### Models
 

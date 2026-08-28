@@ -10,15 +10,15 @@ cURL
 
 ##### [List Events](api/http/beta/sessions/events/list.md)
 
-GET/v1/sessions/{session\_id}/events
+GET/v1/sessions/{session\_id}/events
 
 ##### [Send Events](api/http/beta/sessions/events/send.md)
 
-POST/v1/sessions/{session\_id}/events
+POST/v1/sessions/{session\_id}/events
 
 ##### [Stream Events](api/http/beta/sessions/events/stream.md)
 
-GET/v1/sessions/{session\_id}/events/stream
+GET/v1/sessions/{session\_id}/events/stream
 
 ##### Models
 

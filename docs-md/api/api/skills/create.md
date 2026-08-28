@@ -8,7 +8,7 @@ cURL
 
 # Create Skill
 
-POST/v1/skills
+POST/v1/skills
 
 Create Skill
 
@@ -33,6 +33,8 @@ creation. Not unique.
 
 
 Skill object{ id, created\_at, display\_name, 4 more }
+
+
 
 ### Create Skill
 

@@ -8,7 +8,7 @@ cURL
 
 # List Service Account Workspace Members
 
-GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts
+GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -194,6 +194,8 @@ One of the following:
 next\_page: string or null
 
 Opaque cursor for the next page, or null if no more results.
+
+
 
 ### List Service Account Workspace Members
 

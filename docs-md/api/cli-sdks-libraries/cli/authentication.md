@@ -66,6 +66,20 @@ source ~/.zshrc
 
 To override the key for a single invocation, pass `--api-key`. To point at a different API host, set `ANTHROPIC_BASE_URL` or pass `--base-url`.
 
+If you are using an API key scoped to multiple workspaces, such as a [personal or service account key](manage-claude/authentication.md), you must [specify the workspace](manage-claude/authentication.md) to run your command in. Do this by setting an `ANTHROPIC_WORKSPACE_ID` environment variable, which the CLI reads automatically, or by using the [`--workspace-id` flag](cli-sdks-libraries/cli/using.md). The value must be a `wrkspc_...` ID; the literal `default` that the SDKs accept in `ANTHROPIC_WORKSPACE_ID` for [federated token exchange](manage-claude/wif-reference.md) isn't valid here.
+
+CLI
+
+
+
+```shiki
+ant messages create \
+  --workspace-id wrkspc_01... \
+  --model claude-opus-5 \
+  --max-tokens 1024 \
+  --message '{role: user, content: "Hello, Claude"}'
+```
+
 ##  Check authentication status
 
 `ant auth status` prints the credential source the CLI selected (API key environment variable, OAuth login, federation, or profile), the active profile, the workspace the active token is bound to, and the configuration directory paths. Use it to diagnose why a workload picked the wrong credential or workspace.

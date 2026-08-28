@@ -10,23 +10,23 @@ cURL
 
 ##### [Create Federation Rule](api/http/beta/organization/federation/rules/create.md)
 
-POST/v1/organizations/federation\_rules
+POST/v1/organizations/federation\_rules
 
 ##### [List Federation Rules](api/http/beta/organization/federation/rules/list.md)
 
-GET/v1/organizations/federation\_rules
+GET/v1/organizations/federation\_rules
 
 ##### [Get Federation Rule](api/http/beta/organization/federation/rules/retrieve.md)
 
-GET/v1/organizations/federation\_rules/{federation\_rule\_id}
+GET/v1/organizations/federation\_rules/{federation\_rule\_id}
 
 ##### [Update Federation Rule](api/http/beta/organization/federation/rules/update.md)
 
-POST/v1/organizations/federation\_rules/{federation\_rule\_id}
+POST/v1/organizations/federation\_rules/{federation\_rule\_id}
 
 ##### [Archive Federation Rule](api/http/beta/organization/federation/rules/archive.md)
 
-POST/v1/organizations/federation\_rules/{federation\_rule\_id}/archive
+POST/v1/organizations/federation\_rules/{federation\_rule\_id}/archive
 
 ##### Models
 
@@ -137,15 +137,15 @@ Service account's display name at read time. Ignored on writes.
 
 ##### [Add Federation Rule Workspace](api/http/beta/organization/federation/rules/workspaces/add.md)
 
-POST/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
+POST/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
 
 ##### [List Federation Rule Workspaces](api/http/beta/organization/federation/rules/workspaces/list.md)
 
-GET/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
+GET/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
 
 ##### [Remove Federation Rule Workspace](api/http/beta/organization/federation/rules/workspaces/remove.md)
 
-DELETE/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces/{workspace\_id}
+DELETE/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces/{workspace\_id}
 
 ---
 

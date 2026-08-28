@@ -53,7 +53,7 @@ Effort is set at `output_config.effort`, not inside the `thinking` object; for f
 
 ```shiki
 {
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5",
   "max_tokens": 4096,
   "output_config": { "effort": "medium" },
   "messages": [{ "role": "user", "content": "..." }]

@@ -6,7 +6,7 @@
 
 # Get Claude-generated file metadata
 
-GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}
+GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}
 
 Returns metadata for a file the assistant created via tool use.
 
@@ -55,6 +55,8 @@ MIME type of the stored file, when available
 size\_bytes: number or null
 
 Size in bytes of the stored file, when available
+
+
 
 ### Get Claude-generated file metadata
 

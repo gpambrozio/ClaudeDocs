@@ -6,7 +6,7 @@
 
 # Get Cost Report
 
-GET/v1/organizations/cost\_report
+GET/v1/organizations/cost\_report
 
 Get Cost Report
 
@@ -81,6 +81,8 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 CostReport object{ data, has\_more, next\_page }
 
+
+
 ### Get Cost Report
 
 cURL
@@ -108,9 +110,9 @@ Response 200
           "context_window": "0-200k",
           "cost_type": "tokens",
           "currency": "USD",
-          "description": "Claude Sonnet 4 Usage - Input Tokens",
+          "description": "Claude Opus 5 Usage - Input Tokens",
           "inference_geo": "global",
-          "model": "claude-opus-4-6",
+          "model": "claude-opus-5",
           "service_tier": "standard",
           "token_type": "uncached_input_tokens",
           "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
@@ -141,9 +143,9 @@ Response 200
           "context_window": "0-200k",
           "cost_type": "tokens",
           "currency": "USD",
-          "description": "Claude Sonnet 4 Usage - Input Tokens",
+          "description": "Claude Opus 5 Usage - Input Tokens",
           "inference_geo": "global",
-          "model": "claude-opus-4-6",
+          "model": "claude-opus-5",
           "service_tier": "standard",
           "token_type": "uncached_input_tokens",
           "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"

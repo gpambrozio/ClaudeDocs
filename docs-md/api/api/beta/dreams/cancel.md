@@ -8,7 +8,7 @@ cURL
 
 # Cancel a Dream
 
-POST/v1/dreams/{dream\_id}/cancel
+POST/v1/dreams/{dream\_id}/cancel
 
 Cancel a Dream
 
@@ -123,6 +123,8 @@ One of the following:
 BetaDream object{ id, archived\_at, created\_at, 11 more }
 
 An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output\_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+
+
 
 ### Cancel a Dream
 

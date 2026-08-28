@@ -6,7 +6,7 @@
 
 # Download file content
 
-GET/v1/compliance/apps/chats/files/{claude\_file\_id}/content
+GET/v1/compliance/apps/chats/files/{claude\_file\_id}/content
 
 Downloads the binary content of a file referenced in chat messages.
 
@@ -19,6 +19,8 @@ The file ID (tagged ID, e.g., claude\_file\_abc123)
 ##### Headers
 
 "x-api-key": optional string
+
+
 
 ### Download file content
 

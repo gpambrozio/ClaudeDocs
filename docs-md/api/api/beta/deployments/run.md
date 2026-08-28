@@ -8,7 +8,7 @@ cURL
 
 # Run Deployment Now
 
-POST/v1/deployments/{deployment\_id}/run
+POST/v1/deployments/{deployment\_id}/run
 
 Run Deployment Now
 
@@ -123,6 +123,8 @@ One of the following:
 BetaManagedAgentsDeploymentRun object{ id, agent, created\_at, 5 more }
 
 A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
+
+
 
 ### Run Deployment Now
 

@@ -10,15 +10,15 @@ cURL
 
 ##### [List Session Threads](api/http/beta/sessions/threads/list.md)
 
-GET/v1/sessions/{session\_id}/threads
+GET/v1/sessions/{session\_id}/threads
 
 ##### [Get Session Thread](api/http/beta/sessions/threads/retrieve.md)
 
-GET/v1/sessions/{session\_id}/threads/{thread\_id}
+GET/v1/sessions/{session\_id}/threads/{thread\_id}
 
 ##### [Archive Session Thread](api/http/beta/sessions/threads/archive.md)
 
-POST/v1/sessions/{session\_id}/threads/{thread\_id}/archive
+POST/v1/sessions/{session\_id}/threads/{thread\_id}/archive
 
 ##### Models
 
@@ -92,11 +92,11 @@ One of the following:
 
 ##### [List Session Thread Events](api/http/beta/sessions/threads/events/list.md)
 
-GET/v1/sessions/{session\_id}/threads/{thread\_id}/events
+GET/v1/sessions/{session\_id}/threads/{thread\_id}/events
 
 ##### [Stream Session Thread Events](api/http/beta/sessions/threads/events/stream.md)
 
-GET/v1/sessions/{session\_id}/threads/{thread\_id}/stream
+GET/v1/sessions/{session\_id}/threads/{thread\_id}/stream
 
 ---
 

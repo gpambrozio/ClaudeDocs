@@ -10,7 +10,7 @@ cURL
 
 ##### [List Agent Versions](api/http/beta/agents/versions/list.md)
 
-GET/v1/agents/{agent\_id}/versions
+GET/v1/agents/{agent\_id}/versions
 
 ---
 

@@ -10,31 +10,31 @@
 
 Deprecated
 
-GET/v1/organizations/tunnels/{tunnel\_id}
+GET/v1/organizations/tunnels/{tunnel\_id}
 
 ##### [List Tunnels](api/http/admin/mcp_tunnels/list.md)
 
 Deprecated
 
-GET/v1/organizations/tunnels
+GET/v1/organizations/tunnels
 
 ##### [Reveal Tunnel Token](api/http/admin/mcp_tunnels/reveal_token.md)
 
 Deprecated
 
-POST/v1/organizations/tunnels/{tunnel\_id}/reveal\_token
+POST/v1/organizations/tunnels/{tunnel\_id}/reveal\_token
 
 ##### [Rotate Tunnel Token](api/http/admin/mcp_tunnels/rotate_token.md)
 
 Deprecated
 
-POST/v1/organizations/tunnels/{tunnel\_id}/rotate\_token
+POST/v1/organizations/tunnels/{tunnel\_id}/rotate\_token
 
 ##### [Archive Tunnel](api/http/admin/mcp_tunnels/archive.md)
 
 Deprecated
 
-POST/v1/organizations/tunnels/{tunnel\_id}/archive
+POST/v1/organizations/tunnels/{tunnel\_id}/archive
 
 ##### Models
 
@@ -136,48 +136,6 @@ Workspace. Immutable after creation.
 
 
 
-MCPTunnelRevealTokenResponse object{ id, tunnel\_token, type }
-
-id: string
-
-Stable identifier for the current token value. Changes when the token is
-rotated.
-
-tunnel\_token: string
-
-The tunnel's connection token.
-
-
-
-type: "tunnel\_token"
-
-Object type. Always `tunnel_token` for Tunnel Tokens.
-
-defaulttunnel\_token
-
-
-
-MCPTunnelRotateTokenResponse object{ id, tunnel\_token, type }
-
-id: string
-
-Stable identifier for the current token value. Changes when the token is
-rotated.
-
-tunnel\_token: string
-
-The tunnel's connection token.
-
-
-
-type: "tunnel\_token"
-
-Object type. Always `tunnel_token` for Tunnel Tokens.
-
-defaulttunnel\_token
-
-
-
 MCPTunnelArchiveResponse object{ id, archived\_at, created\_at, 4 more }
 
 id: string
@@ -224,31 +182,73 @@ workspace\_id: string or null
 ID of the Workspace this Tunnel belongs to, or `null` for the default
 Workspace. Immutable after creation.
 
+
+
+MCPTunnelRevealTokenResponse object{ id, tunnel\_token, type }
+
+id: string
+
+Stable identifier for the current token value. Changes when the token is
+rotated.
+
+tunnel\_token: string
+
+The tunnel's connection token.
+
+
+
+type: "tunnel\_token"
+
+Object type. Always `tunnel_token` for Tunnel Tokens.
+
+defaulttunnel\_token
+
+
+
+MCPTunnelRotateTokenResponse object{ id, tunnel\_token, type }
+
+id: string
+
+Stable identifier for the current token value. Changes when the token is
+rotated.
+
+tunnel\_token: string
+
+The tunnel's connection token.
+
+
+
+type: "tunnel\_token"
+
+Object type. Always `tunnel_token` for Tunnel Tokens.
+
+defaulttunnel\_token
+
 #### MCP Tunnels[Tunnel Certificates](api/http/admin/mcp_tunnels/tunnel_certificates.md)
 
 ##### [Create Tunnel Certificate](api/http/admin/mcp_tunnels/tunnel_certificates/create.md)
 
 Deprecated
 
-POST/v1/organizations/tunnels/{tunnel\_id}/certificates
+POST/v1/organizations/tunnels/{tunnel\_id}/certificates
 
 ##### [Get Tunnel Certificate](api/http/admin/mcp_tunnels/tunnel_certificates/retrieve.md)
 
 Deprecated
 
-GET/v1/organizations/tunnels/{tunnel\_id}/certificates/{certificate\_id}
+GET/v1/organizations/tunnels/{tunnel\_id}/certificates/{certificate\_id}
 
 ##### [List Tunnel Certificates](api/http/admin/mcp_tunnels/tunnel_certificates/list.md)
 
 Deprecated
 
-GET/v1/organizations/tunnels/{tunnel\_id}/certificates
+GET/v1/organizations/tunnels/{tunnel\_id}/certificates
 
 ##### [Archive Tunnel Certificate](api/http/admin/mcp_tunnels/tunnel_certificates/archive.md)
 
 Deprecated
 
-POST/v1/organizations/tunnels/{tunnel\_id}/certificates/{certificate\_id}/archive
+POST/v1/organizations/tunnels/{tunnel\_id}/certificates/{certificate\_id}/archive
 
 ---
 

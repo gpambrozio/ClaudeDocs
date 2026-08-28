@@ -6,7 +6,7 @@
 
 # Query compliance activities
 
-GET/v1/compliance/activities
+GET/v1/compliance/activities
 
 List compliance activities for the authenticated tenant.
 
@@ -6981,6 +6981,8 @@ has\_more: optional boolean
 defaultfalse
 
 last\_id: optional string or null
+
+
 
 ### Query compliance activities
 

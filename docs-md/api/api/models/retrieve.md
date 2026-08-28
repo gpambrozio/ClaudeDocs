@@ -8,7 +8,7 @@ cURL
 
 # Get a Model
 
-GET/v1/models/{model\_id}
+GET/v1/models/{model\_id}
 
 Get a specific model.
 
@@ -165,6 +165,8 @@ Object type.
 For Models, this is always `"model"`.
 
 defaultmodel
+
+
 
 ### Get a Model
 

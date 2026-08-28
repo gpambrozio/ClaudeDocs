@@ -8,7 +8,7 @@ cURL
 
 # Download File
 
-GET/v1/files/{file\_id}/content
+GET/v1/files/{file\_id}/content
 
 Download File
 
@@ -118,6 +118,8 @@ One of the following:
 
 "ce-user-management-2026-07-13"
 
+
+
 ### Download File
 
 cURL
@@ -127,7 +129,6 @@ cURL
 ```shiki
 curl https://api.anthropic.com/v1/files/$FILE_ID/content \
     -H 'anthropic-version: 2023-06-01' \
-    -H 'anthropic-beta: files-api-2025-04-14' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 

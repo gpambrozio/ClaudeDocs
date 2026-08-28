@@ -6,7 +6,7 @@
 
 # Get project document content
 
-GET/v1/compliance/apps/projects/documents/{document\_id}
+GET/v1/compliance/apps/projects/documents/{document\_id}
 
 Get detailed information for a specific project document.
 
@@ -59,6 +59,8 @@ User identifier (tagged ID)
 email\_address: string
 
 User's email address
+
+
 
 ### Get project document content
 

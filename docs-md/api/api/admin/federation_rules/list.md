@@ -6,7 +6,7 @@
 
 # List Federation Rules
 
-GET/v1/organizations/federation\_rules
+GET/v1/organizations/federation\_rules
 
 List federation rules in your organization.
 
@@ -198,6 +198,8 @@ Tagged IDs of the workspaces this rule is enabled for. May be empty for older ru
 next\_page: string or null
 
 Opaque cursor for the next page, or null if no more results.
+
+
 
 ### List Federation Rules
 

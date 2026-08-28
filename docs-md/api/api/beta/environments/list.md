@@ -8,7 +8,7 @@ cURL
 
 # List Environments
 
-GET/v1/environments
+GET/v1/environments
 
 List environments with pagination support.
 
@@ -221,6 +221,8 @@ One of the following:
 next\_page: string or null
 
 Token for fetching the next page of results. If `null`, there are no more results available. Pass this value to the `page` parameter in the next request.
+
+
 
 ### List Environments
 

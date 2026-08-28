@@ -8,7 +8,7 @@ cURL
 
 # List Session Resources
 
-GET/v1/sessions/{session\_id}/resources
+GET/v1/sessions/{session\_id}/resources
 
 List Session Resources
 
@@ -181,6 +181,8 @@ A memory store attached to an agent session.
 next\_page: optional string or null
 
 Opaque cursor for the next page. Null when no more results.
+
+
 
 ### List Session Resources
 

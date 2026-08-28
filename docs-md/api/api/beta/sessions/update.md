@@ -8,7 +8,7 @@ cURL
 
 # Update Session
 
-POST/v1/sessions/{session\_id}
+POST/v1/sessions/{session\_id}
 
 Update Session
 
@@ -171,6 +171,8 @@ Vault IDs (`vlt_*`) to attach to the session. Not yet supported; requests settin
 BetaManagedAgentsSession object{ id, agent, archived\_at, 14 more }
 
 A Managed Agents `session`.
+
+
 
 ### Update Session
 

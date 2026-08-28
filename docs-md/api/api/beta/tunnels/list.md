@@ -8,7 +8,7 @@ cURL
 
 # List Tunnels
 
-GET/v1/tunnels
+GET/v1/tunnels
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
@@ -173,6 +173,8 @@ type: "tunnel"
 next\_page: string or null
 
 Pagination cursor for the next page, or null if no more results.
+
+
 
 ### List Tunnels
 

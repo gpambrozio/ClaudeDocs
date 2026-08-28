@@ -38,6 +38,7 @@ ant beta:sessions:events list --session-id session_01...
 | `--transform` | Filter or reshape the response with a [GJSON path](#transform-output-with-gjson) |
 | `-r`, `--raw-output` | Print string results without surrounding quotes, like `jq -r` |
 | `--base-url` | Override the API base URL |
+| `--workspace-id` | Optional. Workspace ID (`wrkspc_...`) to send as the `anthropic-workspace-id` header, for API keys with access to multiple workspaces (equivalent to setting `ANTHROPIC_WORKSPACE_ID`). See [Select a workspace](manage-claude/authentication.md). [Admin API](manage-claude/admin-api.md) commands take their own `--workspace-id`, which names the workspace they manage instead. |
 | `--debug` | Print full HTTP request and response to stderr |
 | `--format-error`, `--transform-error` | Same as `--format` and `--transform` but applied to [error responses](cli-sdks-libraries/cli/scripting.md) |
 

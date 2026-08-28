@@ -25,7 +25,7 @@ By default, scheduled tasks run against whatever state your working directory is
 
 ## [​](#create-a-scheduled-task) Create a scheduled task
 
-On Claude Desktop before 1.1.5368, local scheduled tasks aren’t available. In the [**Code** tab](desktop.md), click **Routines** in the sidebar, then click **New routine** and choose **Local**. If **Routines** is missing from the sidebar, update the Desktop app, and check whether [routines are turned off for your organization](routines.md). Configure these fields:
+On Claude Desktop before 1.1.5368, local scheduled tasks aren’t available. In the [**Code** tab](desktop.md), click **Routines** in the sidebar, then click **New routine** and choose **Local**. If **Routines** is missing from the sidebar, update the Desktop app; [Create a routine](routines.md) says which plan and settings routines need. Configure these fields:
 
 | Field | Description |
 | --- | --- |
@@ -64,7 +64,7 @@ Keep this in mind when writing prompts. A task scheduled for 9am might run at 11
 
 Each task has its own permission mode, which you set when creating or editing the task. Allow rules from `~/.claude/settings.json` also apply to scheduled task sessions. If a task runs in [Manual mode](desktop.md) and needs to run a tool it doesn’t have permission for, the run stalls until you approve it. The session stays open in the sidebar so you can answer later.
 To avoid stalls, click **Run now** after creating a task, watch for permission prompts, and select “always allow” for each one. Future runs of that task auto-approve the same tools without prompting. You can review and revoke these approvals from the task’s detail page.
-Connector tools [your organization set to `ask`](mcp.md) and MCP tools marked [`requiresUserInteraction`](mcp.md) prompt on every call and don’t offer an always-allow option. Runs that call these tools stall each time.
+MCP tools marked [`requiresUserInteraction`](mcp.md) prompt on every call and don’t offer an always-allow option. Runs that call these tools stall each time.
 
 ## [​](#manage-scheduled-tasks) Manage scheduled tasks
 

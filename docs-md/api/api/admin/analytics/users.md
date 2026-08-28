@@ -8,7 +8,7 @@
 
 ##### [List User Activity](api/http/admin/analytics/users/list.md)
 
-GET/v1/organizations/analytics/users
+GET/v1/organizations/analytics/users
 
 ##### Models
 

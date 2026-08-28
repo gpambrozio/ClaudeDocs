@@ -3,9 +3,9 @@
 Cloud environments require [Claude Code on the web](claude-code-on-the-web.md), which is in research preview for Pro, Max, and Team users, and for Enterprise users with [premium seats or Chat + Claude Code seats](https://support.claude.com/en/articles/11845131-use-claude-code-with-your-team-or-enterprise-plan).
 
 Each [cloud session](claude-code-on-the-web.md) runs in a cloud environment. You can configure an environment to allow or deny [network access](#access-levels), set environment variables for the session, and run a [setup script](#setup-scripts) before Claude starts working.
-The same environments apply wherever you start a cloud session: [Claude Code on the web](claude-code-on-the-web.md), the terminal with [`claude --cloud`](claude-code-on-the-web.md), [Claude Tag](https://claude.com/docs/claude-tag/overview), [routines](routines.md), the [Claude mobile app](mobile.md), and the [Desktop app](desktop.md). Claude Tag sessions can’t run in [self-hosted environments](self-hosted-environments.md) yet; the other surfaces can route to any environment.
+The same environments apply wherever you start a cloud session: [Claude Code on the web](claude-code-on-the-web.md), the terminal with [`claude --cloud`](claude-code-on-the-web.md), [Claude Tag](https://claude.com/docs/claude-tag/overview), [routines](routines.md), the [Claude mobile app](mobile.md), and the [Desktop app](desktop.md). Each of these surfaces can also route to a [self-hosted environment](self-hosted-environments.md). [Availability and limitations](self-hosted-environments.md) covers what Claude can’t use yet when a Claude Tag session runs in one.
 
-[Remote Control](remote-control.md) sessions connect the web and mobile interfaces to a session on your own machine, which uses your machine’s network and files, not a cloud environment. Claude Tag channel sessions use [shared environments](#organization-shared-environments) only.
+[Remote Control](remote-control.md) sessions connect the web and mobile interfaces to a session on your own machine, which uses your machine’s network and files, not a cloud environment. Claude Tag channel sessions use organization-level environments only, either [shared environments](#organization-shared-environments) or [self-hosted environments](self-hosted-environments.md).
 
 ## [​](#the-default-environment) The Default environment
 
@@ -82,9 +82,9 @@ Archiving affects new sessions, not running ones:
 On Team and Enterprise plans, an Owner can create cloud environments that are shared with every member of the organization. The same role manages everything else on the **Cloud environments** admin page, including [self-hosted environments](self-hosted-environments.md); the Admin role can’t open the page. The full list of roles that can open it is the one for [managing server-managed settings](server-managed-settings.md). Shared environments appear in each member’s environment selector alongside their personal ones, so a team can standardize on one configuration instead of each member recreating it.
 Create, edit, and archive shared environments from the **Cloud environments** page in [admin settings](https://claude.ai/admin-settings). Each shared environment has a name, a [network access level](#access-levels), [environment variables](#set-environment-variables) in `.env` format, and a [setup script](#setup-scripts). Owners choose the organization’s [default environment](#the-default-environment) separately, at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code).
 Values in a shared environment reach every member’s sessions in that environment. Like personal environments, shared environments have no dedicated secrets store, so don’t include secrets.
-In [Claude Tag](https://claude.com/docs/claude-tag/overview) channels, Claude works as your organization’s shared identity, not as any member, so channel sessions use shared environments only. You can set the environment a channel uses in two ways:
+In [Claude Tag](https://claude.com/docs/claude-tag/overview) channels, Claude works as your organization’s shared identity, not as any member, so channel sessions use organization-level environments only, either shared environments or [self-hosted environments](self-hosted-environments.md). You can set the environment a channel uses in two ways:
 
-- Set a shared environment as the organization’s [default environment](#the-default-environment) at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code).
+- Set a shared or self-hosted environment as the organization’s [default environment](#the-default-environment) at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code).
 - [Pin one to a channel](https://claude.com/docs/claude-tag/admins/troubleshooting#channel-sessions-use-the-wrong-environment-or-can%E2%80%99t-find-one) in the Claude Tag admin settings.
 
 ## [​](#network-access) Network access
@@ -160,7 +160,7 @@ Cloud sessions start from a fresh clone of your repository. Anything you commit 
 | Your repo’s `.claude/rules/` | Yes | Part of the clone |
 | Your repo’s `.claude/skills/`, `.claude/agents/`, `.claude/commands/` | Yes | Part of the clone |
 | Plugins declared in `.claude/settings.json` | Yes | Installed at session start from the [marketplace](plugin-marketplaces.md) you declared. Requires network access to reach the marketplace source |
-| Your organization’s [server-managed settings](server-managed-settings.md) | Yes | Fetched from Anthropic’s servers when the session starts. See [Surface coverage](model-config.md) for how `availableModels` is enforced in cloud sessions. Settings deployed to your device through MDM or managed settings files don’t apply, because the session runs on an Anthropic-managed VM; in a [self-hosted environment](self-hosted-environments.md), sessions read the managed settings file in the runner image only when server-managed settings deliver no keys, per [settings precedence](server-managed-settings.md), apart from the [keys Claude Code reads from every admin source](managed-settings.md) |
+| Your organization’s [server-managed settings](server-managed-settings.md) | Yes | Fetched from Anthropic’s servers when the session starts. See [Surface coverage](model-config.md) for how `availableModels` is enforced in cloud sessions. Settings deployed to your device through MDM or managed settings files don’t apply, because the session runs on an Anthropic-managed VM; in a [self-hosted environment](self-hosted-environments.md), sessions also read the managed settings file in the runner image, per [how Claude Code combines managed sources](managed-settings.md) |
 | Your user `~/.claude/CLAUDE.md` | No | Lives on your machine, not in the repo |
 | Your user `~/.claude/skills/`, `~/.claude/agents/`, `~/.claude/commands/` | No | Live on your machine, not in the repo. Commit them to the repo’s `.claude/` directory instead. Cloud sessions automatically load skills you enable on claude.ai |
 | Plugins enabled only in your user settings | No | User-scoped `enabledPlugins` lives in `~/.claude/settings.json`. Declare them in the repo’s `.claude/settings.json` instead, or enable them for your claude.ai account so Claude Code loads them as [synced plugins](plugins-reference.md) |
@@ -295,7 +295,10 @@ Setup scripts and SessionStart hooks run in a fixed order when a cloud session s
 | **When they run** | Before Claude Code launches, skipped when a [cached environment](#environment-caching) exists | After Claude Code launches, on every session including resumed |
 | **Where they run** | Cloud sessions only | Local and cloud sessions |
 
-If you have SessionStart hooks in your user-level `~/.claude/settings.json`, don’t expect them in the cloud: user-level settings stay on your machine. In a cloud session, Claude Code runs hooks from the repository and from your organization’s [server-managed settings](server-managed-settings.md). In a [self-hosted environment](self-hosted-environments-configuration.md), Claude Code also runs the hooks the operator seeded from the runner host’s `~/.claude/`, and it runs the hooks in the runner image’s managed settings file when neither [server-managed settings nor an MDM-delivered Claude Code policy](settings.md) supplies the managed tier.
+If you have SessionStart hooks in your user-level `~/.claude/settings.json`, don’t expect them in the cloud. User-level settings stay on your machine. Which other hooks run depends on where the session runs:
+
+- **Anthropic-hosted environment**: Claude Code runs hooks from the repository and from your organization’s [server-managed settings](server-managed-settings.md).
+- **[Self-hosted environment](self-hosted-environments-configuration.md)**: Claude Code also runs the hooks the operator seeded from the runner host’s `~/.claude/`, and the hooks in the runner image’s managed settings file when that file is one of the [managed sources Claude Code applies](managed-settings.md).
 
 ### [​](#install-dependencies-with-a-sessionstart-hook) Install dependencies with a SessionStart hook
 
@@ -610,7 +613,7 @@ Model Context Protocol
 
 - [Claude Code on the web](claude-code-on-the-web.md): start, manage, and share cloud sessions
 - [Web quickstart](web-quickstart.md): connect GitHub and start your first cloud session
-- [Claude Tag](https://claude.com/docs/claude-tag/overview): sessions Claude starts from Slack run in the same Anthropic-hosted environments
+- [Claude Tag](https://claude.com/docs/claude-tag/overview): sessions Claude starts from Slack run in the same environments
 - [Routines](routines.md): scheduled runs use the same environments and network access levels
 - [Remote Control](remote-control.md): run sessions on your own machine’s network and files instead
 - [Self-hosted environments](self-hosted-environments.md): run cloud sessions on your organization’s own infrastructure

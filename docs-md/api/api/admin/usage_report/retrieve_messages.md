@@ -6,7 +6,7 @@
 
 # Get Messages Usage Report
 
-GET/v1/organizations/usage\_report/messages
+GET/v1/organizations/usage\_report/messages
 
 Get Messages Usage Report
 
@@ -181,6 +181,8 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 MessagesUsageReport object{ data, has\_more, next\_page }
 
+
+
 ### Get Messages Usage Report
 
 cURL
@@ -213,7 +215,7 @@ Response 200
           "cache_read_input_tokens": 200,
           "context_window": "0-200k",
           "inference_geo": "global",
-          "model": "claude-opus-4-6",
+          "model": "claude-opus-5",
           "output_tokens": 500,
           "server_tool_use": {
             "web_search_requests": 10
@@ -254,7 +256,7 @@ Response 200
           "cache_read_input_tokens": 200,
           "context_window": "0-200k",
           "inference_geo": "global",
-          "model": "claude-opus-4-6",
+          "model": "claude-opus-5",
           "output_tokens": 500,
           "server_tool_use": {
             "web_search_requests": 10

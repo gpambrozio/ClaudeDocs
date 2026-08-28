@@ -8,7 +8,7 @@ cURL
 
 # List Agent Versions
 
-GET/v1/agents/{agent\_id}/versions
+GET/v1/agents/{agent\_id}/versions
 
 List Agent Versions
 
@@ -275,6 +275,8 @@ formatint32
 next\_page: optional string or null
 
 Opaque cursor for the next page. Null when no more results.
+
+
 
 ### List Agent Versions
 

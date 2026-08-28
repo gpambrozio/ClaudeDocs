@@ -8,7 +8,7 @@
 
 ##### [Get chat messages](api/http/compliance/apps/chats/messages/list.md)
 
-GET/v1/compliance/apps/chats/{claude\_chat\_id}/messages
+GET/v1/compliance/apps/chats/{claude\_chat\_id}/messages
 
 ##### Models
 

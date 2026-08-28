@@ -8,7 +8,7 @@ cURL
 
 # Update User
 
-POST/v1/organizations/users/{user\_id}
+POST/v1/organizations/users/{user\_id}
 
 Update a member's organization role.
 
@@ -101,6 +101,8 @@ Object type.
 For Users, this is always `"user"`.
 
 defaultuser
+
+
 
 ### Update User
 

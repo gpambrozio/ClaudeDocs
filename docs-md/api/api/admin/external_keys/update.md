@@ -6,7 +6,7 @@
 
 # Update External Key
 
-POST/v1/organizations/external\_keys/{external\_key\_id}
+POST/v1/organizations/external\_keys/{external\_key\_id}
 
 Partially update an external key config. Omitted fields are left unchanged.
 
@@ -64,7 +64,7 @@ type: "aws"
 
 region: optional string or null
 
-AWS region. Derived from kms\_arn if omitted.
+AWS region. Derived from `kms_arn` if omitted.
 
 role\_arn: optional string or null⁠Deprecated
 
@@ -98,7 +98,7 @@ type: "azure"
 
 vault\_uri: string
 
-Key Vault data-plane URI — https://<vault-name>.vault.azure.net or https://<hsm-name>.managedhsm.azure.net.
+Key Vault data-plane URI — `https://{vault-name}.vault.azure.net` or `https://{hsm-name}.managedhsm.azure.net`.
 
 client\_id: optional string or null
 
@@ -176,7 +176,7 @@ type: "aws"
 
 region: optional string or null
 
-AWS region. Derived from kms\_arn if omitted.
+AWS region. Derived from `kms_arn` if omitted.
 
 role\_arn: optional string or null⁠Deprecated
 
@@ -208,7 +208,7 @@ type: "azure"
 
 vault\_uri: string
 
-Key Vault data-plane URI — https://<vault-name>.vault.azure.net or https://<hsm-name>.managedhsm.azure.net.
+Key Vault data-plane URI — `https://{vault-name}.vault.azure.net` or `https://{hsm-name}.managedhsm.azure.net`.
 
 client\_id: optional string or null
 
@@ -225,6 +225,8 @@ defaultexternal\_key
 updated\_at: string
 
 formatdate-time
+
+
 
 ### Update External Key
 

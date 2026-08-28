@@ -10,27 +10,27 @@ cURL
 
 ##### [Create Environment](api/http/beta/environments/create.md)
 
-POST/v1/environments
+POST/v1/environments
 
 ##### [List Environments](api/http/beta/environments/list.md)
 
-GET/v1/environments
+GET/v1/environments
 
 ##### [Get Environment](api/http/beta/environments/retrieve.md)
 
-GET/v1/environments/{environment\_id}
+GET/v1/environments/{environment\_id}
 
 ##### [Update Environment](api/http/beta/environments/update.md)
 
-POST/v1/environments/{environment\_id}
+POST/v1/environments/{environment\_id}
 
 ##### [Delete Environment](api/http/beta/environments/delete.md)
 
-DELETE/v1/environments/{environment\_id}
+DELETE/v1/environments/{environment\_id}
 
 ##### [Archive Environment](api/http/beta/environments/archive.md)
 
-POST/v1/environments/{environment\_id}/archive
+POST/v1/environments/{environment\_id}/archive
 
 ##### Models
 
@@ -234,35 +234,35 @@ Network policy type
 
 ##### [Get Work Item](api/http/beta/environments/work/retrieve.md)
 
-GET/v1/environments/{environment\_id}/work/{work\_id}
+GET/v1/environments/{environment\_id}/work/{work\_id}
 
 ##### [Poll for Work](api/http/beta/environments/work/poll.md)
 
-GET/v1/environments/{environment\_id}/work/poll
+GET/v1/environments/{environment\_id}/work/poll
 
 ##### [Acknowledge Work](api/http/beta/environments/work/ack.md)
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/ack
+POST/v1/environments/{environment\_id}/work/{work\_id}/ack
 
 ##### [Record Heartbeat](api/http/beta/environments/work/heartbeat.md)
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
+POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
 
 ##### [Stop Work](api/http/beta/environments/work/stop.md)
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/stop
+POST/v1/environments/{environment\_id}/work/{work\_id}/stop
 
 ##### [List Work Items](api/http/beta/environments/work/list.md)
 
-GET/v1/environments/{environment\_id}/work
+GET/v1/environments/{environment\_id}/work
 
 ##### [Update Work Item](api/http/beta/environments/work/update.md)
 
-POST/v1/environments/{environment\_id}/work/{work\_id}
+POST/v1/environments/{environment\_id}/work/{work\_id}
 
 ##### [Get Queue Statistics](api/http/beta/environments/work/stats.md)
 
-GET/v1/environments/{environment\_id}/work/stats
+GET/v1/environments/{environment\_id}/work/stats
 
 ---
 

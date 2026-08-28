@@ -6,7 +6,7 @@
 
 # Get Per-User Cost
 
-GET/v1/organizations/analytics/user\_cost\_report
+GET/v1/organizations/analytics/user\_cost\_report
 
 Get per-user cost in USD across a date range.
 
@@ -170,11 +170,27 @@ Opaque cursor from a previous response's `next_page` field.
 
 
 
-products: optional array of string
+products: optional array of "chat" or "claude-tag" or "claude\_code" or 4 more
 
-Product surfaces to include. Defaults to all products. Values include "chat", "claude\_code", "cowork", "office\_agent", "claude\_in\_chrome", "claude\_design", and "claude-in-slack". "claude-in-slack" (with hyphens) is Claude Tag, the Claude product in Slack. A similarly spelled legacy value (underscores instead of hyphens) identifies the retiring v1 Slack chat bot and appears only for organizations that used it.
+Product surfaces to include. Defaults to all products.
 
 maxItems100
+
+One of the following:
+
+"chat"
+
+"claude-tag"
+
+"claude\_code"
+
+"claude\_design"
+
+"claude\_in\_chrome"
+
+"cowork"
+
+"office\_agent"
 
 
 
@@ -220,6 +236,8 @@ maxItems100
 
 UserCost object{ data, data\_refreshed\_at, has\_more, 2 more }
 
+
+
 ### Get Per-User Cost
 
 cURL
@@ -254,7 +272,7 @@ Response 200
       "ending_at": "2019-12-27T18:11:19.117Z",
       "inference_geo": "global",
       "list_amount": "51600.000000",
-      "model": "claude-opus-4-6",
+      "model": "claude-opus-5",
       "product": "chat",
       "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
       "requests": 128,
@@ -295,7 +313,7 @@ Response 200
       "ending_at": "2019-12-27T18:11:19.117Z",
       "inference_geo": "global",
       "list_amount": "51600.000000",
-      "model": "claude-opus-4-6",
+      "model": "claude-opus-5",
       "product": "chat",
       "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
       "requests": 128,

@@ -6,7 +6,7 @@
 
 # List External Keys
 
-GET/v1/organizations/external\_keys
+GET/v1/organizations/external\_keys
 
 List external key configs in the caller's organization.
 
@@ -107,7 +107,7 @@ type: "aws"
 
 region: optional string or null
 
-AWS region. Derived from kms\_arn if omitted.
+AWS region. Derived from `kms_arn` if omitted.
 
 role\_arn: optional string or null⁠Deprecated
 
@@ -139,7 +139,7 @@ type: "azure"
 
 vault\_uri: string
 
-Key Vault data-plane URI — https://<vault-name>.vault.azure.net or https://<hsm-name>.managedhsm.azure.net.
+Key Vault data-plane URI — `https://{vault-name}.vault.azure.net` or `https://{hsm-name}.managedhsm.azure.net`.
 
 client\_id: optional string or null
 
@@ -160,6 +160,8 @@ formatdate-time
 next\_page: string or null
 
 Opaque cursor for the next page, or null if no more results. Pass as `?page=` to fetch the next page.
+
+
 
 ### List External Keys
 

@@ -8,7 +8,7 @@ cURL
 
 # Upload File
 
-POST/v1/files
+POST/v1/files
 
 Upload File
 
@@ -122,11 +122,23 @@ The file to upload
 
 formatbinary
 
+
+
+expires\_in\_seconds: optional number
+
+Seconds from upload until the file expires and its bytes become permanently unavailable. Must be between 3600 (one hour) and 7776000 (ninety days).
+
+minimum3600
+
+maximum7776000
+
 ##### Returns
 
 
 
-BetaFileMetadata object{ id, created\_at, filename, 5 more }
+BetaFileMetadata object{ id, created\_at, filename, 6 more }
+
+
 
 ### Upload File
 
@@ -138,7 +150,6 @@ cURL
 curl https://api.anthropic.com/v1/files \
     -H 'Content-Type: multipart/form-data' \
     -H 'anthropic-version: 2023-06-01' \
-    -H 'anthropic-beta: files-api-2025-04-14' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -F 'file=@/path/to/file'
 ```
@@ -156,6 +167,7 @@ Response 200
   "size_bytes": 102400,
   "type": "file",
   "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z",
   "scope": {
     "id": "id",
     "type": "session"
@@ -178,6 +190,7 @@ Response 200
   "size_bytes": 102400,
   "type": "file",
   "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z",
   "scope": {
     "id": "id",
     "type": "session"

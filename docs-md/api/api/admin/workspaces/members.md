@@ -8,23 +8,23 @@
 
 ##### [Create Workspace Member](api/http/admin/workspaces/members/create.md)
 
-POST/v1/organizations/workspaces/{workspace\_id}/members
+POST/v1/organizations/workspaces/{workspace\_id}/members
 
 ##### [Get Workspace Member](api/http/admin/workspaces/members/retrieve.md)
 
-GET/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+GET/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 ##### [List Workspace Members](api/http/admin/workspaces/members/list.md)
 
-GET/v1/organizations/workspaces/{workspace\_id}/members
+GET/v1/organizations/workspaces/{workspace\_id}/members
 
 ##### [Update Workspace Member](api/http/admin/workspaces/members/update.md)
 
-POST/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+POST/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 ##### [Delete Workspace Member](api/http/admin/workspaces/members/delete.md)
 
-DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 ##### Models
 

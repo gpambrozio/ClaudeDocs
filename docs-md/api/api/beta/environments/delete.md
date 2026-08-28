@@ -8,7 +8,7 @@ cURL
 
 # Delete Environment
 
-DELETE/v1/environments/{environment\_id}
+DELETE/v1/environments/{environment\_id}
 
 Delete an environment by ID. Returns a confirmation of the deletion.
 
@@ -135,6 +135,8 @@ type: "environment\_deleted"
 The type of response
 
 defaultenvironment\_deleted
+
+
 
 ### Delete Environment
 

@@ -6,7 +6,7 @@
 
 # Create Workspace Member
 
-POST/v1/organizations/workspaces/{workspace\_id}/members
+POST/v1/organizations/workspaces/{workspace\_id}/members
 
 Create Workspace Member
 
@@ -26,7 +26,7 @@ ID of the User.
 
 workspace\_role: "workspace\_admin" or "workspace\_developer" or "workspace\_restricted\_developer" or "workspace\_user"
 
-Role of the new Workspace Member. Cannot be "workspace\_billing".
+Role of the new Workspace Member. Cannot be `workspace_billing`.
 
 One of the following:
 
@@ -79,6 +79,8 @@ One of the following:
 "workspace\_restricted\_developer"
 
 "workspace\_user"
+
+
 
 ### Create Workspace Member
 

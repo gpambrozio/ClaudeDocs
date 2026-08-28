@@ -8,7 +8,7 @@ cURL
 
 # Archive Environment
 
-POST/v1/environments/{environment\_id}/archive
+POST/v1/environments/{environment\_id}/archive
 
 Archive an environment by ID. Archived environments cannot be used to create new sessions.
 
@@ -123,6 +123,8 @@ One of the following:
 BetaEnvironment object{ id, archived\_at, config, 7 more }
 
 Unified Environment resource for both cloud and self-hosted environments.
+
+
 
 ### Archive Environment
 

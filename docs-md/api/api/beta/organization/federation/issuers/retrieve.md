@@ -8,7 +8,7 @@ cURL
 
 # Get Federation Issuer
 
-GET/v1/organizations/federation\_issuers/{federation\_issuer\_id}
+GET/v1/organizations/federation\_issuers/{federation\_issuer\_id}
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -130,6 +130,8 @@ Registered external OIDC identity provider.
 
 Records an external IdP the organization trusts for the RFC 7523
 jwt-bearer grant. The `issuer_url` must match the JWT `iss` claim exactly.
+
+
 
 ### Get Federation Issuer
 

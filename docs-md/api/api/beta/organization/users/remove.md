@@ -8,7 +8,7 @@ cURL
 
 # Remove User
 
-DELETE/v1/organizations/users/{user\_id}
+DELETE/v1/organizations/users/{user\_id}
 
 Remove a member from the organization.
 
@@ -33,6 +33,8 @@ Deleted object type.
 For Users, this is always `"user_deleted"`.
 
 defaultuser\_deleted
+
+
 
 ### Remove User
 

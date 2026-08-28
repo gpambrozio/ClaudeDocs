@@ -8,7 +8,7 @@ cURL
 
 # Reveal Tunnel Token
 
-POST/v1/tunnels/{tunnel\_id}/reveal\_token
+POST/v1/tunnels/{tunnel\_id}/reveal\_token
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
@@ -135,6 +135,8 @@ tunnel\_token: string
 The connector token used to run the tunnel. Treat as a credential.
 
 type: "tunnel\_token"
+
+
 
 ### Reveal Tunnel Token
 

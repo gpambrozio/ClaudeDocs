@@ -8,7 +8,7 @@ cURL
 
 # List Work Items
 
-GET/v1/environments/{environment\_id}/work
+GET/v1/environments/{environment\_id}/work
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
@@ -143,6 +143,8 @@ One of the following:
 BetaSelfHostedWorkListResponse object{ data, next\_page }
 
 Response when listing work items with cursor-based pagination.
+
+
 
 ### List Work Items
 

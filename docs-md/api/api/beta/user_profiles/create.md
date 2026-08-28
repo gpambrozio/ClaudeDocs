@@ -8,7 +8,7 @@ cURL
 
 # Create User Profile
 
-POST/v1/user\_profiles
+POST/v1/user\_profiles
 
 Create User Profile
 
@@ -169,6 +169,8 @@ One of the following:
 
 
 BetaUserProfile object{ id, created\_at, metadata, 7 more }
+
+
 
 ### Create User Profile
 

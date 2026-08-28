@@ -8,7 +8,7 @@ cURL
 
 # List Session Threads
 
-GET/v1/sessions/{session\_id}/threads
+GET/v1/sessions/{session\_id}/threads
 
 List Session Threads
 
@@ -257,6 +257,8 @@ Cumulative token usage for a session thread across all turns.
 next\_page: optional string or null
 
 Opaque cursor for the next page. Null when no more results.
+
+
 
 ### List Session Threads
 

@@ -8,7 +8,7 @@ cURL
 
 # Retrieve Message Batch results
 
-GET/v1/messages/batches/{message\_batch\_id}/results
+GET/v1/messages/batches/{message\_batch\_id}/results
 
 Streams the results of a Message Batch as a `.jsonl` file.
 
@@ -47,6 +47,8 @@ Processing result for this request.
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
 One of the following:
+
+
 
 ### Retrieve Message Batch results
 

@@ -6,7 +6,7 @@
 
 # Download Code Artifact Version Content
 
-GET/v1/compliance/apps/code/artifacts/{artifact\_id}/versions/{version\_id}
+GET/v1/compliance/apps/code/artifacts/{artifact\_id}/versions/{version\_id}
 
 Streams the content of one version of a Claude Code Artifact as the
 response body.
@@ -34,6 +34,8 @@ Opaque version identifier from the Artifact's `versions` list
 ##### Headers
 
 "x-api-key": optional string
+
+
 
 ### Download Code Artifact Version Content
 

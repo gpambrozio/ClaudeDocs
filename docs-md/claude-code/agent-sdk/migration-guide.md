@@ -37,28 +37,8 @@ import { query, tool, createSdkMcpServer } from "@anthropic-ai/claude-code";
 import { query, tool, createSdkMcpServer } from "@anthropic-ai/claude-agent-sdk";
 ```
 
-**4. Update package.json dependencies:**
-If you have the package listed in your `package.json`, update it:
-Before:
-
-```shiki
-{
-  "dependencies": {
-    "@anthropic-ai/claude-code": "^0.0.42"
-  }
-}
-```
-
-After:
-
-```shiki
-{
-  "dependencies": {
-    "@anthropic-ai/claude-agent-sdk": "^0.3.0"
-  }
-}
-```
-
+**4. Update package.json:**
+If `@anthropic-ai/claude-code` is still listed in your `package.json`, replace it with `@anthropic-ai/claude-agent-sdk` and update the version range as well, for example from `"^0.0.42"` to `"^0.3.0"`.
 **5. Review [breaking changes](#breaking-changes)**
 Make any code changes needed to complete the migration.
 
@@ -175,60 +155,11 @@ async def main():
 asyncio.run(main())
 ```
 
-**Why this changed:** Provides better control and isolation for SDK applications. You can now build agents with custom behavior without inheriting Claude Code’s CLI-focused instructions.
-
 ### [​](#settings-sources-default) Settings sources default
 
 This default was briefly changed in v0.1.0 to load no filesystem settings and then reverted, so no migration action is needed.
 **Current behavior:** Omitting `settingSources` on `query()` loads user, project, and local filesystem settings, matching the CLI. This includes `~/.claude/settings.json`, `.claude/settings.json`, `.claude/settings.local.json`, CLAUDE.md files, and custom commands.
-To run isolated from filesystem settings, pass an empty array:
-
-TypeScript
-
-Python
-
-```shiki
-import { query } from "@anthropic-ai/claude-agent-sdk";
-
-const isolatedResult = query({
-  prompt: "Hello",
-  options: {
-    settingSources: [] // No filesystem settings loaded
-  }
-});
-
-// Or load only specific sources:
-const projectOnlyResult = query({
-  prompt: "Hello",
-  options: {
-    settingSources: ["project"] // Only project settings
-  }
-});
-```
-
-```shiki
-from claude_agent_sdk import query, ClaudeAgentOptions
-import asyncio
-
-async def main():
-    async for message in query(
-        prompt="Hello",
-        options=ClaudeAgentOptions(setting_sources=[]),  # No filesystem settings loaded
-    ):
-        print(message)
-
-    # Or load only specific sources:
-    async for message in query(
-        prompt="Hello",
-        options=ClaudeAgentOptions(
-            setting_sources=["project"]  # Only project settings
-        ),
-    ):
-        print(message)
-
-asyncio.run(main())
-```
-
+To run isolated from filesystem settings, pass `settingSources: []`, or `setting_sources=[]` in Python. See [Control filesystem settings with settingSources](agent-sdk/claude-code-features.md) for what each source loads.
 Isolation is especially important for CI/CD pipelines, deployed applications, test environments, and multi-tenant systems where local customizations should not leak in.
 
 Python SDK 0.1.59 and earlier treated an empty list the same as omitting the option, so upgrade before relying on `setting_sources=[]`. See [What settingSources does not control](agent-sdk/claude-code-features.md) for inputs that are read even when `settingSources` is `[]`.

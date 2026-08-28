@@ -6,7 +6,7 @@
 
 # List Compliance Groups
 
-GET/v1/compliance/groups
+GET/v1/compliance/groups
 
 List Compliance Groups
 
@@ -83,6 +83,8 @@ Whether more records exist beyond the current result set
 next\_page: string or null
 
 Token to retrieve the next page. Use this as the 'page' parameter in your next request
+
+
 
 ### List Compliance Groups
 

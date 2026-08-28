@@ -6,6 +6,12 @@
 
 API keys for the Claude API (also called Anthropic API keys) live in the Claude Console. To view your existing keys or create a new one, go to [Settings → API keys](https://platform.claude.com/settings/keys).
 
+##  Choose a key type
+
+When you create a key, you choose its type, which determines what the key can do, where it works, and when it stops working. A **personal key** acts as you, and stops working if you leave an organization. A **service account key** represents a [service account](manage-claude/workload-identity-federation.md) which can be used by workloads such as CI pipelines, production services, or agents. Use a personal key for your own development, and a service account key for anything shared.
+
+You can also create a **workspace key**, a legacy key without an owner: it belongs to the workspace you create it in and keeps working after its creator leaves. It is preferable to use a personal or service account key, as these stop working automatically when their associated account is removed from the organization.
+
 ##  Create an API key
 
 1. 1
@@ -22,14 +28,14 @@ API keys for the Claude API (also called Anthropic API keys) live in the Claude 
 
    Create a key
 
-   Click **Create key**, then give the key a name. You can also choose a [workspace](https://platform.claude.com/settings/workspaces) to scope the key to, and an expiration.
+   Click **Create key**, name the key, choose an [expiration](manage-claude/authentication.md), and set **Linked account** to yourself or a service account. You can also choose a [workspace](https://platform.claude.com/settings/workspaces) to scope the key to.
 4. 4
 
    Copy and store the key
 
    The Console shows the full key, which starts with `sk-ant-`, only once, at creation. Copy it and store it somewhere safe, such as a secrets manager. If you lose a key, you can't view it again in the Console. Create a new key instead.
 
-If the **Create key** button is disabled, you may not have permission to create keys in that workspace. Ask an organization admin to grant you access or to create a key for you.
+If the **Create key** button on the API keys page is disabled, your role may not allow you to create keys there. Ask an organization admin to change your role, or to create a service account key for your workload.
 
 ##  Use your API key
 
@@ -41,11 +47,13 @@ export ANTHROPIC_API_KEY="sk-ant-api03-..."
 
 
 
-The [client SDKs](cli-sdks-libraries/overview.md) read `ANTHROPIC_API_KEY` automatically. Direct HTTP requests send the key in the `x-api-key` header. To make your first request, follow the [Quickstart](get-started.md), and see [Authentication](manage-claude/authentication.md) for the full picture, including short-lived credentials with Workload Identity Federation.
+The [client SDKs](cli-sdks-libraries/overview.md) read `ANTHROPIC_API_KEY` automatically. Direct HTTP requests send the key in the `x-api-key` header. If your API key works on multiple workspaces, you must also send the `anthropic-workspace-id` header on each Claude API request, as shown in [Select a workspace](manage-claude/authentication.md). For the Admin API, see [API keys and the Admin API](#api-keys-and-the-admin-api).
+
+To make your first request, follow the [Quickstart](get-started.md), and see [Authentication](manage-claude/authentication.md) for the full picture, including short-lived credentials with Workload Identity Federation.
 
 ##  API keys and the Admin API
 
-The [Admin API](api/admin.md) includes endpoints for managing your organization's API keys programmatically, such as [Retrieve API Key](api/admin/api_keys/retrieve.md) and [List API Keys](api/admin/api_keys/list.md). These endpoints are for organization admins automating key management. They require a separate [Admin API key](manage-claude/admin-api-keys.md), and they never return a key's secret value, only a partially redacted hint.
+The [Admin API](api/admin.md) includes endpoints for managing your organization's API keys programmatically, such as [Retrieve API Key](api/admin/api_keys/retrieve.md) and [List API Keys](api/admin/api_keys/list.md). These endpoints are for organization admins automating key management. They accept an [Admin API key](manage-claude/admin-api-keys.md), an OAuth token with the `org:admin` scope, or a personal or service account key that isn't scoped to a specific workspace; workspace keys don't work there. They never return a key's secret value, only a partially redacted hint.
 
 Was this page helpful?
 

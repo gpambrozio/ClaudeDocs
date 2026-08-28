@@ -10,11 +10,11 @@ cURL
 
 ##### [Create a Message](api/http/messages/create.md)
 
-POST/v1/messages
+POST/v1/messages
 
 ##### [Count tokens in a Message](api/http/messages/count_tokens.md)
 
-POST/v1/messages/count\_tokens
+POST/v1/messages/count\_tokens
 
 ##### Models
 
@@ -3618,27 +3618,27 @@ One of the following:
 
 ##### [Create a Message Batch](api/http/messages/batches/create.md)
 
-POST/v1/messages/batches
+POST/v1/messages/batches
 
 ##### [Retrieve a Message Batch](api/http/messages/batches/retrieve.md)
 
-GET/v1/messages/batches/{message\_batch\_id}
+GET/v1/messages/batches/{message\_batch\_id}
 
 ##### [List Message Batches](api/http/messages/batches/list.md)
 
-GET/v1/messages/batches
+GET/v1/messages/batches
 
 ##### [Cancel a Message Batch](api/http/messages/batches/cancel.md)
 
-POST/v1/messages/batches/{message\_batch\_id}/cancel
+POST/v1/messages/batches/{message\_batch\_id}/cancel
 
 ##### [Delete a Message Batch](api/http/messages/batches/delete.md)
 
-DELETE/v1/messages/batches/{message\_batch\_id}
+DELETE/v1/messages/batches/{message\_batch\_id}
 
 ##### [Retrieve Message Batch results](api/http/messages/batches/results.md)
 
-GET/v1/messages/batches/{message\_batch\_id}/results
+GET/v1/messages/batches/{message\_batch\_id}/results
 
 ---
 

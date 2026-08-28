@@ -6,7 +6,7 @@
 
 # Get project details
 
-GET/v1/compliance/apps/projects/{project\_id}
+GET/v1/compliance/apps/projects/{project\_id}
 
 Get detailed information for a specific project.
 
@@ -99,6 +99,8 @@ User's email address
 organization\_id: string⁠Deprecated
 
 Organization identifier (tagged ID)
+
+
 
 ### Get project details
 

@@ -105,6 +105,10 @@ You can also hold `Shift` while dragging files into the prompt box to add them a
 ### [​](#resume-past-conversations) Resume past conversations
 
 Click the **Session history** button at the top of the Claude Code panel to access your conversation history. You can search by keyword or browse by time (Today, Yesterday, Last 7 days, etc.). Click any conversation to resume it with the full message history. New sessions receive AI-generated titles based on your first message. Hover over a session to reveal rename and remove actions: rename to give it a descriptive title, or remove to delete it from the list. For more on resuming sessions, see [Manage sessions](sessions.md).
+When the conversation you resume ended in plan mode, Claude Code restores plan mode. Requires Claude Code v2.1.246 or later. Claude Code doesn’t restore it in two cases:
+
+- The extension [chooses the starting permission mode](permission-modes.md) from `claudeCode.initialPermissionMode` or a pick that carries over from an earlier conversation
+- You have `claudeCode.claudeProcessWrapper` configured
 
 ### [​](#resume-cloud-sessions-from-claude-ai) Resume cloud sessions from Claude.ai
 

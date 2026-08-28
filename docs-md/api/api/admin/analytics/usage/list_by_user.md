@@ -6,7 +6,7 @@
 
 # Get Per-User Token Usage
 
-GET/v1/organizations/analytics/user\_usage\_report
+GET/v1/organizations/analytics/user\_usage\_report
 
 Get per-user token usage across a date range.
 
@@ -170,11 +170,27 @@ Opaque cursor from a previous response's `next_page` field.
 
 
 
-products: optional array of string
+products: optional array of "chat" or "claude-tag" or "claude\_code" or 4 more
 
-Product surfaces to include. Defaults to all products. Values include "chat", "claude\_code", "cowork", "office\_agent", "claude\_in\_chrome", "claude\_design", and "claude-in-slack". "claude-in-slack" (with hyphens) is Claude Tag, the Claude product in Slack. A similarly spelled legacy value (underscores instead of hyphens) identifies the retiring v1 Slack chat bot and appears only for organizations that used it.
+Product surfaces to include. Defaults to all products.
 
 maxItems100
+
+One of the following:
+
+"chat"
+
+"claude-tag"
+
+"claude\_code"
+
+"claude\_design"
+
+"claude\_in\_chrome"
+
+"cowork"
+
+"office\_agent"
 
 
 
@@ -220,6 +236,8 @@ maxItems100
 
 UserUsage object{ data, data\_refreshed\_at, has\_more, 2 more }
 
+
+
 ### Get Per-User Token Usage
 
 cURL
@@ -255,7 +273,7 @@ Response 200
       "context_window": "0-200k",
       "ending_at": "2019-12-27T18:11:19.117Z",
       "inference_geo": "global",
-      "model": "claude-opus-4-6",
+      "model": "claude-opus-5",
       "output_tokens": 891000,
       "product": "chat",
       "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
@@ -302,7 +320,7 @@ Response 200
       "context_window": "0-200k",
       "ending_at": "2019-12-27T18:11:19.117Z",
       "inference_geo": "global",
-      "model": "claude-opus-4-6",
+      "model": "claude-opus-5",
       "output_tokens": 891000,
       "product": "chat",
       "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",

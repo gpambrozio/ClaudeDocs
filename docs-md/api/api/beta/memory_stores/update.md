@@ -8,7 +8,7 @@ cURL
 
 # Update a memory store
 
-POST/v1/memory\_stores/{memory\_store\_id}
+POST/v1/memory\_stores/{memory\_store\_id}
 
 Update a memory store
 
@@ -189,6 +189,8 @@ Free-text description of what the store contains, up to 1024 characters. Include
 metadata: optional map[string]
 
 Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+
+
 
 ### Update a memory store
 

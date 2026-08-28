@@ -8,7 +8,7 @@ cURL
 
 # Delete Vault
 
-DELETE/v1/vaults/{vault\_id}
+DELETE/v1/vaults/{vault\_id}
 
 Delete Vault
 
@@ -129,6 +129,8 @@ id: string
 Unique identifier of the deleted vault.
 
 type: "vault\_deleted"
+
+
 
 ### Delete Vault
 

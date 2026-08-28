@@ -8,7 +8,7 @@ cURL
 
 # Get Session
 
-GET/v1/sessions/{session\_id}
+GET/v1/sessions/{session\_id}
 
 Get Session
 
@@ -123,6 +123,8 @@ One of the following:
 BetaManagedAgentsSession object{ id, agent, archived\_at, 14 more }
 
 A Managed Agents `session`.
+
+
 
 ### Get Session
 

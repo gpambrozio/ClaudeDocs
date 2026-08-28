@@ -8,7 +8,7 @@ cURL
 
 # List Vaults
 
-GET/v1/vaults
+GET/v1/vaults
 
 List Vaults
 
@@ -179,6 +179,8 @@ formatdate-time
 next\_page: optional string or null
 
 Pagination token for the next page, or null if no more results.
+
+
 
 ### List Vaults
 

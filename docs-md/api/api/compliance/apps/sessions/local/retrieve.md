@@ -6,7 +6,7 @@
 
 # Retrieve a local session
 
-GET/v1/compliance/apps/sessions/local/{local\_session\_id}
+GET/v1/compliance/apps/sessions/local/{local\_session\_id}
 
 Retrieve one local session.
 
@@ -76,6 +76,8 @@ User's email address. Null when the user's account has been deleted or the user 
 workspace\_id: string or null
 
 Workspace identifier (tagged ID, prefixed `wrkspc_`). Null for sessions not attributed to a workspace.
+
+
 
 ### Retrieve a local session
 

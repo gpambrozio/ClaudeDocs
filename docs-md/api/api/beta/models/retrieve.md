@@ -8,7 +8,7 @@ cURL
 
 # Get a Model
 
-GET/v1/models/{model\_id}
+GET/v1/models/{model\_id}
 
 Get a specific model.
 
@@ -125,6 +125,8 @@ One of the following:
 
 
 BetaModelInfo object{ id, allowed\_fallback\_models, capabilities, 5 more }
+
+
 
 ### Get a Model
 

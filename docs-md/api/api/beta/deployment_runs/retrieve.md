@@ -8,7 +8,7 @@ cURL
 
 # Get Deployment Run
 
-GET/v1/deployment\_runs/{deployment\_run\_id}
+GET/v1/deployment\_runs/{deployment\_run\_id}
 
 Get Deployment Run
 
@@ -123,6 +123,8 @@ One of the following:
 BetaManagedAgentsDeploymentRun object{ id, agent, created\_at, 5 more }
 
 A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
+
+
 
 ### Get Deployment Run
 

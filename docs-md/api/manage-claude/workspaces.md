@@ -8,14 +8,14 @@ Workspaces provide a way to organize your API usage within an organization. Use 
 
 ##  How workspaces work
 
-Every organization has a **Default Workspace** that cannot be renamed, archived, or deleted. When you create additional workspaces, you can assign API keys, members, and resource limits to each one.
+Every organization has a **Default Workspace** that cannot be renamed, archived, or deleted. When you create additional workspaces, you can assign members, service accounts, API keys, and resource limits to each one.
 
 Key characteristics:
 
 - **Workspace identifiers** use the `wrkspc_` prefix (for example, `wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ`)
 - **Maximum 100 workspaces** per organization by default (archived workspaces don't count); contact your account team if you need more
-- **Default Workspace** has a `wrkspc_` ID like any other workspace (returned in the [`anthropic-workspace-id` response header](#identify-the-workspace-behind-an-api-response) and accepted by [Get Workspace](api/admin/workspaces/retrieve.md)), but it doesn't appear in [List Workspaces](api/admin/workspaces/list.md) results, and API keys, usage reports, and cost reports show `null` for its `workspace_id`
-- **API keys** are scoped to a single workspace and can only access resources within that workspace
+- **Default Workspace** has a `wrkspc_` ID like any other workspace (returned in the [`anthropic-workspace-id` response header](#identify-the-workspace-behind-an-api-response) and accepted by [Get Workspace](api/admin/workspaces/retrieve.md)), but it doesn't appear in [List Workspaces](api/admin/workspaces/list.md) results, and API keys, usage reports, and cost reports show `null` for its `workspace_id`, as do all-workspaces API keys (an API key's `scope` field tells them apart; for a key bound to the Default Workspace it carries the real ID)
+- **API keys** can be scoped to a single workspace. In this case, they can only access resources within that workspace. Some API keys can be granted permissions across multiple workspaces, and provide a [workspace ID header](manage-claude/authentication.md) to access resources within that workspace
 
 ###  Claude Code workspace
 
@@ -24,7 +24,7 @@ When a member of your organization first signs in to [Claude Code](overview.md) 
 The Claude Code workspace keeps Claude Code traffic separate from your other API workloads:
 
 - Claude Code mints a per-user API key in this workspace at sign-in. You cannot create keys in it manually from the Console.
-- A Claude Code key stops working if its owner is removed from the workspace or organization, unlike standard workspace keys.
+- A Claude Code key stops working if its owner is removed from the workspace or organization, unlike a workspace key.
 - Claude Code usage is rate-limited separately, and admins can cap its share of the organization's limits under [Settings > Workspaces](/settings/workspaces).
 - It is the only workspace that supports per-user monthly spend limits.
 
@@ -45,6 +45,7 @@ Members can have different roles in each workspace, allowing fine-grained access
 - **Organization admins** automatically receive Workspace Admin access to all workspaces
 - **Organization billing members** automatically receive Workspace Billing access to all workspaces
 - **Organization users and developers** must be explicitly added to each workspace
+- **Service accounts** are added to workspaces from the service account's page in [Settings → Service accounts](/settings/service-accounts) or from the workspace's **Service accounts** tab
 
 ##  Managing workspaces
 
@@ -104,7 +105,7 @@ Each workspace's settings split these across two tabs:
 To archive a workspace, click the ellipsis menu (**...**) and select **Archive**. Archiving:
 
 - Preserves historical data for reporting
-- Deactivates the workspace and all associated API keys
+- Deactivates the workspace and archives every API key created for it
 - Cannot be undone
 
 ###  Using the Admin API
@@ -223,7 +224,10 @@ For complete parameter details, see the [Workspace Members API reference](api/ad
 
 ##  API keys and resource scoping
 
-API keys are scoped to a specific workspace. When you create an API key in a workspace, it can only access resources within that workspace.
+Every request runs in exactly one workspace and can only access resources within that workspace. Which workspace depends on the [key type](manage-claude/authentication.md):
+
+- A **workspace key** (a legacy key without an owner) belongs to the workspace it was created in and always runs there.
+- A **personal key** or **service account key** acts as its user or service account. A single-workspace key always runs in the workspace chosen when it was created. A multi-workspace key runs in the workspace named by each request's `anthropic-workspace-id` header. Accounts must have access to the workspace to use it.
 
 Resources scoped to workspaces include:
 
@@ -231,10 +235,10 @@ Resources scoped to workspaces include:
 - **Message Batches** created through the [Batch API](build-with-claude/batch-processing.md)
 - **Skills** created through the [Skills API](build-with-claude/skills-guide.md)
 
-Some resources cannot be managed with a workspace API key:
+Some resources are managed differently:
 
-- **[MCP tunnels](agents-and-tools/mcp-tunnels/overview.md)** are managed with a `workspace:manage_tunnels` OAuth token obtained through [Workload Identity Federation](manage-claude/workload-identity-federation.md), not a workspace API key. Tunnels are created in a workspace, and the Console **MCP tunnels** list and the Managed Agent server picker show tunnels in the current workspace only; the cap of 10 active tunnels applies organization-wide. Tunnel management requires a role with tunnel management permissions; organization developers can view but not change them.
-- **Workspaces** themselves and **organization members** are managed at the organization level through the [Admin API](manage-claude/admin-api.md), which requires an Admin API key.
+- **[MCP tunnels](agents-and-tools/mcp-tunnels/overview.md)** are managed with a `workspace:manage_tunnels` OAuth token obtained through [Workload Identity Federation](manage-claude/workload-identity-federation.md), not an API key. Tunnels are created in a workspace, and the Console **MCP tunnels** list and the Managed Agent server picker show tunnels in the current workspace only; the cap of 10 active tunnels applies organization-wide. Tunnel management requires a role with tunnel management permissions; organization developers can view but not change them.
+- **Workspaces** themselves and **organization members** are managed at the organization level through the [Admin API](manage-claude/admin-api.md), using an Admin API key, an `org:admin` OAuth token, or a personal or service account key that isn't scoped to a specific workspace.
 
 To look up your organization's workspace IDs, call the [List Workspaces](api/admin/workspaces/list.md) endpoint or find them in the [Claude Console](/settings/workspaces).
 
@@ -284,7 +288,7 @@ The same accessors read the header from other Claude API endpoints too, includin
 With the workspace ID from a response, you can:
 
 - Confirm which workspace's usage, cost, and [rate limits](api/rate-limits.md) the request counted toward
-- Match it against the `workspace_id` field in [Usage and Cost API](manage-claude/usage-cost-api.md) reports and on [Admin API](manage-claude/admin-api.md) objects such as API keys (both report `null` for the Default Workspace)
+- Match it against the `workspace_id` field in [Usage and Cost API](manage-claude/usage-cost-api.md) reports and on [Admin API](manage-claude/admin-api.md) objects such as API keys (both report `null` for the Default Workspace, as API keys also do for all-workspaces keys; an API key's `scope` field tells the two apart and, for a key bound to one workspace, carries that workspace's real ID)
 - Check whether it's your Default Workspace's ID by passing it to [Get Workspace](api/admin/workspaces/retrieve.md) with an [Admin API key](manage-claude/admin-api-keys.md): the Default Workspace comes back with `"name": "Default"`, even though [List Workspaces](api/admin/workspaces/list.md) omits it
 - Open that workspace in the [Console](/settings/workspaces) to find the request's resources, such as sessions, files, message batches, and skills
 

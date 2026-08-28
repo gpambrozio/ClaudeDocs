@@ -8,19 +8,19 @@
 
 ##### [Set Spend Limit](api/http/admin/spend_limits/create.md)
 
-POST/v1/organizations/spend\_limits
+POST/v1/organizations/spend\_limits
 
 ##### [Get Spend Limit](api/http/admin/spend_limits/retrieve.md)
 
-GET/v1/organizations/spend\_limits/{spend\_limit\_id}
+GET/v1/organizations/spend\_limits/{spend\_limit\_id}
 
 ##### [Delete Spend Limit](api/http/admin/spend_limits/delete.md)
 
-DELETE/v1/organizations/spend\_limits/{spend\_limit\_id}
+DELETE/v1/organizations/spend\_limits/{spend\_limit\_id}
 
 ##### [List Effective Spend Limits](api/http/admin/spend_limits/list_effective.md)
 
-GET/v1/organizations/spend\_limits/effective
+GET/v1/organizations/spend\_limits/effective
 
 ##### Models
 
@@ -28,11 +28,13 @@ GET/v1/organizations/spend\_limits/effective
 
 SpendLimit object{ id, amount, created\_at, 5 more }
 
+A configured spend limit: a cap on metered spend for one scope and period.
+
 
 
 SpendSummary object{ actor, amount, currency, 5 more }
 
-Per-member effective-limit report row (GET /spend\_limits/effective).
+Per-member effective-limit report row (`GET /spend_limits/effective`).
 
 
 
@@ -50,19 +52,19 @@ defaultspend\_limit\_deleted
 
 ##### [List Spend Limit Increase Requests](api/http/admin/spend_limits/increase_requests/list.md)
 
-GET/v1/organizations/spend\_limit\_increase\_requests
+GET/v1/organizations/spend\_limit\_increase\_requests
 
 ##### [Get Spend Limit Increase Request](api/http/admin/spend_limits/increase_requests/retrieve.md)
 
-GET/v1/organizations/spend\_limit\_increase\_requests/{spend\_limit\_increase\_request\_id}
+GET/v1/organizations/spend\_limit\_increase\_requests/{spend\_limit\_increase\_request\_id}
 
 ##### [Approve Spend Limit Increase Request](api/http/admin/spend_limits/increase_requests/approve.md)
 
-POST/v1/organizations/spend\_limit\_increase\_requests/{spend\_limit\_increase\_request\_id}/approve
+POST/v1/organizations/spend\_limit\_increase\_requests/{spend\_limit\_increase\_request\_id}/approve
 
 ##### [Deny Spend Limit Increase Request](api/http/admin/spend_limits/increase_requests/deny.md)
 
-POST/v1/organizations/spend\_limit\_increase\_requests/{spend\_limit\_increase\_request\_id}/deny
+POST/v1/organizations/spend\_limit\_increase\_requests/{spend\_limit\_increase\_request\_id}/deny
 
 ---
 

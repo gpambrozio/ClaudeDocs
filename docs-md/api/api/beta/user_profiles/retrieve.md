@@ -8,7 +8,7 @@ cURL
 
 # Get User Profile
 
-GET/v1/user\_profiles/{user\_profile\_id}
+GET/v1/user\_profiles/{user\_profile\_id}
 
 Get User Profile
 
@@ -121,6 +121,8 @@ One of the following:
 
 
 BetaUserProfile object{ id, created\_at, metadata, 7 more }
+
+
 
 ### Get User Profile
 

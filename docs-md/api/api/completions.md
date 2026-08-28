@@ -10,7 +10,7 @@ cURL
 
 ##### [Create a Text Completion](api/http/completions/create.md)
 
-POST/v1/complete
+POST/v1/complete
 
 ##### Models
 

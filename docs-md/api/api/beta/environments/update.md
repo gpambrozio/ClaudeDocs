@@ -8,7 +8,7 @@ cURL
 
 # Update Environment
 
-POST/v1/environments/{environment\_id}
+POST/v1/environments/{environment\_id}
 
 Update an existing environment's configuration.
 
@@ -186,6 +186,8 @@ One of the following:
 BetaEnvironment object{ id, archived\_at, config, 7 more }
 
 Unified Environment resource for both cloud and self-hosted environments.
+
+
 
 ### Update Environment
 

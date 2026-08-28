@@ -6,7 +6,7 @@
 
 # Update Federation Issuer
 
-POST/v1/organizations/federation\_issuers/{federation\_issuer\_id}
+POST/v1/organizations/federation\_issuers/{federation\_issuer\_id}
 
 Partially update a federation issuer.
 
@@ -150,6 +150,8 @@ Registered external OIDC identity provider.
 
 Records an external IdP the organization trusts for the RFC 7523
 jwt-bearer grant. The `issuer_url` must match the JWT `iss` claim exactly.
+
+
 
 ### Update Federation Issuer
 

@@ -2,7 +2,6 @@
 
 The Agent SDK is built on the same foundation as Claude Code, which means your SDK agents have access to the same filesystem-based features: project instructions (`CLAUDE.md` and rules), skills, hooks, and more.
 When you omit `settingSources`, `query()` reads the same filesystem settings as the Claude Code CLI: user, project, and local settings, CLAUDE.md files, and `.claude/` skills, agents, and commands. To run without these, pass `settingSources: []`, which limits the agent to what you configure programmatically. Managed policy settings and the global `~/.claude.json` config are read regardless of this option. See [What settingSources does not control](#what-settingsources-does-not-control).
-For a conceptual overview of what each feature does and when to use it, see [Extend Claude Code](features-overview.md).
 
 ## [​](#control-filesystem-settings-with-settingsources) Control filesystem settings with settingSources
 
@@ -84,6 +83,7 @@ The `cwd` option determines where the SDK looks for project-level inputs. Projec
 | `~/.claude.json` global config | Always read | Relocate with `CLAUDE_CONFIG_DIR` in `env` |
 | Auto memory at `~/.claude/projects/<project>/memory/` | Loaded into the system prompt at session start. The agent writes new memories there with the standard `Write` and `Edit` tools rather than a dedicated memory tool, so those tools must be enabled for the agent to save memories | Set `autoMemoryEnabled: false` in settings, or `CLAUDE_CODE_DISABLE_AUTO_MEMORY=1` in `env` |
 | [claude.ai MCP connectors](mcp.md) | Loaded when the session authenticates with your claude.ai login. Not loaded when `CLAUDE_CODE_OAUTH_TOKEN` holds a token from [`claude setup-token`](authentication.md), which can only make model requests. Passing `mcpServers: {}` does not suppress the connectors | Set `strictMcpConfig: true`, [`disableClaudeAiConnectors: true`](mcp.md) in settings, or `ENABLE_CLAUDEAI_MCP_SERVERS=false` in `env` |
+| [`sandbox.credentials`](sandboxing.md) `deny` entries and file `mask` entries in `~/.claude/settings.json` | When the [command sandbox](sandboxing.md) runs, Claude Code applies the `deny` entries and keeps the `credentials.files` `mask` entries as restrictions even when `settingSources` excludes user settings. Claude Code uses these entries only to narrow what sandboxed commands can access | Remove the entries from `~/.claude/settings.json` |
 
 Do not rely on default `query()` options for multi-tenant isolation. Because the inputs above are read regardless of `settingSources`, an SDK process can pick up host-level configuration and per-directory memory. For multi-tenant deployments, run each tenant in its own filesystem and set `settingSources: []` plus `CLAUDE_CODE_DISABLE_AUTO_MEMORY=1` in `env`. [Server-managed settings](server-managed-settings.md) are fetched when the process authenticates with an organization credential; filesystem isolation does not remove them. See [Secure deployment](agent-sdk/secure-deployment.md).
 
@@ -276,8 +276,6 @@ The Agent SDK gives you access to several ways to extend your agent’s behavior
 | Coordinate multiple Claude Code instances with shared task lists and direct inter-agent messaging | [Agent teams](agent-teams.md) | Not directly configured via SDK options. Agent teams are a CLI feature where one session acts as the team lead, coordinating work across independent teammates |
 | Run deterministic logic on tool calls (audit, block, transform) | [Hooks](agent-sdk/hooks.md) | `hooks` parameter with callbacks, or shell scripts loaded via `settingSources` |
 | Give Claude structured tool access to an external service | [MCP](agent-sdk/mcp.md) | `mcpServers` parameter |
-
-**Subagents versus agent teams:** Subagents are ephemeral and isolated: fresh conversation, one task, summary returned to parent. Agent teams coordinate multiple independent Claude Code instances that share a task list and message each other directly. Agent teams are a CLI feature. See [What subagents inherit](agent-sdk/subagents.md) and the [agent teams comparison](agent-teams.md) for details.
 
 Every feature you enable adds to your agent’s context window. For per-feature costs and how these features layer together, see [Extend Claude Code](features-overview.md).
 

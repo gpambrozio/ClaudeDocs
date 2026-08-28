@@ -6,7 +6,7 @@
 
 # List local sessions
 
-GET/v1/compliance/apps/sessions/local
+GET/v1/compliance/apps/sessions/local
 
 List local sessions across the organizations the key may read.
 
@@ -130,6 +130,8 @@ Workspace identifier (tagged ID, prefixed `wrkspc_`). Null for sessions not attr
 next\_page: string or null
 
 Opaque pagination cursor (prefixed `page_`) for the next page. Null when there is no further page. Treat as an opaque string; the format may change without notice.
+
+
 
 ### List local sessions
 
