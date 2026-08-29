@@ -111,13 +111,14 @@ Fine-grained tool streaming is one of the direct-connection defaults: it is off 
 | [Extended context](build-with-claude/context-windows.md) and [interleaved thinking](build-with-claude/extended-thinking.md) | Beta headers only, no body field | Silently unavailable when the header is stripped; the upstream never sees the capability request | Forward `anthropic-beta` verbatim |
 | Beta [tool fields](agents-and-tools/tool-use/overview.md) | Tool-related beta headers pair with tool schema fields such as `strict` and `defer_loading` | `400` naming the unrecognized tool schema field when the body passes through without its header | Forward both, or [`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1`](#disable-pre-release-capabilities) |
 | [Effort](build-with-claude/effort.md) and [structured outputs](build-with-claude/structured-outputs.md) | The `output_config` body field carries effort, structured-output format, and task budget settings; each pairs with its own beta header | `400` naming `output_config`, often `Extra inputs are not permitted`, on Amazon Bedrock and Google Cloud’s Agent Platform upstreams | Forward the field and its headers together |
+| [Prompt caching](prompt-caching.md) | No beta pairing. Claude Code attaches `cache_control` markers to `system` blocks and to `messages` entries, including `role: "system"` entries appended mid-conversation | No error: the conversation bills as uncached input on every turn, visible as high `input_tokens` with little or no cache activity in `usage` | Forward `cache_control` unchanged wherever it appears, and don’t convert block-form `system` or message content to plain strings |
 | [Token counting](build-with-claude/token-counting.md) | No beta pairing; uses the `count_tokens` endpoint | Claude Code falls back to counting context usage through the messages endpoint | Expose the endpoint so token counts don’t consume inference requests |
 
 The `ANTHROPIC_DEFAULT_*_MODEL_SUPPORTED_CAPABILITIES` [variables](model-config.md) declare model capabilities only in the provider configurations: `CLAUDE_CODE_USE_BEDROCK`, `CLAUDE_CODE_USE_VERTEX`, `CLAUDE_CODE_USE_FOUNDRY`, and [`CLAUDE_CODE_USE_MANTLE`](amazon-bedrock.md). They have no effect behind an `ANTHROPIC_BASE_URL` gateway.
 
 ### [​](#automatic-retry-and-error-forwarding) Automatic retry and error forwarding
 
-Claude Code retries automatically after some upstream rejections and disables the rejected capability for the rest of the conversation. Rejections of the `thinking` field, of [thinking signatures](build-with-claude/extended-thinking.md), and of mid-conversation system messages all recover this way. Context management and tool schema field rejections don’t retry; those `400` errors reach the developer.
+When the upstream rejects the `thinking` field, a [thinking signature](build-with-claude/extended-thinking.md), a mid-conversation system message, or the `cache_control` marker on one of those messages, Claude Code retries the request and disables the rejected capability for the rest of the conversation. Claude Code doesn’t retry context management or tool schema field rejections; those `400` errors reach the developer.
 The retry logic matches on the upstream’s error wording, so forward error response bodies unmodified. A gateway that wraps upstream errors in its own envelope breaks the recovery path, even when it preserves the status code, unless the envelope’s message carries a stable `capability_rejected:` token. [Claude apps gateway substitutes those tokens for cloud providers’ error wording](claude-apps-gateway-config.md), for example `capability_rejected: prompt_too_long`.
 
 ### [​](#disable-pre-release-capabilities) Disable pre-release capabilities
@@ -146,12 +147,13 @@ Discovery applies only to the Anthropic Messages format. It doesn’t run when:
 ### [​](#request-and-response) Request and response
 
 The request is `GET /v1/models?limit=1000` with a 3-second timeout, and any redirect is treated as failure so the credential can’t leak to a redirect target. A gateway that responds slowly or redirects `/v1/models`, even `http` to `https`, fails discovery silently; serve the endpoint directly at the configured base URL.
-The discovery request sends exactly one credential header:
+Claude Code sends the discovery request with both credential headers below and omits a header whose value doesn’t resolve. Sending both headers requires Claude Code v2.1.248 or later. Earlier versions send only `Authorization` when `ANTHROPIC_AUTH_TOKEN` is set and only `x-api-key` otherwise.
 
-- `ANTHROPIC_AUTH_TOKEN` as a bearer token, when set
-- Otherwise the resolved API key, including an [`apiKeyHelper`](llm-gateway-connect.md) value, in the `x-api-key` header
+- `Authorization`: `ANTHROPIC_AUTH_TOKEN` as a bearer token, otherwise the [`apiKeyHelper`](llm-gateway-connect.md) value as a bearer token. In that case Claude Code waits for the helper to return before sending the request.
+- `x-api-key`: the API key Claude Code resolved, such as `ANTHROPIC_API_KEY`. When a helper value is the only credential, this header carries it too, so the value arrives in both headers.
 
-This differs from inference requests, which send a helper value in both headers. A gateway that authenticates `/v1/models` must accept `x-api-key` for helper deployments. Any headers from `ANTHROPIC_CUSTOM_HEADERS` are included as well.
+Claude Code also sends any headers from `ANTHROPIC_CUSTOM_HEADERS`.
+When neither credential header’s value resolves, Claude Code skips discovery and writes a `[gatewayDiscovery] skipped` line to the debug log of a `claude --debug` session.
 Claude Code reads `id` and the optional `display_name` from each entry in the response’s `data` array:
 
 ```shiki

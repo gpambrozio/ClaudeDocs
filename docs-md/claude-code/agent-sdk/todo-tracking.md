@@ -65,7 +65,7 @@ import { query } from "@anthropic-ai/claude-agent-sdk";
 
 try {
   for await (const message of query({
-    prompt: "Optimize my React app performance and track progress with todos",
+    prompt: "Create a static website with a home page, an about page, and a shared stylesheet, and track progress with todos",
     // Keeps the Task tools on models where Claude Code otherwise doesn't provide them.
     options: { maxTurns: 15, permissionMode: "acceptEdits", env: { ...process.env, CLAUDE_CODE_ENABLE_TODO_TOOLS: "1" } },
   })) {
@@ -101,7 +101,7 @@ from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, ToolUs
 async def main():
     try:
         async for message in query(
-            prompt="Optimize my React app performance and track progress with todos",
+            prompt="Create a static website with a home page, an about page, and a shared stylesheet, and track progress with todos",
             # Keeps the Task tools on models where Claude Code otherwise doesn't provide them.
             options=ClaudeAgentOptions(max_turns=15, permission_mode="acceptEdits", env={"CLAUDE_CODE_ENABLE_TODO_TOOLS": "1"}),
         ):

@@ -322,6 +322,11 @@ When a queued entry reaches Claude depends on what you queued.
 - Commands and shell commands: Claude Code holds them until the turn ends, then runs them one at a time
 
 Press `Esc` to interrupt the turn instead. Claude Code keeps what you queued and sends it right away.
+Claude Code runs some commands as soon as you send them instead of queueing them, among them `/model`, `/effort`, and `/fast`. Each of the three changes a setting: the model, the effort level, or fast mode. Whether Claude Code applies the new setting to the turn Claude is already working on, or only from your next turn, differs by command:
+
+- [`/model`](model-config.md): once you confirm the [cache warning](prompt-caching.md), if Claude Code shows one, Claude Code applies your change to the next request it makes in that turn
+- [`/effort`](model-config.md): once you confirm the [cache warning](prompt-caching.md), if Claude Code shows one, Claude Code applies your change to the next request it makes in that turn
+- [`/fast`](fast-mode.md): Claude Code keeps the fast mode setting that was active when the turn started, so your speed change applies from your next turn. If your current model doesn’t support fast mode, turning it on also [switches your model](prompt-caching.md), and Claude Code uses the new model from its next request in that turn
 
 ### [​](#take-back-what-you-queued) Take back what you queued
 
@@ -340,13 +345,7 @@ Claude Code generates each of these next-prompt suggestions with a background re
 
 ### [​](#when-claude-code-skips-suggestions) When Claude Code skips suggestions
 
-In interactive mode, Claude Code leaves prompt suggestions off by default and hides the **Prompt suggestions** toggle in `/config` when it doesn’t evaluate feature flags. That happens in these cases:
-
-- You use Amazon Bedrock, Claude Platform on AWS, Google Cloud’s Agent Platform, or Microsoft Foundry as the model provider, unless a host platform that embeds Claude Code sets [`CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`](env-vars.md) to a true value such as `1`
-- You are signed in to a [Claude apps gateway](claude-apps-gateway.md), or a managed settings file, MDM profile, or policy helper on your machine requires gateway sign-in with [`forceLoginMethod: "gateway"`](settings-reference.md), even before you sign in
-- You set [`CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`, `DISABLE_TELEMETRY`, `DO_NOT_TRACK`, or `DISABLE_GROWTHBOOK`](env-vars.md) to a value that turns off feature-flag evaluation
-
-Outside those cases, if you start a session before Claude Code has ever fetched feature flags, such as your first session after installing on a slow network, Claude Code can also leave suggestions off and hide the **Prompt suggestions** toggle for that session. It shows them starting with the next session after a fetch succeeds.
+In interactive mode, Claude Code leaves prompt suggestions off by default and hides the **Prompt suggestions** toggle in `/config` in a [session that doesn’t fetch feature flags](env-vars.md), such as one on a third-party provider or through a Claude apps gateway, and in a [first session after an install or upgrade](env-vars.md) whose flags haven’t arrived yet.
 Claude Code also skips individual suggestions in several situations, including:
 
 - The prompt cache is cold, to avoid unnecessary cost

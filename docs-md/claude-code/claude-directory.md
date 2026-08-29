@@ -218,7 +218,7 @@ The retention cleanup sweep doesn’t cover the following paths. Claude Code kee
 | `history.jsonl` | Every prompt you’ve typed, with timestamp and project path. Used for up-arrow recall. |
 | `stats-cache.json` | Aggregated token and cost counts shown by `/usage` |
 | `remote-settings.json` | Cached copy of [server-managed settings](server-managed-settings.md) for your organization, or `{}` when your organization has configured none. Only present when the session [fetches them](server-managed-settings.md). Claude Code checks for updates at startup and hourly during a session. Claude Code deletes it when you log out. |
-| `cache/changelog.md` | Cached copy of the Claude Code changelog, used to show release notes after an update. Refreshed in the background. |
+| `cache/changelog.md` | Cached copy of the Claude Code changelog, shown by `/release-notes`. Refreshed in the background. |
 | `policy-limits.json` | Cached feature policy settings for your organization. Only present for some account types. Refreshed automatically. Claude Code deletes it when you log out. |
 
 Other small cache and lock files appear depending on which features you use and are safe to delete.

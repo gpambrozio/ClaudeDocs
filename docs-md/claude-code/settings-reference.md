@@ -255,7 +255,7 @@ The key has no effect on Amazon Bedrock, Google Cloud’s Agent Platform, or Mic
 ### [​](#alwaysthinkingenabled) `alwaysThinkingEnabled`
 
 Turn [extended thinking](model-config.md) off for every session by setting this to `false`. Thinking is on by default, so `true` changes nothing. Most people set this through `/config` rather than by editing the file.
-On models that always think, such as Fable 5, `false` has no effect. On [third-party providers](third-party-integrations.md) Claude Code omits the `thinking` parameter instead of turning thinking off, so adaptive-reasoning models may still think.
+On models that always think, such as Fable 5, `false` has no effect. On [third-party providers](third-party-integrations.md) Claude Code omits the `thinking` parameter instead of turning thinking off, so adaptive-reasoning models may still think. With thinking turned off on the Anthropic API, Claude Code sends effort `high` instead of a higher level to models it knows [don’t accept that combination](errors.md), such as Opus 5.
 
 - **Scope**: [`Any file`](#scopes)
 - **Type**: Boolean
@@ -621,7 +621,7 @@ Choose how long the [prompt cache](prompt-caching.md) holds the requests Claude 
   - `"5m"`: the cache holds for five minutes
   - `"1h"`: the cache holds for an hour
 - **Default**: unset, so each of these requests gets [its default lifetime](prompt-caching.md)
-- **Per-session overrides**: [`FORCE_PROMPT_CACHING_5M`](env-vars.md) takes precedence over everything else, then [`CLAUDE_CODE_SUBAGENT_PROMPT_CACHE_TTL`](env-vars.md), then this key, and last [`ENABLE_PROMPT_CACHING_1H`](env-vars.md), which asks for the one-hour lifetime on every request
+- **Per-session overrides**: [`FORCE_PROMPT_CACHING_5M`](env-vars.md) takes precedence over everything else, then [`CLAUDE_CODE_SUBAGENT_PROMPT_CACHE_TTL`](env-vars.md), then this key, then [`ENABLE_PROMPT_CACHING_1H`](env-vars.md), which asks for the one-hour lifetime on every request. For where a subagent’s own frontmatter value ranks, see [Choose the TTL yourself](prompt-caching.md)
 
 This example gives subagents and the other requests outside the main conversation the one-hour lifetime:
 
@@ -1191,11 +1191,11 @@ Claude Code also removes a trailing `/**`, so `~/build/**` and `~/build` cover t
 
 ### [​](#sandbox-filesystem-allowwrite) `sandbox.filesystem.allowWrite`
 
-Add paths where sandboxed commands can write, beyond the working directory and the session temp directory. Use it when a subprocess such as `kubectl` or a build tool needs to write outside the project.
+Add paths where sandboxed commands can write, beyond the working directory, the directories you’ve added with `--add-dir` or `/add-dir`, and the session temp directory. Use it when a subprocess such as `kubectl` or a build tool needs to write outside the project.
 
 - **Scope**: [`Any file`](#scopes)
 - **Type**: array of path strings, using the [sandbox path prefixes](#sandbox-path-prefixes)
-- **Default**: unset, so sandboxed commands can write only to the working directory and the session temp directory
+- **Default**: unset, so sandboxed commands can write only to the working directory, any directories you’ve added with `--add-dir` or `/add-dir`, and the session temp directory
 
 This lets a build write under `/tmp/build` and lets `kubectl` update your kubeconfig:
 
@@ -3143,7 +3143,9 @@ Set the attribution text Claude Code adds to git commits, including any trailers
 
 - **Scope**: [`Any file`](#scopes)
 - **Type**: string
-- **Default**: unset, so Claude Code adds `Co-Authored-By: <model name> <noreply@anthropic.com>`, where the model name reflects the active model for the session, such as `Claude Sonnet 5`, or `Claude` alone when the session’s model isn’t a public model
+- **Default**: unset, so Claude Code adds `Co-Authored-By: <name> <noreply@anthropic.com>`. The name is the session’s active model, such as `Claude Sonnet 5`.
+  - When Claude Code recognizes the model as a Claude model but can’t confirm its exact version, it writes `Claude` alone.
+  - When it can’t match the model ID to any Claude model, such as a third-party model served through a custom [`ANTHROPIC_BASE_URL`](env-vars.md), it writes `Claude Code`.
 
 This example replaces the default trailer with a custom line and a custom `Co-Authored-By` trailer:
 
@@ -3932,7 +3934,7 @@ The `source` object takes one of these forms:
 - **`settings`**: an inline marketplace declared directly in the settings file without a hosted repository, with `name` and `plugins`
 
 The `git` source type works with any git hosting service, including self-hosted GitLab and Bitbucket. Claude Code clones the repository with the same authentication that `git clone` would use on that machine: configured credential helpers or SSH keys. A provider token such as `GITHUB_TOKEN` takes effect only through a credential helper that reads it. See [Private repositories](plugin-marketplaces.md) for setup details.
-For `github` and `git` sources, set `"skipLfs": true` inside the `source` object, alongside `repo` or `url`, to skip Git LFS downloads when Claude Code clones or updates the marketplace repository. LFS pointer files remain as pointers instead of downloading their content. Use this when the repository contains large LFS objects unrelated to plugin content. Requires Claude Code v2.1.153 or later.
+For `github` and `git` sources, set `"skipLfs": true` inside the `source` object, alongside `repo` or `url`, to skip Git LFS downloads when Claude Code clones or updates the marketplace repository. LFS pointer files remain as pointers instead of downloading their content. Use this when the repository contains large LFS objects unrelated to plugin content.
 For a `url` source, set `headersHelper` inside the `source` object when the credential in `headers` expires and a command has to produce a fresh one. Requires Claude Code v2.1.238 or later. For what the command must print and where Claude Code runs it, see [Write the headersHelper command](plugin-marketplaces.md), and for the cases where Claude Code doesn’t run it, see [When Claude Code skips a headersHelper command](plugin-marketplaces.md). Once you set `headersHelper` on an `https://` marketplace URL, Claude Code runs the command at two points, reusing one run’s output for up to 60 seconds:
 
 - Before each fetch of that marketplace’s `marketplace.json`, including a later refresh. Claude Code sends the printed headers with that fetch.
@@ -4607,7 +4609,7 @@ Pick the default [cloud environment](cloud-environments.md) for cloud sessions y
 
 - **Scope**: [`Any file`](#scopes). For a self-hosted environment ID, user or managed settings, or the `--settings` flag only.
 - **Type**: string, an environment ID such as `env_...` or `ccpool_...`
-- **Default**: unset, so Claude Code uses the Anthropic-hosted environment when one is in your list, and otherwise the first environment it finds
+- **Default**: unset, so Claude Code uses the Anthropic-hosted environment when your list has one, and otherwise the first environment in your list that isn’t a [Remote Control bridge environment](cloud-environments.md), or the first environment when every one is a bridge environment
 - **Per-session overrides**: `--environment` takes precedence over this key for the one cloud session it creates
 
 settings.json
@@ -5091,12 +5093,13 @@ In cloud sessions, Claude Code also ignores server-delivered mid-session MCP upd
 
 ### [​](#forceremotesettingsrefresh) `forceRemoteSettingsRefresh`
 
-Block CLI startup until Claude Code has freshly fetched [server-managed settings](server-managed-settings.md). If the fetch fails, Claude Code exits instead of continuing with cached or no settings. When the key is unset, startup continues without waiting for remote settings. A Cloud gateway session always waits, and exits if the gateway can’t be reached. Set it when your environment can’t accept even a brief window in which a session runs without its managed policy.
+Block CLI startup until Claude Code has freshly fetched [server-managed settings](server-managed-settings.md). If the fetch fails, Claude Code exits instead of continuing with cached or no settings. Set it when your environment can’t accept even a brief window in which a session runs without its managed policy.
+When the key is unset, Claude Code doesn’t block startup on the fetch, though when the developer signs in at startup it waits up to five seconds for the fetch. A Cloud gateway session always waits, and exits if the gateway can’t be reached.
 
 - **Scope**: [`Managed`](#scopes). Claude Code honors a `true` from any admin-controlled managed source, even one that isn’t the highest-priority source.
 - **Type**: Boolean
   - `true`: Claude Code blocks startup until it has freshly fetched server-managed settings, and exits if the fetch fails
-  - `false`: startup continues without waiting for remote settings
+  - `false`: Claude Code doesn’t block startup on the fetch, though at a sign-in startup it waits up to five seconds for the fetch
 - **Default**: `false`
 
 managed-settings.json

@@ -154,7 +154,7 @@ The advisor is one of several ways to combine model strengths. Pick based on whe
 | Advisor tool | At decision points mid-task | Claude calls it when it needs guidance |
 | [`opusplan`](model-config.md) | During plan mode when [allowed by `availableModels`](model-config.md), then switches to Sonnet for execution | You enter plan mode |
 | [Subagents](sub-agents.md) with `model` set | For the entire delegated subtask | Claude delegates, or you invoke the subagent |
-| [`/model`](model-config.md) | For all subsequent turns | You switch models |
+| [`/model`](model-config.md) | From the next request onward | You switch models |
 
 ## [​](#see-also) See also
 

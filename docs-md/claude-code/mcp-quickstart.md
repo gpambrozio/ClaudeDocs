@@ -58,6 +58,7 @@ The server appears with a status indicator:
 | `✘ Failed to connect` | Server didn’t respond. See [Troubleshooting](#troubleshooting) |
 | `✘ Connection error` | The connection attempt threw an error. See [Troubleshooting](#troubleshooting) |
 | `` ⏸ Pending approval (run `claude` to approve) `` | A project-scoped server you haven’t approved yet. See [Edit .mcp.json directly](#edit-mcp-json-directly) |
+| `⊘ Disabled for this project (re-enable via /mcp)` | A server turned off for this project by the project’s `disabledMcpServers` list. See [Disable a server without removing it](mcp.md) |
 
 Some legacy Windows consoles, such as the default console on Windows 10, don’t support these Unicode glyphs and show `√` and `×` in place of `✔` and `✘`.
 

@@ -210,6 +210,7 @@ Set the input box border color and the accent shown while a permission mode or i
 | `bashBorder` | Input box border when entering a `!` shell command |
 | `ide` | IDE connection indicator |
 | `fastMode` | Fast mode indicator |
+| `effortUltra` | The `ultracode` tag on the input box border while [ultracode](model-config.md) is on. Your override of this color takes effect on Claude Code v2.1.239 or later |
 
 #### [​](#diff-rendering) Diff rendering
 
@@ -219,8 +220,8 @@ Color added and removed code in file edits and reviews.
 | --- | --- |
 | `diffAdded` | Background of added lines |
 | `diffRemoved` | Background of removed lines |
-| `diffAddedDimmed` | Background of unchanged context near added lines |
-| `diffRemovedDimmed` | Background of unchanged context near removed lines |
+| `diffAddedDimmed` | Background of added lines in the dimmed diff shown after you reject an edit |
+| `diffRemovedDimmed` | Background of removed lines in the dimmed diff shown after you reject an edit |
 | `diffAddedWord` | Word-level highlight within an added line |
 | `diffRemovedWord` | Word-level highlight within a removed line |
 

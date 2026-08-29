@@ -27,6 +27,7 @@ export NO_PROXY="*"
 ```
 
 Lowercase variants also work, and Claude Code uses the first one that’s set in the order `https_proxy`, `HTTPS_PROXY`, `http_proxy`, `HTTP_PROXY`.
+Claude Code never sends its WebSocket connections to `localhost`, `::1`, or `127.0.0.0/8` through the proxy, so you don’t need a loopback entry in `NO_PROXY` for them.
 
 Claude Code does not support SOCKS proxies.
 
@@ -149,22 +150,25 @@ An already-running supervisor keeps the launch configuration it started with. Af
 
 ## [​](#streaming-idle-watchdogs) Streaming idle watchdogs
 
-Claude Code runs three independent timers that abort a streaming model response when it goes quiet, so a dead connection fails and retries instead of hanging. Each timer watches a different signal:
+Claude Code runs four independent timers that abort a streaming model response when it goes quiet, so a dead connection fails and retries instead of hanging. The first-byte deadline covers the wait for response headers, before any of the response has arrived. Each of the other three watches a live response for a different signal.
 
 | Timer | Aborts when | Runs on | Default timeout |
 | --- | --- | --- | --- |
+| First-byte deadline | No response headers arrive after Claude Code sends the request | Direct Anthropic API and [Claude Platform on AWS](claude-platform-on-aws.md), including through an HTTPS proxy, but not when `ANTHROPIC_BASE_URL` or `ANTHROPIC_AWS_BASE_URL` routes them through a [gateway](gateways.md). Opt-in on Amazon Bedrock with `CLAUDE_ENABLE_BYTE_WATCHDOG_BEDROCK=1`; doesn’t run on Google Cloud’s Agent Platform or Microsoft Foundry | 180 seconds on the direct Anthropic API, 300 seconds elsewhere, plus one second per 32KB of request body |
 | Event-level watchdog | No response events parse. On connections where the byte-level watchdog runs, arriving bytes, including keep-alive pings, also reset this watchdog, for up to about five minutes without a parsed event | Every provider | 300 seconds |
 | Byte-level watchdog | No bytes arrive on the wire, including SSE keep-alive pings | Direct Anthropic API, [Claude Platform on AWS](claude-platform-on-aws.md), and [gateway](gateways.md) connections, including a custom `ANTHROPIC_BASE_URL`. Opt-in on Amazon Bedrock `vnd.amazon.eventstream` responses with `CLAUDE_ENABLE_BYTE_WATCHDOG_BEDROCK=1`; doesn’t run on Google Cloud’s Agent Platform or Microsoft Foundry | 180 seconds on the direct Anthropic API, 300 seconds elsewhere |
 | Body idle timeout | No bytes arrive for 5 minutes | Providers other than the direct Anthropic API and Claude Platform on AWS, unless [`API_FORCE_IDLE_TIMEOUT`](env-vars.md) changes that | 5 minutes |
 
 Configure the timers with these variables, each detailed in the [environment variables reference](env-vars.md):
 
-- `CLAUDE_ENABLE_STREAM_WATCHDOG` and `CLAUDE_ENABLE_BYTE_WATCHDOG` force the corresponding watchdog on with `1` or off with `0`, within the connections the table lists; neither variable extends a watchdog to a connection type it doesn’t cover.
+- `CLAUDE_ENABLE_STREAM_WATCHDOG` and `CLAUDE_ENABLE_BYTE_WATCHDOG` force the corresponding watchdog on with `1` or off with `0`, within the connections the table lists; neither variable extends a watchdog to a connection type it doesn’t cover. `CLAUDE_ENABLE_BYTE_WATCHDOG` set to `0` also turns off the first-byte deadline.
 - `CLAUDE_STREAM_IDLE_TIMEOUT_MS` sets both watchdogs’ timeout. Claude Code raises values below 5 minutes to 5 minutes, and caps the value at 30 minutes for the byte-level watchdog.
-- `CLAUDE_BYTE_STREAM_IDLE_TIMEOUT_MS` sets the byte-level watchdog’s timeout alone, clamped to between 10 seconds and 30 minutes, and takes precedence over `CLAUDE_STREAM_IDLE_TIMEOUT_MS` for that watchdog.
+- `CLAUDE_BYTE_STREAM_IDLE_TIMEOUT_MS` sets the byte-level watchdog’s timeout without changing the event-level watchdog’s, clamped to between 10 seconds and 30 minutes, and takes precedence over `CLAUDE_STREAM_IDLE_TIMEOUT_MS` for that watchdog.
+- `CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS` sets the first-byte deadline directly. Leave it unset and Claude Code derives the deadline from the byte-level watchdog’s timeout or from an `API_TIMEOUT_MS` you set above that timeout, so `CLAUDE_STREAM_IDLE_TIMEOUT_MS` and `CLAUDE_BYTE_STREAM_IDLE_TIMEOUT_MS` change the deadline too. For the clamps, the upload allowance, and the `API_TIMEOUT_MS` cap, see [No response from API](errors.md).
 - `API_FORCE_IDLE_TIMEOUT` set to `0` turns the body idle timeout off, and set to `1` turns it on for every provider. The watchdogs run independently of it, so to let a stream pause longer than their thresholds, also raise or disable them.
 
 When a watchdog aborts a stalled stream, Claude Code treats it as a mid-stream failure: depending on how far the response had got, it retries the request or ends the turn with an error, keeps the completed output and shows an [incomplete-response notice](errors.md), or ends the turn normally. [Automatic retries](errors.md) says where each outcome applies. In a [non-interactive session](headless.md), Claude Code may first prompt Claude to continue the cut-off response; [that notice’s entry](errors.md) says when it does and when you still see the notice.
+When the first-byte deadline fires, no response has started, so there is no partial output to keep. For how Claude Code re-sends the request and when the turn ends instead, see [No response from API](errors.md).
 
 ## [​](#network-access-requirements) Network access requirements
 
@@ -183,7 +187,7 @@ Claude Code requires access to the following URLs. Allowlist these in your proxy
 | `registry.npmjs.org` | Plugin installs (fetching npm-source plugin packages and installing plugins’ Node.js package dependencies), `npx`-launched MCP servers, and the package registry for npm and bun installs of Claude Code itself |
 | `bridge.claudeusercontent.com` | [Claude in Chrome](chrome.md) extension WebSocket bridge |
 | `*.frame.claudeusercontent.com` | [Artifact](artifacts.md) content reads. The CLI fetches an artifact’s files from this host when Claude opens one, and only when the Artifact tool is [available](artifacts.md) for your account. To turn the tool off and drop this requirement, set [`"enableArtifact": false`](settings-reference.md) or [`CLAUDE_CODE_DISABLE_ARTIFACT=1`](env-vars.md); Claude Code also honors the deprecated [`disableArtifact`](settings-reference.md) setting. See [Disable artifacts](artifacts.md) for how these settings interact |
-| `raw.githubusercontent.com` | Changelog feed for [`/release-notes`](commands.md) and the release notes shown after updating |
+| `raw.githubusercontent.com` | Changelog feed for [`/release-notes`](commands.md). In interactive sessions, Claude Code also fetches it in the background at startup when its cached changelog doesn’t yet cover the running version, such as the first start after an update; non-interactive and cloud sessions never fetch it |
 | `http-intake.logs.us5.datadoghq.com` | Operational telemetry events, sent only when the CLI uses the Anthropic API directly, never for Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry. Optional: disable with [`DISABLE_TELEMETRY`](data-usage.md) or `DO_NOT_TRACK` |
 | `browser-intake-us5-datadoghq.com` | Operational error reports, sent when the CLI uses the Anthropic API directly and a server-side rollout gate enables them. Optional: disable with `DISABLE_ERROR_REPORTING` or `DISABLE_TELEMETRY`; see [Telemetry services](data-usage.md) |
 | `formulae.brew.sh` | Update version checks on Homebrew installs. Other install methods don’t contact this host |

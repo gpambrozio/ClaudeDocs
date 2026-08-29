@@ -22,6 +22,24 @@ Usage by model:
 ```
 
 These totals reset when `/clear` starts a new session, so the next session’s total cost starts at $0. Before v2.1.211, they kept accumulating across `/clear` for the lifetime of the Claude Code process.
+For a response from the Claude API billed at the 1.1× [data residency rate](about-claude/pricing.md), Claude Code multiplies the list price of that response’s tokens by 1.1 in the session cost figure. Claude Code reports the same total in the [status line’s cost field](statusline.md) and compares it with [`--max-budget-usd`](cli-reference.md). Before v2.1.239, Claude Code didn’t apply the 1.1× to those responses, so the session cost figure was lower than the bill.
+
+#### [​](#prompt-cache-statistics) Prompt cache statistics
+
+After the main conversation’s first API response, Claude Code also adds a `Prompt cache (main)` line to the Session block, summarizing the session’s [prompt cache](prompt-caching.md) use: the request count, the share of input tokens served from cache, cache misses, and whether the cache is warm right now. Requires Claude Code v2.1.251 or later.
+
+```shiki
+Prompt cache (main):   14 requests · 91% of input tokens from cache · 2 misses (last 6m 10s ago, 310.2k tokens re-cached) · 1 expected rebuild (compaction or tool-result clearing) · warm (1h TTL, last activity 40s ago)
+```
+
+The misses, expected rebuilds, and warm or cold parts of the line mean the following:
+
+- **Misses**: requests that re-processed content the cache already held, with the time of the last miss and how many tokens those requests wrote back to the cache. Claude Code counts a request as a miss when the request re-processed more than 5% and at least 2,000 tokens of what it could have read from cache. [Actions that invalidate the cache](prompt-caching.md) lists the usual causes.
+- **Expected rebuilds**: when Claude Code has itself just rewritten the conversation, by [compaction](prompt-caching.md) or by clearing old tool results from context, it counts the same kind of miss as an expected rebuild instead. This part appears only after at least one expected rebuild has happened.
+- **Warm or cold**: whether the cached prefix is still within its [cache lifetime](prompt-caching.md), with the TTL in effect. When the cache is cold, the line shows how long the session has been idle. When no response has reported cache tokens, the line ends with `no prompt caching reported by the API` instead.
+
+The counts come from the cache token fields in the API’s responses, so the line works on every provider and gateway. It covers the main conversation only, not subagents. `/clear` resets it with the rest of the Session block.
+Status line scripts can read the same numbers from the [`prompt_cache` object](statusline.md).
 
 #### [​](#plan-usage-breakdown) Plan usage breakdown
 
@@ -246,13 +264,14 @@ cmd=$(echo "$input" | jq -r '.tool_input.command')
 # If running tests, filter to show only failures
 if [[ "$cmd" =~ ^(npm test|pytest|go test) ]]; then
   filtered_cmd="$cmd 2>&1 | grep -A 5 -E '(FAIL|ERROR|error:)' | head -100"
-  echo "{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"allow\",\"updatedInput\":{\"command\":\"$filtered_cmd\"}}}"
+  echo "$input" | jq --arg filtered "$filtered_cmd" \
+    '{hookSpecificOutput: {hookEventName: "PreToolUse", permissionDecision: "allow", updatedInput: (.tool_input + {command: $filtered})}}'
 else
   echo "{}"
 fi
 ```
 
-To verify the setup, run `/hooks` and check that the hook appears under PreToolUse. You can also start Claude Code with `claude --debug` and run a test command such as `npm test`. The debug log shows `modified tool input keys: [command]` when the hook rewrites the command.
+To verify the setup, run `/hooks` and check that the hook appears under PreToolUse. You can also start Claude Code with `claude --debug-file ./claude-debug.txt` and ask Claude to run `npm test`. When the hook rewrites the command, that log file contains a `modified tool input keys` line listing `command` and the other Bash input fields.
 
 ### [​](#move-instructions-from-claude-md-to-skills) Move instructions from CLAUDE.md to skills
 

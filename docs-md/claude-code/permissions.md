@@ -346,6 +346,8 @@ When Claude accesses a symlink, permission rules check two paths: the symlink it
 - **Deny rules**: apply when either the symlink path or its target matches. A symlink that points to a denied file is itself denied.
 
 For example, with `Read(./project/**)` allowed and `Read(~/.ssh/**)` denied, a symlink at `./project/key` pointing to `~/.ssh/id_rsa` is blocked: the target fails the allow rule and matches the deny rule.
+When a tool opens an approved file, Claude Code [confirms the path still resolves to the location the permission check approved](errors.md).
+Grep and Glob search the directory the `path` argument resolves to. Claude Code applies `Read` deny rules to that directory.
 
 ### [​](#webfetch) WebFetch
 
