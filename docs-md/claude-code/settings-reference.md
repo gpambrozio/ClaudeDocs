@@ -1,10 +1,22 @@
 # Claude Code settings reference
 
+[Back to index](#all-settings)
+
 This reference page lists each key Claude Code reads from a settings file, plus the [short group of keys](#global-config-settings) it keeps in `~/.claude.json` instead. To pick a file, or check precedence, start with [Claude Code settings](settings.md).
 
 ## [​](#all-settings) All settings
 
 Every key below links to its entry. Scope lists the [files](settings.md) it can go in: `User` is `~/.claude/settings.json`, `Project` is `.claude/settings.json`, `Local` is `.claude/settings.local.json`, and `Managed` is [what your organization deploys](managed-settings.md). `Any file` means all four, and `Global config` means [`~/.claude.json`](#global-config-settings).
+
+/
+
+Topic: All topics▼
+
+Scope: All scopes▼
+
+Sort byKeyTopicScope
+
+219 settings
 
 | Key | Description | Topic | Scope |
 | --- | --- | --- | --- |
@@ -51,6 +63,7 @@ Every key below links to its entry. Scope lists the [files](settings.md) it can 
 | [`crossSessionInbound`](#crosssessioninbound) | Choose whether Claude Code delivers [messages from your other sessions](cross-session-messaging.md), shows a notice without delivering them, or refuses them | Agents, sessions, and worktrees | Any file |
 | [`defaultShell`](#defaultshell) | Choose whether Bash or PowerShell runs the shell commands you type with the [`!` prefix](interactive-mode.md) | Interface and terminal | Any file |
 | [`deniedMcpServers`](#deniedmcpservers) | Block specific [MCP servers](mcp.md) by URL, command, or name | MCP | Any file |
+| [`desktopSessionCleanupPeriodDays`](#desktopsessioncleanupperioddays) | Set an age limit in days for [Claude Desktop and Cowork transcripts](claude-directory.md) | Privacy and telemetry | User or managed |
 | [`dialogExpiry`](#dialogexpiry) | Set how long Claude Code waits for [Remote Control](remote-control.md) or an SDK host to answer a forwarded dialog before it cancels the dialog | Interface and terminal | User or managed |
 | [`diffTool`](#difftool) | Choose whether Claude’s proposed file changes open in the [VS Code](vs-code.md) or [JetBrains](jetbrains.md) diff viewer or stay in the terminal | Global config settings | Global config |
 | [`disableAgentView`](#disableagentview) | Turn off background agents and [agent view](agent-view.md) | Agents, sessions, and worktrees | Any file |
@@ -5004,6 +5017,22 @@ settings.json
 ```
 
 Setting `0` fails validation, so pick a large value such as `3650` for long retention. To stop Claude Code from writing transcripts at all, see [Plaintext storage](claude-directory.md).
+
+### [​](#desktopsessioncleanupperioddays) `desktopSessionCleanupPeriodDays`
+
+Set an age limit in days for the transcripts of sessions you started or most recently continued in Claude Desktop or Cowork. Without this key, Claude Code [keeps those transcripts at any age](claude-directory.md). Claude Code deletes each one once it’s older than both this limit and [`cleanupPeriodDays`](#cleanupperioddays), so with `cleanupPeriodDays` at its default of 30, a value of `7` still keeps them 30 days. When managed settings set `cleanupPeriodDays`, that period applies instead and this key is ignored. Requires Claude Code v2.1.248 or later.
+
+- **Scope**: [`User or managed`](#scopes). Claude Code also reads the key from a file you pass with `--settings`, and ignores it in project and local settings.
+- **Type**: number of days, a whole number, minimum `0`
+- **Default**: `0`, which sets no age limit
+
+settings.json
+
+```shiki
+{
+  "desktopSessionCleanupPeriodDays": 90
+}
+```
 
 ### [​](#feedbackdrafts) `feedbackDrafts`
 

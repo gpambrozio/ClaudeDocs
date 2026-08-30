@@ -262,7 +262,8 @@ Each cloud session is separated from your machine and from other sessions throug
 
 - **Isolated virtual machines**: each session runs in an isolated, Anthropic-managed VM. Sessions your organization routes to a [self-hosted environment](self-hosted-environments.md) run on your own infrastructure instead, where isolation is your deployment’s responsibility
 - **Network access controls**: in Anthropic-hosted environments, network access is limited by default and can be disabled. In a self-hosted environment, you restrict session egress at your own network boundary. When running with network access disabled, Claude Code can still communicate with the Anthropic API, which may allow data to exit the VM.
-- **Credential protection**: in Anthropic-hosted environments, sensitive credentials such as git credentials or signing keys are never inside the sandbox with Claude Code; authentication is handled through a secure proxy using scoped credentials. Sessions in a self-hosted environment authenticate git with credentials your deployment provides; [Configure git](self-hosted-environments-deploy.md) covers the options, including per-session minted credentials and the same proxy.
+- **Credential protection**: in Anthropic-hosted environments, git credentials and signing keys stay outside the sandbox, and a proxy authenticates on the session’s behalf with scoped credentials. In a self-hosted environment, your deployment supplies git credentials; see [Configure git](self-hosted-environments-deploy.md)
+- **API credentials**: in Anthropic-hosted environments, keys you [add to a cloud environment](cloud-environments.md) stay outside the sandbox the same way, attached to matching requests after they leave the session. A self-hosted environment doesn’t have API credentials
 - **Secure analysis**: code is analyzed and modified within the session’s isolated environment before creating PRs
 
 ## [​](#troubleshooting) Troubleshooting

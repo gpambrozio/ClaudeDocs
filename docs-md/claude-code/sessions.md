@@ -168,7 +168,7 @@ If you resume the same session in two terminals without forking, messages from b
 
 These commands control what’s in the context window without leaving the session:
 
-- **`/clear`**: start fresh with an empty context. Claude Code saves the previous conversation; resume it with `/resume`, or, in the same Claude Code process, from [the rewind menu’s previous-session entry](checkpointing.md). You keep a name you set with `--name` or `/rename` in the new conversation, but not an AI-generated session title
+- **`/clear`**: start fresh with an empty context. Claude Code saves the previous conversation; resume it with `/resume`, or, in the same Claude Code process, from [the rewind menu’s previous-session entry](checkpointing.md). With no argument, the new conversation keeps a name you set with `--name` or `/rename`, but not an AI-generated session title. To name the conversation you’re leaving instead, pass the name, as in `/clear release-prep`; the new conversation then starts unnamed
 - **`/compact [instructions]`**: replace history with a summary, optionally focused on what you specify
 - **`/context`**: show what is currently consuming context
 
@@ -204,6 +204,7 @@ The location, retention, and write behavior are configurable:
 | Move storage off `~/.claude` | [`CLAUDE_CONFIG_DIR`](env-vars.md) | Environment variable |
 | [Name the `<project>` directory yourself](#name-the-project-directory-yourself) | [`CLAUDE_CODE_PROJECT_DIR_NAME`](env-vars.md) | Environment variable |
 | Change the 30-day retention | [`cleanupPeriodDays`](settings-reference.md) | `settings.json` |
+| Set an age limit for [Claude Desktop and Cowork transcripts](claude-directory.md) | [`desktopSessionCleanupPeriodDays`](settings-reference.md) | User settings, managed settings, or `--settings` |
 | Suppress transcript writes in all modes | [`CLAUDE_CODE_SKIP_PROMPT_HISTORY`](env-vars.md) | Environment variable |
 | Suppress writes for one non-interactive run | [`--no-session-persistence`](cli-reference.md) | CLI flag with `claude -p` |
 

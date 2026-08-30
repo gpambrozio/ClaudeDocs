@@ -47,6 +47,7 @@ Most organizations can use a cloud provider directly without additional configur
 - **LLM Gateway**: A service that sits between Claude Code and the cloud provider to handle authentication and routing. Use this if you need centralized usage tracking across teams, custom rate limiting or budgets, or centralized authentication management. Configure with the `ANTHROPIC_BASE_URL`, `ANTHROPIC_BEDROCK_BASE_URL`, `ANTHROPIC_AWS_BASE_URL`, `ANTHROPIC_VERTEX_BASE_URL`, or `ANTHROPIC_FOUNDRY_BASE_URL` environment variables. Learn more in [LLM gateways](llm-gateway.md).
 
 For the per-provider environment variables that route Amazon Bedrock, Microsoft Foundry, or Google Cloud’s Agent Platform through an LLM gateway, see [route to a cloud provider through a gateway](llm-gateway-connect.md). Run `/status` in Claude Code to verify which provider, base URL, and proxy a session is using.
+If your organization uses [customer-managed encryption keys](manage-claude/cmek.md) (CMEK) and routes Claude Code through an LLM gateway or a custom `ANTHROPIC_BASE_URL`, CMEK doesn’t apply to Claude Code’s operational telemetry on those sessions. To turn telemetry off for every developer, deliver `DISABLE_TELEMETRY` through managed settings as shown in [Turn telemetry off for your organization](managed-settings.md).
 
 ## [​](#best-practices-for-organizations) Best practices for organizations
 

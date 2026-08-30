@@ -265,8 +265,8 @@ The LSP tool gives Claude code intelligence from a running language server. Afte
 - Find implementations of an interface
 - Trace call hierarchies
 
-Claude Code keeps the tool inactive until you install a [code intelligence plugin](discover-plugins.md) for your language. Claude Code takes the language server’s configuration from the plugin, and you install the server binary yourself.
-Claude Code keeps the tool active for the rest of a session once it has had a language server available in that session. Claude Code returns an error result for each LSP call on a file whose language server it can’t start. Before v2.1.235, Claude Code deactivated the tool whenever every language server had crashed or failed to start and reactivated it when one recovered.
+Claude Code keeps the tool inactive until you install a [code intelligence plugin](discover-plugins.md) for your language. In [cloud sessions](claude-code-on-the-web.md), Claude Code doesn’t start plugin language servers, so the LSP tool stays inactive there. Claude Code takes the language server’s configuration from the plugin, and you install the server binary yourself.
+Claude Code returns an error result for each LSP call on a file whose language server it can’t start.
 
 ## [​](#monitor-tool) Monitor tool
 

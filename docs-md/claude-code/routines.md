@@ -10,7 +10,7 @@ Each routine can have one or more triggers attached to it:
 - **GitHub**: run automatically in response to repository events such as pull requests or releases
 
 A single routine can combine triggers. For example, a PR review routine can run nightly, trigger from a deploy script, and also react to every new PR.
-Routines are available on Pro, Max, Team, and Enterprise plans with [Claude Code on the web](claude-code-on-the-web.md) enabled. Create and manage them at [claude.ai/code/routines](https://claude.ai/code/routines), or from the CLI with `/schedule`.
+Routines are available on Pro, Max, Team, and Enterprise plans. Create and manage them at [claude.ai/code/routines](https://claude.ai/code/routines), or from the CLI with `/schedule`.
 Team and Enterprise Owners can disable routines for all members with the Routines toggle at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code). When disabled, existing routines stop running and members cannot create new ones.
 This page covers creating a routine, configuring each trigger type, managing runs, and how usage limits apply.
 
@@ -26,7 +26,7 @@ Each example pairs a trigger type with the kind of work routines are suited to: 
 
 ## [​](#create-a-routine) Create a routine
 
-Create a routine from the web at [claude.ai/code/routines](https://claude.ai/code/routines), from the Desktop app, or from the CLI. All three surfaces write to the same cloud account, so a routine you create in one shows up in the others immediately. In the Desktop app’s **Code** tab, click **Routines** in the sidebar, then **New routine**, and choose **Cloud**; choosing **Local** instead creates a [Desktop scheduled task](desktop-scheduled-tasks.md), which runs on your machine rather than in the cloud. If **Routines** is missing from the Desktop sidebar, routines aren’t available to your account: they need a Pro, Max, Team, or Enterprise plan with Claude Code on the web enabled, and on Team and Enterprise plans an Owner can turn them off with the Routines toggle at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code).
+Create a routine from the web at [claude.ai/code/routines](https://claude.ai/code/routines), from the Desktop app, or from the CLI. All three surfaces write to the same cloud account, so a routine you create in one shows up in the others immediately. In the Desktop app’s **Code** tab, click **Routines** in the sidebar or in the sidebar’s **More** menu, then **New routine**, and choose **Cloud**; choosing **Local** instead creates a [Desktop scheduled task](desktop-scheduled-tasks.md), which runs on your machine rather than in the cloud.
 The creation form sets up the routine’s prompt, repositories, environment, connectors, and triggers.
 Routines run autonomously as full Claude Code cloud sessions: there is no permission-mode picker and no approval prompts during a run. The session can run shell commands, use [skills](skills.md) committed to the cloned repository, and call any connectors you include. What a routine can reach is determined by the repositories you select, the [environment’s](cloud-environments.md) network access and variables, and the connectors you include. Scope each of those to what the routine actually needs.
 Routines belong to your individual claude.ai account. They are not shared with teammates, and they count against your account’s daily run allowance. Anything a routine does through your connected GitHub identity or connectors appears as you: commits and pull requests carry your GitHub user, and Slack messages, Linear tickets, or other connector actions use your linked accounts for those services.
@@ -58,7 +58,7 @@ Select an environment
 Pick a [cloud environment](cloud-environments.md) for the routine. Environments control what the cloud session has access to:
 
 - **Network access**: set the level of internet access available during each run
-- **Environment variables**: provide values Claude can use during each run. They’re [visible to anyone who uses the environment](cloud-environments.md), so add credentials with that in mind
+- **Environment variables**: provide values Claude can use during each run. They’re [visible to anyone who uses the environment](cloud-environments.md), so store keys for the APIs Claude calls during a run as [API credentials](cloud-environments.md) instead. That section also lists the requests that never get a credential
 - **Setup script**: install dependencies and tools the routine needs. The result is [cached](cloud-environments.md), so the script doesn’t re-run on every session
 
 A **Default** environment is provided with **Trusted** network access, which allows only the [default allowlist](cloud-environments.md) of package registries, cloud provider APIs, container registries, and common development domains through the session’s network. Connectors you add to the routine reach their services through Anthropic’s servers, so they don’t need allowlist changes. If your routine needs to reach your own services directly, or a domain outside that list, edit the environment’s [network access](cloud-environments.md) before running. To use a separate environment, [create one](cloud-environments.md) first.

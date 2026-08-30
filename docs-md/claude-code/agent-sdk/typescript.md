@@ -1642,6 +1642,8 @@ type HookEvent =
   | "SubagentStop"
   | "PreCompact"
   | "PostCompact"
+  | "PreModelSwitch"
+  | "PostModelSwitch"
   | "PermissionRequest"
   | "PermissionDenied"
   | "Setup"
@@ -1706,6 +1708,8 @@ type HookInput =
   | SubagentStopHookInput
   | PreCompactHookInput
   | PostCompactHookInput
+  | PreModelSwitchHookInput
+  | PostModelSwitchHookInput
   | PermissionRequestHookInput
   | SetupHookInput
   | TeammateIdleHookInput
@@ -1949,6 +1953,44 @@ type PostCompactHookInput = BaseHookInput & {
   hook_event_name: "PostCompact";
   trigger: "manual" | "auto";
   compact_summary: string;
+};
+```
+
+#### [​](#premodelswitchhookinput) `PreModelSwitchHookInput`
+
+Fires before a requested model switch takes effect. `context_tokens` and the fields after it estimate what re-sending the conversation to the new model costs. For the full field descriptions and blocking semantics, see [PreModelSwitch](hooks.md).
+
+```shiki
+type PreModelSwitchHookInput = BaseHookInput & {
+  hook_event_name: "PreModelSwitch";
+  from_model: string;
+  to_model: string;
+  requested_model: string | null;
+  source: "command" | "picker" | "sdk";
+  context_tokens: number;
+  prompt_cache_warm: boolean;
+  cache_ttl: "5m" | "1h";
+  estimated_cache_write_usd: number;
+  pricing: "configured" | "catalog" | "default";
+};
+```
+
+#### [​](#postmodelswitchhookinput) `PostModelSwitchHookInput`
+
+Fires after the session’s model changes. It carries the same fields as `PreModelSwitchHookInput`, with two more `source` values. See [PostModelSwitch](hooks.md).
+
+```shiki
+type PostModelSwitchHookInput = BaseHookInput & {
+  hook_event_name: "PostModelSwitch";
+  from_model: string;
+  to_model: string;
+  requested_model: string | null;
+  source: "command" | "picker" | "sdk" | "auto" | "resume";
+  context_tokens: number;
+  prompt_cache_warm: boolean;
+  cache_ttl: "5m" | "1h";
+  estimated_cache_write_usd: number;
+  pricing: "configured" | "catalog" | "default";
 };
 ```
 
@@ -2204,6 +2246,22 @@ type SyncHookJSONOutput = {
       }
     | {
         hookEventName: "Setup";
+        additionalContext?: string;
+      }
+    | {
+        hookEventName: "PreModelSwitch";
+        /**
+         * Same contract as PreToolUse: "allow" proceeds, "deny" cancels
+         * the switch, "ask" asks the user to confirm. Only /model in an
+         * interactive session shows that prompt; every other surface,
+         * set_model requests included, treats "ask" as a refusal.
+         */
+        permissionDecision?: "allow" | "deny" | "ask";
+        permissionDecisionReason?: string;
+      }
+    | {
+        hookEventName: "PostModelSwitch";
+        /** Reaches the model with the next request the new model serves. */
         additionalContext?: string;
       }
     | {

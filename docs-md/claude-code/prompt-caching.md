@@ -63,6 +63,7 @@ These actions cause the next request to miss part or all of the cache. You see a
 Each model has its own cache. Switching with [`/model`](model-config.md) means the next request reads the entire conversation history with no cache hits, even though the content is identical.
 When you run `/model` at the terminal, Claude Code asks you to confirm the switch only while the cache is still warm. The cache stays warm for one [cache TTL](#cache-lifetime) after Claude Code last sent a request in this conversation or Claude last responded. Once that time passes, the cache has expired, so Claude Code switches without asking.
 Before v2.1.238, Claude Code didn’t check the cache TTL and asked even after the cache had expired.
+You can also require this confirmation or skip it with a [PreModelSwitch hook](hooks.md).
 The [`opusplan` model setting](model-config.md) resolves to Opus during plan mode and Sonnet during execution, so each plan-mode toggle is a model switch and starts a fresh cache.
 [Automatic model fallback](model-config.md) on Fable 5 and Opus 5 is also a model switch. When a safety classifier flags a request and the flagged category has a fallback model, Claude Code re-runs the request on that model and the session continues there.
 
@@ -103,7 +104,6 @@ When you enable or disable a plugin that provides [MCP servers](plugins-referenc
 #### [​](#code-intelligence-plugins) Code intelligence plugins
 
 When you enable a [code intelligence plugin](discover-plugins.md), Claude gets the [LSP tool](tools-reference.md).
-If you enable one mid-session, Claude Code changes the tool set at most once in that session. Once Claude Code has had a language server available, it keeps the LSP tool in the request for the rest of the session. Claude Code doesn’t change the tool set or invalidate the cache when a language server stops, fails, or reconnects later. Before v2.1.235, Claude Code removed the tool from the request whenever every language server had crashed or failed to start and added it back when one recovered.
 
 #### [​](#when-plugin-changes-apply) When plugin changes apply
 
@@ -117,7 +117,7 @@ When you run `/reload-plugins` and the reload would trigger a full re-read, Clau
 
 #### [​](#plugins-you-enable-and-then-disable-in-one-session) Plugins you enable and then disable in one session
 
-When you disable a plugin you enabled earlier in the session, Claude Code restores the previous request shape, apart from the [LSP tool](#code-intelligence-plugins), which Claude Code keeps for the rest of the session. If that prefix is still within its [cache lifetime](#cache-lifetime), the next request reads the older cache entry instead of rebuilding.
+When you disable a plugin you enabled earlier in the session, Claude Code restores the previous request shape. If that prefix is still within its [cache lifetime](#cache-lifetime), the next request reads the older cache entry instead of rebuilding.
 
 ### [​](#denying-an-entire-tool) Denying an entire tool
 

@@ -295,6 +295,23 @@ The table covers the permission, plugin, and delivery controls. For any key not 
 
 On Team and Enterprise plans, an Owner enables or disables [Remote Control](remote-control.md) and [web sessions](claude-code-on-the-web.md) organization-wide in [Claude Code admin settings](https://claude.ai/admin-settings/claude-code). Remote Control can additionally be disabled per device with the [`disableRemoteControl`](settings-reference.md) setting. Web sessions have no per-device managed settings key.
 
+## [​](#turn-telemetry-off-for-your-organization) Turn telemetry off for your organization
+
+Claude Code sends Anthropic operational [telemetry](data-usage.md) by default on sessions that use the Anthropic API, whether directly, through an LLM gateway, or through a custom `ANTHROPIC_BASE_URL`; [Default behaviors by API provider](data-usage.md) says which providers send it. To turn it off for every developer without relying on each person’s shell, deliver `DISABLE_TELEMETRY` through the `env` block of your managed settings. This example sets `DISABLE_TELEMETRY` for everyone the policy reaches:
+
+```shiki
+{
+  "env": {
+    "DISABLE_TELEMETRY": "1"
+  }
+}
+```
+
+Claude Code applies a value of `1` without showing the user the [approval dialog](server-managed-settings.md).
+If you turn telemetry off, Claude Code stops sending the usage data that feeds your organization’s [analytics dashboard](analytics.md) for the developers the policy reaches. The variable also turns off feature-flag fetching, which makes Remote Control, default auto mode, and the other [features that need feature-flag fetching](env-vars.md) unavailable for those developers.
+[Where and when a policy applies](#where-and-when-a-policy-applies) says which delivery mechanism reaches each surface, and [Platform availability](server-managed-settings.md) says which sessions skip the server-managed settings fetch.
+If your organization uses customer-managed encryption keys and routes Claude Code through a gateway, [Configure proxies and gateways](third-party-integrations.md) says why those sessions need this variable.
+
 ## [​](#see-also) See also
 
 - [Set up Claude Code for your organization](admin-setup.md): decide what to enforce and how
