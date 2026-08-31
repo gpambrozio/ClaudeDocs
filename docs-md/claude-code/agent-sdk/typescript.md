@@ -334,7 +334,13 @@ function tagSession(
 
 Resolves the effective Claude Code settings for a given directory using the same merge engine as the CLI, without spawning the Claude CLI. Use it to inspect what configuration a `query()` call would see before invoking one.
 
-This function is alpha and its API may change before stabilization. It reads MDM sources, including macOS plist and Windows HKLM/HKCU, for parity with CLI startup, but does not execute the admin-configured `policyHelper` subprocess. The `permissions.defaultMode` field is returned as-is from all tiers including project settings. In a live session, the CLI [ignores `defaultMode: 'auto'` from project and local settings](permission-modes.md); `resolveSettings()` skips that check, so an `auto` from those tiers appears here even though a session would ignore it.
+This function is alpha and its API may change before stabilization.
+
+The snapshot differs from what a live `query()` session applies:
+
+- **`policyHelper`**: `resolveSettings()` reads MDM sources, including macOS plist and Windows HKLM/HKCU, but doesn’t execute the admin-configured `policyHelper` subprocess.
+- **Server-managed settings**: `resolveSettings()` doesn’t fetch [server-managed settings](server-managed-settings.md). Pass them as `options.serverManagedSettings` to include them.
+- **`defaultMode`**: the snapshot returns `permissions.defaultMode` as-is from every tier. A live session [ignores `defaultMode: 'auto'` from project and local settings](permission-modes.md), so an `auto` from those tiers appears in the snapshot even though a session would ignore it.
 
 ```shiki
 function resolveSettings(
@@ -349,7 +355,7 @@ function resolveSettings(
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
 | `options.cwd` | `string` | `process.cwd()` | Directory to resolve project and local settings relative to |
-| `options.settingSources` | [`SettingSource`](#settingsource)`[]` | All sources | Which filesystem sources to load. Pass `[]` to skip user, project, and local settings. [Endpoint-managed policy](managed-settings.md) loads in all cases. Server-managed settings are taken from `serverManagedSettings` when the host passes it, or read from the CLI’s on-disk cache otherwise; the snapshot does not fetch them from the network |
+| `options.settingSources` | [`SettingSource`](#settingsource)`[]` | All sources | Which filesystem sources to load. Pass `[]` to skip user, project, and local settings. [Endpoint-managed policy](managed-settings.md) loads in all cases. `resolveSettings()` includes server-managed settings only when you pass `options.serverManagedSettings` |
 | `options.managedSettings` | `Settings` | `undefined` | Policy-tier settings supplied by the embedding host. Follows the same rules as [`managedSettings` in `Options`](#options), except that `resolveSettings()` doesn’t execute a configured [`policyHelper`](settings-reference.md), so the snapshot can include settings that a live session drops |
 | `options.serverManagedSettings` | `Settings` | `undefined` | Server-managed settings payload from `/api/claude_code/settings`. Non-restrictive keys pass through unfiltered |
 
@@ -443,7 +449,7 @@ Configuration object for the `query()` function.
 | `spawnClaudeCodeProcess` | `(options: SpawnOptions) => SpawnedProcess` | `undefined` | Custom function to spawn the Claude Code process. Use to run Claude Code in VMs, containers, or remote environments |
 | `stderr` | `(data: string) => void` | `undefined` | Callback for stderr output |
 | `strictMcpConfig` | `boolean` | `false` | Use only the servers passed in `mcpServers` and ignore project `.mcp.json`, user settings, plugin-provided MCP servers, and [claude.ai connectors](mcp.md) |
-| `systemPrompt` | `string | { type: 'preset'; preset: 'claude_code'; append?: string; excludeDynamicSections?: boolean }` | `undefined` (minimal prompt) | System prompt configuration. Pass a string for custom prompt, or `{ type: 'preset', preset: 'claude_code' }` to use Claude Code’s system prompt. When using the preset object form, add `append` to extend it with additional instructions, and set `excludeDynamicSections: true` to move per-session context into the first user message for [better prompt-cache reuse across machines](agent-sdk/modifying-system-prompts.md) |
+| `systemPrompt` | `string | string[] | { type: 'preset'; preset: 'claude_code'; append?: string; excludeDynamicSections?: boolean }` | `undefined` (minimal prompt) | System prompt configuration. Pass a string for a custom prompt, or `{ type: 'preset', preset: 'claude_code' }` to use Claude Code’s system prompt. Pass an array of strings with the exported `SYSTEM_PROMPT_DYNAMIC_BOUNDARY` constant between the static and per-request parts to [cache the static part of a custom prompt](agent-sdk/modifying-system-prompts.md). When using the preset object form, add `append` to extend it with additional instructions, and set `excludeDynamicSections: true` to move per-session context into the first user message for [better prompt-cache reuse across machines](agent-sdk/modifying-system-prompts.md) |
 | `taskBudget` | `{ total: number }` | `undefined` | *Alpha.* API-side task budget in tokens. When set, the model is told its remaining token budget so it can pace tool use and wrap up before the limit |
 | `thinking` | [`ThinkingConfig`](#thinkingconfig) | `{ type: 'adaptive' }` for supported models | Controls Claude’s thinking/reasoning behavior. See [`ThinkingConfig`](#thinkingconfig) for options |
 | `title` | `string` | `undefined` | Display title for the session. When resuming via `resume` or `continue`, the resumed session’s persisted title takes precedence; use [`renameSession()`](#renamesession) to retitle an existing session |
@@ -809,7 +815,7 @@ type AgentDefinition = {
 | `tools` | No | Array of allowed tool names. If omitted, inherits every [tool available to subagents](sub-agents.md). To preload Skills into the agent’s context, use the `skills` field rather than listing `'Skill'` here |
 | `disallowedTools` | No | Array of tool names to explicitly disallow for this agent. MCP server-level patterns are also accepted: `mcp__server` or `mcp__server__*` removes every tool from that server, and `mcp__*` removes every MCP tool from any server |
 | `prompt` | Yes | The agent’s system prompt |
-| `model` | No | Model override for this agent. Accepts an alias such as `'fable'`, `'opus'`, `'sonnet'`, `'haiku'`, `'inherit'`, or a full model ID. If omitted or `'inherit'`, uses the main model |
+| `model` | No | Model override for this agent. Accepts an alias such as `'fable'`, `'opus'`, `'sonnet'`, `'haiku'`, `'inherit'`, or a full model ID. `'inherit'` uses the main model. When you omit it, Claude Code picks the model in the [subagent model order](sub-agents.md) |
 | `mcpServers` | No | MCP server specifications for this agent |
 | `skills` | No | Array of skill names to preload into the agent context |
 | `initialPrompt` | No | Auto-submitted as the first user turn when this agent runs as the main thread agent |
@@ -4257,7 +4263,7 @@ type AgentInfo = {
 | --- | --- | --- |
 | `name` | `string` | Agent type identifier (e.g., `"Explore"`, `"general-purpose"`) |
 | `description` | `string` | Description of when to use this agent |
-| `model` | `string | undefined` | Model alias this agent uses. If omitted, inherits the parent’s model |
+| `model` | `string | undefined` | Model this agent uses: an alias or model ID, or `'inherit'` for the parent’s model. When it’s `undefined`, Claude Code picks the model in the [subagent model order](sub-agents.md) |
 
 ### [​](#mcpserverstatus) `McpServerStatus`
 

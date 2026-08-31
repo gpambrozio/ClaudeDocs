@@ -147,8 +147,8 @@ Now let’s make Claude Code do some actual coding. Try a simple task:
 add a hello world function to the main file
 ```
 
-Claude Code finds the appropriate file and shows you the change. In your first session after installing, it asks before each change. Select **Yes** to approve.
-After your first session, auto mode is the [built-in starting permission mode](permission-modes.md) for interactive terminal sessions on Pro, Max, and Team plans: a classifier reviews actions instead of you, and Claude edits most files and runs most commands without asking you. On other plans, Manual mode is the built-in starting permission mode.
+Claude Code finds the appropriate file and shows you the change. If it asks before making the change, select **Yes** to approve.
+Auto mode is the [built-in starting permission mode](permission-modes.md) for interactive terminal sessions on Pro, Max, and Team plans: a classifier reviews actions instead of you, and Claude edits most files and runs most commands without asking you. On other plans, Manual mode is the built-in starting permission mode. For the session you start right after installing, see [First session after an install or upgrade](env-vars.md).
 
 Your settings or your organization can set a different starting permission mode. [Which permission mode a session starts in](permission-modes.md) lists what does. Press `Shift+Tab` at any time to switch the permission mode of the session you’re in.
 

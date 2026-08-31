@@ -675,7 +675,7 @@ When running with `--agent` or inside a subagent, two additional fields are incl
 
 Only [`SessionStart`](#sessionstart) hooks can receive a `model` field, and Claude Code doesn’t always include it. [`PreModelSwitch`](#premodelswitch) and [`PostModelSwitch`](#postmodelswitch) hooks receive `from_model` and `to_model` instead, so use a PostModelSwitch hook to follow the model as it changes during a session.
 There is no `$CLAUDE_MODEL` environment variable. The hook can read `$ANTHROPIC_MODEL` if you set it in your shell, but that value doesn’t change when you switch models with `/model` during a session.
-A hook process inherits the parent environment, apart from the `OTEL_*` exporter variables that Claude Code [removes from every subprocess it spawns](monitoring-usage.md), including hooks.
+A hook process inherits the parent environment, apart from the `OTEL_*` exporter variables that Claude Code [removes from every subprocess it spawns](monitoring-usage.md) and, when [`CLAUDE_CODE_SUBPROCESS_ENV_SCRUB`](env-vars.md) is set to `1`, the variables it strips.
 For example, a `PreToolUse` hook for a Bash command receives this on stdin:
 
 ```shiki
@@ -1604,7 +1604,7 @@ In `PostToolUse`, `tool_response` is an object with `plan` and `filePath` fields
 | --- | --- |
 | `permissionDecision` | `"allow"` skips the permission prompt, except for the [actions no mode auto-approves](permission-modes.md) and for `AskUserQuestion` and `ExitPlanMode`, which need [`updatedInput` paired with it](#allow-with-updatedinput). `"deny"` prevents the tool call. `"ask"` prompts the user to confirm. `"defer"` exits gracefully so the tool can be resumed later. [Deny and ask rules](permissions.md) are still evaluated regardless of what the hook returns |
 | `permissionDecisionReason` | For `"allow"` and `"ask"`, shown to the user but not Claude. For `"deny"`, shown to Claude. For `"defer"`, ignored |
-| `updatedInput` | Modifies the tool’s input parameters before execution. Replaces the entire input object, so include unchanged fields alongside modified ones. Combine with `"allow"` to auto-approve, or `"ask"` to show the modified input to the user. For `"defer"`, ignored |
+| `updatedInput` | Modifies the tool’s input parameters before execution. Replaces the entire input object, so include unchanged fields alongside modified ones. Claude Code evaluates permission rules and a Bash command’s [auto-background eligibility](tools-reference.md) against the input your hook returns, not the input Claude sent. Combine with `"allow"` to auto-approve, or `"ask"` to show the modified input to the user. For `"defer"`, ignored |
 | `additionalContext` | String added to Claude’s context alongside the tool result. Ignored when `permissionDecision` is `"defer"`. See [Add context for Claude](#add-context-for-claude) |
 
 When multiple PreToolUse hooks return different decisions, precedence is `deny` > `defer` > `ask` > `allow`.
@@ -2026,7 +2026,7 @@ You receive these hook events even with desktop notifications turned off: the `p
 | `elicitation_url_dialog` | An MCP server asks you to open a browser URL and you haven’t typed for about six seconds |
 | `elicitation_complete` | An MCP server reports that a [URL-mode elicitation](#elicitation-input) is complete |
 | `elicitation_response` | An MCP elicitation response is sent back to the server |
-| `agent_needs_input` | A background session starts waiting on your input. Fires only while [agent view](agent-view.md) is open in a terminal |
+| `agent_needs_input` | A background session starts waiting on your input while [agent view](agent-view.md) is open in a terminal, or the current session asks you an [agent team teammate’s terminal setup question](agent-teams.md) and you haven’t typed for about six seconds |
 | `agent_completed` | A background session finishes or fails. Fires only while [agent view](agent-view.md) is open in a terminal |
 | `quota_auto_resume_fired` | Claude Code continues your task after a claude.ai usage limit paused it: at the reset, or sooner when something you do in Claude Code during the wait, such as adding usage credits, upgrading your plan, or switching models, makes usage available again, with the [model-setting exception](interactive-mode.md) |
 | `quota_auto_resume_stale` | A claude.ai usage limit reset while your computer slept for more than about 30 minutes. Claude Code waits for you to press `Enter` instead of continuing. After a shorter sleep it continues and fires `quota_auto_resume_fired` instead |
@@ -2035,6 +2035,7 @@ You receive these hook events even with desktop notifications turned off: the `p
 The `agent_needs_input` and `agent_completed` types require Claude Code v2.1.198 or later.
 The `quota_auto_resume_fired`, `quota_auto_resume_stale`, and `quota_auto_resume_disabled` types require Claude Code v2.1.234 or later.
 In terminal sessions, `permission_prompt` for a sandboxed command’s network request requires Claude Code v2.1.246 or later.
+`agent_needs_input` for a teammate’s terminal setup question requires Claude Code v2.1.248 or later.
 
 The `permission_prompt`, `idle_prompt`, `elicitation_dialog`, and `elicitation_url_dialog` types share their timing with desktop notifications, so in terminal sessions you only see them when you appear to be away from the terminal:
 
