@@ -10,7 +10,7 @@ Choose browser use over computer use when the task stays inside webpages: Claude
 
 With browser use, Claude reads and acts on live webpages, so everything a page supplies is untrusted input and the actions Claude takes can have real effects. See [Security considerations](#security-considerations) before you deploy.
 
-##  Quick start
+## Quick start
 
 The browser use tool is available on the Claude API and [Google Cloud](build-with-claude/claude-on-vertex-ai.md): add one entry of type `browser_toolset_20260801`, with no `name`, to the `tools` array of a [Messages API](api/messages/create.md) request.
 
@@ -116,32 +116,32 @@ Your executor runs `navigate`, then `read_page`, and your application returns on
 
 Claude now holds references it can act on, so its next turn can click `ref_2` to open the getting-started page, with no need to locate the link in a screenshot first.
 
-##  How browser use works
+## How browser use works
 
 Browser use runs as an agent loop: Claude returns member tool calls, your executor runs them against the browser, and you return the results until Claude answers in text.
 
 1. 1
 
-   Provide Claude with the browser use tool and a user prompt
+   ### Provide Claude with the browser use tool and a user prompt
 
    - Add the `browser_toolset_20260801` entry, and optionally other tools, to your API request.
    - Include a user prompt that calls for working with webpages, for example, "Open example.com/docs and tell me how to get started."
 2. 2
 
-   Claude responds with member tool calls
+   ### Claude responds with member tool calls
 
    - Claude returns one or more `tool_use` blocks in a single assistant turn; several in one turn form a batch action, for example, `left_click`, then `type`, then `key`.
    - Each block's `name` is the member name, each carries `"toolset_name": "browser"`, and `input` holds only that member's parameters, with no `action` field. The response's `stop_reason` is `tool_use`.
 3. 3
 
-   Run the calls in order and return results
+   ### Run the calls in order and return results
 
    - Iterate every `tool_use` block in `response.content` (don't assume there's exactly one) and run them sequentially, in the order they appear, because later calls usually depend on earlier ones.
    - Return one `tool_result` per block in a new `user` message, matched by `tool_use_id`, and echo `"toolset_name": "browser"` on each. Every call must be answered or the next request is rejected.
    - If a call fails, return `is_error: true` with a text description for that block, then apply the halt rule in [Batch actions](#batch-actions) to every later block in the turn.
 4. 4
 
-   Claude continues until the task is complete
+   ### Claude continues until the task is complete
 
    - Claude reads the results (page text, accessibility trees, screenshots, tab state) and, if it needs more, returns further member calls, which takes you back to step 3.
    - Otherwise, it returns a text response to the user.
@@ -241,7 +241,7 @@ Dispatch each block on the pair (`toolset_name`, `name`) rather than on `name` a
 
 When you stream the response, each member's `input` arrives as one complete `input_json_delta` rather than as fragments, so wait for the turn to finish before running the batch.
 
-###  Batch actions
+### Batch actions
 
 A turn with several member calls is a batch action: run the calls in the order they appear, stop at the first failure, and answer every later call with `is_error: true` and the exact text `Not executed: an earlier action in this turn failed.` A batch uses the same response shape as [parallel tool use](agents-and-tools/tool-use/parallel-tool-use.md); the difference is that you run the blocks in order rather than concurrently. Here Claude clicks the search box it found earlier, types a query, and presses Enter in one turn:
 
@@ -282,7 +282,7 @@ You don't need to return a screenshot after every call. Claude typically ends a 
 
 If your executor can run only one call per round trip, set `disable_parallel_tool_use` to `true` in `tool_choice` and Claude returns at most one member call per turn, at the cost of more round trips ([Disable parallel tool use](agents-and-tools/tool-use/parallel-tool-use.md)). The rest of the contract under [Batch actions for the computer use tool](agents-and-tools/tool-use/computer-use-tool.md) carries over, including one `tool_result` for every `tool_use` in the next `user` message, except for two things: the halt text and what a successful result's `content` holds. Result content follows [Member tools](#member-tools) on this page instead: a `new_tab`, `switch_tab`, `close_tab`, or `list_tabs` result is exactly one `browser_state` block with no text or image ([Tab management results](#tab-management-results)), and any other member's result may add a `browser_state` block to its text or image ([Tab context on other results](#tab-context-on-other-results)). Where cache breakpoints inside a batch take effect is described in the `cache_control` row of the computer use tool's [Tool parameters](agents-and-tools/tool-use/computer-use-tool.md).
 
-###  Targets and coordinates
+### Targets and coordinates
 
 Member tools that act on a location take a `target` object, which is either a viewport-pixel coordinate or a reference to an element that `read_page` or `find` returned. The [Member tools](#member-tools) tables write `Target` for a parameter that accepts either shape.
 
@@ -317,7 +317,7 @@ Claude uses both targeting styles and switches between them based on what the pa
 - **Fall back to coordinates for content the tree doesn't describe.** Canvas-rendered interfaces, embedded video or remote-desktop surfaces, heavily virtualized lists, and elements inside cross-origin iframes often have no useful node, so Claude works from `screenshot` and `zoom` and clicks by coordinate; your executor resolves which frame a coordinate lands in.
 - **Scope reads, and read the tree before you screenshot.** On large pages, `read_page` with `filter: "interactive"` or the `ref` of a container returns a focused subtree, and a tree read of a typical page often costs fewer input tokens than a screenshot while giving Claude references it can act on immediately. Screenshots remain the right observation when visual layout, images, or rendering state matter.
 
-##  Security considerations
+## Security considerations
 
 Browser use carries risks that standard API features don't, because Claude reads and acts on content from the open web, where any page can contain text written to manipulate it.
 
@@ -325,13 +325,13 @@ Claude sometimes follows instructions found in page content even when they confl
 
 Because the browser runs in your environment, the sites Claude visits see your executor's network identity, and page content reaches the API only as the tool results you return. Inform end users of the relevant risks and obtain their consent before enabling browser use in your products.
 
-##  Member tools
+## Member tools
 
 The `browser_toolset_20260801` entry declares 31 member tools; each call's `input` is exactly the parameters listed here, and `tab_id`, where optional, defaults to the active tab. `Target`, `CoordinateTarget`, and `RefTarget` are the shapes described in [Targets and coordinates](#targets-and-coordinates). Four members (`javascript_exec`, `file_upload`, `read_console`, and `read_network`) are disabled by default and appear only when you [enable them](#enable-optional-member-tools). The input bounds and output conventions noted in each member's row are stated to Claude, not enforced by the API, so validate inputs (including coordinates against your viewport) and apply the conventions in your executor.
 
 Only `screenshot` and `zoom` require an [`image` block](agents-and-tools/tool-use/handle-tool-calls.md) in their result, and the four tab-management members (`new_tab`, `list_tabs`, `switch_tab`, and `close_tab`) return exactly one `browser_state` block (see [Tab management results](#tab-management-results)). Every other member returns a `text` block: either a short acknowledgment such as `Clicked element ref_2.` or the member's output. Any result other than a tab-management result may also carry an `image` block, typically a screenshot taken after the action, so Claude sees the outcome without a separate `screenshot` call; [Batch actions](#batch-actions) shows where to attach one in a batch. A member `tool_result` may contain only `text`, `image`, and `browser_state` content blocks.
 
-###  Navigation and capture
+### Navigation and capture
 
 | Member | Input | Description |
 | --- | --- | --- |
@@ -339,7 +339,7 @@ Only `screenshot` and `zoom` require an [`image` block](agents-and-tools/tool-us
 | `screenshot` | `tab_id?` | Capture the viewport and return an `image` block. |
 | `zoom` | `region`, `tab_id?` | Return a cropped, upscaled `image` of `region`, given as `[x0, y0, x1, y1]` in viewport pixels, for closer inspection of small text or controls. |
 
-###  Pointer
+### Pointer
 
 | Member | Input | Description |
 | --- | --- | --- |
@@ -356,7 +356,7 @@ Only `screenshot` and `zoom` require an [`image` block](agents-and-tools/tool-us
 | `scroll` | `target: CoordinateTarget`, `scroll_direction`, `scroll_amount?`, `tab_id?` | Scroll at a viewport position. `scroll_direction` is `"up"`, `"down"`, `"left"`, or `"right"`; `scroll_amount` is in scroll-wheel notches, 1 to 10, default 3. |
 | `scroll_to` | `target: RefTarget`, `tab_id?` | Scroll a referenced element into view. |
 
-###  Keyboard and timing
+### Keyboard and timing
 
 | Member | Input | Description |
 | --- | --- | --- |
@@ -365,7 +365,7 @@ Only `screenshot` and `zoom` require an [`image` block](agents-and-tools/tool-us
 | `hold_key` | `text`, `duration`, `tab_id?` | Hold a key or chord for `duration` seconds, 0 to 30. |
 | `wait` | `duration`, `tab_id?` | Pause for `duration` seconds, 0 to 30. |
 
-###  Page reading
+### Page reading
 
 | Member | Input | Description |
 | --- | --- | --- |
@@ -373,14 +373,14 @@ Only `screenshot` and `zoom` require an [`image` block](agents-and-tools/tool-us
 | `find` | `query`, `tab_id?` | Search for elements matching a natural-language description such as `"search field"` or `"add to cart button"`, and return up to 20 matches in the same tagged format as `read_page`. |
 | `get_page_text` | `tab_id?` | Return the page's visible text as plain text, prioritizing the main article content; suited to articles, documentation, and other text-heavy pages. |
 
-###  Forms and files
+### Forms and files
 
 | Member | Input | Description |
 | --- | --- | --- |
 | `form_input` | `target: RefTarget`, `value`, `tab_id?` | Set a form element's value directly. `value` is a `string`, `number`, or `boolean`; use a `boolean` for checkboxes and an option's value or visible text for selects. |
 | `file_upload` (disabled by default) | `target: RefTarget`, `paths?`, `document_ids?`, `tab_id?` | Set the files on a file-input element from `paths` on the executor's filesystem, `document_ids` your application has staged, or both; at least one is required. See [Upload files](#upload-files). |
 
-###  Diagnostics and scripting
+### Diagnostics and scripting
 
 | Member | Input | Description |
 | --- | --- | --- |
@@ -388,7 +388,7 @@ Only `screenshot` and `zoom` require an [`image` block](agents-and-tools/tool-us
 | `read_network` (disabled by default) | `tab_id?` | Return the tab's network requests (method, URL, status, MIME type, timing) since the last read, one line per entry. |
 | `javascript_exec` (disabled by default) | `text`, `tab_id?` | Run `text` as JavaScript in the page context and return the value of the last expression as text. See [Enable optional members](#enable-optional-member-tools). |
 
-###  Tab management
+### Tab management
 
 | Member | Input | Description |
 | --- | --- | --- |
@@ -399,7 +399,7 @@ Only `screenshot` and `zoom` require an [`image` block](agents-and-tools/tool-us
 
 On success, each of these returns exactly one `browser_state` block and no text or image; see [Tab management results](#tab-management-results).
 
-##  Configure the toolset
+## Configure the toolset
 
 Besides `type`, the toolset entry accepts `configs`, `cache_control`, and `allowed_callers`; the rules these fields share with the computer use toolset are listed under [Client toolsets](agents-and-tools/tool-use/tool-reference.md), and this section covers the browser-specific defaults. `configs` is an object keyed by member name, and each member's value accepts two fields:
 
@@ -408,7 +408,7 @@ Besides `type`, the toolset entry accepts `configs`, `cache_control`, and `allow
 | `enabled` | `true`, except `false` for the four [optional members](#enable-optional-member-tools) | Whether the member is offered to Claude. |
 | `defer_loading` | `false` | Whether the toolset's definition is deferred for tool search. Must resolve to the same value on every enabled member. With the four optional members left disabled, deferring the toolset means setting it on the other 27; see [Client toolsets](agents-and-tools/tool-use/tool-reference.md). |
 
-###  Enable or disable member tools
+### Enable or disable member tools
 
 List only the members you want to change in `configs`; every member you omit keeps its default. For example, an executor that implements console reads but not low-level pointer or key-hold control turns `read_console` on and withholds three members:
 
@@ -428,17 +428,17 @@ List only the members you want to change in `configs`; every member you omit kee
 
 A disabled member disappears from the definition Claude sees; that doesn't guarantee Claude never names it, so your executor still answers such a call with an [error result](#return-errors-from-your-executor).
 
-###  Combine with other tools
+### Combine with other tools
 
 Declare the browser use tool alongside your own tools and other Anthropic-provided tools in the same `tools` array. A custom tool may share a member's name (your own `navigate`, for example), because `toolset_name` distinguishes Claude's calls, but no other entry may be named `browser`, and a request may contain only one browser toolset entry.
 
 You can also declare it alongside the [computer use tool](agents-and-tools/tool-use/computer-use-tool.md), either the toolset or an earlier computer use tool version. The two work independently, each in its own coordinate frame (viewport pixels here, desktop screenshot pixels there), and Claude's calls to members that share a name, such as `screenshot` or `key`, are told apart by `toolset_name`.
 
-##  Enable optional members
+## Enable optional members
 
 Four member tools are disabled by default: `javascript_exec` and `file_upload` because they widen what a manipulated page could make Claude do, and `read_console` and `read_network` because not every browser automation stack can supply those logs and they widen what page-controlled content reaches Claude. Enable each one with `configs` (for example, `"configs": {"file_upload": {"enabled": true}}`) only when your executor implements it and the task needs it.
 
-###  Upload files
+### Upload files
 
 `file_upload` sets the files on an `<input type="file">` element directly, which is more reliable than driving a native file chooser. Its `target` is a reference only, because the call needs the element's identity, and it takes `paths`, `document_ids`, or both:
 
@@ -463,17 +463,17 @@ Four member tools are disabled by default: `javascript_exec` and `file_upload` b
 
 Claude writes these paths while it's reading untrusted pages, so an unrestricted implementation would let a malicious page direct the upload of any file the executor can read to a site the page controls. Enable the member only when your executor resolves each path (following symlinks and `..` segments) and accepts nothing outside a dedicated, allowlisted upload directory that holds only files meant for the task. Don't reuse the browser's download directory for this; if you do, every file a page causes the browser to download becomes uploadable.
 
-###  Run JavaScript in the page
+### Run JavaScript in the page
 
 `javascript_exec` runs the expression Claude writes in the page's context and returns the value of the last expression as text; Claude writes an expression, not a `return` statement. The code runs with the page's full privileges, including its cookies, storage, and same-origin requests. Enable the member only in sessions that hold no credentials, keep the domain allowlist from [Security considerations](#security-considerations) in force, treat the returned value as untrusted input, and log the code Claude emits.
 
-###  Read console and network activity
+### Read console and network activity
 
 `read_console` returns the tab's console entries and `read_network` returns its network requests, each as text with one line per entry accumulated since the previous read of that tab. A console line carries a log, warning, or error entry; a network line carries the method, URL, status, MIME type, and timing. Entries exist only from the moment your browser automation attached to the tab, so an empty result doesn't mean a tab that was already open had no traffic.
 
 These members let Claude diagnose a misbehaving page (a failed request behind a spinner, a script error behind a dead button) without repeated screenshots. Console and network entries are page-controlled and often contain secrets such as tokens in request URLs, so redact credential-like values you don't want in Claude's context and truncate very long entries before returning them.
 
-##  Track tabs with `browser_state`
+## Track tabs with `browser_state`
 
 Claude addresses tabs by `tab_id`, your application is the source of truth for which tabs exist, and you report that state in a `browser_state` content block that Claude never sees directly: the API renders the text Claude reads from it.
 
@@ -505,7 +505,7 @@ Claude addresses tabs by `tab_id`, your application is the source of truth for w
 - A block may list at most 100 tabs and 200 state changes.
 - The same limits apply to the `tab_id` Claude passes to `switch_tab` and `close_tab`, because the API renders it into the result text, so answer a call whose `tab_id` violates them with an error result instead of a `browser_state` block.
 
-###  Tab management results
+### Tab management results
 
 For `new_tab`, `switch_tab`, `close_tab`, and `list_tabs`, a successful result's `content` is exactly one `browser_state` block with no text or image, and the API writes the text Claude sees. A `new_tab` result's block must also carry exactly one `tab_opened` state change whose `tab_id` matches the entry marked `active: true`.
 
@@ -558,7 +558,7 @@ For example, when Claude calls `new_tab` (its `input` is empty), your executor o
 
 Claude sees `Created new tab with tab_id: tab-3, URL: about:blank. It is now the current tab.` Report the URL the tab was opened at, as here, not one it later redirects to; later results report the tab's then-current URL.
 
-###  Tab context on other results
+### Tab context on other results
 
 On every other member the block is optional: send it when the set of open tabs, the active tab, or a tab's title or URL changed, or when there are `state_changes` to report, and always include the full `tabs` inventory. When a result carries both text and a `browser_state` block, the API appends a `Tab Context` footer to that result's text, separated from your text by a blank line, so Claude receives the new state without a separate `list_tabs` call:
 
@@ -615,7 +615,7 @@ For example, when Claude clicked the "Pricing" link (`ref_5`) earlier in this se
 
 Claude sees `Clicked element ref_5.` followed by the Tab Context footer shown earlier. A tab opened during a call that failed gets no `tab_opened` entry, because error results carry no `browser_state`; it appears in the `tabs` inventory of the next successful result instead. In a batch, attach the block to the result of the call during which the change happened, and give every successful tab-management result its own block even when an earlier result in the same turn reported the same state.
 
-###  Report downloads
+### Report downloads
 
 When a click or navigation starts a file download, report it in `state_changes` on the result of the call during which it happened, correlated across results by a `download_id` you assign. Downloads run asynchronously and can span several results, so there are three event types:
 
@@ -662,11 +662,11 @@ Download reports follow these rules:
 - `state_changes` isn't an inventory of downloads in progress; report each event once.
 - Each entry carries only the fields its `type` declares. `size_bytes` is a non-negative integer, `download_id` is non-empty, and `download_id`, `url`, `path`, and `error` are each at most 4,096 characters with no control characters or Unicode line or paragraph separators. The `url` comes from the remote server and often carries signed query-string credentials after redirects, so strip query parameters you don't want in Claude's context and sanitize it before reporting it or using it in a filesystem path.
 
-##  Handle errors
+## Handle errors
 
 Report a failed call to Claude as an ordinary error result: `is_error: true`, text content that says what went wrong, `toolset_name` echoed, and no `browser_state` block.
 
-###  Return errors from your executor
+### Return errors from your executor
 
 Make error text specific, because Claude reads it and adapts: `Error: Navigation to https://example.com/status timed out after 30 seconds. The page may be unavailable.` gives Claude something to act on where a bare `Error: navigation failed` doesn't. Other common cases:
 
@@ -678,7 +678,7 @@ Make error text specific, because Claude reads it and adapts: `Error: Navigation
 
 ### Skipped after an earlier failure in the turn
 
-###  Request errors
+### Request errors
 
 The API validates the toolset entry and every member `tool_use` and `tool_result` block in the conversation. When one is malformed, the API returns an `invalid_request_error` before Claude runs. In the following table, the left column names what you sent.
 
@@ -693,7 +693,7 @@ The API validates the toolset entry and every member `tool_use` and `tool_result
 | An `image` in a result over your model's [image size limits](build-with-claude/vision.md), or over the stricter per-image limit that applies once the request holds [more than 20 images](build-with-claude/vision.md), counting screenshots and `zoom` images in earlier results | The API doesn't downscale toolset images. Resize screenshots before returning them ([Size screenshots to fit image limits](agents-and-tools/tool-use/computer-use-tool.md)). |
 | A `model` that doesn't support `browser_toolset_20260801` | See [Compatibility](#compatibility) for the supported models. |
 
-##  Limitations
+## Limitations
 
 - **Platform availability:** Browser use is available on the Claude API and [Google Cloud](build-with-claude/claude-on-vertex-ai.md).
 - **Whole-input streaming only:** When you stream, each member's `input` arrives as one complete `input_json_delta` ([Client toolsets](agents-and-tools/tool-use/tool-reference.md)).
@@ -701,7 +701,7 @@ The API validates the toolset entry and every member `tool_use` and `tool_result
 - **`read_console` and `read_network` depend on your browser automation:** They report only what it can capture, and only from the moment it attached to a tab.
 - **General agent limitations apply:** Latency, vision accuracy, and prompt-injection risks carry over from computer use (see the computer use tool's [Limitations](agents-and-tools/tool-use/computer-use-tool.md)), and its guidance under [Optimize model performance with prompting](agents-and-tools/tool-use/computer-use-tool.md), [Manage screenshot history](agents-and-tools/tool-use/computer-use-tool.md), and [Follow implementation best practices](agents-and-tools/tool-use/computer-use-tool.md) (action delays, action validation, and logging) applies to browser executors too.
 
-##  Pricing and data retention
+## Pricing and data retention
 
 Browser use follows the standard [tool use pricing](agents-and-tools/tool-use/overview.md). When using the browser use tool:
 
@@ -714,7 +714,7 @@ Browser use follows the standard [tool use pricing](agents-and-tools/tool-use/ov
 
 The browser session, downloads, and uploaded files stay in your environment; the screenshots, page text, and tab state you return are part of your API request content and follow the standard retention policy, or your ZDR arrangement if you have one. The browser use tool is ZDR eligible; see [API and data retention](manage-claude/api-and-data-retention.md) for retention periods and eligibility across features.
 
-##  Next steps
+## Next steps
 
 
 

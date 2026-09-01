@@ -6,13 +6,13 @@
 
 Extended thinking in manual mode gives you direct control over how much Claude thinks. You set a thinking token budget on each request with `thinking: {type: "enabled", budget_tokens: N}`, and Claude thinks against that budget before it starts its final answer. Manual mode remains useful when your workload requires predictable latency or precise control over thinking costs. This page covers how to set and tune the budget, how manual mode interacts with interleaved thinking and prompt caching, and how to migrate to adaptive thinking.
 
-For how thinking itself works, including thinking blocks and the response shape, the `display` parameter, streaming, thinking with tool use, and encryption, see the [thinking overview](build-with-claude/thinking.md).
+To learn how thinking itself works, including thinking blocks and the response shape, the `display` parameter, streaming, thinking with tool use, and encryption, see the [thinking overview](build-with-claude/thinking.md).
 
-##  Supported models
+## Supported models
 
 Extended thinking availability per model, including the models where extended thinking is the only mode, is listed in the [per-model configuration table](build-with-claude/thinking-troubleshooting.md).
 
-##  How to use extended thinking
+## How to use extended thinking
 
 Here is an example of using extended thinking in the Messages API:
 
@@ -48,7 +48,7 @@ To turn on manual extended thinking, add a `thinking` object with `type` set to 
 
 The `budget_tokens` parameter sets a target for how many tokens Claude can use for its internal reasoning process. Larger budgets can improve response quality by enabling more thorough analysis for complex problems.
 
-##  Budget rules and tuning
+## Budget rules and tuning
 
 `budget_tokens` must satisfy these constraints:
 
@@ -69,7 +69,7 @@ To track what a budget actually costs you, monitor the `usage.output_tokens_deta
 
 When you are ready to move off manual budgets, see [Migrating to adaptive thinking](#migrating-to-adaptive-thinking).
 
-##  Interleaved thinking in manual mode
+## Interleaved thinking in manual mode
 
 Interleaved thinking lets Claude think between tool calls within a single assistant turn, reasoning about each tool result before deciding what to do next. For the concept, the turn structure, and how it behaves on adaptive-thinking models, see [interleaved thinking](build-with-claude/thinking.md) in the thinking overview. This section covers how to enable it when you use manual `type: "enabled"` thinking.
 
@@ -91,13 +91,13 @@ How platforms treat the beta header differs. The Claude API and [Claude Platform
 
 Partner-operated platforms ([Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) and [Google Cloud](build-with-claude/claude-on-vertex-ai.md)) likewise accept the header on any model without returning an error, and ignore it on models that don't support interleaved thinking.
 
-##  Turn structure in manual mode
+## Turn structure in manual mode
 
 The general turn-structure rules, including the single-turn tool-use loop, mid-turn conflict handling, and toggling thinking between turns, are on [Thinking with tool use](build-with-claude/thinking.md).
 
 Manual mode adds one requirement: the final assistant turn of a thinking-enabled request must begin with a thinking block ([adaptive thinking](build-with-claude/thinking.md) drops that requirement). Changing the thinking configuration between turns also invalidates prompt caching; see the following section.
 
-##  Prompt caching in manual mode
+## Prompt caching in manual mode
 
 Manual mode adds one rule on top of the mode-neutral caching behavior described in [thinking and prompt caching](build-with-claude/thinking.md): changing `budget_tokens` between requests invalidates cache breakpoints, just as switching thinking modes does, because the budget value is rendered into the prompt. Message-level breakpoints always miss after a budget change; whether tool and system-prompt breakpoints miss too depends on where the model renders the configuration.
 
@@ -120,7 +120,7 @@ Third response usage: { cache_creation_input_tokens: 1370, cache_read_input_toke
 
 The third request re-creates the cache (`cache_creation_input_tokens=1370`, `cache_read_input_tokens=0`) because the budget changed between requests. For a runnable version of the same experiment in adaptive mode, where the effort level plays the cache role that `budget_tokens` plays here, see [Prompt caching](build-with-claude/thinking-steering-and-cost.md) on the steering page.
 
-##  Shared mechanics
+## Shared mechanics
 
 Most thinking behavior is mode neutral and documented once on the [Thinking](build-with-claude/thinking.md) page. Everything there applies in manual mode too:
 
@@ -132,7 +132,7 @@ Most thinking behavior is mode neutral and documented once on the [Thinking](bui
 - [Thinking encryption](build-with-claude/thinking.md)
 - [Pricing](build-with-claude/thinking-steering-and-cost.md) (on the [Steering thinking](build-with-claude/thinking-steering-and-cost.md) page)
 
-##  Migrating to adaptive thinking
+## Migrating to adaptive thinking
 
 If your model supports only extended thinking (Claude Sonnet 4.5, Claude Opus 4.5, Claude Haiku 4.5, and earlier Claude 4 models), no action is needed now: adaptive thinking is not available there, and `type: "adaptive"` [returns a 400 error](build-with-claude/thinking-troubleshooting.md). Keep `budget_tokens` until you move to a model that supports adaptive thinking, then apply the mapping that follows.
 
@@ -181,7 +181,7 @@ Switching modes is a thinking-configuration change, so the first request after t
 
 For full guidance, see [adaptive thinking](build-with-claude/thinking.md), [effort](build-with-claude/effort.md), and the [model migration guide](about-claude/models/migration-guide.md).
 
-##  Next steps
+## Next steps
 
 
 

@@ -14,17 +14,17 @@ List the organization's invites.
 
 ##### Query parameters
 
-after\_id: optional string
+after\_id: optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-before\_id: optional string
+before\_id: optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
 
 
-email: optional string
+email: optional string
 
 Filter by the email address the Invite was sent to. Matches the same way as the Users list's `email` filter (normalized, case-insensitive).
 
@@ -32,7 +32,7 @@ formatemail
 
 
 
-limit: optional number
+limit: optional number
 
 Number of items to return per page.
 
@@ -46,7 +46,7 @@ minimum1
 
 
 
-roles: optional array of string
+roles: optional array of string
 
 Filter to items whose `role` equals one of the supplied values. Repeatable; values are OR'ed together.
 
@@ -54,43 +54,43 @@ Accepted values depend on the organization type: Console and API organizations a
 
 
 
-statuses: optional array of "accepted" or "expired" or "pending"
+statuses: optional array of "accepted" or "expired" or "pending"
 
 Filter by Invite status. Repeatable; values are OR'ed together. Omit to return `pending`, `accepted`, and `expired` Invites alike.
 
 One of the following:
 
-"accepted"
+"accepted"
 
-"expired"
+"expired"
 
-"pending"
+"pending"
 
 ##### Returns
 
 
 
-data: array of [BetaOrganizationInvite](api/http/beta/organization/invites.md) { id, accepted\_at, email, 6 more }
+data: array of [BetaOrganizationInvite](api/http/beta/organization/invites.md) { id, accepted\_at, email, 6 more }
 
-id: string
+id: string
 
 ID of the Invite.
 
 
 
-accepted\_at: string or null
+accepted\_at: string or null
 
 RFC 3339 datetime string indicating when the Invite was accepted, or null.
 
 formatdate-time
 
-email: string
+email: string
 
 Email of the User being invited.
 
 
 
-expires\_at: string
+expires\_at: string
 
 RFC 3339 datetime string indicating when the Invite expires.
 
@@ -98,61 +98,61 @@ formatdate-time
 
 
 
-invited\_at: string
+invited\_at: string
 
 RFC 3339 datetime string indicating when the Invite was created.
 
 formatdate-time
 
-rbac\_group\_ids: array of string
+rbac\_group\_ids: array of string
 
 RBAC group IDs recorded on the Invite (Claude Enterprise organizations), to be assigned to the User when the Invite is accepted. `[]` when none.
 
 
 
-role: [BetaOrganizationRole](api/http/beta/organization.md)
+role: [BetaOrganizationRole](api/http/beta/organization.md)
 
 Organization role of the User.
 
 One of the following:
 
-"admin"
+"admin"
 
-"billing"
+"billing"
 
-"claude\_code\_user"
+"claude\_code\_user"
 
-"developer"
+"developer"
 
-"managed"
+"managed"
 
-"membership\_admin"
+"membership\_admin"
 
-"owner"
+"owner"
 
-"primary\_owner"
+"primary\_owner"
 
-"user"
+"user"
 
 
 
-status: "accepted" or "deleted" or "expired" or "pending"
+status: "accepted" or "deleted" or "expired" or "pending"
 
 Status of the Invite.
 
 One of the following:
 
-"accepted"
+"accepted"
 
-"deleted"
+"deleted"
 
-"expired"
+"expired"
 
-"pending"
+"pending"
 
 
 
-type: "invite"
+type: "invite"
 
 Object type.
 
@@ -160,25 +160,21 @@ For Invites, this is always `"invite"`.
 
 defaultinvite
 
-first\_id: string or null
+first\_id: string or null
 
 First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
-has\_more: boolean
+has\_more: boolean
 
 Indicates if there are more results in the requested page direction.
 
-last\_id: string or null
+last\_id: string or null
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
-
+List Invites
 
-### List Invites
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/invites \

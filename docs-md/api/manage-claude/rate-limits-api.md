@@ -14,7 +14,7 @@ Use this API to:
 
 The SDK and CLI examples on this page construct the default client, which reads the Admin API key from the `ANTHROPIC_API_KEY` environment variable. The SDKs expose these endpoints as `client.beta.organization.rate_limits` and `client.beta.organization.workspaces.rate_limits`; the Python, TypeScript, C#, Go, and Java list methods return an iterator that follows `next_page` for you, while the PHP, Ruby, and curl examples read one page.
 
-##  Quick start
+## Quick start
 
 List the rate limits configured for your organization:
 
@@ -34,11 +34,11 @@ for group in rate_limits:
         print(f"  {limit.type}: {limit.value}")
 ```
 
-##  Organization rate limits
+## Organization rate limits
 
 The `/v1/organizations/rate_limits` endpoint returns the rate limits applied at the organization level for the Messages API and its supporting resources. Limits for other products, such as [Claude Managed Agents](managed-agents/overview.md), are not included.
 
-###  Key concepts
+### Key concepts
 
 - **Rate limit groups:** Each entry in the response represents one rate limit group. Model rate limits are grouped so that several model versions share a single set of limits, and other groups cover resources such as the Message Batches API, the Files API, the Token Counting API, agent skills, and the web search tool.
 - **`group_type`:** Identifies which category of limits the entry covers. See [Filtering by group type](#filtering-by-group-type) for the list of values.
@@ -47,7 +47,7 @@ The `/v1/organizations/rate_limits` endpoint returns the rate limits applied at 
 
 For complete parameter details and response schemas, see the [Organization Rate Limits API reference](api/admin/rate_limits/list.md).
 
-###  List all organization rate limits
+### List all organization rate limits
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -107,7 +107,7 @@ for group in rate_limits:
 
 
 
-###  Look up the limits for a specific model
+### Look up the limits for a specific model
 
 Pass any model ID or alias as the `model` query parameter to return only the entry that contains it:
 
@@ -129,7 +129,7 @@ for group in rate_limits:
 
 If the model string doesn't match any group, the endpoint returns a 404 error. The `model` parameter is supported on the organization endpoint only; the workspace endpoint doesn't accept it.
 
-##  Workspace rate limits
+## Workspace rate limits
 
 The `/v1/organizations/workspaces/{workspace_id}/rate_limits` endpoint returns the rate limit overrides configured for a single workspace.
 
@@ -193,7 +193,7 @@ for group in rate_limits:
 
 
 
-##  Filtering by group type
+## Filtering by group type
 
 Both endpoints accept an optional `group_type` query parameter that restricts the response to a single category:
 
@@ -215,25 +215,25 @@ for group in rate_limits:
 
 Valid values are `model_group`, `batch`, `token_count`, `files`, `skills`, and `web_search`.
 
-##  Pagination
+## Pagination
 
 Both endpoints accept a `page` query parameter and return a `next_page` field. Responses are currently always a single page, so `next_page` is `null`. Loop on `next_page` so your client paginates correctly without changes when the response grows.
 
-##  Frequently asked questions
+## Frequently asked questions
 
-###  Which model strings appear in the `models` list?
+### Which model strings appear in the `models` list?
 
 Every model ID and alias that counts against the group, including dated IDs (such as `claude-sonnet-4-5-20250929`) and undated aliases (such as `claude-sonnet-4-5`). Look up any model string you pass to the Messages API and you'll find it in exactly one `model_group` entry.
 
-###  What does it mean if a group is missing from the workspace response?
+### What does it mean if a group is missing from the workspace response?
 
 The workspace has no override for that group and inherits the organization-level limit. Query the organization endpoint to see the inherited values.
 
-###  Can I update rate limits with this API?
+### Can I update rate limits with this API?
 
 No. To set workspace rate limits, open the workspace in the [Claude Console](/settings/workspaces) and use the **Rate limits** tab.
 
-##  See also
+## See also
 
 - [Rate limits](api/rate-limits.md)
 - [Admin API](manage-claude/admin-api.md)

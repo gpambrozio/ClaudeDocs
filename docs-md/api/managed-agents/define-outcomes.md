@@ -10,7 +10,7 @@ When you define an outcome, the harness automatically provisions a *grader* to e
 
 The grader returns an explanation summarizing which criteria passed or failed, or confirming that the artifact satisfies the rubric. That feedback is handed back to the agent for the next iteration.
 
-##  Create a rubric
+## Create a rubric
 
 A rubric is a markdown document describing per-criterion scoring. The rubric is required.
 
@@ -75,7 +75,7 @@ rubric = client.files.upload(file=Path("/tmp/rubric.md"))
 print(f"Uploaded rubric: {rubric.id}")
 ```
 
-##  Create a session with an outcome
+## Create a session with an outcome
 
 The following examples create a [session](managed-agents/sessions.md) for an existing [agent](managed-agents/agent-setup.md) and [environment](managed-agents/environments.md) (both created separately), then send a `user.define_outcome` event. The agent begins work immediately. No additional user message event is required.
 
@@ -106,7 +106,7 @@ client.beta.sessions.events.send(
 )
 ```
 
-##  Outcome events
+## Outcome events
 
 Progress on an outcome-oriented session is surfaced on the events [stream](managed-agents/events-and-streaming.md).
 
@@ -116,7 +116,7 @@ Progress on an outcome-oriented session is surfaced on the events [stream](manag
 - A `user.interrupt` event pauses work on the current outcome and marks the `span.outcome_evaluation_end.result` as `interrupted`, allowing you to kick off a new outcome.
 - After the final outcome evaluation, the session can be continued as a conversational session, or a new outcome can be started. The session retains history of the prior outcome.
 
-###  Define outcome user event
+### Define outcome user event
 
 This is the event you send to initiate an outcome. It is echoed back on receipt, including a `processed_at` timestamp and `outcome_id`.
 
@@ -131,7 +131,7 @@ This is the event you send to initiate an outcome. It is echoed back on receipt,
 
 
 
-###  Outcome evaluation start
+### Outcome evaluation start
 
 Emitted once the grader starts an evaluation over one iteration loop. The `iteration` field is a 0-indexed revision counter: `0` is the first evaluation, `1` is the re-evaluation after the first revision, and so on.
 
@@ -147,7 +147,7 @@ Emitted once the grader starts an evaluation over one iteration loop. The `itera
 
 
 
-###  Outcome evaluation ongoing
+### Outcome evaluation ongoing
 
 Heartbeat emitted while the grader runs. The grader's internal reasoning is opaque: you see that it's working, not what it's thinking.
 
@@ -163,7 +163,7 @@ Heartbeat emitted while the grader runs. The grader's internal reasoning is opaq
 
 
 
-###  Outcome evaluation end
+### Outcome evaluation end
 
 Emitted when an outcome evaluation cycle ends: after the grader finishes evaluating one iteration, or when the session is interrupted while an outcome is active. The `result` field indicates what happens next.
 
@@ -196,7 +196,7 @@ Emitted when an outcome evaluation cycle ends: after the grader finishes evaluat
 
 
 
-##  Check outcome status
+## Check outcome status
 
 You can either listen on the [event stream](managed-agents/events-and-streaming.md) for `span.outcome_evaluation_end`, or poll `GET /v1/sessions/{session_id}` and read `outcome_evaluations[].result`. Until an evaluation completes, `result` reports `pending`, `running`, or `evaluating`:
 
@@ -212,7 +212,7 @@ for outcome in session.outcome_evaluations:
     # outc_01a...: satisfied
 ```
 
-##  Retrieve deliverables
+## Retrieve deliverables
 
 The agent writes output files to `/mnt/session/outputs/` inside the sandbox. To retrieve them, list files through the [Files API](build-with-claude/files.md) with the session ID as the `scope_id`, then download them by ID. Filtering by `scope_id` requires the `managed-agents-2026-04-01` beta header on the list request, so the SDK and CLI examples make that call through the `beta` namespace and pass the header explicitly. Files appear in the list shortly after the agent finishes writing them, sometimes a few seconds after the session goes idle. If a file you expect is not listed yet, list again after a short delay; once it appears in the list, its upload has finished.
 
@@ -233,7 +233,7 @@ if files.data:
     content.write_to_file("/tmp/output.txt")
 ```
 
-##  Next steps
+## Next steps
 
 [Authenticate with vaults](managed-agents/vaults.md)
 

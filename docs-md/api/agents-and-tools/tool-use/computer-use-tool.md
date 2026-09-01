@@ -10,7 +10,7 @@ The computer use tool is an Anthropic-defined [client toolset](agents-and-tools/
 
 For tasks that stay inside webpages, the [browser use tool](agents-and-tools/tool-use/browser-use-tool.md) is the closer fit: its member tools read and act on the page itself, and it doesn't need a full desktop environment.
 
-##  Security considerations
+## Security considerations
 
 Computer use has unique risks distinct from standard API features. These risks are heightened when interacting with the internet.
 
@@ -22,7 +22,7 @@ These precautions remain important even with the classifier defense layer in pla
 
 Inform end users of relevant risks and obtain their consent prior to enabling computer use in your own products.
 
-##  Quick start
+## Quick start
 
 Add the computer use toolset to the `tools` array of a [Messages API](api/messages/create.md) request as `{"type": "computer_toolset_20260801"}`. The request needs no beta header. This example also declares the [text editor tool](agents-and-tools/tool-use/text-editor-tool.md) and [bash tool](agents-and-tools/tool-use/bash-tool.md), which Claude typically uses alongside computer use:
 
@@ -87,31 +87,31 @@ Your application runs each call in order in your own environment, returns one `t
 
 ---
 
-##  How computer use works
+## How computer use works
 
 1. 1
 
-   Provide Claude with the computer use tool and a user prompt
+   ### Provide Claude with the computer use tool and a user prompt
 
    - Add the computer use toolset (and optionally other tools) to the `tools` array of your API request.
    - Include a user prompt that requires desktop interaction, for example, "Save a picture of a cat to my desktop."
 2. 2
 
-   Claude responds with member tool calls
+   ### Claude responds with member tool calls
 
    - Claude assesses whether acting on the desktop can help with the user's query.
    - If so, Claude responds with one or more member `tool_use` blocks, such as `screenshot`, `left_click`, or `type`, each carrying `"toolset_name": "computer"`. A response with several of these blocks is a [batch action](#batch-actions).
    - The API response has a `stop_reason` of `tool_use`, signaling a tool use request.
 3. 3
 
-   Run the calls in order and return results
+   ### Run the calls in order and return results
 
    - Iterate over every `tool_use` block in the response, in order. For each one, dispatch on the member `name` together with `toolset_name`, and perform that action with the block's `input` on your container or virtual machine.
    - Continue the conversation with a new `user` message that contains one `tool_result` block per `tool_use` block, matched by `tool_use_id` and each echoing `"toolset_name": "computer"`. Return an image for `screenshot` and `zoom`; a short text such as `OK` is enough for the other actions.
    - If an action fails, return `is_error: true` for that block and answer the rest of the batch as described in [Batch actions](#batch-actions).
 4. 4
 
-   Claude continues until the task is complete
+   ### Claude continues until the task is complete
 
    - Claude analyzes the tool results to determine if more actions are needed or the task has been completed.
    - If Claude determines more actions are needed, it responds with another `tool_use` `stop_reason` and you should return to step 3.
@@ -119,7 +119,7 @@ Your application runs each call in order in your own environment, returns one `t
 
 The repetition of steps 3 and 4 without user input is referred to as the "agent loop" (that is, Claude responding with a tool use request and your application responding to Claude with the results of evaluating that request).
 
-###  Batch actions
+### Batch actions
 
 Claude can plan a short sequence of actions, such as click, type, and then take a screenshot, and return them together in one response. This is called a batch action; it uses the same response shape as [parallel tool use](agents-and-tools/tool-use/parallel-tool-use.md) with one difference: you run the blocks in order rather than concurrently.
 
@@ -217,7 +217,7 @@ Claude then sees which actions succeeded, which one failed, and which were skipp
 
 Claude typically finishes a batch with `screenshot` so it can observe the outcome before deciding what to do next. When a batch doesn't end with one, your application can attach a screenshot as an extra `image` block on the last result in the batch so that Claude always sees the current state of the screen, which saves a round trip compared with waiting for Claude to ask. You can also prompt Claude to end every batch with a screenshot (see [Optimize model performance with prompting](#optimize-model-performance-with-prompting)).
 
-###  The computing environment
+### The computing environment
 
 Computer use requires a sandboxed computing environment where Claude can safely interact with applications and the web. This environment includes:
 
@@ -238,11 +238,11 @@ For security and isolation, the reference implementation runs all of this inside
 
 ---
 
-##  How to implement computer use
+## How to implement computer use
 
 Upgrading an existing `computer_20251124` integration? Start with [Migrate from `computer_20251124`](#migrate-from-computer-20251124); the rest of this section applies to both new and migrated integrations.
 
-###  Understand the agent loop
+### Understand the agent loop
 
 The core of computer use is the "agent loop": a cycle where Claude requests tool actions, your application runs them, and returns results to Claude. The loop uses the client you created in the [Quick start](#quick-start), a `tools` array that declares only the computer use toolset, and the tool-call processing helper under [Implement the computer use tool](#implement-the-computer-use-tool). If you also declare other tools, such as the Quick start's bash and text editor tools, dispatch their `tool_use` blocks in the same pass; the helper answers only computer use member calls, and the loop treats a turn with no answered calls as finished. Here's a simplified example:
 
@@ -280,7 +280,7 @@ def sampling_loop(model: str, messages: list[MessageParam], max_iterations: int 
 
 The loop continues until either Claude responds without requesting any tools (task completion) or the maximum iteration limit is reached. This safeguard prevents potential infinite loops that could result in unexpected API costs.
 
-###  Optimize model performance with prompting
+### Optimize model performance with prompting
 
 1. Specify simple, well-defined tasks and provide explicit instructions for each step.
 2. Claude sometimes assumes outcomes of its actions without explicitly checking their results. To prevent this you can prompt Claude with `After each step, take a screenshot and carefully evaluate if you have achieved the right outcome. Explicitly show your thinking: "I have evaluated step X..." If not correct, try again. Only when you confirm a step was executed correctly should you move on to the next one.`
@@ -291,7 +291,7 @@ The loop continues until either Claude responds without requesting any tools (ta
 7. Claude uses the `zoom` action to inspect a region at full resolution when asked about small text or specific UI elements that aren't legible at the screenshot's default resolution, such as file names in a sidebar, tab titles, status-bar text, line numbers, or button labels. If Claude isn't zooming when you expect, ask about a specific region or element rather than the screen as a whole.
 8. If you want every [batch action](#batch-actions) to end with a screenshot, say so in the system prompt, for example, `End each group of actions with a screenshot so you can verify the result before continuing.`
 
-###  System prompts
+### System prompts
 
 When you include the computer use tool in a request, the API generates a computer use-specific system prompt. It's similar to the [tool use system prompt](agents-and-tools/tool-use/define-tools.md) but starts with:
 
@@ -299,7 +299,7 @@ When you include the computer use tool in a request, the API generates a compute
 
 As with regular tool use, the user-provided `system` parameter is still respected and used in the construction of the combined system prompt.
 
-###  Available actions
+### Available actions
 
 Each action is a member tool of the computer use toolset: Claude names the member in a `tool_use` block that carries `"toolset_name": "computer"`, and the block's `input` holds only that member's parameters, with no `action` field. The toolset has 17 member tools:
 
@@ -327,7 +327,7 @@ Keep the following in mind when implementing the members:
 
 ### Example actions
 
-###  Tool parameters
+### Tool parameters
 
 The toolset entry in the `tools` array accepts four parameters; the rules they share with the browser use toolset are listed under [Client toolsets](agents-and-tools/tool-use/tool-reference.md).
 
@@ -362,17 +362,17 @@ The entry rejects these parameters from earlier tool versions, and a request tha
 
 The entry also can't be declared in the same request as a `computer_20251124` entry or another tool named `computer`. For `strict`, `input_examples`, `defer_loading` placement, `tool_choice`, streaming, and caller restrictions, see [Client toolsets](agents-and-tools/tool-use/tool-reference.md).
 
-###  Combining with thinking
+### Combining with thinking
 
-For combining computer use with thinking, see [Thinking](build-with-claude/thinking.md).
+To combine computer use with thinking, see [Thinking](build-with-claude/thinking.md).
 
-###  Augmenting computer use with other tools
+### Augmenting computer use with other tools
 
 To add other tools alongside computer use, include them in the same `tools` array. The [Quick start](#quick-start) section shows this pattern with the [bash tool](agents-and-tools/tool-use/bash-tool.md) and [text editor tool](agents-and-tools/tool-use/text-editor-tool.md). You can add your own [custom tool definitions](agents-and-tools/tool-use/define-tools.md) the same way.
 
 For tasks that stay inside webpages, you can also [declare the browser use tool in the same request](agents-and-tools/tool-use/browser-use-tool.md): the two toolsets work independently, each in its own coordinate frame, and calls to members that share a name, such as `screenshot` or `key`, are told apart by `toolset_name`.
 
-###  Build a custom computer use environment
+### Build a custom computer use environment
 
 The [reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) is meant to help you get started with computer use. It includes all of the components needed to have Claude use a computer. However, you can build your own environment for computer use to suit your needs. You'll need:
 
@@ -381,18 +381,18 @@ The [reference implementation](https://github.com/anthropics/anthropic-quickstar
 - An agent loop that interacts with the Claude API and runs the `tool_use` results using your tool implementations
 - An API or UI that allows user input to start the agent loop
 
-###  Implement the computer use tool
+### Implement the computer use tool
 
 The computer use tool is implemented as a schema-less tool. When using this tool, you don't need to provide an input schema as with other tools; the schema is built into Claude's model and can't be modified.
 
 1. 1
 
-   Set up your computing environment
+   ### Set up your computing environment
 
    Create a virtual display or connect to an existing display that Claude will interact with. This typically involves setting up Xvfb (X Virtual Framebuffer) or similar technology.
 2. 2
 
-   Implement action handlers
+   ### Implement action handlers
 
    Create functions to handle each action type that Claude might request:
 
@@ -435,7 +435,7 @@ The computer use tool is implemented as a schema-less tool. When using this tool
    ```
 3. 3
 
-   Process Claude's tool calls
+   ### Process Claude's tool calls
 
    Extract and run tool calls from Claude's responses:
 
@@ -479,11 +479,11 @@ The computer use tool is implemented as a schema-less tool. When using this tool
    ```
 4. 4
 
-   Implement the agent loop
+   ### Implement the agent loop
 
    Wrap the two previous steps in a loop that sends the results back and repeats until Claude returns no member tool calls; [Understand the agent loop](#understanding-the-agentic-loop) shows this loop in each language.
 
-###  Handle errors
+### Handle errors
 
 Report a failed action to Claude as a `tool_result` with `is_error: true` and a short description, and include `"toolset_name": "computer"` as on any other member result. If the failed action was part of a [batch action](#batch-actions), answer the remaining blocks in the batch with the halt text shown there instead of running them.
 
@@ -508,7 +508,7 @@ For example, when screenshot capture fails:
 
 Use the same shape for coordinates outside the display bounds and for actions that fail to run, with a message that says what went wrong.
 
-###  Size screenshots to fit image limits
+### Size screenshots to fit image limits
 
 Screenshots and zoom images that you return to the computer use toolset must already fit within your model's [image size limits](build-with-claude/vision.md): the toolset takes no display dimensions and the API doesn't downscale for you, so an oversized `tool_result` image is rejected with a validation error. Because Claude returns coordinates in the pixel space of the image it sees, keep the scale factor you used so you can map those coordinates back to your screen.
 
@@ -556,7 +556,7 @@ When you choose a display resolution and return screenshots:
 - Include relevant metadata such as timestamp or display state.
 - If you use higher resolutions, ensure coordinates are accurately scaled.
 
-###  Manage screenshot history
+### Manage screenshot history
 
 Long agent loops accumulate screenshots quickly (roughly 1,000–1,800 input tokens each). The API's [request limits](build-with-claude/vision.md) also apply. Once a single request carries more than 20 images, every image in it is held to a stricter per-side limit. A loop that keeps its screenshot history reaches that count within a few dozen turns, so either resize each screenshot so that neither side exceeds 2000 px or prune older screenshots to keep 20 or fewer in the request.
 
@@ -565,7 +565,7 @@ To keep [Prompt caching](build-with-claude/prompt-caching.md) effective while bo
 - Place one `cache_control` breakpoint after the system prompt and tool definitions, and up to three more on the last `tool_result` block of each of the most recent turns, advancing them each turn. Within a [batch action](#batch-actions), markers on several blocks act as a single breakpoint but each still counts toward the limit of four, so use one per turn.
 - Prune old screenshots in *batches*, not one each turn. Dropping a screenshot every turn changes the prefix every turn and invalidates the cache. A reasonable default is to keep the last three screenshots and prune every 25 turns, so the prefix stays byte-identical between prune events; if your screenshots exceed 2000 px on either side, choose an interval that keeps each request at 20 or fewer images.
 
-###  Diagnose click issues
+### Diagnose click issues
 
 If clicks miss their targets, the cause is usually one of the following:
 
@@ -576,7 +576,7 @@ If clicks miss their targets, the cause is usually one of the following:
 | Claude clicks the wrong element entirely | Ambiguous instruction, or visually similar elements nearby | Use positional prompts ("the blue Submit button in the bottom-right"); break the interaction into smaller steps |
 | Accuracy is consistently poor | Resolution too low | Try 1280x720 as a baseline |
 
-###  Follow implementation best practices
+### Follow implementation best practices
 
 ### Add action delays
 
@@ -586,7 +586,7 @@ If clicks miss their targets, the cause is usually one of the following:
 
 ---
 
-##  Migrate from `computer_20251124`
+## Migrate from `computer_20251124`
 
 Upgrading from `computer_20251124` to the toolset is optional: the models listed for `computer_20251124` under [Earlier tool versions](#earlier-tool-versions) keep accepting it with its beta header, so an existing integration keeps working until you change it. To upgrade, make the following changes together:
 
@@ -652,7 +652,7 @@ The following pair shows a `tool_use` block before and after the change. The act
 
 
 
-##  Earlier tool versions
+## Earlier tool versions
 
 Two earlier versions of the computer use tool remain available in beta for existing integrations, for models that don't support the toolset, and on platforms where the toolset isn't currently available. Each requires its [beta header](api/beta-headers.md) on every request, and their parameters are documented in the [beta Messages API reference](api/beta/messages/create.md). In the SDKs, pass the header through the `betas` parameter and use the beta namespace; only the computer use tool needs the header, not the bash or text editor tools in the same request.
 
@@ -663,7 +663,7 @@ Two earlier versions of the computer use tool remain available in beta for exist
 
 ---
 
-##  Limitations
+## Limitations
 
 1. **Latency:** The current computer use latency for human-AI interactions might be too slow compared to regular human-directed computer actions. Focus on use cases where speed isn't critical (for example, background information gathering, automated software testing) in trusted environments.
 2. **Computer vision accuracy and reliability:** Claude might make mistakes or hallucinate when outputting specific coordinates while generating actions. Claude's [summarized thinking](build-with-claude/thinking.md) output can help you understand the model's reasoning and identify potential issues; set `display: "summarized"` on the thinking configuration, because the models that support the toolset omit thinking text by default.
@@ -676,13 +676,13 @@ Two earlier versions of the computer use tool remain available in beta for exist
 
 Always carefully review and verify Claude's computer use actions and logs. Do not use Claude for tasks requiring perfect precision or sensitive user information without human oversight.
 
-##  Data retention
+## Data retention
 
 Computer use is a client-side tool. All screenshots, mouse actions, keyboard inputs, and any files involved in a session are captured and stored in your environment, not by Anthropic. Anthropic processes the screenshot images and action requests in real time as part of the API call. Retention for those API requests is governed by [API and data retention](manage-claude/api-and-data-retention.md).
 
 Because your application controls where and how computer use data is stored, computer use is ZDR eligible. For ZDR eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
 
-##  Pricing
+## Pricing
 
 Computer use follows the standard [tool use pricing](agents-and-tools/tool-use/overview.md). When using the computer use tool:
 
@@ -698,7 +698,7 @@ Computer use follows the standard [tool use pricing](agents-and-tools/tool-use/o
 - Screenshot and zoom images returned in tool results, billed as image input (see [Vision pricing](build-with-claude/vision.md))
 - Tool execution results returned to Claude
 
-##  Next steps
+## Next steps
 
 
 

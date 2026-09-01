@@ -12,51 +12,47 @@ Get Compliance Group
 
 ##### Path parameters
 
-group\_id: string
+group\_id: string
 
 The group ID (tagged ID, e.g., rbac\_group\_abc123)
 
 ##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### Returns
 
-id: string
+id: string
 
 Group identifier (tagged ID)
 
-created\_at: string or null
+created\_at: string or null
 
 Group creation timestamp (ISO 8601)
 
-description: string
+description: string
 
 Group description
 
-name: string
+name: string
 
 Group name
 
-roles: array of string or null
+roles: array of string or null
 
 Role IDs assigned to this group.
 
-source\_type: string
+source\_type: string
 
 How the group was created ('direct' or 'scim')
 
-updated\_at: string or null
+updated\_at: string or null
 
 Group last-updated timestamp (ISO 8601)
 
-
+Get Compliance Group
 
-### Get Compliance Group
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID \

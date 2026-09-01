@@ -14,7 +14,7 @@
 
 
 
-SkillUsage object{ data, next\_page }
+SkillUsage object{ data, next\_page }
 
 Response for GET /v1/organizations/analytics/skills.
 

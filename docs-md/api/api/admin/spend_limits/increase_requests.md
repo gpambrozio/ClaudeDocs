@@ -26,11 +26,11 @@
 
 
 
-SpendLimitIncreaseRequest object{ id, actor, created\_at, 6 more }
+SpendLimitIncreaseRequest object{ id, actor, created\_at, 6 more }
 
 
 
-IncreaseRequestApproveResponse object{ id, actor, created\_at, 7 more }
+IncreaseRequestApproveResponse object{ id, actor, created\_at, 7 more }
 
 ---
 

@@ -6,35 +6,35 @@
 
 Here's how to make Claude's responses more consistent:
 
-##  Specify the desired output format
+## Specify the desired output format
 
 Precisely define your desired output format using JSON, XML, or custom templates so that Claude follows every output formatting element you require.
 
 ### Example: Standardizing customer feedback
 
-##  Prefill Claude's response
+## Prefill Claude's response
 
 Prefill the `Assistant` turn with your desired format. This trick bypasses Claude's friendly preamble and enforces your structure.
 
 ### Example: Daily sales report
 
-##  Constrain with examples
+## Constrain with examples
 
 Provide examples of your desired output. This is more effective than abstract instructions.
 
 ### Example: Generating consistent market intelligence
 
-##  Use retrieval for contextual consistency
+## Use retrieval for contextual consistency
 
 For tasks requiring consistent context (for example, chatbots, knowledge bases), use retrieval to ground Claude's responses in a fixed information set.
 
 ### Example: Enhancing IT support consistency
 
-##  Chain prompts for complex tasks
+## Chain prompts for complex tasks
 
 Break down complex tasks into smaller, consistent subtasks. Each subtask gets Claude's full attention, reducing inconsistency errors across scaled workflows.
 
-##  Keep Claude in character
+## Keep Claude in character
 
 For role-based applications, maintaining consistent character requires deliberate prompting.
 

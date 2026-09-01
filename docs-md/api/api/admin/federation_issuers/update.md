@@ -20,7 +20,7 @@ are not accepted.
 
 ##### Path parameters
 
-federation\_issuer\_id: string
+federation\_issuer\_id: string
 
 ID of the federation issuer to update.
 
@@ -28,7 +28,7 @@ ID of the federation issuer to update.
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -36,13 +36,13 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 ##### Body
 
-check\_jti: optional boolean or null
+check\_jti: optional boolean or null
 
 Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
 
 
 
-issuer\_url: optional string or null
+issuer\_url: optional string or null
 
 Replaces the `iss` claim value to match against. For discovery-mode issuers without a `discovery_base`, this is also the URL Anthropic fetches the OIDC discovery document and signing keys from, so changing it repoints the JWKS source. Changing the issuer URL to a well-known shared platform is rejected while any live rule under this issuer would not constrain tenant identity.
 
@@ -50,7 +50,7 @@ minLength1
 
 
 
-jwks: optional object{ type, ca\_cert\_pem, discovery\_base } or object{ type, url, ca\_cert\_pem } or object{ keys, type } or null
+jwks: optional object{ type, ca\_cert\_pem, discovery\_base } or object{ type, url, ca\_cert\_pem } or object{ keys, type } or null
 
 Replaces the entire JWKS configuration.
 
@@ -58,35 +58,35 @@ One of the following:
 
 
 
-Discovery object{ type, ca\_cert\_pem, discovery\_base }
+Discovery object{ type, ca\_cert\_pem, discovery\_base }
 
 JWKS via the issuer's OIDC discovery document.
 
-type: "discovery"
+type: "discovery"
 
 
 
-ca\_cert\_pem: optional string or null
+ca\_cert\_pem: optional string or null
 
 Optional custom CA (PEM) for TLS verification of the JWKS fetch.
 
 maxLength8192
 
-discovery\_base: optional string or null
+discovery\_base: optional string or null
 
 Set when the discovery URL differs from `issuer_url`.
 
 
 
-ExplicitURL object{ type, url, ca\_cert\_pem }
+ExplicitURL object{ type, url, ca\_cert\_pem }
 
 JWKS fetched from a fixed endpoint.
 
-type: "explicit\_url"
+type: "explicit\_url"
 
 
 
-url: string
+url: string
 
 JWKS endpoint.
 
@@ -94,7 +94,7 @@ minLength1
 
 
 
-ca\_cert\_pem: optional string or null
+ca\_cert\_pem: optional string or null
 
 Optional custom CA (PEM) for TLS verification of the JWKS fetch.
 
@@ -102,27 +102,27 @@ maxLength8192
 
 
 
-Inline object{ keys, type }
+Inline object{ keys, type }
 
 JWKS supplied directly; no network fetch.
 
 
 
-keys: array of map[unknown]
+keys: array of map[unknown]
 
 Inline JWK objects.
 
 minItems1
 
-type: "inline"
+type: "inline"
 
-jwks\_polling\_disabled: optional boolean or null
+jwks\_polling\_disabled: optional boolean or null
 
 Only `false` is accepted, to re-enable polling after the system pauses it. Polling is paused automatically; sending `true` is rejected.
 
 
 
-max\_jwt\_lifetime\_seconds: optional number or null
+max\_jwt\_lifetime\_seconds: optional number or null
 
 Maximum allowed iat→exp spread for assertions from this issuer (1-176400 seconds, i.e. up to 49h). Assertions must carry both `iat` and `exp`; a missing `iat` is rejected.
 
@@ -132,7 +132,7 @@ exclusiveMinimum0
 
 
 
-name: optional string or null
+name: optional string or null
 
 Replaces the slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
@@ -144,20 +144,16 @@ minLength1
 
 
 
-FederationIssuer object{ id, archived\_at, archived\_by\_actor\_id, 12 more }
+FederationIssuer object{ id, archived\_at, archived\_by\_actor\_id, 12 more }
 
 Registered external OIDC identity provider.
 
 Records an external IdP the organization trusts for the RFC 7523
 jwt-bearer grant. The `issuer_url` must match the JWT `iss` claim exactly.
 
-
+Update Federation Issuer
 
-### Update Federation Issuer
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/federation_issuers/$FEDERATION_ISSUER_ID \

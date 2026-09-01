@@ -24,35 +24,35 @@ cURL
 
 
 
-BetaAPIKey object{ id, created\_at, created\_by, 8 more }
+BetaAPIKey object{ id, created\_at, created\_by, 8 more }
 
 
 
-BetaAPIKeyCreatedBy object{ id, type }
+BetaAPIKeyCreatedBy object{ id, type }
 
-id: string
+id: string
 
 ID of the actor that created the object.
 
 
 
-type: "service\_account" or "user"
+type: "service\_account" or "user"
 
 Type of the actor that created the object.
 
 One of the following:
 
-"service\_account"
+"service\_account"
 
-"user"
-
-
-
-BetaAPIKeyOrganizationScope object{ type }
+"user"
 
 
 
-type: "organization"
+BetaAPIKeyOrganizationScope object{ type }
+
+
+
+type: "organization"
 
 Scope type. Always `"organization"`: the API key has no Workspace. Only a principal-bound API key can have this scope.
 
@@ -60,15 +60,15 @@ defaultorganization
 
 
 
-BetaAPIKeyServiceAccountActor object{ service\_account\_id, type }
+BetaAPIKeyServiceAccountActor object{ service\_account\_id, type }
 
-service\_account\_id: string
+service\_account\_id: string
 
 ID of the Service Account the API key acts as.
 
 
 
-type: "service\_account\_actor"
+type: "service\_account\_actor"
 
 Principal type. Always `"service_account_actor"` for a Service Account.
 
@@ -76,33 +76,33 @@ defaultservice\_account\_actor
 
 
 
-BetaAPIKeyUserActor object{ type, user\_id }
+BetaAPIKeyUserActor object{ type, user\_id }
 
 
 
-type: "user\_actor"
+type: "user\_actor"
 
 Principal type. Always `"user_actor"` for a User.
 
 defaultuser\_actor
 
-user\_id: string
+user\_id: string
 
 ID of the User the API key acts as.
 
 
 
-BetaAPIKeyWorkspaceScope object{ type, workspace\_id }
+BetaAPIKeyWorkspaceScope object{ type, workspace\_id }
 
 
 
-type: "workspace"
+type: "workspace"
 
 Scope type. Always `"workspace"`: the API key belongs to one Workspace.
 
 defaultworkspace
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the Workspace the API key belongs to. Unlike the deprecated top-level `workspace_id`, this is the Workspace's real ID even for the organization's default Workspace.
 

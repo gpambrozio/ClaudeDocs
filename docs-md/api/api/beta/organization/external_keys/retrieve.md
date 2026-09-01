@@ -16,7 +16,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
 
 
-external\_key\_id: string
+external\_key\_id: string
 
 ID of the External Key.
 
@@ -26,7 +26,7 @@ maxLength2048
 
 
 
-BetaExternalKey object{ id, attachment, created\_at, 5 more }
+BetaExternalKey object{ id, attachment, created\_at, 5 more }
 
 CMEK external key config belonging to the caller's organization.
 
@@ -34,13 +34,9 @@ Configs are organization-scoped. Workspaces attach to a config; once any
 workspace references it, the provider fields become effectively immutable
 (existing encrypted data needs the config for decrypt).
 
-
+Get External Key
 
-### Get External Key
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID \

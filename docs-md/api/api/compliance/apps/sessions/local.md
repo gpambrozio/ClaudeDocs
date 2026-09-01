@@ -18,19 +18,19 @@
 
 
 
-LocalRetrieveResponse object{ id, created\_at, organization\_uuid, 5 more }
+LocalRetrieveResponse object{ id, created\_at, organization\_uuid, 5 more }
 
 A session that a user ran on their own computer in a Claude app while
 signed in with their organization account.
 
 
 
-LocalListResponse object{ id, created\_at, organization\_uuid, 5 more }
+LocalListResponse object{ id, created\_at, organization\_uuid, 5 more }
 
 A session that a user ran on their own computer in a Claude app while
 signed in with their organization account.
 
-#### Local[Messages](api/http/compliance/apps/sessions/local/messages.md)
+#### Local[Messages](api/http/compliance/apps/sessions/local/messages.md)
 
 ##### [Retrieve local session messages](api/http/compliance/apps/sessions/local/messages/list.md)
 

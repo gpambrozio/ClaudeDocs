@@ -23,21 +23,21 @@ no time filter) with the default `order_by`. `user_ids[]` with
 
 ##### Query parameters
 
-after\_id: optional string
+after\_id: optional string
 
 Pagination cursor for retrieving the next page of results. To paginate, pass the `last_id` value from the most recent response. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
-before\_id: optional string
+before\_id: optional string
 
 Pagination cursor for retrieving the previous page of results. To paginate, pass the `first_id` value from the most recent response. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
 
 
-created\_at: optional object{ gt, gte, lt, lte }
+created\_at: optional object{ gt, gte, lt, lte }
 
 
 
-gt: optional string
+gt: optional string
 
 Filter chats created after this time (RFC 3339 format)
 
@@ -45,7 +45,7 @@ formatdate-time
 
 
 
-gte: optional string
+gte: optional string
 
 Filter chats created at or after this time (RFC 3339 format)
 
@@ -53,7 +53,7 @@ formatdate-time
 
 
 
-lt: optional string
+lt: optional string
 
 Filter chats created before this time (RFC 3339 format)
 
@@ -61,7 +61,7 @@ formatdate-time
 
 
 
-lte: optional string
+lte: optional string
 
 Filter chats created at or before this time (RFC 3339 format)
 
@@ -69,7 +69,7 @@ formatdate-time
 
 
 
-limit: optional number
+limit: optional number
 
 Maximum results (default: 100, max: 1000)
 
@@ -81,7 +81,7 @@ minimum1
 
 
 
-order\_by: optional "created\_at" or "updated\_at"
+order\_by: optional "created\_at" or "updated\_at"
 
 Sort key for results. `created_at` (default) sorts by chat creation time. `updated_at` sorts by last update time and is only supported for org-wide queries (omit user\_ids[]). For org-wide queries, any time filter must match the sort key: `created_at.*` filters require `order_by=created_at`, and `updated_at.*` filters require `order_by=updated_at`.
 
@@ -89,25 +89,25 @@ defaultcreated\_at
 
 One of the following:
 
-"created\_at"
+"created\_at"
 
-"updated\_at"
+"updated\_at"
 
-organization\_ids: optional array of string
+organization\_ids: optional array of string
 
 Filter by organization IDs (accepts `org_...` or organization UUID). Enumerate IDs via `GET /v1/compliance/organizations`.
 
-project\_ids: optional array of string
+project\_ids: optional array of string
 
 Filter by project IDs (accepts `claude_proj_...`). Enumerate IDs via `GET /v1/compliance/apps/projects`. Requires user\_ids[]; not supported for org-wide queries.
 
 
 
-updated\_at: optional object{ gt, gte, lt, lte }
+updated\_at: optional object{ gt, gte, lt, lte }
 
 
 
-gt: optional string
+gt: optional string
 
 Filter chats updated after this time (RFC 3339 format). Combining updated\_at filters with `user_ids[]` is deprecated and will be rejected after 2026-09-22; for updated\_at-windowed polling, omit `user_ids[]` and use `order_by=updated_at` with `after_id` pagination.
 
@@ -115,7 +115,7 @@ formatdate-time
 
 
 
-gte: optional string
+gte: optional string
 
 Filter chats updated at or after this time (RFC 3339 format). Combining updated\_at filters with `user_ids[]` is deprecated and will be rejected after 2026-09-22; for updated\_at-windowed polling, omit `user_ids[]` and use `order_by=updated_at` with `after_id` pagination.
 
@@ -123,7 +123,7 @@ formatdate-time
 
 
 
-lt: optional string
+lt: optional string
 
 Filter chats updated before this time (RFC 3339 format). Combining updated\_at filters with `user_ids[]` is deprecated and will be rejected after 2026-09-22; for updated\_at-windowed polling, omit `user_ids[]` and use `order_by=updated_at` with `after_id` pagination.
 
@@ -131,7 +131,7 @@ formatdate-time
 
 
 
-lte: optional string
+lte: optional string
 
 Filter chats updated at or before this time (RFC 3339 format). Combining updated\_at filters with `user_ids[]` is deprecated and will be rejected after 2026-09-22; for updated\_at-windowed polling, omit `user_ids[]` and use `order_by=updated_at` with `after_id` pagination.
 
@@ -139,7 +139,7 @@ formatdate-time
 
 
 
-user\_ids: optional array of string
+user\_ids: optional array of string
 
 Filter to chats created by specific users (max 10 per request). Omit for an org-wide query. Enumerate IDs via `GET /v1/compliance/organizations/{org_uuid}/users`. Deprecated combination: passing `user_ids[]` together with any `updated_at.*` filter is deprecated and will be rejected after 2026-09-22. For `updated_at`-windowed polling, omit `user_ids[]` and use `order_by=updated_at` with `after_id` pagination.
 
@@ -147,23 +147,23 @@ maxItems10
 
 ##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### Returns
 
 
 
-data: array of object{ id, created\_at, deleted\_at, 8 more }
+data: array of object{ id, created\_at, deleted\_at, 8 more }
 
 List of chat metadata sorted chronologically by the request's `order_by` key (default `created_at`), tie break by id
 
-id: string
+id: string
 
 Chat ID
 
 
 
-created\_at: string
+created\_at: string
 
 Creation timestamp
 
@@ -171,35 +171,35 @@ formatdate-time
 
 
 
-deleted\_at: string or null
+deleted\_at: string or null
 
 Deletion timestamp if deleted
 
 formatdate-time
 
-href: string
+href: string
 
 URL to view this chat in claude.ai
 
-model: string or null
+model: string or null
 
 Model selected for this chat (e.g. 'claude-opus-5'). May be null for legacy chats that never had a model recorded.
 
-name: string
+name: string
 
 Chat name/title
 
-organization\_uuid: string
+organization\_uuid: string
 
 Organization UUID this chat belongs to
 
-project\_id: string or null
+project\_id: string or null
 
 Project ID this chat belongs to
 
 
 
-updated\_at: string
+updated\_at: string
 
 Last update timestamp
 
@@ -207,41 +207,37 @@ formatdate-time
 
 
 
-user: object{ id, email\_address } or null
+user: object{ id, email\_address } or null
 
 User information for compliance responses.
 
-id: string
+id: string
 
 User identifier
 
-email\_address: string
+email\_address: string
 
 User's email address
 
-organization\_id: string⁠Deprecated
+organization\_id: string⁠Deprecated
 
 Organization ID this chat belongs to
 
-first\_id: string or null
+first\_id: string or null
 
 Opaque pagination cursor for the first chat in the current result set. Pass as `before_id` on the next request to page backwards. Backward pagination is only supported for per-user queries (`user_ids[]` set); org-wide queries do not accept `before_id`. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
-has\_more: boolean
+has\_more: boolean
 
 Whether more records exist beyond the current result set
 
-last\_id: string or null
+last\_id: string or null
 
 Opaque pagination cursor for the last chat in the current result set. Pass as `after_id` on the next request to page forwards. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
-
+List chats
 
-### List chats
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/compliance/apps/chats \

@@ -6,7 +6,7 @@
 
 This guide walks you through creating an agent, setting up an environment, starting a session, and streaming agent responses.
 
-##  Core concepts
+## Core concepts
 
 | Concept | Description |
 | --- | --- |
@@ -15,12 +15,12 @@ This guide walks you through creating an agent, setting up an environment, start
 | **Session** | A running agent instance within an environment, performing a specific task and generating outputs |
 | **Events** | Messages exchanged between your application and the agent (user turns, tool results, status updates) |
 
-##  Prerequisites
+## Prerequisites
 
 - A [Claude Console account](https://platform.claude.com)
 - An [API key](/settings/keys)
 
-##  Install the CLI
+## Install the CLI
 
 Homebrew (macOS)curl (Linux/WSL)Go
 
@@ -38,7 +38,7 @@ ant --version
 
 
 
-##  Install the SDK
+## Install the SDK
 
 PythonTypeScriptJavaGoC#RubyPHP
 
@@ -56,11 +56,11 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 
 
 
-##  Create your first session
+## Create your first session
 
 1. 1
 
-   Create an agent
+   ### Create an agent
 
    Create an agent that defines the model, system prompt, and available tools.
 
@@ -92,7 +92,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
    Save the returned `agent.id`. You'll reference it in every session you create.
 2. 2
 
-   Create an environment
+   ### Create an environment
 
    An environment defines the sandbox where your agent runs.
 
@@ -121,7 +121,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
    Save the returned `environment.id`. You'll reference it in every session you create.
 3. 3
 
-   Start a session
+   ### Start a session
 
    Create a session that references your agent and environment.
 
@@ -140,7 +140,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
    ```
 4. 4
 
-   Send a message and stream the response
+   ### Send a message and stream the response
 
    Open a stream, send a user event, then process events as they arrive:
 
@@ -194,7 +194,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 
    
 
-##  What's happening
+## What's happening
 
 When you send a user event, Claude Managed Agents:
 
@@ -204,7 +204,7 @@ When you send a user event, Claude Managed Agents:
 4. **Streams events:** You receive real-time updates as the agent works.
 5. **Goes idle:** The agent emits a `session.status_idle` event when it has nothing more to do.
 
-##  Build a complete app
+## Build a complete app
 
 Each of these quickstarts pairs Claude Managed Agents with a popular chat framework to make a complete, runnable application. In each one, the framework renders the chat surface while a managed session runs the agent loop server-side: the session holds the transcript, runs tools in a sandbox, and streams events that the front end renders.
 
@@ -220,7 +220,7 @@ A spreadsheet analyst in a chat built from assistant-ui primitives. Sessions are
 
 A personal finance assistant in a CopilotKit chat. The AG-UI adapter for Claude Managed Agents maps each chat thread to a managed session and streams replies token by token, and custom tools render interactive charts inline in the conversation.
 
-##  Next steps
+## Next steps
 
 
 

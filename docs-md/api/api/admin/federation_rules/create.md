@@ -29,7 +29,7 @@ keys are not accepted.
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -37,31 +37,31 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 ##### Body
 
-issuer\_id: string
+issuer\_id: string
 
 Tagged ID of the federation issuer.
 
 
 
-match: object{ audience, claims, condition, subject\_prefix }
+match: object{ audience, claims, condition, subject\_prefix }
 
 Conditions the verified JWT must satisfy for this rule to apply. At least one of `subject_prefix` (other than a wildcard-only value like `*`), `claims`, or `condition` is required; `audience` alone is not sufficient.
 
 
 
-audience: optional string or null
+audience: optional string or null
 
 Exact match against the `aud` claim (any element if array). When omitted, the JWT's `aud` must still equal Anthropic's expected audience for the issuer; setting this field overrides that default.
 
 maxLength1024
 
-claims: optional map[string] or null
+claims: optional map[string] or null
 
 Exact-match `{claim: value}` pairs against top-level claims. Only string-valued claims can be matched; use `condition` for non-string claims.
 
 
 
-condition: optional string or null
+condition: optional string or null
 
 CEL expression over claims for logic the structural fields can't express. Must evaluate to a boolean and may reference only the `claims` variable; a constant-true expression (such as `true`) is rejected with 400.
 
@@ -69,7 +69,7 @@ maxLength4096
 
 
 
-subject\_prefix: optional string or null
+subject\_prefix: optional string or null
 
 Match the verified JWT `sub` claim. Exact match unless the value ends with `*`, in which case it is a prefix match. Example: `repo:my-org/my-repo:ref:refs/heads/main`.
 
@@ -77,7 +77,7 @@ maxLength1024
 
 
 
-name: string
+name: string
 
 Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
@@ -87,7 +87,7 @@ minLength1
 
 
 
-oauth\_scope: string
+oauth\_scope: string
 
 Space-separated OAuth scopes. OAuth callers may only set `workspace:developer` or `workspace:inference`; other scopes (such as `org:admin`) require a Console session.
 
@@ -95,31 +95,31 @@ minLength1
 
 
 
-target: object{ service\_account\_id, type, service\_account\_name }
+target: object{ service\_account\_id, type, service\_account\_name }
 
 Identity that tokens minted via this rule act as. Currently always a `service_account` target.
 
-service\_account\_id: string
+service\_account\_id: string
 
 Tagged ID of the service account to mint tokens for.
 
-type: "service\_account"
+type: "service\_account"
 
-service\_account\_name: optional string or null
+service\_account\_name: optional string or null
 
 Service account's display name at read time. Ignored on writes.
 
-applies\_to\_all\_workspaces: optional boolean
+applies\_to\_all\_workspaces: optional boolean
 
 When true, enable this rule for every workspace in the org (including workspaces created later).
 
-attributes: optional map[string] or null
+attributes: optional map[string] or null
 
 CEL expressions `{name: expr}` extracting named values from claims. Not yet supported; any non-empty value is rejected with 400.
 
 
 
-description: optional string or null
+description: optional string or null
 
 Optional free-text description.
 
@@ -127,7 +127,7 @@ maxLength2000
 
 
 
-token\_lifetime\_seconds: optional number
+token\_lifetime\_seconds: optional number
 
 Lifetime in seconds for access tokens minted via this rule (60-86400). Defaults to 3600 (1h). Minted tokens are capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.
 
@@ -135,7 +135,7 @@ maximum86400
 
 minimum60
 
-workspace\_id: optional string or null
+workspace\_id: optional string or null
 
 Tagged ID of the workspace to enable this rule for. Required unless `applies_to_all_workspaces` is true. Additional workspaces can be added via the `/federation_rules/{federation_rule_id}/workspaces` sub-resource.
 
@@ -143,7 +143,7 @@ Tagged ID of the workspace to enable this rule for. Required unless `applies_to_
 
 
 
-FederationRule object{ id, applies\_to\_all\_workspaces, archived\_at, 17 more }
+FederationRule object{ id, applies\_to\_all\_workspaces, archived\_at, 17 more }
 
 Authorization rule binding an external OIDC identity to Anthropic.
 
@@ -156,13 +156,9 @@ of that workspace (it is implicitly a member of the default workspace);
 rules carrying only the legacy `workspace_id` binding do not enforce
 this.
 
-
+Create Federation Rule
 
-### Create Federation Rule
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/federation_rules \

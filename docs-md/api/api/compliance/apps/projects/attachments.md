@@ -14,7 +14,7 @@
 
 
 
-AttachmentListResponse = object{ id, created\_at, filename, 4 more } or object{ id, created\_at, filename, 3 more }
+AttachmentListResponse = object{ id, created\_at, filename, 4 more } or object{ id, created\_at, filename, 3 more }
 
 File attachment reference for compliance responses.
 

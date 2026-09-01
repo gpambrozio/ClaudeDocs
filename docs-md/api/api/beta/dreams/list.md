@@ -16,7 +16,7 @@ List Dreams
 
 
 
-"created\_at[gt]": optional string
+"created\_at[gt]": optional string
 
 Return dreams with `created_at` strictly after this timestamp (exclusive lower bound, RFC 3339). Unset applies no lower bound.
 
@@ -24,157 +24,157 @@ formatdate-time
 
 
 
-"created\_at[lt]": optional string
+"created\_at[lt]": optional string
 
 Return dreams with `created_at` strictly before this timestamp (exclusive upper bound, RFC 3339). Unset applies no upper bound.
 
 formatdate-time
 
-include\_archived: optional boolean
+include\_archived: optional boolean
 
 Query parameter for include\_archived
 
 
 
-limit: optional number
+limit: optional number
 
 Query parameter for limit
 
 formatint32
 
-page: optional string
+page: optional string
 
 Query parameter for page
 
 
 
-statuses: optional array of [BetaDreamStatus](api/http/beta/dreams.md)
+statuses: optional array of [BetaDreamStatus](api/http/beta/dreams.md)
 
 Filter by lifecycle status. Repeat the parameter to match any of multiple statuses. Empty applies no status filter.
 
 One of the following:
 
-"pending"
+"pending"
 
-"running"
+"running"
 
-"completed"
+"completed"
 
-"failed"
+"failed"
 
-"canceled"
+"canceled"
 
 ##### Headers
 
 
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-string
+string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
 
 One of the following:
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24"
 
-"prompt-caching-2024-07-31"
+"prompt-caching-2024-07-31"
 
-"computer-use-2024-10-22"
+"computer-use-2024-10-22"
 
-"computer-use-2025-01-24"
+"computer-use-2025-01-24"
 
-"pdfs-2024-09-25"
+"pdfs-2024-09-25"
 
-"token-counting-2024-11-01"
+"token-counting-2024-11-01"
 
-"token-efficient-tools-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"output-128k-2025-02-19"
+"output-128k-2025-02-19"
 
-"files-api-2025-04-14"
+"files-api-2025-04-14"
 
-"mcp-client-2025-04-04"
+"mcp-client-2025-04-04"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-11-20"
 
-"dev-full-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"interleaved-thinking-2025-05-14"
+"interleaved-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"code-execution-2025-05-22"
 
-"extended-cache-ttl-2025-04-11"
+"extended-cache-ttl-2025-04-11"
 
-"context-1m-2025-08-07"
+"context-1m-2025-08-07"
 
-"context-management-2025-06-27"
+"context-management-2025-06-27"
 
-"model-context-window-exceeded-2025-08-26"
+"model-context-window-exceeded-2025-08-26"
 
-"skills-2025-10-02"
+"skills-2025-10-02"
 
-"fast-mode-2026-02-01"
+"fast-mode-2026-02-01"
 
-"output-300k-2026-03-24"
+"output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
+"user-profiles-2026-03-24"
 
-"user-profiles-2026-08-18"
+"user-profiles-2026-08-18"
 
-"advisor-tool-2026-03-01"
+"advisor-tool-2026-03-01"
 
-"managed-agents-2026-04-01"
+"managed-agents-2026-04-01"
 
-"cache-diagnosis-2026-04-07"
+"cache-diagnosis-2026-04-07"
 
-"dreaming-2026-04-21"
+"dreaming-2026-04-21"
 
-"thinking-token-count-2026-05-13"
+"thinking-token-count-2026-05-13"
 
-"server-side-fallback-2026-06-01"
+"server-side-fallback-2026-06-01"
 
-"server-side-fallback-2026-07-01"
+"server-side-fallback-2026-07-01"
 
-"fallback-credit-2026-06-01"
+"fallback-credit-2026-06-01"
 
-"fallback-credit-2026-07-01"
+"fallback-credit-2026-07-01"
 
-"agent-memory-2026-07-22"
+"agent-memory-2026-07-22"
 
-"mid-conversation-tool-changes-2026-07-01"
+"mid-conversation-tool-changes-2026-07-01"
 
-"compact-2026-01-12"
+"compact-2026-01-12"
 
-"computer-use-2025-11-24"
+"computer-use-2025-11-24"
 
-"mcp-tunnels-2026-06-22"
+"mcp-tunnels-2026-06-22"
 
-"structured-outputs-2025-11-13"
+"structured-outputs-2025-11-13"
 
-"task-budgets-2026-03-13"
+"task-budgets-2026-03-13"
 
-"thinking-display-updates-2026-08-18"
+"thinking-display-updates-2026-08-18"
 
-"ce-user-management-2026-07-13"
+"ce-user-management-2026-07-13"
 
 ##### Returns
 
 
 
-data: array of [BetaDream](api/http/beta/dreams.md) { id, archived\_at, created\_at, 11 more }
+data: array of [BetaDream](api/http/beta/dreams.md) { id, archived\_at, created\_at, 11 more }
 
-id: string
+id: string
 
 
 
-archived\_at: string or null
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -182,7 +182,7 @@ formatdate-time
 
 
 
-created\_at: string
+created\_at: string
 
 A timestamp in RFC 3339 format
 
@@ -190,7 +190,7 @@ formatdate-time
 
 
 
-ended\_at: string or null
+ended\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -198,55 +198,55 @@ formatdate-time
 
 
 
-error: [BetaDreamError](api/http/beta/dreams.md) { message, type } or null
+error: [BetaDreamError](api/http/beta/dreams.md) { message, type } or null
 
 Failure detail for a Dream whose `status` is `failed`.
 
-message: string
+message: string
 
-type: string
+type: string
 
 
 
-inputs: array of [BetaDreamInput](api/http/beta/dreams.md)
+inputs: array of [BetaDreamInput](api/http/beta/dreams.md)
 
 One of the following:
 
 
 
-BetaDreamMemoryStoreInput object{ memory\_store\_id, type }
+BetaDreamMemoryStoreInput object{ memory\_store\_id, type }
 
 An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output\_behavior {type: "update\_existing"} the job consolidates this store in place.
 
 
 
-memory\_store\_id: string
+memory\_store\_id: string
 
 minLength1
 
-type: "memory\_store"
+type: "memory\_store"
 
 
 
-BetaDreamSessionsInput object{ session\_ids, type }
+BetaDreamSessionsInput object{ session\_ids, type }
 
 Input session transcripts the dream reads.
 
-session\_ids: array of string
+session\_ids: array of string
 
-type: "sessions"
+type: "sessions"
 
-instructions: string or null
+instructions: string or null
 
 
 
-model: [BetaDreamModelConfig](api/http/beta/dreams.md) { id, speed }
+model: [BetaDreamModelConfig](api/http/beta/dreams.md) { id, speed }
 
 Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
 
 
 
-id: string
+id: string
 
 Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
@@ -256,19 +256,19 @@ maxLength256
 
 
 
-speed: optional "standard" or "fast"
+speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
 One of the following:
 
-"standard"
+"standard"
 
-"fast"
+"fast"
 
 
 
-output\_behavior: [BetaOutputBehavior](api/http/beta/dreams.md)
+output\_behavior: [BetaOutputBehavior](api/http/beta/dreams.md)
 
 The default destination: the job creates a new output memory store as a clone of the memory\_store input and writes the consolidated memories into it. The input store is never mutated.
 
@@ -276,65 +276,65 @@ One of the following:
 
 
 
-BetaOutputBehaviorCreateNew object{ type }
+BetaOutputBehaviorCreateNew object{ type }
 
 The default destination: the job creates a new output memory store as a clone of the memory\_store input and writes the consolidated memories into it. The input store is never mutated.
 
-type: "create\_new"
+type: "create\_new"
 
 
 
-BetaOutputBehaviorUpdateExisting object{ memory\_store\_id, type }
+BetaOutputBehaviorUpdateExisting object{ memory\_store\_id, type }
 
 The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory\_store input, so the job consolidates the store in place.
 
 
 
-memory\_store\_id: string
+memory\_store\_id: string
 
 minLength1
 
-type: "update\_existing"
+type: "update\_existing"
 
 
 
-outputs: array of [BetaDreamOutput](api/http/beta/dreams.md) { memory\_store\_id, type }
+outputs: array of [BetaDreamOutput](api/http/beta/dreams.md) { memory\_store\_id, type }
 
-memory\_store\_id: string
+memory\_store\_id: string
 
-type: "memory\_store"
+type: "memory\_store"
 
-session\_id: string or null
+session\_id: string or null
 
 
 
-status: [BetaDreamStatus](api/http/beta/dreams.md)
+status: [BetaDreamStatus](api/http/beta/dreams.md)
 
 Lifecycle status of a Dream.
 
 One of the following:
 
-"pending"
+"pending"
 
-"running"
+"running"
 
-"completed"
+"completed"
 
-"failed"
+"failed"
 
-"canceled"
+"canceled"
 
-type: "dream"
+type: "dream"
 
 
 
-usage: [BetaDreamUsage](api/http/beta/dreams.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, output\_tokens }
+usage: [BetaDreamUsage](api/http/beta/dreams.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, output\_tokens }
 
 Cumulative token usage for the dream across every pipeline stage.
 
 
 
-cache\_creation\_input\_tokens: number
+cache\_creation\_input\_tokens: number
 
 Total tokens used to create prompt-cache entries (sum of all TTL tiers).
 
@@ -342,7 +342,7 @@ formatint32
 
 
 
-cache\_read\_input\_tokens: number
+cache\_read\_input\_tokens: number
 
 Total tokens read from prompt cache.
 
@@ -350,7 +350,7 @@ formatint32
 
 
 
-input\_tokens: number
+input\_tokens: number
 
 Total uncached input tokens consumed across every pipeline stage.
 
@@ -358,21 +358,17 @@ formatint32
 
 
 
-output\_tokens: number
+output\_tokens: number
 
 Total output tokens generated across every pipeline stage.
 
 formatint32
 
-next\_page: string or null
+next\_page: string or null
 
-
+List Dreams
 
-### List Dreams
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/dreams \

@@ -8,7 +8,7 @@ By default, Managed Agents executes tools and code inside [Anthropic-managed clo
 
 Tool execution stays on your host: the filesystem the agent reads and writes, the processes it spawns, and the network it can reach are all under your control. Tool inputs and outputs still flow to Anthropic's control plane (where Claude runs) so the model can see results and determine what to do next. The agent's [skills](managed-agents/skills.md) and the contents of any [memory stores](managed-agents/memory.md) attached to the session are stored by Anthropic and copied into your sandbox for the session; changes the agent makes to memory files sync back to the store. See the [security model](managed-agents/self-hosted-sandboxes-security.md) for the full data-flow boundary.
 
-##  How it differs from cloud environments
+## How it differs from cloud environments
 
 |  | Cloud environment | Self-hosted sandbox |
 | --- | --- | --- |
@@ -22,11 +22,11 @@ Self-hosting is a good fit when the agent needs to operate on data that cannot l
 
 For Zero Data Retention and HIPAA BAA eligibility, see [API and data retention](manage-claude/api-and-data-retention.md).
 
-##  When to combine with MCP tunnels
+## When to combine with MCP tunnels
 
 Self-hosting controls *where the agent's code executes*. [MCP tunnels](agents-and-tools/mcp-tunnels/overview.md) control *how Anthropic reaches MCP servers in your network*. They are independent: a session running in Anthropic's cloud sandboxes can still reach private MCP servers through a tunnel, and a self-hosted session can use either tunneled or public MCP servers. Use both when you want execution and tool access to stay inside your boundary. To give the agent tools from an MCP server inside your network without running a tunnel, you can also [wrap the server as custom tools](#wrap-an-mcp-server-as-custom-tools) served by your worker.
 
-##  Environment worker
+## Environment worker
 
 An environment worker is a process you run on your own infrastructure. It receives tool execution requests from Anthropic and runs them locally. The `self_hosted` environment acts as a work queue: when a [session](managed-agents/sessions.md) is assigned to it, Anthropic enqueues the session as a work item. Your worker claims work items from that queue, spawns an execution context for each one, downloads the agent's [skills](managed-agents/skills.md) (reusable, filesystem-based resources that give the agent domain-specific expertise), runs the tool calls, and posts the results back.
 
@@ -34,13 +34,13 @@ Work items are claimed by polling the environment's queue: either by an **always
 
 The CLI and SDK both ship pre-built workers. The `ant` CLI supports the always-on pattern only; the SDK supports both always-on and webhook-triggered. Both are configurable: see [Self-hosted worker](managed-agents/reference.md) in the reference for CLI flags, and [SDK helpers](#sdk-helpers) on this page for the SDK options. For more control, call the [Environments Work endpoints](api/beta/environments/work.md) directly and implement your own worker.
 
-###  Sandbox filesystem
+### Sandbox filesystem
 
 - **`/workspace`:** the system default working directory for tool execution and skill download. The CLI's `--workdir` flag defaults to the current directory; pass `--workdir /workspace` to match the system default. Skills are downloaded to `<workdir>/skills/<name>/`. If you use a different working directory, update your agent's system prompt so Claude can locate the skill files.
 - **Outputs:** on self-hosted environments the session's system prompt omits the `/mnt/session/outputs` instruction used on Anthropic-managed sandboxes, so final deliverables land wherever the agent writes them in your sandbox filesystem, typically under the working directory.
 - **`/mnt/memory/`:** memory stores attached to the session are materialized here by the SDK worker, one directory per store at the store's `mount_path` (for example, `/mnt/memory/user-preferences/`). The worker creates these directories when it claims the session and removes them when the session ends; see [Use memory stores](#use-memory-stores).
 
-##  Before you begin
+## Before you begin
 
 You need:
 
@@ -52,7 +52,7 @@ You need:
 
 1. 1
 
-   Create a self-hosted environment
+   ### Create a self-hosted environment
 
    In the [Console](https://platform.claude.com/workspaces/default/environments): **Workspace > Environments > New > Self-hosted**
 
@@ -72,7 +72,7 @@ You need:
    ```
 2. 2
 
-   Generate an environment key
+   ### Generate an environment key
 
    In the Console, open the environment and click **Generate environment key**. Key generation is Console-only, regardless of whether you created the environment through the Console or the API. Then export the environment ID and key on the worker host:
 
@@ -83,7 +83,7 @@ You need:
 
    
 
-##  Run a worker
+## Run a worker
 
 Choose **always-on** for the simplest setup: a long-running process polls the queue continuously and needs only outbound HTTPS. Choose **webhook-triggered** to avoid running an idle poller; it requires a webhook endpoint that Anthropic can reach (see [Webhooks](managed-agents/webhooks.md) for endpoint setup and signature verification).
 
@@ -91,7 +91,7 @@ Always-on (ant CLI)Always-on (SDK)Webhook-triggered (SDK)
 
 1. 1
 
-   Install the ant CLI
+   ### Install the ant CLI
 
    Run this on the worker host.
 
@@ -115,7 +115,7 @@ Always-on (ant CLI)Always-on (SDK)Webhook-triggered (SDK)
    You can find all releases on the [GitHub releases page](https://github.com/anthropics/anthropic-cli/releases).
 2. 2
 
-   Run the worker
+   ### Run the worker
 
    **In-process**
 
@@ -172,7 +172,7 @@ Always-on (ant CLI)Always-on (SDK)Webhook-triggered (SDK)
 
    
 
-###  SDK helpers
+### SDK helpers
 
 The SDK provides three helpers at different levels of control. `EnvironmentWorker` covers most use cases; drop to the lower-level helpers when you need to launch your own per-session process or run tools against an already-claimed session.
 
@@ -272,7 +272,7 @@ async with AgentToolContext(
     tools = beta_agent_toolset_20260401(env)
 ```
 
-###  Verify the worker is connected
+### Verify the worker is connected
 
 From a separate shell, with `ANTHROPIC_API_KEY` set to your Claude API key (not the environment key), confirm `workers_polling` is at least 1:
 
@@ -284,7 +284,7 @@ ant beta:environments:work stats --environment-id "$ANTHROPIC_ENVIRONMENT_ID"
 
 If `workers_polling` stays at 0, the worker isn't reaching the queue: confirm `ANTHROPIC_ENVIRONMENT_KEY` and `ANTHROPIC_ENVIRONMENT_ID` are set on the worker host. See [Read queue depth](#read-queue-depth) for the full stats response and other language examples.
 
-##  Start a session
+## Start a session
 
 Once your worker is running, create a session that targets the environment. Set `AGENT_ID` to the agent ID you noted in [Before you begin](#before-you-begin). The session enters the environment's work queue and waits there until a worker claims it; if no worker is connected, the session stays queued rather than failing.
 
@@ -304,7 +304,7 @@ session = client.beta.sessions.create(
 
 See [Self-hosted worker](managed-agents/reference.md) in the reference for the full list of CLI flags, and [SDK helpers](#sdk-helpers) for the SDK helper options.
 
-##  Use memory stores
+## Use memory stores
 
 Sessions on a self-hosted environment attach [memory stores](managed-agents/memory.md) exactly as sessions on cloud environments do: list them in `resources` when you create the session, as shown in [Attach a memory store to a session](managed-agents/memory.md). A session accepts up to 8 memory stores. On a self-hosted environment the SDK worker, rather than Anthropic's infrastructure, materializes each store for the agent, so memory stores there require `EnvironmentWorker` (or its `handle_item()` method) from the Python, TypeScript, or Go SDK.
 
@@ -312,7 +312,7 @@ The `ant` CLI worker (`ant beta:worker poll` and `ant beta:worker run`) does not
 
 Memory stores cannot be attached to sessions on self-hosted environments on [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md).
 
-###  How the worker handles memory
+### How the worker handles memory
 
 When the worker claims a work item whose session has memory stores attached, it:
 
@@ -325,7 +325,7 @@ The memory store on Anthropic's side remains the source of truth. [Memory versio
 
 Each store directory contains a marker file named `.anthropic-memory-store` that ties the directory to its store. Leave it in place: the worker does not sync a directory whose marker is missing or altered.
 
-###  Prepare the host
+### Prepare the host
 
 Memory stores on self-hosted sandboxes need a POSIX filesystem on the worker host (the Linux host from [Before you begin](#before-you-begin)); Windows hosts are not supported, because the worker requires `O_NOFOLLOW` when it opens memory files. A case-sensitive filesystem is recommended, so that memory paths that differ only in case do not collide.
 
@@ -342,7 +342,7 @@ Do not create the per-store directories yourself. The worker creates each store'
 - **Run one session per filesystem when sessions attach the same store.** Two sessions cannot mount the same store on one host at the same time, because both need the same path. Giving each session its own sandbox, as described in [Run one sandbox per session](#run-one-sandbox-per-session), satisfies this rule.
 - **Stop workers gracefully.** When you stop a worker while a session runs, `EnvironmentWorker` uploads the session's changed memory files and removes its store directories only if it is cancelled rather than killed: a killed process runs no teardown, and the worker does not install signal handlers itself. Wire SIGTERM and SIGINT to cancellation in the process that runs it: abort the `signal` you pass to the worker in TypeScript, cancel the context in Go, and in Python cancel the task that runs `run()` or `handle_item()`. Do that from a signal handler when your worker is the process, as the standalone workers on this page do, or from your server's own shutdown hook when the worker runs inside a webhook handler, which must not take over the server's signals. Then stop workers with SIGTERM and give them at least 30 seconds to exit before any hard kill, because the final upload can take that long. If a worker is killed before its teardown runs, remove the leftover store directory under `/mnt/memory/` before the next session that attaches that store; any edits in it that had not synced are lost.
 
-###  Run one sandbox per session
+### Run one sandbox per session
 
 The sandbox-per-session pattern in [Run a worker](#run-a-worker) gives each session a fresh filesystem, which is what [Prepare the host](#prepare-the-host) calls for when sessions attach the same store. Keep `ant beta:worker poll --on-work` (or the SDK's work poller) as the poller on the host.
 
@@ -401,7 +401,7 @@ If you claim work with the SDK's work poller instead, pass each claimed item's `
 
 The sandbox image also needs a writable `/mnt/memory` (see [Prepare the host](#prepare-the-host)). Because each sandbox serves one session and is discarded afterward, no leftover directories need cleanup, and the memory directories do not need to be bind-mounted to the host: the worker uploads their contents to the store before the sandbox exits. If you stop a container before its session ends, send a signal that the entrypoint turns into cancellation (see [Prepare the host](#prepare-the-host)) rather than killing it, so that upload still runs. Give the container time to finish the upload as well: Docker follows the stop signal with SIGKILL after 10 seconds by default, so raise that limit to at least the 30 seconds that Prepare the host calls for, with `--stop-timeout` on `docker run` or your orchestrator's termination grace period.
 
-###  Configure sync
+### Configure sync
 
 Two `EnvironmentWorker` options control memory behavior:
 
@@ -427,13 +427,13 @@ worker = EnvironmentWorker(
 )
 ```
 
-###  Read-only stores and conflicts
+### Read-only stores and conflicts
 
 For a store attached with `access: "read_only"`, the `write` and `edit` tools refuse to change files inside its directory, and the worker never uploads anything from it. Changes made through `bash`, or through a custom tool or MCP server you serve from the sandbox, are not blocked locally: they are never synced to the store, and the next remote change to that memory overwrites them. If you need the local copy itself to stay unchanged during the session, disable the `bash` tool for that agent and give it no custom tool that writes to the sandbox's filesystem; do not mount the store path read-only, because the worker itself must create the directory and write the downloaded memories into it.
 
 Conflicts resolve in favor of the store. When the agent changes a memory file that also changed in the store since the session last synced it, the worker keeps the store's version at the next sync, overwrites the local file with it, and logs a warning; the `write` and `edit` tools themselves succeed and no error reaches the agent. If the agent's change still applies, it can re-read the file after the sync and make the change again.
 
-###  Troubleshoot memory mounts
+### Troubleshoot memory mounts
 
 The worker logs mount and background sync failures rather than reporting them to the session; only read-only refusals reach the agent, as tool errors (see [Read-only stores and conflicts](#read-only-stores-and-conflicts)). If a memory store cannot be mounted when the worker claims a session, the worker fails the work item: the session emits no error event and stays idle.
 
@@ -444,13 +444,13 @@ The worker logs mount and background sync failures rather than reporting them to
 | The worker log contains `cannot create the memory store's folder` and `the worker host must make this mount path writable`. | The user the worker runs as cannot create directories under `/mnt/memory`. | Create `/mnt/memory` and `chown` it to that user; see [Prepare the host](#prepare-the-host). |
 | The session sits `idle` with a `requires_action` stop reason and no error event shortly after a worker claimed it. | The worker failed the work item because it could not mount a memory store, for one of the preceding reasons. | Fix the cause on the host, then send a [`user.interrupt`](managed-agents/events-and-streaming.md) event: the session's work is queued again and the next worker that claims it retries the mount. |
 
-##  Serve custom tools from your sandbox
+## Serve custom tools from your sandbox
 
 [Custom tools](managed-agents/tools.md) are tools your own code executes: the agent emits an `agent.custom_tool_use` event and waits for a matching `user.custom_tool_result`. The worker can be that code, and because it runs inside your sandbox, the tool reaches the internal services, credentials, and network egress you configured for the sandbox, and nothing more. The environment key authorizes posting custom tool results, so your Claude API key stays off the worker host.
 
 1. 1
 
-   Declare the tool on the agent
+   ### Declare the tool on the agent
 
    Add a `custom` entry to the agent's `tools` whose `name` matches the tool your worker registers. See [Custom tools](managed-agents/tools.md) for the full declaration shape.
 
@@ -472,7 +472,7 @@ The worker logs mount and background sync failures rather than reporting them to
    
 2. 2
 
-   Register the implementation with the worker
+   ### Register the implementation with the worker
 
    Pass the tool through the worker's `tools` factory (see [SDK helpers](#sdk-helpers)), alongside the built-in toolset:
 
@@ -510,7 +510,7 @@ The worker logs mount and background sync failures rather than reporting them to
 
 The worker answers only the tools registered with it. A custom tool that is declared on the agent but registered with no worker or client leaves the session paused with a `requires_action` stop reason until something posts its result; see [Handling custom tool calls](managed-agents/events-and-streaming.md) for the event flow.
 
-###  Wrap an MCP server as custom tools
+### Wrap an MCP server as custom tools
 
 The [MCP connector](managed-agents/mcp-connector.md) connects to MCP servers from Anthropic's side, so a server must expose an HTTP endpoint that Anthropic can reach, directly or through an [MCP tunnel](agents-and-tools/mcp-tunnels/overview.md). To use a server that only your network can reach, make the worker the MCP client instead and declare the server's tools as custom tools. The MCP server needs no inbound connectivity from outside your network; Anthropic receives the tool definitions you declare on the agent, each call's input, and the result your worker posts back. At runtime the model calls a wrapped tool like any other custom tool:
 
@@ -522,7 +522,7 @@ The SDKs' [Client-side MCP helpers](agents-and-tools/mcp-connector.md) convert t
 
 1. 1
 
-   Declare the server's tools on the agent
+   ### Declare the server's tools on the agent
 
    List the MCP server's tools and declare each one as a `custom` tool; the MCP `name`, `description`, and `inputSchema` map one to one onto the custom tool's fields. If the server paginates its tool list, declare every page; the worker must list the same pages.
 
@@ -575,7 +575,7 @@ The SDKs' [Client-side MCP helpers](agents-and-tools/mcp-connector.md) convert t
    ```
 2. 2
 
-   Serve the tools from the worker
+   ### Serve the tools from the worker
 
    Connect to the same MCP server at startup, convert its tools with the MCP helpers, and register them alongside the built-in toolset. Keep one MCP session open for the life of the worker.
 
@@ -631,11 +631,11 @@ Keep the following in mind when you wrap an MCP server:
 - **Wrap servers you operate or trust.** A wrapped tool's name, description, and results enter the model's context like any other tool's: untrusted input that can influence what the agent does with its other tools, including `bash` on the worker host. Declare only the tools you intend the agent to use.
 - **Permission policies do not apply to custom tools.** [Permission policies](managed-agents/permission-policies.md) govern the built-in and MCP toolsets; the worker executes every wrapped tool call the model makes, so put any approval step in your own tool code.
 
-##  Monitoring and operations
+## Monitoring and operations
 
 These calls run from your monitoring or operations tooling, authenticated with your Claude API key, to observe and manage the worker fleet. The claim and keep-alive loop is handled inside the worker helpers, so you don't call those endpoints directly.
 
-###  Read queue depth
+### Read queue depth
 
 `work.stats` returns the queue state for an environment:
 
@@ -671,7 +671,7 @@ print(f"depth={stats.depth} pending={stats.pending}")
 
 
 
-###  Stop a session gracefully
+### Stop a session gracefully
 
 Use `work.stop` to ask the worker handling a specific session to shut it down. By default the work item moves to `stopping`: the worker notices on its next lease heartbeat, cancels the session's in-flight tool call, and confirms the shutdown, at which point the work item becomes `stopped`. Pass `force: true` in the request body (with the CLI, pass `--force`) to mark the work item `stopped` immediately instead of waiting for the worker's confirmation.
 
@@ -695,7 +695,7 @@ work = client.beta.environments.work.stop(
 print(work.state)
 ```
 
-##  Next steps
+## Next steps
 
 
 

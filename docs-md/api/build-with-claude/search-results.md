@@ -8,7 +8,7 @@ Search result content blocks let Claude cite your own content the same way it ci
 
 All [active models](models/overview.md) support search results with citations, with the exception of Claude Haiku 3. No beta header is required: search results are part of the standard Messages API.
 
-##  How it works
+## How it works
 
 Search results can be provided in two ways:
 
@@ -17,7 +17,7 @@ Search results can be provided in two ways:
 
 In both cases, Claude cites the search results automatically when citations are enabled. No special prompting is needed: ask your question, and citations appear on the text blocks that draw on your content.
 
-###  Search result schema
+### Search result schema
 
 Search results use the following structure:
 
@@ -42,7 +42,7 @@ Search results use the following structure:
 
 
 
-###  Required fields
+### Required fields
 
 | Field | Type | Description |
 | --- | --- | --- |
@@ -51,7 +51,7 @@ Search results use the following structure:
 | `title` | string | A descriptive title for the search result |
 | `content` | array | An array of text blocks containing the actual content |
 
-###  Optional fields
+### Optional fields
 
 | Field | Type | Description |
 | --- | --- | --- |
@@ -65,11 +65,11 @@ Each item in the `content` array must be a text block with:
 
 Search results hold text only. Images and other media are not supported inside the `content` array.
 
-##  Method 1: Search results from tool calls
+## Method 1: Search results from tool calls
 
 Returning search results from your custom tools enables dynamic RAG applications: tools fetch content at runtime, and Claude cites it in the response. The following example forces the tool call with [`tool_choice`](agents-and-tools/tool-use/define-tools.md), so the retrieval step runs every time.
 
-###  Example: Knowledge base tool
+### Example: Knowledge base tool
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -171,7 +171,7 @@ if tool_use is not None:
     print(final_response)
 ```
 
-##  Method 2: Search results as top-level content
+## Method 2: Search results as top-level content
 
 You can also provide search results directly in user messages. This is useful for:
 
@@ -180,7 +180,7 @@ You can also provide search results directly in user messages. This is useful fo
 - Content from external search services
 - Testing and development
 
-###  Example: Direct search results
+### Example: Direct search results
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -235,7 +235,7 @@ response = client.messages.create(
 print(response)
 ```
 
-##  Claude's response with citations
+## Claude's response with citations
 
 Regardless of how search results are provided, Claude automatically includes citations when using information from them:
 
@@ -283,7 +283,7 @@ Regardless of how search results are provided, Claude automatically includes cit
 
 
 
-###  Citation fields
+### Citation fields
 
 Each citation includes:
 
@@ -299,7 +299,7 @@ Each citation includes:
 
 The block indices identify a slice of the search result's `content` array, and `cited_text` is the full text of that slice. The text block is the minimal citable unit: Claude cites whole blocks, not substrings within a block. To get finer-grained citations, split your search result content into smaller blocks (see [Multiple content blocks](#multiple-content-blocks)).
 
-##  Multiple content blocks
+## Multiple content blocks
 
 Search results can contain multiple text blocks in the `content` array:
 
@@ -346,9 +346,9 @@ A citation referencing the rate limits block looks like:
 
 When this search result is cited, `start_block_index` and `end_block_index` identify which of these blocks the citation covers, and `cited_text` contains exactly those blocks' text. Splitting content into smaller, focused blocks gives Claude finer citation boundaries; combining content into one block means every citation returns the full text. This is the same model used by [custom content documents](build-with-claude/citations.md) in the Citations feature.
 
-##  Advanced usage
+## Advanced usage
 
-###  Combining both methods
+### Combining both methods
 
 You can mix both methods in the same conversation. Claude cites from either source, and `search_result_index` counts all `search_result` blocks in request order, regardless of source.
 
@@ -500,13 +500,13 @@ The response cites both sources. The pre-fetched result is `search_result_index:
 
 
 
-###  Mixing with other content types
+### Mixing with other content types
 
 In user messages, `search_result` blocks can sit alongside any other content block. The Method 2 example pairs search results with a `text` question, and image or document blocks can join them the same way.
 
 Tool results are stricter: if any block in a `tool_result` content array is a `search_result`, all of its blocks must be `search_result`. Mixing search results with other block types in the same tool result returns a validation error. To return supporting text alongside tool-sourced search results, include it as a text block inside one of the search results' `content` arrays, where it also becomes citable.
 
-###  Cache control
+### Cache control
 
 Add `cache_control` on the search result block to cache it for reuse across requests. It sits alongside `citations` on the same block:
 
@@ -525,7 +525,7 @@ Add `cache_control` on the search result block to cache it for reuse across requ
 
 See [Prompt caching](build-with-claude/prompt-caching.md) for minimum cacheable lengths and other requirements.
 
-###  Citation control
+### Citation control
 
 By default, citations are disabled for search results. You can enable citations by explicitly setting the `citations` configuration:
 
@@ -545,21 +545,21 @@ By default, citations are disabled for search results. You can enable citations 
 
 When `citations.enabled` is set to `true`, Claude attaches citation references to the text blocks that draw on the search result.
 
-##  Best practices
+## Best practices
 
-###  For tool-based search (Method 1)
+### For tool-based search (Method 1)
 
 - **Dynamic content:** Use for real-time searches and dynamic RAG applications
 - **Error handling:** Return appropriate messages when searches fail
 - **Result limits:** Return only the most relevant results to avoid context overflow
 
-###  For top-level search (Method 2)
+### For top-level search (Method 2)
 
 - **Pre-fetched content:** Use when you already have search results
 - **Batch processing:** Ideal for processing multiple search results at once
 - **Testing:** Great for testing citation behavior with known content
 
-###  General best practices
+### General best practices
 
 1. **Structure results effectively:**
 
@@ -573,14 +573,14 @@ When `citations.enabled` is set to `true`, Claude attaches citation references t
    - Keep formatting consistent
 3. **Handle errors gracefully:** when a search fails or returns nothing, return a plain text block describing the outcome (for example, `{"type": "text", "text": "No results found."}`) instead of raising an error: Claude explains the empty result to the user, and the conversation continues.
 
-##  Limitations
+## Limitations
 
 - Search result content blocks are available on Claude API, Amazon Bedrock, and Google Cloud.
 - Only text content is supported within search results (no images or other media).
 - `search_result` blocks can only appear in user messages (including inside tool results). Assistant messages with search results are rejected.
 - When the [web search tool](agents-and-tools/tool-use/web-search-tool.md) is enabled in the same request, citations must be enabled on all `search_result` blocks.
 
-##  Next steps
+## Next steps
 
 
 

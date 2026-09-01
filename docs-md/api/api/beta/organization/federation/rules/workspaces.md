@@ -24,19 +24,19 @@ cURL
 
 
 
-WorkspaceRemoveResponse object{ federation\_rule\_id, type, workspace\_id }
+WorkspaceRemoveResponse object{ federation\_rule\_id, type, workspace\_id }
 
-federation\_rule\_id: string
+federation\_rule\_id: string
 
 Tagged ID of the federation rule.
 
 
 
-type: "federation\_rule\_workspace\_deleted"
+type: "federation\_rule\_workspace\_deleted"
 
 defaultfederation\_rule\_workspace\_deleted
 
-workspace\_id: string
+workspace\_id: string
 
 Tagged ID of the workspace named in the delete request. Removal is idempotent.
 

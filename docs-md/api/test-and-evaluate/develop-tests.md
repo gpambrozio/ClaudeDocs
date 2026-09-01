@@ -8,7 +8,7 @@ Building a successful LLM-based application starts with clearly defining your su
 
 ![Flowchart of prompt engineering: test cases, preliminary prompt, iterative testing and refinement, final validation, ship](/docs/images/how-to-prompt-eng.png)
 
-##  Define your success criteria
+## Define your success criteria
 
 Good success criteria are:
 
@@ -28,7 +28,7 @@ Good success criteria are:
 
 ### Example task fidelity criteria for sentiment analysis
 
-###  Common success criteria
+### Common success criteria
 
 Here are some criteria that might be important for your use case. This list is non-exhaustive.
 
@@ -54,9 +54,9 @@ Most use cases need multidimensional evaluation along several success criteria.
 
 ---
 
-##  Build evaluations
+## Build evaluations
 
-###  Eval design principles
+### Eval design principles
 
 1. **Be task-specific:** Design evals that mirror your real-world task distribution. Don't forget to factor in edge cases!
 
@@ -64,7 +64,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 2. **Automate when possible:** Structure questions to allow for automated grading (for example, multiple-choice, string match, code-graded, LLM-graded).
 3. **Prioritize volume over quality:** More questions with slightly lower signal automated grading is better than fewer questions with high-quality human hand-graded evals.
 
-###  Example evals
+### Example evals
 
 ### Task fidelity (sentiment analysis) - exact match evaluation
 
@@ -80,7 +80,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
 ---
 
-##  Grade your evaluations
+## Grade your evaluations
 
 When deciding which method to use to grade evals, choose the fastest, most reliable, most scalable method:
 
@@ -91,7 +91,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 2. **Human grading:** Most flexible and high quality, but slow and expensive. Avoid if possible.
 3. **LLM-based grading:** Fast and flexible, scalable and suitable for complex judgment. Test to ensure reliability first then scale.
 
-###  Tips for LLM-based grading
+### Tips for LLM-based grading
 
 - **Have detailed, clear rubrics:** "The answer should always mention 'Acme Inc.' in the first sentence. If it does not, the answer is automatically graded as 'incorrect.'"
 - **Empirical or specific:** For example, instruct the LLM to output only 'correct' or 'incorrect', or to judge from a scale of 1–5. Purely qualitative evaluations are hard to assess quickly and at scale.
@@ -99,7 +99,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 
 ### Example: LLM-based grading
 
-##  Next steps
+## Next steps
 
 
 

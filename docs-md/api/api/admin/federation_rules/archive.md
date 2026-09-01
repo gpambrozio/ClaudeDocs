@@ -20,7 +20,7 @@ other scopes require a Console session. Admin API keys are not accepted.
 
 ##### Path parameters
 
-federation\_rule\_id: string
+federation\_rule\_id: string
 
 ID of the federation rule to archive.
 
@@ -28,7 +28,7 @@ ID of the federation rule to archive.
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -38,7 +38,7 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 
 
-FederationRule object{ id, applies\_to\_all\_workspaces, archived\_at, 17 more }
+FederationRule object{ id, applies\_to\_all\_workspaces, archived\_at, 17 more }
 
 Authorization rule binding an external OIDC identity to Anthropic.
 
@@ -51,13 +51,9 @@ of that workspace (it is implicitly a member of the default workspace);
 rules carrying only the legacy `workspace_id` binding do not enforce
 this.
 
-
+Archive Federation Rule
 
-### Archive Federation Rule
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RULE_ID/archive \

@@ -22,27 +22,27 @@
 
 
 
-RbacGroupMember object{ created\_at, email, group\_id, 2 more }
+RbacGroupMember object{ created\_at, email, group\_id, 2 more }
 
 
 
-created\_at: string
+created\_at: string
 
 RFC 3339 timestamp of when the User was added to the RBAC Group.
 
 formatdate-time
 
-email: string
+email: string
 
 Email of the User.
 
-group\_id: string
+group\_id: string
 
 ID of the RBAC Group.
 
 
 
-type: "rbac\_group\_member"
+type: "rbac\_group\_member"
 
 Object type.
 
@@ -50,27 +50,27 @@ For RBAC Group Members, this is always `"rbac_group_member"`.
 
 defaultrbac\_group\_member
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 
 
 
-RbacGroupMemberDeleted object{ group\_id, type, user\_id }
+RbacGroupMemberDeleted object{ group\_id, type, user\_id }
 
-group\_id: string
+group\_id: string
 
 ID of the RBAC Group.
 
 
 
-type: "rbac\_group\_member\_deleted"
+type: "rbac\_group\_member\_deleted"
 
 Deleted object type. For RBAC Group Members, this is always `"rbac_group_member_deleted"`.
 
 defaultrbac\_group\_member\_deleted
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 

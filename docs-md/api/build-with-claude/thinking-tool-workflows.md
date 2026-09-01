@@ -6,7 +6,7 @@
 
 This page walks through a complete two-turn tool-use round trip with thinking enabled: Claude thinks, requests a tool call, receives the result, and finishes its answer, with the thinking blocks handled correctly at every step. The full rules live on the [Thinking](build-with-claude/thinking.md) page, in [Thinking with tool use](build-with-claude/thinking.md) and [Preserving thinking blocks](build-with-claude/thinking.md); this page shows those rules applied in runnable code.
 
-##  The rules this walkthrough applies
+## The rules this walkthrough applies
 
 Each link leads to the full statement on the Thinking page:
 
@@ -17,13 +17,13 @@ Each link leads to the full statement on the Thinking page:
 
 The samples use adaptive thinking; on models that support only extended thinking, substitute `thinking: {type: "enabled", budget_tokens: N}`. The round-trip rules are identical.
 
-##  Walk through a two-turn tool-use round trip
+## Walk through a two-turn tool-use round trip
 
 The example defines a `get_weather` tool, lets Claude think and request a tool call, then returns the tool result along with the assistant turn echoed exactly as received, thinking block included.
 
 1. 1
 
-   Make the first request with a tool available
+   ### Make the first request with a tool available
 
    Send a request with adaptive thinking enabled and the tool defined. Apart from the `thinking` parameter, this is a standard [tool use](agents-and-tools/tool-use/overview.md) request:
 
@@ -56,7 +56,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
    ```
 2. 2
 
-   Capture the content array to echo back
+   ### Capture the content array to echo back
 
    You should see `thinking`, `text`, and `tool_use` blocks in the response content on a run where Claude chose to think (on simpler requests, adaptive mode may skip the thinking block). Keep this content array intact: the next step sends it back verbatim.
 
@@ -89,7 +89,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
    ```
 3. 3
 
-   Return the tool result, echoing the assistant turn verbatim
+   ### Return the tool result, echoing the assistant turn verbatim
 
    Run the tool on your side, then send a second request that appends two messages to the conversation. The first is the assistant content echoed back exactly as received, so the thinking block stays unchanged alongside the `tool_use` block. The second is a user message carrying the `tool_result`.
 
@@ -151,7 +151,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
    ```
 4. 4
 
-   Read the final response
+   ### Read the final response
 
    You should see Claude complete the turn with text. Because [interleaved thinking](build-with-claude/thinking.md) is automatic in adaptive mode, the continuation can also open with a new thinking block before the final text:
 
@@ -170,7 +170,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
    }
    ```
 
-##  How interleaved thinking changes the flow
+## How interleaved thinking changes the flow
 
 Interleaved thinking lets Claude think between tool calls, reasoning about each tool result before acting on it. The concept and per-model availability are covered in [Interleaved thinking](build-with-claude/thinking.md) on the Thinking page; interleaving changes where thinking blocks appear, not whether tool calls can chain. The following comparison shows what interleaved thinking changes in a two-tool workflow:
 
@@ -178,7 +178,7 @@ Interleaved thinking lets Claude think between tool calls, reasoning about each 
 
 ### Tool use with interleaved thinking
 
-##  Next steps
+## Next steps
 
 
 

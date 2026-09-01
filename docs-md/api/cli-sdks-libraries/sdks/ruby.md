@@ -6,7 +6,7 @@
 
 The Anthropic Ruby library provides convenient access to the Claude API from any Ruby 3.2.0+ application. It ships with comprehensive types and docstrings in Yard, RBS, and RBI. The standard library's `net/http` is used as the HTTP transport, with connection pooling through the `connection_pool` gem.
 
-##  Installation
+## Installation
 
 Add the gem to your application's `Gemfile` with Bundler:
 
@@ -16,11 +16,11 @@ bundle add anthropic
 
 
 
-##  Requirements
+## Requirements
 
 Ruby 3.2.0 or higher.
 
-##  Usage
+## Usage
 
 ```shiki
 anthropic = Anthropic::Client.new(
@@ -42,7 +42,7 @@ end
 
 For authentication options including Workload Identity Federation, see [Authentication](manage-claude/authentication.md). If your API key is a [personal or service account key](manage-claude/authentication.md) with access to multiple workspaces, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](manage-claude/authentication.md) shows the per-request option for this SDK.
 
-##  Streaming
+## Streaming
 
 The SDK provides support for streaming responses using Server-Sent Events (SSE).
 
@@ -61,7 +61,7 @@ end
 
 
 
-###  Streaming helpers
+### Streaming helpers
 
 This library provides several conveniences for streaming messages, for example:
 
@@ -82,7 +82,7 @@ end
 
 Streaming with `anthropic.messages.stream(...)` exposes various helpers including accumulation and SDK-specific events.
 
-##  Input schema and tool calling
+## Input schema and tool calling
 
 The SDK provides helper mechanisms to define structured data classes for tools and let Claude automatically execute them. For detailed documentation on tool use patterns including the tool runner, see [Tool Runner (SDK)](agents-and-tools/tool-use/tool-runner.md).
 
@@ -113,11 +113,11 @@ anthropic.beta.messages.tool_runner(
 
 
 
-##  Structured outputs
+## Structured outputs
 
 For complete structured outputs documentation including Ruby examples, see [Structured outputs](build-with-claude/structured-outputs.md).
 
-##  Handling errors
+## Handling errors
 
 When the library is unable to connect to the API, or if the API returns a non-success status code (that is, 4xx or 5xx response), a subclass of `Anthropic::Errors::APIError` is raised:
 
@@ -158,7 +158,7 @@ Error codes are as follows:
 | Timeout | `APITimeoutError` |
 | Network error | `APIConnectionError` |
 
-##  Retries
+## Retries
 
 Certain errors will be automatically retried 2 times by default, with a short exponential backoff.
 
@@ -183,7 +183,7 @@ anthropic.messages.create(
 
 
 
-##  Timeouts
+## Timeouts
 
 By default, requests time out after 10 minutes. You can use the `timeout` option to configure this:
 
@@ -208,7 +208,7 @@ On timeout, `Anthropic::Errors::APITimeoutError` is raised.
 
 Note that requests that time out are retried by default.
 
-##  Pagination
+## Pagination
 
 List methods in the Claude API are paginated.
 
@@ -244,7 +244,7 @@ end
 
 
 
-##  File uploads
+## File uploads
 
 Request parameters that correspond to file uploads can be passed as raw contents, a [`Pathname`](https://rubyapi.org/3.2/o/pathname) instance, [`StringIO`](https://rubyapi.org/3.2/o/stringio), or more.
 
@@ -269,7 +269,7 @@ puts(file_metadata.id)
 
 Note that you can also pass a raw `IO` descriptor, but this disables retries, as the library can't be sure if the descriptor is a file or pipe (which cannot be rewound).
 
-##  Sorbet
+## Sorbet
 
 This library provides comprehensive [RBI](https://sorbet.org/docs/rbi) definitions, and has no dependency on sorbet-runtime.
 
@@ -308,7 +308,7 @@ anthropic.messages.create(**params)
 
 
 
-###  Enums
+### Enums
 
 Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, the SDK provides "tagged symbols", which is always a primitive at runtime:
 
@@ -340,7 +340,7 @@ anthropic.messages.create(
 
 
 
-##  BaseModel
+## BaseModel
 
 All parameter and response objects inherit from `Anthropic::Internal::Type::BaseModel`, which provides several conveniences, including:
 
@@ -349,7 +349,7 @@ All parameter and response objects inherit from `Anthropic::Internal::Type::Base
 3. Both instances and the classes themselves can be pretty-printed.
 4. Helpers such as `#to_h`, `#deep_to_h`, `#to_json`, and `#to_yaml`.
 
-##  Concurrency and connection pooling
+## Concurrency and connection pooling
 
 The `Anthropic::Client` instances are threadsafe, but are only fork-safe when there are no in-flight HTTP requests.
 
@@ -359,9 +359,9 @@ When all available connections from the pool are checked out, requests wait for 
 
 Unless otherwise specified, other classes in the SDK do not have locks protecting their underlying data structure.
 
-##  Making custom or undocumented requests
+## Making custom or undocumented requests
 
-###  Undocumented properties
+### Undocumented properties
 
 You can send undocumented parameters to any endpoint, and read undocumented response properties, like so:
 
@@ -385,11 +385,11 @@ puts(message[:my_undocumented_property])
 
 
 
-###  Undocumented request params
+### Undocumented request params
 
 If you want to explicitly send an extra param, you can do so with the `extra_query`, `extra_body`, and `extra_headers` under the `request_options:` parameter when making a request, as seen in the examples above.
 
-###  Undocumented endpoints
+### Undocumented endpoints
 
 To make requests to undocumented endpoints while retaining the benefit of auth, retries, and so on, you can make requests using `anthropic.request`, like so:
 
@@ -405,7 +405,7 @@ response = anthropic.request(
 
 
 
-##  Platform integrations
+## Platform integrations
 
 The Ruby SDK supports the following platforms:
 
@@ -416,13 +416,13 @@ The Ruby SDK supports the following platforms:
 
 Use `Anthropic::BedrockMantleClient` for new projects; `Anthropic::BedrockClient` remains for existing applications using the Bedrock `InvokeModel` API.
 
-##  Semantic versioning
+## Semantic versioning
 
 This package follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions.
 
 This package considers improvements to the (non-runtime) `*.rbi` and `*.rbs` type definitions to be non-breaking changes.
 
-##  Additional resources
+## Additional resources
 
 - [GitHub repository](https://github.com/anthropics/anthropic-sdk-ruby)
 - [YARD documentation](https://gemdocs.org/gems/anthropic)

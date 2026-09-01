@@ -6,11 +6,11 @@
 
 This quickstart takes you from zero to Claude calling a private MCP server through a tunnel. It uses Docker Compose with [manual](agents-and-tools/mcp-tunnels/concepts.md) credential provisioning, which is the shortest path for local testing. For production deployments, see [Deploy with Helm](agents-and-tools/mcp-tunnels/deploy-helm.md) or [Deploy with Docker Compose](agents-and-tools/mcp-tunnels/deploy-compose.md).
 
-##  What you'll build
+## What you'll build
 
 A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [proxy](agents-and-tools/mcp-tunnels/concepts.md) and [cloudflared](agents-and-tools/mcp-tunnels/concepts.md)) plus a sample MCP server running alongside it. When everything is running, the sample server is reachable from Claude at `https://echo.<your-tunnel-domain>/mcp` even though nothing is listening on a public port.
 
-##  What you need
+## What you need
 
 - [Docker and Docker Compose](https://docs.docker.com/get-docker/) on a machine with outbound internet access.
 - A role in the [Claude Console](https://platform.claude.com) that can manage MCP tunnels. See the [Console guide prerequisites](agents-and-tools/mcp-tunnels/console.md).
@@ -18,7 +18,7 @@ A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [p
 
 1. 1
 
-   Create a tunnel
+   ### Create a tunnel
 
    In the Claude Console sidebar, go to **Manage > MCP tunnels** and click **New tunnel**. Give it a name. Leave **Set up programmatic access** off; this quickstart uses manual credential provisioning.
 
@@ -28,7 +28,7 @@ A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [p
    - **Token** (click the eye icon, then copy)
 2. 2
 
-   Set up the deployment directory
+   ### Set up the deployment directory
 
    macOS / LinuxWindows (PowerShell)
 
@@ -42,7 +42,7 @@ A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [p
    
 3. 3
 
-   Generate a CA and server certificate
+   ### Generate a CA and server certificate
 
    The proxy terminates [inner TLS](agents-and-tools/mcp-tunnels/concepts.md) using a certificate signed by a CA you control. Generate both:
 
@@ -77,7 +77,7 @@ A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [p
    Back in the Console, on the tunnel detail page, click **Add certificate** and upload `data/ca.crt` (or paste its contents). The tunnel status flips to **Active**.
 4. 4
 
-   Write the sample MCP server
+   ### Write the sample MCP server
 
    macOS / LinuxWindows (PowerShell)
 
@@ -100,7 +100,7 @@ A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [p
    
 5. 5
 
-   Write the proxy config and compose file
+   ### Write the proxy config and compose file
 
    macOS / LinuxWindows (PowerShell)
 
@@ -145,7 +145,7 @@ A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [p
    
 6. 6
 
-   Start it
+   ### Start it
 
    macOS / LinuxWindows (PowerShell)
 
@@ -160,7 +160,7 @@ A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [p
    You should see one `route configured` line for `echo` and four `Registered tunnel connection` lines. The containers take a few seconds to start; rerun the log commands if they come back empty.
 7. 7
 
-   Call it from Claude
+   ### Call it from Claude
 
    In the Console, go to **Managed Agents > Sessions** and create a session. In the agent picker choose **Create new agent**, give the agent a name, and keep the pre-filled model. Click **+ MCP Server**, select your tunnel, set **Subdomain** to `echo` and **Path** to `mcp`. Then ask:
 
@@ -168,7 +168,7 @@ A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [p
 
    You should see a tool call followed by its result.
 
-##  Next steps
+## Next steps
 
 The tunnel is verified end to end. To swap in your own MCP server, add it to `docker-compose.yaml` (or run it on the same Docker network), add a route for it in `config/mcp-proxy.yaml`, then restart the proxy (`docker compose restart mcp-proxy`).
 

@@ -6,11 +6,11 @@
 
 The Files API lets you upload and manage files to use with the Claude API without re-uploading content with each request. This is particularly useful when using the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) to provide inputs (for example, datasets and documents) and then download outputs (for example, charts). You can [explore the API reference directly](api/files/upload.md), in addition to this guide.
 
-##  File type support
+## File type support
 
 Referencing a `file_id` in a Messages request is supported on all models that support the given file type. [Images](build-with-claude/vision.md) are supported on all current Claude models. For [PDFs](build-with-claude/pdf-support.md) and [other file types with the code execution tool](agents-and-tools/tool-use/code-execution-tool.md), see the linked pages for model support.
 
-##  How the Files API works
+## How the Files API works
 
 The Files API provides a create-once, use-many-times approach for working with files:
 
@@ -19,9 +19,9 @@ The Files API provides a create-once, use-many-times approach for working with f
 - **Reference files** in [Messages](api/messages/create.md) requests using the `file_id` instead of re-uploading content
 - **Manage your files** with list, retrieve, and delete operations
 
-##  How to use the Files API
+## How to use the Files API
 
-###  Uploading a file
+### Uploading a file
 
 Upload a file to be referenced in future API calls:
 
@@ -58,7 +58,7 @@ Response
 
 `downloadable` is `false` for files you upload. Only files created by [skills](build-with-claude/skills-guide.md) or the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) can be downloaded. See [Downloading a file](#downloading-a-file).
 
-###  Using a file in messages
+### Using a file in messages
 
 Once uploaded, reference the file by passing the `id` from the upload response as `file_id`:
 
@@ -89,7 +89,7 @@ response = client.messages.create(
 print(response)
 ```
 
-###  File types and content blocks
+### File types and content blocks
 
 The Files API supports different file types that correspond to different content block types:
 
@@ -100,7 +100,7 @@ The Files API supports different file types that correspond to different content
 | Images | `image/jpeg`, `image/png`, `image/gif`, `image/webp` | `image` | Image analysis, visual tasks |
 | [Datasets, others](agents-and-tools/tool-use/code-execution-tool.md) | Varies | `container_upload` | Analyze data, create visualizations |
 
-####  Document blocks
+#### Document blocks
 
 For PDFs and text files, use the `document` content block:
 
@@ -119,7 +119,7 @@ For PDFs and text files, use the `document` content block:
 
 
 
-####  Image blocks
+#### Image blocks
 
 For images, use the `image` content block:
 
@@ -135,7 +135,7 @@ For images, use the `image` content block:
 
 
 
-####  Container upload blocks
+#### Container upload blocks
 
 To send a file to the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md), use the `container_upload` content block:
 
@@ -148,7 +148,7 @@ To send a file to the [code execution tool](agents-and-tools/tool-use/code-execu
 
 
 
-###  Working with other file formats
+### Working with other file formats
 
 For file types that the `document` block doesn't support (for example, .docx and .xlsx), convert the files to plain text and include the content directly in your message. Files that are already plain text, such as .csv and .md files, can either be read in this way or uploaded through the Files API with an explicit `text/plain` content type. To analyze datasets instead of reading them as text, upload them for the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) using a `container_upload` block.
 
@@ -186,9 +186,9 @@ for block in response.content:
         print(block.text)
 ```
 
-###  Managing files
+### Managing files
 
-####  List files
+#### List files
 
 Retrieve a list of your uploaded files. The endpoint is paginated: each request returns up to `limit` files (20 by default, and at most 1,000), and the response's `next_page` cursor fetches the next page when passed back as the `page` parameter. Files are ordered newest first. See the [List Files API reference](api/files/list.md). The SDKs return the first page and provide auto-pagination helpers. The CLI example bounds the total with `--max-items`:
 
@@ -204,7 +204,7 @@ print(files)
 
 To check a known set of files in one request instead of paging, pass up to 100 file IDs as `ids[]` query parameters. An `ids[]` request always returns a single page (`next_page` is `null`), and any ID that does not resolve to a file in your workspace is silently omitted from `data`; compare the returned IDs against the requested IDs to detect misses. `ids[]` cannot be combined with `page` or `limit`.
 
-####  Get file metadata
+#### Get file metadata
 
 Retrieve information about a specific file:
 
@@ -217,7 +217,7 @@ file = client.files.retrieve_metadata(file_id)
 print(file)
 ```
 
-####  Delete a file
+#### Delete a file
 
 Remove a file from your workspace:
 
@@ -229,7 +229,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client.files.delete(file_id)
 ```
 
-###  Downloading a file
+### Downloading a file
 
 Download files that were created by [skills](build-with-claude/skills-guide.md) or the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md). Files you upload cannot be downloaded. The `file_id` of a generated file appears in the [`bash_code_execution_tool_result` content block](agents-and-tools/tool-use/code-execution-tool.md) of the Messages response that created it:
 
@@ -243,14 +243,14 @@ file_content = client.files.download(file_id)
 file_content.write_to_file("downloaded_file.txt")
 ```
 
-##  File storage and limits
+## File storage and limits
 
-###  Storage limits
+### Storage limits
 
 - **Maximum file size:** 500 MB per file
 - **Total storage:** 1 TB per organization
 
-###  File lifecycle
+### File lifecycle
 
 - Files are scoped to the workspace they were uploaded in. Any request in the same workspace can reference them; never accept file IDs from untrusted sources (see the [workspace access warning](#workspace-scoped-access))
 - Files cannot be modified or renamed after upload. To change a file's content, upload a new file and delete the old one
@@ -259,7 +259,7 @@ file_content.write_to_file("downloaded_file.txt")
 - Files are inaccessible through the API shortly after deletion, but they may persist in active Messages API calls and associated tool uses
 - Files that users delete will be deleted in accordance with Anthropic's [data retention policy](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data). For ZDR eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md)
 
-###  File expiration
+### File expiration
 
 To have a file expire automatically, include an `expires_in_seconds` form field when you upload it. The value is an integer number of seconds between 3,600 (1 hour) and 7,776,000 (90 days). The resulting `expires_at` timestamp (RFC 3339) appears on every file response and is `null` for files uploaded without an expiration. Expiration is set once at upload and cannot be changed.
 
@@ -272,11 +272,11 @@ When a file reaches its `expires_at`:
 
 Deleting an expired file with `DELETE /v1/files/{file_id}` removes its metadata immediately instead of waiting for the 30-day window to elapse.
 
-###  Audit logging
+### Audit logging
 
 If your organization has the [Compliance API](manage-claude/compliance-api.md) enabled, its [Activity Feed](manage-claude/compliance-activity-feed.md) records Files API operations made with a Claude API key or from the Claude Console: each upload (`POST /v1/files`), content download (`GET /v1/files/{file_id}/content`), and deletion (`DELETE /v1/files/{file_id}`) appears as a `platform_file_uploaded`, `platform_file_content_downloaded`, or `platform_file_deleted` activity. Listing files and retrieving file metadata are not recorded. Operations that occur while the Compliance API is off are not recorded and cannot be recovered later, so [set up the Compliance API](manage-claude/compliance-api-access.md) before you rely on this audit trail. On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), audit file operations with AWS CloudTrail data events instead.
 
-##  Migrate from `files-api-2025-04-14`
+## Migrate from `files-api-2025-04-14`
 
 The Files API is out of beta and needs no beta header. Migrating off `files-api-2025-04-14` is optional: requests that still send it keep working and keep returning the beta response shapes, so an existing integration keeps working until you change it. Removing the header switches those requests to the shapes documented on this page:
 
@@ -293,13 +293,13 @@ To migrate:
 2. **Update pagination.** Replace `after_id`/`before_id` loops with the `page`/`next_page` cursor, or use the SDK auto-pagination helpers shown in [Managing files](#managing-files).
 3. **Read `expires_at`.** The field appears only without the header; `null` means the file has no expiration (see [File expiration](#file-expiration)).
 
-###  SDK beta namespace
+### SDK beta namespace
 
 Starting with Python SDK 1.2.0, TypeScript SDK 0.122.0, Go SDK 1.68.0, Java SDK 2.59.0, Ruby SDK 1.67.0, and C# SDK 12.44.0, `client.beta.files` no longer sends `files-api-2025-04-14` and returns the same shapes as `client.files`, with `Beta`-prefixed type names. It accepts a `betas` argument for Files features that are still in beta, such as `scope_id` filtering under a [Managed Agents](managed-agents/files.md) beta header. Earlier SDK releases are typed to the beta shapes; if you depend on those types, stay on an earlier release until you migrate.
 
 Requests that carry `anthropic-beta: managed-agents-2026-04-01` without `files-api-2025-04-14` receive the shapes on this page with one compatibility affordance on `GET /v1/files`: `before_id` and `after_id` are still accepted (not combinable with `page` or `ids[]`), and the list response includes `has_more`, `first_id`, and `last_id` alongside `next_page`. Later Managed Agents beta versions receive the plain shape.
 
-##  Error handling
+## Error handling
 
 Common errors when using the Files API include:
 
@@ -326,7 +326,7 @@ Output
 }
 ```
 
-##  Usage and billing
+## Usage and billing
 
 Files API operations are free:
 
@@ -338,11 +338,11 @@ Files API operations are free:
 
 File content used in Messages requests is priced as input tokens.
 
-###  Rate limits
+### Rate limits
 
 File-related API calls are limited to approximately 500 requests per minute. To request a higher limit, [contact sales](mailto:sales@anthropic.com).
 
-##  Next steps
+## Next steps
 
 
 

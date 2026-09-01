@@ -8,7 +8,7 @@ Cloud sandboxes run as isolated Linux containers on Anthropic-managed infrastruc
 
 These specifications apply to `cloud` environments. Self-hosted sandboxes run on your infrastructure with whatever your worker provides.
 
-##  Programming languages
+## Programming languages
 
 | Language | Version | Package manager |
 | --- | --- | --- |
@@ -23,7 +23,7 @@ These specifications apply to `cloud` environments. Self-hosted sandboxes run on
 
 Common Python data and document libraries, including NumPy, pandas, Matplotlib, openpyxl, python-docx, python-pptx, and pypdf, are installed for the `python3` interpreter.
 
-##  Databases
+## Databases
 
 | Database | Description |
 | --- | --- |
@@ -31,9 +31,9 @@ Common Python data and document libraries, including NumPy, pandas, Matplotlib, 
 | Redis 7 | Server and `redis-cli` are installed. The server is not running by default. |
 | SQLite | Available through language bindings, such as Python's `sqlite3` module. |
 
-##  Utilities
+## Utilities
 
-###  System tools
+### System tools
 
 - `git` - Version control
 - `curl`, `wget` - HTTP clients
@@ -41,19 +41,19 @@ Common Python data and document libraries, including NumPy, pandas, Matplotlib, 
 - `tar`, `zip`, `unzip` - Archive tools
 - `tmux` - Terminal multiplexer
 
-###  Development tools
+### Development tools
 
 - `make`, `cmake` - Build systems
 - `docker` - Container management (limited availability)
 - `ripgrep` (`rg`) - Fast file search
 
-###  Text processing
+### Text processing
 
 - `sed`, `awk`, `grep` - Stream editors
 - `vim`, `nano` - Text editors
 - `diff`, `patch` - File comparison
 
-###  Document and media processing
+### Document and media processing
 
 - `ffmpeg` - Audio and video processing
 - ImageMagick (`convert`, `identify`) - Image manipulation
@@ -63,14 +63,14 @@ Common Python data and document libraries, including NumPy, pandas, Matplotlib, 
 - `tesseract` - Optical character recognition (English language data)
 - TeX Live (`pdflatex`, `xelatex`, `latexmk`) - Typesetting
 
-###  Browser automation
+### Browser automation
 
 - Playwright (Python and Node.js) - Browser automation library
 - Chromium (`/opt/pw-browsers/chromium`) - Browser used by Playwright, not on `PATH`
 
 The sandbox sets `PLAYWRIGHT_BROWSERS_PATH` to `/opt/pw-browsers`, so the pre-installed Playwright packages find Chromium there without configuration. The Python package is installed for the `python3` interpreter. Use the pre-installed packages rather than installing another Playwright version, which would look for a browser build that is not present. Firefox and WebKit are not installed.
 
-##  Sandbox specifications
+## Sandbox specifications
 
 | Property | Value |
 | --- | --- |

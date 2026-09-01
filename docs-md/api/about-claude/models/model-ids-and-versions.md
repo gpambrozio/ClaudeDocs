@@ -6,11 +6,11 @@
 
 Each Claude model ID identifies a pinned version of the model. When you use a model ID in an API request, the underlying model remains constant for the lifetime of that ID. This guarantee covers model IDs, not the convenience aliases that the Claude API accepts for some earlier models (see [Before the 4.6 generation](#before-the-4-6-generation)).
 
-##  Model ID format
+## Model ID format
 
 Claude model IDs follow a versioned naming scheme.
 
-###  The 4.6 generation and later
+### The 4.6 generation and later
 
 Starting with the Claude 4.6 generation, model IDs use a dateless format:
 
@@ -38,7 +38,7 @@ Claude Opus 4.6 is the last Bedrock model ID to include the `-v1` suffix (`anthr
 
 On Google Cloud, the format matches the Claude API.
 
-###  Before the 4.6 generation
+### Before the 4.6 generation
 
 Models before the 4.6 generation include a snapshot date in the ID:
 
@@ -72,7 +72,7 @@ For example: `claude-haiku-4-5@20251001`
 
 On the Claude API, these models also have shorter aliases (for example, `claude-sonnet-4-5`) that point to the most recent dated snapshot for that minor version.
 
-##  Dateless IDs are pinned snapshots
+## Dateless IDs are pinned snapshots
 
 A common misconception is that dateless model IDs such as `claude-sonnet-4-6` behave as evergreen pointers that route to the latest or best-performing version. That is not the case.
 
@@ -82,13 +82,13 @@ This differs from the dateless aliases that exist on the Claude API for earlier 
 
 Every model ID, whether dated or dateless, has its own distinct deprecation and retirement schedule.
 
-##  Model weights versus serving infrastructure
+## Model weights versus serving infrastructure
 
 Model weights are fixed for a given ID, but the serving infrastructure around the model can change over time. This infrastructure includes components such as the request router, safety classifiers, and sampling logic.
 
 Occasionally, infrastructure updates produce minor differences in observable behavior even when the model ID and weights have not changed. If you notice unexpected behavioral differences on a previously stable model ID, an infrastructure update is the most likely cause.
 
-##  Current model IDs
+## Current model IDs
 
 For the full list of current model IDs and their Amazon Bedrock and Google Cloud equivalents, see [Models overview](models/overview.md).
 

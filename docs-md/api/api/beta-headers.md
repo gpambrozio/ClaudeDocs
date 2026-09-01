@@ -6,7 +6,7 @@
 
 Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
 
-##  How to use beta headers
+## How to use beta headers
 
 To access beta features, include the `anthropic-beta` header in your API requests:
 
@@ -41,7 +41,7 @@ response = client.beta.messages.create(
 print(response.content)
 ```
 
-###  Multiple beta features
+### Multiple beta features
 
 To use multiple beta features in a single request, include all feature names in the header separated by commas:
 
@@ -53,7 +53,7 @@ anthropic-beta: feature1,feature2,feature3
 
 When using an SDK, list each feature in the `betas` parameter (for example, `betas=["feature1", "feature2"]`). With the CLI, pass a single `--beta` flag with the feature names separated by commas (for example, `--beta feature1,feature2`). Avoid repeating the flag: currently only the first flag's value takes effect.
 
-###  Endpoint-specific headers
+### Endpoint-specific headers
 
 Some beta APIs are scoped to specific endpoints and require a feature-specific beta header on every request:
 
@@ -67,11 +67,11 @@ The SDKs' `beta` namespaces add these headers automatically. Add them yourself o
 
 Endpoint-specific headers that apply to the same endpoint aren't always combinable. On memory store endpoints, `agent-memory-2026-07-22` replaces `managed-agents-2026-04-01`: sending both on the same request returns a `400` error. The client SDKs send the correct header for each endpoint automatically.
 
-###  Version naming conventions
+### Version naming conventions
 
 Beta feature names typically follow the pattern `feature-name-YYYY-MM-DD`, where the date indicates when the beta was released. Always use the exact beta feature name as documented.
 
-##  Error handling
+## Error handling
 
 If you use an invalid beta name, or a beta your organization doesn't have access to, you'll receive a `400` error response:
 
@@ -90,11 +90,11 @@ Output
 }
 ```
 
-##  Getting help
+## Getting help
 
 For updates to beta features, see the [release notes](release-notes/overview.md). For help with production issues, contact [support](https://support.claude.com/).
 
-##  Next steps
+## Next steps
 
 
 

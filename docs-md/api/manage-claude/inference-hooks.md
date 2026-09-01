@@ -12,7 +12,7 @@ Today the only hook event is `prompt`, which fires once per governed inference r
 
 ---
 
-##  How Inference hooks work
+## How Inference hooks work
 
 1. A user submits a prompt on a governed surface.
 2. Anthropic sends an HTTPS `POST` to your organization's configured AI security server endpoint. The request body carries the conversation transcript, and each request is signed according to the [Standard Webhooks](https://www.standardwebhooks.com/) specification once your organization generates its signing secret, so your server can verify it came from Anthropic.
@@ -35,7 +35,7 @@ For the full request and response schemas, signature verification, and operation
 
 ---
 
-##  Use cases
+## Use cases
 
 - **Data loss prevention (DLP).** Forward the transcript to your DLP scanner and deny prompts that carry regulated or classified material. This is the most common deployment.
 - **Real-time transcript archival.** Archive each transcript as it arrives and always return `allow`, as a push-based alternative to polling the [Compliance API](manage-claude/compliance-api.md).
@@ -44,7 +44,7 @@ For the full request and response schemas, signature verification, and operation
 
 ---
 
-##  Current limitations
+## Current limitations
 
 - Attachments are represented by metadata and extracted text. Raw file and image bytes are never sent, so image-only content (for example, a screenshot of a document) is not inspected.
 - Verdicts are allow or deny. Rewriting or redacting a prompt is not supported.
@@ -52,7 +52,7 @@ For the full request and response schemas, signature verification, and operation
 
 ---
 
-##  Availability
+## Availability
 
 Inference hooks are available to Claude Enterprise organizations. Configuring them requires the `organization:manage` permission, which the built-in Admin, Owner, and Primary owner roles hold, as does any custom role granted it.
 
@@ -62,21 +62,21 @@ Governed requests are the inference requests behind the user's conversation. Anc
 
 ---
 
-##  Inference hooks versus the Compliance API
+## Inference hooks versus the Compliance API
 
 Both features serve security, legal, and compliance teams at Claude Enterprise organizations.
 
 |  | Inference hooks | Compliance API |
 | --- | --- | --- |
 | When it acts | Inline, before inference runs | After the fact |
-| What it does | Allows or denies each governed request in real time | Retrieves activity, chats, files, projects, Cowork and Claude Code session transcripts, and users for audit and export |
+| What it does | Allows or denies each governed request in real time | Retrieves activity, chats, files, projects, session transcripts, and users for audit and export |
 | Direction | Anthropic calls your AI security server | You call Anthropic's API |
 
 Use Inference hooks to stop a request before it reaches the model, and the [Compliance API](manage-claude/compliance-api.md) to audit what happened afterward.
 
 ---
 
-##  In this section
+## In this section
 
 [Configure Inference hooks](manage-claude/inference-hooks-configuration.md)
 

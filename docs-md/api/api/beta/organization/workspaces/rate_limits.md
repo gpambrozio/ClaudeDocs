@@ -16,21 +16,21 @@ cURL
 
 
 
-BetaWorkspaceRateLimit object{ group\_type, limits, models, 3 more }
+BetaWorkspaceRateLimit object{ group\_type, limits, models, 3 more }
 
 
 
-BetaWorkspaceRateLimitValue object{ org\_limit, type, value }
+BetaWorkspaceRateLimitValue object{ org\_limit, type, value }
 
-org\_limit: number or null
+org\_limit: number or null
 
 The organization-level value for the same limiter type, for reference. `null` when the organization has no limit configured for this limiter type.
 
-type: string
+type: string
 
 The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
 
-value: number
+value: number
 
 The workspace-level override value for this limiter type.
 

@@ -24,19 +24,19 @@ cURL
 
 
 
-WorkspaceRemoveResponse object{ service\_account\_id, type, workspace\_id }
+WorkspaceRemoveResponse object{ service\_account\_id, type, workspace\_id }
 
-service\_account\_id: string
+service\_account\_id: string
 
 Tagged service account ID (`svac_...`) named in the delete request. Removal is idempotent; see the endpoint description for the implicit-membership no-op.
 
 
 
-type: "service\_account\_workspace\_member\_deleted"
+type: "service\_account\_workspace\_member\_deleted"
 
 defaultservice\_account\_workspace\_member\_deleted
 
-workspace\_id: string
+workspace\_id: string
 
 Tagged workspace ID (`wrkspc_...`) named in the delete request.
 

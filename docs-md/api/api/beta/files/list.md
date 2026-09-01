@@ -14,13 +14,13 @@ List Files
 
 ##### Query parameters
 
-ids: optional array of string
+ids: optional array of string
 
 Restrict the result set to Files whose `id` is in this list. At most 100 entries (after de-duplication). Mutually exclusive with `page` and `limit`. When supplied, the response is always a single page (`next_page` is null). IDs that do not resolve to a visible File — including deleted Files — are silently omitted.
 
 
 
-limit: optional number
+limit: optional number
 
 Number of items to return per page.
 
@@ -32,11 +32,11 @@ maximum1000
 
 minimum1
 
-page: optional string
+page: optional string
 
 Opaque page cursor returned in a prior list response's `next_page`. Prefixed `page_`.
 
-scope\_id: optional string
+scope\_id: optional string
 
 Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
 
@@ -44,113 +44,113 @@ Filter by scope ID. Only returns files associated with the specified scope (e.g.
 
 
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-string
+string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
 
 One of the following:
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24"
 
-"prompt-caching-2024-07-31"
+"prompt-caching-2024-07-31"
 
-"computer-use-2024-10-22"
+"computer-use-2024-10-22"
 
-"computer-use-2025-01-24"
+"computer-use-2025-01-24"
 
-"pdfs-2024-09-25"
+"pdfs-2024-09-25"
 
-"token-counting-2024-11-01"
+"token-counting-2024-11-01"
 
-"token-efficient-tools-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"output-128k-2025-02-19"
+"output-128k-2025-02-19"
 
-"files-api-2025-04-14"
+"files-api-2025-04-14"
 
-"mcp-client-2025-04-04"
+"mcp-client-2025-04-04"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-11-20"
 
-"dev-full-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"interleaved-thinking-2025-05-14"
+"interleaved-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"code-execution-2025-05-22"
 
-"extended-cache-ttl-2025-04-11"
+"extended-cache-ttl-2025-04-11"
 
-"context-1m-2025-08-07"
+"context-1m-2025-08-07"
 
-"context-management-2025-06-27"
+"context-management-2025-06-27"
 
-"model-context-window-exceeded-2025-08-26"
+"model-context-window-exceeded-2025-08-26"
 
-"skills-2025-10-02"
+"skills-2025-10-02"
 
-"fast-mode-2026-02-01"
+"fast-mode-2026-02-01"
 
-"output-300k-2026-03-24"
+"output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
+"user-profiles-2026-03-24"
 
-"user-profiles-2026-08-18"
+"user-profiles-2026-08-18"
 
-"advisor-tool-2026-03-01"
+"advisor-tool-2026-03-01"
 
-"managed-agents-2026-04-01"
+"managed-agents-2026-04-01"
 
-"cache-diagnosis-2026-04-07"
+"cache-diagnosis-2026-04-07"
 
-"dreaming-2026-04-21"
+"dreaming-2026-04-21"
 
-"thinking-token-count-2026-05-13"
+"thinking-token-count-2026-05-13"
 
-"server-side-fallback-2026-06-01"
+"server-side-fallback-2026-06-01"
 
-"server-side-fallback-2026-07-01"
+"server-side-fallback-2026-07-01"
 
-"fallback-credit-2026-06-01"
+"fallback-credit-2026-06-01"
 
-"fallback-credit-2026-07-01"
+"fallback-credit-2026-07-01"
 
-"agent-memory-2026-07-22"
+"agent-memory-2026-07-22"
 
-"mid-conversation-tool-changes-2026-07-01"
+"mid-conversation-tool-changes-2026-07-01"
 
-"compact-2026-01-12"
+"compact-2026-01-12"
 
-"computer-use-2025-11-24"
+"computer-use-2025-11-24"
 
-"mcp-tunnels-2026-06-22"
+"mcp-tunnels-2026-06-22"
 
-"structured-outputs-2025-11-13"
+"structured-outputs-2025-11-13"
 
-"task-budgets-2026-03-13"
+"task-budgets-2026-03-13"
 
-"thinking-display-updates-2026-08-18"
+"thinking-display-updates-2026-08-18"
 
-"ce-user-management-2026-07-13"
+"ce-user-management-2026-07-13"
 
 ##### Returns
 
 
 
-data: array of [BetaFileMetadata](api/http/beta/files.md) { id, created\_at, filename, 6 more }
+data: array of [BetaFileMetadata](api/http/beta/files.md) { id, created\_at, filename, 6 more }
 
 List of file metadata objects.
 
 
 
-id: string
+id: string
 
 Unique object identifier.
 
@@ -158,7 +158,7 @@ The format and length of IDs may change over time.
 
 
 
-created\_at: string
+created\_at: string
 
 RFC 3339 datetime string representing when the file was created.
 
@@ -166,7 +166,7 @@ formatdate-time
 
 
 
-filename: string
+filename: string
 
 Original filename of the uploaded file.
 
@@ -176,7 +176,7 @@ minLength1
 
 
 
-mime\_type: string
+mime\_type: string
 
 MIME type of the file.
 
@@ -186,7 +186,7 @@ minLength1
 
 
 
-size\_bytes: number
+size\_bytes: number
 
 Size of the file in bytes.
 
@@ -194,7 +194,7 @@ minimum0
 
 
 
-type: "file"
+type: "file"
 
 Object type.
 
@@ -202,7 +202,7 @@ For files, this is always `"file"`.
 
 
 
-downloadable: optional boolean
+downloadable: optional boolean
 
 Whether the file can be downloaded.
 
@@ -210,7 +210,7 @@ defaultfalse
 
 
 
-expires\_at: optional string or null
+expires\_at: optional string or null
 
 RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
 
@@ -218,29 +218,25 @@ formatdate-time
 
 
 
-scope: optional [BetaFileScope](api/http/beta/files.md) { id, type } or null
+scope: optional [BetaFileScope](api/http/beta/files.md) { id, type } or null
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 
-id: string
+id: string
 
 The ID of the scoping resource (e.g., the session ID).
 
-type: "session"
+type: "session"
 
 The type of scope (e.g., `"session"`).
 
-next\_page: optional string or null
+next\_page: optional string or null
 
 Opaque cursor for the next page. Supply as `?page=` to fetch the next page; null when there are no more results.
 
-
+List Files
 
-### List Files
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/files \

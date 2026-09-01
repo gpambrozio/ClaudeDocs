@@ -6,7 +6,7 @@
 
 A request through the tunnel can fail at one of three layers; diagnose them in order: the outbound connection to the [tunnel edge](agents-and-tools/mcp-tunnels/concepts.md), the [inner TLS](agents-and-tools/mcp-tunnels/concepts.md) from Anthropic to your [proxy](agents-and-tools/mcp-tunnels/concepts.md), then routing and IP validation toward the [upstream MCP server](agents-and-tools/mcp-tunnels/concepts.md).
 
-##  Quick reference
+## Quick reference
 
 | Symptom | Cause | Fix |
 | --- | --- | --- |
@@ -20,13 +20,13 @@ A request through the tunnel can fail at one of three layers; diagnose them in o
 
 The following sections cover failures that need more than a one-line fix.
 
-##  OAuth fails behind a source-IP allowlist
+## OAuth fails behind a source-IP allowlist
 
 OAuth flows fail when your authorization server's source-IP allowlist blocks Anthropic's backend from reaching `/token`, `/register`, and the discovery endpoints. If you'd rather not allowlist Anthropic's egress ranges, you can route the backend-to-backend OAuth calls through the tunnel while keeping the browser-facing `/authorize` endpoint on your existing public hostname.
 
 1. 1
 
-   Add a proxy route for the authorization server
+   ### Add a proxy route for the authorization server
 
    ```shiki
    routes:
@@ -39,7 +39,7 @@ OAuth flows fail when your authorization server's source-IP allowlist blocks Ant
    Restart the proxy after editing `routes` (`docker compose restart mcp-proxy`, or `helm upgrade`).
 2. 2
 
-   Serve split-endpoint discovery metadata
+   ### Serve split-endpoint discovery metadata
 
    Your authorization server's `/.well-known/oauth-authorization-server` response should point `authorization_endpoint` at your existing allowlisted hostname and everything else at the tunnel:
 
@@ -56,7 +56,7 @@ OAuth flows fail when your authorization server's source-IP allowlist blocks Ant
    
 3. 3
 
-   Point the MCP server at the tunnel issuer
+   ### Point the MCP server at the tunnel issuer
 
    Your MCP server's `/.well-known/oauth-protected-resource` response should reference the tunnel hostname as its authorization server:
 
@@ -71,7 +71,7 @@ OAuth flows fail when your authorization server's source-IP allowlist blocks Ant
 
 With this configuration, the user's browser hits `/authorize` on your existing hostname (which your allowlist already permits), while Anthropic's backend reaches `/token`, `/register`, and the discovery documents through the tunnel.
 
-##  Setup component authentication failures
+## Setup component authentication failures
 
 The [setup component](agents-and-tools/mcp-tunnels/concepts.md) (Helm Job or Compose `setup` service) authenticates to the Tunnels API by exchanging an OIDC JWT through your federation rule. When the exchange fails, see [Troubleshoot a failed exchange](manage-claude/wif-reference.md) in the Workload Identity Federation reference; the failure modes (subject, audience, issuer, JWKS, lifetime) are the same.
 
@@ -89,7 +89,7 @@ kubectl -n mcp-tunnel delete job mcp-tunnel-setup
 
 
 
-##  Tunnel won't connect
+## Tunnel won't connect
 
 Check the cloudflared logs first. Common causes:
 
@@ -98,7 +98,7 @@ Check the cloudflared logs first. Common causes:
 
 cloudflared may also log warnings about UDP receive buffer sizes; this is a QUIC tuning hint, not an error.
 
-##  Certificate errors
+## Certificate errors
 
 When Anthropic rejects the proxy's certificate during inner TLS, the proxy logs `tls handshake failed`. Verify that:
 
@@ -108,7 +108,7 @@ When Anthropic rejects the proxy's certificate during inner TLS, the proxy logs 
 
 See the [certificate requirements](agents-and-tools/mcp-tunnels/reference.md) for the full validation rules.
 
-##  Upstream IP validation
+## Upstream IP validation
 
 For SSRF protection, the proxy only dials addresses in the RFC1918 private ranges (`10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) by default. Only IPv4 is supported for the proxy-to-upstream connection. (The cloudflared-to-edge egress range in [Network requirements](agents-and-tools/mcp-tunnels/overview.md) is a different hop.)
 

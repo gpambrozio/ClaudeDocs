@@ -4,7 +4,7 @@
 
 
 
-##  Getting started with the OpenAI SDK
+## Getting started with the OpenAI SDK
 
 To use the OpenAI SDK compatibility feature, you'll need to:
 
@@ -16,7 +16,7 @@ To use the OpenAI SDK compatibility feature, you'll need to:
    - Update your model name to use a [Claude model](models/overview.md)
 3. Review the following sections for what features are supported
 
-###  Quick start example
+### Quick start example
 
 PythonTypeScriptC#GoJavaPHPRuby
 
@@ -43,9 +43,9 @@ response = client.chat.completions.create(
 print(response.choices[0].message.content)
 ```
 
-##  Important OpenAI compatibility limitations
+## Important OpenAI compatibility limitations
 
-###  API behavior
+### API behavior
 
 Here are the most substantial differences from using OpenAI:
 
@@ -56,15 +56,15 @@ Here are the most substantial differences from using OpenAI:
 
 Most unsupported fields are silently ignored rather than producing errors. These are all documented in the following sections.
 
-###  Output quality considerations
+### Output quality considerations
 
 If you’ve done lots of tweaking to your prompt, it’s likely to be well-tuned to OpenAI specifically. Consider reworking it for Claude using the [prompting best practices guide](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
-###  System / developer message hoisting
+### System / developer message hoisting
 
 Most of the inputs to the OpenAI SDK clearly map directly to Anthropic’s API parameters, but one distinct difference is the handling of system / developer prompts. These two prompts can be put throughout a chat conversation via OpenAI. Since Anthropic only supports an initial system message, the API takes all system/developer messages and concatenates them together with a single newline (`\n`) in between them. This full string is then supplied as a single system message at the start of the messages.
 
-###  Thinking support
+### Thinking support
 
 You can enable [thinking](build-with-claude/thinking.md) by adding the `thinking` parameter. On current models thinking is adaptive, with Claude deciding when and how deeply to think, and on Claude 5 models it is on by default; manually configured extended thinking is a legacy mode. Although thinking improves Claude's reasoning for complex tasks, the OpenAI SDK doesn't return Claude's detailed thought process. For full thinking features, including access to Claude's step-by-step reasoning output, use the native Claude API.
 
@@ -80,15 +80,15 @@ response = client.chat.completions.create(
 )
 ```
 
-##  Rate limits
+## Rate limits
 
 Rate limits follow Anthropic's [standard limits](api/rate-limits.md) for the `/v1/messages` endpoint.
 
-##  Detailed OpenAI compatible API support
+## Detailed OpenAI compatible API support
 
-###  Request fields
+### Request fields
 
-####  Simple fields
+#### Simple fields
 
 | Field | Support status |
 | --- | --- |
@@ -118,15 +118,15 @@ Rate limits follow Anthropic's [standard limits](api/rate-limits.md) for the `/v
 | `top_logprobs` | Ignored |
 | `reasoning_effort` | Ignored |
 
-####  `tools` / `functions` fields
+#### `tools` / `functions` fields
 
 ### Show fields
 
-####  `messages` array fields
+#### `messages` array fields
 
 ### Show fields
 
-###  Response fields
+### Response fields
 
 | Field | Support status |
 | --- | --- |
@@ -153,11 +153,11 @@ Rate limits follow Anthropic's [standard limits](api/rate-limits.md) for the `/v
 | `service_tier` | Always empty |
 | `system_fingerprint` | Always empty |
 
-###  Error message compatibility
+### Error message compatibility
 
 The compatibility layer maintains consistent error formats with the OpenAI API. However, the detailed error messages will not be equivalent. Only use the error messages for logging and debugging.
 
-###  Header compatibility
+### Header compatibility
 
 While the OpenAI SDK automatically manages headers, here is the complete list of headers supported by the Claude API for developers who need to work with them directly.
 

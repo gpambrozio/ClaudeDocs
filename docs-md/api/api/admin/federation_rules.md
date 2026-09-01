@@ -30,7 +30,7 @@
 
 
 
-FederationRule object{ id, applies\_to\_all\_workspaces, archived\_at, 17 more }
+FederationRule object{ id, applies\_to\_all\_workspaces, archived\_at, 17 more }
 
 Authorization rule binding an external OIDC identity to Anthropic.
 
@@ -43,7 +43,7 @@ of that workspace (it is implicitly a member of the default workspace);
 rules carrying only the legacy `workspace_id` binding do not enforce
 this.
 
-#### Federation Rules[Workspaces](api/http/admin/federation_rules/workspaces.md)
+#### Federation Rules[Workspaces](api/http/admin/federation_rules/workspaces.md)
 
 ##### [List Federation Rule Workspaces](api/http/admin/federation_rules/workspaces/list.md)
 

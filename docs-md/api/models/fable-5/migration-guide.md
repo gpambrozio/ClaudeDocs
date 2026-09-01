@@ -20,7 +20,7 @@ Where the two models diverge:
 - **Safety classifiers:** Claude Fable 5 runs safety classifiers that can decline requests with `stop_reason: "refusal"`. Claude Mythos 5 does not include these classifiers. See [Refusals and fallback](build-with-claude/refusals-and-fallback.md).
 - **Priority Tier:** [Priority Tier](api/service-tiers.md) is supported on Claude Fable 5 but not on Claude Mythos 5.
 
-##  Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Mythos Preview
+## Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Mythos Preview
 
 [Claude Mythos 5](https://anthropic.com/glasswing) is the access-gated successor to [Claude Mythos Preview](https://anthropic.com/glasswing), the invitation-only research preview. [Claude Fable 5](models/fable-5/introducing-claude-fable-5-and-claude-mythos-5.md) offers the same capabilities and does not require access approval. The changes in this section apply equally to both targets.
 
@@ -28,7 +28,7 @@ Migration is mostly drop-in. Claude Mythos 5 and Claude Fable 5 use the same [Me
 
 For the Claude Mythos Preview retirement timeline, see [Model deprecations](about-claude/model-deprecations.md).
 
-###  Update your model name
+### Update your model name
 
 ```shiki
 model = "claude-mythos-preview"  # Before
@@ -40,7 +40,7 @@ model = "claude-fable-5"  # After
 
 
 
-###  Features not available on Claude Mythos 5 and Claude Fable 5
+### Features not available on Claude Mythos 5 and Claude Fable 5
 
 1. **Extended thinking and thinking token budgets:** Manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) is not supported on `claude-mythos-5` or `claude-fable-5` and returns a 400 error. [Adaptive thinking](build-with-claude/thinking.md) is always on: the model determines when and how much to think on each request, and no `thinking` configuration is required. `thinking: {type: "disabled"}` returns an error. `budget_tokens` has no direct replacement: thinking is adaptive, and the [effort parameter](build-with-claude/effort.md) is a separate output-level control, not a thinking budget.
 
@@ -77,13 +77,13 @@ model = "claude-fable-5"  # After
 2. **Assistant prefill:** Prefilling the assistant message is not supported on `claude-mythos-5` or `claude-fable-5` and returns a 400 error, the same as on Claude Mythos Preview. Use system prompt instructions instead.
 3. **Thinking output:** On `claude-mythos-5` and `claude-fable-5`, the raw chain of thought is never returned, but thinking blocks still carry readable summarized text when `thinking.display` is set to `summarized`. Pass thinking blocks back unchanged when continuing a conversation on the same model. See [Thinking output on Claude Fable 5 and Claude Mythos 5](build-with-claude/thinking.md).
 
-###  Token counting and billing
+### Token counting and billing
 
 `claude-mythos-5` and `claude-fable-5` use the same tokenizer as `claude-mythos-preview` (the tokenizer introduced with Claude Opus 4.7). Token counts are roughly unchanged when migrating from `claude-mythos-preview`. Compared with models before Claude Opus 4.7, the same content can tokenize to roughly 30% more tokens, varying by content and workload shape.
 
 [`/v1/messages/count_tokens`](build-with-claude/token-counting.md) returns roughly unchanged values for `claude-mythos-5` and `claude-fable-5` compared with `claude-mythos-preview`. Re-baseline cost and latency on your own workloads.
 
-###  Migration checklist
+### Migration checklist
 
 - Update the model name from `claude-mythos-preview` to `claude-mythos-5`, or to `claude-fable-5`, which offers the same capabilities and does not require access approval.
 - Remove manual extended thinking configuration (`thinking: {type: "enabled", budget_tokens: N}`). Adaptive thinking is always on, and no `thinking` field is required.
@@ -94,11 +94,11 @@ model = "claude-fable-5"  # After
 - If you migrate to Claude Fable 5, handle `stop_reason: "refusal"` and read the `stop_details.category` field. Claude Fable 5 runs safety classifiers that Claude Mythos Preview and Claude Mythos 5 do not have. See [Refusals and fallback](build-with-claude/refusals-and-fallback.md).
 - Re-baseline token counts and costs on your own workloads. Token counts are roughly unchanged when migrating from `claude-mythos-preview`.
 
-##  Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Opus 5
+## Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Opus 5
 
 Claude Fable 5 and Claude Mythos 5 use the same [Messages API](build-with-claude/working-with-messages.md) and the same [tool use](agents-and-tools/tool-use/overview.md) patterns as Claude Opus 5, with the same [1M token context window](build-with-claude/context-windows.md) by default and the same [128k max output tokens](models/overview.md). The prefill and sampling-parameter restrictions, and the thinking display behavior, carry over from Claude Opus 5 unchanged. The changes to check are always-on thinking, pricing, Priority Tier, and data retention.
 
-###  Update your model name
+### Update your model name
 
 ```shiki
 model = "claude-opus-5"  # Before
@@ -110,7 +110,7 @@ model = "claude-mythos-5"  # After
 
 
 
-###  What changed
+### What changed
 
 1. **Thinking can no longer be disabled:** On Claude Opus 5, thinking is on by default and can be turned off with `thinking: {type: "disabled"}` at an [effort](build-with-claude/effort.md) level of `high` or below. On `claude-fable-5` and `claude-mythos-5`, [adaptive thinking](build-with-claude/thinking.md) is always on, and `thinking: {type: "disabled"}` returns a 400 error at any effort level. Remove the `thinking: {type: "disabled"}` configuration and use lower effort levels to control token spend instead.
 
@@ -119,7 +119,7 @@ model = "claude-mythos-5"  # After
 3. **Priority Tier:** [Priority Tier](api/service-tiers.md) is not supported on Claude Opus 5, so no existing traffic is affected. If your organization has a Priority Tier commitment, Claude Fable 5 supports it; Claude Mythos 5 does not.
 4. **Data retention:** Claude Fable 5 and Claude Mythos 5 require 30-day data retention and are not available under zero data retention (ZDR) arrangements; both are designated Covered Models. See [Model-specific data retention requirements](manage-claude/api-and-data-retention.md).
 
-###  Migration checklist
+### Migration checklist
 
 - Update the model name from `claude-opus-5` to `claude-fable-5` (or `claude-mythos-5`).
 - Remove any `thinking: {type: "disabled"}` configuration; it returns a 400 error on `claude-fable-5` and `claude-mythos-5`. Use lower [effort](build-with-claude/effort.md) levels to control token spend instead, and revisit `max_tokens` for workloads that ran with thinking disabled on Claude Opus 5.
@@ -127,11 +127,11 @@ model = "claude-mythos-5"  # After
 - If your organization has a zero data retention (ZDR) arrangement, confirm eligibility before migrating. See [Model-specific data retention requirements](manage-claude/api-and-data-retention.md).
 - Re-baseline cost on your own workloads. Token counts are roughly unchanged; per-token pricing differs, and workloads that ran with thinking disabled now produce thinking tokens, which are billed as output tokens.
 
-##  Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Opus 4.8
+## Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Opus 4.8
 
 Migration is mostly drop-in. Claude Fable 5 and Claude Mythos 5 use the same [Messages API](build-with-claude/working-with-messages.md) and the same [tool use](agents-and-tools/tool-use/overview.md) patterns as Claude Opus 4.8, with the same [1M token context window](build-with-claude/context-windows.md) by default and the same [128k max output tokens](models/overview.md). Token counts are roughly unchanged because the models use the same tokenizer. The key changes to check are always-on [adaptive thinking](build-with-claude/thinking.md), thinking output, safety classifier refusals (Claude Fable 5 only), and pricing.
 
-###  Update your model name
+### Update your model name
 
 ```shiki
 model = "claude-opus-4-8"  # Before
@@ -143,7 +143,7 @@ model = "claude-mythos-5"  # After
 
 
 
-###  What changed
+### What changed
 
 The items in this section describe the API and behavior differences worth checking after you swap the model ID. Except where noted, they apply equally to `claude-fable-5` and `claude-mythos-5`.
 
@@ -196,7 +196,7 @@ The items in this section describe the API and behavior differences worth checki
 6. **Start at `high` effort:** The [effort parameter](build-with-claude/effort.md) default remains `high`. On Claude Opus 4.8, the recommendation for coding and high-autonomy work is to set `xhigh` explicitly. On `claude-fable-5` and `claude-mythos-5`, use `high` as the default for most tasks and reserve `xhigh` for the most capability-sensitive workloads. Lower effort settings still perform well and often exceed `xhigh` performance on prior models. Reduce effort if a task completes but takes longer than necessary. See [Prompting Claude Fable 5](build-with-claude/prompt-engineering/prompting-claude-fable-5.md).
 7. **Lower prompt caching minimum:** The minimum cacheable prompt length on `claude-fable-5` and `claude-mythos-5` is 512 tokens, lower than the 1,024 tokens on Claude Opus 4.8. Prompts that were too short to cache on Claude Opus 4.8 can now create cache entries, with no code changes required. See [Prompt caching](build-with-claude/prompt-caching.md) for per-model minimums.
 
-###  Migration checklist
+### Migration checklist
 
 - If your organization has a zero data retention (ZDR) arrangement, confirm eligibility before migrating. `claude-fable-5` and `claude-mythos-5` require 30-day data retention; on the Claude API, requests to `claude-fable-5` that do not meet this requirement return a 400 `invalid_request_error`. Claude Opus 4.8 remains available under ZDR. See [Model-specific data retention requirements](manage-claude/api-and-data-retention.md).
 - Update the model name from `claude-opus-4-8` to `claude-fable-5` (or `claude-mythos-5`).

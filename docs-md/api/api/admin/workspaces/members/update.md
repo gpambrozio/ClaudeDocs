@@ -12,11 +12,11 @@ Update Workspace Member
 
 ##### Path parameters
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the Workspace.
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 
@@ -24,31 +24,31 @@ ID of the User.
 
 
 
-workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
+workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
 
 New workspace role for the User.
 
 One of the following:
 
-"workspace\_admin"
+"workspace\_admin"
 
-"workspace\_billing"
+"workspace\_billing"
 
-"workspace\_developer"
+"workspace\_developer"
 
-"workspace\_restricted\_developer"
+"workspace\_restricted\_developer"
 
-"workspace\_user"
+"workspace\_user"
 
 ##### Returns
 
 
 
-WorkspaceMember object{ type, user\_id, workspace\_id, workspace\_role }
+WorkspaceMember object{ type, user\_id, workspace\_id, workspace\_role }
 
 
 
-type: "workspace\_member"
+type: "workspace\_member"
 
 Object type.
 
@@ -56,39 +56,35 @@ For Workspace Members, this is always `"workspace_member"`.
 
 defaultworkspace\_member
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the Workspace.
 
 
 
-workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
+workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
 
 Role of the Workspace Member.
 
 One of the following:
 
-"workspace\_admin"
+"workspace\_admin"
 
-"workspace\_billing"
+"workspace\_billing"
 
-"workspace\_developer"
+"workspace\_developer"
 
-"workspace\_restricted\_developer"
+"workspace\_restricted\_developer"
 
-"workspace\_user"
+"workspace\_user"
 
-
+Update Workspace Member
 
-### Update Workspace Member
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members/$USER_ID \

@@ -19,7 +19,7 @@ key with the `read:analytics` scope.
 
 
 
-starting\_at: string
+starting\_at: string
 
 Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
 
@@ -27,7 +27,7 @@ formatdate-time
 
 
 
-bucket\_width: optional "1d" or "1h" or "1m"
+bucket\_width: optional "1d" or "1h" or "1m"
 
 Time bucket granularity.
 
@@ -35,15 +35,15 @@ default1d
 
 One of the following:
 
-"1d"
+"1d"
 
-"1h"
+"1h"
 
-"1m"
+"1m"
 
 
 
-context\_windows: optional array of "0-200k" or "200k-1M"
+context\_windows: optional array of "0-200k" or "200k-1M"
 
 Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
 
@@ -51,13 +51,13 @@ maxItems100
 
 One of the following:
 
-"0-200k"
+"0-200k"
 
-"200k-1M"
+"200k-1M"
 
 
 
-ending\_at: optional string
+ending\_at: optional string
 
 End of range, exclusive. When omitted, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
 
@@ -65,7 +65,7 @@ formatdate-time
 
 
 
-group\_by: optional array of "context\_window" or "inference\_geo" or "model" or 4 more
+group\_by: optional array of "context\_window" or "inference\_geo" or "model" or 4 more
 
 Dimensions to break each time bucket out by. Defaults to no grouping (one total per bucket). Each bucket reports at most its top 100 groups; a group beyond that cap has no row in that bucket (there is no remainder row), so grouped buckets are not exhaustive when a dimension has more than 100 distinct values.
 
@@ -73,23 +73,23 @@ maxItems100
 
 One of the following:
 
-"context\_window"
+"context\_window"
 
-"inference\_geo"
+"inference\_geo"
 
-"model"
+"model"
 
-"product"
+"product"
 
-"rbac\_group\_id"
+"rbac\_group\_id"
 
-"slack\_channel\_id"
+"slack\_channel\_id"
 
-"speed"
+"speed"
 
 
 
-inference\_geos: optional array of "global" or "not\_available" or "us"
+inference\_geos: optional array of "global" or "not\_available" or "us"
 
 Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
 
@@ -97,15 +97,15 @@ maxItems100
 
 One of the following:
 
-"global"
+"global"
 
-"not\_available"
+"not\_available"
 
-"us"
+"us"
 
 
 
-limit: optional number
+limit: optional number
 
 Maximum number of time buckets per page. Defaults and caps vary by `bucket_width` (`1d`: default 7, max 31; `1h`: default 24, max 168; `1m`: default 60, max 256).
 
@@ -113,19 +113,19 @@ minimum1
 
 
 
-models: optional array of string
+models: optional array of string
 
 Models to include. Defaults to all models. Use `group_by[]=model` to break out per-model values.
 
 maxItems100
 
-page: optional string
+page: optional string
 
 Opaque cursor from a previous response's `next_page` field.
 
 
 
-products: optional array of "chat" or "claude-tag" or "claude\_code" or 4 more
+products: optional array of "chat" or "claude-tag" or "claude\_code" or 4 more
 
 Product surfaces to include. Defaults to all products. Use `group_by[]=product` to break out per-product values.
 
@@ -133,23 +133,23 @@ maxItems100
 
 One of the following:
 
-"chat"
+"chat"
 
-"claude-tag"
+"claude-tag"
 
-"claude\_code"
+"claude\_code"
 
-"claude\_design"
+"claude\_design"
 
-"claude\_in\_chrome"
+"claude\_in\_chrome"
 
-"cowork"
+"cowork"
 
-"office\_agent"
+"office\_agent"
 
 
 
-rbac\_group\_ids: optional array of string
+rbac\_group\_ids: optional array of string
 
 Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
 
@@ -157,7 +157,7 @@ maxItems100
 
 
 
-slack\_channel\_ids: optional array of string
+slack\_channel\_ids: optional array of string
 
 Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
 
@@ -165,7 +165,7 @@ maxItems100
 
 
 
-speeds: optional array of "fast" or "standard"
+speeds: optional array of "fast" or "standard"
 
 Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
 
@@ -173,13 +173,13 @@ maxItems100
 
 One of the following:
 
-"fast"
+"fast"
 
-"standard"
+"standard"
 
 
 
-user\_ids: optional array of string
+user\_ids: optional array of string
 
 Filter to specific users by tagged user ID.
 
@@ -189,15 +189,11 @@ maxItems100
 
 
 
-UsageBucket object{ data, data\_refreshed\_at, has\_more, 2 more }
+UsageBucket object{ data, data\_refreshed\_at, has\_more, 2 more }
 
-
+Get Token Usage Over Time
 
-### Get Token Usage Over Time
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/analytics/usage_report \

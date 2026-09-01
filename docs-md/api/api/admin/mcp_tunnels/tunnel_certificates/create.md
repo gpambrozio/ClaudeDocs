@@ -21,13 +21,13 @@ holds at most two non-archived certificates.
 
 ##### Path parameters
 
-tunnel\_id: string
+tunnel\_id: string
 
 ID of the Tunnel.
 
 ##### Headers
 
-"anthropic-beta": array of "mcp-tunnels-2026-05-19"
+"anthropic-beta": array of "mcp-tunnels-2026-05-19"
 
 Required for all Tunnel endpoints.
 
@@ -35,7 +35,7 @@ Required for all Tunnel endpoints.
 
 
 
-ca\_certificate\_pem: string
+ca\_certificate\_pem: string
 
 PEM-encoded X.509 CA certificate. Must contain exactly one certificate and
 no private-key material.
@@ -44,13 +44,13 @@ maxLength8192
 
 ##### Returns
 
-id: string
+id: string
 
 ID of the Tunnel Certificate.
 
 
 
-archived\_at: string or null
+archived\_at: string or null
 
 RFC 3339 datetime string indicating when the certificate was archived, or
 `null` if it is not archived.
@@ -59,7 +59,7 @@ formatdate-time
 
 
 
-created\_at: string
+created\_at: string
 
 RFC 3339 datetime string indicating when the certificate was registered.
 
@@ -67,36 +67,32 @@ formatdate-time
 
 
 
-expires\_at: string or null
+expires\_at: string or null
 
 RFC 3339 datetime string indicating when the certificate expires, or
 `null` if it does not expire.
 
 formatdate-time
 
-fingerprint: string
+fingerprint: string
 
 The certificate's SHA-256 fingerprint, as a lowercase hex string.
 
-tunnel\_id: string
+tunnel\_id: string
 
 ID of the Tunnel this certificate is registered against.
 
 
 
-type: "tunnel\_certificate"
+type: "tunnel\_certificate"
 
 Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
 defaulttunnel\_certificate
 
-
+Create Tunnel Certificate
 
-### Create Tunnel Certificate
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates \

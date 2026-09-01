@@ -23,25 +23,21 @@ only for identity-stored content; validate against it when present.
 
 ##### Path parameters
 
-artifact\_id: string
+artifact\_id: string
 
 The Artifact ID (tagged ID, e.g., cart\_abc123)
 
-version\_id: string
+version\_id: string
 
 Opaque version identifier from the Artifact's `versions` list
 
 ##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
-
+Download Code Artifact Version Content
 
-### Download Code Artifact Version Content
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/compliance/apps/code/artifacts/$ARTIFACT_ID/versions/$VERSION_ID \

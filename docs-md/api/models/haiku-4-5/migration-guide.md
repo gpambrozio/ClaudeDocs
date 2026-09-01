@@ -8,7 +8,7 @@ Claude Haiku 4.5 is the fastest and most intelligent Haiku model with near-front
 
 For a complete overview of capabilities, see the [models overview](models/overview.md).
 
-##  Migrating to Claude Haiku 4.5 from Claude Haiku 3.5 and earlier Haiku models
+## Migrating to Claude Haiku 4.5 from Claude Haiku 3.5 and earlier Haiku models
 
 **Update your model name:**
 
@@ -24,7 +24,7 @@ model = "claude-haiku-4-5-20251001"  # After
 
 **Explore new capabilities:** See the [models overview](models/overview.md) for details on context awareness, increased output capacity (64k tokens), higher intelligence, and improved speed.
 
-###  Breaking changes
+### Breaking changes
 
 These breaking changes apply when migrating from Claude 3.x Haiku models.
 
@@ -41,7 +41,7 @@ These breaking changes apply when migrating from Claude 3.x Haiku models.
 
    Claude 4 models have a more concise, direct communication style. Review [prompting best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) for optimization guidance.
 
-###  Haiku 4.5 migration checklist
+### Haiku 4.5 migration checklist
 
 - Update model ID to `claude-haiku-4-5-20251001`
 - **BREAKING:** Update tool versions to latest (`text_editor_20250728`, `code_execution_20250825`); legacy versions are not supported

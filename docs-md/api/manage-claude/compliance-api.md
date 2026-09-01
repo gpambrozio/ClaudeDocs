@@ -52,7 +52,7 @@ Response
 
 ---
 
-##  How the Compliance API works
+## How the Compliance API works
 
 Every endpoint lives under `/v1/compliance/*` on `https://api.anthropic.com` and authenticates through the `x-api-key` header. To provision a key, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
 
@@ -64,29 +64,29 @@ All `/v1/compliance/*` endpoints share a rate limit of 600 requests per minute p
 
 ---
 
-##  Compliance API versus related features
+## Compliance API versus related features
 
 A few adjacent features overlap with the Compliance API; here is how to choose.
 
-###  Export audit logs
+### Export audit logs
 
 The audit log export is a separate feature in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls) that lets owners and primary owners download a CSV of organization events. It's significantly narrower than the Compliance API: a capped lookback window, CSV download only, and no access to chat, file, or project content. Standardize on the Compliance API for ongoing programmatic use.
 
-###  Analytics API
+### Analytics API
 
 Anthropic provides two analytics APIs: the Claude Enterprise Analytics API and the [Claude Code Analytics API](manage-claude/claude-code-analytics-api.md). Both return aggregated usage and cost figures for IT, FinOps, and platform teams, whereas the Compliance API returns per-event records for security, legal, and compliance teams. The two API families answer different questions, use different keys, and are provisioned separately.
 
-###  OpenTelemetry logging
+### OpenTelemetry logging
 
 [Cowork's OpenTelemetry logging](https://support.claude.com/en/articles/14477985-monitor-claude-cowork-activity-with-opentelemetry) and [Claude Code monitoring](monitoring-usage.md) stream per-event telemetry, including token, cost, and host metadata, to a collector you run as activity happens, whereas the Compliance API returns retained per-session transcripts from Anthropic on request and works with your existing Compliance Access Key. OpenTelemetry logging can also capture prompts and responses, but Anthropic recommends the Compliance API for retrieving the content of Cowork and Claude Code sessions. For a table comparing local sessions, remote sessions, and OpenTelemetry logging, see the introduction to [Retrieve session transcripts](manage-claude/compliance-sessions.md).
 
-###  Inference hooks
+### Inference hooks
 
 [Inference hooks](manage-claude/inference-hooks.md) (beta) act inline: your organization's AI security server receives each governed prompt before inference and can deny it in real time, whereas the Compliance API retrieves records after the fact and returns richer data, such as organization settings and full non-text files.
 
 ---
 
-##  In this section
+## In this section
 
 [Set up the Compliance API](manage-claude/compliance-api-access.md)
 

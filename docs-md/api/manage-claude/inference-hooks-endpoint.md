@@ -6,9 +6,9 @@
 
 An Inference hooks integration is an AI security server: an HTTPS service that Anthropic calls. For each governed request, your server receives a signed `POST` carrying the conversation transcript and responds with an allow or deny verdict. This page documents the protocol for building that server: the request and verdict schemas, signature verification, and the operational contract.
 
-For turning Inference hooks on and pointing them at your endpoint, see [Configure Inference hooks](manage-claude/inference-hooks-configuration.md). For what Inference hooks are and when to use them, see the [Inference hooks overview](manage-claude/inference-hooks.md).
+To turn Inference hooks on and point them at your endpoint, see [Configure Inference hooks](manage-claude/inference-hooks-configuration.md). To learn what Inference hooks are and when to use them, see the [Inference hooks overview](manage-claude/inference-hooks.md).
 
-##  Get a first verdict round trip
+## Get a first verdict round trip
 
 The smallest working integration is a server that reads each request and allows it. Run one of the following servers, expose it at a public `https://` URL (for example, behind a TLS-terminating reverse proxy on a host you control, not a reverse-tunnel service; see [Receive a request](#receive-a-request)), then have your administrator [set it as the endpoint and test the connection](manage-claude/inference-hooks-configuration.md): the **Test connection** result reports the allow verdict your server returned.
 
@@ -36,7 +36,7 @@ class VerdictHandler(BaseHTTPRequestHandler):
 ThreadingHTTPServer(("", 8000), VerdictHandler).serve_forever()
 ```
 
-##  Receive a request
+## Receive a request
 
 Anthropic sends an HTTPS `POST` to the URL your administrator configures. The whole configured URL is the endpoint: there is no fixed path suffix, so choose any path that suits your server.
 
@@ -52,7 +52,7 @@ Every request carries these fixed headers, along with any [custom request header
 
 There is one hook event today: the prompt frame, sent once per governed inference request, before inference begins. Anthropic holds the request until your AI security server responds or the verdict timeout elapses.
 
-##  The prompt frame
+## The prompt frame
 
 The request body is a JSON object with these fields:
 
@@ -109,7 +109,7 @@ An example request body:
 
 
 
-###  Content blocks
+### Content blocks
 
 Each entry in `messages` has a `role` of `user` or `assistant` (tool results appear under the `user` role, matching the public Messages API content model) and a `content` array of blocks discriminated by `type`:
 
@@ -122,7 +122,7 @@ Each entry in `messages` has a `role` of `user` or `assistant` (tool results app
 
 A block whose `type` you don't recognize is a forward-compatible addition. The only field it guarantees is `type`; your policy may inspect whatever other fields are present, but must not reject the request because of an unrecognized type.
 
-###  What the transcript contains
+### What the transcript contains
 
 The transcript is the conversation as the end user sees it, up to the point of inference: transcript text, tool calls and their results, extracted attachment text, and prior turns. It never includes system prompts, tool definitions, Anthropic-internal context, Claude's hidden reasoning, or raw file bytes.
 
@@ -130,13 +130,13 @@ A turn whose every block is excluded is omitted entirely, so don't assume strict
 
 Transcripts are sent untruncated, so a long conversation with large attachments produces a large request body, up to an upper bound of 10 MB. Raise your server's body limit to accept that ceiling. Several common defaults are much smaller, including nginx `client_max_body_size` at 1 MB and Express `express.json()` at 100 kB, and a rejected body counts as a webhook failure, so under **Allow the request** failure handling an oversized prompt would reach the model uninspected.
 
-###  Source values
+### Source values
 
 `source.application` is an open string, not a closed enum. Known values are `claude-ai` and `claude-code`; [connection tests](manage-claude/inference-hooks-configuration.md) use `config-test`. New values may appear, and your server must not reject a request because of one it doesn't recognize.
 
 Treat `source.application` as advisory routing metadata, not a trust boundary: don't rest a security-critical policy decision on it alone.
 
-##  Return a verdict
+## Return a verdict
 
 Respond with HTTP 200 and a JSON verdict body for both outcomes; the `action` field discriminates. To allow the request:
 
@@ -175,7 +175,7 @@ The reverse doesn't hold. Anything other than HTTP 200 with a parseable verdict 
 
 Anthropic reads at most 64 KiB of the response body, and the body must be uncompressed. Redirects are not followed, and cookies are ignored. Unknown fields in the verdict body are ignored, so you can return a richer object alongside the fields documented here.
 
-##  Verify the signature
+## Verify the signature
 
 Requests are signed per the [Standard Webhooks](https://www.standardwebhooks.com/) specification, using three headers. Anthropic sends the header names in lowercase, and proxies are free to re-case them, so look them up case-insensitively.
 
@@ -246,33 +246,35 @@ def verify(secret: str, headers: dict[str, str], body: bytes) -> bool:
     )
 ```
 
-##  Operational semantics
+## Operational semantics
 
-###  Timeout and retry
+### Timeout and retry
 
 Your administrator sets a verdict timeout between 1 and 10,000ms (5,000ms by default). The budget covers the entire exchange: connection, TLS handshake, request, and response.
 
 Anthropic retries exactly once, after a 100ms delay, and only when the connection attempt fails. The retry shares the same timeout budget and carries the same `webhook-id` and the same signature. Once your AI security server has responded, the exchange is never retried.
 
-###  Webhook failures
+### Webhook failures
 
 Timeouts, non-200 statuses (redirects included), unparseable or oversized response bodies, and unreachable endpoints are all webhook failures. A webhook failure never becomes a deny; instead, your organization's [failure handling](manage-claude/inference-hooks-configuration.md) setting decides whether the affected request is blocked or proceeds without inspection.
 
-###  Circuit breaker
+### Circuit breaker
 
-Sustained webhook failures attributable to your AI security server trip a circuit breaker that stops enforcement: Anthropic stops contacting your server, and failure handling applies to every request. Recovery happens on the admin side: fix the server, then have your administrator turn **Enforce verdicts** back on. See [Circuit breaker](manage-claude/inference-hooks-configuration.md).
+Sustained webhook failures attributable to your AI security server trip a circuit breaker that stops enforcement: Anthropic stops contacting your server, and failure handling applies to every request.
+
+Starting 10 minutes after the trip, Anthropic tests whether your server has recovered: at most about once per minute, one request, carried by your organization's own traffic, is delivered to your server for inspection, signed and shaped like any other. Respond to it normally. A valid verdict, allow or deny, resets the breaker and enforcement resumes. A webhook failure leaves the breaker tripped, and testing continues. Either way, the test request itself proceeds for its user: its verdict is not enforced, and a failed test does not block it, even under **Block the request**. An administrator can also reset the breaker at any time, and administrator configuration changes stop the automatic testing; see [Circuit breaker](manage-claude/inference-hooks-configuration.md).
 
 Each trip is recorded as an `inference_hooks_circuit_breaker_tripped` activity in the [Activity Feed](manage-claude/compliance-activity-feed.md), one activity per trip. While the breaker is tripped, no per-request Inference hooks activities are recorded, so the trip activity is the feed's only record of the tripped window.
 
-###  Latency
+### Latency
 
 Enforcement adds your AI security server's round trip to the latency of every governed request in your organization. Keep the verdict fast, and load-test your server before rolling it out to a large organization.
 
-###  Source IP addresses
+### Source IP addresses
 
 Requests to your AI security server originate from `160.79.106.0/24`, part of Anthropic's published [outbound IP ranges](api/ip-addresses.md). Allowlist that block, not the inbound ranges on the same page, which don't cover it. Allowlisting narrows your server's exposure, but it is not a substitute for signature verification: the block carries Anthropic egress traffic beyond Inference hooks.
 
-##  Forward compatibility
+## Forward compatibility
 
 The protocol grows without breaking correctly written servers. Your server must ignore:
 
@@ -286,7 +288,7 @@ Never reject a request because of an unrecognized block type or field; read the 
 
 Other hook event types will be introduced in the future. A new event type is an addition your server can't handle by skipping a field: the request still needs a verdict. When the top-level `type` is a value you don't recognize, return an allow verdict rather than an error status; an error response is a [webhook failure](#webhook-failures), and sustained failures trip the [circuit breaker](#circuit-breaker).
 
-##  Design your integration
+## Design your integration
 
 A production AI security server makes a few design choices beyond the wire protocol.
 
@@ -298,7 +300,7 @@ A production AI security server makes a few design choices beyond the wire proto
 
 **Write `deny_reason` for the end user.** The text you return is what the user sees when their request is blocked, truncated at 500 characters. Tell them what to change, such as which kind of content to remove, rather than emitting a scanner code that only your team can interpret.
 
-##  Next steps
+## Next steps
 
 [Configure Inference hooks](manage-claude/inference-hooks-configuration.md)
 

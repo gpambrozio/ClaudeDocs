@@ -16,7 +16,7 @@ This API enables you to better monitor, analyze, and optimize your Claude implem
 
 Claude Enterprise organizations use an Analytics API key with a different API instead; see [Which API do you need?](#which-api-do-you-need).
 
-##  Which API do you need?
+## Which API do you need?
 
 Anthropic provides cost and usage reporting through two APIs, depending on which Claude product your organization manages:
 
@@ -27,7 +27,7 @@ Anthropic provides cost and usage reporting through two APIs, depending on which
 
 Claude Enterprise parent organizations do not appear in Claude Console and carry no Admin API keys, so for them the Analytics API key is the only path to this data. See [Analytics APIs](manage-claude/analytics-api.md) for how to create each key type and which plans the Claude Enterprise cost data applies to.
 
-##  Partner solutions
+## Partner solutions
 
 Leading observability platforms offer ready-to-use integrations for monitoring your Claude API usage and cost, without writing custom code. These integrations provide dashboards, alerting, and analytics to help you manage your API usage effectively.
 
@@ -65,7 +65,7 @@ Advanced querying and visualization through OpenTelemetry
 
 FinOps platform for LLM cost & usage observability
 
-##  Quick start
+## Quick start
 
 Get your organization's daily usage for the last 7 days:
 
@@ -82,11 +82,11 @@ bucket_width=1d" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
-##  Usage API
+## Usage API
 
 Track token consumption across your organization with detailed breakdowns by model, workspace, and service tier with the `/v1/organizations/usage_report/messages` endpoint.
 
-###  Key concepts
+### Key concepts
 
 - **Time buckets:** Aggregate usage data in fixed intervals (`1m`, `1h`, or `1d`)
 - **Token tracking:** Measure uncached input, cached input, cache creation, and output tokens
@@ -95,9 +95,9 @@ Track token consumption across your organization with detailed breakdowns by mod
 
 For complete parameter details and response schemas, see the [Usage API reference](api/admin-api/usage-cost/get-messages-usage-report.md).
 
-###  Basic examples
+### Basic examples
 
-####  Daily usage by model
+#### Daily usage by model
 
 cURL
 
@@ -113,7 +113,7 @@ bucket_width=1d" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
-####  Hourly usage with filtering
+#### Hourly usage with filtering
 
 cURL
 
@@ -131,7 +131,7 @@ bucket_width=1h" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
-####  Filter usage by API keys and workspaces
+#### Filter usage by API keys and workspaces
 
 cURL
 
@@ -150,7 +150,7 @@ bucket_width=1d" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
-####  Data residency
+#### Data residency
 
 Track your [data residency controls](manage-claude/data-residency.md) by grouping and filtering usage with the `inference_geo` dimension. This is useful for verifying geographic routing across your organization.
 
@@ -186,7 +186,7 @@ bucket_width=1d" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
-####  Fast mode (research preview)
+#### Fast mode (research preview)
 
 Track [fast mode](build-with-claude/fast-mode.md) usage by grouping and filtering with the `speed` dimension. This is useful for monitoring standard versus fast mode usage.
 
@@ -224,7 +224,7 @@ bucket_width=1d" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
-###  Time granularity limits
+### Time granularity limits
 
 | Granularity | Default limit | Maximum limit | Use case |
 | --- | --- | --- | --- |
@@ -232,11 +232,11 @@ bucket_width=1d" \
 | `1h` | 24 buckets | 168 buckets | Daily patterns |
 | `1d` | 7 buckets | 31 buckets | Weekly/monthly reports |
 
-##  Cost API
+## Cost API
 
 Retrieve service-level cost breakdowns in USD with the `/v1/organizations/cost_report` endpoint.
 
-###  Key concepts
+### Key concepts
 
 - **Currency:** All costs in USD, reported as decimal strings in lowest units (cents)
 - **Cost types:** Track token usage, web search, and code execution costs
@@ -245,7 +245,7 @@ Retrieve service-level cost breakdowns in USD with the `/v1/organizations/cost_r
 
 For complete parameter details and response schemas, see the [Cost API reference](api/admin-api/usage-cost/get-cost-report.md).
 
-###  Basic example
+### Basic example
 
 cURL
 
@@ -261,7 +261,7 @@ group_by[]=description" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
-##  Pagination
+## Pagination
 
 Both endpoints support pagination for large datasets:
 
@@ -294,7 +294,7 @@ page=page_xyz..." \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
-##  Common use cases
+## Common use cases
 
 Explore detailed implementations in [Claude Cookbook](https://platform.claude.com/cookbook):
 
@@ -304,37 +304,37 @@ Explore detailed implementations in [Claude Cookbook](https://platform.claude.co
 - **Budget monitoring:** Set up alerts for spending thresholds
 - **CSV export:** Generate reports for finance teams
 
-##  Frequently asked questions
+## Frequently asked questions
 
-###  How fresh is the data?
+### How fresh is the data?
 
 Usage and cost data typically appears within 5 minutes of API request completion, though delays may occasionally be longer.
 
-###  What's the recommended polling frequency?
+### What's the recommended polling frequency?
 
 The API supports polling once per minute for sustained use. For short bursts (for example, downloading paginated data), more frequent polling is acceptable. Cache results for dashboards that need frequent updates.
 
-###  How do I track code execution usage?
+### How do I track code execution usage?
 
 Code execution costs appear in the cost endpoint grouped under `Code Execution Usage` in the description field. Code execution is not included in the usage endpoint.
 
-###  How do I track Priority Tier usage?
+### How do I track Priority Tier usage?
 
 Filter or group by `service_tier` in the usage endpoint and look for the `priority` value. Priority Tier costs are not available in the cost endpoint.
 
-###  What happens with playground usage?
+### What happens with playground usage?
 
 API usage from playground in the Claude Console (and from the legacy Workbench before it) is not associated with an API key, so `api_key_id` will be `null` even when grouping by that dimension.
 
-###  How is the default workspace represented?
+### How is the default workspace represented?
 
 Usage and costs attributed to the default workspace have a `null` value for `workspace_id`.
 
-###  How do I get per-user cost breakdowns for Claude Code?
+### How do I get per-user cost breakdowns for Claude Code?
 
 Use the [Claude Code Analytics API](manage-claude/claude-code-analytics-api.md), which provides per-user estimated costs and productivity metrics without the performance limitations of breaking down costs by many API keys. For general API usage with many keys, use the [Usage API](#usage-api) to track token consumption as a cost proxy.
 
-##  See also
+## See also
 
 Use the Usage and Cost APIs to deliver a better experience for your users, manage costs, and preserve your rate limit. Learn more about some of these other features:
 

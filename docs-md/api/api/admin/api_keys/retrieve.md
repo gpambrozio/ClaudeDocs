@@ -12,7 +12,7 @@ Retrieve information about a single API key in your organization, looked up by i
 
 ##### Path parameters
 
-api\_key\_id: string
+api\_key\_id: string
 
 ID of the API key.
 
@@ -20,15 +20,11 @@ ID of the API key.
 
 
 
-APIKey object{ id, created\_at, created\_by, 8 more }
+APIKey object{ id, created\_at, created\_by, 8 more }
 
-
+Retrieve API Key (Admin API)
 
-### Retrieve API Key (Admin API)
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/api_keys/$API_KEY_ID \

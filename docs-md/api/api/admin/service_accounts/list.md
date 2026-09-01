@@ -18,7 +18,7 @@ archived service accounts.
 
 
 
-include\_archived: optional boolean
+include\_archived: optional boolean
 
 Include archived resources. Defaults to false.
 
@@ -26,7 +26,7 @@ defaultfalse
 
 
 
-limit: optional number
+limit: optional number
 
 Number of results per page.
 
@@ -36,7 +36,7 @@ maximum100
 
 minimum1
 
-page: optional string
+page: optional string
 
 Opaque cursor from a previous response's `next_page`.
 
@@ -44,7 +44,7 @@ Opaque cursor from a previous response's `next_page`.
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -54,85 +54,81 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 
 
-data: array of [ServiceAccount](api/http/admin/service_accounts.md) { id, archived\_at, archived\_by\_actor\_id, 8 more }
+data: array of [ServiceAccount](api/http/admin/service_accounts.md) { id, archived\_at, archived\_by\_actor\_id, 8 more }
 
-id: string
+id: string
 
 Tagged ID of the service account.
 
 
 
-archived\_at: string or null
+archived\_at: string or null
 
 If set, this service account is archived.
 
 formatdate-time
 
-archived\_by\_actor\_id: string or null
+archived\_by\_actor\_id: string or null
 
 Tagged ID (`user_`/`svac_`) of the actor that archived this service account.
 
 
 
-created\_at: string
+created\_at: string
 
 When this service account was created.
 
 formatdate-time
 
-created\_by\_actor\_id: string or null
+created\_by\_actor\_id: string or null
 
 Tagged ID (`user_`/`svac_`) of the actor that created this service account.
 
-description: string or null
+description: string or null
 
 Optional free-text description.
 
-name: string
+name: string
 
 Admin-chosen slug identifier.
 
 
 
-organization\_role: "admin" or "developer"
+organization\_role: "admin" or "developer"
 
 Org-level role. A federation rule may only be created or retargeted to grant `org:admin` scope when this is `admin`. A rule granting `org:admin` whose target is later demoted to `developer` is rejected at token exchange. Rules granting `org:admin` are managed in the Console.
 
 One of the following:
 
-"admin"
+"admin"
 
-"developer"
+"developer"
 
 
 
-type: "service\_account"
+type: "service\_account"
 
 defaultservice\_account
 
 
 
-updated\_at: string
+updated\_at: string
 
 When this service account was last updated.
 
 formatdate-time
 
-updated\_by\_actor\_id: string or null
+updated\_by\_actor\_id: string or null
 
 Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
 
-next\_page: string or null
+next\_page: string or null
 
 Opaque cursor for the next page, or null if no more results.
 
-
+List Service Accounts
 
-### List Service Accounts
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/service_accounts \

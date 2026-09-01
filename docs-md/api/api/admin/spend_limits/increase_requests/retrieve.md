@@ -15,7 +15,7 @@ requester at the request's period.
 
 ##### Path parameters
 
-spend\_limit\_increase\_request\_id: string
+spend\_limit\_increase\_request\_id: string
 
 ID of the spend limit increase request.
 
@@ -23,15 +23,11 @@ ID of the spend limit increase request.
 
 
 
-SpendLimitIncreaseRequest object{ id, actor, created\_at, 6 more }
+SpendLimitIncreaseRequest object{ id, actor, created\_at, 6 more }
 
-
+Get Spend Limit Increase Request
 
-### Get Spend Limit Increase Request
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$SPEND_LIMIT_INCREASE_REQUEST_ID \

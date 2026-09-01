@@ -1,10 +1,10 @@
-##  Overview
+## Overview
 
 Claude Opus 5 is a step-change improvement over Claude Opus 4.8, with the largest gains in deep reasoning, agentic and long-horizon tasks, and test-time compute scaling. This page summarizes everything new in Claude Opus 5, including mid-conversation tool changes and two breaking changes for code running on Claude Opus 4.8: thinking is on by default, and thinking can be disabled only at effort `high` or below.
 
 [What's new in Claude Opus 5](models/opus-5/whats-new-opus-5.md)
 
-##  How it compares
+## How it compares
 
 | Model | Context | Max output | Price / MTok | Latency | Thinking | Default effort | Knowledge cutoff |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -13,7 +13,7 @@ Claude Opus 5 is a step-change improvement over Claude Opus 4.8, with the larges
 | [Claude Sonnet 5](models/sonnet-5/overview.md) | 1M | 128K | $2 / $10 | Fast | Adaptive | `high` | Jan 2026 |
 | [Claude Haiku 4.5](models/haiku-4-5/overview.md) | 200K | 64K | $1 / $5 | Fastest | Extended | — | Feb 2025 |
 
-##  Specifications
+## Specifications
 
 ### Model IDs
 
@@ -95,13 +95,13 @@ Retirement
 Platforms
 :   Claude API[Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)[Google Cloud](build-with-claude/claude-on-vertex-ai.md)[Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)
 
-##  Good to know
+## Good to know
 
 - On the [Message Batches API](build-with-claude/batch-processing.md), Claude Opus 5 supports up to 300k output tokens with the `output-300k-2026-03-24` beta header.
 - The minimum cacheable prompt length is 512 tokens. See [Prompt caching](build-with-claude/prompt-caching.md).
 - Query limits and capabilities programmatically with the [Models API](api/models/list.md).
 
-##  Resources
+## Resources
 
 
 
@@ -127,7 +127,7 @@ On by default. Disabling thinking requires effort `high` or below.
 
 Lower-latency Claude Opus 5 on the Claude API (research preview), priced separately.
 
-##  Reference
+## Reference
 
 
 

@@ -13,35 +13,31 @@ files. This is a destructive operation that cannot be undone.
 
 ##### Path parameters
 
-claude\_chat\_id: string
+claude\_chat\_id: string
 
 The chat ID (tagged ID, e.g., claude\_chat\_abc123)
 
 ##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### Returns
 
-id: string
+id: string
 
 The ID of the Claude chat that was deleted
 
 
 
-type: optional "claude\_chat\_deleted"
+type: optional "claude\_chat\_deleted"
 
 Constant string confirming deletion
 
 defaultclaude\_chat\_deleted
 
-
+Delete chat
 
-### Delete chat
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID \

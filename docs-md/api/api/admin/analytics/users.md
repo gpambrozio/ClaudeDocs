@@ -14,7 +14,7 @@
 
 
 
-UserActivity object{ data, next\_page }
+UserActivity object{ data, next\_page }
 
 Response for GET /v1/organizations/analytics/users.
 

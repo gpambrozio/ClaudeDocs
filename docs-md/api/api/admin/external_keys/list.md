@@ -17,7 +17,7 @@ Results are ordered by creation time (newest first). Use the
 
 
 
-limit: optional number
+limit: optional number
 
 Number of results per page.
 
@@ -27,7 +27,7 @@ maximum100
 
 minimum1
 
-page: optional string
+page: optional string
 
 Opaque cursor from a previous response's `next_page`.
 
@@ -35,15 +35,15 @@ Opaque cursor from a previous response's `next_page`.
 
 
 
-data: array of object{ id, attachment, created\_at, 5 more }
+data: array of object{ id, attachment, created\_at, 5 more }
 
-id: string
+id: string
 
 Identifier of the external key config. A tagged ID prefixed `ekey_`, or — for organizations on the Claude Platform on AWS — the AWS KMS key ARN.
 
 
 
-attachment: object{ type } or object{ type }
+attachment: object{ type } or object{ type }
 
 Whether any workspace uses this config to encrypt its data — counting live and archived workspaces (an archived workspace's data remains encrypted under the config), excluding deleted ones. Only an attached config is used by the encryption path; an `unattached` config is inert and can be deleted.
 
@@ -51,41 +51,41 @@ One of the following:
 
 
 
-Attached object{ type }
+Attached object{ type }
 
 
 
-type: "attached"
+type: "attached"
 
 defaultattached
 
 
 
-Unattached object{ type }
+Unattached object{ type }
 
 
 
-type: "unattached"
+type: "unattached"
 
 defaultunattached
 
 
 
-created\_at: string
+created\_at: string
 
 formatdate-time
 
-display\_name: string or null
+display\_name: string or null
 
 Human-friendly display name. Null if none was set.
 
-geo: string
+geo: string
 
 Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
 
 
 
-provider\_config: object{ kms\_arn, type, region, role\_arn } or object{ key\_name, type } or object{ key\_name, tenant\_id, type, 2 more }
+provider\_config: object{ kms\_arn, type, region, role\_arn } or object{ key\_name, type } or object{ key\_name, tenant\_id, type, 2 more }
 
 KMS provider identity and auth coordinates.
 
@@ -93,81 +93,77 @@ One of the following:
 
 
 
-Aws object{ kms\_arn, type, region, role\_arn }
+Aws object{ kms\_arn, type, region, role\_arn }
 
 
 
-kms\_arn: string
+kms\_arn: string
 
 Full ARN of the AWS KMS key.
 
 maxLength2048
 
-type: "aws"
+type: "aws"
 
-region: optional string or null
+region: optional string or null
 
 AWS region. Derived from `kms_arn` if omitted.
 
-role\_arn: optional string or null⁠Deprecated
+role\_arn: optional string or null⁠Deprecated
 
 IAM role ARN. Deprecated — Anthropic reaches the KMS key via a managed intermediate role; this field is ignored.
 
 
 
-Gcp object{ key\_name, type }
+Gcp object{ key\_name, type }
 
-key\_name: string
+key\_name: string
 
 Full resource name of the Cloud KMS key.
 
-type: "gcp"
+type: "gcp"
 
 
 
-Azure object{ key\_name, tenant\_id, type, 2 more }
+Azure object{ key\_name, tenant\_id, type, 2 more }
 
-key\_name: string
+key\_name: string
 
 Name of the key within the vault.
 
-tenant\_id: string
+tenant\_id: string
 
 Azure AD tenant ID.
 
-type: "azure"
+type: "azure"
 
-vault\_uri: string
+vault\_uri: string
 
 Key Vault data-plane URI — `https://{vault-name}.vault.azure.net` or `https://{hsm-name}.managedhsm.azure.net`.
 
-client\_id: optional string or null
+client\_id: optional string or null
 
 Azure AD application (client) ID. Omit to use Anthropic's multitenant app. Provide only if using a single-tenant app registration in the customer's directory.
 
 
 
-type: "external\_key"
+type: "external\_key"
 
 defaultexternal\_key
 
 
 
-updated\_at: string
+updated\_at: string
 
 formatdate-time
 
-next\_page: string or null
+next\_page: string or null
 
 Opaque cursor for the next page, or null if no more results. Pass as `?page=` to fetch the next page.
 
-
+List External Keys
 
-### List External Keys
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/external_keys \

@@ -16,13 +16,13 @@ Create Skill
 
 
 
-files: array of string
+files: array of string
 
 Files to upload for the skill.
 
 All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
-display\_name: optional string or null
+display\_name: optional string or null
 
 Human-readable, single-line label for the Skill. Maximum 255 characters.
 Always set: derived from the SKILL.md frontmatter `name` when omitted at
@@ -32,15 +32,11 @@ creation. Not unique.
 
 
 
-Skill object{ id, created\_at, display\_name, 4 more }
+Skill object{ id, created\_at, display\_name, 4 more }
 
-
+Create Skill
 
-### Create Skill
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/skills \

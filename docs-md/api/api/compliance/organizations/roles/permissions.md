@@ -14,19 +14,19 @@
 
 
 
-PermissionListResponse object{ action, resource\_id, resource\_type }
+PermissionListResponse object{ action, resource\_id, resource\_type }
 
 Permission granted by a role.
 
-action: string
+action: string
 
 Action permitted on the resource
 
-resource\_id: string
+resource\_id: string
 
 Identifier of the resource the permission applies to
 
-resource\_type: string
+resource\_type: string
 
 Type of resource the permission applies to
 

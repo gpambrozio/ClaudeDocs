@@ -8,7 +8,7 @@ This page covers the tool-call lifecycle: reading `tool_use` blocks from Claude'
 
 Claude's response differs based on whether it uses a [client or server tool](agents-and-tools/tool-use/overview.md).
 
-##  Handling results from client tools
+## Handling results from client tools
 
 The response will have a `stop_reason` of `tool_use` and one or more `tool_use` content blocks that include:
 
@@ -41,11 +41,11 @@ A `tool_result` that answers a computer use or browser use member block must als
 
 After receiving the tool result, Claude will use that information to continue generating a response to the original user prompt.
 
-##  Handling results from server tools
+## Handling results from server tools
 
 Claude executes the tool internally and incorporates the results directly into its response without requiring additional user interaction.
 
-##  Handling errors with is\_error
+## Handling errors with is\_error
 
 There are a few different types of errors that can occur when using tools with Claude:
 
@@ -55,7 +55,7 @@ There are a few different types of errors that can occur when using tools with C
 
 ### Server tool errors
 
-##  Next steps
+## Next steps
 
 
 

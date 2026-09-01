@@ -8,7 +8,7 @@ You can mount a GitHub repository to your session sandbox and connect to the Git
 
 GitHub repositories are cached, so future sessions that use the same repository start faster.
 
-##  GitHub MCP and session resources
+## GitHub MCP and session resources
 
 First, create an agent that declares the GitHub MCP server. The agent definition holds the server URL but no authentication token:
 
@@ -72,7 +72,7 @@ A `github_repository` resource accepts the following fields:
 
 Mounting a repository also loads any skills stored in its root `.claude/skills` directory. Skills are discovered once per session, from the repository state checked out at session start. See [Load skills from a GitHub repository](managed-agents/skills.md).
 
-##  Token permissions
+## Token permissions
 
 When providing a GitHub token, use the minimum required permissions:
 
@@ -83,7 +83,7 @@ When providing a GitHub token, use the minimum required permissions:
 | Read issues | `repo` (private) or `public_repo` |
 | Create issues | `repo` (private) or `public_repo` |
 
-##  Multiple repositories
+## Multiple repositories
 
 Mount multiple repositories by adding entries to the `resources` array:
 
@@ -108,7 +108,7 @@ resources = [
 ]
 ```
 
-##  Managing repositories on a running session
+## Managing repositories on a running session
 
 After a session is created, you can list its repository resources and rotate their authorization tokens. Each resource has an `id` returned at session creation time (or through `resources.list`) that you use for updates. Repositories are attached for the lifetime of the session; to change which repositories are mounted, create a new session.
 
@@ -130,7 +130,7 @@ client.beta.sessions.resources.update(
 )
 ```
 
-##  Creating pull requests
+## Creating pull requests
 
 With the GitHub MCP server, the agent can create branches, commit changes, and push them:
 
@@ -155,7 +155,7 @@ client.beta.sessions.events.send(
 )
 ```
 
-##  Next steps
+## Next steps
 
 
 

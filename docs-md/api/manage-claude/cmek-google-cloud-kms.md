@@ -14,7 +14,7 @@ claude "/claude-api help me configure a customer-managed encryption key with Goo
 
 This guide walks through configuring a Google Cloud KMS key as a [customer-managed encryption key (CMEK)](manage-claude/cmek.md) for your Anthropic organization.
 
-##  Prerequisites
+## Prerequisites
 
 - A Google Cloud project with billing enabled.
 - The Cloud KMS API enabled (`cloudkms.googleapis.com`).
@@ -23,7 +23,7 @@ This guide walks through configuring a Google Cloud KMS key as a [customer-manag
 - The [`gcloud` CLI](https://cloud.google.com/cli) installed and authenticated.
 - Cloud KMS **Data Access audit logs** enabled for the project (IAM & Admin > Audit Logs > Cloud Key Management Service, with `DATA_READ` and `DATA_WRITE`). These are off by default; without them, Anthropic's encrypt and decrypt operations produce no entries in Cloud Logging.
 
-##  Anthropic service account email
+## Anthropic service account email
 
 To have Anthropic use your encryption key, you must give Anthropic's service account a key it can use for encrypting data. The service account email for Anthropic CMEK is:
 
@@ -33,11 +33,11 @@ anthropic-cmek-client-us@gcp-anthropic-cmek-clients.iam.gserviceaccount.com
 
 
 
-##  Encryption key setup
+## Encryption key setup
 
 1. 1
 
-   Create or choose a key ring
+   ### Create or choose a key ring
 
    Skip this step if you already have a key ring to reuse. Key rings are regional. Choose a single-region US location such as `us-east5` that matches the Anthropic geography you are configuring. Multi-region locations like `us` and `global` are not supported.
 
@@ -50,7 +50,7 @@ anthropic-cmek-client-us@gcp-anthropic-cmek-clients.iam.gserviceaccount.com
    
 2. 2
 
-   Create the crypto key
+   ### Create the crypto key
 
    Create a symmetric key with the `ENCRYPT_DECRYPT` purpose. Anthropic strongly recommends HSM protection: Cloud KMS HSM keys are FIPS 140-2 Level 3 validated, and the cost delta over software keys is small.
 
@@ -74,7 +74,7 @@ anthropic-cmek-client-us@gcp-anthropic-cmek-clients.iam.gserviceaccount.com
    Create an HSM-protected symmetric encrypt/decrypt key.
 3. 3
 
-   Grant Anthropic's service account access to the key
+   ### Grant Anthropic's service account access to the key
 
    Two key-level IAM bindings are required. Both are scoped to the single crypto key, not project-wide or keyring-wide.
 
@@ -111,7 +111,7 @@ anthropic-cmek-client-us@gcp-anthropic-cmek-clients.iam.gserviceaccount.com
    Grant the Anthropic service account both roles, scoped to the key.
 4. 4
 
-   Note the full key resource name
+   ### Note the full key resource name
 
    You pass this to Anthropic when you register the key. The format is:
 
@@ -139,7 +139,7 @@ anthropic-cmek-client-us@gcp-anthropic-cmek-clients.iam.gserviceaccount.com
 
    Copy the key's full resource name from the actions menu.
 
-##  Register the key with Anthropic
+## Register the key with Anthropic
 
 How you register the key depends on which product you use.
 
@@ -147,7 +147,7 @@ Claude PlatformClaude Enterprise
 
 1. 1
 
-   Register the key with Anthropic
+   ### Register the key with Anthropic
 
    Create an external key configuration through the Admin API, using the resource name from the Note the full key resource name step under Encryption key setup.
 
@@ -184,7 +184,7 @@ Claude PlatformClaude Enterprise
    
 2. 2
 
-   Validate the key
+   ### Validate the key
 
    Trigger an encrypt and decrypt round-trip against your key.
 
@@ -216,7 +216,7 @@ Claude PlatformClaude Enterprise
    - **Disabled or destroyed key version:** confirm the key's primary version is enabled, and not disabled, scheduled for destruction, or destroyed.
 3. 3
 
-   Attach the key to a workspace
+   ### Attach the key to a workspace
 
    Once the key is validated, attach it to a new workspace before you send any requests to that workspace. For a workspace that already receives requests, the key can take [up to a day to take effect](manage-claude/cmek.md).
 
@@ -235,7 +235,7 @@ Claude PlatformClaude Enterprise
    print(f"external_key_id: {workspace.external_key_id}")
    ```
 
-##  Terraform
+## Terraform
 
 For infrastructure-as-code deployments, the same steps map to the `google` provider with the `google_kms_key_ring`, `google_kms_crypto_key`, and `google_kms_crypto_key_iam_member` resources.
 

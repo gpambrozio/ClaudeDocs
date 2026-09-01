@@ -6,7 +6,7 @@
 
 The Anthropic Helm chart installs the [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) as a single Deployment and attaches it to your tunnel: one the chart's setup hook creates for you, or an existing tunnel you created in the [Console](agents-and-tools/mcp-tunnels/console.md).
 
-##  Before you begin
+## Before you begin
 
 You need:
 
@@ -18,7 +18,7 @@ You need:
 - **Outbound network connectivity** from the cluster to `api.anthropic.com` (443 TCP) and the [tunnel edge](agents-and-tools/mcp-tunnels/concepts.md) (7844 TCP and UDP). See the full [network requirements](agents-and-tools/mcp-tunnels/overview.md).
 - **One or more MCP servers** running and reachable from the cluster on the addresses you'll configure under `gateway.config.routes`. If you don't have one yet, [use the sample server](#optional-use-a-sample-mcp-server).
 
-##  Optional: Use a sample MCP server
+## Optional: Use a sample MCP server
 
 If you don't have an MCP server available for testing, use this minimal one:
 
@@ -82,7 +82,7 @@ EOF
 
 The Install steps that follow note where to add the corresponding route.
 
-##  Install
+## Install
 
 With programmatic accessWithout programmatic access
 
@@ -90,7 +90,7 @@ The setup component exchanges the cluster's projected ServiceAccount token throu
 
 1. 1
 
-   Set up Workload Identity Federation for the cluster
+   ### Set up Workload Identity Federation for the cluster
 
    Follow [Use WIF with Kubernetes](manage-claude/wif-providers/kubernetes.md) to register your cluster's OIDC issuer and create a federation rule. The setup component runs under its own ServiceAccount in the release namespace; the exact name follows Helm's `fullname` convention, so for any release name other than `mcp-tunnel`, run `helm template <release> ... | grep -A2 'kind: ServiceAccount'` to confirm it before creating the rule. The rest of this guide assumes release name `mcp-tunnel` in namespace `mcp-tunnel`, where the ServiceAccount is `mcp-tunnel-setup`.
 
@@ -105,7 +105,7 @@ The setup component exchanges the cluster's projected ServiceAccount token throu
    Note the rule's ID (`fdrl_...`); you'll set it as `api.wif.federationRuleId`.
 2. 2
 
-   Fetch the default values
+   ### Fetch the default values
 
    ```shiki
    helm show values \
@@ -116,7 +116,7 @@ The setup component exchanges the cluster's projected ServiceAccount token throu
    
 3. 3
 
-   Configure tunnel attachment and routes
+   ### Configure tunnel attachment and routes
 
    Edit `values.yaml` and set the `api.wif.*` keys with the federation rule ID and organization ID, plus a `routes` entry for each [upstream MCP server](agents-and-tools/mcp-tunnels/concepts.md):
 
@@ -151,7 +151,7 @@ The setup component exchanges the cluster's projected ServiceAccount token throu
    With these routes, Claude reaches the servers at `docs.<your-tunnel-domain>` and `search.<your-tunnel-domain>`. Some managed Kubernetes distributions allocate the Service CIDR outside the standard private ranges; if your routes target in-cluster Services, add `gateway.config.upstream.allowed_ips` here per [Upstream IP validation](agents-and-tools/mcp-tunnels/troubleshooting.md).
 4. 4
 
-   Review the rendered manifests
+   ### Review the rendered manifests
 
    Render the chart and review the output according to your organization's vetting practices:
 
@@ -166,7 +166,7 @@ The setup component exchanges the cluster's projected ServiceAccount token throu
    
 5. 5
 
-   Install
+   ### Install
 
    ```shiki
    helm install mcp-tunnel \
@@ -191,35 +191,35 @@ The setup component exchanges the cluster's projected ServiceAccount token throu
 
    Re-running the setup component (during [upgrades](#upgrades) or [token rotation](#rotate-the-tunnel-token)) reuses the tunnel ID stored in this Secret; it never creates a second tunnel.
 
-##  Verify the deployment
+## Verify the deployment
 
 Verify end to end from Anthropic's side: use `https://<route>.<your-tunnel-domain>/<path>` in a Managed Agent session or a Messages API request, where `<route>` is a key from `gateway.config.routes` and `<path>` is whatever the upstream MCP server serves at. With the [sample MCP server](#optional-use-a-sample-mcp-server), that's `https://echo.<your-tunnel-domain>/mcp`. See [Use the tunneled MCP servers](agents-and-tools/mcp-tunnels/overview.md) for the request shapes.
 
 If that fails, check the pod logs (`kubectl -n mcp-tunnel logs deploy/mcp-tunnel -c mcp-proxy` and `-c cloudflared`) and consult [Troubleshooting](agents-and-tools/mcp-tunnels/troubleshooting.md).
 
-##  Optional configuration
+## Optional configuration
 
-###  Restrict egress with NetworkPolicy
+### Restrict egress with NetworkPolicy
 
 Ingress to the proxy pod is denied by default (`networkPolicy.ingress.enabled: true`). To additionally restrict pod egress, set `networkPolicy.egress.enabled: true` and populate `networkPolicy.egress.mcpServers` with pod label selectors or CIDR ranges that cover your upstream MCP servers. Egress from cloudflared to the tunnel edge is allowed separately through `networkPolicy.egress.cloudflaredEgressCIDRs`.
 
-###  Tune the proxy
+### Tune the proxy
 
 Fields under `gateway.config.*` pass through to the proxy configuration file. Common adjustments include `upstream.allowed_ips`, `log_level`, and `upstream.tls`. See the [proxy configuration](agents-and-tools/mcp-tunnels/reference.md) reference for the full field list. The chart always sets `listen_addr`, `tls.cert_file`, and `tls.key_file`; setting them in `gateway.config` has no effect.
 
-###  Supply your own OIDC token
+### Supply your own OIDC token
 
 By default the chart projects a Kubernetes ServiceAccount token for the setup component. To use a token from a different identity provider (such as [SPIFFE](manage-claude/wif-providers/spiffe.md), Vault, or a cloud-SDK sidecar), mount it with `setup.extraVolumes` and `setup.extraVolumeMounts`. Then point `api.wif.tokenFile` at the mount path. The chart sets `ANTHROPIC_IDENTITY_TOKEN_FILE` to that path, and the setup component reads the token from there.
 
-##  Upgrades
+## Upgrades
 
 Always pass `--version` to `helm upgrade` so you don't pull a newer chart unexpectedly.
 
-###  Upgrade from chart 1.x
+### Upgrade from chart 1.x
 
 Chart 2.0.0 moves the tunnel ID from `api.wif.tunnelId` to `tunnel.id`. Before upgrading, edit your `values.yaml`: move the `tnl_...` value to `tunnel.id` and remove `api.wif.tunnelId`. Leaving `tunnel.id` unset is safe (the setup component reuses the tunnel ID already stored in the `mcp-tunnel` Secret on re-run), but the explicit move keeps your `values.yaml` accurate. Also update your federation rule's scope from `org:manage_tunnels` to `workspace:manage_tunnels` in the Console.
 
-###  Change configuration
+### Change configuration
 
 For routine changes such as routes, replica count, or NetworkPolicy:
 
@@ -233,7 +233,7 @@ helm upgrade mcp-tunnel \
 
 
 
-###  Rotate the tunnel token
+### Rotate the tunnel token
 
 With programmatic access, increment `tunnel.tokenVersion` in `values.yaml` and upgrade with `--set setup.force=true`. The setup component only re-runs on upgrades when forced:
 
@@ -260,7 +260,7 @@ kubectl -n mcp-tunnel rollout restart deploy/mcp-tunnel
 
 
 
-###  Certificate renewal
+### Certificate renewal
 
 The chart provides automation, but you remain responsible for monitoring expiry and confirming renewal completes.
 
@@ -285,7 +285,7 @@ kubectl -n mcp-tunnel create secret generic mcp-tunnel-cert \
 
 The proxy hot-reloads the certificate from the Secret mount.
 
-##  Next steps
+## Next steps
 
 
 

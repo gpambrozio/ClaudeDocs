@@ -10,7 +10,7 @@ You'll need this for OCR pipelines, form extraction, chart parsing, UI element l
 
 Coordinates follow the standard image convention: the origin `(0, 0)` is the top-left corner of the image, with x increasing to the right and y increasing downward. The coordinates Claude returns are pixel positions in the image Claude sees: your image after Claude resizes it to fit the model's native resolution (see [How Claude resizes and pads images](#how-claude-resizes-and-pads-images)). To get coordinates you can use directly, either pre-resize your image so the coordinates map one-to-one onto the image you have (see [Resize your image before uploading](#resize-your-image-before-uploading)), or rescale the coordinates Claude returns (see [Rescale coordinates when you cannot pre-resize](#rescale-coordinates-when-you-cannot-pre-resize)).
 
-##  How Claude resizes and pads images
+## How Claude resizes and pads images
 
 Claude finds the largest aspect-preserving size that satisfies both of the model's image limits:
 
@@ -25,7 +25,7 @@ The token limit can also trigger a resize when neither side exceeds the edge lim
 
 Claude then pads every image, resized or not, up to the next multiple of 28 pixels on the bottom and right edges (924×1307 becomes 924×1316 in the example). The padding contains no content: Claude perceives the padded image, but the page content only ever occupies the un-padded resized region. **Always normalize or rescale by the resized dimensions, not the padded dimensions**; dividing by the padded dimensions scales every coordinate by a small amount.
 
-##  Resize your image before uploading
+## Resize your image before uploading
 
 The most reliable approach is to resize your image yourself before uploading, so the image you have is exactly the image Claude sees and the coordinates Claude returns need no conversion.
 
@@ -92,7 +92,7 @@ print(resized_size(1075, 1520))  # (924, 1307)
 3. In your prompt, ask explicitly for pixel coordinates. For example: *"Return the click point for the Submit button as `[x, y]` in pixel coordinates."*
 4. Use the returned coordinates directly against the image you sent. If you need normalized coordinates, divide by the dimensions of the image you sent, not by the original image's dimensions and not by the padded dimensions.
 
-##  Turn resizing into an error with `transformations`
+## Turn resizing into an error with `transformations`
 
 Pre-resizing only protects your coordinates while your pipeline keeps producing the right sizes. A new image source or a switch to a model on a different resolution tier can quietly reintroduce server-side resizing. To turn that silent drift into a visible error, set the optional `transformations` field on an image content block in a [Messages](api/messages.md) request:
 
@@ -126,7 +126,7 @@ The setting is per image. `"oversized_image": "downsize"` (the default when the 
 
 The [Token counting](build-with-claude/token-counting.md) endpoint honors `transformations` too, rejecting an embedded image exactly as the Messages API would, so you can check whether an embedded image fits without being resized, before running inference. Counting never fetches images supplied by URL or file ID, so a marked image from those sources is checked only at Messages time, as described above.
 
-##  Rescale coordinates when you cannot pre-resize
+## Rescale coordinates when you cannot pre-resize
 
 If you cannot pre-resize (for example, when the image comes from an upstream system you can't modify), use the resize helper from [Resize your image before uploading](#resize-your-image-before-uploading) to recover the dimensions Claude saw, then map the coordinates Claude returns into normalized coordinates or back onto your original image. Unless an image [opts into an error instead](#oversized-image-error), Claude resizes oversized images rather than rejecting them, up to the API's [request limits](build-with-claude/vision.md). Beyond those limits the request fails with a validation error instead. Pass the tier limits that match the model you called: the wrong tier's limits recover the wrong resized dimensions and silently shift every coordinate. This approach requires knowing the pixel dimensions of the image you uploaded, so it does not apply to PDF uploads.
 
@@ -166,7 +166,7 @@ Padding is applied only to the bottom and right edges, so the origin doesn't shi
 
 The relative coordinates multiply against whatever surface you act on: the original image, a full-resolution scan, or a screen. When you act on a screen and screenshot pixels differ from logical coordinates (HiDPI displays), also divide by the display scale factor. The [Computer use tool's scaling guidance](agents-and-tools/tool-use/computer-use-tool.md) covers that pattern.
 
-##  Next steps
+## Next steps
 
 
 

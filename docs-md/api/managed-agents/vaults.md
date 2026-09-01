@@ -8,7 +8,7 @@ Vaults and credentials are authentication primitives that let you register crede
 
 The vault reference is a per-session parameter, so you can manage your product at the `agent` resource granularity and your users at the `session` resource granularity.
 
-##  Create a vault
+## Create a vault
 
 A vault is the collection of `credentials` associated with an end user. Give it a `display_name` and optionally tag it with `metadata` so you can map it back to your own user records.
 
@@ -47,7 +47,7 @@ The response is the full vault record:
 
 
 
-##  Add a credential
+## Add a credential
 
 Two credential categories are supported:
 
@@ -100,7 +100,7 @@ Constraints:
 - **Keys are immutable.** To change `mcp_server_url` or `secret_name`, archive the credential and create a new one.
 - **Maximum 20 credentials per vault.**
 
-##  Reference the vault at session creation
+## Reference the vault at session creation
 
 Pass `vault_ids` when creating a session:
 
@@ -123,7 +123,7 @@ Runtime behavior:
 - When multiple vaults contain a matching credential, the first vault with a match wins.
 - In [multiagent sessions](managed-agents/multiagent-orchestration.md), vault credentials apply to every thread. An agent whose own definition declares the matching MCP server authenticates with these credentials. See [Connect agents to MCP servers](managed-agents/multiagent-orchestration.md).
 
-##  Rotate a credential
+## Rotate a credential
 
 Secret values, `display_name`, and (on environment variable credentials) `injection_location` can be updated. `injection_location` updates merge per field, as described in the Environment variable tab of [Add a credential](#add-a-credential). For a running session, an `injection_location` update propagates the same way as a secret rotation: the session's credentials are re-resolved without a restart, as described in [Credential lifecycle](#credential-lifecycle), and the updated locations apply to the session's subsequent outbound requests. Structural fields (`mcp_server_url`, `secret_name`, `token_endpoint`, `client_id`) are locked after creation. To change them, archive the credential and create a new one.
 
@@ -144,7 +144,7 @@ auth:
 YAML
 ```
 
-##  Credential lifecycle
+## Credential lifecycle
 
 Credentials are re-resolved periodically, both during a session and during the vault lifecycle. This ensures that credential rotation, archival, or deletion propagates to running sessions without a restart.
 
@@ -160,7 +160,7 @@ To be notified if a credential is archived, deleted, or fails to refresh, you ca
 
 For `mcp_oauth` credentials, re-resolution also refreshes the access token if it has expired. If the refresh fails, a `vault_credential.refresh_failed` event is emitted.
 
-###  Diagnose an OAuth refresh failure
+### Diagnose an OAuth refresh failure
 
 To diagnose why a refresh failed, call `POST /v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate` (or `client.beta.vaults.credentials.mcp_oauth_validate(...)` in the SDK). This lets you decide how to handle the failure; the right action depends on the error type.
 
@@ -209,7 +209,7 @@ The response is a `vault_credential_validation` object. `mcp_probe` includes the
 
 
 
-##  Other operations
+## Other operations
 
 - **List vaults or credentials:** Paginated, newest first. Archived records are excluded by default (pass `include_archived=true` to include them).
 - **Archive a vault:** `POST /v1/vaults/{id}/archive`. Cascades to all credentials. Secrets are purged; records are retained for auditing. Future sessions referencing this vault fail; running sessions continue.

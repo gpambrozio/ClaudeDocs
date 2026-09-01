@@ -8,7 +8,7 @@ Multiagent orchestration lets one agent coordinate with others to complete compl
 
 Not sure a multiagent setup fits your problem? See [when to use multiagent systems (and when not to)](https://claude.com/blog/building-multi-agent-systems-when-and-how-to-use-them).
 
-##  How it works
+## How it works
 
 All agents share the same sandbox, filesystem, and [vault credentials](managed-agents/vaults.md), but each agent runs in its own **session thread**, a context-isolated event stream with its own conversation history. The coordinator reports activity in the **primary thread** (which is the same as the session-level [event stream](managed-agents/events-and-streaming.md)); additional threads are spawned at runtime when the coordinator delegates work.
 
@@ -16,7 +16,7 @@ Threads are persistent: the coordinator can send a follow-up to an agent it call
 
 Each agent uses its own configuration: model, system prompt, tools, MCP servers, and skills. Session-level [agent configuration overrides](managed-agents/sessions.md) are the exception; they apply to the coordinator and its `self` copies. Tools, MCP servers, and context are not shared.
 
-###  What to delegate
+### What to delegate
 
 Multiagent coordination is best suited for complex tasks that either require work across a variety of surfaces, or where multiple well-scoped tasks contribute to an overall goal.
 
@@ -26,7 +26,7 @@ Patterns that work well:
 - **Specialization:** Route to agents with domain-focused system prompts and tools, such as a security agent or a documentation agent, rather than loading a single agent with every capability.
 - **Escalation:** Consult a more capable agent or model for a subset of complex subtasks.
 
-##  Configure the coordinator
+## Configure the coordinator
 
 When [defining your agent](managed-agents/agent-setup.md), set `multiagent` to declare the roster of agents the coordinator can delegate to:
 
@@ -70,7 +70,7 @@ The coordinator can only delegate to one level of agents; referencing an agent t
 
 When agents pin an [inference geography](manage-claude/data-residency.md) (`model.inference_geo` in the [agent definition](managed-agents/agent-setup.md)), the coordinator's pin and every roster member's pin must either all be set to the same value or all be unset. A mismatched roster is rejected with a 400 validation error, both when the agent is saved and when a [session-create override](managed-agents/sessions.md) changes any of the pins.
 
-###  Give the session an advisor
+### Give the session an advisor
 
 An advisor entry in `multiagent.agents` gives the session's primary thread an **advisor**: a model it can consult mid-turn for strategic guidance, such as planning an approach, getting unstuck, or reviewing work before finishing. The entry has exactly two fields, `type` and `model`:
 
@@ -103,7 +103,7 @@ The advisor model must meet a minimum capability bar, and the agent's own model 
 
 The advisor is also available as a [server tool on the Messages API](agents-and-tools/tool-use/advisor-tool.md). The Managed Agents surface differs in configuration and delivery: the roster entry has no `max_uses`, `max_tokens`, or `caching` fields, and advice arrives through thread events rather than `advisor_tool_result` blocks.
 
-####  How consultations work
+#### How consultations work
 
 Each consultation runs as a platform-spawned thread named `anthropic.advisor` that terminates itself when the consultation completes, and the advice is delivered to the primary thread as an `agent.thread_message_received` event. A consultation emits the standard thread events, identified by the reserved name `anthropic.advisor` (the thread lifecycle events carry it as `agent_name`, and the advice delivery carries it as `from_agent_name`), typically in this order:
 
@@ -119,7 +119,7 @@ Whether your client can read the advice is the advisor model's policy, and it mi
 
 A failed or interrupted consultation never fails the agent's turn: the agent continues after a generic notice that the consultation failed. A session-level `user.interrupt` during a consultation terminates the advisor thread with no advice delivered; a `user.interrupt` with the advisor thread's `session_thread_id` abandons only that consultation.
 
-####  Advisor threads
+#### Advisor threads
 
 The advisor is not a roster agent: it is invisible to the coordinator's `list_agents` tool, it cannot be messaged with `send_to_agent`, and only the session's primary thread can consult it. Roster agents cannot.
 
@@ -127,11 +127,11 @@ Advisor threads are exempt from the concurrent-thread limit. They appear in the 
 
 Prompt caching on the advisor's side is automatic; there is nothing to configure. Consultations are billed at the advisor model's rates, and their tokens appear in the advisor thread's usage and in the session's usage totals.
 
-####  Removing the advisor
+#### Removing the advisor
 
 To remove the advisor, [update the agent](managed-agents/agent-setup.md) with a roster that no longer includes the advisor entry. If the advisor is the roster's only entry, clear the roster entirely by setting `"multiagent": null`.
 
-##  Create the session
+## Create the session
 
 Create a session referencing the coordinator. The coordinator delegates to the agents in its roster as needed.
 
@@ -146,7 +146,7 @@ session = client.beta.sessions.create(
 )
 ```
 
-##  Connect agents to MCP servers
+## Connect agents to MCP servers
 
 MCP servers are agent-scoped (each agent definition declares its own servers and tools), while vault credentials are session-scoped (`vault_ids` passed at session creation apply to every thread). Two implications for your integration:
 
@@ -189,7 +189,7 @@ print(session.id)
 
 In this example, only the researcher declares the GitHub MCP server, so the coordinator does not have access. The session's `vault_ids` supply the GitHub credential to the researcher's thread.
 
-##  Threads
+## Threads
 
 The **session-level event stream** (`/v1/sessions/{session_id}/events/stream`) is considered the **primary thread**, containing a condensed view of all activity across all threads. You don't see the full activity from subagents, but you do see the start and end of their work, and blocking events such as tool permission requests.
 
@@ -214,7 +214,7 @@ for thread in client.beta.sessions.threads.list(session.id):
 
 The full list includes the primary thread. `parent_thread_id` is null for the primary thread.
 
-###  Primary thread events
+### Primary thread events
 
 These events surface multiagent activity on the primary thread at `/v1/sessions/{session_id}/events/stream`. Message-direction events are named relative to the thread whose stream they appear on: `agent.thread_message_received` means a message arrived on this thread from another thread, and `agent.thread_message_sent` means this thread sent one. The task the coordinator delegates, for example, arrives on the child's own stream as an `agent.thread_message_received` event.
 
@@ -229,7 +229,7 @@ These events surface multiagent activity on the primary thread at `/v1/sessions/
 
 Advisor consultations emit these same thread events under the reserved name `anthropic.advisor` (as `agent_name` on the thread lifecycle events and `from_agent_name` on the advice delivery); see [Give the session an advisor](#give-the-session-an-advisor) for the sequence.
 
-###  Session thread events
+### Session thread events
 
 Critical events are proxied to the primary thread. However, you might still want to investigate a specific agent's reasoning and tool calls. To do so, stream or list the events from the associated session thread.
 
@@ -256,7 +256,7 @@ with client.beta.sessions.threads.events.stream(
                 break
 ```
 
-###  Tool permissions and custom tools
+### Tool permissions and custom tools
 
 If a subagent needs something from your client, such as [permission](managed-agents/events-and-streaming.md) to run an `always_ask` tool, or the [result of a custom tool](managed-agents/events-and-streaming.md), the event is cross-posted to the **primary thread** with `session_thread_id` identifying the originating session thread.
 

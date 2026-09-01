@@ -28,11 +28,11 @@ cURL
 
 
 
-BetaDeletedSkill object{ id, type }
+BetaDeletedSkill object{ id, type }
 
 
 
-id: string
+id: string
 
 Unique identifier for the skill.
 
@@ -40,7 +40,7 @@ The format and length of IDs may change over time.
 
 
 
-type: "skill\_deleted"
+type: "skill\_deleted"
 
 Deleted object type.
 
@@ -50,15 +50,15 @@ defaultskill\_deleted
 
 
 
-BetaSkill object{ id, created\_at, display\_name, 4 more }
+BetaSkill object{ id, created\_at, display\_name, 4 more }
 
 
 
-BetaSkillSource object{ type }
+BetaSkillSource object{ type }
 
 
 
-type: "custom" or "anthropic" or "anthropic\_example" or "plugin"
+type: "custom" or "anthropic" or "anthropic\_example" or "plugin"
 
 Where the Skill comes from.
 
@@ -71,15 +71,15 @@ Possible values:
 
 One of the following:
 
-"custom"
+"custom"
 
-"anthropic"
+"anthropic"
 
-"anthropic\_example"
+"anthropic\_example"
 
-"plugin"
+"plugin"
 
-#### Skills[Versions](api/http/beta/skills/versions.md)
+#### Skills[Versions](api/http/beta/skills/versions.md)
 
 ##### [Create Skill Version](api/http/beta/skills/versions/create.md)
 

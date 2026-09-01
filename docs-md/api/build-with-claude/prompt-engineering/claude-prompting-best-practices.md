@@ -10,27 +10,27 @@ This is the reference for prompt engineering with Claude's latest models, includ
 - **Techniques for all current models** after that: general principles, output and formatting, tool use, thinking, and agentic systems.
 - **Migration considerations** last, for prompts moving from earlier generations.
 
-##  Claude Fable 5
+## Claude Fable 5
 
 Prompting guidance for Claude Fable 5 and Claude Mythos 5 has its own page: [Prompting Claude Fable 5](build-with-claude/prompt-engineering/prompting-claude-fable-5.md). It covers the behavioral differences from Claude Opus 4.8 and the prompt and scaffolding changes worth making, including effort levels, instruction following, long-run progress claims, memory systems, and the `reasoning_extraction` refusal category.
 
-##  Claude Sonnet 5
+## Claude Sonnet 5
 
 Prompting guidance for Claude Sonnet 5 has its own page: [Prompting Claude Sonnet 5](build-with-claude/prompt-engineering/prompting-claude-sonnet-5.md). It covers the behavioral differences from Claude Sonnet 4.6 and the prompt changes worth making, including response length, effort and thinking-depth calibration, tool use triggering, literal instruction following, and design and frontend defaults.
 
-##  Prompting Claude Opus 5
+## Prompting Claude Opus 5
 
 Prompting guidance for Claude Opus 5 has its own page: [Prompting Claude Opus 5](build-with-claude/prompt-engineering/prompting-claude-opus-5.md). It covers the behavioral differences from prior Opus models and the prompt changes worth making, including response length and verbosity, user-facing progress updates, written deliverable length, task scope and over-verification, subagent control, and self-correction.
 
-##  Prompting Claude Opus 4.8
+## Prompting Claude Opus 4.8
 
 Prompting guidance for Claude Opus 4.8 has its own page: [Prompting Claude Opus 4.8](build-with-claude/prompt-engineering/prompting-claude-opus-4-8.md). It covers response length, effort and thinking-depth calibration, tool use triggering, literal instruction following, subagent control, and design and frontend defaults.
 
-##  General principles
+## General principles
 
 The techniques in this section and the sections that follow apply to all current Claude models, including Claude Fable 5 and Claude Mythos 5.
 
-###  Be clear and direct
+### Be clear and direct
 
 Claude responds well to clear, explicit instructions. Being specific about your desired output can help enhance results. If you want "above and beyond" behavior, explicitly request it rather than relying on the model to infer this from vague prompts.
 
@@ -43,7 +43,7 @@ Think of Claude as a brilliant but new employee who lacks context on your norms 
 
 ### Example: Creating an analytics dashboard
 
-###  Add context to improve performance
+### Add context to improve performance
 
 Providing context or motivation behind your instructions, such as explaining to Claude why such behavior is important, can help Claude better understand your goals and deliver more targeted responses.
 
@@ -51,7 +51,7 @@ Providing context or motivation behind your instructions, such as explaining to 
 
 Claude is smart enough to generalize from the explanation.
 
-###  Use examples effectively
+### Use examples effectively
 
 Examples are one of the most reliable ways to steer Claude's output format, tone, and structure. A few well-crafted examples (known as few-shot or multishot prompting) improve accuracy and consistency.
 
@@ -61,7 +61,7 @@ When adding examples, make them:
 - **Diverse:** Cover edge cases and vary enough that Claude doesn't pick up unintended patterns.
 - **Structured:** Wrap examples in `<example>` tags (multiple examples in `<examples>` tags) so Claude can distinguish them from instructions.
 
-###  Structure prompts with XML tags
+### Structure prompts with XML tags
 
 XML tags help Claude parse complex prompts unambiguously, especially when your prompt mixes instructions, context, examples, and variable inputs. Wrapping each type of content in its own tag (for example, `<instructions>`, `<context>`, `<input>`) reduces misinterpretation.
 
@@ -70,7 +70,7 @@ Best practices:
 - Use consistent, descriptive tag names across your prompts.
 - Nest tags when content has a natural hierarchy (documents inside `<documents>`, each inside `<document index="n">`).
 
-###  Give Claude a role
+### Give Claude a role
 
 Setting a role in the system prompt focuses Claude's behavior and tone for your use case. Even a single sentence makes a difference:
 
@@ -93,7 +93,7 @@ message = client.messages.create(
 print(message.content)
 ```
 
-###  Long context prompting
+### Long context prompting
 
 When working with large documents or data-rich inputs (20k+ tokens), structure your prompt carefully to get the best results:
 
@@ -105,7 +105,7 @@ When working with large documents or data-rich inputs (20k+ tokens), structure y
 
   ### Example quote extraction
 
-###  Model self-knowledge
+### Model self-knowledge
 
 If you would like Claude to identify itself correctly in your application or use specific API strings:
 
@@ -128,9 +128,9 @@ When an LLM is needed, please default to Claude Opus 5 unless the user requests
 otherwise. The exact model string for Claude Opus 5 is claude-opus-5.
 ```
 
-##  Output and formatting
+## Output and formatting
 
-###  Communication style and verbosity
+### Communication style and verbosity
 
 Claude's latest models have a more concise and natural communication style compared to previous models:
 
@@ -150,7 +150,7 @@ After completing a task that involves tool use, provide a quick summary of the w
 
 Claude Opus 5 is an exception on verbosity: its default user-facing responses run longer than prior models', and raising or lowering [effort](build-with-claude/effort.md) does not reliably change visible response length. Prompt explicitly for conciseness instead. See [Prompting Claude Opus 5](build-with-claude/prompt-engineering/prompting-claude-opus-5.md) for a sample instruction.
 
-###  Control the format of responses
+### Control the format of responses
 
 There are a few particularly effective ways to steer output formatting:
 
@@ -194,7 +194,7 @@ rather than fragmenting information into isolated points.
 </avoid_excessive_markdown_and_bullet_points>
 ```
 
-###  LaTeX output
+### LaTeX output
 
 Claude's latest models default to LaTeX for mathematical expressions, equations, and technical explanations. If you prefer plain text, add the following instructions to your prompt:
 
@@ -208,7 +208,7 @@ notation such as \( \), $, or \frac{}{}. Write all math expressions using standa
 characters (e.g., "/" for division, "*" for multiplication, and "^" for exponents).
 ```
 
-###  Document creation
+### Document creation
 
 Claude's latest models create presentations, animations, and visual documents with strong instruction following, and usually produce usable output on the first try.
 
@@ -223,7 +223,7 @@ Create a professional presentation on [topic]. Include thoughtful design element
 visual hierarchy, and engaging animations where appropriate.
 ```
 
-###  Migrating away from prefilled responses
+### Migrating away from prefilled responses
 
 Starting with Claude 4.6 models and [Claude Mythos Preview](https://anthropic.com/glasswing), prefilled responses (providing a partial assistant message for Claude to continue from) on the last assistant turn are no longer supported. Requests with prefilled assistant messages to these models return a 400 error. Model intelligence and instruction following have advanced such that most use cases of prefill no longer require it. Earlier models continue to support prefills, and adding assistant messages elsewhere in the conversation is not affected.
 
@@ -239,11 +239,11 @@ Here are common prefill scenarios and how to migrate away from them:
 
 ### Context hydration and role consistency
 
-##  Tool use
+## Tool use
 
-###  Tool usage
+### Tool usage
 
-Claude's latest models are trained for precise instruction following and benefit from explicit direction to use specific tools. If you say "can you suggest some changes," Claude will sometimes provide suggestions rather than implementing them, even if making changes might be what you intended. For how to define tools and troubleshoot tool triggering, see [Tool use with Claude](agents-and-tools/tool-use/overview.md).
+Claude's latest models are trained for precise instruction following and benefit from explicit direction to use specific tools. If you say "can you suggest some changes," Claude will sometimes provide suggestions rather than implementing them, even if making changes might be what you intended. To learn how to define tools and troubleshoot tool triggering, see [Tool use with Claude](agents-and-tools/tool-use/overview.md).
 
 For Claude to take action, be more explicit:
 
@@ -281,7 +281,7 @@ edits, modifications, or implementations when the user explicitly requests them.
 
 Claude Opus 4.5 and Claude Opus 4.6 are also more responsive to the system prompt than previous models. If your prompts were designed to reduce undertriggering on tools or skills, these models may now overtrigger. The fix is to dial back any aggressive language. Where you might have said "CRITICAL: You MUST use this tool when...", you can use more normal prompting like "Use this tool when...".
 
-###  Optimize parallel tool calling
+### Optimize parallel tool calling
 
 Claude's latest models run independent tool calls in parallel. These models will:
 
@@ -317,9 +317,9 @@ Sample prompt to reduce parallel execution
 Execute operations sequentially with brief pauses between each step to ensure stability.
 ```
 
-##  Thinking and reasoning
+## Thinking and reasoning
 
-###  Overthinking and excessive thoroughness
+### Overthinking and excessive thoroughness
 
 Claude Opus 4.6 does more upfront exploration than previous models, especially at higher [`effort`](build-with-claude/effort.md) settings. This initial work often helps to optimize the final results, but the model may gather extensive context or pursue multiple threads of research without being prompted. If your prompts previously encouraged the model to be more thorough, you should tune that guidance for Claude Opus 4.6:
 
@@ -342,7 +342,7 @@ through. You can always course-correct later if the chosen approach fails.
 
 If you need a hard ceiling on thinking costs, extended thinking with a `budget_tokens` cap is still functional on Opus 4.6 and Sonnet 4.6 but is deprecated. On Claude 4.7 and later models, setting `budget_tokens` returns a 400 error. Prefer lowering the [effort](build-with-claude/effort.md) setting or using `max_tokens` as a hard limit with [adaptive thinking](build-with-claude/thinking.md).
 
-###  Leverage thinking & interleaved thinking capabilities
+### Leverage thinking & interleaved thinking capabilities
 
 Claude's latest models offer thinking capabilities that can be especially helpful for tasks involving reflection after tool use or complex multistep reasoning. You can guide its initial or interleaved thinking for better results.
 
@@ -406,13 +406,13 @@ If you are not using extended thinking, no changes are required. On Claude Opus 
 - **Manual chain-of-thought (CoT) prompting as a fallback.** When thinking is off, you can still encourage step-by-step reasoning by asking Claude to think through the problem. Use structured tags like `<thinking>` and `<answer>` to cleanly separate reasoning from the final output. On Claude Opus 5, prefer keeping thinking enabled at a lower effort level instead: with thinking disabled, the model can occasionally emit internal XML tags into its visible output, so see [Running with thinking disabled](build-with-claude/prompt-engineering/prompting-claude-opus-5.md) before applying this pattern there.
 - **Ask Claude to self-check.** Append something like "Before you finish, verify your answer against [test criteria]." This catches errors reliably, especially for coding and math. Claude Opus 5 is the exception: it verifies its own work well without explicit instruction, and verification instructions carried over from prompts tuned for earlier models can cause over-verification, adding tokens and latency. When migrating to Claude Opus 5, remove these instructions rather than rewriting them; see [Task scope and over-verification](build-with-claude/prompt-engineering/prompting-claude-opus-5.md).
 
-##  Agentic systems
+## Agentic systems
 
-###  Long-horizon reasoning and state tracking
+### Long-horizon reasoning and state tracking
 
 Claude's latest models handle long-horizon reasoning tasks with strong state tracking. Claude maintains orientation across extended sessions by focusing on incremental progress, making steady advances on a few things at a time rather than attempting everything at once. This capability especially emerges over multiple context windows or task iterations, where Claude can work on a complex task, save the state, and continue with a fresh context window.
 
-####  Context awareness and multiwindow workflows
+#### Context awareness and multiwindow workflows
 
 Claude Sonnet 5, Claude Sonnet 4.6, Claude Sonnet 4.5, and Claude Haiku 4.5 feature [context awareness](build-with-claude/context-windows.md), enabling the model to track its remaining context window (that is, its "token budget") throughout a conversation. This enables Claude to execute tasks and manage context more effectively by understanding how much space it has to work.
 
@@ -436,7 +436,7 @@ context remaining.
 
 The [memory tool](agents-and-tools/tool-use/memory-tool.md) pairs well with context awareness for managing context transitions.
 
-####  Workflows across multiple context windows
+#### Workflows across multiple context windows
 
 For tasks spanning multiple context windows:
 
@@ -462,7 +462,7 @@ don't run out of context with significant uncommitted work. Continue working
 systematically until you have completed this task.
 ```
 
-####  State management best practices
+#### State management best practices
 
 - **Use structured formats for state data:** When tracking structured information (like test results or task status), use JSON or other structured formats to help Claude understand schema requirements.
 - **Use unstructured text for progress notes:** Freeform progress notes work well for tracking general progress and context.
@@ -471,7 +471,7 @@ systematically until you have completed this task.
 
 ### Example: State tracking
 
-###  Balancing autonomy and safety
+### Balancing autonomy and safety
 
 Without guidance, Claude Opus 4.6 may take actions that are difficult to reverse or affect shared systems, such as deleting files, force-pushing, or posting to external services. If you want Claude Opus 4.6 to confirm before taking potentially risky actions, add guidance to your prompt:
 
@@ -496,7 +496,7 @@ don't bypass safety checks (e.g. --no-verify) or discard unfamiliar files that m
 in-progress work.
 ```
 
-###  Research and information gathering
+### Research and information gathering
 
 Claude's latest models can find and synthesize information from multiple sources effectively. For optimal research results:
 
@@ -518,7 +518,7 @@ complex research task systematically.
 
 This structured approach helps Claude work through large corpora methodically and iteratively critique its findings.
 
-###  Subagent orchestration
+### Subagent orchestration
 
 Claude's latest models orchestrate subagents natively. These models can recognize when tasks would benefit from delegating work to specialized subagents and do so proactively without requiring explicit instruction.
 
@@ -541,13 +541,13 @@ operations, single-file edits, or tasks where you need to maintain context acros
 work directly rather than delegating.
 ```
 
-###  Chain complex prompts
+### Chain complex prompts
 
 With adaptive thinking and subagent orchestration, Claude handles most multistep reasoning internally. Explicit prompt chaining (breaking a task into sequential API calls) is still useful when you need to inspect intermediate outputs or enforce a specific pipeline structure.
 
 The most common chaining pattern is **self-correction:** generate a draft → have Claude review it against criteria → have Claude refine based on the review. Each step is a separate API call so you can log, evaluate, or branch at any point.
 
-###  Reduce file creation in agentic coding
+### Reduce file creation in agentic coding
 
 Claude's latest models may sometimes create new files for testing and iteration purposes, particularly when working with code. This approach allows Claude to use files, especially Python scripts, as a 'temporary scratchpad' before saving its final output. Using temporary files can improve outcomes particularly for agentic coding use cases.
 
@@ -562,7 +562,7 @@ If you create any temporary new files, scripts, or helper files for iteration, c
 these files by removing them at the end of the task.
 ```
 
-###  Overeagerness
+### Overeagerness
 
 Claude Opus 4.5 and Claude Opus 4.6 have a tendency to overengineer by creating extra files, adding unnecessary abstractions, or building in flexibility that wasn't requested. If you're seeing this undesired behavior, add specific guidance to keep solutions minimal.
 
@@ -592,7 +592,7 @@ operations. Don't design for hypothetical future requirements. The right amount 
 complexity is the minimum needed for the current task.
 ```
 
-###  Avoid focusing on passing tests and hardcoding
+### Avoid focusing on passing tests and hardcoding
 
 Claude can sometimes focus too heavily on making tests pass at the expense of more general solutions, or may use workarounds like helper scripts for complex refactoring instead of using standard tools directly. To prevent this behavior and get solutions that generalize:
 
@@ -616,7 +616,7 @@ inform me rather than working around them. The solution should be robust, mainta
 and extendable.
 ```
 
-###  Minimizing hallucinations in agentic coding
+### Minimizing hallucinations in agentic coding
 
 Claude's latest models are less prone to hallucinations and give more accurate, grounded, intelligent answers based on the code. To encourage this behavior even more and minimize hallucinations:
 
@@ -634,15 +634,15 @@ hallucination-free answers.
 </investigate_before_answering>
 ```
 
-##  Capability-specific tips
+## Capability-specific tips
 
-###  Improved vision capabilities
+### Improved vision capabilities
 
 Claude Opus 4.5 and Claude Opus 4.6 have improved vision capabilities compared to previous Claude models. They perform better on image processing and data extraction tasks, particularly when there are multiple images present in context. These improvements carry over to computer use, where the models can more reliably interpret screenshots and UI elements. You can also use these models to analyze videos by breaking them up into frames.
 
 One technique that has proven effective to further boost performance is to give Claude a crop tool or [agent skill](agents-and-tools/agent-skills/overview.md). Testing has shown consistent uplift on image evaluations when Claude is able to "zoom" in on relevant regions of an image. Anthropic has created a [recipe for the crop tool](https://platform.claude.com/cookbook/multimodal-crop-tool).
 
-###  Frontend design
+### Frontend design
 
 Claude Opus 4.5 and Claude Opus 4.6 build complex, real-world web applications with strong frontend design. However, without guidance, models can default to generic patterns that create what users call the "AI slop" aesthetic. To create distinctive, creative frontends that surprise and delight:
 
@@ -690,7 +690,7 @@ generations. Avoid this: it is critical that you think outside the box!
 
 You can also refer to the [full skill definition](https://github.com/anthropics/claude-code/blob/main/plugins/frontend-design/skills/frontend-design/SKILL.md).
 
-##  Migration considerations
+## Migration considerations
 
 When migrating to current Claude models from earlier generations:
 
@@ -703,11 +703,11 @@ When migrating to current Claude models from earlier generations:
 
 For detailed migration steps, see the [Migration guide](about-claude/models/migration-guide.md).
 
-###  Migrating to Claude Sonnet 5 from Claude Sonnet 4.5 or earlier
+### Migrating to Claude Sonnet 5 from Claude Sonnet 4.5 or earlier
 
 See [Migrating to Claude Sonnet 5 from Claude Sonnet 4.5 or earlier](models/sonnet-5/migration-guide.md) in the migration guide, which covers the effort default change and the removal of manual extended thinking (`budget_tokens`).
 
-##  Next steps
+## Next steps
 
 
 

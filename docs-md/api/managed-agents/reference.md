@@ -6,7 +6,7 @@
 
 This page collects reference material for Claude Managed Agents. For task-oriented guides, follow the links in each section. For the operations on the session resource, see [Session operations](managed-agents/session-operations.md).
 
-##  Event types
+## Event types
 
 Persisted event type strings follow a `{domain}.{action}` naming convention; the stream-only event deltas (see the Event deltas tab) are the exception. See [Session event stream](managed-agents/events-and-streaming.md) for sending, streaming, and listing events. Webhook event types are listed separately in [Subscribe to webhooks](managed-agents/webhooks.md), and some of their names differ from the stream's (for example, `session.status_idled` rather than `session.status_idle`).
 
@@ -21,7 +21,7 @@ User eventsAgent eventsSession eventsSpan eventsSystem eventsEvent deltas
 | `user.define_outcome` | Define an [outcome](managed-agents/define-outcomes.md) for the agent to work toward. |
 | `user.tool_result` | For sessions with `self_hosted` [environments](managed-agents/self-hosted-sandboxes.md) only, your integration is responsible for providing `agent_toolset` results. The SDK helpers and CLI do this automatically. |
 
-##  Self-hosted worker
+## Self-hosted worker
 
 These are the `ant beta:worker` CLI flags for the pre-built worker that drives a `self_hosted` environment. See [Self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md) for setting up the environment, running a worker, and the SDK helper options.
 
@@ -37,13 +37,13 @@ These are the `ant beta:worker` CLI flags for the pre-built worker that drives a
 
 The CLI worker does not mount [memory stores](managed-agents/memory.md): a session that attaches one still runs, but the agent finds nothing at the store's `mount_path` and no changes sync back to the store. To use memory stores in sessions on a self-hosted environment, run the SDK worker instead; see [Use memory stores](managed-agents/self-hosted-sandboxes.md).
 
-##  Supported MCP server types
+## Supported MCP server types
 
 Claude Managed Agents connects to [remote MCP servers](agents-and-tools/remote-mcp-servers.md) that expose an HTTP endpoint, or to private MCP servers through [MCP tunnels](agents-and-tools/mcp-tunnels/overview.md). The server should support the MCP protocol's streamable HTTP transport; servers that only support the deprecated SSE transport still work through an automatic fallback. See [MCP connector](managed-agents/mcp-connector.md) for declaring servers on an agent.
 
 For more information on MCP and building MCP servers, see the [MCP documentation](https://modelcontextprotocol.io).
 
-##  Rate limits
+## Rate limits
 
 Managed Agents endpoints are rate-limited per organization:
 
@@ -54,7 +54,7 @@ Managed Agents endpoints are rate-limited per organization:
 
 Organization-level [spend limits and usage-tier rate limits](api/rate-limits.md) also apply.
 
-##  Branding guidelines
+## Branding guidelines
 
 For partners integrating Claude Managed Agents, use of Claude branding is optional. When referencing Claude in your product:
 

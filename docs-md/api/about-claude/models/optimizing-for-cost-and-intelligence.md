@@ -17,7 +17,7 @@ The levers come in two kinds:
 
 Each lever comes with measured results and the rule for when it pays. In Anthropic's measurements, prompt caching was the largest lever by a wide margin: it cut agent-loop cost by a factor of 2.5 to 3.7 on this guide's benchmarks and cut a small triage agent's bill by 83%, or 88% with input trimming added. The multi-model levers are narrower; a second model paid off in two shapes, an advisor and an orchestrator.
 
-##  Start here
+## Start here
 
 Match your situation to a row.
 
@@ -37,13 +37,13 @@ Match your situation to a row.
 
 These results are Anthropic-internal ([Benchmarks referenced](#refs)) and directional, not guarantees, so measure on your own workload with the [four-step method](#measure-on-your-own-workload).
 
-##  Cut spend without losing quality
+## Cut spend without losing quality
 
 Prompt caching, token hygiene, batch processing, and a prompt audit against your current model all lower what you pay without lowering output quality. Two caveats apply: batch processing trades latency for its discount, and context editing, a token-hygiene lever, cost more than it saved in the run measured in this section.
 
-###  Cache repeated context
+### Cache repeated context
 
-####  Why caching comes first
+#### Why caching comes first
 
 Turn on [prompt caching](build-with-claude/prompt-caching.md) before any other lever, because every turn of an agentic task resends the entire growing conversation: system prompt, tool definitions, and every prior turn. A 40-turn task sends its first turn 40 times, so task cost grows with roughly the square of turn count. Caching does not stop the resending, but each resend costs about a tenth as much and processes faster: the prefix is billed at the [cache-read rate](build-with-claude/prompt-caching.md), a tenth of the input price, and each turn pays the 1.25x cache-write rate only for what is new.
 
@@ -55,7 +55,7 @@ Across Anthropic's measured runs, cache reads are routinely the largest single c
 
 The cache's default lifetime is 5 minutes and an agent loop's turns are seconds apart, so the discount applies to most tokens on every turn. The caching chart's runs achieved 81% to 90% hit rates. The saving varies with episode depth, because shorter loops re-read less, but caching stayed the largest single lever on every model and benchmark measured.
 
-####  Pick the cache duration
+#### Pick the cache duration
 
 If your loop waits on a person between turns, use the [1-hour cache duration](build-with-claude/prompt-caching.md). It costs more to write (2x the input price instead of 1.25x). A miss on either duration bills the whole prefix at the write price instead of the read price, so the longer duration pays off once a few turns per session follow a pause between 5 minutes and an hour.
 
@@ -71,7 +71,7 @@ Anthropic measured the triage job from [Trim input and context tokens](#trim-inp
 
 Anthropic also measured extra requests that keep the 5-minute cache warm. They saved nothing measurable over the 1-hour duration at any share of paused turns and cost more with a pause before every turn, so use the duration instead.
 
-####  Turn on caching
+#### Turn on caching
 
 Setup takes little work. [Automatic caching](build-with-claude/prompt-caching.md) places breakpoints for you; otherwise, the [Claude API skill](agents-and-tools/agent-skills/claude-api-skill.md) that ships with Claude Code can add caching to an existing integration from one prompt. The following excerpt shows the skill adding it to the harness that produced these measurements:
 
@@ -98,7 +98,7 @@ That's 3 breakpoints total, under the limit of 4.
 
 Those breakpoint placements follow the standard pattern in [Explicit cache breakpoints](build-with-claude/prompt-caching.md).
 
-####  What breaks the cache
+#### What breaks the cache
 
 Several things can break your cache during a task. Anything that changes per request, such as a timestamp or a queue position, placed ahead of the stable prefix turns every request into a full cache write: on the triage run in [Trim input and context tokens](#trim-input-and-context-tokens), a 25-token status line at the front of the system prompt cost $4.24 per run instead of $0.59, more than running with caching off. Keep per-request text in the newest user turn.
 
@@ -110,7 +110,7 @@ Anthropic measured this on the triage agent's long sessions[18](#refs). An effor
 
 Changing a [task budget](build-with-claude/task-budgets.md) partway through invalidates any cached prefix that contains the budget value, so set it once, on the first request. Every [context editing](build-with-claude/context-editing.md) pass invalidates the prefix from the point it clears and the next request pays to re-cache everything after it, so clear in a few large batches rather than many small ones. Make every cache-invalidating change at natural breaks, then confirm cache reads have not dropped; if they have, [cache diagnostics](build-with-claude/cache-diagnostics.md) shows where the prefix diverged.
 
-###  Trim input and context tokens
+### Trim input and context tokens
 
 Most agent requests carry tokens that never influence the answer. Trimming them costs nothing in output quality, although not every lever here saved money when measured. Two places to look:
 
@@ -119,7 +119,7 @@ Most agent requests carry tokens that never influence the answer. Trimming them 
 
 The levers interact with the cache and each other, so judge them by net effect, and use [cache diagnostics](build-with-claude/cache-diagnostics.md) to confirm your cached prefix survives each change. Anthropic measured them on an issue-triage agent working through 20 real bug reports with screenshots from a public repository, and on a longer variant of the same job with 2.6 times the tokens. With caching on, input trimming (image resizing and tool search) took a further 26% off the short run and 21% off the long one.
 
-####  Defer unused tool definitions
+#### Defer unused tool definitions
 
 Every tool definition attached to a request is input on every turn, and a few MCP servers add up to hundreds of them. Anthropic ran the triage agent with its own two tools plus a catalog of real tool definitions from public MCP servers, for a total of up to 502 tools, loading all of them or marking the extras `defer_loading` behind [tool search](agents-and-tools/tool-use/tool-search-tool.md):
 
@@ -127,7 +127,7 @@ Every tool definition attached to a request is input on every turn, and a few MC
 
 With every definition loaded, the run cost rose from $0.55 to $1.02, tracking the schema tokens on each request. With tool search, it stayed at $0.56 at every catalog size, 45% less at 502 tools. Accuracy was 15 to 18 of 20 in every cell either way, and the model never called a wrong tool, so at this scale the catalog costs money, not correctness. The same holds for tools that come through the [MCP connector](agents-and-tools/mcp-connector.md): with a public GitHub MCP server attached, deferring its toolset (`default_config: {defer_loading: true}`) cut the run 20% at the same accuracy.
 
-####  Keep data files out of the prompt
+#### Keep data files out of the prompt
 
 When the model has to compute over a table, upload it with the [Files API](build-with-claude/files.md) and let the model query it with [code execution](agents-and-tools/tool-use/code-execution-tool.md) instead of pasting it in. Anthropic asked 25 aggregate questions[15](#refs) (sums, filtered counts, group-bys, and a date filter) over a 1,862-row public CSV, with the answers computed by pandas:
 
@@ -135,7 +135,7 @@ When the model has to compute over a table, upload it with the [Files API](build
 
 Pasted into the prompt, the table is about 91,000 input tokens on every request, and Claude Sonnet 5 answered 6 of 25 questions correctly at $5.01 per run. Uploaded, with code execution, it answered 25 of 25 at $0.40. Claude Opus 5 showed the same pattern (6 of 25 at $13.45 against 25 of 25 at $1.91).
 
-####  Manage the context lifecycle
+#### Manage the context lifecycle
 
 The context levers are where the two runs diverge:
 
@@ -174,11 +174,11 @@ def prune_task_boundary(messages, tool_name_by_id, threshold=2000):
 
 
 
-###  Batch work that can wait
+### Batch work that can wait
 
 The [Batch API](build-with-claude/batch-processing.md) takes 50% off every token of a request, including cached ones, in exchange for results arriving any time within 24 hours. Route every request no one is waiting on through a batch, and keep the interactive path for the rest. Batching is the second-largest free lever after caching for unattended agent work: evaluation runs, backfills, and scheduled jobs such as a recurring run of the issue-triage agent from the [token-trimming measurement](#trim-input-and-context-tokens). It combines with everything on this page except interactivity, but is not available for Claude Managed Agents sessions, which are interactive by design (see [Claude Managed Agents pricing](about-claude/pricing.md)).
 
-###  Audit prompts against the current model
+### Audit prompts against the current model
 
 Each model generation responds to prompts differently, so a prompt accumulates text written for a model you no longer use. The usual case is over-specific instruction added to compensate for an older model: "verify twice," "be maximally thorough," a mandatory step-by-step procedure, or a hand-rolled reasoning scratchpad. A newer model follows these to the letter, producing extra tool rounds and extra writing, so the bill goes up with no gain in accuracy. Auditing prompts against the model you run now, and again whenever you change models, is a free win.
 
@@ -223,11 +223,11 @@ The two kinds of stale text have different costs. Instructions the new model fol
 
 The same patterns appear in tool descriptions and skills, and are worth removing there too.
 
-##  Trade cost against intelligence
+## Trade cost against intelligence
 
 These levers set where a single model sits between cost and intelligence: model choice, effort, re-running failures at a higher setting, and the budgets and caps it works within. Start with an effort sweep on your current model ([Tune effort](#tune-effort)). From lowest to highest cost and capability, the current models are Claude Haiku 4.5, Claude Sonnet 5, Claude Opus 5, and Claude Fable 5 (the frontier model); [Models overview](models/overview.md) has the full lineup and prices.
 
-###  Compare models on cost per task
+### Compare models on cost per task
 
 Price lists are written per token, and per token the frontier model looks expensive: Claude Fable 5's per-token price is several times Claude Sonnet 5's. You pay for completed tasks, though, so compare models on cost per completed task. A more capable model finishes a task with less work: fewer turns, less searching, less re-reading of its own context, and less backtracking. The per-token premium is routinely overwhelmed by doing less of everything.
 
@@ -247,7 +247,7 @@ Price the tail of your workload, not the median: compare models on the hardest t
 
 The [multi-model strategies](#combine-models) exist to spend frontier intelligence on that tail without paying frontier rates for the rest.
 
-###  Upgrade the model
+### Upgrade the model
 
 If you are a model or two behind, the cheapest lever is the model string. Anthropic ran recent Claude Opus and Claude Sonnet models through the same harness on the SWE-bench Pro[3](#refs) subset, each at its shipped defaults, and priced each at list rates:
 
@@ -257,7 +257,7 @@ Anthropic prices the Opus line identically per token across versions, so any sav
 
 Compare on cost per solved task, not per token: the same text costs about 30% more tokens on Claude Opus 4.7 and later, so a per-token comparison makes the newer models look more expensive by construction.
 
-###  Tune effort
+### Tune effort
 
 Effort is the most direct way to tune a model to your task. The `effort` parameter governs how much thinking, tool calling, and self-verification the model does, and the default (`high`) suits demanding tasks. Cost scales with all that activity; accuracy scales only with the part your task needs. Below the model's ceiling, the highest effort levels pay for depth the task never uses.
 
@@ -277,7 +277,7 @@ Lower effort does cost accuracy on workloads that reach the model's ceiling, whe
 
 The task description alone does not reveal which kind of workload you have, so sweep two or three effort levels on a sample of your own traffic and read the answer off the curve. Test each level in a separate session: changing effort mid-session invalidates the cache (see [Cache repeated context](#cache-repeated-context)) and distorts the comparison. For parameter details, see [Effort](build-with-claude/effort.md).
 
-###  Re-run failures at higher effort
+### Re-run failures at higher effort
 
 When a task's outcome is checkable, the cheapest policy on the effort curve is not a fixed setting: run every task at a low setting and re-run only the failures at a higher one.
 
@@ -287,7 +287,7 @@ Anthropic computed this policy task by task from the effort runs on the SWE-benc
 
 Two conditions apply. First, you need a failure signal (here, the benchmark's own tests); a checker that passes bad work lets those failures through. Second, every first-pass failure takes two runs' worth of wall-clock time, so the saving is paid for in latency on the failures.
 
-###  Set budgets and output caps
+### Set budgets and output caps
 
 Most agentic task runs are cheap, but a minority spend many times the median cost on searching, re-verifying, and over-testing. A [task budget](build-with-claude/task-budgets.md) targets that tail. The model sees a live token countdown for the whole task and self-regulates, trimming low-value searches, skipping redundant verification, and wrapping up instead of spiraling.
 
@@ -350,7 +350,7 @@ The second plots per-turn output length against the caps:
 
 ![Dot plot of per-turn output for Opus 5 and Fable 5: medians a few hundred tokens, longest turns 33k and 59k, against the caps](/docs/images/cost-intel-max-tokens-ladder.png)
 
-##  Combine models
+## Combine models
 
 Multi-model architectures fit workloads whose task complexity varies enough that different steps are best served by different models. When your traffic mixes routine work that a smaller model handles reliably with harder steps that need frontier capability, splitting the work keeps frontier intelligence where it matters while most tokens bill at smaller-model rates. When a workload lacks that mix, because its difficulty is uniform or it is one dependent chain, a single well-tuned model is usually the better choice. Each strategy section gives the rule for telling the two cases apart.
 
@@ -361,7 +361,7 @@ Two strategies cover most workloads, and they differ in which model holds the ma
 | **Advisor** | Smaller model runs the loop, escalates on demand | Consulted for plans and corrections | Serial work that is hard in spots, such as a coding agent's many turns between a few real decisions | How often the executor gets stuck |
 | **Orchestrator** | Frontier model runs the loop, delegates the bulk work | Plans, dispatches, and synthesizes | Work that fans out across genuinely independent files, documents, or cases, especially more than one context window of it | How hard the pieces are to coordinate |
 
-###  Advisor strategy: escalate hard decisions
+### Advisor strategy: escalate hard decisions
 
 In the advisor strategy, a lower-cost executor model runs the agent loop and performs most turns. When it hits a decision that needs deeper judgment, such as choosing an approach or recovering from a failure, it calls a higher-intelligence advisor model for strategic guidance, then continues. Most tokens are billed at executor rates, and only the occasional consultations at advisor rates.
 
@@ -399,7 +399,7 @@ Whatever the pairing, first price the advisor's model alone at low effort; that 
 
 **When it fits.** The advisor strategy suits workloads where turns are mostly mechanical but an excellent plan matters: coding agents, computer use, and multistep research pipelines. It fits poorly when every turn genuinely needs frontier capability, when there is nothing to plan (single-turn Q&A), or when your executor is already close to the advisor's capability.
 
-###  Orchestrator strategy: delegate bulk work
+### Orchestrator strategy: delegate bulk work
 
 In the orchestrator strategy, the frontier model holds the loop. It decomposes the task, dispatches subtasks to lower-cost worker models, and merges their results. The orchestrator's own transcript stays short because workers absorb the token-heavy exploration, so most tokens are billed at worker rates while the plan and synthesis still come from the frontier model.
 
@@ -429,7 +429,7 @@ The token accounting shows why. Both bills are mostly corpus reading served from
 
 BrowseComp[4](#refs) shows the boundary inside one benchmark. Delegation paid on the routine slice and lost on the full, harder set, where the frontier model alone reached the coordinator configuration's accuracy at 22% to 30% lower cost. Independent external work reports the same pattern[5](#refs). If the work is one chain, fits in one context without a long cost tail, or a single model at lower effort already meets your bar, don't build an orchestrator.
 
-###  Choose between the strategies
+### Choose between the strategies
 
 Most cases come down to one question: does the work split into independent pieces, or is it one answer reached through a chain of dependent steps? The [strategy table](#combine-models) maps the two answers to the two strategies.
 
@@ -442,7 +442,7 @@ The multi-model results on this page were judged against the same model at lower
 
 When you do add an advisor, it is a tool definition rather than a rearchitecture.
 
-##  Measure on your own workload
+## Measure on your own workload
 
 The numbers on this page reflect list prices at the time of measurement and drift as models and prices change. Your escalation rate, how cleanly tasks split, and transcript length move them too. The method stays the same:
 
@@ -506,7 +506,7 @@ The following table lists the levers in the order to try them:
 | Advisor | Depends on the capability gap and the consult rate; the chart-reading pairing scored above both models' effort curves, the coding pairing only marginally | Small gains | About two extra calls per task | [Advisor strategy](#advisor-strategy-escalate-hard-decisions) |
 | Orchestrator | More than 60% below the frontier model beyond one context window; about half on routine tails | 2 to 6 points below the frontier model | Much faster on large inputs | [Orchestrator strategy](#orchestrator-strategy-delegate-bulk-work) |
 
-##  Benchmarks referenced
+## Benchmarks referenced
 
 Except where a reference says otherwise, measurements are Anthropic-internal runs of these benchmarks. Unless noted, costs are USD at the list prices in effect when each benchmark ran; Claude Sonnet 5 figures use $2 and $10 per million input and output tokens. Charts labeled "notional USD" price each request's token counts at those rates rather than reporting invoices.
 
@@ -529,7 +529,7 @@ Except where a reference says otherwise, measurements are Anthropic-internal run
 17. **Cache-read share in production:** Aggregated first-party Claude API usage for the 14 days ending August 23, 2026, direct API product only, Anthropic-internal organizations excluded, no organization identified. An organization-day counts as an agent loop when its requests carry tool definitions and tool results, its prompts hold 9 or more prior tool calls on average, caching was used, and it made at least 10 such requests (the API has no conversation identifier, so this stands in for conversation length): 303,003 organization-days across 106,487 organizations, median cache-read share 84.2% of all input tokens, upper quartile 91.7%. Use-case labels (the organization's declared use case, or otherwise its classified one) cover 74% of those organization-days and 99% of their tokens; coding organizations supply 87% of agentic input tokens and read a median 88.5% (90.9% at 25 or more prior tool calls), upper quartile 93.4%, with about 72% of coding organization-days at 80% or more; support, research, and data agents read 84% to 85%. The top decile of organization-days reads 95.9% or more for coding and 94.2% to 94.8% for support, research, data, and other agents. The request-level split at 25 or more prior tool calls comes from a six-hour sample: coding 92% read, 7% write, under 1% uncached. Unlabeled organizations, mostly small, read a median 11%. Organization-days with no tool definitions read a median 34.6%. An independent query over the same window that reconstructs conversations of 10 or more requests, rather than scoring organization-days, puts the median at 90.2%; the difference is scope, not data.
 18. **Compaction timing measurement:** The triage agent's long variant from [Trim input and context tokens](#trim-input-and-context-tokens), run August 24, 2026, on Claude Sonnet 5 with the 5-minute cache, cost from the usage fields at list prices, five sessions per arm: a no-change arm at the default effort throughout ($0.81 per session), and two arms that start at low effort and make the same two cache-breaking changes, a switch to the default effort and one added tool, either mid-session at requests 12 and 17 ($0.95) or together on the first request after the first compaction ($0.75). A fourth arm of six sessions, run August 25, 2026, made the same two changes on the request that triggered the first compaction ($0.92 per session): that request's summarization pass wrote the 81,000-token context to the cache instead of reading it, so that pass cost $0.21 against $0.04 for the same pass in the boundary arm. Sessions first compacted at request 21 to 25 (16 of the 21 sessions at request 22), once the prompt passed the 80,000-token compaction trigger, and two no-change sessions compacted a second time near the end. The boundary arm's lower total than the no-change arm reflects its low-effort requests before the change and those second compactions rather than caching: the two arms' re-write costs differ by under a cent. The mid-session arm paid $0.23 per session in cache re-writes; the difference between the mid-session and boundary arms was $0.20 with a 95% confidence interval of $0.11 to $0.29. One mid-session session ran cheap ($0.82) after its model mis-called the search tool following compaction and got empty results; it is included, and without it the arm averages $0.98. Accuracy averaged 14.2 of 20 labels in each August 24 arm and 14.7 in the August 25 arm; cache reads were 91% of prompt tokens with no changes, 85% mid-session, 91% at the boundary, and 86% with the changes on the triggering request.
 
-##  Next steps
+## Next steps
 
 
 

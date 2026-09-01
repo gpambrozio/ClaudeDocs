@@ -12,11 +12,11 @@ Delete Workspace Member
 
 ##### Path parameters
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the Workspace.
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 
@@ -24,7 +24,7 @@ ID of the User.
 
 
 
-type: "workspace\_member\_deleted"
+type: "workspace\_member\_deleted"
 
 Deleted object type.
 
@@ -32,21 +32,17 @@ For Workspace Members, this is always `"workspace_member_deleted"`.
 
 defaultworkspace\_member\_deleted
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the Workspace.
 
-
+Delete Workspace Member
 
-### Delete Workspace Member
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members/$USER_ID \

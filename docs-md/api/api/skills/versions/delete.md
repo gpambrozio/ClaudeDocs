@@ -16,7 +16,7 @@ Delete Skill Version
 
 
 
-skill\_id: string
+skill\_id: string
 
 Unique identifier for the skill.
 
@@ -24,7 +24,7 @@ The format and length of IDs may change over time.
 
 
 
-version: string
+version: string
 
 Identifies the skill version by its version ID.
 
@@ -34,16 +34,16 @@ Requests carrying the `skills-2025-10-02` beta header address versions by their 
 
 
 
-DeletedSkillVersion object{ id, type }
+DeletedSkillVersion object{ id, type }
 
-id: string
+id: string
 
 Unique identifier for this Skill Version. The id addresses the version in
 paths and pins it in references.
 
 
 
-type: "skill\_version\_deleted"
+type: "skill\_version\_deleted"
 
 Deleted object type.
 
@@ -51,13 +51,9 @@ For Skill Versions, this is always `"skill_version_deleted"`.
 
 defaultskill\_version\_deleted
 
-
+Delete Skill Version
 
-### Delete Skill Version
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION \

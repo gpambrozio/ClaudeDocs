@@ -14,7 +14,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
 ##### Path parameters
 
-role\_id: string
+role\_id: string
 
 ID of the RBAC Role.
 
@@ -22,7 +22,7 @@ ID of the RBAC Role.
 
 
 
-limit: optional number
+limit: optional number
 
 Number of items to return per page.
 
@@ -34,7 +34,7 @@ maximum1000
 
 minimum1
 
-page: optional string
+page: optional string
 
 Optionally set to the `next_page` token from the previous response.
 
@@ -42,11 +42,11 @@ Optionally set to the `next_page` token from the previous response.
 
 
 
-data: array of [RbacRolePermission](api/http/admin/rbac_roles/permissions.md) { action, resource, type }
+data: array of [RbacRolePermission](api/http/admin/rbac_roles/permissions.md) { action, resource, type }
 
 
 
-action: string
+action: string
 
 Action the permission grants on the resource.
 
@@ -67,7 +67,7 @@ an authentication-method action (`interactive` or `managed`).
 
 
 
-resource: object{ organization\_id, type } or object{ connector\_id, tool\_name, type } or object{ connector\_id, scope, type } or 2 more
+resource: object{ organization\_id, type } or object{ connector\_id, tool\_name, type } or object{ connector\_id, scope, type } or 2 more
 
 What the permission applies to.
 
@@ -78,15 +78,15 @@ One of the following:
 
 
 
-Organization object{ organization\_id, type }
+Organization object{ organization\_id, type }
 
-organization\_id: string
+organization\_id: string
 
 UUID of the organization the permission applies to.
 
 
 
-type: "organization"
+type: "organization"
 
 Kind of resource the permission applies to.
 
@@ -94,15 +94,15 @@ defaultorganization
 
 
 
-ConnectorTool object{ connector\_id, tool\_name, type }
+ConnectorTool object{ connector\_id, tool\_name, type }
 
-connector\_id: string
+connector\_id: string
 
 ID of the connector the permission applies to.
 
 
 
-tool\_name: string
+tool\_name: string
 
 Published name of the connector tool the permission applies to.
 
@@ -113,7 +113,7 @@ a hash — from which the published name is not recoverable.
 
 
 
-type: "connector\_tool"
+type: "connector\_tool"
 
 Kind of resource the permission applies to.
 
@@ -121,15 +121,15 @@ defaultconnector\_tool
 
 
 
-ConnectorScope object{ connector\_id, scope, type }
+ConnectorScope object{ connector\_id, scope, type }
 
-connector\_id: string
+connector\_id: string
 
 ID of the connector the permission applies to.
 
 
 
-scope: string
+scope: string
 
 OAuth scope the permission names — the role may receive this scope when
 tokens are minted for the connector.
@@ -141,7 +141,7 @@ scopes routinely contain `:` and `/`, so most appear encoded.
 
 
 
-type: "connector\_scope"
+type: "connector\_scope"
 
 Kind of resource the permission applies to.
 
@@ -149,15 +149,15 @@ defaultconnector\_scope
 
 
 
-Connector object{ connector\_id, type }
+Connector object{ connector\_id, type }
 
-connector\_id: string
+connector\_id: string
 
 ID of the connector the permission applies to.
 
 
 
-type: "connector"
+type: "connector"
 
 Kind of resource the permission applies to.
 
@@ -165,11 +165,11 @@ defaultconnector
 
 
 
-AllConnectors object{ type }
+AllConnectors object{ type }
 
 
 
-type: "all\_connectors"
+type: "all\_connectors"
 
 Kind of resource the permission applies to.
 
@@ -177,7 +177,7 @@ defaultall\_connectors
 
 
 
-type: "rbac\_role\_permission"
+type: "rbac\_role\_permission"
 
 Object type.
 
@@ -185,22 +185,18 @@ For RBAC Role Permissions, this is always `"rbac_role_permission"`.
 
 defaultrbac\_role\_permission
 
-has\_more: boolean
+has\_more: boolean
 
 Indicates whether there are more results beyond this page.
 
-next\_page: string or null
+next\_page: string or null
 
 Opaque cursor for the next page. Pass as the `page` parameter on the next
 request.
 
-
+List RBAC Role Permissions
 
-### List RBAC Role Permissions
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/rbac_roles/$ROLE_ID/permissions \

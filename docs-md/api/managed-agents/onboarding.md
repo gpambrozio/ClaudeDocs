@@ -6,7 +6,7 @@
 
 [Console](https://platform.claude.com/workspaces/default/agent-quickstart/) provides a visual interface for creating and configuring agents. It lets you iterate on configuration interactively before writing code.
 
-##  How to build an agent
+## How to build an agent
 
 The [visual interface](https://platform.claude.com/workspaces/default/agent-quickstart/) walks you through each field of an agent definition:
 
@@ -17,11 +17,11 @@ The [visual interface](https://platform.claude.com/workspaces/default/agent-quic
 
 As you configure, Console shows the equivalent API request so you can copy it into your code once you're satisfied.
 
-##  Testing an agent
+## Testing an agent
 
 Console includes an inline session runner. After configuring your agent, you can start a test session directly, send messages, and watch the event stream without leaving the page. This is the fastest way to check that your system prompt and tool selection produce the behavior you expect.
 
-##  From Console to your codebase
+## From Console to your codebase
 
 Once your agent works as expected:
 

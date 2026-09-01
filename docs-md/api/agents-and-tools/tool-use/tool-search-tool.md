@@ -15,7 +15,7 @@ For the models that support tool search, see [Model compatibility](#model-compat
 
 Tool search runs as a server-side tool, but you can also implement your own client-side tool search. See [Custom tool search implementation](#custom-tool-search-implementation) for details.
 
-##  Model compatibility
+## Model compatibility
 
 Both tool search variants are available on the following models:
 
@@ -34,7 +34,7 @@ Both tool search variants are available on the following models:
 
 Claude Opus 4.1 and earlier models don't support the tool search tool.
 
-##  How tool search works
+## How tool search works
 
 There are two tool search variants:
 
@@ -51,7 +51,7 @@ When you enable the tool search tool:
 6. The API automatically expands these references into full tool definitions.
 7. Claude selects from the discovered tools and calls them.
 
-##  Quick start
+## Quick start
 
 The following example includes the tool search tool and two deferred tools:
 
@@ -102,7 +102,7 @@ print(response)
 
 Claude searches the catalog, discovers `get_weather`, and calls it. The response ends with `stop_reason: "tool_use"`. Execute the discovered tool and return a `tool_result` as in [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md). [Response format](#response-format) shows the blocks you get back and what to send next.
 
-##  Tool definition
+## Tool definition
 
 The tool search tool has two variants:
 
@@ -128,7 +128,7 @@ JSON
 }
 ```
 
-###  Deferred tool loading
+### Deferred tool loading
 
 Mark tools for on-demand loading by adding `defer_loading: true`:
 
@@ -166,7 +166,7 @@ Both tool search variants (`regex` and `bm25`) search tool names, descriptions, 
 
 Internally, the API excludes deferred tools from the system-prompt prefix. When Claude discovers a deferred tool through tool search, the API appends a `tool_reference` block inline in the conversation, then expands it into the full tool definition before passing it to Claude. The prefix is untouched, so prompt caching is preserved. The grammar for [strict mode](agents-and-tools/tool-use/strict-tool-use.md) (the rules that constrain tool-call output to match your schemas) builds from the full toolset, so `defer_loading` and strict mode compose without grammar recompilation.
 
-##  Response format
+## Response format
 
 When Claude uses the tool search tool, the response includes the following block types:
 
@@ -214,7 +214,7 @@ JSON
 }
 ```
 
-###  Understanding the response
+### Understanding the response
 
 - **`server_tool_use`:** Claude's call to the tool search tool. The search runs on Anthropic's servers. Never return a `tool_result` for its `srvtoolu_...` ID. The `input` holds the search (`pattern` for the regex variant, `query` for BM25) and may include an optional `limit`, an integer from 1 to 10,000 that caps how many matching tools the search returns (default: 5).
 - **`tool_search_tool_result`:** the search results, in a nested `tool_search_tool_search_result` object. Keep it in the message history as is.
@@ -223,15 +223,15 @@ JSON
 
 The API automatically expands `tool_reference` blocks into full tool definitions before showing them to Claude. You don't need to handle this expansion yourself, as long as you provide all matching tool definitions in the `tools` parameter.
 
-###  Continuing the conversation
+### Continuing the conversation
 
 On the next request, pass the assistant's content back unchanged, including the `server_tool_use` and `tool_search_tool_result` blocks. Add your `tool_result` for the discovered tool in a user message, and send the same `tools` array: the search tool plus every deferred definition. Don't return a `tool_result` for the `srvtoolu_...` ID: the API rejects the request. The API expands `tool_reference` blocks throughout the conversation history, so Claude can reuse discovered tools in later turns without re-searching. A search that matches nothing returns a `tool_search_tool_search_result` with an empty `tool_references` array, not an error.
 
-##  MCP integration
+## MCP integration
 
 If your tools come from MCP servers through the [MCP connector](agents-and-tools/mcp-connector.md), you don't set `defer_loading` on individual tool definitions. Instead, set it once on the `mcp_toolset` entry's `default_config` for the whole server, or per tool in its `configs`. See [MCP toolset configuration](agents-and-tools/mcp-connector.md).
 
-##  Custom tool search implementation
+## Custom tool search implementation
 
 You can implement your own tool search logic (for example, using embeddings or semantic search) by returning `tool_reference` blocks from a custom tool. When Claude calls your custom search tool, return a standard `tool_result` with `tool_reference` blocks in the content array:
 
@@ -251,9 +251,9 @@ Every tool referenced must have a corresponding tool definition in the top-level
 
 For a complete example using embeddings, see the [tool search with embeddings](https://platform.claude.com/cookbook/tool-use-tool-search-with-embeddings) recipe.
 
-##  Error handling
+## Error handling
 
-###  HTTP errors (400 status)
+### HTTP errors (400 status)
 
 These errors prevent the API from processing the request:
 
@@ -285,7 +285,7 @@ These errors prevent the API from processing the request:
 
 
 
-###  Tool result errors (200 status)
+### Tool result errors (200 status)
 
 When a tool search operation fails during execution, the API returns a 200 response with the error in the body:
 
@@ -312,7 +312,7 @@ The `error_code` field has four possible values:
 - `too_many_requests`: rate limit exceeded for tool search operations
 - `execution_time_exceeded`: the search exceeded its execution time limit
 
-###  Common mistakes
+### Common mistakes
 
 ### 400 error: all tools are deferred
 
@@ -320,13 +320,13 @@ The `error_code` field has four possible values:
 
 ### Claude doesn't find expected tools
 
-##  Prompt caching
+## Prompt caching
 
-For how `defer_loading` preserves prompt caching, see [Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md).
+To learn how `defer_loading` preserves prompt caching, see [Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md).
 
 A tool with `defer_loading: true` can't also carry `cache_control`: the API returns a 400. Put the cache breakpoint on a non-deferred tool.
 
-##  Streaming
+## Streaming
 
 With streaming enabled, you'll receive tool search events as part of the stream:
 
@@ -349,20 +349,20 @@ data: {"type": "content_block_start", "index": 2, "content_block": {"type": "too
 
 
 
-##  Batch requests
+## Batch requests
 
 You can include the tool search tool in the [Messages Batches API](build-with-claude/batch-processing.md).
 
-##  Limits and best practices
+## Limits and best practices
 
-###  Limits
+### Limits
 
 - **Maximum deferred tools:** 10,000 tools with `defer_loading: true` per request
 - **Search results:** each search returns up to 5 matching tools by default; Claude can set `limit` in its search input to any integer from 1 to 10,000
 - **Pattern and query length:** maximum 200 characters for regex patterns and 500 characters for BM25 queries
 - **Model support:** see [Model compatibility](#model-compatibility)
 
-###  When to use tool search
+### When to use tool search
 
 Use tool search when any of the following apply:
 
@@ -374,7 +374,7 @@ Use tool search when any of the following apply:
 
 Standard tool calling, without tool search, is a better fit when you have fewer than 10 tools, every tool is used in every request, or your tool definitions are small (less than 100 tokens total).
 
-###  Optimization tips
+### Optimization tips
 
 - Keep your 3–5 most frequently used tools non-deferred.
 - Write clear, descriptive tool names and descriptions.
@@ -383,11 +383,11 @@ Standard tool calling, without tool search, is a better fit when you have fewer 
 - Add a system prompt section describing available tool categories: "You can search for tools to interact with Slack, GitHub, and Jira."
 - Monitor which tools Claude discovers to refine your descriptions.
 
-##  Usage
+## Usage
 
 Tool search isn't metered as a separate server tool. The response's `usage.server_tool_use` object has no tool search field, and the tool definitions that search loads into context count as input tokens like any other tool definition.
 
-##  Next steps
+## Next steps
 
 
 

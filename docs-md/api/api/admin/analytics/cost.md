@@ -18,11 +18,11 @@
 
 
 
-CostBucket object{ data, data\_refreshed\_at, has\_more, 2 more }
+CostBucket object{ data, data\_refreshed\_at, has\_more, 2 more }
 
 
 
-UserCost object{ data, data\_refreshed\_at, has\_more, 2 more }
+UserCost object{ data, data\_refreshed\_at, has\_more, 2 more }
 
 ---
 

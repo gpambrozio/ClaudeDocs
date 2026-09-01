@@ -1,4 +1,4 @@
-##  Compare models
+## Compare models
 
 If you're unsure which model to use, start with [Claude Opus 5](models/opus-5/overview.md) for complex agentic coding and enterprise work; for the highest available capability, use [Claude Fable 5](models/fable-5/overview.md). All current models support text and image input, text output, multilingual capabilities, vision, and tool use; each model's page lists the platforms it is available on.
 
@@ -15,13 +15,13 @@ If you're unsure which model to use, start with [Claude Opus 5](models/opus-5/ov
 | Reliable knowledge cutoff | Jan 2026 | May 2026 | Jan 2026 | Feb 2025 |
 | Show all detailsShow fewer details | | | | |
 
-Once you've picked a model, [learn how to make your first API call](get-started.md). For how model IDs, aliases, and snapshots work, see [Model IDs and versioning](about-claude/models/model-ids-and-versions.md); for the reliable-knowledge and training-data cutoffs behind each model, see [Anthropic's Transparency Hub](https://www.anthropic.com/transparency).
+Once you've picked a model, [learn how to make your first API call](get-started.md). To understand how model IDs, aliases, and snapshots work, see [Model IDs and versioning](about-claude/models/model-ids-and-versions.md); for the reliable-knowledge and training-data cutoffs behind each model, see [Anthropic's Transparency Hub](https://www.anthropic.com/transparency).
 
-##  Using the Models API
+## Using the Models API
 
 You can query model capabilities and token limits programmatically with the [Models API](api/models/list.md). The response includes `max_input_tokens`, `max_tokens`, and a `capabilities` object for every available model.
 
-##  Prompt and output performance
+## Prompt and output performance
 
 Current Claude models excel in:
 
@@ -29,7 +29,7 @@ Current Claude models excel in:
 - **Engaging responses:** Claude models are ideal for applications that require rich, human-like interactions. If you prefer more concise responses, adjust your prompts to guide the model toward the desired output length. Refer to the [prompt engineering guides](build-with-claude/prompt-engineering.md) for details.
 - **Output quality:** When migrating from a previous model generation, you may notice larger improvements in overall performance. If you're on Claude Opus 4.8 or earlier, see [Migrating to Claude Opus 5](models/opus-5/migration-guide.md).
 
-##  Get started with Claude
+## Get started with Claude
 
 If you're ready to start exploring what Claude can do for you, dive in! Whether you're a developer looking to integrate Claude into your applications or a user wanting to experience the power of AI firsthand, the following resources can help.
 

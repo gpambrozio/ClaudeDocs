@@ -22,7 +22,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
 
 
-starting\_at: string
+starting\_at: string
 
 Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
 
@@ -30,21 +30,21 @@ formatdate-time
 
 
 
-bucket\_width: optional "1d" or "1h" or "1m"
+bucket\_width: optional "1d" or "1h" or "1m"
 
 Time-bucket granularity. When set, each row's `starting_at` and `ending_at` are populated and one actor may span several rows (one per time bucket with usage). The time bucket counts toward `limit`, so one page can return multiple rows for the same actor. `ending_at` is required when `bucket_width` is set, and with `bucket_width="1m"` the range may span at most 24 hours. When omitted, each row aggregates the full `[starting_at, ending_at)` range.
 
 One of the following:
 
-"1d"
+"1d"
 
-"1h"
+"1h"
 
-"1m"
+"1m"
 
 
 
-context\_windows: optional array of "0-200k" or "200k-1M"
+context\_windows: optional array of "0-200k" or "200k-1M"
 
 Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
 
@@ -52,13 +52,13 @@ maxItems100
 
 One of the following:
 
-"0-200k"
+"0-200k"
 
-"200k-1M"
+"200k-1M"
 
 
 
-ending\_at: optional string
+ending\_at: optional string
 
 End of range, exclusive. When omitted, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
 
@@ -66,7 +66,7 @@ formatdate-time
 
 
 
-exclude\_deleted\_users: optional boolean
+exclude\_deleted\_users: optional boolean
 
 If true, omit rows for users who are deleted (`deleted: true`). A page may contain fewer than `limit` rows; use `has_more` and `next_page` to paginate as usual.
 
@@ -74,7 +74,7 @@ defaultfalse
 
 
 
-group\_by: optional array of "context\_window" or "inference\_geo" or "model" or 4 more
+group\_by: optional array of "context\_window" or "inference\_geo" or "model" or 4 more
 
 Break each actor's row out by the given dimensions. Accepts the same values as the bucketed `/usage_report` endpoint. `limit` bounds (actor × time bucket × dimension) rows — with dimensions or `bucket_width` present, one actor may span several rows.
 
@@ -82,23 +82,23 @@ maxItems100
 
 One of the following:
 
-"context\_window"
+"context\_window"
 
-"inference\_geo"
+"inference\_geo"
 
-"model"
+"model"
 
-"product"
+"product"
 
-"rbac\_group\_id"
+"rbac\_group\_id"
 
-"slack\_channel\_id"
+"slack\_channel\_id"
 
-"speed"
+"speed"
 
 
 
-inference\_geos: optional array of "global" or "not\_available" or "us"
+inference\_geos: optional array of "global" or "not\_available" or "us"
 
 Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
 
@@ -106,15 +106,15 @@ maxItems100
 
 One of the following:
 
-"global"
+"global"
 
-"not\_available"
+"not\_available"
 
-"us"
+"us"
 
 
 
-limit: optional number
+limit: optional number
 
 Number of rows per page (1-1000, default 20). One row per actor unless `group_by[]` or `bucket_width` splits an actor across rows; `cost_type`/`token_type` fan-out rows (cost endpoint only) are the exception — they do not count toward this limit, so `data` can exceed it.
 
@@ -126,7 +126,7 @@ minimum1
 
 
 
-models: optional array of string
+models: optional array of string
 
 Models to include. Defaults to all models. Use `group_by[]=model` to break out per-model values.
 
@@ -134,7 +134,7 @@ maxItems100
 
 
 
-order: optional "asc" or "desc"
+order: optional "asc" or "desc"
 
 Sort direction. Defaults to `desc`.
 
@@ -142,13 +142,13 @@ defaultdesc
 
 One of the following:
 
-"asc"
+"asc"
 
-"desc"
+"desc"
 
 
 
-order\_by: optional "output\_tokens" or "requests" or "total\_tokens" or "uncached\_input\_tokens"
+order\_by: optional "output\_tokens" or "requests" or "total\_tokens" or "uncached\_input\_tokens"
 
 Metric to rank actors by. Defaults to `total_tokens`.
 
@@ -156,21 +156,21 @@ defaulttotal\_tokens
 
 One of the following:
 
-"output\_tokens"
+"output\_tokens"
 
-"requests"
+"requests"
 
-"total\_tokens"
+"total\_tokens"
 
-"uncached\_input\_tokens"
+"uncached\_input\_tokens"
 
-page: optional string
+page: optional string
 
 Opaque cursor from a previous response's `next_page` field.
 
 
 
-products: optional array of "chat" or "claude-tag" or "claude\_code" or 4 more
+products: optional array of "chat" or "claude-tag" or "claude\_code" or 4 more
 
 Product surfaces to include. Defaults to all products.
 
@@ -178,23 +178,23 @@ maxItems100
 
 One of the following:
 
-"chat"
+"chat"
 
-"claude-tag"
+"claude-tag"
 
-"claude\_code"
+"claude\_code"
 
-"claude\_design"
+"claude\_design"
 
-"claude\_in\_chrome"
+"claude\_in\_chrome"
 
-"cowork"
+"cowork"
 
-"office\_agent"
+"office\_agent"
 
 
 
-rbac\_group\_ids: optional array of string
+rbac\_group\_ids: optional array of string
 
 Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
 
@@ -202,7 +202,7 @@ maxItems100
 
 
 
-slack\_channel\_ids: optional array of string
+slack\_channel\_ids: optional array of string
 
 Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
 
@@ -210,7 +210,7 @@ maxItems100
 
 
 
-speeds: optional array of "fast" or "standard"
+speeds: optional array of "fast" or "standard"
 
 Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
 
@@ -218,13 +218,13 @@ maxItems100
 
 One of the following:
 
-"fast"
+"fast"
 
-"standard"
+"standard"
 
 
 
-user\_ids: optional array of string
+user\_ids: optional array of string
 
 Filter to specific users by tagged user ID.
 
@@ -234,15 +234,11 @@ maxItems100
 
 
 
-UserUsage object{ data, data\_refreshed\_at, has\_more, 2 more }
+UserUsage object{ data, data\_refreshed\_at, has\_more, 2 more }
 
-
+Get Per-User Token Usage
 
-### Get Per-User Token Usage
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/analytics/user_usage_report \

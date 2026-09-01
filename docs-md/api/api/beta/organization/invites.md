@@ -28,19 +28,19 @@ cURL
 
 
 
-BetaOrganizationInvite object{ id, accepted\_at, email, 6 more }
+BetaOrganizationInvite object{ id, accepted\_at, email, 6 more }
 
 
 
-InviteDeleteResponse object{ id, type }
+InviteDeleteResponse object{ id, type }
 
-id: string
+id: string
 
 ID of the Invite.
 
 
 
-type: "invite\_deleted"
+type: "invite\_deleted"
 
 Deleted object type.
 

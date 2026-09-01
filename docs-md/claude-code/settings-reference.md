@@ -639,7 +639,7 @@ settings.json
 }
 ```
 
-Redaction only changes what you see, not what the model generates: to reduce thinking spend, [lower the budget or disable thinking](model-config.md) instead. This setting has no effect in non-interactive mode (`-p`), the Agent SDK, or IDE extensions such as VS Code.
+Redaction changes only what you see, not what the model generates. To reduce thinking spend, [lower the budget or disable thinking](model-config.md) instead.
 
 ### [​](#subagentpromptcachettl) `subagentPromptCacheTtl`
 
@@ -1311,7 +1311,7 @@ settings.json
 }
 ```
 
-Place a `.` entry in project settings: it resolves to the project root there and to `~/.claude` in user settings. Claude Code merges entries across every settings file the session loads unless [`allowManagedReadPathsOnly`](#sandbox-filesystem-allowmanagedreadpathsonly) is set.
+Claude Code resolves a `.` entry to the project root in project settings and to `~/.claude` in user settings. Claude Code merges entries across every settings file the session loads unless [`allowManagedReadPathsOnly`](#sandbox-filesystem-allowmanagedreadpathsonly) is set.
 
 ### [​](#sandbox-filesystem-allowmanagedreadpathsonly) `sandbox.filesystem.allowManagedReadPathsOnly`
 
@@ -4841,7 +4841,8 @@ managed-settings.json
 }
 ```
 
-An empty array in a managed source blocks every login with a misconfiguration message, and so does a value Claude Code can’t parse. See [Restrict login to your organization](authentication.md) for how Claude Code treats Claude Console logins, the other login paths, and environment credentials.
+If a managed source sets an empty array, or a value Claude Code can’t parse, Claude Code blocks every login with a misconfiguration message.
+See [Restrict login to your organization](authentication.md) for how Claude Code treats Claude Console logins, the other login paths, and environment credentials.
 
 ### [​](#gcpauthrefresh) `gcpAuthRefresh`
 

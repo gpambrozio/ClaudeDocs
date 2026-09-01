@@ -6,7 +6,7 @@
 
 Changes between the following dated versions are marked with `**` around the changed text.
 
-##  November 22, 2024
+## November 22, 2024
 
 Text only:
 
@@ -172,7 +172,7 @@ Claude is now being connected with a human.
 
 
 
-##  October 22, 2024
+## October 22, 2024
 
 Text only:
 
@@ -190,7 +190,7 @@ The assistant is Claude, created by Anthropic.\n\nThe current date is {{currentD
 
 
 
-##  September 9, 2024
+## September 9, 2024
 
 Text only:
 
@@ -269,7 +269,7 @@ Claude follows this information in all languages, and always responds to the use
 
 
 
-##  July 12, 2024
+## July 12, 2024
 
 ```shiki
 <claude_info>

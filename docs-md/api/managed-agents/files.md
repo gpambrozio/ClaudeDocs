@@ -6,7 +6,7 @@
 
 You can provide files to your agent by uploading them through the Files API and mounting them in the session's sandbox.
 
-##  Uploading files
+## Uploading files
 
 First, upload a file using the [Files API](build-with-claude/files.md):
 
@@ -19,7 +19,7 @@ file = client.files.upload(file=Path("data.csv"))
 print(f"File ID: {file.id}")
 ```
 
-##  Mounting files in a session
+## Mounting files in a session
 
 Mount uploaded files into the sandbox by adding them to the `resources` array when creating a session:
 
@@ -45,7 +45,7 @@ With the preceding `mount_path`, the agent reads the file at `/mnt/session/uploa
 
 A new `file_id` is created that references the instance of the file in the session. These copies do not count against your [storage limits](build-with-claude/files.md).
 
-##  Multiple files
+## Multiple files
 
 Mount multiple files by adding entries to the `resources` array:
 
@@ -63,7 +63,7 @@ resources = [
 
 A maximum of 500 files is supported per session.
 
-##  Managing files on a running session
+## Managing files on a running session
 
 You can add or remove files from a session after creation using the session resources API. Each resource has an `id` returned when it is added (or listed), which you use for deletes.
 
@@ -94,7 +94,7 @@ for entry in listed.data:
 client.beta.sessions.resources.delete(resource.id, session_id=session.id)
 ```
 
-##  Listing and downloading session files
+## Listing and downloading session files
 
 Use the [Files API](build-with-claude/files.md) to list files scoped to a session and download them. Files the agent writes to `/mnt/session/outputs/` appear in the list shortly after the agent finishes writing them, sometimes a few seconds after the session goes idle. If an output file you expect is missing, list again after a short delay; once it appears in the list, its upload has finished.
 
@@ -118,7 +118,7 @@ content = client.files.download(files.data[0].id)
 content.write_to_file("output.txt")
 ```
 
-##  Supported file types
+## Supported file types
 
 The agent can work with any file type, including:
 
@@ -128,7 +128,7 @@ The agent can work with any file type, including:
 - Archives (`.zip`, `.tar.gz`) - the agent can extract these using bash
 - Binary files - the agent can process these with appropriate tools
 
-##  File paths
+## File paths
 
 - The path you specify is rooted under the session's uploads directory: a `mount_path` of `/data.csv` places the file at `/mnt/session/uploads/data.csv` in the sandbox
 - If you omit `mount_path`, the file is placed at `/mnt/session/uploads/<file_id>`

@@ -8,7 +8,7 @@ Latency refers to the time it takes for the model to process a prompt and genera
 
 ---
 
-##  How to measure latency
+## How to measure latency
 
 When discussing latency, you might come across several terms and measurements:
 
@@ -19,9 +19,9 @@ For a more in-depth understanding of these terms, check out the [glossary](about
 
 ---
 
-##  How to reduce latency
+## How to reduce latency
 
-###  1. Choose the right model
+### 1. Choose the right model
 
 One of the most direct ways to reduce latency is to select the appropriate model for your use case. Anthropic offers a [range of models](models/overview.md) with different capabilities and performance characteristics. Consider your specific requirements and choose the model that best fits your needs in terms of speed and output quality.
 
@@ -50,7 +50,7 @@ print(message.content[0].text)
 
 For more details about model metrics, see the [models overview](models/overview.md) page.
 
-###  2. Optimize prompt and output length
+### 2. Optimize prompt and output length
 
 Minimize the number of tokens in both your input prompt and the expected output, while still maintaining high performance. The fewer tokens the model has to process and generate, the faster the response will be.
 
@@ -63,7 +63,7 @@ Here are some tips to help you optimize your prompts and outputs:
 
 Finding the right balance among prompt clarity, output quality, and token count might require some experimentation.
 
-###  3. Stream responses
+### 3. Stream responses
 
 Streaming is a feature that allows the model to start sending back its response before the full output is complete. This can significantly improve the perceived responsiveness of your application, as users can see the model's output in real time.
 
@@ -73,7 +73,7 @@ Visit [Streaming messages](build-with-claude/streaming.md) to learn about how yo
 
 ---
 
-##  Next steps
+## Next steps
 
 
 

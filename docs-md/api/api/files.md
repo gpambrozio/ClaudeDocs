@@ -32,15 +32,15 @@ cURL
 
 
 
-DeletedFile object{ id, type }
+DeletedFile object{ id, type }
 
-id: string
+id: string
 
 ID of the deleted file.
 
 
 
-type: optional "file\_deleted"
+type: optional "file\_deleted"
 
 Deleted object type.
 
@@ -50,11 +50,11 @@ defaultfile\_deleted
 
 
 
-FileMetadata object{ id, created\_at, filename, 5 more }
+FileMetadata object{ id, created\_at, filename, 5 more }
 
 
 
-id: string
+id: string
 
 Unique object identifier.
 
@@ -62,7 +62,7 @@ The format and length of IDs may change over time.
 
 
 
-created\_at: string
+created\_at: string
 
 RFC 3339 datetime string representing when the file was created.
 
@@ -70,7 +70,7 @@ formatdate-time
 
 
 
-filename: string
+filename: string
 
 Original filename of the uploaded file.
 
@@ -80,7 +80,7 @@ minLength1
 
 
 
-mime\_type: string
+mime\_type: string
 
 MIME type of the file.
 
@@ -90,7 +90,7 @@ minLength1
 
 
 
-size\_bytes: number
+size\_bytes: number
 
 Size of the file in bytes.
 
@@ -98,7 +98,7 @@ minimum0
 
 
 
-type: "file"
+type: "file"
 
 Object type.
 
@@ -106,7 +106,7 @@ For files, this is always `"file"`.
 
 
 
-downloadable: optional boolean
+downloadable: optional boolean
 
 Whether the file can be downloaded.
 
@@ -114,7 +114,7 @@ defaultfalse
 
 
 
-expires\_at: optional string or null
+expires\_at: optional string or null
 
 RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
 

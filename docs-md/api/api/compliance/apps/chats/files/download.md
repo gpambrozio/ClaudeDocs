@@ -12,21 +12,17 @@ Downloads the binary content of a file referenced in chat messages.
 
 ##### Path parameters
 
-claude\_file\_id: string
+claude\_file\_id: string
 
 The file ID (tagged ID, e.g., claude\_file\_abc123)
 
 ##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
-
+Download file content
 
-### Download file content
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID/content \

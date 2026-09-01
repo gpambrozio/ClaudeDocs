@@ -6,7 +6,7 @@
 
 This guide deploys the [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) as hardened containers on a single host. The same configuration can be replicated across multiple hosts for availability.
 
-##  Before you begin
+## Before you begin
 
 You need:
 
@@ -18,7 +18,7 @@ You need:
 - **Outbound network connectivity** from the host to `api.anthropic.com` (443 TCP) and the [tunnel edge](agents-and-tools/mcp-tunnels/concepts.md) (7844 TCP and UDP). See the full [network requirements](agents-and-tools/mcp-tunnels/overview.md).
 - **One or more MCP servers** running and reachable from the host on the addresses you'll configure under `routes`. If you don't have one yet, [use the sample server](#optional-use-a-sample-mcp-server).
 
-##  Optional: Use a sample MCP server
+## Optional: Use a sample MCP server
 
 If you don't have an MCP server available for testing, use this minimal one:
 
@@ -43,7 +43,7 @@ EOF
 
 The following Install steps `cd` into `mcp-tunnel/` and note where to add the corresponding service and route.
 
-##  Install
+## Install
 
 This guide provides one reference approach using Docker Compose. You are responsible for adapting it to meet your organization's security requirements.
 
@@ -55,7 +55,7 @@ The setup component uses Workload Identity Federation to fetch the tunnel token,
 
 1. 1
 
-   Prepare the deployment directory
+   ### Prepare the deployment directory
 
    ```shiki
    mkdir -p mcp-tunnel/{config,data}
@@ -68,7 +68,7 @@ The setup component uses Workload Identity Federation to fetch the tunnel token,
    The containers run as the non-root UID `65532` and need write access to `data/`.
 2. 2
 
-   Write docker-compose.yaml
+   ### Write docker-compose.yaml
 
    The compose file pins images by SHA-256 digest, runs every container as non-root with a read-only filesystem, drops all Linux capabilities, and disables privilege escalation.
 
@@ -159,7 +159,7 @@ The setup component uses Workload Identity Federation to fetch the tunnel token,
    
 3. 3
 
-   Provision the tunnel
+   ### Provision the tunnel
 
    Set the identifiers. Leave `TUNNEL_ID` unset to have the setup component create a tunnel; set it to attach to an existing tunnel from the [Console](agents-and-tools/mcp-tunnels/console.md):
 
@@ -197,7 +197,7 @@ The setup component uses Workload Identity Federation to fetch the tunnel token,
    
 4. 4
 
-   Write the proxy config
+   ### Write the proxy config
 
    `tunnel_domain` is **required**: the [proxy](agents-and-tools/mcp-tunnels/concepts.md) uses it to strip the domain suffix from incoming hostnames before looking up the subdomain in `routes`. `routes` is a flat map from subdomain to upstream URL, not a list.
 
@@ -220,7 +220,7 @@ The setup component uses Workload Identity Federation to fetch the tunnel token,
    The `echo:` route targets the [sample MCP server](#optional-use-a-sample-mcp-server); replace it with (or add) your own routes. See the [proxy configuration](agents-and-tools/mcp-tunnels/reference.md) reference for all available fields.
 5. 5
 
-   Start the deployment
+   ### Start the deployment
 
    ```shiki
    export TUNNEL_TOKEN=$(sudo cat data/tunnel-token)
@@ -233,15 +233,15 @@ The compose file reads `TUNNEL_TOKEN` from the host environment with no default,
 
 For a multi-VM deployment, copy the `mcp-tunnel/` directory to each host, set `TUNNEL_TOKEN`, and run `docker compose up -d`. In the programmatic flow `TUNNEL_TOKEN` is `$(sudo cat data/tunnel-token)`; in the manual flow it's the value you copied from the Console. The same tunnel token and certificates work across all replicas.
 
-##  Verify the deployment
+## Verify the deployment
 
 Verify end to end by calling an [upstream MCP server](agents-and-tools/mcp-tunnels/concepts.md) from Anthropic's side: see [Use the tunneled MCP servers](agents-and-tools/mcp-tunnels/overview.md). With the [sample MCP server](#optional-use-a-sample-mcp-server), the routed URL is `https://echo.<your-tunnel-domain>/mcp`. If verification fails, see [Troubleshooting](agents-and-tools/mcp-tunnels/troubleshooting.md).
 
-##  Upgrades
+## Upgrades
 
 Run the commands in this section from inside the `mcp-tunnel/` deployment directory.
 
-###  Rotate the tunnel token
+### Rotate the tunnel token
 
 With programmatic access, increment `--token-version` in the `setup` service command, set the Workload Identity Federation identifiers, mint a fresh OIDC JWT, and re-run the setup component:
 
@@ -271,7 +271,7 @@ The `--token-version` argument is edited in `docker-compose.yaml` rather than pa
 
 Without programmatic access, click **Rotate token** on the tunnel detail page in the Console, then update the `TUNNEL_TOKEN` environment variable on each host and restart cloudflared (`docker compose up -d cloudflared`).
 
-###  Certificate renewal
+### Certificate renewal
 
 You're responsible for monitoring expiry and renewing the server certificate before it expires.
 
@@ -301,7 +301,7 @@ openssl x509 -req -in /tmp/server.csr \
 
 In either flow the proxy polls `tls.cert_file` and reloads it automatically, so no restart is required.
 
-##  Next steps
+## Next steps
 
 
 

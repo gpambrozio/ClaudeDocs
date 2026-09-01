@@ -14,7 +14,7 @@ For Zero Data Retention eligibility and the `allowed_callers` workaround, see [S
 
 For model support, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
 
-##  How web fetch works
+## How web fetch works
 
 Web fetch is a [server tool](agents-and-tools/tool-use/server-tools.md): the API fetches the content during the request and inserts the results into the conversation. You don't run anything or return a `tool_result`. The exception is when Claude calls web fetch and one of your client tools in the same group of parallel tool calls: the API returns the response with `stop_reason: "tool_use"` before that fetch has run, then runs the fetch when you send back the client `tool_result` blocks. See [Mixing server tools and client tools in one turn](agents-and-tools/tool-use/server-tools.md).
 
@@ -25,7 +25,7 @@ When you add the web fetch tool to your API request:
 3. For PDFs, the API returns the content as base64-encoded data and processes it like a directly attached PDF document.
 4. Claude analyzes the fetched content and provides a response with optional citations.
 
-###  When Claude fetches
+### When Claude fetches
 
 Claude fetches when the request points at a specific page or document:
 
@@ -34,7 +34,7 @@ Claude fetches when the request points at a specific page or document:
 
 Claude does **not** fetch for general-knowledge or open-ended questions that don't reference a specific page. "Summarize this article: `<url>`" triggers a fetch. "What are best practices for REST API design?" is answered directly.
 
-###  Dynamic filtering
+### Dynamic filtering
 
 Fetching full web pages and PDFs can quickly consume tokens, especially when only specific information is needed from large documents. With `web_fetch_20260209` or later, Claude can write and execute code to filter the fetched content before loading it into context.
 
@@ -68,7 +68,7 @@ response = client.messages.create(
 print(response)
 ```
 
-##  How to use web fetch
+## How to use web fetch
 
 Provide the web fetch tool in your API request:
 
@@ -93,7 +93,7 @@ response = client.messages.create(
 print(response)
 ```
 
-##  Tool definition
+## Tool definition
 
 The web fetch tool supports the following parameters:
 
@@ -127,23 +127,23 @@ JSON
 
 Later tool versions add two more optional parameters: `use_cache` requires `web_fetch_20260309` or later (see [Cache bypass](#cache-bypass)), and `response_inclusion` requires `web_fetch_20260318` or later (see [Response inclusion](#response-inclusion)).
 
-###  Max uses
+### Max uses
 
 The `max_uses` parameter limits the number of web fetches performed. Failed fetches count against the limit. If Claude attempts more fetches than allowed, the `web_fetch_tool_result` is an error with the `max_uses_exceeded` error code. There is currently no default limit.
 
-###  Domain filtering
+### Domain filtering
 
 For domain filtering with `allowed_domains` and `blocked_domains`, see [Server tools](agents-and-tools/tool-use/server-tools.md).
 
 On [Claude Managed Agents](managed-agents/overview.md), set these fields on the `web_fetch` entry of the agent toolset, where each listed domain must be a plain hostname with no path; see [Restrict web search and web fetch domains](managed-agents/tools.md).
 
-###  Content limits
+### Content limits
 
 The `max_content_tokens` parameter limits the amount of content included in the context. If the fetched content exceeds this limit, the tool truncates it. This helps control token usage when fetching large documents. The limit applies to text content, not to binary content such as PDFs.
 
 On Claude Managed Agents, the `web_fetch` entry of the agent toolset also accepts `max_content_tokens`; see [Restrict web search and web fetch domains](managed-agents/tools.md).
 
-###  Cache bypass
+### Cache bypass
 
 The `use_cache` parameter controls whether cached content may be returned. Set `"use_cache": false` to bypass the cache and fetch fresh content. The default is `true`. Only disable caching when the user explicitly requests fresh content or when fetching rapidly changing sources, because bypassing the cache increases latency.
 
@@ -161,7 +161,7 @@ The `use_cache` parameter controls whether cached content may be returned. Set `
 
 
 
-###  Response inclusion
+### Response inclusion
 
 The `response_inclusion` parameter controls how fetch result blocks appear in the API response when the result was consumed by a completed [code execution](agents-and-tools/tool-use/code-execution-tool.md) call in the same turn. Set `"response_inclusion": "excluded"` to drop those nested `server_tool_use` and result block pairs entirely from the response, reducing output token costs for agentic workflows that don't need to echo raw page content back to the client. The default is `"full"`. Results from direct calls, or from code execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
@@ -179,11 +179,11 @@ The `response_inclusion` parameter controls how fetch result blocks appear in th
 
 
 
-###  Citations
+### Citations
 
 Unlike web search where citations are always enabled, citations are optional for web fetch and disabled by default. Set `"citations": {"enabled": true}` to enable Claude to cite specific passages from fetched documents.
 
-##  Response
+## Response
 
 Here's an example response structure:
 
@@ -261,7 +261,7 @@ Output
 }
 ```
 
-###  Fetch results
+### Fetch results
 
 Fetch results include:
 
@@ -296,7 +296,7 @@ Output
 }
 ```
 
-###  Errors
+### Errors
 
 When the web fetch tool encounters an error, the Claude API returns a 200 (success) response with the error represented in the response body. Claude sees the error result and continues the turn. For example:
 
@@ -327,7 +327,7 @@ These are the possible error codes:
 - `max_uses_exceeded`: Maximum web fetch tool uses exceeded
 - `unavailable`: An internal error occurred
 
-##  URL validation
+## URL validation
 
 For security reasons, the web fetch tool can only fetch URLs that have previously appeared in the conversation context. This includes:
 
@@ -337,7 +337,7 @@ For security reasons, the web fetch tool can only fetch URLs that have previousl
 
 The tool cannot fetch arbitrary URLs that Claude generates or URLs from container-based server tools (such as Code Execution and Bash).
 
-##  Combined search and fetch
+## Combined search and fetch
 
 When both the web search and web fetch tools are enabled, and the user names a specific page or document without providing a URL (for example, "read the README from the anthropics/anthropic-sdk-python repository"), Claude uses web search to locate it, then fetches the result. The following example asks for a search and an analysis in one request:
 
@@ -377,11 +377,11 @@ In this workflow, Claude:
 3. Uses web fetch to retrieve full content.
 4. Provides detailed analysis with citations.
 
-##  Prompt caching
+## Prompt caching
 
-For caching tool definitions across turns, see [Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md).
+To cache tool definitions across turns, see [Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md).
 
-##  Streaming
+## Streaming
 
 With streaming enabled, fetch events are part of the stream with a pause during content retrieval:
 
@@ -414,11 +414,11 @@ data: {"type": "content_block_start", "index": 2, "content_block": {"type": "web
 // Claude's response continues...
 ```
 
-##  Batch requests
+## Batch requests
 
 You can include the web fetch tool in the [Messages Batches API](build-with-claude/batch-processing.md). Web fetch tool calls through the Messages Batches API are priced the same as those in regular Messages API requests.
 
-##  Usage and pricing
+## Usage and pricing
 
 Web fetch usage has **no additional charges** beyond standard token costs:
 
@@ -448,7 +448,7 @@ Example token usage for typical content:
 - Large documentation page (100 kB): ~25,000 tokens
 - Research paper PDF (500 kB): ~125,000 tokens
 
-##  Next steps
+## Next steps
 
 
 

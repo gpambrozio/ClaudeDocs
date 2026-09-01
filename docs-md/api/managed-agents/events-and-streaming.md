@@ -6,7 +6,7 @@
 
 Communication with Claude Managed Agents is event-based. You send user events to the agent, and receive agent and session events back to track status.
 
-##  Event types
+## Event types
 
 Events flow in two directions.
 
@@ -17,7 +17,7 @@ Session, span, agent, user, and system event type strings follow a `{domain}.{ac
 
 Every persisted event includes a `processed_at` timestamp set when the event finishes processing. On events you send, `processed_at` is null while the event is still queued behind earlier events. The exceptions are `user.define_outcome`, `user.custom_tool_result`, and `user.tool_result`, which are processed on receipt and echoed back with `processed_at` already populated.
 
-##  Integrating events
+## Integrating events
 
 Sending eventsStreaming eventsListing past events
 
@@ -72,11 +72,11 @@ client.beta.sessions.events.send(
 
 The call returns as soon as the events are queued, and the interrupt's `processed_at` stays null until the agent applies it. A model response in progress stops immediately. The interrupt can take longer to apply while tool calls are running, and the session stays `running` until it does. The `user.interrupt` event then appears on the stream, and the interrupted turn ends with a `session.status_idle` event. Its `stop_reason` is `end_turn`, the same value as a turn that finishes on its own; there is no stop reason specific to interruption. The agent starts its next turn with the `user.message` you sent after the interrupt.
 
-##  Event deltas
+## Event deltas
 
 By default, the agent's response text reaches the stream as buffered `agent.message` events, each emitted only after the model request that produced it finishes. Event deltas let you render that text incrementally, as a live preview, while the model is still generating it. A preview is not the response: previews are a best-effort display aid, and the buffered `agent.message` is always the authoritative record. A client that ignores previews still receives a complete, correct stream.
 
-###  Opt in to previews
+### Opt in to previews
 
 Previews are opt-in per stream connection. Add the `event_deltas[]` query parameter to the stream you're reading, repeating it once for each event type you want previewed. Because `[]` is a shell glob pattern, quote the URL whenever you build the request in a shell; the examples percent-encode the brackets as `%5B%5D`, which also works. Both stream endpoints accept the parameter: the session-level stream at `GET /v1/sessions/{session_id}/events/stream`, and each [session thread](managed-agents/multiagent-orchestration.md)'s own stream at `GET /v1/sessions/{session_id}/threads/{thread_id}/stream`. The accepted values are `agent.message` and `agent.thinking`; any other value returns a 400 error, as does a request with more than 100 values. A subagent's previews appear on [that subagent's own thread stream](#preview-session-thread-events).
 
@@ -117,7 +117,7 @@ When an `agent.thinking` event is previewed, only the `event_start` is emitted. 
 
 Unlike persisted events, `event_start` and `event_delta` have no `id` or `processed_at` of their own. The only identifier they carry is the `id` of the event they preview.
 
-###  Accumulate and reconcile
+### Accumulate and reconcile
 
 Every SDK that supports event deltas includes an accumulator helper that handles the `index` bookkeeping for you. The Go, Java, Ruby, and C# helpers also key the accumulating preview by the event's `id`; with the Python, TypeScript, and PHP helpers you keep that map yourself and fold each delta into the entry for its `id`. The manual pattern also works in every language when you need custom bookkeeping: apply it to the generated event types.
 
@@ -196,7 +196,7 @@ with client.beta.sessions.events.stream(
                 break
 ```
 
-###  Preview session thread events
+### Preview session thread events
 
 In a [multiagent](managed-agents/multiagent-orchestration.md) session, every session thread has its own event stream at `GET /v1/sessions/{session_id}/threads/{thread_id}/stream`, and it takes the same `event_deltas[]` parameter with the same values. Previews are thread-scoped by design: a connection previews only the thread it's reading. A child thread's previews are delivered on that child's own stream and are never cross-posted to the session-level stream, whose previews stay scoped to the primary thread. To watch a subagent's text as the model generates it, open that subagent's thread stream.
 
@@ -254,7 +254,7 @@ exec {stream}<&-
 
 The read loop exits on [`session.thread_status_idle`](managed-agents/reference.md), the event emitted when the session thread's turn finishes and the thread goes idle.
 
-###  Limitations
+### Limitations
 
 Previews are tuned for responsiveness. Build against these constraints:
 
@@ -264,7 +264,7 @@ Previews are tuned for responsiveness. Build against these constraints:
 - **Start-only `agent.thinking`:** An `agent.thinking` preview emits only the `event_start` as a signal that a thinking block has started; no `event_delta` events follow it.
 - **Never persisted:** `event_start` and `event_delta` exist only on the live stream. They do not appear in the session's event history (`GET /v1/sessions/{session_id}/events`) or in any session thread's event history.
 
-###  Troubleshoot previews
+### Troubleshoot previews
 
 If the stream doesn't behave as you expect:
 
@@ -274,9 +274,9 @@ If the stream doesn't behave as you expect:
 | A 404 on the stream URL | The path or an ID is wrong, or the request carries no managed-agents beta header at all. The thread endpoints are beta-gated, so without the header they don't exist. |
 | A 400 naming `event_deltas` | Only `agent.message` and `agent.thinking` are accepted. |
 
-##  Additional scenarios
+## Additional scenarios
 
-###  Handling custom tool calls
+### Handling custom tool calls
 
 When the agent invokes a [custom tool](managed-agents/tools.md):
 
@@ -315,7 +315,7 @@ with client.beta.sessions.events.stream(session.id) as stream:
                     break
 ```
 
-###  Tool confirmation
+### Tool confirmation
 
 When a [permission policy](managed-agents/permission-policies.md) requires confirmation before a tool executes:
 
@@ -350,7 +350,7 @@ with client.beta.sessions.events.stream(session.id) as stream:
                     break
 ```
 
-###  Resuming an idle session
+### Resuming an idle session
 
 Sessions persist between interactions. Conversation history is preserved unless the session is explicitly deleted. When a session goes idle, its sandbox is checkpointed, preserving the full sandbox state, including the filesystem, installed packages, and any files the agent created. This allows you to resume cleanly from inactivity.
 
@@ -371,7 +371,7 @@ events:
 YAML
 ```
 
-###  Reaching a session budget
+### Reaching a session budget
 
 A session created with a [budget](managed-agents/budgets.md) pauses instead of overspending. When the session's tracked list cost reaches the cap, the platform pauses each thread before its next model request, and the session goes idle with a `stop_reason` of `budget_reached` rather than terminating. The request that carried the total past the cap runs to completion, so the `list_cost` reported by the `session.usage` snapshot can read [at or a fraction past the cap](managed-agents/budgets.md). On the stream, the pause arrives as three events, in order:
 
@@ -385,7 +385,7 @@ While the session is at its cap, it accepts only the events that settle work alr
 
 No event resumes a session paused at its cap. Instead, update the session's budget: changing the cap to any value above the consumed list cost, or removing the budget by updating the session with `"budget": null`, resumes the paused work automatically. See [Session budgets](managed-agents/budgets.md) for how list cost is tracked and the full budget update semantics.
 
-###  Sending system messages
+### Sending system messages
 
 Send a `system.message` event to give the agent privileged system-level context that applies to the accompanying turn and all subsequent turns. Unlike the `system` field on the agent definition (which sets the top-level system prompt), `system.message` content is appended to the session's system context as a `role: "system"` turn rather than replacing that prompt. Use it when the agent needs updated system-level guidance mid-session: a different persona, revised constraints, or context fetched at runtime that should shape the model's behavior going forward.
 
@@ -405,7 +405,7 @@ YAML
 
 While the session is idle with `stop_reason: requires_action`, a `system.message` is accepted only when it trails a tool result event in the same request; sent on its own or with a `user.message`, it is rejected until the pending tool events are resolved. `content` accepts 1–1000 text items.
 
-###  Tracking usage
+### Tracking usage
 
 The session object includes a `usage` field with the session's cumulative usage: token counts, server tool use, active time, and the tracked list cost. Fetch the session after it goes idle to read the latest totals.
 
@@ -444,7 +444,7 @@ You don't have to poll the session to observe these totals. The `session.usage` 
 
 To enforce a spend limit, set a [session budget](managed-agents/budgets.md) rather than polling usage and stopping the session yourself. The platform prices the session's consumption continuously and pauses each thread before its next model request once the session's list cost reaches the cap; see [Reaching a session budget](#reaching-a-session-budget) for what that looks like on the stream.
 
-##  Console observability
+## Console observability
 
 The Claude Console includes a session viewer for inspecting what an agent did without writing any code. In the Console sidebar, under **Managed Agents**, select **Sessions** to see every session in the workspace with its status, agent, token usage, cost, and creation time, then select a session to open it. The session viewer is only accessible to Developers and Admins. It shows:
 
@@ -459,7 +459,7 @@ The Claude Console includes a session viewer for inspecting what an agent did wi
 
 Append `?event={event_id}` to a session URL to open the session at a specific event.
 
-##  Debugging tips
+## Debugging tips
 
 - **Check session events:** Session errors are conveyed through the `session.error` event
 - **Review tool results:** Tool execution failures often explain unexpected agent behavior

@@ -17,11 +17,11 @@ Console session. Admin API keys are not accepted.
 
 ##### Path parameters
 
-federation\_rule\_id: string
+federation\_rule\_id: string
 
 ID of the federation rule.
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the workspace to disable for.
 
@@ -29,7 +29,7 @@ ID of the workspace to disable for.
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -37,27 +37,23 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 ##### Returns
 
-federation\_rule\_id: string
+federation\_rule\_id: string
 
 Tagged ID of the federation rule.
 
 
 
-type: "federation\_rule\_workspace\_deleted"
+type: "federation\_rule\_workspace\_deleted"
 
 defaultfederation\_rule\_workspace\_deleted
 
-workspace\_id: string
+workspace\_id: string
 
 Tagged ID of the workspace named in the delete request. Removal is idempotent.
 
-
+Remove Federation Rule Workspace
 
-### Remove Federation Rule Workspace
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RULE_ID/workspaces/$WORKSPACE_ID \

@@ -21,7 +21,7 @@ scopes require a Console session. Admin API keys are not accepted.
 
 ##### Path parameters
 
-federation\_rule\_id: string
+federation\_rule\_id: string
 
 ID of the federation rule.
 
@@ -29,7 +29,7 @@ ID of the federation rule.
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -37,7 +37,7 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 ##### Body
 
-workspace\_id: string
+workspace\_id: string
 
 Tagged ID of the workspace to enable this rule for.
 
@@ -45,41 +45,37 @@ Tagged ID of the workspace to enable this rule for.
 
 
 
-created\_at: string
+created\_at: string
 
 When this workspace was enabled for the rule.
 
 formatdate-time
 
-created\_by\_actor\_id: string or null
+created\_by\_actor\_id: string or null
 
 Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
 
-federation\_rule\_id: string
+federation\_rule\_id: string
 
 Tagged ID of the federation rule.
 
 
 
-type: "federation\_rule\_workspace"
+type: "federation\_rule\_workspace"
 
 defaultfederation\_rule\_workspace
 
-workspace\_id: string
+workspace\_id: string
 
 Tagged ID of the workspace this rule is enabled for.
 
-workspace\_name: string or null
+workspace\_name: string or null
 
 Workspace display name. Populated when listing; null in the enable response.
 
-
+Add Federation Rule Workspace
 
-### Add Federation Rule Workspace
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RULE_ID/workspaces \

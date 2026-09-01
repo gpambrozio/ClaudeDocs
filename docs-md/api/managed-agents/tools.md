@@ -8,7 +8,7 @@ Claude Managed Agents provides a set of built-in tools that Claude can use auton
 
 Claude Managed Agents also supports custom, user-defined tools. Your application executes these tools separately and returns the results to Claude, which uses them to continue the task. To give the agent tools from an MCP server, use the [MCP connector](managed-agents/mcp-connector.md) instead.
 
-##  Available tools
+## Available tools
 
 The agent toolset includes the following tools. All are enabled by default when you include the toolset in your agent configuration. Each entry in the `configs` array is identified by its `name`, using the values in the Name column, and accepts an optional `type` field with the same value. The `web_search` and `web_fetch` entries accept additional settings; see [Restrict web search and web fetch domains](#restrict-web-search-and-web-fetch-domains).
 
@@ -25,7 +25,7 @@ The agent toolset includes the following tools. All are enabled by default when 
 
 When a tool output exceeds 100,000 characters (about 25,000 tokens), it is automatically written to a file in the [sandbox](managed-agents/environments.md). The model receives a truncated preview with the file path and can read the full content from there.
 
-##  Configuring the toolset
+## Configuring the toolset
 
 Enable the full toolset with `agent_toolset_20260401` when creating an agent. Use the `configs` array to disable specific tools or override their settings. Each config entry can also set a `permission_policy` that controls whether the tool's calls are auto-approved or require confirmation. See [Permission policies](managed-agents/permission-policies.md) for the available policy types.
 
@@ -47,7 +47,7 @@ tools:
 YAML
 ```
 
-###  Disabling specific tools
+### Disabling specific tools
 
 To disable a tool, set `enabled: false` in its config entry in the toolset object of your agent's `tools` array:
 
@@ -63,7 +63,7 @@ To disable a tool, set `enabled: false` in its config entry in the toolset objec
 
 
 
-###  Enabling only specific tools
+### Enabling only specific tools
 
 The `default_config` object sets the baseline for every tool in the set, and per-tool `configs` entries override it. To start with everything off and enable only what you need, set `default_config.enabled` to `false`:
 
@@ -81,7 +81,7 @@ The `default_config` object sets the baseline for every tool in the set, and per
 
 
 
-###  Restrict web search and web fetch domains
+### Restrict web search and web fetch domains
 
 To control which sites the agent's web tools can reach, set `allowed_domains` (the tool can reach only these hosts) or `blocked_domains` (the tool can never reach these hosts) on the `web_search` and `web_fetch` entries of the toolset's `configs` array. Each tool carries its own list, so `web_search` and `web_fetch` can have different restrictions. A listed domain covers that host and all of its subdomains. At runtime, a `web_fetch` call for a URL that its lists do not permit returns an error result to the agent (`is_error: true` on the `agent.tool_result` event, with content that names the error code `url_not_allowed`), and `web_search` omits results that its lists do not permit.
 
@@ -151,7 +151,7 @@ In addition to `enabled` and `permission_policy`, the web tool entries accept th
 | `max_content_tokens` | `web_fetch` | Caps the amount of fetched page content included in the context. Must be a positive integer. See [content limits](agents-and-tools/tool-use/web-fetch-tool.md). |
 | `user_location` | `web_search` | Localizes search results. An object with the same fields as the Messages API [`user_location`](agents-and-tools/tool-use/web-search-tool.md) parameter. |
 
-####  Domain list rules
+#### Domain list rules
 
 - Set either `allowed_domains` or `blocked_domains` on an entry, not both. An entry that sets both is rejected.
 - Each list holds 1 to 64 domains, each 1 to 255 characters. An empty list is rejected: to apply no restriction, omit the field or send `null`.
@@ -164,13 +164,13 @@ In addition to `enabled` and `permission_policy`, the web tool entries accept th
 - A `web_fetch` domain cannot include a path: use `example.com`, not `example.com/*`. A `web_search` domain can carry a path suffix such as `example.com/blog`, in which the path cannot contain spaces, `?`, `#`, or any of the characters `$ , | ^ !`. Prefer plain hostnames for `web_search` too, because the search provider matches path suffixes as URL patterns rather than as strict host rules.
 - Duplicate domains within a list are rejected. `www.example.com` and `example.com` count as different domains; see the earlier matching rule for what each covers.
 
-####  When settings are validated
+#### When settings are validated
 
 Format and limit violations are rejected with a 400 `invalid_request_error` when you [create an agent](managed-agents/agent-setup.md) or [update an agent](managed-agents/agent-setup.md), and when you create or update a session that supplies `tools`. For example, the message for an entry that sets both lists includes `Only one of allowed_domains or blocked_domains may be set.`, and the message for an empty list includes `allowed_domains: Empty list of domains is ambiguous. Provide at least one domain or null.` The message for a domain that breaks a format rule names its list and zero-based position, for example `allowed_domains.0: IP addresses are not supported; provide a plain hostname like "example.com"`.
 
 The same requests also reject three settings that depend on the search and fetch providers: a domain in `allowed_domains` that Anthropic's crawler is not permitted to access, a `user_location.country` that the search provider does not support (the message ends in `user_location.country: not a country the search provider supports`), and a `user_location.timezone` that is not a valid IANA name. The session checks the configuration again when it first initializes the tool; if a setting that was accepted earlier is no longer valid at that point, the session emits a [`session.error`](managed-agents/events-and-streaming.md) event and returns to `idle` without retrying. Fix the setting by [updating the session's tools](managed-agents/session-operations.md), update the agent as well so that new sessions start with the corrected configuration, then send a new `user.message` to continue.
 
-####  Multiagent sessions, outcomes, and mid-session updates
+#### Multiagent sessions, outcomes, and mid-session updates
 
 In a [multiagent session](managed-agents/multiagent-orchestration.md), every domain list that applies to a thread is enforced at the same time: an agent in the roster of the coordinator is bound by its own `allowed_domains` and `blocked_domains`, by those of any agent that called it, and by the coordinator's current lists.
 
@@ -181,7 +181,7 @@ In a [multiagent session](managed-agents/multiagent-orchestration.md), every dom
 - The grader in [outcome-driven sessions](managed-agents/define-outcomes.md) runs without `web_search` and `web_fetch`, regardless of these settings.
 - You can change the lists on an idle session by [updating its tools](managed-agents/session-operations.md). The new lists apply to the rest of the session; in a multiagent session, every thread applies them from its next turn, while a roster agent's own lists stay as its agent definition set them when the session was created.
 
-####  Differences from the Messages API tools
+#### Differences from the Messages API tools
 
 These settings use the same `allowed_domains` and `blocked_domains` vocabulary as [domain filtering](agents-and-tools/tool-use/server-tools.md) on the Messages API server tools, with the following differences on Managed Agents:
 
@@ -190,7 +190,7 @@ These settings use the same `allowed_domains` and `blocked_domains` vocabulary a
 - Domains must be ASCII: use the `xn--` (Punycode) form for internationalized domain names. The Messages API accepts Unicode entries, though it recommends against them.
 - `max_uses`, `citations`, and `cache_control` are not available on the toolset.
 
-##  Custom tools
+## Custom tools
 
 In addition to built-in tools, you can define custom tools. Custom tools are analogous to [user-defined client tools](agents-and-tools/tool-use/how-tool-use-works.md) in the Messages API.
 
@@ -230,14 +230,14 @@ tools:
 
 Once you've defined custom tools on the agent, the agent invokes them during a session.
 
-###  Best practices for custom tool definitions
+### Best practices for custom tool definitions
 
 - **Provide extremely detailed descriptions.** This is by far the most important factor in tool performance. Your descriptions should explain what the tool does and when to use it (and when not to). Explain what each parameter means and how it affects the tool's behavior. Call out any important caveats or limitations. The more context you can give Claude about your tools, the better it is at determining when and how to use them. Aim for three to four sentences for each tool description, more if the tool is complex.
 - **Consolidate related operations into fewer tools.** Rather than creating a separate tool for every action (`create_pr`, `review_pr`, `merge_pr`), group them into a single tool with an `action` parameter. Fewer, more capable tools reduce selection ambiguity and make your tool surface easier for Claude to navigate.
 - **Use meaningful namespacing in tool names.** When your tools span multiple services or resources, prefix names with the resource (for example, `db_query` or `storage_read`). This makes tool selection unambiguous as your library grows.
 - **Design tool responses to return only high-signal information.** Return semantic, stable identifiers (for example, slugs or UUIDs) rather than opaque internal references, and include only the fields Claude needs to determine its next step. Bloated responses waste context and make it harder for Claude to extract what matters.
 
-##  Next steps
+## Next steps
 
 
 

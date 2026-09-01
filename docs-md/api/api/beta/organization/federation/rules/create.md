@@ -32,129 +32,129 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
 
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-string
+string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
 
 One of the following:
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24"
 
-"prompt-caching-2024-07-31"
+"prompt-caching-2024-07-31"
 
-"computer-use-2024-10-22"
+"computer-use-2024-10-22"
 
-"computer-use-2025-01-24"
+"computer-use-2025-01-24"
 
-"pdfs-2024-09-25"
+"pdfs-2024-09-25"
 
-"token-counting-2024-11-01"
+"token-counting-2024-11-01"
 
-"token-efficient-tools-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"output-128k-2025-02-19"
+"output-128k-2025-02-19"
 
-"files-api-2025-04-14"
+"files-api-2025-04-14"
 
-"mcp-client-2025-04-04"
+"mcp-client-2025-04-04"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-11-20"
 
-"dev-full-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"interleaved-thinking-2025-05-14"
+"interleaved-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"code-execution-2025-05-22"
 
-"extended-cache-ttl-2025-04-11"
+"extended-cache-ttl-2025-04-11"
 
-"context-1m-2025-08-07"
+"context-1m-2025-08-07"
 
-"context-management-2025-06-27"
+"context-management-2025-06-27"
 
-"model-context-window-exceeded-2025-08-26"
+"model-context-window-exceeded-2025-08-26"
 
-"skills-2025-10-02"
+"skills-2025-10-02"
 
-"fast-mode-2026-02-01"
+"fast-mode-2026-02-01"
 
-"output-300k-2026-03-24"
+"output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
+"user-profiles-2026-03-24"
 
-"user-profiles-2026-08-18"
+"user-profiles-2026-08-18"
 
-"advisor-tool-2026-03-01"
+"advisor-tool-2026-03-01"
 
-"managed-agents-2026-04-01"
+"managed-agents-2026-04-01"
 
-"cache-diagnosis-2026-04-07"
+"cache-diagnosis-2026-04-07"
 
-"dreaming-2026-04-21"
+"dreaming-2026-04-21"
 
-"thinking-token-count-2026-05-13"
+"thinking-token-count-2026-05-13"
 
-"server-side-fallback-2026-06-01"
+"server-side-fallback-2026-06-01"
 
-"server-side-fallback-2026-07-01"
+"server-side-fallback-2026-07-01"
 
-"fallback-credit-2026-06-01"
+"fallback-credit-2026-06-01"
 
-"fallback-credit-2026-07-01"
+"fallback-credit-2026-07-01"
 
-"agent-memory-2026-07-22"
+"agent-memory-2026-07-22"
 
-"mid-conversation-tool-changes-2026-07-01"
+"mid-conversation-tool-changes-2026-07-01"
 
-"compact-2026-01-12"
+"compact-2026-01-12"
 
-"computer-use-2025-11-24"
+"computer-use-2025-11-24"
 
-"mcp-tunnels-2026-06-22"
+"mcp-tunnels-2026-06-22"
 
-"structured-outputs-2025-11-13"
+"structured-outputs-2025-11-13"
 
-"task-budgets-2026-03-13"
+"task-budgets-2026-03-13"
 
-"thinking-display-updates-2026-08-18"
+"thinking-display-updates-2026-08-18"
 
-"ce-user-management-2026-07-13"
+"ce-user-management-2026-07-13"
 
 ##### Body
 
-issuer\_id: string
+issuer\_id: string
 
 Tagged ID of the federation issuer.
 
 
 
-match: [BetaFederationRuleMatch](api/http/beta/organization/federation/rules.md) { audience, claims, condition, subject\_prefix }
+match: [BetaFederationRuleMatch](api/http/beta/organization/federation/rules.md) { audience, claims, condition, subject\_prefix }
 
 Conditions the verified JWT must satisfy for this rule to apply. At least one of `subject_prefix` (other than a wildcard-only value like `*`), `claims`, or `condition` is required; `audience` alone is not sufficient.
 
 
 
-audience: optional string or null
+audience: optional string or null
 
 Exact match against the `aud` claim (any element if array). When omitted, the JWT's `aud` must still equal Anthropic's expected audience for the issuer; setting this field overrides that default.
 
 maxLength1024
 
-claims: optional map[string] or null
+claims: optional map[string] or null
 
 Exact-match `{claim: value}` pairs against top-level claims. Only string-valued claims can be matched; use `condition` for non-string claims.
 
 
 
-condition: optional string or null
+condition: optional string or null
 
 CEL expression over claims for logic the structural fields can't express. Must evaluate to a boolean and may reference only the `claims` variable; a constant-true expression (such as `true`) is rejected with 400.
 
@@ -162,7 +162,7 @@ maxLength4096
 
 
 
-subject\_prefix: optional string or null
+subject\_prefix: optional string or null
 
 Match the verified JWT `sub` claim. Exact match unless the value ends with `*`, in which case it is a prefix match. Example: `repo:my-org/my-repo:ref:refs/heads/main`.
 
@@ -170,7 +170,7 @@ maxLength1024
 
 
 
-name: string
+name: string
 
 Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
@@ -180,7 +180,7 @@ minLength1
 
 
 
-oauth\_scope: string
+oauth\_scope: string
 
 Space-separated OAuth scopes. OAuth callers may only set `workspace:developer` or `workspace:inference`; other scopes (such as `org:admin`) require a Console session.
 
@@ -188,31 +188,31 @@ minLength1
 
 
 
-target: [BetaServiceAccountTarget](api/http/beta/organization/federation/rules.md) { service\_account\_id, type, service\_account\_name }
+target: [BetaServiceAccountTarget](api/http/beta/organization/federation/rules.md) { service\_account\_id, type, service\_account\_name }
 
 Identity that tokens minted via this rule act as. Currently always a `service_account` target.
 
-service\_account\_id: string
+service\_account\_id: string
 
 Tagged ID of the service account to mint tokens for.
 
-type: "service\_account"
+type: "service\_account"
 
-service\_account\_name: optional string or null
+service\_account\_name: optional string or null
 
 Service account's display name at read time. Ignored on writes.
 
-applies\_to\_all\_workspaces: optional boolean
+applies\_to\_all\_workspaces: optional boolean
 
 When true, enable this rule for every workspace in the org (including workspaces created later).
 
-attributes: optional map[string] or null
+attributes: optional map[string] or null
 
 CEL expressions `{name: expr}` extracting named values from claims. Not yet supported; any non-empty value is rejected with 400.
 
 
 
-description: optional string or null
+description: optional string or null
 
 Optional free-text description.
 
@@ -220,7 +220,7 @@ maxLength2000
 
 
 
-token\_lifetime\_seconds: optional number
+token\_lifetime\_seconds: optional number
 
 Lifetime in seconds for access tokens minted via this rule (60-86400). Defaults to 3600 (1h). Minted tokens are capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.
 
@@ -228,7 +228,7 @@ maximum86400
 
 minimum60
 
-workspace\_id: optional string or null
+workspace\_id: optional string or null
 
 Tagged ID of the workspace to enable this rule for. Required unless `applies_to_all_workspaces` is true. Additional workspaces can be added via the `/federation_rules/{federation_rule_id}/workspaces` sub-resource.
 
@@ -236,7 +236,7 @@ Tagged ID of the workspace to enable this rule for. Required unless `applies_to_
 
 
 
-BetaFederationRule object{ id, applies\_to\_all\_workspaces, archived\_at, 17 more }
+BetaFederationRule object{ id, applies\_to\_all\_workspaces, archived\_at, 17 more }
 
 Authorization rule binding an external OIDC identity to Anthropic.
 
@@ -249,13 +249,9 @@ of that workspace (it is implicitly a member of the default workspace);
 rules carrying only the legacy `workspace_id` binding do not enforce
 this.
 
-
+Create Federation Rule
 
-### Create Federation Rule
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/federation_rules \

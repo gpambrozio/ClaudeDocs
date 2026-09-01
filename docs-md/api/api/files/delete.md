@@ -14,7 +14,7 @@ Delete File
 
 ##### Path parameters
 
-file\_id: string
+file\_id: string
 
 ID of the File.
 
@@ -22,15 +22,15 @@ ID of the File.
 
 
 
-DeletedFile object{ id, type }
+DeletedFile object{ id, type }
 
-id: string
+id: string
 
 ID of the deleted file.
 
 
 
-type: optional "file\_deleted"
+type: optional "file\_deleted"
 
 Deleted object type.
 
@@ -38,13 +38,9 @@ For file deletion, this is always `"file_deleted"`.
 
 defaultfile\_deleted
 
-
+Delete File
 
-### Delete File
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/files/$FILE_ID \

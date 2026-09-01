@@ -46,7 +46,7 @@ Response
 }
 ```
 
-##  Filter activities
+## Filter activities
 
 Filter by organization, actor, activity type, or a `created_at` time window using the dotted sub-parameters `created_at.gte`, `.gt`, `.lte`, and `.lt`. See the [API reference](api/compliance/activities/list.md) for each parameter's type and accepted values.
 
@@ -67,7 +67,7 @@ curl --fail-with-body -sS -G \
 
 The Activity Feed produces hundreds of distinct activity types. See [Query compliance activities](api/compliance/activities/list.md) in the API reference for the full list of values that `activity_types[]` accepts.
 
-##  Paginate results
+## Paginate results
 
 Activities are returned newest first, with ties in `created_at` broken by activity ID, and capped at `limit` results in each response (default 100, max 5,000). See the [API reference](api/compliance/activities/list.md) for the full response schema.
 
@@ -132,7 +132,7 @@ persist(cursor)
 
 
 
-##  Understand the Activity object
+## Understand the Activity object
 
 Every entry in `data` is an Activity with this top-level shape:
 
@@ -159,7 +159,7 @@ The `actor` field is a discriminated union. The `type` discriminator tells you w
 
 A `claude_*_viewed` activity means a Claude app loaded content, not that a person viewed it. Types such as `claude_chat_viewed`, `claude_file_viewed`, and `claude_project_viewed` are recorded each time a Claude app loads the chat, file, or project from Anthropic's servers. Repeated loads are not deduplicated. The web, desktop, and mobile apps load content at different moments, sometimes in the background, and can display a cached copy without loading it. Counts of these activities vary by platform as a result, and they do not correspond to messages sent or screens viewed.
 
-##  Next steps
+## Next steps
 
 [API reference](api/compliance/activities/list.md)
 

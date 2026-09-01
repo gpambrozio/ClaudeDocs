@@ -10,7 +10,7 @@ Both scopes are granted only on Compliance Access Keys (`sk-ant-api01-...`) crea
 
 Endpoints on this page paginate two ways; see [Paginate results](manage-claude/compliance-activity-feed.md) for the full reference. Each section notes which scheme applies.
 
-##  Retrieve chats and messages
+## Retrieve chats and messages
 
 Use [List chats](api/compliance/apps/chats/list.md) to page through chat metadata, then [Get chat messages](api/compliance/apps/chats/messages/list.md) to fetch the full message content of one chat.
 
@@ -173,7 +173,7 @@ Response
 
 `files`, `generated_files`, and `artifacts` can each be `null` on a given message. `files` are the files and text attachments (for example, PDFs, images, spreadsheets, documents, and pasted text) the user attached to the message, as claude.ai stored them. `generated_files` are binary files the assistant created during the conversation through tool use (for example, PDFs, spreadsheets, or slide decks). `artifacts` are versioned documents (for example, code or markdown) the assistant generated or updated in its response; an artifact can be revised across multiple assistant turns in the same chat, and each revision appears as a new `version_id` under the same artifact `id`. Pass each entry's `id` (or `version_id` for artifacts) to the matching content endpoint in [Retrieve files and artifacts](#retrieve-files-and-artifacts) to download it.
 
-##  Retrieve files and artifacts
+## Retrieve files and artifacts
 
 Files and artifacts are downloaded by ID, not listed independently. The IDs come from the chat messages endpoint in [Retrieve chats and messages](#retrieve-chats-and-messages) (the `files`, `generated_files`, and `artifacts` arrays on each message) or, for project-level uploads, from the [project attachments endpoint](#retrieve-projects-and-attachments).
 
@@ -215,7 +215,7 @@ The `-OJ` flags tell curl to save the response under the file name from `Content
 
 The artifact content endpoint returns the text body of one artifact version. Pass the `version_id` from one of the entries in an assistant message's `artifacts` array, not the artifact's stable `id`. Each new version of an artifact has its own `version_id`, and the Compliance API serves the exact bytes of that version.
 
-##  Retrieve projects and attachments
+## Retrieve projects and attachments
 
 Projects bundle related chats together with custom instructions, knowledge base content, and attached files or text documents. The Compliance API exposes project metadata, project details, and the list of attachments belonging to a project.
 
@@ -226,7 +226,7 @@ Projects bundle related chats together with custom instructions, knowledge base 
 
 Project results are sorted by creation date ascending. Attachment results are sorted by `created_at` ascending, with ties broken by `id`. Project list and attachment list responses paginate with an opaque `next_page` page token instead of the `first_id`/`last_id` cursors used by chats and the Activity Feed. Pass the token back as the `page` query parameter on the next request.
 
-###  Project files versus project documents
+### Project files versus project documents
 
 A project attachment is one of two distinct shapes, identified by the `type` discriminator on each entry:
 
@@ -275,7 +275,7 @@ Response
 }
 ```
 
-##  Delete content
+## Delete content
 
 The Compliance API exposes hard-delete endpoints for chats, files, project documents, and entire projects. A hard-deleted chat cannot be restored, and it stops appearing in list responses afterward.
 
@@ -319,7 +319,7 @@ Response
 
 Each successful delete returns a small confirmation envelope with an `id` and a `type` discriminator. The chat endpoint returns `claude_chat_deleted`; check the `type` field before treating the delete as confirmed. See the response schema on each delete endpoint's [API reference](api/compliance/apps.md) page for the exact `type` value the other endpoints return.
 
-###  Detach chats before deleting a project
+### Detach chats before deleting a project
 
 A project cannot be deleted while any chats remain attached to it. The API returns 409 with this body:
 
@@ -336,7 +336,7 @@ A project cannot be deleted while any chats remain attached to it. The API retur
 
 To resolve, list the project's chats with `GET /v1/compliance/apps/chats?user_ids[]={user_id}&project_ids[]={project_id}` (the `project_ids[]` filter requires at least one `user_ids[]` value; enumerate IDs through [List organization users](manage-claude/compliance-org-data.md)), delete each one with `DELETE /v1/compliance/apps/chats/{claude_chat_id}` (or move it out of the project from claude.ai), and then retry the project delete.
 
-##  Next steps
+## Next steps
 
 [API reference](api/compliance/apps.md)
 

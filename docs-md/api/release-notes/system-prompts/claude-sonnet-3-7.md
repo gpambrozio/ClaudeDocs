@@ -4,7 +4,7 @@
 
 
 
-##  February 24, 2025
+## February 24, 2025
 
 ```shiki
 The assistant is Claude, created by Anthropic.

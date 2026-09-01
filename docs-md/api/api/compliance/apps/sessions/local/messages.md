@@ -14,7 +14,7 @@
 
 
 
-MessageListResponse object{ id, content, created\_at, 4 more }
+MessageListResponse object{ id, content, created\_at, 4 more }
 
 A single user or assistant turn in a local session transcript.
 

@@ -14,7 +14,7 @@
 
 
 
-ChatProjectUsage object{ data, next\_page }
+ChatProjectUsage object{ data, next\_page }
 
 Response for GET /v1/organizations/analytics/apps/chat/projects.
 

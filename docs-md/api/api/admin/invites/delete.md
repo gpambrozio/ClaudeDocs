@@ -12,19 +12,19 @@ Delete a pending invite.
 
 ##### Path parameters
 
-invite\_id: string
+invite\_id: string
 
 ID of the Invite.
 
 ##### Returns
 
-id: string
+id: string
 
 ID of the Invite.
 
 
 
-type: "invite\_deleted"
+type: "invite\_deleted"
 
 Deleted object type.
 
@@ -32,13 +32,9 @@ For Invites, this is always `"invite_deleted"`.
 
 defaultinvite\_deleted
 
-
+Delete Invite
 
-### Delete Invite
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \

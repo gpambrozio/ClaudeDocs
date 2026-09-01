@@ -10,7 +10,7 @@ Claude Fable 5 takes on problems that were previously too complex, long-running,
 
 Claude Fable 5 has several behavioral differences from Claude Opus 4.8 that may require prompt or scaffolding updates. Capability improvements at this level are also a good prompt to re-evaluate which instructions, tools, and guardrails are still needed. The patterns below cover the behaviors that most often require tuning.
 
-##  Capability improvements
+## Capability improvements
 
 Compared with Claude Opus 4.8, Claude Fable 5 shows improvement in:
 
@@ -24,7 +24,7 @@ Compared with Claude Opus 4.8, Claude Fable 5 shows improvement in:
 
 Beyond these specific improvements, Claude Fable 5 is generally more capable than prior models on almost all tasks. Claude Fable 5 is not intended for offensive cybersecurity or biology and life sciences work; requests in those domains can return [`stop_reason: "refusal"`](build-with-claude/refusals-and-fallback.md).
 
-##  Longer turns by default
+## Longer turns by default
 
 Individual requests on hard tasks can run for many minutes at higher [effort](build-with-claude/effort.md) settings, especially when the task requires gathering context, building, and self-verifying, and autonomous runs can extend for hours. This is one of the largest shifts teams encounter when adjusting to Claude Fable 5. Adjust client timeouts, streaming, and user-facing progress indicators before migrating, and consider restructuring harnesses to check on runs asynchronously, for example through scheduled jobs, rather than blocking. To keep Claude Fable 5 from overplanning when a task is ambiguous:
 
@@ -34,7 +34,7 @@ When you have enough information to act, act. Do not re-derive facts already est
 
 
 
-##  Consider all effort levels
+## Consider all effort levels
 
 [Effort](build-with-claude/effort.md) is the primary control for the trade-off between intelligence, latency, and cost on Claude Fable 5. Use `high` as the default for most tasks, with `xhigh` for the most capability-sensitive workloads and `medium` or `low` for routine work. Lower effort settings on Claude Fable 5 still perform well and often exceed `xhigh` performance on prior models. Reduce effort if a task completes but takes longer than necessary, or if you want a quicker, more interactive working style.
 
@@ -46,7 +46,7 @@ Don't add features, refactor, or introduce abstractions beyond what the task req
 
 
 
-##  Strong instruction following
+## Strong instruction following
 
 Instruction-following is improved enough that you can steer most behaviors with a brief instruction rather than enumerating each behavior by name. For example, when un-steered, Claude Fable 5 can elaborate beyond what the task needs, especially at higher effort settings: surveying options it won't pursue, explaining root causes at length, producing heavily-structured PR descriptions, or writing comments that narrate what the next line does. A short brevity instruction is as effective as listing each pattern:
 
@@ -66,7 +66,7 @@ Pause for the user only when the work genuinely requires them: a destructive or 
 
 
 
-##  Ground progress claims during long runs
+## Ground progress claims during long runs
 
 On long autonomous runs, instruct Claude Fable 5 to audit progress against actual tool results. In Anthropic's testing, this nearly eliminated fabricated status reports even on tasks designed to elicit them:
 
@@ -76,7 +76,7 @@ Before reporting progress, audit each claim against a tool result from this sess
 
 
 
-##  State the boundaries
+## State the boundaries
 
 Claude Fable 5 can occasionally take unrequested actions (drafting an email when none was asked for, creating defensive git-branch backups). Define explicit constraints on what Claude Fable 5 should and should not do:
 
@@ -86,7 +86,7 @@ When the user is describing a problem, asking a question, or thinking out loud r
 
 
 
-##  Parallel subagents
+## Parallel subagents
 
 Claude Fable 5 dispatches parallel subagents more readily than prior models. Use subagents frequently, provide explicit guidance about when delegation is appropriate, and prefer asynchronous communication between orchestrator and subagents over blocking until each subagent returns. Long-lived subagents that keep their context across subtasks save time and cost through cache reads and avoid bottlenecking on the slowest subagent.
 
@@ -96,7 +96,7 @@ Delegate independent subtasks to subagents and keep working while they run. Inte
 
 
 
-##  Construct a memory system
+## Construct a memory system
 
 Claude Fable 5 performs particularly well when it can record lessons from previous runs and reference them. Provide a place to write notes, as simple as a Markdown file:
 
@@ -114,7 +114,7 @@ Reflect on the previous sessions we've had together. Use subagents to identify c
 
 
 
-##  Rare cases of early stopping
+## Rare cases of early stopping
 
 Deep into a long session, Claude Fable 5 can occasionally end a turn with a text-only statement of intent ("I'll now run X") without issuing the corresponding tool call, or pause to ask permission when it already has enough to proceed. A "continue" or "go ahead and do it end to end" suffices. To define when pausing is appropriate, pair this with the checkpoint instruction in [Strong instruction following](#strong-instruction-following). For autonomous pipelines, add a system reminder:
 
@@ -124,7 +124,7 @@ You are operating autonomously. The user is not watching in real time and cannot
 
 
 
-##  Rare cases of context-budget concern
+## Rare cases of context-budget concern
 
 In very long sessions, Claude Fable 5 can occasionally suggest a new session, offer to summarize and hand off, or trim its own work. This is most often triggered when the harness shows a remaining-token countdown to the model. Avoid surfacing explicit context-budget counts where possible. If the harness must show them, a reassurance helps:
 
@@ -134,7 +134,7 @@ You have ample context remaining. Do not stop, summarize, or suggest a new sessi
 
 
 
-##  Give the reason, not only the request
+## Give the reason, not only the request
 
 Claude Fable 5 tends to perform better when it understands the intent behind a request: context lets it connect the task to relevant information rather than inferring intent on its own. Provide context about why you're asking, especially for long-running agents drawing on multiple workstreams:
 
@@ -144,7 +144,7 @@ I'm working on [the larger task] for [who it's for]. They need [what the output 
 
 
 
-##  Readability when communicating with the user
+## Readability when communicating with the user
 
 In extended or agentic conversations (many tool calls, large working context), Claude Fable 5 can produce text that's hard to follow: dense arrow-chain shorthand, deep implementation detail, references to thinking the user never saw, or overly technical phrasing. A communication-style addendum mitigates this:
 
@@ -158,7 +158,7 @@ When you write the summary at the end, drop the working shorthand. Write complet
 
 
 
-##  Create a send-to-user tool
+## Create a send-to-user tool
 
 When running long, asynchronous agents, give the agent a way to surface a message the user must see exactly as written, without ending its turn: a deliverable (a generated code snippet or a drafted message), a progress update with specific numbers, or a direct reply to a question the user asked mid-loop. The tool's input is the message to display; when Claude calls it, render the input directly in your UI and return a simple acknowledgement as the tool result. Tool inputs are never summarized, so the content arrives intact.
 
@@ -191,7 +191,7 @@ Between tool calls, when you have content the user must read verbatim (a partial
 
 Do not route narration or internal reasoning through `send_to_user`; over-calling it for non-user-facing content defeats the purpose.
 
-##  Recommended scaffolding changes
+## Recommended scaffolding changes
 
 - **Start at the top of your difficulty range.** Pick a task harder than what you'd assign to prior models, and have Claude Fable 5 scope it, ask clarifying questions, and execute.
 - **Make self-verification explicit in long-run prompts.** Separate, fresh-context verifier subagents tend to outperform self-critique. For long-running tasks, instruct: `Establish a method for checking your own work at an interval of [X] as you build. Run this every [X interval], verifying your work with subagents against the specification.`

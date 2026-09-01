@@ -16,7 +16,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
 
 
-limit: optional number
+limit: optional number
 
 Number of items to return per page.
 
@@ -28,7 +28,7 @@ maximum1000
 
 minimum1
 
-page: optional string
+page: optional string
 
 Optionally set to the `next_page` token from the previous response.
 
@@ -36,27 +36,27 @@ Optionally set to the `next_page` token from the previous response.
 
 
 
-data: array of [RbacRole](api/http/admin/rbac_roles.md) { id, created\_at, name, 2 more }
+data: array of [RbacRole](api/http/admin/rbac_roles.md) { id, created\_at, name, 2 more }
 
-id: string
+id: string
 
 ID of the RBAC Role.
 
 
 
-created\_at: string
+created\_at: string
 
 RFC 3339 datetime string indicating when the RBAC Role was created.
 
 formatdate-time
 
-name: string
+name: string
 
 Name of the RBAC Role.
 
 
 
-type: "rbac\_role"
+type: "rbac\_role"
 
 Object type.
 
@@ -66,28 +66,24 @@ defaultrbac\_role
 
 
 
-updated\_at: string
+updated\_at: string
 
 RFC 3339 datetime string indicating when the RBAC Role was last updated.
 
 formatdate-time
 
-has\_more: boolean
+has\_more: boolean
 
 Indicates whether there are more results beyond this page.
 
-next\_page: string or null
+next\_page: string or null
 
 Opaque cursor for the next page. Pass as the `page` parameter on the next
 request.
 
-
+List RBAC Roles
 
-### List RBAC Roles
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/rbac_roles \

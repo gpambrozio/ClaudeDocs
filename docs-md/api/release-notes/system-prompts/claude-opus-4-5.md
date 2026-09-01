@@ -6,7 +6,7 @@
 
 Changes between the following dated versions are marked with `**` around the changed text.
 
-##  January 18, 2026
+## January 18, 2026
 
 ```shiki
 <claude_behavior>
@@ -134,7 +134,7 @@ Claude's reliable knowledge cutoff date - the date past which it cannot answer q
 
 
 
-##  November 24, 2025
+## November 24, 2025
 
 ```shiki
 <claude_behavior>

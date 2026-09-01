@@ -8,9 +8,9 @@ Claude Sonnet 5 offers the best combination of speed and intelligence in the Cla
 
 Claude Sonnet 5 is a drop-in upgrade for Claude Sonnet 4.6, priced at $2/$10 USD per million input/output tokens; see [Pricing](about-claude/pricing.md) for details. There are two breaking API changes for code already running on Claude Sonnet 4.6. First, [adaptive thinking](build-with-claude/thinking.md) is on by default and manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) returns a 400 error, so requests that ran without thinking can now return `thinking` blocks before the first `text` block and code that reads content by position must select content blocks by `type`. Second, sampling parameters (`temperature`, `top_p`, `top_k`) set to non-default values return a 400 error. Use adaptive thinking with the [effort parameter](build-with-claude/effort.md) to control thinking depth. Claude Sonnet 5 supports the same set of features as Claude Sonnet 4.6, including the [1M token context window](build-with-claude/context-windows.md), [adaptive thinking](build-with-claude/thinking.md), [prompt caching](build-with-claude/prompt-caching.md), [batch processing](build-with-claude/batch-processing.md), the [Files API](build-with-claude/files.md), [PDF support](build-with-claude/pdf-support.md), [vision](build-with-claude/vision.md), and the full set of server-side and client-side [tools](agents-and-tools/tool-use/overview.md). On the Claude API and Google Cloud, Claude Sonnet 5 also supports [computer use](agents-and-tools/tool-use/computer-use-tool.md) as the stable `computer_toolset_20260801` toolset and the [browser use tool](agents-and-tools/tool-use/browser-use-tool.md) for tasks inside webpages, neither of which Claude Sonnet 4.6 supports; existing integrations on the earlier `computer_20251124` version continue to work unchanged on both models. To upgrade an existing integration, see [Migrate from `computer_20251124`](agents-and-tools/tool-use/computer-use-tool.md). [Priority Tier](api/service-tiers.md) is not available on Claude Sonnet 5. Claude Sonnet 5 also uses a new tokenizer.
 
-##  Migrating to Claude Sonnet 5 from Claude Sonnet 4.6
+## Migrating to Claude Sonnet 5 from Claude Sonnet 4.6
 
-###  Update your model name
+### Update your model name
 
 ```shiki
 # Sonnet migration
@@ -20,7 +20,7 @@ model = "claude-sonnet-5"  # After
 
 
 
-###  What changed
+### What changed
 
 Items 4 and 5 in the following list are breaking changes. `max_tokens` remains a hard limit on total output (thinking plus response text), so revisit it for workloads that ran without thinking on Claude Sonnet 4.6.
 
@@ -64,7 +64,7 @@ Items 4 and 5 in the following list are breaking changes. `max_tokens` remains a
 5. **Sampling parameters removed:** Sampling parameters (`temperature`, `top_p`, `top_k`) set to a non-default value are not accepted and return a 400 error.
 6. **Cybersecurity safeguards:** Claude Sonnet 5 is the first Sonnet-tier model with real-time cybersecurity safeguards. Requests that involve prohibited or high-risk cybersecurity topics may be refused. Refusals return as a successful HTTP 200 response with `stop_reason: "refusal"`, not an error. See [Real-time cyber safeguards on Claude Opus and Sonnet](https://support.claude.com/en/articles/14604842-real-time-cyber-safeguards-on-claude-opus-and-sonnet) for what the safeguards block and how legitimate security work can apply to the Cyber Verification Program.
 
-###  Migration checklist
+### Migration checklist
 
 - Update model name from `claude-sonnet-4-6` to `claude-sonnet-5`.
 - Re-run [token counting](build-with-claude/token-counting.md) against Claude Sonnet 5. The new tokenizer produces approximately 30% more tokens for the same text, which can change per-request cost even though per-token pricing is lower. The exact increase depends on the content and workload shape.
@@ -77,13 +77,13 @@ Items 4 and 5 in the following list are breaking changes. `max_tokens` remains a
 - Re-baseline cost on your typical workload before production deployment.
 - Review `max_tokens` for workloads that previously ran without thinking.
 
-##  Migrating to Claude Sonnet 5 from Claude Sonnet 4.5 and earlier Sonnet models
+## Migrating to Claude Sonnet 5 from Claude Sonnet 4.5 and earlier Sonnet models
 
 If you are migrating from Claude Sonnet 4.5 or an earlier Sonnet model directly to Claude Sonnet 5, apply the [Migrating to Claude Sonnet 5 from Claude Sonnet 4.6](#migrating-from-claude-sonnet-4-6-to-claude-sonnet-5) changes plus the changes in this section.
 
-###  Breaking changes
+### Breaking changes
 
-####  When migrating from Sonnet 4.5
+#### When migrating from Sonnet 4.5
 
 1. **Prefilling assistant messages is no longer supported**
 
@@ -102,26 +102,26 @@ If you are migrating from Claude Sonnet 4.5 or an earlier Sonnet model directly 
 
 **Extended thinking changes:** `budget_tokens` configurations from Claude Sonnet 4.5 (`thinking: {type: "enabled", budget_tokens: N}`) are not supported on Claude Sonnet 5 and return a 400 error. Adaptive thinking is on by default, so most workloads need no `thinking` configuration at all; use the [effort parameter](build-with-claude/effort.md) to control thinking depth. If you ran Claude Sonnet 4.5 without extended thinking, pass `thinking: {type: "disabled"}` to preserve that behavior.
 
-####  When migrating from Claude 3.x
+#### When migrating from Claude 3.x
 
-1. **Remove sampling parameters**
+3. **Remove sampling parameters**
 
    Sampling parameters (`temperature`, `top_p`, `top_k`) set to a non-default value return a 400 error on Claude Sonnet 5. Remove them from requests, and use prompting to guide the model's behavior instead.
-2. **Update tool versions**
+4. **Update tool versions**
 
    Update to the latest tool versions (`text_editor_20250728`, `code_execution_20260521`). Remove any code using the `undo_edit` command.
-3. **Handle the `refusal` stop reason**
+5. **Handle the `refusal` stop reason**
 
    Update your application to [handle `refusal` stop reasons](test-and-evaluate/strengthen-guardrails/handle-streaming-refusals.md).
-4. **Update your prompts for behavioral changes**
+6. **Update your prompts for behavioral changes**
 
    Claude 4 models have a more concise, direct communication style. Review [prompting best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) for optimization guidance.
 
-##  Migrating to Claude Sonnet 5 from Claude Haiku 4.5
+## Migrating to Claude Sonnet 5 from Claude Haiku 4.5
 
 Claude Haiku 4.5 and Claude Sonnet 5 differ more at the API level than adjacent models within one class: Claude Haiku 4.5 uses manual [extended thinking](build-with-claude/extended-thinking.md) (off by default), a 200k token context window, and up to 64k output tokens, while Claude Sonnet 5 runs with [adaptive thinking](build-with-claude/thinking.md) on by default, serves a [1M token context window](build-with-claude/context-windows.md) by default, and supports up to [128k output tokens](models/overview.md).
 
-###  Update your model name
+### Update your model name
 
 ```shiki
 model = "claude-haiku-4-5-20251001"  # Before
@@ -130,7 +130,7 @@ model = "claude-sonnet-5"  # After
 
 
 
-###  What changed
+### What changed
 
 1. **Thinking configuration:** Claude Haiku 4.5 supports manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) and rejects `thinking: {type: "adaptive"}`. On Claude Sonnet 5, the support is reversed: adaptive thinking is on by default, and manual extended thinking returns a 400 error. Remove `thinking: {type: "enabled", budget_tokens: N}` configurations and rely on the default, or pass `thinking: {type: "disabled"}` to turn thinking off. `budget_tokens` has no direct replacement; use the [effort parameter](build-with-claude/effort.md) to control thinking depth. Effort is not available on Claude Haiku 4.5 and defaults to `high` on Claude Sonnet 5.
 
@@ -141,7 +141,7 @@ model = "claude-sonnet-5"  # After
 5. **Pricing:** Claude Haiku 4.5 is priced at $1/$5 USD per million input/output tokens. Claude Sonnet 5 is priced at $2/$10 USD per million input/output tokens. See [Claude pricing](about-claude/pricing.md).
 6. **Cybersecurity safeguards:** Claude Sonnet 5 has real-time cybersecurity safeguards. Requests that involve prohibited or high-risk cybersecurity topics may be refused, returned as a successful HTTP 200 response with `stop_reason: "refusal"`. See [Real-time cyber safeguards on Claude Opus and Sonnet](https://support.claude.com/en/articles/14604842-real-time-cyber-safeguards-on-claude-opus-and-sonnet) for what the safeguards block and how legitimate security work can apply to the Cyber Verification Program.
 
-###  Migration checklist
+### Migration checklist
 
 - Update the model name from `claude-haiku-4-5-20251001` (or the `claude-haiku-4-5` alias) to `claude-sonnet-5`.
 - Remove `thinking: {type: "enabled", budget_tokens: N}` configuration (returns a 400 error). Adaptive thinking is on by default; pass `thinking: {type: "disabled"}` to preserve no-thinking behavior, and revisit `max_tokens` for workloads that ran without thinking.

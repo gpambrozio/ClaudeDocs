@@ -4,7 +4,7 @@
 
 
 
-##  Establish key criteria
+## Establish key criteria
 
 When choosing a Claude model, consider first evaluating these factors:
 
@@ -17,11 +17,11 @@ Knowing these answers in advance will make narrowing down and deciding which mod
 
 ---
 
-##  Choose the best model to start with
+## Choose the best model to start with
 
 There are two general approaches you can use to start testing which Claude model best works for your needs.
 
-###  Option 1: Start efficiency-first
+### Option 1: Start efficiency-first
 
 For many applications, starting with a faster, more cost-effective model like Claude Haiku 4.5 can be the optimal approach:
 
@@ -37,7 +37,7 @@ This approach allows for quick iteration, lower development costs, and is often 
 - Cost-sensitive implementations
 - High-volume, straightforward tasks
 
-###  Option 2: Start capability-first
+### Option 2: Start capability-first
 
 For complex tasks where intelligence and advanced capabilities are paramount, you may want to start capability-first: implement with the strongest starting point for your task, then optimize to more efficient models down the line:
 
@@ -60,7 +60,7 @@ This approach is best for:
 
 Claude Fable 5 and Claude Mythos 5 are priced at $10 USD per million input tokens and $50 USD per million output tokens.
 
-##  Model selection matrix
+## Model selection matrix
 
 | When you need... | Consider starting with... | Example use cases |
 | --- | --- | --- |
@@ -71,7 +71,7 @@ Claude Fable 5 and Claude Mythos 5 are priced at $10 USD per million input token
 
 ---
 
-##  Decide whether to upgrade or change models
+## Decide whether to upgrade or change models
 
 To determine if you need to upgrade or change models, you should:
 
@@ -83,11 +83,11 @@ To determine if you need to upgrade or change models, you should:
    - Handling of edge cases
 4. Weigh performance and cost tradeoffs.
 
-##  Combine models
+## Combine models
 
 Multi-model strategies pair a lower-cost model with a frontier model so that most tokens are billed at the lower rate. The two common patterns are an executor that escalates hard decisions to an advisor, and an orchestrator that delegates bulk work to lower-cost workers. See [Optimizing for cost and intelligence](about-claude/models/optimizing-for-cost-and-intelligence.md) for both strategies, measured examples, and implementation options.
 
-##  Next steps
+## Next steps
 
 
 

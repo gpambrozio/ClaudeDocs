@@ -14,13 +14,13 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ##### Path parameters
 
-group\_id: string
+group\_id: string
 
 ID of the RBAC Group.
 
 ##### Body
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 
@@ -28,27 +28,27 @@ ID of the User.
 
 
 
-RbacGroupMember object{ created\_at, email, group\_id, 2 more }
+RbacGroupMember object{ created\_at, email, group\_id, 2 more }
 
 
 
-created\_at: string
+created\_at: string
 
 RFC 3339 timestamp of when the User was added to the RBAC Group.
 
 formatdate-time
 
-email: string
+email: string
 
 Email of the User.
 
-group\_id: string
+group\_id: string
 
 ID of the RBAC Group.
 
 
 
-type: "rbac\_group\_member"
+type: "rbac\_group\_member"
 
 Object type.
 
@@ -56,17 +56,13 @@ For RBAC Group Members, this is always `"rbac_group_member"`.
 
 defaultrbac\_group\_member
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 
-
+Add RBAC Group Member
 
-### Add RBAC Group Member
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \

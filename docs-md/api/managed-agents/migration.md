@@ -6,11 +6,11 @@
 
 Claude Managed Agents replaces your hand-written agent loop with managed infrastructure. This page covers what changes when you migrate from a custom loop built on the [Messages API](build-with-claude/working-with-messages.md) or from the [Claude Agent SDK](agent-sdk/overview.md).
 
-##  From a Messages API agent loop
+## From a Messages API agent loop
 
 If you built an agent by calling `messages.create` in a `while` loop, running tool calls yourself, and appending results to the conversation history, most of that code goes away.
 
-###  What you stop managing
+### What you stop managing
 
 | Before | After |
 | --- | --- |
@@ -19,7 +19,7 @@ If you built an agent by calling `messages.create` in a `while` loop, running to
 | You provision your own sandbox for running agent-generated code. | The session sandbox handles code execution, file operations, and bash. |
 | You decide when the loop is done. | The session emits `session.status_idle` when the agent has nothing more to do. |
 
-###  Code comparison
+### Code comparison
 
 **Before** (Messages API loop, simplified):
 
@@ -84,18 +84,18 @@ with client.beta.sessions.events.stream(session.id) as stream:
             break
 ```
 
-###  What you still control
+### What you still control
 
 - **System prompt and model:** Same fields, now on the agent definition.
 - **Custom tools:** Still declared with JSON Schema. Execution moves from inline handling to responding to `agent.custom_tool_use` events. See [Session event stream](managed-agents/events-and-streaming.md).
 - **Web search and web fetch settings:** Same `allowed_domains`, `blocked_domains`, `max_content_tokens`, and `user_location` fields, now set once on the `web_search` and `web_fetch` entries of the agent toolset's `configs` array instead of on every request. The `max_uses`, `citations`, and `cache_control` fields are not available. See [Restrict web search and web fetch domains](managed-agents/tools.md).
 - **Context:** You can still inject context through the system prompt, [file resources](managed-agents/files.md), or [skills](managed-agents/skills.md).
 
-##  From the Claude Agent SDK
+## From the Claude Agent SDK
 
 If you built with the [Claude Agent SDK](agent-sdk/overview.md), you're already working with agents, tools, and sessions as concepts. The difference is where they run: the SDK runs in a process you operate, while Managed Agents runs in Anthropic's infrastructure. Most of the migration is mapping SDK configuration objects to their API-side equivalents.
 
-###  What changes
+### What changes
 
 | Agent SDK | Managed Agents |
 | --- | --- |
@@ -108,7 +108,7 @@ If you built with the [Claude Agent SDK](agent-sdk/overview.md), you're already 
 | `mcp_servers` configured and authenticated in one place | Declare servers on the Agent; provide credentials through a [Vault](managed-agents/vaults.md) on the Session. |
 | `permission_mode`, `can_use_tool` | Per-tool [`permission_policy`](managed-agents/permission-policies.md); send `user.tool_confirmation` events for `always_ask` tools. |
 
-###  Code comparison
+### Code comparison
 
 **Before** (Agent SDK):
 
@@ -220,7 +220,7 @@ with client.beta.sessions.events.stream(session.id) as stream:
 
 The Agent and Environment are created once and reused across sessions. The tool function still runs in your process; the difference is that you read the `agent.custom_tool_use` event and send the result explicitly instead of the SDK dispatching it for you.
 
-###  Features that move to your client
+### Features that move to your client
 
 The tradeoff for Anthropic running the agent loop is that a few things the SDK handled automatically become your client's responsibility.
 
@@ -231,7 +231,7 @@ The tradeoff for Anthropic running the agent loop is that a few things the SDK h
 | `PreToolUse` / `PostToolUse` hooks | Your client already sees every `agent.custom_tool_use` event before responding; put the logic there. For built-in tools, use `permission_policy: always_ask`. |
 | `max_turns` | Count turns client-side. |
 
-##  Migration checklist
+## Migration checklist
 
 1. [Create an environment](managed-agents/environments.md) with the networking and runtimes your agent needs.
 2. Port your system prompt and tool selection to an [agent definition](managed-agents/agent-setup.md).
@@ -240,7 +240,7 @@ The tradeoff for Anthropic running the agent loop is that a few things the SDK h
 5. For any custom tool handlers, move execution into your event loop as responses to `agent.custom_tool_use` events.
 6. Verify with a test session before pointing production traffic at the new flow.
 
-##  Migrating between model versions
+## Migrating between model versions
 
 When a new Claude model is released, migrating a Claude Managed Agents integration is typically a one-field change: update `model` on your [agent definition](managed-agents/agent-setup.md) and the change takes effect on the next session you create.
 

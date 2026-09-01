@@ -14,7 +14,7 @@
 
 
 
-CostReport object{ data, has\_more, next\_page }
+CostReport object{ data, has\_more, next\_page }
 
 ---
 

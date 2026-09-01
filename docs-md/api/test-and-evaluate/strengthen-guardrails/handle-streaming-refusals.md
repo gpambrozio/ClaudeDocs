@@ -6,7 +6,7 @@
 
 Starting with Claude 4 models, streaming responses from Claude's API return **`stop_reason`: `"refusal"`** when streaming classifiers intervene to handle potential policy violations. This safety feature helps maintain content compliance during real-time streaming.
 
-##  API response format
+## API response format
 
 When streaming classifiers detect content that violates Anthropic's policies, the API returns this response:
 
@@ -32,11 +32,11 @@ When streaming classifiers detect content that violates Anthropic's policies, th
 
 In the event stream, `stop_details` arrives on the `message_delta` event alongside `stop_reason`.
 
-##  Reset context after refusal
+## Reset context after refusal
 
 When you receive **`stop_reason`: `refusal`**, you must reset the conversation context before continuing. You can remove or rephrase the turn that triggered the refusal, or clear the conversation history entirely. Attempting to continue without resetting will result in continued refusals.
 
-##  Implementation guide
+## Implementation guide
 
 Here's how to detect and handle streaming refusals in your application:
 
@@ -70,7 +70,7 @@ except Exception as e:
     print(f"Error: {e}")
 ```
 
-##  Current refusal types
+## Current refusal types
 
 The API currently handles refusals in three different ways:
 
@@ -80,7 +80,7 @@ The API currently handles refusals in three different ways:
 | API input and copyright validation | 400 error codes | When input fails validation checks |
 | Model-generated refusals | Standard text responses | When the model itself refuses |
 
-##  Best practices
+## Best practices
 
 - **Monitor for refusals:** Include **`stop_reason`: `refusal`** checks in your error handling
 - **Reset automatically:** Implement automatic context reset when refusals are detected
@@ -89,7 +89,7 @@ The API currently handles refusals in three different ways:
 - **Provide custom messaging:** Create user-friendly messages for better UX when refusals occur
 - **Track refusal patterns:** Monitor refusal frequency to identify potential issues with your prompts
 
-##  Migration notes
+## Migration notes
 
 If you built refusal handling when this feature first shipped, or you're adding it to an existing integration, check the following:
 
@@ -99,7 +99,7 @@ If you built refusal handling when this feature first shipped, or you're adding 
 - **Check batch results for refusals.** A refused request in a [Message Batch](build-with-claude/batch-processing.md) is returned as a succeeded result with `stop_reason`: `"refusal"`, not as an errored result.
 - **Centralize handling on `stop_reason`.** The API continues to consolidate refusal handling around `stop_reason`: `"refusal"`, so branch on the stop reason rather than on model-specific behavior.
 
-##  Next steps
+## Next steps
 
 
 

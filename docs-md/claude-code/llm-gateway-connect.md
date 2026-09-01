@@ -275,6 +275,8 @@ You can also set `ANTHROPIC_CUSTOM_HEADERS` in the `env` block of a settings fil
 }
 ```
 
+Routing and tenant header names like these count as [headers that need approval](server-managed-settings.md). When the headers come from a project settings file, Claude Code applies them under the [rules for when it applies `env` values](settings-reference.md).
+
 ### [​](#add-gateway-models-to-the-model-picker) Add gateway models to the model picker
 
 With model discovery enabled, Claude Code queries the gateway for its model list at startup and adds those names to the `/model` picker alongside the built-in entries. If you or your administrator set `replaceBuiltInOptions` in a [`modelPicker`](settings-reference.md) lineup, Claude Code hides the discovered names too. It keeps a row for the model the session is already using.

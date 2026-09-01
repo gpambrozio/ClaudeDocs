@@ -6,7 +6,7 @@
 
 The Anthropic PHP library provides convenient access to the Claude API from any PHP 8.1.0+ application.
 
-##  Installation
+## Installation
 
 The SDK uses [PSR-18](https://www.php-fig.org/psr/psr-18/) for HTTP and discovers any installed PSR-18 client automatically. [Guzzle](https://docs.guzzlephp.org/) is recommended because the SDK configures it for streaming with no additional setup:
 
@@ -16,11 +16,11 @@ composer require "anthropic-ai/sdk" "guzzlehttp/guzzle:^7"
 
 
 
-##  Requirements
+## Requirements
 
 PHP 8.1.0 or higher.
 
-##  Usage
+## Usage
 
 This library uses named parameters to specify optional arguments. Parameters with a default value must be set by name.
 
@@ -41,13 +41,13 @@ echo $textBlock->text;
 
 For authentication options including Workload Identity Federation, see [Authentication](manage-claude/authentication.md). If your API key is a [personal or service account key](manage-claude/authentication.md) with access to multiple workspaces, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](manage-claude/authentication.md) shows the per-request option for this SDK.
 
-##  Value objects
+## Value objects
 
 It is recommended to use the static `with` constructor `Base64ImageSource::with(data: "U3RhaW5sZXNzIHJvY2tz", ...)` and named parameters to initialize value objects.
 
 However, builders are also provided `(new Base64ImageSource)->withData("U3RhaW5sZXNzIHJvY2tz")`.
 
-##  Streaming
+## Streaming
 
 The SDK provides support for streaming responses using Server-Sent Events (SSE).
 
@@ -77,7 +77,7 @@ $client = new Anthropic\Client(
 
 
 
-##  Error handling
+## Error handling
 
 When the library is unable to connect to the API, or if the API returns a non-success status code (that is, a 4xx or 5xx response), a subclass of `Anthropic\Core\Exceptions\APIException` is thrown:
 
@@ -123,7 +123,7 @@ Error codes are as follows:
 | Timeout | `APITimeoutException` |
 | Network error | `APIConnectionException` |
 
-##  Retries
+## Retries
 
 Certain errors are automatically retried two times by default, with a short exponential backoff.
 
@@ -148,7 +148,7 @@ $result = $client->messages->create(
 
 
 
-##  Pagination
+## Pagination
 
 List methods in the Claude API are paginated.
 
@@ -171,9 +171,9 @@ foreach ($page->pagingEachItem() as $item) {
 
 
 
-##  Advanced usage
+## Advanced usage
 
-###  Undocumented properties
+### Undocumented properties
 
 You can send undocumented parameters to any endpoint, and read undocumented response properties, as follows:
 
@@ -196,11 +196,11 @@ $message = $client->messages->create(
 
 
 
-###  Undocumented request parameters
+### Undocumented request parameters
 
 If you want to explicitly send an extra parameter, you can do so with the `extraQueryParams`, `extraBodyParams`, and `extraHeaders` options under `RequestOptions::with()` when making a request, as seen in the preceding example.
 
-###  Undocumented endpoints
+### Undocumented endpoints
 
 To make requests to undocumented endpoints while retaining the benefit of authentication, retries, and other client features, you can make requests using `client->request`, as follows:
 
@@ -218,7 +218,7 @@ $response = $client->request(
 
 
 
-##  Platform integrations
+## Platform integrations
 
 The PHP SDK supports the following platforms:
 
@@ -230,13 +230,13 @@ The PHP SDK supports the following platforms:
 
 Use `MantleClient` for new projects; `Anthropic\Bedrock\Client` remains for existing applications using the Bedrock `InvokeModel` API.
 
-##  Semantic versioning
+## Semantic versioning
 
 This package follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions. As the library is in initial development and has a major version of `0`, APIs might change at any time.
 
 This package considers improvements to the (non-runtime) PHPDoc type definitions to be non-breaking changes.
 
-##  Additional resources
+## Additional resources
 
 - [GitHub repository](https://github.com/anthropics/anthropic-sdk-php)
 - [Packagist](https://packagist.org/packages/anthropic-ai/sdk)

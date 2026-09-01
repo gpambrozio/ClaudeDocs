@@ -14,7 +14,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
 ##### Path parameters
 
-role\_id: string
+role\_id: string
 
 ID of the RBAC Role.
 
@@ -22,27 +22,27 @@ ID of the RBAC Role.
 
 
 
-RbacRole object{ id, created\_at, name, 2 more }
+RbacRole object{ id, created\_at, name, 2 more }
 
-id: string
+id: string
 
 ID of the RBAC Role.
 
 
 
-created\_at: string
+created\_at: string
 
 RFC 3339 datetime string indicating when the RBAC Role was created.
 
 formatdate-time
 
-name: string
+name: string
 
 Name of the RBAC Role.
 
 
 
-type: "rbac\_role"
+type: "rbac\_role"
 
 Object type.
 
@@ -52,19 +52,15 @@ defaultrbac\_role
 
 
 
-updated\_at: string
+updated\_at: string
 
 RFC 3339 datetime string indicating when the RBAC Role was last updated.
 
 formatdate-time
 
-
+Get RBAC Role
 
-### Get RBAC Role
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/rbac_roles/$ROLE_ID \

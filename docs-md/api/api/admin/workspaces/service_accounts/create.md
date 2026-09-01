@@ -22,7 +22,7 @@ Console session; Admin API keys are not accepted.
 
 ##### Path parameters
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the workspace.
 
@@ -30,7 +30,7 @@ ID of the workspace.
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -38,75 +38,71 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 ##### Body
 
-service\_account\_id: string
+service\_account\_id: string
 
 Tagged service account ID to add.
 
 
 
-workspace\_role: "workspace\_admin" or "workspace\_developer" or "workspace\_restricted\_developer" or "workspace\_user"
+workspace\_role: "workspace\_admin" or "workspace\_developer" or "workspace\_restricted\_developer" or "workspace\_user"
 
 Role to assign to the service account in this workspace.
 
 One of the following:
 
-"workspace\_admin"
+"workspace\_admin"
 
-"workspace\_developer"
+"workspace\_developer"
 
-"workspace\_restricted\_developer"
+"workspace\_restricted\_developer"
 
-"workspace\_user"
+"workspace\_user"
 
 ##### Returns
 
-created\_by\_actor\_id: string or null
+created\_by\_actor\_id: string or null
 
 Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
 
-implicit: boolean or null
+implicit: boolean or null
 
 True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
 
-service\_account\_id: string
+service\_account\_id: string
 
 Tagged service account ID (`svac_...`).
 
 
 
-type: "service\_account\_workspace\_member"
+type: "service\_account\_workspace\_member"
 
 defaultservice\_account\_workspace\_member
 
-workspace\_id: string
+workspace\_id: string
 
 Tagged workspace ID (`wrkspc_...`).
 
 
 
-workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
+workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
 
 Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
 
 One of the following:
 
-"workspace\_admin"
+"workspace\_admin"
 
-"workspace\_billing"
+"workspace\_billing"
 
-"workspace\_developer"
+"workspace\_developer"
 
-"workspace\_restricted\_developer"
+"workspace\_restricted\_developer"
 
-"workspace\_user"
+"workspace\_user"
 
-
+Create Service Account Workspace Member
 
-### Create Service Account Workspace Member
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/service_accounts \

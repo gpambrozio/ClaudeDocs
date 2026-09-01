@@ -6,14 +6,14 @@
 
 Fast mode delivers up to 2.5x higher output tokens per second from Claude Opus 5 and Claude Opus 4.8 at premium pricing. Set `speed: "fast"` with the `fast-mode-2026-02-01` beta header on your request to opt in.
 
-##  Supported models
+## Supported models
 
 Fast mode is supported on the following models:
 
 - Claude Opus 5 (claude-opus-5)
 - Claude Opus 4.8 (claude-opus-4-8)
 
-##  How fast mode works
+## How fast mode works
 
 Fast mode runs the same model with a faster inference configuration. There is no change to intelligence or capabilities.
 
@@ -22,7 +22,7 @@ Fast mode runs the same model with a faster inference configuration. There is no
 - Same model weights and behavior (not a different model)
 - Compatible with [streaming](build-with-claude/streaming.md), where the OTPS gain is most visible
 
-##  Basic usage
+## Basic usage
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -46,7 +46,7 @@ for block in response.content:
         print(block.text)
 ```
 
-##  Pricing
+## Pricing
 
 Fast mode is priced at a multiplier on standard rates across the full context window, including requests over 200k input tokens. The following table shows fast mode pricing for the supported models:
 
@@ -61,7 +61,7 @@ Fast mode pricing stacks with other pricing modifiers:
 
 For complete pricing details, see the [Pricing](about-claude/pricing.md) page.
 
-##  Rate limits
+## Rate limits
 
 Fast mode has a dedicated rate limit that is separate from standard Opus rate limits. When your fast mode rate limit is exceeded, the API returns a `429` error with a `retry-after` header indicating when capacity will be available.
 
@@ -78,7 +78,7 @@ The response includes headers that indicate your fast mode rate limit status:
 
 For tier-specific rate limits, see the [Rate limits](api/rate-limits.md) page.
 
-##  Checking which speed was used
+## Checking which speed was used
 
 The response `usage` object includes a `speed` field that indicates which speed was used, either `"fast"` or `"standard"`. Requesting `speed: "fast"` on a [model that doesn't support fast mode](#supported-models) returns an error, and so does exceeding fast mode's rate limits or capacity (a `429` or `529`). When a request with `speed: "fast"` succeeds, `usage.speed` is `"fast"`. If you are using Claude Opus 4.6 and request fast mode, its behavior is unique. Instead of returning an error like other models that don't support fast mode, it silently switches to standard speed. Though there is no error with Opus 4.6, the `speed` field accurately shows `"standard"`.
 
@@ -120,13 +120,13 @@ Output
 
 To track fast mode usage and costs across your organization, see the [Usage and Cost API](manage-claude/usage-cost-api.md).
 
-##  Retries and fallback
+## Retries and fallback
 
-###  Automatic retries
+### Automatic retries
 
 When fast mode rate limits are exceeded, the API returns a `429` error with a `retry-after` header. The Anthropic SDKs automatically retry these requests up to 2 times by default (configurable with `max_retries`), waiting for the server-specified delay before each retry. Because fast mode uses continuous token replenishment, the `retry-after` delay is typically short and requests succeed once capacity is available.
 
-###  Falling back to standard speed
+### Falling back to standard speed
 
 If you'd prefer to fall back to standard speed rather than wait for fast mode capacity, catch the rate limit error and retry without `speed: "fast"`. Set `max_retries` to `0` on the initial fast request to skip automatic retries and fail immediately on rate limit errors.
 
@@ -171,7 +171,7 @@ message = create_message_with_fast_fallback(
 )
 ```
 
-##  Considerations
+## Considerations
 
 - **Prompt caching:** Switching between fast and standard speed invalidates the prompt cache. Requests at different speeds do not share cached prefixes.
 - **Supported models:** Fast mode is supported on Claude Opus 5 and Claude Opus 4.8. See [Supported models](#supported-models).
@@ -180,7 +180,7 @@ message = create_message_with_fast_fallback(
 - **Priority Tier:** Fast mode is not available with a [Priority Tier](api/service-tiers.md) commitment.
 - **Claude Platform on AWS:** Fast mode is not currently available on [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md).
 
-##  Next steps
+## Next steps
 
 
 

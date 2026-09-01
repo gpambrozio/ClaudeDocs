@@ -18,7 +18,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
 ##### Path parameters
 
-message\_batch\_id: string
+message\_batch\_id: string
 
 ID of the Message Batch.
 
@@ -26,15 +26,11 @@ ID of the Message Batch.
 
 
 
-MessageBatch object{ id, archived\_at, cancel\_initiated\_at, 7 more }
+MessageBatch object{ id, archived\_at, cancel\_initiated\_at, 7 more }
 
-
+Cancel a Message Batch
 
-### Cancel a Message Batch
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/cancel \

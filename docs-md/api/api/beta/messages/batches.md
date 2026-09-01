@@ -36,15 +36,15 @@ cURL
 
 
 
-BetaDeletedMessageBatch object{ id, type }
+BetaDeletedMessageBatch object{ id, type }
 
-id: string
+id: string
 
 ID of the Message Batch.
 
 
 
-type: "message\_batch\_deleted"
+type: "message\_batch\_deleted"
 
 Deleted object type.
 
@@ -54,65 +54,65 @@ defaultmessage\_batch\_deleted
 
 
 
-BetaMessageBatch object{ id, archived\_at, cancel\_initiated\_at, 7 more }
+BetaMessageBatch object{ id, archived\_at, cancel\_initiated\_at, 7 more }
 
 
 
-BetaMessageBatchCanceledResult object{ type }
+BetaMessageBatchCanceledResult object{ type }
 
 
 
-type: "canceled"
+type: "canceled"
 
 defaultcanceled
 
 
 
-BetaMessageBatchErroredResult object{ error, type }
+BetaMessageBatchErroredResult object{ error, type }
 
 
 
-error: [BetaErrorResponse](api/http/beta.md) { error, request\_id, type }
+error: [BetaErrorResponse](api/http/beta.md) { error, request\_id, type }
 
 
 
-error: [BetaError](api/http/beta.md)
+error: [BetaError](api/http/beta.md)
 
 One of the following:
 
-request\_id: string or null
+request\_id: string or null
 
 
 
-type: "error"
+type: "error"
 
 defaulterror
 
 
 
-type: "errored"
+type: "errored"
 
 defaulterrored
 
 
 
-BetaMessageBatchExpiredResult object{ type }
+BetaMessageBatchExpiredResult object{ type }
 
 
 
-type: "expired"
+type: "expired"
 
 defaultexpired
 
 
 
-BetaMessageBatchIndividualResponse object{ custom\_id, result }
+BetaMessageBatchIndividualResponse object{ custom\_id, result }
 
 This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
 
 
-custom\_id: string
+custom\_id: string
 
 Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
 
@@ -120,7 +120,7 @@ Must be unique for each request within the Message Batch.
 
 
 
-result: [BetaMessageBatchResult](api/http/beta/messages/batches.md)
+result: [BetaMessageBatchResult](api/http/beta/messages/batches.md)
 
 Processing result for this request.
 
@@ -130,11 +130,11 @@ One of the following:
 
 
 
-BetaMessageBatchRequestCounts object{ canceled, errored, expired, 2 more }
+BetaMessageBatchRequestCounts object{ canceled, errored, expired, 2 more }
 
 
 
-canceled: number
+canceled: number
 
 Number of requests in the Message Batch that have been canceled.
 
@@ -144,7 +144,7 @@ default0
 
 
 
-errored: number
+errored: number
 
 Number of requests in the Message Batch that encountered an error.
 
@@ -154,7 +154,7 @@ default0
 
 
 
-expired: number
+expired: number
 
 Number of requests in the Message Batch that have expired.
 
@@ -164,7 +164,7 @@ default0
 
 
 
-processing: number
+processing: number
 
 Number of requests in the Message Batch that are processing.
 
@@ -172,7 +172,7 @@ default0
 
 
 
-succeeded: number
+succeeded: number
 
 Number of requests in the Message Batch that have completed successfully.
 
@@ -182,7 +182,7 @@ default0
 
 
 
-BetaMessageBatchResult = [BetaMessageBatchSucceededResult](api/http/beta/messages/batches.md) { message, type } or [BetaMessageBatchErroredResult](api/http/beta/messages/batches.md) { error, type } or [BetaMessageBatchCanceledResult](api/http/beta/messages/batches.md) { type } or [BetaMessageBatchExpiredResult](api/http/beta/messages/batches.md) { type }
+BetaMessageBatchResult = [BetaMessageBatchSucceededResult](api/http/beta/messages/batches.md) { message, type } or [BetaMessageBatchErroredResult](api/http/beta/messages/batches.md) { error, type } or [BetaMessageBatchCanceledResult](api/http/beta/messages/batches.md) { type } or [BetaMessageBatchExpiredResult](api/http/beta/messages/batches.md) { type }
 
 Processing result for this request.
 
@@ -192,15 +192,15 @@ One of the following:
 
 
 
-BetaMessageBatchSucceededResult object{ message, type }
+BetaMessageBatchSucceededResult object{ message, type }
 
 
 
-message: [BetaMessage](api/http/beta/messages.md) { id, container, content, 9 more }
+message: [BetaMessage](api/http/beta/messages.md) { id, container, content, 9 more }
 
 
 
-type: "succeeded"
+type: "succeeded"
 
 defaultsucceeded
 

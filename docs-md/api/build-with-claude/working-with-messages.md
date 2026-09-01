@@ -13,7 +13,7 @@ Anthropic offers two ways to build with Claude, each suited to different use cas
 
 This guide covers common patterns for working with the Messages API, including basic requests, multi-turn conversations, prefill techniques, and vision capabilities. For complete API specifications, see the [Messages API reference](api/messages/create.md). For the managed agent harness instead, see the [Claude Managed Agents overview](managed-agents/overview.md).
 
-##  Basic request and response
+## Basic request and response
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -55,7 +55,7 @@ Output
 
 Refusal responses (`stop_reason: "refusal"`) also include a `stop_details` object identifying the policy category that triggered the refusal, on every model. See [Handling stop reasons](build-with-claude/refusals-and-fallback.md) for the field reference and example handling code.
 
-##  Multiple conversational turns
+## Multiple conversational turns
 
 The Messages API is stateless, which means that you always send the full conversational history to the API. You can use this pattern to build up a conversation over time. Earlier conversational turns don't necessarily need to actually originate from Claude. You can use synthetic `assistant` messages.
 
@@ -101,7 +101,7 @@ Output
 }
 ```
 
-###  System role in messages
+### System role in messages
 
 On Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), Claude Opus 4.8, and Claude Opus 5, you can include messages with `"role": "system"` after a user turn (subject to [placement rules](build-with-claude/mid-conversation-system-messages.md)) to add a new system instruction partway through a conversation. A `system` message cannot be the first entry in `messages`; use the top-level `system` field for instructions that apply from the start.
 
@@ -109,7 +109,7 @@ A mid-conversation system message has the same authority as the top-level `syste
 
 See [Mid-conversation system messages](build-with-claude/mid-conversation-system-messages.md) for the complete guide, including how to combine it with [prompt caching](build-with-claude/prompt-caching.md).
 
-##  Prefilling Claude's response
+## Prefilling Claude's response
 
 You can pre-fill part of Claude's response in the last position of the input messages list. Use this technique to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
@@ -157,7 +157,7 @@ Output
 }
 ```
 
-##  Vision
+## Vision
 
 Claude can read both text and images in requests. You can supply images using the `base64`, `url`, or `file` source types. The `file` source type references an image uploaded through the [Files API](build-with-claude/files.md). Supported media types are `image/jpeg`, `image/png`, `image/gif`, and `image/webp`. See the [vision guide](build-with-claude/vision.md) for more details.
 
@@ -244,7 +244,7 @@ Output
 }
 ```
 
-##  Next steps
+## Next steps
 
 
 

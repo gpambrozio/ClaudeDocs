@@ -14,7 +14,7 @@
 
 
 
-PluginUsage object{ data, next\_page }
+PluginUsage object{ data, next\_page }
 
 Response for GET /v1/organizations/analytics/plugins.
 

@@ -18,7 +18,7 @@ The request is rejected if any workspace still references this config.
 
 
 
-external\_key\_id: string
+external\_key\_id: string
 
 ID of the External Key.
 
@@ -26,23 +26,19 @@ maxLength2048
 
 ##### Returns
 
-id: string
+id: string
 
 ID of the deleted External Key.
 
 
 
-type: "external\_key\_deleted"
+type: "external\_key\_deleted"
 
 defaultexternal\_key\_deleted
 
-
+Delete External Key
 
-### Delete External Key
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID \

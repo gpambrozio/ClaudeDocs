@@ -6,11 +6,11 @@
 
 The Admin API lets you create and manage [Workload Identity Federation](manage-claude/workload-identity-federation.md) resources programmatically: service accounts, federation issuers, and federation rules. Use it to keep your federation configuration in infrastructure as code, provision it from CI, and reproduce it across organizations instead of clicking through the Claude Console. These endpoints share the `/v1/organizations` path prefix with the rest of the [Admin API](manage-claude/admin-api.md).
 
-##  Prerequisites
+## Prerequisites
 
 Every request on this page authenticates with an OAuth bearer token that carries the `org:admin` scope. The scope is granted only to organization members with the admin, owner, or primary owner role, and it grants access to the whole organization: any workspace binding is ignored. There are two ways to obtain a token, and they carry different permissions: a token from your own login acts as a user, whereas a federated token acts as a service account and cannot perform every operation on this page.
 
-###  Interactive (your terminal)
+### Interactive (your terminal)
 
 Log in with the [`ant` CLI](cli-sdks-libraries/cli/quickstart.md) under a dedicated profile, requesting the `org:admin` scope (see [Admin access](cli-sdks-libraries/cli/authentication.md)), then export the bearer token. Logging in with `--profile admin` stores the `org:admin` credential under its own profile name and also makes it the CLI's active profile, and the exported variable applies to every SDK and CLI call in that shell; so use a shell you reserve for administration, unset the variable when you are done, and switch the CLI back with `ant profile activate default`:
 
@@ -27,22 +27,22 @@ Interactive tokens are short-lived; if requests start returning 401, re-run the 
 
 The SDKs and the `ant` CLI read `ANTHROPIC_AUTH_TOKEN` automatically; leave `ANTHROPIC_API_KEY` unset in the same shell, because these endpoints reject API keys and some clients prefer the key when both are set.
 
-###  Workload (CI and automation)
+### Workload (CI and automation)
 
 Create a federation rule with `oauth_scope: org:admin` that targets a service account whose `organization_role` is `admin`. The rule itself must be created in the Claude Console: granting a workload organization-admin access is a deliberate human action, not something automation can bootstrap for itself. The next section walks through this once-per-organization setup.
 
-##  Bootstrap a workload to manage WIF
+## Bootstrap a workload to manage WIF
 
 One Console-created rule is enough to put the rest of your federation configuration under infrastructure as code: grant a single trusted workload the `org:admin` scope, and let that workload manage federation issuers and every workspace-scoped federation rule through this API.
 
 1. 1
 
-   Create the org:admin rule in the Console
+   ### Create the org:admin rule in the Console
 
    In the Claude Console, go to **Settings → Workload identity** and select **Connect workload** to create one federation rule for your automation workload, for example a GitHub Actions workflow in your infrastructure repository. Under **Advanced rule options**, set the rule's OAuth scope to `org:admin`: the wizard then creates the new service account with the Admin organization role (or asks you to pick an existing admin service account as the target).
 2. 2
 
-   Exchange the workload's identity token
+   ### Exchange the workload's identity token
 
    A workload that uses one of the SDKs or the `ant` CLI does not perform the exchange itself. Point the client at the rule with the federation environment variables and construct it with no arguments, exactly as for inference in [Construct the SDK client](manage-claude/workload-identity-federation.md); the client exchanges the identity token on the first request and, before the resulting access token expires, re-reads the identity token and exchanges it again:
 
@@ -63,13 +63,13 @@ One Console-created rule is enough to put the rest of your federation configurat
    A workload that calls the API with curl exchanges the JWT for a short-lived `org:admin` bearer token itself, using the same [token exchange](manage-claude/workload-identity-federation.md) as any other federated workload, and sends it in the `authorization: Bearer` header.
 3. 3
 
-   Manage issuers and workspace-scoped rules through the API
+   ### Manage issuers and workspace-scoped rules through the API
 
    With the client configured (or, for curl, the minted token in `ANTHROPIC_AUTH_TOKEN`), the workload creates and manages your federation configuration using the endpoints on this page.
 
 For the operations a workload-minted token can and cannot perform, see [Permissions and constraints](#permissions-and-constraints). If you already created issuers, service accounts, or rules with the **Connect workload** wizard, list them with the following endpoints and import them into your infrastructure-as-code state instead of recreating them.
 
-##  Authentication
+## Authentication
 
 All endpoints live under `https://api.anthropic.com/v1/organizations/`. Every request to the federation and service-account endpoints needs the API version header and the bearer token:
 
@@ -90,7 +90,7 @@ for service_account in service_accounts:
 
 Admin API keys are not accepted on these endpoints; the Admin API page's `x-api-key` examples do not apply here.
 
-##  Service accounts
+## Service accounts
 
 A [service account](manage-claude/workload-identity-federation.md) (`svac_...`) is the non-human identity that a federated token acts as. Set `organization_role` to `developer`.
 
@@ -162,7 +162,7 @@ To read or update a single service account, use `GET` and `POST` on `/v1/organiz
 
 For complete parameter details and response schemas, see the [Service accounts API reference](api/admin/service_accounts.md).
 
-##  Federation issuers
+## Federation issuers
 
 A [federation issuer](manage-claude/workload-identity-federation.md) (`fdis_...`) registers an OIDC identity provider with your organization. The `jwks` field is a discriminated union that controls how Anthropic fetches the provider's signing keys:
 
@@ -228,7 +228,7 @@ To read or update a single issuer, use `GET` and `POST` on `/v1/organizations/fe
 
 For complete parameter details and response schemas, see the [Federation issuers API reference](api/admin/federation_issuers.md).
 
-##  Federation rules
+## Federation rules
 
 A [federation rule](manage-claude/workload-identity-federation.md) (`fdrl_...`) binds an issuer to a service account: JWTs from the issuer that satisfy the rule's match conditions can mint tokens that act as the rule's target. The `workspace_id` in the create request enables the rule in that workspace at creation; add more workspaces later through the `/federation_rules/{rule_id}/workspaces` sub-resource. Either `workspace_id` or `applies_to_all_workspaces: true` is required on create.
 
@@ -310,17 +310,17 @@ To read or update a single rule, use `GET` and `POST` on `/v1/organizations/fede
 
 For complete parameter details and response schemas, see the [Federation rules API reference](api/admin/federation_rules.md).
 
-##  Permissions and constraints
+## Permissions and constraints
 
 A rule with `oauth_scope: org:admin` must target a service account whose `organization_role` is `admin`. Resource names must match `^[a-z0-9-]+$`, be 1 to 255 characters, and be unique within an organization for each resource type; for the full field-level constraints, see [Validation rules](manage-claude/wif-reference.md).
 
-##  Pagination and archiving
+## Pagination and archiving
 
 The service-account, federation-issuer, and federation-rule list endpoints accept `limit` (1 to 100, default 20) and a `page` cursor taken from the previous response. Pass the response's `next_page` value as the `page` query parameter on the next request. The rule-workspaces sub-resource list returns the full set without pagination. Archived resources are hidden from lists by default; pass `include_archived=true` to include them.
 
 Archiving is a soft delete and is idempotent: archiving an already-archived resource succeeds. Archiving an issuer or a service account returns `400` while a live federation rule still references it; archive the rule first.
 
-##  See also
+## See also
 
 - [Workload Identity Federation](manage-claude/workload-identity-federation.md): concepts and the Console setup walkthrough
 - [WIF reference](manage-claude/wif-reference.md): environment variables, validation rules, OAuth scopes, and error codes

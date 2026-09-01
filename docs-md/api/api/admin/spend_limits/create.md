@@ -16,55 +16,51 @@ group, and organization-level defaults are configured in claude.ai.
 
 ##### Body
 
-amount: string or null
+amount: string or null
 
 Limit amount as a non-negative integer decimal string in the minor unit of the organization's billing currency (cents for USD): "50000" is $500.00. `null` sets an explicit no-limit override for this scope and `period` only — each period resolves independently, so caps for other periods still apply.
 
 
 
-scope: object{ type, user\_id }
+scope: object{ type, user\_id }
 
 Scope selecting a single member of the organization.
 
 
 
-type: "user"
+type: "user"
 
 Scope type. Always `user` for this scope.
 
 defaultuser
 
-user\_id: string
+user\_id: string
 
 Tagged ID of the member the spend limit applies to.
 
 
 
-period: optional "daily" or "monthly" or "weekly"
+period: optional "daily" or "monthly" or "weekly"
 
 One of the following:
 
-"daily"
+"daily"
 
-"monthly"
+"monthly"
 
-"weekly"
+"weekly"
 
 ##### Returns
 
 
 
-SpendLimit object{ id, amount, created\_at, 5 more }
+SpendLimit object{ id, amount, created\_at, 5 more }
 
 A configured spend limit: a cap on metered spend for one scope and period.
 
-
+Set Spend Limit
 
-### Set Spend Limit
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/spend_limits \

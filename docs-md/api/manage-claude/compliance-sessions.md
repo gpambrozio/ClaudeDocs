@@ -25,7 +25,7 @@ Capture of local sessions is tied to the Compliance API being enabled for your o
 - Local sessions in organizations with [HIPAA readiness](manage-claude/api-and-data-retention.md) enabled. No local session data is captured, so the local session endpoints return no sessions for those organizations.
 - Local sessions for which [zero data retention (ZDR)](manage-claude/api-and-data-retention.md) is in effect. These sessions are excluded from list results, and the retrieve and messages endpoints return 404 for them.
 
-Anthropic recommends the Compliance API for retrieving the content of Cowork and Claude Code sessions. The following table compares [local sessions](#retrieve-local-sessions) and [remote sessions](#retrieve-remote-sessions) with the OpenTelemetry-based alternatives, [Cowork's OpenTelemetry logging](https://support.claude.com/en/articles/14477985-monitor-claude-cowork-activity-with-opentelemetry) and [Claude Code monitoring](monitoring-usage.md).
+Anthropic recommends the Compliance API for retrieving session content. The following table compares [local sessions](#retrieve-local-sessions) and [remote sessions](#retrieve-remote-sessions) with the OpenTelemetry-based alternatives available for Cowork and Claude Code, [Cowork's OpenTelemetry logging](https://support.claude.com/en/articles/14477985-monitor-claude-cowork-activity-with-opentelemetry) and [Claude Code monitoring](monitoring-usage.md).
 
 |  | Local sessions (on users' machines) | Remote sessions (in the cloud) | OpenTelemetry logging |
 | --- | --- | --- | --- |
@@ -42,7 +42,7 @@ Anthropic recommends the Compliance API for retrieving the content of Cowork and
 | Host and device metadata (terminal type, workspace paths) | No | No | Yes |
 | Token usage and cost | No; available through the [Claude Enterprise Analytics API](manage-claude/analytics-api.md) | No; available through the [Claude Enterprise Analytics API](manage-claude/analytics-api.md) | Yes |
 
-##  Sessions on users' machines (local sessions)
+## Sessions on users' machines (local sessions)
 
 Local sessions run on users' machines while they are signed in with their Claude Enterprise account: today, Cowork in Claude Desktop, Claude Code (in the terminal, in Claude Desktop, or in an IDE extension), the Claude Science desktop app, and Claude for Microsoft 365 in Excel, PowerPoint, Word, and Outlook.
 
@@ -120,7 +120,7 @@ To fetch one session's metadata directly, pass its ID to `GET /v1/compliance/app
 
 `product_surface` (string or `null`) identifies the product that created the session: `cowork` (Cowork in Claude Desktop on the user's machine), `claude_code` (Claude Code), `claude_science` (Claude Science), or one of `office_agents/excel`, `office_agents/powerpoint`, `office_agents/word`, and `office_agents/outlook` (Claude for Microsoft 365, by app; `office_agents` alone when the app is not identified). New values appear as coverage expands.
 
-###  Retrieve a local session transcript
+### Retrieve a local session transcript
 
 The messages endpoint returns the session's transcript, reconstructed from the captured Claude API calls: user prompts, assistant text, tool calls, and the text portions of tool results, all returned as they were sent apart from size truncation. Nothing masks URLs, credentials, or personal data in that content, so treat transcripts as sensitive. The transcript omits or replaces the following:
 
@@ -279,7 +279,7 @@ Two parameters cap how many bytes of each tool block are returned: `tool_use_inp
 
 Transcript content honors the retention period described under [Sessions on users' machines](#retrieve-local-sessions). When the start of a session has aged past it, the transcript begins with a single `content_unavailable` placeholder with `reason` of `retention_elapsed`, and the retained messages follow. When every call in a session has aged out, the messages endpoint returns [404 Not Found](manage-claude/compliance-errors.md), as it does for sessions in organizations your key cannot read, sessions that do not exist, and sessions for which zero data retention is in effect. A malformed session ID returns [400 Bad Request](manage-claude/compliance-errors.md).
 
-##  Sessions in the cloud (remote sessions)
+## Sessions in the cloud (remote sessions)
 
 Cowork sessions started on claude.ai web or mobile run in the cloud in Anthropic-managed environments. The Compliance API exposes these remote sessions through two endpoints: `GET /v1/compliance/apps/sessions/remote` lists session metadata, and `GET /v1/compliance/apps/sessions/remote/{session_id}/messages` returns one session's transcript. Both require the `read:compliance_user_data` scope, and both count against the shared Compliance API rate limit plus a second request budget specific to these endpoints; see [429 Too Many Requests](manage-claude/compliance-errors.md).
 
@@ -349,7 +349,7 @@ A session is owned by either a user or an agent, never both. For user-owned sess
 
 `product_surface` (string or `null`) identifies the product that created the session. The endpoint currently returns only sessions with `product_surface` of `cowork_remote`: Cowork sessions started on claude.ai web or mobile.
 
-###  Retrieve a remote session transcript
+### Retrieve a remote session transcript
 
 The messages endpoint returns the session's transcript: user prompts, assistant responses, and tool calls and results. Thinking blocks and images are not included. For a coverage summary, see the [Compliance API FAQ](manage-claude/compliance-faq.md); for a table comparing remote sessions with local sessions and Cowork's OpenTelemetry logging, see this page's introduction.
 
@@ -430,11 +430,11 @@ Two parameters cap how many bytes of each tool block are returned: `tool_use_inp
 
 The messages endpoint returns [404 Not Found](manage-claude/compliance-errors.md) for `pending` sessions, sessions that do not exist or have been deleted, and sessions in organizations your key cannot read.
 
-##  Retention and deletion
+## Retention and deletion
 
-The session endpoints are read-only; local and remote sessions cannot be deleted through the Compliance API. Local session transcripts are retained for 6 years by default, or your organization's custom conversation retention period when a finite one is set, as described under [Sessions on users' machines](#retrieve-local-sessions). Remote session transcripts are retained for 6 years. For how these periods sit alongside Anthropic's other retention arrangements, see [API and data retention](manage-claude/api-and-data-retention.md).
+The session endpoints are read-only; local and remote sessions cannot be deleted through the Compliance API. Local session transcripts are retained for 6 years by default, or your organization's custom conversation retention period when a finite one is set, as described under [Sessions on users' machines](#retrieve-local-sessions). Remote session transcripts are retained for 6 years. To learn how these periods sit alongside Anthropic's other retention arrangements, see [API and data retention](manage-claude/api-and-data-retention.md).
 
-##  Next steps
+## Next steps
 
 [Retrieve and delete chats, files, and projects](manage-claude/compliance-content-data.md)
 

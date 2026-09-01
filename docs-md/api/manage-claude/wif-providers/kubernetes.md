@@ -14,7 +14,7 @@ cURL
 kubectl get --raw /.well-known/openid-configuration | jq -r .issuer
 ```
 
-##  Prerequisites
+## Prerequisites
 
 - Familiarity with [WIF concepts](manage-claude/workload-identity-federation.md): service accounts, federation issuers, and federation rules.
 - A Kubernetes cluster with the [`--service-account-issuer`](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/) flag configured on the API server. Most distributions set this by default; kubeadm clusters typically use `https://kubernetes.default.svc.cluster.local`. Your platform team can confirm the value if you don't have direct access to the API server configuration.
@@ -23,7 +23,7 @@ kubectl get --raw /.well-known/openid-configuration | jq -r .issuer
   - You can fetch the JWKS from inside the cluster and register it in `inline` mode (covered in [Configure Anthropic](#configure-anthropic)).
 - Permission to create service accounts, federation issuers, and federation rules in the Claude Console for your Anthropic organization.
 
-##  Configure Kubernetes
+## Configure Kubernetes
 
 Project a service account token into your pod with the audience and lifetime that your federation rule expects. The `serviceAccountToken` projection writes a fresh JWT to the mount path and rotates it before `expirationSeconds` elapses.
 
@@ -69,7 +69,7 @@ spec:
 
 The token issued for this pod carries `sub: "system:serviceaccount:inference:inference-worker"` and `aud: ["https://api.anthropic.com"]`.
 
-##  Configure Anthropic
+## Configure Anthropic
 
 In the Claude Console, open **Settings → Workload identity**, click **Connect workload**, and select the **Kubernetes** tile. The wizard walks you through registering the issuer, creating a service account, and creating a federation rule.
 
@@ -126,7 +126,7 @@ In `inline` mode the `issuer_url` is only compared against the JWT's `iss` claim
 
 Be as specific as the workload allows. Loosen `subject_prefix` to `system:serviceaccount:inference:*` (the trailing `*` makes it a prefix match) only if every service account in the namespace should map to the same Anthropic service account. Add the rule's `fdrl_...` ID to your pod's `ANTHROPIC_FEDERATION_RULE_ID` environment variable.
 
-##  Acquire and use the token
+## Acquire and use the token
 
 The pod spec in [Configure Kubernetes](#configure-kubernetes) sets `ANTHROPIC_IDENTITY_TOKEN_FILE` to the projected mount path, along with `ANTHROPIC_FEDERATION_RULE_ID`, `ANTHROPIC_ORGANIZATION_ID`, `ANTHROPIC_SERVICE_ACCOUNT_ID`, and `ANTHROPIC_WORKSPACE_ID`. With those in place, the SDK reads the token from disk on every exchange and refreshes the Anthropic access token automatically.
 
@@ -150,11 +150,11 @@ message = client.messages.create(
 print(next(block.text for block in message.content if block.type == "text"))
 ```
 
-##  Verify the setup
+## Verify the setup
 
 A successful exchange returns an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. If the exchange fails with the opaque `401` `authentication_error` response (message `Authentication failed`), check the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) for the deny reason and see [Troubleshoot a failed exchange](manage-claude/wif-reference.md); the most common Kubernetes-side cause is a JWKS key mismatch (for `inline` mode, re-fetch with `kubectl get --raw /openid/v1/jwks` and update the issuer).
 
-##  Scope your rule
+## Scope your rule
 
 Lock the rule's `match` block to the narrowest scope that fits your use case:
 
@@ -163,7 +163,7 @@ Lock the rule's `match` block to the narrowest scope that fits your use case:
 - **Use a separate rule per namespace:** Create a distinct rule and Anthropic service account for each namespace rather than widening one rule.
 - **Scope inline-JWKS issuers to one cluster:** When several clusters share an issuer URL, register each cluster's JWKS as its own federation issuer and bind rules to that issuer only.
 
-##  Next steps
+## Next steps
 
 - [Workload Identity Federation](manage-claude/workload-identity-federation.md): concepts, the token-exchange flow, and SDK configuration options.
 - [WIF reference](manage-claude/wif-reference.md): environment variables, JWKS source modes, and rule match modes.

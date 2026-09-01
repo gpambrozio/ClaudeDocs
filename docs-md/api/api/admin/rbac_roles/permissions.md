@@ -14,7 +14,7 @@
 
 
 
-RbacRolePermission object{ action, resource, type }
+RbacRolePermission object{ action, resource, type }
 
 ---
 

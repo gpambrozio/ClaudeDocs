@@ -22,107 +22,107 @@
 
 
 
-WorkspaceCreateResponse object{ created\_by\_actor\_id, implicit, service\_account\_id, 3 more }
+WorkspaceCreateResponse object{ created\_by\_actor\_id, implicit, service\_account\_id, 3 more }
 
-created\_by\_actor\_id: string or null
+created\_by\_actor\_id: string or null
 
 Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
 
-implicit: boolean or null
+implicit: boolean or null
 
 True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
 
-service\_account\_id: string
+service\_account\_id: string
 
 Tagged service account ID (`svac_...`).
 
 
 
-type: "service\_account\_workspace\_member"
+type: "service\_account\_workspace\_member"
 
 defaultservice\_account\_workspace\_member
 
-workspace\_id: string
+workspace\_id: string
 
 Tagged workspace ID (`wrkspc_...`).
 
 
 
-workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
+workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
 
 Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
 
 One of the following:
 
-"workspace\_admin"
+"workspace\_admin"
 
-"workspace\_billing"
+"workspace\_billing"
 
-"workspace\_developer"
+"workspace\_developer"
 
-"workspace\_restricted\_developer"
+"workspace\_restricted\_developer"
 
-"workspace\_user"
+"workspace\_user"
 
 
 
-WorkspaceListResponse object{ created\_by\_actor\_id, implicit, service\_account\_id, 3 more }
+WorkspaceListResponse object{ created\_by\_actor\_id, implicit, service\_account\_id, 3 more }
 
-created\_by\_actor\_id: string or null
+created\_by\_actor\_id: string or null
 
 Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
 
-implicit: boolean or null
+implicit: boolean or null
 
 True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
 
-service\_account\_id: string
+service\_account\_id: string
 
 Tagged service account ID (`svac_...`).
 
 
 
-type: "service\_account\_workspace\_member"
+type: "service\_account\_workspace\_member"
 
 defaultservice\_account\_workspace\_member
 
-workspace\_id: string
+workspace\_id: string
 
 Tagged workspace ID (`wrkspc_...`).
 
 
 
-workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
+workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
 
 Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
 
 One of the following:
 
-"workspace\_admin"
+"workspace\_admin"
 
-"workspace\_billing"
+"workspace\_billing"
 
-"workspace\_developer"
+"workspace\_developer"
 
-"workspace\_restricted\_developer"
+"workspace\_restricted\_developer"
 
-"workspace\_user"
+"workspace\_user"
 
 
 
-WorkspaceDeleteResponse object{ service\_account\_id, type, workspace\_id }
+WorkspaceDeleteResponse object{ service\_account\_id, type, workspace\_id }
 
-service\_account\_id: string
+service\_account\_id: string
 
 Tagged service account ID (`svac_...`) named in the delete request. Removal is idempotent; see the endpoint description for the implicit-membership no-op.
 
 
 
-type: "service\_account\_workspace\_member\_deleted"
+type: "service\_account\_workspace\_member\_deleted"
 
 defaultservice\_account\_workspace\_member\_deleted
 
-workspace\_id: string
+workspace\_id: string
 
 Tagged workspace ID (`wrkspc_...`) named in the delete request.
 

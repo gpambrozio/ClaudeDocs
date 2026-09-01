@@ -16,17 +16,17 @@ cURL
 
 
 
-BetaOrganizationRateLimit object{ id, group\_type, limits, 2 more }
+BetaOrganizationRateLimit object{ id, group\_type, limits, 2 more }
 
 
 
-BetaOrganizationRateLimitValue object{ type, value }
+BetaOrganizationRateLimitValue object{ type, value }
 
-type: string
+type: string
 
 The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
 
-value: number
+value: number
 
 The configured limit value for this limiter type.
 

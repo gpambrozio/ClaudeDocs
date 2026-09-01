@@ -8,7 +8,7 @@ As safer and more capable models launch, Anthropic regularly retires older ones.
 
 This page lists all API deprecations, along with recommended replacements.
 
-##  Overview
+## Overview
 
 Anthropic uses the following terms to describe the model lifecycle:
 
@@ -19,7 +19,7 @@ Anthropic uses the following terms to describe the model lifecycle:
 
 The dates on this page apply to Anthropic-operated platforms: the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). Partner-operated platforms (Amazon Bedrock and Google Cloud) set their own retirement schedules, so a model's lifecycle status and dates can differ. See the [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md), and [Google Cloud](build-with-claude/claude-on-vertex-ai.md) model tables.
 
-##  Migrating to replacements
+## Migrating to replacements
 
 Once a model is deprecated, migrate all usage to a suitable replacement before the retirement date. Requests to models past the retirement date will fail.
 
@@ -27,11 +27,11 @@ To help measure the performance of replacement models on your tasks, consider th
 
 For specific instructions on migrating to the latest Claude models, see the [Migration guide](about-claude/models/migration-guide.md).
 
-##  Notifications
+## Notifications
 
 Anthropic notifies customers with active deployments for models with upcoming retirements, providing at least 60 days' notice before model retirement for publicly released models.
 
-##  Auditing model usage
+## Auditing model usage
 
 To help identify usage of deprecated models, customers can access an audit of their API usage. Follow these steps:
 
@@ -41,14 +41,14 @@ To help identify usage of deprecated models, customers can access an audit of th
 
 This audit will help you locate any instances where your application is still using deprecated models, allowing you to prioritize updates to newer models before the retirement date.
 
-##  Best practices
+## Best practices
 
 1. Regularly check the documentation for updates on model deprecations.
 2. Test your applications with newer models well before the retirement date of your current model.
 3. Update your code to use the recommended replacement model as soon as possible.
 4. Contact the support team if you need assistance with migration or have any questions.
 
-##  Deprecation downsides and mitigations
+## Deprecation downsides and mitigations
 
 Anthropic currently deprecates and retires models to ensure capacity for new model releases. This comes with downsides:
 
@@ -58,7 +58,7 @@ Anthropic currently deprecates and retires models to ensure capacity for new mod
 
 At some point, Anthropic hopes to make past models publicly available again. In the meantime, Anthropic has committed to long-term preservation of model weights and other measures to help mitigate these impacts. For more details, see [Commitments on Model Deprecation and Preservation](https://www.anthropic.com/research/deprecation-commitments).
 
-##  Model status
+## Model status
 
 Current and recently retired models are listed in the following table with their status:
 
@@ -81,11 +81,11 @@ Current and recently retired models are listed in the following table with their
 | claude-3-5-haiku-20241022 | Retired | December 19, 2025 | February 19, 2026 |
 | claude-3-haiku-20240307 | Retired | February 19, 2026 | April 20, 2026 |
 
-##  Deprecation history
+## Deprecation history
 
 All deprecations are listed in the following sections, with the most recent announcements first.
 
-###  2026-06-05: Claude Opus 4.1 model
+### 2026-06-05: Claude Opus 4.1 model
 
 On June 5, 2026, Anthropic notified developers using Claude Opus 4.1 of its upcoming retirement on the Claude API.
 
@@ -93,7 +93,7 @@ On June 5, 2026, Anthropic notified developers using Claude Opus 4.1 of its upco
 | --- | --- | --- |
 | August 5, 2026 | `claude-opus-4-1-20250805` | `claude-opus-4-8` |
 
-###  2026-04-14: Claude Sonnet 4 and Claude Opus 4 models
+### 2026-04-14: Claude Sonnet 4 and Claude Opus 4 models
 
 On April 14, 2026, Anthropic notified developers using Claude Sonnet 4 and Claude Opus 4 models of their upcoming retirement on the Claude API.
 
@@ -102,7 +102,7 @@ On April 14, 2026, Anthropic notified developers using Claude Sonnet 4 and Claud
 | June 15, 2026 | `claude-sonnet-4-20250514` | `claude-sonnet-4-6` |
 | June 15, 2026 | `claude-opus-4-20250514` | `claude-opus-4-8` |
 
-###  2026-02-19: Claude Haiku 3 model
+### 2026-02-19: Claude Haiku 3 model
 
 On February 19, 2026, Anthropic notified developers using Claude Haiku 3 model of its upcoming retirement on the Claude API.
 
@@ -110,7 +110,7 @@ On February 19, 2026, Anthropic notified developers using Claude Haiku 3 model o
 | --- | --- | --- |
 | April 20, 2026 | `claude-3-haiku-20240307` | `claude-haiku-4-5-20251001` |
 
-###  2025-12-19: Claude Haiku 3.5 model
+### 2025-12-19: Claude Haiku 3.5 model
 
 On December 19, 2025, Anthropic notified developers using Claude Haiku 3.5 model of its upcoming retirement on the Claude API.
 
@@ -118,7 +118,7 @@ On December 19, 2025, Anthropic notified developers using Claude Haiku 3.5 model
 | --- | --- | --- |
 | February 19, 2026 | `claude-3-5-haiku-20241022` | `claude-haiku-4-5-20251001` |
 
-###  2025-10-28: Claude Sonnet 3.7 model
+### 2025-10-28: Claude Sonnet 3.7 model
 
 On October 28, 2025, Anthropic notified developers using Claude Sonnet 3.7 model of its upcoming retirement on the Claude API.
 
@@ -126,7 +126,7 @@ On October 28, 2025, Anthropic notified developers using Claude Sonnet 3.7 model
 | --- | --- | --- |
 | February 19, 2026 | `claude-3-7-sonnet-20250219` | `claude-sonnet-4-6` |
 
-###  2025-08-13: Claude Sonnet 3.5 models
+### 2025-08-13: Claude Sonnet 3.5 models
 
 On August 13, 2025, Anthropic notified developers using Claude Sonnet 3.5 models of their upcoming retirement.
 
@@ -135,7 +135,7 @@ On August 13, 2025, Anthropic notified developers using Claude Sonnet 3.5 models
 | October 28, 2025 | `claude-3-5-sonnet-20240620` | `claude-sonnet-4-6` |
 | October 28, 2025 | `claude-3-5-sonnet-20241022` | `claude-sonnet-4-6` |
 
-###  2025-06-30: Claude Opus 3 model
+### 2025-06-30: Claude Opus 3 model
 
 On June 30, 2025, Anthropic notified developers using Claude Opus 3 model of its upcoming retirement.
 
@@ -143,7 +143,7 @@ On June 30, 2025, Anthropic notified developers using Claude Opus 3 model of its
 | --- | --- | --- |
 | January 5, 2026 | `claude-3-opus-20240229` | `claude-opus-4-8` |
 
-###  2025-01-21: Claude 2, Claude 2.1, and Claude Sonnet 3 models
+### 2025-01-21: Claude 2, Claude 2.1, and Claude Sonnet 3 models
 
 On January 21, 2025, Anthropic notified developers using Claude 2, Claude 2.1, and Claude Sonnet 3 models of their upcoming retirements.
 
@@ -153,7 +153,7 @@ On January 21, 2025, Anthropic notified developers using Claude 2, Claude 2.1, a
 | July 21, 2025 | `claude-2.1` | `claude-opus-4-8` |
 | July 21, 2025 | `claude-3-sonnet-20240229` | `claude-sonnet-4-6` |
 
-###  2024-09-04: Claude 1 and Instant models
+### 2024-09-04: Claude 1 and Instant models
 
 On September 4, 2024, Anthropic notified developers using Claude 1 and Instant models of their upcoming retirements.
 
@@ -167,7 +167,7 @@ On September 4, 2024, Anthropic notified developers using Claude 1 and Instant m
 | November 6, 2024 | `claude-instant-1.1` | `claude-haiku-4-5-20251001` |
 | November 6, 2024 | `claude-instant-1.2` | `claude-haiku-4-5-20251001` |
 
-##  API parameter deprecations
+## API parameter deprecations
 
 Anthropic occasionally deprecates request parameters that no longer apply to current models. How the API treats a deprecated parameter depends on the model, as the following table shows. Most SDKs keep deprecated parameters in their request types so existing code continues to type-check. The Python SDK (v1.0 and later) removes `temperature`, `top_p`, and `top_k`, so passing them raises a `TypeError`.
 

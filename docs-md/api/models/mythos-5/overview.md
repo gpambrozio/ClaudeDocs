@@ -6,7 +6,7 @@ Claude Mythos 5 is offered separately, by invitation only, for defensive cyberse
 
 [See Claude Fable 5](models/fable-5/overview.md)
 
-##  How it compares
+## How it compares
 
 | Model | Context | Max output | Price / MTok | Latency | Thinking | Default effort | Knowledge cutoff |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -16,7 +16,7 @@ Claude Mythos 5 is offered separately, by invitation only, for defensive cyberse
 | [Claude Sonnet 5](models/sonnet-5/overview.md) | 1M | 128K | $2 / $10 | Fast | Adaptive | `high` | Jan 2026 |
 | [Claude Haiku 4.5](models/haiku-4-5/overview.md) | 200K | 64K | $1 / $5 | Fastest | Extended | — | Feb 2025 |
 
-##  Specifications
+## Specifications
 
 ### Model IDs
 
@@ -95,7 +95,7 @@ Retirement
 Platforms
 :   Claude API[Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)[Google Cloud](build-with-claude/claude-on-vertex-ai.md)[Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)
 
-##  Reference
+## Reference
 
 
 

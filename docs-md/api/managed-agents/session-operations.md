@@ -6,7 +6,7 @@
 
 Once a session exists, use these operations to read, update, archive, or delete it. See [Start a session](managed-agents/sessions.md) for creating a session and sending it work.
 
-##  Session statuses
+## Session statuses
 
 Sessions progress through these statuses. See [Start a session](managed-agents/sessions.md) for the session lifecycle.
 
@@ -17,7 +17,7 @@ Sessions progress through these statuses. See [Start a session](managed-agents/s
 | `rescheduling` | Transient error occurred, retrying automatically. |
 | `terminated` | Session has ended, either because of an unrecoverable error or because it was archived. A session that finishes its work goes `idle`, not `terminated`. |
 
-##  Updating the agent configuration
+## Updating the agent configuration
 
 You can update a session's `agent.tools` and `agent.mcp_servers`, including permission policies and per-tool web settings such as [domain filters](managed-agents/tools.md), mid-session without creating a new agent version. Updates are session-local and do not propagate back to the underlying agent. Updated `allowed_domains` and `blocked_domains` apply to the rest of the session.
 
@@ -45,11 +45,11 @@ agent:
 YAML
 ```
 
-##  Updating the session budget
+## Updating the session budget
 
 A session [created with a budget](managed-agents/sessions.md) accepts two kinds of budget update: replacing the cap with a new `max_list_cost`, and removing it by setting `budget` to `null`. Both automatically resume work that paused when the session reached its cap. A replacement cap can be higher or lower than the current one, but it must be strictly greater than the session's consumed list cost, and removal is one-way: a non-null `budget` is accepted only on a session that currently has one, so you can't re-add a removed budget or add one to a session created without it. See [Session budgets](managed-agents/budgets.md) for request examples, the error behaviors, and what counts toward list cost.
 
-##  Retrieving a session
+## Retrieving a session
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -59,7 +59,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 ant beta:sessions retrieve --session-id "$SESSION_ID"
 ```
 
-##  Listing sessions
+## Listing sessions
 
 Results from `GET /v1/sessions` are paginated. Use the `limit` query parameter to control the page size. Each response includes a `next_page` cursor; pass it as the `page` parameter on the next request to fetch the following page. `next_page` is `null` when there are no more results.
 
@@ -92,7 +92,7 @@ ant beta:sessions list \
 # Pass that response's prev_page as --page to go back the same way.
 ```
 
-##  Archiving a session
+## Archiving a session
 
 Archive a session to prevent new events from being sent while preserving its history. A `running` session cannot be archived; to archive one, send a [`user.interrupt` event](managed-agents/events-and-streaming.md) by itself and wait for the session to become `idle`.
 
@@ -105,7 +105,7 @@ ant beta:sessions archive \
   --session-id "$SESSION_ID"
 ```
 
-##  Deleting a session
+## Deleting a session
 
 Delete a session to permanently remove its record, events, and associated sandbox. A `running` session cannot be deleted; to delete one, send a [`user.interrupt` event](managed-agents/events-and-streaming.md) by itself and wait for the session to become `idle`.
 

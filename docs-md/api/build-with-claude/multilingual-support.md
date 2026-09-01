@@ -4,13 +4,13 @@
 
 
 
-##  Overview
+## Overview
 
 Claude demonstrates robust multilingual capabilities, with particularly strong performance in zero-shot tasks across languages. The model maintains consistent relative performance across both widely spoken and lower-resource languages, making it a reliable choice for multilingual applications.
 
 Claude is capable in many languages beyond those benchmarked in the following table. Test with any languages relevant to your specific use cases.
 
-##  Performance data
+## Performance data
 
 The following table shows zero-shot chain-of-thought evaluation scores for Claude models across languages, expressed as a percentage relative to English performance (100%):
 
@@ -36,7 +36,7 @@ The following table shows zero-shot chain-of-thought evaluation scores for Claud
 
 ---
 
-##  Set the response language
+## Set the response language
 
 Claude infers the response language from the conversation, but for production applications you should state the target language explicitly. The most reliable place to do this is the system prompt, which keeps the instruction stable across every turn of a conversation.
 
@@ -61,7 +61,7 @@ If your application lets users pick a language at runtime, interpolate that choi
 
 ---
 
-##  Best practices
+## Best practices
 
 When working with multilingual content:
 
@@ -73,13 +73,13 @@ Also follow the general guidance in [Prompt engineering overview](build-with-cla
 
 ---
 
-##  Language support considerations
+## Language support considerations
 
 - Claude processes input and generates output in most world languages that use standard Unicode characters.
 - Performance varies by language, with particularly strong capabilities in widely spoken languages.
 - Even in languages with fewer digital resources, Claude maintains meaningful capabilities.
 
-##  Next steps
+## Next steps
 
 
 

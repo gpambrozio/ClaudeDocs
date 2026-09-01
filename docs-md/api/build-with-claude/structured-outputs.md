@@ -11,7 +11,7 @@ Structured outputs constrain Claude's responses to follow a specific schema, ens
 
 You can use these features independently or together in the same request.
 
-##  Why use structured outputs
+## Why use structured outputs
 
 Without structured outputs, Claude can generate malformed JSON responses or invalid tool inputs that break your applications. Even with careful prompting, you may encounter:
 
@@ -26,7 +26,7 @@ Structured outputs guarantee schema-compliant responses through constrained deco
 - **Type safe:** Guaranteed field types and required fields
 - **Reliable:** No retries needed for schema violations
 
-##  JSON outputs
+## JSON outputs
 
 JSON outputs control Claude's response format, ensuring Claude returns valid JSON matching your schema. Use JSON outputs when you need to:
 
@@ -35,7 +35,7 @@ JSON outputs control Claude's response format, ensuring Claude returns valid JSO
 - Generate structured reports
 - Format API responses
 
-###  Quick start
+### Quick start
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -88,29 +88,29 @@ Output
 }
 ```
 
-###  How it works
+### How it works
 
 1. 1
 
-   Define your JSON schema
+   ### Define your JSON schema
 
    Create a JSON schema that describes the structure you want Claude to follow. The schema uses standard JSON Schema format with some limitations (see [JSON Schema limitations](#json-schema-limitations)).
 2. 2
 
-   Add the output\_config.format parameter
+   ### Add the output\_config.format parameter
 
    Include the `output_config.format` parameter in your API request with `type: "json_schema"` and your schema definition.
 3. 3
 
-   Parse the response
+   ### Parse the response
 
    Claude's response is valid JSON matching your schema, returned in the response's text content block.
 
-###  Working with JSON outputs in SDKs
+### Working with JSON outputs in SDKs
 
 The SDKs provide helpers that make it easier to work with JSON outputs, including schema transformation, automatic validation, and integration with popular schema libraries.
 
-####  Using native schema definitions
+#### Using native schema definitions
 
 Instead of writing raw JSON schemas, you can use familiar schema definition tools in your language:
 
@@ -154,7 +154,7 @@ response = client.messages.parse(
 print(response.parsed_output)
 ```
 
-####  SDK-specific methods
+#### SDK-specific methods
 
 Each SDK provides helpers that make working with structured outputs easier. See individual SDK pages for full details.
 
@@ -218,7 +218,7 @@ response = client.messages.create(
 
 
 
-####  How SDK transformation works
+#### How SDK transformation works
 
 The Python, TypeScript, Ruby, and PHP SDKs automatically transform schemas with unsupported features. The C# and Go SDKs apply the same transformations when the schema is derived from a native type (`Create<T>()` in C#; struct reflection or `BetaJSONSchemaOutputFormat()` on the Go beta API). The transformation steps:
 
@@ -232,7 +232,7 @@ This means Claude receives a simplified schema, but your code still enforces all
 
 **Example:** A Pydantic field with `minimum: 100` becomes a plain integer in the sent schema, but the SDK updates the description to "Must be at least 100" and validates the response against the original constraint.
 
-###  Common use cases
+### Common use cases
 
 ### Data extraction
 
@@ -240,11 +240,11 @@ This means Claude receives a simplified schema, but your code still enforces all
 
 ### API response formatting
 
-##  Strict tool use
+## Strict tool use
 
-For enforcing JSON Schema compliance on tool inputs with grammar-constrained sampling, see [Strict tool use](agents-and-tools/tool-use/strict-tool-use.md).
+To enforce JSON Schema compliance on tool inputs with grammar-constrained sampling, see [Strict tool use](agents-and-tools/tool-use/strict-tool-use.md).
 
-##  Using both features together
+## Using both features together
 
 JSON outputs and strict tool use solve different problems and work together:
 
@@ -303,9 +303,9 @@ response = client.messages.create(
 print(response)
 ```
 
-##  Important considerations
+## Important considerations
 
-###  Grammar compilation and caching
+### Grammar compilation and caching
 
 Structured outputs use constrained sampling with compiled grammar artifacts. This introduces some performance characteristics to be aware of:
 
@@ -316,7 +316,7 @@ Structured outputs use constrained sampling with compiled grammar artifacts. Thi
   - The set of tools in your request (when using both structured outputs and tool use)
   - Changing only `name` or `description` fields does not invalidate the cache
 
-###  Prompt modification and token costs
+### Prompt modification and token costs
 
 When using structured outputs, Claude automatically receives an additional system prompt explaining the expected output format. This means:
 
@@ -324,7 +324,7 @@ When using structured outputs, Claude automatically receives an additional syste
 - The injected prompt costs you tokens like any other system prompt
 - Changing the `output_config.format` parameter will invalidate any [prompt cache](build-with-claude/prompt-caching.md) for that conversation thread
 
-###  JSON Schema limitations
+### JSON Schema limitations
 
 Structured outputs support standard JSON Schema with some limitations. Both JSON outputs and strict tool use share these limitations.
 
@@ -334,7 +334,7 @@ Structured outputs support standard JSON Schema with some limitations. Both JSON
 
 ### Pattern support (regex)
 
-###  Property ordering
+### Property ordering
 
 When using structured outputs, properties in objects maintain their defined ordering from your schema, with one important caveat: **required properties appear first, followed by optional properties**.
 
@@ -378,7 +378,7 @@ This means the output might look like:
 
 If property order in the output is important to your application, mark all properties as required, or account for this reordering in your parsing logic.
 
-###  Invalid outputs
+### Invalid outputs
 
 While structured outputs guarantee schema compliance in most cases, there are scenarios where the output may not match your schema:
 
@@ -414,11 +414,11 @@ Structured outputs don't guarantee the capitalization of string `enum` and `cons
 
 The output may contain `"Conversation Topic 3"` (capital "T") even though that exact value isn't in the enum. The response completes normally, with no error and no special `stop_reason`. This applies to both JSON outputs and strict tool use. Compare enum values case-insensitively, and avoid enum values that differ only in capitalization.
 
-###  Schema complexity limits
+### Schema complexity limits
 
 Structured outputs work by compiling your JSON schemas into a grammar that constrains Claude's output. More complex schemas produce larger grammars that take longer to compile. To protect against excessive compilation times, the API enforces several complexity limits.
 
-####  Explicit limits
+#### Explicit limits
 
 The following limits apply to all requests with `output_config.format` or `strict: true`:
 
@@ -428,13 +428,13 @@ The following limits apply to all requests with `output_config.format` or `stric
 | Optional parameters | 24 | Total optional parameters across all strict tool schemas and JSON output schemas. Each parameter not listed in `required` counts toward this limit. |
 | Parameters with union types | 16 | Total parameters that use `anyOf` or type arrays (for example, `"type": ["string", "null"]`) across all strict schemas. These are especially expensive because they create exponential compilation cost. |
 
-####  Additional internal limits
+#### Additional internal limits
 
 Beyond the explicit limits in the preceding table, there are additional internal limits on the compiled grammar size. These limits exist because schema complexity doesn't reduce to a single dimension: features like optional parameters, union types, nested objects, and number of tools interact with each other in ways that can make the compiled grammar disproportionately large.
 
 When these limits are exceeded, you'll receive a 400 error with the message "Schema is too complex for compilation." These errors mean the combined complexity of your schemas exceeds what can be efficiently compiled, even if each individual limit in the preceding table is satisfied. As a final stop-gap, the API also enforces a **compilation timeout of 180 seconds**. Schemas that pass all explicit checks but produce very large compiled grammars may hit this timeout.
 
-####  Tips for reducing schema complexity
+#### Tips for reducing schema complexity
 
 If you're hitting complexity limits, try these strategies in order:
 
@@ -445,7 +445,7 @@ If you're hitting complexity limits, try these strategies in order:
 
 For persistent issues with valid schemas, [contact support](https://support.claude.com/en/articles/9015913-how-to-get-support) with your schema definition.
 
-##  Data retention
+## Data retention
 
 Prompts and responses are processed with ZDR when using structured outputs. However, the JSON schema itself is temporarily cached for up to 24 hours since last use for optimization purposes. No prompt or response data is retained beyond the API response.
 
@@ -453,7 +453,7 @@ Structured outputs are HIPAA eligible, but **PHI must not be included in JSON sc
 
 For ZDR and HIPAA eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
 
-##  Feature compatibility
+## Feature compatibility
 
 **Works with:**
 
@@ -467,7 +467,7 @@ For ZDR and HIPAA eligibility across all features, see [API and data retention](
 - **[Citations](build-with-claude/citations.md):** Citations require interleaving citation blocks with text, which conflicts with strict JSON schema constraints. Returns 400 error if citations enabled with `output_config.format`.
 - **Message Prefilling:** Incompatible with JSON outputs
 
-##  Next steps
+## Next steps
 
 [Citations](build-with-claude/citations.md)
 

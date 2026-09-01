@@ -20,7 +20,7 @@ accepted.
 
 ##### Path parameters
 
-federation\_issuer\_id: string
+federation\_issuer\_id: string
 
 ID of the federation issuer to archive.
 
@@ -28,7 +28,7 @@ ID of the federation issuer to archive.
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -38,20 +38,16 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 
 
-FederationIssuer object{ id, archived\_at, archived\_by\_actor\_id, 12 more }
+FederationIssuer object{ id, archived\_at, archived\_by\_actor\_id, 12 more }
 
 Registered external OIDC identity provider.
 
 Records an external IdP the organization trusts for the RFC 7523
 jwt-bearer grant. The `issuer_url` must match the JWT `iss` claim exactly.
 
-
+Archive Federation Issuer
 
-### Archive Federation Issuer
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/federation_issuers/$FEDERATION_ISSUER_ID/archive \

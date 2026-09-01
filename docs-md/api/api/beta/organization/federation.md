@@ -8,7 +8,7 @@ cURL
 
 # Federation
 
-#### Federation[Issuers](api/http/beta/organization/federation/issuers.md)
+#### Federation[Issuers](api/http/beta/organization/federation/issuers.md)
 
 ##### [Create Federation Issuer](api/http/beta/organization/federation/issuers/create.md)
 
@@ -30,7 +30,7 @@ cURL
 
 POST/v1/organizations/federation\_issuers/{federation\_issuer\_id}/archive
 
-#### Federation[Rules](api/http/beta/organization/federation/rules.md)
+#### Federation[Rules](api/http/beta/organization/federation/rules.md)
 
 ##### [Create Federation Rule](api/http/beta/organization/federation/rules/create.md)
 
@@ -52,7 +52,7 @@ cURL
 
 POST/v1/organizations/federation\_rules/{federation\_rule\_id}/archive
 
-#### FederationRules[Workspaces](api/http/beta/organization/federation/rules/workspaces.md)
+#### FederationRules[Workspaces](api/http/beta/organization/federation/rules/workspaces.md)
 
 ##### [Add Federation Rule Workspace](api/http/beta/organization/federation/rules/workspaces/add.md)
 

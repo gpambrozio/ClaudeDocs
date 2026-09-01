@@ -32,7 +32,7 @@ cURL
 
 
 
-BetaFederationRule object{ id, applies\_to\_all\_workspaces, archived\_at, 17 more }
+BetaFederationRule object{ id, applies\_to\_all\_workspaces, archived\_at, 17 more }
 
 Authorization rule binding an external OIDC identity to Anthropic.
 
@@ -47,7 +47,7 @@ this.
 
 
 
-BetaFederationRuleMatch object{ audience, claims, condition, subject\_prefix }
+BetaFederationRuleMatch object{ audience, claims, condition, subject\_prefix }
 
 Does the incoming JWT qualify?
 
@@ -57,19 +57,19 @@ or `condition` is required; `audience` alone is not sufficient.
 
 
 
-audience: optional string or null
+audience: optional string or null
 
 Exact match against the `aud` claim (any element if array). When omitted, the JWT's `aud` must still equal Anthropic's expected audience for the issuer; setting this field overrides that default.
 
 maxLength1024
 
-claims: optional map[string] or null
+claims: optional map[string] or null
 
 Exact-match `{claim: value}` pairs against top-level claims. Only string-valued claims can be matched; use `condition` for non-string claims.
 
 
 
-condition: optional string or null
+condition: optional string or null
 
 CEL expression over claims for logic the structural fields can't express. Must evaluate to a boolean and may reference only the `claims` variable; a constant-true expression (such as `true`) is rejected with 400.
 
@@ -77,7 +77,7 @@ maxLength4096
 
 
 
-subject\_prefix: optional string or null
+subject\_prefix: optional string or null
 
 Match the verified JWT `sub` claim. Exact match unless the value ends with `*`, in which case it is a prefix match. Example: `repo:my-org/my-repo:ref:refs/heads/main`.
 
@@ -85,55 +85,55 @@ maxLength1024
 
 
 
-BetaFederationRuleWorkspace object{ created\_at, created\_by\_actor\_id, federation\_rule\_id, 3 more }
+BetaFederationRuleWorkspace object{ created\_at, created\_by\_actor\_id, federation\_rule\_id, 3 more }
 
 
 
-created\_at: string
+created\_at: string
 
 When this workspace was enabled for the rule.
 
 formatdate-time
 
-created\_by\_actor\_id: string or null
+created\_by\_actor\_id: string or null
 
 Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
 
-federation\_rule\_id: string
+federation\_rule\_id: string
 
 Tagged ID of the federation rule.
 
 
 
-type: "federation\_rule\_workspace"
+type: "federation\_rule\_workspace"
 
 defaultfederation\_rule\_workspace
 
-workspace\_id: string
+workspace\_id: string
 
 Tagged ID of the workspace this rule is enabled for.
 
-workspace\_name: string or null
+workspace\_name: string or null
 
 Workspace display name. Populated when listing; null in the enable response.
 
 
 
-BetaServiceAccountTarget object{ service\_account\_id, type, service\_account\_name }
+BetaServiceAccountTarget object{ service\_account\_id, type, service\_account\_name }
 
 Bind to a fixed service account by ID.
 
-service\_account\_id: string
+service\_account\_id: string
 
 Tagged ID of the service account to mint tokens for.
 
-type: "service\_account"
+type: "service\_account"
 
-service\_account\_name: optional string or null
+service\_account\_name: optional string or null
 
 Service account's display name at read time. Ignored on writes.
 
-#### Rules[Workspaces](api/http/beta/organization/federation/rules/workspaces.md)
+#### Rules[Workspaces](api/http/beta/organization/federation/rules/workspaces.md)
 
 ##### [Add Federation Rule Workspace](api/http/beta/organization/federation/rules/workspaces/add.md)
 

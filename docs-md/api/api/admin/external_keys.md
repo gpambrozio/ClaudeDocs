@@ -34,7 +34,7 @@
 
 
 
-ExternalKeyCreateResponse object{ id, attachment, created\_at, 5 more }
+ExternalKeyCreateResponse object{ id, attachment, created\_at, 5 more }
 
 CMEK external key config belonging to the caller's organization.
 
@@ -44,7 +44,7 @@ workspace references it, the provider fields become effectively immutable
 
 
 
-ExternalKeyRetrieveResponse object{ id, attachment, created\_at, 5 more }
+ExternalKeyRetrieveResponse object{ id, attachment, created\_at, 5 more }
 
 CMEK external key config belonging to the caller's organization.
 
@@ -54,7 +54,7 @@ workspace references it, the provider fields become effectively immutable
 
 
 
-ExternalKeyUpdateResponse object{ id, attachment, created\_at, 5 more }
+ExternalKeyUpdateResponse object{ id, attachment, created\_at, 5 more }
 
 CMEK external key config belonging to the caller's organization.
 
@@ -64,7 +64,7 @@ workspace references it, the provider fields become effectively immutable
 
 
 
-ExternalKeyListResponse object{ id, attachment, created\_at, 5 more }
+ExternalKeyListResponse object{ id, attachment, created\_at, 5 more }
 
 CMEK external key config belonging to the caller's organization.
 
@@ -74,46 +74,46 @@ workspace references it, the provider fields become effectively immutable
 
 
 
-ExternalKeyDeleteResponse object{ id, type }
+ExternalKeyDeleteResponse object{ id, type }
 
-id: string
+id: string
 
 ID of the deleted External Key.
 
 
 
-type: "external\_key\_deleted"
+type: "external\_key\_deleted"
 
 defaultexternal\_key\_deleted
 
 
 
-ExternalKeyValidateResponse object{ error, status, type }
+ExternalKeyValidateResponse object{ error, status, type }
 
 Result of a validation roundtrip against the customer's KMS.
 
 HTTP 200 for both outcomes — the operation completed; `status` says
 whether the key works.
 
-error: string or null
+error: string or null
 
 Error message when status is `failure`. Null otherwise.
 
 
 
-status: "failure" or "success"
+status: "failure" or "success"
 
 `success` — encrypt/decrypt roundtrip succeeded. `failure` — the roundtrip failed or timed out; see `error`.
 
 One of the following:
 
-"failure"
+"failure"
 
-"success"
+"success"
 
 
 
-type: "external\_key\_validation"
+type: "external\_key\_validation"
 
 defaultexternal\_key\_validation
 

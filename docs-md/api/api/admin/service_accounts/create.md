@@ -23,7 +23,7 @@ workload may only create `developer`-role service accounts.
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -33,7 +33,7 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 
 
-name: string
+name: string
 
 Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
@@ -43,7 +43,7 @@ minLength1
 
 
 
-description: optional string or null
+description: optional string or null
 
 Optional free-text description.
 
@@ -51,34 +51,30 @@ maxLength2000
 
 
 
-organization\_role: optional "admin" or "developer"
+organization\_role: optional "admin" or "developer"
 
 Org-level role. Defaults to `developer`.
 
 One of the following:
 
-"admin"
+"admin"
 
-"developer"
+"developer"
 
 ##### Returns
 
 
 
-ServiceAccount object{ id, archived\_at, archived\_by\_actor\_id, 8 more }
+ServiceAccount object{ id, archived\_at, archived\_by\_actor\_id, 8 more }
 
 Named non-human identity within the caller's organization.
 
 A service account is a pure identity: name + org. Authorization lives on
 whatever references it (federation rules).
 
-
+Create Service Account
 
-### Create Service Account
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/service_accounts \

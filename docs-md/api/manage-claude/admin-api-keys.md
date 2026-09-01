@@ -8,7 +8,7 @@ An Admin API key authenticates every API in the **Admin** section of this guide:
 
 Where you create the key depends on which Claude product your organization uses.
 
-##  Which key do you need?
+## Which key do you need?
 
 | Your organization | Create the key in | Key prefix | Who can create it | Works with |
 | --- | --- | --- | --- | --- |
@@ -17,53 +17,53 @@ Where you create the key depends on which Claude product your organization uses.
 
 A key created in one organization cannot be used to manage a different organization. If your company uses both Claude Console and Claude Enterprise, create one key in each.
 
-##  Create a key for a Claude Console organization
+## Create a key for a Claude Console organization
 
 1. 1
 
-   Sign in as an organization admin
+   ### Sign in as an organization admin
 
    Only organization members with the **admin** role can create Admin API keys. See [Organization roles and permissions](manage-claude/admin-api.md).
 2. 2
 
-   Open Admin keys settings
+   ### Open Admin keys settings
 
    Go to [Claude Console > Settings > Admin keys](https://platform.claude.com/settings/admin-keys).
 3. 3
 
-   Create the key
+   ### Create the key
 
    Click **Create key**, give it a name, choose a [key expiration](manage-claude/authentication.md), and click **Create**. Claude Console keys do not have selectable scopes; every key carries full access to all endpoints that accept Admin API keys (the service-account and federation endpoints noted at the top of this page do not accept Admin API keys).
 4. 4
 
-   Copy and store the secret
+   ### Copy and store the secret
 
    Copy the displayed secret (starting with `sk-ant-admin01-`) and store it in your secrets manager. The full secret is shown only once.
 
-##  Create a key for a Claude Enterprise organization
+## Create a key for a Claude Enterprise organization
 
 1. 1
 
-   Sign in as the primary owner or an organization owner
+   ### Sign in as the primary owner or an organization owner
 
    The **primary owner** of the Claude Enterprise parent organization can create a key that can access every linked organization, or one restricted to a single organization. An **organization owner** can create a key with Compliance API scopes only, restricted to their own organization.
 2. 2
 
-   Open API settings
+   ### Open API settings
 
    Go to [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access) and find the **Keys** section.
 3. 3
 
-   Click + Create key
+   ### Click + Create key
 
    Name the key and select the scopes you need from the [scopes table](#choose-scopes-for-a-claude-enterprise-key). The primary owner can combine scopes from different APIs (for example, `read:analytics` and `read:spend_limits`) on a single key.
 4. 4
 
-   Copy and store the secret
+   ### Copy and store the secret
 
    Copy the displayed secret (starting with `sk-ant-api01-`) and store it in your secrets manager. The full secret is shown only once.
 
-##  Choose scopes for a Claude Enterprise key
+## Choose scopes for a Claude Enterprise key
 
 When you create a Claude Enterprise key, select every scope that the APIs you plan to call require. Scopes are fixed at creation; to add a scope later, create a new key.
 
@@ -77,20 +77,20 @@ When you create a Claude Enterprise key, select every scope that the APIs you pl
 | [Spend Limits API](manage-claude/spend-limits-api.md): set or clear per-user spend limits; approve or deny increase requests | `write:spend_limits` |
 | [Claude Enterprise Analytics API](manage-claude/analytics-api.md): engagement, adoption, cost, and usage reports | `read:analytics` |
 | [Compliance API Activity Feed](manage-claude/compliance-activity-feed.md): organization-wide activity events | `read:compliance_activities` |
-| [Compliance API chat, file, and project endpoints](manage-claude/compliance-content-data.md) and [Compliance API session endpoints](manage-claude/compliance-sessions.md): read chats, files, projects, Cowork and Claude Code session transcripts, and [organization users](manage-claude/compliance-org-data.md) | `read:compliance_user_data` |
+| [Compliance API chat, file, and project endpoints](manage-claude/compliance-content-data.md) and [Compliance API session endpoints](manage-claude/compliance-sessions.md): read chats, files, projects, session transcripts, and [organization users](manage-claude/compliance-org-data.md) | `read:compliance_user_data` |
 | [Compliance API chat, file, and project endpoints](manage-claude/compliance-content-data.md): delete chats, files, and projects | `delete:compliance_user_data` |
 | [Compliance API organization endpoints](manage-claude/compliance-org-data.md): read organization metadata and effective settings | `read:compliance_org_data` |
 | Admin API [user management](manage-claude/user-management.md) read endpoints and every Compliance API read endpoint, with a single read-only scope (for security-audit integrations; does not include the Spend Limits or Analytics APIs) | `read:org_audit` |
 
 The Compliance and Analytics APIs must be enabled for your organization before keys with those scopes can be used. See [Set up the Compliance API](manage-claude/compliance-api-access.md) and [Get access to the Claude Enterprise Analytics API](manage-claude/analytics-api.md).
 
-##  Use the key
+## Use the key
 
 Pass the key in the `x-api-key` header on every request. See each API's documentation for complete request examples.
 
 A call that exceeds the key's scopes returns `403 Forbidden` with a message listing the scopes the key has and the scopes the endpoint needs.
 
-##  Next steps
+## Next steps
 
 [Admin API](manage-claude/admin-api.md)
 

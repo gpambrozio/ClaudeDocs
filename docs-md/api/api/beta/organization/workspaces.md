@@ -32,45 +32,45 @@ cURL
 
 
 
-BetaAllowedInferenceGeo = "global" or "us"
+BetaAllowedInferenceGeo = "global" or "us"
 
 One of the following:
 
-"global"
+"global"
 
-"us"
-
-
-
-BetaDataResidency object{ allowed\_inference\_geos, default\_inference\_geo, workspace\_geo }
+"us"
 
 
 
-allowed\_inference\_geos: array of string or "unrestricted"
+BetaDataResidency object{ allowed\_inference\_geos, default\_inference\_geo, workspace\_geo }
+
+
+
+allowed\_inference\_geos: array of string or "unrestricted"
 
 Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
 One of the following:
 
-Geos = array of string
+Geos = array of string
 
-Unrestricted = "unrestricted"
+Unrestricted = "unrestricted"
 
-default\_inference\_geo: string
+default\_inference\_geo: string
 
 Default inference geo applied when requests omit the parameter.
 
-workspace\_geo: string
+workspace\_geo: string
 
 Geographic region for workspace data storage. Immutable after creation.
 
 
 
-BetaDataResidencyCreateConfig object{ allowed\_inference\_geos, default\_inference\_geo, workspace\_geo }
+BetaDataResidencyCreateConfig object{ allowed\_inference\_geos, default\_inference\_geo, workspace\_geo }
 
 
 
-allowed\_inference\_geos: optional array of [BetaAllowedInferenceGeo](api/http/beta/organization/workspaces.md) or "unrestricted" or null
+allowed\_inference\_geos: optional array of [BetaAllowedInferenceGeo](api/http/beta/organization/workspaces.md) or "unrestricted" or null
 
 Permitted inference geo values. Defaults to 'unrestricted' if omitted, which allows all geos. Use the string 'unrestricted' to allow all geos, or a list of specific geos.
 
@@ -78,39 +78,39 @@ One of the following:
 
 
 
-Geos = array of [BetaAllowedInferenceGeo](api/http/beta/organization/workspaces.md)
+Geos = array of [BetaAllowedInferenceGeo](api/http/beta/organization/workspaces.md)
 
 One of the following:
 
-"global"
+"global"
 
-"us"
+"us"
 
-Unrestricted = "unrestricted"
+Unrestricted = "unrestricted"
 
 
 
-default\_inference\_geo: optional "global" or "us" or null
+default\_inference\_geo: optional "global" or "us" or null
 
 Default inference geo applied when requests omit the parameter. Defaults to 'global' if omitted. Must be a member of `allowed_inference_geos` unless `allowed_inference_geos` is `"unrestricted"`.
 
 One of the following:
 
-"global"
+"global"
 
-"us"
+"us"
 
-workspace\_geo: optional "us" or null
+workspace\_geo: optional "us" or null
 
 Geographic region for workspace data storage. Immutable after creation. Defaults to 'us' if omitted.
 
 
 
-BetaDataResidencyUpdateConfig object{ allowed\_inference\_geos, default\_inference\_geo }
+BetaDataResidencyUpdateConfig object{ allowed\_inference\_geos, default\_inference\_geo }
 
 
 
-allowed\_inference\_geos: optional array of [BetaAllowedInferenceGeo](api/http/beta/organization/workspaces.md) or "unrestricted" or null
+allowed\_inference\_geos: optional array of [BetaAllowedInferenceGeo](api/http/beta/organization/workspaces.md) or "unrestricted" or null
 
 Permitted inference geo values. Use 'unrestricted' to allow all geos, or a list of specific geos.
 
@@ -118,53 +118,53 @@ One of the following:
 
 
 
-Geos = array of [BetaAllowedInferenceGeo](api/http/beta/organization/workspaces.md)
+Geos = array of [BetaAllowedInferenceGeo](api/http/beta/organization/workspaces.md)
 
 One of the following:
 
-"global"
+"global"
 
-"us"
+"us"
 
-Unrestricted = "unrestricted"
+Unrestricted = "unrestricted"
 
 
 
-default\_inference\_geo: optional "global" or "us" or null
+default\_inference\_geo: optional "global" or "us" or null
 
 Default inference geo applied when requests omit the parameter. Must be a member of `allowed_inference_geos` unless `allowed_inference_geos` is `"unrestricted"`.
 
 One of the following:
 
-"global"
+"global"
 
-"us"
+"us"
 
 
 
-BetaNoBillingWorkspaceRole = "workspace\_admin" or "workspace\_developer" or "workspace\_restricted\_developer" or "workspace\_user"
+BetaNoBillingWorkspaceRole = "workspace\_admin" or "workspace\_developer" or "workspace\_restricted\_developer" or "workspace\_user"
 
 One of the following:
 
-"workspace\_admin"
+"workspace\_admin"
 
-"workspace\_developer"
+"workspace\_developer"
 
-"workspace\_restricted\_developer"
+"workspace\_restricted\_developer"
 
-"workspace\_user"
-
-
-
-BetaWorkspace object{ id, archived\_at, compartment\_id, 7 more }
+"workspace\_user"
 
 
 
-BetaWorkspaceMember object{ type, user\_id, workspace\_id, workspace\_role }
+BetaWorkspace object{ id, archived\_at, compartment\_id, 7 more }
 
 
 
-type: "workspace\_member"
+BetaWorkspaceMember object{ type, user\_id, workspace\_id, workspace\_role }
+
+
+
+type: "workspace\_member"
 
 Object type.
 
@@ -172,55 +172,55 @@ For Workspace Members, this is always `"workspace_member"`.
 
 defaultworkspace\_member
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the Workspace.
 
 
 
-workspace\_role: [BetaWorkspaceRole](api/http/beta/organization/workspaces.md)
+workspace\_role: [BetaWorkspaceRole](api/http/beta/organization/workspaces.md)
 
 Role of the Workspace Member.
 
 One of the following:
 
-"workspace\_admin"
+"workspace\_admin"
 
-"workspace\_billing"
+"workspace\_billing"
 
-"workspace\_developer"
+"workspace\_developer"
 
-"workspace\_restricted\_developer"
+"workspace\_restricted\_developer"
 
-"workspace\_user"
+"workspace\_user"
 
 
 
-BetaWorkspaceRole = "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
+BetaWorkspaceRole = "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
 
 One of the following:
 
-"workspace\_admin"
+"workspace\_admin"
 
-"workspace\_billing"
+"workspace\_billing"
 
-"workspace\_developer"
+"workspace\_developer"
 
-"workspace\_restricted\_developer"
+"workspace\_restricted\_developer"
 
-"workspace\_user"
+"workspace\_user"
 
-#### Workspaces[Rate Limits](api/http/beta/organization/workspaces/rate_limits.md)
+#### Workspaces[Rate Limits](api/http/beta/organization/workspaces/rate_limits.md)
 
 ##### [List Workspace Rate Limits](api/http/beta/organization/workspaces/rate_limits/list.md)
 
 GET/v1/organizations/workspaces/{workspace\_id}/rate\_limits
 
-#### Workspaces[Members](api/http/beta/organization/workspaces/members.md)
+#### Workspaces[Members](api/http/beta/organization/workspaces/members.md)
 
 ##### [List Workspace Members](api/http/beta/organization/workspaces/members/list.md)
 
@@ -242,7 +242,7 @@ One of the following:
 
 DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
-#### Workspaces[Service Accounts](api/http/beta/organization/workspaces/service_accounts.md)
+#### Workspaces[Service Accounts](api/http/beta/organization/workspaces/service_accounts.md)
 
 ##### [List Service Account Workspace Members](api/http/beta/organization/workspaces/service_accounts/list.md)
 

@@ -12,7 +12,7 @@ Retrieve a spend limit by ID.
 
 ##### Path parameters
 
-spend\_limit\_id: string
+spend\_limit\_id: string
 
 ID of the Spend Limit.
 
@@ -20,17 +20,13 @@ ID of the Spend Limit.
 
 
 
-SpendLimit object{ id, amount, created\_at, 5 more }
+SpendLimit object{ id, amount, created\_at, 5 more }
 
 A configured spend limit: a cap on metered spend for one scope and period.
 
-
+Get Spend Limit
 
-### Get Spend Limit
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/spend_limits/$SPEND_LIMIT_ID \

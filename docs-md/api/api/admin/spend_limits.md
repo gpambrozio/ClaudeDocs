@@ -26,29 +26,29 @@
 
 
 
-SpendLimit object{ id, amount, created\_at, 5 more }
+SpendLimit object{ id, amount, created\_at, 5 more }
 
 A configured spend limit: a cap on metered spend for one scope and period.
 
 
 
-SpendSummary object{ actor, amount, currency, 5 more }
+SpendSummary object{ actor, amount, currency, 5 more }
 
 Per-member effective-limit report row (`GET /spend_limits/effective`).
 
 
 
-SpendLimitDeleteResponse object{ id, type }
+SpendLimitDeleteResponse object{ id, type }
 
-id: string
+id: string
 
 
 
-type: "spend\_limit\_deleted"
+type: "spend\_limit\_deleted"
 
 defaultspend\_limit\_deleted
 
-#### Spend Limits[Increase Requests](api/http/admin/spend_limits/increase_requests.md)
+#### Spend Limits[Increase Requests](api/http/admin/spend_limits/increase_requests.md)
 
 ##### [List Spend Limit Increase Requests](api/http/admin/spend_limits/increase_requests/list.md)
 

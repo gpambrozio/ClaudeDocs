@@ -16,107 +16,107 @@ Create Workspace
 
 
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-string
+string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
 
 One of the following:
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24"
 
-"prompt-caching-2024-07-31"
+"prompt-caching-2024-07-31"
 
-"computer-use-2024-10-22"
+"computer-use-2024-10-22"
 
-"computer-use-2025-01-24"
+"computer-use-2025-01-24"
 
-"pdfs-2024-09-25"
+"pdfs-2024-09-25"
 
-"token-counting-2024-11-01"
+"token-counting-2024-11-01"
 
-"token-efficient-tools-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"output-128k-2025-02-19"
+"output-128k-2025-02-19"
 
-"files-api-2025-04-14"
+"files-api-2025-04-14"
 
-"mcp-client-2025-04-04"
+"mcp-client-2025-04-04"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-11-20"
 
-"dev-full-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"interleaved-thinking-2025-05-14"
+"interleaved-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"code-execution-2025-05-22"
 
-"extended-cache-ttl-2025-04-11"
+"extended-cache-ttl-2025-04-11"
 
-"context-1m-2025-08-07"
+"context-1m-2025-08-07"
 
-"context-management-2025-06-27"
+"context-management-2025-06-27"
 
-"model-context-window-exceeded-2025-08-26"
+"model-context-window-exceeded-2025-08-26"
 
-"skills-2025-10-02"
+"skills-2025-10-02"
 
-"fast-mode-2026-02-01"
+"fast-mode-2026-02-01"
 
-"output-300k-2026-03-24"
+"output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
+"user-profiles-2026-03-24"
 
-"user-profiles-2026-08-18"
+"user-profiles-2026-08-18"
 
-"advisor-tool-2026-03-01"
+"advisor-tool-2026-03-01"
 
-"managed-agents-2026-04-01"
+"managed-agents-2026-04-01"
 
-"cache-diagnosis-2026-04-07"
+"cache-diagnosis-2026-04-07"
 
-"dreaming-2026-04-21"
+"dreaming-2026-04-21"
 
-"thinking-token-count-2026-05-13"
+"thinking-token-count-2026-05-13"
 
-"server-side-fallback-2026-06-01"
+"server-side-fallback-2026-06-01"
 
-"server-side-fallback-2026-07-01"
+"server-side-fallback-2026-07-01"
 
-"fallback-credit-2026-06-01"
+"fallback-credit-2026-06-01"
 
-"fallback-credit-2026-07-01"
+"fallback-credit-2026-07-01"
 
-"agent-memory-2026-07-22"
+"agent-memory-2026-07-22"
 
-"mid-conversation-tool-changes-2026-07-01"
+"mid-conversation-tool-changes-2026-07-01"
 
-"compact-2026-01-12"
+"compact-2026-01-12"
 
-"computer-use-2025-11-24"
+"computer-use-2025-11-24"
 
-"mcp-tunnels-2026-06-22"
+"mcp-tunnels-2026-06-22"
 
-"structured-outputs-2025-11-13"
+"structured-outputs-2025-11-13"
 
-"task-budgets-2026-03-13"
+"task-budgets-2026-03-13"
 
-"thinking-display-updates-2026-08-18"
+"thinking-display-updates-2026-08-18"
 
-"ce-user-management-2026-07-13"
+"ce-user-management-2026-07-13"
 
 ##### Body
 
 
 
-name: string
+name: string
 
 Name of the Workspace.
 
@@ -126,13 +126,13 @@ minLength1
 
 
 
-data\_residency: optional [BetaDataResidencyCreateConfig](api/http/beta/organization/workspaces.md) { allowed\_inference\_geos, default\_inference\_geo, workspace\_geo } or null
+data\_residency: optional [BetaDataResidencyCreateConfig](api/http/beta/organization/workspaces.md) { allowed\_inference\_geos, default\_inference\_geo, workspace\_geo } or null
 
 Data residency configuration for the workspace. If omitted, defaults to `workspace_geo: "us"`, `allowed_inference_geos: "unrestricted"`, and `default_inference_geo: "global"`.
 
 
 
-display\_color: optional string or null
+display\_color: optional string or null
 
 Hex color code representing the Workspace in the Anthropic Console.
 
@@ -140,7 +140,7 @@ maxLength7
 
 pattern^#[0-9A-Fa-f]{6}$
 
-external\_key\_id: optional string or null
+external\_key\_id: optional string or null
 
 ID of the customer-managed encryption key (CMEK) configuration to use for this
 Workspace. Setting this field requires CMEK to be enabled for your
@@ -150,7 +150,7 @@ field is write-once: once a key is attached to a Workspace it cannot be
 detached or replaced. To rotate key material, rotate the underlying key on
 your cloud KMS; the `external_key_id` stays the same.
 
-tags: optional map[string] or null
+tags: optional map[string] or null
 
 User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
@@ -158,15 +158,11 @@ User-defined tags as string key-value pairs. Keys may not begin with `anthropic`
 
 
 
-BetaWorkspace object{ id, archived\_at, compartment\_id, 7 more }
+BetaWorkspace object{ id, archived\_at, compartment\_id, 7 more }
 
-
+Create Workspace
 
-### Create Workspace
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/workspaces \

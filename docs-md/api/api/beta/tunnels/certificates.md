@@ -28,17 +28,17 @@ cURL
 
 
 
-BetaTunnelCertificate object{ id, archived\_at, created\_at, 4 more }
+BetaTunnelCertificate object{ id, archived\_at, created\_at, 4 more }
 
 A CA certificate attached to a tunnel.
 
-id: string
+id: string
 
 Unique identifier for the certificate, prefixed with `tcrt_`.
 
 
 
-archived\_at: string or null
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -46,7 +46,7 @@ formatdate-time
 
 
 
-created\_at: string
+created\_at: string
 
 A timestamp in RFC 3339 format
 
@@ -54,21 +54,21 @@ formatdate-time
 
 
 
-expires\_at: string or null
+expires\_at: string or null
 
 A timestamp in RFC 3339 format
 
 formatdate-time
 
-fingerprint: string
+fingerprint: string
 
 Lowercase hex SHA-256 fingerprint of the certificate's DER encoding.
 
-tunnel\_id: string
+tunnel\_id: string
 
 ID of the tunnel the certificate is registered against.
 
-type: "tunnel\_certificate"
+type: "tunnel\_certificate"
 
 ---
 

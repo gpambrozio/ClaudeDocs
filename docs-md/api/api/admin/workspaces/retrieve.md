@@ -12,7 +12,7 @@ Get Workspace
 
 ##### Path parameters
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the Workspace.
 
@@ -20,15 +20,11 @@ ID of the Workspace.
 
 
 
-Workspace object{ id, archived\_at, compartment\_id, 7 more }
+Workspace object{ id, archived\_at, compartment\_id, 7 more }
 
-
+Get Workspace
 
-### Get Workspace
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID \

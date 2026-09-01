@@ -21,11 +21,11 @@ accepted.
 
 ##### Path parameters
 
-service\_account\_id: string
+service\_account\_id: string
 
 ID of the service account.
 
-workspace\_id: string
+workspace\_id: string
 
 ID of the workspace.
 
@@ -33,7 +33,7 @@ ID of the workspace.
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -41,27 +41,23 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 ##### Returns
 
-service\_account\_id: string
+service\_account\_id: string
 
 Tagged service account ID (`svac_...`) named in the delete request. Removal is idempotent; see the endpoint description for the implicit-membership no-op.
 
 
 
-type: "service\_account\_workspace\_member\_deleted"
+type: "service\_account\_workspace\_member\_deleted"
 
 defaultservice\_account\_workspace\_member\_deleted
 
-workspace\_id: string
+workspace\_id: string
 
 Tagged workspace ID (`wrkspc_...`) named in the delete request.
 
-
+Remove Workspace From Service Account
 
-### Remove Workspace From Service Account
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUNT_ID/workspaces/$WORKSPACE_ID \

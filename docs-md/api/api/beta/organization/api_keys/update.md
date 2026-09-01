@@ -14,7 +14,7 @@ Update API Key
 
 ##### Path parameters
 
-api\_key\_id: string
+api\_key\_id: string
 
 ID of the API key.
 
@@ -22,7 +22,7 @@ ID of the API key.
 
 
 
-name: optional string or null
+name: optional string or null
 
 Name of the API key.
 
@@ -32,31 +32,27 @@ minLength1
 
 
 
-status: optional "active" or "archived" or "inactive" or null
+status: optional "active" or "archived" or "inactive" or null
 
 Status of the API key.
 
 One of the following:
 
-"active"
+"active"
 
-"archived"
+"archived"
 
-"inactive"
+"inactive"
 
 ##### Returns
 
 
 
-BetaAPIKey object{ id, created\_at, created\_by, 8 more }
+BetaAPIKey object{ id, created\_at, created\_by, 8 more }
 
-
+Update API Key
 
-### Update API Key
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/api_keys/$API_KEY_ID \

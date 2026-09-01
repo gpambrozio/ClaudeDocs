@@ -16,7 +16,7 @@ Delete Skill
 
 
 
-skill\_id: string
+skill\_id: string
 
 Unique identifier for the skill.
 
@@ -26,11 +26,11 @@ The format and length of IDs may change over time.
 
 
 
-DeletedSkill object{ id, type }
+DeletedSkill object{ id, type }
 
 
 
-id: string
+id: string
 
 Unique identifier for the skill.
 
@@ -38,7 +38,7 @@ The format and length of IDs may change over time.
 
 
 
-type: "skill\_deleted"
+type: "skill\_deleted"
 
 Deleted object type.
 
@@ -46,13 +46,9 @@ For Skills, this is always `"skill_deleted"`.
 
 defaultskill\_deleted
 
-
+Delete Skill
 
-### Delete Skill
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/skills/$SKILL_ID \

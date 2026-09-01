@@ -14,7 +14,7 @@
 
 
 
-ArtifactUsage object{ data, next\_page }
+ArtifactUsage object{ data, next\_page }
 
 Response for GET /v1/organizations/analytics/artifacts.
 

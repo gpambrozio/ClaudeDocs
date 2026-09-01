@@ -10,16 +10,16 @@ You need this page only when you build the retry yourself: over raw HTTP or with
 
 [Refusals and fallback](build-with-claude/refusals-and-fallback.md) covers detecting refusals and choosing a fallback approach. [Prompt caching](build-with-claude/prompt-caching.md) explains cache reads and cache writes if those terms are new.
 
-##  The basic flow
+## The basic flow
 
 1. 1
 
-   Opt in with the beta header
+   ### Opt in with the beta header
 
    Send the request that may be refused with the `anthropic-beta: fallback-credit-2026-07-01` header. The `server-side-fallback-2026-07-01` header also grants the same fields, and the earlier `fallback-credit-2026-06-01` header remains accepted and grants the same fields.
 2. 2
 
-   Read two fields from the refusal
+   ### Read two fields from the refusal
 
    On a refusal, `stop_details` includes two fields:
 
@@ -29,12 +29,12 @@ You need this page only when you build the retry yourself: over raw HTTP or with
    Both are `null` when no credit is available for the refusal.
 3. 3
 
-   Build the retry
+   ### Build the retry
 
    Start from the refused request body. Set `model` to the fallback model and add the token as the top-level `fallback_credit_token` parameter. Pick the body shape from the table below.
 4. 4
 
-   Send the retry with the same header
+   ### Send the retry with the same header
 
    Send the retry with the same `fallback-credit-2026-07-01` beta header. The retry needs the header to redeem the token.
 
@@ -45,7 +45,7 @@ The `fallback_has_prefill_claim` field tells you whether the retry can continue 
 | `true` | The refused request body, unchanged, plus one appended assistant message whose `content` echoes the refused response's `content`. The retry model continues the response from where the refused model stopped, and completed server tool calls are not re-executed. |
 | `false` | The refused request body, unchanged. |
 
-##  Example
+## Example
 
 The following example makes a request that may be refused and redeems the credit token on a retry against Claude Opus 4.8. When a retry attempt is rejected, the example degrades through the rejection ladder: the sequence of progressively simpler retry shapes covered in [When a retry is rejected](#when-a-retry-is-rejected).
 
@@ -106,7 +106,7 @@ if (
 print(json.dumps({"stop_reason": response.stop_reason, "model": response.model}))
 ```
 
-##  Where it works
+## Where it works
 
 Fallback credit is in beta on the Claude API, Amazon Bedrock, Claude Platform on AWS, Google Cloud, and Microsoft Foundry. Refusals in [Message Batches](build-with-claude/batch-processing.md) don't mint credit tokens, and redemption applies only to direct Messages API requests: a token passed on a batch request is accepted but ignored.
 
@@ -114,28 +114,28 @@ The retry model must be one of the refused model's permitted fallback targets. C
 
 ### Looking up permitted fallback targets programmatically
 
-##  Checking that the credit applied
+## Checking that the credit applied
 
 The refund is visible in the retry's `usage`. Compared with what the same request would report without the token, `cache_creation_input_tokens` is lower, and `cache_read_input_tokens` is higher by the same amount. A shift of zero means the token was honored but there was nothing to reprice, for example because the retry model's cache was already warm.
 
-##  When a retry is rejected
+## When a retry is rejected
 
 Most retries redeem on the first attempt. When one does not, the API returns a 400 error that tells you what to try next.
 
 1. 1
 
-   Continuation rejected: resend the unchanged body
+   ### Continuation rejected: resend the unchanged body
 
    If the retry that appends the assistant message is rejected with a 400 error, resend the refused request body unchanged, still with the token.
 2. 2
 
-   Token rejected: drop the token
+   ### Token rejected: drop the token
 
    If the unchanged body is also rejected with a 400 error whose message names `fallback_credit_token`, retry without the token. The credit is forfeited, but the retry itself goes through.
 
 ### If the error says 'redemption temporarily unavailable'
 
-##  Reference
+## Reference
 
 The sections below cover edge cases and the complete redemption rules. Most integrations do not need them.
 
@@ -151,7 +151,7 @@ The sections below cover edge cases and the complete redemption rules. Most inte
 
 ### When a token cannot be redeemed by either shape
 
-##  Next steps
+## Next steps
 
 
 

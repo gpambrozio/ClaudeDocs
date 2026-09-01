@@ -12,195 +12,195 @@ cURL
 
 
 
-AnthropicBeta = string or "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
+AnthropicBeta = string or "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
 
 One of the following:
 
 
 
-BetaAPIError object{ message, type }
+BetaAPIError object{ message, type }
 
 
 
-message: string
+message: string
 
 defaultInternal server error
 
 
 
-type: "api\_error"
+type: "api\_error"
 
 defaultapi\_error
 
 
 
-BetaAuthenticationError object{ message, type }
+BetaAuthenticationError object{ message, type }
 
 
 
-message: string
+message: string
 
 defaultAuthentication error
 
 
 
-type: "authentication\_error"
+type: "authentication\_error"
 
 defaultauthentication\_error
 
 
 
-BetaBillingError object{ message, type }
+BetaBillingError object{ message, type }
 
 
 
-message: string
+message: string
 
 defaultBilling error
 
 
 
-type: "billing\_error"
+type: "billing\_error"
 
 defaultbilling\_error
 
-BetaCurrency = "USD"
+BetaCurrency = "USD"
 
 
 
-BetaError = [BetaInvalidRequestError](api/http/beta.md) { message, type } or [BetaAuthenticationError](api/http/beta.md) { message, type } or [BetaBillingError](api/http/beta.md) { message, type } or 6 more
+BetaError = [BetaInvalidRequestError](api/http/beta.md) { message, type } or [BetaAuthenticationError](api/http/beta.md) { message, type } or [BetaBillingError](api/http/beta.md) { message, type } or 6 more
 
 One of the following:
 
 
 
-BetaErrorResponse object{ error, request\_id, type }
+BetaErrorResponse object{ error, request\_id, type }
 
 
 
-error: [BetaError](api/http/beta.md)
+error: [BetaError](api/http/beta.md)
 
 One of the following:
 
-request\_id: string or null
+request\_id: string or null
 
 
 
-type: "error"
+type: "error"
 
 defaulterror
 
 
 
-BetaGatewayTimeoutError object{ message, type }
+BetaGatewayTimeoutError object{ message, type }
 
 
 
-message: string
+message: string
 
 defaultRequest timeout
 
 
 
-type: "timeout\_error"
+type: "timeout\_error"
 
 defaulttimeout\_error
 
 
 
-BetaInvalidRequestError object{ message, type }
+BetaInvalidRequestError object{ message, type }
 
 
 
-message: string
+message: string
 
 defaultInvalid request
 
 
 
-type: "invalid\_request\_error"
+type: "invalid\_request\_error"
 
 defaultinvalid\_request\_error
 
 
 
-BetaMonetaryAmount object{ amount, currency }
+BetaMonetaryAmount object{ amount, currency }
 
 A monetary amount in a specific currency.
 
-amount: string
+amount: string
 
 Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
 
-currency: [BetaCurrency](api/http/beta.md)
+currency: [BetaCurrency](api/http/beta.md)
 
 Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
 
 
-BetaNotFoundError object{ message, type }
+BetaNotFoundError object{ message, type }
 
 
 
-message: string
+message: string
 
 defaultNot found
 
 
 
-type: "not\_found\_error"
+type: "not\_found\_error"
 
 defaultnot\_found\_error
 
 
 
-BetaOverloadedError object{ message, type }
+BetaOverloadedError object{ message, type }
 
 
 
-message: string
+message: string
 
 defaultOverloaded
 
 
 
-type: "overloaded\_error"
+type: "overloaded\_error"
 
 defaultoverloaded\_error
 
 
 
-BetaPermissionError object{ message, type }
+BetaPermissionError object{ message, type }
 
 
 
-message: string
+message: string
 
 defaultPermission denied
 
 
 
-type: "permission\_error"
+type: "permission\_error"
 
 defaultpermission\_error
 
 
 
-BetaRateLimitError object{ message, type }
+BetaRateLimitError object{ message, type }
 
 
 
-message: string
+message: string
 
 defaultRate limited
 
 
 
-type: "rate\_limit\_error"
+type: "rate\_limit\_error"
 
 defaultrate\_limit\_error
 
-#### Beta[Models](api/http/beta/models.md)
+#### Beta[Models](api/http/beta/models.md)
 
 ##### [List Models](api/http/beta/models/list.md)
 
@@ -210,7 +210,7 @@ defaultrate\_limit\_error
 
 GET/v1/models/{model\_id}
 
-#### Beta[Messages](api/http/beta/messages.md)
+#### Beta[Messages](api/http/beta/messages.md)
 
 ##### [Create a Message](api/http/beta/messages/create.md)
 
@@ -220,7 +220,7 @@ defaultrate\_limit\_error
 
 POST/v1/messages/count\_tokens
 
-#### BetaMessages[Batches](api/http/beta/messages/batches.md)
+#### BetaMessages[Batches](api/http/beta/messages/batches.md)
 
 ##### [Create a Message Batch](api/http/beta/messages/batches/create.md)
 
@@ -246,7 +246,7 @@ defaultrate\_limit\_error
 
 GET/v1/messages/batches/{message\_batch\_id}/results
 
-#### Beta[Agents](api/http/beta/agents.md)
+#### Beta[Agents](api/http/beta/agents.md)
 
 ##### [Create Agent](api/http/beta/agents/create.md)
 
@@ -268,13 +268,13 @@ defaultrate\_limit\_error
 
 POST/v1/agents/{agent\_id}/archive
 
-#### BetaAgents[Versions](api/http/beta/agents/versions.md)
+#### BetaAgents[Versions](api/http/beta/agents/versions.md)
 
 ##### [List Agent Versions](api/http/beta/agents/versions/list.md)
 
 GET/v1/agents/{agent\_id}/versions
 
-#### Beta[Environments](api/http/beta/environments.md)
+#### Beta[Environments](api/http/beta/environments.md)
 
 ##### [Create Environment](api/http/beta/environments/create.md)
 
@@ -300,7 +300,7 @@ defaultrate\_limit\_error
 
 POST/v1/environments/{environment\_id}/archive
 
-#### BetaEnvironments[Work](api/http/beta/environments/work.md)
+#### BetaEnvironments[Work](api/http/beta/environments/work.md)
 
 ##### [Get Work Item](api/http/beta/environments/work/retrieve.md)
 
@@ -334,7 +334,7 @@ defaultrate\_limit\_error
 
 GET/v1/environments/{environment\_id}/work/stats
 
-#### Beta[Sessions](api/http/beta/sessions.md)
+#### Beta[Sessions](api/http/beta/sessions.md)
 
 ##### [Create Session](api/http/beta/sessions/create.md)
 
@@ -360,7 +360,7 @@ defaultrate\_limit\_error
 
 POST/v1/sessions/{session\_id}/archive
 
-#### BetaSessions[Events](api/http/beta/sessions/events.md)
+#### BetaSessions[Events](api/http/beta/sessions/events.md)
 
 ##### [List Events](api/http/beta/sessions/events/list.md)
 
@@ -374,7 +374,7 @@ defaultrate\_limit\_error
 
 GET/v1/sessions/{session\_id}/events/stream
 
-#### BetaSessions[Resources](api/http/beta/sessions/resources.md)
+#### BetaSessions[Resources](api/http/beta/sessions/resources.md)
 
 ##### [Add Session Resource](api/http/beta/sessions/resources/add.md)
 
@@ -396,7 +396,7 @@ defaultrate\_limit\_error
 
 DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 
-#### BetaSessions[Threads](api/http/beta/sessions/threads.md)
+#### BetaSessions[Threads](api/http/beta/sessions/threads.md)
 
 ##### [List Session Threads](api/http/beta/sessions/threads/list.md)
 
@@ -410,7 +410,7 @@ defaultrate\_limit\_error
 
 POST/v1/sessions/{session\_id}/threads/{thread\_id}/archive
 
-#### BetaSessionsThreads[Events](api/http/beta/sessions/threads/events.md)
+#### BetaSessionsThreads[Events](api/http/beta/sessions/threads/events.md)
 
 ##### [List Session Thread Events](api/http/beta/sessions/threads/events/list.md)
 
@@ -420,7 +420,7 @@ defaultrate\_limit\_error
 
 GET/v1/sessions/{session\_id}/threads/{thread\_id}/stream
 
-#### Beta[Deployments](api/http/beta/deployments.md)
+#### Beta[Deployments](api/http/beta/deployments.md)
 
 ##### [Create Deployment](api/http/beta/deployments/create.md)
 
@@ -454,7 +454,7 @@ defaultrate\_limit\_error
 
 POST/v1/deployments/{deployment\_id}/unpause
 
-#### Beta[Deployment Runs](api/http/beta/deployment_runs.md)
+#### Beta[Deployment Runs](api/http/beta/deployment_runs.md)
 
 ##### [List Deployment Runs](api/http/beta/deployment_runs/list.md)
 
@@ -464,7 +464,7 @@ defaultrate\_limit\_error
 
 GET/v1/deployment\_runs/{deployment\_run\_id}
 
-#### Beta[Vaults](api/http/beta/vaults.md)
+#### Beta[Vaults](api/http/beta/vaults.md)
 
 ##### [Create Vault](api/http/beta/vaults/create.md)
 
@@ -490,7 +490,7 @@ defaultrate\_limit\_error
 
 POST/v1/vaults/{vault\_id}/archive
 
-#### BetaVaults[Credentials](api/http/beta/vaults/credentials.md)
+#### BetaVaults[Credentials](api/http/beta/vaults/credentials.md)
 
 ##### [Create Credential](api/http/beta/vaults/credentials/create.md)
 
@@ -520,7 +520,7 @@ defaultrate\_limit\_error
 
 POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
 
-#### Beta[Memory Stores](api/http/beta/memory_stores.md)
+#### Beta[Memory Stores](api/http/beta/memory_stores.md)
 
 ##### [Create a memory store](api/http/beta/memory_stores/create.md)
 
@@ -546,7 +546,7 @@ defaultrate\_limit\_error
 
 POST/v1/memory\_stores/{memory\_store\_id}/archive
 
-#### BetaMemory Stores[Memories](api/http/beta/memory_stores/memories.md)
+#### BetaMemory Stores[Memories](api/http/beta/memory_stores/memories.md)
 
 ##### [Create a memory](api/http/beta/memory_stores/memories/create.md)
 
@@ -568,7 +568,7 @@ defaultrate\_limit\_error
 
 DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
-#### BetaMemory Stores[Memory Versions](api/http/beta/memory_stores/memory_versions.md)
+#### BetaMemory Stores[Memory Versions](api/http/beta/memory_stores/memory_versions.md)
 
 ##### [List memory versions](api/http/beta/memory_stores/memory_versions/list.md)
 
@@ -582,7 +582,7 @@ defaultrate\_limit\_error
 
 POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}/redact
 
-#### Beta[Files](api/http/beta/files.md)
+#### Beta[Files](api/http/beta/files.md)
 
 ##### [Upload File](api/http/beta/files/upload.md)
 
@@ -604,7 +604,7 @@ defaultrate\_limit\_error
 
 DELETE/v1/files/{file\_id}
 
-#### Beta[Skills](api/http/beta/skills.md)
+#### Beta[Skills](api/http/beta/skills.md)
 
 ##### [Create Skill](api/http/beta/skills/create.md)
 
@@ -622,7 +622,7 @@ defaultrate\_limit\_error
 
 DELETE/v1/skills/{skill\_id}
 
-#### BetaSkills[Versions](api/http/beta/skills/versions.md)
+#### BetaSkills[Versions](api/http/beta/skills/versions.md)
 
 ##### [Create Skill Version](api/http/beta/skills/versions/create.md)
 
@@ -644,13 +644,13 @@ defaultrate\_limit\_error
 
 DELETE/v1/skills/{skill\_id}/versions/{version}
 
-#### Beta[Webhooks](api/http/beta/webhooks.md)
+#### Beta[Webhooks](api/http/beta/webhooks.md)
 
 ##### [Unwrap](api/http/beta/webhooks/unwrap.md)
 
 ##### [Parse Unverified](api/http/beta/webhooks/parse_unverified.md)
 
-#### Beta[User Profiles](api/http/beta/user_profiles.md)
+#### Beta[User Profiles](api/http/beta/user_profiles.md)
 
 ##### [Create User Profile](api/http/beta/user_profiles/create.md)
 
@@ -672,7 +672,7 @@ defaultrate\_limit\_error
 
 POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
-#### Beta[Dreams](api/http/beta/dreams.md)
+#### Beta[Dreams](api/http/beta/dreams.md)
 
 ##### [Create a Dream](api/http/beta/dreams/create.md)
 
@@ -694,7 +694,7 @@ defaultrate\_limit\_error
 
 POST/v1/dreams/{dream\_id}/archive
 
-#### Beta[Tunnels](api/http/beta/tunnels.md)
+#### Beta[Tunnels](api/http/beta/tunnels.md)
 
 ##### [Create Tunnel](api/http/beta/tunnels/create.md)
 
@@ -720,7 +720,7 @@ defaultrate\_limit\_error
 
 POST/v1/tunnels/{tunnel\_id}/rotate\_token
 
-#### BetaTunnels[Certificates](api/http/beta/tunnels/certificates.md)
+#### BetaTunnels[Certificates](api/http/beta/tunnels/certificates.md)
 
 ##### [Create Tunnel Certificate](api/http/beta/tunnels/certificates/create.md)
 
@@ -738,13 +738,13 @@ defaultrate\_limit\_error
 
 POST/v1/tunnels/{tunnel\_id}/certificates/{certificate\_id}/archive
 
-#### Beta[Organization](api/http/beta/organization.md)
+#### Beta[Organization](api/http/beta/organization.md)
 
 ##### [Get Current Organization](api/http/beta/organization/retrieve.md)
 
 GET/v1/organizations/me
 
-#### BetaOrganization[API Keys](api/http/beta/organization/api_keys.md)
+#### BetaOrganization[API Keys](api/http/beta/organization/api_keys.md)
 
 ##### [List API Keys](api/http/beta/organization/api_keys/list.md)
 
@@ -758,7 +758,7 @@ defaultrate\_limit\_error
 
 POST/v1/organizations/api\_keys/{api\_key\_id}
 
-#### BetaOrganization[External Keys](api/http/beta/organization/external_keys.md)
+#### BetaOrganization[External Keys](api/http/beta/organization/external_keys.md)
 
 ##### [Create External Key](api/http/beta/organization/external_keys/create.md)
 
@@ -784,7 +784,7 @@ defaultrate\_limit\_error
 
 POST/v1/organizations/external\_keys/{external\_key\_id}/validate
 
-#### BetaOrganizationFederation[Issuers](api/http/beta/organization/federation/issuers.md)
+#### BetaOrganizationFederation[Issuers](api/http/beta/organization/federation/issuers.md)
 
 ##### [Create Federation Issuer](api/http/beta/organization/federation/issuers/create.md)
 
@@ -806,7 +806,7 @@ defaultrate\_limit\_error
 
 POST/v1/organizations/federation\_issuers/{federation\_issuer\_id}/archive
 
-#### BetaOrganizationFederation[Rules](api/http/beta/organization/federation/rules.md)
+#### BetaOrganizationFederation[Rules](api/http/beta/organization/federation/rules.md)
 
 ##### [Create Federation Rule](api/http/beta/organization/federation/rules/create.md)
 
@@ -828,7 +828,7 @@ defaultrate\_limit\_error
 
 POST/v1/organizations/federation\_rules/{federation\_rule\_id}/archive
 
-#### BetaOrganizationFederationRules[Workspaces](api/http/beta/organization/federation/rules/workspaces.md)
+#### BetaOrganizationFederationRules[Workspaces](api/http/beta/organization/federation/rules/workspaces.md)
 
 ##### [Add Federation Rule Workspace](api/http/beta/organization/federation/rules/workspaces/add.md)
 
@@ -842,7 +842,7 @@ defaultrate\_limit\_error
 
 DELETE/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces/{workspace\_id}
 
-#### BetaOrganization[Invites](api/http/beta/organization/invites.md)
+#### BetaOrganization[Invites](api/http/beta/organization/invites.md)
 
 ##### [Create Invite](api/http/beta/organization/invites/create.md)
 
@@ -860,7 +860,7 @@ defaultrate\_limit\_error
 
 DELETE/v1/organizations/invites/{invite\_id}
 
-#### BetaOrganization[Service Accounts](api/http/beta/organization/service_accounts.md)
+#### BetaOrganization[Service Accounts](api/http/beta/organization/service_accounts.md)
 
 ##### [Create Service Account](api/http/beta/organization/service_accounts/create.md)
 
@@ -882,7 +882,7 @@ defaultrate\_limit\_error
 
 POST/v1/organizations/service\_accounts/{service\_account\_id}/archive
 
-#### BetaOrganizationService Accounts[Workspaces](api/http/beta/organization/service_accounts/workspaces.md)
+#### BetaOrganizationService Accounts[Workspaces](api/http/beta/organization/service_accounts/workspaces.md)
 
 ##### [Add Workspace To Service Account](api/http/beta/organization/service_accounts/workspaces/add.md)
 
@@ -896,7 +896,7 @@ defaultrate\_limit\_error
 
 DELETE/v1/organizations/service\_accounts/{service\_account\_id}/workspaces/{workspace\_id}
 
-#### BetaOrganization[Users](api/http/beta/organization/users.md)
+#### BetaOrganization[Users](api/http/beta/organization/users.md)
 
 ##### [List Users](api/http/beta/organization/users/list.md)
 
@@ -914,7 +914,7 @@ defaultrate\_limit\_error
 
 DELETE/v1/organizations/users/{user\_id}
 
-#### BetaOrganization[Workspaces](api/http/beta/organization/workspaces.md)
+#### BetaOrganization[Workspaces](api/http/beta/organization/workspaces.md)
 
 ##### [List Workspaces](api/http/beta/organization/workspaces/list.md)
 
@@ -936,13 +936,13 @@ defaultrate\_limit\_error
 
 POST/v1/organizations/workspaces/{workspace\_id}/archive
 
-#### BetaOrganizationWorkspaces[Rate Limits](api/http/beta/organization/workspaces/rate_limits.md)
+#### BetaOrganizationWorkspaces[Rate Limits](api/http/beta/organization/workspaces/rate_limits.md)
 
 ##### [List Workspace Rate Limits](api/http/beta/organization/workspaces/rate_limits/list.md)
 
 GET/v1/organizations/workspaces/{workspace\_id}/rate\_limits
 
-#### BetaOrganizationWorkspaces[Members](api/http/beta/organization/workspaces/members.md)
+#### BetaOrganizationWorkspaces[Members](api/http/beta/organization/workspaces/members.md)
 
 ##### [List Workspace Members](api/http/beta/organization/workspaces/members/list.md)
 
@@ -964,7 +964,7 @@ defaultrate\_limit\_error
 
 DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
-#### BetaOrganizationWorkspaces[Service Accounts](api/http/beta/organization/workspaces/service_accounts.md)
+#### BetaOrganizationWorkspaces[Service Accounts](api/http/beta/organization/workspaces/service_accounts.md)
 
 ##### [List Service Account Workspace Members](api/http/beta/organization/workspaces/service_accounts/list.md)
 
@@ -986,7 +986,7 @@ defaultrate\_limit\_error
 
 DELETE/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
 
-#### BetaOrganization[Rate Limits](api/http/beta/organization/rate_limits.md)
+#### BetaOrganization[Rate Limits](api/http/beta/organization/rate_limits.md)
 
 ##### [List Organization Rate Limits](api/http/beta/organization/rate_limits/list.md)
 

@@ -16,27 +16,23 @@ this endpoint.
 
 ##### Path parameters
 
-spend\_limit\_id: string
+spend\_limit\_id: string
 
 ID of the Spend Limit.
 
 ##### Returns
 
-id: string
+id: string
 
 
 
-type: "spend\_limit\_deleted"
+type: "spend\_limit\_deleted"
 
 defaultspend\_limit\_deleted
 
-
+Delete Spend Limit
 
-### Delete Spend Limit
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/spend_limits/$SPEND_LIMIT_ID \

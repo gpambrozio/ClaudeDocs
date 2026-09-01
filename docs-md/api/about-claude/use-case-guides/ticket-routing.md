@@ -4,13 +4,13 @@
 
 
 
-##  Prerequisites
+## Prerequisites
 
 - A Claude API key and the Python SDK installed
 - Access to, and familiarity with, your existing support ticketing system
 - A sample set of historical support tickets for testing
 
-##  Define whether to use Claude for ticket routing
+## Define whether to use Claude for ticket routing
 
 Here are some key indicators that you should use an LLM like Claude instead of traditional ML approaches for your classification task:
 
@@ -30,9 +30,9 @@ Here are some key indicators that you should use an LLM like Claude instead of t
 
 ---
 
-##  Build and deploy your LLM support workflow
+## Build and deploy your LLM support workflow
 
-###  Understand your current support approach
+### Understand your current support approach
 
 Before you automate, it's crucial to understand your existing ticketing system. Start by investigating how your support team currently handles ticket routing.
 
@@ -46,7 +46,7 @@ Consider questions like:
 
 The more you know about how humans handle certain cases, the better you can work with Claude to do the task.
 
-###  Define user intent categories
+### Define user intent categories
 
 A well-defined list of user intent categories is crucial for accurate support ticket classification with Claude. Claude’s ability to route tickets effectively within your system is directly proportional to how well-defined your system’s categories are.
 
@@ -78,7 +78,7 @@ Here are some example user intent categories and subcategories.
 
 In addition to intent, ticket routing and prioritization may also be influenced by other factors such as urgency, customer type, SLAs, or language. Be sure to consider other routing criteria when building your automated routing system.
 
-###  Establish success criteria
+### Establish success criteria
 
 Work with your support team to [define clear success criteria](test-and-evaluate/develop-tests.md) with measurable benchmarks, thresholds, and goals.
 
@@ -120,13 +120,13 @@ Here are some common success criteria that may be useful regardless of whether a
 
 ### Cost per ticket
 
-###  Choose the right Claude model
+### Choose the right Claude model
 
 The choice of model depends on the trade-offs between cost, accuracy, and response time.
 
 Many customers have found `claude-haiku-4-5-20251001` an ideal model for ticket routing, as it is the fastest and most cost-effective model in the Claude 4 family while still delivering excellent results. If your classification problem requires deep subject matter expertise or a large volume of intent categories, or complex reasoning, you may opt for the [larger Sonnet model](about-claude/models.md).
 
-###  Build a strong prompt
+### Build a strong prompt
 
 Ticket routing is a type of classification task. Claude analyzes the content of a support ticket and classifies it into predefined categories based on the issue type, urgency, required expertise, or other relevant factors.
 
@@ -203,7 +203,7 @@ Here are the key components of this prompt:
 
 Having Claude split its response into separate XML tag sections lets you use regular expressions to extract the reasoning and intent from the output independently. This lets you create targeted next steps in the ticket routing workflow, such as using only the intent to decide which person to route the ticket to.
 
-###  Deploy your prompt
+### Deploy your prompt
 
 It’s hard to know how well your prompt works without deploying it in a test production setting and [running evaluations](test-and-evaluate/develop-tests.md).
 
@@ -261,13 +261,13 @@ Because the entire reasoning and intent text must be generated before parsing, t
 
 ---
 
-##  Evaluate your prompt
+## Evaluate your prompt
 
 Prompting often requires testing and optimization for it to be production ready. To determine the readiness of your solution, evaluate performance based on the success criteria and thresholds you established earlier.
 
 To run your evaluation, you need test cases to run it on. The rest of this guide assumes you have already [developed your test cases](test-and-evaluate/develop-tests.md).
 
-###  Build an evaluation function
+### Build an evaluation function
 
 The example evaluation for this guide measures Claude’s performance along three key metrics:
 
@@ -328,7 +328,7 @@ Here is a breakdown of the edits:
 - The `classify_support_request` method now takes the `actual_intent` from the test cases and compares it against Claude’s intent classification to assess whether they match.
 - The method extracts usage statistics for the API call to calculate cost based on input and output tokens used.
 
-###  Run your evaluation
+### Run your evaluation
 
 A proper evaluation requires clear thresholds and benchmarks to determine what is a good result. The preceding script returns the runtime values for accuracy, response time, and cost per classification, but you still need clearly established thresholds. For example:
 
@@ -339,11 +339,11 @@ Having these thresholds allows you to quickly and easily tell at scale, and with
 
 ---
 
-##  Improve performance
+## Improve performance
 
 In complex scenarios, it may be helpful to consider additional strategies to improve performance beyond standard [prompt engineering techniques](build-with-claude/prompt-engineering/overview.md) & [guardrail implementation strategies](test-and-evaluate/strengthen-guardrails/reduce-hallucinations.md). Here are some common scenarios:
 
-###  Use a taxonomic hierarchy for cases with 20+ intent categories
+### Use a taxonomic hierarchy for cases with 20+ intent categories
 
 As the number of classes grows, the number of examples required also expands, potentially making the prompt unwieldy. As an alternative, you can consider implementing a hierarchical classification system using a mixture of classifiers.
 
@@ -357,7 +357,7 @@ For example, you might have a top-level classifier that broadly categorizes tick
 - **Pros - greater nuance and accuracy:** You can create different prompts for each parent path, allowing for more targeted and context-specific classification. This can lead to improved accuracy and more nuanced handling of customer requests.
 - **Cons - increased latency:** Be advised that multiple classifiers can lead to increased latency, and Anthropic recommends implementing this approach with the fastest model, Haiku.
 
-###  Use vector databases and similarity search retrieval to handle highly variable tickets
+### Use vector databases and similarity search retrieval to handle highly variable tickets
 
 Despite providing examples being the most effective way to improve performance, if support requests are highly variable, it can be hard to include enough examples in a single prompt.
 
@@ -365,7 +365,7 @@ In this scenario, you could employ a vector database to do similarity searches f
 
 This approach, outlined in detail in the [classification recipe](https://platform.claude.com/cookbook/capabilities-classification-guide), has been shown to improve performance from 71% accuracy to 93% accuracy.
 
-###  Account specifically for expected edge cases
+### Account specifically for expected edge cases
 
 Here are some scenarios where Claude may misclassify tickets (there may be others that are unique to your situation). In these scenarios, consider providing explicit instructions or examples in the prompt of how Claude should handle the edge case:
 
@@ -377,7 +377,7 @@ Here are some scenarios where Claude may misclassify tickets (there may be other
 
 ---
 
-##  Integrate Claude into your greater support workflow
+## Integrate Claude into your greater support workflow
 
 Proper integration requires that you make some decisions regarding how your Claude-based ticket routing script fits into the architecture of your greater ticket routing system. There are two ways you could do this:
 

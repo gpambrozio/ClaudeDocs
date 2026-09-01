@@ -21,7 +21,7 @@ GET /v1/compliance/apps/projects/documents/{claude\_proj\_doc\_id} endpoint.
 
 ##### Path parameters
 
-project\_id: string
+project\_id: string
 
 The project ID (tagged ID, e.g., claude\_proj\_abc123)
 
@@ -29,7 +29,7 @@ The project ID (tagged ID, e.g., claude\_proj\_abc123)
 
 
 
-limit: optional number
+limit: optional number
 
 Maximum results (default: 20, max: 100)
 
@@ -39,19 +39,19 @@ maximum100
 
 minimum1
 
-page: optional string
+page: optional string
 
 Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
 ##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### Returns
 
 
 
-data: array of object{ id, created\_at, filename, 4 more } or object{ id, created\_at, filename, 3 more }
+data: array of object{ id, created\_at, filename, 4 more } or object{ id, created\_at, filename, 3 more }
 
 List of attachments sorted chronologically by created\_at, tie break by id
 
@@ -59,41 +59,41 @@ One of the following:
 
 
 
-ComplianceProjectFileReference object{ id, created\_at, filename, 4 more }
+ComplianceProjectFileReference object{ id, created\_at, filename, 4 more }
 
 File attachment reference for compliance responses.
 
-id: string
+id: string
 
 File identifier (e.g., 'claude\_file\_abcd')
 
 
 
-created\_at: string
+created\_at: string
 
 Creation timestamp (RFC 3339 format)
 
 formatdate-time
 
-filename: string
+filename: string
 
 Display name of the file (e.g., 'document.pdf')
 
-md5: string or null
+md5: string or null
 
 Lowercase hex MD5 of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
 
-mime\_type: string
+mime\_type: string
 
 MIME type of the file's preferred downloadable variant when one is recorded, else 'application/octet-stream'. Use the per-file `/metadata` endpoint for the authoritative value.
 
-size\_bytes: number or null
+size\_bytes: number or null
 
 Size in bytes of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
 
 
 
-type: "project\_file"
+type: "project\_file"
 
 Discriminator marking this as a binary file
 
@@ -101,29 +101,29 @@ defaultproject\_file
 
 
 
-ComplianceProjectDocReference object{ id, created\_at, filename, 3 more }
+ComplianceProjectDocReference object{ id, created\_at, filename, 3 more }
 
 Project document attachment reference for compliance responses.
 
-id: string
+id: string
 
 Project document identifier (e.g., 'claude\_proj\_doc\_abcd')
 
 
 
-created\_at: string
+created\_at: string
 
 Creation timestamp (RFC 3339 format)
 
 formatdate-time
 
-filename: string
+filename: string
 
 Display name of the document (e.g., 'document.txt')
 
 
 
-mime\_type: "text/plain"
+mime\_type: "text/plain"
 
 MIME type of the project document, always set to plain text
 
@@ -131,7 +131,7 @@ defaulttext/plain
 
 
 
-type: "project\_doc"
+type: "project\_doc"
 
 Discriminator marking this as a plain text document
 
@@ -139,27 +139,23 @@ defaultproject\_doc
 
 
 
-updated\_at: string or null
+updated\_at: string or null
 
 Last-modified timestamp of the document. Reserved for future use — currently always null.
 
 formatdate-time
 
-has\_more: boolean
+has\_more: boolean
 
 Whether more records exist beyond the current result set
 
-next\_page: string or null
+next\_page: string or null
 
 To get the next page, use the 'next\_page' from the current response as the 'page' in your next request
 
-
+List project attachments
 
-### List project attachments
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachments \

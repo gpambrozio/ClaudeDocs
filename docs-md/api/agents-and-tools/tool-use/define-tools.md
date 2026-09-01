@@ -4,18 +4,18 @@
 
 
 
-##  Prerequisites
+## Prerequisites
 
 - Familiarity with the [tool use overview](agents-and-tools/tool-use/overview.md)
 - A Claude API key and a working SDK or cURL setup
 
-##  Choosing a model
+## Choosing a model
 
 Use the latest Claude Opus model, Claude Opus 5, for complex tools and ambiguous queries; it handles multiple tools better and seeks clarification when needed.
 
 Use Claude Haiku models for straightforward tools, but note they may infer missing parameters.
 
-##  Specifying client tools
+## Specifying client tools
 
 Client tools are specified in the `tools` top-level parameter of the API request. Anthropic-schema client tools, such as the bash and text editor tools, are declared by a date-versioned `type`; see each tool's page, linked from the [Tool reference](agents-and-tools/tool-use/tool-reference.md), for the fields it accepts. The computer use and browser use tools are [client toolsets](agents-and-tools/tool-use/tool-reference.md): a single entry with no `name` that declares a fixed set of member tools. A user-defined tool definition includes:
 
@@ -30,7 +30,7 @@ For the full set of optional properties available on any single tool definition,
 
 ### Example simple tool definition
 
-###  Tool use system prompt
+### Tool use system prompt
 
 When you call the Claude API with the `tools` parameter, the API constructs a special system prompt from the tool definitions, tool configuration, and any user-specified system prompt. The constructed prompt is designed to instruct the model to use the specified tool(s) and provide the necessary context for the tool to operate properly:
 
@@ -46,7 +46,7 @@ Here are the functions available in JSONSchema format:
 
 
 
-###  Best practices for tool definitions
+### Best practices for tool definitions
 
 To get the best performance out of Claude when using tools, follow these guidelines:
 
@@ -66,11 +66,11 @@ To get the best performance out of Claude when using tools, follow these guideli
 
 The good description clearly explains what the tool does, when to use it, what data it returns, and what the `ticker` parameter means. The poor description is too brief and leaves Claude with many open questions about the tool's behavior and usage.
 
-##  Providing tool use examples
+## Providing tool use examples
 
 You can provide concrete examples of valid tool inputs to help Claude understand how to use your tools more effectively. This is particularly useful for complex tools with nested objects, optional parameters, or format-sensitive inputs.
 
-###  Basic usage
+### Basic usage
 
 Add an optional `input_examples` field to your tool definition with an array of example input objects. Each example must be valid according to the tool's `input_schema`:
 
@@ -120,15 +120,15 @@ print(response)
 
 Examples are included in the prompt alongside your tool schema, showing Claude concrete patterns for well-formed tool calls. This helps Claude understand when to include optional parameters, what formats to use, and how to structure complex inputs.
 
-###  Requirements and limitations
+### Requirements and limitations
 
 - **Schema validation** - Each example must be valid according to the tool's `input_schema`. Invalid examples return a 400 error
 - **Not supported for server-side tools or client toolsets** - Input examples work on user-defined and Anthropic-schema client tools other than the [computer use](agents-and-tools/tool-use/computer-use-tool.md) and [browser use](agents-and-tools/tool-use/browser-use-tool.md) toolsets, but not on server tools such as web search or code execution
 - **Token cost** - Examples add to prompt tokens: ~20–50 tokens for simple examples, ~100–200 tokens for complex nested objects
 
-##  Controlling Claude's output
+## Controlling Claude's output
 
-###  Forcing tool use
+### Forcing tool use
 
 In some cases, you may want Claude to use a specific tool to answer the user's question, even if Claude would otherwise answer directly without calling a tool. You can do this by specifying the tool in the `tool_choice` field of the request. The highlighted lines are the only difference from a standard tool use request:
 
@@ -182,7 +182,7 @@ Note that when you have `tool_choice` as `any` or `tool`, the API prefills the a
 
 Testing has shown that this should not reduce performance. If you would like the model to provide natural language context or explanations while still requesting that the model use a specific tool, you can use `{"type": "auto"}` for `tool_choice` (the default) and add explicit instructions in a `user` message. For example: `What's the weather like in London? Use the get_weather tool in your response.`
 
-###  Model responses with tools
+### Model responses with tools
 
 When using tools, Claude often comments on what it's doing or responds naturally to the user before calling tools.
 
@@ -214,7 +214,7 @@ This natural response style helps users understand what Claude is doing and crea
 
 It's important to note that Claude may use various phrasings and approaches when explaining its actions. Your code should treat these responses like any other assistant-generated text, and not rely on specific formatting conventions.
 
-##  Next steps
+## Next steps
 
 [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md)
 

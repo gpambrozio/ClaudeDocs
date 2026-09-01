@@ -1,4 +1,4 @@
-##  How it compares to the current lineup
+## How it compares to the current lineup
 
 | Model | Context | Max output | Price / MTok | Thinking | Default effort | Knowledge cutoff |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -8,7 +8,7 @@
 | Claude Sonnet 4.5This modelLegacy | 200K | 64K | $3 / $15 | Extended | — | Jan 2025 |
 | [Claude Haiku 4.5](models/haiku-4-5/overview.md) | 200K | 64K | $1 / $5 | Extended | — | Feb 2025 |
 
-##  Specifications
+## Specifications
 
 ### Model IDs
 
@@ -90,7 +90,7 @@ Retirement
 Platforms
 :   Claude API[Amazon Bedrock (InvokeModel)](build-with-claude/claude-on-amazon-bedrock-legacy.md)[Google Cloud](build-with-claude/claude-on-vertex-ai.md)[Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)[Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)
 
-##  Resources
+## Resources
 
 [Migrate to Claude Sonnet 5](models/sonnet-5/migration-guide.md)
 
@@ -102,7 +102,7 @@ What changes when moving from Claude Sonnet 4.5 and earlier Sonnet models to Cla
 
 The current Sonnet model: overview, specs, and resources.
 
-##  Reference
+## Reference
 
 
 

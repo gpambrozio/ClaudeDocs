@@ -36,15 +36,15 @@ cURL
 
 
 
-DeletedMessageBatch object{ id, type }
+DeletedMessageBatch object{ id, type }
 
-id: string
+id: string
 
 ID of the Message Batch.
 
 
 
-type: "message\_batch\_deleted"
+type: "message\_batch\_deleted"
 
 Deleted object type.
 
@@ -54,65 +54,65 @@ defaultmessage\_batch\_deleted
 
 
 
-MessageBatch object{ id, archived\_at, cancel\_initiated\_at, 7 more }
+MessageBatch object{ id, archived\_at, cancel\_initiated\_at, 7 more }
 
 
 
-MessageBatchCanceledResult object{ type }
+MessageBatchCanceledResult object{ type }
 
 
 
-type: "canceled"
+type: "canceled"
 
 defaultcanceled
 
 
 
-MessageBatchErroredResult object{ error, type }
+MessageBatchErroredResult object{ error, type }
 
 
 
-error: [ErrorResponse](api/http/$shared.md) { error, request\_id, type }
+error: [ErrorResponse](api/http/$shared.md) { error, request\_id, type }
 
 
 
-error: [ErrorObject](api/http/$shared.md)
+error: [ErrorObject](api/http/$shared.md)
 
 One of the following:
 
-request\_id: string or null
+request\_id: string or null
 
 
 
-type: "error"
+type: "error"
 
 defaulterror
 
 
 
-type: "errored"
+type: "errored"
 
 defaulterrored
 
 
 
-MessageBatchExpiredResult object{ type }
+MessageBatchExpiredResult object{ type }
 
 
 
-type: "expired"
+type: "expired"
 
 defaultexpired
 
 
 
-MessageBatchIndividualResponse object{ custom\_id, result }
+MessageBatchIndividualResponse object{ custom\_id, result }
 
 This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
 
 
-custom\_id: string
+custom\_id: string
 
 Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
 
@@ -120,7 +120,7 @@ Must be unique for each request within the Message Batch.
 
 
 
-result: [MessageBatchResult](api/http/messages/batches.md)
+result: [MessageBatchResult](api/http/messages/batches.md)
 
 Processing result for this request.
 
@@ -130,11 +130,11 @@ One of the following:
 
 
 
-MessageBatchRequestCounts object{ canceled, errored, expired, 2 more }
+MessageBatchRequestCounts object{ canceled, errored, expired, 2 more }
 
 
 
-canceled: number
+canceled: number
 
 Number of requests in the Message Batch that have been canceled.
 
@@ -144,7 +144,7 @@ default0
 
 
 
-errored: number
+errored: number
 
 Number of requests in the Message Batch that encountered an error.
 
@@ -154,7 +154,7 @@ default0
 
 
 
-expired: number
+expired: number
 
 Number of requests in the Message Batch that have expired.
 
@@ -164,7 +164,7 @@ default0
 
 
 
-processing: number
+processing: number
 
 Number of requests in the Message Batch that are processing.
 
@@ -172,7 +172,7 @@ default0
 
 
 
-succeeded: number
+succeeded: number
 
 Number of requests in the Message Batch that have completed successfully.
 
@@ -182,7 +182,7 @@ default0
 
 
 
-MessageBatchResult = [MessageBatchSucceededResult](api/http/messages/batches.md) { message, type } or [MessageBatchErroredResult](api/http/messages/batches.md) { error, type } or [MessageBatchCanceledResult](api/http/messages/batches.md) { type } or [MessageBatchExpiredResult](api/http/messages/batches.md) { type }
+MessageBatchResult = [MessageBatchSucceededResult](api/http/messages/batches.md) { message, type } or [MessageBatchErroredResult](api/http/messages/batches.md) { error, type } or [MessageBatchCanceledResult](api/http/messages/batches.md) { type } or [MessageBatchExpiredResult](api/http/messages/batches.md) { type }
 
 Processing result for this request.
 
@@ -192,15 +192,15 @@ One of the following:
 
 
 
-MessageBatchSucceededResult object{ message, type }
+MessageBatchSucceededResult object{ message, type }
 
 
 
-message: [Message](api/http/messages.md) { id, container, content, 7 more }
+message: [Message](api/http/messages.md) { id, container, content, 7 more }
 
 
 
-type: "succeeded"
+type: "succeeded"
 
 defaultsucceeded
 

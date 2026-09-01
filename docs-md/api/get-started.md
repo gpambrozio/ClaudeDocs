@@ -4,18 +4,18 @@
 
 
 
-##  Prerequisites
+## Prerequisites
 
 - A [Claude Console account](https://platform.claude.com)
 - An [API key](/settings/keys)
 
-##  Call the API
+## Call the API
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 1. 1
 
-   Set your API key
+   ### Set your API key
 
    Export your API key as an environment variable. The SDK reads `ANTHROPIC_API_KEY` automatically.
 
@@ -26,7 +26,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
    
 2. 2
 
-   Create a project and install the SDK
+   ### Create a project and install the SDK
 
    ```shiki
    mkdir claude-quickstart && cd claude-quickstart
@@ -37,7 +37,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
    
 3. 3
 
-   Create your code
+   ### Create your code
 
    Create a file called `quickstart.py`:
 
@@ -67,7 +67,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
    ```
 4. 4
 
-   Run your code
+   ### Run your code
 
    ```shiki
    python quickstart.py
@@ -87,7 +87,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
    - ...
    ```
 
-##  Next steps
+## Next steps
 
 You made your first API call. Next, learn the Messages API patterns you'll use in every Claude integration.
 

@@ -12,7 +12,7 @@ List Compliance Group Members
 
 ##### Path parameters
 
-group\_id: string
+group\_id: string
 
 The group ID (tagged ID, e.g., rbac\_group\_abc123)
 
@@ -20,7 +20,7 @@ The group ID (tagged ID, e.g., rbac\_group\_abc123)
 
 
 
-limit: optional number
+limit: optional number
 
 Maximum results (default: 500, max: 1000)
 
@@ -30,53 +30,49 @@ maximum1000
 
 minimum1
 
-page: optional string
+page: optional string
 
 Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
 ##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### Returns
 
 
 
-data: array of object{ created\_at, email, updated\_at, user\_id }
+data: array of object{ created\_at, email, updated\_at, user\_id }
 
 List of group members
 
-created\_at: string or null
+created\_at: string or null
 
 Membership creation timestamp (ISO 8601)
 
-email: string
+email: string
 
 Member email address
 
-updated\_at: string or null
+updated\_at: string or null
 
 Membership last-updated timestamp (ISO 8601)
 
-user\_id: string
+user\_id: string
 
 Member user identifier (tagged ID)
 
-has\_more: boolean
+has\_more: boolean
 
 Whether more records exist beyond the current result set
 
-next\_page: string or null
+next\_page: string or null
 
 Token to retrieve the next page. Use this as the 'page' parameter in your next request
 
-
+List Compliance Group Members
 
-### List Compliance Group Members
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID/members \

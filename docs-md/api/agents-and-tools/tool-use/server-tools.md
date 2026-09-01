@@ -6,7 +6,7 @@
 
 Server-executed tools share these mechanics: the `server_tool_use` block, `pause_turn` continuation, turns that mix server and client tools, Zero Data Retention (ZDR) eligibility, and domain filtering. For individual tools, see the [tool reference](agents-and-tools/tool-use/tool-reference.md).
 
-##  The server\_tool\_use block
+## The server\_tool\_use block
 
 The `server_tool_use` block appears in Claude's response when a server-executed tool runs. Its `id` field uses the `srvtoolu_` prefix to distinguish it from client tool calls:
 
@@ -23,7 +23,7 @@ The `server_tool_use` block appears in Claude's response when a server-executed 
 
 The API executes the tool internally. You see the call and its result in the response, but you don't handle execution. Unlike client `tool_use` blocks, you don't need to respond with a `tool_result`. The tool's result block (for example, `web_search_tool_result` for web search) follows the `server_tool_use` block in the same assistant turn, paired by `tool_use_id`. If Claude calls one of your client tools at the same time, the `server_tool_use` block appears without its result, and the response ends with `stop_reason: "tool_use"`. The API runs the tool when you return the client `tool_result` blocks in your next request.
 
-##  The server-side loop and pause\_turn
+## The server-side loop and pause\_turn
 
 When using server tools such as web search, the API executes tool calls in a server-side agentic loop. On a long-running turn, the API might pause that loop and return a `pause_turn` stop reason.
 
@@ -81,7 +81,7 @@ When handling `pause_turn`:
 
 For the other `stop_reason` values and general handling patterns, see [Stop reasons and fallback](build-with-claude/handling-stop-reasons.md).
 
-##  Mixing server tools and client tools in one turn
+## Mixing server tools and client tools in one turn
 
 Claude can call a server tool and a client tool in the same group of parallel tool calls, for example, `web_fetch` together with a user-defined tool. A client tool is any tool that your code executes and that produces a `tool_use` block, whether it is user-defined or an Anthropic-schema client tool such as the [Bash tool](agents-and-tools/tool-use/bash-tool.md). When that happens, the API does not run the server tool. It returns immediately so that you can run the client tool first:
 
@@ -235,7 +235,7 @@ else:
 
 This code is also correct when Claude does not mix the two kinds of call. A turn with only client `tool_use` blocks takes the same continuation path, and a turn with only server tool calls needs no client `tool_result` blocks from you: its result blocks are normally already present, and one that comes back suspended, such as a [`pause_turn` response](#the-server-side-loop-and-pause-turn), is re-sent as-is instead.
 
-##  ZDR and allowed\_callers
+## ZDR and allowed\_callers
 
 The basic versions of web search (`web_search_20250305`) and web fetch (`web_fetch_20250910`) are eligible for [Zero Data Retention (ZDR)](manage-claude/api-and-data-retention.md).
 
@@ -257,7 +257,7 @@ This restricts the tool to direct invocation only, bypassing the internal code e
 
 `allowed_callers` controls how a tool can be invoked: directly by Claude (`"direct"`), from inside a code execution container (for example, `"code_execution_20260120"`), or both. The `_20260209` versions of the web tools default to the code execution caller only; earlier versions default to `["direct"]`. On models that don't support programmatic tool calling, these versions require `allowed_callers: ["direct"]`; without it the API returns a validation error that says to set it.
 
-##  Domain filtering
+## Domain filtering
 
 Server tools that access the web accept `allowed_domains` and `blocked_domains` parameters to control which domains Claude can reach. Both are fields on the tool object:
 
@@ -292,23 +292,23 @@ Invalid domain formats are rejected at request time with a 400 `invalid_request_
 
 Organization-level web search and web fetch settings in the Claude Console apply to Messages API requests only; they do not apply to Managed Agents sessions, which use only the per-tool lists on the agent toolset.
 
-##  Dynamic filtering with code execution
+## Dynamic filtering with code execution
 
 The `_20260209` and later versions of web search and web fetch use code execution internally to apply dynamic filters against search results.
 
-##  Streaming server-tool events
+## Streaming server-tool events
 
 Server-tool events stream as part of the normal server-sent events (SSE) flow. A `server_tool_use` block that Claude calls directly streams like a client `tool_use` block: a `content_block_start` event followed by `input_json_delta` events. The result block arrives complete in a single `content_block_start` event, with no deltas.
 
 See [Streaming](build-with-claude/streaming.md) for the full event reference. Individual tool pages document tool-specific event names where they differ.
 
-##  Batch requests
+## Batch requests
 
 All server tools support batch processing. In a batch, the agentic loop runs just as it does for synchronous requests, with a higher per-turn iteration limit. If the loop reaches that limit, the response ends with `stop_reason: "pause_turn"`; you can continue it by submitting a follow-up request with the returned content. See [Server tools and the agentic loop](build-with-claude/batch-processing.md) for details.
 
 Common batch workloads include enriching a dataset with information from the web, checking a large set of documents against current sources, and running analysis code over many files.
 
-##  Next steps
+## Next steps
 
 
 

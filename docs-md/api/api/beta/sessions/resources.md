@@ -32,37 +32,37 @@ cURL
 
 
 
-BetaManagedAgentsDeleteSessionResource object{ id, type }
+BetaManagedAgentsDeleteSessionResource object{ id, type }
 
 Confirmation of resource deletion.
 
-id: string
+id: string
 
-type: "session\_resource\_deleted"
-
-
-
-BetaManagedAgentsFileResource object{ id, created\_at, file\_id, 3 more }
-
-id: string
+type: "session\_resource\_deleted"
 
 
 
-created\_at: string
+BetaManagedAgentsFileResource object{ id, created\_at, file\_id, 3 more }
+
+id: string
+
+
+
+created\_at: string
 
 A timestamp in RFC 3339 format
 
 formatdate-time
 
-file\_id: string
+file\_id: string
 
-mount\_path: string
+mount\_path: string
 
-type: "file"
+type: "file"
 
 
 
-updated\_at: string
+updated\_at: string
 
 A timestamp in RFC 3339 format
 
@@ -70,17 +70,17 @@ formatdate-time
 
 
 
-BetaManagedAgentsGitHubRepositoryResource object{ id, created\_at, mount\_path, 4 more }
+BetaManagedAgentsGitHubRepositoryResource object{ id, created\_at, mount\_path, 4 more }
 
 
 
-BetaManagedAgentsMemoryStoreResource object{ memory\_store\_id, type, access, 4 more }
+BetaManagedAgentsMemoryStoreResource object{ memory\_store\_id, type, access, 4 more }
 
 A memory store attached to an agent session.
 
 
 
-BetaManagedAgentsSessionResource = [BetaManagedAgentsGitHubRepositoryResource](api/http/beta/sessions/resources.md) { id, created\_at, mount\_path, 4 more } or [BetaManagedAgentsFileResource](api/http/beta/sessions/resources.md) { id, created\_at, file\_id, 3 more } or [BetaManagedAgentsMemoryStoreResource](api/http/beta/sessions/resources.md) { memory\_store\_id, type, access, 4 more }
+BetaManagedAgentsSessionResource = [BetaManagedAgentsGitHubRepositoryResource](api/http/beta/sessions/resources.md) { id, created\_at, mount\_path, 4 more } or [BetaManagedAgentsFileResource](api/http/beta/sessions/resources.md) { id, created\_at, file\_id, 3 more } or [BetaManagedAgentsMemoryStoreResource](api/http/beta/sessions/resources.md) { memory\_store\_id, type, access, 4 more }
 
 A memory store attached to an agent session.
 
@@ -88,7 +88,7 @@ One of the following:
 
 
 
-ResourceRetrieveResponse = [BetaManagedAgentsGitHubRepositoryResource](api/http/beta/sessions/resources.md) { id, created\_at, mount\_path, 4 more } or [BetaManagedAgentsFileResource](api/http/beta/sessions/resources.md) { id, created\_at, file\_id, 3 more } or [BetaManagedAgentsMemoryStoreResource](api/http/beta/sessions/resources.md) { memory\_store\_id, type, access, 4 more }
+ResourceRetrieveResponse = [BetaManagedAgentsGitHubRepositoryResource](api/http/beta/sessions/resources.md) { id, created\_at, mount\_path, 4 more } or [BetaManagedAgentsFileResource](api/http/beta/sessions/resources.md) { id, created\_at, file\_id, 3 more } or [BetaManagedAgentsMemoryStoreResource](api/http/beta/sessions/resources.md) { memory\_store\_id, type, access, 4 more }
 
 The requested session resource.
 
@@ -96,7 +96,7 @@ One of the following:
 
 
 
-ResourceUpdateResponse = [BetaManagedAgentsGitHubRepositoryResource](api/http/beta/sessions/resources.md) { id, created\_at, mount\_path, 4 more } or [BetaManagedAgentsFileResource](api/http/beta/sessions/resources.md) { id, created\_at, file\_id, 3 more } or [BetaManagedAgentsMemoryStoreResource](api/http/beta/sessions/resources.md) { memory\_store\_id, type, access, 4 more }
+ResourceUpdateResponse = [BetaManagedAgentsGitHubRepositoryResource](api/http/beta/sessions/resources.md) { id, created\_at, mount\_path, 4 more } or [BetaManagedAgentsFileResource](api/http/beta/sessions/resources.md) { id, created\_at, file\_id, 3 more } or [BetaManagedAgentsMemoryStoreResource](api/http/beta/sessions/resources.md) { memory\_store\_id, type, access, 4 more }
 
 The updated session resource.
 

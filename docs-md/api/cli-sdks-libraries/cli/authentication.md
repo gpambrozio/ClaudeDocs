@@ -6,7 +6,7 @@
 
 The `ant` CLI supports several credential sources. The [Quickstart](cli-sdks-libraries/cli/quickstart.md) covers the one-command happy path (`ant auth login`). This page covers every option in full.
 
-##  Interactive login
+## Interactive login
 
 `ant auth login` lets you call the API without creating or managing an API key. It opens a browser-based OAuth flow against the Claude Console and stores the resulting credentials under `$ANTHROPIC_CONFIG_DIR` (see [Configuration directory](manage-claude/wif-reference.md) for the OS-specific default). On a remote host or in any environment without a local browser, pass `--no-browser` to print the authorize URL and paste the returned code back into the terminal.
 
@@ -34,7 +34,7 @@ Interactive login is intended for local development and scripting on your own ma
 
 Login writes credentials to `credentials/<profile>.json`. The first login for a profile also creates `configs/<profile>.json` and sets it as the active profile. To remove stored credentials, run `ant auth logout`, or `ant auth logout --all` to clear every profile.
 
-##  Admin access
+## Admin access
 
 By default, `ant auth login` requests a workspace-scoped token. To manage the resources documented on the [Admin API](manage-claude/admin-api.md) page, request the `org:admin` scope under a dedicated profile:
 
@@ -51,7 +51,7 @@ ant auth print-credentials --profile admin --access-token
 
 The `org:admin` scope is granted only to organization members with the admin, owner, or primary owner role. The issued token has organization-wide access, and any workspace binding on the profile does not constrain it. Keep the admin profile separate from your day-to-day profile so routine commands never run with elevated access.
 
-##  API key
+## API key
 
 The CLI also reads your API key from the `ANTHROPIC_API_KEY` environment variable. Get a key from the [Claude Console](https://platform.claude.com/settings/keys).
 
@@ -80,7 +80,7 @@ ant messages create \
   --message '{role: user, content: "Hello, Claude"}'
 ```
 
-##  Check authentication status
+## Check authentication status
 
 `ant auth status` prints the credential source the CLI selected (API key environment variable, OAuth login, federation, or profile), the active profile, the workspace the active token is bound to, and the configuration directory paths. Use it to diagnose why a workload picked the wrong credential or workspace.
 
@@ -110,7 +110,7 @@ Workspace
 
 Read the `(active)` rows to see which credential source and workspace won. The command reports status rather than performing a health check, so don't script against the exit status. For the full ordering of credential sources, see [Credential precedence](manage-claude/wif-reference.md).
 
-##  Switch between workspaces
+## Switch between workspaces
 
 An interactive-login token is bound to a single workspace. To use the CLI against more than one workspace, log in to each under its own named profile, then switch between them:
 
@@ -133,7 +133,7 @@ ANTHROPIC_PROFILE=other-ws ant models list
 
 Run [`ant auth status`](#check-authentication-status) to confirm which profile and workspace are active.
 
-##  Manage profiles
+## Manage profiles
 
 The `ant profile` subcommands inspect and edit profile state directly:
 
@@ -151,7 +151,7 @@ The writable keys for `ant profile set` are `workspace_id`, `base_url`, `organiz
 
 For the profile file schema and the federation block, see [Profile configuration file](manage-claude/wif-reference.md). For Workload Identity Federation, see the [Authentication overview](manage-claude/authentication.md) and the [WIF reference](manage-claude/wif-reference.md).
 
-##  Next steps
+## Next steps
 
 
 

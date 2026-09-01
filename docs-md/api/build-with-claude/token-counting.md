@@ -12,15 +12,15 @@ Token counting lets you determine the number of tokens in a message before you s
 
 ---
 
-##  How to count message tokens
+## How to count message tokens
 
 The [token counting](api/messages-count-tokens.md) endpoint accepts the same structured list of inputs for creating a message, including support for system prompts, [tools](agents-and-tools/tool-use/overview.md), [images](build-with-claude/vision.md), and [PDFs](build-with-claude/pdf-support.md). The response contains the total number of input tokens.
 
-###  Supported models
+### Supported models
 
 All [active models](models/overview.md) support token counting, including Claude Opus 5 and Claude Sonnet 5.
 
-###  Count tokens in basic messages
+### Count tokens in basic messages
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -46,7 +46,7 @@ Output
 { "input_tokens": 14 }
 ```
 
-###  Count tokens in messages with tools
+### Count tokens in messages with tools
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -87,7 +87,7 @@ Output
 { "input_tokens": 403 }
 ```
 
-###  Count tokens in messages with images
+### Count tokens in messages with images
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -135,7 +135,7 @@ Output
 
 An embedded image block that sets [`"oversized_image": "error"`](build-with-claude/vision-coordinates.md) is rejected at count time exactly as the Messages API would reject it.
 
-###  Count tokens in messages with thinking
+### Count tokens in messages with thinking
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -181,7 +181,7 @@ Output
 { "input_tokens": 88 }
 ```
 
-###  Count tokens in messages with PDFs
+### Count tokens in messages with PDFs
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -229,31 +229,31 @@ Output
 
 ---
 
-##  Token counts on Claude Fable 5 and Claude Mythos 5
+## Token counts on Claude Fable 5 and Claude Mythos 5
 
 Claude Fable 5 and Claude Mythos 5 use the tokenizer introduced with Claude Opus 4.7, which produces roughly 30 percent more tokens than models before Claude Opus 4.7 for the same text. The exact increase depends on the content and workload shape. The token counting endpoint returns the count under the tokenizer of the `model` you pass, so to measure the difference for your workload, count the same request twice: once with your current model and once with `model: "claude-fable-5"` (or `"claude-mythos-5"`), and compare the two `input_tokens` values.
 
 ---
 
-##  Pricing and rate limits
+## Pricing and rate limits
 
 Token counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](api/rate-limits.md). If you need higher limits, use **Request rate limit increase** on the [Rate limits](/settings/limits) page.
 
 | Usage tier | Requests per minute (RPM) |
 | --- | --- |
-| Start | 2,000 |
-| Build | 4,000 |
-| Scale | 8,000 |
+| Start | 5,000 |
+| Build | 10,000 |
+| Scale | 20,000 |
 
 ---
 
-##  FAQ
+## FAQ
 
 ### Does token counting use prompt caching?
 
 ---
 
-##  Next steps
+## Next steps
 
 
 

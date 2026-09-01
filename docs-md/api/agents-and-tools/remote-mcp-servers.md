@@ -6,7 +6,7 @@
 
 Several companies have deployed remote MCP servers that developers can connect to by using the Anthropic MCP connector API. These servers expand the capabilities available to developers and end users by providing remote access to various services and tools through the MCP protocol.
 
-##  Connecting to remote MCP servers
+## Connecting to remote MCP servers
 
 To connect to a remote MCP server:
 
@@ -16,7 +16,7 @@ To connect to a remote MCP server:
 
 For more information about using remote MCP servers with the Claude API, see [MCP connector](agents-and-tools/mcp-connector.md).
 
-##  Remote MCP server examples
+## Remote MCP server examples
 
 [Ticket Tailor(opens in new tab)](https://help.tickettailor.com/en/articles/11892797-how-to-connect-ticket-tailor-to-your-favourite-ai-agent)
 

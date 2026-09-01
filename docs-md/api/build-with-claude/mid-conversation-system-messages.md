@@ -10,7 +10,7 @@ Mid-conversation system messages close that gap. You append a `{"role": "system"
 
 This page covers two features: mid-conversation system messages, and [mid-conversation tool changes](#mid-conversation-tool-changes), a beta introduced with Claude Opus 5 that applies the same approach to the `tools` array.
 
-##  Mid-conversation tool changes
+## Mid-conversation tool changes
 
 The `tools` array sits even earlier in the hashed request prefix than the top-level `system` field, so editing it invalidates the [prompt cache](build-with-claude/prompt-caching.md) for the entire conversation. Mid-conversation tool changes, a beta introduced with Claude Opus 5, are the tools counterpart to mid-conversation system messages. Instead of fixing the tool list for the lifetime of the conversation, you change which tools are offered to the model between turns: declare the full tool set in `tools` up front, then use `tool_addition` and `tool_removal` blocks to offer a tool to the model, or withdraw it, from a specific point in the conversation onward. The `tools` array itself never changes, so the cached prefix stays intact.
 
@@ -71,7 +71,7 @@ for block in response.content:
 
 Mid-conversation tool changes are in beta. To use them, include the beta header `mid-conversation-tool-changes-2026-07-01` in your requests. They are available on Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, and Claude Opus 5, on the Claude API, Amazon Bedrock, and Google Cloud.
 
-##  When to use a mid-conversation system message
+## When to use a mid-conversation system message
 
 [Prompt caching](build-with-claude/prompt-caching.md) hashes the request prefix in order: `tools`, then `system`, then `messages`. A cache hit requires the prefix to match a recent request exactly, byte for byte, up to the cache breakpoint.
 
@@ -89,7 +89,7 @@ A few situations where this matters:
 
 In all of these cases you could put the instruction in a regular `user` message, and Claude does follow instructions that arrive in user turns. The difference is priority: a `user` message is treated as coming from the end user, while a `system` message is treated as coming from you, the application operator. When the two conflict, system instructions take precedence, so use the `system` role for operator-level facts and constraints that should hold even if the end user asks for something different. A mid-conversation system message keeps that operator-level priority without paying the cache-miss cost of editing the top-level `system` field.
 
-##  How it works
+## How it works
 
 Add a message with `"role": "system"` to the `messages` array. Use a plain string or content blocks for `content`, the same as a `user` or `assistant` turn. The instruction applies from that point in the conversation onward. When instructions conflict, later system messages take precedence over earlier ones, and mid-conversation system messages take precedence over the top-level `system` field for the turns that follow them.
 
@@ -142,7 +142,7 @@ This example enables [automatic caching](build-with-claude/prompt-caching.md) wi
 
 A mid-conversation system message must immediately follow a `user` turn (or an `assistant` turn ending in a server tool result), and must either be the last entry in `messages` or be immediately followed by an `assistant` turn. A `user` message that carries `tool_result` blocks counts: in an agentic loop you can place the system message right after the tool results, before Claude's next turn. Any other position, including between an `assistant` `tool_use` block and the `tool_result` that answers it, returns a 400 error.
 
-###  Placement after tool results
+### Placement after tool results
 
 In an [agentic loop](agents-and-tools/tool-use/overview.md), the system message goes after the `user` message that delivers the tool results. This is also where your application can relay input that the user typed while Claude was working, so the new context is absorbed without restarting the turn:
 
@@ -172,7 +172,7 @@ Phrase the system content as context rather than as a command that overrides the
 
 This pattern is for relaying input from the conversation's own end user. Do not use it to pass tool output, retrieved documents, or other third-party content; keep that content in `tool_result` blocks (see [Limitations](#limitations)).
 
-##  Combining with prompt caching
+## Combining with prompt caching
 
 Mid-conversation system messages and [prompt caching](build-with-claude/prompt-caching.md) are designed to be used together:
 
@@ -183,13 +183,13 @@ Mid-conversation system messages and [prompt caching](build-with-claude/prompt-c
 
 Avoid editing or removing a mid-conversation system message that has already been sent. Like any other change to earlier messages, that invalidates the cache from that point forward. If the instruction needs to evolve, append a new system message rather than rewriting the old one. Consecutive system messages are accepted and treated as a single system section, which follows the same placement rule as a whole.
 
-##  Limitations
+## Limitations
 
 - **Not for the first message.** A `system` message cannot be the first entry in `messages`. Use the top-level `system` field for instructions that apply from the very start.
 - **Placement is constrained.** A `system` message must immediately follow a `user` turn (including a `user` turn that carries `tool_result` blocks) or an `assistant` turn ending in a server tool result, and must precede an `assistant` turn or end the array. It cannot sit between a `tool_use` block and its `tool_result`. Placing it elsewhere returns a 400 error.
 - **Not a place for untrusted content.** Claude treats system content as operator instructions and follows it. Do not place text from outside the conversation, such as raw tool output, retrieved documents, or web content, directly in a system message; doing so gives that text operator-level authority. Keep that data in `tool_result` blocks and continue to follow [Mitigate jailbreaks and prompt injections](test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks.md).
 
-##  Related
+## Related
 
 
 

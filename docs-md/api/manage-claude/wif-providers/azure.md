@@ -13,7 +13,7 @@ Azure workloads authenticate to the Claude API by presenting a JSON Web Token (J
 
 On both paths the token you present to Anthropic carries your tenant-specific Entra issuer and the managed identity's object ID in the `sub` and `oid` claims; only how the workload obtains that token differs. Pick the section for where your workload runs: [Use a managed identity](#use-a-managed-identity) for VMs, VM Scale Sets, App Service, Functions, or Container Apps; [Use Entra Workload Identity on AKS](#use-entra-workload-identity-on-aks) for AKS.
 
-##  Prerequisites
+## Prerequisites
 
 - Familiarity with [WIF concepts](manage-claude/workload-identity-federation.md): service accounts, federation issuers, and federation rules.
 - An Azure subscription with permission to assign managed identities (or configure Entra Workload Identity on AKS).
@@ -21,7 +21,7 @@ On both paths the token you present to Anthropic carries your tenant-specific En
 - Your Microsoft Entra tenant ID. Find it in the Azure portal under **Microsoft Entra ID → Overview → Tenant ID**.
 - Permission to create service accounts, federation issuers, and federation rules in the Claude Console for your Anthropic organization.
 
-##  Register the token audience
+## Register the token audience
 
 Microsoft Entra ID only issues a token when the requested audience exists in your tenant as an app registration with a service principal. Create one app registration to represent the Claude API audience; every workload in the tenant can request tokens for it. Without this registration, token requests fail with a "resource not found in tenant" error (`AADSTS50001` from the managed identity endpoints, `AADSTS500011` from the Entra token endpoint).
 
@@ -40,22 +40,22 @@ az ad sp create --id "$APP_ID"
 
 
 
-##  Use a managed identity
+## Use a managed identity
 
 Use this path when your workload runs on a VM, a VM Scale Set, App Service, Functions, or Container Apps. The workload requests an Entra-issued JWT for its assigned managed identity from the platform's local token endpoint, then exchanges that JWT with Anthropic.
 
-###  Configure the managed identity
+### Configure the managed identity
 
 1. 1
 
-   Attach a managed identity
+   ### Attach a managed identity
 
    Enable a system-assigned or user-assigned managed identity on your Azure resource. In the Azure portal, open the resource, go to **Identity**, and turn on **System assigned** (or attach a user-assigned identity).
 
    After the identity is created, note its **Object (principal) ID**. This GUID appears as both the `sub` and `oid` claims in the issued token, and your Anthropic federation rule will match on it. You can find it on the resource's **Identity** page; for a user-assigned identity, it is the **Object (principal) ID** on the managed identity resource's **Overview** page. (A managed identity has only a service principal in Microsoft Entra ID, not an app registration.)
 2. 2
 
-   Find the platform's token endpoint
+   ### Find the platform's token endpoint
 
    The platform exposes a local token endpoint once the identity is attached:
 
@@ -65,7 +65,7 @@ Use this path when your workload runs on a VM, a VM Scale Set, App Service, Func
    If the resource has more than one user-assigned managed identity, add `client_id=<IDENTITY_CLIENT_ID>` to the token request to select one. Azure recommends always specifying it. Without it, the outcome depends on whether the resource also has a system-assigned identity enabled: if it does, the request silently falls back to that identity and then fails your federation rule's `oid` match; if it does not, the request fails outright as soon as a second user-assigned identity is attached.
 3. 3
 
-   Decode a sample token
+   ### Decode a sample token
 
    Request a token from the endpoint and decode its payload to confirm the claims your federation rule needs to match. (For the decode command, see [Troubleshoot a failed exchange](manage-claude/wif-reference.md).) A v2.0 token for a managed identity carries these claims:
 
@@ -93,7 +93,7 @@ Use this path when your workload runs on a VM, a VM Scale Set, App Service, Func
 
    If the decoded token's `ver` claim is `1.0`, the claim names and values differ. See [If your tokens are v1.0](#if-your-tokens-are-v1-0) before continuing.
 
-###  Configure Anthropic
+### Configure Anthropic
 
 In the Claude Console, open **Settings → Workload identity**, click **Connect workload**, and select the **Microsoft Entra** tile. The wizard walks you through registering the issuer, creating a service account, and creating a federation rule.
 
@@ -141,7 +141,7 @@ A longer accepted lifetime means a leaked Entra token stays exchangeable for lon
 
 `token_lifetime_seconds` is the lifetime of the Anthropic access token the exchange returns, not of the Entra token; the SDK refreshes it for you.
 
-###  Acquire and use the token
+### Acquire and use the token
 
 At runtime your workload fetches its Entra token, exchanges it at `POST /v1/oauth/token`, and uses the returned bearer token to call Claude. Each Anthropic SDK handles the exchange and refresh loop when you supply a token-provider callable, as shown in the following examples. The cURL tab shows the raw flow.
 
@@ -202,7 +202,7 @@ message = client.messages.create(
 print(next(block.text for block in message.content if block.type == "text"))
 ```
 
-###  Verify the setup
+### Verify the setup
 
 From your Azure resource, run the cURL exchange shown in [Acquire and use the token](#acquire-and-use-the-token) and confirm that `POST /v1/oauth/token` returns a `200` with an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. If the exchange fails with the opaque `401` `authentication_error` response (message `Authentication failed`), check the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) for the deny reason, then decode the Entra token (see [Troubleshoot a failed exchange](manage-claude/wif-reference.md) for the command) and check the most common Azure-side causes:
 
@@ -211,15 +211,15 @@ From your Azure resource, run the cURL exchange shown in [Acquire and use the to
 - **Audience mismatch:** The rule's `audience` must equal the token's `aud` exactly: the audience app registration's client ID for the v2.0 tokens this guide configures.
 - **Claim name mismatch:** A rule that matches on a claim the token does not carry never passes. v1.0 tokens carry the client ID in `appid`, not `azp`; see [If your tokens are v1.0](#if-your-tokens-are-v1-0).
 
-##  Use Entra Workload Identity on AKS
+## Use Entra Workload Identity on AKS
 
 Use this path when your workload runs in an AKS pod. Entra Workload Identity federates a Kubernetes service account with a user-assigned managed identity: Kubernetes projects a service account token (signed by the AKS cluster's OIDC issuer) into the pod at the path in `AZURE_FEDERATED_TOKEN_FILE`. That projected token is not an Entra-issued token, so to stay on the Entra-mediated path described on this page, the workload performs a two-hop exchange: it first redeems the projected token at `https://login.microsoftonline.com/<TENANT_ID>/oauth2/v2.0/token` (federated `client_credentials` grant) for an Entra-issued access token, then passes that Entra token to the Anthropic SDK as the identity token.
 
-###  Configure Entra Workload Identity
+### Configure Entra Workload Identity
 
 1. 1
 
-   Enable the OIDC issuer and workload identity on your cluster
+   ### Enable the OIDC issuer and workload identity on your cluster
 
    Enabling workload identity installs the `azure-workload-identity` mutating webhook for you; deploy it manually only on non-AKS clusters. Capture the cluster's OIDC issuer URL for the federated credential you create in a later step.
 
@@ -239,7 +239,7 @@ Use this path when your workload runs in an AKS pod. Entra Workload Identity fed
    
 2. 2
 
-   Create a user-assigned managed identity
+   ### Create a user-assigned managed identity
 
    Capture two values from the identity: the **Client ID** goes into the service account annotation (and is injected into the pod as `AZURE_CLIENT_ID`), and the **Object (principal) ID** appears as the `oid` claim that your Anthropic federation rule matches.
 
@@ -265,7 +265,7 @@ Use this path when your workload runs in an AKS pod. Entra Workload Identity fed
    
 3. 3
 
-   Create the annotated Kubernetes service account
+   ### Create the annotated Kubernetes service account
 
    The `azure-workload-identity` webhook reads the `azure.workload.identity/client-id` annotation to inject `AZURE_CLIENT_ID` into the pod, which the samples in [Acquire and use the token](#acquire-and-use-the-token-2) read from the environment.
 
@@ -282,7 +282,7 @@ Use this path when your workload runs in an AKS pod. Entra Workload Identity fed
    
 4. 4
 
-   Create the federated credential on the managed identity
+   ### Create the federated credential on the managed identity
 
    The federated credential trusts your cluster's OIDC issuer for that specific service account. The `--audience api://AzureADTokenExchange` value is Entra's fixed audience for incoming Kubernetes service account tokens; it is unrelated to the Claude API audience you registered earlier.
 
@@ -299,7 +299,7 @@ Use this path when your workload runs in an AKS pod. Entra Workload Identity fed
    
 5. 5
 
-   Label the pod and set its service account
+   ### Label the pod and set its service account
 
    The pod must carry the `azure.workload.identity/use: "true"` label and run as the annotated service account. The webhook then injects `AZURE_FEDERATED_TOKEN_FILE`, `AZURE_CLIENT_ID`, and `AZURE_TENANT_ID` into the pod. The file at `AZURE_FEDERATED_TOKEN_FILE` contains the Kubernetes-projected service account token, signed by the AKS cluster's OIDC issuer.
 
@@ -321,7 +321,7 @@ Use this path when your workload runs in an AKS pod. Entra Workload Identity fed
    
 6. 6
 
-   Decode a sample token
+   ### Decode a sample token
 
    The token your Anthropic federation rule sees is not the projected file; it is the Entra-issued token returned by the `client_credentials` exchange. From inside a labeled pod, run step 1 of the cURL sample in [Acquire and use the token](#acquire-and-use-the-token-2) and decode the result. It carries the same claim shape as the managed identity path:
 
@@ -342,7 +342,7 @@ Use this path when your workload runs in an AKS pod. Entra Workload Identity fed
 
    `sub` and `oid` are the managed identity's object ID, `aud` is the audience app registration's client ID, and `azp` is the managed identity's client ID (the value of `AZURE_CLIENT_ID`). The lifetime differs from the managed identity path: `client_credentials` tokens default to a random 60 to 90 minute window between `iat` and `exp`, not 24 hours.
 
-###  Configure Anthropic
+### Configure Anthropic
 
 In the Claude Console, open **Settings → Workload identity**, click **Connect workload**, and select the **Microsoft Entra** tile. The wizard walks you through registering the issuer, creating a service account, and creating a federation rule.
 
@@ -390,7 +390,7 @@ A longer accepted lifetime means a leaked Entra token stays exchangeable for lon
 
 `token_lifetime_seconds` is the lifetime of the Anthropic access token the exchange returns, not of the Entra token; the SDK refreshes it for you.
 
-###  Acquire and use the token
+### Acquire and use the token
 
 At runtime the pod performs the two-hop exchange: it sends the Kubernetes-projected token (the file at `AZURE_FEDERATED_TOKEN_FILE`) to Entra's token endpoint as a federated `client_credentials` assertion, then exchanges the resulting Entra access token at `POST /v1/oauth/token`. Each Anthropic SDK handles the second exchange and the refresh loop when you supply the Entra fetch as a token-provider callable, as shown in the following examples. The cURL tab shows the raw flow.
 
@@ -442,7 +442,7 @@ message = client.messages.create(
 print(next(block.text for block in message.content if block.type == "text"))
 ```
 
-###  Verify the setup
+### Verify the setup
 
 From inside a labeled pod, run the cURL exchange shown in [Acquire and use the token](#acquire-and-use-the-token-2) and confirm that `POST /v1/oauth/token` returns a `200` with an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. If the exchange fails with the opaque `401` `authentication_error` response (message `Authentication failed`), check the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) for the deny reason, then decode the Entra-issued token from step 1 (see [Troubleshoot a failed exchange](manage-claude/wif-reference.md) for the command) and check the most common Azure-side causes:
 
@@ -451,7 +451,7 @@ From inside a labeled pod, run the cURL exchange shown in [Acquire and use the t
 - **Audience mismatch:** The rule's `audience` must equal the token's `aud` exactly: the audience app registration's client ID for the v2.0 tokens this guide configures.
 - **Claim name mismatch:** A rule that matches on a claim the token does not carry never passes. v1.0 tokens carry the client ID in `appid`, not `azp`; see [If your tokens are v1.0](#if-your-tokens-are-v1-0).
 
-##  If your tokens are v1.0
+## If your tokens are v1.0
 
 This guide configures the audience app registration with `api.requestedAccessTokenVersion: 2`, so every token it shows is v2.0. If you reuse an existing registration that leaves `requestedAccessTokenVersion` unset, Entra issues v1.0 tokens instead. Decode a sample token and check its `ver` claim; if it is `1.0`, four things change:
 
@@ -462,7 +462,7 @@ This guide configures the audience app registration with `api.requestedAccessTok
 
 The `oid`, `sub`, and `tid` claims carry the same values in both versions, so the rest of this guide applies unchanged.
 
-##  Scope your rule
+## Scope your rule
 
 A federation rule can match the token's subject with `subject_prefix` in addition to (or instead of) the `claims` map; see [Rule matching semantics](manage-claude/wif-reference.md) for how the fields combine. Entra `sub` values for these identities are fixed-length canonical GUIDs, so a `subject_prefix` containing the full 36-character object ID matches only that subject; this is a property of Entra's subject format, not of `subject_prefix` in general.
 
@@ -473,7 +473,7 @@ Lock the rule's `match` block to the narrowest scope that fits your use case:
 - **Pin the audience:** Set `audience` to the exact `aud` value from your decoded token so tokens minted for other applications are rejected.
 - **Use a separate rule for each managed identity:** Create one rule for each identity rather than one rule that authorizes several, so you can revoke a single workload's access without affecting others.
 
-##  Next steps
+## Next steps
 
 - Review the full configuration model in [Workload Identity Federation](manage-claude/workload-identity-federation.md).
 - See the [provider guides](manage-claude/workload-identity-federation.md) for AWS, Google Cloud, GitHub Actions, and Kubernetes.

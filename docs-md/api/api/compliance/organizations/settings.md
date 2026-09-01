@@ -14,7 +14,7 @@
 
 
 
-SettingRetrieveResponse object{ api\_keys, organization\_id, settings, type }
+SettingRetrieveResponse object{ api\_keys, organization\_id, settings, type }
 
 The resolved settings in force for one organization at read time.
 

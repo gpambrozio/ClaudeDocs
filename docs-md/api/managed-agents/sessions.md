@@ -6,7 +6,7 @@
 
 A session is an agent instance within an environment. Each session references an [agent](managed-agents/agent-setup.md) and an [environment](managed-agents/environments.md) (both created separately), and maintains conversation history across multiple interactions. Sessions follow a two-step lifecycle: first [create the session](#creating-a-session), then [send a user event](#starting-the-session) to start work. You can also collapse both steps into one call with [`initial_events`](#seed-the-session-with-initial-events).
 
-##  Creating a session
+## Creating a session
 
 A session requires an `agent` ID and an `environment` ID. Agents are versioned resources; passing in the `agent` ID as a string creates the session with the latest agent version.
 
@@ -36,7 +36,7 @@ environment_id: $ENVIRONMENT_ID
 YAML
 ```
 
-###  Seed the session with initial events
+### Seed the session with initial events
 
 You can create a session and start its work in one call. `initial_events` is an optional array of initial [events](managed-agents/reference.md) to send to the session at creation, processed in order. It supports `user.message` and [`user.define_outcome`](managed-agents/define-outcomes.md) events, and accepts a maximum of 50 events. A non-empty list starts the agent loop in the same call: the session is created directly in the `running` status, with no further request.
 
@@ -82,7 +82,7 @@ The create request is rejected in the following cases:
 
 A `user.define_outcome` event in `initial_events` is accepted under the same conditions as sending one to an existing session; see [Define outcomes](managed-agents/define-outcomes.md).
 
-###  Override agent configuration for a session
+### Override agent configuration for a session
 
 You can pass `agent` in three forms: an agent ID string, a pinned-version object (`type: "agent"`), or an overrides object. The overrides form changes parts of the agent's configuration for a single session. Use it to try a different model or grant an extra tool in one session without versioning the agent. For the overrides form, set `type` to `agent_with_overrides` and pass the agent's `id` and optionally a `version` (omit `version` to use the agent's latest version). Then include any of `model`, `system`, `tools`, `mcp_servers`, or `skills` with the values the session should use.
 
@@ -122,7 +122,7 @@ environment_id: $ENVIRONMENT_ID
 YAML
 ```
 
-####  Pin the inference geo for a session
+#### Pin the inference geo for a session
 
 Because a `model` override replaces the agent's `model` object in full, it also sets or clears the model's [`inference_geo`](manage-claude/data-residency.md) pin for the session: an override that includes `inference_geo` pins the geography that serves the session's model requests, and one that omits it clears the agent's pin so the session follows the workspace's `default_inference_geo`. The overridden value is validated against the workspace's `allowed_inference_geos` when the session is created.
 
@@ -147,7 +147,7 @@ YAML
 echo "Inference geo: $(jq -r '.agent.model.inference_geo' <<< "$session")"
 ```
 
-###  Set a session budget
+### Set a session budget
 
 To cap what a session can spend, pass the optional `budget` object when you create it. A budget is a hard ceiling on the session's list cost: the platform prices everything the session consumes at public list rates, and the session stops issuing new model requests once that running total reaches `max_list_cost`. Set `type` to `limit` and give `max_list_cost` an `amount` and a `currency`. `amount` is a whole number of US cents written as a string, such as `"2500"` for $25.00; the API takes a string rather than a number so no floating-point rounding is ever applied. `USD` is the only currency currently supported. When the session reaches the cap, it pauses and goes idle with the stop reason `budget_reached`. The cap is enforced between model requests, so the request that crosses it finishes first and the session's final list cost can land [a fraction past the cap](managed-agents/budgets.md). A budget can only be attached at creation: you can [change or remove](managed-agents/session-operations.md) it later, but you can't add one to a session created without it.
 
@@ -177,7 +177,7 @@ EOF
 
 See [Session budgets](managed-agents/budgets.md) for how enforcement works, what counts toward list cost, and how budgets behave in multiagent sessions.
 
-##  MCP authentication through vaults
+## MCP authentication through vaults
 
 If your agent uses MCP tools that require authentication, pass `vault_ids` at session creation to reference a vault containing stored OAuth credentials. Anthropic manages token refresh on your behalf. See [Authenticate with vaults](managed-agents/vaults.md) for how to create vaults and register credentials.
 
@@ -194,7 +194,7 @@ vault_ids:
 YAML
 ```
 
-##  Starting the session
+## Starting the session
 
 Creating a session without `initial_events` registers the session but does not start any work; the environment's sandbox begins provisioning as soon as the session is created, so the first tool call does not wait on it. To delegate a task, send events to the session using a [user event](managed-agents/reference.md). To supply the first event in the create request instead, see [Seed the session with initial events](#seed-the-session-with-initial-events). The session acts as a state machine that tracks progress while events drive the actual execution.
 
@@ -217,7 +217,7 @@ See [Session event stream](managed-agents/events-and-streaming.md) for how to st
 
 See [Session statuses](managed-agents/session-operations.md) for the statuses a session moves through.
 
-##  Next steps
+## Next steps
 
 
 

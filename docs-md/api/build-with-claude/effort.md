@@ -6,7 +6,7 @@
 
 The effort parameter lets you control how many tokens Claude spends when responding to requests. You can trade off between response thoroughness and token efficiency with a single model. The effort parameter is available on all supported models with no beta header required.
 
-##  How effort works
+## How effort works
 
 By default, Claude uses high effort, spending as many tokens as needed for excellent results. You can raise the effort level to `max` for the absolute highest capability, or lower it to be more conservative with token usage, optimizing for speed and cost while accepting some reduction in capability.
 
@@ -21,7 +21,7 @@ This approach has two major advantages:
 1. It doesn't require thinking to be enabled.
 2. It can affect all token spend including tool calls. For example, lower effort would mean Claude makes fewer tool calls. This gives a much greater degree of control over efficiency.
 
-###  Effort levels
+### Effort levels
 
 | Level | Description | Typical use case |
 | --- | --- | --- |
@@ -33,7 +33,7 @@ This approach has two major advantages:
 
 `xhigh` is a newer level; some models that support `max` don't support `xhigh`.
 
-###  Recommended effort levels for Claude Sonnet 5
+### Recommended effort levels for Claude Sonnet 5
 
 Claude Sonnet 5 defaults to `high` effort on the Claude API and Claude Code.
 
@@ -43,7 +43,7 @@ Claude Sonnet 5 defaults to `high` effort on the Claude API and Claude Code.
 - **Low effort:** For high-volume or latency-sensitive workloads. Suitable for chat and non-coding use cases where faster turnaround is prioritized.
 - **Max effort:** For tasks requiring the absolute highest capability with no constraints on token spending.
 
-###  Recommended effort levels for Claude Sonnet 4.6
+### Recommended effort levels for Claude Sonnet 4.6
 
 Sonnet 4.6 defaults to `high` effort. Explicitly set effort when using Sonnet 4.6 to avoid unexpected latency:
 
@@ -52,7 +52,7 @@ Sonnet 4.6 defaults to `high` effort. Explicitly set effort when using Sonnet 4.
 - **High effort:** For complex reasoning and tasks where quality matters more than speed or cost.
 - **Max effort:** For tasks requiring the absolute highest capability with no constraints on token spending.
 
-###  Recommended effort levels for Claude Opus 4.7
+### Recommended effort levels for Claude Opus 4.7
 
 **Start with `xhigh` for coding and agentic use cases**, and use `high` as the minimum for most intelligence-sensitive workloads. Step down to `medium` for cost-sensitive workloads, or up to `max` only when your evals show measurable headroom at `xhigh`.
 
@@ -70,7 +70,7 @@ Claude Opus 4.7 also respects effort levels more strictly than Claude Opus 4.6, 
 
 When running Claude Opus 4.7 at `xhigh` or `max` effort, set a large `max_tokens` so the model has room to think and act across subagents and tool calls. Starting at 64k tokens and tuning from there is a reasonable default.
 
-###  Recommended effort levels for Claude Opus 4.8
+### Recommended effort levels for Claude Opus 4.8
 
 The guidance for Claude Opus 4.7 also applies to Claude Opus 4.8. **Start with `xhigh` for coding and agentic use cases**, use `high` for most other intelligence-sensitive workloads, and step down to `medium` or `low` only when you've measured that the lower level holds quality on your evals.
 
@@ -78,7 +78,7 @@ The API default is `high`. Set `effort` explicitly to use a different level; the
 
 When running Claude Opus 4.8 at `xhigh` or `max` effort, set a large `max_tokens` so the model has room to think and act across subagents and tool calls. Starting at 64k tokens and tuning from there is a reasonable default.
 
-###  Recommended effort levels for Claude Opus 5
+### Recommended effort levels for Claude Opus 5
 
 Claude Opus 5 supports all five effort levels. **Start with `high`, the default**, and adjust based on your evals: step up to `xhigh` for demanding coding and agentic work, or to `max` when a task justifies unconstrained token spending, and use `low` and `medium` liberally as your primary control for token cost and response time wherever your evals show quality holds. If you carried effort settings over from an earlier model, run a fresh effort sweep on your evals rather than reusing them.
 
@@ -90,13 +90,13 @@ On Claude Opus 5, thinking cannot be disabled at `xhigh` or `max` effort: reques
 
 When running Claude Opus 5 at `xhigh` or `max` effort, set a large `max_tokens` so the model has room to think and act across subagents and tool calls. Starting at 64k tokens and tuning from there is a reasonable default.
 
-###  Recommended effort levels for Claude Fable 5
+### Recommended effort levels for Claude Fable 5
 
 Effort is the primary control for trading off intelligence, latency, and cost on Claude Fable 5. **Start with `high`, the default, for most tasks**, use `xhigh` for the most capability-sensitive workloads, and step down to `medium` or `low` for routine work. Lower effort settings on Claude Fable 5 still perform well and often exceed `xhigh` performance on prior models. At `high` and `xhigh`, set a large `max_tokens`: it is a hard limit on total output, thinking plus response text. See [Cost control](build-with-claude/thinking-steering-and-cost.md).
 
 Reduce effort if a task completes but takes longer than necessary, or if you want a faster, more interactive working style. The same recommendations apply to Claude Mythos 5. For fuller guidance, see [Prompting Claude Fable 5](build-with-claude/prompt-engineering/prompting-claude-fable-5.md).
 
-##  Basic usage
+## Basic usage
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -122,7 +122,7 @@ for block in response.content:
         print(block.text)
 ```
 
-##  When to adjust the effort parameter
+## When to adjust the effort parameter
 
 - Use **max effort** when you need the absolute highest capability with no constraints: the most thorough reasoning and deepest analysis. Available on Claude 4.6 and later models and Claude Mythos Preview.
 - Use **xhigh effort** for advanced coding and complex agentic work requiring extended exploration, such as repeated tool calling and detailed search. Available on Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, and Claude Sonnet 5.
@@ -130,7 +130,7 @@ for block in response.content:
 - Use **medium effort** as a balanced option when you want solid performance without the full token expenditure of high effort.
 - Use **low effort** when you're optimizing for speed (because Claude answers with fewer tokens) or cost. For example, simple classification tasks, quick lookups, or high-volume use cases where marginal quality improvements don't justify additional latency or spend.
 
-##  Effort with tool use
+## Effort with tool use
 
 When using tools, the effort parameter affects both the explanations around tool calls and the tool calls themselves. Lower effort levels tend to:
 
@@ -146,7 +146,7 @@ Higher effort levels may:
 - Provide detailed summaries of changes
 - Include more comprehensive code comments
 
-##  Effort with thinking
+## Effort with thinking
 
 The `thinking` parameter controls whether Claude thinks in [thinking blocks](build-with-claude/thinking.md) before answering; the `effort` parameter controls how much work Claude puts into the whole response, which in adaptive mode includes how often and how deeply it thinks. Don't pass `adaptive` as an `effort` value: `adaptive` is a thinking mode, not an effort level.
 
@@ -156,11 +156,11 @@ On Claude Opus 4.5, the only extended-thinking-only model that supports effort, 
 
 For per-model thinking availability, see the [per-model configuration table](build-with-claude/thinking-troubleshooting.md). Effort works with or without thinking; see [How effort works](#how-effort-works).
 
-##  Changing effort mid-conversation
+## Changing effort mid-conversation
 
 `output_config.effort` is a request-level setting: each request carries its own value, so to run a later part of a conversation at a different effort level, set the new value on the next request. The effort level applies to the whole request. Because effort shapes the rendered prompt, changing it between requests does not preserve cached prefixes from earlier turns; if you rely on [prompt caching](build-with-claude/prompt-caching.md) across a long session, pick an effort level at the start and keep it constant.
 
-##  Best practices
+## Best practices
 
 1. **Set effort explicitly:** The API defaults to `high`, but the right starting point depends on your model and workload.
 2. **Use low for speed-sensitive or simple tasks:** When latency matters or tasks are straightforward, low effort can significantly reduce response times and costs.
@@ -168,7 +168,7 @@ For per-model thinking availability, see the [per-model configuration table](bui
 4. **Consider dynamic effort:** Adjust effort based on task complexity. Simple queries may warrant low effort while agentic coding and complex reasoning benefit from high effort. See the next item before varying it within one conversation.
 5. **Hold effort constant within cached conversations:** Changing the effort value between requests invalidates [prompt caching](build-with-claude/prompt-caching.md), so vary effort across workloads rather than within a conversation that relies on cache hits. See [Thinking and prompt caching](build-with-claude/thinking.md).
 
-##  Next steps
+## Next steps
 
 
 

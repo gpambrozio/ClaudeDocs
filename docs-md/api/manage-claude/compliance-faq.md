@@ -4,7 +4,7 @@
 
 
 
-##  Access and scopes
+## Access and scopes
 
 ### Who can enable the Compliance API?
 
@@ -20,7 +20,7 @@
 
 ### Why does my Admin API key return 403 on chat or file endpoints?
 
-##  Data coverage and retention
+## Data coverage and retention
 
 ### How far back does the Activity Feed go?
 
@@ -28,7 +28,7 @@
 
 ### Do Cowork, Claude Code, Claude Science, and Claude for Microsoft 365 sessions appear in the Compliance API?
 
-### What do Cowork, Claude Code, Claude Science, and Claude for Microsoft 365 session transcripts include?
+### What do session transcripts include?
 
 ### How does session coverage compare with OpenTelemetry logging (OTEL) for Cowork and Claude Code?
 
@@ -36,7 +36,7 @@
 
 ### What does the Compliance API not capture?
 
-##  Integration and pagination
+## Integration and pagination
 
 ### How do I correlate Compliance API records with my SIEM?
 

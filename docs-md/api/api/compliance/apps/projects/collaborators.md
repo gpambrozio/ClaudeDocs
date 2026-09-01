@@ -14,7 +14,7 @@
 
 
 
-CollaboratorListResponse = object{ granted\_at, role, type, user\_id } or object{ granted\_at, group\_id, role, type } or object{ granted\_at, organization\_uuid, role, type } or object{ granted\_at, organization\_role, role, type }
+CollaboratorListResponse = object{ granted\_at, role, type, user\_id } or object{ granted\_at, group\_id, role, type } or object{ granted\_at, organization\_uuid, role, type } or object{ granted\_at, organization\_role, role, type }
 
 An individual user granted a role on a project.
 

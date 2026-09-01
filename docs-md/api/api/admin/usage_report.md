@@ -18,11 +18,11 @@
 
 
 
-ClaudeCodeUsageReport object{ data, has\_more, next\_page }
+ClaudeCodeUsageReport object{ data, has\_more, next\_page }
 
 
 
-MessagesUsageReport object{ data, has\_more, next\_page }
+MessagesUsageReport object{ data, has\_more, next\_page }
 
 ---
 

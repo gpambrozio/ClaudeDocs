@@ -16,153 +16,153 @@ Create a Dream
 
 
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-string
+string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
 
 One of the following:
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24"
 
-"prompt-caching-2024-07-31"
+"prompt-caching-2024-07-31"
 
-"computer-use-2024-10-22"
+"computer-use-2024-10-22"
 
-"computer-use-2025-01-24"
+"computer-use-2025-01-24"
 
-"pdfs-2024-09-25"
+"pdfs-2024-09-25"
 
-"token-counting-2024-11-01"
+"token-counting-2024-11-01"
 
-"token-efficient-tools-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"output-128k-2025-02-19"
+"output-128k-2025-02-19"
 
-"files-api-2025-04-14"
+"files-api-2025-04-14"
 
-"mcp-client-2025-04-04"
+"mcp-client-2025-04-04"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-11-20"
 
-"dev-full-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"interleaved-thinking-2025-05-14"
+"interleaved-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"code-execution-2025-05-22"
 
-"extended-cache-ttl-2025-04-11"
+"extended-cache-ttl-2025-04-11"
 
-"context-1m-2025-08-07"
+"context-1m-2025-08-07"
 
-"context-management-2025-06-27"
+"context-management-2025-06-27"
 
-"model-context-window-exceeded-2025-08-26"
+"model-context-window-exceeded-2025-08-26"
 
-"skills-2025-10-02"
+"skills-2025-10-02"
 
-"fast-mode-2026-02-01"
+"fast-mode-2026-02-01"
 
-"output-300k-2026-03-24"
+"output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
+"user-profiles-2026-03-24"
 
-"user-profiles-2026-08-18"
+"user-profiles-2026-08-18"
 
-"advisor-tool-2026-03-01"
+"advisor-tool-2026-03-01"
 
-"managed-agents-2026-04-01"
+"managed-agents-2026-04-01"
 
-"cache-diagnosis-2026-04-07"
+"cache-diagnosis-2026-04-07"
 
-"dreaming-2026-04-21"
+"dreaming-2026-04-21"
 
-"thinking-token-count-2026-05-13"
+"thinking-token-count-2026-05-13"
 
-"server-side-fallback-2026-06-01"
+"server-side-fallback-2026-06-01"
 
-"server-side-fallback-2026-07-01"
+"server-side-fallback-2026-07-01"
 
-"fallback-credit-2026-06-01"
+"fallback-credit-2026-06-01"
 
-"fallback-credit-2026-07-01"
+"fallback-credit-2026-07-01"
 
-"agent-memory-2026-07-22"
+"agent-memory-2026-07-22"
 
-"mid-conversation-tool-changes-2026-07-01"
+"mid-conversation-tool-changes-2026-07-01"
 
-"compact-2026-01-12"
+"compact-2026-01-12"
 
-"computer-use-2025-11-24"
+"computer-use-2025-11-24"
 
-"mcp-tunnels-2026-06-22"
+"mcp-tunnels-2026-06-22"
 
-"structured-outputs-2025-11-13"
+"structured-outputs-2025-11-13"
 
-"task-budgets-2026-03-13"
+"task-budgets-2026-03-13"
 
-"thinking-display-updates-2026-08-18"
+"thinking-display-updates-2026-08-18"
 
-"ce-user-management-2026-07-13"
+"ce-user-management-2026-07-13"
 
 ##### Body
 
 
 
-inputs: array of [BetaDreamInput](api/http/beta/dreams.md)
+inputs: array of [BetaDreamInput](api/http/beta/dreams.md)
 
 One of the following:
 
 
 
-BetaDreamMemoryStoreInput object{ memory\_store\_id, type }
+BetaDreamMemoryStoreInput object{ memory\_store\_id, type }
 
 An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output\_behavior {type: "update\_existing"} the job consolidates this store in place.
 
 
 
-memory\_store\_id: string
+memory\_store\_id: string
 
 minLength1
 
-type: "memory\_store"
+type: "memory\_store"
 
 
 
-BetaDreamSessionsInput object{ session\_ids, type }
+BetaDreamSessionsInput object{ session\_ids, type }
 
 Input session transcripts the dream reads.
 
-session\_ids: array of string
+session\_ids: array of string
 
-type: "sessions"
+type: "sessions"
 
 
 
-model: string or [BetaDreamModelConfigParam](api/http/beta/dreams.md) { id, speed }
+model: string or [BetaDreamModelConfigParam](api/http/beta/dreams.md) { id, speed }
 
 Model identifier and configuration applied to every pipeline stage.
 
 One of the following:
 
-string
+string
 
 
 
-BetaDreamModelConfigParam object{ id, speed }
+BetaDreamModelConfigParam object{ id, speed }
 
 Model identifier and configuration applied to every pipeline stage.
 
 
 
-id: string
+id: string
 
 Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
@@ -172,19 +172,19 @@ maxLength256
 
 
 
-speed: optional "standard" or "fast" or null
+speed: optional "standard" or "fast" or null
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
 One of the following:
 
-"standard"
+"standard"
 
-"fast"
+"fast"
 
 
 
-instructions: optional string or null
+instructions: optional string or null
 
 minLength1
 
@@ -192,7 +192,7 @@ maxLength4096
 
 
 
-output\_behavior: optional [BetaOutputBehavior](api/http/beta/dreams.md)
+output\_behavior: optional [BetaOutputBehavior](api/http/beta/dreams.md)
 
 The default destination: the job creates a new output memory store as a clone of the memory\_store input and writes the consolidated memories into it. The input store is never mutated.
 
@@ -200,41 +200,37 @@ One of the following:
 
 
 
-BetaOutputBehaviorCreateNew object{ type }
+BetaOutputBehaviorCreateNew object{ type }
 
 The default destination: the job creates a new output memory store as a clone of the memory\_store input and writes the consolidated memories into it. The input store is never mutated.
 
-type: "create\_new"
+type: "create\_new"
 
 
 
-BetaOutputBehaviorUpdateExisting object{ memory\_store\_id, type }
+BetaOutputBehaviorUpdateExisting object{ memory\_store\_id, type }
 
 The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory\_store input, so the job consolidates the store in place.
 
 
 
-memory\_store\_id: string
+memory\_store\_id: string
 
 minLength1
 
-type: "update\_existing"
+type: "update\_existing"
 
 ##### Returns
 
 
 
-BetaDream object{ id, archived\_at, created\_at, 11 more }
+BetaDream object{ id, archived\_at, created\_at, 11 more }
 
 An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output\_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
-
+Create a Dream
 
-### Create a Dream
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/dreams \

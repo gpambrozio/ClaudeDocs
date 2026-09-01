@@ -8,7 +8,7 @@
 
 Cache diagnostics closes that gap. Pass the `id` of your previous response, and the API compares the two requests and tells you where they diverged (the model, the system prompt, the tools, or the message history) so you can fix the root cause instead of guessing.
 
-##  How cache diagnostics works
+## How cache diagnostics works
 
 When the beta header is present, the API stores a lightweight fingerprint of each request, keyed by the response `id`. On your next request, include that `id` as `diagnostics.previous_message_id`. The API rebuilds the fingerprint for the new request, compares it against the stored one, and attaches a `diagnostics` object to the response describing the first point of divergence.
 
@@ -16,7 +16,7 @@ The comparison is about request structure, independent of whether the cache actu
 
 Fingerprints contain only hashes and token-count estimates (never raw prompt content), are retained for a limited time, are scoped to your organization and workspace, and are not used for any other purpose.
 
-##  Basic usage
+## Basic usage
 
 Send the beta header on every turn. On the first turn, pass `"previous_message_id": null` to opt in without a prior message to compare against. On subsequent turns, pass the `id` from the previous response.
 
@@ -64,7 +64,7 @@ else:
     print(f"cache_miss_reason: {diagnostics.cache_miss_reason.type}")
 ```
 
-##  Streaming
+## Streaming
 
 In streaming responses, `diagnostics` appears on the `message_start` event.
 
@@ -103,7 +103,7 @@ else:
 
 The `message_start` event carries the full `diagnostics` field; see [Response format](#response-format) for the possible values.
 
-##  Threading diagnostics through a conversation loop
+## Threading diagnostics through a conversation loop
 
 In a multi-turn conversation, carry the latest response `id` forward as `previous_message_id` on every turn. The first iteration passes `null` to opt in; each subsequent iteration passes the `id` from the previous response.
 
@@ -141,7 +141,7 @@ for i, user_message in enumerate(
 
 
 
-##  Response format
+## Response format
 
 The `diagnostics` field on the response `Message` has four possible states:
 
@@ -177,7 +177,7 @@ When `cache_miss_reason` is non-null, it looks like this:
 
 
 
-##  Cache miss reason types
+## Cache miss reason types
 
 `cache_miss_reason` is a discriminated union on `type`. The response reports the earliest divergence only, so fix it first; later ones may be hidden behind it.
 
@@ -190,7 +190,7 @@ When `cache_miss_reason` is non-null, it looks like this:
 | `previous_message_not_found` | No stored fingerprint exists for the supplied `previous_message_id`. This is not evidence that your request changed. Typically the previous request did not carry the beta header, it came from a different workspace, or too much time has passed since it was sent. | Send the beta header on every turn and keep consecutive turns close together in time. |
 | `unavailable` | Diagnostic information was not available for this request. This includes the case where `model`, `system`, and `tools` match but another prompt-affecting request parameter (`tool_choice`, `thinking`, `context_management`, `output_config`, `output_format`, or the set of active `anthropic-beta` headers) differs, and very long conversations where the divergence is beyond the comparison horizon. Your request was processed normally. | Keep the prompt-affecting request parameters constant for the lifetime of a cached conversation. If persistent, apply the manual checks under [Troubleshooting common issues](build-with-claude/prompt-caching.md) on the prompt caching page. |
 
-##  Reading diagnostics alongside usage
+## Reading diagnostics alongside usage
 
 `diagnostics` answers "did my request change?" while `usage.cache_read_input_tokens` answers "did the cache hit?". Combining them tells you where to look.
 
@@ -203,7 +203,7 @@ This matrix applies to turns where you passed a real `previous_message_id`. On t
 | `cache_miss_reason` is a `*_changed` type | low or zero | Your bug. The request changed; fix the cause indicated by `type`. |
 | `cache_miss_reason` is a `*_changed` type | high | Rare. A change occurred late in the prompt but an earlier `cache_control` breakpoint still hit. Worth fixing, but low impact. |
 
-##  Limitations
+## Limitations
 
 - **Beta:** Field names and semantics may change while this feature is in beta.
 - **Claude API only:** Not available on Amazon Bedrock or Google Cloud.
@@ -212,7 +212,7 @@ This matrix applies to turns where you passed a real `previous_message_id`. On t
 - **Comparison horizon:** For very long conversations where the only change is deep in the message list, the response may be `unavailable` rather than a precise location.
 - **Best-effort:** Diagnostics never blocks or fails your request. If diagnostic information is not available, the response returns `unavailable`, or `cache_miss_reason: null` when the comparison was still running.
 
-##  Data retention
+## Data retention
 
 Cache diagnostics is ZDR eligible (qualified). Anthropic does not store the raw text of your prompts or Claude's outputs for this feature.
 
@@ -220,7 +220,7 @@ The fingerprint stored for each request consists only of cryptographic hashes an
 
 For ZDR eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
 
-##  See also
+## See also
 
 - [Prompt caching](build-with-claude/prompt-caching.md)
 - [Token counting](build-with-claude/token-counting.md)

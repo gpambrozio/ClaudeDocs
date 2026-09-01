@@ -563,6 +563,7 @@ Because these settings arrive over the network, the CLI shows each developer a s
 - `env` variables that require the developer’s approval, such as proxy and base-URL variables
 - shell-execution settings such as `apiKeyHelper` and `statusLine`
 - the sandbox binary settings `sandbox.bwrapPath`, `sandbox.socatPath`, and `sandbox.ripgrep`
+- Sandbox settings that intercept traffic, inject credentials, or weaken isolation, such as `sandbox.network.tlsTerminate` and the proxy port settings. [Security approval dialogs](server-managed-settings.md) lists them all.
 - managed CLAUDE.md content
 
 [Approval memory](server-managed-settings.md) covers how long an approval lasts and when the dialog appears again.

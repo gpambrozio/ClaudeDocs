@@ -14,7 +14,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ##### Path parameters
 
-group\_id: string
+group\_id: string
 
 ID of the RBAC Group.
 
@@ -22,7 +22,7 @@ ID of the RBAC Group.
 
 
 
-limit: optional number
+limit: optional number
 
 Number of items to return per page.
 
@@ -34,7 +34,7 @@ maximum1000
 
 minimum1
 
-page: optional string
+page: optional string
 
 Optionally set to the `next_page` token from the previous response.
 
@@ -42,27 +42,27 @@ Optionally set to the `next_page` token from the previous response.
 
 
 
-data: array of [RbacGroupMember](api/http/admin/rbac_groups/members.md) { created\_at, email, group\_id, 2 more }
+data: array of [RbacGroupMember](api/http/admin/rbac_groups/members.md) { created\_at, email, group\_id, 2 more }
 
 
 
-created\_at: string
+created\_at: string
 
 RFC 3339 timestamp of when the User was added to the RBAC Group.
 
 formatdate-time
 
-email: string
+email: string
 
 Email of the User.
 
-group\_id: string
+group\_id: string
 
 ID of the RBAC Group.
 
 
 
-type: "rbac\_group\_member"
+type: "rbac\_group\_member"
 
 Object type.
 
@@ -70,25 +70,21 @@ For RBAC Group Members, this is always `"rbac_group_member"`.
 
 defaultrbac\_group\_member
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 
-has\_more: boolean
+has\_more: boolean
 
 Indicates if there are more results in the requested page direction.
 
-next\_page: string or null
+next\_page: string or null
 
 Token to provide in as `page` in the subsequent request to retrieve the next page of data.
 
-
+List RBAC Group Members
 
-### List RBAC Group Members
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \

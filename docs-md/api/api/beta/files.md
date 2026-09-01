@@ -32,15 +32,15 @@ cURL
 
 
 
-BetaDeletedFile object{ id, type }
+BetaDeletedFile object{ id, type }
 
-id: string
+id: string
 
 ID of the deleted file.
 
 
 
-type: optional "file\_deleted"
+type: optional "file\_deleted"
 
 Deleted object type.
 
@@ -50,17 +50,17 @@ defaultfile\_deleted
 
 
 
-BetaFileMetadata object{ id, created\_at, filename, 6 more }
+BetaFileMetadata object{ id, created\_at, filename, 6 more }
 
 
 
-BetaFileScope object{ id, type }
+BetaFileScope object{ id, type }
 
-id: string
+id: string
 
 The ID of the scoping resource (e.g., the session ID).
 
-type: "session"
+type: "session"
 
 The type of scope (e.g., `"session"`).
 

@@ -26,7 +26,7 @@
 
 POST/v1/organizations/workspaces/{workspace\_id}/archive
 
-#### Workspaces[Members](api/http/admin/workspaces/members.md)
+#### Workspaces[Members](api/http/admin/workspaces/members.md)
 
 ##### [Create Workspace Member](api/http/admin/workspaces/members/create.md)
 
@@ -48,13 +48,13 @@
 
 DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
-#### Workspaces[Rate Limits](api/http/admin/workspaces/rate_limits.md)
+#### Workspaces[Rate Limits](api/http/admin/workspaces/rate_limits.md)
 
 ##### [List Workspace Rate Limits](api/http/admin/workspaces/rate_limits/list.md)
 
 GET/v1/organizations/workspaces/{workspace\_id}/rate\_limits
 
-#### Workspaces[Service Accounts](api/http/admin/workspaces/service_accounts.md)
+#### Workspaces[Service Accounts](api/http/admin/workspaces/service_accounts.md)
 
 ##### [Create Service Account Workspace Member](api/http/admin/workspaces/service_accounts/create.md)
 

@@ -16,7 +16,7 @@ Get Skill
 
 
 
-skill\_id: string
+skill\_id: string
 
 Unique identifier for the skill.
 
@@ -26,15 +26,11 @@ The format and length of IDs may change over time.
 
 
 
-Skill object{ id, created\_at, display\_name, 4 more }
+Skill object{ id, created\_at, display\_name, 4 more }
 
-
+Get Skill
 
-### Get Skill
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/skills/$SKILL_ID \

@@ -15,7 +15,7 @@ The skill comes bundled with [Claude Code](overview.md) and is also available in
 
 The skill uses [progressive disclosure](agents-and-tools/agent-skills/overview.md) to keep context efficient: Claude loads only the documentation relevant to your project's language, surface (Messages API or Managed Agents), and the specific task at hand (tool use, streaming, batches, and so on), rather than loading everything at once.
 
-##  What the skill provides
+## What the skill provides
 
 When triggered, the skill equips Claude with:
 
@@ -37,7 +37,7 @@ When triggered, the skill equips Claude with:
 - **Client patterns:** Lossless stream reconnect, `processed_at` queued/processed gate, interrupt handling, file-mount gotchas, and credential handling
 - **Deployment constraints:** Managed Agents is available on the Claude API and [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) only (not on Amazon Bedrock, Google Cloud, or Microsoft Foundry). The skill routes other deployments to the Messages API and tool use instead.
 
-##  When the skill activates
+## When the skill activates
 
 The skill activates in two ways:
 
@@ -51,7 +51,7 @@ The skill activates in two ways:
 
 The skill does not activate for general programming tasks, ML/data-science work, or code that imports other AI SDKs (such as OpenAI).
 
-##  Supported languages
+## Supported languages
 
 The skill detects your project's language automatically by examining project files (for example, `requirements.txt` for Python, `tsconfig.json` for TypeScript, `go.mod` for Go) and loads the appropriate documentation.
 
@@ -68,9 +68,9 @@ The skill detects your project's language automatically by examining project fil
 
 If your project uses multiple languages, Claude asks which one applies. For unsupported languages (Rust, Swift, C++), the skill provides cURL/raw HTTP examples.
 
-##  How to use the skill
+## How to use the skill
 
-###  In Claude Code (bundled)
+### In Claude Code (bundled)
 
 The skill ships with [Claude Code](overview.md) and requires no installation. When you ask Claude to help build something with the Claude API, or when your project already imports an Anthropic SDK, the skill activates automatically.
 
@@ -84,7 +84,7 @@ You can also invoke it directly:
 
 For more about how bundled skills work in Claude Code, see the [Claude Code skills documentation](skills.md).
 
-###  From the skills repository
+### From the skills repository
 
 The skill source is available in the [Anthropic skills repository](https://github.com/anthropics/skills). You can install it using the `npx` command:
 
@@ -103,7 +103,7 @@ Or install it as a [Claude Code plugin](plugins.md):
 
 
 
-##  Migrating to a newer Claude model
+## Migrating to a newer Claude model
 
 The Claude API skill can perform Claude model migrations across a code base. Invoke it directly with `/claude-api migrate`:
 
@@ -140,7 +140,7 @@ As it edits, the skill explains each change and its motivation inline. On comple
 
 For the full list of model-specific changes the skill applies, see [Migrating to Claude Opus 5 from Claude Opus 4.8](models/opus-5/migration-guide.md).
 
-##  Setting up a Managed Agent
+## Setting up a Managed Agent
 
 To scaffold a new Managed Agent from scratch, invoke the `managed-agents-onboard` subcommand:
 
@@ -154,7 +154,7 @@ The skill runs an interview that walks you through the Managed Agents mental mod
 
 Managed Agents requires the `managed-agents-2026-04-01` beta header, which the SDK sets automatically for all `client.beta.agents.*`, `client.beta.environments.*`, `client.beta.sessions.*`, and `client.beta.vaults.*` calls.
 
-##  Example usage
+## Example usage
 
 Here are examples of tasks the skill helps Claude handle:
 
@@ -184,7 +184,7 @@ Build a streaming chat UI with the Claude API in TypeScript
 
 In each case, the skill loads the relevant language-specific documentation and guides Claude through the implementation using current API patterns and best practices.
 
-##  Next steps
+## Next steps
 
 
 

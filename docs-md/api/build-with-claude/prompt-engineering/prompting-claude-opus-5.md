@@ -8,7 +8,7 @@ This guide covers the prompting patterns specific to Claude Opus 5. For the mode
 
 Claude Opus 5 is built for complex agentic coding and enterprise work, with particular strengths in long-horizon agentic tasks. It performs well out of the box on existing Claude Opus 4.8 prompts. The following patterns cover the behaviors that most often require tuning.
 
-##  Capability improvements
+## Capability improvements
 
 Compared with Claude Opus 4.8, the improvements most relevant to prompting are:
 
@@ -20,7 +20,7 @@ Compared with Claude Opus 4.8, the improvements most relevant to prompting are:
 - **Office and document tasks:** Claude Opus 5 generates and works with complex, multi-sheet spreadsheets with non-trivial formulas, and it produces well-structured slide decks. Prompt it with any specific styles or templates it needs to follow.
 - **Multi-agent coordination:** Claude Opus 5 coordinates teams of subagents well, with effective writer-verifier patterns and few cases of agents overwriting each other's work. For cost-sensitive workloads, cap delegation; see [Controlling subagent spawning](#controlling-subagent-spawning).
 
-##  Response length and verbosity
+## Response length and verbosity
 
 Claude Opus 5's default user-facing responses run longer than prior Opus models'. The [effort parameter](build-with-claude/effort.md) controls how much the model [thinks](build-with-claude/thinking-steering-and-cost.md) rather than how much it says: lowering effort can reduce thinking volume without reliably shortening the visible response. To control response length, prompt for it explicitly.
 
@@ -42,7 +42,7 @@ Keep outputs reasonably concise.
 
 
 
-##  User-facing progress updates
+## User-facing progress updates
 
 Claude Opus 5 narrates readily during agentic work: it tends to announce what it is about to do, and its per-message output in agentic sessions is often longer than prior models'. It benefits from explicit guidance on how to communicate with the user during a task. To tune narration down, describe the cadence and shape you want:
 
@@ -54,7 +54,7 @@ Before your first tool call, say in one sentence what you're about to do. While 
 
 To tune narration up, or change its style, the same lever applies in the other direction: explicitly describe what updates should look like and provide examples. Positive examples of the communication style you want tend to be more effective than instructions about what not to do.
 
-##  Written deliverable length
+## Written deliverable length
 
 Separate from conversational verbosity, files that Claude Opus 5 writes to disk (reports, Markdown documents, summaries) are often longer than on prior models. If your product includes Claude-authored documents, add explicit length calibration:
 
@@ -64,7 +64,7 @@ Match the length of written documents to what the task needs: cover the substanc
 
 
 
-##  Task scope and over-verification
+## Task scope and over-verification
 
 Claude Opus 5 verifies its own work without being told to. If your prompt contains explicit verification instructions ("include a final verification step for any non-trivial task," "use a subagent to verify"), remove them: instructions like these cause over-verification on Claude Opus 5, and removing them reduces wasted tokens with no loss in quality. The same applies to legacy harness scaffolding that adds separate verification steps.
 
@@ -76,7 +76,7 @@ Deliver what was asked, at the scope intended. Make routine judgment calls yours
 
 
 
-##  Controlling subagent spawning
+## Controlling subagent spawning
 
 Claude Opus 5 delegates to subagents more readily than prior models. Delegation pays off on genuinely independent, sizeable tracks of work, but it multiplies cost and time when applied to small tasks. If your harness supports subagents, give explicit guidance on which scenarios warrant delegation, or set deterministic caps on how many agents can be launched. For example:
 
@@ -88,7 +88,7 @@ Delegate to a subagent only for large tasks that are genuinely independent and p
 
 If your harness is Claude Code or the Claude Agent SDK, the deterministic caps are the `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` and `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` environment variables and the SDK's `max_budget_usd` option. They require Claude Code 2.1.217 or later, so update a pinned SDK before pointing it at Claude Opus 5. Claude Code adds a delegation instruction of its own on Claude Opus 5 only when you use its `claude_code` system prompt preset; with a custom or omitted system prompt, add a delegation instruction such as the example in this section yourself. See [Cap subagent depth, concurrency, and spend](agent-sdk/subagents.md) in the Agent SDK docs.
 
-##  Self-correction
+## Self-correction
 
 Claude Opus 5 catches and fixes its own mistakes well without prompting. Avoid instructing re-checks it already performs ("double-check your answer," "re-verify before responding"); like verification instructions, these compound with the model's own behavior and add cost without improving results.
 
@@ -100,7 +100,7 @@ Only correct an earlier statement when the error would change the user's code, c
 
 
 
-##  Running with thinking disabled
+## Running with thinking disabled
 
 Claude Opus 5 runs with [thinking](build-with-claude/thinking.md) on by default, and thinking can be disabled only at [effort](build-with-claude/effort.md) `high` or below; see the [migration guide](models/opus-5/migration-guide.md). With thinking disabled, two artifacts can occasionally appear in the model's visible output. The primary mitigation for both is to keep thinking enabled and control token cost with lower effort levels instead of disabling thinking: for most tasks, thinking enabled at `low` effort performs better than thinking disabled at similar cost.
 

@@ -14,7 +14,7 @@
 
 
 
-ConnectorUsage object{ data, next\_page }
+ConnectorUsage object{ data, next\_page }
 
 Response for GET /v1/organizations/analytics/connectors.
 

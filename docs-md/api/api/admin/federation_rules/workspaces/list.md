@@ -18,7 +18,7 @@ rules with `applies_to_all_workspaces` or a legacy single
 
 ##### Path parameters
 
-federation\_rule\_id: string
+federation\_rule\_id: string
 
 ID of the federation rule.
 
@@ -26,7 +26,7 @@ ID of the federation rule.
 
 
 
-limit: optional number
+limit: optional number
 
 Number of results per page.
 
@@ -36,7 +36,7 @@ maximum100
 
 minimum1
 
-page: optional string
+page: optional string
 
 Opaque cursor from a previous response's `next_page`.
 
@@ -44,7 +44,7 @@ Opaque cursor from a previous response's `next_page`.
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -54,49 +54,45 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 
 
-data: array of object{ created\_at, created\_by\_actor\_id, federation\_rule\_id, 3 more }
+data: array of object{ created\_at, created\_by\_actor\_id, federation\_rule\_id, 3 more }
 
 
 
-created\_at: string
+created\_at: string
 
 When this workspace was enabled for the rule.
 
 formatdate-time
 
-created\_by\_actor\_id: string or null
+created\_by\_actor\_id: string or null
 
 Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
 
-federation\_rule\_id: string
+federation\_rule\_id: string
 
 Tagged ID of the federation rule.
 
 
 
-type: "federation\_rule\_workspace"
+type: "federation\_rule\_workspace"
 
 defaultfederation\_rule\_workspace
 
-workspace\_id: string
+workspace\_id: string
 
 Tagged ID of the workspace this rule is enabled for.
 
-workspace\_name: string or null
+workspace\_name: string or null
 
 Workspace display name. Populated when listing; null in the enable response.
 
-next\_page: string or null
+next\_page: string or null
 
 Opaque cursor for the next page; null when there are no more results.
 
-
+List Federation Rule Workspaces
 
-### List Federation Rule Workspaces
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RULE_ID/workspaces \

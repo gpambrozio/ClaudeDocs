@@ -12,17 +12,17 @@ List the organization's members.
 
 ##### Query parameters
 
-after\_id: optional string
+after\_id: optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-before\_id: optional string
+before\_id: optional string
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
 
 
-email: optional string
+email: optional string
 
 Filter by user email.
 
@@ -30,7 +30,7 @@ formatemail
 
 
 
-limit: optional number
+limit: optional number
 
 Number of items to return per page.
 
@@ -44,7 +44,7 @@ minimum1
 
 
 
-roles: optional array of string
+roles: optional array of string
 
 Filter to items whose `role` equals one of the supplied values. Repeatable; values are OR'ed together.
 
@@ -54,57 +54,57 @@ Accepted values depend on the organization type: Console and API organizations a
 
 
 
-data: array of [User](api/http/admin/users.md) { id, added\_at, email, 3 more }
+data: array of [User](api/http/admin/users.md) { id, added\_at, email, 3 more }
 
-id: string
+id: string
 
 ID of the User.
 
 
 
-added\_at: string
+added\_at: string
 
 RFC 3339 datetime string indicating when the User joined the Organization.
 
 formatdate-time
 
-email: string
+email: string
 
 Email of the User.
 
-name: string
+name: string
 
 Name of the User.
 
 
 
-role: "admin" or "billing" or "claude\_code\_user" or 6 more
+role: "admin" or "billing" or "claude\_code\_user" or 6 more
 
 Organization role of the User.
 
 One of the following:
 
-"admin"
+"admin"
 
-"billing"
+"billing"
 
-"claude\_code\_user"
+"claude\_code\_user"
 
-"developer"
+"developer"
 
-"managed"
+"managed"
 
-"membership\_admin"
+"membership\_admin"
 
-"owner"
+"owner"
 
-"primary\_owner"
+"primary\_owner"
 
-"user"
+"user"
 
 
 
-type: "user"
+type: "user"
 
 Object type.
 
@@ -112,25 +112,21 @@ For Users, this is always `"user"`.
 
 defaultuser
 
-first\_id: string or null
+first\_id: string or null
 
 First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
-has\_more: boolean
+has\_more: boolean
 
 Indicates if there are more results in the requested page direction.
 
-last\_id: string or null
+last\_id: string or null
 
 Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
-
+List Users
 
-### List Users
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/users \

@@ -6,7 +6,7 @@
 
 # Apps
 
-#### Apps[Chats](api/http/compliance/apps/chats.md)
+#### Apps[Chats](api/http/compliance/apps/chats.md)
 
 ##### [List chats](api/http/compliance/apps/chats/list.md)
 
@@ -16,13 +16,13 @@
 
 DELETE/v1/compliance/apps/chats/{claude\_chat\_id}
 
-#### AppsChats[Messages](api/http/compliance/apps/chats/messages.md)
+#### AppsChats[Messages](api/http/compliance/apps/chats/messages.md)
 
 ##### [Get chat messages](api/http/compliance/apps/chats/messages/list.md)
 
 GET/v1/compliance/apps/chats/{claude\_chat\_id}/messages
 
-#### AppsChats[Files](api/http/compliance/apps/chats/files.md)
+#### AppsChats[Files](api/http/compliance/apps/chats/files.md)
 
 ##### [Get file metadata](api/http/compliance/apps/chats/files/retrieve.md)
 
@@ -36,7 +36,7 @@
 
 GET/v1/compliance/apps/chats/files/{claude\_file\_id}/content
 
-#### AppsChats[Generated Files](api/http/compliance/apps/chats/generated_files.md)
+#### AppsChats[Generated Files](api/http/compliance/apps/chats/generated_files.md)
 
 ##### [Get Claude-generated file metadata](api/http/compliance/apps/chats/generated_files/retrieve.md)
 
@@ -46,7 +46,7 @@
 
 GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}/content
 
-#### Apps[Projects](api/http/compliance/apps/projects.md)
+#### Apps[Projects](api/http/compliance/apps/projects.md)
 
 ##### [List projects](api/http/compliance/apps/projects/list.md)
 
@@ -60,19 +60,19 @@
 
 DELETE/v1/compliance/apps/projects/{project\_id}
 
-#### AppsProjects[Attachments](api/http/compliance/apps/projects/attachments.md)
+#### AppsProjects[Attachments](api/http/compliance/apps/projects/attachments.md)
 
 ##### [List project attachments](api/http/compliance/apps/projects/attachments/list.md)
 
 GET/v1/compliance/apps/projects/{project\_id}/attachments
 
-#### AppsProjects[Collaborators](api/http/compliance/apps/projects/collaborators.md)
+#### AppsProjects[Collaborators](api/http/compliance/apps/projects/collaborators.md)
 
 ##### [List project collaborators](api/http/compliance/apps/projects/collaborators/list.md)
 
 GET/v1/compliance/apps/projects/{project\_id}/collaborators
 
-#### AppsProjects[Documents](api/http/compliance/apps/projects/documents.md)
+#### AppsProjects[Documents](api/http/compliance/apps/projects/documents.md)
 
 ##### [Get project document content](api/http/compliance/apps/projects/documents/retrieve.md)
 
@@ -86,7 +86,7 @@
 
 DELETE/v1/compliance/apps/projects/documents/{document\_id}
 
-#### Apps[Artifacts](api/http/compliance/apps/artifacts.md)
+#### Apps[Artifacts](api/http/compliance/apps/artifacts.md)
 
 ##### [Get artifact metadata](api/http/compliance/apps/artifacts/retrieve.md)
 
@@ -96,7 +96,7 @@
 
 GET/v1/compliance/apps/artifacts/{artifact\_version\_id}/content
 
-#### AppsSessions[Local](api/http/compliance/apps/sessions/local.md)
+#### AppsSessions[Local](api/http/compliance/apps/sessions/local.md)
 
 ##### [List local sessions](api/http/compliance/apps/sessions/local/list.md)
 
@@ -106,19 +106,19 @@
 
 GET/v1/compliance/apps/sessions/local/{local\_session\_id}
 
-#### AppsSessionsLocal[Messages](api/http/compliance/apps/sessions/local/messages.md)
+#### AppsSessionsLocal[Messages](api/http/compliance/apps/sessions/local/messages.md)
 
 ##### [Retrieve local session messages](api/http/compliance/apps/sessions/local/messages/list.md)
 
 GET/v1/compliance/apps/sessions/local/{local\_session\_id}/messages
 
-#### AppsSessions[Remote](api/http/compliance/apps/sessions/remote.md)
+#### AppsSessions[Remote](api/http/compliance/apps/sessions/remote.md)
 
 ##### [List remote sessions](api/http/compliance/apps/sessions/remote/list.md)
 
 GET/v1/compliance/apps/sessions/remote
 
-#### AppsSessionsRemote[Messages](api/http/compliance/apps/sessions/remote/messages.md)
+#### AppsSessionsRemote[Messages](api/http/compliance/apps/sessions/remote/messages.md)
 
 ##### [Retrieve remote session messages](api/http/compliance/apps/sessions/remote/messages/list.md)
 

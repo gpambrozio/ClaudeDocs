@@ -11,9 +11,9 @@ You can ask Claude about any text, pictures, charts, and tables in PDFs you prov
 - Assisting with document translation
 - Converting document information into structured formats
 
-##  Before you begin
+## Before you begin
 
-###  Check PDF requirements
+### Check PDF requirements
 
 Claude works with any standard PDF. Ensure your request size meets these requirements:
 
@@ -27,15 +27,15 @@ Both limits are on the entire request payload, including any other content sent 
 
 Because PDF support relies on Claude's vision capabilities, it is subject to the same [limitations and considerations](build-with-claude/vision.md) as other vision tasks.
 
-###  Supported platforms and models
+### Supported platforms and models
 
 All [active models](models/overview.md) support PDF processing. For PDF support through Amazon Bedrock's Converse API, see [Amazon Bedrock PDF support](#amazon-bedrock-pdf-support).
 
-###  Amazon Bedrock PDF support
+### Amazon Bedrock PDF support
 
 When using PDF support through the Converse API, part of [Claude on Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md), there are two distinct document processing modes:
 
-####  Document processing modes
+#### Document processing modes
 
 1. **Converse Document Chat** (Original mode - Text extraction only)
 
@@ -51,18 +51,18 @@ When using PDF support through the Converse API, part of [Claude on Amazon Bedro
    - Uses approximately 7,000 tokens for a 3-page PDF
    - **Requires citations to be enabled** in the Converse API
 
-####  Key limitations
+#### Key limitations
 
 - **Converse API:** Visual PDF analysis requires citations to be enabled. There is currently no option to use visual analysis without citations (unlike the InvokeModel API).
 - **InvokeModel API:** Provides full control over PDF processing without forced citations.
 
-####  Common issues
+#### Common issues
 
 If Claude isn't seeing images or charts in your PDFs when using the Converse API, you likely need to enable the citations flag. Without it, Converse falls back to basic text extraction only.
 
-##  Process PDFs with Claude
+## Process PDFs with Claude
 
-###  Send your first PDF request
+### Send your first PDF request
 
 Start with a simple example using the Messages API. You can provide PDFs to Claude in three ways:
 
@@ -70,7 +70,7 @@ Start with a simple example using the Messages API. You can provide PDFs to Clau
 2. As a base64-encoded PDF in `document` content blocks
 3. By a `file_id` from the [Files API](build-with-claude/files.md)
 
-####  Option 1: URL-based PDF document
+#### Option 1: URL-based PDF document
 
 The simplest approach is to reference a PDF directly from a URL:
 
@@ -129,7 +129,7 @@ Output
 }
 ```
 
-####  Option 2: Base64-encoded PDF document
+#### Option 2: Base64-encoded PDF document
 
 If you need to send PDFs from your local system or when a URL isn't available:
 
@@ -177,7 +177,7 @@ message = client.messages.create(
 print(message.content)
 ```
 
-####  Option 3: Files API
+#### Option 3: Files API
 
 For PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use the [Files API](build-with-claude/files.md):
 
@@ -213,25 +213,25 @@ message = client.messages.create(
 print(message.content)
 ```
 
-###  How PDF support works
+### How PDF support works
 
 When you send a PDF to Claude, the following steps occur:
 
 1. 1
 
-   The system extracts the contents of the document.
+   ### The system extracts the contents of the document.
 
    - The system converts each page of the document into an image.
    - The text from each page is extracted and provided alongside each page's image.
 2. 2
 
-   Claude analyzes both the text and images to better understand the document.
+   ### Claude analyzes both the text and images to better understand the document.
 
    - Documents are provided as a combination of text and images for analysis.
    - This allows users to ask for insights on visual elements of a PDF, such as charts, diagrams, and other non-textual content.
 3. 3
 
-   Claude responds, referencing the PDF's contents if relevant.
+   ### Claude responds, referencing the PDF's contents if relevant.
 
    Claude can reference both textual and visual content when it responds. You can further improve performance by integrating PDF support with:
 
@@ -239,7 +239,7 @@ When you send a PDF to Claude, the following steps occur:
    - [Process document batches](#process-document-batches): For high-volume document processing.
    - [Tool use](agents-and-tools/tool-use/overview.md): To extract specific information from documents for use as tool inputs.
 
-###  Estimate your costs
+### Estimate your costs
 
 The token count of a PDF file depends on the total text extracted from the document and the number of pages:
 
@@ -248,9 +248,9 @@ The token count of a PDF file depends on the total text extracted from the docum
 
 You can use [token counting](build-with-claude/token-counting.md) to estimate costs for your specific PDFs.
 
-##  Optimize PDF processing
+## Optimize PDF processing
 
-###  Improve performance
+### Improve performance
 
 Follow these best practices for optimal results:
 
@@ -262,11 +262,11 @@ Follow these best practices for optimal results:
 - Split large PDFs into chunks when needed
 - Enable prompt caching for repeated analysis
 
-###  Scale your implementation
+### Scale your implementation
 
 For high-volume processing, consider these approaches:
 
-####  Use prompt caching
+#### Use prompt caching
 
 Cache PDFs with [prompt caching](build-with-claude/prompt-caching.md) to improve performance on repeated queries:
 
@@ -314,7 +314,7 @@ message = client.messages.create(
 print(message.content)
 ```
 
-####  Process document batches
+#### Process document batches
 
 Use the [Message Batches API](build-with-claude/batch-processing.md) to process many PDFs in one request:
 
@@ -396,7 +396,7 @@ print(message_batch)
 
 Batches process asynchronously. To check progress and retrieve results once processing ends, see [Batch processing](build-with-claude/batch-processing.md).
 
-##  Next steps
+## Next steps
 
 
 

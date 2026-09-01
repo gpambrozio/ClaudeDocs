@@ -4,7 +4,7 @@
 
 
 
-##  HTTP errors
+## HTTP errors
 
 The API follows a predictable HTTP error code format:
 
@@ -24,7 +24,7 @@ The official SDKs automatically retry transient failures (such as connection err
 
 When receiving a [streaming](build-with-claude/streaming.md) response over server-sent events (SSE), an error can occur after the API returns a 200 response. In that case, error handling doesn't follow these standard mechanisms. See [Error events](build-with-claude/streaming.md) for the shape of mid-stream errors.
 
-##  Request size limits
+## Request size limits
 
 The API enforces request size limits:
 
@@ -37,7 +37,7 @@ The API enforces request size limits:
 
 If you exceed these limits, you'll receive a 413 `request_too_large` error. On the direct Claude API, Cloudflare returns this error before the request reaches the API servers.
 
-##  Error shapes
+## Error shapes
 
 The API always returns errors as JSON, with a top-level `error` object that always includes a `type` and `message` value. The response also includes a `request_id` field for easier tracking and debugging. For example:
 
@@ -58,13 +58,13 @@ JSON
 
 In accordance with the [versioning](api/versioning.md) policy, the values within these objects may expand, and it is possible that the `type` values will grow over time.
 
-##  SDK error types
+## SDK error types
 
 The official SDKs raise typed exceptions for these errors instead of returning raw JSON, and the class names and namespaces differ by language. For example, a 404 surfaces as `anthropic.NotFoundError` in Python, `Anthropic::Errors::NotFoundError` in Ruby, `com.anthropic.errors.NotFoundException` in Java, and as a single `*anthropic.Error` value (branch on `StatusCode`) in Go. Catch the SDK's typed classes rather than string-matching error messages, handling the most specific classes first. Each SDK page documents its full exception hierarchy:
 
 - [Python](cli-sdks-libraries/sdks/python.md) · [TypeScript](cli-sdks-libraries/sdks/typescript.md) · [C#](cli-sdks-libraries/sdks/csharp.md) · [Go](cli-sdks-libraries/sdks/go.md) · [Java](cli-sdks-libraries/sdks/java.md) · [PHP](cli-sdks-libraries/sdks/php.md) · [Ruby](cli-sdks-libraries/sdks/ruby.md)
 
-##  Request ID
+## Request ID
 
 Every API response includes a unique `request-id` header. This header contains a value such as `req_018EeWyXxfu5pfWkrYcMdjWG`. The same identifier appears as the `request_id` field in [error response bodies](#error-shapes). When contacting support about a specific request, include this ID to help quickly resolve your issue.
 
@@ -89,7 +89,7 @@ print(f"Request ID: {message._request_id}")
 
 For Claude Platform on AWS request-ID examples in other languages, see [Request IDs](build-with-claude/claude-platform-on-aws.md).
 
-##  Long requests
+## Long requests
 
 Avoid setting a large `max_tokens` value without using the [streaming Messages API](build-with-claude/streaming.md)
 or [Message Batches API](api/messages/batches/create.md):
@@ -124,9 +124,9 @@ print(next(block.text for block in message.content if block.type == "text"))
 
 See [Streaming Messages](build-with-claude/streaming.md) for more details.
 
-##  Common validation errors
+## Common validation errors
 
-###  Prefill not supported
+### Prefill not supported
 
 Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing) do not support prefilling assistant messages. Sending a request with a prefilled last assistant message to any of these models returns a 400 `invalid_request_error`:
 
@@ -144,7 +144,7 @@ Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/gl
 
 Use [structured outputs](build-with-claude/structured-outputs.md) on models that support it, system prompt instructions, or [`output_config.format`](build-with-claude/structured-outputs.md) instead.
 
-###  Thinking blocks cannot be modified
+### Thinking blocks cannot be modified
 
 If the most recent assistant message contains `thinking` or `redacted_thinking` blocks that were edited, reordered, filtered out, or reconstructed before being sent back to the API, the request returns a 400 `invalid_request_error`. The error message starts with the position of the offending block (for example, `messages.1.content.0`) and contains:
 
@@ -156,7 +156,7 @@ If the most recent assistant message contains `thinking` or `redacted_thinking` 
 
 With tool use, every `thinking` and `redacted_thinking` block from the assistant turn must be passed back exactly as received, including blocks whose `thinking` field is empty. Pass thinking blocks back unchanged, and if your application filters content blocks by type before resending, include both `thinking` and `redacted_thinking`. See [Troubleshooting thinking](build-with-claude/thinking-troubleshooting.md), [Preserving thinking blocks](build-with-claude/thinking.md), and [Thinking output on Claude Fable 5 and Claude Mythos 5](build-with-claude/thinking.md).
 
-###  Extended thinking not supported
+### Extended thinking not supported
 
 Claude 4.7 and later models have removed extended thinking. Sending `thinking: {"type": "enabled"}` to any of these models returns a 400 `invalid_request_error`:
 
@@ -168,7 +168,7 @@ Claude 4.7 and later models have removed extended thinking. Sending `thinking: {
 
 Use [adaptive thinking](build-with-claude/thinking.md) instead. [Migrating to adaptive thinking](build-with-claude/extended-thinking.md) shows the parameter mapping, and [Troubleshooting thinking](build-with-claude/thinking-troubleshooting.md) covers the symptom-first fix.
 
-###  Adaptive thinking not supported
+### Adaptive thinking not supported
 
 Models that support only extended thinking (Claude 4.5 and earlier models) reject `thinking: {"type": "adaptive"}` with a 400 `invalid_request_error`:
 
@@ -180,7 +180,7 @@ adaptive thinking is not supported on this model
 
 Use `thinking: {"type": "enabled", "budget_tokens": N}` on these models; see [Extended thinking](build-with-claude/extended-thinking.md) for the configuration and [Troubleshooting thinking](build-with-claude/thinking-troubleshooting.md) for the symptom-first fix.
 
-###  Thinking cannot be disabled
+### Thinking cannot be disabled
 
 On Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), and [Claude Mythos Preview](https://anthropic.com/glasswing), thinking is always on. Sending `thinking: {"type": "disabled"}` to any of these models returns a 400 `invalid_request_error`:
 
@@ -192,11 +192,11 @@ On Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), and [Clau
 
 On Claude Fable 5 and Claude Mythos 5, the error message's own suggestion of `"thinking.type.enabled"` is also rejected. Omit the `thinking` parameter and the request runs with adaptive thinking. To keep thinking content out of responses without turning thinking off, set `display: "omitted"` on the thinking configuration. See [Troubleshooting thinking](build-with-claude/thinking-troubleshooting.md).
 
-###  Outbound web identity federation disabled (Claude Platform on AWS)
+### Outbound web identity federation disabled (Claude Platform on AWS)
 
 If every request to [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) returns `"Outbound web identity federation is disabled for your account"`, run `aws iam enable-outbound-web-identity-federation` once per AWS account. See [Enable outbound web identity federation](build-with-claude/claude-platform-on-aws.md) for details.
 
-##  Next steps
+## Next steps
 
 
 

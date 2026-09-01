@@ -6,7 +6,7 @@
 
 # Code
 
-#### Code[Artifacts](api/http/compliance/code/artifacts.md)
+#### Code[Artifacts](api/http/compliance/code/artifacts.md)
 
 ##### [List Code Artifacts](api/http/compliance/code/artifacts/list.md)
 

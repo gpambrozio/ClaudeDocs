@@ -16,7 +16,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 
 
-name: string
+name: string
 
 Name of the RBAC Group. Not uniqueness-enforced.
 
@@ -28,43 +28,43 @@ minLength1
 
 
 
-RbacGroup object{ id, created\_at, name, 4 more }
+RbacGroup object{ id, created\_at, name, 4 more }
 
-id: string
+id: string
 
 ID of the RBAC Group.
 
 
 
-created\_at: string
+created\_at: string
 
 RFC 3339 timestamp of when the RBAC Group was created.
 
 formatdate-time
 
-name: string
+name: string
 
 Name of the RBAC Group. Not uniqueness-enforced.
 
-roles: array of string or null
+roles: array of string or null
 
 RBAC Role IDs attached to this RBAC Group. Role attachment is managed in the admin settings and is read-only on this API. `null` means role data was temporarily unavailable — retry to distinguish from an empty list.
 
 
 
-source\_type: "direct" or "scim"
+source\_type: "direct" or "scim"
 
 How the RBAC Group was created: `"direct"` for groups created directly (for example, in the organization's admin settings), `"scim"` for groups provisioned by the identity provider.
 
 One of the following:
 
-"direct"
+"direct"
 
-"scim"
+"scim"
 
 
 
-type: "rbac\_group"
+type: "rbac\_group"
 
 Object type.
 
@@ -74,19 +74,15 @@ defaultrbac\_group
 
 
 
-updated\_at: string
+updated\_at: string
 
 RFC 3339 timestamp of when the RBAC Group was last updated.
 
 formatdate-time
 
-
+Create RBAC Group
 
-### Create RBAC Group
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/rbac_groups \

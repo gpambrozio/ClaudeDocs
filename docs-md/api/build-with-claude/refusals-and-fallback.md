@@ -36,7 +36,7 @@ print(response.model)
 
 The following sections cover what a refusal response contains, when to use server-side or client-side fallback, and how each is billed.
 
-##  What a refusal looks like
+## What a refusal looks like
 
 A refusal is a successful HTTP 200 response with `stop_reason: "refusal"`:
 
@@ -79,7 +79,7 @@ The `stop_details` object explains the decline:
 
 A refusal can arrive before any output, or mid-stream after partial output. In either case, treat any partial output as incomplete and discard it.
 
-##  Picking a fallback approach
+## Picking a fallback approach
 
 There are three ways to retry a refused request on another model. The right one depends on where you are running and how much control you need.
 
@@ -91,11 +91,11 @@ There are three ways to retry a refused request on another model. The right one 
 
 Server-side fallback and the SDK middleware apply fallback credit for you. You only need the [Fallback credit](build-with-claude/fallback-credit.md) page when you build the retry yourself.
 
-##  Server-side fallback
+## Server-side fallback
 
 Server-side fallback retries a refused request inside a single API call. In the default mode, when the primary model declines and the refusal category has a recommended fallback, the API runs the same request on the model Anthropic recommends for that category. You can instead name up to three fallback models of your own (below). Either way, you get back one response that names the model that answered, so your user gets an answer in one round trip.
 
-###  Making the request
+### Making the request
 
 Set the `fallbacks` parameter to the string `"default"` and send the `server-side-fallback-2026-07-01` beta header. The API then applies the requested model's server-defined default routing, which selects a recommended fallback model based on the refusal category the classifier reports, so refused requests are served without you maintaining a model list as recommendations change.
 
@@ -141,7 +141,7 @@ The routing is applied server-side and is not published per model on the [Models
 
 Only a safety classifier decline triggers the fallback. A rate limit, overload, or server error on the requested model is returned to you as-is.
 
-###  Naming your own fallback models
+### Naming your own fallback models
 
 Instead of default routing, you can set `fallbacks` to a list of up to three models. When the requested model declines, the API runs the next model in the chain on the same request. Use this form when you want to control exactly which models serve refused requests, such as pinning a model your application has qualified.
 
@@ -176,7 +176,7 @@ The explicit-list form also works under the `server-side-fallback-2026-06-01` be
 
 The response has the same shape in both modes: the model that served the turn appears in the top-level `model` field, a `fallback` content block marks the handoff, and `usage.iterations` records each attempt.
 
-###  What the response contains
+### What the response contains
 
 The response looks like any other message, with two additions:
 
@@ -234,7 +234,7 @@ On a refusal before any output, the `fallback` block is the first content block.
 
 The `usage.iterations` array records every attempt. A model that declined appears as an ordinary `message` entry, and the model that served the turn appears as a `fallback_message` entry. If every model in the chain declines, the response is the last model's refusal, with a `message` entry for each earlier hop and a `fallback_message` entry for the last.
 
-###  Continuing the conversation
+### Continuing the conversation
 
 On the next turn, send the assistant content back as you received it. After a mid-output fallback, `content` can include block types the declining model produced before the handoff; the following table covers which to keep and which to drop when you echo the turn.
 
@@ -247,7 +247,7 @@ On the next turn, send the assistant content back as you received it. After a mi
 | Client-side `tool_use` before the final `fallback` block | Drop. |
 | `server_tool_use` before the final `fallback` block | Keep when paired with its result. Drop when it has no matching result. |
 
-###  Streaming
+### Streaming
 
 On a streaming request, the retry happens on the same stream, and nothing you have already received is invalidated. What you see depends on when the decline happens.
 
@@ -262,7 +262,7 @@ On a streaming request, the retry happens on the same stream, and nothing you ha
 - The fallback model continues from the partial output. Only the partial output's `text` blocks are passed to the fallback model as context; other block types remain in `content`.
 - `message_start` already named the requested model, so read the serving model from the `fallback` block's `to.model` and from the `fallback_message` entry in the final `message_delta`'s `usage.iterations`.
 
-###  Non-streaming responses
+### Non-streaming responses
 
 On a non-streaming request, a mid-output decline behaves differently: the response omits the declined model's partial output, and the fallback model answers from scratch. The result looks like a decline before any output, with the `fallback` block first. The declined attempt and its output tokens still appear in `usage.iterations`.
 
@@ -270,11 +270,11 @@ On a non-streaming request, a mid-output decline behaves differently: the respon
 
 ### How server-side fallback is billed
 
-##  Client-side fallback with the SDK middleware
+## Client-side fallback with the SDK middleware
 
 Every Anthropic SDK includes a refusal-fallback middleware. You configure it once on the client with your list of fallback models. Calls through `client.beta.messages` then retry refused requests automatically, on any platform. The middleware also sends the `fallback-credit-2026-07-01` beta header on every request it handles, so retries are repriced without per-request setup.
 
-###  Setting it up
+### Setting it up
 
 Pass the middleware to the client constructor, and share one `BetaFallbackState` instance across the requests of a conversation.
 
@@ -318,7 +318,7 @@ with state:
 print(f"served by: {message.model}")
 ```
 
-###  How it behaves
+### How it behaves
 
 - Retries walk your fallback list in order. A fallback model that itself refuses passes the request to the next entry.
 - When every model in the list has declined, the middleware returns the final refusal (the last model's refusal response) rather than raising an error.
@@ -328,7 +328,7 @@ print(f"served by: {message.model}")
 
 ### Writing the retry yourself
 
-##  Refusals in Message Batches
+## Refusals in Message Batches
 
 A refused request in a [Message Batch](build-with-claude/batch-processing.md) comes back as `result.type: "succeeded"` with `stop_reason: "refusal"`. Batch results carry the same `stop_details` object as synchronous responses, so you can detect refusals through either `stop_reason` or `stop_details.type`. One difference: batch refusals don't mint fallback credits, so `stop_details` on a batch result never includes a `fallback_credit_token`.
 
@@ -338,7 +338,7 @@ Server-side fallback is not available for batches (a batch request that includes
 2. Strip Claude Fable 5's thinking blocks from any multi-turn histories.
 3. Resubmit them on a fallback model as a new batch or as direct requests.
 
-##  Common pitfalls
+## Common pitfalls
 
 - **Retry on a different model.** Re-sending a refused request to the same model usually earns another refusal. Point the retry at the fallback model.
 - **Budget retries per request, not per turn or per session.** A single turn can produce several refusals, for example an agent plus its sub-agents.
@@ -348,7 +348,7 @@ Server-side fallback is not available for batches (a batch request that includes
 - **Instrument refusals as their own signal.** A refusal is an HTTP 200, so monitoring built on error rates or 5xx responses never sees it. Emit one event per refusal and one per fallback-served response (the `fallback_message` entry in `usage.iterations` marks the latter), then alert on the gap between the two counts.
 - **Branch on `stop_reason` or `stop_details.type`, not on `content` or the inner `stop_details` fields.** The `stop_details` object is always present on a refusal, but its `category` and `explanation` fields can be `null`. Check for `stop_reason` equal to `"refusal"` directly.
 
-##  Next steps
+## Next steps
 
 
 

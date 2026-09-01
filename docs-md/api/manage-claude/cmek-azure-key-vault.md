@@ -14,7 +14,7 @@ claude "/claude-api help me configure a customer-managed encryption key with Azu
 
 This guide walks through configuring an Azure Key Vault key as a [customer-managed encryption key (CMEK)](manage-claude/cmek.md) for your Anthropic organization.
 
-##  Prerequisites
+## Prerequisites
 
 - An Azure Key Vault with **RBAC authorization enabled** (`enableRbacAuthorization: true`) and **public network access allowed**. Anthropic calls your vault over the public data-plane endpoint; private endpoints are not supported.
 - **Purge protection enabled** (`enablePurgeProtection: true`) on the vault. Without it, a deleted key can be permanently purged during the soft-delete retention window, causing irreversible loss of your CMEK-protected data. Purge protection cannot be disabled once enabled.
@@ -24,7 +24,7 @@ This guide walks through configuring an Azure Key Vault key as a [customer-manag
 - The [`az` CLI](https://learn.microsoft.com/en-us/cli/azure/?view=azure-cli-latest) installed and authenticated.
 - **Diagnostic Settings** configured on the vault to route the `AuditEvent` log category to Log Analytics, a storage account, or an event hub. Azure Key Vault does not emit data-plane audit logs (such as `KeyWrap`, `KeyUnwrap`, and `KeyGet`) by default, so without this you get no audit trail for Anthropic's key operations.
 
-##  Anthropic app information
+## Anthropic app information
 
 To have Anthropic use your encryption key, you must configure an Anthropic multitenant application ID and display name. Those values are:
 
@@ -33,11 +33,11 @@ To have Anthropic use your encryption key, you must configure an Anthropic multi
 | Multitenant app client ID (US) | `8635ae1a-3e5d-44e8-a4ed-e0f614466f87` |
 | App display name | `anthropic-cmek-client-us` |
 
-##  Encryption key setup
+## Encryption key setup
 
 1. 1
 
-   Consent to the Anthropic multitenant application
+   ### Consent to the Anthropic multitenant application
 
    This creates a service principal in your Entra tenant for Anthropic's CMEK client application. The application requests no Microsoft Graph permissions; it exists solely as a federation target for Key Vault data-plane access.
 
@@ -74,7 +74,7 @@ To have Anthropic use your encryption key, you must configure an Anthropic multi
    Find the service principal's Object ID on its Entra enterprise application overview.
 2. 2
 
-   Create an RSA key in your vault
+   ### Create an RSA key in your vault
 
    Azure Key Vault does not support symmetric key wrapping, so the key must be RSA (3072-bit or larger) with `wrapKey` and `unwrapKey` in its allowed operations.
 
@@ -101,7 +101,7 @@ To have Anthropic use your encryption key, you must configure an Anthropic multi
    Restrict permitted operations to Wrap Key and Unwrap Key.
 3. 3
 
-   Grant the Anthropic service principal access to your key
+   ### Grant the Anthropic service principal access to your key
 
    Assign the `Key Vault Crypto User` role to the service principal from the first step, scoped to the **individual key** rather than the whole vault.
 
@@ -126,7 +126,7 @@ To have Anthropic use your encryption key, you must configure an Anthropic multi
    Assign Key Vault Crypto User to the Anthropic service principal, scoped to the key.
 4. 4
 
-   Verify your vault configuration
+   ### Verify your vault configuration
 
    ```shiki
    az keyvault show --name <your-vault-name> \
@@ -144,7 +144,7 @@ To have Anthropic use your encryption key, you must configure an Anthropic multi
    - `uri` is the vault URI you use when you register the key.
    - `tenantId` is the tenant that governs the vault. Use this value as `tenant_id` when you register the key, not the tenant of your currently-active subscription (the two can differ in cross-tenant setups).
 
-##  Register the key with Anthropic
+## Register the key with Anthropic
 
 How you register the key depends on which product you use.
 
@@ -152,7 +152,7 @@ Claude PlatformClaude Enterprise
 
 1. 1
 
-   Register the key with Anthropic
+   ### Register the key with Anthropic
 
    Create an external key configuration through the Admin API.
 
@@ -191,7 +191,7 @@ Claude PlatformClaude Enterprise
    
 2. 2
 
-   Validate the key
+   ### Validate the key
 
    Trigger an encrypt and decrypt round-trip against your key. This confirms that Anthropic can authenticate to your tenant and perform wrap and unwrap operations.
 
@@ -223,7 +223,7 @@ Claude PlatformClaude Enterprise
    - **Conditional access policies on workload identities:** if your tenant has conditional access policies that target service principals, exclude the Anthropic service principal or add Anthropic's egress ranges to the policy's named locations.
 3. 3
 
-   Attach the key to a workspace
+   ### Attach the key to a workspace
 
    Once the key is validated, attach it to a new workspace before you send any requests to that workspace. For a workspace that already receives requests, the key can take [up to a day to take effect](manage-claude/cmek.md).
 
@@ -242,7 +242,7 @@ Claude PlatformClaude Enterprise
    print(f"external_key_id: {workspace.external_key_id}")
    ```
 
-##  Terraform
+## Terraform
 
 For infrastructure-as-code deployments, the same steps map to the `azurerm` and `azuread` providers.
 

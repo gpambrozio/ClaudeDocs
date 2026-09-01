@@ -6,7 +6,7 @@
 
 Claude Sonnet 5 is the next generation of Anthropic's Sonnet model family. It is a drop-in upgrade for Claude Sonnet 4.6 with three behavior changes: [adaptive thinking](build-with-claude/thinking.md) is on by default, manual extended thinking now returns a 400 error (it was deprecated on Claude Sonnet 4.6), and setting sampling parameters (`temperature`, `top_p`, `top_k`) to non-default values returns a 400 error. This page summarizes everything new at launch, including a new tokenizer.
 
-##  New model
+## New model
 
 | Model | API model ID | Description |
 | --- | --- | --- |
@@ -16,17 +16,17 @@ Claude Sonnet 5 supports the [1M token context window](build-with-claude/context
 
 For complete pricing and specs, see the [models overview](models/overview.md).
 
-##  Behavior changes
+## Behavior changes
 
-###  Adaptive thinking on by default
+### Adaptive thinking on by default
 
 On Claude Sonnet 4.6, requests without a `thinking` field run without thinking. On Claude Sonnet 5, the same requests run with [adaptive thinking](build-with-claude/thinking.md). To turn thinking off, pass `thinking: {type: "disabled"}`. Because `max_tokens` is a hard limit on total output (thinking plus response text), revisit it for workloads that ran without thinking on Claude Sonnet 4.6.
 
-###  Sampling parameters not accepted
+### Sampling parameters not accepted
 
 Setting `temperature`, `top_p`, or `top_k` to a non-default value returns a 400 error. Remove these parameters when migrating; the default value (or omitting the parameter) is accepted. Use system-prompt instructions to guide model behavior. This is new for Sonnet-class models; the same constraint was previously introduced on Claude Opus 4.7.
 
-###  Manual extended thinking removed
+### Manual extended thinking removed
 
 Manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) was deprecated on Claude Sonnet 4.6; on Claude Sonnet 5 it is removed and returns a 400 error, the same as on Claude Opus 4.8 and Claude Opus 4.7. Use adaptive thinking with the [effort parameter](build-with-claude/effort.md) instead.
 
@@ -42,7 +42,7 @@ thinking = {"type": "enabled", "budget_tokens": 32000}
 thinking = {"type": "adaptive"}
 ```
 
-##  New tokenizer
+## New tokenizer
 
 Claude Sonnet 5 uses a new tokenizer. The same input text produces approximately 30% more tokens than on Claude Sonnet 4.6. The exact increase depends on the content. This is not an API change: requests, responses, and streaming events keep the same shape, and no code changes are required.
 
@@ -53,29 +53,29 @@ The change affects anything you measure or budget in tokens:
 - **`max_tokens` budgets:** an output limit tuned for Claude Sonnet 4.6 may truncate equivalent output on Claude Sonnet 5. Revisit limits sized close to your expected output length.
 - **Per-request cost:** per-token pricing is lower than Claude Sonnet 4.6's (see [Pricing](#pricing)), but because the same text produces more tokens, the cost of an equivalent request does not drop in direct proportion.
 
-##  API constraints inherited from Claude Sonnet 4.6
+## API constraints inherited from Claude Sonnet 4.6
 
-###  Assistant message prefilling not supported
+### Assistant message prefilling not supported
 
 Prefilling the assistant message returns a `400` error, unchanged from Claude Sonnet 4.6. Use [structured outputs](build-with-claude/structured-outputs.md), system prompt instructions, or `output_config.format` instead.
 
-##  Capability improvements
+## Capability improvements
 
 Claude Sonnet 5 is a capability upgrade over Claude Sonnet 4.6 at a lower price. It is also an option for workloads that need more capability than Claude Sonnet 4.6 provides without moving to an Opus-class model.
 
 The largest gains over Claude Sonnet 4.6 are in coding and agentic tasks. For benchmark results, see [Anthropic's Transparency Hub](https://www.anthropic.com/transparency).
 
-##  Cybersecurity safeguards
+## Cybersecurity safeguards
 
 Claude Sonnet 5 is the first Sonnet-tier model with real-time cybersecurity safeguards. Requests that involve prohibited or high-risk cybersecurity topics may be refused. Refusals return as a successful HTTP 200 response with `stop_reason: "refusal"`, not an error. See [Real-time cyber safeguards on Claude Opus and Sonnet](https://support.claude.com/en/articles/14604842-real-time-cyber-safeguards-on-claude-opus-and-sonnet) for what the safeguards block and how legitimate security work can apply to the Cyber Verification Program.
 
-##  Pricing
+## Pricing
 
 Claude Sonnet 5 is priced at $2 per million input tokens and $10 per million output tokens, lower per-token pricing than Claude Sonnet 4.6's $3/$15. Because the [new tokenizer](#new-tokenizer) produces approximately 30% more tokens for the same text, the cost of an equivalent request does not drop in direct proportion to the per-token prices when comparing with Claude Sonnet 4.6. The exact difference depends on the content and workload shape.
 
 See [Pricing](about-claude/pricing.md) for complete pricing, including batch processing and prompt caching rates.
 
-##  Availability
+## Availability
 
 At launch, Claude Sonnet 5 is available on:
 
@@ -86,7 +86,7 @@ At launch, Claude Sonnet 5 is available on:
 
 Claude Sonnet 5 supports [zero data retention](manage-claude/api-and-data-retention.md) for organizations with ZDR agreements.
 
-##  Migration guide
+## Migration guide
 
 Claude Sonnet 5 is a drop-in replacement for Claude Sonnet 4.6. Update your model ID:
 
@@ -107,7 +107,7 @@ Then review the following:
 
 See [Migrating to Claude Sonnet 5 from Claude Sonnet 4.6](models/sonnet-5/migration-guide.md) for details.
 
-##  Next steps
+## Next steps
 
 
 

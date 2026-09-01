@@ -30,14 +30,14 @@
 
 
 
-ServiceAccount object{ id, archived\_at, archived\_by\_actor\_id, 8 more }
+ServiceAccount object{ id, archived\_at, archived\_by\_actor\_id, 8 more }
 
 Named non-human identity within the caller's organization.
 
 A service account is a pure identity: name + org. Authorization lives on
 whatever references it (federation rules).
 
-#### Service Accounts[Workspaces](api/http/admin/service_accounts/workspaces.md)
+#### Service Accounts[Workspaces](api/http/admin/service_accounts/workspaces.md)
 
 ##### [Add Workspace To Service Account](api/http/admin/service_accounts/workspaces/create.md)
 

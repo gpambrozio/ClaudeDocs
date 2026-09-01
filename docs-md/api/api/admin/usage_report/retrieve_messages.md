@@ -14,24 +14,24 @@ Get Messages Usage Report
 
 
 
-starting\_at: string
+starting\_at: string
 
 Time buckets that start on or after this RFC 3339 timestamp will be returned.
 Each time bucket will be snapped to the start of the minute/hour/day in UTC.
 
 formatdate-time
 
-account\_ids: optional array of string
+account\_ids: optional array of string
 
 Restrict usage returned to the specified user account ID(s).
 
-api\_key\_ids: optional array of string
+api\_key\_ids: optional array of string
 
 Restrict usage returned to the specified API key ID(s).
 
 
 
-bucket\_width: optional "1d" or "1h" or "1m"
+bucket\_width: optional "1d" or "1h" or "1m"
 
 Time granularity of the response data.
 
@@ -39,27 +39,27 @@ default1d
 
 One of the following:
 
-"1d"
+"1d"
 
-"1h"
+"1h"
 
-"1m"
+"1m"
 
 
 
-context\_window: optional array of "0-200k" or "200k-1M"
+context\_window: optional array of "0-200k" or "200k-1M"
 
 Restrict usage returned to the specified context window(s).
 
 One of the following:
 
-"0-200k"
+"0-200k"
 
-"200k-1M"
+"200k-1M"
 
 
 
-ending\_at: optional string
+ending\_at: optional string
 
 Time buckets that end before this RFC 3339 timestamp will be returned.
 
@@ -67,47 +67,47 @@ formatdate-time
 
 
 
-group\_by: optional array of "account\_id" or "api\_key\_id" or "context\_window" or 6 more
+group\_by: optional array of "account\_id" or "api\_key\_id" or "context\_window" or 6 more
 
 Group by any subset of the available options. Grouping by `speed` requires the `fast-mode-2026-02-01` beta header.
 
 One of the following:
 
-"account\_id"
+"account\_id"
 
-"api\_key\_id"
+"api\_key\_id"
 
-"context\_window"
+"context\_window"
 
-"inference\_geo"
+"inference\_geo"
 
-"model"
+"model"
 
-"service\_account\_id"
+"service\_account\_id"
 
-"service\_tier"
+"service\_tier"
 
-"speed"
+"speed"
 
-"workspace\_id"
+"workspace\_id"
 
 
 
-inference\_geos: optional array of "global" or "not\_available" or "us"
+inference\_geos: optional array of "global" or "not\_available" or "us"
 
 Restrict usage returned to the specified inference geo(s). Use `not_available` for models that do not support specifying `inference_geo`.
 
 One of the following:
 
-"global"
+"global"
 
-"not\_available"
+"not\_available"
 
-"us"
+"us"
 
 
 
-limit: optional number
+limit: optional number
 
 Maximum number of time buckets to return in the response.
 
@@ -116,52 +116,52 @@ The default and max limits depend on `bucket_width`:
 • `"1h"`: Default of 24 hours, maximum of 168 hours
 • `"1m"`: Default of 60 minutes, maximum of 1440 minutes
 
-models: optional array of string
+models: optional array of string
 
 Restrict usage returned to the specified model(s).
 
-page: optional string
+page: optional string
 
 Optionally set to the `next_page` token from the previous response.
 
-service\_account\_ids: optional array of string
+service\_account\_ids: optional array of string
 
 Restrict usage returned to the specified service account ID(s).
 
 
 
-service\_tiers: optional array of "batch" or "flex" or "flex\_discount" or 3 more
+service\_tiers: optional array of "batch" or "flex" or "flex\_discount" or 3 more
 
 Restrict usage returned to the specified service tier(s).
 
 One of the following:
 
-"batch"
+"batch"
 
-"flex"
+"flex"
 
-"flex\_discount"
+"flex\_discount"
 
-"priority"
+"priority"
 
-"priority\_on\_demand"
+"priority\_on\_demand"
 
-"standard"
+"standard"
 
 
 
-speeds: optional array of "fast" or "standard"
+speeds: optional array of "fast" or "standard"
 
 Restrict usage returned to the specified speed(s) (Claude Code research preview).
 Requires the `fast-mode-2026-02-01` beta header.
 
 One of the following:
 
-"fast"
+"fast"
 
-"standard"
+"standard"
 
-workspace\_ids: optional array of string
+workspace\_ids: optional array of string
 
 Restrict usage returned to the specified workspace ID(s).
 
@@ -169,7 +169,7 @@ Restrict usage returned to the specified workspace ID(s).
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -179,15 +179,11 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 
 
-MessagesUsageReport object{ data, has\_more, next\_page }
+MessagesUsageReport object{ data, has\_more, next\_page }
 
-
+Get Messages Usage Report
 
-### Get Messages Usage Report
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/usage_report/messages \

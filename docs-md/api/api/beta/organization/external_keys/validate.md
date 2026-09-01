@@ -21,7 +21,7 @@ message if it failed or timed out.
 
 
 
-external\_key\_id: string
+external\_key\_id: string
 
 ID of the External Key.
 
@@ -29,35 +29,31 @@ maxLength2048
 
 ##### Returns
 
-error: string or null
+error: string or null
 
 Error message when status is `failure`. Null otherwise.
 
 
 
-status: "failure" or "success"
+status: "failure" or "success"
 
 `success` — encrypt/decrypt roundtrip succeeded. `failure` — the roundtrip failed or timed out; see `error`.
 
 One of the following:
 
-"failure"
+"failure"
 
-"success"
+"success"
 
 
 
-type: "external\_key\_validation"
+type: "external\_key\_validation"
 
 defaultexternal\_key\_validation
 
-
+Validate External Key
 
-### Validate External Key
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID/validate \

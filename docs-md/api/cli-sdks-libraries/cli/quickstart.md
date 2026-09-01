@@ -12,7 +12,7 @@ The ant CLI in action.
 
 Compared to `curl`, `ant` builds request bodies from typed flags or piped YAML instead of hand-written JSON, and inlines file contents into string fields with an `@path` reference. It extracts response fields with a built-in `--transform` query, so you don't need a separate tool such as `jq`, and it paginates list endpoints automatically.
 
-##  Installation
+## Installation
 
 Homebrew (macOS)curl (Linux/WSL)Go
 
@@ -30,7 +30,7 @@ ant --version
 
 
 
-##  Authentication
+## Authentication
 
 `ant auth login` opens a browser-based OAuth flow against the Claude Console and stores the resulting credentials locally, so you can call the API without creating or managing an API key.
 
@@ -42,7 +42,7 @@ CLI
 ant auth login
 ```
 
-##  Send your first request
+## Send your first request
 
 With the binary installed and authenticated, call the [Messages API](api/cli/messages/create.md):
 
@@ -78,7 +78,7 @@ Output
 
 The response is the full API object, pretty-printed because stdout is a terminal.
 
-##  Shell completion
+## Shell completion
 
 The CLI ships completion scripts for bash, zsh, fish, and PowerShell. Generate and install one for your shell:
 
@@ -91,7 +91,7 @@ ant @completion zsh > "${fpath[1]}/_ant"
 
 
 
-##  Next steps
+## Next steps
 
 
 

@@ -13,41 +13,41 @@ Anthropic offers two ways to build with Claude, each suited to different use cas
 
 To learn more about each, see [Using the Messages API](build-with-claude/working-with-messages.md) and the [Claude Managed Agents overview](managed-agents/overview.md).
 
-##  Recommended path for new developers
+## Recommended path for new developers
 
 Follow these steps to go from zero to a working Claude integration.
 
 1. 1
 
-   Make your first API call
+   ### Make your first API call
 
    Set up your environment, install an SDK, and send your first message to Claude.
 
    [Go to the quickstart](get-started.md)
 2. 2
 
-   Secure your credentials
+   ### Secure your credentials
 
    Set an expiration when you create your API key. Keep the key out of source control, client-side code, and prompts. Check whether your workload can use Workload Identity Federation instead of a static key.
 
    [Read the authentication guide](manage-claude/authentication.md)
 3. 3
 
-   Understand the Messages API
+   ### Understand the Messages API
 
    Learn the core request and response structure, including multi-turn conversations, system prompts, and stop reasons.
 
    [Read the Messages API guide](build-with-claude/working-with-messages.md)
 4. 4
 
-   Choose the right model
+   ### Choose the right model
 
    Compare Claude models by capability and cost to pick the best fit for your use case.
 
    [See the models overview](models/overview.md)
 5. 5
 
-   Explore features and tools
+   ### Explore features and tools
 
    Discover what Claude can do: extended thinking, web search, file handling, structured outputs, and more.
 
@@ -55,7 +55,7 @@ Follow these steps to go from zero to a working Claude integration.
 
 ---
 
-##  Develop with Claude
+## Develop with Claude
 
 Anthropic provides developer tools to help you build and scale applications with Claude.
 
@@ -77,7 +77,7 @@ Learn with interactive Jupyter notebooks covering PDFs, embeddings, and more.
 
 ---
 
-##  Key capabilities
+## Key capabilities
 
 Claude can assist with many tasks that involve text, code, and images.
 
@@ -95,7 +95,7 @@ Process and analyze visual input and generate text and code from images.
 
 ---
 
-##  Support
+## Support
 
 
 

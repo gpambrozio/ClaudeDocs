@@ -6,7 +6,7 @@
 
 The endpoints on this page expose the directory side of a Claude Enterprise organization: its linked organizations, the users in each one, the roles defined on each, and its role-based access control (RBAC) or SCIM (System for Cross-domain Identity Management)-provisioned groups and their members. Use them to seed eDiscovery user lists, build reporting dashboards, and reconcile group membership against an external system of record. A Compliance Access Key that covers the parent organization returns data from every linked organization underneath, so a single key reaches the entire tree. The [effective-settings endpoint](#get-effective-organization-settings) complements the directory: it returns the data-privacy, security, and capability settings actually in force for one organization.
 
-##  List organizations
+## List organizations
 
 The [List organizations](api/compliance/organizations/list.md) endpoint returns every organization under the parent the key is bound to.
 
@@ -59,7 +59,7 @@ Most other Anthropic APIs use the `org_`-prefixed form.
 
 To track organization-membership changes over time, relist this endpoint periodically, following the `next_page` token through every page on each pass. The Activity Feed also surfaces membership events through the `org_deletion_requested`, `org_deleted_via_bulk`, `org_parent_join_proposal_created`, and `org_join_proposal_decided` activity types; see [Query the Activity Feed](manage-claude/compliance-activity-feed.md).
 
-##  List organization users
+## List organization users
 
 The [List organization users](api/compliance/organizations/users/list.md) endpoint returns a paginated list of user records for one organization.
 
@@ -106,7 +106,7 @@ The user IDs returned here are the same `user_...` identifiers accepted by the [
 
 A user only appears here while they are an active member of the organization. Removed users are dropped from the list immediately. Their historical activity remains queryable through the Activity Feed for the full retention window, indexed by the same `user_...` ID.
 
-##  List roles
+## List roles
 
 The [List Compliance Roles](api/compliance/organizations/roles/list.md) endpoint returns a paginated list of role records defined on one organization, and [Get Compliance Role](api/compliance/organizations/roles/retrieve.md) returns one role by ID.
 
@@ -146,7 +146,7 @@ Response
 
 See the [List Compliance Roles](api/compliance/organizations/roles/list.md) response schema for the full role record shape. To list the permissions currently granted to a role, use [List Compliance Role Permissions](api/compliance/organizations/roles/permissions/list.md). To audit historical role assignments and permission changes, query the RBAC activity types (for example, `rbac_role_assigned` and `rbac_role_permission_added`) through the Activity Feed; see [Filter activities](manage-claude/compliance-activity-feed.md).
 
-##  List groups and members
+## List groups and members
 
 The [List Compliance Groups](api/compliance/groups/list.md) endpoint returns a paginated list of RBAC and SCIM-provisioned groups, and [Get Compliance Group](api/compliance/groups/retrieve.md) returns one group by ID. The [List Compliance Group Members](api/compliance/groups/members/list.md) endpoint returns the members of one group.
 
@@ -223,7 +223,7 @@ Response
 
 See the [List Compliance Group Members](api/compliance/groups/members/list.md) response schema for the full member record shape. The `user_id` field is the same `user_...` identifier that the Activity Feed, chat list, and remote session list accept; it also matches `user.id` on local session objects and on user-owned remote session objects (agent-owned remote sessions carry the human's ID in `started_by_user.id` instead). To get a member's full name, look it up through the organization users list.
 
-##  Get effective organization settings
+## Get effective organization settings
 
 The [Get effective organization settings](api/compliance/organizations/settings/retrieve.md) endpoint returns the settings in force for one organization under your parent: the enforced state after regulatory restrictions (such as HIPAA), feature-availability rules, organization-type defaults, and inter-feature dependencies are applied, which can differ from what an administrator configured. Use it to attest that retention windows, content redaction, single sign-on enforcement, the IP allowlist, and session-duration controls match your documented baseline, without administrator Console access.
 
@@ -299,7 +299,7 @@ Rows reflect the enforced state rather than the last-stored configuration: for e
 
 The response reflects the state at read time; nothing is snapshotted. Changes to most of these settings surface as events in the [Activity Feed](manage-claude/compliance-activity-feed.md); use this endpoint for the current resolved state and the feed to audit who changed what, and when.
 
-##  Next steps
+## Next steps
 
 [Compliance organizations API reference](api/compliance/organizations.md)
 

@@ -9,7 +9,7 @@
 - [Migrating to Claude Sonnet 5](models/sonnet-5/migration-guide.md)
 - [Migrating to Claude Haiku 4.5](models/haiku-4-5/migration-guide.md)
 
-##  Get help
+## Get help
 
 - Check the [API documentation](api/overview.md) for detailed specifications
 - Review [model capabilities](models/overview.md) for performance comparisons

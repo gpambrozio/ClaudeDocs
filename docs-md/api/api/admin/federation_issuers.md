@@ -30,7 +30,7 @@
 
 
 
-FederationIssuer object{ id, archived\_at, archived\_by\_actor\_id, 12 more }
+FederationIssuer object{ id, archived\_at, archived\_by\_actor\_id, 12 more }
 
 Registered external OIDC identity provider.
 

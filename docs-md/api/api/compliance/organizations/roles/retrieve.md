@@ -12,47 +12,43 @@ Get Compliance Role
 
 ##### Path parameters
 
-org\_uuid: string
+org\_uuid: string
 
 The organization UUID
 
-role\_id: string
+role\_id: string
 
 The role ID (tagged ID, e.g., rbac\_role\_abc123)
 
 ##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### Returns
 
-id: string
+id: string
 
 Role identifier (tagged ID)
 
-created\_at: string or null
+created\_at: string or null
 
 Role creation timestamp (ISO 8601)
 
-description: string
+description: string
 
 Role description
 
-name: string
+name: string
 
 Role name
 
-updated\_at: string or null
+updated\_at: string or null
 
 Role last-updated timestamp (ISO 8601)
 
-
+Get Compliance Role
 
-### Get Compliance Role
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/roles/$ROLE_ID \

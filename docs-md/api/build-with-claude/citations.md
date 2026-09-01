@@ -45,20 +45,20 @@ print(response)
 
 ---
 
-##  How citations work
+## How citations work
 
 Integrate citations with Claude in these steps:
 
 1. 1
 
-   Provide document(s) and enable citations
+   ### Provide document(s) and enable citations
 
    - Include documents in any of the supported formats: [PDFs](#pdf-documents), [plain text](#plain-text-documents), or [custom content](#custom-content-documents) documents.
    - Set `citations.enabled=true` on each of your documents. Currently, citations must be enabled on all or none of the documents within a request.
    - Only text citations are currently supported. Image citations are not yet possible.
 2. 2
 
-   Documents get processed
+   ### Documents get processed
 
    - Document contents are "chunked" to define the minimum granularity of possible citations. For example, sentence chunking lets Claude cite a single sentence or chain together multiple consecutive sentences to cite a paragraph or longer passage.
      - **For PDFs:** Text is extracted as described in [PDF support](build-with-claude/pdf-support.md) and content is chunked into sentences. Citing images from PDFs is not currently supported.
@@ -66,7 +66,7 @@ Integrate citations with Claude in these steps:
      - **For custom content documents:** Your provided content blocks are used as-is and no further chunking is done.
 3. 3
 
-   Claude provides cited response
+   ### Claude provides cited response
 
    - Responses may now include multiple text blocks where each text block can contain a claim that Claude is making and a list of citations that support the claim.
    - Citations reference specific locations in source documents. The format of these citations is dependent on the type of document being cited from.
@@ -75,30 +75,30 @@ Integrate citations with Claude in these steps:
      - **For custom content documents:** Citations include the content block index range (0-indexed) corresponding to the original content list provided.
    - Document indices are provided to indicate the reference source and are 0-indexed according to the list of all documents in your original request.
 
-###  Citable versus non-citable content
+### Citable versus non-citable content
 
 - Text found within a document's `source` content can be cited from.
 - `title` and `context` are optional fields that are passed to the model but not used toward cited content.
 - `title` is limited in length, so the `context` field is useful for storing document metadata as text or stringified JSON.
 
-###  Citation indices
+### Citation indices
 
 - Document indices are 0-indexed from the list of all document content blocks in the request (spanning across all messages).
 - Character indices are 0-indexed with exclusive end indices.
 - Page numbers are 1-indexed with exclusive end page numbers.
 - Content block indices are 0-indexed with exclusive end indices from the `content` list provided in the custom content document.
 
-###  Token costs
+### Token costs
 
 - Enabling citations incurs a slight increase in input tokens because of system prompt additions and document chunking.
 - However, the citations feature is very efficient with output tokens. Internally, the model outputs citations in a standardized format that are then parsed into cited text and document location indices. The `cited_text` field is provided for convenience and does not count toward output tokens.
 - When passed back in subsequent conversation turns, `cited_text` is also not counted toward input tokens.
 
-###  Feature compatibility
+### Feature compatibility
 
 Citations work in conjunction with other API features including [prompt caching](build-with-claude/prompt-caching.md), [token counting](build-with-claude/token-counting.md), and [batch processing](build-with-claude/batch-processing.md).
 
-####  Using prompt caching with citations
+#### Using prompt caching with citations
 
 Citations and prompt caching can be used together effectively.
 
@@ -153,9 +153,9 @@ In this example:
 - Claude can generate responses with citations while benefiting from cached document content.
 - Subsequent requests using the same document benefit from the cached content.
 
-##  Document types
+## Document types
 
-###  Choosing a document type
+### Choosing a document type
 
 Three document types are supported for citations. Documents can be provided directly in the message (base64, text, or URL) or uploaded through the [Files API](build-with-claude/files.md) and referenced by `file_id`:
 
@@ -165,7 +165,7 @@ Three document types are supported for citations. Documents can be provided dire
 | PDF | PDF files with text content | Sentence | Page numbers (1-indexed) |
 | Custom content | Lists, transcripts, special formatting, more granular citations | No additional chunking | Block indices (0-indexed) |
 
-###  Plain text documents
+### Plain text documents
 
 Plain text documents are automatically chunked into sentences. You can provide them inline or by reference with their `file_id`:
 
@@ -191,7 +191,7 @@ The intro example at the top of this page shows a complete plain text request in
 
 ### Example plain text citation
 
-###  PDF documents
+### PDF documents
 
 PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PDF text is extracted and chunked into sentences. As image citations are not yet supported, PDFs that are scans of documents and do not contain extractable text are not citable.
 
@@ -236,7 +236,7 @@ print(response)
 
 ### Example PDF citation
 
-###  Custom content documents
+### Custom content documents
 
 Custom content documents give you control over citation granularity. No additional chunking is done and chunks are provided to the model according to the content blocks provided.
 
@@ -279,7 +279,7 @@ print(response)
 
 ---
 
-##  Response structure
+## Response structure
 
 When citations are enabled, responses include multiple text blocks with citations:
 
@@ -358,13 +358,13 @@ When citations are enabled, responses include multiple text blocks with citation
 
 
 
-###  Streaming support
+### Streaming support
 
 For streaming responses, citations arrive as a `citations_delta` delta type inside `content_block_delta` events. Each delta contains a single citation to add to the `citations` list on the current `text` content block.
 
 ### Example streaming events
 
-##  Next steps
+## Next steps
 
 [Streaming messages](build-with-claude/streaming.md)
 

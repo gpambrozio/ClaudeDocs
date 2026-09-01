@@ -6,7 +6,7 @@
 
 Permission policies control whether server-executed tools (the pre-built agent toolset and MCP toolset) run automatically or wait for your approval. Custom tools are executed by your application and controlled by you, so they are not governed by permission policies.
 
-##  Permission policy types
+## Permission policy types
 
 | Policy | Behavior |
 | --- | --- |
@@ -17,11 +17,11 @@ Each toolset kind has its own default: the agent toolset defaults to `always_all
 
 A permission policy controls when an enabled tool runs. To remove a tool from the agent entirely, disable it instead. See [Disabling specific tools](managed-agents/tools.md).
 
-##  Set a policy for a toolset
+## Set a policy for a toolset
 
 You set permission policies in the agent's `tools` configuration when you create the agent, and you can change them later by [updating the agent](managed-agents/agent-setup.md). Running sessions keep the toolset configuration they were created with. Updates apply to sessions created afterward.
 
-###  Agent toolset permissions
+### Agent toolset permissions
 
 When creating an agent, you can apply a policy to every tool in `agent_toolset_20260401` using `default_config.permission_policy`:
 
@@ -49,7 +49,7 @@ tools:
 
 `default_config` is optional. If you omit it, the agent toolset is enabled with the default permission policy, `always_allow`.
 
-###  MCP toolset permissions
+### MCP toolset permissions
 
 MCP toolsets default to `always_ask`. This ensures that new tools added to an MCP server do not execute in your application without approval. To auto-approve tools from a trusted MCP server, set `default_config.permission_policy` on the `mcp_toolset` entry.
 
@@ -85,7 +85,7 @@ tools:
         type: always_allow
 ```
 
-##  Override an individual tool policy
+## Override an individual tool policy
 
 Use the `configs` array to override the default for individual tools. The `name` values for the agent toolset are listed in [Available tools](managed-agents/tools.md). This example allows the full agent toolset by default but requires confirmation before any bash command runs:
 
@@ -111,7 +111,7 @@ YAML
 
 Pass this `tools` configuration in the agent create request (the CLI tab shows the complete command). MCP toolsets support the same per-tool overrides, with `name` set to the tool name reported by the MCP server. See [Configure which MCP tools are available](managed-agents/mcp-connector.md).
 
-##  Respond to confirmation requests
+## Respond to confirmation requests
 
 When the agent invokes a tool with an `always_ask` policy:
 
@@ -139,11 +139,11 @@ ant beta:sessions:events send \
     deny_message: Don't create issues in the production project. Use the staging project.}"
 ```
 
-##  Custom tools
+## Custom tools
 
 Permission policies do not apply to custom tools. When the agent invokes a custom tool, your application receives an `agent.custom_tool_use` event and is responsible for deciding whether to execute it before sending back a `user.custom_tool_result`. See [Session event stream](managed-agents/events-and-streaming.md) for the full flow.
 
-##  Next steps
+## Next steps
 
 
 

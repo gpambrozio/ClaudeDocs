@@ -12,21 +12,17 @@ Downloads the binary content of a file the assistant created via tool use.
 
 ##### Path parameters
 
-claude\_gen\_file\_id: string
+claude\_gen\_file\_id: string
 
 The generated-file id (e.g., 'claude\_gen\_file\_abc123') as returned in `chat_messages[].generated_files[].id` from GET /apps/chats/{claude\_chat\_id}/messages.
 
 ##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
-
+Download a Claude-generated file
 
-### Download a Claude-generated file
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/compliance/apps/chats/generated-files/$CLAUDE_GEN_FILE_ID/content \

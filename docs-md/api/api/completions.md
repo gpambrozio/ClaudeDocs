@@ -16,7 +16,7 @@ cURL
 
 
 
-Completion object{ id, completion, model, 2 more }
+Completion object{ id, completion, model, 2 more }
 
 ---
 

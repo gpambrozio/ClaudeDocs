@@ -11,7 +11,7 @@ This is ideal for:
 - Chat-based, multi-turn conversations where you want users to use one chat for a long period of time
 - Task-oriented prompts that require a lot of follow-up work (often tool use) that might exceed the context window
 
-##  How compaction works
+## How compaction works
 
 When compaction is enabled, Claude automatically summarizes your conversation when it reaches the configured token threshold. The API:
 
@@ -24,7 +24,7 @@ On subsequent requests, append the response to your messages. The API automatica
 
 ![Compaction flow: when input tokens reach the trigger, Claude writes a summary into a compaction block and continues](/docs/images/compaction-flow.svg)
 
-##  Basic usage
+## Basic usage
 
 Enable compaction by adding the `compact_20260112` strategy to `context_management.edits` in your Messages API request.
 
@@ -49,7 +49,7 @@ response = client.beta.messages.create(
 messages.append({"role": "assistant", "content": response.content})
 ```
 
-##  Parameters
+## Parameters
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -58,7 +58,7 @@ messages.append({"role": "assistant", "content": response.content})
 | `pause_after_compaction` | boolean | `false` | Whether to pause after generating the compaction summary |
 | `instructions` | string | `null` | Custom summarization prompt. Completely replaces the default prompt when provided. |
 
-###  Trigger configuration
+### Trigger configuration
 
 Configure when compaction triggers using the `trigger` parameter:
 
@@ -85,7 +85,7 @@ response = client.beta.messages.create(
 )
 ```
 
-###  Custom summarization instructions
+### Custom summarization instructions
 
 The default summarization prompt varies by model. Each default instructs Claude to write a summary inside `<summary></summary>` tags with the information needed to continue the task in a future context window. For example, some models use the following prompt:
 
@@ -120,7 +120,7 @@ response = client.beta.messages.create(
 )
 ```
 
-###  Pausing after compaction
+### Pausing after compaction
 
 Use `pause_after_compaction` to pause the API after generating the compaction summary. This allows you to add additional content blocks (such as preserving recent messages or specific instruction-oriented messages) before the API continues with the response.
 
@@ -158,7 +158,7 @@ if response.stop_reason == "compaction":
     )
 ```
 
-####  Enforcing a total token budget
+#### Enforcing a total token budget
 
 When a model works on long tasks with many tool-use iterations, total token consumption can grow significantly. You can combine `pause_after_compaction` with a compaction counter to estimate cumulative usage and gracefully wrap up the task once a budget is reached.
 
@@ -205,7 +205,7 @@ if response.stop_reason == "compaction":
         )
 ```
 
-##  Working with compaction blocks
+## Working with compaction blocks
 
 When compaction is triggered, the API returns a `compaction` block at the start of the assistant response.
 
@@ -230,7 +230,7 @@ Output
 }
 ```
 
-###  Passing compaction blocks back
+### Passing compaction blocks back
 
 You must pass the `compaction` block back to the API on subsequent requests to continue the conversation with the shortened prompt. The simplest approach is to append the entire response content to your messages:
 
@@ -268,7 +268,7 @@ When the API receives a `compaction` block, all content blocks before it are ign
 - Keep the original messages in your list and let the API handle removing the compacted content
 - Manually drop the compacted messages and only include the compaction block onwards
 
-###  Streaming
+### Streaming
 
 The compaction block streams differently from text blocks. You receive a `content_block_start` event, followed by a single `content_block_delta` with the complete summary content (no intermediate streaming), and then a `content_block_stop` event.
 
@@ -305,7 +305,7 @@ with client.beta.messages.stream(
     messages.append({"role": "assistant", "content": message.content})
 ```
 
-###  Prompt caching
+### Prompt caching
 
 Compaction works well with [prompt caching](build-with-claude/prompt-caching.md). You can add a `cache_control` breakpoint on compaction blocks to cache the summarized content.
 
@@ -328,7 +328,7 @@ Compaction works well with [prompt caching](build-with-claude/prompt-caching.md)
 
 
 
-####  Maximizing cache hits with system prompts
+#### Maximizing cache hits with system prompts
 
 When compaction occurs, the summary becomes new content that needs to be written to the cache. Without additional cache breakpoints, this would also invalidate any cached system prompt, requiring it to be re-cached along with the compaction summary.
 
@@ -364,7 +364,7 @@ response = client.beta.messages.create(
 
 This keeps long system prompts cached across multiple compaction events throughout a conversation.
 
-##  Understanding usage
+## Understanding usage
 
 Compaction requires an additional sampling step, which contributes to rate limits and billing. The API returns detailed usage information in the response:
 
@@ -395,13 +395,13 @@ Output
 
 The `iterations` array shows usage for each sampling iteration. When compaction occurs, you'll see a `compaction` iteration followed by the main `message` iteration. The top-level `input_tokens` and `output_tokens` match the `message` iteration exactly in this example because there is only one non-compaction iteration. The final iteration's token counts reflect the effective context size after compaction.
 
-##  Combining with other features
+## Combining with other features
 
-###  Server tools
+### Server tools
 
 When using server tools (such as web search), the compaction trigger is checked at the start of each sampling iteration. Compaction might occur multiple times within a single request depending on your trigger threshold and the amount of output generated.
 
-###  Token counting
+### Token counting
 
 The token counting endpoint (`/v1/messages/count_tokens`) applies existing `compaction` blocks in your prompt but does not trigger new compactions. Use it to check your effective token count after previous compactions:
 
@@ -423,7 +423,7 @@ print(f"Current tokens: {count_response.input_tokens}")
 print(f"Original tokens: {count_response.context_management.original_input_tokens}")
 ```
 
-##  Examples
+## Examples
 
 Here's a complete example of a long-running conversation with compaction:
 
@@ -540,7 +540,7 @@ print(chat("Now add rate limiting and error handling"))
 # Continue calling chat() for as long as the conversation needs
 ```
 
-##  Current limitations
+## Current limitations
 
 - **Same model for summarization:** The model specified in your request is used for summarization. There is no option to use a different (for example, cheaper) model for the summary.
 - **Compaction might fail when tools are defined:** When your request includes `tools`, the model occasionally calls a tool during the internal summarization step instead of writing a summary. When this occurs, the response contains a `compaction` block with `content: null`. To prevent this, set [`instructions`](#custom-summarization-instructions) to a prompt that explicitly tells the model not to call tools, for example:
@@ -551,7 +551,7 @@ print(chat("Now add rate limiting and error handling"))
 
   
 
-##  Next steps
+## Next steps
 
 
 

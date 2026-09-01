@@ -6,7 +6,7 @@
 
 The Anthropic Go library provides convenient access to the Claude API from applications written in Go.
 
-##  Installation
+## Installation
 
 ```shiki
 import (
@@ -24,11 +24,11 @@ go get github.com/anthropics/anthropic-sdk-go
 
 
 
-##  Requirements
+## Requirements
 
 This library requires Go 1.24+.
 
-##  Usage
+## Usage
 
 ```shiki
 package main
@@ -75,7 +75,7 @@ For authentication options including Workload Identity Federation, see [Authenti
 
 ### Tool calling
 
-##  Request fields
+## Request fields
 
 The anthropic library uses the [`omitzero`](https://tip.golang.org/doc/go1.24#encodingjsonpkgencodingjson)
 semantics from the Go 1.24+ `encoding/json` release for request fields.
@@ -139,7 +139,7 @@ custom := param.Override[anthropic.FooParams](12)
 
 
 
-###  Request unions
+### Request unions
 
 Unions are represented as a struct with fields prefixed by "Of" for each of its variants,
 only one field can be non-zero. The non-zero field will be serialized.
@@ -171,7 +171,7 @@ if address := animal.GetOwner().GetAddress(); address != nil {
 
 
 
-###  Deserializing params
+### Deserializing params
 
 Param types (types ending in `Param`, such as `MessageNewParams` or `ToolUnionParam`) are designed for outgoing requests only. They marshal correctly to JSON but do not fully support round-trip deserialization. If you unmarshal raw JSON into a param struct, typed union fields like `OfBashTool20250124` will be nil even when the underlying JSON is valid.
 
@@ -203,7 +203,7 @@ fmt.Println(string(b) == string(b2)) // true
 
 For this use case, `param.SetJSON` (available since v1.20.0) is preferred over the more general `param.Override[T](any)` because it doesn't require spelling out the type parameter and makes the round-trip intent explicit.
 
-##  Response objects
+## Response objects
 
 All fields in response structs are ordinary value types (not pointers or wrappers).
 Response structs also include a special `JSON` field containing metadata about
@@ -270,7 +270,7 @@ body := res.JSON.ExtraFields["my_unexpected_field"].Raw()
 
 
 
-###  Response unions
+### Response unions
 
 In responses, unions are represented by a flattened struct containing all possible fields from each of the
 object variants.
@@ -311,7 +311,7 @@ default:
 
 
 
-##  Error handling
+## Error handling
 
 When the API returns a non-success status code, the SDK returns an error with type
 `*anthropic.Error`. This contains the `StatusCode`, `*http.Request`, and
@@ -350,7 +350,7 @@ if err != nil {
 When other errors occur, they are returned unwrapped; for example,
 if HTTP transport fails, you might receive `*url.Error` wrapping `*net.OpError`.
 
-##  Retries
+## Retries
 
 Certain errors will be automatically retried 2 times by default, with a short exponential backoff.
 The SDK retries by default all connection errors, 408 Request Timeout, 409 Conflict, 429 Rate Limit,
@@ -386,7 +386,7 @@ client := anthropic.NewClient(
 
 
 
-##  Timeouts
+## Timeouts
 
 Non-streaming Messages requests time out after 10 minutes by default; other requests have no default timeout. Use context to configure a timeout for a request lifecycle.
 
@@ -419,7 +419,7 @@ defer cancel()
 
 
 
-##  Long requests
+## Long requests
 
 Avoid setting a large `MaxTokens` value without using streaming as some networks may drop idle connections after a certain period of time, which
 can cause the request to fail or [timeout](#timeouts) without receiving a response from Anthropic.
@@ -427,7 +427,7 @@ can cause the request to fail or [timeout](#timeouts) without receiving a respon
 This SDK will also return an error if a non-streaming request is expected to be above roughly 10 minutes long.
 Calling `.Messages.NewStreaming()` or [setting a custom timeout](#timeouts) disables this error.
 
-##  File uploads
+## File uploads
 
 Request parameters that correspond to file uploads in multipart requests are typed as
 `io.Reader`. The contents of the `io.Reader` will by default be sent as a multipart form
@@ -452,7 +452,7 @@ anthropic.FileUploadParams{
 The file name and content-type can also be customized by implementing `Name() string` or `ContentType() string` on the run-time type of `io.Reader`. Note that `os.File` implements `Name() string`, so a
 file returned by `os.Open` will be sent with the file name on disk.
 
-##  Pagination
+## Pagination
 
 This library provides some conveniences for working with paginated list endpoints.
 
@@ -494,7 +494,7 @@ if err != nil {
 
 
 
-##  RequestOptions
+## RequestOptions
 
 This library uses the functional options pattern. Functions defined in the
 `option` package return a `RequestOption`, which is a closure that mutates a
@@ -521,11 +521,11 @@ The request option `option.WithDebugLog(nil)` may be helpful while debugging.
 
 See the [full list of request options](https://pkg.go.dev/github.com/anthropics/anthropic-sdk-go/option).
 
-##  HTTP client customization
+## HTTP client customization
 
 For request middleware (`option.WithMiddleware`) and replacing the default `http.Client` (`option.WithHTTPClient`), see [SDK middleware](cli-sdks-libraries/middleware.md).
 
-##  Platform integrations
+## Platform integrations
 
 The Go SDK supports the following platforms:
 
@@ -536,9 +536,9 @@ The Go SDK supports the following platforms:
 
 Use `bedrock.NewMantleClient` for new projects; `bedrock.WithLoadDefaultConfig`/`WithConfig` remain for existing applications using the Bedrock `InvokeModel` API.
 
-##  Advanced usage
+## Advanced usage
 
-###  Accessing raw response data (for example, response headers)
+### Accessing raw response data (for example, response headers)
 
 You can access the raw HTTP response data by using the `option.WithResponseInto()` request option. This is useful when
 you need to examine response headers, status codes, or other details.
@@ -573,12 +573,12 @@ fmt.Printf("Headers: %+#v\n", response.Header)
 
 
 
-###  Making custom/undocumented requests
+### Making custom/undocumented requests
 
 This library is typed for convenient access to the documented API. If you need to access undocumented
 endpoints, params, or response properties, the library can still be used.
 
-####  Undocumented endpoints
+#### Undocumented endpoints
 
 To make requests to undocumented endpoints, you can use `client.Get`, `client.Post`, and other HTTP verbs.
 `RequestOptions` on the client, such as retries, will be respected when making these requests.
@@ -601,7 +601,7 @@ if err != nil {
 
 
 
-####  Undocumented request params
+#### Undocumented request params
 
 To make requests using undocumented parameters, you may use either the `option.WithQuerySet()`
 or the `option.WithJSONSet()` methods.
@@ -618,7 +618,7 @@ client.Foo.New(context.Background(), params, option.WithJSONSet("data.last_name"
 
 
 
-####  Undocumented response properties
+#### Undocumented response properties
 
 To access undocumented response properties, you may either access the raw JSON of the response as a string
 with `result.JSON.RawJSON()`, or get the raw JSON of a particular field on the result with
@@ -626,7 +626,7 @@ with `result.JSON.RawJSON()`, or get the raw JSON of a particular field on the r
 
 Any fields that are not present on the response struct are saved and can be accessed through `result.JSON.ExtraFields`, which is a `map[string]respjson.Field`.
 
-##  Semantic versioning
+## Semantic versioning
 
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backward-incompatible changes may be released as minor versions:
 
@@ -637,7 +637,7 @@ Backward-compatibility is taken seriously to ensure you can rely on a smooth upg
 
 Your feedback is welcome; open an [issue](https://github.com/anthropics/anthropic-sdk-go/issues) with questions, bugs, or suggestions.
 
-##  Additional resources
+## Additional resources
 
 - [GitHub repository](https://github.com/anthropics/anthropic-sdk-go)
 - [Go package documentation](https://pkg.go.dev/github.com/anthropics/anthropic-sdk-go)

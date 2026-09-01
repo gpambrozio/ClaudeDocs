@@ -16,7 +16,7 @@ List Skills
 
 
 
-limit: optional number
+limit: optional number
 
 Number of results to return per page.
 
@@ -30,7 +30,7 @@ maximum1000
 
 
 
-page: optional string
+page: optional string
 
 Pagination token for fetching a specific page of results.
 
@@ -38,7 +38,7 @@ Pass the value from a previous response's `next_page` field to get the next page
 
 
 
-source: optional string
+source: optional string
 
 Filter skills by source.
 
@@ -51,13 +51,13 @@ If provided, only skills from the specified source will be returned:
 
 
 
-data: array of [Skill](api/http/skills.md) { id, created\_at, display\_name, 4 more }
+data: array of [Skill](api/http/skills.md) { id, created\_at, display\_name, 4 more }
 
 List of skills.
 
 
 
-id: string
+id: string
 
 Unique identifier for the skill.
 
@@ -65,25 +65,25 @@ The format and length of IDs may change over time.
 
 
 
-created\_at: string
+created\_at: string
 
 ISO 8601 timestamp of when the skill was created.
 
 formatdate-time
 
-display\_name: string
+display\_name: string
 
 Human-readable, single-line label for the Skill. Maximum 255 characters.
 Always set: derived from the SKILL.md frontmatter `name` when omitted at
 creation. Not unique.
 
-latest\_version\_id: string
+latest\_version\_id: string
 
 ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
 
 
 
-source: [SkillSource](api/http/skills.md) { type }
+source: [SkillSource](api/http/skills.md) { type }
 
 Where the Skill comes from.
 
@@ -96,7 +96,7 @@ Possible values:
 
 
 
-type: "custom" or "anthropic" or "anthropic\_example" or "plugin"
+type: "custom" or "anthropic" or "anthropic\_example" or "plugin"
 
 Where the Skill comes from.
 
@@ -109,17 +109,17 @@ Possible values:
 
 One of the following:
 
-"custom"
+"custom"
 
-"anthropic"
+"anthropic"
 
-"anthropic\_example"
+"anthropic\_example"
 
-"plugin"
+"plugin"
 
 
 
-type: "skill"
+type: "skill"
 
 Object type.
 
@@ -129,7 +129,7 @@ defaultskill
 
 
 
-updated\_at: string
+updated\_at: string
 
 ISO 8601 timestamp of when the skill was last updated.
 
@@ -137,19 +137,15 @@ formatdate-time
 
 
 
-next\_page: string or null
+next\_page: string or null
 
 Token for fetching the next page of results.
 
 If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
 
-
+List Skills
 
-### List Skills
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/skills \

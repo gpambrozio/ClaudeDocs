@@ -8,7 +8,7 @@ This guide covers the prompting patterns specific to Claude Sonnet 5. For the mo
 
 Claude Sonnet 5 has particular strengths in coding and agentic tasks. It performs well out of the box on existing Claude Sonnet 4.6 prompts. The patterns in this guide cover the behaviors that most often require tuning.
 
-##  Response length and verbosity
+## Response length and verbosity
 
 Claude Sonnet 5 calibrates response length to the complexity of the task rather than defaulting to a fixed verbosity. This usually means shorter answers on simple lookups and longer ones on open-ended analysis.
 
@@ -22,7 +22,7 @@ Provide concise, focused responses. Skip non-essential context, and keep example
 
 If you see specific kinds of verbosity (such as over-explaining), you can add additional instructions in your prompt to prevent them. Positive examples showing how Claude can communicate with the appropriate level of concision tend to be more effective than negative examples or instructions that tell the model what not to do.
 
-##  Calibrating effort and thinking depth
+## Calibrating effort and thinking depth
 
 The [effort parameter](build-with-claude/effort.md) allows you to tune Claude's intelligence versus token spend, trading off capability for faster speed and lower costs. On Claude Sonnet 5, effort defaults to `high`, the same as on Claude Sonnet 4.6. For the hardest coding and agentic tasks, raise effort to `xhigh`. Experiment with other effort levels to further tune token usage and intelligence:
 
@@ -58,19 +58,19 @@ Conversely, if you're running hard workloads at `medium` and seeing under-thinki
 
 Manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) is not supported on Claude Sonnet 5 and returns a 400 error. It was deprecated on Claude Sonnet 4.6 and is now removed. Use adaptive thinking with the effort parameter instead.
 
-##  Tool use triggering
+## Tool use triggering
 
 Claude Sonnet 5 is more agentic than Claude Sonnet 4.6 by default and will reach for tools and run self-verification loops more readily. With thinking disabled, the model is less likely to reach for tools or consider searching; if you rely on tool calls with thinking off, add an explicit nudge in the system prompt. Effort is also a lever for tool usage: `high` or `xhigh` effort settings show substantially more tool usage in agentic search and coding. For scenarios where you want more tool use, you can also adjust your prompt to explicitly instruct the model about when and how to properly use its tools. For instance, if you find that the model is not using your web search tools, clearly describe why and how it should.
 
-##  User-facing progress updates
+## User-facing progress updates
 
 Claude Sonnet 5 provides regular, higher-quality updates to the user throughout long agentic traces. If you've added scaffolding to force interim status messages ("After every 3 tool calls, summarize progress"), try removing it. If you find that the length or contents of Claude Sonnet 5's user-facing updates are not well-calibrated to your use case, explicitly describe what these updates should look like in the prompt and provide examples.
 
-##  More literal instruction following
+## More literal instruction following
 
 Claude Sonnet 5 interprets prompts literally and explicitly, particularly at lower effort levels. It does not silently generalize an instruction from one item to another, and it does not infer requests you didn't make. The upside of this literalism is precision, and it generally performs better for API use cases with carefully tuned prompts, structured extraction, and pipelines where you want predictable behavior. If you need Claude to apply an instruction broadly, state the scope explicitly (for example, "Apply this formatting to every section, not just the first one").
 
-##  Tone and writing style
+## Tone and writing style
 
 As with any new model, prose style on long-form writing may shift. If your product relies on a specific voice, re-evaluate style prompts against the new baseline.
 
@@ -84,7 +84,7 @@ Use a warm, collaborative tone. Acknowledge the user's framing before answering.
 
 If you previously relied on `temperature` for stylistic variety, note that setting `temperature`, `top_p`, or `top_k` to a non-default value returns a 400 error on Claude Sonnet 5. This constraint is new for Sonnet-class models. Remove these parameters when migrating, and use system-prompt instructions to guide tone and variety instead.
 
-##  Design and frontend defaults
+## Design and frontend defaults
 
 Claude Sonnet 5 may settle into a consistent default visual style on open-ended frontend and design briefs. A default house style can read well for some briefs but feel off for dashboards, dev tools, fintech, healthcare, or enterprise apps.
 
@@ -135,13 +135,13 @@ NEVER use generic AI-generated aesthetics like overused font families (Inter, Ro
 
 
 
-##  Interactive coding products
+## Interactive coding products
 
 Token usage and behavior can differ between autonomous, asynchronous coding agents with a single user turn and interactive, synchronous coding agents with multiple user turns. To maximize both performance and token efficiency in coding products, use `xhigh` or `high` effort, add autonomous features like an auto mode, and reduce the number of human interactions required from your users.
 
 When limiting the number of required user interactions, it's important to specify the task, intent, and relevant constraints upfront in the first human turn. Providing well-specified, clear, and accurate task descriptions upfront can help maximize autonomy and intelligence while minimizing extra token usage after user turns. In contrast, ambiguous or underspecified prompts conveyed progressively over multiple user turns tend to relatively reduce token efficiency and sometimes performance.
 
-##  Code review harnesses
+## Code review harnesses
 
 If your code-review harness was tuned for an earlier model, you may initially see lower recall on Claude Sonnet 5. This is likely a harness effect, not a capability regression. When a review prompt says things like "only report high-severity issues," "be conservative," or "don't nitpick," Claude Sonnet 5 may follow that instruction more faithfully than earlier models did: it may investigate the code just as thoroughly, identify the bugs, and then not report findings it judges to be below your stated bar. This can show up as the model doing the same depth of investigation but converting fewer investigations into reported findings, especially on lower-severity bugs. Precision typically rises, but measured recall can fall even though the model's underlying bug-finding ability has improved.
 
@@ -159,7 +159,7 @@ If you do want the model to self-filter in a single pass, be concrete about wher
 
 Iterate on prompts against a subset of your evals or test cases to validate recall or F1 score gains.
 
-##  Computer use
+## Computer use
 
 Claude Sonnet 5 supports the `computer_toolset_20260801` toolset (on the Claude API and Google Cloud) and the earlier `computer_20251124` tool version. For tasks inside webpages, Claude Sonnet 5 also supports the [browser use tool](agents-and-tools/tool-use/browser-use-tool.md) (`browser_toolset_20260801`). [Computer use](agents-and-tools/tool-use/computer-use-tool.md) capability works across resolutions, up to a maximum resolution of 2576px / 3.75MP. Internal computer use testing shows that sending images at 1080p provides a good balance of performance and cost.
 

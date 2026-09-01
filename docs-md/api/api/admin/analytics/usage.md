@@ -18,11 +18,11 @@
 
 
 
-UsageBucket object{ data, data\_refreshed\_at, has\_more, 2 more }
+UsageBucket object{ data, data\_refreshed\_at, has\_more, 2 more }
 
 
 
-UserUsage object{ data, data\_refreshed\_at, has\_more, 2 more }
+UserUsage object{ data, data\_refreshed\_at, has\_more, 2 more }
 
 ---
 

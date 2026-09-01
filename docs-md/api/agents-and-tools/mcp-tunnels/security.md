@@ -6,7 +6,7 @@
 
 The tunnel architecture provides strong defaults (outbound-only connectivity, end-to-end encryption, and IP validation), but the overall security of your [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) also depends on how you configure and operate it. This page covers recommended hardening, breach response, and how to decommission a tunnel.
 
-##  Best practices
+## Best practices
 
 - **Require OAuth on every MCP server.** Configure each [upstream MCP server](agents-and-tools/mcp-tunnels/concepts.md) to require OAuth as described in the [MCP authorization spec](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization). OAuth provides defense in depth on top of the tunnel's transport authentication and enables user-level authorization at the data layer.
 - **Enable SSO for your organization.** Tunnels, federation rules, and service accounts are managed in the Claude Console. SSO enforces your identity provider's session controls on the admins who can change them.
@@ -18,13 +18,13 @@ The tunnel architecture provides strong defaults (outbound-only connectivity, en
 - **Limit MCP server scope.** Each server should expose only the tools and data required for its purpose.
 - **Protect credentials at rest.** Apply your organization's secrets-management practices to private keys and tunnel tokens.
 
-##  Respond to a suspected breach
+## Respond to a suspected breach
 
 If you believe your tunnel token, TLS keys, or proxy host has been compromised:
 
 1. 1
 
-   Stop the tunnel stack
+   ### Stop the tunnel stack
 
    HelmDocker Compose
 
@@ -35,37 +35,37 @@ If you believe your tunnel token, TLS keys, or proxy host has been compromised:
    
 2. 2
 
-   Detach the upstream MCP servers
+   ### Detach the upstream MCP servers
 
    Remove the upstream MCP servers from any Managed Agent sessions that use them, and stop passing their URLs in the `mcp_servers` block of Messages API requests.
 3. 3
 
-   Archive the tunnel
+   ### Archive the tunnel
 
    Archiving invalidates the tunnel token and detaches the domain. In the Console, [archive the tunnel](agents-and-tools/mcp-tunnels/console.md) from the **MCP tunnels** list. To archive over the API instead, see [Archive a tunnel](api/beta/tunnels/archive.md).
 4. 4
 
-   Contact Anthropic
+   ### Contact Anthropic
 
    Report the suspected compromise to Anthropic support.
 5. 5
 
-   Rotate downstream credentials
+   ### Rotate downstream credentials
 
    Re-provision a fresh tunnel and rotate any OAuth tokens that the affected MCP servers issued.
 6. 6
 
-   Review logs before restoring service
+   ### Review logs before restoring service
 
    Inspect proxy, cloudflared, and MCP server logs for the window of suspected compromise before bringing the new tunnel online.
 
-##  Tear down a tunnel
+## Tear down a tunnel
 
 Follow these steps to decommission a tunnel and remove all stored credentials.
 
 1. 1
 
-   Stop the tunnel stack
+   ### Stop the tunnel stack
 
    HelmDocker Compose
 
@@ -76,12 +76,12 @@ Follow these steps to decommission a tunnel and remove all stored credentials.
    
 2. 2
 
-   Archive the tunnel
+   ### Archive the tunnel
 
    In the Console, [archive the tunnel](agents-and-tools/mcp-tunnels/console.md) from the **MCP tunnels** list.
 3. 3
 
-   Remove stored credentials
+   ### Remove stored credentials
 
    HelmDocker Compose
 

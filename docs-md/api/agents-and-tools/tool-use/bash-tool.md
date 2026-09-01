@@ -10,14 +10,14 @@ Your application keeps one bash process alive across tool calls, so state persis
 
 The current version of the tool is `bash_20250124`. For model support, beta headers, and the earlier version, see [Tool versions](#tool-versions). For all Anthropic-provided tools, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
 
-##  Use cases
+## Use cases
 
 - **Development workflows:** Run build commands, tests, and development tools
 - **System automation:** Execute scripts, manage files, automate tasks
 - **Data processing:** Process files, run analysis scripts, manage datasets
 - **Environment setup:** Install packages, configure environments
 
-##  Quick start
+## Quick start
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -69,7 +69,7 @@ Output
 
 Run `input.command` in your bash session and send the output back as a `tool_result`. See [Implement the bash tool](#implement-the-bash-tool) for the round trip.
 
-##  How it works
+## How it works
 
 Each tool call is one round trip between Claude and your application:
 
@@ -82,7 +82,7 @@ Claude can also return several `tool_use` blocks in one response. Run them in or
 
 The API is stateless. Nothing about your shell session travels between requests, so your application decides when the session starts, how long it lives, and when to restart it. For the full request and response cycle, see [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md).
 
-##  Parameters
+## Parameters
 
 A bash tool definition has two required fields, `type` and `name`, and the `name` must be `bash`. The tool is schema-less: you don't provide an `input_schema`, because the schema is built into Claude's model and can't be modified. The following table lists the input fields Claude sets when it calls the tool.
 
@@ -97,13 +97,13 @@ To handle `restart: true`, kill the shell process, start a new one, and return a
 
 ### Example usage
 
-##  Tool versions
+## Tool versions
 
 `bash_20250124` is the current version of the tool, and it requires no beta header. Every model from Claude Sonnet 3.7 ([retired](about-claude/model-deprecations.md)) onward accepts it, including all current Claude models.
 
 The original `bash_20241022` version works only with the October 2024 Claude Sonnet 3.5 model ([retired](about-claude/model-deprecations.md)). Requests that use it need the `anthropic-beta: computer-use-2024-10-22` header, and the SDKs expose it only in their beta namespaces. New integrations should use `bash_20250124`.
 
-##  Example: Multistep automation
+## Example: Multistep automation
 
 Claude can chain commands across tool calls to complete a multistep task:
 
@@ -127,13 +127,13 @@ Claude's tool uses:
 
 The session maintains state between commands, so files created in step 2 are available in step 3.
 
-##  Implement the bash tool
+## Implement the bash tool
 
 Claude determines which command to run. Your application owns everything else: the shell process, the timeout, and the safety checks. The following steps show a minimal implementation.
 
 1. 1
 
-   Create a persistent bash session
+   ### Create a persistent bash session
 
    Start one long-lived bash process and run every command inside it. Because a pipe to a live process never reports end-of-file, the session prints a unique sentinel line after each command to mark where that command's output ends:
 
@@ -184,7 +184,7 @@ Claude determines which command to run. Your application owns everything else: t
    The session interleaves stderr with stdout, so error messages land where they happened. The example leaves out what a complete implementation also needs: a timeout that kills the shell and every process it started when a command hangs, then restarts the session. The [Use command timeouts](#follow-implementation-best-practices) best practice shows one way to add it.
 2. 2
 
-   Process Claude's tool calls
+   ### Process Claude's tool calls
 
    Extract and run commands from Claude's responses:
 
@@ -210,7 +210,7 @@ Claude determines which command to run. Your application owns everything else: t
    ```
 3. 3
 
-   Return the result to Claude
+   ### Return the result to Claude
 
    Send the `tool_result` back in a `user` message that continues the same conversation. Claude either requests another command in the same session or finishes its answer:
 
@@ -257,7 +257,7 @@ Claude determines which command to run. Your application owns everything else: t
    Repeat the run-and-return cycle while `stop_reason` is `tool_use`. For the full loop, see [Handling results from client tools](agents-and-tools/tool-use/handle-tool-calls.md).
 4. 4
 
-   Implement safety measures
+   ### Implement safety measures
 
    Add validation and restrictions. Use an allowlist rather than a blocklist: a blocklist misses any command it didn't anticipate. The example also rejects shell operators that appear as separate words:
 
@@ -295,7 +295,7 @@ Claude determines which command to run. Your application owns everything else: t
 
    This check is a tripwire for obvious mistakes, not an enforcement boundary. It rejects the spaced chaining (`&&`), pipes, and redirection that the other examples on this page use. It does not catch an operator glued to a word, such as `cat data.txt|grep x`, because the tokenizer keeps `data.txt|grep` inside one token. Decide which commands and operators your application allows. The real control is isolation: run the whole session inside a container or a virtual machine (see [Security](#security)).
 
-###  Handle errors
+### Handle errors
 
 When a command fails or the session breaks, tell Claude what happened. Return the message as the `tool_result` content and set `is_error` to `true`, which marks the tool call as failed. See [Handling errors with is\_error](agents-and-tools/tool-use/handle-tool-calls.md).
 
@@ -305,7 +305,7 @@ When a command fails or the session breaks, tell Claude what happened. Return th
 
 ### Permission denied
 
-###  Follow implementation best practices
+### Follow implementation best practices
 
 ### Use command timeouts
 
@@ -315,7 +315,7 @@ When a command fails or the session breaks, tell Claude what happened. Return th
 
 ### Log all commands
 
-##  Security
+## Security
 
 Beyond isolation, add these controls:
 
@@ -324,7 +324,7 @@ Beyond isolation, add these controls:
 - Log every command and its output so you can audit what ran.
 - Redact credentials and other secrets from output before returning it to Claude.
 
-##  Pricing
+## Pricing
 
 The bash tool definition adds the following input tokens to your request. This is in addition to the per-model [tool use system prompt](agents-and-tools/tool-use/overview.md) that applies whenever any tool is present.
 
@@ -341,9 +341,9 @@ Additional tokens are consumed by:
 
 See [tool use pricing](agents-and-tools/tool-use/overview.md) for complete pricing details.
 
-##  Common patterns
+## Common patterns
 
-###  Development workflows
+### Development workflows
 
 - Running tests: `pytest && coverage report`
 - Building projects: `npm install && npm run build`
@@ -351,19 +351,19 @@ See [tool use pricing](agents-and-tools/tool-use/overview.md) for complete prici
 
 For guidance on using git as a checkpoint-and-recovery mechanism in long-running agent workflows, see [state management best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
-###  File operations
+### File operations
 
 - Processing data: `wc -l *.csv && ls -lh *.csv`
 - Searching files: `find . -name "*.py" | xargs grep "pattern"`
 - Creating backups: `tar -czf backup.tar.gz ./data`
 
-###  System tasks
+### System tasks
 
 - Checking resources: `df -h && free -m`
 - Process management: `ps aux | grep python`
 - Environment setup: `export PATH=$PATH:/new/path && echo $PATH`
 
-##  Limitations
+## Limitations
 
 - **No interactive commands:** The session can't run `vim`, `less`, password prompts, or any command that waits for input on stdin.
 - **No GUI applications:** The session is command-line only.
@@ -371,11 +371,11 @@ For guidance on using git as a checkpoint-and-recovery mechanism in long-running
 - **Output limits:** The API doesn't truncate tool results (an oversized request is rejected). Truncate large outputs in your application before returning them to Claude.
 - **No streaming:** Output reaches Claude only when your application returns the `tool_result` in the next request.
 
-##  Combining with other tools
+## Combining with other tools
 
 The bash tool pairs well with the [Text editor tool](agents-and-tools/tool-use/text-editor-tool.md): Claude edits a file with one tool and requests the command that runs it with the other.
 
-##  Next steps
+## Next steps
 
 
 

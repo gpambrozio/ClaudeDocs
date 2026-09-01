@@ -14,7 +14,7 @@
 
 
 
-RateLimitListResponse object{ data, next\_page }
+RateLimitListResponse object{ data, next\_page }
 
 ---
 

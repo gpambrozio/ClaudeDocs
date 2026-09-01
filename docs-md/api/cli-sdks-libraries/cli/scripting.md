@@ -6,13 +6,13 @@
 
 This page covers task-oriented workflows built on the `ant` CLI. For the underlying flags and output options, see [Using the CLI](cli-sdks-libraries/cli/using.md).
 
-##  Version-controlling API resources
+## Version-controlling API resources
 
 You can use the CLI to version control API resources such as skills, agents, environments, or deployments as YAML files in your repository and keep them in sync with the Claude API.
 
 1. 1
 
-   Define your agent
+   ### Define your agent
 
    Write the agent definition to `summarizer.agent.yaml`:
 
@@ -30,7 +30,7 @@ You can use the CLI to version control API resources such as skills, agents, env
    ```
 2. 2
 
-   Create the agent
+   ### Create the agent
 
    ```shiki
    ant beta:agents create < summarizer.agent.yaml
@@ -55,7 +55,7 @@ You can use the CLI to version control API resources such as skills, agents, env
    Note the `id` from the response. You'll pass it to the session create command in a later step.
 3. 3
 
-   Define the environment
+   ### Define the environment
 
    A session runs in an [environment](api/cli/beta/environments.md), which defines the sandbox it executes in. Write the environment definition to `summarizer.environment.yaml`:
 
@@ -72,7 +72,7 @@ You can use the CLI to version control API resources such as skills, agents, env
    ```
 4. 4
 
-   Create the environment
+   ### Create the environment
 
    ```shiki
    ant beta:environments create < summarizer.environment.yaml
@@ -95,7 +95,7 @@ You can use the CLI to version control API resources such as skills, agents, env
    Note the `id` from the response. You'll pass it to the session create command in a later step.
 5. 5
 
-   Start a session
+   ### Start a session
 
    Paste the agent `id` and environment `id` from the previous outputs into the session create command:
 
@@ -121,7 +121,7 @@ You can use the CLI to version control API resources such as skills, agents, env
    ```
 6. 6
 
-   Send a user message
+   ### Send a user message
 
    Copy the session `id` from the previous output into `--session-id`:
 
@@ -134,7 +134,7 @@ You can use the CLI to version control API resources such as skills, agents, env
    
 7. 7
 
-   Read the conversation
+   ### Read the conversation
 
    `--transform` runs against each listed event, so this prints the text of every message in order. `--format auto` overrides the interactive explorer that list commands open by default in a terminal:
 
@@ -155,11 +155,11 @@ You can use the CLI to version control API resources such as skills, agents, env
    Type safety catches errors at compile time rather than runtime, reducing bugs, improving code clarity, enabling better tooling support, and making codebases easier to maintain and refactor with confidence.
    ```
 
-##  Scripting patterns
+## Scripting patterns
 
 The CLI is designed to compose with standard shell tooling.
 
-###  Chain list output into a second command
+### Chain list output into a second command
 
 `--transform id --raw-output` on a list endpoint emits one bare ID per line, so standard tools such as `head` and `xargs` apply directly. Capture the first result, then pass it to a follow-up command:
 
@@ -173,7 +173,7 @@ ant beta:agents:versions list \
 
 
 
-###  Inspect errors
+### Inspect errors
 
 The `--transform-error` and `--format-error` flags apply the same filtering to error responses. `--raw-output` does not apply to errors, so use `--format-error yaml` for an unquoted scalar. Extract only the error message:
 
@@ -193,7 +193,7 @@ GET "https://api.anthropic.com/v1/agents/bogus?beta=true": 404 Not Found
 Agent not found.
 ```
 
-##  Use the CLI from Claude Code
+## Use the CLI from Claude Code
 
 [Claude Code](overview.md) can use the `ant` CLI out of the box. With the CLI installed and authenticated, you can ask Claude Code to operate on your API resources directly. For example:
 
@@ -203,7 +203,7 @@ Agent not found.
 
 Claude Code shells out to `ant`, parses the structured output, and reasons over the results (no custom integration code required).
 
-##  Authenticate curl requests with CLI credentials
+## Authenticate curl requests with CLI credentials
 
 Scripts that call the API with `curl` or another HTTP client can use the credentials stored by [`ant auth login`](cli-sdks-libraries/cli/quickstart.md) instead of a static API key. The OAuth access token goes in the `Authorization` header as a bearer token; the `x-api-key` header is only for static API keys.
 

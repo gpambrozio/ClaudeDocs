@@ -16,23 +16,23 @@ Retrieve information about the organization associated with the authenticated AP
 
 
 
-BetaOrganization object{ id, name, type }
+BetaOrganization object{ id, name, type }
 
 
 
-id: string
+id: string
 
 ID of the Organization.
 
 formatuuid
 
-name: string
+name: string
 
 Name of the Organization.
 
 
 
-type: "organization"
+type: "organization"
 
 Object type.
 
@@ -40,13 +40,9 @@ For Organizations, this is always `"organization"`.
 
 defaultorganization
 
-
+Get Current Organization
 
-### Get Current Organization
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/me \

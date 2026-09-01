@@ -6,7 +6,7 @@
 
 This page covers prompt caching for tool definitions: where to place `cache_control` breakpoints, how `defer_loading` preserves your cache, and what invalidates it. For general prompt caching, see [Prompt caching](build-with-claude/prompt-caching.md).
 
-##  cache\_control on tool definitions
+## cache\_control on tool definitions
 
 Place `cache_control: {"type": "ephemeral"}` on the last tool in your `tools` array. This caches the entire tool-definitions prefix, from the first tool through the marked breakpoint:
 
@@ -46,7 +46,7 @@ For `mcp_toolset`, the `cache_control` breakpoint lands on the last tool in the 
 
 The [computer use](agents-and-tools/tool-use/computer-use-tool.md) and [browser use](agents-and-tools/tool-use/browser-use-tool.md) toolset entries follow the same rule: place `cache_control` on the toolset entry itself, and the breakpoint lands after the toolset's definition. It isn't accepted inside a member's `configs` entry, because the toolset's members load as one definition. Within a [batch action](agents-and-tools/tool-use/computer-use-tool.md), a `cache_control` marker on any of the turn's member `tool_use` or `tool_result` blocks is accepted and takes effect at the end of that batch, so several markers in one batch act as a single breakpoint. Each marker still counts toward the request's limit of [four breakpoints](build-with-claude/prompt-caching.md), so use one per turn.
 
-##  defer\_loading and cache preservation
+## defer\_loading and cache preservation
 
 Deferred tools are not included in the system-prompt prefix. When the model discovers a deferred tool through [tool search](agents-and-tools/tool-use/tool-search-tool.md), the definition is appended inline as a `tool_reference` block in the conversation history. The prefix is untouched, so prompt caching is preserved.
 
@@ -54,7 +54,7 @@ This means adding tools dynamically through tool search does not break your cach
 
 `defer_loading` also acts independently of grammar construction for [strict mode](agents-and-tools/tool-use/strict-tool-use.md). The grammar builds from the full toolset regardless of which tools are deferred, so prompt caching and grammar caching are both preserved when tools load dynamically.
 
-##  What invalidates your cache
+## What invalidates your cache
 
 The cache follows a prefix hierarchy (`tools` → `system` → `messages`), so a change at one level invalidates that level and everything after it:
 
@@ -68,7 +68,7 @@ The cache follows a prefix hierarchy (`tools` → `system` → `messages`), so a
 | Changing thinking parameters | Messages cache always; tool and system caches too on models that render the thinking configuration ahead of them ([details](build-with-claude/thinking.md)) |
 | Changing `output_config.effort` | Same as thinking parameters; setting the model's default explicitly is equivalent to omitting it |
 
-##  Server tool results are cached automatically
+## Server tool results are cached automatically
 
 When your request has prompt caching enabled and Claude uses a [server tool](agents-and-tools/tool-use/server-tools.md) such as web search, web fetch, or code execution, the API automatically places a cache breakpoint on the server tool result before running the next iteration of the agentic loop. This lets later iterations within the same request read the growing prefix from cache instead of reprocessing it.
 
@@ -76,7 +76,7 @@ This automatic breakpoint always uses the default 5-minute TTL, independent of a
 
 This behavior only applies when your request already has at least one `cache_control` marker. Requests without prompt caching do not receive the automatic breakpoint.
 
-##  Per-tool interaction table
+## Per-tool interaction table
 
 | Tool | Caching considerations |
 | --- | --- |
@@ -90,7 +90,7 @@ This behavior only applies when your request already has at least one `cache_con
 | [Bash](agents-and-tools/tool-use/bash-tool.md) | Standard client tool, no special caching interaction |
 | [Memory](agents-and-tools/tool-use/memory-tool.md) | Standard client tool, no special caching interaction |
 
-##  Next steps
+## Next steps
 
 
 

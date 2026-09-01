@@ -8,7 +8,7 @@ An agent is a reusable, versioned configuration that defines persona and capabil
 
 Create the agent once as a reusable resource and reference it by ID each time you [start a session](managed-agents/sessions.md). Agents are versioned and easier to manage across many sessions.
 
-##  Agent configuration fields
+## Agent configuration fields
 
 | Field | Description |
 | --- | --- |
@@ -24,7 +24,7 @@ Create the agent once as a reusable resource and reference it by ID each time yo
 
 You can also override `model`, `system`, `tools`, `mcp_servers`, and `skills` for a single session without changing the agent. An `effort` level set inside a per-session `model` override isn't applied, and because the override replaces the agent's `model` object in full, a session created with a `model` override runs at the model's default effort level; to run at a specific effort level, set `effort` on the agent and don't override `model` for that session. See [Override agent configuration for a session](managed-agents/sessions.md).
 
-##  Create an agent
+## Create an agent
 
 The following example defines a coding agent that uses Claude Opus 5 with access to the pre-built agent toolset. The toolset lets the agent write code, read files, search the web, and more. See the [agent tools reference](managed-agents/tools.md) for the full list of supported tools.
 
@@ -90,7 +90,7 @@ The response echoes your configuration and adds `id`, `type`, `version`, `create
 
 The `default_config` on the toolset shows its default [permission policy](managed-agents/permission-policies.md), `always_allow`, which applies unless you configure one.
 
-###  Pin the inference geo
+### Pin the inference geo
 
 Like `speed` and `effort`, `inference_geo` is set through the object form of `model`: pass `model` as an object and set `inference_geo` alongside `id`. The field accepts `"us"` or `"global"`. When it's unset, each model request follows the workspace's default inference geo at the time it's served. See [Data residency](manage-claude/data-residency.md) for the workspace-level geo controls and pricing.
 
@@ -122,7 +122,7 @@ An `inference_geo` pin is validated against the workspace's [`allowed_inference_
 
 Setting `inference_geo` on a model that doesn't support geographic inference pinning returns a 400 error; see [Model availability](manage-claude/data-residency.md) for the models that do. In a `multiagent` configuration, the coordinator's pin and every roster member's must all be set to the same value or all be unset; see [Multiagent orchestration](managed-agents/multiagent-orchestration.md). To change or clear the pin later, update the agent's `model` object; supplying `model` without `inference_geo` clears it, as described under [Update semantics](#update-semantics).
 
-##  Update an agent
+## Update an agent
 
 Updating an agent generates a new version when the configuration changes. The `version` field is optional: supply it for optimistic concurrency (a mismatch returns a 409), or omit it to apply the update unconditionally (last write wins). Updates to archived agents are rejected.
 
@@ -166,7 +166,7 @@ updated_agent=$(curl -fsSL "https://api.anthropic.com/v1/agents/$AGENT_ID" \
 echo "New version: $(jq -r '.version' <<< "$updated_agent")"
 ```
 
-###  Update semantics
+### Update semantics
 
 - **`version`** is optional and must be at least 1 when supplied. When supplied, the request returns a 409 if it doesn't match the agent's current version, even when the fields you send already match the stored values; re-read the agent and retry. When omitted, the update applies unconditionally and the most recent update silently replaces any concurrent one, with no error to either caller. Supplying `version` is the recommended default for interactive callers, and omitting it fits declarative apply loops, such as a CI job that syncs checked-in agent definitions, where the loop owns the agent.
 - **Omitted fields are preserved.** You only need to include the fields you want to change.
@@ -177,7 +177,7 @@ echo "New version: $(jq -r '.version' <<< "$updated_agent")"
 - **No-op detection.** If the update produces no change relative to the current version, no new version is created and the existing version is returned.
 - **Coordinator rosters are not updated.** Coordinators that reference this agent in their `multiagent.agents` roster keep the version that was pinned when the coordinator was created or last updated, even if the reference omits `version`. To delegate to the new version, [update the coordinator](managed-agents/multiagent-orchestration.md) so its roster references it.
 
-##  Agent lifecycle
+## Agent lifecycle
 
 | Operation | Behavior |
 | --- | --- |
@@ -185,7 +185,7 @@ echo "New version: $(jq -r '.version' <<< "$updated_agent")"
 | **List versions** | Returns the full version history so you can track changes over time. |
 | **Archive** | Makes the agent read-only. New sessions cannot reference it, but existing sessions continue to run. |
 
-###  List versions
+### List versions
 
 Fetch the full version history to track how an agent has changed over time. Results are paginated, and the SDK examples fetch every page automatically.
 
@@ -197,7 +197,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 ant beta:agents:versions list --agent-id "$AGENT_ID"
 ```
 
-###  Archive an agent
+### Archive an agent
 
 Archiving makes the agent read-only and cannot be undone. Existing sessions continue to run, but new sessions cannot reference the agent. The response sets `archived_at` to the archive timestamp.
 
@@ -209,7 +209,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 ant beta:agents archive --agent-id "$AGENT_ID"
 ```
 
-##  Next steps
+## Next steps
 
 
 

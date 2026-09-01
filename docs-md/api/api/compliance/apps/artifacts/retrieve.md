@@ -17,59 +17,55 @@ without downloading every artifact.
 
 ##### Path parameters
 
-artifact\_version\_id: string
+artifact\_version\_id: string
 
 The artifact version ID (tagged ID, e.g., claude\_artifact\_version\_abc123)
 
 ##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### Returns
 
-id: string
+id: string
 
 Artifact ID e.g. 'claude\_artifact\_abc123'
 
-artifact\_type: string or null
+artifact\_type: string or null
 
 MIME-like artifact type e.g. 'application/vnd.ant.code'
 
-claude\_chat\_id: string
+claude\_chat\_id: string
 
 The chat this artifact belongs to
 
 
 
-created\_at: string
+created\_at: string
 
 Artifact version creation timestamp
 
 formatdate-time
 
-md5: string
+md5: string
 
 Lowercase hex MD5 of the artifact content (UTF-8 encoded). Matches the `content` field returned by the sibling `/content` endpoint.
 
-size\_bytes: number
+size\_bytes: number
 
 Size in bytes of the artifact content (UTF-8 encoded)
 
-title: string or null
+title: string or null
 
 Artifact title
 
-version\_id: string
+version\_id: string
 
 Artifact version ID e.g. 'claude\_artifact\_version\_abc123'
 
-
+Get artifact metadata
 
-### Get artifact metadata
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/compliance/apps/artifacts/$ARTIFACT_VERSION_ID \

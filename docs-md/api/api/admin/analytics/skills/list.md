@@ -21,7 +21,7 @@ on a Claude Enterprise plan. Requires an API key with the
 
 
 
-date: optional string
+date: optional string
 
 UTC date in YYYY-MM-DD format. The day to get skill usage for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
@@ -29,7 +29,7 @@ formatdate
 
 
 
-ending\_date: optional string
+ending\_date: optional string
 
 UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with `starting_date`. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after `starting_date`.
 
@@ -37,7 +37,7 @@ formatdate
 
 
 
-filter: optional array of string
+filter: optional array of string
 
 Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `product`, `rbac_group_id`, `share_status`, `skill_name`, `user_id`. Value forms: `product` is one of `chat`, `claude_code`, `cowork`, or `office_agent`; `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `share_status` is one of `organization`, `private`, or `public`; `skill_name` matches case-insensitively; `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
 
@@ -45,7 +45,7 @@ maxItems100
 
 
 
-group\_by: optional array of "product" or "rbac\_group\_id" or "user\_id"
+group\_by: optional array of "product" or "rbac\_group\_id" or "user\_id"
 
 Dimensions to break results out by (e.g. `group_by[]=user_id`). Supported on this endpoint: `product`, `rbac_group_id`, `user_id`. Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via `next_page`; an unsupported dimension returns 400. `rbac_group_id` attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
 
@@ -53,15 +53,15 @@ maxItems100
 
 One of the following:
 
-"product"
+"product"
 
-"rbac\_group\_id"
+"rbac\_group\_id"
 
-"user\_id"
+"user\_id"
 
 
 
-limit: optional number
+limit: optional number
 
 Number of results per page (1-1000, default 100).
 
@@ -71,27 +71,27 @@ maximum1000
 
 
 
-order: optional "asc" or "desc"
+order: optional "asc" or "desc"
 
 Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort column and to `desc` when `order_by` names a metric (a top-N ranking). Applies to `order_by`, or to the endpoint's default sort field when `order_by` is omitted.
 
 One of the following:
 
-"asc"
+"asc"
 
-"desc"
+"desc"
 
-order\_by: optional string
+order\_by: optional string
 
 Sort field. Restricted to the endpoint's sort column plus its rankable metrics (metrics default to descending; a few metrics rank in date-range mode only, per the endpoint's documented orderable set).
 
-page: optional string
+page: optional string
 
 Opaque cursor from a previous response's `next_page` field.
 
 
 
-starting\_date: optional string
+starting\_date: optional string
 
 UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
@@ -101,17 +101,13 @@ formatdate
 
 
 
-SkillUsage object{ data, next\_page }
+SkillUsage object{ data, next\_page }
 
 Response for GET /v1/organizations/analytics/skills.
 
-
+Get Skill Usage
 
-### Get Skill Usage
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/analytics/skills \

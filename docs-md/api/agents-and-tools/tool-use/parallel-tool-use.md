@@ -6,7 +6,7 @@
 
 By default, Claude may call multiple tools in a single response. This page covers how to run those calls, how to format the message history so parallelism keeps working, and how to disable parallel tool use when you need to. For the single-call flow, see [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md).
 
-##  Execution semantics
+## Execution semantics
 
 When Claude calls tools, the response has a `stop_reason` of `tool_use` and can contain several `tool_use` blocks in a single assistant turn. How you run those calls is your decision. The API doesn't prescribe an execution order: you can run the calls concurrently (`Promise.all`, `asyncio.gather`), sequentially in the order they appear, or in any combination that suits your tools.
 
@@ -27,7 +27,7 @@ Whichever strategy you use, return one `tool_result` for each `tool_use` block, 
 
 The [computer use tool](agents-and-tools/tool-use/computer-use-tool.md) and the [browser use tool](agents-and-tools/tool-use/browser-use-tool.md) are stricter. When Claude returns several of their member tool calls in one turn (a batch action), run them sequentially in the order they appear and stop at the first failure; each tool defines the exact text to return for the calls you skip.
 
-##  Test parallel tool calls
+## Test parallel tool calls
 
 The following script sends a request that should trigger parallel tool calls, verifies the response contains them, and formats the tool results so parallelism keeps working. Run it with `ANTHROPIC_API_KEY` set in your environment:
 
@@ -141,7 +141,7 @@ print("✓ Conversation formatted correctly for future parallel tool use")
 
 The summary lines at the end restate the two formatting rules that keep parallelism working: every tool result returns in a single user message, and no text content appears before the tool results in that message.
 
-##  Maximizing parallel tool use
+## Maximizing parallel tool use
 
 Claude 4 and later models make parallel tool calls by default when a request benefits from multiple tools. For all models, you can increase the likelihood of parallel tool calls with targeted prompting:
 
@@ -149,11 +149,11 @@ Claude 4 and later models make parallel tool calls by default when a request ben
 
 ### User message prompting
 
-##  Disable parallel tool use
+## Disable parallel tool use
 
 Parallel tool use is on by default. To turn it off, set `disable_parallel_tool_use: true` inside the [`tool_choice`](agents-and-tools/tool-use/define-tools.md) object. It is not a top-level request parameter. The effect depends on the `tool_choice` type.
 
-###  At most one tool call
+### At most one tool call
 
 When `tool_choice` type is `auto` (the default), setting `disable_parallel_tool_use: true` means Claude calls at most one tool per response. Claude can still answer in plain text without calling any tool. The highlighted lines are the only change from a standard tool use request:
 
@@ -194,7 +194,7 @@ response = client.messages.create(
 print(response.content)
 ```
 
-###  Exactly one tool call
+### Exactly one tool call
 
 When `tool_choice` type is `any` or `tool`, setting `disable_parallel_tool_use: true` means Claude calls exactly one tool. The following example uses `any`. The same field works with `tool`:
 
@@ -235,7 +235,7 @@ response = client.messages.create(
 print(response.content)
 ```
 
-##  Troubleshooting
+## Troubleshooting
 
 If Claude isn't making parallel tool calls when expected, check these common issues:
 
@@ -300,7 +300,7 @@ print(f"Average tools per message: {avg_tools_per_message}")
 
 Execution order is your choice. If your tools have ordering dependencies, running the batch sequentially and stopping on the first failure is a valid strategy (and the required one for the [computer use](agents-and-tools/tool-use/computer-use-tool.md) and [browser use](agents-and-tools/tool-use/browser-use-tool.md) tools): return `is_error: true` for any call you didn't run. If you run in parallel and a call fails because its prerequisite hadn't completed, return `is_error: true` with the natural error message. Claude will reissue the call on the next turn. To reduce dependent calls appearing together, add this to your system prompt: "Only batch tool calls that are independent of each other."
 
-##  Next steps
+## Next steps
 
 
 

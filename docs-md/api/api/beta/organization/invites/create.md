@@ -18,7 +18,7 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
 
 
 
-email: string
+email: string
 
 Email of the User.
 
@@ -26,7 +26,7 @@ formatemail
 
 
 
-role: "billing" or "claude\_code\_user" or "developer" or 2 more
+role: "billing" or "claude\_code\_user" or "developer" or 2 more
 
 Role for the invited User.
 
@@ -34,19 +34,19 @@ The accepted values depend on the organization type. Console and API organizatio
 
 One of the following:
 
-"billing"
+"billing"
 
-"claude\_code\_user"
+"claude\_code\_user"
 
-"developer"
+"developer"
 
-"managed"
+"managed"
 
-"user"
+"user"
 
 
 
-rbac\_group\_ids: optional array of string
+rbac\_group\_ids: optional array of string
 
 RBAC group IDs to assign to the User when the Invite is accepted. A non-empty array is accepted only for a Claude Enterprise organization with RBAC groups, and requires the key to carry the `write:rbac_groups` scope.
 
@@ -56,15 +56,11 @@ maxItems100
 
 
 
-BetaOrganizationInvite object{ id, accepted\_at, email, 6 more }
+BetaOrganizationInvite object{ id, accepted\_at, email, 6 more }
 
-
+Create Invite
 
-### Create Invite
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/invites \

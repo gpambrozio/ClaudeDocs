@@ -20,7 +20,7 @@ For web search's Zero Data Retention eligibility and the related `allowed_caller
 
 For model support, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
 
-##  How web search works
+## How web search works
 
 When you add the web search tool to your API request:
 
@@ -28,7 +28,7 @@ When you add the web search tool to your API request:
 2. The API runs the searches and provides Claude with the results. This process can repeat multiple times throughout a single request.
 3. At the end of its turn, Claude provides a final response with cited sources.
 
-###  When Claude searches
+### When Claude searches
 
 Claude searches when the request depends on information that is current, changing, or outside its training data:
 
@@ -46,7 +46,7 @@ Claude answers directly without searching when the request draws on stable knowl
 
 Triggering is steerable through your system prompt: you can encourage Claude to search more readily or to prefer answering directly. For a hard constraint, use `max_uses` to cap the number of searches for each request.
 
-###  Dynamic filtering
+### Dynamic filtering
 
 With basic web search, every search result is loaded into Claude's context window, and much of that content can be irrelevant to the request. With `web_search_20260209` or later, Claude instead writes and runs code that filters the results first, so only relevant content reaches the context window. This reduces token use on search-heavy requests.
 
@@ -77,7 +77,7 @@ response = client.messages.create(
 print(response)
 ```
 
-##  How to use web search
+## How to use web search
 
 These organization-level settings in the Claude Console apply to Messages API requests only. [Claude Managed Agents](managed-agents/overview.md) sessions use only the per-tool `allowed_domains` and `blocked_domains` lists on the agent toolset; see [Restrict web search and web fetch domains](managed-agents/tools.md).
 
@@ -99,7 +99,7 @@ response = client.messages.create(
 print(response)
 ```
 
-##  Tool definition
+## Tool definition
 
 The web search tool supports the following parameters:
 
@@ -135,13 +135,13 @@ JSON
 
 All web search tool versions accept `allowed_callers`, which controls whether Claude calls web search directly or from code execution through [dynamic filtering](#dynamic-filtering). On `web_search_20260209` and later it defaults to `["code_execution_20260120"]` instead of `["direct"]`. See [Server tools](agents-and-tools/tool-use/server-tools.md) for how to configure it. `web_search_20260318` and later also accept [`response_inclusion`](#response-inclusion).
 
-###  Max uses
+### Max uses
 
 The `max_uses` parameter limits the number of searches performed. If Claude attempts more searches than allowed, the `web_search_tool_result` is an error with the `max_uses_exceeded` error code.
 
 Simple factual queries typically use 1–3 searches; comparative or multientity research can use 10 or more. For guidance on choosing a value, see [Server tools](agents-and-tools/tool-use/server-tools.md).
 
-###  Domain filtering
+### Domain filtering
 
 Provide `allowed_domains` or `blocked_domains`, not both. If a request includes both, the API returns a 400 error. Entries are bare domains with an optional path, for example `example.com` or `example.com/blog`, without a scheme.
 
@@ -149,7 +149,7 @@ For the full domain filtering rules, see [Domain filtering](agents-and-tools/too
 
 On [Claude Managed Agents](managed-agents/overview.md), set these fields on the `web_search` entry of the agent toolset; see [Restrict web search and web fetch domains](managed-agents/tools.md).
 
-###  Localization
+### Localization
 
 The `user_location` parameter allows you to localize search results based on a user's location. Provide at least one of `city`, `region`, `country`, or `timezone`.
 
@@ -161,7 +161,7 @@ The `user_location` parameter allows you to localize search results based on a u
 
 On Claude Managed Agents, the `web_search` entry of the agent toolset accepts a `user_location` object with the same fields. The API rejects an unsupported `country` code with a 400 error when you create or update the agent, or when you create or update a session that supplies the setting. See [Restrict web search and web fetch domains](managed-agents/tools.md).
 
-###  Response inclusion
+### Response inclusion
 
 The `response_inclusion` parameter controls how search result blocks appear in the API response when the result was consumed by a completed [code execution](agents-and-tools/tool-use/code-execution-tool.md) call in the same turn. Set `"response_inclusion": "excluded"` to drop those nested `server_tool_use` and result block pairs entirely from the response, reducing output token costs for agentic workflows that don't need to echo raw search content back to the client. The default is `"full"`. Results from direct calls, or from code execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
@@ -181,7 +181,7 @@ JSON
 }
 ```
 
-##  Response
+## Response
 
 Here's an example response structure:
 
@@ -254,7 +254,7 @@ Output
 
 This example shows a direct search. When a search runs through [dynamic filtering](#dynamic-filtering), the response also contains the [code execution tool's](agents-and-tools/tool-use/code-execution-tool.md) result blocks, and each nested `server_tool_use` and `web_search_tool_result` pair carries a `caller` field identifying the code execution call that made it.
 
-###  Search results
+### Search results
 
 Search results include:
 
@@ -265,7 +265,7 @@ Search results include:
 
 To continue a conversation that contains search results, send the assistant's content blocks back exactly as you received them, including each result's `encrypted_content`. The API decrypts that content on later turns to restore the search results in Claude's context. If `encrypted_content` is missing or modified, the request fails with a 400 validation error.
 
-###  Citations
+### Citations
 
 Citations are always enabled for web search, and each `web_search_result_location` includes:
 
@@ -276,7 +276,7 @@ Citations are always enabled for web search, and each `web_search_result_locatio
 
 The web search citation fields `cited_text`, `title`, and `url` do not count toward input or output token usage.
 
-###  Errors
+### Errors
 
 When the web search tool encounters an error (such as hitting rate limits), the Claude API still returns a 200 (success) response. The error is represented within the response body using the following structure:
 
@@ -306,7 +306,7 @@ These are the possible error codes:
 - `request_too_large`: The search request is too large, typically because of a long domain filter list
 - `unavailable`: An internal error occurred
 
-###  `pause_turn` stop reason
+### `pause_turn` stop reason
 
 The API can pause a long-running search turn and return `stop_reason: "pause_turn"`. To continue, send the paused assistant message back unchanged in a new request.
 
@@ -314,11 +314,11 @@ If Claude calls web search and one of your client tools in the same group of par
 
 For the server-side loop and `pause_turn` handling, see [The server-side loop and pause\_turn](agents-and-tools/tool-use/server-tools.md) in the Server tools guide.
 
-##  Prompt caching
+## Prompt caching
 
-For caching tool definitions across turns, see [Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md).
+To cache tool definitions across turns, see [Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md).
 
-##  Streaming
+## Streaming
 
 With streaming enabled, you'll receive search events as part of the stream. There will be a pause while the search runs:
 
@@ -351,13 +351,13 @@ data: {"type": "content_block_start", "index": 2, "content_block": {"type": "web
 // Claude's response with citations (omitted in this example)
 ```
 
-##  Batch requests
+## Batch requests
 
 You can include the web search tool in the [Messages Batches API](build-with-claude/batch-processing.md). Web search tool calls through the Messages Batches API are priced the same as those in regular Messages API requests.
 
 To protect shared capacity, the Batches API throttles web search requests per organization, so large batches with many searches might take longer to complete. You can see your organization's web search rate limit on the [Rate limits](/settings/limits) page in the Claude Console. To request a higher limit, contact sales from that page.
 
-##  Usage and pricing
+## Usage and pricing
 
 Web search usage is charged in addition to token usage:
 
@@ -381,7 +381,7 @@ Web search is available on the Claude API for **$10 per 1,000 searches**, plus s
 
 Each web search counts as one use, regardless of the number of results returned. If an error occurs during web search, the web search will not be billed.
 
-##  Next steps
+## Next steps
 
 
 

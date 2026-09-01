@@ -36,75 +36,75 @@ cURL
 
 
 
-BetaAWSExternalKeyConfig object{ kms\_arn, type, region, role\_arn }
+BetaAWSExternalKeyConfig object{ kms\_arn, type, region, role\_arn }
 
 
 
-kms\_arn: string
+kms\_arn: string
 
 Full ARN of the AWS KMS key.
 
 maxLength2048
 
-type: "aws"
+type: "aws"
 
-region: optional string or null
+region: optional string or null
 
 AWS region. Derived from `kms_arn` if omitted.
 
-role\_arn: optional string or null⁠Deprecated
+role\_arn: optional string or null⁠Deprecated
 
 IAM role ARN. Deprecated — Anthropic reaches the KMS key via a managed intermediate role; this field is ignored.
 
 
 
-BetaAzureExternalKeyConfig object{ key\_name, tenant\_id, type, 2 more }
+BetaAzureExternalKeyConfig object{ key\_name, tenant\_id, type, 2 more }
 
-key\_name: string
+key\_name: string
 
 Name of the key within the vault.
 
-tenant\_id: string
+tenant\_id: string
 
 Azure AD tenant ID.
 
-type: "azure"
+type: "azure"
 
-vault\_uri: string
+vault\_uri: string
 
 Key Vault data-plane URI — `https://{vault-name}.vault.azure.net` or `https://{hsm-name}.managedhsm.azure.net`.
 
-client\_id: optional string or null
+client\_id: optional string or null
 
 Azure AD application (client) ID. Omit to use Anthropic's multitenant app. Provide only if using a single-tenant app registration in the customer's directory.
 
 
 
-BetaAzureExternalKeyConfigParam object{ key\_name, tenant\_id, type, 2 more }
+BetaAzureExternalKeyConfigParam object{ key\_name, tenant\_id, type, 2 more }
 
 Azure Key Vault provider configuration.
 
-key\_name: string
+key\_name: string
 
 Name of the key within the vault.
 
-tenant\_id: string
+tenant\_id: string
 
 Azure AD tenant ID.
 
-type: "azure"
+type: "azure"
 
-vault\_uri: string
+vault\_uri: string
 
 Key Vault data-plane URI — `https://{vault-name}.vault.azure.net` or `https://{hsm-name}.managedhsm.azure.net`.
 
-client\_id: optional string or null
+client\_id: optional string or null
 
 Azure AD application (client) ID. Omit to use Anthropic's multitenant app. Provide only if using a single-tenant app registration in the customer's directory.
 
 
 
-BetaExternalKey object{ id, attachment, created\_at, 5 more }
+BetaExternalKey object{ id, attachment, created\_at, 5 more }
 
 CMEK external key config belonging to the caller's organization.
 
@@ -114,76 +114,76 @@ workspace references it, the provider fields become effectively immutable
 
 
 
-BetaExternalKeyAttachedAttachment object{ type }
+BetaExternalKeyAttachedAttachment object{ type }
 
 
 
-type: "attached"
+type: "attached"
 
 defaultattached
 
 
 
-BetaExternalKeyUnattachedAttachment object{ type }
+BetaExternalKeyUnattachedAttachment object{ type }
 
 
 
-type: "unattached"
+type: "unattached"
 
 defaultunattached
 
 
 
-BetaGCPExternalKeyConfig object{ key\_name, type }
+BetaGCPExternalKeyConfig object{ key\_name, type }
 
-key\_name: string
+key\_name: string
 
 Full resource name of the Cloud KMS key.
 
-type: "gcp"
+type: "gcp"
 
 
 
-ExternalKeyDeleteResponse object{ id, type }
+ExternalKeyDeleteResponse object{ id, type }
 
-id: string
+id: string
 
 ID of the deleted External Key.
 
 
 
-type: "external\_key\_deleted"
+type: "external\_key\_deleted"
 
 defaultexternal\_key\_deleted
 
 
 
-ExternalKeyValidateResponse object{ error, status, type }
+ExternalKeyValidateResponse object{ error, status, type }
 
 Result of a validation roundtrip against the customer's KMS.
 
 HTTP 200 for both outcomes — the operation completed; `status` says
 whether the key works.
 
-error: string or null
+error: string or null
 
 Error message when status is `failure`. Null otherwise.
 
 
 
-status: "failure" or "success"
+status: "failure" or "success"
 
 `success` — encrypt/decrypt roundtrip succeeded. `failure` — the roundtrip failed or timed out; see `error`.
 
 One of the following:
 
-"failure"
+"failure"
 
-"success"
+"success"
 
 
 
-type: "external\_key\_validation"
+type: "external\_key\_validation"
 
 defaultexternal\_key\_validation
 

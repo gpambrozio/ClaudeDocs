@@ -8,7 +8,7 @@ This guide describes how to send images to Claude, the limits and costs that app
 
 ---
 
-##  Send images to Claude
+## Send images to Claude
 
 Use Claude's vision capabilities through:
 
@@ -22,7 +22,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
 2. A URL reference to an image hosted online
 3. A `file_id` returned by the [Files API](build-with-claude/files.md) (upload once, reference many times)
 
-###  Base64-encoded image example
+### Base64-encoded image example
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -56,7 +56,7 @@ message = client.messages.create(
 print(message)
 ```
 
-###  URL-based image example
+### URL-based image example
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -86,7 +86,7 @@ message = client.messages.create(
 print(message)
 ```
 
-###  Files API image example
+### Files API image example
 
 For images you'll use repeatedly or when you want to avoid encoding overhead, use the [Files API](build-with-claude/files.md). Upload the image once, then reference the returned `file_id` in subsequent messages instead of resending base64 data.
 
@@ -124,7 +124,7 @@ print(message.content)
 
 See [Messages API examples](api/messages/create.md) for more example code and parameter details.
 
-###  Multiple images
+### Multiple images
 
 You can include multiple images in a single request, and Claude analyzes them jointly. This is useful for comparing images, asking about differences, or working with a sequence such as pages of a document. When sending several images, introduce each one with a short text label (`Image 1:`, `Image 2:`, and so on) so you can refer to them by name in your prompt and in follow-up turns.
 
@@ -174,9 +174,9 @@ In a multi-turn conversation, add new images in later `user` turns the same way.
 
 ---
 
-##  Image limits and costs
+## Image limits and costs
 
-###  Request limits
+### Request limits
 
 The maximum number of images per message or request is:
 
@@ -194,11 +194,11 @@ The maximum size per image is:
 - 5 MB (base64-encoded) on Amazon Bedrock and Google Cloud.
 - 10 MB on [claude.ai](https://claude.ai/).
 
-###  Supported formats
+### Supported formats
 
 Claude supports JPEG, PNG, GIF, and WebP images (`image/jpeg`, `image/png`, `image/gif`, `image/webp`). Animations are unsupported, and only the first frame is used.
 
-###  Resolution and token cost
+### Resolution and token cost
 
 Claude views images in patches instead of pixels. Each patch is a 28×28-pixel block of the image, referred to as a visual token. An image, therefore, costs `⌈width / 28⌉ × ⌈height / 28⌉` visual tokens.
 
@@ -228,7 +228,7 @@ To estimate cost, multiply the token count by the [per-token price of the model]
 
 High-resolution images can use up to roughly three times more visual tokens than the same image on a standard-tier model. If you don't need the additional fidelity that high resolution provides for computer use, screenshot understanding, and dense documents, downsample images before sending to control token costs. To minimize latency and to simplify [coordinate-based workflows](build-with-claude/vision-coordinates.md), prefer resizing images before uploading them.
 
-###  Image quality guidance
+### Image quality guidance
 
 When providing images to Claude, keep the following in mind for best results:
 
@@ -239,13 +239,13 @@ When providing images to Claude, keep the following in mind for best results:
 
 ---
 
-##  Coordinates and bounding boxes
+## Coordinates and bounding boxes
 
 For bounding boxes, points, and pixel coordinates, see [Coordinates and bounding boxes](build-with-claude/vision-coordinates.md). Claude returns absolute pixel coordinates relative to the image it sees after resizing; that guide covers how Claude resizes and pads images and how to pre-resize or rescale so coordinates line up with your original image.
 
 ---
 
-##  Limitations
+## Limitations
 
 Although Claude's image understanding capabilities are cutting-edge, there are some limitations to be aware of:
 
@@ -261,7 +261,7 @@ Always carefully review and verify Claude's image interpretations, especially fo
 
 ---
 
-##  FAQ
+## FAQ
 
 ### What image file types does Claude support?
 
@@ -283,7 +283,7 @@ Always carefully review and verify Claude's image interpretations, especially fo
 
 ---
 
-##  Next steps
+## Next steps
 
 
 

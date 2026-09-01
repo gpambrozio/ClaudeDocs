@@ -4,7 +4,7 @@
 
 
 
-##  February 17, 2026
+## February 17, 2026
 
 ```shiki
 <claude_behavior>

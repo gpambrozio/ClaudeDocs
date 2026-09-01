@@ -18,57 +18,57 @@
 
 
 
-RoleRetrieveResponse object{ id, created\_at, description, 2 more }
+RoleRetrieveResponse object{ id, created\_at, description, 2 more }
 
 Role information for compliance responses.
 
-id: string
+id: string
 
 Role identifier (tagged ID)
 
-created\_at: string or null
+created\_at: string or null
 
 Role creation timestamp (ISO 8601)
 
-description: string
+description: string
 
 Role description
 
-name: string
+name: string
 
 Role name
 
-updated\_at: string or null
+updated\_at: string or null
 
 Role last-updated timestamp (ISO 8601)
 
 
 
-RoleListResponse object{ id, created\_at, description, 2 more }
+RoleListResponse object{ id, created\_at, description, 2 more }
 
 Role information for compliance responses.
 
-id: string
+id: string
 
 Role identifier (tagged ID)
 
-created\_at: string or null
+created\_at: string or null
 
 Role creation timestamp (ISO 8601)
 
-description: string
+description: string
 
 Role description
 
-name: string
+name: string
 
 Role name
 
-updated\_at: string or null
+updated\_at: string or null
 
 Role last-updated timestamp (ISO 8601)
 
-#### Roles[Permissions](api/http/compliance/organizations/roles/permissions.md)
+#### Roles[Permissions](api/http/compliance/organizations/roles/permissions.md)
 
 ##### [List Compliance Role Permissions](api/http/compliance/organizations/roles/permissions/list.md)
 

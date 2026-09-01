@@ -6,7 +6,7 @@
 
 Fine-grained tool streaming delivers a tool's input to your client as Claude generates it, without server-side buffering or JSON validation. Skipping the buffering step reduces the time to the first fragment of a large parameter, such as a document or a block of code, and the fragments arrive through the same [Streaming messages](build-with-claude/streaming.md) events as standard tool use.
 
-##  How to use fine-grained tool streaming
+## How to use fine-grained tool streaming
 
 All models support fine-grained tool streaming on the Claude API, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). To use it, set `eager_input_streaming` to `true` on any user-defined tool where you want fine-grained streaming enabled, and enable streaming on your request.
 
@@ -74,7 +74,7 @@ Complete tool input: {"filename": "poem.txt", "lines_of_text": ["The Wanderer's 
 
 Without `eager_input_streaming`, the API buffers and validates each parameter value before streaming it back, so nothing prints for a large parameter until Claude has finished generating it. With it, fragments start arriving as soon as Claude begins the parameter, and they are typically longer, with fewer mid-word breaks.
 
-##  Accumulating tool input deltas
+## Accumulating tool input deltas
 
 The accumulation contract is the same as for standard tool-use streaming, so this section applies with and without `eager_input_streaming`. See [Input JSON delta](build-with-claude/streaming.md) in Streaming messages for the event format. Fine-grained tool streaming changes what you can assume about the result: the server streams fragments without validating them, so the accumulated string might not be valid JSON.
 
@@ -136,7 +136,7 @@ with client.messages.stream(
                     print(f"Tool input: {parsed}")
 ```
 
-##  Handling invalid JSON in tool responses
+## Handling invalid JSON in tool responses
 
 With fine-grained tool streaming, the accumulated input for a tool call might be invalid or incomplete JSON. When it is, you cannot run the tool, so report the failure back to Claude instead. The `content` of a tool result does not have to be JSON, but wrapping the raw string in a JSON object under a single key makes it unambiguous to Claude that you received invalid JSON, and preserves the original input for debugging:
 
@@ -161,7 +161,7 @@ Return the wrapper, serialized to a string, as the `content` of a [tool result](
 
 
 
-##  Next steps
+## Next steps
 
 
 

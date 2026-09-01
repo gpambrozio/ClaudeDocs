@@ -6,7 +6,7 @@
 
 When creating a Message, you can set `"stream": true` to incrementally stream the response using [server-sent events](https://developer.mozilla.org/en-US/Web/API/Server-sent%5Fevents/Using%5Fserver-sent%5Fevents) (SSE).
 
-##  Streaming with SDKs
+## Streaming with SDKs
 
 The [Python SDK](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript SDK](https://github.com/anthropics/anthropic-sdk-typescript) offer multiple ways of streaming. The [PHP SDK](https://github.com/anthropics/anthropic-sdk-php) provides streaming through `createStream()`. The Python SDK allows both sync and async streams. See the documentation in each SDK for details.
 
@@ -26,7 +26,7 @@ with client.messages.stream(
         print(text, end="", flush=True)
 ```
 
-##  Get the final message without handling events
+## Get the final message without handling events
 
 If you don't need to process text as it arrives, the SDKs provide a way to use streaming internally while returning the complete `Message` object, identical to what `.create()` returns. This is especially useful for requests with large `max_tokens` values, where the SDKs require streaming to avoid HTTP timeouts.
 
@@ -51,7 +51,7 @@ for block in message.content:
 
 The `.stream()` call keeps the HTTP connection alive with server-sent events, then `.get_final_message()` (Python) or `.finalMessage()` (TypeScript) accumulates all events and returns the complete `Message` object. In Go, you call `message.Accumulate(event)` inside the stream loop to build the same complete `Message`. In Java, use `MessageAccumulator.create()` and call `accumulator.accumulate(event)` on each event. In C#, await the stream's `.Aggregate()` extension method to get the complete `Message`, or pass a `MessageContentAggregator` to `.CollectAsync()` to aggregate while handling events. In Ruby, call `.accumulated_message` on the stream. In the PHP SDK, you iterate over stream events manually to accumulate the response.
 
-##  Event types
+## Event types
 
 Each server-sent event includes a named event type and associated JSON data. Each event uses an SSE event name (for example, `event: message_stop`), and includes the matching event `type` in its data.
 
@@ -62,11 +62,11 @@ Each stream uses the following event flow:
 3. One or more `message_delta` events, indicating top-level changes to the final `Message` object.
 4. A final `message_stop` event.
 
-###  Ping events
+### Ping events
 
 Event streams may also include any number of `ping` events.
 
-###  Error events
+### Error events
 
 The API may occasionally send [errors](api/errors.md) in the event stream. For example, during periods of high usage, you may receive an `overloaded_error`, which would normally correspond to an HTTP 529 in a non-streaming context:
 
@@ -79,15 +79,15 @@ event: error
 data: {"type": "error", "error": {"type": "overloaded_error", "message": "Overloaded"}}
 ```
 
-###  Other events
+### Other events
 
 In accordance with the [versioning policy](api/versioning.md), new event types may be added, and your code should handle unknown event types gracefully.
 
-##  Content block delta types
+## Content block delta types
 
 Each `content_block_delta` event contains a `delta` of a type that updates the `content` block at a given `index`.
 
-###  Text delta
+### Text delta
 
 A `text` content block delta looks like:
 
@@ -100,7 +100,7 @@ event: content_block_delta
 data: {"type": "content_block_delta","index": 0,"delta": {"type": "text_delta", "text": "ello frien"}}
 ```
 
-###  Input JSON delta
+### Input JSON delta
 
 The deltas for `tool_use` content blocks correspond to updates for the `input` field of the block. To support maximum granularity, the deltas are *partial JSON strings*, whereas the final `tool_use.input` is always an *object*.
 
@@ -119,7 +119,7 @@ data: {"type": "content_block_delta","index": 1,"delta": {"type": "input_json_de
 
 Note: Current models only support emitting one complete key and value property from `input` at a time. As such, when using tools, there may be delays between streaming events while the model is working. Once an `input` key and value are accumulated, they are emitted as multiple `content_block_delta` events with chunked partial JSON so that the format can automatically support finer granularity in future models.
 
-###  Thinking delta
+### Thinking delta
 
 When using [thinking](build-with-claude/thinking.md) with streaming enabled, you'll receive thinking content through `thinking_delta` events. These deltas correspond to the `thinking` field of the `thinking` content blocks.
 
@@ -149,7 +149,7 @@ event: content_block_delta
 data: {"type": "content_block_delta", "index": 0, "delta": {"type": "signature_delta", "signature": "EqQBCgIYAhIM1gbcDa9GJwZA2b3hGgxBdjrkzLoky3dl1pkiMOYds..."}}
 ```
 
-##  Full HTTP stream response
+## Full HTTP stream response
 
 Use the [client SDKs](cli-sdks-libraries/overview.md) when using streaming mode. However, if you are building a direct API integration, you need to handle these events yourself.
 
@@ -165,7 +165,7 @@ A stream response consists of:
 
 There may be `ping` events dispersed throughout the response as well. See [Event types](#event-types) for more details on the format.
 
-###  Basic streaming request
+### Basic streaming request
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -213,7 +213,7 @@ event: message_stop
 data: {"type": "message_stop"}
 ```
 
-###  Streaming request with tool use
+### Streaming request with tool use
 
 This request asks Claude to use a tool to report the weather.
 
@@ -341,7 +341,7 @@ event: message_stop
 data: {"type":"message_stop"}
 ```
 
-###  Streaming request with thinking
+### Streaming request with thinking
 
 This request enables thinking with streaming. The `display: "summarized"` setting streams a condensed summary of Claude's reasoning rather than the full chain of thought.
 
@@ -416,7 +416,7 @@ event: message_stop
 data: {"type": "message_stop"}
 ```
 
-###  Streaming request with web search tool use
+### Streaming request with web search tool use
 
 This request asks Claude to search the web for current weather information.
 
@@ -525,9 +525,9 @@ event: message_stop
 data: {"type":"message_stop"}
 ```
 
-##  Error recovery
+## Error recovery
 
-###  Claude 4.5 and earlier
+### Claude 4.5 and earlier
 
 For Claude 4.5 models and earlier, you can recover a streaming request that was interrupted because of network issues, timeouts, or other errors by resuming from where the stream was interrupted. This approach saves you from re-processing the entire response.
 
@@ -537,7 +537,7 @@ The basic recovery strategy involves:
 2. **Construct a continuation request:** Create a new API request that includes the partial assistant response as the beginning of a new assistant message.
 3. **Resume streaming:** Continue receiving the rest of the response from where it was interrupted.
 
-###  Claude 4.6 and later
+### Claude 4.6 and later
 
 For Claude 4.6 and later models, the same capture-and-resume strategy applies, but step 2 changes: instead of placing the partial response in an assistant message, add a user message that instructs the model to continue from where it left off.
 
@@ -553,12 +553,12 @@ For Claude 4.6 and later models, the same capture-and-resume strategy applies, b
    ```
 3. **Resume streaming:** Continue receiving the rest of the response from where it was interrupted.
 
-###  Error recovery best practices
+### Error recovery best practices
 
 1. **Use SDK features:** Leverage the SDK's built-in message accumulation and error handling capabilities.
 2. **Handle content types:** Be aware that messages can contain multiple content blocks (`text`, `tool_use`, `thinking`). Tool use and extended thinking blocks cannot be partially recovered. You can resume streaming from the most recent text block.
 
-##  Next steps
+## Next steps
 
 
 

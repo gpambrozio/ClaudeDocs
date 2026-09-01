@@ -8,9 +8,9 @@ Claude's thinking is adaptive: the model evaluates each request and decides for 
 
 This makes thinking a strong fit for workloads that mix trivial and complex requests, and for long-horizon agentic workflows where the right amount of reasoning varies from step to step.
 
-For how to turn thinking on, how to read thinking output, and [thinking output on Claude Fable 5 and Claude Mythos 5](build-with-claude/thinking.md), see the [Thinking](build-with-claude/thinking.md) overview. This page covers how Claude decides when to think, how to steer that decision, and the caching, cost, and pricing mechanics that follow from it.
+To learn how to turn thinking on, how to read thinking output, and about [thinking output on Claude Fable 5 and Claude Mythos 5](build-with-claude/thinking.md), see the [Thinking](build-with-claude/thinking.md) overview. This page covers how Claude decides when to think, how to steer that decision, and the caching, cost, and pricing mechanics that follow from it.
 
-##  How Claude decides when to think
+## How Claude decides when to think
 
 Thinking is optional for the model. On each request, Claude weighs the complexity of the input and decides whether deeper reasoning would improve the answer. A simple factual question may get a direct response with no thinking block at all; a multistep math problem or a tricky debugging task triggers deeper reasoning.
 
@@ -24,7 +24,7 @@ Thinking also interleaves with tool use automatically: Claude can think between 
 
 For the full picture of how the thinking configuration and the effort parameter interact, see [Thinking and effort](build-with-claude/thinking.md).
 
-##  Steering how often Claude thinks
+## Steering how often Claude thinks
 
 Whether Claude thinks on a given turn is promptable. Effort sets the overall posture, but you can also shape the decision directly with natural-language guidance, either globally in the system prompt or per message from the user turn.
 
@@ -35,7 +35,7 @@ Use the two levers together in this order:
 
 For broader prompting guidance with thinking, see [leverage thinking and interleaved thinking capabilities](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
-###  Effort levels
+### Effort levels
 
 Effort is the primary steering lever for thinking. Each level sets a different default for how often Claude thinks and how deeply:
 
@@ -64,7 +64,7 @@ Effort is set at `output_config.effort`, not inside the `thinking` object; for f
 
 Level availability varies by model; the [effort availability table](build-with-claude/effort.md) on the effort page is the authority for which levels each model supports.
 
-###  System prompt guidance
+### System prompt guidance
 
 System prompt guidance shifts Claude's thinking threshold for every request in the conversation. If Claude is thinking more often than your workload needs, add guidance like this to your system prompt:
 
@@ -86,21 +86,21 @@ This task involves multistep reasoning. Think carefully before responding.
 
 Steering effectiveness can be sensitive to exact wording. If one phrasing doesn't produce the behavior you want, try a more direct variant.
 
-###  Per-message steering
+### Per-message steering
 
 You can also steer thinking on a per-message basis from the user turn, independently of the system prompt. Appending `"Please think hard before responding."` to a user message encourages Claude to think on that turn; `"Answer directly without deliberating."` suppresses it.
 
 Per-message steering is useful when only some requests in a conversation warrant extended reasoning. An agent harness, for example, can append the encouraging phrase on planning steps and the suppressing phrase on routine confirmations, without touching the system prompt or changing any request parameters between turns.
 
-###  Verify steering on your workload
+### Verify steering on your workload
 
 Prompt-based steering changes model behavior, so treat it like any other prompt change: measure before you ship. Run a representative sample of your traffic with and without the guidance, and compare how often thinking triggers (the presence of thinking blocks in responses), output token usage, latency, and answer quality on the cases that matter to you.
 
-##  Mechanics
+## Mechanics
 
 Three mechanics follow from Claude managing its own thinking: turn validation, prompt caching, and how you bound cost.
 
-###  Turn validation
+### Turn validation
 
 Assistant turns don't need to start with a thinking block. (Models using a legacy manual thinking budget enforce that the final assistant turn of a thinking-enabled request begins with one; see [Turn structure in manual mode](build-with-claude/extended-thinking.md).)
 
@@ -112,7 +112,7 @@ For multi-turn applications, this means you can pass back conversation history i
 
 The relaxation is about validation, not about what you should send. When you have thinking blocks, pass them back unmodified, particularly during tool use, where they carry the reasoning behind Claude's tool calls. See the [Thinking](build-with-claude/thinking.md) overview for the full rules.
 
-###  Prompt caching
+### Prompt caching
 
 Consecutive requests that keep the same thinking configuration and effort level preserve prompt caching; see [Thinking and prompt caching](build-with-claude/thinking.md) for the full rules. The resolved effort value is rendered into the prompt, so changing it between requests invalidates cache breakpoints, just as changing the legacy [`budget_tokens`](build-with-claude/extended-thinking.md) parameter does on models that use it. Setting `effort` explicitly to the model's default is equivalent to omitting it and does not break the cache.
 
@@ -122,7 +122,7 @@ The following example demonstrates the invalidation with a multi-turn script you
 
 ### Effort changes invalidate the prompt cache
 
-###  Cost control
+### Cost control
 
 You don't set a thinking token budget. Two controls bound cost:
 
@@ -138,7 +138,7 @@ At `high` effort and above, Claude may think extensively and is more likely to e
 
 Which one is right depends on whether the truncated responses needed the reasoning. If quality on those requests matters, raise the cap; if they were over-thought, lower the effort.
 
-##  Pricing
+## Pricing
 
 Thinking incurs charges for:
 
@@ -173,7 +173,7 @@ To see how many billed output tokens were spent on internal reasoning, read `usa
 
 `output_tokens` remains the inclusive, authoritative total used for billing. `output_tokens_details` is a read-only breakdown for observability. For complete pricing information including base rates, cache writes, cache hits, and output tokens, see [Pricing](about-claude/pricing.md).
 
-##  Next steps
+## Next steps
 
 
 

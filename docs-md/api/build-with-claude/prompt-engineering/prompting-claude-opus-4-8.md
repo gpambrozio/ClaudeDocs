@@ -8,7 +8,7 @@ This guide covers the prompting patterns specific to Claude Opus 4.8. For the AP
 
 Claude Opus 4.8 has particular strengths in long-horizon agentic work, knowledge work, vision, and memory tasks. It performs well out of the box on existing Claude Opus 4.7 prompts. The following patterns cover the behaviors that most often require tuning.
 
-##  Response length and verbosity
+## Response length and verbosity
 
 Claude Opus 4.8 calibrates response length to how complex it judges the task to be, rather than defaulting to a fixed verbosity. This usually means shorter answers on simple lookups and much longer ones on open-ended analysis.
 
@@ -22,7 +22,7 @@ Provide concise, focused responses. Skip non-essential context, and keep example
 
 If you see specific examples of kinds of verbosity (such as over-explaining), you can add additional instructions in your prompt to prevent them. Positive examples showing how Claude can communicate with the appropriate level of concision tend to be more effective than negative examples or instructions that tell the model what not to do.
 
-##  Calibrating effort and thinking depth
+## Calibrating effort and thinking depth
 
 The [effort parameter](build-with-claude/effort.md) allows you to tune Claude's intelligence versus token spend, trading off capability for faster speed and lower costs. Start with the `xhigh` effort level for coding and agentic use cases, and use a minimum of `high` effort for most intelligence-sensitive use cases. Experiment with other effort levels to further tune token usage and intelligence:
 
@@ -54,19 +54,19 @@ Thinking adds latency and should only be used when it will meaningfully improve 
 
 Conversely, if you're running hard workloads at `medium` and seeing under-thinking, the first lever is to raise effort. If you need finer control, prompt for it directly.
 
-##  Tool use triggering
+## Tool use triggering
 
 Claude Opus 4.8 has a tendency to favor reasoning over tool calls. This produces better results in most cases. However, increasing the effort setting is a useful lever to increase the level of tool usage, especially in knowledge work. `high` or `xhigh` effort settings show substantially more tool usage in agentic search and coding. For scenarios where you want more tool use, you can also adjust your prompt to explicitly instruct the model about when and how to properly use its tools. For instance, if you find that the model is not using your web search tools, clearly describe why and how it should.
 
-##  User-facing progress updates
+## User-facing progress updates
 
 Claude Opus 4.8 provides more regular, higher-quality updates to the user throughout long agentic traces. If you've added scaffolding to force interim status messages ("After every 3 tool calls, summarize progress"), try removing it. If you find that the length or contents of Claude Opus 4.8's user-facing updates are not well-calibrated to your use case, explicitly describe what these updates should look like in the prompt and provide examples.
 
-##  More literal instruction following
+## More literal instruction following
 
 Claude Opus 4.8 interprets prompts literally and explicitly, particularly at lower effort levels. It does not silently generalize an instruction from one item to another, and it does not infer requests you didn't make. The upside of this literalism is precision and less thrash, and it generally performs better for API use cases with carefully tuned prompts, structured extraction, and pipelines where you want predictable behavior. If you need Claude to apply an instruction broadly, state the scope explicitly (for example, "Apply this formatting to every section, not just the first one").
 
-##  Tone and writing style
+## Tone and writing style
 
 As with any new model, prose style on long-form writing may shift. Claude Opus 4.8 tends toward a direct, opinionated style with minimal validation-forward phrasing and sparing emoji use. If your product relies on a specific voice, re-evaluate style prompts against the new baseline.
 
@@ -78,7 +78,7 @@ Use a warm, collaborative tone. Acknowledge the user's framing before answering.
 
 
 
-##  Controlling subagent spawning
+## Controlling subagent spawning
 
 Claude Opus 4.8 tends to spawn fewer subagents by default. However, this behavior is steerable through prompting; give Claude Opus 4.8 explicit guidance around when subagents are desirable. A toy example for a coding use case:
 
@@ -90,7 +90,7 @@ Spawn multiple subagents in the same turn when fanning out across items or readi
 
 
 
-##  Design and frontend defaults
+## Design and frontend defaults
 
 Claude Opus 4.8 has strong design instincts, with a consistent default house style: warm cream/off-white backgrounds (~`#F4F1EA`), serif display type (Georgia, Fraunces, Playfair), italic word-accents, and a terracotta/amber accent. This reads well for editorial, hospitality, and portfolio briefs, but will feel off for dashboards, dev tools, fintech, healthcare, or enterprise apps. The default appears in slide decks and web UIs.
 
@@ -141,13 +141,13 @@ NEVER use generic AI-generated aesthetics like overused font families (Inter, Ro
 
 
 
-##  Interactive coding products
+## Interactive coding products
 
 Claude Opus 4.8's token usage and behavior can differ between autonomous, asynchronous coding agents with a single user turn and interactive, synchronous coding agents with multiple user turns. Specifically, it tends to use more tokens in interactive settings, primarily because it reasons more after user turns. This can improve long-horizon coherence, instruction following, and coding capabilities in long, interactive coding sessions, but also comes with more token usage. To maximize both performance and token efficiency in coding products, use `xhigh` or `high` effort, add autonomous features like an auto mode, and reduce the number of human interactions required from your users.
 
 Of course, when limiting the number of required user interactions, it's important to specify the task, intent, and relevant constraints upfront in the first human turn. Providing well-specified, clear, and accurate task descriptions upfront can help maximize autonomy and intelligence while minimizing extra token usage after user turns. Because Claude Opus 4.8 is more autonomous than prior models, this usage pattern helps to maximize performance. In contrast, ambiguous or underspecified prompts conveyed progressively over multiple user turns tend to relatively reduce token efficiency and sometimes performance.
 
-##  Code review harnesses
+## Code review harnesses
 
 Claude Opus 4.8 is meaningfully better at finding bugs than prior models, and has both higher recall and precision in internal evals. However, if your code-review harness was tuned for an earlier model, you may initially see lower recall. This is likely a harness effect, not a capability regression. When a review prompt says things like "only report high-severity issues," "be conservative," or "don't nitpick," Claude Opus 4.8 may follow that instruction more faithfully than earlier models did: it may investigate the code just as thoroughly, identify the bugs, and then not report findings it judges to be below your stated bar. This can show up as the model doing the same depth of investigation but converting fewer investigations into reported findings, especially on lower-severity bugs. Precision typically rises, but measured recall can fall even though the model's underlying bug-finding ability has improved.
 
@@ -165,7 +165,7 @@ If you do want the model to self-filter in a single pass, be concrete about wher
 
 Iterate on prompts against a subset of your evals or test cases to validate recall or F1 score gains.
 
-##  Computer use
+## Computer use
 
 Claude Opus 4.8 supports the `computer_toolset_20260801` toolset (on the Claude API and Google Cloud) and the earlier `computer_20251124` tool version. For tasks inside webpages, Claude Opus 4.8 also supports the [browser use tool](agents-and-tools/tool-use/browser-use-tool.md) (`browser_toolset_20260801`). [Computer use](agents-and-tools/tool-use/computer-use-tool.md) capability works across resolutions, up to a maximum resolution of 2576px / 3.75MP. Internal computer use testing shows that sending images at 1080p provides a good balance of performance and cost.
 

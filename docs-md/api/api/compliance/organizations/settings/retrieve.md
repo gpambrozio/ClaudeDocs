@@ -21,53 +21,53 @@ unknown organizations and organizations outside the hierarchy return 404.
 
 ##### Path parameters
 
-organization\_id: string
+organization\_id: string
 
 The organization's UUID
 
 ##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### Returns
 
 
 
-api\_keys: array of object{ id, created\_at, created\_by\_id, 5 more }
+api\_keys: array of object{ id, created\_at, created\_by\_id, 5 more }
 
 Compliance API keys configured for the organization hierarchy, ordered by creation time ascending. Key secret values are never included.
 
-id: string
+id: string
 
 Unique identifier for the API key.
 
 
 
-created\_at: string
+created\_at: string
 
 When the key was created.
 
 formatdate-time
 
-created\_by\_id: string or null
+created\_by\_id: string or null
 
 Identifier of the user who created the key, or null when the key was created by automation or its creator's account no longer exists.
 
-is\_active: boolean
+is\_active: boolean
 
 Whether the key is currently active. A deactivated key is listed for audit visibility but cannot authenticate requests.
 
-name: string
+name: string
 
 The name given to the API key when it was created.
 
-scopes: array of string
+scopes: array of string
 
 The permission scopes granted to the key.
 
 
 
-expires\_at: optional string or null
+expires\_at: optional string or null
 
 When the key will stop authenticating, or null when the key does not expire.
 
@@ -75,219 +75,219 @@ formatdate-time
 
 
 
-type: optional "compliance\_api\_key"
+type: optional "compliance\_api\_key"
 
 defaultcompliance\_api\_key
 
-organization\_id: string
+organization\_id: string
 
 
 
-settings: array of object{ name, value, type } or object{ name, value, type } or object{ name, value, type } or 3 more
+settings: array of object{ name, value, type } or object{ name, value, type } or object{ name, value, type } or 3 more
 
 One of the following:
 
 
 
-Boolean object{ name, value, type }
+Boolean object{ name, value, type }
 
 A setting whose enforced value is a single true/false flag.
 
 
 
-name: "ai\_powered\_artifacts\_enabled" or "api\_workbench\_feedback\_collection\_enabled" or "artifact\_connectors\_enabled" or 52 more
+name: "ai\_powered\_artifacts\_enabled" or "api\_workbench\_feedback\_collection\_enabled" or "artifact\_connectors\_enabled" or 52 more
 
 One of the following:
 
-"ai\_powered\_artifacts\_enabled"
+"ai\_powered\_artifacts\_enabled"
 
-"api\_workbench\_feedback\_collection\_enabled"
+"api\_workbench\_feedback\_collection\_enabled"
 
-"artifact\_connectors\_enabled"
+"artifact\_connectors\_enabled"
 
-"ask\_your\_org\_enabled"
+"ask\_your\_org\_enabled"
 
-"chat\_enabled"
+"chat\_enabled"
 
-"claude\_ai\_chat\_sharing\_enabled"
+"claude\_ai\_chat\_sharing\_enabled"
 
-"claude\_ai\_feedback\_collection\_enabled"
+"claude\_ai\_feedback\_collection\_enabled"
 
-"claude\_ai\_integration\_sharing\_enabled"
+"claude\_ai\_integration\_sharing\_enabled"
 
-"claude\_code\_desktop\_bypass\_permissions\_enabled"
+"claude\_code\_desktop\_bypass\_permissions\_enabled"
 
-"claude\_code\_desktop\_enabled"
+"claude\_code\_desktop\_enabled"
 
-"claude\_code\_fast\_mode\_enabled"
+"claude\_code\_fast\_mode\_enabled"
 
-"claude\_code\_metrics\_logging\_enabled"
+"claude\_code\_metrics\_logging\_enabled"
 
-"claude\_code\_remote\_control\_enabled"
+"claude\_code\_remote\_control\_enabled"
 
-"claude\_code\_review\_enabled"
+"claude\_code\_review\_enabled"
 
-"claude\_code\_routines\_enabled"
+"claude\_code\_routines\_enabled"
 
-"claude\_code\_security\_enabled"
+"claude\_code\_security\_enabled"
 
-"claude\_code\_trusted\_devices\_required"
+"claude\_code\_trusted\_devices\_required"
 
-"claude\_code\_web\_enabled"
+"claude\_code\_web\_enabled"
 
-"claude\_code\_workflows\_enabled"
+"claude\_code\_workflows\_enabled"
 
-"claude\_design\_enabled"
+"claude\_design\_enabled"
 
-"claude\_in\_slack\_enabled"
+"claude\_in\_slack\_enabled"
 
-"claude\_science\_custom\_connectors\_enabled"
+"claude\_science\_custom\_connectors\_enabled"
 
-"claude\_science\_custom\_skills\_enabled"
+"claude\_science\_custom\_skills\_enabled"
 
-"claude\_science\_enabled"
+"claude\_science\_enabled"
 
-"claude\_science\_managed\_network\_allowlist\_enabled"
+"claude\_science\_managed\_network\_allowlist\_enabled"
 
-"claude\_science\_memory\_enabled"
+"claude\_science\_memory\_enabled"
 
-"claude\_science\_modal\_enabled"
+"claude\_science\_modal\_enabled"
 
-"claude\_science\_scientific\_model\_endpoints\_enabled"
+"claude\_science\_scientific\_model\_endpoints\_enabled"
 
-"claude\_science\_ssh\_hosts\_enabled"
+"claude\_science\_ssh\_hosts\_enabled"
 
-"code\_execution\_enabled"
+"code\_execution\_enabled"
 
-"code\_execution\_network\_egress\_enabled"
+"code\_execution\_network\_egress\_enabled"
 
-"connector\_tools\_default\_always\_allow"
+"connector\_tools\_default\_always\_allow"
 
-"content\_redaction\_enabled"
+"content\_redaction\_enabled"
 
-"cowork\_trusted\_devices\_required"
+"cowork\_trusted\_devices\_required"
 
-"desktop\_extension\_allowlist\_enabled"
+"desktop\_extension\_allowlist\_enabled"
 
-"directory\_sync\_enabled"
+"directory\_sync\_enabled"
 
-"frontier\_data\_use\_enabled"
+"frontier\_data\_use\_enabled"
 
-"group\_skill\_sharing\_enabled"
+"group\_skill\_sharing\_enabled"
 
-"hipaa\_compliance\_enabled"
+"hipaa\_compliance\_enabled"
 
-"inline\_visualizations\_enabled"
+"inline\_visualizations\_enabled"
 
-"ip\_allowlist\_enabled"
+"ip\_allowlist\_enabled"
 
-"location\_metadata\_enabled"
+"location\_metadata\_enabled"
 
-"member\_usage\_dashboard\_visible"
+"member\_usage\_dashboard\_visible"
 
-"memory\_enabled"
+"memory\_enabled"
 
-"org\_wide\_skill\_sharing\_enabled"
+"org\_wide\_skill\_sharing\_enabled"
 
-"public\_projects\_enabled"
+"public\_projects\_enabled"
 
-"skill\_sharing\_enabled"
+"skill\_sharing\_enabled"
 
-"skills\_enabled"
+"skills\_enabled"
 
-"sso\_claude\_ai\_enforced"
+"sso\_claude\_ai\_enforced"
 
-"sso\_console\_enforced"
+"sso\_console\_enforced"
 
-"sso\_enabled"
+"sso\_enabled"
 
-"third\_party\_interactive\_content\_enabled"
+"third\_party\_interactive\_content\_enabled"
 
-"user\_skill\_creation\_enabled"
+"user\_skill\_creation\_enabled"
 
-"web\_search\_enabled"
+"web\_search\_enabled"
 
-"work\_across\_apps\_enabled"
+"work\_across\_apps\_enabled"
 
-value: boolean
+value: boolean
 
 
 
-type: optional "boolean"
+type: optional "boolean"
 
 defaultboolean
 
 
 
-Integer object{ name, value, type }
+Integer object{ name, value, type }
 
 A setting whose enforced value is a whole number; null means no limit
 is in force.
 
-name: "account\_session\_duration\_seconds"
+name: "account\_session\_duration\_seconds"
 
-value: number or null
+value: number or null
 
 
 
-type: optional "integer"
+type: optional "integer"
 
 defaultinteger
 
 
 
-String object{ name, value, type }
+String object{ name, value, type }
 
 A setting whose enforced value is a single string; null means no value
 is configured.
 
 
 
-name: "claude\_code\_default\_worker\_environment\_id" or "claude\_code\_default\_worker\_pool\_id"
+name: "claude\_code\_default\_worker\_environment\_id" or "claude\_code\_default\_worker\_pool\_id"
 
 One of the following:
 
-"claude\_code\_default\_worker\_environment\_id"
+"claude\_code\_default\_worker\_environment\_id"
 
-"claude\_code\_default\_worker\_pool\_id"
+"claude\_code\_default\_worker\_pool\_id"
 
-value: string or null
+value: string or null
 
 
 
-type: optional "string"
+type: optional "string"
 
 defaultstring
 
 
 
-StringList object{ name, value, type }
+StringList object{ name, value, type }
 
 A setting whose enforced value is a list of strings.
 
 
 
-name: "allowed\_invite\_domains" or "disabled\_admin\_request\_types" or "ip\_allowlist\_ip\_ranges"
+name: "allowed\_invite\_domains" or "disabled\_admin\_request\_types" or "ip\_allowlist\_ip\_ranges"
 
 One of the following:
 
-"allowed\_invite\_domains"
+"allowed\_invite\_domains"
 
-"disabled\_admin\_request\_types"
+"disabled\_admin\_request\_types"
 
-"ip\_allowlist\_ip\_ranges"
+"ip\_allowlist\_ip\_ranges"
 
-value: array of string
+value: array of string
 
 
 
-type: optional "string\_list"
+type: optional "string\_list"
 
 defaultstring\_list
 
 
 
-ProvisioningMode object{ value, name, type }
+ProvisioningMode object{ value, name, type }
 
 How organization members are provisioned, resolved to the enforced mode.
 
@@ -298,37 +298,37 @@ reported, regardless of any stored configuration.
 
 
 
-value: "jit\_advanced" or "jit\_permissive" or "login\_only" or 2 more
+value: "jit\_advanced" or "jit\_permissive" or "login\_only" or 2 more
 
 How organization members are provisioned under SSO.
 
 One of the following:
 
-"jit\_advanced"
+"jit\_advanced"
 
-"jit\_permissive"
+"jit\_permissive"
 
-"login\_only"
+"login\_only"
 
-"scim\_advanced"
+"scim\_advanced"
 
-"scim\_permissive"
+"scim\_permissive"
 
 
 
-name: optional "sso\_provisioning\_mode"
+name: optional "sso\_provisioning\_mode"
 
 defaultsso\_provisioning\_mode
 
 
 
-type: optional "provisioning\_mode"
+type: optional "provisioning\_mode"
 
 defaultprovisioning\_mode
 
 
 
-DataRetention object{ value, name, type }
+DataRetention object{ value, name, type }
 
 The data retention periods in force, keyed by the type of data they
 apply to.
@@ -340,71 +340,67 @@ Anthropic's service defaults may still apply.
 
 
 
-value: map[object{ duration, timescale, type } or object{ type }]
+value: map[object{ duration, timescale, type } or object{ type }]
 
 One of the following:
 
 
 
-Fixed object{ duration, timescale, type }
+Fixed object{ duration, timescale, type }
 
 A fixed retention window measured from each item's last activity.
 
-duration: number
+duration: number
 
 
 
-timescale: "day" or "month"
+timescale: "day" or "month"
 
 One of the following:
 
-"day"
+"day"
 
-"month"
+"month"
 
 
 
-type: optional "fixed"
+type: optional "fixed"
 
 defaultfixed
 
 
 
-Indefinite object{ type }
+Indefinite object{ type }
 
 An indefinite retention period: data is kept with no time limit.
 
 
 
-type: optional "indefinite"
+type: optional "indefinite"
 
 defaultindefinite
 
 
 
-name: optional "data\_retention\_periods"
+name: optional "data\_retention\_periods"
 
 defaultdata\_retention\_periods
 
 
 
-type: optional "data\_retention"
+type: optional "data\_retention"
 
 defaultdata\_retention
 
 
 
-type: optional "effective\_organization\_settings"
+type: optional "effective\_organization\_settings"
 
 defaulteffective\_organization\_settings
 
-
+Get effective organization settings
 
-### Get effective organization settings
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/compliance/organizations/$ORGANIZATION_ID/settings \

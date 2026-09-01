@@ -6,7 +6,7 @@
 
 This page is a reference for the tools Anthropic provides and the optional properties you can set on any tool definition. For a conceptual introduction to tool use, see [Tool use with Claude](agents-and-tools/tool-use/overview.md). For guidance on implementing tool use in your application, see [Define tools](agents-and-tools/tool-use/define-tools.md).
 
-##  Anthropic-provided tools
+## Anthropic-provided tools
 
 Anthropic provides two kinds of tools: **server tools** that execute on Anthropic's infrastructure, and **client tools** where Anthropic defines the schema but your application handles execution. Both kinds appear in your request's `tools` array alongside any user-defined tools.
 
@@ -26,7 +26,7 @@ Anthropic provides two kinds of tools: **server tools** that execute on Anthropi
 
 For model compatibility, see each tool's page. Supported models vary by tool and by tool version.
 
-###  Tool versioning
+### Tool versioning
 
 Most Anthropic-provided tools carry a `_YYYYMMDD` suffix in the `type` string. A new version is released when the tool's behavior, schema, or model support changes. Older versions remain available so that existing integrations continue to work.
 
@@ -40,7 +40,7 @@ When a tool has multiple active versions, the relationship between them varies:
 
 The `mcp_toolset` type is not date-versioned; versioning is carried in the `anthropic-beta` header instead.
 
-###  Client toolsets
+### Client toolsets
 
 The [computer use tool](agents-and-tools/tool-use/computer-use-tool.md) and [browser use tool](agents-and-tools/tool-use/browser-use-tool.md) are Anthropic-defined client toolsets: one entry in `tools` declares a fixed set of member tools whose names, descriptions, and input schemas Anthropic defines, and your application executes every call. The entry takes no `name`, because the dated `type` fixes the member names. `configs`, `cache_control`, and `allowed_callers` (which accepts only `["direct"]`) are optional.
 
@@ -67,7 +67,7 @@ Client toolsets are Messages API tools. They aren't currently available as agent
 
 Set `defer_loading` per member, never on the entry, and give every enabled member the same value: under [tool search](agents-and-tools/tool-use/tool-search-tool.md) the toolset loads and expands as one definition. When every enabled member defers, only a [tool search tool](agents-and-tools/tool-use/tool-search-tool.md) that isn't itself deferred can surface the toolset, so declare one in the same request. Don't put `cache_control` on a toolset entry whose members defer; set the breakpoint on a non-deferred tool instead, because deferred definitions are not part of the cached prefix.
 
-`cache_control` goes on the entry only; for where the breakpoint lands, including markers inside a batch action, see [Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md).
+`cache_control` goes on the entry only; to learn where the breakpoint lands, including markers inside a batch action, see [Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md).
 
 **Handle member tool calls.** Claude calls a member with a `tool_use` block whose `name` is the member name and whose `toolset_name` is `computer` or `browser`; `input` holds that member's parameters and no `action` field. Dispatch on the `toolset_name` and `name` pair, because a custom tool may share a member's name and the two toolsets share names such as `screenshot`. Only member results echo `toolset_name`. Several member calls in one turn form a batch action that you run in order ([computer use](agents-and-tools/tool-use/computer-use-tool.md), [browser use](agents-and-tools/tool-use/browser-use-tool.md)). New members arrive only with a new dated `type`.
 
@@ -80,7 +80,7 @@ Set `defer_loading` per member, never on the entry, and give every enabled membe
 - A `tool_choice` of type `tool` that names the toolset or a member (use `auto`, `any`, or `none`).
 - Two entries of the same toolset, or another tool that carries that toolset's name: a tool named `computer` alongside `computer_toolset_20260801`, or a tool named `browser` alongside `browser_toolset_20260801`. The two toolsets can be declared together.
 
-##  Tool definition properties
+## Tool definition properties
 
 Every tool in the `tools` array, including user-defined tools, accepts optional properties that control how the tool is loaded, who can call it, and how its inputs are validated. These properties compose: you can set `defer_loading` and `cache_control` and `strict` on the same tool.
 
@@ -93,7 +93,7 @@ Every tool in the `tools` array, including user-defined tools, accepts optional 
 | `input_examples` | Provide example input objects to help Claude understand how to call the tool | User-defined and Anthropic-schema client tools, except `computer_toolset_20260801` and `browser_toolset_20260801`. Not available on server tools. | [Define tools](agents-and-tools/tool-use/define-tools.md) |
 | `eager_input_streaming` | Enable fine-grained input streaming (`true`) or keep standard buffered streaming (`false`) for this tool | User-defined tools only | [Fine-grained tool streaming](agents-and-tools/tool-use/fine-grained-tool-streaming.md) |
 
-###  `allowed_callers` values
+### `allowed_callers` values
 
 `allowed_callers` is an array that accepts any combination of:
 
@@ -106,13 +106,13 @@ Both `"code_execution_20260120"` and `"code_execution_20260521"` are accepted in
 
 Omitting `"direct"` from the array (for example, `"allowed_callers": ["code_execution_20260120"]`) guides Claude to call the tool only from within code execution. The response's `tool_use` block includes a `caller` field that identifies which caller called the tool. See [Programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md) for the full treatment, including the `caller` response shape and error behavior.
 
-###  `defer_loading` and prompt caching
+### `defer_loading` and prompt caching
 
 Tools with `defer_loading: true` are stripped from the rendered tools section before the cache key is computed. They don't appear in the system-prompt prefix at all. When tool search discovers a deferred tool and returns a `tool_reference` for it, the tool's full definition is expanded inline at that point in the conversation body, not in the prefix.
 
 This means `defer_loading: true` preserves your prompt cache. You can add deferred tools to a request without invalidating an existing cache entry, and the cache remains valid across the turn where the tool is discovered and the turn where it's called.
 
-For how to combine `defer_loading` with `cache_control` breakpoints, see the [Tool search tool prompt caching guidance](agents-and-tools/tool-use/tool-search-tool.md).
+To learn how to combine `defer_loading` with `cache_control` breakpoints, see the [Tool search tool prompt caching guidance](agents-and-tools/tool-use/tool-search-tool.md).
 
 Was this page helpful?
 

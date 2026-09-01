@@ -27,7 +27,7 @@ accepted.
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -37,7 +37,7 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 
 
-issuer\_url: string
+issuer\_url: string
 
 The `iss` claim value to match against.
 
@@ -45,7 +45,7 @@ minLength1
 
 
 
-name: string
+name: string
 
 Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
@@ -53,13 +53,13 @@ maxLength255
 
 minLength1
 
-check\_jti: optional boolean or null
+check\_jti: optional boolean or null
 
 Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Defaults to true. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
 
 
 
-jwks: optional object{ type, ca\_cert\_pem, discovery\_base } or object{ type, url, ca\_cert\_pem } or object{ keys, type }
+jwks: optional object{ type, ca\_cert\_pem, discovery\_base } or object{ type, url, ca\_cert\_pem } or object{ keys, type }
 
 How signing keys are obtained. Defaults to OIDC discovery.
 
@@ -67,35 +67,35 @@ One of the following:
 
 
 
-Discovery object{ type, ca\_cert\_pem, discovery\_base }
+Discovery object{ type, ca\_cert\_pem, discovery\_base }
 
 JWKS via the issuer's OIDC discovery document.
 
-type: "discovery"
+type: "discovery"
 
 
 
-ca\_cert\_pem: optional string or null
+ca\_cert\_pem: optional string or null
 
 Optional custom CA (PEM) for TLS verification of the JWKS fetch.
 
 maxLength8192
 
-discovery\_base: optional string or null
+discovery\_base: optional string or null
 
 Set when the discovery URL differs from `issuer_url`.
 
 
 
-ExplicitURL object{ type, url, ca\_cert\_pem }
+ExplicitURL object{ type, url, ca\_cert\_pem }
 
 JWKS fetched from a fixed endpoint.
 
-type: "explicit\_url"
+type: "explicit\_url"
 
 
 
-url: string
+url: string
 
 JWKS endpoint.
 
@@ -103,7 +103,7 @@ minLength1
 
 
 
-ca\_cert\_pem: optional string or null
+ca\_cert\_pem: optional string or null
 
 Optional custom CA (PEM) for TLS verification of the JWKS fetch.
 
@@ -111,23 +111,23 @@ maxLength8192
 
 
 
-Inline object{ keys, type }
+Inline object{ keys, type }
 
 JWKS supplied directly; no network fetch.
 
 
 
-keys: array of map[unknown]
+keys: array of map[unknown]
 
 Inline JWK objects.
 
 minItems1
 
-type: "inline"
+type: "inline"
 
 
 
-max\_jwt\_lifetime\_seconds: optional number or null
+max\_jwt\_lifetime\_seconds: optional number or null
 
 Maximum allowed iat→exp spread for assertions from this issuer (1-176400 seconds, i.e. up to 49h). Defaults to 3600 (1h). Assertions must carry both `iat` and `exp`; a missing `iat` is rejected.
 
@@ -139,20 +139,16 @@ exclusiveMinimum0
 
 
 
-FederationIssuer object{ id, archived\_at, archived\_by\_actor\_id, 12 more }
+FederationIssuer object{ id, archived\_at, archived\_by\_actor\_id, 12 more }
 
 Registered external OIDC identity provider.
 
 Records an external IdP the organization trusts for the RFC 7523
 jwt-bearer grant. The `issuer_url` must match the JWT `iss` claim exactly.
 
-
+Create Federation Issuer
 
-### Create Federation Issuer
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/federation_issuers \

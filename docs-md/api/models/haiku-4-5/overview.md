@@ -1,4 +1,4 @@
-##  How it compares
+## How it compares
 
 | Model | Context | Max output | Price / MTok | Latency | Thinking | Default effort | Knowledge cutoff |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -7,7 +7,7 @@
 | [Claude Sonnet 5](models/sonnet-5/overview.md) | 1M | 128K | $2 / $10 | Fast | Adaptive | `high` | Jan 2026 |
 | Claude Haiku 4.5This model | 200K | 64K | $1 / $5 | Fastest | Extended | — | Feb 2025 |
 
-##  Specifications
+## Specifications
 
 ### Model IDs
 
@@ -95,13 +95,13 @@ Retirement
 Platforms
 :   Claude API[Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)[Amazon Bedrock (InvokeModel)](build-with-claude/claude-on-amazon-bedrock-legacy.md)[Google Cloud](build-with-claude/claude-on-vertex-ai.md)[Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)[Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)
 
-##  Good to know
+## Good to know
 
 - `claude-haiku-4-5` is a convenience alias that resolves to the pinned snapshot `claude-haiku-4-5-20251001`. See [Model IDs and versioning](about-claude/models/model-ids-and-versions.md).
 - Claude Haiku 4.5 uses manual extended thinking (`thinking.type: "enabled"`), not adaptive thinking.
 - Query limits and capabilities programmatically with the [Models API](api/models/list.md).
 
-##  Resources
+## Resources
 
 
 
@@ -121,7 +121,7 @@ When to start efficiency-first with Haiku and when to reach for a larger model.
 
 Techniques that pair well with the fastest model in the lineup.
 
-##  Reference
+## Reference
 
 
 

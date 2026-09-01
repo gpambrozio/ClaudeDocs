@@ -219,7 +219,7 @@ You are a code reviewer. When invoked, analyze the code and provide
 specific, actionable feedback on quality, security, and best practices.
 ```
 
-The frontmatter defines the subagent’s metadata and configuration. The body becomes the system prompt that guides the subagent’s behavior. Subagents receive only this system prompt plus basic environment details like the working directory, not the full Claude Code system prompt.
+The frontmatter defines the subagent’s metadata and configuration. The body becomes the system prompt that guides the subagent’s behavior. Subagents receive only this system prompt plus basic environment details like the working directory, not the Claude Code system prompt.
 In [non-interactive mode](headless.md), pass [`--append-subagent-system-prompt`](cli-reference.md) to append your text to the end of every subagent’s system prompt, nested subagents included, apart from a [forked subagent](#fork-the-current-conversation), which reuses the conversation’s own prompt. Requires Claude Code v2.1.205 or later.
 A subagent starts in the main conversation’s current working directory. Within a subagent, `cd` commands don’t persist between Bash or PowerShell tool calls and don’t affect the main conversation’s working directory. To give the subagent an isolated copy of the repository instead, set [`isolation: worktree`](#supported-frontmatter-fields).
 A subagent with `isolation: worktree` runs its Bash and PowerShell commands inside its worktree. A command whose working directory resolves to your main checkout instead, for example because the worktree directory was removed while the subagent was running, fails with an error. Before v2.1.203, such a command could run in the main checkout.
@@ -255,7 +255,7 @@ The following fields can be used in the YAML frontmatter. Only `name` and `descr
 | `isolation` | No | Set to `worktree` to run the subagent in a temporary [git worktree](worktrees.md), giving it an isolated copy of the repository branched by default from your [default branch](worktrees.md) rather than the parent session’s `HEAD`. The worktree is automatically cleaned up if the subagent makes no changes |
 | `color` | No | Display color for the subagent in the task list and transcript. Accepts `red`, `blue`, `green`, `yellow`, `purple`, `orange`, `pink`, or `cyan` |
 | `initialPrompt` | No | Auto-submitted as the first user turn when this agent runs as the main session agent (via `--agent` or the `agent` setting). [Commands](commands.md) and [skills](skills.md) are processed. Prepended to any user-provided prompt |
-| `experimental` | No | Map of experimental options. Set its `cacheTtl` key to `5m` or `1h` to choose the [prompt cache lifetime](prompt-caching.md) for this subagent’s requests. Claude Code ignores any other value, ignores `1h` while your Claude subscription is using usage credits, and reads the field only from subagent files. Requires Claude Code v2.1.248 or later |
+| `experimental` | No | Map of experimental options. Set its `cacheTtl` key to `5m` or `1h` to choose the [prompt cache lifetime](prompt-caching.md) for this subagent’s requests, at the frontmatter’s place in the [cache lifetime precedence](prompt-caching.md). Claude Code ignores any other value, ignores `1h` while your Claude subscription is using usage credits, and reads the field only from subagent files. Requires Claude Code v2.1.248 or later |
 
 Write `cacheTtl` inside the `experimental` map, not at the top level of the frontmatter.
 
@@ -309,6 +309,7 @@ Claude Code checks the per-invocation parameter, frontmatter, and environment va
 - For any other blocked value, on providers where that substitution doesn’t operate, or when the allowlist permits no version of the family, Claude Code runs the subagent on the inherited model instead. If you set `CLAUDE_CODE_SUBAGENT_MODEL`, Claude Code tries that model first, under these same rules.
 
 In interactive sessions, Claude Code shows a warning naming the requested model and the model the subagent runs on, for either substitution.
+To check which model a subagent is running on, run [`/tasks`](commands.md). Claude Code names the model on the subagent’s row, and adds the [effort level](model-config.md) when the subagent’s definition, or the skill it forked from, sets [`effort`](#supported-frontmatter-fields). Requires Claude Code v2.1.242 or later.
 A per-invocation `model` parameter also applies when the subagent is [resumed or sent a follow-up message](#resume-subagents), so the subagent stays on that model. Before v2.1.211, resuming dropped the per-invocation value and the subagent reverted to its definition’s `model` field or, without one, the main conversation’s model.
 As of v2.1.198, subagents also inherit the main conversation’s [extended thinking](model-config.md) configuration: if thinking is on in your session, it’s on for the subagent, and if it’s off, it stays off. There is no per-subagent thinking setting. Before v2.1.198, subagents ran with extended thinking disabled regardless of the main conversation’s setting.
 
@@ -680,6 +681,7 @@ See [Hooks](hooks.md) for the complete hook configuration format.
 ### [​](#understand-automatic-delegation) Understand automatic delegation
 
 Claude automatically delegates tasks based on the task description in your request, the `description` field in subagent configurations, and current context. To encourage proactive delegation, include phrases like “use proactively” in your subagent’s description field.
+Keep descriptions brief: Claude Code shows a startup warning when your subagents’ combined descriptions pass [the 15,000-token limit](errors.md), and still loads every subagent.
 
 ### [​](#invoke-subagents-explicitly) Invoke subagents explicitly
 
@@ -883,7 +885,7 @@ Agents that other features run, such as [workflow](workflows.md) agents and [age
 Each subagent starts with a fresh, isolated context window. It doesn’t see your conversation history, the skills you’ve already invoked, or the files Claude has already read. Claude composes a delegation message that summarizes the task, and the subagent works from there. The exception is a [fork](#fork-the-current-conversation), which inherits the parent conversation instead of starting fresh.
 A non-fork subagent’s initial context contains:
 
-- **System prompt**: the agent’s own prompt plus environment details that Claude Code appends, not the full Claude Code system prompt. Custom subagents define theirs in the [markdown body](#write-subagent-files) or `prompt` field. Built-in agents have predefined prompts.
+- **System prompt**: the agent’s own prompt plus environment details that Claude Code appends, not the Claude Code system prompt. Custom subagents define theirs in the [markdown body](#write-subagent-files) or `prompt` field. Built-in agents have predefined prompts.
 - **Task message**: the delegation prompt Claude writes when it hands off the work.
 - **CLAUDE.md files**: every level of the [CLAUDE.md hierarchy](memory.md) the main conversation loads, including `~/.claude/CLAUDE.md`, project rules, `CLAUDE.local.md`, and managed policy files. The built-in Explore and Plan agents skip this.
 - **Git status**: a snapshot taken at the start of the parent session. Absent when the working directory isn’t a Git repository or when [`includeGitInstructions`](settings-reference.md) is `false`. Explore and Plan skip it regardless.
@@ -903,7 +905,8 @@ Some main-conversation state never reaches a non-fork subagent:
 Each subagent invocation creates a new instance rather than continuing an earlier one. To continue an existing subagent’s work instead of starting over, ask Claude to resume it.
 Resumed subagents retain their full conversation history, including all previous tool calls, results, and reasoning. The subagent picks up exactly where it stopped rather than starting fresh.
 
-- When a subagent completes, Claude receives its agent ID. The built-in Explore and Plan agents are one-shot and return no agent ID, so they can’t be resumed; use `general-purpose` or a custom subagent when you need to continue the work.
+- When a subagent completes, Claude receives its agent ID.
+- The built-in Explore and Plan agents are one-shot and return no agent ID, so Claude can’t resume them. Use `general-purpose` or a custom subagent when you need to continue the work.
 - When a subagent stops at its [`maxTurns`](#supported-frontmatter-fields) limit, Claude Code marks the returned output as partial. For subagents that return an agent ID, Claude Code also notes in the result that Claude can message the subagent to continue from where it stopped.
 
 Claude uses the `SendMessage` tool with the agent’s ID or name as the `to` field to resume it. `SendMessage` doesn’t require [agent teams](agent-teams.md) to be enabled; only structured team-protocol messages such as `shutdown_request` and `plan_approval_response` do. Beyond subagents and teammates, in sessions where cross-session messaging is enabled, Claude can use the same tool to message [your other Claude Code sessions](cross-session-messaging.md), on this machine or [beyond it](cross-session-messaging.md).
@@ -1013,7 +1016,7 @@ These examples demonstrate effective patterns for building subagents. Use them a
 **Best practices:**
 
 - **Design focused subagents:** each subagent should excel at one specific task
-- **Write specific descriptions:** Claude uses the description to decide when to delegate
+- **Write descriptions that single out one subagent:** Claude uses the description to decide when to delegate. Make each description specific enough to route to the right subagent, and keep the combined set within the [15,000-token description budget](#understand-automatic-delegation)
 - **Limit tool access:** grant only necessary permissions for security and focus
 - **Check into version control:** share project subagents with your team
 

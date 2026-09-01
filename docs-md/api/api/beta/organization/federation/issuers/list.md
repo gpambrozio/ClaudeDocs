@@ -20,7 +20,7 @@ Archived issuers are excluded unless `include_archived=true`.
 
 
 
-include\_archived: optional boolean
+include\_archived: optional boolean
 
 Include archived resources. Defaults to false.
 
@@ -28,7 +28,7 @@ defaultfalse
 
 
 
-limit: optional number
+limit: optional number
 
 Number of results per page.
 
@@ -38,7 +38,7 @@ maximum100
 
 minimum1
 
-page: optional string
+page: optional string
 
 Opaque cursor from a previous response's `next_page`.
 
@@ -46,147 +46,147 @@ Opaque cursor from a previous response's `next_page`.
 
 
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-string
+string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
 
 One of the following:
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24"
 
-"prompt-caching-2024-07-31"
+"prompt-caching-2024-07-31"
 
-"computer-use-2024-10-22"
+"computer-use-2024-10-22"
 
-"computer-use-2025-01-24"
+"computer-use-2025-01-24"
 
-"pdfs-2024-09-25"
+"pdfs-2024-09-25"
 
-"token-counting-2024-11-01"
+"token-counting-2024-11-01"
 
-"token-efficient-tools-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"output-128k-2025-02-19"
+"output-128k-2025-02-19"
 
-"files-api-2025-04-14"
+"files-api-2025-04-14"
 
-"mcp-client-2025-04-04"
+"mcp-client-2025-04-04"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-11-20"
 
-"dev-full-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"interleaved-thinking-2025-05-14"
+"interleaved-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"code-execution-2025-05-22"
 
-"extended-cache-ttl-2025-04-11"
+"extended-cache-ttl-2025-04-11"
 
-"context-1m-2025-08-07"
+"context-1m-2025-08-07"
 
-"context-management-2025-06-27"
+"context-management-2025-06-27"
 
-"model-context-window-exceeded-2025-08-26"
+"model-context-window-exceeded-2025-08-26"
 
-"skills-2025-10-02"
+"skills-2025-10-02"
 
-"fast-mode-2026-02-01"
+"fast-mode-2026-02-01"
 
-"output-300k-2026-03-24"
+"output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
+"user-profiles-2026-03-24"
 
-"user-profiles-2026-08-18"
+"user-profiles-2026-08-18"
 
-"advisor-tool-2026-03-01"
+"advisor-tool-2026-03-01"
 
-"managed-agents-2026-04-01"
+"managed-agents-2026-04-01"
 
-"cache-diagnosis-2026-04-07"
+"cache-diagnosis-2026-04-07"
 
-"dreaming-2026-04-21"
+"dreaming-2026-04-21"
 
-"thinking-token-count-2026-05-13"
+"thinking-token-count-2026-05-13"
 
-"server-side-fallback-2026-06-01"
+"server-side-fallback-2026-06-01"
 
-"server-side-fallback-2026-07-01"
+"server-side-fallback-2026-07-01"
 
-"fallback-credit-2026-06-01"
+"fallback-credit-2026-06-01"
 
-"fallback-credit-2026-07-01"
+"fallback-credit-2026-07-01"
 
-"agent-memory-2026-07-22"
+"agent-memory-2026-07-22"
 
-"mid-conversation-tool-changes-2026-07-01"
+"mid-conversation-tool-changes-2026-07-01"
 
-"compact-2026-01-12"
+"compact-2026-01-12"
 
-"computer-use-2025-11-24"
+"computer-use-2025-11-24"
 
-"mcp-tunnels-2026-06-22"
+"mcp-tunnels-2026-06-22"
 
-"structured-outputs-2025-11-13"
+"structured-outputs-2025-11-13"
 
-"task-budgets-2026-03-13"
+"task-budgets-2026-03-13"
 
-"thinking-display-updates-2026-08-18"
+"thinking-display-updates-2026-08-18"
 
-"ce-user-management-2026-07-13"
+"ce-user-management-2026-07-13"
 
 ##### Returns
 
 
 
-data: array of [BetaFederationIssuer](api/http/beta/organization/federation/issuers.md) { id, archived\_at, archived\_by\_actor\_id, 12 more }
+data: array of [BetaFederationIssuer](api/http/beta/organization/federation/issuers.md) { id, archived\_at, archived\_by\_actor\_id, 12 more }
 
-id: string
+id: string
 
 Tagged ID of the federation issuer.
 
 
 
-archived\_at: string or null
+archived\_at: string or null
 
 If set, all rules referencing this issuer reject token exchange.
 
 formatdate-time
 
-archived\_by\_actor\_id: string or null
+archived\_by\_actor\_id: string or null
 
 Tagged ID (`user_`/`svac_`) of the actor that archived this issuer.
 
-check\_jti: boolean
+check\_jti: boolean
 
 Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
 
 
 
-created\_at: string
+created\_at: string
 
 When this issuer was created.
 
 formatdate-time
 
-created\_by\_actor\_id: string or null
+created\_by\_actor\_id: string or null
 
 Tagged ID (`user_`/`svac_`) of the actor that created this issuer.
 
-issuer\_url: string
+issuer\_url: string
 
 The `iss` claim value. Incoming JWTs must match exactly.
 
 
 
-jwks: [BetaJWKSDiscovery](api/http/beta/organization/federation/issuers.md) { type, ca\_cert\_pem, discovery\_base } or [BetaJWKSExplicitURL](api/http/beta/organization/federation/issuers.md) { type, url, ca\_cert\_pem } or [BetaJWKSInline](api/http/beta/organization/federation/issuers.md) { keys, type }
+jwks: [BetaJWKSDiscovery](api/http/beta/organization/federation/issuers.md) { type, ca\_cert\_pem, discovery\_base } or [BetaJWKSExplicitURL](api/http/beta/organization/federation/issuers.md) { type, url, ca\_cert\_pem } or [BetaJWKSInline](api/http/beta/organization/federation/issuers.md) { keys, type }
 
 How signing keys are obtained for signature verification.
 
@@ -194,35 +194,35 @@ One of the following:
 
 
 
-BetaJWKSDiscovery object{ type, ca\_cert\_pem, discovery\_base }
+BetaJWKSDiscovery object{ type, ca\_cert\_pem, discovery\_base }
 
 JWKS via the issuer's OIDC discovery document.
 
-type: "discovery"
+type: "discovery"
 
 
 
-ca\_cert\_pem: optional string or null
+ca\_cert\_pem: optional string or null
 
 Optional custom CA (PEM) for TLS verification of the JWKS fetch.
 
 maxLength8192
 
-discovery\_base: optional string or null
+discovery\_base: optional string or null
 
 Set when the discovery URL differs from `issuer_url`.
 
 
 
-BetaJWKSExplicitURL object{ type, url, ca\_cert\_pem }
+BetaJWKSExplicitURL object{ type, url, ca\_cert\_pem }
 
 JWKS fetched from a fixed endpoint.
 
-type: "explicit\_url"
+type: "explicit\_url"
 
 
 
-url: string
+url: string
 
 JWKS endpoint.
 
@@ -230,7 +230,7 @@ minLength1
 
 
 
-ca\_cert\_pem: optional string or null
+ca\_cert\_pem: optional string or null
 
 Optional custom CA (PEM) for TLS verification of the JWKS fetch.
 
@@ -238,39 +238,39 @@ maxLength8192
 
 
 
-BetaJWKSInline object{ keys, type }
+BetaJWKSInline object{ keys, type }
 
 JWKS supplied directly; no network fetch.
 
 
 
-keys: array of map[unknown]
+keys: array of map[unknown]
 
 Inline JWK objects.
 
 minItems1
 
-type: "inline"
+type: "inline"
 
 
 
-jwks\_polling\_disabled\_at: string or null
+jwks\_polling\_disabled\_at: string or null
 
 If set, Anthropic's JWKS poller has paused polling for this issuer after repeated fetch failures. Re-enable by sending `jwks_polling_disabled: false` via the issuer update endpoint (POST) once the upstream JWKS endpoint is fixed. An OAuth caller cannot send this when the issuer backs a rule with any scope other than `workspace:developer` or `workspace:inference`; use a Console session.
 
 formatdate-time
 
-max\_jwt\_lifetime\_seconds: number
+max\_jwt\_lifetime\_seconds: number
 
 Maximum allowed iat→exp spread for assertions from this issuer (1-176400 seconds, i.e. up to 49h). Assertions must carry both `iat` and `exp`; a missing `iat` is rejected.
 
-name: string
+name: string
 
 Admin-chosen slug identifier.
 
 
 
-poll\_status: [BetaFederationIssuerPollStatus](api/http/beta/organization/federation/issuers.md) { consecutive\_failures, last\_fetched\_at, next\_poll\_at } or null
+poll\_status: [BetaFederationIssuerPollStatus](api/http/beta/organization/federation/issuers.md) { consecutive\_failures, last\_fetched\_at, next\_poll\_at } or null
 
 Status of automatic JWKS polling for a federation issuer.
 
@@ -278,13 +278,13 @@ Anthropic periodically fetches the issuer's signing keys in the
 background. These fields summarize the most recent fetches so the
 health of the JWKS endpoint can be monitored.
 
-consecutive\_failures: number
+consecutive\_failures: number
 
 Consecutive fetch failures since the last success.
 
 
 
-last\_fetched\_at: string or null
+last\_fetched\_at: string or null
 
 When the last successful fetch completed.
 
@@ -292,7 +292,7 @@ formatdate-time
 
 
 
-next\_poll\_at: string or null
+next\_poll\_at: string or null
 
 When the next fetch is scheduled. Null if paused.
 
@@ -300,33 +300,29 @@ formatdate-time
 
 
 
-type: "federation\_issuer"
+type: "federation\_issuer"
 
 defaultfederation\_issuer
 
 
 
-updated\_at: string
+updated\_at: string
 
 When this issuer was last updated.
 
 formatdate-time
 
-updated\_by\_actor\_id: string or null
+updated\_by\_actor\_id: string or null
 
 Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
 
-next\_page: string or null
+next\_page: string or null
 
 Opaque cursor for the next page, or null if no more results.
 
-
+List Federation Issuers
 
-### List Federation Issuers
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/federation_issuers \

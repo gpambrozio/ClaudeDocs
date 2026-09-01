@@ -14,7 +14,7 @@
 
 
 
-MessageListResponse object{ id, artifacts, content, 4 more }
+MessageListResponse object{ id, artifacts, content, 4 more }
 
 A single message in a chat conversation.
 

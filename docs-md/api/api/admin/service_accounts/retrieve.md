@@ -12,7 +12,7 @@ Retrieve a service account by its ID (`svac_...`).
 
 ##### Path parameters
 
-service\_account\_id: string
+service\_account\_id: string
 
 ID of the service account.
 
@@ -20,7 +20,7 @@ ID of the service account.
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -30,20 +30,16 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 
 
-ServiceAccount object{ id, archived\_at, archived\_by\_actor\_id, 8 more }
+ServiceAccount object{ id, archived\_at, archived\_by\_actor\_id, 8 more }
 
 Named non-human identity within the caller's organization.
 
 A service account is a pure identity: name + org. Authorization lives on
 whatever references it (federation rules).
 
-
+Get Service Account
 
-### Get Service Account
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUNT_ID \

@@ -4,27 +4,27 @@
 
 
 
-##  Inbound IP addresses
+## Inbound IP addresses
 
 These are the IP addresses where Anthropic services receive incoming connections.
 
-###  IPv4
+### IPv4
 
 `160.79.104.0/23`
 
-###  IPv6
+### IPv6
 
 `2607:6bc0::/48`
 
-##  Outbound IP addresses
+## Outbound IP addresses
 
 These are the stable IP addresses that Anthropic uses for outbound requests (for example, when making MCP tool calls to external servers).
 
-###  IPv4
+### IPv4
 
 `160.79.104.0/21`
 
-###  Phased out IP addresses
+### Phased out IP addresses
 
 The following IP addresses are no longer in use by Anthropic. If you have previously allowlisted these addresses, you should remove them from your firewall rules.
 

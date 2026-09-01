@@ -36,29 +36,29 @@ cURL
 
 
 
-BetaManagedAgentsDeletedVault object{ id, type }
+BetaManagedAgentsDeletedVault object{ id, type }
 
 Confirmation of a deleted vault.
 
-id: string
+id: string
 
 Unique identifier of the deleted vault.
 
-type: "vault\_deleted"
+type: "vault\_deleted"
 
 
 
-BetaManagedAgentsVault object{ id, archived\_at, created\_at, 4 more }
+BetaManagedAgentsVault object{ id, archived\_at, created\_at, 4 more }
 
 A vault that stores credentials for use by agents during sessions.
 
-id: string
+id: string
 
 Unique identifier for the vault.
 
 
 
-archived\_at: string or null
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -66,31 +66,31 @@ formatdate-time
 
 
 
-created\_at: string
+created\_at: string
 
 A timestamp in RFC 3339 format
 
 formatdate-time
 
-display\_name: string
+display\_name: string
 
 Human-readable name for the vault.
 
-metadata: map[string]
+metadata: map[string]
 
 Arbitrary key-value metadata attached to the vault.
 
-type: "vault"
+type: "vault"
 
 
 
-updated\_at: string
+updated\_at: string
 
 A timestamp in RFC 3339 format
 
 formatdate-time
 
-#### Vaults[Credentials](api/http/beta/vaults/credentials.md)
+#### Vaults[Credentials](api/http/beta/vaults/credentials.md)
 
 ##### [Create Credential](api/http/beta/vaults/credentials/create.md)
 

@@ -25,7 +25,7 @@ print(response.content)
 
 Claude runs the search on Anthropic's infrastructure and returns the cited results in the same response. To have Claude call a function that you define, pass a tool with an `input_schema`, then execute the call when Claude returns a `tool_use` block. [How tool use works](#how-tool-use-works) shows that round trip end to end. Learn more about [defining tools](agents-and-tools/tool-use/define-tools.md) and [handling tool calls](agents-and-tools/tool-use/handle-tool-calls.md).
 
-##  How tool use works
+## How tool use works
 
 Tools differ primarily by where the code executes. **Client tools** (including user-defined tools and tools with Anthropic-defined schemas, such as `bash` and `text_editor`) run in your application. Claude responds with `stop_reason: "tool_use"` and one or more `tool_use` blocks. Your code executes the operation and sends back a `tool_result`. **Server tools** (such as `web_search`, `web_fetch`, `code_execution`, and `tool_search`) run on Anthropic's infrastructure: you see the results directly without handling execution, unless Claude calls the tool in the same group of parallel tool calls as one of your client tools (see [Stop reasons and fallback](build-with-claude/handling-stop-reasons.md)).
 
@@ -105,9 +105,9 @@ The current weather in San Francisco is 15 degrees Celsius with partly cloudy sk
 
 For the full conceptual model including the agentic loop and when to choose each approach, see [How tool use works](agents-and-tools/tool-use/how-tool-use-works.md).
 
-For connecting to Model Context Protocol (MCP) servers, see the [MCP connector](agents-and-tools/mcp-connector.md). For building your own MCP client, see the Model Context Protocol guide to [building an MCP client](https://modelcontextprotocol.io/docs/develop/build-client).
+To connect to Model Context Protocol (MCP) servers, see the [MCP connector](agents-and-tools/mcp-connector.md). To build your own MCP client, see the Model Context Protocol guide to [building an MCP client](https://modelcontextprotocol.io/docs/develop/build-client).
 
-##  When Claude uses tools
+## When Claude uses tools
 
 With the default `tool_choice` of `{"type": "auto"}`, Claude determines on each turn whether to call a tool or respond directly. It calls a tool when the request maps to that tool's described capability and the answer isn't already in context. It responds directly for stable knowledge, creative tasks, and conversational turns.
 
@@ -119,11 +119,11 @@ Each server tool's page describes its own trigger boundary in more detail.
 
 ### When required parameters are missing
 
-##  Choose a tool
+## Choose a tool
 
 For `type` strings, versions, and beta headers, see [Tool reference](agents-and-tools/tool-use/tool-reference.md).
 
-###  Your own tools
+### Your own tools
 
 For tools you define, you write the schema and your application executes each call.
 
@@ -137,7 +137,7 @@ Specify tool schemas, write descriptions, and control when Claude calls your too
 
 Parse `tool_use` blocks, format `tool_result` responses, and handle errors.
 
-###  Anthropic-schema client tools
+### Anthropic-schema client tools
 
 Anthropic publishes the schema and trains Claude on it. Your application still executes each call and returns the `tool_result`.
 
@@ -169,7 +169,7 @@ Take screenshots and control the mouse and keyboard in a desktop environment.
 
 Navigate, read, and interact with webpages in your own browser environment.
 
-###  Server tools
+### Server tools
 
 Server tools run on Anthropic's infrastructure, with no handler code in your application. See [Server tools](agents-and-tools/tool-use/server-tools.md) for the mechanics they share.
 
@@ -209,7 +209,7 @@ Work with thousands of tools by discovering and loading them on demand.
 
 Connect to remote MCP servers from the Messages API without a separate MCP client.
 
-##  Pricing
+## Pricing
 
 Tool use requests are priced based on:
 
@@ -251,7 +251,7 @@ When you send a tool use prompt, like any other API request, the response includ
 
 Some server tools add usage-based charges on top of tokens: see [Web search tool](agents-and-tools/tool-use/web-search-tool.md) and [Code execution tool](agents-and-tools/tool-use/code-execution-tool.md) for their rates.
 
-##  Next steps
+## Next steps
 
 [How tool use works](agents-and-tools/tool-use/how-tool-use-works.md)
 

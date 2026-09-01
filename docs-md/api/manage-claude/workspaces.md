@@ -6,7 +6,7 @@
 
 Workspaces provide a way to organize your API usage within an organization. Use workspaces to separate different projects, environments, or teams while maintaining centralized billing and administration.
 
-##  How workspaces work
+## How workspaces work
 
 Every organization has a **Default Workspace** that cannot be renamed, archived, or deleted. When you create additional workspaces, you can assign members, service accounts, API keys, and resource limits to each one.
 
@@ -17,7 +17,7 @@ Key characteristics:
 - **Default Workspace** has a `wrkspc_` ID like any other workspace (returned in the [`anthropic-workspace-id` response header](#identify-the-workspace-behind-an-api-response) and accepted by [Get Workspace](api/admin/workspaces/retrieve.md)), but it doesn't appear in [List Workspaces](api/admin/workspaces/list.md) results, and API keys, usage reports, and cost reports show `null` for its `workspace_id`, as do all-workspaces API keys (an API key's `scope` field tells them apart; for a key bound to the Default Workspace it carries the real ID)
 - **API keys** can be scoped to a single workspace. In this case, they can only access resources within that workspace. Some API keys can be granted permissions across multiple workspaces, and provide a [workspace ID header](manage-claude/authentication.md) to access resources within that workspace
 
-###  Claude Code workspace
+### Claude Code workspace
 
 When a member of your organization first signs in to [Claude Code](overview.md) with their Claude Console account, Anthropic automatically creates a **Claude Code** workspace in the organization and adds that member to it. Every subsequent member who signs in to Claude Code is added the same way.
 
@@ -28,7 +28,7 @@ The Claude Code workspace keeps Claude Code traffic separate from your other API
 - Claude Code usage is rate-limited separately, and admins can cap its share of the organization's limits under [Settings > Workspaces](/settings/workspaces).
 - It is the only workspace that supports per-user monthly spend limits.
 
-##  Workspace roles and permissions
+## Workspace roles and permissions
 
 Members can have different roles in each workspace, allowing fine-grained access control.
 
@@ -40,43 +40,43 @@ Members can have different roles in each workspace, allowing fine-grained access
 | Workspace Admin | Full control over workspace settings and members |
 | Workspace Billing | View workspace billing information (inherited from organization billing role) |
 
-###  Role inheritance
+### Role inheritance
 
 - **Organization admins** automatically receive Workspace Admin access to all workspaces
 - **Organization billing members** automatically receive Workspace Billing access to all workspaces
 - **Organization users and developers** must be explicitly added to each workspace
 - **Service accounts** are added to workspaces from the service account's page in [Settings → Service accounts](/settings/service-accounts) or from the workspace's **Service accounts** tab
 
-##  Managing workspaces
+## Managing workspaces
 
-###  Using the Console
+### Using the Console
 
 Create and manage workspaces in the [Claude Console](/settings/workspaces).
 
-####  Create a workspace
+#### Create a workspace
 
 1. 1
 
-   Open workspace settings
+   ### Open workspace settings
 
    In the Claude Console, go to **Settings > Workspaces**.
 2. 2
 
-   Create a workspace
+   ### Create a workspace
 
    Click **Create workspace**.
 3. 3
 
-   Configure the workspace
+   ### Configure the workspace
 
    Enter a workspace name and select a color for visual identification.
 4. 4
 
-   Create the workspace
+   ### Create the workspace
 
    Click **Create** to finalize.
 
-####  Edit workspace details
+#### Edit workspace details
 
 To modify a workspace's name or color:
 
@@ -84,7 +84,7 @@ To modify a workspace's name or color:
 2. Click the ellipsis menu (**...**) and choose **Edit details**.
 3. Update the name or color and save your changes.
 
-####  Add members to a workspace
+#### Add members to a workspace
 
 1. Navigate to the workspace's **Members** tab.
 2. Click **Add to Workspace**.
@@ -93,14 +93,14 @@ To modify a workspace's name or color:
 
 To remove a member, click the trash icon next to their name.
 
-####  Set workspace limits
+#### Set workspace limits
 
 Each workspace's settings split these across two tabs:
 
 - **Rate limits:** On the **Rate limits** tab, set limits per model tier for requests per minute, input tokens, or output tokens
 - **Spend limits:** On the **Spend limits** tab, cap monthly spending and configure alerts when spending reaches certain thresholds
 
-####  Archive a workspace
+#### Archive a workspace
 
 To archive a workspace, click the ellipsis menu (**...**) and select **Archive**. Archiving:
 
@@ -108,7 +108,7 @@ To archive a workspace, click the ellipsis menu (**...**) and select **Archive**
 - Deactivates the workspace and archives every API key created for it
 - Cannot be undone
 
-###  Using the Admin API
+### Using the Admin API
 
 Programmatically manage workspaces using the [Admin API](manage-claude/admin-api.md).
 
@@ -163,7 +163,7 @@ print(f"archived_at: {workspace.archived_at}")
 
 For complete parameter details and response schemas, see the [Workspaces API reference](api/admin/workspaces/retrieve.md).
 
-###  Managing workspace members
+### Managing workspace members
 
 Add a member to a workspace:
 
@@ -222,7 +222,7 @@ print(f"user_id: {removed_member.user_id}")
 
 For complete parameter details, see the [Workspace Members API reference](api/admin/workspaces/members/retrieve.md).
 
-##  API keys and resource scoping
+## API keys and resource scoping
 
 Every request runs in exactly one workspace and can only access resources within that workspace. Which workspace depends on the [key type](manage-claude/authentication.md):
 
@@ -242,7 +242,7 @@ Some resources are managed differently:
 
 To look up your organization's workspace IDs, call the [List Workspaces](api/admin/workspaces/list.md) endpoint or find them in the [Claude Console](/settings/workspaces).
 
-##  Identify the workspace behind an API response
+## Identify the workspace behind an API response
 
 Claude API responses include an `anthropic-workspace-id` header alongside the `request-id` and `anthropic-organization-id` [response headers](api/overview.md). Its value is the `wrkspc_`-prefixed ID of the workspace that the request's API key or access token resolved to, including when that workspace is the Default Workspace. For example, a successful response includes headers like these:
 
@@ -292,11 +292,11 @@ With the workspace ID from a response, you can:
 - Check whether it's your Default Workspace's ID by passing it to [Get Workspace](api/admin/workspaces/retrieve.md) with an [Admin API key](manage-claude/admin-api-keys.md): the Default Workspace comes back with `"name": "Default"`, even though [List Workspaces](api/admin/workspaces/list.md) omits it
 - Open that workspace in the [Console](/settings/workspaces) to find the request's resources, such as sessions, files, message batches, and skills
 
-##  Workspace limits
+## Workspace limits
 
 You can set custom spend and rate limits for each workspace to protect against overuse and ensure fair resource distribution.
 
-###  Setting workspace limits
+### Setting workspace limits
 
 You can set workspace limits lower than (but not higher than) your organization's limits:
 
@@ -305,7 +305,7 @@ You can set workspace limits lower than (but not higher than) your organization'
 
 For detailed information on rate limits and how they work, see [Rate limits](api/rate-limits.md). You can also read your current organization and workspace rate limits programmatically with the [Rate Limits API](manage-claude/rate-limits-api.md).
 
-##  Usage and cost tracking
+## Usage and cost tracking
 
 Track usage and costs by workspace using the [Usage and Cost API](manage-claude/usage-cost-api.md):
 
@@ -326,9 +326,9 @@ bucket_width=1d" \
 
 Usage and costs attributed to the Default Workspace have a `null` value for `workspace_id`.
 
-##  Common use cases
+## Common use cases
 
-###  Environment separation
+### Environment separation
 
 Create separate workspaces for development, staging, and production:
 
@@ -338,7 +338,7 @@ Create separate workspaces for development, staging, and production:
 | Staging | Pre-production testing with production-like limits |
 | Production | Live traffic with full rate limits and monitoring |
 
-###  Team or department isolation
+### Team or department isolation
 
 Assign workspaces to different teams for cost allocation and access control:
 
@@ -346,39 +346,39 @@ Assign workspaces to different teams for cost allocation and access control:
 - **Data science team** with their own API keys
 - **Support team** with limited access for customer tools
 
-###  Project-based organization
+### Project-based organization
 
 Create workspaces for specific projects or products to track usage and costs separately.
 
-##  Best practices
+## Best practices
 
 1. 1
 
-   Plan your workspace structure
+   ### Plan your workspace structure
 
    Consider how you'll organize workspaces before creating them. Think about billing, access control, and usage tracking needs.
 2. 2
 
-   Use meaningful names
+   ### Use meaningful names
 
    Name workspaces clearly to indicate their purpose (for example, "Production - Customer Chatbot" or "Dev - Internal Tools").
 3. 3
 
-   Set appropriate limits
+   ### Set appropriate limits
 
    Configure spend and rate limits to prevent unexpected costs and ensure fair resource distribution.
 4. 4
 
-   Audit access regularly
+   ### Audit access regularly
 
    Review workspace membership periodically to ensure only appropriate users have access.
 5. 5
 
-   Monitor usage
+   ### Monitor usage
 
    Use the [Usage and Cost API](manage-claude/usage-cost-api.md) to track workspace-level consumption.
 
-##  FAQ
+## FAQ
 
 ### What's the Default Workspace?
 
@@ -396,7 +396,7 @@ Create workspaces for specific projects or products to track usage and costs sep
 
 ### What happens to API keys when a user is removed from a workspace?
 
-##  See also
+## See also
 
 - [Admin API](manage-claude/admin-api.md)
 - [Admin API reference](api/admin.md)

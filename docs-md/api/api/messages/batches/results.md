@@ -18,7 +18,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
 ##### Path parameters
 
-message\_batch\_id: string
+message\_batch\_id: string
 
 ID of the Message Batch.
 
@@ -26,13 +26,13 @@ ID of the Message Batch.
 
 
 
-MessageBatchIndividualResponse object{ custom\_id, result }
+MessageBatchIndividualResponse object{ custom\_id, result }
 
 This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
 
 
-custom\_id: string
+custom\_id: string
 
 Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
 
@@ -40,7 +40,7 @@ Must be unique for each request within the Message Batch.
 
 
 
-result: [MessageBatchResult](api/http/messages/batches.md)
+result: [MessageBatchResult](api/http/messages/batches.md)
 
 Processing result for this request.
 
@@ -48,13 +48,9 @@ Contains a Message output if processing was successful, an error response if pro
 
 One of the following:
 
-
+Retrieve Message Batch results
 
-### Retrieve Message Batch results
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \

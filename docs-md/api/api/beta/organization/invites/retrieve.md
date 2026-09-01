@@ -14,7 +14,7 @@ Retrieve an invite by ID.
 
 ##### Path parameters
 
-invite\_id: string
+invite\_id: string
 
 ID of the Invite.
 
@@ -22,15 +22,11 @@ ID of the Invite.
 
 
 
-BetaOrganizationInvite object{ id, accepted\_at, email, 6 more }
+BetaOrganizationInvite object{ id, accepted\_at, email, 6 more }
 
-
+Get Invite
 
-### Get Invite
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \

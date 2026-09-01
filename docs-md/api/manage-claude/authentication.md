@@ -14,11 +14,11 @@ The Claude API supports three ways to authenticate requests:
 
 API keys and Workload Identity Federation grant the same access to Claude API endpoints. Choose API keys to get started quickly: a personal key for your own development, or a service account key for anything shared. Move to Workload Identity Federation when your workload already has a platform-issued identity you can federate. Use App Attest for iOS and macOS apps you distribute to end users.
 
-##  API keys
+## API keys
 
 API keys are static secrets that you generate in the Claude Console and send on every request in the `x-api-key` header.
 
-###  Key types
+### Key types
 
 When you create a key, you choose its type, which determines what the key can do, where it works, and when it stops working:
 
@@ -34,7 +34,7 @@ Use a personal key for your own development and scripts. A shared personal key a
 
 Workspace API keys still work but should be considered legacy; identity-backed keys or [Workload Identity Federation](manage-claude/workload-identity-federation.md) are preferred. To migrate, see [Replacing workspace API keys](#replacing-workspace-api-keys).
 
-###  Create and use a key
+### Create and use a key
 
 - **Create a key:** Go to [Settings → API keys](https://platform.claude.com/settings/keys) in the Claude Console and click **Create key**. Name the key and choose an [expiration](#key-expiration). Set **Linked account** to yourself for a personal key, or to a service account for a key shared across multiple users. You can also scope the key to a specific workspace, which lets you skip setting a workspace ID manually in future requests.
 - **Use the key:** Set the `x-api-key` header on direct HTTP requests, or set the `ANTHROPIC_API_KEY` environment variable and the [client SDKs](cli-sdks-libraries/overview.md) pick it up automatically.
@@ -60,7 +60,7 @@ client = Anthropic(api_key="my-anthropic-api-key")
 client = Anthropic()
 ```
 
-###  Select a workspace
+### Select a workspace
 
 API keys that are created for a specific workspace only work in that workspace, and API requests using these keys can omit the workspace ID.
 
@@ -114,7 +114,7 @@ A header value that isn't a valid workspace ID returns a 400 `invalid_request_er
 
 Workload Identity Federation selects a workspace at token exchange instead; see the [WIF reference](manage-claude/wif-reference.md) for details.
 
-###  Key expiration
+### Key expiration
 
 When you create an API key from the [API keys page](https://platform.claude.com/settings/keys) in the Claude Console, you choose an expiration: a preset (3 hours, 1 day, 7 days, or 30 days), a custom duration, or **Never** for keys you store in a secrets manager and rotate yourself. If your organization has a maximum expiration policy, the Console limits presets and custom durations to the policy maximum, and **Never** is unavailable. Existing keys keep their current behavior; expiration is set at creation time and cannot be changed afterward. The same expiration choice applies when you [create an Admin API key](manage-claude/admin-api-keys.md) in the Claude Console.
 
@@ -126,7 +126,7 @@ The Console API keys table shows each key's expiration, and the Admin API report
 
 Expiration limits the lifetime of a leaked credential, but it is not a substitute for secret hygiene. Regardless of expiration, store keys in a secrets manager and disable or delete any key you suspect has leaked.
 
-###  Replacing workspace API keys
+### Replacing workspace API keys
 
 If you have a workspace key, you may want to replace it with [Workload Identity Federation](manage-claude/wif-reference.md) or a personal or service account key. This provides better security and observability.
 
@@ -140,7 +140,7 @@ To replace a workspace key with a personal or service account key:
 4. **Deploy the new key.** Replace the old key wherever the integration reads it, typically the `ANTHROPIC_API_KEY` environment variable or a secrets manager entry. For a multi-workspace key, also send the `anthropic-workspace-id` header as shown in [Select a workspace](#select-a-workspace).
 5. **Delete the old key.** Confirm that requests succeed, then delete the workspace key on the [API keys page](https://platform.claude.com/settings/keys).
 
-##  Workload Identity Federation
+## Workload Identity Federation
 
 Workload Identity Federation (WIF) lets a workload authenticate with a short-lived identity token issued by an identity provider (IdP) you already trust, such as AWS IAM, Google Cloud, or any standards-compliant OIDC issuer (such as GitHub Actions, Kubernetes service accounts, SPIFFE, Microsoft Entra ID, or Okta). The workload exchanges its IdP-issued JWT at `POST /v1/oauth/token` for a short-lived Claude API access token, and the SDK refreshes that token automatically before it expires. There is no `sk-ant-api...` string to mint, distribute, or rotate.
 
@@ -148,13 +148,13 @@ Federation removes long-lived Claude API keys from your environment, which shrin
 
 To configure federation, you create three resources in the Claude Console (a service account, a federation issuer, and a federation rule) and then point your SDK at the rule. See [Workload Identity Federation](manage-claude/workload-identity-federation.md) for the full setup walkthrough.
 
-##  App Attest
+## App Attest
 
 App Attest authenticates iOS and macOS apps that call the Claude API directly from the device. Each installation proves that it is a genuine, unmodified build of an app you registered in the Claude Console, using Apple's App Attest service. Anthropic then issues the device a short-lived access token that bills usage to your workspace. Tokens are scoped to your workspace, expire after one hour, and authorize only [Messages API](api/messages/create.md) calls.
 
 To register your app and get a client ID, see [App Attest for iOS and macOS apps](manage-claude/app-attest.md).
 
-##  Next steps
+## Next steps
 
 
 

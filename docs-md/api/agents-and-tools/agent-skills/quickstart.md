@@ -6,13 +6,13 @@
 
 This tutorial shows you how to use Agent Skills to create a PowerPoint presentation. You'll learn how to enable Skills, make a request, and access the generated file.
 
-##  Prerequisites
+## Prerequisites
 
 - A [Claude API key](/settings/keys) or a logged-in [ant CLI](cli-sdks-libraries/cli/authentication.md)
 - A [client SDK](cli-sdks-libraries/overview.md) for your language, or `curl` and `jq`
 - Basic familiarity with making API requests
 
-##  Agent Skills overview
+## Agent Skills overview
 
 Pre-built Agent Skills extend Claude's capabilities with specialized expertise for tasks such as creating documents, analyzing data, and processing files. Anthropic provides the following pre-built Agent Skills in the API:
 
@@ -21,7 +21,7 @@ Pre-built Agent Skills extend Claude's capabilities with specialized expertise f
 - **Word (docx):** Create and edit documents
 - **PDF (pdf):** Generate PDF documents
 
-##  Step 1: List available Skills
+## Step 1: List available Skills
 
 First, check what Skills are available. Use the Skills API to list all Anthropic-managed Skills. Each language tab is an excerpt from one continuous script, with any imports and client setup at the top:
 
@@ -38,7 +38,7 @@ You see the following Skills: `pptx`, `xlsx`, `docx`, and `pdf`.
 
 This API returns each Skill's metadata: its name and description. Claude loads this metadata at startup to determine which Skills are available. This is the first level of **progressive disclosure**, where Claude discovers Skills without loading their full instructions yet.
 
-##  Step 2: Create a presentation
+## Step 2: Create a presentation
 
 Use the PowerPoint Skill to create a presentation about renewable energy. Specify Skills using the `container` parameter in the Messages API:
 
@@ -77,7 +77,7 @@ The request includes the following parts:
 
 When you make this request, Claude automatically matches your task to the relevant Skill. Because you asked for a presentation, Claude determines the PowerPoint Skill is relevant and loads its full instructions: the second level of progressive disclosure. Then Claude runs the Skill's code to create your presentation.
 
-##  Step 3: Download the created file
+## Step 3: Download the created file
 
 The presentation was created in the code execution container and saved as a file. The Step 2 `response` includes a file reference with a file ID. Extract the file ID and download the file with the Files API. The example saves it to your system temp directory:
 
@@ -104,11 +104,11 @@ if file_id:
     print(f"Presentation saved to {output_path}")
 ```
 
-##  Try more examples
+## Try more examples
 
 Try these variations:
 
-###  Create a spreadsheet
+### Create a spreadsheet
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -131,7 +131,7 @@ response = client.messages.create(
 )
 ```
 
-###  Create a Word document
+### Create a Word document
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -154,7 +154,7 @@ response = client.messages.create(
 )
 ```
 
-###  Generate a PDF
+### Generate a PDF
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -177,7 +177,7 @@ response = client.messages.create(
 )
 ```
 
-##  Next steps
+## Next steps
 
 
 

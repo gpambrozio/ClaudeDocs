@@ -30,11 +30,11 @@ retrieve the next page, and stop when `next_page` is null.
 
 
 
-created\_at: optional object{ gt, gte, lt, lte }
+created\_at: optional object{ gt, gte, lt, lte }
 
 
 
-gt: optional string
+gt: optional string
 
 Filter remote sessions created after this time (RFC 3339 format)
 
@@ -42,7 +42,7 @@ formatdate-time
 
 
 
-gte: optional string
+gte: optional string
 
 Filter remote sessions created at or after this time (RFC 3339 format)
 
@@ -50,7 +50,7 @@ formatdate-time
 
 
 
-lt: optional string
+lt: optional string
 
 Filter remote sessions created before this time (RFC 3339 format)
 
@@ -58,7 +58,7 @@ formatdate-time
 
 
 
-lte: optional string
+lte: optional string
 
 Filter remote sessions created at or before this time (RFC 3339 format)
 
@@ -66,7 +66,7 @@ formatdate-time
 
 
 
-limit: optional number
+limit: optional number
 
 Maximum results (default: 100, max: 500)
 
@@ -78,19 +78,19 @@ minimum1
 
 
 
-organization\_ids: optional array of string
+organization\_ids: optional array of string
 
 Filter to specific child organization identifiers. Omit to enumerate every child organization the key may read.
 
 maxItems500
 
-page: optional string
+page: optional string
 
 Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
 
 
-user\_ids: optional array of string
+user\_ids: optional array of string
 
 Filter to sessions owned by specific users (max 10 per request). Agent-owned sessions are excluded when this filter is set.
 
@@ -98,63 +98,63 @@ maxItems10
 
 ##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### Returns
 
 
 
-data: array of object{ id, agent\_id, claude\_project\_id, 7 more }
+data: array of object{ id, agent\_id, claude\_project\_id, 7 more }
 
-id: string
+id: string
 
 Remote session identifier
 
-agent\_id: string or null
+agent\_id: string or null
 
 Identifier of the automated agent that owns the session. Null for user-owned sessions. At most one of `user` and `agent_id` is set.
 
-claude\_project\_id: string or null
+claude\_project\_id: string or null
 
 ID of the project the session is bound to. Null when the session has no project binding.
 
 
 
-created\_at: string
+created\_at: string
 
 When the session was created (RFC 3339, UTC)
 
 formatdate-time
 
-organization\_uuid: string
+organization\_uuid: string
 
 UUID of the organization the session belongs to
 
-product\_surface: string or null
+product\_surface: string or null
 
 The Claude product the session was created from. Currently `cowork_remote`, for Cowork sessions started on claude.ai web or mobile. More values will appear as other surfaces launch, so treat any unrecognized value as an unclassified surface rather than an error. Null for sessions created before this field was recorded, for surfaces that do not stamp it, and for unrecognized tag values.
 
 
 
-started\_by\_user: object{ id, email\_address } or null
+started\_by\_user: object{ id, email\_address } or null
 
 A user associated with a remote session.
 
-id: string
+id: string
 
 User identifier
 
-email\_address: string or null
+email\_address: string or null
 
 User's email address. Null when the user is no longer a member of an organization the key may read — `id` remains set so attribution is preserved. The messages endpoint does not resolve email addresses; this field is always null there.
 
-status: string
+status: string
 
 Session lifecycle state. One of `active`, `paused`, `archived`, or `failed` — the lifecycle states the owning product surface exposes — plus `pending`, a brief transient state that resolves before any transcript content exists. The list endpoint includes `pending`; the messages endpoint returns 404 for it. Deleted sessions are not returned on either endpoint. Treat unrecognized values as an unknown state rather than an error.
 
 
 
-updated\_at: string
+updated\_at: string
 
 When the session was last modified (RFC 3339, UTC)
 
@@ -162,29 +162,25 @@ formatdate-time
 
 
 
-user: object{ id, email\_address } or null
+user: object{ id, email\_address } or null
 
 A user associated with a remote session.
 
-id: string
+id: string
 
 User identifier
 
-email\_address: string or null
+email\_address: string or null
 
 User's email address. Null when the user is no longer a member of an organization the key may read — `id` remains set so attribution is preserved. The messages endpoint does not resolve email addresses; this field is always null there.
 
-next\_page: string or null
+next\_page: string or null
 
 Opaque page token; pass as `page` to retrieve the next page. Null when no rows exist after this page. Treat this value as opaque; do not parse or store it long-term, as the format may change without notice.
 
-
+List remote sessions
 
-### List remote sessions
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/compliance/apps/sessions/remote \

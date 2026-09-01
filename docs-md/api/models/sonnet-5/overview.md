@@ -1,10 +1,10 @@
-##  Overview
+## Overview
 
 Claude Sonnet 5 is the next generation of Anthropic's Sonnet model family. It is a drop-in upgrade for Claude Sonnet 4.6 with three behavior changes: [adaptive thinking](build-with-claude/thinking.md) is on by default, manual extended thinking now returns a 400 error (it was deprecated on Claude Sonnet 4.6), and setting sampling parameters (`temperature`, `top_p`, `top_k`) to non-default values returns a 400 error. This page summarizes everything new at launch, including a new tokenizer.
 
 [What's new in Claude Sonnet 5](models/sonnet-5/whats-new-sonnet-5.md)
 
-##  How it compares
+## How it compares
 
 | Model | Context | Max output | Price / MTok | Latency | Thinking | Default effort | Knowledge cutoff |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -13,7 +13,7 @@ Claude Sonnet 5 is the next generation of Anthropic's Sonnet model family. It is
 | Claude Sonnet 5This model | 1M | 128K | $2 / $10 | Fast | Adaptive | `high` | Jan 2026 |
 | [Claude Haiku 4.5](models/haiku-4-5/overview.md) | 200K | 64K | $1 / $5 | Fastest | Extended | — | Feb 2025 |
 
-##  Specifications
+## Specifications
 
 ### Model IDs
 
@@ -98,13 +98,13 @@ Retirement
 Platforms
 :   Claude API[Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)[Google Cloud](build-with-claude/claude-on-vertex-ai.md)[Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)[Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)
 
-##  Good to know
+## Good to know
 
 - On the [Message Batches API](build-with-claude/batch-processing.md), Claude Sonnet 5 supports up to 300k output tokens with the `output-300k-2026-03-24` beta header.
 - Setting `temperature`, `top_p`, or `top_k` to non-default values returns a 400 error. See [What's new in Claude Sonnet 5](models/sonnet-5/whats-new-sonnet-5.md).
 - Query limits and capabilities programmatically with the [Models API](api/models/list.md).
 
-##  Resources
+## Resources
 
 
 
@@ -130,7 +130,7 @@ Effort defaults to `high` on the Claude API and Claude Code. Choose a level per 
 
 1M tokens by default. How the window is counted and managed.
 
-##  Reference
+## Reference
 
 
 

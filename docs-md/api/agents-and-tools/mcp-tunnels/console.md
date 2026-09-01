@@ -6,7 +6,7 @@
 
 This page covers the Console side of an MCP tunnels deployment: creating a tunnel, registering your CA certificate, retrieving the tunnel token, and attaching the [upstream MCP servers](agents-and-tools/mcp-tunnels/concepts.md) to an agent. [Deploy MCP tunnels with Helm](agents-and-tools/mcp-tunnels/deploy-helm.md) and [Deploy MCP tunnels with Docker Compose](agents-and-tools/mcp-tunnels/deploy-compose.md) cover running the [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) inside your network.
 
-##  Prerequisites
+## Prerequisites
 
 - **One or more MCP servers** running in your private network. The tunnel routes traffic to them; it does not host them. See [Remote MCP servers](agents-and-tools/remote-mcp-servers.md) for examples you can deploy.
 - **A Console role with the Manage tunnels permission**, so you can create and archive tunnels, rotate the token, and manage certificates. Organization admins and owners have it by default; custom roles and per-account grants can also include it. Roles without it have read-only access to the **MCP tunnels** page and tunnel details.
@@ -14,21 +14,21 @@ This page covers the Console side of an MCP tunnels deployment: creating a tunne
   - **[Programmatic access](agents-and-tools/mcp-tunnels/concepts.md) (recommended).** Set up [Workload Identity Federation](manage-claude/workload-identity-federation.md) during tunnel creation so your stack mints short-lived API tokens from your identity provider, fetches the tunnel token, and generates and registers a CA certificate automatically. Requires permission to manage federation rules, a registered OIDC issuer, and a federation rule with the `workspace:manage_tunnels` scope.
   - **[Manual](agents-and-tools/mcp-tunnels/concepts.md).** Skip programmatic access. After creating the tunnel, [get the tunnel token](#get-the-connection-details), generate and [register a CA certificate](#add-a-ca-certificate) yourself, and supply the token and your server certificate to your tunnel stack as secrets.
 
-##  Create a tunnel
+## Create a tunnel
 
 1. 1
 
-   Open the MCP tunnels page
+   ### Open the MCP tunnels page
 
    In the Console sidebar, go to **Manage > MCP tunnels**. Tunnels are workspace-scoped; the new tunnel belongs to the workspace currently selected in the Console, so switch workspaces first if you want it elsewhere.
 2. 2
 
-   Name the tunnel
+   ### Name the tunnel
 
    Click **New tunnel** and enter a name in the **Create tunnel** dialog. The name is required and identifies the tunnel in the list, on the detail page, and in the agent MCP server picker. A domain of the form `abcd1234.tunnel.anthropic.com` is assigned automatically.
 3. 3
 
-   Optionally set up programmatic access
+   ### Optionally set up programmatic access
 
    If your role can manage federation rules, a **Set up programmatic access** toggle appears (off by default). If not, the Console shows a notice in its place and your tunnel stack uses the manual flow instead. The rest of the create flow is the same either way.
 
@@ -41,12 +41,12 @@ This page covers the Console side of an MCP tunnels deployment: creating a tunne
    Skipping this step is fully supported; both deploy guides have a **Without programmatic access** tab.
 4. 4
 
-   Create the tunnel
+   ### Create the tunnel
 
    Click **Create tunnel**. The Console provisions the tunnel and opens the detail page.
 5. 5
 
-   Record the deployment identifiers
+   ### Record the deployment identifiers
 
    Both deploy paths need:
 
@@ -64,7 +64,7 @@ This page covers the Console side of an MCP tunnels deployment: creating a tunne
 
 Your organization can have up to 10 active tunnels. Creating a tunnel does not establish any connectivity; that happens once your stack dials in with the tunnel token and a CA certificate is registered.
 
-##  Get the connection details
+## Get the connection details
 
 Open the tunnel. The detail page shows a **Connection** section with the domain and token and a **Certificates** section.
 
@@ -73,29 +73,29 @@ Open the tunnel. The detail page shows a **Connection** section with the domain 
 | **Domain** | Copy the assigned `abcd1234.tunnel.anthropic.com` value. Your proxy's routes are subdomains of this domain. |
 | **Token** | Click the eye icon (**Show token**) to fetch the tunnel token, then use the copy icon to copy it into your tunnel stack's secret store. Click **Rotate token** to invalidate the current token and issue a new one. |
 
-##  Add a CA certificate
+## Add a CA certificate
 
 Anthropic verifies [inner TLS](agents-and-tools/mcp-tunnels/concepts.md) to your [proxy](agents-and-tools/mcp-tunnels/concepts.md) against the CA certificates you register on the tunnel. A tunnel with no active certificates cannot accept connections, and does not appear in the agent MCP server picker until one is registered.
 
 1. 1
 
-   Find the Certificates section
+   ### Find the Certificates section
 
    On the tunnel's detail page, scroll to the **Certificates** section and click **Add certificate**.
 2. 2
 
-   Provide the certificate
+   ### Provide the certificate
 
    Click **Choose file** to select a `.pem`, `.crt`, or `.cer` file, drag the file onto the text area, or paste the PEM block directly. The modal rejects private-key material and content that isn't a `-----BEGIN CERTIFICATE-----` block. The file must be 8 kB or smaller.
 3. 3
 
-   Add the certificate
+   ### Add the certificate
 
    Click **Add certificate**. The fingerprint and expiry appear in the certificate list, and the slot count on the section header increments.
 
 A tunnel holds up to two active certificates so you can rotate without downtime: register the new certificate alongside the old one, redeploy your proxy with the new key pair, confirm traffic is flowing, then click **Revoke** on the old certificate's row. Revoked certificates remain visible in the list with a **Revoked** badge.
 
-##  Deploy the tunnel stack
+## Deploy the tunnel stack
 
 The tunnel exists in the Console, but no traffic flows until the tunnel stack is running inside your network and dialed in with the tunnel token. Follow one of the deploy guides:
 
@@ -111,38 +111,38 @@ Run the tunnel stack on a single host. Both programmatic-access and manual flows
 
 Run the tunnel stack on a Kubernetes cluster. Both programmatic-access and manual flows.
 
-##  Use the tunnel in an agent
+## Use the tunnel in an agent
 
 Once your stack is running and has one or more MCP servers configured, attach an upstream MCP server to a Managed Agent session. To call the same servers from the Messages API instead, see [Use the tunneled MCP servers](agents-and-tools/mcp-tunnels/overview.md).
 
 1. 1
 
-   Open the New session modal
+   ### Open the New session modal
 
    Go to **Managed Agents > Sessions** and click **New session**.
 2. 2
 
-   Define an inline agent
+   ### Define an inline agent
 
    In the agent picker, choose **Create new agent** so you can edit the MCP server list directly.
 3. 3
 
-   Add the MCP server
+   ### Add the MCP server
 
    Click **+ MCP Server** and open the dropdown. Tunnels created in the current workspace appear at the top of the list, above the public connector catalog. Select the tunnel that fronts the server you want to reach.
 4. 4
 
-   Supply the routing
+   ### Supply the routing
 
    The card shows two optional fields: **Subdomain** (prefixed to the tunnel domain) and **Path** (appended after it). Fill in one or both, depending on how your proxy's routes are configured. The **Resolves to** line shows the full MCP server URL that the agent connects to.
 
-##  Archive a tunnel
+## Archive a tunnel
 
 Archiving immediately stops the tunnel from accepting connections and is permanent.
 
 In the **MCP tunnels** list, open the row menu for the tunnel and choose **Archive**. Archived tunnels remain visible when you filter the list by **Archived** or **All**.
 
-##  Next steps
+## Next steps
 
 
 

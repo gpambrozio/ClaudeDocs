@@ -6,7 +6,7 @@
 
 Claude Platform on AWS uses AWS IAM for access control. Every API route maps to an IAM action in the `aws-external-anthropic` namespace. This page lists all actions, the routes each action authorizes, and the managed policies available for common access patterns. For platform setup and authentication, see [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md).
 
-##  Service details
+## Service details
 
 | Attribute | Value |
 | --- | --- |
@@ -23,18 +23,18 @@ arn:aws:aws-external-anthropic:{region}:{account-id}:workspace/{workspace-id}
 
 The ARN region is always populated and matches the region the workspace is bound to. The resource segment is the tagged workspace ID (`wrkspc_...`), the same value you pass in the `anthropic-workspace-id` header.
 
-##  Actions
+## Actions
 
 The service defines 71 actions. Actions follow the AWS `VerbNoun` convention and use verb discipline so that `Get*` and `List*` wildcards produce a clean read-only boundary.
 
-###  Inference
+### Inference
 
 | Action | Routes authorized |
 | --- | --- |
 | `CreateInference` | `POST /v1/messages` |
 | `CountTokens` | `POST /v1/messages/count_tokens` |
 
-###  Batch processing
+### Batch processing
 
 | Action | Routes authorized |
 | --- | --- |
@@ -44,14 +44,14 @@ The service defines 71 actions. Actions follow the AWS `VerbNoun` convention and
 | `CancelBatchInference` | `POST /v1/messages/batches/{id}/cancel` |
 | `DeleteBatchInference` | `DELETE /v1/messages/batches/{id}` |
 
-###  Models
+### Models
 
 | Action | Routes authorized |
 | --- | --- |
 | `GetModel` | `GET /v1/models/{id}` |
 | `ListModels` | `GET /v1/models` |
 
-###  Files
+### Files
 
 | Action | Routes authorized |
 | --- | --- |
@@ -60,7 +60,7 @@ The service defines 71 actions. Actions follow the AWS `VerbNoun` convention and
 | `ListFiles` | `GET /v1/files` |
 | `DeleteFile` | `DELETE /v1/files/{id}` |
 
-###  Skills
+### Skills
 
 | Action | Routes authorized |
 | --- | --- |
@@ -70,7 +70,7 @@ The service defines 71 actions. Actions follow the AWS `VerbNoun` convention and
 | `UpdateSkill` | `POST /v1/skills/{id}/versions` `DELETE /v1/skills/{id}/versions/{version}` |
 | `DeleteSkill` | `DELETE /v1/skills/{id}` |
 
-###  Agents
+### Agents
 
 | Action | Routes authorized |
 | --- | --- |
@@ -80,7 +80,7 @@ The service defines 71 actions. Actions follow the AWS `VerbNoun` convention and
 | `UpdateAgent` | `POST /v1/agents/{id}` |
 | `ArchiveAgent` | `POST /v1/agents/{id}/archive` |
 
-###  Sessions
+### Sessions
 
 | Action | Routes authorized |
 | --- | --- |
@@ -91,7 +91,7 @@ The service defines 71 actions. Actions follow the AWS `VerbNoun` convention and
 | `ArchiveSession` | `POST /v1/sessions/{id}/archive` |
 | `DeleteSession` | `DELETE /v1/sessions/{id}` |
 
-###  Environments
+### Environments
 
 | Action | Routes authorized |
 | --- | --- |
@@ -103,7 +103,7 @@ The service defines 71 actions. Actions follow the AWS `VerbNoun` convention and
 | `DeleteEnvironment` | `DELETE /v1/environments/{id}` |
 | `ProcessEnvironmentWork` | `GET /v1/environments/{id}/work/poll` `POST /v1/environments/{id}/work/{work_id}` `POST /v1/environments/{id}/work/{work_id}/ack` `POST /v1/environments/{id}/work/{work_id}/heartbeat` `POST /v1/environments/{id}/work/{work_id}/stop` |
 
-###  Vaults
+### Vaults
 
 | Action | Routes authorized |
 | --- | --- |
@@ -114,7 +114,7 @@ The service defines 71 actions. Actions follow the AWS `VerbNoun` convention and
 | `ArchiveVault` | `POST /v1/vaults/{id}/archive` |
 | `DeleteVault` | `DELETE /v1/vaults/{id}` |
 
-###  Memory stores
+### Memory stores
 
 | Action | Routes authorized |
 | --- | --- |
@@ -125,7 +125,7 @@ The service defines 71 actions. Actions follow the AWS `VerbNoun` convention and
 | `ArchiveMemoryStore` | `POST /v1/memory_stores/{id}/archive` |
 | `DeleteMemoryStore` | `DELETE /v1/memory_stores/{id}` |
 
-###  Webhooks
+### Webhooks
 
 | Action | Routes authorized |
 | --- | --- |
@@ -136,7 +136,7 @@ The service defines 71 actions. Actions follow the AWS `VerbNoun` convention and
 | `DeleteWebhook` | `DELETE /v1/webhooks/{id}` |
 | `RotateWebhookSecret` | `POST /v1/webhooks/{id}/regenerate_signing_secret` |
 
-###  User profiles
+### User profiles
 
 | Action | Routes authorized |
 | --- | --- |
@@ -145,7 +145,7 @@ The service defines 71 actions. Actions follow the AWS `VerbNoun` convention and
 | `ListUserProfiles` | `GET /v1/user_profiles` |
 | `UpdateUserProfile` | `POST /v1/user_profiles/{id}` |
 
-###  Workspaces
+### Workspaces
 
 | Action | Routes authorized |
 | --- | --- |
@@ -155,7 +155,7 @@ The service defines 71 actions. Actions follow the AWS `VerbNoun` convention and
 | `UpdateWorkspace` | `POST /v1/organizations/workspaces/{id}` |
 | `ArchiveWorkspace` | `POST /v1/organizations/workspaces/{id}/archive` |
 
-###  Encryption keys
+### Encryption keys
 
 | Action | Routes authorized |
 | --- | --- |
@@ -165,13 +165,13 @@ The service defines 71 actions. Actions follow the AWS `VerbNoun` convention and
 | `UpdateKey` | `POST /v1/organizations/external_keys/{id}` |
 | `DisableKey` | `DELETE /v1/organizations/external_keys/{id}` |
 
-###  Compliance
+### Compliance
 
 | Action | Routes authorized |
 | --- | --- |
 | `ListComplianceActivities` | `GET /v1/compliance/activities` |
 
-###  Authentication
+### Authentication
 
 | Action | Routes authorized |
 | --- | --- |
@@ -179,7 +179,7 @@ The service defines 71 actions. Actions follow the AWS `VerbNoun` convention and
 
 `CallWithBearerToken` is an authentication-layer permission that authorizes a principal to authenticate through an API key (bearer token) rather than AWS SigV4. It does not map to a route. Grant it alongside the route-mapped actions you want the API key holder to perform.
 
-###  Console access
+### Console access
 
 | Action | Routes authorized |
 | --- | --- |
@@ -187,7 +187,7 @@ The service defines 71 actions. Actions follow the AWS `VerbNoun` convention and
 
 `AssumeConsole` authorizes a principal to open the Claude Console for a Claude Platform on AWS workspace through the AWS Console federation flow. It does not map to a route. Grant it to principals who should be able to click **Open Claude Console** on the Claude Platform on AWS service page in the AWS Console. The Claude Console role (Admin or Developer) is assigned separately by your Anthropic account representative; it is not derived from the principal's IAM permissions. See [Using the Claude Console](build-with-claude/claude-platform-on-aws.md) for the sign-in flow and role descriptions.
 
-##  Route-to-action mapping
+## Route-to-action mapping
 
 The following table lists every route on Claude Platform on AWS and the IAM action required to call it. Each IAM action also authorizes requests that use the `anthropic-beta` header; beta variants of a route do not require a separate IAM action. CloudTrail classifies each action as either a Data event (high-volume, data-plane operations) or a Management event (control-plane operations). Vault and webhook actions are classified as Management events because they hold secrets (vault credentials and webhook signing secrets) and benefit from default-on audit logging. Workspace, external key, and compliance actions are also classified as Management events because they are organization-scoped control-plane operations. All other actions, including inference, batch, model, file, skill, user profile, and the remaining Claude Managed Agents actions, are classified as Data events.
 
@@ -301,7 +301,7 @@ The following table lists every route on Claude Platform on AWS and the IAM acti
 
 Routes not in this table are not available on Claude Platform on AWS. The gateway denies any route not listed here by default.
 
-##  Managed policies
+## Managed policies
 
 AWS provides five managed policies for Claude Platform on AWS. All managed policies apply to `Resource: "*"`.
 
@@ -321,9 +321,9 @@ AWS provides five managed policies for Claude Platform on AWS. All managed polic
 
 `AssumeConsole` is not included in `AnthropicReadOnlyAccess`, `AnthropicInferenceAccess`, `AnthropicLimitedAccess`, or `AnthropicSelfHostedEnvironmentAccess`. Principals who need Claude Console access require either `AnthropicFullAccess` or a custom policy that grants `aws-external-anthropic:AssumeConsole`. See [Console access](#console-access).
 
-##  Example policies
+## Example policies
 
-###  Synchronous inference on a single workspace
+### Synchronous inference on a single workspace
 
 Grants the minimal permissions for an IAM principal that runs inference against one production workspace:
 
@@ -348,7 +348,7 @@ Grants the minimal permissions for an IAM principal that runs inference against 
 
 
 
-###  Per-customer workspace isolation
+### Per-customer workspace isolation
 
 Restricts a role to a single workspace:
 
@@ -375,7 +375,7 @@ Restricts a role to a single workspace:
 
 
 
-###  Feature lockdown for a ZDR-sensitive workspace
+### Feature lockdown for a ZDR-sensitive workspace
 
 Blocks batch processing and file upload on a specific workspace while leaving synchronous inference available. Useful when a workspace handles [Zero Data Retention (ZDR)](manage-claude/api-and-data-retention.md) data that must not persist server-side. Attach this policy alongside an Allow policy such as `AnthropicInferenceAccess` or the [single-workspace example](#synchronous-inference-on-a-single-workspace); on its own, a Deny-only policy grants no permissions:
 
@@ -397,7 +397,7 @@ Blocks batch processing and file upload on a specific workspace while leaving sy
 
 
 
-###  Provisioning automation
+### Provisioning automation
 
 Grants a CI/CD role the actions needed to create and manage workspaces, without any inference permissions:
 
@@ -424,7 +424,7 @@ Grants a CI/CD role the actions needed to create and manage workspaces, without 
 
 `CreateWorkspace` and `ListWorkspaces` are account-scoped operations. Specifying a workspace ARN on these actions has no effect; use `Resource: "*"`.
 
-##  See also
+## See also
 
 - [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) for setup, authentication, and platform overview
 - [AWS IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) for IAM policy syntax and evaluation logic

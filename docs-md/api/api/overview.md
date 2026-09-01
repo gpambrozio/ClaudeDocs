@@ -6,7 +6,7 @@
 
 The Claude API is a RESTful API at `https://api.anthropic.com` that provides programmatic access to Claude models and Claude Managed Agents.
 
-##  Prerequisites
+## Prerequisites
 
 To use the Claude API, you'll need:
 
@@ -15,7 +15,7 @@ To use the Claude API, you'll need:
 
 For step-by-step setup instructions, see [Get started](get-started.md).
 
-##  Available APIs
+## Available APIs
 
 The Claude API includes the following APIs:
 
@@ -34,7 +34,7 @@ The following APIs are in beta:
 
 For the complete API reference with all endpoints, parameters, and response schemas, explore the API reference pages listed in the navigation. To access beta features, see [Beta headers](api/beta-headers.md).
 
-##  Authentication
+## Authentication
 
 For details on each authentication method and when to use it, see [Authentication](manage-claude/authentication.md). Requests to the Claude API include these headers:
 
@@ -50,11 +50,11 @@ If you are using the [Client SDKs](#client-sdks), the SDK sends the authenticati
 
 When accessing Claude through a [cloud platform](#claude-api-vs-cloud-platforms), authentication is integrated with the cloud provider's IAM system. See the platform-specific documentation for supported credential types, required headers, and authentication options.
 
-###  Getting API keys
+### Getting API keys
 
 The API is made available through the web [Console](https://platform.claude.com/). You can use [playground](https://platform.claude.com/playground) to try out the API in the browser and then generate API keys in [Account Settings](https://platform.claude.com/settings/keys). You choose each key's type (see [Key types](manage-claude/authentication.md)) and its [expiration](manage-claude/authentication.md) when you create it. Use [workspaces](https://platform.claude.com/settings/workspaces) to separate environments and [control spend](api/rate-limits.md) by use case.
 
-##  Client SDKs
+## Client SDKs
 
 Anthropic provides official SDKs that simplify API integration by handling authentication, request formatting, error handling, and more.
 
@@ -68,17 +68,17 @@ Anthropic provides official SDKs that simplify API integration by handling authe
 
 For a list of client SDKs, see [Client SDKs](cli-sdks-libraries/overview.md).
 
-##  Claude API vs cloud platforms
+## Claude API vs cloud platforms
 
 Claude is available through the direct Claude API and through cloud platforms. Choose based on your infrastructure, feature availability, compliance requirements, and pricing preferences.
 
-###  Claude API
+### Claude API
 
 - **Direct access** to the latest models and features
 - **Anthropic billing and support**
 - **Best for:** New integrations, full feature access, direct relationship with Anthropic
 
-###  Cloud platform APIs
+### Cloud platform APIs
 
 Access Claude through AWS, Google Cloud, or Microsoft Azure:
 
@@ -93,9 +93,9 @@ Access Claude through AWS, Google Cloud, or Microsoft Azure:
 | Claude Platform on AWS | AWS (Anthropic-operated) | [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) |
 | Microsoft Foundry | Microsoft Azure (Anthropic-operated) | [Claude in Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) |
 
-##  Request and response format
+## Request and response format
 
-###  Request size limits
+### Request size limits
 
 | Endpoint | Maximum request size |
 | --- | --- |
@@ -106,7 +106,7 @@ Access Claude through AWS, Google Cloud, or Microsoft Azure:
 
 If you exceed these limits, you'll receive a 413 `request_too_large` error.
 
-###  Response headers
+### Response headers
 
 The Claude API includes the following headers in its responses:
 
@@ -118,7 +118,7 @@ The Claude API includes the following headers in its responses:
 
 For the rate limit headers, see [Response headers](api/rate-limits.md) in Rate limits. For examples that read a response header by name with each SDK, see [Identify the workspace behind an API response](manage-claude/workspaces.md).
 
-##  Pagination
+## Pagination
 
 List endpoints return results in pages. Most newer list endpoints use the `page` and `next_page` cursor scheme described in this section. Some use a different scheme; see the note at the end of this section. Use the `limit` query parameter to control the page size and the `page` query parameter to fetch an adjacent page. Each response includes a `data` array alongside cursor fields for navigating between pages.
 
@@ -134,9 +134,9 @@ To go back a page, pass `prev_page` as the `page` parameter. `prev_page` is `nul
 
 Every SDK provides an auto-paginating iterator that follows `next_page` for you. In Python and TypeScript, you get it by iterating the list result directly. The other SDKs provide the iterator through a separate method. SDK auto-pagination is forward-only; to go back a page, read `prev_page` from the response and pass it back as the `page` parameter yourself. See [client SDKs](cli-sdks-libraries/overview.md) for language-specific details.
 
-##  Rate limits and availability
+## Rate limits and availability
 
-###  Rate limits
+### Rate limits
 
 The API enforces rate limits and spend limits to prevent misuse and manage capacity. Limits are organized into usage tiers; your organization is placed on a tier automatically and can move to a higher tier over time. Each tier has:
 
@@ -147,11 +147,11 @@ You can view your rate limits on the [Rate limits](/settings/limits) page and yo
 
 For detailed information about limits, tiers, and the token bucket algorithm used for rate limiting, see [Rate limits](api/rate-limits.md).
 
-###  Availability
+### Availability
 
 The Claude API is available in [many countries and regions](api/supported-regions.md) worldwide. Check the supported regions page to confirm availability in your location.
 
-##  Next steps
+## Next steps
 
 
 

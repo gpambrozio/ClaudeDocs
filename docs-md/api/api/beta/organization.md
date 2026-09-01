@@ -16,23 +16,23 @@ cURL
 
 
 
-BetaOrganization object{ id, name, type }
+BetaOrganization object{ id, name, type }
 
 
 
-id: string
+id: string
 
 ID of the Organization.
 
 formatuuid
 
-name: string
+name: string
 
 Name of the Organization.
 
 
 
-type: "organization"
+type: "organization"
 
 Object type.
 
@@ -42,29 +42,29 @@ defaultorganization
 
 
 
-BetaOrganizationRole = "admin" or "billing" or "claude\_code\_user" or 6 more
+BetaOrganizationRole = "admin" or "billing" or "claude\_code\_user" or 6 more
 
 One of the following:
 
-"admin"
+"admin"
 
-"billing"
+"billing"
 
-"claude\_code\_user"
+"claude\_code\_user"
 
-"developer"
+"developer"
 
-"managed"
+"managed"
 
-"membership\_admin"
+"membership\_admin"
 
-"owner"
+"owner"
 
-"primary\_owner"
+"primary\_owner"
 
-"user"
+"user"
 
-#### Organization[API Keys](api/http/beta/organization/api_keys.md)
+#### Organization[API Keys](api/http/beta/organization/api_keys.md)
 
 ##### [List API Keys](api/http/beta/organization/api_keys/list.md)
 
@@ -78,7 +78,7 @@ One of the following:
 
 POST/v1/organizations/api\_keys/{api\_key\_id}
 
-#### Organization[External Keys](api/http/beta/organization/external_keys.md)
+#### Organization[External Keys](api/http/beta/organization/external_keys.md)
 
 ##### [Create External Key](api/http/beta/organization/external_keys/create.md)
 
@@ -104,7 +104,7 @@ One of the following:
 
 POST/v1/organizations/external\_keys/{external\_key\_id}/validate
 
-#### OrganizationFederation[Issuers](api/http/beta/organization/federation/issuers.md)
+#### OrganizationFederation[Issuers](api/http/beta/organization/federation/issuers.md)
 
 ##### [Create Federation Issuer](api/http/beta/organization/federation/issuers/create.md)
 
@@ -126,7 +126,7 @@ One of the following:
 
 POST/v1/organizations/federation\_issuers/{federation\_issuer\_id}/archive
 
-#### OrganizationFederation[Rules](api/http/beta/organization/federation/rules.md)
+#### OrganizationFederation[Rules](api/http/beta/organization/federation/rules.md)
 
 ##### [Create Federation Rule](api/http/beta/organization/federation/rules/create.md)
 
@@ -148,7 +148,7 @@ One of the following:
 
 POST/v1/organizations/federation\_rules/{federation\_rule\_id}/archive
 
-#### OrganizationFederationRules[Workspaces](api/http/beta/organization/federation/rules/workspaces.md)
+#### OrganizationFederationRules[Workspaces](api/http/beta/organization/federation/rules/workspaces.md)
 
 ##### [Add Federation Rule Workspace](api/http/beta/organization/federation/rules/workspaces/add.md)
 
@@ -162,7 +162,7 @@ One of the following:
 
 DELETE/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces/{workspace\_id}
 
-#### Organization[Invites](api/http/beta/organization/invites.md)
+#### Organization[Invites](api/http/beta/organization/invites.md)
 
 ##### [Create Invite](api/http/beta/organization/invites/create.md)
 
@@ -180,7 +180,7 @@ One of the following:
 
 DELETE/v1/organizations/invites/{invite\_id}
 
-#### Organization[Service Accounts](api/http/beta/organization/service_accounts.md)
+#### Organization[Service Accounts](api/http/beta/organization/service_accounts.md)
 
 ##### [Create Service Account](api/http/beta/organization/service_accounts/create.md)
 
@@ -202,7 +202,7 @@ One of the following:
 
 POST/v1/organizations/service\_accounts/{service\_account\_id}/archive
 
-#### OrganizationService Accounts[Workspaces](api/http/beta/organization/service_accounts/workspaces.md)
+#### OrganizationService Accounts[Workspaces](api/http/beta/organization/service_accounts/workspaces.md)
 
 ##### [Add Workspace To Service Account](api/http/beta/organization/service_accounts/workspaces/add.md)
 
@@ -216,7 +216,7 @@ One of the following:
 
 DELETE/v1/organizations/service\_accounts/{service\_account\_id}/workspaces/{workspace\_id}
 
-#### Organization[Users](api/http/beta/organization/users.md)
+#### Organization[Users](api/http/beta/organization/users.md)
 
 ##### [List Users](api/http/beta/organization/users/list.md)
 
@@ -234,7 +234,7 @@ One of the following:
 
 DELETE/v1/organizations/users/{user\_id}
 
-#### Organization[Workspaces](api/http/beta/organization/workspaces.md)
+#### Organization[Workspaces](api/http/beta/organization/workspaces.md)
 
 ##### [List Workspaces](api/http/beta/organization/workspaces/list.md)
 
@@ -256,13 +256,13 @@ One of the following:
 
 POST/v1/organizations/workspaces/{workspace\_id}/archive
 
-#### OrganizationWorkspaces[Rate Limits](api/http/beta/organization/workspaces/rate_limits.md)
+#### OrganizationWorkspaces[Rate Limits](api/http/beta/organization/workspaces/rate_limits.md)
 
 ##### [List Workspace Rate Limits](api/http/beta/organization/workspaces/rate_limits/list.md)
 
 GET/v1/organizations/workspaces/{workspace\_id}/rate\_limits
 
-#### OrganizationWorkspaces[Members](api/http/beta/organization/workspaces/members.md)
+#### OrganizationWorkspaces[Members](api/http/beta/organization/workspaces/members.md)
 
 ##### [List Workspace Members](api/http/beta/organization/workspaces/members/list.md)
 
@@ -284,7 +284,7 @@ One of the following:
 
 DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
-#### OrganizationWorkspaces[Service Accounts](api/http/beta/organization/workspaces/service_accounts.md)
+#### OrganizationWorkspaces[Service Accounts](api/http/beta/organization/workspaces/service_accounts.md)
 
 ##### [List Service Account Workspace Members](api/http/beta/organization/workspaces/service_accounts/list.md)
 
@@ -306,7 +306,7 @@ One of the following:
 
 DELETE/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
 
-#### Organization[Rate Limits](api/http/beta/organization/rate_limits.md)
+#### Organization[Rate Limits](api/http/beta/organization/rate_limits.md)
 
 ##### [List Organization Rate Limits](api/http/beta/organization/rate_limits/list.md)
 

@@ -7,7 +7,7 @@
 Even the most advanced language models, like Claude, can sometimes generate text that is factually incorrect or inconsistent with the given context. This phenomenon, known as "hallucination," can undermine the reliability of your AI-driven solutions.
 This guide will explore techniques to minimize hallucinations and ensure Claude's outputs are accurate and trustworthy.
 
-##  Basic hallucination minimization strategies
+## Basic hallucination minimization strategies
 
 - **Allow Claude to say "I don't know":** Explicitly give Claude permission to admit uncertainty. This simple technique can drastically reduce false information.
 
@@ -23,7 +23,7 @@ This guide will explore techniques to minimize hallucinations and ensure Claude'
 
 ---
 
-##  Advanced techniques
+## Advanced techniques
 
 - **Chain-of-thought verification**: Ask Claude to explain its reasoning step-by-step before giving a final answer. This can reveal faulty logic or assumptions.
 - **Best-of-N verification**: Run Claude through the same prompt multiple times and compare the outputs. Inconsistencies across outputs could indicate hallucinations.

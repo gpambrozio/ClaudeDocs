@@ -22,33 +22,33 @@
 
 
 
-DocumentRetrieveResponse object{ id, content, created\_at, 2 more }
+DocumentRetrieveResponse object{ id, content, created\_at, 2 more }
 
 Project document information for compliance responses.
 
-id: string
+id: string
 
 Project document identifier (tagged ID)
 
-content: string
+content: string
 
 Document text content
 
 
 
-created\_at: string
+created\_at: string
 
 Document creation timestamp
 
 formatdate-time
 
-filename: string
+filename: string
 
 Document filename
 
 
 
-user: object{ id, email\_address } or null
+user: object{ id, email\_address } or null
 
 The user who created a project or project document.
 
@@ -56,27 +56,27 @@ Fields that reference this type are null when the creator's account has
 been deleted or the creator is no longer a member of an organization the
 key may read.
 
-id: string
+id: string
 
 User identifier (tagged ID)
 
-email\_address: string
+email\_address: string
 
 User's email address
 
 
 
-DocumentDeleteResponse object{ id, type }
+DocumentDeleteResponse object{ id, type }
 
 Response for deleting a project document.
 
-id: string
+id: string
 
 The ID of the project document that was deleted
 
 
 
-type: "claude\_project\_document\_deleted"
+type: "claude\_project\_document\_deleted"
 
 Constant string confirming deletion.
 
@@ -84,7 +84,7 @@ defaultclaude\_project\_document\_deleted
 
 
 
-DocumentMetadataResponse object{ id, claude\_project\_id, created\_at, 5 more }
+DocumentMetadataResponse object{ id, claude\_project\_id, created\_at, 5 more }
 
 Project document metadata for GET /v1/compliance/apps/projects/documents/{document\_id}/metadata.
 

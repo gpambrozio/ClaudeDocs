@@ -16,7 +16,7 @@ Get Skill Version
 
 
 
-skill\_id: string
+skill\_id: string
 
 Unique identifier for the skill.
 
@@ -24,7 +24,7 @@ The format and length of IDs may change over time.
 
 
 
-version: string
+version: string
 
 Identifies the skill version: a version ID, or the literal `latest` for the skill's most recent version.
 
@@ -34,16 +34,16 @@ Requests carrying the `skills-2025-10-02` beta header address versions by their 
 
 
 
-SkillVersion object{ id, created\_at, description, 3 more }
+SkillVersion object{ id, created\_at, description, 3 more }
 
-id: string
+id: string
 
 Unique identifier for this Skill Version. The id addresses the version in
 paths and pins it in references.
 
 
 
-created\_at: string
+created\_at: string
 
 ISO 8601 timestamp of when the skill was created.
 
@@ -51,13 +51,13 @@ formatdate-time
 
 
 
-description: string
+description: string
 
 Description of the skill version.
 
 This is extracted from the SKILL.md file in the skill upload.
 
-name: string
+name: string
 
 The Skill's immutable kebab-case slug, set at creation from the first
 upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
@@ -66,7 +66,7 @@ of the Skill's mounted files and the base name of a downloaded archive.
 
 
 
-skill\_id: string
+skill\_id: string
 
 Unique identifier for the skill.
 
@@ -74,7 +74,7 @@ The format and length of IDs may change over time.
 
 
 
-type: "skill\_version"
+type: "skill\_version"
 
 Object type.
 
@@ -82,13 +82,9 @@ For Skill Versions, this is always `"skill_version"`.
 
 defaultskill\_version
 
-
+Get Skill Version
 
-### Get Skill Version
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION \

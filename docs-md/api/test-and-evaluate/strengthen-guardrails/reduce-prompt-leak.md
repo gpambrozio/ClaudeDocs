@@ -6,7 +6,7 @@
 
 Prompt leaks can expose sensitive information that you expect to be "hidden" in your prompt. While no method is foolproof, the strategies below can significantly reduce the risk.
 
-##  Before you try to reduce prompt leak
+## Before you try to reduce prompt leak
 
 Consider using leak-resistant prompt engineering strategies only when **absolutely necessary**. Attempts to leak-proof your prompt can add complexity that may degrade performance in other parts of the task due to increasing the complexity of the LLM’s overall task.
 
@@ -14,7 +14,7 @@ If you decide to implement leak-resistant techniques, be sure to test your promp
 
 ---
 
-##  Strategies to reduce prompt leak
+## Strategies to reduce prompt leak
 
 - **Separate context from queries:**
   You can try using system prompts to isolate key information and context from user queries. You can emphasize key instructions in the `User` turn, then reemphasize those instructions by prefilling the `Assistant` turn. (Note: prefilling is not supported on Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing).)

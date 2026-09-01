@@ -18,7 +18,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
 ##### Path parameters
 
-message\_batch\_id: string
+message\_batch\_id: string
 
 ID of the Message Batch.
 
@@ -26,15 +26,15 @@ ID of the Message Batch.
 
 
 
-DeletedMessageBatch object{ id, type }
+DeletedMessageBatch object{ id, type }
 
-id: string
+id: string
 
 ID of the Message Batch.
 
 
 
-type: "message\_batch\_deleted"
+type: "message\_batch\_deleted"
 
 Deleted object type.
 
@@ -42,13 +42,9 @@ For Message Batches, this is always `"message_batch_deleted"`.
 
 defaultmessage\_batch\_deleted
 
-
+Delete a Message Batch
 
-### Delete a Message Batch
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \

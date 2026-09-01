@@ -18,7 +18,7 @@ However, Anthropic may do the following:
 
 Generally, if you are using the API as documented in this reference, Anthropic will not break your usage.
 
-##  Version history
+## Version history
 
 Anthropic recommends using the latest API version whenever possible. Previous versions are considered deprecated and may be unavailable for new users.
 

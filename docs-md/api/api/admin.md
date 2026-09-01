@@ -6,13 +6,13 @@
 
 # Admin
 
-#### Admin[Organizations](api/http/admin/organizations.md)
+#### Admin[Organizations](api/http/admin/organizations.md)
 
 ##### [Get Current Organization](api/http/admin/organizations/me.md)
 
 GET/v1/organizations/me
 
-#### Admin[Invites](api/http/admin/invites.md)
+#### Admin[Invites](api/http/admin/invites.md)
 
 ##### [Create Invite](api/http/admin/invites/create.md)
 
@@ -30,7 +30,7 @@
 
 DELETE/v1/organizations/invites/{invite\_id}
 
-#### Admin[Users](api/http/admin/users.md)
+#### Admin[Users](api/http/admin/users.md)
 
 ##### [Get User](api/http/admin/users/retrieve.md)
 
@@ -48,7 +48,7 @@
 
 DELETE/v1/organizations/users/{user\_id}
 
-#### Admin[RBAC Groups](api/http/admin/rbac_groups.md)
+#### Admin[RBAC Groups](api/http/admin/rbac_groups.md)
 
 ##### [List RBAC Groups](api/http/admin/rbac_groups/list.md)
 
@@ -70,7 +70,7 @@
 
 DELETE/v1/organizations/rbac\_groups/{group\_id}
 
-#### AdminRBAC Groups[Members](api/http/admin/rbac_groups/members.md)
+#### AdminRBAC Groups[Members](api/http/admin/rbac_groups/members.md)
 
 ##### [List RBAC Group Members](api/http/admin/rbac_groups/members/list.md)
 
@@ -84,7 +84,7 @@
 
 DELETE/v1/organizations/rbac\_groups/{group\_id}/members/{user\_id}
 
-#### Admin[RBAC Roles](api/http/admin/rbac_roles.md)
+#### Admin[RBAC Roles](api/http/admin/rbac_roles.md)
 
 ##### [List RBAC Roles](api/http/admin/rbac_roles/list.md)
 
@@ -94,13 +94,13 @@
 
 GET/v1/organizations/rbac\_roles/{role\_id}
 
-#### AdminRBAC Roles[Permissions](api/http/admin/rbac_roles/permissions.md)
+#### AdminRBAC Roles[Permissions](api/http/admin/rbac_roles/permissions.md)
 
 ##### [List RBAC Role Permissions](api/http/admin/rbac_roles/permissions/list.md)
 
 GET/v1/organizations/rbac\_roles/{role\_id}/permissions
 
-#### Admin[Workspaces](api/http/admin/workspaces.md)
+#### Admin[Workspaces](api/http/admin/workspaces.md)
 
 ##### [Create Workspace](api/http/admin/workspaces/create.md)
 
@@ -122,7 +122,7 @@
 
 POST/v1/organizations/workspaces/{workspace\_id}/archive
 
-#### AdminWorkspaces[Members](api/http/admin/workspaces/members.md)
+#### AdminWorkspaces[Members](api/http/admin/workspaces/members.md)
 
 ##### [Create Workspace Member](api/http/admin/workspaces/members/create.md)
 
@@ -144,13 +144,13 @@
 
 DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
-#### AdminWorkspaces[Rate Limits](api/http/admin/workspaces/rate_limits.md)
+#### AdminWorkspaces[Rate Limits](api/http/admin/workspaces/rate_limits.md)
 
 ##### [List Workspace Rate Limits](api/http/admin/workspaces/rate_limits/list.md)
 
 GET/v1/organizations/workspaces/{workspace\_id}/rate\_limits
 
-#### AdminWorkspaces[Service Accounts](api/http/admin/workspaces/service_accounts.md)
+#### AdminWorkspaces[Service Accounts](api/http/admin/workspaces/service_accounts.md)
 
 ##### [Create Service Account Workspace Member](api/http/admin/workspaces/service_accounts/create.md)
 
@@ -172,7 +172,7 @@
 
 DELETE/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
 
-#### Admin[API Keys](api/http/admin/api_keys.md)
+#### Admin[API Keys](api/http/admin/api_keys.md)
 
 ##### [Retrieve API Key (Admin API)](api/http/admin/api_keys/retrieve.md)
 
@@ -186,7 +186,7 @@
 
 POST/v1/organizations/api\_keys/{api\_key\_id}
 
-#### Admin[External Keys](api/http/admin/external_keys.md)
+#### Admin[External Keys](api/http/admin/external_keys.md)
 
 ##### [Create External Key](api/http/admin/external_keys/create.md)
 
@@ -212,7 +212,7 @@
 
 POST/v1/organizations/external\_keys/{external\_key\_id}/validate
 
-#### Admin[Usage Report](api/http/admin/usage_report.md)
+#### Admin[Usage Report](api/http/admin/usage_report.md)
 
 ##### [Get Messages Usage Report](api/http/admin/usage_report/retrieve_messages.md)
 
@@ -222,19 +222,19 @@
 
 GET/v1/organizations/usage\_report/claude\_code
 
-#### Admin[Cost Report](api/http/admin/cost_report.md)
+#### Admin[Cost Report](api/http/admin/cost_report.md)
 
 ##### [Get Cost Report](api/http/admin/cost_report/retrieve.md)
 
 GET/v1/organizations/cost\_report
 
-#### Admin[Analytics](api/http/admin/analytics.md)
+#### Admin[Analytics](api/http/admin/analytics.md)
 
 ##### [Get Activity Summaries](api/http/admin/analytics/retrieve_summaries.md)
 
 GET/v1/organizations/analytics/summaries
 
-#### AdminAnalytics[Usage](api/http/admin/analytics/usage.md)
+#### AdminAnalytics[Usage](api/http/admin/analytics/usage.md)
 
 ##### [Get Token Usage Over Time](api/http/admin/analytics/usage/list.md)
 
@@ -244,7 +244,7 @@
 
 GET/v1/organizations/analytics/user\_usage\_report
 
-#### AdminAnalytics[Cost](api/http/admin/analytics/cost.md)
+#### AdminAnalytics[Cost](api/http/admin/analytics/cost.md)
 
 ##### [Get Cost Over Time](api/http/admin/analytics/cost/list.md)
 
@@ -254,43 +254,43 @@
 
 GET/v1/organizations/analytics/user\_cost\_report
 
-#### AdminAnalytics[Users](api/http/admin/analytics/users.md)
+#### AdminAnalytics[Users](api/http/admin/analytics/users.md)
 
 ##### [List User Activity](api/http/admin/analytics/users/list.md)
 
 GET/v1/organizations/analytics/users
 
-#### AdminAnalytics[Skills](api/http/admin/analytics/skills.md)
+#### AdminAnalytics[Skills](api/http/admin/analytics/skills.md)
 
 ##### [Get Skill Usage](api/http/admin/analytics/skills/list.md)
 
 GET/v1/organizations/analytics/skills
 
-#### AdminAnalytics[Connectors](api/http/admin/analytics/connectors.md)
+#### AdminAnalytics[Connectors](api/http/admin/analytics/connectors.md)
 
 ##### [Get Connector Usage](api/http/admin/analytics/connectors/list.md)
 
 GET/v1/organizations/analytics/connectors
 
-#### AdminAnalytics[Chat Projects](api/http/admin/analytics/chat_projects.md)
+#### AdminAnalytics[Chat Projects](api/http/admin/analytics/chat_projects.md)
 
 ##### [Get Chat Project Usage](api/http/admin/analytics/chat_projects/list.md)
 
 GET/v1/organizations/analytics/apps/chat/projects
 
-#### AdminAnalytics[Plugins](api/http/admin/analytics/plugins.md)
+#### AdminAnalytics[Plugins](api/http/admin/analytics/plugins.md)
 
 ##### [Get Plugin Usage](api/http/admin/analytics/plugins/list.md)
 
 GET/v1/organizations/analytics/plugins
 
-#### AdminAnalytics[Artifacts](api/http/admin/analytics/artifacts.md)
+#### AdminAnalytics[Artifacts](api/http/admin/analytics/artifacts.md)
 
 ##### [Get Artifact Activity](api/http/admin/analytics/artifacts/list.md)
 
 GET/v1/organizations/analytics/artifacts
 
-#### Admin[Spend Limits](api/http/admin/spend_limits.md)
+#### Admin[Spend Limits](api/http/admin/spend_limits.md)
 
 ##### [Set Spend Limit](api/http/admin/spend_limits/create.md)
 
@@ -308,7 +308,7 @@
 
 GET/v1/organizations/spend\_limits/effective
 
-#### AdminSpend Limits[Increase Requests](api/http/admin/spend_limits/increase_requests.md)
+#### AdminSpend Limits[Increase Requests](api/http/admin/spend_limits/increase_requests.md)
 
 ##### [List Spend Limit Increase Requests](api/http/admin/spend_limits/increase_requests/list.md)
 
@@ -326,13 +326,13 @@
 
 POST/v1/organizations/spend\_limit\_increase\_requests/{spend\_limit\_increase\_request\_id}/deny
 
-#### Admin[Rate Limits](api/http/admin/rate_limits.md)
+#### Admin[Rate Limits](api/http/admin/rate_limits.md)
 
 ##### [List Organization Rate Limits](api/http/admin/rate_limits/list.md)
 
 GET/v1/organizations/rate\_limits
 
-#### Admin[Service Accounts](api/http/admin/service_accounts.md)
+#### Admin[Service Accounts](api/http/admin/service_accounts.md)
 
 ##### [Create Service Account](api/http/admin/service_accounts/create.md)
 
@@ -354,7 +354,7 @@
 
 POST/v1/organizations/service\_accounts/{service\_account\_id}/archive
 
-#### AdminService Accounts[Workspaces](api/http/admin/service_accounts/workspaces.md)
+#### AdminService Accounts[Workspaces](api/http/admin/service_accounts/workspaces.md)
 
 ##### [Add Workspace To Service Account](api/http/admin/service_accounts/workspaces/create.md)
 
@@ -368,7 +368,7 @@
 
 DELETE/v1/organizations/service\_accounts/{service\_account\_id}/workspaces/{workspace\_id}
 
-#### Admin[Federation Issuers](api/http/admin/federation_issuers.md)
+#### Admin[Federation Issuers](api/http/admin/federation_issuers.md)
 
 ##### [Create Federation Issuer](api/http/admin/federation_issuers/create.md)
 
@@ -390,7 +390,7 @@
 
 POST/v1/organizations/federation\_issuers/{federation\_issuer\_id}/archive
 
-#### Admin[Federation Rules](api/http/admin/federation_rules.md)
+#### Admin[Federation Rules](api/http/admin/federation_rules.md)
 
 ##### [Create Federation Rule](api/http/admin/federation_rules/create.md)
 
@@ -412,7 +412,7 @@
 
 POST/v1/organizations/federation\_rules/{federation\_rule\_id}/archive
 
-#### AdminFederation Rules[Workspaces](api/http/admin/federation_rules/workspaces.md)
+#### AdminFederation Rules[Workspaces](api/http/admin/federation_rules/workspaces.md)
 
 ##### [List Federation Rule Workspaces](api/http/admin/federation_rules/workspaces/list.md)
 
@@ -426,7 +426,7 @@
 
 DELETE/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces/{workspace\_id}
 
-#### Admin[MCP Tunnels](api/http/admin/mcp_tunnels.md)
+#### Admin[MCP Tunnels](api/http/admin/mcp_tunnels.md)
 
 ##### [Get Tunnel](api/http/admin/mcp_tunnels/retrieve.md)
 
@@ -458,7 +458,7 @@ Deprecated
 
 POST/v1/organizations/tunnels/{tunnel\_id}/archive
 
-#### AdminMCP Tunnels[Tunnel Certificates](api/http/admin/mcp_tunnels/tunnel_certificates.md)
+#### AdminMCP Tunnels[Tunnel Certificates](api/http/admin/mcp_tunnels/tunnel_certificates.md)
 
 ##### [Create Tunnel Certificate](api/http/admin/mcp_tunnels/tunnel_certificates/create.md)
 

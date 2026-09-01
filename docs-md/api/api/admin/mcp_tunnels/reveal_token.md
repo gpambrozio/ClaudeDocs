@@ -21,42 +21,38 @@ access logs.
 
 ##### Path parameters
 
-tunnel\_id: string
+tunnel\_id: string
 
 ID of the Tunnel.
 
 ##### Headers
 
-"anthropic-beta": array of "mcp-tunnels-2026-05-19"
+"anthropic-beta": array of "mcp-tunnels-2026-05-19"
 
 Required for all Tunnel endpoints.
 
 ##### Returns
 
-id: string
+id: string
 
 Stable identifier for the current token value. Changes when the token is
 rotated.
 
-tunnel\_token: string
+tunnel\_token: string
 
 The tunnel's connection token.
 
 
 
-type: "tunnel\_token"
+type: "tunnel\_token"
 
 Object type. Always `tunnel_token` for Tunnel Tokens.
 
 defaulttunnel\_token
 
-
+Reveal Tunnel Token
 
-### Reveal Tunnel Token
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/reveal_token \

@@ -8,7 +8,7 @@ Environments define the sandbox configuration where your agent runs. You create 
 
 This page covers `type: cloud` environments. To run sandboxes on your own infrastructure, see [Self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md).
 
-##  Create an environment
+## Create an environment
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -32,7 +32,7 @@ config:
 
 Use a unique, descriptive `name` so you can tell environments apart.
 
-##  Use the environment in a session
+## Use the environment in a session
 
 Pass the environment ID as a string when [creating a session](managed-agents/sessions.md).
 
@@ -44,9 +44,9 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 ant beta:sessions create --agent "$AGENT_ID" --environment-id "$ENVIRONMENT_ID"
 ```
 
-##  Configuration options
+## Configuration options
 
-###  Packages
+### Packages
 
 The `packages` field pre-installs packages into the sandbox before the agent starts. Packages are installed by their respective package managers and cached across sessions that share the same environment. When multiple package managers are specified, they run in alphabetical order (apt, cargo, gem, go, npm, pip). You can optionally pin specific versions. Unpinned packages install the latest version. If the environment uses `limited` [networking](#networking), also set `networking.allow_package_managers` to `true`; otherwise the request is rejected with a 400 error.
 
@@ -88,7 +88,7 @@ Supported package managers:
 | `npm` | Node.js (npm) | `"express@4.18.0"` |
 | `pip` | Python (pip) | `"sqlalchemy==2.0.30"` |
 
-###  Networking
+### Networking
 
 The `networking` field controls the sandbox's outbound network access. It does not affect the `web_search` or `web_fetch` tools, which run on Anthropic's servers; to restrict the sites those tools can reach, set `allowed_domains` or `blocked_domains` on the tool's entry in the agent toolset. See [Restrict web search and web fetch domains](managed-agents/tools.md).
 
@@ -129,13 +129,13 @@ When using `limited` networking:
 - `allow_mcp_servers` allows outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 - `allow_package_managers` allows outbound access to public package registries (such as PyPI and npm) beyond those listed in the `allowed_hosts` array. Defaults to `false`. Set it to `true` whenever the environment specifies `packages`; otherwise the request is rejected with a 400 error, even if the registry hosts are listed in `allowed_hosts`.
 
-##  Environment lifecycle
+## Environment lifecycle
 
 - Environments persist until explicitly archived or deleted.
 - Each session gets its own sandbox instance, even when multiple sessions reference the same environment. Sessions do not share filesystem state.
 - Environments are not versioned. If you update an environment frequently, keep your own record of the changes so you can tell which configuration each session used.
 
-##  Manage environments
+## Manage environments
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -155,11 +155,11 @@ ant beta:environments archive --environment-id "$ENVIRONMENT_ID"
 ant beta:environments delete --environment-id "$ENVIRONMENT_ID"
 ```
 
-##  Pre-installed runtimes
+## Pre-installed runtimes
 
 Cloud sandboxes include common language runtimes, databases, and command-line tools out of the box. See [Cloud sandbox reference](managed-agents/cloud-sandboxes-reference.md) for the full list.
 
-##  Next steps
+## Next steps
 
 
 

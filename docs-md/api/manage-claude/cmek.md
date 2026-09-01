@@ -16,7 +16,7 @@ A customer-managed encryption key (CMEK) lets you provision an encryption key in
 
 The use of CMEK is optional. Eligible organizations can **opt in** to use customer-managed encryption keys instead of the default encryption that Anthropic provides. To activate CMEK, contact your Anthropic account team.
 
-##  How it works
+## How it works
 
 Only Organization Admins (on Claude Platform; the Admin role on Claude Platform on AWS) or Owners and the Primary Owner (on Claude Enterprise) can configure CMEK. On Claude Platform, CMEK is scoped per workspace and configured with the Admin API (on Claude Platform on AWS, in the Claude Console or through the IAM-authorized external key and workspace endpoints). On Claude Enterprise, CMEK is scoped per organization and configured in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls). On either product, CMEK protects data written after your key takes effect. Existing data (prior chats, files, and sessions) remains encrypted with Anthropic-managed keys and is not re-encrypted under your key.
 
@@ -26,13 +26,13 @@ CMEK configuration events appear in the [Compliance API Activity Feed](manage-cl
 
 Anthropic calls your key management service from its standard public IP range. If you restrict access to your key management service by IP, allow the addresses listed in [IP addresses](api/ip-addresses.md). On Claude Platform on AWS, don't rely on IP-based restrictions for your key; scope access with the key policy described in the [AWS KMS guide](manage-claude/cmek-aws-kms.md) instead.
 
-##  Prerequisites
+## Prerequisites
 
 - Permissions to create encryption keys and manage key access in the account, project, or subscription that will host the encryption key.
 - An Organization Admin role in the Claude Console on Claude Platform (the Admin role on Claude Platform on AWS), or an Owner or Primary Owner role on Claude Enterprise.
 - Data retention configuration: CMEK is allowed with [Zero data retention (ZDR)](manage-claude/api-and-data-retention.md) for both Claude Platform and Claude Enterprise.
 
-##  Availability and regions
+## Availability and regions
 
 Except on Claude Platform on AWS (covered at the end of this section), CMEK is currently available in US regions only, and all encryption operations are processed in US regions. For minimal latency, choose a region close to Anthropic's US infrastructure:
 
@@ -44,11 +44,11 @@ Except on Claude Platform on AWS (covered at the end of this section), CMEK is c
 
 On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), CMEK is available with AWS KMS keys only; Google Cloud KMS and Azure Key Vault keys cannot be registered. These region recommendations do not apply there: the key must be a single-region KMS key in the same AWS account and region as the workspace it is attached to, and its key policy must grant access to an AWS service principal rather than Anthropic's IAM role; see [Set up CMEK on Claude Platform on AWS](manage-claude/cmek-aws-kms.md). Register and attach keys in the Claude Console; the external key endpoints are also available on Claude Platform on AWS, authorized through [IAM actions](api/claude-platform-on-aws-iam-actions.md). There is no separate validation step: the key is implicitly validated when you attach it to a workspace (the attach call performs an encrypt/decrypt round), so a key policy problem surfaces at attach time rather than at registration.
 
-##  What CMEK protects
+## What CMEK protects
 
 What CMEK covers depends on which product you use.
 
-###  Encrypted with CMEK key
+### Encrypted with CMEK key
 
 **Claude Platform**
 
@@ -67,7 +67,7 @@ What CMEK covers depends on which product you use.
 
 On both products, backups and snapshots inherit the key.
 
-###  Disabled or modified
+### Disabled or modified
 
 Some features are turned off or substantially modified when CMEK is enabled. This list is not exhaustive; review it with your team before enabling CMEK.
 
@@ -85,7 +85,7 @@ Some features are turned off or substantially modified when CMEK is enabled. Thi
 - Audit log exports are disabled.
 - Signed URLs for temporary file exchanges are disabled. These back organization data exports in claude.ai and Claude Code Remote file flows such as screenshot updates.
 
-###  Encrypted with Anthropic key
+### Encrypted with Anthropic key
 
 These features remain available, but their data is not encrypted under your key. You can disable any feature that is not appropriate for your use case in **Settings**.
 
@@ -105,7 +105,7 @@ These features remain available, but their data is not encrypted under your key.
 
 On both products, account data for users in your organization (such as names, email addresses, and profile pictures) is not encrypted under your key.
 
-###  Feature support
+### Feature support
 
 The following Claude Platform APIs and tools store data at rest under your key when CMEK is enabled:
 
@@ -123,7 +123,7 @@ The following Claude Platform APIs and tools store data at rest under your key w
 |  | Browser use |
 |  | Context management |
 
-##  Limited preservation outside your key
+## Limited preservation outside your key
 
 In three narrow cases, Anthropic may preserve specific records under Anthropic-managed encryption:
 
@@ -133,7 +133,7 @@ In three narrow cases, Anthropic may preserve specific records under Anthropic-m
 
 Outside of [CSAM screening](https://support.claude.com/en/articles/9020328-csam-detection-and-reporting), preservation requires a human reviewer's explicit decision and follows Anthropic's [retention policy for commercial data](https://privacy.claude.com/en/articles/10023548-how-long-do-you-store-my-data). For every instance of preservation, a corresponding [Compliance API Activity Feed](manage-claude/compliance-activity-feed.md) event is generated with a reason code conveying the purpose of the preservation. See [CMEK content preservation](manage-claude/access-transparency.md) for details. Safety screening metadata (records derived from Anthropic's automated safety scans, such as pattern identifiers and match indicators, not conversation content) is retained under Anthropic-managed encryption and remains readable after key revocation.
 
-##  Limitations
+## Limitations
 
 - **Irreversible action:** Once a key is attached to a workspace, it cannot be detached or swapped. On Claude Platform, attaching a key also locks the workspace's data retention setting: you cannot turn off 30-day data retention for that workspace, and returning to zero data retention requires creating a new workspace and moving your traffic to it. Rotating the key material within the same key (for example, AWS KMS automatic rotation, a Cloud KMS rotation schedule, or an Azure Key Vault rotation policy) is supported transparently and requires no change in Anthropic. Switching to a *different* key requires creating a new workspace with the new key and migrating your data. Revoking or disabling the key makes all CMEK-protected data in that workspace permanently inaccessible, with no backout path.
 - **No retroactive encryption:** CMEK only protects data written after your key takes effect (see [How it works](#how-it-works)).
@@ -142,7 +142,7 @@ Outside of [CSAM screening](https://support.claude.com/en/articles/9020328-csam-
 - **KMS costs:** CMEK requires a key in a third-party key management service (AWS KMS, Google Cloud KMS, or Azure Key Vault), which might incur separate charges billed by your KMS provider.
 - **Claude Code telemetry behind a gateway:** When Claude Code connects through an LLM gateway or proxy (a custom `ANTHROPIC_BASE_URL`), CMEK does not apply to Claude Code's operational telemetry. To turn this telemetry off, set the `DISABLE_TELEMETRY` environment variable to `1`, as described under [Telemetry services](data-usage.md) in the Claude Code documentation.
 
-##  Configure your provider
+## Configure your provider
 
 Follow the guide for the key management service you use.
 

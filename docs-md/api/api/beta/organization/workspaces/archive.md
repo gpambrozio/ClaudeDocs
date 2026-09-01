@@ -14,21 +14,17 @@ Archive Workspace
 
 ##### Path parameters
 
-workspace\_id: string
+workspace\_id: string
 
 ##### Returns
 
 
 
-BetaWorkspace object{ id, archived\_at, compartment\_id, 7 more }
+BetaWorkspace object{ id, archived\_at, compartment\_id, 7 more }
 
-
+Archive Workspace
 
-### Archive Workspace
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/archive \

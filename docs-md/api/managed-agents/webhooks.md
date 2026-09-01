@@ -8,7 +8,7 @@ Sessions are long-running interactions. While most real-time interactions happen
 
 Webhook events return the event `type` and `id`, not the full object. When you receive a webhook event, you need to fetch the object directly with a `GET` call. This avoids delivering stale data on retries and keeps every delivery small.
 
-##  Supported event types
+## Supported event types
 
 Session eventsVault eventsAgent eventsDeployment eventsDeployment run eventsEnvironment eventsMemory store events
 
@@ -28,7 +28,7 @@ Some of these events are named differently from the matching events on the sessi
 | `session.updated` | Session properties changed (for example, its name or configuration was updated). |
 | `session.deleted` | Session permanently deleted. There is no object left to fetch, so treat the event itself as final. |
 
-##  Register an endpoint
+## Register an endpoint
 
 Visit **Manage > Webhooks** in the [Claude Console](https://platform.claude.com/settings/workspaces/default/webhooks).
 
@@ -38,7 +38,7 @@ A webhook endpoint consists of:
 - **Event types:** The list of `data.type` values this endpoint receives. An endpoint only receives events it's subscribed to.
 - **Signing secret:** A 32-byte `whsec_`-prefixed secret generated at creation. It's shown only once, so store it securely to verify webhook deliveries.
 
-##  Verify the signature
+## Verify the signature
 
 Every delivery carries the `webhook-id`, `webhook-timestamp`, and `webhook-signature` headers. Use the SDK's `unwrap()` helper to verify the signature and parse the event in one step. It throws if the signature is invalid or the payload is more than 5 minutes old.
 
@@ -73,7 +73,7 @@ def webhook():
     return "", 200
 ```
 
-##  Handle an event
+## Handle an event
 
 Parse the body, switch on `data.type`, and fetch the resource by ID. Return any `2xx` to acknowledge. Any other response counts against the endpoint: a `3xx` disables it immediately (redirects are never followed), while other failures are retried; see [Delivery behavior](#delivery-behavior) for the retry and auto-disable rules.
 
@@ -108,7 +108,7 @@ return "", 204
 
 The top-level `event.id` is unique per event, not per delivery. If you receive the same `event.id` twice, it's a retry and you can discard it.
 
-##  Delivery behavior
+## Delivery behavior
 
 - **Duplicates:** An endpoint can receive the same event more than once, and every attempt delivers the same top-level `event.id` (the same value as the `webhook-id` header). Deduplicate on it.
 - **Subscription scope:** An event is delivered only to endpoints subscribed to its type at the moment it's emitted. An event emitted while no endpoint is subscribed to its type is never delivered, and subscribing later doesn't backfill it, so subscribe to an event type before you need it.

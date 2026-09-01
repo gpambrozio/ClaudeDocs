@@ -4,9 +4,9 @@
 
 
 
-This page covers the `ant` CLI's input and output mechanics that apply across every endpoint. For installing and authenticating, see the [Quickstart](cli-sdks-libraries/cli/quickstart.md). For chaining commands and version-controlling resources, see [CLI scripting and automation](cli-sdks-libraries/cli/scripting.md).
+This page covers the `ant` CLI's input and output mechanics that apply across every endpoint. To install and authenticate, see the [Quickstart](cli-sdks-libraries/cli/quickstart.md). To chain commands and version-control resources, see [CLI scripting and automation](cli-sdks-libraries/cli/scripting.md).
 
-##  Command structure
+## Command structure
 
 Commands follow a `resource action` pattern. Nested resources use colons:
 
@@ -29,7 +29,7 @@ ant beta:sessions:events list --session-id session_01...
 
 
 
-###  Global flags
+### Global flags
 
 | Flag | Description |
 | --- | --- |
@@ -42,7 +42,7 @@ ant beta:sessions:events list --session-id session_01...
 | `--debug` | Print full HTTP request and response to stderr |
 | `--format-error`, `--transform-error` | Same as `--format` and `--transform` but applied to [error responses](cli-sdks-libraries/cli/scripting.md) |
 
-##  Output formats
+## Output formats
 
 `auto` pretty-prints JSON and is the default for commands that create or modify resources. List and retrieve commands default to the [interactive explorer](#interactive-explorer) when writing to a terminal, and to pretty-printed JSON when piped. Override either default with `--format`:
 
@@ -66,7 +66,7 @@ created_at: "2026-07-24T00:00:00Z"
 
 List endpoints auto-paginate. In the default formats each item is written separately (one compact JSON object per line in `jsonl` mode, a stream of YAML documents in `yaml` mode), which streams cleanly into `head`, `grep`, and `--transform` filters.
 
-###  Interactive explorer
+### Interactive explorer
 
 The explorer is a fold-and-search TUI for browsing large responses. Arrow keys expand and collapse nodes, `/` searches, `q` exits. List and retrieve commands open it by default when connected to a terminal. Pass `--format explore` to open it explicitly:
 
@@ -76,7 +76,7 @@ ant models list --format explore
 
 
 
-##  Transform output with GJSON
+## Transform output with GJSON
 
 Use `--transform` to reshape responses before printing. The expression is a [GJSON path](https://github.com/tidwall/gjson/blob/master/SYNTAX.md). For list endpoints the transform runs against each item individually, not the envelope:
 
@@ -98,7 +98,7 @@ Output
 {"id": "agent_011CYixHhtUP...", "name": "Coding Assistant", "model": "claude-opus-5"}
 ```
 
-###  Extract a scalar
+### Extract a scalar
 
 To capture a single field as an unquoted string (for example, the ID of a newly created resource), pair `--transform` with `--raw-output`. The result prints without JSON quotes and is ready to assign to a shell variable:
 
@@ -121,11 +121,11 @@ Output
 agent_011CYm1BLqPXpQRk5khsSXrs
 ```
 
-##  Passing request bodies
+## Passing request bodies
 
 The right input mechanism depends on the shape of the data: use **flags** for scalar fields and short structured values, pipe a **stdin** document for nested or multiline bodies, and use **`@file` references** to pull file contents into any string or binary field.
 
-###  Flags
+### Flags
 
 Scalar fields map directly to flags. Structured fields accept a relaxed YAML-like syntax (unquoted keys, optional quotes around strings) or strict JSON:
 
@@ -150,7 +150,7 @@ ant beta:agents create \
 
 
 
-###  Stdin
+### Stdin
 
 Pipe a JSON or YAML document to stdin to supply the full request body. Fields from stdin are merged with flags, with flags taking precedence. Here `version` is the optimistic-locking token returned by an earlier `retrieve`, and `$AGENT_ID` was captured as in [Extract a scalar](#extract-a-scalar):
 
@@ -176,7 +176,7 @@ YAML
 
 
 
-###  File references
+### File references
 
 Flags that take a file path, such as `--file` on the upload command, accept a bare path:
 
@@ -213,7 +213,7 @@ ant messages create \
 
 The CLI detects the file type and encodes binary files as base64 automatically. To force a specific encoding use `@file://` for plain text or `@data://` for base64. Escape a literal leading `@` with a backslash (`\@username`).
 
-##  Debugging
+## Debugging
 
 Add `--debug` to any command to print the exact HTTP request and response (headers and body) to stderr. API keys are redacted.
 
@@ -236,11 +236,11 @@ X-Api-Key: <REDACTED>
 ...
 ```
 
-##  Available resources
+## Available resources
 
 Every API resource the CLI exposes is documented in the [API reference](api/cli/messages/create.md). For a local listing, run `ant --help`, and append `--help` to any subcommand for its flags and parameters.
 
-##  Next steps
+## Next steps
 
 
 

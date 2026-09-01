@@ -12,19 +12,19 @@ Update Workspace
 
 ##### Path parameters
 
-workspace\_id: string
+workspace\_id: string
 
 ##### Body
 
 
 
-data\_residency: optional object{ allowed\_inference\_geos, default\_inference\_geo } or null
+data\_residency: optional object{ allowed\_inference\_geos, default\_inference\_geo } or null
 
 Data residency configuration for the workspace.
 
 
 
-allowed\_inference\_geos: optional array of "global" or "us" or "unrestricted" or null
+allowed\_inference\_geos: optional array of "global" or "us" or "unrestricted" or null
 
 Permitted inference geo values. Use 'unrestricted' to allow all geos, or a list of specific geos.
 
@@ -32,29 +32,29 @@ One of the following:
 
 
 
-array of "global" or "us"
+array of "global" or "us"
 
 One of the following:
 
-"global"
+"global"
 
-"us"
+"us"
 
-"unrestricted"
+"unrestricted"
 
 
 
-default\_inference\_geo: optional "global" or "us" or null
+default\_inference\_geo: optional "global" or "us" or null
 
 Default inference geo applied when requests omit the parameter. Must be a member of `allowed_inference_geos` unless `allowed_inference_geos` is `"unrestricted"`.
 
 One of the following:
 
-"global"
+"global"
 
-"us"
+"us"
 
-external\_key\_id: optional string
+external\_key\_id: optional string
 
 ID of the customer-managed encryption key (CMEK) configuration to use for this
 Workspace. Setting this field requires CMEK to be enabled for your
@@ -66,7 +66,7 @@ your cloud KMS; the `external_key_id` stays the same.
 
 
 
-name: optional string
+name: optional string
 
 Name of the Workspace.
 
@@ -74,7 +74,7 @@ maxLength40
 
 minLength1
 
-tags: optional map[string] or null
+tags: optional map[string] or null
 
 User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
@@ -82,15 +82,11 @@ User-defined tags as string key-value pairs. Keys may not begin with `anthropic`
 
 
 
-Workspace object{ id, archived\_at, compartment\_id, 7 more }
+Workspace object{ id, archived\_at, compartment\_id, 7 more }
 
-
+Update Workspace
 
-### Update Workspace
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID \

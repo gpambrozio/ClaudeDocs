@@ -15,7 +15,7 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
 
 
-starting\_at: string
+starting\_at: string
 
 UTC date in YYYY-MM-DD format. Returns metrics for this single day only.
 
@@ -25,7 +25,7 @@ formatdate
 
 
 
-limit: optional number
+limit: optional number
 
 Number of records per page (default: 20, max: 1000).
 
@@ -35,7 +35,7 @@ maximum1000
 
 minimum1
 
-page: optional string
+page: optional string
 
 Opaque cursor token from previous response's `next_page` field.
 
@@ -43,15 +43,11 @@ Opaque cursor token from previous response's `next_page` field.
 
 
 
-ClaudeCodeUsageReport object{ data, has\_more, next\_page }
+ClaudeCodeUsageReport object{ data, has\_more, next\_page }
 
-
+Get Claude Code Usage Report
 
-### Get Claude Code Usage Report
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \

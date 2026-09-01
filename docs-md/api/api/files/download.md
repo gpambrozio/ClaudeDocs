@@ -14,17 +14,13 @@ Download File
 
 ##### Path parameters
 
-file\_id: string
+file\_id: string
 
 ID of the File.
 
-
+Download File
 
-### Download File
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/files/$FILE_ID/content \

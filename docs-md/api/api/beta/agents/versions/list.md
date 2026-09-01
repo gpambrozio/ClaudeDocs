@@ -14,19 +14,19 @@ List Agent Versions
 
 ##### Path parameters
 
-agent\_id: string
+agent\_id: string
 
 ##### Query parameters
 
 
 
-limit: optional number
+limit: optional number
 
 Maximum results per page. Default 20, maximum 100.
 
 formatint32
 
-page: optional string
+page: optional string
 
 Opaque pagination cursor.
 
@@ -34,115 +34,115 @@ Opaque pagination cursor.
 
 
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
 
 Optional header to specify the beta version(s) you want to use.
 
 One of the following:
 
-string
+string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
 
 One of the following:
 
-"message-batches-2024-09-24"
+"message-batches-2024-09-24"
 
-"prompt-caching-2024-07-31"
+"prompt-caching-2024-07-31"
 
-"computer-use-2024-10-22"
+"computer-use-2024-10-22"
 
-"computer-use-2025-01-24"
+"computer-use-2025-01-24"
 
-"pdfs-2024-09-25"
+"pdfs-2024-09-25"
 
-"token-counting-2024-11-01"
+"token-counting-2024-11-01"
 
-"token-efficient-tools-2025-02-19"
+"token-efficient-tools-2025-02-19"
 
-"output-128k-2025-02-19"
+"output-128k-2025-02-19"
 
-"files-api-2025-04-14"
+"files-api-2025-04-14"
 
-"mcp-client-2025-04-04"
+"mcp-client-2025-04-04"
 
-"mcp-client-2025-11-20"
+"mcp-client-2025-11-20"
 
-"dev-full-thinking-2025-05-14"
+"dev-full-thinking-2025-05-14"
 
-"interleaved-thinking-2025-05-14"
+"interleaved-thinking-2025-05-14"
 
-"code-execution-2025-05-22"
+"code-execution-2025-05-22"
 
-"extended-cache-ttl-2025-04-11"
+"extended-cache-ttl-2025-04-11"
 
-"context-1m-2025-08-07"
+"context-1m-2025-08-07"
 
-"context-management-2025-06-27"
+"context-management-2025-06-27"
 
-"model-context-window-exceeded-2025-08-26"
+"model-context-window-exceeded-2025-08-26"
 
-"skills-2025-10-02"
+"skills-2025-10-02"
 
-"fast-mode-2026-02-01"
+"fast-mode-2026-02-01"
 
-"output-300k-2026-03-24"
+"output-300k-2026-03-24"
 
-"user-profiles-2026-03-24"
+"user-profiles-2026-03-24"
 
-"user-profiles-2026-08-18"
+"user-profiles-2026-08-18"
 
-"advisor-tool-2026-03-01"
+"advisor-tool-2026-03-01"
 
-"managed-agents-2026-04-01"
+"managed-agents-2026-04-01"
 
-"cache-diagnosis-2026-04-07"
+"cache-diagnosis-2026-04-07"
 
-"dreaming-2026-04-21"
+"dreaming-2026-04-21"
 
-"thinking-token-count-2026-05-13"
+"thinking-token-count-2026-05-13"
 
-"server-side-fallback-2026-06-01"
+"server-side-fallback-2026-06-01"
 
-"server-side-fallback-2026-07-01"
+"server-side-fallback-2026-07-01"
 
-"fallback-credit-2026-06-01"
+"fallback-credit-2026-06-01"
 
-"fallback-credit-2026-07-01"
+"fallback-credit-2026-07-01"
 
-"agent-memory-2026-07-22"
+"agent-memory-2026-07-22"
 
-"mid-conversation-tool-changes-2026-07-01"
+"mid-conversation-tool-changes-2026-07-01"
 
-"compact-2026-01-12"
+"compact-2026-01-12"
 
-"computer-use-2025-11-24"
+"computer-use-2025-11-24"
 
-"mcp-tunnels-2026-06-22"
+"mcp-tunnels-2026-06-22"
 
-"structured-outputs-2025-11-13"
+"structured-outputs-2025-11-13"
 
-"task-budgets-2026-03-13"
+"task-budgets-2026-03-13"
 
-"thinking-display-updates-2026-08-18"
+"thinking-display-updates-2026-08-18"
 
-"ce-user-management-2026-07-13"
+"ce-user-management-2026-07-13"
 
 ##### Returns
 
 
 
-data: array of [BetaManagedAgentsAgent](api/http/beta/agents.md) { id, archived\_at, created\_at, 12 more }
+data: array of [BetaManagedAgentsAgent](api/http/beta/agents.md) { id, archived\_at, created\_at, 12 more }
 
 Agent versions.
 
-id: string
+id: string
 
 
 
-archived\_at: string or null
+archived\_at: string or null
 
 A timestamp in RFC 3339 format
 
@@ -150,115 +150,115 @@ formatdate-time
 
 
 
-created\_at: string
+created\_at: string
 
 A timestamp in RFC 3339 format
 
 formatdate-time
 
-description: string or null
+description: string or null
 
 
 
-mcp\_servers: array of [BetaManagedAgentsMCPServerURLDefinition](api/http/beta/agents.md) { name, type, url }
+mcp\_servers: array of [BetaManagedAgentsMCPServerURLDefinition](api/http/beta/agents.md) { name, type, url }
 
-name: string
+name: string
 
-type: "url"
+type: "url"
 
-url: string
+url: string
 
-metadata: map[string]
+metadata: map[string]
 
 
 
-model: [BetaManagedAgentsModelConfig](api/http/beta/agents.md) { id, effort, inference\_geo, speed }
+model: [BetaManagedAgentsModelConfig](api/http/beta/agents.md) { id, effort, inference\_geo, speed }
 
 Model identifier and configuration.
 
 
 
-multiagent: [BetaManagedAgentsMultiagent](api/http/beta/sessions.md) { agents, type } or null
+multiagent: [BetaManagedAgentsMultiagent](api/http/beta/sessions.md) { agents, type } or null
 
 Resolved coordinator topology with a concrete agent roster.
 
-name: string
+name: string
 
 
 
-skills: array of [BetaManagedAgentsAnthropicSkill](api/http/beta/agents.md) { skill\_id, type, version } or [BetaManagedAgentsCustomSkill](api/http/beta/agents.md) { skill\_id, type, version }
+skills: array of [BetaManagedAgentsAnthropicSkill](api/http/beta/agents.md) { skill\_id, type, version } or [BetaManagedAgentsCustomSkill](api/http/beta/agents.md) { skill\_id, type, version }
 
 One of the following:
 
 
 
-BetaManagedAgentsAnthropicSkill object{ skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object{ skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
-skill\_id: string
+skill\_id: string
 
-type: "anthropic"
+type: "anthropic"
 
-version: string
+version: string
 
 
 
-BetaManagedAgentsCustomSkill object{ skill\_id, type, version }
+BetaManagedAgentsCustomSkill object{ skill\_id, type, version }
 
 A resolved user-created custom skill.
 
-skill\_id: string
+skill\_id: string
 
-type: "custom"
+type: "custom"
 
-version: string
+version: string
 
-system: string or null
+system: string or null
 
 
 
-tools: array of [BetaManagedAgentsAgentToolset20260401](api/http/beta/agents.md) { configs, default\_config, type } or [BetaManagedAgentsMCPToolset](api/http/beta/agents.md) { configs, default\_config, mcp\_server\_name, type } or [BetaManagedAgentsCustomTool](api/http/beta/agents.md) { description, input\_schema, name, type }
+tools: array of [BetaManagedAgentsAgentToolset20260401](api/http/beta/agents.md) { configs, default\_config, type } or [BetaManagedAgentsMCPToolset](api/http/beta/agents.md) { configs, default\_config, mcp\_server\_name, type } or [BetaManagedAgentsCustomTool](api/http/beta/agents.md) { description, input\_schema, name, type }
 
 One of the following:
 
 
 
-BetaManagedAgentsAgentToolset20260401 object{ configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object{ configs, default\_config, type }
 
 
 
-BetaManagedAgentsMCPToolset object{ configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object{ configs, default\_config, mcp\_server\_name, type }
 
 
 
-BetaManagedAgentsCustomTool object{ description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object{ description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
-description: string
+description: string
 
 
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/http/beta/agents.md) { type, properties, required }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/http/beta/agents.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
-type: "object"
+type: "object"
 
-properties: optional map[unknown] or null
+properties: optional map[unknown] or null
 
-required: optional array of string or null
+required: optional array of string or null
 
-name: string
+name: string
 
-type: "custom"
+type: "custom"
 
-type: "agent"
+type: "agent"
 
 
 
-updated\_at: string
+updated\_at: string
 
 A timestamp in RFC 3339 format
 
@@ -266,23 +266,19 @@ formatdate-time
 
 
 
-version: number
+version: number
 
 The agent's current version. Starts at 1 and increments when the agent is modified.
 
 formatint32
 
-next\_page: optional string or null
+next\_page: optional string or null
 
 Opaque cursor for the next page. Null when no more results.
 
-
+List Agent Versions
 
-### List Agent Versions
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/agents/$AGENT_ID/versions \

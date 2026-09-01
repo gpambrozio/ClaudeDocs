@@ -28,7 +28,7 @@ Console session. Admin API keys are not accepted.
 
 ##### Path parameters
 
-federation\_rule\_id: string
+federation\_rule\_id: string
 
 ID of the federation rule to update.
 
@@ -36,7 +36,7 @@ ID of the federation rule to update.
 
 
 
-"anthropic-beta": optional array of string
+"anthropic-beta": optional array of string
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -44,17 +44,17 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 ##### Body
 
-applies\_to\_all\_workspaces: optional boolean or null
+applies\_to\_all\_workspaces: optional boolean or null
 
 When true, enables this rule for every workspace in the org (including workspaces created later). Setting `false` is rejected with 400 if no workspace would remain enabled; a rule with only a legacy `workspace_id` binding continues to mint.
 
-attributes: optional map[string] or null
+attributes: optional map[string] or null
 
 Replaces the CEL expressions `{name: expr}` extracting named values from claims. Send null to clear them. Not yet supported; any non-empty value is rejected with 400.
 
 
 
-description: optional string or null
+description: optional string or null
 
 Replaces the description. Omit to leave unchanged; send `null` to clear (the field is stored as an empty string).
 
@@ -62,7 +62,7 @@ maxLength2000
 
 
 
-match: optional object{ audience, claims, condition, subject\_prefix } or null
+match: optional object{ audience, claims, condition, subject\_prefix } or null
 
 Does the incoming JWT qualify?
 
@@ -72,19 +72,19 @@ or `condition` is required; `audience` alone is not sufficient.
 
 
 
-audience: optional string or null
+audience: optional string or null
 
 Exact match against the `aud` claim (any element if array). When omitted, the JWT's `aud` must still equal Anthropic's expected audience for the issuer; setting this field overrides that default.
 
 maxLength1024
 
-claims: optional map[string] or null
+claims: optional map[string] or null
 
 Exact-match `{claim: value}` pairs against top-level claims. Only string-valued claims can be matched; use `condition` for non-string claims.
 
 
 
-condition: optional string or null
+condition: optional string or null
 
 CEL expression over claims for logic the structural fields can't express. Must evaluate to a boolean and may reference only the `claims` variable; a constant-true expression (such as `true`) is rejected with 400.
 
@@ -92,7 +92,7 @@ maxLength4096
 
 
 
-subject\_prefix: optional string or null
+subject\_prefix: optional string or null
 
 Match the verified JWT `sub` claim. Exact match unless the value ends with `*`, in which case it is a prefix match. Example: `repo:my-org/my-repo:ref:refs/heads/main`.
 
@@ -100,7 +100,7 @@ maxLength1024
 
 
 
-name: optional string or null
+name: optional string or null
 
 Replaces the slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
@@ -110,7 +110,7 @@ minLength1
 
 
 
-oauth\_scope: optional string or null
+oauth\_scope: optional string or null
 
 Replaces the space-separated OAuth scopes granted on minted tokens. OAuth callers may only set `workspace:developer` or `workspace:inference`; other scopes (such as `org:admin`) require a Console session.
 
@@ -118,23 +118,23 @@ minLength1
 
 
 
-target: optional object{ service\_account\_id, type, service\_account\_name } or null
+target: optional object{ service\_account\_id, type, service\_account\_name } or null
 
 Bind to a fixed service account by ID.
 
-service\_account\_id: string
+service\_account\_id: string
 
 Tagged ID of the service account to mint tokens for.
 
-type: "service\_account"
+type: "service\_account"
 
-service\_account\_name: optional string or null
+service\_account\_name: optional string or null
 
 Service account's display name at read time. Ignored on writes.
 
 
 
-token\_lifetime\_seconds: optional number or null
+token\_lifetime\_seconds: optional number or null
 
 Replaces the lifetime in seconds for access tokens minted via this rule (60-86400). Minted tokens are capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.
 
@@ -142,7 +142,7 @@ maximum86400
 
 minimum60
 
-workspace\_id: optional string or null
+workspace\_id: optional string or null
 
 Replaces the existing single workspace enablement (the previous one is removed). Rejected with 400 if the rule is enabled for more than one workspace; use the `/federation_rules/{federation_rule_id}/workspaces` sub-resource instead.
 
@@ -150,7 +150,7 @@ Replaces the existing single workspace enablement (the previous one is removed).
 
 
 
-FederationRule object{ id, applies\_to\_all\_workspaces, archived\_at, 17 more }
+FederationRule object{ id, applies\_to\_all\_workspaces, archived\_at, 17 more }
 
 Authorization rule binding an external OIDC identity to Anthropic.
 
@@ -163,13 +163,9 @@ of that workspace (it is implicitly a member of the default workspace);
 rules carrying only the legacy `workspace_id` binding do not enforce
 this.
 
-
+Update Federation Rule
 
-### Update Federation Rule
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RULE_ID \

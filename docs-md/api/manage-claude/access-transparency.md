@@ -6,7 +6,7 @@
 
 Learn how Access Transparency creates a record of human access to your organization's data by Anthropic personnel, what it covers, and how to receive events through the Compliance API.
 
-##  How Access Transparency works
+## How Access Transparency works
 
 Anthropic personnel access customer content only under defined conditions. Access Transparency is designed to make such access visible to you. The design rests on the following principles:
 
@@ -15,12 +15,12 @@ Anthropic personnel access customer content only under defined conditions. Acces
 - **Events represent human access, not automated processing.** Anthropic's automated safety systems process your content in a secured pipeline with no interactive human access; that processing does not generate `anthropic_access` events. The one event automated processing can initiate is a `cmek_preserve` preservation record (see [CMEK content preservation](#cmek-content-preservation)).
 - **Events arrive on your existing feed.** Activities are accessible through your [Compliance API Activity Feed](manage-claude/compliance-activity-feed.md). Existing credentials, audit, export, and SIEM integrations for the Compliance API will still apply.
 
-##  What Access Transparency covers
+## What Access Transparency covers
 
 - **Covered content:** Access Transparency covers prompt and response content sent through the Claude Messages API or Claude Code sessions. Anthropic's [general ZDR documentation](manage-claude/api-and-data-retention.md) and [ZDR for Claude Code documentation](zero-data-retention.md) explain which APIs and features are covered by ZDR. The same APIs and features are covered by Access Transparency.
 - **Manual views by Anthropic personnel:** Manual views of your covered content by Anthropic reviewers generate events.
 
-##  What Access Transparency does not cover
+## What Access Transparency does not cover
 
 - **Automated processing:** Model serving, safety classifiers, and abuse-detection pipelines process your content as part of normal operation and do not generate `anthropic_access` events. Preservation initiated by automated processing does generate a `cmek_preserve` event (see [CMEK content preservation](#cmek-content-preservation)).
 - **Your own organization's activity:** Your API calls, admin actions, and Compliance API reads are covered by standard [Activity Feed](manage-claude/compliance-activity-feed.md) event types.
@@ -29,29 +29,29 @@ Anthropic personnel access customer content only under defined conditions. Acces
 - **Partner-operated platforms:** Amazon Bedrock and Google Cloud; refer to those platforms' transparency controls.
 - **Anything ZDR does not cover:** Products that are not covered by ZDR (for example, the Files API, Anthropic-hosted stateful applications, and the Batch API) are not covered by Access Transparency. See [ZDR documentation](zero-data-retention.md) for additional details.
 
-##  Getting started
+## Getting started
 
 To enable Access Transparency:
 
 1. 1
 
-   Request Access Transparency
+   ### Request Access Transparency
 
    Contact your Anthropic account representative.
 2. 2
 
-   Anthropic reviews eligibility
+   ### Anthropic reviews eligibility
 
    Anthropic confirms your organization meets the eligibility criteria and enables the capability at the organization level.
 3. 3
 
-   Receive events through the Compliance API
+   ### Receive events through the Compliance API
 
    `anthropic_access` activities appear in your existing Activity Feed under your existing Compliance Access Key; no new endpoint or credentials are required.
 
 Access Transparency is enabled at the organization level and covers all workspaces. Per-workspace enrollment is not currently available.
 
-##  Receiving Access Transparency events
+## Receiving Access Transparency events
 
 Access Transparency events are delivered as the `anthropic_access` activity type on the Compliance API Activity Feed. Filter with `activity_types[]`:
 
@@ -103,7 +103,7 @@ Example JSON message:
 
 
 
-##  CMEK content preservation
+## CMEK content preservation
 
 In rare cases, Anthropic preserves specific content beyond the standard retention window (for example, when a safety review confirms severely harmful content that must be retained for an ongoing investigation). Preservation is itself a logged, customer-visible action:
 
@@ -144,7 +144,7 @@ Example JSON message:
 
 For preservation events, `accessed_at` records when the content was preserved.
 
-##  Reason codes
+## Reason codes
 
 The set of reason codes is closed. Anthropic will update this page in the event it introduces a new code.
 
@@ -155,7 +155,7 @@ The set of reason codes is closed. Anthropic will update this page in the event 
 | `policy_violation_investigation` | Content was preserved during a Trust and Safety policy-violation investigation |
 | `csae_report` | Content was preserved as evidence for a child safety (CSAE) report |
 
-##  Surface eligibility
+## Surface eligibility
 
 The following table lists which surfaces are covered by Access Transparency. Coverage means human access to content from that surface generates `anthropic_access` events.
 
@@ -172,29 +172,29 @@ The following table lists which surfaces are covered by Access Transparency. Cov
 | Microsoft Foundry | No | Not available |
 | Amazon Bedrock, Google Cloud | No | Partner-operated platforms; refer to those platforms' transparency controls |
 
-##  Limitations and exclusions
+## Limitations and exclusions
 
-###  Coverage timing
+### Coverage timing
 
 Access Transparency applies from the time it is enabled for your organization. Content already in your retention window at enablement might also generate events when accessed, but Anthropic does not guarantee coverage for content written before enablement. Treat your enablement date as the start of reliable coverage. There might be a delay of up to two hours between enabling Access Transparency and your content being covered.
 
-###  Notification timing
+### Notification timing
 
 `anthropic_access` and `cmek_preserve` events are delivered to your Compliance API feed within two business days of the access or preservation they record. This feed should not be treated as a real-time alerting channel, and the `accessed_at` timestamp reflects when the access occurred, which might be up to two business days before the activity becomes visible in your feed. The `created_at` field reflects the time that the event became visible.
 
-###  Automated processing does not generate access events
+### Automated processing does not generate access events
 
 `anthropic_access` events record human access only. Anthropic's automated safety systems and classifiers continue to process your content as part of normal operation, and that processing does not generate `anthropic_access` events. The one event automated processing can initiate is a `cmek_preserve` preservation record (see [CMEK content preservation](#cmek-content-preservation)). An empty feed means no human at Anthropic has viewed your content; it does not mean your content was not processed by automated systems.
 
-###  Access Transparency does not change what Anthropic can access
+### Access Transparency does not change what Anthropic can access
 
 Access Transparency records access; it does not grant or restrict it. The purposes for which Anthropic personnel may access your content are governed by your agreement with Anthropic and the [Usage Policies](https://www.anthropic.com/legal/aup), and are the same regardless of whether Access Transparency is enabled.
 
-###  CMEK key-use logs are not a per-read record
+### CMEK key-use logs are not a per-read record
 
 For organizations that also enable CMEK, your cloud KMS audit log (CloudTrail, Cloud Audit Logs, or Azure Monitor) records Anthropic's use of your key. Because keys are cached for short periods during operation, an individual human read does not necessarily produce a distinct KMS decryption entry. Use the Access Transparency feed as the per-access record; your KMS log independently confirms key usage patterns.
 
-##  Frequently asked questions
+## Frequently asked questions
 
 ### How do I know if my organization has Access Transparency enabled?
 
@@ -214,7 +214,7 @@ For organizations that also enable CMEK, your cloud KMS audit log (CloudTrail, C
 
 ### How do I request Access Transparency?
 
-##  Related resources
+## Related resources
 
 - [Compliance API overview](manage-claude/compliance-api.md)
 - [Activity Feed](manage-claude/compliance-activity-feed.md)

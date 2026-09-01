@@ -31,7 +31,7 @@ Create a session and send your first event
 
 Event types, rate limits, CLI flags, and other lookup tables
 
-##  Core concepts
+## Core concepts
 
 Claude Managed Agents is built around four concepts:
 
@@ -42,35 +42,35 @@ Claude Managed Agents is built around four concepts:
 | **Session** | A running agent instance within an environment, performing a specific task and generating outputs |
 | **Events** | Messages exchanged between your application and the agent (user turns, tool results, status updates) |
 
-##  How it works
+## How it works
 
 1. 1
 
-   Create an agent
+   ### Create an agent
 
    Define the model, system prompt, tools, MCP servers, and skills. Create the agent once and reference it by ID across sessions.
 2. 2
 
-   Create an environment
+   ### Create an environment
 
    Configure where the agent runs: a cloud sandbox, or a [self-hosted sandbox](managed-agents/self-hosted-sandboxes.md) on your own infrastructure.
 3. 3
 
-   Start a session
+   ### Start a session
 
    Launch a session that references your agent and environment configuration.
 4. 4
 
-   Send events and stream responses
+   ### Send events and stream responses
 
    Send user messages as events. Claude autonomously runs tools and streams back results through server-sent events (SSE). Event history is persisted server-side and can be fetched in full.
 5. 5
 
-   Steer or interrupt
+   ### Steer or interrupt
 
    Send additional user events to guide the agent mid-execution, or interrupt it to change direction.
 
-##  When to use Claude Managed Agents
+## When to use Claude Managed Agents
 
 Claude Managed Agents is best for workloads that need:
 
@@ -81,7 +81,7 @@ Claude Managed Agents is best for workloads that need:
 - **Stateful sessions:** Persistent filesystems and conversation history across multiple interactions
 - **Scheduled execution:** Recurring agent runs on a cron schedule through [scheduled deployments](managed-agents/scheduled-deployments.md)
 
-##  Supported tools
+## Supported tools
 
 Claude Managed Agents gives Claude access to a set of built-in tools:
 
@@ -92,7 +92,7 @@ Claude Managed Agents gives Claude access to a set of built-in tools:
 
 See [Tools](managed-agents/tools.md) for the full list and configuration options.
 
-##  Beta access
+## Beta access
 
 To get started, you need:
 

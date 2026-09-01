@@ -8,7 +8,7 @@ Every Messages API response includes a `stop_reason` field that tells you why Cl
 
 For the full response schema, see the [Messages API reference](api/messages/create.md).
 
-##  Quick reference
+## Quick reference
 
 | Value | When it occurs | What to do |
 | --- | --- | --- |
@@ -20,7 +20,7 @@ For the full response schema, see the [Messages API reference](api/messages/crea
 | [`refusal`](#refusal) | Claude declined to respond. | Read `stop_details` and [retry on a fallback model](build-with-claude/refusals-and-fallback.md). |
 | [`model_context_window_exceeded`](#model-context-window-exceeded) | The response filled the model's context window. | Treat the response as truncated. |
 
-##  The stop\_reason field
+## The stop\_reason field
 
 The `stop_reason` field is part of every successful Messages API response. Unlike errors, which indicate failures in processing your request, `stop_reason` tells you why Claude completed its response generation.
 
@@ -49,9 +49,9 @@ Example response
 }
 ```
 
-##  Stop reason values
+## Stop reason values
 
-###  end\_turn
+### end\_turn
 
 The most common stop reason. Indicates Claude finished its response naturally.
 
@@ -76,7 +76,7 @@ if response.stop_reason == "end_turn":
 
 ### Empty responses with end\_turn
 
-###  max\_tokens
+### max\_tokens
 
 Claude stopped because it reached the `max_tokens` limit specified in your request.
 
@@ -101,7 +101,7 @@ if response.stop_reason == "max_tokens":
 
 ### Incomplete tool use blocks
 
-###  stop\_sequence
+### stop\_sequence
 
 Claude encountered one of your custom stop sequences.
 
@@ -122,7 +122,7 @@ if response.stop_reason == "stop_sequence":
     print(f"Stopped at sequence: {response.stop_sequence}")
 ```
 
-###  tool\_use
+### tool\_use
 
 Claude is calling a tool and expects you to run it.
 
@@ -218,7 +218,7 @@ Adding anything after the `tool_result` blocks in that user message, such as tex
 
 Leaving out a `tool_result`, or putting one after other content, fails earlier with the standard `tool_use ids were found without tool_result blocks immediately after` error instead. To give Claude more input, send it as a separate user message after the turn completes.
 
-###  pause\_turn
+### pause\_turn
 
 Returned when the server-side sampling loop reaches its iteration limit while executing [server tools](agents-and-tools/tool-use/server-tools.md) such as web search. The default limit is 10 iterations per request.
 
@@ -250,7 +250,7 @@ if response.stop_reason == "pause_turn":
     )
 ```
 
-###  refusal
+### refusal
 
 Claude declined to generate a response. Safety classifiers return this stop reason as a normal HTTP 200 response, not an error.
 
@@ -276,7 +276,7 @@ On a refusal, the `stop_details` object identifies the policy category that trig
 
 A refused request on Claude Fable 5 or Claude Opus 5 can usually be served by retrying on another Claude model, and [Refusals and fallback](build-with-claude/refusals-and-fallback.md) shows how to set up that retry, server-side or in your client. [Fallback credit](build-with-claude/fallback-credit.md) covers how to avoid paying the prompt-cache cost twice when you build the retry yourself.
 
-###  model\_context\_window\_exceeded
+### model\_context\_window\_exceeded
 
 Claude stopped because it reached the model's context window limit. This lets you request the maximum possible tokens without knowing the exact input size.
 
@@ -300,9 +300,9 @@ if response.stop_reason == "model_context_window_exceeded":
     # The response is still valid but was limited by context window
 ```
 
-##  Best practices for handling stop reasons
+## Best practices for handling stop reasons
 
-###  Always check stop\_reason
+### Always check stop\_reason
 
 Make it a habit to check the `stop_reason` in your response handling logic:
 
@@ -329,7 +329,7 @@ def handle_response(response):
         )
 ```
 
-###  Handle truncated responses gracefully
+### Handle truncated responses gracefully
 
 When a response is truncated because of token limits or the context window, append a notice so the reader knows the output is incomplete. To continue generating from where the response left off instead, see [Ensuring complete responses](#ensuring-complete-responses).
 
@@ -349,7 +349,7 @@ def handle_truncated_response(response):
     return text
 ```
 
-###  Implement retry logic for pause\_turn
+### Implement retry logic for pause\_turn
 
 When using [server tools](agents-and-tools/tool-use/server-tools.md), the API may return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
 
@@ -387,17 +387,17 @@ def handle_server_tool_conversation(client, user_query, tools, max_continuations
     return response
 ```
 
-##  Stop reasons vs. errors
+## Stop reasons vs. errors
 
 It's important to distinguish between `stop_reason` values and actual errors:
 
-###  Stop reasons (successful responses)
+### Stop reasons (successful responses)
 
 - Part of the response body
 - Indicate why generation stopped normally
 - Response contains valid content
 
-###  Errors (failed requests)
+### Errors (failed requests)
 
 - HTTP status codes 4xx or 5xx
 - Indicate request processing failures
@@ -429,7 +429,7 @@ except anthropic.APIStatusError as e:
         print("Server error")
 ```
 
-##  Streaming considerations
+## Streaming considerations
 
 When using streaming, `stop_reason` is:
 
@@ -456,9 +456,9 @@ with client.messages.stream(
                 print(f"Stream ended with: {stop_reason}")
 ```
 
-##  Common patterns
+## Common patterns
 
-###  Handling tool use workflows
+### Handling tool use workflows
 
 PythonTypeScriptC#GoJavaPHPRuby
 
@@ -483,7 +483,7 @@ def complete_tool_workflow(client, user_query, tools):
             return response
 ```
 
-###  Ensuring complete responses
+### Ensuring complete responses
 
 PythonTypeScriptC#GoJavaPHPRuby
 
@@ -516,7 +516,7 @@ def get_complete_response(client, prompt, max_attempts=3):
     return full_response
 ```
 
-###  Getting maximum tokens without knowing input size
+### Getting maximum tokens without knowing input size
 
 With the `model_context_window_exceeded` stop reason, you can request the maximum possible tokens without calculating input size:
 
@@ -551,7 +551,7 @@ def get_max_possible_tokens(client, prompt):
     return next((block.text for block in response.content if block.type == "text"), "")
 ```
 
-##  Next steps
+## Next steps
 
 
 

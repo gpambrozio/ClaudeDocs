@@ -13,7 +13,7 @@ MCP configuration is split across two steps:
 
 This separation keeps secrets out of reusable agent definitions while letting each session authenticate with its own credentials.
 
-##  Declare MCP servers on the agent
+## Declare MCP servers on the agent
 
 Specify MCP servers in the `mcp_servers` array when creating an agent. Each server needs a `type`, a unique `name`, and a `url`. No authentication tokens are provided at this stage.
 
@@ -45,7 +45,7 @@ tools:
     mcp_server_name: github
 ```
 
-###  `mcp_servers` field reference
+### `mcp_servers` field reference
 
 Each entry in the `mcp_servers` array defines one connection.
 
@@ -60,7 +60,7 @@ Constraints:
 - An agent can declare up to 20 MCP servers. Server names must be unique within the array.
 - Every `mcp_servers` entry must be referenced by an `mcp_toolset` in the `tools` array, and every `mcp_toolset` must reference a declared server. The API rejects agent definitions with unreferenced servers or dangling toolsets.
 
-##  Configure which MCP tools are available
+## Configure which MCP tools are available
 
 The `mcp_toolset` entry supports a `default_config` object and a `configs` array, applied to the tools the MCP server exposes. Each `configs` entry accepts only `name`, `enabled`, and `permission_policy`. Unlike entries in the built-in agent toolset, MCP tool entries do not take a `type` field, and the [web settings](managed-agents/tools.md) available on `web_search` and `web_fetch` do not apply to MCP tools. The `name` in each `configs` entry is the bare tool name as reported by the server.
 
@@ -97,11 +97,11 @@ To disable specific tools while keeping the rest enabled, omit `default_config` 
 
 See [configuring the toolset](managed-agents/tools.md) for the general `default_config` / `configs` pattern, and [MCP toolset permissions](managed-agents/permission-policies.md) for setting `permission_policy` on MCP tools and handling confirmation requests.
 
-###  MCP tool output handling
+### MCP tool output handling
 
 When an MCP tool output exceeds 100,000 characters (about 25,000 tokens), it is automatically written to a file in the sandbox. The model receives a truncated preview with the file path and can read the full content from there.
 
-##  Provide authentication at session creation
+## Provide authentication at session creation
 
 When starting a session, pass `vault_ids` to provide credentials for your MCP servers. Vaults are collections of credentials that you register once and reference by ID. See [Authenticate with vaults](managed-agents/vaults.md) for how to create vaults and manage credentials.
 
@@ -119,7 +119,7 @@ session = client.beta.sessions.create(
 
 Credentials are matched by URL, so the vault must contain a credential whose `mcp_server_url` refers to the same server as the `url` declared in `mcp_servers`. Both URLs are normalized before matching (scheme and host lowercased, default ports and trailing slashes stripped), so differences in host casing, a default port, or a trailing slash don't prevent a match; a different path, subdomain, or non-default port does. If none matches, the connection is attempted unauthenticated. See [Add a credential](managed-agents/vaults.md) for the `static_bearer` and `mcp_oauth` credential types.
 
-###  Handle connection and authentication failures
+### Handle connection and authentication failures
 
 Session creation does not validate MCP connectivity or credentials. If an MCP server is unreachable or rejects the supplied credential, the session still starts and interaction remains possible. A [`session.error`](managed-agents/events-and-streaming.md) event is emitted with the `mcp_server_name` of the affected server and a `retry_status`:
 
@@ -130,7 +130,7 @@ Session creation does not validate MCP connectivity or credentials. If an MCP se
 
 You can decide whether to block further interaction on this error, trigger a credential rotation, or let the session continue without the affected server's tools. The connection is retried on the next `session.status_idle` to `session.status_running` transition.
 
-##  Next steps
+## Next steps
 
 
 

@@ -10,17 +10,17 @@ Anthropic offers three service tiers:
 - **Standard:** Default tier for both piloting and scaling everyday use cases
 - **Batch:** Best for asynchronous workflows that can wait or benefit from being outside your normal capacity
 
-##  Standard Tier
+## Standard Tier
 
 The standard tier is the default service tier for all API requests. The API prioritizes these requests alongside all other requests with best-effort availability.
 
-##  Priority Tier
+## Priority Tier
 
 The API prioritizes requests in this tier over all other requests. This prioritization helps minimize ["server overloaded" errors](api/errors.md), even during peak times.
 
 For more information, see [Existing Priority Tier commitments](#existing-priority-tier-commitments).
 
-##  How requests get assigned tiers
+## How requests get assigned tiers
 
 When handling a request, Anthropic decides to assign a request to Priority Tier in the following scenarios:
 
@@ -44,7 +44,7 @@ Anthropic counts usage against Priority Tier capacity as follows:
 
 Otherwise, requests proceed at standard tier.
 
-##  Using service tiers
+## Using service tiers
 
 You can control which service tiers can be used for a request by setting the `service_tier` parameter:
 
@@ -102,7 +102,7 @@ anthropic-priority-output-tokens-reset: 2025-01-12T23:12:21Z
 
 You can use the presence of these headers to detect if your request was eligible for Priority Tier, even if it was over the limit.
 
-##  Existing Priority Tier commitments
+## Existing Priority Tier commitments
 
 A Priority Tier commitment consists of:
 
@@ -113,7 +113,7 @@ A Priority Tier commitment consists of:
 
 Priority Tier targets 99.5% uptime with prioritized computational resources. Requests beyond your committed capacity automatically fall back to standard tier.
 
-###  Supported models
+### Supported models
 
 Priority Tier is supported on all available Claude models except Claude Mythos 5, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 5, and Claude Sonnet 5.
 
