@@ -8,6 +8,10 @@ Claude's web interface ([claude.ai](https://claude.ai)) and mobile apps use a sy
 
 
 
+[Claude Fable 5.1](release-notes/system-prompts/claude-fable-5-1.md)
+
+
+
 [Claude Opus 5](release-notes/system-prompts/claude-opus-5.md)
 
 

@@ -564,6 +564,7 @@ To keep [Prompt caching](build-with-claude/prompt-caching.md) effective while bo
 
 - Place one `cache_control` breakpoint after the system prompt and tool definitions, and up to three more on the last `tool_result` block of each of the most recent turns, advancing them each turn. Within a [batch action](#batch-actions), markers on several blocks act as a single breakpoint but each still counts toward the limit of four, so use one per turn.
 - Prune old screenshots in *batches*, not one each turn. Dropping a screenshot every turn changes the prefix every turn and invalidates the cache. A reasonable default is to keep the last three screenshots and prune every 25 turns, so the prefix stays byte-identical between prune events; if your screenshots exceed 2000 px on either side, choose an interval that keeps each request at 20 or fewer images.
+- On Claude Fable 5.1, avoid pruning on the client: removing an earlier screenshot [invalidates every later thinking block](build-with-claude/thinking.md) in every request that still carries those turns. Resize screenshots to 2000 px or less per side instead, and use server-side [tool result clearing](build-with-claude/context-editing.md) to drop old ones from the context. If you must prune, keep [`prefix_mismatch_behavior: "drop_block"`](build-with-claude/thinking.md) set from then on; after each prune, Claude continues without the thinking produced since the pruned screenshot, on that request and every later one.
 
 ### Diagnose click issues
 
@@ -658,7 +659,7 @@ Two earlier versions of the computer use tool remain available in beta for exist
 
 | Tool version | Beta header | Use with | Parameters |
 | --- | --- | --- | --- |
-| `computer_20251124` | `computer-use-2025-11-24` | Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5 | [API reference](api/beta/messages/create.md) |
+| `computer_20251124` | `computer-use-2025-11-24` | Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5 | [API reference](api/beta/messages/create.md) |
 | `computer_20250124` | `computer-use-2025-01-24` | Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.1 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)), Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)), and Claude Opus 4 ([retired, except on Google Cloud](about-claude/model-deprecations.md)) | [API reference](api/beta/messages/create.md) |
 
 ---
@@ -730,7 +731,7 @@ Let Claude navigate, read, and interact with webpages in your own browser enviro
 
 |  |  |
 | --- | --- |
-| Supported models | - Fable 5 - Mythos 5 - Opus 4.8 and 5 - Sonnet 5 |
+| Supported models | - Fable 5 and 5.1 - Mythos 5 and 5.1 - Opus 4.8 and 5 - Sonnet 5 |
 | Supported platforms | - Claude API - Claude Platform on AWSBeta - Amazon BedrockBeta - Google Cloud - Microsoft FoundryBeta |
 
 - Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5 support computer use only through the earlier `computer_20251124` tool version, which requires a beta header; see [Earlier tool versions](#earlier-tool-versions).

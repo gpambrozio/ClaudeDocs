@@ -120,6 +120,8 @@ response = client.beta.messages.create(
 )
 ```
 
+On Claude Fable 5.1 and Claude Mythos 5.1, a request with custom `instructions` summarizes from the visible conversation only: earlier thinking blocks are not part of the summarizer's input.
+
 ### Pausing after compaction
 
 Use `pause_after_compaction` to pause the API after generating the compaction summary. This allows you to add additional content blocks (such as preserving recent messages or specific instruction-oriented messages) before the API continues with the response.
@@ -267,6 +269,8 @@ When the API receives a `compaction` block, all content blocks before it are ign
 
 - Keep the original messages in your list and let the API handle removing the compacted content
 - Manually drop the compacted messages and only include the compaction block onwards
+
+On Claude Fable 5.1 and Claude Mythos 5.1, thinking blocks from before a `compaction` block aren't carried forward, so the summary is all the model has of that earlier work. If you write your own `instructions`, tell the model what the summary must retain; see [Tell the model what to preserve in compaction summaries](build-with-claude/prompt-engineering/prompting-claude-fable-5-1.md).
 
 ### Streaming
 
@@ -467,6 +471,8 @@ print(chat("Now add rate limiting and error handling"))
 # Continue calling chat() for as long as the conversation needs
 ```
 
+On Claude Fable 5.1, remove the `thinking` and `redacted_thinking` blocks from any assistant turn you re-insert after the compaction block, or send `thinking.block_binding.prefix_mismatch_behavior: "drop_block"` with the `thinking-binding-controls-2026-08-01` [beta header](api/beta-headers.md). Those blocks were produced when the full history was present, so they no longer pass the [conversation check](build-with-claude/thinking.md). Where the check is enforced, the continuation request is rejected with a 400 error. The preserved text and tool blocks can stay as they are. Letting the API summarize everything, without re-inserting earlier turns, avoids this.
+
 Here's an example that uses `pause_after_compaction` to preserve the prior exchange and the current user message (three messages total) verbatim instead of summarizing them:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
@@ -573,7 +579,7 @@ Explore a practical implementation that manages long-running conversations with 
 
 |  |  |
 | --- | --- |
-| Supported models | - Fable 5 - Mythos 5 and Preview - Opus 4.6, 4.7, 4.8, and 5 - Sonnet 4.6 and 5 |
+| Supported models | - Fable 5 and 5.1 - Mythos 5, 5.1, and Preview - Opus 4.6, 4.7, 4.8, and 5 - Sonnet 4.6 and 5 |
 | Supported platforms | - Claude APIBeta - Claude Platform on AWSBeta - Amazon BedrockBeta - Google CloudBeta - Microsoft FoundryBeta |
 
 Was this page helpful?

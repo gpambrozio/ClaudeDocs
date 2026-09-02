@@ -213,19 +213,21 @@ print(response.usage.output_tokens)
 
 Run this across a representative set of tasks and record the distribution. Start with the p99 of your per-task token spend to understand how providing the model with a task budget might modify the model's behavior, then test up or down as needed.
 
-The minimum accepted `task_budget.total` is model-specific; on every model that currently supports task budgets (see [Feature support](#feature-support)) it is **20,000 tokens**, and values below the minimum return a 400 error.
+The minimum accepted `task_budget.total` is model-specific. On every model that supports task budgets (see [Feature support](#feature-support)) it is **20,000 tokens**, and smaller values return a 400 error.
 
 ## Interaction with other parameters
 
 - **`max_tokens`:** Orthogonal to task budgets. `max_tokens` is a hard per-request cap on generated tokens, while `task_budget` is an advisory cap across the full agentic loop (potentially spanning many requests). At `xhigh` or `max` effort, set `max_tokens` to at least 64k to give Claude room to think and act on each request.
 - **[Effort](build-with-claude/effort.md):** Effort controls how deeply Claude reasons per step. Task budgets control how much total work Claude does across an agentic loop. The two are complementary: effort tunes depth, task budgets tune breadth.
-- **[Adaptive thinking](build-with-claude/thinking.md):** Task budgets include thinking tokens in the count, so adaptive thinking naturally scales down as the budget depletes.
+- **[Adaptive thinking](build-with-claude/thinking.md):** Task budgets include thinking tokens in the count, so adaptive thinking scales down as the budget depletes.
 - **[Prompt caching](build-with-claude/prompt-caching.md):** The budget-countdown marker is injected server-side per turn, so it does not match across requests. If your client decrements `task_budget.remaining` on each follow-up request, the changed value invalidates any cache prefix that contains it. To preserve caching, set the budget once on the initial request and let the model self-regulate against the server-side countdown rather than mutating the budget client-side.
 
 ## Feature support
 
 | Model | Support |
 | --- | --- |
+| Claude Fable 5.1 | Beta (set `task-budgets-2026-03-13` header) |
+| Claude Mythos 5.1 | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Opus 5 | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Fable 5 | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Mythos 5 | Beta (set `task-budgets-2026-03-13` header) |
@@ -268,7 +270,7 @@ Reduce cost and latency on repeated prompts by caching prompt prefixes.
 
 |  |  |
 | --- | --- |
-| Supported models | - Fable 5 - Mythos 5 - Opus 4.7, 4.8, and 5 |
+| Supported models | - Fable 5 and 5.1 - Mythos 5 and 5.1 - Opus 4.7, 4.8, and 5 |
 
 Was this page helpful?
 

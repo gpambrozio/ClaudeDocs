@@ -8,12 +8,14 @@ This page provides detailed pricing information for Anthropic's models and featu
 
 For the most current pricing information, visit [claude.com/pricing](https://claude.com/pricing).
 
-##  Model pricing
+## Model pricing
 
 The following table shows pricing for all Claude models:
 
-| Model | Base Input Tokens | 5m Cache Writes | 1h Cache Writes | Cache Hits & Refreshes | Output Tokens |
+| Model | Base input tokens | 5m cache writes | 1h cache writes | Cache hits and refreshes | Output tokens |
 | --- | --- | --- | --- | --- | --- |
+| Claude Fable 5.1 | $10 / MTok | $12.50 / MTok | $20 / MTok | $0.25 / MTok1 | $50 / MTok |
+| Claude Mythos 5.1 ([limited availability](https://anthropic.com/glasswing)) | $10 / MTok | $12.50 / MTok | $20 / MTok | $0.25 / MTok1 | $50 / MTok |
 | Claude Fable 5 | $10 / MTok | $12.50 / MTok | $20 / MTok | $1 / MTok | $50 / MTok |
 | Claude Mythos 5 ([limited availability](https://anthropic.com/glasswing)) | $10 / MTok | $12.50 / MTok | $20 / MTok | $1 / MTok | $50 / MTok |
 | Claude Opus 5 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
@@ -30,9 +32,11 @@ The following table shows pricing for all Claude models:
 | Claude Haiku 4.5 | $1 / MTok | $1.25 / MTok | $2 / MTok | $0.10 / MTok | $5 / MTok |
 | Claude Haiku 3.5 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)) | $0.80 / MTok | $1 / MTok | $1.60 / MTok | $0.08 / MTok | $4 / MTok |
 
+*1 Cache hits and refreshes on Claude Fable 5.1 and Claude Mythos 5.1 are priced at 0.025x the base input price. All other models use the standard 0.1x multiplier.*
+
 For Claude Platform on AWS pricing, see [Claude Platform on AWS pricing](#claude-platform-on-aws-pricing).
 
-##  Cloud platform pricing
+## Cloud platform pricing
 
 This section covers partner-operated cloud platforms, where the cloud provider invoices you. For Anthropic-operated cloud platforms billed through a marketplace, see [Claude Platform on AWS pricing](#claude-platform-on-aws-pricing) and [Claude in Microsoft Foundry pricing](#claude-in-microsoft-foundry-pricing).
 
@@ -41,7 +45,7 @@ Claude models are available on [Amazon Bedrock](build-with-claude/claude-in-amaz
 - [Amazon Bedrock pricing](https://aws.amazon.com/bedrock/pricing/)
 - [Google Cloud pricing](https://cloud.google.com/vertex-ai/generative-ai/pricing#claude-models)
 
-##  Claude Platform on AWS pricing
+## Claude Platform on AWS pricing
 
 [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) bills through AWS Marketplace using Claude Consumption Units (CCUs). Anthropic rates your token usage in USD at standard per-model, per-feature rates, applies any negotiated discount, converts the result to CCUs at $0.01 per CCU, and reports the CCU quantity to AWS Marketplace hourly. Your AWS bill shows a single CCU line item.
 
@@ -56,15 +60,15 @@ Claude models are available on [Amazon Bedrock](build-with-claude/claude-in-amaz
 | **Tax** | Pre-tax metering; AWS Marketplace handles tax |
 | **Cost visibility** | Real-time breakdown in the Claude Console (access through the AWS Console); AWS Cost Explorer shows aggregated CCU |
 
-###  Inference geography
+### Inference geography
 
 For Claude 4.6 and later models, using `inference_geo: "us"` applies a 1.1x pricing multiplier. `inference_geo: "global"` (default) uses standard pricing. See [Data residency](manage-claude/data-residency.md) for details.
 
-###  Private offers
+### Private offers
 
 When you sign up on the AWS Console **Claude Platform on AWS** service page, the AWS Console looks up any private offer associated with your account and prompts you to accept it in AWS Marketplace. Contact your Anthropic account representative for private offer terms.
 
-##  Claude in Microsoft Foundry pricing
+## Claude in Microsoft Foundry pricing
 
 [Claude in Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) bills through the Azure Marketplace using Claude Consumption Units (CCUs). Anthropic rates your token usage in USD at standard per-model, per-feature rates, applies any negotiated discount, converts the result to CCUs at $0.01 per CCU, and reports the CCU quantity to the Azure Marketplace hourly. Your Azure bill shows a single CCU line item.
 
@@ -79,13 +83,13 @@ When you sign up on the AWS Console **Claude Platform on AWS** service page, the
 | **Tax** | Pre-tax metering; Azure Marketplace handles tax |
 | **Cost visibility** | Azure Cost Management shows aggregated CCU |
 
-###  Inference geography
+### Inference geography
 
 Deployments hosted on Azure can use the US Data Zone Standard deployment type, which keeps inference within the United States. This is equivalent to `inference_geo: "us"` on the Claude API and applies the same 1.1x pricing multiplier. See [Data residency](manage-claude/data-residency.md) for details.
 
-##  Feature-specific pricing
+## Feature-specific pricing
 
-###  Prompt caching
+### Prompt caching
 
 Prompt caching reduces costs and latency by reusing previously processed portions of your prompt across API calls. Instead of reprocessing the same large system prompt, document, or conversation history on every request, the API reads from cache at a fraction of the standard input price.
 
@@ -100,15 +104,15 @@ Prompt caching uses the following pricing multipliers relative to base input tok
 | --- | --- | --- |
 | 5-minute cache write | 1.25x base input price | Cache valid for 5 minutes |
 | 1-hour cache write | 2x base input price | Cache valid for 1 hour |
-| Cache read (hit) | 0.1x base input price | Same duration as the preceding write |
+| Cache read (hit) | 0.1x base input price (0.025x on Claude Fable 5.1 and Claude Mythos 5.1) | Same duration as the preceding write |
 
-Cache write tokens are charged when content is first stored. Cache read tokens are charged when a subsequent request retrieves the cached content. A cache hit costs 10% of the standard input price, which means caching pays off after one cache read for the 5-minute duration (1.25x write), or after two cache reads for the 1-hour duration (2x write).
+Cache write tokens are charged when content is first stored. Cache read tokens are charged when a subsequent request retrieves the cached content. A cache hit costs 10% of the standard input price, which means caching pays off after one cache read for the 5-minute duration (1.25x write), or after two cache reads for the 1-hour duration (2x write). On Claude Fable 5.1 and Claude Mythos 5.1, a cache hit costs 2.5% of the standard input price ($0.25 USD per million tokens).
 
 These multipliers stack with other pricing modifiers, including the Batch API discount and data residency.
 
 For implementation details, supported models, and code examples, see [Prompt caching](build-with-claude/prompt-caching.md).
 
-###  Data residency pricing
+### Data residency pricing
 
 For Claude 4.6 and later models, specifying US-only inference through the `inference_geo` parameter incurs a 1.1x multiplier on all token pricing categories, including input tokens, output tokens, cache writes, and cache reads. Global routing (the default) uses standard pricing.
 
@@ -116,7 +120,7 @@ This applies to the Claude API (first-party) and Claude Platform on AWS. On Clau
 
 For more information, see [Data residency](manage-claude/data-residency.md).
 
-###  Fast mode pricing
+### Fast mode pricing
 
 [Fast mode](build-with-claude/fast-mode.md), in research preview, provides significantly faster output for Claude Opus 5 and Claude Opus 4.8 at premium pricing. Fast mode pricing applies across the full context window, including requests over 200k input tokens. Fast mode is available on the Claude API (first-party) only; it is not available on Claude Platform on AWS or partner-operated cloud platforms.
 
@@ -135,12 +139,14 @@ Fast mode is not available with the [Batch API](#batch-processing).
 
 For more information, see [Fast mode](build-with-claude/fast-mode.md).
 
-###  Batch processing
+### Batch processing
 
 The Batch API allows asynchronous processing of large volumes of requests with a 50% discount on both input and output tokens.
 
 | Model | Batch input | Batch output |
 | --- | --- | --- |
+| Claude Fable 5.1 | $5 / MTok | $25 / MTok |
+| Claude Mythos 5.1 ([limited availability](https://anthropic.com/glasswing)) | $5 / MTok | $25 / MTok |
 | Claude Fable 5 | $5 / MTok | $25 / MTok |
 | Claude Mythos 5 ([limited availability](https://anthropic.com/glasswing)) | $5 / MTok | $25 / MTok |
 | Claude Opus 5 | $2.50 / MTok | $12.50 / MTok |
@@ -159,11 +165,11 @@ The Batch API allows asynchronous processing of large volumes of requests with a
 
 For more information about batch processing, see [Batch processing](build-with-claude/batch-processing.md).
 
-###  Long context pricing
+### Long context pricing
 
 Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing) include the full [1M token context window](build-with-claude/context-windows.md) at standard pricing. (A 900k-token request is billed at the same per-token rate as a 9k-token request.) Prompt caching and batch processing discounts apply at standard rates across the full context window.
 
-###  Tool use pricing
+### Tool use pricing
 
 Tool use requests are priced based on:
 
@@ -203,9 +209,9 @@ For current per-model prices, refer to the [model pricing](#model-pricing) secti
 
 For more information about tool use implementation and best practices, see [Tool use](agents-and-tools/tool-use/overview.md).
 
-###  Specific tool pricing
+### Specific tool pricing
 
-####  Bash tool
+#### Bash tool
 
 The bash tool definition adds the following input tokens to your request. This is in addition to the per-model [tool use system prompt](agents-and-tools/tool-use/overview.md) that applies whenever any tool is present.
 
@@ -222,7 +228,7 @@ Additional tokens are consumed by:
 
 See [tool use pricing](#tool-use-pricing) for complete pricing details.
 
-####  Code execution tool
+#### Code execution tool
 
 **Code execution is free when used with web search or web fetch.** When `web_search_20260209` (or later) or `web_fetch_20260209` (or later) is included in your API request, there are no additional charges for code execution tool calls beyond the standard input and output token costs.
 
@@ -249,7 +255,7 @@ Code execution usage is tracked in the response:
 
 
 
-####  Text editor tool
+#### Text editor tool
 
 The text editor tool uses the same pricing structure as other tools used with Claude. It follows the standard input and output token pricing based on the Claude model you're using.
 
@@ -261,7 +267,7 @@ In addition to the base tokens, the following additional input tokens are needed
 
 See [tool use pricing](#tool-use-pricing) for complete pricing details.
 
-####  Web search tool
+#### Web search tool
 
 Web search usage is charged in addition to token usage:
 
@@ -285,7 +291,7 @@ Web search is available on the Claude API for **$10 per 1,000 searches**, plus s
 
 Each web search counts as one use, regardless of the number of results returned. If an error occurs during web search, the web search will not be billed.
 
-####  Web fetch tool
+#### Web fetch tool
 
 Web fetch usage has **no additional charges** beyond standard token costs:
 
@@ -315,7 +321,7 @@ Example token usage for typical content:
 - Large documentation page (100 kB): ~25,000 tokens
 - Research paper PDF (500 kB): ~125,000 tokens
 
-####  Computer use tool
+#### Computer use tool
 
 Computer use follows the standard [tool use pricing](agents-and-tools/tool-use/overview.md). When using the computer use tool:
 
@@ -331,7 +337,7 @@ Computer use follows the standard [tool use pricing](agents-and-tools/tool-use/o
 - Screenshot and zoom images returned in tool results, billed as image input (see [Vision pricing](build-with-claude/vision.md))
 - Tool execution results returned to Claude
 
-####  Browser use tool
+#### Browser use tool
 
 Browser use follows the standard [tool use pricing](agents-and-tools/tool-use/overview.md). When using the browser use tool:
 
@@ -342,11 +348,11 @@ Browser use follows the standard [tool use pricing](agents-and-tools/tool-use/ov
 - Screenshot and zoom images returned in tool results, billed as image input (see [Vision pricing](build-with-claude/vision.md))
 - Text tool results returned to Claude, such as accessibility trees, page text, and console or network entries
 
-##  Claude Managed Agents pricing
+## Claude Managed Agents pricing
 
 [Claude Managed Agents](managed-agents/overview.md) is billed on two dimensions: tokens and session runtime.
 
-###  Tokens
+### Tokens
 
 All tokens consumed by a Claude Managed Agents session are billed at the rates shown in [Model pricing](#model-pricing). [Prompt caching](#prompt-caching) multipliers apply identically. Web search triggered inside a session incurs the standard $10 per 1,000 searches. On [Claude Platform on AWS](#claude-platform-on-aws-pricing), session token and runtime charges convert to Claude Consumption Units at the standard rate. [Fast mode](#fast-mode-pricing) premium pricing applies when an agent's `model.speed` is set to `"fast"`.
 
@@ -359,7 +365,7 @@ The following Messages API modifiers do **not** apply to Claude Managed Agents s
 | [Batch API discount](#batch-processing) | Sessions are stateful and interactive. There is no batch mode. |
 | [Cloud platform pricing](#cloud-platform-pricing) | Not available on partner-operated cloud platforms. |
 
-###  Session runtime
+### Session runtime
 
 | SKU | Rate | Metering |
 | --- | --- | --- |
@@ -367,7 +373,7 @@ The following Messages API modifiers do **not** apply to Claude Managed Agents s
 
 Runtime is measured to the millisecond and accrues only while the session's status is `running`. Time spent `idle` (waiting for your next message or a tool confirmation), `rescheduling`, or `terminated` does not count toward runtime.
 
-###  Worked example
+### Worked example
 
 A one-hour coding session using Claude Opus 5 that consumes 50,000 input tokens and 15,000 output tokens:
 
@@ -390,9 +396,9 @@ If prompt caching is active and 40,000 of the input tokens are cache reads:
 
 For a detailed walkthrough of this calculation, see the [customer support agent guide](about-claude/use-case-guides/customer-support-chat.md).
 
-##  Additional pricing considerations
+## Additional pricing considerations
 
-###  Cost optimization strategies
+### Cost optimization strategies
 
 When building agents with Claude:
 
@@ -401,7 +407,7 @@ When building agents with Claude:
 3. **Batch operations:** Use the Batch API for non-time-sensitive tasks
 4. **Monitor usage patterns:** Track token consumption to identify optimization opportunities
 
-###  Rate limits
+### Rate limits
 
 Rate limits vary by usage tier and affect how many requests you can make:
 
@@ -413,7 +419,7 @@ For detailed rate limit information, see [Rate limits](api/rate-limits.md).
 
 For limits beyond the Scale tier or custom pricing arrangements, [contact the sales team](https://claude.com/contact-sales).
 
-###  Volume discounts
+### Volume discounts
 
 Volume discounts may be available for high-volume users. These are negotiated on a case-by-case basis.
 
@@ -421,7 +427,7 @@ Volume discounts may be available for high-volume users. These are negotiated on
 - Enterprise customers can [contact sales](mailto:sales@anthropic.com) for custom pricing
 - Academic and research discounts may be available
 
-###  Enterprise pricing
+### Enterprise pricing
 
 For enterprise customers with specific needs:
 
@@ -432,28 +438,28 @@ For enterprise customers with specific needs:
 
 Contact the sales team at [sales@anthropic.com](mailto:sales@anthropic.com) or through the [Claude Console](/settings/limits) to discuss enterprise pricing options.
 
-##  Billing and payment
+## Billing and payment
 
 - Billing is based on actual monthly usage
 - All payments are in USD
 - Credit card and invoicing options available
 - Usage tracking available in the [Claude Console](/)
 
-##  Frequently asked questions
+## Frequently asked questions
 
-###  How is token usage calculated?
+### How is token usage calculated?
 
 Tokens are pieces of text that models process. As a rough estimate, 1 token is approximately 4 characters or 0.75 words in English. The exact count varies by language and content type.
 
-###  Are there free tiers or trials?
+### Are there free tiers or trials?
 
 New users receive a small amount of free credits to test the API. [Contact sales](mailto:sales@anthropic.com) for information about extended trials for enterprise evaluation.
 
-###  How do discounts stack?
+### How do discounts stack?
 
 Batch API and prompt caching discounts can be combined. For example, using both features together provides significant cost savings compared to standard API calls. See [prompt caching pricing](#prompt-caching) for how the multipliers interact.
 
-###  What payment methods are accepted?
+### What payment methods are accepted?
 
 Major credit cards are accepted for standard accounts. Enterprise customers can arrange invoicing and other payment methods.
 

@@ -12,7 +12,7 @@ List current user members of an organization.
 
 ##### Path parameters
 
-org\_uuid: string
+org\_uuid: string
 
 The organization UUID
 
@@ -20,7 +20,7 @@ The organization UUID
 
 
 
-limit: optional number
+limit: optional number
 
 Maximum results (default: 500, max: 1000)
 
@@ -30,83 +30,79 @@ maximum1000
 
 minimum1
 
-page: optional string
+page: optional string
 
 Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
 ##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### Returns
 
 
 
-data: array of object{ id, created\_at, email, 2 more }
+data: array of object{ id, created\_at, email, 2 more }
 
 List of current organization members sorted by organization join date ascending
 
-id: string
+id: string
 
 User identifier (tagged ID)
 
 
 
-created\_at: string
+created\_at: string
 
 User account creation timestamp
 
 formatdate-time
 
-email: string
+email: string
 
 User's current email address
 
-full\_name: string
+full\_name: string
 
 User's current full name
 
 
 
-organization\_role: "admin" or "billing" or "claude\_code\_user" or 6 more
+organization\_role: "admin" or "billing" or "claude\_code\_user" or 6 more
 
 User's built-in role within the organization. This is distinct from any custom RBAC roles that may also be assigned.
 
 One of the following:
 
-"admin"
+"admin"
 
-"billing"
+"billing"
 
-"claude\_code\_user"
+"claude\_code\_user"
 
-"developer"
+"developer"
 
-"managed"
+"managed"
 
-"membership\_admin"
+"membership\_admin"
 
-"owner"
+"owner"
 
-"primary\_owner"
+"primary\_owner"
 
-"user"
+"user"
 
-has\_more: boolean
+has\_more: boolean
 
 Whether more records exist beyond the current result set
 
-next\_page: string or null
+next\_page: string or null
 
 Token to retrieve the next page. Use this as the 'page' parameter in your next request
 
-
+List organization users
 
-### List organization users
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/users \

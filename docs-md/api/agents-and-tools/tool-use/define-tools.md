@@ -9,12 +9,6 @@
 - Familiarity with the [tool use overview](agents-and-tools/tool-use/overview.md)
 - A Claude API key and a working SDK or cURL setup
 
-## Choosing a model
-
-Use the latest Claude Opus model, Claude Opus 5, for complex tools and ambiguous queries; it handles multiple tools better and seeks clarification when needed.
-
-Use Claude Haiku models for straightforward tools, but note they may infer missing parameters.
-
 ## Specifying client tools
 
 Client tools are specified in the `tools` top-level parameter of the API request. Anthropic-schema client tools, such as the bash and text editor tools, are declared by a date-versioned `type`; see each tool's page, linked from the [Tool reference](agents-and-tools/tool-use/tool-reference.md), for the fields it accepts. The computer use and browser use tools are [client toolsets](agents-and-tools/tool-use/tool-reference.md): a single entry with no `name` that declares a fixed set of member tools. A user-defined tool definition includes:
@@ -130,7 +124,16 @@ Examples are included in the prompt alongside your tool schema, showing Claude c
 
 ### Forcing tool use
 
-In some cases, you may want Claude to use a specific tool to answer the user's question, even if Claude would otherwise answer directly without calling a tool. You can do this by specifying the tool in the `tool_choice` field of the request. The highlighted lines are the only difference from a standard tool use request:
+In some cases, you may want Claude to use a specific tool to answer the user's question, even if Claude would otherwise answer directly without calling a tool. You can do this by specifying the tool in the `tool_choice` field of the request.
+
+Not every model and setting supports forced tool use. Where it isn't supported, `tool_choice: {"type": "any"}` and `tool_choice: {"type": "tool", "name": "..."}` fail, while `tool_choice: {"type": "auto"}` (the default) and `tool_choice: {"type": "none"}` still work:
+
+| Model or setting | Restriction | What to use instead |
+| --- | --- | --- |
+| Manual [extended thinking](build-with-claude/extended-thinking.md) (`thinking: {type: "enabled"}`) | `any` and `tool` are not supported and result in an error | `auto` or `none`. [Adaptive thinking](build-with-claude/thinking.md), including on models where thinking is on by default such as Claude Opus 5, supports forced tool use |
+| Claude Fable 5.1 and [Claude Mythos 5.1](https://anthropic.com/glasswing) | `any` and `tool` return a [400 error](api/errors.md) | `auto` with [strict tool use](agents-and-tools/tool-use/strict-tool-use.md) to guarantee schema-valid tool inputs, or [structured outputs](build-with-claude/structured-outputs.md) when you need a response in a fixed JSON shape. Prompting still influences which tool `auto` picks. `none` is also supported |
+
+On models that support it, the highlighted lines are the only difference from a standard tool use request:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 

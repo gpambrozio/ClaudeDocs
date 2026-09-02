@@ -30,7 +30,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
 
 One of the following:
 
@@ -116,6 +116,12 @@ One of the following:
 
 "ce-user-management-2026-07-13"
 
+"mid-conversation-output-config-2026-07-01"
+
+"thinking-binding-controls-2026-08-01"
+
+"mid-conversation-system-clear-at-2026-08-21"
+
 ##### Body
 
 
@@ -140,6 +146,14 @@ minLength1
 
 maxLength255
 
+
+
+external\_user\_onboarded\_at: optional string
+
+A timestamp in RFC 3339 format
+
+formatdate-time
+
 metadata: optional map[string]
 
 Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
@@ -153,20 +167,6 @@ If present, replaces the stored name. Omit to leave unchanged. Maximum 255 chara
 minLength1
 
 maxLength255
-
-
-
-relationship: optional "external" or "resold" or "internal" or null
-
-How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
-One of the following:
-
-"external"
-
-"resold"
-
-"internal"
 
 ##### Returns
 
@@ -207,8 +207,8 @@ Response 200
   "updated_at": "2026-03-15T10:00:00Z",
   "access_type": "application",
   "external_id": "user_12345",
-  "name": "Example User",
-  "relationship": "external"
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
+  "name": "Example User"
 }
 ```
 
@@ -232,8 +232,8 @@ Response 200
   "updated_at": "2026-03-15T10:00:00Z",
   "access_type": "application",
   "external_id": "user_12345",
-  "name": "Example User",
-  "relationship": "external"
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
+  "name": "Example User"
 }
 ```
 

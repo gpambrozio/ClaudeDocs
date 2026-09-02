@@ -4,14 +4,15 @@
 
 
 
-#  API usage primer for Claude
+# API usage primer for Claude
 
 > This guide is designed to give Claude the basics of using the Claude API. It gives explanation and examples of model IDs/the basic messages API, tool use, streaming, thinking, and nothing else.
 
-##  Models
+## Models
 
 ```shiki
-For complex agentic coding and enterprise work: Claude Opus 5: claude-opus-5
+Recommended default for most work, including complex agentic coding: Claude Opus 5: claude-opus-5
+Step up for the hardest long-running agentic and research tasks, at 2x Claude Opus 5 pricing: Claude Fable 5.1: claude-fable-5-1
 Previous Opus model: Claude Opus 4.8: claude-opus-4-8
 Smart model: Claude Sonnet 5: claude-sonnet-5
 For fast, cost-effective tasks: Claude Haiku 4.5: claude-haiku-4-5-20251001
@@ -19,9 +20,9 @@ For fast, cost-effective tasks: Claude Haiku 4.5: claude-haiku-4-5-20251001
 
 
 
-##  Calling the API
+## Calling the API
 
-###  Basic request and response
+### Basic request and response
 
 CLIPython
 
@@ -63,7 +64,7 @@ Output
 }
 ```
 
-###  Multiple conversational turns
+### Multiple conversational turns
 
 The Messages API is stateless, which means that you always send the full conversational history to the API. You can use this pattern to build up a conversation over time. Earlier conversational turns don't necessarily need to actually originate from Claude. You can use synthetic `assistant` messages.
 
@@ -86,7 +87,7 @@ message = anthropic.Anthropic().messages.create(
 print(message)
 ```
 
-###  Prefilling Claude's response
+### Prefilling Claude's response
 
 You can prefill part of Claude's response in the last position of the input messages list. Use this technique to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
@@ -111,7 +112,7 @@ message = anthropic.Anthropic().messages.create(
 print(message.content[0].text)
 ```
 
-###  Vision
+### Vision
 
 Claude can read both text and images in requests. Both `base64` and `url` source types are supported for images, along with the `image/jpeg`, `image/png`, `image/gif`, and `image/webp` media types.
 
@@ -174,7 +175,7 @@ message_from_url = anthropic.Anthropic().messages.create(
 print(next(block.text for block in message_from_url.content if block.type == "text"))
 ```
 
-##  Thinking
+## Thinking
 
 Thinking can sometimes help Claude with very hard tasks. The current mechanism is [adaptive thinking](build-with-claude/thinking.md) (`thinking: {"type": "adaptive"}`): Claude decides when and how much to think, and you steer thinking depth with the [`effort`](build-with-claude/effort.md) parameter rather than a token budget. Adaptive thinking is supported on Claude 4.6 and later models and Claude Mythos Preview. On Claude 5 models and Claude Mythos Preview, thinking is on by default when the `thinking` parameter is omitted.
 
@@ -192,7 +193,7 @@ Thinking is supported in the following models:
 - Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`, legacy manual thinking only)
 - Claude Haiku 4.5 (`claude-haiku-4-5-20251001`, legacy manual thinking only)
 
-###  How thinking works
+### How thinking works
 
 When thinking is on, Claude creates `thinking` content blocks where it outputs its internal reasoning. The API response includes `thinking` content blocks, followed by `text` content blocks.
 
@@ -227,7 +228,7 @@ for block in response.content:
 
 Manual extended thinking (`thinking: {"type": "enabled", "budget_tokens": N}`) is the legacy mechanism. It works only on Claude 4 through 4.6 models that support thinking; Claude 4.7 and later models reject `type: enabled` with a 400 error and use [adaptive thinking](build-with-claude/thinking.md) instead. With manual extended thinking, `budget_tokens` sets the maximum number of tokens Claude is allowed to use for its internal reasoning process; the limit applies to full thinking tokens, not to the summarized output. Unless you are using [interleaved thinking](#interleaved-thinking), `budget_tokens` must be less than `max_tokens` so that Claude has space to write its response after thinking is complete.
 
-##  Thinking with tool use
+## Thinking with tool use
 
 Thinking can be used alongside tool use, allowing Claude to reason through tool selection and results processing.
 
@@ -236,7 +237,7 @@ Important limitations:
 1. **Tool choice limitation:** Only supports `tool_choice: {"type": "auto"}` (default) or `tool_choice: {"type": "none"}`.
 2. **Preserving thinking blocks:** During tool use, you must pass `thinking` blocks back to the API for the last assistant message.
 
-###  Preserving thinking blocks
+### Preserving thinking blocks
 
 CLIPython
 
@@ -304,7 +305,7 @@ for block in continuation.content:
         print(block.text)
 ```
 
-###  Interleaved thinking
+### Interleaved thinking
 
 Interleaved thinking enables Claude to think between tool calls, reasoning about tool results before deciding the next step.
 
@@ -371,9 +372,9 @@ for block in response.content:
 
 With interleaved thinking and ONLY with interleaved thinking (not regular manual extended thinking), the `budget_tokens` can exceed the `max_tokens` parameter, as `budget_tokens` in this case represents the total budget across all thinking blocks within one assistant turn.
 
-##  Tool use
+## Tool use
 
-###  Specifying client tools
+### Specifying client tools
 
 Client tools are specified in the `tools` top-level parameter of the API request. Each tool definition includes:
 
@@ -407,7 +408,7 @@ Client tools are specified in the `tools` top-level parameter of the API request
 
 
 
-###  Best practices for tool definitions
+### Best practices for tool definitions
 
 **Provide extremely detailed descriptions.** This is by far the most important factor in tool performance. Your descriptions should explain every detail about the tool, including:
 
@@ -439,9 +440,9 @@ Example of a good tool description:
 
 
 
-##  Controlling Claude's output
+## Controlling Claude's output
 
-###  Forcing tool use
+### Forcing tool use
 
 You can force Claude to use a specific tool by specifying the tool in the `tool_choice` field:
 
@@ -458,11 +459,13 @@ When working with the `tool_choice` parameter, there are four possible options:
 - `tool` forces Claude to always use a particular tool.
 - `none` prevents Claude from using any tools.
 
-###  JSON output
+On Claude Fable 5.1 and Claude Mythos 5.1, `any` and `tool` return a 400 error. Leave `tool_choice` at `auto` and set `"strict": true` on the tool definition to guarantee that any call Claude makes matches the tool's `input_schema`. See [Strict tool use](agents-and-tools/tool-use/strict-tool-use.md).
+
+### JSON output
 
 Tools do not necessarily need to be client functions. You can use tools anytime you want the model to return JSON output that follows a provided schema.
 
-###  Chain of thought
+### Chain of thought
 
 When using tools, Claude often shows its "chain of thought," that is, the step-by-step reasoning it uses to break down the problem and determine which tools to use.
 
@@ -486,13 +489,13 @@ When using tools, Claude often shows its "chain of thought," that is, the step-b
 
 
 
-###  Parallel tool use
+### Parallel tool use
 
 By default, Claude may use multiple tools to answer a user query. You can disable this behavior by setting `disable_parallel_tool_use=true`.
 
-##  Handling tool use and tool result content blocks
+## Handling tool use and tool result content blocks
 
-###  Handling results from client tools
+### Handling results from client tools
 
 The response has a `stop_reason` of `tool_use` and one or more `tool_use` content blocks that include:
 
@@ -521,17 +524,17 @@ When you receive a tool use response, you should:
 
 
 
-###  Handling the `max_tokens` stop reason
+### Handling the `max_tokens` stop reason
 
 If Claude's response is cut off because it hits the `max_tokens` limit during tool use, retry the request with a higher `max_tokens` value.
 
-###  Handling the `pause_turn` stop reason
+### Handling the `pause_turn` stop reason
 
 When using server tools such as web search, the API may return a `pause_turn` stop reason. Continue the conversation by passing the paused response back as-is in a subsequent request.
 
-##  Troubleshooting errors
+## Troubleshooting errors
 
-###  Tool execution error
+### Tool execution error
 
 If the tool itself throws an error during execution, return the error message with `"is_error": true`:
 
@@ -551,15 +554,15 @@ If the tool itself throws an error during execution, return the error message wi
 
 
 
-###  Invalid tool name
+### Invalid tool name
 
 If Claude's attempted use of a tool is invalid (for example, missing required parameters), try the request again with more-detailed `description` values in your tool definitions.
 
-##  Streaming messages
+## Streaming messages
 
 When creating a Message, you can set `"stream": true` to incrementally stream the response using server-sent events (SSE).
 
-###  Streaming with SDKs
+### Streaming with SDKs
 
 CLIPython
 
@@ -579,7 +582,7 @@ with client.messages.stream(
         print(text, end="", flush=True)
 ```
 
-###  Event types
+### Event types
 
 Each server-sent event includes a named event type and associated JSON data. Each stream uses the following event flow:
 
@@ -590,9 +593,9 @@ Each server-sent event includes a named event type and associated JSON data. Eac
 
 **Warning:** The token counts shown in the `usage` field of the `message_delta` event are *cumulative*.
 
-###  Content block delta types
+### Content block delta types
 
-####  Text delta
+#### Text delta
 
 ```shiki
 {
@@ -604,7 +607,7 @@ Each server-sent event includes a named event type and associated JSON data. Eac
 
 
 
-####  Input JSON delta
+#### Input JSON delta
 
 For `tool_use` content blocks, deltas are *partial JSON strings*:
 
@@ -614,7 +617,7 @@ For `tool_use` content blocks, deltas are *partial JSON strings*:
 
 
 
-####  Thinking delta
+#### Thinking delta
 
 When using thinking with streaming:
 
@@ -631,7 +634,7 @@ When using thinking with streaming:
 
 
 
-###  Basic streaming request example
+### Basic streaming request example
 
 ```shiki
 event: message_start

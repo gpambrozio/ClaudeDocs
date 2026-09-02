@@ -1,23 +1,16 @@
-## Overview
-
-Claude Fable 5 is Anthropic's most capable widely released model, built for the most demanding reasoning and long-horizon agentic work. Claude Mythos 5 shares the same capabilities and is available only in limited release through [Project Glasswing](https://anthropic.com/glasswing).
-
-The headline change for integrations: Claude Fable 5 includes safety classifiers that can decline requests. Claude Mythos 5 does not include these classifiers. If your integration calls Claude Fable 5, plan for three changes: new response handling for refusals, fallback options for retrying on another Claude model, and new billing rules. [Refusals, fallback, and billing on Claude Fable 5](models/fable-5/introducing-claude-fable-5-and-claude-mythos-5.md) summarizes all three.
-
-[Introducing Claude Fable 5 and Claude Mythos 5](models/fable-5/introducing-claude-fable-5-and-claude-mythos-5.md)
-
 ## Fable vs. Mythos
 
 [Claude Mythos 5](models/mythos-5/overview.md) is offered separately, by invitation only, for defensive cybersecurity workflows as part of [Project Glasswing](https://anthropic.com/glasswing). It shares Claude Fable 5's specifications and pricing; Claude Fable 5 includes safety classifiers that can decline requests, and Claude Mythos 5 does not. For access, contact your Anthropic, AWS, or Google Cloud account team.
 
-## How it compares
+## How it compares to the current lineup
 
-| Model | Context | Max output | Price / MTok | Latency | Thinking | Default effort | Knowledge cutoff |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Claude Fable 5This model | 1M | 128K | $10 / $50 | Slower | Adaptive (always on) | `high` | Jan 2026 |
-| [Claude Opus 5](models/opus-5/overview.md) | 1M | 128K | $5 / $25 | Moderate | Adaptive | `high` | May 2026 |
-| [Claude Sonnet 5](models/sonnet-5/overview.md) | 1M | 128K | $2 / $10 | Fast | Adaptive | `high` | Jan 2026 |
-| [Claude Haiku 4.5](models/haiku-4-5/overview.md) | 200K | 64K | $1 / $5 | Fastest | Extended | — | Feb 2025 |
+| Model | Context | Max output | Price / MTok | Thinking | Default effort | Knowledge cutoff |
+| --- | --- | --- | --- | --- | --- | --- |
+| [Claude Fable 5.1](models/fable-5-1/overview.md) | 1M | 128K | $10 / $50 | Adaptive (always on) | `high` | Jun 2026 |
+| Claude Fable 5This modelLegacy | 1M | 128K | $10 / $50 | Adaptive (always on) | `high` | Jan 2026 |
+| [Claude Opus 5](models/opus-5/overview.md) | 1M | 128K | $5 / $25 | Adaptive | `high` | May 2026 |
+| [Claude Sonnet 5](models/sonnet-5/overview.md) | 1M | 128K | $2 / $10 | Adaptive | `high` | Jan 2026 |
+| [Claude Haiku 4.5](models/haiku-4-5/overview.md) | 200K | 64K | $1 / $5 | Extended | — | Feb 2025 |
 
 ## Specifications
 
@@ -75,9 +68,6 @@ Max output
 [Default effort](build-with-claude/effort.md)
 :   `high`
 
-Comparative latency
-:   Slower
-
 Input → output
 :   Text and images → text
 
@@ -90,7 +80,7 @@ Training data cutoff
 ### Availability
 
 [Status](about-claude/model-deprecations.md)
-:   Active (latest)
+:   Active (legacy)
 
 Released
 :   June 9, 2026
@@ -103,6 +93,22 @@ Platforms
 
 ## Resources
 
+[Migrate to Claude Fable 5.1](models/fable-5-1/migration-guide.md)
+
+What changes when moving from Claude Fable 5 to Claude Fable 5.1.
+
+
+
+[Claude Fable 5.1](models/fable-5-1/overview.md)
+
+The current Fable model: overview, specs, and resources.
+
+
+
+[Introducing Claude Fable 5 and Claude Mythos 5](models/fable-5/introducing-claude-fable-5-and-claude-mythos-5.md)
+
+Capabilities, API changes, and availability for Claude Fable 5.
+
 
 
 [Prompting Claude Fable 5](build-with-claude/prompt-engineering/prompting-claude-fable-5.md)
@@ -114,12 +120,6 @@ Model-specific prompting guidance for long-horizon and agentic work.
 [Refusals and fallback](build-with-claude/refusals-and-fallback.md)
 
 Handle classifier refusals and retry on another Claude model with the `fallbacks` parameter.
-
-
-
-[Adaptive thinking](build-with-claude/thinking.md)
-
-The only thinking mode on Claude Fable 5. Steer depth with `effort`.
 
 ## Reference
 

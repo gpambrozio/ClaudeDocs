@@ -670,7 +670,7 @@ Configuration for tools from an MCP server defined in `mcp_servers`.
 
 
 
-BetaManagedAgentsModel = "claude-sonnet-5" or "claude-fable-5" or "claude-opus-5" or 10 more or string
+BetaManagedAgentsModel = "claude-fable-5-1" or "claude-sonnet-5" or "claude-fable-5" or 11 more or string
 
 The model that will power your agent.
 

@@ -312,6 +312,16 @@ One of the following:
 
 GET/v1/organizations/rate\_limits
 
+#### Organization[Compliance Settings](api/http/beta/organization/compliance_settings.md)
+
+##### [Get Compliance Settings](api/http/beta/organization/compliance_settings/retrieve.md)
+
+GET/v1/organizations/compliance\_settings
+
+##### [Update Compliance Settings](api/http/beta/organization/compliance_settings/update.md)
+
+POST/v1/organizations/compliance\_settings
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

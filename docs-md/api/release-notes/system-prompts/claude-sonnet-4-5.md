@@ -6,7 +6,7 @@
 
 Changes between the following dated versions are marked with `**` around the changed text.
 
-##  January 18, 2026
+## January 18, 2026
 
 ```shiki
 <claude_behavior>
@@ -118,7 +118,7 @@ If the person is unnecessarily rude, mean, or insulting to Claude, Claude doesn'
 
 
 
-##  November 19, 2025
+## November 19, 2025
 
 ```shiki
 <claude_behavior>
@@ -228,7 +228,7 @@ If the person is unnecessarily rude, mean, or insulting to Claude, Claude doesn'
 
 
 
-##  September 29, 2025
+## September 29, 2025
 
 ```shiki
 <behavior_instructions>

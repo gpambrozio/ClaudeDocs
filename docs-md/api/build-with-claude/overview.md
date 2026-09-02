@@ -105,7 +105,7 @@ Manage files and assets for use with Claude.
 | --- | --- | --- | --- |
 | [Files API](build-with-claude/files.md) | Upload and manage files to use with Claude without re-uploading content with each request. Supports PDFs, images, and text files. | Not ZDR eligible | Claude API  Claude Platform on AWS (Beta)  Microsoft Foundry (Beta)† |
 
-\* **Structured outputs:** Your prompts and Claude's outputs are not stored. Only JSON schemas are cached, for up to 24 hours since last use. **Web search and web fetch:** ZDR-eligible except when [dynamic filtering](agents-and-tools/tool-use/web-search-tool.md) is enabled. **Fallback credit and server-side fallback:** The features retain no message content, but both handle refusals from Claude Fable 5, which [is not available under ZDR](manage-claude/api-and-data-retention.md). See [ZDR details](manage-claude/api-and-data-retention.md).
+\* **Structured outputs:** Your prompts and Claude's outputs are not stored. Only JSON schemas are cached, for up to 24 hours since last use. **Web search and web fetch:** ZDR-eligible except when [dynamic filtering](agents-and-tools/tool-use/web-search-tool.md) is enabled. **Fallback credit and server-side fallback:** The features retain no message content, but they handle refusals from the Claude Fable models, which [are not available under ZDR](manage-claude/api-and-data-retention.md). See [ZDR details](manage-claude/api-and-data-retention.md).
 
 † On Microsoft Foundry, feature availability differs by [hosting option](build-with-claude/claude-in-microsoft-foundry.md). These features are available on Hosted on Anthropic deployments, and not on Hosted on Azure deployments.
 

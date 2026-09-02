@@ -15,27 +15,23 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
 ##### Path parameters
 
-spend\_limit\_increase\_request\_id: string
+spend\_limit\_increase\_request\_id: string
 
 ID of the spend limit increase request.
 
 ##### Body
 
-suppress\_notification: optional boolean
+suppress\_notification: optional boolean
 
 ##### Returns
 
 
 
-SpendLimitIncreaseRequest object{ id, actor, created\_at, 6 more }
+SpendLimitIncreaseRequest object{ id, actor, created\_at, 6 more }
 
-
+Deny Spend Limit Increase Request
 
-### Deny Spend Limit Increase Request
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$SPEND_LIMIT_INCREASE_REQUEST_ID/deny \

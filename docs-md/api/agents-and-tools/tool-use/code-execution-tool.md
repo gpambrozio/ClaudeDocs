@@ -192,6 +192,14 @@ python /tmp/make_report.py && cp /tmp/report.pdf "$OUTPUT_DIR/" && ls "$OUTPUT_D
 
 A file Claude wrote elsewhere is still in the container, so you can [reuse the container](#container-reuse) and ask Claude to copy it into `$OUTPUT_DIR`.
 
+### Content Credentials on generated files
+
+On the Claude API, supported image and video files that Claude produces in the code execution sandbox carry [C2PA](https://c2pa.org/) Content Credentials when you download them through the [Files API](build-with-claude/files.md). [Supported formats](https://opensource.contentauthenticity.org/docs/sdk-repos/c2pa-python/docs/supported-formats/) include PNG, JPEG, GIF, WebP, TIFF, HEIC, AVIF, SVG, MP4, and MOV. The credential is a cryptographically signed manifest embedded in the file's metadata. It identifies Anthropic as the issuer, carries a timestamp, and records the action description "Claude provided this file at the request of a user and may have created or modified the file contents."
+
+Signing requires no changes to your requests or response handling, and the manifest records nothing about you, your organization, or your request. The file's visible content is unchanged. The manifest adds a few kilobytes, so the downloaded file's size and checksum differ from the file as it exists inside the container. Text files, PDFs, and office documents are not signed because they are not supported formats for signing. Files you upload are stored as-is, including any Content Credentials they already carry.
+
+To verify a credential, inspect the file with any C2PA-compatible tool, such as the open-source [c2patool command-line utility](https://github.com/contentauth/c2pa-rs). Re-encoding, format conversion, screenshots, and tools that strip metadata remove the credential, so a missing credential doesn't mean a file wasn't produced with Claude. For more on why a credential can be missing, see [How Claude marks AI-generated content](https://support.claude.com/en/articles/16266773-how-claude-marks-ai-generated-content).
+
 ## Tool definition
 
 The code execution tool requires no additional parameters:
@@ -623,7 +631,7 @@ Learn how to use Agent Skills to extend Claude's capabilities through the API.
 
 |  |  |
 | --- | --- |
-| Supported models | - Fable 5 - Mythos 5 - Opus 4.5, 4.6, 4.7, 4.8, and 5 - Sonnet 4.5, 4.6, and 5 - Haiku 4.5 |
+| Supported models | - Fable 5 and 5.1 - Mythos 5 and 5.1 - Opus 4.5, 4.6, 4.7, 4.8, and 5 - Sonnet 4.5, 4.6, and 5 - Haiku 4.5 |
 | Supported platforms | - Claude API - Claude Platform on AWS - Microsoft Foundry[1](#compat-fn-1) |
 
 1. On [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md), code execution requires a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md). [↩](#compat-fnref-1)

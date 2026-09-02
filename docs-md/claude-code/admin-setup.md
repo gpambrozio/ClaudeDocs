@@ -72,7 +72,7 @@ Managed settings can lock down tools, sandbox execution, restrict MCP servers an
 | Control | What it does | Key settings |
 | --- | --- | --- |
 | [Permission rules](permissions.md) | Allow, ask, or deny specific tools and commands | `permissions.allow`, `permissions.deny` |
-| [Permission lockdown](permissions.md) | Only managed permission rules apply; disable `--dangerously-skip-permissions` | `allowManagedPermissionRulesOnly`, `permissions.disableBypassPermissionsMode` |
+| [Permission lockdown](permissions.md) | Make managed settings the [only settings source of permission rules](settings-reference.md). Disable `--dangerously-skip-permissions` | `allowManagedPermissionRulesOnly`, `permissions.disableBypassPermissionsMode` |
 | [Starting permission mode](permission-modes.md) | Choose the permission mode your developers’ terminal sessions start in instead of the built-in starting permission mode, or remove auto mode. The VS Code extension reads a `defaultMode` you set only on Pro, Max, and Team plans; [Switch permission modes](permission-modes.md) lists what the extension reads | `permissions.defaultMode`, `permissions.disableAutoMode` |
 | [Sandboxing](sandboxing.md) | OS-level filesystem and network isolation with domain allowlists | `sandbox.enabled`, `sandbox.network.allowedDomains` |
 | [Managed policy CLAUDE.md](memory.md) | Org-wide instructions loaded in every session, can’t be excluded | File at the managed policy path |

@@ -30,7 +30,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
 
 One of the following:
 
@@ -116,6 +116,12 @@ One of the following:
 
 "ce-user-management-2026-07-13"
 
+"mid-conversation-output-config-2026-07-01"
+
+"thinking-binding-controls-2026-08-01"
+
+"mid-conversation-system-clear-at-2026-08-21"
+
 ##### Returns
 
 
@@ -151,8 +157,8 @@ Response 200
   "updated_at": "2026-03-15T10:00:00Z",
   "access_type": "application",
   "external_id": "user_12345",
-  "name": "Example User",
-  "relationship": "external"
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
+  "name": "Example User"
 }
 ```
 
@@ -176,8 +182,8 @@ Response 200
   "updated_at": "2026-03-15T10:00:00Z",
   "access_type": "application",
   "external_id": "user_12345",
-  "name": "Example User",
-  "relationship": "external"
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
+  "name": "Example User"
 }
 ```
 

@@ -286,78 +286,6 @@ One of the following:
 
 
 
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 12 more
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-5"
-
-Powerful intelligence for long-running agents and coding
-
-"claude-opus-4-8"
-
-Powerful intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Powerful intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Powerful intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Powerful intelligence for long-running agents and coding
-
-"claude-opus-4-5-20251101"
-
-Powerful intelligence for long-running agents and coding
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-string
-
-
-
 cache\_control: optional [CacheControlEphemeral](api/http/messages.md) { type, ttl } or null
 
 Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
@@ -772,7 +700,7 @@ Code execution tool with REPL state persistence.
 
 
 
-BrowserToolset20260801 object{ type, allowed\_callers, cache\_control, configs }
+BrowserToolset20260801 object{ type, cache\_control, configs }
 
 The browser toolset: a single `tools[]` entry (carrying no
 `name`) that declares the browser tool family. The model is served
@@ -785,7 +713,7 @@ MemoryTool20250818 object{ name, type, allowed\_callers, 4 more }
 
 
 
-ComputerToolset20260801 object{ type, allowed\_callers, cache\_control, configs }
+ComputerToolset20260801 object{ type, cache\_control, configs }
 
 The computer toolset: a single `tools[]` entry (carrying no
 `name`) that declares the computer tool family. The model is

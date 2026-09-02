@@ -65,7 +65,7 @@ When you run `/model` at the terminal, Claude Code asks you to confirm the switc
 Before v2.1.238, Claude Code didn’t check the cache TTL and asked even after the cache had expired.
 You can also require this confirmation or skip it with a [PreModelSwitch hook](hooks.md).
 The [`opusplan` model setting](model-config.md) resolves to Opus during plan mode and Sonnet during execution, so each plan-mode toggle is a model switch and starts a fresh cache.
-[Automatic model fallback](model-config.md) on Fable 5 and Opus 5 is also a model switch. When a safety classifier flags a request and the flagged category has a fallback model, Claude Code re-runs the request on that model and the session continues there.
+[Automatic model fallback](model-config.md) on Fable 5.1, Fable 5, and Opus 5 is also a model switch. When a safety classifier flags a request and the flagged category has a fallback model, Claude Code re-runs the request on that model and the session continues there.
 
 ### [​](#changing-effort-level) Changing effort level
 

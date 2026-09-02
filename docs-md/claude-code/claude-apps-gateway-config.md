@@ -553,7 +553,7 @@ managed:
 | `availableModels` | Gateway + CLI | Model allowlist. Also checked at `/v1/messages`, so a patched client can’t bypass it. |
 | `permissions.allow` / `.deny` | CLI | Tool and command rules. See [Permissions](permissions.md). |
 | `permissions.disableBypassPermissionsMode` | CLI | Set to `disable` to block [`bypassPermissions`](permission-modes.md), the mode that skips permission prompts, and the `--dangerously-skip-permissions` flag |
-| `allowManagedPermissionRulesOnly` | CLI | When `true`, user and project permission rules are ignored; only rules from this document apply |
+| `allowManagedPermissionRulesOnly` | CLI | When `true`, managed settings become the only settings source of permission rules. The [`allowManagedPermissionRulesOnly`](settings-reference.md) entry lists every source Claude Code then ignores. |
 | `env` | CLI | Environment variables merged into the CLI process. Use for telemetry, auto-update, and model-name overrides. |
 | `hooks` | CLI | Org-wide [hooks](hooks.md) |
 

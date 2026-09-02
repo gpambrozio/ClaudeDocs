@@ -493,7 +493,7 @@ Learn about Anthropic's pricing structure for models and features.
 
 |  |  |
 | --- | --- |
-| Supported models | - Fable 5 - Mythos 5 and Preview - Opus 4.5, 4.6, 4.7, 4.8, and 5 - Sonnet 4.5, 4.6, and 5 - Haiku 4.5 |
+| Supported models | - Fable 5 and 5.1 - Mythos 5, 5.1, and Preview - Opus 4.5, 4.6, 4.7, 4.8, and 5 - Sonnet 4.5, 4.6, and 5 - Haiku 4.5 |
 | Supported platforms | - Claude API - Claude Platform on AWS - Amazon Bedrock[1](#compat-fn-1) - Google Cloud - Microsoft Foundry |
 
 1. On Amazon Bedrock, structured outputs are available for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. [↩](#compat-fnref-1)

@@ -32,45 +32,45 @@ cURL
 
 
 
-BetaUserProfile object{ id, created\_at, metadata, 7 more }
+BetaUserProfile object{ id, created\_at, metadata, 7 more }
 
 
 
-BetaUserProfileEnrollmentURL object{ expires\_at, type, url }
+BetaUserProfileEnrollmentURL object{ expires\_at, type, url }
 
 
 
-expires\_at: string
+expires\_at: string
 
 A timestamp in RFC 3339 format
 
 formatdate-time
 
-type: "enrollment\_url"
+type: "enrollment\_url"
 
 Object type. Always `enrollment_url`.
 
-url: string
+url: string
 
 Enrollment URL to send to the end user. Valid until `expires_at`.
 
 
 
-BetaUserProfileTrustGrant object{ status }
+BetaUserProfileTrustGrant object{ status }
 
 
 
-status: "active" or "pending" or "rejected"
+status: "active" or "pending" or "rejected"
 
 Status of the trust grant.
 
 One of the following:
 
-"active"
+"active"
 
-"pending"
+"pending"
 
-"rejected"
+"rejected"
 
 ---
 

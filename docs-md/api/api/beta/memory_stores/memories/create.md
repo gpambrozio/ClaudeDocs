@@ -44,7 +44,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
 
 One of the following:
 
@@ -130,6 +130,12 @@ One of the following:
 
 "ce-user-management-2026-07-13"
 
+"mid-conversation-output-config-2026-07-01"
+
+"thinking-binding-controls-2026-08-01"
+
+"mid-conversation-system-clear-at-2026-08-21"
+
 ##### Body
 
 content: string or null
@@ -140,7 +146,7 @@ UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required;
 
 path: string
 
-Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, and must be NFC-normalized. Paths are case-sensitive.
+Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, or the Unicode line and paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are case-sensitive.
 
 minLength2
 

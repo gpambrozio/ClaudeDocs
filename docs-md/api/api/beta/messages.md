@@ -920,7 +920,7 @@ Whether this member is offered to the model. Default is per member, per the tool
 
 
 
-BetaBrowserToolset20260801 object{ type, allowed\_callers, cache\_control, configs }
+BetaBrowserToolset20260801 object{ type, cache\_control, configs }
 
 The browser toolset: a single `tools[]` entry (carrying no
 `name`) that declares the browser tool family. The model is served
@@ -2161,7 +2161,7 @@ Whether this member is offered to the model. Default is per member, per the tool
 
 
 
-BetaComputerToolset20260801 object{ type, allowed\_callers, cache\_control, configs }
+BetaComputerToolset20260801 object{ type, cache\_control, configs }
 
 The computer toolset: a single `tools[]` entry (carrying no
 `name`) that declares the computer tool family. The model is
@@ -2637,9 +2637,29 @@ Identifies one hop of a fallback transition.
 
 
 
+model: [Model](api/http/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+
+
 to: [BetaFallbackInfoParam](api/http/beta/messages.md) { model }
 
 Identifies one hop of a fallback transition.
+
+
+
+model: [Model](api/http/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
 
 type: "fallback"
 
@@ -2746,9 +2766,29 @@ Identifies one hop of a fallback transition.
 
 
 
+model: [Model](api/http/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+
+
 BetaFallbackInfoParam object{ model }
 
 Identifies one hop of a fallback transition.
+
+
+
+model: [Model](api/http/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
 
 
 
@@ -3129,7 +3169,7 @@ maxItems2
 
 
 
-BetaMessage object{ id, container, content, 9 more }
+BetaMessage object{ id, container, content, 10 more }
 
 
 
@@ -3143,7 +3183,7 @@ Token usage for a sampling iteration.
 
 
 
-BetaMessageParam object{ content, role }
+BetaMessageParam object{ content, role, clear\_at, output\_config }
 
 
 
@@ -3254,7 +3294,7 @@ defaultcontent\_block\_stop
 
 
 
-BetaRawMessageDeltaEvent object{ context\_management, delta, type, usage }
+BetaRawMessageDeltaEvent object{ context\_management, delta, type, 2 more }
 
 
 
@@ -3262,7 +3302,7 @@ BetaRawMessageStartEvent object{ message, type }
 
 
 
-message: [BetaMessage](api/http/beta/messages.md) { id, container, content, 9 more }
+message: [BetaMessage](api/http/beta/messages.md) { id, container, content, 10 more }
 
 
 
@@ -3282,7 +3322,7 @@ defaultmessage\_stop
 
 
 
-BetaRawMessageStreamEvent = [BetaRawMessageStartEvent](api/http/beta/messages.md) { message, type } or [BetaRawMessageDeltaEvent](api/http/beta/messages.md) { context\_management, delta, type, usage } or [BetaRawMessageStopEvent](api/http/beta/messages.md) { type } or 3 more
+BetaRawMessageStreamEvent = [BetaRawMessageStartEvent](api/http/beta/messages.md) { message, type } or [BetaRawMessageDeltaEvent](api/http/beta/messages.md) { context\_management, delta, type, 2 more } or [BetaRawMessageStopEvent](api/http/beta/messages.md) { type } or 3 more
 
 One of the following:
 
@@ -3516,6 +3556,34 @@ One of the following:
 
 
 
+BetaSystemMessageOutputConfig object{ effort }
+
+Per-message output configuration on a role:"system" input message.
+
+Fields here apply per-turn; `format` remains top-level only. An
+empty `{}` is accepted on a message that carries content; a message
+with neither content nor output\_config fields is rejected.
+
+
+
+effort: optional "low" or "medium" or "high" or 2 more or null
+
+All possible effort levels.
+
+One of the following:
+
+"low"
+
+"medium"
+
+"high"
+
+"xhigh"
+
+"max"
+
+
+
 BetaTextBlock object{ citations, text, type }
 
 
@@ -3744,6 +3812,30 @@ defaultthinking
 
 
 
+BetaThinkingBlockBinding object{ prefix\_mismatch\_behavior }
+
+Controls for block binding: what happens when a thinking block this
+request sends back fails the conversation check. Every field is optional;
+an empty object means every default.
+
+
+
+prefix\_mismatch\_behavior: optional [BetaThinkingPrefixMismatchBehavior](api/http/beta/messages.md) or null
+
+What happens when a thinking block in `messages` fails the conversation
+check: it was created in a different conversation, or the messages before
+it have changed since. `"error"` (the default) fails the request with a
+400 error. `"drop_block"` removes the failing blocks and the request
+proceeds; the model no longer sees the dropped reasoning.
+
+One of the following:
+
+"error"
+
+"drop\_block"
+
+
+
 BetaThinkingBlockParam object{ signature, thinking, type }
 
 
@@ -3762,9 +3854,33 @@ type: "thinking"
 
 
 
-BetaThinkingConfigAdaptive object{ type, display }
+BetaThinkingConfigAdaptive object{ type, block\_binding, display }
 
 type: "adaptive"
+
+
+
+block\_binding: optional [BetaThinkingBlockBinding](api/http/beta/messages.md) { prefix\_mismatch\_behavior } or null
+
+Controls for block binding: what happens when a thinking block this
+request sends back fails the conversation check. Every field is optional;
+an empty object means every default.
+
+
+
+prefix\_mismatch\_behavior: optional [BetaThinkingPrefixMismatchBehavior](api/http/beta/messages.md) or null
+
+What happens when a thinking block in `messages` fails the conversation
+check: it was created in a different conversation, or the messages before
+it have changed since. `"error"` (the default) fails the request with a
+400 error. `"drop_block"` removes the failing blocks and the request
+proceeds; the model no longer sees the dropped reasoning.
+
+One of the following:
+
+"error"
+
+"drop\_block"
 
 
 
@@ -3788,39 +3904,11 @@ type: "disabled"
 
 
 
-BetaThinkingConfigEnabled object{ budget\_tokens, type, display }
+BetaThinkingConfigEnabled object{ budget\_tokens, type, block\_binding, display }
 
 
 
-budget\_tokens: number
-
-Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
-
-Must be ≥1024 and less than `max_tokens`.
-
-See [extended thinking](build-with-claude/extended-thinking.md) for details.
-
-minimum1024
-
-type: "enabled"
-
-
-
-display: optional "summarized" or "omitted" or "updates" or null
-
-Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-One of the following:
-
-"summarized"
-
-"omitted"
-
-"updates"
-
-
-
-BetaThinkingConfigParam = [BetaThinkingConfigEnabled](api/http/beta/messages.md) { budget\_tokens, type, display } or [BetaThinkingConfigDisabled](api/http/beta/messages.md) { type } or [BetaThinkingConfigAdaptive](api/http/beta/messages.md) { type, display }
+BetaThinkingConfigParam = [BetaThinkingConfigEnabled](api/http/beta/messages.md) { budget\_tokens, type, block\_binding, display } or [BetaThinkingConfigDisabled](api/http/beta/messages.md) { type } or [BetaThinkingConfigAdaptive](api/http/beta/messages.md) { type, block\_binding, display }
 
 Configuration for enabling Claude's extended thinking.
 
@@ -3847,6 +3935,68 @@ The incremental `thinking` text for this content block. Concatenate the `thinkin
 type: "thinking\_delta"
 
 defaultthinking\_delta
+
+
+
+BetaThinkingDroppedInputTransformation object{ path, reason, type }
+
+path: string
+
+Where the removed block was in your request, as `messages.{i}.content.{j}`:
+`i` indexes the `messages` array you sent and `j` that message's `content`
+array — the same form error messages use.
+
+
+
+reason: "model\_binding\_mismatch" or "prefix\_binding\_mismatch" or "organization\_binding\_mismatch" or "end\_user\_binding\_mismatch"
+
+Which binding check removed the block: `model_binding_mismatch` — it was
+created by a model whose reasoning the requested model may not read;
+`prefix_binding_mismatch` — the conversation before it differs from the
+conversation it was created in (the rest of that turn's consecutive thinking
+blocks are removed with it, each with this reason);
+`organization_binding_mismatch` — it was created under a different
+organization (an Anthropic organization, AWS account or Google Cloud project)
+and this organization is not one of its additional organizations;
+`end_user_binding_mismatch` — it was created for a different end user, or
+was removed by the consumer-organization binding. A block that would fail
+several checks reports one reason, in this order of precedence:
+`organization_binding_mismatch`, `end_user_binding_mismatch`,
+`model_binding_mismatch`, `prefix_binding_mismatch`.
+
+One of the following:
+
+"model\_binding\_mismatch"
+
+"prefix\_binding\_mismatch"
+
+"organization\_binding\_mismatch"
+
+"end\_user\_binding\_mismatch"
+
+
+
+type: "thinking\_dropped"
+
+Always `thinking_dropped` for this entry type.
+
+defaultthinking\_dropped
+
+
+
+BetaThinkingPrefixMismatchBehavior = "error" or "drop\_block"
+
+What happens when a thinking block in `messages` fails the conversation
+check: it was created in a different conversation, or the messages before
+it have changed since. `"error"` (the default) fails the request with a
+400 error. `"drop_block"` removes the failing blocks and the request
+proceeds; the model no longer sees the dropped reasoning.
+
+One of the following:
+
+"error"
+
+"drop\_block"
 
 
 

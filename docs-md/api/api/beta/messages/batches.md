@@ -196,7 +196,7 @@ BetaMessageBatchSucceededResult object{ message, type }
 
 
 
-message: [BetaMessage](api/http/beta/messages.md) { id, container, content, 9 more }
+message: [BetaMessage](api/http/beta/messages.md) { id, container, content, 10 more }
 
 
 

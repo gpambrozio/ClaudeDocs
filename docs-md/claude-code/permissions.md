@@ -24,8 +24,6 @@ When the directory you started Claude Code in is what makes the option’s label
 - **Starting directory too long, not shortened:** it contains characters Claude Code can’t display safely, or even its start doesn’t fit.
 
 Approve the action once, or add the rule yourself in [`/permissions`](#manage-permissions).
-On a Bash or PowerShell permission prompt, press `Ctrl+E` to show an explanation of the command: what it does, why Claude is running it, and what could go wrong, labeled **Low risk**, **Med risk**, or **High risk**. Claude Code sends the command and Claude’s own description of the call to the model to generate the explanation only when you press `Ctrl+E`, not on every prompt. Showing the explanation doesn’t run the command; press `Ctrl+E` again to hide it.
-To turn the shortcut off, set [`permissionExplainerEnabled`](settings-reference.md) to `false` in `~/.claude.json`.
 
 ### [​](#add-a-comment-when-you-answer-a-permission-prompt) Add a comment when you answer a permission prompt
 
@@ -505,7 +503,8 @@ Commands that won’t run sandboxed, such as excluded commands, respect the bare
 
 ## [​](#managed-settings) Managed settings
 
-For organizations that need centralized control, administrators deploy managed settings that user and project settings can’t override, apart from a few [security-sensitive keys](settings.md). [Deploy managed settings](managed-settings.md) covers the delivery mechanisms, precedence within the managed tier, and the [keys only managed settings can set](managed-settings.md), such as `allowManagedPermissionRulesOnly`, which limits permission rules to the managed source.
+For organizations that need centralized control, administrators deploy managed settings that user and project settings can’t override, apart from a few [security-sensitive keys](settings.md). [Deploy managed settings](managed-settings.md) covers the delivery mechanisms, precedence within the managed tier, and the [keys that only managed settings can set](managed-settings.md).
+One of those keys, [`allowManagedPermissionRulesOnly`](settings-reference.md), makes managed settings the only settings source of permission rules. Its entry lists every source Claude Code then ignores.
 `disableBypassPermissionsMode` is typically placed in managed settings to enforce organizational policy, but it works from any scope. A user can set it in their own settings to lock themselves out of bypass mode.
 
 ## [​](#settings-precedence) Settings precedence

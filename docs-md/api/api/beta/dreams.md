@@ -236,6 +236,14 @@ formatint32
 
 
 
+BetaDreamingError = [BetaInvalidRequestError](api/http/beta.md) { message, type } or [BetaAuthenticationError](api/http/beta.md) { message, type } or [BetaBillingError](api/http/beta.md) { message, type } or 7 more
+
+The `output_behavior.memory_store_id` target is still held by a prior `{type: "update_existing"}` dream — one that is `pending` or `running`, or was canceled with its final writes still landing. Rarely the named dream has just finished (`completed`/`failed`) and its execution is still closing; an immediate retry then almost always succeeds. The message names the holding dream when the server can identify it (rarely omitted); poll it to a terminal state or cancel it, then retry. Carried with `x-should-retry: false`.
+
+One of the following:
+
+
+
 BetaOutputBehavior = [BetaOutputBehaviorCreateNew](api/http/beta/dreams.md) { type } or [BetaOutputBehaviorUpdateExisting](api/http/beta/dreams.md) { memory\_store\_id, type }
 
 The default destination: the job creates a new output memory store as a clone of the memory\_store input and writes the consolidated memories into it. The input store is never mutated.
@@ -285,6 +293,18 @@ memory\_store\_id: string
 minLength1
 
 type: "update\_existing"
+
+
+
+BetaTargetStoreHeldError object{ type, message }
+
+The `output_behavior.memory_store_id` target is still held by a prior `{type: "update_existing"}` dream — one that is `pending` or `running`, or was canceled with its final writes still landing. Rarely the named dream has just finished (`completed`/`failed`) and its execution is still closing; an immediate retry then almost always succeeds. The message names the holding dream when the server can identify it (rarely omitted); poll it to a terminal state or cancel it, then retry. Carried with `x-should-retry: false`.
+
+type: "conflict\_error"
+
+message: optional string
+
+Human-readable description of the conflict, naming the dream that holds the target store when the server can identify it.
 
 ---
 

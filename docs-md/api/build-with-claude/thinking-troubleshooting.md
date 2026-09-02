@@ -4,11 +4,11 @@
 
 
 
-This page covers the most common failures when configuring thinking or round-tripping thinking blocks (sending returned thinking blocks back in later requests). The first section maps each model to its supported thinking configurations and the ones it rejects; the sections after it each start from a symptom you observe, so you can match an error message or unexpected response directly to its cause and fix. For how thinking works, see the [Thinking](build-with-claude/thinking.md) overview.
+This page covers the most common failures when configuring thinking or round-tripping thinking blocks (sending returned thinking blocks back in later requests). The first section maps each model to its supported thinking configurations and the ones it rejects; the sections after it each start from a symptom you observe, so you can match an error message or unexpected response directly to its cause and fix. To learn how thinking works, see the [Thinking](build-with-claude/thinking.md) overview.
 
-##  Configurations each model rejects
+## Thinking support, defaults, and rejected configurations by model
 
-Most thinking configuration errors are a mismatch between the `thinking.type` value in the request and what the model supports. On current models, thinking runs as `thinking: {type: "adaptive"}`, and on the newest it is on by default. Some earlier models instead use [extended thinking](build-with-claude/extended-thinking.md), a legacy manual mode configured as `thinking: {type: "enabled", budget_tokens: N}`.
+Most thinking configuration errors are a mismatch between the `thinking.type` value in the request and what the model supports. On most models, thinking runs as `thinking: {type: "adaptive"}`, and many have it on by default. Some earlier models instead use [extended thinking](build-with-claude/extended-thinking.md), a legacy manual mode configured as `thinking: {type: "enabled", budget_tokens: N}`.
 
 Extended thinking (`thinking.type: "enabled"` with `budget_tokens`) is deprecated on the Claude 4.6 models (requests using it still succeed). Claude 4.7 and later models do not support it and reject requests that use it, returning a 400 error. On Claude 4.5 and earlier models that support thinking, extended thinking is the only available thinking mode. Claude Mythos Preview supports both modes. Where both modes are available, use [adaptive thinking](build-with-claude/thinking.md) instead.
 
@@ -16,6 +16,8 @@ The table lists what each model supports, what it defaults to, and which `thinki
 
 | Model | Thinking types | Default | Rejected with 400 |
 | --- | --- | --- | --- |
+| Claude Fable 5.1 | Adaptive only | Always on | `"enabled"`, `"disabled"` |
+| Claude Mythos 5.1 | Adaptive only | Always on | `"enabled"`, `"disabled"` |
 | Claude Fable 5 | Adaptive only | Always on | `"enabled"`, `"disabled"` |
 | Claude Mythos 5 | Adaptive only | Always on | `"enabled"`, `"disabled"` |
 | Claude Mythos Preview | Adaptive, extended | Always on | `"disabled"` |
@@ -34,9 +36,9 @@ The table lists what each model supports, what it defaults to, and which `thinki
 
 Models marked `Always on` cannot turn thinking off. Models marked `On` default to thinking but accept `thinking: {type: "disabled"}`.
 
-Earlier Claude 4 models (Claude Opus 4.1, Claude Sonnet 4, and Claude Opus 4) support extended thinking only; see [Model deprecations](about-claude/model-deprecations.md) for their availability. Claude Fable 5 and Claude Mythos 5 are not available under [zero data retention](manage-claude/api-and-data-retention.md).
+Earlier Claude 4 models (Claude Opus 4.1, Claude Sonnet 4, and Claude Opus 4) support extended thinking only. See [Model deprecations](about-claude/model-deprecations.md) for their availability. Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, and Claude Mythos 5 are not available under [zero data retention](manage-claude/api-and-data-retention.md) unless expressly authorized by Anthropic.
 
-##  A 400 error says `"thinking.type.enabled"` is not supported
+## A 400 error says `"thinking.type.enabled"` is not supported
 
 The request fails with a 400 error whose message reads:
 
@@ -46,11 +48,11 @@ The request fails with a 400 error whose message reads:
 
 
 
-This happens because the model you requested has removed extended thinking (see [Configurations each model rejects](#rejected-configurations)).
+This happens because the model you requested has removed extended thinking (see the [per-model configuration table](#rejected-configurations)).
 
 Switch the request to `thinking: {type: "adaptive"}` and steer thinking depth with `effort` instead of `budget_tokens`. [Migrating to adaptive thinking](build-with-claude/extended-thinking.md) walks through the conversion.
 
-##  A 400 error says `"thinking.type.disabled"` is not supported
+## A 400 error says `"thinking.type.disabled"` is not supported
 
 The request fails with a 400 error whose message reads:
 
@@ -60,13 +62,13 @@ The request fails with a 400 error whose message reads:
 
 
 
-This happens on models where thinking is always on: Claude Fable 5, Claude Mythos 5, and Claude Mythos Preview reject `"disabled"`. On Claude Fable 5 and Claude Mythos 5, the error text's suggestion of `"thinking.type.enabled"` does not apply either: those models reject it too.
+This happens on models where thinking is always on: Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, and Claude Mythos Preview reject `"disabled"`. All of these except Claude Mythos Preview also reject the error text's suggested `"thinking.type.enabled"`.
 
 Omit the `thinking` parameter; these models think without any configuration. If your goal was to keep thinking text out of responses, use `display: "omitted"` instead of disabling thinking; see [Controlling thinking display](build-with-claude/thinking.md).
 
 A 400 error on `"disabled"` can also occur on Claude Opus 5, which accepts `thinking: {type: "disabled"}` only at [effort](build-with-claude/effort.md) `high` or below: combining it with effort `xhigh` or `max` is rejected. Lower the effort level, or leave thinking on.
 
-##  A 400 error says adaptive thinking is not supported
+## A 400 error says adaptive thinking is not supported
 
 The request fails with a 400 error whose message reads:
 
@@ -76,11 +78,11 @@ adaptive thinking is not supported on this model
 
 
 
-This happens because the model supports only extended thinking (see [Configurations each model rejects](#rejected-configurations)).
+This happens because the model supports only extended thinking (see the [per-model configuration table](#rejected-configurations)).
 
 Use `thinking: {type: "enabled", budget_tokens: N}` instead; see [Extended thinking](build-with-claude/extended-thinking.md) for the configuration.
 
-##  A 400 error says thinking blocks cannot be modified
+## A 400 error says thinking blocks cannot be modified
 
 A request that returns tool results fails with a 400 `invalid_request_error` whose message contains:
 
@@ -94,15 +96,33 @@ In multi-turn and tool-use conversations you send previous assistant messages, i
 
 Echo the assistant turn back verbatim, thinking blocks included. See [Preserving thinking blocks](build-with-claude/thinking.md) for the rules, and the worked round trip in [Thinking in tool and multi-turn workflows](build-with-claude/thinking-tool-workflows.md) for correct code in every SDK.
 
-##  The thinking field is empty in the response
+## A 400 error says a thinking block signature is invalid
+
+A request to Claude Fable 5.1 that replays earlier thinking blocks fails with a 400 `invalid_request_error` whose message reads:
+
+```block
+messages.{i}.content.{j}: Invalid `signature` in `thinking` block. The block is bound to a different conversation. Remove the block, or set `thinking.block_binding.prefix_mismatch_behavior` to "drop_block".
+```
+
+
+
+If the request didn't send the `thinking-binding-controls-2026-08-01` beta header, the message adds `` That setting requires the `thinking-binding-controls-2026-08-01` value in the `anthropic-beta` header. `` The message can also end with a sentence naming the first message that changed. If the message has no reason clause at all, the block's content was modified. See [A 400 error says thinking blocks cannot be modified](#error-thinking-blocks-modified).
+
+On Claude Fable 5.1, the API accepts a replayed thinking block [only while the `system` prompt, `tools`, and messages that preceded it are unchanged](build-with-claude/thinking.md). The error means something earlier in the conversation changed between requests: an edited, reordered, or removed turn, a per-turn reminder that was injected and later removed, a rebuilt `system` prompt or `tools` array, or client-side compaction that kept recent turns and their thinking verbatim. The check is enforced for new accounts created on or after August 31, 2026, and for any request that sets `thinking.block_binding.prefix_mismatch_behavior`. Server-side [compaction](build-with-claude/compaction.md) and [context editing](build-with-claude/context-editing.md) never trigger it.
+
+To fix it, keep the history append-only: pass earlier turns back exactly as sent and received, add instructions with a [mid-conversation system message](build-with-claude/mid-conversation-system-messages.md) instead of editing `system` or `tools`, and let server-side [context editing](build-with-claude/context-editing.md) or [compaction](build-with-claude/compaction.md) do any trimming. Retrying the same request body doesn't clear the error. To continue this request without the invalidated reasoning, send the `thinking-binding-controls-2026-08-01` beta header and set `thinking.block_binding.prefix_mismatch_behavior` to `"drop_block"`. Alternatively, strip every `thinking` and `redacted_thinking` block from the history (at minimum the named block and every one after it, in that turn and all later turns), leave each turn's other blocks in place, and retry once.
+
+A block from a model the target model can't read never produces this error: the API drops it and, under the beta header, reports it in `input_transformations`.
+
+## The thinking field is empty in the response
 
 The response contains `thinking` blocks, but their `thinking` field is an empty string and only the `signature` field is populated.
 
 This happens because `display` defaults to `"omitted"` on newer models, which returns thinking blocks without their text.
 
-Set `display: "summarized"` in your thinking configuration to receive the summarized thinking text; see [Controlling thinking display](build-with-claude/thinking.md) for the defaults per model.
+Set `display: "summarized"` in your thinking configuration to receive the summarized thinking text. See [Controlling thinking display](build-with-claude/thinking.md) for the defaults per model. If you only want the short status lines some models write between tool calls, and not the reasoning, set `display: "updates"` (beta) instead. See [Progress updates between tool calls](build-with-claude/thinking.md).
 
-##  No thinking block appears on some turns
+## No thinking block appears on some turns
 
 Some responses contain no `thinking` block at all, even though thinking is configured.
 
@@ -110,7 +130,7 @@ This is normal in adaptive mode: Claude skips thinking on requests it judges sim
 
 If you want thinking more often or more deeply, raise `effort` or steer with prompting; see [Steering how often Claude thinks](build-with-claude/thinking-steering-and-cost.md).
 
-##  Tool calls or XML tags appear in the text output
+## Tool calls or XML tags appear in the text output
 
 A response occasionally writes a tool call into its text instead of emitting a `tool_use` block, or includes `<thinking>` or other internal XML tags in its visible text. A leaked tool call never runs, and in agentic loops the leaked text stays in the conversation history, so later turns are affected as well.
 
@@ -118,7 +138,7 @@ This happens on Claude Opus 5 when thinking is disabled, most commonly on tool-h
 
 Re-enable thinking (the default) and use lower `effort` levels to control token cost instead. If your integration must keep thinking disabled, apply the prompting mitigations in [Running with thinking disabled](build-with-claude/prompt-engineering/prompting-claude-opus-5.md).
 
-##  The response stops with `stop_reason: "max_tokens"`
+## The response stops with `stop_reason: "max_tokens"`
 
 The response ends with `stop_reason: "max_tokens"`, often with a truncated or missing text block.
 
@@ -126,7 +146,7 @@ This happens because thinking tokens count toward `max_tokens`, so a long thinki
 
 Raise `max_tokens` to leave room for both thinking and text, or lower `effort` so Claude spends less on thinking; see [Cost control](build-with-claude/thinking-steering-and-cost.md) and [Thinking and the context window](build-with-claude/thinking.md).
 
-##  Cache hits drop after changing thinking settings
+## Cache hits drop after changing thinking settings
 
 `cache_read_input_tokens` falls to zero on requests that previously hit the cache.
 
@@ -134,7 +154,7 @@ This happens because the thinking configuration and the effort level (or its def
 
 Keep the thinking configuration and effort level constant across requests that share a conversation; setting a parameter explicitly to its default is equivalent to omitting it and does not invalidate. See [Thinking and prompt caching](build-with-claude/thinking.md).
 
-##  Setting effort does not change thinking
+## Setting effort does not change thinking
 
 You change `effort` but thinking frequency or depth stays the same.
 
@@ -142,7 +162,7 @@ This happens because effort is the primary thinking lever only in adaptive mode.
 
 Adjust `budget_tokens` on those models, or check which mode your model runs in; see [Thinking and effort](build-with-claude/thinking.md). On Claude Opus 4.5, the one extended-thinking-only model that supports effort, effort composes with the budget; see [Budget rules and tuning](build-with-claude/extended-thinking.md).
 
-##  Next steps
+## Next steps
 
 
 

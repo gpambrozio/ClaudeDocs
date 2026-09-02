@@ -11,7 +11,7 @@ These attacks fall into two categories with different threat models:
 - **Jailbreaks and direct prompt injection**, where the *user* of your application is the adversary and crafts inputs intended to bypass your guardrails.
 - **Indirect prompt injection**, where the user is trusted but Claude processes *third-party content* (web pages, emails, documents, tool results) that contains adversarial instructions.
 
-##  Jailbreaks and direct prompt injection
+## Jailbreaks and direct prompt injection
 
 In this threat model, a user is deliberately crafting inputs to manipulate your application into producing content or taking actions you don't want it to. These mitigations strengthen your application's guardrails:
 
@@ -24,7 +24,7 @@ In this threat model, a user is deliberately crafting inputs to manipulate your 
   ### Example: Ethical system prompt for an enterprise chatbot
 - **Respond to repeat offenders:** Adjust responses and consider throttling or banning users who repeatedly attempt to circumvent your application's guardrails. For example, if a particular user triggers the same kind of refusal multiple times (such as "output blocked by content filtering policy"), tell the user that their actions violate the relevant usage policies and take action accordingly.
 
-##  Indirect prompt injection
+## Indirect prompt injection
 
 In this threat model, you're protecting your users from instructions embedded in content that Claude reads on their behalf: the body of an inbound email, a fetched web page, OCR output from an uploaded file, or the result of a tool call. An attacker who can influence that content may embed instructions that try to redirect Claude.
 
@@ -47,11 +47,11 @@ Structure your application so that Claude can reliably distinguish untrusted con
   You can also apply the input-validation patterns from the previous section to tool results before passing them to Claude.
 - **Red-team your own agent.** Before deploying, test your workflow with documents, emails, and tool outputs that deliberately contain injection attempts, and confirm that Claude ignores them and that your screening and confirmation steps catch the rest.
 
-##  Continuous monitoring
+## Continuous monitoring
 
 Regularly analyze outputs for signs of successful injection. Use this monitoring to iteratively refine your prompts, validation, and filtering strategies.
 
-##  Advanced: Chain safeguards
+## Advanced: Chain safeguards
 
 Combine strategies for robust protection. Here's an enterprise-grade example with tool use:
 

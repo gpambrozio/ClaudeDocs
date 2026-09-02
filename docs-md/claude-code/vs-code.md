@@ -80,11 +80,15 @@ The prompt box supports several features:
   - **Manual**: Claude asks permission before file edits and most shell commands.
   - **Plan**: Claude describes what it will do and waits for approval before making changes. VS Code automatically opens the plan as a full Markdown document where you can add inline comments to give feedback before Claude begins.
   - **Edit automatically**: Claude makes edits without asking.
-- **Command menu**: click `/` or type `/` to open the command menu. Options include attaching files, switching models, toggling extended thinking, viewing plan usage (`/usage`), and starting a [Remote Control](remote-control.md) session (`/remote-control`). The Customize section provides access to MCP servers, hooks, memory, permissions, and plugins. Items with a terminal icon open in the integrated terminal.
+- **Model**: select **Switch model…** from the command menu to change the model mid-session. You can also click the model name at the bottom of the prompt box to open the same picker. The picker includes a **More models** page with the models not on the main list. When the current model supports [effort levels](model-config.md), the picker also shows an **Effort** row. The model name button, the **More models** page, and the **Effort** row require Claude Code v2.1.257 or later.
+- **Command menu**: click `/` or type `/` to open the command menu. Options include attaching files, switching models, and toggling extended thinking. The Customize section provides access to MCP servers, slash commands, output styles, hooks, memory, permissions, and plugins. Items with a terminal icon open in the integrated terminal.
+  - To browse commands such as `/usage` or [`/remote-control`](remote-control.md), select **Slash commands** in the Customize section. A dialog lists them with a filter box. Pick one to run it. Typing `/` in the prompt box still suggests commands inline. Requires Claude Code v2.1.257 or later.
+  - Select **Output styles** in the Customize section to pick an [output style](output-styles.md), including your custom styles. Requires Claude Code v2.1.257 or later.
   - The Settings section includes **Enable Remote Control for all sessions**, which sets [`remoteControlAtStartup`](settings-reference.md) to control whether [new interactive sessions connect to Remote Control automatically](remote-control.md). Requires Claude Code v2.1.203 or later.
+    When you flip the toggle, the change applies to the sessions already open in VS Code, not only to sessions you start afterwards. If you turn it off, the open sessions disconnect. Before v2.1.257, the toggle applied only to sessions started after the change.
   - The Settings section also includes **Focus view**, which hides tool calls, tool results, and thinking behind expandable rows, leaving your prompts and Claude’s responses. Claude’s latest to-do list stays visible, and so does the text a pending question from Claude is asking about; this requires Claude Code v2.1.225 or later. Toggle it there, with `Ctrl+Option+F` (Mac) / `Ctrl+Alt+F` (Windows/Linux), or from the Command Palette with **Claude Code: Toggle Focus view**. The change applies to every open session and persists across sessions. Requires Claude Code v2.1.221 or later.
   - To report a bug, click **Report a problem** at the bottom of the menu, or type `/bug` or `/feedback` with an optional description that prefills the report. When you submit the report and you’re signed in to Anthropic on a first-party connection, Claude Code sends it to Anthropic. On a third-party provider, or without Anthropic credentials, the dialog still opens, but submitting shows an error and sends nothing: unlike the CLI’s `/bug`, the extension doesn’t write a local archive. Requires Claude Code v2.1.229 or later.
-- **Side questions**: type `/btw` followed by a question, or pick it from the command menu, to ask about your session [without adding to the conversation](interactive-mode.md). The answer opens in a panel beside the chat, where you can ask follow-up questions. The thread survives window reloads. Claude Code keeps the newest 20 exchanges and expires stored threads on the [`cleanupPeriodDays`](settings-reference.md) schedule, as long as Claude Code can [safely determine the retention period](claude-directory.md). To clear a thread, click the trash icon in the panel. Requires Claude Code v2.1.227 or later.
+- **Side questions**: type `/btw` followed by a question to ask about your session [without adding to the conversation](interactive-mode.md). The answer opens in a panel beside the chat, where you can ask follow-up questions. The thread survives window reloads. Claude Code keeps the newest 20 exchanges and expires stored threads on the [`cleanupPeriodDays`](settings-reference.md) schedule, as long as Claude Code can [safely determine the retention period](claude-directory.md). To clear a thread, click the trash icon in the panel. Requires Claude Code v2.1.227 or later.
 - **Context indicator**: the prompt box shows how much of Claude’s context window you’re using. Claude automatically compacts when needed, or you can run `/compact` manually.
 - **Extended thinking**: lets Claude spend more time reasoning through complex problems. Toggle it on via the command menu (`/`). Claude’s reasoning appears in the conversation as collapsed blocks: click a block to read it, or press `Ctrl+O` to expand or collapse every thinking block in the session. See [Extended thinking](model-config.md) for details.
 - **Multi-line input**: press `Shift+Enter` to add a new line without sending. This also works in the “Other” free-text input of question dialogs.
@@ -104,7 +108,9 @@ You can also hold `Shift` while dragging files into the prompt box to add them a
 
 ### [​](#resume-past-conversations) Resume past conversations
 
-Click the **Session history** button at the top of the Claude Code panel to access your conversation history. You can search by keyword or browse by time (Today, Yesterday, Last 7 days, etc.). Click any conversation to resume it with the full message history. New sessions receive AI-generated titles based on your first message. Hover over a session to reveal rename and remove actions: rename to give it a descriptive title, or remove to delete it from the list. For more on resuming sessions, see [Manage sessions](sessions.md).
+Click the **Session history** button at the top of the Claude Code panel to access your conversation history. You can search by keyword or browse by time. Click any conversation to resume it with the full message history. For more on resuming sessions, see [Manage sessions](sessions.md).
+New sessions receive AI-generated titles based on your first message. Hover over a session to reveal rename and archive actions: rename to give it a descriptive title, or archive to move it to the **Archived sessions** group at the bottom of the list.
+To restore an archived session, expand **Archived sessions** and click **Unarchive session**. Before v2.1.257, the action was **Delete session**, which hid a session with no way to restore it. Sessions you deleted then appear under **Archived sessions** after you upgrade.
 When the conversation you resume ended in plan mode, Claude Code restores plan mode. Requires Claude Code v2.1.246 or later. Claude Code doesn’t restore it in two cases:
 
 - The extension [chooses the starting permission mode](permission-modes.md) from `claudeCode.initialPermissionMode` or a pick that carries over from an earlier conversation
@@ -136,7 +142,7 @@ Only web sessions started with a GitHub repository appear in the Web tab. Resumi
 
 ### [​](#check-account-and-usage) Check account and usage
 
-Run `/usage` from the command menu to open the Account & usage dialog. It shows your signed-in account, plan, and usage bars for the current session and week with how long until each limit resets.
+Run `/usage` to open the Account & usage dialog. The dialog requires a claude.ai sign-in, so it isn’t offered on a [third-party provider](#use-third-party-providers). It shows your signed-in account, your plan, and usage bars for the current session and the week. Each bar shows how long until its limit resets.
 The dialog also breaks down what is contributing to your plan limits. It flags behaviors that account for 10% or more of recent usage, such as cache misses, long context, and subagent-heavy or highly parallel sessions, each with a tip to reduce it. Attribution tables show how much usage came from each skill, subagent, plugin, and MCP server. Requires Claude Code v2.1.174 or later.
 Use the Day and Week toggle to switch between the last 24 hours and the last 7 days. The figures are approximate and computed from local sessions on this machine, so usage from other devices or claude.ai is not included. For more on tracking and reducing usage, see [Track your costs](costs.md).
 
@@ -165,6 +171,7 @@ In the sessions list in the Activity Bar, you can collect related sessions into 
 
 - **Group or ungroup a session**: right-click a session to create a group from it, move it into an existing group, or remove it from its group. Each session belongs to one group at a time, so moving it into another group removes it from the first.
 - **Move several sessions at once**: `Cmd`-click (Mac) / `Ctrl`-click (Windows/Linux) each session, or `Shift`-click to select a range, then right-click the selection.
+- **Group a session from its tab**: run **Claude Code: Add Session Tab to Group** from the Command Palette, or right-click the session’s editor tab, then pick or create a group. Requires Claude Code v2.1.257 or later.
 - **Rename or delete a group**: right-click a group header. Deleting a group removes only the group, and its sessions return to the ungrouped list.
 
 The extension saves groups per workspace folder, so they survive window reloads and appear in every window where you open the same folder. When you search the list, the extension shows matches in one flat list across all groups.
@@ -239,6 +246,9 @@ These are VS Code commands for controlling the extension. Not all built-in Claud
 | Reopen Closed Session | `Cmd+Shift+T` (Mac) / `Ctrl+Shift+T` (Windows/Linux) | Reopen the most recently closed Claude session tab. Falls through to VS Code’s normal reopen-closed-editor when the last closed tab wasn’t a Claude session. Disable with `enableReopenClosedSessionShortcut` |
 | Insert @-Mention Reference | `Option+K` (Mac) / `Alt+K` (Windows/Linux) | Insert a reference to the current file and selection (requires editor to be focused) |
 | Toggle Focus view | `Ctrl+Option+F` (Mac) / `Ctrl+Alt+F` (Windows/Linux) | Hide or show tool activity in the conversation. Works while a Claude panel or sidebar is visible. Requires Claude Code v2.1.221 or later |
+| Rename Session Tab | - | Rename the session in the active Claude tab. The command also appears in the tab’s right-click menu. Requires Claude Code v2.1.257 or later |
+| Add Session Tab to Group | - | Add the session in the active Claude tab to a [session group](#organize-sessions-into-groups) you pick or create. The command also appears in the tab’s right-click menu. Requires Claude Code v2.1.257 or later |
+| Mark Session as Unread | - | Mark the session in the active Claude tab as unread in the sessions list. The command also appears in the tab’s right-click menu. Requires Claude Code v2.1.257 or later |
 | Show Logs | - | View extension debug logs |
 | Logout | - | Sign out of your Anthropic account |
 
@@ -424,6 +434,8 @@ Follow the setup guide for your provider:
 - [Claude Code on Microsoft Foundry](microsoft-foundry.md)
 
 These guides cover configuring your provider in `~/.claude/settings.json`, which ensures your settings are shared between the VS Code extension and the CLI.
+
+On a third-party provider, the extension doesn’t offer features that require a claude.ai account, such as usage tracking, [voice dictation](voice-dictation.md), and the Web tab for [cloud sessions](#resume-cloud-sessions-from-claude-ai). A claude.ai sign-in left over from an earlier `/login` stays unused: the extension doesn’t send it with any request.
 
 ## [​](#security-and-privacy) Security and privacy
 

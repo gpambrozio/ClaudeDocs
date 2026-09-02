@@ -14,7 +14,7 @@
 
 
 
-MessageListResponse object{ id, content, content\_unavailable, 3 more }
+MessageListResponse object{ id, content, content\_unavailable, 3 more }
 
 A single user or assistant turn in a remote session transcript.
 

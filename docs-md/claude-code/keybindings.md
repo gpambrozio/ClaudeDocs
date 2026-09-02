@@ -135,9 +135,9 @@ Actions available in the `Confirmation` context:
 | `confirm:previousField` | (unbound) | Previous field |
 | `confirm:toggle` | Space | Toggle selection |
 | `confirm:cycleMode` | Shift+Tab\* | Cycle permission modes. On a file permission prompt, closes an open [comment field](permissions.md); with no field open, selects the option that allows the action for the rest of the session, when the prompt offers that option |
-| `confirm:toggleExplanation` | Ctrl+E | Toggle a model-generated [explanation of the command](permissions.md) on Bash and PowerShell permission prompts |
 
 \*On Windows without VT mode (Node <24.2.0/<22.17.0, Bun <1.2.23), defaults to Meta+M.
+Before v2.1.257, a `confirm:toggleExplanation` action, bound to `Ctrl+E` by default, showed a model-generated explanation of the command on Bash and PowerShell permission prompts.
 
 ### [​](#permission-actions) Permission actions
 

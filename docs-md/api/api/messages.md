@@ -800,7 +800,7 @@ Whether this member is offered to the model. Default is per member, per the tool
 
 
 
-BrowserToolset20260801 object{ type, allowed\_callers, cache\_control, configs }
+BrowserToolset20260801 object{ type, cache\_control, configs }
 
 The browser toolset: a single `tools[]` entry (carrying no
 `name`) that declares the browser tool family. The model is served
@@ -1706,7 +1706,7 @@ Whether this member is offered to the model. Default is per member, per the tool
 
 
 
-ComputerToolset20260801 object{ type, allowed\_callers, cache\_control, configs }
+ComputerToolset20260801 object{ type, cache\_control, configs }
 
 The computer toolset: a single `tools[]` entry (carrying no
 `name`) that declares the computer tool family. The model is
@@ -2274,7 +2274,7 @@ maxLength512
 
 
 
-Model = "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 12 more or string
+Model = "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string
 
 The model that will complete your prompt.
 

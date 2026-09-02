@@ -4,7 +4,7 @@
 
 
 
-Prompt caches are per-model. When Claude Fable 5 declines a request and you retry on another model, the conversation prefix that was already cached for Claude Fable 5 must be written into the new model's cache from scratch. Cache writes cost more than cache reads. Fallback credit removes that extra cost. The refusal carries a credit token, you echo the token on the retry, and the retry is billed as though the conversation had been on the new model all along.
+Prompt caches are per-model. When a model declines a request and you retry on another model, the conversation prefix already cached for the first model must be written into the new model's cache from scratch. Cache writes cost more than cache reads. Fallback credit removes that extra cost. The refusal carries a credit token, you echo the token on the retry, and the retry is billed as though the conversation had been on the new model all along.
 
 You need this page only when you build the retry yourself: over raw HTTP or with custom retry logic. [Server-side fallback](build-with-claude/refusals-and-fallback.md) and the [SDK middleware](build-with-claude/refusals-and-fallback.md) apply fallback credit automatically. If you use either, skip this page.
 
@@ -31,7 +31,7 @@ You need this page only when you build the retry yourself: over raw HTTP or with
 
    ### Build the retry
 
-   Start from the refused request body. Set `model` to the fallback model and add the token as the top-level `fallback_credit_token` parameter. Pick the body shape from the table below.
+   Start from the refused request body. Set `model` to the fallback model and add the token as the top-level `fallback_credit_token` parameter. Pick the body shape from the following table.
 4. 4
 
    ### Send the retry with the same header
@@ -110,7 +110,7 @@ print(json.dumps({"stop_reason": response.stop_reason, "model": response.model})
 
 Fallback credit is in beta on the Claude API, Amazon Bedrock, Claude Platform on AWS, Google Cloud, and Microsoft Foundry. Refusals in [Message Batches](build-with-claude/batch-processing.md) don't mint credit tokens, and redemption applies only to direct Messages API requests: a token passed on a batch request is accepted but ignored.
 
-The retry model must be one of the refused model's permitted fallback targets. Claude Fable 5's permitted targets are Claude Opus 4.8 (`claude-opus-4-8`) and Claude Opus 5 (`claude-opus-5`).
+The retry model must be one of the refused model's permitted fallback targets. For Claude Fable 5.1 and Claude Fable 5, those are Claude Opus 4.8 (`claude-opus-4-8`) and Claude Opus 5 (`claude-opus-5`).
 
 ### Looking up permitted fallback targets programmatically
 
@@ -137,7 +137,7 @@ Most retries redeem on the first attempt. When one does not, the API returns a 4
 
 ## Reference
 
-The sections below cover edge cases and the complete redemption rules. Most integrations do not need them.
+The following sections cover edge cases and the complete redemption rules. Most integrations do not need them.
 
 ### Fields that must match the refused request
 

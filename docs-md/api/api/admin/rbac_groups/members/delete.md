@@ -14,11 +14,11 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ##### Path parameters
 
-group\_id: string
+group\_id: string
 
 ID of the RBAC Group.
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 
@@ -26,31 +26,27 @@ ID of the User.
 
 
 
-RbacGroupMemberDeleted object{ group\_id, type, user\_id }
+RbacGroupMemberDeleted object{ group\_id, type, user\_id }
 
-group\_id: string
+group\_id: string
 
 ID of the RBAC Group.
 
 
 
-type: "rbac\_group\_member\_deleted"
+type: "rbac\_group\_member\_deleted"
 
 Deleted object type. For RBAC Group Members, this is always `"rbac_group_member_deleted"`.
 
 defaultrbac\_group\_member\_deleted
 
-user\_id: string
+user\_id: string
 
 ID of the User.
 
-
+Remove RBAC Group Member
 
-### Remove RBAC Group Member
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members/$USER_ID \

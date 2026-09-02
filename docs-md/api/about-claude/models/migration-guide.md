@@ -4,6 +4,7 @@
 
 
 
+- [Migrating to Claude Fable 5.1 and Claude Mythos 5.1](models/fable-5-1/migration-guide.md)
 - [Migrating to Claude Mythos 5 and Claude Fable 5](models/fable-5/migration-guide.md)
 - [Migrating to Claude Opus 5](models/opus-5/migration-guide.md)
 - [Migrating to Claude Sonnet 5](models/sonnet-5/migration-guide.md)

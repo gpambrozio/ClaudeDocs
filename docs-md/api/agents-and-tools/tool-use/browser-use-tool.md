@@ -738,7 +738,7 @@ Browse client toolsets and every other Anthropic-provided tool, with their versi
 
 |  |  |
 | --- | --- |
-| Supported models | - Fable 5 - Mythos 5 - Opus 4.8 and 5 - Sonnet 5 |
+| Supported models | - Fable 5 and 5.1 - Mythos 5 and 5.1 - Opus 4.8 and 5 - Sonnet 5 |
 | Supported platforms | - Claude API - Google Cloud |
 
 Was this page helpful?

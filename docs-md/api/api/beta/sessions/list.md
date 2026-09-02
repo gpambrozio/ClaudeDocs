@@ -22,7 +22,7 @@ Filter sessions created with this agent ID.
 
 agent\_version: optional number
 
-Filter by agent version. Only applies when agent\_id is also set.
+Filter by agent version. Only applies when `agent_id` is also set.
 
 formatint32
 
@@ -76,13 +76,13 @@ formatint32
 
 memory\_store\_id: optional string
 
-Filter sessions whose resources contain a memory\_store with this memory store ID.
+Filter sessions whose resources contain a `memory_store` with this memory store ID.
 
 
 
 order: optional "asc" or "desc"
 
-Sort direction for results, ordered by created\_at. Defaults to desc (newest first).
+Sort direction for results, ordered by `created_at`. Defaults to `desc` (newest first).
 
 One of the following:
 
@@ -124,7 +124,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
 
 One of the following:
 
@@ -210,6 +210,12 @@ One of the following:
 
 "ce-user-management-2026-07-13"
 
+"mid-conversation-output-config-2026-07-01"
+
+"thinking-binding-controls-2026-08-01"
+
+"mid-conversation-system-clear-at-2026-08-21"
+
 ##### Returns
 
 
@@ -272,7 +278,7 @@ metadata: map[string]
 
 outcome\_evaluations: array of [BetaManagedAgentsOutcomeEvaluationResource](api/http/beta/sessions.md) { completed\_at, description, explanation, 4 more }
 
-Per-outcome evaluation state. One entry per define\_outcome event sent to the session.
+Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
 
 
 
@@ -288,7 +294,7 @@ What the agent should produce.
 
 explanation: string or null
 
-Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs\_revision (intermediate), what's missing; for failed, why unrecoverable.
+Grader's verdict text from the most recent evaluation. For `satisfied`, explains why criteria are met; for `needs_revision` (intermediate), what's missing; for `failed`, why unrecoverable.
 
 
 
@@ -362,7 +368,7 @@ Timing statistics for a session.
 
 active\_seconds: optional number
 
-Cumulative time in seconds the session spent in running status. Excludes idle time.
+Cumulative time in seconds the session spent in `running` status. Excludes idle time.
 
 formatdouble
 

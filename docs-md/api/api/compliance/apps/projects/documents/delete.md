@@ -14,35 +14,31 @@ Hard-deletes the project document permanently.
 
 ##### Path parameters
 
-document\_id: string
+document\_id: string
 
 The document ID (tagged ID, e.g., claude\_proj\_doc\_abc123)
 
 ##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### Returns
 
-id: string
+id: string
 
 The ID of the project document that was deleted
 
 
 
-type: "claude\_project\_document\_deleted"
+type: "claude\_project\_document\_deleted"
 
 Constant string confirming deletion.
 
 defaultclaude\_project\_document\_deleted
 
-
+Delete project document
 
-### Delete project document
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID \

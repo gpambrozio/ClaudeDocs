@@ -274,7 +274,7 @@ if response.stop_reason == "refusal":
 
 On a refusal, the `stop_details` object identifies the policy category that triggered it. The categories and the full refusal response shape are covered on [Refusals and fallback](build-with-claude/refusals-and-fallback.md). `stop_details` is `null` for all stop reasons other than `refusal`.
 
-A refused request on Claude Fable 5 or Claude Opus 5 can usually be served by retrying on another Claude model, and [Refusals and fallback](build-with-claude/refusals-and-fallback.md) shows how to set up that retry, server-side or in your client. [Fallback credit](build-with-claude/fallback-credit.md) covers how to avoid paying the prompt-cache cost twice when you build the retry yourself.
+A refused request on Claude Fable 5.1, Claude Fable 5, or Claude Opus 5 can usually be served by retrying on another Claude model. [Refusals and fallback](build-with-claude/refusals-and-fallback.md) shows how to set up that retry, server-side or in your client. If you build the retry yourself from Claude Fable 5.1, Claude Fable 5, or Claude Opus 5, [fallback credit](build-with-claude/fallback-credit.md) covers how to avoid paying the prompt-cache cost twice.
 
 ### model\_context\_window\_exceeded
 

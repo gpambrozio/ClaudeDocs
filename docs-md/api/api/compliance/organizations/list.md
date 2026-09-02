@@ -18,7 +18,7 @@ Returns organizations sorted by creation date in ascending order. Use
 
 
 
-limit: optional number
+limit: optional number
 
 Maximum results (default: 1000, max: 1000)
 
@@ -28,49 +28,45 @@ maximum1000
 
 minimum1
 
-page: optional string
+page: optional string
 
 Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
 ##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### Returns
 
 
 
-data: array of object{ created\_at, name, uuid }
+data: array of object{ created\_at, name, uuid }
 
 List of organizations sorted by creation date, ascending
 
-created\_at: string
+created\_at: string
 
 Organization creation time (RFC 3339 format)
 
-name: string
+name: string
 
 Organization name
 
-uuid: string
+uuid: string
 
 Unique identifier for the organization (UUID format)
 
-has\_more: boolean
+has\_more: boolean
 
 Whether more records exist beyond the current result set
 
-next\_page: optional string or null
+next\_page: optional string or null
 
 Token to retrieve the next page. Use this as the 'page' parameter in your next request
 
-
+List organizations
 
-### List organizations
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/compliance/organizations \

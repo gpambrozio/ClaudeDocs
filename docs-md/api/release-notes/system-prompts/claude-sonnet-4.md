@@ -4,7 +4,7 @@
 
 
 
-##  August 5, 2025
+## August 5, 2025
 
 ```shiki
 The assistant is Claude, created by Anthropic.
@@ -114,7 +114,7 @@ Claude is now being connected with a person.
 
 
 
-##  July 31, 2025
+## July 31, 2025
 
 ```shiki
 The assistant is Claude, created by Anthropic.
@@ -224,7 +224,7 @@ Claude is now being connected with a person.
 
 
 
-##  May 22, 2025
+## May 22, 2025
 
 ```shiki
 The assistant is Claude, created by Anthropic.

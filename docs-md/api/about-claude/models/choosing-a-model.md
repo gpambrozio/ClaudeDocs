@@ -11,9 +11,7 @@ When choosing a Claude model, consider first evaluating these factors:
 - **Capabilities:** What specific features or capabilities will you need the model to have to meet your needs?
 - **Speed:** How quickly does the model need to respond in your application? Claude Opus 5 and Claude Opus 4.8 support [fast mode](build-with-claude/fast-mode.md) (research preview), which delivers up to 2.5x higher output speed at premium pricing.
 - **Cost:** What's your budget for both development and production usage?
-- **Effort:** Recent Opus and Sonnet models support an [effort parameter](build-with-claude/effort.md) that trades intelligence for latency and cost within a single model. Tuning effort is often a better lever than switching models. On Claude Opus 5, start with the default (`high`) and adjust up or down based on your evals. On Claude Opus 4.8 and Claude Opus 4.7, the `xhigh` effort level, between `high` and `max`, is the best setting for most coding and agentic use cases.
-
-Knowing these answers in advance will make narrowing down and deciding which model to use much easier.
+- **Effort:** Several Claude models support an [effort parameter](build-with-claude/effort.md) that trades intelligence for latency and cost within a single model. Tuning effort is often a better lever than switching models. On Claude Fable 5.1 and Claude Opus 5, start with the default (`high`) and adjust up or down based on your evals. On Claude Opus 4.8 and Claude Opus 4.7, the `xhigh` effort level, between `high` and `max`, is the best setting for most coding and agentic use cases.
 
 ---
 
@@ -45,6 +43,7 @@ For complex tasks where intelligence and advanced capabilities are paramount, yo
 2. [Optimize your prompts](build-with-claude/prompt-engineering/prompting-claude-opus-5.md) for this model.
 3. Evaluate if performance meets your requirements.
 4. Consider increasing efficiency by lowering [effort](build-with-claude/effort.md) or downgrading models over time with greater workflow optimization.
+5. If your evals at `xhigh` or `max` effort still fall short on demanding reasoning or long-horizon agentic work, move to [Claude Fable 5.1](models/fable-5-1/whats-new-fable-5-1.md).
 
 This approach is best for:
 
@@ -54,20 +53,22 @@ This approach is best for:
 - Applications where accuracy outweighs cost considerations
 - Advanced coding and high-autonomy agentic work
 
-**Claude Opus 5** (`claude-opus-5`) is a step-change improvement over Claude Opus 4.8, strong on deep reasoning, agentic and long-horizon tasks, and test-time compute scaling. Claude Opus 5 supports a 1M token context window by default and up to 128k output tokens, and is priced at $5 USD per million input tokens and $25 USD per million output tokens.
+**Claude Opus 5** (`claude-opus-5`) is built for complex agentic coding and enterprise work, with deep reasoning, long-horizon tasks, and test-time compute scaling.
 
-**Claude Fable 5** (`claude-fable-5`) is Anthropic's most capable widely released model, delivering next-generation intelligence for long-running agents. **Claude Mythos 5** (`claude-mythos-5`) is available through [Project Glasswing](https://anthropic.com/glasswing). Both models support a 1M token context window by default, up to 128k output tokens, and always-on [adaptive thinking](build-with-claude/thinking.md). See [Introducing Claude Fable 5 and Claude Mythos 5](models/fable-5/introducing-claude-fable-5-and-claude-mythos-5.md) for launch details.
+**Claude Fable 5.1** (`claude-fable-5-1`) is Anthropic's most capable widely released model. It extends Claude Fable 5 with stronger long-running agentic coding, knowledge work, and research at the same input and output prices, with cache reads at a quarter of the cost. **Claude Mythos 5.1** (`claude-mythos-5-1`) offers the same capabilities to [Project Glasswing](https://anthropic.com/glasswing) participants only. Both models use always-on [adaptive thinking](build-with-claude/thinking.md). See [What's new in Claude Fable 5.1](models/fable-5-1/whats-new-fable-5-1.md) for details.
 
-Claude Fable 5 and Claude Mythos 5 are priced at $10 USD per million input tokens and $50 USD per million output tokens.
+Claude Fable 5 and Claude Mythos 5 are also available. See [Introducing Claude Fable 5 and Claude Mythos 5](models/fable-5/introducing-claude-fable-5-and-claude-mythos-5.md) for details. For context windows, output limits, and prices, see the [model comparison table](models/overview.md).
 
 ## Model selection matrix
 
+Most workloads start with Claude Opus 5.
+
 | When you need... | Consider starting with... | Example use cases |
 | --- | --- | --- |
-| The highest available capability | Claude Fable 5 | Long-running agents, deep reasoning, long-horizon agentic tasks, advanced research |
-| Complex agentic coding and enterprise work | Claude Opus 5 | Multihour autonomous coding agents, large-scale refactoring, complex systems engineering, advanced research, knowledge work, vision-heavy workflows, computer use |
-| Frontier intelligence at scale, built for coding, agents, and enterprise workflows | Claude Sonnet 5 | Code generation, data analysis, content creation, visual understanding, agentic tool use |
-| Near-frontier performance with lightning-fast speed and extended thinking at the most economical price point | Claude Haiku 4.5 | Real-time applications, high-volume intelligent processing, cost-sensitive deployments needing strong reasoning, sub-agent tasks |
+| The highest available capability | Claude Fable 5.1 | Agent sessions that run for hours, multistep deep research, analysis carried through to a finished document, spreadsheet, or deck |
+| Complex agentic coding and enterprise work | Claude Opus 5 | Multihour autonomous coding agents, large-scale refactoring, complex systems engineering, vision-heavy workflows, computer use |
+| Speed and capability for everyday coding, agent, and enterprise workloads | Claude Sonnet 5 | Code generation, data analysis, content creation, visual understanding, agentic tool use |
+| The lowest latency and price, with extended thinking | Claude Haiku 4.5 | Real-time applications, high-volume intelligent processing, cost-sensitive deployments needing strong reasoning, sub-agent tasks |
 
 ---
 
@@ -95,13 +96,17 @@ Multi-model strategies pair a lower-cost model with a frontier model so that mos
 
 See detailed specifications and pricing for the latest Claude models
 
+[What's new in Claude Fable 5.1](models/fable-5-1/whats-new-fable-5-1.md)
+
+Built for demanding reasoning and long-horizon agentic work
+
 [What's new in Claude Opus 5](models/opus-5/whats-new-opus-5.md)
 
-Explore the latest improvements in Claude Opus 5
+Explore the improvements in Claude Opus 5
 
 [What's new in Claude Sonnet 5](models/sonnet-5/whats-new-sonnet-5.md)
 
-The best combination of speed and intelligence
+For everyday workloads that balance speed and capability
 
 
 

@@ -17,11 +17,11 @@ forward-only via `next_page`; there is no reverse cursor.
 
 
 
-created\_at: optional object{ gte, lt }
+created\_at: optional object{ gte, lt }
 
 
 
-gte: optional string
+gte: optional string
 
 Only return sessions whose first inference call is at or after this time (RFC 3339; a UTC offset is required).
 
@@ -29,7 +29,7 @@ formatdate-time
 
 
 
-lt: optional string
+lt: optional string
 
 Only return sessions whose first inference call is strictly before this time (RFC 3339; a UTC offset is required).
 
@@ -37,7 +37,7 @@ formatdate-time
 
 
 
-limit: optional number
+limit: optional number
 
 Maximum results (default: 100, max: 500)
 
@@ -47,17 +47,17 @@ maximum500
 
 minimum1
 
-page: optional string
+page: optional string
 
 Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
 
 
-updated\_at: optional object{ gte }
+updated\_at: optional object{ gte }
 
 
 
-gte: optional string
+gte: optional string
 
 Only return sessions whose last inference call is at or after this time (RFC 3339; a UTC offset is required). Combines with `created_at.gte` / `created_at.lt`; the ordering and pagination are unchanged. Use it to poll for sessions that have been active since a previous pass — a session that becomes active later can only enter the result, never leave it.
 
@@ -65,45 +65,45 @@ formatdate-time
 
 ##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### Returns
 
 
 
-data: array of object{ id, created\_at, organization\_uuid, 5 more }
+data: array of object{ id, created\_at, organization\_uuid, 5 more }
 
 Page of local sessions, ordered by `created_at` descending; ties are broken by a fixed server-side order. `updated_at` never participates in the ordering; the `updated_at.gte` query parameter filters on it without changing the order or the pagination cursor.
 
-id: string
+id: string
 
 Local session identifier, prefixed `clls_`. Unique within the parent organization. Treat as an opaque string; the format may change without notice.
 
 
 
-created\_at: string
+created\_at: string
 
 Timestamp of the session's first retained inference call (RFC 3339, UTC). When a session's activity spans the child organization's retention boundary, calls older than the boundary are no longer reflected, so this value is the timestamp of the earliest retained call: always strictly after the boundary, never the boundary itself.
 
 formatdate-time
 
-organization\_uuid: string
+organization\_uuid: string
 
 UUID of the child organization the session belongs to
 
-product\_surface: string or null
+product\_surface: string or null
 
 The product the session ran in: `cowork` (Cowork in Claude Desktop on the user's machine), `claude_code` (Claude Code), `claude_science` (Claude Science), or one of `office_agents/excel`, `office_agents/powerpoint`, `office_agents/word`, and `office_agents/outlook` (Claude for Microsoft 365, by app; `office_agents` alone when the app is not identified). New values appear as coverage expands; treat unrecognized values as opaque. `null` when the surface was not recorded.
 
 
 
-type: "compliance\_local\_session"
+type: "compliance\_local\_session"
 
 defaultcompliance\_local\_session
 
 
 
-updated\_at: string
+updated\_at: string
 
 Timestamp of the session's last retained inference call (RFC 3339, UTC). Always at or after `created_at`. When a session's activity spans the child organization's retention boundary, calls older than the boundary are no longer reflected — but because retention removes only the oldest calls, this value (unlike `created_at`) is unaffected until the entire session has aged out. On the list endpoint this value is a lower bound: for a session still active at a page or `created_at.lt` window boundary it can momentarily lag the session's true last activity. Retrieving the session, or its messages, always reflects the exact latest retained call.
 
@@ -111,33 +111,29 @@ formatdate-time
 
 
 
-user: object{ id, email\_address }
+user: object{ id, email\_address }
 
 The authenticated user at the time of the session. Always set; `user.id` is always populated. `user.email_address` is null when the user's account has been deleted or the user is no longer a member of an organization the key may read.
 
-id: string
+id: string
 
 User identifier (tagged ID, prefixed `user_`). Always set, so attribution survives after the user's account is deleted or the user leaves the organizations the key may read.
 
-email\_address: string or null
+email\_address: string or null
 
 User's email address. Null when the user's account has been deleted or the user is no longer a member of an organization the key may read. The messages endpoint does not resolve email addresses; this field is always null there.
 
-workspace\_id: string or null
+workspace\_id: string or null
 
 Workspace identifier (tagged ID, prefixed `wrkspc_`). Null for sessions not attributed to a workspace.
 
-next\_page: string or null
+next\_page: string or null
 
 Opaque pagination cursor (prefixed `page_`) for the next page. Null when there is no further page. Treat as an opaque string; the format may change without notice.
 
-
+List local sessions
 
-### List local sessions
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/compliance/apps/sessions/local \

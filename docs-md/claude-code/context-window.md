@@ -98,7 +98,7 @@ You can also act before the automatic pass runs:
 - **Clear between tasks**: run `/clear` when switching to unrelated work. Old conversation crowds out the files you need next and costs tokens on every message.
 - **Delegate large reads**: send research to a [subagent](sub-agents.md) so the file contents stay in its context window, not yours.
 
-If you need a larger window rather than a smaller conversation, Fable 5, Sonnet 5, Opus 4.6 and later, and Sonnet 4.6 support a 1 million token context window. See [Extended context](model-config.md) for availability by plan and how to select a `[1m]` model variant. Sonnet 5 runs at 1M with no `[1m]` variant to select; see [Sonnet 5 context window](model-config.md) for its auto-compaction thresholds and the LLM gateway exception. Compaction works the same way at the larger limit.
+If you need a larger window rather than a smaller conversation, Fable 5.1, Fable 5, Sonnet 5, Opus 4.6 and later, and Sonnet 4.6 support a 1 million token context window. See [Extended context](model-config.md) for availability by plan and how to select a `[1m]` model variant. Sonnet 5 runs at 1M with no `[1m]` variant to select; see [Sonnet 5 context window](model-config.md) for its auto-compaction thresholds and the LLM gateway exception. Compaction works the same way at the larger limit.
 The point where automatic compaction runs depends on your model and configuration. See [Default auto-compact thresholds](model-config.md) for the boundaries per model, and [Correct the window for a gateway or custom model ID](model-config.md) if Claude Code assumes the wrong window for your model ID, such as an [LLM gateway](llm-gateway.md) alias.
 
 ## [​](#check-your-own-session) Check your own session

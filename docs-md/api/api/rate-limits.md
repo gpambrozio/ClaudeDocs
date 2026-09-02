@@ -110,19 +110,21 @@ Start tierBuild tierScale tierCustom tier
 
 | Model | Maximum requests per minute (RPM) | Maximum input tokens per minute (ITPM) | Maximum output tokens per minute (OTPM) |
 | --- | --- | --- | --- |
-| Claude Fable 5 | 1,000 | 500,000 | 100,000 |
+| Claude Fable 5.x1 | 1,000 | 500,000 | 100,000 |
 | Claude Opus 5 | 1,000 | 2,000,000 | 400,000 |
-| Claude Opus 4.x\* | 1,000 | 2,000,000 | 400,000 |
+| Claude Opus 4.x2 | 1,000 | 2,000,000 | 400,000 |
 | Claude Sonnet 5 | 1,000 | 2,000,000 | 400,000 |
-| Claude Sonnet 4.x\*\* | 1,000 | 2,000,000 | 400,000 |
+| Claude Sonnet 4.x3 | 1,000 | 2,000,000 | 400,000 |
 | Claude Haiku 4.5 | 1,000 | 2,000,000 | 400,000 |
-| Claude Haiku 3.5 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)) | 1,000 | 100,000† | 20,000 |
+| Claude Haiku 3.5 ([retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)) | 1,000 | 100,0004 | 20,000 |
 
-*\* Opus rate limit is a total limit that applies to combined traffic across Claude Opus 4.8, Opus 4.7, Opus 4.6, and Opus 4.5. Claude Opus 5 has a separate rate limit and is not part of this combined bucket.*
+*1 Fable rate limit is a total limit that applies to combined traffic across Claude Fable 5.1 and Claude Fable 5. Claude Mythos 5.1 and Claude Mythos 5 share a separate combined limit on the same terms.*
 
-*\*\* Sonnet 4.x rate limit is a total limit that applies to combined traffic across Sonnet 4.6 and Sonnet 4.5. Claude Sonnet 5 has a separate rate limit and is not part of this combined bucket.*
+*2 Opus rate limit is a total limit that applies to combined traffic across Claude Opus 4.8, Opus 4.7, Opus 4.6, and Opus 4.5. Claude Opus 5 has a separate rate limit and is not part of this combined bucket.*
 
-*† Limit counts `cache_read_input_tokens` toward ITPM usage.*
+*3 Sonnet 4.x rate limit is a total limit that applies to combined traffic across Sonnet 4.6 and Sonnet 4.5. Claude Sonnet 5 has a separate rate limit and is not part of this combined bucket.*
+
+*4 Limit counts `cache_read_input_tokens` toward ITPM usage.*
 
 ### Message Batches API
 

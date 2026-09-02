@@ -45,7 +45,7 @@ Restoring plan mode on the non-interactive and VS Code paths requires Claude Cod
 
 | Session ended in | How you resume | Permission mode after you resume |
 | --- | --- | --- |
-| `bypassPermissions` | Terminal | The permission mode a new session would start in. To [bypass permissions](permission-modes.md) again, enable it at launch with one of its launch flags or `permissions.defaultMode: "bypassPermissions"` in [settings](settings-reference.md) |
+| `bypassPermissions` | Terminal | The permission mode a new session would start in. To [bypass permissions](permission-modes.md) again, enable it at launch with one of its launch flags or `permissions.defaultMode: "bypassPermissions"` in [user, `--settings`, or managed settings](settings-reference.md) |
 | `plan` | Terminal | The permission mode a new session would start in |
 | `auto` | Terminal | `auto`, only when your account still meets the [auto mode requirements](permission-modes.md) |
 | Manual | Terminal | Manual when a new session would start in auto mode from the [built-in default](permission-modes.md). When a `defaultMode` from a settings file [takes effect](permission-modes.md), Claude Code starts the resumed session in that mode instead |

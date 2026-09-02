@@ -737,7 +737,7 @@ Specify tool schemas, write effective descriptions, and control when Claude call
 
 |  |  |
 | --- | --- |
-| Supported models | - Fable 5 - Mythos 5 - Opus 4.5, 4.6, 4.7, 4.8, and 5 - Sonnet 4.5, 4.6, and 5 |
+| Supported models | - Fable 5 and 5.1 - Mythos 5 and 5.1 - Opus 4.5, 4.6, 4.7, 4.8, and 5 - Sonnet 4.5, 4.6, and 5 |
 | Supported platforms | - Claude API - Claude Platform on AWS - Microsoft Foundry[1](#compat-fn-1) |
 
 1. On [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md), programmatic tool calling requires a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md). [↩](#compat-fnref-1)

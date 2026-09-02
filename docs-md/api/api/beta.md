@@ -12,7 +12,7 @@ cURL
 
 
 
-AnthropicBeta = string or "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
+AnthropicBeta = string or "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
 
 One of the following:
 
@@ -991,6 +991,16 @@ defaultrate\_limit\_error
 ##### [List Organization Rate Limits](api/http/beta/organization/rate_limits/list.md)
 
 GET/v1/organizations/rate\_limits
+
+#### BetaOrganization[Compliance Settings](api/http/beta/organization/compliance_settings.md)
+
+##### [Get Compliance Settings](api/http/beta/organization/compliance_settings/retrieve.md)
+
+GET/v1/organizations/compliance\_settings
+
+##### [Update Compliance Settings](api/http/beta/organization/compliance_settings/update.md)
+
+POST/v1/organizations/compliance\_settings
 
 ---
 

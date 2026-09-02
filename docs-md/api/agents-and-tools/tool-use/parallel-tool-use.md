@@ -196,7 +196,7 @@ print(response.content)
 
 ### Exactly one tool call
 
-When `tool_choice` type is `any` or `tool`, setting `disable_parallel_tool_use: true` means Claude calls exactly one tool. The following example uses `any`. The same field works with `tool`:
+When `tool_choice` type is `any` or `tool`, setting `disable_parallel_tool_use: true` means Claude calls exactly one tool. Claude Fable 5.1 and Claude Mythos 5.1 don't support these `tool_choice` types (see [Forcing tool use](agents-and-tools/tool-use/define-tools.md)). The following example uses `any`. The same field works with `tool`:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 

@@ -22,23 +22,23 @@
 
 
 
-ArtifactListResponse object{ id, organization\_uuid, owner\_user\_id, 5 more }
+ArtifactListResponse object{ id, organization\_uuid, owner\_user\_id, 5 more }
 
 A hosted site published via Claude Code.
 
 
 
-ArtifactDeleteResponse object{ id, type }
+ArtifactDeleteResponse object{ id, type }
 
 Response for deleting a Code Artifact.
 
-id: string
+id: string
 
 The ID of the Artifact that was deleted
 
 
 
-type: "code\_artifact\_deleted"
+type: "code\_artifact\_deleted"
 
 Constant string confirming deletion
 

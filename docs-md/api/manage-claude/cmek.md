@@ -117,7 +117,7 @@ The following Claude Platform APIs and tools store data at rest under your key w
 | Batch | Bash tool |
 | Skills | Text editor tool |
 | Claude Managed Agents | MCP connector |
-|  | Structured outputs (not available for Claude Fable 5 or Claude Mythos models in CMEK organizations) |
+|  | Structured outputs (not available for Claude Fable or Claude Mythos models in CMEK organizations) |
 |  | Advisor tool |
 |  | Computer use |
 |  | Browser use |

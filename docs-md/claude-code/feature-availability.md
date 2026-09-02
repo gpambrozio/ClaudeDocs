@@ -77,7 +77,7 @@ Organization-level controls and usage visibility.
 | [Zero Data Retention](zero-data-retention.md) | ✓ (qualified Enterprise accounts) | ✓ (qualified accounts) | See note [3](#fn3) | ✓ (qualified accounts) | See note [3](#fn3) | See note [3](#fn3) |
 
 1 On Google Cloud’s Agent Platform, web search is available for Claude 4 models and later.  
-2 On these providers, auto mode supports only Claude Sonnet 5, Opus 4.7 or later, and Fable 5. See [Auto mode configuration](auto-mode-config.md). The built-in starting permission mode on these providers is Manual. See [which mode a session starts in](permission-modes.md). In v2.1.158 through v2.1.206, auto mode on these providers also required setting `CLAUDE_CODE_ENABLE_AUTO_MODE=1`; v2.1.207 removed the requirement.  
+2 On these providers, auto mode supports only Claude Sonnet 5, Opus 4.7 or later, and the Fable models. See [Auto mode configuration](auto-mode-config.md). The built-in starting permission mode on these providers is Manual. See [which mode a session starts in](permission-modes.md). In v2.1.158 through v2.1.206, auto mode on these providers also required setting `CLAUDE_CODE_ENABLE_AUTO_MODE=1`; v2.1.207 removed the requirement.  
 3 Subject to your agreement with the cloud provider.  
 4 Dashboard and API only. [Contribution metrics](analytics.md) requires a claude.ai Team or Enterprise organization.  
 5 Requires Claude Code v2.1.224 or later on macOS and Linux, including Linux inside WSL 2. On native Windows, requires Claude Code v2.1.234 or later. With API key authentication, messaging is same-machine only. On Amazon Bedrock, Claude Platform on AWS, Google Cloud’s Agent Platform, and Microsoft Foundry, messaging is same-machine only and requires Claude Code v2.1.248 or later. Claude can find your [Claude Code on the web](claude-code-on-the-web.md) sessions and your sessions on other machines only from a session that is connected to [Remote Control](remote-control.md). To connect, you need a claude.ai sign-in and the other [Remote Control requirements](remote-control.md). See [Message sessions on other machines](cross-session-messaging.md).
@@ -97,7 +97,7 @@ Each tab lists what is unavailable or partially supported on that provider, with
 **Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription), plus [web search](tools-reference.md), [fast mode](fast-mode.md), [Advisor](advisor.md), [Channels](channels.md), the [analytics dashboard](analytics.md), [server-managed settings](server-managed-settings.md), and the [`/design-sync` and `/import` commands](commands.md).**Partial support:**
 
 - [Desktop](desktop.md): only via [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
-- [Auto mode](auto-mode-config.md): Sonnet 5, Opus 4.7 or later, and Fable 5 only
+- [Auto mode](auto-mode-config.md): Sonnet 5, Opus 4.7 or later, and Fable models only
 - [Cross-session messaging](cross-session-messaging.md): between your sessions on this machine only [5](#fn5)
 - [Zero Data Retention](zero-data-retention.md): subject to your AWS agreement
 
@@ -113,7 +113,7 @@ Each tab lists what is unavailable or partially supported on that provider, with
 
 - [Desktop](desktop.md): via [managed settings](https://claude.com/docs/third-party/claude-desktop/configuration) or [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
 - [Web search](tools-reference.md): Claude 4 models and later
-- [Auto mode](auto-mode-config.md): Sonnet 5, Opus 4.7 or later, and Fable 5 only
+- [Auto mode](auto-mode-config.md): Sonnet 5, Opus 4.7 or later, and Fable models only
 - [Cross-session messaging](cross-session-messaging.md): between your sessions on this machine only [5](#fn5)
 - [Zero Data Retention](zero-data-retention.md): subject to your Google Cloud agreement
 
@@ -123,7 +123,7 @@ Each tab lists what is unavailable or partially supported on that provider, with
 
 - [Desktop](desktop.md): only via [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
 - [Web search](tools-reference.md): [deployments hosted on Anthropic](build-with-claude/claude-in-microsoft-foundry.md) only
-- [Auto mode](auto-mode-config.md): Sonnet 5, Opus 4.7 or later, and Fable 5 only
+- [Auto mode](auto-mode-config.md): Sonnet 5, Opus 4.7 or later, and Fable models only
 - [Cross-session messaging](cross-session-messaging.md): between your sessions on this machine only [5](#fn5)
 - [Zero Data Retention](zero-data-retention.md): subject to your Azure agreement
 

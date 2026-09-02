@@ -243,6 +243,8 @@ file_content = client.files.download(file_id)
 file_content.write_to_file("downloaded_file.txt")
 ```
 
+On the Claude API, supported image and video files that Claude produces with the code execution tool, including files created by skills, carry signed C2PA Content Credentials when you download them. See [Content Credentials on generated files](agents-and-tools/tool-use/code-execution-tool.md) for what the credential contains and how to verify it.
+
 ## File storage and limits
 
 ### Storage limits

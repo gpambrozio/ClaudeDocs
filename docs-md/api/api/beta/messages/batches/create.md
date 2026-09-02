@@ -30,7 +30,7 @@ string
 
 
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
 
 One of the following:
 
@@ -116,6 +116,12 @@ One of the following:
 
 "ce-user-management-2026-07-13"
 
+"mid-conversation-output-config-2026-07-01"
+
+"thinking-binding-controls-2026-08-01"
+
+"mid-conversation-system-clear-at-2026-08-21"
+
 "anthropic-user-profile-id": optional string
 
 The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
@@ -170,7 +176,7 @@ minimum0
 
 
 
-messages: array of [BetaMessageParam](api/http/beta/messages.md) { content, role }
+messages: array of [BetaMessageParam](api/http/beta/messages.md) { content, role, clear\_at, output\_config }
 
 Input messages.
 
@@ -513,9 +519,29 @@ Identifies one hop of a fallback transition.
 
 
 
+model: [Model](api/http/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+
+
 to: [BetaFallbackInfoParam](api/http/beta/messages.md) { model }
 
 Identifies one hop of a fallback transition.
+
+
+
+model: [Model](api/http/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
 
 type: "fallback"
 
@@ -537,6 +563,46 @@ One of the following:
 
 
 
+clear\_at: optional "next\_user\_message" or "never" or null
+
+How long this system message's text stays in front of the model. `"never"` (the default) renders it on every request that includes it. `"next_user_message"` renders it only for the user turn it follows: once a later `role: "user"` message exists in `messages` the message stays in the array (send it unchanged) but is no longer shown to the model. Only permitted on `role: "system"` messages.
+
+One of the following:
+
+"next\_user\_message"
+
+"never"
+
+
+
+output\_config: optional [BetaSystemMessageOutputConfig](api/http/beta/messages.md) { effort } or null
+
+Per-message output configuration on a role:"system" input message.
+
+Fields here apply per-turn; `format` remains top-level only. An
+empty `{}` is accepted on a message that carries content; a message
+with neither content nor output\_config fields is rejected.
+
+
+
+effort: optional "low" or "medium" or "high" or 2 more or null
+
+All possible effort levels.
+
+One of the following:
+
+"low"
+
+"medium"
+
+"high"
+
+"xhigh"
+
+"max"
+
+
+
 model: [Model](api/http/messages.md)
 
 The model that will complete your prompt.
@@ -544,78 +610,6 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
-
-
-
-"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 12 more
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-5"
-
-Powerful intelligence for long-running agents and coding
-
-"claude-opus-4-8"
-
-Powerful intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Powerful intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Powerful intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Powerful intelligence for long-running agents and coding
-
-"claude-opus-4-5-20251101"
-
-Powerful intelligence for long-running agents and coding
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-string
 
 
 
@@ -1249,7 +1243,7 @@ Code execution tool with REPL state persistence.
 
 
 
-BetaBrowserToolset20260801 object{ type, allowed\_callers, cache\_control, configs }
+BetaBrowserToolset20260801 object{ type, cache\_control, configs }
 
 The browser toolset: a single `tools[]` entry (carrying no
 `name`) that declares the browser tool family. The model is served
@@ -1278,7 +1272,7 @@ BetaToolComputerUse20251124 object{ display\_height\_px, display\_width\_px, nam
 
 
 
-BetaComputerToolset20260801 object{ type, allowed\_callers, cache\_control, configs }
+BetaComputerToolset20260801 object{ type, cache\_control, configs }
 
 The computer toolset: a single `tools[]` entry (carrying no
 `name`) that declares the computer tool family. The model is

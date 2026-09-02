@@ -4,7 +4,7 @@
 
 
 
-##  Learning resources
+## Learning resources
 
 
 
@@ -14,7 +14,7 @@ Deployable applications built with the API.
 
 
 
-[Courses](https://anthropic.skilljar.com/)
+[Courses](https://academy.claude.com/courses)
 
 Step-by-step lessons on building with Claude.
 
@@ -30,7 +30,7 @@ In-depth production guides for building common use cases with Claude.
 
 Key terms and concepts for working with Claude and language models.
 
-##  Resources for AI ingestion
+## Resources for AI ingestion
 
 
 

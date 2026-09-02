@@ -1,18 +1,18 @@
 ## Compare models
 
-If you're unsure which model to use, start with [Claude Opus 5](models/opus-5/overview.md) for complex agentic coding and enterprise work; for the highest available capability, use [Claude Fable 5](models/fable-5/overview.md). All current models support text and image input, text output, multilingual capabilities, vision, and tool use; each model's page lists the platforms it is available on.
+If you're unsure which model to use, start with [Claude Opus 5](models/opus-5/overview.md) for most workloads. Use [Claude Fable 5.1](models/fable-5-1/overview.md) for demanding reasoning and long-horizon agentic work, or when your evals on Claude Opus 5 at higher effort still fall short. All current models support text and image input, text output, multilingual capabilities, vision, and tool use. Each model's page lists the platforms it's available on.
 
-| Feature | [Claude Fable 5](models/fable-5/overview.md)Next-generation intelligence for long-running agents | [Claude Opus 5](models/opus-5/overview.md)For complex agentic coding and enterprise work | [Claude Sonnet 5](models/sonnet-5/overview.md)The best combination of speed and intelligence | [Claude Haiku 4.5](models/haiku-4-5/overview.md)The fastest model with near-frontier intelligence |
+| Feature | [Claude Fable 5.1](models/fable-5-1/overview.md)For demanding reasoning and long-horizon agentic work | [Claude Opus 5](models/opus-5/overview.md)For complex agentic coding and enterprise work | [Claude Sonnet 5](models/sonnet-5/overview.md)The best combination of speed and intelligence | [Claude Haiku 4.5](models/haiku-4-5/overview.md)The fastest model with near-frontier intelligence |
 | --- | --- | --- | --- | --- |
 | Comparative latency | Slower | Moderate | Fast | Fastest |
 | [Pricing](about-claude/pricing.md) | $10 / input MTok$50 / output MTok | $5 / input MTok$25 / output MTok | $2 / input MTok$10 / output MTok | $1 / input MTok$5 / output MTok |
-| Claude API ID | claude-fable-5 | claude-opus-5 | claude-sonnet-5 | claude-haiku-4-5-20251001 |
+| Claude API ID | claude-fable-5-1 | claude-opus-5 | claude-sonnet-5 | claude-haiku-4-5-20251001 |
 | Capabilities |  | | | |
 | [Thinking](build-with-claude/thinking.md) | Adaptive (always on) | Adaptive | Adaptive | Extended |
 | [Default effort](build-with-claude/effort.md) | `high` | `high` | `high` | Not supported |
 | [Context window](build-with-claude/context-windows.md) | 1M tokens | 1M tokens | 1M tokens | 200K tokens |
 | Max output | 128K tokens | 128K tokens | 128K tokens | 64K tokens |
-| Reliable knowledge cutoff | Jan 2026 | May 2026 | Jan 2026 | Feb 2025 |
+| Reliable knowledge cutoff | Jun 2026 | May 2026 | Jan 2026 | Feb 2025 |
 | Show all detailsShow fewer details | | | | |
 
 Once you've picked a model, [learn how to make your first API call](get-started.md). To understand how model IDs, aliases, and snapshots work, see [Model IDs and versioning](about-claude/models/model-ids-and-versions.md); for the reliable-knowledge and training-data cutoffs behind each model, see [Anthropic's Transparency Hub](https://www.anthropic.com/transparency).

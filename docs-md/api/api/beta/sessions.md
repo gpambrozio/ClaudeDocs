@@ -328,7 +328,7 @@ One of the following:
 
 BetaManagedAgentsOutcomeEvaluationResource object{ completed\_at, description, explanation, 4 more }
 
-Evaluation state for a single outcome defined via a define\_outcome event.
+Evaluation state for a single outcome defined via a `define_outcome` event.
 
 
 
@@ -344,7 +344,7 @@ What the agent should produce.
 
 explanation: string or null
 
-Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs\_revision (intermediate), what's missing; for failed, why unrecoverable.
+Grader's verdict text from the most recent evaluation. For `satisfied`, explains why criteria are met; for `needs_revision` (intermediate), what's missing; for `failed`, why unrecoverable.
 
 
 
@@ -420,7 +420,7 @@ Timing statistics for a session.
 
 active\_seconds: optional number
 
-Cumulative time in seconds the session spent in running status. Excludes idle time.
+Cumulative time in seconds the session spent in `running` status. Excludes idle time.
 
 formatdouble
 

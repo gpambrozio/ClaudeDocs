@@ -19,35 +19,31 @@ Artifact.
 
 ##### Path parameters
 
-artifact\_id: string
+artifact\_id: string
 
 The Artifact ID (tagged ID, e.g., cart\_abc123)
 
 ##### Headers
 
-"x-api-key": optional string
+"x-api-key": optional string
 
 ##### Returns
 
-id: string
+id: string
 
 The ID of the Artifact that was deleted
 
 
 
-type: "code\_artifact\_deleted"
+type: "code\_artifact\_deleted"
 
 Constant string confirming deletion
 
 defaultcode\_artifact\_deleted
 
-
+Delete Code Artifact
 
-### Delete Code Artifact
-
-cURL
-
-
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/compliance/apps/code/artifacts/$ARTIFACT_ID \
