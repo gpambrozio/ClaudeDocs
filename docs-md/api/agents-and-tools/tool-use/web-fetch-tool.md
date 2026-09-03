@@ -335,7 +335,7 @@ For security reasons, the web fetch tool can only fetch URLs that have previousl
 - URLs in client-side tool results
 - URLs from previous web search or web fetch results
 
-The tool cannot fetch arbitrary URLs that Claude generates or URLs from container-based server tools (such as Code Execution and Bash).
+The tool cannot fetch URLs that appear only in Claude's own output or only in the system prompt. To make a URL from the system prompt fetchable, also include it in a user message. Results of other server-side tools, such as [code execution](agents-and-tools/tool-use/code-execution-tool.md), the [MCP connector](agents-and-tools/mcp-connector.md), or [tool search](agents-and-tools/tool-use/tool-search-tool.md), are not an allowed source either. Client-side tool results are an allowed source even when they echo text that Claude produced (for example, a command that prints its input, or an error message that quotes it).
 
 ## Combined search and fetch
 

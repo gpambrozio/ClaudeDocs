@@ -11,7 +11,7 @@ The Anthropic Java SDK provides convenient access to the Claude API from applica
 GradleMaven
 
 ```shiki
-implementation("com.anthropic:anthropic-java:2.58.0")
+implementation("com.anthropic:anthropic-java:2.60.0")
 ```
 
 

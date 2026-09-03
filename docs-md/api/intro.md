@@ -13,6 +13,56 @@ Anthropic offers two ways to build with Claude, each suited to different use cas
 
 To learn more about each, see [Using the Messages API](build-with-claude/working-with-messages.md) and the [Claude Managed Agents overview](managed-agents/overview.md).
 
+## Explore the latest generation of Claude models
+
+If you're unsure which model to use, start with [Claude Opus 5](models/opus-5/overview.md) for most workloads. Use [Claude Fable 5.1](models/fable-5-1/overview.md) for demanding reasoning and long-horizon agentic work, or when your evals on Claude Opus 5 at higher effort still fall short. All current models support text and image input, text output, multilingual capabilities, vision, and tool use. Each model's page lists the platforms it's available on.
+
+![](/images/dashboard-discovery/head.svg)
+
+![](/images/dashboard-discovery/head.svg)
+
+### [Fable 5.1](models/fable-5-1/overview.md)
+
+New
+
+Most capableResearchMulti-day tasks
+
+For demanding reasoning and long-horizon agentic work
+
+![](/images/dashboard-discovery/cursor.svg)
+
+![](/images/dashboard-discovery/cursor.svg)
+
+### [Opus 5](models/opus-5/overview.md)
+
+Complex projectsAgentsCoding
+
+For complex agentic coding and enterprise work
+
+![](/images/dashboard-discovery/bubble.svg)
+
+![](/images/dashboard-discovery/bubble.svg)
+
+### [Sonnet 5](models/sonnet-5/overview.md)
+
+Everyday tasksWritingCost-efficient
+
+The best combination of speed and intelligence
+
+![](/images/dashboard-discovery/bird.svg)
+
+![](/images/dashboard-discovery/bird.svg)
+
+### [Haiku 4.5](models/haiku-4-5/overview.md)
+
+FastestLowest costHigh volume
+
+The fastest model with near-frontier intelligence
+
+[Compare models](models/overview.md)
+
+---
+
 ## Recommended path for new developers
 
 Follow these steps to go from zero to a working Claude integration.

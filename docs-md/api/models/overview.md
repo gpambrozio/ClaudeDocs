@@ -13,7 +13,7 @@ If you're unsure which model to use, start with [Claude Opus 5](models/opus-5/ov
 | [Context window](build-with-claude/context-windows.md) | 1M tokens | 1M tokens | 1M tokens | 200K tokens |
 | Max output | 128K tokens | 128K tokens | 128K tokens | 64K tokens |
 | Reliable knowledge cutoff | Jun 2026 | May 2026 | Jan 2026 | Feb 2025 |
-| Show all detailsShow fewer details | | | | |
+| Show all details | | | | |
 
 Once you've picked a model, [learn how to make your first API call](get-started.md). To understand how model IDs, aliases, and snapshots work, see [Model IDs and versioning](about-claude/models/model-ids-and-versions.md); for the reliable-knowledge and training-data cutoffs behind each model, see [Anthropic's Transparency Hub](https://www.anthropic.com/transparency).
 

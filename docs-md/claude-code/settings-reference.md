@@ -1,10 +1,22 @@
 # Claude Code settings reference
 
+[Back to index](#all-settings)
+
 This reference page lists each key Claude Code reads from a settings file, plus the [short group of keys](#global-config-settings) it keeps in `~/.claude.json` instead. To pick a file, or check precedence, start with [Claude Code settings](settings.md).
 
 ## [​](#all-settings) All settings
 
 Every key below links to its entry. Scope lists the [files](settings.md) it can go in: `User` is `~/.claude/settings.json`, `Project` is `.claude/settings.json`, `Local` is `.claude/settings.local.json`, and `Managed` is [what your organization deploys](managed-settings.md). `Any file` means all four, and `Global config` means [`~/.claude.json`](#global-config-settings).
+
+/
+
+Topic: All topics▼
+
+Scope: All scopes▼
+
+Sort byKeyTopicScope
+
+222 settings
 
 | Key | Description | Topic | Scope |
 | --- | --- | --- | --- |
@@ -3216,11 +3228,11 @@ settings.json
 
 ### [​](#prurltemplate) `prUrlTemplate`
 
-Point the PR links Claude Code renders, in the footer badge and in tool-result summaries, at an internal code-review tool instead of `github.com`. Claude Code substitutes `{host}`, `{owner}`, `{repo}`, `{number}`, and `{url}` from the `gh`-reported PR URL. The [GitLab merge request badge](interactive-mode.md) keeps its GitLab URL.
+Point the PR links Claude Code renders, in the footer badge and in tool-result summaries, at an internal code-review tool instead of `github.com`. Claude Code substitutes `{host}`, `{owner}`, `{repo}`, `{number}`, and `{url}` from the PR URL. The [GitLab merge request badge](interactive-mode.md) keeps its GitLab URL.
 
 - **Scope**: [`Any file`](#scopes)
 - **Type**: string, a URL template using any of the five placeholders
-- **Default**: unset, so links use the `gh`-reported URL
+- **Default**: unset
 
 settings.json
 

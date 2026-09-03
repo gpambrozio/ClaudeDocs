@@ -135,7 +135,8 @@ while True:
     tool_results: list[BetaToolResultBlockParam] = []
     for block in response.content:
         if block.type == "tool_use":
-            path = str(block.input["path"])
+            raw_path = block.input.get("path")
+            path = raw_path if isinstance(raw_path, str) else ""
             if path in FILES:
                 tool_results.append(
                     {
@@ -311,7 +312,7 @@ At `xhigh` and especially `max` effort, Claude Fable 5.1 can think for longer be
 - Append the following note to the end of the user message. It makes the thinking much shorter on prose and code requests. Replace `[max_tokens]` with the request's actual `max_tokens` value, for example 64,000.
 
 ```shiki
-Everything produced in one reply, including any reasoning or drafting it does before the reply, counts toward a single limit of about [max_tokens] tokens. If that limit is reached before the reply is finished, the person receives a cut-off response and has to start over. Composing an entire output or deliverable in full as reasoning and then again as a reply would double the length of the turn without improving the result, so don't do that.
+Everything produced in one reply, including any reasoning or drafting done before the reply, counts toward a single limit of about [max_tokens] tokens. If that limit is reached before the reply is finished, the person receives a cut-off response and has to start over. Composing an entire output or deliverable in full as reasoning and then again as a reply would double the length of the turn without improving the result, so don't do that.
 
 Instead, when the person has asked for a long or effort-intensive deliverable such as a multi-section document, a large table or dataset, or a complete code file, spend extra effort on understanding the request, checking the inputs the answer depends on, settling the structure and other difficult decisions, and otherwise using the reasoning space to reason and the output space to write an output. Usually it is not needed to draft an output multiple times.
 ```

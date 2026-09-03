@@ -145,8 +145,8 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.count_tokens(
-    model="claude-sonnet-4-6",
-    thinking={"type": "enabled", "budget_tokens": 16000},
+    model="claude-opus-5",
+    thinking={"type": "adaptive"},
     messages=[
         {
             "role": "user",

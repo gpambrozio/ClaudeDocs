@@ -10,7 +10,11 @@ cURL
 
 ##### [Unwrap](api/http/beta/webhooks/unwrap.md)
 
+Function
+
 ##### [Parse Unverified](api/http/beta/webhooks/parse_unverified.md)
+
+Function
 
 ##### Models
 

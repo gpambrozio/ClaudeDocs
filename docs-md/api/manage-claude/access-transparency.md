@@ -60,7 +60,8 @@ curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/activities" \
   --data-urlencode "activity_types[]=anthropic_access" \
   --data-urlencode "limit=50" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  --header "anthropic-version: 2023-06-01"
 ```
 
 
@@ -118,7 +119,8 @@ curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/activities" \
   --data-urlencode "activity_types[]=cmek_preserve" \
   --data-urlencode "limit=50" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  --header "anthropic-version: 2023-06-01"
 ```
 
 

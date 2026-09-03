@@ -304,6 +304,28 @@ The same beta names apply on Amazon Bedrock and Google Cloud. See [Beta headers]
 - Cross-turn files are `file_id` or base64, not mutable URLs.
 - A production `prefix_mismatch_behavior` is set and its 400s or dropped entries are monitored.
 
+## FAQ
+
+### Do I need a new account to test the check?
+
+### If anything before a thinking block changes, even one tool description, is the conversation unusable?
+
+### Does changing effort or other thinking settings between requests invalidate earlier thinking?
+
+### My tool list changes mid-session. How do I avoid invalidating the conversation?
+
+### I compact by summarizing older turns and keeping recent turns verbatim. Does that still work?
+
+### How do I handle instruction files such as AGENTS.md or CLAUDE.md that change mid-session?
+
+### Can I resume a saved session later, after a restart or the next day?
+
+### What happens to thinking when the conversation moves from Claude Fable 5.1 to an older model and back?
+
+### My harness can route a turn to a non-Claude model. Do those turns invalidate Claude's earlier thinking?
+
+### Can I carry a conversation's reasoning into a new conversation?
+
 ## Next steps
 
 

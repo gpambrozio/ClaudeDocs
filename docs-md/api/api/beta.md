@@ -648,7 +648,11 @@ defaultrate\_limit\_error
 
 ##### [Unwrap](api/http/beta/webhooks/unwrap.md)
 
+Function
+
 ##### [Parse Unverified](api/http/beta/webhooks/parse_unverified.md)
+
+Function
 
 #### Beta[User Profiles](api/http/beta/user_profiles.md)
 

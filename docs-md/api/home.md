@@ -136,6 +136,8 @@ Choose the right model for your use case.
 
 ![](/images/dashboard-discovery/head.svg)
 
+![](/images/dashboard-discovery/head.svg)
+
 ### [Fable 5.1](models/fable-5-1/overview.md)
 
 New
@@ -143,6 +145,8 @@ New
 Most capableResearchMulti-day tasks
 
 For demanding reasoning and long-horizon agentic work
+
+![](/images/dashboard-discovery/cursor.svg)
 
 ![](/images/dashboard-discovery/cursor.svg)
 
@@ -154,11 +158,15 @@ For complex agentic coding and enterprise work
 
 ![](/images/dashboard-discovery/bubble.svg)
 
+![](/images/dashboard-discovery/bubble.svg)
+
 ### [Sonnet 5](models/sonnet-5/overview.md)
 
 Everyday tasksWritingCost-efficient
 
 The best combination of speed and intelligence
+
+![](/images/dashboard-discovery/bird.svg)
 
 ![](/images/dashboard-discovery/bird.svg)
 

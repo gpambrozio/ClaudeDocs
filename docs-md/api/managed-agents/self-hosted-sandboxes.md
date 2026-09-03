@@ -100,7 +100,7 @@ Always-on (ant CLI)Always-on (SDK)Webhook-triggered (SDK)
    For Linux environments, download the release binary directly.
 
    ```shiki
-   VERSION=1.27.0
+   VERSION=1.29.0
    OS=$(uname -s | tr '[:upper:]' '[:lower:]')
    case $(uname -m) in
      x86_64) ARCH=amd64 ;;
@@ -135,7 +135,7 @@ Always-on (ant CLI)Always-on (SDK)Webhook-triggered (SDK)
 
    ```inline-block
    FROM your-base-image
-   ARG ANT_VERSION=1.27.0
+   ARG ANT_VERSION=1.29.0
    ARG TARGETARCH
    RUN ARCH=$([ "$TARGETARCH" = "arm64" ] && echo arm64 || echo amd64) && \
        curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${ANT_VERSION}/ant_${ANT_VERSION}_linux_${ARCH}.tar.gz" \
