@@ -67,10 +67,7 @@ A small number of Messages API parameters are **not** supported in batch request
 | --- | --- |
 | `stream: true` | Batch results come back as a single file, not a stream. |
 | `speed` ([Fast mode](build-with-claude/fast-mode.md)) | Fast mode tunes synchronous latency, which doesn't apply to asynchronous batch processing. |
-| `store` / `previous_thread_event_id` (Threads) | Threads are stateful; batch requests are not. |
-| `cache_hint` / `context_hint` | These routing hints apply to synchronous request scheduling only. |
 | `max_tokens: 0` | See [Batch limitations](#batch-limitations). |
-| `research_preview_2026_02: "active"` | Research preview mode is not available on the batch path. |
 
 ## Pricing
 
@@ -485,21 +482,44 @@ For ZDR eligibility across all features, see [API and data retention](manage-cla
 
 ### How long does it take for a batch to process?
 
+Batches may take up to 24 hours for processing, but many finish sooner. Actual processing time depends on the size of the batch, current demand, and your request volume. It is possible for a batch to expire and not complete within 24 hours.
+
 ### Is the Batches API available for all models?
+
+See [Supported models](#supported-models) for the list of supported models.
 
 ### Can I use the Message Batches API with other API features?
 
+Yes, the Message Batches API supports nearly all features available in the Messages API, including most beta features. A small number of parameters (`stream`, `speed`, and `max_tokens: 0`) are not supported. See [What can be batched](#what-can-be-batched) for the full list.
+
 ### How does the Message Batches API affect pricing?
+
+The Message Batches API offers a 50% discount on all usage compared to standard API prices. This applies to input tokens, output tokens, and any special tokens. For more on pricing, visit [Pricing](https://claude.com/pricing#anthropic-api).
 
 ### Can I update a batch after it's been submitted?
 
+No, once a batch has been submitted, it cannot be modified. If you need to make changes, you should cancel the current batch and submit a new one. Note that cancellation may not take immediate effect.
+
 ### Are there Message Batches API rate limits and do they interact with the Messages API rate limits?
+
+The Message Batches API has HTTP requests-based rate limits in addition to limits on the number of requests in need of processing. See [Message Batches API rate limits](api/rate-limits.md). Usage of the Batches API does not affect rate limits in the Messages API.
 
 ### How do I handle errors in my batch requests?
 
+When you retrieve the results, each request has a `result` field indicating whether it `succeeded`, `errored`, was `canceled`, or `expired`. For `errored` results, additional error information is provided. View the error response object in the [API reference](api/messages/batches/create.md).
+
 ### How does the Message Batches API handle privacy and data separation?
 
+The Message Batches API is designed with strong privacy and data separation measures:
+
+1. Batches and their results are isolated within the Workspace in which they were created. This means they can only be accessed by API requests in that same Workspace.
+2. Each request within a batch is processed independently, with no data leakage between requests.
+3. Results are only available for a limited time (29 days), and follow Anthropic's [data retention policy](https://support.claude.com/en/articles/7996866-how-long-do-you-store-personal-data).
+4. Downloading batch results in the Console can be disabled on the organization-level or on a per-workspace basis.
+
 ### Can I use prompt caching in the Message Batches API?
+
+Yes, it is possible to use prompt caching with Message Batches API. However, because asynchronous batch requests can be processed concurrently and in any order, cache hits are provided on a best-effort basis.
 
 ## Next steps
 

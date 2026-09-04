@@ -240,6 +240,21 @@ This example applies lint fixes with `acceptEdits` as the baseline:
 claude -p "Apply the lint fixes" --permission-mode acceptEdits
 ```
 
+### [​](#turn-off-permission-prompts-in-unattended-runs) Turn off permission prompts in unattended runs
+
+Pass `--permission-prompts none` when nobody is available to answer permission prompts, for example in a scheduled job. The flag matters most when your run has a permission host: an Agent SDK app with a [`canUseTool` callback](agent-sdk/user-input.md), or an MCP tool you pass with [`--permission-prompt-tool`](cli-reference.md). Without the flag, your run waits for that host to answer each permission request.
+With the flag, your run doesn’t consult the host or wait on it. Anything that would prompt is denied unless a `PermissionRequest` hook allows it, Claude is told that nobody can approve the request and not to retry it, and the run continues. In a `-p` run with no host, these requests are denied either way, and the flag also tells Claude not to retry them. Permission rules, [`PermissionRequest` hooks](hooks.md), and the permission mode you set still decide every call first; Claude Code denies only the requests that nothing else resolves.
+This example runs an unattended task in [auto mode](permission-modes.md). The classifier reviews each action as usual, and Claude Code denies anything that would have fallen back to a prompt:
+
+```shiki
+claude -p "Update the dependency pins and run the tests" --permission-mode auto --permission-prompts none
+```
+
+With `--permission-prompts none`, Claude Code removes the tools that need an answer from a person, such as [`AskUserQuestion`](tools-reference.md), so Claude can’t call them. Any [MCP elicitation request](mcp.md) that no [`Elicitation` hook](hooks.md) answers is cancelled.
+With `--output-format stream-json`, denials appear as `permission_denied` system messages, and the final result message lists them in `permission_denials`.
+
+The `--permission-prompts` flag requires Claude Code v2.1.259 or later. Earlier versions reject it with an unknown-option error.
+
 ### [​](#create-a-commit) Create a commit
 
 This example reviews staged changes and creates a commit with an appropriate message:

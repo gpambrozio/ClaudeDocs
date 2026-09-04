@@ -318,9 +318,50 @@ The `error_code` field has four possible values:
 
 ### 400 error: all tools are deferred
 
+**Cause:** You set `defer_loading: true` on every tool, including the tool search tool.
+
+**Fix:** Remove `defer_loading` from the tool search tool:
+
+```shiki
+{
+  "type": "tool_search_tool_regex_20251119",
+  "name": "tool_search_tool_regex"
+}
+```
+
+
+
 ### 400 error: missing tool definition
 
+**Cause:** A `tool_reference` points to a tool not in your `tools` array.
+
+**Fix:** Ensure every tool that could be discovered has a complete definition:
+
+```shiki
+{
+  "name": "my_tool",
+  "description": "Full description here",
+  "input_schema": {
+    "type": "object"
+  },
+  "defer_loading": true
+}
+```
+
+
+
 ### Claude doesn't find expected tools
+
+**Cause:** The regex pattern doesn't match the tool's name, description, argument names, or argument descriptions.
+
+**Debugging steps:**
+
+1. Check tool name, description, argument names, and argument descriptions. Claude searches all of these fields.
+2. Test your pattern: `import re; re.search(r"your_pattern", "tool_name", re.IGNORECASE)`.
+3. Matching is case-insensitive, so casing differences aren't the problem.
+4. Claude uses broad patterns such as `".*weather.*"`, not exact matches.
+
+**Tip:** Add common keywords to tool descriptions to improve discoverability.
 
 ## Prompt caching
 

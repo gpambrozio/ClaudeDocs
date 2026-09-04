@@ -54,7 +54,7 @@ A gateway routes model API requests. A few things you might expect it to handle 
 
 ## [​](#next-steps) Next steps
 
-The next page depends on who runs the gateway. Anthropic’s gateway runs from the `claude` binary and has its own setup guide; a gateway your organization already runs has a protocol to implement and an admin rollout checklist.
+The next page depends on who runs the gateway. Anthropic’s gateway runs from the `claude` binary and has its own setup guide; a gateway your organization already runs has a compatibility guide to follow and an admin rollout checklist.
 
 - [Claude apps gateway](claude-apps-gateway.md) to deploy Anthropic’s self-hosted gateway with SSO sign-in and OTLP telemetry
 - [Other LLM gateways](llm-gateway.md) for what a gateway your organization already runs must implement, and how to point Claude Code at it

@@ -27,13 +27,23 @@ Here are some key indicators that you should employ an LLM like Claude to automa
 
 ### High volume of repetitive queries
 
+Claude excels at handling a large number of similar questions efficiently, freeing up human agents for more complex issues.
+
 ### Need for quick information synthesis
+
+Claude can quickly retrieve, process, and combine information from vast knowledge bases, while human agents may need time to research or consult multiple sources.
 
 ### 24/7 availability requirement
 
+Claude can provide round-the-clock support without fatigue, whereas staffing human agents for continuous coverage can be costly and challenging.
+
 ### Rapid scaling during peak periods
 
+Claude can handle sudden increases in query volume without the need for hiring and training additional staff.
+
 ### Consistent brand voice
+
+You can instruct Claude to consistently represent your brand's tone and values, whereas human agents may vary in their communication styles.
 
 Some considerations for choosing Claude over other LLMs:
 
@@ -98,27 +108,49 @@ Here are criteria and benchmarks that can be used to evaluate how successfully C
 
 ### Query comprehension accuracy
 
+This metric evaluates how accurately Claude understands customer inquiries across various topics. Measure this by reviewing a sample of conversations and assessing whether Claude has the correct interpretation of customer intent, critical next steps, what successful resolution looks like, and more. Aim for a comprehension accuracy of 95% or higher.
+
 ### Response relevance
+
+This assesses how well Claude's response addresses the customer's specific question or issue. Evaluate a set of conversations and rate the relevance of each response (using LLM-based grading for scale). Target a relevance score of 90% or above.
 
 ### Response accuracy
 
+Assess the correctness of general company and product information provided to the user, based on the information provided to Claude in context. Target 100% accuracy in this introductory information.
+
 ### Citation provision relevance
+
+Track the frequency and relevance of links or sources offered. Target providing relevant sources in 80% of interactions where additional information could be beneficial.
 
 ### Topic adherence
 
+Measure how well Claude stays on topic, such as the topic of car insurance in the example implementation. Aim for 95% of responses to be directly related to car insurance or the customer's specific query.
+
 ### Content generation effectiveness
 
+Measure how successful Claude is at determining when to generate informational content and how relevant that content is. For example, in this implementation, you would be determining how well Claude understands when to generate a quote and how accurate that quote is. Target 100% accuracy, as this is vital information for a successful customer interaction.
+
 ### Escalation efficiency
+
+This measures Claude's ability to recognize when a query needs human intervention and escalate appropriately. Track the percentage of correctly escalated conversations versus those that should have been escalated but weren't. Aim for an escalation accuracy of 95% or higher.
 
 Here are criteria and benchmarks that can be used to evaluate the business impact of employing Claude for support:
 
 ### Sentiment maintenance
 
+This assesses Claude's ability to maintain or improve customer sentiment throughout the conversation. Use sentiment analysis tools to measure sentiment at the beginning and end of each conversation. Aim for maintained or improved sentiment in 90% of interactions.
+
 ### Deflection rate
+
+The percentage of customer inquiries successfully handled by the chatbot without human intervention. Typically aim for 70-80% deflection rate, depending on the complexity of inquiries.
 
 ### Customer satisfaction score
 
+A measure of how satisfied customers are with their chatbot interaction. Usually done through post-interaction surveys. Aim for a CSAT score of 4 out of 5 or higher.
+
 ### Average handle time
+
+The average time it takes for the chatbot to resolve an inquiry. This varies widely based on the complexity of issues, but generally, aim for a lower AHT compared to human agents.
 
 ## How to implement Claude as a customer service agent
 

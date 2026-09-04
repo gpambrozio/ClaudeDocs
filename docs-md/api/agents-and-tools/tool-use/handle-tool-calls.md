@@ -20,6 +20,31 @@ A `tool_use` block for a member of the [computer use](agents-and-tools/tool-use/
 
 ### Example API response with a `tool\_use` content block
 
+JSON
+
+
+
+```shiki
+{
+  "id": "msg_01Aq9w938a90dw8q",
+  "model": "claude-opus-5",
+  "stop_reason": "tool_use",
+  "role": "assistant",
+  "content": [
+    {
+      "type": "text",
+      "text": "I'll check the current weather in San Francisco for you."
+    },
+    {
+      "type": "tool_use",
+      "id": "toolu_01A09q90qw90lq917835lq9",
+      "name": "get_weather",
+      "input": { "location": "San Francisco, CA", "unit": "celsius" }
+    }
+  ]
+}
+```
+
 When you receive a tool use response for a client tool, you should:
 
 1. Extract the `name`, `id`, and `input` from the `tool_use` block.
@@ -33,11 +58,98 @@ A `tool_result` that answers a computer use or browser use member block must als
 
 ### Example of successful tool result
 
+JSON
+
+
+
+```shiki
+{
+  "role": "user",
+  "content": [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
+      "content": "15 degrees"
+    }
+  ]
+}
+```
+
 ### Example of tool result with images
+
+JSON
+
+
+
+```shiki
+{
+  "role": "user",
+  "content": [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
+      "content": [
+        { "type": "text", "text": "15 degrees" },
+        {
+          "type": "image",
+          "source": {
+            "type": "base64",
+            "media_type": "image/jpeg",
+            "data": "/9j/4AAQSkZJRg..."
+          }
+        }
+      ]
+    }
+  ]
+}
+```
 
 ### Example of empty tool result
 
+JSON
+
+
+
+```shiki
+{
+  "role": "user",
+  "content": [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01A09q90qw90lq917835lq9"
+    }
+  ]
+}
+```
+
 ### Example of tool result with documents
+
+JSON
+
+
+
+```shiki
+{
+  "role": "user",
+  "content": [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
+      "content": [
+        { "type": "text", "text": "The weather is" },
+        {
+          "type": "document",
+          "source": {
+            "type": "text",
+            "media_type": "text/plain",
+            "data": "15 degrees"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
 
 After receiving the tool result, Claude will use that information to continue generating a response to the original user prompt.
 
@@ -51,9 +163,65 @@ There are a few different types of errors that can occur when using tools with C
 
 ### Tool execution error
 
+If the tool itself throws an error during execution (for example, a network error when fetching weather data), you can return the error message in the `content` along with `"is_error": true`:
+
+JSON
+
+
+
+```shiki
+{
+  "role": "user",
+  "content": [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
+      "content": "ConnectionError: the weather service API is not available (HTTP 500)",
+      "is_error": true
+    }
+  ]
+}
+```
+
+Claude will then incorporate this error into its response to the user. For example: "I'm sorry, I was unable to retrieve the current weather because the weather service API is not available. Please try again later."
+
 ### Invalid tool name
 
+If Claude's attempted use of a tool is invalid (for example, missing required parameters), it usually means that there wasn't enough information for Claude to use the tool correctly. Your best bet during development is to try the request again with more-detailed `description` values in your tool definitions.
+
+However, you can also continue the conversation forward with a `tool_result` that indicates the error, and Claude will try to use the tool again with the missing information filled in:
+
+JSON
+
+
+
+```shiki
+{
+  "role": "user",
+  "content": [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
+      "content": "Error: Missing required 'location' parameter",
+      "is_error": true
+    }
+  ]
+}
+```
+
+If a tool request is invalid or missing parameters, Claude will retry 2-3 times with corrections before apologizing to the user.
+
 ### Server tool errors
+
+When server tools encounter errors (for example, network issues with Web Search), Claude will transparently handle these errors and attempt to provide an alternative response or explanation to the user. Unlike client tools, you do not need to handle `is_error` results for server tools.
+
+For web search specifically, possible error codes include:
+
+- `too_many_requests`: Rate limit exceeded
+- `invalid_input`: Invalid search query parameter
+- `max_uses_exceeded`: Maximum web search tool uses exceeded
+- `query_too_long`: Query exceeds maximum length
+- `unavailable`: An internal error occurred
 
 ## Next steps
 

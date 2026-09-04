@@ -672,11 +672,61 @@ Make error text specific, because Claude reads it and adapts: `Error: Navigation
 
 ### Refused navigation scheme
 
+```shiki
+{
+  "type": "tool_result",
+  "tool_use_id": "toolu_01LeUTyqkhRxBFq1QTG3pkwN",
+  "toolset_name": "browser",
+  "is_error": true,
+  "content": "Error: Navigation refused. Only http and https URLs are allowed."
+}
+```
+
+
+
 ### Stale or unknown element reference
+
+```shiki
+{
+  "type": "tool_result",
+  "tool_use_id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+  "toolset_name": "browser",
+  "is_error": true,
+  "content": "Error: ref_3 is stale or not found on the current page. Re-read the page to get fresh references."
+}
+```
+
+
 
 ### Disabled or unimplemented member
 
+```shiki
+{
+  "type": "tool_result",
+  "tool_use_id": "toolu_013h2Q55HcNwVyapSpy2s5ZG",
+  "toolset_name": "browser",
+  "is_error": true,
+  "content": "Error: javascript_exec is not enabled in this environment."
+}
+```
+
+
+
 ### Skipped after an earlier failure in the turn
+
+When the `left_click` on `ref_3` from [Batch actions](#batch-actions) fails with the stale-reference error shown earlier, the `type` and `key` calls after it each get this result:
+
+```shiki
+{
+  "type": "tool_result",
+  "tool_use_id": "toolu_01FkP8rTz6uYh2mNq4LsXw7v",
+  "toolset_name": "browser",
+  "is_error": true,
+  "content": "Not executed: an earlier action in this turn failed."
+}
+```
+
+
 
 ### Request errors
 

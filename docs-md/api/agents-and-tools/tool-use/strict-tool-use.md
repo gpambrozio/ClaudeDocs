@@ -110,7 +110,101 @@ The [computer use](agents-and-tools/tool-use/computer-use-tool.md) and [browser 
 
 ### Validated tool inputs
 
+Ensure tool parameters exactly match your schema:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+client = Anthropic()
+response = client.messages.create(
+    model="claude-opus-5",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": "Search for flights to Tokyo departing June 1, 2026",
+        }
+    ],
+    tools=[
+        {
+            "name": "search_flights",
+            "strict": True,
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "destination": {"type": "string"},
+                    "departure_date": {"type": "string", "format": "date"},
+                    "passengers": {
+                        "type": "integer",
+                        "enum": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                    },
+                },
+                "required": ["destination", "departure_date"],
+                "additionalProperties": False,
+            },
+        }
+    ],
+)
+
+print(response)
+```
+
 ### Agentic workflow with multiple validated tools
+
+Build reliable multistep agents with guaranteed tool parameters:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+client = Anthropic()
+response = client.messages.create(
+    model="claude-opus-5",
+    max_tokens=1024,
+    messages=[
+        {
+            "role": "user",
+            "content": "Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026",
+        }
+    ],
+    tools=[
+        {
+            "name": "search_flights",
+            "strict": True,
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "origin": {"type": "string"},
+                    "destination": {"type": "string"},
+                    "departure_date": {"type": "string", "format": "date"},
+                    "travelers": {"type": "integer", "enum": [1, 2, 3, 4, 5, 6]},
+                },
+                "required": ["origin", "destination", "departure_date"],
+                "additionalProperties": False,
+            },
+        },
+        {
+            "name": "search_hotels",
+            "strict": True,
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "city": {"type": "string"},
+                    "check_in": {"type": "string", "format": "date"},
+                    "guests": {"type": "integer", "enum": [1, 2, 3, 4]},
+                },
+                "required": ["city", "check_in"],
+                "additionalProperties": False,
+            },
+        },
+    ],
+)
+
+print(response)
+```
 
 ## Data retention
 

@@ -46,23 +46,26 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-ant beta:agents create < agent.yaml
+ant apply agent.md
 ```
 
-agent.yaml
+agent.md
 
 
 
 ```shiki
+---
 name: Financial Analyst
 model: claude-opus-5
-system: You are a financial analysis agent.
 skills:
   - type: anthropic
     skill_id: xlsx
   - type: custom
     skill_id: skill_01AbCdEfGhIjKlMnOpQrStUv
     version: latest
+---
+
+You are a financial analysis agent.
 ```
 
 ## Load skills from a GitHub repository

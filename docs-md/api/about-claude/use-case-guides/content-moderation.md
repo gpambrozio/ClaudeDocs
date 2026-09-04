@@ -14,17 +14,31 @@ Here are some key indicators that you should use an LLM like Claude instead of a
 
 ### You want a cost-effective and rapid implementation
 
+Traditional ML methods require significant engineering resources, ML expertise, and infrastructure costs. Human moderation systems incur even higher costs. With Claude, you can have a sophisticated moderation system operational in significantly less time and at a much lower cost.
+
 ### You want both semantic understanding and quick decisions
+
+Traditional ML approaches, such as bag-of-words models or simple pattern matching, often struggle to understand the tone, intent, and context of the content. While human moderation systems excel at understanding semantic meaning, they require time for content to be reviewed. Claude addresses both needs by combining semantic understanding with the ability to deliver moderation decisions quickly.
 
 ### You need consistent policy decisions
 
+By leveraging its advanced reasoning capabilities, Claude can interpret and apply complex moderation guidelines uniformly. This consistency helps ensure fair treatment of all content, reducing the risk of inconsistent or biased moderation decisions that can undermine user trust.
+
 ### Your moderation policies are likely to change or evolve over time
+
+Once a traditional ML approach has been established, changing it is a laborious and data-intensive undertaking. On the other hand, as your product or customer needs evolve, Claude can easily adapt to changes or additions to moderation policies without extensive relabeling of training data.
 
 ### You require interpretable reasoning for your moderation decisions
 
+If you want to provide users or regulators with clear explanations behind moderation decisions, Claude can generate detailed and coherent justifications. This transparency is important for building trust and ensuring accountability in content moderation practices.
+
 ### You need multilingual support without maintaining separate models
 
+Traditional ML approaches typically require separate models or extensive translation processes for each supported language. Human moderation requires hiring a workforce fluent in each supported language. Claude’s multilingual capabilities allow it to classify tickets in various languages without the need for separate models or extensive translation processes, streamlining moderation for global customer bases.
+
 ### You require multimodal support
+
+Claude's multimodal capabilities allow it to analyze and interpret content across both text and images. This makes it a versatile tool for comprehensive content moderation in environments where different media types need to be evaluated together.
 
 ### Generate examples of content to moderate
 

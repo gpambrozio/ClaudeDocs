@@ -8,96 +8,17 @@ This page covers task-oriented workflows built on the `ant` CLI. For the underly
 
 ## Version-controlling API resources
 
-You can use the CLI to version control API resources such as skills, agents, environments, or deployments as YAML files in your repository and keep them in sync with the Claude API.
+To keep agents, environments, and other Claude Managed Agents resources as files in your repository, see [Manage resources as code with ant apply](cli-sdks-libraries/cli/apply.md).
+
+### Run the applied agent from the shell
+
+Once an agent and environment exist, you can drive a session from the shell:
 
 1. 1
 
-   ### Define your agent
-
-   Write the agent definition to `summarizer.agent.yaml`:
-
-   summarizer.agent.yaml
-
-   
-
-   ```shiki
-   name: Summarizer
-   model: claude-opus-5
-   system: |
-     You are a helpful assistant that writes concise summaries.
-   tools:
-     - type: agent_toolset_20260401
-   ```
-2. 2
-
-   ### Create the agent
-
-   ```shiki
-   ant beta:agents create < summarizer.agent.yaml
-   ```
-
-   
-
-   Output
-
-   
-
-   ```shiki
-   {
-     "id": "agent_011CYm1BLqPXpQRk5khsSXrs",
-     "version": 1,
-     "name": "Summarizer",
-     "model": "claude-opus-5"
-     /* ... */
-   }
-   ```
-
-   Note the `id` from the response. You'll pass it to the session create command in a later step.
-3. 3
-
-   ### Define the environment
-
-   A session runs in an [environment](api/cli/beta/environments.md), which defines the sandbox it executes in. Write the environment definition to `summarizer.environment.yaml`:
-
-   summarizer.environment.yaml
-
-   
-
-   ```shiki
-   name: summarizer-env
-   config:
-     type: cloud
-     networking:
-       type: unrestricted
-   ```
-4. 4
-
-   ### Create the environment
-
-   ```shiki
-   ant beta:environments create < summarizer.environment.yaml
-   ```
-
-   
-
-   Output
-
-   
-
-   ```shiki
-   {
-     "id": "env_01595EKxaaTTGwwY3kyXdtbs",
-     "name": "summarizer-env"
-     /* ... */
-   }
-   ```
-
-   Note the `id` from the response. You'll pass it to the session create command in a later step.
-5. 5
-
    ### Start a session
 
-   Paste the agent `id` and environment `id` from the previous outputs into the session create command:
+   Pass the agent and environment IDs to the session create command. After `ant apply`, read them from `claude-lock.json`: each entry under `resources` has an `id`, and for the project in [Manage resources as code with ant apply](cli-sdks-libraries/cli/apply.md) the entries are `./agents/summarizer.md` and `./environments/cloud.yaml`.
 
    ```shiki
    ant beta:sessions create \
@@ -119,7 +40,7 @@ You can use the CLI to version control API resources such as skills, agents, env
      /* ... */
    }
    ```
-6. 6
+2. 2
 
    ### Send a user message
 
@@ -132,16 +53,18 @@ You can use the CLI to version control API resources such as skills, agents, env
    ```
 
    
-7. 7
+3. 3
 
    ### Read the conversation
 
-   `--transform` runs against each listed event, so this prints the text of every message in order. `--format auto` overrides the interactive explorer that list commands open by default in a terminal:
+   Once the agent has replied, list the events. `--transform` runs against each listed event, so this prints the text of every message in order. `--format auto` overrides the interactive explorer that list commands open by default in a terminal:
 
    ```shiki
    ant beta:sessions:events list \
      --session-id session_01JZCh78XvmxJjiXVy3oSi7K \
-     --transform 'content.0.text' --format auto --raw-output
+     --transform 'content.0.text' \
+     --raw-output \
+     --format auto
    ```
 
    

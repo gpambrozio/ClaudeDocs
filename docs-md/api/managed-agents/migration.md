@@ -249,19 +249,22 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-ant beta:agents update --agent-id "$AGENT_ID" < agent.yaml
+ant apply agent.md
 ```
 
-agent.yaml
+agent.md
 
 
 
 ```shiki
+---
 name: Task Runner
 model: claude-opus-5
-system: You are a task automation agent. Complete the task you are given end to end.
 tools:
   - type: agent_toolset_20260401
+---
+
+You are a task automation agent. Complete the task you are given end to end.
 ```
 
 Most model-level behavior changes documented in the [Messages API migration guide](about-claude/models/migration-guide.md) do not require action on your side:

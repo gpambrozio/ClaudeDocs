@@ -119,6 +119,25 @@ Each server tool's page describes its own trigger boundary in more detail.
 
 ### When required parameters are missing
 
+If the user's prompt doesn't include enough information to fill all the required parameters for a tool, Claude Opus is much more likely to recognize that a parameter is missing and ask for it. Claude Sonnet might ask, especially when prompted to think before outputting a tool request. But it might also infer a reasonable value.
+
+For example, given a `get_weather` tool that requires a `location` parameter, if you ask Claude "What's the weather?" without specifying a location, Claude (particularly Claude Sonnet) might guess values you didn't supply:
+
+JSON
+
+
+
+```shiki
+{
+  "type": "tool_use",
+  "id": "toolu_01A09q90qw90lq917835lq9",
+  "name": "get_weather",
+  "input": { "location": "New York, NY", "unit": "fahrenheit" }
+}
+```
+
+This behavior is not guaranteed, especially for more ambiguous prompts and for less capable models.
+
 ## Choose a tool
 
 For `type` strings, versions, and beta headers, see [Tool reference](agents-and-tools/tool-use/tool-reference.md).

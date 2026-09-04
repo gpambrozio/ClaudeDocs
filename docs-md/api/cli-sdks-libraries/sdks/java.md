@@ -1182,7 +1182,19 @@ export ANTHROPIC_LOG=debug
 
 ### Jackson compatibility
 
+The SDK depends on Jackson for JSON serialization/deserialization. It is compatible with version 2.13.4 or higher, but depends on version 2.19.4 by default.
+
+The SDK throws an exception if it detects an incompatible Jackson version at runtime (for example, if the default version was overridden in your Maven or Gradle config).
+
+If the SDK threw an exception, but you're certain the version is compatible, then disable the version check using `checkJacksonVersionCompatibility` on `AnthropicOkHttpClient` or `AnthropicOkHttpClientAsync`.
+
+There are also bugs in older Jackson versions that can affect the SDK. The SDK doesn't work around all Jackson bugs and expects users to upgrade Jackson for those instead.
+
 ### ProGuard/R8 configuration
+
+Although the SDK uses reflection, it is still usable with ProGuard and R8 because `anthropic-java-core` is published with a configuration file containing keep rules.
+
+ProGuard and R8 should automatically detect and use the published rules, but you can also manually copy the keep rules if necessary.
 
 ### Undocumented API functionality
 
@@ -1258,11 +1270,32 @@ void main() {
 
 ### Why doesn't the SDK use plain enum classes?
 
+Java `enum` classes are not trivially forward compatible. Using them in the SDK could cause runtime exceptions if the API is updated to respond with a new enum value.
+
+Because these classes are open, you can also construct them with any string value through their `of(String)` factory method. See [New or unreleased enum values](#new-or-unreleased-enum-values) if you need to use a value that isn't in your SDK version yet.
+
 ### Why are fields represented using JsonField<T> instead of just plain T?
+
+Using `JsonField<T>` enables a few features:
+
+- Allowing usage of undocumented API functionality
+- Lazily validating the API response against the expected shape
+- Representing absent vs explicitly null values
 
 ### Why doesn't the SDK use data classes?
 
+It is not backwards compatible to add new fields to a data class, and the SDK avoids introducing a breaking change every time a field is added to a class.
+
 ### Why doesn't the SDK use checked exceptions?
+
+Checked exceptions are widely considered a mistake in the Java programming language. In fact, they were omitted from Kotlin for this reason.
+
+Checked exceptions:
+
+- Are verbose to handle
+- Encourage error handling at the wrong level of abstraction, where nothing can be done about the error
+- Are tedious to propagate because of the function coloring problem
+- Don't play well with lambdas (also because of the function coloring problem)
 
 ## Semantic versioning
 

@@ -114,6 +114,8 @@ The retry model must be one of the refused model's permitted fallback targets. F
 
 ### Looking up permitted fallback targets programmatically
 
+On the Claude API and Claude Platform on AWS, the target list is published as `allowed_fallback_models` on each model's entry in the [Models API](api/models/list.md) when the `server-side-fallback-2026-07-01` beta header is set. The list is not yet visible under the `fallback-credit-*` header alone. It is not exposed on Amazon Bedrock, Google Cloud, or Microsoft Foundry.
+
 ## Checking that the credit applied
 
 The refund is visible in the retry's `usage`. Compared with what the same request would report without the token, `cache_creation_input_tokens` is lower, and `cache_read_input_tokens` is higher by the same amount. A shift of zero means the token was honored but there was nothing to reprice, for example because the retry model's cache was already warm.
@@ -135,21 +137,65 @@ Most retries redeem on the first attempt. When one does not, the API returns a 4
 
 ### If the error says 'redemption temporarily unavailable'
 
+This rejection is transient, not a verdict on your retry shape. Retry the same request, with the same token, within the token's five-minute window. Do not move to the next step of the ladder.
+
 ## Reference
 
 The following sections cover edge cases and the complete redemption rules. Most integrations do not need them.
 
 ### Fields that must match the refused request
 
+Redemption compares the retry against the refused request. Every field that shapes the prompt must match exactly. Fields that do not shape the prompt may change on the retry.
+
+| Rule | Fields |
+| --- | --- |
+| Must match exactly | `system`, `messages`, `tools`, `tool_choice`, `thinking`, and `cache_control`, plus `output_config`, `mcp_servers`, `context_management`, and `container` when you use them |
+| May change on the retry | `model`, `max_tokens`, `stop_sequences`, `temperature`, `top_p`, `top_k`, `stream`, `metadata`, and `service_tier` |
+
+The continuation shape (`fallback_has_prefill_claim: true`) is the one exception to the `messages` match: it adds exactly one assistant message at the end of `messages`.
+
+Do not strip `thinking` or `redacted_thinking` blocks from earlier turns on the retry, even though a plain retry without a token usually strips them. The body must match the refused request, and the server handles those blocks itself.
+
 ### Beta headers must match too
+
+Send the same `anthropic-beta` headers on the retry as on the refused request. A beta header present on one of the two requests but not the other can fail the match even when the bodies are identical. The resulting 400 error carries the same `request body ... does not match` message as a body difference, so a header difference is easy to misread as a body problem. In particular, do not add or drop beta headers based on which model the request targets.
+
+Two header families are exempt from the match, for the retry's sake:
+
+- **`server-side-fallback-*`:** a retry must drop the `fallbacks` parameter, and dropping this header along with it does not cause a mismatch.
+- **`fallback-credit-*`:** keep this header on both requests. The retry needs it to redeem the token.
 
 ### When fallback\_has\_prefill\_claim is absent
 
+The field is `null` only when the token is also `null`, so a value you observe while holding a token is never `null`. It can still be absent (`None` in the typed SDKs) on Amazon Bedrock, Google Cloud, and Microsoft Foundry while their support for the field rolls out. In that case, treat the retry shape as unknown rather than as `false`. Try the appended-assistant-message shape first, and rely on the rejection handling in [When a retry is rejected](#when-a-retry-is-rejected), which falls back to the unchanged body.
+
 ### Echoing the refused response's content
+
+When a refusal's token supports the continuation shape, the response `content` carries only the model's own output, and the refusal explanation is delivered in `stop_details.explanation`. You can therefore echo `content` into the appended assistant message as-is.
+
+Two adjustments may still be needed before sending:
+
+- If the final block you send is a `text` block, strip its trailing whitespace.
+- Omit any client-side `tool_use` block that has no matching `tool_result`.
+
+If the echoed content includes a `fallback` block from an earlier [server-side fallback](build-with-claude/refusals-and-fallback.md), keep the block exactly where it appeared. It is accepted on any request without a beta header. The API uses its position to validate the thinking blocks around it, so a request that echoes thinking blocks from both sides of that boundary is rejected if the block is omitted or moved.
 
 ### Token scope and lifetime
 
+The token redeems only from the organization and workspace that received the refusal, including on Microsoft Foundry. On Amazon Bedrock and Google Cloud, which do not have workspaces, the token is bound to the platform's caller identity instead.
+
+The token expires five minutes after the refusal. After that, send the retry without it. The token is also stateless: the server stores nothing about it, and there is no endpoint to inspect or revoke it.
+
 ### When a token cannot be redeemed by either shape
+
+When the refusal arrived after server tools had already executed within the request, the token redeems only by continuing the partial response. That restriction is what prevents the completed tool calls from running, and billing, again.
+
+One combination can therefore leave the token unredeemable by either shape, when both of the following are true:
+
+- The request used `output_config.format` or a `tool_choice` that forces tool use. Either one rules out the appended-assistant-message shape.
+- The refusal arrived after server tools had executed. That rules out the unchanged body.
+
+If the unchanged-body retry is rejected with a 400 error saying the token must be redeemed by continuing the partial response, discard the token. A retry without it goes through, but it re-runs and re-bills the completed server tools. Surface the cost or the error to your caller rather than retrying silently.
 
 ## Next steps
 

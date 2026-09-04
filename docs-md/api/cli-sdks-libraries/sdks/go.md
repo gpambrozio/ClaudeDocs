@@ -69,11 +69,184 @@ For authentication options including Workload Identity Federation, see [Authenti
 
 ### Conversations
 
+```shiki
+messages := []anthropic.MessageParam{
+	anthropic.NewUserMessage(anthropic.NewTextBlock("What is my first name?")),
+}
+
+message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+	Model:     anthropic.ModelClaudeOpus5,
+	Messages:  messages,
+	MaxTokens: 1024,
+})
+if err != nil {
+	panic(err)
+}
+
+fmt.Printf("%+v\n", message.Content)
+
+messages = append(messages, message.ToParam())
+messages = append(messages, anthropic.NewUserMessage(
+	anthropic.NewTextBlock("My full name is John Doe"),
+))
+
+message, err = client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+	Model:     anthropic.ModelClaudeOpus5,
+	Messages:  messages,
+	MaxTokens: 1024,
+})
+if err != nil {
+	panic(err)
+}
+
+fmt.Printf("%+v\n", message.Content)
+```
+
+
+
 ### System prompts
+
+```shiki
+message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+	Model:     anthropic.ModelClaudeOpus5,
+	MaxTokens: 1024,
+	System: []anthropic.TextBlockParam{
+		{Text: "Be very serious at all times."},
+	},
+	Messages: messages,
+})
+if err != nil {
+	panic(err)
+}
+fmt.Printf("%+v\n", message.Content)
+```
+
+
 
 ### Streaming
 
+```shiki
+content := "What is a quaternion?"
+
+stream := client.Messages.NewStreaming(context.TODO(), anthropic.MessageNewParams{
+	Model:     anthropic.ModelClaudeOpus5,
+	MaxTokens: 1024,
+	Messages: []anthropic.MessageParam{
+		anthropic.NewUserMessage(anthropic.NewTextBlock(content)),
+	},
+})
+
+message := anthropic.Message{}
+for stream.Next() {
+	event := stream.Current()
+	err := message.Accumulate(event)
+	if err != nil {
+		panic(err)
+	}
+
+	switch eventVariant := event.AsAny().(type) {
+	case anthropic.ContentBlockDeltaEvent:
+		switch deltaVariant := eventVariant.Delta.AsAny().(type) {
+		case anthropic.TextDelta:
+			print(deltaVariant.Text)
+		}
+
+	}
+}
+
+if stream.Err() != nil {
+	panic(stream.Err())
+}
+```
+
+
+
 ### Tool calling
+
+```shiki
+messages := []anthropic.MessageParam{
+	anthropic.NewUserMessage(anthropic.NewTextBlock(content)),
+}
+
+toolParams := []anthropic.ToolParam{
+	{
+		Name:        "get_coordinates",
+		Description: anthropic.String("Accepts a place as an address, then returns the latitude and longitude coordinates."),
+		InputSchema: GetCoordinatesInputSchema,
+	},
+}
+tools := make([]anthropic.ToolUnionParam, len(toolParams))
+for i, toolParam := range toolParams {
+	tools[i] = anthropic.ToolUnionParam{OfTool: &toolParam}
+}
+
+for {
+	message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus5,
+		MaxTokens: 1024,
+		Messages:  messages,
+		Tools:     tools,
+	})
+
+	if err != nil {
+		panic(err)
+	}
+
+	print(color("[assistant]: "))
+	for _, block := range message.Content {
+		switch block := block.AsAny().(type) {
+		case anthropic.TextBlock:
+			println(block.Text)
+			println()
+		case anthropic.ToolUseBlock:
+			inputJSON, _ := json.Marshal(block.Input)
+			println(block.Name + ": " + string(inputJSON))
+			println()
+		}
+	}
+
+	messages = append(messages, message.ToParam())
+	toolResults := []anthropic.ContentBlockParamUnion{}
+
+	for _, block := range message.Content {
+		switch variant := block.AsAny().(type) {
+		case anthropic.ToolUseBlock:
+			print(color("[user (" + block.Name + ")]: "))
+
+			var response interface{}
+			switch block.Name {
+			case "get_coordinates":
+				var input struct {
+					Location string `json:"location"`
+				}
+
+				err := json.Unmarshal([]byte(variant.JSON.Input.Raw()), &input)
+				if err != nil {
+					panic(err)
+				}
+
+				response = GetCoordinates(input.Location)
+			}
+
+			b, err := json.Marshal(response)
+			if err != nil {
+				panic(err)
+			}
+
+			println(string(b))
+
+			toolResults = append(toolResults, anthropic.NewToolResultBlock(block.ID, string(b), false))
+		}
+
+	}
+	if len(toolResults) == 0 {
+		break
+	}
+	messages = append(messages, anthropic.NewUserMessage(toolResults...))
+}
+```
+
+
 
 ## Request fields
 

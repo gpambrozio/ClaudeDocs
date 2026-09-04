@@ -129,9 +129,59 @@ When working with large documents or data-rich inputs (20k+ tokens), structure y
 - **Structure document content and metadata with XML tags:** When using multiple documents, wrap each document in `<document>` tags with `<document_content>` and `<source>` (and other metadata) subtags for clarity.
 
   ### Example multidocument structure
+
+  ```shiki
+  <documents>
+    <document index="1">
+      <source>annual_report_2023.pdf</source>
+      <document_content>
+        {{ANNUAL_REPORT}}
+      </document_content>
+    </document>
+    <document index="2">
+      <source>competitor_analysis_q2.xlsx</source>
+      <document_content>
+        {{COMPETITOR_ANALYSIS}}
+      </document_content>
+    </document>
+  </documents>
+
+  Analyze the annual report and competitor analysis. Identify strategic advantages and recommend Q3 focus areas.
+  ```
+
+  
 - **Ground responses in quotes:** For long document tasks, ask Claude to quote relevant parts of the documents first before carrying out its task. This helps Claude focus on the relevant content and ignore the rest of the document.
 
   ### Example quote extraction
+
+  ```shiki
+  You are an AI physician's assistant. Your task is to help doctors diagnose possible patient illnesses.
+
+  <documents>
+    <document index="1">
+      <source>patient_symptoms.txt</source>
+      <document_content>
+        {{PATIENT_SYMPTOMS}}
+      </document_content>
+    </document>
+    <document index="2">
+      <source>patient_records.txt</source>
+      <document_content>
+        {{PATIENT_RECORDS}}
+      </document_content>
+    </document>
+    <document index="3">
+      <source>patient01_appt_history.txt</source>
+      <document_content>
+        {{PATIENT01_APPOINTMENT_HISTORY}}
+      </document_content>
+    </document>
+  </documents>
+
+  Find quotes from the patient records and appointment history that are relevant to diagnosing the patient's reported symptoms. Place these in <quotes> tags. Then, based on these quotes, list all information that would help the doctor diagnose the patient's symptoms. Place your diagnostic information in <info> tags.
+  ```
+
+  
 
 ### Model self-knowledge
 
@@ -261,13 +311,33 @@ Here are common prefill scenarios and how to migrate away from them:
 
 ### Controlling output formatting
 
+Prefills have been used to force specific output formats like JSON/YAML, classification, and similar patterns where the prefill constrains Claude to a particular structure.
+
+**Migration:** The [Structured Outputs](build-with-claude/structured-outputs.md) feature is designed specifically to constrain Claude's responses to follow a given schema. Try asking the model to conform to your output structure first, as newer models can reliably match complex schemas when told to, especially if implemented with retries. For classification tasks, use either tools with an enum field containing your valid labels or structured outputs.
+
 ### Eliminating preambles
+
+Prefills like `Here is the requested summary:\n` were used to skip introductory text.
+
+**Migration:** Use direct instructions in the system prompt: "Respond directly without preamble. Do not start with phrases like 'Here is...', 'Based on...', etc." Alternatively, direct the model to output within XML tags, use structured outputs, or use tool calling. If the occasional preamble slips through, strip it in post-processing.
 
 ### Avoiding bad refusals
 
+Prefills were used to steer around unnecessary refusals.
+
+**Migration:** Claude is much better at appropriate refusals now. Clear prompting within the `user` message without prefill should be sufficient.
+
 ### Continuations
 
+Prefills were used to continue partial completions, resume interrupted responses, or pick up where a previous generation left off.
+
+**Migration:** Move the continuation to the user message, and include the final text from the interrupted response: "Your previous response was interrupted and ended with `[previous\_response]`. Continue from where you left off." If this is part of error-handling or incomplete-response-handling and there is no UX penalty, retry the request.
+
 ### Context hydration and role consistency
+
+Prefills were used to periodically ensure refreshed or injected context.
+
+**Migration:** For very long conversations, inject what were previously prefilled-assistant reminders into the user turn. If context hydration is part of a more complex agentic system, consider hydrating through tools (expose or encourage use of tools containing context based on heuristics such as number of turns) or during [context compaction](build-with-claude/compaction.md).
 
 ## Tool use
 
@@ -526,6 +596,35 @@ systematically until you have completed this task.
 - **Emphasize incremental progress:** Explicitly ask Claude to keep track of its progress and focus on incremental work.
 
 ### Example: State tracking
+
+tests.json
+
+
+
+```shiki
+{
+  "tests": [
+    { "id": 1, "name": "authentication_flow", "status": "passing" },
+    { "id": 2, "name": "user_management", "status": "failing" },
+    { "id": 3, "name": "api_endpoints", "status": "not_started" }
+  ],
+  "total": 200,
+  "passing": 150,
+  "failing": 25,
+  "not_started": 25
+}
+```
+
+```block
+// Progress notes (progress.txt)
+Session 3 progress:
+- Fixed authentication token validation
+- Updated user model to handle edge cases
+- Next: investigate user_management test failures (test #2)
+- Note: Do not remove tests as this could lead to missing functionality
+```
+
+
 
 ### Balancing autonomy and safety
 

@@ -176,7 +176,51 @@ Interleaved thinking lets Claude think between tool calls, reasoning about each 
 
 ### Tool use without interleaved thinking
 
+Without interleaved thinking, Claude thinks once at the start of the assistant turn. Subsequent responses after tool results continue without new thinking blocks.
+
+```inline-block
+User: "What's the total revenue if we sold 150 units at $50 each,
+       and how does this compare to our average monthly revenue?"
+
+Response 1: [thinking] "I need to calculate 150 * $50, then check the database..."
+            [tool_use: calculator] { "expression": "150 * 50" }
+  ↓ tool result: "7500"
+
+Response 2: [tool_use: database_query] { "query": "SELECT AVG(revenue)..." }
+            ↑ no thinking block
+  ↓ tool result: "5200"
+
+Response 3: [text] "The total revenue is $7,500, which is 44% above your
+            average monthly revenue of $5,200."
+            ↑ no thinking block
+```
+
+
+
 ### Tool use with interleaved thinking
+
+With interleaved thinking enabled, Claude can think after receiving each tool result, allowing it to reason about intermediate results before continuing.
+
+```inline-block
+User: "What's the total revenue if we sold 150 units at $50 each,
+       and how does this compare to our average monthly revenue?"
+
+Response 1: [thinking] "I need to calculate 150 * $50 first..."
+            [tool_use: calculator] { "expression": "150 * 50" }
+  ↓ tool result: "7500"
+
+Response 2: [thinking] "Got $7,500. Now I should query the database to compare..."
+            [tool_use: database_query] { "query": "SELECT AVG(revenue)..." }
+            ↑ thinking after receiving calculator result
+  ↓ tool result: "5200"
+
+Response 3: [thinking] "$7,500 vs $5,200 average - that's a 44% increase..."
+            [text] "The total revenue is $7,500, which is 44% above your
+            average monthly revenue of $5,200."
+            ↑ thinking before final answer
+```
+
+
 
 ## Next steps
 

@@ -76,6 +76,102 @@ if response.stop_reason == "end_turn":
 
 ### Empty responses with end\_turn
 
+Sometimes Claude returns an empty response (exactly 2–3 tokens with no content) with `stop_reason: "end_turn"`. This typically occurs when Claude interprets that the assistant turn is complete, particularly after tool results.
+
+**Common causes:**
+
+- Adding text blocks immediately after tool results (Claude learns to expect the user to always insert text after tool results, so it ends its turn to follow the pattern)
+- Sending Claude's completed response back without adding anything (Claude already determined it's done, so it will remain done)
+
+**How to prevent empty responses:**
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+# INCORRECT: Adding text immediately after tool_result
+messages = [
+    {"role": "user", "content": "Calculate the sum of 1234 and 5678"},
+    {
+        "role": "assistant",
+        "content": [
+            {
+                "type": "tool_use",
+                "id": "toolu_123",
+                "name": "calculator",
+                "input": {"operation": "add", "a": 1234, "b": 5678},
+            }
+        ],
+    },
+    {
+        "role": "user",
+        "content": [
+            {"type": "tool_result", "tool_use_id": "toolu_123", "content": "6912"},
+            {
+                "type": "text",
+                "text": "Here's the result",  # Don't add text after tool_result
+            },
+        ],
+    },
+]
+
+# CORRECT: Send tool results directly without additional text
+messages = [
+    {"role": "user", "content": "Calculate the sum of 1234 and 5678"},
+    {
+        "role": "assistant",
+        "content": [
+            {
+                "type": "tool_use",
+                "id": "toolu_123",
+                "name": "calculator",
+                "input": {"operation": "add", "a": 1234, "b": 5678},
+            }
+        ],
+    },
+    {
+        "role": "user",
+        "content": [
+            {"type": "tool_result", "tool_use_id": "toolu_123", "content": "6912"}
+        ],
+    },  # Just the tool_result, no additional text
+]
+```
+
+If you still get empty responses after fixing the message structure, add a continuation prompt in a new user message rather than retrying with the empty response:
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+def handle_empty_response(client, messages):
+    response = client.messages.create(
+        model="claude-opus-5", max_tokens=1024, messages=messages
+    )
+
+    # Check if response is empty
+    if response.stop_reason == "end_turn" and not response.content:
+        # INCORRECT: Don't just retry with the empty response
+        # This won't work because Claude already decided it's done
+
+        # CORRECT: Add a continuation prompt in a NEW user message
+        messages.append({"role": "user", "content": "Please continue"})
+
+        response = client.messages.create(
+            model="claude-opus-5", max_tokens=1024, messages=messages
+        )
+
+    return response
+```
+
+**Best practices:**
+
+1. **Never add text blocks immediately after tool results:** This teaches Claude to expect user input after every tool use.
+2. **Don't retry empty responses without modification:** Sending the empty response back won't help.
+3. **Use continuation prompts as a last resort:** Only if these fixes don't resolve the issue.
+
 ### max\_tokens
 
 Claude stopped because it reached the `max_tokens` limit specified in your request.
@@ -100,6 +196,27 @@ if response.stop_reason == "max_tokens":
 ```
 
 ### Incomplete tool use blocks
+
+If Claude's response is cut off because it hit the `max_tokens` limit, and the truncated response contains an incomplete tool use block, you'll need to retry the request with a higher `max_tokens` value to get the full tool use.
+
+CLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+# Check if response was truncated during tool use
+if response.stop_reason == "max_tokens":
+    # Check if the last content block is an incomplete tool_use
+    last_block = response.content[-1]
+    if last_block.type == "tool_use":
+        # Send the request with higher max_tokens
+        response = client.messages.create(
+            model="claude-opus-5",
+            max_tokens=4096,  # Increased limit
+            messages=messages,
+            tools=tools,
+        )
+```
 
 ### stop\_sequence
 

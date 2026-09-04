@@ -24,6 +24,34 @@ For the full set of optional properties available on any single tool definition,
 
 ### Example simple tool definition
 
+JSON
+
+
+
+```shiki
+{
+  "name": "get_weather",
+  "description": "Get the current weather in a given location",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "location": {
+        "type": "string",
+        "description": "The city and state, e.g. San Francisco, CA"
+      },
+      "unit": {
+        "type": "string",
+        "enum": ["celsius", "fahrenheit"],
+        "description": "The unit of temperature, either 'celsius' or 'fahrenheit'"
+      }
+    },
+    "required": ["location"]
+  }
+}
+```
+
+This tool, named `get_weather`, expects an input object with a required `location` string and an optional `unit` string that must be either "celsius" or "fahrenheit".
+
 ### Tool use system prompt
 
 When you call the Claude API with the `tools` parameter, the API constructs a special system prompt from the tool definitions, tool configuration, and any user-specified system prompt. The constructed prompt is designed to instruct the model to use the specified tool(s) and provide the necessary context for the tool to operate properly:
@@ -56,7 +84,48 @@ To get the best performance out of Claude when using tools, follow these guideli
 
 ### Example of a good tool description
 
+JSON
+
+
+
+```shiki
+{
+  "name": "get_stock_price",
+  "description": "Retrieves the current stock price for a given ticker symbol. The ticker symbol must be a valid symbol for a publicly traded company on a major US stock exchange like NYSE or NASDAQ. The tool will return the latest trade price in USD. It should be used when the user asks about the current or most recent price of a specific stock. It will not provide any other information about the stock or company.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "ticker": {
+        "type": "string",
+        "description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
+      }
+    },
+    "required": ["ticker"]
+  }
+}
+```
+
 ### Example poor tool description
+
+JSON
+
+
+
+```shiki
+{
+  "name": "get_stock_price",
+  "description": "Gets the stock price for a ticker.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "ticker": {
+        "type": "string"
+      }
+    },
+    "required": ["ticker"]
+  }
+}
+```
 
 The good description clearly explains what the tool does, when to use it, what data it returns, and what the `ticker` parameter means. The poor description is too brief and leaves Claude with many open questions about the tool's behavior and usage.
 

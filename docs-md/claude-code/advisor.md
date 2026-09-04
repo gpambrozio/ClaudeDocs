@@ -124,7 +124,7 @@ For how advisor tokens are reported in API responses, see [Usage and billing](ag
 
 ## [​](#impact-on-prompt-caching) Impact on prompt caching
 
-Enabling or disabling the advisor mid-session does not invalidate your main model’s [prompt cache](prompt-caching.md). Unlike [changing model or effort level](prompt-caching.md), toggling `/advisor` keeps the cached prefix intact, and the advisor’s returned guidance is cached as part of the transcript on later turns.
+Enabling or disabling the advisor mid-session does not invalidate your main model’s [prompt cache](prompt-caching.md). Unlike [switching models](prompt-caching.md), toggling `/advisor` keeps the cached prefix intact, and the advisor’s returned guidance is cached as part of the transcript on later turns.
 The advisor model’s own read of the conversation is not cached. Each advisor call processes the full transcript anew, with no reuse between calls.
 
 ## [​](#requirements) Requirements

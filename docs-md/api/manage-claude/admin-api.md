@@ -388,13 +388,25 @@ Retrieve audit and activity data for your organization with the [Compliance API]
 
 ### What permissions are needed to use the Admin API?
 
+The Admin API accepts an Admin API key (starting with `sk-ant-admin`), an OAuth bearer token with the `org:admin` scope, or a personal key or service account key that isn't scoped to a specific workspace. Only organization members with the admin role can provision Admin API keys, and only members with the admin, owner, or primary owner role can obtain `org:admin` tokens. A personal key or service account key has the same permissions as the linked account. See [Authentication](#authentication).
+
 ### Can I create new API keys through the Admin API?
+
+No. You create API keys in the Claude Console. The Admin API can only read, rename, and change the status of existing keys.
 
 ### What happens to API keys when removing a user?
 
+Behavior depends on the [key type](manage-claude/authentication.md).
+
+Personal keys stop working when their user is removed from the organization. Service account keys stop working if their service account is archived, but continue to work even if the user that created them is removed. Workspace API keys continue to work. In the [Claude Code workspace](manage-claude/workspaces.md), each key is bound to the member who created it and stops working when that member is removed.
+
 ### Can organization admins be removed through the API?
 
+No. The API can't remove members with the admin role.
+
 ### How long do organization invites last?
+
+Invites expire after 21 days. The expiration period isn't configurable.
 
 For workspace-specific questions, see the [Workspaces FAQ](manage-claude/workspaces.md).
 

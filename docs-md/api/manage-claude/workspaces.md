@@ -382,19 +382,39 @@ Create workspaces for specific projects or products to track usage and costs sep
 
 ### What's the Default Workspace?
 
+Every organization has a "Default Workspace" that cannot be renamed, archived, or deleted. Like every workspace, it has a `wrkspc_` ID: the API returns it in the [`anthropic-workspace-id` response header](#identify-the-workspace-behind-an-api-response), and you can pass it to [Get Workspace](api/admin/workspaces/retrieve.md) and [Update Workspace](api/admin/workspaces/update.md). It has no member list of its own, because access to it follows each member's organization role. It doesn't appear in [List Workspaces](api/admin/workspaces/list.md) results, and API keys, usage reports, and cost reports that belong to it show `null` for `workspace_id`, as do all-workspaces API keys; an API key's `scope` field tells the two apart and, for a key that belongs to the Default Workspace, carries its real ID.
+
 ### What's the Claude Code workspace?
+
+Anthropic creates the Claude Code workspace automatically the first time a member of your organization signs in to Claude Code with their Console account. It isolates Claude Code's API keys, usage, and rate limits from your other workloads. See [Claude Code workspace](#claude-code-workspace) for details.
 
 ### Are there limits on workspaces?
 
+Yes. Each organization can have up to 100 workspaces by default, and archived workspaces don't count toward this limit. If you need more, contact your account team.
+
 ### How do organization roles affect workspace access?
+
+Organization admins automatically get the Workspace Admin role in all workspaces. Organization billing members automatically get the Workspace Billing role. Organization users and developers must be manually added to each workspace.
 
 ### Which roles can be assigned in workspaces?
 
+Organization users and developers can be assigned Workspace Admin, Workspace Developer, Workspace Limited Developer, or Workspace User roles. The Workspace Billing role cannot be manually assigned; it's inherited from having the organization `billing` role.
+
 ### Can organization admin or billing members' workspace roles be changed?
+
+Organization admins and billing members cannot have their workspace roles changed or be removed from workspaces while they hold those organization roles (with one exception: billing members can be upgraded to a Workspace Admin role). For everyone else covered by this constraint, change their organization role first to change their workspace access.
 
 ### What happens to workspace access when organization roles change?
 
+If an organization admin or billing member is demoted to user or developer, they lose access to all workspaces except ones where they were manually assigned roles. When users are promoted to admin or billing roles, they gain automatic access to all workspaces.
+
 ### What happens to API keys when a user is removed from a workspace?
+
+Behavior depends on the [key type](manage-claude/authentication.md).
+
+A personal or service account key stops working in a workspace shortly after its user or service account is removed from it. A service account key keeps working even if the user who created it is removed. Workspace API keys continue to work. In the [Claude Code workspace](#claude-code-workspace), each key is bound to the member who created it and stops working when that member is removed.
+
+Personal keys are archived when their user is removed from the organization. If the user is re-invited, they need to create new keys; archived keys are not restored.
 
 ## See also
 

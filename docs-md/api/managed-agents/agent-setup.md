@@ -35,22 +35,22 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-agent=$(ant beta:agents create --format json < coding-assistant.agent.yaml)
-
-AGENT_ID=$(jq -r '.id' <<< "$agent")
+ant apply coding-assistant.md
 ```
 
-coding-assistant.agent.yaml
+coding-assistant.md
 
 
 
 ```shiki
+---
 name: Coding Assistant
-model:
-  id: claude-opus-5
-system: You are a helpful coding agent.
+model: claude-opus-5
 tools:
   - type: agent_toolset_20260401
+---
+
+You are a helpful coding agent.
 ```
 
 The response echoes your configuration and adds `id`, `type`, `version`, `created_at`, `updated_at`, and `archived_at` fields, and fills in `model` fields you omit, such as `effort`, with their defaults. The `version` starts at 1 and increments each time an update changes the agent.
@@ -94,28 +94,29 @@ The `default_config` on the toolset shows its default [permission policy](manage
 
 Like `speed` and `effort`, `inference_geo` is set through the object form of `model`: pass `model` as an object and set `inference_geo` alongside `id`. The field accepts `"us"` or `"global"`. When it's unset, each model request follows the workspace's default inference geo at the time it's served. See [Data residency](manage-claude/data-residency.md) for the workspace-level geo controls and pricing.
 
-The following example pins an agent to US inference and prints the `inference_geo` value echoed in the response's `model` object:
+The following example pins an agent to US inference and prints the `inference_geo` value from the agent's `model` object:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-agent=$(ant beta:agents create --format json < geo-pinned.agent.yaml)
-
-echo "Inference geo: $(jq -r '.model.inference_geo' <<< "$agent")"
+ant apply geo-pinned-assistant.md
 ```
 
-geo-pinned.agent.yaml
+geo-pinned-assistant.md
 
 
 
 ```shiki
+---
 name: Geo-pinned assistant
 model:
   id: claude-opus-5
   inference_geo: us
-system: You are a helpful assistant.
+---
+
+You are a helpful assistant.
 ```
 
 An `inference_geo` pin is validated against the workspace's [`allowed_inference_geos`](manage-claude/data-residency.md) when the agent is saved, when a session is created from it, and on every turn the session serves. If the workspace allowlist narrows so a pin is no longer allowed, new sessions can't be created from the agent and running sessions refuse further turns; pins are never exempted, because workspaces rely on them for compliance and data residency.
@@ -126,25 +127,29 @@ Setting `inference_geo` on a model that doesn't support geographic inference pin
 
 Updating an agent generates a new version when the configuration changes. The `version` field is optional: supply it for optimistic concurrency (a mismatch returns a 409), or omit it to apply the update unconditionally (last write wins). Updates to archived agents are rejected.
 
+With the CLI, edit the agent's file and run `ant apply` again; apply supplies `version` for you.
+
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-ant beta:agents update --agent-id "$AGENT_ID" < coding-assistant.agent.yaml
+ant apply coding-assistant.md
 ```
 
-coding-assistant.agent.yaml
+coding-assistant.md
 
 
 
 ```shiki
+---
 name: Coding Assistant
-model:
-  id: claude-opus-5
-system: You are a helpful coding agent. Always write tests.
+model: claude-opus-5
 tools:
   - type: agent_toolset_20260401
+---
+
+You are a helpful coding agent. Always write tests.
 ```
 
 The preceding example supplies `version` from the create response, so the update only applies if nothing else has changed the agent since you read it. To apply an update unconditionally, omit `version` from the request:

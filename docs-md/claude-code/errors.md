@@ -210,6 +210,8 @@ Match the message you see to a section below.
 | `Agent descriptions are over the 15.0k-token limit` | [Configuration warnings](#agent-descriptions-are-over-the-15000-token-limit) |
 | `Ignoring N permissions.allow entries from ... this workspace has not been trusted` | [Configuration warnings](#workspace-has-not-been-trusted) |
 | `Remote managed settings failed to load (<cause>)` | [Configuration warnings](#remote-managed-settings-failed-to-load) |
+| `Managed settings document could not be parsed as a JSON object; none of its settings are in effect. Fix or remove it.` | [Configuration warnings](#managed-settings-document-could-not-be-parsed) |
+| `Managed settings drop-in directory could not be read` | [Configuration warnings](#managed-settings-document-could-not-be-parsed) |
 | `"crossSessionInbound" must be one of "accept", "hold", "refuse"` | [Configuration warnings](#crosssessioninbound-must-be-one-of-accept-hold-refuse) |
 | `headersHelper not run — this workspace has no persisted trust` | [Configuration warnings](#headershelper-not-run) |
 | `... is not matched by file permission checks` | [Configuration warnings](#is-not-matched-by-file-permission-checks) |
@@ -253,7 +255,7 @@ As of v2.1.198, the usual spinner tip is suppressed during retries. Once the err
 If no data arrives on the response stream for 20 seconds while a request is still pending, the spinner shows `Waiting for API response · will retry in … · check your network` before any retry has started. The request hasn’t failed yet: the countdown runs to the point where Claude Code aborts the stalled connection. After the abort, what you see depends on how far the response had got:
 
 - Before Claude has completed a block of text or a tool call, or started one after finishing its thinking, Claude Code retries the request or ends the turn with an error. [Automatic retries](#automatic-retries) says which stalls it retries and how many times.
-- After Claude has completed a block of text or a tool call, or started one after finishing its thinking, but before Claude has finished the response, Claude Code keeps what Claude completed, continues the turn from any tool calls Claude finished, and shows [The response above may be incomplete](#the-response-above-may-be-incomplete). In a non-interactive session, Claude Code may first prompt Claude to continue the response; that entry says when it does and when you still see the notice there.
+- After Claude has completed a block of text or a tool call, or started one after finishing its thinking, but before Claude has finished the response, Claude Code keeps what Claude completed, continues the turn from any tool calls Claude finished, and shows [The response above may be incomplete](#the-response-above-may-be-incomplete). In a non-interactive session, and for a subagent’s response in any session, Claude Code may first prompt Claude to continue the response; that entry says when it does and when you still see the notice there.
 - After Claude finished the response, Claude Code ends the turn normally.
 
 The banner clears on its own once data resumes or a retry succeeds. If it reappears on every attempt, treat it as a [network issue](#unable-to-connect-to-api). Before v2.1.185, the banner appeared after 10 seconds with different wording.
@@ -362,11 +364,12 @@ API Error: The response stopped arriving. The response above may be incomplete.
 - `The response stopped arriving`: the connection stayed open but stopped delivering data, so the streaming idle watchdog aborted it. Before v2.1.222, Claude Code could also report this failure on [gateway](gateways.md) connections reached through `ANTHROPIC_BASE_URL` or `ANTHROPIC_AWS_BASE_URL` while the server’s keep-alive pings were still arriving, because it counted only parsed response events there; upgrading stops those spurious timeouts on those routes. Gateways reached through a provider base URL such as `ANTHROPIC_BEDROCK_BASE_URL` aren’t wrapped by the byte watchdog; see [Streaming idle watchdogs](network-config.md).
 
 Before v2.1.227, `Connection lost mid-response` read `Connection closed mid-response` and `The response stopped arriving` read `Response stalled mid-stream`.
-In three cases, Claude Code handles the failure without showing this notice right away:
+In four cases, Claude Code handles the failure without showing this notice right away:
 
 - Earlier in the response, Claude Code either retries the failure or ends the turn with a different error. See [Automatic retries](#automatic-retries).
 - When one of these failures arrives after Claude has finished the response, Claude Code keeps the complete response and ends the turn normally, without this notice. Before v2.1.222, Claude Code showed this notice when the connection dropped or stalled after the response finished, and reported the turn as an error even though the response was complete.
 - In a [non-interactive session](headless.md), such as a `-p` run, an [Agent SDK](agent-sdk/overview.md) run, or a [cloud session](claude-code-on-the-web.md), you don’t have to send `continue` yourself when the cut-off response is in the main conversation and contains text but no tool calls: Claude Code keeps the partial output and prompts Claude to continue from where it stopped, up to three times in a row. You see this notice for such a response only once Claude Code has used up those continuations. Before v2.1.246, Claude Code ended a non-interactive turn with this notice on the first cut-off.
+- In a [subagent](sub-agents.md), whether the session is interactive or not: when its cut-off response contains text but no tool calls, Claude Code prompts the subagent to continue. The notice becomes the subagent’s last message only once those continuations are used up. Before v2.1.257, a subagent showed this notice on the first cut-off.
 
 **What to do:**
 
@@ -2924,6 +2927,29 @@ Your session is eligible for [server-managed settings](server-managed-settings.m
 - Run `/status` or `claude doctor` for the full diagnostic
 
 Before v2.1.248, Claude Code reported a failed settings fetch only in the debug log.
+
+### [​](#managed-settings-document-could-not-be-parsed) Managed settings document could not be parsed
+
+Your organization deploys [managed settings](managed-settings.md), and one of the deployed documents is present but can’t be parsed as a JSON object, so Claude Code exits with code 1 at startup instead of running without the policy the document carries. The line names the failed source before the message:
+
+```shiki
+/Library/Application Support/ClaudeCode/managed-settings.json: Managed settings document could not be parsed as a JSON object; none of its settings are in effect. Fix or remove it.
+```
+
+The source is one of:
+
+- The path of the `managed-settings.json` file or a drop-in file under `managed-settings.d`
+- The macOS managed preferences profile, `per-user managed preferences` or `device-level managed preferences`
+- The Windows registry value, `Registry: HKLM\SOFTWARE\Policies\ClaudeCode\Settings`
+
+[Find entries Claude Code dropped](managed-settings.md) lists what makes each source unparseable.
+Claude Code refuses to start even when another admin source delivers a valid policy. You see this error in interactive sessions, `claude -p`, Agent SDK sessions, [background sessions](agent-view.md), and most subcommands, `claude doctor` included. The refusal fails closed on purpose: settings in a document Claude Code can’t parse can’t be enforced, and starting anyway would run sessions without the organization’s controls.
+A schema problem in a parseable document doesn’t produce this error. [Find entries Claude Code dropped](managed-settings.md) covers what Claude Code does with one.
+When a `managed-settings.d/` directory exists but can’t be listed, Claude Code reports `Managed settings drop-in directory could not be read:` followed by the underlying error instead. [Find entries Claude Code dropped](managed-settings.md) covers when a read failure exits at startup.
+**What to do:**
+
+- If you administer the machine, fix the named document so it parses as a JSON object, or remove the file, profile, or registry value. An empty `managed-settings.json` counts as `{}` and doesn’t block launch.
+- If you don’t, ask your administrator to fix the deployed document. Nothing in your own settings files causes or clears this error.
 
 ### [​](#headershelper-not-run) headersHelper not run
 

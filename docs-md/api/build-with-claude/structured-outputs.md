@@ -236,9 +236,95 @@ This means Claude receives a simplified schema, but your code still enforces all
 
 ### Data extraction
 
+Extract structured data from unstructured text:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+from pydantic import BaseModel
+
+class Invoice(BaseModel):
+    invoice_number: str
+    date: str
+    total_amount: float
+    line_items: list[dict]
+    customer_name: str
+
+client = anthropic.Anthropic()
+invoice_text = "Invoice #12345, Date: 2024-01-15, Total: $500.00"
+
+response = client.messages.parse(
+    model="claude-opus-5",
+    max_tokens=4096,
+    output_format=Invoice,
+    messages=[
+        {"role": "user", "content": f"Extract invoice data from: {invoice_text}"}
+    ],
+)
+
+print(response.parsed_output)
+```
+
 ### Classification
 
+Classify content with structured categories:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+from pydantic import BaseModel
+
+client = Anthropic()
+
+class Classification(BaseModel):
+    category: str
+    confidence: float
+    tags: list[str]
+    sentiment: str
+
+feedback_text = "Great product, but the delivery was slow."
+response = client.messages.parse(
+    model="claude-opus-5",
+    max_tokens=1024,
+    output_format=Classification,
+    messages=[{"role": "user", "content": f"Classify this feedback: {feedback_text}"}],
+)
+
+print(response.parsed_output)
+```
+
 ### API response formatting
+
+Generate API-ready responses:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+from pydantic import BaseModel
+
+client = Anthropic()
+
+class APIResponse(BaseModel):
+    status: str
+    data: dict
+    errors: list[dict] | None
+    metadata: dict
+
+response = client.messages.parse(
+    model="claude-opus-5",
+    max_tokens=1024,
+    output_format=APIResponse,
+    messages=[{"role": "user", "content": "Process this request: ..."}],
+)
+
+print(response.parsed_output)
+```
 
 ## Strict tool use
 
@@ -330,9 +416,45 @@ Structured outputs support standard JSON Schema with some limitations. Both JSON
 
 ### Supported features
 
+- All basic types: object, array, string, integer, number, boolean, null
+- `enum` (strings, numbers, bools, or nulls only - no complex types; see [Invalid outputs](#invalid-outputs) for a capitalization caveat)
+- `const`
+- `anyOf` and `allOf` (with limitations - `allOf` with `$ref` not supported)
+- `$ref`, `$def`, and `definitions` (external `$ref` not supported)
+- `default` property for all supported types
+- `required` and `additionalProperties` (must be set to `false` for objects)
+- String formats: `date-time`, `time`, `date`, `duration`, `email`, `hostname`, `uri`, `ipv4`, `ipv6`, `uuid`
+- Array `minItems` (only values 0 and 1 supported)
+
 ### Not supported
 
+- Recursive schemas
+- Complex types within enums
+- External `$ref` (for example, `'$ref': 'http://...'`)
+- Numerical constraints (such as `minimum`, `maximum`, `multipleOf`)
+- String constraints (`minLength`, `maxLength`)
+- Array constraints beyond `minItems` of 0 or 1
+- `additionalProperties` set to anything other than `false`
+
+If you use an unsupported feature, you'll receive a 400 error with details.
+
 ### Pattern support (regex)
+
+**Supported regex features:**
+
+- Full matching (`^...$`) and partial matching
+- Quantifiers: `*`, `+`, `?`, simple `{n,m}` cases
+- Character classes: `[]`, `.`, `\d`, `\w`, `\s`
+- Groups: `(...)`
+
+**NOT supported:**
+
+- Backreferences to groups (for example, `\1`, `\2`)
+- Lookahead/lookbehind assertions (for example, `(?=...)`, `(?!...)`)
+- Word boundaries: `\b`, `\B`
+- Complex `{n,m}` quantifiers with large ranges
+
+Simple regex patterns work well. Complex patterns may result in 400 errors.
 
 ### Property ordering
 

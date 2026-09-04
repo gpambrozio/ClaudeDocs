@@ -147,7 +147,40 @@ Claude 4 and later models make parallel tool calls by default when a request ben
 
 ### System prompts for parallel tool use
 
+For Claude 4 and later models, add this to your system prompt:
+
+```block
+For maximum efficiency, whenever you need to perform multiple independent operations, invoke all relevant tools simultaneously rather than sequentially.
+```
+
+
+
+For even stronger parallel tool use (recommended if the default isn't sufficient), use:
+
+```shiki
+<use_parallel_tool_calls>
+For maximum efficiency, whenever you perform multiple independent operations, invoke all relevant tools simultaneously rather than sequentially. Prioritize calling tools in parallel whenever possible. For example, when reading 3 files, run 3 tool calls in parallel to read all 3 files into context at the same time. When running multiple read-only commands like `ls` or `list_dir`, always run all of the commands in parallel. Err on the side of maximizing parallel tool calls rather than running too many tools sequentially.
+</use_parallel_tool_calls>
+```
+
+
+
 ### User message prompting
+
+You can also encourage parallel tool use within specific user messages:
+
+```block
+Instead of:
+"What's the weather in Paris? Also check London."
+
+Use:
+"Check the weather in Paris and London simultaneously."
+
+Or be explicit:
+"Please use parallel tool calls to get the weather for Paris, London, and Tokyo at the same time."
+```
+
+
 
 ## Disable parallel tool use
 

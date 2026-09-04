@@ -122,9 +122,29 @@ Rate limits follow Anthropic's [standard limits](api/rate-limits.md) for the `/v
 
 ### Show fields
 
+ToolsFunctions
+
+`tools[n].function` fields
+
+| Field | Support status |
+| --- | --- |
+| `name` | Fully supported |
+| `description` | Fully supported |
+| `parameters` | Fully supported |
+| `strict` | Ignored. Use [Structured Outputs](build-with-claude/structured-outputs.md) with native Claude API for strict schema validation |
+
 #### `messages` array fields
 
 ### Show fields
+
+Developer roleSystem roleUser roleAssistant roleTool roleFunction role
+
+Fields for `messages[n].role == "developer"`
+
+| Field | Support status |
+| --- | --- |
+| `content` | Fully supported, but hoisted |
+| `name` | Ignored |
 
 ### Response fields
 

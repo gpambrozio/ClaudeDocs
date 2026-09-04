@@ -122,6 +122,101 @@ The following example demonstrates the invalidation with a multi-turn script you
 
 ### Effort changes invalidate the prompt cache
 
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+```shiki
+import requests
+
+client = Anthropic()
+
+def fetch_article_content(url):
+    text = requests.get(url).text
+    lines = (line.strip() for line in text.splitlines())
+    return "\n".join(line for line in lines if line)
+
+# Fetch the content of the article
+book_url = "https://www.gutenberg.org/cache/epub/1342/pg1342.txt"
+book_content = fetch_article_content(book_url)
+# Use just enough text for caching (first few chapters)
+LARGE_TEXT = book_content[:10000]
+
+# No system prompt - caching in messages instead
+MESSAGES = [
+    {
+        "role": "user",
+        "content": [
+            {
+                "type": "text",
+                "text": LARGE_TEXT,
+                "cache_control": {"type": "ephemeral"},
+            },
+            {"type": "text", "text": "Analyze the tone of this passage."},
+        ],
+    }
+]
+
+# First request - establish cache
+print("First request - establishing cache")
+response1 = client.messages.create(
+    model="claude-opus-5",
+    max_tokens=16000,
+    thinking={"type": "adaptive"},
+    messages=MESSAGES,
+)
+
+print(f"First response usage: {response1.usage}")
+
+MESSAGES.append({"role": "assistant", "content": response1.content})
+MESSAGES.append({"role": "user", "content": "Analyze the characters in this passage."})
+
+# Second request - same configuration (cache hit expected)
+print("\nSecond request - same configuration (cache hit expected)")
+response2 = client.messages.create(
+    model="claude-opus-5",
+    max_tokens=16000,
+    thinking={"type": "adaptive"},
+    messages=MESSAGES,
+)
+
+print(f"Second response usage: {response2.usage}")
+
+MESSAGES.append({"role": "assistant", "content": response2.content})
+MESSAGES.append({"role": "user", "content": "Analyze the setting in this passage."})
+
+# Third request - different effort level (cache miss expected)
+print("\nThird request - different effort level (cache miss expected)")
+response3 = client.messages.create(
+    model="claude-opus-5",
+    max_tokens=16000,
+    thinking={"type": "adaptive"},
+    output_config={"effort": "medium"},
+    messages=MESSAGES,
+)
+
+print(f"Third response usage: {response3.usage}")
+```
+
+
+
+Here is the output of the script (you may see slightly different numbers):
+
+Output
+
+
+
+```block
+First request - establishing cache
+First response usage: { cache_creation_input_tokens: 3546, cache_read_input_tokens: 0, input_tokens: 15, output_tokens: 1033 }
+
+Second request - same configuration (cache hit expected)
+Second response usage: { cache_creation_input_tokens: 0, cache_read_input_tokens: 3546, input_tokens: 1062, output_tokens: 1630 }
+
+Third request - different effort level (cache miss expected)
+Third response usage: { cache_creation_input_tokens: 3546, cache_read_input_tokens: 0, input_tokens: 2706, output_tokens: 1468 }
+```
+
+With the cache breakpoint in the messages array, changing effort from the default `high` to `medium` invalidates it: the third request shows `cache_creation_input_tokens=3546` and `cache_read_input_tokens=0` where the second showed a full cache read.
+
 ### Cost control
 
 You don't set a thinking token budget. Two controls bound cost:

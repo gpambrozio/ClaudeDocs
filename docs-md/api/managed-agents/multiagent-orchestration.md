@@ -35,26 +35,53 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-ant beta:agents create < coordinator.agent.yaml
+ant apply engineering-lead.md reviewer.md test-writer.md
 ```
 
-coordinator.agent.yaml
+engineering-lead.md
 
 
 
 ```shiki
+---
 name: Engineering Lead
 model: claude-opus-5
-system: You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.
 tools:
   - type: agent_toolset_20260401
 multiagent:
   type: coordinator
-  agents:
-    - type: agent
-      id: $REVIEWER_AGENT_ID # replace before running command
-    - type: agent
-      id: $TEST_WRITER_AGENT_ID # replace before running command
+  agents: # paths: ant apply substitutes {type: agent, id, version}
+    - ./reviewer.md
+    - ./test-writer.md
+---
+
+You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.
+```
+
+reviewer.md
+
+
+
+```shiki
+---
+name: reviewer
+model: claude-haiku-4-5
+---
+
+You are a code reviewer.
+```
+
+test-writer.md
+
+
+
+```shiki
+---
+name: test-writer
+model: claude-haiku-4-5
+---
+
+You write unit tests.
 ```
 
 `multiagent.agents` can accept any of the following:
@@ -63,6 +90,8 @@ multiagent:
 - `{"type": "agent", "id": agent.id, "version": agent.version}` pins a specific agent version.
 - `{"type": "self"}` allows the coordinator to spawn copies of itself. If the session was created with [agent configuration overrides](managed-agents/sessions.md), those overrides also apply to these copies; roster entries referenced by ID are unaffected.
 - `{"type": "advisor", "model": "<model id>"}` gives the session's primary thread an advisor it can consult mid-turn. At most one advisor entry per roster. See [Give the session an advisor](#give-the-session-an-advisor).
+
+In an [`ant apply`](cli-sdks-libraries/cli/scripting.md) agent file (the CLI tab), a roster entry can also be the path to another agent's file, such as `./reviewer.md`. Apply creates that agent first and replaces the path with a pinned `{"type": "agent", "id": ..., "version": ...}` reference.
 
 The coordinator's configuration, including its `multiagent.agents` roster, is snapshotted when the coordinator is created or updated. Referenced agents stay pinned to the versions resolved at that time and do not automatically pick up later updates to their definitions. To delegate to a newer version of a referenced agent, [update the coordinator](managed-agents/agent-setup.md) so its roster references that version.
 

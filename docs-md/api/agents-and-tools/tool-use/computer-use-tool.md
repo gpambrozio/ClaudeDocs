@@ -327,6 +327,99 @@ Keep the following in mind when implementing the members:
 
 ### Example actions
 
+Each example is a complete `tool_use` block as it appears in Claude's response.
+
+Shift+click at a position, for example, to extend a selection. Unlike `hold_key`, `text` holds the modifiers only for the duration of that click or scroll:
+
+```shiki
+{
+  "type": "tool_use",
+  "id": "toolu_01Qg8m3XqC5aRy7tD2eS4jUg",
+  "name": "left_click",
+  "toolset_name": "computer",
+  "input": { "coordinate": [500, 300], "text": "shift" }
+}
+```
+
+
+
+Drag from one point to another:
+
+```shiki
+{
+  "type": "tool_use",
+  "id": "toolu_01Ed6j9VnA3yPw5rB8cQ2gSe",
+  "name": "left_click_drag",
+  "toolset_name": "computer",
+  "input": {
+    "start_coordinate": [200, 300],
+    "coordinate": [600, 300]
+  }
+}
+```
+
+
+
+Scroll down three clicks of the wheel:
+
+```shiki
+{
+  "type": "tool_use",
+  "id": "toolu_01Yc5h8UmZ2xNv4qA7bP9fRd",
+  "name": "scroll",
+  "toolset_name": "computer",
+  "input": {
+    "coordinate": [500, 400],
+    "scroll_direction": "down",
+    "scroll_amount": 3
+  }
+}
+```
+
+
+
+Press Tab four times:
+
+```shiki
+{
+  "type": "tool_use",
+  "id": "toolu_01Sb4g7TkY9wLu3pX6zM8eQc",
+  "name": "key",
+  "toolset_name": "computer",
+  "input": { "text": "Tab", "repeat": 4 }
+}
+```
+
+
+
+Zoom in to inspect a region at full resolution:
+
+```shiki
+{
+  "type": "tool_use",
+  "id": "toolu_01Kf7k2WpB4zQx6sC9dR3hTf",
+  "name": "zoom",
+  "toolset_name": "computer",
+  "input": { "region": [100, 200, 400, 350] }
+}
+```
+
+
+
+Report the cursor position. Answer this call with a short text result that gives the position in screenshot pixels, for example, `X=512, Y=384`:
+
+```shiki
+{
+  "type": "tool_use",
+  "id": "toolu_01Ekh3vqB6yTs2mNc4Rw8pLd",
+  "name": "cursor_position",
+  "toolset_name": "computer",
+  "input": {}
+}
+```
+
+
+
 ### Tool parameters
 
 The toolset entry in the `tools` array accepts four parameters; the rules they share with the browser use toolset are listed under [Client toolsets](agents-and-tools/tool-use/tool-reference.md).
@@ -581,9 +674,51 @@ If clicks miss their targets, the cause is usually one of the following:
 
 ### Add action delays
 
+Some applications need time to respond to actions:
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+def click_and_wait(x, y, wait_time=0.5):
+    click_at(x, y)
+    time.sleep(wait_time)  # Allow UI to update
+```
+
 ### Validate actions before running them
 
+Check that requested actions are safe and valid:
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+display_width, display_height = 1024, 768
+
+def validate_action(action_type, params):
+    if action_type == "left_click" and "coordinate" in params:
+        x, y = params["coordinate"]
+        if not (0 <= x < display_width and 0 <= y < display_height):
+            return False, "Coordinates out of bounds"
+    return True, None
+```
+
 ### Log actions for debugging
+
+Keep a log of all actions for troubleshooting:
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+import logging
+
+def log_action(action_type, params, result):
+    logging.info(f"Action: {action_type}, Params: {params}, Result: {result}")
+```
 
 ---
 

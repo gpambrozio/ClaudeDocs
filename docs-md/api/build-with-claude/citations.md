@@ -191,6 +191,19 @@ The intro example at the top of this page shows a complete plain text request in
 
 ### Example plain text citation
 
+```shiki
+{
+  "type": "char_location",
+  "cited_text": "The exact text being cited", // not counted toward output tokens
+  "document_index": 0,
+  "document_title": "Document Title",
+  "start_char_index": 0, // 0-indexed
+  "end_char_index": 50 // exclusive
+}
+```
+
+
+
 ### PDF documents
 
 PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PDF text is extracted and chunked into sentences. As image citations are not yet supported, PDFs that are scans of documents and do not contain extractable text are not citable.
@@ -236,6 +249,19 @@ print(response)
 
 ### Example PDF citation
 
+```shiki
+{
+  "type": "page_location",
+  "cited_text": "The exact text being cited", // not counted toward output tokens
+  "document_index": 0,
+  "document_title": "Document Title",
+  "start_page_number": 1, // 1-indexed
+  "end_page_number": 2 // exclusive
+}
+```
+
+
+
 ### Custom content documents
 
 Custom content documents give you control over citation granularity. No additional chunking is done and chunks are provided to the model according to the content blocks provided.
@@ -276,6 +302,19 @@ print(response)
 ```
 
 ### Example citation
+
+```shiki
+{
+  "type": "content_block_location",
+  "cited_text": "The exact text being cited", // not counted toward output tokens
+  "document_index": 0,
+  "document_title": "Document Title",
+  "start_block_index": 0, // 0-indexed
+  "end_block_index": 1 // exclusive
+}
+```
+
+
 
 ---
 
@@ -363,6 +402,36 @@ When citations are enabled, responses include multiple text blocks with citation
 For streaming responses, citations arrive as a `citations_delta` delta type inside `content_block_delta` events. Each delta contains a single citation to add to the `citations` list on the current `text` content block.
 
 ### Example streaming events
+
+```shiki
+event: message_start
+data: {"type": "message_start", ...}
+
+event: content_block_start
+data: {"type": "content_block_start", "index": 0, ...}
+
+event: content_block_delta
+data: {"type": "content_block_delta", "index": 0,
+       "delta": {"type": "text_delta", "text": "According to..."}}
+
+event: content_block_delta
+data: {"type": "content_block_delta", "index": 0,
+       "delta": {"type": "citations_delta",
+                 "citation": {
+                     "type": "char_location",
+                     "cited_text": "...",
+                     "document_index": 0,
+                     ...
+                 }}}
+
+event: content_block_stop
+data: {"type": "content_block_stop", "index": 0}
+
+event: message_stop
+data: {"type": "message_stop"}
+```
+
+
 
 ## Next steps
 

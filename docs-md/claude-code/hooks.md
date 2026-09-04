@@ -1674,7 +1674,8 @@ Matches on tool name, same values as PreToolUse.
 
 #### [​](#permissionrequest-input) PermissionRequest input
 
-PermissionRequest hooks receive `tool_name` and `tool_input` fields like PreToolUse hooks, but without `tool_use_id`. An optional `permission_suggestions` array contains the “always allow” options the user would normally see in the permission dialog.
+PermissionRequest hooks receive `tool_name` and `tool_input` fields like PreToolUse hooks, but without `tool_use_id`. An optional `permission_suggestions` array contains the [permission updates](#permission-update-entries) Claude Code suggests for this request, such as adding an allow rule or changing the permission mode.
+The permission dialog builds its “always allow” options from these suggestions, but the array isn’t an exact list of the options you see. The dialog can withhold an option whose suggestion stays in the array, for example when [`allowManagedPermissionRulesOnly`](settings-reference.md) hides rule-saving options. It can also offer options that have no suggestion entry, such as [**Yes, and switch to auto mode**](permission-modes.md), which changes the permission mode directly rather than through a permission update.
 PreToolUse hooks run before every tool call, whether or not it needs permission. PermissionRequest hooks run only when Claude Code is about to ask you for permission, or when it would otherwise auto-deny a call that can’t prompt. Neither event fires for [`EndConversation`](tools-reference.md).
 
 ```shiki
@@ -1752,7 +1753,7 @@ The `destination` field on every entry determines whether the change stays in me
 | `projectSettings` | `.claude/settings.json` |
 | `userSettings` | `~/.claude/settings.json` |
 
-A hook can echo one of the `permission_suggestions` it received as its own `updatedPermissions` output, which is equivalent to the user selecting that “always allow” option in the dialog.
+A hook can echo one of the `permission_suggestions` it received as its own `updatedPermissions` output.
 
 ### [​](#posttooluse) PostToolUse
 

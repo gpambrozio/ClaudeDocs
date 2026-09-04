@@ -30,14 +30,15 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-ant beta:agents create < agent.yaml
+ant apply agent.md
 ```
 
-agent.yaml
+agent.md
 
 
 
 ```shiki
+---
 name: Coding Assistant
 model: claude-opus-5
 tools:
@@ -45,6 +46,7 @@ tools:
     default_config:
       permission_policy:
         type: always_ask
+---
 ```
 
 `default_config` is optional. If you omit it, the agent toolset is enabled with the default permission policy, `always_allow`.
@@ -62,14 +64,15 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-ant beta:agents create < agent.yaml
+ant apply agent.md
 ```
 
-agent.yaml
+agent.md
 
 
 
 ```shiki
+---
 name: Dev Assistant
 model: claude-opus-5
 mcp_servers:
@@ -83,6 +86,7 @@ tools:
     default_config:
       permission_policy:
         type: always_allow
+---
 ```
 
 ## Override an individual tool policy

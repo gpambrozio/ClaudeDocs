@@ -69,27 +69,27 @@ export ANTHROPIC_API_KEY="your-api-key-here"
    
 
    ```shiki
-   AGENT_ID=$(ant beta:agents create --transform id --raw-output < coding-assistant.agent.yaml)
-
-   echo "Agent ID: $AGENT_ID"
+   ant apply coding-assistant.md
    ```
 
-   coding-assistant.agent.yaml
+   coding-assistant.md
 
    
 
    ```shiki
+   ---
    name: Coding Assistant
-   model:
-     id: claude-opus-5
-   system: You are a helpful coding assistant. Write clean, well-documented code.
+   model: claude-opus-5
    tools:
      - type: agent_toolset_20260401
+   ---
+
+   You are a helpful coding assistant. Write clean, well-documented code.
    ```
 
    The `agent_toolset_20260401` tool type enables the full set of pre-built agent tools (bash, file operations, web search, and more). See [Tools](managed-agents/tools.md) for the complete list and per-tool configuration options.
 
-   Save the returned `agent.id`. You'll reference it in every session you create.
+   Save the returned `agent.id` (the CLI's [`ant apply`](cli-sdks-libraries/cli/scripting.md) prints it and records it in `claude-lock.json`). You'll reference it in every session you create.
 2. 2
 
    ### Create an environment
@@ -101,12 +101,10 @@ export ANTHROPIC_API_KEY="your-api-key-here"
    
 
    ```shiki
-   ENVIRONMENT_ID=$(ant beta:environments create --transform id --raw-output < quickstart.environment.yaml)
-
-   echo "Environment ID: $ENVIRONMENT_ID"
+   ant apply environment.yaml
    ```
 
-   quickstart.environment.yaml
+   environment.yaml
 
    
 
@@ -118,7 +116,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
        type: unrestricted
    ```
 
-   Save the returned `environment.id`. You'll reference it in every session you create.
+   Save the returned `environment.id` (also in `claude-lock.json` if you used `ant apply`). You'll reference it in every session you create.
 3. 3
 
    ### Start a session

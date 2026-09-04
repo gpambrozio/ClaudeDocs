@@ -792,6 +792,15 @@ const response = await client.beta.messages.create({
 
 ### Browser usage
 
+Enabling the `dangerouslyAllowBrowser` option can be dangerous because it exposes your secret API credentials in the client-side code. Web browsers are inherently less secure than server environments, any user with access to the browser can potentially inspect, extract, and misuse these credentials. This could lead to unauthorized access using your credentials and potentially compromise sensitive data or functionality.
+
+**When might this not be dangerous?**
+
+In certain scenarios where enabling browser support might not pose significant risks:
+
+- **Internal tools:** If the application is used solely within a controlled internal environment where the users are trusted, the risk of credential exposure can be mitigated.
+- **Development or debugging purpose:** Enabling this feature temporarily might be acceptable, provided the credentials are short-lived, aren't also used in production environments, or are frequently rotated.
+
 ## Platform integrations
 
 The TypeScript SDK supports the following platforms:

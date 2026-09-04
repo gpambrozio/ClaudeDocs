@@ -17,18 +17,17 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-AGENT_ID=$(ant beta:agents create --transform id --raw-output < code-reviewer.agent.yaml)
+ant apply code-reviewer.md
 ```
 
-code-reviewer.agent.yaml
+code-reviewer.md
 
 
 
 ```shiki
+---
 name: Code Reviewer
-model:
-  id: claude-opus-5
-system: You are a code review assistant with access to GitHub.
+model: claude-opus-5
 mcp_servers:
   - type: url
     name: github
@@ -37,6 +36,9 @@ tools:
   - type: agent_toolset_20260401
   - type: mcp_toolset
     mcp_server_name: github
+---
+
+You are a code review assistant with access to GitHub.
 ```
 
 Then create a session that mounts the GitHub repository:

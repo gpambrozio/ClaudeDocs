@@ -207,31 +207,68 @@ Even with ZDR or HIPAA arrangements in place, Anthropic may retain data where re
 
 ### How do I know if my organization has ZDR arrangements?
 
+Check your contract terms or contact your Anthropic account representative to confirm whether your organization has ZDR arrangements in place.
+
 ### Can I use ZDR-eligible (qualified) features under my ZDR arrangement?
+
+Yes. These features retain a minimal, documented set of technical data, not your prompts or Claude's outputs. See the [feature eligibility table](#feature-eligibility) legend for what "Yes (qualified)" means and [How Anthropic approaches data retention](#how-anthropic-approaches-data-retention) for the commitments that govern these features.
 
 ### What happens if I use a feature marked "No" under ZDR?
 
+Nothing blocks the request. Features marked "No" for ZDR are fundamentally stateful: the Batch API stores your jobs, the Files API stores your files, and code execution runs in persistent containers. Data for these features is retained per the feature's documented policy. Using them is a choice to step outside your ZDR arrangement for that specific data.
+
 ### Can I request deletion of data from features that are not ZDR-eligible?
+
+Contact your Anthropic account representative to discuss deletion options for non-ZDR features.
 
 ### How does HIPAA readiness differ from ZDR?
 
+ZDR prevents customer data from being stored at rest after the API response is returned. HIPAA readiness involves a broader set of privacy and security safeguards that protect PHI throughout its lifecycle, including encryption, access controls, and audit logging. Under HIPAA readiness, data can be retained with these safeguards in place rather than requiring immediate deletion. The two arrangements cover different feature sets; see the [feature eligibility table](#feature-eligibility).
+
 ### Do I still need ZDR if I have HIPAA readiness?
+
+No. HIPAA-ready API access is designed as an alternative to ZDR for organizations handling PHI. With HIPAA readiness enabled, you get access to supported API features while maintaining the privacy and security protections that HIPAA requires.
 
 ### What happens if I use a non-eligible feature under HIPAA?
 
+The API returns a `400` error with an `invalid_request_error` type, except for the client-side tools whose Details column in the [feature eligibility table](#feature-eligibility) says they are not blocked (those are accepted but remain outside HIPAA readiness). The error message identifies which features are not available. Remove those features from your request and retry. See [HIPAA error handling](#hipaa-error-handling).
+
 ### Can I use the same organization for HIPAA and non-HIPAA workloads?
+
+No. HIPAA readiness is enforced at the organization level and automatically blocks non-eligible features (client-side tools noted in the table's Details column are the exception: they are not blocked, but they are still outside HIPAA readiness). Use a separate organization for workloads that do not require HIPAA readiness.
 
 ### How do I request HIPAA-ready API access?
 
+Eligible organizations can enable HIPAA readiness directly in [Claude Console > Settings > Privacy](https://platform.claude.com/settings/privacy) by reviewing and executing Anthropic's standard BAA; see [Getting started with HIPAA readiness](#getting-started-with-hipaa-readiness). If your organization requires a negotiated BAA, or self-serve enablement isn't available for your organization, contact the [Anthropic sales team](https://claude.com/contact-sales).
+
 ### Does this apply to Amazon Bedrock or Google Cloud?
+
+No. The ZDR and HIPAA arrangements described on this page apply to the Claude API, where Anthropic is the data processor. On Bedrock and Google Cloud, the cloud provider is the data processor; refer to those platforms' data retention and compliance policies for their equivalent controls.
 
 ### Is Claude Platform on AWS eligible for ZDR or HIPAA readiness?
 
+Claude Platform on AWS follows the same data retention policy as the first-party Claude API. ZDR is available on request; contact your Anthropic account representative to enable it. HIPAA readiness is not available on Claude Platform on AWS. See [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) for details.
+
 ### Is Claude Code eligible for ZDR?
+
+Claude Code is eligible for ZDR through two paths:
+
+- **API keys:** Claude Code used with pay-as-you-go API keys from a Commercial organization
+- **Claude Enterprise:** Claude Code used through Claude Enterprise with ZDR enabled for the organization
+
+ZDR is enabled on a per-organization basis. Each new organization requires ZDR to be enabled separately by your account team. ZDR does not automatically apply to new organizations created under the same account.
+
+Additionally, if you have metrics logging enabled in Claude Code, productivity data (such as usage statistics) is exempted from ZDR and may be retained.
+
+For full details on ZDR for Claude Code on Claude Enterprise, including disabled features and how to request enablement, see the [Claude Code ZDR documentation](zero-data-retention.md).
 
 ### Does Claude for Excel support ZDR?
 
+No, Claude for Excel is not currently ZDR-eligible.
+
 ### How do I request ZDR?
+
+To request a ZDR arrangement, contact the [Anthropic sales team](https://claude.com/contact-sales).
 
 ## Related resources
 

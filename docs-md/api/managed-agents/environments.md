@@ -15,10 +15,10 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-ant beta:environments create < python-dev.environment.yaml
+ant apply environment.yaml
 ```
 
-python-dev.environment.yaml
+environment.yaml
 
 
 
@@ -55,7 +55,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-ant beta:environments create < environment.yaml
+ant apply environment.yaml
 ```
 
 environment.yaml
@@ -104,7 +104,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-ant beta:environments create < environment.yaml
+ant apply environment.yaml
 ```
 
 environment.yaml

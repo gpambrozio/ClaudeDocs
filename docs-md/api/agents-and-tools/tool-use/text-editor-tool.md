@@ -108,6 +108,38 @@ Parameters:
 
 ### Example view commands
 
+Example for viewing a file:
+
+```shiki
+{
+  "type": "tool_use",
+  "id": "toolu_01A09q90qw90lq917835lq9",
+  "name": "str_replace_based_edit_tool",
+  "input": {
+    "command": "view",
+    "path": "primes.py"
+  }
+}
+```
+
+
+
+Example for viewing a directory:
+
+```shiki
+{
+  "type": "tool_use",
+  "id": "toolu_02B19r91rw91mr917835mr9",
+  "name": "str_replace_based_edit_tool",
+  "input": {
+    "command": "view",
+    "path": "src/"
+  }
+}
+```
+
+
+
 #### str\_replace
 
 The `str_replace` command allows Claude to replace a specific string in a file with a new string. This is used for making precise edits.
@@ -121,6 +153,22 @@ Parameters:
 
 ### Example str\_replace command
 
+```shiki
+{
+  "type": "tool_use",
+  "id": "toolu_01A09q90qw90lq917835lq9",
+  "name": "str_replace_based_edit_tool",
+  "input": {
+    "command": "str_replace",
+    "path": "primes.py",
+    "old_str": "for num in range(2, limit + 1)",
+    "new_str": "for num in range(2, limit + 1):"
+  }
+}
+```
+
+
+
 #### create
 
 The `create` command allows Claude to create a new file with specified content.
@@ -132,6 +180,21 @@ Parameters:
 - `file_text`: The content to write to the new file
 
 ### Example create command
+
+```shiki
+{
+  "type": "tool_use",
+  "id": "toolu_01A09q90qw90lq917835lq9",
+  "name": "str_replace_based_edit_tool",
+  "input": {
+    "command": "create",
+    "path": "test_primes.py",
+    "file_text": "import unittest\nimport primes\n\nclass TestPrimes(unittest.TestCase):\n    def test_is_prime(self):\n        self.assertTrue(primes.is_prime(2))\n        self.assertTrue(primes.is_prime(3))\n        self.assertFalse(primes.is_prime(4))\n\nif __name__ == '__main__':\n    unittest.main()"
+  }
+}
+```
+
+
 
 #### insert
 
@@ -145,6 +208,22 @@ Parameters:
 - `insert_text`: The text to insert
 
 ### Example insert command
+
+```shiki
+{
+  "type": "tool_use",
+  "id": "toolu_01A09q90qw90lq917835lq9",
+  "name": "str_replace_based_edit_tool",
+  "input": {
+    "command": "insert",
+    "path": "primes.py",
+    "insert_line": 0,
+    "insert_text": "\"\"\"Module for working with prime numbers.\n\nThis module provides functions to check if a number is prime\nand to generate a list of prime numbers up to a given limit.\n\"\"\"\n"
+  }
+}
+```
+
+
 
 ### Example: Fixing a syntax error with the text editor tool
 
@@ -434,23 +513,167 @@ When using the text editor tool, various errors may occur. Here is guidance on h
 
 ### File not found
 
+If Claude tries to view or modify a file that doesn't exist, return an appropriate error message in the `tool_result`:
+
+```shiki
+{
+  "role": "user",
+  "content": [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
+      "content": "Error: File not found",
+      "is_error": true
+    }
+  ]
+}
+```
+
+
+
 ### Multiple matches for replacement
+
+If Claude's `str_replace` command matches multiple locations in the file, return an appropriate error message:
+
+```shiki
+{
+  "role": "user",
+  "content": [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
+      "content": "Error: Found 3 matches for replacement text. Please provide more context to make a unique match.",
+      "is_error": true
+    }
+  ]
+}
+```
+
+
 
 ### No matches for replacement
 
+If Claude's `str_replace` command doesn't match any text in the file, return an appropriate error message:
+
+```shiki
+{
+  "role": "user",
+  "content": [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
+      "content": "Error: No match found for replacement. Please check your text and try again.",
+      "is_error": true
+    }
+  ]
+}
+```
+
+
+
 ### Permission errors
+
+If there are permission issues with creating, reading, or modifying files, return an appropriate error message:
+
+```shiki
+{
+  "role": "user",
+  "content": [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
+      "content": "Error: Permission denied. Cannot write to file.",
+      "is_error": true
+    }
+  ]
+}
+```
+
+
 
 ### Follow implementation best practices
 
 ### Provide clear context
 
+When asking Claude to fix or modify code, be specific about what files need to be examined or what issues need to be addressed. Clear context helps Claude identify the right files and make appropriate changes.
+
+**Less helpful prompt:** "Can you fix my code?"
+
+**Better prompt:** "There's a syntax error in my primes.py file that prevents it from running. Can you fix it?"
+
 ### Be explicit about file paths
+
+Specify file paths clearly when needed, especially if you're working with multiple files or files in different directories.
+
+**Less helpful prompt:** "Review my helper file"
+
+**Better prompt:** "Can you check my utils/helpers.py file for any performance issues?"
 
 ### Create backups before editing
 
+Implement a backup system in your application that creates copies of files before allowing Claude to edit them, especially for important or production code.
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+def backup_file(file_path):
+    """Create a backup of a file before editing."""
+    backup_path = f"{file_path}.backup"
+    if os.path.exists(file_path):
+        with open(file_path, "r") as src, open(backup_path, "w") as dst:
+            dst.write(src.read())
+```
+
 ### Handle unique text replacement carefully
 
+The `str_replace` command requires an exact match for the text to be replaced. Your application should ensure that there is exactly one match for the old text or provide appropriate error messages.
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+def safe_replace(file_path, old_text, new_text):
+    """Replace text only if there's exactly one match."""
+    with open(file_path, "r") as f:
+        content = f.read()
+
+    count = content.count(old_text)
+    if count == 0:
+        return "Error: No match found"
+    elif count > 1:
+        return f"Error: Found {count} matches"
+    else:
+        new_content = content.replace(old_text, new_text)
+        with open(file_path, "w") as f:
+            f.write(new_content)
+        return "Successfully replaced text"
+```
+
 ### Verify changes
+
+After Claude makes changes to a file, verify the changes by running tests or checking that the code still works as expected.
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+def verify_changes(file_path):
+    """Run tests or checks after making changes."""
+    try:
+        # For Python files, check for syntax errors
+        if file_path.endswith(".py"):
+            import ast
+
+            with open(file_path, "r") as f:
+                ast.parse(f.read())
+            return "Syntax check passed"
+    except Exception as e:
+        return f"Verification failed: {str(e)}"
+```
 
 ---
 

@@ -564,7 +564,6 @@ Because these settings arrive over the network, the CLI shows each developer a s
 - shell-execution settings such as `apiKeyHelper` and `statusLine`
 - the sandbox binary settings `sandbox.bwrapPath`, `sandbox.socatPath`, and `sandbox.ripgrep`
 - Sandbox settings that intercept traffic, inject credentials, or weaken isolation, such as `sandbox.network.tlsTerminate` and the proxy port settings. [Security approval dialogs](server-managed-settings.md) lists them all.
-- managed CLAUDE.md content
 
 [Approval memory](server-managed-settings.md) covers how long an approval lasts and when the dialog appears again.
 Claude Code applies some delivered `env` variables without showing the developer the approval dialog, such as model selection settings and numeric limits. Other delivered variables can require the developer’s approval before they take effect; a non-empty proxy, base-URL, or `OTEL_EXPORTER_OTLP_ENDPOINT` value always does. When a delivered variable needs approval, the dialog names it.

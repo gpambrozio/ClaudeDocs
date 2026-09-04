@@ -200,21 +200,39 @@ For organizations that also enable CMEK, your cloud KMS audit log (CloudTrail, C
 
 ### How do I know if my organization has Access Transparency enabled?
 
+Contact your Anthropic account representative.
+
 ### Will I see an event each time a safety classifier runs on my traffic?
+
+No. Automated processing does not generate `anthropic_access` events; you will see an `anthropic_access` event only if a human reviewer subsequently views the content. Separately, a `cmek_preserve` event is written when content is preserved, whether the preservation was initiated by a human reviewer or an automated safety pipeline.
 
 ### We are a platform that serves Claude to our own end users. Can we enable Access Transparency?
 
+Access Transparency is not available for platform deployments. Contact your Anthropic account representative to discuss your use case.
+
 ### Will I see events for access that happened before we enrolled, or for our older data?
+
+Access Transparency is not guaranteed to be retroactive. It covers human access to content written to the Claude API on or after your enrollment date. You might see events for access to content that was written before enrollment.
 
 ### How soon after an access will I see the event?
 
+Within two business days of the access. Configure any SIEM alerting or scheduled exports with a matching lookback window rather than assuming real-time arrival.
+
 ### How do I know which request an anthropic\_access event refers to?
+
+Use the `resource_details.id` field. It contains the same message ID (`msg_...`) that the [Messages API](api/messages/create.md) returns in the `id` field of every response body. To make this useful, log `id` in your own systems alongside your internal metadata, such as the application, end user, or conversation that produced the request. When an event arrives, join its `resource_details.id` against your logs to identify exactly which request was viewed.
 
 ### Can I enable Access Transparency for a single workspace?
 
+Access Transparency is enabled at the organization level and covers all workspaces.
+
 ### How does Access Transparency relate to CMEK?
 
+They are independent. With CMEK, safety preservation outside your key emits a separate `cmek_preserve` event on the same feed. See [CMEK content preservation](#cmek-content-preservation) and [CMEK](manage-claude/cmek.md).
+
 ### How do I request Access Transparency?
+
+Contact your Anthropic account representative.
 
 ## Related resources
 

@@ -265,21 +265,49 @@ Always carefully review and verify Claude's image interpretations, especially fo
 
 ### What image file types does Claude support?
 
+JPEG, PNG, GIF, and WebP. See [Supported formats](#supported-formats).
+
 ### Can Claude read image URLs?
+
+Yes. Use the `url` source type instead of `base64` in the `image` content block. See the [URL-based image example](#url-based-image-example).
 
 ### Is there a limit to the image file size I can upload?
 
+Yes. See [Request limits](#request-limits) for per-image and overall request size limits across the Claude API, Amazon Bedrock, Google Cloud, and claude.ai.
+
 ### How many images can I include in one request?
+
+Up to 600 per API request (100 for models with a 200k-token context window) and 20 per turn on claude.ai. See [Request limits](#request-limits) for details and the lower per-image dimension limit that applies above 20 images.
 
 ### Does Claude read image metadata?
 
+No, Claude does not parse or receive any metadata from images passed to it.
+
 ### Can I delete images I've uploaded?
+
+No. Image uploads are ephemeral and not stored beyond the duration of the API
+request. Uploaded images are automatically deleted after they have been
+processed.
 
 ### Where can I find details on data privacy for image uploads?
 
+Refer to the Anthropic privacy policy page for information on how uploaded
+images and other data are handled. Anthropic does not use uploaded images to
+train models.
+
 ### What if Claude's image interpretation seems wrong?
 
+If Claude's image interpretation seems incorrect:
+
+1. Ensure the image is clear, high-quality, and correctly oriented.
+2. Try prompt engineering techniques to improve results.
+3. If the issue persists, flag the output in claude.ai (thumbs up/down) or contact the [support team](https://support.claude.com/).
+
+Your feedback helps improve Claude!
+
 ### Can Claude generate or edit images?
+
+No, Claude is an image understanding model only. It can interpret and analyze images, but it cannot generate, produce, edit, manipulate, or create images.
 
 ---
 

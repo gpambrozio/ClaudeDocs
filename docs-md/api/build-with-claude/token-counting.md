@@ -251,6 +251,8 @@ Token counting is **free to use** but subject to requests per minute rate limits
 
 ### Does token counting use prompt caching?
 
+No, token counting provides an estimate without using caching logic. Although you may provide `cache_control` blocks in your token counting request, prompt caching only occurs during actual message creation.
+
 ---
 
 ## Next steps

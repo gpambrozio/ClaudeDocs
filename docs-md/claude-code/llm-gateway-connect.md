@@ -4,7 +4,7 @@ An [LLM gateway](llm-gateway.md) is a proxy your organization runs between Claud
 This page is for developers running Claude Code through a gateway their organization operates. It covers two paths: [checking whether your administrator already configured it for you](#check-for-an-existing-configuration), and [configuring it yourself](#configure-claude-code-yourself) when they haven’t.
 
 - To deploy a gateway for your organization, see [Roll out an LLM gateway](llm-gateway-rollout.md)
-- For what Claude Code sends to a gateway, see the [gateway protocol reference](llm-gateway-protocol.md)
+- For what Claude Code sends to a gateway, see the [gateway compatibility guide](llm-gateway-protocol.md)
 
 ## [​](#check-for-an-existing-configuration) Check for an existing configuration
 
@@ -477,7 +477,7 @@ If Claude Code prompts you to log in repeatedly after removing gateway configura
 
 - [LLM gateways overview](llm-gateway.md): what a gateway is and how it interacts with claude.ai subscriptions
 - [Roll out an LLM gateway for your organization](llm-gateway-rollout.md): the admin-facing checklist for deploying and distributing gateway configuration
-- [Gateway protocol reference](llm-gateway-protocol.md): what Claude Code sends to a gateway, including the headers and fields the gateway must forward
+- [Gateway compatibility guide](llm-gateway-protocol.md): what Claude Code sends to a gateway, including the headers and fields the gateway must forward
 - [Settings](settings.md): where settings files live and how the `env` block is read
 - [Authentication](authentication.md): how credential variables, `apiKeyHelper`, and OAuth login interact
 

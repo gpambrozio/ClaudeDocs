@@ -16,6 +16,10 @@ A rubric is a markdown document describing per-criterion scoring. The rubric is 
 
 ### Tips for writing effective rubrics
 
+Structure the rubric as explicit, gradeable criteria, such as "The CSV contains a price column with numeric values" rather than "The data looks good." The grader scores each criterion independently, so vague criteria produce noisy evaluations.
+
+If you don't have a rubric on hand, try giving Claude an example of a known-good artifact and asking it to analyze what makes that content good, then turn that analysis into a rubric. This middle-ground approach often produces better results than writing criteria from scratch.
+
 Example rubric:
 
 ```shiki

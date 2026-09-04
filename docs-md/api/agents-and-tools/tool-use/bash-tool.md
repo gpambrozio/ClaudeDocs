@@ -97,6 +97,26 @@ To handle `restart: true`, kill the shell process, start a new one, and return a
 
 ### Example usage
 
+Run a command:
+
+```shiki
+{
+  "command": "ls -la *.py"
+}
+```
+
+
+
+Restart the session:
+
+```shiki
+{
+  "restart": true
+}
+```
+
+
+
 ## Tool versions
 
 `bash_20250124` is the current version of the tool, and it requires no beta header. Every model from Claude Sonnet 3.7 ([retired](about-claude/model-deprecations.md)) onward accepts it, including all current Claude models.
@@ -301,19 +321,150 @@ When a command fails or the session breaks, tell Claude what happened. Return th
 
 ### Command execution timeout
 
+If a command takes too long to execute:
+
+```shiki
+{
+  "role": "user",
+  "content": [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
+      "content": "Error: command did not finish within 30 seconds",
+      "is_error": true
+    }
+  ]
+}
+```
+
+
+
 ### Command not found
 
+If a command doesn't exist:
+
+```shiki
+{
+  "role": "user",
+  "content": [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
+      "content": "bash: nonexistentcommand: command not found",
+      "is_error": true
+    }
+  ]
+}
+```
+
+
+
 ### Permission denied
+
+If there are permission issues:
+
+```shiki
+{
+  "role": "user",
+  "content": [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
+      "content": "bash: /root/sensitive-file: Permission denied",
+      "is_error": true
+    }
+  ]
+}
+```
+
+
 
 ### Follow implementation best practices
 
 ### Use command timeouts
 
+A command that never finishes, such as one that waits for input, blocks the session forever because its sentinel line never arrives. Give every command a deadline. When the deadline passes, stop the shell and everything the command started, then restart the session:
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+import concurrent.futures
+import os
+import signal
+
+def execute_with_timeout(session, command, timeout=30):
+    """Run a command in the session, replacing the session if the command hangs."""
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as pool:
+        future = pool.submit(session.execute_command, command)
+        try:
+            return future.result(timeout=timeout)
+        except concurrent.futures.TimeoutError:
+            # The group is the shell and every process the command started
+            os.killpg(session.process.pid, signal.SIGKILL)
+            session.restart()
+            return f"Error: command did not finish within {timeout} seconds"
+```
+
+The kill stops the hung command and everything it started. Return the message as an error `tool_result` (see [Handle errors](#handle-errors)), which marks the tool call as failed.
+
 ### Maintain session state
+
+Keep the bash session persistent to maintain environment variables and working directory:
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+# Commands run in the same session maintain state
+commands = [
+    "cd /tmp",
+    "echo 'Hello' > test.txt",
+    "cat test.txt",  # The session is still in /tmp
+]
+```
 
 ### Handle large outputs
 
+Truncate large outputs to prevent token limit issues:
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+def truncate_output(output, max_lines=100):
+    lines = output.split("\n")
+    if len(lines) > max_lines:
+        truncated = "\n".join(lines[:max_lines])
+        return f"{truncated}\n\n... Output truncated ({len(lines)} total lines) ..."
+    return output
+```
+
 ### Log all commands
+
+Keep an audit trail. Route every command through one wrapper that records the command before it runs and the output after it finishes. A command that hangs or breaks the session still leaves a record:
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+import logging
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
+
+def execute_and_log(session, command):
+    """Run a command in the session and keep an audit record of it."""
+    logging.info("command=%r", command)
+    output = session.execute_command(command)
+    logging.info("output=%r", output[:200])  # first 200 characters
+    return output
+```
+
+The records go to `stderr` by default; point them at a file or your logging pipeline to keep them. Include whatever ties the record to the request in your application, such as the end user and the `tool_use_id`.
 
 ## Security
 
