@@ -490,143 +490,19 @@ The tradeoff is context usage: long conversations consume more context space on 
 
 ## Preserved thinking
 
-Claude preserves a thinking block, keeping it usable on later turns, only under the conditions it was created in. Starting with Claude Fable 5.1 and Claude Mythos 5.1, a `thinking` or `redacted_thinking` block is preserved only:
+[Preserved thinking](build-with-claude/preserved-thinking.md) decides whether the model can use a thinking block that you send back from an earlier turn. Starting with Claude Fable 5.1, the API checks the `signature` of every `thinking` or `redacted_thinking` block in a request for two things:
 
-- **For the model that produced it, or a newer one.** An earlier model can't use the block, and the API drops it from that request. See [Only for the model that produced it, or a newer one](#preserved-for-model).
-- **In the conversation that produced it (Claude Fable 5.1 only).** If the `system` prompt, the `tools`, or any earlier message changes, the block is no longer valid, and the API rejects the request or drops the block. See [Only in the conversation that produced it](#preserved-in-conversation).
+- **The model that produced it.** A model reads its own thinking blocks and those of earlier models, never those of a newer model. Claude Fable 5.1 reads blocks from Claude Opus 5, but Claude Opus 5 can't read blocks from Claude Fable 5.1. The API drops a block the current model can't read, without an error and without billing it. See [Switching models mid-conversation](build-with-claude/preserved-thinking.md).
+- **Everything sent before it.** A block stays valid only while the top-level `system` prompt, the `tools`, and the messages before it are unchanged. If any of them changes, that block and every later thinking block are invalid, and the API rejects the request with a 400 error or drops the invalid blocks, whichever you choose. See [Keeping the prefix unchanged](build-with-claude/preserved-thinking.md).
 
-The block's `signature` records both conditions on both models. The API checks it whenever the block comes back in a later request, including a request to a different model; Claude Mythos 5.1 checks only the model condition.
+The model check applies to every account. The API enforces the prefix check by default for accounts created on or after August 31, 2026, 00:00 UTC. On older accounts it enforces the check only on requests that set `thinking.block_binding.prefix_mismatch_behavior`. Later models will enforce it for all accounts, so make your integration append-only now.
 
-**Pass blocks back unchanged.** Send every assistant turn exactly as you received it, thinking blocks included, and let the API decide which blocks the model can use.
+To keep thinking valid, send every assistant turn back exactly as you received it and add new messages only at the end of `messages`. If your code builds the `messages` array itself, the Preserved thinking page covers:
 
-### Only for the model that produced it, or a newer one
-
-This condition is one-way: Claude Fable 5.1 and Claude Mythos 5.1 read earlier models' thinking blocks, and no earlier model reads theirs.
-
-- **A conversation that moves onto Claude Fable 5.1 or Claude Mythos 5.1 keeps its reasoning.** The earlier model's thinking blocks stay readable, so the model thinks as usual from the first turn after the switch.
-- **A conversation that moves from them to any earlier model loses it.** The earlier model can't read their blocks, the API drops them for that request, and the earlier model reasons again from the visible messages. If the conversation later returns to Claude Fable 5.1 with the same history, its own blocks are readable again.
-
-In full, Claude Fable 5.1 and Claude Mythos 5.1 read thinking blocks produced by each other, by Claude Opus 5, Claude Fable 5, and Claude Mythos 5, and by Claude Opus 4.8 and earlier Opus models, Claude Sonnet models, and Claude Haiku 4.5. No model other than these two can read a block produced by Claude Fable 5.1 or Claude Mythos 5.1.
-
-**A block the receiving model can't read is dropped.** The API removes it before the prompt reaches the model. It doesn't count toward `input_tokens` and isn't billed. When you fall back from Claude Fable 5.1 to an older model mid-conversation, for example after a [classifier refusal fallback](build-with-claude/refusals-and-fallback.md), the older model reasons again from the visible conversation. With the [controls beta header](#preserved-thinking-controls) the drop is reported in `input_transformations` as `model_binding_mismatch`. Without it the drop is silent. A [server-side fallback](build-with-claude/refusals-and-fallback.md) drops unreadable blocks the same way.
-
-### Only in the conversation that produced it
-
-A thinking block from Claude Fable 5.1 is preserved only while the conversation prefix it was produced from stays unchanged. Its `signature` covers the `system` prompt, the `tools`, and the messages that preceded the block. Claude Mythos 5.1 records the same `signature` but doesn't run this check.
-
-This check is enforced for new accounts created on or after August 31, 2026. For accounts created earlier, the API records the condition in the signature but doesn't act on a mismatch unless the request sets [`thinking.block_binding.prefix_mismatch_behavior`](#preserved-thinking-controls), which opts into enforcement. Anthropic plans to enforce this condition for every organization on future models. If your account was created earlier, make your application compatible now: the same append-only patterns keep the [prompt cache](build-with-claude/prompt-caching.md) warm, and you can test against the check by sending `prefix_mismatch_behavior: "error"`. If you ship a tool or framework that people run with their own API key, test that way: your users on new accounts are enforced before you are. [Preserved thinking](build-with-claude/preserved-thinking.md) has the integration checklist: how to tell whether your code edits history, and the API feature that replaces each kind of edit.
-
-Where the check is enforced, a request that replays a block against a changed prefix is rejected with a 400 `invalid_request_error`:
-
-```shiki
-messages.5.content.0: Invalid `signature` in `thinking` block. The block is bound to a different conversation. Remove the block, or set `thinking.block_binding.prefix_mismatch_behavior` to "drop_block". That setting requires the `thinking-binding-controls-2026-08-01` value in the `anthropic-beta` header.
-```
-
-
-
-The last sentence appears only when the request didn't send the beta header. The message can end with one more sentence naming the first message that changed. Retrying the same request body fails the same way. To continue without the invalidated reasoning instead, send the `thinking-binding-controls-2026-08-01` beta header and set `prefix_mismatch_behavior` to `"drop_block"`. The API then drops the failing block and every thinking block after it in the conversation, and reports each one in `input_transformations` as `prefix_binding_mismatch`. The [token counting](build-with-claude/token-counting.md) endpoint runs the same check and returns the same 400.
-
-What invalidates later thinking blocks:
-
-- Editing, reordering, or removing an earlier message, including removing a per-turn reminder you injected into an earlier user turn.
-- Changing the content of the top-level `system` prompt, or adding, removing, or editing a tool in the `tools` array, between requests.
-- Client-side compaction or truncation that keeps recent assistant turns verbatim, thinking included, while rewriting the turns before them.
-- An image or document URL in an earlier turn that serves different bytes on a later request. The check covers the bytes, not the URL string, so a rotating signed URL for the same file is fine. For content you reference across turns, upload it once with the [Files API](build-with-claude/files.md) and send the `file_id`, or send base64.
-
-What doesn't:
-
-- Removing a leading run of thinking blocks, oldest first: the first thinking block in the conversation (or the first one after the most recent compaction block), then the next, and so on. Removing a thinking block from anywhere else invalidates every thinking block after it, in that turn and in every later turn.
-- Changing `output_config.effort`, `max_tokens`, or other sampling settings between requests.
-- `cache_control` markers, wherever you place or move them.
-- Server-side [compaction](build-with-claude/compaction.md) and [context editing](build-with-claude/context-editing.md): they don't count as edits, because the check compares the conversation as you sent it, not the server's edited copy. After a compaction, the checked prefix starts from the compaction block.
-
-Patterns that keep thinking blocks valid:
-
-- **Append only.** Add new messages at the end of `messages` and leave earlier turns byte-for-byte unchanged.
-- **Use [mid-conversation system messages](build-with-claude/mid-conversation-system-messages.md)** and mid-conversation tool changes to add instructions or change tool availability partway through, instead of editing the top-level `system` field or `tools` array. For a reminder that should apply to one turn only, send it as a [turn-scoped system message](build-with-claude/mid-conversation-system-messages.md) and leave it in the history rather than deleting it later. This also preserves the prompt cache.
-- **Use server-side context management** rather than trimming history yourself.
-- **If a request is rejected for a prefix mismatch and you can't repair the history,** resend it with the beta header and `prefix_mismatch_behavior: "drop_block"`, or strip every `thinking` and `redacted_thinking` block from the history and retry once.
-
-When earlier thinking is dropped, the model answers that turn without those blocks. A client that repeatedly invalidates its own history restarts the prompt cache each time, which raises cost.
-
-**Client-side compaction.** This check doesn't rule out compacting on the client. The rule is narrower: don't keep a thinking block behind a prefix you've rewritten. Server-side [compaction](build-with-claude/compaction.md) is the simplest way to satisfy it. If you compact on the client, use one of these shapes:
-
-- **Simple compaction (recommended):** summarize the conversation into one message and start the next request with that summary plus the new user turn, replaying no earlier turns and no earlier thinking blocks. No earlier thinking remains, so nothing fails, and the model thinks afresh on the compacted conversation. Claude models are trained on long-horizon tasks with this scheme, and it performs comparably to more elaborate ones for most workloads. It resets the prompt cache, as any compaction does.
-- **Keep-tail compaction:** summarize older turns and keep the most recent turns verbatim. The kept turns' thinking blocks were produced against the full history and fail behind the summary. Strip `thinking` and `redacted_thinking` from every turn you carry across (their text and tool calls can stay), or set `prefix_mismatch_behavior: "drop_block"` and let the API discard them.
-- **Background compaction:** build the summary off the critical path and swap it in while the conversation continues. Every turn produced in the meantime has thinking that predates the swap. Send `"drop_block"` on every request that still carries thinking blocks produced before the swap (or strip those blocks yourself; `input_transformations` on the first response after the swap lists exactly which ones), or compact synchronously.
-
-Snipping individual turns out of the middle of the transcript invalidates every thinking block after them, and no client-side shape avoids that. Use a mid-conversation system message for the instruction change you were making, or server-side [context editing](build-with-claude/context-editing.md) for selective removal.
-
-### Controls for blocks that aren't preserved (beta)
-
-Send the [beta header](api/beta-headers.md) `thinking-binding-controls-2026-08-01` to get two things: an `input_transformations` array on every response that lists any thinking blocks the API dropped, and a `block_binding` object on the thinking configuration with one field.
-
-| Field | Type | Default | Description |
-| --- | --- | --- | --- |
-| `prefix_mismatch_behavior` | `"error"` or `"drop_block"` | `"error"` | What the API does with a thinking block that fails the [conversation check](#preserved-in-conversation). `"error"` rejects the request with a 400 error. `"drop_block"` removes the block and every later thinking block in the conversation, reports each in `input_transformations`, and continues. Neither value changes the model check, which always drops. |
-
-`block_binding` is accepted alongside `thinking.type: "adaptive"` and `thinking.type: "enabled"`. Sending it without the beta header returns a 400 error. Models that don't run the conversation check accept the object and report only model-check drops, so one request body works across models. On Amazon Bedrock and Google Cloud, pass beta names as described in [Beta headers](api/beta-headers.md).
-
-The following request opts into dropping rather than rejecting. On a first turn there is nothing to replay, so `input_transformations` comes back empty:
-
-cURLCLIPythonTypeScriptC#GoJavaPHPRuby
-
-
-
-```shiki
-client = anthropic.Anthropic()
-
-response = client.beta.messages.create(
-    model="claude-fable-5-1",
-    max_tokens=16000,
-    thinking={
-        "type": "adaptive",
-        "block_binding": {"prefix_mismatch_behavior": "drop_block"},
-    },
-    messages=[
-        {
-            "role": "user",
-            "content": "What is the greatest common divisor of 1071 and 462?",
-        }
-    ],
-    betas=["thinking-binding-controls-2026-08-01"],
-)
-
-for block in response.content:
-    if block.type == "text":
-        print(block.text)
-
-print(f"Input transformations: {len(response.input_transformations or [])}")
-```
-
-Output
-
-
-
-```block
-The greatest common divisor of 1071 and 462 is 21.
-Input transformations: 0
-```
-
-**Dropped blocks are reported in `input_transformations`.** Under the beta header, every response from a thinking-capable model carries this top-level array. It's empty when nothing was dropped and never `null`. Each entry names the position of a dropped block and the check it failed:
-
-```shiki
-{
-  "input_transformations": [
-    {
-      "type": "thinking_dropped",
-      "path": "messages.1.content.0",
-      "reason": "model_binding_mismatch"
-    }
-  ]
-}
-```
-
-
-
-The `reason` field is `model_binding_mismatch` or `prefix_binding_mismatch`. Ignore entries whose `type` or `reason` you don't recognize, because later checks add values. When [streaming](build-with-claude/streaming.md), `input_transformations` arrives on the `message` object in the `message_start` event. After a mid-stream server-side fallback, the final `message_delta` event carries the array again with the serving model's entries. Without the beta header the field is absent.
-
-A tampered or undecryptable signature is a different failure: it always returns a 400 (`` Invalid `signature` in `thinking` block ``, with no reason clause) and `prefix_mismatch_behavior` doesn't apply to it. In a [message batch](build-with-claude/batch-processing.md), an item whose block fails the conversation check under `"error"` resolves as `errored`.
+- [What counts as an edit](build-with-claude/preserved-thinking.md), and [how to check whether your code makes one](build-with-claude/preserved-thinking.md).
+- [The API feature that replaces each common edit](build-with-claude/preserved-thinking.md): mid-conversation system messages for new instructions and per-turn reminders, `tool_addition` and `tool_removal` blocks for tool changes, per-message `output_config` for effort changes, and server-side compaction and context editing for trimming.
+- [Client-side compaction](build-with-claude/preserved-thinking.md): which patterns keep thinking valid and which don't.
+- [The `thinking-binding-controls-2026-08-01` beta header](build-with-claude/preserved-thinking.md). It adds an `input_transformations` array to every response that lists the blocks the API dropped, and a `block_binding.prefix_mismatch_behavior` field on the thinking configuration that accepts `"error"` or `"drop_block"`.
 
 ## Thinking and prompt caching
 

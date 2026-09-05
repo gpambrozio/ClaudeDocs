@@ -8,6 +8,8 @@
 
 GET/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
 
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+
 List workspaces where this federation rule is enabled.
 
 Returns all workspace enablements in a single response; the `limit` and
@@ -97,7 +99,7 @@ cURL
 ```shiki
 curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RULE_ID/workspaces \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
 Response 200

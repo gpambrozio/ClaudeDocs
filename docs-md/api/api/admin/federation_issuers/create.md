@@ -8,6 +8,8 @@
 
 POST/v1/organizations/federation\_issuers
 
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+
 Register an OIDC issuer that Anthropic will trust for workload identity
 federation in your organization.
 
@@ -19,9 +21,6 @@ URL), or `inline` (provide a static key set). When `jwks.type` is
 publicly reachable over HTTPS so Anthropic can fetch the discovery
 document; for `explicit_url` and `inline` modes the issuer URL is only
 matched as the JWT's `iss` claim and is not fetched.
-
-Requires an OAuth bearer or Console session; Admin API keys are not
-accepted.
 
 ##### Headers
 
@@ -154,7 +153,7 @@ cURL
 curl https://api.anthropic.com/v1/organizations/federation_issuers \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
     -d '{
           "issuer_url": "x",
           "name": "x"

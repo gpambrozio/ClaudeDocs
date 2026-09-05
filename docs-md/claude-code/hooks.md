@@ -2547,7 +2547,7 @@ Claude Code doesn’t fire this event when:
 
 - You pass a directory with the `--add-dir` startup flag; [SessionStart](#sessionstart) covers those directories
 - You add a directory on the `/permissions` Workspace tab
-- You add a directory that is already a working directory; the add fails with an error
+- You add a directory that is already a working directory or inside one
 
 Claude Code fires DirectoryAdded after refreshing sandbox and permission state, so sandboxed tools already see the new directory when your hook runs. Hook commands themselves run unsandboxed.
 Claude Code doesn’t wait for the hook: the add completes immediately, and the hook runs in the background with the 600-second default timeout.

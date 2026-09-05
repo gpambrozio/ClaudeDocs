@@ -66,7 +66,7 @@ cURL
 curl https://api.anthropic.com/v1/organizations/spend_limits \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
     -d '{
           "amount": "50000",
           "scope": {

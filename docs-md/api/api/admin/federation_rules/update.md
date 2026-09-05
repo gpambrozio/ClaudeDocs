@@ -8,6 +8,8 @@
 
 POST/v1/organizations/federation\_rules/{federation\_rule\_id}
 
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+
 Partially update a federation rule.
 
 `issuer_id` is immutable. `match` and `target` are replaced as whole
@@ -24,7 +26,7 @@ match does not yet constrain tenant identity, any update (even a rename
 or description change) must also supply a conforming `match` in the same
 request. OAuth callers may only manage rules whose `oauth_scope` is
 `workspace:developer` or `workspace:inference`; other scopes require a
-Console session. Admin API keys are not accepted.
+Console session.
 
 ##### Path parameters
 
@@ -171,7 +173,7 @@ cURL
 curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RULE_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
     -d '{}'
 ```
 

@@ -43,6 +43,34 @@ One of the following:
 
 
 
+claude\_tag\_categories: optional array of "dm" or "engaged" or "monitoring" or 2 more
+
+Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage with no category never matches. `dm` usage is reported under the user's product rather than `claude-tag`, so combining this filter with `products[]=claude-tag` excludes it. Use `group_by[]=claude_tag_category` to break out per-category values.
+
+maxItems100
+
+One of the following:
+
+"dm"
+
+"engaged"
+
+"monitoring"
+
+"proactive"
+
+"scheduled"
+
+
+
+claude\_tag\_user\_ids: optional array of string
+
+Filter to Claude Tag (Claude in Slack) usage attributed to specific Slack users, by Slack user ID (for example `U0123ABCDEF`), not claude.ai user ID. Usage that is not Claude Tag, and Claude Tag usage not attributed to a single user, never matches. Use `group_by[]=claude_tag_user_id` to break out per-user values.
+
+maxItems100
+
+
+
 context\_windows: optional array of "0-200k" or "200k-1M"
 
 Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
@@ -65,13 +93,17 @@ formatdate-time
 
 
 
-group\_by: optional array of "context\_window" or "inference\_geo" or "model" or 4 more
+group\_by: optional array of "claude\_tag\_category" or "claude\_tag\_user\_id" or "context\_window" or 6 more
 
 Dimensions to break each time bucket out by. Defaults to no grouping (one total per bucket). Each bucket reports at most its top 100 groups; a group beyond that cap has no row in that bucket (there is no remainder row), so grouped buckets are not exhaustive when a dimension has more than 100 distinct values.
 
 maxItems100
 
 One of the following:
+
+"claude\_tag\_category"
+
+"claude\_tag\_user\_id"
 
 "context\_window"
 
@@ -217,6 +249,8 @@ Response 200
             "ephemeral_5m_input_tokens": 500
           },
           "cache_read_input_tokens": 0,
+          "claude_tag_category": "dm",
+          "claude_tag_user_id": "U0123ABCDEF",
           "context_window": "0-200k",
           "inference_geo": "global",
           "model": "claude-opus-5",
@@ -260,6 +294,8 @@ Response 200
             "ephemeral_5m_input_tokens": 500
           },
           "cache_read_input_tokens": 0,
+          "claude_tag_category": "dm",
+          "claude_tag_user_id": "U0123ABCDEF",
           "context_window": "0-200k",
           "inference_geo": "global",
           "model": "claude-opus-5",

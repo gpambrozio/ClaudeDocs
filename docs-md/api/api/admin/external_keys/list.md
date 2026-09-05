@@ -99,7 +99,7 @@ Aws object{ kms\_arn, type, region, role\_arn }
 
 kms\_arn: string
 
-Full ARN of the AWS KMS key.
+Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a single-Region key in your organization's own AWS account; cross-account keys, multi-Region keys, and alias ARNs are rejected.
 
 maxLength2048
 
@@ -111,7 +111,7 @@ AWS region. Derived from `kms_arn` if omitted.
 
 role\_arn: optional string or null⁠Deprecated
 
-IAM role ARN. Deprecated — Anthropic reaches the KMS key via a managed intermediate role; this field is ignored.
+IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own intermediate role (or, on Claude Platform on AWS, with credentials AWS issues for the Workspace); this field is ignored.
 
 
 
@@ -168,7 +168,7 @@ cURL
 ```shiki
 curl https://api.anthropic.com/v1/organizations/external_keys \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
 Response 200

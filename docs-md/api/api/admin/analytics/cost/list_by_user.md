@@ -44,6 +44,34 @@ One of the following:
 
 
 
+claude\_tag\_categories: optional array of "dm" or "engaged" or "monitoring" or 2 more
+
+Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage with no category never matches. `dm` usage is reported under the user's product rather than `claude-tag`, so combining this filter with `products[]=claude-tag` excludes it. Use `group_by[]=claude_tag_category` to break out per-category values.
+
+maxItems100
+
+One of the following:
+
+"dm"
+
+"engaged"
+
+"monitoring"
+
+"proactive"
+
+"scheduled"
+
+
+
+claude\_tag\_user\_ids: optional array of string
+
+Filter to Claude Tag (Claude in Slack) usage attributed to specific Slack users, by Slack user ID (for example `U0123ABCDEF`), not claude.ai user ID. Usage that is not Claude Tag, and Claude Tag usage not attributed to a single user, never matches. Use `group_by[]=claude_tag_user_id` to break out per-user values.
+
+maxItems100
+
+
+
 context\_windows: optional array of "0-200k" or "200k-1M"
 
 Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
@@ -74,13 +102,17 @@ defaultfalse
 
 
 
-group\_by: optional array of "context\_window" or "cost\_type" or "inference\_geo" or 6 more
+group\_by: optional array of "claude\_tag\_category" or "claude\_tag\_user\_id" or "context\_window" or 8 more
 
 Break each actor's row out by the given dimensions. Accepts the same values as the bucketed `/cost_report` endpoint. The `product`, `model`, `context_window`, `inference_geo`, and `speed` dimensions — and the time bucket, when `bucket_width` is set — count toward `limit`. `cost_type` and `token_type` do not: `cost_type` returns one row per cost component (tokens, web search, code execution); `token_type` returns one row per token type, each with `cost_type: "tokens"`; combining both returns the per-token-type rows plus the web-search and code-execution rows. A page can therefore contain more rows than `limit` when `cost_type` or `token_type` is requested.
 
 maxItems100
 
 One of the following:
+
+"claude\_tag\_category"
+
+"claude\_tag\_user\_id"
 
 "context\_window"
 
@@ -262,6 +294,8 @@ Response 200
         "user_id": "user_01AbCdEfGhIjKlMnOpQrSt"
       },
       "amount": "41280.000000",
+      "claude_tag_category": "dm",
+      "claude_tag_user_id": "U0123ABCDEF",
       "context_window": "0-200k",
       "cost_type": "code_execution",
       "currency": "USD",
@@ -303,6 +337,8 @@ Response 200
         "user_id": "user_01AbCdEfGhIjKlMnOpQrSt"
       },
       "amount": "41280.000000",
+      "claude_tag_category": "dm",
+      "claude_tag_user_id": "U0123ABCDEF",
       "context_window": "0-200k",
       "cost_type": "code_execution",
       "currency": "USD",

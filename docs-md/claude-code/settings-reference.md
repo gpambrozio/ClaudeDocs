@@ -16,7 +16,7 @@ Scope: All scopes▼
 
 Sort byKeyTopicScope
 
-223 settings
+225 settings
 
 | Key | Description | Topic | Scope |
 | --- | --- | --- | --- |
@@ -53,6 +53,7 @@ Sort byKeyTopicScope
 | [`awsAuthRefresh`](#awsauthrefresh) | Refresh expired [Bedrock credentials](amazon-bedrock.md) in `.aws` with your own command | Authentication and providers | Any file |
 | [`awsCredentialExport`](#awscredentialexport) | Supply [Bedrock credentials](amazon-bedrock.md) as JSON from your own command | Authentication and providers | Any file |
 | [`axScreenReader`](#axscreenreader) | Render [screen-reader friendly output](accessibility.md) | Interface and terminal | Any file |
+| [`bashOutputMaxChars`](#bashoutputmaxchars) | Set how much of a successful command’s [output](tools-reference.md) Claude receives inline | Memory and context | Any file |
 | [`blockedMarketplaces`](#blockedmarketplaces) | Block [plugin marketplace](plugin-marketplaces.md) sources for your organization | Plugins and skills | Managed |
 | [`browserExternalPageTools`](#browserexternalpagetools) | Keep Claude’s tools off external pages in the [desktop](desktop.md) Browser pane | Tools | Managed |
 | [`channelsEnabled`](#channelsenabled) | Allow [channels](channels.md) for your organization | Plugins and skills | Managed |
@@ -113,7 +114,7 @@ Sort byKeyTopicScope
 | [`includeGitInstructions`](#includegitinstructions) | Remove the built-in commit and PR instructions from the [system prompt](sub-agents.md) | Git and attribution | Any file |
 | [`inputNeededNotifEnabled`](#inputneedednotifenabled) | Get a [push notification](remote-control.md) when Claude is waiting on you | Remote, desktop, and notifications | Any file |
 | [`isolatePeerMachines`](#isolatepeermachines) | Ask you before Claude [messages one of your sessions on another machine](cross-session-messaging.md) | Agents, sessions, and worktrees | Any file |
-| [`keybindingFlavor`](#keybindingflavor) | Make `Ctrl+W` [delete back to the previous whitespace](interactive-mode.md), as Bash does | Interface and terminal | Any file |
+| [`keybindingFlavor`](#keybindingflavor) | Deprecated and has no effect; the word-editing shortcuts always [follow readline conventions](interactive-mode.md) | Interface and terminal | Any file |
 | [`language`](#language) | Have Claude respond in a language other than English | Model and responses | Any file |
 | [`managedSourcesBehavior`](#managedsourcesbehavior) | Compose every [managed source](managed-settings.md) you deploy instead of using the highest-priority one alone | Enterprise and managed settings | Managed |
 | [`minimumVersion`](#minimumversion) | Keep [auto-updates](setup.md) from installing anything below a version | Updates and versioning | Any file |
@@ -219,6 +220,7 @@ Sort byKeyTopicScope
 | [`switchModelsOnFlag`](#switchmodelsonflag) | Switch models automatically or pause when a [safety classifier](model-config.md) flags a request | Model and responses | Any file |
 | [`syncClaudeAiSkills`](#syncclaudeaiskills) | Stop downloading the [skills enabled on your claude.ai account](skills.md) and hide the ones already synced | Plugins and skills | User, local, or managed |
 | [`syntaxHighlightingDisabled`](#syntaxhighlightingdisabled) | Turn off syntax highlighting in diffs and code blocks | Interface and terminal | Any file |
+| [`taskOutputMaxChars`](#taskoutputmaxchars) | Set how much of a [background task’s](tools-reference.md) output Claude receives inline | Memory and context | Any file |
 | [`teammateDefaultModel`](#teammatedefaultmodel) | Removed in v2.1.234; see [Specify teammates and models](agent-teams.md) for how Claude Code picks a teammate’s model | Global config settings | Global config |
 | [`teammateMode`](#teammatemode) | Choose how [agent team teammates display](agent-teams.md) | Agents, sessions, and worktrees | Any file |
 | [`terminalProgressBarEnabled`](#terminalprogressbarenabled) | Hide the terminal progress bar in terminals that support it | Interface and terminal | Any file |
@@ -906,7 +908,7 @@ settings.json
 
 ### [​](#permissions-deny) `permissions.deny`
 
-List the tool uses Claude Code blocks. Use it for files that hold API keys, secrets, or environment values: Claude Code excludes matching files from file discovery and search results, denies reads of them, and blocks the [Edit and Write tools](permissions.md) on the matching paths. Read and Edit deny rules apply to Claude’s built-in file tools and to file commands Claude Code recognizes in Bash, such as `cat`, `head`, `tail`, and `sed`; they don’t apply to arbitrary subprocesses, so for OS-level enforcement [enable the sandbox](sandboxing.md).
+List the tool uses Claude Code blocks. Use it for files that hold API keys, secrets, or environment values: Claude Code excludes matching files from file discovery and search results, denies reads of them, and blocks the [Edit and Write tools](permissions.md) on the matching paths. Read and Edit deny rules apply to Claude’s built-in file tools, to file commands Claude Code recognizes in Bash, such as `cat`, `head`, `tail`, and `sed`, and to the targets of Bash [redirections](permissions.md) such as `> file` and `< file`; they don’t apply to arbitrary subprocesses, so for OS-level enforcement [enable the sandbox](sandboxing.md).
 
 - **Scope**: [`Any file`](#scopes)
 - **Type**: array of permission rule strings
@@ -1177,7 +1179,7 @@ Name commands that Claude Code always runs outside the sandbox, such as tools th
 
 - **Scope**: [`Any file`](#scopes)
 - **Type**: array of command patterns
-- **Default**: unset, so every command Claude Code can sandbox runs sandboxed
+- **Default**: unset, so no command is excluded
 
 settings.json
 
@@ -1193,12 +1195,12 @@ Excluded commands still go through the regular permission flow. Exclusion is a c
 
 ### [​](#sandbox-allowunsandboxedcommands) `sandbox.allowUnsandboxedCommands`
 
-Let Claude retry a command outside the sandbox with the `dangerouslyDisableSandbox` parameter after the sandbox blocks it. Set it to `false` so Claude Code ignores that parameter completely and every command must run sandboxed or appear in [`excludedCommands`](#sandbox-excludedcommands), which the `/sandbox` **Overrides** tab shows as **Strict sandbox mode**. Use `false` in managed settings for policies that require strict sandboxing.
+Let Claude retry a command outside the sandbox with the `dangerouslyDisableSandbox` parameter after the sandbox blocks it. Set it to `false` so Claude Code ignores that parameter completely and every command Claude runs must be sandboxed or appear in [`excludedCommands`](#sandbox-excludedcommands). The `/sandbox` **Overrides** tab shows that state as **Strict sandbox mode**. Use `false` in managed settings for policies that require strict sandboxing.
 
 - **Scope**: [`Any file`](#scopes)
 - **Type**: Boolean
   - `true`: Claude can retry a command outside the sandbox with the `dangerouslyDisableSandbox` parameter after the sandbox blocks it
-  - `false`: Claude Code ignores that parameter, so every command runs sandboxed or appears in `excludedCommands`
+  - `false`: Claude Code ignores that parameter, so every command Claude runs is sandboxed or appears in `excludedCommands`
 - **Default**: `true`
 
 This enforces strict sandbox mode for everyone the managed settings cover:
@@ -1215,6 +1217,7 @@ managed-settings.json
 ```
 
 An unsandboxed retry goes through the regular permission flow, with a prompt in Manual mode. See [The unsandboxed retry escape hatch](sandboxing.md).
+To see when commands you type yourself at the [`!` shell-mode prompt](interactive-mode.md) run sandboxed, see [strict sandbox mode](sandboxing.md).
 
 ### [​](#sandbox-filesystem) `sandbox.filesystem`
 
@@ -2172,6 +2175,24 @@ settings.json
 }
 ```
 
+### [​](#bashoutputmaxchars) `bashOutputMaxChars`
+
+Set how many characters of a successful Bash or PowerShell command’s [output Claude receives inline](tools-reference.md). When output passes the limit, Claude Code saves it to a file and Claude receives a short preview plus the file’s path. Raise the limit when command output, such as a verbose build or a full test-suite log, routinely overflows the default and you want Claude to read it without opening the file. Requires Claude Code v2.1.261 or later.
+
+- **Scope**: [`Any file`](#scopes)
+- **Type**: number of characters, a positive integer. Claude Code clamps the value into the range `4000` to `128000`
+- **Default**: unset, so Claude receives up to 30,000 characters inline
+
+settings.json
+
+```shiki
+{
+  "bashOutputMaxChars": 100000
+}
+```
+
+When you set this key, Claude Code ignores the [`BASH_MAX_OUTPUT_LENGTH`](env-vars.md) environment variable.
+
 ### [​](#claudemd) `claudeMd`
 
 Inject CLAUDE.md-style instructions as organization-managed memory without deploying a separate file. Claude Code loads the text as a managed memory entry ahead of user and project CLAUDE.md files.
@@ -2328,6 +2349,24 @@ settings.json
 ```
 
 Raise it to keep long descriptions intact at the cost of more context per turn; lower it to fit more skills under [`skillListingBudgetFraction`](#skilllistingbudgetfraction).
+
+### [​](#taskoutputmaxchars) `taskOutputMaxChars`
+
+Set how many characters of a [background task’s](tools-reference.md) output Claude receives inline when Claude reads the task with the `TaskOutput` tool. When a finished task’s output is longer, Claude receives the most recent characters. Raise the limit when your background tasks routinely produce more output than the default. Requires Claude Code v2.1.261 or later.
+
+- **Scope**: [`Any file`](#scopes)
+- **Type**: number of characters, a positive integer. Claude Code clamps the value into the range `4000` to `128000`
+- **Default**: unset, so Claude receives up to 32,000 characters inline
+
+settings.json
+
+```shiki
+{
+  "taskOutputMaxChars": 100000
+}
+```
+
+When you set this key, Claude Code ignores the [`TASK_MAX_OUTPUT_LENGTH`](env-vars.md) environment variable.
 
 ## [​](#interface-and-terminal) Interface and terminal
 
@@ -2601,23 +2640,13 @@ Footer badges render alongside a [custom status line](statusline.md) when one is
 
 ### [​](#keybindingflavor) `keybindingFlavor`
 
-Choose which convention `Ctrl+W` follows in the prompt input. Set it to `"readline"` to make `Ctrl+W` delete back to the previous whitespace, as Bash does, so a path or a `--flag=value` goes in one press. Requires Claude Code v2.1.238 or later.
+Deprecated since v2.1.261 and has no effect. The prompt’s word-editing keys always [follow readline conventions](interactive-mode.md), as in Bash. Claude Code still accepts `keybindingFlavor`, so a settings file that sets it stays valid.
+
+In v2.1.238 through v2.1.260, setting it to `"readline"` made `Ctrl+W` delete back to the previous whitespace instead of only the previous word.
 
 - **Scope**: [`Any file`](#scopes)
-- **Type**: string, one of:
-  - `"classic"`: `Ctrl+W` deletes the previous word
-  - `"readline"`: `Ctrl+W` deletes back to the previous whitespace
-- **Default**: `"classic"`
-
-settings.json
-
-```shiki
-{
-  "keybindingFlavor": "readline"
-}
-```
-
-See [Make editing keys follow readline conventions](interactive-mode.md) for the per-key behavior.
+- **Type**: string, `"classic"` or `"readline"`
+- **Default**: unset
 
 ### [​](#prefersreducedmotion) `prefersReducedMotion`
 

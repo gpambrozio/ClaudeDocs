@@ -69,7 +69,7 @@ Claude Code keeps the terminal cursor on the input caret, so your screen readerâ
 As you type at the end of the input line, or press `Backspace` there, Claude Code writes only the characters that change. Your screen reader echoes only those characters.
 When you delete a word or a line with one of the [text editing shortcuts](interactive-mode.md), Claude Code announces the deleted text:
 
-- Deleting a word with `Ctrl+W`, `Option+Delete` on macOS, or `Ctrl+Backspace` on Windows
+- Deleting words with `Ctrl+W` or `Alt+D`, or with `Option+Delete` on macOS or `Ctrl+Backspace` on Windows
 - Deleting to the start of the line with `Ctrl+U` or `Cmd+Backspace`
 - Deleting to the end of the line with `Ctrl+K`
 

@@ -1,5 +1,9 @@
 # List organizations
 
+To enable the Compliance API, see the setup guide.
+
+[Set up the Compliance API](manage-claude/compliance-api-access.md)
+
 Copy page
 
 

@@ -14,7 +14,7 @@
 
 
 
-RateLimitListResponse object{ data, next\_page }
+RateLimitListResponse object{ group\_type, limits, models, 3 more }
 
 ---
 

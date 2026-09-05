@@ -14,6 +14,10 @@ Each entry corresponds to one rate-limit group (either a model family
 or an API-surface category such as the Files API or Message Batches)
 and contains the set of limiter values that apply to it.
 
+When `limit` is omitted, every matching entry is returned in a single
+page; when `limit` truncates the result, follow `next_page` to fetch
+the remaining entries.
+
 ##### Query parameters
 
 
@@ -35,6 +39,18 @@ One of the following:
 "token\_count"
 
 "web\_search"
+
+
+
+limit: optional number
+
+Maximum number of items to return per page. Ranges from `1` to `1000`.
+
+When omitted, every remaining entry is returned in a single page and `next_page` is `null`.
+
+maximum1000
+
+minimum1
 
 model: optional string
 
@@ -104,7 +120,7 @@ defaultrate\_limit
 
 next\_page: string or null
 
-Token to provide in as `page` in the subsequent request to retrieve the next page of data.
+Opaque cursor for the next page of results, or `null` when no entries remain beyond this response.
 
 List Organization Rate Limits
 
@@ -113,7 +129,7 @@ cURL
 ```shiki
 curl https://api.anthropic.com/v1/organizations/rate_limits \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
 Response 200

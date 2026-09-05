@@ -70,6 +70,17 @@ Restarting doesn’t lose your conversation. Run `claude --resume` in the same d
 
 If characters render as boxes, smears, or the wrong glyphs when running Claude Code in the VS Code, Cursor, or Devin Desktop integrated terminal, the terminal’s GPU renderer is likely the cause. Run `/terminal-setup` inside Claude Code to set `terminal.integrated.gpuAcceleration` to `"off"`, or set it manually in your editor settings and reload the window. See [Terminal configuration](terminal-config.md) for the other settings `/terminal-setup` writes.
 
+### [​](#mouse-wheel-scrolls-one-line-at-a-time-in-fullscreen-rendering) Mouse wheel scrolls one line at a time in fullscreen rendering
+
+In [fullscreen rendering](fullscreen.md), Claude Code scrolls the conversation itself rather than leaving it to your terminal. If each wheel notch moves fewer lines than you want, run `/scroll-speed` to raise the number of lines per notch and save it, or set the `CLAUDE_CODE_SCROLL_SPEED` environment variable, except in the JetBrains IDE terminal, where Claude Code applies its own scroll handling and neither takes effect. See [Mouse wheel scrolling](fullscreen.md) for the values each accepts.
+To move faster without changing the speed, press `PgUp` and `PgDn` to scroll half a screen at a time. To hand scrolling back to your terminal’s native scrollback instead, run `/tui default` to switch to the classic renderer.
+
+### [​](#clipboard-commands-such-as-pbcopy-fail-inside-the-sandbox) Clipboard commands such as `pbcopy` fail inside the sandbox
+
+When [sandboxing](sandboxing.md) is on, clipboard utilities such as `pbcopy`, `xclip`, and `wl-copy` can fail to reach the system clipboard from inside a sandboxed Bash command, leaving your clipboard unchanged after Claude pipes text to them.
+To put Claude’s output on your clipboard, ask Claude to print the content in its response, then run [`/copy`](commands.md). `/copy` writes to the clipboard from the Claude Code process itself rather than from a sandboxed command, so sandboxing doesn’t block it. It can copy a single code block instead of the whole response, and it also writes what it copied to a file and prints the path, which gives you a fallback when the clipboard write doesn’t reach your terminal, for example over SSH.
+To let a piped command reach the clipboard directly instead, add `pbcopy *`, `wl-copy *`, or `xclip *` to [`excludedCommands`](settings-reference.md) so the command runs outside the sandbox.
+
 ### [​](#search-and-discovery-issues) Search and discovery issues
 
 If the Search tool, `@file` mentions, custom agents, or custom skills aren’t finding files, the bundled `ripgrep` binary may not run on your system. Install your platform’s `ripgrep` package and tell Claude Code to use it instead:
