@@ -1,147 +1,88 @@
 # Get Skill Version
 
-Copy page
+`$ ant beta:skills:versions retrieve`
 
-
-
-CLI
-
-# Get Skill Version
-
-$ ant beta:skills:versions retrieve
-
-GET/v1/skills/{skill\_id}/versions/{version}
+**GET** `/v1/skills/{skill_id}/versions/{version}`
 
 Get Skill Version
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `--skill-id: string`
 
---skill-id: string
+  Path param: Unique identifier for the skill.
 
-Path param: Unique identifier for the skill.
+  The format and length of IDs may change over time.
 
-The format and length of IDs may change over time.
+- `--version: string`
 
-
+  Path param: Identifies the skill version: a version ID, or the literal `latest` for the skill's most recent version.
 
---version: string
+  Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
-Path param: Version identifier for the skill.
+- `--beta: optional array of AnthropicBeta`
 
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+  Header param: Optional header to specify the beta version(s) you want to use.
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+## Returns
 
-Header param: Optional header to specify the beta version(s) you want to use.
+- `beta_skill_version: object`
 
-##### ReturnsExpand Collapse
+  - `id: string`
 
-
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
 
-BetaSkillVersionGetResponse: object { id, created\_at, description, 5 more } 
+  - `created_at: string`
 
-
+    ISO 8601 timestamp of when the skill was created.
 
-id: string
+    format: date-time
 
-Unique identifier for the skill version.
+  - `description: string`
 
-The format and length of IDs may change over time.
+    Description of the skill version.
 
-created\_at: string
+    This is extracted from the SKILL.md file in the skill upload.
 
-ISO 8601 timestamp of when the skill version was created.
+  - `name: string`
 
-
+    The Skill's immutable kebab-case slug, set at creation from the first
+    upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
+    later upload must resolve to the same value. Also the top-level directory
+    of the Skill's mounted files and the base name of a downloaded archive.
 
-description: string
+  - `skill_id: string`
 
-Description of the skill version.
+    Unique identifier for the skill.
 
-This is extracted from the SKILL.md file in the skill upload.
+    The format and length of IDs may change over time.
 
-
+  - `type: "skill_version"`
 
-directory: string
+    Object type.
 
-Directory name of the skill version.
+    For Skill Versions, this is always `"skill_version"`.
 
-This is the top-level directory name that was extracted from the uploaded files.
+## Example
 
-
-
-name: string
-
-Human-readable name of the skill version.
-
-This is extracted from the SKILL.md file in the skill upload.
-
-skill\_id: string
-
-Identifier for the skill that this version belongs to.
-
-
-
-type: string
-
-Object type.
-
-For Skill Versions, this is always `"skill_version"`.
-
-
-
-version: string
-
-Version identifier for the skill.
-
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
-
-Get Skill Version
-
-CLI
-
-```shiki
+```bash
 ant beta:skills:versions retrieve \
   --api-key my-anthropic-api-key \
   --skill-id skill_id \
   --version version
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
-  "id": "skillver_01JAbcdefghijklmnopqrstuvw",
+  "id": "id",
   "created_at": "2024-10-30T23:58:27.427722Z",
-  "description": "A custom skill for doing something useful",
-  "directory": "my-skill",
-  "name": "my-skill",
+  "description": "description",
+  "name": "name",
   "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type",
-  "version": "1759178010641129"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "skillver_01JAbcdefghijklmnopqrstuvw",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "description": "A custom skill for doing something useful",
-  "directory": "my-skill",
-  "name": "my-skill",
-  "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type",
-  "version": "1759178010641129"
+  "type": "skill_version"
 }
 ```
 

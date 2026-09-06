@@ -1,168 +1,154 @@
 # Delete Skill Version
 
-Copy page
+`beta.skills.versions.delete(version, **kwargs) -> BetaDeletedSkillVersion`
 
-
-
-Ruby
-
-# Delete Skill Version
-
-beta.skills.versions.delete(version, \*\*kwargs) -> [VersionDeleteResponse](api/beta/skills/versions.md) { id, type }
-
-DELETE/v1/skills/{skill\_id}/versions/{version}
+**DELETE** `/v1/skills/{skill_id}/versions/{version}`
 
 Delete Skill Version
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `skill_id: String`
 
-skill\_id: String
+  Unique identifier for the skill.
 
-Unique identifier for the skill.
+  The format and length of IDs may change over time.
 
-The format and length of IDs may change over time.
+- `version: String`
 
-
+  Identifies the skill version by its version ID.
 
-version: String
+  Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
-Version identifier for the skill.
+- `betas: Array[AnthropicBeta]`
 
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+  Optional header to specify the beta version(s) you want to use.
 
-
+  - `String = String`
 
-betas: Array[[AnthropicBeta](api/beta.md)]
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
 
-Optional header to specify the beta version(s) you want to use.
+    - `:"message-batches-2024-09-24"`
 
-One of the following:
+    - `:"prompt-caching-2024-07-31"`
 
-String = String
+    - `:"computer-use-2024-10-22"`
 
-
+    - `:"computer-use-2025-01-24"`
 
-AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more
+    - `:"pdfs-2024-09-25"`
 
-One of the following:
+    - `:"token-counting-2024-11-01"`
 
-:"message-batches-2024-09-24"
+    - `:"token-efficient-tools-2025-02-19"`
 
-:"prompt-caching-2024-07-31"
+    - `:"output-128k-2025-02-19"`
 
-:"computer-use-2024-10-22"
+    - `:"files-api-2025-04-14"`
 
-:"computer-use-2025-01-24"
+    - `:"mcp-client-2025-04-04"`
 
-:"pdfs-2024-09-25"
+    - `:"mcp-client-2025-11-20"`
 
-:"token-counting-2024-11-01"
+    - `:"dev-full-thinking-2025-05-14"`
 
-:"token-efficient-tools-2025-02-19"
+    - `:"interleaved-thinking-2025-05-14"`
 
-:"output-128k-2025-02-19"
+    - `:"code-execution-2025-05-22"`
 
-:"files-api-2025-04-14"
+    - `:"extended-cache-ttl-2025-04-11"`
 
-:"mcp-client-2025-04-04"
+    - `:"context-1m-2025-08-07"`
 
-:"mcp-client-2025-11-20"
+    - `:"context-management-2025-06-27"`
 
-:"dev-full-thinking-2025-05-14"
+    - `:"model-context-window-exceeded-2025-08-26"`
 
-:"interleaved-thinking-2025-05-14"
+    - `:"skills-2025-10-02"`
 
-:"code-execution-2025-05-22"
+    - `:"fast-mode-2026-02-01"`
 
-:"extended-cache-ttl-2025-04-11"
+    - `:"output-300k-2026-03-24"`
 
-:"context-1m-2025-08-07"
+    - `:"user-profiles-2026-03-24"`
 
-:"context-management-2025-06-27"
+    - `:"user-profiles-2026-08-18"`
 
-:"model-context-window-exceeded-2025-08-26"
+    - `:"advisor-tool-2026-03-01"`
 
-:"skills-2025-10-02"
+    - `:"managed-agents-2026-04-01"`
 
-:"fast-mode-2026-02-01"
+    - `:"cache-diagnosis-2026-04-07"`
 
-:"output-300k-2026-03-24"
+    - `:"dreaming-2026-04-21"`
 
-:"user-profiles-2026-03-24"
+    - `:"thinking-token-count-2026-05-13"`
 
-:"advisor-tool-2026-03-01"
+    - `:"server-side-fallback-2026-06-01"`
 
-:"managed-agents-2026-04-01"
+    - `:"server-side-fallback-2026-07-01"`
 
-:"cache-diagnosis-2026-04-07"
+    - `:"fallback-credit-2026-06-01"`
 
-:"thinking-token-count-2026-05-13"
+    - `:"fallback-credit-2026-07-01"`
 
-:"server-side-fallback-2026-06-01"
+    - `:"agent-memory-2026-07-22"`
 
-:"fallback-credit-2026-06-01"
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
-:"agent-memory-2026-07-22"
+    - `:"compact-2026-01-12"`
 
-##### ReturnsExpand Collapse
+    - `:"computer-use-2025-11-24"`
 
-
+    - `:"mcp-tunnels-2026-06-22"`
 
-class VersionDeleteResponse { id, type } 
+    - `:"structured-outputs-2025-11-13"`
 
-
+    - `:"task-budgets-2026-03-13"`
 
-id: String
+    - `:"thinking-display-updates-2026-08-18"`
 
-Version identifier for the skill.
+    - `:"ce-user-management-2026-07-13"`
 
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+    - `:"mid-conversation-output-config-2026-07-01"`
 
-
+    - `:"thinking-binding-controls-2026-08-01"`
 
-type: String
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
 
-Deleted object type.
+## Returns
 
-For Skill Versions, this is always `"skill_version_deleted"`.
+- `class BetaDeletedSkillVersion`
 
-Delete Skill Version
+  - `id: String`
 
-Ruby
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
 
-```shiki
+  - `type: :skill_version_deleted`
+
+    Deleted object type.
+
+    For Skill Versions, this is always `"skill_version_deleted"`.
+
+## Example
+
+```ruby
 require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-version = anthropic.beta.skills.versions.delete("version", skill_id: "skill_id")
+beta_deleted_skill_version = anthropic.beta.skills.versions.delete("version", skill_id: "skill_id")
 
-puts(version)
+puts(beta_deleted_skill_version)
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
-  "id": "1759178010641129",
-  "type": "type"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "1759178010641129",
-  "type": "type"
+  "id": "id",
+  "type": "skill_version_deleted"
 }
 ```
 

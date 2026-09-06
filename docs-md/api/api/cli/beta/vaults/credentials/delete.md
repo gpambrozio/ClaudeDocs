@@ -1,80 +1,49 @@
 # Delete Credential
 
-Copy page
+`$ ant beta:vaults:credentials delete`
 
-
-
-CLI
-
-# Delete Credential
-
-$ ant beta:vaults:credentials delete
-
-DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
+**DELETE** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
 Delete Credential
 
-##### ParametersExpand Collapse
+## Parameters
 
---vault-id: string
+- `--vault-id: string`
 
-Path param: Path parameter vault\_id
+  Path param: Path parameter vault_id
 
---credential-id: string
+- `--credential-id: string`
 
-Path param: Path parameter credential\_id
+  Path param: Path parameter credential_id
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--beta: optional array of AnthropicBeta`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `beta_managed_agents_deleted_credential: object`
 
-beta\_managed\_agents\_deleted\_credential: object { id, type } 
+  Confirmation of a deleted credential.
 
-Confirmation of a deleted credential.
+  - `id: string`
 
-id: string
+    Unique identifier of the deleted credential.
 
-Unique identifier of the deleted credential.
+  - `type: "vault_credential_deleted"`
 
-
+## Example
 
-type: "vault\_credential\_deleted"
-
-"vault\_credential\_deleted"
-
-Delete Credential
-
-CLI
-
-```shiki
+```bash
 ant beta:vaults:credentials delete \
   --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv \
   --credential-id vcrd_011CZkZEMt8gZan2iYOQfSkw
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
-  "type": "vault_credential_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
   "type": "vault_credential_deleted"

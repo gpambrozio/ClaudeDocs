@@ -1,190 +1,1043 @@
 # Models
 
-Copy page
+## List Models
 
-
+**GET** `/v1/models`
 
-cURL
+List available models.
 
-# Models
+The Models API response can be used to determine which models are available for use in the API. More recently released models are listed first.
 
-##### [List Models](api/http/models/list.md)
+### Query parameters
 
-GET/v1/models
+- `after_id: optional string`
 
-##### [Get a Model](api/http/models/retrieve.md)
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-GET/v1/models/{model\_id}
+- `before_id: optional string`
 
-##### Models
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-
+- `limit: optional number`
 
-CapabilitySupport object{ supported }
+  Number of items to return per page.
 
-Indicates whether a capability is supported.
+  Defaults to `20`. Ranges from `1` to `1000`.
 
-supported: boolean
+  default: 20, maximum: 1000, minimum: 1
 
-Whether this capability is supported by the model.
+### Headers
 
-
+- `"anthropic-beta": optional array of AnthropicBeta`
 
-ContextManagementCapability object{ clear\_thinking\_20251015, clear\_tool\_uses\_20250919, compact\_20260112, supported }
+  Optional header to specify the beta version(s) you want to use.
 
-Context management capability details.
+  - `string`
 
-
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
-clear\_thinking\_20251015: [CapabilitySupport](api/http/models.md) { supported } or null
+    - `"message-batches-2024-09-24"`
 
-Indicates whether a capability is supported.
+    - `"prompt-caching-2024-07-31"`
 
-supported: boolean
+    - `"computer-use-2024-10-22"`
 
-Whether this capability is supported by the model.
+    - `"computer-use-2025-01-24"`
 
-
+    - `"pdfs-2024-09-25"`
 
-clear\_tool\_uses\_20250919: [CapabilitySupport](api/http/models.md) { supported } or null
+    - `"token-counting-2024-11-01"`
 
-Indicates whether a capability is supported.
+    - `"token-efficient-tools-2025-02-19"`
 
-supported: boolean
+    - `"output-128k-2025-02-19"`
 
-Whether this capability is supported by the model.
+    - `"files-api-2025-04-14"`
 
-
+    - `"mcp-client-2025-04-04"`
 
-compact\_20260112: [CapabilitySupport](api/http/models.md) { supported } or null
+    - `"mcp-client-2025-11-20"`
 
-Indicates whether a capability is supported.
+    - `"dev-full-thinking-2025-05-14"`
 
-supported: boolean
+    - `"interleaved-thinking-2025-05-14"`
 
-Whether this capability is supported by the model.
+    - `"code-execution-2025-05-22"`
 
-supported: boolean
+    - `"extended-cache-ttl-2025-04-11"`
 
-Whether this capability is supported by the model.
+    - `"context-1m-2025-08-07"`
 
-
+    - `"context-management-2025-06-27"`
 
-EffortCapability object{ high, low, max, 3 more }
+    - `"model-context-window-exceeded-2025-08-26"`
 
-Effort (reasoning\_effort) capability details.
+    - `"skills-2025-10-02"`
 
-
+    - `"fast-mode-2026-02-01"`
 
-ModelCapabilities object{ batch, citations, code\_execution, 6 more }
+    - `"output-300k-2026-03-24"`
 
-Model capability information.
+    - `"user-profiles-2026-03-24"`
 
-
+    - `"user-profiles-2026-08-18"`
 
-ModelInfo object{ id, capabilities, created\_at, 4 more }
+    - `"advisor-tool-2026-03-01"`
 
-id: string
+    - `"managed-agents-2026-04-01"`
 
-Unique model identifier.
+    - `"cache-diagnosis-2026-04-07"`
 
-
+    - `"dreaming-2026-04-21"`
 
-capabilities: [ModelCapabilities](api/http/models.md) { batch, citations, code\_execution, 6 more } or null
+    - `"thinking-token-count-2026-05-13"`
 
-Model capability information.
+    - `"server-side-fallback-2026-06-01"`
 
-
+    - `"server-side-fallback-2026-07-01"`
 
-created\_at: string
+    - `"fallback-credit-2026-06-01"`
 
-RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
+    - `"fallback-credit-2026-07-01"`
 
-formatdate-time
+    - `"agent-memory-2026-07-22"`
 
-display\_name: string
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-A human-readable name for the model.
+    - `"compact-2026-01-12"`
 
-max\_input\_tokens: number or null
+    - `"computer-use-2025-11-24"`
 
-Maximum input context window size in tokens for this model.
+    - `"mcp-tunnels-2026-06-22"`
 
-max\_tokens: number or null
+    - `"structured-outputs-2025-11-13"`
 
-Maximum value for the `max_tokens` parameter when using this model.
+    - `"task-budgets-2026-03-13"`
 
-
+    - `"thinking-display-updates-2026-08-18"`
 
-type: "model"
+    - `"ce-user-management-2026-07-13"`
 
-Object type.
+    - `"mid-conversation-output-config-2026-07-01"`
 
-For Models, this is always `"model"`.
+    - `"thinking-binding-controls-2026-08-01"`
 
-defaultmodel
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-
+### Returns
 
-ThinkingCapability object{ supported, types }
+- `data: array of ModelInfo`
 
-Thinking capability details.
+  - `id: string`
 
-supported: boolean
+    Unique model identifier.
 
-Whether this capability is supported by the model.
+  - `capabilities: ModelCapabilities or null`
 
-
+    Model capability information.
 
-types: [ThinkingTypes](api/http/models.md) { adaptive, enabled }
+    - `batch: CapabilitySupport`
 
-Supported thinking type configurations.
+      Whether the model supports the Batch API.
 
-
+      - `supported: boolean`
 
-adaptive: [CapabilitySupport](api/http/models.md) { supported }
+        Whether this capability is supported by the model.
 
-Whether the model supports thinking with type 'adaptive' (auto).
+    - `citations: CapabilitySupport`
 
-supported: boolean
+      Whether the model supports citation generation.
 
-Whether this capability is supported by the model.
+    - `code_execution: CapabilitySupport`
 
-
+      Whether the model supports code execution tools.
 
-enabled: [CapabilitySupport](api/http/models.md) { supported }
+    - `context_management: ContextManagementCapability`
 
-Whether the model supports thinking with type 'enabled'.
+      Context management support and available strategies.
 
-supported: boolean
+      - `clear_thinking_20251015: CapabilitySupport or null`
 
-Whether this capability is supported by the model.
+        Indicates whether a capability is supported.
 
-
+      - `clear_tool_uses_20250919: CapabilitySupport or null`
 
-ThinkingTypes object{ adaptive, enabled }
+        Indicates whether a capability is supported.
 
-Supported thinking type configurations.
+      - `compact_20260112: CapabilitySupport or null`
 
-
+        Indicates whether a capability is supported.
 
-adaptive: [CapabilitySupport](api/http/models.md) { supported }
+      - `supported: boolean`
 
-Whether the model supports thinking with type 'adaptive' (auto).
+        Whether this capability is supported by the model.
 
-supported: boolean
+    - `effort: EffortCapability`
 
-Whether this capability is supported by the model.
+      Effort (reasoning_effort) support and available levels.
 
-
+      - `high: CapabilitySupport`
 
-enabled: [CapabilitySupport](api/http/models.md) { supported }
+        Whether the model supports high effort level.
 
-Whether the model supports thinking with type 'enabled'.
+      - `low: CapabilitySupport`
 
-supported: boolean
+        Whether the model supports low effort level.
 
-Whether this capability is supported by the model.
+      - `max: CapabilitySupport`
+
+        Whether the model supports max effort level.
+
+      - `medium: CapabilitySupport`
+
+        Whether the model supports medium effort level.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+      - `xhigh: CapabilitySupport or null`
+
+        Indicates whether a capability is supported.
+
+    - `image_input: CapabilitySupport`
+
+      Whether the model accepts image content blocks.
+
+    - `pdf_input: CapabilitySupport`
+
+      Whether the model accepts PDF content blocks.
+
+    - `structured_outputs: CapabilitySupport`
+
+      Whether the model supports structured output / JSON mode / strict tool schemas.
+
+    - `thinking: ThinkingCapability`
+
+      Thinking capability and supported type configurations.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+      - `types: ThinkingTypes`
+
+        Supported thinking type configurations.
+
+        - `adaptive: CapabilitySupport`
+
+          Whether the model supports thinking with type 'adaptive' (auto).
+
+        - `enabled: CapabilitySupport`
+
+          Whether the model supports thinking with type 'enabled'.
+
+  - `created_at: string`
+
+    RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
+
+    format: date-time
+
+  - `display_name: string`
+
+    A human-readable name for the model.
+
+  - `max_input_tokens: number or null`
+
+    Maximum input context window size in tokens for this model.
+
+  - `max_tokens: number or null`
+
+    Maximum value for the `max_tokens` parameter when using this model.
+
+  - `type: "model"`
+
+    Object type.
+
+    For Models, this is always `"model"`.
+
+    default: model
+
+- `first_id: string or null`
+
+  First ID in the `data` list. Can be used as the `before_id` for the previous page.
+
+- `has_more: boolean`
+
+  Indicates if there are more results in the requested page direction.
+
+- `last_id: string or null`
+
+  Last ID in the `data` list. Can be used as the `after_id` for the next page.
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/models \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "claude-opus-5",
+      "capabilities": {
+        "batch": {
+          "supported": true
+        },
+        "citations": {
+          "supported": true
+        },
+        "code_execution": {
+          "supported": true
+        },
+        "context_management": {
+          "clear_thinking_20251015": {
+            "supported": true
+          },
+          "clear_tool_uses_20250919": {
+            "supported": true
+          },
+          "compact_20260112": {
+            "supported": true
+          },
+          "supported": true
+        },
+        "effort": {
+          "high": {
+            "supported": true
+          },
+          "low": {
+            "supported": true
+          },
+          "max": {
+            "supported": true
+          },
+          "medium": {
+            "supported": true
+          },
+          "supported": true,
+          "xhigh": {
+            "supported": true
+          }
+        },
+        "image_input": {
+          "supported": true
+        },
+        "pdf_input": {
+          "supported": true
+        },
+        "structured_outputs": {
+          "supported": true
+        },
+        "thinking": {
+          "supported": true,
+          "types": {
+            "adaptive": {
+              "supported": true
+            },
+            "enabled": {
+              "supported": true
+            }
+          }
+        }
+      },
+      "created_at": "2026-07-24T00:00:00Z",
+      "display_name": "Claude Opus 5",
+      "max_input_tokens": 0,
+      "max_tokens": 0,
+      "type": "model"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
+
+## Get a Model
+
+**GET** `/v1/models/{model_id}`
+
+Get a specific model.
+
+The Models API response can be used to determine information about a specific model or resolve a model alias to a model ID.
+
+### Path parameters
+
+- `model_id: string`
+
+  Model identifier or alias.
+
+### Headers
+
+- `"anthropic-beta": optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `string`
+
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `ModelInfo object`
+
+  - `id: string`
+
+    Unique model identifier.
+
+  - `capabilities: ModelCapabilities or null`
+
+    Model capability information.
+
+    - `batch: CapabilitySupport`
+
+      Whether the model supports the Batch API.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+    - `citations: CapabilitySupport`
+
+      Whether the model supports citation generation.
+
+    - `code_execution: CapabilitySupport`
+
+      Whether the model supports code execution tools.
+
+    - `context_management: ContextManagementCapability`
+
+      Context management support and available strategies.
+
+      - `clear_thinking_20251015: CapabilitySupport or null`
+
+        Indicates whether a capability is supported.
+
+      - `clear_tool_uses_20250919: CapabilitySupport or null`
+
+        Indicates whether a capability is supported.
+
+      - `compact_20260112: CapabilitySupport or null`
+
+        Indicates whether a capability is supported.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+    - `effort: EffortCapability`
+
+      Effort (reasoning_effort) support and available levels.
+
+      - `high: CapabilitySupport`
+
+        Whether the model supports high effort level.
+
+      - `low: CapabilitySupport`
+
+        Whether the model supports low effort level.
+
+      - `max: CapabilitySupport`
+
+        Whether the model supports max effort level.
+
+      - `medium: CapabilitySupport`
+
+        Whether the model supports medium effort level.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+      - `xhigh: CapabilitySupport or null`
+
+        Indicates whether a capability is supported.
+
+    - `image_input: CapabilitySupport`
+
+      Whether the model accepts image content blocks.
+
+    - `pdf_input: CapabilitySupport`
+
+      Whether the model accepts PDF content blocks.
+
+    - `structured_outputs: CapabilitySupport`
+
+      Whether the model supports structured output / JSON mode / strict tool schemas.
+
+    - `thinking: ThinkingCapability`
+
+      Thinking capability and supported type configurations.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+      - `types: ThinkingTypes`
+
+        Supported thinking type configurations.
+
+        - `adaptive: CapabilitySupport`
+
+          Whether the model supports thinking with type 'adaptive' (auto).
+
+        - `enabled: CapabilitySupport`
+
+          Whether the model supports thinking with type 'enabled'.
+
+  - `created_at: string`
+
+    RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
+
+    format: date-time
+
+  - `display_name: string`
+
+    A human-readable name for the model.
+
+  - `max_input_tokens: number or null`
+
+    Maximum input context window size in tokens for this model.
+
+  - `max_tokens: number or null`
+
+    Maximum value for the `max_tokens` parameter when using this model.
+
+  - `type: "model"`
+
+    Object type.
+
+    For Models, this is always `"model"`.
+
+    default: model
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/models/$MODEL_ID \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "claude-opus-5",
+  "capabilities": {
+    "batch": {
+      "supported": true
+    },
+    "citations": {
+      "supported": true
+    },
+    "code_execution": {
+      "supported": true
+    },
+    "context_management": {
+      "clear_thinking_20251015": {
+        "supported": true
+      },
+      "clear_tool_uses_20250919": {
+        "supported": true
+      },
+      "compact_20260112": {
+        "supported": true
+      },
+      "supported": true
+    },
+    "effort": {
+      "high": {
+        "supported": true
+      },
+      "low": {
+        "supported": true
+      },
+      "max": {
+        "supported": true
+      },
+      "medium": {
+        "supported": true
+      },
+      "supported": true,
+      "xhigh": {
+        "supported": true
+      }
+    },
+    "image_input": {
+      "supported": true
+    },
+    "pdf_input": {
+      "supported": true
+    },
+    "structured_outputs": {
+      "supported": true
+    },
+    "thinking": {
+      "supported": true,
+      "types": {
+        "adaptive": {
+          "supported": true
+        },
+        "enabled": {
+          "supported": true
+        }
+      }
+    }
+  },
+  "created_at": "2026-07-24T00:00:00Z",
+  "display_name": "Claude Opus 5",
+  "max_input_tokens": 0,
+  "max_tokens": 0,
+  "type": "model"
+}
+```
+
+## Domain types
+
+### Capability Support
+
+- `CapabilitySupport object`
+
+  Indicates whether a capability is supported.
+
+  - `supported: boolean`
+
+    Whether this capability is supported by the model.
+
+### Context Management Capability
+
+- `ContextManagementCapability object`
+
+  Context management capability details.
+
+  - `clear_thinking_20251015: CapabilitySupport or null`
+
+    Indicates whether a capability is supported.
+
+    - `supported: boolean`
+
+      Whether this capability is supported by the model.
+
+  - `clear_tool_uses_20250919: CapabilitySupport or null`
+
+    Indicates whether a capability is supported.
+
+  - `compact_20260112: CapabilitySupport or null`
+
+    Indicates whether a capability is supported.
+
+  - `supported: boolean`
+
+    Whether this capability is supported by the model.
+
+### Effort Capability
+
+- `EffortCapability object`
+
+  Effort (reasoning_effort) capability details.
+
+  - `high: CapabilitySupport`
+
+    Whether the model supports high effort level.
+
+    - `supported: boolean`
+
+      Whether this capability is supported by the model.
+
+  - `low: CapabilitySupport`
+
+    Whether the model supports low effort level.
+
+  - `max: CapabilitySupport`
+
+    Whether the model supports max effort level.
+
+  - `medium: CapabilitySupport`
+
+    Whether the model supports medium effort level.
+
+  - `supported: boolean`
+
+    Whether this capability is supported by the model.
+
+  - `xhigh: CapabilitySupport or null`
+
+    Indicates whether a capability is supported.
+
+### Model Capabilities
+
+- `ModelCapabilities object`
+
+  Model capability information.
+
+  - `batch: CapabilitySupport`
+
+    Whether the model supports the Batch API.
+
+    - `supported: boolean`
+
+      Whether this capability is supported by the model.
+
+  - `citations: CapabilitySupport`
+
+    Whether the model supports citation generation.
+
+  - `code_execution: CapabilitySupport`
+
+    Whether the model supports code execution tools.
+
+  - `context_management: ContextManagementCapability`
+
+    Context management support and available strategies.
+
+    - `clear_thinking_20251015: CapabilitySupport or null`
+
+      Indicates whether a capability is supported.
+
+    - `clear_tool_uses_20250919: CapabilitySupport or null`
+
+      Indicates whether a capability is supported.
+
+    - `compact_20260112: CapabilitySupport or null`
+
+      Indicates whether a capability is supported.
+
+    - `supported: boolean`
+
+      Whether this capability is supported by the model.
+
+  - `effort: EffortCapability`
+
+    Effort (reasoning_effort) support and available levels.
+
+    - `high: CapabilitySupport`
+
+      Whether the model supports high effort level.
+
+    - `low: CapabilitySupport`
+
+      Whether the model supports low effort level.
+
+    - `max: CapabilitySupport`
+
+      Whether the model supports max effort level.
+
+    - `medium: CapabilitySupport`
+
+      Whether the model supports medium effort level.
+
+    - `supported: boolean`
+
+      Whether this capability is supported by the model.
+
+    - `xhigh: CapabilitySupport or null`
+
+      Indicates whether a capability is supported.
+
+  - `image_input: CapabilitySupport`
+
+    Whether the model accepts image content blocks.
+
+  - `pdf_input: CapabilitySupport`
+
+    Whether the model accepts PDF content blocks.
+
+  - `structured_outputs: CapabilitySupport`
+
+    Whether the model supports structured output / JSON mode / strict tool schemas.
+
+  - `thinking: ThinkingCapability`
+
+    Thinking capability and supported type configurations.
+
+    - `supported: boolean`
+
+      Whether this capability is supported by the model.
+
+    - `types: ThinkingTypes`
+
+      Supported thinking type configurations.
+
+      - `adaptive: CapabilitySupport`
+
+        Whether the model supports thinking with type 'adaptive' (auto).
+
+      - `enabled: CapabilitySupport`
+
+        Whether the model supports thinking with type 'enabled'.
+
+### Model Info
+
+- `ModelInfo object`
+
+  - `id: string`
+
+    Unique model identifier.
+
+  - `capabilities: ModelCapabilities or null`
+
+    Model capability information.
+
+    - `batch: CapabilitySupport`
+
+      Whether the model supports the Batch API.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+    - `citations: CapabilitySupport`
+
+      Whether the model supports citation generation.
+
+    - `code_execution: CapabilitySupport`
+
+      Whether the model supports code execution tools.
+
+    - `context_management: ContextManagementCapability`
+
+      Context management support and available strategies.
+
+      - `clear_thinking_20251015: CapabilitySupport or null`
+
+        Indicates whether a capability is supported.
+
+      - `clear_tool_uses_20250919: CapabilitySupport or null`
+
+        Indicates whether a capability is supported.
+
+      - `compact_20260112: CapabilitySupport or null`
+
+        Indicates whether a capability is supported.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+    - `effort: EffortCapability`
+
+      Effort (reasoning_effort) support and available levels.
+
+      - `high: CapabilitySupport`
+
+        Whether the model supports high effort level.
+
+      - `low: CapabilitySupport`
+
+        Whether the model supports low effort level.
+
+      - `max: CapabilitySupport`
+
+        Whether the model supports max effort level.
+
+      - `medium: CapabilitySupport`
+
+        Whether the model supports medium effort level.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+      - `xhigh: CapabilitySupport or null`
+
+        Indicates whether a capability is supported.
+
+    - `image_input: CapabilitySupport`
+
+      Whether the model accepts image content blocks.
+
+    - `pdf_input: CapabilitySupport`
+
+      Whether the model accepts PDF content blocks.
+
+    - `structured_outputs: CapabilitySupport`
+
+      Whether the model supports structured output / JSON mode / strict tool schemas.
+
+    - `thinking: ThinkingCapability`
+
+      Thinking capability and supported type configurations.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+      - `types: ThinkingTypes`
+
+        Supported thinking type configurations.
+
+        - `adaptive: CapabilitySupport`
+
+          Whether the model supports thinking with type 'adaptive' (auto).
+
+        - `enabled: CapabilitySupport`
+
+          Whether the model supports thinking with type 'enabled'.
+
+  - `created_at: string`
+
+    RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
+
+    format: date-time
+
+  - `display_name: string`
+
+    A human-readable name for the model.
+
+  - `max_input_tokens: number or null`
+
+    Maximum input context window size in tokens for this model.
+
+  - `max_tokens: number or null`
+
+    Maximum value for the `max_tokens` parameter when using this model.
+
+  - `type: "model"`
+
+    Object type.
+
+    For Models, this is always `"model"`.
+
+    default: model
+
+### Thinking Capability
+
+- `ThinkingCapability object`
+
+  Thinking capability details.
+
+  - `supported: boolean`
+
+    Whether this capability is supported by the model.
+
+  - `types: ThinkingTypes`
+
+    Supported thinking type configurations.
+
+    - `adaptive: CapabilitySupport`
+
+      Whether the model supports thinking with type 'adaptive' (auto).
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+    - `enabled: CapabilitySupport`
+
+      Whether the model supports thinking with type 'enabled'.
+
+### Thinking Types
+
+- `ThinkingTypes object`
+
+  Supported thinking type configurations.
+
+  - `adaptive: CapabilitySupport`
+
+    Whether the model supports thinking with type 'adaptive' (auto).
+
+    - `supported: boolean`
+
+      Whether this capability is supported by the model.
+
+  - `enabled: CapabilitySupport`
+
+    Whether the model supports thinking with type 'enabled'.
 
 ---
 

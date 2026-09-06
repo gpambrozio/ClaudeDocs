@@ -1,114 +1,88 @@
 # List Skills
 
-Copy page
+`$client->beta->skills->list(?int limit, ?string page, ?string source, ?list<AnthropicBeta> betas): PageCursor<BetaSkill>`
 
-
-
-PHP
-
-# List Skills
-
-$client->beta->skills->list(?int limit, ?string page, ?string source, ?list<AnthropicBeta> betas): PageCursor<[SkillListResponse](api/beta/skills.md)>
-
-GET/v1/skills
+**GET** `/v1/skills`
 
 List Skills
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `limit?:optional int`
 
-limit?:optional int
+  Number of results to return per page.
 
-Number of results to return per page.
+  Ranges from `1` to `1000`. Defaults to `20`.
 
-Maximum value is 100. Defaults to 20.
+  default: 20
 
-
+- `page?:optional string`
 
-page?:optional string
+  Pagination token for fetching a specific page of results.
 
-Pagination token for fetching a specific page of results.
+  Pass the value from a previous response's `next_page` field to get the next page of results.
 
-Pass the value from a previous response's `next_page` field to get the next page of results.
+- `source?:optional string`
 
-
+  Filter skills by source.
 
-source?:optional string
+  If provided, only skills from the specified source will be returned:
 
-Filter skills by source.
+  * `"custom"`: only return user-created skills
+  * `"anthropic"`: only return Anthropic-created skills
 
-If provided, only skills from the specified source will be returned:
+- `betas?:optional list<AnthropicBeta>`
 
-- `"custom"`: only return user-created skills
-- `"anthropic"`: only return Anthropic-created skills
+  Optional header to specify the beta version(s) you want to use.
 
-betas?:optional list<AnthropicBeta>
+## Returns
 
-Optional header to specify the beta version(s) you want to use.
+- `BetaSkill`
 
-##### ReturnsExpand Collapse
+  - `string id`
 
-
+    Unique identifier for the skill.
 
-[SkillListResponse](api/beta/skills.md)
+    The format and length of IDs may change over time.
 
-
+  - `\Datetime createdAt`
 
-string id
+    ISO 8601 timestamp of when the skill was created.
 
-Unique identifier for the skill.
+  - `string displayName`
 
-The format and length of IDs may change over time.
+    Human-readable, single-line label for the Skill. Maximum 255 characters.
+    Always set: derived from the SKILL.md frontmatter `name` when omitted at
+    creation. Not unique.
 
-string createdAt
+  - `string latestVersionID`
 
-ISO 8601 timestamp of when the skill was created.
+    ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
 
-
+  - `BetaSkillSource source`
 
-?string displayTitle
+    Where the Skill comes from.
 
-Display title for the skill.
+    Possible values:
 
-This is a human-readable label that is not included in the prompt sent to the model.
+    * `"custom"`: authored by the platform user; private to their workspace
+    * `"anthropic"`: published by Anthropic; shared and read-only
+    * `"anthropic_example"`: Anthropic-published sample Skill
+    * `"plugin"`: resolved from an installed plugin
 
-
+  - `"skill" type`
 
-?string latestVersion
+    Object type.
 
-The latest version identifier for the skill.
+    For Skills, this is always `"skill"`.
 
-This represents the most recent version of the skill that has been created.
+  - `\Datetime updatedAt`
 
-
+    ISO 8601 timestamp of when the skill was last updated.
 
-string source
+## Example
 
-Source of the skill.
-
-This may be one of the following values:
-
-- `"custom"`: the skill was created by a user
-- `"anthropic"`: the skill was created by Anthropic
-
-
-
-string type
-
-Object type.
-
-For Skills, this is always `"skill"`.
-
-string updatedAt
-
-ISO 8601 timestamp of when the skill was last updated.
-
-List Skills
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -116,58 +90,33 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->skills->list(
-  limit: 0,
+  limit: 1,
   page: 'page',
   source: 'source',
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($page);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
       "id": "skill_01JAbcdefghijklmnopqrstuvw",
       "created_at": "2024-10-30T23:58:27.427722Z",
-      "display_title": "My Custom Skill",
-      "latest_version": "1759178010641129",
-      "source": "custom",
-      "type": "type",
+      "display_name": "display_name",
+      "latest_version_id": "latest_version_id",
+      "source": {
+        "type": "custom"
+      },
+      "type": "skill",
       "updated_at": "2024-10-30T23:58:27.427722Z"
     }
   ],
-  "has_more": true,
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "skill_01JAbcdefghijklmnopqrstuvw",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "display_title": "My Custom Skill",
-      "latest_version": "1759178010641129",
-      "source": "custom",
-      "type": "type",
-      "updated_at": "2024-10-30T23:58:27.427722Z"
-    }
-  ],
-  "has_more": true,
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+  "next_page": "next_page"
 }
 ```
 

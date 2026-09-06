@@ -1,140 +1,156 @@
 # Retrieve a memory store
 
-Copy page
+`beta.memory_stores.retrieve(memory_store_id, **kwargs) -> BetaManagedAgentsMemoryStore`
 
-
-
-Ruby
-
-# Retrieve a memory store
-
-beta.memory\_stores.retrieve(memory\_store\_id, \*\*kwargs) -> [BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) { id, created\_at, name, 5 more }
-
-GET/v1/memory\_stores/{memory\_store\_id}
+**GET** `/v1/memory_stores/{memory_store_id}`
 
 Retrieve a memory store
 
-##### ParametersExpand Collapse
+## Parameters
 
-memory\_store\_id: String
+- `memory_store_id: String`
 
-
+- `betas: Array[AnthropicBeta]`
 
-betas: Array[[AnthropicBeta](api/beta.md)]
+  Optional header to specify the beta version(s) you want to use.
 
-Optional header to specify the beta version(s) you want to use.
+  - `String = String`
 
-One of the following:
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
 
-String = String
+    - `:"message-batches-2024-09-24"`
 
-
+    - `:"prompt-caching-2024-07-31"`
 
-AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more
+    - `:"computer-use-2024-10-22"`
 
-One of the following:
+    - `:"computer-use-2025-01-24"`
 
-:"message-batches-2024-09-24"
+    - `:"pdfs-2024-09-25"`
 
-:"prompt-caching-2024-07-31"
+    - `:"token-counting-2024-11-01"`
 
-:"computer-use-2024-10-22"
+    - `:"token-efficient-tools-2025-02-19"`
 
-:"computer-use-2025-01-24"
+    - `:"output-128k-2025-02-19"`
 
-:"pdfs-2024-09-25"
+    - `:"files-api-2025-04-14"`
 
-:"token-counting-2024-11-01"
+    - `:"mcp-client-2025-04-04"`
 
-:"token-efficient-tools-2025-02-19"
+    - `:"mcp-client-2025-11-20"`
 
-:"output-128k-2025-02-19"
+    - `:"dev-full-thinking-2025-05-14"`
 
-:"files-api-2025-04-14"
+    - `:"interleaved-thinking-2025-05-14"`
 
-:"mcp-client-2025-04-04"
+    - `:"code-execution-2025-05-22"`
 
-:"mcp-client-2025-11-20"
+    - `:"extended-cache-ttl-2025-04-11"`
 
-:"dev-full-thinking-2025-05-14"
+    - `:"context-1m-2025-08-07"`
 
-:"interleaved-thinking-2025-05-14"
+    - `:"context-management-2025-06-27"`
 
-:"code-execution-2025-05-22"
+    - `:"model-context-window-exceeded-2025-08-26"`
 
-:"extended-cache-ttl-2025-04-11"
+    - `:"skills-2025-10-02"`
 
-:"context-1m-2025-08-07"
+    - `:"fast-mode-2026-02-01"`
 
-:"context-management-2025-06-27"
+    - `:"output-300k-2026-03-24"`
 
-:"model-context-window-exceeded-2025-08-26"
+    - `:"user-profiles-2026-03-24"`
 
-:"skills-2025-10-02"
+    - `:"user-profiles-2026-08-18"`
 
-:"fast-mode-2026-02-01"
+    - `:"advisor-tool-2026-03-01"`
 
-:"output-300k-2026-03-24"
+    - `:"managed-agents-2026-04-01"`
 
-:"user-profiles-2026-03-24"
+    - `:"cache-diagnosis-2026-04-07"`
 
-:"advisor-tool-2026-03-01"
+    - `:"dreaming-2026-04-21"`
 
-:"managed-agents-2026-04-01"
+    - `:"thinking-token-count-2026-05-13"`
 
-:"cache-diagnosis-2026-04-07"
+    - `:"server-side-fallback-2026-06-01"`
 
-:"thinking-token-count-2026-05-13"
+    - `:"server-side-fallback-2026-07-01"`
 
-:"server-side-fallback-2026-06-01"
+    - `:"fallback-credit-2026-06-01"`
 
-:"fallback-credit-2026-06-01"
+    - `:"fallback-credit-2026-07-01"`
 
-:"agent-memory-2026-07-22"
+    - `:"agent-memory-2026-07-22"`
 
-##### ReturnsExpand Collapse
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
-
+    - `:"compact-2026-01-12"`
 
-class BetaManagedAgentsMemoryStore { id, created\_at, name, 5 more } 
+    - `:"computer-use-2025-11-24"`
 
-A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
+    - `:"mcp-tunnels-2026-06-22"`
 
-id: String
+    - `:"structured-outputs-2025-11-13"`
 
-Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+    - `:"task-budgets-2026-03-13"`
 
-created\_at: Time
+    - `:"thinking-display-updates-2026-08-18"`
 
-A timestamp in RFC 3339 format
+    - `:"ce-user-management-2026-07-13"`
 
-name: String
+    - `:"mid-conversation-output-config-2026-07-01"`
 
-Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
+    - `:"thinking-binding-controls-2026-08-01"`
 
-type: :memory\_store
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
 
-updated\_at: Time
+## Returns
 
-A timestamp in RFC 3339 format
+- `class BetaManagedAgentsMemoryStore`
 
-archived\_at: Time
+  A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
-A timestamp in RFC 3339 format
+  - `id: String`
 
-description: String
+    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
 
-Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+  - `created_at: Time`
 
-metadata: Hash[Symbol, String]
+    A timestamp in RFC 3339 format
 
-Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+    format: date-time
 
-Retrieve a memory store
+  - `name: String`
 
-Ruby
+    Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
-```shiki
+  - `type: :memory_store`
+
+  - `updated_at: Time`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `archived_at: Time`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `description: String`
+
+    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+
+  - `metadata: Hash[Symbol, String]`
+
+    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+
+## Example
+
+```ruby
 require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
@@ -144,32 +160,9 @@ beta_managed_agents_memory_store = anthropic.beta.memory_stores.retrieve("memory
 puts(beta_managed_agents_memory_store)
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "name": "name",
-  "type": "memory_store",
-  "updated_at": "2019-12-27T18:11:19.117Z",
-  "archived_at": "2019-12-27T18:11:19.117Z",
-  "description": "description",
-  "metadata": {
-    "foo": "string"
-  }
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "id",
   "created_at": "2019-12-27T18:11:19.117Z",

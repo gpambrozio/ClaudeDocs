@@ -1,1213 +1,1094 @@
 # Update Deployment
 
-Copy page
+`client.Beta.Deployments.Update(ctx, deploymentID, params) (*BetaManagedAgentsDeployment, error)`
 
-
-
-Go
-
-# Update Deployment
-
-client.Beta.Deployments.Update(ctx, deploymentID, params) (\*[BetaManagedAgentsDeployment](api/beta/deployments.md), error)
-
-POST/v1/deployments/{deployment\_id}
+**POST** `/v1/deployments/{deployment_id}`
 
 Update Deployment
 
-##### ParametersExpand Collapse
+## Parameters
 
-deploymentID string
+- `deploymentID string`
 
-
+- `params BetaDeploymentUpdateParams`
 
-params BetaDeploymentUpdateParams
+  - `Agent param.Field[BetaDeploymentUpdateParamsAgentUnion] Optional`
 
-
+    Body param: Agent to deploy. Accepts the `agent` ID string, which re-pins to the latest version, or an `agent` object with both id and version specified. Omit to preserve. Cannot be cleared.
 
-Agent param.Field[[BetaDeploymentUpdateParamsAgentUnion](api/beta/deployments/update.md)]Optional
+    - `string`
 
-Body param: Agent to deploy. Accepts the `agent` ID string, which re-pins to the latest version, or an `agent` object with both id and version specified. Omit to preserve. Cannot be cleared.
+    - `type BetaManagedAgentsAgentParamsResp struct{…}`
 
-string
+      Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
-
+      - `ID string`
 
-type BetaManagedAgentsAgentParamsResp struct{…}
+        The `agent` ID.
 
-Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+        minLength: 1, maxLength: 128
 
-ID string
+      - `Type BetaManagedAgentsAgentParamsType`
 
-The `agent` ID.
+      - `Version int64 Optional`
 
-Type BetaManagedAgentsAgentParamsType
+        The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
-Version int64Optional
+        format: int32
 
-The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+  - `Budget param.Field[BetaManagedAgentsBudgetLimit] Optional`
 
-Description param.Field[string]Optional
+    Body param: A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-Body param: Description. Omit to preserve; send empty string or null to clear.
+  - `Description param.Field[string] Optional`
 
-EnvironmentID param.Field[string]Optional
+    Body param: Description. Omit to preserve; send empty string or null to clear.
 
-Body param: ID of the `environment` where sessions run. Omit to preserve. Cannot be cleared.
+    maxLength: 2048
 
-
+  - `EnvironmentID param.Field[string] Optional`
 
-InitialEvents param.Field[[][BetaManagedAgentsDeploymentInitialEventParamsUnionResp](api/beta/deployments.md)]Optional
+    Body param: ID of the `environment` where sessions run. Omit to preserve. Cannot be cleared.
 
-Body param: Initial events. Full replacement. Omit to preserve. Cannot be cleared. At least 1, maximum 50.
+    maxLength: 128
 
-
+  - `InitialEvents param.Field[[]BetaManagedAgentsDeploymentInitialEventParamsUnionResp] Optional`
 
-type BetaManagedAgentsUserMessageEventParamsResp struct{…}
+    Body param: Initial events. Full replacement. Omit to preserve. Cannot be cleared. At least 1, maximum 50.
 
-Parameters for sending a user message to the session.
+    - `type BetaManagedAgentsUserMessageEventParams struct{…}`
 
-
+      Parameters for sending a user message to the session.
 
-Content []BetaManagedAgentsUserMessageEventParamsContentUnionResp
+      - `Content []BetaManagedAgentsUserMessageEventParamsContentUnionResp`
 
-Array of content blocks for the user message.
+        Array of content blocks for the user message.
 
-One of the following:
+        - `type BetaManagedAgentsTextBlock struct{…}`
 
-
+          Regular text content.
 
-type BetaManagedAgentsTextBlock struct{…}
+          - `Text string`
 
-Regular text content.
+            The text content.
 
-Text string
+            minLength: 1
 
-The text content.
+          - `Type BetaManagedAgentsTextBlockType`
 
-Type BetaManagedAgentsTextBlockType
+        - `type BetaManagedAgentsImageBlock struct{…}`
 
-
+          Image content specified directly as base64 data or as a reference via a URL.
 
-type BetaManagedAgentsImageBlock struct{…}
+          - `Source BetaManagedAgentsImageBlockSourceUnion`
 
-Image content specified directly as base64 data or as a reference via a URL.
+            Union type for image source variants.
 
-
+            - `type BetaManagedAgentsBase64ImageSource struct{…}`
 
-Source BetaManagedAgentsImageBlockSourceUnion
+              Base64-encoded image data.
 
-Union type for image source variants.
+              - `Data string`
 
-One of the following:
+                Base64-encoded image data.
 
-
+                minLength: 1
 
-type BetaManagedAgentsBase64ImageSource struct{…}
+              - `MediaType string`
 
-Base64-encoded image data.
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-Data string
+                minLength: 1
 
-Base64-encoded image data.
+              - `Type BetaManagedAgentsBase64ImageSourceType`
 
-MediaType string
+            - `type BetaManagedAgentsURLImageSource struct{…}`
 
-MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+              Image referenced by URL.
 
-Type BetaManagedAgentsBase64ImageSourceType
+              - `Type BetaManagedAgentsURLImageSourceType`
 
-
+              - `URL string`
 
-type BetaManagedAgentsURLImageSource struct{…}
+                URL of the image to fetch.
 
-Image referenced by URL.
+                minLength: 1
 
-Type BetaManagedAgentsURLImageSourceType
+            - `type BetaManagedAgentsFileImageSource struct{…}`
 
-URL string
+              Image referenced by file ID.
 
-URL of the image to fetch.
+              - `FileID string`
 
-
+                ID of a previously uploaded file.
 
-type BetaManagedAgentsFileImageSource struct{…}
+                minLength: 1
 
-Image referenced by file ID.
+              - `Type BetaManagedAgentsFileImageSourceType`
 
-FileID string
+          - `Type BetaManagedAgentsImageBlockType`
 
-ID of a previously uploaded file.
+        - `type BetaManagedAgentsDocumentBlock struct{…}`
 
-Type BetaManagedAgentsFileImageSourceType
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-Type BetaManagedAgentsImageBlockType
+          - `Source BetaManagedAgentsDocumentBlockSourceUnion`
 
-
+            Union type for document source variants.
 
-type BetaManagedAgentsDocumentBlock struct{…}
+            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
 
-Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+              Base64-encoded document data.
 
-
+              - `Data string`
 
-Source BetaManagedAgentsDocumentBlockSourceUnion
+                Base64-encoded document data.
 
-Union type for document source variants.
+                minLength: 1
 
-One of the following:
+              - `MediaType string`
 
-
+                MIME type of the document (e.g., "application/pdf").
 
-type BetaManagedAgentsBase64DocumentSource struct{…}
+                minLength: 1
 
-Base64-encoded document data.
+              - `Type BetaManagedAgentsBase64DocumentSourceType`
 
-Data string
+            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
 
-Base64-encoded document data.
+              Plain text document content.
 
-MediaType string
+              - `Data string`
 
-MIME type of the document (e.g., "application/pdf").
+                The plain text content.
 
-Type BetaManagedAgentsBase64DocumentSourceType
+                minLength: 1
 
-
+              - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
 
-type BetaManagedAgentsPlainTextDocumentSource struct{…}
+                MIME type of the text content. Must be "text/plain".
 
-Plain text document content.
+              - `Type BetaManagedAgentsPlainTextDocumentSourceType`
 
-Data string
+            - `type BetaManagedAgentsURLDocumentSource struct{…}`
 
-The plain text content.
+              Document referenced by URL.
 
-MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType
+              - `Type BetaManagedAgentsURLDocumentSourceType`
 
-MIME type of the text content. Must be "text/plain".
+              - `URL string`
 
-Type BetaManagedAgentsPlainTextDocumentSourceType
+                URL of the document to fetch.
 
-
+                minLength: 1
 
-type BetaManagedAgentsURLDocumentSource struct{…}
+            - `type BetaManagedAgentsFileDocumentSource struct{…}`
 
-Document referenced by URL.
+              Document referenced by file ID.
 
-Type BetaManagedAgentsURLDocumentSourceType
+              - `FileID string`
 
-URL string
+                ID of a previously uploaded file.
 
-URL of the document to fetch.
+                minLength: 1
 
-
+              - `Type BetaManagedAgentsFileDocumentSourceType`
 
-type BetaManagedAgentsFileDocumentSource struct{…}
+          - `Type BetaManagedAgentsDocumentBlockType`
 
-Document referenced by file ID.
+          - `Context string Optional`
 
-FileID string
+            Additional context about the document for the model.
 
-ID of a previously uploaded file.
+          - `Title string Optional`
 
-Type BetaManagedAgentsFileDocumentSourceType
+            The title of the document.
 
-Type BetaManagedAgentsDocumentBlockType
+        - `type BetaManagedAgentsRedactedBlockParam struct{…}`
 
-Context stringOptional
+          Placeholder for content withheld by Anthropic model policy.
 
-Additional context about the document for the model.
+          - `Type BetaManagedAgentsRedactedBlockType`
 
-Title stringOptional
+      - `Type BetaManagedAgentsUserMessageEventParamsType`
 
-The title of the document.
+    - `type BetaManagedAgentsUserDefineOutcomeEventParams struct{…}`
 
-Type BetaManagedAgentsUserMessageEventParamsType
+      Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
-
+      - `Description string`
 
-type BetaManagedAgentsUserDefineOutcomeEventParamsResp struct{…}
+        What the agent should produce. This is the task specification.
 
-Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+      - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp`
 
-Description string
+        Rubric for grading the quality of an outcome.
 
-What the agent should produce. This is the task specification.
+        - `type BetaManagedAgentsFileRubricParams struct{…}`
 
-
+          Rubric referenced by a file uploaded via the Files API.
 
-Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp
+          - `FileID string`
 
-Rubric for grading the quality of an outcome.
+            ID of the rubric file.
 
-One of the following:
+          - `Type BetaManagedAgentsFileRubricParamsType`
 
-
+        - `type BetaManagedAgentsTextRubricParams struct{…}`
 
-type BetaManagedAgentsFileRubricParamsResp struct{…}
+          Rubric content provided inline as text.
 
-Rubric referenced by a file uploaded via the Files API.
+          - `Content string`
 
-FileID string
+            Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
-ID of the rubric file.
+            maxLength: 262144
 
-Type BetaManagedAgentsFileRubricParamsType
+          - `Type BetaManagedAgentsTextRubricParamsType`
 
-
+      - `Type BetaManagedAgentsUserDefineOutcomeEventParamsType`
 
-type BetaManagedAgentsTextRubricParamsResp struct{…}
+      - `MaxIterations int64 Optional`
 
-Rubric content provided inline as text.
+        Eval→revision cycles before giving up. Default 3, max 20.
 
-Content string
+        format: int32
 
-Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+    - `type BetaManagedAgentsSystemMessageEventParamsResp struct{…}`
 
-Type BetaManagedAgentsTextRubricParamsType
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
-Type BetaManagedAgentsUserDefineOutcomeEventParamsType
+      - `Content []BetaManagedAgentsSystemContentBlock`
 
-MaxIterations int64Optional
+        System content blocks to append. Text-only.
 
-Eval→revision cycles before giving up. Default 3, max 20.
+        - `Text string`
 
-
+          The text content.
 
-type BetaManagedAgentsSystemMessageEventParamsResp struct{…}
+          minLength: 1
 
-Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+        - `Type BetaManagedAgentsSystemContentBlockType`
 
-
+      - `Type BetaManagedAgentsSystemMessageEventParamsType`
 
-Content [][BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)
+  - `Metadata param.Field[map[string, string]] Optional`
 
-System content blocks to append. Text-only.
+    Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
-Text string
+  - `Name param.Field[string] Optional`
 
-The text content.
+    Body param: Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
-Type BetaManagedAgentsSystemContentBlockType
+    maxLength: 256
 
-Type BetaManagedAgentsSystemMessageEventParamsType
+  - `Resources param.Field[[]BetaDeploymentUpdateParamsResourceUnion] Optional`
 
-Metadata param.Field[map[string, string]]Optional
+    Body param: Session resources. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 500.
 
-Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
+    - `type BetaManagedAgentsGitHubRepositoryResourceParamsResp struct{…}`
 
-Name param.Field[string]Optional
+      Mount a GitHub repository into the session's container.
 
-Body param: Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
+      - `AuthorizationToken string`
 
-
+        GitHub authorization token used to clone the repository.
 
-Resources param.Field[[]BetaDeploymentUpdateParamsResourceUnion]Optional
+        minLength: 1, maxLength: 4096
 
-Body param: Session resources. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 500.
+      - `Type BetaManagedAgentsGitHubRepositoryResourceParamsType`
 
-
+      - `URL string`
 
-type BetaManagedAgentsGitHubRepositoryResourceParamsResp struct{…}
+        Github URL of the repository
 
-Mount a GitHub repository into the session's container.
+        minLength: 1, maxLength: 2048
 
-AuthorizationToken string
+      - `Checkout BetaManagedAgentsGitHubRepositoryResourceParamsCheckoutUnionResp Optional`
 
-GitHub authorization token used to clone the repository.
+        Branch or commit to check out. Defaults to the repository's default branch.
 
-Type BetaManagedAgentsGitHubRepositoryResourceParamsType
+        - `type BetaManagedAgentsBranchCheckout struct{…}`
 
-URL string
+          - `Name string`
 
-Github URL of the repository
+            Branch name to check out.
 
-
+            minLength: 1, maxLength: 255
 
-Checkout BetaManagedAgentsGitHubRepositoryResourceParamsCheckoutUnionRespOptional
+          - `Type BetaManagedAgentsBranchCheckoutType`
 
-Branch or commit to check out. Defaults to the repository's default branch.
+        - `type BetaManagedAgentsCommitCheckout struct{…}`
 
-One of the following:
+          - `Sha string`
 
-
+            Full commit SHA to check out.
 
-type BetaManagedAgentsBranchCheckout struct{…}
+            minLength: 7, maxLength: 64
 
-Name string
+          - `Type BetaManagedAgentsCommitCheckoutType`
 
-Branch name to check out.
+      - `MountPath string Optional`
 
-Type BetaManagedAgentsBranchCheckoutType
+        Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-
+        minLength: 1, maxLength: 4096
 
-type BetaManagedAgentsCommitCheckout struct{…}
+    - `type BetaManagedAgentsFileResourceParamsResp struct{…}`
 
-Sha string
+      Mount a file uploaded via the Files API into the session.
 
-Full commit SHA to check out.
+      - `FileID string`
 
-Type BetaManagedAgentsCommitCheckoutType
+        ID of a previously uploaded file.
 
-MountPath stringOptional
+        minLength: 1, maxLength: 128
 
-Mount path in the container. Defaults to `/workspace/<repo-name>`.
+      - `Type BetaManagedAgentsFileResourceParamsType`
 
-
+      - `MountPath string Optional`
 
-type BetaManagedAgentsFileResourceParamsResp struct{…}
+        Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-Mount a file uploaded via the Files API into the session.
+        minLength: 1, maxLength: 4096
 
-FileID string
+    - `type BetaManagedAgentsMemoryStoreResourceParamResp struct{…}`
 
-ID of a previously uploaded file.
+      Parameters for attaching a memory store to an agent session.
 
-Type BetaManagedAgentsFileResourceParamsType
+      - `MemoryStoreID string`
 
-MountPath stringOptional
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+      - `Type BetaManagedAgentsMemoryStoreResourceParamType`
 
-
+      - `Access BetaManagedAgentsMemoryStoreResourceParamAccess Optional`
 
-type BetaManagedAgentsMemoryStoreResourceParamResp struct{…}
+        Access mode for an attached memory store.
 
-Parameters for attaching a memory store to an agent session.
+        - `const BetaManagedAgentsMemoryStoreResourceParamAccessReadWrite BetaManagedAgentsMemoryStoreResourceParamAccess = "read_write"`
 
-MemoryStoreID string
+        - `const BetaManagedAgentsMemoryStoreResourceParamAccessReadOnly BetaManagedAgentsMemoryStoreResourceParamAccess = "read_only"`
 
-The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+      - `Instructions string Optional`
 
-Type BetaManagedAgentsMemoryStoreResourceParamType
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-
+        maxLength: 4096
 
-Access BetaManagedAgentsMemoryStoreResourceParamAccessOptional
+  - `Schedule param.Field[BetaManagedAgentsScheduleParamsResp] Optional`
 
-Access mode for an attached memory store.
+    Body param: 5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
 
-One of the following:
+  - `VaultIDs param.Field[[]string] Optional`
 
-const BetaManagedAgentsMemoryStoreResourceParamAccessReadWrite BetaManagedAgentsMemoryStoreResourceParamAccess = "read\_write"
+    Body param: Vault IDs. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 50.
 
-const BetaManagedAgentsMemoryStoreResourceParamAccessReadOnly BetaManagedAgentsMemoryStoreResourceParamAccess = "read\_only"
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
-Instructions stringOptional
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+    - `string`
 
-Schedule param.Field[[BetaManagedAgentsScheduleParamsResp](api/beta/deployments.md)]Optional
+    - `type AnthropicBeta string`
 
-Body param: 5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
+      - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
 
-VaultIDs param.Field[[]string]Optional
+      - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
 
-Body param: Vault IDs. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 50.
+      - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
 
-
+      - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
 
-Betas param.Field[[]AnthropicBeta]Optional
+      - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+      - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
 
-string
+      - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
 
-
+      - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
 
-type AnthropicBeta string
+      - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
 
-One of the following:
+      - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
 
-const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
+      - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
 
-const AnthropicBetaPromptCaching2024\_07\_31 AnthropicBeta = "prompt-caching-2024-07-31"
+      - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
 
-const AnthropicBetaComputerUse2024\_10\_22 AnthropicBeta = "computer-use-2024-10-22"
+      - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
 
-const AnthropicBetaComputerUse2025\_01\_24 AnthropicBeta = "computer-use-2025-01-24"
+      - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
 
-const AnthropicBetaPDFs2024\_09\_25 AnthropicBeta = "pdfs-2024-09-25"
+      - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
 
-const AnthropicBetaTokenCounting2024\_11\_01 AnthropicBeta = "token-counting-2024-11-01"
+      - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
 
-const AnthropicBetaTokenEfficientTools2025\_02\_19 AnthropicBeta = "token-efficient-tools-2025-02-19"
+      - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
 
-const AnthropicBetaOutput128k2025\_02\_19 AnthropicBeta = "output-128k-2025-02-19"
+      - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
 
-const AnthropicBetaFilesAPI2025\_04\_14 AnthropicBeta = "files-api-2025-04-14"
+      - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
 
-const AnthropicBetaMCPClient2025\_04\_04 AnthropicBeta = "mcp-client-2025-04-04"
+      - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
-const AnthropicBetaMCPClient2025\_11\_20 AnthropicBeta = "mcp-client-2025-11-20"
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
-const AnthropicBetaDevFullThinking2025\_05\_14 AnthropicBeta = "dev-full-thinking-2025-05-14"
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
-const AnthropicBetaInterleavedThinking2025\_05\_14 AnthropicBeta = "interleaved-thinking-2025-05-14"
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
-const AnthropicBetaCodeExecution2025\_05\_22 AnthropicBeta = "code-execution-2025-05-22"
+      - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
-const AnthropicBetaExtendedCacheTTL2025\_04\_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
-const AnthropicBetaContext1m2025\_08\_07 AnthropicBeta = "context-1m-2025-08-07"
+      - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
-const AnthropicBetaContextManagement2025\_06\_27 AnthropicBeta = "context-management-2025-06-27"
+      - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
 
-const AnthropicBetaModelContextWindowExceeded2025\_08\_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
-const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
 
-const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
+      - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
 
-const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
 
-const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
+      - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
-const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
-const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
+      - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2026-04-07"
+      - `const AnthropicBetaCompact2026_01_12 AnthropicBeta = "compact-2026-01-12"`
 
-const AnthropicBetaThinkingTokenCount2026\_05\_13 AnthropicBeta = "thinking-token-count-2026-05-13"
+      - `const AnthropicBetaComputerUse2025_11_24 AnthropicBeta = "computer-use-2025-11-24"`
 
-const AnthropicBetaServerSideFallback2026\_06\_01 AnthropicBeta = "server-side-fallback-2026-06-01"
+      - `const AnthropicBetaMCPTunnels2026_06_22 AnthropicBeta = "mcp-tunnels-2026-06-22"`
 
-const AnthropicBetaFallbackCredit2026\_06\_01 AnthropicBeta = "fallback-credit-2026-06-01"
+      - `const AnthropicBetaStructuredOutputs2025_11_13 AnthropicBeta = "structured-outputs-2025-11-13"`
 
-const AnthropicBetaAgentMemory2026\_07\_22 AnthropicBeta = "agent-memory-2026-07-22"
+      - `const AnthropicBetaTaskBudgets2026_03_13 AnthropicBeta = "task-budgets-2026-03-13"`
 
-##### ReturnsExpand Collapse
+      - `const AnthropicBetaThinkingDisplayUpdates2026_08_18 AnthropicBeta = "thinking-display-updates-2026-08-18"`
 
-
+      - `const AnthropicBetaCEUserManagement2026_07_13 AnthropicBeta = "ce-user-management-2026-07-13"`
 
-type BetaManagedAgentsDeployment struct{…}
+      - `const AnthropicBetaMidConversationOutputConfig2026_07_01 AnthropicBeta = "mid-conversation-output-config-2026-07-01"`
 
-A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+      - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
 
-ID string
+      - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
-Unique identifier for this deployment.
+## Returns
 
-
+- `type BetaManagedAgentsDeployment struct{…}`
 
-Agent [BetaManagedAgentsAgentReference](api/beta/agents.md)
+  A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
-A resolved agent reference with a concrete version.
+  - `ID string`
 
-ID string
+    Unique identifier for this deployment.
 
-Type BetaManagedAgentsAgentReferenceType
+  - `Agent BetaManagedAgentsAgentReference`
 
-Version int64
+    A resolved agent reference with a concrete version.
 
-ArchivedAt Time
+    - `ID string`
 
-A timestamp in RFC 3339 format
+    - `Type BetaManagedAgentsAgentReferenceType`
 
-CreatedAt Time
+    - `Version int64`
 
-A timestamp in RFC 3339 format
+      format: int32
 
-Description string
+  - `ArchivedAt Time`
 
-Description of what the deployment does.
+    A timestamp in RFC 3339 format
 
-EnvironmentID string
+    format: date-time
 
-ID of the `environment` where sessions run.
+  - `CreatedAt Time`
 
-
+    A timestamp in RFC 3339 format
 
-InitialEvents [][BetaManagedAgentsDeploymentInitialEventUnion](api/beta/deployments.md)
+    format: date-time
 
-Events sent to each session immediately after creation.
+  - `Description string`
 
-One of the following:
+    Description of what the deployment does.
 
-
+  - `EnvironmentID string`
 
-type BetaManagedAgentsDeploymentUserMessageEvent struct{…}
+    ID of the `environment` where sessions run.
 
-A user message sent to the session.
+  - `InitialEvents []BetaManagedAgentsDeploymentInitialEventUnion`
 
-
+    Events sent to each session immediately after creation.
 
-Content []BetaManagedAgentsDeploymentUserMessageEventContentUnion
+    - `type BetaManagedAgentsDeploymentUserMessageEvent struct{…}`
 
-Array of content blocks for the user message.
+      A user message sent to the session.
 
-One of the following:
+      - `Content []BetaManagedAgentsDeploymentUserMessageEventContentUnion`
 
-
+        Array of content blocks for the user message.
 
-type BetaManagedAgentsTextBlock struct{…}
+        - `type BetaManagedAgentsTextBlock struct{…}`
 
-Regular text content.
+          Regular text content.
 
-Text string
+          - `Text string`
 
-The text content.
+            The text content.
 
-Type BetaManagedAgentsTextBlockType
+            minLength: 1
 
-
+          - `Type BetaManagedAgentsTextBlockType`
 
-type BetaManagedAgentsImageBlock struct{…}
+        - `type BetaManagedAgentsImageBlock struct{…}`
 
-Image content specified directly as base64 data or as a reference via a URL.
+          Image content specified directly as base64 data or as a reference via a URL.
 
-
+          - `Source BetaManagedAgentsImageBlockSourceUnion`
 
-Source BetaManagedAgentsImageBlockSourceUnion
+            Union type for image source variants.
 
-Union type for image source variants.
+            - `type BetaManagedAgentsBase64ImageSource struct{…}`
 
-One of the following:
+              Base64-encoded image data.
 
-
+              - `Data string`
 
-type BetaManagedAgentsBase64ImageSource struct{…}
+                Base64-encoded image data.
 
-Base64-encoded image data.
+                minLength: 1
 
-Data string
+              - `MediaType string`
 
-Base64-encoded image data.
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-MediaType string
+                minLength: 1
 
-MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+              - `Type BetaManagedAgentsBase64ImageSourceType`
 
-Type BetaManagedAgentsBase64ImageSourceType
+            - `type BetaManagedAgentsURLImageSource struct{…}`
 
-
+              Image referenced by URL.
 
-type BetaManagedAgentsURLImageSource struct{…}
+              - `Type BetaManagedAgentsURLImageSourceType`
 
-Image referenced by URL.
+              - `URL string`
 
-Type BetaManagedAgentsURLImageSourceType
+                URL of the image to fetch.
 
-URL string
+                minLength: 1
 
-URL of the image to fetch.
+            - `type BetaManagedAgentsFileImageSource struct{…}`
 
-
+              Image referenced by file ID.
 
-type BetaManagedAgentsFileImageSource struct{…}
+              - `FileID string`
 
-Image referenced by file ID.
+                ID of a previously uploaded file.
 
-FileID string
+                minLength: 1
 
-ID of a previously uploaded file.
+              - `Type BetaManagedAgentsFileImageSourceType`
 
-Type BetaManagedAgentsFileImageSourceType
+          - `Type BetaManagedAgentsImageBlockType`
 
-Type BetaManagedAgentsImageBlockType
+        - `type BetaManagedAgentsDocumentBlock struct{…}`
 
-
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-type BetaManagedAgentsDocumentBlock struct{…}
+          - `Source BetaManagedAgentsDocumentBlockSourceUnion`
 
-Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+            Union type for document source variants.
 
-
+            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
 
-Source BetaManagedAgentsDocumentBlockSourceUnion
+              Base64-encoded document data.
 
-Union type for document source variants.
+              - `Data string`
 
-One of the following:
+                Base64-encoded document data.
 
-
+                minLength: 1
 
-type BetaManagedAgentsBase64DocumentSource struct{…}
+              - `MediaType string`
 
-Base64-encoded document data.
+                MIME type of the document (e.g., "application/pdf").
 
-Data string
+                minLength: 1
 
-Base64-encoded document data.
+              - `Type BetaManagedAgentsBase64DocumentSourceType`
 
-MediaType string
+            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
 
-MIME type of the document (e.g., "application/pdf").
+              Plain text document content.
 
-Type BetaManagedAgentsBase64DocumentSourceType
+              - `Data string`
 
-
+                The plain text content.
 
-type BetaManagedAgentsPlainTextDocumentSource struct{…}
+                minLength: 1
 
-Plain text document content.
+              - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
 
-Data string
+                MIME type of the text content. Must be "text/plain".
 
-The plain text content.
+              - `Type BetaManagedAgentsPlainTextDocumentSourceType`
 
-MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType
+            - `type BetaManagedAgentsURLDocumentSource struct{…}`
 
-MIME type of the text content. Must be "text/plain".
+              Document referenced by URL.
 
-Type BetaManagedAgentsPlainTextDocumentSourceType
+              - `Type BetaManagedAgentsURLDocumentSourceType`
 
-
+              - `URL string`
 
-type BetaManagedAgentsURLDocumentSource struct{…}
+                URL of the document to fetch.
 
-Document referenced by URL.
+                minLength: 1
 
-Type BetaManagedAgentsURLDocumentSourceType
+            - `type BetaManagedAgentsFileDocumentSource struct{…}`
 
-URL string
+              Document referenced by file ID.
 
-URL of the document to fetch.
+              - `FileID string`
 
-
+                ID of a previously uploaded file.
 
-type BetaManagedAgentsFileDocumentSource struct{…}
+                minLength: 1
 
-Document referenced by file ID.
+              - `Type BetaManagedAgentsFileDocumentSourceType`
 
-FileID string
+          - `Type BetaManagedAgentsDocumentBlockType`
 
-ID of a previously uploaded file.
+          - `Context string Optional`
 
-Type BetaManagedAgentsFileDocumentSourceType
+            Additional context about the document for the model.
 
-Type BetaManagedAgentsDocumentBlockType
+          - `Title string Optional`
 
-Context stringOptional
+            The title of the document.
 
-Additional context about the document for the model.
+        - `type BetaManagedAgentsRedactedBlockParam struct{…}`
 
-Title stringOptional
+          Placeholder for content withheld by Anthropic model policy.
 
-The title of the document.
+          - `Type BetaManagedAgentsRedactedBlockType`
 
-Type BetaManagedAgentsDeploymentUserMessageEventType
+      - `Type BetaManagedAgentsDeploymentUserMessageEventType`
 
-
+    - `type BetaManagedAgentsDeploymentUserDefineOutcomeEvent struct{…}`
 
-type BetaManagedAgentsDeploymentUserDefineOutcomeEvent struct{…}
+      An outcome the agent should work toward. The agent begins work on receipt.
 
-An outcome the agent should work toward. The agent begins work on receipt.
+      - `Description string`
 
-Description string
+        What the agent should produce. This is the task specification.
 
-What the agent should produce. This is the task specification.
+      - `Rubric BetaManagedAgentsDeploymentUserDefineOutcomeEventRubricUnion`
 
-
+        Rubric for grading the quality of an outcome.
 
-Rubric BetaManagedAgentsDeploymentUserDefineOutcomeEventRubricUnion
+        - `type BetaManagedAgentsFileRubric struct{…}`
 
-Rubric for grading the quality of an outcome.
+          Rubric referenced by a file uploaded via the Files API.
 
-One of the following:
+          - `FileID string`
 
-
+            ID of the rubric file.
 
-type BetaManagedAgentsFileRubric struct{…}
+          - `Type BetaManagedAgentsFileRubricType`
 
-Rubric referenced by a file uploaded via the Files API.
+        - `type BetaManagedAgentsTextRubric struct{…}`
 
-FileID string
+          Rubric content provided inline as text.
 
-ID of the rubric file.
+          - `Content string`
 
-Type BetaManagedAgentsFileRubricType
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-
+          - `Type BetaManagedAgentsTextRubricType`
 
-type BetaManagedAgentsTextRubric struct{…}
+      - `Type BetaManagedAgentsDeploymentUserDefineOutcomeEventType`
 
-Rubric content provided inline as text.
+      - `MaxIterations int64 Optional`
 
-Content string
+        Eval→revision cycles before giving up. Default 3, max 20.
 
-Rubric content. Plain text or markdown — the grader treats it as freeform text.
+        format: int32
 
-Type BetaManagedAgentsTextRubricType
+    - `type BetaManagedAgentsDeploymentSystemMessageEvent struct{…}`
 
-Type BetaManagedAgentsDeploymentUserDefineOutcomeEventType
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-MaxIterations int64Optional
+      - `Content []BetaManagedAgentsSystemContentBlock`
 
-Eval→revision cycles before giving up. Default 3, max 20.
+        System content blocks to append. Text-only.
 
-
+        - `Text string`
 
-type BetaManagedAgentsDeploymentSystemMessageEvent struct{…}
+          The text content.
 
-Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+          minLength: 1
 
-
+        - `Type BetaManagedAgentsSystemContentBlockType`
 
-Content [][BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)
+      - `Type BetaManagedAgentsDeploymentSystemMessageEventType`
 
-System content blocks to append. Text-only.
+  - `Metadata map[string, string]`
 
-Text string
+    Arbitrary key-value metadata. Maximum 16 pairs.
 
-The text content.
+  - `Name string`
 
-Type BetaManagedAgentsSystemContentBlockType
+    Human-readable name.
 
-Type BetaManagedAgentsDeploymentSystemMessageEventType
+  - `PausedReason BetaManagedAgentsDeploymentPausedReasonUnion`
 
-Metadata map[string, string]
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-Arbitrary key-value metadata. Maximum 16 pairs.
+    - `type BetaManagedAgentsManualDeploymentPausedReason struct{…}`
 
-Name string
+      The caller invoked the pause endpoint on the deployment.
 
-Human-readable name.
+      - `Type BetaManagedAgentsManualDeploymentPausedReasonType`
 
-
+    - `type BetaManagedAgentsErrorDeploymentPausedReason struct{…}`
 
-PausedReason [BetaManagedAgentsDeploymentPausedReasonUnion](api/beta/deployments.md)
+      A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-Why a deployment is paused. Non-null exactly when `status` is `paused`.
+      - `Error BetaManagedAgentsDeploymentPausedReasonErrorUnion`
 
-One of the following:
+        The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-
+        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError struct{…}`
 
-type BetaManagedAgentsManualDeploymentPausedReason struct{…}
+          The deployment's environment was archived.
 
-The caller invoked the pause endpoint on the deployment.
+          - `Type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorType`
 
-Type BetaManagedAgentsManualDeploymentPausedReasonType
+        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError struct{…}`
 
-
+          The deployment's agent was archived.
 
-type BetaManagedAgentsErrorDeploymentPausedReason struct{…}
+          - `Type BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorType`
 
-A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError struct{…}`
 
-
+          The deployment's environment no longer exists.
 
-Error [BetaManagedAgentsDeploymentPausedReasonErrorUnion](api/beta/deployments.md)
+          - `Type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorType`
 
-The error that triggered an auto-pause. Matches the failed run's `error.type`.
+        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError struct{…}`
 
-One of the following:
+          A vault referenced by the deployment no longer exists.
 
-
+          - `Type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorType`
 
-type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError struct{…}
+        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError struct{…}`
 
-The deployment's environment was archived.
+          A file resource referenced by the deployment no longer exists.
 
-Type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorType
+          - `Type BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorType`
 
-
+        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError struct{…}`
 
-type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError struct{…}
+          A referenced resource no longer exists and its kind was not reported.
 
-The deployment's agent was archived.
+          - `Type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorType`
 
-Type BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorType
+        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError struct{…}`
 
-
+          The deployment's workspace was archived.
 
-type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError struct{…}
+          - `Type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorType`
 
-The deployment's environment no longer exists.
+        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError struct{…}`
 
-Type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorType
+          The deployment's organization is disabled.
 
-
+          - `Type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorType`
 
-type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError struct{…}
+        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError struct{…}`
 
-A vault referenced by the deployment no longer exists.
+          A memory store referenced by the deployment is archived.
 
-Type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorType
+          - `Type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorType`
 
-
+        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError struct{…}`
 
-type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError struct{…}
+          A skill referenced by the deployment's agent no longer exists.
 
-A file resource referenced by the deployment no longer exists.
+          - `Type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorType`
 
-Type BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorType
+        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError struct{…}`
 
-
+          A vault referenced by the deployment is archived.
 
-type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError struct{…}
+          - `Type BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorType`
 
-A referenced resource no longer exists and its kind was not reported.
+        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError struct{…}`
 
-Type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorType
+          An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-
+          - `Type BetaManagedAgentsUnknownDeploymentPausedReasonErrorType`
 
-type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError struct{…}
+        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError struct{…}`
 
-The deployment's workspace was archived.
+          The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-Type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorType
+          - `Type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorType`
 
-
+        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError struct{…}`
 
-type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError struct{…}
+          An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-The deployment's organization is disabled.
+          - `Type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorType`
 
-Type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorType
+      - `Type BetaManagedAgentsErrorDeploymentPausedReasonType`
 
-
+  - `Resources []BetaManagedAgentsSessionResourceConfigUnion`
 
-type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError struct{…}
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-A memory store referenced by the deployment is archived.
+    - `type BetaManagedAgentsGitHubRepositoryResourceConfig struct{…}`
 
-Type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorType
+      A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-
+      - `Type BetaManagedAgentsGitHubRepositoryResourceConfigType`
 
-type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError struct{…}
+      - `URL string`
 
-A skill referenced by the deployment's agent no longer exists.
+        Github URL of the repository
 
-Type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorType
+      - `Checkout BetaManagedAgentsGitHubRepositoryResourceConfigCheckoutUnion Optional`
 
-
+        Branch or commit to check out. Defaults to the repository's default branch.
 
-type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError struct{…}
+        - `type BetaManagedAgentsBranchCheckout struct{…}`
 
-A vault referenced by the deployment is archived.
+          - `Name string`
 
-Type BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorType
+            Branch name to check out.
 
-
+            minLength: 1, maxLength: 255
 
-type BetaManagedAgentsUnknownDeploymentPausedReasonError struct{…}
+          - `Type BetaManagedAgentsBranchCheckoutType`
 
-An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+        - `type BetaManagedAgentsCommitCheckout struct{…}`
 
-Type BetaManagedAgentsUnknownDeploymentPausedReasonErrorType
+          - `Sha string`
 
-
+            Full commit SHA to check out.
 
-type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError struct{…}
+            minLength: 7, maxLength: 64
 
-The deployment configures resources, but its environment is self-hosted and cannot mount them.
+          - `Type BetaManagedAgentsCommitCheckoutType`
 
-Type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorType
+      - `MountPath string Optional`
 
-
+        Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError struct{…}
+    - `type BetaManagedAgentsFileResourceConfig struct{…}`
 
-An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+      A file mounted into each session's container.
 
-Type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorType
+      - `FileID string`
 
-Type BetaManagedAgentsErrorDeploymentPausedReasonType
+        ID of a previously uploaded file.
 
-
+      - `Type BetaManagedAgentsFileResourceConfigType`
 
-Resources [][BetaManagedAgentsSessionResourceConfigUnion](api/beta/deployments.md)
+      - `MountPath string Optional`
 
-Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+        Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-One of the following:
+    - `type BetaManagedAgentsMemoryStoreResourceConfig struct{…}`
 
-
+      A memory store attached to each session created from this deployment.
 
-type BetaManagedAgentsGitHubRepositoryResourceConfig struct{…}
+      - `MemoryStoreID string`
 
-A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-Type BetaManagedAgentsGitHubRepositoryResourceConfigType
+      - `Type BetaManagedAgentsMemoryStoreResourceConfigType`
 
-URL string
+      - `Access BetaManagedAgentsMemoryStoreResourceConfigAccess Optional`
 
-Github URL of the repository
+        Access mode for an attached memory store.
 
-
+        - `const BetaManagedAgentsMemoryStoreResourceConfigAccessReadWrite BetaManagedAgentsMemoryStoreResourceConfigAccess = "read_write"`
 
-Checkout BetaManagedAgentsGitHubRepositoryResourceConfigCheckoutUnionOptional
+        - `const BetaManagedAgentsMemoryStoreResourceConfigAccessReadOnly BetaManagedAgentsMemoryStoreResourceConfigAccess = "read_only"`
 
-Branch or commit to check out. Defaults to the repository's default branch.
+      - `Instructions string Optional`
 
-One of the following:
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-
+  - `Schedule BetaManagedAgentsSchedule`
 
-type BetaManagedAgentsBranchCheckout struct{…}
+    5-field POSIX cron schedule with computed runtime timestamps.
 
-Name string
+    - `Expression string`
 
-Branch name to check out.
+      5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
-Type BetaManagedAgentsBranchCheckoutType
+      minLength: 1, maxLength: 256
 
-
+    - `Timezone string`
 
-type BetaManagedAgentsCommitCheckout struct{…}
+      IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
-Sha string
+      minLength: 1
 
-Full commit SHA to check out.
+    - `Type BetaManagedAgentsScheduleType`
 
-Type BetaManagedAgentsCommitCheckoutType
+    - `LastRunAt Time Optional`
 
-MountPath stringOptional
+      A timestamp in RFC 3339 format
 
-Mount path in the container. Defaults to `/workspace/<repo-name>`.
+      format: date-time
 
-
+    - `UpcomingRunsAt []Time Optional`
 
-type BetaManagedAgentsFileResourceConfig struct{…}
+      Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
-A file mounted into each session's container.
+  - `Status BetaManagedAgentsDeploymentStatus`
 
-FileID string
+    Lifecycle status of a deployment.
 
-ID of a previously uploaded file.
+    - `const BetaManagedAgentsDeploymentStatusActive BetaManagedAgentsDeploymentStatus = "active"`
 
-Type BetaManagedAgentsFileResourceConfigType
+    - `const BetaManagedAgentsDeploymentStatusPaused BetaManagedAgentsDeploymentStatus = "paused"`
 
-MountPath stringOptional
+  - `Type BetaManagedAgentsDeploymentType`
 
-Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+  - `UpdatedAt Time`
 
-
+    A timestamp in RFC 3339 format
 
-type BetaManagedAgentsMemoryStoreResourceConfig struct{…}
+    format: date-time
 
-A memory store attached to each session created from this deployment.
+  - `VaultIDs []string`
 
-MemoryStoreID string
+    Vault IDs supplying stored credentials for sessions created from this deployment.
 
-The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+  - `Budget BetaManagedAgentsBudgetLimit Optional`
 
-Type BetaManagedAgentsMemoryStoreResourceConfigType
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-
+    - `MaxListCost BetaMonetaryAmount`
 
-Access BetaManagedAgentsMemoryStoreResourceConfigAccessOptional
+      A monetary amount in a specific currency.
 
-Access mode for an attached memory store.
+      - `Amount string`
 
-One of the following:
+        Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
 
-const BetaManagedAgentsMemoryStoreResourceConfigAccessReadWrite BetaManagedAgentsMemoryStoreResourceConfigAccess = "read\_write"
+      - `Currency BetaCurrency`
 
-const BetaManagedAgentsMemoryStoreResourceConfigAccessReadOnly BetaManagedAgentsMemoryStoreResourceConfigAccess = "read\_only"
+        Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-Instructions stringOptional
+    - `Type BetaManagedAgentsBudgetLimitType`
 
-Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+## Example
 
-
-
-Schedule [BetaManagedAgentsSchedule](api/beta/deployments.md)
-
-5-field POSIX cron schedule with computed runtime timestamps.
-
-Expression string
-
-5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
-
-Timezone string
-
-IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC").
-
-Type BetaManagedAgentsScheduleType
-
-LastRunAt TimeOptional
-
-A timestamp in RFC 3339 format
-
-UpcomingRunsAt []TimeOptional
-
-Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
-
-
-
-Status [BetaManagedAgentsDeploymentStatus](api/beta/deployments.md)
-
-Lifecycle status of a deployment.
-
-One of the following:
-
-const BetaManagedAgentsDeploymentStatusActive [BetaManagedAgentsDeploymentStatus](api/beta/deployments.md) = "active"
-
-const BetaManagedAgentsDeploymentStatusPaused [BetaManagedAgentsDeploymentStatus](api/beta/deployments.md) = "paused"
-
-Type BetaManagedAgentsDeploymentType
-
-UpdatedAt Time
-
-A timestamp in RFC 3339 format
-
-VaultIDs []string
-
-Vault IDs supplying stored credentials for sessions created from this deployment.
-
-Update Deployment
-
-Go
-
-```shiki
+```go
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  betaManagedAgentsDeployment, err := client.Beta.Deployments.Update(
-    context.TODO(),
-    "depl_011CZkZcDH3vPqd7xnEfwTai",
-    anthropic.BetaDeploymentUpdateParams{
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaManagedAgentsDeployment, err := client.Beta.Deployments.Update(
+		context.TODO(),
+		"depl_011CZkZcDH3vPqd7xnEfwTai",
+		anthropic.BetaDeploymentUpdateParams{},
+	)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaManagedAgentsDeployment.ID)
+}
+```
 
+### Response (200)
+
+```json
+{
+  "id": "depl_011CZkZcDH3vPqd7xnEfwTai",
+  "agent": {
+    "id": "agent_011CZkYpogX7uDKUyvBTophP",
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Compiles yesterday's orders into a report every weekday morning.",
+  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "initial_events": [
+    {
+      "content": [
+        {
+          "text": "Compile yesterday's orders into report.md.",
+          "type": "text"
+        }
+      ],
+      "type": "user.message"
+    }
+  ],
+  "metadata": {},
+  "name": "Daily order report",
+  "paused_reason": {
+    "type": "manual"
+  },
+  "resources": [
+    {
+      "type": "github_repository",
+      "url": "url",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      },
+      "mount_path": "mount_path"
+    }
+  ],
+  "schedule": {
+    "expression": "0 9 * * 1-5",
+    "timezone": "America/Los_Angeles",
+    "type": "cron",
+    "last_run_at": "2026-03-16T16:00:09Z",
+    "upcoming_runs_at": [
+      "2026-03-17T16:00:00Z",
+      "2026-03-18T16:00:00Z"
+    ]
+  },
+  "status": "active",
+  "type": "deployment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "vault_ids": [
+    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+  ],
+  "budget": {
+    "max_list_cost": {
+      "amount": "2500",
+      "currency": "USD"
     },
-  )
-  if err != nil {
-    panic(err.Error())
+    "type": "limit"
   }
-  fmt.Printf("%+v\n", betaManagedAgentsDeployment.ID)
-}
-```
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "depl_011CZkZcDH3vPqd7xnEfwTai",
-  "agent": {
-    "id": "agent_011CZkYpogX7uDKUyvBTophP",
-    "type": "agent",
-    "version": 1
-  },
-  "archived_at": null,
-  "created_at": "2026-03-15T10:00:00Z",
-  "description": "Compiles yesterday's orders into a report every weekday morning.",
-  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
-  "initial_events": [
-    {
-      "content": [
-        {
-          "text": "Compile yesterday's orders into report.md.",
-          "type": "text"
-        }
-      ],
-      "type": "user.message"
-    }
-  ],
-  "metadata": {},
-  "name": "Daily order report",
-  "paused_reason": {
-    "type": "manual"
-  },
-  "resources": [
-    {
-      "type": "github_repository",
-      "url": "url",
-      "checkout": {
-        "name": "main",
-        "type": "branch"
-      },
-      "mount_path": "mount_path"
-    }
-  ],
-  "schedule": {
-    "expression": "0 9 * * 1-5",
-    "timezone": "America/Los_Angeles",
-    "type": "cron",
-    "last_run_at": "2026-03-16T16:00:09Z",
-    "upcoming_runs_at": [
-      "2026-03-17T16:00:00Z",
-      "2026-03-18T16:00:00Z"
-    ]
-  },
-  "status": "active",
-  "type": "deployment",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "vault_ids": [
-    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "depl_011CZkZcDH3vPqd7xnEfwTai",
-  "agent": {
-    "id": "agent_011CZkYpogX7uDKUyvBTophP",
-    "type": "agent",
-    "version": 1
-  },
-  "archived_at": null,
-  "created_at": "2026-03-15T10:00:00Z",
-  "description": "Compiles yesterday's orders into a report every weekday morning.",
-  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
-  "initial_events": [
-    {
-      "content": [
-        {
-          "text": "Compile yesterday's orders into report.md.",
-          "type": "text"
-        }
-      ],
-      "type": "user.message"
-    }
-  ],
-  "metadata": {},
-  "name": "Daily order report",
-  "paused_reason": {
-    "type": "manual"
-  },
-  "resources": [
-    {
-      "type": "github_repository",
-      "url": "url",
-      "checkout": {
-        "name": "main",
-        "type": "branch"
-      },
-      "mount_path": "mount_path"
-    }
-  ],
-  "schedule": {
-    "expression": "0 9 * * 1-5",
-    "timezone": "America/Los_Angeles",
-    "type": "cron",
-    "last_run_at": "2026-03-16T16:00:09Z",
-    "upcoming_runs_at": [
-      "2026-03-17T16:00:00Z",
-      "2026-03-18T16:00:00Z"
-    ]
-  },
-  "status": "active",
-  "type": "deployment",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "vault_ids": [
-    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
 }
 ```
 

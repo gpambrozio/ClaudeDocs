@@ -1,383 +1,289 @@
 # Get a Model
 
-Copy page
+`client.Beta.Models.Get(ctx, modelID, query) (*BetaModelInfo, error)`
 
-
-
-Go
-
-# Get a Model
-
-client.Beta.Models.Get(ctx, modelID, query) (\*[BetaModelInfo](api/beta/models.md), error)
-
-GET/v1/models/{model\_id}
+**GET** `/v1/models/{model_id}`
 
 Get a specific model.
 
 The Models API response can be used to determine information about a specific model or resolve a model alias to a model ID.
 
-##### ParametersExpand Collapse
+## Parameters
 
-modelID string
+- `modelID string`
 
-Model identifier or alias.
+  Model identifier or alias.
 
-
+- `query BetaModelGetParams`
 
-query BetaModelGetParams
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
-
+    Optional header to specify the beta version(s) you want to use.
 
-Betas param.Field[[]AnthropicBeta]Optional
+    - `string`
 
-Optional header to specify the beta version(s) you want to use.
+    - `type AnthropicBeta string`
 
-string
+      - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
 
-
+      - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
 
-type AnthropicBeta string
+      - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
 
-One of the following:
+      - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
 
-const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
+      - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
 
-const AnthropicBetaPromptCaching2024\_07\_31 AnthropicBeta = "prompt-caching-2024-07-31"
+      - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
 
-const AnthropicBetaComputerUse2024\_10\_22 AnthropicBeta = "computer-use-2024-10-22"
+      - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
 
-const AnthropicBetaComputerUse2025\_01\_24 AnthropicBeta = "computer-use-2025-01-24"
+      - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
 
-const AnthropicBetaPDFs2024\_09\_25 AnthropicBeta = "pdfs-2024-09-25"
+      - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
 
-const AnthropicBetaTokenCounting2024\_11\_01 AnthropicBeta = "token-counting-2024-11-01"
+      - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
 
-const AnthropicBetaTokenEfficientTools2025\_02\_19 AnthropicBeta = "token-efficient-tools-2025-02-19"
+      - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
 
-const AnthropicBetaOutput128k2025\_02\_19 AnthropicBeta = "output-128k-2025-02-19"
+      - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
 
-const AnthropicBetaFilesAPI2025\_04\_14 AnthropicBeta = "files-api-2025-04-14"
+      - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
 
-const AnthropicBetaMCPClient2025\_04\_04 AnthropicBeta = "mcp-client-2025-04-04"
+      - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
 
-const AnthropicBetaMCPClient2025\_11\_20 AnthropicBeta = "mcp-client-2025-11-20"
+      - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
 
-const AnthropicBetaDevFullThinking2025\_05\_14 AnthropicBeta = "dev-full-thinking-2025-05-14"
+      - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
 
-const AnthropicBetaInterleavedThinking2025\_05\_14 AnthropicBeta = "interleaved-thinking-2025-05-14"
+      - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
 
-const AnthropicBetaCodeExecution2025\_05\_22 AnthropicBeta = "code-execution-2025-05-22"
+      - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
 
-const AnthropicBetaExtendedCacheTTL2025\_04\_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"
+      - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
 
-const AnthropicBetaContext1m2025\_08\_07 AnthropicBeta = "context-1m-2025-08-07"
+      - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
-const AnthropicBetaContextManagement2025\_06\_27 AnthropicBeta = "context-management-2025-06-27"
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
-const AnthropicBetaModelContextWindowExceeded2025\_08\_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
-const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
-const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
+      - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
-const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
-const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
+      - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
-const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
+      - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
 
-const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
-const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2026-04-07"
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
 
-const AnthropicBetaThinkingTokenCount2026\_05\_13 AnthropicBeta = "thinking-token-count-2026-05-13"
+      - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
 
-const AnthropicBetaServerSideFallback2026\_06\_01 AnthropicBeta = "server-side-fallback-2026-06-01"
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
 
-const AnthropicBetaFallbackCredit2026\_06\_01 AnthropicBeta = "fallback-credit-2026-06-01"
+      - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
-const AnthropicBetaAgentMemory2026\_07\_22 AnthropicBeta = "agent-memory-2026-07-22"
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
-##### ReturnsExpand Collapse
+      - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-
+      - `const AnthropicBetaCompact2026_01_12 AnthropicBeta = "compact-2026-01-12"`
 
-type BetaModelInfo struct{…}
+      - `const AnthropicBetaComputerUse2025_11_24 AnthropicBeta = "computer-use-2025-11-24"`
 
-ID string
+      - `const AnthropicBetaMCPTunnels2026_06_22 AnthropicBeta = "mcp-tunnels-2026-06-22"`
 
-Unique model identifier.
+      - `const AnthropicBetaStructuredOutputs2025_11_13 AnthropicBeta = "structured-outputs-2025-11-13"`
 
-AllowedFallbackModels []string
+      - `const AnthropicBetaTaskBudgets2026_03_13 AnthropicBeta = "task-budgets-2026-03-13"`
 
-Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
+      - `const AnthropicBetaThinkingDisplayUpdates2026_08_18 AnthropicBeta = "thinking-display-updates-2026-08-18"`
 
-
+      - `const AnthropicBetaCEUserManagement2026_07_13 AnthropicBeta = "ce-user-management-2026-07-13"`
 
-Capabilities [BetaModelCapabilities](api/beta/models.md)
+      - `const AnthropicBetaMidConversationOutputConfig2026_07_01 AnthropicBeta = "mid-conversation-output-config-2026-07-01"`
 
-Model capability information.
+      - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
 
-
+      - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
-Batch [BetaCapabilitySupport](api/beta/models.md)
+## Returns
 
-Whether the model supports the Batch API.
+- `type BetaModelInfo struct{…}`
 
-Supported bool
+  - `ID string`
 
-Whether this capability is supported by the model.
+    Unique model identifier.
 
-
+  - `AllowedFallbackModels []string`
 
-Citations [BetaCapabilitySupport](api/beta/models.md)
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
-Whether the model supports citation generation.
+  - `Capabilities BetaModelCapabilities`
 
-Supported bool
+    Model capability information.
 
-Whether this capability is supported by the model.
+    - `Batch BetaCapabilitySupport`
 
-
+      Whether the model supports the Batch API.
 
-CodeExecution [BetaCapabilitySupport](api/beta/models.md)
+      - `Supported bool`
 
-Whether the model supports code execution tools.
+        Whether this capability is supported by the model.
 
-Supported bool
+    - `Citations BetaCapabilitySupport`
 
-Whether this capability is supported by the model.
+      Whether the model supports citation generation.
 
-
+    - `CodeExecution BetaCapabilitySupport`
 
-ContextManagement [BetaContextManagementCapability](api/beta/models.md)
+      Whether the model supports code execution tools.
 
-Context management support and available strategies.
+    - `ContextManagement BetaContextManagementCapability`
 
-
+      Context management support and available strategies.
 
-ClearThinking20251015 [BetaCapabilitySupport](api/beta/models.md)
+      - `ClearThinking20251015 BetaCapabilitySupport`
 
-Indicates whether a capability is supported.
+        Indicates whether a capability is supported.
 
-Supported bool
+      - `ClearToolUses20250919 BetaCapabilitySupport`
 
-Whether this capability is supported by the model.
+        Indicates whether a capability is supported.
 
-
+      - `Compact20260112 BetaCapabilitySupport`
 
-ClearToolUses20250919 [BetaCapabilitySupport](api/beta/models.md)
+        Indicates whether a capability is supported.
 
-Indicates whether a capability is supported.
+      - `Supported bool`
 
-Supported bool
+        Whether this capability is supported by the model.
 
-Whether this capability is supported by the model.
+    - `Effort BetaEffortCapability`
 
-
+      Effort (reasoning_effort) support and available levels.
 
-Compact20260112 [BetaCapabilitySupport](api/beta/models.md)
+      - `High BetaCapabilitySupport`
 
-Indicates whether a capability is supported.
+        Whether the model supports high effort level.
 
-Supported bool
+      - `Low BetaCapabilitySupport`
 
-Whether this capability is supported by the model.
+        Whether the model supports low effort level.
 
-Supported bool
+      - `Max BetaCapabilitySupport`
 
-Whether this capability is supported by the model.
+        Whether the model supports max effort level.
 
-
+      - `Medium BetaCapabilitySupport`
 
-Effort [BetaEffortCapability](api/beta/models.md)
+        Whether the model supports medium effort level.
 
-Effort (reasoning\_effort) support and available levels.
+      - `Supported bool`
 
-
+        Whether this capability is supported by the model.
 
-High [BetaCapabilitySupport](api/beta/models.md)
+      - `Xhigh BetaCapabilitySupport`
 
-Whether the model supports high effort level.
+        Indicates whether a capability is supported.
 
-Supported bool
+    - `ImageInput BetaCapabilitySupport`
 
-Whether this capability is supported by the model.
+      Whether the model accepts image content blocks.
 
-
+    - `PDFInput BetaCapabilitySupport`
 
-Low [BetaCapabilitySupport](api/beta/models.md)
+      Whether the model accepts PDF content blocks.
 
-Whether the model supports low effort level.
+    - `StructuredOutputs BetaCapabilitySupport`
 
-Supported bool
+      Whether the model supports structured output / JSON mode / strict tool schemas.
 
-Whether this capability is supported by the model.
+    - `Thinking BetaThinkingCapability`
 
-
+      Thinking capability and supported type configurations.
 
-Max [BetaCapabilitySupport](api/beta/models.md)
+      - `Supported bool`
 
-Whether the model supports max effort level.
+        Whether this capability is supported by the model.
 
-Supported bool
+      - `Types BetaThinkingTypes`
 
-Whether this capability is supported by the model.
+        Supported thinking type configurations.
 
-
+        - `Adaptive BetaCapabilitySupport`
 
-Medium [BetaCapabilitySupport](api/beta/models.md)
+          Whether the model supports thinking with type 'adaptive' (auto).
 
-Whether the model supports medium effort level.
+        - `Enabled BetaCapabilitySupport`
 
-Supported bool
+          Whether the model supports thinking with type 'enabled'.
 
-Whether this capability is supported by the model.
+  - `CreatedAt Time`
 
-Supported bool
+    RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-Whether this capability is supported by the model.
+    format: date-time
 
-
+  - `DisplayName string`
 
-Xhigh [BetaCapabilitySupport](api/beta/models.md)
+    A human-readable name for the model.
 
-Indicates whether a capability is supported.
+  - `MaxInputTokens int64`
 
-Supported bool
+    Maximum input context window size in tokens for this model.
 
-Whether this capability is supported by the model.
+  - `MaxTokens int64`
 
-
+    Maximum value for the `max_tokens` parameter when using this model.
 
-ImageInput [BetaCapabilitySupport](api/beta/models.md)
+  - `Type Model`
 
-Whether the model accepts image content blocks.
+    Object type.
 
-Supported bool
+    For Models, this is always `"model"`.
 
-Whether this capability is supported by the model.
+    default: model
 
-
+## Example
 
-PDFInput [BetaCapabilitySupport](api/beta/models.md)
-
-Whether the model accepts PDF content blocks.
-
-Supported bool
-
-Whether this capability is supported by the model.
-
-
-
-StructuredOutputs [BetaCapabilitySupport](api/beta/models.md)
-
-Whether the model supports structured output / JSON mode / strict tool schemas.
-
-Supported bool
-
-Whether this capability is supported by the model.
-
-
-
-Thinking [BetaThinkingCapability](api/beta/models.md)
-
-Thinking capability and supported type configurations.
-
-Supported bool
-
-Whether this capability is supported by the model.
-
-
-
-Types [BetaThinkingTypes](api/beta/models.md)
-
-Supported thinking type configurations.
-
-
-
-Adaptive [BetaCapabilitySupport](api/beta/models.md)
-
-Whether the model supports thinking with type 'adaptive' (auto).
-
-Supported bool
-
-Whether this capability is supported by the model.
-
-
-
-Enabled [BetaCapabilitySupport](api/beta/models.md)
-
-Whether the model supports thinking with type 'enabled'.
-
-Supported bool
-
-Whether this capability is supported by the model.
-
-CreatedAt Time
-
-RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
-
-DisplayName string
-
-A human-readable name for the model.
-
-MaxInputTokens int64
-
-Maximum input context window size in tokens for this model.
-
-MaxTokens int64
-
-Maximum value for the `max_tokens` parameter when using this model.
-
-
-
-Type Model
-
-Object type.
-
-For Models, this is always `"model"`.
-
-Get a Model
-
-Go
-
-```shiki
+```go
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  betaModelInfo, err := client.Beta.Models.Get(
-    context.TODO(),
-    "model_id",
-    anthropic.BetaModelGetParams{
-
-    },
-  )
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", betaModelInfo.ID)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaModelInfo, err := client.Beta.Models.Get(
+		context.TODO(),
+		"model_id",
+		anthropic.BetaModelGetParams{},
+	)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaModelInfo.ID)
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
-  "id": "claude-opus-4-6",
+  "id": "claude-opus-5",
   "allowed_fallback_models": [
     "string"
   ],
@@ -442,89 +348,8 @@ Response 200
       }
     }
   },
-  "created_at": "2026-02-04T00:00:00Z",
-  "display_name": "Claude Opus 4.6",
-  "max_input_tokens": 0,
-  "max_tokens": 0,
-  "type": "model"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "claude-opus-4-6",
-  "allowed_fallback_models": [
-    "string"
-  ],
-  "capabilities": {
-    "batch": {
-      "supported": true
-    },
-    "citations": {
-      "supported": true
-    },
-    "code_execution": {
-      "supported": true
-    },
-    "context_management": {
-      "clear_thinking_20251015": {
-        "supported": true
-      },
-      "clear_tool_uses_20250919": {
-        "supported": true
-      },
-      "compact_20260112": {
-        "supported": true
-      },
-      "supported": true
-    },
-    "effort": {
-      "high": {
-        "supported": true
-      },
-      "low": {
-        "supported": true
-      },
-      "max": {
-        "supported": true
-      },
-      "medium": {
-        "supported": true
-      },
-      "supported": true,
-      "xhigh": {
-        "supported": true
-      }
-    },
-    "image_input": {
-      "supported": true
-    },
-    "pdf_input": {
-      "supported": true
-    },
-    "structured_outputs": {
-      "supported": true
-    },
-    "thinking": {
-      "supported": true,
-      "types": {
-        "adaptive": {
-          "supported": true
-        },
-        "enabled": {
-          "supported": true
-        }
-      }
-    }
-  },
-  "created_at": "2026-02-04T00:00:00Z",
-  "display_name": "Claude Opus 4.6",
+  "created_at": "2026-07-24T00:00:00Z",
+  "display_name": "Claude Opus 5",
   "max_input_tokens": 0,
   "max_tokens": 0,
   "type": "model"

@@ -1,461 +1,384 @@
 # Update Environment
 
-Copy page
+`client.beta.environments.update(environmentID, params, options?): BetaEnvironment`
 
-
-
-TypeScript
-
-# Update Environment
-
-client.beta.environments.update(stringenvironmentID, EnvironmentUpdateParams { config, description, metadata, 3 more } params, RequestOptionsoptions?): [BetaEnvironment](api/beta/environments.md) { id, archived\_at, config, 7 more }
-
-POST/v1/environments/{environment\_id}
+**POST** `/v1/environments/{environment_id}`
 
 Update an existing environment's configuration.
 
-##### ParametersExpand Collapse
+## Parameters
 
-environmentID: string
+- `environmentID: string`
 
-
+- `params: EnvironmentUpdateParams`
 
-params: EnvironmentUpdateParams { config, description, metadata, 3 more } 
+  - `config?: BetaCloudConfigParams | BetaSelfHostedConfigParams | null`
 
-
+    Body param: Updated environment configuration
 
-config?: [BetaCloudConfigParams](api/beta/environments.md) { type, networking, packages }  | [BetaSelfHostedConfigParams](api/beta/environments.md) { type }  | null
+    - `BetaCloudConfigParams`
 
-Body param: Updated environment configuration
+      Request params for `cloud` environment configuration.
 
-One of the following:
+      Fields default to null; on update, omitted fields preserve the
+      existing value.
 
-
+      - `type: "cloud"`
 
-BetaCloudConfigParams { type, networking, packages } 
+        Environment type
 
-Request params for `cloud` environment configuration.
+      - `networking?: BetaUnrestrictedNetwork | BetaLimitedNetworkParams | null`
 
-Fields default to null; on update, omitted fields preserve the
-existing value.
+        Network configuration policy. Omit on update to preserve the existing value.
 
-type: "cloud"
+        - `BetaUnrestrictedNetwork`
 
-Environment type
+          Unrestricted network access.
 
-
+          - `type: "unrestricted"`
 
-networking?: [BetaUnrestrictedNetwork](api/beta/environments.md) { type }  | [BetaLimitedNetworkParams](api/beta/environments.md) { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts }  | null
+            Network policy type
 
-Network configuration policy. Omit on update to preserve the existing value.
+        - `BetaLimitedNetworkParams`
 
-One of the following:
+          Limited network request params.
 
-
+          Fields default to null; on update, omitted fields preserve the
+          existing value.
 
-BetaUnrestrictedNetwork { type } 
+          - `type: "limited"`
 
-Unrestricted network access.
+            Network policy type
 
-type: "unrestricted"
+          - `allow_mcp_servers?: boolean | null`
 
-Network policy type
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-
+          - `allow_package_managers?: boolean | null`
 
-BetaLimitedNetworkParams { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts } 
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
 
-Limited network request params.
+          - `allowed_hosts?: Array<string> | null`
 
-Fields default to null; on update, omitted fields preserve the
-existing value.
+            Specifies domains the container can reach.
 
-type: "limited"
+      - `packages?: BetaPackagesParams | null`
 
-Network policy type
+        Specify packages (and optionally their versions) available in this environment.
 
-allow\_mcp\_servers?: boolean | null
+        When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+        Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
 
-allow\_package\_managers?: boolean | null
+        - `apt?: Array<string> | null`
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+          Ubuntu/Debian packages to install
 
-allowed\_hosts?: Array<string> | null
+        - `cargo?: Array<string> | null`
 
-Specifies domains the container can reach.
+          Rust packages to install
 
-
+        - `gem?: Array<string> | null`
 
-packages?: [BetaPackagesParams](api/beta/environments.md) { apt, cargo, gem, 4 more }  | null
+          Ruby packages to install
 
-Specify packages (and optionally their versions) available in this environment.
+        - `go?: Array<string> | null`
 
-When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+          Go packages to install
 
-apt?: Array<string> | null
+        - `npm?: Array<string> | null`
 
-Ubuntu/Debian packages to install
+          Node.js packages to install
 
-cargo?: Array<string> | null
+        - `pip?: Array<string> | null`
 
-Rust packages to install
+          Python packages to install
 
-gem?: Array<string> | null
+        - `type?: "packages"`
 
-Ruby packages to install
+          Package configuration type
 
-go?: Array<string> | null
+          default: packages
 
-Go packages to install
+    - `BetaSelfHostedConfigParams`
 
-npm?: Array<string> | null
+      Request params for `self_hosted` environment configuration.
 
-Node.js packages to install
+      - `type: "self_hosted"`
 
-pip?: Array<string> | null
+        Environment type
 
-Python packages to install
+  - `description?: string | null`
 
-type?: "packages"
+    Body param: Updated description of the environment. Omit to preserve; null clears to null; an empty string is stored as an empty string.
 
-Package configuration type
+    maxLength: 1024
 
-
+  - `metadata?: Record<string, string | null>`
 
-BetaSelfHostedConfigParams { type } 
+    Body param: User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
 
-Request params for `self_hosted` environment configuration.
+  - `name?: string | null`
 
-type: "self\_hosted"
+    Body param: Updated name for the environment
 
-Environment type
+    maxLength: 256, minLength: 1
 
-description?: string | null
+  - `scope?: "organization" | "account" | null`
 
-Body param: Updated description of the environment
+    Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
 
-metadata?: Record<string, string | null>
+    - `"organization"`
 
-Body param: User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
+    - `"account"`
 
-name?: string | null
+  - `betas?: Array<AnthropicBeta>`
 
-Body param: Updated name for the environment
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-
+    - `(string & {})`
 
-scope?: "organization" | "account" | null
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
 
-Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
+      - `"message-batches-2024-09-24"`
 
-One of the following:
+      - `"prompt-caching-2024-07-31"`
 
-"organization"
+      - `"computer-use-2024-10-22"`
 
-"account"
+      - `"computer-use-2025-01-24"`
 
-
+      - `"pdfs-2024-09-25"`
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+      - `"token-counting-2024-11-01"`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+      - `"token-efficient-tools-2025-02-19"`
 
-One of the following:
+      - `"output-128k-2025-02-19"`
 
-(string & {})
+      - `"files-api-2025-04-14"`
 
-
+      - `"mcp-client-2025-04-04"`
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more
+      - `"mcp-client-2025-11-20"`
 
-"message-batches-2024-09-24"
+      - `"dev-full-thinking-2025-05-14"`
 
-"prompt-caching-2024-07-31"
+      - `"interleaved-thinking-2025-05-14"`
 
-"computer-use-2024-10-22"
+      - `"code-execution-2025-05-22"`
 
-"computer-use-2025-01-24"
+      - `"extended-cache-ttl-2025-04-11"`
 
-"pdfs-2024-09-25"
+      - `"context-1m-2025-08-07"`
 
-"token-counting-2024-11-01"
+      - `"context-management-2025-06-27"`
 
-"token-efficient-tools-2025-02-19"
+      - `"model-context-window-exceeded-2025-08-26"`
 
-"output-128k-2025-02-19"
+      - `"skills-2025-10-02"`
 
-"files-api-2025-04-14"
+      - `"fast-mode-2026-02-01"`
 
-"mcp-client-2025-04-04"
+      - `"output-300k-2026-03-24"`
 
-"mcp-client-2025-11-20"
+      - `"user-profiles-2026-03-24"`
 
-"dev-full-thinking-2025-05-14"
+      - `"user-profiles-2026-08-18"`
 
-"interleaved-thinking-2025-05-14"
+      - `"advisor-tool-2026-03-01"`
 
-"code-execution-2025-05-22"
+      - `"managed-agents-2026-04-01"`
 
-"extended-cache-ttl-2025-04-11"
+      - `"cache-diagnosis-2026-04-07"`
 
-"context-1m-2025-08-07"
+      - `"dreaming-2026-04-21"`
 
-"context-management-2025-06-27"
+      - `"thinking-token-count-2026-05-13"`
 
-"model-context-window-exceeded-2025-08-26"
+      - `"server-side-fallback-2026-06-01"`
 
-"skills-2025-10-02"
+      - `"server-side-fallback-2026-07-01"`
 
-"fast-mode-2026-02-01"
+      - `"fallback-credit-2026-06-01"`
 
-"output-300k-2026-03-24"
+      - `"fallback-credit-2026-07-01"`
 
-"user-profiles-2026-03-24"
+      - `"agent-memory-2026-07-22"`
 
-"advisor-tool-2026-03-01"
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
-"managed-agents-2026-04-01"
+      - `"compact-2026-01-12"`
 
-"cache-diagnosis-2026-04-07"
+      - `"computer-use-2025-11-24"`
 
-"thinking-token-count-2026-05-13"
+      - `"mcp-tunnels-2026-06-22"`
 
-"server-side-fallback-2026-06-01"
+      - `"structured-outputs-2025-11-13"`
 
-"fallback-credit-2026-06-01"
+      - `"task-budgets-2026-03-13"`
 
-"agent-memory-2026-07-22"
+      - `"thinking-display-updates-2026-08-18"`
 
-##### ReturnsExpand Collapse
+      - `"ce-user-management-2026-07-13"`
 
-
+      - `"mid-conversation-output-config-2026-07-01"`
 
-BetaEnvironment { id, archived\_at, config, 7 more } 
+      - `"thinking-binding-controls-2026-08-01"`
 
-Unified Environment resource for both cloud and self-hosted environments.
+      - `"mid-conversation-system-clear-at-2026-08-21"`
 
-id: string
+## Returns
 
-Environment identifier (e.g., 'env\_...')
+- `BetaEnvironment`
 
-archived\_at: string | null
+  Unified Environment resource for both cloud and self-hosted environments.
 
-RFC 3339 timestamp when environment was archived, or null if not archived
+  - `id: string`
 
-
+    Environment identifier (e.g., 'env_...')
 
-config: [BetaCloudConfig](api/beta/environments.md) { networking, packages, type }  | [BetaSelfHostedConfig](api/beta/environments.md) { type } 
+  - `archived_at: string | null`
 
-Environment configuration (either Anthropic Cloud or self-hosted)
+    RFC 3339 timestamp when environment was archived, or null if not archived
 
-One of the following:
+  - `config: BetaCloudConfig | BetaSelfHostedConfig`
 
-
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-BetaCloudConfig { networking, packages, type } 
+    - `BetaCloudConfig`
 
-`cloud` environment configuration.
+      `cloud` environment configuration.
 
-
+      - `networking: BetaUnrestrictedNetwork | BetaLimitedNetwork`
 
-networking: [BetaUnrestrictedNetwork](api/beta/environments.md) { type }  | [BetaLimitedNetwork](api/beta/environments.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
+        Network configuration policy.
 
-Network configuration policy.
+        - `BetaUnrestrictedNetwork`
 
-One of the following:
+          Unrestricted network access.
 
-
+          - `type: "unrestricted"`
 
-BetaUnrestrictedNetwork { type } 
+            Network policy type
 
-Unrestricted network access.
+        - `BetaLimitedNetwork`
 
-type: "unrestricted"
+          Limited network access.
 
-Network policy type
+          - `allow_mcp_servers: boolean`
 
-
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-BetaLimitedNetwork { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
+          - `allow_package_managers: boolean`
 
-Limited network access.
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-allow\_mcp\_servers: boolean
+          - `allowed_hosts: Array<string>`
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+            Specifies domains the container can reach.
 
-allow\_package\_managers: boolean
+          - `type: "limited"`
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+            Network policy type
 
-allowed\_hosts: Array<string>
+      - `packages: BetaPackages`
 
-Specifies domains the container can reach.
+        Package manager configuration.
 
-type: "limited"
+        - `apt: Array<string>`
 
-Network policy type
+          Ubuntu/Debian packages to install
 
-
+        - `cargo: Array<string>`
 
-packages: [BetaPackages](api/beta/environments.md) { apt, cargo, gem, 4 more } 
+          Rust packages to install
 
-Package manager configuration.
+        - `gem: Array<string>`
 
-apt: Array<string>
+          Ruby packages to install
 
-Ubuntu/Debian packages to install
+        - `go: Array<string>`
 
-cargo: Array<string>
+          Go packages to install
 
-Rust packages to install
+        - `npm: Array<string>`
 
-gem: Array<string>
+          Node.js packages to install
 
-Ruby packages to install
+        - `pip: Array<string>`
 
-go: Array<string>
+          Python packages to install
 
-Go packages to install
+        - `type?: "packages"`
 
-npm: Array<string>
+          Package configuration type
 
-Node.js packages to install
+          default: packages
 
-pip: Array<string>
+      - `type: "cloud"`
 
-Python packages to install
+        Environment type
 
-type?: "packages"
+    - `BetaSelfHostedConfig`
 
-Package configuration type
+      Configuration for self-hosted environments.
 
-type: "cloud"
+      - `type: "self_hosted"`
 
-Environment type
+        Environment type
 
-
+  - `created_at: string`
 
-BetaSelfHostedConfig { type } 
+    RFC 3339 timestamp when environment was created
 
-Configuration for self-hosted environments.
+  - `description: string | null`
 
-type: "self\_hosted"
+    User-provided description for the environment; null when unset
 
-Environment type
+  - `metadata: Record<string, string>`
 
-created\_at: string
+    User-provided metadata key-value pairs
 
-RFC 3339 timestamp when environment was created
+  - `name: string`
 
-description: string
+    Human-readable name for the environment
 
-User-provided description for the environment
+  - `type: "environment"`
 
-metadata: Record<string, string>
+    The type of object (always 'environment')
 
-User-provided metadata key-value pairs
+    default: environment
 
-name: string
+  - `updated_at: string`
 
-Human-readable name for the environment
+    RFC 3339 timestamp when environment was last updated
 
-type: "environment"
+  - `scope?: "organization" | "account"`
 
-The type of object (always 'environment')
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-updated\_at: string
+    - `"organization"`
 
-RFC 3339 timestamp when environment was last updated
+    - `"account"`
 
-
+## Example
 
-scope?: "organization" | "account"
-
-The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
-
-One of the following:
-
-"organization"
-
-"account"
-
-Update Environment
-
-TypeScript
-
-```shiki
-import Anthropic from '@anthropic-ai/sdk';
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const betaEnvironment = await client.beta.environments.update('env_011CZkZ9X2dpNyB7HsEFoRfW');
+const betaEnvironment = await client.beta.environments.update("env_011CZkZ9X2dpNyB7HsEFoRfW");
 
 console.log(betaEnvironment.id);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
-  "archived_at": null,
-  "config": {
-    "networking": {
-      "allow_mcp_servers": false,
-      "allow_package_managers": true,
-      "allowed_hosts": [
-        "api.example.com"
-      ],
-      "type": "limited"
-    },
-    "packages": {
-      "apt": [
-        "string"
-      ],
-      "cargo": [
-        "string"
-      ],
-      "gem": [
-        "string"
-      ],
-      "go": [
-        "string"
-      ],
-      "npm": [
-        "string"
-      ],
-      "pip": [
-        "pandas",
-        "numpy"
-      ],
-      "type": "packages"
-    },
-    "type": "cloud"
-  },
-  "created_at": "2026-03-15T10:00:00Z",
-  "description": "Python environment with data-analysis packages.",
-  "metadata": {},
-  "name": "python-data-analysis",
-  "type": "environment",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "scope": "organization"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
   "archived_at": null,

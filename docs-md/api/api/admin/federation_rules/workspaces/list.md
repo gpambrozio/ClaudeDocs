@@ -1,12 +1,6 @@
 # List Federation Rule Workspaces
 
-Copy page
-
-
-
-# List Federation Rule Workspaces
-
-GET/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
+**GET** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces`
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -18,117 +12,77 @@ always `null`. Returns explicit per-workspace enablements only; for
 rules with `applies_to_all_workspaces` or a legacy single
 `workspace_id`, check those fields on the rule itself.
 
-##### Path parameters
+## Path parameters
 
-federation\_rule\_id: string
+- `federation_rule_id: string`
 
-ID of the federation rule.
+  ID of the federation rule.
 
-##### Query parameters
+## Query parameters
 
-
+- `limit: optional number`
 
-limit: optional number
+  Number of results per page.
 
-Number of results per page.
+  default: 20, maximum: 100, minimum: 1
 
-default20
+- `page: optional string`
 
-maximum100
+  Opaque cursor from a previous response's `next_page`.
 
-minimum1
+## Headers
 
-page: optional string
+- `"anthropic-beta": optional array of string`
 
-Opaque cursor from a previous response's `next_page`.
+  Optional header to specify the beta version(s) you want to use.
 
-##### Headers
+  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-
+## Returns
 
-"anthropic-beta": optional array of string
+- `data: array of object`
 
-Optional header to specify the beta version(s) you want to use.
+  - `created_at: string`
 
-To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
+    When this workspace was enabled for the rule.
 
-##### Returns
+    format: date-time
 
-
+  - `created_by_actor_id: string or null`
 
-data: array of object{ created\_at, created\_by\_actor\_id, federation\_rule\_id, 3 more }
+    Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
 
-
+  - `federation_rule_id: string`
 
-created\_at: string
+    Tagged ID of the federation rule.
 
-When this workspace was enabled for the rule.
+  - `type: "federation_rule_workspace"`
 
-formatdate-time
+    default: federation_rule_workspace
 
-created\_by\_actor\_id: string or null
+  - `workspace_id: string`
 
-Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
+    Tagged ID of the workspace this rule is enabled for.
 
-federation\_rule\_id: string
+  - `workspace_name: string or null`
 
-Tagged ID of the federation rule.
+    Workspace display name. Populated when listing; null in the enable response.
 
-
+- `next_page: string or null`
 
-type: "federation\_rule\_workspace"
+  Opaque cursor for the next page; null when there are no more results.
 
-defaultfederation\_rule\_workspace
+## Example
 
-workspace\_id: string
-
-Tagged ID of the workspace this rule is enabled for.
-
-workspace\_name: string or null
-
-Workspace display name. Populated when listing; null in the enable response.
-
-next\_page: string or null
-
-Opaque cursor for the next page; null when there are no more results.
-
-List Federation Rule Workspaces
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RULE_ID/workspaces \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "created_by_actor_id": "created_by_actor_id",
-      "federation_rule_id": "federation_rule_id",
-      "type": "federation_rule_workspace",
-      "workspace_id": "workspace_id",
-      "workspace_name": "workspace_name"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

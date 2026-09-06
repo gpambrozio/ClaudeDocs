@@ -1,1161 +1,1271 @@
 # Webhooks
 
-Copy page
+## Unwrap
 
-
+`$client->beta->webhooks->unwrap(): void`
 
-PHP
+Verifies the webhook signature from the `webhook-id`, `webhook-timestamp` and `webhook-signature`
+headers using your webhook signing key, then parses the payload into an event. Fails if the
+signature is missing or invalid.
 
-# Webhooks
+### Example
 
-Helpers for receiving and verifying webhook events. Use `unwrap` in your SDK to verify signatures and parse payloads; see the [webhooks guide](managed-agents/webhooks.md) for handler examples.
+```php
+<?php
 
-Possible `data.type` values:
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-- `agent.archived`
-- `agent.created`
-- `agent.deleted`
-- `agent.updated`
-- `deployment.archived`
-- `deployment.created`
-- `deployment.deleted`
-- `deployment.paused`
-- `deployment.unpaused`
-- `deployment.updated`
-- `deployment_run.failed`
-- `deployment_run.started`
-- `deployment_run.succeeded`
-- `session.archived`
-- `session.created`
-- `session.deleted`
-- `session.idled`
-- `session.outcome_evaluation_ended`
-- `session.pending`
-- `session.requires_action`
-- `session.running`
-- `session.status_idled`
-- `session.status_rescheduled`
-- `session.status_run_started`
-- `session.status_terminated`
-- `session.thread_created`
-- `session.thread_idled`
-- `session.thread_terminated`
-- `session.updated`
-- `vault.archived`
-- `vault.created`
-- `vault.deleted`
-- `vault_credential.archived`
-- `vault_credential.created`
-- `vault_credential.deleted`
-- `vault_credential.refresh_failed`
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-##### ModelsExpand Collapse
+$result = $client->beta->webhooks->unwrap();
 
-
+var_dump($result);
+```
 
-[BetaWebhookAgentArchivedEventData](api/beta/webhooks.md)
+## Parse Unverified
 
-string id
+`$client->beta->webhooks->parseUnverified(): void`
 
-ID of the agent that triggered the event.
+Parses a webhook payload into an event without verifying its signature. Prefer `unwrap()` unless
+you have already verified the signature yourself.
 
-string organizationID
+### Example
 
-"agent.archived" type
+```php
+<?php
 
-string workspaceID
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-[BetaWebhookAgentCreatedEventData](api/beta/webhooks.md)
+$result = $client->beta->webhooks->parseUnverified();
 
-string id
+var_dump($result);
+```
 
-ID of the agent that triggered the event.
+## Domain types
 
-string organizationID
+### Beta Webhook Agent Archived Event Data
 
-"agent.created" type
+- `BetaWebhookAgentArchivedEventData`
 
-string workspaceID
+  - `string id`
 
-
+    ID of the agent that triggered the event.
 
-[BetaWebhookAgentDeletedEventData](api/beta/webhooks.md)
+  - `string organizationID`
 
-string id
+  - `"agent.archived" type`
 
-ID of the agent that triggered the event.
+  - `string workspaceID`
 
-string organizationID
+### Beta Webhook Agent Created Event Data
 
-"agent.deleted" type
+- `BetaWebhookAgentCreatedEventData`
 
-string workspaceID
+  - `string id`
 
-
+    ID of the agent that triggered the event.
 
-[BetaWebhookAgentUpdatedEventData](api/beta/webhooks.md)
+  - `string organizationID`
 
-string id
+  - `"agent.created" type`
 
-ID of the agent that triggered the event.
+  - `string workspaceID`
 
-string organizationID
+### Beta Webhook Agent Deleted Event Data
 
-"agent.updated" type
+- `BetaWebhookAgentDeletedEventData`
 
-string workspaceID
+  - `string id`
 
-
+    ID of the agent that triggered the event.
 
-[BetaWebhookDeploymentArchivedEventData](api/beta/webhooks.md)
+  - `string organizationID`
 
-string id
+  - `"agent.deleted" type`
 
-ID of the deployment that triggered the event.
+  - `string workspaceID`
 
-string organizationID
+### Beta Webhook Agent Updated Event Data
 
-"deployment.archived" type
+- `BetaWebhookAgentUpdatedEventData`
 
-string workspaceID
+  - `string id`
 
-
+    ID of the agent that triggered the event.
 
-[BetaWebhookDeploymentCreatedEventData](api/beta/webhooks.md)
+  - `string organizationID`
 
-string id
+  - `"agent.updated" type`
 
-ID of the deployment that triggered the event.
+  - `string workspaceID`
 
-string organizationID
+### Beta Webhook Deployment Archived Event Data
 
-"deployment.created" type
+- `BetaWebhookDeploymentArchivedEventData`
 
-string workspaceID
+  - `string id`
 
-
+    ID of the deployment that triggered the event.
 
-[BetaWebhookDeploymentDeletedEventData](api/beta/webhooks.md)
+  - `string organizationID`
 
-string id
+  - `"deployment.archived" type`
 
-ID of the deployment that triggered the event.
+  - `string workspaceID`
 
-string organizationID
+### Beta Webhook Deployment Created Event Data
 
-"deployment.deleted" type
+- `BetaWebhookDeploymentCreatedEventData`
 
-string workspaceID
+  - `string id`
 
-
+    ID of the deployment that triggered the event.
 
-[BetaWebhookDeploymentPausedEventData](api/beta/webhooks.md)
+  - `string organizationID`
 
-string id
+  - `"deployment.created" type`
 
-ID of the deployment that triggered the event.
+  - `string workspaceID`
 
-string organizationID
+### Beta Webhook Deployment Deleted Event Data
 
-"deployment.paused" type
+- `BetaWebhookDeploymentDeletedEventData`
 
-string workspaceID
+  - `string id`
 
-
+    ID of the deployment that triggered the event.
 
-[BetaWebhookDeploymentRunFailedEventData](api/beta/webhooks.md)
+  - `string organizationID`
 
-string id
+  - `"deployment.deleted" type`
 
-ID of the deployment run that triggered the event.
+  - `string workspaceID`
 
-string organizationID
+### Beta Webhook Deployment Paused Event Data
 
-"deployment\_run.failed" type
+- `BetaWebhookDeploymentPausedEventData`
 
-string workspaceID
+  - `string id`
 
-
+    ID of the deployment that triggered the event.
 
-[BetaWebhookDeploymentRunStartedEventData](api/beta/webhooks.md)
+  - `string organizationID`
 
-string id
+  - `"deployment.paused" type`
 
-ID of the deployment run that triggered the event.
+  - `string workspaceID`
 
-string organizationID
+### Beta Webhook Deployment Run Failed Event Data
 
-"deployment\_run.started" type
+- `BetaWebhookDeploymentRunFailedEventData`
 
-string workspaceID
+  - `string id`
 
-
+    ID of the deployment run that triggered the event.
 
-[BetaWebhookDeploymentRunSucceededEventData](api/beta/webhooks.md)
+  - `string organizationID`
 
-string id
+  - `"deployment_run.failed" type`
 
-ID of the deployment run that triggered the event.
+  - `string workspaceID`
 
-string organizationID
+### Beta Webhook Deployment Run Started Event Data
 
-"deployment\_run.succeeded" type
+- `BetaWebhookDeploymentRunStartedEventData`
 
-string workspaceID
+  - `string id`
 
-
+    ID of the deployment run that triggered the event.
 
-[BetaWebhookDeploymentUnpausedEventData](api/beta/webhooks.md)
+  - `string organizationID`
 
-string id
+  - `"deployment_run.started" type`
 
-ID of the deployment that triggered the event.
+  - `string workspaceID`
 
-string organizationID
+### Beta Webhook Deployment Run Succeeded Event Data
 
-"deployment.unpaused" type
+- `BetaWebhookDeploymentRunSucceededEventData`
 
-string workspaceID
+  - `string id`
 
-
+    ID of the deployment run that triggered the event.
 
-[BetaWebhookDeploymentUpdatedEventData](api/beta/webhooks.md)
+  - `string organizationID`
 
-string id
+  - `"deployment_run.succeeded" type`
 
-ID of the deployment that triggered the event.
+  - `string workspaceID`
 
-string organizationID
+### Beta Webhook Deployment Unpaused Event Data
 
-"deployment.updated" type
+- `BetaWebhookDeploymentUnpausedEventData`
 
-string workspaceID
+  - `string id`
 
-
+    ID of the deployment that triggered the event.
 
-[BetaWebhookEvent](api/beta/webhooks.md)
+  - `string organizationID`
 
-string id
+  - `"deployment.unpaused" type`
 
-Unique event identifier for idempotency.
+  - `string workspaceID`
 
-\Datetime createdAt
+### Beta Webhook Deployment Updated Event Data
 
-RFC 3339 timestamp when the event occurred.
+- `BetaWebhookDeploymentUpdatedEventData`
 
-[BetaWebhookEventData](api/beta/webhooks.md) data
+  - `string id`
 
-"event" type
+    ID of the deployment that triggered the event.
 
-Object type. Always `event` for webhook payloads.
+  - `string organizationID`
 
-
+  - `"deployment.updated" type`
 
-[BetaWebhookEventData](api/beta/webhooks.md)
+  - `string workspaceID`
 
-One of the following:
+### Beta Webhook Environment Archived Event Data
 
-
+- `BetaWebhookEnvironmentArchivedEventData`
 
-[BetaWebhookSessionCreatedEventData](api/beta/webhooks.md)
+  - `string id`
 
-string id
+    ID of the environment that triggered the event.
 
-ID of the session that triggered the event.
+  - `string organizationID`
 
-string organizationID
+  - `"environment.archived" type`
 
-"session.created" type
+  - `string workspaceID`
 
-string workspaceID
+### Beta Webhook Environment Created Event Data
 
-
+- `BetaWebhookEnvironmentCreatedEventData`
 
-[BetaWebhookSessionPendingEventData](api/beta/webhooks.md)
+  - `string id`
 
-string id
+    ID of the environment that triggered the event.
 
-ID of the session that triggered the event.
+  - `string organizationID`
 
-string organizationID
+  - `"environment.created" type`
 
-"session.pending" type
+  - `string workspaceID`
 
-string workspaceID
+### Beta Webhook Environment Deleted Event Data
 
-
+- `BetaWebhookEnvironmentDeletedEventData`
 
-[BetaWebhookSessionRunningEventData](api/beta/webhooks.md)
+  - `string id`
 
-string id
+    ID of the environment that triggered the event.
 
-ID of the session that triggered the event.
+  - `string organizationID`
 
-string organizationID
+  - `"environment.deleted" type`
 
-"session.running" type
+  - `string workspaceID`
 
-string workspaceID
+### Beta Webhook Environment Updated Event Data
 
-
+- `BetaWebhookEnvironmentUpdatedEventData`
 
-[BetaWebhookSessionIdledEventData](api/beta/webhooks.md)
+  - `string id`
 
-string id
+    ID of the environment that triggered the event.
 
-ID of the session that triggered the event.
+  - `string organizationID`
 
-string organizationID
+  - `"environment.updated" type`
 
-"session.idled" type
+  - `string workspaceID`
 
-string workspaceID
+### Beta Webhook Event
 
-
+- `BetaWebhookEvent`
 
-[BetaWebhookSessionRequiresActionEventData](api/beta/webhooks.md)
+  - `string id`
 
-string id
+    Unique event identifier for idempotency.
 
-ID of the session that triggered the event.
+  - `\Datetime createdAt`
 
-string organizationID
+    RFC 3339 timestamp when the event occurred.
 
-"session.requires\_action" type
+  - `BetaWebhookEventData data`
 
-string workspaceID
+  - `"event" type`
 
-
+    Object type. Always `event` for webhook payloads.
 
-[BetaWebhookSessionArchivedEventData](api/beta/webhooks.md)
+### Beta Webhook Event Data
 
-string id
+- `BetaWebhookEventData`
 
-ID of the session that triggered the event.
+  - `BetaWebhookSessionCreatedEventData`
 
-string organizationID
+    - `string id`
 
-"session.archived" type
+      ID of the session that triggered the event.
 
-string workspaceID
+    - `string organizationID`
 
-
+    - `"session.created" type`
 
-[BetaWebhookSessionDeletedEventData](api/beta/webhooks.md)
+    - `string workspaceID`
 
-string id
+  - `BetaWebhookSessionPendingEventData`
 
-ID of the session that triggered the event.
+    - `string id`
 
-string organizationID
+      ID of the session that triggered the event.
 
-"session.deleted" type
+    - `string organizationID`
 
-string workspaceID
+    - `"session.pending" type`
 
-
+    - `string workspaceID`
 
-[BetaWebhookSessionStatusRescheduledEventData](api/beta/webhooks.md)
+  - `BetaWebhookSessionRunningEventData`
 
-string id
+    - `string id`
 
-ID of the session that triggered the event.
+      ID of the session that triggered the event.
 
-string organizationID
+    - `string organizationID`
 
-"session.status\_rescheduled" type
+    - `"session.running" type`
 
-string workspaceID
+    - `string workspaceID`
 
-
+  - `BetaWebhookSessionIdledEventData`
 
-[BetaWebhookSessionStatusRunStartedEventData](api/beta/webhooks.md)
+    - `string id`
 
-string id
+      ID of the session that triggered the event.
 
-ID of the session that triggered the event.
+    - `string organizationID`
 
-string organizationID
+    - `"session.idled" type`
 
-"session.status\_run\_started" type
+    - `string workspaceID`
 
-string workspaceID
+  - `BetaWebhookSessionRequiresActionEventData`
 
-
+    - `string id`
 
-[BetaWebhookSessionStatusIdledEventData](api/beta/webhooks.md)
+      ID of the session that triggered the event.
 
-string id
+    - `string organizationID`
 
-ID of the session that triggered the event.
+    - `"session.requires_action" type`
 
-string organizationID
+    - `string workspaceID`
 
-"session.status\_idled" type
+  - `BetaWebhookSessionArchivedEventData`
 
-string workspaceID
+    - `string id`
 
-
+      ID of the session that triggered the event.
 
-[BetaWebhookSessionStatusTerminatedEventData](api/beta/webhooks.md)
+    - `string organizationID`
 
-string id
+    - `"session.archived" type`
 
-ID of the session that triggered the event.
+    - `string workspaceID`
 
-string organizationID
+  - `BetaWebhookSessionDeletedEventData`
 
-"session.status\_terminated" type
+    - `string id`
 
-string workspaceID
+      ID of the session that triggered the event.
 
-
+    - `string organizationID`
 
-[BetaWebhookSessionThreadCreatedEventData](api/beta/webhooks.md)
+    - `"session.deleted" type`
 
-string id
+    - `string workspaceID`
 
-ID of the session that triggered the event.
+  - `BetaWebhookSessionStatusRescheduledEventData`
 
-string organizationID
+    - `string id`
 
-string sessionThreadID
+      ID of the session that triggered the event.
 
-ID of the session thread this event refers to.
+    - `string organizationID`
 
-"session.thread\_created" type
+    - `"session.status_rescheduled" type`
 
-string workspaceID
+    - `string workspaceID`
 
-
+  - `BetaWebhookSessionStatusRunStartedEventData`
 
-[BetaWebhookSessionThreadIdledEventData](api/beta/webhooks.md)
+    - `string id`
 
-string id
+      ID of the session that triggered the event.
 
-ID of the session that triggered the event.
+    - `string organizationID`
 
-string organizationID
+    - `"session.status_run_started" type`
 
-string sessionThreadID
+    - `string workspaceID`
 
-ID of the session thread this event refers to.
+  - `BetaWebhookSessionStatusIdledEventData`
 
-"session.thread\_idled" type
+    - `string id`
 
-string workspaceID
+      ID of the session that triggered the event.
 
-
+    - `string organizationID`
 
-[BetaWebhookSessionThreadTerminatedEventData](api/beta/webhooks.md)
+    - `"session.status_idled" type`
 
-string id
+    - `string workspaceID`
 
-ID of the session that triggered the event.
+  - `BetaWebhookSessionStatusTerminatedEventData`
 
-string organizationID
+    - `string id`
 
-string sessionThreadID
+      ID of the session that triggered the event.
 
-ID of the session thread this event refers to.
+    - `string organizationID`
 
-"session.thread\_terminated" type
+    - `"session.status_terminated" type`
 
-string workspaceID
+    - `string workspaceID`
 
-
+  - `BetaWebhookSessionThreadCreatedEventData`
 
-[BetaWebhookSessionOutcomeEvaluationEndedEventData](api/beta/webhooks.md)
+    - `string id`
 
-string id
+      ID of the session that triggered the event.
 
-ID of the session that triggered the event.
+    - `string organizationID`
 
-string organizationID
+    - `string sessionThreadID`
 
-"session.outcome\_evaluation\_ended" type
+      ID of the session thread this event refers to.
 
-string workspaceID
+    - `"session.thread_created" type`
 
-
+    - `string workspaceID`
 
-[BetaWebhookVaultCreatedEventData](api/beta/webhooks.md)
+  - `BetaWebhookSessionThreadIdledEventData`
 
-string id
+    - `string id`
 
-ID of the vault that triggered the event.
+      ID of the session that triggered the event.
 
-string organizationID
+    - `string organizationID`
 
-"vault.created" type
+    - `string sessionThreadID`
 
-string workspaceID
+      ID of the session thread this event refers to.
 
-
+    - `"session.thread_idled" type`
 
-[BetaWebhookVaultArchivedEventData](api/beta/webhooks.md)
+    - `string workspaceID`
 
-string id
+  - `BetaWebhookSessionThreadTerminatedEventData`
 
-ID of the vault that triggered the event.
+    - `string id`
 
-string organizationID
+      ID of the session that triggered the event.
 
-"vault.archived" type
+    - `string organizationID`
 
-string workspaceID
+    - `string sessionThreadID`
 
-
+      ID of the session thread this event refers to.
 
-[BetaWebhookVaultDeletedEventData](api/beta/webhooks.md)
+    - `"session.thread_terminated" type`
 
-string id
+    - `string workspaceID`
 
-ID of the vault that triggered the event.
+  - `BetaWebhookSessionOutcomeEvaluationEndedEventData`
 
-string organizationID
+    - `string id`
 
-"vault.deleted" type
+      ID of the session that triggered the event.
 
-string workspaceID
+    - `string organizationID`
 
-
+    - `"session.outcome_evaluation_ended" type`
 
-[BetaWebhookVaultCredentialCreatedEventData](api/beta/webhooks.md)
+    - `string workspaceID`
 
-string id
+  - `BetaWebhookVaultCreatedEventData`
 
-ID of the vault credential that triggered the event.
+    - `string id`
 
-string organizationID
+      ID of the vault that triggered the event.
 
-"vault\_credential.created" type
+    - `string organizationID`
 
-string vaultID
+    - `"vault.created" type`
 
-ID of the vault that owns this credential.
+    - `string workspaceID`
 
-string workspaceID
+  - `BetaWebhookVaultArchivedEventData`
 
-
+    - `string id`
 
-[BetaWebhookVaultCredentialArchivedEventData](api/beta/webhooks.md)
+      ID of the vault that triggered the event.
 
-string id
+    - `string organizationID`
 
-ID of the vault credential that triggered the event.
+    - `"vault.archived" type`
 
-string organizationID
+    - `string workspaceID`
 
-"vault\_credential.archived" type
+  - `BetaWebhookVaultDeletedEventData`
 
-string vaultID
+    - `string id`
 
-ID of the vault that owns this credential.
+      ID of the vault that triggered the event.
 
-string workspaceID
+    - `string organizationID`
 
-
+    - `"vault.deleted" type`
 
-[BetaWebhookVaultCredentialDeletedEventData](api/beta/webhooks.md)
+    - `string workspaceID`
 
-string id
+  - `BetaWebhookVaultCredentialCreatedEventData`
 
-ID of the vault credential that triggered the event.
+    - `string id`
 
-string organizationID
+      ID of the vault credential that triggered the event.
 
-"vault\_credential.deleted" type
+    - `string organizationID`
 
-string vaultID
+    - `"vault_credential.created" type`
 
-ID of the vault that owns this credential.
+    - `string vaultID`
 
-string workspaceID
+      ID of the vault that owns this credential.
 
-
+    - `string workspaceID`
 
-[BetaWebhookVaultCredentialRefreshFailedEventData](api/beta/webhooks.md)
+  - `BetaWebhookVaultCredentialArchivedEventData`
 
-string id
+    - `string id`
 
-ID of the vault credential that triggered the event.
+      ID of the vault credential that triggered the event.
 
-string organizationID
+    - `string organizationID`
 
-"vault\_credential.refresh\_failed" type
+    - `"vault_credential.archived" type`
 
-string vaultID
+    - `string vaultID`
 
-ID of the vault that owns this credential.
+      ID of the vault that owns this credential.
 
-string workspaceID
+    - `string workspaceID`
 
-
+  - `BetaWebhookVaultCredentialDeletedEventData`
 
-[BetaWebhookSessionUpdatedEventData](api/beta/webhooks.md)
+    - `string id`
 
-string id
+      ID of the vault credential that triggered the event.
 
-ID of the session that triggered the event.
+    - `string organizationID`
 
-string organizationID
+    - `"vault_credential.deleted" type`
 
-"session.updated" type
+    - `string vaultID`
 
-string workspaceID
+      ID of the vault that owns this credential.
 
-
+    - `string workspaceID`
 
-[BetaWebhookAgentCreatedEventData](api/beta/webhooks.md)
+  - `BetaWebhookVaultCredentialRefreshFailedEventData`
 
-string id
+    - `string id`
 
-ID of the agent that triggered the event.
+      ID of the vault credential that triggered the event.
 
-string organizationID
+    - `string organizationID`
 
-"agent.created" type
+    - `"vault_credential.refresh_failed" type`
 
-string workspaceID
+    - `string vaultID`
 
-
+      ID of the vault that owns this credential.
 
-[BetaWebhookAgentArchivedEventData](api/beta/webhooks.md)
+    - `string workspaceID`
 
-string id
+  - `BetaWebhookSessionUpdatedEventData`
 
-ID of the agent that triggered the event.
+    - `string id`
 
-string organizationID
+      ID of the session that triggered the event.
 
-"agent.archived" type
+    - `string organizationID`
 
-string workspaceID
+    - `"session.updated" type`
 
-
+    - `string workspaceID`
 
-[BetaWebhookAgentDeletedEventData](api/beta/webhooks.md)
+  - `BetaWebhookAgentCreatedEventData`
 
-string id
+    - `string id`
 
-ID of the agent that triggered the event.
+      ID of the agent that triggered the event.
 
-string organizationID
+    - `string organizationID`
 
-"agent.deleted" type
+    - `"agent.created" type`
 
-string workspaceID
+    - `string workspaceID`
 
-
+  - `BetaWebhookAgentArchivedEventData`
 
-[BetaWebhookDeploymentPausedEventData](api/beta/webhooks.md)
+    - `string id`
 
-string id
+      ID of the agent that triggered the event.
 
-ID of the deployment that triggered the event.
+    - `string organizationID`
 
-string organizationID
+    - `"agent.archived" type`
 
-"deployment.paused" type
+    - `string workspaceID`
 
-string workspaceID
+  - `BetaWebhookAgentDeletedEventData`
 
-
+    - `string id`
 
-[BetaWebhookDeploymentRunFailedEventData](api/beta/webhooks.md)
+      ID of the agent that triggered the event.
 
-string id
+    - `string organizationID`
 
-ID of the deployment run that triggered the event.
+    - `"agent.deleted" type`
 
-string organizationID
+    - `string workspaceID`
 
-"deployment\_run.failed" type
+  - `BetaWebhookDeploymentPausedEventData`
 
-string workspaceID
+    - `string id`
 
-
+      ID of the deployment that triggered the event.
 
-[BetaWebhookDeploymentCreatedEventData](api/beta/webhooks.md)
+    - `string organizationID`
 
-string id
+    - `"deployment.paused" type`
 
-ID of the deployment that triggered the event.
+    - `string workspaceID`
 
-string organizationID
+  - `BetaWebhookDeploymentRunFailedEventData`
 
-"deployment.created" type
+    - `string id`
 
-string workspaceID
+      ID of the deployment run that triggered the event.
 
-
+    - `string organizationID`
 
-[BetaWebhookDeploymentUpdatedEventData](api/beta/webhooks.md)
+    - `"deployment_run.failed" type`
 
-string id
+    - `string workspaceID`
 
-ID of the deployment that triggered the event.
+  - `BetaWebhookDeploymentCreatedEventData`
 
-string organizationID
+    - `string id`
 
-"deployment.updated" type
+      ID of the deployment that triggered the event.
 
-string workspaceID
+    - `string organizationID`
 
-
+    - `"deployment.created" type`
 
-[BetaWebhookDeploymentUnpausedEventData](api/beta/webhooks.md)
+    - `string workspaceID`
 
-string id
+  - `BetaWebhookDeploymentUpdatedEventData`
 
-ID of the deployment that triggered the event.
+    - `string id`
 
-string organizationID
+      ID of the deployment that triggered the event.
 
-"deployment.unpaused" type
+    - `string organizationID`
 
-string workspaceID
+    - `"deployment.updated" type`
 
-
+    - `string workspaceID`
 
-[BetaWebhookAgentUpdatedEventData](api/beta/webhooks.md)
+  - `BetaWebhookDeploymentUnpausedEventData`
 
-string id
+    - `string id`
 
-ID of the agent that triggered the event.
+      ID of the deployment that triggered the event.
 
-string organizationID
+    - `string organizationID`
 
-"agent.updated" type
+    - `"deployment.unpaused" type`
 
-string workspaceID
+    - `string workspaceID`
 
-
+  - `BetaWebhookAgentUpdatedEventData`
 
-[BetaWebhookDeploymentArchivedEventData](api/beta/webhooks.md)
+    - `string id`
 
-string id
+      ID of the agent that triggered the event.
 
-ID of the deployment that triggered the event.
+    - `string organizationID`
 
-string organizationID
+    - `"agent.updated" type`
 
-"deployment.archived" type
+    - `string workspaceID`
 
-string workspaceID
+  - `BetaWebhookDeploymentArchivedEventData`
 
-
+    - `string id`
 
-[BetaWebhookDeploymentRunStartedEventData](api/beta/webhooks.md)
+      ID of the deployment that triggered the event.
 
-string id
+    - `string organizationID`
 
-ID of the deployment run that triggered the event.
+    - `"deployment.archived" type`
 
-string organizationID
+    - `string workspaceID`
 
-"deployment\_run.started" type
+  - `BetaWebhookDeploymentRunStartedEventData`
 
-string workspaceID
+    - `string id`
 
-
+      ID of the deployment run that triggered the event.
 
-[BetaWebhookDeploymentDeletedEventData](api/beta/webhooks.md)
+    - `string organizationID`
 
-string id
+    - `"deployment_run.started" type`
 
-ID of the deployment that triggered the event.
+    - `string workspaceID`
 
-string organizationID
+  - `BetaWebhookDeploymentDeletedEventData`
 
-"deployment.deleted" type
+    - `string id`
 
-string workspaceID
+      ID of the deployment that triggered the event.
 
-
+    - `string organizationID`
 
-[BetaWebhookDeploymentRunSucceededEventData](api/beta/webhooks.md)
+    - `"deployment.deleted" type`
 
-string id
+    - `string workspaceID`
 
-ID of the deployment run that triggered the event.
+  - `BetaWebhookDeploymentRunSucceededEventData`
 
-string organizationID
+    - `string id`
 
-"deployment\_run.succeeded" type
+      ID of the deployment run that triggered the event.
 
-string workspaceID
+    - `string organizationID`
 
-
+    - `"deployment_run.succeeded" type`
 
-[BetaWebhookSessionArchivedEventData](api/beta/webhooks.md)
+    - `string workspaceID`
 
-string id
+  - `BetaWebhookEnvironmentCreatedEventData`
 
-ID of the session that triggered the event.
+    - `string id`
 
-string organizationID
+      ID of the environment that triggered the event.
 
-"session.archived" type
+    - `string organizationID`
 
-string workspaceID
+    - `"environment.created" type`
 
-
+    - `string workspaceID`
 
-[BetaWebhookSessionCreatedEventData](api/beta/webhooks.md)
+  - `BetaWebhookEnvironmentUpdatedEventData`
 
-string id
+    - `string id`
 
-ID of the session that triggered the event.
+      ID of the environment that triggered the event.
 
-string organizationID
+    - `string organizationID`
 
-"session.created" type
+    - `"environment.updated" type`
 
-string workspaceID
+    - `string workspaceID`
 
-
+  - `BetaWebhookEnvironmentArchivedEventData`
 
-[BetaWebhookSessionDeletedEventData](api/beta/webhooks.md)
+    - `string id`
 
-string id
+      ID of the environment that triggered the event.
 
-ID of the session that triggered the event.
+    - `string organizationID`
 
-string organizationID
+    - `"environment.archived" type`
 
-"session.deleted" type
+    - `string workspaceID`
 
-string workspaceID
+  - `BetaWebhookEnvironmentDeletedEventData`
 
-
+    - `string id`
 
-[BetaWebhookSessionIdledEventData](api/beta/webhooks.md)
+      ID of the environment that triggered the event.
 
-string id
+    - `string organizationID`
 
-ID of the session that triggered the event.
+    - `"environment.deleted" type`
 
-string organizationID
+    - `string workspaceID`
 
-"session.idled" type
+  - `BetaWebhookMemoryStoreCreatedEventData`
 
-string workspaceID
+    - `string id`
 
-
+      ID of the memory store that triggered the event.
 
-[BetaWebhookSessionOutcomeEvaluationEndedEventData](api/beta/webhooks.md)
+    - `string organizationID`
 
-string id
+    - `"memory_store.created" type`
 
-ID of the session that triggered the event.
+    - `string workspaceID`
 
-string organizationID
+  - `BetaWebhookMemoryStoreArchivedEventData`
 
-"session.outcome\_evaluation\_ended" type
+    - `string id`
 
-string workspaceID
+      ID of the memory store that triggered the event.
 
-
+    - `string organizationID`
 
-[BetaWebhookSessionPendingEventData](api/beta/webhooks.md)
+    - `"memory_store.archived" type`
 
-string id
+    - `string workspaceID`
 
-ID of the session that triggered the event.
+  - `BetaWebhookMemoryStoreDeletedEventData`
 
-string organizationID
+    - `string id`
 
-"session.pending" type
+      ID of the memory store that triggered the event.
 
-string workspaceID
+    - `string organizationID`
 
-
+    - `"memory_store.deleted" type`
 
-[BetaWebhookSessionRequiresActionEventData](api/beta/webhooks.md)
+    - `string workspaceID`
 
-string id
+  - `BetaWebhookSessionBudgetReachedEventData`
 
-ID of the session that triggered the event.
+    - `string id`
 
-string organizationID
+      ID of the session that triggered the event.
 
-"session.requires\_action" type
+    - `string organizationID`
 
-string workspaceID
+    - `"session.budget_reached" type`
 
-
+    - `string workspaceID`
 
-[BetaWebhookSessionRunningEventData](api/beta/webhooks.md)
+### Beta Webhook Memory Store Archived Event Data
 
-string id
+- `BetaWebhookMemoryStoreArchivedEventData`
 
-ID of the session that triggered the event.
+  - `string id`
 
-string organizationID
+    ID of the memory store that triggered the event.
 
-"session.running" type
+  - `string organizationID`
 
-string workspaceID
+  - `"memory_store.archived" type`
 
-
+  - `string workspaceID`
 
-[BetaWebhookSessionStatusIdledEventData](api/beta/webhooks.md)
+### Beta Webhook Memory Store Created Event Data
 
-string id
+- `BetaWebhookMemoryStoreCreatedEventData`
 
-ID of the session that triggered the event.
+  - `string id`
 
-string organizationID
+    ID of the memory store that triggered the event.
 
-"session.status\_idled" type
+  - `string organizationID`
 
-string workspaceID
+  - `"memory_store.created" type`
 
-
+  - `string workspaceID`
 
-[BetaWebhookSessionStatusRescheduledEventData](api/beta/webhooks.md)
+### Beta Webhook Memory Store Deleted Event Data
 
-string id
+- `BetaWebhookMemoryStoreDeletedEventData`
 
-ID of the session that triggered the event.
+  - `string id`
 
-string organizationID
+    ID of the memory store that triggered the event.
 
-"session.status\_rescheduled" type
+  - `string organizationID`
 
-string workspaceID
+  - `"memory_store.deleted" type`
 
-
+  - `string workspaceID`
 
-[BetaWebhookSessionStatusRunStartedEventData](api/beta/webhooks.md)
+### Beta Webhook Session Archived Event Data
 
-string id
+- `BetaWebhookSessionArchivedEventData`
 
-ID of the session that triggered the event.
+  - `string id`
 
-string organizationID
+    ID of the session that triggered the event.
 
-"session.status\_run\_started" type
+  - `string organizationID`
 
-string workspaceID
+  - `"session.archived" type`
 
-
+  - `string workspaceID`
 
-[BetaWebhookSessionStatusTerminatedEventData](api/beta/webhooks.md)
+### Beta Webhook Session Budget Reached Event Data
 
-string id
+- `BetaWebhookSessionBudgetReachedEventData`
 
-ID of the session that triggered the event.
+  - `string id`
 
-string organizationID
+    ID of the session that triggered the event.
 
-"session.status\_terminated" type
+  - `string organizationID`
 
-string workspaceID
+  - `"session.budget_reached" type`
 
-
+  - `string workspaceID`
 
-[BetaWebhookSessionThreadCreatedEventData](api/beta/webhooks.md)
+### Beta Webhook Session Created Event Data
 
-string id
+- `BetaWebhookSessionCreatedEventData`
 
-ID of the session that triggered the event.
+  - `string id`
 
-string organizationID
+    ID of the session that triggered the event.
 
-string sessionThreadID
+  - `string organizationID`
 
-ID of the session thread this event refers to.
+  - `"session.created" type`
 
-"session.thread\_created" type
+  - `string workspaceID`
 
-string workspaceID
+### Beta Webhook Session Deleted Event Data
 
-
+- `BetaWebhookSessionDeletedEventData`
 
-[BetaWebhookSessionThreadIdledEventData](api/beta/webhooks.md)
+  - `string id`
 
-string id
+    ID of the session that triggered the event.
 
-ID of the session that triggered the event.
+  - `string organizationID`
 
-string organizationID
+  - `"session.deleted" type`
 
-string sessionThreadID
+  - `string workspaceID`
 
-ID of the session thread this event refers to.
+### Beta Webhook Session Idled Event Data
 
-"session.thread\_idled" type
+- `BetaWebhookSessionIdledEventData`
 
-string workspaceID
+  - `string id`
 
-
+    ID of the session that triggered the event.
 
-[BetaWebhookSessionThreadTerminatedEventData](api/beta/webhooks.md)
+  - `string organizationID`
 
-string id
+  - `"session.idled" type`
 
-ID of the session that triggered the event.
+  - `string workspaceID`
 
-string organizationID
+### Beta Webhook Session Outcome Evaluation Ended Event Data
 
-string sessionThreadID
+- `BetaWebhookSessionOutcomeEvaluationEndedEventData`
 
-ID of the session thread this event refers to.
+  - `string id`
 
-"session.thread\_terminated" type
+    ID of the session that triggered the event.
 
-string workspaceID
+  - `string organizationID`
 
-
+  - `"session.outcome_evaluation_ended" type`
 
-[BetaWebhookSessionUpdatedEventData](api/beta/webhooks.md)
+  - `string workspaceID`
 
-string id
+### Beta Webhook Session Pending Event Data
 
-ID of the session that triggered the event.
+- `BetaWebhookSessionPendingEventData`
 
-string organizationID
+  - `string id`
 
-"session.updated" type
+    ID of the session that triggered the event.
 
-string workspaceID
+  - `string organizationID`
 
-
+  - `"session.pending" type`
 
-[BetaWebhookVaultArchivedEventData](api/beta/webhooks.md)
+  - `string workspaceID`
 
-string id
+### Beta Webhook Session Requires Action Event Data
 
-ID of the vault that triggered the event.
+- `BetaWebhookSessionRequiresActionEventData`
 
-string organizationID
+  - `string id`
 
-"vault.archived" type
+    ID of the session that triggered the event.
 
-string workspaceID
+  - `string organizationID`
 
-
+  - `"session.requires_action" type`
 
-[BetaWebhookVaultCreatedEventData](api/beta/webhooks.md)
+  - `string workspaceID`
 
-string id
+### Beta Webhook Session Running Event Data
 
-ID of the vault that triggered the event.
+- `BetaWebhookSessionRunningEventData`
 
-string organizationID
+  - `string id`
 
-"vault.created" type
+    ID of the session that triggered the event.
 
-string workspaceID
+  - `string organizationID`
 
-
+  - `"session.running" type`
 
-[BetaWebhookVaultCredentialArchivedEventData](api/beta/webhooks.md)
+  - `string workspaceID`
 
-string id
+### Beta Webhook Session Status Idled Event Data
 
-ID of the vault credential that triggered the event.
+- `BetaWebhookSessionStatusIdledEventData`
 
-string organizationID
+  - `string id`
 
-"vault\_credential.archived" type
+    ID of the session that triggered the event.
 
-string vaultID
+  - `string organizationID`
 
-ID of the vault that owns this credential.
+  - `"session.status_idled" type`
 
-string workspaceID
+  - `string workspaceID`
 
-
+### Beta Webhook Session Status Rescheduled Event Data
 
-[BetaWebhookVaultCredentialCreatedEventData](api/beta/webhooks.md)
+- `BetaWebhookSessionStatusRescheduledEventData`
 
-string id
+  - `string id`
 
-ID of the vault credential that triggered the event.
+    ID of the session that triggered the event.
 
-string organizationID
+  - `string organizationID`
 
-"vault\_credential.created" type
+  - `"session.status_rescheduled" type`
 
-string vaultID
+  - `string workspaceID`
 
-ID of the vault that owns this credential.
+### Beta Webhook Session Status Run Started Event Data
 
-string workspaceID
+- `BetaWebhookSessionStatusRunStartedEventData`
 
-
+  - `string id`
 
-[BetaWebhookVaultCredentialDeletedEventData](api/beta/webhooks.md)
+    ID of the session that triggered the event.
 
-string id
+  - `string organizationID`
 
-ID of the vault credential that triggered the event.
+  - `"session.status_run_started" type`
 
-string organizationID
+  - `string workspaceID`
 
-"vault\_credential.deleted" type
+### Beta Webhook Session Status Terminated Event Data
 
-string vaultID
+- `BetaWebhookSessionStatusTerminatedEventData`
 
-ID of the vault that owns this credential.
+  - `string id`
 
-string workspaceID
+    ID of the session that triggered the event.
 
-
+  - `string organizationID`
 
-[BetaWebhookVaultCredentialRefreshFailedEventData](api/beta/webhooks.md)
+  - `"session.status_terminated" type`
 
-string id
+  - `string workspaceID`
 
-ID of the vault credential that triggered the event.
+### Beta Webhook Session Thread Created Event Data
 
-string organizationID
+- `BetaWebhookSessionThreadCreatedEventData`
 
-"vault\_credential.refresh\_failed" type
+  - `string id`
 
-string vaultID
+    ID of the session that triggered the event.
 
-ID of the vault that owns this credential.
+  - `string organizationID`
 
-string workspaceID
+  - `string sessionThreadID`
 
-
+    ID of the session thread this event refers to.
 
-[BetaWebhookVaultDeletedEventData](api/beta/webhooks.md)
+  - `"session.thread_created" type`
 
-string id
+  - `string workspaceID`
 
-ID of the vault that triggered the event.
+### Beta Webhook Session Thread Idled Event Data
 
-string organizationID
+- `BetaWebhookSessionThreadIdledEventData`
 
-"vault.deleted" type
+  - `string id`
 
-string workspaceID
+    ID of the session that triggered the event.
 
-
+  - `string organizationID`
 
-[UnwrapWebhookEvent](api/beta/webhooks.md)
+  - `string sessionThreadID`
 
-string id
+    ID of the session thread this event refers to.
 
-Unique event identifier for idempotency.
+  - `"session.thread_idled" type`
 
-\Datetime createdAt
+  - `string workspaceID`
 
-RFC 3339 timestamp when the event occurred.
+### Beta Webhook Session Thread Terminated Event Data
 
-[BetaWebhookEventData](api/beta/webhooks.md) data
+- `BetaWebhookSessionThreadTerminatedEventData`
 
-"event" type
+  - `string id`
 
-Object type. Always `event` for webhook payloads.
+    ID of the session that triggered the event.
+
+  - `string organizationID`
+
+  - `string sessionThreadID`
+
+    ID of the session thread this event refers to.
+
+  - `"session.thread_terminated" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Session Updated Event Data
+
+- `BetaWebhookSessionUpdatedEventData`
+
+  - `string id`
+
+    ID of the session that triggered the event.
+
+  - `string organizationID`
+
+  - `"session.updated" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Vault Archived Event Data
+
+- `BetaWebhookVaultArchivedEventData`
+
+  - `string id`
+
+    ID of the vault that triggered the event.
+
+  - `string organizationID`
+
+  - `"vault.archived" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Vault Created Event Data
+
+- `BetaWebhookVaultCreatedEventData`
+
+  - `string id`
+
+    ID of the vault that triggered the event.
+
+  - `string organizationID`
+
+  - `"vault.created" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Vault Credential Archived Event Data
+
+- `BetaWebhookVaultCredentialArchivedEventData`
+
+  - `string id`
+
+    ID of the vault credential that triggered the event.
+
+  - `string organizationID`
+
+  - `"vault_credential.archived" type`
+
+  - `string vaultID`
+
+    ID of the vault that owns this credential.
+
+  - `string workspaceID`
+
+### Beta Webhook Vault Credential Created Event Data
+
+- `BetaWebhookVaultCredentialCreatedEventData`
+
+  - `string id`
+
+    ID of the vault credential that triggered the event.
+
+  - `string organizationID`
+
+  - `"vault_credential.created" type`
+
+  - `string vaultID`
+
+    ID of the vault that owns this credential.
+
+  - `string workspaceID`
+
+### Beta Webhook Vault Credential Deleted Event Data
+
+- `BetaWebhookVaultCredentialDeletedEventData`
+
+  - `string id`
+
+    ID of the vault credential that triggered the event.
+
+  - `string organizationID`
+
+  - `"vault_credential.deleted" type`
+
+  - `string vaultID`
+
+    ID of the vault that owns this credential.
+
+  - `string workspaceID`
+
+### Beta Webhook Vault Credential Refresh Failed Event Data
+
+- `BetaWebhookVaultCredentialRefreshFailedEventData`
+
+  - `string id`
+
+    ID of the vault credential that triggered the event.
+
+  - `string organizationID`
+
+  - `"vault_credential.refresh_failed" type`
+
+  - `string vaultID`
+
+    ID of the vault that owns this credential.
+
+  - `string workspaceID`
+
+### Beta Webhook Vault Deleted Event Data
+
+- `BetaWebhookVaultDeletedEventData`
+
+  - `string id`
+
+    ID of the vault that triggered the event.
+
+  - `string organizationID`
+
+  - `"vault.deleted" type`
+
+  - `string workspaceID`
 
 ---
 

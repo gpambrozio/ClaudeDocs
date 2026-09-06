@@ -1,96 +1,90 @@
 # List Work Items
 
-Copy page
+`$client->beta->environments->work->list(string environmentID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<SelfHostedWork>`
 
-
-
-PHP
-
-# List Work Items
-
-$client->beta->environments->work->list(string environmentID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[SelfHostedWork](api/beta/environments/work.md)>
-
-GET/v1/environments/{environment\_id}/work
+**GET** `/v1/environments/{environment_id}/work`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 List work items in an environment.
 
-##### ParametersExpand Collapse
+## Parameters
 
-environmentID: string
+- `environmentID: string`
 
-limit?:optional int
+- `limit?:optional int`
 
-Maximum number of work items to return
+  Maximum number of work items to return
 
-page?:optional string
+  default: 20
 
-Opaque cursor from previous response for pagination
+- `page?:optional string`
 
-betas?:optional list<AnthropicBeta>
+  Opaque cursor from previous response for pagination
 
-Optional header to specify the beta version(s) you want to use.
+- `betas?:optional list<AnthropicBeta>`
 
-##### ReturnsExpand Collapse
+  Optional header to specify the beta version(s) you want to use.
 
-
+## Returns
 
-[SelfHostedWork](api/beta/environments/work.md)
+- `SelfHostedWork`
 
-string id
+  - `string id`
 
-Work identifier (e.g., 'work\_...')
+    Work identifier (e.g., 'work_...')
 
-?string acknowledgedAt
+  - `?string acknowledgedAt`
 
-RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-string createdAt
+  - `string createdAt`
 
-RFC 3339 timestamp when work was created
+    RFC 3339 timestamp when work was created
 
-[SessionWorkData](api/beta/environments/work.md) data
+  - `SessionWorkData data`
 
-The actual work to be performed
+    The actual work to be performed
 
-string environmentID
+  - `string environmentID`
 
-Environment identifier this work belongs to (e.g., `env_...`)
+    Environment identifier this work belongs to (e.g., `env_...`)
 
-?string latestHeartbeatAt
+  - `?string latestHeartbeatAt`
 
-RFC 3339 timestamp of the most recent heartbeat
+    RFC 3339 timestamp of the most recent heartbeat
 
-array<string,string> metadata
+  - `array<string,string> metadata`
 
-User-provided metadata key-value pairs associated with this work item
+    User-provided metadata key-value pairs associated with this work item
 
-?string startedAt
+  - `?string secret`
 
-RFC 3339 timestamp when work execution started
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
-State state
+  - `?string startedAt`
 
-Current state of the work item
+    RFC 3339 timestamp when work execution started
 
-?string stopRequestedAt
+  - `State state`
 
-RFC 3339 timestamp when stop was requested
+    Current state of the work item
 
-?string stoppedAt
+  - `?string stopRequestedAt`
 
-RFC 3339 timestamp when work execution stopped
+    RFC 3339 timestamp when stop was requested
 
-"work" type
+  - `?string stoppedAt`
 
-The type of object (always 'work')
+    RFC 3339 timestamp when work execution stopped
 
-List Work Items
+  - `"work" type`
 
-PHP
+    The type of object (always 'work')
 
-```shiki
+## Example
+
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -101,17 +95,15 @@ $page = $client->beta->environments->work->list(
   'env_011CZkZ9X2dpNyB7HsEFoRfW',
   limit: 1,
   page: 'page',
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($page);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
@@ -127,39 +119,7 @@ Response 200
       "metadata": {
         "foo": "string"
       },
-      "started_at": "started_at",
-      "state": "queued",
-      "stop_requested_at": "stop_requested_at",
-      "stopped_at": "stopped_at",
-      "type": "work"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "acknowledged_at": "acknowledged_at",
-      "created_at": "created_at",
-      "data": {
-        "id": "id",
-        "type": "session"
-      },
-      "environment_id": "environment_id",
-      "latest_heartbeat_at": "latest_heartbeat_at",
-      "metadata": {
-        "foo": "string"
-      },
+      "secret": "secret",
       "started_at": "started_at",
       "state": "queued",
       "stop_requested_at": "stop_requested_at",

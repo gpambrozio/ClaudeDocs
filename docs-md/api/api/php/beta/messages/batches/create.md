@@ -1,16 +1,8 @@
 # Create a Message Batch
 
-Copy page
+`$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas, ?string userProfileID): MessageBatch`
 
-
-
-PHP
-
-# Create a Message Batch
-
-$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas, ?string userProfileID): [MessageBatch](api/beta/messages/batches.md)
-
-POST/v1/messages/batches
+**POST** `/v1/messages/batches`
 
 Send a batch of Message creation requests.
 
@@ -18,91 +10,77 @@ The Message Batches API can be used to process multiple Messages API requests at
 
 Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
-requests: list<Request>
+- `requests: list<Request>`
 
-List of requests for prompt completion. Each is an individual request to create a Message.
+  List of requests for prompt completion. Each is an individual request to create a Message.
 
-betas?:optional list<AnthropicBeta>
+- `betas?:optional list<AnthropicBeta>`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-userProfileID?:optional string
+- `userProfileID?:optional string`
 
-The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
+  The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `MessageBatch`
 
-[MessageBatch](api/beta/messages/batches.md)
+  - `string id`
 
-
+    Unique object identifier.
 
-string id
+    The format and length of IDs may change over time.
 
-Unique object identifier.
+  - `?\Datetime archivedAt`
 
-The format and length of IDs may change over time.
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-?\Datetime archivedAt
+  - `?\Datetime cancelInitiatedAt`
 
-RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-?\Datetime cancelInitiatedAt
+  - `\Datetime createdAt`
 
-RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-\Datetime createdAt
+  - `?\Datetime endedAt`
 
-RFC 3339 datetime string representing the time at which the Message Batch was created.
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
-
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
-?\Datetime endedAt
+  - `\Datetime expiresAt`
 
-RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+  - `ProcessingStatus processingStatus`
 
-\Datetime expiresAt
+    Processing status of the Message Batch.
 
-RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+  - `MessageBatchRequestCounts requestCounts`
 
-ProcessingStatus processingStatus
+    Tallies requests within the Message Batch, categorized by their status.
 
-Processing status of the Message Batch.
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-
+  - `?string resultsURL`
 
-[MessageBatchRequestCounts](api/beta/messages/batches.md) requestCounts
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
-Tallies requests within the Message Batch, categorized by their status.
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+  - `"message_batch" type`
 
-
+    Object type.
 
-?string resultsURL
+    For Message Batches, this is always `"message_batch"`.
 
-URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
+## Example
 
-Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-
-
-"message\_batch" type
-
-Object type.
-
-For Message Batches, this is always `"message_batch"`.
-
-Create a Message Batch
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -115,8 +93,15 @@ $betaMessageBatch = $client->beta->messages->batches->create(
       'customID' => 'my-custom-id-1',
       'params' => [
         'maxTokens' => 1024,
-        'messages' => [['content' => 'Hello, world', 'role' => 'user']],
-        'model' => 'claude-opus-4-6',
+        'messages' => [
+          [
+            'content' => 'Hello, world',
+            'role' => 'user',
+            'clearAt' => 'next_user_message',
+            'outputConfig' => ['effort' => 'low'],
+          ],
+        ],
+        'model' => Model::CLAUDE_OPUS_5,
         'cacheControl' => ['type' => 'ephemeral', 'ttl' => '5m'],
         'container' => [
           'id' => 'id',
@@ -138,27 +123,7 @@ $betaMessageBatch = $client->beta->messages->batches->create(
         ],
         'diagnostics' => ['previousMessageID' => 'previous_message_id'],
         'fallbackCreditToken' => 'x',
-        'fallbacks' => [
-          [
-            'model' => 'claude-sonnet-5',
-            'maxTokens' => 0,
-            'outputConfig' => [
-              'effort' => 'low',
-              'format' => [
-                'schema' => ['foo' => 'bar'], 'type' => 'json_schema'
-              ],
-              'taskBudget' => [
-                'total' => 1024, 'type' => 'tokens', 'remaining' => 0
-              ],
-            ],
-            'speed' => 'standard',
-            'thinking' => [
-              'budgetTokens' => 1024,
-              'type' => 'enabled',
-              'display' => 'summarized',
-            ],
-          ],
-        ],
+        'fallbacks' => 'default',
         'inferenceGeo' => 'inference_geo',
         'mcpServers' => [
           [
@@ -193,7 +158,7 @@ $betaMessageBatch = $client->beta->messages->batches->create(
             'cacheControl' => ['type' => 'ephemeral', 'ttl' => '5m'],
             'citations' => [
               [
-                'citedText' => 'cited_text',
+                'citedText' => 'The grass is green. The sky is blue.',
                 'documentIndex' => 0,
                 'documentTitle' => 'x',
                 'endCharIndex' => 0,
@@ -204,7 +169,13 @@ $betaMessageBatch = $client->beta->messages->batches->create(
           ],
         ],
         'temperature' => 1,
-        'thinking' => ['type' => 'adaptive', 'display' => 'summarized'],
+        'thinking' => [
+          'type' => 'adaptive',
+          'blockBinding' => [
+            'prefixMismatchBehavior' => BetaThinkingPrefixMismatchBehavior::ERROR,
+          ],
+          'display' => 'summarized',
+        ],
         'toolChoice' => ['type' => 'auto', 'disableParallelToolUse' => true],
         'tools' => [
           [
@@ -229,45 +200,16 @@ $betaMessageBatch = $client->beta->messages->batches->create(
       ],
     ],
   ],
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
   userProfileID: 'anthropic-user-profile-id',
 );
 
 var_dump($betaMessageBatch);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "archived_at": "2024-08-20T18:37:24.100435Z",
-  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
-  "created_at": "2024-08-20T18:37:24.100435Z",
-  "ended_at": "2024-08-20T18:37:24.100435Z",
-  "expires_at": "2024-08-20T18:37:24.100435Z",
-  "processing_status": "in_progress",
-  "request_counts": {
-    "canceled": 10,
-    "errored": 30,
-    "expired": 10,
-    "processing": 100,
-    "succeeded": 50
-  },
-  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
-  "type": "message_batch"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
   "archived_at": "2024-08-20T18:37:24.100435Z",

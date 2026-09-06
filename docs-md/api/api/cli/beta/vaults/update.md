@@ -1,110 +1,80 @@
 # Update Vault
 
-Copy page
+`$ ant beta:vaults update`
 
-
-
-CLI
-
-# Update Vault
-
-$ ant beta:vaults update
-
-POST/v1/vaults/{vault\_id}
+**POST** `/v1/vaults/{vault_id}`
 
 Update Vault
 
-##### ParametersExpand Collapse
+## Parameters
 
---vault-id: string
+- `--vault-id: string`
 
-Path param: Path parameter vault\_id
+  Path param: Path parameter vault_id
 
---display-name: optional string
+- `--display-name: optional string`
 
-Body param: Updated human-readable name for the vault. 1-255 characters.
+  Body param: Updated human-readable name for the vault. 1-255 characters.
 
---metadata: optional map[string]
+  minLength: 1, maxLength: 255
 
-Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
+- `--metadata: optional map[string]`
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+  Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
-Header param: Optional header to specify the beta version(s) you want to use.
+- `--beta: optional array of AnthropicBeta`
 
-##### ReturnsExpand Collapse
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-
+## Returns
 
-beta\_managed\_agents\_vault: object { id, archived\_at, created\_at, 4 more } 
+- `beta_managed_agents_vault: object`
 
-A vault that stores credentials for use by agents during sessions.
+  A vault that stores credentials for use by agents during sessions.
 
-id: string
+  - `id: string`
 
-Unique identifier for the vault.
+    Unique identifier for the vault.
 
-archived\_at: string
+  - `archived_at: string`
 
-A timestamp in RFC 3339 format
+    A timestamp in RFC 3339 format
 
-created\_at: string
+    format: date-time
 
-A timestamp in RFC 3339 format
+  - `created_at: string`
 
-display\_name: string
+    A timestamp in RFC 3339 format
 
-Human-readable name for the vault.
+    format: date-time
 
-metadata: map[string]
+  - `display_name: string`
 
-Arbitrary key-value metadata attached to the vault.
+    Human-readable name for the vault.
 
-
+  - `metadata: map[string]`
 
-type: "vault"
+    Arbitrary key-value metadata attached to the vault.
 
-"vault"
+  - `type: "vault"`
 
-updated\_at: string
+  - `updated_at: string`
 
-A timestamp in RFC 3339 format
+    A timestamp in RFC 3339 format
 
-Update Vault
+    format: date-time
 
-CLI
+## Example
 
-```shiki
+```bash
 ant beta:vaults update \
   --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
-  "archived_at": null,
-  "created_at": "2026-03-15T10:00:00Z",
-  "display_name": "Example vault",
-  "metadata": {
-    "environment": "production"
-  },
-  "type": "vault",
-  "updated_at": "2026-03-15T10:00:00Z"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
   "archived_at": null,

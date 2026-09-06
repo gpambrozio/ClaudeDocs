@@ -1,634 +1,1027 @@
 # Models
 
-Copy page
+## List Models
 
-
+`ModelListPage Models.List(parameters, cancellationToken = default)`
 
-C#
+**GET** `/v1/models`
 
-# Models
+List available models.
 
-##### [List Models](api/models/list.md)
+The Models API response can be used to determine which models are available for use in the API. More recently released models are listed first.
 
-[ModelListPageResponse](api/models.md) Models.List(ModelListParams?parameters, CancellationTokencancellationToken = default)
+### Parameters
 
-GET/v1/models
+- `ModelListParams parameters`
 
-##### [Get a Model](api/models/retrieve.md)
+  - `string afterID`
 
-[ModelInfo](api/models.md) Models.Retrieve(ModelRetrieveParamsparameters, CancellationTokencancellationToken = default)
+    Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-GET/v1/models/{model\_id}
+  - `string beforeID`
 
-##### ModelsExpand Collapse
+    Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-
+  - `long limit`
 
-class CapabilitySupport:
+    Query param: Number of items to return per page.
 
-Indicates whether a capability is supported.
+    Defaults to `20`. Ranges from `1` to `1000`.
 
-required Boolean Supported
+    maximum: 1000, minimum: 1
 
-Whether this capability is supported by the model.
+  - `IReadOnlyList<AnthropicBeta> betas`
 
-
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-class ContextManagementCapability:
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
-Context management capability details.
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
 
-
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
 
-required [CapabilitySupport](api/models.md)? ClearThinking20251015
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
 
-Indicates whether a capability is supported.
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
 
-required Boolean Supported
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
 
-Whether this capability is supported by the model.
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
 
-
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
 
-required [CapabilitySupport](api/models.md)? ClearToolUses20250919
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
 
-Indicates whether a capability is supported.
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
 
-required Boolean Supported
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
 
-Whether this capability is supported by the model.
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
 
-
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
 
-required [CapabilitySupport](api/models.md)? Compact20260112
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
 
-Indicates whether a capability is supported.
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
 
-required Boolean Supported
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
 
-Whether this capability is supported by the model.
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
 
-required Boolean Supported
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-Whether this capability is supported by the model.
+    - `Skills2025_10_02("skills-2025-10-02")`
 
-
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
 
-class EffortCapability:
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
 
-Effort (reasoning\_effort) capability details.
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
 
-
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
-required [CapabilitySupport](api/models.md) High
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
-Whether the model supports high effort level.
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
 
-required Boolean Supported
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
 
-Whether this capability is supported by the model.
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
 
-
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
 
-required [CapabilitySupport](api/models.md) Low
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
 
-Whether the model supports low effort level.
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
 
-required Boolean Supported
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
 
-Whether this capability is supported by the model.
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
 
-
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
 
-required [CapabilitySupport](api/models.md) Max
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-Whether the model supports max effort level.
+    - `Compact2026_01_12("compact-2026-01-12")`
 
-required Boolean Supported
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
 
-Whether this capability is supported by the model.
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
 
-
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
 
-required [CapabilitySupport](api/models.md) Medium
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
 
-Whether the model supports medium effort level.
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
 
-required Boolean Supported
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
 
-Whether this capability is supported by the model.
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-required Boolean Supported
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
 
-Whether this capability is supported by the model.
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-
+### Returns
 
-required [CapabilitySupport](api/models.md)? Xhigh
+- `class ModelInfo:`
 
-Indicates whether a capability is supported.
+  - `required string ID`
 
-required Boolean Supported
+    Unique model identifier.
 
-Whether this capability is supported by the model.
+  - `required ModelCapabilities? Capabilities`
 
-
+    Model capability information.
 
-class ModelCapabilities:
+    - `required CapabilitySupport Batch`
 
-Model capability information.
+      Whether the model supports the Batch API.
 
-
+      - `required bool Supported`
 
-required [CapabilitySupport](api/models.md) Batch
+        Whether this capability is supported by the model.
 
-Whether the model supports the Batch API.
+    - `required CapabilitySupport Citations`
 
-required Boolean Supported
+      Whether the model supports citation generation.
 
-Whether this capability is supported by the model.
+    - `required CapabilitySupport CodeExecution`
 
-
+      Whether the model supports code execution tools.
 
-required [CapabilitySupport](api/models.md) Citations
+    - `required ContextManagementCapability ContextManagement`
 
-Whether the model supports citation generation.
+      Context management support and available strategies.
 
-required Boolean Supported
+      - `required CapabilitySupport? ClearThinking20251015`
 
-Whether this capability is supported by the model.
+        Indicates whether a capability is supported.
 
-
+      - `required CapabilitySupport? ClearToolUses20250919`
 
-required [CapabilitySupport](api/models.md) CodeExecution
+        Indicates whether a capability is supported.
 
-Whether the model supports code execution tools.
+      - `required CapabilitySupport? Compact20260112`
 
-required Boolean Supported
+        Indicates whether a capability is supported.
 
-Whether this capability is supported by the model.
+      - `required bool Supported`
 
-
+        Whether this capability is supported by the model.
 
-required [ContextManagementCapability](api/models.md) ContextManagement
+    - `required EffortCapability Effort`
 
-Context management support and available strategies.
+      Effort (reasoning_effort) support and available levels.
 
-
+      - `required CapabilitySupport High`
 
-required [CapabilitySupport](api/models.md)? ClearThinking20251015
+        Whether the model supports high effort level.
 
-Indicates whether a capability is supported.
+      - `required CapabilitySupport Low`
 
-required Boolean Supported
+        Whether the model supports low effort level.
 
-Whether this capability is supported by the model.
+      - `required CapabilitySupport Max`
 
-
+        Whether the model supports max effort level.
 
-required [CapabilitySupport](api/models.md)? ClearToolUses20250919
+      - `required CapabilitySupport Medium`
 
-Indicates whether a capability is supported.
+        Whether the model supports medium effort level.
 
-required Boolean Supported
+      - `required bool Supported`
 
-Whether this capability is supported by the model.
+        Whether this capability is supported by the model.
 
-
+      - `required CapabilitySupport? Xhigh`
 
-required [CapabilitySupport](api/models.md)? Compact20260112
+        Indicates whether a capability is supported.
 
-Indicates whether a capability is supported.
+    - `required CapabilitySupport ImageInput`
 
-required Boolean Supported
+      Whether the model accepts image content blocks.
 
-Whether this capability is supported by the model.
+    - `required CapabilitySupport PdfInput`
 
-required Boolean Supported
+      Whether the model accepts PDF content blocks.
 
-Whether this capability is supported by the model.
+    - `required CapabilitySupport StructuredOutputs`
 
-
+      Whether the model supports structured output / JSON mode / strict tool schemas.
 
-required [EffortCapability](api/models.md) Effort
+    - `required ThinkingCapability Thinking`
 
-Effort (reasoning\_effort) support and available levels.
+      Thinking capability and supported type configurations.
 
-
+      - `required bool Supported`
 
-required [CapabilitySupport](api/models.md) High
+        Whether this capability is supported by the model.
 
-Whether the model supports high effort level.
+      - `required ThinkingTypes Types`
 
-required Boolean Supported
+        Supported thinking type configurations.
 
-Whether this capability is supported by the model.
+        - `required CapabilitySupport Adaptive`
 
-
+          Whether the model supports thinking with type 'adaptive' (auto).
 
-required [CapabilitySupport](api/models.md) Low
+        - `required CapabilitySupport Enabled`
 
-Whether the model supports low effort level.
+          Whether the model supports thinking with type 'enabled'.
 
-required Boolean Supported
+  - `required DateTimeOffset CreatedAt`
 
-Whether this capability is supported by the model.
+    RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-
+    format: date-time
 
-required [CapabilitySupport](api/models.md) Max
+  - `required string DisplayName`
 
-Whether the model supports max effort level.
+    A human-readable name for the model.
 
-required Boolean Supported
+  - `required long? MaxInputTokens`
 
-Whether this capability is supported by the model.
+    Maximum input context window size in tokens for this model.
 
-
+  - `required long? MaxTokens`
 
-required [CapabilitySupport](api/models.md) Medium
+    Maximum value for the `max_tokens` parameter when using this model.
 
-Whether the model supports medium effort level.
+  - `JsonElement Type = "model"`
 
-required Boolean Supported
+    Object type.
 
-Whether this capability is supported by the model.
+    For Models, this is always `"model"`.
 
-required Boolean Supported
+### Example
 
-Whether this capability is supported by the model.
+```csharp
+ModelListParams parameters = new();
 
-
+var page = await client.Models.List(parameters);
+await foreach (var item in page.Paginate())
+{
+    Console.WriteLine(item);
+}
+```
 
-required [CapabilitySupport](api/models.md)? Xhigh
+#### Response (200)
 
-Indicates whether a capability is supported.
+```json
+{
+  "data": [
+    {
+      "id": "claude-opus-5",
+      "capabilities": {
+        "batch": {
+          "supported": true
+        },
+        "citations": {
+          "supported": true
+        },
+        "code_execution": {
+          "supported": true
+        },
+        "context_management": {
+          "clear_thinking_20251015": {
+            "supported": true
+          },
+          "clear_tool_uses_20250919": {
+            "supported": true
+          },
+          "compact_20260112": {
+            "supported": true
+          },
+          "supported": true
+        },
+        "effort": {
+          "high": {
+            "supported": true
+          },
+          "low": {
+            "supported": true
+          },
+          "max": {
+            "supported": true
+          },
+          "medium": {
+            "supported": true
+          },
+          "supported": true,
+          "xhigh": {
+            "supported": true
+          }
+        },
+        "image_input": {
+          "supported": true
+        },
+        "pdf_input": {
+          "supported": true
+        },
+        "structured_outputs": {
+          "supported": true
+        },
+        "thinking": {
+          "supported": true,
+          "types": {
+            "adaptive": {
+              "supported": true
+            },
+            "enabled": {
+              "supported": true
+            }
+          }
+        }
+      },
+      "created_at": "2026-07-24T00:00:00Z",
+      "display_name": "Claude Opus 5",
+      "max_input_tokens": 0,
+      "max_tokens": 0,
+      "type": "model"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
 
-required Boolean Supported
+## Get a Model
 
-Whether this capability is supported by the model.
+`ModelInfo Models.Retrieve(parameters, cancellationToken = default)`
 
-
+**GET** `/v1/models/{model_id}`
 
-required [CapabilitySupport](api/models.md) ImageInput
+Get a specific model.
 
-Whether the model accepts image content blocks.
+The Models API response can be used to determine information about a specific model or resolve a model alias to a model ID.
 
-required Boolean Supported
+### Parameters
 
-Whether this capability is supported by the model.
+- `ModelRetrieveParams parameters`
 
-
+  - `required string modelID`
 
-required [CapabilitySupport](api/models.md) PdfInput
+    Model identifier or alias.
 
-Whether the model accepts PDF content blocks.
+  - `IReadOnlyList<AnthropicBeta> betas`
 
-required Boolean Supported
+    Optional header to specify the beta version(s) you want to use.
 
-Whether this capability is supported by the model.
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
-
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
 
-required [CapabilitySupport](api/models.md) StructuredOutputs
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
 
-Whether the model supports structured output / JSON mode / strict tool schemas.
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
 
-required Boolean Supported
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
 
-Whether this capability is supported by the model.
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
 
-
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
 
-required [ThinkingCapability](api/models.md) Thinking
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
 
-Thinking capability and supported type configurations.
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
 
-required Boolean Supported
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
 
-Whether this capability is supported by the model.
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
 
-
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
 
-required [ThinkingTypes](api/models.md) Types
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
 
-Supported thinking type configurations.
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
 
-
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
 
-required [CapabilitySupport](api/models.md) Adaptive
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
 
-Whether the model supports thinking with type 'adaptive' (auto).
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
 
-required Boolean Supported
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-Whether this capability is supported by the model.
+    - `Skills2025_10_02("skills-2025-10-02")`
 
-
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
 
-required [CapabilitySupport](api/models.md) Enabled
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
 
-Whether the model supports thinking with type 'enabled'.
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
 
-required Boolean Supported
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
-Whether this capability is supported by the model.
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
-
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
 
-class ModelInfo:
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
 
-required string ID
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
 
-Unique model identifier.
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
 
-
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
 
-required [ModelCapabilities](api/models.md)? Capabilities
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
 
-Model capability information.
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
 
-
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
 
-required [CapabilitySupport](api/models.md) Batch
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
 
-Whether the model supports the Batch API.
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-required Boolean Supported
+    - `Compact2026_01_12("compact-2026-01-12")`
 
-Whether this capability is supported by the model.
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
 
-
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
 
-required [CapabilitySupport](api/models.md) Citations
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
 
-Whether the model supports citation generation.
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
 
-required Boolean Supported
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
 
-Whether this capability is supported by the model.
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
 
-
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-required [CapabilitySupport](api/models.md) CodeExecution
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
 
-Whether the model supports code execution tools.
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-required Boolean Supported
+### Returns
 
-Whether this capability is supported by the model.
+- `class ModelInfo:`
 
-
+  - `required string ID`
 
-required [ContextManagementCapability](api/models.md) ContextManagement
+    Unique model identifier.
 
-Context management support and available strategies.
+  - `required ModelCapabilities? Capabilities`
 
-
+    Model capability information.
 
-required [CapabilitySupport](api/models.md)? ClearThinking20251015
+    - `required CapabilitySupport Batch`
 
-Indicates whether a capability is supported.
+      Whether the model supports the Batch API.
 
-required Boolean Supported
+      - `required bool Supported`
 
-Whether this capability is supported by the model.
+        Whether this capability is supported by the model.
 
-
+    - `required CapabilitySupport Citations`
 
-required [CapabilitySupport](api/models.md)? ClearToolUses20250919
+      Whether the model supports citation generation.
 
-Indicates whether a capability is supported.
+    - `required CapabilitySupport CodeExecution`
 
-required Boolean Supported
+      Whether the model supports code execution tools.
 
-Whether this capability is supported by the model.
+    - `required ContextManagementCapability ContextManagement`
 
-
+      Context management support and available strategies.
 
-required [CapabilitySupport](api/models.md)? Compact20260112
+      - `required CapabilitySupport? ClearThinking20251015`
 
-Indicates whether a capability is supported.
+        Indicates whether a capability is supported.
 
-required Boolean Supported
+      - `required CapabilitySupport? ClearToolUses20250919`
 
-Whether this capability is supported by the model.
+        Indicates whether a capability is supported.
 
-required Boolean Supported
+      - `required CapabilitySupport? Compact20260112`
 
-Whether this capability is supported by the model.
+        Indicates whether a capability is supported.
 
-
+      - `required bool Supported`
 
-required [EffortCapability](api/models.md) Effort
+        Whether this capability is supported by the model.
 
-Effort (reasoning\_effort) support and available levels.
+    - `required EffortCapability Effort`
 
-
+      Effort (reasoning_effort) support and available levels.
 
-required [CapabilitySupport](api/models.md) High
+      - `required CapabilitySupport High`
 
-Whether the model supports high effort level.
+        Whether the model supports high effort level.
 
-required Boolean Supported
+      - `required CapabilitySupport Low`
 
-Whether this capability is supported by the model.
+        Whether the model supports low effort level.
 
-
+      - `required CapabilitySupport Max`
 
-required [CapabilitySupport](api/models.md) Low
+        Whether the model supports max effort level.
 
-Whether the model supports low effort level.
+      - `required CapabilitySupport Medium`
 
-required Boolean Supported
+        Whether the model supports medium effort level.
 
-Whether this capability is supported by the model.
+      - `required bool Supported`
 
-
+        Whether this capability is supported by the model.
 
-required [CapabilitySupport](api/models.md) Max
+      - `required CapabilitySupport? Xhigh`
 
-Whether the model supports max effort level.
+        Indicates whether a capability is supported.
 
-required Boolean Supported
+    - `required CapabilitySupport ImageInput`
 
-Whether this capability is supported by the model.
+      Whether the model accepts image content blocks.
 
-
+    - `required CapabilitySupport PdfInput`
 
-required [CapabilitySupport](api/models.md) Medium
+      Whether the model accepts PDF content blocks.
 
-Whether the model supports medium effort level.
+    - `required CapabilitySupport StructuredOutputs`
 
-required Boolean Supported
+      Whether the model supports structured output / JSON mode / strict tool schemas.
 
-Whether this capability is supported by the model.
+    - `required ThinkingCapability Thinking`
 
-required Boolean Supported
+      Thinking capability and supported type configurations.
 
-Whether this capability is supported by the model.
+      - `required bool Supported`
 
-
+        Whether this capability is supported by the model.
 
-required [CapabilitySupport](api/models.md)? Xhigh
+      - `required ThinkingTypes Types`
 
-Indicates whether a capability is supported.
+        Supported thinking type configurations.
 
-required Boolean Supported
+        - `required CapabilitySupport Adaptive`
 
-Whether this capability is supported by the model.
+          Whether the model supports thinking with type 'adaptive' (auto).
 
-
+        - `required CapabilitySupport Enabled`
 
-required [CapabilitySupport](api/models.md) ImageInput
+          Whether the model supports thinking with type 'enabled'.
 
-Whether the model accepts image content blocks.
+  - `required DateTimeOffset CreatedAt`
 
-required Boolean Supported
+    RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-Whether this capability is supported by the model.
+    format: date-time
 
-
+  - `required string DisplayName`
 
-required [CapabilitySupport](api/models.md) PdfInput
+    A human-readable name for the model.
 
-Whether the model accepts PDF content blocks.
+  - `required long? MaxInputTokens`
 
-required Boolean Supported
+    Maximum input context window size in tokens for this model.
 
-Whether this capability is supported by the model.
+  - `required long? MaxTokens`
 
-
+    Maximum value for the `max_tokens` parameter when using this model.
 
-required [CapabilitySupport](api/models.md) StructuredOutputs
+  - `JsonElement Type = "model"`
 
-Whether the model supports structured output / JSON mode / strict tool schemas.
+    Object type.
 
-required Boolean Supported
+    For Models, this is always `"model"`.
 
-Whether this capability is supported by the model.
+### Example
 
-
+```csharp
+ModelRetrieveParams parameters = new() { ModelID = "model_id" };
 
-required [ThinkingCapability](api/models.md) Thinking
+var modelInfo = await client.Models.Retrieve(parameters);
 
-Thinking capability and supported type configurations.
+Console.WriteLine(modelInfo);
+```
 
-required Boolean Supported
+#### Response (200)
 
-Whether this capability is supported by the model.
+```json
+{
+  "id": "claude-opus-5",
+  "capabilities": {
+    "batch": {
+      "supported": true
+    },
+    "citations": {
+      "supported": true
+    },
+    "code_execution": {
+      "supported": true
+    },
+    "context_management": {
+      "clear_thinking_20251015": {
+        "supported": true
+      },
+      "clear_tool_uses_20250919": {
+        "supported": true
+      },
+      "compact_20260112": {
+        "supported": true
+      },
+      "supported": true
+    },
+    "effort": {
+      "high": {
+        "supported": true
+      },
+      "low": {
+        "supported": true
+      },
+      "max": {
+        "supported": true
+      },
+      "medium": {
+        "supported": true
+      },
+      "supported": true,
+      "xhigh": {
+        "supported": true
+      }
+    },
+    "image_input": {
+      "supported": true
+    },
+    "pdf_input": {
+      "supported": true
+    },
+    "structured_outputs": {
+      "supported": true
+    },
+    "thinking": {
+      "supported": true,
+      "types": {
+        "adaptive": {
+          "supported": true
+        },
+        "enabled": {
+          "supported": true
+        }
+      }
+    }
+  },
+  "created_at": "2026-07-24T00:00:00Z",
+  "display_name": "Claude Opus 5",
+  "max_input_tokens": 0,
+  "max_tokens": 0,
+  "type": "model"
+}
+```
 
-
+## Domain types
 
-required [ThinkingTypes](api/models.md) Types
+### Capability Support
 
-Supported thinking type configurations.
+- `class CapabilitySupport:`
 
-
+  Indicates whether a capability is supported.
 
-required [CapabilitySupport](api/models.md) Adaptive
+  - `required bool Supported`
 
-Whether the model supports thinking with type 'adaptive' (auto).
+    Whether this capability is supported by the model.
 
-required Boolean Supported
+### Context Management Capability
 
-Whether this capability is supported by the model.
+- `class ContextManagementCapability:`
 
-
+  Context management capability details.
 
-required [CapabilitySupport](api/models.md) Enabled
+  - `required CapabilitySupport? ClearThinking20251015`
 
-Whether the model supports thinking with type 'enabled'.
+    Indicates whether a capability is supported.
 
-required Boolean Supported
+    - `required bool Supported`
 
-Whether this capability is supported by the model.
+      Whether this capability is supported by the model.
 
-required DateTimeOffset CreatedAt
+  - `required CapabilitySupport? ClearToolUses20250919`
 
-RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
+    Indicates whether a capability is supported.
 
-required string DisplayName
+  - `required CapabilitySupport? Compact20260112`
 
-A human-readable name for the model.
+    Indicates whether a capability is supported.
 
-required Long? MaxInputTokens
+  - `required bool Supported`
 
-Maximum input context window size in tokens for this model.
+    Whether this capability is supported by the model.
 
-required Long? MaxTokens
+### Effort Capability
 
-Maximum value for the `max_tokens` parameter when using this model.
+- `class EffortCapability:`
 
-
+  Effort (reasoning_effort) capability details.
 
-JsonElement Type "model"constant
+  - `required CapabilitySupport High`
 
-Object type.
+    Whether the model supports high effort level.
 
-For Models, this is always `"model"`.
+    - `required bool Supported`
 
-
+      Whether this capability is supported by the model.
 
-class ThinkingCapability:
+  - `required CapabilitySupport Low`
 
-Thinking capability details.
+    Whether the model supports low effort level.
 
-required Boolean Supported
+  - `required CapabilitySupport Max`
 
-Whether this capability is supported by the model.
+    Whether the model supports max effort level.
 
-
+  - `required CapabilitySupport Medium`
 
-required [ThinkingTypes](api/models.md) Types
+    Whether the model supports medium effort level.
 
-Supported thinking type configurations.
+  - `required bool Supported`
 
-
+    Whether this capability is supported by the model.
 
-required [CapabilitySupport](api/models.md) Adaptive
+  - `required CapabilitySupport? Xhigh`
 
-Whether the model supports thinking with type 'adaptive' (auto).
+    Indicates whether a capability is supported.
 
-required Boolean Supported
+### Model Capabilities
 
-Whether this capability is supported by the model.
+- `class ModelCapabilities:`
 
-
+  Model capability information.
 
-required [CapabilitySupport](api/models.md) Enabled
+  - `required CapabilitySupport Batch`
 
-Whether the model supports thinking with type 'enabled'.
+    Whether the model supports the Batch API.
 
-required Boolean Supported
+    - `required bool Supported`
 
-Whether this capability is supported by the model.
+      Whether this capability is supported by the model.
 
-
+  - `required CapabilitySupport Citations`
 
-class ThinkingTypes:
+    Whether the model supports citation generation.
 
-Supported thinking type configurations.
+  - `required CapabilitySupport CodeExecution`
 
-
+    Whether the model supports code execution tools.
 
-required [CapabilitySupport](api/models.md) Adaptive
+  - `required ContextManagementCapability ContextManagement`
 
-Whether the model supports thinking with type 'adaptive' (auto).
+    Context management support and available strategies.
 
-required Boolean Supported
+    - `required CapabilitySupport? ClearThinking20251015`
 
-Whether this capability is supported by the model.
+      Indicates whether a capability is supported.
 
-
+    - `required CapabilitySupport? ClearToolUses20250919`
 
-required [CapabilitySupport](api/models.md) Enabled
+      Indicates whether a capability is supported.
 
-Whether the model supports thinking with type 'enabled'.
+    - `required CapabilitySupport? Compact20260112`
 
-required Boolean Supported
+      Indicates whether a capability is supported.
 
-Whether this capability is supported by the model.
+    - `required bool Supported`
+
+      Whether this capability is supported by the model.
+
+  - `required EffortCapability Effort`
+
+    Effort (reasoning_effort) support and available levels.
+
+    - `required CapabilitySupport High`
+
+      Whether the model supports high effort level.
+
+    - `required CapabilitySupport Low`
+
+      Whether the model supports low effort level.
+
+    - `required CapabilitySupport Max`
+
+      Whether the model supports max effort level.
+
+    - `required CapabilitySupport Medium`
+
+      Whether the model supports medium effort level.
+
+    - `required bool Supported`
+
+      Whether this capability is supported by the model.
+
+    - `required CapabilitySupport? Xhigh`
+
+      Indicates whether a capability is supported.
+
+  - `required CapabilitySupport ImageInput`
+
+    Whether the model accepts image content blocks.
+
+  - `required CapabilitySupport PdfInput`
+
+    Whether the model accepts PDF content blocks.
+
+  - `required CapabilitySupport StructuredOutputs`
+
+    Whether the model supports structured output / JSON mode / strict tool schemas.
+
+  - `required ThinkingCapability Thinking`
+
+    Thinking capability and supported type configurations.
+
+    - `required bool Supported`
+
+      Whether this capability is supported by the model.
+
+    - `required ThinkingTypes Types`
+
+      Supported thinking type configurations.
+
+      - `required CapabilitySupport Adaptive`
+
+        Whether the model supports thinking with type 'adaptive' (auto).
+
+      - `required CapabilitySupport Enabled`
+
+        Whether the model supports thinking with type 'enabled'.
+
+### Model Info
+
+- `class ModelInfo:`
+
+  - `required string ID`
+
+    Unique model identifier.
+
+  - `required ModelCapabilities? Capabilities`
+
+    Model capability information.
+
+    - `required CapabilitySupport Batch`
+
+      Whether the model supports the Batch API.
+
+      - `required bool Supported`
+
+        Whether this capability is supported by the model.
+
+    - `required CapabilitySupport Citations`
+
+      Whether the model supports citation generation.
+
+    - `required CapabilitySupport CodeExecution`
+
+      Whether the model supports code execution tools.
+
+    - `required ContextManagementCapability ContextManagement`
+
+      Context management support and available strategies.
+
+      - `required CapabilitySupport? ClearThinking20251015`
+
+        Indicates whether a capability is supported.
+
+      - `required CapabilitySupport? ClearToolUses20250919`
+
+        Indicates whether a capability is supported.
+
+      - `required CapabilitySupport? Compact20260112`
+
+        Indicates whether a capability is supported.
+
+      - `required bool Supported`
+
+        Whether this capability is supported by the model.
+
+    - `required EffortCapability Effort`
+
+      Effort (reasoning_effort) support and available levels.
+
+      - `required CapabilitySupport High`
+
+        Whether the model supports high effort level.
+
+      - `required CapabilitySupport Low`
+
+        Whether the model supports low effort level.
+
+      - `required CapabilitySupport Max`
+
+        Whether the model supports max effort level.
+
+      - `required CapabilitySupport Medium`
+
+        Whether the model supports medium effort level.
+
+      - `required bool Supported`
+
+        Whether this capability is supported by the model.
+
+      - `required CapabilitySupport? Xhigh`
+
+        Indicates whether a capability is supported.
+
+    - `required CapabilitySupport ImageInput`
+
+      Whether the model accepts image content blocks.
+
+    - `required CapabilitySupport PdfInput`
+
+      Whether the model accepts PDF content blocks.
+
+    - `required CapabilitySupport StructuredOutputs`
+
+      Whether the model supports structured output / JSON mode / strict tool schemas.
+
+    - `required ThinkingCapability Thinking`
+
+      Thinking capability and supported type configurations.
+
+      - `required bool Supported`
+
+        Whether this capability is supported by the model.
+
+      - `required ThinkingTypes Types`
+
+        Supported thinking type configurations.
+
+        - `required CapabilitySupport Adaptive`
+
+          Whether the model supports thinking with type 'adaptive' (auto).
+
+        - `required CapabilitySupport Enabled`
+
+          Whether the model supports thinking with type 'enabled'.
+
+  - `required DateTimeOffset CreatedAt`
+
+    RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
+
+    format: date-time
+
+  - `required string DisplayName`
+
+    A human-readable name for the model.
+
+  - `required long? MaxInputTokens`
+
+    Maximum input context window size in tokens for this model.
+
+  - `required long? MaxTokens`
+
+    Maximum value for the `max_tokens` parameter when using this model.
+
+  - `JsonElement Type = "model"`
+
+    Object type.
+
+    For Models, this is always `"model"`.
+
+### Thinking Capability
+
+- `class ThinkingCapability:`
+
+  Thinking capability details.
+
+  - `required bool Supported`
+
+    Whether this capability is supported by the model.
+
+  - `required ThinkingTypes Types`
+
+    Supported thinking type configurations.
+
+    - `required CapabilitySupport Adaptive`
+
+      Whether the model supports thinking with type 'adaptive' (auto).
+
+      - `required bool Supported`
+
+        Whether this capability is supported by the model.
+
+    - `required CapabilitySupport Enabled`
+
+      Whether the model supports thinking with type 'enabled'.
+
+### Thinking Types
+
+- `class ThinkingTypes:`
+
+  Supported thinking type configurations.
+
+  - `required CapabilitySupport Adaptive`
+
+    Whether the model supports thinking with type 'adaptive' (auto).
+
+    - `required bool Supported`
+
+      Whether this capability is supported by the model.
+
+  - `required CapabilitySupport Enabled`
+
+    Whether the model supports thinking with type 'enabled'.
 
 ---
 

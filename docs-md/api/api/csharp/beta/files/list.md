@@ -1,192 +1,192 @@
 # List Files
 
-Copy page
+`FileListPage Beta.Files.List(parameters, cancellationToken = default)`
 
-
-
-C#
-
-# List Files
-
-[FileListPageResponse](api/beta/files.md) Beta.Files.List(FileListParams?parameters, CancellationTokencancellationToken = default)
-
-GET/v1/files
+**GET** `/v1/files`
 
 List Files
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `FileListParams parameters`
 
-FileListParams parameters
+  - `IReadOnlyList<string>? ids`
 
-string afterID
+    Query param: Restrict the result set to Files whose `id` is in this list. At most 100 entries (after de-duplication). Mutually exclusive with `page` and `limit`. When supplied, the response is always a single page (`next_page` is null). IDs that do not resolve to a visible File — including deleted Files — are silently omitted.
 
-Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+  - `long limit`
 
-string beforeID
+    Query param: Number of items to return per page.
 
-Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+    Defaults to `20`. Ranges from `1` to `1000`.
 
-
+    maximum: 1000, minimum: 1
 
-Long limit
+  - `string? page`
 
-Query param: Number of items to return per page.
+    Query param: Opaque page cursor returned in a prior list response's `next_page`. Prefixed `page_`.
 
-Defaults to `20`. Ranges from `1` to `1000`.
+  - `string scopeID`
 
-maximum1000
+    Query param: Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
 
-minimum1
+  - `IReadOnlyList<AnthropicBeta> betas`
 
-string scopeID
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-Query param: Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
-
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
 
-IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
 
-"message-batches-2024-09-24"MessageBatches2024\_09\_24
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
 
-"prompt-caching-2024-07-31"PromptCaching2024\_07\_31
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
 
-"computer-use-2024-10-22"ComputerUse2024\_10\_22
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
 
-"computer-use-2025-01-24"ComputerUse2025\_01\_24
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
 
-"pdfs-2024-09-25"Pdfs2024\_09\_25
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
 
-"token-counting-2024-11-01"TokenCounting2024\_11\_01
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
 
-"token-efficient-tools-2025-02-19"TokenEfficientTools2025\_02\_19
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
 
-"output-128k-2025-02-19"Output128k2025\_02\_19
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
 
-"files-api-2025-04-14"FilesApi2025\_04\_14
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
 
-"mcp-client-2025-04-04"McpClient2025\_04\_04
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
 
-"mcp-client-2025-11-20"McpClient2025\_11\_20
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
 
-"dev-full-thinking-2025-05-14"DevFullThinking2025\_05\_14
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
 
-"interleaved-thinking-2025-05-14"InterleavedThinking2025\_05\_14
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
 
-"code-execution-2025-05-22"CodeExecution2025\_05\_22
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025\_04\_11
+    - `Skills2025_10_02("skills-2025-10-02")`
 
-"context-1m-2025-08-07"Context1m2025\_08\_07
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
 
-"context-management-2025-06-27"ContextManagement2025\_06\_27
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
 
-"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025\_08\_26
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
 
-"skills-2025-10-02"Skills2025\_10\_02
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
-"fast-mode-2026-02-01"FastMode2026\_02\_01
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
-"output-300k-2026-03-24"Output300k2026\_03\_24
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
 
-"user-profiles-2026-03-24"UserProfiles2026\_03\_24
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
 
-"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
 
-"managed-agents-2026-04-01"ManagedAgents2026\_04\_01
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
 
-"cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
 
-"thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
 
-"server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
 
-"fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
 
-"agent-memory-2026-07-22"AgentMemory2026\_07\_22
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
 
-##### ReturnsExpand Collapse
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-
+    - `Compact2026_01_12("compact-2026-01-12")`
 
-class FileListPageResponse:
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
 
-
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
 
-required IReadOnlyList<[FileMetadata](api/beta/files.md)> Data
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
 
-List of file metadata objects.
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
 
-
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
 
-required string ID
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
 
-Unique object identifier.
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-The format and length of IDs may change over time.
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
 
-required DateTimeOffset CreatedAt
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-RFC 3339 datetime string representing when the file was created.
+## Returns
 
-required string Filename
+- `class BetaFileMetadata:`
 
-Original filename of the uploaded file.
+  - `required string ID`
 
-required string MimeType
+    Unique object identifier.
 
-MIME type of the file.
+    The format and length of IDs may change over time.
 
-required Long SizeBytes
+  - `required DateTimeOffset CreatedAt`
 
-Size of the file in bytes.
+    RFC 3339 datetime string representing when the file was created.
 
-
+    format: date-time
 
-JsonElement Type "file"constant
+  - `required string Filename`
 
-Object type.
+    Original filename of the uploaded file.
 
-For files, this is always `"file"`.
+    maxLength: 500, minLength: 1
 
-Boolean Downloadable
+  - `required string MimeType`
 
-Whether the file can be downloaded.
+    MIME type of the file.
 
-
+    maxLength: 255, minLength: 1
 
-[BetaFileScope](api/beta/files.md)? Scope
+  - `required long SizeBytes`
 
-The scope of this file, indicating the context in which it was created (e.g., a session).
+    Size of the file in bytes.
 
-required string ID
+    minimum: 0
 
-The ID of the scoping resource (e.g., the session ID).
+  - `JsonElement Type = "file"`
 
-JsonElement Type "session"constant
+    Object type.
 
-The type of scope (e.g., `"session"`).
+    For files, this is always `"file"`.
 
-string? FirstID
+  - `bool Downloadable`
 
-ID of the first file in this page of results.
+    Whether the file can be downloaded.
 
-Boolean HasMore
+  - `DateTimeOffset? ExpiresAt`
 
-Whether there are more results available.
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
 
-string? LastID
+    format: date-time
 
-ID of the last file in this page of results.
+  - `BetaFileScope? Scope`
 
-List Files
+    The scope of this file, indicating the context in which it was created (e.g., a session).
 
-C#
+    - `required string ID`
 
-```shiki
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `JsonElement Type = "session"`
+
+      The type of scope (e.g., `"session"`).
+
+## Example
+
+```csharp
 FileListParams parameters = new();
 
 var page = await client.Beta.Files.List(parameters);
@@ -196,11 +196,9 @@ await foreach (var item in page.Paginate())
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
@@ -211,44 +209,14 @@ Response 200
       "size_bytes": 102400,
       "type": "file",
       "downloadable": false,
+      "expires_at": "2025-05-15T18:37:24.100435Z",
       "scope": {
         "id": "id",
         "type": "session"
       }
     }
   ],
-  "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "has_more": true,
-  "last_id": "file_013Zva2CMHLNnXjNJJKqJ2EF"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "file_011CNha8iCJcU1wXNR6q4V8w",
-      "created_at": "2025-04-15T18:37:24.100435Z",
-      "filename": "document.pdf",
-      "mime_type": "application/pdf",
-      "size_bytes": 102400,
-      "type": "file",
-      "downloadable": false,
-      "scope": {
-        "id": "id",
-        "type": "session"
-      }
-    }
-  ],
-  "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "has_more": true,
-  "last_id": "file_013Zva2CMHLNnXjNJJKqJ2EF"
+  "next_page": "next_page"
 }
 ```
 

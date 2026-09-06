@@ -1,12 +1,6 @@
 # List Service Account Workspace Members
 
-Copy page
-
-
-
-# List Service Account Workspace Members
-
-GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts
+**GET** `/v1/organizations/workspaces/{workspace_id}/service_accounts`
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -19,127 +13,85 @@ archived workspace. The implicit default-workspace membership is not
 included in this list. Memberships of archived service accounts are
 omitted from the results.
 
-##### Path parameters
+## Path parameters
 
-workspace\_id: string
+- `workspace_id: string`
 
-ID of the workspace.
+  ID of the workspace.
 
-##### Query parameters
+## Query parameters
 
-
+- `limit: optional number`
 
-limit: optional number
+  Number of results per page.
 
-Number of results per page.
+  default: 20, maximum: 100, minimum: 1
 
-default20
+- `page: optional string`
 
-maximum100
+  Opaque cursor from a previous response's `next_page`.
 
-minimum1
+## Headers
 
-page: optional string
+- `"anthropic-beta": optional array of string`
 
-Opaque cursor from a previous response's `next_page`.
+  Optional header to specify the beta version(s) you want to use.
 
-##### Headers
+  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-
+## Returns
 
-"anthropic-beta": optional array of string
+- `data: array of object`
 
-Optional header to specify the beta version(s) you want to use.
+  - `created_by_actor_id: string or null`
 
-To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
+    Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
 
-##### Returns
+  - `implicit: boolean or null`
 
-
+    True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
 
-data: array of object{ created\_by\_actor\_id, implicit, service\_account\_id, 3 more }
+  - `service_account_id: string`
 
-created\_by\_actor\_id: string or null
+    Tagged service account ID (`svac_...`).
 
-Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
+  - `type: "service_account_workspace_member"`
 
-implicit: boolean or null
+    default: service_account_workspace_member
 
-True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
+  - `workspace_id: string`
 
-service\_account\_id: string
+    Tagged workspace ID (`wrkspc_...`).
 
-Tagged service account ID (`svac_...`).
+  - `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
 
-
+    Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
 
-type: "service\_account\_workspace\_member"
+    - `"workspace_admin"`
 
-defaultservice\_account\_workspace\_member
+    - `"workspace_billing"`
 
-workspace\_id: string
+    - `"workspace_developer"`
 
-Tagged workspace ID (`wrkspc_...`).
+    - `"workspace_restricted_developer"`
 
-
+    - `"workspace_user"`
 
-workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
+- `next_page: string or null`
 
-Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
+  Opaque cursor for the next page, or null if no more results.
 
-One of the following:
+## Example
 
-"workspace\_admin"
-
-"workspace\_billing"
-
-"workspace\_developer"
-
-"workspace\_restricted\_developer"
-
-"workspace\_user"
-
-next\_page: string or null
-
-Opaque cursor for the next page, or null if no more results.
-
-List Service Account Workspace Members
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/service_accounts \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "created_by_actor_id": "created_by_actor_id",
-      "implicit": true,
-      "service_account_id": "service_account_id",
-      "type": "service_account_workspace_member",
-      "workspace_id": "workspace_id",
-      "workspace_role": "workspace_admin"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

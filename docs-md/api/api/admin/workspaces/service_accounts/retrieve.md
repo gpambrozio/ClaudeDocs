@@ -1,12 +1,6 @@
 # Get Service Account Workspace Member
 
-Copy page
-
-
-
-# Get Service Account Workspace Member
-
-GET/v1/organizations/workspaces/{workspace\_id}/service\_accounts/{service\_account\_id}
+**GET** `/v1/organizations/workspaces/{workspace_id}/service_accounts/{service_account_id}`
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -19,100 +13,71 @@ membership when no explicit membership exists; an explicitly added
 membership is returned with its assigned role. An archived service
 account returns 404.
 
-##### Path parameters
+## Path parameters
 
-workspace\_id: string
+- `workspace_id: string`
 
-ID of the workspace.
+  ID of the workspace.
 
-service\_account\_id: string
+- `service_account_id: string`
 
-ID of the service account.
+  ID of the service account.
 
-##### Headers
+## Headers
 
-
+- `"anthropic-beta": optional array of string`
 
-"anthropic-beta": optional array of string
+  Optional header to specify the beta version(s) you want to use.
 
-Optional header to specify the beta version(s) you want to use.
+  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
+## Returns
 
-##### Returns
+- `created_by_actor_id: string or null`
 
-created\_by\_actor\_id: string or null
+  Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
 
-Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
+- `implicit: boolean or null`
 
-implicit: boolean or null
+  True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
 
-True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
+- `service_account_id: string`
 
-service\_account\_id: string
+  Tagged service account ID (`svac_...`).
 
-Tagged service account ID (`svac_...`).
+- `type: "service_account_workspace_member"`
 
-
+  default: service_account_workspace_member
 
-type: "service\_account\_workspace\_member"
+- `workspace_id: string`
 
-defaultservice\_account\_workspace\_member
+  Tagged workspace ID (`wrkspc_...`).
 
-workspace\_id: string
+- `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
 
-Tagged workspace ID (`wrkspc_...`).
+  Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
 
-
+  - `"workspace_admin"`
 
-workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
+  - `"workspace_billing"`
 
-Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
+  - `"workspace_developer"`
 
-One of the following:
+  - `"workspace_restricted_developer"`
 
-"workspace\_admin"
+  - `"workspace_user"`
 
-"workspace\_billing"
+## Example
 
-"workspace\_developer"
-
-"workspace\_restricted\_developer"
-
-"workspace\_user"
-
-Get Service Account Workspace Member
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/service_accounts/$SERVICE_ACCOUNT_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "created_by_actor_id": "created_by_actor_id",
-  "implicit": true,
-  "service_account_id": "service_account_id",
-  "type": "service_account_workspace_member",
-  "workspace_id": "workspace_id",
-  "workspace_role": "workspace_admin"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "created_by_actor_id": "created_by_actor_id",
   "implicit": true,

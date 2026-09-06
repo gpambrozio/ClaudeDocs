@@ -1,14 +1,8 @@
 # Reveal Tunnel Token
 
-Copy page
+**POST** `/v1/organizations/tunnels/{tunnel_id}/reveal_token`
 
-
-
-# Reveal Tunnel Token
-
-Deprecated
-
-POST/v1/organizations/tunnels/{tunnel\_id}/reveal\_token
+**Deprecated**
 
 **Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](api/beta/tunnels.md) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
@@ -19,67 +13,47 @@ Repeated calls return the same value until the token is rotated.
 Exposed as `POST` so the token does not appear in intermediary
 access logs.
 
-##### Path parameters
+## Path parameters
 
-tunnel\_id: string
+- `tunnel_id: string`
 
-ID of the Tunnel.
+  ID of the Tunnel.
 
-##### Headers
+## Headers
 
-"anthropic-beta": array of "mcp-tunnels-2026-05-19"
+- `"anthropic-beta": array of "mcp-tunnels-2026-05-19"`
 
-Required for all Tunnel endpoints.
+  Required for all Tunnel endpoints.
 
-##### Returns
+## Returns
 
-id: string
+- `id: string`
 
-Stable identifier for the current token value. Changes when the token is
-rotated.
+  Stable identifier for the current token value. Changes when the token is
+  rotated.
 
-tunnel\_token: string
+- `tunnel_token: string`
 
-The tunnel's connection token.
+  The tunnel's connection token.
 
-
+- `type: "tunnel_token"`
 
-type: "tunnel\_token"
+  Object type. Always `tunnel_token` for Tunnel Tokens.
 
-Object type. Always `tunnel_token` for Tunnel Tokens.
+  default: tunnel_token
 
-defaulttunnel\_token
+## Example
 
-Reveal Tunnel Token
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/reveal_token \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "ttkn_bb97000eaec162831399ca9b6684a4fdf5be49ace5683057b017aab5c87e19e0",
-  "tunnel_token": "eyJhIjoiRVhBTVBMRSIsInQiOiJFWEFNUExFIiwicyI6IkVYQU1QTEUifQ==",
-  "type": "tunnel_token"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "ttkn_bb97000eaec162831399ca9b6684a4fdf5be49ace5683057b017aab5c87e19e0",
   "tunnel_token": "eyJhIjoiRVhBTVBMRSIsInQiOiJFWEFNUExFIiwicyI6IkVYQU1QTEUifQ==",

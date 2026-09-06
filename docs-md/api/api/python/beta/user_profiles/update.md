@@ -1,201 +1,215 @@
 # Update User Profile
 
-Copy page
+`beta.user_profiles.update(user_profile_id, **kwargs)  -> BetaUserProfile`
 
-
-
-Python
-
-# Update User Profile
-
-beta.user\_profiles.update(struser\_profile\_id, UserProfileUpdateParams\*\*kwargs)  -> [BetaUserProfile](api/beta/user_profiles.md)
-
-POST/v1/user\_profiles/{user\_profile\_id}
+**POST** `/v1/user_profiles/{user_profile_id}`
 
 Update User Profile
 
-##### ParametersExpand Collapse
+## Parameters
 
-user\_profile\_id: str
+- `user_profile_id: str`
 
-external\_id: Optional[str]
+- `access_type: Optional[Literal["application", "passthrough"]]`
 
-If present, replaces the stored external\_id. Omit to leave unchanged. Maximum 255 characters.
+  How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
-metadata: Optional[Dict[str, str]]
+  - `"application"`
 
-Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
+  - `"passthrough"`
 
-name: Optional[str]
+- `external_id: Optional[str]`
 
-If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
+  If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters.
 
-
+  minLength: 1, maxLength: 255
 
-relationship: Optional[Literal["external", "resold", "internal"]]
+- `external_user_onboarded_at: Optional[Union[str, datetime]]`
 
-How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+  A timestamp in RFC 3339 format
 
-One of the following:
+  format: date-time
 
-"external"
+- `metadata: Optional[Dict[str, str]]`
 
-"resold"
+  Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
 
-"internal"
+- `name: Optional[str]`
 
-
+  If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
 
-betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
+  minLength: 1, maxLength: 255
 
-Optional header to specify the beta version(s) you want to use.
+- `betas: Optional[List[AnthropicBetaParam]]`
 
-One of the following:
+  Optional header to specify the beta version(s) you want to use.
 
-str
+  - `str`
 
-
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]
+    - `"message-batches-2024-09-24"`
 
-One of the following:
+    - `"prompt-caching-2024-07-31"`
 
-"message-batches-2024-09-24"
+    - `"computer-use-2024-10-22"`
 
-"prompt-caching-2024-07-31"
+    - `"computer-use-2025-01-24"`
 
-"computer-use-2024-10-22"
+    - `"pdfs-2024-09-25"`
 
-"computer-use-2025-01-24"
+    - `"token-counting-2024-11-01"`
 
-"pdfs-2024-09-25"
+    - `"token-efficient-tools-2025-02-19"`
 
-"token-counting-2024-11-01"
+    - `"output-128k-2025-02-19"`
 
-"token-efficient-tools-2025-02-19"
+    - `"files-api-2025-04-14"`
 
-"output-128k-2025-02-19"
+    - `"mcp-client-2025-04-04"`
 
-"files-api-2025-04-14"
+    - `"mcp-client-2025-11-20"`
 
-"mcp-client-2025-04-04"
+    - `"dev-full-thinking-2025-05-14"`
 
-"mcp-client-2025-11-20"
+    - `"interleaved-thinking-2025-05-14"`
 
-"dev-full-thinking-2025-05-14"
+    - `"code-execution-2025-05-22"`
 
-"interleaved-thinking-2025-05-14"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"code-execution-2025-05-22"
+    - `"context-1m-2025-08-07"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"context-management-2025-06-27"`
 
-"context-1m-2025-08-07"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"context-management-2025-06-27"
+    - `"skills-2025-10-02"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"fast-mode-2026-02-01"`
 
-"skills-2025-10-02"
+    - `"output-300k-2026-03-24"`
 
-"fast-mode-2026-02-01"
+    - `"user-profiles-2026-03-24"`
 
-"output-300k-2026-03-24"
+    - `"user-profiles-2026-08-18"`
 
-"user-profiles-2026-03-24"
+    - `"advisor-tool-2026-03-01"`
 
-"advisor-tool-2026-03-01"
+    - `"managed-agents-2026-04-01"`
 
-"managed-agents-2026-04-01"
+    - `"cache-diagnosis-2026-04-07"`
 
-"cache-diagnosis-2026-04-07"
+    - `"dreaming-2026-04-21"`
 
-"thinking-token-count-2026-05-13"
+    - `"thinking-token-count-2026-05-13"`
 
-"server-side-fallback-2026-06-01"
+    - `"server-side-fallback-2026-06-01"`
 
-"fallback-credit-2026-06-01"
+    - `"server-side-fallback-2026-07-01"`
 
-"agent-memory-2026-07-22"
+    - `"fallback-credit-2026-06-01"`
 
-##### ReturnsExpand Collapse
+    - `"fallback-credit-2026-07-01"`
 
-
+    - `"agent-memory-2026-07-22"`
 
-class BetaUserProfile: …
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-id: str
+    - `"compact-2026-01-12"`
 
-Unique identifier for this user profile, prefixed `uprof_`.
+    - `"computer-use-2025-11-24"`
 
-created\_at: datetime
+    - `"mcp-tunnels-2026-06-22"`
 
-A timestamp in RFC 3339 format
+    - `"structured-outputs-2025-11-13"`
 
-metadata: Dict[str, str]
+    - `"task-budgets-2026-03-13"`
 
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+    - `"thinking-display-updates-2026-08-18"`
 
-
+    - `"ce-user-management-2026-07-13"`
 
-relationship: Literal["external", "resold", "internal"]
+    - `"mid-conversation-output-config-2026-07-01"`
 
-How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+    - `"thinking-binding-controls-2026-08-01"`
 
-One of the following:
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"external"
+## Returns
 
-"resold"
+- `class BetaUserProfile: …`
 
-"internal"
+  - `id: str`
 
-
+    Unique identifier for this user profile, prefixed `uprof_`.
 
-trust\_grants: Dict[str, [BetaUserProfileTrustGrant](api/beta/user_profiles.md)]
+  - `created_at: datetime`
 
-Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+    A timestamp in RFC 3339 format
 
-
+    format: date-time
 
-status: Literal["active", "pending", "rejected"]
+  - `metadata: Dict[str, str]`
 
-Status of the trust grant.
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-One of the following:
+  - `trust_grants: Dict[str, BetaUserProfileTrustGrant]`
 
-"active"
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-"pending"
+    - `status: Literal["active", "pending", "rejected"]`
 
-"rejected"
+      Status of the trust grant.
 
-type: Literal["user\_profile"]
+      - `"active"`
 
-Object type. Always `user_profile`.
+      - `"pending"`
 
-updated\_at: datetime
+      - `"rejected"`
 
-A timestamp in RFC 3339 format
+  - `type: Literal["user_profile"]`
 
-external\_id: Optional[str]
+    Object type. Always `user_profile`.
 
-Platform's own identifier for this user. Not enforced unique.
+  - `updated_at: datetime`
 
-name: Optional[str]
+    A timestamp in RFC 3339 format
 
-Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    format: date-time
 
-Update User Profile
+  - `access_type: Optional[Literal["application", "passthrough"]]`
 
-Python
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
-```shiki
+    - `"application"`
+
+    - `"passthrough"`
+
+  - `external_id: Optional[str]`
+
+    Platform's own identifier for this user. Not enforced unique.
+
+  - `external_user_onboarded_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `name: Optional[str]`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
+
+## Example
+
+```python
 import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
 )
 beta_user_profile = client.beta.user_profiles.update(
     user_profile_id="uprof_011CZkZCu8hGbp5mYRQgUmz9",
@@ -203,16 +217,13 @@ beta_user_profile = client.beta.user_profiles.update(
 print(beta_user_profile.id)
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
-  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -220,31 +231,9 @@ Response 200
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
+  "access_type": "application",
   "external_id": "user_12345",
-  "name": "Example User"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
-  "created_at": "2026-03-15T10:00:00Z",
-  "metadata": {},
-  "relationship": "external",
-  "trust_grants": {
-    "cyber": {
-      "status": "active"
-    }
-  },
-  "type": "user_profile",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "external_id": "user_12345",
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
   "name": "Example User"
 }
 ```

@@ -1,74 +1,66 @@
 # Get User Profile
 
-Copy page
+`$client->beta->userProfiles->retrieve(string userProfileID, ?list<AnthropicBeta> betas): BetaUserProfile`
 
-
-
-PHP
-
-# Get User Profile
-
-$client->beta->userProfiles->retrieve(string userProfileID, ?list<AnthropicBeta> betas): [BetaUserProfile](api/beta/user_profiles.md)
-
-GET/v1/user\_profiles/{user\_profile\_id}
+**GET** `/v1/user_profiles/{user_profile_id}`
 
 Get User Profile
 
-##### ParametersExpand Collapse
+## Parameters
 
-userProfileID: string
+- `userProfileID: string`
 
-betas?:optional list<AnthropicBeta>
+- `betas?:optional list<AnthropicBeta>`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `BetaUserProfile`
 
-[BetaUserProfile](api/beta/user_profiles.md)
+  - `string id`
 
-string id
+    Unique identifier for this user profile, prefixed `uprof_`.
 
-Unique identifier for this user profile, prefixed `uprof_`.
+  - `\Datetime createdAt`
 
-\Datetime createdAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `array<string,string> metadata`
 
-array<string,string> metadata
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+  - `array<string,BetaUserProfileTrustGrant> trustGrants`
 
-Relationship relationship
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+  - `Type type`
 
-array<string,[BetaUserProfileTrustGrant](api/beta/user_profiles.md)> trustGrants
+    Object type. Always `user_profile`.
 
-Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+  - `\Datetime updatedAt`
 
-Type type
+    A timestamp in RFC 3339 format
 
-Object type. Always `user_profile`.
+  - `?AccessType accessType`
 
-\Datetime updatedAt
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
-A timestamp in RFC 3339 format
+  - `?string externalID`
 
-?string externalID
+    Platform's own identifier for this user. Not enforced unique.
 
-Platform's own identifier for this user. Not enforced unique.
+  - `?\Datetime externalUserOnboardedAt`
 
-?string name
+    A timestamp in RFC 3339 format
 
-Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+  - `?string name`
 
-Get User Profile
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
 
-PHP
+## Example
 
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -76,22 +68,20 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaUserProfile = $client->beta->userProfiles->retrieve(
-  'uprof_011CZkZCu8hGbp5mYRQgUmz9', betas: ['message-batches-2024-09-24']
+  'uprof_011CZkZCu8hGbp5mYRQgUmz9',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaUserProfile);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
-  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -99,31 +89,9 @@ Response 200
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
+  "access_type": "application",
   "external_id": "user_12345",
-  "name": "Example User"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
-  "created_at": "2026-03-15T10:00:00Z",
-  "metadata": {},
-  "relationship": "external",
-  "trust_grants": {
-    "cyber": {
-      "status": "active"
-    }
-  },
-  "type": "user_profile",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "external_id": "user_12345",
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
   "name": "Example User"
 }
 ```

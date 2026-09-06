@@ -1,216 +1,183 @@
 # Get Skill Version
 
-Copy page
+`BetaSkillVersion Beta.Skills.Versions.Retrieve(parameters, cancellationToken = default)`
 
-
-
-C#
-
-# Get Skill Version
-
-[VersionRetrieveResponse](api/beta/skills/versions.md) Beta.Skills.Versions.Retrieve(VersionRetrieveParamsparameters, CancellationTokencancellationToken = default)
-
-GET/v1/skills/{skill\_id}/versions/{version}
+**GET** `/v1/skills/{skill_id}/versions/{version}`
 
 Get Skill Version
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `VersionRetrieveParams parameters`
 
-VersionRetrieveParams parameters
+  - `required string skillID`
 
-
+    Path param: Unique identifier for the skill.
 
-required string skillID
+    The format and length of IDs may change over time.
 
-Path param: Unique identifier for the skill.
+  - `required string version`
 
-The format and length of IDs may change over time.
+    Path param: Identifies the skill version: a version ID, or the literal `latest` for the skill's most recent version.
 
-
+    Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
-required string version
+  - `IReadOnlyList<AnthropicBeta> betas`
 
-Path param: Version identifier for the skill.
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
-
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
 
-IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
 
-"message-batches-2024-09-24"MessageBatches2024\_09\_24
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
 
-"prompt-caching-2024-07-31"PromptCaching2024\_07\_31
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
 
-"computer-use-2024-10-22"ComputerUse2024\_10\_22
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
 
-"computer-use-2025-01-24"ComputerUse2025\_01\_24
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
 
-"pdfs-2024-09-25"Pdfs2024\_09\_25
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
 
-"token-counting-2024-11-01"TokenCounting2024\_11\_01
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
 
-"token-efficient-tools-2025-02-19"TokenEfficientTools2025\_02\_19
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
 
-"output-128k-2025-02-19"Output128k2025\_02\_19
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
 
-"files-api-2025-04-14"FilesApi2025\_04\_14
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
 
-"mcp-client-2025-04-04"McpClient2025\_04\_04
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
 
-"mcp-client-2025-11-20"McpClient2025\_11\_20
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
 
-"dev-full-thinking-2025-05-14"DevFullThinking2025\_05\_14
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
 
-"interleaved-thinking-2025-05-14"InterleavedThinking2025\_05\_14
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
 
-"code-execution-2025-05-22"CodeExecution2025\_05\_22
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025\_04\_11
+    - `Skills2025_10_02("skills-2025-10-02")`
 
-"context-1m-2025-08-07"Context1m2025\_08\_07
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
 
-"context-management-2025-06-27"ContextManagement2025\_06\_27
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
 
-"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025\_08\_26
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
 
-"skills-2025-10-02"Skills2025\_10\_02
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
-"fast-mode-2026-02-01"FastMode2026\_02\_01
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
-"output-300k-2026-03-24"Output300k2026\_03\_24
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
 
-"user-profiles-2026-03-24"UserProfiles2026\_03\_24
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
 
-"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
 
-"managed-agents-2026-04-01"ManagedAgents2026\_04\_01
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
 
-"cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
 
-"thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
 
-"server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
 
-"fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
 
-"agent-memory-2026-07-22"AgentMemory2026\_07\_22
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
 
-##### ReturnsExpand Collapse
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-
+    - `Compact2026_01_12("compact-2026-01-12")`
 
-class VersionRetrieveResponse:
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
 
-
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
 
-required string ID
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
 
-Unique identifier for the skill version.
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
 
-The format and length of IDs may change over time.
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
 
-required string CreatedAt
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
 
-ISO 8601 timestamp of when the skill version was created.
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
 
-required string Description
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-Description of the skill version.
+## Returns
 
-This is extracted from the SKILL.md file in the skill upload.
+- `class BetaSkillVersion:`
 
-
+  - `required string ID`
 
-required string Directory
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
 
-Directory name of the skill version.
+  - `required DateTimeOffset CreatedAt`
 
-This is the top-level directory name that was extracted from the uploaded files.
+    ISO 8601 timestamp of when the skill was created.
 
-
+    format: date-time
 
-required string Name
+  - `required string Description`
 
-Human-readable name of the skill version.
+    Description of the skill version.
 
-This is extracted from the SKILL.md file in the skill upload.
+    This is extracted from the SKILL.md file in the skill upload.
 
-required string SkillID
+  - `required string Name`
 
-Identifier for the skill that this version belongs to.
+    The Skill's immutable kebab-case slug, set at creation from the first
+    upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
+    later upload must resolve to the same value. Also the top-level directory
+    of the Skill's mounted files and the base name of a downloaded archive.
 
-
+  - `required string SkillID`
 
-required string Type
+    Unique identifier for the skill.
 
-Object type.
+    The format and length of IDs may change over time.
 
-For Skill Versions, this is always `"skill_version"`.
+  - `JsonElement Type = "skill_version"`
 
-
+    Object type.
 
-required string Version
+    For Skill Versions, this is always `"skill_version"`.
 
-Version identifier for the skill.
+## Example
 
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
-
-Get Skill Version
-
-C#
-
-```shiki
+```csharp
 VersionRetrieveParams parameters = new()
 {
     SkillID = "skill_id",
     Version = "version",
 };
 
-var version = await client.Beta.Skills.Versions.Retrieve(parameters);
+var betaSkillVersion = await client.Beta.Skills.Versions.Retrieve(parameters);
 
-Console.WriteLine(version);
+Console.WriteLine(betaSkillVersion);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
-  "id": "skillver_01JAbcdefghijklmnopqrstuvw",
+  "id": "id",
   "created_at": "2024-10-30T23:58:27.427722Z",
-  "description": "A custom skill for doing something useful",
-  "directory": "my-skill",
-  "name": "my-skill",
+  "description": "description",
+  "name": "name",
   "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type",
-  "version": "1759178010641129"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "skillver_01JAbcdefghijklmnopqrstuvw",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "description": "A custom skill for doing something useful",
-  "directory": "my-skill",
-  "name": "my-skill",
-  "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type",
-  "version": "1759178010641129"
+  "type": "skill_version"
 }
 ```
 

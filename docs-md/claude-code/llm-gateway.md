@@ -1,49 +1,53 @@
 # Other LLM gateways
 
+> Route Claude Code through an LLM gateway your organization already runs. Covers connecting Claude Code to a gateway, rolling one out for your organization, and what Claude Code sends to a gateway.
+
 This section covers using a gateway product your organization already runs, rather than [Claude apps gateway](claude-apps-gateway.md). For what a gateway is, how it sits between Claude Code and your provider, and how to choose between Claude apps gateway and another product, see the [gateway overview](gateways.md).
 
-- If you’re a developer connecting to an existing gateway: [connect Claude Code to your gateway](llm-gateway-connect.md)
-- If you’re an admin rolling out a gateway for your organization: [deploy and distribute a gateway](llm-gateway-rollout.md)
-- If you’re configuring a gateway product: the [gateway compatibility guide](llm-gateway-protocol.md)
+* If you're a developer connecting to an existing gateway: [connect Claude Code to your gateway](llm-gateway-connect.md)
+* If you're an admin rolling out a gateway for your organization: [deploy and distribute a gateway](llm-gateway-rollout.md)
+* If you're configuring a gateway product: the [gateway compatibility guide](llm-gateway-protocol.md)
 
-Any gateway that exposes a [supported API format](llm-gateway-protocol.md) works. Anthropic doesn’t endorse, maintain, or audit third-party gateway products, and doesn’t support routing Claude Code to non-Claude models through any gateway. Deploy the gateway following its own documentation, then complete the Claude Code side with the [rollout steps below](#roll-out-a-gateway).
+Any gateway that exposes a [supported API format](llm-gateway-protocol.md) works. Anthropic doesn't endorse, maintain, or audit third-party gateway products, and doesn't support routing Claude Code to non-Claude models through any gateway. Deploy the gateway following its own documentation, then complete the Claude Code side with the [rollout steps below](#roll-out-a-gateway).
 
-## [​](#what-a-gateway-provides) What a gateway provides
+## What a gateway provides
 
 A gateway gives your organization one place to manage:
 
-- **Credentials**: the provider key stays server-side; developers hold gateway credentials instead
-- **Usage tracking**: attribute usage by developer or team, regardless of which provider serves the request
-- **Cost controls**: enforce budgets and rate limits in one place
-- **Audit logging**: log every model request for compliance
-- **Provider switching**: change the provider in gateway configuration, without touching developer machines
+* **Credentials**: the provider key stays server-side; developers hold gateway credentials instead
+* **Usage tracking**: attribute usage by developer or team, regardless of which provider serves the request
+* **Cost controls**: enforce budgets and rate limits in one place
+* **Audit logging**: log every model request for compliance
+* **Provider switching**: change the provider in gateway configuration, without touching developer machines
 
-All of these except provider switching apply whether the upstream is Anthropic’s API or a [cloud provider](third-party-integrations.md). Provider switching without reconfiguring developer machines also depends on the gateway exposing a single [Anthropic-format endpoint](llm-gateway-protocol.md) regardless of upstream; a gateway that exposes a provider’s own format ties the client configuration to that provider.
-The tradeoff is that the gateway becomes infrastructure your organization operates. Claude Code adds capabilities with each release, and a gateway that doesn’t forward them breaks the corresponding features, so the gateway product needs to be kept updated as Claude Code evolves. The [gateway compatibility guide](llm-gateway-protocol.md) covers what to forward.
+All of these except provider switching apply whether the upstream is Anthropic's API or a [cloud provider](third-party-integrations.md). Provider switching without reconfiguring developer machines also depends on the gateway exposing a single [Anthropic-format endpoint](llm-gateway-protocol.md) regardless of upstream; a gateway that exposes a provider's own format ties the client configuration to that provider.
 
-## [​](#roll-out-a-gateway) Roll out a gateway
+The tradeoff is that the gateway becomes infrastructure your organization operates. Claude Code adds capabilities with each release, and a gateway that doesn't forward them breaks the corresponding features, so the gateway product needs to be kept updated as Claude Code evolves. The [gateway compatibility guide](llm-gateway-protocol.md) covers what to forward.
 
-When you’re ready to roll out an LLM gateway to your organization, the sequence is the same whichever gateway product you choose:
+## Roll out a gateway
+
+When you're ready to roll out an LLM gateway to your organization, the sequence is the same whichever gateway product you choose:
 
 1. Deploy the gateway and give it your provider credential, so it can authenticate the requests it forwards.
 2. Issue each developer a gateway credential, so usage is attributed to the developer and offboarding revokes one credential.
-3. Distribute the configuration through a [managed settings file](managed-settings.md) and your secrets tooling, so every machine receives the base URL and a credential. When both are distributed, developers don’t configure anything. If you don’t have settings distribution in place, developers follow the [connect page](llm-gateway-connect.md) to set the variables themselves.
+3. Distribute the configuration through a [managed settings file](managed-settings.md) and your secrets tooling, so every machine receives the base URL and a credential. When both are distributed, developers don't configure anything. If you don't have settings distribution in place, developers follow the [connect page](llm-gateway-connect.md) to set the variables themselves.
 4. Have each developer [check for the configuration in Claude Code](llm-gateway-connect.md), so distribution problems surface before they depend on the gateway.
 
 [Roll out an LLM gateway for your organization](llm-gateway-rollout.md) walks each step and shows the configuration files to distribute at each one. The gateway is one part of organization setup; for policy enforcement, usage visibility, and data handling decisions, see [Set up Claude Code for your organization](admin-setup.md).
 
-## [​](#subscriptions-and-gateways) Subscriptions and gateways
+## Subscriptions and gateways
 
-While a [gateway credential variable](llm-gateway-connect.md) or `apiKeyHelper` is active, a developer’s claude.ai subscription isn’t used: the credential replaces the subscription login for that session, and the subscription’s usage limits don’t apply. That traffic is billed per token to whoever owns the credential the gateway forwards, such as your organization’s Anthropic Console account, or your Amazon Bedrock, Google Cloud’s Agent Platform, or Microsoft Foundry account when the gateway routes there.
-[`ANTHROPIC_BASE_URL`](llm-gateway-connect.md) is the variable that points Claude Code at the gateway. Setting only that variable, without a gateway credential, doesn’t replace the subscription. Requests still route through the gateway, but a saved claude.ai login remains the active credential, so its usage limits and billing apply. Gateways that pass this traffic on to Anthropic must forward the OAuth capability in `anthropic-beta`; see the [request headers reference](llm-gateway-protocol.md).
+While a [gateway credential variable](llm-gateway-connect.md) or `apiKeyHelper` is active, a developer's claude.ai subscription isn't used: the credential replaces the subscription login for that session, and the subscription's usage limits don't apply. That traffic is billed per token to whoever owns the credential the gateway forwards, such as your organization's Anthropic Console account, or your Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry account when the gateway routes there.
 
-## [​](#related-pages) Related pages
+[`ANTHROPIC_BASE_URL`](llm-gateway-connect.md) is the variable that points Claude Code at the gateway. Setting only that variable, without a gateway credential, doesn't replace the subscription. Requests still route through the gateway, but a saved claude.ai login remains the active credential, so its usage limits and billing apply. Gateways that pass this traffic on to Anthropic must forward the OAuth capability in `anthropic-beta`; see the [request headers reference](llm-gateway-protocol.md).
 
-- [Gateway overview](gateways.md): how a gateway works and how to choose between Claude apps gateway and another product
-- [Claude apps gateway](claude-apps-gateway.md): Anthropic’s self-hosted gateway with SSO sign-in and OTLP telemetry
-- [Connect Claude Code to an LLM gateway](llm-gateway-connect.md): set the base URL and credential on your own machine, with per-surface configuration and a troubleshooting table
-- [Roll out an LLM gateway for your organization](llm-gateway-rollout.md): the admin checklist for deploying a gateway, issuing developer credentials, and distributing managed settings
-- [Gateway compatibility guide](llm-gateway-protocol.md): what Claude Code sends to a gateway, for operators configuring one, covering endpoints, headers to forward, and feature pass-through
+## Related pages
+
+* [Gateway overview](gateways.md): how a gateway works and how to choose between Claude apps gateway and another product
+* [Claude apps gateway](claude-apps-gateway.md): Anthropic's self-hosted gateway with SSO sign-in and OTLP telemetry
+* [Connect Claude Code to an LLM gateway](llm-gateway-connect.md): set the base URL and credential on your own machine, with per-surface configuration and a troubleshooting table
+* [Roll out an LLM gateway for your organization](llm-gateway-rollout.md): the admin checklist for deploying a gateway, issuing developer credentials, and distributing managed settings
+* [Gateway compatibility guide](llm-gateway-protocol.md): what Claude Code sends to a gateway, for operators configuring one, covering endpoints, headers to forward, and feature pass-through
 
 ---
 

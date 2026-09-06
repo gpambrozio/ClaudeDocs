@@ -1,196 +1,206 @@
 # List memories
 
-Copy page
+`beta.memory_stores.memories.list(memory_store_id, **kwargs) -> PageCursor<BetaManagedAgentsMemoryListItem>`
 
-
-
-Ruby
-
-# List memories
-
-beta.memory\_stores.memories.list(memory\_store\_id, \*\*kwargs) -> PageCursor<[BetaManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)>
-
-GET/v1/memory\_stores/{memory\_store\_id}/memories
+**GET** `/v1/memory_stores/{memory_store_id}/memories`
 
 List memories
 
-##### ParametersExpand Collapse
+## Parameters
 
-memory\_store\_id: String
+- `memory_store_id: String`
 
-depth: Integer
+- `depth: Integer`
 
-`0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` returns immediate children only; deeper entries roll up as `memory_prefix` items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
+  `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` returns immediate children only; deeper entries roll up as `memory_prefix` items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
 
-limit: Integer
+  format: int32
 
-Maximum number of items to return per page. Must be between 1 and 100. Defaults to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and `memory_prefix` items count toward the limit.
+- `limit: Integer`
 
-page: String
+  Maximum number of items to return per page. Must be between 1 and 100. Defaults to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and `memory_prefix` items count toward the limit.
 
-Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
+  format: int32
 
-path\_prefix: String
+- `page: String`
 
-Optional path prefix filter. Must end with `/` (segment-aligned), e.g., `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
+  Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
-
+- `path_prefix: String`
 
-view: [BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)
+  Optional path prefix filter. Must end with `/` (segment-aligned), e.g., `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
 
-Which projection of each `memory` to return. Defaults to `basic` (content omitted). `full` populates `content` on each item and caps `limit` at 20; use this as the bulk-read path for export and sync.
+- `view: BetaManagedAgentsMemoryView`
 
-One of the following:
+  Which projection of each `memory` to return. Defaults to `basic` (content omitted). `full` populates `content` on each item and caps `limit` at 20; use this as the bulk-read path for export and sync.
 
-:basic
+  - `:basic`
 
-:full
+  - `:full`
 
-
+- `betas: Array[AnthropicBeta]`
 
-betas: Array[[AnthropicBeta](api/beta.md)]
+  Optional header to specify the beta version(s) you want to use.
 
-Optional header to specify the beta version(s) you want to use.
+  - `String = String`
 
-One of the following:
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
 
-String = String
+    - `:"message-batches-2024-09-24"`
 
-
+    - `:"prompt-caching-2024-07-31"`
 
-AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more
+    - `:"computer-use-2024-10-22"`
 
-One of the following:
+    - `:"computer-use-2025-01-24"`
 
-:"message-batches-2024-09-24"
+    - `:"pdfs-2024-09-25"`
 
-:"prompt-caching-2024-07-31"
+    - `:"token-counting-2024-11-01"`
 
-:"computer-use-2024-10-22"
+    - `:"token-efficient-tools-2025-02-19"`
 
-:"computer-use-2025-01-24"
+    - `:"output-128k-2025-02-19"`
 
-:"pdfs-2024-09-25"
+    - `:"files-api-2025-04-14"`
 
-:"token-counting-2024-11-01"
+    - `:"mcp-client-2025-04-04"`
 
-:"token-efficient-tools-2025-02-19"
+    - `:"mcp-client-2025-11-20"`
 
-:"output-128k-2025-02-19"
+    - `:"dev-full-thinking-2025-05-14"`
 
-:"files-api-2025-04-14"
+    - `:"interleaved-thinking-2025-05-14"`
 
-:"mcp-client-2025-04-04"
+    - `:"code-execution-2025-05-22"`
 
-:"mcp-client-2025-11-20"
+    - `:"extended-cache-ttl-2025-04-11"`
 
-:"dev-full-thinking-2025-05-14"
+    - `:"context-1m-2025-08-07"`
 
-:"interleaved-thinking-2025-05-14"
+    - `:"context-management-2025-06-27"`
 
-:"code-execution-2025-05-22"
+    - `:"model-context-window-exceeded-2025-08-26"`
 
-:"extended-cache-ttl-2025-04-11"
+    - `:"skills-2025-10-02"`
 
-:"context-1m-2025-08-07"
+    - `:"fast-mode-2026-02-01"`
 
-:"context-management-2025-06-27"
+    - `:"output-300k-2026-03-24"`
 
-:"model-context-window-exceeded-2025-08-26"
+    - `:"user-profiles-2026-03-24"`
 
-:"skills-2025-10-02"
+    - `:"user-profiles-2026-08-18"`
 
-:"fast-mode-2026-02-01"
+    - `:"advisor-tool-2026-03-01"`
 
-:"output-300k-2026-03-24"
+    - `:"managed-agents-2026-04-01"`
 
-:"user-profiles-2026-03-24"
+    - `:"cache-diagnosis-2026-04-07"`
 
-:"advisor-tool-2026-03-01"
+    - `:"dreaming-2026-04-21"`
 
-:"managed-agents-2026-04-01"
+    - `:"thinking-token-count-2026-05-13"`
 
-:"cache-diagnosis-2026-04-07"
+    - `:"server-side-fallback-2026-06-01"`
 
-:"thinking-token-count-2026-05-13"
+    - `:"server-side-fallback-2026-07-01"`
 
-:"server-side-fallback-2026-06-01"
+    - `:"fallback-credit-2026-06-01"`
 
-:"fallback-credit-2026-06-01"
+    - `:"fallback-credit-2026-07-01"`
 
-:"agent-memory-2026-07-22"
+    - `:"agent-memory-2026-07-22"`
 
-##### ReturnsExpand Collapse
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
-
+    - `:"compact-2026-01-12"`
 
-BetaManagedAgentsMemoryListItem = [BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) { id, content\_sha256, content\_size\_bytes, 7 more }  | [BetaManagedAgentsMemoryPrefix](api/beta/memory_stores/memories.md) { path, type } 
+    - `:"computer-use-2025-11-24"`
 
-One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
+    - `:"mcp-tunnels-2026-06-22"`
 
-One of the following:
+    - `:"structured-outputs-2025-11-13"`
 
-
+    - `:"task-budgets-2026-03-13"`
 
-class BetaManagedAgentsMemory { id, content\_sha256, content\_size\_bytes, 7 more } 
+    - `:"thinking-display-updates-2026-08-18"`
 
-A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+    - `:"ce-user-management-2026-07-13"`
 
-id: String
+    - `:"mid-conversation-output-config-2026-07-01"`
 
-Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+    - `:"thinking-binding-controls-2026-08-01"`
 
-content\_sha256: String
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
 
-Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
+## Returns
 
-content\_size\_bytes: Integer
+- `BetaManagedAgentsMemoryListItem = BetaManagedAgentsMemory | BetaManagedAgentsMemoryPrefix`
 
-Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+  One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
-created\_at: Time
+  - `class BetaManagedAgentsMemory`
 
-A timestamp in RFC 3339 format
+    A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
-memory\_store\_id: String
+    - `id: String`
 
-ID of the memory store this memory belongs to (a `memstore_...` value).
+      Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
 
-memory\_version\_id: String
+    - `content_sha256: String`
 
-ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+      Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
 
-path: String
+    - `content_size_bytes: Integer`
 
-Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
+      Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
-type: :memory
+      format: int32
 
-updated\_at: Time
+    - `created_at: Time`
 
-A timestamp in RFC 3339 format
+      A timestamp in RFC 3339 format
 
-content: String
+      format: date-time
 
-The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+    - `memory_store_id: String`
 
-
+      ID of the memory store this memory belongs to (a `memstore_...` value).
 
-class BetaManagedAgentsMemoryPrefix { path, type } 
+    - `memory_version_id: String`
 
-A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
 
-path: String
+    - `path: String`
 
-The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
+      Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-type: :memory\_prefix
+    - `type: :memory`
 
-List memories
+    - `updated_at: Time`
 
-Ruby
+      A timestamp in RFC 3339 format
 
-```shiki
+      format: date-time
+
+    - `content: String`
+
+      The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+
+  - `class BetaManagedAgentsMemoryPrefix`
+
+    A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+
+    - `path: String`
+
+      The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
+
+    - `type: :memory_prefix`
+
+## Example
+
+```ruby
 require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
@@ -200,37 +210,9 @@ page = anthropic.beta.memory_stores.memories.list("memory_store_id")
 puts(page)
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "content_sha256": "content_sha256",
-      "content_size_bytes": 0,
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "memory_store_id": "memory_store_id",
-      "memory_version_id": "memory_version_id",
-      "path": "path",
-      "type": "memory",
-      "updated_at": "2019-12-27T18:11:19.117Z",
-      "content": "content"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

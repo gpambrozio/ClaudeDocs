@@ -1,133 +1,117 @@
 # List Files
 
-Copy page
+`$ ant beta:files list`
 
-
-
-CLI
-
-# List Files
-
-$ ant beta:files list
-
-GET/v1/files
+**GET** `/v1/files`
 
 List Files
 
-##### ParametersExpand Collapse
+## Parameters
 
---after-id: optional string
+- `--id: optional array of string`
 
-Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+  Query param: Restrict the result set to Files whose `id` is in this list. At most 100 entries (after de-duplication). Mutually exclusive with `page` and `limit`. When supplied, the response is always a single page (`next_page` is null). IDs that do not resolve to a visible File — including deleted Files — are silently omitted.
 
---before-id: optional string
+- `--limit: optional number`
 
-Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+  Query param: Number of items to return per page.
 
-
+  Defaults to `20`. Ranges from `1` to `1000`.
 
---limit: optional number
+  maximum: 1000, minimum: 1
 
-Query param: Number of items to return per page.
+- `--page: optional string`
 
-Defaults to `20`. Ranges from `1` to `1000`.
+  Query param: Opaque page cursor returned in a prior list response's `next_page`. Prefixed `page_`.
 
---scope-id: optional string
+- `--scope-id: optional string`
 
-Query param: Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
+  Query param: Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--beta: optional array of AnthropicBeta`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `BetaFileListResponse: object`
 
-BetaFileListResponse: object { data, first\_id, has\_more, last\_id } 
+  - `data: array of BetaFileMetadata`
 
-
+    List of file metadata objects.
 
-data: array of [FileMetadata](api/beta/files.md) { id, created\_at, filename, 5 more } 
+    - `id: string`
 
-List of file metadata objects.
+      Unique object identifier.
 
-
+      The format and length of IDs may change over time.
 
-id: string
+    - `created_at: string`
 
-Unique object identifier.
+      RFC 3339 datetime string representing when the file was created.
 
-The format and length of IDs may change over time.
+      format: date-time
 
-created\_at: string
+    - `filename: string`
 
-RFC 3339 datetime string representing when the file was created.
+      Original filename of the uploaded file.
 
-filename: string
+      maxLength: 500, minLength: 1
 
-Original filename of the uploaded file.
+    - `mime_type: string`
 
-mime\_type: string
+      MIME type of the file.
 
-MIME type of the file.
+      maxLength: 255, minLength: 1
 
-size\_bytes: number
+    - `size_bytes: number`
 
-Size of the file in bytes.
+      Size of the file in bytes.
 
-
+      minimum: 0
 
-type: "file"
+    - `type: "file"`
 
-Object type.
+      Object type.
 
-For files, this is always `"file"`.
+      For files, this is always `"file"`.
 
-downloadable: optional boolean
+    - `downloadable: optional boolean`
 
-Whether the file can be downloaded.
+      Whether the file can be downloaded.
 
-
+    - `expires_at: optional string`
 
-scope: optional object { id, type } 
+      RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
 
-The scope of this file, indicating the context in which it was created (e.g., a session).
+      format: date-time
 
-id: string
+    - `scope: optional object`
 
-The ID of the scoping resource (e.g., the session ID).
+      The scope of this file, indicating the context in which it was created (e.g., a session).
 
-type: "session"
+      - `id: string`
 
-The type of scope (e.g., `"session"`).
+        The ID of the scoping resource (e.g., the session ID).
 
-first\_id: optional string
+      - `type: "session"`
 
-ID of the first file in this page of results.
+        The type of scope (e.g., `"session"`).
 
-has\_more: optional boolean
+  - `next_page: optional string`
 
-Whether there are more results available.
+    Opaque cursor for the next page. Supply as `?page=` to fetch the next page; null when there are no more results.
 
-last\_id: optional string
+## Example
 
-ID of the last file in this page of results.
-
-List Files
-
-CLI
-
-```shiki
+```bash
 ant beta:files list \
   --api-key my-anthropic-api-key
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
@@ -138,44 +122,14 @@ Response 200
       "size_bytes": 102400,
       "type": "file",
       "downloadable": false,
+      "expires_at": "2025-05-15T18:37:24.100435Z",
       "scope": {
         "id": "id",
         "type": "session"
       }
     }
   ],
-  "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "has_more": true,
-  "last_id": "file_013Zva2CMHLNnXjNJJKqJ2EF"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "file_011CNha8iCJcU1wXNR6q4V8w",
-      "created_at": "2025-04-15T18:37:24.100435Z",
-      "filename": "document.pdf",
-      "mime_type": "application/pdf",
-      "size_bytes": 102400,
-      "type": "file",
-      "downloadable": false,
-      "scope": {
-        "id": "id",
-        "type": "session"
-      }
-    }
-  ],
-  "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "has_more": true,
-  "last_id": "file_013Zva2CMHLNnXjNJJKqJ2EF"
+  "next_page": "next_page"
 }
 ```
 

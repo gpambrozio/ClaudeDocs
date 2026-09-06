@@ -1,91 +1,214 @@
 # Files
 
-To enable the Compliance API, see the setup guide.
+## Get file metadata
 
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
+**GET** `/v1/compliance/apps/chats/files/{claude_file_id}`
 
-Copy page
+Retrieves metadata for a file referenced in chat messages, without
+downloading the file content. Use the sibling `/content` endpoint to
+download the bytes.
 
-
+### Path parameters
 
-# Files
+- `claude_file_id: string`
 
-##### [Get file metadata](api/http/compliance/apps/chats/files/retrieve.md)
+  The file ID (tagged ID, e.g., claude_file_abc123)
 
-GET/v1/compliance/apps/chats/files/{claude\_file\_id}
+### Headers
 
-##### [Delete file](api/http/compliance/apps/chats/files/delete.md)
+- `"x-api-key": optional string`
 
-DELETE/v1/compliance/apps/chats/files/{claude\_file\_id}
+### Returns
 
-##### [Download file content](api/http/compliance/apps/chats/files/download.md)
+- `id: string`
 
-GET/v1/compliance/apps/chats/files/{claude\_file\_id}/content
+  File ID
 
-##### Models
+- `claude_chat_ids: array of string`
 
-
+  Chats this file is attached to. A file can be referenced by messages across multiple chats.
 
-FileRetrieveResponse object{ id, claude\_chat\_ids, created\_at, 5 more }
+- `created_at: string`
 
-File metadata for GET /v1/compliance/apps/chats/files/{claude\_file\_id}.
+  File creation timestamp
 
-Returns metadata only. Use the sibling `/content` endpoint to download
-the file bytes.
+  format: date-time
 
-id: string
+- `filename: string or null`
 
-File ID
+  Display name of the file, if set
 
-claude\_chat\_ids: array of string
+- `md5: string or null`
 
-Chats this file is attached to. A file can be referenced by messages across multiple chats.
+  Lowercase hex MD5 of the file's preferred downloadable variant, as recorded at upload time. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes; when the two disagree, the header is authoritative.
 
-
+- `message_ids: array of string`
 
-created\_at: string
+  Chat message IDs this file is attached to. A file can be referenced by multiple messages.
 
-File creation timestamp
+- `mime_type: string or null`
 
-formatdate-time
+  MIME type of the file's preferred downloadable variant (e.g. 'application/pdf'). May be null for files with no downloadable content (e.g. code-interpreter outputs).
 
-filename: string or null
+- `size_bytes: number or null`
 
-Display name of the file, if set
+  Size in bytes of the file's preferred downloadable variant, if known
 
-md5: string or null
+### Example
 
-Lowercase hex MD5 of the file's preferred downloadable variant, as recorded at upload time. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes; when the two disagree, the header is authoritative.
+```bash
+curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
 
-message\_ids: array of string
+#### Response (200)
 
-Chat message IDs this file is attached to. A file can be referenced by multiple messages.
+```json
+{
+  "id": "claude_file_xyz789",
+  "filename": "quarterly_report.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 1048576,
+  "md5": "5d41402abc4b2a76b9719d911017c592",
+  "created_at": "2024-01-15T10:30:00Z",
+  "message_ids": [
+    "claude_chat_msg_abc123"
+  ],
+  "claude_chat_ids": [
+    "claude_chat_def456"
+  ]
+}
+```
 
-mime\_type: string or null
+## Delete file
 
-MIME type of the file's preferred downloadable variant (e.g. 'application/pdf'). May be null for files with no downloadable content (e.g. code-interpreter outputs).
+**DELETE** `/v1/compliance/apps/chats/files/{claude_file_id}`
 
-size\_bytes: number or null
+Permanently deletes a specific file. This is a destructive
+operation that cannot be undone.
 
-Size in bytes of the file's preferred downloadable variant, if known
+### Path parameters
 
-
+- `claude_file_id: string`
 
-FileDeleteResponse object{ id, type }
+  The file ID (tagged ID, e.g., claude_file_abc123)
 
-Response for deleting a compliance file.
+### Headers
 
-id: string
+- `"x-api-key": optional string`
 
-The ID of the file that was deleted
+### Returns
 
-
+- `id: string`
 
-type: optional "claude\_file\_deleted"
+  The ID of the file that was deleted
 
-Constant string confirming deletion
+- `type: optional "claude_file_deleted"`
 
-defaultclaude\_file\_deleted
+  Constant string confirming deletion
+
+  default: claude_file_deleted
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID \
+    -X DELETE \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "claude_file_xyz789",
+  "type": "claude_file_deleted"
+}
+```
+
+## Download file content
+
+**GET** `/v1/compliance/apps/chats/files/{claude_file_id}/content`
+
+Downloads the binary content of a file referenced in chat messages.
+
+### Path parameters
+
+- `claude_file_id: string`
+
+  The file ID (tagged ID, e.g., claude_file_abc123)
+
+### Headers
+
+- `"x-api-key": optional string`
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID/content \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+## Domain types
+
+### File Retrieve Response
+
+- `FileRetrieveResponse object`
+
+  File metadata for GET /v1/compliance/apps/chats/files/{claude_file_id}.
+
+  Returns metadata only. Use the sibling `/content` endpoint to download
+  the file bytes.
+
+  - `id: string`
+
+    File ID
+
+  - `claude_chat_ids: array of string`
+
+    Chats this file is attached to. A file can be referenced by messages across multiple chats.
+
+  - `created_at: string`
+
+    File creation timestamp
+
+    format: date-time
+
+  - `filename: string or null`
+
+    Display name of the file, if set
+
+  - `md5: string or null`
+
+    Lowercase hex MD5 of the file's preferred downloadable variant, as recorded at upload time. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes; when the two disagree, the header is authoritative.
+
+  - `message_ids: array of string`
+
+    Chat message IDs this file is attached to. A file can be referenced by multiple messages.
+
+  - `mime_type: string or null`
+
+    MIME type of the file's preferred downloadable variant (e.g. 'application/pdf'). May be null for files with no downloadable content (e.g. code-interpreter outputs).
+
+  - `size_bytes: number or null`
+
+    Size in bytes of the file's preferred downloadable variant, if known
+
+### File Delete Response
+
+- `FileDeleteResponse object`
+
+  Response for deleting a compliance file.
+
+  - `id: string`
+
+    The ID of the file that was deleted
+
+  - `type: optional "claude_file_deleted"`
+
+    Constant string confirming deletion
+
+    default: claude_file_deleted
 
 ---
 

@@ -1,188 +1,202 @@
 # List User Profiles
 
-Copy page
+`beta.user_profiles.list(**kwargs) -> PageCursor<BetaUserProfile>`
 
-
-
-Ruby
-
-# List User Profiles
-
-beta.user\_profiles.list(\*\*kwargs) -> PageCursor<[BetaUserProfile](api/beta/user_profiles.md) { id, created\_at, metadata, 6 more } >
-
-GET/v1/user\_profiles
+**GET** `/v1/user_profiles`
 
 List User Profiles
 
-##### ParametersExpand Collapse
+## Parameters
 
-limit: Integer
+- `limit: Integer`
 
-Query parameter for limit
+  Query parameter for limit
 
-
+  format: int32
 
-order: :asc | :desc
+- `order: :asc | :desc`
 
-Query parameter for order
+  Query parameter for order
 
-One of the following:
+  - `:asc`
 
-:asc
+  - `:desc`
 
-:desc
+- `order_by: :created_at | :name`
 
-page: String
+  Query parameter for order_by
 
-Query parameter for page
+  - `:created_at`
 
-
+  - `:name`
 
-betas: Array[[AnthropicBeta](api/beta.md)]
+- `page: String`
 
-Optional header to specify the beta version(s) you want to use.
+  Query parameter for page
 
-One of the following:
+- `betas: Array[AnthropicBeta]`
 
-String = String
+  Optional header to specify the beta version(s) you want to use.
 
-
+  - `String = String`
 
-AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
 
-One of the following:
+    - `:"message-batches-2024-09-24"`
 
-:"message-batches-2024-09-24"
+    - `:"prompt-caching-2024-07-31"`
 
-:"prompt-caching-2024-07-31"
+    - `:"computer-use-2024-10-22"`
 
-:"computer-use-2024-10-22"
+    - `:"computer-use-2025-01-24"`
 
-:"computer-use-2025-01-24"
+    - `:"pdfs-2024-09-25"`
 
-:"pdfs-2024-09-25"
+    - `:"token-counting-2024-11-01"`
 
-:"token-counting-2024-11-01"
+    - `:"token-efficient-tools-2025-02-19"`
 
-:"token-efficient-tools-2025-02-19"
+    - `:"output-128k-2025-02-19"`
 
-:"output-128k-2025-02-19"
+    - `:"files-api-2025-04-14"`
 
-:"files-api-2025-04-14"
+    - `:"mcp-client-2025-04-04"`
 
-:"mcp-client-2025-04-04"
+    - `:"mcp-client-2025-11-20"`
 
-:"mcp-client-2025-11-20"
+    - `:"dev-full-thinking-2025-05-14"`
 
-:"dev-full-thinking-2025-05-14"
+    - `:"interleaved-thinking-2025-05-14"`
 
-:"interleaved-thinking-2025-05-14"
+    - `:"code-execution-2025-05-22"`
 
-:"code-execution-2025-05-22"
+    - `:"extended-cache-ttl-2025-04-11"`
 
-:"extended-cache-ttl-2025-04-11"
+    - `:"context-1m-2025-08-07"`
 
-:"context-1m-2025-08-07"
+    - `:"context-management-2025-06-27"`
 
-:"context-management-2025-06-27"
+    - `:"model-context-window-exceeded-2025-08-26"`
 
-:"model-context-window-exceeded-2025-08-26"
+    - `:"skills-2025-10-02"`
 
-:"skills-2025-10-02"
+    - `:"fast-mode-2026-02-01"`
 
-:"fast-mode-2026-02-01"
+    - `:"output-300k-2026-03-24"`
 
-:"output-300k-2026-03-24"
+    - `:"user-profiles-2026-03-24"`
 
-:"user-profiles-2026-03-24"
+    - `:"user-profiles-2026-08-18"`
 
-:"advisor-tool-2026-03-01"
+    - `:"advisor-tool-2026-03-01"`
 
-:"managed-agents-2026-04-01"
+    - `:"managed-agents-2026-04-01"`
 
-:"cache-diagnosis-2026-04-07"
+    - `:"cache-diagnosis-2026-04-07"`
 
-:"thinking-token-count-2026-05-13"
+    - `:"dreaming-2026-04-21"`
 
-:"server-side-fallback-2026-06-01"
+    - `:"thinking-token-count-2026-05-13"`
 
-:"fallback-credit-2026-06-01"
+    - `:"server-side-fallback-2026-06-01"`
 
-:"agent-memory-2026-07-22"
+    - `:"server-side-fallback-2026-07-01"`
 
-##### ReturnsExpand Collapse
+    - `:"fallback-credit-2026-06-01"`
 
-
+    - `:"fallback-credit-2026-07-01"`
 
-class BetaUserProfile { id, created\_at, metadata, 6 more } 
+    - `:"agent-memory-2026-07-22"`
 
-id: String
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
-Unique identifier for this user profile, prefixed `uprof_`.
+    - `:"compact-2026-01-12"`
 
-created\_at: Time
+    - `:"computer-use-2025-11-24"`
 
-A timestamp in RFC 3339 format
+    - `:"mcp-tunnels-2026-06-22"`
 
-metadata: Hash[Symbol, String]
+    - `:"structured-outputs-2025-11-13"`
 
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+    - `:"task-budgets-2026-03-13"`
 
-
+    - `:"thinking-display-updates-2026-08-18"`
 
-relationship: :external | :resold | :internal
+    - `:"ce-user-management-2026-07-13"`
 
-How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+    - `:"mid-conversation-output-config-2026-07-01"`
 
-One of the following:
+    - `:"thinking-binding-controls-2026-08-01"`
 
-:external
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
 
-:resold
+## Returns
 
-:internal
+- `class BetaUserProfile`
 
-
+  - `id: String`
 
-trust\_grants: Hash[Symbol, [BetaUserProfileTrustGrant](api/beta/user_profiles.md) { status } ]
+    Unique identifier for this user profile, prefixed `uprof_`.
 
-Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+  - `created_at: Time`
 
-
+    A timestamp in RFC 3339 format
 
-status: :active | :pending | :rejected
+    format: date-time
 
-Status of the trust grant.
+  - `metadata: Hash[Symbol, String]`
 
-One of the following:
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-:active
+  - `trust_grants: Hash[Symbol, BetaUserProfileTrustGrant]`
 
-:pending
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-:rejected
+    - `status: :active | :pending | :rejected`
 
-type: :user\_profile
+      Status of the trust grant.
 
-Object type. Always `user_profile`.
+      - `:active`
 
-updated\_at: Time
+      - `:pending`
 
-A timestamp in RFC 3339 format
+      - `:rejected`
 
-external\_id: String
+  - `type: :user_profile`
 
-Platform's own identifier for this user. Not enforced unique.
+    Object type. Always `user_profile`.
 
-name: String
+  - `updated_at: Time`
 
-Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    A timestamp in RFC 3339 format
 
-List User Profiles
+    format: date-time
 
-Ruby
+  - `access_type: :application | :passthrough`
 
-```shiki
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `:application`
+
+    - `:passthrough`
+
+  - `external_id: String`
+
+    Platform's own identifier for this user. Not enforced unique.
+
+  - `external_user_onboarded_at: Time`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `name: String`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
+
+## Example
+
+```ruby
 require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
@@ -192,18 +206,15 @@ page = anthropic.beta.user_profiles.list
 puts(page)
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
       "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
       "created_at": "2026-03-15T10:00:00Z",
       "metadata": {},
-      "relationship": "external",
       "trust_grants": {
         "cyber": {
           "status": "active"
@@ -211,36 +222,9 @@ Response 200
       },
       "type": "user_profile",
       "updated_at": "2026-03-15T10:00:00Z",
+      "access_type": "application",
       "external_id": "user_12345",
-      "name": "Example User"
-    }
-  ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
-      "created_at": "2026-03-15T10:00:00Z",
-      "metadata": {},
-      "relationship": "external",
-      "trust_grants": {
-        "cyber": {
-          "status": "active"
-        }
-      },
-      "type": "user_profile",
-      "updated_at": "2026-03-15T10:00:00Z",
-      "external_id": "user_12345",
+      "external_user_onboarded_at": "2024-11-02T08:15:00Z",
       "name": "Example User"
     }
   ],

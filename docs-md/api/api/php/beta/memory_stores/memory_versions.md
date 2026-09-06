@@ -1,164 +1,559 @@
 # Memory Versions
 
-Copy page
+## List memory versions
 
-
+`$client->beta->memoryStores->memoryVersions->list(string memoryStoreID, ?string apiKeyID, ?\Datetime createdAtGte, ?\Datetime createdAtLte, ?int limit, ?string memoryID, ?ManagedAgentsMemoryVersionOperation operation, ?string page, ?string serviceAccountID, ?string sessionID, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas): PageCursor<ManagedAgentsMemoryVersion>`
 
-PHP
+**GET** `/v1/memory_stores/{memory_store_id}/memory_versions`
 
-# Memory Versions
+List memory versions
 
-##### [List memory versions](api/beta/memory_stores/memory_versions/list.md)
+### Parameters
 
-$client->beta->memoryStores->memoryVersions->list(string memoryStoreID, ?string apiKeyID, ?\Datetime createdAtGte, ?\Datetime createdAtLte, ?int limit, ?string memoryID, ?[ManagedAgentsMemoryVersionOperation](api/beta/memory_stores/memory_versions.md) operation, ?string page, ?string sessionID, ?[ManagedAgentsMemoryView](api/beta/memory_stores/memories.md) view, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md)>
+- `memoryStoreID: string`
 
-GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions
+- `apiKeyID?:optional string`
 
-##### [Retrieve a memory version](api/beta/memory_stores/memory_versions/retrieve.md)
+  Query parameter for api_key_id
 
-$client->beta->memoryStores->memoryVersions->retrieve(string memoryVersionID, string memoryStoreID, ?[ManagedAgentsMemoryView](api/beta/memory_stores/memories.md) view, ?list<AnthropicBeta> betas): [ManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md)
+- `createdAtGte?:optional \Datetime`
 
-GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}
+  Return versions created at or after this time (inclusive).
 
-##### [Redact a memory version](api/beta/memory_stores/memory_versions/redact.md)
+- `createdAtLte?:optional \Datetime`
 
-$client->beta->memoryStores->memoryVersions->redact(string memoryVersionID, string memoryStoreID, ?list<AnthropicBeta> betas): [ManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md)
+  Return versions created at or before this time (inclusive).
 
-POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}/redact
+- `limit?:optional int`
 
-##### ModelsExpand Collapse
+  Query parameter for limit
 
-
+- `memoryID?:optional string`
 
-[ManagedAgentsActor](api/beta/memory_stores/memory_versions.md)
+  Query parameter for memory_id
 
-One of the following:
+- `operation?:optional ManagedAgentsMemoryVersionOperation`
 
-
+  Query parameter for operation
 
-[ManagedAgentsSessionActor](api/beta/memory_stores/memory_versions.md)
+- `page?:optional string`
 
-string sessionID
+  Query parameter for page
 
-ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+- `serviceAccountID?:optional string`
 
-Type type
+  Query parameter for service_account_id
 
-
+- `sessionID?:optional string`
 
-[ManagedAgentsAPIActor](api/beta/memory_stores/memory_versions.md)
+  Query parameter for session_id
 
-string apiKeyID
+- `view?:optional ManagedAgentsMemoryView`
 
-ID of the API key that performed the write. This identifies the key, not the secret.
+  Query parameter for view
 
-Type type
+- `betas?:optional list<AnthropicBeta>`
 
-
+  Optional header to specify the beta version(s) you want to use.
 
-[ManagedAgentsUserActor](api/beta/memory_stores/memory_versions.md)
+### Returns
 
-Type type
+- `ManagedAgentsMemoryVersion`
 
-string userID
+  - `string id`
 
-ID of the user who performed the write (a `user_...` value).
+    Unique identifier for this version (a `memver_...` value).
 
-
+  - `\Datetime createdAt`
 
-[ManagedAgentsAPIActor](api/beta/memory_stores/memory_versions.md)
+    A timestamp in RFC 3339 format
 
-string apiKeyID
+  - `string memoryID`
 
-ID of the API key that performed the write. This identifies the key, not the secret.
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
 
-Type type
+  - `string memoryStoreID`
 
-
+    ID of the memory store this version belongs to (a `memstore_...` value).
 
-[ManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md)
+  - `ManagedAgentsMemoryVersionOperation operation`
 
-string id
+    The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-Unique identifier for this version (a `memver_...` value).
+  - `Type type`
 
-\Datetime createdAt
+  - `?string content`
 
-A timestamp in RFC 3339 format
+    The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
 
-string memoryID
+  - `?string contentSha256`
 
-ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the full lineage including the `deleted` row.
+    Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-string memoryStoreID
+  - `?int contentSizeBytes`
 
-ID of the memory store this version belongs to (a `memstore_...` value).
+    Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-[ManagedAgentsMemoryVersionOperation](api/beta/memory_stores/memory_versions.md) operation
+  - `?ManagedAgentsActor createdBy`
 
-The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Type type
+  - `?string path`
 
-?string content
+    The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
-The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
+  - `?\Datetime redactedAt`
 
-?string contentSha256
+    A timestamp in RFC 3339 format
 
-Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+  - `?ManagedAgentsActor redactedBy`
 
-?int contentSizeBytes
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+### Example
 
-?[ManagedAgentsActor](api/beta/memory_stores/memory_versions.md) createdBy
+```php
+<?php
 
-Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-?string path
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
+$page = $client->beta->memoryStores->memoryVersions->list(
+  'memory_store_id',
+  apiKeyID: 'api_key_id',
+  createdAtGte: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  createdAtLte: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  limit: 0,
+  memoryID: 'memory_id',
+  operation: ManagedAgentsMemoryVersionOperation::CREATED,
+  page: 'page',
+  serviceAccountID: 'service_account_id',
+  sessionID: 'session_id',
+  view: ManagedAgentsMemoryView::BASIC,
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-?\Datetime redactedAt
+var_dump($page);
+```
 
-A timestamp in RFC 3339 format
+#### Response (200)
 
-?[ManagedAgentsActor](api/beta/memory_stores/memory_versions.md) redactedBy
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "memory_id": "memory_id",
+      "memory_store_id": "memory_store_id",
+      "operation": "created",
+      "type": "memory_version",
+      "content": "content",
+      "content_sha256": "content_sha256",
+      "content_size_bytes": 0,
+      "created_by": {
+        "session_id": "x",
+        "type": "session_actor"
+      },
+      "path": "path",
+      "redacted_at": "2019-12-27T18:11:19.117Z",
+      "redacted_by": {
+        "session_id": "x",
+        "type": "session_actor"
+      }
+    }
+  ],
+  "next_page": "next_page"
+}
+```
 
-Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+## Retrieve a memory version
 
-
+`$client->beta->memoryStores->memoryVersions->retrieve(string memoryVersionID, string memoryStoreID, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas): ManagedAgentsMemoryVersion`
 
-[ManagedAgentsMemoryVersionOperation](api/beta/memory_stores/memory_versions.md)
+**GET** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}`
 
-One of the following:
+Retrieve a memory version
 
-"created"
+### Parameters
 
-"modified"
+- `memoryStoreID: string`
 
-"deleted"
+- `memoryVersionID: string`
 
-
+- `view?:optional ManagedAgentsMemoryView`
 
-[ManagedAgentsSessionActor](api/beta/memory_stores/memory_versions.md)
+  Query parameter for view
 
-string sessionID
+- `betas?:optional list<AnthropicBeta>`
 
-ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+  Optional header to specify the beta version(s) you want to use.
 
-Type type
+### Returns
 
-
+- `ManagedAgentsMemoryVersion`
 
-[ManagedAgentsUserActor](api/beta/memory_stores/memory_versions.md)
+  - `string id`
 
-Type type
+    Unique identifier for this version (a `memver_...` value).
 
-string userID
+  - `\Datetime createdAt`
 
-ID of the user who performed the write (a `user_...` value).
+    A timestamp in RFC 3339 format
+
+  - `string memoryID`
+
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+
+  - `string memoryStoreID`
+
+    ID of the memory store this version belongs to (a `memstore_...` value).
+
+  - `ManagedAgentsMemoryVersionOperation operation`
+
+    The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
+
+  - `Type type`
+
+  - `?string content`
+
+    The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
+
+  - `?string contentSha256`
+
+    Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
+  - `?int contentSizeBytes`
+
+    Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
+  - `?ManagedAgentsActor createdBy`
+
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+
+  - `?string path`
+
+    The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
+
+  - `?\Datetime redactedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?ManagedAgentsActor redactedBy`
+
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsMemoryVersion = $client
+  ->beta
+  ->memoryStores
+  ->memoryVersions
+  ->retrieve(
+  'memory_version_id',
+  memoryStoreID: 'memory_store_id',
+  view: ManagedAgentsMemoryView::BASIC,
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsMemoryVersion);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_id": "memory_id",
+  "memory_store_id": "memory_store_id",
+  "operation": "created",
+  "type": "memory_version",
+  "content": "content",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  },
+  "path": "path",
+  "redacted_at": "2019-12-27T18:11:19.117Z",
+  "redacted_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  }
+}
+```
+
+## Redact a memory version
+
+`$client->beta->memoryStores->memoryVersions->redact(string memoryVersionID, string memoryStoreID, ?list<AnthropicBeta> betas): ManagedAgentsMemoryVersion`
+
+**POST** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}/redact`
+
+Redact a memory version
+
+### Parameters
+
+- `memoryStoreID: string`
+
+- `memoryVersionID: string`
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `ManagedAgentsMemoryVersion`
+
+  - `string id`
+
+    Unique identifier for this version (a `memver_...` value).
+
+  - `\Datetime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string memoryID`
+
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+
+  - `string memoryStoreID`
+
+    ID of the memory store this version belongs to (a `memstore_...` value).
+
+  - `ManagedAgentsMemoryVersionOperation operation`
+
+    The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
+
+  - `Type type`
+
+  - `?string content`
+
+    The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
+
+  - `?string contentSha256`
+
+    Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
+  - `?int contentSizeBytes`
+
+    Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
+  - `?ManagedAgentsActor createdBy`
+
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+
+  - `?string path`
+
+    The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
+
+  - `?\Datetime redactedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?ManagedAgentsActor redactedBy`
+
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsMemoryVersion = $client
+  ->beta
+  ->memoryStores
+  ->memoryVersions
+  ->redact(
+  'memory_version_id',
+  memoryStoreID: 'memory_store_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsMemoryVersion);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_id": "memory_id",
+  "memory_store_id": "memory_store_id",
+  "operation": "created",
+  "type": "memory_version",
+  "content": "content",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  },
+  "path": "path",
+  "redacted_at": "2019-12-27T18:11:19.117Z",
+  "redacted_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  }
+}
+```
+
+## Domain types
+
+### Beta Managed Agents Actor
+
+- `ManagedAgentsActor`
+
+  - `ManagedAgentsSessionActor`
+
+    - `string sessionID`
+
+      ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+
+    - `Type type`
+
+  - `ManagedAgentsAPIActor`
+
+    - `string apiKeyID`
+
+      ID of the API key that performed the write. This identifies the key, not the secret.
+
+    - `Type type`
+
+  - `ManagedAgentsUserActor`
+
+    - `Type type`
+
+    - `string userID`
+
+      ID of the user who performed the write (a `user_...` value).
+
+  - `ManagedAgentsServiceAccountActor`
+
+    - `string serviceAccountID`
+
+      ID of the service account that performed the write (a `svac_...` value).
+
+    - `"service_account_actor" type`
+
+### Beta Managed Agents API Actor
+
+- `ManagedAgentsAPIActor`
+
+  - `string apiKeyID`
+
+    ID of the API key that performed the write. This identifies the key, not the secret.
+
+  - `Type type`
+
+### Beta Managed Agents Memory Version
+
+- `ManagedAgentsMemoryVersion`
+
+  - `string id`
+
+    Unique identifier for this version (a `memver_...` value).
+
+  - `\Datetime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string memoryID`
+
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+
+  - `string memoryStoreID`
+
+    ID of the memory store this version belongs to (a `memstore_...` value).
+
+  - `ManagedAgentsMemoryVersionOperation operation`
+
+    The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
+
+  - `Type type`
+
+  - `?string content`
+
+    The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
+
+  - `?string contentSha256`
+
+    Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
+  - `?int contentSizeBytes`
+
+    Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
+  - `?ManagedAgentsActor createdBy`
+
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+
+  - `?string path`
+
+    The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
+
+  - `?\Datetime redactedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?ManagedAgentsActor redactedBy`
+
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+
+### Beta Managed Agents Memory Version Operation
+
+- `ManagedAgentsMemoryVersionOperation`
+
+  - `"created"`
+
+  - `"modified"`
+
+  - `"deleted"`
+
+### Beta Managed Agents Service Account Actor
+
+- `ManagedAgentsServiceAccountActor`
+
+  - `string serviceAccountID`
+
+    ID of the service account that performed the write (a `svac_...` value).
+
+  - `"service_account_actor" type`
+
+### Beta Managed Agents Session Actor
+
+- `ManagedAgentsSessionActor`
+
+  - `string sessionID`
+
+    ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+
+  - `Type type`
+
+### Beta Managed Agents User Actor
+
+- `ManagedAgentsUserActor`
+
+  - `Type type`
+
+  - `string userID`
+
+    ID of the user who performed the write (a `user_...` value).
 
 ---
 

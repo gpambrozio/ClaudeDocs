@@ -1,416 +1,392 @@
 # List Deployment Runs
 
-Copy page
+`client.beta.deploymentRuns.list(params?, options?): PageCursor<BetaManagedAgentsDeploymentRun>`
 
-
-
-TypeScript
-
-# List Deployment Runs
-
-client.beta.deploymentRuns.list(DeploymentRunListParams { created\_at[gt], created\_at[gte], created\_at[lt], 7 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md) { id, agent, created\_at, 5 more } >
-
-GET/v1/deployment\_runs
+**GET** `/v1/deployment_runs`
 
 List Deployment Runs
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `params: DeploymentRunListParams`
 
-params: DeploymentRunListParams { created\_at[gt], created\_at[gte], created\_at[lt], 7 more } 
+  - `"created_at[gt]"?: string`
 
-"created\_at[gt]"?: string
+    Query param: Return runs created strictly after this time (exclusive).
 
-Query param: Return runs created strictly after this time (exclusive).
+    format: date-time
 
-"created\_at[gte]"?: string
+  - `"created_at[gte]"?: string`
 
-Query param: Return runs created at or after this time (inclusive).
+    Query param: Return runs created at or after this time (inclusive).
 
-"created\_at[lt]"?: string
+    format: date-time
 
-Query param: Return runs created strictly before this time (exclusive).
+  - `"created_at[lt]"?: string`
 
-"created\_at[lte]"?: string
+    Query param: Return runs created strictly before this time (exclusive).
 
-Query param: Return runs created at or before this time (inclusive).
+    format: date-time
 
-deployment\_id?: string
+  - `"created_at[lte]"?: string`
 
-Query param: Filter to a specific deployment. Omit to list across all deployments in the workspace. Filtering by a non-existent deployment\_id returns 200 with empty data.
+    Query param: Return runs created at or before this time (inclusive).
 
-has\_error?: boolean
+    format: date-time
 
-Query param: Filter: true for runs with non-null error, false for runs with non-null session\_id. Omit for all.
+  - `deployment_id?: string`
 
-limit?: number
+    Query param: Filter to a specific deployment. Omit to list across all deployments in the workspace. Filtering by a non-existent `deployment_id` returns 200 with empty data.
 
-Query param: Maximum results per page. Default 20, maximum 1000.
+  - `has_error?: boolean`
 
-page?: string
+    Query param: Filter: true for runs with non-null `error`, false for runs with non-null `session_id`. Omit for all.
 
-Query param: Opaque pagination cursor. Pass next\_page from the previous response. Invalid or expired cursors return 400.
+  - `limit?: number`
 
-
+    Query param: Maximum results per page. Default 20, maximum 1000.
 
-trigger\_type?: [BetaManagedAgentsTriggerType](api/beta/deployment_runs.md)
+    format: int32
 
-Query param: Filter runs by what triggered them. Omit to return all runs.
+  - `page?: string`
 
-One of the following:
+    Query param: Opaque pagination cursor. Pass `next_page` from the previous response. Invalid or expired cursors return 400.
 
-"schedule"
+  - `trigger_type?: BetaManagedAgentsTriggerType`
 
-"manual"
+    Query param: Filter runs by what triggered them. Omit to return all runs.
 
-
+    - `"schedule"`
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+    - `"manual"`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+  - `betas?: Array<AnthropicBeta>`
 
-One of the following:
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-(string & {})
+    - `(string & {})`
 
-
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more
+      - `"message-batches-2024-09-24"`
 
-"message-batches-2024-09-24"
+      - `"prompt-caching-2024-07-31"`
 
-"prompt-caching-2024-07-31"
+      - `"computer-use-2024-10-22"`
 
-"computer-use-2024-10-22"
+      - `"computer-use-2025-01-24"`
 
-"computer-use-2025-01-24"
+      - `"pdfs-2024-09-25"`
 
-"pdfs-2024-09-25"
+      - `"token-counting-2024-11-01"`
 
-"token-counting-2024-11-01"
+      - `"token-efficient-tools-2025-02-19"`
 
-"token-efficient-tools-2025-02-19"
+      - `"output-128k-2025-02-19"`
 
-"output-128k-2025-02-19"
+      - `"files-api-2025-04-14"`
 
-"files-api-2025-04-14"
+      - `"mcp-client-2025-04-04"`
 
-"mcp-client-2025-04-04"
+      - `"mcp-client-2025-11-20"`
 
-"mcp-client-2025-11-20"
+      - `"dev-full-thinking-2025-05-14"`
 
-"dev-full-thinking-2025-05-14"
+      - `"interleaved-thinking-2025-05-14"`
 
-"interleaved-thinking-2025-05-14"
+      - `"code-execution-2025-05-22"`
 
-"code-execution-2025-05-22"
+      - `"extended-cache-ttl-2025-04-11"`
 
-"extended-cache-ttl-2025-04-11"
+      - `"context-1m-2025-08-07"`
 
-"context-1m-2025-08-07"
+      - `"context-management-2025-06-27"`
 
-"context-management-2025-06-27"
+      - `"model-context-window-exceeded-2025-08-26"`
 
-"model-context-window-exceeded-2025-08-26"
+      - `"skills-2025-10-02"`
 
-"skills-2025-10-02"
+      - `"fast-mode-2026-02-01"`
 
-"fast-mode-2026-02-01"
+      - `"output-300k-2026-03-24"`
 
-"output-300k-2026-03-24"
+      - `"user-profiles-2026-03-24"`
 
-"user-profiles-2026-03-24"
+      - `"user-profiles-2026-08-18"`
 
-"advisor-tool-2026-03-01"
+      - `"advisor-tool-2026-03-01"`
 
-"managed-agents-2026-04-01"
+      - `"managed-agents-2026-04-01"`
 
-"cache-diagnosis-2026-04-07"
+      - `"cache-diagnosis-2026-04-07"`
 
-"thinking-token-count-2026-05-13"
+      - `"dreaming-2026-04-21"`
 
-"server-side-fallback-2026-06-01"
+      - `"thinking-token-count-2026-05-13"`
 
-"fallback-credit-2026-06-01"
+      - `"server-side-fallback-2026-06-01"`
 
-"agent-memory-2026-07-22"
+      - `"server-side-fallback-2026-07-01"`
 
-##### ReturnsExpand Collapse
+      - `"fallback-credit-2026-06-01"`
 
-
+      - `"fallback-credit-2026-07-01"`
 
-BetaManagedAgentsDeploymentRun { id, agent, created\_at, 5 more } 
+      - `"agent-memory-2026-07-22"`
 
-A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
-id: string
+      - `"compact-2026-01-12"`
 
-Unique identifier for this run (`drun_...`).
+      - `"computer-use-2025-11-24"`
 
-
+      - `"mcp-tunnels-2026-06-22"`
 
-agent: [BetaManagedAgentsAgentReference](api/beta/agents.md) { id, type, version } 
+      - `"structured-outputs-2025-11-13"`
 
-A resolved agent reference with a concrete version.
+      - `"task-budgets-2026-03-13"`
 
-id: string
+      - `"thinking-display-updates-2026-08-18"`
 
-type: "agent"
+      - `"ce-user-management-2026-07-13"`
 
-version: number
+      - `"mid-conversation-output-config-2026-07-01"`
 
-created\_at: string
+      - `"thinking-binding-controls-2026-08-01"`
 
-A timestamp in RFC 3339 format
+      - `"mid-conversation-system-clear-at-2026-08-21"`
 
-deployment\_id: string
+## Returns
 
-ID of the deployment that produced this run.
+- `BetaManagedAgentsDeploymentRun`
 
-
+  A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
 
-error: [BetaManagedAgentsEnvironmentArchivedRunError](api/beta/deployment_runs.md) { message, type }  | [BetaManagedAgentsAgentArchivedRunError](api/beta/deployment_runs.md) { message, type }  | [BetaManagedAgentsEnvironmentNotFoundRunError](api/beta/deployment_runs.md) { message, type }  | 13 more | null
+  - `id: string`
 
-Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+    Unique identifier for this run (`drun_...`).
 
-One of the following:
+  - `agent: BetaManagedAgentsAgentReference`
 
-
+    A resolved agent reference with a concrete version.
 
-BetaManagedAgentsEnvironmentArchivedRunError { message, type } 
+    - `id: string`
 
-The deployment's environment was archived.
+    - `type: "agent"`
 
-message: string
+    - `version: number`
 
-Human-readable error description.
+      format: int32
 
-type: "environment\_archived\_error"
+  - `created_at: string`
 
-
+    A timestamp in RFC 3339 format
 
-BetaManagedAgentsAgentArchivedRunError { message, type } 
+    format: date-time
 
-The deployment's agent was archived.
+  - `deployment_id: string`
 
-message: string
+    ID of the deployment that produced this run.
 
-Human-readable error description.
+  - `error: BetaManagedAgentsEnvironmentArchivedRunError | BetaManagedAgentsAgentArchivedRunError | BetaManagedAgentsEnvironmentNotFoundRunError | 13 more | null`
 
-type: "agent\_archived\_error"
+    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
-
+    - `BetaManagedAgentsEnvironmentArchivedRunError`
 
-BetaManagedAgentsEnvironmentNotFoundRunError { message, type } 
+      The deployment's environment was archived.
 
-The deployment's environment no longer exists.
+      - `message: string`
 
-message: string
+        Human-readable error description.
 
-Human-readable error description.
+      - `type: "environment_archived_error"`
 
-type: "environment\_not\_found\_error"
+    - `BetaManagedAgentsAgentArchivedRunError`
 
-
+      The deployment's agent was archived.
 
-BetaManagedAgentsVaultNotFoundRunError { message, type } 
+      - `message: string`
 
-A vault referenced by the deployment no longer exists.
+        Human-readable error description.
 
-message: string
+      - `type: "agent_archived_error"`
 
-Human-readable error description.
+    - `BetaManagedAgentsEnvironmentNotFoundRunError`
 
-type: "vault\_not\_found\_error"
+      The deployment's environment no longer exists.
 
-
+      - `message: string`
 
-BetaManagedAgentsVaultArchivedRunError { message, type } 
+        Human-readable error description.
 
-A vault referenced by the deployment is archived.
+      - `type: "environment_not_found_error"`
 
-message: string
+    - `BetaManagedAgentsVaultNotFoundRunError`
 
-Human-readable error description.
+      A vault referenced by the deployment no longer exists.
 
-type: "vault\_archived\_error"
+      - `message: string`
 
-
+        Human-readable error description.
 
-BetaManagedAgentsFileNotFoundRunError { message, type } 
+      - `type: "vault_not_found_error"`
 
-A file resource referenced by the deployment no longer exists.
+    - `BetaManagedAgentsVaultArchivedRunError`
 
-message: string
+      A vault referenced by the deployment is archived.
 
-Human-readable error description.
+      - `message: string`
 
-type: "file\_not\_found\_error"
+        Human-readable error description.
 
-
+      - `type: "vault_archived_error"`
 
-BetaManagedAgentsMemoryStoreArchivedRunError { message, type } 
+    - `BetaManagedAgentsFileNotFoundRunError`
 
-A memory store referenced by the deployment is archived.
+      A file resource referenced by the deployment no longer exists.
 
-message: string
+      - `message: string`
 
-Human-readable error description.
+        Human-readable error description.
 
-type: "memory\_store\_archived\_error"
+      - `type: "file_not_found_error"`
 
-
+    - `BetaManagedAgentsMemoryStoreArchivedRunError`
 
-BetaManagedAgentsSkillNotFoundRunError { message, type } 
+      A memory store referenced by the deployment is archived.
 
-A skill referenced by the deployment's agent no longer exists.
+      - `message: string`
 
-message: string
+        Human-readable error description.
 
-Human-readable error description.
+      - `type: "memory_store_archived_error"`
 
-type: "skill\_not\_found\_error"
+    - `BetaManagedAgentsSkillNotFoundRunError`
 
-
+      A skill referenced by the deployment's agent no longer exists.
 
-BetaManagedAgentsSessionResourceNotFoundRunError { message, type } 
+      - `message: string`
 
-A referenced resource no longer exists and its kind was not reported.
+        Human-readable error description.
 
-message: string
+      - `type: "skill_not_found_error"`
 
-Human-readable error description.
+    - `BetaManagedAgentsSessionResourceNotFoundRunError`
 
-type: "session\_resource\_not\_found\_error"
+      A referenced resource no longer exists and its kind was not reported.
 
-
+      - `message: string`
 
-BetaManagedAgentsWorkspaceArchivedRunError { message, type } 
+        Human-readable error description.
 
-The deployment's workspace was archived.
+      - `type: "session_resource_not_found_error"`
 
-message: string
+    - `BetaManagedAgentsWorkspaceArchivedRunError`
 
-Human-readable error description.
+      The deployment's workspace was archived.
 
-type: "workspace\_archived\_error"
+      - `message: string`
 
-
+        Human-readable error description.
 
-BetaManagedAgentsOrganizationDisabledRunError { message, type } 
+      - `type: "workspace_archived_error"`
 
-The deployment's organization is disabled.
+    - `BetaManagedAgentsOrganizationDisabledRunError`
 
-message: string
+      The deployment's organization is disabled.
 
-Human-readable error description.
+      - `message: string`
 
-type: "organization\_disabled\_error"
+        Human-readable error description.
 
-
+      - `type: "organization_disabled_error"`
 
-BetaManagedAgentsSessionRateLimitedRunError { message, type } 
+    - `BetaManagedAgentsSessionRateLimitedRunError`
 
-Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
+      Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
-message: string
+      - `message: string`
 
-Human-readable error description.
+        Human-readable error description.
 
-type: "session\_rate\_limited\_error"
+      - `type: "session_rate_limited_error"`
 
-
+    - `BetaManagedAgentsSessionCreationRejectedRunError`
 
-BetaManagedAgentsSessionCreationRejectedRunError { message, type } 
+      The session create request was rejected with a non-retryable validation error.
 
-The session create request was rejected with a non-retryable validation error.
+      - `message: string`
 
-message: string
+        Human-readable error description.
 
-Human-readable error description.
+      - `type: "session_creation_rejected_error"`
 
-type: "session\_creation\_rejected\_error"
+    - `BetaManagedAgentsUnknownRunError`
 
-
+      An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
-BetaManagedAgentsUnknownRunError { message, type } 
+      - `message: string`
 
-An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
+        Human-readable error description.
 
-message: string
+      - `type: "unknown_error"`
 
-Human-readable error description.
+    - `BetaManagedAgentsSelfHostedResourcesUnsupportedRunError`
 
-type: "unknown\_error"
+      The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-
+      - `message: string`
 
-BetaManagedAgentsSelfHostedResourcesUnsupportedRunError { message, type } 
+        Human-readable error description.
 
-The deployment configures resources, but its environment is self-hosted and cannot mount them.
+      - `type: "self_hosted_resources_unsupported_error"`
 
-message: string
+    - `BetaManagedAgentsMCPEgressBlockedRunError`
 
-Human-readable error description.
+      An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-type: "self\_hosted\_resources\_unsupported\_error"
+      - `message: string`
 
-
+        Human-readable error description.
 
-BetaManagedAgentsMCPEgressBlockedRunError { message, type } 
+      - `type: "mcp_egress_blocked_error"`
 
-An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+  - `session_id: string | null`
 
-message: string
+    Populated on success. Null on creation failure. Exactly one of `session_id` or `error` is non-null.
 
-Human-readable error description.
+  - `trigger_context: BetaManagedAgentsTriggerContext`
 
-type: "mcp\_egress\_blocked\_error"
+    Describes what triggered a deployment run, with trigger-specific metadata.
 
-session\_id: string | null
+    - `BetaManagedAgentsScheduleTriggerContext`
 
-Populated on success. Null on creation failure. Exactly one of session\_id or error is non-null.
+      The run was fired by the deployment's cron schedule.
 
-
+      - `scheduled_at: string`
 
-trigger\_context: [BetaManagedAgentsTriggerContext](api/beta/deployment_runs.md)
+        A timestamp in RFC 3339 format
 
-Describes what triggered a deployment run, with trigger-specific metadata.
+        format: date-time
 
-One of the following:
+      - `type: "schedule"`
 
-
+    - `BetaManagedAgentsManualTriggerContext`
 
-BetaManagedAgentsScheduleTriggerContext { scheduled\_at, type } 
+      The run was started manually by creating a session directly against the deployment.
 
-The run was fired by the deployment's cron schedule.
+      - `type: "manual"`
 
-scheduled\_at: string
+  - `type: "deployment_run"`
 
-A timestamp in RFC 3339 format
+## Example
 
-type: "schedule"
-
-
-
-BetaManagedAgentsManualTriggerContext { type } 
-
-The run was started manually by creating a session directly against the deployment.
-
-type: "manual"
-
-type: "deployment\_run"
-
-List Deployment Runs
-
-TypeScript
-
-```shiki
-import Anthropic from '@anthropic-ai/sdk';
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 // Automatically fetches more pages as needed.
@@ -419,45 +395,9 @@ for await (const betaManagedAgentsDeploymentRun of client.beta.deploymentRuns.li
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "agent": {
-        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-        "type": "agent",
-        "version": 1
-      },
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "deployment_id": "deployment_id",
-      "error": {
-        "message": "message",
-        "type": "environment_archived_error"
-      },
-      "session_id": "session_id",
-      "trigger_context": {
-        "scheduled_at": "2019-12-27T18:11:19.117Z",
-        "type": "schedule"
-      },
-      "type": "deployment_run"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

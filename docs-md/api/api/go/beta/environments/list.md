@@ -1,355 +1,287 @@
 # List Environments
 
-Copy page
+`client.Beta.Environments.List(ctx, params) (*PageCursor[BetaEnvironment], error)`
 
-
-
-Go
-
-# List Environments
-
-client.Beta.Environments.List(ctx, params) (\*PageCursor[[BetaEnvironment](api/beta/environments.md)], error)
-
-GET/v1/environments
+**GET** `/v1/environments`
 
 List environments with pagination support.
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `params BetaEnvironmentListParams`
 
-params BetaEnvironmentListParams
+  - `IncludeArchived param.Field[bool] Optional`
 
-IncludeArchived param.Field[bool]Optional
+    Query param: Include archived environments in the response
 
-Query param: Include archived environments in the response
+  - `Limit param.Field[int64] Optional`
 
-Limit param.Field[int64]Optional
+    Query param: Maximum number of environments to return
 
-Query param: Maximum number of environments to return
+    maximum: 1000, minimum: 1
 
-Page param.Field[string]Optional
+  - `Page param.Field[string] Optional`
 
-Query param: Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
+    Query param: Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
 
-
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
-Betas param.Field[[]AnthropicBeta]Optional
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-Header param: Optional header to specify the beta version(s) you want to use.
+    - `string`
 
-string
+    - `type AnthropicBeta string`
 
-
+      - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
 
-type AnthropicBeta string
+      - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
 
-One of the following:
+      - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
 
-const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
+      - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
 
-const AnthropicBetaPromptCaching2024\_07\_31 AnthropicBeta = "prompt-caching-2024-07-31"
+      - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
 
-const AnthropicBetaComputerUse2024\_10\_22 AnthropicBeta = "computer-use-2024-10-22"
+      - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
 
-const AnthropicBetaComputerUse2025\_01\_24 AnthropicBeta = "computer-use-2025-01-24"
+      - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
 
-const AnthropicBetaPDFs2024\_09\_25 AnthropicBeta = "pdfs-2024-09-25"
+      - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
 
-const AnthropicBetaTokenCounting2024\_11\_01 AnthropicBeta = "token-counting-2024-11-01"
+      - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
 
-const AnthropicBetaTokenEfficientTools2025\_02\_19 AnthropicBeta = "token-efficient-tools-2025-02-19"
+      - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
 
-const AnthropicBetaOutput128k2025\_02\_19 AnthropicBeta = "output-128k-2025-02-19"
+      - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
 
-const AnthropicBetaFilesAPI2025\_04\_14 AnthropicBeta = "files-api-2025-04-14"
+      - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
 
-const AnthropicBetaMCPClient2025\_04\_04 AnthropicBeta = "mcp-client-2025-04-04"
+      - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
 
-const AnthropicBetaMCPClient2025\_11\_20 AnthropicBeta = "mcp-client-2025-11-20"
+      - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
 
-const AnthropicBetaDevFullThinking2025\_05\_14 AnthropicBeta = "dev-full-thinking-2025-05-14"
+      - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
 
-const AnthropicBetaInterleavedThinking2025\_05\_14 AnthropicBeta = "interleaved-thinking-2025-05-14"
+      - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
 
-const AnthropicBetaCodeExecution2025\_05\_22 AnthropicBeta = "code-execution-2025-05-22"
+      - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
 
-const AnthropicBetaExtendedCacheTTL2025\_04\_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"
+      - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
 
-const AnthropicBetaContext1m2025\_08\_07 AnthropicBeta = "context-1m-2025-08-07"
+      - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
 
-const AnthropicBetaContextManagement2025\_06\_27 AnthropicBeta = "context-management-2025-06-27"
+      - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
-const AnthropicBetaModelContextWindowExceeded2025\_08\_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
-const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
-const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
-const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
+      - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
-const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
-const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
+      - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
-const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
+      - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
 
-const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2026-04-07"
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
-const AnthropicBetaThinkingTokenCount2026\_05\_13 AnthropicBeta = "thinking-token-count-2026-05-13"
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
 
-const AnthropicBetaServerSideFallback2026\_06\_01 AnthropicBeta = "server-side-fallback-2026-06-01"
+      - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
 
-const AnthropicBetaFallbackCredit2026\_06\_01 AnthropicBeta = "fallback-credit-2026-06-01"
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
 
-const AnthropicBetaAgentMemory2026\_07\_22 AnthropicBeta = "agent-memory-2026-07-22"
+      - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
-##### ReturnsExpand Collapse
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
-
+      - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-type BetaEnvironment struct{…}
+      - `const AnthropicBetaCompact2026_01_12 AnthropicBeta = "compact-2026-01-12"`
 
-Unified Environment resource for both cloud and self-hosted environments.
+      - `const AnthropicBetaComputerUse2025_11_24 AnthropicBeta = "computer-use-2025-11-24"`
 
-ID string
+      - `const AnthropicBetaMCPTunnels2026_06_22 AnthropicBeta = "mcp-tunnels-2026-06-22"`
 
-Environment identifier (e.g., 'env\_...')
+      - `const AnthropicBetaStructuredOutputs2025_11_13 AnthropicBeta = "structured-outputs-2025-11-13"`
 
-ArchivedAt string
+      - `const AnthropicBetaTaskBudgets2026_03_13 AnthropicBeta = "task-budgets-2026-03-13"`
 
-RFC 3339 timestamp when environment was archived, or null if not archived
+      - `const AnthropicBetaThinkingDisplayUpdates2026_08_18 AnthropicBeta = "thinking-display-updates-2026-08-18"`
 
-
+      - `const AnthropicBetaCEUserManagement2026_07_13 AnthropicBeta = "ce-user-management-2026-07-13"`
 
-Config BetaEnvironmentConfigUnion
+      - `const AnthropicBetaMidConversationOutputConfig2026_07_01 AnthropicBeta = "mid-conversation-output-config-2026-07-01"`
 
-Environment configuration (either Anthropic Cloud or self-hosted)
+      - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
 
-One of the following:
+      - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
-
+## Returns
 
-type BetaCloudConfig struct{…}
+- `type BetaEnvironment struct{…}`
 
-`cloud` environment configuration.
+  Unified Environment resource for both cloud and self-hosted environments.
 
-
+  - `ID string`
 
-Networking BetaCloudConfigNetworkingUnion
+    Environment identifier (e.g., 'env_...')
 
-Network configuration policy.
+  - `ArchivedAt string`
 
-One of the following:
+    RFC 3339 timestamp when environment was archived, or null if not archived
 
-
+  - `Config BetaEnvironmentConfigUnion`
 
-type BetaUnrestrictedNetwork struct{…}
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-Unrestricted network access.
+    - `type BetaCloudConfig struct{…}`
 
-Type Unrestricted
+      `cloud` environment configuration.
 
-Network policy type
+      - `Networking BetaCloudConfigNetworkingUnion`
 
-
+        Network configuration policy.
 
-type BetaLimitedNetwork struct{…}
+        - `type BetaUnrestrictedNetwork struct{…}`
 
-Limited network access.
+          Unrestricted network access.
 
-AllowMCPServers bool
+          - `Type Unrestricted`
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+            Network policy type
 
-AllowPackageManagers bool
+        - `type BetaLimitedNetwork struct{…}`
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+          Limited network access.
 
-AllowedHosts []string
+          - `AllowMCPServers bool`
 
-Specifies domains the container can reach.
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-Type Limited
+          - `AllowPackageManagers bool`
 
-Network policy type
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-
+          - `AllowedHosts []string`
 
-Packages [BetaPackages](api/beta/environments.md)
+            Specifies domains the container can reach.
 
-Package manager configuration.
+          - `Type Limited`
 
-Apt []string
+            Network policy type
 
-Ubuntu/Debian packages to install
+      - `Packages BetaPackages`
 
-Cargo []string
+        Package manager configuration.
 
-Rust packages to install
+        - `Apt []string`
 
-Gem []string
+          Ubuntu/Debian packages to install
 
-Ruby packages to install
+        - `Cargo []string`
 
-Go []string
+          Rust packages to install
 
-Go packages to install
+        - `Gem []string`
 
-Npm []string
+          Ruby packages to install
 
-Node.js packages to install
+        - `Go []string`
 
-Pip []string
+          Go packages to install
 
-Python packages to install
+        - `Npm []string`
 
-Type BetaPackagesTypeOptional
+          Node.js packages to install
 
-Package configuration type
+        - `Pip []string`
 
-Type Cloud
+          Python packages to install
 
-Environment type
+        - `Type BetaPackagesType Optional`
 
-
+          Package configuration type
 
-type BetaSelfHostedConfig struct{…}
+          default: packages
 
-Configuration for self-hosted environments.
+      - `Type Cloud`
 
-Type SelfHosted
+        Environment type
 
-Environment type
+    - `type BetaSelfHostedConfig struct{…}`
 
-CreatedAt string
+      Configuration for self-hosted environments.
 
-RFC 3339 timestamp when environment was created
+      - `Type SelfHosted`
 
-Description string
+        Environment type
 
-User-provided description for the environment
+  - `CreatedAt string`
 
-Metadata map[string, string]
+    RFC 3339 timestamp when environment was created
 
-User-provided metadata key-value pairs
+  - `Description string`
 
-Name string
+    User-provided description for the environment; null when unset
 
-Human-readable name for the environment
+  - `Metadata map[string, string]`
 
-Type Environment
+    User-provided metadata key-value pairs
 
-The type of object (always 'environment')
+  - `Name string`
 
-UpdatedAt string
+    Human-readable name for the environment
 
-RFC 3339 timestamp when environment was last updated
+  - `Type Environment`
 
-
+    The type of object (always 'environment')
 
-Scope BetaEnvironmentScopeOptional
+    default: environment
 
-The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+  - `UpdatedAt string`
 
-One of the following:
+    RFC 3339 timestamp when environment was last updated
 
-const BetaEnvironmentScopeOrganization BetaEnvironmentScope = "organization"
+  - `Scope BetaEnvironmentScope Optional`
 
-const BetaEnvironmentScopeAccount BetaEnvironmentScope = "account"
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-List Environments
+    - `const BetaEnvironmentScopeOrganization BetaEnvironmentScope = "organization"`
 
-Go
+    - `const BetaEnvironmentScopeAccount BetaEnvironmentScope = "account"`
 
-```shiki
+## Example
+
+```go
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  page, err := client.Beta.Environments.List(context.TODO(), anthropic.BetaEnvironmentListParams{
-
-  })
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", page)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	page, err := client.Beta.Environments.List(context.TODO(), anthropic.BetaEnvironmentListParams{})
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", page)
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
-      "archived_at": null,
-      "config": {
-        "networking": {
-          "allow_mcp_servers": false,
-          "allow_package_managers": true,
-          "allowed_hosts": [
-            "api.example.com"
-          ],
-          "type": "limited"
-        },
-        "packages": {
-          "apt": [
-            "string"
-          ],
-          "cargo": [
-            "string"
-          ],
-          "gem": [
-            "string"
-          ],
-          "go": [
-            "string"
-          ],
-          "npm": [
-            "string"
-          ],
-          "pip": [
-            "pandas",
-            "numpy"
-          ],
-          "type": "packages"
-        },
-        "type": "cloud"
-      },
-      "created_at": "2026-03-15T10:00:00Z",
-      "description": "Python environment with data-analysis packages.",
-      "metadata": {},
-      "name": "python-data-analysis",
-      "type": "environment",
-      "updated_at": "2026-03-15T10:00:00Z",
-      "scope": "organization"
-    }
-  ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

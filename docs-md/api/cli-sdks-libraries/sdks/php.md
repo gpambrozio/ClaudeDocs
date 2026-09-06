@@ -1,30 +1,34 @@
-# PHP SDK
+# Php
 
-Copy page
-
-
+---
+title: PHP SDK
+url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/php
+description: Install and configure the Anthropic PHP SDK with value objects and builder patterns
+---
 
 The Anthropic PHP library provides convenient access to the Claude API from any PHP 8.1.0+ application.
 
-## Installation
+The PHP SDK is currently in beta. APIs might change between versions.
+
+For API feature documentation with code examples, see the [API reference](api/overview.md). This page covers PHP-specific SDK features and configuration.
+
+## Installation
 
 The SDK uses [PSR-18](https://www.php-fig.org/psr/psr-18/) for HTTP and discovers any installed PSR-18 client automatically. [Guzzle](https://docs.guzzlephp.org/) is recommended because the SDK configures it for streaming with no additional setup:
 
-```shiki
+```bash
 composer require "anthropic-ai/sdk" "guzzlehttp/guzzle:^7"
 ```
 
-
-
-## Requirements
+## Requirements
 
 PHP 8.1.0 or higher.
 
-## Usage
+## Usage
 
 This library uses named parameters to specify optional arguments. Parameters with a default value must be set by name.
 
-```shiki
+```php
 $client = new Client();
 
 $message = $client->messages->create(
@@ -37,21 +41,19 @@ $textBlock = array_find($message->content, static fn ($block): bool => $block->t
 echo $textBlock->text;
 ```
 
-
-
 For authentication options including Workload Identity Federation, see [Authentication](manage-claude/authentication.md). If your API key is a [personal or service account key](manage-claude/authentication.md) with access to multiple workspaces, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](manage-claude/authentication.md) shows the per-request option for this SDK.
 
-## Value objects
+## Value objects
 
 It is recommended to use the static `with` constructor `Base64ImageSource::with(data: "U3RhaW5sZXNzIHJvY2tz", ...)` and named parameters to initialize value objects.
 
 However, builders are also provided `(new Base64ImageSource)->withData("U3RhaW5sZXNzIHJvY2tz")`.
 
-## Streaming
+## Streaming
 
 The SDK provides support for streaming responses using Server-Sent Events (SSE).
 
-```shiki
+```php
 $client = new Client();
 
 $stream = $client->messages->createStream(
@@ -65,23 +67,19 @@ foreach ($stream as $event) {
 }
 ```
 
-
-
 Streaming requires an HTTP client that returns the response body incrementally. When Guzzle is the discovered PSR-18 client, the SDK configures it for streaming automatically. With a buffering client, the `foreach` loop yields every event at once when the response completes instead of incrementally; if you observe that symptom, install Guzzle or supply a streaming-capable PSR-18 client through the `streamingTransporter` request option:
 
-```shiki
+```php
 $client = new Anthropic\Client(
   requestOptions: Anthropic\RequestOptions::with(streamingTransporter: $myStreamingClient),
 );
 ```
 
-
-
-## Error handling
+## Error handling
 
 When the library is unable to connect to the API, or if the API returns a non-success status code (that is, a 4xx or 5xx response), a subclass of `Anthropic\Core\Exceptions\APIException` is thrown:
 
-```shiki
+```php
 <?php
 // ...
 use Anthropic\Core\Exceptions\APIConnectionException;
@@ -105,25 +103,23 @@ try {
 }
 ```
 
-
-
 Error codes are as follows:
 
-| Cause | Error Type |
-| --- | --- |
-| HTTP 400 | `BadRequestException` |
-| HTTP 401 | `AuthenticationException` |
-| HTTP 403 | `PermissionDeniedException` |
-| HTTP 404 | `NotFoundException` |
-| HTTP 409 | `ConflictException` |
-| HTTP 422 | `UnprocessableEntityException` |
-| HTTP 429 | `RateLimitException` |
-| HTTP >= 500 | `InternalServerException` |
-| Other HTTP error | `APIStatusException` |
-| Timeout | `APITimeoutException` |
-| Network error | `APIConnectionException` |
+| Cause            | Error Type                     |
+| ---------------- | ------------------------------ |
+| HTTP 400         | `BadRequestException`          |
+| HTTP 401         | `AuthenticationException`      |
+| HTTP 403         | `PermissionDeniedException`    |
+| HTTP 404         | `NotFoundException`            |
+| HTTP 409         | `ConflictException`            |
+| HTTP 422         | `UnprocessableEntityException` |
+| HTTP 429         | `RateLimitException`           |
+| HTTP >= 500      | `InternalServerException`      |
+| Other HTTP error | `APIStatusException`           |
+| Timeout          | `APITimeoutException`          |
+| Network error    | `APIConnectionException`       |
 
-## Retries
+## Retries
 
 Certain errors are automatically retried two times by default, with a short exponential backoff.
 
@@ -131,7 +127,7 @@ Connection errors (for example, because of a network connectivity problem), 408 
 
 You can use the `maxRetries` option to configure or disable this:
 
-```shiki
+```php
 use Anthropic\RequestOptions;
 // ...
 // Configure the default for all requests:
@@ -146,15 +142,13 @@ $result = $client->messages->create(
 );
 ```
 
-
-
-## Pagination
+## Pagination
 
 List methods in the Claude API are paginated.
 
 This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
 
-```shiki
+```php
 $client = new Client();
 
 $page = $client->beta->messages->batches->list(limit: 20);
@@ -169,15 +163,15 @@ foreach ($page->pagingEachItem() as $item) {
 }
 ```
 
-
+## Advanced usage
 
-## Advanced usage
-
-### Undocumented properties
+### Undocumented properties
 
 You can send undocumented parameters to any endpoint, and read undocumented response properties, as follows:
 
-```shiki
+The `extra*` parameters of the same name override the documented parameters.
+
+```php
 <?php
 // ...
 use Anthropic\RequestOptions;
@@ -194,17 +188,15 @@ $message = $client->messages->create(
 );
 ```
 
-
-
-### Undocumented request parameters
+### Undocumented request parameters
 
 If you want to explicitly send an extra parameter, you can do so with the `extraQueryParams`, `extraBodyParams`, and `extraHeaders` options under `RequestOptions::with()` when making a request, as seen in the preceding example.
 
-### Undocumented endpoints
+### Undocumented endpoints
 
 To make requests to undocumented endpoints while retaining the benefit of authentication, retries, and other client features, you can make requests using `client->request`, as follows:
 
-```shiki
+```php
 $client = new Client();
 
 $response = $client->request(
@@ -216,36 +208,38 @@ $response = $client->request(
 );
 ```
 
-
+## Platform integrations
 
-## Platform integrations
+For detailed platform setup guides with code examples, see:
+
+* [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
+* [Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md)
+* [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)
+* [Google Cloud](build-with-claude/claude-on-vertex-ai.md)
+* [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)
 
 The PHP SDK supports the following platforms:
 
-- **Agent Platform:** `Anthropic\Vertex\Client`. Use `::fromEnvironment()`.
-- **Bedrock:** `Anthropic\Bedrock\MantleClient`. Use `new MantleClient(awsRegion: ...)`.
-- **Bedrock (legacy):** `Anthropic\Bedrock\Client`. Use `::fromEnvironment()` or `::withCredentials()`.
-- **Claude Platform on AWS:** `Anthropic\Aws\Client` (requires `aws/aws-sdk-php` as a soft dependency). Use `new Anthropic\Aws\Client(workspaceId: ...)` or set `ANTHROPIC_AWS_WORKSPACE_ID`. Available in beta.
-- **Foundry:** `Anthropic\Foundry\Client`. Use `::withCredentials()`.
+* **Agent Platform:** `Anthropic\Vertex\Client`. Use `::fromEnvironment()`.
+* **Bedrock:** `Anthropic\Bedrock\MantleClient`. Use `new MantleClient(awsRegion: ...)`.
+* **Bedrock (legacy):** `Anthropic\Bedrock\Client`. Use `::fromEnvironment()` or `::withCredentials()`.
+* **Claude Platform on AWS:** `Anthropic\Aws\Client` (requires `aws/aws-sdk-php` as a soft dependency). Use `new Anthropic\Aws\Client(workspaceId: ...)` or set `ANTHROPIC_AWS_WORKSPACE_ID`. Available in beta.
+* **Foundry:** `Anthropic\Foundry\Client`. Use `::withCredentials()`.
 
 Use `MantleClient` for new projects; `Anthropic\Bedrock\Client` remains for existing applications using the Bedrock `InvokeModel` API.
 
-## Semantic versioning
+## Semantic versioning
 
 This package follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions. As the library is in initial development and has a major version of `0`, APIs might change at any time.
 
 This package considers improvements to the (non-runtime) PHPDoc type definitions to be non-breaking changes.
 
-## Additional resources
+## Additional resources
 
-- [GitHub repository](https://github.com/anthropics/anthropic-sdk-php)
-- [Packagist](https://packagist.org/packages/anthropic-ai/sdk)
-- [API reference](api/overview.md)
-- [Streaming Messages](build-with-claude/streaming.md)
-
-Was this page helpful?
-
-
+* [GitHub repository](https://github.com/anthropics/anthropic-sdk-php)
+* [Packagist](https://packagist.org/packages/anthropic-ai/sdk)
+* [API reference](api/overview.md)
+* [Streaming Messages](build-with-claude/streaming.md)
 
 ---
 

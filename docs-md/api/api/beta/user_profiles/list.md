@@ -1,295 +1,217 @@
 # List User Profiles
 
-Copy page
-
-
-
-cURL
-
-# List User Profiles
-
-GET/v1/user\_profiles
+**GET** `/v1/user_profiles`
 
 List User Profiles
 
-##### Query parameters
+## Query parameters
 
-
+- `limit: optional number`
 
-limit: optional number
+  Query parameter for limit
 
-Query parameter for limit
+  format: int32
 
-formatint32
+- `order: optional "asc" or "desc"`
 
-
+  Query parameter for order
 
-order: optional "asc" or "desc"
+  - `"asc"`
 
-Query parameter for order
+  - `"desc"`
 
-One of the following:
+- `order_by: optional "created_at" or "name"`
 
-"asc"
+  Query parameter for order_by
 
-"desc"
+  - `"created_at"`
 
-
+  - `"name"`
 
-order\_by: optional "created\_at" or "name"
+- `page: optional string`
 
-Query parameter for order\_by
+  Query parameter for page
 
-One of the following:
+## Headers
 
-"created\_at"
+- `"anthropic-beta": optional array of AnthropicBeta`
 
-"name"
+  Optional header to specify the beta version(s) you want to use.
 
-page: optional string
+  - `string`
 
-Query parameter for page
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
-##### Headers
+    - `"message-batches-2024-09-24"`
 
-
+    - `"prompt-caching-2024-07-31"`
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+    - `"computer-use-2024-10-22"`
 
-Optional header to specify the beta version(s) you want to use.
+    - `"computer-use-2025-01-24"`
 
-One of the following:
+    - `"pdfs-2024-09-25"`
 
-string
+    - `"token-counting-2024-11-01"`
 
-
+    - `"token-efficient-tools-2025-02-19"`
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
+    - `"output-128k-2025-02-19"`
 
-One of the following:
+    - `"files-api-2025-04-14"`
 
-"message-batches-2024-09-24"
+    - `"mcp-client-2025-04-04"`
 
-"prompt-caching-2024-07-31"
+    - `"mcp-client-2025-11-20"`
 
-"computer-use-2024-10-22"
+    - `"dev-full-thinking-2025-05-14"`
 
-"computer-use-2025-01-24"
+    - `"interleaved-thinking-2025-05-14"`
 
-"pdfs-2024-09-25"
+    - `"code-execution-2025-05-22"`
 
-"token-counting-2024-11-01"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"token-efficient-tools-2025-02-19"
+    - `"context-1m-2025-08-07"`
 
-"output-128k-2025-02-19"
+    - `"context-management-2025-06-27"`
 
-"files-api-2025-04-14"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"mcp-client-2025-04-04"
+    - `"skills-2025-10-02"`
 
-"mcp-client-2025-11-20"
+    - `"fast-mode-2026-02-01"`
 
-"dev-full-thinking-2025-05-14"
+    - `"output-300k-2026-03-24"`
 
-"interleaved-thinking-2025-05-14"
+    - `"user-profiles-2026-03-24"`
 
-"code-execution-2025-05-22"
+    - `"user-profiles-2026-08-18"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"advisor-tool-2026-03-01"`
 
-"context-1m-2025-08-07"
+    - `"managed-agents-2026-04-01"`
 
-"context-management-2025-06-27"
+    - `"cache-diagnosis-2026-04-07"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"dreaming-2026-04-21"`
 
-"skills-2025-10-02"
+    - `"thinking-token-count-2026-05-13"`
 
-"fast-mode-2026-02-01"
+    - `"server-side-fallback-2026-06-01"`
 
-"output-300k-2026-03-24"
+    - `"server-side-fallback-2026-07-01"`
 
-"user-profiles-2026-03-24"
+    - `"fallback-credit-2026-06-01"`
 
-"user-profiles-2026-08-18"
+    - `"fallback-credit-2026-07-01"`
 
-"advisor-tool-2026-03-01"
+    - `"agent-memory-2026-07-22"`
 
-"managed-agents-2026-04-01"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-"cache-diagnosis-2026-04-07"
+    - `"compact-2026-01-12"`
 
-"dreaming-2026-04-21"
+    - `"computer-use-2025-11-24"`
 
-"thinking-token-count-2026-05-13"
+    - `"mcp-tunnels-2026-06-22"`
 
-"server-side-fallback-2026-06-01"
+    - `"structured-outputs-2025-11-13"`
 
-"server-side-fallback-2026-07-01"
+    - `"task-budgets-2026-03-13"`
 
-"fallback-credit-2026-06-01"
+    - `"thinking-display-updates-2026-08-18"`
 
-"fallback-credit-2026-07-01"
+    - `"ce-user-management-2026-07-13"`
 
-"agent-memory-2026-07-22"
+    - `"mid-conversation-output-config-2026-07-01"`
 
-"mid-conversation-tool-changes-2026-07-01"
+    - `"thinking-binding-controls-2026-08-01"`
 
-"compact-2026-01-12"
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"computer-use-2025-11-24"
+## Returns
 
-"mcp-tunnels-2026-06-22"
+- `data: array of BetaUserProfile`
 
-"structured-outputs-2025-11-13"
+  User profiles on this page.
 
-"task-budgets-2026-03-13"
+  - `id: string`
 
-"thinking-display-updates-2026-08-18"
+    Unique identifier for this user profile, prefixed `uprof_`.
 
-"ce-user-management-2026-07-13"
+  - `created_at: string`
 
-"mid-conversation-output-config-2026-07-01"
+    A timestamp in RFC 3339 format
 
-"thinking-binding-controls-2026-08-01"
+    format: date-time
 
-"mid-conversation-system-clear-at-2026-08-21"
+  - `metadata: map[string]`
 
-##### Returns
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-
+  - `trust_grants: map[BetaUserProfileTrustGrant]`
 
-data: array of [BetaUserProfile](api/http/beta/user_profiles.md) { id, created\_at, metadata, 7 more }
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-User profiles on this page.
+    - `status: "active" or "pending" or "rejected"`
 
-id: string
+      Status of the trust grant.
 
-Unique identifier for this user profile, prefixed `uprof_`.
+      - `"active"`
 
-
+      - `"pending"`
 
-created\_at: string
+      - `"rejected"`
 
-A timestamp in RFC 3339 format
+  - `type: "user_profile"`
 
-formatdate-time
+    Object type. Always `user_profile`.
 
-metadata: map[string]
+  - `updated_at: string`
 
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+    A timestamp in RFC 3339 format
 
-
+    format: date-time
 
-trust\_grants: map[[BetaUserProfileTrustGrant](api/http/beta/user_profiles.md) { status }]
+  - `access_type: optional "application" or "passthrough"`
 
-Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
-
+    - `"application"`
 
-status: "active" or "pending" or "rejected"
+    - `"passthrough"`
 
-Status of the trust grant.
+  - `external_id: optional string or null`
 
-One of the following:
+    Platform's own identifier for this user. Not enforced unique.
 
-"active"
+  - `external_user_onboarded_at: optional string or null`
 
-"pending"
+    A timestamp in RFC 3339 format
 
-"rejected"
+    format: date-time
 
-type: "user\_profile"
+  - `name: optional string or null`
 
-Object type. Always `user_profile`.
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
 
-
+- `next_page: string or null`
 
-updated\_at: string
+  Cursor for the next page, or `null` when there are no more results.
 
-A timestamp in RFC 3339 format
+## Example
 
-formatdate-time
-
-
-
-access\_type: optional "application" or "passthrough"
-
-How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
-
-One of the following:
-
-"application"
-
-"passthrough"
-
-external\_id: optional string or null
-
-Platform's own identifier for this user. Not enforced unique.
-
-
-
-external\_user\_onboarded\_at: optional string or null
-
-A timestamp in RFC 3339 format
-
-formatdate-time
-
-name: optional string or null
-
-Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
-
-next\_page: string or null
-
-Cursor for the next page, or `null` when there are no more results.
-
-List User Profiles
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/user_profiles \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: user-profiles-2026-08-18' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
-      "created_at": "2026-03-15T10:00:00Z",
-      "metadata": {},
-      "trust_grants": {
-        "cyber": {
-          "status": "active"
-        }
-      },
-      "type": "user_profile",
-      "updated_at": "2026-03-15T10:00:00Z",
-      "access_type": "application",
-      "external_id": "user_12345",
-      "external_user_onboarded_at": "2024-11-02T08:15:00Z",
-      "name": "Example User"
-    }
-  ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

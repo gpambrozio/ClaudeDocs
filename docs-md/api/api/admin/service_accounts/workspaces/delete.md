@@ -1,12 +1,6 @@
 # Remove Workspace From Service Account
 
-Copy page
-
-
-
-# Remove Workspace From Service Account
-
-DELETE/v1/organizations/service\_accounts/{service\_account\_id}/workspaces/{workspace\_id}
+**DELETE** `/v1/organizations/service_accounts/{service_account_id}/workspaces/{workspace_id}`
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -20,72 +14,50 @@ membership persists; deleting an explicit default-workspace row reverts
 to the implicit `workspace_user` membership. Archived workspaces return
 400.
 
-##### Path parameters
+## Path parameters
 
-service\_account\_id: string
+- `service_account_id: string`
 
-ID of the service account.
+  ID of the service account.
 
-workspace\_id: string
+- `workspace_id: string`
 
-ID of the workspace.
+  ID of the workspace.
 
-##### Headers
+## Headers
 
-
+- `"anthropic-beta": optional array of string`
 
-"anthropic-beta": optional array of string
+  Optional header to specify the beta version(s) you want to use.
 
-Optional header to specify the beta version(s) you want to use.
+  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
+## Returns
 
-##### Returns
+- `service_account_id: string`
 
-service\_account\_id: string
+  Tagged service account ID (`svac_...`) named in the delete request. Removal is idempotent; see the endpoint description for the implicit-membership no-op.
 
-Tagged service account ID (`svac_...`) named in the delete request. Removal is idempotent; see the endpoint description for the implicit-membership no-op.
+- `type: "service_account_workspace_member_deleted"`
 
-
+  default: service_account_workspace_member_deleted
 
-type: "service\_account\_workspace\_member\_deleted"
+- `workspace_id: string`
 
-defaultservice\_account\_workspace\_member\_deleted
+  Tagged workspace ID (`wrkspc_...`) named in the delete request.
 
-workspace\_id: string
+## Example
 
-Tagged workspace ID (`wrkspc_...`) named in the delete request.
-
-Remove Workspace From Service Account
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUNT_ID/workspaces/$WORKSPACE_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "service_account_id": "service_account_id",
-  "type": "service_account_workspace_member_deleted",
-  "workspace_id": "workspace_id"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "service_account_id": "service_account_id",
   "type": "service_account_workspace_member_deleted",

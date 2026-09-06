@@ -1,102 +1,90 @@
 # List Deployment Runs
 
-Copy page
+`$client->beta->deploymentRuns->list(?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?string deploymentID, ?bool hasError, ?int limit, ?string page, ?BetaManagedAgentsTriggerType triggerType, ?list<AnthropicBeta> betas): PageCursor<BetaManagedAgentsDeploymentRun>`
 
-
-
-PHP
-
-# List Deployment Runs
-
-$client->beta->deploymentRuns->list(?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?string deploymentID, ?bool hasError, ?int limit, ?string page, ?[BetaManagedAgentsTriggerType](api/beta/deployment_runs.md) triggerType, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)>
-
-GET/v1/deployment\_runs
+**GET** `/v1/deployment_runs`
 
 List Deployment Runs
 
-##### ParametersExpand Collapse
+## Parameters
 
-createdAtGt?:optional \Datetime
+- `createdAtGt?:optional \Datetime`
 
-Return runs created strictly after this time (exclusive).
+  Return runs created strictly after this time (exclusive).
 
-createdAtGte?:optional \Datetime
+- `createdAtGte?:optional \Datetime`
 
-Return runs created at or after this time (inclusive).
+  Return runs created at or after this time (inclusive).
 
-createdAtLt?:optional \Datetime
+- `createdAtLt?:optional \Datetime`
 
-Return runs created strictly before this time (exclusive).
+  Return runs created strictly before this time (exclusive).
 
-createdAtLte?:optional \Datetime
+- `createdAtLte?:optional \Datetime`
 
-Return runs created at or before this time (inclusive).
+  Return runs created at or before this time (inclusive).
 
-deploymentID?:optional string
+- `deploymentID?:optional string`
 
-Filter to a specific deployment. Omit to list across all deployments in the workspace. Filtering by a non-existent deployment\_id returns 200 with empty data.
+  Filter to a specific deployment. Omit to list across all deployments in the workspace. Filtering by a non-existent `deployment_id` returns 200 with empty data.
 
-hasError?:optional bool
+- `hasError?:optional bool`
 
-Filter: true for runs with non-null error, false for runs with non-null session\_id. Omit for all.
+  Filter: true for runs with non-null `error`, false for runs with non-null `session_id`. Omit for all.
 
-limit?:optional int
+- `limit?:optional int`
 
-Maximum results per page. Default 20, maximum 1000.
+  Maximum results per page. Default 20, maximum 1000.
 
-page?:optional string
+- `page?:optional string`
 
-Opaque pagination cursor. Pass next\_page from the previous response. Invalid or expired cursors return 400.
+  Opaque pagination cursor. Pass `next_page` from the previous response. Invalid or expired cursors return 400.
 
-triggerType?:optional [BetaManagedAgentsTriggerType](api/beta/deployment_runs.md)
+- `triggerType?:optional BetaManagedAgentsTriggerType`
 
-Filter runs by what triggered them. Omit to return all runs.
+  Filter runs by what triggered them. Omit to return all runs.
 
-betas?:optional list<AnthropicBeta>
+- `betas?:optional list<AnthropicBeta>`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `BetaManagedAgentsDeploymentRun`
 
-[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)
+  - `string id`
 
-string id
+    Unique identifier for this run (`drun_...`).
 
-Unique identifier for this run (`drun_...`).
+  - `BetaManagedAgentsAgentReference agent`
 
-[BetaManagedAgentsAgentReference](api/beta/agents.md) agent
+    A resolved agent reference with a concrete version.
 
-A resolved agent reference with a concrete version.
+  - `\Datetime createdAt`
 
-\Datetime createdAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `string deploymentID`
 
-string deploymentID
+    ID of the deployment that produced this run.
 
-ID of the deployment that produced this run.
+  - `?Error error`
 
-?Error error
+    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
-Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+  - `?string sessionID`
 
-?string sessionID
+    Populated on success. Null on creation failure. Exactly one of `session_id` or `error` is non-null.
 
-Populated on success. Null on creation failure. Exactly one of session\_id or error is non-null.
+  - `BetaManagedAgentsTriggerContext triggerContext`
 
-[BetaManagedAgentsTriggerContext](api/beta/deployment_runs.md) triggerContext
+    Describes what triggered a deployment run, with trigger-specific metadata.
 
-Describes what triggered a deployment run, with trigger-specific metadata.
+  - `Type type`
 
-Type type
+## Example
 
-List Deployment Runs
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -113,51 +101,15 @@ $page = $client->beta->deploymentRuns->list(
   limit: 0,
   page: 'page',
   triggerType: BetaManagedAgentsTriggerType::SCHEDULE,
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($page);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "agent": {
-        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-        "type": "agent",
-        "version": 1
-      },
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "deployment_id": "deployment_id",
-      "error": {
-        "message": "message",
-        "type": "environment_archived_error"
-      },
-      "session_id": "session_id",
-      "trigger_context": {
-        "scheduled_at": "2019-12-27T18:11:19.117Z",
-        "type": "schedule"
-      },
-      "type": "deployment_run"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

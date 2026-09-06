@@ -1,296 +1,194 @@
 # List API Keys
 
-Copy page
-
-
-
-# List API Keys
-
-GET/v1/organizations/api\_keys
+**GET** `/v1/organizations/api_keys`
 
 List API Keys
 
-##### Query parameters
+## Query parameters
 
-after\_id: optional string
+- `after_id: optional string`
 
-ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-before\_id: optional string
+- `before_id: optional string`
 
-ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-created\_by\_user\_id: optional string
+- `created_by_user_id: optional string`
 
-Filter by the ID of the User who created the object.
+  Filter by the ID of the User who created the object.
 
-
+- `limit: optional number`
 
-limit: optional number
+  Number of items to return per page.
 
-Number of items to return per page.
+  Defaults to `20`. Ranges from `1` to `1000`.
 
-Defaults to `20`. Ranges from `1` to `1000`.
+  default: 20, maximum: 1000, minimum: 1
 
-default20
+- `status: optional "active" or "archived" or "expired" or "inactive"`
 
-maximum1000
+  Filter by API key status.
 
-minimum1
+  - `"active"`
 
-
+  - `"archived"`
 
-status: optional "active" or "archived" or "expired" or "inactive"
+  - `"expired"`
 
-Filter by API key status.
+  - `"inactive"`
 
-One of the following:
+- `workspace_id: optional string`
 
-"active"
+  Filter by Workspace ID.
 
-"archived"
+## Returns
 
-"expired"
+- `data: array of APIKey`
 
-"inactive"
+  - `id: string`
 
-workspace\_id: optional string
+    ID of the API key.
 
-Filter by Workspace ID.
+  - `created_at: string`
 
-##### Returns
+    RFC 3339 datetime string indicating when the API Key was created.
 
-
+    format: date-time
 
-data: array of [APIKey](api/http/$shared.md) { id, created\_at, created\_by, 8 more }
+  - `created_by: object or null`
 
-id: string
+    The ID and type of the actor that created the API key, or `null` when the
+    creator is not recorded (legacy, workload-identity-federated, or
+    system-created keys).
 
-ID of the API key.
+    - `id: string`
 
-
+      ID of the actor that created the object.
 
-created\_at: string
+    - `type: "service_account" or "user"`
 
-RFC 3339 datetime string indicating when the API Key was created.
+      Type of the actor that created the object.
 
-formatdate-time
+      - `"service_account"`
 
-
+      - `"user"`
 
-created\_by: object{ id, type } or null
+  - `expires_at: string or null`
 
-The ID and type of the actor that created the API key, or `null` when the
-creator is not recorded (legacy, workload-identity-federated, or
-system-created keys).
+    RFC 3339 datetime string indicating when the API Key expires, or `null` if it never expires.
 
-id: string
+    format: date-time
 
-ID of the actor that created the object.
+  - `name: string`
 
-
+    Name of the API key.
 
-type: "service\_account" or "user"
+  - `partial_key_hint: string or null`
 
-Type of the actor that created the object.
+    Partially redacted hint for the API key.
 
-One of the following:
+  - `principal: object or object or null`
 
-"service\_account"
+    The principal the API key acts as (a User or a Service Account), or `null` if the API key is not bound to a principal.
 
-"user"
+    - `UserActor object`
 
-
+      - `type: "user_actor"`
 
-expires\_at: string or null
+        Principal type. Always `"user_actor"` for a User.
 
-RFC 3339 datetime string indicating when the API Key expires, or `null` if it never expires.
+        default: user_actor
 
-formatdate-time
+      - `user_id: string`
 
-name: string
+        ID of the User the API key acts as.
 
-Name of the API key.
+    - `ServiceAccountActor object`
 
-partial\_key\_hint: string or null
+      - `service_account_id: string`
 
-Partially redacted hint for the API key.
+        ID of the Service Account the API key acts as.
 
-
+      - `type: "service_account_actor"`
 
-principal: object{ type, user\_id } or object{ service\_account\_id, type } or null
+        Principal type. Always `"service_account_actor"` for a Service Account.
 
-The principal the API key acts as (a User or a Service Account), or `null` if the API key is not bound to a principal.
+        default: service_account_actor
 
-One of the following:
+  - `scope: object or object`
 
-
+    Where the API key belongs: its Workspace (`{"type": "workspace", "workspace_id": "wrkspc_..."}`, with the Workspace's real ID even when it is the organization's default Workspace), or the organization (`{"type": "organization"}`) for a principal-bound API key that has no Workspace.
 
-UserActor object{ type, user\_id }
+    - `Organization object`
 
-
+      - `type: "organization"`
 
-type: "user\_actor"
+        Scope type. Always `"organization"`: the API key has no Workspace. Only a principal-bound API key can have this scope.
 
-Principal type. Always `"user_actor"` for a User.
+        default: organization
 
-defaultuser\_actor
+    - `Workspace object`
 
-user\_id: string
+      - `type: "workspace"`
 
-ID of the User the API key acts as.
+        Scope type. Always `"workspace"`: the API key belongs to one Workspace.
 
-
+        default: workspace
 
-ServiceAccountActor object{ service\_account\_id, type }
+      - `workspace_id: string`
 
-service\_account\_id: string
+        ID of the Workspace the API key belongs to. Unlike the deprecated top-level `workspace_id`, this is the Workspace's real ID even for the organization's default Workspace.
 
-ID of the Service Account the API key acts as.
+  - `status: "active" or "archived" or "expired" or "inactive"`
 
-
+    Status of the API key.
 
-type: "service\_account\_actor"
+    - `"active"`
 
-Principal type. Always `"service_account_actor"` for a Service Account.
+    - `"archived"`
 
-defaultservice\_account\_actor
+    - `"expired"`
 
-
+    - `"inactive"`
 
-scope: object{ type } or object{ type, workspace\_id }
+  - `type: "api_key"`
 
-Where the API key belongs: its Workspace (`{"type": "workspace", "workspace_id": "wrkspc_..."}`, with the Workspace's real ID even when it is the organization's default Workspace), or the organization (`{"type": "organization"}`) for a principal-bound API key that has no Workspace.
+    Object type.
 
-One of the following:
+    For API Keys, this is always `"api_key"`.
 
-
+    default: api_key
 
-Organization object{ type }
+  - `workspace_id: string or null`
 
-
+    **Deprecated**: Use `scope` instead. `workspace_id` is `null` both for an API key in the default Workspace and for a principal-bound API key that has no Workspace.
 
-type: "organization"
+    Deprecated: use `scope` instead. ID of the Workspace associated with the API key, or `null` if the API key belongs to the default Workspace. Also `null` for a principal-bound API key that has no Workspace; `scope` tells the two apart.
 
-Scope type. Always `"organization"`: the API key has no Workspace. Only a principal-bound API key can have this scope.
+- `first_id: string or null`
 
-defaultorganization
+  First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
-
+- `has_more: boolean`
 
-Workspace object{ type, workspace\_id }
+  Indicates if there are more results in the requested page direction.
 
-
+- `last_id: string or null`
 
-type: "workspace"
+  Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
-Scope type. Always `"workspace"`: the API key belongs to one Workspace.
+## Example
 
-defaultworkspace
-
-workspace\_id: string
-
-ID of the Workspace the API key belongs to. Unlike the deprecated top-level `workspace_id`, this is the Workspace's real ID even for the organization's default Workspace.
-
-
-
-status: "active" or "archived" or "expired" or "inactive"
-
-Status of the API key.
-
-One of the following:
-
-"active"
-
-"archived"
-
-"expired"
-
-"inactive"
-
-
-
-type: "api\_key"
-
-Object type.
-
-For API Keys, this is always `"api_key"`.
-
-defaultapi\_key
-
-
-
-workspace\_id: string or null⁠Deprecated
-
-Deprecated: use `scope` instead. ID of the Workspace associated with the API key, or `null` if the API key belongs to the default Workspace. Also `null` for a principal-bound API key that has no Workspace; `scope` tells the two apart.
-
-Use `scope` instead. `workspace\_id` is `null` both for an API key in the default Workspace and for a principal-bound API key that has no Workspace.
-
-first\_id: string or null
-
-First ID in the `data` list. Can be used as the `before_id` for the previous page.
-
-has\_more: boolean
-
-Indicates if there are more results in the requested page direction.
-
-last\_id: string or null
-
-Last ID in the `data` list. Can be used as the `after_id` for the next page.
-
-List API Keys
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/api_keys \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "created_by": {
-        "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-        "type": "user"
-      },
-      "expires_at": "2024-10-30T23:58:27.427722Z",
-      "name": "Developer Key",
-      "partial_key_hint": "sk-ant-api03-R2D...igAA",
-      "principal": {
-        "type": "user_actor",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
-      },
-      "scope": {
-        "type": "workspace",
-        "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
-      },
-      "status": "active",
-      "type": "api_key",
-      "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

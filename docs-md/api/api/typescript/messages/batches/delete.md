@@ -1,16 +1,8 @@
 # Delete a Message Batch
 
-Copy page
+`client.messages.batches.delete(messageBatchID, options?): DeletedMessageBatch`
 
-
-
-TypeScript
-
-# Delete a Message Batch
-
-client.messages.batches.delete(stringmessageBatchID, RequestOptionsoptions?): [DeletedMessageBatch](api/messages/batches.md) { id, type }
-
-DELETE/v1/messages/batches/{message\_batch\_id}
+**DELETE** `/v1/messages/batches/{message_batch_id}`
 
 Delete a Message Batch.
 
@@ -18,64 +10,45 @@ Message Batches can only be deleted once they've finished processing. If you'd l
 
 Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
-messageBatchID: string
+- `messageBatchID: string`
 
-ID of the Message Batch.
+  ID of the Message Batch.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `DeletedMessageBatch`
 
-DeletedMessageBatch { id, type } 
+  - `id: string`
 
-id: string
+    ID of the Message Batch.
 
-ID of the Message Batch.
+  - `type: "message_batch_deleted"`
 
-
+    Deleted object type.
 
-type: "message\_batch\_deleted"
+    For Message Batches, this is always `"message_batch_deleted"`.
 
-Deleted object type.
+    default: message_batch_deleted
 
-For Message Batches, this is always `"message_batch_deleted"`.
+## Example
 
-Delete a Message Batch
-
-TypeScript
-
-```shiki
-import Anthropic from '@anthropic-ai/sdk';
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const deletedMessageBatch = await client.messages.batches.delete('message_batch_id');
+const deletedMessageBatch = await client.messages.batches.delete("message_batch_id");
 
 console.log(deletedMessageBatch.id);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "type": "message_batch_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
   "type": "message_batch_deleted"

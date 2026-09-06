@@ -1,145 +1,95 @@
 # List organization users
 
-To enable the Compliance API, see the setup guide.
-
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
-
-Copy page
-
-
-
-# List organization users
-
-GET/v1/compliance/organizations/{org\_uuid}/users
+**GET** `/v1/compliance/organizations/{org_uuid}/users`
 
 List current user members of an organization.
 
-##### Path parameters
+## Path parameters
 
-org\_uuid: string
+- `org_uuid: string`
 
-The organization UUID
+  The organization UUID
 
-##### Query parameters
+## Query parameters
 
-
+- `limit: optional number`
 
-limit: optional number
+  Maximum results (default: 500, max: 1000)
 
-Maximum results (default: 500, max: 1000)
+  default: 500, maximum: 1000, minimum: 1
 
-default500
+- `page: optional string`
 
-maximum1000
+  Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
-minimum1
+## Headers
 
-page: optional string
+- `"x-api-key": optional string`
 
-Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
+## Returns
 
-##### Headers
+- `data: array of object`
 
-"x-api-key": optional string
+  List of current organization members sorted by organization join date ascending
 
-##### Returns
+  - `id: string`
 
-
+    User identifier (tagged ID)
 
-data: array of object{ id, created\_at, email, 2 more }
+  - `created_at: string`
 
-List of current organization members sorted by organization join date ascending
+    User account creation timestamp
 
-id: string
+    format: date-time
 
-User identifier (tagged ID)
+  - `email: string`
 
-
+    User's current email address
 
-created\_at: string
+  - `full_name: string`
 
-User account creation timestamp
+    User's current full name
 
-formatdate-time
+  - `organization_role: "admin" or "billing" or "claude_code_user" or 6 more`
 
-email: string
+    User's built-in role within the organization. This is distinct from any custom RBAC roles that may also be assigned.
 
-User's current email address
+    - `"admin"`
 
-full\_name: string
+    - `"billing"`
 
-User's current full name
+    - `"claude_code_user"`
 
-
+    - `"developer"`
 
-organization\_role: "admin" or "billing" or "claude\_code\_user" or 6 more
+    - `"managed"`
 
-User's built-in role within the organization. This is distinct from any custom RBAC roles that may also be assigned.
+    - `"membership_admin"`
 
-One of the following:
+    - `"owner"`
 
-"admin"
+    - `"primary_owner"`
 
-"billing"
+    - `"user"`
 
-"claude\_code\_user"
+- `has_more: boolean`
 
-"developer"
+  Whether more records exist beyond the current result set
 
-"managed"
+- `next_page: string or null`
 
-"membership\_admin"
+  Token to retrieve the next page. Use this as the 'page' parameter in your next request
 
-"owner"
+## Example
 
-"primary\_owner"
-
-"user"
-
-has\_more: boolean
-
-Whether more records exist beyond the current result set
-
-next\_page: string or null
-
-Token to retrieve the next page. Use this as the 'page' parameter in your next request
-
-List organization users
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/users \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-      "created_at": "2025-03-12T18:22:41.123456Z",
-      "email": "jane.doe@example.com",
-      "full_name": "Jane Doe",
-      "organization_role": "admin"
-    }
-  ],
-  "has_more": true,
-  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

@@ -1,44 +1,32 @@
 # Delete Vault
 
-Copy page
+`$client->beta->vaults->delete(string vaultID, ?list<AnthropicBeta> betas): BetaManagedAgentsDeletedVault`
 
-
-
-PHP
-
-# Delete Vault
-
-$client->beta->vaults->delete(string vaultID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeletedVault](api/beta/vaults.md)
-
-DELETE/v1/vaults/{vault\_id}
+**DELETE** `/v1/vaults/{vault_id}`
 
 Delete Vault
 
-##### ParametersExpand Collapse
+## Parameters
 
-vaultID: string
+- `vaultID: string`
 
-betas?:optional list<AnthropicBeta>
+- `betas?:optional list<AnthropicBeta>`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `BetaManagedAgentsDeletedVault`
 
-[BetaManagedAgentsDeletedVault](api/beta/vaults.md)
+  - `string id`
 
-string id
+    Unique identifier of the deleted vault.
 
-Unique identifier of the deleted vault.
+  - `Type type`
 
-Type type
+## Example
 
-Delete Vault
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -46,30 +34,16 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsDeletedVault = $client->beta->vaults->delete(
-  'vlt_011CZkZDLs7fYzm1hXNPeRjv', betas: ['message-batches-2024-09-24']
+  'vlt_011CZkZDLs7fYzm1hXNPeRjv',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaManagedAgentsDeletedVault);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
-  "type": "vault_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
   "type": "vault_deleted"

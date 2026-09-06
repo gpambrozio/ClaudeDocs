@@ -1,150 +1,103 @@
 # Get project details
 
-To enable the Compliance API, see the setup guide.
-
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
-
-Copy page
-
-
-
-# Get project details
-
-GET/v1/compliance/apps/projects/{project\_id}
+**GET** `/v1/compliance/apps/projects/{project_id}`
 
 Get detailed information for a specific project.
 
-##### Path parameters
+## Path parameters
 
-project\_id: string
+- `project_id: string`
 
-The project ID (tagged ID, e.g., claude\_proj\_abc123)
+  The project ID (tagged ID, e.g., claude_proj_abc123)
 
-##### Headers
+## Headers
 
-"x-api-key": optional string
+- `"x-api-key": optional string`
 
-##### Returns
+## Returns
 
-id: string
+- `id: string`
 
-Project identifier (tagged ID)
+  Project identifier (tagged ID)
 
-attachments\_count: number
+- `attachments_count: number`
 
-Number of attachments contained within this project
+  Number of attachments contained within this project
 
-chats\_count: number
+- `chats_count: number`
 
-Number of chats contained within this project
+  Number of chats contained within this project
 
-
+- `created_at: string`
 
-created\_at: string
+  Project creation timestamp
 
-Project creation timestamp
+  format: date-time
 
-formatdate-time
+- `deleted_at: string or null`
 
-
+  Timestamp when the project was deleted by an end user, or null otherwise
 
-deleted\_at: string or null
+  format: date-time
 
-Timestamp when the project was deleted by an end user, or null otherwise
+- `description: string`
 
-formatdate-time
+  Project description
 
-description: string
+- `instructions: string`
 
-Project description
+  Project's custom instructions / prompt
 
-instructions: string
+- `is_private: boolean`
 
-Project's custom instructions / prompt
+  If false, the project is visible to all organization members; if true the project is accessible only to the creator and specified collaborators
 
-is\_private: boolean
+- `name: string`
 
-If false, the project is visible to all organization members; if true the project is accessible only to the creator and specified collaborators
+  Project name
 
-name: string
+- `organization_uuid: string`
 
-Project name
+  Organization UUID this project belongs to
 
-organization\_uuid: string
+- `updated_at: string`
 
-Organization UUID this project belongs to
+  Project last update timestamp
 
-
+  format: date-time
 
-updated\_at: string
+- `user: object or null`
 
-Project last update timestamp
+  The user who created a project or project document.
 
-formatdate-time
+  Fields that reference this type are null when the creator's account has
+  been deleted or the creator is no longer a member of an organization the
+  key may read.
 
-
+  - `id: string`
 
-user: object{ id, email\_address } or null
+    User identifier (tagged ID)
 
-The user who created a project or project document.
+  - `email_address: string`
 
-Fields that reference this type are null when the creator's account has
-been deleted or the creator is no longer a member of an organization the
-key may read.
+    User's email address
 
-id: string
+- `organization_id: string`
 
-User identifier (tagged ID)
+  **Deprecated**
 
-email\_address: string
+  Organization identifier (tagged ID)
 
-User's email address
+## Example
 
-organization\_id: string⁠Deprecated
-
-Organization identifier (tagged ID)
-
-Get project details
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "claude_proj_01Nm7PqRsTuVwXyZaBcDeFgH",
-  "attachments_count": 3,
-  "chats_count": 14,
-  "created_at": "2025-03-12T18:22:41.123456Z",
-  "deleted_at": "2019-12-27T18:11:19.117Z",
-  "description": "Planning and research for the Q3 launch",
-  "instructions": "Focus on concise, actionable answers.",
-  "is_private": true,
-  "name": "Q3 Product Launch",
-  "organization_id": "org_015eofRkKpogX7uDKUyvBTph",
-  "organization_uuid": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
-  "updated_at": "2025-03-14T09:05:17.456789Z",
-  "user": {
-    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-    "email_address": "jane.doe@example.com"
-  }
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "claude_proj_01Nm7PqRsTuVwXyZaBcDeFgH",
   "attachments_count": 3,

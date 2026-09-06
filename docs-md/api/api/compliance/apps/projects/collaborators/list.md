@@ -1,16 +1,6 @@
 # List project collaborators
 
-To enable the Compliance API, see the setup guide.
-
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
-
-Copy page
-
-
-
-# List project collaborators
-
-GET/v1/compliance/apps/projects/{project\_id}/collaborators
+**GET** `/v1/compliance/apps/projects/{project_id}/collaborators`
 
 List the users, groups, and organization-wide grants on a project.
 
@@ -19,255 +9,180 @@ are returned as a discriminated union on `type` — an individual user, an
 RBAC group, the whole organization, or all holders of an organization-level
 role.
 
-##### Path parameters
+## Path parameters
 
-project\_id: string
+- `project_id: string`
 
-The project ID (tagged ID, e.g., claude\_proj\_abc123)
+  The project ID (tagged ID, e.g., claude_proj_abc123)
 
-##### Query parameters
+## Query parameters
 
-
+- `limit: optional number`
 
-limit: optional number
+  Maximum results (default: 20, max: 100)
 
-Maximum results (default: 20, max: 100)
+  default: 20, maximum: 100, minimum: 1
 
-default20
+- `page: optional string`
 
-maximum100
+  Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
-minimum1
+## Headers
 
-page: optional string
+- `"x-api-key": optional string`
 
-Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
+## Returns
 
-##### Headers
+- `data: array of object or object or object or object`
 
-"x-api-key": optional string
+  List of collaborators sorted chronologically by granted_at, tie break by the underlying role-assignment UUID
 
-##### Returns
+  - `ComplianceProjectUserCollaborator object`
 
-
+    An individual user granted a role on a project.
 
-data: array of object{ granted\_at, role, type, user\_id } or object{ granted\_at, group\_id, role, type } or object{ granted\_at, organization\_uuid, role, type } or object{ granted\_at, organization\_role, role, type }
+    - `granted_at: string`
 
-List of collaborators sorted chronologically by granted\_at, tie break by the underlying role-assignment UUID
+      When this collaborator was granted access (RFC 3339 format)
 
-One of the following:
+      format: date-time
 
-
+    - `role: "admin" or "editor" or "owner" or "viewer"`
 
-ComplianceProjectUserCollaborator object{ granted\_at, role, type, user\_id }
+      Role granted on the project
 
-An individual user granted a role on a project.
+      - `"admin"`
 
-
+      - `"editor"`
 
-granted\_at: string
+      - `"owner"`
 
-When this collaborator was granted access (RFC 3339 format)
+      - `"viewer"`
 
-formatdate-time
+    - `type: "user"`
 
-
+      Discriminator marking this as an individual user collaborator
 
-role: "admin" or "editor" or "owner" or "viewer"
+      default: user
 
-Role granted on the project
+    - `user_id: string or null`
 
-One of the following:
+      Identifier of the user granted access (tagged ID), or null if their account has since been deleted
 
-"admin"
+  - `ComplianceProjectGroupCollaborator object`
 
-"editor"
+    An RBAC group granted a role on a project.
 
-"owner"
+    - `granted_at: string`
 
-"viewer"
+      When this collaborator was granted access (RFC 3339 format)
 
-
+      format: date-time
 
-type: "user"
+    - `group_id: string`
 
-Discriminator marking this as an individual user collaborator
+      Identifier of the group granted access (tagged ID)
 
-defaultuser
+    - `role: "admin" or "editor" or "owner" or "viewer"`
 
-user\_id: string or null
+      Role granted on the project
 
-Identifier of the user granted access (tagged ID), or null if their account has since been deleted
+      - `"admin"`
 
-
+      - `"editor"`
 
-ComplianceProjectGroupCollaborator object{ granted\_at, group\_id, role, type }
+      - `"owner"`
 
-An RBAC group granted a role on a project.
+      - `"viewer"`
 
-
+    - `type: "group"`
 
-granted\_at: string
+      Discriminator marking this as a group collaborator
 
-When this collaborator was granted access (RFC 3339 format)
+      default: group
 
-formatdate-time
+  - `ComplianceProjectOrganizationCollaborator object`
 
-group\_id: string
+    An entire organization granted a role on a project.
 
-Identifier of the group granted access (tagged ID)
+    - `granted_at: string`
 
-
+      When this collaborator was granted access (RFC 3339 format)
 
-role: "admin" or "editor" or "owner" or "viewer"
+      format: date-time
 
-Role granted on the project
+    - `organization_uuid: string`
 
-One of the following:
+      UUID of the organization granted access
 
-"admin"
+    - `role: "admin" or "editor" or "owner" or "viewer"`
 
-"editor"
+      Role granted on the project
 
-"owner"
+      - `"admin"`
 
-"viewer"
+      - `"editor"`
 
-
+      - `"owner"`
 
-type: "group"
+      - `"viewer"`
 
-Discriminator marking this as a group collaborator
+    - `type: "organization"`
 
-defaultgroup
+      Discriminator marking this as an organization-wide grant
 
-
+      default: organization
 
-ComplianceProjectOrganizationCollaborator object{ granted\_at, organization\_uuid, role, type }
+  - `ComplianceProjectOrganizationRoleCollaborator object`
 
-An entire organization granted a role on a project.
+    All holders of an organization-level role granted a role on a project.
 
-
+    - `granted_at: string`
 
-granted\_at: string
+      When this collaborator was granted access (RFC 3339 format)
 
-When this collaborator was granted access (RFC 3339 format)
+      format: date-time
 
-formatdate-time
+    - `organization_role: string`
 
-organization\_uuid: string
+      The organization-level role whose holders are granted access
 
-UUID of the organization granted access
+    - `role: "admin" or "editor" or "owner" or "viewer"`
 
-
+      Role granted on the project
 
-role: "admin" or "editor" or "owner" or "viewer"
+      - `"admin"`
 
-Role granted on the project
+      - `"editor"`
 
-One of the following:
+      - `"owner"`
 
-"admin"
+      - `"viewer"`
 
-"editor"
+    - `type: "organization_role"`
 
-"owner"
+      Discriminator marking this as a grant to all organization members holding a specific org-level role
 
-"viewer"
+      default: organization_role
 
-
+- `has_more: boolean`
 
-type: "organization"
+  Whether more records exist beyond the current result set
 
-Discriminator marking this as an organization-wide grant
+- `next_page: string or null`
 
-defaultorganization
+  To get the next page, use the 'next_page' from the current response as the 'page' in your next request
 
-
+## Example
 
-ComplianceProjectOrganizationRoleCollaborator object{ granted\_at, organization\_role, role, type }
-
-All holders of an organization-level role granted a role on a project.
-
-
-
-granted\_at: string
-
-When this collaborator was granted access (RFC 3339 format)
-
-formatdate-time
-
-organization\_role: string
-
-The organization-level role whose holders are granted access
-
-
-
-role: "admin" or "editor" or "owner" or "viewer"
-
-Role granted on the project
-
-One of the following:
-
-"admin"
-
-"editor"
-
-"owner"
-
-"viewer"
-
-
-
-type: "organization\_role"
-
-Discriminator marking this as a grant to all organization members holding a specific org-level role
-
-defaultorganization\_role
-
-has\_more: boolean
-
-Whether more records exist beyond the current result set
-
-next\_page: string or null
-
-To get the next page, use the 'next\_page' from the current response as the 'page' in your next request
-
-List project collaborators
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/collaborators \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "granted_at": "2019-12-27T18:11:19.117Z",
-      "role": "admin",
-      "type": "user",
-      "user_id": "user_id"
-    }
-  ],
-  "has_more": true,
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

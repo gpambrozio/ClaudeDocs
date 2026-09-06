@@ -1,542 +1,1269 @@
 # Deployment Runs
 
-Copy page
+## List Deployment Runs
 
-
+`beta.deployment_runs.list(**kwargs) -> PageCursor<BetaManagedAgentsDeploymentRun>`
 
-Ruby
+**GET** `/v1/deployment_runs`
 
-# Deployment Runs
+List Deployment Runs
 
-##### [List Deployment Runs](api/beta/deployment_runs/list.md)
+### Parameters
 
-beta.deployment\_runs.list(\*\*kwargs) -> PageCursor<[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md) { id, agent, created\_at, 5 more } >
+- `created_at_gt: Time`
 
-GET/v1/deployment\_runs
+  Return runs created strictly after this time (exclusive).
 
-##### [Get Deployment Run](api/beta/deployment_runs/retrieve.md)
+  format: date-time
 
-beta.deployment\_runs.retrieve(deployment\_run\_id, \*\*kwargs) -> [BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md) { id, agent, created\_at, 5 more }
+- `created_at_gte: Time`
 
-GET/v1/deployment\_runs/{deployment\_run\_id}
+  Return runs created at or after this time (inclusive).
 
-##### ModelsExpand Collapse
+  format: date-time
 
-
+- `created_at_lt: Time`
 
-class BetaManagedAgentsAgentArchivedRunError { message, type } 
+  Return runs created strictly before this time (exclusive).
 
-The deployment's agent was archived.
+  format: date-time
 
-message: String
+- `created_at_lte: Time`
 
-Human-readable error description.
+  Return runs created at or before this time (inclusive).
 
-type: :agent\_archived\_error
+  format: date-time
 
-
+- `deployment_id: String`
 
-class BetaManagedAgentsDeploymentRun { id, agent, created\_at, 5 more } 
+  Filter to a specific deployment. Omit to list across all deployments in the workspace. Filtering by a non-existent `deployment_id` returns 200 with empty data.
 
-A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
+- `has_error: bool`
 
-id: String
+  Filter: true for runs with non-null `error`, false for runs with non-null `session_id`. Omit for all.
 
-Unique identifier for this run (`drun_...`).
+- `limit: Integer`
 
-
+  Maximum results per page. Default 20, maximum 1000.
 
-agent: [BetaManagedAgentsAgentReference](api/beta/agents.md) { id, type, version } 
+  format: int32
 
-A resolved agent reference with a concrete version.
+- `page: String`
 
-id: String
+  Opaque pagination cursor. Pass `next_page` from the previous response. Invalid or expired cursors return 400.
 
-type: :agent
+- `trigger_type: BetaManagedAgentsTriggerType`
 
-version: Integer
+  Filter runs by what triggered them. Omit to return all runs.
 
-created\_at: Time
+  - `:schedule`
 
-A timestamp in RFC 3339 format
+  - `:manual`
 
-deployment\_id: String
+- `betas: Array[AnthropicBeta]`
 
-ID of the deployment that produced this run.
+  Optional header to specify the beta version(s) you want to use.
 
-
+  - `String = String`
 
-error: [BetaManagedAgentsEnvironmentArchivedRunError](api/beta/deployment_runs.md) { message, type }  | [BetaManagedAgentsAgentArchivedRunError](api/beta/deployment_runs.md) { message, type }  | [BetaManagedAgentsEnvironmentNotFoundRunError](api/beta/deployment_runs.md) { message, type }  | 13 more
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
 
-Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+    - `:"message-batches-2024-09-24"`
 
-One of the following:
+    - `:"prompt-caching-2024-07-31"`
 
-
+    - `:"computer-use-2024-10-22"`
 
-class BetaManagedAgentsEnvironmentArchivedRunError { message, type } 
+    - `:"computer-use-2025-01-24"`
 
-The deployment's environment was archived.
+    - `:"pdfs-2024-09-25"`
 
-message: String
+    - `:"token-counting-2024-11-01"`
 
-Human-readable error description.
+    - `:"token-efficient-tools-2025-02-19"`
 
-type: :environment\_archived\_error
+    - `:"output-128k-2025-02-19"`
 
-
+    - `:"files-api-2025-04-14"`
 
-class BetaManagedAgentsAgentArchivedRunError { message, type } 
+    - `:"mcp-client-2025-04-04"`
 
-The deployment's agent was archived.
+    - `:"mcp-client-2025-11-20"`
 
-message: String
+    - `:"dev-full-thinking-2025-05-14"`
 
-Human-readable error description.
+    - `:"interleaved-thinking-2025-05-14"`
 
-type: :agent\_archived\_error
+    - `:"code-execution-2025-05-22"`
 
-
+    - `:"extended-cache-ttl-2025-04-11"`
 
-class BetaManagedAgentsEnvironmentNotFoundRunError { message, type } 
+    - `:"context-1m-2025-08-07"`
 
-The deployment's environment no longer exists.
+    - `:"context-management-2025-06-27"`
 
-message: String
+    - `:"model-context-window-exceeded-2025-08-26"`
 
-Human-readable error description.
+    - `:"skills-2025-10-02"`
 
-type: :environment\_not\_found\_error
+    - `:"fast-mode-2026-02-01"`
 
-
+    - `:"output-300k-2026-03-24"`
 
-class BetaManagedAgentsVaultNotFoundRunError { message, type } 
+    - `:"user-profiles-2026-03-24"`
 
-A vault referenced by the deployment no longer exists.
+    - `:"user-profiles-2026-08-18"`
 
-message: String
+    - `:"advisor-tool-2026-03-01"`
 
-Human-readable error description.
+    - `:"managed-agents-2026-04-01"`
 
-type: :vault\_not\_found\_error
+    - `:"cache-diagnosis-2026-04-07"`
 
-
+    - `:"dreaming-2026-04-21"`
 
-class BetaManagedAgentsVaultArchivedRunError { message, type } 
+    - `:"thinking-token-count-2026-05-13"`
 
-A vault referenced by the deployment is archived.
+    - `:"server-side-fallback-2026-06-01"`
 
-message: String
+    - `:"server-side-fallback-2026-07-01"`
 
-Human-readable error description.
+    - `:"fallback-credit-2026-06-01"`
 
-type: :vault\_archived\_error
+    - `:"fallback-credit-2026-07-01"`
 
-
+    - `:"agent-memory-2026-07-22"`
 
-class BetaManagedAgentsFileNotFoundRunError { message, type } 
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
-A file resource referenced by the deployment no longer exists.
+    - `:"compact-2026-01-12"`
 
-message: String
+    - `:"computer-use-2025-11-24"`
 
-Human-readable error description.
+    - `:"mcp-tunnels-2026-06-22"`
 
-type: :file\_not\_found\_error
+    - `:"structured-outputs-2025-11-13"`
 
-
+    - `:"task-budgets-2026-03-13"`
 
-class BetaManagedAgentsMemoryStoreArchivedRunError { message, type } 
+    - `:"thinking-display-updates-2026-08-18"`
 
-A memory store referenced by the deployment is archived.
+    - `:"ce-user-management-2026-07-13"`
 
-message: String
+    - `:"mid-conversation-output-config-2026-07-01"`
 
-Human-readable error description.
+    - `:"thinking-binding-controls-2026-08-01"`
 
-type: :memory\_store\_archived\_error
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
 
-
+### Returns
 
-class BetaManagedAgentsSkillNotFoundRunError { message, type } 
+- `class BetaManagedAgentsDeploymentRun`
 
-A skill referenced by the deployment's agent no longer exists.
+  A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
 
-message: String
+  - `id: String`
 
-Human-readable error description.
+    Unique identifier for this run (`drun_...`).
 
-type: :skill\_not\_found\_error
+  - `agent: BetaManagedAgentsAgentReference`
 
-
+    A resolved agent reference with a concrete version.
 
-class BetaManagedAgentsSessionResourceNotFoundRunError { message, type } 
+    - `id: String`
 
-A referenced resource no longer exists and its kind was not reported.
+    - `type: :agent`
 
-message: String
+    - `version: Integer`
 
-Human-readable error description.
+      format: int32
 
-type: :session\_resource\_not\_found\_error
+  - `created_at: Time`
 
-
+    A timestamp in RFC 3339 format
 
-class BetaManagedAgentsWorkspaceArchivedRunError { message, type } 
+    format: date-time
 
-The deployment's workspace was archived.
+  - `deployment_id: String`
 
-message: String
+    ID of the deployment that produced this run.
 
-Human-readable error description.
+  - `error: BetaManagedAgentsEnvironmentArchivedRunError | BetaManagedAgentsAgentArchivedRunError | BetaManagedAgentsEnvironmentNotFoundRunError | 13 more`
 
-type: :workspace\_archived\_error
+    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
-
+    - `class BetaManagedAgentsEnvironmentArchivedRunError`
 
-class BetaManagedAgentsOrganizationDisabledRunError { message, type } 
+      The deployment's environment was archived.
 
-The deployment's organization is disabled.
+      - `message: String`
 
-message: String
+        Human-readable error description.
 
-Human-readable error description.
+      - `type: :environment_archived_error`
 
-type: :organization\_disabled\_error
+    - `class BetaManagedAgentsAgentArchivedRunError`
 
-
+      The deployment's agent was archived.
 
-class BetaManagedAgentsSessionRateLimitedRunError { message, type } 
+      - `message: String`
 
-Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
+        Human-readable error description.
 
-message: String
+      - `type: :agent_archived_error`
 
-Human-readable error description.
+    - `class BetaManagedAgentsEnvironmentNotFoundRunError`
 
-type: :session\_rate\_limited\_error
+      The deployment's environment no longer exists.
 
-
+      - `message: String`
 
-class BetaManagedAgentsSessionCreationRejectedRunError { message, type } 
+        Human-readable error description.
 
-The session create request was rejected with a non-retryable validation error.
+      - `type: :environment_not_found_error`
 
-message: String
+    - `class BetaManagedAgentsVaultNotFoundRunError`
 
-Human-readable error description.
+      A vault referenced by the deployment no longer exists.
 
-type: :session\_creation\_rejected\_error
+      - `message: String`
 
-
+        Human-readable error description.
 
-class BetaManagedAgentsUnknownRunError { message, type } 
+      - `type: :vault_not_found_error`
 
-An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
+    - `class BetaManagedAgentsVaultArchivedRunError`
 
-message: String
+      A vault referenced by the deployment is archived.
 
-Human-readable error description.
+      - `message: String`
 
-type: :unknown\_error
+        Human-readable error description.
 
-
+      - `type: :vault_archived_error`
 
-class BetaManagedAgentsSelfHostedResourcesUnsupportedRunError { message, type } 
+    - `class BetaManagedAgentsFileNotFoundRunError`
 
-The deployment configures resources, but its environment is self-hosted and cannot mount them.
+      A file resource referenced by the deployment no longer exists.
 
-message: String
+      - `message: String`
 
-Human-readable error description.
+        Human-readable error description.
 
-type: :self\_hosted\_resources\_unsupported\_error
+      - `type: :file_not_found_error`
 
-
+    - `class BetaManagedAgentsMemoryStoreArchivedRunError`
 
-class BetaManagedAgentsMCPEgressBlockedRunError { message, type } 
+      A memory store referenced by the deployment is archived.
 
-An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+      - `message: String`
 
-message: String
+        Human-readable error description.
 
-Human-readable error description.
+      - `type: :memory_store_archived_error`
 
-type: :mcp\_egress\_blocked\_error
+    - `class BetaManagedAgentsSkillNotFoundRunError`
 
-session\_id: String
+      A skill referenced by the deployment's agent no longer exists.
 
-Populated on success. Null on creation failure. Exactly one of session\_id or error is non-null.
+      - `message: String`
 
-
+        Human-readable error description.
 
-trigger\_context: [BetaManagedAgentsTriggerContext](api/beta/deployment_runs.md)
+      - `type: :skill_not_found_error`
 
-Describes what triggered a deployment run, with trigger-specific metadata.
+    - `class BetaManagedAgentsSessionResourceNotFoundRunError`
 
-One of the following:
+      A referenced resource no longer exists and its kind was not reported.
 
-
+      - `message: String`
 
-class BetaManagedAgentsScheduleTriggerContext { scheduled\_at, type } 
+        Human-readable error description.
 
-The run was fired by the deployment's cron schedule.
+      - `type: :session_resource_not_found_error`
 
-scheduled\_at: Time
+    - `class BetaManagedAgentsWorkspaceArchivedRunError`
 
-A timestamp in RFC 3339 format
+      The deployment's workspace was archived.
 
-type: :schedule
+      - `message: String`
 
-
+        Human-readable error description.
 
-class BetaManagedAgentsManualTriggerContext { type } 
+      - `type: :workspace_archived_error`
 
-The run was started manually by creating a session directly against the deployment.
+    - `class BetaManagedAgentsOrganizationDisabledRunError`
 
-type: :manual
+      The deployment's organization is disabled.
 
-type: :deployment\_run
+      - `message: String`
 
-
+        Human-readable error description.
 
-class BetaManagedAgentsEnvironmentArchivedRunError { message, type } 
+      - `type: :organization_disabled_error`
 
-The deployment's environment was archived.
+    - `class BetaManagedAgentsSessionRateLimitedRunError`
 
-message: String
+      Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
-Human-readable error description.
+      - `message: String`
 
-type: :environment\_archived\_error
+        Human-readable error description.
 
-
+      - `type: :session_rate_limited_error`
 
-class BetaManagedAgentsEnvironmentNotFoundRunError { message, type } 
+    - `class BetaManagedAgentsSessionCreationRejectedRunError`
 
-The deployment's environment no longer exists.
+      The session create request was rejected with a non-retryable validation error.
 
-message: String
+      - `message: String`
 
-Human-readable error description.
+        Human-readable error description.
 
-type: :environment\_not\_found\_error
+      - `type: :session_creation_rejected_error`
 
-
+    - `class BetaManagedAgentsUnknownRunError`
 
-class BetaManagedAgentsFileNotFoundRunError { message, type } 
+      An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
-A file resource referenced by the deployment no longer exists.
+      - `message: String`
 
-message: String
+        Human-readable error description.
 
-Human-readable error description.
+      - `type: :unknown_error`
 
-type: :file\_not\_found\_error
+    - `class BetaManagedAgentsSelfHostedResourcesUnsupportedRunError`
 
-
+      The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-class BetaManagedAgentsManualTriggerContext { type } 
+      - `message: String`
 
-The run was started manually by creating a session directly against the deployment.
+        Human-readable error description.
 
-type: :manual
+      - `type: :self_hosted_resources_unsupported_error`
 
-
+    - `class BetaManagedAgentsMCPEgressBlockedRunError`
 
-class BetaManagedAgentsMCPEgressBlockedRunError { message, type } 
+      An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+      - `message: String`
 
-message: String
+        Human-readable error description.
 
-Human-readable error description.
+      - `type: :mcp_egress_blocked_error`
 
-type: :mcp\_egress\_blocked\_error
+  - `session_id: String`
 
-
+    Populated on success. Null on creation failure. Exactly one of `session_id` or `error` is non-null.
 
-class BetaManagedAgentsMemoryStoreArchivedRunError { message, type } 
+  - `trigger_context: BetaManagedAgentsTriggerContext`
 
-A memory store referenced by the deployment is archived.
+    Describes what triggered a deployment run, with trigger-specific metadata.
 
-message: String
+    - `class BetaManagedAgentsScheduleTriggerContext`
 
-Human-readable error description.
+      The run was fired by the deployment's cron schedule.
 
-type: :memory\_store\_archived\_error
+      - `scheduled_at: Time`
 
-
+        A timestamp in RFC 3339 format
 
-class BetaManagedAgentsOrganizationDisabledRunError { message, type } 
+        format: date-time
 
-The deployment's organization is disabled.
+      - `type: :schedule`
 
-message: String
+    - `class BetaManagedAgentsManualTriggerContext`
 
-Human-readable error description.
+      The run was started manually by creating a session directly against the deployment.
 
-type: :organization\_disabled\_error
+      - `type: :manual`
 
-
+  - `type: :deployment_run`
 
-class BetaManagedAgentsScheduleTriggerContext { scheduled\_at, type } 
+### Example
 
-The run was fired by the deployment's cron schedule.
+```ruby
+require "anthropic"
 
-scheduled\_at: Time
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-A timestamp in RFC 3339 format
+page = anthropic.beta.deployment_runs.list
 
-type: :schedule
+puts(page)
+```
 
-
+#### Response (200)
 
-class BetaManagedAgentsSelfHostedResourcesUnsupportedRunError { message, type } 
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "agent": {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      },
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "deployment_id": "deployment_id",
+      "error": {
+        "message": "message",
+        "type": "environment_archived_error"
+      },
+      "session_id": "session_id",
+      "trigger_context": {
+        "scheduled_at": "2019-12-27T18:11:19.117Z",
+        "type": "schedule"
+      },
+      "type": "deployment_run"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
 
-The deployment configures resources, but its environment is self-hosted and cannot mount them.
+## Get Deployment Run
 
-message: String
+`beta.deployment_runs.retrieve(deployment_run_id, **kwargs) -> BetaManagedAgentsDeploymentRun`
 
-Human-readable error description.
+**GET** `/v1/deployment_runs/{deployment_run_id}`
 
-type: :self\_hosted\_resources\_unsupported\_error
+Get Deployment Run
 
-
+### Parameters
 
-class BetaManagedAgentsSessionCreationRejectedRunError { message, type } 
+- `deployment_run_id: String`
 
-The session create request was rejected with a non-retryable validation error.
+- `betas: Array[AnthropicBeta]`
 
-message: String
+  Optional header to specify the beta version(s) you want to use.
 
-Human-readable error description.
+  - `String = String`
 
-type: :session\_creation\_rejected\_error
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
 
-
+    - `:"message-batches-2024-09-24"`
 
-class BetaManagedAgentsSessionRateLimitedRunError { message, type } 
+    - `:"prompt-caching-2024-07-31"`
 
-Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
+    - `:"computer-use-2024-10-22"`
 
-message: String
+    - `:"computer-use-2025-01-24"`
 
-Human-readable error description.
+    - `:"pdfs-2024-09-25"`
 
-type: :session\_rate\_limited\_error
+    - `:"token-counting-2024-11-01"`
 
-
+    - `:"token-efficient-tools-2025-02-19"`
 
-class BetaManagedAgentsSessionResourceNotFoundRunError { message, type } 
+    - `:"output-128k-2025-02-19"`
 
-A referenced resource no longer exists and its kind was not reported.
+    - `:"files-api-2025-04-14"`
 
-message: String
+    - `:"mcp-client-2025-04-04"`
 
-Human-readable error description.
+    - `:"mcp-client-2025-11-20"`
 
-type: :session\_resource\_not\_found\_error
+    - `:"dev-full-thinking-2025-05-14"`
 
-
+    - `:"interleaved-thinking-2025-05-14"`
 
-class BetaManagedAgentsSkillNotFoundRunError { message, type } 
+    - `:"code-execution-2025-05-22"`
 
-A skill referenced by the deployment's agent no longer exists.
+    - `:"extended-cache-ttl-2025-04-11"`
 
-message: String
+    - `:"context-1m-2025-08-07"`
 
-Human-readable error description.
+    - `:"context-management-2025-06-27"`
 
-type: :skill\_not\_found\_error
+    - `:"model-context-window-exceeded-2025-08-26"`
 
-
+    - `:"skills-2025-10-02"`
 
-BetaManagedAgentsTriggerContext = [BetaManagedAgentsScheduleTriggerContext](api/beta/deployment_runs.md) { scheduled\_at, type }  | [BetaManagedAgentsManualTriggerContext](api/beta/deployment_runs.md) { type } 
+    - `:"fast-mode-2026-02-01"`
 
-Describes what triggered a deployment run, with trigger-specific metadata.
+    - `:"output-300k-2026-03-24"`
 
-One of the following:
+    - `:"user-profiles-2026-03-24"`
 
-
+    - `:"user-profiles-2026-08-18"`
 
-class BetaManagedAgentsScheduleTriggerContext { scheduled\_at, type } 
+    - `:"advisor-tool-2026-03-01"`
 
-The run was fired by the deployment's cron schedule.
+    - `:"managed-agents-2026-04-01"`
 
-scheduled\_at: Time
+    - `:"cache-diagnosis-2026-04-07"`
 
-A timestamp in RFC 3339 format
+    - `:"dreaming-2026-04-21"`
 
-type: :schedule
+    - `:"thinking-token-count-2026-05-13"`
 
-
+    - `:"server-side-fallback-2026-06-01"`
 
-class BetaManagedAgentsManualTriggerContext { type } 
+    - `:"server-side-fallback-2026-07-01"`
 
-The run was started manually by creating a session directly against the deployment.
+    - `:"fallback-credit-2026-06-01"`
 
-type: :manual
+    - `:"fallback-credit-2026-07-01"`
 
-
+    - `:"agent-memory-2026-07-22"`
 
-BetaManagedAgentsTriggerType = :schedule | :manual
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
-What triggered a deployment run.
+    - `:"compact-2026-01-12"`
 
-One of the following:
+    - `:"computer-use-2025-11-24"`
 
-:schedule
+    - `:"mcp-tunnels-2026-06-22"`
 
-:manual
+    - `:"structured-outputs-2025-11-13"`
 
-
+    - `:"task-budgets-2026-03-13"`
 
-class BetaManagedAgentsUnknownRunError { message, type } 
+    - `:"thinking-display-updates-2026-08-18"`
 
-An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
+    - `:"ce-user-management-2026-07-13"`
 
-message: String
+    - `:"mid-conversation-output-config-2026-07-01"`
 
-Human-readable error description.
+    - `:"thinking-binding-controls-2026-08-01"`
 
-type: :unknown\_error
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
 
-
+### Returns
 
-class BetaManagedAgentsVaultArchivedRunError { message, type } 
+- `class BetaManagedAgentsDeploymentRun`
 
-A vault referenced by the deployment is archived.
+  A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
 
-message: String
+  - `id: String`
 
-Human-readable error description.
+    Unique identifier for this run (`drun_...`).
 
-type: :vault\_archived\_error
+  - `agent: BetaManagedAgentsAgentReference`
 
-
+    A resolved agent reference with a concrete version.
 
-class BetaManagedAgentsVaultNotFoundRunError { message, type } 
+    - `id: String`
 
-A vault referenced by the deployment no longer exists.
+    - `type: :agent`
 
-message: String
+    - `version: Integer`
 
-Human-readable error description.
+      format: int32
 
-type: :vault\_not\_found\_error
+  - `created_at: Time`
 
-
+    A timestamp in RFC 3339 format
 
-class BetaManagedAgentsWorkspaceArchivedRunError { message, type } 
+    format: date-time
 
-The deployment's workspace was archived.
+  - `deployment_id: String`
 
-message: String
+    ID of the deployment that produced this run.
 
-Human-readable error description.
+  - `error: BetaManagedAgentsEnvironmentArchivedRunError | BetaManagedAgentsAgentArchivedRunError | BetaManagedAgentsEnvironmentNotFoundRunError | 13 more`
 
-type: :workspace\_archived\_error
+    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+
+    - `class BetaManagedAgentsEnvironmentArchivedRunError`
+
+      The deployment's environment was archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :environment_archived_error`
+
+    - `class BetaManagedAgentsAgentArchivedRunError`
+
+      The deployment's agent was archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :agent_archived_error`
+
+    - `class BetaManagedAgentsEnvironmentNotFoundRunError`
+
+      The deployment's environment no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :environment_not_found_error`
+
+    - `class BetaManagedAgentsVaultNotFoundRunError`
+
+      A vault referenced by the deployment no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :vault_not_found_error`
+
+    - `class BetaManagedAgentsVaultArchivedRunError`
+
+      A vault referenced by the deployment is archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :vault_archived_error`
+
+    - `class BetaManagedAgentsFileNotFoundRunError`
+
+      A file resource referenced by the deployment no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :file_not_found_error`
+
+    - `class BetaManagedAgentsMemoryStoreArchivedRunError`
+
+      A memory store referenced by the deployment is archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :memory_store_archived_error`
+
+    - `class BetaManagedAgentsSkillNotFoundRunError`
+
+      A skill referenced by the deployment's agent no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :skill_not_found_error`
+
+    - `class BetaManagedAgentsSessionResourceNotFoundRunError`
+
+      A referenced resource no longer exists and its kind was not reported.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :session_resource_not_found_error`
+
+    - `class BetaManagedAgentsWorkspaceArchivedRunError`
+
+      The deployment's workspace was archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :workspace_archived_error`
+
+    - `class BetaManagedAgentsOrganizationDisabledRunError`
+
+      The deployment's organization is disabled.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :organization_disabled_error`
+
+    - `class BetaManagedAgentsSessionRateLimitedRunError`
+
+      Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :session_rate_limited_error`
+
+    - `class BetaManagedAgentsSessionCreationRejectedRunError`
+
+      The session create request was rejected with a non-retryable validation error.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :session_creation_rejected_error`
+
+    - `class BetaManagedAgentsUnknownRunError`
+
+      An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :unknown_error`
+
+    - `class BetaManagedAgentsSelfHostedResourcesUnsupportedRunError`
+
+      The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :self_hosted_resources_unsupported_error`
+
+    - `class BetaManagedAgentsMCPEgressBlockedRunError`
+
+      An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :mcp_egress_blocked_error`
+
+  - `session_id: String`
+
+    Populated on success. Null on creation failure. Exactly one of `session_id` or `error` is non-null.
+
+  - `trigger_context: BetaManagedAgentsTriggerContext`
+
+    Describes what triggered a deployment run, with trigger-specific metadata.
+
+    - `class BetaManagedAgentsScheduleTriggerContext`
+
+      The run was fired by the deployment's cron schedule.
+
+      - `scheduled_at: Time`
+
+        A timestamp in RFC 3339 format
+
+        format: date-time
+
+      - `type: :schedule`
+
+    - `class BetaManagedAgentsManualTriggerContext`
+
+      The run was started manually by creating a session directly against the deployment.
+
+      - `type: :manual`
+
+  - `type: :deployment_run`
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_managed_agents_deployment_run = anthropic.beta.deployment_runs.retrieve("deployment_run_id")
+
+puts(beta_managed_agents_deployment_run)
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "type": "agent",
+    "version": 1
+  },
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "deployment_id": "deployment_id",
+  "error": {
+    "message": "message",
+    "type": "environment_archived_error"
+  },
+  "session_id": "session_id",
+  "trigger_context": {
+    "scheduled_at": "2019-12-27T18:11:19.117Z",
+    "type": "schedule"
+  },
+  "type": "deployment_run"
+}
+```
+
+## Domain types
+
+### Beta Managed Agents Agent Archived Run Error
+
+- `class BetaManagedAgentsAgentArchivedRunError`
+
+  The deployment's agent was archived.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :agent_archived_error`
+
+### Beta Managed Agents Deployment Run
+
+- `class BetaManagedAgentsDeploymentRun`
+
+  A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
+
+  - `id: String`
+
+    Unique identifier for this run (`drun_...`).
+
+  - `agent: BetaManagedAgentsAgentReference`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: String`
+
+    - `type: :agent`
+
+    - `version: Integer`
+
+      format: int32
+
+  - `created_at: Time`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `deployment_id: String`
+
+    ID of the deployment that produced this run.
+
+  - `error: BetaManagedAgentsEnvironmentArchivedRunError | BetaManagedAgentsAgentArchivedRunError | BetaManagedAgentsEnvironmentNotFoundRunError | 13 more`
+
+    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+
+    - `class BetaManagedAgentsEnvironmentArchivedRunError`
+
+      The deployment's environment was archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :environment_archived_error`
+
+    - `class BetaManagedAgentsAgentArchivedRunError`
+
+      The deployment's agent was archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :agent_archived_error`
+
+    - `class BetaManagedAgentsEnvironmentNotFoundRunError`
+
+      The deployment's environment no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :environment_not_found_error`
+
+    - `class BetaManagedAgentsVaultNotFoundRunError`
+
+      A vault referenced by the deployment no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :vault_not_found_error`
+
+    - `class BetaManagedAgentsVaultArchivedRunError`
+
+      A vault referenced by the deployment is archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :vault_archived_error`
+
+    - `class BetaManagedAgentsFileNotFoundRunError`
+
+      A file resource referenced by the deployment no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :file_not_found_error`
+
+    - `class BetaManagedAgentsMemoryStoreArchivedRunError`
+
+      A memory store referenced by the deployment is archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :memory_store_archived_error`
+
+    - `class BetaManagedAgentsSkillNotFoundRunError`
+
+      A skill referenced by the deployment's agent no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :skill_not_found_error`
+
+    - `class BetaManagedAgentsSessionResourceNotFoundRunError`
+
+      A referenced resource no longer exists and its kind was not reported.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :session_resource_not_found_error`
+
+    - `class BetaManagedAgentsWorkspaceArchivedRunError`
+
+      The deployment's workspace was archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :workspace_archived_error`
+
+    - `class BetaManagedAgentsOrganizationDisabledRunError`
+
+      The deployment's organization is disabled.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :organization_disabled_error`
+
+    - `class BetaManagedAgentsSessionRateLimitedRunError`
+
+      Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :session_rate_limited_error`
+
+    - `class BetaManagedAgentsSessionCreationRejectedRunError`
+
+      The session create request was rejected with a non-retryable validation error.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :session_creation_rejected_error`
+
+    - `class BetaManagedAgentsUnknownRunError`
+
+      An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :unknown_error`
+
+    - `class BetaManagedAgentsSelfHostedResourcesUnsupportedRunError`
+
+      The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :self_hosted_resources_unsupported_error`
+
+    - `class BetaManagedAgentsMCPEgressBlockedRunError`
+
+      An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :mcp_egress_blocked_error`
+
+  - `session_id: String`
+
+    Populated on success. Null on creation failure. Exactly one of `session_id` or `error` is non-null.
+
+  - `trigger_context: BetaManagedAgentsTriggerContext`
+
+    Describes what triggered a deployment run, with trigger-specific metadata.
+
+    - `class BetaManagedAgentsScheduleTriggerContext`
+
+      The run was fired by the deployment's cron schedule.
+
+      - `scheduled_at: Time`
+
+        A timestamp in RFC 3339 format
+
+        format: date-time
+
+      - `type: :schedule`
+
+    - `class BetaManagedAgentsManualTriggerContext`
+
+      The run was started manually by creating a session directly against the deployment.
+
+      - `type: :manual`
+
+  - `type: :deployment_run`
+
+### Beta Managed Agents Environment Archived Run Error
+
+- `class BetaManagedAgentsEnvironmentArchivedRunError`
+
+  The deployment's environment was archived.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :environment_archived_error`
+
+### Beta Managed Agents Environment Not Found Run Error
+
+- `class BetaManagedAgentsEnvironmentNotFoundRunError`
+
+  The deployment's environment no longer exists.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :environment_not_found_error`
+
+### Beta Managed Agents File Not Found Run Error
+
+- `class BetaManagedAgentsFileNotFoundRunError`
+
+  A file resource referenced by the deployment no longer exists.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :file_not_found_error`
+
+### Beta Managed Agents Manual Trigger Context
+
+- `class BetaManagedAgentsManualTriggerContext`
+
+  The run was started manually by creating a session directly against the deployment.
+
+  - `type: :manual`
+
+### Beta Managed Agents MCP Egress Blocked Run Error
+
+- `class BetaManagedAgentsMCPEgressBlockedRunError`
+
+  An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :mcp_egress_blocked_error`
+
+### Beta Managed Agents Memory Store Archived Run Error
+
+- `class BetaManagedAgentsMemoryStoreArchivedRunError`
+
+  A memory store referenced by the deployment is archived.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :memory_store_archived_error`
+
+### Beta Managed Agents Organization Disabled Run Error
+
+- `class BetaManagedAgentsOrganizationDisabledRunError`
+
+  The deployment's organization is disabled.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :organization_disabled_error`
+
+### Beta Managed Agents Schedule Trigger Context
+
+- `class BetaManagedAgentsScheduleTriggerContext`
+
+  The run was fired by the deployment's cron schedule.
+
+  - `scheduled_at: Time`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `type: :schedule`
+
+### Beta Managed Agents Self Hosted Resources Unsupported Run Error
+
+- `class BetaManagedAgentsSelfHostedResourcesUnsupportedRunError`
+
+  The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :self_hosted_resources_unsupported_error`
+
+### Beta Managed Agents Session Creation Rejected Run Error
+
+- `class BetaManagedAgentsSessionCreationRejectedRunError`
+
+  The session create request was rejected with a non-retryable validation error.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :session_creation_rejected_error`
+
+### Beta Managed Agents Session Rate Limited Run Error
+
+- `class BetaManagedAgentsSessionRateLimitedRunError`
+
+  Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :session_rate_limited_error`
+
+### Beta Managed Agents Session Resource Not Found Run Error
+
+- `class BetaManagedAgentsSessionResourceNotFoundRunError`
+
+  A referenced resource no longer exists and its kind was not reported.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :session_resource_not_found_error`
+
+### Beta Managed Agents Skill Not Found Run Error
+
+- `class BetaManagedAgentsSkillNotFoundRunError`
+
+  A skill referenced by the deployment's agent no longer exists.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :skill_not_found_error`
+
+### Beta Managed Agents Trigger Context
+
+- `BetaManagedAgentsTriggerContext = BetaManagedAgentsScheduleTriggerContext | BetaManagedAgentsManualTriggerContext`
+
+  Describes what triggered a deployment run, with trigger-specific metadata.
+
+  - `class BetaManagedAgentsScheduleTriggerContext`
+
+    The run was fired by the deployment's cron schedule.
+
+    - `scheduled_at: Time`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `type: :schedule`
+
+  - `class BetaManagedAgentsManualTriggerContext`
+
+    The run was started manually by creating a session directly against the deployment.
+
+    - `type: :manual`
+
+### Beta Managed Agents Trigger Type
+
+- `BetaManagedAgentsTriggerType = :schedule | :manual`
+
+  What triggered a deployment run.
+
+  - `:schedule`
+
+  - `:manual`
+
+### Beta Managed Agents Unknown Run Error
+
+- `class BetaManagedAgentsUnknownRunError`
+
+  An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :unknown_error`
+
+### Beta Managed Agents Vault Archived Run Error
+
+- `class BetaManagedAgentsVaultArchivedRunError`
+
+  A vault referenced by the deployment is archived.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :vault_archived_error`
+
+### Beta Managed Agents Vault Not Found Run Error
+
+- `class BetaManagedAgentsVaultNotFoundRunError`
+
+  A vault referenced by the deployment no longer exists.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :vault_not_found_error`
+
+### Beta Managed Agents Workspace Archived Run Error
+
+- `class BetaManagedAgentsWorkspaceArchivedRunError`
+
+  The deployment's workspace was archived.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :workspace_archived_error`
 
 ---
 

@@ -1,12 +1,6 @@
 # Create Service Account Workspace Member
 
-Copy page
-
-
-
-# Create Service Account Workspace Member
-
-POST/v1/organizations/workspaces/{workspace\_id}/service\_accounts
+**POST** `/v1/organizations/workspaces/{workspace_id}/service_accounts`
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -21,91 +15,77 @@ member of the workspace, its `workspace_role` is replaced with the
 value supplied here. Archived workspaces return 400. Archived service
 accounts cannot be added and are rejected.
 
-##### Path parameters
+## Path parameters
 
-workspace\_id: string
+- `workspace_id: string`
 
-ID of the workspace.
+  ID of the workspace.
 
-##### Headers
+## Headers
 
-
+- `"anthropic-beta": optional array of string`
 
-"anthropic-beta": optional array of string
+  Optional header to specify the beta version(s) you want to use.
 
-Optional header to specify the beta version(s) you want to use.
+  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
+## Body parameters
 
-##### Body
+- `service_account_id: string`
 
-service\_account\_id: string
+  Tagged service account ID to add.
 
-Tagged service account ID to add.
+- `workspace_role: "workspace_admin" or "workspace_developer" or "workspace_restricted_developer" or "workspace_user"`
 
-
+  Role to assign to the service account in this workspace.
 
-workspace\_role: "workspace\_admin" or "workspace\_developer" or "workspace\_restricted\_developer" or "workspace\_user"
+  - `"workspace_admin"`
 
-Role to assign to the service account in this workspace.
+  - `"workspace_developer"`
 
-One of the following:
+  - `"workspace_restricted_developer"`
 
-"workspace\_admin"
+  - `"workspace_user"`
 
-"workspace\_developer"
+## Returns
 
-"workspace\_restricted\_developer"
+- `created_by_actor_id: string or null`
 
-"workspace\_user"
+  Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
 
-##### Returns
+- `implicit: boolean or null`
 
-created\_by\_actor\_id: string or null
+  True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
 
-Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
+- `service_account_id: string`
 
-implicit: boolean or null
+  Tagged service account ID (`svac_...`).
 
-True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
+- `type: "service_account_workspace_member"`
 
-service\_account\_id: string
+  default: service_account_workspace_member
 
-Tagged service account ID (`svac_...`).
+- `workspace_id: string`
 
-
+  Tagged workspace ID (`wrkspc_...`).
 
-type: "service\_account\_workspace\_member"
+- `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
 
-defaultservice\_account\_workspace\_member
+  Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
 
-workspace\_id: string
+  - `"workspace_admin"`
 
-Tagged workspace ID (`wrkspc_...`).
+  - `"workspace_billing"`
 
-
+  - `"workspace_developer"`
 
-workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
+  - `"workspace_restricted_developer"`
 
-Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
+  - `"workspace_user"`
 
-One of the following:
+## Example
 
-"workspace\_admin"
-
-"workspace\_billing"
-
-"workspace\_developer"
-
-"workspace\_restricted\_developer"
-
-"workspace\_user"
-
-Create Service Account Workspace Member
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/service_accounts \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -116,28 +96,9 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/service
         }'
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "created_by_actor_id": "created_by_actor_id",
-  "implicit": true,
-  "service_account_id": "service_account_id",
-  "type": "service_account_workspace_member",
-  "workspace_id": "workspace_id",
-  "workspace_role": "workspace_admin"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "created_by_actor_id": "created_by_actor_id",
   "implicit": true,

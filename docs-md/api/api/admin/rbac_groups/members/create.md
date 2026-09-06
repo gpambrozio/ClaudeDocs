@@ -1,70 +1,56 @@
 # Add RBAC Group Member
 
-Copy page
-
-
-
-# Add RBAC Group Member
-
-POST/v1/organizations/rbac\_groups/{group\_id}/members
+**POST** `/v1/organizations/rbac_groups/{group_id}/members`
 
 Add a User to an RBAC Group. Membership of groups provisioned by an identity provider (source type `"scim"`) cannot be modified via the API while an organization in the tenant uses SCIM provisioning.
 
 The RBAC Groups API is available to Claude Enterprise organizations only.
 
-##### Path parameters
+## Path parameters
 
-group\_id: string
+- `group_id: string`
 
-ID of the RBAC Group.
+  ID of the RBAC Group.
 
-##### Body
+## Body parameters
 
-user\_id: string
+- `user_id: string`
 
-ID of the User.
+  ID of the User.
 
-##### Returns
+## Returns
 
-
+- `RbacGroupMember object`
 
-RbacGroupMember object{ created\_at, email, group\_id, 2 more }
+  - `created_at: string`
 
-
+    RFC 3339 timestamp of when the User was added to the RBAC Group.
 
-created\_at: string
+    format: date-time
 
-RFC 3339 timestamp of when the User was added to the RBAC Group.
+  - `email: string`
 
-formatdate-time
+    Email of the User.
 
-email: string
+  - `group_id: string`
 
-Email of the User.
+    ID of the RBAC Group.
 
-group\_id: string
+  - `type: "rbac_group_member"`
 
-ID of the RBAC Group.
+    Object type.
 
-
+    For RBAC Group Members, this is always `"rbac_group_member"`.
 
-type: "rbac\_group\_member"
+    default: rbac_group_member
 
-Object type.
+  - `user_id: string`
 
-For RBAC Group Members, this is always `"rbac_group_member"`.
+    ID of the User.
 
-defaultrbac\_group\_member
+## Example
 
-user\_id: string
-
-ID of the User.
-
-Add RBAC Group Member
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -74,27 +60,9 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \
         }'
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "email": "user@emaildomain.com",
-  "group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
-  "type": "rbac_group_member",
-  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "created_at": "2024-10-30T23:58:27.427722Z",
   "email": "user@emaildomain.com",

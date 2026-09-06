@@ -1,16 +1,6 @@
 # Delete project
 
-To enable the Compliance API, see the setup guide.
-
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
-
-Copy page
-
-
-
-# Delete project
-
-DELETE/v1/compliance/apps/projects/{project\_id}
+**DELETE** `/v1/compliance/apps/projects/{project_id}`
 
 Delete a project for compliance purposes.
 
@@ -23,58 +13,39 @@ Hard-deletes the project and all its associated data including:
 
 Project must have no attached chats - returns 409 if chats exist.
 
-##### Path parameters
+## Path parameters
 
-project\_id: string
+- `project_id: string`
 
-The project ID (tagged ID, e.g., claude\_proj\_abc123)
+  The project ID (tagged ID, e.g., claude_proj_abc123)
 
-##### Headers
+## Headers
 
-"x-api-key": optional string
+- `"x-api-key": optional string`
 
-##### Returns
+## Returns
 
-id: string
+- `id: string`
 
-The ID of the Claude project that was deleted
+  The ID of the Claude project that was deleted
 
-
+- `type: optional "claude_project_deleted"`
 
-type: optional "claude\_project\_deleted"
+  Constant string confirming deletion.
 
-Constant string confirming deletion.
+  default: claude_project_deleted
 
-defaultclaude\_project\_deleted
+## Example
 
-Delete project
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
     -X DELETE \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "id",
-  "type": "claude_project_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "id",
   "type": "claude_project_deleted"

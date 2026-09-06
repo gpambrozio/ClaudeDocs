@@ -1,190 +1,208 @@
 # Update User Profile
 
-Copy page
+`BetaUserProfile Beta.UserProfiles.Update(parameters, cancellationToken = default)`
 
-
-
-C#
-
-# Update User Profile
-
-[BetaUserProfile](api/beta/user_profiles.md) Beta.UserProfiles.Update(UserProfileUpdateParamsparameters, CancellationTokencancellationToken = default)
-
-POST/v1/user\_profiles/{user\_profile\_id}
+**POST** `/v1/user_profiles/{user_profile_id}`
 
 Update User Profile
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `UserProfileUpdateParams parameters`
 
-UserProfileUpdateParams parameters
+  - `required string userProfileID`
 
-required string userProfileID
+    Path param: Path parameter user_profile_id
 
-Path param: Path parameter user\_profile\_id
+  - `AccessType? accessType`
 
-string? externalID
+    Body param: How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
-Body param: If present, replaces the stored external\_id. Omit to leave unchanged. Maximum 255 characters.
+    - `Application("application")`
 
-IReadOnlyDictionary<string, string> metadata
+    - `Passthrough("passthrough")`
 
-Body param: Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
+  - `string? externalID`
 
-string? name
+    Body param: If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters.
 
-Body param: If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
+    minLength: 1, maxLength: 255
 
-
+  - `DateTimeOffset externalUserOnboardedAt`
 
-[Relationship](api/beta/user_profiles/update.md)? relationship
+    Body param: A timestamp in RFC 3339 format
 
-Body param: How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+    format: date-time
 
-"external"External
+  - `IReadOnlyDictionary<string, string> metadata`
 
-"resold"Resold
+    Body param: Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
 
-"internal"Internal
+  - `string? name`
 
-
+    Body param: If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
 
-IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
+    minLength: 1, maxLength: 255
 
-Header param: Optional header to specify the beta version(s) you want to use.
+  - `IReadOnlyList<AnthropicBeta> betas`
 
-"message-batches-2024-09-24"MessageBatches2024\_09\_24
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-"prompt-caching-2024-07-31"PromptCaching2024\_07\_31
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
-"computer-use-2024-10-22"ComputerUse2024\_10\_22
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
 
-"computer-use-2025-01-24"ComputerUse2025\_01\_24
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
 
-"pdfs-2024-09-25"Pdfs2024\_09\_25
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
 
-"token-counting-2024-11-01"TokenCounting2024\_11\_01
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
 
-"token-efficient-tools-2025-02-19"TokenEfficientTools2025\_02\_19
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
 
-"output-128k-2025-02-19"Output128k2025\_02\_19
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
 
-"files-api-2025-04-14"FilesApi2025\_04\_14
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
 
-"mcp-client-2025-04-04"McpClient2025\_04\_04
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
 
-"mcp-client-2025-11-20"McpClient2025\_11\_20
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
 
-"dev-full-thinking-2025-05-14"DevFullThinking2025\_05\_14
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
 
-"interleaved-thinking-2025-05-14"InterleavedThinking2025\_05\_14
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
 
-"code-execution-2025-05-22"CodeExecution2025\_05\_22
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
 
-"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025\_04\_11
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
 
-"context-1m-2025-08-07"Context1m2025\_08\_07
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
 
-"context-management-2025-06-27"ContextManagement2025\_06\_27
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
 
-"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025\_08\_26
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
 
-"skills-2025-10-02"Skills2025\_10\_02
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-"fast-mode-2026-02-01"FastMode2026\_02\_01
+    - `Skills2025_10_02("skills-2025-10-02")`
 
-"output-300k-2026-03-24"Output300k2026\_03\_24
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
 
-"user-profiles-2026-03-24"UserProfiles2026\_03\_24
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
 
-"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
 
-"managed-agents-2026-04-01"ManagedAgents2026\_04\_01
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
-"cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
-"thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
 
-"server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
 
-"fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
 
-"agent-memory-2026-07-22"AgentMemory2026\_07\_22
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
 
-##### ReturnsExpand Collapse
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
 
-
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
 
-class BetaUserProfile:
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
 
-required string ID
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
 
-Unique identifier for this user profile, prefixed `uprof_`.
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
 
-required DateTimeOffset CreatedAt
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-A timestamp in RFC 3339 format
+    - `Compact2026_01_12("compact-2026-01-12")`
 
-required IReadOnlyDictionary<string, string> Metadata
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
 
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
 
-
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
 
-required Relationship Relationship
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
 
-How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
 
-One of the following:
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
 
-"external"External
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-"resold"Resold
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
 
-"internal"Internal
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-
+## Returns
 
-required IReadOnlyDictionary<string, [BetaUserProfileTrustGrant](api/beta/user_profiles.md)> TrustGrants
+- `class BetaUserProfile:`
 
-Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+  - `required string ID`
 
-
+    Unique identifier for this user profile, prefixed `uprof_`.
 
-required Status Status
+  - `required DateTimeOffset CreatedAt`
 
-Status of the trust grant.
+    A timestamp in RFC 3339 format
 
-One of the following:
+    format: date-time
 
-"active"Active
+  - `required IReadOnlyDictionary<string, string> Metadata`
 
-"pending"Pending
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-"rejected"Rejected
+  - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
 
-required Type Type
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-Object type. Always `user_profile`.
+    - `required Status Status`
 
-required DateTimeOffset UpdatedAt
+      Status of the trust grant.
 
-A timestamp in RFC 3339 format
+      - `Active("active")`
 
-string? ExternalID
+      - `Pending("pending")`
 
-Platform's own identifier for this user. Not enforced unique.
+      - `Rejected("rejected")`
 
-string? Name
+  - `required Type Type`
 
-Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    Object type. Always `user_profile`.
 
-Update User Profile
+  - `required DateTimeOffset UpdatedAt`
 
-C#
+    A timestamp in RFC 3339 format
 
-```shiki
+    format: date-time
+
+  - `AccessType AccessType`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `Application("application")`
+
+    - `Passthrough("passthrough")`
+
+  - `string? ExternalID`
+
+    Platform's own identifier for this user. Not enforced unique.
+
+  - `DateTimeOffset? ExternalUserOnboardedAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `string? Name`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
+
+## Example
+
+```csharp
 UserProfileUpdateParams parameters = new()
 {
     UserProfileID = "uprof_011CZkZCu8hGbp5mYRQgUmz9"
@@ -195,16 +213,13 @@ var betaUserProfile = await client.Beta.UserProfiles.Update(parameters);
 Console.WriteLine(betaUserProfile);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
-  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -212,31 +227,9 @@ Response 200
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
+  "access_type": "application",
   "external_id": "user_12345",
-  "name": "Example User"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
-  "created_at": "2026-03-15T10:00:00Z",
-  "metadata": {},
-  "relationship": "external",
-  "trust_grants": {
-    "cyber": {
-      "status": "active"
-    }
-  },
-  "type": "user_profile",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "external_id": "user_12345",
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
   "name": "Example User"
 }
 ```

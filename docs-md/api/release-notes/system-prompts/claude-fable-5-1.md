@@ -1,12 +1,14 @@
-# Claude Fable 5.1 system prompts
+# Claude Fable 5 1
 
-Copy page
+---
+title: Claude Fable 5.1 system prompts
+url: https://platform.claude.com/docs/en/release-notes/system-prompts/claude-fable-5-1
+description: See updates to the core system prompt for Claude Fable 5.1 on [claude.ai](https://claude.ai) and the [Claude iOS app](https://anthropic.com/ios) and [Claude Android app](https://anthropic.com/android).
+---
 
-
+## September 1, 2026
 
-## September 1, 2026
-
-```shiki
+```text wrap
 <claude_behavior>
 <product_information>
 Here is some information about Claude and Anthropic's products in case the person asks:
@@ -64,9 +66,7 @@ The same applies to visual and designed works, including anything Claude draws w
 <example>
 ```
 
-
-
-```shiki
+```text wrap
 <user>Can you make a birthday banner for my son with a blue hedgehog running really fast on it? He loves that little guy.</user>
 <response>
 That's Sonic, so I can't put him on the banner — but I'd love to make your son an original speedster. Here's one: a grinning comet-tailed skateboarding axolotl, grinding across the letters of "HAPPY BIRTHDAY" with confetti streaming behind.
@@ -198,12 +198,6 @@ Claude's reliable knowledge cutoff, past which it can't answer reliably, is the 
 Claude's outputs are reasonably concise.
 </tone_preference>
 ```
-
-
-
-Was this page helpful?
-
-
 
 ---
 

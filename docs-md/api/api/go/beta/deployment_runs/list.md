@@ -1,467 +1,409 @@
 # List Deployment Runs
 
-Copy page
+`client.Beta.DeploymentRuns.List(ctx, params) (*PageCursor[BetaManagedAgentsDeploymentRun], error)`
 
-
-
-Go
-
-# List Deployment Runs
-
-client.Beta.DeploymentRuns.List(ctx, params) (\*PageCursor[[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)], error)
-
-GET/v1/deployment\_runs
+**GET** `/v1/deployment_runs`
 
 List Deployment Runs
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `params BetaDeploymentRunListParams`
 
-params BetaDeploymentRunListParams
+  - `CreatedAtGt param.Field[Time] Optional`
 
-CreatedAtGt param.Field[[Time](api/beta/deployment_runs/list.md)]Optional
+    Query param: Return runs created strictly after this time (exclusive).
 
-Query param: Return runs created strictly after this time (exclusive).
+    format: date-time
 
-CreatedAtGte param.Field[[Time](api/beta/deployment_runs/list.md)]Optional
+  - `CreatedAtGte param.Field[Time] Optional`
 
-Query param: Return runs created at or after this time (inclusive).
+    Query param: Return runs created at or after this time (inclusive).
 
-CreatedAtLt param.Field[[Time](api/beta/deployment_runs/list.md)]Optional
+    format: date-time
 
-Query param: Return runs created strictly before this time (exclusive).
+  - `CreatedAtLt param.Field[Time] Optional`
 
-CreatedAtLte param.Field[[Time](api/beta/deployment_runs/list.md)]Optional
+    Query param: Return runs created strictly before this time (exclusive).
 
-Query param: Return runs created at or before this time (inclusive).
+    format: date-time
 
-DeploymentID param.Field[string]Optional
+  - `CreatedAtLte param.Field[Time] Optional`
 
-Query param: Filter to a specific deployment. Omit to list across all deployments in the workspace. Filtering by a non-existent deployment\_id returns 200 with empty data.
+    Query param: Return runs created at or before this time (inclusive).
 
-HasError param.Field[bool]Optional
+    format: date-time
 
-Query param: Filter: true for runs with non-null error, false for runs with non-null session\_id. Omit for all.
+  - `DeploymentID param.Field[string] Optional`
 
-Limit param.Field[int64]Optional
+    Query param: Filter to a specific deployment. Omit to list across all deployments in the workspace. Filtering by a non-existent `deployment_id` returns 200 with empty data.
 
-Query param: Maximum results per page. Default 20, maximum 1000.
+  - `HasError param.Field[bool] Optional`
 
-Page param.Field[string]Optional
+    Query param: Filter: true for runs with non-null `error`, false for runs with non-null `session_id`. Omit for all.
 
-Query param: Opaque pagination cursor. Pass next\_page from the previous response. Invalid or expired cursors return 400.
+  - `Limit param.Field[int64] Optional`
 
-TriggerType param.Field[[BetaManagedAgentsTriggerType](api/beta/deployment_runs.md)]Optional
+    Query param: Maximum results per page. Default 20, maximum 1000.
 
-Query param: Filter runs by what triggered them. Omit to return all runs.
+    format: int32
 
-
+  - `Page param.Field[string] Optional`
 
-Betas param.Field[[]AnthropicBeta]Optional
+    Query param: Opaque pagination cursor. Pass `next_page` from the previous response. Invalid or expired cursors return 400.
 
-Header param: Optional header to specify the beta version(s) you want to use.
+  - `TriggerType param.Field[BetaManagedAgentsTriggerType] Optional`
 
-string
+    Query param: Filter runs by what triggered them. Omit to return all runs.
 
-
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
-type AnthropicBeta string
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-One of the following:
+    - `string`
 
-const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
+    - `type AnthropicBeta string`
 
-const AnthropicBetaPromptCaching2024\_07\_31 AnthropicBeta = "prompt-caching-2024-07-31"
+      - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
 
-const AnthropicBetaComputerUse2024\_10\_22 AnthropicBeta = "computer-use-2024-10-22"
+      - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
 
-const AnthropicBetaComputerUse2025\_01\_24 AnthropicBeta = "computer-use-2025-01-24"
+      - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
 
-const AnthropicBetaPDFs2024\_09\_25 AnthropicBeta = "pdfs-2024-09-25"
+      - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
 
-const AnthropicBetaTokenCounting2024\_11\_01 AnthropicBeta = "token-counting-2024-11-01"
+      - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
 
-const AnthropicBetaTokenEfficientTools2025\_02\_19 AnthropicBeta = "token-efficient-tools-2025-02-19"
+      - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
 
-const AnthropicBetaOutput128k2025\_02\_19 AnthropicBeta = "output-128k-2025-02-19"
+      - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
 
-const AnthropicBetaFilesAPI2025\_04\_14 AnthropicBeta = "files-api-2025-04-14"
+      - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
 
-const AnthropicBetaMCPClient2025\_04\_04 AnthropicBeta = "mcp-client-2025-04-04"
+      - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
 
-const AnthropicBetaMCPClient2025\_11\_20 AnthropicBeta = "mcp-client-2025-11-20"
+      - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
 
-const AnthropicBetaDevFullThinking2025\_05\_14 AnthropicBeta = "dev-full-thinking-2025-05-14"
+      - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
 
-const AnthropicBetaInterleavedThinking2025\_05\_14 AnthropicBeta = "interleaved-thinking-2025-05-14"
+      - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
 
-const AnthropicBetaCodeExecution2025\_05\_22 AnthropicBeta = "code-execution-2025-05-22"
+      - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
 
-const AnthropicBetaExtendedCacheTTL2025\_04\_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"
+      - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
 
-const AnthropicBetaContext1m2025\_08\_07 AnthropicBeta = "context-1m-2025-08-07"
+      - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
 
-const AnthropicBetaContextManagement2025\_06\_27 AnthropicBeta = "context-management-2025-06-27"
+      - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
 
-const AnthropicBetaModelContextWindowExceeded2025\_08\_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"
+      - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
 
-const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
+      - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
 
-const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
+      - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
 
-const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
+      - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
-const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
-const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
-const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
-const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2026-04-07"
+      - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
-const AnthropicBetaThinkingTokenCount2026\_05\_13 AnthropicBeta = "thinking-token-count-2026-05-13"
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
-const AnthropicBetaServerSideFallback2026\_06\_01 AnthropicBeta = "server-side-fallback-2026-06-01"
+      - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
-const AnthropicBetaFallbackCredit2026\_06\_01 AnthropicBeta = "fallback-credit-2026-06-01"
+      - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
 
-const AnthropicBetaAgentMemory2026\_07\_22 AnthropicBeta = "agent-memory-2026-07-22"
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
-##### ReturnsExpand Collapse
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
 
-
+      - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
 
-type BetaManagedAgentsDeploymentRun struct{…}
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
 
-A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
+      - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
-ID string
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
-Unique identifier for this run (`drun_...`).
+      - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-
+      - `const AnthropicBetaCompact2026_01_12 AnthropicBeta = "compact-2026-01-12"`
 
-Agent [BetaManagedAgentsAgentReference](api/beta/agents.md)
+      - `const AnthropicBetaComputerUse2025_11_24 AnthropicBeta = "computer-use-2025-11-24"`
 
-A resolved agent reference with a concrete version.
+      - `const AnthropicBetaMCPTunnels2026_06_22 AnthropicBeta = "mcp-tunnels-2026-06-22"`
 
-ID string
+      - `const AnthropicBetaStructuredOutputs2025_11_13 AnthropicBeta = "structured-outputs-2025-11-13"`
 
-Type BetaManagedAgentsAgentReferenceType
+      - `const AnthropicBetaTaskBudgets2026_03_13 AnthropicBeta = "task-budgets-2026-03-13"`
 
-Version int64
+      - `const AnthropicBetaThinkingDisplayUpdates2026_08_18 AnthropicBeta = "thinking-display-updates-2026-08-18"`
 
-CreatedAt Time
+      - `const AnthropicBetaCEUserManagement2026_07_13 AnthropicBeta = "ce-user-management-2026-07-13"`
 
-A timestamp in RFC 3339 format
+      - `const AnthropicBetaMidConversationOutputConfig2026_07_01 AnthropicBeta = "mid-conversation-output-config-2026-07-01"`
 
-DeploymentID string
+      - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
 
-ID of the deployment that produced this run.
+      - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
-
+## Returns
 
-Error BetaManagedAgentsDeploymentRunErrorUnion
+- `type BetaManagedAgentsDeploymentRun struct{…}`
 
-Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+  A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
 
-One of the following:
+  - `ID string`
 
-
+    Unique identifier for this run (`drun_...`).
 
-type BetaManagedAgentsEnvironmentArchivedRunError struct{…}
+  - `Agent BetaManagedAgentsAgentReference`
 
-The deployment's environment was archived.
+    A resolved agent reference with a concrete version.
 
-Message string
+    - `ID string`
 
-Human-readable error description.
+    - `Type BetaManagedAgentsAgentReferenceType`
 
-Type BetaManagedAgentsEnvironmentArchivedRunErrorType
+    - `Version int64`
 
-
+      format: int32
 
-type BetaManagedAgentsAgentArchivedRunError struct{…}
+  - `CreatedAt Time`
 
-The deployment's agent was archived.
+    A timestamp in RFC 3339 format
 
-Message string
+    format: date-time
 
-Human-readable error description.
+  - `DeploymentID string`
 
-Type BetaManagedAgentsAgentArchivedRunErrorType
+    ID of the deployment that produced this run.
 
-
+  - `Error BetaManagedAgentsDeploymentRunErrorUnion`
 
-type BetaManagedAgentsEnvironmentNotFoundRunError struct{…}
+    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
-The deployment's environment no longer exists.
+    - `type BetaManagedAgentsEnvironmentArchivedRunError struct{…}`
 
-Message string
+      The deployment's environment was archived.
 
-Human-readable error description.
+      - `Message string`
 
-Type BetaManagedAgentsEnvironmentNotFoundRunErrorType
+        Human-readable error description.
 
-
+      - `Type BetaManagedAgentsEnvironmentArchivedRunErrorType`
 
-type BetaManagedAgentsVaultNotFoundRunError struct{…}
+    - `type BetaManagedAgentsAgentArchivedRunError struct{…}`
 
-A vault referenced by the deployment no longer exists.
+      The deployment's agent was archived.
 
-Message string
+      - `Message string`
 
-Human-readable error description.
+        Human-readable error description.
 
-Type BetaManagedAgentsVaultNotFoundRunErrorType
+      - `Type BetaManagedAgentsAgentArchivedRunErrorType`
 
-
+    - `type BetaManagedAgentsEnvironmentNotFoundRunError struct{…}`
 
-type BetaManagedAgentsVaultArchivedRunError struct{…}
+      The deployment's environment no longer exists.
 
-A vault referenced by the deployment is archived.
+      - `Message string`
 
-Message string
+        Human-readable error description.
 
-Human-readable error description.
+      - `Type BetaManagedAgentsEnvironmentNotFoundRunErrorType`
 
-Type BetaManagedAgentsVaultArchivedRunErrorType
+    - `type BetaManagedAgentsVaultNotFoundRunError struct{…}`
 
-
+      A vault referenced by the deployment no longer exists.
 
-type BetaManagedAgentsFileNotFoundRunError struct{…}
+      - `Message string`
 
-A file resource referenced by the deployment no longer exists.
+        Human-readable error description.
 
-Message string
+      - `Type BetaManagedAgentsVaultNotFoundRunErrorType`
 
-Human-readable error description.
+    - `type BetaManagedAgentsVaultArchivedRunError struct{…}`
 
-Type BetaManagedAgentsFileNotFoundRunErrorType
+      A vault referenced by the deployment is archived.
 
-
+      - `Message string`
 
-type BetaManagedAgentsMemoryStoreArchivedRunError struct{…}
+        Human-readable error description.
 
-A memory store referenced by the deployment is archived.
+      - `Type BetaManagedAgentsVaultArchivedRunErrorType`
 
-Message string
+    - `type BetaManagedAgentsFileNotFoundRunError struct{…}`
 
-Human-readable error description.
+      A file resource referenced by the deployment no longer exists.
 
-Type BetaManagedAgentsMemoryStoreArchivedRunErrorType
+      - `Message string`
 
-
+        Human-readable error description.
 
-type BetaManagedAgentsSkillNotFoundRunError struct{…}
+      - `Type BetaManagedAgentsFileNotFoundRunErrorType`
 
-A skill referenced by the deployment's agent no longer exists.
+    - `type BetaManagedAgentsMemoryStoreArchivedRunError struct{…}`
 
-Message string
+      A memory store referenced by the deployment is archived.
 
-Human-readable error description.
+      - `Message string`
 
-Type BetaManagedAgentsSkillNotFoundRunErrorType
+        Human-readable error description.
 
-
+      - `Type BetaManagedAgentsMemoryStoreArchivedRunErrorType`
 
-type BetaManagedAgentsSessionResourceNotFoundRunError struct{…}
+    - `type BetaManagedAgentsSkillNotFoundRunError struct{…}`
 
-A referenced resource no longer exists and its kind was not reported.
+      A skill referenced by the deployment's agent no longer exists.
 
-Message string
+      - `Message string`
 
-Human-readable error description.
+        Human-readable error description.
 
-Type BetaManagedAgentsSessionResourceNotFoundRunErrorType
+      - `Type BetaManagedAgentsSkillNotFoundRunErrorType`
 
-
+    - `type BetaManagedAgentsSessionResourceNotFoundRunError struct{…}`
 
-type BetaManagedAgentsWorkspaceArchivedRunError struct{…}
+      A referenced resource no longer exists and its kind was not reported.
 
-The deployment's workspace was archived.
+      - `Message string`
 
-Message string
+        Human-readable error description.
 
-Human-readable error description.
+      - `Type BetaManagedAgentsSessionResourceNotFoundRunErrorType`
 
-Type BetaManagedAgentsWorkspaceArchivedRunErrorType
+    - `type BetaManagedAgentsWorkspaceArchivedRunError struct{…}`
 
-
+      The deployment's workspace was archived.
 
-type BetaManagedAgentsOrganizationDisabledRunError struct{…}
+      - `Message string`
 
-The deployment's organization is disabled.
+        Human-readable error description.
 
-Message string
+      - `Type BetaManagedAgentsWorkspaceArchivedRunErrorType`
 
-Human-readable error description.
+    - `type BetaManagedAgentsOrganizationDisabledRunError struct{…}`
 
-Type BetaManagedAgentsOrganizationDisabledRunErrorType
+      The deployment's organization is disabled.
 
-
+      - `Message string`
 
-type BetaManagedAgentsSessionRateLimitedRunError struct{…}
+        Human-readable error description.
 
-Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
+      - `Type BetaManagedAgentsOrganizationDisabledRunErrorType`
 
-Message string
+    - `type BetaManagedAgentsSessionRateLimitedRunError struct{…}`
 
-Human-readable error description.
+      Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
-Type BetaManagedAgentsSessionRateLimitedRunErrorType
+      - `Message string`
 
-
+        Human-readable error description.
 
-type BetaManagedAgentsSessionCreationRejectedRunError struct{…}
+      - `Type BetaManagedAgentsSessionRateLimitedRunErrorType`
 
-The session create request was rejected with a non-retryable validation error.
+    - `type BetaManagedAgentsSessionCreationRejectedRunError struct{…}`
 
-Message string
+      The session create request was rejected with a non-retryable validation error.
 
-Human-readable error description.
+      - `Message string`
 
-Type BetaManagedAgentsSessionCreationRejectedRunErrorType
+        Human-readable error description.
 
-
+      - `Type BetaManagedAgentsSessionCreationRejectedRunErrorType`
 
-type BetaManagedAgentsUnknownRunError struct{…}
+    - `type BetaManagedAgentsUnknownRunError struct{…}`
 
-An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
+      An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
-Message string
+      - `Message string`
 
-Human-readable error description.
+        Human-readable error description.
 
-Type BetaManagedAgentsUnknownRunErrorType
+      - `Type BetaManagedAgentsUnknownRunErrorType`
 
-
+    - `type BetaManagedAgentsSelfHostedResourcesUnsupportedRunError struct{…}`
 
-type BetaManagedAgentsSelfHostedResourcesUnsupportedRunError struct{…}
+      The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-The deployment configures resources, but its environment is self-hosted and cannot mount them.
+      - `Message string`
 
-Message string
+        Human-readable error description.
 
-Human-readable error description.
+      - `Type BetaManagedAgentsSelfHostedResourcesUnsupportedRunErrorType`
 
-Type BetaManagedAgentsSelfHostedResourcesUnsupportedRunErrorType
+    - `type BetaManagedAgentsMCPEgressBlockedRunError struct{…}`
 
-
+      An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-type BetaManagedAgentsMCPEgressBlockedRunError struct{…}
+      - `Message string`
 
-An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+        Human-readable error description.
 
-Message string
+      - `Type BetaManagedAgentsMCPEgressBlockedRunErrorType`
 
-Human-readable error description.
+  - `SessionID string`
 
-Type BetaManagedAgentsMCPEgressBlockedRunErrorType
+    Populated on success. Null on creation failure. Exactly one of `session_id` or `error` is non-null.
 
-SessionID string
+  - `TriggerContext BetaManagedAgentsTriggerContextUnion`
 
-Populated on success. Null on creation failure. Exactly one of session\_id or error is non-null.
+    Describes what triggered a deployment run, with trigger-specific metadata.
 
-
+    - `type BetaManagedAgentsScheduleTriggerContext struct{…}`
 
-TriggerContext [BetaManagedAgentsTriggerContextUnion](api/beta/deployment_runs.md)
+      The run was fired by the deployment's cron schedule.
 
-Describes what triggered a deployment run, with trigger-specific metadata.
+      - `ScheduledAt Time`
 
-One of the following:
+        A timestamp in RFC 3339 format
 
-
+        format: date-time
 
-type BetaManagedAgentsScheduleTriggerContext struct{…}
+      - `Type BetaManagedAgentsScheduleTriggerContextType`
 
-The run was fired by the deployment's cron schedule.
+    - `type BetaManagedAgentsManualTriggerContext struct{…}`
 
-ScheduledAt Time
+      The run was started manually by creating a session directly against the deployment.
 
-A timestamp in RFC 3339 format
+      - `Type BetaManagedAgentsManualTriggerContextType`
 
-Type BetaManagedAgentsScheduleTriggerContextType
+  - `Type BetaManagedAgentsDeploymentRunType`
 
-
+## Example
 
-type BetaManagedAgentsManualTriggerContext struct{…}
-
-The run was started manually by creating a session directly against the deployment.
-
-Type BetaManagedAgentsManualTriggerContextType
-
-Type BetaManagedAgentsDeploymentRunType
-
-List Deployment Runs
-
-Go
-
-```shiki
+```go
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  page, err := client.Beta.DeploymentRuns.List(context.TODO(), anthropic.BetaDeploymentRunListParams{
-
-  })
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", page)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	page, err := client.Beta.DeploymentRuns.List(context.TODO(), anthropic.BetaDeploymentRunListParams{})
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", page)
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "agent": {
-        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-        "type": "agent",
-        "version": 1
-      },
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "deployment_id": "deployment_id",
-      "error": {
-        "message": "message",
-        "type": "environment_archived_error"
-      },
-      "session_id": "session_id",
-      "trigger_context": {
-        "scheduled_at": "2019-12-27T18:11:19.117Z",
-        "type": "schedule"
-      },
-      "type": "deployment_run"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

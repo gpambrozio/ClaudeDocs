@@ -1,16 +1,18 @@
 # API usage primer for Claude
 
-Copy page
+---
+title: API usage primer for Claude
+url: https://platform.claude.com/docs/en/claude_api_primer
+description: This guide is designed to give Claude the basics of using the Claude API. It gives explanation and examples of model IDs/the basic messages API, tool use, streaming, thinking, and nothing else.
+---
 
-
-
-# API usage primer for Claude
+# API usage primer for Claude
 
 > This guide is designed to give Claude the basics of using the Claude API. It gives explanation and examples of model IDs/the basic messages API, tool use, streaming, thinking, and nothing else.
 
-## Models
+## Models
 
-```shiki
+```text wrap
 Recommended default for most work, including complex agentic coding: Claude Opus 5: claude-opus-5
 Step up for the hardest long-running agentic and research tasks, at 2x Claude Opus 5 pricing: Claude Fable 5.1: claude-fable-5-1
 Previous Opus model: Claude Opus 4.8: claude-opus-4-8
@@ -18,17 +20,18 @@ Smart model: Claude Sonnet 5: claude-sonnet-5
 For fast, cost-effective tasks: Claude Haiku 4.5: claude-haiku-4-5-20251001
 ```
 
-
+## Calling the API
 
-## Calling the API
+### Basic request and response
 
-### Basic request and response
+```bash CLI
+ant messages create \
+  --model claude-opus-5 \
+  --max-tokens 1024 \
+  --message '{"role": "user", "content": "Hello, Claude"}'
+```
 
-CLIPython
-
-
-
-```shiki
+```python Python
 import anthropic
 
 message = anthropic.Anthropic().messages.create(
@@ -39,11 +42,7 @@ message = anthropic.Anthropic().messages.create(
 print(message)
 ```
 
-Output
-
-
-
-```shiki
+```json Output
 {
   "id": "msg_01XFDUDYJgAACzvnptvVoYEL",
   "type": "message",
@@ -64,15 +63,25 @@ Output
 }
 ```
 
-### Multiple conversational turns
+### Multiple conversational turns
 
 The Messages API is stateless, which means that you always send the full conversational history to the API. You can use this pattern to build up a conversation over time. Earlier conversational turns don't necessarily need to actually originate from Claude. You can use synthetic `assistant` messages.
 
-CLIPython
+```bash CLI
+ant messages create <<'YAML'
+model: claude-opus-5
+max_tokens: 1024
+messages:
+  - role: user
+    content: Hello, Claude
+  - role: assistant
+    content: Hello!
+  - role: user
+    content: Can you describe LLMs to me?
+YAML
+```
 
-
-
-```shiki
+```python Python
 import anthropic
 
 message = anthropic.Anthropic().messages.create(
@@ -87,15 +96,25 @@ message = anthropic.Anthropic().messages.create(
 print(message)
 ```
 
-### Prefilling Claude's response
+### Prefilling Claude's response
 
 You can prefill part of Claude's response in the last position of the input messages list. Use this technique to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
-CLIPython
+Claude 4.6 and later models and Claude Mythos Preview do not support assistant message prefill; requests to those models must end with a user message. The examples below use a model that supports prefill.
 
-
+```bash CLI
+ant messages create <<'YAML'
+model: claude-sonnet-4-5
+max_tokens: 1
+messages:
+  - role: user
+    content: "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae"
+  - role: assistant
+    content: "The answer is ("
+YAML
+```
 
-```shiki
+```python Python
 import anthropic
 
 message = anthropic.Anthropic().messages.create(
@@ -112,15 +131,48 @@ message = anthropic.Anthropic().messages.create(
 print(message.content[0].text)
 ```
 
-### Vision
+### Vision
 
 Claude can read both text and images in requests. Both `base64` and `url` source types are supported for images, along with the `image/jpeg`, `image/png`, `image/gif`, and `image/webp` media types.
 
-CLIPython
+```bash CLI
+IMAGE_URL="https://platform.claude.com/docs/images/vision-example.jpg"
 
-
+# Option 1: Base64-encoded image (@ prefix auto-encodes binary files as base64)
+curl -sSo vision-example.jpg "$IMAGE_URL"
 
-```shiki
+ant messages create <<'YAML'
+model: claude-opus-5
+max_tokens: 1024
+messages:
+  - role: user
+    content:
+      - type: image
+        source:
+          type: base64
+          media_type: image/jpeg
+          data: "@./vision-example.jpg"
+      - type: text
+        text: What is in the above image?
+YAML
+
+# Option 2: URL-referenced image
+ant messages create <<YAML
+model: claude-opus-5
+max_tokens: 1024
+messages:
+  - role: user
+    content:
+      - type: image
+        source:
+          type: url
+          url: $IMAGE_URL
+      - type: text
+        text: What is in the above image?
+YAML
+```
+
+```python Python
 import anthropic
 import base64
 import httpx2
@@ -175,7 +227,7 @@ message_from_url = anthropic.Anthropic().messages.create(
 print(next(block.text for block in message_from_url.content if block.type == "text"))
 ```
 
-## Thinking
+## Thinking
 
 Thinking can sometimes help Claude with very hard tasks. The current mechanism is [adaptive thinking](build-with-claude/thinking.md) (`thinking: {"type": "adaptive"}`): Claude decides when and how much to think, and you steer thinking depth with the [`effort`](build-with-claude/effort.md) parameter rather than a token budget. Adaptive thinking is supported on Claude 4.6 and later models and Claude Mythos Preview. On Claude 5 models and Claude Mythos Preview, thinking is on by default when the `thinking` parameter is omitted.
 
@@ -183,25 +235,36 @@ Temperature must be set to 1 (or left unset) whenever thinking is enabled, on al
 
 Thinking is supported in the following models:
 
-- Claude Opus 5 (claude-opus-5, adaptive thinking only, on by default)
-- Claude Sonnet 5 (`claude-sonnet-5`, adaptive thinking only, on by default)
-- Claude Opus 4.8 (claude-opus-4-8, adaptive thinking only)
-- Claude Opus 4.7 (`claude-opus-4-7`, adaptive thinking only)
-- Claude Opus 4.6 (`claude-opus-4-6`, adaptive or legacy manual thinking)
-- Claude Sonnet 4.6 (`claude-sonnet-4-6`, adaptive or legacy manual thinking)
-- Claude Opus 4.5 (`claude-opus-4-5-20251101`, legacy manual thinking only)
-- Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`, legacy manual thinking only)
-- Claude Haiku 4.5 (`claude-haiku-4-5-20251001`, legacy manual thinking only)
+* Claude Opus 5 (claude-opus-5, adaptive thinking only, on by default)
+* Claude Sonnet 5 (`claude-sonnet-5`, adaptive thinking only, on by default)
+* Claude Opus 4.8 (claude-opus-4-8, adaptive thinking only)
+* Claude Opus 4.7 (`claude-opus-4-7`, adaptive thinking only)
+* Claude Opus 4.6 (`claude-opus-4-6`, adaptive or legacy manual thinking)
+* Claude Sonnet 4.6 (`claude-sonnet-4-6`, adaptive or legacy manual thinking)
+* Claude Opus 4.5 (`claude-opus-4-5-20251101`, legacy manual thinking only)
+* Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`, legacy manual thinking only)
+* Claude Haiku 4.5 (`claude-haiku-4-5-20251001`, legacy manual thinking only)
 
-### How thinking works
+On Claude 4.7 and later models, manual extended thinking (`type: enabled` with a `budget_tokens` value) is not supported and returns a 400 error. Use [adaptive thinking](build-with-claude/thinking.md) (`type: adaptive`) instead.
+
+### How thinking works
 
 When thinking is on, Claude creates `thinking` content blocks where it outputs its internal reasoning. The API response includes `thinking` content blocks, followed by `text` content blocks.
 
-CLIPython
+```bash CLI
+ant messages create --transform content --format yaml <<'YAML'
+model: claude-opus-5
+max_tokens: 16000
+thinking:
+  type: adaptive
+  display: summarized
+messages:
+  - role: user
+    content: Are there an infinite number of prime numbers such that n mod 4 == 3?
+YAML
+```
 
-
-
-```shiki
+```python Python
 import anthropic
 
 client = anthropic.Anthropic()
@@ -226,9 +289,9 @@ for block in response.content:
         print(f"\nResponse: {block.text}")
 ```
 
-Manual extended thinking (`thinking: {"type": "enabled", "budget_tokens": N}`) is the legacy mechanism. It works only on Claude 4 through 4.6 models that support thinking; Claude 4.7 and later models reject `type: enabled` with a 400 error and use [adaptive thinking](build-with-claude/thinking.md) instead. With manual extended thinking, `budget_tokens` sets the maximum number of tokens Claude is allowed to use for its internal reasoning process; the limit applies to full thinking tokens, not to the summarized output. Unless you are using [interleaved thinking](#interleaved-thinking), `budget_tokens` must be less than `max_tokens` so that Claude has space to write its response after thinking is complete.
+Manual extended thinking (`thinking: {"type": "enabled", "budget_tokens": N}`) is the legacy mechanism. It works only on Claude 4 through 4.6 models that support thinking; Claude 4.7 and later models reject `type: enabled` with a 400 error and use [adaptive thinking](build-with-claude/thinking.md) instead. With manual extended thinking, `budget_tokens` sets the maximum number of tokens Claude is allowed to use for its internal reasoning process; the limit applies to full thinking tokens, not to the summarized output. Unless you are using [interleaved thinking](claude_api_primer.md), `budget_tokens` must be less than `max_tokens` so that Claude has space to write its response after thinking is complete.
 
-## Thinking with tool use
+## Thinking with tool use
 
 Thinking can be used alongside tool use, allowing Claude to reason through tool selection and results processing.
 
@@ -237,13 +300,69 @@ Important limitations:
 1. **Tool choice limitation:** Only supports `tool_choice: {"type": "auto"}` (default) or `tool_choice: {"type": "none"}`.
 2. **Preserving thinking blocks:** During tool use, you must pass `thinking` blocks back to the API for the last assistant message.
 
-### Preserving thinking blocks
+### Preserving thinking blocks
 
-CLIPython
+```bash CLI
+# First request: capture the assistant content array (thinking + tool_use
+# blocks, signatures intact) as compact JSON.
+ASSISTANT_CONTENT=$(ant messages create \
+  --transform content --format jsonl <<'YAML'
+model: claude-opus-5
+max_tokens: 16000
+thinking:
+  type: adaptive
+  display: summarized
+tools:
+  - name: get_weather
+    description: Get the current weather for a location.
+    input_schema:
+      type: object
+      properties:
+        location:
+          type: string
+          description: The city name.
+      required: [location]
+messages:
+  - role: user
+    content: "What's the weather in Paris?"
+YAML
+)
 
-
+TOOL_USE_ID=$(printf '%s' "$ASSISTANT_CONTENT" \
+  | jq -r '.[] | select(.type == "tool_use") | .id')
 
-```shiki
+# Second request: pass the captured blocks back unchanged as the assistant
+# message. The thinking block must accompany the tool_use block.
+ant messages create <<YAML
+model: claude-opus-5
+max_tokens: 16000
+thinking:
+  type: adaptive
+  display: summarized
+tools:
+  - name: get_weather
+    description: Get the current weather for a location.
+    input_schema:
+      type: object
+      properties:
+        location:
+          type: string
+          description: The city name.
+      required: [location]
+messages:
+  - role: user
+    content: "What's the weather in Paris?"
+  - role: assistant
+    content: $ASSISTANT_CONTENT
+  - role: user
+    content:
+      - type: tool_result
+        tool_use_id: $TOOL_USE_ID
+        content: "Current temperature: 72°F"
+YAML
+```
+
+```python Python
 import anthropic
 
 client = anthropic.Anthropic()
@@ -305,17 +424,49 @@ for block in continuation.content:
         print(block.text)
 ```
 
-### Interleaved thinking
+### Interleaved thinking
 
 Interleaved thinking enables Claude to think between tool calls, reasoning about tool results before deciding the next step.
 
+On models with [adaptive thinking](build-with-claude/thinking.md) (`thinking: {type: "adaptive"}`), interleaved thinking is automatically enabled. No beta header is needed. Sonnet 4.6 supports both the `interleaved-thinking-2025-05-14` beta header with manual extended thinking and adaptive thinking.
+
 On older models that use manual extended thinking (Claude 4, 4.5, and Sonnet 4.6 models), enable interleaved thinking by adding the beta header `interleaved-thinking-2025-05-14` to your API request:
 
-CLIPython
+```bash CLI
+ant beta:messages create --beta interleaved-thinking-2025-05-14 <<'YAML'
+model: claude-sonnet-4-6
+max_tokens: 16000
+thinking:
+  type: enabled
+  budget_tokens: 10000
+tools:
+  - name: calculator
+    description: Perform arithmetic calculations.
+    input_schema:
+      type: object
+      properties:
+        expression:
+          type: string
+          description: The math expression to evaluate.
+      required:
+        - expression
+  - name: database_query
+    description: Query the product database.
+    input_schema:
+      type: object
+      properties:
+        query:
+          type: string
+          description: The database query.
+      required:
+        - query
+messages:
+  - role: user
+    content: "What's the total revenue if we sold 150 units of product A at $50 each?"
+YAML
+```
 
-
-
-```shiki
+```python Python
 import anthropic
 
 client = anthropic.Anthropic()
@@ -372,19 +523,19 @@ for block in response.content:
 
 With interleaved thinking and ONLY with interleaved thinking (not regular manual extended thinking), the `budget_tokens` can exceed the `max_tokens` parameter, as `budget_tokens` in this case represents the total budget across all thinking blocks within one assistant turn.
 
-## Tool use
+## Tool use
 
-### Specifying client tools
+### Specifying client tools
 
 Client tools are specified in the `tools` top-level parameter of the API request. Each tool definition includes:
 
-| Parameter | Description |
-| --- | --- |
-| `name` | The name of the tool. Must match the regex `^[a-zA-Z0-9_-]{1,64}$`. |
-| `description` | A detailed plaintext description of what the tool does, when it should be used, and how it behaves. |
-| `input_schema` | A [JSON Schema](https://json-schema.org/) object defining the expected parameters for the tool. |
+| Parameter      | Description                                                                                         |
+| -------------- | --------------------------------------------------------------------------------------------------- |
+| `name`         | The name of the tool. Must match the regex `^[a-zA-Z0-9_-]{1,64}$`.                                 |
+| `description`  | A detailed plaintext description of what the tool does, when it should be used, and how it behaves. |
+| `input_schema` | A [JSON Schema](https://json-schema.org/) object defining the expected parameters for the tool.     |
 
-```shiki
+```json
 {
   "name": "get_weather",
   "description": "Get the current weather in a given location",
@@ -406,22 +557,20 @@ Client tools are specified in the `tools` top-level parameter of the API request
 }
 ```
 
-
-
-### Best practices for tool definitions
+### Best practices for tool definitions
 
 **Provide extremely detailed descriptions.** This is by far the most important factor in tool performance. Your descriptions should explain every detail about the tool, including:
 
-- What the tool does
-- When it should be used (and when it shouldn't)
-- What each parameter means and how it affects the tool's behavior
-- Any important caveats or limitations
+* What the tool does
+* When it should be used (and when it shouldn't)
+* What each parameter means and how it affects the tool's behavior
+* Any important caveats or limitations
 
 **Consider using `input_examples` for complex tools.** For tools with nested objects, optional parameters, or format-sensitive inputs, you can provide concrete examples using the `input_examples` field (beta). This helps Claude understand expected input patterns. See [Providing tool use examples](agents-and-tools/tool-use/define-tools.md) for details.
 
 Example of a good tool description:
 
-```shiki
+```json
 {
   "name": "get_stock_price",
   "description": "Retrieves the current stock price for a given ticker symbol. The ticker symbol must be a valid symbol for a publicly traded company on a major US stock exchange like NYSE or NASDAQ. The tool will return the latest trade price in USD. It should be used when the user asks about the current or most recent price of a specific stock. It will not provide any other information about the stock or company.",
@@ -438,38 +587,34 @@ Example of a good tool description:
 }
 ```
 
-
+## Controlling Claude's output
 
-## Controlling Claude's output
-
-### Forcing tool use
+### Forcing tool use
 
 You can force Claude to use a specific tool by specifying the tool in the `tool_choice` field:
 
-```shiki
+```python
 tool_choice = {"type": "tool", "name": "get_weather"}
 ```
 
-
-
 When working with the `tool_choice` parameter, there are four possible options:
 
-- `auto` allows Claude to determine whether to call any provided tools or not (default).
-- `any` tells Claude that it must use one of the provided tools.
-- `tool` forces Claude to always use a particular tool.
-- `none` prevents Claude from using any tools.
+* `auto` allows Claude to determine whether to call any provided tools or not (default).
+* `any` tells Claude that it must use one of the provided tools.
+* `tool` forces Claude to always use a particular tool.
+* `none` prevents Claude from using any tools.
 
 On Claude Fable 5.1 and Claude Mythos 5.1, `any` and `tool` return a 400 error. Leave `tool_choice` at `auto` and set `"strict": true` on the tool definition to guarantee that any call Claude makes matches the tool's `input_schema`. See [Strict tool use](agents-and-tools/tool-use/strict-tool-use.md).
 
-### JSON output
+### JSON output
 
 Tools do not necessarily need to be client functions. You can use tools anytime you want the model to return JSON output that follows a provided schema.
 
-### Chain of thought
+### Chain of thought
 
 When using tools, Claude often shows its "chain of thought," that is, the step-by-step reasoning it uses to break down the problem and determine which tools to use.
 
-```shiki
+```json
 {
   "role": "assistant",
   "content": [
@@ -487,21 +632,19 @@ When using tools, Claude often shows its "chain of thought," that is, the step-b
 }
 ```
 
-
-
-### Parallel tool use
+### Parallel tool use
 
 By default, Claude may use multiple tools to answer a user query. You can disable this behavior by setting `disable_parallel_tool_use=true`.
 
-## Handling tool use and tool result content blocks
+## Handling tool use and tool result content blocks
 
-### Handling results from client tools
+### Handling results from client tools
 
 The response has a `stop_reason` of `tool_use` and one or more `tool_use` content blocks that include:
 
-- `id`: A unique identifier for this particular tool use block.
-- `name`: The name of the tool being used.
-- `input`: An object containing the input being passed to the tool.
+* `id`: A unique identifier for this particular tool use block.
+* `name`: The name of the tool being used.
+* `input`: An object containing the input being passed to the tool.
 
 When you receive a tool use response, you should:
 
@@ -509,7 +652,7 @@ When you receive a tool use response, you should:
 2. Run the actual tool in your code base corresponding to that tool name.
 3. Continue the conversation by sending a new message with a `tool_result`:
 
-```shiki
+```json
 {
   "role": "user",
   "content": [
@@ -522,23 +665,21 @@ When you receive a tool use response, you should:
 }
 ```
 
-
-
-### Handling the `max_tokens` stop reason
+### Handling the `max_tokens` stop reason
 
 If Claude's response is cut off because it hits the `max_tokens` limit during tool use, retry the request with a higher `max_tokens` value.
 
-### Handling the `pause_turn` stop reason
+### Handling the `pause_turn` stop reason
 
 When using server tools such as web search, the API may return a `pause_turn` stop reason. Continue the conversation by passing the paused response back as-is in a subsequent request.
 
-## Troubleshooting errors
+## Troubleshooting errors
 
-### Tool execution error
+### Tool execution error
 
 If the tool itself throws an error during execution, return the error message with `"is_error": true`:
 
-```shiki
+```json
 {
   "role": "user",
   "content": [
@@ -552,23 +693,25 @@ If the tool itself throws an error during execution, return the error message wi
 }
 ```
 
-
-
-### Invalid tool name
+### Invalid tool name
 
 If Claude's attempted use of a tool is invalid (for example, missing required parameters), try the request again with more-detailed `description` values in your tool definitions.
 
-## Streaming messages
+## Streaming messages
 
 When creating a Message, you can set `"stream": true` to incrementally stream the response using server-sent events (SSE).
 
-### Streaming with SDKs
+### Streaming with SDKs
 
-CLIPython
+```bash CLI
+ant messages create --stream --format jsonl \
+  --model claude-opus-5 \
+  --max-tokens 1024 \
+  --message '{role: user, content: "Hello"}' \
+  | jq -rj 'select(.delta.type? == "text_delta") | .delta.text'
+```
 
-
-
-```shiki
+```python Python
 import anthropic
 
 client = anthropic.Anthropic()
@@ -582,7 +725,7 @@ with client.messages.stream(
         print(text, end="", flush=True)
 ```
 
-### Event types
+### Event types
 
 Each server-sent event includes a named event type and associated JSON data. Each stream uses the following event flow:
 
@@ -593,11 +736,11 @@ Each server-sent event includes a named event type and associated JSON data. Eac
 
 **Warning:** The token counts shown in the `usage` field of the `message_delta` event are *cumulative*.
 
-### Content block delta types
+### Content block delta types
 
-#### Text delta
+#### Text delta
 
-```shiki
+```json
 {
   "type": "content_block_delta",
   "index": 0,
@@ -605,23 +748,19 @@ Each server-sent event includes a named event type and associated JSON data. Eac
 }
 ```
 
-
-
-#### Input JSON delta
+#### Input JSON delta
 
 For `tool_use` content blocks, deltas are *partial JSON strings*:
 
-```shiki
+```json
 {"type": "content_block_delta","index": 1,"delta": {"type": "input_json_delta","partial_json": "{\"location\": \"San Fra"}}}
 ```
 
-
-
-#### Thinking delta
+#### Thinking delta
 
 When using thinking with streaming:
 
-```shiki
+```json
 {
   "type": "content_block_delta",
   "index": 0,
@@ -632,11 +771,9 @@ When using thinking with streaming:
 }
 ```
 
-
+### Basic streaming request example
 
-### Basic streaming request example
-
-```shiki
+```sse
 event: message_start
 data: {"type": "message_start", "message": {"id": "msg_1nZdL29xx5MUA1yADyHTEsnR8uuvGzszyY", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-5", "stop_reason": null, "stop_sequence": null, "usage": {"input_tokens": 25, "output_tokens": 1}}}
 
@@ -658,12 +795,6 @@ data: {"type": "message_delta", "delta": {"stop_reason": "end_turn", "stop_seque
 event: message_stop
 data: {"type": "message_stop"}
 ```
-
-
-
-Was this page helpful?
-
-
 
 ---
 

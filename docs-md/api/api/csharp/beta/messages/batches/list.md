@@ -1,246 +1,226 @@
 # List Message Batches
 
-Copy page
+`BatchListPage Beta.Messages.Batches.List(parameters, cancellationToken = default)`
 
-
-
-C#
-
-# List Message Batches
-
-[BatchListPageResponse](api/beta/messages/batches.md) Beta.Messages.Batches.List(BatchListParams?parameters, CancellationTokencancellationToken = default)
-
-GET/v1/messages/batches
+**GET** `/v1/messages/batches`
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
 Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `BatchListParams parameters`
 
-BatchListParams parameters
+  - `string afterID`
 
-string afterID
+    Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+  - `string beforeID`
 
-string beforeID
+    Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+  - `long limit`
 
-
+    Query param: Number of items to return per page.
 
-Long limit
+    Defaults to `20`. Ranges from `1` to `1000`.
 
-Query param: Number of items to return per page.
+    maximum: 1000, minimum: 1
 
-Defaults to `20`. Ranges from `1` to `1000`.
+  - `IReadOnlyList<AnthropicBeta> betas`
 
-maximum1000
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-minimum1
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
-
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
 
-IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
 
-"message-batches-2024-09-24"MessageBatches2024\_09\_24
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
 
-"prompt-caching-2024-07-31"PromptCaching2024\_07\_31
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
 
-"computer-use-2024-10-22"ComputerUse2024\_10\_22
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
 
-"computer-use-2025-01-24"ComputerUse2025\_01\_24
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
 
-"pdfs-2024-09-25"Pdfs2024\_09\_25
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
 
-"token-counting-2024-11-01"TokenCounting2024\_11\_01
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
 
-"token-efficient-tools-2025-02-19"TokenEfficientTools2025\_02\_19
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
 
-"output-128k-2025-02-19"Output128k2025\_02\_19
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
 
-"files-api-2025-04-14"FilesApi2025\_04\_14
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
 
-"mcp-client-2025-04-04"McpClient2025\_04\_04
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
 
-"mcp-client-2025-11-20"McpClient2025\_11\_20
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
 
-"dev-full-thinking-2025-05-14"DevFullThinking2025\_05\_14
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
 
-"interleaved-thinking-2025-05-14"InterleavedThinking2025\_05\_14
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
 
-"code-execution-2025-05-22"CodeExecution2025\_05\_22
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025\_04\_11
+    - `Skills2025_10_02("skills-2025-10-02")`
 
-"context-1m-2025-08-07"Context1m2025\_08\_07
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
 
-"context-management-2025-06-27"ContextManagement2025\_06\_27
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
 
-"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025\_08\_26
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
 
-"skills-2025-10-02"Skills2025\_10\_02
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
-"fast-mode-2026-02-01"FastMode2026\_02\_01
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
-"output-300k-2026-03-24"Output300k2026\_03\_24
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
 
-"user-profiles-2026-03-24"UserProfiles2026\_03\_24
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
 
-"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
 
-"managed-agents-2026-04-01"ManagedAgents2026\_04\_01
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
 
-"cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
 
-"thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
 
-"server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
 
-"fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
 
-"agent-memory-2026-07-22"AgentMemory2026\_07\_22
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
 
-##### ReturnsExpand Collapse
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-
+    - `Compact2026_01_12("compact-2026-01-12")`
 
-class BatchListPageResponse:
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
 
-
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
 
-required IReadOnlyList<[BetaMessageBatch](api/beta/messages/batches.md)> Data
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
 
-
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
 
-required string ID
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
 
-Unique object identifier.
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
 
-The format and length of IDs may change over time.
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-required DateTimeOffset? ArchivedAt
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
 
-RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-required DateTimeOffset? CancelInitiatedAt
+## Returns
 
-RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+- `class BetaMessageBatch:`
 
-required DateTimeOffset CreatedAt
+  - `required string ID`
 
-RFC 3339 datetime string representing the time at which the Message Batch was created.
+    Unique object identifier.
 
-
+    The format and length of IDs may change over time.
 
-required DateTimeOffset? EndedAt
+  - `required DateTimeOffset? ArchivedAt`
 
-RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+    format: date-time
 
-formatdate-time
+  - `required DateTimeOffset? CancelInitiatedAt`
 
-required DateTimeOffset ExpiresAt
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+    format: date-time
 
-
+  - `required DateTimeOffset CreatedAt`
 
-required ProcessingStatus ProcessingStatus
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-Processing status of the Message Batch.
+    format: date-time
 
-One of the following:
+  - `required DateTimeOffset? EndedAt`
 
-"in\_progress"InProgress
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
-"canceling"Canceling
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
-"ended"Ended
+    format: date-time
 
-
+  - `required DateTimeOffset ExpiresAt`
 
-required [BetaMessageBatchRequestCounts](api/beta/messages/batches.md) RequestCounts
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-Tallies requests within the Message Batch, categorized by their status.
+    format: date-time
 
-Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+  - `required ProcessingStatus ProcessingStatus`
 
-
+    Processing status of the Message Batch.
 
-required Long Canceled
+    - `InProgress("in_progress")`
 
-Number of requests in the Message Batch that have been canceled.
+    - `Canceling("canceling")`
 
-This is zero until processing of the entire Message Batch has ended.
+    - `Ended("ended")`
 
-
+  - `required BetaMessageBatchRequestCounts RequestCounts`
 
-required Long Errored
+    Tallies requests within the Message Batch, categorized by their status.
 
-Number of requests in the Message Batch that encountered an error.
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-This is zero until processing of the entire Message Batch has ended.
+    - `required long Canceled`
 
-
+      Number of requests in the Message Batch that have been canceled.
 
-required Long Expired
+      This is zero until processing of the entire Message Batch has ended.
 
-Number of requests in the Message Batch that have expired.
+    - `required long Errored`
 
-This is zero until processing of the entire Message Batch has ended.
+      Number of requests in the Message Batch that encountered an error.
 
-required Long Processing
+      This is zero until processing of the entire Message Batch has ended.
 
-Number of requests in the Message Batch that are processing.
+    - `required long Expired`
 
-
+      Number of requests in the Message Batch that have expired.
 
-required Long Succeeded
+      This is zero until processing of the entire Message Batch has ended.
 
-Number of requests in the Message Batch that have completed successfully.
+    - `required long Processing`
 
-This is zero until processing of the entire Message Batch has ended.
+      Number of requests in the Message Batch that are processing.
 
-
+    - `required long Succeeded`
 
-required string? ResultsUrl
+      Number of requests in the Message Batch that have completed successfully.
 
-URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
+      This is zero until processing of the entire Message Batch has ended.
 
-Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+  - `required string? ResultsUrl`
 
-
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
-JsonElement Type "message\_batch"constant
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Object type.
+  - `JsonElement Type = "message_batch"`
 
-For Message Batches, this is always `"message_batch"`.
+    Object type.
 
-required string? FirstID
+    For Message Batches, this is always `"message_batch"`.
 
-First ID in the `data` list. Can be used as the `before_id` for the previous page.
+## Example
 
-required Boolean HasMore
-
-Indicates if there are more results in the requested page direction.
-
-required string? LastID
-
-Last ID in the `data` list. Can be used as the `after_id` for the next page.
-
-List Message Batches
-
-C#
-
-```shiki
+```csharp
 BatchListParams parameters = new();
 
 var page = await client.Beta.Messages.Batches.List(parameters);
@@ -250,45 +230,9 @@ await foreach (var item in page.Paginate())
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-      "archived_at": "2024-08-20T18:37:24.100435Z",
-      "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
-      "created_at": "2024-08-20T18:37:24.100435Z",
-      "ended_at": "2024-08-20T18:37:24.100435Z",
-      "expires_at": "2024-08-20T18:37:24.100435Z",
-      "processing_status": "in_progress",
-      "request_counts": {
-        "canceled": 10,
-        "errored": 30,
-        "expired": 10,
-        "processing": 100,
-        "succeeded": 50
-      },
-      "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
-      "type": "message_batch"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

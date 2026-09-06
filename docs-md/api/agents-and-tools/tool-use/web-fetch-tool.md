@@ -1,20 +1,38 @@
-# Web fetch tool
+# Web Fetch Tool
 
-Copy page
+---
+title: Web fetch tool
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool
+description: Fetch and read content from specific URLs to augment Claude's context with live web content.
+---
 
-
+To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
 
 The web fetch tool allows Claude to retrieve full content from specified web pages and PDF documents.
 
-The latest web fetch tool version (`web_fetch_20260318`) supports **dynamic filtering**: Claude can write and execute code to filter fetched content before it reaches the context window, keeping only relevant information and discarding the rest. This reduces token consumption while maintaining response quality. Dynamic filtering is available with Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6. `web_fetch_20260318` also adds [response inclusion](#response-inclusion) control for agentic workflows. The previous versions (`web_fetch_20260309` for dynamic filtering and [cache bypass](#cache-bypass), `web_fetch_20260209` for dynamic filtering only, `web_fetch_20250910` for basic fetch) remain available.
+The latest web fetch tool version (`web_fetch_20260318`) supports **dynamic filtering**: Claude can write and execute code to filter fetched content before it reaches the context window, keeping only relevant information and discarding the rest. This reduces token consumption while maintaining response quality. Dynamic filtering is available with Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6. `web_fetch_20260318` also adds [response inclusion](agents-and-tools/tool-use/web-fetch-tool.md) control for agentic workflows. The previous versions (`web_fetch_20260309` for dynamic filtering and [cache bypass](agents-and-tools/tool-use/web-fetch-tool.md), `web_fetch_20260209` for dynamic filtering only, `web_fetch_20250910` for basic fetch) remain available.
 
 Web fetch (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). On Microsoft Foundry, deployments [hosted on Azure](build-with-claude/claude-in-microsoft-foundry.md) support only the basic web fetch tool (`web_fetch_20250910`, without dynamic filtering). Deployments hosted on Anthropic support all versions. Web fetch is not currently available on Amazon Bedrock or Google Cloud.
 
+For [Claude Mythos Preview](https://anthropic.com/glasswing), web fetch is available on the Claude API and Microsoft Foundry. It is not currently available for Mythos Preview on Amazon Bedrock or Google Cloud.
+
+Use the [feedback form](https://forms.gle/NhWcgmkcvPCMmPE86) to provide feedback on the quality of the model responses, the API itself, or the quality of the documentation.
+
 For Zero Data Retention eligibility and the `allowed_callers` workaround, see [Server tools](agents-and-tools/tool-use/server-tools.md).
+
+Enabling the web fetch tool in environments where Claude processes untrusted input alongside sensitive data poses data exfiltration risks. Only use this tool in trusted environments or when handling non-sensitive data.
+
+To minimize exfiltration risks, Claude cannot fetch URLs that appear only in its own output. Claude can only fetch URLs that have previously appeared in the conversation: URLs in user messages, URLs in client-side tool results (even when a result echoes text that Claude generated), and URLs from previous web search or web fetch results (see [URL validation](agents-and-tools/tool-use/web-fetch-tool.md)). However, there is still residual risk that you should carefully consider when using this tool.
+
+If data exfiltration is a concern, consider:
+
+* Disabling the web fetch tool entirely
+* Using the `max_uses` parameter to limit the number of requests
+* Using the `allowed_domains` parameter to restrict to known safe domains
 
 For model support, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
 
-## How web fetch works
+## How web fetch works
 
 Web fetch is a [server tool](agents-and-tools/tool-use/server-tools.md): the API fetches the content during the request and inserts the results into the conversation. You don't run anything or return a `tool_result`. The exception is when Claude calls web fetch and one of your client tools in the same group of parallel tool calls: the API returns the response with `stop_reason: "tool_use"` before that fetch has run, then runs the fetch when you send back the client `tool_result` blocks. See [Mixing server tools and client tools in one turn](agents-and-tools/tool-use/server-tools.md).
 
@@ -25,33 +43,69 @@ When you add the web fetch tool to your API request:
 3. For PDFs, the API returns the content as base64-encoded data and processes it like a directly attached PDF document.
 4. Claude analyzes the fetched content and provides a response with optional citations.
 
-### When Claude fetches
+The web fetch tool currently does not support websites dynamically rendered with JavaScript. For pages that need a real browser (JavaScript rendering, clicking, or filling forms), consider the [browser use tool](agents-and-tools/tool-use/browser-use-tool.md), a client tool where your application drives the browser and returns page text or screenshots to Claude as tool results.
+
+### When Claude fetches
 
 Claude fetches when the request points at a specific page or document:
 
-- A URL is provided in the conversation (or a previous tool result)
-- The user names a specific resource (a particular article, README, pricing page, or documentation section) without a URL, and the [web search tool](agents-and-tools/tool-use/web-search-tool.md) is also enabled so Claude can locate it first (see [Combined search and fetch](#combined-search-and-fetch))
+* A URL is provided in the conversation (or a previous tool result)
+* The user names a specific resource (a particular article, README, pricing page, or documentation section) without a URL, and the [web search tool](agents-and-tools/tool-use/web-search-tool.md) is also enabled so Claude can locate it first (see [Combined search and fetch](agents-and-tools/tool-use/web-fetch-tool.md))
 
 Claude does **not** fetch for general-knowledge or open-ended questions that don't reference a specific page. "Summarize this article: `<url>`" triggers a fetch. "What are best practices for REST API design?" is answered directly.
 
-### Dynamic filtering
+### Dynamic filtering
 
 Fetching full web pages and PDFs can quickly consume tokens, especially when only specific information is needed from large documents. With `web_fetch_20260209` or later, Claude can write and execute code to filter the fetched content before loading it into context.
 
 This dynamic filtering is particularly useful for:
 
-- Extracting specific sections from long documents
-- Processing structured data from web pages
-- Filtering relevant information from PDFs
-- Reducing token costs when working with large documents
+* Extracting specific sections from long documents
+* Processing structured data from web pages
+* Filtering relevant information from PDFs
+* Reducing token costs when working with large documents
+
+Dynamic filtering runs on the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md), which the API enables automatically for the request. You don't need to add the code execution tool to the `tools` array.
 
 To enable dynamic filtering, use `web_fetch_20260209` or any later version. The following examples use `web_fetch_20260318`:
 
-cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+```bash cURL
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-8",
+    "max_tokens": 4096,
+    "messages": [
+      {
+        "role": "user",
+        "content": "Fetch the content at https://example.com/research-paper and extract the key findings."
+      }
+    ],
+    "tools": [{
+      "type": "web_fetch_20260318",
+      "name": "web_fetch"
+    }]
+  }'
+```
 
-
+```bash CLI
+ant messages create <<'YAML'
+model: claude-opus-4-8
+max_tokens: 4096
+messages:
+  - role: user
+    content: >-
+      Fetch the content at https://example.com/research-paper
+      and extract the key findings.
+tools:
+  - type: web_fetch_20260318
+    name: web_fetch
+YAML
+```
 
-```shiki
+```python Python
 client = anthropic.Anthropic()
 
 response = client.messages.create(
@@ -68,15 +122,146 @@ response = client.messages.create(
 print(response)
 ```
 
-## How to use web fetch
+```typescript TypeScript
+const client = new Anthropic();
+
+const response = await client.messages.create({
+  model: "claude-opus-4-8",
+  max_tokens: 4096,
+  messages: [
+    {
+      role: "user",
+      content:
+        "Fetch the content at https://example.com/research-paper and extract the key findings."
+    }
+  ],
+  tools: [{ type: "web_fetch_20260318", name: "web_fetch" }]
+});
+
+console.log(response);
+```
+
+```csharp C#
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_8,
+    MaxTokens = 4096,
+    Messages = [new() { Role = Role.User, Content = "Fetch the content at https://example.com/research-paper and extract the key findings." }],
+    Tools = [new ToolUnion(new WebFetchTool20260318())]
+};
+
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message);
+```
+
+```go Go
+client := anthropic.NewClient()
+
+response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+	Model:     anthropic.ModelClaudeOpus4_8,
+	MaxTokens: 4096,
+	Messages: []anthropic.MessageParam{
+		anthropic.NewUserMessage(anthropic.NewTextBlock("Fetch the content at https://example.com/research-paper and extract the key findings.")),
+	},
+	Tools: []anthropic.ToolUnionParam{
+		{OfWebFetchTool20260318: &anthropic.WebFetchTool20260318Param{}},
+	},
+})
+if err != nil {
+	log.Fatal(err)
+}
+fmt.Println(response.RawJSON())
+```
+
+```java Java
+import com.anthropic.models.messages.WebFetchTool20260318;
+
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(4096L)
+        .addUserMessage("Fetch the content at https://example.com/research-paper and extract the key findings.")
+        .addTool(WebFetchTool20260318.builder().build())
+        .build();
+
+    Message response = client.messages().create(params);
+    IO.println(response);
+}
+```
+
+```php PHP
+$client = new Client();
+
+$message = $client->messages->create(
+    maxTokens: 4096,
+    messages: [
+        ['role' => 'user', 'content' => 'Fetch the content at https://example.com/research-paper and extract the key findings.']
+    ],
+    model: 'claude-opus-4-8',
+    tools: [[
+        'type' => 'web_fetch_20260318',
+        'name' => 'web_fetch',
+    ]],
+);
+echo $message;
+```
+
+```ruby Ruby
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-8",
+  max_tokens: 4096,
+  messages: [
+    { role: "user", content: "Fetch the content at https://example.com/research-paper and extract the key findings." }
+  ],
+  tools: [{
+    type: "web_fetch_20260318",
+    name: "web_fetch"
+  }]
+)
+puts message
+```
+
+## How to use web fetch
 
 Provide the web fetch tool in your API request:
 
-cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+```bash cURL
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-8",
+    "max_tokens": 1024,
+    "messages": [
+      {
+        "role": "user",
+        "content": "Please analyze the content at https://example.com/article"
+      }
+    ],
+    "tools": [{
+      "type": "web_fetch_20250910",
+      "name": "web_fetch",
+      "max_uses": 5
+    }]
+  }'
+```
 
-
+```bash CLI
+ant messages create \
+  --model claude-opus-4-8 \
+  --max-tokens 1024 \
+  --message '{role: user, content: "Please analyze the content at https://example.com/article"}' \
+  --tool '{type: web_fetch_20250910, name: web_fetch, max_uses: 5}'
+```
 
-```shiki
+```python Python
 client = anthropic.Anthropic()
 
 response = client.messages.create(
@@ -93,15 +278,127 @@ response = client.messages.create(
 print(response)
 ```
 
-## Tool definition
+```typescript TypeScript
+const client = new Anthropic();
+
+const response = await client.messages.create({
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  messages: [
+    {
+      role: "user",
+      content: "Please analyze the content at https://example.com/article"
+    }
+  ],
+  tools: [
+    {
+      type: "web_fetch_20250910",
+      name: "web_fetch",
+      max_uses: 5
+    }
+  ]
+});
+
+console.log(response);
+```
+
+```csharp C#
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_8,
+    MaxTokens = 1024,
+    Messages = [new() { Role = Role.User, Content = "Please analyze the content at https://example.com/article" }],
+    Tools = [new ToolUnion(new WebFetchTool20250910() { MaxUses = 5 })]
+};
+
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message);
+```
+
+```go Go
+client := anthropic.NewClient()
+
+response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+	Model:     anthropic.ModelClaudeOpus4_8,
+	MaxTokens: 1024,
+	Messages: []anthropic.MessageParam{
+		anthropic.NewUserMessage(anthropic.NewTextBlock("Please analyze the content at https://example.com/article")),
+	},
+	Tools: []anthropic.ToolUnionParam{
+		{OfWebFetchTool20250910: &anthropic.WebFetchTool20250910Param{
+			MaxUses: anthropic.Int(5),
+		}},
+	},
+})
+if err != nil {
+	log.Fatal(err)
+}
+fmt.Println(response.RawJSON())
+```
+
+```java Java
+import com.anthropic.models.messages.WebFetchTool20250910;
+
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(1024L)
+        .addUserMessage("Please analyze the content at https://example.com/article")
+        .addTool(WebFetchTool20250910.builder()
+            .maxUses(5L)
+            .build())
+        .build();
+
+    Message response = client.messages().create(params);
+    IO.println(response);
+}
+```
+
+```php PHP
+$client = new Client();
+
+$message = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        ['role' => 'user', 'content' => 'Please analyze the content at https://example.com/article']
+    ],
+    model: 'claude-opus-4-8',
+    tools: [[
+        'type' => 'web_fetch_20250910',
+        'name' => 'web_fetch',
+        'max_uses' => 5,
+    ]],
+);
+echo $message;
+```
+
+```ruby Ruby
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-8",
+  max_tokens: 1024,
+  messages: [
+    { role: "user", content: "Please analyze the content at https://example.com/article" }
+  ],
+  tools: [{
+    type: "web_fetch_20250910",
+    name: "web_fetch",
+    max_uses: 5
+  }]
+)
+puts message
+```
+
+## Tool definition
 
 The web fetch tool supports the following parameters:
 
-JSON
-
-
-
-```shiki
+```json JSON
 {
   "type": "web_fetch_20250910",
   "name": "web_fetch",
@@ -125,29 +422,33 @@ JSON
 }
 ```
 
-Later tool versions add two more optional parameters: `use_cache` requires `web_fetch_20260309` or later (see [Cache bypass](#cache-bypass)), and `response_inclusion` requires `web_fetch_20260318` or later (see [Response inclusion](#response-inclusion)).
+Later tool versions add two more optional parameters: `use_cache` requires `web_fetch_20260309` or later (see [Cache bypass](agents-and-tools/tool-use/web-fetch-tool.md)), and `response_inclusion` requires `web_fetch_20260318` or later (see [Response inclusion](agents-and-tools/tool-use/web-fetch-tool.md)).
 
-### Max uses
+### Max uses
 
 The `max_uses` parameter limits the number of web fetches performed. Failed fetches count against the limit. If Claude attempts more fetches than allowed, the `web_fetch_tool_result` is an error with the `max_uses_exceeded` error code. There is currently no default limit.
 
-### Domain filtering
+### Domain filtering
 
 For domain filtering with `allowed_domains` and `blocked_domains`, see [Server tools](agents-and-tools/tool-use/server-tools.md).
 
 On [Claude Managed Agents](managed-agents/overview.md), set these fields on the `web_fetch` entry of the agent toolset, where each listed domain must be a plain hostname with no path; see [Restrict web search and web fetch domains](managed-agents/tools.md).
 
-### Content limits
+### Content limits
 
 The `max_content_tokens` parameter limits the amount of content included in the context. If the fetched content exceeds this limit, the tool truncates it. This helps control token usage when fetching large documents. The limit applies to text content, not to binary content such as PDFs.
 
+The `max_content_tokens` parameter limit is approximate. The actual number of input tokens used can vary by a small amount.
+
 On Claude Managed Agents, the `web_fetch` entry of the agent toolset also accepts `max_content_tokens`; see [Restrict web search and web fetch domains](managed-agents/tools.md).
 
-### Cache bypass
+### Cache bypass
+
+Requires `web_fetch_20260309` or later (including `web_fetch_20260318`).
 
 The `use_cache` parameter controls whether cached content may be returned. Set `"use_cache": false` to bypass the cache and fetch fresh content. The default is `true`. Only disable caching when the user explicitly requests fresh content or when fetching rapidly changing sources, because bypassing the cache increases latency.
 
-```shiki
+```json
 {
   "tools": [
     {
@@ -159,13 +460,13 @@ The `use_cache` parameter controls whether cached content may be returned. Set `
 }
 ```
 
-
+### Response inclusion
 
-### Response inclusion
+Requires `web_fetch_20260318` or later.
 
 The `response_inclusion` parameter controls how fetch result blocks appear in the API response when the result was consumed by a completed [code execution](agents-and-tools/tool-use/code-execution-tool.md) call in the same turn. Set `"response_inclusion": "excluded"` to drop those nested `server_tool_use` and result block pairs entirely from the response, reducing output token costs for agentic workflows that don't need to echo raw page content back to the client. The default is `"full"`. Results from direct calls, or from code execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
-```shiki
+```json
 {
   "tools": [
     {
@@ -177,21 +478,17 @@ The `response_inclusion` parameter controls how fetch result blocks appear in th
 }
 ```
 
-
-
-### Citations
+### Citations
 
 Unlike web search where citations are always enabled, citations are optional for web fetch and disabled by default. Set `"citations": {"enabled": true}` to enable Claude to cite specific passages from fetched documents.
 
-## Response
+When displaying API outputs directly to end users, include citations to the original source. If you are making modifications to API outputs, including by reprocessing or combining them with your own material before displaying them to end users, display citations as appropriate based on consultation with your legal team.
+
+## Response
 
 Here's an example response structure:
 
-Output
-
-
-
-```shiki
+```json Output
 {
   "role": "assistant",
   "content": [
@@ -261,21 +558,19 @@ Output
 }
 ```
 
-### Fetch results
+### Fetch results
 
 Fetch results include:
 
-- `url`: The URL that was fetched
-- `content`: A document block containing the fetched content
-- `retrieved_at`: Timestamp when the content was retrieved
+* `url`: The URL that was fetched
+* `content`: A document block containing the fetched content
+* `retrieved_at`: Timestamp when the content was retrieved
+
+The web fetch tool caches results to improve performance and reduce redundant requests. The content returned may not always reflect the latest version available at the URL. The cache behavior is managed automatically and may change over time to optimize for different content types and usage patterns. To fetch fresh content, set `"use_cache": false` (see [Cache bypass](agents-and-tools/tool-use/web-fetch-tool.md)).
 
 For PDF documents, content is returned as base64-encoded data:
 
-Output
-
-
-
-```shiki
+```json Output
 {
   "type": "web_fetch_tool_result",
   "tool_use_id": "srvtoolu_02",
@@ -296,15 +591,11 @@ Output
 }
 ```
 
-### Errors
+### Errors
 
 When the web fetch tool encounters an error, the Claude API returns a 200 (success) response with the error represented in the response body. Claude sees the error result and continues the turn. For example:
 
-Output
-
-
-
-```shiki
+```json Output
 {
   "type": "web_fetch_tool_result",
   "tool_use_id": "srvtoolu_a93jad",
@@ -317,35 +608,82 @@ Output
 
 These are the possible error codes:
 
-- `invalid_tool_input`: Invalid tool input, such as a malformed URL or a non-HTTP(S) scheme
-- `url_too_long`: URL exceeds maximum length (250 characters)
-- `url_not_allowed`: URL blocked by domain filtering rules (including your organization's settings) or by Anthropic-side restrictions, such as private addresses and `robots.txt`
-- `url_not_in_prior_context`: URL did not appear earlier in the conversation (see [URL validation](#url-validation))
-- `url_not_accessible`: Failed to fetch content (HTTP error)
-- `too_many_requests`: Rate limit exceeded
-- `unsupported_content_type`: Content type not supported (only text, HTML, and PDF)
-- `max_uses_exceeded`: Maximum web fetch tool uses exceeded
-- `unavailable`: An internal error occurred
+* `invalid_tool_input`: Invalid tool input, such as a malformed URL or a non-HTTP(S) scheme
+* `url_too_long`: URL exceeds maximum length (250 characters)
+* `url_not_allowed`: URL blocked by domain filtering rules (including your organization's settings) or by Anthropic-side restrictions, such as private addresses and `robots.txt`
+* `url_not_in_prior_context`: URL did not appear earlier in the conversation (see [URL validation](agents-and-tools/tool-use/web-fetch-tool.md))
+* `url_not_accessible`: Failed to fetch content (HTTP error)
+* `too_many_requests`: Rate limit exceeded
+* `unsupported_content_type`: Content type not supported (only text, HTML, and PDF)
+* `max_uses_exceeded`: Maximum web fetch tool uses exceeded
+* `unavailable`: An internal error occurred
 
-## URL validation
+## URL validation
 
 For security reasons, the web fetch tool can only fetch URLs that have previously appeared in the conversation context. This includes:
 
-- URLs in user messages
-- URLs in client-side tool results
-- URLs from previous web search or web fetch results
+* URLs in user messages
+* URLs in client-side tool results
+* URLs from previous web search or web fetch results
 
 The tool cannot fetch URLs that appear only in Claude's own output or only in the system prompt. To make a URL from the system prompt fetchable, also include it in a user message. Results of other server-side tools, such as [code execution](agents-and-tools/tool-use/code-execution-tool.md), the [MCP connector](agents-and-tools/mcp-connector.md), or [tool search](agents-and-tools/tool-use/tool-search-tool.md), are not an allowed source either. Client-side tool results are an allowed source even when they echo text that Claude produced (for example, a command that prints its input, or an error message that quotes it).
 
-## Combined search and fetch
+## Combined search and fetch
 
 When both the web search and web fetch tools are enabled, and the user names a specific page or document without providing a URL (for example, "read the README from the anthropics/anthropic-sdk-python repository"), Claude uses web search to locate it, then fetches the result. The following example asks for a search and an analysis in one request:
 
-cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+```bash cURL
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-4-8",
+    "max_tokens": 4096,
+    "messages": [
+      {
+        "role": "user",
+        "content": "Find recent articles about quantum computing and analyze the most relevant one in detail"
+      }
+    ],
+    "tools": [
+      {
+        "type": "web_search_20250305",
+        "name": "web_search",
+        "max_uses": 3
+      },
+      {
+        "type": "web_fetch_20250910",
+        "name": "web_fetch",
+        "max_uses": 5,
+        "citations": {"enabled": true}
+      }
+    ]
+  }'
+```
 
-
+```bash CLI
+ant messages create <<'YAML'
+model: claude-opus-4-8
+max_tokens: 4096
+messages:
+  - role: user
+    content: >-
+      Find recent articles about quantum computing
+      and analyze the most relevant one in detail
+tools:
+  - type: web_search_20250305
+    name: web_search
+    max_uses: 3
+  - type: web_fetch_20250910
+    name: web_fetch
+    max_uses: 5
+    citations:
+      enabled: true
+YAML
+```
 
-```shiki
+```python Python
 client = anthropic.Anthropic()
 
 response = client.messages.create(
@@ -370,6 +708,155 @@ response = client.messages.create(
 print(response)
 ```
 
+```typescript TypeScript
+const client = new Anthropic();
+
+const response = await client.messages.create({
+  model: "claude-opus-4-8",
+  max_tokens: 4096,
+  messages: [
+    {
+      role: "user",
+      content:
+        "Find recent articles about quantum computing and analyze the most relevant one in detail"
+    }
+  ],
+  tools: [
+    { type: "web_search_20250305", name: "web_search", max_uses: 3 },
+    {
+      type: "web_fetch_20250910",
+      name: "web_fetch",
+      max_uses: 5,
+      citations: { enabled: true }
+    }
+  ]
+});
+
+console.log(response);
+```
+
+```csharp C#
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
+{
+    Model = Model.ClaudeOpus4_8,
+    MaxTokens = 4096,
+    Messages = [new() { Role = Role.User, Content = "Find recent articles about quantum computing and analyze the most relevant one in detail" }],
+    Tools = [
+        new ToolUnion(new WebSearchTool20250305() { MaxUses = 3 }),
+        new ToolUnion(new WebFetchTool20250910() { MaxUses = 5, Citations = new() { Enabled = true } })
+    ]
+};
+
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message);
+```
+
+```go Go
+client := anthropic.NewClient()
+
+response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+	Model:     anthropic.ModelClaudeOpus4_8,
+	MaxTokens: 4096,
+	Messages: []anthropic.MessageParam{
+		anthropic.NewUserMessage(anthropic.NewTextBlock("Find recent articles about quantum computing and analyze the most relevant one in detail")),
+	},
+	Tools: []anthropic.ToolUnionParam{
+		{OfWebSearchTool20250305: &anthropic.WebSearchTool20250305Param{
+			MaxUses: anthropic.Int(3),
+		}},
+		{OfWebFetchTool20250910: &anthropic.WebFetchTool20250910Param{
+			MaxUses:   anthropic.Int(5),
+			Citations: anthropic.CitationsConfigParam{Enabled: anthropic.Bool(true)},
+		}},
+	},
+})
+if err != nil {
+	log.Fatal(err)
+}
+fmt.Println(response.RawJSON())
+```
+
+```java Java
+import com.anthropic.models.messages.CitationsConfigParam;
+// ...
+import com.anthropic.models.messages.WebFetchTool20250910;
+import com.anthropic.models.messages.WebSearchTool20250305;
+
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_8)
+        .maxTokens(4096L)
+        .addUserMessage("Find recent articles about quantum computing and analyze the most relevant one in detail")
+        .addTool(WebSearchTool20250305.builder()
+            .maxUses(3L)
+            .build())
+        .addTool(WebFetchTool20250910.builder()
+            .maxUses(5L)
+            .citations(CitationsConfigParam.builder().enabled(true).build())
+            .build())
+        .build();
+
+    Message response = client.messages().create(params);
+    IO.println(response);
+}
+```
+
+```php PHP
+$client = new Client();
+
+$message = $client->messages->create(
+    maxTokens: 4096,
+    messages: [
+        ['role' => 'user', 'content' => 'Find recent articles about quantum computing and analyze the most relevant one in detail']
+    ],
+    model: 'claude-opus-4-8',
+    tools: [
+        [
+            'type' => 'web_search_20250305',
+            'name' => 'web_search',
+            'max_uses' => 3,
+        ],
+        [
+            'type' => 'web_fetch_20250910',
+            'name' => 'web_fetch',
+            'max_uses' => 5,
+            'citations' => ['enabled' => true],
+        ],
+    ],
+);
+echo $message;
+```
+
+```ruby Ruby
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-4-8",
+  max_tokens: 4096,
+  messages: [
+    { role: "user", content: "Find recent articles about quantum computing and analyze the most relevant one in detail" }
+  ],
+  tools: [
+    {
+      type: "web_search_20250305",
+      name: "web_search",
+      max_uses: 3
+    },
+    {
+      type: "web_fetch_20250910",
+      name: "web_fetch",
+      max_uses: 5,
+      citations: { enabled: true }
+    }
+  ]
+)
+puts message
+```
+
 In this workflow, Claude:
 
 1. Uses web search to find relevant articles.
@@ -377,19 +864,15 @@ In this workflow, Claude:
 3. Uses web fetch to retrieve full content.
 4. Provides detailed analysis with citations.
 
-## Prompt caching
+## Prompt caching
 
 To cache tool definitions across turns, see [Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md).
 
-## Streaming
+## Streaming
 
 With streaming enabled, fetch events are part of the stream with a pause during content retrieval:
 
-Output
-
-
-
-```shiki
+```sse Output
 event: message_start
 data: {"type": "message_start", "message": {"id": "msg_abc123", "type": "message"}}
 
@@ -414,15 +897,15 @@ data: {"type": "content_block_start", "index": 2, "content_block": {"type": "web
 // Claude's response continues...
 ```
 
-## Batch requests
+## Batch requests
 
 You can include the web fetch tool in the [Messages Batches API](build-with-claude/batch-processing.md). Web fetch tool calls through the Messages Batches API are priced the same as those in regular Messages API requests.
 
-## Usage and pricing
+## Usage and pricing
 
 Web fetch usage has **no additional charges** beyond standard token costs:
 
-```shiki
+```json
 {
   "usage": {
     "input_tokens": 25039,
@@ -436,41 +919,29 @@ Web fetch usage has **no additional charges** beyond standard token costs:
 }
 ```
 
-
-
 The web fetch tool is available on the Claude API at **no additional cost**. You only pay standard token costs for the fetched content that becomes part of your conversation context.
 
 To protect against inadvertently fetching large content that would consume excessive tokens, use the `max_content_tokens` parameter to set appropriate limits based on your use case and budget considerations.
 
 Example token usage for typical content:
 
-- Average web page (10 kB): ~2,500 tokens
-- Large documentation page (100 kB): ~25,000 tokens
-- Research paper PDF (500 kB): ~125,000 tokens
+* Average web page (10 kB): \~2,500 tokens
+* Large documentation page (100 kB): \~25,000 tokens
+* Research paper PDF (500 kB): \~125,000 tokens
 
-## Next steps
+## Next steps
 
-
-
-[Code execution tool](agents-and-tools/tool-use/code-execution-tool.md)
+**Code execution tool**
 
 Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions.
 
-
-
-[Server tools](agents-and-tools/tool-use/server-tools.md)
+**Server tools**
 
 Work with Anthropic-executed tools: server\_tool\_use blocks, pause\_turn continuation, and domain filtering.
 
-
-
-[Tool reference](agents-and-tools/tool-use/tool-reference.md)
+**Tool reference**
 
 Directory of Anthropic-provided tools and reference for optional tool definition properties.
-
-Was this page helpful?
-
-
 
 ---
 

@@ -1,253 +1,193 @@
 # List memory stores
 
-Copy page
-
-
-
-cURL
-
-# List memory stores
-
-GET/v1/memory\_stores
+**GET** `/v1/memory_stores`
 
 List memory stores
 
-##### Query parameters
+## Query parameters
 
-
+- `"created_at[gte]": optional string`
 
-"created\_at[gte]": optional string
+  Return only stores whose `created_at` is at or after this time (inclusive). Sent on the wire as `created_at[gte]`.
 
-Return only stores whose `created_at` is at or after this time (inclusive). Sent on the wire as `created_at[gte]`.
+  format: date-time
 
-formatdate-time
+- `"created_at[lte]": optional string`
 
-
+  Return only stores whose `created_at` is at or before this time (inclusive). Sent on the wire as `created_at[lte]`.
 
-"created\_at[lte]": optional string
+  format: date-time
 
-Return only stores whose `created_at` is at or before this time (inclusive). Sent on the wire as `created_at[lte]`.
+- `include_archived: optional boolean`
 
-formatdate-time
+  When `true`, archived stores are included in the results. Defaults to `false` (archived stores are excluded).
 
-include\_archived: optional boolean
+- `limit: optional number`
 
-When `true`, archived stores are included in the results. Defaults to `false` (archived stores are excluded).
+  Maximum number of stores to return per page. Must be between 1 and 100. Defaults to 20 when omitted.
 
-
+  format: int32
 
-limit: optional number
+- `page: optional string`
 
-Maximum number of stores to return per page. Must be between 1 and 100. Defaults to 20 when omitted.
+  Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
-formatint32
+## Headers
 
-page: optional string
+- `"anthropic-beta": optional array of AnthropicBeta`
 
-Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
+  Optional header to specify the beta version(s) you want to use.
 
-##### Headers
+  - `string`
 
-
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+    - `"message-batches-2024-09-24"`
 
-Optional header to specify the beta version(s) you want to use.
+    - `"prompt-caching-2024-07-31"`
 
-One of the following:
+    - `"computer-use-2024-10-22"`
 
-string
+    - `"computer-use-2025-01-24"`
 
-
+    - `"pdfs-2024-09-25"`
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
+    - `"token-counting-2024-11-01"`
 
-One of the following:
+    - `"token-efficient-tools-2025-02-19"`
 
-"message-batches-2024-09-24"
+    - `"output-128k-2025-02-19"`
 
-"prompt-caching-2024-07-31"
+    - `"files-api-2025-04-14"`
 
-"computer-use-2024-10-22"
+    - `"mcp-client-2025-04-04"`
 
-"computer-use-2025-01-24"
+    - `"mcp-client-2025-11-20"`
 
-"pdfs-2024-09-25"
+    - `"dev-full-thinking-2025-05-14"`
 
-"token-counting-2024-11-01"
+    - `"interleaved-thinking-2025-05-14"`
 
-"token-efficient-tools-2025-02-19"
+    - `"code-execution-2025-05-22"`
 
-"output-128k-2025-02-19"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"files-api-2025-04-14"
+    - `"context-1m-2025-08-07"`
 
-"mcp-client-2025-04-04"
+    - `"context-management-2025-06-27"`
 
-"mcp-client-2025-11-20"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"dev-full-thinking-2025-05-14"
+    - `"skills-2025-10-02"`
 
-"interleaved-thinking-2025-05-14"
+    - `"fast-mode-2026-02-01"`
 
-"code-execution-2025-05-22"
+    - `"output-300k-2026-03-24"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"user-profiles-2026-03-24"`
 
-"context-1m-2025-08-07"
+    - `"user-profiles-2026-08-18"`
 
-"context-management-2025-06-27"
+    - `"advisor-tool-2026-03-01"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"managed-agents-2026-04-01"`
 
-"skills-2025-10-02"
+    - `"cache-diagnosis-2026-04-07"`
 
-"fast-mode-2026-02-01"
+    - `"dreaming-2026-04-21"`
 
-"output-300k-2026-03-24"
+    - `"thinking-token-count-2026-05-13"`
 
-"user-profiles-2026-03-24"
+    - `"server-side-fallback-2026-06-01"`
 
-"user-profiles-2026-08-18"
+    - `"server-side-fallback-2026-07-01"`
 
-"advisor-tool-2026-03-01"
+    - `"fallback-credit-2026-06-01"`
 
-"managed-agents-2026-04-01"
+    - `"fallback-credit-2026-07-01"`
 
-"cache-diagnosis-2026-04-07"
+    - `"agent-memory-2026-07-22"`
 
-"dreaming-2026-04-21"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-"thinking-token-count-2026-05-13"
+    - `"compact-2026-01-12"`
 
-"server-side-fallback-2026-06-01"
+    - `"computer-use-2025-11-24"`
 
-"server-side-fallback-2026-07-01"
+    - `"mcp-tunnels-2026-06-22"`
 
-"fallback-credit-2026-06-01"
+    - `"structured-outputs-2025-11-13"`
 
-"fallback-credit-2026-07-01"
+    - `"task-budgets-2026-03-13"`
 
-"agent-memory-2026-07-22"
+    - `"thinking-display-updates-2026-08-18"`
 
-"mid-conversation-tool-changes-2026-07-01"
+    - `"ce-user-management-2026-07-13"`
 
-"compact-2026-01-12"
+    - `"mid-conversation-output-config-2026-07-01"`
 
-"computer-use-2025-11-24"
+    - `"thinking-binding-controls-2026-08-01"`
 
-"mcp-tunnels-2026-06-22"
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"structured-outputs-2025-11-13"
+## Returns
 
-"task-budgets-2026-03-13"
+- `data: optional array of BetaManagedAgentsMemoryStore`
 
-"thinking-display-updates-2026-08-18"
+  Memory stores on this page, newest first. Empty when there are no stores matching the filters.
 
-"ce-user-management-2026-07-13"
+  - `id: string`
 
-"mid-conversation-output-config-2026-07-01"
+    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
 
-"thinking-binding-controls-2026-08-01"
+  - `created_at: string`
 
-"mid-conversation-system-clear-at-2026-08-21"
+    A timestamp in RFC 3339 format
 
-##### Returns
+    format: date-time
 
-
+  - `name: string`
 
-data: optional array of [BetaManagedAgentsMemoryStore](api/http/beta/memory_stores.md) { id, created\_at, name, 5 more }
+    Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
-Memory stores on this page, newest first. Empty when there are no stores matching the filters.
+  - `type: "memory_store"`
 
-id: string
+  - `updated_at: string`
 
-Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+    A timestamp in RFC 3339 format
 
-
+    format: date-time
 
-created\_at: string
+  - `archived_at: optional string or null`
 
-A timestamp in RFC 3339 format
+    A timestamp in RFC 3339 format
 
-formatdate-time
+    format: date-time
 
-name: string
+  - `description: optional string`
 
-Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
+    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
-type: "memory\_store"
+  - `metadata: optional map[string]`
 
-
+    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 
-updated\_at: string
+- `next_page: optional string or null`
 
-A timestamp in RFC 3339 format
+  Opaque cursor for the next page (a `page_...` value). Pass as `page` on the next request. `null` when there are no more results.
 
-formatdate-time
+## Example
 
-
-
-archived\_at: optional string or null
-
-A timestamp in RFC 3339 format
-
-formatdate-time
-
-description: optional string
-
-Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
-
-metadata: optional map[string]
-
-Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
-
-next\_page: optional string or null
-
-Opaque cursor for the next page (a `page_...` value). Pass as `page` on the next request. `null` when there are no more results.
-
-List memory stores
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/memory_stores \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: agent-memory-2026-07-22' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "name": "name",
-      "type": "memory_store",
-      "updated_at": "2019-12-27T18:11:19.117Z",
-      "archived_at": "2019-12-27T18:11:19.117Z",
-      "description": "description",
-      "metadata": {
-        "foo": "string"
-      }
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

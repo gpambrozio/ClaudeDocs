@@ -1,380 +1,360 @@
 # Update Environment
 
-Copy page
+`BetaEnvironment beta().environments().update(params = EnvironmentUpdateParams.none(), requestOptions = RequestOptions.none())`
 
-
-
-Java
-
-# Update Environment
-
-[BetaEnvironment](api/beta/environments.md) beta().environments().update(EnvironmentUpdateParamsparams = EnvironmentUpdateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
-
-POST/v1/environments/{environment\_id}
+**POST** `/v1/environments/{environment_id}`
 
 Update an existing environment's configuration.
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `EnvironmentUpdateParams params`
 
-EnvironmentUpdateParams params
+  - `Optional<String> environmentId`
 
-Optional<String> environmentId
+  - `Optional<List<AnthropicBeta>> betas`
 
-
+    Optional header to specify the beta version(s) you want to use.
 
-Optional<List<AnthropicBeta>> betas
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
-Optional header to specify the beta version(s) you want to use.
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
 
-MESSAGE\_BATCHES\_2024\_09\_24("message-batches-2024-09-24")
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
-PROMPT\_CACHING\_2024\_07\_31("prompt-caching-2024-07-31")
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-COMPUTER\_USE\_2024\_10\_22("computer-use-2024-10-22")
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
 
-COMPUTER\_USE\_2025\_01\_24("computer-use-2025-01-24")
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
 
-PDFS\_2024\_09\_25("pdfs-2024-09-25")
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
 
-TOKEN\_COUNTING\_2024\_11\_01("token-counting-2024-11-01")
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
 
-TOKEN\_EFFICIENT\_TOOLS\_2025\_02\_19("token-efficient-tools-2025-02-19")
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
-OUTPUT\_128K\_2025\_02\_19("output-128k-2025-02-19")
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
-FILES\_API\_2025\_04\_14("files-api-2025-04-14")
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
 
-MCP\_CLIENT\_2025\_04\_04("mcp-client-2025-04-04")
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
 
-MCP\_CLIENT\_2025\_11\_20("mcp-client-2025-11-20")
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
 
-DEV\_FULL\_THINKING\_2025\_05\_14("dev-full-thinking-2025-05-14")
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-INTERLEAVED\_THINKING\_2025\_05\_14("interleaved-thinking-2025-05-14")
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
 
-CODE\_EXECUTION\_2025\_05\_22("code-execution-2025-05-22")
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
-EXTENDED\_CACHE\_TTL\_2025\_04\_11("extended-cache-ttl-2025-04-11")
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
-CONTEXT\_1M\_2025\_08\_07("context-1m-2025-08-07")
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-CONTEXT\_MANAGEMENT\_2025\_06\_27("context-management-2025-06-27")
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
-MODEL\_CONTEXT\_WINDOW\_EXCEEDED\_2025\_08\_26("model-context-window-exceeded-2025-08-26")
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
-SKILLS\_2025\_10\_02("skills-2025-10-02")
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
-OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
-USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
-MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
-CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
-THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
-FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
 
-AGENT\_MEMORY\_2026\_07\_22("agent-memory-2026-07-22")
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
-
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
-Optional<Config> config
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
-Updated environment configuration
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
 
-class BetaCloudConfigParams:
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
 
-Request params for `cloud` environment configuration.
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
 
-Fields default to null; on update, omitted fields preserve the
-existing value.
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
 
-JsonValue; type "cloud"constant"cloud"constant
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
 
-Environment type
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
 
-Optional<Networking> networking
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-Network configuration policy. Omit on update to preserve the existing value.
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
 
-One of the following:
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-
+  - `Optional<Config> config`
 
-class BetaUnrestrictedNetwork:
+    Updated environment configuration
 
-Unrestricted network access.
+    - `class BetaCloudConfigParams:`
 
-JsonValue; type "unrestricted"constant"unrestricted"constant
+      Request params for `cloud` environment configuration.
 
-Network policy type
+      Fields default to null; on update, omitted fields preserve the
+      existing value.
 
-
+      - `JsonValue type = "cloud"`
 
-class BetaLimitedNetworkParams:
+        Environment type
 
-Limited network request params.
+      - `Optional<Networking> networking`
 
-Fields default to null; on update, omitted fields preserve the
-existing value.
+        Network configuration policy. Omit on update to preserve the existing value.
 
-JsonValue; type "limited"constant"limited"constant
+        - `class BetaUnrestrictedNetwork:`
 
-Network policy type
+          Unrestricted network access.
 
-Optional<Boolean> allowMcpServers
+          - `JsonValue type = "unrestricted"`
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+            Network policy type
 
-Optional<Boolean> allowPackageManagers
+        - `class BetaLimitedNetworkParams:`
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+          Limited network request params.
 
-Optional<List<String>> allowedHosts
+          Fields default to null; on update, omitted fields preserve the
+          existing value.
 
-Specifies domains the container can reach.
+          - `JsonValue type = "limited"`
 
-
+            Network policy type
 
-Optional<[BetaPackagesParams](api/beta/environments.md)> packages
+          - `Optional<Boolean> allowMcpServers`
 
-Specify packages (and optionally their versions) available in this environment.
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+          - `Optional<Boolean> allowPackageManagers`
 
-Optional<List<String>> apt
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
 
-Ubuntu/Debian packages to install
+          - `Optional<List<String>> allowedHosts`
 
-Optional<List<String>> cargo
+            Specifies domains the container can reach.
 
-Rust packages to install
+      - `Optional<BetaPackagesParams> packages`
 
-Optional<List<String>> gem
+        Specify packages (and optionally their versions) available in this environment.
 
-Ruby packages to install
+        When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-Optional<List<String>> go
+        Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
 
-Go packages to install
+        - `Optional<List<String>> apt`
 
-Optional<List<String>> npm
+          Ubuntu/Debian packages to install
 
-Node.js packages to install
+        - `Optional<List<String>> cargo`
 
-Optional<List<String>> pip
+          Rust packages to install
 
-Python packages to install
+        - `Optional<List<String>> gem`
 
-Optional<Type> type
+          Ruby packages to install
 
-Package configuration type
+        - `Optional<List<String>> go`
 
-
+          Go packages to install
 
-class BetaSelfHostedConfigParams:
+        - `Optional<List<String>> npm`
 
-Request params for `self_hosted` environment configuration.
+          Node.js packages to install
 
-JsonValue; type "self\_hosted"constant"self\_hosted"constant
+        - `Optional<List<String>> pip`
 
-Environment type
+          Python packages to install
 
-Optional<String> description
+        - `Optional<Type> type`
 
-Updated description of the environment
+          Package configuration type
 
-Optional<Metadata> metadata
+    - `class BetaSelfHostedConfigParams:`
 
-User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
+      Request params for `self_hosted` environment configuration.
 
-Optional<String> name
+      - `JsonValue type = "self_hosted"`
 
-Updated name for the environment
+        Environment type
 
-
+  - `Optional<String> description`
 
-Optional<Scope> scope
+    Updated description of the environment. Omit to preserve; null clears to null; an empty string is stored as an empty string.
 
-The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
+    maxLength: 1024
 
-ORGANIZATION("organization")
+  - `Optional<Metadata> metadata`
 
-ACCOUNT("account")
+    User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
 
-##### ReturnsExpand Collapse
+  - `Optional<String> name`
 
-
+    Updated name for the environment
 
-class BetaEnvironment:
+    maxLength: 256, minLength: 1
 
-Unified Environment resource for both cloud and self-hosted environments.
+  - `Optional<Scope> scope`
 
-String id
+    The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
 
-Environment identifier (e.g., 'env\_...')
+    - `ORGANIZATION("organization")`
 
-Optional<String> archivedAt
+    - `ACCOUNT("account")`
 
-RFC 3339 timestamp when environment was archived, or null if not archived
+## Returns
 
-
+- `class BetaEnvironment:`
 
-Config config
+  Unified Environment resource for both cloud and self-hosted environments.
 
-Environment configuration (either Anthropic Cloud or self-hosted)
+  - `String id`
 
-One of the following:
+    Environment identifier (e.g., 'env_...')
 
-
+  - `Optional<String> archivedAt`
 
-class BetaCloudConfig:
+    RFC 3339 timestamp when environment was archived, or null if not archived
 
-`cloud` environment configuration.
+  - `Config config`
 
-
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-Networking networking
+    - `class BetaCloudConfig:`
 
-Network configuration policy.
+      `cloud` environment configuration.
 
-One of the following:
+      - `Networking networking`
 
-
+        Network configuration policy.
 
-class BetaUnrestrictedNetwork:
+        - `class BetaUnrestrictedNetwork:`
 
-Unrestricted network access.
+          Unrestricted network access.
 
-JsonValue; type "unrestricted"constant"unrestricted"constant
+          - `JsonValue type = "unrestricted"`
 
-Network policy type
+            Network policy type
 
-
+        - `class BetaLimitedNetwork:`
 
-class BetaLimitedNetwork:
+          Limited network access.
 
-Limited network access.
+          - `boolean allowMcpServers`
 
-boolean allowMcpServers
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+          - `boolean allowPackageManagers`
 
-boolean allowPackageManagers
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+          - `List<String> allowedHosts`
 
-List<String> allowedHosts
+            Specifies domains the container can reach.
 
-Specifies domains the container can reach.
+          - `JsonValue type = "limited"`
 
-JsonValue; type "limited"constant"limited"constant
+            Network policy type
 
-Network policy type
+      - `BetaPackages packages`
 
-
+        Package manager configuration.
 
-[BetaPackages](api/beta/environments.md) packages
+        - `List<String> apt`
 
-Package manager configuration.
+          Ubuntu/Debian packages to install
 
-List<String> apt
+        - `List<String> cargo`
 
-Ubuntu/Debian packages to install
+          Rust packages to install
 
-List<String> cargo
+        - `List<String> gem`
 
-Rust packages to install
+          Ruby packages to install
 
-List<String> gem
+        - `List<String> go`
 
-Ruby packages to install
+          Go packages to install
 
-List<String> go
+        - `List<String> npm`
 
-Go packages to install
+          Node.js packages to install
 
-List<String> npm
+        - `List<String> pip`
 
-Node.js packages to install
+          Python packages to install
 
-List<String> pip
+        - `Optional<Type> type`
 
-Python packages to install
+          Package configuration type
 
-Optional<Type> type
+      - `JsonValue type = "cloud"`
 
-Package configuration type
+        Environment type
 
-JsonValue; type "cloud"constant"cloud"constant
+    - `class BetaSelfHostedConfig:`
 
-Environment type
+      Configuration for self-hosted environments.
 
-
+      - `JsonValue type = "self_hosted"`
 
-class BetaSelfHostedConfig:
+        Environment type
 
-Configuration for self-hosted environments.
+  - `String createdAt`
 
-JsonValue; type "self\_hosted"constant"self\_hosted"constant
+    RFC 3339 timestamp when environment was created
 
-Environment type
+  - `Optional<String> description`
 
-String createdAt
+    User-provided description for the environment; null when unset
 
-RFC 3339 timestamp when environment was created
+  - `Metadata metadata`
 
-String description
+    User-provided metadata key-value pairs
 
-User-provided description for the environment
+  - `String name`
 
-Metadata metadata
+    Human-readable name for the environment
 
-User-provided metadata key-value pairs
+  - `JsonValue type = "environment"`
 
-String name
+    The type of object (always 'environment')
 
-Human-readable name for the environment
+  - `String updatedAt`
 
-JsonValue; type "environment"constant"environment"constant
+    RFC 3339 timestamp when environment was last updated
 
-The type of object (always 'environment')
+  - `Optional<Scope> scope`
 
-String updatedAt
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-RFC 3339 timestamp when environment was last updated
+    - `ORGANIZATION("organization")`
 
-
+    - `ACCOUNT("account")`
 
-Optional<Scope> scope
+## Example
 
-The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
-
-One of the following:
-
-ORGANIZATION("organization")
-
-ACCOUNT("account")
-
-Update Environment
-
-Java
-
-```shiki
+```java
 package com.anthropic.example;
 
 import com.anthropic.client.AnthropicClient;
@@ -393,64 +373,9 @@ public final class Main {
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
-  "archived_at": null,
-  "config": {
-    "networking": {
-      "allow_mcp_servers": false,
-      "allow_package_managers": true,
-      "allowed_hosts": [
-        "api.example.com"
-      ],
-      "type": "limited"
-    },
-    "packages": {
-      "apt": [
-        "string"
-      ],
-      "cargo": [
-        "string"
-      ],
-      "gem": [
-        "string"
-      ],
-      "go": [
-        "string"
-      ],
-      "npm": [
-        "string"
-      ],
-      "pip": [
-        "pandas",
-        "numpy"
-      ],
-      "type": "packages"
-    },
-    "type": "cloud"
-  },
-  "created_at": "2026-03-15T10:00:00Z",
-  "description": "Python environment with data-analysis packages.",
-  "metadata": {},
-  "name": "python-data-analysis",
-  "type": "environment",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "scope": "organization"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
   "archived_at": null,

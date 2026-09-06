@@ -1,26 +1,26 @@
 # Example settings files
 
+> Realistic settings.json files for a developer, a team, and an organization: copy one, keep the keys you want, and change the values.
+
 This page holds three example `settings.json` files, one for each place you save a setting:
 
-- A developer’s `~/.claude/settings.json`
-- A team’s `.claude/settings.json`, committed to the repository
-- An organization’s `managed-settings.json`
+* A developer's `~/.claude/settings.json`
+* A team's `.claude/settings.json`, committed to the repository
+* An organization's `managed-settings.json`
 
-Each one is a plausible file for that reader, so you can see the shape and copy the parts you want. None of them is a recommended baseline. Every value comes from the key’s entry on the [settings reference](settings-reference.md), which has its type, default, and where it can be set.
-Each example has two tabs. **Copyable settings file** is the file as you’d save it. **What each key does** is the same file with a comment above each key; Claude Code doesn’t accept comments in a settings file, so copy from the first tab.
+Each one is a plausible file for that reader, so you can see the shape and copy the parts you want. None of them is a recommended baseline. Every value comes from the key's entry on the [settings reference](settings-reference.md), which has its type, default, and where it can be set.
 
-## [​](#your-own-settings) Your own settings
+Each example has two tabs. **Copyable settings file** is the file as you'd save it. **What each key does** is the same file with a comment above each key; Claude Code doesn't accept comments in a settings file, so copy from the first tab.
 
-One developer’s personal settings. It picks a model and effort, adjusts the terminal, and pre-approves a read-only command and one file read. Everything not listed keeps its default. A file like this goes in `~/.claude/settings.json`, where it applies to every project you open.
+## Your own settings
 
-- Copyable settings file
-- What each key does
+One developer's personal settings. It picks a model and effort, adjusts the terminal, and pre-approves a read-only command and one file read. Everything not listed keeps its default. A file like this goes in `~/.claude/settings.json`, where it applies to every project you open.
 
-Save this as `~/.claude/settings.json`. It’s valid JSON with no comments, so you can paste it as is and delete the keys you don’t want.
+**Copyable settings file**
 
-~/.claude/settings.json
+Save this as `~/.claude/settings.json`. It's valid JSON with no comments, so you can paste it as is and delete the keys you don't want.
 
-```shiki
+```json ~/.claude/settings.json
 {
   "model": "claude-sonnet-5",
   "effortLevel": "xhigh",
@@ -44,11 +44,11 @@ Save this as `~/.claude/settings.json`. It’s valid JSON with no comments, so y
 }
 ```
 
-The same file with a comment above each key. Read it here; copy from the other tab, because Claude Code doesn’t accept comments in a settings file.
+**What each key does**
 
-~/.claude/settings.json
+The same file with a comment above each key. Read it here; copy from the other tab, because Claude Code doesn't accept comments in a settings file.
 
-```shiki
+```jsonc ~/.claude/settings.json
 {
   // Start every session on Sonnet 5
   "model": "claude-sonnet-5",
@@ -82,22 +82,21 @@ The same file with a comment above each key. Read it here; copy from the other t
 }
 ```
 
-## [​](#a-teams-shared-settings) A team’s shared settings
+<h2 id="a-teams-shared-settings">
+  A team's shared settings
+</h2>
 
-One team’s shared settings, committed to the repository so everyone who clones it gets the same permissions, hooks, telemetry, and plugin marketplace. Save a file like this at `.claude/settings.json` at the top of the repository. Three things to know before you commit one:
+One team's shared settings, committed to the repository so everyone who clones it gets the same permissions, hooks, telemetry, and plugin marketplace. Save a file like this at `.claude/settings.json` at the top of the repository. Three things to know before you commit one:
 
-- **Cloud sessions read it too.** A [cloud session](settings.md) on Claude Code on the web starts from a clone of the repository, so the committed file applies there as well.
-- **Allow rules wait for trust.** Allow rules and `extraKnownMarketplaces` entries take effect after each person [trusts this folder itself](permissions.md), not only a parent folder; deny and ask rules apply in every session, trusted or not.
-- **The hook is a script in the repo.** This file’s hook runs `.claude/hooks/block-rm.sh`; [How a hook resolves](hooks.md) walks through writing it.
+* **Cloud sessions read it too.** A [cloud session](settings.md) on Claude Code on the web starts from a clone of the repository, so the committed file applies there as well.
+* **Allow rules wait for trust.** Allow rules and `extraKnownMarketplaces` entries take effect after each person [trusts this folder itself](permissions.md), not only a parent folder; deny and ask rules apply in every session, trusted or not.
+* **The hook is a script in the repo.** This file's hook runs `.claude/hooks/block-rm.sh`; [How a hook resolves](hooks.md) walks through writing it.
 
-- Copyable settings file
-- What each key does
+**Copyable settings file**
 
-Save this as `.claude/settings.json` at the top of the repository and commit it. It’s valid JSON with no comments, so you can paste it as is and delete the keys you don’t want.
+Save this as `.claude/settings.json` at the top of the repository and commit it. It's valid JSON with no comments, so you can paste it as is and delete the keys you don't want.
 
-.claude/settings.json
-
-```shiki
+```json .claude/settings.json
 {
   "permissions": {
     "allow": [
@@ -160,11 +159,11 @@ Save this as `.claude/settings.json` at the top of the repository and commit it.
 }
 ```
 
-The same file with a comment above each key. Read it here; copy from the other tab, because Claude Code doesn’t accept comments in a settings file.
+**What each key does**
 
-.claude/settings.json
+The same file with a comment above each key. Read it here; copy from the other tab, because Claude Code doesn't accept comments in a settings file.
 
-```shiki
+```jsonc .claude/settings.json
 {
   "permissions": {
     // Run npm scripts without asking
@@ -236,31 +235,30 @@ The same file with a comment above each key. Read it here; copy from the other t
 }
 ```
 
-## [​](#an-organizations-managed-settings) An organization’s managed settings
+<h2 id="an-organizations-managed-settings">
+  An organization's managed settings
+</h2>
 
-A `managed-settings.json` file that shows the shape of the managed keys, with one plausible value for each. It isn’t a recommended policy: pick the keys that match your own requirements and set your own values. The example sets these keys:
+A `managed-settings.json` file that shows the shape of the managed keys, with one plausible value for each. It isn't a recommended policy: pick the keys that match your own requirements and set your own values. The example sets these keys:
 
-- `forceLoginMethod` and `forceLoginOrgUUID` pin the login method and organization
-- `availableModels` and `enforceAvailableModels` restrict which models sessions can use
-- `permissions.deny` blocks two file reads and `curl`, and `disableBypassPermissionsMode` removes the bypass permission mode
-- [`allowManagedPermissionRulesOnly`](settings-reference.md) and [`allowManagedMcpServersOnly`](settings-reference.md) make the managed permission and MCP allowlists the only ones that apply
-- `allowedMcpServers` pins the MCP server by URL
-- `strictKnownMarketplaces` allows one plugin marketplace
-- `sandbox` sandboxes commands with a fixed network allowlist and no unsandboxed retry
-- `requiredMinimumVersion` sets a minimum Claude Code version
-- `cleanupPeriodDays` shortens retention of session transcripts and other local data to seven days
-- `companyAnnouncements` shows a message at startup
+* `forceLoginMethod` and `forceLoginOrgUUID` pin the login method and organization
+* `availableModels` and `enforceAvailableModels` restrict which models sessions can use
+* `permissions.deny` blocks two file reads and `curl`, and `disableBypassPermissionsMode` removes the bypass permission mode
+* [`allowManagedPermissionRulesOnly`](settings-reference.md) and [`allowManagedMcpServersOnly`](settings-reference.md) make the managed permission and MCP allowlists the only ones that apply
+* `allowedMcpServers` pins the MCP server by URL
+* `strictKnownMarketplaces` allows one plugin marketplace
+* `sandbox` sandboxes commands with a fixed network allowlist and no unsandboxed retry
+* `requiredMinimumVersion` sets a minimum Claude Code version
+* `cleanupPeriodDays` shortens retention of session transcripts and other local data to seven days
+* `companyAnnouncements` shows a message at startup
 
-Administrators deploy a file like this as `managed-settings.json`, or the same JSON through MDM or [server-managed settings](server-managed-settings.md). One deployed file applies to every machine or account it reaches. To give a group different values, deploy a different file or profile to that group, since [server-managed settings don’t support per-group policy yet](server-managed-settings.md).
+Administrators deploy a file like this as `managed-settings.json`, or the same JSON through MDM or [server-managed settings](server-managed-settings.md). One deployed file applies to every machine or account it reaches. To give a group different values, deploy a different file or profile to that group, since [server-managed settings don't support per-group policy yet](server-managed-settings.md).
 
-- Copyable settings file
-- What each key does
+**Copyable settings file**
 
-Deploy this as `managed-settings.json`, or the same JSON through MDM or the claude.ai console. It’s valid JSON with no comments; replace the example organization UUID, server URL, and marketplace with your own and delete the keys you don’t want.
+Deploy this as `managed-settings.json`, or the same JSON through MDM or the claude.ai console. It's valid JSON with no comments; replace the example organization UUID, server URL, and marketplace with your own and delete the keys you don't want.
 
-managed-settings.json
-
-```shiki
+```json managed-settings.json
 {
   "forceLoginMethod": "claudeai",
   "forceLoginOrgUUID": [
@@ -312,11 +310,11 @@ managed-settings.json
 }
 ```
 
-The same file with a comment above each key. Read it here; copy from the other tab, because Claude Code doesn’t accept comments in a settings file.
+**What each key does**
 
-managed-settings.json
+The same file with a comment above each key. Read it here; copy from the other tab, because Claude Code doesn't accept comments in a settings file.
 
-```shiki
+```jsonc managed-settings.json
 {
   // Only claude.ai logins, and only in this organization
   "forceLoginMethod": "claudeai",

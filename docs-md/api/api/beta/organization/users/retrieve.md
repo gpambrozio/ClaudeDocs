@@ -1,117 +1,78 @@
 # Get User
 
-Copy page
-
-
-
-cURL
-
-# Get User
-
-GET/v1/organizations/users/{user\_id}
+**GET** `/v1/organizations/users/{user_id}`
 
 Retrieve a member of the organization by user ID.
 
-##### Path parameters
+## Path parameters
 
-user\_id: string
+- `user_id: string`
 
-ID of the User.
+  ID of the User.
 
-##### Returns
+## Returns
 
-
+- `BetaOrganizationUser object`
 
-BetaOrganizationUser object{ id, added\_at, email, 3 more }
+  - `id: string`
 
-id: string
+    ID of the User.
 
-ID of the User.
+  - `added_at: string`
 
-
+    RFC 3339 datetime string indicating when the User joined the Organization.
 
-added\_at: string
+    format: date-time
 
-RFC 3339 datetime string indicating when the User joined the Organization.
+  - `email: string`
 
-formatdate-time
+    Email of the User.
 
-email: string
+  - `name: string`
 
-Email of the User.
+    Name of the User.
 
-name: string
+  - `role: BetaOrganizationRole`
 
-Name of the User.
+    Organization role of the User.
 
-
+    - `"admin"`
 
-role: [BetaOrganizationRole](api/http/beta/organization.md)
+    - `"billing"`
 
-Organization role of the User.
+    - `"claude_code_user"`
 
-One of the following:
+    - `"developer"`
 
-"admin"
+    - `"managed"`
 
-"billing"
+    - `"membership_admin"`
 
-"claude\_code\_user"
+    - `"owner"`
 
-"developer"
+    - `"primary_owner"`
 
-"managed"
+    - `"user"`
 
-"membership\_admin"
+  - `type: "user"`
 
-"owner"
+    Object type.
 
-"primary\_owner"
+    For Users, this is always `"user"`.
 
-"user"
+    default: user
 
-
+## Example
 
-type: "user"
-
-Object type.
-
-For Users, this is always `"user"`.
-
-defaultuser
-
-Get User
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-  "added_at": "2024-10-30T23:58:27.427722Z",
-  "email": "user@emaildomain.com",
-  "name": "Jane Doe",
-  "role": "admin",
-  "type": "user"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
   "added_at": "2024-10-30T23:58:27.427722Z",

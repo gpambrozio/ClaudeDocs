@@ -1,86 +1,53 @@
 # Delete Skill
 
-Copy page
+`$ ant beta:skills delete`
 
-
-
-CLI
-
-# Delete Skill
-
-$ ant beta:skills delete
-
-DELETE/v1/skills/{skill\_id}
+**DELETE** `/v1/skills/{skill_id}`
 
 Delete Skill
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `--skill-id: string`
 
---skill-id: string
+  Unique identifier for the skill.
 
-Unique identifier for the skill.
+  The format and length of IDs may change over time.
 
-The format and length of IDs may change over time.
+- `--beta: optional array of AnthropicBeta`
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+  Optional header to specify the beta version(s) you want to use.
 
-Optional header to specify the beta version(s) you want to use.
+## Returns
 
-##### ReturnsExpand Collapse
+- `beta_deleted_skill: object`
 
-
+  - `id: string`
 
-BetaSkillDeleteResponse: object { id, type } 
+    Unique identifier for the skill.
 
-
+    The format and length of IDs may change over time.
 
-id: string
+  - `type: "skill_deleted"`
 
-Unique identifier for the skill.
+    Deleted object type.
 
-The format and length of IDs may change over time.
+    For Skills, this is always `"skill_deleted"`.
 
-
+## Example
 
-type: string
-
-Deleted object type.
-
-For Skills, this is always `"skill_deleted"`.
-
-Delete Skill
-
-CLI
-
-```shiki
+```bash
 ant beta:skills delete \
   --api-key my-anthropic-api-key \
   --skill-id skill_id
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type"
+  "type": "skill_deleted"
 }
 ```
 

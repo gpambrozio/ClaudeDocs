@@ -1,14 +1,6 @@
 # List Federation Rule Workspaces
 
-Copy page
-
-
-
-cURL
-
-# List Federation Rule Workspaces
-
-GET/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
+**GET** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces`
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -20,213 +12,167 @@ always `null`. Returns explicit per-workspace enablements only; for
 rules with `applies_to_all_workspaces` or a legacy single
 `workspace_id`, check those fields on the rule itself.
 
-##### Path parameters
+## Path parameters
 
-federation\_rule\_id: string
+- `federation_rule_id: string`
 
-ID of the federation rule.
+  ID of the federation rule.
 
-##### Query parameters
+## Query parameters
 
-
+- `limit: optional number`
 
-limit: optional number
+  Number of results per page.
 
-Number of results per page.
+  default: 20, maximum: 100, minimum: 1
 
-default20
+- `page: optional string`
 
-maximum100
+  Opaque cursor from a previous response's `next_page`.
 
-minimum1
+## Headers
 
-page: optional string
+- `"anthropic-beta": optional array of AnthropicBeta`
 
-Opaque cursor from a previous response's `next_page`.
+  Optional header to specify the beta version(s) you want to use.
 
-##### Headers
+  - `string`
 
-
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+    - `"message-batches-2024-09-24"`
 
-Optional header to specify the beta version(s) you want to use.
+    - `"prompt-caching-2024-07-31"`
 
-One of the following:
+    - `"computer-use-2024-10-22"`
 
-string
+    - `"computer-use-2025-01-24"`
 
-
+    - `"pdfs-2024-09-25"`
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
+    - `"token-counting-2024-11-01"`
 
-One of the following:
+    - `"token-efficient-tools-2025-02-19"`
 
-"message-batches-2024-09-24"
+    - `"output-128k-2025-02-19"`
 
-"prompt-caching-2024-07-31"
+    - `"files-api-2025-04-14"`
 
-"computer-use-2024-10-22"
+    - `"mcp-client-2025-04-04"`
 
-"computer-use-2025-01-24"
+    - `"mcp-client-2025-11-20"`
 
-"pdfs-2024-09-25"
+    - `"dev-full-thinking-2025-05-14"`
 
-"token-counting-2024-11-01"
+    - `"interleaved-thinking-2025-05-14"`
 
-"token-efficient-tools-2025-02-19"
+    - `"code-execution-2025-05-22"`
 
-"output-128k-2025-02-19"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"files-api-2025-04-14"
+    - `"context-1m-2025-08-07"`
 
-"mcp-client-2025-04-04"
+    - `"context-management-2025-06-27"`
 
-"mcp-client-2025-11-20"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"dev-full-thinking-2025-05-14"
+    - `"skills-2025-10-02"`
 
-"interleaved-thinking-2025-05-14"
+    - `"fast-mode-2026-02-01"`
 
-"code-execution-2025-05-22"
+    - `"output-300k-2026-03-24"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"user-profiles-2026-03-24"`
 
-"context-1m-2025-08-07"
+    - `"user-profiles-2026-08-18"`
 
-"context-management-2025-06-27"
+    - `"advisor-tool-2026-03-01"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"managed-agents-2026-04-01"`
 
-"skills-2025-10-02"
+    - `"cache-diagnosis-2026-04-07"`
 
-"fast-mode-2026-02-01"
+    - `"dreaming-2026-04-21"`
 
-"output-300k-2026-03-24"
+    - `"thinking-token-count-2026-05-13"`
 
-"user-profiles-2026-03-24"
+    - `"server-side-fallback-2026-06-01"`
 
-"user-profiles-2026-08-18"
+    - `"server-side-fallback-2026-07-01"`
 
-"advisor-tool-2026-03-01"
+    - `"fallback-credit-2026-06-01"`
 
-"managed-agents-2026-04-01"
+    - `"fallback-credit-2026-07-01"`
 
-"cache-diagnosis-2026-04-07"
+    - `"agent-memory-2026-07-22"`
 
-"dreaming-2026-04-21"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-"thinking-token-count-2026-05-13"
+    - `"compact-2026-01-12"`
 
-"server-side-fallback-2026-06-01"
+    - `"computer-use-2025-11-24"`
 
-"server-side-fallback-2026-07-01"
+    - `"mcp-tunnels-2026-06-22"`
 
-"fallback-credit-2026-06-01"
+    - `"structured-outputs-2025-11-13"`
 
-"fallback-credit-2026-07-01"
+    - `"task-budgets-2026-03-13"`
 
-"agent-memory-2026-07-22"
+    - `"thinking-display-updates-2026-08-18"`
 
-"mid-conversation-tool-changes-2026-07-01"
+    - `"ce-user-management-2026-07-13"`
 
-"compact-2026-01-12"
+    - `"mid-conversation-output-config-2026-07-01"`
 
-"computer-use-2025-11-24"
+    - `"thinking-binding-controls-2026-08-01"`
 
-"mcp-tunnels-2026-06-22"
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"structured-outputs-2025-11-13"
+## Returns
 
-"task-budgets-2026-03-13"
+- `data: array of BetaFederationRuleWorkspace`
 
-"thinking-display-updates-2026-08-18"
+  - `created_at: string`
 
-"ce-user-management-2026-07-13"
+    When this workspace was enabled for the rule.
 
-"mid-conversation-output-config-2026-07-01"
+    format: date-time
 
-"thinking-binding-controls-2026-08-01"
+  - `created_by_actor_id: string or null`
 
-"mid-conversation-system-clear-at-2026-08-21"
+    Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
 
-##### Returns
+  - `federation_rule_id: string`
 
-
+    Tagged ID of the federation rule.
 
-data: array of [BetaFederationRuleWorkspace](api/http/beta/organization/federation/rules.md) { created\_at, created\_by\_actor\_id, federation\_rule\_id, 3 more }
+  - `type: "federation_rule_workspace"`
 
-
+    default: federation_rule_workspace
 
-created\_at: string
+  - `workspace_id: string`
 
-When this workspace was enabled for the rule.
+    Tagged ID of the workspace this rule is enabled for.
 
-formatdate-time
+  - `workspace_name: string or null`
 
-created\_by\_actor\_id: string or null
+    Workspace display name. Populated when listing; null in the enable response.
 
-Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
+- `next_page: string or null`
 
-federation\_rule\_id: string
+  Opaque cursor for the next page; null when there are no more results.
 
-Tagged ID of the federation rule.
+## Example
 
-
-
-type: "federation\_rule\_workspace"
-
-defaultfederation\_rule\_workspace
-
-workspace\_id: string
-
-Tagged ID of the workspace this rule is enabled for.
-
-workspace\_name: string or null
-
-Workspace display name. Populated when listing; null in the enable response.
-
-next\_page: string or null
-
-Opaque cursor for the next page; null when there are no more results.
-
-List Federation Rule Workspaces
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RULE_ID/workspaces \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "created_by_actor_id": "created_by_actor_id",
-      "federation_rule_id": "federation_rule_id",
-      "type": "federation_rule_workspace",
-      "workspace_id": "workspace_id",
-      "workspace_name": "workspace_name"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

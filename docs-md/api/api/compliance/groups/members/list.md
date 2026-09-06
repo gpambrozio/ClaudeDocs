@@ -1,114 +1,71 @@
 # List Compliance Group Members
 
-To enable the Compliance API, see the setup guide.
-
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
-
-Copy page
-
-
-
-# List Compliance Group Members
-
-GET/v1/compliance/groups/{group\_id}/members
+**GET** `/v1/compliance/groups/{group_id}/members`
 
 List Compliance Group Members
 
-##### Path parameters
+## Path parameters
 
-group\_id: string
+- `group_id: string`
 
-The group ID (tagged ID, e.g., rbac\_group\_abc123)
+  The group ID (tagged ID, e.g., rbac_group_abc123)
 
-##### Query parameters
+## Query parameters
 
-
+- `limit: optional number`
 
-limit: optional number
+  Maximum results (default: 500, max: 1000)
 
-Maximum results (default: 500, max: 1000)
+  default: 500, maximum: 1000, minimum: 1
 
-default500
+- `page: optional string`
 
-maximum1000
+  Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
-minimum1
+## Headers
 
-page: optional string
+- `"x-api-key": optional string`
 
-Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
+## Returns
 
-##### Headers
+- `data: array of object`
 
-"x-api-key": optional string
+  List of group members
 
-##### Returns
+  - `created_at: string or null`
 
-
+    Membership creation timestamp (ISO 8601)
 
-data: array of object{ created\_at, email, updated\_at, user\_id }
+  - `email: string`
 
-List of group members
+    Member email address
 
-created\_at: string or null
+  - `updated_at: string or null`
 
-Membership creation timestamp (ISO 8601)
+    Membership last-updated timestamp (ISO 8601)
 
-email: string
+  - `user_id: string`
 
-Member email address
+    Member user identifier (tagged ID)
 
-updated\_at: string or null
+- `has_more: boolean`
 
-Membership last-updated timestamp (ISO 8601)
+  Whether more records exist beyond the current result set
 
-user\_id: string
+- `next_page: string or null`
 
-Member user identifier (tagged ID)
+  Token to retrieve the next page. Use this as the 'page' parameter in your next request
 
-has\_more: boolean
+## Example
 
-Whether more records exist beyond the current result set
-
-next\_page: string or null
-
-Token to retrieve the next page. Use this as the 'page' parameter in your next request
-
-List Compliance Group Members
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID/members \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "created_at": "2025-03-12T18:22:41.123456",
-      "email": "jane.doe@example.com",
-      "updated_at": "2025-03-14T09:05:17.456789",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
-    }
-  ],
-  "has_more": true,
-  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

@@ -1,16 +1,6 @@
 # Delete Code Artifact
 
-To enable the Compliance API, see the setup guide.
-
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
-
-Copy page
-
-
-
-# Delete Code Artifact
-
-DELETE/v1/compliance/apps/code/artifacts/{artifact\_id}
+**DELETE** `/v1/compliance/apps/code/artifacts/{artifact_id}`
 
 Permanently deletes a Code Artifact and all its versions. This is a
 destructive operation that cannot be undone. A 200 response means the
@@ -21,58 +11,39 @@ Returns 404 for Artifacts that don't exist or belong to another parent
 organization. Returns 404 on a repeated delete of an already-deleted
 Artifact.
 
-##### Path parameters
+## Path parameters
 
-artifact\_id: string
+- `artifact_id: string`
 
-The Artifact ID (tagged ID, e.g., cart\_abc123)
+  The Artifact ID (tagged ID, e.g., cart_abc123)
 
-##### Headers
+## Headers
 
-"x-api-key": optional string
+- `"x-api-key": optional string`
 
-##### Returns
+## Returns
 
-id: string
+- `id: string`
 
-The ID of the Artifact that was deleted
+  The ID of the Artifact that was deleted
 
-
+- `type: "code_artifact_deleted"`
 
-type: "code\_artifact\_deleted"
+  Constant string confirming deletion
 
-Constant string confirming deletion
+  default: code_artifact_deleted
 
-defaultcode\_artifact\_deleted
+## Example
 
-Delete Code Artifact
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/code/artifacts/$ARTIFACT_ID \
     -X DELETE \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "cart_xyz789",
-  "type": "code_artifact_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "cart_xyz789",
   "type": "code_artifact_deleted"

@@ -1,16 +1,8 @@
 # Count tokens in a Message
 
-Copy page
+`MessageTokensCount messages().countTokens(params, requestOptions = RequestOptions.none())`
 
-
-
-Java
-
-# Count tokens in a Message
-
-[MessageTokensCount](api/messages.md) messages().countTokens(MessageCountTokensParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
-
-POST/v1/messages/count\_tokens
+**POST** `/v1/messages/count_tokens`
 
 Count the number of tokens in a Message.
 
@@ -18,4855 +10,2661 @@ The Token Count API can be used to count the number of tokens in a Message, incl
 
 Learn more about token counting in our [user guide](build-with-claude/token-counting.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `MessageCountTokensParams params`
 
-MessageCountTokensParams params
+  - `Optional<String> userProfileId`
 
-Optional<String> userProfileId
+    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
-The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+  - `List<MessageParam> messages`
 
-
+    Input messages.
 
-List<[MessageParam](api/messages.md)> messages
+    Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
 
-Input messages.
+    Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
 
-Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
+    If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
 
-Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
+    Example with a single `user` message:
 
-If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
+    ```json
+    [{"role": "user", "content": "Hello, Claude"}]
+    ```
 
-Example with a single `user` message:
+    Example with multiple conversational turns:
 
-```shiki
-[{"role": "user", "content": "Hello, Claude"}]
-```
+    ```json
+    [
+      {"role": "user", "content": "Hello there."},
+      {"role": "assistant", "content": "Hi, I'm Claude. How can I help you?"},
+      {"role": "user", "content": "Can you explain LLMs in plain English?"},
+    ]
+    ```
 
-
+    Example with a partially-filled response from Claude:
 
-Example with multiple conversational turns:
+    ```json
+    [
+      {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+      {"role": "assistant", "content": "The best answer is ("},
+    ]
+    ```
 
-```shiki
-[
-  {"role": "user", "content": "Hello there."},
-  {"role": "assistant", "content": "Hi, I'm Claude. How can I help you?"},
-  {"role": "user", "content": "Can you explain LLMs in plain English?"},
-]
-```
+    Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
 
-
+    ```json
+    {"role": "user", "content": "Hello, Claude"}
+    ```
 
-Example with a partially-filled response from Claude:
+    ```json
+    {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
+    ```
 
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("},
-]
-```
+    See [input examples](build-with-claude/working-with-messages.md).
 
-
+    Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
-Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
+    There is a limit of 100,000 messages in a single request.
 
-```shiki
-{"role": "user", "content": "Hello, Claude"}
-```
+    - `Content content`
 
-
+      - `String`
 
-```shiki
-{"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
-```
+      - `List<ContentBlockParam>`
 
-
+        - `class TextBlockParam:`
 
-See [input examples](build-with-claude/working-with-messages.md).
+          - `String text`
 
-Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+            minLength: 1
 
-There is a limit of 100,000 messages in a single request.
+          - `JsonValue type = "text"`
 
-
+          - `Optional<CacheControlEphemeral> cacheControl`
 
-Content content
+            Create a cache control breakpoint at this content block.
 
-One of the following:
+            - `JsonValue type = "ephemeral"`
 
-String
+            - `Optional<Ttl> ttl`
 
-
+              The time-to-live for the cache control breakpoint.
 
-List<[ContentBlockParam](api/messages.md)>
+              This may be one the following values:
 
-One of the following:
+              - `5m`: 5 minutes
+              - `1h`: 1 hour
 
-
+              Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
-class TextBlockParam:
+              - `TTL_5M("5m")`
 
-String text
+              - `TTL_1H("1h")`
 
-JsonValue; type "text"constant"text"constant
+          - `Optional<List<TextCitationParam>> citations`
 
-
+            - `class CitationCharLocationParam:`
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+              - `String citedText`
 
-Create a cache control breakpoint at this content block.
+              - `long documentIndex`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+                minimum: 0
 
-
+              - `Optional<String> documentTitle`
 
-Optional<Ttl> ttl
+                maxLength: 500, minLength: 1
 
-The time-to-live for the cache control breakpoint.
+              - `long endCharIndex`
 
-This may be one the following values:
+              - `long startCharIndex`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+                minimum: 0
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+              - `JsonValue type = "char_location"`
 
-One of the following:
+            - `class CitationPageLocationParam:`
 
-TTL\_5M("5m")
+              - `String citedText`
 
-TTL\_1H("1h")
+              - `long documentIndex`
 
-
+                minimum: 0
 
-Optional<List<[TextCitationParam](api/messages.md)>> citations
+              - `Optional<String> documentTitle`
 
-One of the following:
+                maxLength: 500, minLength: 1
 
-
+              - `long endPageNumber`
 
-class CitationCharLocationParam:
+              - `long startPageNumber`
 
-String citedText
+                minimum: 1
 
-long documentIndex
+              - `JsonValue type = "page_location"`
 
-Optional<String> documentTitle
+            - `class CitationContentBlockLocationParam:`
 
-long endCharIndex
+              - `String citedText`
 
-long startCharIndex
+                The full text of the cited block range, concatenated.
 
-JsonValue; type "char\_location"constant"char\_location"constant
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-
+              - `long documentIndex`
 
-class CitationPageLocationParam:
+                minimum: 0
 
-String citedText
+              - `Optional<String> documentTitle`
 
-long documentIndex
+                maxLength: 500, minLength: 1
 
-Optional<String> documentTitle
+              - `long endBlockIndex`
 
-long endPageNumber
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-long startPageNumber
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-JsonValue; type "page\_location"constant"page\_location"constant
+              - `long startBlockIndex`
 
-
+                0-based index of the first cited block in the source's `content` array.
 
-class CitationContentBlockLocationParam:
+                minimum: 0
 
-
+              - `JsonValue type = "content_block_location"`
 
-String citedText
+            - `class CitationWebSearchResultLocationParam:`
 
-The full text of the cited block range, concatenated.
+              - `String citedText`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+              - `String encryptedIndex`
 
-long documentIndex
+              - `Optional<String> title`
 
-Optional<String> documentTitle
+                maxLength: 512, minLength: 1
 
-
+              - `JsonValue type = "web_search_result_location"`
 
-long endBlockIndex
+              - `String url`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+                minLength: 1
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+            - `class CitationSearchResultLocationParam:`
 
-long startBlockIndex
+              - `String citedText`
 
-0-based index of the first cited block in the source's `content` array.
+                The full text of the cited block range, concatenated.
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-
+              - `long endBlockIndex`
 
-class CitationWebSearchResultLocationParam:
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-String citedText
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-String encryptedIndex
+              - `long searchResultIndex`
 
-Optional<String> title
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
-String url
+                minimum: 0
 
-
+              - `String source`
 
-class CitationSearchResultLocationParam:
+              - `long startBlockIndex`
 
-
+                0-based index of the first cited block in the source's `content` array.
 
-String citedText
+                minimum: 0
 
-The full text of the cited block range, concatenated.
+              - `Optional<String> title`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+              - `JsonValue type = "search_result_location"`
 
-
+        - `class ImageBlockParam:`
 
-long endBlockIndex
+          - `Source source`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+            - `class Base64ImageSource:`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+              - `String data`
 
-
+                format: byte
 
-long searchResultIndex
+              - `MediaType mediaType`
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+                - `IMAGE_JPEG("image/jpeg")`
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+                - `IMAGE_PNG("image/png")`
 
-minimum0
+                - `IMAGE_GIF("image/gif")`
 
-String source
+                - `IMAGE_WEBP("image/webp")`
 
-long startBlockIndex
+              - `JsonValue type = "base64"`
 
-0-based index of the first cited block in the source's `content` array.
+            - `class UrlImageSource:`
 
-Optional<String> title
+              - `JsonValue type = "url"`
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+              - `String url`
 
-
+            - `class FileImageSource:`
 
-class ImageBlockParam:
+              - `String fileId`
 
-
+              - `JsonValue type = "file"`
 
-Source source
+          - `JsonValue type = "image"`
 
-One of the following:
+          - `Optional<CacheControlEphemeral> cacheControl`
 
-
+            Create a cache control breakpoint at this content block.
 
-class Base64ImageSource:
+          - `Optional<ImageTransformationsParam> transformations`
 
-String data
+            Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
 
-
+            - `Optional<OversizedImage> oversizedImage`
 
-MediaType mediaType
+              What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
 
-One of the following:
+              - `DOWNSIZE("downsize")`
 
-IMAGE\_JPEG("image/jpeg")
+              - `ERROR("error")`
 
-IMAGE\_PNG("image/png")
+        - `class DocumentBlockParam:`
 
-IMAGE\_GIF("image/gif")
+          - `Source source`
 
-IMAGE\_WEBP("image/webp")
+            - `class Base64PdfSource:`
 
-JsonValue; type "base64"constant"base64"constant
+              - `String data`
 
-
+                format: byte
 
-class UrlImageSource:
+              - `JsonValue mediaType = "application/pdf"`
 
-JsonValue; type "url"constant"url"constant
+              - `JsonValue type = "base64"`
 
-String url
+            - `class PlainTextSource:`
 
-JsonValue; type "image"constant"image"constant
+              - `String data`
 
-
+              - `JsonValue mediaType = "text/plain"`
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+              - `JsonValue type = "text"`
 
-Create a cache control breakpoint at this content block.
+            - `class ContentBlockSource:`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+              - `Content content`
 
-
+                - `String`
 
-Optional<Ttl> ttl
+                - `List<ContentBlockSourceContent>`
 
-The time-to-live for the cache control breakpoint.
+                  - `class TextBlockParam:`
 
-This may be one the following values:
+                  - `class ImageBlockParam:`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+              - `JsonValue type = "content"`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            - `class UrlPdfSource:`
 
-One of the following:
+              - `JsonValue type = "url"`
 
-TTL\_5M("5m")
+              - `String url`
 
-TTL\_1H("1h")
+            - `class FileDocumentSource:`
 
-
+              - `String fileId`
 
-class DocumentBlockParam:
+              - `JsonValue type = "file"`
 
-
+          - `JsonValue type = "document"`
 
-Source source
+          - `Optional<CacheControlEphemeral> cacheControl`
 
-One of the following:
+            Create a cache control breakpoint at this content block.
 
-
+          - `Optional<CitationsConfigParam> citations`
 
-class Base64PdfSource:
+            - `Optional<Boolean> enabled`
 
-String data
+          - `Optional<String> context`
 
-JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+            minLength: 1
 
-JsonValue; type "base64"constant"base64"constant
+          - `Optional<String> title`
 
-
+            maxLength: 500, minLength: 1
 
-class PlainTextSource:
+        - `class SearchResultBlockParam:`
 
-String data
+          - `List<TextBlockParam> content`
 
-JsonValue; mediaType "text/plain"constant"text/plain"constant
+            - `String text`
 
-JsonValue; type "text"constant"text"constant
+              minLength: 1
 
-
+            - `JsonValue type = "text"`
 
-class ContentBlockSource:
+            - `Optional<CacheControlEphemeral> cacheControl`
 
-
+              Create a cache control breakpoint at this content block.
 
-Content content
+            - `Optional<List<TextCitationParam>> citations`
 
-One of the following:
+          - `String source`
 
-String
+          - `String title`
 
-
+          - `JsonValue type = "search_result"`
 
-List<[ContentBlockSourceContent](api/messages.md)>
+          - `Optional<CacheControlEphemeral> cacheControl`
 
-One of the following:
+            Create a cache control breakpoint at this content block.
 
-
+          - `Optional<CitationsConfigParam> citations`
 
-class TextBlockParam:
+        - `class ThinkingBlockParam:`
 
-String text
+          - `String signature`
 
-JsonValue; type "text"constant"text"constant
+            The `signature` value of this thinking block, exactly as returned by the API in a previous response. Used to verify that the block was generated by Claude.
 
-
+            Thinking blocks must be passed back unmodified and in their original order; a modified block results in a 400 `invalid_request_error`.
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+          - `String thinking`
 
-Create a cache control breakpoint at this content block.
+            The `thinking` text of this block as returned by the API.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+          - `JsonValue type = "thinking"`
 
-
+        - `class RedactedThinkingBlockParam:`
 
-Optional<Ttl> ttl
+          - `String data`
 
-The time-to-live for the cache control breakpoint.
+            The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-This may be one the following values:
+          - `JsonValue type = "redacted_thinking"`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        - `class ToolUseBlockParam:`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          - `String id`
 
-One of the following:
+            pattern: ^[a-zA-Z0-9_-]+$
 
-TTL\_5M("5m")
+          - `Input input`
 
-TTL\_1H("1h")
+          - `String name`
 
-
+            maxLength: 200, minLength: 1
 
-Optional<List<[TextCitationParam](api/messages.md)>> citations
+          - `JsonValue type = "tool_use"`
 
-One of the following:
+          - `Optional<CacheControlEphemeral> cacheControl`
 
-
+            Create a cache control breakpoint at this content block.
 
-class CitationCharLocationParam:
+          - `Optional<Caller> caller`
 
-String citedText
+            Tool invocation directly from the model.
 
-long documentIndex
+            - `class DirectCaller:`
 
-Optional<String> documentTitle
+              Tool invocation directly from the model.
 
-long endCharIndex
+              - `JsonValue type = "direct"`
 
-long startCharIndex
+            - `class ServerToolCaller:`
 
-JsonValue; type "char\_location"constant"char\_location"constant
+              Tool invocation generated by a server-side tool.
 
-
+              - `String toolId`
 
-class CitationPageLocationParam:
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-String citedText
+              - `JsonValue type = "code_execution_20250825"`
 
-long documentIndex
+            - `class ServerToolCaller20260120:`
 
-Optional<String> documentTitle
+              - `String toolId`
 
-long endPageNumber
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-long startPageNumber
+              - `JsonValue type = "code_execution_20260120"`
 
-JsonValue; type "page\_location"constant"page\_location"constant
+          - `Optional<String> toolsetName`
 
-
+            For a toolset member tool_use, the toolset family this member belongs to.
 
-class CitationContentBlockLocationParam:
+            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-
+        - `class ToolResultBlockParam:`
 
-String citedText
+          - `String toolUseId`
 
-The full text of the cited block range, concatenated.
+            pattern: ^[a-zA-Z0-9_-]+$
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+          - `JsonValue type = "tool_result"`
 
-long documentIndex
+          - `Optional<CacheControlEphemeral> cacheControl`
 
-Optional<String> documentTitle
+            Create a cache control breakpoint at this content block.
 
-
+          - `Optional<Content> content`
 
-long endBlockIndex
+            - `String`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+            - `List<Block>`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+              - `class TextBlockParam:`
 
-long startBlockIndex
+              - `class ImageBlockParam:`
 
-0-based index of the first cited block in the source's `content` array.
+              - `class SearchResultBlockParam:`
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+              - `class DocumentBlockParam:`
 
-
+              - `class ToolReferenceBlockParam:`
 
-class CitationWebSearchResultLocationParam:
+                Tool reference block that can be included in tool_result content.
 
-String citedText
+                - `String toolName`
 
-String encryptedIndex
+                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-Optional<String> title
+                - `JsonValue type = "tool_reference"`
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+                - `Optional<CacheControlEphemeral> cacheControl`
 
-String url
+                  Create a cache control breakpoint at this content block.
 
-
+              - `class BrowserStateBlockParam:`
 
-class CitationSearchResultLocationParam:
+                The caller's browser state after a browser toolset member call —
+                the full inventory of open tabs, which tab is active, and any side
+                effects (tabs opened, download state changes) the call produced.
 
-
+                At most one per `tool_result`, only on a non-error result answering a
+                browser toolset member `tool_use`. The server renders the
+                model-visible text from it; the model never sees the raw fields.
 
-String citedText
+                - `List<BrowserStateTabEntry> tabs`
 
-The full text of the cited block range, concatenated.
+                  All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+                  maxItems: 100
 
-
+                  - `String tabId`
 
-long endBlockIndex
+                    The caller-assigned identifier for this tab, unique within the inventory.
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+                  - `String title`
 
-
+                    The title of the page the tab is showing. May be empty.
 
-long searchResultIndex
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+                  - `String url`
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+                    The URL of the page the tab is showing. May be empty.
 
-minimum0
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-String source
+                  - `Optional<Boolean> active`
 
-long startBlockIndex
+                    Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-0-based index of the first cited block in the source's `content` array.
+                - `JsonValue type = "browser_state"`
 
-Optional<String> title
+                - `Optional<CacheControlEphemeral> cacheControl`
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+                  Create a cache control breakpoint at this content block.
 
-
+                - `Optional<List<BrowserStateChange>> stateChanges`
 
-class ImageBlockParam:
+                  Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-
+                  maxItems: 200, minItems: 1
 
-Source source
+                  - `class BrowserStateChangeTabOpened:`
 
-One of the following:
+                    A tab this call's execution opened that remains open at its end —
+                    the creation delta of the `tabs` inventory, not an event log.
 
-
+                    Carries only the `tab_id`; the tab's `title` and `url` live on its
+                    `tabs` entry, which must include the same `tab_id`. A tab opened
+                    during a failed call gets no deferred `tab_opened`; it simply appears
+                    in the next result's `tabs` inventory.
 
-class Base64ImageSource:
+                    - `String tabId`
 
-String data
+                      The `tab_id` of the opened tab, present in `tabs`.
 
-
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-MediaType mediaType
+                    - `JsonValue type = "tab_opened"`
 
-One of the following:
+                  - `class BrowserStateChangeDownloadStarted:`
 
-IMAGE\_JPEG("image/jpeg")
+                    A file download that started during this call.
 
-IMAGE\_PNG("image/png")
+                    - `String downloadId`
 
-IMAGE\_GIF("image/gif")
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-IMAGE\_WEBP("image/webp")
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-JsonValue; type "base64"constant"base64"constant
+                    - `JsonValue type = "download_started"`
 
-
+                    - `String url`
 
-class UrlImageSource:
+                      The final post-redirect URL the download was served from.
 
-JsonValue; type "url"constant"url"constant
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-String url
+                  - `class BrowserStateChangeDownloadCompleted:`
 
-JsonValue; type "image"constant"image"constant
+                    A file download that finished during this call, reported with the
+                    same `download_id` as its `download_started` — or without a prior
+                    `download_started`, when the download finished during the call that
+                    started it (at most one state change per `download_id` per result).
 
-
+                    - `String downloadId`
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-Create a cache control breakpoint at this content block.
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+                    - `JsonValue type = "download_completed"`
 
-
+                    - `String url`
 
-Optional<Ttl> ttl
+                      The final post-redirect URL the download was served from.
 
-The time-to-live for the cache control breakpoint.
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-This may be one the following values:
+                    - `Optional<String> path`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+                      Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+                      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
 
-One of the following:
+                    - `Optional<Long> sizeBytes`
 
-TTL\_5M("5m")
+                      The completed download's size.
 
-TTL\_1H("1h")
+                      minimum: 0
 
-JsonValue; type "content"constant"content"constant
+                  - `class BrowserStateChangeDownloadFailed:`
 
-
+                    A file download that failed — or was cancelled — during this call.
 
-class UrlPdfSource:
+                    - `String downloadId`
 
-JsonValue; type "url"constant"url"constant
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-String url
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-JsonValue; type "document"constant"document"constant
+                    - `JsonValue type = "download_failed"`
 
-
+                    - `String url`
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+                      The final post-redirect URL the download was served from.
 
-Create a cache control breakpoint at this content block.
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+                    - `Optional<String> error`
 
-
+                      The failure or cancellation detail, when known.
 
-Optional<Ttl> ttl
+                      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
 
-The time-to-live for the cache control breakpoint.
+          - `Optional<Boolean> isError`
 
-This may be one the following values:
+          - `Optional<String> toolsetName`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            For a toolset member tool_result, the toolset family of the paired tool_use.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-One of the following:
+        - `class ServerToolUseBlockParam:`
 
-TTL\_5M("5m")
+          - `String id`
 
-TTL\_1H("1h")
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-
+          - `Input input`
 
-Optional<[CitationsConfigParam](api/messages.md)> citations
+          - `Name name`
 
-Optional<Boolean> enabled
+            - `WEB_SEARCH("web_search")`
 
-Optional<String> context
+            - `WEB_FETCH("web_fetch")`
 
-Optional<String> title
+            - `CODE_EXECUTION("code_execution")`
 
-
+            - `BASH_CODE_EXECUTION("bash_code_execution")`
 
-class SearchResultBlockParam:
+            - `TEXT_EDITOR_CODE_EXECUTION("text_editor_code_execution")`
 
-
+            - `TOOL_SEARCH_TOOL_REGEX("tool_search_tool_regex")`
 
-List<[TextBlockParam](api/messages.md)> content
+            - `TOOL_SEARCH_TOOL_BM25("tool_search_tool_bm25")`
 
-String text
+          - `JsonValue type = "server_tool_use"`
 
-JsonValue; type "text"constant"text"constant
+          - `Optional<CacheControlEphemeral> cacheControl`
 
-
+            Create a cache control breakpoint at this content block.
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+          - `Optional<Caller> caller`
 
-Create a cache control breakpoint at this content block.
+            Tool invocation directly from the model.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+            - `class DirectCaller:`
 
-
+              Tool invocation directly from the model.
 
-Optional<Ttl> ttl
+            - `class ServerToolCaller:`
 
-The time-to-live for the cache control breakpoint.
+              Tool invocation generated by a server-side tool.
 
-This may be one the following values:
+            - `class ServerToolCaller20260120:`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        - `class WebSearchToolResultBlockParam:`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          - `WebSearchToolResultBlockParamContent content`
 
-One of the following:
+            - `List<WebSearchResultBlockParam>`
 
-TTL\_5M("5m")
+              - `String encryptedContent`
 
-TTL\_1H("1h")
+              - `String title`
 
-
+              - `JsonValue type = "web_search_result"`
 
-Optional<List<[TextCitationParam](api/messages.md)>> citations
+              - `String url`
 
-One of the following:
+              - `Optional<String> pageAge`
 
-
+            - `class WebSearchToolRequestError:`
 
-class CitationCharLocationParam:
+              - `WebSearchToolResultErrorCode errorCode`
 
-String citedText
+                - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
-long documentIndex
+                - `UNAVAILABLE("unavailable")`
 
-Optional<String> documentTitle
+                - `MAX_USES_EXCEEDED("max_uses_exceeded")`
 
-long endCharIndex
+                - `TOO_MANY_REQUESTS("too_many_requests")`
 
-long startCharIndex
+                - `QUERY_TOO_LONG("query_too_long")`
 
-JsonValue; type "char\_location"constant"char\_location"constant
+                - `REQUEST_TOO_LARGE("request_too_large")`
 
-
+              - `JsonValue type = "web_search_tool_result_error"`
 
-class CitationPageLocationParam:
+          - `String toolUseId`
 
-String citedText
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-long documentIndex
+          - `JsonValue type = "web_search_tool_result"`
 
-Optional<String> documentTitle
+          - `Optional<CacheControlEphemeral> cacheControl`
 
-long endPageNumber
+            Create a cache control breakpoint at this content block.
 
-long startPageNumber
+          - `Optional<Caller> caller`
 
-JsonValue; type "page\_location"constant"page\_location"constant
+            Tool invocation directly from the model.
 
-
+            - `class DirectCaller:`
 
-class CitationContentBlockLocationParam:
+              Tool invocation directly from the model.
 
-
+            - `class ServerToolCaller:`
 
-String citedText
+              Tool invocation generated by a server-side tool.
 
-The full text of the cited block range, concatenated.
+            - `class ServerToolCaller20260120:`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+        - `class WebFetchToolResultBlockParam:`
 
-long documentIndex
+          - `Content content`
 
-Optional<String> documentTitle
+            - `class WebFetchToolResultErrorBlockParam:`
 
-
+              - `WebFetchToolResultErrorCode errorCode`
 
-long endBlockIndex
+                - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+                - `URL_TOO_LONG("url_too_long")`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+                - `URL_NOT_ALLOWED("url_not_allowed")`
 
-long startBlockIndex
+                - `URL_NOT_IN_PRIOR_CONTEXT("url_not_in_prior_context")`
 
-0-based index of the first cited block in the source's `content` array.
+                - `URL_NOT_ACCESSIBLE("url_not_accessible")`
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+                - `UNSUPPORTED_CONTENT_TYPE("unsupported_content_type")`
 
-
+                - `TOO_MANY_REQUESTS("too_many_requests")`
 
-class CitationWebSearchResultLocationParam:
+                - `MAX_USES_EXCEEDED("max_uses_exceeded")`
 
-String citedText
+                - `UNAVAILABLE("unavailable")`
 
-String encryptedIndex
+              - `JsonValue type = "web_fetch_tool_result_error"`
 
-Optional<String> title
+            - `class WebFetchBlockParam:`
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+              - `DocumentBlockParam content`
 
-String url
+              - `JsonValue type = "web_fetch_result"`
 
-
+              - `String url`
 
-class CitationSearchResultLocationParam:
+                Fetched content URL
 
-
+              - `Optional<String> retrievedAt`
 
-String citedText
+                ISO 8601 timestamp when the content was retrieved
 
-The full text of the cited block range, concatenated.
+          - `String toolUseId`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-
+          - `JsonValue type = "web_fetch_tool_result"`
 
-long endBlockIndex
+          - `Optional<CacheControlEphemeral> cacheControl`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+            Create a cache control breakpoint at this content block.
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+          - `Optional<Caller> caller`
 
-
+            Tool invocation directly from the model.
 
-long searchResultIndex
+            - `class DirectCaller:`
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+              Tool invocation directly from the model.
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+            - `class ServerToolCaller:`
 
-minimum0
+              Tool invocation generated by a server-side tool.
 
-String source
+            - `class ServerToolCaller20260120:`
 
-long startBlockIndex
+        - `class CodeExecutionToolResultBlockParam:`
 
-0-based index of the first cited block in the source's `content` array.
+          - `CodeExecutionToolResultBlockParamContent content`
 
-Optional<String> title
+            Code execution result with encrypted stdout for PFC + web_search results.
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+            - `class CodeExecutionToolResultErrorParam:`
 
-String source
+              - `CodeExecutionToolResultErrorCode errorCode`
 
-String title
+                - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
-JsonValue; type "search\_result"constant"search\_result"constant
+                - `UNAVAILABLE("unavailable")`
 
-
+                - `TOO_MANY_REQUESTS("too_many_requests")`
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+                - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-Create a cache control breakpoint at this content block.
+              - `JsonValue type = "code_execution_tool_result_error"`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+            - `class CodeExecutionResultBlockParam:`
 
-
+              - `List<CodeExecutionOutputBlockParam> content`
 
-Optional<Ttl> ttl
+                - `String fileId`
 
-The time-to-live for the cache control breakpoint.
+                - `JsonValue type = "code_execution_output"`
 
-This may be one the following values:
+              - `long returnCode`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+              - `String stderr`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+              - `String stdout`
 
-One of the following:
+              - `JsonValue type = "code_execution_result"`
 
-TTL\_5M("5m")
+            - `class EncryptedCodeExecutionResultBlockParam:`
 
-TTL\_1H("1h")
+              Code execution result with encrypted stdout for PFC + web_search results.
 
-
+              - `List<CodeExecutionOutputBlockParam> content`
 
-Optional<[CitationsConfigParam](api/messages.md)> citations
+                - `String fileId`
 
-Optional<Boolean> enabled
+                - `JsonValue type = "code_execution_output"`
 
-
+              - `String encryptedStdout`
 
-class ThinkingBlockParam:
+              - `long returnCode`
 
-String signature
+              - `String stderr`
 
-String thinking
+              - `JsonValue type = "encrypted_code_execution_result"`
 
-JsonValue; type "thinking"constant"thinking"constant
+          - `String toolUseId`
 
-
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-class RedactedThinkingBlockParam:
+          - `JsonValue type = "code_execution_tool_result"`
 
-String data
+          - `Optional<CacheControlEphemeral> cacheControl`
 
-JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
+            Create a cache control breakpoint at this content block.
 
-
+        - `class BashCodeExecutionToolResultBlockParam:`
 
-class ToolUseBlockParam:
+          - `Content content`
 
-String id
+            - `class BashCodeExecutionToolResultErrorParam:`
 
-Input input
+              - `BashCodeExecutionToolResultErrorCode errorCode`
 
-String name
+                - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
-JsonValue; type "tool\_use"constant"tool\_use"constant
+                - `UNAVAILABLE("unavailable")`
 
-
+                - `TOO_MANY_REQUESTS("too_many_requests")`
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+                - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-Create a cache control breakpoint at this content block.
+                - `OUTPUT_FILE_TOO_LARGE("output_file_too_large")`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+              - `JsonValue type = "bash_code_execution_tool_result_error"`
 
-
+            - `class BashCodeExecutionResultBlockParam:`
 
-Optional<Ttl> ttl
+              - `List<BashCodeExecutionOutputBlockParam> content`
 
-The time-to-live for the cache control breakpoint.
+                - `String fileId`
 
-This may be one the following values:
+                - `JsonValue type = "bash_code_execution_output"`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+              - `long returnCode`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+              - `String stderr`
 
-One of the following:
+              - `String stdout`
 
-TTL\_5M("5m")
+              - `JsonValue type = "bash_code_execution_result"`
 
-TTL\_1H("1h")
+          - `String toolUseId`
 
-
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Optional<Caller> caller
+          - `JsonValue type = "bash_code_execution_tool_result"`
 
-Tool invocation directly from the model.
+          - `Optional<CacheControlEphemeral> cacheControl`
 
-One of the following:
+            Create a cache control breakpoint at this content block.
 
-
+        - `class TextEditorCodeExecutionToolResultBlockParam:`
 
-class DirectCaller:
+          - `Content content`
 
-Tool invocation directly from the model.
+            - `class TextEditorCodeExecutionToolResultErrorParam:`
 
-JsonValue; type "direct"constant"direct"constant
+              - `TextEditorCodeExecutionToolResultErrorCode errorCode`
 
-
+                - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
-class ServerToolCaller:
+                - `UNAVAILABLE("unavailable")`
 
-Tool invocation generated by a server-side tool.
+                - `TOO_MANY_REQUESTS("too_many_requests")`
 
-String toolId
+                - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+                - `FILE_NOT_FOUND("file_not_found")`
 
-
+              - `JsonValue type = "text_editor_code_execution_tool_result_error"`
 
-class ServerToolCaller20260120:
+              - `Optional<String> errorMessage`
 
-String toolId
+            - `class TextEditorCodeExecutionViewResultBlockParam:`
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+              - `String content`
 
-
+              - `FileType fileType`
 
-class ToolResultBlockParam:
+                - `TEXT("text")`
 
-String toolUseId
+                - `IMAGE("image")`
 
-JsonValue; type "tool\_result"constant"tool\_result"constant
+                - `PDF("pdf")`
 
-
+              - `JsonValue type = "text_editor_code_execution_view_result"`
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+              - `Optional<Long> numLines`
 
-Create a cache control breakpoint at this content block.
+              - `Optional<Long> startLine`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+              - `Optional<Long> totalLines`
 
-
+            - `class TextEditorCodeExecutionCreateResultBlockParam:`
 
-Optional<Ttl> ttl
+              - `boolean isFileUpdate`
 
-The time-to-live for the cache control breakpoint.
+              - `JsonValue type = "text_editor_code_execution_create_result"`
 
-This may be one the following values:
+            - `class TextEditorCodeExecutionStrReplaceResultBlockParam:`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+              - `JsonValue type = "text_editor_code_execution_str_replace_result"`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+              - `Optional<List<String>> lines`
 
-One of the following:
+              - `Optional<Long> newLines`
 
-TTL\_5M("5m")
+              - `Optional<Long> newStart`
 
-TTL\_1H("1h")
+              - `Optional<Long> oldLines`
 
-
+              - `Optional<Long> oldStart`
 
-Optional<Content> content
+          - `String toolUseId`
 
-One of the following:
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-String
+          - `JsonValue type = "text_editor_code_execution_tool_result"`
 
-
+          - `Optional<CacheControlEphemeral> cacheControl`
 
-List<Block>
+            Create a cache control breakpoint at this content block.
 
-One of the following:
+        - `class ToolSearchToolResultBlockParam:`
 
-
+          - `Content content`
 
-class TextBlockParam:
+            - `class ToolSearchToolResultErrorParam:`
 
-String text
+              - `ToolSearchToolResultErrorCode errorCode`
 
-JsonValue; type "text"constant"text"constant
+                - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
-
+                - `UNAVAILABLE("unavailable")`
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+                - `TOO_MANY_REQUESTS("too_many_requests")`
 
-Create a cache control breakpoint at this content block.
+                - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+              - `JsonValue type = "tool_search_tool_result_error"`
 
-
+              - `Optional<String> errorMessage`
 
-Optional<Ttl> ttl
+            - `class ToolSearchToolSearchResultBlockParam:`
 
-The time-to-live for the cache control breakpoint.
+              - `List<ToolReferenceBlockParam> toolReferences`
 
-This may be one the following values:
+                - `String toolName`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+                - `JsonValue type = "tool_reference"`
 
-One of the following:
+                - `Optional<CacheControlEphemeral> cacheControl`
 
-TTL\_5M("5m")
+                  Create a cache control breakpoint at this content block.
 
-TTL\_1H("1h")
+              - `JsonValue type = "tool_search_tool_search_result"`
 
-
+          - `String toolUseId`
 
-Optional<List<[TextCitationParam](api/messages.md)>> citations
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-One of the following:
+          - `JsonValue type = "tool_search_tool_result"`
 
-
+          - `Optional<CacheControlEphemeral> cacheControl`
 
-class CitationCharLocationParam:
+            Create a cache control breakpoint at this content block.
 
-String citedText
+        - `class ContainerUploadBlockParam:`
 
-long documentIndex
+          A content block that represents a file to be uploaded to the container
+          Files uploaded via this block will be available in the container's input directory.
 
-Optional<String> documentTitle
+          - `String fileId`
 
-long endCharIndex
+          - `JsonValue type = "container_upload"`
 
-long startCharIndex
+          - `Optional<CacheControlEphemeral> cacheControl`
 
-JsonValue; type "char\_location"constant"char\_location"constant
+            Create a cache control breakpoint at this content block.
 
-
+    - `Role role`
 
-class CitationPageLocationParam:
+      - `USER("user")`
 
-String citedText
+      - `ASSISTANT("assistant")`
 
-long documentIndex
+      - `SYSTEM("system")`
 
-Optional<String> documentTitle
+  - `Model model`
 
-long endPageNumber
+    The model that will complete your prompt.
 
-long startPageNumber
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-JsonValue; type "page\_location"constant"page\_location"constant
+  - `Optional<CacheControlEphemeral> cacheControl`
 
-
+    Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
-class CitationContentBlockLocationParam:
+  - `Optional<OutputConfig> outputConfig`
 
-
+    Configuration options for the model's output, such as the output format.
 
-String citedText
+  - `Optional<System> system`
 
-The full text of the cited block range, concatenated.
+    System prompt.
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+    A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
-long documentIndex
+    - `String`
 
-Optional<String> documentTitle
+    - `List<TextBlockParam>`
 
-
+      - `String text`
 
-long endBlockIndex
+        minLength: 1
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+      - `JsonValue type = "text"`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-long startBlockIndex
+        Create a cache control breakpoint at this content block.
 
-0-based index of the first cited block in the source's `content` array.
+      - `Optional<List<TextCitationParam>> citations`
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+  - `Optional<ThinkingConfigParam> thinking`
 
-
+    Configuration for enabling Claude's extended thinking.
 
-class CitationWebSearchResultLocationParam:
+    When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-String citedText
+    See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-String encryptedIndex
+  - `Optional<ToolChoice> toolChoice`
 
-Optional<String> title
+    How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+  - `Optional<List<MessageCountTokensTool>> tools`
 
-String url
+    Definitions of tools that the model may use.
 
-
+    If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-class CitationSearchResultLocationParam:
+    There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
 
-
+    Each tool definition includes:
 
-String citedText
+    * `name`: Name of the tool.
+    * `description`: Optional, but strongly-recommended description of the tool.
+    * `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
 
-The full text of the cited block range, concatenated.
+    For example, if you defined `tools` as:
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-long searchResultIndex
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-String source
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-Optional<String> title
-
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-
-
-class ImageBlockParam:
-
-
-
-Source source
-
-One of the following:
-
-
-
-class Base64ImageSource:
-
-String data
-
-
-
-MediaType mediaType
-
-One of the following:
-
-IMAGE\_JPEG("image/jpeg")
-
-IMAGE\_PNG("image/png")
-
-IMAGE\_GIF("image/gif")
-
-IMAGE\_WEBP("image/webp")
-
-JsonValue; type "base64"constant"base64"constant
-
-
-
-class UrlImageSource:
-
-JsonValue; type "url"constant"url"constant
-
-String url
-
-JsonValue; type "image"constant"image"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-class SearchResultBlockParam:
-
-
-
-List<[TextBlockParam](api/messages.md)> content
-
-String text
-
-JsonValue; type "text"constant"text"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<List<[TextCitationParam](api/messages.md)>> citations
-
-One of the following:
-
-
-
-class CitationCharLocationParam:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endCharIndex
-
-long startCharIndex
-
-JsonValue; type "char\_location"constant"char\_location"constant
-
-
-
-class CitationPageLocationParam:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endPageNumber
-
-long startPageNumber
-
-JsonValue; type "page\_location"constant"page\_location"constant
-
-
-
-class CitationContentBlockLocationParam:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-long documentIndex
-
-Optional<String> documentTitle
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
-
-
-
-class CitationWebSearchResultLocationParam:
-
-String citedText
-
-String encryptedIndex
-
-Optional<String> title
-
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-String url
-
-
-
-class CitationSearchResultLocationParam:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-long searchResultIndex
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-String source
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-Optional<String> title
-
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-String source
-
-String title
-
-JsonValue; type "search\_result"constant"search\_result"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<[CitationsConfigParam](api/messages.md)> citations
-
-Optional<Boolean> enabled
-
-
-
-class DocumentBlockParam:
-
-
-
-Source source
-
-One of the following:
-
-
-
-class Base64PdfSource:
-
-String data
-
-JsonValue; mediaType "application/pdf"constant"application/pdf"constant
-
-JsonValue; type "base64"constant"base64"constant
-
-
-
-class PlainTextSource:
-
-String data
-
-JsonValue; mediaType "text/plain"constant"text/plain"constant
-
-JsonValue; type "text"constant"text"constant
-
-
-
-class ContentBlockSource:
-
-
-
-Content content
-
-One of the following:
-
-String
-
-
-
-List<[ContentBlockSourceContent](api/messages.md)>
-
-One of the following:
-
-
-
-class TextBlockParam:
-
-String text
-
-JsonValue; type "text"constant"text"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<List<[TextCitationParam](api/messages.md)>> citations
-
-One of the following:
-
-
-
-class CitationCharLocationParam:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endCharIndex
-
-long startCharIndex
-
-JsonValue; type "char\_location"constant"char\_location"constant
-
-
-
-class CitationPageLocationParam:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endPageNumber
-
-long startPageNumber
-
-JsonValue; type "page\_location"constant"page\_location"constant
-
-
-
-class CitationContentBlockLocationParam:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-long documentIndex
-
-Optional<String> documentTitle
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
-
-
-
-class CitationWebSearchResultLocationParam:
-
-String citedText
-
-String encryptedIndex
-
-Optional<String> title
-
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-String url
-
-
-
-class CitationSearchResultLocationParam:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-long searchResultIndex
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-String source
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-Optional<String> title
-
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-
-
-class ImageBlockParam:
-
-
-
-Source source
-
-One of the following:
-
-
-
-class Base64ImageSource:
-
-String data
-
-
-
-MediaType mediaType
-
-One of the following:
-
-IMAGE\_JPEG("image/jpeg")
-
-IMAGE\_PNG("image/png")
-
-IMAGE\_GIF("image/gif")
-
-IMAGE\_WEBP("image/webp")
-
-JsonValue; type "base64"constant"base64"constant
-
-
-
-class UrlImageSource:
-
-JsonValue; type "url"constant"url"constant
-
-String url
-
-JsonValue; type "image"constant"image"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-JsonValue; type "content"constant"content"constant
-
-
-
-class UrlPdfSource:
-
-JsonValue; type "url"constant"url"constant
-
-String url
-
-JsonValue; type "document"constant"document"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<[CitationsConfigParam](api/messages.md)> citations
-
-Optional<Boolean> enabled
-
-Optional<String> context
-
-Optional<String> title
-
-
-
-class ToolReferenceBlockParam:
-
-Tool reference block that can be included in tool\_result content.
-
-String toolName
-
-JsonValue; type "tool\_reference"constant"tool\_reference"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-Optional<Boolean> isError
-
-
-
-class ServerToolUseBlockParam:
-
-String id
-
-Input input
-
-
-
-Name name
-
-One of the following:
-
-WEB\_SEARCH("web\_search")
-
-WEB\_FETCH("web\_fetch")
-
-CODE\_EXECUTION("code\_execution")
-
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
-
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
-
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
-
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
-
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<Caller> caller
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class DirectCaller:
-
-Tool invocation directly from the model.
-
-JsonValue; type "direct"constant"direct"constant
-
-
-
-class ServerToolCaller:
-
-Tool invocation generated by a server-side tool.
-
-String toolId
-
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
-
-
-
-class ServerToolCaller20260120:
-
-String toolId
-
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
-
-
-
-class WebSearchToolResultBlockParam:
-
-
-
-[WebSearchToolResultBlockParamContent](api/messages.md) content
-
-One of the following:
-
-
-
-List<[WebSearchResultBlockParam](api/messages.md)>
-
-String encryptedContent
-
-String title
-
-JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
-
-String url
-
-Optional<String> pageAge
-
-
-
-class WebSearchToolRequestError:
-
-
-
-[WebSearchToolResultErrorCode](api/messages.md) errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-QUERY\_TOO\_LONG("query\_too\_long")
-
-REQUEST\_TOO\_LARGE("request\_too\_large")
-
-JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
-
-String toolUseId
-
-JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<Caller> caller
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class DirectCaller:
-
-Tool invocation directly from the model.
-
-JsonValue; type "direct"constant"direct"constant
-
-
-
-class ServerToolCaller:
-
-Tool invocation generated by a server-side tool.
-
-String toolId
-
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
-
-
-
-class ServerToolCaller20260120:
-
-String toolId
-
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
-
-
-
-class WebFetchToolResultBlockParam:
-
-
-
-Content content
-
-One of the following:
-
-
-
-class WebFetchToolResultErrorBlockParam:
-
-
-
-[WebFetchToolResultErrorCode](api/messages.md) errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-URL\_TOO\_LONG("url\_too\_long")
-
-URL\_NOT\_ALLOWED("url\_not\_allowed")
-
-URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
-
-URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
-
-UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
-
-UNAVAILABLE("unavailable")
-
-JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
-
-
-
-class WebFetchBlockParam:
-
-
-
-[DocumentBlockParam](api/messages.md) content
-
-
-
-Source source
-
-One of the following:
-
-
-
-class Base64PdfSource:
-
-String data
-
-JsonValue; mediaType "application/pdf"constant"application/pdf"constant
-
-JsonValue; type "base64"constant"base64"constant
-
-
-
-class PlainTextSource:
-
-String data
-
-JsonValue; mediaType "text/plain"constant"text/plain"constant
-
-JsonValue; type "text"constant"text"constant
-
-
-
-class ContentBlockSource:
-
-
-
-Content content
-
-One of the following:
-
-String
-
-
-
-List<[ContentBlockSourceContent](api/messages.md)>
-
-One of the following:
-
-
-
-class TextBlockParam:
-
-String text
-
-JsonValue; type "text"constant"text"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<List<[TextCitationParam](api/messages.md)>> citations
-
-One of the following:
-
-
-
-class CitationCharLocationParam:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endCharIndex
-
-long startCharIndex
-
-JsonValue; type "char\_location"constant"char\_location"constant
-
-
-
-class CitationPageLocationParam:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endPageNumber
-
-long startPageNumber
-
-JsonValue; type "page\_location"constant"page\_location"constant
-
-
-
-class CitationContentBlockLocationParam:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-long documentIndex
-
-Optional<String> documentTitle
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
-
-
-
-class CitationWebSearchResultLocationParam:
-
-String citedText
-
-String encryptedIndex
-
-Optional<String> title
-
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-String url
-
-
-
-class CitationSearchResultLocationParam:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-long searchResultIndex
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-String source
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-Optional<String> title
-
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-
-
-class ImageBlockParam:
-
-
-
-Source source
-
-One of the following:
-
-
-
-class Base64ImageSource:
-
-String data
-
-
-
-MediaType mediaType
-
-One of the following:
-
-IMAGE\_JPEG("image/jpeg")
-
-IMAGE\_PNG("image/png")
-
-IMAGE\_GIF("image/gif")
-
-IMAGE\_WEBP("image/webp")
-
-JsonValue; type "base64"constant"base64"constant
-
-
-
-class UrlImageSource:
-
-JsonValue; type "url"constant"url"constant
-
-String url
-
-JsonValue; type "image"constant"image"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-JsonValue; type "content"constant"content"constant
-
-
-
-class UrlPdfSource:
-
-JsonValue; type "url"constant"url"constant
-
-String url
-
-JsonValue; type "document"constant"document"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<[CitationsConfigParam](api/messages.md)> citations
-
-Optional<Boolean> enabled
-
-Optional<String> context
-
-Optional<String> title
-
-JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
-
-String url
-
-Fetched content URL
-
-Optional<String> retrievedAt
-
-ISO 8601 timestamp when the content was retrieved
-
-String toolUseId
-
-JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<Caller> caller
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class DirectCaller:
-
-Tool invocation directly from the model.
-
-JsonValue; type "direct"constant"direct"constant
-
-
-
-class ServerToolCaller:
-
-Tool invocation generated by a server-side tool.
-
-String toolId
-
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
-
-
-
-class ServerToolCaller20260120:
-
-String toolId
-
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
-
-
-
-class CodeExecutionToolResultBlockParam:
-
-
-
-[CodeExecutionToolResultBlockParamContent](api/messages.md) content
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-One of the following:
-
-
-
-class CodeExecutionToolResultErrorParam:
-
-
-
-[CodeExecutionToolResultErrorCode](api/messages.md) errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
-
-
-
-class CodeExecutionResultBlockParam:
-
-
-
-List<[CodeExecutionOutputBlockParam](api/messages.md)> content
-
-String fileId
-
-JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
-
-long returnCode
-
-String stderr
-
-String stdout
-
-JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
-
-
-
-class EncryptedCodeExecutionResultBlockParam:
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-
-
-List<[CodeExecutionOutputBlockParam](api/messages.md)> content
-
-String fileId
-
-JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
-
-String encryptedStdout
-
-long returnCode
-
-String stderr
-
-JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
-
-String toolUseId
-
-JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-class BashCodeExecutionToolResultBlockParam:
-
-
-
-Content content
-
-One of the following:
-
-
-
-class BashCodeExecutionToolResultErrorParam:
-
-
-
-[BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
-
-JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
-
-
-
-class BashCodeExecutionResultBlockParam:
-
-
-
-List<[BashCodeExecutionOutputBlockParam](api/messages.md)> content
-
-String fileId
-
-JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
-
-long returnCode
-
-String stderr
-
-String stdout
-
-JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
-
-String toolUseId
-
-JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-class TextEditorCodeExecutionToolResultBlockParam:
-
-
-
-Content content
-
-One of the following:
-
-
-
-class TextEditorCodeExecutionToolResultErrorParam:
-
-
-
-[TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-FILE\_NOT\_FOUND("file\_not\_found")
-
-JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
-
-Optional<String> errorMessage
-
-
-
-class TextEditorCodeExecutionViewResultBlockParam:
-
-String content
-
-
-
-FileType fileType
-
-One of the following:
-
-TEXT("text")
-
-IMAGE("image")
-
-PDF("pdf")
-
-JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
-
-Optional<Long> numLines
-
-Optional<Long> startLine
-
-Optional<Long> totalLines
-
-
-
-class TextEditorCodeExecutionCreateResultBlockParam:
-
-boolean isFileUpdate
-
-JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
-
-
-
-class TextEditorCodeExecutionStrReplaceResultBlockParam:
-
-JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
-
-Optional<List<String>> lines
-
-Optional<Long> newLines
-
-Optional<Long> newStart
-
-Optional<Long> oldLines
-
-Optional<Long> oldStart
-
-String toolUseId
-
-JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-class ToolSearchToolResultBlockParam:
-
-
-
-Content content
-
-One of the following:
-
-
-
-class ToolSearchToolResultErrorParam:
-
-
-
-[ToolSearchToolResultErrorCode](api/messages.md) errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
-
-Optional<String> errorMessage
-
-
-
-class ToolSearchToolSearchResultBlockParam:
-
-
-
-List<[ToolReferenceBlockParam](api/messages.md)> toolReferences
-
-String toolName
-
-JsonValue; type "tool\_reference"constant"tool\_reference"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
-
-String toolUseId
-
-JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-class ContainerUploadBlockParam:
-
-A content block that represents a file to be uploaded to the container
-Files uploaded via this block will be available in the container's input directory.
-
-String fileId
-
-JsonValue; type "container\_upload"constant"container\_upload"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-class MidConversationSystemBlockParam:
-
-System instructions that appear mid-conversation.
-
-Use this block to provide or update system-level instructions at a specific
-point in the conversation, rather than only via the top-level `system` parameter.
-
-
-
-List<[TextBlockParam](api/messages.md)> content
-
-System instruction text blocks.
-
-String text
-
-JsonValue; type "text"constant"text"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<List<[TextCitationParam](api/messages.md)>> citations
-
-One of the following:
-
-
-
-class CitationCharLocationParam:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endCharIndex
-
-long startCharIndex
-
-JsonValue; type "char\_location"constant"char\_location"constant
-
-
-
-class CitationPageLocationParam:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endPageNumber
-
-long startPageNumber
-
-JsonValue; type "page\_location"constant"page\_location"constant
-
-
-
-class CitationContentBlockLocationParam:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-long documentIndex
-
-Optional<String> documentTitle
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
-
-
-
-class CitationWebSearchResultLocationParam:
-
-String citedText
-
-String encryptedIndex
-
-Optional<String> title
-
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-String url
-
-
-
-class CitationSearchResultLocationParam:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-long searchResultIndex
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-String source
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-Optional<String> title
-
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-JsonValue; type "mid\_conv\_system"constant"mid\_conv\_system"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Role role
-
-One of the following:
-
-USER("user")
-
-ASSISTANT("assistant")
-
-SYSTEM("system")
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
-
-Optional<[OutputConfig](api/messages.md)> outputConfig
-
-Configuration options for the model's output, such as the output format.
-
-
-
-Optional<System> system
-
-System prompt.
-
-A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
-
-String
-
-
-
-List<[TextBlockParam](api/messages.md)>
-
-String text
-
-JsonValue; type "text"constant"text"constant
-
-
-
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<List<[TextCitationParam](api/messages.md)>> citations
-
-One of the following:
-
-
-
-class CitationCharLocationParam:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endCharIndex
-
-long startCharIndex
-
-JsonValue; type "char\_location"constant"char\_location"constant
-
-
-
-class CitationPageLocationParam:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endPageNumber
-
-long startPageNumber
-
-JsonValue; type "page\_location"constant"page\_location"constant
-
-
-
-class CitationContentBlockLocationParam:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-long documentIndex
-
-Optional<String> documentTitle
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
-
-
-
-class CitationWebSearchResultLocationParam:
-
-String citedText
-
-String encryptedIndex
-
-Optional<String> title
-
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-String url
-
-
-
-class CitationSearchResultLocationParam:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-long searchResultIndex
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-String source
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-Optional<String> title
-
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-
-
-Optional<[ThinkingConfigParam](api/messages.md)> thinking
-
-Configuration for enabling Claude's extended thinking.
-
-When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
-
-See [extended thinking](build-with-claude/extended-thinking.md) for details.
-
-Optional<[ToolChoice](api/messages.md)> toolChoice
-
-How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
-
-
-
-Optional<List<[MessageCountTokensTool](api/messages.md)>> tools
-
-Definitions of tools that the model may use.
-
-If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
-
-There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
-
-Each tool definition includes:
-
-- `name`: Name of the tool.
-- `description`: Optional, but strongly-recommended description of the tool.
-- `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
-
-For example, if you defined `tools` as:
-
-```shiki
-[
-  {
-    "name": "get_stock_price",
-    "description": "Get the current stock price for a given ticker symbol.",
-    "input_schema": {
-      "type": "object",
-      "properties": {
-        "ticker": {
-          "type": "string",
-          "description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
+    ```json
+    [
+      {
+        "name": "get_stock_price",
+        "description": "Get the current stock price for a given ticker symbol.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "ticker": {
+              "type": "string",
+              "description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
+            }
+          },
+          "required": ["ticker"]
         }
-      },
-      "required": ["ticker"]
-    }
-  }
-]
-```
+      }
+    ]
+    ```
 
-
+    And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
 
-And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
+    ```json
+    [
+      {
+        "type": "tool_use",
+        "id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+        "name": "get_stock_price",
+        "input": { "ticker": "^GSPC" }
+      }
+    ]
+    ```
 
-```shiki
-[
-  {
-    "type": "tool_use",
-    "id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
-    "name": "get_stock_price",
-    "input": { "ticker": "^GSPC" }
-  }
-]
-```
+    You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
 
-
+    ```json
+    [
+      {
+        "type": "tool_result",
+        "tool_use_id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+        "content": "259.75 USD"
+      }
+    ]
+    ```
 
-You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
+    Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-```shiki
-[
-  {
-    "type": "tool_result",
-    "tool_use_id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
-    "content": "259.75 USD"
-  }
-]
-```
+    See our [guide](agents-and-tools/tool-use/overview.md) for more details.
 
-
+    - `class Tool:`
 
-Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
+      - `InputSchema inputSchema`
 
-See our [guide](agents-and-tools/tool-use/overview.md) for more details.
+        [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
-
+        This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-class Tool:
+        - `JsonValue type = "object"`
 
-
+        - `Optional<Properties> properties`
 
-InputSchema inputSchema
+        - `Optional<List<String>> required`
 
-[JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
+      - `String name`
 
-This defines the shape of the `input` that your tool accepts and that the model will produce.
+        Name of the tool.
 
-JsonValue; type "object"constant"object"constant
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Optional<Properties> properties
+        maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-Optional<List<String>> required
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-
+        - `DIRECT("direct")`
 
-String name
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-Name of the tool.
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-maxLength128
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-minLength1
+        Create a cache control breakpoint at this content block.
 
-
+      - `Optional<Boolean> deferLoading`
 
-Optional<List<AllowedCaller>> allowedCallers
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-One of the following:
+      - `Optional<String> description`
 
-DIRECT("direct")
+        Description of what this tool does.
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+        Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+      - `Optional<Boolean> eagerInputStreaming`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+        Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-
+      - `Optional<List<InputExample>> inputExamples`
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+      - `Optional<Boolean> strict`
 
-Create a cache control breakpoint at this content block.
+        When true, guarantees schema validation on tool names and inputs
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+      - `Optional<Type> type`
 
-
+    - `class ToolBash20250124:`
 
-Optional<Ttl> ttl
+      - `JsonValue name = "bash"`
 
-The time-to-live for the cache control breakpoint.
+        Name of the tool.
 
-This may be one the following values:
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      - `JsonValue type = "bash_20250124"`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-One of the following:
+        - `DIRECT("direct")`
 
-TTL\_5M("5m")
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-TTL\_1H("1h")
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-Optional<Boolean> deferLoading
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-
+        Create a cache control breakpoint at this content block.
 
-Optional<String> description
+      - `Optional<Boolean> deferLoading`
 
-Description of what this tool does.
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+      - `Optional<List<InputExample>> inputExamples`
 
-Optional<Boolean> eagerInputStreaming
+      - `Optional<Boolean> strict`
 
-Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+        When true, guarantees schema validation on tool names and inputs
 
-Optional<List<InputExample>> inputExamples
+    - `class CodeExecutionTool20250522:`
 
-Optional<Boolean> strict
+      - `JsonValue name = "code_execution"`
 
-When true, guarantees schema validation on tool names and inputs
+        Name of the tool.
 
-Optional<Type> type
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-
+      - `JsonValue type = "code_execution_20250522"`
 
-class ToolBash20250124:
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-
+        - `DIRECT("direct")`
 
-JsonValue; name "bash"constant"bash"constant
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-Name of the tool.
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-JsonValue; type "bash\_20250124"constant"bash\_20250124"constant
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-
+        Create a cache control breakpoint at this content block.
 
-Optional<List<AllowedCaller>> allowedCallers
+      - `Optional<Boolean> deferLoading`
 
-One of the following:
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-DIRECT("direct")
+      - `Optional<Boolean> strict`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+        When true, guarantees schema validation on tool names and inputs
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+    - `class CodeExecutionTool20250825:`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+      - `JsonValue name = "code_execution"`
 
-
+        Name of the tool.
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Create a cache control breakpoint at this content block.
+      - `JsonValue type = "code_execution_20250825"`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-
+        - `DIRECT("direct")`
 
-Optional<Ttl> ttl
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-The time-to-live for the cache control breakpoint.
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-This may be one the following values:
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        Create a cache control breakpoint at this content block.
 
-One of the following:
+      - `Optional<Boolean> deferLoading`
 
-TTL\_5M("5m")
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-TTL\_1H("1h")
+      - `Optional<Boolean> strict`
 
-Optional<Boolean> deferLoading
+        When true, guarantees schema validation on tool names and inputs
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+    - `class CodeExecutionTool20260120:`
 
-Optional<List<InputExample>> inputExamples
+      Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-Optional<Boolean> strict
+      - `JsonValue name = "code_execution"`
 
-When true, guarantees schema validation on tool names and inputs
+        Name of the tool.
 
-
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-class CodeExecutionTool20250522:
+      - `JsonValue type = "code_execution_20260120"`
 
-
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-JsonValue; name "code\_execution"constant"code\_execution"constant
+        - `DIRECT("direct")`
 
-Name of the tool.
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-JsonValue; type "code\_execution\_20250522"constant"code\_execution\_20250522"constant
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-Optional<List<AllowedCaller>> allowedCallers
+        Create a cache control breakpoint at this content block.
 
-One of the following:
+      - `Optional<Boolean> deferLoading`
 
-DIRECT("direct")
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+      - `Optional<Boolean> strict`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+        When true, guarantees schema validation on tool names and inputs
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+    - `class CodeExecutionTool20260521:`
 
-
+      Code execution tool with REPL state persistence.
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+      - `JsonValue name = "code_execution"`
 
-Create a cache control breakpoint at this content block.
+        Name of the tool.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-
+      - `JsonValue type = "code_execution_20260521"`
 
-Optional<Ttl> ttl
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-The time-to-live for the cache control breakpoint.
+        - `DIRECT("direct")`
 
-This may be one the following values:
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-One of the following:
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-TTL\_5M("5m")
+        Create a cache control breakpoint at this content block.
 
-TTL\_1H("1h")
+      - `Optional<Boolean> deferLoading`
 
-Optional<Boolean> deferLoading
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      - `Optional<Boolean> strict`
 
-Optional<Boolean> strict
+        When true, guarantees schema validation on tool names and inputs
 
-When true, guarantees schema validation on tool names and inputs
+    - `class BrowserToolset20260801:`
 
-
+      The browser toolset: a single `tools[]` entry (carrying no
+      `name`) that declares the browser tool family. The model is served
+      the family's tool with any members disabled via `configs` removed
+      from its schema.
 
-class CodeExecutionTool20250825:
+      - `JsonValue type = "browser_toolset_20260801"`
 
-
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-JsonValue; name "code\_execution"constant"code\_execution"constant
+        Create a cache control breakpoint at this content block.
 
-Name of the tool.
+      - `Optional<BrowserToolsetConfigs> configs`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        Per-member configuration for `browser_toolset_20260801`: one
+        optional field per member tool, keyed by the member name — the same
+        name the member's `tool_use` blocks carry. Every member is an
+        accepted key, and a member's defaults apply wherever its key is
+        absent. Unknown keys are rejected: the field set is this toolset
+        version's complete member set.
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+        - `Optional<BrowserCloseTabConfig> closeTab`
 
-
+          `close_tab`'s config overrides.
 
-Optional<List<AllowedCaller>> allowedCallers
+          - `Optional<Boolean> deferLoading`
 
-One of the following:
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-DIRECT("direct")
+          - `Optional<Boolean> enabled`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+        - `Optional<BrowserDoubleClickConfig> doubleClick`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+          `double_click`'s config overrides.
 
-
+          - `Optional<Boolean> deferLoading`
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Create a cache control breakpoint at this content block.
+          - `Optional<Boolean> enabled`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+        - `Optional<BrowserFileUploadConfig> fileUpload`
 
-Optional<Ttl> ttl
+          `file_upload`'s config overrides.
 
-The time-to-live for the cache control breakpoint.
+          - `Optional<Boolean> deferLoading`
 
-This may be one the following values:
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          - `Optional<Boolean> enabled`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-One of the following:
+        - `Optional<BrowserFindConfig> find`
 
-TTL\_5M("5m")
+          `find`'s config overrides.
 
-TTL\_1H("1h")
+          - `Optional<Boolean> deferLoading`
 
-Optional<Boolean> deferLoading
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          - `Optional<Boolean> enabled`
 
-Optional<Boolean> strict
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-When true, guarantees schema validation on tool names and inputs
+        - `Optional<BrowserFormInputConfig> formInput`
 
-
+          `form_input`'s config overrides.
 
-class CodeExecutionTool20260120:
+          - `Optional<Boolean> deferLoading`
 
-Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Optional<Boolean> enabled`
 
-JsonValue; name "code\_execution"constant"code\_execution"constant
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Name of the tool.
+        - `Optional<BrowserGetPageTextConfig> getPageText`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          `get_page_text`'s config overrides.
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+          - `Optional<Boolean> deferLoading`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Optional<List<AllowedCaller>> allowedCallers
+          - `Optional<Boolean> enabled`
 
-One of the following:
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-DIRECT("direct")
+        - `Optional<BrowserHoldKeyConfig> holdKey`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+          `hold_key`'s config overrides.
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+          - `Optional<Boolean> deferLoading`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Optional<Boolean> enabled`
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Create a cache control breakpoint at this content block.
+        - `Optional<BrowserHoverConfig> hover`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+          `hover`'s config overrides.
 
-
+          - `Optional<Boolean> deferLoading`
 
-Optional<Ttl> ttl
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-The time-to-live for the cache control breakpoint.
+          - `Optional<Boolean> enabled`
 
-This may be one the following values:
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        - `Optional<BrowserJavascriptExecConfig> javascriptExec`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          `javascript_exec`'s config overrides.
 
-One of the following:
+          - `Optional<Boolean> deferLoading`
 
-TTL\_5M("5m")
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-TTL\_1H("1h")
+          - `Optional<Boolean> enabled`
 
-Optional<Boolean> deferLoading
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+        - `Optional<BrowserKeyConfig> key`
 
-Optional<Boolean> strict
+          `key`'s config overrides.
 
-When true, guarantees schema validation on tool names and inputs
+          - `Optional<Boolean> deferLoading`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-class CodeExecutionTool20260521:
+          - `Optional<Boolean> enabled`
 
-Code execution tool with REPL state persistence.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+        - `Optional<BrowserLeftClickConfig> leftClick`
 
-JsonValue; name "code\_execution"constant"code\_execution"constant
+          `left_click`'s config overrides.
 
-Name of the tool.
+          - `Optional<Boolean> deferLoading`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-JsonValue; type "code\_execution\_20260521"constant"code\_execution\_20260521"constant
+          - `Optional<Boolean> enabled`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Optional<List<AllowedCaller>> allowedCallers
+        - `Optional<BrowserLeftClickDragConfig> leftClickDrag`
 
-One of the following:
+          `left_click_drag`'s config overrides.
 
-DIRECT("direct")
+          - `Optional<Boolean> deferLoading`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+          - `Optional<Boolean> enabled`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+        - `Optional<BrowserLeftMouseDownConfig> leftMouseDown`
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+          `left_mouse_down`'s config overrides.
 
-Create a cache control breakpoint at this content block.
+          - `Optional<Boolean> deferLoading`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Optional<Boolean> enabled`
 
-Optional<Ttl> ttl
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-The time-to-live for the cache control breakpoint.
+        - `Optional<BrowserLeftMouseUpConfig> leftMouseUp`
 
-This may be one the following values:
+          `left_mouse_up`'s config overrides.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          - `Optional<Boolean> deferLoading`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-One of the following:
+          - `Optional<Boolean> enabled`
 
-TTL\_5M("5m")
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-TTL\_1H("1h")
+        - `Optional<BrowserListTabsConfig> listTabs`
 
-Optional<Boolean> deferLoading
+          `list_tabs`'s config overrides.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          - `Optional<Boolean> deferLoading`
 
-Optional<Boolean> strict
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-When true, guarantees schema validation on tool names and inputs
+          - `Optional<Boolean> enabled`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-class MemoryTool20250818:
+        - `Optional<BrowserMiddleClickConfig> middleClick`
 
-
+          `middle_click`'s config overrides.
 
-JsonValue; name "memory"constant"memory"constant
+          - `Optional<Boolean> deferLoading`
 
-Name of the tool.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          - `Optional<Boolean> enabled`
 
-JsonValue; type "memory\_20250818"constant"memory\_20250818"constant
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+        - `Optional<BrowserMouseMoveConfig> mouseMove`
 
-Optional<List<AllowedCaller>> allowedCallers
+          `mouse_move`'s config overrides.
 
-One of the following:
+          - `Optional<Boolean> deferLoading`
 
-DIRECT("direct")
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+          - `Optional<Boolean> enabled`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+        - `Optional<BrowserNavigateConfig> navigate`
 
-
+          `navigate`'s config overrides.
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+          - `Optional<Boolean> deferLoading`
 
-Create a cache control breakpoint at this content block.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+          - `Optional<Boolean> enabled`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Optional<Ttl> ttl
+        - `Optional<BrowserNewTabConfig> newTab`
 
-The time-to-live for the cache control breakpoint.
+          `new_tab`'s config overrides.
 
-This may be one the following values:
+          - `Optional<Boolean> deferLoading`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          - `Optional<Boolean> enabled`
 
-One of the following:
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-TTL\_5M("5m")
+        - `Optional<BrowserReadConsoleConfig> readConsole`
 
-TTL\_1H("1h")
+          `read_console`'s config overrides.
 
-Optional<Boolean> deferLoading
+          - `Optional<Boolean> deferLoading`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Optional<List<InputExample>> inputExamples
+          - `Optional<Boolean> enabled`
 
-Optional<Boolean> strict
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-When true, guarantees schema validation on tool names and inputs
+        - `Optional<BrowserReadNetworkConfig> readNetwork`
 
-
+          `read_network`'s config overrides.
 
-class ToolTextEditor20250124:
+          - `Optional<Boolean> deferLoading`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-JsonValue; name "str\_replace\_editor"constant"str\_replace\_editor"constant
+          - `Optional<Boolean> enabled`
 
-Name of the tool.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        - `Optional<BrowserReadPageConfig> readPage`
 
-JsonValue; type "text\_editor\_20250124"constant"text\_editor\_20250124"constant
+          `read_page`'s config overrides.
 
-
+          - `Optional<Boolean> deferLoading`
 
-Optional<List<AllowedCaller>> allowedCallers
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-One of the following:
+          - `Optional<Boolean> enabled`
 
-DIRECT("direct")
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+        - `Optional<BrowserRightClickConfig> rightClick`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+          `right_click`'s config overrides.
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+          - `Optional<Boolean> deferLoading`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+          - `Optional<Boolean> enabled`
 
-Create a cache control breakpoint at this content block.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+        - `Optional<BrowserScreenshotConfig> screenshot`
 
-
+          `screenshot`'s config overrides.
 
-Optional<Ttl> ttl
+          - `Optional<Boolean> deferLoading`
 
-The time-to-live for the cache control breakpoint.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-This may be one the following values:
+          - `Optional<Boolean> enabled`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        - `Optional<BrowserScrollConfig> scroll`
 
-One of the following:
+          `scroll`'s config overrides.
 
-TTL\_5M("5m")
+          - `Optional<Boolean> deferLoading`
 
-TTL\_1H("1h")
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Optional<Boolean> deferLoading
+          - `Optional<Boolean> enabled`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Optional<List<InputExample>> inputExamples
+        - `Optional<BrowserScrollToConfig> scrollTo`
 
-Optional<Boolean> strict
+          `scroll_to`'s config overrides.
 
-When true, guarantees schema validation on tool names and inputs
+          - `Optional<Boolean> deferLoading`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-class ToolTextEditor20250429:
+          - `Optional<Boolean> enabled`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-JsonValue; name "str\_replace\_based\_edit\_tool"constant"str\_replace\_based\_edit\_tool"constant
+        - `Optional<BrowserSwitchTabConfig> switchTab`
 
-Name of the tool.
+          `switch_tab`'s config overrides.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          - `Optional<Boolean> deferLoading`
 
-JsonValue; type "text\_editor\_20250429"constant"text\_editor\_20250429"constant
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Optional<Boolean> enabled`
 
-Optional<List<AllowedCaller>> allowedCallers
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-One of the following:
+        - `Optional<BrowserTripleClickConfig> tripleClick`
 
-DIRECT("direct")
+          `triple_click`'s config overrides.
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+          - `Optional<Boolean> deferLoading`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+          - `Optional<Boolean> enabled`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+        - `Optional<BrowserTypeConfig> type`
 
-Create a cache control breakpoint at this content block.
+          `type`'s config overrides.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+          - `Optional<Boolean> deferLoading`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Optional<Ttl> ttl
+          - `Optional<Boolean> enabled`
 
-The time-to-live for the cache control breakpoint.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-This may be one the following values:
+        - `Optional<BrowserWaitConfig> wait`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          `wait`'s config overrides.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          - `Optional<Boolean> deferLoading`
 
-One of the following:
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-TTL\_5M("5m")
+          - `Optional<Boolean> enabled`
 
-TTL\_1H("1h")
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Optional<Boolean> deferLoading
+        - `Optional<BrowserZoomConfig> zoom`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          `zoom`'s config overrides.
 
-Optional<List<InputExample>> inputExamples
+          - `Optional<Boolean> deferLoading`
 
-Optional<Boolean> strict
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-When true, guarantees schema validation on tool names and inputs
+          - `Optional<Boolean> enabled`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-class ToolTextEditor20250728:
+    - `class MemoryTool20250818:`
 
-
+      - `JsonValue name = "memory"`
 
-JsonValue; name "str\_replace\_based\_edit\_tool"constant"str\_replace\_based\_edit\_tool"constant
+        Name of the tool.
 
-Name of the tool.
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      - `JsonValue type = "memory_20250818"`
 
-JsonValue; type "text\_editor\_20250728"constant"text\_editor\_20250728"constant
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-
+        - `DIRECT("direct")`
 
-Optional<List<AllowedCaller>> allowedCallers
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-One of the following:
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-DIRECT("direct")
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+        Create a cache control breakpoint at this content block.
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+      - `Optional<Boolean> deferLoading`
 
-
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+      - `Optional<List<InputExample>> inputExamples`
 
-Create a cache control breakpoint at this content block.
+      - `Optional<Boolean> strict`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+        When true, guarantees schema validation on tool names and inputs
 
-
+    - `class ComputerToolset20260801:`
 
-Optional<Ttl> ttl
+      The computer toolset: a single `tools[]` entry (carrying no
+      `name`) that declares the computer tool family. The model is
+      served the family's tool with any members disabled via `configs`
+      removed from its schema. Every member is enabled by default, zoom
+      included. The single-tool options `display_number` and
+      `enable_zoom` are not fields of a toolset entry — it carries only
+      `type`, `configs`, and `cache_control`; zoom is controlled
+      via `configs.zoom.enabled`.
 
-The time-to-live for the cache control breakpoint.
+      - `JsonValue type = "computer_toolset_20260801"`
 
-This may be one the following values:
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        Create a cache control breakpoint at this content block.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      - `Optional<ComputerToolsetConfigs> configs`
 
-One of the following:
+        Per-member configuration for `computer_toolset_20260801`: one
+        optional field per member tool, keyed by the member name — the same
+        name the member's `tool_use` blocks carry. Every member is an
+        accepted key, and a member's defaults apply wherever its key is
+        absent. Unknown keys are rejected: the field set is this toolset
+        version's complete member set.
 
-TTL\_5M("5m")
+        - `Optional<ComputerCursorPositionConfig> cursorPosition`
 
-TTL\_1H("1h")
+          `cursor_position`'s config overrides.
 
-Optional<Boolean> deferLoading
+          - `Optional<Boolean> deferLoading`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Optional<List<InputExample>> inputExamples
+          - `Optional<Boolean> enabled`
 
-Optional<Long> maxCharacters
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
+        - `Optional<ComputerDoubleClickConfig> doubleClick`
 
-Optional<Boolean> strict
+          `double_click`'s config overrides.
 
-When true, guarantees schema validation on tool names and inputs
+          - `Optional<Boolean> deferLoading`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-class WebSearchTool20250305:
+          - `Optional<Boolean> enabled`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-JsonValue; name "web\_search"constant"web\_search"constant
+        - `Optional<ComputerHoldKeyConfig> holdKey`
 
-Name of the tool.
+          `hold_key`'s config overrides.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          - `Optional<Boolean> deferLoading`
 
-JsonValue; type "web\_search\_20250305"constant"web\_search\_20250305"constant
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Optional<Boolean> enabled`
 
-Optional<List<AllowedCaller>> allowedCallers
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-One of the following:
+        - `Optional<ComputerKeyConfig> key`
 
-DIRECT("direct")
+          `key`'s config overrides.
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+          - `Optional<Boolean> deferLoading`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+          - `Optional<Boolean> enabled`
 
-Optional<List<String>> allowedDomains
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+        - `Optional<ComputerLeftClickConfig> leftClick`
 
-Optional<List<String>> blockedDomains
+          `left_click`'s config overrides.
 
-If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+          - `Optional<Boolean> deferLoading`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+          - `Optional<Boolean> enabled`
 
-Create a cache control breakpoint at this content block.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+        - `Optional<ComputerLeftClickDragConfig> leftClickDrag`
 
-
+          `left_click_drag`'s config overrides.
 
-Optional<Ttl> ttl
+          - `Optional<Boolean> deferLoading`
 
-The time-to-live for the cache control breakpoint.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-This may be one the following values:
+          - `Optional<Boolean> enabled`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        - `Optional<ComputerLeftMouseDownConfig> leftMouseDown`
 
-One of the following:
+          `left_mouse_down`'s config overrides.
 
-TTL\_5M("5m")
+          - `Optional<Boolean> deferLoading`
 
-TTL\_1H("1h")
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Optional<Boolean> deferLoading
+          - `Optional<Boolean> enabled`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Optional<Long> maxUses
+        - `Optional<ComputerLeftMouseUpConfig> leftMouseUp`
 
-Maximum number of times the tool can be used in the API request.
+          `left_mouse_up`'s config overrides.
 
-Optional<Boolean> strict
+          - `Optional<Boolean> deferLoading`
 
-When true, guarantees schema validation on tool names and inputs
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Optional<Boolean> enabled`
 
-Optional<[UserLocation](api/messages.md)> userLocation
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Parameters for the user's location. Used to provide more relevant search results.
+        - `Optional<ComputerMiddleClickConfig> middleClick`
 
-JsonValue; type "approximate"constant"approximate"constant
+          `middle_click`'s config overrides.
 
-Optional<String> city
+          - `Optional<Boolean> deferLoading`
 
-The city of the user.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Optional<String> country
+          - `Optional<Boolean> enabled`
 
-The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Optional<String> region
+        - `Optional<ComputerMouseMoveConfig> mouseMove`
 
-The region of the user.
+          `mouse_move`'s config overrides.
 
-Optional<String> timezone
+          - `Optional<Boolean> deferLoading`
 
-The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Optional<Boolean> enabled`
 
-class WebFetchTool20250910:
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+        - `Optional<ComputerRightClickConfig> rightClick`
 
-JsonValue; name "web\_fetch"constant"web\_fetch"constant
+          `right_click`'s config overrides.
 
-Name of the tool.
+          - `Optional<Boolean> deferLoading`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-JsonValue; type "web\_fetch\_20250910"constant"web\_fetch\_20250910"constant
+          - `Optional<Boolean> enabled`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Optional<List<AllowedCaller>> allowedCallers
+        - `Optional<ComputerScreenshotConfig> screenshot`
 
-One of the following:
+          `screenshot`'s config overrides.
 
-DIRECT("direct")
+          - `Optional<Boolean> deferLoading`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+          - `Optional<Boolean> enabled`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Optional<List<String>> allowedDomains
+        - `Optional<ComputerScrollConfig> scroll`
 
-List of domains to allow fetching from
+          `scroll`'s config overrides.
 
-Optional<List<String>> blockedDomains
+          - `Optional<Boolean> deferLoading`
 
-List of domains to block fetching from
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Optional<Boolean> enabled`
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Create a cache control breakpoint at this content block.
+        - `Optional<ComputerTripleClickConfig> tripleClick`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+          `triple_click`'s config overrides.
 
-
+          - `Optional<Boolean> deferLoading`
 
-Optional<Ttl> ttl
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-The time-to-live for the cache control breakpoint.
+          - `Optional<Boolean> enabled`
 
-This may be one the following values:
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        - `Optional<ComputerTypeConfig> type`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          `type`'s config overrides.
 
-One of the following:
+          - `Optional<Boolean> deferLoading`
 
-TTL\_5M("5m")
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-TTL\_1H("1h")
+          - `Optional<Boolean> enabled`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Optional<[CitationsConfigParam](api/messages.md)> citations
+        - `Optional<ComputerWaitConfig> wait`
 
-Citations configuration for fetched documents. Citations are disabled by default.
+          `wait`'s config overrides.
 
-Optional<Boolean> enabled
+          - `Optional<Boolean> deferLoading`
 
-Optional<Boolean> deferLoading
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          - `Optional<Boolean> enabled`
 
-Optional<Long> maxContentTokens
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+        - `Optional<ComputerZoomConfig> zoom`
 
-Optional<Long> maxUses
+          `zoom`'s config overrides.
 
-Maximum number of times the tool can be used in the API request.
+          - `Optional<Boolean> deferLoading`
 
-Optional<Boolean> strict
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-When true, guarantees schema validation on tool names and inputs
+          - `Optional<Boolean> enabled`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-class WebSearchTool20260209:
+    - `class ToolTextEditor20250124:`
 
-
+      - `JsonValue name = "str_replace_editor"`
 
-JsonValue; name "web\_search"constant"web\_search"constant
+        Name of the tool.
 
-Name of the tool.
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      - `JsonValue type = "text_editor_20250124"`
 
-JsonValue; type "web\_search\_20260209"constant"web\_search\_20260209"constant
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-
+        - `DIRECT("direct")`
 
-Optional<List<AllowedCaller>> allowedCallers
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-One of the following:
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-DIRECT("direct")
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+        Create a cache control breakpoint at this content block.
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+      - `Optional<Boolean> deferLoading`
 
-Optional<List<String>> allowedDomains
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+      - `Optional<List<InputExample>> inputExamples`
 
-Optional<List<String>> blockedDomains
+      - `Optional<Boolean> strict`
 
-If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+        When true, guarantees schema validation on tool names and inputs
 
-
+    - `class ToolTextEditor20250429:`
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+      - `JsonValue name = "str_replace_based_edit_tool"`
 
-Create a cache control breakpoint at this content block.
+        Name of the tool.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-
+      - `JsonValue type = "text_editor_20250429"`
 
-Optional<Ttl> ttl
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-The time-to-live for the cache control breakpoint.
+        - `DIRECT("direct")`
 
-This may be one the following values:
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-One of the following:
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-TTL\_5M("5m")
+        Create a cache control breakpoint at this content block.
 
-TTL\_1H("1h")
+      - `Optional<Boolean> deferLoading`
 
-Optional<Boolean> deferLoading
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      - `Optional<List<InputExample>> inputExamples`
 
-Optional<Long> maxUses
+      - `Optional<Boolean> strict`
 
-Maximum number of times the tool can be used in the API request.
+        When true, guarantees schema validation on tool names and inputs
 
-Optional<Boolean> strict
+    - `class ToolTextEditor20250728:`
 
-When true, guarantees schema validation on tool names and inputs
+      - `JsonValue name = "str_replace_based_edit_tool"`
 
-
+        Name of the tool.
 
-Optional<[UserLocation](api/messages.md)> userLocation
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Parameters for the user's location. Used to provide more relevant search results.
+      - `JsonValue type = "text_editor_20250728"`
 
-JsonValue; type "approximate"constant"approximate"constant
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-Optional<String> city
+        - `DIRECT("direct")`
 
-The city of the user.
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-Optional<String> country
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-Optional<String> region
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-The region of the user.
+        Create a cache control breakpoint at this content block.
 
-Optional<String> timezone
+      - `Optional<Boolean> deferLoading`
 
-The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-
+      - `Optional<List<InputExample>> inputExamples`
 
-class WebFetchTool20260209:
+      - `Optional<Long> maxCharacters`
 
-
+        Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-JsonValue; name "web\_fetch"constant"web\_fetch"constant
+        minimum: 1
 
-Name of the tool.
+      - `Optional<Boolean> strict`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        When true, guarantees schema validation on tool names and inputs
 
-JsonValue; type "web\_fetch\_20260209"constant"web\_fetch\_20260209"constant
+    - `class WebSearchTool20250305:`
 
-
+      - `JsonValue name = "web_search"`
 
-Optional<List<AllowedCaller>> allowedCallers
+        Name of the tool.
 
-One of the following:
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-DIRECT("direct")
+      - `JsonValue type = "web_search_20250305"`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+        - `DIRECT("direct")`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-Optional<List<String>> allowedDomains
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-List of domains to allow fetching from
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-Optional<List<String>> blockedDomains
+      - `Optional<List<String>> allowedDomains`
 
-List of domains to block fetching from
+        If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-
+      - `Optional<List<String>> blockedDomains`
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+        If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-Create a cache control breakpoint at this content block.
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+        Create a cache control breakpoint at this content block.
 
-
+      - `Optional<Boolean> deferLoading`
 
-Optional<Ttl> ttl
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-The time-to-live for the cache control breakpoint.
+      - `Optional<Long> maxUses`
 
-This may be one the following values:
+        Maximum number of times the tool can be used in the API request.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        exclusiveMinimum: 0
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      - `Optional<Boolean> strict`
 
-One of the following:
+        When true, guarantees schema validation on tool names and inputs
 
-TTL\_5M("5m")
+      - `Optional<UserLocation> userLocation`
 
-TTL\_1H("1h")
+        Parameters for the user's location. Used to provide more relevant search results.
 
-
+        - `JsonValue type = "approximate"`
 
-Optional<[CitationsConfigParam](api/messages.md)> citations
+        - `Optional<String> city`
 
-Citations configuration for fetched documents. Citations are disabled by default.
+          The city of the user.
 
-Optional<Boolean> enabled
+          maxLength: 255, minLength: 1
 
-Optional<Boolean> deferLoading
+        - `Optional<String> country`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-Optional<Long> maxContentTokens
+          maxLength: 2, minLength: 2
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+        - `Optional<String> region`
 
-Optional<Long> maxUses
+          The region of the user.
 
-Maximum number of times the tool can be used in the API request.
+          maxLength: 255, minLength: 1
 
-Optional<Boolean> strict
+        - `Optional<String> timezone`
 
-When true, guarantees schema validation on tool names and inputs
+          The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-
+          maxLength: 255, minLength: 1
 
-class WebFetchTool20260309:
+    - `class WebFetchTool20250910:`
 
-Web fetch tool with use\_cache parameter for bypassing cached content.
+      - `JsonValue name = "web_fetch"`
 
-
+        Name of the tool.
 
-JsonValue; name "web\_fetch"constant"web\_fetch"constant
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Name of the tool.
+      - `JsonValue type = "web_fetch_20250910"`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-JsonValue; type "web\_fetch\_20260309"constant"web\_fetch\_20260309"constant
+        - `DIRECT("direct")`
 
-
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-Optional<List<AllowedCaller>> allowedCallers
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-One of the following:
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-DIRECT("direct")
+      - `Optional<List<String>> allowedDomains`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+        List of domains to allow fetching from
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+      - `Optional<List<String>> blockedDomains`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+        List of domains to block fetching from
 
-Optional<List<String>> allowedDomains
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-List of domains to allow fetching from
+        Create a cache control breakpoint at this content block.
 
-Optional<List<String>> blockedDomains
+      - `Optional<CitationsConfigParam> citations`
 
-List of domains to block fetching from
+        Citations configuration for fetched documents. Citations are disabled by default.
 
-
+      - `Optional<Boolean> deferLoading`
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-Create a cache control breakpoint at this content block.
+      - `Optional<Long> maxContentTokens`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+        Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-
+        exclusiveMinimum: 0
 
-Optional<Ttl> ttl
+      - `Optional<Long> maxUses`
 
-The time-to-live for the cache control breakpoint.
+        Maximum number of times the tool can be used in the API request.
 
-This may be one the following values:
+        exclusiveMinimum: 0
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      - `Optional<Boolean> strict`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        When true, guarantees schema validation on tool names and inputs
 
-One of the following:
+    - `class WebSearchTool20260209:`
 
-TTL\_5M("5m")
+      - `JsonValue name = "web_search"`
 
-TTL\_1H("1h")
+        Name of the tool.
 
-
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Optional<[CitationsConfigParam](api/messages.md)> citations
+      - `JsonValue type = "web_search_20260209"`
 
-Citations configuration for fetched documents. Citations are disabled by default.
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-Optional<Boolean> enabled
+        - `DIRECT("direct")`
 
-Optional<Boolean> deferLoading
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-Optional<Long> maxContentTokens
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+      - `Optional<List<String>> allowedDomains`
 
-Optional<Long> maxUses
+        If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-Maximum number of times the tool can be used in the API request.
+      - `Optional<List<String>> blockedDomains`
 
-Optional<Boolean> strict
+        If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-When true, guarantees schema validation on tool names and inputs
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-Optional<Boolean> useCache
+        Create a cache control breakpoint at this content block.
 
-Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+      - `Optional<Boolean> deferLoading`
 
-
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-class WebSearchTool20260318:
+      - `Optional<Long> maxUses`
 
-
+        Maximum number of times the tool can be used in the API request.
 
-JsonValue; name "web\_search"constant"web\_search"constant
+        exclusiveMinimum: 0
 
-Name of the tool.
+      - `Optional<Boolean> strict`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        When true, guarantees schema validation on tool names and inputs
 
-JsonValue; type "web\_search\_20260318"constant"web\_search\_20260318"constant
+      - `Optional<UserLocation> userLocation`
 
-
+        Parameters for the user's location. Used to provide more relevant search results.
 
-Optional<List<AllowedCaller>> allowedCallers
+    - `class WebFetchTool20260209:`
 
-One of the following:
+      - `JsonValue name = "web_fetch"`
 
-DIRECT("direct")
+        Name of the tool.
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+      - `JsonValue type = "web_fetch_20260209"`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-Optional<List<String>> allowedDomains
+        - `DIRECT("direct")`
 
-If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-Optional<List<String>> blockedDomains
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-
+      - `Optional<List<String>> allowedDomains`
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+        List of domains to allow fetching from
 
-Create a cache control breakpoint at this content block.
+      - `Optional<List<String>> blockedDomains`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+        List of domains to block fetching from
 
-
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-Optional<Ttl> ttl
+        Create a cache control breakpoint at this content block.
 
-The time-to-live for the cache control breakpoint.
+      - `Optional<CitationsConfigParam> citations`
 
-This may be one the following values:
+        Citations configuration for fetched documents. Citations are disabled by default.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      - `Optional<Boolean> deferLoading`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-One of the following:
+      - `Optional<Long> maxContentTokens`
 
-TTL\_5M("5m")
+        Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-TTL\_1H("1h")
+        exclusiveMinimum: 0
 
-Optional<Boolean> deferLoading
+      - `Optional<Long> maxUses`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+        Maximum number of times the tool can be used in the API request.
 
-Optional<Long> maxUses
+        exclusiveMinimum: 0
 
-Maximum number of times the tool can be used in the API request.
+      - `Optional<Boolean> strict`
 
-
+        When true, guarantees schema validation on tool names and inputs
 
-Optional<ResponseInclusion> responseInclusion
+    - `class WebFetchTool20260309:`
 
-How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+      Web fetch tool with use_cache parameter for bypassing cached content.
 
-One of the following:
+      - `JsonValue name = "web_fetch"`
 
-FULL("full")
+        Name of the tool.
 
-EXCLUDED("excluded")
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Optional<Boolean> strict
+      - `JsonValue type = "web_fetch_20260309"`
 
-When true, guarantees schema validation on tool names and inputs
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-
+        - `DIRECT("direct")`
 
-Optional<[UserLocation](api/messages.md)> userLocation
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-Parameters for the user's location. Used to provide more relevant search results.
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-JsonValue; type "approximate"constant"approximate"constant
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-Optional<String> city
+      - `Optional<List<String>> allowedDomains`
 
-The city of the user.
+        List of domains to allow fetching from
 
-Optional<String> country
+      - `Optional<List<String>> blockedDomains`
 
-The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+        List of domains to block fetching from
 
-Optional<String> region
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-The region of the user.
+        Create a cache control breakpoint at this content block.
 
-Optional<String> timezone
+      - `Optional<CitationsConfigParam> citations`
 
-The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+        Citations configuration for fetched documents. Citations are disabled by default.
 
-
+      - `Optional<Boolean> deferLoading`
 
-class WebFetchTool20260318:
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-
+      - `Optional<Long> maxContentTokens`
 
-JsonValue; name "web\_fetch"constant"web\_fetch"constant
+        Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-Name of the tool.
+        exclusiveMinimum: 0
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      - `Optional<Long> maxUses`
 
-JsonValue; type "web\_fetch\_20260318"constant"web\_fetch\_20260318"constant
+        Maximum number of times the tool can be used in the API request.
 
-
+        exclusiveMinimum: 0
 
-Optional<List<AllowedCaller>> allowedCallers
+      - `Optional<Boolean> strict`
 
-One of the following:
+        When true, guarantees schema validation on tool names and inputs
 
-DIRECT("direct")
+      - `Optional<Boolean> useCache`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+        Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+    - `class WebSearchTool20260318:`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+      - `JsonValue name = "web_search"`
 
-Optional<List<String>> allowedDomains
+        Name of the tool.
 
-List of domains to allow fetching from
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Optional<List<String>> blockedDomains
+      - `JsonValue type = "web_search_20260318"`
 
-List of domains to block fetching from
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-
+        - `DIRECT("direct")`
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-Create a cache control breakpoint at this content block.
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-
+      - `Optional<List<String>> allowedDomains`
 
-Optional<Ttl> ttl
+        If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-The time-to-live for the cache control breakpoint.
+      - `Optional<List<String>> blockedDomains`
 
-This may be one the following values:
+        If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        Create a cache control breakpoint at this content block.
 
-One of the following:
+      - `Optional<Boolean> deferLoading`
 
-TTL\_5M("5m")
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-TTL\_1H("1h")
+      - `Optional<Long> maxUses`
 
-
+        Maximum number of times the tool can be used in the API request.
 
-Optional<[CitationsConfigParam](api/messages.md)> citations
+        exclusiveMinimum: 0
 
-Citations configuration for fetched documents. Citations are disabled by default.
+      - `Optional<ResponseInclusion> responseInclusion`
 
-Optional<Boolean> enabled
+        How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
-Optional<Boolean> deferLoading
+        - `FULL("full")`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+        - `EXCLUDED("excluded")`
 
-Optional<Long> maxContentTokens
+      - `Optional<Boolean> strict`
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+        When true, guarantees schema validation on tool names and inputs
 
-Optional<Long> maxUses
+      - `Optional<UserLocation> userLocation`
 
-Maximum number of times the tool can be used in the API request.
+        Parameters for the user's location. Used to provide more relevant search results.
 
-
+    - `class WebFetchTool20260318:`
 
-Optional<ResponseInclusion> responseInclusion
+      - `JsonValue name = "web_fetch"`
 
-How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+        Name of the tool.
 
-One of the following:
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-FULL("full")
+      - `JsonValue type = "web_fetch_20260318"`
 
-EXCLUDED("excluded")
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-Optional<Boolean> strict
+        - `DIRECT("direct")`
 
-When true, guarantees schema validation on tool names and inputs
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-Optional<Boolean> useCache
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-
+      - `Optional<List<String>> allowedDomains`
 
-class ToolSearchToolBm25\_20251119:
+        List of domains to allow fetching from
 
-
+      - `Optional<List<String>> blockedDomains`
 
-JsonValue; name "tool\_search\_tool\_bm25"constant"tool\_search\_tool\_bm25"constant
+        List of domains to block fetching from
 
-Name of the tool.
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        Create a cache control breakpoint at this content block.
 
-
+      - `Optional<CitationsConfigParam> citations`
 
-Type type
+        Citations configuration for fetched documents. Citations are disabled by default.
 
-One of the following:
+      - `Optional<Boolean> deferLoading`
 
-TOOL\_SEARCH\_TOOL\_BM25\_20251119("tool\_search\_tool\_bm25\_20251119")
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+      - `Optional<Long> maxContentTokens`
 
-
+        Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-Optional<List<AllowedCaller>> allowedCallers
+        exclusiveMinimum: 0
 
-One of the following:
+      - `Optional<Long> maxUses`
 
-DIRECT("direct")
+        Maximum number of times the tool can be used in the API request.
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+        exclusiveMinimum: 0
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+      - `Optional<ResponseInclusion> responseInclusion`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+        How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
-
+        - `FULL("full")`
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+        - `EXCLUDED("excluded")`
 
-Create a cache control breakpoint at this content block.
+      - `Optional<Boolean> strict`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+        When true, guarantees schema validation on tool names and inputs
 
-
+      - `Optional<Boolean> useCache`
 
-Optional<Ttl> ttl
+        Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-The time-to-live for the cache control breakpoint.
+    - `class ToolSearchToolBm25_20251119:`
 
-This may be one the following values:
+      - `JsonValue name = "tool_search_tool_bm25"`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        Name of the tool.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-One of the following:
+      - `Type type`
 
-TTL\_5M("5m")
+        - `TOOL_SEARCH_TOOL_BM25_20251119("tool_search_tool_bm25_20251119")`
 
-TTL\_1H("1h")
+        - `TOOL_SEARCH_TOOL_BM25("tool_search_tool_bm25")`
 
-Optional<Boolean> deferLoading
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+        - `DIRECT("direct")`
 
-Optional<Boolean> strict
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-When true, guarantees schema validation on tool names and inputs
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-class ToolSearchToolRegex20251119:
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-
+        Create a cache control breakpoint at this content block.
 
-JsonValue; name "tool\_search\_tool\_regex"constant"tool\_search\_tool\_regex"constant
+      - `Optional<Boolean> deferLoading`
 
-Name of the tool.
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      - `Optional<Boolean> strict`
 
-
+        When true, guarantees schema validation on tool names and inputs
 
-Type type
+    - `class ToolSearchToolRegex20251119:`
 
-One of the following:
+      - `JsonValue name = "tool_search_tool_regex"`
 
-TOOL\_SEARCH\_TOOL\_REGEX\_20251119("tool\_search\_tool\_regex\_20251119")
+        Name of the tool.
 
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-
+      - `Type type`
 
-Optional<List<AllowedCaller>> allowedCallers
+        - `TOOL_SEARCH_TOOL_REGEX_20251119("tool_search_tool_regex_20251119")`
 
-One of the following:
+        - `TOOL_SEARCH_TOOL_REGEX("tool_search_tool_regex")`
 
-DIRECT("direct")
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+        - `DIRECT("direct")`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-Optional<[CacheControlEphemeral](api/messages.md)> cacheControl
+      - `Optional<CacheControlEphemeral> cacheControl`
 
-Create a cache control breakpoint at this content block.
+        Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+      - `Optional<Boolean> deferLoading`
 
-
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-Optional<Ttl> ttl
+      - `Optional<Boolean> strict`
 
-The time-to-live for the cache control breakpoint.
+        When true, guarantees schema validation on tool names and inputs
 
-This may be one the following values:
+## Returns
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+- `class MessageTokensCount:`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+  - `long inputTokens`
 
-One of the following:
+    The total number of tokens across the provided list of messages, system prompt, and tools.
 
-TTL\_5M("5m")
+## Example
 
-TTL\_1H("1h")
-
-Optional<Boolean> deferLoading
-
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
-
-Optional<Boolean> strict
-
-When true, guarantees schema validation on tool names and inputs
-
-##### ReturnsExpand Collapse
-
-
-
-class MessageTokensCount:
-
-long inputTokens
-
-The total number of tokens across the provided list of messages, system prompt, and tools.
-
-Count tokens in a Message
-
-Java
-
-```shiki
+```java
 package com.anthropic.example;
 
 import com.anthropic.client.AnthropicClient;
@@ -4883,30 +2681,16 @@ public final class Main {
 
         MessageCountTokensParams params = MessageCountTokensParams.builder()
             .addUserMessage("Hello, world")
-            .model(Model.CLAUDE_OPUS_4_6)
+            .model(Model.CLAUDE_OPUS_5)
             .build();
         MessageTokensCount messageTokensCount = client.messages().countTokens(params);
     }
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "input_tokens": 2095
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "input_tokens": 2095
 }

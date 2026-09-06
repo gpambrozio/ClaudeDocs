@@ -1,14 +1,8 @@
 # Create Tunnel Certificate
 
-Copy page
+**POST** `/v1/organizations/tunnels/{tunnel_id}/certificates`
 
-
-
-# Create Tunnel Certificate
-
-Deprecated
-
-POST/v1/organizations/tunnels/{tunnel\_id}/certificates
+**Deprecated**
 
 **Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](api/beta/tunnels.md) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
@@ -19,82 +13,70 @@ when it terminates the inner TLS session. The PEM body must contain
 exactly one X.509 certificate and no private-key material. A tunnel
 holds at most two non-archived certificates.
 
-##### Path parameters
+## Path parameters
 
-tunnel\_id: string
+- `tunnel_id: string`
 
-ID of the Tunnel.
+  ID of the Tunnel.
 
-##### Headers
+## Headers
 
-"anthropic-beta": array of "mcp-tunnels-2026-05-19"
+- `"anthropic-beta": array of "mcp-tunnels-2026-05-19"`
 
-Required for all Tunnel endpoints.
+  Required for all Tunnel endpoints.
 
-##### Body
+## Body parameters
 
-
+- `ca_certificate_pem: string`
 
-ca\_certificate\_pem: string
+  PEM-encoded X.509 CA certificate. Must contain exactly one certificate and
+  no private-key material.
 
-PEM-encoded X.509 CA certificate. Must contain exactly one certificate and
-no private-key material.
+  maxLength: 8192
 
-maxLength8192
+## Returns
 
-##### Returns
+- `id: string`
 
-id: string
+  ID of the Tunnel Certificate.
 
-ID of the Tunnel Certificate.
+- `archived_at: string or null`
 
-
+  RFC 3339 datetime string indicating when the certificate was archived, or
+  `null` if it is not archived.
 
-archived\_at: string or null
+  format: date-time
 
-RFC 3339 datetime string indicating when the certificate was archived, or
-`null` if it is not archived.
+- `created_at: string`
 
-formatdate-time
+  RFC 3339 datetime string indicating when the certificate was registered.
 
-
+  format: date-time
 
-created\_at: string
+- `expires_at: string or null`
 
-RFC 3339 datetime string indicating when the certificate was registered.
+  RFC 3339 datetime string indicating when the certificate expires, or
+  `null` if it does not expire.
 
-formatdate-time
+  format: date-time
 
-
+- `fingerprint: string`
 
-expires\_at: string or null
+  The certificate's SHA-256 fingerprint, as a lowercase hex string.
 
-RFC 3339 datetime string indicating when the certificate expires, or
-`null` if it does not expire.
+- `tunnel_id: string`
 
-formatdate-time
+  ID of the Tunnel this certificate is registered against.
 
-fingerprint: string
+- `type: "tunnel_certificate"`
 
-The certificate's SHA-256 fingerprint, as a lowercase hex string.
+  Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
-tunnel\_id: string
+  default: tunnel_certificate
 
-ID of the Tunnel this certificate is registered against.
+## Example
 
-
-
-type: "tunnel\_certificate"
-
-Object type. Always `tunnel_certificate` for Tunnel Certificates.
-
-defaulttunnel\_certificate
-
-Create Tunnel Certificate
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -104,29 +86,9 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates 
         }'
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "tcrt_01JmWq4ZxnBvR7tKpY2sLdH9",
-  "archived_at": "2024-11-01T23:59:27.427722Z",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "expires_at": "2024-10-30T23:58:27.427722Z",
-  "fingerprint": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
-  "tunnel_id": "tnl_01Hx9Kp2RtQvMn3sWbYdLcF8",
-  "type": "tunnel_certificate"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "tcrt_01JmWq4ZxnBvR7tKpY2sLdH9",
   "archived_at": "2024-11-01T23:59:27.427722Z",

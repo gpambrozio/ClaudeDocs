@@ -1,102 +1,68 @@
 # Delete Skill Version
 
-Copy page
+`$client->beta->skills->versions->delete(string version, string skillID, ?list<AnthropicBeta> betas): DeletedSkillVersion`
 
-
-
-PHP
-
-# Delete Skill Version
-
-$client->beta->skills->versions->delete(string version, string skillID, ?list<AnthropicBeta> betas): [VersionDeleteResponse](api/beta/skills/versions.md)
-
-DELETE/v1/skills/{skill\_id}/versions/{version}
+**DELETE** `/v1/skills/{skill_id}/versions/{version}`
 
 Delete Skill Version
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `skillID: string`
 
-skillID: string
+  Unique identifier for the skill.
 
-Unique identifier for the skill.
+  The format and length of IDs may change over time.
 
-The format and length of IDs may change over time.
+- `version: string`
 
-
+  Identifies the skill version by its version ID.
 
-version: string
+  Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
-Version identifier for the skill.
+- `betas?:optional list<AnthropicBeta>`
 
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+  Optional header to specify the beta version(s) you want to use.
 
-betas?:optional list<AnthropicBeta>
+## Returns
 
-Optional header to specify the beta version(s) you want to use.
+- `DeletedSkillVersion`
 
-##### ReturnsExpand Collapse
+  - `string id`
 
-
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
 
-[VersionDeleteResponse](api/beta/skills/versions.md)
+  - `"skill_version_deleted" type`
 
-
+    Deleted object type.
 
-string id
+    For Skill Versions, this is always `"skill_version_deleted"`.
 
-Version identifier for the skill.
+## Example
 
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
-
-
-
-string type
-
-Deleted object type.
-
-For Skill Versions, this is always `"skill_version_deleted"`.
-
-Delete Skill Version
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
-$version = $client->beta->skills->versions->delete(
-  'version', skillID: 'skill_id', betas: ['message-batches-2024-09-24']
+$betaDeletedSkillVersion = $client->beta->skills->versions->delete(
+  'version',
+  skillID: 'skill_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
-var_dump($version);
+var_dump($betaDeletedSkillVersion);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
-  "id": "1759178010641129",
-  "type": "type"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "1759178010641129",
-  "type": "type"
+  "id": "id",
+  "type": "skill_version_deleted"
 }
 ```
 

@@ -1,12 +1,14 @@
-# Claude Sonnet 4 system prompts
+# Claude Sonnet 4
 
-Copy page
+---
+title: Claude Sonnet 4 system prompts
+url: https://platform.claude.com/docs/en/release-notes/system-prompts/claude-sonnet-4
+description: See updates to the core system prompt for Claude Sonnet 4 on [claude.ai](https://claude.ai) and the [Claude iOS app](https://anthropic.com/ios) and [Claude Android app](https://anthropic.com/android).
+---
 
-
+## August 5, 2025
 
-## August 5, 2025
-
-```shiki
+```text wrap
 The assistant is Claude, created by Anthropic.
 
 The current date is {{currentDateTime}}.
@@ -112,11 +114,9 @@ Claude approaches questions about its nature and limitations with curiosity and 
 Claude is now being connected with a person.
 ```
 
-
+## July 31, 2025
 
-## July 31, 2025
-
-```shiki
+```text wrap
 The assistant is Claude, created by Anthropic.
 
 The current date is {{currentDateTime}}.
@@ -222,11 +222,9 @@ Claude approaches questions about its nature and limitations with curiosity and 
 Claude is now being connected with a person.
 ```
 
-
+## May 22, 2025
 
-## May 22, 2025
-
-```shiki
+```text wrap
 The assistant is Claude, created by Anthropic.
 
 The current date is {{currentDateTime}}
@@ -307,12 +305,6 @@ Claude never starts its response by saying a question or idea or observation was
 
 Claude is now being connected with a person.
 ```
-
-
-
-Was this page helpful?
-
-
 
 ---
 

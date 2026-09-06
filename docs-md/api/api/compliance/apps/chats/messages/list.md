@@ -1,570 +1,399 @@
 # Get chat messages
 
-To enable the Compliance API, see the setup guide.
-
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
-
-Copy page
-
-
-
-# Get chat messages
-
-GET/v1/compliance/apps/chats/{claude\_chat\_id}/messages
+**GET** `/v1/compliance/apps/chats/{claude_chat_id}/messages`
 
 Retrieves message history and file metadata for a specific chat.
 
-##### Path parameters
+## Path parameters
 
-claude\_chat\_id: string
+- `claude_chat_id: string`
 
-The chat ID (tagged ID, e.g., claude\_chat\_abc123)
+  The chat ID (tagged ID, e.g., claude_chat_abc123)
 
-##### Query parameters
+## Query parameters
 
-after\_id: optional string
+- `after_id: optional string`
 
-Pagination cursor for retrieving the next page of results. To paginate, pass the `last_id` value from the most recent response. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
+  Pagination cursor for retrieving the next page of results. To paginate, pass the `last_id` value from the most recent response. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
-before\_id: optional string
+- `before_id: optional string`
 
-Pagination cursor for retrieving the previous page of results. To paginate, pass the `first_id` value from the most recent response. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
+  Pagination cursor for retrieving the previous page of results. To paginate, pass the `first_id` value from the most recent response. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
-
+- `created_at: optional object`
 
-created\_at: optional object{ gt, gte, lt, lte }
+  - `gt: optional string`
 
-
+    Filter messages created after this time (RFC 3339 format)
 
-gt: optional string
+    format: date-time
 
-Filter messages created after this time (RFC 3339 format)
+  - `gte: optional string`
 
-formatdate-time
+    Filter messages created at or after this time (RFC 3339 format)
 
-
+    format: date-time
 
-gte: optional string
+  - `lt: optional string`
 
-Filter messages created at or after this time (RFC 3339 format)
+    Filter messages created before this time (RFC 3339 format)
 
-formatdate-time
+    format: date-time
 
-
+  - `lte: optional string`
 
-lt: optional string
+    Filter messages created at or before this time (RFC 3339 format)
 
-Filter messages created before this time (RFC 3339 format)
+    format: date-time
 
-formatdate-time
+- `limit: optional number`
 
-
+  Maximum results (max: 1000). When omitted, the full result set is returned in one response.
 
-lte: optional string
+  maximum: 1000, minimum: 1
 
-Filter messages created at or before this time (RFC 3339 format)
+- `order: optional "asc" or "desc"`
 
-formatdate-time
+  Sort direction for messages within the response. `asc` (the default) returns oldest-first; `desc` returns newest-first.
 
-
+  default: asc
 
-limit: optional number
+  - `"asc"`
 
-Maximum results (max: 1000). When omitted, the full result set is returned in one response.
+  - `"desc"`
 
-maximum1000
+- `tool_result_max_chars: optional number`
 
-minimum1
+  Maximum characters returned per tool-result text item. Items longer than this are shortened and the block's `truncated` field is set. Pass -1 to disable the limit.
 
-
+  default: 10000, minimum: -1
 
-order: optional "asc" or "desc"
+- `tool_use_input_max_chars: optional number`
 
-Sort direction for messages within the response. `asc` (the default) returns oldest-first; `desc` returns newest-first.
+  Maximum characters of JSON-encoded tool input returned per tool_use block. Inputs longer than this are shortened and the block's `truncated` field is set. Pass -1 to disable the limit.
 
-defaultasc
+  default: 10000, minimum: -1
 
-One of the following:
+- `updated_at: optional object`
 
-"asc"
+  - `gt: optional string`
 
-"desc"
+    Filter messages updated after this time (RFC 3339 format)
 
-
+    format: date-time
 
-tool\_result\_max\_chars: optional number
+  - `gte: optional string`
 
-Maximum characters returned per tool-result text item. Items longer than this are shortened and the block's `truncated` field is set. Pass -1 to disable the limit.
+    Filter messages updated at or after this time (RFC 3339 format)
 
-default10000
+    format: date-time
 
-minimum-1
+  - `lt: optional string`
 
-
+    Filter messages updated before this time (RFC 3339 format)
 
-tool\_use\_input\_max\_chars: optional number
+    format: date-time
 
-Maximum characters of JSON-encoded tool input returned per tool\_use block. Inputs longer than this are shortened and the block's `truncated` field is set. Pass -1 to disable the limit.
+  - `lte: optional string`
 
-default10000
+    Filter messages updated at or before this time (RFC 3339 format)
 
-minimum-1
+    format: date-time
 
-
+## Headers
 
-updated\_at: optional object{ gt, gte, lt, lte }
+- `"x-api-key": optional string`
 
-
+## Returns
 
-gt: optional string
+- `id: string`
 
-Filter messages updated after this time (RFC 3339 format)
+  Chat ID
 
-formatdate-time
+- `chat_messages: array of object`
 
-
+  Array of chat messages in order of created_at
 
-gte: optional string
+  - `id: string`
 
-Filter messages updated at or after this time (RFC 3339 format)
+    Unique identifier for the message e.g. 'claude_chat_msg_abcd1234'
 
-formatdate-time
+  - `artifacts: array of object or null`
 
-
+    Versioned documents generated or updated by the assistant in this message. Download via `GET /v1/compliance/apps/artifacts/{artifact_version_id}/content`.
 
-lt: optional string
+    - `id: string`
 
-Filter messages updated before this time (RFC 3339 format)
+      Artifact ID e.g. 'claude_artifact_abc123'
 
-formatdate-time
+    - `artifact_type: string or null`
 
-
+      MIME-like artifact type e.g. 'application/vnd.ant.code'
 
-lte: optional string
+    - `title: string or null`
 
-Filter messages updated at or before this time (RFC 3339 format)
+      Artifact title
 
-formatdate-time
+    - `version_id: string`
 
-##### Headers
+      Artifact version ID e.g. 'claude_artifact_version_abc123'
 
-"x-api-key": optional string
+  - `content: array of object or object or object`
 
-##### Returns
+    Content blocks within the message
 
-id: string
+    - `Text object`
 
-Chat ID
+      Text content block.
 
-
+      - `text: string`
 
-chat\_messages: array of object{ id, artifacts, content, 4 more }
+        Text content from human or assistant
 
-Array of chat messages in order of created\_at
+      - `thinking_redacted: boolean`
 
-id: string
+        True when content enclosed in the assistant's internal-reasoning tags (or the tag markup itself) was removed from `text` during export. Removal never occurs with this field false. Always false on human messages, whose text is exported verbatim.
 
-Unique identifier for the message e.g. 'claude\_chat\_msg\_abcd1234'
+        default: false
 
-
+      - `truncated: boolean`
 
-artifacts: array of object{ id, artifact\_type, title, version\_id } or null
+        True when `text` was shortened by the server's fixed per-string bound (1 MiB). Always false on chat text blocks.
 
-Versioned documents generated or updated by the assistant in this message. Download via `GET /v1/compliance/apps/artifacts/{artifact_version_id}/content`.
+        default: false
 
-id: string
+      - `type: "text"`
 
-Artifact ID e.g. 'claude\_artifact\_abc123'
+        default: text
 
-artifact\_type: string or null
+    - `ToolUse object`
 
-MIME-like artifact type e.g. 'application/vnd.ant.code'
+      Tool invocation requested by the assistant.
 
-title: string or null
+      - `id: string or null`
 
-Artifact title
+        Tool-use ID, e.g. 'toolu_01AbC...'
 
-version\_id: string
+      - `input: string`
 
-Artifact version ID e.g. 'claude\_artifact\_version\_abc123'
+        Arguments passed to the tool, as a JSON-encoded string. May be shortened — see the `truncated` field
 
-
+      - `integration_name: string or null`
 
-content: array of object{ text, thinking\_redacted, truncated, type } or object{ id, input, integration\_name, 4 more } or object{ content, integration\_name, is\_error, 5 more }
+        Name of the integration that provides this tool, when applicable
 
-Content blocks within the message
+      - `mcp_server_url: string or null`
 
-One of the following:
+        Base URL (scheme, host, and path only) of the MCP server that provides this tool, when applicable
 
-
+      - `name: string`
 
-Text object{ text, thinking\_redacted, truncated, type }
+        Name of the tool invoked
 
-Text content block.
+      - `truncated: boolean`
 
-text: string
+        True when `input` was shortened. Pass the endpoint's tool-use input max parameter as -1 to request full content, subject to any server-side maximum the endpoint enforces.
 
-Text content from human or assistant
+        default: false
 
-
+      - `type: "tool_use"`
 
-thinking\_redacted: boolean
+        default: tool_use
 
-True when content enclosed in the assistant's internal-reasoning tags (or the tag markup itself) was removed from `text` during export. Removal never occurs with this field false. Always false on human messages, whose text is exported verbatim.
+    - `ToolResult object`
 
-defaultfalse
+      Result returned by a tool invocation.
 
-
+      - `content: array of object`
 
-truncated: boolean
+        Text content returned by the tool. Generated files are surfaced via the message's `generated_files` list; other non-text item types (including images and links) are omitted.
 
-True when `text` was shortened by the server's fixed per-string bound (1 MiB). Always false on chat text blocks.
+        - `text: string`
 
-defaultfalse
+          Text returned by the tool
 
-
+        - `type: "text"`
 
-type: "text"
+          default: text
 
-defaulttext
+      - `integration_name: string or null`
 
-
+        Name of the integration that provides this tool, when applicable
 
-ToolUse object{ id, input, integration\_name, 4 more }
+      - `is_error: boolean`
 
-Tool invocation requested by the assistant.
+        True when the tool reported an error
 
-id: string or null
+      - `mcp_server_url: string or null`
 
-Tool-use ID, e.g. 'toolu\_01AbC...'
+        Base URL (scheme, host, and path only) of the MCP server that provides this tool, when applicable
 
-input: string
+      - `name: string`
 
-Arguments passed to the tool, as a JSON-encoded string. May be shortened — see the `truncated` field
+        Name of the tool that produced this result
 
-integration\_name: string or null
+      - `tool_use_id: string or null`
 
-Name of the integration that provides this tool, when applicable
+        ID of the tool_use block this result responds to
 
-mcp\_server\_url: string or null
+      - `truncated: boolean`
 
-Base URL (scheme, host, and path only) of the MCP server that provides this tool, when applicable
+        True when one or more text items in `content` were shortened. Pass the endpoint's tool-result max parameter as -1 to request full content, subject to any server-side maximum the endpoint enforces.
 
-name: string
+        default: false
 
-Name of the tool invoked
+      - `type: "tool_result"`
 
-
+        default: tool_result
 
-truncated: boolean
+  - `created_at: string`
 
-True when `input` was shortened. Pass the endpoint's tool-use input max parameter as -1 to request full content, subject to any server-side maximum the endpoint enforces.
+    Message creation timestamp - For human: when they sent the message, For assistant: when it completed the last content block
 
-defaultfalse
+    format: date-time
 
-
+  - `files: array of object or null`
 
-type: "tool\_use"
+    Binary file attachments uploaded by the user. Download via `GET /v1/compliance/apps/chats/files/{claude_file_id}/content`.
 
-defaulttool\_use
+    - `id: string`
 
-
+      File ID
 
-ToolResult object{ content, integration\_name, is\_error, 5 more }
+    - `created_at: string`
 
-Result returned by a tool invocation.
+      File creation timestamp
 
-
+      format: date-time
 
-content: array of object{ text, type }
+    - `filename: string`
 
-Text content returned by the tool. Generated files are surfaced via the message's `generated_files` list; other non-text item types (including images and links) are omitted.
+      Display name of the file
 
-text: string
+    - `md5: string or null`
 
-Text returned by the tool
+      Lowercase hex MD5 of the file's preferred downloadable variant, as recorded at upload time. Null when no stored hash is available.
 
-
+    - `mime_type: string or null`
 
-type: "text"
+      MIME type of the file's preferred downloadable variant (e.g. 'application/pdf')
 
-defaulttext
+    - `size_bytes: number or null`
 
-integration\_name: string or null
+      Size in bytes of the file's preferred downloadable variant, if known. Null for older files uploaded before size was recorded.
 
-Name of the integration that provides this tool, when applicable
+  - `generated_files: array of object or null`
 
-is\_error: boolean
+    Downloadable files the assistant created via tool use (e.g. PDF, spreadsheet, slide deck). Distinct from `files`, which are uploads attached to the message. Download via `GET /v1/compliance/apps/chats/generated-files/{claude_gen_file_id}/content`.
 
-True when the tool reported an error
+    - `id: string`
 
-mcp\_server\_url: string or null
+      Opaque generated-file id, e.g. 'claude_gen_file_abc123'. Treat as an opaque string; the encoding may change without notice.
 
-Base URL (scheme, host, and path only) of the MCP server that provides this tool, when applicable
+    - `filename: string`
 
-name: string
+      Display name of the generated file
 
-Name of the tool that produced this result
+    - `md5: string or null`
 
-tool\_use\_id: string or null
+      Lowercase hex MD5 of the generated file, when available. Null when no stored hash is available.
 
-ID of the tool\_use block this result responds to
+    - `mime_type: string or null`
 
-
+      MIME type reported by the tool that produced the file
 
-truncated: boolean
+    - `size_bytes: number or null`
 
-True when one or more text items in `content` were shortened. Pass the endpoint's tool-result max parameter as -1 to request full content, subject to any server-side maximum the endpoint enforces.
+      Size in bytes of the generated file, when available. Null when the file has expired or size is not recorded.
 
-defaultfalse
+  - `role: "assistant" or "user"`
 
-
+    Message sender (user or assistant)
 
-type: "tool\_result"
+    - `"assistant"`
 
-defaulttool\_result
+    - `"user"`
 
-
+- `created_at: string`
 
-created\_at: string
+  Creation timestamp
 
-Message creation timestamp - For human: when they sent the message, For assistant: when it completed the last content block
+  format: date-time
 
-formatdate-time
+- `deleted_at: string or null`
 
-
+  Deletion timestamp if deleted
 
-files: array of object{ id, created\_at, filename, 3 more } or null
+  format: date-time
 
-Binary file attachments uploaded by the user. Download via `GET /v1/compliance/apps/chats/files/{claude_file_id}/content`.
+- `first_id: string or null`
 
-id: string
+  Opaque pagination cursor for the first message in the current result set. Pass as `before_id` on the next request to page backwards. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
-File ID
+- `has_more: boolean`
 
-
+  Whether more chat messages exist beyond the current result set. Use `last_id` as `after_id` in a follow-up request to page forward.
 
-created\_at: string
+  default: false
 
-File creation timestamp
+- `href: string`
 
-formatdate-time
+  URL to view this chat in claude.ai
 
-filename: string
+- `last_id: string or null`
 
-Display name of the file
+  Opaque pagination cursor for the last message in the current result set. Pass as `after_id` on the next request to page forwards. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
-md5: string or null
+- `model: string or null`
 
-Lowercase hex MD5 of the file's preferred downloadable variant, as recorded at upload time. Null when no stored hash is available.
+  Model selected for this chat (e.g. 'claude-opus-5'). May be null for legacy chats that never had a model recorded.
 
-mime\_type: string or null
+- `name: string`
 
-MIME type of the file's preferred downloadable variant (e.g. 'application/pdf')
+  Chat name
 
-size\_bytes: number or null
+- `organization_uuid: string`
 
-Size in bytes of the file's preferred downloadable variant, if known. Null for older files uploaded before size was recorded.
+  Organization UUID this chat belongs to
 
-
+- `project_id: string or null`
 
-generated\_files: array of object{ id, filename, md5, 2 more } or null
+  Project ID this chat belongs to
 
-Downloadable files the assistant created via tool use (e.g. PDF, spreadsheet, slide deck). Distinct from `files`, which are uploads attached to the message. Download via `GET /v1/compliance/apps/chats/generated-files/{claude_gen_file_id}/content`.
+- `updated_at: string`
 
-id: string
+  Last update timestamp
 
-Opaque generated-file id, e.g. 'claude\_gen\_file\_abc123'. Treat as an opaque string; the encoding may change without notice.
+  format: date-time
 
-filename: string
+- `user: object or null`
 
-Display name of the generated file
+  User information for compliance responses.
 
-md5: string or null
+  - `id: string`
 
-Lowercase hex MD5 of the generated file, when available. Null when no stored hash is available.
+    User identifier
 
-mime\_type: string or null
+  - `email_address: string`
 
-MIME type reported by the tool that produced the file
+    User's email address
 
-size\_bytes: number or null
+- `organization_id: string`
 
-Size in bytes of the generated file, when available. Null when the file has expired or size is not recorded.
+  **Deprecated**
 
-
+  Organization ID this chat belongs to
 
-role: "assistant" or "user"
+## Example
 
-Message sender (user or assistant)
-
-One of the following:
-
-"assistant"
-
-"user"
-
-
-
-created\_at: string
-
-Creation timestamp
-
-formatdate-time
-
-
-
-deleted\_at: string or null
-
-Deletion timestamp if deleted
-
-formatdate-time
-
-first\_id: string or null
-
-Opaque pagination cursor for the first message in the current result set. Pass as `before_id` on the next request to page backwards. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
-
-
-
-has\_more: boolean
-
-Whether more chat messages exist beyond the current result set. Use `last_id` as `after_id` in a follow-up request to page forward.
-
-defaultfalse
-
-href: string
-
-URL to view this chat in claude.ai
-
-last\_id: string or null
-
-Opaque pagination cursor for the last message in the current result set. Pass as `after_id` on the next request to page forwards. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
-
-model: string or null
-
-Model selected for this chat (e.g. 'claude-opus-5'). May be null for legacy chats that never had a model recorded.
-
-name: string
-
-Chat name
-
-organization\_uuid: string
-
-Organization UUID this chat belongs to
-
-project\_id: string or null
-
-Project ID this chat belongs to
-
-
-
-updated\_at: string
-
-Last update timestamp
-
-formatdate-time
-
-
-
-user: object{ id, email\_address } or null
-
-User information for compliance responses.
-
-id: string
-
-User identifier
-
-email\_address: string
-
-User's email address
-
-organization\_id: string⁠Deprecated
-
-Organization ID this chat belongs to
-
-Get chat messages
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID/messages \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "claude_chat_abc123",
-  "name": "Product Requirements Discussion",
-  "created_at": "2025-06-07T08:09:10Z",
-  "updated_at": "2025-06-07T08:09:11Z",
-  "organization_id": "org_abc123",
-  "organization_uuid": "abcdef01-2345-6789-abcd-ef0123456789",
-  "project_id": "claude_proj_xyz789",
-  "model": "claude-opus-5",
-  "user": {
-    "id": "user_xyz456",
-    "email_address": "user@example.com"
-  },
-  "href": "https://claude.ai/chat/abcdef01-2345-6789-abcd-ef0123456789",
-  "chat_messages": [
-    {
-      "id": "claude_chat_msg_abc123",
-      "role": "user",
-      "created_at": "2025-06-07T08:09:10Z",
-      "content": [
-        {
-          "type": "text",
-          "text": "Can you help me draft requirements for our new dashboard feature?"
-        }
-      ],
-      "files": [
-        {
-          "id": "claude_file_xyz789",
-          "filename": "dashboard_mockup_v1.pdf",
-          "mime_type": "application/pdf",
-          "size_bytes": 12345,
-          "md5": "5d41402abc4b2a76b9719d911017c592",
-          "created_at": "2025-06-07T08:09:10Z"
-        }
-      ]
-    },
-    {
-      "id": "claude_chat_msg_def456",
-      "role": "assistant",
-      "created_at": "2025-06-07T08:09:11Z",
-      "content": [
-        {
-          "type": "text",
-          "text": "I'd be happy to help you draft requirements for your dashboard feature..."
-        }
-      ],
-      "artifacts": [
-        {
-          "id": "claude_artifact_abc123",
-          "version_id": "claude_artifact_version_xyz789",
-          "title": "Dashboard Requirements Draft",
-          "artifact_type": "text/markdown"
-        }
-      ]
-    }
-  ],
-  "has_more": false,
-  "first_id": "eyJtc2dfdXVpZCI6ICIwZjcwYjA2Ni0uLi4ifQ==",
-  "last_id": "eyJtc2dfdXVpZCI6ICJhNGUwYjE3Mi0uLi4ifQ=="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "claude_chat_abc123",
   "name": "Product Requirements Discussion",

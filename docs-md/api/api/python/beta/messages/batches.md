@@ -1,7635 +1,12932 @@
 # Batches
 
-Copy page
+## Create a Message Batch
 
-
+`beta.messages.batches.create(**kwargs)  -> BetaMessageBatch`
 
-Python
+**POST** `/v1/messages/batches`
 
-# Batches
+Send a batch of Message creation requests.
 
-##### [Create a Message Batch](api/beta/messages/batches/create.md)
+The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created, it begins processing immediately. Batches can take up to 24 hours to complete.
 
-beta.messages.batches.create(BatchCreateParams\*\*kwargs)  -> [BetaMessageBatch](api/beta/messages/batches.md)
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-POST/v1/messages/batches
+### Parameters
 
-##### [Retrieve a Message Batch](api/beta/messages/batches/retrieve.md)
+- `requests: Iterable[Request]`
 
-beta.messages.batches.retrieve(strmessage\_batch\_id, BatchRetrieveParams\*\*kwargs)  -> [BetaMessageBatch](api/beta/messages/batches.md)
+  List of requests for prompt completion. Each is an individual request to create a Message.
 
-GET/v1/messages/batches/{message\_batch\_id}
+  maxItems: 100000, minItems: 1
 
-##### [List Message Batches](api/beta/messages/batches/list.md)
+  - `custom_id: str`
 
-beta.messages.batches.list(BatchListParams\*\*kwargs)  -> SyncPage[[BetaMessageBatch](api/beta/messages/batches.md)]
+    Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
 
-GET/v1/messages/batches
+    Must be unique for each request within the Message Batch.
 
-##### [Cancel a Message Batch](api/beta/messages/batches/cancel.md)
+    maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,64}$
 
-beta.messages.batches.cancel(strmessage\_batch\_id, BatchCancelParams\*\*kwargs)  -> [BetaMessageBatch](api/beta/messages/batches.md)
+  - `params: RequestParams`
 
-POST/v1/messages/batches/{message\_batch\_id}/cancel
+    Messages API creation parameters for the individual request.
 
-##### [Delete a Message Batch](api/beta/messages/batches/delete.md)
+    See the [Messages API reference](api/messages.md) for full documentation on available parameters.
 
-beta.messages.batches.delete(strmessage\_batch\_id, BatchDeleteParams\*\*kwargs)  -> [BetaDeletedMessageBatch](api/beta/messages/batches.md)
+    - `max_tokens: int`
 
-DELETE/v1/messages/batches/{message\_batch\_id}
+      The maximum number of tokens to generate before stopping.
 
-##### [Retrieve Message Batch results](api/beta/messages/batches/results.md)
+      Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-beta.messages.batches.results(strmessage\_batch\_id, BatchResultsParams\*\*kwargs)  -> [BetaMessageBatchIndividualResponse](api/beta/messages/batches.md)
+      Set to `0` to populate the [prompt cache](build-with-claude/prompt-caching.md) without generating a response.
 
-GET/v1/messages/batches/{message\_batch\_id}/results
+      Different models have different maximum values for this parameter.  See [models](about-claude/models/overview.md) for details.
 
-##### ModelsExpand Collapse
+      minimum: 0
 
-
+    - `messages: Iterable[BetaMessageParam]`
 
-class BetaDeletedMessageBatch: …
+      Input messages.
 
-id: str
+      Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
 
-ID of the Message Batch.
+      Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
 
-
+      If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
 
-type: Literal["message\_batch\_deleted"]
+      Example with a single `user` message:
 
-Deleted object type.
+      ```json
+      [{"role": "user", "content": "Hello, Claude"}]
+      ```
 
-For Message Batches, this is always `"message_batch_deleted"`.
+      Example with multiple conversational turns:
 
-
+      ```json
+      [
+        {"role": "user", "content": "Hello there."},
+        {"role": "assistant", "content": "Hi, I'm Claude. How can I help you?"},
+        {"role": "user", "content": "Can you explain LLMs in plain English?"},
+      ]
+      ```
 
-class BetaMessageBatch: …
+      Example with a partially-filled response from Claude:
 
-
+      ```json
+      [
+        {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+        {"role": "assistant", "content": "The best answer is ("},
+      ]
+      ```
 
-id: str
+      Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
 
-Unique object identifier.
+      ```json
+      {"role": "user", "content": "Hello, Claude"}
+      ```
 
-The format and length of IDs may change over time.
+      ```json
+      {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
+      ```
 
-archived\_at: Optional[datetime]
+      See [input examples](build-with-claude/working-with-messages.md).
 
-RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+      Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
-cancel\_initiated\_at: Optional[datetime]
+      There is a limit of 100,000 messages in a single request.
 
-RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+      - `content: Union[str, List[BetaContentBlockParam]]`
 
-created\_at: datetime
+        - `str`
 
-RFC 3339 datetime string representing the time at which the Message Batch was created.
+        - `List[BetaContentBlockParam]`
 
-
+          - `class BetaTextBlockParam: …`
 
-ended\_at: Optional[datetime]
+            - `text: str`
 
-RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+              minLength: 1
 
-Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+            - `type: Literal["text"]`
 
-formatdate-time
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
 
-expires\_at: datetime
+              Create a cache control breakpoint at this content block.
 
-RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+              - `type: Literal["ephemeral"]`
 
-
+              - `ttl: Optional[Literal["5m", "1h"]]`
 
-processing\_status: Literal["in\_progress", "canceling", "ended"]
+                The time-to-live for the cache control breakpoint.
 
-Processing status of the Message Batch.
+                This may be one the following values:
 
-One of the following:
+                - `5m`: 5 minutes
+                - `1h`: 1 hour
 
-"in\_progress"
+                Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
-"canceling"
+                - `"5m"`
 
-"ended"
+                - `"1h"`
 
-
+            - `citations: Optional[List[BetaTextCitationParam]]`
 
-request\_counts: [BetaMessageBatchRequestCounts](api/beta/messages/batches.md)
+              - `class BetaCitationCharLocationParam: …`
 
-Tallies requests within the Message Batch, categorized by their status.
+                - `cited_text: str`
 
-Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+                - `document_index: int`
 
-
+                  minimum: 0
 
-canceled: int
+                - `document_title: Optional[str]`
 
-Number of requests in the Message Batch that have been canceled.
+                  maxLength: 500, minLength: 1
 
-This is zero until processing of the entire Message Batch has ended.
+                - `end_char_index: int`
 
-
+                - `start_char_index: int`
 
-errored: int
+                  minimum: 0
 
-Number of requests in the Message Batch that encountered an error.
+                - `type: Literal["char_location"]`
 
-This is zero until processing of the entire Message Batch has ended.
+              - `class BetaCitationPageLocationParam: …`
 
-
+                - `cited_text: str`
 
-expired: int
+                - `document_index: int`
 
-Number of requests in the Message Batch that have expired.
+                  minimum: 0
 
-This is zero until processing of the entire Message Batch has ended.
+                - `document_title: Optional[str]`
 
-processing: int
+                  maxLength: 500, minLength: 1
 
-Number of requests in the Message Batch that are processing.
+                - `end_page_number: int`
 
-
+                - `start_page_number: int`
 
-succeeded: int
+                  minimum: 1
 
-Number of requests in the Message Batch that have completed successfully.
+                - `type: Literal["page_location"]`
 
-This is zero until processing of the entire Message Batch has ended.
+              - `class BetaCitationContentBlockLocationParam: …`
 
-
+                - `cited_text: str`
 
-results\_url: Optional[str]
+                  The full text of the cited block range, concatenated.
 
-URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+                - `document_index: int`
 
-
+                  minimum: 0
 
-type: Literal["message\_batch"]
+                - `document_title: Optional[str]`
 
-Object type.
+                  maxLength: 500, minLength: 1
 
-For Message Batches, this is always `"message_batch"`.
+                - `end_block_index: int`
 
-
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-class BetaMessageBatchCanceledResult: …
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-type: Literal["canceled"]
+                - `start_block_index: int`
 
-
+                  0-based index of the first cited block in the source's `content` array.
 
-class BetaMessageBatchErroredResult: …
+                  minimum: 0
 
-
+                - `type: Literal["content_block_location"]`
 
-error: [BetaErrorResponse](api/beta.md)
+              - `class BetaCitationWebSearchResultLocationParam: …`
 
-
+                - `cited_text: str`
 
-error: [BetaError](api/beta.md)
+                - `encrypted_index: str`
 
-One of the following:
+                - `title: Optional[str]`
 
-
+                  maxLength: 512, minLength: 1
 
-class BetaInvalidRequestError: …
+                - `type: Literal["web_search_result_location"]`
 
-message: str
+                - `url: str`
 
-type: Literal["invalid\_request\_error"]
+                  minLength: 1
 
-
+              - `class BetaCitationSearchResultLocationParam: …`
 
-class BetaAuthenticationError: …
+                - `cited_text: str`
 
-message: str
+                  The full text of the cited block range, concatenated.
 
-type: Literal["authentication\_error"]
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-
+                - `end_block_index: int`
 
-class BetaBillingError: …
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-message: str
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-type: Literal["billing\_error"]
+                - `search_result_index: int`
 
-
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
-class BetaPermissionError: …
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
-message: str
+                  minimum: 0
 
-type: Literal["permission\_error"]
+                - `source: str`
 
-
+                - `start_block_index: int`
 
-class BetaNotFoundError: …
+                  0-based index of the first cited block in the source's `content` array.
 
-message: str
+                  minimum: 0
 
-type: Literal["not\_found\_error"]
+                - `title: Optional[str]`
 
-
+                - `type: Literal["search_result_location"]`
 
-class BetaRateLimitError: …
+          - `class BetaImageBlockParam: …`
 
-message: str
+            - `source: Source`
 
-type: Literal["rate\_limit\_error"]
+              - `class BetaBase64ImageSource: …`
 
-
+                - `data: str`
 
-class BetaGatewayTimeoutError: …
+                  format: byte
 
-message: str
+                - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
 
-type: Literal["timeout\_error"]
+                  - `"image/jpeg"`
 
-
+                  - `"image/png"`
 
-class BetaAPIError: …
+                  - `"image/gif"`
 
-message: str
+                  - `"image/webp"`
 
-type: Literal["api\_error"]
+                - `type: Literal["base64"]`
 
-
+              - `class BetaURLImageSource: …`
 
-class BetaOverloadedError: …
+                - `type: Literal["url"]`
 
-message: str
+                - `url: str`
 
-type: Literal["overloaded\_error"]
+              - `class BetaFileImageSource: …`
 
-request\_id: Optional[str]
+                - `file_id: str`
 
-type: Literal["error"]
+                - `type: Literal["file"]`
 
-type: Literal["errored"]
+            - `type: Literal["image"]`
 
-
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
 
-class BetaMessageBatchExpiredResult: …
+              Create a cache control breakpoint at this content block.
 
-type: Literal["expired"]
+            - `transformations: Optional[BetaImageTransformationsParam]`
 
-
+              Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
 
-class BetaMessageBatchIndividualResponse: …
+              - `oversized_image: Optional[Literal["downsize", "error"]]`
 
-This is a single line in the response `.jsonl` file and does not represent the response as a whole.
+                What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
 
-
+                - `"downsize"`
 
-custom\_id: str
+                - `"error"`
 
-Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
+          - `class BetaRequestDocumentBlock: …`
 
-Must be unique for each request within the Message Batch.
+            - `source: Source`
 
-
+              - `class BetaBase64PDFSource: …`
 
-result: [BetaMessageBatchResult](api/beta/messages/batches.md)
+                - `data: str`
 
-Processing result for this request.
+                  format: byte
 
-Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
+                - `media_type: Literal["application/pdf"]`
 
-One of the following:
+                - `type: Literal["base64"]`
 
-
+              - `class BetaPlainTextSource: …`
 
-class BetaMessageBatchSucceededResult: …
+                - `data: str`
 
-
+                - `media_type: Literal["text/plain"]`
 
-message: [BetaMessage](api/beta/messages.md)
+                - `type: Literal["text"]`
 
-
+              - `class BetaContentBlockSource: …`
 
-id: str
+                - `content: Union[str, List[BetaContentBlockSourceContent]]`
 
-Unique object identifier.
+                  - `str`
 
-The format and length of IDs may change over time.
+                  - `List[BetaContentBlockSourceContent]`
 
-
+                    - `class BetaTextBlockParam: …`
 
-container: Optional[BetaContainer]
+                    - `class BetaImageBlockParam: …`
 
-Information about the container used in the request (for the code execution tool)
+                - `type: Literal["content"]`
 
-id: str
+              - `class BetaURLPDFSource: …`
 
-Identifier for the container used in this request
+                - `type: Literal["url"]`
 
-expires\_at: datetime
+                - `url: str`
 
-The time at which the container will expire.
+              - `class BetaFileDocumentSource: …`
 
-
+                - `file_id: str`
 
-skills: Optional[List[[BetaSkill](api/beta/messages.md)]]
+                - `type: Literal["file"]`
 
-Skills loaded in the container
+            - `type: Literal["document"]`
 
-skill\_id: str
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
 
-Skill ID
+              Create a cache control breakpoint at this content block.
 
-
+            - `citations: Optional[BetaCitationsConfigParam]`
 
-type: Literal["anthropic", "custom"]
+              - `enabled: Optional[bool]`
 
-Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+            - `context: Optional[str]`
 
-One of the following:
+              minLength: 1
 
-"anthropic"
+            - `title: Optional[str]`
 
-"custom"
+              maxLength: 500, minLength: 1
 
-version: str
+          - `class BetaSearchResultBlockParam: …`
 
-Skill version or 'latest' for most recent version
+            - `content: List[BetaTextBlockParam]`
 
-
+              - `text: str`
 
-content: List[[BetaContentBlock](api/beta/messages.md)]
+                minLength: 1
 
-Content generated by the model.
+              - `type: Literal["text"]`
 
-This is an array of content blocks, each of which has a `type` that determines its shape.
+              - `cache_control: Optional[BetaCacheControlEphemeral]`
 
-Example:
+                Create a cache control breakpoint at this content block.
 
-```shiki
-[{"type": "text", "text": "Hi, I'm Claude."}]
+              - `citations: Optional[List[BetaTextCitationParam]]`
+
+            - `source: str`
+
+            - `title: str`
+
+            - `type: Literal["search_result"]`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+            - `citations: Optional[BetaCitationsConfigParam]`
+
+          - `class BetaThinkingBlockParam: …`
+
+            - `signature: str`
+
+              The `signature` value of this thinking block, exactly as returned by the API in a previous response. Used to verify that the block was generated by Claude.
+
+              Thinking blocks must be passed back unmodified and in their original order; a modified block results in a 400 `invalid_request_error`.
+
+            - `thinking: str`
+
+              The `thinking` text of this block as returned by the API.
+
+            - `type: Literal["thinking"]`
+
+          - `class BetaRedactedThinkingBlockParam: …`
+
+            - `data: str`
+
+              The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
+
+            - `type: Literal["redacted_thinking"]`
+
+          - `class BetaToolUseBlockParam: …`
+
+            - `id: str`
+
+              pattern: ^[a-zA-Z0-9_-]+$
+
+            - `input: Dict[str, object]`
+
+            - `name: str`
+
+              maxLength: 200, minLength: 1
+
+            - `type: Literal["tool_use"]`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+            - `caller: Optional[Caller]`
+
+              Tool invocation directly from the model.
+
+              - `class BetaDirectCaller: …`
+
+                Tool invocation directly from the model.
+
+                - `type: Literal["direct"]`
+
+              - `class BetaServerToolCaller: …`
+
+                Tool invocation generated by a server-side tool.
+
+                - `tool_id: str`
+
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+                - `type: Literal["code_execution_20250825"]`
+
+              - `class BetaServerToolCaller20260120: …`
+
+                - `tool_id: str`
+
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+                - `type: Literal["code_execution_20260120"]`
+
+            - `toolset_name: Optional[str]`
+
+              For a toolset member tool_use, the toolset family this member belongs to.
+
+              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
+          - `class BetaToolResultBlockParam: …`
+
+            - `tool_use_id: str`
+
+              pattern: ^[a-zA-Z0-9_-]+$
+
+            - `type: Literal["tool_result"]`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+            - `content: Optional[Union[str, List[Content], null]]`
+
+              - `str`
+
+              - `List[Content]`
+
+                - `class BetaTextBlockParam: …`
+
+                - `class BetaImageBlockParam: …`
+
+                - `class BetaSearchResultBlockParam: …`
+
+                - `class BetaRequestDocumentBlock: …`
+
+                - `class BetaToolReferenceBlockParam: …`
+
+                  Tool reference block that can be included in tool_result content.
+
+                  - `tool_name: str`
+
+                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
+                  - `type: Literal["tool_reference"]`
+
+                  - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+                    Create a cache control breakpoint at this content block.
+
+                - `class BetaBrowserStateBlockParam: …`
+
+                  The caller's browser state after a browser toolset member call —
+                  the full inventory of open tabs, which tab is active, and any side
+                  effects (tabs opened, download state changes) the call produced.
+
+                  At most one per `tool_result`, only on a non-error result answering a
+                  browser toolset member `tool_use`. The server renders the
+                  model-visible text from it; the model never sees the raw fields.
+
+                  - `tabs: List[BetaBrowserStateTabEntry]`
+
+                    All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+                    maxItems: 100
+
+                    - `tab_id: str`
+
+                      The caller-assigned identifier for this tab, unique within the inventory.
+
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
+                    - `title: str`
+
+                      The title of the page the tab is showing. May be empty.
+
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
+                    - `url: str`
+
+                      The URL of the page the tab is showing. May be empty.
+
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
+                    - `active: Optional[bool]`
+
+                      Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+                  - `type: Literal["browser_state"]`
+
+                  - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+                    Create a cache control breakpoint at this content block.
+
+                  - `state_changes: Optional[List[BetaBrowserStateChange]]`
+
+                    Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                    maxItems: 200, minItems: 1
+
+                    - `class BetaBrowserStateChangeTabOpened: …`
+
+                      A tab this call's execution opened that remains open at its end —
+                      the creation delta of the `tabs` inventory, not an event log.
+
+                      Carries only the `tab_id`; the tab's `title` and `url` live on its
+                      `tabs` entry, which must include the same `tab_id`. A tab opened
+                      during a failed call gets no deferred `tab_opened`; it simply appears
+                      in the next result's `tabs` inventory.
+
+                      - `tab_id: str`
+
+                        The `tab_id` of the opened tab, present in `tabs`.
+
+                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
+                      - `type: Literal["tab_opened"]`
+
+                    - `class BetaBrowserStateChangeDownloadStarted: …`
+
+                      A file download that started during this call.
+
+                      - `download_id: str`
+
+                        The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
+                      - `type: Literal["download_started"]`
+
+                      - `url: str`
+
+                        The final post-redirect URL the download was served from.
+
+                        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
+                    - `class BetaBrowserStateChangeDownloadCompleted: …`
+
+                      A file download that finished during this call, reported with the
+                      same `download_id` as its `download_started` — or without a prior
+                      `download_started`, when the download finished during the call that
+                      started it (at most one state change per `download_id` per result).
+
+                      - `download_id: str`
+
+                        The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
+                      - `type: Literal["download_completed"]`
+
+                      - `url: str`
+
+                        The final post-redirect URL the download was served from.
+
+                        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
+                      - `path: Optional[str]`
+
+                        Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+                        pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+
+                      - `size_bytes: Optional[int]`
+
+                        The completed download's size.
+
+                        minimum: 0
+
+                    - `class BetaBrowserStateChangeDownloadFailed: …`
+
+                      A file download that failed — or was cancelled — during this call.
+
+                      - `download_id: str`
+
+                        The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
+                      - `type: Literal["download_failed"]`
+
+                      - `url: str`
+
+                        The final post-redirect URL the download was served from.
+
+                        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
+                      - `error: Optional[str]`
+
+                        The failure or cancellation detail, when known.
+
+                        pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+
+            - `is_error: Optional[bool]`
+
+            - `toolset_name: Optional[str]`
+
+              For a toolset member tool_result, the toolset family of the paired tool_use.
+
+              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
+          - `class BetaServerToolUseBlockParam: …`
+
+            - `id: str`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `input: Dict[str, object]`
+
+            - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+              - `"advisor"`
+
+              - `"web_search"`
+
+              - `"web_fetch"`
+
+              - `"code_execution"`
+
+              - `"bash_code_execution"`
+
+              - `"text_editor_code_execution"`
+
+              - `"tool_search_tool_regex"`
+
+              - `"tool_search_tool_bm25"`
+
+            - `type: Literal["server_tool_use"]`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+            - `caller: Optional[Caller]`
+
+              Tool invocation directly from the model.
+
+              - `class BetaDirectCaller: …`
+
+                Tool invocation directly from the model.
+
+              - `class BetaServerToolCaller: …`
+
+                Tool invocation generated by a server-side tool.
+
+              - `class BetaServerToolCaller20260120: …`
+
+          - `class BetaWebSearchToolResultBlockParam: …`
+
+            - `content: BetaWebSearchToolResultBlockParamContent`
+
+              - `List[BetaWebSearchResultBlockParam]`
+
+                - `encrypted_content: str`
+
+                - `title: str`
+
+                - `type: Literal["web_search_result"]`
+
+                - `url: str`
+
+                - `page_age: Optional[str]`
+
+              - `class BetaWebSearchToolRequestError: …`
+
+                - `error_code: BetaWebSearchToolResultErrorCode`
+
+                  - `"invalid_tool_input"`
+
+                  - `"unavailable"`
+
+                  - `"max_uses_exceeded"`
+
+                  - `"too_many_requests"`
+
+                  - `"query_too_long"`
+
+                  - `"request_too_large"`
+
+                - `type: Literal["web_search_tool_result_error"]`
+
+            - `tool_use_id: str`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: Literal["web_search_tool_result"]`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+            - `caller: Optional[Caller]`
+
+              Tool invocation directly from the model.
+
+              - `class BetaDirectCaller: …`
+
+                Tool invocation directly from the model.
+
+              - `class BetaServerToolCaller: …`
+
+                Tool invocation generated by a server-side tool.
+
+              - `class BetaServerToolCaller20260120: …`
+
+          - `class BetaWebFetchToolResultBlockParam: …`
+
+            - `content: Content`
+
+              - `class BetaWebFetchToolResultErrorBlockParam: …`
+
+                - `error_code: BetaWebFetchToolResultErrorCode`
+
+                  - `"invalid_tool_input"`
+
+                  - `"url_too_long"`
+
+                  - `"url_not_allowed"`
+
+                  - `"url_not_in_prior_context"`
+
+                  - `"url_not_accessible"`
+
+                  - `"unsupported_content_type"`
+
+                  - `"too_many_requests"`
+
+                  - `"max_uses_exceeded"`
+
+                  - `"unavailable"`
+
+                - `type: Literal["web_fetch_tool_result_error"]`
+
+              - `class BetaWebFetchBlockParam: …`
+
+                - `content: BetaRequestDocumentBlock`
+
+                - `type: Literal["web_fetch_result"]`
+
+                - `url: str`
+
+                  Fetched content URL
+
+                - `retrieved_at: Optional[str]`
+
+                  ISO 8601 timestamp when the content was retrieved
+
+            - `tool_use_id: str`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: Literal["web_fetch_tool_result"]`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+            - `caller: Optional[Caller]`
+
+              Tool invocation directly from the model.
+
+              - `class BetaDirectCaller: …`
+
+                Tool invocation directly from the model.
+
+              - `class BetaServerToolCaller: …`
+
+                Tool invocation generated by a server-side tool.
+
+              - `class BetaServerToolCaller20260120: …`
+
+          - `class BetaAdvisorToolResultBlockParam: …`
+
+            - `content: Content`
+
+              - `class BetaAdvisorToolResultErrorParam: …`
+
+                - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 4 more]`
+
+                  - `"max_uses_exceeded"`
+
+                  - `"prompt_too_long"`
+
+                  - `"too_many_requests"`
+
+                  - `"overloaded"`
+
+                  - `"unavailable"`
+
+                  - `"execution_time_exceeded"`
+
+                  - `"model_not_found"`
+
+                - `type: Literal["advisor_tool_result_error"]`
+
+              - `class BetaAdvisorResultBlockParam: …`
+
+                - `text: str`
+
+                - `type: Literal["advisor_result"]`
+
+                - `stop_reason: Optional[str]`
+
+              - `class BetaAdvisorRedactedResultBlockParam: …`
+
+                - `encrypted_content: str`
+
+                  Opaque blob produced by a prior response; must be round-tripped verbatim.
+
+                - `type: Literal["advisor_redacted_result"]`
+
+                - `stop_reason: Optional[str]`
+
+            - `tool_use_id: str`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: Literal["advisor_tool_result"]`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+          - `class BetaCodeExecutionToolResultBlockParam: …`
+
+            - `content: BetaCodeExecutionToolResultBlockParamContent`
+
+              Code execution result with encrypted stdout for PFC + web_search results.
+
+              - `class BetaCodeExecutionToolResultErrorParam: …`
+
+                - `error_code: BetaCodeExecutionToolResultErrorCode`
+
+                  - `"invalid_tool_input"`
+
+                  - `"unavailable"`
+
+                  - `"too_many_requests"`
+
+                  - `"execution_time_exceeded"`
+
+                - `type: Literal["code_execution_tool_result_error"]`
+
+              - `class BetaCodeExecutionResultBlockParam: …`
+
+                - `content: List[BetaCodeExecutionOutputBlockParam]`
+
+                  - `file_id: str`
+
+                  - `type: Literal["code_execution_output"]`
+
+                - `return_code: int`
+
+                - `stderr: str`
+
+                - `stdout: str`
+
+                - `type: Literal["code_execution_result"]`
+
+              - `class BetaEncryptedCodeExecutionResultBlockParam: …`
+
+                Code execution result with encrypted stdout for PFC + web_search results.
+
+                - `content: List[BetaCodeExecutionOutputBlockParam]`
+
+                  - `file_id: str`
+
+                  - `type: Literal["code_execution_output"]`
+
+                - `encrypted_stdout: str`
+
+                - `return_code: int`
+
+                - `stderr: str`
+
+                - `type: Literal["encrypted_code_execution_result"]`
+
+            - `tool_use_id: str`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: Literal["code_execution_tool_result"]`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+          - `class BetaBashCodeExecutionToolResultBlockParam: …`
+
+            - `content: Content`
+
+              - `class BetaBashCodeExecutionToolResultErrorParam: …`
+
+                - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", 2 more]`
+
+                  - `"invalid_tool_input"`
+
+                  - `"unavailable"`
+
+                  - `"too_many_requests"`
+
+                  - `"execution_time_exceeded"`
+
+                  - `"output_file_too_large"`
+
+                - `type: Literal["bash_code_execution_tool_result_error"]`
+
+              - `class BetaBashCodeExecutionResultBlockParam: …`
+
+                - `content: List[BetaBashCodeExecutionOutputBlockParam]`
+
+                  - `file_id: str`
+
+                  - `type: Literal["bash_code_execution_output"]`
+
+                - `return_code: int`
+
+                - `stderr: str`
+
+                - `stdout: str`
+
+                - `type: Literal["bash_code_execution_result"]`
+
+            - `tool_use_id: str`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: Literal["bash_code_execution_tool_result"]`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+          - `class BetaTextEditorCodeExecutionToolResultBlockParam: …`
+
+            - `content: Content`
+
+              - `class BetaTextEditorCodeExecutionToolResultErrorParam: …`
+
+                - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", 2 more]`
+
+                  - `"invalid_tool_input"`
+
+                  - `"unavailable"`
+
+                  - `"too_many_requests"`
+
+                  - `"execution_time_exceeded"`
+
+                  - `"file_not_found"`
+
+                - `type: Literal["text_editor_code_execution_tool_result_error"]`
+
+                - `error_message: Optional[str]`
+
+              - `class BetaTextEditorCodeExecutionViewResultBlockParam: …`
+
+                - `content: str`
+
+                - `file_type: Literal["text", "image", "pdf"]`
+
+                  - `"text"`
+
+                  - `"image"`
+
+                  - `"pdf"`
+
+                - `type: Literal["text_editor_code_execution_view_result"]`
+
+                - `num_lines: Optional[int]`
+
+                - `start_line: Optional[int]`
+
+                - `total_lines: Optional[int]`
+
+              - `class BetaTextEditorCodeExecutionCreateResultBlockParam: …`
+
+                - `is_file_update: bool`
+
+                - `type: Literal["text_editor_code_execution_create_result"]`
+
+              - `class BetaTextEditorCodeExecutionStrReplaceResultBlockParam: …`
+
+                - `type: Literal["text_editor_code_execution_str_replace_result"]`
+
+                - `lines: Optional[List[str]]`
+
+                - `new_lines: Optional[int]`
+
+                - `new_start: Optional[int]`
+
+                - `old_lines: Optional[int]`
+
+                - `old_start: Optional[int]`
+
+            - `tool_use_id: str`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: Literal["text_editor_code_execution_tool_result"]`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+          - `class BetaToolSearchToolResultBlockParam: …`
+
+            - `content: Content`
+
+              - `class BetaToolSearchToolResultErrorParam: …`
+
+                - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", "execution_time_exceeded"]`
+
+                  - `"invalid_tool_input"`
+
+                  - `"unavailable"`
+
+                  - `"too_many_requests"`
+
+                  - `"execution_time_exceeded"`
+
+                - `type: Literal["tool_search_tool_result_error"]`
+
+                - `error_message: Optional[str]`
+
+              - `class BetaToolSearchToolSearchResultBlockParam: …`
+
+                - `tool_references: List[BetaToolReferenceBlockParam]`
+
+                  - `tool_name: str`
+
+                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
+                  - `type: Literal["tool_reference"]`
+
+                  - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+                    Create a cache control breakpoint at this content block.
+
+                - `type: Literal["tool_search_tool_search_result"]`
+
+            - `tool_use_id: str`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: Literal["tool_search_tool_result"]`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+          - `class BetaMCPToolUseBlockParam: …`
+
+            - `id: str`
+
+              pattern: ^[a-zA-Z0-9_-]+$
+
+            - `input: Dict[str, object]`
+
+            - `name: str`
+
+            - `server_name: str`
+
+              The name of the MCP server
+
+            - `type: Literal["mcp_tool_use"]`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+          - `class BetaRequestMCPToolResultBlockParam: …`
+
+            - `tool_use_id: str`
+
+              pattern: ^[a-zA-Z0-9_-]+$
+
+            - `type: Literal["mcp_tool_result"]`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+            - `content: Optional[Union[str, List[BetaTextBlockParam], null]]`
+
+              - `str`
+
+              - `List[BetaTextBlockParam]`
+
+                - `text: str`
+
+                  minLength: 1
+
+                - `type: Literal["text"]`
+
+                - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+                  Create a cache control breakpoint at this content block.
+
+                - `citations: Optional[List[BetaTextCitationParam]]`
+
+            - `is_error: Optional[bool]`
+
+          - `class BetaContainerUploadBlockParam: …`
+
+            A content block that represents a file to be uploaded to the container
+            Files uploaded via this block will be available in the container's input directory.
+
+            - `file_id: str`
+
+            - `type: Literal["container_upload"]`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+          - `class BetaCompactionBlockParam: …`
+
+            A compaction block containing summary of previous context.
+
+            Users should round-trip these blocks from responses to subsequent requests
+            to maintain context across compaction boundaries.
+
+            When content is None, the block represents a failed compaction. The server
+            treats these as no-ops. Empty string content is not allowed.
+
+            - `type: Literal["compaction"]`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+            - `content: Optional[str]`
+
+              Summary of previously compacted content, or null if compaction failed
+
+            - `encrypted_content: Optional[str]`
+
+              Opaque metadata from prior compaction, to be round-tripped verbatim
+
+          - `class BetaRequestToolAdditionBlock: …`
+
+            Mid-conversation directive to surface a declared tool.
+
+            `tool` references a tool (or MCP toolset) by name from the request's
+            `tools`; it is offered to the model from this point in the
+            conversation onward.
+
+            - `tool: Tool`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+              - `class BetaToolChangeToolReference: …`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `name: str`
+
+                  pattern: ^[a-zA-Z0-9_-]{1,128}$
+
+                - `type: Literal["tool_reference"]`
+
+              - `class BetaToolChangeMCPToolReference: …`
+
+                Reference to a single MCP tool by its server and remote name — the
+                same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                - `name: str`
+
+                - `server_name: str`
+
+                - `type: Literal["mcp_tool_reference"]`
+
+              - `class BetaToolChangeMCPToolsetReference: …`
+
+                Reference to every tool in the named MCP server's toolset.
+
+                - `server_name: str`
+
+                - `type: Literal["mcp_toolset_reference"]`
+
+            - `type: Literal["tool_addition"]`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+          - `class BetaRequestToolRemovalBlock: …`
+
+            Mid-conversation directive to withdraw a tool.
+
+            `tool` references a tool (or MCP toolset) by name from the request's
+            `tools`; it is no longer offered to the model from this point in the
+            conversation onward.
+
+            - `tool: Tool`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+              - `class BetaToolChangeToolReference: …`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+              - `class BetaToolChangeMCPToolReference: …`
+
+                Reference to a single MCP tool by its server and remote name — the
+                same `server_name`/`name` pair `mcp_tool_use` carries.
+
+              - `class BetaToolChangeMCPToolsetReference: …`
+
+                Reference to every tool in the named MCP server's toolset.
+
+            - `type: Literal["tool_removal"]`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+          - `class BetaFallbackBlockParam: …`
+
+            A `fallback` block echoed back from a prior response.
+
+            Accepted in `messages[].content` and not rendered into the prompt; not
+            validated against the request's `fallbacks` chain or top-level `model`.
+
+            Echo the assistant turn back verbatim, including this block in its
+            original position. The block marks the boundary between content produced
+            before and after a fallback hop, and the server relies on that boundary
+            to validate the turn: when thinking runs flank the boundary, omitting
+            the block merges them into one span the server cannot validate (the
+            request is rejected), and moving it into the middle of a single run is
+            likewise rejected; between non-thinking blocks the block's placement has
+            no validation effect.
+
+            - `from_: BetaFallbackInfoParam`
+
+              Identifies one hop of a fallback transition.
+
+              - `model: Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `Literal["claude-fable-5-1", "claude-mythos-5-1", "claude-sonnet-5", 14 more]`
+
+                  The model that will complete your prompt.
+
+                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                  - `claude-fable-5-1` - Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+                  - `claude-mythos-5-1` - Our most capable model for cybersecurity and biology research, available through trusted access programs
+                  - `claude-sonnet-5` - High-performance model for coding and agents
+                  - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
+                  - `claude-mythos-5` - Most capable model for cybersecurity and biology research
+                  - `claude-opus-5` - Powerful intelligence for long-running agents and coding
+                  - `claude-opus-4-8` - Powerful intelligence for long-running agents and coding
+                  - `claude-opus-4-7` - Powerful intelligence for long-running agents and coding
+                  - `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+                  - `claude-opus-4-6` - Powerful intelligence for long-running agents and coding
+                  - `claude-sonnet-4-6` - Best combination of speed and intelligence
+                  - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+                  - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+                  - `claude-opus-4-5` - Powerful intelligence for long-running agents and coding
+                  - `claude-opus-4-5-20251101` - Powerful intelligence for long-running agents and coding
+                  - `claude-sonnet-4-5` - High-performance model for agents and coding
+                  - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+
+                  - `"claude-fable-5-1"`
+
+                    Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+                  - `"claude-mythos-5-1"`
+
+                    Our most capable model for cybersecurity and biology research, available through trusted access programs
+
+                  - `"claude-sonnet-5"`
+
+                    High-performance model for coding and agents
+
+                  - `"claude-fable-5"`
+
+                    Next generation of intelligence for the hardest knowledge work and coding problems
+
+                  - `"claude-mythos-5"`
+
+                    Most capable model for cybersecurity and biology research
+
+                  - `"claude-opus-5"`
+
+                    Powerful intelligence for long-running agents and coding
+
+                  - `"claude-opus-4-8"`
+
+                    Powerful intelligence for long-running agents and coding
+
+                  - `"claude-opus-4-7"`
+
+                    Powerful intelligence for long-running agents and coding
+
+                  - `"claude-mythos-preview"`
+
+                    New class of intelligence, strongest in coding and cybersecurity
+
+                  - `"claude-opus-4-6"`
+
+                    Powerful intelligence for long-running agents and coding
+
+                  - `"claude-sonnet-4-6"`
+
+                    Best combination of speed and intelligence
+
+                  - `"claude-haiku-4-5"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `"claude-haiku-4-5-20251001"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `"claude-opus-4-5"`
+
+                    Powerful intelligence for long-running agents and coding
+
+                  - `"claude-opus-4-5-20251101"`
+
+                    Powerful intelligence for long-running agents and coding
+
+                  - `"claude-sonnet-4-5"`
+
+                    High-performance model for agents and coding
+
+                  - `"claude-sonnet-4-5-20250929"`
+
+                    High-performance model for agents and coding
+
+                - `str`
+
+            - `to: BetaFallbackInfoParam`
+
+              Identifies one hop of a fallback transition.
+
+            - `type: Literal["fallback"]`
+
+            - `trigger: Optional[object]`
+
+              The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
+
+      - `role: Literal["user", "assistant", "system"]`
+
+        - `"user"`
+
+        - `"assistant"`
+
+        - `"system"`
+
+      - `clear_at: Optional[Literal["next_user_message", "never"]]`
+
+        How long this system message's text stays in front of the model. `"never"` (the default) renders it on every request that includes it. `"next_user_message"` renders it only for the user turn it follows: once a later `role: "user"` message exists in `messages` the message stays in the array (send it unchanged) but is no longer shown to the model. Only permitted on `role: "system"` messages.
+
+        - `"next_user_message"`
+
+        - `"never"`
+
+      - `output_config: Optional[BetaSystemMessageOutputConfig]`
+
+        Per-message output configuration on a role:"system" input message.
+
+        Fields here apply per-turn; `format` remains top-level only. An
+        empty `{}` is accepted on a message that carries content; a message
+        with neither content nor output_config fields is rejected.
+
+        - `effort: Optional[Literal["low", "medium", "high", 2 more]]`
+
+          All possible effort levels.
+
+          - `"low"`
+
+          - `"medium"`
+
+          - `"high"`
+
+          - `"xhigh"`
+
+          - `"max"`
+
+    - `model: ModelParam`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `cache_control: Optional[BetaCacheControlEphemeralParam]`
+
+      Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
+    - `container: Optional[RequestParamsContainer]`
+
+      Container identifier for reuse across requests.
+
+      - `class BetaContainerParams: …`
+
+        Container parameters with skills to be loaded.
+
+        - `id: Optional[str]`
+
+          Container id
+
+        - `skills: Optional[List[BetaSkillParams]]`
+
+          List of skills to load in the container
+
+          maxItems: 20
+
+          - `skill_id: str`
+
+            Skill ID
+
+            maxLength: 64, minLength: 1
+
+          - `type: Literal["anthropic", "custom"]`
+
+            Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+
+            - `"anthropic"`
+
+            - `"custom"`
+
+          - `version: Optional[str]`
+
+            Skill version or 'latest' for most recent version
+
+            maxLength: 64, minLength: 1
+
+      - `str`
+
+    - `context_management: Optional[BetaContextManagementConfigParam]`
+
+      Context management configuration.
+
+      This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
+
+      - `edits: Optional[List[Edit]]`
+
+        List of context management edits to apply
+
+        minItems: 0
+
+        - `class BetaClearToolUses20250919Edit: …`
+
+          - `type: Literal["clear_tool_uses_20250919"]`
+
+          - `clear_at_least: Optional[BetaInputTokensClearAtLeast]`
+
+            Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
+
+            - `type: Literal["input_tokens"]`
+
+            - `value: int`
+
+              minimum: 0
+
+          - `clear_tool_inputs: Optional[Union[bool, List[str], null]]`
+
+            Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
+
+            - `bool`
+
+            - `List[str]`
+
+          - `exclude_tools: Optional[List[str]]`
+
+            Tool names whose uses are preserved from clearing
+
+          - `keep: Optional[BetaToolUsesKeep]`
+
+            Number of tool uses to retain in the conversation
+
+            - `type: Literal["tool_uses"]`
+
+            - `value: int`
+
+              minimum: 0
+
+          - `trigger: Optional[Trigger]`
+
+            Condition that triggers the context management strategy
+
+            - `class BetaInputTokensTrigger: …`
+
+              - `type: Literal["input_tokens"]`
+
+              - `value: int`
+
+                minimum: 1
+
+            - `class BetaToolUsesTrigger: …`
+
+              - `type: Literal["tool_uses"]`
+
+              - `value: int`
+
+                minimum: 1
+
+        - `class BetaClearThinking20251015Edit: …`
+
+          - `type: Literal["clear_thinking_20251015"]`
+
+          - `keep: Optional[Keep]`
+
+            Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
+
+            - `class BetaThinkingTurns: …`
+
+              - `type: Literal["thinking_turns"]`
+
+              - `value: int`
+
+                minimum: 1
+
+            - `class BetaAllThinkingTurns: …`
+
+              - `type: Literal["all"]`
+
+            - `Literal["all"]`
+
+        - `class BetaCompact20260112Edit: …`
+
+          Automatically compact older context when reaching the configured trigger threshold.
+
+          - `type: Literal["compact_20260112"]`
+
+          - `instructions: Optional[str]`
+
+            Additional instructions for summarization.
+
+          - `pause_after_compaction: Optional[bool]`
+
+            Whether to pause after compaction and return the compaction block to the user.
+
+          - `trigger: Optional[BetaInputTokensTrigger]`
+
+            When to trigger compaction. Defaults to 150000 input tokens.
+
+    - `diagnostics: Optional[BetaDiagnosticsParam]`
+
+      Request-level diagnostics. Currently carries the previous response
+      id for prompt-cache divergence reporting.
+
+      - `previous_message_id: Optional[str]`
+
+        The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
+        maxLength: 256
+
+    - `fallback_credit_token: Optional[RequestParamsFallbackCreditToken]`
+
+      The `fallback_credit_token` from a prior refusal's `stop_details`.
+
+      When a preceding request was refused and returned a `fallback_credit_token`,
+      pass that code here on the retry to have the retry's cache-creation tokens
+      for the prefix that was warm on the refused model billed at the cache-read
+      rate. Must be redeemed by the same organization and workspace, with the same
+      request body (optionally extended by one appended `assistant` message whose
+      content is the partial text — with any trailing whitespace stripped from
+      the final text block — and paired server-tool blocks streamed before the
+      refusal; the appended-assistant form is not available for requests with
+      `output_format` set or forced `tool_choice`), on an eligible fallback
+      model, on the same platform,
+      and within 5 minutes of the refusal; a mismatch is a 400. A token minted
+      mid-server-tool-loop whose partial content was continuable may only be
+      redeemed with the appended-assistant form — if an exact-body retry is
+      rejected with a 400 saying the token must be redeemed by continuing the
+      partial response, retry with the appended-assistant form instead.
+
+      When the appended-assistant form is used on a model that otherwise disallows
+      assistant-turn prefill, this token also authorizes that one prefill.
+
+      - `str`
+
+      - `class BetaFallbackCreditTokenParam: …`
+
+        Object form of `fallback_credit_token`: the token plus a redemption
+        mode.
+
+        Requires `anthropic-beta: fallback-credit-2026-07-01`; without that
+        header the field accepts the bare string only. The bare string and the
+        mode-less object are equivalent (both select `strict`), so wrapping
+        an existing token changes nothing by itself.
+
+        - `token: str`
+
+          The opaque `fallback_credit_token` from a prior refusal's `stop_details` — the same string the bare-string form carries.
+
+          maxLength: 2048, minLength: 1
+
+        - `mode: Optional[Literal["strict", "best_effort"]]`
+
+          How a failing token affects the retry. `strict` (the default, and the bare-string behavior): a failing redemption is a 400 and the retry is not served. `best_effort`: the retry is served either way — a token-layer failure no longer rejects the request; the retry proceeds at normal price and the outcome is reported on the response's `usage.fallback_credit`. Two failures stay hard in both modes: a malformed token, and combining `fallback_credit_token` with `fallbacks`.
+
+          - `"strict"`
+
+          - `"best_effort"`
+
+    - `fallbacks: Optional[BetaFallbacksParam]`
+
+      Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
+
+      - `List[BetaFallbackParam]`
+
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `max_tokens: Optional[int]`
+
+        - `output_config: Optional[BetaOutputConfig]`
+
+          - `effort: Optional[Literal["low", "medium", "high", 2 more]]`
+
+            All possible effort levels.
+
+            - `"low"`
+
+            - `"medium"`
+
+            - `"high"`
+
+            - `"xhigh"`
+
+            - `"max"`
+
+          - `format: Optional[BetaJSONOutputFormat]`
+
+            A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+            - `schema: Dict[str, object]`
+
+              The JSON schema of the format
+
+            - `type: Literal["json_schema"]`
+
+          - `task_budget: Optional[BetaTokenTaskBudget]`
+
+            User-configurable total token budget across contexts.
+
+            - `total: int`
+
+              Total token budget across all contexts in the session.
+
+              minimum: 1024
+
+            - `type: Literal["tokens"]`
+
+              The budget type. Currently only 'tokens' is supported.
+
+            - `remaining: Optional[int]`
+
+              Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+              minimum: 0
+
+        - `speed: Optional[Literal["standard", "fast"]]`
+
+          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+          - `"standard"`
+
+          - `"fast"`
+
+        - `thinking: Optional[Thinking]`
+
+          - `class BetaThinkingConfigEnabled: …`
+
+            - `budget_tokens: int`
+
+              Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+
+              Must be ≥1024 and less than `max_tokens`.
+
+              See [extended thinking](build-with-claude/extended-thinking.md) for details.
+
+              minimum: 1024
+
+            - `type: Literal["enabled"]`
+
+            - `block_binding: Optional[BetaThinkingBlockBinding]`
+
+              Controls for block binding: what happens when a thinking block this
+              request sends back fails the conversation check. Every field is optional;
+              an empty object means every default.
+
+              - `prefix_mismatch_behavior: Optional[BetaThinkingPrefixMismatchBehavior]`
+
+                What happens when a thinking block in `messages` fails the conversation
+                check: it was created in a different conversation, or the messages before
+                it have changed since. `"error"` (the default) fails the request with a
+                400 error. `"drop_block"` removes the failing blocks and the request
+                proceeds; the model no longer sees the dropped reasoning.
+
+                - `"error"`
+
+                - `"drop_block"`
+
+            - `display: Optional[Literal["summarized", "omitted", "updates"]]`
+
+              Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+              - `"summarized"`
+
+              - `"omitted"`
+
+              - `"updates"`
+
+          - `class BetaThinkingConfigDisabled: …`
+
+            - `type: Literal["disabled"]`
+
+          - `class BetaThinkingConfigAdaptive: …`
+
+            - `type: Literal["adaptive"]`
+
+            - `block_binding: Optional[BetaThinkingBlockBinding]`
+
+              Controls for block binding: what happens when a thinking block this
+              request sends back fails the conversation check. Every field is optional;
+              an empty object means every default.
+
+            - `display: Optional[Literal["summarized", "omitted", "updates"]]`
+
+              Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+              - `"summarized"`
+
+              - `"omitted"`
+
+              - `"updates"`
+
+      - `Literal["default"]`
+
+    - `inference_geo: Optional[str]`
+
+      Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+
+    - `mcp_servers: Optional[Iterable[BetaRequestMCPServerURLDefinitionParam]]`
+
+      MCP servers to be utilized in this request
+
+      maxItems: 20
+
+      - `name: str`
+
+      - `type: Literal["url"]`
+
+      - `url: str`
+
+      - `authorization_token: Optional[str]`
+
+      - `tool_configuration: Optional[BetaRequestMCPServerToolConfiguration]`
+
+        - `allowed_tools: Optional[List[str]]`
+
+        - `enabled: Optional[bool]`
+
+    - `metadata: Optional[BetaMetadataParam]`
+
+      An object describing metadata about the request.
+
+      - `user_id: Optional[str]`
+
+        An external identifier for the user who is associated with the request.
+
+        This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
+
+        maxLength: 512
+
+    - `output_config: Optional[BetaOutputConfigParam]`
+
+      Configuration options for the model's output, such as the output format.
+
+    - `service_tier: Optional[Literal["auto", "standard_only"]]`
+
+      Determines whether to use priority capacity (if available) or standard capacity for this request.
+
+      Anthropic offers different levels of service for your API requests. See [service-tiers](api/service-tiers.md) for details.
+
+      - `"auto"`
+
+      - `"standard_only"`
+
+    - `speed: Optional[Literal["standard", "fast"]]`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `"standard"`
+
+      - `"fast"`
+
+    - `stop_sequences: Optional[Sequence[str]]`
+
+      Custom text sequences that will cause the model to stop generating.
+
+      Our models will normally stop when they have naturally completed their turn, which will result in a response `stop_reason` of `"end_turn"`.
+
+      If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
+
+    - `stream: Optional[bool]`
+
+      Whether to incrementally stream the response using server-sent events.
+
+      See [streaming](build-with-claude/streaming.md) for details.
+
+    - `system: Optional[Union[str, Iterable[BetaTextBlockParam]]]`
+
+      System prompt.
+
+      A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
+
+      - `str`
+
+      - `Iterable[BetaTextBlockParam]`
+
+        - `text: str`
+
+          minLength: 1
+
+        - `type: Literal["text"]`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `citations: Optional[List[BetaTextCitationParam]]`
+
+    - `thinking: Optional[BetaThinkingConfigParam]`
+
+      Configuration for enabling Claude's extended thinking.
+
+      When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
+
+      See [extended thinking](build-with-claude/extended-thinking.md) for details.
+
+      - `class BetaThinkingConfigEnabled: …`
+
+      - `class BetaThinkingConfigDisabled: …`
+
+      - `class BetaThinkingConfigAdaptive: …`
+
+    - `tool_choice: Optional[BetaToolChoiceParam]`
+
+      How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
+
+      - `class BetaToolChoiceAuto: …`
+
+        The model will automatically decide whether to use tools.
+
+        - `type: Literal["auto"]`
+
+        - `disable_parallel_tool_use: Optional[bool]`
+
+          Whether to disable parallel tool use.
+
+          Defaults to `false`. If set to `true`, the model will output at most one tool use.
+
+      - `class BetaToolChoiceAny: …`
+
+        The model will use any available tools.
+
+        - `type: Literal["any"]`
+
+        - `disable_parallel_tool_use: Optional[bool]`
+
+          Whether to disable parallel tool use.
+
+          Defaults to `false`. If set to `true`, the model will output exactly one tool use.
+
+      - `class BetaToolChoiceTool: …`
+
+        The model will use the specified tool with `tool_choice.name`.
+
+        - `name: str`
+
+          The name of the tool to use.
+
+        - `type: Literal["tool"]`
+
+        - `disable_parallel_tool_use: Optional[bool]`
+
+          Whether to disable parallel tool use.
+
+          Defaults to `false`. If set to `true`, the model will output exactly one tool use.
+
+      - `class BetaToolChoiceNone: …`
+
+        The model will not be allowed to use tools.
+
+        - `type: Literal["none"]`
+
+    - `tools: Optional[Iterable[BetaToolUnionParam]]`
+
+      Definitions of tools that the model may use.
+
+      If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
+
+      There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
+
+      Each tool definition includes:
+
+      * `name`: Name of the tool.
+      * `description`: Optional, but strongly-recommended description of the tool.
+      * `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
+
+      For example, if you defined `tools` as:
+
+      ```json
+      [
+        {
+          "name": "get_stock_price",
+          "description": "Get the current stock price for a given ticker symbol.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "ticker": {
+                "type": "string",
+                "description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
+              }
+            },
+            "required": ["ticker"]
+          }
+        }
+      ]
+      ```
+
+      And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
+
+      ```json
+      [
+        {
+          "type": "tool_use",
+          "id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+          "name": "get_stock_price",
+          "input": { "ticker": "^GSPC" }
+        }
+      ]
+      ```
+
+      You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
+
+      ```json
+      [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+          "content": "259.75 USD"
+        }
+      ]
+      ```
+
+      Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
+
+      See our [guide](agents-and-tools/tool-use/overview.md) for more details.
+
+      - `class BetaTool: …`
+
+        - `input_schema: InputSchema`
+
+          [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
+
+          This defines the shape of the `input` that your tool accepts and that the model will produce.
+
+          - `type: Literal["object"]`
+
+          - `properties: Optional[Dict[str, object]]`
+
+          - `required: Optional[List[str]]`
+
+        - `name: str`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+          maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `description: Optional[str]`
+
+          Description of what this tool does.
+
+          Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+        - `eager_input_streaming: Optional[bool]`
+
+          Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+
+        - `input_examples: Optional[List[Dict[str, object]]]`
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+        - `type: Optional[Literal["custom"]]`
+
+      - `class BetaToolBash20241022: …`
+
+        - `name: Literal["bash"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["bash_20241022"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `input_examples: Optional[List[Dict[str, object]]]`
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+      - `class BetaToolBash20250124: …`
+
+        - `name: Literal["bash"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["bash_20250124"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `input_examples: Optional[List[Dict[str, object]]]`
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+      - `class BetaCodeExecutionTool20250522: …`
+
+        - `name: Literal["code_execution"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["code_execution_20250522"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+      - `class BetaCodeExecutionTool20250825: …`
+
+        - `name: Literal["code_execution"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["code_execution_20250825"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+      - `class BetaCodeExecutionTool20260120: …`
+
+        Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+
+        - `name: Literal["code_execution"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["code_execution_20260120"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+      - `class BetaCodeExecutionTool20260521: …`
+
+        Code execution tool with REPL state persistence.
+
+        - `name: Literal["code_execution"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["code_execution_20260521"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+      - `class BetaBrowserToolset20260801: …`
+
+        The browser toolset: a single `tools[]` entry (carrying no
+        `name`) that declares the browser tool family. The model is served
+        the family's tool with any members disabled via `configs` removed
+        from its schema.
+
+        - `type: Literal["browser_toolset_20260801"]`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `configs: Optional[BetaBrowserToolsetConfigs]`
+
+          Per-member configuration for `browser_toolset_20260801`: one
+          optional field per member tool, keyed by the member name — the same
+          name the member's `tool_use` blocks carry. Every member is an
+          accepted key, and a member's defaults apply wherever its key is
+          absent. Unknown keys are rejected: the field set is this toolset
+          version's complete member set.
+
+          - `close_tab: Optional[BetaBrowserCloseTabConfig]`
+
+            `close_tab`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `double_click: Optional[BetaBrowserDoubleClickConfig]`
+
+            `double_click`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `file_upload: Optional[BetaBrowserFileUploadConfig]`
+
+            `file_upload`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `find: Optional[BetaBrowserFindConfig]`
+
+            `find`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `form_input: Optional[BetaBrowserFormInputConfig]`
+
+            `form_input`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `get_page_text: Optional[BetaBrowserGetPageTextConfig]`
+
+            `get_page_text`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `hold_key: Optional[BetaBrowserHoldKeyConfig]`
+
+            `hold_key`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `hover: Optional[BetaBrowserHoverConfig]`
+
+            `hover`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `javascript_exec: Optional[BetaBrowserJavascriptExecConfig]`
+
+            `javascript_exec`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `key: Optional[BetaBrowserKeyConfig]`
+
+            `key`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `left_click: Optional[BetaBrowserLeftClickConfig]`
+
+            `left_click`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `left_click_drag: Optional[BetaBrowserLeftClickDragConfig]`
+
+            `left_click_drag`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `left_mouse_down: Optional[BetaBrowserLeftMouseDownConfig]`
+
+            `left_mouse_down`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `left_mouse_up: Optional[BetaBrowserLeftMouseUpConfig]`
+
+            `left_mouse_up`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `list_tabs: Optional[BetaBrowserListTabsConfig]`
+
+            `list_tabs`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `middle_click: Optional[BetaBrowserMiddleClickConfig]`
+
+            `middle_click`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `mouse_move: Optional[BetaBrowserMouseMoveConfig]`
+
+            `mouse_move`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `navigate: Optional[BetaBrowserNavigateConfig]`
+
+            `navigate`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `new_tab: Optional[BetaBrowserNewTabConfig]`
+
+            `new_tab`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `read_console: Optional[BetaBrowserReadConsoleConfig]`
+
+            `read_console`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `read_network: Optional[BetaBrowserReadNetworkConfig]`
+
+            `read_network`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `read_page: Optional[BetaBrowserReadPageConfig]`
+
+            `read_page`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `right_click: Optional[BetaBrowserRightClickConfig]`
+
+            `right_click`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `screenshot: Optional[BetaBrowserScreenshotConfig]`
+
+            `screenshot`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `scroll: Optional[BetaBrowserScrollConfig]`
+
+            `scroll`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `scroll_to: Optional[BetaBrowserScrollToConfig]`
+
+            `scroll_to`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `switch_tab: Optional[BetaBrowserSwitchTabConfig]`
+
+            `switch_tab`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `triple_click: Optional[BetaBrowserTripleClickConfig]`
+
+            `triple_click`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `type: Optional[BetaBrowserTypeConfig]`
+
+            `type`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `wait: Optional[BetaBrowserWaitConfig]`
+
+            `wait`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `zoom: Optional[BetaBrowserZoomConfig]`
+
+            `zoom`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `class BetaToolComputerUse20241022: …`
+
+        - `display_height_px: int`
+
+          The height of the display in pixels.
+
+          minimum: 1
+
+        - `display_width_px: int`
+
+          The width of the display in pixels.
+
+          minimum: 1
+
+        - `name: Literal["computer"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["computer_20241022"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `display_number: Optional[int]`
+
+          The X11 display number (e.g. 0, 1) for the display.
+
+          minimum: 0
+
+        - `input_examples: Optional[List[Dict[str, object]]]`
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+      - `class BetaMemoryTool20250818: …`
+
+        - `name: Literal["memory"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["memory_20250818"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `input_examples: Optional[List[Dict[str, object]]]`
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+      - `class BetaToolComputerUse20250124: …`
+
+        - `display_height_px: int`
+
+          The height of the display in pixels.
+
+          minimum: 1
+
+        - `display_width_px: int`
+
+          The width of the display in pixels.
+
+          minimum: 1
+
+        - `name: Literal["computer"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["computer_20250124"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `display_number: Optional[int]`
+
+          The X11 display number (e.g. 0, 1) for the display.
+
+          minimum: 0
+
+        - `input_examples: Optional[List[Dict[str, object]]]`
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+      - `class BetaToolTextEditor20241022: …`
+
+        - `name: Literal["str_replace_editor"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["text_editor_20241022"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `input_examples: Optional[List[Dict[str, object]]]`
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+      - `class BetaToolComputerUse20251124: …`
+
+        - `display_height_px: int`
+
+          The height of the display in pixels.
+
+          minimum: 1
+
+        - `display_width_px: int`
+
+          The width of the display in pixels.
+
+          minimum: 1
+
+        - `name: Literal["computer"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["computer_20251124"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `display_number: Optional[int]`
+
+          The X11 display number (e.g. 0, 1) for the display.
+
+          minimum: 0
+
+        - `enable_zoom: Optional[bool]`
+
+          Whether to enable an action to take a zoomed-in screenshot of the screen.
+
+        - `input_examples: Optional[List[Dict[str, object]]]`
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+      - `class BetaComputerToolset20260801: …`
+
+        The computer toolset: a single `tools[]` entry (carrying no
+        `name`) that declares the computer tool family. The model is
+        served the family's tool with any members disabled via `configs`
+        removed from its schema. Every member is enabled by default, zoom
+        included. The single-tool options `display_number` and
+        `enable_zoom` are not fields of a toolset entry — it carries only
+        `type`, `configs`, and `cache_control`; zoom is controlled
+        via `configs.zoom.enabled`.
+
+        - `type: Literal["computer_toolset_20260801"]`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `configs: Optional[BetaComputerToolsetConfigs]`
+
+          Per-member configuration for `computer_toolset_20260801`: one
+          optional field per member tool, keyed by the member name — the same
+          name the member's `tool_use` blocks carry. Every member is an
+          accepted key, and a member's defaults apply wherever its key is
+          absent. Unknown keys are rejected: the field set is this toolset
+          version's complete member set.
+
+          - `cursor_position: Optional[BetaComputerCursorPositionConfig]`
+
+            `cursor_position`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `double_click: Optional[BetaComputerDoubleClickConfig]`
+
+            `double_click`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `hold_key: Optional[BetaComputerHoldKeyConfig]`
+
+            `hold_key`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `key: Optional[BetaComputerKeyConfig]`
+
+            `key`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `left_click: Optional[BetaComputerLeftClickConfig]`
+
+            `left_click`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `left_click_drag: Optional[BetaComputerLeftClickDragConfig]`
+
+            `left_click_drag`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `left_mouse_down: Optional[BetaComputerLeftMouseDownConfig]`
+
+            `left_mouse_down`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `left_mouse_up: Optional[BetaComputerLeftMouseUpConfig]`
+
+            `left_mouse_up`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `middle_click: Optional[BetaComputerMiddleClickConfig]`
+
+            `middle_click`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `mouse_move: Optional[BetaComputerMouseMoveConfig]`
+
+            `mouse_move`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `right_click: Optional[BetaComputerRightClickConfig]`
+
+            `right_click`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `screenshot: Optional[BetaComputerScreenshotConfig]`
+
+            `screenshot`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `scroll: Optional[BetaComputerScrollConfig]`
+
+            `scroll`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `triple_click: Optional[BetaComputerTripleClickConfig]`
+
+            `triple_click`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `type: Optional[BetaComputerTypeConfig]`
+
+            `type`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `wait: Optional[BetaComputerWaitConfig]`
+
+            `wait`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `zoom: Optional[BetaComputerZoomConfig]`
+
+            `zoom`'s config overrides.
+
+            - `defer_loading: Optional[bool]`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled: Optional[bool]`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `class BetaToolTextEditor20250124: …`
+
+        - `name: Literal["str_replace_editor"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["text_editor_20250124"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `input_examples: Optional[List[Dict[str, object]]]`
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+      - `class BetaToolTextEditor20250429: …`
+
+        - `name: Literal["str_replace_based_edit_tool"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["text_editor_20250429"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `input_examples: Optional[List[Dict[str, object]]]`
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+      - `class BetaToolTextEditor20250728: …`
+
+        - `name: Literal["str_replace_based_edit_tool"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["text_editor_20250728"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `input_examples: Optional[List[Dict[str, object]]]`
+
+        - `max_characters: Optional[int]`
+
+          Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
+
+          minimum: 1
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+      - `class BetaWebSearchTool20250305: …`
+
+        - `name: Literal["web_search"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["web_search_20250305"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `allowed_domains: Optional[List[str]]`
+
+          If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+        - `blocked_domains: Optional[List[str]]`
+
+          If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `max_uses: Optional[int]`
+
+          Maximum number of times the tool can be used in the API request.
+
+          exclusiveMinimum: 0
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+        - `user_location: Optional[BetaUserLocation]`
+
+          Parameters for the user's location. Used to provide more relevant search results.
+
+          - `type: Literal["approximate"]`
+
+          - `city: Optional[str]`
+
+            The city of the user.
+
+            maxLength: 255, minLength: 1
+
+          - `country: Optional[str]`
+
+            The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+            maxLength: 2, minLength: 2
+
+          - `region: Optional[str]`
+
+            The region of the user.
+
+            maxLength: 255, minLength: 1
+
+          - `timezone: Optional[str]`
+
+            The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+            maxLength: 255, minLength: 1
+
+      - `class BetaWebFetchTool20250910: …`
+
+        - `name: Literal["web_fetch"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["web_fetch_20250910"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `allowed_domains: Optional[List[str]]`
+
+          List of domains to allow fetching from
+
+        - `blocked_domains: Optional[List[str]]`
+
+          List of domains to block fetching from
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `citations: Optional[BetaCitationsConfigParam]`
+
+          Citations configuration for fetched documents. Citations are disabled by default.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `max_content_tokens: Optional[int]`
+
+          Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+          exclusiveMinimum: 0
+
+        - `max_uses: Optional[int]`
+
+          Maximum number of times the tool can be used in the API request.
+
+          exclusiveMinimum: 0
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+      - `class BetaWebSearchTool20260209: …`
+
+        - `name: Literal["web_search"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["web_search_20260209"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `allowed_domains: Optional[List[str]]`
+
+          If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+        - `blocked_domains: Optional[List[str]]`
+
+          If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `max_uses: Optional[int]`
+
+          Maximum number of times the tool can be used in the API request.
+
+          exclusiveMinimum: 0
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+        - `user_location: Optional[BetaUserLocation]`
+
+          Parameters for the user's location. Used to provide more relevant search results.
+
+      - `class BetaWebFetchTool20260209: …`
+
+        - `name: Literal["web_fetch"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["web_fetch_20260209"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `allowed_domains: Optional[List[str]]`
+
+          List of domains to allow fetching from
+
+        - `blocked_domains: Optional[List[str]]`
+
+          List of domains to block fetching from
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `citations: Optional[BetaCitationsConfigParam]`
+
+          Citations configuration for fetched documents. Citations are disabled by default.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `max_content_tokens: Optional[int]`
+
+          Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+          exclusiveMinimum: 0
+
+        - `max_uses: Optional[int]`
+
+          Maximum number of times the tool can be used in the API request.
+
+          exclusiveMinimum: 0
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+      - `class BetaWebFetchTool20260309: …`
+
+        Web fetch tool with use_cache parameter for bypassing cached content.
+
+        - `name: Literal["web_fetch"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["web_fetch_20260309"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `allowed_domains: Optional[List[str]]`
+
+          List of domains to allow fetching from
+
+        - `blocked_domains: Optional[List[str]]`
+
+          List of domains to block fetching from
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `citations: Optional[BetaCitationsConfigParam]`
+
+          Citations configuration for fetched documents. Citations are disabled by default.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `max_content_tokens: Optional[int]`
+
+          Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+          exclusiveMinimum: 0
+
+        - `max_uses: Optional[int]`
+
+          Maximum number of times the tool can be used in the API request.
+
+          exclusiveMinimum: 0
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+        - `use_cache: Optional[bool]`
+
+          Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
+      - `class BetaWebSearchTool20260318: …`
+
+        - `name: Literal["web_search"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["web_search_20260318"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `allowed_domains: Optional[List[str]]`
+
+          If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+        - `blocked_domains: Optional[List[str]]`
+
+          If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `max_uses: Optional[int]`
+
+          Maximum number of times the tool can be used in the API request.
+
+          exclusiveMinimum: 0
+
+        - `response_inclusion: Optional[Literal["full", "excluded"]]`
+
+          How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+          - `"full"`
+
+          - `"excluded"`
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+        - `user_location: Optional[BetaUserLocation]`
+
+          Parameters for the user's location. Used to provide more relevant search results.
+
+      - `class BetaWebFetchTool20260318: …`
+
+        - `name: Literal["web_fetch"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["web_fetch_20260318"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `allowed_domains: Optional[List[str]]`
+
+          List of domains to allow fetching from
+
+        - `blocked_domains: Optional[List[str]]`
+
+          List of domains to block fetching from
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `citations: Optional[BetaCitationsConfigParam]`
+
+          Citations configuration for fetched documents. Citations are disabled by default.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `max_content_tokens: Optional[int]`
+
+          Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+          exclusiveMinimum: 0
+
+        - `max_uses: Optional[int]`
+
+          Maximum number of times the tool can be used in the API request.
+
+          exclusiveMinimum: 0
+
+        - `response_inclusion: Optional[Literal["full", "excluded"]]`
+
+          How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+          - `"full"`
+
+          - `"excluded"`
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+        - `use_cache: Optional[bool]`
+
+          Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
+      - `class BetaAdvisorTool20260301: …`
+
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `name: Literal["advisor"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["advisor_20260301"]`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `caching: Optional[BetaCacheControlEphemeral]`
+
+          Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `max_tokens: Optional[int]`
+
+          Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+
+          minimum: 1024
+
+        - `max_uses: Optional[int]`
+
+          Maximum number of times the tool can be used in the API request.
+
+          exclusiveMinimum: 0
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+      - `class BetaToolSearchToolBm25_20251119: …`
+
+        - `name: Literal["tool_search_tool_bm25"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["tool_search_tool_bm25_20251119", "tool_search_tool_bm25"]`
+
+          - `"tool_search_tool_bm25_20251119"`
+
+          - `"tool_search_tool_bm25"`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+      - `class BetaToolSearchToolRegex20251119: …`
+
+        - `name: Literal["tool_search_tool_regex"]`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
+
+        - `type: Literal["tool_search_tool_regex_20251119", "tool_search_tool_regex"]`
+
+          - `"tool_search_tool_regex_20251119"`
+
+          - `"tool_search_tool_regex"`
+
+        - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `defer_loading: Optional[bool]`
+
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+        - `strict: Optional[bool]`
+
+          When true, guarantees schema validation on tool names and inputs
+
+      - `class BetaMCPToolset: …`
+
+        Configuration for a group of tools from an MCP server.
+
+        Allows configuring enabled status and defer_loading for all tools
+        from an MCP server, with optional per-tool overrides.
+
+        - `mcp_server_name: str`
+
+          Name of the MCP server to configure tools for
+
+          maxLength: 255, minLength: 1
+
+        - `type: Literal["mcp_toolset"]`
+
+        - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+          Create a cache control breakpoint at this content block.
+
+        - `configs: Optional[Dict[str, BetaMCPToolConfig]]`
+
+          Configuration overrides for specific tools, keyed by tool name
+
+          - `defer_loading: Optional[bool]`
+
+          - `enabled: Optional[bool]`
+
+        - `default_config: Optional[BetaMCPToolDefaultConfig]`
+
+          Default configuration applied to all tools from this server
+
+          - `defer_loading: Optional[bool]`
+
+          - `enabled: Optional[bool]`
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+- `user_profile_id: Optional[str]`
+
+  The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
+
+### Returns
+
+- `class BetaMessageBatch: …`
+
+  - `id: str`
+
+    Unique object identifier.
+
+    The format and length of IDs may change over time.
+
+  - `archived_at: Optional[datetime]`
+
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+
+    format: date-time
+
+  - `cancel_initiated_at: Optional[datetime]`
+
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+
+    format: date-time
+
+  - `created_at: datetime`
+
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+    format: date-time
+
+  - `ended_at: Optional[datetime]`
+
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+
+    format: date-time
+
+  - `expires_at: datetime`
+
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+    format: date-time
+
+  - `processing_status: Literal["in_progress", "canceling", "ended"]`
+
+    Processing status of the Message Batch.
+
+    - `"in_progress"`
+
+    - `"canceling"`
+
+    - `"ended"`
+
+  - `request_counts: BetaMessageBatchRequestCounts`
+
+    Tallies requests within the Message Batch, categorized by their status.
+
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+
+    - `canceled: int`
+
+      Number of requests in the Message Batch that have been canceled.
+
+      This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
+
+    - `errored: int`
+
+      Number of requests in the Message Batch that encountered an error.
+
+      This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
+
+    - `expired: int`
+
+      Number of requests in the Message Batch that have expired.
+
+      This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
+
+    - `processing: int`
+
+      Number of requests in the Message Batch that are processing.
+
+      default: 0
+
+    - `succeeded: int`
+
+      Number of requests in the Message Batch that have completed successfully.
+
+      This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
+
+  - `results_url: Optional[str]`
+
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
+
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+
+  - `type: Literal["message_batch"]`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+beta_message_batch = client.beta.messages.batches.create(
+    requests=[
+        {
+            "custom_id": "my-custom-id-1",
+            "params": {
+                "max_tokens": 1024,
+                "messages": [
+                    {
+                        "content": "Hello, world",
+                        "role": "user",
+                    }
+                ],
+                "model": "claude-opus-5",
+            },
+        }
+    ],
+)
+print(beta_message_batch.id)
 ```
 
-
+#### Response (200)
 
-If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
-
-For example, if the input `messages` were:
-
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("}
-]
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
 ```
 
-
+## Retrieve a Message Batch
 
-Then the response `content` might be:
+`beta.messages.batches.retrieve(message_batch_id, **kwargs)  -> BetaMessageBatch`
 
-```shiki
-[{"type": "text", "text": "B)"}]
+**GET** `/v1/messages/batches/{message_batch_id}`
+
+This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
+
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+
+### Parameters
+
+- `message_batch_id: str`
+
+  ID of the Message Batch.
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaMessageBatch: …`
+
+  - `id: str`
+
+    Unique object identifier.
+
+    The format and length of IDs may change over time.
+
+  - `archived_at: Optional[datetime]`
+
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+
+    format: date-time
+
+  - `cancel_initiated_at: Optional[datetime]`
+
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+
+    format: date-time
+
+  - `created_at: datetime`
+
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+    format: date-time
+
+  - `ended_at: Optional[datetime]`
+
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+
+    format: date-time
+
+  - `expires_at: datetime`
+
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+    format: date-time
+
+  - `processing_status: Literal["in_progress", "canceling", "ended"]`
+
+    Processing status of the Message Batch.
+
+    - `"in_progress"`
+
+    - `"canceling"`
+
+    - `"ended"`
+
+  - `request_counts: BetaMessageBatchRequestCounts`
+
+    Tallies requests within the Message Batch, categorized by their status.
+
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+
+    - `canceled: int`
+
+      Number of requests in the Message Batch that have been canceled.
+
+      This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
+
+    - `errored: int`
+
+      Number of requests in the Message Batch that encountered an error.
+
+      This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
+
+    - `expired: int`
+
+      Number of requests in the Message Batch that have expired.
+
+      This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
+
+    - `processing: int`
+
+      Number of requests in the Message Batch that are processing.
+
+      default: 0
+
+    - `succeeded: int`
+
+      Number of requests in the Message Batch that have completed successfully.
+
+      This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
+
+  - `results_url: Optional[str]`
+
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
+
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+
+  - `type: Literal["message_batch"]`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+beta_message_batch = client.beta.messages.batches.retrieve(
+    message_batch_id="message_batch_id",
+)
+print(beta_message_batch.id)
 ```
 
-
-
-One of the following:
-
-
-
-class BetaTextBlock: …
-
-
-
-citations: Optional[List[[BetaTextCitation](api/beta/messages.md)]]
-
-Citations supporting the text block.
-
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-One of the following:
-
-
-
-class BetaCitationCharLocation: …
-
-cited\_text: str
-
-document\_index: int
-
-document\_title: Optional[str]
-
-end\_char\_index: int
-
-file\_id: Optional[str]
-
-start\_char\_index: int
-
-type: Literal["char\_location"]
-
-
-
-class BetaCitationPageLocation: …
-
-cited\_text: str
-
-document\_index: int
-
-document\_title: Optional[str]
-
-end\_page\_number: int
-
-file\_id: Optional[str]
-
-start\_page\_number: int
-
-type: Literal["page\_location"]
-
-
-
-class BetaCitationContentBlockLocation: …
-
-
-
-cited\_text: str
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-document\_index: int
-
-document\_title: Optional[str]
-
-
-
-end\_block\_index: int
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-file\_id: Optional[str]
-
-start\_block\_index: int
-
-0-based index of the first cited block in the source's `content` array.
-
-type: Literal["content\_block\_location"]
-
-
-
-class BetaCitationsWebSearchResultLocation: …
-
-cited\_text: str
-
-encrypted\_index: str
-
-title: Optional[str]
-
-type: Literal["web\_search\_result\_location"]
-
-url: str
-
-
-
-class BetaCitationSearchResultLocation: …
-
-
-
-cited\_text: str
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-end\_block\_index: int
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-search\_result\_index: int
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-source: str
-
-start\_block\_index: int
-
-0-based index of the first cited block in the source's `content` array.
-
-title: Optional[str]
-
-type: Literal["search\_result\_location"]
-
-text: str
-
-type: Literal["text"]
-
-
-
-class BetaThinkingBlock: …
-
-signature: str
-
-thinking: str
-
-type: Literal["thinking"]
-
-
-
-class BetaRedactedThinkingBlock: …
-
-data: str
-
-type: Literal["redacted\_thinking"]
-
-
-
-class BetaToolUseBlock: …
-
-id: str
-
-input: Dict[str, object]
-
-name: str
-
-type: Literal["tool\_use"]
-
-
-
-caller: Optional[Caller]
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller: …
-
-Tool invocation directly from the model.
-
-type: Literal["direct"]
-
-
-
-class BetaServerToolCaller: …
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: str
-
-type: Literal["code\_execution\_20250825"]
-
-
-
-class BetaServerToolCaller20260120: …
-
-tool\_id: str
-
-type: Literal["code\_execution\_20260120"]
-
-
-
-class BetaServerToolUseBlock: …
-
-id: str
-
-input: Dict[str, object]
-
-
-
-name: Literal["advisor", "web\_search", "web\_fetch", 5 more]
-
-One of the following:
-
-"advisor"
-
-"web\_search"
-
-"web\_fetch"
-
-"code\_execution"
-
-"bash\_code\_execution"
-
-"text\_editor\_code\_execution"
-
-"tool\_search\_tool\_regex"
-
-"tool\_search\_tool\_bm25"
-
-type: Literal["server\_tool\_use"]
-
-
-
-caller: Optional[Caller]
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller: …
-
-Tool invocation directly from the model.
-
-type: Literal["direct"]
-
-
-
-class BetaServerToolCaller: …
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: str
-
-type: Literal["code\_execution\_20250825"]
-
-
-
-class BetaServerToolCaller20260120: …
-
-tool\_id: str
-
-type: Literal["code\_execution\_20260120"]
-
-
-
-class BetaWebSearchToolResultBlock: …
-
-
-
-content: [BetaWebSearchToolResultBlockContent](api/beta/messages.md)
-
-One of the following:
-
-
-
-class BetaWebSearchToolResultError: …
-
-
-
-error\_code: [BetaWebSearchToolResultErrorCode](api/beta/messages.md)
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"max\_uses\_exceeded"
-
-"too\_many\_requests"
-
-"query\_too\_long"
-
-"request\_too\_large"
-
-type: Literal["web\_search\_tool\_result\_error"]
-
-
-
-List[[BetaWebSearchResultBlock](api/beta/messages.md)]
-
-encrypted\_content: str
-
-page\_age: Optional[str]
-
-title: str
-
-type: Literal["web\_search\_result"]
-
-url: str
-
-tool\_use\_id: str
-
-type: Literal["web\_search\_tool\_result"]
-
-
-
-caller: Optional[Caller]
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller: …
-
-Tool invocation directly from the model.
-
-type: Literal["direct"]
-
-
-
-class BetaServerToolCaller: …
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: str
-
-type: Literal["code\_execution\_20250825"]
-
-
-
-class BetaServerToolCaller20260120: …
-
-tool\_id: str
-
-type: Literal["code\_execution\_20260120"]
-
-
-
-class BetaWebFetchToolResultBlock: …
-
-
-
-content: Content
-
-One of the following:
-
-
-
-class BetaWebFetchToolResultErrorBlock: …
-
-
-
-error\_code: [BetaWebFetchToolResultErrorCode](api/beta/messages.md)
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"url\_too\_long"
-
-"url\_not\_allowed"
-
-"url\_not\_in\_prior\_context"
-
-"url\_not\_accessible"
-
-"unsupported\_content\_type"
-
-"too\_many\_requests"
-
-"max\_uses\_exceeded"
-
-"unavailable"
-
-type: Literal["web\_fetch\_tool\_result\_error"]
-
-
-
-class BetaWebFetchBlock: …
-
-
-
-content: [BetaDocumentBlock](api/beta/messages.md)
-
-
-
-citations: Optional[BetaCitationConfig]
-
-Citation configuration for the document
-
-enabled: bool
-
-
-
-source: Source
-
-One of the following:
-
-
-
-class BetaBase64PDFSource: …
-
-data: str
-
-media\_type: Literal["application/pdf"]
-
-type: Literal["base64"]
-
-
-
-class BetaPlainTextSource: …
-
-data: str
-
-media\_type: Literal["text/plain"]
-
-type: Literal["text"]
-
-title: Optional[str]
-
-The title of the document
-
-type: Literal["document"]
-
-retrieved\_at: Optional[str]
-
-ISO 8601 timestamp when the content was retrieved
-
-type: Literal["web\_fetch\_result"]
-
-url: str
-
-Fetched content URL
-
-tool\_use\_id: str
-
-type: Literal["web\_fetch\_tool\_result"]
-
-
-
-caller: Optional[Caller]
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller: …
-
-Tool invocation directly from the model.
-
-type: Literal["direct"]
-
-
-
-class BetaServerToolCaller: …
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: str
-
-type: Literal["code\_execution\_20250825"]
-
-
-
-class BetaServerToolCaller20260120: …
-
-tool\_id: str
-
-type: Literal["code\_execution\_20260120"]
-
-
-
-class BetaAdvisorToolResultBlock: …
-
-
-
-content: Content
-
-One of the following:
-
-
-
-class BetaAdvisorToolResultError: …
-
-
-
-error\_code: Literal["max\_uses\_exceeded", "prompt\_too\_long", "too\_many\_requests", 4 more]
-
-One of the following:
-
-"max\_uses\_exceeded"
-
-"prompt\_too\_long"
-
-"too\_many\_requests"
-
-"overloaded"
-
-"unavailable"
-
-"execution\_time\_exceeded"
-
-"model\_not\_found"
-
-type: Literal["advisor\_tool\_result\_error"]
-
-
-
-class BetaAdvisorResultBlock: …
-
-stop\_reason: Optional[str]
-
-The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
-
-text: str
-
-type: Literal["advisor\_result"]
-
-
-
-class BetaAdvisorRedactedResultBlock: …
-
-encrypted\_content: str
-
-Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
-
-stop\_reason: Optional[str]
-
-The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
-
-type: Literal["advisor\_redacted\_result"]
-
-tool\_use\_id: str
-
-type: Literal["advisor\_tool\_result"]
-
-
-
-class BetaCodeExecutionToolResultBlock: …
-
-
-
-content: [BetaCodeExecutionToolResultBlockContent](api/beta/messages.md)
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-One of the following:
-
-
-
-class BetaCodeExecutionToolResultError: …
-
-
-
-error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta/messages.md)
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: Literal["code\_execution\_tool\_result\_error"]
-
-
-
-class BetaCodeExecutionResultBlock: …
-
-
-
-content: List[[BetaCodeExecutionOutputBlock](api/beta/messages.md)]
-
-file\_id: str
-
-type: Literal["code\_execution\_output"]
-
-return\_code: int
-
-stderr: str
-
-stdout: str
-
-type: Literal["code\_execution\_result"]
-
-
-
-class BetaEncryptedCodeExecutionResultBlock: …
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-
-
-content: List[[BetaCodeExecutionOutputBlock](api/beta/messages.md)]
-
-file\_id: str
-
-type: Literal["code\_execution\_output"]
-
-encrypted\_stdout: str
-
-return\_code: int
-
-stderr: str
-
-type: Literal["encrypted\_code\_execution\_result"]
-
-tool\_use\_id: str
-
-type: Literal["code\_execution\_tool\_result"]
-
-
-
-class BetaBashCodeExecutionToolResultBlock: …
-
-
-
-content: Content
-
-One of the following:
-
-
-
-class BetaBashCodeExecutionToolResultError: …
-
-
-
-error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-"output\_file\_too\_large"
-
-type: Literal["bash\_code\_execution\_tool\_result\_error"]
-
-
-
-class BetaBashCodeExecutionResultBlock: …
-
-
-
-content: List[[BetaBashCodeExecutionOutputBlock](api/beta/messages.md)]
-
-file\_id: str
-
-type: Literal["bash\_code\_execution\_output"]
-
-return\_code: int
-
-stderr: str
-
-stdout: str
-
-type: Literal["bash\_code\_execution\_result"]
-
-tool\_use\_id: str
-
-type: Literal["bash\_code\_execution\_tool\_result"]
-
-
-
-class BetaTextEditorCodeExecutionToolResultBlock: …
-
-
-
-content: Content
-
-One of the following:
-
-
-
-class BetaTextEditorCodeExecutionToolResultError: …
-
-
-
-error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-"file\_not\_found"
-
-error\_message: Optional[str]
-
-type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
-
-
-
-class BetaTextEditorCodeExecutionViewResultBlock: …
-
-content: str
-
-
-
-file\_type: Literal["text", "image", "pdf"]
-
-One of the following:
-
-"text"
-
-"image"
-
-"pdf"
-
-num\_lines: Optional[int]
-
-start\_line: Optional[int]
-
-total\_lines: Optional[int]
-
-type: Literal["text\_editor\_code\_execution\_view\_result"]
-
-
-
-class BetaTextEditorCodeExecutionCreateResultBlock: …
-
-is\_file\_update: bool
-
-type: Literal["text\_editor\_code\_execution\_create\_result"]
-
-
-
-class BetaTextEditorCodeExecutionStrReplaceResultBlock: …
-
-lines: Optional[List[str]]
-
-new\_lines: Optional[int]
-
-new\_start: Optional[int]
-
-old\_lines: Optional[int]
-
-old\_start: Optional[int]
-
-type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
-
-tool\_use\_id: str
-
-type: Literal["text\_editor\_code\_execution\_tool\_result"]
-
-
-
-class BetaToolSearchToolResultBlock: …
-
-
-
-content: Content
-
-One of the following:
-
-
-
-class BetaToolSearchToolResultError: …
-
-
-
-error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-error\_message: Optional[str]
-
-type: Literal["tool\_search\_tool\_result\_error"]
-
-
-
-class BetaToolSearchToolSearchResultBlock: …
-
-
-
-tool\_references: List[[BetaToolReferenceBlock](api/beta/messages.md)]
-
-tool\_name: str
-
-type: Literal["tool\_reference"]
-
-type: Literal["tool\_search\_tool\_search\_result"]
-
-tool\_use\_id: str
-
-type: Literal["tool\_search\_tool\_result"]
-
-
-
-class BetaMCPToolUseBlock: …
-
-id: str
-
-input: Dict[str, object]
-
-name: str
-
-The name of the MCP tool
-
-server\_name: str
-
-The name of the MCP server
-
-type: Literal["mcp\_tool\_use"]
-
-
-
-class BetaMCPToolResultBlock: …
-
-
-
-content: Union[str, List[[BetaTextBlock](api/beta/messages.md)]]
-
-One of the following:
-
-str
-
-
-
-List[[BetaTextBlock](api/beta/messages.md)]
-
-
-
-citations: Optional[List[[BetaTextCitation](api/beta/messages.md)]]
-
-Citations supporting the text block.
-
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-One of the following:
-
-
-
-class BetaCitationCharLocation: …
-
-cited\_text: str
-
-document\_index: int
-
-document\_title: Optional[str]
-
-end\_char\_index: int
-
-file\_id: Optional[str]
-
-start\_char\_index: int
-
-type: Literal["char\_location"]
-
-
-
-class BetaCitationPageLocation: …
-
-cited\_text: str
-
-document\_index: int
-
-document\_title: Optional[str]
-
-end\_page\_number: int
-
-file\_id: Optional[str]
-
-start\_page\_number: int
-
-type: Literal["page\_location"]
-
-
-
-class BetaCitationContentBlockLocation: …
-
-
-
-cited\_text: str
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-document\_index: int
-
-document\_title: Optional[str]
-
-
-
-end\_block\_index: int
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-file\_id: Optional[str]
-
-start\_block\_index: int
-
-0-based index of the first cited block in the source's `content` array.
-
-type: Literal["content\_block\_location"]
-
-
-
-class BetaCitationsWebSearchResultLocation: …
-
-cited\_text: str
-
-encrypted\_index: str
-
-title: Optional[str]
-
-type: Literal["web\_search\_result\_location"]
-
-url: str
-
-
-
-class BetaCitationSearchResultLocation: …
-
-
-
-cited\_text: str
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-end\_block\_index: int
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-search\_result\_index: int
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-source: str
-
-start\_block\_index: int
-
-0-based index of the first cited block in the source's `content` array.
-
-title: Optional[str]
-
-type: Literal["search\_result\_location"]
-
-text: str
-
-type: Literal["text"]
-
-is\_error: bool
-
-tool\_use\_id: str
-
-type: Literal["mcp\_tool\_result"]
-
-
-
-class BetaContainerUploadBlock: …
-
-Response model for a file uploaded to the container.
-
-file\_id: str
-
-type: Literal["container\_upload"]
-
-
-
-class BetaCompactionBlock: …
-
-A compaction block returned when autocompact is triggered.
-
-When content is None, it indicates the compaction failed to produce a valid
-summary (e.g., malformed output from the model). Clients may round-trip
-compaction blocks with null content; the server treats them as no-ops.
-
-content: Optional[str]
-
-Summary of compacted content, or null if compaction failed
-
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
-type: Literal["compaction"]
-
-
-
-class BetaFallbackBlock: …
-
-Marks the point in `content` where one model's output gives way to the next.
-
-One block appears per hop where a preceding model actually ran this turn and
-declined. A turn where no preceding model ran and declined has no such
-boundary and carries no block — the signal for whether a fallback model
-served the response is the presence of a `fallback_message` entry in
-`usage.iterations`, not this block.
-
-The block is treated like a server-tool content block for streaming: it
-arrives via the standard `content_block_start` / `content_block_stop`
-pair and carries no deltas.
-
-
-
-from\_: [BetaFallbackInfo](api/beta/messages.md)
-
-The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
-
-
-
-model: [Model](api/messages.md)
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-
-
-Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-- `claude-sonnet-5` - High-performance model for coding and agents
-- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-- `claude-mythos-5` - Most capable model for cybersecurity and biology research
-- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-- `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-- `claude-sonnet-4-6` - Best combination of speed and intelligence
-- `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-- `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-- `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-- `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-- `claude-sonnet-4-5` - High-performance model for agents and coding
-- `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-- `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-
-One of the following:
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-str
-
-
-
-to: [BetaFallbackInfo](api/beta/messages.md)
-
-The fallback model producing the content that follows this block. Its `model` is always the canonical id.
-
-
-
-model: [Model](api/messages.md)
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-
-
-Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-- `claude-sonnet-5` - High-performance model for coding and agents
-- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-- `claude-mythos-5` - Most capable model for cybersecurity and biology research
-- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-- `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-- `claude-sonnet-4-6` - Best combination of speed and intelligence
-- `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-- `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-- `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-- `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-- `claude-sonnet-4-5` - High-performance model for agents and coding
-- `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-- `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-
-One of the following:
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-str
-
-
-
-trigger: [BetaFallbackRefusalTrigger](api/beta/messages.md)
-
-What caused the `from` model to hand over at this hop.
-
-
-
-category: Optional[Literal["cyber", "bio", "frontier\_llm", "reasoning\_extraction"]]
-
-The policy category that triggered a refusal.
-
-One of the following:
-
-"cyber"
-
-"bio"
-
-"frontier\_llm"
-
-"reasoning\_extraction"
-
-type: Literal["refusal"]
-
-type: Literal["fallback"]
-
-
-
-context\_management: Optional[BetaContextManagementResponse]
-
-Context management response.
-
-Information about context management strategies applied during the request.
-
-
-
-applied\_edits: List[AppliedEdit]
-
-List of context management edits that were applied.
-
-One of the following:
-
-
-
-class BetaClearToolUses20250919EditResponse: …
-
-cleared\_input\_tokens: int
-
-Number of input tokens cleared by this edit.
-
-cleared\_tool\_uses: int
-
-Number of tool uses that were cleared.
-
-type: Literal["clear\_tool\_uses\_20250919"]
-
-The type of context management edit applied.
-
-
-
-class BetaClearThinking20251015EditResponse: …
-
-cleared\_input\_tokens: int
-
-Number of input tokens cleared by this edit.
-
-cleared\_thinking\_turns: int
-
-Number of thinking turns that were cleared.
-
-type: Literal["clear\_thinking\_20251015"]
-
-The type of context management edit applied.
-
-
-
-diagnostics: Optional[BetaDiagnostics]
-
-Response envelope for request-level diagnostics. Present (possibly
-null) whenever the caller supplied `diagnostics` on the request.
-
-
-
-cache\_miss\_reason: Optional[CacheMissReason]
-
-Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
-
-One of the following:
-
-
-
-class BetaCacheMissModelChanged: …
-
-cache\_missed\_input\_tokens: int
-
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-type: Literal["model\_changed"]
-
-
-
-class BetaCacheMissSystemChanged: …
-
-cache\_missed\_input\_tokens: int
-
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-type: Literal["system\_changed"]
-
-
-
-class BetaCacheMissToolsChanged: …
-
-cache\_missed\_input\_tokens: int
-
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-type: Literal["tools\_changed"]
-
-
-
-class BetaCacheMissMessagesChanged: …
-
-cache\_missed\_input\_tokens: int
-
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-type: Literal["messages\_changed"]
-
-
-
-class BetaCacheMissPreviousMessageNotFound: …
-
-type: Literal["previous\_message\_not\_found"]
-
-
-
-class BetaCacheMissUnavailable: …
-
-type: Literal["unavailable"]
-
-
-
-model: [Model](api/messages.md)
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-
-
-Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-- `claude-sonnet-5` - High-performance model for coding and agents
-- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-- `claude-mythos-5` - Most capable model for cybersecurity and biology research
-- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-- `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-- `claude-sonnet-4-6` - Best combination of speed and intelligence
-- `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-- `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-- `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-- `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-- `claude-sonnet-4-5` - High-performance model for agents and coding
-- `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-- `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-
-One of the following:
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-str
-
-
-
-role: Literal["assistant"]
-
-Conversational role of the generated message.
-
-This will always be `"assistant"`.
-
-
-
-stop\_details: Optional[BetaRefusalStopDetails]
-
-Structured information about a refusal.
-
-
-
-category: Optional[Literal["cyber", "bio", "frontier\_llm", "reasoning\_extraction"]]
-
-The policy category that triggered a refusal.
-
-One of the following:
-
-"cyber"
-
-"bio"
-
-"frontier\_llm"
-
-"reasoning\_extraction"
-
-
-
-explanation: Optional[str]
-
-Human-readable explanation of the refusal.
-
-This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-
-
-fallback\_credit\_token: Optional[str]
-
-Opaque code that refunds the cache-miss cost when retrying this refused
-request on the fallback model. Pass it as `fallback_credit_token` on the
-retry request. Expires 5 minutes after the refusal.
-
-The retry is sent either with the same request body (`system`, `messages`,
-`tools`, and other render-shaping fields), or with the same body plus one
-appended `assistant` message whose content is the partial text (with any
-trailing whitespace stripped from the final text block) and paired
-server-tool blocks from this refusal — which also authorizes that
-appended turn as an assistant-prefill continuation on models that otherwise
-disallow prefill. A token minted mid-server-tool-loop whose partial content
-was continuable may only be redeemed the second way — if a same-body retry
-is rejected with a 400 saying the token must be redeemed by continuing the
-partial response, retry the second way instead. Either way: same workspace,
-same platform; a mismatch is a 400. Resending a token for an already-warm
-prefix is permitted but yields no additional credit.
-
-`null` when the refused model isn't eligible for a fallback credit.
-
-
-
-fallback\_has\_prefill\_claim: Optional[bool]
-
-Whether the accompanying `fallback_credit_token` may be redeemed with the
-appended-assistant retry form. Only set when `fallback_credit_token` is
-present.
-
-`true`: retry by resending the same request body plus one appended
-`assistant` message whose content is this response's `content` with any
-trailing whitespace stripped from the final text block and unpaired
-`tool_use` blocks omitted (the same appended-turn shape described on
-`fallback_credit_token`), with the token attached. `false`: retry by
-resending the original request body unchanged, with the token attached —
-the appended-assistant form is not available for this refusal (no
-continuable partial content, or the request uses `output_format` or a
-`tool_choice` that forces tool use). One exception: when the request used
-`output_format` or a forced `tool_choice` and the refusal arrived after
-server tools (including MCP connector tools) had already executed, the
-token may not be redeemable by either retry form; if the exact-body retry
-is then rejected with a 400 saying the token must be redeemed by
-continuing the partial response, discard the token and retry without it.
-
-Advisory: if an appended-assistant retry is rejected with a 400 despite
-`true`, fall back to resending the original request body with the token.
-
-recommended\_model: Optional[str]
-
-The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
-
-type: Literal["refusal"]
-
-
-
-stop\_reason: Optional[BetaStopReason]
-
-The reason that we stopped.
-
-This may be one the following values:
-
-- `"end_turn"`: the model reached a natural stopping point
-- `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
-- `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
-- `"tool_use"`: the model invoked one or more tools
-- `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
-- `"refusal"`: when streaming classifiers intervene to handle potential policy violations
-
-In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
-
-One of the following:
-
-"end\_turn"
-
-"max\_tokens"
-
-"stop\_sequence"
-
-"tool\_use"
-
-"pause\_turn"
-
-"compaction"
-
-"refusal"
-
-"model\_context\_window\_exceeded"
-
-
-
-stop\_sequence: Optional[str]
-
-Which custom stop sequence was generated, if any.
-
-This value will be a non-null string if one of your custom stop sequences was generated.
-
-
-
-type: Literal["message"]
-
-Object type.
-
-For Messages, this is always `"message"`.
-
-
-
-usage: [BetaUsage](api/beta/messages.md)
-
-Billing and rate-limit usage.
-
-Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
-
-Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
-
-For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
-
-Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
-
-
-
-cache\_creation: Optional[BetaCacheCreation]
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: int
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: int
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: Optional[int]
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: Optional[int]
-
-The number of input tokens read from the cache.
-
-inference\_geo: Optional[str]
-
-The geographic region where inference was performed for this request.
-
-input\_tokens: int
-
-The number of input tokens which were used.
-
-
-
-iterations: Optional[BetaIterationsUsage]
-
-Per-iteration token usage breakdown.
-
-Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
-
-- Determine which iterations exceeded long context thresholds (>=200k tokens)
-- Calculate the true context window size from the last iteration
-- Understand token accumulation across server-side tool use loops
-
-One of the following:
-
-
-
-class BetaMessageIterationUsage: …
-
-Token usage for a sampling iteration.
-
-
-
-cache\_creation: Optional[BetaCacheCreation]
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: int
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: int
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: int
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: int
-
-The number of input tokens read from the cache.
-
-input\_tokens: int
-
-The number of input tokens which were used.
-
-
-
-model: [Model](api/messages.md)
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-
-
-Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-- `claude-sonnet-5` - High-performance model for coding and agents
-- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-- `claude-mythos-5` - Most capable model for cybersecurity and biology research
-- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-- `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-- `claude-sonnet-4-6` - Best combination of speed and intelligence
-- `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-- `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-- `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-- `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-- `claude-sonnet-4-5` - High-performance model for agents and coding
-- `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-- `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-
-One of the following:
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-str
-
-output\_tokens: int
-
-The number of output tokens which were used.
-
-type: Literal["message"]
-
-Usage for a sampling iteration
-
-
-
-class BetaCompactionIterationUsage: …
-
-Token usage for a compaction iteration.
-
-
-
-cache\_creation: Optional[BetaCacheCreation]
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: int
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: int
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: int
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: int
-
-The number of input tokens read from the cache.
-
-input\_tokens: int
-
-The number of input tokens which were used.
-
-output\_tokens: int
-
-The number of output tokens which were used.
-
-type: Literal["compaction"]
-
-Usage for a compaction iteration
-
-
-
-class BetaAdvisorMessageIterationUsage: …
-
-Token usage for an advisor sub-inference iteration.
-
-
-
-cache\_creation: Optional[BetaCacheCreation]
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: int
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: int
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: int
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: int
-
-The number of input tokens read from the cache.
-
-input\_tokens: int
-
-The number of input tokens which were used.
-
-
-
-model: [Model](api/messages.md)
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-
-
-Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-- `claude-sonnet-5` - High-performance model for coding and agents
-- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-- `claude-mythos-5` - Most capable model for cybersecurity and biology research
-- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-- `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-- `claude-sonnet-4-6` - Best combination of speed and intelligence
-- `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-- `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-- `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-- `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-- `claude-sonnet-4-5` - High-performance model for agents and coding
-- `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-- `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-
-One of the following:
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-str
-
-output\_tokens: int
-
-The number of output tokens which were used.
-
-type: Literal["advisor\_message"]
-
-Usage for an advisor sub-inference iteration
-
-
-
-class BetaFallbackMessageIterationUsage: …
-
-Token usage for the fallback-model attempt of a server-side fallback request.
-
-Produced in place of a `message` entry for whichever hop served the
-response. A declined hop produces the existing `message` entry. Whether
-a fallback model served the response is signalled by the presence of this
-entry in `usage.iterations`.
-
-
-
-cache\_creation: Optional[BetaCacheCreation]
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: int
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: int
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: int
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: int
-
-The number of input tokens read from the cache.
-
-input\_tokens: int
-
-The number of input tokens which were used.
-
-
-
-model: [Model](api/messages.md)
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-
-
-Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-- `claude-sonnet-5` - High-performance model for coding and agents
-- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-- `claude-mythos-5` - Most capable model for cybersecurity and biology research
-- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-- `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-- `claude-sonnet-4-6` - Best combination of speed and intelligence
-- `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-- `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-- `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-- `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-- `claude-sonnet-4-5` - High-performance model for agents and coding
-- `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-- `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-
-One of the following:
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-str
-
-output\_tokens: int
-
-The number of output tokens which were used.
-
-type: Literal["fallback\_message"]
-
-Usage for the fallback-model attempt that served the response
-
-output\_tokens: int
-
-The number of output tokens which were used.
-
-
-
-output\_tokens\_details: Optional[BetaOutputTokensDetails]
-
-Breakdown of output tokens by category.
-
-`output_tokens` remains the inclusive, authoritative total used for billing.
-This object provides a read-only decomposition for observability — for example,
-how many of the billed output tokens were spent on internal reasoning that may
-have been summarized before being returned to you.
-
-
-
-thinking\_tokens: int
-
-Number of output tokens the model generated as internal reasoning, including
-the thinking-block delimiter tokens.
-
-Reflects the raw reasoning the model produced, not the (possibly shorter)
-summarized thinking text returned in the response body. Computed by
-re-tokenizing the raw reasoning text, so it may differ from the model's exact
-generation count by a small number of tokens. Always ≤ `output_tokens`;
-`output_tokens - thinking_tokens` approximates the non-reasoning output.
-
-minimum0
-
-
-
-server\_tool\_use: Optional[BetaServerToolUsage]
-
-The number of server tool requests.
-
-web\_fetch\_requests: int
-
-The number of web fetch tool requests.
-
-web\_search\_requests: int
-
-The number of web search tool requests.
-
-
-
-service\_tier: Optional[Literal["standard", "priority", "batch"]]
-
-If the request used the priority, standard, or batch tier.
-
-One of the following:
-
-"standard"
-
-"priority"
-
-"batch"
-
-
-
-speed: Optional[Literal["standard", "fast"]]
-
-The inference speed mode used for this request.
-
-One of the following:
-
-"standard"
-
-"fast"
-
-type: Literal["succeeded"]
-
-
-
-class BetaMessageBatchErroredResult: …
-
-
-
-error: [BetaErrorResponse](api/beta.md)
-
-
-
-error: [BetaError](api/beta.md)
-
-One of the following:
-
-
-
-class BetaInvalidRequestError: …
-
-message: str
-
-type: Literal["invalid\_request\_error"]
-
-
-
-class BetaAuthenticationError: …
-
-message: str
-
-type: Literal["authentication\_error"]
-
-
-
-class BetaBillingError: …
-
-message: str
-
-type: Literal["billing\_error"]
-
-
-
-class BetaPermissionError: …
-
-message: str
-
-type: Literal["permission\_error"]
-
-
-
-class BetaNotFoundError: …
-
-message: str
-
-type: Literal["not\_found\_error"]
-
-
-
-class BetaRateLimitError: …
-
-message: str
-
-type: Literal["rate\_limit\_error"]
-
-
-
-class BetaGatewayTimeoutError: …
-
-message: str
-
-type: Literal["timeout\_error"]
-
-
-
-class BetaAPIError: …
-
-message: str
-
-type: Literal["api\_error"]
-
-
-
-class BetaOverloadedError: …
-
-message: str
-
-type: Literal["overloaded\_error"]
-
-request\_id: Optional[str]
-
-type: Literal["error"]
-
-type: Literal["errored"]
-
-
-
-class BetaMessageBatchCanceledResult: …
-
-type: Literal["canceled"]
-
-
-
-class BetaMessageBatchExpiredResult: …
-
-type: Literal["expired"]
-
-
-
-class BetaMessageBatchRequestCounts: …
-
-
-
-canceled: int
-
-Number of requests in the Message Batch that have been canceled.
-
-This is zero until processing of the entire Message Batch has ended.
-
-
-
-errored: int
-
-Number of requests in the Message Batch that encountered an error.
-
-This is zero until processing of the entire Message Batch has ended.
-
-
-
-expired: int
-
-Number of requests in the Message Batch that have expired.
-
-This is zero until processing of the entire Message Batch has ended.
-
-processing: int
-
-Number of requests in the Message Batch that are processing.
-
-
-
-succeeded: int
-
-Number of requests in the Message Batch that have completed successfully.
-
-This is zero until processing of the entire Message Batch has ended.
-
-
-
-[BetaMessageBatchResult](api/beta/messages/batches.md)
-
-Processing result for this request.
-
-Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
-
-One of the following:
-
-
-
-class BetaMessageBatchSucceededResult: …
-
-
-
-message: [BetaMessage](api/beta/messages.md)
-
-
-
-id: str
-
-Unique object identifier.
-
-The format and length of IDs may change over time.
-
-
-
-container: Optional[BetaContainer]
-
-Information about the container used in the request (for the code execution tool)
-
-id: str
-
-Identifier for the container used in this request
-
-expires\_at: datetime
-
-The time at which the container will expire.
-
-
-
-skills: Optional[List[[BetaSkill](api/beta/messages.md)]]
-
-Skills loaded in the container
-
-skill\_id: str
-
-Skill ID
-
-
-
-type: Literal["anthropic", "custom"]
-
-Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
-
-One of the following:
-
-"anthropic"
-
-"custom"
-
-version: str
-
-Skill version or 'latest' for most recent version
-
-
-
-content: List[[BetaContentBlock](api/beta/messages.md)]
-
-Content generated by the model.
-
-This is an array of content blocks, each of which has a `type` that determines its shape.
-
-Example:
-
-```shiki
-[{"type": "text", "text": "Hi, I'm Claude."}]
+#### Response (200)
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
 ```
 
-
+## List Message Batches
 
-If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
+`beta.messages.batches.list(**kwargs)  -> SyncPage[BetaMessageBatch]`
 
-For example, if the input `messages` were:
+**GET** `/v1/messages/batches`
 
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("}
-]
+List all Message Batches within a Workspace. Most recently created batches are returned first.
+
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+
+### Parameters
+
+- `after_id: Optional[str]`
+
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+
+- `before_id: Optional[str]`
+
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+
+- `limit: Optional[int]`
+
+  Number of items to return per page.
+
+  Defaults to `20`. Ranges from `1` to `1000`.
+
+  default: 20, maximum: 1000, minimum: 1
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaMessageBatch: …`
+
+  - `id: str`
+
+    Unique object identifier.
+
+    The format and length of IDs may change over time.
+
+  - `archived_at: Optional[datetime]`
+
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+
+    format: date-time
+
+  - `cancel_initiated_at: Optional[datetime]`
+
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+
+    format: date-time
+
+  - `created_at: datetime`
+
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+    format: date-time
+
+  - `ended_at: Optional[datetime]`
+
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+
+    format: date-time
+
+  - `expires_at: datetime`
+
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+    format: date-time
+
+  - `processing_status: Literal["in_progress", "canceling", "ended"]`
+
+    Processing status of the Message Batch.
+
+    - `"in_progress"`
+
+    - `"canceling"`
+
+    - `"ended"`
+
+  - `request_counts: BetaMessageBatchRequestCounts`
+
+    Tallies requests within the Message Batch, categorized by their status.
+
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+
+    - `canceled: int`
+
+      Number of requests in the Message Batch that have been canceled.
+
+      This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
+
+    - `errored: int`
+
+      Number of requests in the Message Batch that encountered an error.
+
+      This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
+
+    - `expired: int`
+
+      Number of requests in the Message Batch that have expired.
+
+      This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
+
+    - `processing: int`
+
+      Number of requests in the Message Batch that are processing.
+
+      default: 0
+
+    - `succeeded: int`
+
+      Number of requests in the Message Batch that have completed successfully.
+
+      This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
+
+  - `results_url: Optional[str]`
+
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
+
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+
+  - `type: Literal["message_batch"]`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+page = client.beta.messages.batches.list()
+page = page.data[0]
+print(page.id)
 ```
 
-
+#### Response (200)
 
-Then the response `content` might be:
-
-```shiki
-[{"type": "text", "text": "B)"}]
+```json
+{
+  "data": [
+    {
+      "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+      "archived_at": "2024-08-20T18:37:24.100435Z",
+      "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+      "created_at": "2024-08-20T18:37:24.100435Z",
+      "ended_at": "2024-08-20T18:37:24.100435Z",
+      "expires_at": "2024-08-20T18:37:24.100435Z",
+      "processing_status": "in_progress",
+      "request_counts": {
+        "canceled": 10,
+        "errored": 30,
+        "expired": 10,
+        "processing": 100,
+        "succeeded": 50
+      },
+      "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+      "type": "message_batch"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
 ```
 
-
+## Cancel a Message Batch
 
-One of the following:
+`beta.messages.batches.cancel(message_batch_id, **kwargs)  -> BetaMessageBatch`
 
-
+**POST** `/v1/messages/batches/{message_batch_id}/cancel`
 
-class BetaTextBlock: …
+Batches may be canceled any time before processing ends. Once cancellation is initiated, the batch enters a `canceling` state, at which time the system may complete any in-progress, non-interruptible requests before finalizing cancellation.
 
-
+The number of canceled requests is specified in `request_counts`. To determine which requests were canceled, check the individual results within the batch. Note that cancellation may not result in any canceled requests if they were non-interruptible.
 
-citations: Optional[List[[BetaTextCitation](api/beta/messages.md)]]
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-Citations supporting the text block.
+### Parameters
 
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+- `message_batch_id: str`
 
-One of the following:
+  ID of the Message Batch.
 
-
+- `betas: Optional[List[AnthropicBetaParam]]`
 
-class BetaCitationCharLocation: …
+  Optional header to specify the beta version(s) you want to use.
 
-cited\_text: str
+  - `str`
 
-document\_index: int
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
 
-document\_title: Optional[str]
+    - `"message-batches-2024-09-24"`
 
-end\_char\_index: int
+    - `"prompt-caching-2024-07-31"`
 
-file\_id: Optional[str]
+    - `"computer-use-2024-10-22"`
 
-start\_char\_index: int
+    - `"computer-use-2025-01-24"`
 
-type: Literal["char\_location"]
+    - `"pdfs-2024-09-25"`
 
-
+    - `"token-counting-2024-11-01"`
 
-class BetaCitationPageLocation: …
+    - `"token-efficient-tools-2025-02-19"`
 
-cited\_text: str
+    - `"output-128k-2025-02-19"`
 
-document\_index: int
+    - `"files-api-2025-04-14"`
 
-document\_title: Optional[str]
+    - `"mcp-client-2025-04-04"`
 
-end\_page\_number: int
+    - `"mcp-client-2025-11-20"`
 
-file\_id: Optional[str]
+    - `"dev-full-thinking-2025-05-14"`
 
-start\_page\_number: int
+    - `"interleaved-thinking-2025-05-14"`
 
-type: Literal["page\_location"]
+    - `"code-execution-2025-05-22"`
 
-
+    - `"extended-cache-ttl-2025-04-11"`
 
-class BetaCitationContentBlockLocation: …
+    - `"context-1m-2025-08-07"`
 
-
+    - `"context-management-2025-06-27"`
 
-cited\_text: str
+    - `"model-context-window-exceeded-2025-08-26"`
 
-The full text of the cited block range, concatenated.
+    - `"skills-2025-10-02"`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+    - `"fast-mode-2026-02-01"`
 
-document\_index: int
+    - `"output-300k-2026-03-24"`
 
-document\_title: Optional[str]
+    - `"user-profiles-2026-03-24"`
 
-
+    - `"user-profiles-2026-08-18"`
 
-end\_block\_index: int
+    - `"advisor-tool-2026-03-01"`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+    - `"managed-agents-2026-04-01"`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+    - `"cache-diagnosis-2026-04-07"`
 
-file\_id: Optional[str]
+    - `"dreaming-2026-04-21"`
 
-start\_block\_index: int
+    - `"thinking-token-count-2026-05-13"`
 
-0-based index of the first cited block in the source's `content` array.
+    - `"server-side-fallback-2026-06-01"`
 
-type: Literal["content\_block\_location"]
+    - `"server-side-fallback-2026-07-01"`
 
-
+    - `"fallback-credit-2026-06-01"`
 
-class BetaCitationsWebSearchResultLocation: …
+    - `"fallback-credit-2026-07-01"`
 
-cited\_text: str
+    - `"agent-memory-2026-07-22"`
 
-encrypted\_index: str
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-title: Optional[str]
+    - `"compact-2026-01-12"`
 
-type: Literal["web\_search\_result\_location"]
+    - `"computer-use-2025-11-24"`
 
-url: str
+    - `"mcp-tunnels-2026-06-22"`
 
-
+    - `"structured-outputs-2025-11-13"`
 
-class BetaCitationSearchResultLocation: …
+    - `"task-budgets-2026-03-13"`
 
-
+    - `"thinking-display-updates-2026-08-18"`
 
-cited\_text: str
+    - `"ce-user-management-2026-07-13"`
 
-The full text of the cited block range, concatenated.
+    - `"mid-conversation-output-config-2026-07-01"`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+    - `"thinking-binding-controls-2026-08-01"`
 
-
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-end\_block\_index: int
+### Returns
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+- `class BetaMessageBatch: …`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+  - `id: str`
 
-
+    Unique object identifier.
 
-search\_result\_index: int
+    The format and length of IDs may change over time.
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+  - `archived_at: Optional[datetime]`
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-minimum0
+    format: date-time
 
-source: str
+  - `cancel_initiated_at: Optional[datetime]`
 
-start\_block\_index: int
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-0-based index of the first cited block in the source's `content` array.
+    format: date-time
 
-title: Optional[str]
+  - `created_at: datetime`
 
-type: Literal["search\_result\_location"]
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-text: str
+    format: date-time
 
-type: Literal["text"]
+  - `ended_at: Optional[datetime]`
 
-
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
-class BetaThinkingBlock: …
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
-signature: str
+    format: date-time
 
-thinking: str
+  - `expires_at: datetime`
 
-type: Literal["thinking"]
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-
+    format: date-time
 
-class BetaRedactedThinkingBlock: …
+  - `processing_status: Literal["in_progress", "canceling", "ended"]`
 
-data: str
+    Processing status of the Message Batch.
 
-type: Literal["redacted\_thinking"]
+    - `"in_progress"`
 
-
+    - `"canceling"`
 
-class BetaToolUseBlock: …
+    - `"ended"`
 
-id: str
+  - `request_counts: BetaMessageBatchRequestCounts`
 
-input: Dict[str, object]
+    Tallies requests within the Message Batch, categorized by their status.
 
-name: str
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-type: Literal["tool\_use"]
+    - `canceled: int`
 
-
+      Number of requests in the Message Batch that have been canceled.
 
-caller: Optional[Caller]
+      This is zero until processing of the entire Message Batch has ended.
 
-Tool invocation directly from the model.
+      default: 0
 
-One of the following:
+    - `errored: int`
 
-
+      Number of requests in the Message Batch that encountered an error.
 
-class BetaDirectCaller: …
+      This is zero until processing of the entire Message Batch has ended.
 
-Tool invocation directly from the model.
+      default: 0
 
-type: Literal["direct"]
+    - `expired: int`
 
-
+      Number of requests in the Message Batch that have expired.
 
-class BetaServerToolCaller: …
+      This is zero until processing of the entire Message Batch has ended.
 
-Tool invocation generated by a server-side tool.
+      default: 0
 
-tool\_id: str
+    - `processing: int`
 
-type: Literal["code\_execution\_20250825"]
+      Number of requests in the Message Batch that are processing.
 
-
+      default: 0
 
-class BetaServerToolCaller20260120: …
+    - `succeeded: int`
 
-tool\_id: str
+      Number of requests in the Message Batch that have completed successfully.
 
-type: Literal["code\_execution\_20260120"]
+      This is zero until processing of the entire Message Batch has ended.
 
-
+      default: 0
 
-class BetaServerToolUseBlock: …
+  - `results_url: Optional[str]`
 
-id: str
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
-input: Dict[str, object]
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-
+  - `type: Literal["message_batch"]`
 
-name: Literal["advisor", "web\_search", "web\_fetch", 5 more]
+    Object type.
 
-One of the following:
+    For Message Batches, this is always `"message_batch"`.
 
-"advisor"
+    default: message_batch
 
-"web\_search"
+### Example
 
-"web\_fetch"
+```python
+import os
+from anthropic import Anthropic
 
-"code\_execution"
-
-"bash\_code\_execution"
-
-"text\_editor\_code\_execution"
-
-"tool\_search\_tool\_regex"
-
-"tool\_search\_tool\_bm25"
-
-type: Literal["server\_tool\_use"]
-
-
-
-caller: Optional[Caller]
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller: …
-
-Tool invocation directly from the model.
-
-type: Literal["direct"]
-
-
-
-class BetaServerToolCaller: …
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: str
-
-type: Literal["code\_execution\_20250825"]
-
-
-
-class BetaServerToolCaller20260120: …
-
-tool\_id: str
-
-type: Literal["code\_execution\_20260120"]
-
-
-
-class BetaWebSearchToolResultBlock: …
-
-
-
-content: [BetaWebSearchToolResultBlockContent](api/beta/messages.md)
-
-One of the following:
-
-
-
-class BetaWebSearchToolResultError: …
-
-
-
-error\_code: [BetaWebSearchToolResultErrorCode](api/beta/messages.md)
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"max\_uses\_exceeded"
-
-"too\_many\_requests"
-
-"query\_too\_long"
-
-"request\_too\_large"
-
-type: Literal["web\_search\_tool\_result\_error"]
-
-
-
-List[[BetaWebSearchResultBlock](api/beta/messages.md)]
-
-encrypted\_content: str
-
-page\_age: Optional[str]
-
-title: str
-
-type: Literal["web\_search\_result"]
-
-url: str
-
-tool\_use\_id: str
-
-type: Literal["web\_search\_tool\_result"]
-
-
-
-caller: Optional[Caller]
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller: …
-
-Tool invocation directly from the model.
-
-type: Literal["direct"]
-
-
-
-class BetaServerToolCaller: …
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: str
-
-type: Literal["code\_execution\_20250825"]
-
-
-
-class BetaServerToolCaller20260120: …
-
-tool\_id: str
-
-type: Literal["code\_execution\_20260120"]
-
-
-
-class BetaWebFetchToolResultBlock: …
-
-
-
-content: Content
-
-One of the following:
-
-
-
-class BetaWebFetchToolResultErrorBlock: …
-
-
-
-error\_code: [BetaWebFetchToolResultErrorCode](api/beta/messages.md)
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"url\_too\_long"
-
-"url\_not\_allowed"
-
-"url\_not\_in\_prior\_context"
-
-"url\_not\_accessible"
-
-"unsupported\_content\_type"
-
-"too\_many\_requests"
-
-"max\_uses\_exceeded"
-
-"unavailable"
-
-type: Literal["web\_fetch\_tool\_result\_error"]
-
-
-
-class BetaWebFetchBlock: …
-
-
-
-content: [BetaDocumentBlock](api/beta/messages.md)
-
-
-
-citations: Optional[BetaCitationConfig]
-
-Citation configuration for the document
-
-enabled: bool
-
-
-
-source: Source
-
-One of the following:
-
-
-
-class BetaBase64PDFSource: …
-
-data: str
-
-media\_type: Literal["application/pdf"]
-
-type: Literal["base64"]
-
-
-
-class BetaPlainTextSource: …
-
-data: str
-
-media\_type: Literal["text/plain"]
-
-type: Literal["text"]
-
-title: Optional[str]
-
-The title of the document
-
-type: Literal["document"]
-
-retrieved\_at: Optional[str]
-
-ISO 8601 timestamp when the content was retrieved
-
-type: Literal["web\_fetch\_result"]
-
-url: str
-
-Fetched content URL
-
-tool\_use\_id: str
-
-type: Literal["web\_fetch\_tool\_result"]
-
-
-
-caller: Optional[Caller]
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller: …
-
-Tool invocation directly from the model.
-
-type: Literal["direct"]
-
-
-
-class BetaServerToolCaller: …
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: str
-
-type: Literal["code\_execution\_20250825"]
-
-
-
-class BetaServerToolCaller20260120: …
-
-tool\_id: str
-
-type: Literal["code\_execution\_20260120"]
-
-
-
-class BetaAdvisorToolResultBlock: …
-
-
-
-content: Content
-
-One of the following:
-
-
-
-class BetaAdvisorToolResultError: …
-
-
-
-error\_code: Literal["max\_uses\_exceeded", "prompt\_too\_long", "too\_many\_requests", 4 more]
-
-One of the following:
-
-"max\_uses\_exceeded"
-
-"prompt\_too\_long"
-
-"too\_many\_requests"
-
-"overloaded"
-
-"unavailable"
-
-"execution\_time\_exceeded"
-
-"model\_not\_found"
-
-type: Literal["advisor\_tool\_result\_error"]
-
-
-
-class BetaAdvisorResultBlock: …
-
-stop\_reason: Optional[str]
-
-The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
-
-text: str
-
-type: Literal["advisor\_result"]
-
-
-
-class BetaAdvisorRedactedResultBlock: …
-
-encrypted\_content: str
-
-Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
-
-stop\_reason: Optional[str]
-
-The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
-
-type: Literal["advisor\_redacted\_result"]
-
-tool\_use\_id: str
-
-type: Literal["advisor\_tool\_result"]
-
-
-
-class BetaCodeExecutionToolResultBlock: …
-
-
-
-content: [BetaCodeExecutionToolResultBlockContent](api/beta/messages.md)
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-One of the following:
-
-
-
-class BetaCodeExecutionToolResultError: …
-
-
-
-error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta/messages.md)
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: Literal["code\_execution\_tool\_result\_error"]
-
-
-
-class BetaCodeExecutionResultBlock: …
-
-
-
-content: List[[BetaCodeExecutionOutputBlock](api/beta/messages.md)]
-
-file\_id: str
-
-type: Literal["code\_execution\_output"]
-
-return\_code: int
-
-stderr: str
-
-stdout: str
-
-type: Literal["code\_execution\_result"]
-
-
-
-class BetaEncryptedCodeExecutionResultBlock: …
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-
-
-content: List[[BetaCodeExecutionOutputBlock](api/beta/messages.md)]
-
-file\_id: str
-
-type: Literal["code\_execution\_output"]
-
-encrypted\_stdout: str
-
-return\_code: int
-
-stderr: str
-
-type: Literal["encrypted\_code\_execution\_result"]
-
-tool\_use\_id: str
-
-type: Literal["code\_execution\_tool\_result"]
-
-
-
-class BetaBashCodeExecutionToolResultBlock: …
-
-
-
-content: Content
-
-One of the following:
-
-
-
-class BetaBashCodeExecutionToolResultError: …
-
-
-
-error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-"output\_file\_too\_large"
-
-type: Literal["bash\_code\_execution\_tool\_result\_error"]
-
-
-
-class BetaBashCodeExecutionResultBlock: …
-
-
-
-content: List[[BetaBashCodeExecutionOutputBlock](api/beta/messages.md)]
-
-file\_id: str
-
-type: Literal["bash\_code\_execution\_output"]
-
-return\_code: int
-
-stderr: str
-
-stdout: str
-
-type: Literal["bash\_code\_execution\_result"]
-
-tool\_use\_id: str
-
-type: Literal["bash\_code\_execution\_tool\_result"]
-
-
-
-class BetaTextEditorCodeExecutionToolResultBlock: …
-
-
-
-content: Content
-
-One of the following:
-
-
-
-class BetaTextEditorCodeExecutionToolResultError: …
-
-
-
-error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-"file\_not\_found"
-
-error\_message: Optional[str]
-
-type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
-
-
-
-class BetaTextEditorCodeExecutionViewResultBlock: …
-
-content: str
-
-
-
-file\_type: Literal["text", "image", "pdf"]
-
-One of the following:
-
-"text"
-
-"image"
-
-"pdf"
-
-num\_lines: Optional[int]
-
-start\_line: Optional[int]
-
-total\_lines: Optional[int]
-
-type: Literal["text\_editor\_code\_execution\_view\_result"]
-
-
-
-class BetaTextEditorCodeExecutionCreateResultBlock: …
-
-is\_file\_update: bool
-
-type: Literal["text\_editor\_code\_execution\_create\_result"]
-
-
-
-class BetaTextEditorCodeExecutionStrReplaceResultBlock: …
-
-lines: Optional[List[str]]
-
-new\_lines: Optional[int]
-
-new\_start: Optional[int]
-
-old\_lines: Optional[int]
-
-old\_start: Optional[int]
-
-type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
-
-tool\_use\_id: str
-
-type: Literal["text\_editor\_code\_execution\_tool\_result"]
-
-
-
-class BetaToolSearchToolResultBlock: …
-
-
-
-content: Content
-
-One of the following:
-
-
-
-class BetaToolSearchToolResultError: …
-
-
-
-error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-error\_message: Optional[str]
-
-type: Literal["tool\_search\_tool\_result\_error"]
-
-
-
-class BetaToolSearchToolSearchResultBlock: …
-
-
-
-tool\_references: List[[BetaToolReferenceBlock](api/beta/messages.md)]
-
-tool\_name: str
-
-type: Literal["tool\_reference"]
-
-type: Literal["tool\_search\_tool\_search\_result"]
-
-tool\_use\_id: str
-
-type: Literal["tool\_search\_tool\_result"]
-
-
-
-class BetaMCPToolUseBlock: …
-
-id: str
-
-input: Dict[str, object]
-
-name: str
-
-The name of the MCP tool
-
-server\_name: str
-
-The name of the MCP server
-
-type: Literal["mcp\_tool\_use"]
-
-
-
-class BetaMCPToolResultBlock: …
-
-
-
-content: Union[str, List[[BetaTextBlock](api/beta/messages.md)]]
-
-One of the following:
-
-str
-
-
-
-List[[BetaTextBlock](api/beta/messages.md)]
-
-
-
-citations: Optional[List[[BetaTextCitation](api/beta/messages.md)]]
-
-Citations supporting the text block.
-
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-One of the following:
-
-
-
-class BetaCitationCharLocation: …
-
-cited\_text: str
-
-document\_index: int
-
-document\_title: Optional[str]
-
-end\_char\_index: int
-
-file\_id: Optional[str]
-
-start\_char\_index: int
-
-type: Literal["char\_location"]
-
-
-
-class BetaCitationPageLocation: …
-
-cited\_text: str
-
-document\_index: int
-
-document\_title: Optional[str]
-
-end\_page\_number: int
-
-file\_id: Optional[str]
-
-start\_page\_number: int
-
-type: Literal["page\_location"]
-
-
-
-class BetaCitationContentBlockLocation: …
-
-
-
-cited\_text: str
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-document\_index: int
-
-document\_title: Optional[str]
-
-
-
-end\_block\_index: int
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-file\_id: Optional[str]
-
-start\_block\_index: int
-
-0-based index of the first cited block in the source's `content` array.
-
-type: Literal["content\_block\_location"]
-
-
-
-class BetaCitationsWebSearchResultLocation: …
-
-cited\_text: str
-
-encrypted\_index: str
-
-title: Optional[str]
-
-type: Literal["web\_search\_result\_location"]
-
-url: str
-
-
-
-class BetaCitationSearchResultLocation: …
-
-
-
-cited\_text: str
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-end\_block\_index: int
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-search\_result\_index: int
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-source: str
-
-start\_block\_index: int
-
-0-based index of the first cited block in the source's `content` array.
-
-title: Optional[str]
-
-type: Literal["search\_result\_location"]
-
-text: str
-
-type: Literal["text"]
-
-is\_error: bool
-
-tool\_use\_id: str
-
-type: Literal["mcp\_tool\_result"]
-
-
-
-class BetaContainerUploadBlock: …
-
-Response model for a file uploaded to the container.
-
-file\_id: str
-
-type: Literal["container\_upload"]
-
-
-
-class BetaCompactionBlock: …
-
-A compaction block returned when autocompact is triggered.
-
-When content is None, it indicates the compaction failed to produce a valid
-summary (e.g., malformed output from the model). Clients may round-trip
-compaction blocks with null content; the server treats them as no-ops.
-
-content: Optional[str]
-
-Summary of compacted content, or null if compaction failed
-
-encrypted\_content: Optional[str]
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
-type: Literal["compaction"]
-
-
-
-class BetaFallbackBlock: …
-
-Marks the point in `content` where one model's output gives way to the next.
-
-One block appears per hop where a preceding model actually ran this turn and
-declined. A turn where no preceding model ran and declined has no such
-boundary and carries no block — the signal for whether a fallback model
-served the response is the presence of a `fallback_message` entry in
-`usage.iterations`, not this block.
-
-The block is treated like a server-tool content block for streaming: it
-arrives via the standard `content_block_start` / `content_block_stop`
-pair and carries no deltas.
-
-
-
-from\_: [BetaFallbackInfo](api/beta/messages.md)
-
-The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
-
-
-
-model: [Model](api/messages.md)
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-
-
-Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-- `claude-sonnet-5` - High-performance model for coding and agents
-- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-- `claude-mythos-5` - Most capable model for cybersecurity and biology research
-- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-- `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-- `claude-sonnet-4-6` - Best combination of speed and intelligence
-- `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-- `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-- `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-- `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-- `claude-sonnet-4-5` - High-performance model for agents and coding
-- `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-- `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-
-One of the following:
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-str
-
-
-
-to: [BetaFallbackInfo](api/beta/messages.md)
-
-The fallback model producing the content that follows this block. Its `model` is always the canonical id.
-
-
-
-model: [Model](api/messages.md)
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-
-
-Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-- `claude-sonnet-5` - High-performance model for coding and agents
-- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-- `claude-mythos-5` - Most capable model for cybersecurity and biology research
-- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-- `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-- `claude-sonnet-4-6` - Best combination of speed and intelligence
-- `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-- `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-- `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-- `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-- `claude-sonnet-4-5` - High-performance model for agents and coding
-- `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-- `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-
-One of the following:
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-str
-
-
-
-trigger: [BetaFallbackRefusalTrigger](api/beta/messages.md)
-
-What caused the `from` model to hand over at this hop.
-
-
-
-category: Optional[Literal["cyber", "bio", "frontier\_llm", "reasoning\_extraction"]]
-
-The policy category that triggered a refusal.
-
-One of the following:
-
-"cyber"
-
-"bio"
-
-"frontier\_llm"
-
-"reasoning\_extraction"
-
-type: Literal["refusal"]
-
-type: Literal["fallback"]
-
-
-
-context\_management: Optional[BetaContextManagementResponse]
-
-Context management response.
-
-Information about context management strategies applied during the request.
-
-
-
-applied\_edits: List[AppliedEdit]
-
-List of context management edits that were applied.
-
-One of the following:
-
-
-
-class BetaClearToolUses20250919EditResponse: …
-
-cleared\_input\_tokens: int
-
-Number of input tokens cleared by this edit.
-
-cleared\_tool\_uses: int
-
-Number of tool uses that were cleared.
-
-type: Literal["clear\_tool\_uses\_20250919"]
-
-The type of context management edit applied.
-
-
-
-class BetaClearThinking20251015EditResponse: …
-
-cleared\_input\_tokens: int
-
-Number of input tokens cleared by this edit.
-
-cleared\_thinking\_turns: int
-
-Number of thinking turns that were cleared.
-
-type: Literal["clear\_thinking\_20251015"]
-
-The type of context management edit applied.
-
-
-
-diagnostics: Optional[BetaDiagnostics]
-
-Response envelope for request-level diagnostics. Present (possibly
-null) whenever the caller supplied `diagnostics` on the request.
-
-
-
-cache\_miss\_reason: Optional[CacheMissReason]
-
-Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
-
-One of the following:
-
-
-
-class BetaCacheMissModelChanged: …
-
-cache\_missed\_input\_tokens: int
-
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-type: Literal["model\_changed"]
-
-
-
-class BetaCacheMissSystemChanged: …
-
-cache\_missed\_input\_tokens: int
-
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-type: Literal["system\_changed"]
-
-
-
-class BetaCacheMissToolsChanged: …
-
-cache\_missed\_input\_tokens: int
-
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-type: Literal["tools\_changed"]
-
-
-
-class BetaCacheMissMessagesChanged: …
-
-cache\_missed\_input\_tokens: int
-
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-type: Literal["messages\_changed"]
-
-
-
-class BetaCacheMissPreviousMessageNotFound: …
-
-type: Literal["previous\_message\_not\_found"]
-
-
-
-class BetaCacheMissUnavailable: …
-
-type: Literal["unavailable"]
-
-
-
-model: [Model](api/messages.md)
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-
-
-Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-- `claude-sonnet-5` - High-performance model for coding and agents
-- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-- `claude-mythos-5` - Most capable model for cybersecurity and biology research
-- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-- `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-- `claude-sonnet-4-6` - Best combination of speed and intelligence
-- `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-- `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-- `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-- `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-- `claude-sonnet-4-5` - High-performance model for agents and coding
-- `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-- `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-
-One of the following:
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-str
-
-
-
-role: Literal["assistant"]
-
-Conversational role of the generated message.
-
-This will always be `"assistant"`.
-
-
-
-stop\_details: Optional[BetaRefusalStopDetails]
-
-Structured information about a refusal.
-
-
-
-category: Optional[Literal["cyber", "bio", "frontier\_llm", "reasoning\_extraction"]]
-
-The policy category that triggered a refusal.
-
-One of the following:
-
-"cyber"
-
-"bio"
-
-"frontier\_llm"
-
-"reasoning\_extraction"
-
-
-
-explanation: Optional[str]
-
-Human-readable explanation of the refusal.
-
-This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-
-
-fallback\_credit\_token: Optional[str]
-
-Opaque code that refunds the cache-miss cost when retrying this refused
-request on the fallback model. Pass it as `fallback_credit_token` on the
-retry request. Expires 5 minutes after the refusal.
-
-The retry is sent either with the same request body (`system`, `messages`,
-`tools`, and other render-shaping fields), or with the same body plus one
-appended `assistant` message whose content is the partial text (with any
-trailing whitespace stripped from the final text block) and paired
-server-tool blocks from this refusal — which also authorizes that
-appended turn as an assistant-prefill continuation on models that otherwise
-disallow prefill. A token minted mid-server-tool-loop whose partial content
-was continuable may only be redeemed the second way — if a same-body retry
-is rejected with a 400 saying the token must be redeemed by continuing the
-partial response, retry the second way instead. Either way: same workspace,
-same platform; a mismatch is a 400. Resending a token for an already-warm
-prefix is permitted but yields no additional credit.
-
-`null` when the refused model isn't eligible for a fallback credit.
-
-
-
-fallback\_has\_prefill\_claim: Optional[bool]
-
-Whether the accompanying `fallback_credit_token` may be redeemed with the
-appended-assistant retry form. Only set when `fallback_credit_token` is
-present.
-
-`true`: retry by resending the same request body plus one appended
-`assistant` message whose content is this response's `content` with any
-trailing whitespace stripped from the final text block and unpaired
-`tool_use` blocks omitted (the same appended-turn shape described on
-`fallback_credit_token`), with the token attached. `false`: retry by
-resending the original request body unchanged, with the token attached —
-the appended-assistant form is not available for this refusal (no
-continuable partial content, or the request uses `output_format` or a
-`tool_choice` that forces tool use). One exception: when the request used
-`output_format` or a forced `tool_choice` and the refusal arrived after
-server tools (including MCP connector tools) had already executed, the
-token may not be redeemable by either retry form; if the exact-body retry
-is then rejected with a 400 saying the token must be redeemed by
-continuing the partial response, discard the token and retry without it.
-
-Advisory: if an appended-assistant retry is rejected with a 400 despite
-`true`, fall back to resending the original request body with the token.
-
-recommended\_model: Optional[str]
-
-The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
-
-type: Literal["refusal"]
-
-
-
-stop\_reason: Optional[BetaStopReason]
-
-The reason that we stopped.
-
-This may be one the following values:
-
-- `"end_turn"`: the model reached a natural stopping point
-- `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
-- `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
-- `"tool_use"`: the model invoked one or more tools
-- `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
-- `"refusal"`: when streaming classifiers intervene to handle potential policy violations
-
-In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
-
-One of the following:
-
-"end\_turn"
-
-"max\_tokens"
-
-"stop\_sequence"
-
-"tool\_use"
-
-"pause\_turn"
-
-"compaction"
-
-"refusal"
-
-"model\_context\_window\_exceeded"
-
-
-
-stop\_sequence: Optional[str]
-
-Which custom stop sequence was generated, if any.
-
-This value will be a non-null string if one of your custom stop sequences was generated.
-
-
-
-type: Literal["message"]
-
-Object type.
-
-For Messages, this is always `"message"`.
-
-
-
-usage: [BetaUsage](api/beta/messages.md)
-
-Billing and rate-limit usage.
-
-Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
-
-Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
-
-For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
-
-Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
-
-
-
-cache\_creation: Optional[BetaCacheCreation]
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: int
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: int
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: Optional[int]
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: Optional[int]
-
-The number of input tokens read from the cache.
-
-inference\_geo: Optional[str]
-
-The geographic region where inference was performed for this request.
-
-input\_tokens: int
-
-The number of input tokens which were used.
-
-
-
-iterations: Optional[BetaIterationsUsage]
-
-Per-iteration token usage breakdown.
-
-Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
-
-- Determine which iterations exceeded long context thresholds (>=200k tokens)
-- Calculate the true context window size from the last iteration
-- Understand token accumulation across server-side tool use loops
-
-One of the following:
-
-
-
-class BetaMessageIterationUsage: …
-
-Token usage for a sampling iteration.
-
-
-
-cache\_creation: Optional[BetaCacheCreation]
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: int
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: int
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: int
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: int
-
-The number of input tokens read from the cache.
-
-input\_tokens: int
-
-The number of input tokens which were used.
-
-
-
-model: [Model](api/messages.md)
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-
-
-Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-- `claude-sonnet-5` - High-performance model for coding and agents
-- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-- `claude-mythos-5` - Most capable model for cybersecurity and biology research
-- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-- `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-- `claude-sonnet-4-6` - Best combination of speed and intelligence
-- `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-- `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-- `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-- `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-- `claude-sonnet-4-5` - High-performance model for agents and coding
-- `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-- `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-
-One of the following:
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-str
-
-output\_tokens: int
-
-The number of output tokens which were used.
-
-type: Literal["message"]
-
-Usage for a sampling iteration
-
-
-
-class BetaCompactionIterationUsage: …
-
-Token usage for a compaction iteration.
-
-
-
-cache\_creation: Optional[BetaCacheCreation]
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: int
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: int
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: int
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: int
-
-The number of input tokens read from the cache.
-
-input\_tokens: int
-
-The number of input tokens which were used.
-
-output\_tokens: int
-
-The number of output tokens which were used.
-
-type: Literal["compaction"]
-
-Usage for a compaction iteration
-
-
-
-class BetaAdvisorMessageIterationUsage: …
-
-Token usage for an advisor sub-inference iteration.
-
-
-
-cache\_creation: Optional[BetaCacheCreation]
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: int
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: int
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: int
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: int
-
-The number of input tokens read from the cache.
-
-input\_tokens: int
-
-The number of input tokens which were used.
-
-
-
-model: [Model](api/messages.md)
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-
-
-Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-- `claude-sonnet-5` - High-performance model for coding and agents
-- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-- `claude-mythos-5` - Most capable model for cybersecurity and biology research
-- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-- `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-- `claude-sonnet-4-6` - Best combination of speed and intelligence
-- `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-- `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-- `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-- `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-- `claude-sonnet-4-5` - High-performance model for agents and coding
-- `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-- `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-
-One of the following:
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-str
-
-output\_tokens: int
-
-The number of output tokens which were used.
-
-type: Literal["advisor\_message"]
-
-Usage for an advisor sub-inference iteration
-
-
-
-class BetaFallbackMessageIterationUsage: …
-
-Token usage for the fallback-model attempt of a server-side fallback request.
-
-Produced in place of a `message` entry for whichever hop served the
-response. A declined hop produces the existing `message` entry. Whether
-a fallback model served the response is signalled by the presence of this
-entry in `usage.iterations`.
-
-
-
-cache\_creation: Optional[BetaCacheCreation]
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: int
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: int
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: int
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: int
-
-The number of input tokens read from the cache.
-
-input\_tokens: int
-
-The number of input tokens which were used.
-
-
-
-model: [Model](api/messages.md)
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-
-
-Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-- `claude-sonnet-5` - High-performance model for coding and agents
-- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-- `claude-mythos-5` - Most capable model for cybersecurity and biology research
-- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-- `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-- `claude-sonnet-4-6` - Best combination of speed and intelligence
-- `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-- `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-- `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-- `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-- `claude-sonnet-4-5` - High-performance model for agents and coding
-- `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-- `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-
-One of the following:
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-str
-
-output\_tokens: int
-
-The number of output tokens which were used.
-
-type: Literal["fallback\_message"]
-
-Usage for the fallback-model attempt that served the response
-
-output\_tokens: int
-
-The number of output tokens which were used.
-
-
-
-output\_tokens\_details: Optional[BetaOutputTokensDetails]
-
-Breakdown of output tokens by category.
-
-`output_tokens` remains the inclusive, authoritative total used for billing.
-This object provides a read-only decomposition for observability — for example,
-how many of the billed output tokens were spent on internal reasoning that may
-have been summarized before being returned to you.
-
-
-
-thinking\_tokens: int
-
-Number of output tokens the model generated as internal reasoning, including
-the thinking-block delimiter tokens.
-
-Reflects the raw reasoning the model produced, not the (possibly shorter)
-summarized thinking text returned in the response body. Computed by
-re-tokenizing the raw reasoning text, so it may differ from the model's exact
-generation count by a small number of tokens. Always ≤ `output_tokens`;
-`output_tokens - thinking_tokens` approximates the non-reasoning output.
-
-minimum0
-
-
-
-server\_tool\_use: Optional[BetaServerToolUsage]
-
-The number of server tool requests.
-
-web\_fetch\_requests: int
-
-The number of web fetch tool requests.
-
-web\_search\_requests: int
-
-The number of web search tool requests.
-
-
-
-service\_tier: Optional[Literal["standard", "priority", "batch"]]
-
-If the request used the priority, standard, or batch tier.
-
-One of the following:
-
-"standard"
-
-"priority"
-
-"batch"
-
-
-
-speed: Optional[Literal["standard", "fast"]]
-
-The inference speed mode used for this request.
-
-One of the following:
-
-"standard"
-
-"fast"
-
-type: Literal["succeeded"]
-
-
-
-class BetaMessageBatchErroredResult: …
-
-
-
-error: [BetaErrorResponse](api/beta.md)
-
-
-
-error: [BetaError](api/beta.md)
-
-One of the following:
-
-
-
-class BetaInvalidRequestError: …
-
-message: str
-
-type: Literal["invalid\_request\_error"]
-
-
-
-class BetaAuthenticationError: …
-
-message: str
-
-type: Literal["authentication\_error"]
-
-
-
-class BetaBillingError: …
-
-message: str
-
-type: Literal["billing\_error"]
-
-
-
-class BetaPermissionError: …
-
-message: str
-
-type: Literal["permission\_error"]
-
-
-
-class BetaNotFoundError: …
-
-message: str
-
-type: Literal["not\_found\_error"]
-
-
-
-class BetaRateLimitError: …
-
-message: str
-
-type: Literal["rate\_limit\_error"]
-
-
-
-class BetaGatewayTimeoutError: …
-
-message: str
-
-type: Literal["timeout\_error"]
-
-
-
-class BetaAPIError: …
-
-message: str
-
-type: Literal["api\_error"]
-
-
-
-class BetaOverloadedError: …
-
-message: str
-
-type: Literal["overloaded\_error"]
-
-request\_id: Optional[str]
-
-type: Literal["error"]
-
-type: Literal["errored"]
-
-
-
-class BetaMessageBatchCanceledResult: …
-
-type: Literal["canceled"]
-
-
-
-class BetaMessageBatchExpiredResult: …
-
-type: Literal["expired"]
-
-
-
-class BetaMessageBatchSucceededResult: …
-
-
-
-message: [BetaMessage](api/beta/messages.md)
-
-
-
-id: str
-
-Unique object identifier.
-
-The format and length of IDs may change over time.
-
-
-
-container: Optional[BetaContainer]
-
-Information about the container used in the request (for the code execution tool)
-
-id: str
-
-Identifier for the container used in this request
-
-expires\_at: datetime
-
-The time at which the container will expire.
-
-
-
-skills: Optional[List[[BetaSkill](api/beta/messages.md)]]
-
-Skills loaded in the container
-
-skill\_id: str
-
-Skill ID
-
-
-
-type: Literal["anthropic", "custom"]
-
-Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
-
-One of the following:
-
-"anthropic"
-
-"custom"
-
-version: str
-
-Skill version or 'latest' for most recent version
-
-
-
-content: List[[BetaContentBlock](api/beta/messages.md)]
-
-Content generated by the model.
-
-This is an array of content blocks, each of which has a `type` that determines its shape.
-
-Example:
-
-```shiki
-[{"type": "text", "text": "Hi, I'm Claude."}]
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+beta_message_batch = client.beta.messages.batches.cancel(
+    message_batch_id="message_batch_id",
+)
+print(beta_message_batch.id)
 ```
 
-
+#### Response (200)
 
-If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
-
-For example, if the input `messages` were:
-
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("}
-]
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
 ```
 
-
+## Delete a Message Batch
 
-Then the response `content` might be:
+`beta.messages.batches.delete(message_batch_id, **kwargs)  -> BetaDeletedMessageBatch`
 
-```shiki
-[{"type": "text", "text": "B)"}]
+**DELETE** `/v1/messages/batches/{message_batch_id}`
+
+Delete a Message Batch.
+
+Message Batches can only be deleted once they've finished processing. If you'd like to delete an in-progress batch, you must first cancel it.
+
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+
+### Parameters
+
+- `message_batch_id: str`
+
+  ID of the Message Batch.
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaDeletedMessageBatch: …`
+
+  - `id: str`
+
+    ID of the Message Batch.
+
+  - `type: Literal["message_batch_deleted"]`
+
+    Deleted object type.
+
+    For Message Batches, this is always `"message_batch_deleted"`.
+
+    default: message_batch_deleted
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+beta_deleted_message_batch = client.beta.messages.batches.delete(
+    message_batch_id="message_batch_id",
+)
+print(beta_deleted_message_batch.id)
 ```
 
-
+#### Response (200)
 
-One of the following:
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
+```
 
-
+## Retrieve Message Batch results
 
-class BetaTextBlock: …
+`beta.messages.batches.results(message_batch_id, **kwargs)  -> BetaMessageBatchIndividualResponse`
 
-
+**GET** `/v1/messages/batches/{message_batch_id}/results`
 
-citations: Optional[List[[BetaTextCitation](api/beta/messages.md)]]
+Streams the results of a Message Batch as a `.jsonl` file.
 
-Citations supporting the text block.
+Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-One of the following:
+### Parameters
 
-
+- `message_batch_id: str`
 
-class BetaCitationCharLocation: …
+  ID of the Message Batch.
 
-cited\_text: str
+- `betas: Optional[List[AnthropicBetaParam]]`
 
-document\_index: int
+  Optional header to specify the beta version(s) you want to use.
 
-document\_title: Optional[str]
+  - `str`
 
-end\_char\_index: int
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
 
-file\_id: Optional[str]
+    - `"message-batches-2024-09-24"`
 
-start\_char\_index: int
+    - `"prompt-caching-2024-07-31"`
 
-type: Literal["char\_location"]
+    - `"computer-use-2024-10-22"`
 
-
+    - `"computer-use-2025-01-24"`
 
-class BetaCitationPageLocation: …
+    - `"pdfs-2024-09-25"`
 
-cited\_text: str
+    - `"token-counting-2024-11-01"`
 
-document\_index: int
+    - `"token-efficient-tools-2025-02-19"`
 
-document\_title: Optional[str]
+    - `"output-128k-2025-02-19"`
 
-end\_page\_number: int
+    - `"files-api-2025-04-14"`
 
-file\_id: Optional[str]
+    - `"mcp-client-2025-04-04"`
 
-start\_page\_number: int
+    - `"mcp-client-2025-11-20"`
 
-type: Literal["page\_location"]
+    - `"dev-full-thinking-2025-05-14"`
 
-
+    - `"interleaved-thinking-2025-05-14"`
 
-class BetaCitationContentBlockLocation: …
+    - `"code-execution-2025-05-22"`
 
-
+    - `"extended-cache-ttl-2025-04-11"`
 
-cited\_text: str
+    - `"context-1m-2025-08-07"`
 
-The full text of the cited block range, concatenated.
+    - `"context-management-2025-06-27"`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+    - `"model-context-window-exceeded-2025-08-26"`
 
-document\_index: int
+    - `"skills-2025-10-02"`
 
-document\_title: Optional[str]
+    - `"fast-mode-2026-02-01"`
 
-
+    - `"output-300k-2026-03-24"`
 
-end\_block\_index: int
+    - `"user-profiles-2026-03-24"`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+    - `"user-profiles-2026-08-18"`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+    - `"advisor-tool-2026-03-01"`
 
-file\_id: Optional[str]
+    - `"managed-agents-2026-04-01"`
 
-start\_block\_index: int
+    - `"cache-diagnosis-2026-04-07"`
 
-0-based index of the first cited block in the source's `content` array.
+    - `"dreaming-2026-04-21"`
 
-type: Literal["content\_block\_location"]
+    - `"thinking-token-count-2026-05-13"`
 
-
+    - `"server-side-fallback-2026-06-01"`
 
-class BetaCitationsWebSearchResultLocation: …
+    - `"server-side-fallback-2026-07-01"`
 
-cited\_text: str
+    - `"fallback-credit-2026-06-01"`
 
-encrypted\_index: str
+    - `"fallback-credit-2026-07-01"`
 
-title: Optional[str]
+    - `"agent-memory-2026-07-22"`
 
-type: Literal["web\_search\_result\_location"]
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-url: str
+    - `"compact-2026-01-12"`
 
-
+    - `"computer-use-2025-11-24"`
 
-class BetaCitationSearchResultLocation: …
+    - `"mcp-tunnels-2026-06-22"`
 
-
+    - `"structured-outputs-2025-11-13"`
 
-cited\_text: str
+    - `"task-budgets-2026-03-13"`
 
-The full text of the cited block range, concatenated.
+    - `"thinking-display-updates-2026-08-18"`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+    - `"ce-user-management-2026-07-13"`
 
-
+    - `"mid-conversation-output-config-2026-07-01"`
 
-end\_block\_index: int
+    - `"thinking-binding-controls-2026-08-01"`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+### Returns
 
-
+- `class BetaMessageBatchIndividualResponse: …`
 
-search\_result\_index: int
+  This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+  - `custom_id: str`
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+    Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
 
-minimum0
+    Must be unique for each request within the Message Batch.
 
-source: str
+  - `result: BetaMessageBatchResult`
 
-start\_block\_index: int
+    Processing result for this request.
 
-0-based index of the first cited block in the source's `content` array.
+    Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-title: Optional[str]
+    - `class BetaMessageBatchSucceededResult: …`
 
-type: Literal["search\_result\_location"]
+      - `message: BetaMessage`
 
-text: str
+        - `id: str`
 
-type: Literal["text"]
+          Unique object identifier.
 
-
+          The format and length of IDs may change over time.
 
-class BetaThinkingBlock: …
+        - `container: Optional[BetaContainer]`
 
-signature: str
+          Information about the container used in the request (for the code execution tool)
 
-thinking: str
+          - `id: str`
 
-type: Literal["thinking"]
+            Identifier for the container used in this request
 
-
+          - `expires_at: datetime`
 
-class BetaRedactedThinkingBlock: …
+            The time at which the container will expire.
 
-data: str
+            format: date-time
 
-type: Literal["redacted\_thinking"]
+          - `skills: Optional[List[BetaContainerSkill]]`
 
-
+            Skills loaded in the container
 
-class BetaToolUseBlock: …
+            - `skill_id: str`
 
-id: str
+              Skill ID
 
-input: Dict[str, object]
+              maxLength: 64, minLength: 1
 
-name: str
+            - `type: Literal["anthropic", "custom"]`
 
-type: Literal["tool\_use"]
+              Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-
+              - `"anthropic"`
 
-caller: Optional[Caller]
+              - `"custom"`
 
-Tool invocation directly from the model.
+            - `version: str`
 
-One of the following:
+              The resolved version: a skill version ID for custom skills.
 
-
+              maxLength: 64, minLength: 1
 
-class BetaDirectCaller: …
+        - `content: List[BetaContentBlock]`
 
-Tool invocation directly from the model.
+          Content generated by the model.
 
-type: Literal["direct"]
+          This is an array of content blocks, each of which has a `type` that determines its shape.
 
-
+          Example:
 
-class BetaServerToolCaller: …
+          ```json
+          [{"type": "text", "text": "Hi, I'm Claude."}]
+          ```
 
-Tool invocation generated by a server-side tool.
+          If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
 
-tool\_id: str
+          For example, if the input `messages` were:
 
-type: Literal["code\_execution\_20250825"]
+          ```json
+          [
+            {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+            {"role": "assistant", "content": "The best answer is ("}
+          ]
+          ```
 
-
+          Then the response `content` might be:
 
-class BetaServerToolCaller20260120: …
+          ```json
+          [{"type": "text", "text": "B)"}]
+          ```
 
-tool\_id: str
+          - `class BetaTextBlock: …`
 
-type: Literal["code\_execution\_20260120"]
+            - `citations: Optional[List[BetaTextCitation]]`
 
-
+              Citations supporting the text block.
 
-class BetaServerToolUseBlock: …
+              The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-id: str
+              - `class BetaCitationCharLocation: …`
 
-input: Dict[str, object]
+                - `cited_text: str`
 
-
+                - `document_index: int`
 
-name: Literal["advisor", "web\_search", "web\_fetch", 5 more]
+                  minimum: 0
 
-One of the following:
+                - `document_title: Optional[str]`
 
-"advisor"
+                - `end_char_index: int`
 
-"web\_search"
+                - `file_id: Optional[str]`
 
-"web\_fetch"
+                - `start_char_index: int`
 
-"code\_execution"
+                  minimum: 0
 
-"bash\_code\_execution"
+                - `type: Literal["char_location"]`
 
-"text\_editor\_code\_execution"
+                  default: char_location
 
-"tool\_search\_tool\_regex"
+              - `class BetaCitationPageLocation: …`
 
-"tool\_search\_tool\_bm25"
+                - `cited_text: str`
 
-type: Literal["server\_tool\_use"]
+                - `document_index: int`
 
-
+                  minimum: 0
 
-caller: Optional[Caller]
+                - `document_title: Optional[str]`
 
-Tool invocation directly from the model.
+                - `end_page_number: int`
 
-One of the following:
+                - `file_id: Optional[str]`
 
-
+                - `start_page_number: int`
 
-class BetaDirectCaller: …
+                  minimum: 1
 
-Tool invocation directly from the model.
+                - `type: Literal["page_location"]`
 
-type: Literal["direct"]
+                  default: page_location
 
-
+              - `class BetaCitationContentBlockLocation: …`
 
-class BetaServerToolCaller: …
+                - `cited_text: str`
 
-Tool invocation generated by a server-side tool.
+                  The full text of the cited block range, concatenated.
 
-tool\_id: str
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-type: Literal["code\_execution\_20250825"]
+                - `document_index: int`
 
-
+                  minimum: 0
 
-class BetaServerToolCaller20260120: …
+                - `document_title: Optional[str]`
 
-tool\_id: str
+                - `end_block_index: int`
 
-type: Literal["code\_execution\_20260120"]
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-class BetaWebSearchToolResultBlock: …
+                - `file_id: Optional[str]`
 
-
+                - `start_block_index: int`
 
-content: [BetaWebSearchToolResultBlockContent](api/beta/messages.md)
+                  0-based index of the first cited block in the source's `content` array.
 
-One of the following:
+                  minimum: 0
 
-
+                - `type: Literal["content_block_location"]`
 
-class BetaWebSearchToolResultError: …
+                  default: content_block_location
 
-
+              - `class BetaCitationsWebSearchResultLocation: …`
 
-error\_code: [BetaWebSearchToolResultErrorCode](api/beta/messages.md)
+                - `cited_text: str`
 
-One of the following:
+                - `encrypted_index: str`
 
-"invalid\_tool\_input"
+                - `title: Optional[str]`
 
-"unavailable"
+                  maxLength: 512
 
-"max\_uses\_exceeded"
+                - `type: Literal["web_search_result_location"]`
 
-"too\_many\_requests"
+                  default: web_search_result_location
 
-"query\_too\_long"
+                - `url: str`
 
-"request\_too\_large"
+              - `class BetaCitationSearchResultLocation: …`
 
-type: Literal["web\_search\_tool\_result\_error"]
+                - `cited_text: str`
 
-
+                  The full text of the cited block range, concatenated.
 
-List[[BetaWebSearchResultBlock](api/beta/messages.md)]
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-encrypted\_content: str
+                - `end_block_index: int`
 
-page\_age: Optional[str]
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-title: str
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-type: Literal["web\_search\_result"]
+                - `search_result_index: int`
 
-url: str
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
-tool\_use\_id: str
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
-type: Literal["web\_search\_tool\_result"]
+                  minimum: 0
 
-
+                - `source: str`
 
-caller: Optional[Caller]
+                - `start_block_index: int`
 
-Tool invocation directly from the model.
+                  0-based index of the first cited block in the source's `content` array.
 
-One of the following:
+                  minimum: 0
 
-
+                - `title: Optional[str]`
 
-class BetaDirectCaller: …
+                - `type: Literal["search_result_location"]`
 
-Tool invocation directly from the model.
+                  default: search_result_location
 
-type: Literal["direct"]
+            - `text: str`
 
-
+              maxLength: 5000000, minLength: 0
 
-class BetaServerToolCaller: …
+            - `type: Literal["text"]`
 
-Tool invocation generated by a server-side tool.
+              default: text
 
-tool\_id: str
+          - `class BetaThinkingBlock: …`
 
-type: Literal["code\_execution\_20250825"]
+            - `signature: str`
 
-
+              A value used to verify that this thinking block was generated by Claude when it is passed back to the API.
 
-class BetaServerToolCaller20260120: …
+              This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-tool\_id: str
+              See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-type: Literal["code\_execution\_20260120"]
+            - `thinking: str`
 
-
+              The text of Claude's thinking process for this block.
 
-class BetaWebFetchToolResultBlock: …
+            - `type: Literal["thinking"]`
 
-
+              default: thinking
 
-content: Content
+          - `class BetaRedactedThinkingBlock: …`
 
-One of the following:
+            - `data: str`
 
-
+              The contents of this redacted thinking block, returned when portions of the model's thinking were safety-redacted. This field is opaque and encrypted, with no readable content.
 
-class BetaWebFetchToolResultErrorBlock: …
+              Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-
+              See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-error\_code: [BetaWebFetchToolResultErrorCode](api/beta/messages.md)
+            - `type: Literal["redacted_thinking"]`
 
-One of the following:
+              default: redacted_thinking
 
-"invalid\_tool\_input"
+          - `class BetaToolUseBlock: …`
 
-"url\_too\_long"
+            - `id: str`
 
-"url\_not\_allowed"
+              pattern: ^[a-zA-Z0-9_-]+$
 
-"url\_not\_in\_prior\_context"
+            - `input: Dict[str, object]`
 
-"url\_not\_accessible"
+            - `name: str`
 
-"unsupported\_content\_type"
+              minLength: 1
 
-"too\_many\_requests"
+            - `type: Literal["tool_use"]`
 
-"max\_uses\_exceeded"
+              default: tool_use
 
-"unavailable"
+            - `caller: Optional[Caller]`
 
-type: Literal["web\_fetch\_tool\_result\_error"]
+              Tool invocation directly from the model.
 
-
+              - `class BetaDirectCaller: …`
 
-class BetaWebFetchBlock: …
+                Tool invocation directly from the model.
 
-
+                - `type: Literal["direct"]`
 
-content: [BetaDocumentBlock](api/beta/messages.md)
+              - `class BetaServerToolCaller: …`
 
-
+                Tool invocation generated by a server-side tool.
 
-citations: Optional[BetaCitationConfig]
+                - `tool_id: str`
 
-Citation configuration for the document
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-enabled: bool
+                - `type: Literal["code_execution_20250825"]`
 
-
+              - `class BetaServerToolCaller20260120: …`
 
-source: Source
+                - `tool_id: str`
 
-One of the following:
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-
+                - `type: Literal["code_execution_20260120"]`
 
-class BetaBase64PDFSource: …
+            - `toolset_name: Optional[str]`
 
-data: str
+              For a toolset member tool_use, the toolset family.
 
-media\_type: Literal["application/pdf"]
+              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-type: Literal["base64"]
+          - `class BetaServerToolUseBlock: …`
 
-
+            - `id: str`
 
-class BetaPlainTextSource: …
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-data: str
+            - `input: Dict[str, object]`
 
-media\_type: Literal["text/plain"]
+            - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
 
-type: Literal["text"]
+              - `"advisor"`
 
-title: Optional[str]
+              - `"web_search"`
 
-The title of the document
+              - `"web_fetch"`
 
-type: Literal["document"]
+              - `"code_execution"`
 
-retrieved\_at: Optional[str]
+              - `"bash_code_execution"`
 
-ISO 8601 timestamp when the content was retrieved
+              - `"text_editor_code_execution"`
 
-type: Literal["web\_fetch\_result"]
+              - `"tool_search_tool_regex"`
 
-url: str
+              - `"tool_search_tool_bm25"`
 
-Fetched content URL
+            - `type: Literal["server_tool_use"]`
 
-tool\_use\_id: str
+              default: server_tool_use
 
-type: Literal["web\_fetch\_tool\_result"]
+            - `caller: Optional[Caller]`
 
-
+              Tool invocation directly from the model.
 
-caller: Optional[Caller]
+              - `class BetaDirectCaller: …`
 
-Tool invocation directly from the model.
+                Tool invocation directly from the model.
 
-One of the following:
+              - `class BetaServerToolCaller: …`
 
-
+                Tool invocation generated by a server-side tool.
 
-class BetaDirectCaller: …
+              - `class BetaServerToolCaller20260120: …`
 
-Tool invocation directly from the model.
+          - `class BetaWebSearchToolResultBlock: …`
 
-type: Literal["direct"]
+            - `content: BetaWebSearchToolResultBlockContent`
 
-
+              - `class BetaWebSearchToolResultError: …`
 
-class BetaServerToolCaller: …
+                - `error_code: BetaWebSearchToolResultErrorCode`
 
-Tool invocation generated by a server-side tool.
+                  - `"invalid_tool_input"`
 
-tool\_id: str
+                  - `"unavailable"`
 
-type: Literal["code\_execution\_20250825"]
+                  - `"max_uses_exceeded"`
 
-
+                  - `"too_many_requests"`
 
-class BetaServerToolCaller20260120: …
+                  - `"query_too_long"`
 
-tool\_id: str
+                  - `"request_too_large"`
 
-type: Literal["code\_execution\_20260120"]
+                - `type: Literal["web_search_tool_result_error"]`
 
-
+                  default: web_search_tool_result_error
 
-class BetaAdvisorToolResultBlock: …
+              - `List[BetaWebSearchResultBlock]`
 
-
+                - `encrypted_content: str`
 
-content: Content
+                - `page_age: Optional[str]`
 
-One of the following:
+                - `title: str`
 
-
+                - `type: Literal["web_search_result"]`
 
-class BetaAdvisorToolResultError: …
+                  default: web_search_result
 
-
+                - `url: str`
 
-error\_code: Literal["max\_uses\_exceeded", "prompt\_too\_long", "too\_many\_requests", 4 more]
+            - `tool_use_id: str`
 
-One of the following:
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-"max\_uses\_exceeded"
+            - `type: Literal["web_search_tool_result"]`
 
-"prompt\_too\_long"
+              default: web_search_tool_result
 
-"too\_many\_requests"
+            - `caller: Optional[Caller]`
 
-"overloaded"
+              Tool invocation directly from the model.
 
-"unavailable"
+              - `class BetaDirectCaller: …`
 
-"execution\_time\_exceeded"
+                Tool invocation directly from the model.
 
-"model\_not\_found"
+              - `class BetaServerToolCaller: …`
 
-type: Literal["advisor\_tool\_result\_error"]
+                Tool invocation generated by a server-side tool.
 
-
+              - `class BetaServerToolCaller20260120: …`
 
-class BetaAdvisorResultBlock: …
+          - `class BetaWebFetchToolResultBlock: …`
 
-stop\_reason: Optional[str]
+            - `content: Content`
 
-The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+              - `class BetaWebFetchToolResultErrorBlock: …`
 
-text: str
+                - `error_code: BetaWebFetchToolResultErrorCode`
 
-type: Literal["advisor\_result"]
+                  - `"invalid_tool_input"`
 
-
+                  - `"url_too_long"`
 
-class BetaAdvisorRedactedResultBlock: …
+                  - `"url_not_allowed"`
 
-encrypted\_content: str
+                  - `"url_not_in_prior_context"`
 
-Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+                  - `"url_not_accessible"`
 
-stop\_reason: Optional[str]
+                  - `"unsupported_content_type"`
 
-The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
+                  - `"too_many_requests"`
 
-type: Literal["advisor\_redacted\_result"]
+                  - `"max_uses_exceeded"`
 
-tool\_use\_id: str
+                  - `"unavailable"`
 
-type: Literal["advisor\_tool\_result"]
+                - `type: Literal["web_fetch_tool_result_error"]`
 
-
+                  default: web_fetch_tool_result_error
 
-class BetaCodeExecutionToolResultBlock: …
+              - `class BetaWebFetchBlock: …`
 
-
+                - `content: BetaDocumentBlock`
 
-content: [BetaCodeExecutionToolResultBlockContent](api/beta/messages.md)
+                  - `citations: Optional[BetaCitationConfig]`
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+                    Citation configuration for the document
 
-One of the following:
+                    - `enabled: bool`
 
-
+                      default: false
 
-class BetaCodeExecutionToolResultError: …
+                  - `source: Source`
 
-
+                    - `class BetaBase64PDFSource: …`
 
-error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta/messages.md)
+                      - `data: str`
 
-One of the following:
+                        format: byte
 
-"invalid\_tool\_input"
+                      - `media_type: Literal["application/pdf"]`
 
-"unavailable"
+                      - `type: Literal["base64"]`
 
-"too\_many\_requests"
+                    - `class BetaPlainTextSource: …`
 
-"execution\_time\_exceeded"
+                      - `data: str`
 
-type: Literal["code\_execution\_tool\_result\_error"]
+                      - `media_type: Literal["text/plain"]`
 
-
+                      - `type: Literal["text"]`
 
-class BetaCodeExecutionResultBlock: …
+                  - `title: Optional[str]`
 
-
+                    The title of the document
 
-content: List[[BetaCodeExecutionOutputBlock](api/beta/messages.md)]
+                  - `type: Literal["document"]`
 
-file\_id: str
+                    default: document
 
-type: Literal["code\_execution\_output"]
+                - `retrieved_at: Optional[str]`
 
-return\_code: int
+                  ISO 8601 timestamp when the content was retrieved
 
-stderr: str
+                - `type: Literal["web_fetch_result"]`
 
-stdout: str
+                  default: web_fetch_result
 
-type: Literal["code\_execution\_result"]
+                - `url: str`
 
-
+                  Fetched content URL
 
-class BetaEncryptedCodeExecutionResultBlock: …
+            - `tool_use_id: str`
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-
+            - `type: Literal["web_fetch_tool_result"]`
 
-content: List[[BetaCodeExecutionOutputBlock](api/beta/messages.md)]
+              default: web_fetch_tool_result
 
-file\_id: str
+            - `caller: Optional[Caller]`
 
-type: Literal["code\_execution\_output"]
+              Tool invocation directly from the model.
 
-encrypted\_stdout: str
+              - `class BetaDirectCaller: …`
 
-return\_code: int
+                Tool invocation directly from the model.
 
-stderr: str
+              - `class BetaServerToolCaller: …`
 
-type: Literal["encrypted\_code\_execution\_result"]
+                Tool invocation generated by a server-side tool.
 
-tool\_use\_id: str
+              - `class BetaServerToolCaller20260120: …`
 
-type: Literal["code\_execution\_tool\_result"]
+          - `class BetaAdvisorToolResultBlock: …`
 
-
+            - `content: Content`
 
-class BetaBashCodeExecutionToolResultBlock: …
+              - `class BetaAdvisorToolResultError: …`
 
-
+                - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 4 more]`
 
-content: Content
+                  - `"max_uses_exceeded"`
 
-One of the following:
+                  - `"prompt_too_long"`
 
-
+                  - `"too_many_requests"`
 
-class BetaBashCodeExecutionToolResultError: …
+                  - `"overloaded"`
 
-
+                  - `"unavailable"`
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
+                  - `"execution_time_exceeded"`
 
-One of the following:
+                  - `"model_not_found"`
 
-"invalid\_tool\_input"
+                - `type: Literal["advisor_tool_result_error"]`
 
-"unavailable"
+                  default: advisor_tool_result_error
 
-"too\_many\_requests"
+              - `class BetaAdvisorResultBlock: …`
 
-"execution\_time\_exceeded"
+                - `stop_reason: Optional[str]`
 
-"output\_file\_too\_large"
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
-type: Literal["bash\_code\_execution\_tool\_result\_error"]
+                - `text: str`
 
-
+                - `type: Literal["advisor_result"]`
 
-class BetaBashCodeExecutionResultBlock: …
+                  default: advisor_result
 
-
+              - `class BetaAdvisorRedactedResultBlock: …`
 
-content: List[[BetaBashCodeExecutionOutputBlock](api/beta/messages.md)]
+                - `encrypted_content: str`
 
-file\_id: str
+                  Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-type: Literal["bash\_code\_execution\_output"]
+                - `stop_reason: Optional[str]`
 
-return\_code: int
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-stderr: str
+                - `type: Literal["advisor_redacted_result"]`
 
-stdout: str
+                  default: advisor_redacted_result
 
-type: Literal["bash\_code\_execution\_result"]
+            - `tool_use_id: str`
 
-tool\_use\_id: str
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-type: Literal["bash\_code\_execution\_tool\_result"]
+            - `type: Literal["advisor_tool_result"]`
 
-
+              default: advisor_tool_result
 
-class BetaTextEditorCodeExecutionToolResultBlock: …
+          - `class BetaCodeExecutionToolResultBlock: …`
 
-
+            - `content: BetaCodeExecutionToolResultBlockContent`
 
-content: Content
+              Code execution result with encrypted stdout for PFC + web_search results.
 
-One of the following:
+              - `class BetaCodeExecutionToolResultError: …`
 
-
+                - `error_code: BetaCodeExecutionToolResultErrorCode`
 
-class BetaTextEditorCodeExecutionToolResultError: …
+                  - `"invalid_tool_input"`
 
-
+                  - `"unavailable"`
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
+                  - `"too_many_requests"`
 
-One of the following:
+                  - `"execution_time_exceeded"`
 
-"invalid\_tool\_input"
+                - `type: Literal["code_execution_tool_result_error"]`
 
-"unavailable"
+                  default: code_execution_tool_result_error
 
-"too\_many\_requests"
+              - `class BetaCodeExecutionResultBlock: …`
 
-"execution\_time\_exceeded"
+                - `content: List[BetaCodeExecutionOutputBlock]`
 
-"file\_not\_found"
+                  - `file_id: str`
 
-error\_message: Optional[str]
+                  - `type: Literal["code_execution_output"]`
 
-type: Literal["text\_editor\_code\_execution\_tool\_result\_error"]
+                    default: code_execution_output
 
-
+                - `return_code: int`
 
-class BetaTextEditorCodeExecutionViewResultBlock: …
+                - `stderr: str`
 
-content: str
+                - `stdout: str`
 
-
+                - `type: Literal["code_execution_result"]`
 
-file\_type: Literal["text", "image", "pdf"]
+                  default: code_execution_result
 
-One of the following:
+              - `class BetaEncryptedCodeExecutionResultBlock: …`
 
-"text"
+                Code execution result with encrypted stdout for PFC + web_search results.
 
-"image"
+                - `content: List[BetaCodeExecutionOutputBlock]`
 
-"pdf"
+                  - `file_id: str`
 
-num\_lines: Optional[int]
+                  - `type: Literal["code_execution_output"]`
 
-start\_line: Optional[int]
+                    default: code_execution_output
 
-total\_lines: Optional[int]
+                - `encrypted_stdout: str`
 
-type: Literal["text\_editor\_code\_execution\_view\_result"]
+                - `return_code: int`
 
-
+                - `stderr: str`
 
-class BetaTextEditorCodeExecutionCreateResultBlock: …
+                - `type: Literal["encrypted_code_execution_result"]`
 
-is\_file\_update: bool
+                  default: encrypted_code_execution_result
 
-type: Literal["text\_editor\_code\_execution\_create\_result"]
+            - `tool_use_id: str`
 
-
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-class BetaTextEditorCodeExecutionStrReplaceResultBlock: …
+            - `type: Literal["code_execution_tool_result"]`
 
-lines: Optional[List[str]]
+              default: code_execution_tool_result
 
-new\_lines: Optional[int]
+          - `class BetaBashCodeExecutionToolResultBlock: …`
 
-new\_start: Optional[int]
+            - `content: Content`
 
-old\_lines: Optional[int]
+              - `class BetaBashCodeExecutionToolResultError: …`
 
-old\_start: Optional[int]
+                - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", 2 more]`
 
-type: Literal["text\_editor\_code\_execution\_str\_replace\_result"]
+                  - `"invalid_tool_input"`
 
-tool\_use\_id: str
+                  - `"unavailable"`
 
-type: Literal["text\_editor\_code\_execution\_tool\_result"]
+                  - `"too_many_requests"`
 
-
+                  - `"execution_time_exceeded"`
 
-class BetaToolSearchToolResultBlock: …
+                  - `"output_file_too_large"`
 
-
+                - `type: Literal["bash_code_execution_tool_result_error"]`
 
-content: Content
+                  default: bash_code_execution_tool_result_error
 
-One of the following:
+              - `class BetaBashCodeExecutionResultBlock: …`
 
-
+                - `content: List[BetaBashCodeExecutionOutputBlock]`
 
-class BetaToolSearchToolResultError: …
+                  - `file_id: str`
 
-
+                  - `type: Literal["bash_code_execution_output"]`
 
-error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
+                    default: bash_code_execution_output
 
-One of the following:
+                - `return_code: int`
 
-"invalid\_tool\_input"
+                - `stderr: str`
 
-"unavailable"
+                - `stdout: str`
 
-"too\_many\_requests"
+                - `type: Literal["bash_code_execution_result"]`
 
-"execution\_time\_exceeded"
+                  default: bash_code_execution_result
 
-error\_message: Optional[str]
+            - `tool_use_id: str`
 
-type: Literal["tool\_search\_tool\_result\_error"]
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-
+            - `type: Literal["bash_code_execution_tool_result"]`
 
-class BetaToolSearchToolSearchResultBlock: …
+              default: bash_code_execution_tool_result
 
-
+          - `class BetaTextEditorCodeExecutionToolResultBlock: …`
 
-tool\_references: List[[BetaToolReferenceBlock](api/beta/messages.md)]
+            - `content: Content`
 
-tool\_name: str
+              - `class BetaTextEditorCodeExecutionToolResultError: …`
 
-type: Literal["tool\_reference"]
+                - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", 2 more]`
 
-type: Literal["tool\_search\_tool\_search\_result"]
+                  - `"invalid_tool_input"`
 
-tool\_use\_id: str
+                  - `"unavailable"`
 
-type: Literal["tool\_search\_tool\_result"]
+                  - `"too_many_requests"`
 
-
+                  - `"execution_time_exceeded"`
 
-class BetaMCPToolUseBlock: …
+                  - `"file_not_found"`
 
-id: str
+                - `error_message: Optional[str]`
 
-input: Dict[str, object]
+                - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
-name: str
+                  default: text_editor_code_execution_tool_result_error
 
-The name of the MCP tool
+              - `class BetaTextEditorCodeExecutionViewResultBlock: …`
 
-server\_name: str
+                - `content: str`
 
-The name of the MCP server
+                - `file_type: Literal["text", "image", "pdf"]`
 
-type: Literal["mcp\_tool\_use"]
+                  - `"text"`
 
-
+                  - `"image"`
 
-class BetaMCPToolResultBlock: …
+                  - `"pdf"`
 
-
+                - `num_lines: Optional[int]`
 
-content: Union[str, List[[BetaTextBlock](api/beta/messages.md)]]
+                - `start_line: Optional[int]`
 
-One of the following:
+                - `total_lines: Optional[int]`
 
-str
+                - `type: Literal["text_editor_code_execution_view_result"]`
 
-
+                  default: text_editor_code_execution_view_result
 
-List[[BetaTextBlock](api/beta/messages.md)]
+              - `class BetaTextEditorCodeExecutionCreateResultBlock: …`
 
-
+                - `is_file_update: bool`
 
-citations: Optional[List[[BetaTextCitation](api/beta/messages.md)]]
+                - `type: Literal["text_editor_code_execution_create_result"]`
 
-Citations supporting the text block.
+                  default: text_editor_code_execution_create_result
 
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+              - `class BetaTextEditorCodeExecutionStrReplaceResultBlock: …`
 
-One of the following:
+                - `lines: Optional[List[str]]`
 
-
+                - `new_lines: Optional[int]`
 
-class BetaCitationCharLocation: …
+                - `new_start: Optional[int]`
 
-cited\_text: str
+                - `old_lines: Optional[int]`
 
-document\_index: int
+                - `old_start: Optional[int]`
 
-document\_title: Optional[str]
+                - `type: Literal["text_editor_code_execution_str_replace_result"]`
 
-end\_char\_index: int
+                  default: text_editor_code_execution_str_replace_result
 
-file\_id: Optional[str]
+            - `tool_use_id: str`
 
-start\_char\_index: int
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-type: Literal["char\_location"]
+            - `type: Literal["text_editor_code_execution_tool_result"]`
 
-
+              default: text_editor_code_execution_tool_result
 
-class BetaCitationPageLocation: …
+          - `class BetaToolSearchToolResultBlock: …`
 
-cited\_text: str
+            - `content: Content`
 
-document\_index: int
+              - `class BetaToolSearchToolResultError: …`
 
-document\_title: Optional[str]
+                - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", "execution_time_exceeded"]`
 
-end\_page\_number: int
+                  - `"invalid_tool_input"`
 
-file\_id: Optional[str]
+                  - `"unavailable"`
 
-start\_page\_number: int
+                  - `"too_many_requests"`
 
-type: Literal["page\_location"]
+                  - `"execution_time_exceeded"`
 
-
+                - `error_message: Optional[str]`
 
-class BetaCitationContentBlockLocation: …
+                - `type: Literal["tool_search_tool_result_error"]`
 
-
+                  default: tool_search_tool_result_error
 
-cited\_text: str
+              - `class BetaToolSearchToolSearchResultBlock: …`
 
-The full text of the cited block range, concatenated.
+                - `tool_references: List[BetaToolReferenceBlock]`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+                  - `tool_name: str`
 
-document\_index: int
+                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-document\_title: Optional[str]
+                  - `type: Literal["tool_reference"]`
 
-
+                    default: tool_reference
 
-end\_block\_index: int
+                - `type: Literal["tool_search_tool_search_result"]`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+                  default: tool_search_tool_search_result
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+            - `tool_use_id: str`
 
-file\_id: Optional[str]
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-start\_block\_index: int
+            - `type: Literal["tool_search_tool_result"]`
 
-0-based index of the first cited block in the source's `content` array.
+              default: tool_search_tool_result
 
-type: Literal["content\_block\_location"]
+          - `class BetaMCPToolUseBlock: …`
 
-
+            - `id: str`
 
-class BetaCitationsWebSearchResultLocation: …
+              pattern: ^[a-zA-Z0-9_-]+$
 
-cited\_text: str
+            - `input: Dict[str, object]`
 
-encrypted\_index: str
+            - `name: str`
 
-title: Optional[str]
+              The name of the MCP tool
 
-type: Literal["web\_search\_result\_location"]
+            - `server_name: str`
 
-url: str
+              The name of the MCP server
 
-
+            - `type: Literal["mcp_tool_use"]`
 
-class BetaCitationSearchResultLocation: …
+              default: mcp_tool_use
 
-
+          - `class BetaMCPToolResultBlock: …`
 
-cited\_text: str
+            - `content: Union[str, List[BetaTextBlock]]`
 
-The full text of the cited block range, concatenated.
+              - `str`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+              - `List[BetaTextBlock]`
 
-
+                - `citations: Optional[List[BetaTextCitation]]`
 
-end\_block\_index: int
+                  Citations supporting the text block.
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+                  The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+                - `text: str`
 
-
+                  maxLength: 5000000, minLength: 0
 
-search\_result\_index: int
+                - `type: Literal["text"]`
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+                  default: text
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+            - `is_error: bool`
 
-minimum0
+              default: false
 
-source: str
+            - `tool_use_id: str`
 
-start\_block\_index: int
+              pattern: ^[a-zA-Z0-9_-]+$
 
-0-based index of the first cited block in the source's `content` array.
+            - `type: Literal["mcp_tool_result"]`
 
-title: Optional[str]
+              default: mcp_tool_result
 
-type: Literal["search\_result\_location"]
+          - `class BetaContainerUploadBlock: …`
 
-text: str
+            Response model for a file uploaded to the container.
 
-type: Literal["text"]
+            - `file_id: str`
 
-is\_error: bool
+            - `type: Literal["container_upload"]`
 
-tool\_use\_id: str
+              default: container_upload
 
-type: Literal["mcp\_tool\_result"]
+          - `class BetaCompactionBlock: …`
 
-
+            A compaction block returned when autocompact is triggered.
 
-class BetaContainerUploadBlock: …
+            When content is None, it indicates the compaction failed to produce a valid
+            summary (e.g., malformed output from the model). Clients may round-trip
+            compaction blocks with null content; the server treats them as no-ops.
 
-Response model for a file uploaded to the container.
+            - `content: Optional[str]`
 
-file\_id: str
+              Summary of compacted content, or null if compaction failed
 
-type: Literal["container\_upload"]
+            - `encrypted_content: Optional[str]`
 
-
+              Opaque metadata from prior compaction, to be round-tripped verbatim
 
-class BetaCompactionBlock: …
+            - `type: Literal["compaction"]`
 
-A compaction block returned when autocompact is triggered.
+              default: compaction
 
-When content is None, it indicates the compaction failed to produce a valid
-summary (e.g., malformed output from the model). Clients may round-trip
-compaction blocks with null content; the server treats them as no-ops.
+          - `class BetaFallbackBlock: …`
 
-content: Optional[str]
+            Marks the point in `content` where one model's output gives way to the next.
 
-Summary of compacted content, or null if compaction failed
+            One block appears per hop where a preceding model actually ran this turn and
+            declined. A turn where no preceding model ran and declined has no such
+            boundary and carries no block — the signal for whether a fallback model
+            served the response is the presence of a `fallback_message` entry in
+            `usage.iterations`, not this block.
 
-encrypted\_content: Optional[str]
+            The block is treated like a server-tool content block for streaming: it
+            arrives via the standard `content_block_start` / `content_block_stop`
+            pair and carries no deltas.
 
-Opaque metadata from prior compaction, to be round-tripped verbatim
+            - `from_: BetaFallbackInfo`
 
-type: Literal["compaction"]
+              The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-
+              - `model: Model`
 
-class BetaFallbackBlock: …
+                The model that will complete your prompt.
 
-Marks the point in `content` where one model's output gives way to the next.
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-One block appears per hop where a preceding model actually ran this turn and
-declined. A turn where no preceding model ran and declined has no such
-boundary and carries no block — the signal for whether a fallback model
-served the response is the presence of a `fallback_message` entry in
-`usage.iterations`, not this block.
+                - `Literal["claude-fable-5-1", "claude-mythos-5-1", "claude-sonnet-5", 14 more]`
 
-The block is treated like a server-tool content block for streaming: it
-arrives via the standard `content_block_start` / `content_block_stop`
-pair and carries no deltas.
+                  The model that will complete your prompt.
 
-
+                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-from\_: [BetaFallbackInfo](api/beta/messages.md)
+                  - `claude-fable-5-1` - Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+                  - `claude-mythos-5-1` - Our most capable model for cybersecurity and biology research, available through trusted access programs
+                  - `claude-sonnet-5` - High-performance model for coding and agents
+                  - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
+                  - `claude-mythos-5` - Most capable model for cybersecurity and biology research
+                  - `claude-opus-5` - Powerful intelligence for long-running agents and coding
+                  - `claude-opus-4-8` - Powerful intelligence for long-running agents and coding
+                  - `claude-opus-4-7` - Powerful intelligence for long-running agents and coding
+                  - `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+                  - `claude-opus-4-6` - Powerful intelligence for long-running agents and coding
+                  - `claude-sonnet-4-6` - Best combination of speed and intelligence
+                  - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+                  - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+                  - `claude-opus-4-5` - Powerful intelligence for long-running agents and coding
+                  - `claude-opus-4-5-20251101` - Powerful intelligence for long-running agents and coding
+                  - `claude-sonnet-4-5` - High-performance model for agents and coding
+                  - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+                  - `"claude-fable-5-1"`
 
-
+                    Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
-model: [Model](api/messages.md)
+                  - `"claude-mythos-5-1"`
 
-The model that will complete your prompt.
+                    Our most capable model for cybersecurity and biology research, available through trusted access programs
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+                  - `"claude-sonnet-5"`
 
-One of the following:
+                    High-performance model for coding and agents
 
-
+                  - `"claude-fable-5"`
 
-Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]
+                    Next generation of intelligence for the hardest knowledge work and coding problems
 
-The model that will complete your prompt.
+                  - `"claude-mythos-5"`
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+                    Most capable model for cybersecurity and biology research
 
-- `claude-sonnet-5` - High-performance model for coding and agents
-- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-- `claude-mythos-5` - Most capable model for cybersecurity and biology research
-- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-- `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-- `claude-sonnet-4-6` - Best combination of speed and intelligence
-- `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-- `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-- `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-- `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-- `claude-sonnet-4-5` - High-performance model for agents and coding
-- `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-- `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+                  - `"claude-opus-5"`
 
-One of the following:
+                    Powerful intelligence for long-running agents and coding
 
-"claude-sonnet-5"
+                  - `"claude-opus-4-8"`
 
-High-performance model for coding and agents
+                    Powerful intelligence for long-running agents and coding
 
-"claude-fable-5"
+                  - `"claude-opus-4-7"`
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+                    Powerful intelligence for long-running agents and coding
 
-"claude-mythos-5"
+                  - `"claude-mythos-preview"`
 
-Most capable model for cybersecurity and biology research
+                    New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-8"
+                  - `"claude-opus-4-6"`
 
-Frontier intelligence for long-running agents and coding
+                    Powerful intelligence for long-running agents and coding
 
-"claude-opus-4-7"
+                  - `"claude-sonnet-4-6"`
 
-Frontier intelligence for long-running agents and coding
+                    Best combination of speed and intelligence
 
-"claude-mythos-preview"
+                  - `"claude-haiku-4-5"`
 
-New class of intelligence, strongest in coding and cybersecurity
+                    Fastest model with near-frontier intelligence
 
-"claude-opus-4-6"
+                  - `"claude-haiku-4-5-20251001"`
 
-Frontier intelligence for long-running agents and coding
+                    Fastest model with near-frontier intelligence
 
-"claude-sonnet-4-6"
+                  - `"claude-opus-4-5"`
 
-Best combination of speed and intelligence
+                    Powerful intelligence for long-running agents and coding
 
-"claude-haiku-4-5"
+                  - `"claude-opus-4-5-20251101"`
 
-Fastest model with near-frontier intelligence
+                    Powerful intelligence for long-running agents and coding
 
-"claude-haiku-4-5-20251001"
+                  - `"claude-sonnet-4-5"`
 
-Fastest model with near-frontier intelligence
+                    High-performance model for agents and coding
 
-"claude-opus-4-5"
+                  - `"claude-sonnet-4-5-20250929"`
 
-Premium model combining maximum intelligence with practical performance
+                    High-performance model for agents and coding
 
-"claude-opus-4-5-20251101"
+                - `str`
 
-Premium model combining maximum intelligence with practical performance
+            - `to: BetaFallbackInfo`
 
-"claude-sonnet-4-5"
+              The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-High-performance model for agents and coding
+            - `trigger: BetaFallbackRefusalTrigger`
 
-"claude-sonnet-4-5-20250929"
+              What caused the `from` model to hand over at this hop.
 
-High-performance model for agents and coding
+              - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
-"claude-opus-4-1"
+                The policy category that triggered a refusal.
 
-Exceptional model for specialized complex tasks
+                - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+                - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+                - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+                - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+                - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-"claude-opus-4-1-20250805"
+                - `"cyber"`
 
-Exceptional model for specialized complex tasks
+                  The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
 
-str
+                - `"bio"`
 
-
+                  The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
-to: [BetaFallbackInfo](api/beta/messages.md)
+                - `"frontier_llm"`
 
-The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+                  The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
 
-
+                - `"reasoning_extraction"`
 
-model: [Model](api/messages.md)
+                  The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
 
-The model that will complete your prompt.
+                - `"general_harms"`
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+                  The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-One of the following:
+              - `type: Literal["refusal"]`
 
-
+                default: refusal
 
-Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]
+            - `type: Literal["fallback"]`
 
-The model that will complete your prompt.
+              default: fallback
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+        - `context_management: Optional[BetaContextManagementResponse]`
 
-- `claude-sonnet-5` - High-performance model for coding and agents
-- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-- `claude-mythos-5` - Most capable model for cybersecurity and biology research
-- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-- `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-- `claude-sonnet-4-6` - Best combination of speed and intelligence
-- `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-- `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-- `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-- `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-- `claude-sonnet-4-5` - High-performance model for agents and coding
-- `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-- `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+          Context management response.
 
-One of the following:
+          Information about context management strategies applied during the request.
 
-"claude-sonnet-5"
+          - `applied_edits: List[AppliedEdit]`
 
-High-performance model for coding and agents
+            List of context management edits that were applied.
 
-"claude-fable-5"
+            - `class BetaClearToolUses20250919EditResponse: …`
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+              - `cleared_input_tokens: int`
 
-"claude-mythos-5"
+                Number of input tokens cleared by this edit.
 
-Most capable model for cybersecurity and biology research
+                minimum: 0
 
-"claude-opus-4-8"
+              - `cleared_tool_uses: int`
 
-Frontier intelligence for long-running agents and coding
+                Number of tool uses that were cleared.
 
-"claude-opus-4-7"
+                minimum: 0
 
-Frontier intelligence for long-running agents and coding
+              - `type: Literal["clear_tool_uses_20250919"]`
 
-"claude-mythos-preview"
+                The type of context management edit applied.
 
-New class of intelligence, strongest in coding and cybersecurity
+                default: clear_tool_uses_20250919
 
-"claude-opus-4-6"
+            - `class BetaClearThinking20251015EditResponse: …`
 
-Frontier intelligence for long-running agents and coding
+              - `cleared_input_tokens: int`
 
-"claude-sonnet-4-6"
+                Number of input tokens cleared by this edit.
 
-Best combination of speed and intelligence
+                minimum: 0
 
-"claude-haiku-4-5"
+              - `cleared_thinking_turns: int`
 
-Fastest model with near-frontier intelligence
+                Number of thinking turns that were cleared.
 
-"claude-haiku-4-5-20251001"
+                minimum: 0
 
-Fastest model with near-frontier intelligence
+              - `type: Literal["clear_thinking_20251015"]`
 
-"claude-opus-4-5"
+                The type of context management edit applied.
 
-Premium model combining maximum intelligence with practical performance
+                default: clear_thinking_20251015
 
-"claude-opus-4-5-20251101"
+        - `diagnostics: Optional[BetaDiagnostics]`
 
-Premium model combining maximum intelligence with practical performance
+          Response envelope for request-level diagnostics. Present (possibly
+          null) whenever the caller supplied `diagnostics` on the request.
 
-"claude-sonnet-4-5"
+          - `cache_miss_reason: Optional[CacheMissReason]`
 
-High-performance model for agents and coding
+            Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-"claude-sonnet-4-5-20250929"
+            - `class BetaCacheMissModelChanged: …`
 
-High-performance model for agents and coding
+              - `cache_missed_input_tokens: int`
 
-"claude-opus-4-1"
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-Exceptional model for specialized complex tasks
+              - `type: Literal["model_changed"]`
 
-"claude-opus-4-1-20250805"
+                default: model_changed
 
-Exceptional model for specialized complex tasks
+            - `class BetaCacheMissSystemChanged: …`
 
-str
+              - `cache_missed_input_tokens: int`
 
-
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-trigger: [BetaFallbackRefusalTrigger](api/beta/messages.md)
+              - `type: Literal["system_changed"]`
 
-What caused the `from` model to hand over at this hop.
+                default: system_changed
 
-
+            - `class BetaCacheMissToolsChanged: …`
 
-category: Optional[Literal["cyber", "bio", "frontier\_llm", "reasoning\_extraction"]]
+              - `cache_missed_input_tokens: int`
 
-The policy category that triggered a refusal.
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-One of the following:
+              - `type: Literal["tools_changed"]`
 
-"cyber"
+                default: tools_changed
 
-"bio"
+            - `class BetaCacheMissMessagesChanged: …`
 
-"frontier\_llm"
+              - `cache_missed_input_tokens: int`
 
-"reasoning\_extraction"
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-type: Literal["refusal"]
+              - `type: Literal["messages_changed"]`
 
-type: Literal["fallback"]
+                default: messages_changed
 
-
+            - `class BetaCacheMissPreviousMessageNotFound: …`
 
-context\_management: Optional[BetaContextManagementResponse]
+              - `type: Literal["previous_message_not_found"]`
 
-Context management response.
+                default: previous_message_not_found
 
-Information about context management strategies applied during the request.
+            - `class BetaCacheMissUnavailable: …`
 
-
+              - `type: Literal["unavailable"]`
 
-applied\_edits: List[AppliedEdit]
+                default: unavailable
 
-List of context management edits that were applied.
+        - `model: Model`
 
-One of the following:
+          The model that will complete your prompt.
 
-
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-class BetaClearToolUses20250919EditResponse: …
+        - `role: Literal["assistant"]`
 
-cleared\_input\_tokens: int
+          Conversational role of the generated message.
 
-Number of input tokens cleared by this edit.
+          This will always be `"assistant"`.
 
-cleared\_tool\_uses: int
+          default: assistant
 
-Number of tool uses that were cleared.
+        - `stop_details: Optional[BetaRefusalStopDetails]`
 
-type: Literal["clear\_tool\_uses\_20250919"]
+          Structured information about a refusal.
 
-The type of context management edit applied.
+          - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
-
+            The policy category that triggered a refusal.
 
-class BetaClearThinking20251015EditResponse: …
+            - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+            - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+            - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+            - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+            - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-cleared\_input\_tokens: int
+            - `"cyber"`
 
-Number of input tokens cleared by this edit.
+              The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
 
-cleared\_thinking\_turns: int
+            - `"bio"`
 
-Number of thinking turns that were cleared.
+              The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
-type: Literal["clear\_thinking\_20251015"]
+            - `"frontier_llm"`
 
-The type of context management edit applied.
+              The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
 
-
+            - `"reasoning_extraction"`
 
-diagnostics: Optional[BetaDiagnostics]
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
 
-Response envelope for request-level diagnostics. Present (possibly
-null) whenever the caller supplied `diagnostics` on the request.
+            - `"general_harms"`
 
-
+              The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-cache\_miss\_reason: Optional[CacheMissReason]
+          - `explanation: Optional[str]`
 
-Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+            Human-readable explanation of the refusal.
 
-One of the following:
+            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-
+          - `fallback_credit_token: Optional[str]`
 
-class BetaCacheMissModelChanged: …
+            Opaque code that refunds the cache-miss cost when retrying this refused
+            request on the fallback model. Pass it as `fallback_credit_token` on the
+            retry request. Expires 5 minutes after the refusal.
 
-cache\_missed\_input\_tokens: int
+            The retry is sent either with the same request body (`system`, `messages`,
+            `tools`, and other render-shaping fields), or with the same body plus one
+            appended `assistant` message whose content is the partial text (with any
+            trailing whitespace stripped from the final text block) and paired
+            server-tool blocks from this refusal — which also authorizes that
+            appended turn as an assistant-prefill continuation on models that otherwise
+            disallow prefill. A token minted mid-server-tool-loop whose partial content
+            was continuable may only be redeemed the second way — if a same-body retry
+            is rejected with a 400 saying the token must be redeemed by continuing the
+            partial response, retry the second way instead. Either way: same workspace,
+            same platform; a mismatch is a 400. Resending a token for an already-warm
+            prefix is permitted but yields no additional credit.
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+            `null` when the refused model isn't eligible for a fallback credit.
 
-type: Literal["model\_changed"]
+          - `fallback_has_prefill_claim: Optional[bool]`
 
-
+            Whether the accompanying `fallback_credit_token` may be redeemed with the
+            appended-assistant retry form. Only set when `fallback_credit_token` is
+            present.
 
-class BetaCacheMissSystemChanged: …
+            `true`: retry by resending the same request body plus one appended
+            `assistant` message whose content is this response's `content` with any
+            trailing whitespace stripped from the final text block and unpaired
+            `tool_use` blocks omitted (the same appended-turn shape described on
+            `fallback_credit_token`), with the token attached. `false`: retry by
+            resending the original request body unchanged, with the token attached —
+            the appended-assistant form is not available for this refusal (no
+            continuable partial content, or the request uses `output_format` or a
+            `tool_choice` that forces tool use). One exception: when the request used
+            `output_format` or a forced `tool_choice` and the refusal arrived after
+            server tools (including MCP connector tools) had already executed, the
+            token may not be redeemable by either retry form; if the exact-body retry
+            is then rejected with a 400 saying the token must be redeemed by
+            continuing the partial response, discard the token and retry without it.
 
-cache\_missed\_input\_tokens: int
+            Advisory: if an appended-assistant retry is rejected with a 400 despite
+            `true`, fall back to resending the original request body with the token.
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+          - `recommended_model: Optional[str]`
 
-type: Literal["system\_changed"]
+            The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-
+          - `type: Literal["refusal"]`
 
-class BetaCacheMissToolsChanged: …
+            default: refusal
 
-cache\_missed\_input\_tokens: int
+        - `stop_reason: Optional[BetaStopReason]`
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+          The reason that we stopped.
 
-type: Literal["tools\_changed"]
+          This may be one the following values:
 
-
+          * `"end_turn"`: the model reached a natural stopping point
+          * `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
+          * `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
+          * `"tool_use"`: the model invoked one or more tools
+          * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
+          * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+          * `"model_context_window_exceeded"`: we exceeded the model's context window
 
-class BetaCacheMissMessagesChanged: …
+          In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-cache\_missed\_input\_tokens: int
+          - `"end_turn"`
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+          - `"max_tokens"`
 
-type: Literal["messages\_changed"]
+          - `"stop_sequence"`
 
-
+          - `"tool_use"`
 
-class BetaCacheMissPreviousMessageNotFound: …
+          - `"pause_turn"`
 
-type: Literal["previous\_message\_not\_found"]
+          - `"compaction"`
 
-
+          - `"refusal"`
 
-class BetaCacheMissUnavailable: …
+          - `"model_context_window_exceeded"`
 
-type: Literal["unavailable"]
+        - `stop_sequence: Optional[str]`
 
-
+          Which custom stop sequence was generated, if any.
 
-model: [Model](api/messages.md)
+          This value will be a non-null string if one of your custom stop sequences was generated.
 
-The model that will complete your prompt.
+        - `type: Literal["message"]`
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+          Object type.
 
-One of the following:
+          For Messages, this is always `"message"`.
 
-
+          default: message
 
-Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]
+        - `usage: BetaUsage`
 
-The model that will complete your prompt.
+          Billing and rate-limit usage.
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+          Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
 
-- `claude-sonnet-5` - High-performance model for coding and agents
-- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-- `claude-mythos-5` - Most capable model for cybersecurity and biology research
-- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-- `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-- `claude-sonnet-4-6` - Best combination of speed and intelligence
-- `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-- `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-- `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-- `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-- `claude-sonnet-4-5` - High-performance model for agents and coding
-- `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-- `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+          Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
 
-One of the following:
+          For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
 
-"claude-sonnet-5"
+          Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-High-performance model for coding and agents
+          - `cache_creation: Optional[BetaCacheCreation]`
 
-"claude-fable-5"
+            Breakdown of cached tokens by TTL
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+            - `ephemeral_1h_input_tokens: int`
 
-"claude-mythos-5"
+              The number of input tokens used to create the 1 hour cache entry.
 
-Most capable model for cybersecurity and biology research
+              default: 0, minimum: 0
 
-"claude-opus-4-8"
+            - `ephemeral_5m_input_tokens: int`
 
-Frontier intelligence for long-running agents and coding
+              The number of input tokens used to create the 5 minute cache entry.
 
-"claude-opus-4-7"
+              default: 0, minimum: 0
 
-Frontier intelligence for long-running agents and coding
+          - `cache_creation_input_tokens: Optional[int]`
 
-"claude-mythos-preview"
+            The number of input tokens used to create the cache entry.
 
-New class of intelligence, strongest in coding and cybersecurity
+            minimum: 0
 
-"claude-opus-4-6"
+          - `cache_read_input_tokens: Optional[int]`
 
-Frontier intelligence for long-running agents and coding
+            The number of input tokens read from the cache.
 
-"claude-sonnet-4-6"
+            minimum: 0
 
-Best combination of speed and intelligence
+          - `fallback_credit: Optional[BetaFallbackCreditUsage]`
 
-"claude-haiku-4-5"
+            Outcome of the `fallback_credit_token` presented on this request.
 
-Fastest model with near-frontier intelligence
+            - `status: Status`
 
-"claude-haiku-4-5-20251001"
+              Whether the fallback-credit reprice was applied to this response's billing.
 
-Fastest model with near-frontier intelligence
+              A union discriminated on `type`. `redeemed`: the retry is billed as if
+              the conversation had been on the retry model all along — including when the
+              resulting shift is zero because there was nothing to move. `not_applied`:
+              no reprice was applied; the arm's `reason` says why.
 
-"claude-opus-4-5"
+              - `class BetaFallbackCreditRedeemed: …`
 
-Premium model combining maximum intelligence with practical performance
+                The reprice was applied: the retry is billed as if the conversation
+                had been on the retry model all along.
 
-"claude-opus-4-5-20251101"
+                - `type: Literal["redeemed"]`
 
-Premium model combining maximum intelligence with practical performance
+                  default: redeemed
 
-"claude-sonnet-4-5"
+              - `class BetaFallbackCreditNotApplied: …`
 
-High-performance model for agents and coding
+                No reprice was applied; `reason` says why.
 
-"claude-sonnet-4-5-20250929"
+                - `reason: Literal["body_mismatch", "continuation_excluded", "continuation_only", 9 more]`
 
-High-performance model for agents and coding
+                  Why the reprice was not applied.
 
-"claude-opus-4-1"
+                  A closed enum; additions to the redemption-check vocabulary arrive as
+                  deliberate schema updates.
 
-Exceptional model for specialized complex tasks
+                  - `"body_mismatch"`
 
-"claude-opus-4-1-20250805"
+                  - `"continuation_excluded"`
 
-Exceptional model for specialized complex tasks
+                  - `"continuation_only"`
 
-str
+                  - `"expired"`
 
-
+                  - `"invalid_target_model"`
 
-role: Literal["assistant"]
+                  - `"not_enabled"`
 
-Conversational role of the generated message.
+                  - `"reprice_unavailable"`
 
-This will always be `"assistant"`.
+                  - `"temporarily_unavailable"`
 
-
+                  - `"variant_fields_present"`
 
-stop\_details: Optional[BetaRefusalStopDetails]
+                  - `"wrong_organization"`
 
-Structured information about a refusal.
+                  - `"wrong_platform"`
 
-
+                  - `"wrong_workspace"`
 
-category: Optional[Literal["cyber", "bio", "frontier\_llm", "reasoning\_extraction"]]
+                - `type: Literal["not_applied"]`
 
-The policy category that triggered a refusal.
+                  default: not_applied
 
-One of the following:
+                - `remove_to_redeem: Optional[List[str]]`
 
-"cyber"
+                  Request fields to remove before retrying, so the retry can redeem this
+                  token.
 
-"bio"
+                  Present exactly when `reason` is `variant_fields_present` — never null,
+                  never an empty array; absent otherwise. Fields are named only from your own request, and only after
+                  the sealed variant hash matched. A served best-effort retry has already
+                  been billed at normal price; nothing redeems retroactively, but a corrected
+                  re-send inside the token's five-minute window can still redeem.
 
-"frontier\_llm"
+          - `inference_geo: Optional[str]`
 
-"reasoning\_extraction"
+            The geographic region where inference was performed for this request.
 
-
+          - `input_tokens: int`
 
-explanation: Optional[str]
+            The number of input tokens which were used.
 
-Human-readable explanation of the refusal.
+            minimum: 0
 
-This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+          - `iterations: Optional[BetaIterationsUsage]`
 
-
+            Per-iteration token usage breakdown.
 
-fallback\_credit\_token: Optional[str]
+            Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
-Opaque code that refunds the cache-miss cost when retrying this refused
-request on the fallback model. Pass it as `fallback_credit_token` on the
-retry request. Expires 5 minutes after the refusal.
+            - Determine which iterations exceeded long context thresholds (>=200k tokens)
+            - Calculate the context window size from the last `message` entry
+            - Understand token accumulation across server-side tool use loops
 
-The retry is sent either with the same request body (`system`, `messages`,
-`tools`, and other render-shaping fields), or with the same body plus one
-appended `assistant` message whose content is the partial text (with any
-trailing whitespace stripped from the final text block) and paired
-server-tool blocks from this refusal — which also authorizes that
-appended turn as an assistant-prefill continuation on models that otherwise
-disallow prefill. A token minted mid-server-tool-loop whose partial content
-was continuable may only be redeemed the second way — if a same-body retry
-is rejected with a 400 saying the token must be redeemed by continuing the
-partial response, retry the second way instead. Either way: same workspace,
-same platform; a mismatch is a 400. Resending a token for an already-warm
-prefix is permitted but yields no additional credit.
+            A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-`null` when the refused model isn't eligible for a fallback credit.
+            - `class BetaMessageIterationUsage: …`
 
-
+              Token usage for a sampling iteration.
 
-fallback\_has\_prefill\_claim: Optional[bool]
+              - `cache_creation: Optional[BetaCacheCreation]`
 
-Whether the accompanying `fallback_credit_token` may be redeemed with the
-appended-assistant retry form. Only set when `fallback_credit_token` is
-present.
+                Breakdown of cached tokens by TTL
 
-`true`: retry by resending the same request body plus one appended
-`assistant` message whose content is this response's `content` with any
-trailing whitespace stripped from the final text block and unpaired
-`tool_use` blocks omitted (the same appended-turn shape described on
-`fallback_credit_token`), with the token attached. `false`: retry by
-resending the original request body unchanged, with the token attached —
-the appended-assistant form is not available for this refusal (no
-continuable partial content, or the request uses `output_format` or a
-`tool_choice` that forces tool use). One exception: when the request used
-`output_format` or a forced `tool_choice` and the refusal arrived after
-server tools (including MCP connector tools) had already executed, the
-token may not be redeemable by either retry form; if the exact-body retry
-is then rejected with a 400 saying the token must be redeemed by
-continuing the partial response, discard the token and retry without it.
+              - `cache_creation_input_tokens: int`
 
-Advisory: if an appended-assistant retry is rejected with a 400 despite
-`true`, fall back to resending the original request body with the token.
+                The number of input tokens used to create the cache entry.
 
-recommended\_model: Optional[str]
+                default: 0, minimum: 0
 
-The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
+              - `cache_read_input_tokens: int`
 
-type: Literal["refusal"]
+                The number of input tokens read from the cache.
 
-
+                default: 0, minimum: 0
 
-stop\_reason: Optional[BetaStopReason]
+              - `input_tokens: int`
 
-The reason that we stopped.
+                The number of input tokens which were used.
 
-This may be one the following values:
+                minimum: 0
 
-- `"end_turn"`: the model reached a natural stopping point
-- `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
-- `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
-- `"tool_use"`: the model invoked one or more tools
-- `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
-- `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+              - `model: Model`
 
-In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
+                The model that will complete your prompt.
 
-One of the following:
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-"end\_turn"
+              - `output_tokens: int`
 
-"max\_tokens"
+                The number of output tokens which were used.
 
-"stop\_sequence"
+                minimum: 0
 
-"tool\_use"
+              - `type: Literal["message"]`
 
-"pause\_turn"
+                Usage for a sampling iteration
 
-"compaction"
+                default: message
 
-"refusal"
+            - `class BetaCompactionIterationUsage: …`
 
-"model\_context\_window\_exceeded"
+              Token usage for a compaction iteration.
 
-
+              - `cache_creation: Optional[BetaCacheCreation]`
 
-stop\_sequence: Optional[str]
+                Breakdown of cached tokens by TTL
 
-Which custom stop sequence was generated, if any.
+              - `cache_creation_input_tokens: int`
 
-This value will be a non-null string if one of your custom stop sequences was generated.
+                The number of input tokens used to create the cache entry.
 
-
+                default: 0, minimum: 0
 
-type: Literal["message"]
+              - `cache_read_input_tokens: int`
 
-Object type.
+                The number of input tokens read from the cache.
 
-For Messages, this is always `"message"`.
+                default: 0, minimum: 0
 
-
+              - `input_tokens: int`
 
-usage: [BetaUsage](api/beta/messages.md)
+                The number of input tokens which were used.
 
-Billing and rate-limit usage.
+                minimum: 0
 
-Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+              - `output_tokens: int`
 
-Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+                The number of output tokens which were used.
 
-For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+                minimum: 0
 
-Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+              - `type: Literal["compaction"]`
 
-
+                Usage for a compaction iteration
 
-cache\_creation: Optional[BetaCacheCreation]
+                default: compaction
 
-Breakdown of cached tokens by TTL
+            - `class BetaAdvisorMessageIterationUsage: …`
 
-ephemeral\_1h\_input\_tokens: int
+              Token usage for an advisor sub-inference iteration.
 
-The number of input tokens used to create the 1 hour cache entry.
+              - `cache_creation: Optional[BetaCacheCreation]`
 
-ephemeral\_5m\_input\_tokens: int
+                Breakdown of cached tokens by TTL
 
-The number of input tokens used to create the 5 minute cache entry.
+              - `cache_creation_input_tokens: int`
 
-cache\_creation\_input\_tokens: Optional[int]
+                The number of input tokens used to create the cache entry.
 
-The number of input tokens used to create the cache entry.
+                default: 0, minimum: 0
 
-cache\_read\_input\_tokens: Optional[int]
+              - `cache_read_input_tokens: int`
 
-The number of input tokens read from the cache.
+                The number of input tokens read from the cache.
 
-inference\_geo: Optional[str]
+                default: 0, minimum: 0
 
-The geographic region where inference was performed for this request.
+              - `input_tokens: int`
 
-input\_tokens: int
+                The number of input tokens which were used.
 
-The number of input tokens which were used.
+                minimum: 0
 
-
+              - `model: Model`
 
-iterations: Optional[BetaIterationsUsage]
+                The model that will complete your prompt.
 
-Per-iteration token usage breakdown.
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+              - `output_tokens: int`
 
-- Determine which iterations exceeded long context thresholds (>=200k tokens)
-- Calculate the true context window size from the last iteration
-- Understand token accumulation across server-side tool use loops
+                The number of output tokens which were used.
 
-One of the following:
+                minimum: 0
 
-
+              - `type: Literal["advisor_message"]`
 
-class BetaMessageIterationUsage: …
+                Usage for an advisor sub-inference iteration
 
-Token usage for a sampling iteration.
+                default: advisor_message
 
-
+            - `class BetaFallbackMessageIterationUsage: …`
 
-cache\_creation: Optional[BetaCacheCreation]
+              Token usage for the fallback-model attempt of a server-side fallback request.
 
-Breakdown of cached tokens by TTL
+              Produced in place of a `message` entry for whichever hop served the
+              response. A declined hop produces the existing `message` entry. Whether
+              a fallback model served the response is signalled by the presence of this
+              entry in `usage.iterations`.
 
-ephemeral\_1h\_input\_tokens: int
+              - `cache_creation: Optional[BetaCacheCreation]`
 
-The number of input tokens used to create the 1 hour cache entry.
+                Breakdown of cached tokens by TTL
 
-ephemeral\_5m\_input\_tokens: int
+              - `cache_creation_input_tokens: int`
 
-The number of input tokens used to create the 5 minute cache entry.
+                The number of input tokens used to create the cache entry.
 
-cache\_creation\_input\_tokens: int
+                default: 0, minimum: 0
 
-The number of input tokens used to create the cache entry.
+              - `cache_read_input_tokens: int`
 
-cache\_read\_input\_tokens: int
+                The number of input tokens read from the cache.
 
-The number of input tokens read from the cache.
+                default: 0, minimum: 0
 
-input\_tokens: int
+              - `input_tokens: int`
 
-The number of input tokens which were used.
+                The number of input tokens which were used.
 
-
+                minimum: 0
 
-model: [Model](api/messages.md)
+              - `model: Model`
 
-The model that will complete your prompt.
+                The model that will complete your prompt.
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-One of the following:
+              - `output_tokens: int`
 
-
+                The number of output tokens which were used.
 
-Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]
+                minimum: 0
 
-The model that will complete your prompt.
+              - `type: Literal["fallback_message"]`
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+                Usage for the fallback-model attempt that served the response
 
-- `claude-sonnet-5` - High-performance model for coding and agents
-- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-- `claude-mythos-5` - Most capable model for cybersecurity and biology research
-- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-- `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-- `claude-sonnet-4-6` - Best combination of speed and intelligence
-- `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-- `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-- `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-- `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-- `claude-sonnet-4-5` - High-performance model for agents and coding
-- `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-- `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+                default: fallback_message
 
-One of the following:
+          - `output_tokens: int`
 
-"claude-sonnet-5"
+            The number of output tokens which were used.
 
-High-performance model for coding and agents
+            minimum: 0
 
-"claude-fable-5"
+          - `output_tokens_details: Optional[BetaOutputTokensDetails]`
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+            Breakdown of output tokens by category.
 
-"claude-mythos-5"
+            `output_tokens` remains the inclusive, authoritative total used for billing.
+            This object provides a read-only decomposition for observability — for example,
+            how many of the billed output tokens were spent on internal reasoning that may
+            have been summarized before being returned to you.
 
-Most capable model for cybersecurity and biology research
+            - `thinking_tokens: int`
 
-"claude-opus-4-8"
+              Number of output tokens the model generated as internal reasoning, including
+              the thinking-block delimiter tokens.
 
-Frontier intelligence for long-running agents and coding
+              Reflects the raw reasoning the model produced, not the (possibly shorter)
+              summarized thinking text returned in the response body. Computed by
+              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              generation count by a small number of tokens. Always ≤ `output_tokens`;
+              `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
-"claude-opus-4-7"
+              default: 0, minimum: 0
 
-Frontier intelligence for long-running agents and coding
+          - `server_tool_use: Optional[BetaServerToolUsage]`
 
-"claude-mythos-preview"
+            The number of server tool requests.
 
-New class of intelligence, strongest in coding and cybersecurity
+            - `web_fetch_requests: int`
 
-"claude-opus-4-6"
+              The number of web fetch tool requests.
 
-Frontier intelligence for long-running agents and coding
+              default: 0, minimum: 0
 
-"claude-sonnet-4-6"
+            - `web_search_requests: int`
 
-Best combination of speed and intelligence
+              The number of web search tool requests.
 
-"claude-haiku-4-5"
+              default: 0, minimum: 0
 
-Fastest model with near-frontier intelligence
+          - `service_tier: Optional[Literal["standard", "priority", "batch"]]`
 
-"claude-haiku-4-5-20251001"
+            If the request used the priority, standard, or batch tier.
 
-Fastest model with near-frontier intelligence
+            - `"standard"`
 
-"claude-opus-4-5"
+            - `"priority"`
 
-Premium model combining maximum intelligence with practical performance
+            - `"batch"`
 
-"claude-opus-4-5-20251101"
+          - `speed: Optional[Literal["standard", "fast"]]`
 
-Premium model combining maximum intelligence with practical performance
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-"claude-sonnet-4-5"
+            - `"standard"`
 
-High-performance model for agents and coding
+            - `"fast"`
 
-"claude-sonnet-4-5-20250929"
+        - `input_transformations: Optional[List[BetaThinkingDroppedInputTransformation]]`
 
-High-performance model for agents and coding
+          Changes the API made to the request's input before showing it to the model:
+          one entry per change, in request order. Today the only entry type is
+          `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
+          block from the request's `messages` that was removed from the prompt instead
+          of being shown to the model because it failed a binding check. More entry
+          types may be added over time; ignore types you do not recognize.
 
-"claude-opus-4-1"
+          Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
+          every such response from a model that supports extended thinking, as `[]`
+          when nothing was changed; without the beta, blocks are removed all the same
+          but nothing is reported. Removed blocks contribute nothing to
+          `usage.input_tokens`. When streaming, the array is final in `message_start`;
+          the final `message_delta` event carries it only when a server-side model
+          fallback happened mid-stream, in which case it holds the serving model's
+          entries and replaces the one in `message_start`.
 
-Exceptional model for specialized complex tasks
+          - `path: str`
 
-"claude-opus-4-1-20250805"
+            Where the removed block was in your request, as `messages.{i}.content.{j}`:
+            `i` indexes the `messages` array you sent and `j` that message's `content`
+            array — the same form error messages use.
 
-Exceptional model for specialized complex tasks
+          - `reason: Literal["model_binding_mismatch", "prefix_binding_mismatch", "organization_binding_mismatch", "end_user_binding_mismatch"]`
 
-str
+            Which binding check removed the block: `model_binding_mismatch` — it was
+            created by a model whose reasoning the requested model may not read;
+            `prefix_binding_mismatch` — the conversation before it differs from the
+            conversation it was created in (the rest of that turn's consecutive thinking
+            blocks are removed with it, each with this reason);
+            `organization_binding_mismatch` — it was created under a different
+            organization (an Anthropic organization, AWS account or Google Cloud project)
+            and this organization is not one of its additional organizations;
+            `end_user_binding_mismatch` — it was created for a different end user, or
+            was removed by the consumer-organization binding. A block that would fail
+            several checks reports one reason, in this order of precedence:
+            `organization_binding_mismatch`, `end_user_binding_mismatch`,
+            `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-output\_tokens: int
+            - `"model_binding_mismatch"`
 
-The number of output tokens which were used.
+            - `"prefix_binding_mismatch"`
 
-type: Literal["message"]
+            - `"organization_binding_mismatch"`
 
-Usage for a sampling iteration
+            - `"end_user_binding_mismatch"`
 
-
+          - `type: Literal["thinking_dropped"]`
 
-class BetaCompactionIterationUsage: …
+            Always `thinking_dropped` for this entry type.
 
-Token usage for a compaction iteration.
+            default: thinking_dropped
 
-
+      - `type: Literal["succeeded"]`
 
-cache\_creation: Optional[BetaCacheCreation]
+        default: succeeded
 
-Breakdown of cached tokens by TTL
+    - `class BetaMessageBatchErroredResult: …`
 
-ephemeral\_1h\_input\_tokens: int
+      - `error: BetaErrorResponse`
 
-The number of input tokens used to create the 1 hour cache entry.
+        - `error: BetaError`
 
-ephemeral\_5m\_input\_tokens: int
+          - `class BetaInvalidRequestError: …`
 
-The number of input tokens used to create the 5 minute cache entry.
+            - `message: str`
 
-cache\_creation\_input\_tokens: int
+              default: Invalid request
 
-The number of input tokens used to create the cache entry.
+            - `type: Literal["invalid_request_error"]`
 
-cache\_read\_input\_tokens: int
+              default: invalid_request_error
 
-The number of input tokens read from the cache.
+          - `class BetaAuthenticationError: …`
 
-input\_tokens: int
+            - `message: str`
 
-The number of input tokens which were used.
+              default: Authentication error
 
-output\_tokens: int
+            - `type: Literal["authentication_error"]`
 
-The number of output tokens which were used.
+              default: authentication_error
 
-type: Literal["compaction"]
+          - `class BetaBillingError: …`
 
-Usage for a compaction iteration
+            - `message: str`
 
-
+              default: Billing error
 
-class BetaAdvisorMessageIterationUsage: …
+            - `type: Literal["billing_error"]`
 
-Token usage for an advisor sub-inference iteration.
+              default: billing_error
 
-
+          - `class BetaPermissionError: …`
 
-cache\_creation: Optional[BetaCacheCreation]
+            - `message: str`
 
-Breakdown of cached tokens by TTL
+              default: Permission denied
 
-ephemeral\_1h\_input\_tokens: int
+            - `type: Literal["permission_error"]`
 
-The number of input tokens used to create the 1 hour cache entry.
+              default: permission_error
 
-ephemeral\_5m\_input\_tokens: int
+          - `class BetaNotFoundError: …`
 
-The number of input tokens used to create the 5 minute cache entry.
+            - `message: str`
 
-cache\_creation\_input\_tokens: int
+              default: Not found
 
-The number of input tokens used to create the cache entry.
+            - `type: Literal["not_found_error"]`
 
-cache\_read\_input\_tokens: int
+              default: not_found_error
 
-The number of input tokens read from the cache.
+          - `class BetaRateLimitError: …`
 
-input\_tokens: int
+            - `message: str`
 
-The number of input tokens which were used.
+              default: Rate limited
 
-
+            - `type: Literal["rate_limit_error"]`
 
-model: [Model](api/messages.md)
+              default: rate_limit_error
 
-The model that will complete your prompt.
+          - `class BetaGatewayTimeoutError: …`
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+            - `message: str`
 
-One of the following:
+              default: Request timeout
 
-
+            - `type: Literal["timeout_error"]`
 
-Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]
+              default: timeout_error
 
-The model that will complete your prompt.
+          - `class BetaAPIError: …`
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+            - `message: str`
 
-- `claude-sonnet-5` - High-performance model for coding and agents
-- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-- `claude-mythos-5` - Most capable model for cybersecurity and biology research
-- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-- `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-- `claude-sonnet-4-6` - Best combination of speed and intelligence
-- `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-- `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-- `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-- `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-- `claude-sonnet-4-5` - High-performance model for agents and coding
-- `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-- `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+              default: Internal server error
 
-One of the following:
+            - `type: Literal["api_error"]`
 
-"claude-sonnet-5"
+              default: api_error
 
-High-performance model for coding and agents
+          - `class BetaOverloadedError: …`
 
-"claude-fable-5"
+            - `message: str`
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+              default: Overloaded
 
-"claude-mythos-5"
+            - `type: Literal["overloaded_error"]`
 
-Most capable model for cybersecurity and biology research
+              default: overloaded_error
 
-"claude-opus-4-8"
+        - `request_id: Optional[str]`
 
-Frontier intelligence for long-running agents and coding
+        - `type: Literal["error"]`
 
-"claude-opus-4-7"
+          default: error
 
-Frontier intelligence for long-running agents and coding
+      - `type: Literal["errored"]`
 
-"claude-mythos-preview"
+        default: errored
 
-New class of intelligence, strongest in coding and cybersecurity
+    - `class BetaMessageBatchCanceledResult: …`
 
-"claude-opus-4-6"
+      - `type: Literal["canceled"]`
 
-Frontier intelligence for long-running agents and coding
+        default: canceled
 
-"claude-sonnet-4-6"
+    - `class BetaMessageBatchExpiredResult: …`
 
-Best combination of speed and intelligence
+      - `type: Literal["expired"]`
 
-"claude-haiku-4-5"
+        default: expired
 
-Fastest model with near-frontier intelligence
+### Example
 
-"claude-haiku-4-5-20251001"
+```python
+import os
+from anthropic import Anthropic
 
-Fastest model with near-frontier intelligence
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+for batch in client.beta.messages.batches.results(
+    message_batch_id="message_batch_id",
+):
+    print(batch)
+```
 
-"claude-opus-4-5"
+## Domain types
 
-Premium model combining maximum intelligence with practical performance
+### Beta Deleted Message Batch
 
-"claude-opus-4-5-20251101"
+- `class BetaDeletedMessageBatch: …`
 
-Premium model combining maximum intelligence with practical performance
+  - `id: str`
 
-"claude-sonnet-4-5"
+    ID of the Message Batch.
 
-High-performance model for agents and coding
+  - `type: Literal["message_batch_deleted"]`
 
-"claude-sonnet-4-5-20250929"
+    Deleted object type.
 
-High-performance model for agents and coding
+    For Message Batches, this is always `"message_batch_deleted"`.
 
-"claude-opus-4-1"
+    default: message_batch_deleted
 
-Exceptional model for specialized complex tasks
+### Beta Message Batch
 
-"claude-opus-4-1-20250805"
+- `class BetaMessageBatch: …`
 
-Exceptional model for specialized complex tasks
+  - `id: str`
 
-str
+    Unique object identifier.
 
-output\_tokens: int
+    The format and length of IDs may change over time.
 
-The number of output tokens which were used.
+  - `archived_at: Optional[datetime]`
 
-type: Literal["advisor\_message"]
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-Usage for an advisor sub-inference iteration
+    format: date-time
 
-
+  - `cancel_initiated_at: Optional[datetime]`
 
-class BetaFallbackMessageIterationUsage: …
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-Token usage for the fallback-model attempt of a server-side fallback request.
+    format: date-time
 
-Produced in place of a `message` entry for whichever hop served the
-response. A declined hop produces the existing `message` entry. Whether
-a fallback model served the response is signalled by the presence of this
-entry in `usage.iterations`.
+  - `created_at: datetime`
 
-
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-cache\_creation: Optional[BetaCacheCreation]
+    format: date-time
 
-Breakdown of cached tokens by TTL
+  - `ended_at: Optional[datetime]`
 
-ephemeral\_1h\_input\_tokens: int
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
-The number of input tokens used to create the 1 hour cache entry.
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
-ephemeral\_5m\_input\_tokens: int
+    format: date-time
 
-The number of input tokens used to create the 5 minute cache entry.
+  - `expires_at: datetime`
 
-cache\_creation\_input\_tokens: int
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-The number of input tokens used to create the cache entry.
+    format: date-time
 
-cache\_read\_input\_tokens: int
+  - `processing_status: Literal["in_progress", "canceling", "ended"]`
 
-The number of input tokens read from the cache.
+    Processing status of the Message Batch.
 
-input\_tokens: int
+    - `"in_progress"`
 
-The number of input tokens which were used.
+    - `"canceling"`
 
-
+    - `"ended"`
 
-model: [Model](api/messages.md)
+  - `request_counts: BetaMessageBatchRequestCounts`
 
-The model that will complete your prompt.
+    Tallies requests within the Message Batch, categorized by their status.
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-One of the following:
+    - `canceled: int`
 
-
+      Number of requests in the Message Batch that have been canceled.
 
-Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]
+      This is zero until processing of the entire Message Batch has ended.
 
-The model that will complete your prompt.
+      default: 0
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+    - `errored: int`
 
-- `claude-sonnet-5` - High-performance model for coding and agents
-- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-- `claude-mythos-5` - Most capable model for cybersecurity and biology research
-- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-- `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
-- `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
-- `claude-sonnet-4-6` - Best combination of speed and intelligence
-- `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-- `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-- `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-- `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
-- `claude-sonnet-4-5` - High-performance model for agents and coding
-- `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-- `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
-- `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
+      Number of requests in the Message Batch that encountered an error.
 
-One of the following:
+      This is zero until processing of the entire Message Batch has ended.
 
-"claude-sonnet-5"
+      default: 0
 
-High-performance model for coding and agents
+    - `expired: int`
 
-"claude-fable-5"
+      Number of requests in the Message Batch that have expired.
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+      This is zero until processing of the entire Message Batch has ended.
 
-"claude-mythos-5"
+      default: 0
 
-Most capable model for cybersecurity and biology research
+    - `processing: int`
 
-"claude-opus-4-8"
+      Number of requests in the Message Batch that are processing.
 
-Frontier intelligence for long-running agents and coding
+      default: 0
 
-"claude-opus-4-7"
+    - `succeeded: int`
 
-Frontier intelligence for long-running agents and coding
+      Number of requests in the Message Batch that have completed successfully.
 
-"claude-mythos-preview"
+      This is zero until processing of the entire Message Batch has ended.
 
-New class of intelligence, strongest in coding and cybersecurity
+      default: 0
 
-"claude-opus-4-6"
+  - `results_url: Optional[str]`
 
-Frontier intelligence for long-running agents and coding
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
-"claude-sonnet-4-6"
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Best combination of speed and intelligence
+  - `type: Literal["message_batch"]`
 
-"claude-haiku-4-5"
+    Object type.
 
-Fastest model with near-frontier intelligence
+    For Message Batches, this is always `"message_batch"`.
 
-"claude-haiku-4-5-20251001"
+    default: message_batch
 
-Fastest model with near-frontier intelligence
+### Beta Message Batch Canceled Result
 
-"claude-opus-4-5"
+- `class BetaMessageBatchCanceledResult: …`
 
-Premium model combining maximum intelligence with practical performance
+  - `type: Literal["canceled"]`
 
-"claude-opus-4-5-20251101"
+    default: canceled
 
-Premium model combining maximum intelligence with practical performance
+### Beta Message Batch Errored Result
 
-"claude-sonnet-4-5"
+- `class BetaMessageBatchErroredResult: …`
 
-High-performance model for agents and coding
+  - `error: BetaErrorResponse`
 
-"claude-sonnet-4-5-20250929"
+    - `error: BetaError`
 
-High-performance model for agents and coding
+      - `class BetaInvalidRequestError: …`
 
-"claude-opus-4-1"
+        - `message: str`
 
-Exceptional model for specialized complex tasks
+          default: Invalid request
 
-"claude-opus-4-1-20250805"
+        - `type: Literal["invalid_request_error"]`
 
-Exceptional model for specialized complex tasks
+          default: invalid_request_error
 
-str
+      - `class BetaAuthenticationError: …`
 
-output\_tokens: int
+        - `message: str`
 
-The number of output tokens which were used.
+          default: Authentication error
 
-type: Literal["fallback\_message"]
+        - `type: Literal["authentication_error"]`
 
-Usage for the fallback-model attempt that served the response
+          default: authentication_error
 
-output\_tokens: int
+      - `class BetaBillingError: …`
 
-The number of output tokens which were used.
+        - `message: str`
 
-
+          default: Billing error
 
-output\_tokens\_details: Optional[BetaOutputTokensDetails]
+        - `type: Literal["billing_error"]`
 
-Breakdown of output tokens by category.
+          default: billing_error
 
-`output_tokens` remains the inclusive, authoritative total used for billing.
-This object provides a read-only decomposition for observability — for example,
-how many of the billed output tokens were spent on internal reasoning that may
-have been summarized before being returned to you.
+      - `class BetaPermissionError: …`
 
-
+        - `message: str`
 
-thinking\_tokens: int
+          default: Permission denied
 
-Number of output tokens the model generated as internal reasoning, including
-the thinking-block delimiter tokens.
+        - `type: Literal["permission_error"]`
 
-Reflects the raw reasoning the model produced, not the (possibly shorter)
-summarized thinking text returned in the response body. Computed by
-re-tokenizing the raw reasoning text, so it may differ from the model's exact
-generation count by a small number of tokens. Always ≤ `output_tokens`;
-`output_tokens - thinking_tokens` approximates the non-reasoning output.
+          default: permission_error
 
-minimum0
+      - `class BetaNotFoundError: …`
 
-
+        - `message: str`
 
-server\_tool\_use: Optional[BetaServerToolUsage]
+          default: Not found
 
-The number of server tool requests.
+        - `type: Literal["not_found_error"]`
 
-web\_fetch\_requests: int
+          default: not_found_error
 
-The number of web fetch tool requests.
+      - `class BetaRateLimitError: …`
 
-web\_search\_requests: int
+        - `message: str`
 
-The number of web search tool requests.
+          default: Rate limited
 
-
+        - `type: Literal["rate_limit_error"]`
 
-service\_tier: Optional[Literal["standard", "priority", "batch"]]
+          default: rate_limit_error
 
-If the request used the priority, standard, or batch tier.
+      - `class BetaGatewayTimeoutError: …`
 
-One of the following:
+        - `message: str`
 
-"standard"
+          default: Request timeout
 
-"priority"
+        - `type: Literal["timeout_error"]`
 
-"batch"
+          default: timeout_error
 
-
+      - `class BetaAPIError: …`
 
-speed: Optional[Literal["standard", "fast"]]
+        - `message: str`
 
-The inference speed mode used for this request.
+          default: Internal server error
 
-One of the following:
+        - `type: Literal["api_error"]`
 
-"standard"
+          default: api_error
 
-"fast"
+      - `class BetaOverloadedError: …`
 
-type: Literal["succeeded"]
+        - `message: str`
+
+          default: Overloaded
+
+        - `type: Literal["overloaded_error"]`
+
+          default: overloaded_error
+
+    - `request_id: Optional[str]`
+
+    - `type: Literal["error"]`
+
+      default: error
+
+  - `type: Literal["errored"]`
+
+    default: errored
+
+### Beta Message Batch Expired Result
+
+- `class BetaMessageBatchExpiredResult: …`
+
+  - `type: Literal["expired"]`
+
+    default: expired
+
+### Beta Message Batch Individual Response
+
+- `class BetaMessageBatchIndividualResponse: …`
+
+  This is a single line in the response `.jsonl` file and does not represent the response as a whole.
+
+  - `custom_id: str`
+
+    Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
+
+    Must be unique for each request within the Message Batch.
+
+  - `result: BetaMessageBatchResult`
+
+    Processing result for this request.
+
+    Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
+
+    - `class BetaMessageBatchSucceededResult: …`
+
+      - `message: BetaMessage`
+
+        - `id: str`
+
+          Unique object identifier.
+
+          The format and length of IDs may change over time.
+
+        - `container: Optional[BetaContainer]`
+
+          Information about the container used in the request (for the code execution tool)
+
+          - `id: str`
+
+            Identifier for the container used in this request
+
+          - `expires_at: datetime`
+
+            The time at which the container will expire.
+
+            format: date-time
+
+          - `skills: Optional[List[BetaContainerSkill]]`
+
+            Skills loaded in the container
+
+            - `skill_id: str`
+
+              Skill ID
+
+              maxLength: 64, minLength: 1
+
+            - `type: Literal["anthropic", "custom"]`
+
+              Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+
+              - `"anthropic"`
+
+              - `"custom"`
+
+            - `version: str`
+
+              The resolved version: a skill version ID for custom skills.
+
+              maxLength: 64, minLength: 1
+
+        - `content: List[BetaContentBlock]`
+
+          Content generated by the model.
+
+          This is an array of content blocks, each of which has a `type` that determines its shape.
+
+          Example:
+
+          ```json
+          [{"type": "text", "text": "Hi, I'm Claude."}]
+          ```
+
+          If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
+
+          For example, if the input `messages` were:
+
+          ```json
+          [
+            {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+            {"role": "assistant", "content": "The best answer is ("}
+          ]
+          ```
+
+          Then the response `content` might be:
+
+          ```json
+          [{"type": "text", "text": "B)"}]
+          ```
+
+          - `class BetaTextBlock: …`
+
+            - `citations: Optional[List[BetaTextCitation]]`
+
+              Citations supporting the text block.
+
+              The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+
+              - `class BetaCitationCharLocation: …`
+
+                - `cited_text: str`
+
+                - `document_index: int`
+
+                  minimum: 0
+
+                - `document_title: Optional[str]`
+
+                - `end_char_index: int`
+
+                - `file_id: Optional[str]`
+
+                - `start_char_index: int`
+
+                  minimum: 0
+
+                - `type: Literal["char_location"]`
+
+                  default: char_location
+
+              - `class BetaCitationPageLocation: …`
+
+                - `cited_text: str`
+
+                - `document_index: int`
+
+                  minimum: 0
+
+                - `document_title: Optional[str]`
+
+                - `end_page_number: int`
+
+                - `file_id: Optional[str]`
+
+                - `start_page_number: int`
+
+                  minimum: 1
+
+                - `type: Literal["page_location"]`
+
+                  default: page_location
+
+              - `class BetaCitationContentBlockLocation: …`
+
+                - `cited_text: str`
+
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+                - `document_index: int`
+
+                  minimum: 0
+
+                - `document_title: Optional[str]`
+
+                - `end_block_index: int`
+
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+                - `file_id: Optional[str]`
+
+                - `start_block_index: int`
+
+                  0-based index of the first cited block in the source's `content` array.
+
+                  minimum: 0
+
+                - `type: Literal["content_block_location"]`
+
+                  default: content_block_location
+
+              - `class BetaCitationsWebSearchResultLocation: …`
+
+                - `cited_text: str`
+
+                - `encrypted_index: str`
+
+                - `title: Optional[str]`
+
+                  maxLength: 512
+
+                - `type: Literal["web_search_result_location"]`
+
+                  default: web_search_result_location
+
+                - `url: str`
+
+              - `class BetaCitationSearchResultLocation: …`
+
+                - `cited_text: str`
+
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+                - `end_block_index: int`
+
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+                - `search_result_index: int`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
+
+                  minimum: 0
+
+                - `source: str`
+
+                - `start_block_index: int`
+
+                  0-based index of the first cited block in the source's `content` array.
+
+                  minimum: 0
+
+                - `title: Optional[str]`
+
+                - `type: Literal["search_result_location"]`
+
+                  default: search_result_location
+
+            - `text: str`
+
+              maxLength: 5000000, minLength: 0
+
+            - `type: Literal["text"]`
+
+              default: text
+
+          - `class BetaThinkingBlock: …`
+
+            - `signature: str`
+
+              A value used to verify that this thinking block was generated by Claude when it is passed back to the API.
+
+              This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
+
+              See [extended thinking](build-with-claude/extended-thinking.md) for details.
+
+            - `thinking: str`
+
+              The text of Claude's thinking process for this block.
+
+            - `type: Literal["thinking"]`
+
+              default: thinking
+
+          - `class BetaRedactedThinkingBlock: …`
+
+            - `data: str`
+
+              The contents of this redacted thinking block, returned when portions of the model's thinking were safety-redacted. This field is opaque and encrypted, with no readable content.
+
+              Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
+
+              See [extended thinking](build-with-claude/extended-thinking.md) for details.
+
+            - `type: Literal["redacted_thinking"]`
+
+              default: redacted_thinking
+
+          - `class BetaToolUseBlock: …`
+
+            - `id: str`
+
+              pattern: ^[a-zA-Z0-9_-]+$
+
+            - `input: Dict[str, object]`
+
+            - `name: str`
+
+              minLength: 1
+
+            - `type: Literal["tool_use"]`
+
+              default: tool_use
+
+            - `caller: Optional[Caller]`
+
+              Tool invocation directly from the model.
+
+              - `class BetaDirectCaller: …`
+
+                Tool invocation directly from the model.
+
+                - `type: Literal["direct"]`
+
+              - `class BetaServerToolCaller: …`
+
+                Tool invocation generated by a server-side tool.
+
+                - `tool_id: str`
+
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+                - `type: Literal["code_execution_20250825"]`
+
+              - `class BetaServerToolCaller20260120: …`
+
+                - `tool_id: str`
+
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+                - `type: Literal["code_execution_20260120"]`
+
+            - `toolset_name: Optional[str]`
+
+              For a toolset member tool_use, the toolset family.
+
+              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
+          - `class BetaServerToolUseBlock: …`
+
+            - `id: str`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `input: Dict[str, object]`
+
+            - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+              - `"advisor"`
+
+              - `"web_search"`
+
+              - `"web_fetch"`
+
+              - `"code_execution"`
+
+              - `"bash_code_execution"`
+
+              - `"text_editor_code_execution"`
+
+              - `"tool_search_tool_regex"`
+
+              - `"tool_search_tool_bm25"`
+
+            - `type: Literal["server_tool_use"]`
+
+              default: server_tool_use
+
+            - `caller: Optional[Caller]`
+
+              Tool invocation directly from the model.
+
+              - `class BetaDirectCaller: …`
+
+                Tool invocation directly from the model.
+
+              - `class BetaServerToolCaller: …`
+
+                Tool invocation generated by a server-side tool.
+
+              - `class BetaServerToolCaller20260120: …`
+
+          - `class BetaWebSearchToolResultBlock: …`
+
+            - `content: BetaWebSearchToolResultBlockContent`
+
+              - `class BetaWebSearchToolResultError: …`
+
+                - `error_code: BetaWebSearchToolResultErrorCode`
+
+                  - `"invalid_tool_input"`
+
+                  - `"unavailable"`
+
+                  - `"max_uses_exceeded"`
+
+                  - `"too_many_requests"`
+
+                  - `"query_too_long"`
+
+                  - `"request_too_large"`
+
+                - `type: Literal["web_search_tool_result_error"]`
+
+                  default: web_search_tool_result_error
+
+              - `List[BetaWebSearchResultBlock]`
+
+                - `encrypted_content: str`
+
+                - `page_age: Optional[str]`
+
+                - `title: str`
+
+                - `type: Literal["web_search_result"]`
+
+                  default: web_search_result
+
+                - `url: str`
+
+            - `tool_use_id: str`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: Literal["web_search_tool_result"]`
+
+              default: web_search_tool_result
+
+            - `caller: Optional[Caller]`
+
+              Tool invocation directly from the model.
+
+              - `class BetaDirectCaller: …`
+
+                Tool invocation directly from the model.
+
+              - `class BetaServerToolCaller: …`
+
+                Tool invocation generated by a server-side tool.
+
+              - `class BetaServerToolCaller20260120: …`
+
+          - `class BetaWebFetchToolResultBlock: …`
+
+            - `content: Content`
+
+              - `class BetaWebFetchToolResultErrorBlock: …`
+
+                - `error_code: BetaWebFetchToolResultErrorCode`
+
+                  - `"invalid_tool_input"`
+
+                  - `"url_too_long"`
+
+                  - `"url_not_allowed"`
+
+                  - `"url_not_in_prior_context"`
+
+                  - `"url_not_accessible"`
+
+                  - `"unsupported_content_type"`
+
+                  - `"too_many_requests"`
+
+                  - `"max_uses_exceeded"`
+
+                  - `"unavailable"`
+
+                - `type: Literal["web_fetch_tool_result_error"]`
+
+                  default: web_fetch_tool_result_error
+
+              - `class BetaWebFetchBlock: …`
+
+                - `content: BetaDocumentBlock`
+
+                  - `citations: Optional[BetaCitationConfig]`
+
+                    Citation configuration for the document
+
+                    - `enabled: bool`
+
+                      default: false
+
+                  - `source: Source`
+
+                    - `class BetaBase64PDFSource: …`
+
+                      - `data: str`
+
+                        format: byte
+
+                      - `media_type: Literal["application/pdf"]`
+
+                      - `type: Literal["base64"]`
+
+                    - `class BetaPlainTextSource: …`
+
+                      - `data: str`
+
+                      - `media_type: Literal["text/plain"]`
+
+                      - `type: Literal["text"]`
+
+                  - `title: Optional[str]`
+
+                    The title of the document
+
+                  - `type: Literal["document"]`
+
+                    default: document
+
+                - `retrieved_at: Optional[str]`
+
+                  ISO 8601 timestamp when the content was retrieved
+
+                - `type: Literal["web_fetch_result"]`
+
+                  default: web_fetch_result
+
+                - `url: str`
+
+                  Fetched content URL
+
+            - `tool_use_id: str`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: Literal["web_fetch_tool_result"]`
+
+              default: web_fetch_tool_result
+
+            - `caller: Optional[Caller]`
+
+              Tool invocation directly from the model.
+
+              - `class BetaDirectCaller: …`
+
+                Tool invocation directly from the model.
+
+              - `class BetaServerToolCaller: …`
+
+                Tool invocation generated by a server-side tool.
+
+              - `class BetaServerToolCaller20260120: …`
+
+          - `class BetaAdvisorToolResultBlock: …`
+
+            - `content: Content`
+
+              - `class BetaAdvisorToolResultError: …`
+
+                - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 4 more]`
+
+                  - `"max_uses_exceeded"`
+
+                  - `"prompt_too_long"`
+
+                  - `"too_many_requests"`
+
+                  - `"overloaded"`
+
+                  - `"unavailable"`
+
+                  - `"execution_time_exceeded"`
+
+                  - `"model_not_found"`
+
+                - `type: Literal["advisor_tool_result_error"]`
+
+                  default: advisor_tool_result_error
+
+              - `class BetaAdvisorResultBlock: …`
+
+                - `stop_reason: Optional[str]`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
+                - `text: str`
+
+                - `type: Literal["advisor_result"]`
+
+                  default: advisor_result
+
+              - `class BetaAdvisorRedactedResultBlock: …`
+
+                - `encrypted_content: str`
+
+                  Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+                - `stop_reason: Optional[str]`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
+
+                - `type: Literal["advisor_redacted_result"]`
+
+                  default: advisor_redacted_result
+
+            - `tool_use_id: str`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: Literal["advisor_tool_result"]`
+
+              default: advisor_tool_result
+
+          - `class BetaCodeExecutionToolResultBlock: …`
+
+            - `content: BetaCodeExecutionToolResultBlockContent`
+
+              Code execution result with encrypted stdout for PFC + web_search results.
+
+              - `class BetaCodeExecutionToolResultError: …`
+
+                - `error_code: BetaCodeExecutionToolResultErrorCode`
+
+                  - `"invalid_tool_input"`
+
+                  - `"unavailable"`
+
+                  - `"too_many_requests"`
+
+                  - `"execution_time_exceeded"`
+
+                - `type: Literal["code_execution_tool_result_error"]`
+
+                  default: code_execution_tool_result_error
+
+              - `class BetaCodeExecutionResultBlock: …`
+
+                - `content: List[BetaCodeExecutionOutputBlock]`
+
+                  - `file_id: str`
+
+                  - `type: Literal["code_execution_output"]`
+
+                    default: code_execution_output
+
+                - `return_code: int`
+
+                - `stderr: str`
+
+                - `stdout: str`
+
+                - `type: Literal["code_execution_result"]`
+
+                  default: code_execution_result
+
+              - `class BetaEncryptedCodeExecutionResultBlock: …`
+
+                Code execution result with encrypted stdout for PFC + web_search results.
+
+                - `content: List[BetaCodeExecutionOutputBlock]`
+
+                  - `file_id: str`
+
+                  - `type: Literal["code_execution_output"]`
+
+                    default: code_execution_output
+
+                - `encrypted_stdout: str`
+
+                - `return_code: int`
+
+                - `stderr: str`
+
+                - `type: Literal["encrypted_code_execution_result"]`
+
+                  default: encrypted_code_execution_result
+
+            - `tool_use_id: str`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: Literal["code_execution_tool_result"]`
+
+              default: code_execution_tool_result
+
+          - `class BetaBashCodeExecutionToolResultBlock: …`
+
+            - `content: Content`
+
+              - `class BetaBashCodeExecutionToolResultError: …`
+
+                - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", 2 more]`
+
+                  - `"invalid_tool_input"`
+
+                  - `"unavailable"`
+
+                  - `"too_many_requests"`
+
+                  - `"execution_time_exceeded"`
+
+                  - `"output_file_too_large"`
+
+                - `type: Literal["bash_code_execution_tool_result_error"]`
+
+                  default: bash_code_execution_tool_result_error
+
+              - `class BetaBashCodeExecutionResultBlock: …`
+
+                - `content: List[BetaBashCodeExecutionOutputBlock]`
+
+                  - `file_id: str`
+
+                  - `type: Literal["bash_code_execution_output"]`
+
+                    default: bash_code_execution_output
+
+                - `return_code: int`
+
+                - `stderr: str`
+
+                - `stdout: str`
+
+                - `type: Literal["bash_code_execution_result"]`
+
+                  default: bash_code_execution_result
+
+            - `tool_use_id: str`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: Literal["bash_code_execution_tool_result"]`
+
+              default: bash_code_execution_tool_result
+
+          - `class BetaTextEditorCodeExecutionToolResultBlock: …`
+
+            - `content: Content`
+
+              - `class BetaTextEditorCodeExecutionToolResultError: …`
+
+                - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", 2 more]`
+
+                  - `"invalid_tool_input"`
+
+                  - `"unavailable"`
+
+                  - `"too_many_requests"`
+
+                  - `"execution_time_exceeded"`
+
+                  - `"file_not_found"`
+
+                - `error_message: Optional[str]`
+
+                - `type: Literal["text_editor_code_execution_tool_result_error"]`
+
+                  default: text_editor_code_execution_tool_result_error
+
+              - `class BetaTextEditorCodeExecutionViewResultBlock: …`
+
+                - `content: str`
+
+                - `file_type: Literal["text", "image", "pdf"]`
+
+                  - `"text"`
+
+                  - `"image"`
+
+                  - `"pdf"`
+
+                - `num_lines: Optional[int]`
+
+                - `start_line: Optional[int]`
+
+                - `total_lines: Optional[int]`
+
+                - `type: Literal["text_editor_code_execution_view_result"]`
+
+                  default: text_editor_code_execution_view_result
+
+              - `class BetaTextEditorCodeExecutionCreateResultBlock: …`
+
+                - `is_file_update: bool`
+
+                - `type: Literal["text_editor_code_execution_create_result"]`
+
+                  default: text_editor_code_execution_create_result
+
+              - `class BetaTextEditorCodeExecutionStrReplaceResultBlock: …`
+
+                - `lines: Optional[List[str]]`
+
+                - `new_lines: Optional[int]`
+
+                - `new_start: Optional[int]`
+
+                - `old_lines: Optional[int]`
+
+                - `old_start: Optional[int]`
+
+                - `type: Literal["text_editor_code_execution_str_replace_result"]`
+
+                  default: text_editor_code_execution_str_replace_result
+
+            - `tool_use_id: str`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: Literal["text_editor_code_execution_tool_result"]`
+
+              default: text_editor_code_execution_tool_result
+
+          - `class BetaToolSearchToolResultBlock: …`
+
+            - `content: Content`
+
+              - `class BetaToolSearchToolResultError: …`
+
+                - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", "execution_time_exceeded"]`
+
+                  - `"invalid_tool_input"`
+
+                  - `"unavailable"`
+
+                  - `"too_many_requests"`
+
+                  - `"execution_time_exceeded"`
+
+                - `error_message: Optional[str]`
+
+                - `type: Literal["tool_search_tool_result_error"]`
+
+                  default: tool_search_tool_result_error
+
+              - `class BetaToolSearchToolSearchResultBlock: …`
+
+                - `tool_references: List[BetaToolReferenceBlock]`
+
+                  - `tool_name: str`
+
+                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
+                  - `type: Literal["tool_reference"]`
+
+                    default: tool_reference
+
+                - `type: Literal["tool_search_tool_search_result"]`
+
+                  default: tool_search_tool_search_result
+
+            - `tool_use_id: str`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: Literal["tool_search_tool_result"]`
+
+              default: tool_search_tool_result
+
+          - `class BetaMCPToolUseBlock: …`
+
+            - `id: str`
+
+              pattern: ^[a-zA-Z0-9_-]+$
+
+            - `input: Dict[str, object]`
+
+            - `name: str`
+
+              The name of the MCP tool
+
+            - `server_name: str`
+
+              The name of the MCP server
+
+            - `type: Literal["mcp_tool_use"]`
+
+              default: mcp_tool_use
+
+          - `class BetaMCPToolResultBlock: …`
+
+            - `content: Union[str, List[BetaTextBlock]]`
+
+              - `str`
+
+              - `List[BetaTextBlock]`
+
+                - `citations: Optional[List[BetaTextCitation]]`
+
+                  Citations supporting the text block.
+
+                  The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+
+                - `text: str`
+
+                  maxLength: 5000000, minLength: 0
+
+                - `type: Literal["text"]`
+
+                  default: text
+
+            - `is_error: bool`
+
+              default: false
+
+            - `tool_use_id: str`
+
+              pattern: ^[a-zA-Z0-9_-]+$
+
+            - `type: Literal["mcp_tool_result"]`
+
+              default: mcp_tool_result
+
+          - `class BetaContainerUploadBlock: …`
+
+            Response model for a file uploaded to the container.
+
+            - `file_id: str`
+
+            - `type: Literal["container_upload"]`
+
+              default: container_upload
+
+          - `class BetaCompactionBlock: …`
+
+            A compaction block returned when autocompact is triggered.
+
+            When content is None, it indicates the compaction failed to produce a valid
+            summary (e.g., malformed output from the model). Clients may round-trip
+            compaction blocks with null content; the server treats them as no-ops.
+
+            - `content: Optional[str]`
+
+              Summary of compacted content, or null if compaction failed
+
+            - `encrypted_content: Optional[str]`
+
+              Opaque metadata from prior compaction, to be round-tripped verbatim
+
+            - `type: Literal["compaction"]`
+
+              default: compaction
+
+          - `class BetaFallbackBlock: …`
+
+            Marks the point in `content` where one model's output gives way to the next.
+
+            One block appears per hop where a preceding model actually ran this turn and
+            declined. A turn where no preceding model ran and declined has no such
+            boundary and carries no block — the signal for whether a fallback model
+            served the response is the presence of a `fallback_message` entry in
+            `usage.iterations`, not this block.
+
+            The block is treated like a server-tool content block for streaming: it
+            arrives via the standard `content_block_start` / `content_block_stop`
+            pair and carries no deltas.
+
+            - `from_: BetaFallbackInfo`
+
+              The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+              - `model: Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `Literal["claude-fable-5-1", "claude-mythos-5-1", "claude-sonnet-5", 14 more]`
+
+                  The model that will complete your prompt.
+
+                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                  - `claude-fable-5-1` - Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+                  - `claude-mythos-5-1` - Our most capable model for cybersecurity and biology research, available through trusted access programs
+                  - `claude-sonnet-5` - High-performance model for coding and agents
+                  - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
+                  - `claude-mythos-5` - Most capable model for cybersecurity and biology research
+                  - `claude-opus-5` - Powerful intelligence for long-running agents and coding
+                  - `claude-opus-4-8` - Powerful intelligence for long-running agents and coding
+                  - `claude-opus-4-7` - Powerful intelligence for long-running agents and coding
+                  - `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+                  - `claude-opus-4-6` - Powerful intelligence for long-running agents and coding
+                  - `claude-sonnet-4-6` - Best combination of speed and intelligence
+                  - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+                  - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+                  - `claude-opus-4-5` - Powerful intelligence for long-running agents and coding
+                  - `claude-opus-4-5-20251101` - Powerful intelligence for long-running agents and coding
+                  - `claude-sonnet-4-5` - High-performance model for agents and coding
+                  - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+
+                  - `"claude-fable-5-1"`
+
+                    Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+                  - `"claude-mythos-5-1"`
+
+                    Our most capable model for cybersecurity and biology research, available through trusted access programs
+
+                  - `"claude-sonnet-5"`
+
+                    High-performance model for coding and agents
+
+                  - `"claude-fable-5"`
+
+                    Next generation of intelligence for the hardest knowledge work and coding problems
+
+                  - `"claude-mythos-5"`
+
+                    Most capable model for cybersecurity and biology research
+
+                  - `"claude-opus-5"`
+
+                    Powerful intelligence for long-running agents and coding
+
+                  - `"claude-opus-4-8"`
+
+                    Powerful intelligence for long-running agents and coding
+
+                  - `"claude-opus-4-7"`
+
+                    Powerful intelligence for long-running agents and coding
+
+                  - `"claude-mythos-preview"`
+
+                    New class of intelligence, strongest in coding and cybersecurity
+
+                  - `"claude-opus-4-6"`
+
+                    Powerful intelligence for long-running agents and coding
+
+                  - `"claude-sonnet-4-6"`
+
+                    Best combination of speed and intelligence
+
+                  - `"claude-haiku-4-5"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `"claude-haiku-4-5-20251001"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `"claude-opus-4-5"`
+
+                    Powerful intelligence for long-running agents and coding
+
+                  - `"claude-opus-4-5-20251101"`
+
+                    Powerful intelligence for long-running agents and coding
+
+                  - `"claude-sonnet-4-5"`
+
+                    High-performance model for agents and coding
+
+                  - `"claude-sonnet-4-5-20250929"`
+
+                    High-performance model for agents and coding
+
+                - `str`
+
+            - `to: BetaFallbackInfo`
+
+              The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+            - `trigger: BetaFallbackRefusalTrigger`
+
+              What caused the `from` model to hand over at this hop.
+
+              - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+
+                The policy category that triggered a refusal.
+
+                - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+                - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+                - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+                - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+                - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
+                - `"cyber"`
+
+                  The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
+                - `"bio"`
+
+                  The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+
+                - `"frontier_llm"`
+
+                  The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
+                - `"reasoning_extraction"`
+
+                  The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+
+                - `"general_harms"`
+
+                  The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
+              - `type: Literal["refusal"]`
+
+                default: refusal
+
+            - `type: Literal["fallback"]`
+
+              default: fallback
+
+        - `context_management: Optional[BetaContextManagementResponse]`
+
+          Context management response.
+
+          Information about context management strategies applied during the request.
+
+          - `applied_edits: List[AppliedEdit]`
+
+            List of context management edits that were applied.
+
+            - `class BetaClearToolUses20250919EditResponse: …`
+
+              - `cleared_input_tokens: int`
+
+                Number of input tokens cleared by this edit.
+
+                minimum: 0
+
+              - `cleared_tool_uses: int`
+
+                Number of tool uses that were cleared.
+
+                minimum: 0
+
+              - `type: Literal["clear_tool_uses_20250919"]`
+
+                The type of context management edit applied.
+
+                default: clear_tool_uses_20250919
+
+            - `class BetaClearThinking20251015EditResponse: …`
+
+              - `cleared_input_tokens: int`
+
+                Number of input tokens cleared by this edit.
+
+                minimum: 0
+
+              - `cleared_thinking_turns: int`
+
+                Number of thinking turns that were cleared.
+
+                minimum: 0
+
+              - `type: Literal["clear_thinking_20251015"]`
+
+                The type of context management edit applied.
+
+                default: clear_thinking_20251015
+
+        - `diagnostics: Optional[BetaDiagnostics]`
+
+          Response envelope for request-level diagnostics. Present (possibly
+          null) whenever the caller supplied `diagnostics` on the request.
+
+          - `cache_miss_reason: Optional[CacheMissReason]`
+
+            Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+            - `class BetaCacheMissModelChanged: …`
+
+              - `cache_missed_input_tokens: int`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `type: Literal["model_changed"]`
+
+                default: model_changed
+
+            - `class BetaCacheMissSystemChanged: …`
+
+              - `cache_missed_input_tokens: int`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `type: Literal["system_changed"]`
+
+                default: system_changed
+
+            - `class BetaCacheMissToolsChanged: …`
+
+              - `cache_missed_input_tokens: int`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `type: Literal["tools_changed"]`
+
+                default: tools_changed
+
+            - `class BetaCacheMissMessagesChanged: …`
+
+              - `cache_missed_input_tokens: int`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `type: Literal["messages_changed"]`
+
+                default: messages_changed
+
+            - `class BetaCacheMissPreviousMessageNotFound: …`
+
+              - `type: Literal["previous_message_not_found"]`
+
+                default: previous_message_not_found
+
+            - `class BetaCacheMissUnavailable: …`
+
+              - `type: Literal["unavailable"]`
+
+                default: unavailable
+
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `role: Literal["assistant"]`
+
+          Conversational role of the generated message.
+
+          This will always be `"assistant"`.
+
+          default: assistant
+
+        - `stop_details: Optional[BetaRefusalStopDetails]`
+
+          Structured information about a refusal.
+
+          - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+
+            The policy category that triggered a refusal.
+
+            - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+            - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+            - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+            - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+            - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
+            - `"cyber"`
+
+              The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
+            - `"bio"`
+
+              The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+
+            - `"frontier_llm"`
+
+              The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
+            - `"reasoning_extraction"`
+
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+
+            - `"general_harms"`
+
+              The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
+          - `explanation: Optional[str]`
+
+            Human-readable explanation of the refusal.
+
+            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `fallback_credit_token: Optional[str]`
+
+            Opaque code that refunds the cache-miss cost when retrying this refused
+            request on the fallback model. Pass it as `fallback_credit_token` on the
+            retry request. Expires 5 minutes after the refusal.
+
+            The retry is sent either with the same request body (`system`, `messages`,
+            `tools`, and other render-shaping fields), or with the same body plus one
+            appended `assistant` message whose content is the partial text (with any
+            trailing whitespace stripped from the final text block) and paired
+            server-tool blocks from this refusal — which also authorizes that
+            appended turn as an assistant-prefill continuation on models that otherwise
+            disallow prefill. A token minted mid-server-tool-loop whose partial content
+            was continuable may only be redeemed the second way — if a same-body retry
+            is rejected with a 400 saying the token must be redeemed by continuing the
+            partial response, retry the second way instead. Either way: same workspace,
+            same platform; a mismatch is a 400. Resending a token for an already-warm
+            prefix is permitted but yields no additional credit.
+
+            `null` when the refused model isn't eligible for a fallback credit.
+
+          - `fallback_has_prefill_claim: Optional[bool]`
+
+            Whether the accompanying `fallback_credit_token` may be redeemed with the
+            appended-assistant retry form. Only set when `fallback_credit_token` is
+            present.
+
+            `true`: retry by resending the same request body plus one appended
+            `assistant` message whose content is this response's `content` with any
+            trailing whitespace stripped from the final text block and unpaired
+            `tool_use` blocks omitted (the same appended-turn shape described on
+            `fallback_credit_token`), with the token attached. `false`: retry by
+            resending the original request body unchanged, with the token attached —
+            the appended-assistant form is not available for this refusal (no
+            continuable partial content, or the request uses `output_format` or a
+            `tool_choice` that forces tool use). One exception: when the request used
+            `output_format` or a forced `tool_choice` and the refusal arrived after
+            server tools (including MCP connector tools) had already executed, the
+            token may not be redeemable by either retry form; if the exact-body retry
+            is then rejected with a 400 saying the token must be redeemed by
+            continuing the partial response, discard the token and retry without it.
+
+            Advisory: if an appended-assistant retry is rejected with a 400 despite
+            `true`, fall back to resending the original request body with the token.
+
+          - `recommended_model: Optional[str]`
+
+            The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
+
+          - `type: Literal["refusal"]`
+
+            default: refusal
+
+        - `stop_reason: Optional[BetaStopReason]`
+
+          The reason that we stopped.
+
+          This may be one the following values:
+
+          * `"end_turn"`: the model reached a natural stopping point
+          * `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
+          * `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
+          * `"tool_use"`: the model invoked one or more tools
+          * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
+          * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+          * `"model_context_window_exceeded"`: we exceeded the model's context window
+
+          In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
+
+          - `"end_turn"`
+
+          - `"max_tokens"`
+
+          - `"stop_sequence"`
+
+          - `"tool_use"`
+
+          - `"pause_turn"`
+
+          - `"compaction"`
+
+          - `"refusal"`
+
+          - `"model_context_window_exceeded"`
+
+        - `stop_sequence: Optional[str]`
+
+          Which custom stop sequence was generated, if any.
+
+          This value will be a non-null string if one of your custom stop sequences was generated.
+
+        - `type: Literal["message"]`
+
+          Object type.
+
+          For Messages, this is always `"message"`.
+
+          default: message
+
+        - `usage: BetaUsage`
+
+          Billing and rate-limit usage.
+
+          Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+
+          Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+
+          For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+
+          Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+
+          - `cache_creation: Optional[BetaCacheCreation]`
+
+            Breakdown of cached tokens by TTL
+
+            - `ephemeral_1h_input_tokens: int`
+
+              The number of input tokens used to create the 1 hour cache entry.
+
+              default: 0, minimum: 0
+
+            - `ephemeral_5m_input_tokens: int`
+
+              The number of input tokens used to create the 5 minute cache entry.
+
+              default: 0, minimum: 0
+
+          - `cache_creation_input_tokens: Optional[int]`
+
+            The number of input tokens used to create the cache entry.
+
+            minimum: 0
+
+          - `cache_read_input_tokens: Optional[int]`
+
+            The number of input tokens read from the cache.
+
+            minimum: 0
+
+          - `fallback_credit: Optional[BetaFallbackCreditUsage]`
+
+            Outcome of the `fallback_credit_token` presented on this request.
+
+            - `status: Status`
+
+              Whether the fallback-credit reprice was applied to this response's billing.
+
+              A union discriminated on `type`. `redeemed`: the retry is billed as if
+              the conversation had been on the retry model all along — including when the
+              resulting shift is zero because there was nothing to move. `not_applied`:
+              no reprice was applied; the arm's `reason` says why.
+
+              - `class BetaFallbackCreditRedeemed: …`
+
+                The reprice was applied: the retry is billed as if the conversation
+                had been on the retry model all along.
+
+                - `type: Literal["redeemed"]`
+
+                  default: redeemed
+
+              - `class BetaFallbackCreditNotApplied: …`
+
+                No reprice was applied; `reason` says why.
+
+                - `reason: Literal["body_mismatch", "continuation_excluded", "continuation_only", 9 more]`
+
+                  Why the reprice was not applied.
+
+                  A closed enum; additions to the redemption-check vocabulary arrive as
+                  deliberate schema updates.
+
+                  - `"body_mismatch"`
+
+                  - `"continuation_excluded"`
+
+                  - `"continuation_only"`
+
+                  - `"expired"`
+
+                  - `"invalid_target_model"`
+
+                  - `"not_enabled"`
+
+                  - `"reprice_unavailable"`
+
+                  - `"temporarily_unavailable"`
+
+                  - `"variant_fields_present"`
+
+                  - `"wrong_organization"`
+
+                  - `"wrong_platform"`
+
+                  - `"wrong_workspace"`
+
+                - `type: Literal["not_applied"]`
+
+                  default: not_applied
+
+                - `remove_to_redeem: Optional[List[str]]`
+
+                  Request fields to remove before retrying, so the retry can redeem this
+                  token.
+
+                  Present exactly when `reason` is `variant_fields_present` — never null,
+                  never an empty array; absent otherwise. Fields are named only from your own request, and only after
+                  the sealed variant hash matched. A served best-effort retry has already
+                  been billed at normal price; nothing redeems retroactively, but a corrected
+                  re-send inside the token's five-minute window can still redeem.
+
+          - `inference_geo: Optional[str]`
+
+            The geographic region where inference was performed for this request.
+
+          - `input_tokens: int`
+
+            The number of input tokens which were used.
+
+            minimum: 0
+
+          - `iterations: Optional[BetaIterationsUsage]`
+
+            Per-iteration token usage breakdown.
+
+            Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
+
+            - Determine which iterations exceeded long context thresholds (>=200k tokens)
+            - Calculate the context window size from the last `message` entry
+            - Understand token accumulation across server-side tool use loops
+
+            A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
+
+            - `class BetaMessageIterationUsage: …`
+
+              Token usage for a sampling iteration.
+
+              - `cache_creation: Optional[BetaCacheCreation]`
+
+                Breakdown of cached tokens by TTL
+
+              - `cache_creation_input_tokens: int`
+
+                The number of input tokens used to create the cache entry.
+
+                default: 0, minimum: 0
+
+              - `cache_read_input_tokens: int`
+
+                The number of input tokens read from the cache.
+
+                default: 0, minimum: 0
+
+              - `input_tokens: int`
+
+                The number of input tokens which were used.
+
+                minimum: 0
+
+              - `model: Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `output_tokens: int`
+
+                The number of output tokens which were used.
+
+                minimum: 0
+
+              - `type: Literal["message"]`
+
+                Usage for a sampling iteration
+
+                default: message
+
+            - `class BetaCompactionIterationUsage: …`
+
+              Token usage for a compaction iteration.
+
+              - `cache_creation: Optional[BetaCacheCreation]`
+
+                Breakdown of cached tokens by TTL
+
+              - `cache_creation_input_tokens: int`
+
+                The number of input tokens used to create the cache entry.
+
+                default: 0, minimum: 0
+
+              - `cache_read_input_tokens: int`
+
+                The number of input tokens read from the cache.
+
+                default: 0, minimum: 0
+
+              - `input_tokens: int`
+
+                The number of input tokens which were used.
+
+                minimum: 0
+
+              - `output_tokens: int`
+
+                The number of output tokens which were used.
+
+                minimum: 0
+
+              - `type: Literal["compaction"]`
+
+                Usage for a compaction iteration
+
+                default: compaction
+
+            - `class BetaAdvisorMessageIterationUsage: …`
+
+              Token usage for an advisor sub-inference iteration.
+
+              - `cache_creation: Optional[BetaCacheCreation]`
+
+                Breakdown of cached tokens by TTL
+
+              - `cache_creation_input_tokens: int`
+
+                The number of input tokens used to create the cache entry.
+
+                default: 0, minimum: 0
+
+              - `cache_read_input_tokens: int`
+
+                The number of input tokens read from the cache.
+
+                default: 0, minimum: 0
+
+              - `input_tokens: int`
+
+                The number of input tokens which were used.
+
+                minimum: 0
+
+              - `model: Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `output_tokens: int`
+
+                The number of output tokens which were used.
+
+                minimum: 0
+
+              - `type: Literal["advisor_message"]`
+
+                Usage for an advisor sub-inference iteration
+
+                default: advisor_message
+
+            - `class BetaFallbackMessageIterationUsage: …`
+
+              Token usage for the fallback-model attempt of a server-side fallback request.
+
+              Produced in place of a `message` entry for whichever hop served the
+              response. A declined hop produces the existing `message` entry. Whether
+              a fallback model served the response is signalled by the presence of this
+              entry in `usage.iterations`.
+
+              - `cache_creation: Optional[BetaCacheCreation]`
+
+                Breakdown of cached tokens by TTL
+
+              - `cache_creation_input_tokens: int`
+
+                The number of input tokens used to create the cache entry.
+
+                default: 0, minimum: 0
+
+              - `cache_read_input_tokens: int`
+
+                The number of input tokens read from the cache.
+
+                default: 0, minimum: 0
+
+              - `input_tokens: int`
+
+                The number of input tokens which were used.
+
+                minimum: 0
+
+              - `model: Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `output_tokens: int`
+
+                The number of output tokens which were used.
+
+                minimum: 0
+
+              - `type: Literal["fallback_message"]`
+
+                Usage for the fallback-model attempt that served the response
+
+                default: fallback_message
+
+          - `output_tokens: int`
+
+            The number of output tokens which were used.
+
+            minimum: 0
+
+          - `output_tokens_details: Optional[BetaOutputTokensDetails]`
+
+            Breakdown of output tokens by category.
+
+            `output_tokens` remains the inclusive, authoritative total used for billing.
+            This object provides a read-only decomposition for observability — for example,
+            how many of the billed output tokens were spent on internal reasoning that may
+            have been summarized before being returned to you.
+
+            - `thinking_tokens: int`
+
+              Number of output tokens the model generated as internal reasoning, including
+              the thinking-block delimiter tokens.
+
+              Reflects the raw reasoning the model produced, not the (possibly shorter)
+              summarized thinking text returned in the response body. Computed by
+              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              generation count by a small number of tokens. Always ≤ `output_tokens`;
+              `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+              default: 0, minimum: 0
+
+          - `server_tool_use: Optional[BetaServerToolUsage]`
+
+            The number of server tool requests.
+
+            - `web_fetch_requests: int`
+
+              The number of web fetch tool requests.
+
+              default: 0, minimum: 0
+
+            - `web_search_requests: int`
+
+              The number of web search tool requests.
+
+              default: 0, minimum: 0
+
+          - `service_tier: Optional[Literal["standard", "priority", "batch"]]`
+
+            If the request used the priority, standard, or batch tier.
+
+            - `"standard"`
+
+            - `"priority"`
+
+            - `"batch"`
+
+          - `speed: Optional[Literal["standard", "fast"]]`
+
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+            - `"standard"`
+
+            - `"fast"`
+
+        - `input_transformations: Optional[List[BetaThinkingDroppedInputTransformation]]`
+
+          Changes the API made to the request's input before showing it to the model:
+          one entry per change, in request order. Today the only entry type is
+          `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
+          block from the request's `messages` that was removed from the prompt instead
+          of being shown to the model because it failed a binding check. More entry
+          types may be added over time; ignore types you do not recognize.
+
+          Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
+          every such response from a model that supports extended thinking, as `[]`
+          when nothing was changed; without the beta, blocks are removed all the same
+          but nothing is reported. Removed blocks contribute nothing to
+          `usage.input_tokens`. When streaming, the array is final in `message_start`;
+          the final `message_delta` event carries it only when a server-side model
+          fallback happened mid-stream, in which case it holds the serving model's
+          entries and replaces the one in `message_start`.
+
+          - `path: str`
+
+            Where the removed block was in your request, as `messages.{i}.content.{j}`:
+            `i` indexes the `messages` array you sent and `j` that message's `content`
+            array — the same form error messages use.
+
+          - `reason: Literal["model_binding_mismatch", "prefix_binding_mismatch", "organization_binding_mismatch", "end_user_binding_mismatch"]`
+
+            Which binding check removed the block: `model_binding_mismatch` — it was
+            created by a model whose reasoning the requested model may not read;
+            `prefix_binding_mismatch` — the conversation before it differs from the
+            conversation it was created in (the rest of that turn's consecutive thinking
+            blocks are removed with it, each with this reason);
+            `organization_binding_mismatch` — it was created under a different
+            organization (an Anthropic organization, AWS account or Google Cloud project)
+            and this organization is not one of its additional organizations;
+            `end_user_binding_mismatch` — it was created for a different end user, or
+            was removed by the consumer-organization binding. A block that would fail
+            several checks reports one reason, in this order of precedence:
+            `organization_binding_mismatch`, `end_user_binding_mismatch`,
+            `model_binding_mismatch`, `prefix_binding_mismatch`.
+
+            - `"model_binding_mismatch"`
+
+            - `"prefix_binding_mismatch"`
+
+            - `"organization_binding_mismatch"`
+
+            - `"end_user_binding_mismatch"`
+
+          - `type: Literal["thinking_dropped"]`
+
+            Always `thinking_dropped` for this entry type.
+
+            default: thinking_dropped
+
+      - `type: Literal["succeeded"]`
+
+        default: succeeded
+
+    - `class BetaMessageBatchErroredResult: …`
+
+      - `error: BetaErrorResponse`
+
+        - `error: BetaError`
+
+          - `class BetaInvalidRequestError: …`
+
+            - `message: str`
+
+              default: Invalid request
+
+            - `type: Literal["invalid_request_error"]`
+
+              default: invalid_request_error
+
+          - `class BetaAuthenticationError: …`
+
+            - `message: str`
+
+              default: Authentication error
+
+            - `type: Literal["authentication_error"]`
+
+              default: authentication_error
+
+          - `class BetaBillingError: …`
+
+            - `message: str`
+
+              default: Billing error
+
+            - `type: Literal["billing_error"]`
+
+              default: billing_error
+
+          - `class BetaPermissionError: …`
+
+            - `message: str`
+
+              default: Permission denied
+
+            - `type: Literal["permission_error"]`
+
+              default: permission_error
+
+          - `class BetaNotFoundError: …`
+
+            - `message: str`
+
+              default: Not found
+
+            - `type: Literal["not_found_error"]`
+
+              default: not_found_error
+
+          - `class BetaRateLimitError: …`
+
+            - `message: str`
+
+              default: Rate limited
+
+            - `type: Literal["rate_limit_error"]`
+
+              default: rate_limit_error
+
+          - `class BetaGatewayTimeoutError: …`
+
+            - `message: str`
+
+              default: Request timeout
+
+            - `type: Literal["timeout_error"]`
+
+              default: timeout_error
+
+          - `class BetaAPIError: …`
+
+            - `message: str`
+
+              default: Internal server error
+
+            - `type: Literal["api_error"]`
+
+              default: api_error
+
+          - `class BetaOverloadedError: …`
+
+            - `message: str`
+
+              default: Overloaded
+
+            - `type: Literal["overloaded_error"]`
+
+              default: overloaded_error
+
+        - `request_id: Optional[str]`
+
+        - `type: Literal["error"]`
+
+          default: error
+
+      - `type: Literal["errored"]`
+
+        default: errored
+
+    - `class BetaMessageBatchCanceledResult: …`
+
+      - `type: Literal["canceled"]`
+
+        default: canceled
+
+    - `class BetaMessageBatchExpiredResult: …`
+
+      - `type: Literal["expired"]`
+
+        default: expired
+
+### Beta Message Batch Request Counts
+
+- `class BetaMessageBatchRequestCounts: …`
+
+  - `canceled: int`
+
+    Number of requests in the Message Batch that have been canceled.
+
+    This is zero until processing of the entire Message Batch has ended.
+
+    default: 0
+
+  - `errored: int`
+
+    Number of requests in the Message Batch that encountered an error.
+
+    This is zero until processing of the entire Message Batch has ended.
+
+    default: 0
+
+  - `expired: int`
+
+    Number of requests in the Message Batch that have expired.
+
+    This is zero until processing of the entire Message Batch has ended.
+
+    default: 0
+
+  - `processing: int`
+
+    Number of requests in the Message Batch that are processing.
+
+    default: 0
+
+  - `succeeded: int`
+
+    Number of requests in the Message Batch that have completed successfully.
+
+    This is zero until processing of the entire Message Batch has ended.
+
+    default: 0
+
+### Beta Message Batch Result
+
+- `BetaMessageBatchResult`
+
+  Processing result for this request.
+
+  Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
+
+  - `class BetaMessageBatchSucceededResult: …`
+
+    - `message: BetaMessage`
+
+      - `id: str`
+
+        Unique object identifier.
+
+        The format and length of IDs may change over time.
+
+      - `container: Optional[BetaContainer]`
+
+        Information about the container used in the request (for the code execution tool)
+
+        - `id: str`
+
+          Identifier for the container used in this request
+
+        - `expires_at: datetime`
+
+          The time at which the container will expire.
+
+          format: date-time
+
+        - `skills: Optional[List[BetaContainerSkill]]`
+
+          Skills loaded in the container
+
+          - `skill_id: str`
+
+            Skill ID
+
+            maxLength: 64, minLength: 1
+
+          - `type: Literal["anthropic", "custom"]`
+
+            Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+
+            - `"anthropic"`
+
+            - `"custom"`
+
+          - `version: str`
+
+            The resolved version: a skill version ID for custom skills.
+
+            maxLength: 64, minLength: 1
+
+      - `content: List[BetaContentBlock]`
+
+        Content generated by the model.
+
+        This is an array of content blocks, each of which has a `type` that determines its shape.
+
+        Example:
+
+        ```json
+        [{"type": "text", "text": "Hi, I'm Claude."}]
+        ```
+
+        If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
+
+        For example, if the input `messages` were:
+
+        ```json
+        [
+          {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+          {"role": "assistant", "content": "The best answer is ("}
+        ]
+        ```
+
+        Then the response `content` might be:
+
+        ```json
+        [{"type": "text", "text": "B)"}]
+        ```
+
+        - `class BetaTextBlock: …`
+
+          - `citations: Optional[List[BetaTextCitation]]`
+
+            Citations supporting the text block.
+
+            The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+
+            - `class BetaCitationCharLocation: …`
+
+              - `cited_text: str`
+
+              - `document_index: int`
+
+                minimum: 0
+
+              - `document_title: Optional[str]`
+
+              - `end_char_index: int`
+
+              - `file_id: Optional[str]`
+
+              - `start_char_index: int`
+
+                minimum: 0
+
+              - `type: Literal["char_location"]`
+
+                default: char_location
+
+            - `class BetaCitationPageLocation: …`
+
+              - `cited_text: str`
+
+              - `document_index: int`
+
+                minimum: 0
+
+              - `document_title: Optional[str]`
+
+              - `end_page_number: int`
+
+              - `file_id: Optional[str]`
+
+              - `start_page_number: int`
+
+                minimum: 1
+
+              - `type: Literal["page_location"]`
+
+                default: page_location
+
+            - `class BetaCitationContentBlockLocation: …`
+
+              - `cited_text: str`
+
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+              - `document_index: int`
+
+                minimum: 0
+
+              - `document_title: Optional[str]`
+
+              - `end_block_index: int`
+
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+              - `file_id: Optional[str]`
+
+              - `start_block_index: int`
+
+                0-based index of the first cited block in the source's `content` array.
+
+                minimum: 0
+
+              - `type: Literal["content_block_location"]`
+
+                default: content_block_location
+
+            - `class BetaCitationsWebSearchResultLocation: …`
+
+              - `cited_text: str`
+
+              - `encrypted_index: str`
+
+              - `title: Optional[str]`
+
+                maxLength: 512
+
+              - `type: Literal["web_search_result_location"]`
+
+                default: web_search_result_location
+
+              - `url: str`
+
+            - `class BetaCitationSearchResultLocation: …`
+
+              - `cited_text: str`
+
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+              - `end_block_index: int`
+
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+              - `search_result_index: int`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
+
+                minimum: 0
+
+              - `source: str`
+
+              - `start_block_index: int`
+
+                0-based index of the first cited block in the source's `content` array.
+
+                minimum: 0
+
+              - `title: Optional[str]`
+
+              - `type: Literal["search_result_location"]`
+
+                default: search_result_location
+
+          - `text: str`
+
+            maxLength: 5000000, minLength: 0
+
+          - `type: Literal["text"]`
+
+            default: text
+
+        - `class BetaThinkingBlock: …`
+
+          - `signature: str`
+
+            A value used to verify that this thinking block was generated by Claude when it is passed back to the API.
+
+            This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
+
+            See [extended thinking](build-with-claude/extended-thinking.md) for details.
+
+          - `thinking: str`
+
+            The text of Claude's thinking process for this block.
+
+          - `type: Literal["thinking"]`
+
+            default: thinking
+
+        - `class BetaRedactedThinkingBlock: …`
+
+          - `data: str`
+
+            The contents of this redacted thinking block, returned when portions of the model's thinking were safety-redacted. This field is opaque and encrypted, with no readable content.
+
+            Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
+
+            See [extended thinking](build-with-claude/extended-thinking.md) for details.
+
+          - `type: Literal["redacted_thinking"]`
+
+            default: redacted_thinking
+
+        - `class BetaToolUseBlock: …`
+
+          - `id: str`
+
+            pattern: ^[a-zA-Z0-9_-]+$
+
+          - `input: Dict[str, object]`
+
+          - `name: str`
+
+            minLength: 1
+
+          - `type: Literal["tool_use"]`
+
+            default: tool_use
+
+          - `caller: Optional[Caller]`
+
+            Tool invocation directly from the model.
+
+            - `class BetaDirectCaller: …`
+
+              Tool invocation directly from the model.
+
+              - `type: Literal["direct"]`
+
+            - `class BetaServerToolCaller: …`
+
+              Tool invocation generated by a server-side tool.
+
+              - `tool_id: str`
+
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+              - `type: Literal["code_execution_20250825"]`
+
+            - `class BetaServerToolCaller20260120: …`
+
+              - `tool_id: str`
+
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+              - `type: Literal["code_execution_20260120"]`
+
+          - `toolset_name: Optional[str]`
+
+            For a toolset member tool_use, the toolset family.
+
+            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
+        - `class BetaServerToolUseBlock: …`
+
+          - `id: str`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `input: Dict[str, object]`
+
+          - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+            - `"advisor"`
+
+            - `"web_search"`
+
+            - `"web_fetch"`
+
+            - `"code_execution"`
+
+            - `"bash_code_execution"`
+
+            - `"text_editor_code_execution"`
+
+            - `"tool_search_tool_regex"`
+
+            - `"tool_search_tool_bm25"`
+
+          - `type: Literal["server_tool_use"]`
+
+            default: server_tool_use
+
+          - `caller: Optional[Caller]`
+
+            Tool invocation directly from the model.
+
+            - `class BetaDirectCaller: …`
+
+              Tool invocation directly from the model.
+
+            - `class BetaServerToolCaller: …`
+
+              Tool invocation generated by a server-side tool.
+
+            - `class BetaServerToolCaller20260120: …`
+
+        - `class BetaWebSearchToolResultBlock: …`
+
+          - `content: BetaWebSearchToolResultBlockContent`
+
+            - `class BetaWebSearchToolResultError: …`
+
+              - `error_code: BetaWebSearchToolResultErrorCode`
+
+                - `"invalid_tool_input"`
+
+                - `"unavailable"`
+
+                - `"max_uses_exceeded"`
+
+                - `"too_many_requests"`
+
+                - `"query_too_long"`
+
+                - `"request_too_large"`
+
+              - `type: Literal["web_search_tool_result_error"]`
+
+                default: web_search_tool_result_error
+
+            - `List[BetaWebSearchResultBlock]`
+
+              - `encrypted_content: str`
+
+              - `page_age: Optional[str]`
+
+              - `title: str`
+
+              - `type: Literal["web_search_result"]`
+
+                default: web_search_result
+
+              - `url: str`
+
+          - `tool_use_id: str`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `type: Literal["web_search_tool_result"]`
+
+            default: web_search_tool_result
+
+          - `caller: Optional[Caller]`
+
+            Tool invocation directly from the model.
+
+            - `class BetaDirectCaller: …`
+
+              Tool invocation directly from the model.
+
+            - `class BetaServerToolCaller: …`
+
+              Tool invocation generated by a server-side tool.
+
+            - `class BetaServerToolCaller20260120: …`
+
+        - `class BetaWebFetchToolResultBlock: …`
+
+          - `content: Content`
+
+            - `class BetaWebFetchToolResultErrorBlock: …`
+
+              - `error_code: BetaWebFetchToolResultErrorCode`
+
+                - `"invalid_tool_input"`
+
+                - `"url_too_long"`
+
+                - `"url_not_allowed"`
+
+                - `"url_not_in_prior_context"`
+
+                - `"url_not_accessible"`
+
+                - `"unsupported_content_type"`
+
+                - `"too_many_requests"`
+
+                - `"max_uses_exceeded"`
+
+                - `"unavailable"`
+
+              - `type: Literal["web_fetch_tool_result_error"]`
+
+                default: web_fetch_tool_result_error
+
+            - `class BetaWebFetchBlock: …`
+
+              - `content: BetaDocumentBlock`
+
+                - `citations: Optional[BetaCitationConfig]`
+
+                  Citation configuration for the document
+
+                  - `enabled: bool`
+
+                    default: false
+
+                - `source: Source`
+
+                  - `class BetaBase64PDFSource: …`
+
+                    - `data: str`
+
+                      format: byte
+
+                    - `media_type: Literal["application/pdf"]`
+
+                    - `type: Literal["base64"]`
+
+                  - `class BetaPlainTextSource: …`
+
+                    - `data: str`
+
+                    - `media_type: Literal["text/plain"]`
+
+                    - `type: Literal["text"]`
+
+                - `title: Optional[str]`
+
+                  The title of the document
+
+                - `type: Literal["document"]`
+
+                  default: document
+
+              - `retrieved_at: Optional[str]`
+
+                ISO 8601 timestamp when the content was retrieved
+
+              - `type: Literal["web_fetch_result"]`
+
+                default: web_fetch_result
+
+              - `url: str`
+
+                Fetched content URL
+
+          - `tool_use_id: str`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `type: Literal["web_fetch_tool_result"]`
+
+            default: web_fetch_tool_result
+
+          - `caller: Optional[Caller]`
+
+            Tool invocation directly from the model.
+
+            - `class BetaDirectCaller: …`
+
+              Tool invocation directly from the model.
+
+            - `class BetaServerToolCaller: …`
+
+              Tool invocation generated by a server-side tool.
+
+            - `class BetaServerToolCaller20260120: …`
+
+        - `class BetaAdvisorToolResultBlock: …`
+
+          - `content: Content`
+
+            - `class BetaAdvisorToolResultError: …`
+
+              - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 4 more]`
+
+                - `"max_uses_exceeded"`
+
+                - `"prompt_too_long"`
+
+                - `"too_many_requests"`
+
+                - `"overloaded"`
+
+                - `"unavailable"`
+
+                - `"execution_time_exceeded"`
+
+                - `"model_not_found"`
+
+              - `type: Literal["advisor_tool_result_error"]`
+
+                default: advisor_tool_result_error
+
+            - `class BetaAdvisorResultBlock: …`
+
+              - `stop_reason: Optional[str]`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
+              - `text: str`
+
+              - `type: Literal["advisor_result"]`
+
+                default: advisor_result
+
+            - `class BetaAdvisorRedactedResultBlock: …`
+
+              - `encrypted_content: str`
+
+                Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+              - `stop_reason: Optional[str]`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
+
+              - `type: Literal["advisor_redacted_result"]`
+
+                default: advisor_redacted_result
+
+          - `tool_use_id: str`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `type: Literal["advisor_tool_result"]`
+
+            default: advisor_tool_result
+
+        - `class BetaCodeExecutionToolResultBlock: …`
+
+          - `content: BetaCodeExecutionToolResultBlockContent`
+
+            Code execution result with encrypted stdout for PFC + web_search results.
+
+            - `class BetaCodeExecutionToolResultError: …`
+
+              - `error_code: BetaCodeExecutionToolResultErrorCode`
+
+                - `"invalid_tool_input"`
+
+                - `"unavailable"`
+
+                - `"too_many_requests"`
+
+                - `"execution_time_exceeded"`
+
+              - `type: Literal["code_execution_tool_result_error"]`
+
+                default: code_execution_tool_result_error
+
+            - `class BetaCodeExecutionResultBlock: …`
+
+              - `content: List[BetaCodeExecutionOutputBlock]`
+
+                - `file_id: str`
+
+                - `type: Literal["code_execution_output"]`
+
+                  default: code_execution_output
+
+              - `return_code: int`
+
+              - `stderr: str`
+
+              - `stdout: str`
+
+              - `type: Literal["code_execution_result"]`
+
+                default: code_execution_result
+
+            - `class BetaEncryptedCodeExecutionResultBlock: …`
+
+              Code execution result with encrypted stdout for PFC + web_search results.
+
+              - `content: List[BetaCodeExecutionOutputBlock]`
+
+                - `file_id: str`
+
+                - `type: Literal["code_execution_output"]`
+
+                  default: code_execution_output
+
+              - `encrypted_stdout: str`
+
+              - `return_code: int`
+
+              - `stderr: str`
+
+              - `type: Literal["encrypted_code_execution_result"]`
+
+                default: encrypted_code_execution_result
+
+          - `tool_use_id: str`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `type: Literal["code_execution_tool_result"]`
+
+            default: code_execution_tool_result
+
+        - `class BetaBashCodeExecutionToolResultBlock: …`
+
+          - `content: Content`
+
+            - `class BetaBashCodeExecutionToolResultError: …`
+
+              - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", 2 more]`
+
+                - `"invalid_tool_input"`
+
+                - `"unavailable"`
+
+                - `"too_many_requests"`
+
+                - `"execution_time_exceeded"`
+
+                - `"output_file_too_large"`
+
+              - `type: Literal["bash_code_execution_tool_result_error"]`
+
+                default: bash_code_execution_tool_result_error
+
+            - `class BetaBashCodeExecutionResultBlock: …`
+
+              - `content: List[BetaBashCodeExecutionOutputBlock]`
+
+                - `file_id: str`
+
+                - `type: Literal["bash_code_execution_output"]`
+
+                  default: bash_code_execution_output
+
+              - `return_code: int`
+
+              - `stderr: str`
+
+              - `stdout: str`
+
+              - `type: Literal["bash_code_execution_result"]`
+
+                default: bash_code_execution_result
+
+          - `tool_use_id: str`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `type: Literal["bash_code_execution_tool_result"]`
+
+            default: bash_code_execution_tool_result
+
+        - `class BetaTextEditorCodeExecutionToolResultBlock: …`
+
+          - `content: Content`
+
+            - `class BetaTextEditorCodeExecutionToolResultError: …`
+
+              - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", 2 more]`
+
+                - `"invalid_tool_input"`
+
+                - `"unavailable"`
+
+                - `"too_many_requests"`
+
+                - `"execution_time_exceeded"`
+
+                - `"file_not_found"`
+
+              - `error_message: Optional[str]`
+
+              - `type: Literal["text_editor_code_execution_tool_result_error"]`
+
+                default: text_editor_code_execution_tool_result_error
+
+            - `class BetaTextEditorCodeExecutionViewResultBlock: …`
+
+              - `content: str`
+
+              - `file_type: Literal["text", "image", "pdf"]`
+
+                - `"text"`
+
+                - `"image"`
+
+                - `"pdf"`
+
+              - `num_lines: Optional[int]`
+
+              - `start_line: Optional[int]`
+
+              - `total_lines: Optional[int]`
+
+              - `type: Literal["text_editor_code_execution_view_result"]`
+
+                default: text_editor_code_execution_view_result
+
+            - `class BetaTextEditorCodeExecutionCreateResultBlock: …`
+
+              - `is_file_update: bool`
+
+              - `type: Literal["text_editor_code_execution_create_result"]`
+
+                default: text_editor_code_execution_create_result
+
+            - `class BetaTextEditorCodeExecutionStrReplaceResultBlock: …`
+
+              - `lines: Optional[List[str]]`
+
+              - `new_lines: Optional[int]`
+
+              - `new_start: Optional[int]`
+
+              - `old_lines: Optional[int]`
+
+              - `old_start: Optional[int]`
+
+              - `type: Literal["text_editor_code_execution_str_replace_result"]`
+
+                default: text_editor_code_execution_str_replace_result
+
+          - `tool_use_id: str`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `type: Literal["text_editor_code_execution_tool_result"]`
+
+            default: text_editor_code_execution_tool_result
+
+        - `class BetaToolSearchToolResultBlock: …`
+
+          - `content: Content`
+
+            - `class BetaToolSearchToolResultError: …`
+
+              - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", "execution_time_exceeded"]`
+
+                - `"invalid_tool_input"`
+
+                - `"unavailable"`
+
+                - `"too_many_requests"`
+
+                - `"execution_time_exceeded"`
+
+              - `error_message: Optional[str]`
+
+              - `type: Literal["tool_search_tool_result_error"]`
+
+                default: tool_search_tool_result_error
+
+            - `class BetaToolSearchToolSearchResultBlock: …`
+
+              - `tool_references: List[BetaToolReferenceBlock]`
+
+                - `tool_name: str`
+
+                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
+                - `type: Literal["tool_reference"]`
+
+                  default: tool_reference
+
+              - `type: Literal["tool_search_tool_search_result"]`
+
+                default: tool_search_tool_search_result
+
+          - `tool_use_id: str`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `type: Literal["tool_search_tool_result"]`
+
+            default: tool_search_tool_result
+
+        - `class BetaMCPToolUseBlock: …`
+
+          - `id: str`
+
+            pattern: ^[a-zA-Z0-9_-]+$
+
+          - `input: Dict[str, object]`
+
+          - `name: str`
+
+            The name of the MCP tool
+
+          - `server_name: str`
+
+            The name of the MCP server
+
+          - `type: Literal["mcp_tool_use"]`
+
+            default: mcp_tool_use
+
+        - `class BetaMCPToolResultBlock: …`
+
+          - `content: Union[str, List[BetaTextBlock]]`
+
+            - `str`
+
+            - `List[BetaTextBlock]`
+
+              - `citations: Optional[List[BetaTextCitation]]`
+
+                Citations supporting the text block.
+
+                The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+
+              - `text: str`
+
+                maxLength: 5000000, minLength: 0
+
+              - `type: Literal["text"]`
+
+                default: text
+
+          - `is_error: bool`
+
+            default: false
+
+          - `tool_use_id: str`
+
+            pattern: ^[a-zA-Z0-9_-]+$
+
+          - `type: Literal["mcp_tool_result"]`
+
+            default: mcp_tool_result
+
+        - `class BetaContainerUploadBlock: …`
+
+          Response model for a file uploaded to the container.
+
+          - `file_id: str`
+
+          - `type: Literal["container_upload"]`
+
+            default: container_upload
+
+        - `class BetaCompactionBlock: …`
+
+          A compaction block returned when autocompact is triggered.
+
+          When content is None, it indicates the compaction failed to produce a valid
+          summary (e.g., malformed output from the model). Clients may round-trip
+          compaction blocks with null content; the server treats them as no-ops.
+
+          - `content: Optional[str]`
+
+            Summary of compacted content, or null if compaction failed
+
+          - `encrypted_content: Optional[str]`
+
+            Opaque metadata from prior compaction, to be round-tripped verbatim
+
+          - `type: Literal["compaction"]`
+
+            default: compaction
+
+        - `class BetaFallbackBlock: …`
+
+          Marks the point in `content` where one model's output gives way to the next.
+
+          One block appears per hop where a preceding model actually ran this turn and
+          declined. A turn where no preceding model ran and declined has no such
+          boundary and carries no block — the signal for whether a fallback model
+          served the response is the presence of a `fallback_message` entry in
+          `usage.iterations`, not this block.
+
+          The block is treated like a server-tool content block for streaming: it
+          arrives via the standard `content_block_start` / `content_block_stop`
+          pair and carries no deltas.
+
+          - `from_: BetaFallbackInfo`
+
+            The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+            - `model: Model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `Literal["claude-fable-5-1", "claude-mythos-5-1", "claude-sonnet-5", 14 more]`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `claude-fable-5-1` - Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+                - `claude-mythos-5-1` - Our most capable model for cybersecurity and biology research, available through trusted access programs
+                - `claude-sonnet-5` - High-performance model for coding and agents
+                - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
+                - `claude-mythos-5` - Most capable model for cybersecurity and biology research
+                - `claude-opus-5` - Powerful intelligence for long-running agents and coding
+                - `claude-opus-4-8` - Powerful intelligence for long-running agents and coding
+                - `claude-opus-4-7` - Powerful intelligence for long-running agents and coding
+                - `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+                - `claude-opus-4-6` - Powerful intelligence for long-running agents and coding
+                - `claude-sonnet-4-6` - Best combination of speed and intelligence
+                - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+                - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+                - `claude-opus-4-5` - Powerful intelligence for long-running agents and coding
+                - `claude-opus-4-5-20251101` - Powerful intelligence for long-running agents and coding
+                - `claude-sonnet-4-5` - High-performance model for agents and coding
+                - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+
+                - `"claude-fable-5-1"`
+
+                  Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+                - `"claude-mythos-5-1"`
+
+                  Our most capable model for cybersecurity and biology research, available through trusted access programs
+
+                - `"claude-sonnet-5"`
+
+                  High-performance model for coding and agents
+
+                - `"claude-fable-5"`
+
+                  Next generation of intelligence for the hardest knowledge work and coding problems
+
+                - `"claude-mythos-5"`
+
+                  Most capable model for cybersecurity and biology research
+
+                - `"claude-opus-5"`
+
+                  Powerful intelligence for long-running agents and coding
+
+                - `"claude-opus-4-8"`
+
+                  Powerful intelligence for long-running agents and coding
+
+                - `"claude-opus-4-7"`
+
+                  Powerful intelligence for long-running agents and coding
+
+                - `"claude-mythos-preview"`
+
+                  New class of intelligence, strongest in coding and cybersecurity
+
+                - `"claude-opus-4-6"`
+
+                  Powerful intelligence for long-running agents and coding
+
+                - `"claude-sonnet-4-6"`
+
+                  Best combination of speed and intelligence
+
+                - `"claude-haiku-4-5"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-haiku-4-5-20251001"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-opus-4-5"`
+
+                  Powerful intelligence for long-running agents and coding
+
+                - `"claude-opus-4-5-20251101"`
+
+                  Powerful intelligence for long-running agents and coding
+
+                - `"claude-sonnet-4-5"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-sonnet-4-5-20250929"`
+
+                  High-performance model for agents and coding
+
+              - `str`
+
+          - `to: BetaFallbackInfo`
+
+            The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+          - `trigger: BetaFallbackRefusalTrigger`
+
+            What caused the `from` model to hand over at this hop.
+
+            - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+
+              The policy category that triggered a refusal.
+
+              - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+              - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+              - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+              - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+              - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
+              - `"cyber"`
+
+                The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
+              - `"bio"`
+
+                The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+
+              - `"frontier_llm"`
+
+                The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
+              - `"reasoning_extraction"`
+
+                The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+
+              - `"general_harms"`
+
+                The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
+            - `type: Literal["refusal"]`
+
+              default: refusal
+
+          - `type: Literal["fallback"]`
+
+            default: fallback
+
+      - `context_management: Optional[BetaContextManagementResponse]`
+
+        Context management response.
+
+        Information about context management strategies applied during the request.
+
+        - `applied_edits: List[AppliedEdit]`
+
+          List of context management edits that were applied.
+
+          - `class BetaClearToolUses20250919EditResponse: …`
+
+            - `cleared_input_tokens: int`
+
+              Number of input tokens cleared by this edit.
+
+              minimum: 0
+
+            - `cleared_tool_uses: int`
+
+              Number of tool uses that were cleared.
+
+              minimum: 0
+
+            - `type: Literal["clear_tool_uses_20250919"]`
+
+              The type of context management edit applied.
+
+              default: clear_tool_uses_20250919
+
+          - `class BetaClearThinking20251015EditResponse: …`
+
+            - `cleared_input_tokens: int`
+
+              Number of input tokens cleared by this edit.
+
+              minimum: 0
+
+            - `cleared_thinking_turns: int`
+
+              Number of thinking turns that were cleared.
+
+              minimum: 0
+
+            - `type: Literal["clear_thinking_20251015"]`
+
+              The type of context management edit applied.
+
+              default: clear_thinking_20251015
+
+      - `diagnostics: Optional[BetaDiagnostics]`
+
+        Response envelope for request-level diagnostics. Present (possibly
+        null) whenever the caller supplied `diagnostics` on the request.
+
+        - `cache_miss_reason: Optional[CacheMissReason]`
+
+          Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+          - `class BetaCacheMissModelChanged: …`
+
+            - `cache_missed_input_tokens: int`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `type: Literal["model_changed"]`
+
+              default: model_changed
+
+          - `class BetaCacheMissSystemChanged: …`
+
+            - `cache_missed_input_tokens: int`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `type: Literal["system_changed"]`
+
+              default: system_changed
+
+          - `class BetaCacheMissToolsChanged: …`
+
+            - `cache_missed_input_tokens: int`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `type: Literal["tools_changed"]`
+
+              default: tools_changed
+
+          - `class BetaCacheMissMessagesChanged: …`
+
+            - `cache_missed_input_tokens: int`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `type: Literal["messages_changed"]`
+
+              default: messages_changed
+
+          - `class BetaCacheMissPreviousMessageNotFound: …`
+
+            - `type: Literal["previous_message_not_found"]`
+
+              default: previous_message_not_found
+
+          - `class BetaCacheMissUnavailable: …`
+
+            - `type: Literal["unavailable"]`
+
+              default: unavailable
+
+      - `model: Model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `role: Literal["assistant"]`
+
+        Conversational role of the generated message.
+
+        This will always be `"assistant"`.
+
+        default: assistant
+
+      - `stop_details: Optional[BetaRefusalStopDetails]`
+
+        Structured information about a refusal.
+
+        - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+
+          The policy category that triggered a refusal.
+
+          - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+          - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+          - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+          - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+          - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
+          - `"cyber"`
+
+            The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
+          - `"bio"`
+
+            The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+
+          - `"frontier_llm"`
+
+            The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
+          - `"reasoning_extraction"`
+
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+
+          - `"general_harms"`
+
+            The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
+        - `explanation: Optional[str]`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `fallback_credit_token: Optional[str]`
+
+          Opaque code that refunds the cache-miss cost when retrying this refused
+          request on the fallback model. Pass it as `fallback_credit_token` on the
+          retry request. Expires 5 minutes after the refusal.
+
+          The retry is sent either with the same request body (`system`, `messages`,
+          `tools`, and other render-shaping fields), or with the same body plus one
+          appended `assistant` message whose content is the partial text (with any
+          trailing whitespace stripped from the final text block) and paired
+          server-tool blocks from this refusal — which also authorizes that
+          appended turn as an assistant-prefill continuation on models that otherwise
+          disallow prefill. A token minted mid-server-tool-loop whose partial content
+          was continuable may only be redeemed the second way — if a same-body retry
+          is rejected with a 400 saying the token must be redeemed by continuing the
+          partial response, retry the second way instead. Either way: same workspace,
+          same platform; a mismatch is a 400. Resending a token for an already-warm
+          prefix is permitted but yields no additional credit.
+
+          `null` when the refused model isn't eligible for a fallback credit.
+
+        - `fallback_has_prefill_claim: Optional[bool]`
+
+          Whether the accompanying `fallback_credit_token` may be redeemed with the
+          appended-assistant retry form. Only set when `fallback_credit_token` is
+          present.
+
+          `true`: retry by resending the same request body plus one appended
+          `assistant` message whose content is this response's `content` with any
+          trailing whitespace stripped from the final text block and unpaired
+          `tool_use` blocks omitted (the same appended-turn shape described on
+          `fallback_credit_token`), with the token attached. `false`: retry by
+          resending the original request body unchanged, with the token attached —
+          the appended-assistant form is not available for this refusal (no
+          continuable partial content, or the request uses `output_format` or a
+          `tool_choice` that forces tool use). One exception: when the request used
+          `output_format` or a forced `tool_choice` and the refusal arrived after
+          server tools (including MCP connector tools) had already executed, the
+          token may not be redeemable by either retry form; if the exact-body retry
+          is then rejected with a 400 saying the token must be redeemed by
+          continuing the partial response, discard the token and retry without it.
+
+          Advisory: if an appended-assistant retry is rejected with a 400 despite
+          `true`, fall back to resending the original request body with the token.
+
+        - `recommended_model: Optional[str]`
+
+          The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
+
+        - `type: Literal["refusal"]`
+
+          default: refusal
+
+      - `stop_reason: Optional[BetaStopReason]`
+
+        The reason that we stopped.
+
+        This may be one the following values:
+
+        * `"end_turn"`: the model reached a natural stopping point
+        * `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
+        * `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
+        * `"tool_use"`: the model invoked one or more tools
+        * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
+        * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+        * `"model_context_window_exceeded"`: we exceeded the model's context window
+
+        In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
+
+        - `"end_turn"`
+
+        - `"max_tokens"`
+
+        - `"stop_sequence"`
+
+        - `"tool_use"`
+
+        - `"pause_turn"`
+
+        - `"compaction"`
+
+        - `"refusal"`
+
+        - `"model_context_window_exceeded"`
+
+      - `stop_sequence: Optional[str]`
+
+        Which custom stop sequence was generated, if any.
+
+        This value will be a non-null string if one of your custom stop sequences was generated.
+
+      - `type: Literal["message"]`
+
+        Object type.
+
+        For Messages, this is always `"message"`.
+
+        default: message
+
+      - `usage: BetaUsage`
+
+        Billing and rate-limit usage.
+
+        Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+
+        Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+
+        For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+
+        Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+
+        - `cache_creation: Optional[BetaCacheCreation]`
+
+          Breakdown of cached tokens by TTL
+
+          - `ephemeral_1h_input_tokens: int`
+
+            The number of input tokens used to create the 1 hour cache entry.
+
+            default: 0, minimum: 0
+
+          - `ephemeral_5m_input_tokens: int`
+
+            The number of input tokens used to create the 5 minute cache entry.
+
+            default: 0, minimum: 0
+
+        - `cache_creation_input_tokens: Optional[int]`
+
+          The number of input tokens used to create the cache entry.
+
+          minimum: 0
+
+        - `cache_read_input_tokens: Optional[int]`
+
+          The number of input tokens read from the cache.
+
+          minimum: 0
+
+        - `fallback_credit: Optional[BetaFallbackCreditUsage]`
+
+          Outcome of the `fallback_credit_token` presented on this request.
+
+          - `status: Status`
+
+            Whether the fallback-credit reprice was applied to this response's billing.
+
+            A union discriminated on `type`. `redeemed`: the retry is billed as if
+            the conversation had been on the retry model all along — including when the
+            resulting shift is zero because there was nothing to move. `not_applied`:
+            no reprice was applied; the arm's `reason` says why.
+
+            - `class BetaFallbackCreditRedeemed: …`
+
+              The reprice was applied: the retry is billed as if the conversation
+              had been on the retry model all along.
+
+              - `type: Literal["redeemed"]`
+
+                default: redeemed
+
+            - `class BetaFallbackCreditNotApplied: …`
+
+              No reprice was applied; `reason` says why.
+
+              - `reason: Literal["body_mismatch", "continuation_excluded", "continuation_only", 9 more]`
+
+                Why the reprice was not applied.
+
+                A closed enum; additions to the redemption-check vocabulary arrive as
+                deliberate schema updates.
+
+                - `"body_mismatch"`
+
+                - `"continuation_excluded"`
+
+                - `"continuation_only"`
+
+                - `"expired"`
+
+                - `"invalid_target_model"`
+
+                - `"not_enabled"`
+
+                - `"reprice_unavailable"`
+
+                - `"temporarily_unavailable"`
+
+                - `"variant_fields_present"`
+
+                - `"wrong_organization"`
+
+                - `"wrong_platform"`
+
+                - `"wrong_workspace"`
+
+              - `type: Literal["not_applied"]`
+
+                default: not_applied
+
+              - `remove_to_redeem: Optional[List[str]]`
+
+                Request fields to remove before retrying, so the retry can redeem this
+                token.
+
+                Present exactly when `reason` is `variant_fields_present` — never null,
+                never an empty array; absent otherwise. Fields are named only from your own request, and only after
+                the sealed variant hash matched. A served best-effort retry has already
+                been billed at normal price; nothing redeems retroactively, but a corrected
+                re-send inside the token's five-minute window can still redeem.
+
+        - `inference_geo: Optional[str]`
+
+          The geographic region where inference was performed for this request.
+
+        - `input_tokens: int`
+
+          The number of input tokens which were used.
+
+          minimum: 0
+
+        - `iterations: Optional[BetaIterationsUsage]`
+
+          Per-iteration token usage breakdown.
+
+          Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
+
+          - Determine which iterations exceeded long context thresholds (>=200k tokens)
+          - Calculate the context window size from the last `message` entry
+          - Understand token accumulation across server-side tool use loops
+
+          A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
+
+          - `class BetaMessageIterationUsage: …`
+
+            Token usage for a sampling iteration.
+
+            - `cache_creation: Optional[BetaCacheCreation]`
+
+              Breakdown of cached tokens by TTL
+
+            - `cache_creation_input_tokens: int`
+
+              The number of input tokens used to create the cache entry.
+
+              default: 0, minimum: 0
+
+            - `cache_read_input_tokens: int`
+
+              The number of input tokens read from the cache.
+
+              default: 0, minimum: 0
+
+            - `input_tokens: int`
+
+              The number of input tokens which were used.
+
+              minimum: 0
+
+            - `model: Model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `output_tokens: int`
+
+              The number of output tokens which were used.
+
+              minimum: 0
+
+            - `type: Literal["message"]`
+
+              Usage for a sampling iteration
+
+              default: message
+
+          - `class BetaCompactionIterationUsage: …`
+
+            Token usage for a compaction iteration.
+
+            - `cache_creation: Optional[BetaCacheCreation]`
+
+              Breakdown of cached tokens by TTL
+
+            - `cache_creation_input_tokens: int`
+
+              The number of input tokens used to create the cache entry.
+
+              default: 0, minimum: 0
+
+            - `cache_read_input_tokens: int`
+
+              The number of input tokens read from the cache.
+
+              default: 0, minimum: 0
+
+            - `input_tokens: int`
+
+              The number of input tokens which were used.
+
+              minimum: 0
+
+            - `output_tokens: int`
+
+              The number of output tokens which were used.
+
+              minimum: 0
+
+            - `type: Literal["compaction"]`
+
+              Usage for a compaction iteration
+
+              default: compaction
+
+          - `class BetaAdvisorMessageIterationUsage: …`
+
+            Token usage for an advisor sub-inference iteration.
+
+            - `cache_creation: Optional[BetaCacheCreation]`
+
+              Breakdown of cached tokens by TTL
+
+            - `cache_creation_input_tokens: int`
+
+              The number of input tokens used to create the cache entry.
+
+              default: 0, minimum: 0
+
+            - `cache_read_input_tokens: int`
+
+              The number of input tokens read from the cache.
+
+              default: 0, minimum: 0
+
+            - `input_tokens: int`
+
+              The number of input tokens which were used.
+
+              minimum: 0
+
+            - `model: Model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `output_tokens: int`
+
+              The number of output tokens which were used.
+
+              minimum: 0
+
+            - `type: Literal["advisor_message"]`
+
+              Usage for an advisor sub-inference iteration
+
+              default: advisor_message
+
+          - `class BetaFallbackMessageIterationUsage: …`
+
+            Token usage for the fallback-model attempt of a server-side fallback request.
+
+            Produced in place of a `message` entry for whichever hop served the
+            response. A declined hop produces the existing `message` entry. Whether
+            a fallback model served the response is signalled by the presence of this
+            entry in `usage.iterations`.
+
+            - `cache_creation: Optional[BetaCacheCreation]`
+
+              Breakdown of cached tokens by TTL
+
+            - `cache_creation_input_tokens: int`
+
+              The number of input tokens used to create the cache entry.
+
+              default: 0, minimum: 0
+
+            - `cache_read_input_tokens: int`
+
+              The number of input tokens read from the cache.
+
+              default: 0, minimum: 0
+
+            - `input_tokens: int`
+
+              The number of input tokens which were used.
+
+              minimum: 0
+
+            - `model: Model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `output_tokens: int`
+
+              The number of output tokens which were used.
+
+              minimum: 0
+
+            - `type: Literal["fallback_message"]`
+
+              Usage for the fallback-model attempt that served the response
+
+              default: fallback_message
+
+        - `output_tokens: int`
+
+          The number of output tokens which were used.
+
+          minimum: 0
+
+        - `output_tokens_details: Optional[BetaOutputTokensDetails]`
+
+          Breakdown of output tokens by category.
+
+          `output_tokens` remains the inclusive, authoritative total used for billing.
+          This object provides a read-only decomposition for observability — for example,
+          how many of the billed output tokens were spent on internal reasoning that may
+          have been summarized before being returned to you.
+
+          - `thinking_tokens: int`
+
+            Number of output tokens the model generated as internal reasoning, including
+            the thinking-block delimiter tokens.
+
+            Reflects the raw reasoning the model produced, not the (possibly shorter)
+            summarized thinking text returned in the response body. Computed by
+            re-tokenizing the raw reasoning text, so it may differ from the model's exact
+            generation count by a small number of tokens. Always ≤ `output_tokens`;
+            `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+            default: 0, minimum: 0
+
+        - `server_tool_use: Optional[BetaServerToolUsage]`
+
+          The number of server tool requests.
+
+          - `web_fetch_requests: int`
+
+            The number of web fetch tool requests.
+
+            default: 0, minimum: 0
+
+          - `web_search_requests: int`
+
+            The number of web search tool requests.
+
+            default: 0, minimum: 0
+
+        - `service_tier: Optional[Literal["standard", "priority", "batch"]]`
+
+          If the request used the priority, standard, or batch tier.
+
+          - `"standard"`
+
+          - `"priority"`
+
+          - `"batch"`
+
+        - `speed: Optional[Literal["standard", "fast"]]`
+
+          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+          - `"standard"`
+
+          - `"fast"`
+
+      - `input_transformations: Optional[List[BetaThinkingDroppedInputTransformation]]`
+
+        Changes the API made to the request's input before showing it to the model:
+        one entry per change, in request order. Today the only entry type is
+        `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
+        block from the request's `messages` that was removed from the prompt instead
+        of being shown to the model because it failed a binding check. More entry
+        types may be added over time; ignore types you do not recognize.
+
+        Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
+        every such response from a model that supports extended thinking, as `[]`
+        when nothing was changed; without the beta, blocks are removed all the same
+        but nothing is reported. Removed blocks contribute nothing to
+        `usage.input_tokens`. When streaming, the array is final in `message_start`;
+        the final `message_delta` event carries it only when a server-side model
+        fallback happened mid-stream, in which case it holds the serving model's
+        entries and replaces the one in `message_start`.
+
+        - `path: str`
+
+          Where the removed block was in your request, as `messages.{i}.content.{j}`:
+          `i` indexes the `messages` array you sent and `j` that message's `content`
+          array — the same form error messages use.
+
+        - `reason: Literal["model_binding_mismatch", "prefix_binding_mismatch", "organization_binding_mismatch", "end_user_binding_mismatch"]`
+
+          Which binding check removed the block: `model_binding_mismatch` — it was
+          created by a model whose reasoning the requested model may not read;
+          `prefix_binding_mismatch` — the conversation before it differs from the
+          conversation it was created in (the rest of that turn's consecutive thinking
+          blocks are removed with it, each with this reason);
+          `organization_binding_mismatch` — it was created under a different
+          organization (an Anthropic organization, AWS account or Google Cloud project)
+          and this organization is not one of its additional organizations;
+          `end_user_binding_mismatch` — it was created for a different end user, or
+          was removed by the consumer-organization binding. A block that would fail
+          several checks reports one reason, in this order of precedence:
+          `organization_binding_mismatch`, `end_user_binding_mismatch`,
+          `model_binding_mismatch`, `prefix_binding_mismatch`.
+
+          - `"model_binding_mismatch"`
+
+          - `"prefix_binding_mismatch"`
+
+          - `"organization_binding_mismatch"`
+
+          - `"end_user_binding_mismatch"`
+
+        - `type: Literal["thinking_dropped"]`
+
+          Always `thinking_dropped` for this entry type.
+
+          default: thinking_dropped
+
+    - `type: Literal["succeeded"]`
+
+      default: succeeded
+
+  - `class BetaMessageBatchErroredResult: …`
+
+    - `error: BetaErrorResponse`
+
+      - `error: BetaError`
+
+        - `class BetaInvalidRequestError: …`
+
+          - `message: str`
+
+            default: Invalid request
+
+          - `type: Literal["invalid_request_error"]`
+
+            default: invalid_request_error
+
+        - `class BetaAuthenticationError: …`
+
+          - `message: str`
+
+            default: Authentication error
+
+          - `type: Literal["authentication_error"]`
+
+            default: authentication_error
+
+        - `class BetaBillingError: …`
+
+          - `message: str`
+
+            default: Billing error
+
+          - `type: Literal["billing_error"]`
+
+            default: billing_error
+
+        - `class BetaPermissionError: …`
+
+          - `message: str`
+
+            default: Permission denied
+
+          - `type: Literal["permission_error"]`
+
+            default: permission_error
+
+        - `class BetaNotFoundError: …`
+
+          - `message: str`
+
+            default: Not found
+
+          - `type: Literal["not_found_error"]`
+
+            default: not_found_error
+
+        - `class BetaRateLimitError: …`
+
+          - `message: str`
+
+            default: Rate limited
+
+          - `type: Literal["rate_limit_error"]`
+
+            default: rate_limit_error
+
+        - `class BetaGatewayTimeoutError: …`
+
+          - `message: str`
+
+            default: Request timeout
+
+          - `type: Literal["timeout_error"]`
+
+            default: timeout_error
+
+        - `class BetaAPIError: …`
+
+          - `message: str`
+
+            default: Internal server error
+
+          - `type: Literal["api_error"]`
+
+            default: api_error
+
+        - `class BetaOverloadedError: …`
+
+          - `message: str`
+
+            default: Overloaded
+
+          - `type: Literal["overloaded_error"]`
+
+            default: overloaded_error
+
+      - `request_id: Optional[str]`
+
+      - `type: Literal["error"]`
+
+        default: error
+
+    - `type: Literal["errored"]`
+
+      default: errored
+
+  - `class BetaMessageBatchCanceledResult: …`
+
+    - `type: Literal["canceled"]`
+
+      default: canceled
+
+  - `class BetaMessageBatchExpiredResult: …`
+
+    - `type: Literal["expired"]`
+
+      default: expired
+
+### Beta Message Batch Succeeded Result
+
+- `class BetaMessageBatchSucceededResult: …`
+
+  - `message: BetaMessage`
+
+    - `id: str`
+
+      Unique object identifier.
+
+      The format and length of IDs may change over time.
+
+    - `container: Optional[BetaContainer]`
+
+      Information about the container used in the request (for the code execution tool)
+
+      - `id: str`
+
+        Identifier for the container used in this request
+
+      - `expires_at: datetime`
+
+        The time at which the container will expire.
+
+        format: date-time
+
+      - `skills: Optional[List[BetaContainerSkill]]`
+
+        Skills loaded in the container
+
+        - `skill_id: str`
+
+          Skill ID
+
+          maxLength: 64, minLength: 1
+
+        - `type: Literal["anthropic", "custom"]`
+
+          Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+
+          - `"anthropic"`
+
+          - `"custom"`
+
+        - `version: str`
+
+          The resolved version: a skill version ID for custom skills.
+
+          maxLength: 64, minLength: 1
+
+    - `content: List[BetaContentBlock]`
+
+      Content generated by the model.
+
+      This is an array of content blocks, each of which has a `type` that determines its shape.
+
+      Example:
+
+      ```json
+      [{"type": "text", "text": "Hi, I'm Claude."}]
+      ```
+
+      If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
+
+      For example, if the input `messages` were:
+
+      ```json
+      [
+        {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+        {"role": "assistant", "content": "The best answer is ("}
+      ]
+      ```
+
+      Then the response `content` might be:
+
+      ```json
+      [{"type": "text", "text": "B)"}]
+      ```
+
+      - `class BetaTextBlock: …`
+
+        - `citations: Optional[List[BetaTextCitation]]`
+
+          Citations supporting the text block.
+
+          The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+
+          - `class BetaCitationCharLocation: …`
+
+            - `cited_text: str`
+
+            - `document_index: int`
+
+              minimum: 0
+
+            - `document_title: Optional[str]`
+
+            - `end_char_index: int`
+
+            - `file_id: Optional[str]`
+
+            - `start_char_index: int`
+
+              minimum: 0
+
+            - `type: Literal["char_location"]`
+
+              default: char_location
+
+          - `class BetaCitationPageLocation: …`
+
+            - `cited_text: str`
+
+            - `document_index: int`
+
+              minimum: 0
+
+            - `document_title: Optional[str]`
+
+            - `end_page_number: int`
+
+            - `file_id: Optional[str]`
+
+            - `start_page_number: int`
+
+              minimum: 1
+
+            - `type: Literal["page_location"]`
+
+              default: page_location
+
+          - `class BetaCitationContentBlockLocation: …`
+
+            - `cited_text: str`
+
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+            - `document_index: int`
+
+              minimum: 0
+
+            - `document_title: Optional[str]`
+
+            - `end_block_index: int`
+
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+            - `file_id: Optional[str]`
+
+            - `start_block_index: int`
+
+              0-based index of the first cited block in the source's `content` array.
+
+              minimum: 0
+
+            - `type: Literal["content_block_location"]`
+
+              default: content_block_location
+
+          - `class BetaCitationsWebSearchResultLocation: …`
+
+            - `cited_text: str`
+
+            - `encrypted_index: str`
+
+            - `title: Optional[str]`
+
+              maxLength: 512
+
+            - `type: Literal["web_search_result_location"]`
+
+              default: web_search_result_location
+
+            - `url: str`
+
+          - `class BetaCitationSearchResultLocation: …`
+
+            - `cited_text: str`
+
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+            - `end_block_index: int`
+
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+            - `search_result_index: int`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
+
+              minimum: 0
+
+            - `source: str`
+
+            - `start_block_index: int`
+
+              0-based index of the first cited block in the source's `content` array.
+
+              minimum: 0
+
+            - `title: Optional[str]`
+
+            - `type: Literal["search_result_location"]`
+
+              default: search_result_location
+
+        - `text: str`
+
+          maxLength: 5000000, minLength: 0
+
+        - `type: Literal["text"]`
+
+          default: text
+
+      - `class BetaThinkingBlock: …`
+
+        - `signature: str`
+
+          A value used to verify that this thinking block was generated by Claude when it is passed back to the API.
+
+          This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
+
+          See [extended thinking](build-with-claude/extended-thinking.md) for details.
+
+        - `thinking: str`
+
+          The text of Claude's thinking process for this block.
+
+        - `type: Literal["thinking"]`
+
+          default: thinking
+
+      - `class BetaRedactedThinkingBlock: …`
+
+        - `data: str`
+
+          The contents of this redacted thinking block, returned when portions of the model's thinking were safety-redacted. This field is opaque and encrypted, with no readable content.
+
+          Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
+
+          See [extended thinking](build-with-claude/extended-thinking.md) for details.
+
+        - `type: Literal["redacted_thinking"]`
+
+          default: redacted_thinking
+
+      - `class BetaToolUseBlock: …`
+
+        - `id: str`
+
+          pattern: ^[a-zA-Z0-9_-]+$
+
+        - `input: Dict[str, object]`
+
+        - `name: str`
+
+          minLength: 1
+
+        - `type: Literal["tool_use"]`
+
+          default: tool_use
+
+        - `caller: Optional[Caller]`
+
+          Tool invocation directly from the model.
+
+          - `class BetaDirectCaller: …`
+
+            Tool invocation directly from the model.
+
+            - `type: Literal["direct"]`
+
+          - `class BetaServerToolCaller: …`
+
+            Tool invocation generated by a server-side tool.
+
+            - `tool_id: str`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: Literal["code_execution_20250825"]`
+
+          - `class BetaServerToolCaller20260120: …`
+
+            - `tool_id: str`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: Literal["code_execution_20260120"]`
+
+        - `toolset_name: Optional[str]`
+
+          For a toolset member tool_use, the toolset family.
+
+          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
+      - `class BetaServerToolUseBlock: …`
+
+        - `id: str`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+        - `input: Dict[str, object]`
+
+        - `name: Literal["advisor", "web_search", "web_fetch", 5 more]`
+
+          - `"advisor"`
+
+          - `"web_search"`
+
+          - `"web_fetch"`
+
+          - `"code_execution"`
+
+          - `"bash_code_execution"`
+
+          - `"text_editor_code_execution"`
+
+          - `"tool_search_tool_regex"`
+
+          - `"tool_search_tool_bm25"`
+
+        - `type: Literal["server_tool_use"]`
+
+          default: server_tool_use
+
+        - `caller: Optional[Caller]`
+
+          Tool invocation directly from the model.
+
+          - `class BetaDirectCaller: …`
+
+            Tool invocation directly from the model.
+
+          - `class BetaServerToolCaller: …`
+
+            Tool invocation generated by a server-side tool.
+
+          - `class BetaServerToolCaller20260120: …`
+
+      - `class BetaWebSearchToolResultBlock: …`
+
+        - `content: BetaWebSearchToolResultBlockContent`
+
+          - `class BetaWebSearchToolResultError: …`
+
+            - `error_code: BetaWebSearchToolResultErrorCode`
+
+              - `"invalid_tool_input"`
+
+              - `"unavailable"`
+
+              - `"max_uses_exceeded"`
+
+              - `"too_many_requests"`
+
+              - `"query_too_long"`
+
+              - `"request_too_large"`
+
+            - `type: Literal["web_search_tool_result_error"]`
+
+              default: web_search_tool_result_error
+
+          - `List[BetaWebSearchResultBlock]`
+
+            - `encrypted_content: str`
+
+            - `page_age: Optional[str]`
+
+            - `title: str`
+
+            - `type: Literal["web_search_result"]`
+
+              default: web_search_result
+
+            - `url: str`
+
+        - `tool_use_id: str`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+        - `type: Literal["web_search_tool_result"]`
+
+          default: web_search_tool_result
+
+        - `caller: Optional[Caller]`
+
+          Tool invocation directly from the model.
+
+          - `class BetaDirectCaller: …`
+
+            Tool invocation directly from the model.
+
+          - `class BetaServerToolCaller: …`
+
+            Tool invocation generated by a server-side tool.
+
+          - `class BetaServerToolCaller20260120: …`
+
+      - `class BetaWebFetchToolResultBlock: …`
+
+        - `content: Content`
+
+          - `class BetaWebFetchToolResultErrorBlock: …`
+
+            - `error_code: BetaWebFetchToolResultErrorCode`
+
+              - `"invalid_tool_input"`
+
+              - `"url_too_long"`
+
+              - `"url_not_allowed"`
+
+              - `"url_not_in_prior_context"`
+
+              - `"url_not_accessible"`
+
+              - `"unsupported_content_type"`
+
+              - `"too_many_requests"`
+
+              - `"max_uses_exceeded"`
+
+              - `"unavailable"`
+
+            - `type: Literal["web_fetch_tool_result_error"]`
+
+              default: web_fetch_tool_result_error
+
+          - `class BetaWebFetchBlock: …`
+
+            - `content: BetaDocumentBlock`
+
+              - `citations: Optional[BetaCitationConfig]`
+
+                Citation configuration for the document
+
+                - `enabled: bool`
+
+                  default: false
+
+              - `source: Source`
+
+                - `class BetaBase64PDFSource: …`
+
+                  - `data: str`
+
+                    format: byte
+
+                  - `media_type: Literal["application/pdf"]`
+
+                  - `type: Literal["base64"]`
+
+                - `class BetaPlainTextSource: …`
+
+                  - `data: str`
+
+                  - `media_type: Literal["text/plain"]`
+
+                  - `type: Literal["text"]`
+
+              - `title: Optional[str]`
+
+                The title of the document
+
+              - `type: Literal["document"]`
+
+                default: document
+
+            - `retrieved_at: Optional[str]`
+
+              ISO 8601 timestamp when the content was retrieved
+
+            - `type: Literal["web_fetch_result"]`
+
+              default: web_fetch_result
+
+            - `url: str`
+
+              Fetched content URL
+
+        - `tool_use_id: str`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+        - `type: Literal["web_fetch_tool_result"]`
+
+          default: web_fetch_tool_result
+
+        - `caller: Optional[Caller]`
+
+          Tool invocation directly from the model.
+
+          - `class BetaDirectCaller: …`
+
+            Tool invocation directly from the model.
+
+          - `class BetaServerToolCaller: …`
+
+            Tool invocation generated by a server-side tool.
+
+          - `class BetaServerToolCaller20260120: …`
+
+      - `class BetaAdvisorToolResultBlock: …`
+
+        - `content: Content`
+
+          - `class BetaAdvisorToolResultError: …`
+
+            - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 4 more]`
+
+              - `"max_uses_exceeded"`
+
+              - `"prompt_too_long"`
+
+              - `"too_many_requests"`
+
+              - `"overloaded"`
+
+              - `"unavailable"`
+
+              - `"execution_time_exceeded"`
+
+              - `"model_not_found"`
+
+            - `type: Literal["advisor_tool_result_error"]`
+
+              default: advisor_tool_result_error
+
+          - `class BetaAdvisorResultBlock: …`
+
+            - `stop_reason: Optional[str]`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
+            - `text: str`
+
+            - `type: Literal["advisor_result"]`
+
+              default: advisor_result
+
+          - `class BetaAdvisorRedactedResultBlock: …`
+
+            - `encrypted_content: str`
+
+              Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `stop_reason: Optional[str]`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
+
+            - `type: Literal["advisor_redacted_result"]`
+
+              default: advisor_redacted_result
+
+        - `tool_use_id: str`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+        - `type: Literal["advisor_tool_result"]`
+
+          default: advisor_tool_result
+
+      - `class BetaCodeExecutionToolResultBlock: …`
+
+        - `content: BetaCodeExecutionToolResultBlockContent`
+
+          Code execution result with encrypted stdout for PFC + web_search results.
+
+          - `class BetaCodeExecutionToolResultError: …`
+
+            - `error_code: BetaCodeExecutionToolResultErrorCode`
+
+              - `"invalid_tool_input"`
+
+              - `"unavailable"`
+
+              - `"too_many_requests"`
+
+              - `"execution_time_exceeded"`
+
+            - `type: Literal["code_execution_tool_result_error"]`
+
+              default: code_execution_tool_result_error
+
+          - `class BetaCodeExecutionResultBlock: …`
+
+            - `content: List[BetaCodeExecutionOutputBlock]`
+
+              - `file_id: str`
+
+              - `type: Literal["code_execution_output"]`
+
+                default: code_execution_output
+
+            - `return_code: int`
+
+            - `stderr: str`
+
+            - `stdout: str`
+
+            - `type: Literal["code_execution_result"]`
+
+              default: code_execution_result
+
+          - `class BetaEncryptedCodeExecutionResultBlock: …`
+
+            Code execution result with encrypted stdout for PFC + web_search results.
+
+            - `content: List[BetaCodeExecutionOutputBlock]`
+
+              - `file_id: str`
+
+              - `type: Literal["code_execution_output"]`
+
+                default: code_execution_output
+
+            - `encrypted_stdout: str`
+
+            - `return_code: int`
+
+            - `stderr: str`
+
+            - `type: Literal["encrypted_code_execution_result"]`
+
+              default: encrypted_code_execution_result
+
+        - `tool_use_id: str`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+        - `type: Literal["code_execution_tool_result"]`
+
+          default: code_execution_tool_result
+
+      - `class BetaBashCodeExecutionToolResultBlock: …`
+
+        - `content: Content`
+
+          - `class BetaBashCodeExecutionToolResultError: …`
+
+            - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", 2 more]`
+
+              - `"invalid_tool_input"`
+
+              - `"unavailable"`
+
+              - `"too_many_requests"`
+
+              - `"execution_time_exceeded"`
+
+              - `"output_file_too_large"`
+
+            - `type: Literal["bash_code_execution_tool_result_error"]`
+
+              default: bash_code_execution_tool_result_error
+
+          - `class BetaBashCodeExecutionResultBlock: …`
+
+            - `content: List[BetaBashCodeExecutionOutputBlock]`
+
+              - `file_id: str`
+
+              - `type: Literal["bash_code_execution_output"]`
+
+                default: bash_code_execution_output
+
+            - `return_code: int`
+
+            - `stderr: str`
+
+            - `stdout: str`
+
+            - `type: Literal["bash_code_execution_result"]`
+
+              default: bash_code_execution_result
+
+        - `tool_use_id: str`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+        - `type: Literal["bash_code_execution_tool_result"]`
+
+          default: bash_code_execution_tool_result
+
+      - `class BetaTextEditorCodeExecutionToolResultBlock: …`
+
+        - `content: Content`
+
+          - `class BetaTextEditorCodeExecutionToolResultError: …`
+
+            - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", 2 more]`
+
+              - `"invalid_tool_input"`
+
+              - `"unavailable"`
+
+              - `"too_many_requests"`
+
+              - `"execution_time_exceeded"`
+
+              - `"file_not_found"`
+
+            - `error_message: Optional[str]`
+
+            - `type: Literal["text_editor_code_execution_tool_result_error"]`
+
+              default: text_editor_code_execution_tool_result_error
+
+          - `class BetaTextEditorCodeExecutionViewResultBlock: …`
+
+            - `content: str`
+
+            - `file_type: Literal["text", "image", "pdf"]`
+
+              - `"text"`
+
+              - `"image"`
+
+              - `"pdf"`
+
+            - `num_lines: Optional[int]`
+
+            - `start_line: Optional[int]`
+
+            - `total_lines: Optional[int]`
+
+            - `type: Literal["text_editor_code_execution_view_result"]`
+
+              default: text_editor_code_execution_view_result
+
+          - `class BetaTextEditorCodeExecutionCreateResultBlock: …`
+
+            - `is_file_update: bool`
+
+            - `type: Literal["text_editor_code_execution_create_result"]`
+
+              default: text_editor_code_execution_create_result
+
+          - `class BetaTextEditorCodeExecutionStrReplaceResultBlock: …`
+
+            - `lines: Optional[List[str]]`
+
+            - `new_lines: Optional[int]`
+
+            - `new_start: Optional[int]`
+
+            - `old_lines: Optional[int]`
+
+            - `old_start: Optional[int]`
+
+            - `type: Literal["text_editor_code_execution_str_replace_result"]`
+
+              default: text_editor_code_execution_str_replace_result
+
+        - `tool_use_id: str`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+        - `type: Literal["text_editor_code_execution_tool_result"]`
+
+          default: text_editor_code_execution_tool_result
+
+      - `class BetaToolSearchToolResultBlock: …`
+
+        - `content: Content`
+
+          - `class BetaToolSearchToolResultError: …`
+
+            - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", "execution_time_exceeded"]`
+
+              - `"invalid_tool_input"`
+
+              - `"unavailable"`
+
+              - `"too_many_requests"`
+
+              - `"execution_time_exceeded"`
+
+            - `error_message: Optional[str]`
+
+            - `type: Literal["tool_search_tool_result_error"]`
+
+              default: tool_search_tool_result_error
+
+          - `class BetaToolSearchToolSearchResultBlock: …`
+
+            - `tool_references: List[BetaToolReferenceBlock]`
+
+              - `tool_name: str`
+
+                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
+              - `type: Literal["tool_reference"]`
+
+                default: tool_reference
+
+            - `type: Literal["tool_search_tool_search_result"]`
+
+              default: tool_search_tool_search_result
+
+        - `tool_use_id: str`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+        - `type: Literal["tool_search_tool_result"]`
+
+          default: tool_search_tool_result
+
+      - `class BetaMCPToolUseBlock: …`
+
+        - `id: str`
+
+          pattern: ^[a-zA-Z0-9_-]+$
+
+        - `input: Dict[str, object]`
+
+        - `name: str`
+
+          The name of the MCP tool
+
+        - `server_name: str`
+
+          The name of the MCP server
+
+        - `type: Literal["mcp_tool_use"]`
+
+          default: mcp_tool_use
+
+      - `class BetaMCPToolResultBlock: …`
+
+        - `content: Union[str, List[BetaTextBlock]]`
+
+          - `str`
+
+          - `List[BetaTextBlock]`
+
+            - `citations: Optional[List[BetaTextCitation]]`
+
+              Citations supporting the text block.
+
+              The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+
+            - `text: str`
+
+              maxLength: 5000000, minLength: 0
+
+            - `type: Literal["text"]`
+
+              default: text
+
+        - `is_error: bool`
+
+          default: false
+
+        - `tool_use_id: str`
+
+          pattern: ^[a-zA-Z0-9_-]+$
+
+        - `type: Literal["mcp_tool_result"]`
+
+          default: mcp_tool_result
+
+      - `class BetaContainerUploadBlock: …`
+
+        Response model for a file uploaded to the container.
+
+        - `file_id: str`
+
+        - `type: Literal["container_upload"]`
+
+          default: container_upload
+
+      - `class BetaCompactionBlock: …`
+
+        A compaction block returned when autocompact is triggered.
+
+        When content is None, it indicates the compaction failed to produce a valid
+        summary (e.g., malformed output from the model). Clients may round-trip
+        compaction blocks with null content; the server treats them as no-ops.
+
+        - `content: Optional[str]`
+
+          Summary of compacted content, or null if compaction failed
+
+        - `encrypted_content: Optional[str]`
+
+          Opaque metadata from prior compaction, to be round-tripped verbatim
+
+        - `type: Literal["compaction"]`
+
+          default: compaction
+
+      - `class BetaFallbackBlock: …`
+
+        Marks the point in `content` where one model's output gives way to the next.
+
+        One block appears per hop where a preceding model actually ran this turn and
+        declined. A turn where no preceding model ran and declined has no such
+        boundary and carries no block — the signal for whether a fallback model
+        served the response is the presence of a `fallback_message` entry in
+        `usage.iterations`, not this block.
+
+        The block is treated like a server-tool content block for streaming: it
+        arrives via the standard `content_block_start` / `content_block_stop`
+        pair and carries no deltas.
+
+        - `from_: BetaFallbackInfo`
+
+          The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+          - `model: Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `Literal["claude-fable-5-1", "claude-mythos-5-1", "claude-sonnet-5", 14 more]`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `claude-fable-5-1` - Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+              - `claude-mythos-5-1` - Our most capable model for cybersecurity and biology research, available through trusted access programs
+              - `claude-sonnet-5` - High-performance model for coding and agents
+              - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
+              - `claude-mythos-5` - Most capable model for cybersecurity and biology research
+              - `claude-opus-5` - Powerful intelligence for long-running agents and coding
+              - `claude-opus-4-8` - Powerful intelligence for long-running agents and coding
+              - `claude-opus-4-7` - Powerful intelligence for long-running agents and coding
+              - `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+              - `claude-opus-4-6` - Powerful intelligence for long-running agents and coding
+              - `claude-sonnet-4-6` - Best combination of speed and intelligence
+              - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
+              - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
+              - `claude-opus-4-5` - Powerful intelligence for long-running agents and coding
+              - `claude-opus-4-5-20251101` - Powerful intelligence for long-running agents and coding
+              - `claude-sonnet-4-5` - High-performance model for agents and coding
+              - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+
+              - `"claude-fable-5-1"`
+
+                Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+              - `"claude-mythos-5-1"`
+
+                Our most capable model for cybersecurity and biology research, available through trusted access programs
+
+              - `"claude-sonnet-5"`
+
+                High-performance model for coding and agents
+
+              - `"claude-fable-5"`
+
+                Next generation of intelligence for the hardest knowledge work and coding problems
+
+              - `"claude-mythos-5"`
+
+                Most capable model for cybersecurity and biology research
+
+              - `"claude-opus-5"`
+
+                Powerful intelligence for long-running agents and coding
+
+              - `"claude-opus-4-8"`
+
+                Powerful intelligence for long-running agents and coding
+
+              - `"claude-opus-4-7"`
+
+                Powerful intelligence for long-running agents and coding
+
+              - `"claude-mythos-preview"`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `"claude-opus-4-6"`
+
+                Powerful intelligence for long-running agents and coding
+
+              - `"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"`
+
+                Powerful intelligence for long-running agents and coding
+
+              - `"claude-opus-4-5-20251101"`
+
+                Powerful intelligence for long-running agents and coding
+
+              - `"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+            - `str`
+
+        - `to: BetaFallbackInfo`
+
+          The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+        - `trigger: BetaFallbackRefusalTrigger`
+
+          What caused the `from` model to hand over at this hop.
+
+          - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+
+            The policy category that triggered a refusal.
+
+            - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+            - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+            - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+            - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+            - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
+            - `"cyber"`
+
+              The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
+            - `"bio"`
+
+              The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+
+            - `"frontier_llm"`
+
+              The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
+            - `"reasoning_extraction"`
+
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+
+            - `"general_harms"`
+
+              The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
+          - `type: Literal["refusal"]`
+
+            default: refusal
+
+        - `type: Literal["fallback"]`
+
+          default: fallback
+
+    - `context_management: Optional[BetaContextManagementResponse]`
+
+      Context management response.
+
+      Information about context management strategies applied during the request.
+
+      - `applied_edits: List[AppliedEdit]`
+
+        List of context management edits that were applied.
+
+        - `class BetaClearToolUses20250919EditResponse: …`
+
+          - `cleared_input_tokens: int`
+
+            Number of input tokens cleared by this edit.
+
+            minimum: 0
+
+          - `cleared_tool_uses: int`
+
+            Number of tool uses that were cleared.
+
+            minimum: 0
+
+          - `type: Literal["clear_tool_uses_20250919"]`
+
+            The type of context management edit applied.
+
+            default: clear_tool_uses_20250919
+
+        - `class BetaClearThinking20251015EditResponse: …`
+
+          - `cleared_input_tokens: int`
+
+            Number of input tokens cleared by this edit.
+
+            minimum: 0
+
+          - `cleared_thinking_turns: int`
+
+            Number of thinking turns that were cleared.
+
+            minimum: 0
+
+          - `type: Literal["clear_thinking_20251015"]`
+
+            The type of context management edit applied.
+
+            default: clear_thinking_20251015
+
+    - `diagnostics: Optional[BetaDiagnostics]`
+
+      Response envelope for request-level diagnostics. Present (possibly
+      null) whenever the caller supplied `diagnostics` on the request.
+
+      - `cache_miss_reason: Optional[CacheMissReason]`
+
+        Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+        - `class BetaCacheMissModelChanged: …`
+
+          - `cache_missed_input_tokens: int`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `type: Literal["model_changed"]`
+
+            default: model_changed
+
+        - `class BetaCacheMissSystemChanged: …`
+
+          - `cache_missed_input_tokens: int`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `type: Literal["system_changed"]`
+
+            default: system_changed
+
+        - `class BetaCacheMissToolsChanged: …`
+
+          - `cache_missed_input_tokens: int`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `type: Literal["tools_changed"]`
+
+            default: tools_changed
+
+        - `class BetaCacheMissMessagesChanged: …`
+
+          - `cache_missed_input_tokens: int`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `type: Literal["messages_changed"]`
+
+            default: messages_changed
+
+        - `class BetaCacheMissPreviousMessageNotFound: …`
+
+          - `type: Literal["previous_message_not_found"]`
+
+            default: previous_message_not_found
+
+        - `class BetaCacheMissUnavailable: …`
+
+          - `type: Literal["unavailable"]`
+
+            default: unavailable
+
+    - `model: Model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `role: Literal["assistant"]`
+
+      Conversational role of the generated message.
+
+      This will always be `"assistant"`.
+
+      default: assistant
+
+    - `stop_details: Optional[BetaRefusalStopDetails]`
+
+      Structured information about a refusal.
+
+      - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
+
+        The policy category that triggered a refusal.
+
+        - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+        - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+        - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+        - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+        - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
+        - `"cyber"`
+
+          The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
+        - `"bio"`
+
+          The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+
+        - `"frontier_llm"`
+
+          The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
+        - `"reasoning_extraction"`
+
+          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+
+        - `"general_harms"`
+
+          The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
+      - `explanation: Optional[str]`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `fallback_credit_token: Optional[str]`
+
+        Opaque code that refunds the cache-miss cost when retrying this refused
+        request on the fallback model. Pass it as `fallback_credit_token` on the
+        retry request. Expires 5 minutes after the refusal.
+
+        The retry is sent either with the same request body (`system`, `messages`,
+        `tools`, and other render-shaping fields), or with the same body plus one
+        appended `assistant` message whose content is the partial text (with any
+        trailing whitespace stripped from the final text block) and paired
+        server-tool blocks from this refusal — which also authorizes that
+        appended turn as an assistant-prefill continuation on models that otherwise
+        disallow prefill. A token minted mid-server-tool-loop whose partial content
+        was continuable may only be redeemed the second way — if a same-body retry
+        is rejected with a 400 saying the token must be redeemed by continuing the
+        partial response, retry the second way instead. Either way: same workspace,
+        same platform; a mismatch is a 400. Resending a token for an already-warm
+        prefix is permitted but yields no additional credit.
+
+        `null` when the refused model isn't eligible for a fallback credit.
+
+      - `fallback_has_prefill_claim: Optional[bool]`
+
+        Whether the accompanying `fallback_credit_token` may be redeemed with the
+        appended-assistant retry form. Only set when `fallback_credit_token` is
+        present.
+
+        `true`: retry by resending the same request body plus one appended
+        `assistant` message whose content is this response's `content` with any
+        trailing whitespace stripped from the final text block and unpaired
+        `tool_use` blocks omitted (the same appended-turn shape described on
+        `fallback_credit_token`), with the token attached. `false`: retry by
+        resending the original request body unchanged, with the token attached —
+        the appended-assistant form is not available for this refusal (no
+        continuable partial content, or the request uses `output_format` or a
+        `tool_choice` that forces tool use). One exception: when the request used
+        `output_format` or a forced `tool_choice` and the refusal arrived after
+        server tools (including MCP connector tools) had already executed, the
+        token may not be redeemable by either retry form; if the exact-body retry
+        is then rejected with a 400 saying the token must be redeemed by
+        continuing the partial response, discard the token and retry without it.
+
+        Advisory: if an appended-assistant retry is rejected with a 400 despite
+        `true`, fall back to resending the original request body with the token.
+
+      - `recommended_model: Optional[str]`
+
+        The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
+
+      - `type: Literal["refusal"]`
+
+        default: refusal
+
+    - `stop_reason: Optional[BetaStopReason]`
+
+      The reason that we stopped.
+
+      This may be one the following values:
+
+      * `"end_turn"`: the model reached a natural stopping point
+      * `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
+      * `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
+      * `"tool_use"`: the model invoked one or more tools
+      * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
+      * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+      * `"model_context_window_exceeded"`: we exceeded the model's context window
+
+      In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
+
+      - `"end_turn"`
+
+      - `"max_tokens"`
+
+      - `"stop_sequence"`
+
+      - `"tool_use"`
+
+      - `"pause_turn"`
+
+      - `"compaction"`
+
+      - `"refusal"`
+
+      - `"model_context_window_exceeded"`
+
+    - `stop_sequence: Optional[str]`
+
+      Which custom stop sequence was generated, if any.
+
+      This value will be a non-null string if one of your custom stop sequences was generated.
+
+    - `type: Literal["message"]`
+
+      Object type.
+
+      For Messages, this is always `"message"`.
+
+      default: message
+
+    - `usage: BetaUsage`
+
+      Billing and rate-limit usage.
+
+      Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+
+      Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+
+      For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+
+      Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+
+      - `cache_creation: Optional[BetaCacheCreation]`
+
+        Breakdown of cached tokens by TTL
+
+        - `ephemeral_1h_input_tokens: int`
+
+          The number of input tokens used to create the 1 hour cache entry.
+
+          default: 0, minimum: 0
+
+        - `ephemeral_5m_input_tokens: int`
+
+          The number of input tokens used to create the 5 minute cache entry.
+
+          default: 0, minimum: 0
+
+      - `cache_creation_input_tokens: Optional[int]`
+
+        The number of input tokens used to create the cache entry.
+
+        minimum: 0
+
+      - `cache_read_input_tokens: Optional[int]`
+
+        The number of input tokens read from the cache.
+
+        minimum: 0
+
+      - `fallback_credit: Optional[BetaFallbackCreditUsage]`
+
+        Outcome of the `fallback_credit_token` presented on this request.
+
+        - `status: Status`
+
+          Whether the fallback-credit reprice was applied to this response's billing.
+
+          A union discriminated on `type`. `redeemed`: the retry is billed as if
+          the conversation had been on the retry model all along — including when the
+          resulting shift is zero because there was nothing to move. `not_applied`:
+          no reprice was applied; the arm's `reason` says why.
+
+          - `class BetaFallbackCreditRedeemed: …`
+
+            The reprice was applied: the retry is billed as if the conversation
+            had been on the retry model all along.
+
+            - `type: Literal["redeemed"]`
+
+              default: redeemed
+
+          - `class BetaFallbackCreditNotApplied: …`
+
+            No reprice was applied; `reason` says why.
+
+            - `reason: Literal["body_mismatch", "continuation_excluded", "continuation_only", 9 more]`
+
+              Why the reprice was not applied.
+
+              A closed enum; additions to the redemption-check vocabulary arrive as
+              deliberate schema updates.
+
+              - `"body_mismatch"`
+
+              - `"continuation_excluded"`
+
+              - `"continuation_only"`
+
+              - `"expired"`
+
+              - `"invalid_target_model"`
+
+              - `"not_enabled"`
+
+              - `"reprice_unavailable"`
+
+              - `"temporarily_unavailable"`
+
+              - `"variant_fields_present"`
+
+              - `"wrong_organization"`
+
+              - `"wrong_platform"`
+
+              - `"wrong_workspace"`
+
+            - `type: Literal["not_applied"]`
+
+              default: not_applied
+
+            - `remove_to_redeem: Optional[List[str]]`
+
+              Request fields to remove before retrying, so the retry can redeem this
+              token.
+
+              Present exactly when `reason` is `variant_fields_present` — never null,
+              never an empty array; absent otherwise. Fields are named only from your own request, and only after
+              the sealed variant hash matched. A served best-effort retry has already
+              been billed at normal price; nothing redeems retroactively, but a corrected
+              re-send inside the token's five-minute window can still redeem.
+
+      - `inference_geo: Optional[str]`
+
+        The geographic region where inference was performed for this request.
+
+      - `input_tokens: int`
+
+        The number of input tokens which were used.
+
+        minimum: 0
+
+      - `iterations: Optional[BetaIterationsUsage]`
+
+        Per-iteration token usage breakdown.
+
+        Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
+
+        - Determine which iterations exceeded long context thresholds (>=200k tokens)
+        - Calculate the context window size from the last `message` entry
+        - Understand token accumulation across server-side tool use loops
+
+        A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
+
+        - `class BetaMessageIterationUsage: …`
+
+          Token usage for a sampling iteration.
+
+          - `cache_creation: Optional[BetaCacheCreation]`
+
+            Breakdown of cached tokens by TTL
+
+          - `cache_creation_input_tokens: int`
+
+            The number of input tokens used to create the cache entry.
+
+            default: 0, minimum: 0
+
+          - `cache_read_input_tokens: int`
+
+            The number of input tokens read from the cache.
+
+            default: 0, minimum: 0
+
+          - `input_tokens: int`
+
+            The number of input tokens which were used.
+
+            minimum: 0
+
+          - `model: Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `output_tokens: int`
+
+            The number of output tokens which were used.
+
+            minimum: 0
+
+          - `type: Literal["message"]`
+
+            Usage for a sampling iteration
+
+            default: message
+
+        - `class BetaCompactionIterationUsage: …`
+
+          Token usage for a compaction iteration.
+
+          - `cache_creation: Optional[BetaCacheCreation]`
+
+            Breakdown of cached tokens by TTL
+
+          - `cache_creation_input_tokens: int`
+
+            The number of input tokens used to create the cache entry.
+
+            default: 0, minimum: 0
+
+          - `cache_read_input_tokens: int`
+
+            The number of input tokens read from the cache.
+
+            default: 0, minimum: 0
+
+          - `input_tokens: int`
+
+            The number of input tokens which were used.
+
+            minimum: 0
+
+          - `output_tokens: int`
+
+            The number of output tokens which were used.
+
+            minimum: 0
+
+          - `type: Literal["compaction"]`
+
+            Usage for a compaction iteration
+
+            default: compaction
+
+        - `class BetaAdvisorMessageIterationUsage: …`
+
+          Token usage for an advisor sub-inference iteration.
+
+          - `cache_creation: Optional[BetaCacheCreation]`
+
+            Breakdown of cached tokens by TTL
+
+          - `cache_creation_input_tokens: int`
+
+            The number of input tokens used to create the cache entry.
+
+            default: 0, minimum: 0
+
+          - `cache_read_input_tokens: int`
+
+            The number of input tokens read from the cache.
+
+            default: 0, minimum: 0
+
+          - `input_tokens: int`
+
+            The number of input tokens which were used.
+
+            minimum: 0
+
+          - `model: Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `output_tokens: int`
+
+            The number of output tokens which were used.
+
+            minimum: 0
+
+          - `type: Literal["advisor_message"]`
+
+            Usage for an advisor sub-inference iteration
+
+            default: advisor_message
+
+        - `class BetaFallbackMessageIterationUsage: …`
+
+          Token usage for the fallback-model attempt of a server-side fallback request.
+
+          Produced in place of a `message` entry for whichever hop served the
+          response. A declined hop produces the existing `message` entry. Whether
+          a fallback model served the response is signalled by the presence of this
+          entry in `usage.iterations`.
+
+          - `cache_creation: Optional[BetaCacheCreation]`
+
+            Breakdown of cached tokens by TTL
+
+          - `cache_creation_input_tokens: int`
+
+            The number of input tokens used to create the cache entry.
+
+            default: 0, minimum: 0
+
+          - `cache_read_input_tokens: int`
+
+            The number of input tokens read from the cache.
+
+            default: 0, minimum: 0
+
+          - `input_tokens: int`
+
+            The number of input tokens which were used.
+
+            minimum: 0
+
+          - `model: Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `output_tokens: int`
+
+            The number of output tokens which were used.
+
+            minimum: 0
+
+          - `type: Literal["fallback_message"]`
+
+            Usage for the fallback-model attempt that served the response
+
+            default: fallback_message
+
+      - `output_tokens: int`
+
+        The number of output tokens which were used.
+
+        minimum: 0
+
+      - `output_tokens_details: Optional[BetaOutputTokensDetails]`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+        - `thinking_tokens: int`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+          default: 0, minimum: 0
+
+      - `server_tool_use: Optional[BetaServerToolUsage]`
+
+        The number of server tool requests.
+
+        - `web_fetch_requests: int`
+
+          The number of web fetch tool requests.
+
+          default: 0, minimum: 0
+
+        - `web_search_requests: int`
+
+          The number of web search tool requests.
+
+          default: 0, minimum: 0
+
+      - `service_tier: Optional[Literal["standard", "priority", "batch"]]`
+
+        If the request used the priority, standard, or batch tier.
+
+        - `"standard"`
+
+        - `"priority"`
+
+        - `"batch"`
+
+      - `speed: Optional[Literal["standard", "fast"]]`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `"standard"`
+
+        - `"fast"`
+
+    - `input_transformations: Optional[List[BetaThinkingDroppedInputTransformation]]`
+
+      Changes the API made to the request's input before showing it to the model:
+      one entry per change, in request order. Today the only entry type is
+      `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
+      block from the request's `messages` that was removed from the prompt instead
+      of being shown to the model because it failed a binding check. More entry
+      types may be added over time; ignore types you do not recognize.
+
+      Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
+      every such response from a model that supports extended thinking, as `[]`
+      when nothing was changed; without the beta, blocks are removed all the same
+      but nothing is reported. Removed blocks contribute nothing to
+      `usage.input_tokens`. When streaming, the array is final in `message_start`;
+      the final `message_delta` event carries it only when a server-side model
+      fallback happened mid-stream, in which case it holds the serving model's
+      entries and replaces the one in `message_start`.
+
+      - `path: str`
+
+        Where the removed block was in your request, as `messages.{i}.content.{j}`:
+        `i` indexes the `messages` array you sent and `j` that message's `content`
+        array — the same form error messages use.
+
+      - `reason: Literal["model_binding_mismatch", "prefix_binding_mismatch", "organization_binding_mismatch", "end_user_binding_mismatch"]`
+
+        Which binding check removed the block: `model_binding_mismatch` — it was
+        created by a model whose reasoning the requested model may not read;
+        `prefix_binding_mismatch` — the conversation before it differs from the
+        conversation it was created in (the rest of that turn's consecutive thinking
+        blocks are removed with it, each with this reason);
+        `organization_binding_mismatch` — it was created under a different
+        organization (an Anthropic organization, AWS account or Google Cloud project)
+        and this organization is not one of its additional organizations;
+        `end_user_binding_mismatch` — it was created for a different end user, or
+        was removed by the consumer-organization binding. A block that would fail
+        several checks reports one reason, in this order of precedence:
+        `organization_binding_mismatch`, `end_user_binding_mismatch`,
+        `model_binding_mismatch`, `prefix_binding_mismatch`.
+
+        - `"model_binding_mismatch"`
+
+        - `"prefix_binding_mismatch"`
+
+        - `"organization_binding_mismatch"`
+
+        - `"end_user_binding_mismatch"`
+
+      - `type: Literal["thinking_dropped"]`
+
+        Always `thinking_dropped` for this entry type.
+
+        default: thinking_dropped
+
+  - `type: Literal["succeeded"]`
+
+    default: succeeded
 
 ---
 

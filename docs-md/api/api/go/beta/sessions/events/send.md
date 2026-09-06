@@ -1,1649 +1,965 @@
 # Send Events
 
-Copy page
+`client.Beta.Sessions.Events.Send(ctx, sessionID, params) (*BetaManagedAgentsSendSessionEvents, error)`
 
-
-
-Go
-
-# Send Events
-
-client.Beta.Sessions.Events.Send(ctx, sessionID, params) (\*[BetaManagedAgentsSendSessionEvents](api/beta/sessions/events.md), error)
-
-POST/v1/sessions/{session\_id}/events
+**POST** `/v1/sessions/{session_id}/events`
 
 Send Events
 
-##### ParametersExpand Collapse
+## Parameters
 
-sessionID string
+- `sessionID string`
 
-
+- `params BetaSessionEventSendParams`
 
-params BetaSessionEventSendParams
+  - `Events param.Field[[]BetaManagedAgentsEventParamsUnionResp]`
 
-
+    Body param: Events to send to the `session`.
 
-Events param.Field[[][BetaManagedAgentsEventParamsUnionResp](api/beta/sessions/events.md)]
+    - `type BetaManagedAgentsUserMessageEventParams struct{…}`
 
-Body param: Events to send to the `session`.
+      Parameters for sending a user message to the session.
 
-
+      - `Content []BetaManagedAgentsUserMessageEventParamsContentUnionResp`
 
-type BetaManagedAgentsUserMessageEventParamsResp struct{…}
+        Array of content blocks for the user message.
 
-Parameters for sending a user message to the session.
+        - `type BetaManagedAgentsTextBlock struct{…}`
 
-
+          Regular text content.
 
-Content []BetaManagedAgentsUserMessageEventParamsContentUnionResp
+          - `Text string`
 
-Array of content blocks for the user message.
+            The text content.
 
-One of the following:
+            minLength: 1
 
-
+          - `Type BetaManagedAgentsTextBlockType`
 
-type BetaManagedAgentsTextBlock struct{…}
+        - `type BetaManagedAgentsImageBlock struct{…}`
 
-Regular text content.
+          Image content specified directly as base64 data or as a reference via a URL.
 
-Text string
+          - `Source BetaManagedAgentsImageBlockSourceUnion`
 
-The text content.
+            Union type for image source variants.
 
-Type BetaManagedAgentsTextBlockType
+            - `type BetaManagedAgentsBase64ImageSource struct{…}`
 
-
+              Base64-encoded image data.
 
-type BetaManagedAgentsImageBlock struct{…}
+              - `Data string`
 
-Image content specified directly as base64 data or as a reference via a URL.
+                Base64-encoded image data.
 
-
+                minLength: 1
 
-Source BetaManagedAgentsImageBlockSourceUnion
+              - `MediaType string`
 
-Union type for image source variants.
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-One of the following:
+                minLength: 1
 
-
+              - `Type BetaManagedAgentsBase64ImageSourceType`
 
-type BetaManagedAgentsBase64ImageSource struct{…}
+            - `type BetaManagedAgentsURLImageSource struct{…}`
 
-Base64-encoded image data.
+              Image referenced by URL.
 
-Data string
+              - `Type BetaManagedAgentsURLImageSourceType`
 
-Base64-encoded image data.
+              - `URL string`
 
-MediaType string
+                URL of the image to fetch.
 
-MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+                minLength: 1
 
-Type BetaManagedAgentsBase64ImageSourceType
+            - `type BetaManagedAgentsFileImageSource struct{…}`
 
-
+              Image referenced by file ID.
 
-type BetaManagedAgentsURLImageSource struct{…}
+              - `FileID string`
 
-Image referenced by URL.
+                ID of a previously uploaded file.
 
-Type BetaManagedAgentsURLImageSourceType
+                minLength: 1
 
-URL string
+              - `Type BetaManagedAgentsFileImageSourceType`
 
-URL of the image to fetch.
+          - `Type BetaManagedAgentsImageBlockType`
 
-
+        - `type BetaManagedAgentsDocumentBlock struct{…}`
 
-type BetaManagedAgentsFileImageSource struct{…}
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-Image referenced by file ID.
+          - `Source BetaManagedAgentsDocumentBlockSourceUnion`
 
-FileID string
+            Union type for document source variants.
 
-ID of a previously uploaded file.
+            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
 
-Type BetaManagedAgentsFileImageSourceType
+              Base64-encoded document data.
 
-Type BetaManagedAgentsImageBlockType
+              - `Data string`
 
-
+                Base64-encoded document data.
 
-type BetaManagedAgentsDocumentBlock struct{…}
+                minLength: 1
 
-Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+              - `MediaType string`
 
-
+                MIME type of the document (e.g., "application/pdf").
 
-Source BetaManagedAgentsDocumentBlockSourceUnion
+                minLength: 1
 
-Union type for document source variants.
+              - `Type BetaManagedAgentsBase64DocumentSourceType`
 
-One of the following:
+            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
 
-
+              Plain text document content.
 
-type BetaManagedAgentsBase64DocumentSource struct{…}
+              - `Data string`
 
-Base64-encoded document data.
+                The plain text content.
 
-Data string
+                minLength: 1
 
-Base64-encoded document data.
+              - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
 
-MediaType string
+                MIME type of the text content. Must be "text/plain".
 
-MIME type of the document (e.g., "application/pdf").
+              - `Type BetaManagedAgentsPlainTextDocumentSourceType`
 
-Type BetaManagedAgentsBase64DocumentSourceType
+            - `type BetaManagedAgentsURLDocumentSource struct{…}`
 
-
+              Document referenced by URL.
 
-type BetaManagedAgentsPlainTextDocumentSource struct{…}
+              - `Type BetaManagedAgentsURLDocumentSourceType`
 
-Plain text document content.
+              - `URL string`
 
-Data string
+                URL of the document to fetch.
 
-The plain text content.
+                minLength: 1
 
-MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType
+            - `type BetaManagedAgentsFileDocumentSource struct{…}`
 
-MIME type of the text content. Must be "text/plain".
+              Document referenced by file ID.
 
-Type BetaManagedAgentsPlainTextDocumentSourceType
+              - `FileID string`
 
-
+                ID of a previously uploaded file.
 
-type BetaManagedAgentsURLDocumentSource struct{…}
+                minLength: 1
 
-Document referenced by URL.
+              - `Type BetaManagedAgentsFileDocumentSourceType`
 
-Type BetaManagedAgentsURLDocumentSourceType
+          - `Type BetaManagedAgentsDocumentBlockType`
 
-URL string
+          - `Context string Optional`
 
-URL of the document to fetch.
+            Additional context about the document for the model.
 
-
+          - `Title string Optional`
 
-type BetaManagedAgentsFileDocumentSource struct{…}
+            The title of the document.
 
-Document referenced by file ID.
+        - `type BetaManagedAgentsRedactedBlockParam struct{…}`
 
-FileID string
+          Placeholder for content withheld by Anthropic model policy.
 
-ID of a previously uploaded file.
+          - `Type BetaManagedAgentsRedactedBlockType`
 
-Type BetaManagedAgentsFileDocumentSourceType
+      - `Type BetaManagedAgentsUserMessageEventParamsType`
 
-Type BetaManagedAgentsDocumentBlockType
+    - `type BetaManagedAgentsUserInterruptEventParamsResp struct{…}`
 
-Context stringOptional
+      Parameters for sending an interrupt to pause the agent.
 
-Additional context about the document for the model.
+      - `Type BetaManagedAgentsUserInterruptEventParamsType`
 
-Title stringOptional
+      - `SessionThreadID string Optional`
 
-The title of the document.
+        If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-Type BetaManagedAgentsUserMessageEventParamsType
+    - `type BetaManagedAgentsUserToolConfirmationEventParamsResp struct{…}`
 
-
+      Parameters for confirming or denying a tool execution request.
 
-type BetaManagedAgentsUserInterruptEventParamsResp struct{…}
+      - `Result BetaManagedAgentsUserToolConfirmationEventParamsResult`
 
-Parameters for sending an interrupt to pause the agent.
+        UserToolConfirmationResult enum
 
-Type BetaManagedAgentsUserInterruptEventParamsType
+        - `const BetaManagedAgentsUserToolConfirmationEventParamsResultAllow BetaManagedAgentsUserToolConfirmationEventParamsResult = "allow"`
 
-SessionThreadID stringOptional
+        - `const BetaManagedAgentsUserToolConfirmationEventParamsResultDeny BetaManagedAgentsUserToolConfirmationEventParamsResult = "deny"`
 
-If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+      - `ToolUseID string`
 
-
+        The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-type BetaManagedAgentsUserToolConfirmationEventParamsResp struct{…}
+        minLength: 1, maxLength: 128
 
-Parameters for confirming or denying a tool execution request.
+      - `Type BetaManagedAgentsUserToolConfirmationEventParamsType`
 
-
+      - `DenyMessage string Optional`
 
-Result BetaManagedAgentsUserToolConfirmationEventParamsResult
+        Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-UserToolConfirmationResult enum
+        maxLength: 10000
 
-One of the following:
+    - `type BetaManagedAgentsUserCustomToolResultEventParamsResp struct{…}`
 
-const BetaManagedAgentsUserToolConfirmationEventParamsResultAllow BetaManagedAgentsUserToolConfirmationEventParamsResult = "allow"
+      Parameters for providing the result of a custom tool execution.
 
-const BetaManagedAgentsUserToolConfirmationEventParamsResultDeny BetaManagedAgentsUserToolConfirmationEventParamsResult = "deny"
+      - `CustomToolUseID string`
 
-ToolUseID string
+        The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+        minLength: 1, maxLength: 128
 
-Type BetaManagedAgentsUserToolConfirmationEventParamsType
+      - `Type BetaManagedAgentsUserCustomToolResultEventParamsType`
 
-DenyMessage stringOptional
+      - `Content []BetaManagedAgentsUserCustomToolResultEventParamsContentUnionResp Optional`
 
-Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+        The result content returned by the tool.
 
-
+        - `type BetaManagedAgentsTextBlock struct{…}`
 
-type BetaManagedAgentsUserCustomToolResultEventParamsResp struct{…}
+          Regular text content.
 
-Parameters for providing the result of a custom tool execution.
+        - `type BetaManagedAgentsImageBlock struct{…}`
 
-CustomToolUseID string
+          Image content specified directly as base64 data or as a reference via a URL.
 
-The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+        - `type BetaManagedAgentsDocumentBlock struct{…}`
 
-Type BetaManagedAgentsUserCustomToolResultEventParamsType
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-
+        - `type BetaManagedAgentsSearchResultBlock struct{…}`
 
-Content []BetaManagedAgentsUserCustomToolResultEventParamsContentUnionRespOptional
+          A block containing a web search result.
 
-The result content returned by the tool.
+          - `Citations BetaManagedAgentsSearchResultCitations`
 
-One of the following:
+            Citation settings for a search result.
 
-
+            - `Enabled bool`
 
-type BetaManagedAgentsTextBlock struct{…}
+              Whether citations are enabled for this search result.
 
-Regular text content.
+          - `Content []BetaManagedAgentsSearchResultContent`
 
-Text string
+            Array of text content blocks from the search result.
 
-The text content.
+            - `Text string`
 
-Type BetaManagedAgentsTextBlockType
+              The text content.
 
-
+              minLength: 1
 
-type BetaManagedAgentsImageBlock struct{…}
+            - `Type BetaManagedAgentsSearchResultContentType`
 
-Image content specified directly as base64 data or as a reference via a URL.
+          - `Source string`
 
-
+            The URL source of the search result.
 
-Source BetaManagedAgentsImageBlockSourceUnion
+            minLength: 1
 
-Union type for image source variants.
+          - `Title string`
 
-One of the following:
+            The title of the search result.
 
-
+            minLength: 1
 
-type BetaManagedAgentsBase64ImageSource struct{…}
+          - `Type BetaManagedAgentsSearchResultBlockType`
 
-Base64-encoded image data.
+      - `IsError bool Optional`
 
-Data string
+        Whether the tool execution resulted in an error.
 
-Base64-encoded image data.
+    - `type BetaManagedAgentsUserDefineOutcomeEventParams struct{…}`
 
-MediaType string
+      Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
-MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+      - `Description string`
 
-Type BetaManagedAgentsBase64ImageSourceType
+        What the agent should produce. This is the task specification.
 
-
+      - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp`
 
-type BetaManagedAgentsURLImageSource struct{…}
+        Rubric for grading the quality of an outcome.
 
-Image referenced by URL.
+        - `type BetaManagedAgentsFileRubricParams struct{…}`
 
-Type BetaManagedAgentsURLImageSourceType
+          Rubric referenced by a file uploaded via the Files API.
 
-URL string
+          - `FileID string`
 
-URL of the image to fetch.
+            ID of the rubric file.
 
-
+          - `Type BetaManagedAgentsFileRubricParamsType`
 
-type BetaManagedAgentsFileImageSource struct{…}
+        - `type BetaManagedAgentsTextRubricParams struct{…}`
 
-Image referenced by file ID.
+          Rubric content provided inline as text.
 
-FileID string
+          - `Content string`
 
-ID of a previously uploaded file.
+            Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
-Type BetaManagedAgentsFileImageSourceType
+            maxLength: 262144
 
-Type BetaManagedAgentsImageBlockType
+          - `Type BetaManagedAgentsTextRubricParamsType`
 
-
+      - `Type BetaManagedAgentsUserDefineOutcomeEventParamsType`
 
-type BetaManagedAgentsDocumentBlock struct{…}
+      - `MaxIterations int64 Optional`
 
-Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+        Eval→revision cycles before giving up. Default 3, max 20.
 
-
+        format: int32
 
-Source BetaManagedAgentsDocumentBlockSourceUnion
+    - `type BetaManagedAgentsUserToolResultEventParamsResp struct{…}`
 
-Union type for document source variants.
+      Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
-One of the following:
+      - `ToolUseID string`
 
-
+        The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-type BetaManagedAgentsBase64DocumentSource struct{…}
+        minLength: 1, maxLength: 128
 
-Base64-encoded document data.
+      - `Type BetaManagedAgentsUserToolResultEventParamsType`
 
-Data string
+      - `Content []BetaManagedAgentsUserToolResultEventParamsContentUnionResp Optional`
 
-Base64-encoded document data.
+        The result content returned by the tool.
 
-MediaType string
+        - `type BetaManagedAgentsTextBlock struct{…}`
 
-MIME type of the document (e.g., "application/pdf").
+          Regular text content.
 
-Type BetaManagedAgentsBase64DocumentSourceType
+        - `type BetaManagedAgentsImageBlock struct{…}`
 
-
+          Image content specified directly as base64 data or as a reference via a URL.
 
-type BetaManagedAgentsPlainTextDocumentSource struct{…}
+        - `type BetaManagedAgentsDocumentBlock struct{…}`
 
-Plain text document content.
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-Data string
+        - `type BetaManagedAgentsSearchResultBlock struct{…}`
 
-The plain text content.
+          A block containing a web search result.
 
-MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType
+      - `IsError bool Optional`
 
-MIME type of the text content. Must be "text/plain".
+        Whether the tool execution resulted in an error.
 
-Type BetaManagedAgentsPlainTextDocumentSourceType
+    - `type BetaManagedAgentsSystemMessageEventParamsResp struct{…}`
 
-
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
-type BetaManagedAgentsURLDocumentSource struct{…}
+      - `Content []BetaManagedAgentsSystemContentBlock`
 
-Document referenced by URL.
+        System content blocks to append. Text-only.
 
-Type BetaManagedAgentsURLDocumentSourceType
+        - `Text string`
 
-URL string
+          The text content.
 
-URL of the document to fetch.
+          minLength: 1
 
-
+        - `Type BetaManagedAgentsSystemContentBlockType`
 
-type BetaManagedAgentsFileDocumentSource struct{…}
+      - `Type BetaManagedAgentsSystemMessageEventParamsType`
 
-Document referenced by file ID.
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
-FileID string
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-ID of a previously uploaded file.
+    - `string`
 
-Type BetaManagedAgentsFileDocumentSourceType
+    - `type AnthropicBeta string`
 
-Type BetaManagedAgentsDocumentBlockType
+      - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
 
-Context stringOptional
+      - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
 
-Additional context about the document for the model.
+      - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
 
-Title stringOptional
+      - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
 
-The title of the document.
+      - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
 
-
+      - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
 
-type BetaManagedAgentsSearchResultBlock struct{…}
+      - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
 
-A block containing a web search result.
+      - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
 
-
+      - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
 
-Citations [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md)
+      - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
 
-Citation settings for a search result.
+      - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
 
-Enabled bool
+      - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
 
-Whether citations are enabled for this search result.
+      - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
 
-
+      - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
 
-Content [][BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)
+      - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
 
-Array of text content blocks from the search result.
+      - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
 
-Text string
+      - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
 
-The text content.
+      - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
 
-Type BetaManagedAgentsSearchResultContentType
+      - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
 
-Source string
+      - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
-The URL source of the search result.
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
-Title string
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
-The title of the search result.
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
-Type BetaManagedAgentsSearchResultBlockType
+      - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
-IsError boolOptional
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
-Whether the tool execution resulted in an error.
+      - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
-
+      - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
 
-type BetaManagedAgentsUserDefineOutcomeEventParamsResp struct{…}
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
-Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
 
-Description string
+      - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
 
-What the agent should produce. This is the task specification.
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
 
-
+      - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
-Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
-Rubric for grading the quality of an outcome.
+      - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-One of the following:
+      - `const AnthropicBetaCompact2026_01_12 AnthropicBeta = "compact-2026-01-12"`
 
-
+      - `const AnthropicBetaComputerUse2025_11_24 AnthropicBeta = "computer-use-2025-11-24"`
 
-type BetaManagedAgentsFileRubricParamsResp struct{…}
+      - `const AnthropicBetaMCPTunnels2026_06_22 AnthropicBeta = "mcp-tunnels-2026-06-22"`
 
-Rubric referenced by a file uploaded via the Files API.
+      - `const AnthropicBetaStructuredOutputs2025_11_13 AnthropicBeta = "structured-outputs-2025-11-13"`
 
-FileID string
+      - `const AnthropicBetaTaskBudgets2026_03_13 AnthropicBeta = "task-budgets-2026-03-13"`
 
-ID of the rubric file.
+      - `const AnthropicBetaThinkingDisplayUpdates2026_08_18 AnthropicBeta = "thinking-display-updates-2026-08-18"`
 
-Type BetaManagedAgentsFileRubricParamsType
+      - `const AnthropicBetaCEUserManagement2026_07_13 AnthropicBeta = "ce-user-management-2026-07-13"`
 
-
+      - `const AnthropicBetaMidConversationOutputConfig2026_07_01 AnthropicBeta = "mid-conversation-output-config-2026-07-01"`
 
-type BetaManagedAgentsTextRubricParamsResp struct{…}
+      - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
 
-Rubric content provided inline as text.
+      - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
-Content string
+## Returns
 
-Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+- `type BetaManagedAgentsSendSessionEvents struct{…}`
 
-Type BetaManagedAgentsTextRubricParamsType
+  Events that were successfully sent to the session.
 
-Type BetaManagedAgentsUserDefineOutcomeEventParamsType
+  - `Data []BetaManagedAgentsSendSessionEventsDataUnion Optional`
 
-MaxIterations int64Optional
+    Sent events
 
-Eval→revision cycles before giving up. Default 3, max 20.
+    - `type BetaManagedAgentsUserMessageEvent struct{…}`
 
-
+      A user message event in the session conversation.
 
-type BetaManagedAgentsUserToolResultEventParamsResp struct{…}
+      - `ID string`
 
-Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+        Unique identifier for this event.
 
-ToolUseID string
+      - `Content []BetaManagedAgentsUserMessageEventContentUnion`
 
-The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+        Array of content blocks comprising the user message.
 
-Type BetaManagedAgentsUserToolResultEventParamsType
+        - `type BetaManagedAgentsTextBlock struct{…}`
 
-
+          Regular text content.
 
-Content []BetaManagedAgentsUserToolResultEventParamsContentUnionRespOptional
+          - `Text string`
 
-The result content returned by the tool.
+            The text content.
 
-One of the following:
+            minLength: 1
 
-
+          - `Type BetaManagedAgentsTextBlockType`
 
-type BetaManagedAgentsTextBlock struct{…}
+        - `type BetaManagedAgentsImageBlock struct{…}`
 
-Regular text content.
+          Image content specified directly as base64 data or as a reference via a URL.
 
-Text string
+          - `Source BetaManagedAgentsImageBlockSourceUnion`
 
-The text content.
+            Union type for image source variants.
 
-Type BetaManagedAgentsTextBlockType
+            - `type BetaManagedAgentsBase64ImageSource struct{…}`
 
-
+              Base64-encoded image data.
 
-type BetaManagedAgentsImageBlock struct{…}
+              - `Data string`
 
-Image content specified directly as base64 data or as a reference via a URL.
+                Base64-encoded image data.
 
-
+                minLength: 1
 
-Source BetaManagedAgentsImageBlockSourceUnion
+              - `MediaType string`
 
-Union type for image source variants.
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-One of the following:
+                minLength: 1
 
-
+              - `Type BetaManagedAgentsBase64ImageSourceType`
 
-type BetaManagedAgentsBase64ImageSource struct{…}
+            - `type BetaManagedAgentsURLImageSource struct{…}`
 
-Base64-encoded image data.
+              Image referenced by URL.
 
-Data string
+              - `Type BetaManagedAgentsURLImageSourceType`
 
-Base64-encoded image data.
+              - `URL string`
 
-MediaType string
+                URL of the image to fetch.
 
-MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+                minLength: 1
 
-Type BetaManagedAgentsBase64ImageSourceType
+            - `type BetaManagedAgentsFileImageSource struct{…}`
 
-
+              Image referenced by file ID.
 
-type BetaManagedAgentsURLImageSource struct{…}
+              - `FileID string`
 
-Image referenced by URL.
+                ID of a previously uploaded file.
 
-Type BetaManagedAgentsURLImageSourceType
+                minLength: 1
 
-URL string
+              - `Type BetaManagedAgentsFileImageSourceType`
 
-URL of the image to fetch.
+          - `Type BetaManagedAgentsImageBlockType`
 
-
+        - `type BetaManagedAgentsDocumentBlock struct{…}`
 
-type BetaManagedAgentsFileImageSource struct{…}
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-Image referenced by file ID.
+          - `Source BetaManagedAgentsDocumentBlockSourceUnion`
 
-FileID string
+            Union type for document source variants.
 
-ID of a previously uploaded file.
+            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
 
-Type BetaManagedAgentsFileImageSourceType
+              Base64-encoded document data.
 
-Type BetaManagedAgentsImageBlockType
+              - `Data string`
 
-
+                Base64-encoded document data.
 
-type BetaManagedAgentsDocumentBlock struct{…}
+                minLength: 1
 
-Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+              - `MediaType string`
 
-
+                MIME type of the document (e.g., "application/pdf").
 
-Source BetaManagedAgentsDocumentBlockSourceUnion
+                minLength: 1
 
-Union type for document source variants.
+              - `Type BetaManagedAgentsBase64DocumentSourceType`
 
-One of the following:
+            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
 
-
+              Plain text document content.
 
-type BetaManagedAgentsBase64DocumentSource struct{…}
+              - `Data string`
 
-Base64-encoded document data.
+                The plain text content.
 
-Data string
+                minLength: 1
 
-Base64-encoded document data.
+              - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
 
-MediaType string
+                MIME type of the text content. Must be "text/plain".
 
-MIME type of the document (e.g., "application/pdf").
+              - `Type BetaManagedAgentsPlainTextDocumentSourceType`
 
-Type BetaManagedAgentsBase64DocumentSourceType
+            - `type BetaManagedAgentsURLDocumentSource struct{…}`
 
-
+              Document referenced by URL.
 
-type BetaManagedAgentsPlainTextDocumentSource struct{…}
+              - `Type BetaManagedAgentsURLDocumentSourceType`
 
-Plain text document content.
+              - `URL string`
 
-Data string
+                URL of the document to fetch.
 
-The plain text content.
+                minLength: 1
 
-MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType
+            - `type BetaManagedAgentsFileDocumentSource struct{…}`
 
-MIME type of the text content. Must be "text/plain".
+              Document referenced by file ID.
 
-Type BetaManagedAgentsPlainTextDocumentSourceType
+              - `FileID string`
 
-
+                ID of a previously uploaded file.
 
-type BetaManagedAgentsURLDocumentSource struct{…}
+                minLength: 1
 
-Document referenced by URL.
+              - `Type BetaManagedAgentsFileDocumentSourceType`
 
-Type BetaManagedAgentsURLDocumentSourceType
+          - `Type BetaManagedAgentsDocumentBlockType`
 
-URL string
+          - `Context string Optional`
 
-URL of the document to fetch.
+            Additional context about the document for the model.
 
-
+          - `Title string Optional`
 
-type BetaManagedAgentsFileDocumentSource struct{…}
+            The title of the document.
 
-Document referenced by file ID.
+        - `type BetaManagedAgentsRedactedBlockParam struct{…}`
 
-FileID string
+          Placeholder for content withheld by Anthropic model policy.
 
-ID of a previously uploaded file.
+          - `Type BetaManagedAgentsRedactedBlockType`
 
-Type BetaManagedAgentsFileDocumentSourceType
+      - `Type BetaManagedAgentsUserMessageEventType`
 
-Type BetaManagedAgentsDocumentBlockType
+      - `ProcessedAt Time Optional`
 
-Context stringOptional
+        A timestamp in RFC 3339 format
 
-Additional context about the document for the model.
+        format: date-time
 
-Title stringOptional
+    - `type BetaManagedAgentsUserInterruptEvent struct{…}`
 
-The title of the document.
+      An interrupt event that pauses agent execution and returns control to the user.
 
-
+      - `ID string`
 
-type BetaManagedAgentsSearchResultBlock struct{…}
+        Unique identifier for this event.
 
-A block containing a web search result.
+      - `Type BetaManagedAgentsUserInterruptEventType`
 
-
+      - `ProcessedAt Time Optional`
 
-Citations [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md)
+        A timestamp in RFC 3339 format
 
-Citation settings for a search result.
+        format: date-time
 
-Enabled bool
+      - `SessionThreadID string Optional`
 
-Whether citations are enabled for this search result.
+        If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-
+    - `type BetaManagedAgentsUserToolConfirmationEvent struct{…}`
 
-Content [][BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)
+      A tool confirmation event that approves or denies a pending tool execution.
 
-Array of text content blocks from the search result.
+      - `ID string`
 
-Text string
+        Unique identifier for this event.
 
-The text content.
+      - `Result BetaManagedAgentsUserToolConfirmationEventResult`
 
-Type BetaManagedAgentsSearchResultContentType
+        UserToolConfirmationResult enum
 
-Source string
+        - `const BetaManagedAgentsUserToolConfirmationEventResultAllow BetaManagedAgentsUserToolConfirmationEventResult = "allow"`
 
-The URL source of the search result.
+        - `const BetaManagedAgentsUserToolConfirmationEventResultDeny BetaManagedAgentsUserToolConfirmationEventResult = "deny"`
 
-Title string
+      - `ToolUseID string`
 
-The title of the search result.
+        The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Type BetaManagedAgentsSearchResultBlockType
+      - `Type BetaManagedAgentsUserToolConfirmationEventType`
 
-IsError boolOptional
+      - `DenyMessage string Optional`
 
-Whether the tool execution resulted in an error.
+        Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-
+        maxLength: 10000
 
-type BetaManagedAgentsSystemMessageEventParamsResp struct{…}
+      - `ProcessedAt Time Optional`
 
-Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+        A timestamp in RFC 3339 format
 
-
+        format: date-time
 
-Content [][BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)
+      - `SessionThreadID string Optional`
 
-System content blocks to append. Text-only.
+        When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-Text string
+    - `type BetaManagedAgentsUserCustomToolResultEvent struct{…}`
 
-The text content.
+      Event sent by the client providing the result of a custom tool execution.
 
-Type BetaManagedAgentsSystemContentBlockType
+      - `ID string`
 
-Type BetaManagedAgentsSystemMessageEventParamsType
+        Unique identifier for this event.
 
-
+      - `CustomToolUseID string`
 
-Betas param.Field[[]AnthropicBeta]Optional
+        The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Header param: Optional header to specify the beta version(s) you want to use.
+      - `Type BetaManagedAgentsUserCustomToolResultEventType`
 
-string
+      - `Content []BetaManagedAgentsUserCustomToolResultEventContentUnion Optional`
 
-
+        The result content returned by the tool.
 
-type AnthropicBeta string
+        - `type BetaManagedAgentsTextBlock struct{…}`
 
-One of the following:
+          Regular text content.
 
-const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
+        - `type BetaManagedAgentsImageBlock struct{…}`
 
-const AnthropicBetaPromptCaching2024\_07\_31 AnthropicBeta = "prompt-caching-2024-07-31"
+          Image content specified directly as base64 data or as a reference via a URL.
 
-const AnthropicBetaComputerUse2024\_10\_22 AnthropicBeta = "computer-use-2024-10-22"
+        - `type BetaManagedAgentsDocumentBlock struct{…}`
 
-const AnthropicBetaComputerUse2025\_01\_24 AnthropicBeta = "computer-use-2025-01-24"
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-const AnthropicBetaPDFs2024\_09\_25 AnthropicBeta = "pdfs-2024-09-25"
+        - `type BetaManagedAgentsSearchResultBlock struct{…}`
 
-const AnthropicBetaTokenCounting2024\_11\_01 AnthropicBeta = "token-counting-2024-11-01"
+          A block containing a web search result.
 
-const AnthropicBetaTokenEfficientTools2025\_02\_19 AnthropicBeta = "token-efficient-tools-2025-02-19"
+          - `Citations BetaManagedAgentsSearchResultCitations`
 
-const AnthropicBetaOutput128k2025\_02\_19 AnthropicBeta = "output-128k-2025-02-19"
+            Citation settings for a search result.
 
-const AnthropicBetaFilesAPI2025\_04\_14 AnthropicBeta = "files-api-2025-04-14"
+            - `Enabled bool`
 
-const AnthropicBetaMCPClient2025\_04\_04 AnthropicBeta = "mcp-client-2025-04-04"
+              Whether citations are enabled for this search result.
 
-const AnthropicBetaMCPClient2025\_11\_20 AnthropicBeta = "mcp-client-2025-11-20"
+          - `Content []BetaManagedAgentsSearchResultContent`
 
-const AnthropicBetaDevFullThinking2025\_05\_14 AnthropicBeta = "dev-full-thinking-2025-05-14"
+            Array of text content blocks from the search result.
 
-const AnthropicBetaInterleavedThinking2025\_05\_14 AnthropicBeta = "interleaved-thinking-2025-05-14"
+            - `Text string`
 
-const AnthropicBetaCodeExecution2025\_05\_22 AnthropicBeta = "code-execution-2025-05-22"
+              The text content.
 
-const AnthropicBetaExtendedCacheTTL2025\_04\_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"
+              minLength: 1
 
-const AnthropicBetaContext1m2025\_08\_07 AnthropicBeta = "context-1m-2025-08-07"
+            - `Type BetaManagedAgentsSearchResultContentType`
 
-const AnthropicBetaContextManagement2025\_06\_27 AnthropicBeta = "context-management-2025-06-27"
+          - `Source string`
 
-const AnthropicBetaModelContextWindowExceeded2025\_08\_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"
+            The URL source of the search result.
 
-const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
+            minLength: 1
 
-const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
+          - `Title string`
 
-const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
+            The title of the search result.
 
-const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
+            minLength: 1
 
-const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
+          - `Type BetaManagedAgentsSearchResultBlockType`
 
-const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
+      - `IsError bool Optional`
 
-const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2026-04-07"
+        Whether the tool execution resulted in an error.
 
-const AnthropicBetaThinkingTokenCount2026\_05\_13 AnthropicBeta = "thinking-token-count-2026-05-13"
+      - `ProcessedAt Time Optional`
 
-const AnthropicBetaServerSideFallback2026\_06\_01 AnthropicBeta = "server-side-fallback-2026-06-01"
+        A timestamp in RFC 3339 format
 
-const AnthropicBetaFallbackCredit2026\_06\_01 AnthropicBeta = "fallback-credit-2026-06-01"
+        format: date-time
 
-const AnthropicBetaAgentMemory2026\_07\_22 AnthropicBeta = "agent-memory-2026-07-22"
+      - `SessionThreadID string Optional`
 
-##### ReturnsExpand Collapse
+        Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-
+    - `type BetaManagedAgentsUserDefineOutcomeEvent struct{…}`
 
-type BetaManagedAgentsSendSessionEvents struct{…}
+      Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
-Events that were successfully sent to the session.
+      - `ID string`
 
-
+        Unique identifier for this event.
 
-Data []BetaManagedAgentsSendSessionEventsDataUnionOptional
+      - `Description string`
 
-Sent events
+        What the agent should produce. Copied from the input event.
 
-One of the following:
+      - `MaxIterations int64`
 
-
+        Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
-type BetaManagedAgentsUserMessageEvent struct{…}
+        format: int32
 
-A user message event in the session conversation.
+      - `OutcomeID string`
 
-ID string
+        Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
 
-Unique identifier for this event.
+      - `ProcessedAt Time`
 
-
+        A timestamp in RFC 3339 format
 
-Content []BetaManagedAgentsUserMessageEventContentUnion
+        format: date-time
 
-Array of content blocks comprising the user message.
+      - `Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion`
 
-One of the following:
+        Rubric for grading the quality of an outcome.
 
-
+        - `type BetaManagedAgentsFileRubric struct{…}`
 
-type BetaManagedAgentsTextBlock struct{…}
+          Rubric referenced by a file uploaded via the Files API.
 
-Regular text content.
+          - `FileID string`
 
-Text string
+            ID of the rubric file.
 
-The text content.
+          - `Type BetaManagedAgentsFileRubricType`
 
-Type BetaManagedAgentsTextBlockType
+        - `type BetaManagedAgentsTextRubric struct{…}`
 
-
+          Rubric content provided inline as text.
 
-type BetaManagedAgentsImageBlock struct{…}
+          - `Content string`
 
-Image content specified directly as base64 data or as a reference via a URL.
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-
+          - `Type BetaManagedAgentsTextRubricType`
 
-Source BetaManagedAgentsImageBlockSourceUnion
+      - `Type BetaManagedAgentsUserDefineOutcomeEventType`
 
-Union type for image source variants.
+    - `type BetaManagedAgentsUserToolResultEvent struct{…}`
 
-One of the following:
+      Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
-
+      - `ID string`
 
-type BetaManagedAgentsBase64ImageSource struct{…}
+        Unique identifier for this event.
 
-Base64-encoded image data.
+      - `ToolUseID string`
 
-Data string
+        The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Base64-encoded image data.
+      - `Type BetaManagedAgentsUserToolResultEventType`
 
-MediaType string
+      - `Content []BetaManagedAgentsUserToolResultEventContentUnion Optional`
 
-MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+        The result content returned by the tool.
 
-Type BetaManagedAgentsBase64ImageSourceType
+        - `type BetaManagedAgentsTextBlock struct{…}`
 
-
+          Regular text content.
 
-type BetaManagedAgentsURLImageSource struct{…}
+        - `type BetaManagedAgentsImageBlock struct{…}`
 
-Image referenced by URL.
+          Image content specified directly as base64 data or as a reference via a URL.
 
-Type BetaManagedAgentsURLImageSourceType
+        - `type BetaManagedAgentsDocumentBlock struct{…}`
 
-URL string
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-URL of the image to fetch.
+        - `type BetaManagedAgentsSearchResultBlock struct{…}`
 
-
+          A block containing a web search result.
 
-type BetaManagedAgentsFileImageSource struct{…}
+      - `IsError bool Optional`
 
-Image referenced by file ID.
+        Whether the tool execution resulted in an error.
 
-FileID string
+      - `ProcessedAt Time Optional`
 
-ID of a previously uploaded file.
+        A timestamp in RFC 3339 format
 
-Type BetaManagedAgentsFileImageSourceType
+        format: date-time
 
-Type BetaManagedAgentsImageBlockType
+      - `SessionThreadID string Optional`
 
-
+        Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-type BetaManagedAgentsDocumentBlock struct{…}
+    - `type BetaManagedAgentsSystemMessageEvent struct{…}`
 
-Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+      A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
-
+      - `ID string`
 
-Source BetaManagedAgentsDocumentBlockSourceUnion
+        Unique identifier for this event.
 
-Union type for document source variants.
+      - `Content []BetaManagedAgentsSystemContentBlock`
 
-One of the following:
+        System content blocks. Text-only.
 
-
+        - `Text string`
 
-type BetaManagedAgentsBase64DocumentSource struct{…}
+          The text content.
 
-Base64-encoded document data.
+          minLength: 1
 
-Data string
+        - `Type BetaManagedAgentsSystemContentBlockType`
 
-Base64-encoded document data.
+      - `Type BetaManagedAgentsSystemMessageEventType`
 
-MediaType string
+      - `ProcessedAt Time Optional`
 
-MIME type of the document (e.g., "application/pdf").
+        A timestamp in RFC 3339 format
 
-Type BetaManagedAgentsBase64DocumentSourceType
+        format: date-time
 
-
+## Example
 
-type BetaManagedAgentsPlainTextDocumentSource struct{…}
-
-Plain text document content.
-
-Data string
-
-The plain text content.
-
-MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType
-
-MIME type of the text content. Must be "text/plain".
-
-Type BetaManagedAgentsPlainTextDocumentSourceType
-
-
-
-type BetaManagedAgentsURLDocumentSource struct{…}
-
-Document referenced by URL.
-
-Type BetaManagedAgentsURLDocumentSourceType
-
-URL string
-
-URL of the document to fetch.
-
-
-
-type BetaManagedAgentsFileDocumentSource struct{…}
-
-Document referenced by file ID.
-
-FileID string
-
-ID of a previously uploaded file.
-
-Type BetaManagedAgentsFileDocumentSourceType
-
-Type BetaManagedAgentsDocumentBlockType
-
-Context stringOptional
-
-Additional context about the document for the model.
-
-Title stringOptional
-
-The title of the document.
-
-Type BetaManagedAgentsUserMessageEventType
-
-ProcessedAt TimeOptional
-
-A timestamp in RFC 3339 format
-
-
-
-type BetaManagedAgentsUserInterruptEvent struct{…}
-
-An interrupt event that pauses agent execution and returns control to the user.
-
-ID string
-
-Unique identifier for this event.
-
-Type BetaManagedAgentsUserInterruptEventType
-
-ProcessedAt TimeOptional
-
-A timestamp in RFC 3339 format
-
-SessionThreadID stringOptional
-
-If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
-
-
-
-type BetaManagedAgentsUserToolConfirmationEvent struct{…}
-
-A tool confirmation event that approves or denies a pending tool execution.
-
-ID string
-
-Unique identifier for this event.
-
-
-
-Result BetaManagedAgentsUserToolConfirmationEventResult
-
-UserToolConfirmationResult enum
-
-One of the following:
-
-const BetaManagedAgentsUserToolConfirmationEventResultAllow BetaManagedAgentsUserToolConfirmationEventResult = "allow"
-
-const BetaManagedAgentsUserToolConfirmationEventResultDeny BetaManagedAgentsUserToolConfirmationEventResult = "deny"
-
-ToolUseID string
-
-The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
-
-Type BetaManagedAgentsUserToolConfirmationEventType
-
-DenyMessage stringOptional
-
-Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
-
-ProcessedAt TimeOptional
-
-A timestamp in RFC 3339 format
-
-SessionThreadID stringOptional
-
-When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
-
-
-
-type BetaManagedAgentsUserCustomToolResultEvent struct{…}
-
-Event sent by the client providing the result of a custom tool execution.
-
-ID string
-
-Unique identifier for this event.
-
-CustomToolUseID string
-
-The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
-
-Type BetaManagedAgentsUserCustomToolResultEventType
-
-
-
-Content []BetaManagedAgentsUserCustomToolResultEventContentUnionOptional
-
-The result content returned by the tool.
-
-One of the following:
-
-
-
-type BetaManagedAgentsTextBlock struct{…}
-
-Regular text content.
-
-Text string
-
-The text content.
-
-Type BetaManagedAgentsTextBlockType
-
-
-
-type BetaManagedAgentsImageBlock struct{…}
-
-Image content specified directly as base64 data or as a reference via a URL.
-
-
-
-Source BetaManagedAgentsImageBlockSourceUnion
-
-Union type for image source variants.
-
-One of the following:
-
-
-
-type BetaManagedAgentsBase64ImageSource struct{…}
-
-Base64-encoded image data.
-
-Data string
-
-Base64-encoded image data.
-
-MediaType string
-
-MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-Type BetaManagedAgentsBase64ImageSourceType
-
-
-
-type BetaManagedAgentsURLImageSource struct{…}
-
-Image referenced by URL.
-
-Type BetaManagedAgentsURLImageSourceType
-
-URL string
-
-URL of the image to fetch.
-
-
-
-type BetaManagedAgentsFileImageSource struct{…}
-
-Image referenced by file ID.
-
-FileID string
-
-ID of a previously uploaded file.
-
-Type BetaManagedAgentsFileImageSourceType
-
-Type BetaManagedAgentsImageBlockType
-
-
-
-type BetaManagedAgentsDocumentBlock struct{…}
-
-Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-
-
-Source BetaManagedAgentsDocumentBlockSourceUnion
-
-Union type for document source variants.
-
-One of the following:
-
-
-
-type BetaManagedAgentsBase64DocumentSource struct{…}
-
-Base64-encoded document data.
-
-Data string
-
-Base64-encoded document data.
-
-MediaType string
-
-MIME type of the document (e.g., "application/pdf").
-
-Type BetaManagedAgentsBase64DocumentSourceType
-
-
-
-type BetaManagedAgentsPlainTextDocumentSource struct{…}
-
-Plain text document content.
-
-Data string
-
-The plain text content.
-
-MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType
-
-MIME type of the text content. Must be "text/plain".
-
-Type BetaManagedAgentsPlainTextDocumentSourceType
-
-
-
-type BetaManagedAgentsURLDocumentSource struct{…}
-
-Document referenced by URL.
-
-Type BetaManagedAgentsURLDocumentSourceType
-
-URL string
-
-URL of the document to fetch.
-
-
-
-type BetaManagedAgentsFileDocumentSource struct{…}
-
-Document referenced by file ID.
-
-FileID string
-
-ID of a previously uploaded file.
-
-Type BetaManagedAgentsFileDocumentSourceType
-
-Type BetaManagedAgentsDocumentBlockType
-
-Context stringOptional
-
-Additional context about the document for the model.
-
-Title stringOptional
-
-The title of the document.
-
-
-
-type BetaManagedAgentsSearchResultBlock struct{…}
-
-A block containing a web search result.
-
-
-
-Citations [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md)
-
-Citation settings for a search result.
-
-Enabled bool
-
-Whether citations are enabled for this search result.
-
-
-
-Content [][BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)
-
-Array of text content blocks from the search result.
-
-Text string
-
-The text content.
-
-Type BetaManagedAgentsSearchResultContentType
-
-Source string
-
-The URL source of the search result.
-
-Title string
-
-The title of the search result.
-
-Type BetaManagedAgentsSearchResultBlockType
-
-IsError boolOptional
-
-Whether the tool execution resulted in an error.
-
-ProcessedAt TimeOptional
-
-A timestamp in RFC 3339 format
-
-SessionThreadID stringOptional
-
-Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
-
-
-
-type BetaManagedAgentsUserDefineOutcomeEvent struct{…}
-
-Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
-
-ID string
-
-Unique identifier for this event.
-
-Description string
-
-What the agent should produce. Copied from the input event.
-
-MaxIterations int64
-
-Evaluate-then-revise cycles before giving up. Default 3, max 20.
-
-OutcomeID string
-
-Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
-
-ProcessedAt Time
-
-A timestamp in RFC 3339 format
-
-
-
-Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion
-
-Rubric for grading the quality of an outcome.
-
-One of the following:
-
-
-
-type BetaManagedAgentsFileRubric struct{…}
-
-Rubric referenced by a file uploaded via the Files API.
-
-FileID string
-
-ID of the rubric file.
-
-Type BetaManagedAgentsFileRubricType
-
-
-
-type BetaManagedAgentsTextRubric struct{…}
-
-Rubric content provided inline as text.
-
-Content string
-
-Rubric content. Plain text or markdown — the grader treats it as freeform text.
-
-Type BetaManagedAgentsTextRubricType
-
-Type BetaManagedAgentsUserDefineOutcomeEventType
-
-
-
-type BetaManagedAgentsUserToolResultEvent struct{…}
-
-Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
-
-ID string
-
-Unique identifier for this event.
-
-ToolUseID string
-
-The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
-
-Type BetaManagedAgentsUserToolResultEventType
-
-
-
-Content []BetaManagedAgentsUserToolResultEventContentUnionOptional
-
-The result content returned by the tool.
-
-One of the following:
-
-
-
-type BetaManagedAgentsTextBlock struct{…}
-
-Regular text content.
-
-Text string
-
-The text content.
-
-Type BetaManagedAgentsTextBlockType
-
-
-
-type BetaManagedAgentsImageBlock struct{…}
-
-Image content specified directly as base64 data or as a reference via a URL.
-
-
-
-Source BetaManagedAgentsImageBlockSourceUnion
-
-Union type for image source variants.
-
-One of the following:
-
-
-
-type BetaManagedAgentsBase64ImageSource struct{…}
-
-Base64-encoded image data.
-
-Data string
-
-Base64-encoded image data.
-
-MediaType string
-
-MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-Type BetaManagedAgentsBase64ImageSourceType
-
-
-
-type BetaManagedAgentsURLImageSource struct{…}
-
-Image referenced by URL.
-
-Type BetaManagedAgentsURLImageSourceType
-
-URL string
-
-URL of the image to fetch.
-
-
-
-type BetaManagedAgentsFileImageSource struct{…}
-
-Image referenced by file ID.
-
-FileID string
-
-ID of a previously uploaded file.
-
-Type BetaManagedAgentsFileImageSourceType
-
-Type BetaManagedAgentsImageBlockType
-
-
-
-type BetaManagedAgentsDocumentBlock struct{…}
-
-Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-
-
-Source BetaManagedAgentsDocumentBlockSourceUnion
-
-Union type for document source variants.
-
-One of the following:
-
-
-
-type BetaManagedAgentsBase64DocumentSource struct{…}
-
-Base64-encoded document data.
-
-Data string
-
-Base64-encoded document data.
-
-MediaType string
-
-MIME type of the document (e.g., "application/pdf").
-
-Type BetaManagedAgentsBase64DocumentSourceType
-
-
-
-type BetaManagedAgentsPlainTextDocumentSource struct{…}
-
-Plain text document content.
-
-Data string
-
-The plain text content.
-
-MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType
-
-MIME type of the text content. Must be "text/plain".
-
-Type BetaManagedAgentsPlainTextDocumentSourceType
-
-
-
-type BetaManagedAgentsURLDocumentSource struct{…}
-
-Document referenced by URL.
-
-Type BetaManagedAgentsURLDocumentSourceType
-
-URL string
-
-URL of the document to fetch.
-
-
-
-type BetaManagedAgentsFileDocumentSource struct{…}
-
-Document referenced by file ID.
-
-FileID string
-
-ID of a previously uploaded file.
-
-Type BetaManagedAgentsFileDocumentSourceType
-
-Type BetaManagedAgentsDocumentBlockType
-
-Context stringOptional
-
-Additional context about the document for the model.
-
-Title stringOptional
-
-The title of the document.
-
-
-
-type BetaManagedAgentsSearchResultBlock struct{…}
-
-A block containing a web search result.
-
-
-
-Citations [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md)
-
-Citation settings for a search result.
-
-Enabled bool
-
-Whether citations are enabled for this search result.
-
-
-
-Content [][BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md)
-
-Array of text content blocks from the search result.
-
-Text string
-
-The text content.
-
-Type BetaManagedAgentsSearchResultContentType
-
-Source string
-
-The URL source of the search result.
-
-Title string
-
-The title of the search result.
-
-Type BetaManagedAgentsSearchResultBlockType
-
-IsError boolOptional
-
-Whether the tool execution resulted in an error.
-
-ProcessedAt TimeOptional
-
-A timestamp in RFC 3339 format
-
-SessionThreadID stringOptional
-
-Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
-
-
-
-type BetaManagedAgentsSystemMessageEvent struct{…}
-
-A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
-
-ID string
-
-Unique identifier for this event.
-
-
-
-Content [][BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)
-
-System content blocks. Text-only.
-
-Text string
-
-The text content.
-
-Type BetaManagedAgentsSystemContentBlockType
-
-Type BetaManagedAgentsSystemMessageEventType
-
-ProcessedAt TimeOptional
-
-A timestamp in RFC 3339 format
-
-Send Events
-
-Go
-
-```shiki
+```go
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  betaManagedAgentsSendSessionEvents, err := client.Beta.Sessions.Events.Send(
-    context.TODO(),
-    "sesn_011CZkZAtmR3yMPDzynEDxu7",
-    anthropic.BetaSessionEventSendParams{
-      Events: []anthropic.BetaManagedAgentsEventParamsUnion{anthropic.BetaManagedAgentsEventParamsUnion{
-        OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-          Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{
-            OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-              Text: "Where is my order #1234?",
-              Type: anthropic.BetaManagedAgentsTextBlockTypeText,
-            },
-          }},
-          Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
-        },
-      }},
-    },
-  )
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", betaManagedAgentsSendSessionEvents.Data)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaManagedAgentsSendSessionEvents, err := client.Beta.Sessions.Events.Send(
+		context.TODO(),
+		"sesn_011CZkZAtmR3yMPDzynEDxu7",
+		anthropic.BetaSessionEventSendParams{
+			Events: []anthropic.BetaManagedAgentsEventParamsUnion{anthropic.BetaManagedAgentsEventParamsUnion{
+				OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
+					Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{
+						OfText: &anthropic.BetaManagedAgentsTextBlockParam{
+							Text: "Where is my order #1234?",
+							Type: anthropic.BetaManagedAgentsTextBlockTypeText,
+						},
+					}},
+					Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
+				},
+			}},
+		},
+	)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaManagedAgentsSendSessionEvents.Data)
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
-      "content": [
-        {
-          "text": "Where is my order #1234?",
-          "type": "text"
-        }
-      ],
-      "type": "user.message",
-      "processed_at": "2026-03-15T10:00:00Z"
-    }
-  ]
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

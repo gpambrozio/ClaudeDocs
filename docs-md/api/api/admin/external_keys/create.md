@@ -1,222 +1,172 @@
 # Create External Key
 
-Copy page
-
-
-
-# Create External Key
-
-POST/v1/organizations/external\_keys
+**POST** `/v1/organizations/external_keys`
 
 Create an external key config owned by the caller's organization.
 
-##### Body
+## Body parameters
 
-
+- `provider_config: object or object or object`
 
-provider\_config: object{ kms\_arn, type, region, role\_arn } or object{ key\_name, type } or object{ key\_name, tenant\_id, type, 2 more }
+  KMS provider identity and auth coordinates.
 
-KMS provider identity and auth coordinates.
+  - `Aws object`
 
-One of the following:
+    - `kms_arn: string`
 
-
+      Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a single-Region key in your organization's own AWS account; cross-account keys, multi-Region keys, and alias ARNs are rejected.
 
-Aws object{ kms\_arn, type, region, role\_arn }
+      maxLength: 2048
 
-
+    - `type: "aws"`
 
-kms\_arn: string
+    - `region: optional string or null`
 
-Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a single-Region key in your organization's own AWS account; cross-account keys, multi-Region keys, and alias ARNs are rejected.
+      AWS region. Derived from `kms_arn` if omitted.
 
-maxLength2048
+    - `role_arn: optional string or null`
 
-type: "aws"
+      **Deprecated**
 
-region: optional string or null
+      IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own intermediate role (or, on Claude Platform on AWS, with credentials AWS issues for the Workspace); this field is ignored.
 
-AWS region. Derived from `kms_arn` if omitted.
+  - `Gcp object`
 
-role\_arn: optional string or null⁠Deprecated
+    - `key_name: string`
 
-IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own intermediate role (or, on Claude Platform on AWS, with credentials AWS issues for the Workspace); this field is ignored.
+      Full resource name of the Cloud KMS key.
 
-
+    - `type: "gcp"`
 
-Gcp object{ key\_name, type }
+  - `Azure object`
 
-key\_name: string
+    Azure Key Vault provider configuration.
 
-Full resource name of the Cloud KMS key.
+    - `key_name: string`
 
-type: "gcp"
+      Name of the key within the vault.
 
-
+    - `tenant_id: string`
 
-Azure object{ key\_name, tenant\_id, type, 2 more }
+      Azure AD tenant ID.
 
-Azure Key Vault provider configuration.
+    - `type: "azure"`
 
-key\_name: string
+    - `vault_uri: string`
 
-Name of the key within the vault.
+      Key Vault data-plane URI — `https://{vault-name}.vault.azure.net` or `https://{hsm-name}.managedhsm.azure.net`.
 
-tenant\_id: string
+    - `client_id: optional string or null`
 
-Azure AD tenant ID.
+      Azure AD application (client) ID. Omit to use Anthropic's multitenant app. Provide only if using a single-tenant app registration in the customer's directory.
 
-type: "azure"
+- `display_name: optional string or null`
 
-vault\_uri: string
+  Human-friendly display name.
 
-Key Vault data-plane URI — `https://{vault-name}.vault.azure.net` or `https://{hsm-name}.managedhsm.azure.net`.
+  maxLength: 255, minLength: 1
 
-client\_id: optional string or null
+- `geo: optional "us"`
 
-Azure AD application (client) ID. Omit to use Anthropic's multitenant app. Provide only if using a single-tenant app registration in the customer's directory.
+  Data residency geo. Only `us` is supported.
 
-
+## Returns
 
-display\_name: optional string or null
+- `id: string`
 
-Human-friendly display name.
+  Identifier of the external key config. A tagged ID prefixed `ekey_`, or — for organizations on the Claude Platform on AWS — the AWS KMS key ARN.
 
-maxLength255
+- `attachment: object or object`
 
-minLength1
+  Whether any workspace uses this config to encrypt its data — counting live and archived workspaces (an archived workspace's data remains encrypted under the config), excluding deleted ones. Only an attached config is used by the encryption path; an `unattached` config is inert and can be deleted.
 
-geo: optional "us"
+  - `Attached object`
 
-Data residency geo. Only `us` is supported.
+    - `type: "attached"`
 
-##### Returns
+      default: attached
 
-id: string
+  - `Unattached object`
 
-Identifier of the external key config. A tagged ID prefixed `ekey_`, or — for organizations on the Claude Platform on AWS — the AWS KMS key ARN.
+    - `type: "unattached"`
 
-
+      default: unattached
 
-attachment: object{ type } or object{ type }
+- `created_at: string`
 
-Whether any workspace uses this config to encrypt its data — counting live and archived workspaces (an archived workspace's data remains encrypted under the config), excluding deleted ones. Only an attached config is used by the encryption path; an `unattached` config is inert and can be deleted.
+  format: date-time
 
-One of the following:
+- `display_name: string or null`
 
-
+  Human-friendly display name. Null if none was set.
 
-Attached object{ type }
+- `geo: string`
 
-
+  Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
 
-type: "attached"
+- `provider_config: object or object or object`
 
-defaultattached
+  KMS provider identity and auth coordinates.
 
-
+  - `Aws object`
 
-Unattached object{ type }
+    - `kms_arn: string`
 
-
+      Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a single-Region key in your organization's own AWS account; cross-account keys, multi-Region keys, and alias ARNs are rejected.
 
-type: "unattached"
+      maxLength: 2048
 
-defaultunattached
+    - `type: "aws"`
 
-
+    - `region: optional string or null`
 
-created\_at: string
+      AWS region. Derived from `kms_arn` if omitted.
 
-formatdate-time
+    - `role_arn: optional string or null`
 
-display\_name: string or null
+      **Deprecated**
 
-Human-friendly display name. Null if none was set.
+      IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own intermediate role (or, on Claude Platform on AWS, with credentials AWS issues for the Workspace); this field is ignored.
 
-geo: string
+  - `Gcp object`
 
-Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
+    - `key_name: string`
 
-
+      Full resource name of the Cloud KMS key.
 
-provider\_config: object{ kms\_arn, type, region, role\_arn } or object{ key\_name, type } or object{ key\_name, tenant\_id, type, 2 more }
+    - `type: "gcp"`
 
-KMS provider identity and auth coordinates.
+  - `Azure object`
 
-One of the following:
+    - `key_name: string`
 
-
+      Name of the key within the vault.
 
-Aws object{ kms\_arn, type, region, role\_arn }
+    - `tenant_id: string`
 
-
+      Azure AD tenant ID.
 
-kms\_arn: string
+    - `type: "azure"`
 
-Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a single-Region key in your organization's own AWS account; cross-account keys, multi-Region keys, and alias ARNs are rejected.
+    - `vault_uri: string`
 
-maxLength2048
+      Key Vault data-plane URI — `https://{vault-name}.vault.azure.net` or `https://{hsm-name}.managedhsm.azure.net`.
 
-type: "aws"
+    - `client_id: optional string or null`
 
-region: optional string or null
+      Azure AD application (client) ID. Omit to use Anthropic's multitenant app. Provide only if using a single-tenant app registration in the customer's directory.
 
-AWS region. Derived from `kms_arn` if omitted.
+- `type: "external_key"`
 
-role\_arn: optional string or null⁠Deprecated
+  default: external_key
 
-IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own intermediate role (or, on Claude Platform on AWS, with credentials AWS issues for the Workspace); this field is ignored.
+- `updated_at: string`
 
-
+  format: date-time
 
-Gcp object{ key\_name, type }
+## Example
 
-key\_name: string
-
-Full resource name of the Cloud KMS key.
-
-type: "gcp"
-
-
-
-Azure object{ key\_name, tenant\_id, type, 2 more }
-
-key\_name: string
-
-Name of the key within the vault.
-
-tenant\_id: string
-
-Azure AD tenant ID.
-
-type: "azure"
-
-vault\_uri: string
-
-Key Vault data-plane URI — `https://{vault-name}.vault.azure.net` or `https://{hsm-name}.managedhsm.azure.net`.
-
-client\_id: optional string or null
-
-Azure AD application (client) ID. Omit to use Anthropic's multitenant app. Provide only if using a single-tenant app registration in the customer's directory.
-
-
-
-type: "external\_key"
-
-defaultexternal\_key
-
-
-
-updated\_at: string
-
-formatdate-time
-
-Create External Key
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/external_keys \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -229,37 +179,9 @@ curl https://api.anthropic.com/v1/organizations/external_keys \
         }'
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",
-  "attachment": {
-    "type": "attached"
-  },
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "display_name": "prod-us-key",
-  "geo": "us",
-  "provider_config": {
-    "kms_arn": "arn:aws:kms:us-east-1:111122223333:key/abcd1234-5678-90ab-cdef-000011112222",
-    "type": "aws",
-    "region": "us-east-1",
-    "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek"
-  },
-  "type": "external_key",
-  "updated_at": "2024-10-30T23:58:27.427722Z"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",
   "attachment": {

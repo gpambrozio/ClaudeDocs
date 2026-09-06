@@ -1,268 +1,1118 @@
 # Memory Versions
 
-Copy page
+## List memory versions
 
-
+`MemoryVersionListPage beta().memoryStores().memoryVersions().list(params = MemoryVersionListParams.none(), requestOptions = RequestOptions.none())`
 
-Java
+**GET** `/v1/memory_stores/{memory_store_id}/memory_versions`
 
-# Memory Versions
+List memory versions
 
-##### [List memory versions](api/beta/memory_stores/memory_versions/list.md)
+### Parameters
 
-MemoryVersionListPage beta().memoryStores().memoryVersions().list(MemoryVersionListParamsparams = MemoryVersionListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+- `MemoryVersionListParams params`
 
-GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions
+  - `Optional<String> memoryStoreId`
 
-##### [Retrieve a memory version](api/beta/memory_stores/memory_versions/retrieve.md)
+  - `Optional<String> apiKeyId`
 
-[BetaManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md) beta().memoryStores().memoryVersions().retrieve(MemoryVersionRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+    Query parameter for api_key_id
 
-GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}
+  - `Optional<LocalDateTime> createdAtGte`
 
-##### [Redact a memory version](api/beta/memory_stores/memory_versions/redact.md)
+    Return versions created at or after this time (inclusive).
 
-[BetaManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md) beta().memoryStores().memoryVersions().redact(MemoryVersionRedactParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+    format: date-time
 
-POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id}/redact
+  - `Optional<LocalDateTime> createdAtLte`
 
-##### ModelsExpand Collapse
+    Return versions created at or before this time (inclusive).
 
-
+    format: date-time
 
-class BetaManagedAgentsActor: A class that can be one of several variants.union 
+  - `Optional<Long> limit`
 
-Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Query parameter for limit
 
-
+    format: int32
 
-class BetaManagedAgentsSessionActor:
+  - `Optional<String> memoryId`
 
-Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+    Query parameter for memory_id
 
-String sessionId
+  - `Optional<BetaManagedAgentsMemoryVersionOperation> operation`
 
-ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+    Query parameter for operation
 
-Type type
+  - `Optional<String> page`
 
-
+    Query parameter for page
 
-class BetaManagedAgentsApiActor:
+  - `Optional<String> serviceAccountId`
 
-Attribution for a write made directly via the public API (outside of any session).
+    Query parameter for service_account_id
 
-String apiKeyId
+  - `Optional<String> sessionId`
 
-ID of the API key that performed the write. This identifies the key, not the secret.
+    Query parameter for session_id
 
-Type type
+  - `Optional<BetaManagedAgentsMemoryView> view`
 
-
+    Query parameter for view
 
-class BetaManagedAgentsUserActor:
+  - `Optional<List<AnthropicBeta>> betas`
 
-Attribution for a write made by a human user through the Anthropic Console.
+    Optional header to specify the beta version(s) you want to use.
 
-Type type
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
-String userId
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
 
-ID of the user who performed the write (a `user_...` value).
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
-
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-class BetaManagedAgentsApiActor:
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
 
-Attribution for a write made directly via the public API (outside of any session).
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
 
-String apiKeyId
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
 
-ID of the API key that performed the write. This identifies the key, not the secret.
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
 
-Type type
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
-
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
-class BetaManagedAgentsMemoryVersion:
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
 
-A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and persist after the memory is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
 
-String id
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
 
-Unique identifier for this version (a `memver_...` value).
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-LocalDateTime createdAt
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
 
-A timestamp in RFC 3339 format
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
-String memoryId
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
-ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the full lineage including the `deleted` row.
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-String memoryStoreId
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
-ID of the memory store this version belongs to (a `memstore_...` value).
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
-
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-[BetaManagedAgentsMemoryVersionOperation](api/beta/memory_stores/memory_versions.md) operation
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
-The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
-One of the following:
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-CREATED("created")
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
-MODIFIED("modified")
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
-DELETED("deleted")
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
-Type type
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-Optional<String> content
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
-The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
 
-Optional<String> contentSha256
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
-Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
-Optional<Long> contentSizeBytes
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
-Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
 
-Optional<[BetaManagedAgentsActor](api/beta/memory_stores/memory_versions.md)> createdBy
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
 
-Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
 
-One of the following:
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
 
-
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
 
-class BetaManagedAgentsSessionActor:
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
 
-String sessionId
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
 
-Type type
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-
+### Returns
 
-class BetaManagedAgentsApiActor:
+- `class BetaManagedAgentsMemoryVersion:`
 
-Attribution for a write made directly via the public API (outside of any session).
+  A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
 
-String apiKeyId
+  - `String id`
 
-ID of the API key that performed the write. This identifies the key, not the secret.
+    Unique identifier for this version (a `memver_...` value).
 
-Type type
+  - `LocalDateTime createdAt`
 
-
+    A timestamp in RFC 3339 format
 
-class BetaManagedAgentsUserActor:
+    format: date-time
 
-Attribution for a write made by a human user through the Anthropic Console.
+  - `String memoryId`
 
-Type type
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
 
-String userId
+  - `String memoryStoreId`
 
-ID of the user who performed the write (a `user_...` value).
+    ID of the memory store this version belongs to (a `memstore_...` value).
 
-Optional<String> path
+  - `BetaManagedAgentsMemoryVersionOperation operation`
 
-The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
+    The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-Optional<LocalDateTime> redactedAt
+    - `CREATED("created")`
 
-A timestamp in RFC 3339 format
+    - `MODIFIED("modified")`
 
-
+    - `DELETED("deleted")`
 
-Optional<[BetaManagedAgentsActor](api/beta/memory_stores/memory_versions.md)> redactedBy
+  - `Type type`
 
-Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+  - `Optional<String> content`
 
-One of the following:
+    The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
 
-
+  - `Optional<String> contentSha256`
 
-class BetaManagedAgentsSessionActor:
+    Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+  - `Optional<Long> contentSizeBytes`
 
-String sessionId
+    Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+    format: int32
 
-Type type
+  - `Optional<BetaManagedAgentsActor> createdBy`
 
-
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-class BetaManagedAgentsApiActor:
+    - `class BetaManagedAgentsSessionActor:`
 
-Attribution for a write made directly via the public API (outside of any session).
+      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
-String apiKeyId
+      - `String sessionId`
 
-ID of the API key that performed the write. This identifies the key, not the secret.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
 
-Type type
+        minLength: 1
 
-
+      - `Type type`
 
-class BetaManagedAgentsUserActor:
+    - `class BetaManagedAgentsApiActor:`
 
-Attribution for a write made by a human user through the Anthropic Console.
+      Attribution for a write made directly via the public API (outside of any session).
 
-Type type
+      - `String apiKeyId`
 
-String userId
+        ID of the API key that performed the write. This identifies the key, not the secret.
 
-ID of the user who performed the write (a `user_...` value).
+        minLength: 1
 
-
+      - `Type type`
 
-enum BetaManagedAgentsMemoryVersionOperation:
+    - `class BetaManagedAgentsUserActor:`
 
-The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
+      Attribution for a write made by a human user through the Anthropic Console.
 
-CREATED("created")
+      - `Type type`
 
-MODIFIED("modified")
+      - `String userId`
 
-DELETED("deleted")
+        ID of the user who performed the write (a `user_...` value).
 
-
+        minLength: 1
 
-class BetaManagedAgentsSessionActor:
+    - `class BetaManagedAgentsServiceAccountActor:`
 
-Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
 
-String sessionId
+      - `String serviceAccountId`
 
-ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+        ID of the service account that performed the write (a `svac_...` value).
 
-Type type
+        minLength: 1
 
-
+      - `JsonValue type = "service_account_actor"`
 
-class BetaManagedAgentsUserActor:
+  - `Optional<String> path`
 
-Attribution for a write made by a human user through the Anthropic Console.
+    The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
-Type type
+  - `Optional<LocalDateTime> redactedAt`
 
-String userId
+    A timestamp in RFC 3339 format
 
-ID of the user who performed the write (a `user_...` value).
+    format: date-time
+
+  - `Optional<BetaManagedAgentsActor> redactedBy`
+
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.memorystores.memoryversions.MemoryVersionListPage;
+import com.anthropic.models.beta.memorystores.memoryversions.MemoryVersionListParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MemoryVersionListPage page = client.beta().memoryStores().memoryVersions().list("memory_store_id");
+    }
+}
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "memory_id": "memory_id",
+      "memory_store_id": "memory_store_id",
+      "operation": "created",
+      "type": "memory_version",
+      "content": "content",
+      "content_sha256": "content_sha256",
+      "content_size_bytes": 0,
+      "created_by": {
+        "session_id": "x",
+        "type": "session_actor"
+      },
+      "path": "path",
+      "redacted_at": "2019-12-27T18:11:19.117Z",
+      "redacted_by": {
+        "session_id": "x",
+        "type": "session_actor"
+      }
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Retrieve a memory version
+
+`BetaManagedAgentsMemoryVersion beta().memoryStores().memoryVersions().retrieve(params, requestOptions = RequestOptions.none())`
+
+**GET** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}`
+
+Retrieve a memory version
+
+### Parameters
+
+- `MemoryVersionRetrieveParams params`
+
+  - `String memoryStoreId`
+
+  - `Optional<String> memoryVersionId`
+
+  - `Optional<BetaManagedAgentsMemoryView> view`
+
+    Query parameter for view
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
+
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
+
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
+
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+### Returns
+
+- `class BetaManagedAgentsMemoryVersion:`
+
+  A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
+
+  - `String id`
+
+    Unique identifier for this version (a `memver_...` value).
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `String memoryId`
+
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+
+  - `String memoryStoreId`
+
+    ID of the memory store this version belongs to (a `memstore_...` value).
+
+  - `BetaManagedAgentsMemoryVersionOperation operation`
+
+    The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
+
+    - `CREATED("created")`
+
+    - `MODIFIED("modified")`
+
+    - `DELETED("deleted")`
+
+  - `Type type`
+
+  - `Optional<String> content`
+
+    The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
+
+  - `Optional<String> contentSha256`
+
+    Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
+  - `Optional<Long> contentSizeBytes`
+
+    Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
+    format: int32
+
+  - `Optional<BetaManagedAgentsActor> createdBy`
+
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+
+    - `class BetaManagedAgentsSessionActor:`
+
+      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+
+      - `String sessionId`
+
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+
+        minLength: 1
+
+      - `Type type`
+
+    - `class BetaManagedAgentsApiActor:`
+
+      Attribution for a write made directly via the public API (outside of any session).
+
+      - `String apiKeyId`
+
+        ID of the API key that performed the write. This identifies the key, not the secret.
+
+        minLength: 1
+
+      - `Type type`
+
+    - `class BetaManagedAgentsUserActor:`
+
+      Attribution for a write made by a human user through the Anthropic Console.
+
+      - `Type type`
+
+      - `String userId`
+
+        ID of the user who performed the write (a `user_...` value).
+
+        minLength: 1
+
+    - `class BetaManagedAgentsServiceAccountActor:`
+
+      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+      - `String serviceAccountId`
+
+        ID of the service account that performed the write (a `svac_...` value).
+
+        minLength: 1
+
+      - `JsonValue type = "service_account_actor"`
+
+  - `Optional<String> path`
+
+    The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
+
+  - `Optional<LocalDateTime> redactedAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `Optional<BetaManagedAgentsActor> redactedBy`
+
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.memorystores.memoryversions.BetaManagedAgentsMemoryVersion;
+import com.anthropic.models.beta.memorystores.memoryversions.MemoryVersionRetrieveParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MemoryVersionRetrieveParams params = MemoryVersionRetrieveParams.builder()
+            .memoryStoreId("memory_store_id")
+            .memoryVersionId("memory_version_id")
+            .build();
+        BetaManagedAgentsMemoryVersion betaManagedAgentsMemoryVersion = client.beta().memoryStores().memoryVersions().retrieve(params);
+    }
+}
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_id": "memory_id",
+  "memory_store_id": "memory_store_id",
+  "operation": "created",
+  "type": "memory_version",
+  "content": "content",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  },
+  "path": "path",
+  "redacted_at": "2019-12-27T18:11:19.117Z",
+  "redacted_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  }
+}
+```
+
+## Redact a memory version
+
+`BetaManagedAgentsMemoryVersion beta().memoryStores().memoryVersions().redact(params, requestOptions = RequestOptions.none())`
+
+**POST** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}/redact`
+
+Redact a memory version
+
+### Parameters
+
+- `MemoryVersionRedactParams params`
+
+  - `String memoryStoreId`
+
+  - `Optional<String> memoryVersionId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
+
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
+
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
+
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+### Returns
+
+- `class BetaManagedAgentsMemoryVersion:`
+
+  A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
+
+  - `String id`
+
+    Unique identifier for this version (a `memver_...` value).
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `String memoryId`
+
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+
+  - `String memoryStoreId`
+
+    ID of the memory store this version belongs to (a `memstore_...` value).
+
+  - `BetaManagedAgentsMemoryVersionOperation operation`
+
+    The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
+
+    - `CREATED("created")`
+
+    - `MODIFIED("modified")`
+
+    - `DELETED("deleted")`
+
+  - `Type type`
+
+  - `Optional<String> content`
+
+    The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
+
+  - `Optional<String> contentSha256`
+
+    Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
+  - `Optional<Long> contentSizeBytes`
+
+    Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
+    format: int32
+
+  - `Optional<BetaManagedAgentsActor> createdBy`
+
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+
+    - `class BetaManagedAgentsSessionActor:`
+
+      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+
+      - `String sessionId`
+
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+
+        minLength: 1
+
+      - `Type type`
+
+    - `class BetaManagedAgentsApiActor:`
+
+      Attribution for a write made directly via the public API (outside of any session).
+
+      - `String apiKeyId`
+
+        ID of the API key that performed the write. This identifies the key, not the secret.
+
+        minLength: 1
+
+      - `Type type`
+
+    - `class BetaManagedAgentsUserActor:`
+
+      Attribution for a write made by a human user through the Anthropic Console.
+
+      - `Type type`
+
+      - `String userId`
+
+        ID of the user who performed the write (a `user_...` value).
+
+        minLength: 1
+
+    - `class BetaManagedAgentsServiceAccountActor:`
+
+      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+      - `String serviceAccountId`
+
+        ID of the service account that performed the write (a `svac_...` value).
+
+        minLength: 1
+
+      - `JsonValue type = "service_account_actor"`
+
+  - `Optional<String> path`
+
+    The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
+
+  - `Optional<LocalDateTime> redactedAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `Optional<BetaManagedAgentsActor> redactedBy`
+
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.memorystores.memoryversions.BetaManagedAgentsMemoryVersion;
+import com.anthropic.models.beta.memorystores.memoryversions.MemoryVersionRedactParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MemoryVersionRedactParams params = MemoryVersionRedactParams.builder()
+            .memoryStoreId("memory_store_id")
+            .memoryVersionId("memory_version_id")
+            .build();
+        BetaManagedAgentsMemoryVersion betaManagedAgentsMemoryVersion = client.beta().memoryStores().memoryVersions().redact(params);
+    }
+}
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_id": "memory_id",
+  "memory_store_id": "memory_store_id",
+  "operation": "created",
+  "type": "memory_version",
+  "content": "content",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  },
+  "path": "path",
+  "redacted_at": "2019-12-27T18:11:19.117Z",
+  "redacted_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  }
+}
+```
+
+## Domain types
+
+### Beta Managed Agents Actor
+
+- `class BetaManagedAgentsActor: union`
+
+  Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+
+  - `class BetaManagedAgentsSessionActor:`
+
+    Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+
+    - `String sessionId`
+
+      ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+
+      minLength: 1
+
+    - `Type type`
+
+  - `class BetaManagedAgentsApiActor:`
+
+    Attribution for a write made directly via the public API (outside of any session).
+
+    - `String apiKeyId`
+
+      ID of the API key that performed the write. This identifies the key, not the secret.
+
+      minLength: 1
+
+    - `Type type`
+
+  - `class BetaManagedAgentsUserActor:`
+
+    Attribution for a write made by a human user through the Anthropic Console.
+
+    - `Type type`
+
+    - `String userId`
+
+      ID of the user who performed the write (a `user_...` value).
+
+      minLength: 1
+
+  - `class BetaManagedAgentsServiceAccountActor:`
+
+    Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+    - `String serviceAccountId`
+
+      ID of the service account that performed the write (a `svac_...` value).
+
+      minLength: 1
+
+    - `JsonValue type = "service_account_actor"`
+
+### Beta Managed Agents API Actor
+
+- `class BetaManagedAgentsApiActor:`
+
+  Attribution for a write made directly via the public API (outside of any session).
+
+  - `String apiKeyId`
+
+    ID of the API key that performed the write. This identifies the key, not the secret.
+
+    minLength: 1
+
+  - `Type type`
+
+### Beta Managed Agents Memory Version
+
+- `class BetaManagedAgentsMemoryVersion:`
+
+  A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
+
+  - `String id`
+
+    Unique identifier for this version (a `memver_...` value).
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `String memoryId`
+
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+
+  - `String memoryStoreId`
+
+    ID of the memory store this version belongs to (a `memstore_...` value).
+
+  - `BetaManagedAgentsMemoryVersionOperation operation`
+
+    The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
+
+    - `CREATED("created")`
+
+    - `MODIFIED("modified")`
+
+    - `DELETED("deleted")`
+
+  - `Type type`
+
+  - `Optional<String> content`
+
+    The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
+
+  - `Optional<String> contentSha256`
+
+    Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
+  - `Optional<Long> contentSizeBytes`
+
+    Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
+    format: int32
+
+  - `Optional<BetaManagedAgentsActor> createdBy`
+
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+
+    - `class BetaManagedAgentsSessionActor:`
+
+      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+
+      - `String sessionId`
+
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+
+        minLength: 1
+
+      - `Type type`
+
+    - `class BetaManagedAgentsApiActor:`
+
+      Attribution for a write made directly via the public API (outside of any session).
+
+      - `String apiKeyId`
+
+        ID of the API key that performed the write. This identifies the key, not the secret.
+
+        minLength: 1
+
+      - `Type type`
+
+    - `class BetaManagedAgentsUserActor:`
+
+      Attribution for a write made by a human user through the Anthropic Console.
+
+      - `Type type`
+
+      - `String userId`
+
+        ID of the user who performed the write (a `user_...` value).
+
+        minLength: 1
+
+    - `class BetaManagedAgentsServiceAccountActor:`
+
+      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+      - `String serviceAccountId`
+
+        ID of the service account that performed the write (a `svac_...` value).
+
+        minLength: 1
+
+      - `JsonValue type = "service_account_actor"`
+
+  - `Optional<String> path`
+
+    The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
+
+  - `Optional<LocalDateTime> redactedAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `Optional<BetaManagedAgentsActor> redactedBy`
+
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+
+### Beta Managed Agents Memory Version Operation
+
+- `enum BetaManagedAgentsMemoryVersionOperation:`
+
+  The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
+
+  - `CREATED("created")`
+
+  - `MODIFIED("modified")`
+
+  - `DELETED("deleted")`
+
+### Beta Managed Agents Service Account Actor
+
+- `class BetaManagedAgentsServiceAccountActor:`
+
+  Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+  - `String serviceAccountId`
+
+    ID of the service account that performed the write (a `svac_...` value).
+
+    minLength: 1
+
+  - `JsonValue type = "service_account_actor"`
+
+### Beta Managed Agents Session Actor
+
+- `class BetaManagedAgentsSessionActor:`
+
+  Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+
+  - `String sessionId`
+
+    ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+
+    minLength: 1
+
+  - `Type type`
+
+### Beta Managed Agents User Actor
+
+- `class BetaManagedAgentsUserActor:`
+
+  Attribution for a write made by a human user through the Anthropic Console.
+
+  - `Type type`
+
+  - `String userId`
+
+    ID of the user who performed the write (a `user_...` value).
+
+    minLength: 1
 
 ---
 

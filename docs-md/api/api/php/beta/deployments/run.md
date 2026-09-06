@@ -1,68 +1,56 @@
 # Run Deployment Now
 
-Copy page
+`$client->beta->deployments->run(string deploymentID, ?list<AnthropicBeta> betas): BetaManagedAgentsDeploymentRun`
 
-
-
-PHP
-
-# Run Deployment Now
-
-$client->beta->deployments->run(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)
-
-POST/v1/deployments/{deployment\_id}/run
+**POST** `/v1/deployments/{deployment_id}/run`
 
 Run Deployment Now
 
-##### ParametersExpand Collapse
+## Parameters
 
-deploymentID: string
+- `deploymentID: string`
 
-betas?:optional list<AnthropicBeta>
+- `betas?:optional list<AnthropicBeta>`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `BetaManagedAgentsDeploymentRun`
 
-[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)
+  - `string id`
 
-string id
+    Unique identifier for this run (`drun_...`).
 
-Unique identifier for this run (`drun_...`).
+  - `BetaManagedAgentsAgentReference agent`
 
-[BetaManagedAgentsAgentReference](api/beta/agents.md) agent
+    A resolved agent reference with a concrete version.
 
-A resolved agent reference with a concrete version.
+  - `\Datetime createdAt`
 
-\Datetime createdAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `string deploymentID`
 
-string deploymentID
+    ID of the deployment that produced this run.
 
-ID of the deployment that produced this run.
+  - `?Error error`
 
-?Error error
+    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
-Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+  - `?string sessionID`
 
-?string sessionID
+    Populated on success. Null on creation failure. Exactly one of `session_id` or `error` is non-null.
 
-Populated on success. Null on creation failure. Exactly one of session\_id or error is non-null.
+  - `BetaManagedAgentsTriggerContext triggerContext`
 
-[BetaManagedAgentsTriggerContext](api/beta/deployment_runs.md) triggerContext
+    Describes what triggered a deployment run, with trigger-specific metadata.
 
-Describes what triggered a deployment run, with trigger-specific metadata.
+  - `Type type`
 
-Type type
+## Example
 
-Run Deployment Now
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -70,46 +58,16 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsDeploymentRun = $client->beta->deployments->run(
-  'depl_011CZkZcDH3vPqd7xnEfwTai', betas: ['message-batches-2024-09-24']
+  'depl_011CZkZcDH3vPqd7xnEfwTai',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaManagedAgentsDeploymentRun);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "id",
-  "agent": {
-    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-    "type": "agent",
-    "version": 1
-  },
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "deployment_id": "deployment_id",
-  "error": {
-    "message": "message",
-    "type": "environment_archived_error"
-  },
-  "session_id": "session_id",
-  "trigger_context": {
-    "scheduled_at": "2019-12-27T18:11:19.117Z",
-    "type": "schedule"
-  },
-  "type": "deployment_run"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "id",
   "agent": {

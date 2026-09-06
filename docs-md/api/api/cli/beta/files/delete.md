@@ -1,77 +1,46 @@
 # Delete File
 
-Copy page
+`$ ant beta:files delete`
 
-
-
-CLI
-
-# Delete File
-
-$ ant beta:files delete
-
-DELETE/v1/files/{file\_id}
+**DELETE** `/v1/files/{file_id}`
 
 Delete File
 
-##### ParametersExpand Collapse
+## Parameters
 
---file-id: string
+- `--file-id: string`
 
-ID of the File.
+  ID of the File.
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--beta: optional array of AnthropicBeta`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `beta_deleted_file: object`
 
-deleted\_file: object { id, type } 
+  - `id: string`
 
-id: string
+    ID of the deleted file.
 
-ID of the deleted file.
+  - `type: optional "file_deleted"`
 
-
+    Deleted object type.
 
-type: optional "file\_deleted"
+    For file deletion, this is always `"file_deleted"`.
 
-Deleted object type.
+## Example
 
-For file deletion, this is always `"file_deleted"`.
-
-"file\_deleted"
-
-Delete File
-
-CLI
-
-```shiki
+```bash
 ant beta:files delete \
   --api-key my-anthropic-api-key \
   --file-id file_id
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "type": "file_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "file_011CNha8iCJcU1wXNR6q4V8w",
   "type": "file_deleted"

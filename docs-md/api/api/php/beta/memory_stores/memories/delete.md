@@ -1,50 +1,38 @@
 # Delete a memory
 
-Copy page
+`$client->beta->memoryStores->memories->delete(string memoryID, string memoryStoreID, ?string expectedContentSha256, ?list<AnthropicBeta> betas): ManagedAgentsDeletedMemory`
 
-
-
-PHP
-
-# Delete a memory
-
-$client->beta->memoryStores->memories->delete(string memoryID, string memoryStoreID, ?string expectedContentSha256, ?list<AnthropicBeta> betas): [ManagedAgentsDeletedMemory](api/beta/memory_stores/memories.md)
-
-DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+**DELETE** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
 Delete a memory
 
-##### ParametersExpand Collapse
+## Parameters
 
-memoryStoreID: string
+- `memoryStoreID: string`
 
-memoryID: string
+- `memoryID: string`
 
-expectedContentSha256?:optional string
+- `expectedContentSha256?:optional string`
 
-Query parameter for expected\_content\_sha256
+  Query parameter for expected_content_sha256
 
-betas?:optional list<AnthropicBeta>
+- `betas?:optional list<AnthropicBeta>`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `ManagedAgentsDeletedMemory`
 
-[ManagedAgentsDeletedMemory](api/beta/memory_stores/memories.md)
+  - `string id`
 
-string id
+    ID of the deleted memory (a `mem_...` value).
 
-ID of the deleted memory (a `mem_...` value).
+  - `Type type`
 
-Type type
+## Example
 
-Delete a memory
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -55,30 +43,15 @@ $betaManagedAgentsDeletedMemory = $client->beta->memoryStores->memories->delete(
   'memory_id',
   memoryStoreID: 'memory_store_id',
   expectedContentSha256: 'expected_content_sha256',
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaManagedAgentsDeletedMemory);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "id",
-  "type": "memory_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "id",
   "type": "memory_deleted"

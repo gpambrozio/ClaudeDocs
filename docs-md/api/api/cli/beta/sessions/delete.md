@@ -1,73 +1,42 @@
 # Delete Session
 
-Copy page
+`$ ant beta:sessions delete`
 
-
-
-CLI
-
-# Delete Session
-
-$ ant beta:sessions delete
-
-DELETE/v1/sessions/{session\_id}
+**DELETE** `/v1/sessions/{session_id}`
 
 Delete Session
 
-##### ParametersExpand Collapse
+## Parameters
 
---session-id: string
+- `--session-id: string`
 
-Path parameter session\_id
+  Path parameter session_id
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--beta: optional array of AnthropicBeta`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `beta_managed_agents_deleted_session: object`
 
-beta\_managed\_agents\_deleted\_session: object { id, type } 
+  Confirmation that a `session` has been permanently deleted.
 
-Confirmation that a `session` has been permanently deleted.
+  - `id: string`
 
-id: string
+  - `type: "session_deleted"`
 
-
+## Example
 
-type: "session\_deleted"
-
-"session\_deleted"
-
-Delete Session
-
-CLI
-
-```shiki
+```bash
 ant beta:sessions delete \
   --api-key my-anthropic-api-key \
   --session-id sesn_011CZkZAtmR3yMPDzynEDxu7
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
-  "type": "session_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
   "type": "session_deleted"

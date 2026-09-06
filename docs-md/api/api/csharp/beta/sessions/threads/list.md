@@ -1,544 +1,752 @@
 # List Session Threads
 
-Copy page
+`ThreadListPage Beta.Sessions.Threads.List(parameters, cancellationToken = default)`
 
-
-
-C#
-
-# List Session Threads
-
-[ThreadListPageResponse](api/beta/sessions/threads.md) Beta.Sessions.Threads.List(ThreadListParamsparameters, CancellationTokencancellationToken = default)
-
-GET/v1/sessions/{session\_id}/threads
+**GET** `/v1/sessions/{session_id}/threads`
 
 List Session Threads
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `ThreadListParams parameters`
 
-ThreadListParams parameters
+  - `required string sessionID`
 
-required string sessionID
+    Path param: Path parameter session_id
 
-Path param: Path parameter session\_id
+  - `int limit`
 
-Int limit
+    Query param: Maximum results per page. Defaults to 1000.
 
-Query param: Maximum results per page. Defaults to 1000.
+    format: int32
 
-string page
+  - `string page`
 
-Query param: Opaque pagination cursor from a previous response's next\_page. Forward-only.
+    Query param: Opaque pagination cursor from a previous response's `next_page`. Forward-only.
 
-
+  - `IReadOnlyList<AnthropicBeta> betas`
 
-IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-Header param: Optional header to specify the beta version(s) you want to use.
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
-"message-batches-2024-09-24"MessageBatches2024\_09\_24
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
 
-"prompt-caching-2024-07-31"PromptCaching2024\_07\_31
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
 
-"computer-use-2024-10-22"ComputerUse2024\_10\_22
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
 
-"computer-use-2025-01-24"ComputerUse2025\_01\_24
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
 
-"pdfs-2024-09-25"Pdfs2024\_09\_25
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
 
-"token-counting-2024-11-01"TokenCounting2024\_11\_01
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
 
-"token-efficient-tools-2025-02-19"TokenEfficientTools2025\_02\_19
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
 
-"output-128k-2025-02-19"Output128k2025\_02\_19
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
 
-"files-api-2025-04-14"FilesApi2025\_04\_14
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
 
-"mcp-client-2025-04-04"McpClient2025\_04\_04
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
 
-"mcp-client-2025-11-20"McpClient2025\_11\_20
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
 
-"dev-full-thinking-2025-05-14"DevFullThinking2025\_05\_14
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
 
-"interleaved-thinking-2025-05-14"InterleavedThinking2025\_05\_14
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
 
-"code-execution-2025-05-22"CodeExecution2025\_05\_22
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
 
-"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025\_04\_11
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
 
-"context-1m-2025-08-07"Context1m2025\_08\_07
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
 
-"context-management-2025-06-27"ContextManagement2025\_06\_27
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025\_08\_26
+    - `Skills2025_10_02("skills-2025-10-02")`
 
-"skills-2025-10-02"Skills2025\_10\_02
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
 
-"fast-mode-2026-02-01"FastMode2026\_02\_01
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
 
-"output-300k-2026-03-24"Output300k2026\_03\_24
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
 
-"user-profiles-2026-03-24"UserProfiles2026\_03\_24
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
-"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
-"managed-agents-2026-04-01"ManagedAgents2026\_04\_01
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
 
-"cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
 
-"thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
 
-"server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
 
-"fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
 
-"agent-memory-2026-07-22"AgentMemory2026\_07\_22
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
 
-##### ReturnsExpand Collapse
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
 
-
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
 
-class ThreadListPageResponse:
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
 
-Paginated list of threads within a `session`.
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-
+    - `Compact2026_01_12("compact-2026-01-12")`
 
-IReadOnlyList<[BetaManagedAgentsSessionThread](api/beta/sessions/threads.md)> Data
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
 
-Threads in the session, primary first then children in spawn order.
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
 
-required string ID
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
 
-Unique identifier for this thread.
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
 
-
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
 
-required [BetaManagedAgentsSessionThreadAgent](api/beta/agents.md) Agent
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
 
-Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-required string ID
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
 
-required string? Description
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-
+## Returns
 
-required IReadOnlyList<[BetaManagedAgentsMcpServerUrlDefinition](api/beta/agents.md)> McpServers
+- `class BetaManagedAgentsSessionThread:`
 
-required string Name
+  An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
 
-required Type Type
+  - `required string ID`
 
-required string Url
+    Unique identifier for this thread.
 
-
+  - `required Agent Agent`
 
-required [BetaManagedAgentsModelConfig](api/beta/agents.md) Model
+    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
 
-Model identifier and configuration.
+    - `class BetaManagedAgentsSessionThreadAgent:`
 
-
+      Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-required [BetaManagedAgentsModel](api/beta/agents.md) ID
+      - `required string ID`
 
-The model that will power your agent.
+      - `required string? Description`
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+      - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-One of the following:
+        - `required string Name`
 
-"claude-sonnet-5"ClaudeSonnet5
+        - `required Type Type`
 
-High-performance model for coding and agents
+        - `required string Url`
 
-"claude-fable-5"ClaudeFable5
+      - `required BetaManagedAgentsModelConfig Model`
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+        Model identifier and configuration.
 
-"claude-opus-4-8"ClaudeOpus4\_8
+        - `required BetaManagedAgentsModel ID`
 
-Frontier intelligence for long-running agents and coding
+          The model that will power your agent.
 
-"claude-opus-4-7"ClaudeOpus4\_7
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Frontier intelligence for long-running agents and coding
+          - `ClaudeFable5_1("claude-fable-5-1")`
 
-"claude-opus-4-6"ClaudeOpus4\_6
+            Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
-Most intelligent model for building agents and coding
+          - `ClaudeSonnet5("claude-sonnet-5")`
 
-"claude-sonnet-4-6"ClaudeSonnet4\_6
+            High-performance model for coding and agents
 
-Best combination of speed and intelligence
+          - `ClaudeFable5("claude-fable-5")`
 
-"claude-haiku-4-5"ClaudeHaiku4\_5
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
-Fastest model with near-frontier intelligence
+          - `ClaudeOpus5("claude-opus-5")`
 
-"claude-haiku-4-5-20251001"ClaudeHaiku4\_5\_20251001
+            Powerful intelligence for long-running agents and coding
 
-Fastest model with near-frontier intelligence
+          - `ClaudeOpus4_8("claude-opus-4-8")`
 
-"claude-opus-4-5"ClaudeOpus4\_5
+            Powerful intelligence for long-running agents and coding
 
-Premium model combining maximum intelligence with practical performance
+          - `ClaudeOpus4_7("claude-opus-4-7")`
 
-"claude-opus-4-5-20251101"ClaudeOpus4\_5\_20251101
+            Powerful intelligence for long-running agents and coding
 
-Premium model combining maximum intelligence with practical performance
+          - `ClaudeOpus4_6("claude-opus-4-6")`
 
-"claude-sonnet-4-5"ClaudeSonnet4\_5
+            Powerful intelligence for long-running agents and coding
 
-High-performance model for agents and coding
+          - `ClaudeSonnet4_6("claude-sonnet-4-6")`
 
-"claude-sonnet-4-5-20250929"ClaudeSonnet4\_5\_20250929
+            Best combination of speed and intelligence
 
-High-performance model for agents and coding
+          - `ClaudeHaiku4_5("claude-haiku-4-5")`
 
-
+            Fastest model with near-frontier intelligence
 
-Speed Speed
+          - `ClaudeHaiku4_5_20251001("claude-haiku-4-5-20251001")`
 
-Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+            Fastest model with near-frontier intelligence
 
-One of the following:
+          - `ClaudeOpus4_5("claude-opus-4-5")`
 
-"standard"Standard
+            Powerful intelligence for long-running agents and coding
 
-"fast"Fast
+          - `ClaudeOpus4_5_20251101("claude-opus-4-5-20251101")`
 
-required string Name
+            Powerful intelligence for long-running agents and coding
 
-
+          - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
-required IReadOnlyList<Skill> Skills
+            High-performance model for agents and coding
 
-One of the following:
+          - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
 
-
+            High-performance model for agents and coding
 
-class BetaManagedAgentsAnthropicSkill:
+        - `Effort Effort`
 
-A resolved Anthropic-managed skill.
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-required string SkillID
+          - `class BetaManagedAgentsEffortLow:`
 
-required Type Type
+            Low effort. Favors latency over reasoning depth.
 
-required string Version
+            - `required Type Type`
 
-
+          - `class BetaManagedAgentsEffortMedium:`
 
-class BetaManagedAgentsCustomSkill:
+            Medium effort. Balances latency and reasoning depth.
 
-A resolved user-created custom skill.
+            - `required Type Type`
 
-required string SkillID
+          - `class BetaManagedAgentsEffortHigh:`
 
-required Type Type
+            High effort. Favors reasoning depth.
 
-required string Version
+            - `required Type Type`
 
-required string? System
+          - `class BetaManagedAgentsEffortXhigh:`
 
-
+            Extra-high effort. Not all models accept this level.
 
-required IReadOnlyList<Tool> Tools
+            - `required Type Type`
 
-One of the following:
+          - `class BetaManagedAgentsEffortMax:`
 
-
+            Maximum effort. Favors reasoning depth over latency.
 
-class BetaManagedAgentsAgentToolset20260401:
+            - `required Type Type`
 
-
+        - `string InferenceGeo`
 
-required IReadOnlyList<[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)> Configs
+          Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
 
-required Boolean Enabled
+        - `Speed Speed`
 
-
+          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-required Name Name
+          - `Standard("standard")`
 
-Built-in agent tool identifier.
+          - `Fast("fast")`
 
-One of the following:
+      - `required string Name`
 
-"bash"Bash
+      - `required IReadOnlyList<Skill> Skills`
 
-"edit"Edit
+        - `class BetaManagedAgentsAnthropicSkill:`
 
-"read"Read
+          A resolved Anthropic-managed skill.
 
-"write"Write
+          - `required string SkillID`
 
-"glob"Glob
+          - `required Type Type`
 
-"grep"Grep
+          - `required string Version`
 
-"web\_fetch"WebFetch
+        - `class BetaManagedAgentsCustomSkill:`
 
-"web\_search"WebSearch
+          A resolved user-created custom skill.
 
-
+          - `required string SkillID`
 
-required PermissionPolicy PermissionPolicy
+          - `required Type Type`
 
-Permission policy for tool execution.
+          - `required string Version`
 
-One of the following:
+      - `required string? System`
 
-
+      - `required IReadOnlyList<Tool> Tools`
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+        - `class BetaManagedAgentsAgentToolset20260401:`
 
-Tool calls are automatically approved without user confirmation.
+          - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-required Type Type
+            - `class BetaManagedAgentsBashToolConfig:`
 
-
+              Configuration for the bash tool.
 
-class BetaManagedAgentsAlwaysAskPolicy:
+              - `required bool Enabled`
 
-Tool calls require user confirmation before execution.
+              - `JsonElement Name = "bash"`
 
-required Type Type
+              - `required PermissionPolicy PermissionPolicy`
 
-
+                Permission policy for tool execution.
 
-required [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-Resolved default configuration for agent tools.
+                  Tool calls are automatically approved without user confirmation.
 
-required Boolean Enabled
+                  - `required Type Type`
 
-
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-required PermissionPolicy PermissionPolicy
+                  Tool calls require user confirmation before execution.
 
-Permission policy for tool execution.
+                  - `required Type Type`
 
-One of the following:
+              - `JsonElement Type = "bash"`
 
-
+            - `class BetaManagedAgentsEditToolConfig:`
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+              Configuration for the edit tool.
 
-Tool calls are automatically approved without user confirmation.
+              - `required bool Enabled`
 
-required Type Type
+              - `JsonElement Name = "edit"`
 
-
+              - `required PermissionPolicy PermissionPolicy`
 
-class BetaManagedAgentsAlwaysAskPolicy:
+                Permission policy for tool execution.
 
-Tool calls require user confirmation before execution.
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-required Type Type
+                  Tool calls are automatically approved without user confirmation.
 
-required Type Type
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-
+                  Tool calls require user confirmation before execution.
 
-class BetaManagedAgentsMcpToolset:
+              - `JsonElement Type = "edit"`
 
-
+            - `class BetaManagedAgentsReadToolConfig:`
 
-required IReadOnlyList<[BetaManagedAgentsMcpToolConfig](api/beta/agents.md)> Configs
+              Configuration for the read tool.
 
-required Boolean Enabled
+              - `required bool Enabled`
 
-required string Name
+              - `JsonElement Name = "read"`
 
-
+              - `required PermissionPolicy PermissionPolicy`
 
-required PermissionPolicy PermissionPolicy
+                Permission policy for tool execution.
 
-Permission policy for tool execution.
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-One of the following:
+                  Tool calls are automatically approved without user confirmation.
 
-
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+                  Tool calls require user confirmation before execution.
 
-Tool calls are automatically approved without user confirmation.
+              - `JsonElement Type = "read"`
 
-required Type Type
+            - `class BetaManagedAgentsWriteToolConfig:`
 
-
+              Configuration for the write tool.
 
-class BetaManagedAgentsAlwaysAskPolicy:
+              - `required bool Enabled`
 
-Tool calls require user confirmation before execution.
+              - `JsonElement Name = "write"`
 
-required Type Type
+              - `required PermissionPolicy PermissionPolicy`
 
-
+                Permission policy for tool execution.
 
-required [BetaManagedAgentsMcpToolsetDefaultConfig](api/beta/agents.md) DefaultConfig
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-Resolved default configuration for all tools from an MCP server.
+                  Tool calls are automatically approved without user confirmation.
 
-required Boolean Enabled
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-
+                  Tool calls require user confirmation before execution.
 
-required PermissionPolicy PermissionPolicy
+              - `JsonElement Type = "write"`
 
-Permission policy for tool execution.
+            - `class BetaManagedAgentsGlobToolConfig:`
 
-One of the following:
+              Configuration for the glob tool.
 
-
+              - `required bool Enabled`
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+              - `JsonElement Name = "glob"`
 
-Tool calls are automatically approved without user confirmation.
+              - `required PermissionPolicy PermissionPolicy`
 
-required Type Type
+                Permission policy for tool execution.
 
-
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-class BetaManagedAgentsAlwaysAskPolicy:
+                  Tool calls are automatically approved without user confirmation.
 
-Tool calls require user confirmation before execution.
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-required Type Type
+                  Tool calls require user confirmation before execution.
 
-required string McpServerName
+              - `JsonElement Type = "glob"`
 
-required Type Type
+            - `class BetaManagedAgentsGrepToolConfig:`
 
-
+              Configuration for the grep tool.
 
-class BetaManagedAgentsCustomTool:
+              - `required bool Enabled`
 
-A custom tool as returned in API responses.
+              - `JsonElement Name = "grep"`
 
-required string Description
+              - `required PermissionPolicy PermissionPolicy`
 
-
+                Permission policy for tool execution.
 
-required [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) InputSchema
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-JSON Schema for custom tool input parameters.
+                  Tool calls are automatically approved without user confirmation.
 
-JsonElement Type "object"constant
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-IReadOnlyDictionary<string, JsonElement>? Properties
+                  Tool calls require user confirmation before execution.
 
-IReadOnlyList<string>? Required
+              - `JsonElement Type = "grep"`
 
-required string Name
+            - `class BetaManagedAgentsWebFetchToolConfig:`
 
-required Type Type
+              Configuration for the web_fetch tool.
 
-required Type Type
+              - `required bool Enabled`
 
-required Int Version
+              - `JsonElement Name = "web_fetch"`
 
-required DateTimeOffset? ArchivedAt
+              - `required PermissionPolicy PermissionPolicy`
 
-A timestamp in RFC 3339 format
+                Permission policy for tool execution.
 
-required DateTimeOffset CreatedAt
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-A timestamp in RFC 3339 format
+                  Tool calls are automatically approved without user confirmation.
 
-required string? ParentThreadID
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-Parent thread that spawned this thread. Null for the primary thread.
+                  Tool calls require user confirmation before execution.
 
-required string SessionID
+              - `JsonElement Type = "web_fetch"`
 
-The session this thread belongs to.
+              - `IReadOnlyList<string> AllowedDomains`
 
-
+              - `IReadOnlyList<string> BlockedDomains`
 
-required [BetaManagedAgentsSessionThreadStats](api/beta/sessions/threads.md)? Stats
+              - `int? MaxContentTokens`
 
-Timing statistics for a session thread.
+                format: int32
 
-Double ActiveSeconds
+            - `class BetaManagedAgentsWebSearchToolConfig:`
 
-Cumulative time in seconds the thread spent actively running. Excludes idle time.
+              Configuration for the web_search tool.
 
-Double DurationSeconds
+              - `required bool Enabled`
 
-Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
+              - `JsonElement Name = "web_search"`
 
-Double StartupSeconds
+              - `required PermissionPolicy PermissionPolicy`
 
-Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
+                Permission policy for tool execution.
 
-
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-required [BetaManagedAgentsSessionThreadStatus](api/beta/sessions/threads.md) Status
+                  Tool calls are automatically approved without user confirmation.
 
-SessionThreadStatus enum
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-One of the following:
+                  Tool calls require user confirmation before execution.
 
-"running"Running
+              - `JsonElement Type = "web_search"`
 
-"idle"Idle
+              - `IReadOnlyList<string> AllowedDomains`
 
-"rescheduling"Rescheduling
+              - `IReadOnlyList<string> BlockedDomains`
 
-"terminated"Terminated
+              - `BetaManagedAgentsUserLocation? UserLocation`
 
-required Type Type
+                Approximate user location for search result localization.
 
-required DateTimeOffset UpdatedAt
+                - `JsonElement Type = "approximate"`
 
-A timestamp in RFC 3339 format
+                  Location precision. Only "approximate" is supported.
 
-
+                - `string? City`
 
-required [BetaManagedAgentsSessionThreadUsage](api/beta/sessions/threads.md)? Usage
+                  City name.
 
-Cumulative token usage for a session thread across all turns.
+                  minLength: 1, maxLength: 255
 
-
+                - `string? Country`
 
-[BetaManagedAgentsCacheCreationUsage](api/beta/sessions.md) CacheCreation
+                  Two-letter ISO 3166-1 country code, uppercase.
 
-Prompt-cache creation token usage broken down by cache lifetime.
+                - `string? Region`
 
-Int Ephemeral1hInputTokens
+                  Region or state name.
 
-Tokens used to create 1-hour ephemeral cache entries.
+                  minLength: 1, maxLength: 255
 
-Int Ephemeral5mInputTokens
+                - `string? Timezone`
 
-Tokens used to create 5-minute ephemeral cache entries.
+                  IANA timezone identifier, e.g. "America/Los_Angeles".
 
-Int CacheReadInputTokens
+                  minLength: 1, maxLength: 255
 
-Total tokens read from prompt cache.
+          - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
-Int InputTokens
+            Resolved default configuration for agent tools.
 
-Total input tokens consumed across all turns.
+            - `required bool Enabled`
 
-Int OutputTokens
+            - `required PermissionPolicy PermissionPolicy`
 
-Total output tokens generated across all turns.
+              Permission policy for tool execution.
 
-string? NextPage
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-Opaque cursor for the next page. Null when no more results.
+                Tool calls are automatically approved without user confirmation.
 
-List Session Threads
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-C#
+                Tool calls require user confirmation before execution.
 
-```shiki
+          - `required Type Type`
+
+        - `class BetaManagedAgentsMcpToolset:`
+
+          - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
+
+            - `required bool Enabled`
+
+            - `required string Name`
+
+            - `required PermissionPolicy PermissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+          - `required BetaManagedAgentsMcpToolsetDefaultConfig DefaultConfig`
+
+            Resolved default configuration for all tools from an MCP server.
+
+            - `required bool Enabled`
+
+            - `required PermissionPolicy PermissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+          - `required string McpServerName`
+
+          - `required Type Type`
+
+        - `class BetaManagedAgentsCustomTool:`
+
+          A custom tool as returned in API responses.
+
+          - `required string Description`
+
+          - `required BetaManagedAgentsCustomToolInputSchema InputSchema`
+
+            JSON Schema for custom tool input parameters.
+
+            - `JsonElement Type = "object"`
+
+            - `IReadOnlyDictionary<string, JsonElement>? Properties`
+
+            - `IReadOnlyList<string>? Required`
+
+          - `required string Name`
+
+          - `required Type Type`
+
+      - `required Type Type`
+
+      - `required int Version`
+
+        format: int32
+
+    - `class BetaManagedAgentsAdvisor:`
+
+      Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+      - `required string Model`
+
+        The advisor model id.
+
+      - `required Type Type`
+
+  - `required DateTimeOffset? ArchivedAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `required string? ParentThreadID`
+
+    Parent thread that spawned this thread. Null for the primary thread.
+
+  - `required string SessionID`
+
+    The session this thread belongs to.
+
+  - `required BetaManagedAgentsSessionThreadStats? Stats`
+
+    Timing statistics for a session thread.
+
+    - `double ActiveSeconds`
+
+      Cumulative time in seconds the thread spent actively running. Excludes idle time.
+
+      format: double
+
+    - `double DurationSeconds`
+
+      Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
+
+      format: double
+
+    - `double StartupSeconds`
+
+      Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
+
+      format: double
+
+  - `required BetaManagedAgentsSessionThreadStatus Status`
+
+    SessionThreadStatus enum
+
+    - `Running("running")`
+
+    - `Idle("idle")`
+
+    - `Rescheduling("rescheduling")`
+
+    - `Terminated("terminated")`
+
+  - `required Type Type`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `required BetaManagedAgentsSessionThreadUsage? Usage`
+
+    Cumulative token usage for a session thread across all turns.
+
+    - `double ActiveSeconds`
+
+      Cumulative time in seconds this thread spent in running status. Equal to `stats.active_seconds`; surfaced here so a thread's usage carries every quantity its cost is priced on.
+
+      format: double
+
+    - `BetaManagedAgentsCacheCreationUsage CacheCreation`
+
+      Prompt-cache creation token usage broken down by cache lifetime.
+
+      - `int Ephemeral1hInputTokens`
+
+        Tokens used to create 1-hour ephemeral cache entries.
+
+        format: int32
+
+      - `int Ephemeral5mInputTokens`
+
+        Tokens used to create 5-minute ephemeral cache entries.
+
+        format: int32
+
+    - `int CacheReadInputTokens`
+
+      Total tokens read from prompt cache.
+
+      format: int32
+
+    - `int InputTokens`
+
+      Total input tokens consumed across all turns.
+
+      format: int32
+
+    - `BetaMonetaryAmount? ListCost`
+
+      A monetary amount in a specific currency.
+
+      - `required string Amount`
+
+        Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+      - `required BetaCurrency Currency`
+
+        Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
+
+    - `int OutputTokens`
+
+      Total output tokens generated across all turns.
+
+      format: int32
+
+    - `BetaManagedAgentsServerToolUsage? ServerToolUse`
+
+      Cumulative count of server-executed tool invocations, broken down by tool.
+
+      - `int WebFetchRequests`
+
+        Number of server-executed web fetch requests.
+
+        format: int32
+
+      - `int WebSearchRequests`
+
+        Number of server-executed web search requests.
+
+        format: int32
+
+## Example
+
+```csharp
 ThreadListParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7"
@@ -551,11 +759,9 @@ await foreach (var item in page.Paginate())
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
@@ -571,7 +777,11 @@ Response 200
           }
         ],
         "model": {
-          "id": "claude-sonnet-4-6",
+          "id": "claude-opus-5",
+          "effort": {
+            "type": "low"
+          },
+          "inference_geo": "inference_geo",
           "speed": "standard"
         },
         "name": "Researcher",
@@ -591,7 +801,8 @@ Response 200
                 "name": "bash",
                 "permission_policy": {
                   "type": "always_allow"
-                }
+                },
+                "type": "bash"
               }
             ],
             "default_config": {
@@ -619,97 +830,22 @@ Response 200
       "type": "session_thread",
       "updated_at": "2026-03-15T10:00:00Z",
       "usage": {
-        "cache_creation": {
-          "ephemeral_1h_input_tokens": 0,
-          "ephemeral_5m_input_tokens": 0
-        },
-        "cache_read_input_tokens": 0,
-        "input_tokens": 0,
-        "output_tokens": 0
-      }
-    }
-  ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "sthr_011CZkZVWa6oIjw0rgXZpnBt",
-      "agent": {
-        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-        "description": "A focused research subagent.",
-        "mcp_servers": [
-          {
-            "name": "example-mcp",
-            "type": "url",
-            "url": "https://example-server.modelcontextprotocol.io/sse"
-          }
-        ],
-        "model": {
-          "id": "claude-sonnet-4-6",
-          "speed": "standard"
-        },
-        "name": "Researcher",
-        "skills": [
-          {
-            "skill_id": "xlsx",
-            "type": "anthropic",
-            "version": "1"
-          }
-        ],
-        "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
-        "tools": [
-          {
-            "configs": [
-              {
-                "enabled": true,
-                "name": "bash",
-                "permission_policy": {
-                  "type": "always_allow"
-                }
-              }
-            ],
-            "default_config": {
-              "enabled": true,
-              "permission_policy": {
-                "type": "always_ask"
-              }
-            },
-            "type": "agent_toolset_20260401"
-          }
-        ],
-        "type": "agent",
-        "version": 1
-      },
-      "archived_at": null,
-      "created_at": "2026-03-15T10:00:00Z",
-      "parent_thread_id": null,
-      "session_id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
-      "stats": {
         "active_seconds": 0,
-        "duration_seconds": 0,
-        "startup_seconds": 0
-      },
-      "status": "idle",
-      "type": "session_thread",
-      "updated_at": "2026-03-15T10:00:00Z",
-      "usage": {
         "cache_creation": {
           "ephemeral_1h_input_tokens": 0,
           "ephemeral_5m_input_tokens": 0
         },
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
-        "output_tokens": 0
+        "list_cost": {
+          "amount": "2500",
+          "currency": "USD"
+        },
+        "output_tokens": 0,
+        "server_tool_use": {
+          "web_fetch_requests": 0,
+          "web_search_requests": 3
+        }
       }
     }
   ],

@@ -1,265 +1,182 @@
 # Create Environment
 
-Copy page
+`$ ant beta:environments create`
 
-
-
-CLI
-
-# Create Environment
-
-$ ant beta:environments create
-
-POST/v1/environments
+**POST** `/v1/environments`
 
 Create a new environment with the specified configuration.
 
-##### ParametersExpand Collapse
+## Parameters
 
---name: string
+- `--name: string`
 
-Body param: Human-readable name for the environment
+  Body param: Human-readable name for the environment
 
---config: optional [BetaCloudConfigParams](api/beta/environments.md) { type, networking, packages }  or [BetaSelfHostedConfigParams](api/beta/environments.md) { type } 
+  maxLength: 256, minLength: 1
 
-Body param: Environment configuration
+- `--config: optional BetaCloudConfigParams or BetaSelfHostedConfigParams`
 
---description: optional string
+  Body param: Environment configuration
 
-Body param: Optional description of the environment
+- `--description: optional string`
 
---metadata: optional map[string]
+  Body param: Optional description of the environment
 
-Body param: User-provided metadata key-value pairs
+  maxLength: 1024
 
---scope: optional "organization" or "account"
+- `--metadata: optional map[string]`
 
-Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. Only applicable for self-hosted environments. If not specified, defaults based on organization type.
+  Body param: User-provided metadata key-value pairs
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--scope: optional "organization" or "account"`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+  Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. Only applicable for self-hosted environments. If not specified, defaults based on organization type.
 
-##### ReturnsExpand Collapse
+- `--beta: optional array of AnthropicBeta`
 
-
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-beta\_environment: object { id, archived\_at, config, 7 more } 
+## Returns
 
-Unified Environment resource for both cloud and self-hosted environments.
+- `beta_environment: object`
 
-id: string
+  Unified Environment resource for both cloud and self-hosted environments.
 
-Environment identifier (e.g., 'env\_...')
+  - `id: string`
 
-archived\_at: string
+    Environment identifier (e.g., 'env_...')
 
-RFC 3339 timestamp when environment was archived, or null if not archived
+  - `archived_at: string`
 
-
+    RFC 3339 timestamp when environment was archived, or null if not archived
 
-config: [BetaCloudConfig](api/beta/environments.md) { networking, packages, type }  or [BetaSelfHostedConfig](api/beta/environments.md) { type } 
+  - `config: BetaCloudConfig or BetaSelfHostedConfig`
 
-Environment configuration (either Anthropic Cloud or self-hosted)
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-
+    - `beta_cloud_config: object`
 
-beta\_cloud\_config: object { networking, packages, type } 
+      `cloud` environment configuration.
 
-`cloud` environment configuration.
+      - `networking: BetaUnrestrictedNetwork or BetaLimitedNetwork`
 
-
+        Network configuration policy.
 
-networking: [BetaUnrestrictedNetwork](api/beta/environments.md) { type }  or [BetaLimitedNetwork](api/beta/environments.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
+        - `beta_unrestricted_network: object`
 
-Network configuration policy.
+          Unrestricted network access.
 
-
+          - `type: "unrestricted"`
 
-beta\_unrestricted\_network: object { type } 
+            Network policy type
 
-Unrestricted network access.
+        - `beta_limited_network: object`
 
-type: "unrestricted"
+          Limited network access.
 
-Network policy type
+          - `allow_mcp_servers: boolean`
 
-
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-beta\_limited\_network: object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
+          - `allow_package_managers: boolean`
 
-Limited network access.
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-allow\_mcp\_servers: boolean
+          - `allowed_hosts: array of string`
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+            Specifies domains the container can reach.
 
-allow\_package\_managers: boolean
+          - `type: "limited"`
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+            Network policy type
 
-allowed\_hosts: array of string
+      - `packages: object`
 
-Specifies domains the container can reach.
+        Package manager configuration.
 
-type: "limited"
+        - `apt: array of string`
 
-Network policy type
+          Ubuntu/Debian packages to install
 
-
+        - `cargo: array of string`
 
-packages: object { apt, cargo, gem, 4 more } 
+          Rust packages to install
 
-Package manager configuration.
+        - `gem: array of string`
 
-apt: array of string
+          Ruby packages to install
 
-Ubuntu/Debian packages to install
+        - `go: array of string`
 
-cargo: array of string
+          Go packages to install
 
-Rust packages to install
+        - `npm: array of string`
 
-gem: array of string
+          Node.js packages to install
 
-Ruby packages to install
+        - `pip: array of string`
 
-go: array of string
+          Python packages to install
 
-Go packages to install
+        - `type: optional "packages"`
 
-npm: array of string
+          Package configuration type
 
-Node.js packages to install
+      - `type: "cloud"`
 
-pip: array of string
+        Environment type
 
-Python packages to install
+    - `beta_self_hosted_config: object`
 
-
+      Configuration for self-hosted environments.
 
-type: optional "packages"
+      - `type: "self_hosted"`
 
-Package configuration type
+        Environment type
 
-"packages"
+  - `created_at: string`
 
-type: "cloud"
+    RFC 3339 timestamp when environment was created
 
-Environment type
+  - `description: string`
 
-
+    User-provided description for the environment; null when unset
 
-beta\_self\_hosted\_config: object { type } 
+  - `metadata: map[string]`
 
-Configuration for self-hosted environments.
+    User-provided metadata key-value pairs
 
-type: "self\_hosted"
+  - `name: string`
 
-Environment type
+    Human-readable name for the environment
 
-created\_at: string
+  - `type: "environment"`
 
-RFC 3339 timestamp when environment was created
+    The type of object (always 'environment')
 
-description: string
+  - `updated_at: string`
 
-User-provided description for the environment
+    RFC 3339 timestamp when environment was last updated
 
-metadata: map[string]
+  - `scope: optional "organization" or "account"`
 
-User-provided metadata key-value pairs
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-name: string
+    - `"organization"`
 
-Human-readable name for the environment
+    - `"account"`
 
-type: "environment"
+## Example
 
-The type of object (always 'environment')
-
-updated\_at: string
-
-RFC 3339 timestamp when environment was last updated
-
-
-
-scope: optional "organization" or "account"
-
-The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
-
-"organization"
-
-"account"
-
-Create Environment
-
-CLI
-
-```shiki
+```bash
 ant beta:environments create \
   --api-key my-anthropic-api-key \
   --name python-data-analysis
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
-  "archived_at": null,
-  "config": {
-    "networking": {
-      "allow_mcp_servers": false,
-      "allow_package_managers": true,
-      "allowed_hosts": [
-        "api.example.com"
-      ],
-      "type": "limited"
-    },
-    "packages": {
-      "apt": [
-        "string"
-      ],
-      "cargo": [
-        "string"
-      ],
-      "gem": [
-        "string"
-      ],
-      "go": [
-        "string"
-      ],
-      "npm": [
-        "string"
-      ],
-      "pip": [
-        "pandas",
-        "numpy"
-      ],
-      "type": "packages"
-    },
-    "type": "cloud"
-  },
-  "created_at": "2026-03-15T10:00:00Z",
-  "description": "Python environment with data-analysis packages.",
-  "metadata": {},
-  "name": "python-data-analysis",
-  "type": "environment",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "scope": "organization"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
   "archived_at": null,

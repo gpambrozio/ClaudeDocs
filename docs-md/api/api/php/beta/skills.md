@@ -1,68 +1,886 @@
 # Skills
 
-Copy page
+## Create Skill
 
-
+`$client->beta->skills->create(list<string> files, ?string displayName, ?list<AnthropicBeta> betas): BetaSkill`
 
-PHP
+**POST** `/v1/skills`
 
-# Skills
+Create Skill
 
-##### [Create Skill](api/beta/skills/create.md)
+### Parameters
 
-$client->beta->skills->create(list<string> files, ?string displayTitle, ?list<AnthropicBeta> betas): [SkillNewResponse](api/beta/skills.md)
+- `files: list<string>`
 
-POST/v1/skills
+  Files to upload for the skill.
 
-##### [List Skills](api/beta/skills/list.md)
+  All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
-$client->beta->skills->list(?int limit, ?string page, ?string source, ?list<AnthropicBeta> betas): PageCursor<[SkillListResponse](api/beta/skills.md)>
+- `displayName?:optional string`
 
-GET/v1/skills
+  Human-readable, single-line label for the Skill. Maximum 255 characters.
+  Always set: derived from the SKILL.md frontmatter `name` when omitted at
+  creation. Not unique.
 
-##### [Get Skill](api/beta/skills/retrieve.md)
+- `betas?:optional list<AnthropicBeta>`
 
-$client->beta->skills->retrieve(string skillID, ?list<AnthropicBeta> betas): [SkillGetResponse](api/beta/skills.md)
+  Optional header to specify the beta version(s) you want to use.
 
-GET/v1/skills/{skill\_id}
+### Returns
 
-##### [Delete Skill](api/beta/skills/delete.md)
+- `BetaSkill`
 
-$client->beta->skills->delete(string skillID, ?list<AnthropicBeta> betas): [SkillDeleteResponse](api/beta/skills.md)
+  - `string id`
 
-DELETE/v1/skills/{skill\_id}
+    Unique identifier for the skill.
 
-#### SkillsVersions
+    The format and length of IDs may change over time.
 
-##### [Create Skill Version](api/beta/skills/versions/create.md)
+  - `\Datetime createdAt`
 
-$client->beta->skills->versions->create(string skillID, list<string> files, ?list<AnthropicBeta> betas): [VersionNewResponse](api/beta/skills/versions.md)
+    ISO 8601 timestamp of when the skill was created.
 
-POST/v1/skills/{skill\_id}/versions
+  - `string displayName`
 
-##### [List Skill Versions](api/beta/skills/versions/list.md)
+    Human-readable, single-line label for the Skill. Maximum 255 characters.
+    Always set: derived from the SKILL.md frontmatter `name` when omitted at
+    creation. Not unique.
 
-$client->beta->skills->versions->list(string skillID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[VersionListResponse](api/beta/skills/versions.md)>
+  - `string latestVersionID`
 
-GET/v1/skills/{skill\_id}/versions
+    ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
 
-##### [Download Skill Version Content](api/beta/skills/versions/download.md)
+  - `BetaSkillSource source`
 
-$client->beta->skills->versions->download(string version, string skillID, ?list<AnthropicBeta> betas): download
+    Where the Skill comes from.
 
-GET/v1/skills/{skill\_id}/versions/{version}/content
+    Possible values:
 
-##### [Get Skill Version](api/beta/skills/versions/retrieve.md)
+    * `"custom"`: authored by the platform user; private to their workspace
+    * `"anthropic"`: published by Anthropic; shared and read-only
+    * `"anthropic_example"`: Anthropic-published sample Skill
+    * `"plugin"`: resolved from an installed plugin
 
-$client->beta->skills->versions->retrieve(string version, string skillID, ?list<AnthropicBeta> betas): [VersionGetResponse](api/beta/skills/versions.md)
+  - `"skill" type`
 
-GET/v1/skills/{skill\_id}/versions/{version}
+    Object type.
 
-##### [Delete Skill Version](api/beta/skills/versions/delete.md)
+    For Skills, this is always `"skill"`.
 
-$client->beta->skills->versions->delete(string version, string skillID, ?list<AnthropicBeta> betas): [VersionDeleteResponse](api/beta/skills/versions.md)
+  - `\Datetime updatedAt`
 
-DELETE/v1/skills/{skill\_id}/versions/{version}
+    ISO 8601 timestamp of when the skill was last updated.
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaSkill = $client->beta->skills->create(
+  files: [
+    FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
+  ],
+  displayName: 'display_name',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaSkill);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "display_name": "display_name",
+  "latest_version_id": "latest_version_id",
+  "source": {
+    "type": "custom"
+  },
+  "type": "skill",
+  "updated_at": "2024-10-30T23:58:27.427722Z"
+}
+```
+
+## List Skills
+
+`$client->beta->skills->list(?int limit, ?string page, ?string source, ?list<AnthropicBeta> betas): PageCursor<BetaSkill>`
+
+**GET** `/v1/skills`
+
+List Skills
+
+### Parameters
+
+- `limit?:optional int`
+
+  Number of results to return per page.
+
+  Ranges from `1` to `1000`. Defaults to `20`.
+
+  default: 20
+
+- `page?:optional string`
+
+  Pagination token for fetching a specific page of results.
+
+  Pass the value from a previous response's `next_page` field to get the next page of results.
+
+- `source?:optional string`
+
+  Filter skills by source.
+
+  If provided, only skills from the specified source will be returned:
+
+  * `"custom"`: only return user-created skills
+  * `"anthropic"`: only return Anthropic-created skills
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaSkill`
+
+  - `string id`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `\Datetime createdAt`
+
+    ISO 8601 timestamp of when the skill was created.
+
+  - `string displayName`
+
+    Human-readable, single-line label for the Skill. Maximum 255 characters.
+    Always set: derived from the SKILL.md frontmatter `name` when omitted at
+    creation. Not unique.
+
+  - `string latestVersionID`
+
+    ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
+
+  - `BetaSkillSource source`
+
+    Where the Skill comes from.
+
+    Possible values:
+
+    * `"custom"`: authored by the platform user; private to their workspace
+    * `"anthropic"`: published by Anthropic; shared and read-only
+    * `"anthropic_example"`: Anthropic-published sample Skill
+    * `"plugin"`: resolved from an installed plugin
+
+  - `"skill" type`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
+
+  - `\Datetime updatedAt`
+
+    ISO 8601 timestamp of when the skill was last updated.
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$page = $client->beta->skills->list(
+  limit: 1,
+  page: 'page',
+  source: 'source',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($page);
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "skill_01JAbcdefghijklmnopqrstuvw",
+      "created_at": "2024-10-30T23:58:27.427722Z",
+      "display_name": "display_name",
+      "latest_version_id": "latest_version_id",
+      "source": {
+        "type": "custom"
+      },
+      "type": "skill",
+      "updated_at": "2024-10-30T23:58:27.427722Z"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Get Skill
+
+`$client->beta->skills->retrieve(string skillID, ?list<AnthropicBeta> betas): BetaSkill`
+
+**GET** `/v1/skills/{skill_id}`
+
+Get Skill
+
+### Parameters
+
+- `skillID: string`
+
+  Unique identifier for the skill.
+
+  The format and length of IDs may change over time.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaSkill`
+
+  - `string id`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `\Datetime createdAt`
+
+    ISO 8601 timestamp of when the skill was created.
+
+  - `string displayName`
+
+    Human-readable, single-line label for the Skill. Maximum 255 characters.
+    Always set: derived from the SKILL.md frontmatter `name` when omitted at
+    creation. Not unique.
+
+  - `string latestVersionID`
+
+    ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
+
+  - `BetaSkillSource source`
+
+    Where the Skill comes from.
+
+    Possible values:
+
+    * `"custom"`: authored by the platform user; private to their workspace
+    * `"anthropic"`: published by Anthropic; shared and read-only
+    * `"anthropic_example"`: Anthropic-published sample Skill
+    * `"plugin"`: resolved from an installed plugin
+
+  - `"skill" type`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
+
+  - `\Datetime updatedAt`
+
+    ISO 8601 timestamp of when the skill was last updated.
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaSkill = $client->beta->skills->retrieve(
+  'skill_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+);
+
+var_dump($betaSkill);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "display_name": "display_name",
+  "latest_version_id": "latest_version_id",
+  "source": {
+    "type": "custom"
+  },
+  "type": "skill",
+  "updated_at": "2024-10-30T23:58:27.427722Z"
+}
+```
+
+## Delete Skill
+
+`$client->beta->skills->delete(string skillID, ?list<AnthropicBeta> betas): BetaDeletedSkill`
+
+**DELETE** `/v1/skills/{skill_id}`
+
+Delete Skill
+
+### Parameters
+
+- `skillID: string`
+
+  Unique identifier for the skill.
+
+  The format and length of IDs may change over time.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaDeletedSkill`
+
+  - `string id`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `"skill_deleted" type`
+
+    Deleted object type.
+
+    For Skills, this is always `"skill_deleted"`.
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaDeletedSkill = $client->beta->skills->delete(
+  'skill_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+);
+
+var_dump($betaDeletedSkill);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "skill_deleted"
+}
+```
+
+## Domain types
+
+### Beta Deleted Skill
+
+- `BetaDeletedSkill`
+
+  - `string id`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `"skill_deleted" type`
+
+    Deleted object type.
+
+    For Skills, this is always `"skill_deleted"`.
+
+### Beta Skill
+
+- `BetaSkill`
+
+  - `string id`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `\Datetime createdAt`
+
+    ISO 8601 timestamp of when the skill was created.
+
+  - `string displayName`
+
+    Human-readable, single-line label for the Skill. Maximum 255 characters.
+    Always set: derived from the SKILL.md frontmatter `name` when omitted at
+    creation. Not unique.
+
+  - `string latestVersionID`
+
+    ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
+
+  - `BetaSkillSource source`
+
+    Where the Skill comes from.
+
+    Possible values:
+
+    * `"custom"`: authored by the platform user; private to their workspace
+    * `"anthropic"`: published by Anthropic; shared and read-only
+    * `"anthropic_example"`: Anthropic-published sample Skill
+    * `"plugin"`: resolved from an installed plugin
+
+  - `"skill" type`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
+
+  - `\Datetime updatedAt`
+
+    ISO 8601 timestamp of when the skill was last updated.
+
+### Beta Skill Source
+
+- `BetaSkillSource`
+
+  - `Type type`
+
+    Where the Skill comes from.
+
+    Possible values:
+
+    * `"custom"`: authored by the platform user; private to their workspace
+    * `"anthropic"`: published by Anthropic; shared and read-only
+    * `"anthropic_example"`: Anthropic-published sample Skill
+    * `"plugin"`: resolved from an installed plugin
+
+## Skills › Versions
+
+### Create Skill Version
+
+`$client->beta->skills->versions->create(string skillID, list<string> files, ?list<AnthropicBeta> betas): SkillVersion`
+
+**POST** `/v1/skills/{skill_id}/versions`
+
+Create Skill Version
+
+#### Parameters
+
+- `skillID: string`
+
+  Unique identifier for the skill.
+
+  The format and length of IDs may change over time.
+
+- `files: list<string>`
+
+  Files to upload for the skill.
+
+  All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `SkillVersion`
+
+  - `string id`
+
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
+
+  - `\Datetime createdAt`
+
+    ISO 8601 timestamp of when the skill was created.
+
+  - `string description`
+
+    Description of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `string name`
+
+    The Skill's immutable kebab-case slug, set at creation from the first
+    upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
+    later upload must resolve to the same value. Also the top-level directory
+    of the Skill's mounted files and the base name of a downloaded archive.
+
+  - `string skillID`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `"skill_version" type`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaSkillVersion = $client->beta->skills->versions->create(
+  'skill_id',
+  files: [
+    FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
+  ],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaSkillVersion);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "description": "description",
+  "name": "name",
+  "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "skill_version"
+}
+```
+
+### List Skill Versions
+
+`$client->beta->skills->versions->list(string skillID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<SkillVersion>`
+
+**GET** `/v1/skills/{skill_id}/versions`
+
+List Skill Versions
+
+#### Parameters
+
+- `skillID: string`
+
+  Unique identifier for the skill.
+
+  The format and length of IDs may change over time.
+
+- `limit?:optional int`
+
+  Number of results to return per page.
+
+  Ranges from `1` to `1000`. Defaults to `20`.
+
+  default: 20
+
+- `page?:optional string`
+
+  Optionally set to the `next_page` token from the previous response.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `SkillVersion`
+
+  - `string id`
+
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
+
+  - `\Datetime createdAt`
+
+    ISO 8601 timestamp of when the skill was created.
+
+  - `string description`
+
+    Description of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `string name`
+
+    The Skill's immutable kebab-case slug, set at creation from the first
+    upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
+    later upload must resolve to the same value. Also the top-level directory
+    of the Skill's mounted files and the base name of a downloaded archive.
+
+  - `string skillID`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `"skill_version" type`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$page = $client->beta->skills->versions->list(
+  'skill_id',
+  limit: 1,
+  page: 'page',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($page);
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2024-10-30T23:58:27.427722Z",
+      "description": "description",
+      "name": "name",
+      "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
+      "type": "skill_version"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+### Download Skill Version Content
+
+`$client->beta->skills->versions->download(string version, string skillID, ?list<AnthropicBeta> betas): download`
+
+**GET** `/v1/skills/{skill_id}/versions/{version}/content`
+
+Download a skill version's content as a zip archive.
+
+#### Parameters
+
+- `skillID: string`
+
+  Unique identifier for the skill.
+
+  The format and length of IDs may change over time.
+
+- `version: string`
+
+  Identifies the skill version by its version ID.
+
+  Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `mixed`
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$response = $client->beta->skills->versions->download(
+  'version',
+  skillID: 'skill_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($response);
+```
+
+### Get Skill Version
+
+`$client->beta->skills->versions->retrieve(string version, string skillID, ?list<AnthropicBeta> betas): SkillVersion`
+
+**GET** `/v1/skills/{skill_id}/versions/{version}`
+
+Get Skill Version
+
+#### Parameters
+
+- `skillID: string`
+
+  Unique identifier for the skill.
+
+  The format and length of IDs may change over time.
+
+- `version: string`
+
+  Identifies the skill version: a version ID, or the literal `latest` for the skill's most recent version.
+
+  Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `SkillVersion`
+
+  - `string id`
+
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
+
+  - `\Datetime createdAt`
+
+    ISO 8601 timestamp of when the skill was created.
+
+  - `string description`
+
+    Description of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `string name`
+
+    The Skill's immutable kebab-case slug, set at creation from the first
+    upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
+    later upload must resolve to the same value. Also the top-level directory
+    of the Skill's mounted files and the base name of a downloaded archive.
+
+  - `string skillID`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `"skill_version" type`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaSkillVersion = $client->beta->skills->versions->retrieve(
+  'version',
+  skillID: 'skill_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaSkillVersion);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "description": "description",
+  "name": "name",
+  "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "skill_version"
+}
+```
+
+### Delete Skill Version
+
+`$client->beta->skills->versions->delete(string version, string skillID, ?list<AnthropicBeta> betas): DeletedSkillVersion`
+
+**DELETE** `/v1/skills/{skill_id}/versions/{version}`
+
+Delete Skill Version
+
+#### Parameters
+
+- `skillID: string`
+
+  Unique identifier for the skill.
+
+  The format and length of IDs may change over time.
+
+- `version: string`
+
+  Identifies the skill version by its version ID.
+
+  Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `DeletedSkillVersion`
+
+  - `string id`
+
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
+
+  - `"skill_version_deleted" type`
+
+    Deleted object type.
+
+    For Skill Versions, this is always `"skill_version_deleted"`.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaDeletedSkillVersion = $client->beta->skills->versions->delete(
+  'version',
+  skillID: 'skill_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaDeletedSkillVersion);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "type": "skill_version_deleted"
+}
+```
 
 ---
 

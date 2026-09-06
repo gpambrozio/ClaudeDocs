@@ -1,16 +1,8 @@
 # Create a Message
 
-Copy page
+`$ ant beta:messages create`
 
-
-
-CLI
-
-# Create a Message
-
-$ ant beta:messages create
-
-POST/v1/messages
+**POST** `/v1/messages`
 
 Send a structured list of input messages with text and/or image content, and the model will generate the next message in the conversation.
 
@@ -18,6596 +10,3067 @@ The Messages API can be used for either single queries or stateless multi-turn c
 
 Learn more about the Messages API in our [user guide](get-started.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `--max-tokens: number`
 
---max-tokens: number
+  Body param: The maximum number of tokens to generate before stopping.
 
-Body param: The maximum number of tokens to generate before stopping.
+  Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-Note that our models may stop *before* reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
+  Set to `0` to populate the [prompt cache](build-with-claude/prompt-caching.md) without generating a response.
 
-Set to `0` to populate the [prompt cache](build-with-claude/prompt-caching.md) without generating a response.
+  Different models have different maximum values for this parameter.  See [models](about-claude/models/overview.md) for details.
 
-Different models have different maximum values for this parameter. See [models](about-claude/models/overview.md) for details.
+  minimum: 0
 
-
+- `--message: array of BetaMessageParam`
 
---message: array of [BetaMessageParam](api/beta/messages.md) { content, role } 
+  Body param: Input messages.
 
-Body param: Input messages.
+  Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
 
-Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
+  Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
 
-Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
+  If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
 
-If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
+  Example with a single `user` message:
 
-Example with a single `user` message:
+  ```json
+  [{"role": "user", "content": "Hello, Claude"}]
+  ```
 
-```shiki
-[{"role": "user", "content": "Hello, Claude"}]
-```
+  Example with multiple conversational turns:
 
-
+  ```json
+  [
+    {"role": "user", "content": "Hello there."},
+    {"role": "assistant", "content": "Hi, I'm Claude. How can I help you?"},
+    {"role": "user", "content": "Can you explain LLMs in plain English?"},
+  ]
+  ```
 
-Example with multiple conversational turns:
+  Example with a partially-filled response from Claude:
 
-```shiki
-[
-  {"role": "user", "content": "Hello there."},
-  {"role": "assistant", "content": "Hi, I'm Claude. How can I help you?"},
-  {"role": "user", "content": "Can you explain LLMs in plain English?"},
-]
-```
+  ```json
+  [
+    {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+    {"role": "assistant", "content": "The best answer is ("},
+  ]
+  ```
 
-
+  Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
 
-Example with a partially-filled response from Claude:
+  ```json
+  {"role": "user", "content": "Hello, Claude"}
+  ```
 
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("},
-]
-```
+  ```json
+  {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
+  ```
 
-
+  See [input examples](build-with-claude/working-with-messages.md).
 
-Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
+  Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
-```shiki
-{"role": "user", "content": "Hello, Claude"}
-```
+  There is a limit of 100,000 messages in a single request.
 
-
+- `--model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
 
-```shiki
-{"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
-```
+  Body param: The model that will complete your prompt.
 
-
+  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-See [input examples](build-with-claude/working-with-messages.md).
+- `--cache-control: optional object`
 
-Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+  Body param: Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
-There is a limit of 100,000 messages in a single request.
+- `--container: optional BetaContainerParams or string`
 
-
+  Body param: Container identifier for reuse across requests.
 
---model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
+- `--context-management: optional object`
 
-Body param: The model that will complete your prompt.
+  Body param: Context management configuration.
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+  This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
---cache-control: optional object { type, ttl } 
+- `--diagnostics: optional object`
 
-Body param: Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
+  Body param: Request-level diagnostics. Currently carries the previous response
+  id for prompt-cache divergence reporting.
 
---container: optional [BetaContainerParams](api/beta/messages.md) { id, skills }  or string
+- `--fallback-credit-token: optional string or BetaFallbackCreditTokenParam`
 
-Body param: Container identifier for reuse across requests.
+  Body param: The `fallback_credit_token` from a prior refusal's `stop_details`.
 
-
+  When a preceding request was refused and returned a `fallback_credit_token`,
+  pass that code here on the retry to have the retry's cache-creation tokens
+  for the prefix that was warm on the refused model billed at the cache-read
+  rate. Must be redeemed by the same organization and workspace, with the same
+  request body (optionally extended by one appended `assistant` message whose
+  content is the partial text — with any trailing whitespace stripped from
+  the final text block — and paired server-tool blocks streamed before the
+  refusal; the appended-assistant form is not available for requests with
+  `output_format` set or forced `tool_choice`), on an eligible fallback
+  model, on the same platform,
+  and within 5 minutes of the refusal; a mismatch is a 400. A token minted
+  mid-server-tool-loop whose partial content was continuable may only be
+  redeemed with the appended-assistant form — if an exact-body retry is
+  rejected with a 400 saying the token must be redeemed by continuing the
+  partial response, retry with the appended-assistant form instead.
 
---context-management: optional object { edits } 
+  When the appended-assistant form is used on a model that otherwise disallows
+  assistant-turn prefill, this token also authorizes that one prefill.
 
-Body param: Context management configuration.
+- `--fallbacks: optional array of BetaFallbackParam or "default"`
 
-This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
+  Body param: Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
 
---diagnostics: optional object { previous\_message\_id } 
+- `--inference-geo: optional string`
 
-Body param: Request-level diagnostics. Currently carries the previous response
-id for prompt-cache divergence reporting.
+  Body param: Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
-
+- `--mcp-server: optional array of BetaRequestMCPServerURLDefinition`
 
---fallback-credit-token: optional string
+  Body param: MCP servers to be utilized in this request
 
-Body param: The `fallback_credit_token` from a prior refusal's `stop_details`.
+  maxItems: 20
 
-When a preceding request was refused and returned a `fallback_credit_token`,
-pass that code here on the retry to have the retry's cache-creation tokens
-for the prefix that was warm on the refused model billed at the cache-read
-rate. Must be redeemed by the same organization and workspace, with the same
-request body (optionally extended by one appended `assistant` message whose
-content is the partial text — with any trailing whitespace stripped from
-the final text block — and paired server-tool blocks streamed before the
-refusal; the appended-assistant form is not available for requests with
-`output_format` set or forced `tool_choice`), on an eligible fallback
-model, on the same platform,
-and within 5 minutes of the refusal; a mismatch is a 400. A token minted
-mid-server-tool-loop whose partial content was continuable may only be
-redeemed with the appended-assistant form — if an exact-body retry is
-rejected with a 400 saying the token must be redeemed by continuing the
-partial response, retry with the appended-assistant form instead.
+- `--metadata: optional object`
 
-When the appended-assistant form is used on a model that otherwise disallows
-assistant-turn prefill, this token also authorizes that one prefill.
+  Body param: An object describing metadata about the request.
 
---fallback: optional array of [BetaFallbackParam](api/beta/messages.md) { model, max\_tokens, output\_config, 2 more } 
+- `--output-config: optional object`
 
-Body param: Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
+  Body param: Configuration options for the model's output, such as the output format.
 
---inference-geo: optional string
+- `--output-format: optional object`
 
-Body param: Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+  Body param: Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
 
---mcp-server: optional array of [BetaRequestMCPServerURLDefinition](api/beta/messages.md) { name, type, url, 2 more } 
+  A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
-Body param: MCP servers to be utilized in this request
+- `--service-tier: optional "auto" or "standard_only"`
 
---metadata: optional object { user\_id } 
+  Body param: Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-Body param: An object describing metadata about the request.
+  Anthropic offers different levels of service for your API requests. See [service-tiers](api/service-tiers.md) for details.
 
---output-config: optional object { effort, format, task\_budget } 
+- `--speed: optional "standard" or "fast"`
 
-Body param: Configuration options for the model's output, such as the output format.
+  Body param: Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-
+- `--stop-sequence: optional array of string`
 
---output-format: optional object { schema, type } 
+  Body param: Custom text sequences that will cause the model to stop generating.
 
-Body param: Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+  Our models will normally stop when they have naturally completed their turn, which will result in a response `stop_reason` of `"end_turn"`.
 
-A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
+  If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
 
-
+- `--system: optional string or array of BetaTextBlockParam`
 
---service-tier: optional "auto" or "standard\_only"
+  Body param: System prompt.
 
-Body param: Determines whether to use priority capacity (if available) or standard capacity for this request.
+  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
-Anthropic offers different levels of service for your API requests. See [service-tiers](api/service-tiers.md) for details.
+- `--thinking: optional BetaThinkingConfigEnabled or BetaThinkingConfigDisabled or BetaThinkingConfigAdaptive`
 
---speed: optional "standard" or "fast"
+  Body param: Configuration for enabling Claude's extended thinking.
 
-Body param: The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+  When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-
+  See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
---stop-sequence: optional array of string
+- `--tool-choice: optional BetaToolChoiceAuto or BetaToolChoiceAny or BetaToolChoiceTool or BetaToolChoiceNone`
 
-Body param: Custom text sequences that will cause the model to stop generating.
+  Body param: How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-Our models will normally stop when they have naturally completed their turn, which will result in a response `stop_reason` of `"end_turn"`.
+- `--tool: optional array of BetaToolUnion`
 
-If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
+  Body param: Definitions of tools that the model may use.
 
-
+  If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
---system: optional string or array of [BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations } 
+  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
 
-Body param: System prompt.
+  Each tool definition includes:
 
-A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
+  * `name`: Name of the tool.
+  * `description`: Optional, but strongly-recommended description of the tool.
+  * `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
 
-
+  For example, if you defined `tools` as:
 
---thinking: optional [BetaThinkingConfigEnabled](api/beta/messages.md) { budget\_tokens, type, display }  or [BetaThinkingConfigDisabled](api/beta/messages.md) { type }  or [BetaThinkingConfigAdaptive](api/beta/messages.md) { type, display } 
-
-Body param: Configuration for enabling Claude's extended thinking.
-
-When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
-
-See [extended thinking](build-with-claude/extended-thinking.md) for details.
-
---tool-choice: optional [BetaToolChoiceAuto](api/beta/messages.md) { type, disable\_parallel\_tool\_use }  or [BetaToolChoiceAny](api/beta/messages.md) { type, disable\_parallel\_tool\_use }  or [BetaToolChoiceTool](api/beta/messages.md) { name, type, disable\_parallel\_tool\_use }  or [BetaToolChoiceNone](api/beta/messages.md) { type } 
-
-Body param: How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
-
-
-
---tool: optional array of [BetaToolUnion](api/beta/messages.md)
-
-Body param: Definitions of tools that the model may use.
-
-If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
-
-There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
-
-Each tool definition includes:
-
-- `name`: Name of the tool.
-- `description`: Optional, but strongly-recommended description of the tool.
-- `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
-
-For example, if you defined `tools` as:
-
-```shiki
-[
-  {
-    "name": "get_stock_price",
-    "description": "Get the current stock price for a given ticker symbol.",
-    "input_schema": {
-      "type": "object",
-      "properties": {
-        "ticker": {
-          "type": "string",
-          "description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
-        }
-      },
-      "required": ["ticker"]
+  ```json
+  [
+    {
+      "name": "get_stock_price",
+      "description": "Get the current stock price for a given ticker symbol.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
+          }
+        },
+        "required": ["ticker"]
+      }
     }
-  }
-]
-```
+  ]
+  ```
 
-
+  And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
 
-And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
+  ```json
+  [
+    {
+      "type": "tool_use",
+      "id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+      "name": "get_stock_price",
+      "input": { "ticker": "^GSPC" }
+    }
+  ]
+  ```
 
-```shiki
-[
-  {
-    "type": "tool_use",
-    "id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
-    "name": "get_stock_price",
-    "input": { "ticker": "^GSPC" }
-  }
-]
-```
+  You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
 
-
+  ```json
+  [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+      "content": "259.75 USD"
+    }
+  ]
+  ```
 
-You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
+  Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-```shiki
-[
-  {
-    "type": "tool_result",
-    "tool_use_id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
-    "content": "259.75 USD"
-  }
-]
-```
+  See our [guide](agents-and-tools/tool-use/overview.md) for more details.
 
-
+- `--beta: optional array of AnthropicBeta`
 
-Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-See our [guide](agents-and-tools/tool-use/overview.md) for more details.
+- `--user-profile-id: optional string`
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+  Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
-Header param: Optional header to specify the beta version(s) you want to use.
+- `--temperature: optional number`
 
---user-profile-id: optional string
+  **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+  Body param: Amount of randomness injected into the response.
 
-
+  Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
 
---temperature: optional number⁠Deprecated
+  Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
-Body param: Amount of randomness injected into the response.
+  maximum: 1, minimum: 0
 
-Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+- `--top-k: optional number`
 
-Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
+  **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not accept top_k; any value will be rejected with a 400 error.
 
-Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
+  Body param: Only sample from the top K options for each subsequent token.
 
-
+  Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
---top-k: optional number⁠Deprecated
+  Recommended for advanced use cases only.
 
-Body param: Only sample from the top K options for each subsequent token.
+  minimum: 0
 
-Deprecated. Models released after Claude Opus 4.6 do not accept top\_k; any value will be rejected with a 400 error.
+- `--top-p: optional number`
 
-Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
+  **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting top_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-Recommended for advanced use cases only.
+  Body param: Use nucleus sampling.
 
-
+  In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
---top-p: optional number⁠Deprecated
+  Recommended for advanced use cases only.
 
-Body param: Use nucleus sampling.
+  maximum: 1, minimum: 0
 
-Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+## Returns
 
-In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
+- `beta_message: object`
 
-Recommended for advanced use cases only.
+  - `id: string`
 
-##### ReturnsExpand Collapse
+    Unique object identifier.
 
-
+    The format and length of IDs may change over time.
 
-beta\_message: object { id, container, content, 9 more } 
+  - `container: object`
 
-
+    Information about the container used in the request (for the code execution tool)
 
-id: string
+    - `id: string`
 
-Unique object identifier.
+      Identifier for the container used in this request
 
-The format and length of IDs may change over time.
+    - `expires_at: string`
 
-
+      The time at which the container will expire.
 
-container: object { id, expires\_at, skills } 
+      format: date-time
 
-Information about the container used in the request (for the code execution tool)
+    - `skills: array of BetaContainerSkill`
 
-id: string
+      Skills loaded in the container
 
-Identifier for the container used in this request
+      - `skill_id: string`
 
-expires\_at: string
+        Skill ID
 
-The time at which the container will expire.
+        maxLength: 64, minLength: 1
 
-
+      - `type: "anthropic" or "custom"`
 
-skills: array of [BetaSkill](api/beta/messages.md) { skill\_id, type, version } 
+        Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Skills loaded in the container
+        - `"anthropic"`
 
-skill\_id: string
+        - `"custom"`
 
-Skill ID
+      - `version: string`
 
-
+        The resolved version: a skill version ID for custom skills.
 
-type: "anthropic" or "custom"
+        maxLength: 64, minLength: 1
 
-Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+  - `content: array of BetaContentBlock`
 
-"anthropic"
+    Content generated by the model.
 
-"custom"
+    This is an array of content blocks, each of which has a `type` that determines its shape.
 
-version: string
+    Example:
 
-Skill version or 'latest' for most recent version
+    ```json
+    [{"type": "text", "text": "Hi, I'm Claude."}]
+    ```
 
-
+    If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
 
-content: array of [BetaContentBlock](api/beta/messages.md)
+    For example, if the input `messages` were:
 
-Content generated by the model.
+    ```json
+    [
+      {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+      {"role": "assistant", "content": "The best answer is ("}
+    ]
+    ```
 
-This is an array of content blocks, each of which has a `type` that determines its shape.
+    Then the response `content` might be:
 
-Example:
+    ```json
+    [{"type": "text", "text": "B)"}]
+    ```
 
-```shiki
-[{"type": "text", "text": "Hi, I'm Claude."}]
-```
+    - `beta_text_block: object`
 
-
+      - `citations: array of BetaTextCitation`
 
-If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
+        Citations supporting the text block.
 
-For example, if the input `messages` were:
+        The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("}
-]
-```
+        - `beta_citation_char_location: object`
 
-
+          - `cited_text: string`
 
-Then the response `content` might be:
+          - `document_index: number`
 
-```shiki
-[{"type": "text", "text": "B)"}]
-```
+            minimum: 0
 
-
+          - `document_title: string`
 
-
+          - `end_char_index: number`
 
-beta\_text\_block: object { citations, text, type } 
+          - `file_id: string`
 
-
+          - `start_char_index: number`
 
-citations: array of [BetaTextCitation](api/beta/messages.md)
+            minimum: 0
 
-Citations supporting the text block.
+          - `type: "char_location"`
 
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+        - `beta_citation_page_location: object`
 
-
+          - `cited_text: string`
 
-beta\_citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+          - `document_index: number`
 
-cited\_text: string
+            minimum: 0
 
-document\_index: number
+          - `document_title: string`
 
-document\_title: string
+          - `end_page_number: number`
 
-end\_char\_index: number
+          - `file_id: string`
 
-file\_id: string
+          - `start_page_number: number`
 
-start\_char\_index: number
+            minimum: 1
 
-type: "char\_location"
+          - `type: "page_location"`
 
-
+        - `beta_citation_content_block_location: object`
 
-beta\_citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+          - `cited_text: string`
 
-cited\_text: string
+            The full text of the cited block range, concatenated.
 
-document\_index: number
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-document\_title: string
+          - `document_index: number`
 
-end\_page\_number: number
+            minimum: 0
 
-file\_id: string
+          - `document_title: string`
 
-start\_page\_number: number
+          - `end_block_index: number`
 
-type: "page\_location"
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-beta\_citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+          - `file_id: string`
 
-
+          - `start_block_index: number`
 
-cited\_text: string
+            0-based index of the first cited block in the source's `content` array.
 
-The full text of the cited block range, concatenated.
+            minimum: 0
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+          - `type: "content_block_location"`
 
-document\_index: number
+        - `beta_citations_web_search_result_location: object`
 
-document\_title: string
+          - `cited_text: string`
 
-
+          - `encrypted_index: string`
 
-end\_block\_index: number
+          - `title: string`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+            maxLength: 512
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+          - `type: "web_search_result_location"`
 
-file\_id: string
+          - `url: string`
 
-start\_block\_index: number
+        - `beta_citation_search_result_location: object`
 
-0-based index of the first cited block in the source's `content` array.
+          - `cited_text: string`
 
-type: "content\_block\_location"
+            The full text of the cited block range, concatenated.
 
-
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-beta\_citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
+          - `end_block_index: number`
 
-cited\_text: string
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-encrypted\_index: string
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-title: string
+          - `search_result_index: number`
 
-type: "web\_search\_result\_location"
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
-url: string
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
-
+            minimum: 0
 
-beta\_citation\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+          - `source: string`
 
-
+          - `start_block_index: number`
 
-cited\_text: string
+            0-based index of the first cited block in the source's `content` array.
 
-The full text of the cited block range, concatenated.
+            minimum: 0
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+          - `title: string`
 
-
+          - `type: "search_result_location"`
 
-end\_block\_index: number
+      - `text: string`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+        maxLength: 5000000, minLength: 0
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+      - `type: "text"`
 
-
+    - `beta_thinking_block: object`
 
-search\_result\_index: number
+      - `signature: string`
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+        A value used to verify that this thinking block was generated by Claude when it is passed back to the API.
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+        This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-source: string
+        See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-start\_block\_index: number
+      - `thinking: string`
 
-0-based index of the first cited block in the source's `content` array.
+        The text of Claude's thinking process for this block.
 
-title: string
+      - `type: "thinking"`
 
-type: "search\_result\_location"
+    - `beta_redacted_thinking_block: object`
 
-text: string
+      - `data: string`
 
-type: "text"
+        The contents of this redacted thinking block, returned when portions of the model's thinking were safety-redacted. This field is opaque and encrypted, with no readable content.
 
-
+        Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-beta\_thinking\_block: object { signature, thinking, type } 
+        See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-signature: string
+      - `type: "redacted_thinking"`
 
-thinking: string
+    - `beta_tool_use_block: object`
 
-type: "thinking"
+      - `id: string`
 
-
+        pattern: ^[a-zA-Z0-9_-]+$
 
-beta\_redacted\_thinking\_block: object { data, type } 
+      - `input: map[unknown]`
 
-data: string
+      - `name: string`
 
-type: "redacted\_thinking"
+        minLength: 1
 
-
+      - `type: "tool_use"`
 
-beta\_tool\_use\_block: object { id, input, name, 2 more } 
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-id: string
+        Tool invocation directly from the model.
 
-input: map[unknown]
+        - `beta_direct_caller: object`
 
-name: string
+          Tool invocation directly from the model.
 
-type: "tool\_use"
+          - `type: "direct"`
 
-
+        - `beta_server_tool_caller: object`
 
-caller: optional [BetaDirectCaller](api/beta/messages.md) { type }  or [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  or [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
+          Tool invocation generated by a server-side tool.
 
-Tool invocation directly from the model.
+          - `tool_id: string`
 
-
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-beta\_direct\_caller: object { type } 
+          - `type: "code_execution_20250825"`
 
-Tool invocation directly from the model.
+        - `beta_server_tool_caller_20260120: object`
 
-type: "direct"
+          - `tool_id: string`
 
-
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-beta\_server\_tool\_caller: object { tool\_id, type } 
+          - `type: "code_execution_20260120"`
 
-Tool invocation generated by a server-side tool.
+      - `toolset_name: optional string`
 
-tool\_id: string
+        For a toolset member tool_use, the toolset family.
 
-type: "code\_execution\_20250825"
+        maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-
+    - `beta_server_tool_use_block: object`
 
-beta\_server\_tool\_caller\_20260120: object { tool\_id, type } 
+      - `id: string`
 
-tool\_id: string
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-type: "code\_execution\_20260120"
+      - `input: map[unknown]`
 
-
+      - `name: "advisor" or "web_search" or "web_fetch" or 5 more`
 
-beta\_server\_tool\_use\_block: object { id, input, name, 2 more } 
+        - `"advisor"`
 
-id: string
+        - `"web_search"`
 
-input: map[unknown]
+        - `"web_fetch"`
 
-
+        - `"code_execution"`
 
-name: "advisor" or "web\_search" or "web\_fetch" or 5 more
+        - `"bash_code_execution"`
 
-"advisor"
+        - `"text_editor_code_execution"`
 
-"web\_search"
+        - `"tool_search_tool_regex"`
 
-"web\_fetch"
+        - `"tool_search_tool_bm25"`
 
-"code\_execution"
+      - `type: "server_tool_use"`
 
-"bash\_code\_execution"
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-"text\_editor\_code\_execution"
+        Tool invocation directly from the model.
 
-"tool\_search\_tool\_regex"
+        - `beta_direct_caller: object`
 
-"tool\_search\_tool\_bm25"
+          Tool invocation directly from the model.
 
-type: "server\_tool\_use"
+        - `beta_server_tool_caller: object`
 
-
+          Tool invocation generated by a server-side tool.
 
-caller: optional [BetaDirectCaller](api/beta/messages.md) { type }  or [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  or [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
+        - `beta_server_tool_caller_20260120: object`
 
-Tool invocation directly from the model.
+    - `beta_web_search_tool_result_block: object`
 
-
+      - `content: BetaWebSearchToolResultError or array of BetaWebSearchResultBlock`
 
-beta\_direct\_caller: object { type } 
+        - `beta_web_search_tool_result_error: object`
 
-Tool invocation directly from the model.
+          - `error_code: "invalid_tool_input" or "unavailable" or "max_uses_exceeded" or 3 more`
 
-type: "direct"
+            - `"invalid_tool_input"`
 
-
+            - `"unavailable"`
 
-beta\_server\_tool\_caller: object { tool\_id, type } 
+            - `"max_uses_exceeded"`
 
-Tool invocation generated by a server-side tool.
+            - `"too_many_requests"`
 
-tool\_id: string
+            - `"query_too_long"`
 
-type: "code\_execution\_20250825"
+            - `"request_too_large"`
 
-
+          - `type: "web_search_tool_result_error"`
 
-beta\_server\_tool\_caller\_20260120: object { tool\_id, type } 
+        - `union_member_1: array of BetaWebSearchResultBlock`
 
-tool\_id: string
+          - `encrypted_content: string`
 
-type: "code\_execution\_20260120"
+          - `page_age: string`
 
-
+          - `title: string`
 
-beta\_web\_search\_tool\_result\_block: object { content, tool\_use\_id, type, caller } 
+          - `type: "web_search_result"`
 
-
+          - `url: string`
 
-content: [BetaWebSearchToolResultError](api/beta/messages.md) { error\_code, type }  or array of [BetaWebSearchResultBlock](api/beta/messages.md) { encrypted\_content, page\_age, title, 2 more } 
+      - `tool_use_id: string`
 
-
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-beta\_web\_search\_tool\_result\_error: object { error\_code, type } 
+      - `type: "web_search_tool_result"`
 
-
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+        Tool invocation directly from the model.
 
-"invalid\_tool\_input"
+        - `beta_direct_caller: object`
 
-"unavailable"
+          Tool invocation directly from the model.
 
-"max\_uses\_exceeded"
+        - `beta_server_tool_caller: object`
 
-"too\_many\_requests"
+          Tool invocation generated by a server-side tool.
 
-"query\_too\_long"
+        - `beta_server_tool_caller_20260120: object`
 
-"request\_too\_large"
+    - `beta_web_fetch_tool_result_block: object`
 
-type: "web\_search\_tool\_result\_error"
+      - `content: BetaWebFetchToolResultErrorBlock or BetaWebFetchBlock`
 
-
+        - `beta_web_fetch_tool_result_error_block: object`
 
-union\_member\_1: array of [BetaWebSearchResultBlock](api/beta/messages.md) { encrypted\_content, page\_age, title, 2 more } 
+          - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
-encrypted\_content: string
+            - `"invalid_tool_input"`
 
-page\_age: string
+            - `"url_too_long"`
 
-title: string
+            - `"url_not_allowed"`
 
-type: "web\_search\_result"
+            - `"url_not_in_prior_context"`
 
-url: string
+            - `"url_not_accessible"`
 
-tool\_use\_id: string
+            - `"unsupported_content_type"`
 
-type: "web\_search\_tool\_result"
+            - `"too_many_requests"`
 
-
+            - `"max_uses_exceeded"`
 
-caller: optional [BetaDirectCaller](api/beta/messages.md) { type }  or [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  or [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
+            - `"unavailable"`
 
-Tool invocation directly from the model.
+          - `type: "web_fetch_tool_result_error"`
 
-
+        - `beta_web_fetch_block: object`
 
-beta\_direct\_caller: object { type } 
+          - `content: object`
 
-Tool invocation directly from the model.
+            - `citations: object`
 
-type: "direct"
+              Citation configuration for the document
 
-
+              - `enabled: boolean`
 
-beta\_server\_tool\_caller: object { tool\_id, type } 
+            - `source: BetaBase64PDFSource or BetaPlainTextSource`
 
-Tool invocation generated by a server-side tool.
+              - `beta_base64_pdf_source: object`
 
-tool\_id: string
+                - `data: string`
 
-type: "code\_execution\_20250825"
+                  format: byte
 
-
+                - `media_type: "application/pdf"`
 
-beta\_server\_tool\_caller\_20260120: object { tool\_id, type } 
+                - `type: "base64"`
 
-tool\_id: string
+              - `beta_plain_text_source: object`
 
-type: "code\_execution\_20260120"
+                - `data: string`
 
-
+                - `media_type: "text/plain"`
 
-beta\_web\_fetch\_tool\_result\_block: object { content, tool\_use\_id, type, caller } 
+                - `type: "text"`
 
-
+            - `title: string`
 
-content: [BetaWebFetchToolResultErrorBlock](api/beta/messages.md) { error\_code, type }  or [BetaWebFetchBlock](api/beta/messages.md) { content, retrieved\_at, type, url } 
+              The title of the document
 
-
+            - `type: "document"`
 
-beta\_web\_fetch\_tool\_result\_error\_block: object { error\_code, type } 
+          - `retrieved_at: string`
 
-
+            ISO 8601 timestamp when the content was retrieved
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
+          - `type: "web_fetch_result"`
 
-"invalid\_tool\_input"
+          - `url: string`
 
-"url\_too\_long"
+            Fetched content URL
 
-"url\_not\_allowed"
+      - `tool_use_id: string`
 
-"url\_not\_in\_prior\_context"
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-"url\_not\_accessible"
+      - `type: "web_fetch_tool_result"`
 
-"unsupported\_content\_type"
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-"too\_many\_requests"
+        Tool invocation directly from the model.
 
-"max\_uses\_exceeded"
+        - `beta_direct_caller: object`
 
-"unavailable"
+          Tool invocation directly from the model.
 
-type: "web\_fetch\_tool\_result\_error"
+        - `beta_server_tool_caller: object`
 
-
+          Tool invocation generated by a server-side tool.
 
-beta\_web\_fetch\_block: object { content, retrieved\_at, type, url } 
+        - `beta_server_tool_caller_20260120: object`
 
-
+    - `beta_advisor_tool_result_block: object`
 
-content: object { citations, source, title, type } 
+      - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
 
-
+        - `beta_advisor_tool_result_error: object`
 
-citations: object { enabled } 
+          - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
-Citation configuration for the document
+            - `"max_uses_exceeded"`
 
-enabled: boolean
+            - `"prompt_too_long"`
 
-
+            - `"too_many_requests"`
 
-source: [BetaBase64PDFSource](api/beta/messages.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta/messages.md) { data, media\_type, type } 
+            - `"overloaded"`
 
-
+            - `"unavailable"`
 
-beta\_base64\_pdf\_source: object { data, media\_type, type } 
+            - `"execution_time_exceeded"`
 
-data: string
+            - `"model_not_found"`
 
-media\_type: "application/pdf"
+          - `type: "advisor_tool_result_error"`
 
-type: "base64"
+        - `beta_advisor_result_block: object`
 
-
+          - `stop_reason: string`
 
-beta\_plain\_text\_source: object { data, media\_type, type } 
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
-data: string
+          - `text: string`
 
-media\_type: "text/plain"
+          - `type: "advisor_result"`
 
-type: "text"
+        - `beta_advisor_redacted_result_block: object`
 
-title: string
+          - `encrypted_content: string`
 
-The title of the document
+            Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-type: "document"
+          - `stop_reason: string`
 
-retrieved\_at: string
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-ISO 8601 timestamp when the content was retrieved
+          - `type: "advisor_redacted_result"`
 
-type: "web\_fetch\_result"
+      - `tool_use_id: string`
 
-url: string
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Fetched content URL
+      - `type: "advisor_tool_result"`
 
-tool\_use\_id: string
+    - `beta_code_execution_tool_result_block: object`
 
-type: "web\_fetch\_tool\_result"
+      - `content: BetaCodeExecutionToolResultError or BetaCodeExecutionResultBlock or BetaEncryptedCodeExecutionResultBlock`
 
-
+        Code execution result with encrypted stdout for PFC + web_search results.
 
-caller: optional [BetaDirectCaller](api/beta/messages.md) { type }  or [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  or [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
+        - `beta_code_execution_tool_result_error: object`
 
-Tool invocation directly from the model.
+          - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
-
+            - `"invalid_tool_input"`
 
-beta\_direct\_caller: object { type } 
+            - `"unavailable"`
 
-Tool invocation directly from the model.
+            - `"too_many_requests"`
 
-type: "direct"
+            - `"execution_time_exceeded"`
 
-
+          - `type: "code_execution_tool_result_error"`
 
-beta\_server\_tool\_caller: object { tool\_id, type } 
+        - `beta_code_execution_result_block: object`
 
-Tool invocation generated by a server-side tool.
+          - `content: array of BetaCodeExecutionOutputBlock`
 
-tool\_id: string
+            - `file_id: string`
 
-type: "code\_execution\_20250825"
+            - `type: "code_execution_output"`
 
-
+          - `return_code: number`
 
-beta\_server\_tool\_caller\_20260120: object { tool\_id, type } 
+          - `stderr: string`
 
-tool\_id: string
+          - `stdout: string`
 
-type: "code\_execution\_20260120"
+          - `type: "code_execution_result"`
 
-
+        - `beta_encrypted_code_execution_result_block: object`
 
-beta\_advisor\_tool\_result\_block: object { content, tool\_use\_id, type } 
+          Code execution result with encrypted stdout for PFC + web_search results.
 
-
+          - `content: array of BetaCodeExecutionOutputBlock`
 
-content: [BetaAdvisorToolResultError](api/beta/messages.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta/messages.md) { stop\_reason, text, type }  or [BetaAdvisorRedactedResultBlock](api/beta/messages.md) { encrypted\_content, stop\_reason, type } 
+            - `file_id: string`
 
-
+            - `type: "code_execution_output"`
 
-beta\_advisor\_tool\_result\_error: object { error\_code, type } 
+          - `encrypted_stdout: string`
 
-
+          - `return_code: number`
 
-error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 4 more
+          - `stderr: string`
 
-"max\_uses\_exceeded"
+          - `type: "encrypted_code_execution_result"`
 
-"prompt\_too\_long"
+      - `tool_use_id: string`
 
-"too\_many\_requests"
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-"overloaded"
+      - `type: "code_execution_tool_result"`
 
-"unavailable"
+    - `beta_bash_code_execution_tool_result_block: object`
 
-"execution\_time\_exceeded"
+      - `content: BetaBashCodeExecutionToolResultError or BetaBashCodeExecutionResultBlock`
 
-"model\_not\_found"
+        - `beta_bash_code_execution_tool_result_error: object`
 
-type: "advisor\_tool\_result\_error"
+          - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
-
+            - `"invalid_tool_input"`
 
-beta\_advisor\_result\_block: object { stop\_reason, text, type } 
+            - `"unavailable"`
 
-stop\_reason: string
+            - `"too_many_requests"`
 
-The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+            - `"execution_time_exceeded"`
 
-text: string
+            - `"output_file_too_large"`
 
-type: "advisor\_result"
+          - `type: "bash_code_execution_tool_result_error"`
 
-
+        - `beta_bash_code_execution_result_block: object`
 
-beta\_advisor\_redacted\_result\_block: object { encrypted\_content, stop\_reason, type } 
+          - `content: array of BetaBashCodeExecutionOutputBlock`
 
-encrypted\_content: string
+            - `file_id: string`
 
-Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+            - `type: "bash_code_execution_output"`
 
-stop\_reason: string
+          - `return_code: number`
 
-The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
+          - `stderr: string`
 
-type: "advisor\_redacted\_result"
+          - `stdout: string`
 
-tool\_use\_id: string
+          - `type: "bash_code_execution_result"`
 
-type: "advisor\_tool\_result"
+      - `tool_use_id: string`
 
-
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-beta\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
+      - `type: "bash_code_execution_tool_result"`
 
-
+    - `beta_text_editor_code_execution_tool_result_block: object`
 
-content: [BetaCodeExecutionToolResultError](api/beta/messages.md) { error\_code, type }  or [BetaCodeExecutionResultBlock](api/beta/messages.md) { content, return\_code, stderr, 2 more }  or [BetaEncryptedCodeExecutionResultBlock](api/beta/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
+      - `content: BetaTextEditorCodeExecutionToolResultError or BetaTextEditorCodeExecutionViewResultBlock or BetaTextEditorCodeExecutionCreateResultBlock or BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+        - `beta_text_editor_code_execution_tool_result_error: object`
 
-
+          - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
-beta\_code\_execution\_tool\_result\_error: object { error\_code, type } 
+            - `"invalid_tool_input"`
 
-
+            - `"unavailable"`
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+            - `"too_many_requests"`
 
-"invalid\_tool\_input"
+            - `"execution_time_exceeded"`
 
-"unavailable"
+            - `"file_not_found"`
 
-"too\_many\_requests"
+          - `error_message: string`
 
-"execution\_time\_exceeded"
+          - `type: "text_editor_code_execution_tool_result_error"`
 
-type: "code\_execution\_tool\_result\_error"
+        - `beta_text_editor_code_execution_view_result_block: object`
 
-
+          - `content: string`
 
-beta\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
+          - `file_type: "text" or "image" or "pdf"`
 
-
+            - `"text"`
 
-content: array of [BetaCodeExecutionOutputBlock](api/beta/messages.md) { file\_id, type } 
+            - `"image"`
 
-file\_id: string
+            - `"pdf"`
 
-type: "code\_execution\_output"
+          - `num_lines: number`
 
-return\_code: number
+          - `start_line: number`
 
-stderr: string
+          - `total_lines: number`
 
-stdout: string
+          - `type: "text_editor_code_execution_view_result"`
 
-type: "code\_execution\_result"
+        - `beta_text_editor_code_execution_create_result_block: object`
 
-
+          - `is_file_update: boolean`
 
-beta\_encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more } 
+          - `type: "text_editor_code_execution_create_result"`
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+        - `beta_text_editor_code_execution_str_replace_result_block: object`
 
-
+          - `lines: array of string`
 
-content: array of [BetaCodeExecutionOutputBlock](api/beta/messages.md) { file\_id, type } 
+          - `new_lines: number`
 
-file\_id: string
+          - `new_start: number`
 
-type: "code\_execution\_output"
+          - `old_lines: number`
 
-encrypted\_stdout: string
+          - `old_start: number`
 
-return\_code: number
+          - `type: "text_editor_code_execution_str_replace_result"`
 
-stderr: string
+      - `tool_use_id: string`
 
-type: "encrypted\_code\_execution\_result"
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-tool\_use\_id: string
+      - `type: "text_editor_code_execution_tool_result"`
 
-type: "code\_execution\_tool\_result"
+    - `beta_tool_search_tool_result_block: object`
 
-
+      - `content: BetaToolSearchToolResultError or BetaToolSearchToolSearchResultBlock`
 
-beta\_bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
+        - `beta_tool_search_tool_result_error: object`
 
-
+          - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
-content: [BetaBashCodeExecutionToolResultError](api/beta/messages.md) { error\_code, type }  or [BetaBashCodeExecutionResultBlock](api/beta/messages.md) { content, return\_code, stderr, 2 more } 
+            - `"invalid_tool_input"`
 
-
+            - `"unavailable"`
 
-beta\_bash\_code\_execution\_tool\_result\_error: object { error\_code, type } 
+            - `"too_many_requests"`
 
-
+            - `"execution_time_exceeded"`
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+          - `error_message: string`
 
-"invalid\_tool\_input"
+          - `type: "tool_search_tool_result_error"`
 
-"unavailable"
+        - `beta_tool_search_tool_search_result_block: object`
 
-"too\_many\_requests"
+          - `tool_references: array of BetaToolReferenceBlock`
 
-"execution\_time\_exceeded"
+            - `tool_name: string`
 
-"output\_file\_too\_large"
+              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-type: "bash\_code\_execution\_tool\_result\_error"
+            - `type: "tool_reference"`
 
-
+          - `type: "tool_search_tool_search_result"`
 
-beta\_bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
+      - `tool_use_id: string`
 
-
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-content: array of [BetaBashCodeExecutionOutputBlock](api/beta/messages.md) { file\_id, type } 
+      - `type: "tool_search_tool_result"`
 
-file\_id: string
+    - `beta_mcp_tool_use_block: object`
 
-type: "bash\_code\_execution\_output"
+      - `id: string`
 
-return\_code: number
+        pattern: ^[a-zA-Z0-9_-]+$
 
-stderr: string
+      - `input: map[unknown]`
 
-stdout: string
+      - `name: string`
 
-type: "bash\_code\_execution\_result"
+        The name of the MCP tool
 
-tool\_use\_id: string
+      - `server_name: string`
 
-type: "bash\_code\_execution\_tool\_result"
+        The name of the MCP server
 
-
+      - `type: "mcp_tool_use"`
 
-beta\_text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
+    - `beta_mcp_tool_result_block: object`
 
-
+      - `content: string or array of BetaTextBlock`
 
-content: [BetaTextEditorCodeExecutionToolResultError](api/beta/messages.md) { error\_code, error\_message, type }  or [BetaTextEditorCodeExecutionViewResultBlock](api/beta/messages.md) { content, file\_type, num\_lines, 3 more }  or [BetaTextEditorCodeExecutionCreateResultBlock](api/beta/messages.md) { is\_file\_update, type }  or [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta/messages.md) { lines, new\_lines, new\_start, 3 more } 
+        - `union_member_0: string`
 
-
+        - `beta_mcp_tool_result_block_content: array of BetaTextBlock`
 
-beta\_text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type } 
+          - `citations: array of BetaTextCitation`
 
-
+            Citations supporting the text block.
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+            The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-"invalid\_tool\_input"
+          - `text: string`
 
-"unavailable"
+            maxLength: 5000000, minLength: 0
 
-"too\_many\_requests"
+          - `type: "text"`
 
-"execution\_time\_exceeded"
+      - `is_error: boolean`
 
-"file\_not\_found"
+      - `tool_use_id: string`
 
-error\_message: string
+        pattern: ^[a-zA-Z0-9_-]+$
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
+      - `type: "mcp_tool_result"`
 
-
+    - `beta_container_upload_block: object`
 
-beta\_text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more } 
+      Response model for a file uploaded to the container.
 
-content: string
+      - `file_id: string`
 
-
+      - `type: "container_upload"`
 
-file\_type: "text" or "image" or "pdf"
+    - `beta_compaction_block: object`
 
-"text"
+      A compaction block returned when autocompact is triggered.
 
-"image"
+      When content is None, it indicates the compaction failed to produce a valid
+      summary (e.g., malformed output from the model). Clients may round-trip
+      compaction blocks with null content; the server treats them as no-ops.
 
-"pdf"
+      - `content: string`
 
-num\_lines: number
+        Summary of compacted content, or null if compaction failed
 
-start\_line: number
+      - `encrypted_content: string`
 
-total\_lines: number
+        Opaque metadata from prior compaction, to be round-tripped verbatim
 
-type: "text\_editor\_code\_execution\_view\_result"
+      - `type: "compaction"`
 
-
+    - `beta_fallback_block: object`
 
-beta\_text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type } 
+      Marks the point in `content` where one model's output gives way to the next.
 
-is\_file\_update: boolean
+      One block appears per hop where a preceding model actually ran this turn and
+      declined. A turn where no preceding model ran and declined has no such
+      boundary and carries no block — the signal for whether a fallback model
+      served the response is the presence of a `fallback_message` entry in
+      `usage.iterations`, not this block.
 
-type: "text\_editor\_code\_execution\_create\_result"
+      The block is treated like a server-tool content block for streaming: it
+      arrives via the standard `content_block_start` / `content_block_stop`
+      pair and carries no deltas.
 
-
+      - `from: object`
 
-beta\_text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more } 
+        The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-lines: array of string
+        - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
 
-new\_lines: number
+          The model that will complete your prompt.
 
-new\_start: number
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-old\_lines: number
+          - `"claude-fable-5-1"`
 
-old\_start: number
+            Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
-type: "text\_editor\_code\_execution\_str\_replace\_result"
+          - `"claude-mythos-5-1"`
 
-tool\_use\_id: string
+            Our most capable model for cybersecurity and biology research, available through trusted access programs
 
-type: "text\_editor\_code\_execution\_tool\_result"
+          - `"claude-sonnet-5"`
 
-
+            High-performance model for coding and agents
 
-beta\_tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type } 
+          - `"claude-fable-5"`
 
-
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
-content: [BetaToolSearchToolResultError](api/beta/messages.md) { error\_code, error\_message, type }  or [BetaToolSearchToolSearchResultBlock](api/beta/messages.md) { tool\_references, type } 
+          - `"claude-mythos-5"`
 
-
+            Most capable model for cybersecurity and biology research
 
-beta\_tool\_search\_tool\_result\_error: object { error\_code, error\_message, type } 
+          - `"claude-opus-5"`
 
-
+            Powerful intelligence for long-running agents and coding
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+          - `"claude-opus-4-8"`
 
-"invalid\_tool\_input"
+            Powerful intelligence for long-running agents and coding
 
-"unavailable"
+          - `"claude-opus-4-7"`
 
-"too\_many\_requests"
+            Powerful intelligence for long-running agents and coding
 
-"execution\_time\_exceeded"
+          - `"claude-mythos-preview"`
 
-error\_message: string
+            New class of intelligence, strongest in coding and cybersecurity
 
-type: "tool\_search\_tool\_result\_error"
+          - `"claude-opus-4-6"`
 
-
+            Powerful intelligence for long-running agents and coding
 
-beta\_tool\_search\_tool\_search\_result\_block: object { tool\_references, type } 
+          - `"claude-sonnet-4-6"`
 
-
+            Best combination of speed and intelligence
 
-tool\_references: array of [BetaToolReferenceBlock](api/beta/messages.md) { tool\_name, type } 
+          - `"claude-haiku-4-5"`
 
-tool\_name: string
+            Fastest model with near-frontier intelligence
 
-type: "tool\_reference"
+          - `"claude-haiku-4-5-20251001"`
 
-type: "tool\_search\_tool\_search\_result"
+            Fastest model with near-frontier intelligence
 
-tool\_use\_id: string
+          - `"claude-opus-4-5"`
 
-type: "tool\_search\_tool\_result"
+            Powerful intelligence for long-running agents and coding
 
-
+          - `"claude-opus-4-5-20251101"`
 
-beta\_mcp\_tool\_use\_block: object { id, input, name, 2 more } 
+            Powerful intelligence for long-running agents and coding
 
-id: string
+          - `"claude-sonnet-4-5"`
 
-input: map[unknown]
+            High-performance model for agents and coding
 
-name: string
+          - `"claude-sonnet-4-5-20250929"`
 
-The name of the MCP tool
+            High-performance model for agents and coding
 
-server\_name: string
+      - `to: object`
 
-The name of the MCP server
+        The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-type: "mcp\_tool\_use"
+        - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
 
-
+          The model that will complete your prompt.
 
-beta\_mcp\_tool\_result\_block: object { content, is\_error, tool\_use\_id, type } 
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-
+      - `trigger: object`
 
-content: string or array of [BetaTextBlock](api/beta/messages.md) { citations, text, type } 
+        What caused the `from` model to hand over at this hop.
 
-union\_member\_0: string
+        - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
-
+          The policy category that triggered a refusal.
 
-beta\_mcp\_tool\_result\_block\_content: array of [BetaTextBlock](api/beta/messages.md) { citations, text, type } 
+          - `"cyber"`
 
-
+            The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
 
-citations: array of [BetaTextCitation](api/beta/messages.md)
+          - `"bio"`
 
-Citations supporting the text block.
+            The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+          - `"frontier_llm"`
 
-
+            The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
 
-beta\_citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+          - `"reasoning_extraction"`
 
-cited\_text: string
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
 
-document\_index: number
+          - `"general_harms"`
 
-document\_title: string
+            The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-end\_char\_index: number
+        - `type: "refusal"`
 
-file\_id: string
+      - `type: "fallback"`
 
-start\_char\_index: number
+  - `context_management: object`
 
-type: "char\_location"
+    Context management response.
 
-
+    Information about context management strategies applied during the request.
 
-beta\_citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+    - `applied_edits: array of BetaClearToolUses20250919EditResponse or BetaClearThinking20251015EditResponse`
 
-cited\_text: string
+      List of context management edits that were applied.
 
-document\_index: number
+      - `beta_clear_tool_uses_20250919_edit_response: object`
 
-document\_title: string
+        - `cleared_input_tokens: number`
 
-end\_page\_number: number
+          Number of input tokens cleared by this edit.
 
-file\_id: string
+          minimum: 0
 
-start\_page\_number: number
+        - `cleared_tool_uses: number`
 
-type: "page\_location"
+          Number of tool uses that were cleared.
 
-
+          minimum: 0
 
-beta\_citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+        - `type: "clear_tool_uses_20250919"`
 
-
+          The type of context management edit applied.
 
-cited\_text: string
+      - `beta_clear_thinking_20251015_edit_response: object`
 
-The full text of the cited block range, concatenated.
+        - `cleared_input_tokens: number`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+          Number of input tokens cleared by this edit.
 
-document\_index: number
+          minimum: 0
 
-document\_title: string
+        - `cleared_thinking_turns: number`
 
-
+          Number of thinking turns that were cleared.
 
-end\_block\_index: number
+          minimum: 0
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+        - `type: "clear_thinking_20251015"`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+          The type of context management edit applied.
 
-file\_id: string
+  - `diagnostics: object`
 
-start\_block\_index: number
+    Response envelope for request-level diagnostics. Present (possibly
+    null) whenever the caller supplied `diagnostics` on the request.
 
-0-based index of the first cited block in the source's `content` array.
+    - `cache_miss_reason: BetaCacheMissModelChanged or BetaCacheMissSystemChanged or BetaCacheMissToolsChanged or 3 more`
 
-type: "content\_block\_location"
+      Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-
+      - `beta_cache_miss_model_changed: object`
 
-beta\_citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
+        - `cache_missed_input_tokens: number`
 
-cited\_text: string
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-encrypted\_index: string
+        - `type: "model_changed"`
 
-title: string
+      - `beta_cache_miss_system_changed: object`
 
-type: "web\_search\_result\_location"
+        - `cache_missed_input_tokens: number`
 
-url: string
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-
+        - `type: "system_changed"`
 
-beta\_citation\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+      - `beta_cache_miss_tools_changed: object`
 
-
+        - `cache_missed_input_tokens: number`
 
-cited\_text: string
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-The full text of the cited block range, concatenated.
+        - `type: "tools_changed"`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+      - `beta_cache_miss_messages_changed: object`
 
-
+        - `cache_missed_input_tokens: number`
 
-end\_block\_index: number
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+        - `type: "messages_changed"`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+      - `beta_cache_miss_previous_message_not_found: object`
 
-
+        - `type: "previous_message_not_found"`
 
-search\_result\_index: number
+      - `beta_cache_miss_unavailable: object`
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+        - `type: "unavailable"`
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+  - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
 
-source: string
+    The model that will complete your prompt.
 
-start\_block\_index: number
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-0-based index of the first cited block in the source's `content` array.
+    - `"claude-fable-5-1"`
 
-title: string
+      Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
-type: "search\_result\_location"
+    - `"claude-mythos-5-1"`
 
-text: string
+      Our most capable model for cybersecurity and biology research, available through trusted access programs
 
-type: "text"
+    - `"claude-sonnet-5"`
 
-is\_error: boolean
+      High-performance model for coding and agents
 
-tool\_use\_id: string
+    - `"claude-fable-5"`
 
-type: "mcp\_tool\_result"
+      Next generation of intelligence for the hardest knowledge work and coding problems
 
-
+    - `"claude-mythos-5"`
 
-beta\_container\_upload\_block: object { file\_id, type } 
+      Most capable model for cybersecurity and biology research
 
-Response model for a file uploaded to the container.
+    - `"claude-opus-5"`
 
-file\_id: string
+      Powerful intelligence for long-running agents and coding
 
-type: "container\_upload"
+    - `"claude-opus-4-8"`
 
-
+      Powerful intelligence for long-running agents and coding
 
-beta\_compaction\_block: object { content, encrypted\_content, type } 
+    - `"claude-opus-4-7"`
 
-A compaction block returned when autocompact is triggered.
+      Powerful intelligence for long-running agents and coding
 
-When content is None, it indicates the compaction failed to produce a valid
-summary (e.g., malformed output from the model). Clients may round-trip
-compaction blocks with null content; the server treats them as no-ops.
+    - `"claude-mythos-preview"`
 
-content: string
+      New class of intelligence, strongest in coding and cybersecurity
 
-Summary of compacted content, or null if compaction failed
+    - `"claude-opus-4-6"`
 
-encrypted\_content: string
+      Powerful intelligence for long-running agents and coding
 
-Opaque metadata from prior compaction, to be round-tripped verbatim
+    - `"claude-sonnet-4-6"`
 
-type: "compaction"
+      Best combination of speed and intelligence
 
-
+    - `"claude-haiku-4-5"`
 
-beta\_fallback\_block: object { from, to, trigger, type } 
+      Fastest model with near-frontier intelligence
 
-Marks the point in `content` where one model's output gives way to the next.
+    - `"claude-haiku-4-5-20251001"`
 
-One block appears per hop where a preceding model actually ran this turn and
-declined. A turn where no preceding model ran and declined has no such
-boundary and carries no block — the signal for whether a fallback model
-served the response is the presence of a `fallback_message` entry in
-`usage.iterations`, not this block.
+      Fastest model with near-frontier intelligence
 
-The block is treated like a server-tool content block for streaming: it
-arrives via the standard `content_block_start` / `content_block_stop`
-pair and carries no deltas.
+    - `"claude-opus-4-5"`
 
-
+      Powerful intelligence for long-running agents and coding
 
-from: object { model } 
+    - `"claude-opus-4-5-20251101"`
 
-The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+      Powerful intelligence for long-running agents and coding
 
-
+    - `"claude-sonnet-4-5"`
 
-model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
+      High-performance model for agents and coding
 
-The model that will complete your prompt.
+    - `"claude-sonnet-4-5-20250929"`
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+      High-performance model for agents and coding
 
-"claude-sonnet-5"
+  - `role: "assistant"`
 
-High-performance model for coding and agents
+    Conversational role of the generated message.
 
-"claude-fable-5"
+    This will always be `"assistant"`.
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+  - `stop_details: object`
 
-"claude-mythos-5"
+    Structured information about a refusal.
 
-Most capable model for cybersecurity and biology research
+    - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
-"claude-opus-4-8"
+      The policy category that triggered a refusal.
 
-Frontier intelligence for long-running agents and coding
+      - `"cyber"`
 
-"claude-opus-4-7"
+        The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
 
-Frontier intelligence for long-running agents and coding
+      - `"bio"`
 
-"claude-mythos-preview"
+        The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
-New class of intelligence, strongest in coding and cybersecurity
+      - `"frontier_llm"`
 
-"claude-opus-4-6"
+        The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
 
-Frontier intelligence for long-running agents and coding
+      - `"reasoning_extraction"`
 
-"claude-sonnet-4-6"
+        The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
 
-Best combination of speed and intelligence
+      - `"general_harms"`
 
-"claude-haiku-4-5"
+        The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-Fastest model with near-frontier intelligence
+    - `explanation: string`
 
-"claude-haiku-4-5-20251001"
+      Human-readable explanation of the refusal.
 
-Fastest model with near-frontier intelligence
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-"claude-opus-4-5"
+    - `fallback_credit_token: string`
 
-Premium model combining maximum intelligence with practical performance
+      Opaque code that refunds the cache-miss cost when retrying this refused
+      request on the fallback model. Pass it as `fallback_credit_token` on the
+      retry request. Expires 5 minutes after the refusal.
 
-"claude-opus-4-5-20251101"
+      The retry is sent either with the same request body (`system`, `messages`,
+      `tools`, and other render-shaping fields), or with the same body plus one
+      appended `assistant` message whose content is the partial text (with any
+      trailing whitespace stripped from the final text block) and paired
+      server-tool blocks from this refusal — which also authorizes that
+      appended turn as an assistant-prefill continuation on models that otherwise
+      disallow prefill. A token minted mid-server-tool-loop whose partial content
+      was continuable may only be redeemed the second way — if a same-body retry
+      is rejected with a 400 saying the token must be redeemed by continuing the
+      partial response, retry the second way instead. Either way: same workspace,
+      same platform; a mismatch is a 400. Resending a token for an already-warm
+      prefix is permitted but yields no additional credit.
 
-Premium model combining maximum intelligence with practical performance
+      `null` when the refused model isn't eligible for a fallback credit.
 
-"claude-sonnet-4-5"
+    - `fallback_has_prefill_claim: boolean`
 
-High-performance model for agents and coding
+      Whether the accompanying `fallback_credit_token` may be redeemed with the
+      appended-assistant retry form. Only set when `fallback_credit_token` is
+      present.
 
-"claude-sonnet-4-5-20250929"
+      `true`: retry by resending the same request body plus one appended
+      `assistant` message whose content is this response's `content` with any
+      trailing whitespace stripped from the final text block and unpaired
+      `tool_use` blocks omitted (the same appended-turn shape described on
+      `fallback_credit_token`), with the token attached. `false`: retry by
+      resending the original request body unchanged, with the token attached —
+      the appended-assistant form is not available for this refusal (no
+      continuable partial content, or the request uses `output_format` or a
+      `tool_choice` that forces tool use). One exception: when the request used
+      `output_format` or a forced `tool_choice` and the refusal arrived after
+      server tools (including MCP connector tools) had already executed, the
+      token may not be redeemable by either retry form; if the exact-body retry
+      is then rejected with a 400 saying the token must be redeemed by
+      continuing the partial response, discard the token and retry without it.
 
-High-performance model for agents and coding
+      Advisory: if an appended-assistant retry is rejected with a 400 despite
+      `true`, fall back to resending the original request body with the token.
 
-"claude-opus-4-1"
+    - `recommended_model: string`
 
-Exceptional model for specialized complex tasks
+      The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-"claude-opus-4-1-20250805"
+    - `type: "refusal"`
 
-Exceptional model for specialized complex tasks
+  - `stop_reason: "end_turn" or "max_tokens" or "stop_sequence" or 5 more`
 
-
+    The reason that we stopped.
 
-to: object { model } 
+    This may be one the following values:
 
-The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+    * `"end_turn"`: the model reached a natural stopping point
+    * `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
+    * `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
+    * `"tool_use"`: the model invoked one or more tools
+    * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
+    * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+    * `"model_context_window_exceeded"`: we exceeded the model's context window
 
-
+    In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
+    - `"end_turn"`
 
-The model that will complete your prompt.
+    - `"max_tokens"`
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+    - `"stop_sequence"`
 
-"claude-sonnet-5"
+    - `"tool_use"`
 
-High-performance model for coding and agents
+    - `"pause_turn"`
 
-"claude-fable-5"
+    - `"compaction"`
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+    - `"refusal"`
 
-"claude-mythos-5"
+    - `"model_context_window_exceeded"`
 
-Most capable model for cybersecurity and biology research
+  - `stop_sequence: string`
 
-"claude-opus-4-8"
+    Which custom stop sequence was generated, if any.
 
-Frontier intelligence for long-running agents and coding
+    This value will be a non-null string if one of your custom stop sequences was generated.
 
-"claude-opus-4-7"
+  - `type: "message"`
 
-Frontier intelligence for long-running agents and coding
+    Object type.
 
-"claude-mythos-preview"
+    For Messages, this is always `"message"`.
 
-New class of intelligence, strongest in coding and cybersecurity
+  - `usage: object`
 
-"claude-opus-4-6"
+    Billing and rate-limit usage.
 
-Frontier intelligence for long-running agents and coding
+    Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
 
-"claude-sonnet-4-6"
+    Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
 
-Best combination of speed and intelligence
+    For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
 
-"claude-haiku-4-5"
+    Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-Fastest model with near-frontier intelligence
+    - `cache_creation: object`
 
-"claude-haiku-4-5-20251001"
+      Breakdown of cached tokens by TTL
 
-Fastest model with near-frontier intelligence
+      - `ephemeral_1h_input_tokens: number`
 
-"claude-opus-4-5"
+        The number of input tokens used to create the 1 hour cache entry.
 
-Premium model combining maximum intelligence with practical performance
+        minimum: 0
 
-"claude-opus-4-5-20251101"
+      - `ephemeral_5m_input_tokens: number`
 
-Premium model combining maximum intelligence with practical performance
+        The number of input tokens used to create the 5 minute cache entry.
 
-"claude-sonnet-4-5"
+        minimum: 0
 
-High-performance model for agents and coding
+    - `cache_creation_input_tokens: number`
 
-"claude-sonnet-4-5-20250929"
+      The number of input tokens used to create the cache entry.
 
-High-performance model for agents and coding
+      minimum: 0
 
-"claude-opus-4-1"
+    - `cache_read_input_tokens: number`
 
-Exceptional model for specialized complex tasks
+      The number of input tokens read from the cache.
 
-"claude-opus-4-1-20250805"
+      minimum: 0
 
-Exceptional model for specialized complex tasks
+    - `fallback_credit: object`
 
-
+      Outcome of the `fallback_credit_token` presented on this request.
 
-trigger: object { category, type } 
+      - `status: BetaFallbackCreditRedeemed or BetaFallbackCreditNotApplied`
 
-What caused the `from` model to hand over at this hop.
+        Whether the fallback-credit reprice was applied to this response's billing.
 
-
+        A union discriminated on `type`. `redeemed`: the retry is billed as if
+        the conversation had been on the retry model all along — including when the
+        resulting shift is zero because there was nothing to move. `not_applied`:
+        no reprice was applied; the arm's `reason` says why.
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+        - `beta_fallback_credit_redeemed: object`
 
-The policy category that triggered a refusal.
+          The reprice was applied: the retry is billed as if the conversation
+          had been on the retry model all along.
 
-"cyber"
+          - `type: "redeemed"`
 
-"bio"
+        - `beta_fallback_credit_not_applied: object`
 
-"frontier\_llm"
+          No reprice was applied; `reason` says why.
 
-"reasoning\_extraction"
+          - `reason: "body_mismatch" or "continuation_excluded" or "continuation_only" or 9 more`
 
-type: "refusal"
+            Why the reprice was not applied.
 
-type: "fallback"
+            A closed enum; additions to the redemption-check vocabulary arrive as
+            deliberate schema updates.
 
-
+            - `"body_mismatch"`
 
-context\_management: object { applied\_edits } 
+            - `"continuation_excluded"`
 
-Context management response.
+            - `"continuation_only"`
 
-Information about context management strategies applied during the request.
+            - `"expired"`
 
-
+            - `"invalid_target_model"`
 
-applied\_edits: array of [BetaClearToolUses20250919EditResponse](api/beta/messages.md) { cleared\_input\_tokens, cleared\_tool\_uses, type }  or [BetaClearThinking20251015EditResponse](api/beta/messages.md) { cleared\_input\_tokens, cleared\_thinking\_turns, type } 
+            - `"not_enabled"`
 
-List of context management edits that were applied.
+            - `"reprice_unavailable"`
 
-
+            - `"temporarily_unavailable"`
 
-beta\_clear\_tool\_uses\_20250919\_edit\_response: object { cleared\_input\_tokens, cleared\_tool\_uses, type } 
+            - `"variant_fields_present"`
 
-cleared\_input\_tokens: number
+            - `"wrong_organization"`
 
-Number of input tokens cleared by this edit.
+            - `"wrong_platform"`
 
-cleared\_tool\_uses: number
+            - `"wrong_workspace"`
 
-Number of tool uses that were cleared.
+          - `type: "not_applied"`
 
-type: "clear\_tool\_uses\_20250919"
+          - `remove_to_redeem: optional array of string`
 
-The type of context management edit applied.
+            Request fields to remove before retrying, so the retry can redeem this
+            token.
 
-
+            Present exactly when `reason` is `variant_fields_present` — never null,
+            never an empty array; absent otherwise. Fields are named only from your own request, and only after
+            the sealed variant hash matched. A served best-effort retry has already
+            been billed at normal price; nothing redeems retroactively, but a corrected
+            re-send inside the token's five-minute window can still redeem.
 
-beta\_clear\_thinking\_20251015\_edit\_response: object { cleared\_input\_tokens, cleared\_thinking\_turns, type } 
+    - `inference_geo: string`
 
-cleared\_input\_tokens: number
+      The geographic region where inference was performed for this request.
 
-Number of input tokens cleared by this edit.
+    - `input_tokens: number`
 
-cleared\_thinking\_turns: number
+      The number of input tokens which were used.
 
-Number of thinking turns that were cleared.
+      minimum: 0
 
-type: "clear\_thinking\_20251015"
+    - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage or BetaFallbackMessageIterationUsage`
 
-The type of context management edit applied.
+      Per-iteration token usage breakdown.
 
-
+      Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
-diagnostics: object { cache\_miss\_reason } 
+      - Determine which iterations exceeded long context thresholds (>=200k tokens)
+      - Calculate the context window size from the last `message` entry
+      - Understand token accumulation across server-side tool use loops
 
-Response envelope for request-level diagnostics. Present (possibly
-null) whenever the caller supplied `diagnostics` on the request.
+      A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-
+      - `beta_message_iteration_usage: object`
 
-cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissSystemChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissToolsChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or 3 more
+        Token usage for a sampling iteration.
 
-Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+        - `cache_creation: object`
 
-
+          Breakdown of cached tokens by TTL
 
-beta\_cache\_miss\_model\_changed: object { cache\_missed\_input\_tokens, type } 
+          - `ephemeral_1h_input_tokens: number`
 
-cache\_missed\_input\_tokens: number
+            The number of input tokens used to create the 1 hour cache entry.
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+            minimum: 0
 
-type: "model\_changed"
+          - `ephemeral_5m_input_tokens: number`
 
-
+            The number of input tokens used to create the 5 minute cache entry.
 
-beta\_cache\_miss\_system\_changed: object { cache\_missed\_input\_tokens, type } 
+            minimum: 0
 
-cache\_missed\_input\_tokens: number
+        - `cache_creation_input_tokens: number`
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+          The number of input tokens used to create the cache entry.
 
-type: "system\_changed"
+          minimum: 0
 
-
+        - `cache_read_input_tokens: number`
 
-beta\_cache\_miss\_tools\_changed: object { cache\_missed\_input\_tokens, type } 
+          The number of input tokens read from the cache.
 
-cache\_missed\_input\_tokens: number
+          minimum: 0
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+        - `input_tokens: number`
 
-type: "tools\_changed"
+          The number of input tokens which were used.
 
-
+          minimum: 0
 
-beta\_cache\_miss\_messages\_changed: object { cache\_missed\_input\_tokens, type } 
+        - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
 
-cache\_missed\_input\_tokens: number
+          The model that will complete your prompt.
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-type: "messages\_changed"
+          - `"claude-fable-5-1"`
 
-
+            Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
-beta\_cache\_miss\_previous\_message\_not\_found: object { type } 
+          - `"claude-mythos-5-1"`
 
-type: "previous\_message\_not\_found"
+            Our most capable model for cybersecurity and biology research, available through trusted access programs
 
-
+          - `"claude-sonnet-5"`
 
-beta\_cache\_miss\_unavailable: object { type } 
+            High-performance model for coding and agents
 
-type: "unavailable"
+          - `"claude-fable-5"`
 
-
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
-model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
+          - `"claude-mythos-5"`
 
-The model that will complete your prompt.
+            Most capable model for cybersecurity and biology research
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+          - `"claude-opus-5"`
 
-"claude-sonnet-5"
+            Powerful intelligence for long-running agents and coding
 
-High-performance model for coding and agents
+          - `"claude-opus-4-8"`
 
-"claude-fable-5"
+            Powerful intelligence for long-running agents and coding
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+          - `"claude-opus-4-7"`
 
-"claude-mythos-5"
+            Powerful intelligence for long-running agents and coding
 
-Most capable model for cybersecurity and biology research
+          - `"claude-mythos-preview"`
 
-"claude-opus-4-8"
+            New class of intelligence, strongest in coding and cybersecurity
 
-Frontier intelligence for long-running agents and coding
+          - `"claude-opus-4-6"`
 
-"claude-opus-4-7"
+            Powerful intelligence for long-running agents and coding
 
-Frontier intelligence for long-running agents and coding
+          - `"claude-sonnet-4-6"`
 
-"claude-mythos-preview"
+            Best combination of speed and intelligence
 
-New class of intelligence, strongest in coding and cybersecurity
+          - `"claude-haiku-4-5"`
 
-"claude-opus-4-6"
+            Fastest model with near-frontier intelligence
 
-Frontier intelligence for long-running agents and coding
+          - `"claude-haiku-4-5-20251001"`
 
-"claude-sonnet-4-6"
+            Fastest model with near-frontier intelligence
 
-Best combination of speed and intelligence
+          - `"claude-opus-4-5"`
 
-"claude-haiku-4-5"
+            Powerful intelligence for long-running agents and coding
 
-Fastest model with near-frontier intelligence
+          - `"claude-opus-4-5-20251101"`
 
-"claude-haiku-4-5-20251001"
+            Powerful intelligence for long-running agents and coding
 
-Fastest model with near-frontier intelligence
+          - `"claude-sonnet-4-5"`
 
-"claude-opus-4-5"
+            High-performance model for agents and coding
 
-Premium model combining maximum intelligence with practical performance
+          - `"claude-sonnet-4-5-20250929"`
 
-"claude-opus-4-5-20251101"
+            High-performance model for agents and coding
 
-Premium model combining maximum intelligence with practical performance
+        - `output_tokens: number`
 
-"claude-sonnet-4-5"
+          The number of output tokens which were used.
 
-High-performance model for agents and coding
+          minimum: 0
 
-"claude-sonnet-4-5-20250929"
+        - `type: "message"`
 
-High-performance model for agents and coding
+          Usage for a sampling iteration
 
-"claude-opus-4-1"
+      - `beta_compaction_iteration_usage: object`
 
-Exceptional model for specialized complex tasks
+        Token usage for a compaction iteration.
 
-"claude-opus-4-1-20250805"
+        - `cache_creation: object`
 
-Exceptional model for specialized complex tasks
+          Breakdown of cached tokens by TTL
 
-
+          - `ephemeral_1h_input_tokens: number`
 
-role: "assistant"
+            The number of input tokens used to create the 1 hour cache entry.
 
-Conversational role of the generated message.
+            minimum: 0
 
-This will always be `"assistant"`.
+          - `ephemeral_5m_input_tokens: number`
 
-
+            The number of input tokens used to create the 5 minute cache entry.
 
-stop\_details: object { category, explanation, fallback\_credit\_token, 3 more } 
+            minimum: 0
 
-Structured information about a refusal.
+        - `cache_creation_input_tokens: number`
 
-
+          The number of input tokens used to create the cache entry.
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+          minimum: 0
 
-The policy category that triggered a refusal.
+        - `cache_read_input_tokens: number`
 
-"cyber"
+          The number of input tokens read from the cache.
 
-"bio"
+          minimum: 0
 
-"frontier\_llm"
+        - `input_tokens: number`
 
-"reasoning\_extraction"
+          The number of input tokens which were used.
 
-
+          minimum: 0
 
-explanation: string
+        - `output_tokens: number`
 
-Human-readable explanation of the refusal.
+          The number of output tokens which were used.
 
-This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+          minimum: 0
 
-
+        - `type: "compaction"`
 
-fallback\_credit\_token: string
+          Usage for a compaction iteration
 
-Opaque code that refunds the cache-miss cost when retrying this refused
-request on the fallback model. Pass it as `fallback_credit_token` on the
-retry request. Expires 5 minutes after the refusal.
+      - `beta_advisor_message_iteration_usage: object`
 
-The retry is sent either with the same request body (`system`, `messages`,
-`tools`, and other render-shaping fields), or with the same body plus one
-appended `assistant` message whose content is the partial text (with any
-trailing whitespace stripped from the final text block) and paired
-server-tool blocks from this refusal — which also authorizes that
-appended turn as an assistant-prefill continuation on models that otherwise
-disallow prefill. A token minted mid-server-tool-loop whose partial content
-was continuable may only be redeemed the second way — if a same-body retry
-is rejected with a 400 saying the token must be redeemed by continuing the
-partial response, retry the second way instead. Either way: same workspace,
-same platform; a mismatch is a 400. Resending a token for an already-warm
-prefix is permitted but yields no additional credit.
+        Token usage for an advisor sub-inference iteration.
 
-`null` when the refused model isn't eligible for a fallback credit.
+        - `cache_creation: object`
 
-
+          Breakdown of cached tokens by TTL
 
-fallback\_has\_prefill\_claim: boolean
+          - `ephemeral_1h_input_tokens: number`
 
-Whether the accompanying `fallback_credit_token` may be redeemed with the
-appended-assistant retry form. Only set when `fallback_credit_token` is
-present.
+            The number of input tokens used to create the 1 hour cache entry.
 
-`true`: retry by resending the same request body plus one appended
-`assistant` message whose content is this response's `content` with any
-trailing whitespace stripped from the final text block and unpaired
-`tool_use` blocks omitted (the same appended-turn shape described on
-`fallback_credit_token`), with the token attached. `false`: retry by
-resending the original request body unchanged, with the token attached —
-the appended-assistant form is not available for this refusal (no
-continuable partial content, or the request uses `output_format` or a
-`tool_choice` that forces tool use). One exception: when the request used
-`output_format` or a forced `tool_choice` and the refusal arrived after
-server tools (including MCP connector tools) had already executed, the
-token may not be redeemable by either retry form; if the exact-body retry
-is then rejected with a 400 saying the token must be redeemed by
-continuing the partial response, discard the token and retry without it.
+            minimum: 0
 
-Advisory: if an appended-assistant retry is rejected with a 400 despite
-`true`, fall back to resending the original request body with the token.
+          - `ephemeral_5m_input_tokens: number`
 
-recommended\_model: string
+            The number of input tokens used to create the 5 minute cache entry.
 
-The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
+            minimum: 0
 
-type: "refusal"
+        - `cache_creation_input_tokens: number`
 
-
+          The number of input tokens used to create the cache entry.
 
-stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 5 more
+          minimum: 0
 
-The reason that we stopped.
+        - `cache_read_input_tokens: number`
 
-This may be one the following values:
+          The number of input tokens read from the cache.
 
-- `"end_turn"`: the model reached a natural stopping point
-- `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
-- `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
-- `"tool_use"`: the model invoked one or more tools
-- `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
-- `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+          minimum: 0
 
-In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
+        - `input_tokens: number`
 
-"end\_turn"
+          The number of input tokens which were used.
 
-"max\_tokens"
+          minimum: 0
 
-"stop\_sequence"
+        - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
 
-"tool\_use"
+          The model that will complete your prompt.
 
-"pause\_turn"
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-"compaction"
+          - `"claude-fable-5-1"`
 
-"refusal"
+            Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
-"model\_context\_window\_exceeded"
+          - `"claude-mythos-5-1"`
 
-
+            Our most capable model for cybersecurity and biology research, available through trusted access programs
 
-stop\_sequence: string
+          - `"claude-sonnet-5"`
 
-Which custom stop sequence was generated, if any.
+            High-performance model for coding and agents
 
-This value will be a non-null string if one of your custom stop sequences was generated.
+          - `"claude-fable-5"`
 
-
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
-type: "message"
+          - `"claude-mythos-5"`
 
-Object type.
+            Most capable model for cybersecurity and biology research
 
-For Messages, this is always `"message"`.
+          - `"claude-opus-5"`
 
-
+            Powerful intelligence for long-running agents and coding
 
-usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more } 
+          - `"claude-opus-4-8"`
 
-Billing and rate-limit usage.
+            Powerful intelligence for long-running agents and coding
 
-Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+          - `"claude-opus-4-7"`
 
-Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+            Powerful intelligence for long-running agents and coding
 
-For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+          - `"claude-mythos-preview"`
 
-Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+            New class of intelligence, strongest in coding and cybersecurity
 
-
+          - `"claude-opus-4-6"`
 
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+            Powerful intelligence for long-running agents and coding
 
-Breakdown of cached tokens by TTL
+          - `"claude-sonnet-4-6"`
 
-ephemeral\_1h\_input\_tokens: number
+            Best combination of speed and intelligence
 
-The number of input tokens used to create the 1 hour cache entry.
+          - `"claude-haiku-4-5"`
 
-ephemeral\_5m\_input\_tokens: number
+            Fastest model with near-frontier intelligence
 
-The number of input tokens used to create the 5 minute cache entry.
+          - `"claude-haiku-4-5-20251001"`
 
-cache\_creation\_input\_tokens: number
+            Fastest model with near-frontier intelligence
 
-The number of input tokens used to create the cache entry.
+          - `"claude-opus-4-5"`
 
-cache\_read\_input\_tokens: number
+            Powerful intelligence for long-running agents and coding
 
-The number of input tokens read from the cache.
+          - `"claude-opus-4-5-20251101"`
 
-inference\_geo: string
+            Powerful intelligence for long-running agents and coding
 
-The geographic region where inference was performed for this request.
+          - `"claude-sonnet-4-5"`
 
-input\_tokens: number
+            High-performance model for agents and coding
 
-The number of input tokens which were used.
+          - `"claude-sonnet-4-5-20250929"`
 
-
+            High-performance model for agents and coding
 
-iterations: array of [BetaMessageIterationUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }  or [BetaCompactionIterationUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  or [BetaAdvisorMessageIterationUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }  or [BetaFallbackMessageIterationUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
+        - `output_tokens: number`
 
-Per-iteration token usage breakdown.
+          The number of output tokens which were used.
 
-Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+          minimum: 0
 
-- Determine which iterations exceeded long context thresholds (>=200k tokens)
-- Calculate the true context window size from the last iteration
-- Understand token accumulation across server-side tool use loops
+        - `type: "advisor_message"`
 
-
+          Usage for an advisor sub-inference iteration
 
-beta\_message\_iteration\_usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
+      - `beta_fallback_message_iteration_usage: object`
 
-Token usage for a sampling iteration.
+        Token usage for the fallback-model attempt of a server-side fallback request.
 
-
+        Produced in place of a `message` entry for whichever hop served the
+        response. A declined hop produces the existing `message` entry. Whether
+        a fallback model served the response is signalled by the presence of this
+        entry in `usage.iterations`.
 
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+        - `cache_creation: object`
 
-Breakdown of cached tokens by TTL
+          Breakdown of cached tokens by TTL
 
-ephemeral\_1h\_input\_tokens: number
+          - `ephemeral_1h_input_tokens: number`
 
-The number of input tokens used to create the 1 hour cache entry.
+            The number of input tokens used to create the 1 hour cache entry.
 
-ephemeral\_5m\_input\_tokens: number
+            minimum: 0
 
-The number of input tokens used to create the 5 minute cache entry.
+          - `ephemeral_5m_input_tokens: number`
 
-cache\_creation\_input\_tokens: number
+            The number of input tokens used to create the 5 minute cache entry.
 
-The number of input tokens used to create the cache entry.
+            minimum: 0
 
-cache\_read\_input\_tokens: number
+        - `cache_creation_input_tokens: number`
 
-The number of input tokens read from the cache.
+          The number of input tokens used to create the cache entry.
 
-input\_tokens: number
+          minimum: 0
 
-The number of input tokens which were used.
+        - `cache_read_input_tokens: number`
 
-
+          The number of input tokens read from the cache.
 
-model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
+          minimum: 0
 
-The model that will complete your prompt.
+        - `input_tokens: number`
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+          The number of input tokens which were used.
 
-"claude-sonnet-5"
+          minimum: 0
 
-High-performance model for coding and agents
+        - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
 
-"claude-fable-5"
+          The model that will complete your prompt.
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-"claude-mythos-5"
+          - `"claude-fable-5-1"`
 
-Most capable model for cybersecurity and biology research
+            Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
-"claude-opus-4-8"
+          - `"claude-mythos-5-1"`
 
-Frontier intelligence for long-running agents and coding
+            Our most capable model for cybersecurity and biology research, available through trusted access programs
 
-"claude-opus-4-7"
+          - `"claude-sonnet-5"`
 
-Frontier intelligence for long-running agents and coding
+            High-performance model for coding and agents
 
-"claude-mythos-preview"
+          - `"claude-fable-5"`
 
-New class of intelligence, strongest in coding and cybersecurity
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
-"claude-opus-4-6"
+          - `"claude-mythos-5"`
 
-Frontier intelligence for long-running agents and coding
+            Most capable model for cybersecurity and biology research
 
-"claude-sonnet-4-6"
+          - `"claude-opus-5"`
 
-Best combination of speed and intelligence
+            Powerful intelligence for long-running agents and coding
 
-"claude-haiku-4-5"
+          - `"claude-opus-4-8"`
 
-Fastest model with near-frontier intelligence
+            Powerful intelligence for long-running agents and coding
 
-"claude-haiku-4-5-20251001"
+          - `"claude-opus-4-7"`
 
-Fastest model with near-frontier intelligence
+            Powerful intelligence for long-running agents and coding
 
-"claude-opus-4-5"
+          - `"claude-mythos-preview"`
 
-Premium model combining maximum intelligence with practical performance
+            New class of intelligence, strongest in coding and cybersecurity
 
-"claude-opus-4-5-20251101"
+          - `"claude-opus-4-6"`
 
-Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
-"claude-sonnet-4-5"
+          - `"claude-sonnet-4-6"`
 
-High-performance model for agents and coding
+            Best combination of speed and intelligence
 
-"claude-sonnet-4-5-20250929"
+          - `"claude-haiku-4-5"`
 
-High-performance model for agents and coding
+            Fastest model with near-frontier intelligence
 
-"claude-opus-4-1"
+          - `"claude-haiku-4-5-20251001"`
 
-Exceptional model for specialized complex tasks
+            Fastest model with near-frontier intelligence
 
-"claude-opus-4-1-20250805"
+          - `"claude-opus-4-5"`
 
-Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
-output\_tokens: number
+          - `"claude-opus-4-5-20251101"`
 
-The number of output tokens which were used.
+            Powerful intelligence for long-running agents and coding
 
-type: "message"
+          - `"claude-sonnet-4-5"`
 
-Usage for a sampling iteration
+            High-performance model for agents and coding
 
-
+          - `"claude-sonnet-4-5-20250929"`
 
-beta\_compaction\_iteration\_usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } 
+            High-performance model for agents and coding
 
-Token usage for a compaction iteration.
+        - `output_tokens: number`
 
-
+          The number of output tokens which were used.
 
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+          minimum: 0
 
-Breakdown of cached tokens by TTL
+        - `type: "fallback_message"`
 
-ephemeral\_1h\_input\_tokens: number
+          Usage for the fallback-model attempt that served the response
 
-The number of input tokens used to create the 1 hour cache entry.
+    - `output_tokens: number`
 
-ephemeral\_5m\_input\_tokens: number
+      The number of output tokens which were used.
 
-The number of input tokens used to create the 5 minute cache entry.
+      minimum: 0
 
-cache\_creation\_input\_tokens: number
+    - `output_tokens_details: object`
 
-The number of input tokens used to create the cache entry.
+      Breakdown of output tokens by category.
 
-cache\_read\_input\_tokens: number
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
 
-The number of input tokens read from the cache.
+      - `thinking_tokens: number`
 
-input\_tokens: number
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
 
-The number of input tokens which were used.
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
-output\_tokens: number
+        minimum: 0
 
-The number of output tokens which were used.
+    - `server_tool_use: object`
 
-type: "compaction"
+      The number of server tool requests.
 
-Usage for a compaction iteration
+      - `web_fetch_requests: number`
 
-
+        The number of web fetch tool requests.
 
-beta\_advisor\_message\_iteration\_usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
+        minimum: 0
 
-Token usage for an advisor sub-inference iteration.
+      - `web_search_requests: number`
 
-
+        The number of web search tool requests.
 
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+        minimum: 0
 
-Breakdown of cached tokens by TTL
+    - `service_tier: "standard" or "priority" or "batch"`
 
-ephemeral\_1h\_input\_tokens: number
+      If the request used the priority, standard, or batch tier.
 
-The number of input tokens used to create the 1 hour cache entry.
+      - `"standard"`
 
-ephemeral\_5m\_input\_tokens: number
+      - `"priority"`
 
-The number of input tokens used to create the 5 minute cache entry.
+      - `"batch"`
 
-cache\_creation\_input\_tokens: number
+    - `speed: "standard" or "fast"`
 
-The number of input tokens used to create the cache entry.
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-cache\_read\_input\_tokens: number
+      - `"standard"`
 
-The number of input tokens read from the cache.
+      - `"fast"`
 
-input\_tokens: number
+  - `input_transformations: optional array of BetaThinkingDroppedInputTransformation`
 
-The number of input tokens which were used.
+    Changes the API made to the request's input before showing it to the model:
+    one entry per change, in request order. Today the only entry type is
+    `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
+    block from the request's `messages` that was removed from the prompt instead
+    of being shown to the model because it failed a binding check. More entry
+    types may be added over time; ignore types you do not recognize.
 
-
+    Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
+    every such response from a model that supports extended thinking, as `[]`
+    when nothing was changed; without the beta, blocks are removed all the same
+    but nothing is reported. Removed blocks contribute nothing to
+    `usage.input_tokens`. When streaming, the array is final in `message_start`;
+    the final `message_delta` event carries it only when a server-side model
+    fallback happened mid-stream, in which case it holds the serving model's
+    entries and replaces the one in `message_start`.
 
-model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
+    - `path: string`
 
-The model that will complete your prompt.
+      Where the removed block was in your request, as `messages.{i}.content.{j}`:
+      `i` indexes the `messages` array you sent and `j` that message's `content`
+      array — the same form error messages use.
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+    - `reason: "model_binding_mismatch" or "prefix_binding_mismatch" or "organization_binding_mismatch" or "end_user_binding_mismatch"`
 
-"claude-sonnet-5"
+      Which binding check removed the block: `model_binding_mismatch` — it was
+      created by a model whose reasoning the requested model may not read;
+      `prefix_binding_mismatch` — the conversation before it differs from the
+      conversation it was created in (the rest of that turn's consecutive thinking
+      blocks are removed with it, each with this reason);
+      `organization_binding_mismatch` — it was created under a different
+      organization (an Anthropic organization, AWS account or Google Cloud project)
+      and this organization is not one of its additional organizations;
+      `end_user_binding_mismatch` — it was created for a different end user, or
+      was removed by the consumer-organization binding. A block that would fail
+      several checks reports one reason, in this order of precedence:
+      `organization_binding_mismatch`, `end_user_binding_mismatch`,
+      `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-High-performance model for coding and agents
+      - `"model_binding_mismatch"`
 
-"claude-fable-5"
+      - `"prefix_binding_mismatch"`
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+      - `"organization_binding_mismatch"`
 
-"claude-mythos-5"
+      - `"end_user_binding_mismatch"`
 
-Most capable model for cybersecurity and biology research
+    - `type: "thinking_dropped"`
 
-"claude-opus-4-8"
+      Always `thinking_dropped` for this entry type.
 
-Frontier intelligence for long-running agents and coding
+- `beta_raw_message_stream_event: BetaRawMessageStartEvent or BetaRawMessageDeltaEvent or BetaRawMessageStopEvent or 3 more`
 
-"claude-opus-4-7"
+  - `beta_raw_message_start_event: object`
 
-Frontier intelligence for long-running agents and coding
+    - `message: object`
 
-"claude-mythos-preview"
+      - `id: string`
 
-New class of intelligence, strongest in coding and cybersecurity
+        Unique object identifier.
 
-"claude-opus-4-6"
+        The format and length of IDs may change over time.
 
-Frontier intelligence for long-running agents and coding
+      - `container: object`
 
-"claude-sonnet-4-6"
+        Information about the container used in the request (for the code execution tool)
 
-Best combination of speed and intelligence
+      - `content: array of BetaContentBlock`
 
-"claude-haiku-4-5"
+        Content generated by the model.
 
-Fastest model with near-frontier intelligence
+        This is an array of content blocks, each of which has a `type` that determines its shape.
 
-"claude-haiku-4-5-20251001"
+        Example:
 
-Fastest model with near-frontier intelligence
+        ```json
+        [{"type": "text", "text": "Hi, I'm Claude."}]
+        ```
 
-"claude-opus-4-5"
+        If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
 
-Premium model combining maximum intelligence with practical performance
+        For example, if the input `messages` were:
 
-"claude-opus-4-5-20251101"
+        ```json
+        [
+          {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+          {"role": "assistant", "content": "The best answer is ("}
+        ]
+        ```
 
-Premium model combining maximum intelligence with practical performance
+        Then the response `content` might be:
 
-"claude-sonnet-4-5"
+        ```json
+        [{"type": "text", "text": "B)"}]
+        ```
 
-High-performance model for agents and coding
+      - `context_management: object`
 
-"claude-sonnet-4-5-20250929"
+        Context management response.
 
-High-performance model for agents and coding
+        Information about context management strategies applied during the request.
 
-"claude-opus-4-1"
+      - `diagnostics: object`
 
-Exceptional model for specialized complex tasks
+        Response envelope for request-level diagnostics. Present (possibly
+        null) whenever the caller supplied `diagnostics` on the request.
 
-"claude-opus-4-1-20250805"
+      - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
 
-Exceptional model for specialized complex tasks
+        The model that will complete your prompt.
 
-output\_tokens: number
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-The number of output tokens which were used.
+      - `role: "assistant"`
 
-type: "advisor\_message"
+        Conversational role of the generated message.
 
-Usage for an advisor sub-inference iteration
+        This will always be `"assistant"`.
 
-
+      - `stop_details: object`
 
-beta\_fallback\_message\_iteration\_usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
+        Structured information about a refusal.
 
-Token usage for the fallback-model attempt of a server-side fallback request.
+      - `stop_reason: "end_turn" or "max_tokens" or "stop_sequence" or 5 more`
 
-Produced in place of a `message` entry for whichever hop served the
-response. A declined hop produces the existing `message` entry. Whether
-a fallback model served the response is signalled by the presence of this
-entry in `usage.iterations`.
+        The reason that we stopped.
 
-
+        This may be one the following values:
 
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+        * `"end_turn"`: the model reached a natural stopping point
+        * `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
+        * `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
+        * `"tool_use"`: the model invoked one or more tools
+        * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
+        * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+        * `"model_context_window_exceeded"`: we exceeded the model's context window
 
-Breakdown of cached tokens by TTL
+        In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-ephemeral\_1h\_input\_tokens: number
+      - `stop_sequence: string`
 
-The number of input tokens used to create the 1 hour cache entry.
+        Which custom stop sequence was generated, if any.
 
-ephemeral\_5m\_input\_tokens: number
+        This value will be a non-null string if one of your custom stop sequences was generated.
 
-The number of input tokens used to create the 5 minute cache entry.
+      - `type: "message"`
 
-cache\_creation\_input\_tokens: number
+        Object type.
 
-The number of input tokens used to create the cache entry.
+        For Messages, this is always `"message"`.
 
-cache\_read\_input\_tokens: number
+      - `usage: object`
 
-The number of input tokens read from the cache.
+        Billing and rate-limit usage.
 
-input\_tokens: number
+        Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
 
-The number of input tokens which were used.
+        Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
 
-
+        For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
 
-model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
+        Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-The model that will complete your prompt.
+      - `input_transformations: optional array of BetaThinkingDroppedInputTransformation`
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+        Changes the API made to the request's input before showing it to the model:
+        one entry per change, in request order. Today the only entry type is
+        `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
+        block from the request's `messages` that was removed from the prompt instead
+        of being shown to the model because it failed a binding check. More entry
+        types may be added over time; ignore types you do not recognize.
 
-"claude-sonnet-5"
+        Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
+        every such response from a model that supports extended thinking, as `[]`
+        when nothing was changed; without the beta, blocks are removed all the same
+        but nothing is reported. Removed blocks contribute nothing to
+        `usage.input_tokens`. When streaming, the array is final in `message_start`;
+        the final `message_delta` event carries it only when a server-side model
+        fallback happened mid-stream, in which case it holds the serving model's
+        entries and replaces the one in `message_start`.
 
-High-performance model for coding and agents
+    - `type: "message_start"`
 
-"claude-fable-5"
+  - `beta_raw_message_delta_event: object`
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+    - `context_management: object`
 
-"claude-mythos-5"
+      Information about context management strategies applied during the request
 
-Most capable model for cybersecurity and biology research
+      - `applied_edits: array of BetaClearToolUses20250919EditResponse or BetaClearThinking20251015EditResponse`
 
-"claude-opus-4-8"
+        List of context management edits that were applied.
 
-Frontier intelligence for long-running agents and coding
+    - `delta: object`
 
-"claude-opus-4-7"
+      - `container: object`
 
-Frontier intelligence for long-running agents and coding
+        Information about the container used in the request (for the code execution tool)
 
-"claude-mythos-preview"
+        - `id: string`
 
-New class of intelligence, strongest in coding and cybersecurity
+          Identifier for the container used in this request
 
-"claude-opus-4-6"
+        - `expires_at: string`
 
-Frontier intelligence for long-running agents and coding
+          The time at which the container will expire.
 
-"claude-sonnet-4-6"
+          format: date-time
 
-Best combination of speed and intelligence
+        - `skills: array of BetaContainerSkill`
 
-"claude-haiku-4-5"
+          Skills loaded in the container
 
-Fastest model with near-frontier intelligence
+      - `stop_details: object`
 
-"claude-haiku-4-5-20251001"
+        Structured information about a refusal.
 
-Fastest model with near-frontier intelligence
+        - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
-"claude-opus-4-5"
+          The policy category that triggered a refusal.
 
-Premium model combining maximum intelligence with practical performance
+        - `explanation: string`
 
-"claude-opus-4-5-20251101"
+          Human-readable explanation of the refusal.
 
-Premium model combining maximum intelligence with practical performance
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-"claude-sonnet-4-5"
+        - `fallback_credit_token: string`
 
-High-performance model for agents and coding
+          Opaque code that refunds the cache-miss cost when retrying this refused
+          request on the fallback model. Pass it as `fallback_credit_token` on the
+          retry request. Expires 5 minutes after the refusal.
 
-"claude-sonnet-4-5-20250929"
+          The retry is sent either with the same request body (`system`, `messages`,
+          `tools`, and other render-shaping fields), or with the same body plus one
+          appended `assistant` message whose content is the partial text (with any
+          trailing whitespace stripped from the final text block) and paired
+          server-tool blocks from this refusal — which also authorizes that
+          appended turn as an assistant-prefill continuation on models that otherwise
+          disallow prefill. A token minted mid-server-tool-loop whose partial content
+          was continuable may only be redeemed the second way — if a same-body retry
+          is rejected with a 400 saying the token must be redeemed by continuing the
+          partial response, retry the second way instead. Either way: same workspace,
+          same platform; a mismatch is a 400. Resending a token for an already-warm
+          prefix is permitted but yields no additional credit.
 
-High-performance model for agents and coding
+          `null` when the refused model isn't eligible for a fallback credit.
 
-"claude-opus-4-1"
+        - `fallback_has_prefill_claim: boolean`
 
-Exceptional model for specialized complex tasks
+          Whether the accompanying `fallback_credit_token` may be redeemed with the
+          appended-assistant retry form. Only set when `fallback_credit_token` is
+          present.
 
-"claude-opus-4-1-20250805"
+          `true`: retry by resending the same request body plus one appended
+          `assistant` message whose content is this response's `content` with any
+          trailing whitespace stripped from the final text block and unpaired
+          `tool_use` blocks omitted (the same appended-turn shape described on
+          `fallback_credit_token`), with the token attached. `false`: retry by
+          resending the original request body unchanged, with the token attached —
+          the appended-assistant form is not available for this refusal (no
+          continuable partial content, or the request uses `output_format` or a
+          `tool_choice` that forces tool use). One exception: when the request used
+          `output_format` or a forced `tool_choice` and the refusal arrived after
+          server tools (including MCP connector tools) had already executed, the
+          token may not be redeemable by either retry form; if the exact-body retry
+          is then rejected with a 400 saying the token must be redeemed by
+          continuing the partial response, discard the token and retry without it.
 
-Exceptional model for specialized complex tasks
+          Advisory: if an appended-assistant retry is rejected with a 400 despite
+          `true`, fall back to resending the original request body with the token.
 
-output\_tokens: number
+        - `recommended_model: string`
 
-The number of output tokens which were used.
+          The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-type: "fallback\_message"
+        - `type: "refusal"`
 
-Usage for the fallback-model attempt that served the response
+      - `stop_reason: "end_turn" or "max_tokens" or "stop_sequence" or 5 more`
 
-output\_tokens: number
+        - `"end_turn"`
 
-The number of output tokens which were used.
+        - `"max_tokens"`
 
-
+        - `"stop_sequence"`
 
-output\_tokens\_details: object { thinking\_tokens } 
+        - `"tool_use"`
 
-Breakdown of output tokens by category.
+        - `"pause_turn"`
 
-`output_tokens` remains the inclusive, authoritative total used for billing.
-This object provides a read-only decomposition for observability — for example,
-how many of the billed output tokens were spent on internal reasoning that may
-have been summarized before being returned to you.
+        - `"compaction"`
 
-
+        - `"refusal"`
 
-thinking\_tokens: number
+        - `"model_context_window_exceeded"`
 
-Number of output tokens the model generated as internal reasoning, including
-the thinking-block delimiter tokens.
+      - `stop_sequence: string`
 
-Reflects the raw reasoning the model produced, not the (possibly shorter)
-summarized thinking text returned in the response body. Computed by
-re-tokenizing the raw reasoning text, so it may differ from the model's exact
-generation count by a small number of tokens. Always ≤ `output_tokens`;
-`output_tokens - thinking_tokens` approximates the non-reasoning output.
+    - `type: "message_delta"`
 
-
+    - `usage: object`
 
-server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests } 
+      Billing and rate-limit usage.
 
-The number of server tool requests.
+      Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
 
-web\_fetch\_requests: number
+      Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
 
-The number of web fetch tool requests.
+      For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
 
-web\_search\_requests: number
+      Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-The number of web search tool requests.
+      - `cache_creation_input_tokens: number`
 
-
+        The cumulative number of input tokens used to create the cache entry.
 
-service\_tier: "standard" or "priority" or "batch"
+        minimum: 0
 
-If the request used the priority, standard, or batch tier.
+      - `cache_read_input_tokens: number`
 
-"standard"
+        The cumulative number of input tokens read from the cache.
 
-"priority"
+        minimum: 0
 
-"batch"
+      - `fallback_credit: object`
 
-
+        Outcome of the `fallback_credit_token` presented on this request.
 
-speed: "standard" or "fast"
+        - `status: BetaFallbackCreditRedeemed or BetaFallbackCreditNotApplied`
 
-The inference speed mode used for this request.
+          Whether the fallback-credit reprice was applied to this response's billing.
 
-"standard"
+          A union discriminated on `type`. `redeemed`: the retry is billed as if
+          the conversation had been on the retry model all along — including when the
+          resulting shift is zero because there was nothing to move. `not_applied`:
+          no reprice was applied; the arm's `reason` says why.
 
-"fast"
+      - `input_tokens: number`
 
-
+        The cumulative number of input tokens which were used.
 
-beta\_raw\_message\_stream\_event: [BetaRawMessageStartEvent](api/beta/messages.md) { message, type }  or [BetaRawMessageDeltaEvent](api/beta/messages.md) { context\_management, delta, type, usage }  or [BetaRawMessageStopEvent](api/beta/messages.md) { type }  or 3 more
+        minimum: 0
 
-
+      - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage or BetaFallbackMessageIterationUsage`
 
-beta\_raw\_message\_start\_event: object { message, type } 
+        Per-iteration token usage breakdown.
 
-
+        Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
-message: object { id, container, content, 9 more } 
+        - Determine which iterations exceeded long context thresholds (>=200k tokens)
+        - Calculate the context window size from the last `message` entry
+        - Understand token accumulation across server-side tool use loops
 
-
+        A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-id: string
+        - `beta_message_iteration_usage: object`
 
-Unique object identifier.
+          Token usage for a sampling iteration.
 
-The format and length of IDs may change over time.
+        - `beta_compaction_iteration_usage: object`
 
-
+          Token usage for a compaction iteration.
 
-container: object { id, expires\_at, skills } 
+        - `beta_advisor_message_iteration_usage: object`
 
-Information about the container used in the request (for the code execution tool)
+          Token usage for an advisor sub-inference iteration.
 
-id: string
+        - `beta_fallback_message_iteration_usage: object`
 
-Identifier for the container used in this request
+          Token usage for the fallback-model attempt of a server-side fallback request.
 
-expires\_at: string
+          Produced in place of a `message` entry for whichever hop served the
+          response. A declined hop produces the existing `message` entry. Whether
+          a fallback model served the response is signalled by the presence of this
+          entry in `usage.iterations`.
 
-The time at which the container will expire.
+      - `output_tokens: number`
 
-
+        The cumulative number of output tokens which were used.
 
-skills: array of [BetaSkill](api/beta/messages.md) { skill\_id, type, version } 
+      - `output_tokens_details: object`
 
-Skills loaded in the container
+        Breakdown of output tokens by category.
 
-skill\_id: string
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
 
-Skill ID
+        - `thinking_tokens: number`
 
-
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
 
-type: "anthropic" or "custom"
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
-Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+          minimum: 0
 
-"anthropic"
+      - `server_tool_use: object`
 
-"custom"
+        The number of server tool requests.
 
-version: string
+        - `web_fetch_requests: number`
 
-Skill version or 'latest' for most recent version
+          The number of web fetch tool requests.
 
-
+          minimum: 0
 
-content: array of [BetaContentBlock](api/beta/messages.md)
+        - `web_search_requests: number`
 
-Content generated by the model.
+          The number of web search tool requests.
 
-This is an array of content blocks, each of which has a `type` that determines its shape.
+          minimum: 0
 
-Example:
+    - `input_transformations: optional array of BetaThinkingDroppedInputTransformation`
 
-```shiki
-[{"type": "text", "text": "Hi, I'm Claude."}]
-```
+      Changes the API made to the request's input before showing it to the model:
+      one entry per change, in request order. Today the only entry type is
+      `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
+      block from the request's `messages` that was removed from the prompt instead
+      of being shown to the model because it failed a binding check. More entry
+      types may be added over time; ignore types you do not recognize.
 
-
+      Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
+      every such response from a model that supports extended thinking, as `[]`
+      when nothing was changed; without the beta, blocks are removed all the same
+      but nothing is reported. Removed blocks contribute nothing to
+      `usage.input_tokens`. When streaming, the array is final in `message_start`;
+      the final `message_delta` event carries it only when a server-side model
+      fallback happened mid-stream, in which case it holds the serving model's
+      entries and replaces the one in `message_start`.
 
-If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
+      - `path: string`
 
-For example, if the input `messages` were:
+        Where the removed block was in your request, as `messages.{i}.content.{j}`:
+        `i` indexes the `messages` array you sent and `j` that message's `content`
+        array — the same form error messages use.
 
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("}
-]
-```
+      - `reason: "model_binding_mismatch" or "prefix_binding_mismatch" or "organization_binding_mismatch" or "end_user_binding_mismatch"`
 
-
+        Which binding check removed the block: `model_binding_mismatch` — it was
+        created by a model whose reasoning the requested model may not read;
+        `prefix_binding_mismatch` — the conversation before it differs from the
+        conversation it was created in (the rest of that turn's consecutive thinking
+        blocks are removed with it, each with this reason);
+        `organization_binding_mismatch` — it was created under a different
+        organization (an Anthropic organization, AWS account or Google Cloud project)
+        and this organization is not one of its additional organizations;
+        `end_user_binding_mismatch` — it was created for a different end user, or
+        was removed by the consumer-organization binding. A block that would fail
+        several checks reports one reason, in this order of precedence:
+        `organization_binding_mismatch`, `end_user_binding_mismatch`,
+        `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-Then the response `content` might be:
+      - `type: "thinking_dropped"`
 
-```shiki
-[{"type": "text", "text": "B)"}]
-```
+        Always `thinking_dropped` for this entry type.
 
-
+  - `beta_raw_message_stop_event: object`
 
-
+    - `type: "message_stop"`
 
-beta\_text\_block: object { citations, text, type } 
+  - `beta_raw_content_block_start_event: object`
 
-
+    - `content_block: BetaTextBlock or BetaThinkingBlock or BetaRedactedThinkingBlock or 14 more`
 
-citations: array of [BetaTextCitation](api/beta/messages.md)
+      Response model for a file uploaded to the container.
 
-Citations supporting the text block.
+      - `beta_text_block: object`
 
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+        - `citations: array of BetaTextCitation`
 
-
+          Citations supporting the text block.
 
-beta\_citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+          The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-cited\_text: string
+        - `text: string`
 
-document\_index: number
+          maxLength: 5000000, minLength: 0
 
-document\_title: string
+        - `type: "text"`
 
-end\_char\_index: number
+      - `beta_thinking_block: object`
 
-file\_id: string
+        - `signature: string`
 
-start\_char\_index: number
+          A value used to verify that this thinking block was generated by Claude when it is passed back to the API.
 
-type: "char\_location"
+          This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-
+          See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-beta\_citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+        - `thinking: string`
 
-cited\_text: string
+          The text of Claude's thinking process for this block.
 
-document\_index: number
+        - `type: "thinking"`
 
-document\_title: string
+      - `beta_redacted_thinking_block: object`
 
-end\_page\_number: number
+        - `data: string`
 
-file\_id: string
+          The contents of this redacted thinking block, returned when portions of the model's thinking were safety-redacted. This field is opaque and encrypted, with no readable content.
 
-start\_page\_number: number
+          Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-type: "page\_location"
+          See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-
+        - `type: "redacted_thinking"`
 
-beta\_citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+      - `beta_tool_use_block: object`
 
-
+        - `id: string`
 
-cited\_text: string
+          pattern: ^[a-zA-Z0-9_-]+$
 
-The full text of the cited block range, concatenated.
+        - `input: map[unknown]`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+        - `name: string`
 
-document\_index: number
+          minLength: 1
 
-document\_title: string
+        - `type: "tool_use"`
 
-
+        - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-end\_block\_index: number
+          Tool invocation directly from the model.
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+        - `toolset_name: optional string`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+          For a toolset member tool_use, the toolset family.
 
-file\_id: string
+          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-start\_block\_index: number
+      - `beta_server_tool_use_block: object`
 
-0-based index of the first cited block in the source's `content` array.
+        - `id: string`
 
-type: "content\_block\_location"
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-
+        - `input: map[unknown]`
 
-beta\_citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
+        - `name: "advisor" or "web_search" or "web_fetch" or 5 more`
 
-cited\_text: string
+        - `type: "server_tool_use"`
 
-encrypted\_index: string
+        - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-title: string
+          Tool invocation directly from the model.
 
-type: "web\_search\_result\_location"
+      - `beta_web_search_tool_result_block: object`
 
-url: string
+        - `content: BetaWebSearchToolResultError or array of BetaWebSearchResultBlock`
 
-
+        - `tool_use_id: string`
 
-beta\_citation\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-
+        - `type: "web_search_tool_result"`
 
-cited\_text: string
+        - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-The full text of the cited block range, concatenated.
+          Tool invocation directly from the model.
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+      - `beta_web_fetch_tool_result_block: object`
 
-
+        - `content: BetaWebFetchToolResultErrorBlock or BetaWebFetchBlock`
 
-end\_block\_index: number
+        - `tool_use_id: string`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+        - `type: "web_fetch_tool_result"`
 
-
+        - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-search\_result\_index: number
+          Tool invocation directly from the model.
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+      - `beta_advisor_tool_result_block: object`
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+        - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
 
-source: string
+        - `tool_use_id: string`
 
-start\_block\_index: number
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-0-based index of the first cited block in the source's `content` array.
+        - `type: "advisor_tool_result"`
 
-title: string
+      - `beta_code_execution_tool_result_block: object`
 
-type: "search\_result\_location"
+        - `content: BetaCodeExecutionToolResultError or BetaCodeExecutionResultBlock or BetaEncryptedCodeExecutionResultBlock`
 
-text: string
+          Code execution result with encrypted stdout for PFC + web_search results.
 
-type: "text"
+        - `tool_use_id: string`
 
-
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-beta\_thinking\_block: object { signature, thinking, type } 
+        - `type: "code_execution_tool_result"`
 
-signature: string
+      - `beta_bash_code_execution_tool_result_block: object`
 
-thinking: string
+        - `content: BetaBashCodeExecutionToolResultError or BetaBashCodeExecutionResultBlock`
 
-type: "thinking"
+        - `tool_use_id: string`
 
-
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-beta\_redacted\_thinking\_block: object { data, type } 
+        - `type: "bash_code_execution_tool_result"`
 
-data: string
+      - `beta_text_editor_code_execution_tool_result_block: object`
 
-type: "redacted\_thinking"
+        - `content: BetaTextEditorCodeExecutionToolResultError or BetaTextEditorCodeExecutionViewResultBlock or BetaTextEditorCodeExecutionCreateResultBlock or BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
-
+        - `tool_use_id: string`
 
-beta\_tool\_use\_block: object { id, input, name, 2 more } 
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-id: string
+        - `type: "text_editor_code_execution_tool_result"`
 
-input: map[unknown]
+      - `beta_tool_search_tool_result_block: object`
 
-name: string
+        - `content: BetaToolSearchToolResultError or BetaToolSearchToolSearchResultBlock`
 
-type: "tool\_use"
+        - `tool_use_id: string`
 
-
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-caller: optional [BetaDirectCaller](api/beta/messages.md) { type }  or [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  or [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
+        - `type: "tool_search_tool_result"`
 
-Tool invocation directly from the model.
+      - `beta_mcp_tool_use_block: object`
 
-
+        - `id: string`
 
-beta\_direct\_caller: object { type } 
+          pattern: ^[a-zA-Z0-9_-]+$
 
-Tool invocation directly from the model.
+        - `input: map[unknown]`
 
-type: "direct"
+        - `name: string`
 
-
+          The name of the MCP tool
 
-beta\_server\_tool\_caller: object { tool\_id, type } 
+        - `server_name: string`
 
-Tool invocation generated by a server-side tool.
+          The name of the MCP server
 
-tool\_id: string
+        - `type: "mcp_tool_use"`
 
-type: "code\_execution\_20250825"
+      - `beta_mcp_tool_result_block: object`
 
-
+        - `content: string or array of BetaTextBlock`
 
-beta\_server\_tool\_caller\_20260120: object { tool\_id, type } 
+        - `is_error: boolean`
 
-tool\_id: string
+        - `tool_use_id: string`
 
-type: "code\_execution\_20260120"
+          pattern: ^[a-zA-Z0-9_-]+$
 
-
+        - `type: "mcp_tool_result"`
 
-beta\_server\_tool\_use\_block: object { id, input, name, 2 more } 
+      - `beta_container_upload_block: object`
 
-id: string
+        Response model for a file uploaded to the container.
 
-input: map[unknown]
+        - `file_id: string`
 
-
+        - `type: "container_upload"`
 
-name: "advisor" or "web\_search" or "web\_fetch" or 5 more
+      - `beta_compaction_block: object`
 
-"advisor"
+        A compaction block returned when autocompact is triggered.
 
-"web\_search"
+        When content is None, it indicates the compaction failed to produce a valid
+        summary (e.g., malformed output from the model). Clients may round-trip
+        compaction blocks with null content; the server treats them as no-ops.
 
-"web\_fetch"
+        - `content: string`
 
-"code\_execution"
+          Summary of compacted content, or null if compaction failed
 
-"bash\_code\_execution"
+        - `encrypted_content: string`
 
-"text\_editor\_code\_execution"
+          Opaque metadata from prior compaction, to be round-tripped verbatim
 
-"tool\_search\_tool\_regex"
+        - `type: "compaction"`
 
-"tool\_search\_tool\_bm25"
+      - `beta_fallback_block: object`
 
-type: "server\_tool\_use"
+        Marks the point in `content` where one model's output gives way to the next.
 
-
+        One block appears per hop where a preceding model actually ran this turn and
+        declined. A turn where no preceding model ran and declined has no such
+        boundary and carries no block — the signal for whether a fallback model
+        served the response is the presence of a `fallback_message` entry in
+        `usage.iterations`, not this block.
 
-caller: optional [BetaDirectCaller](api/beta/messages.md) { type }  or [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  or [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
+        The block is treated like a server-tool content block for streaming: it
+        arrives via the standard `content_block_start` / `content_block_stop`
+        pair and carries no deltas.
 
-Tool invocation directly from the model.
+        - `from: object`
 
-
+          The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-beta\_direct\_caller: object { type } 
+        - `to: object`
 
-Tool invocation directly from the model.
+          The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-type: "direct"
+        - `trigger: object`
 
-
+          What caused the `from` model to hand over at this hop.
 
-beta\_server\_tool\_caller: object { tool\_id, type } 
+        - `type: "fallback"`
 
-Tool invocation generated by a server-side tool.
+    - `index: number`
 
-tool\_id: string
+    - `type: "content_block_start"`
 
-type: "code\_execution\_20250825"
+  - `beta_raw_content_block_delta_event: object`
 
-
+    - `delta: BetaTextDelta or BetaInputJSONDelta or BetaCitationsDelta or 3 more`
 
-beta\_server\_tool\_caller\_20260120: object { tool\_id, type } 
+      - `beta_text_delta: object`
 
-tool\_id: string
+        - `text: string`
 
-type: "code\_execution\_20260120"
+        - `type: "text_delta"`
 
-
+      - `beta_input_json_delta: object`
 
-beta\_web\_search\_tool\_result\_block: object { content, tool\_use\_id, type, caller } 
+        - `partial_json: string`
 
-
+        - `type: "input_json_delta"`
 
-content: [BetaWebSearchToolResultError](api/beta/messages.md) { error\_code, type }  or array of [BetaWebSearchResultBlock](api/beta/messages.md) { encrypted\_content, page\_age, title, 2 more } 
+      - `beta_citations_delta: object`
 
-
+        - `citation: BetaCitationCharLocation or BetaCitationPageLocation or BetaCitationContentBlockLocation or 2 more`
 
-beta\_web\_search\_tool\_result\_error: object { error\_code, type } 
+          - `beta_citation_char_location: object`
 
-
+            - `cited_text: string`
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+            - `document_index: number`
 
-"invalid\_tool\_input"
+              minimum: 0
 
-"unavailable"
+            - `document_title: string`
 
-"max\_uses\_exceeded"
+            - `end_char_index: number`
 
-"too\_many\_requests"
+            - `file_id: string`
 
-"query\_too\_long"
+            - `start_char_index: number`
 
-"request\_too\_large"
+              minimum: 0
 
-type: "web\_search\_tool\_result\_error"
+            - `type: "char_location"`
 
-
+          - `beta_citation_page_location: object`
 
-union\_member\_1: array of [BetaWebSearchResultBlock](api/beta/messages.md) { encrypted\_content, page\_age, title, 2 more } 
+            - `cited_text: string`
 
-encrypted\_content: string
+            - `document_index: number`
 
-page\_age: string
+              minimum: 0
 
-title: string
+            - `document_title: string`
 
-type: "web\_search\_result"
+            - `end_page_number: number`
 
-url: string
+            - `file_id: string`
 
-tool\_use\_id: string
+            - `start_page_number: number`
 
-type: "web\_search\_tool\_result"
+              minimum: 1
 
-
+            - `type: "page_location"`
 
-caller: optional [BetaDirectCaller](api/beta/messages.md) { type }  or [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  or [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
+          - `beta_citation_content_block_location: object`
 
-Tool invocation directly from the model.
+            - `cited_text: string`
 
-
+              The full text of the cited block range, concatenated.
 
-beta\_direct\_caller: object { type } 
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-Tool invocation directly from the model.
+            - `document_index: number`
 
-type: "direct"
+              minimum: 0
 
-
+            - `document_title: string`
 
-beta\_server\_tool\_caller: object { tool\_id, type } 
+            - `end_block_index: number`
 
-Tool invocation generated by a server-side tool.
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-tool\_id: string
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-type: "code\_execution\_20250825"
+            - `file_id: string`
 
-
+            - `start_block_index: number`
 
-beta\_server\_tool\_caller\_20260120: object { tool\_id, type } 
+              0-based index of the first cited block in the source's `content` array.
 
-tool\_id: string
+              minimum: 0
 
-type: "code\_execution\_20260120"
+            - `type: "content_block_location"`
 
-
+          - `beta_citations_web_search_result_location: object`
 
-beta\_web\_fetch\_tool\_result\_block: object { content, tool\_use\_id, type, caller } 
+            - `cited_text: string`
 
-
+            - `encrypted_index: string`
 
-content: [BetaWebFetchToolResultErrorBlock](api/beta/messages.md) { error\_code, type }  or [BetaWebFetchBlock](api/beta/messages.md) { content, retrieved\_at, type, url } 
+            - `title: string`
 
-
+              maxLength: 512
 
-beta\_web\_fetch\_tool\_result\_error\_block: object { error\_code, type } 
+            - `type: "web_search_result_location"`
 
-
+            - `url: string`
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
+          - `beta_citation_search_result_location: object`
 
-"invalid\_tool\_input"
+            - `cited_text: string`
 
-"url\_too\_long"
+              The full text of the cited block range, concatenated.
 
-"url\_not\_allowed"
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-"url\_not\_in\_prior\_context"
+            - `end_block_index: number`
 
-"url\_not\_accessible"
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-"unsupported\_content\_type"
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-"too\_many\_requests"
+            - `search_result_index: number`
 
-"max\_uses\_exceeded"
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
-"unavailable"
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
-type: "web\_fetch\_tool\_result\_error"
+              minimum: 0
 
-
+            - `source: string`
 
-beta\_web\_fetch\_block: object { content, retrieved\_at, type, url } 
+            - `start_block_index: number`
 
-
+              0-based index of the first cited block in the source's `content` array.
 
-content: object { citations, source, title, type } 
+              minimum: 0
 
-
+            - `title: string`
 
-citations: object { enabled } 
+            - `type: "search_result_location"`
 
-Citation configuration for the document
+        - `type: "citations_delta"`
 
-enabled: boolean
+      - `beta_thinking_delta: object`
 
-
+        - `estimated_tokens: number`
 
-source: [BetaBase64PDFSource](api/beta/messages.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta/messages.md) { data, media\_type, type } 
+          Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
-
+        - `thinking: string`
 
-beta\_base64\_pdf\_source: object { data, media\_type, type } 
+          The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-data: string
+        - `type: "thinking_delta"`
 
-media\_type: "application/pdf"
+      - `beta_signature_delta: object`
 
-type: "base64"
+        - `signature: string`
 
-
+          The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
-beta\_plain\_text\_source: object { data, media\_type, type } 
+        - `type: "signature_delta"`
 
-data: string
+      - `beta_compaction_content_block_delta: object`
 
-media\_type: "text/plain"
+        - `content: string`
 
-type: "text"
+        - `encrypted_content: string`
 
-title: string
+          Opaque metadata from prior compaction, to be round-tripped verbatim
 
-The title of the document
+        - `type: "compaction_delta"`
 
-type: "document"
+    - `index: number`
 
-retrieved\_at: string
+    - `type: "content_block_delta"`
 
-ISO 8601 timestamp when the content was retrieved
+  - `beta_raw_content_block_stop_event: object`
 
-type: "web\_fetch\_result"
+    - `index: number`
 
-url: string
+    - `type: "content_block_stop"`
 
-Fetched content URL
+## Example
 
-tool\_use\_id: string
-
-type: "web\_fetch\_tool\_result"
-
-
-
-caller: optional [BetaDirectCaller](api/beta/messages.md) { type }  or [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  or [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
-
-Tool invocation directly from the model.
-
-
-
-beta\_direct\_caller: object { type } 
-
-Tool invocation directly from the model.
-
-type: "direct"
-
-
-
-beta\_server\_tool\_caller: object { tool\_id, type } 
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: string
-
-type: "code\_execution\_20250825"
-
-
-
-beta\_server\_tool\_caller\_20260120: object { tool\_id, type } 
-
-tool\_id: string
-
-type: "code\_execution\_20260120"
-
-
-
-beta\_advisor\_tool\_result\_block: object { content, tool\_use\_id, type } 
-
-
-
-content: [BetaAdvisorToolResultError](api/beta/messages.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta/messages.md) { stop\_reason, text, type }  or [BetaAdvisorRedactedResultBlock](api/beta/messages.md) { encrypted\_content, stop\_reason, type } 
-
-
-
-beta\_advisor\_tool\_result\_error: object { error\_code, type } 
-
-
-
-error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 4 more
-
-"max\_uses\_exceeded"
-
-"prompt\_too\_long"
-
-"too\_many\_requests"
-
-"overloaded"
-
-"unavailable"
-
-"execution\_time\_exceeded"
-
-"model\_not\_found"
-
-type: "advisor\_tool\_result\_error"
-
-
-
-beta\_advisor\_result\_block: object { stop\_reason, text, type } 
-
-stop\_reason: string
-
-The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
-
-text: string
-
-type: "advisor\_result"
-
-
-
-beta\_advisor\_redacted\_result\_block: object { encrypted\_content, stop\_reason, type } 
-
-encrypted\_content: string
-
-Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
-
-stop\_reason: string
-
-The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
-
-type: "advisor\_redacted\_result"
-
-tool\_use\_id: string
-
-type: "advisor\_tool\_result"
-
-
-
-beta\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
-
-
-
-content: [BetaCodeExecutionToolResultError](api/beta/messages.md) { error\_code, type }  or [BetaCodeExecutionResultBlock](api/beta/messages.md) { content, return\_code, stderr, 2 more }  or [BetaEncryptedCodeExecutionResultBlock](api/beta/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-
-
-beta\_code\_execution\_tool\_result\_error: object { error\_code, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-
-
-beta\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
-
-
-
-content: array of [BetaCodeExecutionOutputBlock](api/beta/messages.md) { file\_id, type } 
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-
-
-beta\_encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more } 
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-
-
-content: array of [BetaCodeExecutionOutputBlock](api/beta/messages.md) { file\_id, type } 
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-encrypted\_stdout: string
-
-return\_code: number
-
-stderr: string
-
-type: "encrypted\_code\_execution\_result"
-
-tool\_use\_id: string
-
-type: "code\_execution\_tool\_result"
-
-
-
-beta\_bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
-
-
-
-content: [BetaBashCodeExecutionToolResultError](api/beta/messages.md) { error\_code, type }  or [BetaBashCodeExecutionResultBlock](api/beta/messages.md) { content, return\_code, stderr, 2 more } 
-
-
-
-beta\_bash\_code\_execution\_tool\_result\_error: object { error\_code, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-"output\_file\_too\_large"
-
-type: "bash\_code\_execution\_tool\_result\_error"
-
-
-
-beta\_bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
-
-
-
-content: array of [BetaBashCodeExecutionOutputBlock](api/beta/messages.md) { file\_id, type } 
-
-file\_id: string
-
-type: "bash\_code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "bash\_code\_execution\_result"
-
-tool\_use\_id: string
-
-type: "bash\_code\_execution\_tool\_result"
-
-
-
-beta\_text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
-
-
-
-content: [BetaTextEditorCodeExecutionToolResultError](api/beta/messages.md) { error\_code, error\_message, type }  or [BetaTextEditorCodeExecutionViewResultBlock](api/beta/messages.md) { content, file\_type, num\_lines, 3 more }  or [BetaTextEditorCodeExecutionCreateResultBlock](api/beta/messages.md) { is\_file\_update, type }  or [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta/messages.md) { lines, new\_lines, new\_start, 3 more } 
-
-
-
-beta\_text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-"file\_not\_found"
-
-error\_message: string
-
-type: "text\_editor\_code\_execution\_tool\_result\_error"
-
-
-
-beta\_text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more } 
-
-content: string
-
-
-
-file\_type: "text" or "image" or "pdf"
-
-"text"
-
-"image"
-
-"pdf"
-
-num\_lines: number
-
-start\_line: number
-
-total\_lines: number
-
-type: "text\_editor\_code\_execution\_view\_result"
-
-
-
-beta\_text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type } 
-
-is\_file\_update: boolean
-
-type: "text\_editor\_code\_execution\_create\_result"
-
-
-
-beta\_text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more } 
-
-lines: array of string
-
-new\_lines: number
-
-new\_start: number
-
-old\_lines: number
-
-old\_start: number
-
-type: "text\_editor\_code\_execution\_str\_replace\_result"
-
-tool\_use\_id: string
-
-type: "text\_editor\_code\_execution\_tool\_result"
-
-
-
-beta\_tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type } 
-
-
-
-content: [BetaToolSearchToolResultError](api/beta/messages.md) { error\_code, error\_message, type }  or [BetaToolSearchToolSearchResultBlock](api/beta/messages.md) { tool\_references, type } 
-
-
-
-beta\_tool\_search\_tool\_result\_error: object { error\_code, error\_message, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-error\_message: string
-
-type: "tool\_search\_tool\_result\_error"
-
-
-
-beta\_tool\_search\_tool\_search\_result\_block: object { tool\_references, type } 
-
-
-
-tool\_references: array of [BetaToolReferenceBlock](api/beta/messages.md) { tool\_name, type } 
-
-tool\_name: string
-
-type: "tool\_reference"
-
-type: "tool\_search\_tool\_search\_result"
-
-tool\_use\_id: string
-
-type: "tool\_search\_tool\_result"
-
-
-
-beta\_mcp\_tool\_use\_block: object { id, input, name, 2 more } 
-
-id: string
-
-input: map[unknown]
-
-name: string
-
-The name of the MCP tool
-
-server\_name: string
-
-The name of the MCP server
-
-type: "mcp\_tool\_use"
-
-
-
-beta\_mcp\_tool\_result\_block: object { content, is\_error, tool\_use\_id, type } 
-
-
-
-content: string or array of [BetaTextBlock](api/beta/messages.md) { citations, text, type } 
-
-union\_member\_0: string
-
-
-
-beta\_mcp\_tool\_result\_block\_content: array of [BetaTextBlock](api/beta/messages.md) { citations, text, type } 
-
-
-
-citations: array of [BetaTextCitation](api/beta/messages.md)
-
-Citations supporting the text block.
-
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-
-
-beta\_citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
-
-cited\_text: string
-
-document\_index: number
-
-document\_title: string
-
-end\_char\_index: number
-
-file\_id: string
-
-start\_char\_index: number
-
-type: "char\_location"
-
-
-
-beta\_citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
-
-cited\_text: string
-
-document\_index: number
-
-document\_title: string
-
-end\_page\_number: number
-
-file\_id: string
-
-start\_page\_number: number
-
-type: "page\_location"
-
-
-
-beta\_citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
-
-
-
-cited\_text: string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-document\_index: number
-
-document\_title: string
-
-
-
-end\_block\_index: number
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-file\_id: string
-
-start\_block\_index: number
-
-0-based index of the first cited block in the source's `content` array.
-
-type: "content\_block\_location"
-
-
-
-beta\_citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
-
-cited\_text: string
-
-encrypted\_index: string
-
-title: string
-
-type: "web\_search\_result\_location"
-
-url: string
-
-
-
-beta\_citation\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
-
-
-
-cited\_text: string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-end\_block\_index: number
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-search\_result\_index: number
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-source: string
-
-start\_block\_index: number
-
-0-based index of the first cited block in the source's `content` array.
-
-title: string
-
-type: "search\_result\_location"
-
-text: string
-
-type: "text"
-
-is\_error: boolean
-
-tool\_use\_id: string
-
-type: "mcp\_tool\_result"
-
-
-
-beta\_container\_upload\_block: object { file\_id, type } 
-
-Response model for a file uploaded to the container.
-
-file\_id: string
-
-type: "container\_upload"
-
-
-
-beta\_compaction\_block: object { content, encrypted\_content, type } 
-
-A compaction block returned when autocompact is triggered.
-
-When content is None, it indicates the compaction failed to produce a valid
-summary (e.g., malformed output from the model). Clients may round-trip
-compaction blocks with null content; the server treats them as no-ops.
-
-content: string
-
-Summary of compacted content, or null if compaction failed
-
-encrypted\_content: string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
-type: "compaction"
-
-
-
-beta\_fallback\_block: object { from, to, trigger, type } 
-
-Marks the point in `content` where one model's output gives way to the next.
-
-One block appears per hop where a preceding model actually ran this turn and
-declined. A turn where no preceding model ran and declined has no such
-boundary and carries no block — the signal for whether a fallback model
-served the response is the presence of a `fallback_message` entry in
-`usage.iterations`, not this block.
-
-The block is treated like a server-tool content block for streaming: it
-arrives via the standard `content_block_start` / `content_block_stop`
-pair and carries no deltas.
-
-
-
-from: object { model } 
-
-The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
-
-
-
-model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-
-
-to: object { model } 
-
-The fallback model producing the content that follows this block. Its `model` is always the canonical id.
-
-
-
-model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-
-
-trigger: object { category, type } 
-
-What caused the `from` model to hand over at this hop.
-
-
-
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
-
-The policy category that triggered a refusal.
-
-"cyber"
-
-"bio"
-
-"frontier\_llm"
-
-"reasoning\_extraction"
-
-type: "refusal"
-
-type: "fallback"
-
-
-
-context\_management: object { applied\_edits } 
-
-Context management response.
-
-Information about context management strategies applied during the request.
-
-
-
-applied\_edits: array of [BetaClearToolUses20250919EditResponse](api/beta/messages.md) { cleared\_input\_tokens, cleared\_tool\_uses, type }  or [BetaClearThinking20251015EditResponse](api/beta/messages.md) { cleared\_input\_tokens, cleared\_thinking\_turns, type } 
-
-List of context management edits that were applied.
-
-
-
-beta\_clear\_tool\_uses\_20250919\_edit\_response: object { cleared\_input\_tokens, cleared\_tool\_uses, type } 
-
-cleared\_input\_tokens: number
-
-Number of input tokens cleared by this edit.
-
-cleared\_tool\_uses: number
-
-Number of tool uses that were cleared.
-
-type: "clear\_tool\_uses\_20250919"
-
-The type of context management edit applied.
-
-
-
-beta\_clear\_thinking\_20251015\_edit\_response: object { cleared\_input\_tokens, cleared\_thinking\_turns, type } 
-
-cleared\_input\_tokens: number
-
-Number of input tokens cleared by this edit.
-
-cleared\_thinking\_turns: number
-
-Number of thinking turns that were cleared.
-
-type: "clear\_thinking\_20251015"
-
-The type of context management edit applied.
-
-
-
-diagnostics: object { cache\_miss\_reason } 
-
-Response envelope for request-level diagnostics. Present (possibly
-null) whenever the caller supplied `diagnostics` on the request.
-
-
-
-cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissSystemChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or [BetaCacheMissToolsChanged](api/beta/messages.md) { cache\_missed\_input\_tokens, type }  or 3 more
-
-Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
-
-
-
-beta\_cache\_miss\_model\_changed: object { cache\_missed\_input\_tokens, type } 
-
-cache\_missed\_input\_tokens: number
-
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-type: "model\_changed"
-
-
-
-beta\_cache\_miss\_system\_changed: object { cache\_missed\_input\_tokens, type } 
-
-cache\_missed\_input\_tokens: number
-
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-type: "system\_changed"
-
-
-
-beta\_cache\_miss\_tools\_changed: object { cache\_missed\_input\_tokens, type } 
-
-cache\_missed\_input\_tokens: number
-
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-type: "tools\_changed"
-
-
-
-beta\_cache\_miss\_messages\_changed: object { cache\_missed\_input\_tokens, type } 
-
-cache\_missed\_input\_tokens: number
-
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-type: "messages\_changed"
-
-
-
-beta\_cache\_miss\_previous\_message\_not\_found: object { type } 
-
-type: "previous\_message\_not\_found"
-
-
-
-beta\_cache\_miss\_unavailable: object { type } 
-
-type: "unavailable"
-
-
-
-model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-
-
-role: "assistant"
-
-Conversational role of the generated message.
-
-This will always be `"assistant"`.
-
-
-
-stop\_details: object { category, explanation, fallback\_credit\_token, 3 more } 
-
-Structured information about a refusal.
-
-
-
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
-
-The policy category that triggered a refusal.
-
-"cyber"
-
-"bio"
-
-"frontier\_llm"
-
-"reasoning\_extraction"
-
-
-
-explanation: string
-
-Human-readable explanation of the refusal.
-
-This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-
-
-fallback\_credit\_token: string
-
-Opaque code that refunds the cache-miss cost when retrying this refused
-request on the fallback model. Pass it as `fallback_credit_token` on the
-retry request. Expires 5 minutes after the refusal.
-
-The retry is sent either with the same request body (`system`, `messages`,
-`tools`, and other render-shaping fields), or with the same body plus one
-appended `assistant` message whose content is the partial text (with any
-trailing whitespace stripped from the final text block) and paired
-server-tool blocks from this refusal — which also authorizes that
-appended turn as an assistant-prefill continuation on models that otherwise
-disallow prefill. A token minted mid-server-tool-loop whose partial content
-was continuable may only be redeemed the second way — if a same-body retry
-is rejected with a 400 saying the token must be redeemed by continuing the
-partial response, retry the second way instead. Either way: same workspace,
-same platform; a mismatch is a 400. Resending a token for an already-warm
-prefix is permitted but yields no additional credit.
-
-`null` when the refused model isn't eligible for a fallback credit.
-
-
-
-fallback\_has\_prefill\_claim: boolean
-
-Whether the accompanying `fallback_credit_token` may be redeemed with the
-appended-assistant retry form. Only set when `fallback_credit_token` is
-present.
-
-`true`: retry by resending the same request body plus one appended
-`assistant` message whose content is this response's `content` with any
-trailing whitespace stripped from the final text block and unpaired
-`tool_use` blocks omitted (the same appended-turn shape described on
-`fallback_credit_token`), with the token attached. `false`: retry by
-resending the original request body unchanged, with the token attached —
-the appended-assistant form is not available for this refusal (no
-continuable partial content, or the request uses `output_format` or a
-`tool_choice` that forces tool use). One exception: when the request used
-`output_format` or a forced `tool_choice` and the refusal arrived after
-server tools (including MCP connector tools) had already executed, the
-token may not be redeemable by either retry form; if the exact-body retry
-is then rejected with a 400 saying the token must be redeemed by
-continuing the partial response, discard the token and retry without it.
-
-Advisory: if an appended-assistant retry is rejected with a 400 despite
-`true`, fall back to resending the original request body with the token.
-
-recommended\_model: string
-
-The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
-
-type: "refusal"
-
-
-
-stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 5 more
-
-The reason that we stopped.
-
-This may be one the following values:
-
-- `"end_turn"`: the model reached a natural stopping point
-- `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
-- `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
-- `"tool_use"`: the model invoked one or more tools
-- `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
-- `"refusal"`: when streaming classifiers intervene to handle potential policy violations
-
-In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
-
-"end\_turn"
-
-"max\_tokens"
-
-"stop\_sequence"
-
-"tool\_use"
-
-"pause\_turn"
-
-"compaction"
-
-"refusal"
-
-"model\_context\_window\_exceeded"
-
-
-
-stop\_sequence: string
-
-Which custom stop sequence was generated, if any.
-
-This value will be a non-null string if one of your custom stop sequences was generated.
-
-
-
-type: "message"
-
-Object type.
-
-For Messages, this is always `"message"`.
-
-
-
-usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more } 
-
-Billing and rate-limit usage.
-
-Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
-
-Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
-
-For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
-
-Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
-
-
-
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: number
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: number
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: number
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: number
-
-The number of input tokens read from the cache.
-
-inference\_geo: string
-
-The geographic region where inference was performed for this request.
-
-input\_tokens: number
-
-The number of input tokens which were used.
-
-
-
-iterations: array of [BetaMessageIterationUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }  or [BetaCompactionIterationUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  or [BetaAdvisorMessageIterationUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }  or [BetaFallbackMessageIterationUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
-
-Per-iteration token usage breakdown.
-
-Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
-
-- Determine which iterations exceeded long context thresholds (>=200k tokens)
-- Calculate the true context window size from the last iteration
-- Understand token accumulation across server-side tool use loops
-
-
-
-beta\_message\_iteration\_usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
-
-Token usage for a sampling iteration.
-
-
-
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: number
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: number
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: number
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: number
-
-The number of input tokens read from the cache.
-
-input\_tokens: number
-
-The number of input tokens which were used.
-
-
-
-model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-output\_tokens: number
-
-The number of output tokens which were used.
-
-type: "message"
-
-Usage for a sampling iteration
-
-
-
-beta\_compaction\_iteration\_usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } 
-
-Token usage for a compaction iteration.
-
-
-
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: number
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: number
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: number
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: number
-
-The number of input tokens read from the cache.
-
-input\_tokens: number
-
-The number of input tokens which were used.
-
-output\_tokens: number
-
-The number of output tokens which were used.
-
-type: "compaction"
-
-Usage for a compaction iteration
-
-
-
-beta\_advisor\_message\_iteration\_usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
-
-Token usage for an advisor sub-inference iteration.
-
-
-
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: number
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: number
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: number
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: number
-
-The number of input tokens read from the cache.
-
-input\_tokens: number
-
-The number of input tokens which were used.
-
-
-
-model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-output\_tokens: number
-
-The number of output tokens which were used.
-
-type: "advisor\_message"
-
-Usage for an advisor sub-inference iteration
-
-
-
-beta\_fallback\_message\_iteration\_usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
-
-Token usage for the fallback-model attempt of a server-side fallback request.
-
-Produced in place of a `message` entry for whichever hop served the
-response. A declined hop produces the existing `message` entry. Whether
-a fallback model served the response is signalled by the presence of this
-entry in `usage.iterations`.
-
-
-
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: number
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: number
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: number
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: number
-
-The number of input tokens read from the cache.
-
-input\_tokens: number
-
-The number of input tokens which were used.
-
-
-
-model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-output\_tokens: number
-
-The number of output tokens which were used.
-
-type: "fallback\_message"
-
-Usage for the fallback-model attempt that served the response
-
-output\_tokens: number
-
-The number of output tokens which were used.
-
-
-
-output\_tokens\_details: object { thinking\_tokens } 
-
-Breakdown of output tokens by category.
-
-`output_tokens` remains the inclusive, authoritative total used for billing.
-This object provides a read-only decomposition for observability — for example,
-how many of the billed output tokens were spent on internal reasoning that may
-have been summarized before being returned to you.
-
-
-
-thinking\_tokens: number
-
-Number of output tokens the model generated as internal reasoning, including
-the thinking-block delimiter tokens.
-
-Reflects the raw reasoning the model produced, not the (possibly shorter)
-summarized thinking text returned in the response body. Computed by
-re-tokenizing the raw reasoning text, so it may differ from the model's exact
-generation count by a small number of tokens. Always ≤ `output_tokens`;
-`output_tokens - thinking_tokens` approximates the non-reasoning output.
-
-
-
-server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests } 
-
-The number of server tool requests.
-
-web\_fetch\_requests: number
-
-The number of web fetch tool requests.
-
-web\_search\_requests: number
-
-The number of web search tool requests.
-
-
-
-service\_tier: "standard" or "priority" or "batch"
-
-If the request used the priority, standard, or batch tier.
-
-"standard"
-
-"priority"
-
-"batch"
-
-
-
-speed: "standard" or "fast"
-
-The inference speed mode used for this request.
-
-"standard"
-
-"fast"
-
-type: "message\_start"
-
-
-
-beta\_raw\_message\_delta\_event: object { context\_management, delta, type, usage } 
-
-
-
-context\_management: object { applied\_edits } 
-
-Information about context management strategies applied during the request
-
-
-
-applied\_edits: array of [BetaClearToolUses20250919EditResponse](api/beta/messages.md) { cleared\_input\_tokens, cleared\_tool\_uses, type }  or [BetaClearThinking20251015EditResponse](api/beta/messages.md) { cleared\_input\_tokens, cleared\_thinking\_turns, type } 
-
-List of context management edits that were applied.
-
-
-
-beta\_clear\_tool\_uses\_20250919\_edit\_response: object { cleared\_input\_tokens, cleared\_tool\_uses, type } 
-
-cleared\_input\_tokens: number
-
-Number of input tokens cleared by this edit.
-
-cleared\_tool\_uses: number
-
-Number of tool uses that were cleared.
-
-type: "clear\_tool\_uses\_20250919"
-
-The type of context management edit applied.
-
-
-
-beta\_clear\_thinking\_20251015\_edit\_response: object { cleared\_input\_tokens, cleared\_thinking\_turns, type } 
-
-cleared\_input\_tokens: number
-
-Number of input tokens cleared by this edit.
-
-cleared\_thinking\_turns: number
-
-Number of thinking turns that were cleared.
-
-type: "clear\_thinking\_20251015"
-
-The type of context management edit applied.
-
-
-
-delta: object { container, stop\_details, stop\_reason, stop\_sequence } 
-
-
-
-container: object { id, expires\_at, skills } 
-
-Information about the container used in the request (for the code execution tool)
-
-id: string
-
-Identifier for the container used in this request
-
-expires\_at: string
-
-The time at which the container will expire.
-
-
-
-skills: array of [BetaSkill](api/beta/messages.md) { skill\_id, type, version } 
-
-Skills loaded in the container
-
-skill\_id: string
-
-Skill ID
-
-
-
-type: "anthropic" or "custom"
-
-Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
-
-"anthropic"
-
-"custom"
-
-version: string
-
-Skill version or 'latest' for most recent version
-
-
-
-stop\_details: object { category, explanation, fallback\_credit\_token, 3 more } 
-
-Structured information about a refusal.
-
-
-
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
-
-The policy category that triggered a refusal.
-
-"cyber"
-
-"bio"
-
-"frontier\_llm"
-
-"reasoning\_extraction"
-
-
-
-explanation: string
-
-Human-readable explanation of the refusal.
-
-This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-
-
-fallback\_credit\_token: string
-
-Opaque code that refunds the cache-miss cost when retrying this refused
-request on the fallback model. Pass it as `fallback_credit_token` on the
-retry request. Expires 5 minutes after the refusal.
-
-The retry is sent either with the same request body (`system`, `messages`,
-`tools`, and other render-shaping fields), or with the same body plus one
-appended `assistant` message whose content is the partial text (with any
-trailing whitespace stripped from the final text block) and paired
-server-tool blocks from this refusal — which also authorizes that
-appended turn as an assistant-prefill continuation on models that otherwise
-disallow prefill. A token minted mid-server-tool-loop whose partial content
-was continuable may only be redeemed the second way — if a same-body retry
-is rejected with a 400 saying the token must be redeemed by continuing the
-partial response, retry the second way instead. Either way: same workspace,
-same platform; a mismatch is a 400. Resending a token for an already-warm
-prefix is permitted but yields no additional credit.
-
-`null` when the refused model isn't eligible for a fallback credit.
-
-
-
-fallback\_has\_prefill\_claim: boolean
-
-Whether the accompanying `fallback_credit_token` may be redeemed with the
-appended-assistant retry form. Only set when `fallback_credit_token` is
-present.
-
-`true`: retry by resending the same request body plus one appended
-`assistant` message whose content is this response's `content` with any
-trailing whitespace stripped from the final text block and unpaired
-`tool_use` blocks omitted (the same appended-turn shape described on
-`fallback_credit_token`), with the token attached. `false`: retry by
-resending the original request body unchanged, with the token attached —
-the appended-assistant form is not available for this refusal (no
-continuable partial content, or the request uses `output_format` or a
-`tool_choice` that forces tool use). One exception: when the request used
-`output_format` or a forced `tool_choice` and the refusal arrived after
-server tools (including MCP connector tools) had already executed, the
-token may not be redeemable by either retry form; if the exact-body retry
-is then rejected with a 400 saying the token must be redeemed by
-continuing the partial response, discard the token and retry without it.
-
-Advisory: if an appended-assistant retry is rejected with a 400 despite
-`true`, fall back to resending the original request body with the token.
-
-recommended\_model: string
-
-The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
-
-type: "refusal"
-
-
-
-stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 5 more
-
-"end\_turn"
-
-"max\_tokens"
-
-"stop\_sequence"
-
-"tool\_use"
-
-"pause\_turn"
-
-"compaction"
-
-"refusal"
-
-"model\_context\_window\_exceeded"
-
-stop\_sequence: string
-
-type: "message\_delta"
-
-
-
-usage: object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 4 more } 
-
-Billing and rate-limit usage.
-
-Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
-
-Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
-
-For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
-
-Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
-
-cache\_creation\_input\_tokens: number
-
-The cumulative number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: number
-
-The cumulative number of input tokens read from the cache.
-
-input\_tokens: number
-
-The cumulative number of input tokens which were used.
-
-
-
-iterations: array of [BetaMessageIterationUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }  or [BetaCompactionIterationUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  or [BetaAdvisorMessageIterationUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }  or [BetaFallbackMessageIterationUsage](api/beta/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
-
-Per-iteration token usage breakdown.
-
-Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
-
-- Determine which iterations exceeded long context thresholds (>=200k tokens)
-- Calculate the true context window size from the last iteration
-- Understand token accumulation across server-side tool use loops
-
-
-
-beta\_message\_iteration\_usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
-
-Token usage for a sampling iteration.
-
-
-
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: number
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: number
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: number
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: number
-
-The number of input tokens read from the cache.
-
-input\_tokens: number
-
-The number of input tokens which were used.
-
-
-
-model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-output\_tokens: number
-
-The number of output tokens which were used.
-
-type: "message"
-
-Usage for a sampling iteration
-
-
-
-beta\_compaction\_iteration\_usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more } 
-
-Token usage for a compaction iteration.
-
-
-
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: number
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: number
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: number
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: number
-
-The number of input tokens read from the cache.
-
-input\_tokens: number
-
-The number of input tokens which were used.
-
-output\_tokens: number
-
-The number of output tokens which were used.
-
-type: "compaction"
-
-Usage for a compaction iteration
-
-
-
-beta\_advisor\_message\_iteration\_usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
-
-Token usage for an advisor sub-inference iteration.
-
-
-
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: number
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: number
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: number
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: number
-
-The number of input tokens read from the cache.
-
-input\_tokens: number
-
-The number of input tokens which were used.
-
-
-
-model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-output\_tokens: number
-
-The number of output tokens which were used.
-
-type: "advisor\_message"
-
-Usage for an advisor sub-inference iteration
-
-
-
-beta\_fallback\_message\_iteration\_usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } 
-
-Token usage for the fallback-model attempt of a server-side fallback request.
-
-Produced in place of a `message` entry for whichever hop served the
-response. A declined hop produces the existing `message` entry. Whether
-a fallback model served the response is signalled by the presence of this
-entry in `usage.iterations`.
-
-
-
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: number
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: number
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: number
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: number
-
-The number of input tokens read from the cache.
-
-input\_tokens: number
-
-The number of input tokens which were used.
-
-
-
-model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-output\_tokens: number
-
-The number of output tokens which were used.
-
-type: "fallback\_message"
-
-Usage for the fallback-model attempt that served the response
-
-output\_tokens: number
-
-The cumulative number of output tokens which were used.
-
-
-
-output\_tokens\_details: object { thinking\_tokens } 
-
-Breakdown of output tokens by category.
-
-`output_tokens` remains the inclusive, authoritative total used for billing.
-This object provides a read-only decomposition for observability — for example,
-how many of the billed output tokens were spent on internal reasoning that may
-have been summarized before being returned to you.
-
-
-
-thinking\_tokens: number
-
-Number of output tokens the model generated as internal reasoning, including
-the thinking-block delimiter tokens.
-
-Reflects the raw reasoning the model produced, not the (possibly shorter)
-summarized thinking text returned in the response body. Computed by
-re-tokenizing the raw reasoning text, so it may differ from the model's exact
-generation count by a small number of tokens. Always ≤ `output_tokens`;
-`output_tokens - thinking_tokens` approximates the non-reasoning output.
-
-
-
-server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests } 
-
-The number of server tool requests.
-
-web\_fetch\_requests: number
-
-The number of web fetch tool requests.
-
-web\_search\_requests: number
-
-The number of web search tool requests.
-
-
-
-beta\_raw\_message\_stop\_event: object { type } 
-
-type: "message\_stop"
-
-
-
-beta\_raw\_content\_block\_start\_event: object { content\_block, index, type } 
-
-
-
-content\_block: [BetaTextBlock](api/beta/messages.md) { citations, text, type }  or [BetaThinkingBlock](api/beta/messages.md) { signature, thinking, type }  or [BetaRedactedThinkingBlock](api/beta/messages.md) { data, type }  or 14 more
-
-Response model for a file uploaded to the container.
-
-
-
-beta\_text\_block: object { citations, text, type } 
-
-
-
-citations: array of [BetaTextCitation](api/beta/messages.md)
-
-Citations supporting the text block.
-
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-
-
-beta\_citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
-
-cited\_text: string
-
-document\_index: number
-
-document\_title: string
-
-end\_char\_index: number
-
-file\_id: string
-
-start\_char\_index: number
-
-type: "char\_location"
-
-
-
-beta\_citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
-
-cited\_text: string
-
-document\_index: number
-
-document\_title: string
-
-end\_page\_number: number
-
-file\_id: string
-
-start\_page\_number: number
-
-type: "page\_location"
-
-
-
-beta\_citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
-
-
-
-cited\_text: string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-document\_index: number
-
-document\_title: string
-
-
-
-end\_block\_index: number
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-file\_id: string
-
-start\_block\_index: number
-
-0-based index of the first cited block in the source's `content` array.
-
-type: "content\_block\_location"
-
-
-
-beta\_citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
-
-cited\_text: string
-
-encrypted\_index: string
-
-title: string
-
-type: "web\_search\_result\_location"
-
-url: string
-
-
-
-beta\_citation\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
-
-
-
-cited\_text: string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-end\_block\_index: number
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-search\_result\_index: number
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-source: string
-
-start\_block\_index: number
-
-0-based index of the first cited block in the source's `content` array.
-
-title: string
-
-type: "search\_result\_location"
-
-text: string
-
-type: "text"
-
-
-
-beta\_thinking\_block: object { signature, thinking, type } 
-
-signature: string
-
-thinking: string
-
-type: "thinking"
-
-
-
-beta\_redacted\_thinking\_block: object { data, type } 
-
-data: string
-
-type: "redacted\_thinking"
-
-
-
-beta\_tool\_use\_block: object { id, input, name, 2 more } 
-
-id: string
-
-input: map[unknown]
-
-name: string
-
-type: "tool\_use"
-
-
-
-caller: optional [BetaDirectCaller](api/beta/messages.md) { type }  or [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  or [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
-
-Tool invocation directly from the model.
-
-
-
-beta\_direct\_caller: object { type } 
-
-Tool invocation directly from the model.
-
-type: "direct"
-
-
-
-beta\_server\_tool\_caller: object { tool\_id, type } 
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: string
-
-type: "code\_execution\_20250825"
-
-
-
-beta\_server\_tool\_caller\_20260120: object { tool\_id, type } 
-
-tool\_id: string
-
-type: "code\_execution\_20260120"
-
-
-
-beta\_server\_tool\_use\_block: object { id, input, name, 2 more } 
-
-id: string
-
-input: map[unknown]
-
-
-
-name: "advisor" or "web\_search" or "web\_fetch" or 5 more
-
-"advisor"
-
-"web\_search"
-
-"web\_fetch"
-
-"code\_execution"
-
-"bash\_code\_execution"
-
-"text\_editor\_code\_execution"
-
-"tool\_search\_tool\_regex"
-
-"tool\_search\_tool\_bm25"
-
-type: "server\_tool\_use"
-
-
-
-caller: optional [BetaDirectCaller](api/beta/messages.md) { type }  or [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  or [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
-
-Tool invocation directly from the model.
-
-
-
-beta\_direct\_caller: object { type } 
-
-Tool invocation directly from the model.
-
-type: "direct"
-
-
-
-beta\_server\_tool\_caller: object { tool\_id, type } 
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: string
-
-type: "code\_execution\_20250825"
-
-
-
-beta\_server\_tool\_caller\_20260120: object { tool\_id, type } 
-
-tool\_id: string
-
-type: "code\_execution\_20260120"
-
-
-
-beta\_web\_search\_tool\_result\_block: object { content, tool\_use\_id, type, caller } 
-
-
-
-content: [BetaWebSearchToolResultError](api/beta/messages.md) { error\_code, type }  or array of [BetaWebSearchResultBlock](api/beta/messages.md) { encrypted\_content, page\_age, title, 2 more } 
-
-
-
-beta\_web\_search\_tool\_result\_error: object { error\_code, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"max\_uses\_exceeded"
-
-"too\_many\_requests"
-
-"query\_too\_long"
-
-"request\_too\_large"
-
-type: "web\_search\_tool\_result\_error"
-
-
-
-union\_member\_1: array of [BetaWebSearchResultBlock](api/beta/messages.md) { encrypted\_content, page\_age, title, 2 more } 
-
-encrypted\_content: string
-
-page\_age: string
-
-title: string
-
-type: "web\_search\_result"
-
-url: string
-
-tool\_use\_id: string
-
-type: "web\_search\_tool\_result"
-
-
-
-caller: optional [BetaDirectCaller](api/beta/messages.md) { type }  or [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  or [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
-
-Tool invocation directly from the model.
-
-
-
-beta\_direct\_caller: object { type } 
-
-Tool invocation directly from the model.
-
-type: "direct"
-
-
-
-beta\_server\_tool\_caller: object { tool\_id, type } 
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: string
-
-type: "code\_execution\_20250825"
-
-
-
-beta\_server\_tool\_caller\_20260120: object { tool\_id, type } 
-
-tool\_id: string
-
-type: "code\_execution\_20260120"
-
-
-
-beta\_web\_fetch\_tool\_result\_block: object { content, tool\_use\_id, type, caller } 
-
-
-
-content: [BetaWebFetchToolResultErrorBlock](api/beta/messages.md) { error\_code, type }  or [BetaWebFetchBlock](api/beta/messages.md) { content, retrieved\_at, type, url } 
-
-
-
-beta\_web\_fetch\_tool\_result\_error\_block: object { error\_code, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
-
-"invalid\_tool\_input"
-
-"url\_too\_long"
-
-"url\_not\_allowed"
-
-"url\_not\_in\_prior\_context"
-
-"url\_not\_accessible"
-
-"unsupported\_content\_type"
-
-"too\_many\_requests"
-
-"max\_uses\_exceeded"
-
-"unavailable"
-
-type: "web\_fetch\_tool\_result\_error"
-
-
-
-beta\_web\_fetch\_block: object { content, retrieved\_at, type, url } 
-
-
-
-content: object { citations, source, title, type } 
-
-
-
-citations: object { enabled } 
-
-Citation configuration for the document
-
-enabled: boolean
-
-
-
-source: [BetaBase64PDFSource](api/beta/messages.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta/messages.md) { data, media\_type, type } 
-
-
-
-beta\_base64\_pdf\_source: object { data, media\_type, type } 
-
-data: string
-
-media\_type: "application/pdf"
-
-type: "base64"
-
-
-
-beta\_plain\_text\_source: object { data, media\_type, type } 
-
-data: string
-
-media\_type: "text/plain"
-
-type: "text"
-
-title: string
-
-The title of the document
-
-type: "document"
-
-retrieved\_at: string
-
-ISO 8601 timestamp when the content was retrieved
-
-type: "web\_fetch\_result"
-
-url: string
-
-Fetched content URL
-
-tool\_use\_id: string
-
-type: "web\_fetch\_tool\_result"
-
-
-
-caller: optional [BetaDirectCaller](api/beta/messages.md) { type }  or [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  or [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
-
-Tool invocation directly from the model.
-
-
-
-beta\_direct\_caller: object { type } 
-
-Tool invocation directly from the model.
-
-type: "direct"
-
-
-
-beta\_server\_tool\_caller: object { tool\_id, type } 
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: string
-
-type: "code\_execution\_20250825"
-
-
-
-beta\_server\_tool\_caller\_20260120: object { tool\_id, type } 
-
-tool\_id: string
-
-type: "code\_execution\_20260120"
-
-
-
-beta\_advisor\_tool\_result\_block: object { content, tool\_use\_id, type } 
-
-
-
-content: [BetaAdvisorToolResultError](api/beta/messages.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta/messages.md) { stop\_reason, text, type }  or [BetaAdvisorRedactedResultBlock](api/beta/messages.md) { encrypted\_content, stop\_reason, type } 
-
-
-
-beta\_advisor\_tool\_result\_error: object { error\_code, type } 
-
-
-
-error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 4 more
-
-"max\_uses\_exceeded"
-
-"prompt\_too\_long"
-
-"too\_many\_requests"
-
-"overloaded"
-
-"unavailable"
-
-"execution\_time\_exceeded"
-
-"model\_not\_found"
-
-type: "advisor\_tool\_result\_error"
-
-
-
-beta\_advisor\_result\_block: object { stop\_reason, text, type } 
-
-stop\_reason: string
-
-The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
-
-text: string
-
-type: "advisor\_result"
-
-
-
-beta\_advisor\_redacted\_result\_block: object { encrypted\_content, stop\_reason, type } 
-
-encrypted\_content: string
-
-Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
-
-stop\_reason: string
-
-The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
-
-type: "advisor\_redacted\_result"
-
-tool\_use\_id: string
-
-type: "advisor\_tool\_result"
-
-
-
-beta\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
-
-
-
-content: [BetaCodeExecutionToolResultError](api/beta/messages.md) { error\_code, type }  or [BetaCodeExecutionResultBlock](api/beta/messages.md) { content, return\_code, stderr, 2 more }  or [BetaEncryptedCodeExecutionResultBlock](api/beta/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-
-
-beta\_code\_execution\_tool\_result\_error: object { error\_code, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-
-
-beta\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
-
-
-
-content: array of [BetaCodeExecutionOutputBlock](api/beta/messages.md) { file\_id, type } 
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-
-
-beta\_encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more } 
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-
-
-content: array of [BetaCodeExecutionOutputBlock](api/beta/messages.md) { file\_id, type } 
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-encrypted\_stdout: string
-
-return\_code: number
-
-stderr: string
-
-type: "encrypted\_code\_execution\_result"
-
-tool\_use\_id: string
-
-type: "code\_execution\_tool\_result"
-
-
-
-beta\_bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
-
-
-
-content: [BetaBashCodeExecutionToolResultError](api/beta/messages.md) { error\_code, type }  or [BetaBashCodeExecutionResultBlock](api/beta/messages.md) { content, return\_code, stderr, 2 more } 
-
-
-
-beta\_bash\_code\_execution\_tool\_result\_error: object { error\_code, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-"output\_file\_too\_large"
-
-type: "bash\_code\_execution\_tool\_result\_error"
-
-
-
-beta\_bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
-
-
-
-content: array of [BetaBashCodeExecutionOutputBlock](api/beta/messages.md) { file\_id, type } 
-
-file\_id: string
-
-type: "bash\_code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "bash\_code\_execution\_result"
-
-tool\_use\_id: string
-
-type: "bash\_code\_execution\_tool\_result"
-
-
-
-beta\_text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
-
-
-
-content: [BetaTextEditorCodeExecutionToolResultError](api/beta/messages.md) { error\_code, error\_message, type }  or [BetaTextEditorCodeExecutionViewResultBlock](api/beta/messages.md) { content, file\_type, num\_lines, 3 more }  or [BetaTextEditorCodeExecutionCreateResultBlock](api/beta/messages.md) { is\_file\_update, type }  or [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta/messages.md) { lines, new\_lines, new\_start, 3 more } 
-
-
-
-beta\_text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-"file\_not\_found"
-
-error\_message: string
-
-type: "text\_editor\_code\_execution\_tool\_result\_error"
-
-
-
-beta\_text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more } 
-
-content: string
-
-
-
-file\_type: "text" or "image" or "pdf"
-
-"text"
-
-"image"
-
-"pdf"
-
-num\_lines: number
-
-start\_line: number
-
-total\_lines: number
-
-type: "text\_editor\_code\_execution\_view\_result"
-
-
-
-beta\_text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type } 
-
-is\_file\_update: boolean
-
-type: "text\_editor\_code\_execution\_create\_result"
-
-
-
-beta\_text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more } 
-
-lines: array of string
-
-new\_lines: number
-
-new\_start: number
-
-old\_lines: number
-
-old\_start: number
-
-type: "text\_editor\_code\_execution\_str\_replace\_result"
-
-tool\_use\_id: string
-
-type: "text\_editor\_code\_execution\_tool\_result"
-
-
-
-beta\_tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type } 
-
-
-
-content: [BetaToolSearchToolResultError](api/beta/messages.md) { error\_code, error\_message, type }  or [BetaToolSearchToolSearchResultBlock](api/beta/messages.md) { tool\_references, type } 
-
-
-
-beta\_tool\_search\_tool\_result\_error: object { error\_code, error\_message, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-error\_message: string
-
-type: "tool\_search\_tool\_result\_error"
-
-
-
-beta\_tool\_search\_tool\_search\_result\_block: object { tool\_references, type } 
-
-
-
-tool\_references: array of [BetaToolReferenceBlock](api/beta/messages.md) { tool\_name, type } 
-
-tool\_name: string
-
-type: "tool\_reference"
-
-type: "tool\_search\_tool\_search\_result"
-
-tool\_use\_id: string
-
-type: "tool\_search\_tool\_result"
-
-
-
-beta\_mcp\_tool\_use\_block: object { id, input, name, 2 more } 
-
-id: string
-
-input: map[unknown]
-
-name: string
-
-The name of the MCP tool
-
-server\_name: string
-
-The name of the MCP server
-
-type: "mcp\_tool\_use"
-
-
-
-beta\_mcp\_tool\_result\_block: object { content, is\_error, tool\_use\_id, type } 
-
-
-
-content: string or array of [BetaTextBlock](api/beta/messages.md) { citations, text, type } 
-
-union\_member\_0: string
-
-
-
-beta\_mcp\_tool\_result\_block\_content: array of [BetaTextBlock](api/beta/messages.md) { citations, text, type } 
-
-
-
-citations: array of [BetaTextCitation](api/beta/messages.md)
-
-Citations supporting the text block.
-
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-
-
-beta\_citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
-
-cited\_text: string
-
-document\_index: number
-
-document\_title: string
-
-end\_char\_index: number
-
-file\_id: string
-
-start\_char\_index: number
-
-type: "char\_location"
-
-
-
-beta\_citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
-
-cited\_text: string
-
-document\_index: number
-
-document\_title: string
-
-end\_page\_number: number
-
-file\_id: string
-
-start\_page\_number: number
-
-type: "page\_location"
-
-
-
-beta\_citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
-
-
-
-cited\_text: string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-document\_index: number
-
-document\_title: string
-
-
-
-end\_block\_index: number
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-file\_id: string
-
-start\_block\_index: number
-
-0-based index of the first cited block in the source's `content` array.
-
-type: "content\_block\_location"
-
-
-
-beta\_citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
-
-cited\_text: string
-
-encrypted\_index: string
-
-title: string
-
-type: "web\_search\_result\_location"
-
-url: string
-
-
-
-beta\_citation\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
-
-
-
-cited\_text: string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-end\_block\_index: number
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-search\_result\_index: number
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-source: string
-
-start\_block\_index: number
-
-0-based index of the first cited block in the source's `content` array.
-
-title: string
-
-type: "search\_result\_location"
-
-text: string
-
-type: "text"
-
-is\_error: boolean
-
-tool\_use\_id: string
-
-type: "mcp\_tool\_result"
-
-
-
-beta\_container\_upload\_block: object { file\_id, type } 
-
-Response model for a file uploaded to the container.
-
-file\_id: string
-
-type: "container\_upload"
-
-
-
-beta\_compaction\_block: object { content, encrypted\_content, type } 
-
-A compaction block returned when autocompact is triggered.
-
-When content is None, it indicates the compaction failed to produce a valid
-summary (e.g., malformed output from the model). Clients may round-trip
-compaction blocks with null content; the server treats them as no-ops.
-
-content: string
-
-Summary of compacted content, or null if compaction failed
-
-encrypted\_content: string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
-type: "compaction"
-
-
-
-beta\_fallback\_block: object { from, to, trigger, type } 
-
-Marks the point in `content` where one model's output gives way to the next.
-
-One block appears per hop where a preceding model actually ran this turn and
-declined. A turn where no preceding model ran and declined has no such
-boundary and carries no block — the signal for whether a fallback model
-served the response is the presence of a `fallback_message` entry in
-`usage.iterations`, not this block.
-
-The block is treated like a server-tool content block for streaming: it
-arrives via the standard `content_block_start` / `content_block_stop`
-pair and carries no deltas.
-
-
-
-from: object { model } 
-
-The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
-
-
-
-model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-
-
-to: object { model } 
-
-The fallback model producing the content that follows this block. Its `model` is always the canonical id.
-
-
-
-model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-
-
-trigger: object { category, type } 
-
-What caused the `from` model to hand over at this hop.
-
-
-
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
-
-The policy category that triggered a refusal.
-
-"cyber"
-
-"bio"
-
-"frontier\_llm"
-
-"reasoning\_extraction"
-
-type: "refusal"
-
-type: "fallback"
-
-index: number
-
-type: "content\_block\_start"
-
-
-
-beta\_raw\_content\_block\_delta\_event: object { delta, index, type } 
-
-
-
-delta: [BetaTextDelta](api/beta/messages.md) { text, type }  or [BetaInputJSONDelta](api/beta/messages.md) { partial\_json, type }  or [BetaCitationsDelta](api/beta/messages.md) { citation, type }  or 3 more
-
-
-
-beta\_text\_delta: object { text, type } 
-
-text: string
-
-type: "text\_delta"
-
-
-
-beta\_input\_json\_delta: object { partial\_json, type } 
-
-partial\_json: string
-
-type: "input\_json\_delta"
-
-
-
-beta\_citations\_delta: object { citation, type } 
-
-
-
-citation: [BetaCitationCharLocation](api/beta/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [BetaCitationPageLocation](api/beta/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [BetaCitationContentBlockLocation](api/beta/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
-
-
-
-beta\_citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
-
-cited\_text: string
-
-document\_index: number
-
-document\_title: string
-
-end\_char\_index: number
-
-file\_id: string
-
-start\_char\_index: number
-
-type: "char\_location"
-
-
-
-beta\_citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
-
-cited\_text: string
-
-document\_index: number
-
-document\_title: string
-
-end\_page\_number: number
-
-file\_id: string
-
-start\_page\_number: number
-
-type: "page\_location"
-
-
-
-beta\_citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
-
-
-
-cited\_text: string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-document\_index: number
-
-document\_title: string
-
-
-
-end\_block\_index: number
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-file\_id: string
-
-start\_block\_index: number
-
-0-based index of the first cited block in the source's `content` array.
-
-type: "content\_block\_location"
-
-
-
-beta\_citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
-
-cited\_text: string
-
-encrypted\_index: string
-
-title: string
-
-type: "web\_search\_result\_location"
-
-url: string
-
-
-
-beta\_citation\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
-
-
-
-cited\_text: string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-end\_block\_index: number
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-search\_result\_index: number
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-source: string
-
-start\_block\_index: number
-
-0-based index of the first cited block in the source's `content` array.
-
-title: string
-
-type: "search\_result\_location"
-
-type: "citations\_delta"
-
-
-
-beta\_thinking\_delta: object { estimated\_tokens, thinking, type } 
-
-estimated\_tokens: number
-
-Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
-
-thinking: string
-
-type: "thinking\_delta"
-
-
-
-beta\_signature\_delta: object { signature, type } 
-
-signature: string
-
-type: "signature\_delta"
-
-
-
-beta\_compaction\_content\_block\_delta: object { content, encrypted\_content, type } 
-
-content: string
-
-encrypted\_content: string
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
-type: "compaction\_delta"
-
-index: number
-
-type: "content\_block\_delta"
-
-
-
-beta\_raw\_content\_block\_stop\_event: object { index, type } 
-
-index: number
-
-type: "content\_block\_stop"
-
-Create a Message
-
-CLI
-
-```shiki
+```bash
 ant beta:messages create \
   --api-key my-anthropic-api-key \
   --max-tokens 1024 \
   --message '{content: [{text: x, type: text}], role: user}' \
-  --model claude-opus-4-6
+  --model claude-opus-5
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
   "container": {
-    "id": "id",
+    "id": "container_011CpZohnwH4vuy7gazohgSP",
     "expires_at": "2019-12-27T18:11:19.117Z",
     "skills": [
       {
@@ -6621,11 +3084,11 @@ Response 200
     {
       "citations": [
         {
-          "cited_text": "cited_text",
+          "cited_text": "The grass is green. The sky is blue.",
           "document_index": 0,
-          "document_title": "document_title",
+          "document_title": "My Document",
           "end_char_index": 0,
-          "file_id": "file_id",
+          "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
           "start_char_index": 0,
           "type": "char_location"
         }
@@ -6649,14 +3112,14 @@ Response 200
       "type": "model_changed"
     }
   },
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-5",
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
-    "explanation": "explanation",
-    "fallback_credit_token": "fallback_credit_token",
+    "explanation": "This request was declined because it conflicts with Anthropic's Usage Policy.",
+    "fallback_credit_token": "QW50aHJvcGljL0NsYXVkZQ==",
     "fallback_has_prefill_claim": true,
-    "recommended_model": "recommended_model",
+    "recommended_model": "claude-opus-4-8",
     "type": "refusal"
   },
   "stop_reason": "end_turn",
@@ -6669,7 +3132,12 @@ Response 200
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
-    "inference_geo": "inference_geo",
+    "fallback_credit": {
+      "status": {
+        "type": "redeemed"
+      }
+    },
+    "inference_geo": "global",
     "input_tokens": 2095,
     "iterations": [
       {
@@ -6680,7 +3148,7 @@ Response 200
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
-        "model": "claude-sonnet-5",
+        "model": "claude-fable-5-1",
         "output_tokens": 0,
         "type": "message"
       }
@@ -6695,109 +3163,14 @@ Response 200
     },
     "service_tier": "standard",
     "speed": "standard"
-  }
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
-  "container": {
-    "id": "id",
-    "expires_at": "2019-12-27T18:11:19.117Z",
-    "skills": [
-      {
-        "skill_id": "pdf",
-        "type": "anthropic",
-        "version": "latest"
-      }
-    ]
   },
-  "content": [
+  "input_transformations": [
     {
-      "citations": [
-        {
-          "cited_text": "cited_text",
-          "document_index": 0,
-          "document_title": "document_title",
-          "end_char_index": 0,
-          "file_id": "file_id",
-          "start_char_index": 0,
-          "type": "char_location"
-        }
-      ],
-      "text": "Hi! My name is Claude.",
-      "type": "text"
+      "path": "path",
+      "reason": "model_binding_mismatch",
+      "type": "thinking_dropped"
     }
-  ],
-  "context_management": {
-    "applied_edits": [
-      {
-        "cleared_input_tokens": 0,
-        "cleared_tool_uses": 0,
-        "type": "clear_tool_uses_20250919"
-      }
-    ]
-  },
-  "diagnostics": {
-    "cache_miss_reason": {
-      "cache_missed_input_tokens": 0,
-      "type": "model_changed"
-    }
-  },
-  "model": "claude-opus-4-6",
-  "role": "assistant",
-  "stop_details": {
-    "category": "cyber",
-    "explanation": "explanation",
-    "fallback_credit_token": "fallback_credit_token",
-    "fallback_has_prefill_claim": true,
-    "recommended_model": "recommended_model",
-    "type": "refusal"
-  },
-  "stop_reason": "end_turn",
-  "stop_sequence": null,
-  "type": "message",
-  "usage": {
-    "cache_creation": {
-      "ephemeral_1h_input_tokens": 0,
-      "ephemeral_5m_input_tokens": 0
-    },
-    "cache_creation_input_tokens": 2051,
-    "cache_read_input_tokens": 2051,
-    "inference_geo": "inference_geo",
-    "input_tokens": 2095,
-    "iterations": [
-      {
-        "cache_creation": {
-          "ephemeral_1h_input_tokens": 0,
-          "ephemeral_5m_input_tokens": 0
-        },
-        "cache_creation_input_tokens": 0,
-        "cache_read_input_tokens": 0,
-        "input_tokens": 0,
-        "model": "claude-sonnet-5",
-        "output_tokens": 0,
-        "type": "message"
-      }
-    ],
-    "output_tokens": 503,
-    "output_tokens_details": {
-      "thinking_tokens": 0
-    },
-    "server_tool_use": {
-      "web_fetch_requests": 2,
-      "web_search_requests": 0
-    },
-    "service_tier": "standard",
-    "speed": "standard"
-  }
+  ]
 }
 ```
 

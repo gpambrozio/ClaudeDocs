@@ -1,38 +1,105 @@
 # Permissions
 
-To enable the Compliance API, see the setup guide.
+## List Compliance Role Permissions
 
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
+**GET** `/v1/compliance/organizations/{org_uuid}/roles/{role_id}/permissions`
 
-Copy page
+List Compliance Role Permissions
 
-
+### Path parameters
 
-# Permissions
+- `org_uuid: string`
 
-##### [List Compliance Role Permissions](api/http/compliance/organizations/roles/permissions/list.md)
+  The organization UUID
 
-GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}/permissions
+- `role_id: string`
 
-##### Models
+  The role ID (tagged ID, e.g., rbac_role_abc123)
 
-
+### Query parameters
 
-PermissionListResponse object{ action, resource\_id, resource\_type }
+- `limit: optional number`
 
-Permission granted by a role.
+  Maximum results (default: 500, max: 1000)
 
-action: string
+  default: 500, maximum: 1000, minimum: 1
 
-Action permitted on the resource
+- `page: optional string`
 
-resource\_id: string
+  Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
-Identifier of the resource the permission applies to
+### Headers
 
-resource\_type: string
+- `"x-api-key": optional string`
 
-Type of resource the permission applies to
+### Returns
+
+- `data: array of object`
+
+  List of permissions
+
+  - `action: string`
+
+    Action permitted on the resource
+
+  - `resource_id: string`
+
+    Identifier of the resource the permission applies to
+
+  - `resource_type: string`
+
+    Type of resource the permission applies to
+
+- `has_more: boolean`
+
+  Whether more records exist beyond the current result set
+
+- `next_page: string or null`
+
+  Token to retrieve the next page. Use this as the 'page' parameter in your next request
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/roles/$ROLE_ID/permissions \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "action": "claude_code",
+      "resource_id": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
+      "resource_type": "organization"
+    }
+  ],
+  "has_more": true,
+  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
+}
+```
+
+## Domain types
+
+### Permission List Response
+
+- `PermissionListResponse object`
+
+  Permission granted by a role.
+
+  - `action: string`
+
+    Action permitted on the resource
+
+  - `resource_id: string`
+
+    Identifier of the resource the permission applies to
+
+  - `resource_type: string`
+
+    Type of resource the permission applies to
 
 ---
 

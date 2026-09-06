@@ -1,52 +1,42 @@
-# Additional resources
+# Additional Resources
 
-Copy page
+---
+title: Additional resources
+url: https://platform.claude.com/docs/en/about-claude/additional-resources
+description: Learning resources and documentation formats optimized for AI ingestion.
+---
 
-
+## Learning resources
 
-## Learning resources
-
-
-
-[Quickstarts](https://github.com/anthropics/anthropic-quickstarts)
+**Quickstarts**
 
 Deployable applications built with the API.
 
-
-
-[Courses](https://academy.claude.com/courses)
+**Courses**
 
 Step-by-step lessons on building with Claude.
 
-[Cookbook](https://platform.claude.com/cookbook)
+**Cookbook**
 
 Replicable code samples and implementations.
 
-[Use case guides](about-claude/use-case-guides/overview.md)
+**Use case guides**
 
 In-depth production guides for building common use cases with Claude.
 
-[Glossary](about-claude/glossary.md)
+**Glossary**
 
 Key terms and concepts for working with Claude and language models.
 
-## Resources for AI ingestion
+## Resources for AI ingestion
 
-
-
-[API primer for Claude ingestion](claude_api_primer.md)
+**API primer for Claude ingestion**
 
 Concise API guide meant for ingestion by Claude.
 
-
-
-[llms.txt](/llms.txt)
+**llms.txt**
 
 LLM-optimized documentation index.
-
-Was this page helpful?
-
-
 
 ---
 

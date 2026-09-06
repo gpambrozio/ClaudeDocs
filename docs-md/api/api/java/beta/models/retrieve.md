@@ -1,340 +1,252 @@
 # Get a Model
 
-Copy page
+`BetaModelInfo beta().models().retrieve(params = ModelRetrieveParams.none(), requestOptions = RequestOptions.none())`
 
-
-
-Java
-
-# Get a Model
-
-[BetaModelInfo](api/beta/models.md) beta().models().retrieve(ModelRetrieveParamsparams = ModelRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
-
-GET/v1/models/{model\_id}
+**GET** `/v1/models/{model_id}`
 
 Get a specific model.
 
 The Models API response can be used to determine information about a specific model or resolve a model alias to a model ID.
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `ModelRetrieveParams params`
 
-ModelRetrieveParams params
+  - `Optional<String> modelId`
 
-Optional<String> modelId
+    Model identifier or alias.
 
-Model identifier or alias.
+  - `Optional<List<AnthropicBeta>> betas`
 
-
+    Optional header to specify the beta version(s) you want to use.
 
-Optional<List<AnthropicBeta>> betas
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
-Optional header to specify the beta version(s) you want to use.
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
 
-MESSAGE\_BATCHES\_2024\_09\_24("message-batches-2024-09-24")
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
-PROMPT\_CACHING\_2024\_07\_31("prompt-caching-2024-07-31")
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-COMPUTER\_USE\_2024\_10\_22("computer-use-2024-10-22")
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
 
-COMPUTER\_USE\_2025\_01\_24("computer-use-2025-01-24")
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
 
-PDFS\_2024\_09\_25("pdfs-2024-09-25")
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
 
-TOKEN\_COUNTING\_2024\_11\_01("token-counting-2024-11-01")
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
 
-TOKEN\_EFFICIENT\_TOOLS\_2025\_02\_19("token-efficient-tools-2025-02-19")
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
-OUTPUT\_128K\_2025\_02\_19("output-128k-2025-02-19")
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
-FILES\_API\_2025\_04\_14("files-api-2025-04-14")
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
 
-MCP\_CLIENT\_2025\_04\_04("mcp-client-2025-04-04")
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
 
-MCP\_CLIENT\_2025\_11\_20("mcp-client-2025-11-20")
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
 
-DEV\_FULL\_THINKING\_2025\_05\_14("dev-full-thinking-2025-05-14")
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-INTERLEAVED\_THINKING\_2025\_05\_14("interleaved-thinking-2025-05-14")
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
 
-CODE\_EXECUTION\_2025\_05\_22("code-execution-2025-05-22")
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
-EXTENDED\_CACHE\_TTL\_2025\_04\_11("extended-cache-ttl-2025-04-11")
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
-CONTEXT\_1M\_2025\_08\_07("context-1m-2025-08-07")
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-CONTEXT\_MANAGEMENT\_2025\_06\_27("context-management-2025-06-27")
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
-MODEL\_CONTEXT\_WINDOW\_EXCEEDED\_2025\_08\_26("model-context-window-exceeded-2025-08-26")
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
-SKILLS\_2025\_10\_02("skills-2025-10-02")
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
-OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
-USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
-MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
-CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
-THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
-FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
 
-AGENT\_MEMORY\_2026\_07\_22("agent-memory-2026-07-22")
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
-##### ReturnsExpand Collapse
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
-
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
-class BetaModelInfo:
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-String id
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
 
-Unique model identifier.
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
 
-Optional<List<String>> allowedFallbackModels
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
 
-Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
 
-
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
 
-Optional<[BetaModelCapabilities](api/beta/models.md)> capabilities
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-Model capability information.
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
 
-
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-[BetaCapabilitySupport](api/beta/models.md) batch
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
 
-Whether the model supports the Batch API.
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-boolean supported
+## Returns
 
-Whether this capability is supported by the model.
+- `class BetaModelInfo:`
 
-
+  - `String id`
 
-[BetaCapabilitySupport](api/beta/models.md) citations
+    Unique model identifier.
 
-Whether the model supports citation generation.
+  - `Optional<List<String>> allowedFallbackModels`
 
-boolean supported
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
-Whether this capability is supported by the model.
+  - `Optional<BetaModelCapabilities> capabilities`
 
-
+    Model capability information.
 
-[BetaCapabilitySupport](api/beta/models.md) codeExecution
+    - `BetaCapabilitySupport batch`
 
-Whether the model supports code execution tools.
+      Whether the model supports the Batch API.
 
-boolean supported
+      - `boolean supported`
 
-Whether this capability is supported by the model.
+        Whether this capability is supported by the model.
 
-
+    - `BetaCapabilitySupport citations`
 
-[BetaContextManagementCapability](api/beta/models.md) contextManagement
+      Whether the model supports citation generation.
 
-Context management support and available strategies.
+    - `BetaCapabilitySupport codeExecution`
 
-
+      Whether the model supports code execution tools.
 
-Optional<[BetaCapabilitySupport](api/beta/models.md)> clearThinking20251015
+    - `BetaContextManagementCapability contextManagement`
 
-Indicates whether a capability is supported.
+      Context management support and available strategies.
 
-boolean supported
+      - `Optional<BetaCapabilitySupport> clearThinking20251015`
 
-Whether this capability is supported by the model.
+        Indicates whether a capability is supported.
 
-
+      - `Optional<BetaCapabilitySupport> clearToolUses20250919`
 
-Optional<[BetaCapabilitySupport](api/beta/models.md)> clearToolUses20250919
+        Indicates whether a capability is supported.
 
-Indicates whether a capability is supported.
+      - `Optional<BetaCapabilitySupport> compact20260112`
 
-boolean supported
+        Indicates whether a capability is supported.
 
-Whether this capability is supported by the model.
+      - `boolean supported`
 
-
+        Whether this capability is supported by the model.
 
-Optional<[BetaCapabilitySupport](api/beta/models.md)> compact20260112
+    - `BetaEffortCapability effort`
 
-Indicates whether a capability is supported.
+      Effort (reasoning_effort) support and available levels.
 
-boolean supported
+      - `BetaCapabilitySupport high`
 
-Whether this capability is supported by the model.
+        Whether the model supports high effort level.
 
-boolean supported
+      - `BetaCapabilitySupport low`
 
-Whether this capability is supported by the model.
+        Whether the model supports low effort level.
 
-
+      - `BetaCapabilitySupport max`
 
-[BetaEffortCapability](api/beta/models.md) effort
+        Whether the model supports max effort level.
 
-Effort (reasoning\_effort) support and available levels.
+      - `BetaCapabilitySupport medium`
 
-
+        Whether the model supports medium effort level.
 
-[BetaCapabilitySupport](api/beta/models.md) high
+      - `boolean supported`
 
-Whether the model supports high effort level.
+        Whether this capability is supported by the model.
 
-boolean supported
+      - `Optional<BetaCapabilitySupport> xhigh`
 
-Whether this capability is supported by the model.
+        Indicates whether a capability is supported.
 
-
+    - `BetaCapabilitySupport imageInput`
 
-[BetaCapabilitySupport](api/beta/models.md) low
+      Whether the model accepts image content blocks.
 
-Whether the model supports low effort level.
+    - `BetaCapabilitySupport pdfInput`
 
-boolean supported
+      Whether the model accepts PDF content blocks.
 
-Whether this capability is supported by the model.
+    - `BetaCapabilitySupport structuredOutputs`
 
-
+      Whether the model supports structured output / JSON mode / strict tool schemas.
 
-[BetaCapabilitySupport](api/beta/models.md) max
+    - `BetaThinkingCapability thinking`
 
-Whether the model supports max effort level.
+      Thinking capability and supported type configurations.
 
-boolean supported
+      - `boolean supported`
 
-Whether this capability is supported by the model.
+        Whether this capability is supported by the model.
 
-
+      - `BetaThinkingTypes types`
 
-[BetaCapabilitySupport](api/beta/models.md) medium
+        Supported thinking type configurations.
 
-Whether the model supports medium effort level.
+        - `BetaCapabilitySupport adaptive`
 
-boolean supported
+          Whether the model supports thinking with type 'adaptive' (auto).
 
-Whether this capability is supported by the model.
+        - `BetaCapabilitySupport enabled`
 
-boolean supported
+          Whether the model supports thinking with type 'enabled'.
 
-Whether this capability is supported by the model.
+  - `LocalDateTime createdAt`
 
-
+    RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-Optional<[BetaCapabilitySupport](api/beta/models.md)> xhigh
+    format: date-time
 
-Indicates whether a capability is supported.
+  - `String displayName`
 
-boolean supported
+    A human-readable name for the model.
 
-Whether this capability is supported by the model.
+  - `Optional<Long> maxInputTokens`
 
-
+    Maximum input context window size in tokens for this model.
 
-[BetaCapabilitySupport](api/beta/models.md) imageInput
+  - `Optional<Long> maxTokens`
 
-Whether the model accepts image content blocks.
+    Maximum value for the `max_tokens` parameter when using this model.
 
-boolean supported
+  - `JsonValue type = "model"`
 
-Whether this capability is supported by the model.
+    Object type.
 
-
+    For Models, this is always `"model"`.
 
-[BetaCapabilitySupport](api/beta/models.md) pdfInput
+## Example
 
-Whether the model accepts PDF content blocks.
-
-boolean supported
-
-Whether this capability is supported by the model.
-
-
-
-[BetaCapabilitySupport](api/beta/models.md) structuredOutputs
-
-Whether the model supports structured output / JSON mode / strict tool schemas.
-
-boolean supported
-
-Whether this capability is supported by the model.
-
-
-
-[BetaThinkingCapability](api/beta/models.md) thinking
-
-Thinking capability and supported type configurations.
-
-boolean supported
-
-Whether this capability is supported by the model.
-
-
-
-[BetaThinkingTypes](api/beta/models.md) types
-
-Supported thinking type configurations.
-
-
-
-[BetaCapabilitySupport](api/beta/models.md) adaptive
-
-Whether the model supports thinking with type 'adaptive' (auto).
-
-boolean supported
-
-Whether this capability is supported by the model.
-
-
-
-[BetaCapabilitySupport](api/beta/models.md) enabled
-
-Whether the model supports thinking with type 'enabled'.
-
-boolean supported
-
-Whether this capability is supported by the model.
-
-LocalDateTime createdAt
-
-RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
-
-String displayName
-
-A human-readable name for the model.
-
-Optional<Long> maxInputTokens
-
-Maximum input context window size in tokens for this model.
-
-Optional<Long> maxTokens
-
-Maximum value for the `max_tokens` parameter when using this model.
-
-
-
-JsonValue; type "model"constant"model"constant
-
-Object type.
-
-For Models, this is always `"model"`.
-
-Get a Model
-
-Java
-
-```shiki
+```java
 package com.anthropic.example;
 
 import com.anthropic.client.AnthropicClient;
@@ -353,13 +265,11 @@ public final class Main {
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
-  "id": "claude-opus-4-6",
+  "id": "claude-opus-5",
   "allowed_fallback_models": [
     "string"
   ],
@@ -424,89 +334,8 @@ Response 200
       }
     }
   },
-  "created_at": "2026-02-04T00:00:00Z",
-  "display_name": "Claude Opus 4.6",
-  "max_input_tokens": 0,
-  "max_tokens": 0,
-  "type": "model"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "claude-opus-4-6",
-  "allowed_fallback_models": [
-    "string"
-  ],
-  "capabilities": {
-    "batch": {
-      "supported": true
-    },
-    "citations": {
-      "supported": true
-    },
-    "code_execution": {
-      "supported": true
-    },
-    "context_management": {
-      "clear_thinking_20251015": {
-        "supported": true
-      },
-      "clear_tool_uses_20250919": {
-        "supported": true
-      },
-      "compact_20260112": {
-        "supported": true
-      },
-      "supported": true
-    },
-    "effort": {
-      "high": {
-        "supported": true
-      },
-      "low": {
-        "supported": true
-      },
-      "max": {
-        "supported": true
-      },
-      "medium": {
-        "supported": true
-      },
-      "supported": true,
-      "xhigh": {
-        "supported": true
-      }
-    },
-    "image_input": {
-      "supported": true
-    },
-    "pdf_input": {
-      "supported": true
-    },
-    "structured_outputs": {
-      "supported": true
-    },
-    "thinking": {
-      "supported": true,
-      "types": {
-        "adaptive": {
-          "supported": true
-        },
-        "enabled": {
-          "supported": true
-        }
-      }
-    }
-  },
-  "created_at": "2026-02-04T00:00:00Z",
-  "display_name": "Claude Opus 4.6",
+  "created_at": "2026-07-24T00:00:00Z",
+  "display_name": "Claude Opus 5",
   "max_input_tokens": 0,
   "max_tokens": 0,
   "type": "model"

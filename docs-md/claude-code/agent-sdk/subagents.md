@@ -1,40 +1,40 @@
 # Subagents in the SDK
 
-Subagents are separate agent instances that your main agent can spawn to handle focused subtasks.
-Use them to isolate context, run multiple analyses in parallel, and apply specialized instructions without adding to the main agent’s prompt.
+> Define and invoke subagents to isolate context, run tasks in parallel, and apply specialized instructions in your Claude Agent SDK applications.
 
-## [​](#overview) Overview
+Subagents are separate agent instances that your main agent can spawn to handle focused subtasks.
+Use them to isolate context, run multiple analyses in parallel, and apply specialized instructions without adding to the main agent's prompt.
+
+## Overview
 
 You can create subagents in three ways:
 
-- **Programmatically**: use the `agents` parameter in your `query()` options. See the [TypeScript](agent-sdk/typescript.md) and [Python](agent-sdk/python.md) references
-- **Filesystem-based**: define agents as markdown files in `.claude/agents/` directories. See [defining subagents as files](sub-agents.md)
-- **Built-in general-purpose**: Claude can invoke the built-in `general-purpose` subagent at any time via the Agent tool without you defining anything
+* **Programmatically**: use the `agents` parameter in your `query()` options. See the [TypeScript](agent-sdk/typescript.md) and [Python](agent-sdk/python.md) references
+* **Filesystem-based**: define agents as markdown files in `.claude/agents/` directories. See [defining subagents as files](sub-agents.md)
+* **Built-in general-purpose**: Claude can invoke the built-in `general-purpose` subagent at any time via the Agent tool without you defining anything
 
 This guide focuses on the programmatic approach, which is recommended for SDK applications.
 
-## [​](#benefits-of-using-subagents) Benefits of using subagents
+## Benefits of using subagents
 
 Because subagents are separate agent instances, delegating work to them gives you four benefits:
 
-- **Context isolation**: each subagent runs in its own conversation, which starts fresh unless the subagent is a [fork](sub-agents.md). Either way, intermediate tool calls and results stay inside the subagent; only its final message returns to the parent. A `research-assistant` subagent can explore dozens of files without any of that content accumulating in the main conversation. The parent receives a concise summary, not every file the subagent read. See [What subagents inherit](#what-subagents-inherit) for exactly what’s in the subagent’s context.
-- **Parallelization**: multiple subagents can run concurrently, so independent subtasks finish in the time of the slowest one rather than the sum of all of them. During a code review, you can run `style-checker`, `security-scanner`, and `test-coverage` subagents simultaneously instead of sequentially.
-- **Specialized instructions and knowledge**: each subagent can have a tailored system prompt with specific expertise, best practices, and constraints. A `database-migration` subagent can have detailed knowledge about SQL best practices, rollback strategies, and data integrity checks that would be unnecessary noise in the main agent’s instructions.
-- **Tool restrictions**: subagents can be limited to specific tools, reducing the risk of unintended actions. A `doc-reviewer` subagent might only have access to Read and Grep tools, ensuring it can analyze but never accidentally modify your documentation files.
+* **Context isolation**: each subagent runs in its own conversation, which starts fresh unless the subagent is a [fork](sub-agents.md). Either way, intermediate tool calls and results stay inside the subagent; only its final message returns to the parent. A `research-assistant` subagent can explore dozens of files without any of that content accumulating in the main conversation. The parent receives a concise summary, not every file the subagent read. See [What subagents inherit](#what-subagents-inherit) for exactly what's in the subagent's context.
+* **Parallelization**: multiple subagents can run concurrently, so independent subtasks finish in the time of the slowest one rather than the sum of all of them. During a code review, you can run `style-checker`, `security-scanner`, and `test-coverage` subagents simultaneously instead of sequentially.
+* **Specialized instructions and knowledge**: each subagent can have a tailored system prompt with specific expertise, best practices, and constraints. A `database-migration` subagent can have detailed knowledge about SQL best practices, rollback strategies, and data integrity checks that would be unnecessary noise in the main agent's instructions.
+* **Tool restrictions**: subagents can be limited to specific tools, reducing the risk of unintended actions. A `doc-reviewer` subagent might only have access to Read and Grep tools, ensuring it can analyze but never accidentally modify your documentation files.
 
-## [​](#create-subagents) Create subagents
+## Create subagents
 
-### [​](#programmatic-definition-recommended) Programmatic definition (recommended)
+### Programmatic definition (recommended)
 
 Define subagents directly in your code using the `agents` parameter. Claude invokes subagents through the `Agent` tool.
+
 Most examples on this page print only the final result. To confirm that Claude delegated to a subagent rather than answering directly, see [Detect subagent invocation](#detect-subagent-invocation).
+
 This example creates two subagents: a code reviewer with read-only access and a test runner that can execute commands.
 
-Python
-
-TypeScript
-
-```shiki
+```python Python
 import asyncio
 from claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition
 
@@ -84,7 +84,7 @@ Focus on:
 asyncio.run(main())
 ```
 
-```shiki
+```typescript TypeScript
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
 for await (const message of query({
@@ -132,83 +132,87 @@ Focus on:
 }
 ```
 
-### [​](#agentdefinition-configuration) AgentDefinition configuration
+### AgentDefinition configuration
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `description` | `string` | Yes | Natural language description of when to use this agent |
-| `prompt` | `string` | Yes | The agent’s system prompt defining its role and behavior |
-| `tools` | `string[]` | No | Array of allowed tool names. If omitted, inherits every [tool available to subagents](sub-agents.md) |
-| `disallowedTools` | `string[]` | No | Array of tool names to remove from the agent’s tool set. MCP server-level patterns are also accepted: `mcp__server` or `mcp__server__*` removes every tool from that server, and `mcp__*` removes every MCP tool from any server |
-| `model` | `string` | No | Model override for this agent. Accepts an alias such as `'fable'`, `'opus'`, `'sonnet'`, `'haiku'`, `'inherit'`, or a full model ID. `'inherit'` uses the main model. When you omit it, Claude Code picks the model in the [subagent model order](sub-agents.md) |
-| `skills` | `string[]` | No | List of skill names to preload into the agent’s context at startup. Unlisted skills remain invocable through the Skill tool |
-| `memory` | `'user' | 'project' | 'local'` | No | Memory source for this agent |
-| `mcpServers` | `(string | object)[]` | No | MCP servers available to this agent, by name or inline config |
-| `initialPrompt` | `string` | No | Auto-submitted as the first user turn when this agent runs as the main thread agent. Ignored when the agent is invoked as a subagent |
-| `maxTurns` | `number` | No | Maximum number of agentic turns before the agent stops. When the agent reaches the limit, Claude Code returns its output marked as partial, and you can [resume the agent](#resume-subagents) to continue. The partial marking requires Claude Code v2.1.246 or later |
-| `background` | `boolean` | No | Run this agent as a non-blocking background task when invoked |
-| `effort` | `'low' | 'medium' | 'high' | 'xhigh' | 'max' | number` | No | Reasoning effort level for this agent |
-| `permissionMode` | `PermissionMode` | No | Permission mode for tool execution within this agent |
+| Field             | Type                                                        | Required | Description                                                                                                                                                                                                                                                                      |
+| :---------------- | :---------------------------------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `description`     | `string`                                                    | Yes      | Natural language description of when to use this agent                                                                                                                                                                                                                           |
+| `prompt`          | `string`                                                    | Yes      | The agent's system prompt defining its role and behavior                                                                                                                                                                                                                         |
+| `tools`           | `string[]`                                                  | No       | Array of allowed tool names. If omitted, inherits every [tool available to subagents](sub-agents.md)                                                                                                                                                            |
+| `disallowedTools` | `string[]`                                                  | No       | Array of tool names to remove from the agent's tool set. MCP server-level patterns are also accepted: `mcp__server` or `mcp__server__*` removes every tool from that server, and `mcp__*` removes every MCP tool from any server                                                 |
+| `model`           | `string`                                                    | No       | Model override for this agent. Accepts an alias such as `'fable'`, `'opus'`, `'sonnet'`, `'haiku'`, `'inherit'`, or a full model ID. `'inherit'` uses the main model. When you omit it, Claude Code picks the model in the [subagent model order](sub-agents.md) |
+| `skills`          | `string[]`                                                  | No       | List of skill names to preload into the agent's context at startup. Unlisted skills remain invocable through the Skill tool                                                                                                                                                      |
+| `memory`          | `'user' \| 'project' \| 'local'`                            | No       | Memory source for this agent                                                                                                                                                                                                                                                     |
+| `mcpServers`      | `(string \| object)[]`                                      | No       | MCP servers available to this agent, by name or inline config                                                                                                                                                                                                                    |
+| `initialPrompt`   | `string`                                                    | No       | Auto-submitted as the first user turn when this agent runs as the main thread agent. Ignored when the agent is invoked as a subagent                                                                                                                                             |
+| `maxTurns`        | `number`                                                    | No       | Maximum number of agentic turns before the agent stops. When the agent reaches the limit, Claude Code returns its output marked as partial, and you can [resume the agent](#resume-subagents) to continue. The partial marking requires Claude Code v2.1.246 or later            |
+| `background`      | `boolean`                                                   | No       | Run this agent as a non-blocking background task when invoked                                                                                                                                                                                                                    |
+| `effort`          | `'low' \| 'medium' \| 'high' \| 'xhigh' \| 'max' \| number` | No       | Reasoning effort level for this agent                                                                                                                                                                                                                                            |
+| `permissionMode`  | `PermissionMode`                                            | No       | Permission mode for tool execution within this agent                                                                                                                                                                                                                             |
 
-In the Python SDK, multi-word field names such as `disallowedTools` and `mcpServers` keep their camelCase spelling to match the wire format rather than following Python’s snake\_case convention. See the [`AgentDefinition` reference](agent-sdk/python.md) for details.
+In the Python SDK, multi-word field names such as `disallowedTools` and `mcpServers` keep their camelCase spelling to match the wire format rather than following Python's snake\_case convention. See the [`AgentDefinition` reference](agent-sdk/python.md) for details.
+
 Subagents run in the background by default. An Agent tool call that omits the [`run_in_background`](sub-agents.md) input launches a background subagent, and Claude sets `run_in_background: false` when it needs the result before continuing. Set the `background` field to `true` to force background execution for a specific agent regardless of what Claude requests. Before Claude Code v2.1.198, the background default was rolling out gradually, and an Agent tool call that omitted `run_in_background` could run the subagent synchronously.
+
 Subagents can also spawn subagents of their own. To limit how deep that nesting goes, how many subagents run at once, and how much a query spends, see [Cap subagent depth, concurrency, and spend](#cap-subagent-depth-concurrency-and-spend).
 
-### [​](#filesystem-based-definition-alternative) Filesystem-based definition (alternative)
+### Filesystem-based definition (alternative)
 
 You can also define subagents as markdown files in `.claude/agents/` directories. See the [Claude Code subagents documentation](sub-agents.md) for details on this approach. Programmatically defined agents take precedence over filesystem-based agents with the same name.
 
 When Claude calls the Agent tool without a `subagent_type`, it gets the built-in `general-purpose` subagent, which Claude can spawn even when you define no agents of your own. Setting [`CLAUDE_AGENT_SDK_DISABLE_BUILTIN_AGENTS=1`](env-vars.md) removes that default, and such a call fails with [`subagent_type is required`](errors.md).
 
-## [​](#what-subagents-inherit) What subagents inherit
+## What subagents inherit
 
-Unless the subagent is a [fork](sub-agents.md), its context window starts fresh, with no parent conversation, but isn’t empty. The only content you pass from parent to subagent is the Agent tool’s prompt string, so include any file paths, error messages, or decisions the subagent needs directly in that prompt.
-A subagent that has the [`SendMessage`](tools-reference.md) tool starts with a list of the other named agents running in the session, so it knows which names it can send messages to. Claude Code adds the list to the subagent’s first turn automatically. A [fork](sub-agents.md) doesn’t get the list because it inherits the parent conversation instead.
-A subagent also inherits the main session’s extended thinking configuration.
-The table below lists what a non-fork subagent’s context contains and what it leaves out.
+Unless the subagent is a [fork](sub-agents.md), its context window starts fresh, with no parent conversation, but isn't empty. The only content you pass from parent to subagent is the Agent tool's prompt string, so include any file paths, error messages, or decisions the subagent needs directly in that prompt.
 
-| The subagent receives | The subagent doesn’t receive |
-| --- | --- |
-| Its own system prompt (`AgentDefinition.prompt`) and the Agent tool’s prompt | The parent’s conversation history or tool results |
+A subagent that has the [`SendMessage`](tools-reference.md) tool starts with a list of the other named agents running in the session, so it knows which names it can send messages to. Claude Code adds the list to the subagent's first turn automatically. A [fork](sub-agents.md) doesn't get the list because it inherits the parent conversation instead.
+
+A subagent also inherits the main session's extended thinking configuration.
+
+The table below lists what a non-fork subagent's context contains and what it leaves out.
+
+| The subagent receives                                                                                                                 | The subagent doesn't receive                                       |
+| :------------------------------------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------- |
+| Its own system prompt (`AgentDefinition.prompt`) and the Agent tool's prompt                                                          | The parent's conversation history or tool results                  |
 | Project CLAUDE.md (loaded via [`settingSources`](agent-sdk/claude-code-features.md)) | Preloaded skill content, unless listed in `AgentDefinition.skills` |
-| Tool definitions (inherited from parent or the subset in `tools`, [filtered for background runs](sub-agents.md)) | The parent’s system prompt |
+| Tool definitions (inherited from parent or the subset in `tools`, [filtered for background runs](sub-agents.md))     | The parent's system prompt                                         |
 
-The parent receives the subagent’s final message as the Agent tool result, but may summarize it in its own response. To preserve subagent output verbatim in the user-facing response, include an instruction to do so in the prompt or `systemPrompt` option you pass to the main `query()` call.In v2.1.210 and later, Claude Code [scans the final message for instruction-shaped patterns](sub-agents.md) before the parent reads it. The scan treats three kinds of pattern differently:
+The parent receives the subagent's final message as the Agent tool result, but may summarize it in its own response. To preserve subagent output verbatim in the user-facing response, include an instruction to do so in the prompt or `systemPrompt` option you pass to the main `query()` call.
 
-- **Control-tag imitation**: Claude Code neutralizes a tag that only the harness emits, such as a `<system-reminder>` block, in place. It inserts a backslash after the opening angle bracket and deletes nothing.
-- **Permission-configuration mentions**: Claude Code keeps references to the permission configuration, such as `.claude/settings.json`, `bypassPermissions`, or `--dangerously-skip-permissions`, as written.
-- **Turn markers**: a line that starts with `Human:` or `Assistant:` gets a backslash before the colon, so the message can’t imitate a conversation turn boundary.
+In v2.1.210 and later, Claude Code [scans the final message for instruction-shaped patterns](sub-agents.md) before the parent reads it. The scan treats three kinds of pattern differently:
 
-For a control-tag or permission-configuration match, Claude Code prepends a `[harness: ...]` marker line naming the matched patterns; a turn-marker match doesn’t add the marker line. Those are the only modifications the scan makes: it never removes or rewords the subagent’s text.
+* **Control-tag imitation**: Claude Code neutralizes a tag that only the harness emits, such as a `<system-reminder>` block, in place. It inserts a backslash after the opening angle bracket and deletes nothing.
+* **Permission-configuration mentions**: Claude Code keeps references to the permission configuration, such as `.claude/settings.json`, `bypassPermissions`, or `--dangerously-skip-permissions`, as written.
+* **Turn markers**: a line that starts with `Human:` or `Assistant:` gets a backslash before the colon, so the message can't imitate a conversation turn boundary.
+
+For a control-tag or permission-configuration match, Claude Code prepends a `[harness: ...]` marker line naming the matched patterns; a turn-marker match doesn't add the marker line. Those are the only modifications the scan makes: it never removes or rewords the subagent's text.
 
 An API error that ends the subagent early, such as a rate limit, is never delivered as its result. See [API errors in subagents](sub-agents.md) for the foreground and background behavior.
 
-## [​](#invoke-subagents) Invoke subagents
+## Invoke subagents
 
-### [​](#automatic-invocation) Automatic invocation
+### Automatic invocation
 
-Claude automatically decides when to invoke subagents based on the task and each subagent’s `description`. For example, if you define a `performance-optimizer` subagent with the description “Performance optimization specialist for query tuning”, Claude will invoke it when your prompt mentions optimizing queries.
+Claude automatically decides when to invoke subagents based on the task and each subagent's `description`. For example, if you define a `performance-optimizer` subagent with the description "Performance optimization specialist for query tuning", Claude will invoke it when your prompt mentions optimizing queries.
+
 Write clear, specific descriptions so Claude can match tasks to the right subagent.
 
-### [​](#explicit-invocation) Explicit invocation
+### Explicit invocation
 
 To guarantee Claude uses a specific subagent, mention it by name in your prompt:
 
-```shiki
+```text
 "Use the code-reviewer agent to check the authentication module"
 ```
 
 This bypasses automatic matching and directly invokes the named subagent.
 
-### [​](#dynamic-agent-configuration) Dynamic agent configuration
+### Dynamic agent configuration
 
 You can create agent definitions dynamically based on runtime conditions. This example creates a security reviewer with different strictness levels, using a more capable model for strict reviews.
 
-Python
-
-TypeScript
-
-```shiki
+```python Python
 import asyncio
 from claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition
 
@@ -243,7 +247,7 @@ async def main():
 asyncio.run(main())
 ```
 
-```shiki
+```typescript TypeScript
 import { query, type AgentDefinition } from "@anthropic-ai/claude-agent-sdk";
 
 // Factory function that returns an AgentDefinition
@@ -275,20 +279,17 @@ for await (const message of query({
 }
 ```
 
-## [​](#detect-subagent-invocation) Detect subagent invocation
+## Detect subagent invocation
 
-Claude invokes subagents through the Agent tool. To detect when a subagent is invoked, check for `tool_use` blocks where `name` is `"Agent"`. Messages from within a subagent’s context include a `parent_tool_use_id` field.
+Claude invokes subagents through the Agent tool. To detect when a subagent is invoked, check for `tool_use` blocks where `name` is `"Agent"`. Messages from within a subagent's context include a `parent_tool_use_id` field.
 
 The tool appears as `"Agent"` in `tool_use` blocks but as `"Task"` in the `system:init` tools list. Before Claude Code v2.1.63, `tool_use` blocks also named it `"Task"`. To keep detection working across SDK versions, match both values in `block.name`.
 
 The message structure differs between SDKs. In Python, you access content blocks directly via `message.content`. In TypeScript, `SDKAssistantMessage` wraps the Claude API message, so you access content via `message.message.content`.
-This example iterates through streamed messages, logging when a subagent is invoked and when subsequent messages originate from within that subagent’s execution context.
 
-Python
+This example iterates through streamed messages, logging when a subagent is invoked and when subsequent messages originate from within that subagent's execution context.
 
-TypeScript
-
-```shiki
+```python Python
 import asyncio
 from claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition, ToolUseBlock
 
@@ -326,7 +327,7 @@ async def main():
 asyncio.run(main())
 ```
 
-```shiki
+```typescript TypeScript
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
 for await (const message of query({
@@ -363,25 +364,23 @@ for await (const message of query({
 }
 ```
 
-## [​](#resume-subagents) Resume subagents
+## Resume subagents
 
 You can resume a subagent to continue where it left off rather than starting fresh. A resumed subagent retains its full conversation history, including all previous tool calls, results, and reasoning.
+
 When a subagent stops at its [`maxTurns`](#agentdefinition-configuration) limit, Claude Code marks the output in the Agent tool result as partial, so Claude knows the run is unfinished.
-When a subagent completes, the Agent tool result includes a text block containing `agentId: <id>`. The built-in [`Explore` and `Plan` agents](sub-agents.md) are one-shot and don’t return an `agentId`, so use a custom agent or `general-purpose` when you need to resume. To resume a subagent programmatically:
+
+When a subagent completes, the Agent tool result includes a text block containing `agentId: <id>`. The built-in [`Explore` and `Plan` agents](sub-agents.md) are one-shot and don't return an `agentId`, so use a custom agent or `general-purpose` when you need to resume. To resume a subagent programmatically:
 
 1. **Capture the session ID**: extract `session_id` from messages during the first query
 2. **Extract the agent ID**: parse `agentId` from the Agent tool result text
-3. **Resume the session**: pass `resume: sessionId` in the second query’s options, and include the agent ID in your prompt. Each `query()` call starts a new session by default, and you must resume the same session to access the subagent’s transcript.
+3. **Resume the session**: pass `resume: sessionId` in the second query's options, and include the agent ID in your prompt. Each `query()` call starts a new session by default, and you must resume the same session to access the subagent's transcript.
 
 When using a custom agent, pass the same agent definition in the `agents` parameter for both queries.
 
 The example below defines a custom `endpoint-finder` agent. The first query runs it and captures the session ID and agent ID from the Agent tool result, then the second query resumes the session to ask a follow-up question that requires context from the first analysis.
 
-Python
-
-TypeScript
-
-```shiki
+```python Python
 import asyncio
 import re
 from claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition, ToolResultBlock
@@ -443,7 +442,7 @@ async def main():
 asyncio.run(main())
 ```
 
-```shiki
+```typescript TypeScript
 import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
 
 const agents = {
@@ -500,21 +499,18 @@ if (agentId && sessionId) {
 
 Subagent transcripts are stored in separate files and persist independently of the main conversation. See [resume subagents in Claude Code](sub-agents.md) for compaction behavior and the `cleanupPeriodDays` cleanup period.
 
-## [​](#tool-restrictions) Tool restrictions
+## Tool restrictions
 
 Use the `tools` field to limit what a subagent can do:
 
-- **Omit `tools`**: the subagent gets every [tool available to subagents](sub-agents.md)
-- **List tools**: the subagent gets only those. A code reviewer that should never edit files, for example, gets `["Read", "Grep", "Glob"]`
+* **Omit `tools`**: the subagent gets every [tool available to subagents](sub-agents.md)
+* **List tools**: the subagent gets only those. A code reviewer that should never edit files, for example, gets `["Read", "Grep", "Glob"]`
 
-A tool you leave out isn’t in the subagent’s session at all: Claude works without it, with no permission prompt or error.
-This example creates a read-only analysis agent that can examine code but can’t modify files or run commands.
+A tool you leave out isn't in the subagent's session at all: Claude works without it, with no permission prompt or error.
 
-Python
+This example creates a read-only analysis agent that can examine code but can't modify files or run commands.
 
-TypeScript
-
-```shiki
+```python Python
 import asyncio
 from claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition
 
@@ -540,7 +536,7 @@ identify patterns, and suggest improvements without making changes.""",
 asyncio.run(main())
 ```
 
-```shiki
+```typescript TypeScript
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
 for await (const message of query({
@@ -562,35 +558,32 @@ identify patterns, and suggest improvements without making changes.`,
 }
 ```
 
-### [​](#common-tool-combinations) Common tool combinations
+### Common tool combinations
 
-| Use case | Tools | Description |
-| --- | --- | --- |
-| Read-only analysis | `Read`, `Grep`, `Glob` | Can examine code but not modify or execute |
-| Test execution | `Bash`, `Read`, `Grep` | Can run commands and analyze output |
-| Code modification | `Read`, `Edit`, `Write`, `Grep`, `Glob` | Full read/write access without command execution |
-| Full access | All tools | Inherits the tools available to subagents (omit the `tools` field) |
+| Use case           | Tools                                   | Description                                                        |
+| :----------------- | :-------------------------------------- | :----------------------------------------------------------------- |
+| Read-only analysis | `Read`, `Grep`, `Glob`                  | Can examine code but not modify or execute                         |
+| Test execution     | `Bash`, `Read`, `Grep`                  | Can run commands and analyze output                                |
+| Code modification  | `Read`, `Edit`, `Write`, `Grep`, `Glob` | Full read/write access without command execution                   |
+| Full access        | All tools                               | Inherits the tools available to subagents (omit the `tools` field) |
 
-## [​](#cap-subagent-depth-concurrency-and-spend) Cap subagent depth, concurrency, and spend
+## Cap subagent depth, concurrency, and spend
 
-This section describes TypeScript SDK v0.3.219 and Python SDK v0.2.127 and later, the releases that bundle Claude Code v2.1.219 or later. On earlier releases, some of these limits are missing or default differently, so upgrade before you rely on them to bound a run. The [environment variable reference](env-vars.md) and [turns and budget](agent-sdk/agent-loop.md) record the Claude Code version that added each variable and the spend cap’s subagent enforcement.
+This section describes TypeScript SDK v0.3.219 and Python SDK v0.2.127 and later, the releases that bundle Claude Code v2.1.219 or later. On earlier releases, some of these limits are missing or default differently, so upgrade before you rely on them to bound a run. The [environment variable reference](env-vars.md) and [turns and budget](agent-sdk/agent-loop.md) record the Claude Code version that added each variable and the spend cap's subagent enforcement.
 
-Claude decides on its own when to spawn a subagent and how many to spawn. Each subagent makes its own API requests, which count toward the query’s `total_cost_usd`, and a subagent can spawn subagents of its own, so one prompt can grow into a tree of agents.
+Claude decides on its own when to spawn a subagent and how many to spawn. Each subagent makes its own API requests, which count toward the query's `total_cost_usd`, and a subagent can spawn subagents of its own, so one prompt can grow into a tree of agents.
+
 You can cap that growth in three ways: how deeply subagents nest, how many run at once, and how much the whole query spends. Set the depth and concurrency limits as environment variables through the [`env`](agent-sdk/typescript.md) option, and the spend limit as a query option:
 
-| Limit | Set it with | Default | What Claude Code does at the limit |
-| --- | --- | --- | --- |
-| Depth | [`CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH`](env-vars.md) | `3` layers of subagents below your main agent. `1` stops your subagents from spawning any of their own | Leaves a subagent at the bottom layer unable to spawn, so it does its delegated work itself. See [nested subagents](sub-agents.md) |
-| Concurrency | [`CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS`](env-vars.md) | `20` subagents running at once, counting every subagent Claude spawns with the Agent tool | Refuses to spawn another subagent, returning `Concurrent subagent limit reached`, until the running count drops below the limit. Sessions with [ultracode](model-config.md) active are never refused. See the [concurrent subagent limit](sub-agents.md) |
-| Spend | `maxBudgetUsd` in TypeScript, `max_budget_usd` in Python | No limit. Compared against `total_cost_usd`, so subagent requests count | Enforces the cap in three ways: refuses to spawn more subagents, returning `Budget limit reached`, stops background subagents that are still running, and ends the query with the `error_max_budget_usd` result subtype. See [turns and budget](agent-sdk/agent-loop.md) |
+| Limit       | Set it with                                              | Default                                                                                                | What Claude Code does at the limit                                                                                                                                                                                                                                                                       |
+| :---------- | :------------------------------------------------------- | :----------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Depth       | [`CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH`](env-vars.md)   | `3` layers of subagents below your main agent. `1` stops your subagents from spawning any of their own | Leaves a subagent at the bottom layer unable to spawn, so it does its delegated work itself. See [nested subagents](sub-agents.md)                                                                                                                              |
+| Concurrency | [`CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS`](env-vars.md)   | `20` subagents running at once, counting every subagent Claude spawns with the Agent tool              | Refuses to spawn another subagent, returning `Concurrent subagent limit reached`, until the running count drops below the limit. Sessions with [ultracode](model-config.md) active are never refused. See the [concurrent subagent limit](sub-agents.md) |
+| Spend       | `maxBudgetUsd` in TypeScript, `max_budget_usd` in Python | No limit. Compared against `total_cost_usd`, so subagent requests count                                | Enforces the cap in three ways: refuses to spawn more subagents, returning `Budget limit reached`, stops background subagents that are still running, and ends the query with the `error_max_budget_usd` result subtype. See [turns and budget](agent-sdk/agent-loop.md)               |
 
-The two SDKs treat the `env` option differently: the TypeScript SDK replaces the subprocess environment with it, so spread `process.env` into it to keep variables like `PATH`, while the Python SDK merges it into the inherited environment. This example turns nesting off, allows at most five subagents at a time, and stops the query once the estimated spend reaches $5:
+The two SDKs treat the `env` option differently: the TypeScript SDK replaces the subprocess environment with it, so spread `process.env` into it to keep variables like `PATH`, while the Python SDK merges it into the inherited environment. This example turns nesting off, allows at most five subagents at a time, and stops the query once the estimated spend reaches \$5:
 
-Python
-
-TypeScript
-
-```shiki
+```python Python
 import asyncio
 from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage
 
@@ -618,7 +611,7 @@ async def main():
 asyncio.run(main())
 ```
 
-```shiki
+```typescript TypeScript
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
 try {
@@ -648,50 +641,51 @@ try {
 
 What you see depends on which limit, if any, the query reaches:
 
-- **Under the spend cap**: you see `success` and the estimated cost.
-- **At the spend cap**: you see `error_max_budget_usd` with a cost at or above `5`, and then your error handler runs.
-- **At the concurrency limit**: you see a `tool_result` block in the message stream carrying `Concurrent subagent limit reached`. Claude receives the same block as the Agent tool’s result.
+* **Under the spend cap**: you see `success` and the estimated cost.
+* **At the spend cap**: you see `error_max_budget_usd` with a cost at or above `5`, and then your error handler runs.
+* **At the concurrency limit**: you see a `tool_result` block in the message stream carrying `Concurrent subagent limit reached`. Claude receives the same block as the Agent tool's result.
 
-### [​](#run-opus-5-with-subagents) Run Opus 5 with subagents
+### Run Opus 5 with subagents
 
 Claude Opus 5 delegates to subagents more readily than earlier models, so the [depth, concurrency, and spend limits](#cap-subagent-depth-concurrency-and-spend) matter most on queries that run Opus 5. The [Opus 5 prompting guide](build-with-claude/prompt-engineering/prompting-claude-opus-5.md) has a delegation instruction you can add to any prompt. Whether Claude Code adds an instruction of its own depends on which [system prompt](agent-sdk/modifying-system-prompts.md) you use:
 
-- **`claude_code` preset**: when the model is Opus 5, Claude Code adds a line to its system prompt telling Claude not to call the Agent tool unless it’s asked to. The Agent tool stays available.
-- **A custom prompt, or no `systemPrompt`**: Claude Code doesn’t build its system prompt, so that line is absent. Add the prompting guide’s delegation instruction to your own prompt.
+* **`claude_code` preset**: when the model is Opus 5, Claude Code adds a line to its system prompt telling Claude not to call the Agent tool unless it's asked to. The Agent tool stays available.
+* **A custom prompt, or no `systemPrompt`**: Claude Code doesn't build its system prompt, so that line is absent. Add the prompting guide's delegation instruction to your own prompt.
 
 Either instruction only steers Claude, so set the limits as well. Claude Code enforces them however Claude decides to delegate.
 
-## [​](#scale-up-with-dynamic-workflows) Scale up with dynamic workflows
+## Scale up with dynamic workflows
 
 Subagents work well for a few delegated tasks per turn. For runs that coordinate dozens to hundreds of agents, use the `Workflow` tool, which moves the orchestration into a script the runtime executes outside the conversation context. See [dynamic workflows](workflows.md) for how workflows differ from turn-by-turn subagent delegation.
+
 The `Workflow` tool is available in the TypeScript Agent SDK v0.3.149 and later. Include `Workflow` in `allowedTools` to auto-approve workflow runs. The tool input and output schemas are listed in the [TypeScript reference](agent-sdk/typescript.md).
 
-## [​](#troubleshooting) Troubleshooting
+## Troubleshooting
 
-### [​](#claude-not-delegating-to-subagents) Claude not delegating to subagents
+### Claude not delegating to subagents
 
 If Claude completes tasks directly instead of delegating to your subagent:
 
-- **Use explicit prompting**: mention the subagent by name in your prompt, for example “Use the code-reviewer agent to…”
-- **Write a clear description**: explain exactly when to use the subagent so Claude can match tasks appropriately
+* **Use explicit prompting**: mention the subagent by name in your prompt, for example "Use the code-reviewer agent to..."
+* **Write a clear description**: explain exactly when to use the subagent so Claude can match tasks appropriately
 
-### [​](#filesystem-based-agents-not-loading) Filesystem-based agents not loading
+### Filesystem-based agents not loading
 
 Claude Code watches `~/.claude/agents/` and `.claude/agents/` and picks up a new or edited agent file within a few seconds, with no restart needed. If a definition never appears, work through these causes:
 
-- **New `agents` directory**: the watcher covers only directories that existed when the session started, so the first file in a new directory needs a session restart. This is the most common cause.
-- **Invalid frontmatter or a duplicate `name`**: check the file’s YAML, and whether an existing agent already uses the `name`.
-- **`--disable-slash-commands`**: sessions started with this flag don’t watch these directories and always need a restart to load new files.
-- **A file under an added directory**: Claude Code loads `.claude/agents/` from directories added with the `add_dirs` (Python) or `additionalDirectories` (TypeScript) option, or the CLI’s `--add-dir` or `/add-dir`, but doesn’t watch them, so a new or edited file there needs a session restart.
-- **A programmatic agent with the same name**: `agents` passed to `query()` override a filesystem agent with the same name.
+* **New `agents` directory**: the watcher covers only directories that existed when the session started, so the first file in a new directory needs a session restart. This is the most common cause.
+* **Invalid frontmatter or a duplicate `name`**: check the file's YAML, and whether an existing agent already uses the `name`.
+* **`--disable-slash-commands`**: sessions started with this flag don't watch these directories and always need a restart to load new files.
+* **A file under an added directory**: Claude Code loads `.claude/agents/` from directories added with the `add_dirs` (Python) or `additionalDirectories` (TypeScript) option, or the CLI's `--add-dir` or `/add-dir`, but doesn't watch them, so a new or edited file there needs a session restart.
+* **A programmatic agent with the same name**: `agents` passed to `query()` override a filesystem agent with the same name.
 
 For the file format, see [how to write subagent files](sub-agents.md).
 
-## [​](#related-documentation) Related documentation
+## Related documentation
 
-- [Claude Code subagents](sub-agents.md): comprehensive subagent documentation including filesystem-based definitions
-- [Dynamic workflows](workflows.md): orchestrate many subagents from a script for jobs too large for one conversation
-- [SDK overview](agent-sdk/overview.md): getting started with the Claude Agent SDK
+* [Claude Code subagents](sub-agents.md): comprehensive subagent documentation including filesystem-based definitions
+* [Dynamic workflows](workflows.md): orchestrate many subagents from a script for jobs too large for one conversation
+* [SDK overview](agent-sdk/overview.md): getting started with the Claude Agent SDK
 
 ---
 

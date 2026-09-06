@@ -1,178 +1,201 @@
 # List Skills
 
-Copy page
+`SkillListPage beta().skills().list(params = SkillListParams.none(), requestOptions = RequestOptions.none())`
 
-
-
-Java
-
-# List Skills
-
-SkillListPage beta().skills().list(SkillListParamsparams = SkillListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
-
-GET/v1/skills
+**GET** `/v1/skills`
 
 List Skills
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `SkillListParams params`
 
-SkillListParams params
+  - `Optional<Long> limit`
 
-
+    Number of results to return per page.
 
-Optional<Long> limit
+    Ranges from `1` to `1000`. Defaults to `20`.
 
-Number of results to return per page.
+    minimum: 1, maximum: 1000
 
-Maximum value is 100. Defaults to 20.
+  - `Optional<String> page`
 
-
+    Pagination token for fetching a specific page of results.
 
-Optional<String> page
+    Pass the value from a previous response's `next_page` field to get the next page of results.
 
-Pagination token for fetching a specific page of results.
+  - `Optional<String> source`
 
-Pass the value from a previous response's `next_page` field to get the next page of results.
+    Filter skills by source.
 
-
+    If provided, only skills from the specified source will be returned:
 
-Optional<String> source
+    * `"custom"`: only return user-created skills
+    * `"anthropic"`: only return Anthropic-created skills
 
-Filter skills by source.
+  - `Optional<List<AnthropicBeta>> betas`
 
-If provided, only skills from the specified source will be returned:
+    Optional header to specify the beta version(s) you want to use.
 
-- `"custom"`: only return user-created skills
-- `"anthropic"`: only return Anthropic-created skills
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
-
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
 
-Optional<List<AnthropicBeta>> betas
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
-Optional header to specify the beta version(s) you want to use.
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-MESSAGE\_BATCHES\_2024\_09\_24("message-batches-2024-09-24")
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
 
-PROMPT\_CACHING\_2024\_07\_31("prompt-caching-2024-07-31")
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
 
-COMPUTER\_USE\_2024\_10\_22("computer-use-2024-10-22")
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
 
-COMPUTER\_USE\_2025\_01\_24("computer-use-2025-01-24")
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
 
-PDFS\_2024\_09\_25("pdfs-2024-09-25")
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
-TOKEN\_COUNTING\_2024\_11\_01("token-counting-2024-11-01")
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
-TOKEN\_EFFICIENT\_TOOLS\_2025\_02\_19("token-efficient-tools-2025-02-19")
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
 
-OUTPUT\_128K\_2025\_02\_19("output-128k-2025-02-19")
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
 
-FILES\_API\_2025\_04\_14("files-api-2025-04-14")
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
 
-MCP\_CLIENT\_2025\_04\_04("mcp-client-2025-04-04")
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-MCP\_CLIENT\_2025\_11\_20("mcp-client-2025-11-20")
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
 
-DEV\_FULL\_THINKING\_2025\_05\_14("dev-full-thinking-2025-05-14")
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
-INTERLEAVED\_THINKING\_2025\_05\_14("interleaved-thinking-2025-05-14")
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
-CODE\_EXECUTION\_2025\_05\_22("code-execution-2025-05-22")
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-EXTENDED\_CACHE\_TTL\_2025\_04\_11("extended-cache-ttl-2025-04-11")
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
-CONTEXT\_1M\_2025\_08\_07("context-1m-2025-08-07")
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
-CONTEXT\_MANAGEMENT\_2025\_06\_27("context-management-2025-06-27")
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-MODEL\_CONTEXT\_WINDOW\_EXCEEDED\_2025\_08\_26("model-context-window-exceeded-2025-08-26")
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
-SKILLS\_2025\_10\_02("skills-2025-10-02")
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
-FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
-USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
-ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
-MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
-THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
 
-SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
-FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
-AGENT\_MEMORY\_2026\_07\_22("agent-memory-2026-07-22")
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
-##### ReturnsExpand Collapse
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
 
-class SkillListResponse:
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
 
-
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
 
-String id
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
 
-Unique identifier for the skill.
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
 
-The format and length of IDs may change over time.
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-String createdAt
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
 
-ISO 8601 timestamp of when the skill was created.
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
 
-Optional<String> displayTitle
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-Display title for the skill.
+## Returns
 
-This is a human-readable label that is not included in the prompt sent to the model.
+- `class BetaSkill:`
 
-
+  - `String id`
 
-Optional<String> latestVersion
+    Unique identifier for the skill.
 
-The latest version identifier for the skill.
+    The format and length of IDs may change over time.
 
-This represents the most recent version of the skill that has been created.
+  - `LocalDateTime createdAt`
 
-
+    ISO 8601 timestamp of when the skill was created.
 
-String source
+    format: date-time
 
-Source of the skill.
+  - `String displayName`
 
-This may be one of the following values:
+    Human-readable, single-line label for the Skill. Maximum 255 characters.
+    Always set: derived from the SKILL.md frontmatter `name` when omitted at
+    creation. Not unique.
 
-- `"custom"`: the skill was created by a user
-- `"anthropic"`: the skill was created by Anthropic
+  - `String latestVersionId`
 
-
+    ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
 
-String type
+  - `BetaSkillSource source`
 
-Object type.
+    Where the Skill comes from.
 
-For Skills, this is always `"skill"`.
+    Possible values:
 
-String updatedAt
+    * `"custom"`: authored by the platform user; private to their workspace
+    * `"anthropic"`: published by Anthropic; shared and read-only
+    * `"anthropic_example"`: Anthropic-published sample Skill
+    * `"plugin"`: resolved from an installed plugin
 
-ISO 8601 timestamp of when the skill was last updated.
+    - `Type type`
 
-List Skills
+      Where the Skill comes from.
 
-Java
+      Possible values:
 
-```shiki
+      * `"custom"`: authored by the platform user; private to their workspace
+      * `"anthropic"`: published by Anthropic; shared and read-only
+      * `"anthropic_example"`: Anthropic-published sample Skill
+      * `"plugin"`: resolved from an installed plugin
+
+      - `CUSTOM("custom")`
+
+      - `ANTHROPIC("anthropic")`
+
+      - `ANTHROPIC_EXAMPLE("anthropic_example")`
+
+      - `PLUGIN("plugin")`
+
+  - `JsonValue type = "skill"`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
+
+  - `LocalDateTime updatedAt`
+
+    ISO 8601 timestamp of when the skill was last updated.
+
+    format: date-time
+
+## Example
+
+```java
 package com.anthropic.example;
 
 import com.anthropic.client.AnthropicClient;
@@ -191,49 +214,24 @@ public final class Main {
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
       "id": "skill_01JAbcdefghijklmnopqrstuvw",
       "created_at": "2024-10-30T23:58:27.427722Z",
-      "display_title": "My Custom Skill",
-      "latest_version": "1759178010641129",
-      "source": "custom",
-      "type": "type",
+      "display_name": "display_name",
+      "latest_version_id": "latest_version_id",
+      "source": {
+        "type": "custom"
+      },
+      "type": "skill",
       "updated_at": "2024-10-30T23:58:27.427722Z"
     }
   ],
-  "has_more": true,
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "skill_01JAbcdefghijklmnopqrstuvw",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "display_title": "My Custom Skill",
-      "latest_version": "1759178010641129",
-      "source": "custom",
-      "type": "type",
-      "updated_at": "2024-10-30T23:58:27.427722Z"
-    }
-  ],
-  "has_more": true,
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+  "next_page": "next_page"
 }
 ```
 

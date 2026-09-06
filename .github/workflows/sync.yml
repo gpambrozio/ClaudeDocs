@@ -5,8 +5,8 @@ on:
     - cron: '0 11 * * *'  # Daily at 11 AM UTC
   workflow_dispatch:     # Manual trigger
 
-# Only one sync may run at a time. A sync takes ~4h, so a manual dispatch could
-# otherwise overlap the schedule and race on the same branch.
+# Only one sync may run at a time, so that a manual dispatch cannot overlap the
+# schedule and race on the same branch.
 concurrency:
   group: sync-documentation
   cancel-in-progress: false

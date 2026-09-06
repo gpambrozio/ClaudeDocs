@@ -1,188 +1,122 @@
 # Get External Key
 
-Copy page
-
-
-
-# Get External Key
-
-GET/v1/organizations/external\_keys/{external\_key\_id}
+**GET** `/v1/organizations/external_keys/{external_key_id}`
 
 Retrieve a single external key config in the caller's organization by ID.
 
-##### Path parameters
+## Path parameters
 
-
+- `external_key_id: string`
 
-external\_key\_id: string
+  ID of the External Key.
 
-ID of the External Key.
+  maxLength: 2048
 
-maxLength2048
+## Returns
 
-##### Returns
+- `id: string`
 
-id: string
+  Identifier of the external key config. A tagged ID prefixed `ekey_`, or — for organizations on the Claude Platform on AWS — the AWS KMS key ARN.
 
-Identifier of the external key config. A tagged ID prefixed `ekey_`, or — for organizations on the Claude Platform on AWS — the AWS KMS key ARN.
+- `attachment: object or object`
 
-
+  Whether any workspace uses this config to encrypt its data — counting live and archived workspaces (an archived workspace's data remains encrypted under the config), excluding deleted ones. Only an attached config is used by the encryption path; an `unattached` config is inert and can be deleted.
 
-attachment: object{ type } or object{ type }
+  - `Attached object`
 
-Whether any workspace uses this config to encrypt its data — counting live and archived workspaces (an archived workspace's data remains encrypted under the config), excluding deleted ones. Only an attached config is used by the encryption path; an `unattached` config is inert and can be deleted.
+    - `type: "attached"`
 
-One of the following:
+      default: attached
 
-
+  - `Unattached object`
 
-Attached object{ type }
+    - `type: "unattached"`
 
-
+      default: unattached
 
-type: "attached"
+- `created_at: string`
 
-defaultattached
+  format: date-time
 
-
+- `display_name: string or null`
 
-Unattached object{ type }
+  Human-friendly display name. Null if none was set.
 
-
+- `geo: string`
 
-type: "unattached"
+  Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
 
-defaultunattached
+- `provider_config: object or object or object`
 
-
+  KMS provider identity and auth coordinates.
 
-created\_at: string
+  - `Aws object`
 
-formatdate-time
+    - `kms_arn: string`
 
-display\_name: string or null
+      Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a single-Region key in your organization's own AWS account; cross-account keys, multi-Region keys, and alias ARNs are rejected.
 
-Human-friendly display name. Null if none was set.
+      maxLength: 2048
 
-geo: string
+    - `type: "aws"`
 
-Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
+    - `region: optional string or null`
 
-
+      AWS region. Derived from `kms_arn` if omitted.
 
-provider\_config: object{ kms\_arn, type, region, role\_arn } or object{ key\_name, type } or object{ key\_name, tenant\_id, type, 2 more }
+    - `role_arn: optional string or null`
 
-KMS provider identity and auth coordinates.
+      **Deprecated**
 
-One of the following:
+      IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own intermediate role (or, on Claude Platform on AWS, with credentials AWS issues for the Workspace); this field is ignored.
 
-
+  - `Gcp object`
 
-Aws object{ kms\_arn, type, region, role\_arn }
+    - `key_name: string`
 
-
+      Full resource name of the Cloud KMS key.
 
-kms\_arn: string
+    - `type: "gcp"`
 
-Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a single-Region key in your organization's own AWS account; cross-account keys, multi-Region keys, and alias ARNs are rejected.
+  - `Azure object`
 
-maxLength2048
+    - `key_name: string`
 
-type: "aws"
+      Name of the key within the vault.
 
-region: optional string or null
+    - `tenant_id: string`
 
-AWS region. Derived from `kms_arn` if omitted.
+      Azure AD tenant ID.
 
-role\_arn: optional string or null⁠Deprecated
+    - `type: "azure"`
 
-IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own intermediate role (or, on Claude Platform on AWS, with credentials AWS issues for the Workspace); this field is ignored.
+    - `vault_uri: string`
 
-
+      Key Vault data-plane URI — `https://{vault-name}.vault.azure.net` or `https://{hsm-name}.managedhsm.azure.net`.
 
-Gcp object{ key\_name, type }
+    - `client_id: optional string or null`
 
-key\_name: string
+      Azure AD application (client) ID. Omit to use Anthropic's multitenant app. Provide only if using a single-tenant app registration in the customer's directory.
 
-Full resource name of the Cloud KMS key.
+- `type: "external_key"`
 
-type: "gcp"
+  default: external_key
 
-
+- `updated_at: string`
 
-Azure object{ key\_name, tenant\_id, type, 2 more }
+  format: date-time
 
-key\_name: string
+## Example
 
-Name of the key within the vault.
-
-tenant\_id: string
-
-Azure AD tenant ID.
-
-type: "azure"
-
-vault\_uri: string
-
-Key Vault data-plane URI — `https://{vault-name}.vault.azure.net` or `https://{hsm-name}.managedhsm.azure.net`.
-
-client\_id: optional string or null
-
-Azure AD application (client) ID. Omit to use Anthropic's multitenant app. Provide only if using a single-tenant app registration in the customer's directory.
-
-
-
-type: "external\_key"
-
-defaultexternal\_key
-
-
-
-updated\_at: string
-
-formatdate-time
-
-Get External Key
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",
-  "attachment": {
-    "type": "attached"
-  },
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "display_name": "prod-us-key",
-  "geo": "us",
-  "provider_config": {
-    "kms_arn": "arn:aws:kms:us-east-1:111122223333:key/abcd1234-5678-90ab-cdef-000011112222",
-    "type": "aws",
-    "region": "us-east-1",
-    "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek"
-  },
-  "type": "external_key",
-  "updated_at": "2024-10-30T23:58:27.427722Z"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",
   "attachment": {

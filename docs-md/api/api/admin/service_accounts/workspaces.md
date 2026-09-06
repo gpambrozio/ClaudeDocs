@@ -1,130 +1,390 @@
 # Workspaces
 
-Copy page
+## Add Workspace To Service Account
 
-
+**POST** `/v1/organizations/service_accounts/{service_account_id}/workspaces`
 
-# Workspaces
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
-##### [Add Workspace To Service Account](api/http/admin/service_accounts/workspaces/create.md)
+Add a service account to a workspace with the given `workspace_role`.
 
-POST/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
+Mirror of `POST /workspaces/{workspace_id}/service_accounts`, addressed
+from the service-account side; both create the same membership. If the
+service account is already an explicit member of the workspace, its
+`workspace_role` is replaced with the value supplied here. Archived
+workspaces return 400. Archived service accounts cannot be added and are
+rejected.
 
-##### [List Workspaces For Service Account](api/http/admin/service_accounts/workspaces/list.md)
+### Path parameters
 
-GET/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
+- `service_account_id: string`
 
-##### [Remove Workspace From Service Account](api/http/admin/service_accounts/workspaces/delete.md)
+  ID of the service account.
 
-DELETE/v1/organizations/service\_accounts/{service\_account\_id}/workspaces/{workspace\_id}
+### Headers
 
-##### Models
+- `"anthropic-beta": optional array of string`
 
-
+  Optional header to specify the beta version(s) you want to use.
 
-WorkspaceCreateResponse object{ created\_by\_actor\_id, implicit, service\_account\_id, 3 more }
+  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-created\_by\_actor\_id: string or null
+### Body parameters
 
-Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
+- `workspace_id: string`
 
-implicit: boolean or null
+  Tagged workspace ID to add the service account to.
 
-True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
+- `workspace_role: "workspace_admin" or "workspace_developer" or "workspace_restricted_developer" or "workspace_user"`
 
-service\_account\_id: string
+  Role to assign to the service account in this workspace.
 
-Tagged service account ID (`svac_...`).
+  - `"workspace_admin"`
 
-
+  - `"workspace_developer"`
 
-type: "service\_account\_workspace\_member"
+  - `"workspace_restricted_developer"`
 
-defaultservice\_account\_workspace\_member
+  - `"workspace_user"`
 
-workspace\_id: string
+### Returns
 
-Tagged workspace ID (`wrkspc_...`).
+- `created_by_actor_id: string or null`
 
-
+  Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
 
-workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
+- `implicit: boolean or null`
 
-Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
+  True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
 
-One of the following:
+- `service_account_id: string`
 
-"workspace\_admin"
+  Tagged service account ID (`svac_...`).
 
-"workspace\_billing"
+- `type: "service_account_workspace_member"`
 
-"workspace\_developer"
+  default: service_account_workspace_member
 
-"workspace\_restricted\_developer"
+- `workspace_id: string`
 
-"workspace\_user"
+  Tagged workspace ID (`wrkspc_...`).
 
-
+- `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
 
-WorkspaceListResponse object{ created\_by\_actor\_id, implicit, service\_account\_id, 3 more }
+  Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
 
-created\_by\_actor\_id: string or null
+  - `"workspace_admin"`
 
-Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
+  - `"workspace_billing"`
 
-implicit: boolean or null
+  - `"workspace_developer"`
 
-True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
+  - `"workspace_restricted_developer"`
 
-service\_account\_id: string
+  - `"workspace_user"`
 
-Tagged service account ID (`svac_...`).
+### Example
 
-
+```bash
+curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUNT_ID/workspaces \
+    -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
+    -d '{
+          "workspace_id": "workspace_id",
+          "workspace_role": "workspace_admin"
+        }'
+```
 
-type: "service\_account\_workspace\_member"
+#### Response (200)
 
-defaultservice\_account\_workspace\_member
+```json
+{
+  "created_by_actor_id": "created_by_actor_id",
+  "implicit": true,
+  "service_account_id": "service_account_id",
+  "type": "service_account_workspace_member",
+  "workspace_id": "workspace_id",
+  "workspace_role": "workspace_admin"
+}
+```
 
-workspace\_id: string
+## List Workspaces For Service Account
 
-Tagged workspace ID (`wrkspc_...`).
+**GET** `/v1/organizations/service_accounts/{service_account_id}/workspaces`
 
-
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
-workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
+List the workspaces a service account is a member of.
 
-Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
+Each entry includes the service account's `workspace_role` in that
+workspace. Use `limit` and the `next_page` cursor to paginate. When the
+service account has no explicit default-workspace membership, the
+implicit (`implicit: true`) membership is returned as the first entry on
+the first page; with `limit=1` the first page may return up to 2 entries
+(the implicit entry plus one explicit membership) so a pagination cursor
+can be derived. Memberships are returned only while
+the service account is active. Without a `page` cursor, an archived
+service account returns an empty list. A `page` cursor that does not
+match an active membership returns a 400 invalid-request error. A cursor
+stops matching when the membership is removed, the workspace is deleted,
+or the service account is archived. Restart pagination from the first
+page to recover.
 
-One of the following:
+### Path parameters
 
-"workspace\_admin"
+- `service_account_id: string`
 
-"workspace\_billing"
+  ID of the service account.
 
-"workspace\_developer"
+### Query parameters
 
-"workspace\_restricted\_developer"
+- `limit: optional number`
 
-"workspace\_user"
+  Number of results per page.
 
-
+  default: 20, maximum: 100, minimum: 1
 
-WorkspaceDeleteResponse object{ service\_account\_id, type, workspace\_id }
+- `page: optional string`
 
-service\_account\_id: string
+  Opaque cursor from a previous response's `next_page`.
 
-Tagged service account ID (`svac_...`) named in the delete request. Removal is idempotent; see the endpoint description for the implicit-membership no-op.
+### Headers
 
-
+- `"anthropic-beta": optional array of string`
 
-type: "service\_account\_workspace\_member\_deleted"
+  Optional header to specify the beta version(s) you want to use.
 
-defaultservice\_account\_workspace\_member\_deleted
+  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-workspace\_id: string
+### Returns
 
-Tagged workspace ID (`wrkspc_...`) named in the delete request.
+- `data: array of object`
+
+  - `created_by_actor_id: string or null`
+
+    Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
+
+  - `implicit: boolean or null`
+
+    True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
+
+  - `service_account_id: string`
+
+    Tagged service account ID (`svac_...`).
+
+  - `type: "service_account_workspace_member"`
+
+    default: service_account_workspace_member
+
+  - `workspace_id: string`
+
+    Tagged workspace ID (`wrkspc_...`).
+
+  - `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
+
+    Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
+
+    - `"workspace_admin"`
+
+    - `"workspace_billing"`
+
+    - `"workspace_developer"`
+
+    - `"workspace_restricted_developer"`
+
+    - `"workspace_user"`
+
+- `next_page: string or null`
+
+  Opaque cursor for the next page, or null if no more results.
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUNT_ID/workspaces \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "created_by_actor_id": "created_by_actor_id",
+      "implicit": true,
+      "service_account_id": "service_account_id",
+      "type": "service_account_workspace_member",
+      "workspace_id": "workspace_id",
+      "workspace_role": "workspace_admin"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Remove Workspace From Service Account
+
+**DELETE** `/v1/organizations/service_accounts/{service_account_id}/workspaces/{workspace_id}`
+
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+
+Remove a service account from a workspace.
+
+Mirror of `DELETE /workspaces/{workspace_id}/service_accounts/{service_account_id}`,
+addressed from the service-account side. Removal is idempotent (returns
+200 even if the membership was already removed). A DELETE against the
+implicit default-workspace membership returns 200 but is a no-op and the
+membership persists; deleting an explicit default-workspace row reverts
+to the implicit `workspace_user` membership. Archived workspaces return
+400.
+
+### Path parameters
+
+- `service_account_id: string`
+
+  ID of the service account.
+
+- `workspace_id: string`
+
+  ID of the workspace.
+
+### Headers
+
+- `"anthropic-beta": optional array of string`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
+
+### Returns
+
+- `service_account_id: string`
+
+  Tagged service account ID (`svac_...`) named in the delete request. Removal is idempotent; see the endpoint description for the implicit-membership no-op.
+
+- `type: "service_account_workspace_member_deleted"`
+
+  default: service_account_workspace_member_deleted
+
+- `workspace_id: string`
+
+  Tagged workspace ID (`wrkspc_...`) named in the delete request.
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUNT_ID/workspaces/$WORKSPACE_ID \
+    -X DELETE \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+```
+
+#### Response (200)
+
+```json
+{
+  "service_account_id": "service_account_id",
+  "type": "service_account_workspace_member_deleted",
+  "workspace_id": "workspace_id"
+}
+```
+
+## Domain types
+
+### Workspace Create Response
+
+- `WorkspaceCreateResponse object`
+
+  - `created_by_actor_id: string or null`
+
+    Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
+
+  - `implicit: boolean or null`
+
+    True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
+
+  - `service_account_id: string`
+
+    Tagged service account ID (`svac_...`).
+
+  - `type: "service_account_workspace_member"`
+
+    default: service_account_workspace_member
+
+  - `workspace_id: string`
+
+    Tagged workspace ID (`wrkspc_...`).
+
+  - `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
+
+    Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
+
+    - `"workspace_admin"`
+
+    - `"workspace_billing"`
+
+    - `"workspace_developer"`
+
+    - `"workspace_restricted_developer"`
+
+    - `"workspace_user"`
+
+### Workspace List Response
+
+- `WorkspaceListResponse object`
+
+  - `created_by_actor_id: string or null`
+
+    Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
+
+  - `implicit: boolean or null`
+
+    True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
+
+  - `service_account_id: string`
+
+    Tagged service account ID (`svac_...`).
+
+  - `type: "service_account_workspace_member"`
+
+    default: service_account_workspace_member
+
+  - `workspace_id: string`
+
+    Tagged workspace ID (`wrkspc_...`).
+
+  - `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
+
+    Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
+
+    - `"workspace_admin"`
+
+    - `"workspace_billing"`
+
+    - `"workspace_developer"`
+
+    - `"workspace_restricted_developer"`
+
+    - `"workspace_user"`
+
+### Workspace Delete Response
+
+- `WorkspaceDeleteResponse object`
+
+  - `service_account_id: string`
+
+    Tagged service account ID (`svac_...`) named in the delete request. Removal is idempotent; see the endpoint description for the implicit-membership no-op.
+
+  - `type: "service_account_workspace_member_deleted"`
+
+    default: service_account_workspace_member_deleted
+
+  - `workspace_id: string`
+
+    Tagged workspace ID (`wrkspc_...`) named in the delete request.
 
 ---
 

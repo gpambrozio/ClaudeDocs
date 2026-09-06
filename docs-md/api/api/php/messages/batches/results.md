@@ -1,16 +1,8 @@
 # Retrieve Message Batch results
 
-Copy page
+`$client->messages->batches->results(string messageBatchID): MessageBatchIndividualResponse`
 
-
-
-PHP
-
-# Retrieve Message Batch results
-
-$client->messages->batches->results(string messageBatchID): [MessageBatchIndividualResponse](api/messages/batches.md)
-
-GET/v1/messages/batches/{message\_batch\_id}/results
+**GET** `/v1/messages/batches/{message_batch_id}/results`
 
 Streams the results of a Message Batch as a `.jsonl` file.
 
@@ -18,39 +10,31 @@ Each line in the file is a JSON object containing the result of a single request
 
 Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
-messageBatchID: string
+- `messageBatchID: string`
 
-ID of the Message Batch.
+  ID of the Message Batch.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `MessageBatchIndividualResponse`
 
-[MessageBatchIndividualResponse](api/messages/batches.md)
+  - `string customID`
 
-
+    Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
 
-string customID
+    Must be unique for each request within the Message Batch.
 
-Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
+  - `MessageBatchResult result`
 
-Must be unique for each request within the Message Batch.
+    Processing result for this request.
 
-
+    Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-[MessageBatchResult](api/messages/batches.md) result
+## Example
 
-Processing result for this request.
-
-Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
-
-Retrieve Message Batch results
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -63,8 +47,6 @@ $messageBatchIndividualResponse = $client->messages->batches->resultsStream(
 
 var_dump($messageBatchIndividualResponse);
 ```
-
-##### Returns Examples
 
 ---
 

@@ -1,118 +1,168 @@
 # Create Workspace
 
-Copy page
-
-
-
-# Create Workspace
-
-POST/v1/organizations/workspaces
+**POST** `/v1/organizations/workspaces`
 
 Create Workspace
 
-##### Headers
+## Headers
 
-
+- `"anthropic-beta": optional array of string`
 
-"anthropic-beta": optional array of string
+  Optional header to specify the beta version(s) you want to use.
 
-Optional header to specify the beta version(s) you want to use.
+  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
+## Body parameters
 
-##### Body
+- `name: string`
 
-
+  Name of the Workspace.
 
-name: string
+  maxLength: 40, minLength: 1
 
-Name of the Workspace.
+- `data_residency: optional object or null`
 
-maxLength40
+  Data residency configuration for the workspace. If omitted, defaults to `workspace_geo: "us"`, `allowed_inference_geos: "unrestricted"`, and `default_inference_geo: "global"`.
 
-minLength1
+  - `allowed_inference_geos: optional array of "global" or "us" or "unrestricted" or null`
 
-
+    Permitted inference geo values. Defaults to 'unrestricted' if omitted, which allows all geos. Use the string 'unrestricted' to allow all geos, or a list of specific geos.
 
-data\_residency: optional object{ allowed\_inference\_geos, default\_inference\_geo, workspace\_geo } or null
+    - `array of "global" or "us"`
 
-Data residency configuration for the workspace. If omitted, defaults to `workspace_geo: "us"`, `allowed_inference_geos: "unrestricted"`, and `default_inference_geo: "global"`.
+      - `"global"`
 
-
+      - `"us"`
 
-allowed\_inference\_geos: optional array of "global" or "us" or "unrestricted" or null
+    - `"unrestricted"`
 
-Permitted inference geo values. Defaults to 'unrestricted' if omitted, which allows all geos. Use the string 'unrestricted' to allow all geos, or a list of specific geos.
+  - `default_inference_geo: optional "global" or "us" or null`
 
-One of the following:
+    Default inference geo applied when requests omit the parameter. Defaults to 'global' if omitted. Must be a member of `allowed_inference_geos` unless `allowed_inference_geos` is `"unrestricted"`.
 
-
+    - `"global"`
 
-array of "global" or "us"
+    - `"us"`
 
-One of the following:
+  - `workspace_geo: optional "us" or null`
 
-"global"
+    Geographic region for workspace data storage. Immutable after creation. Defaults to 'us' if omitted.
 
-"us"
+- `display_color: optional string or null`
 
-"unrestricted"
+  Hex color code representing the Workspace in the Anthropic Console.
 
-
+  maxLength: 7, pattern: ^#[0-9A-Fa-f]{6}$
 
-default\_inference\_geo: optional "global" or "us" or null
+- `external_key_id: optional string or null`
 
-Default inference geo applied when requests omit the parameter. Defaults to 'global' if omitted. Must be a member of `allowed_inference_geos` unless `allowed_inference_geos` is `"unrestricted"`.
+  ID of the customer-managed encryption key (CMEK) configuration to use for this
+  Workspace. Setting this field requires CMEK to be enabled for your
+  organization. When set, data stored for this Workspace is encrypted with the
+  referenced key. Create key configurations with the External Keys API. On
+  Claude Platform on AWS the value is the AWS KMS key ARN, and the key must be a
+  single-Region key in the same AWS account and Region as the Workspace. On that
+  platform the key is validated against this Workspace when it is attached, so a
+  key-policy problem is reported as an error on this request. This field is write-once:
+  once a key is attached to a Workspace it cannot be detached or replaced. To
+  rotate key material, rotate the underlying key on your cloud KMS; the
+  `external_key_id` stays the same.
 
-One of the following:
+- `tags: optional map[string] or null`
 
-"global"
+  User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
-"us"
+## Returns
 
-workspace\_geo: optional "us" or null
+- `Workspace object`
 
-Geographic region for workspace data storage. Immutable after creation. Defaults to 'us' if omitted.
+  - `id: string`
 
-
+    ID of the Workspace.
 
-display\_color: optional string or null
+  - `archived_at: string or null`
 
-Hex color code representing the Workspace in the Anthropic Console.
+    RFC 3339 datetime string indicating when the Workspace was archived, or `null` if the Workspace is not archived.
 
-maxLength7
+    format: date-time
 
-pattern^#[0-9A-Fa-f]{6}$
+  - `compartment_id: string`
 
-external\_key\_id: optional string or null
+    Identifier for this Workspace's encryption compartment. When you configure a
+    customer-managed encryption key (CMEK) on AWS, reference this value in your
+    KMS key-policy condition so the key is scoped to this compartment. On GCP and
+    Azure, Anthropic enforces the compartment binding automatically; you do not
+    need to reference this value in your key configuration. See the CMEK
+    integration guide for the required key configuration; unless your organization
+    is on Claude Platform on AWS, it includes a separate value used during key
+    validation. On Claude Platform on AWS there is no separate validation value:
+    the key is validated against this Workspace's own value when it is attached, so
+    if your key policy uses the compartment condition, add this value to it before
+    attaching the key.
 
-ID of the customer-managed encryption key (CMEK) configuration to use for this
-Workspace. Setting this field requires CMEK to be enabled for your
-organization. When set, data stored for this Workspace is encrypted with the
-referenced key. Create key configurations with the External Keys API. On
-Claude Platform on AWS the value is the AWS KMS key ARN, and the key must be a
-single-Region key in the same AWS account and Region as the Workspace. On that
-platform the key is validated against this Workspace when it is attached, so a
-key-policy problem is reported as an error on this request. This field is write-once:
-once a key is attached to a Workspace it cannot be detached or replaced. To
-rotate key material, rotate the underlying key on your cloud KMS; the
-`external_key_id` stays the same.
+  - `created_at: string`
 
-tags: optional map[string] or null
+    RFC 3339 datetime string indicating when the Workspace was created.
 
-User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+    format: date-time
 
-##### Returns
+  - `data_residency: object`
 
-
+    Data residency configuration.
 
-Workspace object{ id, archived\_at, compartment\_id, 7 more }
+    - `allowed_inference_geos: array of string or "unrestricted"`
 
-Create Workspace
+      Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
-cURL
+      - `array of string`
 
-```shiki
+      - `"unrestricted"`
+
+    - `default_inference_geo: string`
+
+      Default inference geo applied when requests omit the parameter.
+
+    - `workspace_geo: string`
+
+      Geographic region for workspace data storage. Immutable after creation.
+
+  - `display_color: string`
+
+    Hex color code representing the Workspace in the Anthropic Console.
+
+  - `external_key_id: string or null`
+
+    ID of the customer-managed encryption key (CMEK) configuration to use for this
+    Workspace. Setting this field requires CMEK to be enabled for your
+    organization. When set, data stored for this Workspace is encrypted with the
+    referenced key. Create key configurations with the External Keys API. On
+    Claude Platform on AWS the value is the AWS KMS key ARN, and the key must be a
+    single-Region key in the same AWS account and Region as the Workspace. On that
+    platform the key is validated against this Workspace when it is attached, so a
+    key-policy problem is reported as an error on this request. This field is write-once:
+    once a key is attached to a Workspace it cannot be detached or replaced. To
+    rotate key material, rotate the underlying key on your cloud KMS; the
+    `external_key_id` stays the same.
+
+  - `name: string`
+
+    Name of the Workspace.
+
+  - `tags: map[string]`
+
+    User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
+  - `type: "workspace"`
+
+    Object type.
+
+    For Workspaces, this is always `"workspace"`.
+
+    default: workspace
+
+## Example
+
+```bash
 curl https://api.anthropic.com/v1/organizations/workspaces \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -128,39 +178,9 @@ curl https://api.anthropic.com/v1/organizations/workspaces \
         }'
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-  "archived_at": "2024-11-01T23:59:27.427722Z",
-  "compartment_id": "f8a7b6c5-4d3e-4f1a-8b9c-0d1e2f3a4b5c",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "data_residency": {
-    "allowed_inference_geos": "unrestricted",
-    "default_inference_geo": "default_inference_geo",
-    "workspace_geo": "workspace_geo"
-  },
-  "display_color": "#6C5BB9",
-  "external_key_id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",
-  "name": "Workspace Name",
-  "tags": {
-    "env": "prod",
-    "team": "platform"
-  },
-  "type": "workspace"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
   "archived_at": "2024-11-01T23:59:27.427722Z",

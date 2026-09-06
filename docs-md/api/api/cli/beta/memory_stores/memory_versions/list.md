@@ -1,295 +1,218 @@
 # List memory versions
 
-Copy page
+`$ ant beta:memory-stores:memory-versions list`
 
-
-
-CLI
-
-# List memory versions
-
-$ ant beta:memory-stores:memory-versions list
-
-GET/v1/memory\_stores/{memory\_store\_id}/memory\_versions
+**GET** `/v1/memory_stores/{memory_store_id}/memory_versions`
 
 List memory versions
 
-##### ParametersExpand Collapse
+## Parameters
 
---memory-store-id: string
+- `--memory-store-id: string`
 
-Path param: Path parameter memory\_store\_id
+  Path param: Path parameter memory_store_id
 
---api-key-id: optional string
+- `--api-key-id: optional string`
 
-Query param: Query parameter for api\_key\_id
+  Query param: Query parameter for api_key_id
 
---created-at-gte: optional string
+- `--created-at-gte: optional string`
 
-Query param: Return versions created at or after this time (inclusive).
+  Query param: Return versions created at or after this time (inclusive).
 
---created-at-lte: optional string
+  format: date-time
 
-Query param: Return versions created at or before this time (inclusive).
+- `--created-at-lte: optional string`
 
---limit: optional number
+  Query param: Return versions created at or before this time (inclusive).
 
-Query param: Query parameter for limit
+  format: date-time
 
---memory-id: optional string
+- `--limit: optional number`
 
-Query param: Query parameter for memory\_id
+  Query param: Query parameter for limit
 
---operation: optional "created" or "modified" or "deleted"
+  format: int32
 
-Query param: Query parameter for operation
+- `--memory-id: optional string`
 
---page: optional string
+  Query param: Query parameter for memory_id
 
-Query param: Query parameter for page
+- `--operation: optional "created" or "modified" or "deleted"`
 
---session-id: optional string
+  Query param: Query parameter for operation
 
-Query param: Query parameter for session\_id
+- `--page: optional string`
 
---view: optional "basic" or "full"
+  Query param: Query parameter for page
 
-Query param: Query parameter for view
+- `--service-account-id: optional string`
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+  Query param: Query parameter for service_account_id
 
-Header param: Optional header to specify the beta version(s) you want to use.
+- `--session-id: optional string`
 
-##### ReturnsExpand Collapse
+  Query param: Query parameter for session_id
 
-
+- `--view: optional "basic" or "full"`
 
-BetaManagedAgentsListMemoryVersionsResult: object { data, next\_page } 
+  Query param: Query parameter for view
 
-Response payload for [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+- `--beta: optional array of AnthropicBeta`
 
-
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-data: optional array of [BetaManagedAgentsMemoryVersion](api/beta/memory_stores/memory_versions.md) { id, created\_at, memory\_id, 10 more } 
+## Returns
 
-One page of `memory_version` objects, ordered by `created_at` descending (newest first), with `id` as tiebreak.
+- `BetaManagedAgentsListMemoryVersionsResult: object`
 
-id: string
+  Response payload for [List memory versions](api/beta/memory_stores/memory_versions/list.md).
 
-Unique identifier for this version (a `memver_...` value).
+  - `data: optional array of BetaManagedAgentsMemoryVersion`
 
-created\_at: string
+    One page of `memory_version` objects, ordered by `created_at` descending (newest first), with `id` as tiebreak.
 
-A timestamp in RFC 3339 format
+    - `id: string`
 
-memory\_id: string
+      Unique identifier for this version (a `memver_...` value).
 
-ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the full lineage including the `deleted` row.
+    - `created_at: string`
 
-memory\_store\_id: string
+      A timestamp in RFC 3339 format
 
-ID of the memory store this version belongs to (a `memstore_...` value).
+      format: date-time
 
-
+    - `memory_id: string`
 
-operation: "created" or "modified" or "deleted"
+      ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
 
-The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
+    - `memory_store_id: string`
 
-"created"
+      ID of the memory store this version belongs to (a `memstore_...` value).
 
-"modified"
+    - `operation: "created" or "modified" or "deleted"`
 
-"deleted"
+      The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-
+      - `"created"`
 
-type: "memory\_version"
+      - `"modified"`
 
-"memory\_version"
+      - `"deleted"`
 
-content: optional string
+    - `type: "memory_version"`
 
-The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
+    - `content: optional string`
 
-content\_sha256: optional string
+      The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
 
-Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+    - `content_sha256: optional string`
 
-content\_size\_bytes: optional number
+      Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+    - `content_size_bytes: optional number`
 
-
+      Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-created\_by: optional [BetaManagedAgentsSessionActor](api/beta/memory_stores/memory_versions.md) { session\_id, type }  or [BetaManagedAgentsAPIActor](api/beta/memory_stores/memory_versions.md) { api\_key\_id, type }  or [BetaManagedAgentsUserActor](api/beta/memory_stores/memory_versions.md) { type, user\_id } 
+      format: int32
 
-Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    - `created_by: optional BetaManagedAgentsSessionActor or BetaManagedAgentsAPIActor or BetaManagedAgentsUserActor or BetaManagedAgentsServiceAccountActor`
 
-
+      Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-beta\_managed\_agents\_session\_actor: object { session\_id, type } 
+      - `beta_managed_agents_session_actor: object`
 
-Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+        Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
-session\_id: string
+        - `session_id: string`
 
-ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+          ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
 
-
+          minLength: 1
 
-type: "session\_actor"
+        - `type: "session_actor"`
 
-"session\_actor"
+      - `beta_managed_agents_api_actor: object`
 
-
+        Attribution for a write made directly via the public API (outside of any session).
 
-beta\_managed\_agents\_api\_actor: object { api\_key\_id, type } 
+        - `api_key_id: string`
 
-Attribution for a write made directly via the public API (outside of any session).
+          ID of the API key that performed the write. This identifies the key, not the secret.
 
-api\_key\_id: string
+          minLength: 1
 
-ID of the API key that performed the write. This identifies the key, not the secret.
+        - `type: "api_actor"`
 
-
+      - `beta_managed_agents_user_actor: object`
 
-type: "api\_actor"
+        Attribution for a write made by a human user through the Anthropic Console.
 
-"api\_actor"
+        - `type: "user_actor"`
 
-
+        - `user_id: string`
 
-beta\_managed\_agents\_user\_actor: object { type, user\_id } 
+          ID of the user who performed the write (a `user_...` value).
 
-Attribution for a write made by a human user through the Anthropic Console.
+          minLength: 1
 
-
+      - `beta_managed_agents_service_account_actor: object`
 
-type: "user\_actor"
+        Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
 
-"user\_actor"
+        - `service_account_id: string`
 
-user\_id: string
+          ID of the service account that performed the write (a `svac_...` value).
 
-ID of the user who performed the write (a `user_...` value).
+          minLength: 1
 
-path: optional string
+        - `type: "service_account_actor"`
 
-The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
+    - `path: optional string`
 
-redacted\_at: optional string
+      The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
-A timestamp in RFC 3339 format
+    - `redacted_at: optional string`
 
-
+      A timestamp in RFC 3339 format
 
-redacted\_by: optional [BetaManagedAgentsSessionActor](api/beta/memory_stores/memory_versions.md) { session\_id, type }  or [BetaManagedAgentsAPIActor](api/beta/memory_stores/memory_versions.md) { api\_key\_id, type }  or [BetaManagedAgentsUserActor](api/beta/memory_stores/memory_versions.md) { type, user\_id } 
+      format: date-time
 
-Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    - `redacted_by: optional BetaManagedAgentsSessionActor or BetaManagedAgentsAPIActor or BetaManagedAgentsUserActor or BetaManagedAgentsServiceAccountActor`
 
-
+      Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-beta\_managed\_agents\_session\_actor: object { session\_id, type } 
+      - `beta_managed_agents_session_actor: object`
 
-Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+        Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
-session\_id: string
+      - `beta_managed_agents_api_actor: object`
 
-ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+        Attribution for a write made directly via the public API (outside of any session).
 
-
+      - `beta_managed_agents_user_actor: object`
 
-type: "session\_actor"
+        Attribution for a write made by a human user through the Anthropic Console.
 
-"session\_actor"
+      - `beta_managed_agents_service_account_actor: object`
 
-
+        Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
 
-beta\_managed\_agents\_api\_actor: object { api\_key\_id, type } 
+  - `next_page: optional string`
 
-Attribution for a write made directly via the public API (outside of any session).
+    Opaque cursor for the next page (a `page_...` value), or `null` if there are no more results. Pass as `page` on the next request.
 
-api\_key\_id: string
+## Example
 
-ID of the API key that performed the write. This identifies the key, not the secret.
-
-
-
-type: "api\_actor"
-
-"api\_actor"
-
-
-
-beta\_managed\_agents\_user\_actor: object { type, user\_id } 
-
-Attribution for a write made by a human user through the Anthropic Console.
-
-
-
-type: "user\_actor"
-
-"user\_actor"
-
-user\_id: string
-
-ID of the user who performed the write (a `user_...` value).
-
-next\_page: optional string
-
-Opaque cursor for the next page (a `page_...` value), or `null` if there are no more results. Pass as `page` on the next request.
-
-List memory versions
-
-CLI
-
-```shiki
+```bash
 ant beta:memory-stores:memory-versions list \
   --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "memory_id": "memory_id",
-      "memory_store_id": "memory_store_id",
-      "operation": "created",
-      "type": "memory_version",
-      "content": "content",
-      "content_sha256": "content_sha256",
-      "content_size_bytes": 0,
-      "created_by": {
-        "session_id": "x",
-        "type": "session_actor"
-      },
-      "path": "path",
-      "redacted_at": "2019-12-27T18:11:19.117Z",
-      "redacted_by": {
-        "session_id": "x",
-        "type": "session_actor"
-      }
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

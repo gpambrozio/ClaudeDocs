@@ -1,114 +1,72 @@
 # Get RBAC Group
 
-Copy page
-
-
-
-# Get RBAC Group
-
-GET/v1/organizations/rbac\_groups/{group\_id}
+**GET** `/v1/organizations/rbac_groups/{group_id}`
 
 Retrieve an RBAC Group by ID.
 
 The RBAC Groups API is available to Claude Enterprise organizations only.
 
-##### Path parameters
+## Path parameters
 
-group\_id: string
+- `group_id: string`
 
-ID of the RBAC Group.
+  ID of the RBAC Group.
 
-##### Returns
+## Returns
 
-
+- `RbacGroup object`
 
-RbacGroup object{ id, created\_at, name, 4 more }
+  - `id: string`
 
-id: string
+    ID of the RBAC Group.
 
-ID of the RBAC Group.
+  - `created_at: string`
 
-
+    RFC 3339 timestamp of when the RBAC Group was created.
 
-created\_at: string
+    format: date-time
 
-RFC 3339 timestamp of when the RBAC Group was created.
+  - `name: string`
 
-formatdate-time
+    Name of the RBAC Group. Not uniqueness-enforced.
 
-name: string
+  - `roles: array of string or null`
 
-Name of the RBAC Group. Not uniqueness-enforced.
+    RBAC Role IDs attached to this RBAC Group. Role attachment is managed in the admin settings and is read-only on this API. `null` means role data was temporarily unavailable — retry to distinguish from an empty list.
 
-roles: array of string or null
+  - `source_type: "direct" or "scim"`
 
-RBAC Role IDs attached to this RBAC Group. Role attachment is managed in the admin settings and is read-only on this API. `null` means role data was temporarily unavailable — retry to distinguish from an empty list.
+    How the RBAC Group was created: `"direct"` for groups created directly (for example, in the organization's admin settings), `"scim"` for groups provisioned by the identity provider.
 
-
+    - `"direct"`
 
-source\_type: "direct" or "scim"
+    - `"scim"`
 
-How the RBAC Group was created: `"direct"` for groups created directly (for example, in the organization's admin settings), `"scim"` for groups provisioned by the identity provider.
+  - `type: "rbac_group"`
 
-One of the following:
+    Object type.
 
-"direct"
+    For RBAC Groups, this is always `"rbac_group"`.
 
-"scim"
+    default: rbac_group
 
-
+  - `updated_at: string`
 
-type: "rbac\_group"
+    RFC 3339 timestamp of when the RBAC Group was last updated.
 
-Object type.
+    format: date-time
 
-For RBAC Groups, this is always `"rbac_group"`.
+## Example
 
-defaultrbac\_group
-
-
-
-updated\_at: string
-
-RFC 3339 timestamp of when the RBAC Group was last updated.
-
-formatdate-time
-
-Get RBAC Group
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "name": "Engineering",
-  "roles": [
-    "rbac_role_016J8xVtKpDq3Wy9ZmN2hR4s"
-  ],
-  "source_type": "direct",
-  "type": "rbac_group",
-  "updated_at": "2024-10-30T23:58:27.427722Z"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
   "created_at": "2024-10-30T23:58:27.427722Z",

@@ -1,166 +1,134 @@
 # List Message Batches
 
-Copy page
+`BatchListPage messages().batches().list(params = BatchListParams.none(), requestOptions = RequestOptions.none())`
 
-
-
-Java
-
-# List Message Batches
-
-BatchListPage messages().batches().list(BatchListParamsparams = BatchListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
-
-GET/v1/messages/batches
+**GET** `/v1/messages/batches`
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
 Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `BatchListParams params`
 
-BatchListParams params
+  - `Optional<String> afterId`
 
-Optional<String> afterId
+    ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+  - `Optional<String> beforeId`
 
-Optional<String> beforeId
+    ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+  - `Optional<Long> limit`
 
-
+    Number of items to return per page.
 
-Optional<Long> limit
+    Defaults to `20`. Ranges from `1` to `1000`.
 
-Number of items to return per page.
+    maximum: 1000, minimum: 1
 
-Defaults to `20`. Ranges from `1` to `1000`.
+## Returns
 
-maximum1000
+- `class MessageBatch:`
 
-minimum1
+  - `String id`
 
-##### ReturnsExpand Collapse
+    Unique object identifier.
 
-
+    The format and length of IDs may change over time.
 
-class MessageBatch:
+  - `Optional<LocalDateTime> archivedAt`
 
-
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-String id
+    format: date-time
 
-Unique object identifier.
+  - `Optional<LocalDateTime> cancelInitiatedAt`
 
-The format and length of IDs may change over time.
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-Optional<LocalDateTime> archivedAt
+    format: date-time
 
-RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+  - `LocalDateTime createdAt`
 
-Optional<LocalDateTime> cancelInitiatedAt
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+    format: date-time
 
-LocalDateTime createdAt
+  - `Optional<LocalDateTime> endedAt`
 
-RFC 3339 datetime string representing the time at which the Message Batch was created.
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
-
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
-Optional<LocalDateTime> endedAt
+    format: date-time
 
-RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+  - `LocalDateTime expiresAt`
 
-Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-formatdate-time
+    format: date-time
 
-LocalDateTime expiresAt
+  - `ProcessingStatus processingStatus`
 
-RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+    Processing status of the Message Batch.
 
-
+    - `IN_PROGRESS("in_progress")`
 
-ProcessingStatus processingStatus
+    - `CANCELING("canceling")`
 
-Processing status of the Message Batch.
+    - `ENDED("ended")`
 
-One of the following:
+  - `MessageBatchRequestCounts requestCounts`
 
-IN\_PROGRESS("in\_progress")
+    Tallies requests within the Message Batch, categorized by their status.
 
-CANCELING("canceling")
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-ENDED("ended")
+    - `long canceled`
 
-
+      Number of requests in the Message Batch that have been canceled.
 
-[MessageBatchRequestCounts](api/messages/batches.md) requestCounts
+      This is zero until processing of the entire Message Batch has ended.
 
-Tallies requests within the Message Batch, categorized by their status.
+    - `long errored`
 
-Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+      Number of requests in the Message Batch that encountered an error.
 
-
+      This is zero until processing of the entire Message Batch has ended.
 
-long canceled
+    - `long expired`
 
-Number of requests in the Message Batch that have been canceled.
+      Number of requests in the Message Batch that have expired.
 
-This is zero until processing of the entire Message Batch has ended.
+      This is zero until processing of the entire Message Batch has ended.
 
-
+    - `long processing`
 
-long errored
+      Number of requests in the Message Batch that are processing.
 
-Number of requests in the Message Batch that encountered an error.
+    - `long succeeded`
 
-This is zero until processing of the entire Message Batch has ended.
+      Number of requests in the Message Batch that have completed successfully.
 
-
+      This is zero until processing of the entire Message Batch has ended.
 
-long expired
+  - `Optional<String> resultsUrl`
 
-Number of requests in the Message Batch that have expired.
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
-This is zero until processing of the entire Message Batch has ended.
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-long processing
+  - `JsonValue type = "message_batch"`
 
-Number of requests in the Message Batch that are processing.
+    Object type.
 
-
+    For Message Batches, this is always `"message_batch"`.
 
-long succeeded
+## Example
 
-Number of requests in the Message Batch that have completed successfully.
-
-This is zero until processing of the entire Message Batch has ended.
-
-
-
-Optional<String> resultsUrl
-
-URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
-
-Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-
-
-JsonValue; type "message\_batch"constant"message\_batch"constant
-
-Object type.
-
-For Message Batches, this is always `"message_batch"`.
-
-List Message Batches
-
-Java
-
-```shiki
+```java
 package com.anthropic.example;
 
 import com.anthropic.client.AnthropicClient;
@@ -179,45 +147,9 @@ public final class Main {
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-      "archived_at": "2024-08-20T18:37:24.100435Z",
-      "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
-      "created_at": "2024-08-20T18:37:24.100435Z",
-      "ended_at": "2024-08-20T18:37:24.100435Z",
-      "expires_at": "2024-08-20T18:37:24.100435Z",
-      "processing_status": "in_progress",
-      "request_counts": {
-        "canceled": 10,
-        "errored": 30,
-        "expired": 10,
-        "processing": 100,
-        "succeeded": 50
-      },
-      "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
-      "type": "message_batch"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

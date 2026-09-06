@@ -1,126 +1,1041 @@
 # Files
 
-Copy page
+## Upload File
 
-
+`beta.files.upload(**kwargs)  -> BetaFileMetadata`
 
-Python
+**POST** `/v1/files`
 
-# Files
+Upload File
 
-##### [Upload File](api/beta/files/upload.md)
+### Parameters
 
-beta.files.upload(FileUploadParams\*\*kwargs)  -> [FileMetadata](api/beta/files.md)
+- `file: FileTypes`
 
-POST/v1/files
+  The file to upload
 
-##### [List Files](api/beta/files/list.md)
+  format: binary
 
-beta.files.list(FileListParams\*\*kwargs)  -> SyncPage[[FileMetadata](api/beta/files.md)]
+- `expires_in_seconds: Optional[int]`
 
-GET/v1/files
+  Seconds from upload until the file expires and its bytes become permanently unavailable. Must be between 3600 (one hour) and 7776000 (ninety days).
 
-##### [Download File](api/beta/files/download.md)
+  minimum: 3600, maximum: 7776000
 
-beta.files.download(strfile\_id, FileDownloadParams\*\*kwargs)  -> BinaryResponseContent
+- `betas: Optional[List[AnthropicBetaParam]]`
 
-GET/v1/files/{file\_id}/content
+  Optional header to specify the beta version(s) you want to use.
 
-##### [Get File Metadata](api/beta/files/retrieve_metadata.md)
+  - `str`
 
-beta.files.retrieve\_metadata(strfile\_id, FileRetrieveMetadataParams\*\*kwargs)  -> [FileMetadata](api/beta/files.md)
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
 
-GET/v1/files/{file\_id}
+    - `"message-batches-2024-09-24"`
 
-##### [Delete File](api/beta/files/delete.md)
+    - `"prompt-caching-2024-07-31"`
 
-beta.files.delete(strfile\_id, FileDeleteParams\*\*kwargs)  -> [DeletedFile](api/beta/files.md)
+    - `"computer-use-2024-10-22"`
 
-DELETE/v1/files/{file\_id}
+    - `"computer-use-2025-01-24"`
 
-##### ModelsExpand Collapse
+    - `"pdfs-2024-09-25"`
 
-
+    - `"token-counting-2024-11-01"`
 
-class BetaFileScope: …
+    - `"token-efficient-tools-2025-02-19"`
 
-id: str
+    - `"output-128k-2025-02-19"`
 
-The ID of the scoping resource (e.g., the session ID).
+    - `"files-api-2025-04-14"`
 
-type: Literal["session"]
+    - `"mcp-client-2025-04-04"`
 
-The type of scope (e.g., `"session"`).
+    - `"mcp-client-2025-11-20"`
 
-
+    - `"dev-full-thinking-2025-05-14"`
 
-class DeletedFile: …
+    - `"interleaved-thinking-2025-05-14"`
 
-id: str
+    - `"code-execution-2025-05-22"`
 
-ID of the deleted file.
+    - `"extended-cache-ttl-2025-04-11"`
 
-
+    - `"context-1m-2025-08-07"`
 
-type: Optional[Literal["file\_deleted"]]
+    - `"context-management-2025-06-27"`
 
-Deleted object type.
+    - `"model-context-window-exceeded-2025-08-26"`
 
-For file deletion, this is always `"file_deleted"`.
+    - `"skills-2025-10-02"`
 
-
+    - `"fast-mode-2026-02-01"`
 
-class FileMetadata: …
+    - `"output-300k-2026-03-24"`
 
-
+    - `"user-profiles-2026-03-24"`
 
-id: str
+    - `"user-profiles-2026-08-18"`
 
-Unique object identifier.
+    - `"advisor-tool-2026-03-01"`
 
-The format and length of IDs may change over time.
+    - `"managed-agents-2026-04-01"`
 
-created\_at: datetime
+    - `"cache-diagnosis-2026-04-07"`
 
-RFC 3339 datetime string representing when the file was created.
+    - `"dreaming-2026-04-21"`
 
-filename: str
+    - `"thinking-token-count-2026-05-13"`
 
-Original filename of the uploaded file.
+    - `"server-side-fallback-2026-06-01"`
 
-mime\_type: str
+    - `"server-side-fallback-2026-07-01"`
 
-MIME type of the file.
+    - `"fallback-credit-2026-06-01"`
 
-size\_bytes: int
+    - `"fallback-credit-2026-07-01"`
 
-Size of the file in bytes.
+    - `"agent-memory-2026-07-22"`
 
-
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-type: Literal["file"]
+    - `"compact-2026-01-12"`
 
-Object type.
+    - `"computer-use-2025-11-24"`
 
-For files, this is always `"file"`.
+    - `"mcp-tunnels-2026-06-22"`
 
-downloadable: Optional[bool]
+    - `"structured-outputs-2025-11-13"`
 
-Whether the file can be downloaded.
+    - `"task-budgets-2026-03-13"`
 
-
+    - `"thinking-display-updates-2026-08-18"`
 
-scope: Optional[BetaFileScope]
+    - `"ce-user-management-2026-07-13"`
 
-The scope of this file, indicating the context in which it was created (e.g., a session).
+    - `"mid-conversation-output-config-2026-07-01"`
 
-id: str
+    - `"thinking-binding-controls-2026-08-01"`
 
-The ID of the scoping resource (e.g., the session ID).
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-type: Literal["session"]
+### Returns
 
-The type of scope (e.g., `"session"`).
+- `class BetaFileMetadata: …`
+
+  - `id: str`
+
+    Unique object identifier.
+
+    The format and length of IDs may change over time.
+
+  - `created_at: datetime`
+
+    RFC 3339 datetime string representing when the file was created.
+
+    format: date-time
+
+  - `filename: str`
+
+    Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
+
+  - `mime_type: str`
+
+    MIME type of the file.
+
+    maxLength: 255, minLength: 1
+
+  - `size_bytes: int`
+
+    Size of the file in bytes.
+
+    minimum: 0
+
+  - `type: Literal["file"]`
+
+    Object type.
+
+    For files, this is always `"file"`.
+
+  - `downloadable: Optional[bool]`
+
+    Whether the file can be downloaded.
+
+    default: false
+
+  - `expires_at: Optional[datetime]`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
+
+  - `scope: Optional[BetaFileScope]`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `id: str`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `type: Literal["session"]`
+
+      The type of scope (e.g., `"session"`).
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+beta_file_metadata = client.beta.files.upload(
+    file=b"Example data",
+)
+print(beta_file_metadata.id)
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
+  "type": "file",
+  "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z",
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
+}
+```
+
+## List Files
+
+`beta.files.list(**kwargs)  -> SyncPageCursor[BetaFileMetadata]`
+
+**GET** `/v1/files`
+
+List Files
+
+### Parameters
+
+- `ids: Optional[Sequence[str]]`
+
+  Restrict the result set to Files whose `id` is in this list. At most 100 entries (after de-duplication). Mutually exclusive with `page` and `limit`. When supplied, the response is always a single page (`next_page` is null). IDs that do not resolve to a visible File — including deleted Files — are silently omitted.
+
+- `limit: Optional[int]`
+
+  Number of items to return per page.
+
+  Defaults to `20`. Ranges from `1` to `1000`.
+
+  default: 20, maximum: 1000, minimum: 1
+
+- `page: Optional[str]`
+
+  Opaque page cursor returned in a prior list response's `next_page`. Prefixed `page_`.
+
+- `scope_id: Optional[str]`
+
+  Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaFileMetadata: …`
+
+  - `id: str`
+
+    Unique object identifier.
+
+    The format and length of IDs may change over time.
+
+  - `created_at: datetime`
+
+    RFC 3339 datetime string representing when the file was created.
+
+    format: date-time
+
+  - `filename: str`
+
+    Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
+
+  - `mime_type: str`
+
+    MIME type of the file.
+
+    maxLength: 255, minLength: 1
+
+  - `size_bytes: int`
+
+    Size of the file in bytes.
+
+    minimum: 0
+
+  - `type: Literal["file"]`
+
+    Object type.
+
+    For files, this is always `"file"`.
+
+  - `downloadable: Optional[bool]`
+
+    Whether the file can be downloaded.
+
+    default: false
+
+  - `expires_at: Optional[datetime]`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
+
+  - `scope: Optional[BetaFileScope]`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `id: str`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `type: Literal["session"]`
+
+      The type of scope (e.g., `"session"`).
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+page = client.beta.files.list()
+page = page.data[0]
+print(page.id)
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "created_at": "2025-04-15T18:37:24.100435Z",
+      "filename": "document.pdf",
+      "mime_type": "application/pdf",
+      "size_bytes": 102400,
+      "type": "file",
+      "downloadable": false,
+      "expires_at": "2025-05-15T18:37:24.100435Z",
+      "scope": {
+        "id": "id",
+        "type": "session"
+      }
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Download File
+
+`beta.files.download(file_id, **kwargs)  -> BinaryResponseContent`
+
+**GET** `/v1/files/{file_id}/content`
+
+Download File
+
+### Parameters
+
+- `file_id: str`
+
+  ID of the File.
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `BinaryResponseContent`
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+response = client.beta.files.download(
+    file_id="file_id",
+)
+print(response)
+content = response.read()
+print(content)
+```
+
+## Get File Metadata
+
+`beta.files.retrieve_metadata(file_id, **kwargs)  -> BetaFileMetadata`
+
+**GET** `/v1/files/{file_id}`
+
+Get File Metadata
+
+### Parameters
+
+- `file_id: str`
+
+  ID of the File.
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaFileMetadata: …`
+
+  - `id: str`
+
+    Unique object identifier.
+
+    The format and length of IDs may change over time.
+
+  - `created_at: datetime`
+
+    RFC 3339 datetime string representing when the file was created.
+
+    format: date-time
+
+  - `filename: str`
+
+    Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
+
+  - `mime_type: str`
+
+    MIME type of the file.
+
+    maxLength: 255, minLength: 1
+
+  - `size_bytes: int`
+
+    Size of the file in bytes.
+
+    minimum: 0
+
+  - `type: Literal["file"]`
+
+    Object type.
+
+    For files, this is always `"file"`.
+
+  - `downloadable: Optional[bool]`
+
+    Whether the file can be downloaded.
+
+    default: false
+
+  - `expires_at: Optional[datetime]`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
+
+  - `scope: Optional[BetaFileScope]`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `id: str`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `type: Literal["session"]`
+
+      The type of scope (e.g., `"session"`).
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+beta_file_metadata = client.beta.files.retrieve_metadata(
+    file_id="file_id",
+)
+print(beta_file_metadata.id)
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
+  "type": "file",
+  "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z",
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
+}
+```
+
+## Delete File
+
+`beta.files.delete(file_id, **kwargs)  -> BetaDeletedFile`
+
+**DELETE** `/v1/files/{file_id}`
+
+Delete File
+
+### Parameters
+
+- `file_id: str`
+
+  ID of the File.
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaDeletedFile: …`
+
+  - `id: str`
+
+    ID of the deleted file.
+
+  - `type: Optional[Literal["file_deleted"]]`
+
+    Deleted object type.
+
+    For file deletion, this is always `"file_deleted"`.
+
+    default: file_deleted
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+beta_deleted_file = client.beta.files.delete(
+    file_id="file_id",
+)
+print(beta_deleted_file.id)
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "type": "file_deleted"
+}
+```
+
+## Domain types
+
+### Beta Deleted File
+
+- `class BetaDeletedFile: …`
+
+  - `id: str`
+
+    ID of the deleted file.
+
+  - `type: Optional[Literal["file_deleted"]]`
+
+    Deleted object type.
+
+    For file deletion, this is always `"file_deleted"`.
+
+    default: file_deleted
+
+### Beta File Metadata
+
+- `class BetaFileMetadata: …`
+
+  - `id: str`
+
+    Unique object identifier.
+
+    The format and length of IDs may change over time.
+
+  - `created_at: datetime`
+
+    RFC 3339 datetime string representing when the file was created.
+
+    format: date-time
+
+  - `filename: str`
+
+    Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
+
+  - `mime_type: str`
+
+    MIME type of the file.
+
+    maxLength: 255, minLength: 1
+
+  - `size_bytes: int`
+
+    Size of the file in bytes.
+
+    minimum: 0
+
+  - `type: Literal["file"]`
+
+    Object type.
+
+    For files, this is always `"file"`.
+
+  - `downloadable: Optional[bool]`
+
+    Whether the file can be downloaded.
+
+    default: false
+
+  - `expires_at: Optional[datetime]`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
+
+  - `scope: Optional[BetaFileScope]`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `id: str`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `type: Literal["session"]`
+
+      The type of scope (e.g., `"session"`).
+
+### Beta File Scope
+
+- `class BetaFileScope: …`
+
+  - `id: str`
+
+    The ID of the scoping resource (e.g., the session ID).
+
+  - `type: Literal["session"]`
+
+    The type of scope (e.g., `"session"`).
 
 ---
 

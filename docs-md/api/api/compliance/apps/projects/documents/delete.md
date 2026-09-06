@@ -1,73 +1,44 @@
 # Delete project document
 
-To enable the Compliance API, see the setup guide.
-
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
-
-Copy page
-
-
-
-# Delete project document
-
-DELETE/v1/compliance/apps/projects/documents/{document\_id}
+**DELETE** `/v1/compliance/apps/projects/documents/{document_id}`
 
 Delete a project document for compliance purposes.
 
 Hard-deletes the project document permanently.
 
-##### Path parameters
+## Path parameters
 
-document\_id: string
+- `document_id: string`
 
-The document ID (tagged ID, e.g., claude\_proj\_doc\_abc123)
+  The document ID (tagged ID, e.g., claude_proj_doc_abc123)
 
-##### Headers
+## Headers
 
-"x-api-key": optional string
+- `"x-api-key": optional string`
 
-##### Returns
+## Returns
 
-id: string
+- `id: string`
 
-The ID of the project document that was deleted
+  The ID of the project document that was deleted
 
-
+- `type: "claude_project_document_deleted"`
 
-type: "claude\_project\_document\_deleted"
+  Constant string confirming deletion.
 
-Constant string confirming deletion.
+  default: claude_project_document_deleted
 
-defaultclaude\_project\_document\_deleted
+## Example
 
-Delete project document
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID \
     -X DELETE \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "id",
-  "type": "claude_project_document_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "id",
   "type": "claude_project_document_deleted"

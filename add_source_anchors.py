@@ -42,6 +42,26 @@ HAS_SOURCE_PATTERN = re.compile(r"\[\[Source\]\([^)]+\)\]")
 # Match anchor in markdown: [​](#anchor-name) - with optional zero-width space
 ANCHOR_PATTERN = re.compile(r"\[[\u200b]?\]\(#([^)]+)\)")
 
+# Markdown heading, e.g. "## Hook events". The docs derive each heading's
+# anchor from its text, so the anchor is recovered by slugifying it.
+HEADING_PATTERN = re.compile(r"^#{1,6}\s+(.+?)\s*#*$")
+
+# Fenced code block delimiter - a "#" inside a code block is not a heading
+FENCE_PATTERN = re.compile(r"^\s*(?:`{3,}|~{3,})")
+
+
+def slugify_heading(text: str) -> str:
+    """Convert heading text to its anchor, matching the docs site's scheme."""
+    # Reduce inline markdown to its visible text before slugifying
+    text = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", text)
+    # Underscores are kept: real anchors read "create_sdk_mcp_server", not
+    # "create-sdk-mcp-server", so only emphasis markers are stripped.
+    text = re.sub(r"[`*~]", "", text).replace("\u200b", "")
+
+    slug = re.sub(r"[^\w\s-]", "", text.lower())
+    slug = re.sub(r"\s+", "-", slug.strip())
+    return re.sub(r"-{2,}", "-", slug).strip("-")
+
 
 def map_to_source_url(file_path: str) -> str | None:
     """Map a local docs-md path to its source URL."""
@@ -73,12 +93,33 @@ def find_anchor_above_line(file_path: Path, target_line: int) -> str | None:
 
     lines = content.split("\n")
 
-    # Search backwards from target line to find the nearest anchor
+    # Headings inside code blocks are not headings, so record which lines are
+    # fenced before searching backwards.
+    in_code = [False] * len(lines)
+    fenced = False
+    for i, line in enumerate(lines):
+        if FENCE_PATTERN.match(line):
+            fenced = not fenced
+            in_code[i] = True
+        else:
+            in_code[i] = fenced
+
+    # Search backwards from the target line for the nearest anchor. Explicit
+    # [​](#anchor) markers only exist in files mirrored from rendered HTML;
+    # markdown sourced pages carry plain headings instead.
     for line_num in range(min(target_line - 1, len(lines) - 1), -1, -1):
         line = lines[line_num]
+
         match = ANCHOR_PATTERN.search(line)
         if match:
             return match.group(1)
+
+        if not in_code[line_num]:
+            heading = HEADING_PATTERN.match(line)
+            if heading:
+                slug = slugify_heading(heading.group(1))
+                if slug:
+                    return slug
 
     return None
 

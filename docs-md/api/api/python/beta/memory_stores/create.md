@@ -1,155 +1,177 @@
 # Create a memory store
 
-Copy page
+`beta.memory_stores.create(**kwargs)  -> BetaManagedAgentsMemoryStore`
 
-
-
-Python
-
-# Create a memory store
-
-beta.memory\_stores.create(MemoryStoreCreateParams\*\*kwargs)  -> [BetaManagedAgentsMemoryStore](api/beta/memory_stores.md)
-
-POST/v1/memory\_stores
+**POST** `/v1/memory_stores`
 
 Create a memory store
 
-##### ParametersExpand Collapse
+## Parameters
 
-name: str
+- `name: str`
 
-Human-readable name for the store. Required; 1–255 characters; no control characters. The mount-path slug under `/mnt/memory/` is derived from this name (lowercased, non-alphanumeric runs collapsed to a hyphen). Names need not be unique within a workspace.
+  Human-readable name for the store. Required; 1–255 characters; no control characters. The mount-path slug under `/mnt/memory/` is derived from this name (lowercased, non-alphanumeric runs collapsed to a hyphen). Names need not be unique within a workspace.
 
-description: Optional[str]
+  minLength: 1, maxLength: 255
 
-Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent.
+- `description: Optional[str]`
 
-metadata: Optional[Dict[str, str]]
+  Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent.
 
-Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Not visible to the agent.
+  maxLength: 1024
 
-
+- `metadata: Optional[Dict[str, str]]`
 
-betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
+  Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Not visible to the agent.
 
-Optional header to specify the beta version(s) you want to use.
+- `betas: Optional[List[AnthropicBetaParam]]`
 
-One of the following:
+  Optional header to specify the beta version(s) you want to use.
 
-str
+  - `str`
 
-
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]
+    - `"message-batches-2024-09-24"`
 
-One of the following:
+    - `"prompt-caching-2024-07-31"`
 
-"message-batches-2024-09-24"
+    - `"computer-use-2024-10-22"`
 
-"prompt-caching-2024-07-31"
+    - `"computer-use-2025-01-24"`
 
-"computer-use-2024-10-22"
+    - `"pdfs-2024-09-25"`
 
-"computer-use-2025-01-24"
+    - `"token-counting-2024-11-01"`
 
-"pdfs-2024-09-25"
+    - `"token-efficient-tools-2025-02-19"`
 
-"token-counting-2024-11-01"
+    - `"output-128k-2025-02-19"`
 
-"token-efficient-tools-2025-02-19"
+    - `"files-api-2025-04-14"`
 
-"output-128k-2025-02-19"
+    - `"mcp-client-2025-04-04"`
 
-"files-api-2025-04-14"
+    - `"mcp-client-2025-11-20"`
 
-"mcp-client-2025-04-04"
+    - `"dev-full-thinking-2025-05-14"`
 
-"mcp-client-2025-11-20"
+    - `"interleaved-thinking-2025-05-14"`
 
-"dev-full-thinking-2025-05-14"
+    - `"code-execution-2025-05-22"`
 
-"interleaved-thinking-2025-05-14"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"code-execution-2025-05-22"
+    - `"context-1m-2025-08-07"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"context-management-2025-06-27"`
 
-"context-1m-2025-08-07"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"context-management-2025-06-27"
+    - `"skills-2025-10-02"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"fast-mode-2026-02-01"`
 
-"skills-2025-10-02"
+    - `"output-300k-2026-03-24"`
 
-"fast-mode-2026-02-01"
+    - `"user-profiles-2026-03-24"`
 
-"output-300k-2026-03-24"
+    - `"user-profiles-2026-08-18"`
 
-"user-profiles-2026-03-24"
+    - `"advisor-tool-2026-03-01"`
 
-"advisor-tool-2026-03-01"
+    - `"managed-agents-2026-04-01"`
 
-"managed-agents-2026-04-01"
+    - `"cache-diagnosis-2026-04-07"`
 
-"cache-diagnosis-2026-04-07"
+    - `"dreaming-2026-04-21"`
 
-"thinking-token-count-2026-05-13"
+    - `"thinking-token-count-2026-05-13"`
 
-"server-side-fallback-2026-06-01"
+    - `"server-side-fallback-2026-06-01"`
 
-"fallback-credit-2026-06-01"
+    - `"server-side-fallback-2026-07-01"`
 
-"agent-memory-2026-07-22"
+    - `"fallback-credit-2026-06-01"`
 
-##### ReturnsExpand Collapse
+    - `"fallback-credit-2026-07-01"`
 
-
+    - `"agent-memory-2026-07-22"`
 
-class BetaManagedAgentsMemoryStore: …
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
+    - `"compact-2026-01-12"`
 
-id: str
+    - `"computer-use-2025-11-24"`
 
-Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+    - `"mcp-tunnels-2026-06-22"`
 
-created\_at: datetime
+    - `"structured-outputs-2025-11-13"`
 
-A timestamp in RFC 3339 format
+    - `"task-budgets-2026-03-13"`
 
-name: str
+    - `"thinking-display-updates-2026-08-18"`
 
-Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
+    - `"ce-user-management-2026-07-13"`
 
-type: Literal["memory\_store"]
+    - `"mid-conversation-output-config-2026-07-01"`
 
-updated\_at: datetime
+    - `"thinking-binding-controls-2026-08-01"`
 
-A timestamp in RFC 3339 format
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-archived\_at: Optional[datetime]
+## Returns
 
-A timestamp in RFC 3339 format
+- `class BetaManagedAgentsMemoryStore: …`
 
-description: Optional[str]
+  A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
-Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+  - `id: str`
 
-metadata: Optional[Dict[str, str]]
+    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
 
-Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+  - `created_at: datetime`
 
-Create a memory store
+    A timestamp in RFC 3339 format
 
-Python
+    format: date-time
 
-```shiki
+  - `name: str`
+
+    Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
+
+  - `type: Literal["memory_store"]`
+
+  - `updated_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `archived_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `description: Optional[str]`
+
+    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+
+  - `metadata: Optional[Dict[str, str]]`
+
+    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+
+## Example
+
+```python
 import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
 )
 beta_managed_agents_memory_store = client.beta.memory_stores.create(
     name="x",
@@ -157,32 +179,9 @@ beta_managed_agents_memory_store = client.beta.memory_stores.create(
 print(beta_managed_agents_memory_store.id)
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "name": "name",
-  "type": "memory_store",
-  "updated_at": "2019-12-27T18:11:19.117Z",
-  "archived_at": "2019-12-27T18:11:19.117Z",
-  "description": "description",
-  "metadata": {
-    "foo": "string"
-  }
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "id",
   "created_at": "2019-12-27T18:11:19.117Z",

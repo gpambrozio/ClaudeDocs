@@ -1,94 +1,59 @@
 # Get Compliance Group
 
-To enable the Compliance API, see the setup guide.
-
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
-
-Copy page
-
-
-
-# Get Compliance Group
-
-GET/v1/compliance/groups/{group\_id}
+**GET** `/v1/compliance/groups/{group_id}`
 
 Get Compliance Group
 
-##### Path parameters
+## Path parameters
 
-group\_id: string
+- `group_id: string`
 
-The group ID (tagged ID, e.g., rbac\_group\_abc123)
+  The group ID (tagged ID, e.g., rbac_group_abc123)
 
-##### Headers
+## Headers
 
-"x-api-key": optional string
+- `"x-api-key": optional string`
 
-##### Returns
+## Returns
 
-id: string
+- `id: string`
 
-Group identifier (tagged ID)
+  Group identifier (tagged ID)
 
-created\_at: string or null
+- `created_at: string or null`
 
-Group creation timestamp (ISO 8601)
+  Group creation timestamp (ISO 8601)
 
-description: string
+- `description: string`
 
-Group description
+  Group description
 
-name: string
+- `name: string`
 
-Group name
+  Group name
 
-roles: array of string or null
+- `roles: array of string or null`
 
-Role IDs assigned to this group.
+  Role IDs assigned to this group.
 
-source\_type: string
+- `source_type: string`
 
-How the group was created ('direct' or 'scim')
+  How the group was created ('direct' or 'scim')
 
-updated\_at: string or null
+- `updated_at: string or null`
 
-Group last-updated timestamp (ISO 8601)
+  Group last-updated timestamp (ISO 8601)
 
-Get Compliance Group
+## Example
 
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
-  "created_at": "2025-03-12T18:22:41.123456",
-  "description": "All members of the engineering organization",
-  "name": "Engineering Team",
-  "roles": [
-    "rbac_role_01SGBg3kEnZrdsVR2QmyJbvD",
-    "rbac_role_01HtCd4mFoAseWS3RnzKcwE7"
-  ],
-  "source_type": "scim",
-  "updated_at": "2025-03-14T09:05:17.456789"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
   "created_at": "2025-03-12T18:22:41.123456",

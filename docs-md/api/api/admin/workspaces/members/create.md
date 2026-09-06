@@ -1,90 +1,70 @@
 # Create Workspace Member
 
-Copy page
-
-
-
-# Create Workspace Member
-
-POST/v1/organizations/workspaces/{workspace\_id}/members
+**POST** `/v1/organizations/workspaces/{workspace_id}/members`
 
 Create Workspace Member
 
-##### Path parameters
+## Path parameters
 
-workspace\_id: string
+- `workspace_id: string`
 
-ID of the Workspace.
+  ID of the Workspace.
 
-##### Body
+## Body parameters
 
-user\_id: string
+- `user_id: string`
 
-ID of the User.
+  ID of the User.
 
-
+- `workspace_role: "workspace_admin" or "workspace_developer" or "workspace_restricted_developer" or "workspace_user"`
 
-workspace\_role: "workspace\_admin" or "workspace\_developer" or "workspace\_restricted\_developer" or "workspace\_user"
+  Role of the new Workspace Member. Cannot be `workspace_billing`.
 
-Role of the new Workspace Member. Cannot be `workspace_billing`.
+  - `"workspace_admin"`
 
-One of the following:
+  - `"workspace_developer"`
 
-"workspace\_admin"
+  - `"workspace_restricted_developer"`
 
-"workspace\_developer"
+  - `"workspace_user"`
 
-"workspace\_restricted\_developer"
+## Returns
 
-"workspace\_user"
+- `WorkspaceMember object`
 
-##### Returns
+  - `type: "workspace_member"`
 
-
+    Object type.
 
-WorkspaceMember object{ type, user\_id, workspace\_id, workspace\_role }
+    For Workspace Members, this is always `"workspace_member"`.
 
-
+    default: workspace_member
 
-type: "workspace\_member"
+  - `user_id: string`
 
-Object type.
+    ID of the User.
 
-For Workspace Members, this is always `"workspace_member"`.
+  - `workspace_id: string`
 
-defaultworkspace\_member
+    ID of the Workspace.
 
-user\_id: string
+  - `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
 
-ID of the User.
+    Role of the Workspace Member.
 
-workspace\_id: string
+    - `"workspace_admin"`
 
-ID of the Workspace.
+    - `"workspace_billing"`
 
-
+    - `"workspace_developer"`
 
-workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
+    - `"workspace_restricted_developer"`
 
-Role of the Workspace Member.
+    - `"workspace_user"`
 
-One of the following:
+## Example
 
-"workspace\_admin"
-
-"workspace\_billing"
-
-"workspace\_developer"
-
-"workspace\_restricted\_developer"
-
-"workspace\_user"
-
-Create Workspace Member
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -95,26 +75,9 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
         }'
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "type": "workspace_member",
-  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-  "workspace_role": "workspace_user"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "type": "workspace_member",
   "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",

@@ -1,144 +1,1179 @@
 # User Profiles
 
-Copy page
+## Create User Profile
 
-
+`beta.user_profiles.create(**kwargs)  -> BetaUserProfile`
 
-Python
+**POST** `/v1/user_profiles`
 
-# User Profiles
+Create User Profile
 
-##### [Create User Profile](api/beta/user_profiles/create.md)
+### Parameters
 
-beta.user\_profiles.create(UserProfileCreateParams\*\*kwargs)  -> [BetaUserProfile](api/beta/user_profiles.md)
+- `access_type: Optional[Literal["application", "passthrough"]]`
 
-POST/v1/user\_profiles
+  How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
-##### [List User Profiles](api/beta/user_profiles/list.md)
+  - `"application"`
 
-beta.user\_profiles.list(UserProfileListParams\*\*kwargs)  -> SyncPageCursor[[BetaUserProfile](api/beta/user_profiles.md)]
+  - `"passthrough"`
 
-GET/v1/user\_profiles
+- `external_id: Optional[str]`
 
-##### [Get User Profile](api/beta/user_profiles/retrieve.md)
+  Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
 
-beta.user\_profiles.retrieve(struser\_profile\_id, UserProfileRetrieveParams\*\*kwargs)  -> [BetaUserProfile](api/beta/user_profiles.md)
+  minLength: 1, maxLength: 255
 
-GET/v1/user\_profiles/{user\_profile\_id}
+- `external_user_onboarded_at: Optional[Union[str, datetime]]`
 
-##### [Update User Profile](api/beta/user_profiles/update.md)
+  A timestamp in RFC 3339 format
 
-beta.user\_profiles.update(struser\_profile\_id, UserProfileUpdateParams\*\*kwargs)  -> [BetaUserProfile](api/beta/user_profiles.md)
+  format: date-time
 
-POST/v1/user\_profiles/{user\_profile\_id}
+- `metadata: Optional[Dict[str, str]]`
 
-##### [Create Enrollment URL](api/beta/user_profiles/create_enrollment_url.md)
+  Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
 
-beta.user\_profiles.create\_enrollment\_url(struser\_profile\_id, UserProfileCreateEnrollmentURLParams\*\*kwargs)  -> [BetaUserProfileEnrollmentURL](api/beta/user_profiles.md)
+- `name: Optional[str]`
 
-POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
+  Optional for all profiles. Real-world name of the entity this profile represents (company or individual); for a company the platform resells Claude access to (`access_type` `passthrough`), that company's name where known. Maximum 255 characters.
 
-##### ModelsExpand Collapse
+  minLength: 1, maxLength: 255
 
-
+- `betas: Optional[List[AnthropicBetaParam]]`
 
-class BetaUserProfile: …
+  Optional header to specify the beta version(s) you want to use.
 
-id: str
+  - `str`
 
-Unique identifier for this user profile, prefixed `uprof_`.
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
 
-created\_at: datetime
+    - `"message-batches-2024-09-24"`
 
-A timestamp in RFC 3339 format
+    - `"prompt-caching-2024-07-31"`
 
-metadata: Dict[str, str]
+    - `"computer-use-2024-10-22"`
 
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+    - `"computer-use-2025-01-24"`
 
-
+    - `"pdfs-2024-09-25"`
 
-relationship: Literal["external", "resold", "internal"]
+    - `"token-counting-2024-11-01"`
 
-How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+    - `"token-efficient-tools-2025-02-19"`
 
-One of the following:
+    - `"output-128k-2025-02-19"`
 
-"external"
+    - `"files-api-2025-04-14"`
 
-"resold"
+    - `"mcp-client-2025-04-04"`
 
-"internal"
+    - `"mcp-client-2025-11-20"`
 
-
+    - `"dev-full-thinking-2025-05-14"`
 
-trust\_grants: Dict[str, [BetaUserProfileTrustGrant](api/beta/user_profiles.md)]
+    - `"interleaved-thinking-2025-05-14"`
 
-Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+    - `"code-execution-2025-05-22"`
 
-
+    - `"extended-cache-ttl-2025-04-11"`
 
-status: Literal["active", "pending", "rejected"]
+    - `"context-1m-2025-08-07"`
 
-Status of the trust grant.
+    - `"context-management-2025-06-27"`
 
-One of the following:
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"active"
+    - `"skills-2025-10-02"`
 
-"pending"
+    - `"fast-mode-2026-02-01"`
 
-"rejected"
+    - `"output-300k-2026-03-24"`
 
-type: Literal["user\_profile"]
+    - `"user-profiles-2026-03-24"`
 
-Object type. Always `user_profile`.
+    - `"user-profiles-2026-08-18"`
 
-updated\_at: datetime
+    - `"advisor-tool-2026-03-01"`
 
-A timestamp in RFC 3339 format
+    - `"managed-agents-2026-04-01"`
 
-external\_id: Optional[str]
+    - `"cache-diagnosis-2026-04-07"`
 
-Platform's own identifier for this user. Not enforced unique.
+    - `"dreaming-2026-04-21"`
 
-name: Optional[str]
+    - `"thinking-token-count-2026-05-13"`
 
-Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    - `"server-side-fallback-2026-06-01"`
 
-
+    - `"server-side-fallback-2026-07-01"`
 
-class BetaUserProfileEnrollmentURL: …
+    - `"fallback-credit-2026-06-01"`
 
-expires\_at: datetime
+    - `"fallback-credit-2026-07-01"`
 
-A timestamp in RFC 3339 format
+    - `"agent-memory-2026-07-22"`
 
-type: Literal["enrollment\_url"]
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-Object type. Always `enrollment_url`.
+    - `"compact-2026-01-12"`
 
-url: str
+    - `"computer-use-2025-11-24"`
 
-Enrollment URL to send to the end user. Valid until `expires_at`.
+    - `"mcp-tunnels-2026-06-22"`
 
-
+    - `"structured-outputs-2025-11-13"`
 
-class BetaUserProfileTrustGrant: …
+    - `"task-budgets-2026-03-13"`
 
-
+    - `"thinking-display-updates-2026-08-18"`
 
-status: Literal["active", "pending", "rejected"]
+    - `"ce-user-management-2026-07-13"`
 
-Status of the trust grant.
+    - `"mid-conversation-output-config-2026-07-01"`
 
-One of the following:
+    - `"thinking-binding-controls-2026-08-01"`
 
-"active"
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"pending"
+### Returns
 
-"rejected"
+- `class BetaUserProfile: …`
+
+  - `id: str`
+
+    Unique identifier for this user profile, prefixed `uprof_`.
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `metadata: Dict[str, str]`
+
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `trust_grants: Dict[str, BetaUserProfileTrustGrant]`
+
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+
+    - `status: Literal["active", "pending", "rejected"]`
+
+      Status of the trust grant.
+
+      - `"active"`
+
+      - `"pending"`
+
+      - `"rejected"`
+
+  - `type: Literal["user_profile"]`
+
+    Object type. Always `user_profile`.
+
+  - `updated_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `access_type: Optional[Literal["application", "passthrough"]]`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `"application"`
+
+    - `"passthrough"`
+
+  - `external_id: Optional[str]`
+
+    Platform's own identifier for this user. Not enforced unique.
+
+  - `external_user_onboarded_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `name: Optional[str]`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+beta_user_profile = client.beta.user_profiles.create()
+print(beta_user_profile.id)
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {},
+  "trust_grants": {
+    "cyber": {
+      "status": "active"
+    }
+  },
+  "type": "user_profile",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "access_type": "application",
+  "external_id": "user_12345",
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
+  "name": "Example User"
+}
+```
+
+## List User Profiles
+
+`beta.user_profiles.list(**kwargs)  -> SyncPageCursor[BetaUserProfile]`
+
+**GET** `/v1/user_profiles`
+
+List User Profiles
+
+### Parameters
+
+- `limit: Optional[int]`
+
+  Query parameter for limit
+
+  format: int32
+
+- `order: Optional[Literal["asc", "desc"]]`
+
+  Query parameter for order
+
+  - `"asc"`
+
+  - `"desc"`
+
+- `order_by: Optional[Literal["created_at", "name"]]`
+
+  Query parameter for order_by
+
+  - `"created_at"`
+
+  - `"name"`
+
+- `page: Optional[str]`
+
+  Query parameter for page
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaUserProfile: …`
+
+  - `id: str`
+
+    Unique identifier for this user profile, prefixed `uprof_`.
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `metadata: Dict[str, str]`
+
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `trust_grants: Dict[str, BetaUserProfileTrustGrant]`
+
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+
+    - `status: Literal["active", "pending", "rejected"]`
+
+      Status of the trust grant.
+
+      - `"active"`
+
+      - `"pending"`
+
+      - `"rejected"`
+
+  - `type: Literal["user_profile"]`
+
+    Object type. Always `user_profile`.
+
+  - `updated_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `access_type: Optional[Literal["application", "passthrough"]]`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `"application"`
+
+    - `"passthrough"`
+
+  - `external_id: Optional[str]`
+
+    Platform's own identifier for this user. Not enforced unique.
+
+  - `external_user_onboarded_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `name: Optional[str]`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+page = client.beta.user_profiles.list()
+page = page.data[0]
+print(page.id)
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+      "created_at": "2026-03-15T10:00:00Z",
+      "metadata": {},
+      "trust_grants": {
+        "cyber": {
+          "status": "active"
+        }
+      },
+      "type": "user_profile",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "access_type": "application",
+      "external_id": "user_12345",
+      "external_user_onboarded_at": "2024-11-02T08:15:00Z",
+      "name": "Example User"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
+
+## Get User Profile
+
+`beta.user_profiles.retrieve(user_profile_id, **kwargs)  -> BetaUserProfile`
+
+**GET** `/v1/user_profiles/{user_profile_id}`
+
+Get User Profile
+
+### Parameters
+
+- `user_profile_id: str`
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaUserProfile: …`
+
+  - `id: str`
+
+    Unique identifier for this user profile, prefixed `uprof_`.
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `metadata: Dict[str, str]`
+
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `trust_grants: Dict[str, BetaUserProfileTrustGrant]`
+
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+
+    - `status: Literal["active", "pending", "rejected"]`
+
+      Status of the trust grant.
+
+      - `"active"`
+
+      - `"pending"`
+
+      - `"rejected"`
+
+  - `type: Literal["user_profile"]`
+
+    Object type. Always `user_profile`.
+
+  - `updated_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `access_type: Optional[Literal["application", "passthrough"]]`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `"application"`
+
+    - `"passthrough"`
+
+  - `external_id: Optional[str]`
+
+    Platform's own identifier for this user. Not enforced unique.
+
+  - `external_user_onboarded_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `name: Optional[str]`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+beta_user_profile = client.beta.user_profiles.retrieve(
+    user_profile_id="uprof_011CZkZCu8hGbp5mYRQgUmz9",
+)
+print(beta_user_profile.id)
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {},
+  "trust_grants": {
+    "cyber": {
+      "status": "active"
+    }
+  },
+  "type": "user_profile",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "access_type": "application",
+  "external_id": "user_12345",
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
+  "name": "Example User"
+}
+```
+
+## Update User Profile
+
+`beta.user_profiles.update(user_profile_id, **kwargs)  -> BetaUserProfile`
+
+**POST** `/v1/user_profiles/{user_profile_id}`
+
+Update User Profile
+
+### Parameters
+
+- `user_profile_id: str`
+
+- `access_type: Optional[Literal["application", "passthrough"]]`
+
+  How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+  - `"application"`
+
+  - `"passthrough"`
+
+- `external_id: Optional[str]`
+
+  If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters.
+
+  minLength: 1, maxLength: 255
+
+- `external_user_onboarded_at: Optional[Union[str, datetime]]`
+
+  A timestamp in RFC 3339 format
+
+  format: date-time
+
+- `metadata: Optional[Dict[str, str]]`
+
+  Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
+
+- `name: Optional[str]`
+
+  If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
+
+  minLength: 1, maxLength: 255
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaUserProfile: …`
+
+  - `id: str`
+
+    Unique identifier for this user profile, prefixed `uprof_`.
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `metadata: Dict[str, str]`
+
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `trust_grants: Dict[str, BetaUserProfileTrustGrant]`
+
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+
+    - `status: Literal["active", "pending", "rejected"]`
+
+      Status of the trust grant.
+
+      - `"active"`
+
+      - `"pending"`
+
+      - `"rejected"`
+
+  - `type: Literal["user_profile"]`
+
+    Object type. Always `user_profile`.
+
+  - `updated_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `access_type: Optional[Literal["application", "passthrough"]]`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `"application"`
+
+    - `"passthrough"`
+
+  - `external_id: Optional[str]`
+
+    Platform's own identifier for this user. Not enforced unique.
+
+  - `external_user_onboarded_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `name: Optional[str]`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+beta_user_profile = client.beta.user_profiles.update(
+    user_profile_id="uprof_011CZkZCu8hGbp5mYRQgUmz9",
+)
+print(beta_user_profile.id)
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {},
+  "trust_grants": {
+    "cyber": {
+      "status": "active"
+    }
+  },
+  "type": "user_profile",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "access_type": "application",
+  "external_id": "user_12345",
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
+  "name": "Example User"
+}
+```
+
+## Create Enrollment URL
+
+`beta.user_profiles.create_enrollment_url(user_profile_id, **kwargs)  -> BetaUserProfileEnrollmentURL`
+
+**POST** `/v1/user_profiles/{user_profile_id}/enrollment_url`
+
+Create Enrollment URL
+
+### Parameters
+
+- `user_profile_id: str`
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaUserProfileEnrollmentURL: …`
+
+  - `expires_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `type: Literal["enrollment_url"]`
+
+    Object type. Always `enrollment_url`.
+
+  - `url: str`
+
+    Enrollment URL to send to the end user. Valid until `expires_at`.
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+beta_user_profile_enrollment_url = client.beta.user_profiles.create_enrollment_url(
+    user_profile_id="uprof_011CZkZCu8hGbp5mYRQgUmz9",
+)
+print(beta_user_profile_enrollment_url.expires_at)
+```
+
+#### Response (200)
+
+```json
+{
+  "expires_at": "2026-03-15T10:15:00Z",
+  "type": "enrollment_url",
+  "url": "https://platform.claude.com/user-profiles/enrollment/M3J0bGJxZ2ppMnptbnB1"
+}
+```
+
+## Domain types
+
+### Beta User Profile
+
+- `class BetaUserProfile: …`
+
+  - `id: str`
+
+    Unique identifier for this user profile, prefixed `uprof_`.
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `metadata: Dict[str, str]`
+
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `trust_grants: Dict[str, BetaUserProfileTrustGrant]`
+
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+
+    - `status: Literal["active", "pending", "rejected"]`
+
+      Status of the trust grant.
+
+      - `"active"`
+
+      - `"pending"`
+
+      - `"rejected"`
+
+  - `type: Literal["user_profile"]`
+
+    Object type. Always `user_profile`.
+
+  - `updated_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `access_type: Optional[Literal["application", "passthrough"]]`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `"application"`
+
+    - `"passthrough"`
+
+  - `external_id: Optional[str]`
+
+    Platform's own identifier for this user. Not enforced unique.
+
+  - `external_user_onboarded_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `name: Optional[str]`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
+
+### Beta User Profile Enrollment URL
+
+- `class BetaUserProfileEnrollmentURL: …`
+
+  - `expires_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `type: Literal["enrollment_url"]`
+
+    Object type. Always `enrollment_url`.
+
+  - `url: str`
+
+    Enrollment URL to send to the end user. Valid until `expires_at`.
+
+### Beta User Profile Trust Grant
+
+- `class BetaUserProfileTrustGrant: …`
+
+  - `status: Literal["active", "pending", "rejected"]`
+
+    Status of the trust grant.
+
+    - `"active"`
+
+    - `"pending"`
+
+    - `"rejected"`
 
 ---
 

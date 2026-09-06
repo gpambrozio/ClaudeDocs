@@ -1,133 +1,126 @@
 # Update User Profile
 
-Copy page
+`$ ant beta:user-profiles update`
 
-
-
-CLI
-
-# Update User Profile
-
-$ ant beta:user-profiles update
-
-POST/v1/user\_profiles/{user\_profile\_id}
+**POST** `/v1/user_profiles/{user_profile_id}`
 
 Update User Profile
 
-##### ParametersExpand Collapse
+## Parameters
 
---user-profile-id: string
+- `--user-profile-id: string`
 
-Path param: Path parameter user\_profile\_id
+  Path param: Path parameter user_profile_id
 
---external-id: optional string
+- `--access-type: optional "application" or "passthrough"`
 
-Body param: If present, replaces the stored external\_id. Omit to leave unchanged. Maximum 255 characters.
+  Body param: How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
---metadata: optional map[string]
+- `--external-id: optional string`
 
-Body param: Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
+  Body param: If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters.
 
---name: optional string
+  minLength: 1, maxLength: 255
 
-Body param: If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
+- `--external-user-onboarded-at: optional string`
 
---relationship: optional "external" or "resold" or "internal"
+  Body param: A timestamp in RFC 3339 format
 
-Body param: How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+  format: date-time
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--metadata: optional map[string]`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+  Body param: Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
 
-##### ReturnsExpand Collapse
+- `--name: optional string`
 
-
+  Body param: If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
 
-beta\_user\_profile: object { id, created\_at, metadata, 6 more } 
+  minLength: 1, maxLength: 255
 
-id: string
+- `--beta: optional array of AnthropicBeta`
 
-Unique identifier for this user profile, prefixed `uprof_`.
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-created\_at: string
+## Returns
 
-A timestamp in RFC 3339 format
+- `beta_user_profile: object`
 
-metadata: map[string]
+  - `id: string`
 
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+    Unique identifier for this user profile, prefixed `uprof_`.
 
-
+  - `created_at: string`
 
-relationship: "external" or "resold" or "internal"
+    A timestamp in RFC 3339 format
 
-How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+    format: date-time
 
-"external"
+  - `metadata: map[string]`
 
-"resold"
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-"internal"
+  - `trust_grants: map[BetaUserProfileTrustGrant]`
 
-
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-trust\_grants: map[[BetaUserProfileTrustGrant](api/beta/user_profiles.md) { status } ]
+    - `status: "active" or "pending" or "rejected"`
 
-Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+      Status of the trust grant.
 
-
+      - `"active"`
 
-status: "active" or "pending" or "rejected"
+      - `"pending"`
 
-Status of the trust grant.
+      - `"rejected"`
 
-"active"
+  - `type: "user_profile"`
 
-"pending"
+    Object type. Always `user_profile`.
 
-"rejected"
+  - `updated_at: string`
 
-
+    A timestamp in RFC 3339 format
 
-type: "user\_profile"
+    format: date-time
 
-Object type. Always `user_profile`.
+  - `access_type: optional "application" or "passthrough"`
 
-"user\_profile"
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
-updated\_at: string
+    - `"application"`
 
-A timestamp in RFC 3339 format
+    - `"passthrough"`
 
-external\_id: optional string
+  - `external_id: optional string`
 
-Platform's own identifier for this user. Not enforced unique.
+    Platform's own identifier for this user. Not enforced unique.
 
-name: optional string
+  - `external_user_onboarded_at: optional string`
 
-Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    A timestamp in RFC 3339 format
 
-Update User Profile
+    format: date-time
 
-CLI
+  - `name: optional string`
 
-```shiki
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
+
+## Example
+
+```bash
 ant beta:user-profiles update \
   --api-key my-anthropic-api-key \
   --user-profile-id uprof_011CZkZCu8hGbp5mYRQgUmz9
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
-  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -135,31 +128,9 @@ Response 200
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
+  "access_type": "application",
   "external_id": "user_12345",
-  "name": "Example User"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
-  "created_at": "2026-03-15T10:00:00Z",
-  "metadata": {},
-  "relationship": "external",
-  "trust_grants": {
-    "cyber": {
-      "status": "active"
-    }
-  },
-  "type": "user_profile",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "external_id": "user_12345",
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
   "name": "Example User"
 }
 ```

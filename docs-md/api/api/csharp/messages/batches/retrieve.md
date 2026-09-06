@@ -1,150 +1,122 @@
 # Retrieve a Message Batch
 
-Copy page
+`MessageBatch Messages.Batches.Retrieve(parameters, cancellationToken = default)`
 
-
-
-C#
-
-# Retrieve a Message Batch
-
-[MessageBatch](api/messages/batches.md) Messages.Batches.Retrieve(BatchRetrieveParamsparameters, CancellationTokencancellationToken = default)
-
-GET/v1/messages/batches/{message\_batch\_id}
+**GET** `/v1/messages/batches/{message_batch_id}`
 
 This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
 
 Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `BatchRetrieveParams parameters`
 
-BatchRetrieveParams parameters
+  - `required string messageBatchID`
 
-required string messageBatchID
+    ID of the Message Batch.
 
-ID of the Message Batch.
+## Returns
 
-##### ReturnsExpand Collapse
+- `class MessageBatch:`
 
-
+  - `required string ID`
 
-class MessageBatch:
+    Unique object identifier.
 
-
+    The format and length of IDs may change over time.
 
-required string ID
+  - `required DateTimeOffset? ArchivedAt`
 
-Unique object identifier.
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-The format and length of IDs may change over time.
+    format: date-time
 
-required DateTimeOffset? ArchivedAt
+  - `required DateTimeOffset? CancelInitiatedAt`
 
-RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-required DateTimeOffset? CancelInitiatedAt
+    format: date-time
 
-RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+  - `required DateTimeOffset CreatedAt`
 
-required DateTimeOffset CreatedAt
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-RFC 3339 datetime string representing the time at which the Message Batch was created.
+    format: date-time
 
-
+  - `required DateTimeOffset? EndedAt`
 
-required DateTimeOffset? EndedAt
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
-RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
-Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+    format: date-time
 
-formatdate-time
+  - `required DateTimeOffset ExpiresAt`
 
-required DateTimeOffset ExpiresAt
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+    format: date-time
 
-
+  - `required ProcessingStatus ProcessingStatus`
 
-required ProcessingStatus ProcessingStatus
+    Processing status of the Message Batch.
 
-Processing status of the Message Batch.
+    - `InProgress("in_progress")`
 
-One of the following:
+    - `Canceling("canceling")`
 
-"in\_progress"InProgress
+    - `Ended("ended")`
 
-"canceling"Canceling
+  - `required MessageBatchRequestCounts RequestCounts`
 
-"ended"Ended
+    Tallies requests within the Message Batch, categorized by their status.
 
-
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-required [MessageBatchRequestCounts](api/messages/batches.md) RequestCounts
+    - `required long Canceled`
 
-Tallies requests within the Message Batch, categorized by their status.
+      Number of requests in the Message Batch that have been canceled.
 
-Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+      This is zero until processing of the entire Message Batch has ended.
 
-
+    - `required long Errored`
 
-required Long Canceled
+      Number of requests in the Message Batch that encountered an error.
 
-Number of requests in the Message Batch that have been canceled.
+      This is zero until processing of the entire Message Batch has ended.
 
-This is zero until processing of the entire Message Batch has ended.
+    - `required long Expired`
 
-
+      Number of requests in the Message Batch that have expired.
 
-required Long Errored
+      This is zero until processing of the entire Message Batch has ended.
 
-Number of requests in the Message Batch that encountered an error.
+    - `required long Processing`
 
-This is zero until processing of the entire Message Batch has ended.
+      Number of requests in the Message Batch that are processing.
 
-
+    - `required long Succeeded`
 
-required Long Expired
+      Number of requests in the Message Batch that have completed successfully.
 
-Number of requests in the Message Batch that have expired.
+      This is zero until processing of the entire Message Batch has ended.
 
-This is zero until processing of the entire Message Batch has ended.
+  - `required string? ResultsUrl`
 
-required Long Processing
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
-Number of requests in the Message Batch that are processing.
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-
+  - `JsonElement Type = "message_batch"`
 
-required Long Succeeded
+    Object type.
 
-Number of requests in the Message Batch that have completed successfully.
+    For Message Batches, this is always `"message_batch"`.
 
-This is zero until processing of the entire Message Batch has ended.
+## Example
 
-
-
-required string? ResultsUrl
-
-URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
-
-Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-
-
-JsonElement Type "message\_batch"constant
-
-Object type.
-
-For Message Batches, this is always `"message_batch"`.
-
-Retrieve a Message Batch
-
-C#
-
-```shiki
+```csharp
 BatchRetrieveParams parameters = new() { MessageBatchID = "message_batch_id" };
 
 var messageBatch = await client.Messages.Batches.Retrieve(parameters);
@@ -152,38 +124,9 @@ var messageBatch = await client.Messages.Batches.Retrieve(parameters);
 Console.WriteLine(messageBatch);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "archived_at": "2024-08-20T18:37:24.100435Z",
-  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
-  "created_at": "2024-08-20T18:37:24.100435Z",
-  "ended_at": "2024-08-20T18:37:24.100435Z",
-  "expires_at": "2024-08-20T18:37:24.100435Z",
-  "processing_status": "in_progress",
-  "request_counts": {
-    "canceled": 10,
-    "errored": 30,
-    "expired": 10,
-    "processing": 100,
-    "succeeded": 50
-  },
-  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
-  "type": "message_batch"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
   "archived_at": "2024-08-20T18:37:24.100435Z",

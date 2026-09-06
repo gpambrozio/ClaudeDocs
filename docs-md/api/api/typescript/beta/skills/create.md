@@ -1,216 +1,221 @@
 # Create Skill
 
-Copy page
+`client.beta.skills.create(params, options?): BetaSkill`
 
-
-
-TypeScript
-
-# Create Skill
-
-client.beta.skills.create(SkillCreateParams { files, display\_title, betas } params, RequestOptionsoptions?): [SkillCreateResponse](api/beta/skills.md) { id, created\_at, display\_title, 4 more }
-
-POST/v1/skills
+**POST** `/v1/skills`
 
 Create Skill
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `params: SkillCreateParams`
 
-params: SkillCreateParams { files, display\_title, betas } 
+  - `files: Array<Uploadable>`
 
-
+    Body param: Files to upload for the skill.
 
-files: Array<Uploadable>
+    All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
-Body param: Files to upload for the skill.
+  - `display_name?: string | null`
 
-All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
+    Body param: Human-readable, single-line label for the Skill. Maximum 255 characters.
+    Always set: derived from the SKILL.md frontmatter `name` when omitted at
+    creation. Not unique.
 
-
+  - `betas?: Array<AnthropicBeta>`
 
-display\_title?: string | null
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-Body param: Display title for the skill.
+    - `(string & {})`
 
-This is a human-readable label that is not included in the prompt sent to the model.
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
 
-
+      - `"message-batches-2024-09-24"`
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+      - `"prompt-caching-2024-07-31"`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+      - `"computer-use-2024-10-22"`
 
-One of the following:
+      - `"computer-use-2025-01-24"`
 
-(string & {})
+      - `"pdfs-2024-09-25"`
 
-
+      - `"token-counting-2024-11-01"`
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more
+      - `"token-efficient-tools-2025-02-19"`
 
-"message-batches-2024-09-24"
+      - `"output-128k-2025-02-19"`
 
-"prompt-caching-2024-07-31"
+      - `"files-api-2025-04-14"`
 
-"computer-use-2024-10-22"
+      - `"mcp-client-2025-04-04"`
 
-"computer-use-2025-01-24"
+      - `"mcp-client-2025-11-20"`
 
-"pdfs-2024-09-25"
+      - `"dev-full-thinking-2025-05-14"`
 
-"token-counting-2024-11-01"
+      - `"interleaved-thinking-2025-05-14"`
 
-"token-efficient-tools-2025-02-19"
+      - `"code-execution-2025-05-22"`
 
-"output-128k-2025-02-19"
+      - `"extended-cache-ttl-2025-04-11"`
 
-"files-api-2025-04-14"
+      - `"context-1m-2025-08-07"`
 
-"mcp-client-2025-04-04"
+      - `"context-management-2025-06-27"`
 
-"mcp-client-2025-11-20"
+      - `"model-context-window-exceeded-2025-08-26"`
 
-"dev-full-thinking-2025-05-14"
+      - `"skills-2025-10-02"`
 
-"interleaved-thinking-2025-05-14"
+      - `"fast-mode-2026-02-01"`
 
-"code-execution-2025-05-22"
+      - `"output-300k-2026-03-24"`
 
-"extended-cache-ttl-2025-04-11"
+      - `"user-profiles-2026-03-24"`
 
-"context-1m-2025-08-07"
+      - `"user-profiles-2026-08-18"`
 
-"context-management-2025-06-27"
+      - `"advisor-tool-2026-03-01"`
 
-"model-context-window-exceeded-2025-08-26"
+      - `"managed-agents-2026-04-01"`
 
-"skills-2025-10-02"
+      - `"cache-diagnosis-2026-04-07"`
 
-"fast-mode-2026-02-01"
+      - `"dreaming-2026-04-21"`
 
-"output-300k-2026-03-24"
+      - `"thinking-token-count-2026-05-13"`
 
-"user-profiles-2026-03-24"
+      - `"server-side-fallback-2026-06-01"`
 
-"advisor-tool-2026-03-01"
+      - `"server-side-fallback-2026-07-01"`
 
-"managed-agents-2026-04-01"
+      - `"fallback-credit-2026-06-01"`
 
-"cache-diagnosis-2026-04-07"
+      - `"fallback-credit-2026-07-01"`
 
-"thinking-token-count-2026-05-13"
+      - `"agent-memory-2026-07-22"`
 
-"server-side-fallback-2026-06-01"
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
-"fallback-credit-2026-06-01"
+      - `"compact-2026-01-12"`
 
-"agent-memory-2026-07-22"
+      - `"computer-use-2025-11-24"`
 
-##### ReturnsExpand Collapse
+      - `"mcp-tunnels-2026-06-22"`
 
-
+      - `"structured-outputs-2025-11-13"`
 
-SkillCreateResponse { id, created\_at, display\_title, 4 more } 
+      - `"task-budgets-2026-03-13"`
 
-
+      - `"thinking-display-updates-2026-08-18"`
 
-id: string
+      - `"ce-user-management-2026-07-13"`
 
-Unique identifier for the skill.
+      - `"mid-conversation-output-config-2026-07-01"`
 
-The format and length of IDs may change over time.
+      - `"thinking-binding-controls-2026-08-01"`
 
-created\_at: string
+      - `"mid-conversation-system-clear-at-2026-08-21"`
 
-ISO 8601 timestamp of when the skill was created.
+## Returns
 
-
+- `BetaSkill`
 
-display\_title: string | null
+  - `id: string`
 
-Display title for the skill.
+    Unique identifier for the skill.
 
-This is a human-readable label that is not included in the prompt sent to the model.
+    The format and length of IDs may change over time.
 
-
+  - `created_at: string`
 
-latest\_version: string | null
+    ISO 8601 timestamp of when the skill was created.
 
-The latest version identifier for the skill.
+    format: date-time
 
-This represents the most recent version of the skill that has been created.
+  - `display_name: string`
 
-
+    Human-readable, single-line label for the Skill. Maximum 255 characters.
+    Always set: derived from the SKILL.md frontmatter `name` when omitted at
+    creation. Not unique.
 
-source: string
+  - `latest_version_id: string`
 
-Source of the skill.
+    ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
 
-This may be one of the following values:
+  - `source: BetaSkillSource`
 
-- `"custom"`: the skill was created by a user
-- `"anthropic"`: the skill was created by Anthropic
+    Where the Skill comes from.
 
-
+    Possible values:
 
-type: string
+    * `"custom"`: authored by the platform user; private to their workspace
+    * `"anthropic"`: published by Anthropic; shared and read-only
+    * `"anthropic_example"`: Anthropic-published sample Skill
+    * `"plugin"`: resolved from an installed plugin
 
-Object type.
+    - `type: "custom" | "anthropic" | "anthropic_example" | "plugin"`
 
-For Skills, this is always `"skill"`.
+      Where the Skill comes from.
 
-updated\_at: string
+      Possible values:
 
-ISO 8601 timestamp of when the skill was last updated.
+      * `"custom"`: authored by the platform user; private to their workspace
+      * `"anthropic"`: published by Anthropic; shared and read-only
+      * `"anthropic_example"`: Anthropic-published sample Skill
+      * `"plugin"`: resolved from an installed plugin
 
-Create Skill
+      - `"custom"`
 
-TypeScript
+      - `"anthropic"`
 
-```shiki
-import Anthropic from '@anthropic-ai/sdk';
+      - `"anthropic_example"`
+
+      - `"plugin"`
+
+  - `type: "skill"`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
+
+    default: skill
+
+  - `updated_at: string`
+
+    ISO 8601 timestamp of when the skill was last updated.
+
+    format: date-time
+
+## Example
+
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const skill = await client.beta.skills.create({ files: [fs.createReadStream('path/to/file')] });
+const betaSkill = await client.beta.skills.create({
+  files: [fs.createReadStream("path/to/file")]
+});
 
-console.log(skill.id);
+console.log(betaSkill.id);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "skill_01JAbcdefghijklmnopqrstuvw",
   "created_at": "2024-10-30T23:58:27.427722Z",
-  "display_title": "My Custom Skill",
-  "latest_version": "1759178010641129",
-  "source": "custom",
-  "type": "type",
-  "updated_at": "2024-10-30T23:58:27.427722Z"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "display_title": "My Custom Skill",
-  "latest_version": "1759178010641129",
-  "source": "custom",
-  "type": "type",
+  "display_name": "display_name",
+  "latest_version_id": "latest_version_id",
+  "source": {
+    "type": "custom"
+  },
+  "type": "skill",
   "updated_at": "2024-10-30T23:58:27.427722Z"
 }
 ```

@@ -1,180 +1,200 @@
 # List User Profiles
 
-Copy page
+`UserProfileListPage beta().userProfiles().list(params = UserProfileListParams.none(), requestOptions = RequestOptions.none())`
 
-
-
-Java
-
-# List User Profiles
-
-UserProfileListPage beta().userProfiles().list(UserProfileListParamsparams = UserProfileListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
-
-GET/v1/user\_profiles
+**GET** `/v1/user_profiles`
 
 List User Profiles
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `UserProfileListParams params`
 
-UserProfileListParams params
+  - `Optional<Long> limit`
 
-Optional<Long> limit
+    Query parameter for limit
 
-Query parameter for limit
+    format: int32
 
-
+  - `Optional<Order> order`
 
-Optional<[Order](api/beta/user_profiles/list.md)> order
+    Query parameter for order
 
-Query parameter for order
+    - `ASC("asc")`
 
-ASC("asc")
+    - `DESC("desc")`
 
-DESC("desc")
+  - `Optional<OrderBy> orderBy`
 
-Optional<String> page
+    Query parameter for order_by
 
-Query parameter for page
+    - `CREATED_AT("created_at")`
 
-
+    - `NAME("name")`
 
-Optional<List<AnthropicBeta>> betas
+  - `Optional<String> page`
 
-Optional header to specify the beta version(s) you want to use.
+    Query parameter for page
 
-MESSAGE\_BATCHES\_2024\_09\_24("message-batches-2024-09-24")
+  - `Optional<List<AnthropicBeta>> betas`
 
-PROMPT\_CACHING\_2024\_07\_31("prompt-caching-2024-07-31")
+    Optional header to specify the beta version(s) you want to use.
 
-COMPUTER\_USE\_2024\_10\_22("computer-use-2024-10-22")
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
-COMPUTER\_USE\_2025\_01\_24("computer-use-2025-01-24")
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
 
-PDFS\_2024\_09\_25("pdfs-2024-09-25")
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
-TOKEN\_COUNTING\_2024\_11\_01("token-counting-2024-11-01")
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-TOKEN\_EFFICIENT\_TOOLS\_2025\_02\_19("token-efficient-tools-2025-02-19")
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
 
-OUTPUT\_128K\_2025\_02\_19("output-128k-2025-02-19")
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
 
-FILES\_API\_2025\_04\_14("files-api-2025-04-14")
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
 
-MCP\_CLIENT\_2025\_04\_04("mcp-client-2025-04-04")
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
 
-MCP\_CLIENT\_2025\_11\_20("mcp-client-2025-11-20")
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
-DEV\_FULL\_THINKING\_2025\_05\_14("dev-full-thinking-2025-05-14")
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
-INTERLEAVED\_THINKING\_2025\_05\_14("interleaved-thinking-2025-05-14")
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
 
-CODE\_EXECUTION\_2025\_05\_22("code-execution-2025-05-22")
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
 
-EXTENDED\_CACHE\_TTL\_2025\_04\_11("extended-cache-ttl-2025-04-11")
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
 
-CONTEXT\_1M\_2025\_08\_07("context-1m-2025-08-07")
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-CONTEXT\_MANAGEMENT\_2025\_06\_27("context-management-2025-06-27")
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
 
-MODEL\_CONTEXT\_WINDOW\_EXCEEDED\_2025\_08\_26("model-context-window-exceeded-2025-08-26")
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
-SKILLS\_2025\_10\_02("skills-2025-10-02")
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
-FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
-USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
-ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
-CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
-THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
-FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
-AGENT\_MEMORY\_2026\_07\_22("agent-memory-2026-07-22")
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
-##### ReturnsExpand Collapse
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
-class BetaUserProfile:
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
 
-String id
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
-Unique identifier for this user profile, prefixed `uprof_`.
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
-LocalDateTime createdAt
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
-A timestamp in RFC 3339 format
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-Metadata metadata
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
 
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
 
-
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
 
-Relationship relationship
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
 
-How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
 
-One of the following:
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-EXTERNAL("external")
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
 
-RESOLD("resold")
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-INTERNAL("internal")
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
 
-
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-TrustGrants trustGrants
+## Returns
 
-Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+- `class BetaUserProfile:`
 
-
+  - `String id`
 
-Status status
+    Unique identifier for this user profile, prefixed `uprof_`.
 
-Status of the trust grant.
+  - `LocalDateTime createdAt`
 
-One of the following:
+    A timestamp in RFC 3339 format
 
-ACTIVE("active")
+    format: date-time
 
-PENDING("pending")
+  - `Metadata metadata`
 
-REJECTED("rejected")
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-Type type
+  - `TrustGrants trustGrants`
 
-Object type. Always `user_profile`.
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-LocalDateTime updatedAt
+    - `Status status`
 
-A timestamp in RFC 3339 format
+      Status of the trust grant.
 
-Optional<String> externalId
+      - `ACTIVE("active")`
 
-Platform's own identifier for this user. Not enforced unique.
+      - `PENDING("pending")`
 
-Optional<String> name
+      - `REJECTED("rejected")`
 
-Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+  - `Type type`
 
-List User Profiles
+    Object type. Always `user_profile`.
 
-Java
+  - `LocalDateTime updatedAt`
 
-```shiki
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `Optional<AccessType> accessType`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `APPLICATION("application")`
+
+    - `PASSTHROUGH("passthrough")`
+
+  - `Optional<String> externalId`
+
+    Platform's own identifier for this user. Not enforced unique.
+
+  - `Optional<LocalDateTime> externalUserOnboardedAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `Optional<String> name`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
+
+## Example
+
+```java
 package com.anthropic.example;
 
 import com.anthropic.client.AnthropicClient;
@@ -193,18 +213,15 @@ public final class Main {
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
       "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
       "created_at": "2026-03-15T10:00:00Z",
       "metadata": {},
-      "relationship": "external",
       "trust_grants": {
         "cyber": {
           "status": "active"
@@ -212,36 +229,9 @@ Response 200
       },
       "type": "user_profile",
       "updated_at": "2026-03-15T10:00:00Z",
+      "access_type": "application",
       "external_id": "user_12345",
-      "name": "Example User"
-    }
-  ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
-      "created_at": "2026-03-15T10:00:00Z",
-      "metadata": {},
-      "relationship": "external",
-      "trust_grants": {
-        "cyber": {
-          "status": "active"
-        }
-      },
-      "type": "user_profile",
-      "updated_at": "2026-03-15T10:00:00Z",
-      "external_id": "user_12345",
+      "external_user_onboarded_at": "2024-11-02T08:15:00Z",
       "name": "Example User"
     }
   ],

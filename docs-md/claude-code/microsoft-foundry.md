@@ -1,35 +1,101 @@
 # Claude Code on Microsoft Foundry
 
-**Deploying Claude Code across your organization?** Talk to sales about enterprise plans, SSO, and centralized billing.
+> Learn about configuring Claude Code through Microsoft Foundry, including setup, configuration, and troubleshooting.
 
-[View plans](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=foundry_view_plans#plans-business)[Contact sales](https://claude.com/contact-sales?utm_source=claude_code&utm_medium=docs&utm_content=foundry_contact_sales)
+export const ContactSalesCard = ({surface}) => {
+  const utm = content => `utm_source=claude_code&utm_medium=docs&utm_content=${surface}_${content}`;
+  const iconArrowRight = (size = 13) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <line x1="5" y1="12" x2="19" y2="12" />
+      <polyline points="12 5 19 12 12 19" />
+    </svg>;
+  const STYLES = `
+.cc-cs {
+  --cs-slate: #141413;
+  --cs-clay: #d97757;
+  --cs-clay-deep: #c6613f;
+  --cs-gray-000: #ffffff;
+  --cs-gray-700: #3d3d3a;
+  --cs-border-default: rgba(31, 30, 29, 0.15);
+  font-family: inherit;
+}
+.dark .cc-cs {
+  --cs-slate: #f0eee6;
+  --cs-gray-000: #262624;
+  --cs-gray-700: #bfbdb4;
+  --cs-border-default: rgba(240, 238, 230, 0.14);
+}
+.cc-cs-card {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding: 14px 16px; margin: 0;
+  background: var(--cs-gray-000); border: 0.5px solid var(--cs-border-default);
+  border-radius: 8px; flex-wrap: wrap;
+}
+.cc-cs-text { font-size: 13px; color: var(--cs-gray-700); line-height: 1.5; flex: 1; min-width: 240px; }
+.cc-cs-text strong { font-weight: 550; color: var(--cs-slate); }
+.cc-cs-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.cc-cs-btn-clay {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--cs-clay-deep); color: #fff; border: none;
+  border-radius: 8px; padding: 8px 14px;
+  font-size: 13px; font-weight: 500;
+  transition: background-color 0.15s; white-space: nowrap;
+}
+.cc-cs-btn-clay:hover { background: var(--cs-clay); }
+.cc-cs-btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--cs-gray-700);
+  border: 0.5px solid var(--cs-border-default);
+  border-radius: 8px; padding: 8px 14px;
+  font-size: 13px; font-weight: 500;
+}
+.cc-cs-btn-ghost:hover { background: rgba(0, 0, 0, 0.04); }
+.dark .cc-cs-btn-ghost:hover { background: rgba(255, 255, 255, 0.04); }
+@media (max-width: 720px) {
+  .cc-cs-actions { width: 100%; }
+}
+`;
+  return 
+      <style>{STYLES}</style>
+      <strong>Deploying Claude Code across your organization?</strong> Talk to sales about enterprise plans, SSO, and centralized billing.
+      <a href={`https://claude.com/pricing?${utm('view_plans')}#plans-business`} className="cc-cs-btn-ghost">
+        View plans
+      </a>
+      <a href={`https://claude.com/contact-sales?${utm('contact_sales')}`} className="cc-cs-btn-clay">
+        Contact sales {iconArrowRight()}
+      </a>
+    ;
+};
 
-## [​](#prerequisites) Prerequisites
+## Prerequisites
 
 Before configuring Claude Code with Microsoft Foundry, ensure you have:
 
-- An Azure subscription with access to Microsoft Foundry
-- RBAC permissions to create Microsoft Foundry resources and deployments
-- Azure CLI installed and configured (optional - only needed if you don’t have another mechanism for getting credentials)
+* An Azure subscription with access to Microsoft Foundry
+* RBAC permissions to create Microsoft Foundry resources and deployments
+* Azure CLI installed and configured (optional - only needed if you don't have another mechanism for getting credentials)
 
 If you are deploying Claude Code to multiple users, [pin your model versions](#4-pin-model-versions) before rolling out.
 
-## [​](#setup) Setup
+## Setup
 
-### [​](#1-provision-microsoft-foundry-resource) 1. Provision Microsoft Foundry resource
+### 1. Provision Microsoft Foundry resource
 
 First, create a Claude resource in Azure:
 
 1. Navigate to the [Microsoft Foundry portal](https://ai.azure.com/)
 2. Create a new resource, noting your resource name
-3. Create deployments for the Claude models, noting the deployment name you give each; you’ll set these names as the model variables in step 4:
-   - Claude Opus
-   - Claude Sonnet
-   - Claude HaikuWhen you configure a deployment, you also choose its [hosting option](build-with-claude/claude-in-microsoft-foundry.md), which determines whether inference runs on Azure or on Anthropic infrastructure.
+3. Create deployments for the Claude models, noting the deployment name you give each; you'll set these names as the model variables in step 4:
 
-### [​](#2-configure-azure-credentials) 2. Configure Azure credentials
+   * Claude Opus
+   * Claude Sonnet
+   * Claude Haiku
+
+   When you configure a deployment, you also choose its [hosting option](build-with-claude/claude-in-microsoft-foundry.md), which determines whether inference runs on Azure or on Anthropic infrastructure.
+
+### 2. Configure Azure credentials
 
 Claude Code supports three authentication methods for Microsoft Foundry. Choose the method that best fits your security requirements.
+
 **Option A: API key authentication**
 
 1. Navigate to your resource in the Microsoft Foundry portal
@@ -37,24 +103,28 @@ Claude Code supports three authentication methods for Microsoft Foundry. Choose 
 3. Copy **API Key**
 4. Set the environment variable, replacing `your-azure-api-key` with the key you copied:
 
-```shiki
+```bash
 export ANTHROPIC_FOUNDRY_API_KEY=your-azure-api-key
 ```
 
 **Option B: Microsoft Entra ID authentication**
+
 When neither `ANTHROPIC_FOUNDRY_API_KEY` nor `ANTHROPIC_FOUNDRY_AUTH_TOKEN` is set, Claude Code automatically uses the Azure SDK [default credential chain](https://learn.microsoft.com/en-us/azure/developer/javascript/sdk/authentication/credential-chains#defaultazurecredential-overview).
 This supports a variety of methods for authenticating local and remote workloads.
+
 On local environments, you commonly may use the Azure CLI:
 
-```shiki
+```bash
 az login
 ```
 
 **Option C: Bearer token authentication**
+
 Claude Code sends the value of `ANTHROPIC_FOUNDRY_AUTH_TOKEN` on every request as the `Authorization: Bearer` header. Use this option when another process, such as a host application or a sign-in script, has already obtained an access token for you. Requires Claude Code v2.1.203 or later.
+
 Set the variable to a bearer token that Microsoft Entra ID issued for your resource:
 
-```shiki
+```bash
 export ANTHROPIC_FOUNDRY_AUTH_TOKEN=your-entra-access-token
 ```
 
@@ -62,11 +132,11 @@ export ANTHROPIC_FOUNDRY_AUTH_TOKEN=your-entra-access-token
 
 When using Microsoft Foundry, the `/logout` command is unavailable since authentication is handled through Azure credentials.
 
-### [​](#3-configure-claude-code) 3. Configure Claude Code
+### 3. Configure Claude Code
 
 Set the following environment variables to enable Microsoft Foundry:
 
-```shiki
+```bash
 # Enable Microsoft Foundry integration
 export CLAUDE_CODE_USE_FOUNDRY=1
 
@@ -76,46 +146,51 @@ export ANTHROPIC_FOUNDRY_RESOURCE={resource}
 # export ANTHROPIC_FOUNDRY_BASE_URL=https://{resource}.services.ai.azure.com/anthropic
 ```
 
-### [​](#4-pin-model-versions) 4. Pin model versions
+### 4. Pin model versions
 
-Pin specific model versions for every deployment. Without pinning, model aliases such as `sonnet` and `opus` resolve to Claude Code’s built-in default for Microsoft Foundry, which can lag the newest release and may not yet be available in your account. Microsoft Foundry has no startup model check, so requests fail when the default is unavailable. When you create Azure deployments, select a specific model version rather than “auto-update to latest.”
+Pin specific model versions for every deployment. Without pinning, model aliases such as `sonnet` and `opus` resolve to Claude Code's built-in default for Microsoft Foundry, which can lag the newest release and may not yet be available in your account. Microsoft Foundry has no startup model check, so requests fail when the default is unavailable. When you create Azure deployments, select a specific model version rather than "auto-update to latest."
 
 Set the model variables to match the deployment names you created in step 1.
+
 Without `ANTHROPIC_DEFAULT_OPUS_MODEL`, the `opus` alias on Microsoft Foundry resolves to Opus 4.6. Set it to the ID of a newer Opus model, such as Opus 4.8:
 
-```shiki
+```bash
 export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-8'
 export ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-5'
 export ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5'
 ```
 
 Background tasks such as session title generation use the small/fast model, normally a Haiku-class model. On Microsoft Foundry, Claude Code defaults this to the primary model because not every account has a Haiku deployment. To use Haiku for background tasks, set `ANTHROPIC_DEFAULT_HAIKU_MODEL` to a Haiku deployment that is available in your account, as shown above.
+
 For current and legacy model IDs, see [Models overview](about-claude/models/overview.md). See [Model configuration](model-config.md) for the full list of environment variables.
+
 [Prompt caching](prompt-caching.md) is enabled automatically. To request a 1-hour cache TTL instead of the 5-minute default, set the following variable; cache writes with a 1-hour TTL are billed at a higher rate:
 
-```shiki
+```bash
 export ENABLE_PROMPT_CACHING_1H=1
 ```
 
 To set different TTLs for your main conversation and for the requests Claude Code makes outside it, [choose the TTL yourself](prompt-caching.md).
 
-### [​](#5-run-claude-code) 5. Run Claude Code
+### 5. Run Claude Code
 
 With the environment variables set, start Claude Code from your project directory:
 
-```shiki
+```bash
 claude
 ```
 
-Claude Code reads `CLAUDE_CODE_USE_FOUNDRY` and the other Microsoft Foundry variables from the environment and connects to your Azure resource on the first prompt. Unlike Amazon Bedrock and Google Cloud’s Agent Platform, Microsoft Foundry has no interactive setup wizard, so the environment variables in steps 3 and 4 are the only configuration path.
+Claude Code reads `CLAUDE_CODE_USE_FOUNDRY` and the other Microsoft Foundry variables from the environment and connects to your Azure resource on the first prompt. Unlike Amazon Bedrock and Google Cloud's Agent Platform, Microsoft Foundry has no interactive setup wizard, so the environment variables in steps 3 and 4 are the only configuration path.
+
 To verify your setup, run `/status` inside Claude Code. The API provider line shows `Microsoft Foundry`, along with the resource name or base URL you configured.
 
-## [​](#azure-rbac-configuration) Azure RBAC configuration
+## Azure RBAC configuration
 
 The `Azure AI User` and `Cognitive Services User` default roles include all required permissions for invoking Claude models.
+
 For more restrictive permissions, create a custom role with the following:
 
-```shiki
+```json
 {
   "permissions": [
     {
@@ -129,21 +204,21 @@ For more restrictive permissions, create a custom role with the following:
 
 For details, see [Microsoft Foundry RBAC documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/concepts/rbac-azure-ai-foundry).
 
-## [​](#troubleshooting) Troubleshooting
+## Troubleshooting
 
-If you receive an error “Failed to get token from azureADTokenProvider: ChainedTokenCredential authentication failed”:
+If you receive an error "Failed to get token from azureADTokenProvider: ChainedTokenCredential authentication failed":
 
-- Configure Entra ID on the environment, or set `ANTHROPIC_FOUNDRY_API_KEY`.
+* Configure Entra ID on the environment, or set `ANTHROPIC_FOUNDRY_API_KEY`.
 
 If requests fail with repeated connection errors on the first prompt:
 
-- Check that `ANTHROPIC_FOUNDRY_RESOURCE` is set to your actual resource name rather than a placeholder. Claude Code builds the endpoint URL from this value, so an incorrect name points at a host that doesn’t exist.
+* Check that `ANTHROPIC_FOUNDRY_RESOURCE` is set to your actual resource name rather than a placeholder. Claude Code builds the endpoint URL from this value, so an incorrect name points at a host that doesn't exist.
 
-## [​](#additional-resources) Additional resources
+## Additional resources
 
-- [Microsoft Foundry documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/what-is-azure-ai-foundry)
-- [Microsoft Foundry models](https://ai.azure.com/explore/models)
-- [Microsoft Foundry pricing](https://azure.microsoft.com/en-us/pricing/details/ai-foundry/)
+* [Microsoft Foundry documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/what-is-azure-ai-foundry)
+* [Microsoft Foundry models](https://ai.azure.com/explore/models)
+* [Microsoft Foundry pricing](https://azure.microsoft.com/en-us/pricing/details/ai-foundry/)
 
 ---
 

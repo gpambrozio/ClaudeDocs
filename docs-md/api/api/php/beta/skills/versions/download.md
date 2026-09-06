@@ -1,50 +1,36 @@
 # Download Skill Version Content
 
-Copy page
+`$client->beta->skills->versions->download(string version, string skillID, ?list<AnthropicBeta> betas): download`
 
-
-
-PHP
-
-# Download Skill Version Content
-
-$client->beta->skills->versions->download(string version, string skillID, ?list<AnthropicBeta> betas): download
-
-GET/v1/skills/{skill\_id}/versions/{version}/content
+**GET** `/v1/skills/{skill_id}/versions/{version}/content`
 
 Download a skill version's content as a zip archive.
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `skillID: string`
 
-skillID: string
+  Unique identifier for the skill.
 
-Unique identifier for the skill.
+  The format and length of IDs may change over time.
 
-The format and length of IDs may change over time.
+- `version: string`
 
-
+  Identifies the skill version by its version ID.
 
-version: string
+  Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
-Version identifier for the skill.
+- `betas?:optional list<AnthropicBeta>`
 
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+  Optional header to specify the beta version(s) you want to use.
 
-betas?:optional list<AnthropicBeta>
+## Returns
 
-Optional header to specify the beta version(s) you want to use.
+- `mixed`
 
-##### ReturnsExpand Collapse
+## Example
 
-mixed
-
-Download Skill Version Content
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -52,13 +38,13 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $response = $client->beta->skills->versions->download(
-  'version', skillID: 'skill_id', betas: ['message-batches-2024-09-24']
+  'version',
+  skillID: 'skill_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($response);
 ```
-
-##### Returns Examples
 
 ---
 

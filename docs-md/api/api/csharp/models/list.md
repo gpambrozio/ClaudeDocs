@@ -1,368 +1,260 @@
 # List Models
 
-Copy page
+`ModelListPage Models.List(parameters, cancellationToken = default)`
 
-
-
-C#
-
-# List Models
-
-[ModelListPageResponse](api/models.md) Models.List(ModelListParams?parameters, CancellationTokencancellationToken = default)
-
-GET/v1/models
+**GET** `/v1/models`
 
 List available models.
 
 The Models API response can be used to determine which models are available for use in the API. More recently released models are listed first.
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `ModelListParams parameters`
 
-ModelListParams parameters
+  - `string afterID`
 
-string afterID
+    Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+  - `string beforeID`
 
-string beforeID
+    Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+  - `long limit`
 
-
+    Query param: Number of items to return per page.
 
-Long limit
+    Defaults to `20`. Ranges from `1` to `1000`.
 
-Query param: Number of items to return per page.
+    maximum: 1000, minimum: 1
 
-Defaults to `20`. Ranges from `1` to `1000`.
+  - `IReadOnlyList<AnthropicBeta> betas`
 
-maximum1000
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-minimum1
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
-
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
 
-IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
 
-"message-batches-2024-09-24"MessageBatches2024\_09\_24
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
 
-"prompt-caching-2024-07-31"PromptCaching2024\_07\_31
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
 
-"computer-use-2024-10-22"ComputerUse2024\_10\_22
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
 
-"computer-use-2025-01-24"ComputerUse2025\_01\_24
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
 
-"pdfs-2024-09-25"Pdfs2024\_09\_25
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
 
-"token-counting-2024-11-01"TokenCounting2024\_11\_01
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
 
-"token-efficient-tools-2025-02-19"TokenEfficientTools2025\_02\_19
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
 
-"output-128k-2025-02-19"Output128k2025\_02\_19
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
 
-"files-api-2025-04-14"FilesApi2025\_04\_14
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
 
-"mcp-client-2025-04-04"McpClient2025\_04\_04
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
 
-"mcp-client-2025-11-20"McpClient2025\_11\_20
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
 
-"dev-full-thinking-2025-05-14"DevFullThinking2025\_05\_14
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
 
-"interleaved-thinking-2025-05-14"InterleavedThinking2025\_05\_14
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
 
-"code-execution-2025-05-22"CodeExecution2025\_05\_22
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025\_04\_11
+    - `Skills2025_10_02("skills-2025-10-02")`
 
-"context-1m-2025-08-07"Context1m2025\_08\_07
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
 
-"context-management-2025-06-27"ContextManagement2025\_06\_27
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
 
-"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025\_08\_26
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
 
-"skills-2025-10-02"Skills2025\_10\_02
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
-"fast-mode-2026-02-01"FastMode2026\_02\_01
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
-"output-300k-2026-03-24"Output300k2026\_03\_24
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
 
-"user-profiles-2026-03-24"UserProfiles2026\_03\_24
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
 
-"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
 
-"managed-agents-2026-04-01"ManagedAgents2026\_04\_01
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
 
-"cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
 
-"thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
 
-"server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
 
-"fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
 
-"agent-memory-2026-07-22"AgentMemory2026\_07\_22
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
 
-##### ReturnsExpand Collapse
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-
+    - `Compact2026_01_12("compact-2026-01-12")`
 
-class ModelListPageResponse:
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
 
-
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
 
-required IReadOnlyList<[ModelInfo](api/models.md)> Data
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
 
-required string ID
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
 
-Unique model identifier.
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
 
-
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
 
-required [ModelCapabilities](api/models.md)? Capabilities
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-Model capability information.
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
 
-
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-required [CapabilitySupport](api/models.md) Batch
+## Returns
 
-Whether the model supports the Batch API.
+- `class ModelInfo:`
 
-required Boolean Supported
+  - `required string ID`
 
-Whether this capability is supported by the model.
+    Unique model identifier.
 
-
+  - `required ModelCapabilities? Capabilities`
 
-required [CapabilitySupport](api/models.md) Citations
+    Model capability information.
 
-Whether the model supports citation generation.
+    - `required CapabilitySupport Batch`
 
-required Boolean Supported
+      Whether the model supports the Batch API.
 
-Whether this capability is supported by the model.
+      - `required bool Supported`
 
-
+        Whether this capability is supported by the model.
 
-required [CapabilitySupport](api/models.md) CodeExecution
+    - `required CapabilitySupport Citations`
 
-Whether the model supports code execution tools.
+      Whether the model supports citation generation.
 
-required Boolean Supported
+    - `required CapabilitySupport CodeExecution`
 
-Whether this capability is supported by the model.
+      Whether the model supports code execution tools.
 
-
+    - `required ContextManagementCapability ContextManagement`
 
-required [ContextManagementCapability](api/models.md) ContextManagement
+      Context management support and available strategies.
 
-Context management support and available strategies.
+      - `required CapabilitySupport? ClearThinking20251015`
 
-
+        Indicates whether a capability is supported.
 
-required [CapabilitySupport](api/models.md)? ClearThinking20251015
+      - `required CapabilitySupport? ClearToolUses20250919`
 
-Indicates whether a capability is supported.
+        Indicates whether a capability is supported.
 
-required Boolean Supported
+      - `required CapabilitySupport? Compact20260112`
 
-Whether this capability is supported by the model.
+        Indicates whether a capability is supported.
 
-
+      - `required bool Supported`
 
-required [CapabilitySupport](api/models.md)? ClearToolUses20250919
+        Whether this capability is supported by the model.
 
-Indicates whether a capability is supported.
+    - `required EffortCapability Effort`
 
-required Boolean Supported
+      Effort (reasoning_effort) support and available levels.
 
-Whether this capability is supported by the model.
+      - `required CapabilitySupport High`
 
-
+        Whether the model supports high effort level.
 
-required [CapabilitySupport](api/models.md)? Compact20260112
+      - `required CapabilitySupport Low`
 
-Indicates whether a capability is supported.
+        Whether the model supports low effort level.
 
-required Boolean Supported
+      - `required CapabilitySupport Max`
 
-Whether this capability is supported by the model.
+        Whether the model supports max effort level.
 
-required Boolean Supported
+      - `required CapabilitySupport Medium`
 
-Whether this capability is supported by the model.
+        Whether the model supports medium effort level.
 
-
+      - `required bool Supported`
 
-required [EffortCapability](api/models.md) Effort
+        Whether this capability is supported by the model.
 
-Effort (reasoning\_effort) support and available levels.
+      - `required CapabilitySupport? Xhigh`
 
-
+        Indicates whether a capability is supported.
 
-required [CapabilitySupport](api/models.md) High
+    - `required CapabilitySupport ImageInput`
 
-Whether the model supports high effort level.
+      Whether the model accepts image content blocks.
 
-required Boolean Supported
+    - `required CapabilitySupport PdfInput`
 
-Whether this capability is supported by the model.
+      Whether the model accepts PDF content blocks.
 
-
+    - `required CapabilitySupport StructuredOutputs`
 
-required [CapabilitySupport](api/models.md) Low
+      Whether the model supports structured output / JSON mode / strict tool schemas.
 
-Whether the model supports low effort level.
+    - `required ThinkingCapability Thinking`
 
-required Boolean Supported
+      Thinking capability and supported type configurations.
 
-Whether this capability is supported by the model.
+      - `required bool Supported`
 
-
+        Whether this capability is supported by the model.
 
-required [CapabilitySupport](api/models.md) Max
+      - `required ThinkingTypes Types`
 
-Whether the model supports max effort level.
+        Supported thinking type configurations.
 
-required Boolean Supported
+        - `required CapabilitySupport Adaptive`
 
-Whether this capability is supported by the model.
+          Whether the model supports thinking with type 'adaptive' (auto).
 
-
+        - `required CapabilitySupport Enabled`
 
-required [CapabilitySupport](api/models.md) Medium
+          Whether the model supports thinking with type 'enabled'.
 
-Whether the model supports medium effort level.
+  - `required DateTimeOffset CreatedAt`
 
-required Boolean Supported
+    RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-Whether this capability is supported by the model.
+    format: date-time
 
-required Boolean Supported
+  - `required string DisplayName`
 
-Whether this capability is supported by the model.
+    A human-readable name for the model.
 
-
+  - `required long? MaxInputTokens`
 
-required [CapabilitySupport](api/models.md)? Xhigh
+    Maximum input context window size in tokens for this model.
 
-Indicates whether a capability is supported.
+  - `required long? MaxTokens`
 
-required Boolean Supported
+    Maximum value for the `max_tokens` parameter when using this model.
 
-Whether this capability is supported by the model.
+  - `JsonElement Type = "model"`
 
-
+    Object type.
 
-required [CapabilitySupport](api/models.md) ImageInput
+    For Models, this is always `"model"`.
 
-Whether the model accepts image content blocks.
+## Example
 
-required Boolean Supported
-
-Whether this capability is supported by the model.
-
-
-
-required [CapabilitySupport](api/models.md) PdfInput
-
-Whether the model accepts PDF content blocks.
-
-required Boolean Supported
-
-Whether this capability is supported by the model.
-
-
-
-required [CapabilitySupport](api/models.md) StructuredOutputs
-
-Whether the model supports structured output / JSON mode / strict tool schemas.
-
-required Boolean Supported
-
-Whether this capability is supported by the model.
-
-
-
-required [ThinkingCapability](api/models.md) Thinking
-
-Thinking capability and supported type configurations.
-
-required Boolean Supported
-
-Whether this capability is supported by the model.
-
-
-
-required [ThinkingTypes](api/models.md) Types
-
-Supported thinking type configurations.
-
-
-
-required [CapabilitySupport](api/models.md) Adaptive
-
-Whether the model supports thinking with type 'adaptive' (auto).
-
-required Boolean Supported
-
-Whether this capability is supported by the model.
-
-
-
-required [CapabilitySupport](api/models.md) Enabled
-
-Whether the model supports thinking with type 'enabled'.
-
-required Boolean Supported
-
-Whether this capability is supported by the model.
-
-required DateTimeOffset CreatedAt
-
-RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
-
-required string DisplayName
-
-A human-readable name for the model.
-
-required Long? MaxInputTokens
-
-Maximum input context window size in tokens for this model.
-
-required Long? MaxTokens
-
-Maximum value for the `max_tokens` parameter when using this model.
-
-
-
-JsonElement Type "model"constant
-
-Object type.
-
-For Models, this is always `"model"`.
-
-required string? FirstID
-
-First ID in the `data` list. Can be used as the `before_id` for the previous page.
-
-required Boolean HasMore
-
-Indicates if there are more results in the requested page direction.
-
-required string? LastID
-
-Last ID in the `data` list. Can be used as the `after_id` for the next page.
-
-List Models
-
-C#
-
-```shiki
+```csharp
 ModelListParams parameters = new();
 
 var page = await client.Models.List(parameters);
@@ -372,15 +264,13 @@ await foreach (var item in page.Paginate())
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
-      "id": "claude-opus-4-6",
+      "id": "claude-opus-5",
       "capabilities": {
         "batch": {
           "supported": true
@@ -442,93 +332,8 @@ Response 200
           }
         }
       },
-      "created_at": "2026-02-04T00:00:00Z",
-      "display_name": "Claude Opus 4.6",
-      "max_input_tokens": 0,
-      "max_tokens": 0,
-      "type": "model"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "claude-opus-4-6",
-      "capabilities": {
-        "batch": {
-          "supported": true
-        },
-        "citations": {
-          "supported": true
-        },
-        "code_execution": {
-          "supported": true
-        },
-        "context_management": {
-          "clear_thinking_20251015": {
-            "supported": true
-          },
-          "clear_tool_uses_20250919": {
-            "supported": true
-          },
-          "compact_20260112": {
-            "supported": true
-          },
-          "supported": true
-        },
-        "effort": {
-          "high": {
-            "supported": true
-          },
-          "low": {
-            "supported": true
-          },
-          "max": {
-            "supported": true
-          },
-          "medium": {
-            "supported": true
-          },
-          "supported": true,
-          "xhigh": {
-            "supported": true
-          }
-        },
-        "image_input": {
-          "supported": true
-        },
-        "pdf_input": {
-          "supported": true
-        },
-        "structured_outputs": {
-          "supported": true
-        },
-        "thinking": {
-          "supported": true,
-          "types": {
-            "adaptive": {
-              "supported": true
-            },
-            "enabled": {
-              "supported": true
-            }
-          }
-        }
-      },
-      "created_at": "2026-02-04T00:00:00Z",
-      "display_name": "Claude Opus 4.6",
+      "created_at": "2026-07-24T00:00:00Z",
+      "display_name": "Claude Opus 5",
       "max_input_tokens": 0,
       "max_tokens": 0,
       "type": "model"

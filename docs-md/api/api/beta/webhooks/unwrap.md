@@ -1,23 +1,8 @@
 # Unwrap
 
-Copy page
-
-cURL
-
-# Unwrap
-
-Function
-
-##### Supported Languages
-
-This method is available in:
-
-- [Python](api/python/resources/beta/subresources/webhooks/methods/unwrap.md)
-- [TypeScript](api/typescript/resources/beta/subresources/webhooks/methods/unwrap.md)
-- [Go](api/go/resources/beta/subresources/webhooks/methods/unwrap.md)
-- [Ruby](api/ruby/resources/beta/subresources/webhooks/methods/unwrap.md)
-
-##### Returns Examples
+Verifies the webhook signature from the `webhook-id`, `webhook-timestamp` and `webhook-signature`
+headers using your webhook signing key, then parses the payload into an event. Fails if the
+signature is missing or invalid.
 
 ---
 

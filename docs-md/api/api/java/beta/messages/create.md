@@ -1,16 +1,8 @@
 # Create a Message
 
-Copy page
+`BetaMessage beta().messages().create(params, requestOptions = RequestOptions.none())`
 
-
-
-Java
-
-# Create a Message
-
-[BetaMessage](api/beta/messages.md) beta().messages().create(MessageCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
-
-POST/v1/messages
+**POST** `/v1/messages`
 
 Send a structured list of input messages with text and/or image content, and the model will generate the next message in the conversation.
 
@@ -18,13067 +10,5510 @@ The Messages API can be used for either single queries or stateless multi-turn c
 
 Learn more about the Messages API in our [user guide](get-started.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `MessageCreateParams params`
 
-MessageCreateParams params
+  - `Optional<List<AnthropicBeta>> betas`
 
-
+    Optional header to specify the beta version(s) you want to use.
 
-Optional<List<AnthropicBeta>> betas
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
-Optional header to specify the beta version(s) you want to use.
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
 
-MESSAGE\_BATCHES\_2024\_09\_24("message-batches-2024-09-24")
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
-PROMPT\_CACHING\_2024\_07\_31("prompt-caching-2024-07-31")
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-COMPUTER\_USE\_2024\_10\_22("computer-use-2024-10-22")
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
 
-COMPUTER\_USE\_2025\_01\_24("computer-use-2025-01-24")
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
 
-PDFS\_2024\_09\_25("pdfs-2024-09-25")
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
 
-TOKEN\_COUNTING\_2024\_11\_01("token-counting-2024-11-01")
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
 
-TOKEN\_EFFICIENT\_TOOLS\_2025\_02\_19("token-efficient-tools-2025-02-19")
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
-OUTPUT\_128K\_2025\_02\_19("output-128k-2025-02-19")
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
-FILES\_API\_2025\_04\_14("files-api-2025-04-14")
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
 
-MCP\_CLIENT\_2025\_04\_04("mcp-client-2025-04-04")
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
 
-MCP\_CLIENT\_2025\_11\_20("mcp-client-2025-11-20")
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
 
-DEV\_FULL\_THINKING\_2025\_05\_14("dev-full-thinking-2025-05-14")
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-INTERLEAVED\_THINKING\_2025\_05\_14("interleaved-thinking-2025-05-14")
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
 
-CODE\_EXECUTION\_2025\_05\_22("code-execution-2025-05-22")
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
-EXTENDED\_CACHE\_TTL\_2025\_04\_11("extended-cache-ttl-2025-04-11")
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
-CONTEXT\_1M\_2025\_08\_07("context-1m-2025-08-07")
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-CONTEXT\_MANAGEMENT\_2025\_06\_27("context-management-2025-06-27")
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
-MODEL\_CONTEXT\_WINDOW\_EXCEEDED\_2025\_08\_26("model-context-window-exceeded-2025-08-26")
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
-SKILLS\_2025\_10\_02("skills-2025-10-02")
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
-OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
-USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
-MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
-CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
-THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
-FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
 
-AGENT\_MEMORY\_2026\_07\_22("agent-memory-2026-07-22")
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
-Optional<String> userProfileId
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
-The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
-
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-long maxTokens
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
 
-The maximum number of tokens to generate before stopping.
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
 
-Note that our models may stop *before* reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
 
-Set to `0` to populate the [prompt cache](build-with-claude/prompt-caching.md) without generating a response.
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
 
-Different models have different maximum values for this parameter. See [models](about-claude/models/overview.md) for details.
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
 
-minimum0
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
 
-List<[BetaMessageParam](api/beta/messages.md)> messages
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-Input messages.
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
 
-Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
+  - `Optional<String> userProfileId`
 
-If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
+    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
-Example with a single `user` message:
+  - `long maxTokens`
 
-```shiki
-[{"role": "user", "content": "Hello, Claude"}]
-```
+    The maximum number of tokens to generate before stopping.
 
-
+    Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-Example with multiple conversational turns:
+    Set to `0` to populate the [prompt cache](build-with-claude/prompt-caching.md) without generating a response.
 
-```shiki
-[
-  {"role": "user", "content": "Hello there."},
-  {"role": "assistant", "content": "Hi, I'm Claude. How can I help you?"},
-  {"role": "user", "content": "Can you explain LLMs in plain English?"},
-]
-```
+    Different models have different maximum values for this parameter.  See [models](about-claude/models/overview.md) for details.
 
-
+    minimum: 0
 
-Example with a partially-filled response from Claude:
+  - `List<BetaMessageParam> messages`
 
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("},
-]
-```
+    Input messages.
 
-
+    Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
 
-Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
+    Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
 
-```shiki
-{"role": "user", "content": "Hello, Claude"}
-```
+    If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
 
-
+    Example with a single `user` message:
 
-```shiki
-{"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
-```
+    ```json
+    [{"role": "user", "content": "Hello, Claude"}]
+    ```
 
-
+    Example with multiple conversational turns:
 
-See [input examples](build-with-claude/working-with-messages.md).
+    ```json
+    [
+      {"role": "user", "content": "Hello there."},
+      {"role": "assistant", "content": "Hi, I'm Claude. How can I help you?"},
+      {"role": "user", "content": "Can you explain LLMs in plain English?"},
+    ]
+    ```
 
-Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+    Example with a partially-filled response from Claude:
 
-There is a limit of 100,000 messages in a single request.
+    ```json
+    [
+      {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+      {"role": "assistant", "content": "The best answer is ("},
+    ]
+    ```
 
-
+    Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
 
-Content content
+    ```json
+    {"role": "user", "content": "Hello, Claude"}
+    ```
 
-One of the following:
+    ```json
+    {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
+    ```
 
-String
+    See [input examples](build-with-claude/working-with-messages.md).
 
-
+    Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
-List<[BetaContentBlockParam](api/beta/messages.md)>
+    There is a limit of 100,000 messages in a single request.
 
-One of the following:
+    - `Content content`
 
-
+      - `String`
 
-class BetaTextBlockParam:
+      - `List<BetaContentBlockParam>`
 
-String text
+        - `class BetaTextBlockParam:`
 
-JsonValue; type "text"constant"text"constant
+          - `String text`
 
-
+            minLength: 1
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+          - `JsonValue type = "text"`
 
-Create a cache control breakpoint at this content block.
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+            Create a cache control breakpoint at this content block.
 
-
+            - `JsonValue type = "ephemeral"`
 
-Optional<Ttl> ttl
+            - `Optional<Ttl> ttl`
 
-The time-to-live for the cache control breakpoint.
+              The time-to-live for the cache control breakpoint.
 
-This may be one the following values:
+              This may be one the following values:
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+              - `5m`: 5 minutes
+              - `1h`: 1 hour
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+              Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
-One of the following:
+              - `TTL_5M("5m")`
 
-TTL\_5M("5m")
+              - `TTL_1H("1h")`
 
-TTL\_1H("1h")
+          - `Optional<List<BetaTextCitationParam>> citations`
 
-
+            - `class BetaCitationCharLocationParam:`
 
-Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
+              - `String citedText`
 
-One of the following:
+              - `long documentIndex`
 
-
+                minimum: 0
 
-class BetaCitationCharLocationParam:
+              - `Optional<String> documentTitle`
 
-String citedText
+                maxLength: 500, minLength: 1
 
-long documentIndex
+              - `long endCharIndex`
 
-Optional<String> documentTitle
+              - `long startCharIndex`
 
-long endCharIndex
+                minimum: 0
 
-long startCharIndex
+              - `JsonValue type = "char_location"`
 
-JsonValue; type "char\_location"constant"char\_location"constant
+            - `class BetaCitationPageLocationParam:`
 
-
+              - `String citedText`
 
-class BetaCitationPageLocationParam:
+              - `long documentIndex`
 
-String citedText
+                minimum: 0
 
-long documentIndex
+              - `Optional<String> documentTitle`
 
-Optional<String> documentTitle
+                maxLength: 500, minLength: 1
 
-long endPageNumber
+              - `long endPageNumber`
 
-long startPageNumber
+              - `long startPageNumber`
 
-JsonValue; type "page\_location"constant"page\_location"constant
+                minimum: 1
 
-
+              - `JsonValue type = "page_location"`
 
-class BetaCitationContentBlockLocationParam:
+            - `class BetaCitationContentBlockLocationParam:`
 
-
+              - `String citedText`
 
-String citedText
+                The full text of the cited block range, concatenated.
 
-The full text of the cited block range, concatenated.
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+              - `long documentIndex`
 
-long documentIndex
+                minimum: 0
 
-Optional<String> documentTitle
+              - `Optional<String> documentTitle`
 
-
+                maxLength: 500, minLength: 1
 
-long endBlockIndex
+              - `long endBlockIndex`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-long startBlockIndex
+              - `long startBlockIndex`
 
-0-based index of the first cited block in the source's `content` array.
+                0-based index of the first cited block in the source's `content` array.
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+                minimum: 0
 
-
+              - `JsonValue type = "content_block_location"`
 
-class BetaCitationWebSearchResultLocationParam:
+            - `class BetaCitationWebSearchResultLocationParam:`
 
-String citedText
+              - `String citedText`
 
-String encryptedIndex
+              - `String encryptedIndex`
 
-Optional<String> title
+              - `Optional<String> title`
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+                maxLength: 512, minLength: 1
 
-String url
+              - `JsonValue type = "web_search_result_location"`
 
-
+              - `String url`
 
-class BetaCitationSearchResultLocationParam:
+                minLength: 1
 
-
+            - `class BetaCitationSearchResultLocationParam:`
 
-String citedText
+              - `String citedText`
 
-The full text of the cited block range, concatenated.
+                The full text of the cited block range, concatenated.
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-
+              - `long endBlockIndex`
 
-long endBlockIndex
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+              - `long searchResultIndex`
 
-
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
-long searchResultIndex
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+                minimum: 0
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+              - `String source`
 
-minimum0
+              - `long startBlockIndex`
 
-String source
+                0-based index of the first cited block in the source's `content` array.
 
-long startBlockIndex
+                minimum: 0
 
-0-based index of the first cited block in the source's `content` array.
+              - `Optional<String> title`
 
-Optional<String> title
+              - `JsonValue type = "search_result_location"`
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+        - `class BetaImageBlockParam:`
 
-
+          - `Source source`
 
-class BetaImageBlockParam:
+            - `class BetaBase64ImageSource:`
 
-
+              - `String data`
 
-Source source
+                format: byte
 
-One of the following:
+              - `MediaType mediaType`
 
-
+                - `IMAGE_JPEG("image/jpeg")`
 
-class BetaBase64ImageSource:
+                - `IMAGE_PNG("image/png")`
 
-String data
+                - `IMAGE_GIF("image/gif")`
 
-
+                - `IMAGE_WEBP("image/webp")`
 
-MediaType mediaType
+              - `JsonValue type = "base64"`
 
-One of the following:
+            - `class BetaUrlImageSource:`
 
-IMAGE\_JPEG("image/jpeg")
+              - `JsonValue type = "url"`
 
-IMAGE\_PNG("image/png")
+              - `String url`
 
-IMAGE\_GIF("image/gif")
+            - `class BetaFileImageSource:`
 
-IMAGE\_WEBP("image/webp")
+              - `String fileId`
 
-JsonValue; type "base64"constant"base64"constant
+              - `JsonValue type = "file"`
 
-
+          - `JsonValue type = "image"`
 
-class BetaUrlImageSource:
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-JsonValue; type "url"constant"url"constant
+            Create a cache control breakpoint at this content block.
 
-String url
+          - `Optional<BetaImageTransformationsParam> transformations`
 
-
+            Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
 
-class BetaFileImageSource:
+            - `Optional<OversizedImage> oversizedImage`
 
-String fileId
+              What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
 
-JsonValue; type "file"constant"file"constant
+              - `DOWNSIZE("downsize")`
 
-JsonValue; type "image"constant"image"constant
+              - `ERROR("error")`
 
-
+        - `class BetaRequestDocumentBlock:`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+          - `Source source`
 
-Create a cache control breakpoint at this content block.
+            - `class BetaBase64PdfSource:`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+              - `String data`
 
-
+                format: byte
 
-Optional<Ttl> ttl
+              - `JsonValue mediaType = "application/pdf"`
 
-The time-to-live for the cache control breakpoint.
+              - `JsonValue type = "base64"`
 
-This may be one the following values:
+            - `class BetaPlainTextSource:`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+              - `String data`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+              - `JsonValue mediaType = "text/plain"`
 
-One of the following:
+              - `JsonValue type = "text"`
 
-TTL\_5M("5m")
+            - `class BetaContentBlockSource:`
 
-TTL\_1H("1h")
+              - `Content content`
 
-
+                - `String`
 
-class BetaRequestDocumentBlock:
+                - `List<BetaContentBlockSourceContent>`
 
-
+                  - `class BetaTextBlockParam:`
 
-Source source
+                  - `class BetaImageBlockParam:`
 
-One of the following:
+              - `JsonValue type = "content"`
 
-
+            - `class BetaUrlPdfSource:`
 
-class BetaBase64PdfSource:
+              - `JsonValue type = "url"`
 
-String data
+              - `String url`
 
-JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+            - `class BetaFileDocumentSource:`
 
-JsonValue; type "base64"constant"base64"constant
+              - `String fileId`
 
-
+              - `JsonValue type = "file"`
 
-class BetaPlainTextSource:
+          - `JsonValue type = "document"`
 
-String data
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-JsonValue; mediaType "text/plain"constant"text/plain"constant
+            Create a cache control breakpoint at this content block.
 
-JsonValue; type "text"constant"text"constant
+          - `Optional<BetaCitationsConfigParam> citations`
 
-
+            - `Optional<Boolean> enabled`
 
-class BetaContentBlockSource:
+          - `Optional<String> context`
 
-
+            minLength: 1
 
-Content content
+          - `Optional<String> title`
 
-One of the following:
+            maxLength: 500, minLength: 1
 
-String
+        - `class BetaSearchResultBlockParam:`
 
-
+          - `List<BetaTextBlockParam> content`
 
-List<[BetaContentBlockSourceContent](api/beta/messages.md)>
+            - `String text`
 
-One of the following:
+              minLength: 1
 
-
+            - `JsonValue type = "text"`
 
-class BetaTextBlockParam:
+            - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-String text
+              Create a cache control breakpoint at this content block.
 
-JsonValue; type "text"constant"text"constant
+            - `Optional<List<BetaTextCitationParam>> citations`
 
-
+          - `String source`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+          - `String title`
 
-Create a cache control breakpoint at this content block.
+          - `JsonValue type = "search_result"`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-
+            Create a cache control breakpoint at this content block.
 
-Optional<Ttl> ttl
+          - `Optional<BetaCitationsConfigParam> citations`
 
-The time-to-live for the cache control breakpoint.
+        - `class BetaThinkingBlockParam:`
 
-This may be one the following values:
+          - `String signature`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            The `signature` value of this thinking block, exactly as returned by the API in a previous response. Used to verify that the block was generated by Claude.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            Thinking blocks must be passed back unmodified and in their original order; a modified block results in a 400 `invalid_request_error`.
 
-One of the following:
+          - `String thinking`
 
-TTL\_5M("5m")
+            The `thinking` text of this block as returned by the API.
 
-TTL\_1H("1h")
+          - `JsonValue type = "thinking"`
 
-
+        - `class BetaRedactedThinkingBlockParam:`
 
-Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
+          - `String data`
 
-One of the following:
+            The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-
+          - `JsonValue type = "redacted_thinking"`
 
-class BetaCitationCharLocationParam:
+        - `class BetaToolUseBlockParam:`
 
-String citedText
+          - `String id`
 
-long documentIndex
+            pattern: ^[a-zA-Z0-9_-]+$
 
-Optional<String> documentTitle
+          - `Input input`
 
-long endCharIndex
+          - `String name`
 
-long startCharIndex
+            maxLength: 200, minLength: 1
 
-JsonValue; type "char\_location"constant"char\_location"constant
+          - `JsonValue type = "tool_use"`
 
-
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-class BetaCitationPageLocationParam:
+            Create a cache control breakpoint at this content block.
 
-String citedText
+          - `Optional<Caller> caller`
 
-long documentIndex
+            Tool invocation directly from the model.
 
-Optional<String> documentTitle
+            - `class BetaDirectCaller:`
 
-long endPageNumber
+              Tool invocation directly from the model.
 
-long startPageNumber
+              - `JsonValue type = "direct"`
 
-JsonValue; type "page\_location"constant"page\_location"constant
+            - `class BetaServerToolCaller:`
 
-
+              Tool invocation generated by a server-side tool.
 
-class BetaCitationContentBlockLocationParam:
+              - `String toolId`
 
-
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-String citedText
+              - `JsonValue type = "code_execution_20250825"`
 
-The full text of the cited block range, concatenated.
+            - `class BetaServerToolCaller20260120:`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+              - `String toolId`
 
-long documentIndex
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Optional<String> documentTitle
+              - `JsonValue type = "code_execution_20260120"`
 
-
+          - `Optional<String> toolsetName`
 
-long endBlockIndex
+            For a toolset member tool_use, the toolset family this member belongs to.
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+        - `class BetaToolResultBlockParam:`
 
-long startBlockIndex
+          - `String toolUseId`
 
-0-based index of the first cited block in the source's `content` array.
+            pattern: ^[a-zA-Z0-9_-]+$
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+          - `JsonValue type = "tool_result"`
 
-
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-class BetaCitationWebSearchResultLocationParam:
+            Create a cache control breakpoint at this content block.
 
-String citedText
+          - `Optional<Content> content`
 
-String encryptedIndex
+            - `String`
 
-Optional<String> title
+            - `List<Block>`
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+              - `class BetaTextBlockParam:`
 
-String url
+              - `class BetaImageBlockParam:`
 
-
+              - `class BetaSearchResultBlockParam:`
 
-class BetaCitationSearchResultLocationParam:
+              - `class BetaRequestDocumentBlock:`
 
-
+              - `class BetaToolReferenceBlockParam:`
 
-String citedText
+                Tool reference block that can be included in tool_result content.
 
-The full text of the cited block range, concatenated.
+                - `String toolName`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-
+                - `JsonValue type = "tool_reference"`
 
-long endBlockIndex
+                - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+                  Create a cache control breakpoint at this content block.
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+              - `class BetaBrowserStateBlockParam:`
 
-
+                The caller's browser state after a browser toolset member call —
+                the full inventory of open tabs, which tab is active, and any side
+                effects (tabs opened, download state changes) the call produced.
 
-long searchResultIndex
+                At most one per `tool_result`, only on a non-error result answering a
+                browser toolset member `tool_use`. The server renders the
+                model-visible text from it; the model never sees the raw fields.
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+                - `List<BetaBrowserStateTabEntry> tabs`
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+                  All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
-minimum0
+                  maxItems: 100
 
-String source
+                  - `String tabId`
 
-long startBlockIndex
+                    The caller-assigned identifier for this tab, unique within the inventory.
 
-0-based index of the first cited block in the source's `content` array.
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-Optional<String> title
+                  - `String title`
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+                    The title of the page the tab is showing. May be empty.
 
-
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-class BetaImageBlockParam:
+                  - `String url`
 
-
+                    The URL of the page the tab is showing. May be empty.
 
-Source source
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-One of the following:
+                  - `Optional<Boolean> active`
 
-
+                    Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-class BetaBase64ImageSource:
+                - `JsonValue type = "browser_state"`
 
-String data
+                - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-
+                  Create a cache control breakpoint at this content block.
 
-MediaType mediaType
+                - `Optional<List<BetaBrowserStateChange>> stateChanges`
 
-One of the following:
+                  Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-IMAGE\_JPEG("image/jpeg")
+                  maxItems: 200, minItems: 1
 
-IMAGE\_PNG("image/png")
+                  - `class BetaBrowserStateChangeTabOpened:`
 
-IMAGE\_GIF("image/gif")
+                    A tab this call's execution opened that remains open at its end —
+                    the creation delta of the `tabs` inventory, not an event log.
 
-IMAGE\_WEBP("image/webp")
+                    Carries only the `tab_id`; the tab's `title` and `url` live on its
+                    `tabs` entry, which must include the same `tab_id`. A tab opened
+                    during a failed call gets no deferred `tab_opened`; it simply appears
+                    in the next result's `tabs` inventory.
 
-JsonValue; type "base64"constant"base64"constant
+                    - `String tabId`
 
-
+                      The `tab_id` of the opened tab, present in `tabs`.
 
-class BetaUrlImageSource:
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-JsonValue; type "url"constant"url"constant
+                    - `JsonValue type = "tab_opened"`
 
-String url
+                  - `class BetaBrowserStateChangeDownloadStarted:`
 
-
+                    A file download that started during this call.
 
-class BetaFileImageSource:
+                    - `String downloadId`
 
-String fileId
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-JsonValue; type "file"constant"file"constant
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-JsonValue; type "image"constant"image"constant
+                    - `JsonValue type = "download_started"`
 
-
+                    - `String url`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+                      The final post-redirect URL the download was served from.
 
-Create a cache control breakpoint at this content block.
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+                  - `class BetaBrowserStateChangeDownloadCompleted:`
 
-
+                    A file download that finished during this call, reported with the
+                    same `download_id` as its `download_started` — or without a prior
+                    `download_started`, when the download finished during the call that
+                    started it (at most one state change per `download_id` per result).
 
-Optional<Ttl> ttl
+                    - `String downloadId`
 
-The time-to-live for the cache control breakpoint.
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-This may be one the following values:
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+                    - `JsonValue type = "download_completed"`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+                    - `String url`
 
-One of the following:
+                      The final post-redirect URL the download was served from.
 
-TTL\_5M("5m")
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-TTL\_1H("1h")
+                    - `Optional<String> path`
 
-JsonValue; type "content"constant"content"constant
+                      Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-
+                      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
 
-class BetaUrlPdfSource:
+                    - `Optional<Long> sizeBytes`
 
-JsonValue; type "url"constant"url"constant
+                      The completed download's size.
 
-String url
+                      minimum: 0
 
-
+                  - `class BetaBrowserStateChangeDownloadFailed:`
 
-class BetaFileDocumentSource:
+                    A file download that failed — or was cancelled — during this call.
 
-String fileId
+                    - `String downloadId`
 
-JsonValue; type "file"constant"file"constant
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-JsonValue; type "document"constant"document"constant
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-
+                    - `JsonValue type = "download_failed"`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+                    - `String url`
 
-Create a cache control breakpoint at this content block.
+                      The final post-redirect URL the download was served from.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-
+                    - `Optional<String> error`
 
-Optional<Ttl> ttl
+                      The failure or cancellation detail, when known.
 
-The time-to-live for the cache control breakpoint.
+                      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
 
-This may be one the following values:
+          - `Optional<Boolean> isError`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          - `Optional<String> toolsetName`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            For a toolset member tool_result, the toolset family of the paired tool_use.
 
-One of the following:
+            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-TTL\_5M("5m")
+        - `class BetaServerToolUseBlockParam:`
 
-TTL\_1H("1h")
+          - `String id`
 
-
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
+          - `Input input`
 
-Optional<Boolean> enabled
+          - `Name name`
 
-Optional<String> context
+            - `ADVISOR("advisor")`
 
-Optional<String> title
+            - `WEB_SEARCH("web_search")`
 
-
+            - `WEB_FETCH("web_fetch")`
 
-class BetaSearchResultBlockParam:
+            - `CODE_EXECUTION("code_execution")`
 
-
+            - `BASH_CODE_EXECUTION("bash_code_execution")`
 
-List<[BetaTextBlockParam](api/beta/messages.md)> content
+            - `TEXT_EDITOR_CODE_EXECUTION("text_editor_code_execution")`
 
-String text
+            - `TOOL_SEARCH_TOOL_REGEX("tool_search_tool_regex")`
 
-JsonValue; type "text"constant"text"constant
+            - `TOOL_SEARCH_TOOL_BM25("tool_search_tool_bm25")`
 
-
+          - `JsonValue type = "server_tool_use"`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-Create a cache control breakpoint at this content block.
+            Create a cache control breakpoint at this content block.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+          - `Optional<Caller> caller`
 
-
+            Tool invocation directly from the model.
 
-Optional<Ttl> ttl
+            - `class BetaDirectCaller:`
 
-The time-to-live for the cache control breakpoint.
+              Tool invocation directly from the model.
 
-This may be one the following values:
+            - `class BetaServerToolCaller:`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+              Tool invocation generated by a server-side tool.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            - `class BetaServerToolCaller20260120:`
 
-One of the following:
+        - `class BetaWebSearchToolResultBlockParam:`
 
-TTL\_5M("5m")
+          - `BetaWebSearchToolResultBlockParamContent content`
 
-TTL\_1H("1h")
+            - `List<BetaWebSearchResultBlockParam>`
 
-
+              - `String encryptedContent`
 
-Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
+              - `String title`
 
-One of the following:
+              - `JsonValue type = "web_search_result"`
 
-
+              - `String url`
 
-class BetaCitationCharLocationParam:
+              - `Optional<String> pageAge`
 
-String citedText
+            - `class BetaWebSearchToolRequestError:`
 
-long documentIndex
+              - `BetaWebSearchToolResultErrorCode errorCode`
 
-Optional<String> documentTitle
+                - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
-long endCharIndex
+                - `UNAVAILABLE("unavailable")`
 
-long startCharIndex
+                - `MAX_USES_EXCEEDED("max_uses_exceeded")`
 
-JsonValue; type "char\_location"constant"char\_location"constant
+                - `TOO_MANY_REQUESTS("too_many_requests")`
 
-
+                - `QUERY_TOO_LONG("query_too_long")`
 
-class BetaCitationPageLocationParam:
+                - `REQUEST_TOO_LARGE("request_too_large")`
 
-String citedText
+              - `JsonValue type = "web_search_tool_result_error"`
 
-long documentIndex
+          - `String toolUseId`
 
-Optional<String> documentTitle
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-long endPageNumber
+          - `JsonValue type = "web_search_tool_result"`
 
-long startPageNumber
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-JsonValue; type "page\_location"constant"page\_location"constant
+            Create a cache control breakpoint at this content block.
 
-
+          - `Optional<Caller> caller`
 
-class BetaCitationContentBlockLocationParam:
+            Tool invocation directly from the model.
 
-
+            - `class BetaDirectCaller:`
 
-String citedText
+              Tool invocation directly from the model.
 
-The full text of the cited block range, concatenated.
+            - `class BetaServerToolCaller:`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+              Tool invocation generated by a server-side tool.
 
-long documentIndex
+            - `class BetaServerToolCaller20260120:`
 
-Optional<String> documentTitle
+        - `class BetaWebFetchToolResultBlockParam:`
 
-
+          - `Content content`
 
-long endBlockIndex
+            - `class BetaWebFetchToolResultErrorBlockParam:`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+              - `BetaWebFetchToolResultErrorCode errorCode`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+                - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
-long startBlockIndex
+                - `URL_TOO_LONG("url_too_long")`
 
-0-based index of the first cited block in the source's `content` array.
+                - `URL_NOT_ALLOWED("url_not_allowed")`
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+                - `URL_NOT_IN_PRIOR_CONTEXT("url_not_in_prior_context")`
 
-
+                - `URL_NOT_ACCESSIBLE("url_not_accessible")`
 
-class BetaCitationWebSearchResultLocationParam:
+                - `UNSUPPORTED_CONTENT_TYPE("unsupported_content_type")`
 
-String citedText
+                - `TOO_MANY_REQUESTS("too_many_requests")`
 
-String encryptedIndex
+                - `MAX_USES_EXCEEDED("max_uses_exceeded")`
 
-Optional<String> title
+                - `UNAVAILABLE("unavailable")`
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+              - `JsonValue type = "web_fetch_tool_result_error"`
 
-String url
+            - `class BetaWebFetchBlockParam:`
 
-
+              - `BetaRequestDocumentBlock content`
 
-class BetaCitationSearchResultLocationParam:
+              - `JsonValue type = "web_fetch_result"`
 
-
+              - `String url`
 
-String citedText
+                Fetched content URL
 
-The full text of the cited block range, concatenated.
+              - `Optional<String> retrievedAt`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+                ISO 8601 timestamp when the content was retrieved
 
-
+          - `String toolUseId`
 
-long endBlockIndex
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+          - `JsonValue type = "web_fetch_tool_result"`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-
+            Create a cache control breakpoint at this content block.
 
-long searchResultIndex
+          - `Optional<Caller> caller`
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+            Tool invocation directly from the model.
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+            - `class BetaDirectCaller:`
 
-minimum0
+              Tool invocation directly from the model.
 
-String source
+            - `class BetaServerToolCaller:`
 
-long startBlockIndex
+              Tool invocation generated by a server-side tool.
 
-0-based index of the first cited block in the source's `content` array.
+            - `class BetaServerToolCaller20260120:`
 
-Optional<String> title
+        - `class BetaAdvisorToolResultBlockParam:`
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+          - `Content content`
 
-String source
+            - `class BetaAdvisorToolResultErrorParam:`
 
-String title
+              - `ErrorCode errorCode`
 
-JsonValue; type "search\_result"constant"search\_result"constant
+                - `MAX_USES_EXCEEDED("max_uses_exceeded")`
 
-
+                - `PROMPT_TOO_LONG("prompt_too_long")`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+                - `TOO_MANY_REQUESTS("too_many_requests")`
 
-Create a cache control breakpoint at this content block.
+                - `OVERLOADED("overloaded")`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+                - `UNAVAILABLE("unavailable")`
 
-
+                - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-Optional<Ttl> ttl
+                - `MODEL_NOT_FOUND("model_not_found")`
 
-The time-to-live for the cache control breakpoint.
+              - `JsonValue type = "advisor_tool_result_error"`
 
-This may be one the following values:
+            - `class BetaAdvisorResultBlockParam:`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+              - `String text`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+              - `JsonValue type = "advisor_result"`
 
-One of the following:
+              - `Optional<String> stopReason`
 
-TTL\_5M("5m")
+            - `class BetaAdvisorRedactedResultBlockParam:`
 
-TTL\_1H("1h")
+              - `String encryptedContent`
 
-
+                Opaque blob produced by a prior response; must be round-tripped verbatim.
 
-Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
+              - `JsonValue type = "advisor_redacted_result"`
 
-Optional<Boolean> enabled
+              - `Optional<String> stopReason`
 
-
+          - `String toolUseId`
 
-class BetaThinkingBlockParam:
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-String signature
+          - `JsonValue type = "advisor_tool_result"`
 
-String thinking
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-JsonValue; type "thinking"constant"thinking"constant
+            Create a cache control breakpoint at this content block.
 
-
+        - `class BetaCodeExecutionToolResultBlockParam:`
 
-class BetaRedactedThinkingBlockParam:
+          - `BetaCodeExecutionToolResultBlockParamContent content`
 
-String data
+            Code execution result with encrypted stdout for PFC + web_search results.
 
-JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
+            - `class BetaCodeExecutionToolResultErrorParam:`
 
-
+              - `BetaCodeExecutionToolResultErrorCode errorCode`
 
-class BetaToolUseBlockParam:
+                - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
-String id
+                - `UNAVAILABLE("unavailable")`
 
-Input input
+                - `TOO_MANY_REQUESTS("too_many_requests")`
 
-String name
+                - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-JsonValue; type "tool\_use"constant"tool\_use"constant
+              - `JsonValue type = "code_execution_tool_result_error"`
 
-
+            - `class BetaCodeExecutionResultBlockParam:`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+              - `List<BetaCodeExecutionOutputBlockParam> content`
 
-Create a cache control breakpoint at this content block.
+                - `String fileId`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+                - `JsonValue type = "code_execution_output"`
 
-
+              - `long returnCode`
 
-Optional<Ttl> ttl
+              - `String stderr`
 
-The time-to-live for the cache control breakpoint.
+              - `String stdout`
 
-This may be one the following values:
+              - `JsonValue type = "code_execution_result"`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            - `class BetaEncryptedCodeExecutionResultBlockParam:`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+              Code execution result with encrypted stdout for PFC + web_search results.
 
-One of the following:
+              - `List<BetaCodeExecutionOutputBlockParam> content`
 
-TTL\_5M("5m")
+                - `String fileId`
 
-TTL\_1H("1h")
+                - `JsonValue type = "code_execution_output"`
 
-
+              - `String encryptedStdout`
 
-Optional<Caller> caller
+              - `long returnCode`
 
-Tool invocation directly from the model.
+              - `String stderr`
 
-One of the following:
+              - `JsonValue type = "encrypted_code_execution_result"`
 
-
+          - `String toolUseId`
 
-class BetaDirectCaller:
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Tool invocation directly from the model.
+          - `JsonValue type = "code_execution_tool_result"`
 
-JsonValue; type "direct"constant"direct"constant
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-
+            Create a cache control breakpoint at this content block.
 
-class BetaServerToolCaller:
+        - `class BetaBashCodeExecutionToolResultBlockParam:`
 
-Tool invocation generated by a server-side tool.
+          - `Content content`
 
-String toolId
+            - `class BetaBashCodeExecutionToolResultErrorParam:`
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+              - `ErrorCode errorCode`
 
-
+                - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
-class BetaServerToolCaller20260120:
+                - `UNAVAILABLE("unavailable")`
 
-String toolId
+                - `TOO_MANY_REQUESTS("too_many_requests")`
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+                - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-
+                - `OUTPUT_FILE_TOO_LARGE("output_file_too_large")`
 
-class BetaToolResultBlockParam:
+              - `JsonValue type = "bash_code_execution_tool_result_error"`
 
-String toolUseId
+            - `class BetaBashCodeExecutionResultBlockParam:`
 
-JsonValue; type "tool\_result"constant"tool\_result"constant
+              - `List<BetaBashCodeExecutionOutputBlockParam> content`
 
-
+                - `String fileId`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+                - `JsonValue type = "bash_code_execution_output"`
 
-Create a cache control breakpoint at this content block.
+              - `long returnCode`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+              - `String stderr`
 
-
+              - `String stdout`
 
-Optional<Ttl> ttl
+              - `JsonValue type = "bash_code_execution_result"`
 
-The time-to-live for the cache control breakpoint.
+          - `String toolUseId`
 
-This may be one the following values:
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          - `JsonValue type = "bash_code_execution_tool_result"`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-One of the following:
+            Create a cache control breakpoint at this content block.
 
-TTL\_5M("5m")
+        - `class BetaTextEditorCodeExecutionToolResultBlockParam:`
 
-TTL\_1H("1h")
+          - `Content content`
 
-
+            - `class BetaTextEditorCodeExecutionToolResultErrorParam:`
 
-Optional<Content> content
+              - `ErrorCode errorCode`
 
-One of the following:
+                - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
-String
+                - `UNAVAILABLE("unavailable")`
 
-
+                - `TOO_MANY_REQUESTS("too_many_requests")`
 
-List<Block>
+                - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-One of the following:
+                - `FILE_NOT_FOUND("file_not_found")`
 
-
+              - `JsonValue type = "text_editor_code_execution_tool_result_error"`
 
-class BetaTextBlockParam:
+              - `Optional<String> errorMessage`
 
-String text
+            - `class BetaTextEditorCodeExecutionViewResultBlockParam:`
 
-JsonValue; type "text"constant"text"constant
+              - `String content`
 
-
+              - `FileType fileType`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+                - `TEXT("text")`
 
-Create a cache control breakpoint at this content block.
+                - `IMAGE("image")`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+                - `PDF("pdf")`
 
-
+              - `JsonValue type = "text_editor_code_execution_view_result"`
 
-Optional<Ttl> ttl
+              - `Optional<Long> numLines`
 
-The time-to-live for the cache control breakpoint.
+              - `Optional<Long> startLine`
 
-This may be one the following values:
+              - `Optional<Long> totalLines`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            - `class BetaTextEditorCodeExecutionCreateResultBlockParam:`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+              - `boolean isFileUpdate`
 
-One of the following:
+              - `JsonValue type = "text_editor_code_execution_create_result"`
 
-TTL\_5M("5m")
+            - `class BetaTextEditorCodeExecutionStrReplaceResultBlockParam:`
 
-TTL\_1H("1h")
+              - `JsonValue type = "text_editor_code_execution_str_replace_result"`
 
-
+              - `Optional<List<String>> lines`
 
-Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
+              - `Optional<Long> newLines`
 
-One of the following:
+              - `Optional<Long> newStart`
 
-
+              - `Optional<Long> oldLines`
 
-class BetaCitationCharLocationParam:
+              - `Optional<Long> oldStart`
 
-String citedText
+          - `String toolUseId`
 
-long documentIndex
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Optional<String> documentTitle
+          - `JsonValue type = "text_editor_code_execution_tool_result"`
 
-long endCharIndex
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-long startCharIndex
+            Create a cache control breakpoint at this content block.
 
-JsonValue; type "char\_location"constant"char\_location"constant
+        - `class BetaToolSearchToolResultBlockParam:`
 
-
+          - `Content content`
 
-class BetaCitationPageLocationParam:
+            - `class BetaToolSearchToolResultErrorParam:`
 
-String citedText
+              - `ErrorCode errorCode`
 
-long documentIndex
+                - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
-Optional<String> documentTitle
+                - `UNAVAILABLE("unavailable")`
 
-long endPageNumber
+                - `TOO_MANY_REQUESTS("too_many_requests")`
 
-long startPageNumber
+                - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-JsonValue; type "page\_location"constant"page\_location"constant
+              - `JsonValue type = "tool_search_tool_result_error"`
 
-
+              - `Optional<String> errorMessage`
 
-class BetaCitationContentBlockLocationParam:
+            - `class BetaToolSearchToolSearchResultBlockParam:`
 
-
+              - `List<BetaToolReferenceBlockParam> toolReferences`
 
-String citedText
+                - `String toolName`
 
-The full text of the cited block range, concatenated.
+                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+                - `JsonValue type = "tool_reference"`
 
-long documentIndex
+                - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-Optional<String> documentTitle
+                  Create a cache control breakpoint at this content block.
 
-
+              - `JsonValue type = "tool_search_tool_search_result"`
 
-long endBlockIndex
+          - `String toolUseId`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+          - `JsonValue type = "tool_search_tool_result"`
 
-long startBlockIndex
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-0-based index of the first cited block in the source's `content` array.
+            Create a cache control breakpoint at this content block.
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+        - `class BetaMcpToolUseBlockParam:`
 
-
+          - `String id`
 
-class BetaCitationWebSearchResultLocationParam:
+            pattern: ^[a-zA-Z0-9_-]+$
 
-String citedText
+          - `Input input`
 
-String encryptedIndex
+          - `String name`
 
-Optional<String> title
+          - `String serverName`
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+            The name of the MCP server
 
-String url
+          - `JsonValue type = "mcp_tool_use"`
 
-
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-class BetaCitationSearchResultLocationParam:
+            Create a cache control breakpoint at this content block.
 
-
+        - `class BetaRequestMcpToolResultBlockParam:`
 
-String citedText
+          - `String toolUseId`
 
-The full text of the cited block range, concatenated.
+            pattern: ^[a-zA-Z0-9_-]+$
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+          - `JsonValue type = "mcp_tool_result"`
 
-
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-long endBlockIndex
+            Create a cache control breakpoint at this content block.
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+          - `Optional<Content> content`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+            - `String`
 
-
+            - `List<BetaTextBlockParam>`
 
-long searchResultIndex
+              - `String text`
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+                minLength: 1
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+              - `JsonValue type = "text"`
 
-minimum0
+              - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-String source
+                Create a cache control breakpoint at this content block.
 
-long startBlockIndex
+              - `Optional<List<BetaTextCitationParam>> citations`
 
-0-based index of the first cited block in the source's `content` array.
+          - `Optional<Boolean> isError`
 
-Optional<String> title
+        - `class BetaContainerUploadBlockParam:`
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+          A content block that represents a file to be uploaded to the container
+          Files uploaded via this block will be available in the container's input directory.
 
-
+          - `String fileId`
 
-class BetaImageBlockParam:
+          - `JsonValue type = "container_upload"`
 
-
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-Source source
+            Create a cache control breakpoint at this content block.
 
-One of the following:
+        - `class BetaCompactionBlockParam:`
 
-
+          A compaction block containing summary of previous context.
 
-class BetaBase64ImageSource:
+          Users should round-trip these blocks from responses to subsequent requests
+          to maintain context across compaction boundaries.
 
-String data
+          When content is None, the block represents a failed compaction. The server
+          treats these as no-ops. Empty string content is not allowed.
 
-
+          - `JsonValue type = "compaction"`
 
-MediaType mediaType
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-One of the following:
+            Create a cache control breakpoint at this content block.
 
-IMAGE\_JPEG("image/jpeg")
+          - `Optional<String> content`
 
-IMAGE\_PNG("image/png")
+            Summary of previously compacted content, or null if compaction failed
 
-IMAGE\_GIF("image/gif")
+          - `Optional<String> encryptedContent`
 
-IMAGE\_WEBP("image/webp")
+            Opaque metadata from prior compaction, to be round-tripped verbatim
 
-JsonValue; type "base64"constant"base64"constant
+        - `class BetaRequestToolAdditionBlock:`
 
-
+          Mid-conversation directive to surface a declared tool.
 
-class BetaUrlImageSource:
+          `tool` references a tool (or MCP toolset) by name from the request's
+          `tools`; it is offered to the model from this point in the
+          conversation onward.
 
-JsonValue; type "url"constant"url"constant
+          - `Tool tool`
 
-String url
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
 
-
+            - `class BetaToolChangeToolReference:`
 
-class BetaFileImageSource:
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
 
-String fileId
+              - `String name`
 
-JsonValue; type "file"constant"file"constant
+                pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-JsonValue; type "image"constant"image"constant
+              - `JsonValue type = "tool_reference"`
 
-
+            - `class BetaToolChangeMcpToolReference:`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+              Reference to a single MCP tool by its server and remote name — the
+              same `server_name`/`name` pair `mcp_tool_use` carries.
 
-Create a cache control breakpoint at this content block.
+              - `String name`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+              - `String serverName`
 
-
+              - `JsonValue type = "mcp_tool_reference"`
 
-Optional<Ttl> ttl
+            - `class BetaToolChangeMcpToolsetReference:`
 
-The time-to-live for the cache control breakpoint.
+              Reference to every tool in the named MCP server's toolset.
 
-This may be one the following values:
+              - `String serverName`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+              - `JsonValue type = "mcp_toolset_reference"`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          - `JsonValue type = "tool_addition"`
 
-One of the following:
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-TTL\_5M("5m")
+            Create a cache control breakpoint at this content block.
 
-TTL\_1H("1h")
+        - `class BetaRequestToolRemovalBlock:`
 
-
+          Mid-conversation directive to withdraw a tool.
 
-class BetaSearchResultBlockParam:
+          `tool` references a tool (or MCP toolset) by name from the request's
+          `tools`; it is no longer offered to the model from this point in the
+          conversation onward.
 
-
+          - `Tool tool`
 
-List<[BetaTextBlockParam](api/beta/messages.md)> content
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
 
-String text
+            - `class BetaToolChangeToolReference:`
 
-JsonValue; type "text"constant"text"constant
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
 
-
+            - `class BetaToolChangeMcpToolReference:`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+              Reference to a single MCP tool by its server and remote name — the
+              same `server_name`/`name` pair `mcp_tool_use` carries.
 
-Create a cache control breakpoint at this content block.
+            - `class BetaToolChangeMcpToolsetReference:`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+              Reference to every tool in the named MCP server's toolset.
 
-
+          - `JsonValue type = "tool_removal"`
 
-Optional<Ttl> ttl
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-The time-to-live for the cache control breakpoint.
+            Create a cache control breakpoint at this content block.
 
-This may be one the following values:
+        - `class BetaFallbackBlockParam:`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          A `fallback` block echoed back from a prior response.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          Accepted in `messages[].content` and not rendered into the prompt; not
+          validated against the request's `fallbacks` chain or top-level `model`.
 
-One of the following:
+          Echo the assistant turn back verbatim, including this block in its
+          original position. The block marks the boundary between content produced
+          before and after a fallback hop, and the server relies on that boundary
+          to validate the turn: when thinking runs flank the boundary, omitting
+          the block merges them into one span the server cannot validate (the
+          request is rejected), and moving it into the middle of a single run is
+          likewise rejected; between non-thinking blocks the block's placement has
+          no validation effect.
 
-TTL\_5M("5m")
+          - `BetaFallbackInfoParam from`
 
-TTL\_1H("1h")
+            Identifies one hop of a fallback transition.
 
-
+            - `Model model`
 
-Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
+              The model that will complete your prompt.
 
-One of the following:
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-
+              - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
-class BetaCitationCharLocationParam:
+                Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
-String citedText
+              - `CLAUDE_MYTHOS_5_1("claude-mythos-5-1")`
 
-long documentIndex
+                Our most capable model for cybersecurity and biology research, available through trusted access programs
 
-Optional<String> documentTitle
+              - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-long endCharIndex
+                High-performance model for coding and agents
 
-long startCharIndex
+              - `CLAUDE_FABLE_5("claude-fable-5")`
 
-JsonValue; type "char\_location"constant"char\_location"constant
+                Next generation of intelligence for the hardest knowledge work and coding problems
 
-
+              - `CLAUDE_MYTHOS_5("claude-mythos-5")`
 
-class BetaCitationPageLocationParam:
+                Most capable model for cybersecurity and biology research
 
-String citedText
+              - `CLAUDE_OPUS_5("claude-opus-5")`
 
-long documentIndex
+                Powerful intelligence for long-running agents and coding
 
-Optional<String> documentTitle
+              - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-long endPageNumber
+                Powerful intelligence for long-running agents and coding
 
-long startPageNumber
+              - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-JsonValue; type "page\_location"constant"page\_location"constant
+                Powerful intelligence for long-running agents and coding
 
-
+              - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
-class BetaCitationContentBlockLocationParam:
+                New class of intelligence, strongest in coding and cybersecurity
 
-
+              - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-String citedText
+                Powerful intelligence for long-running agents and coding
 
-The full text of the cited block range, concatenated.
+              - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+                Best combination of speed and intelligence
 
-long documentIndex
+              - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
 
-Optional<String> documentTitle
+                Fastest model with near-frontier intelligence
 
-
+              - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
 
-long endBlockIndex
+                Fastest model with near-frontier intelligence
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+              - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+                Powerful intelligence for long-running agents and coding
 
-long startBlockIndex
+              - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-0-based index of the first cited block in the source's `content` array.
+                Powerful intelligence for long-running agents and coding
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+              - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
-
+                High-performance model for agents and coding
 
-class BetaCitationWebSearchResultLocationParam:
+              - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
 
-String citedText
+                High-performance model for agents and coding
 
-String encryptedIndex
+          - `BetaFallbackInfoParam to`
 
-Optional<String> title
+            Identifies one hop of a fallback transition.
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+          - `JsonValue type = "fallback"`
 
-String url
+          - `Optional<JsonValue> trigger`
 
-
+            The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
 
-class BetaCitationSearchResultLocationParam:
+    - `Role role`
 
-
+      - `USER("user")`
 
-String citedText
+      - `ASSISTANT("assistant")`
 
-The full text of the cited block range, concatenated.
+      - `SYSTEM("system")`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+    - `Optional<ClearAt> clearAt`
 
-
+      How long this system message's text stays in front of the model. `"never"` (the default) renders it on every request that includes it. `"next_user_message"` renders it only for the user turn it follows: once a later `role: "user"` message exists in `messages` the message stays in the array (send it unchanged) but is no longer shown to the model. Only permitted on `role: "system"` messages.
 
-long endBlockIndex
+      - `NEXT_USER_MESSAGE("next_user_message")`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+      - `NEVER("never")`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+    - `Optional<BetaSystemMessageOutputConfig> outputConfig`
 
-
+      Per-message output configuration on a role:"system" input message.
 
-long searchResultIndex
+      Fields here apply per-turn; `format` remains top-level only. An
+      empty `{}` is accepted on a message that carries content; a message
+      with neither content nor output_config fields is rejected.
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+      - `Optional<Effort> effort`
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+        All possible effort levels.
 
-minimum0
+        - `LOW("low")`
 
-String source
+        - `MEDIUM("medium")`
 
-long startBlockIndex
+        - `HIGH("high")`
 
-0-based index of the first cited block in the source's `content` array.
+        - `XHIGH("xhigh")`
 
-Optional<String> title
+        - `MAX("max")`
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+  - `Model model`
 
-String source
+    The model that will complete your prompt.
 
-String title
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-JsonValue; type "search\_result"constant"search\_result"constant
+  - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-
+    Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+  - `Optional<Container> container`
 
-Create a cache control breakpoint at this content block.
+    Container identifier for reuse across requests.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+    - `class BetaContainerParams:`
 
-
+      Container parameters with skills to be loaded.
 
-Optional<Ttl> ttl
+      - `Optional<String> id`
 
-The time-to-live for the cache control breakpoint.
+        Container id
 
-This may be one the following values:
+      - `Optional<List<BetaSkillParams>> skills`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        List of skills to load in the container
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        maxItems: 20
 
-One of the following:
+        - `String skillId`
 
-TTL\_5M("5m")
+          Skill ID
 
-TTL\_1H("1h")
+          maxLength: 64, minLength: 1
 
-
+        - `Type type`
 
-Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
+          Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Optional<Boolean> enabled
+          - `ANTHROPIC("anthropic")`
 
-
+          - `CUSTOM("custom")`
 
-class BetaRequestDocumentBlock:
+        - `Optional<String> version`
 
-
+          Skill version or 'latest' for most recent version
 
-Source source
+          maxLength: 64, minLength: 1
 
-One of the following:
+    - `String`
 
-
+  - `Optional<BetaContextManagementConfig> contextManagement`
 
-class BetaBase64PdfSource:
+    Context management configuration.
 
-String data
+    This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+  - `Optional<BetaDiagnosticsParam> diagnostics`
 
-JsonValue; type "base64"constant"base64"constant
+    Request-level diagnostics. Currently carries the previous response
+    id for prompt-cache divergence reporting.
 
-
+  - `Optional<FallbackCreditToken> fallbackCreditToken`
 
-class BetaPlainTextSource:
+    The `fallback_credit_token` from a prior refusal's `stop_details`.
 
-String data
+    When a preceding request was refused and returned a `fallback_credit_token`,
+    pass that code here on the retry to have the retry's cache-creation tokens
+    for the prefix that was warm on the refused model billed at the cache-read
+    rate. Must be redeemed by the same organization and workspace, with the same
+    request body (optionally extended by one appended `assistant` message whose
+    content is the partial text — with any trailing whitespace stripped from
+    the final text block — and paired server-tool blocks streamed before the
+    refusal; the appended-assistant form is not available for requests with
+    `output_format` set or forced `tool_choice`), on an eligible fallback
+    model, on the same platform,
+    and within 5 minutes of the refusal; a mismatch is a 400. A token minted
+    mid-server-tool-loop whose partial content was continuable may only be
+    redeemed with the appended-assistant form — if an exact-body retry is
+    rejected with a 400 saying the token must be redeemed by continuing the
+    partial response, retry with the appended-assistant form instead.
 
-JsonValue; mediaType "text/plain"constant"text/plain"constant
+    When the appended-assistant form is used on a model that otherwise disallows
+    assistant-turn prefill, this token also authorizes that one prefill.
 
-JsonValue; type "text"constant"text"constant
+    - `String`
 
-
+    - `class BetaFallbackCreditTokenParam:`
 
-class BetaContentBlockSource:
+      Object form of `fallback_credit_token`: the token plus a redemption
+      mode.
 
-
+      Requires `anthropic-beta: fallback-credit-2026-07-01`; without that
+      header the field accepts the bare string only. The bare string and the
+      mode-less object are equivalent (both select `strict`), so wrapping
+      an existing token changes nothing by itself.
 
-Content content
+      - `String token`
 
-One of the following:
+        The opaque `fallback_credit_token` from a prior refusal's `stop_details` — the same string the bare-string form carries.
 
-String
+        maxLength: 2048, minLength: 1
 
-
+      - `Optional<Mode> mode`
 
-List<[BetaContentBlockSourceContent](api/beta/messages.md)>
+        How a failing token affects the retry. `strict` (the default, and the bare-string behavior): a failing redemption is a 400 and the retry is not served. `best_effort`: the retry is served either way — a token-layer failure no longer rejects the request; the retry proceeds at normal price and the outcome is reported on the response's `usage.fallback_credit`. Two failures stay hard in both modes: a malformed token, and combining `fallback_credit_token` with `fallbacks`.
 
-One of the following:
+        - `STRICT("strict")`
 
-
+        - `BEST_EFFORT("best_effort")`
 
-class BetaTextBlockParam:
+  - `Optional<BetaFallbacksParam> fallbacks`
 
-String text
+    Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
 
-JsonValue; type "text"constant"text"constant
+  - `Optional<String> inferenceGeo`
 
-
+    Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+  - `Optional<List<BetaRequestMcpServerUrlDefinition>> mcpServers`
 
-Create a cache control breakpoint at this content block.
+    MCP servers to be utilized in this request
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+    maxItems: 20
 
-
+    - `String name`
 
-Optional<Ttl> ttl
+    - `JsonValue type = "url"`
 
-The time-to-live for the cache control breakpoint.
+    - `String url`
 
-This may be one the following values:
+    - `Optional<String> authorizationToken`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+    - `Optional<BetaRequestMcpServerToolConfiguration> toolConfiguration`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      - `Optional<List<String>> allowedTools`
 
-One of the following:
+      - `Optional<Boolean> enabled`
 
-TTL\_5M("5m")
+  - `Optional<BetaMetadata> metadata`
 
-TTL\_1H("1h")
+    An object describing metadata about the request.
 
-
+  - `Optional<BetaOutputConfig> outputConfig`
 
-Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
+    Configuration options for the model's output, such as the output format.
 
-One of the following:
+  - `Optional<ServiceTier> serviceTier`
 
-
+    Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-class BetaCitationCharLocationParam:
+    Anthropic offers different levels of service for your API requests. See [service-tiers](api/service-tiers.md) for details.
 
-String citedText
+    - `AUTO("auto")`
 
-long documentIndex
+    - `STANDARD_ONLY("standard_only")`
 
-Optional<String> documentTitle
+  - `Optional<Speed> speed`
 
-long endCharIndex
+    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-long startCharIndex
+    - `STANDARD("standard")`
 
-JsonValue; type "char\_location"constant"char\_location"constant
+    - `FAST("fast")`
 
-
+  - `Optional<List<String>> stopSequences`
 
-class BetaCitationPageLocationParam:
+    Custom text sequences that will cause the model to stop generating.
 
-String citedText
+    Our models will normally stop when they have naturally completed their turn, which will result in a response `stop_reason` of `"end_turn"`.
 
-long documentIndex
+    If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
 
-Optional<String> documentTitle
+  - `Optional<System> system`
 
-long endPageNumber
+    System prompt.
 
-long startPageNumber
+    A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
-JsonValue; type "page\_location"constant"page\_location"constant
+    - `String`
 
-
+    - `List<BetaTextBlockParam>`
 
-class BetaCitationContentBlockLocationParam:
+      - `String text`
 
-
+        minLength: 1
 
-String citedText
+      - `JsonValue type = "text"`
 
-The full text of the cited block range, concatenated.
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+        Create a cache control breakpoint at this content block.
 
-long documentIndex
+      - `Optional<List<BetaTextCitationParam>> citations`
 
-Optional<String> documentTitle
+  - `Optional<BetaThinkingConfigParam> thinking`
 
-
+    Configuration for enabling Claude's extended thinking.
 
-long endBlockIndex
+    When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+    See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+  - `Optional<BetaToolChoice> toolChoice`
 
-long startBlockIndex
+    How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-0-based index of the first cited block in the source's `content` array.
+  - `Optional<List<BetaToolUnion>> tools`
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+    Definitions of tools that the model may use.
 
-
+    If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-class BetaCitationWebSearchResultLocationParam:
+    There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
 
-String citedText
+    Each tool definition includes:
 
-String encryptedIndex
+    * `name`: Name of the tool.
+    * `description`: Optional, but strongly-recommended description of the tool.
+    * `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
 
-Optional<String> title
+    For example, if you defined `tools` as:
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-String url
-
-
-
-class BetaCitationSearchResultLocationParam:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-long searchResultIndex
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-String source
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-Optional<String> title
-
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-
-
-class BetaImageBlockParam:
-
-
-
-Source source
-
-One of the following:
-
-
-
-class BetaBase64ImageSource:
-
-String data
-
-
-
-MediaType mediaType
-
-One of the following:
-
-IMAGE\_JPEG("image/jpeg")
-
-IMAGE\_PNG("image/png")
-
-IMAGE\_GIF("image/gif")
-
-IMAGE\_WEBP("image/webp")
-
-JsonValue; type "base64"constant"base64"constant
-
-
-
-class BetaUrlImageSource:
-
-JsonValue; type "url"constant"url"constant
-
-String url
-
-
-
-class BetaFileImageSource:
-
-String fileId
-
-JsonValue; type "file"constant"file"constant
-
-JsonValue; type "image"constant"image"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-JsonValue; type "content"constant"content"constant
-
-
-
-class BetaUrlPdfSource:
-
-JsonValue; type "url"constant"url"constant
-
-String url
-
-
-
-class BetaFileDocumentSource:
-
-String fileId
-
-JsonValue; type "file"constant"file"constant
-
-JsonValue; type "document"constant"document"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
-
-Optional<Boolean> enabled
-
-Optional<String> context
-
-Optional<String> title
-
-
-
-class BetaToolReferenceBlockParam:
-
-Tool reference block that can be included in tool\_result content.
-
-String toolName
-
-JsonValue; type "tool\_reference"constant"tool\_reference"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-Optional<Boolean> isError
-
-
-
-class BetaServerToolUseBlockParam:
-
-String id
-
-Input input
-
-
-
-Name name
-
-One of the following:
-
-ADVISOR("advisor")
-
-WEB\_SEARCH("web\_search")
-
-WEB\_FETCH("web\_fetch")
-
-CODE\_EXECUTION("code\_execution")
-
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
-
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
-
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
-
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
-
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<Caller> caller
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller:
-
-Tool invocation directly from the model.
-
-JsonValue; type "direct"constant"direct"constant
-
-
-
-class BetaServerToolCaller:
-
-Tool invocation generated by a server-side tool.
-
-String toolId
-
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
-
-
-
-class BetaServerToolCaller20260120:
-
-String toolId
-
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
-
-
-
-class BetaWebSearchToolResultBlockParam:
-
-
-
-[BetaWebSearchToolResultBlockParamContent](api/beta/messages.md) content
-
-One of the following:
-
-
-
-List<[BetaWebSearchResultBlockParam](api/beta/messages.md)>
-
-String encryptedContent
-
-String title
-
-JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
-
-String url
-
-Optional<String> pageAge
-
-
-
-class BetaWebSearchToolRequestError:
-
-
-
-[BetaWebSearchToolResultErrorCode](api/beta/messages.md) errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-QUERY\_TOO\_LONG("query\_too\_long")
-
-REQUEST\_TOO\_LARGE("request\_too\_large")
-
-JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
-
-String toolUseId
-
-JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<Caller> caller
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller:
-
-Tool invocation directly from the model.
-
-JsonValue; type "direct"constant"direct"constant
-
-
-
-class BetaServerToolCaller:
-
-Tool invocation generated by a server-side tool.
-
-String toolId
-
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
-
-
-
-class BetaServerToolCaller20260120:
-
-String toolId
-
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
-
-
-
-class BetaWebFetchToolResultBlockParam:
-
-
-
-Content content
-
-One of the following:
-
-
-
-class BetaWebFetchToolResultErrorBlockParam:
-
-
-
-[BetaWebFetchToolResultErrorCode](api/beta/messages.md) errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-URL\_TOO\_LONG("url\_too\_long")
-
-URL\_NOT\_ALLOWED("url\_not\_allowed")
-
-URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
-
-URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
-
-UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
-
-UNAVAILABLE("unavailable")
-
-JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
-
-
-
-class BetaWebFetchBlockParam:
-
-
-
-[BetaRequestDocumentBlock](api/beta/messages.md) content
-
-
-
-Source source
-
-One of the following:
-
-
-
-class BetaBase64PdfSource:
-
-String data
-
-JsonValue; mediaType "application/pdf"constant"application/pdf"constant
-
-JsonValue; type "base64"constant"base64"constant
-
-
-
-class BetaPlainTextSource:
-
-String data
-
-JsonValue; mediaType "text/plain"constant"text/plain"constant
-
-JsonValue; type "text"constant"text"constant
-
-
-
-class BetaContentBlockSource:
-
-
-
-Content content
-
-One of the following:
-
-String
-
-
-
-List<[BetaContentBlockSourceContent](api/beta/messages.md)>
-
-One of the following:
-
-
-
-class BetaTextBlockParam:
-
-String text
-
-JsonValue; type "text"constant"text"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
-
-One of the following:
-
-
-
-class BetaCitationCharLocationParam:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endCharIndex
-
-long startCharIndex
-
-JsonValue; type "char\_location"constant"char\_location"constant
-
-
-
-class BetaCitationPageLocationParam:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endPageNumber
-
-long startPageNumber
-
-JsonValue; type "page\_location"constant"page\_location"constant
-
-
-
-class BetaCitationContentBlockLocationParam:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-long documentIndex
-
-Optional<String> documentTitle
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
-
-
-
-class BetaCitationWebSearchResultLocationParam:
-
-String citedText
-
-String encryptedIndex
-
-Optional<String> title
-
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-String url
-
-
-
-class BetaCitationSearchResultLocationParam:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-long searchResultIndex
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-String source
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-Optional<String> title
-
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-
-
-class BetaImageBlockParam:
-
-
-
-Source source
-
-One of the following:
-
-
-
-class BetaBase64ImageSource:
-
-String data
-
-
-
-MediaType mediaType
-
-One of the following:
-
-IMAGE\_JPEG("image/jpeg")
-
-IMAGE\_PNG("image/png")
-
-IMAGE\_GIF("image/gif")
-
-IMAGE\_WEBP("image/webp")
-
-JsonValue; type "base64"constant"base64"constant
-
-
-
-class BetaUrlImageSource:
-
-JsonValue; type "url"constant"url"constant
-
-String url
-
-
-
-class BetaFileImageSource:
-
-String fileId
-
-JsonValue; type "file"constant"file"constant
-
-JsonValue; type "image"constant"image"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-JsonValue; type "content"constant"content"constant
-
-
-
-class BetaUrlPdfSource:
-
-JsonValue; type "url"constant"url"constant
-
-String url
-
-
-
-class BetaFileDocumentSource:
-
-String fileId
-
-JsonValue; type "file"constant"file"constant
-
-JsonValue; type "document"constant"document"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
-
-Optional<Boolean> enabled
-
-Optional<String> context
-
-Optional<String> title
-
-JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
-
-String url
-
-Fetched content URL
-
-Optional<String> retrievedAt
-
-ISO 8601 timestamp when the content was retrieved
-
-String toolUseId
-
-JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<Caller> caller
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller:
-
-Tool invocation directly from the model.
-
-JsonValue; type "direct"constant"direct"constant
-
-
-
-class BetaServerToolCaller:
-
-Tool invocation generated by a server-side tool.
-
-String toolId
-
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
-
-
-
-class BetaServerToolCaller20260120:
-
-String toolId
-
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
-
-
-
-class BetaAdvisorToolResultBlockParam:
-
-
-
-Content content
-
-One of the following:
-
-
-
-class BetaAdvisorToolResultErrorParam:
-
-
-
-ErrorCode errorCode
-
-One of the following:
-
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
-
-PROMPT\_TOO\_LONG("prompt\_too\_long")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-OVERLOADED("overloaded")
-
-UNAVAILABLE("unavailable")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-MODEL\_NOT\_FOUND("model\_not\_found")
-
-JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
-
-
-
-class BetaAdvisorResultBlockParam:
-
-String text
-
-JsonValue; type "advisor\_result"constant"advisor\_result"constant
-
-Optional<String> stopReason
-
-
-
-class BetaAdvisorRedactedResultBlockParam:
-
-String encryptedContent
-
-Opaque blob produced by a prior response; must be round-tripped verbatim.
-
-JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
-
-Optional<String> stopReason
-
-String toolUseId
-
-JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-class BetaCodeExecutionToolResultBlockParam:
-
-
-
-[BetaCodeExecutionToolResultBlockParamContent](api/beta/messages.md) content
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-One of the following:
-
-
-
-class BetaCodeExecutionToolResultErrorParam:
-
-
-
-[BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
-
-
-
-class BetaCodeExecutionResultBlockParam:
-
-
-
-List<[BetaCodeExecutionOutputBlockParam](api/beta/messages.md)> content
-
-String fileId
-
-JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
-
-long returnCode
-
-String stderr
-
-String stdout
-
-JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
-
-
-
-class BetaEncryptedCodeExecutionResultBlockParam:
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-
-
-List<[BetaCodeExecutionOutputBlockParam](api/beta/messages.md)> content
-
-String fileId
-
-JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
-
-String encryptedStdout
-
-long returnCode
-
-String stderr
-
-JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
-
-String toolUseId
-
-JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-class BetaBashCodeExecutionToolResultBlockParam:
-
-
-
-Content content
-
-One of the following:
-
-
-
-class BetaBashCodeExecutionToolResultErrorParam:
-
-
-
-ErrorCode errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
-
-JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
-
-
-
-class BetaBashCodeExecutionResultBlockParam:
-
-
-
-List<[BetaBashCodeExecutionOutputBlockParam](api/beta/messages.md)> content
-
-String fileId
-
-JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
-
-long returnCode
-
-String stderr
-
-String stdout
-
-JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
-
-String toolUseId
-
-JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-class BetaTextEditorCodeExecutionToolResultBlockParam:
-
-
-
-Content content
-
-One of the following:
-
-
-
-class BetaTextEditorCodeExecutionToolResultErrorParam:
-
-
-
-ErrorCode errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-FILE\_NOT\_FOUND("file\_not\_found")
-
-JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
-
-Optional<String> errorMessage
-
-
-
-class BetaTextEditorCodeExecutionViewResultBlockParam:
-
-String content
-
-
-
-FileType fileType
-
-One of the following:
-
-TEXT("text")
-
-IMAGE("image")
-
-PDF("pdf")
-
-JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
-
-Optional<Long> numLines
-
-Optional<Long> startLine
-
-Optional<Long> totalLines
-
-
-
-class BetaTextEditorCodeExecutionCreateResultBlockParam:
-
-boolean isFileUpdate
-
-JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
-
-
-
-class BetaTextEditorCodeExecutionStrReplaceResultBlockParam:
-
-JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
-
-Optional<List<String>> lines
-
-Optional<Long> newLines
-
-Optional<Long> newStart
-
-Optional<Long> oldLines
-
-Optional<Long> oldStart
-
-String toolUseId
-
-JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-class BetaToolSearchToolResultBlockParam:
-
-
-
-Content content
-
-One of the following:
-
-
-
-class BetaToolSearchToolResultErrorParam:
-
-
-
-ErrorCode errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
-
-Optional<String> errorMessage
-
-
-
-class BetaToolSearchToolSearchResultBlockParam:
-
-
-
-List<[BetaToolReferenceBlockParam](api/beta/messages.md)> toolReferences
-
-String toolName
-
-JsonValue; type "tool\_reference"constant"tool\_reference"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
-
-String toolUseId
-
-JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-class BetaMcpToolUseBlockParam:
-
-String id
-
-Input input
-
-String name
-
-String serverName
-
-The name of the MCP server
-
-JsonValue; type "mcp\_tool\_use"constant"mcp\_tool\_use"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-class BetaRequestMcpToolResultBlockParam:
-
-String toolUseId
-
-JsonValue; type "mcp\_tool\_result"constant"mcp\_tool\_result"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<Content> content
-
-One of the following:
-
-String
-
-
-
-List<[BetaTextBlockParam](api/beta/messages.md)>
-
-String text
-
-JsonValue; type "text"constant"text"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
-
-One of the following:
-
-
-
-class BetaCitationCharLocationParam:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endCharIndex
-
-long startCharIndex
-
-JsonValue; type "char\_location"constant"char\_location"constant
-
-
-
-class BetaCitationPageLocationParam:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endPageNumber
-
-long startPageNumber
-
-JsonValue; type "page\_location"constant"page\_location"constant
-
-
-
-class BetaCitationContentBlockLocationParam:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-long documentIndex
-
-Optional<String> documentTitle
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
-
-
-
-class BetaCitationWebSearchResultLocationParam:
-
-String citedText
-
-String encryptedIndex
-
-Optional<String> title
-
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-String url
-
-
-
-class BetaCitationSearchResultLocationParam:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-long searchResultIndex
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-String source
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-Optional<String> title
-
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-Optional<Boolean> isError
-
-
-
-class BetaContainerUploadBlockParam:
-
-A content block that represents a file to be uploaded to the container
-Files uploaded via this block will be available in the container's input directory.
-
-String fileId
-
-JsonValue; type "container\_upload"constant"container\_upload"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-class BetaCompactionBlockParam:
-
-A compaction block containing summary of previous context.
-
-Users should round-trip these blocks from responses to subsequent requests
-to maintain context across compaction boundaries.
-
-When content is None, the block represents a failed compaction. The server
-treats these as no-ops. Empty string content is not allowed.
-
-JsonValue; type "compaction"constant"compaction"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-Optional<String> content
-
-Summary of previously compacted content, or null if compaction failed
-
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
-
-
-class BetaMidConversationSystemBlockParam:
-
-System instructions that appear mid-conversation.
-
-Use this block to provide or update system-level instructions at a specific
-point in the conversation, rather than only via the top-level `system` parameter.
-
-
-
-List<[BetaTextBlockParam](api/beta/messages.md)> content
-
-System instruction text blocks.
-
-String text
-
-JsonValue; type "text"constant"text"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
-
-One of the following:
-
-
-
-class BetaCitationCharLocationParam:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endCharIndex
-
-long startCharIndex
-
-JsonValue; type "char\_location"constant"char\_location"constant
-
-
-
-class BetaCitationPageLocationParam:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endPageNumber
-
-long startPageNumber
-
-JsonValue; type "page\_location"constant"page\_location"constant
-
-
-
-class BetaCitationContentBlockLocationParam:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-long documentIndex
-
-Optional<String> documentTitle
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
-
-
-
-class BetaCitationWebSearchResultLocationParam:
-
-String citedText
-
-String encryptedIndex
-
-Optional<String> title
-
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-String url
-
-
-
-class BetaCitationSearchResultLocationParam:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-long searchResultIndex
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-String source
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-Optional<String> title
-
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-JsonValue; type "mid\_conv\_system"constant"mid\_conv\_system"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-class BetaFallbackBlockParam:
-
-A `fallback` block echoed back from a prior response.
-
-Accepted in `messages[].content` and not rendered into the prompt; not
-validated against the request's `fallbacks` chain or top-level `model`.
-
-Echo the assistant turn back verbatim, including this block in its
-original position. The block marks the boundary between content produced
-before and after a fallback hop, and the server relies on that boundary
-to validate the turn: when thinking runs flank the boundary, omitting
-the block merges them into one span the server cannot validate (the
-request is rejected), and moving it into the middle of a single run is
-likewise rejected; between non-thinking blocks the block's placement has
-no validation effect.
-
-
-
-[BetaFallbackInfoParam](api/beta/messages.md) from
-
-Identifies one hop of a fallback transition.
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-CLAUDE\_SONNET\_5("claude-sonnet-5")
-
-High-performance model for coding and agents
-
-CLAUDE\_FABLE\_5("claude-fable-5")
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
-
-Most capable model for cybersecurity and biology research
-
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
-
-New class of intelligence, strongest in coding and cybersecurity
-
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
-
-Best combination of speed and intelligence
-
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-High-performance model for agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-High-performance model for agents and coding
-
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
-
-Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
-
-Exceptional model for specialized complex tasks
-
-
-
-[BetaFallbackInfoParam](api/beta/messages.md) to
-
-Identifies one hop of a fallback transition.
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-CLAUDE\_SONNET\_5("claude-sonnet-5")
-
-High-performance model for coding and agents
-
-CLAUDE\_FABLE\_5("claude-fable-5")
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
-
-Most capable model for cybersecurity and biology research
-
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
-
-New class of intelligence, strongest in coding and cybersecurity
-
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
-
-Best combination of speed and intelligence
-
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-High-performance model for agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-High-performance model for agents and coding
-
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
-
-Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
-
-Exceptional model for specialized complex tasks
-
-JsonValue; type "fallback"constant"fallback"constant
-
-Optional<JsonValue> trigger
-
-The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
-
-
-
-Role role
-
-One of the following:
-
-USER("user")
-
-ASSISTANT("assistant")
-
-SYSTEM("system")
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
-
-
-
-Optional<Container> container
-
-Container identifier for reuse across requests.
-
-
-
-class BetaContainerParams:
-
-Container parameters with skills to be loaded.
-
-Optional<String> id
-
-Container id
-
-
-
-Optional<List<[BetaSkillParams](api/beta/messages.md)>> skills
-
-List of skills to load in the container
-
-String skillId
-
-Skill ID
-
-
-
-Type type
-
-Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
-
-One of the following:
-
-ANTHROPIC("anthropic")
-
-CUSTOM("custom")
-
-Optional<String> version
-
-Skill version or 'latest' for most recent version
-
-String
-
-
-
-Optional<[BetaContextManagementConfig](api/beta/messages.md)> contextManagement
-
-Context management configuration.
-
-This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
-
-Optional<[BetaDiagnosticsParam](api/beta/messages.md)> diagnostics
-
-Request-level diagnostics. Currently carries the previous response
-id for prompt-cache divergence reporting.
-
-
-
-Optional<String> fallbackCreditToken
-
-The `fallback_credit_token` from a prior refusal's `stop_details`.
-
-When a preceding request was refused and returned a `fallback_credit_token`,
-pass that code here on the retry to have the retry's cache-creation tokens
-for the prefix that was warm on the refused model billed at the cache-read
-rate. Must be redeemed by the same organization and workspace, with the same
-request body (optionally extended by one appended `assistant` message whose
-content is the partial text — with any trailing whitespace stripped from
-the final text block — and paired server-tool blocks streamed before the
-refusal; the appended-assistant form is not available for requests with
-`output_format` set or forced `tool_choice`), on an eligible fallback
-model, on the same platform,
-and within 5 minutes of the refusal; a mismatch is a 400. A token minted
-mid-server-tool-loop whose partial content was continuable may only be
-redeemed with the appended-assistant form — if an exact-body retry is
-rejected with a 400 saying the token must be redeemed by continuing the
-partial response, retry with the appended-assistant form instead.
-
-When the appended-assistant form is used on a model that otherwise disallows
-assistant-turn prefill, this token also authorizes that one prefill.
-
-maxLength2048
-
-minLength1
-
-
-
-Optional<List<[BetaFallbackParam](api/beta/messages.md)>> fallbacks
-
-Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-CLAUDE\_SONNET\_5("claude-sonnet-5")
-
-High-performance model for coding and agents
-
-CLAUDE\_FABLE\_5("claude-fable-5")
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
-
-Most capable model for cybersecurity and biology research
-
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
-
-New class of intelligence, strongest in coding and cybersecurity
-
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
-
-Best combination of speed and intelligence
-
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-High-performance model for agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-High-performance model for agents and coding
-
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
-
-Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
-
-Exceptional model for specialized complex tasks
-
-Optional<Long> maxTokens
-
-
-
-Optional<[BetaOutputConfig](api/beta/messages.md)> outputConfig
-
-
-
-Optional<Effort> effort
-
-All possible effort levels.
-
-One of the following:
-
-LOW("low")
-
-MEDIUM("medium")
-
-HIGH("high")
-
-XHIGH("xhigh")
-
-MAX("max")
-
-
-
-Optional<[BetaJsonOutputFormat](api/beta/messages.md)> format
-
-A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
-
-Schema schema
-
-The JSON schema of the format
-
-JsonValue; type "json\_schema"constant"json\_schema"constant
-
-
-
-Optional<[BetaTokenTaskBudget](api/beta/messages.md)> taskBudget
-
-User-configurable total token budget across contexts.
-
-long total
-
-Total token budget across all contexts in the session.
-
-JsonValue; type "tokens"constant"tokens"constant
-
-The budget type. Currently only 'tokens' is supported.
-
-Optional<Long> remaining
-
-Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
-
-
-
-Optional<Speed> speed
-
-One of the following:
-
-STANDARD("standard")
-
-FAST("fast")
-
-
-
-Optional<Thinking> thinking
-
-One of the following:
-
-
-
-class BetaThinkingConfigEnabled:
-
-
-
-long budgetTokens
-
-Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
-
-Must be ≥1024 and less than `max_tokens`.
-
-See [extended thinking](build-with-claude/extended-thinking.md) for details.
-
-minimum1024
-
-JsonValue; type "enabled"constant"enabled"constant
-
-
-
-Optional<Display> display
-
-Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-One of the following:
-
-SUMMARIZED("summarized")
-
-OMITTED("omitted")
-
-
-
-class BetaThinkingConfigDisabled:
-
-JsonValue; type "disabled"constant"disabled"constant
-
-
-
-class BetaThinkingConfigAdaptive:
-
-JsonValue; type "adaptive"constant"adaptive"constant
-
-
-
-Optional<Display> display
-
-Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-One of the following:
-
-SUMMARIZED("summarized")
-
-OMITTED("omitted")
-
-Optional<String> inferenceGeo
-
-Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
-
-
-
-Optional<List<[BetaRequestMcpServerUrlDefinition](api/beta/messages.md)>> mcpServers
-
-MCP servers to be utilized in this request
-
-String name
-
-JsonValue; type "url"constant"url"constant
-
-String url
-
-Optional<String> authorizationToken
-
-
-
-Optional<[BetaRequestMcpServerToolConfiguration](api/beta/messages.md)> toolConfiguration
-
-Optional<List<String>> allowedTools
-
-Optional<Boolean> enabled
-
-Optional<[BetaMetadata](api/beta/messages.md)> metadata
-
-An object describing metadata about the request.
-
-Optional<[BetaOutputConfig](api/beta/messages.md)> outputConfig
-
-Configuration options for the model's output, such as the output format.
-
-
-
-Optional<ServiceTier> serviceTier
-
-Determines whether to use priority capacity (if available) or standard capacity for this request.
-
-Anthropic offers different levels of service for your API requests. See [service-tiers](api/service-tiers.md) for details.
-
-AUTO("auto")
-
-STANDARD\_ONLY("standard\_only")
-
-
-
-Optional<Speed> speed
-
-The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
-
-STANDARD("standard")
-
-FAST("fast")
-
-
-
-Optional<List<String>> stopSequences
-
-Custom text sequences that will cause the model to stop generating.
-
-Our models will normally stop when they have naturally completed their turn, which will result in a response `stop_reason` of `"end_turn"`.
-
-If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
-
-
-
-Optional<System> system
-
-System prompt.
-
-A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
-
-String
-
-
-
-List<[BetaTextBlockParam](api/beta/messages.md)>
-
-String text
-
-JsonValue; type "text"constant"text"constant
-
-
-
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
-
-Create a cache control breakpoint at this content block.
-
-JsonValue; type "ephemeral"constant"ephemeral"constant
-
-
-
-Optional<Ttl> ttl
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-TTL\_5M("5m")
-
-TTL\_1H("1h")
-
-
-
-Optional<List<[BetaTextCitationParam](api/beta/messages.md)>> citations
-
-One of the following:
-
-
-
-class BetaCitationCharLocationParam:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endCharIndex
-
-long startCharIndex
-
-JsonValue; type "char\_location"constant"char\_location"constant
-
-
-
-class BetaCitationPageLocationParam:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endPageNumber
-
-long startPageNumber
-
-JsonValue; type "page\_location"constant"page\_location"constant
-
-
-
-class BetaCitationContentBlockLocationParam:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-long documentIndex
-
-Optional<String> documentTitle
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
-
-
-
-class BetaCitationWebSearchResultLocationParam:
-
-String citedText
-
-String encryptedIndex
-
-Optional<String> title
-
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-String url
-
-
-
-class BetaCitationSearchResultLocationParam:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-long searchResultIndex
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-String source
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-Optional<String> title
-
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-
-
-Optional<[BetaThinkingConfigParam](api/beta/messages.md)> thinking
-
-Configuration for enabling Claude's extended thinking.
-
-When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
-
-See [extended thinking](build-with-claude/extended-thinking.md) for details.
-
-Optional<[BetaToolChoice](api/beta/messages.md)> toolChoice
-
-How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
-
-
-
-Optional<List<[BetaToolUnion](api/beta/messages.md)>> tools
-
-Definitions of tools that the model may use.
-
-If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
-
-There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
-
-Each tool definition includes:
-
-- `name`: Name of the tool.
-- `description`: Optional, but strongly-recommended description of the tool.
-- `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
-
-For example, if you defined `tools` as:
-
-```shiki
-[
-  {
-    "name": "get_stock_price",
-    "description": "Get the current stock price for a given ticker symbol.",
-    "input_schema": {
-      "type": "object",
-      "properties": {
-        "ticker": {
-          "type": "string",
-          "description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
+    ```json
+    [
+      {
+        "name": "get_stock_price",
+        "description": "Get the current stock price for a given ticker symbol.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "ticker": {
+              "type": "string",
+              "description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
+            }
+          },
+          "required": ["ticker"]
         }
-      },
-      "required": ["ticker"]
-    }
-  }
-]
-```
+      }
+    ]
+    ```
 
-
+    And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
 
-And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
+    ```json
+    [
+      {
+        "type": "tool_use",
+        "id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+        "name": "get_stock_price",
+        "input": { "ticker": "^GSPC" }
+      }
+    ]
+    ```
 
-```shiki
-[
-  {
-    "type": "tool_use",
-    "id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
-    "name": "get_stock_price",
-    "input": { "ticker": "^GSPC" }
-  }
-]
-```
+    You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
 
-
+    ```json
+    [
+      {
+        "type": "tool_result",
+        "tool_use_id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+        "content": "259.75 USD"
+      }
+    ]
+    ```
 
-You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
+    Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-```shiki
-[
-  {
-    "type": "tool_result",
-    "tool_use_id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
-    "content": "259.75 USD"
-  }
-]
-```
+    See our [guide](agents-and-tools/tool-use/overview.md) for more details.
 
-
+    - `class BetaTool:`
 
-Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
+      - `InputSchema inputSchema`
 
-See our [guide](agents-and-tools/tool-use/overview.md) for more details.
+        [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
-
+        This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-class BetaTool:
+        - `JsonValue type = "object"`
 
-
+        - `Optional<Properties> properties`
 
-InputSchema inputSchema
+        - `Optional<List<String>> required`
 
-[JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
+      - `String name`
 
-This defines the shape of the `input` that your tool accepts and that the model will produce.
+        Name of the tool.
 
-JsonValue; type "object"constant"object"constant
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Optional<Properties> properties
+        maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-Optional<List<String>> required
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-
+        - `DIRECT("direct")`
 
-String name
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-Name of the tool.
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-maxLength128
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-minLength1
+        Create a cache control breakpoint at this content block.
 
-
+      - `Optional<Boolean> deferLoading`
 
-Optional<List<AllowedCaller>> allowedCallers
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-One of the following:
+      - `Optional<String> description`
 
-DIRECT("direct")
+        Description of what this tool does.
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+        Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+      - `Optional<Boolean> eagerInputStreaming`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+        Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-
+      - `Optional<List<InputExample>> inputExamples`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+      - `Optional<Boolean> strict`
 
-Create a cache control breakpoint at this content block.
+        When true, guarantees schema validation on tool names and inputs
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+      - `Optional<Type> type`
 
-
+    - `class BetaToolBash20241022:`
 
-Optional<Ttl> ttl
+      - `JsonValue name = "bash"`
 
-The time-to-live for the cache control breakpoint.
+        Name of the tool.
 
-This may be one the following values:
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      - `JsonValue type = "bash_20241022"`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-One of the following:
+        - `DIRECT("direct")`
 
-TTL\_5M("5m")
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-TTL\_1H("1h")
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-Optional<Boolean> deferLoading
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-
+        Create a cache control breakpoint at this content block.
 
-Optional<String> description
+      - `Optional<Boolean> deferLoading`
 
-Description of what this tool does.
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+      - `Optional<List<InputExample>> inputExamples`
 
-Optional<Boolean> eagerInputStreaming
+      - `Optional<Boolean> strict`
 
-Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+        When true, guarantees schema validation on tool names and inputs
 
-Optional<List<InputExample>> inputExamples
+    - `class BetaToolBash20250124:`
 
-Optional<Boolean> strict
+      - `JsonValue name = "bash"`
 
-When true, guarantees schema validation on tool names and inputs
+        Name of the tool.
 
-Optional<Type> type
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-
+      - `JsonValue type = "bash_20250124"`
 
-class BetaToolBash20241022:
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-
+        - `DIRECT("direct")`
 
-JsonValue; name "bash"constant"bash"constant
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-Name of the tool.
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-JsonValue; type "bash\_20241022"constant"bash\_20241022"constant
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-
+        Create a cache control breakpoint at this content block.
 
-Optional<List<AllowedCaller>> allowedCallers
+      - `Optional<Boolean> deferLoading`
 
-One of the following:
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-DIRECT("direct")
+      - `Optional<List<InputExample>> inputExamples`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+      - `Optional<Boolean> strict`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+        When true, guarantees schema validation on tool names and inputs
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+    - `class BetaCodeExecutionTool20250522:`
 
-
+      - `JsonValue name = "code_execution"`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+        Name of the tool.
 
-Create a cache control breakpoint at this content block.
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+      - `JsonValue type = "code_execution_20250522"`
 
-
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-Optional<Ttl> ttl
+        - `DIRECT("direct")`
 
-The time-to-live for the cache control breakpoint.
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-This may be one the following values:
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-One of the following:
+        Create a cache control breakpoint at this content block.
 
-TTL\_5M("5m")
+      - `Optional<Boolean> deferLoading`
 
-TTL\_1H("1h")
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-Optional<Boolean> deferLoading
+      - `Optional<Boolean> strict`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+        When true, guarantees schema validation on tool names and inputs
 
-Optional<List<InputExample>> inputExamples
+    - `class BetaCodeExecutionTool20250825:`
 
-Optional<Boolean> strict
+      - `JsonValue name = "code_execution"`
 
-When true, guarantees schema validation on tool names and inputs
+        Name of the tool.
 
-
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-class BetaToolBash20250124:
+      - `JsonValue type = "code_execution_20250825"`
 
-
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-JsonValue; name "bash"constant"bash"constant
+        - `DIRECT("direct")`
 
-Name of the tool.
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-JsonValue; type "bash\_20250124"constant"bash\_20250124"constant
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-Optional<List<AllowedCaller>> allowedCallers
+        Create a cache control breakpoint at this content block.
 
-One of the following:
+      - `Optional<Boolean> deferLoading`
 
-DIRECT("direct")
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+      - `Optional<Boolean> strict`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+        When true, guarantees schema validation on tool names and inputs
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+    - `class BetaCodeExecutionTool20260120:`
 
-
+      Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+      - `JsonValue name = "code_execution"`
 
-Create a cache control breakpoint at this content block.
+        Name of the tool.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-
+      - `JsonValue type = "code_execution_20260120"`
 
-Optional<Ttl> ttl
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-The time-to-live for the cache control breakpoint.
+        - `DIRECT("direct")`
 
-This may be one the following values:
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-One of the following:
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-TTL\_5M("5m")
+        Create a cache control breakpoint at this content block.
 
-TTL\_1H("1h")
+      - `Optional<Boolean> deferLoading`
 
-Optional<Boolean> deferLoading
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      - `Optional<Boolean> strict`
 
-Optional<List<InputExample>> inputExamples
+        When true, guarantees schema validation on tool names and inputs
 
-Optional<Boolean> strict
+    - `class BetaCodeExecutionTool20260521:`
 
-When true, guarantees schema validation on tool names and inputs
+      Code execution tool with REPL state persistence.
 
-
+      - `JsonValue name = "code_execution"`
 
-class BetaCodeExecutionTool20250522:
+        Name of the tool.
 
-
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-JsonValue; name "code\_execution"constant"code\_execution"constant
+      - `JsonValue type = "code_execution_20260521"`
 
-Name of the tool.
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        - `DIRECT("direct")`
 
-JsonValue; type "code\_execution\_20250522"constant"code\_execution\_20250522"constant
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-Optional<List<AllowedCaller>> allowedCallers
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-One of the following:
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-DIRECT("direct")
+        Create a cache control breakpoint at this content block.
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+      - `Optional<Boolean> deferLoading`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+      - `Optional<Boolean> strict`
 
-
+        When true, guarantees schema validation on tool names and inputs
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+    - `class BetaBrowserToolset20260801:`
 
-Create a cache control breakpoint at this content block.
+      The browser toolset: a single `tools[]` entry (carrying no
+      `name`) that declares the browser tool family. The model is served
+      the family's tool with any members disabled via `configs` removed
+      from its schema.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+      - `JsonValue type = "browser_toolset_20260801"`
 
-
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-Optional<Ttl> ttl
+        Create a cache control breakpoint at this content block.
 
-The time-to-live for the cache control breakpoint.
+      - `Optional<BetaBrowserToolsetConfigs> configs`
 
-This may be one the following values:
+        Per-member configuration for `browser_toolset_20260801`: one
+        optional field per member tool, keyed by the member name — the same
+        name the member's `tool_use` blocks carry. Every member is an
+        accepted key, and a member's defaults apply wherever its key is
+        absent. Unknown keys are rejected: the field set is this toolset
+        version's complete member set.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        - `Optional<BetaBrowserCloseTabConfig> closeTab`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          `close_tab`'s config overrides.
 
-One of the following:
+          - `Optional<Boolean> deferLoading`
 
-TTL\_5M("5m")
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-TTL\_1H("1h")
+          - `Optional<Boolean> enabled`
 
-Optional<Boolean> deferLoading
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+        - `Optional<BetaBrowserDoubleClickConfig> doubleClick`
 
-Optional<Boolean> strict
+          `double_click`'s config overrides.
 
-When true, guarantees schema validation on tool names and inputs
+          - `Optional<Boolean> deferLoading`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-class BetaCodeExecutionTool20250825:
+          - `Optional<Boolean> enabled`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-JsonValue; name "code\_execution"constant"code\_execution"constant
+        - `Optional<BetaBrowserFileUploadConfig> fileUpload`
 
-Name of the tool.
+          `file_upload`'s config overrides.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          - `Optional<Boolean> deferLoading`
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Optional<Boolean> enabled`
 
-Optional<List<AllowedCaller>> allowedCallers
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-One of the following:
+        - `Optional<BetaBrowserFindConfig> find`
 
-DIRECT("direct")
+          `find`'s config overrides.
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+          - `Optional<Boolean> deferLoading`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+          - `Optional<Boolean> enabled`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+        - `Optional<BetaBrowserFormInputConfig> formInput`
 
-Create a cache control breakpoint at this content block.
+          `form_input`'s config overrides.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+          - `Optional<Boolean> deferLoading`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Optional<Ttl> ttl
+          - `Optional<Boolean> enabled`
 
-The time-to-live for the cache control breakpoint.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-This may be one the following values:
+        - `Optional<BetaBrowserGetPageTextConfig> getPageText`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          `get_page_text`'s config overrides.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          - `Optional<Boolean> deferLoading`
 
-One of the following:
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-TTL\_5M("5m")
+          - `Optional<Boolean> enabled`
 
-TTL\_1H("1h")
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Optional<Boolean> deferLoading
+        - `Optional<BetaBrowserHoldKeyConfig> holdKey`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          `hold_key`'s config overrides.
 
-Optional<Boolean> strict
+          - `Optional<Boolean> deferLoading`
 
-When true, guarantees schema validation on tool names and inputs
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Optional<Boolean> enabled`
 
-class BetaCodeExecutionTool20260120:
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+        - `Optional<BetaBrowserHoverConfig> hover`
 
-
+          `hover`'s config overrides.
 
-JsonValue; name "code\_execution"constant"code\_execution"constant
+          - `Optional<Boolean> deferLoading`
 
-Name of the tool.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          - `Optional<Boolean> enabled`
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+        - `Optional<BetaBrowserJavascriptExecConfig> javascriptExec`
 
-Optional<List<AllowedCaller>> allowedCallers
+          `javascript_exec`'s config overrides.
 
-One of the following:
+          - `Optional<Boolean> deferLoading`
 
-DIRECT("direct")
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+          - `Optional<Boolean> enabled`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+        - `Optional<BetaBrowserKeyConfig> key`
 
-
+          `key`'s config overrides.
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+          - `Optional<Boolean> deferLoading`
 
-Create a cache control breakpoint at this content block.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+          - `Optional<Boolean> enabled`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Optional<Ttl> ttl
+        - `Optional<BetaBrowserLeftClickConfig> leftClick`
 
-The time-to-live for the cache control breakpoint.
+          `left_click`'s config overrides.
 
-This may be one the following values:
+          - `Optional<Boolean> deferLoading`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          - `Optional<Boolean> enabled`
 
-One of the following:
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-TTL\_5M("5m")
+        - `Optional<BetaBrowserLeftClickDragConfig> leftClickDrag`
 
-TTL\_1H("1h")
+          `left_click_drag`'s config overrides.
 
-Optional<Boolean> deferLoading
+          - `Optional<Boolean> deferLoading`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Optional<Boolean> strict
+          - `Optional<Boolean> enabled`
 
-When true, guarantees schema validation on tool names and inputs
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+        - `Optional<BetaBrowserLeftMouseDownConfig> leftMouseDown`
 
-class BetaCodeExecutionTool20260521:
+          `left_mouse_down`'s config overrides.
 
-Code execution tool with REPL state persistence.
+          - `Optional<Boolean> deferLoading`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-JsonValue; name "code\_execution"constant"code\_execution"constant
+          - `Optional<Boolean> enabled`
 
-Name of the tool.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        - `Optional<BetaBrowserLeftMouseUpConfig> leftMouseUp`
 
-JsonValue; type "code\_execution\_20260521"constant"code\_execution\_20260521"constant
+          `left_mouse_up`'s config overrides.
 
-
+          - `Optional<Boolean> deferLoading`
 
-Optional<List<AllowedCaller>> allowedCallers
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-One of the following:
+          - `Optional<Boolean> enabled`
 
-DIRECT("direct")
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+        - `Optional<BetaBrowserListTabsConfig> listTabs`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+          `list_tabs`'s config overrides.
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+          - `Optional<Boolean> deferLoading`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+          - `Optional<Boolean> enabled`
 
-Create a cache control breakpoint at this content block.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+        - `Optional<BetaBrowserMiddleClickConfig> middleClick`
 
-
+          `middle_click`'s config overrides.
 
-Optional<Ttl> ttl
+          - `Optional<Boolean> deferLoading`
 
-The time-to-live for the cache control breakpoint.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-This may be one the following values:
+          - `Optional<Boolean> enabled`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        - `Optional<BetaBrowserMouseMoveConfig> mouseMove`
 
-One of the following:
+          `mouse_move`'s config overrides.
 
-TTL\_5M("5m")
+          - `Optional<Boolean> deferLoading`
 
-TTL\_1H("1h")
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Optional<Boolean> deferLoading
+          - `Optional<Boolean> enabled`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Optional<Boolean> strict
+        - `Optional<BetaBrowserNavigateConfig> navigate`
 
-When true, guarantees schema validation on tool names and inputs
+          `navigate`'s config overrides.
 
-
+          - `Optional<Boolean> deferLoading`
 
-class BetaToolComputerUse20241022:
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-long displayHeightPx
+          - `Optional<Boolean> enabled`
 
-The height of the display in pixels.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-long displayWidthPx
+        - `Optional<BetaBrowserNewTabConfig> newTab`
 
-The width of the display in pixels.
+          `new_tab`'s config overrides.
 
-
+          - `Optional<Boolean> deferLoading`
 
-JsonValue; name "computer"constant"computer"constant
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Name of the tool.
+          - `Optional<Boolean> enabled`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-JsonValue; type "computer\_20241022"constant"computer\_20241022"constant
+        - `Optional<BetaBrowserReadConsoleConfig> readConsole`
 
-
+          `read_console`'s config overrides.
 
-Optional<List<AllowedCaller>> allowedCallers
+          - `Optional<Boolean> deferLoading`
 
-One of the following:
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-DIRECT("direct")
+          - `Optional<Boolean> enabled`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+        - `Optional<BetaBrowserReadNetworkConfig> readNetwork`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+          `read_network`'s config overrides.
 
-
+          - `Optional<Boolean> deferLoading`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Create a cache control breakpoint at this content block.
+          - `Optional<Boolean> enabled`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+        - `Optional<BetaBrowserReadPageConfig> readPage`
 
-Optional<Ttl> ttl
+          `read_page`'s config overrides.
 
-The time-to-live for the cache control breakpoint.
+          - `Optional<Boolean> deferLoading`
 
-This may be one the following values:
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          - `Optional<Boolean> enabled`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-One of the following:
+        - `Optional<BetaBrowserRightClickConfig> rightClick`
 
-TTL\_5M("5m")
+          `right_click`'s config overrides.
 
-TTL\_1H("1h")
+          - `Optional<Boolean> deferLoading`
 
-Optional<Boolean> deferLoading
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          - `Optional<Boolean> enabled`
 
-Optional<Long> displayNumber
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-The X11 display number (e.g. 0, 1) for the display.
+        - `Optional<BetaBrowserScreenshotConfig> screenshot`
 
-Optional<List<InputExample>> inputExamples
+          `screenshot`'s config overrides.
 
-Optional<Boolean> strict
+          - `Optional<Boolean> deferLoading`
 
-When true, guarantees schema validation on tool names and inputs
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Optional<Boolean> enabled`
 
-class BetaMemoryTool20250818:
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+        - `Optional<BetaBrowserScrollConfig> scroll`
 
-JsonValue; name "memory"constant"memory"constant
+          `scroll`'s config overrides.
 
-Name of the tool.
+          - `Optional<Boolean> deferLoading`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-JsonValue; type "memory\_20250818"constant"memory\_20250818"constant
+          - `Optional<Boolean> enabled`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Optional<List<AllowedCaller>> allowedCallers
+        - `Optional<BetaBrowserScrollToConfig> scrollTo`
 
-One of the following:
+          `scroll_to`'s config overrides.
 
-DIRECT("direct")
+          - `Optional<Boolean> deferLoading`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+          - `Optional<Boolean> enabled`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+        - `Optional<BetaBrowserSwitchTabConfig> switchTab`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+          `switch_tab`'s config overrides.
 
-Create a cache control breakpoint at this content block.
+          - `Optional<Boolean> deferLoading`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Optional<Boolean> enabled`
 
-Optional<Ttl> ttl
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-The time-to-live for the cache control breakpoint.
+        - `Optional<BetaBrowserTripleClickConfig> tripleClick`
 
-This may be one the following values:
+          `triple_click`'s config overrides.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          - `Optional<Boolean> deferLoading`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-One of the following:
+          - `Optional<Boolean> enabled`
 
-TTL\_5M("5m")
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-TTL\_1H("1h")
+        - `Optional<BetaBrowserTypeConfig> type`
 
-Optional<Boolean> deferLoading
+          `type`'s config overrides.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          - `Optional<Boolean> deferLoading`
 
-Optional<List<InputExample>> inputExamples
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Optional<Boolean> strict
+          - `Optional<Boolean> enabled`
 
-When true, guarantees schema validation on tool names and inputs
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+        - `Optional<BetaBrowserWaitConfig> wait`
 
-class BetaToolComputerUse20250124:
+          `wait`'s config overrides.
 
-long displayHeightPx
+          - `Optional<Boolean> deferLoading`
 
-The height of the display in pixels.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-long displayWidthPx
+          - `Optional<Boolean> enabled`
 
-The width of the display in pixels.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+        - `Optional<BetaBrowserZoomConfig> zoom`
 
-JsonValue; name "computer"constant"computer"constant
+          `zoom`'s config overrides.
 
-Name of the tool.
+          - `Optional<Boolean> deferLoading`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-JsonValue; type "computer\_20250124"constant"computer\_20250124"constant
+          - `Optional<Boolean> enabled`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Optional<List<AllowedCaller>> allowedCallers
+    - `class BetaToolComputerUse20241022:`
 
-One of the following:
+      - `long displayHeightPx`
 
-DIRECT("direct")
+        The height of the display in pixels.
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+        minimum: 1
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+      - `long displayWidthPx`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+        The width of the display in pixels.
 
-
+        minimum: 1
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+      - `JsonValue name = "computer"`
 
-Create a cache control breakpoint at this content block.
+        Name of the tool.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-
+      - `JsonValue type = "computer_20241022"`
 
-Optional<Ttl> ttl
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-The time-to-live for the cache control breakpoint.
+        - `DIRECT("direct")`
 
-This may be one the following values:
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-One of the following:
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-TTL\_5M("5m")
+        Create a cache control breakpoint at this content block.
 
-TTL\_1H("1h")
+      - `Optional<Boolean> deferLoading`
 
-Optional<Boolean> deferLoading
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      - `Optional<Long> displayNumber`
 
-Optional<Long> displayNumber
+        The X11 display number (e.g. 0, 1) for the display.
 
-The X11 display number (e.g. 0, 1) for the display.
+        minimum: 0
 
-Optional<List<InputExample>> inputExamples
+      - `Optional<List<InputExample>> inputExamples`
 
-Optional<Boolean> strict
+      - `Optional<Boolean> strict`
 
-When true, guarantees schema validation on tool names and inputs
+        When true, guarantees schema validation on tool names and inputs
 
-
+    - `class BetaMemoryTool20250818:`
 
-class BetaToolTextEditor20241022:
+      - `JsonValue name = "memory"`
 
-
+        Name of the tool.
 
-JsonValue; name "str\_replace\_editor"constant"str\_replace\_editor"constant
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Name of the tool.
+      - `JsonValue type = "memory_20250818"`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-JsonValue; type "text\_editor\_20241022"constant"text\_editor\_20241022"constant
+        - `DIRECT("direct")`
 
-
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-Optional<List<AllowedCaller>> allowedCallers
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-One of the following:
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-DIRECT("direct")
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+        Create a cache control breakpoint at this content block.
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+      - `Optional<Boolean> deferLoading`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-
+      - `Optional<List<InputExample>> inputExamples`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+      - `Optional<Boolean> strict`
 
-Create a cache control breakpoint at this content block.
+        When true, guarantees schema validation on tool names and inputs
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+    - `class BetaToolComputerUse20250124:`
 
-
+      - `long displayHeightPx`
 
-Optional<Ttl> ttl
+        The height of the display in pixels.
 
-The time-to-live for the cache control breakpoint.
+        minimum: 1
 
-This may be one the following values:
+      - `long displayWidthPx`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        The width of the display in pixels.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        minimum: 1
 
-One of the following:
+      - `JsonValue name = "computer"`
 
-TTL\_5M("5m")
+        Name of the tool.
 
-TTL\_1H("1h")
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Optional<Boolean> deferLoading
+      - `JsonValue type = "computer_20250124"`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-Optional<List<InputExample>> inputExamples
+        - `DIRECT("direct")`
 
-Optional<Boolean> strict
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-When true, guarantees schema validation on tool names and inputs
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-class BetaToolComputerUse20251124:
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-long displayHeightPx
+        Create a cache control breakpoint at this content block.
 
-The height of the display in pixels.
+      - `Optional<Boolean> deferLoading`
 
-long displayWidthPx
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-The width of the display in pixels.
+      - `Optional<Long> displayNumber`
 
-
+        The X11 display number (e.g. 0, 1) for the display.
 
-JsonValue; name "computer"constant"computer"constant
+        minimum: 0
 
-Name of the tool.
+      - `Optional<List<InputExample>> inputExamples`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      - `Optional<Boolean> strict`
 
-JsonValue; type "computer\_20251124"constant"computer\_20251124"constant
+        When true, guarantees schema validation on tool names and inputs
 
-
+    - `class BetaToolTextEditor20241022:`
 
-Optional<List<AllowedCaller>> allowedCallers
+      - `JsonValue name = "str_replace_editor"`
 
-One of the following:
+        Name of the tool.
 
-DIRECT("direct")
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+      - `JsonValue type = "text_editor_20241022"`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+        - `DIRECT("direct")`
 
-
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-Create a cache control breakpoint at this content block.
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-
+        Create a cache control breakpoint at this content block.
 
-Optional<Ttl> ttl
+      - `Optional<Boolean> deferLoading`
 
-The time-to-live for the cache control breakpoint.
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-This may be one the following values:
+      - `Optional<List<InputExample>> inputExamples`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      - `Optional<Boolean> strict`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        When true, guarantees schema validation on tool names and inputs
 
-One of the following:
+    - `class BetaToolComputerUse20251124:`
 
-TTL\_5M("5m")
+      - `long displayHeightPx`
 
-TTL\_1H("1h")
+        The height of the display in pixels.
 
-Optional<Boolean> deferLoading
+        minimum: 1
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      - `long displayWidthPx`
 
-Optional<Long> displayNumber
+        The width of the display in pixels.
 
-The X11 display number (e.g. 0, 1) for the display.
+        minimum: 1
 
-Optional<Boolean> enableZoom
+      - `JsonValue name = "computer"`
 
-Whether to enable an action to take a zoomed-in screenshot of the screen.
+        Name of the tool.
 
-Optional<List<InputExample>> inputExamples
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Optional<Boolean> strict
+      - `JsonValue type = "computer_20251124"`
 
-When true, guarantees schema validation on tool names and inputs
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-
+        - `DIRECT("direct")`
 
-class BetaToolTextEditor20250124:
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-JsonValue; name "str\_replace\_editor"constant"str\_replace\_editor"constant
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-Name of the tool.
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        Create a cache control breakpoint at this content block.
 
-JsonValue; type "text\_editor\_20250124"constant"text\_editor\_20250124"constant
+      - `Optional<Boolean> deferLoading`
 
-
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-Optional<List<AllowedCaller>> allowedCallers
+      - `Optional<Long> displayNumber`
 
-One of the following:
+        The X11 display number (e.g. 0, 1) for the display.
 
-DIRECT("direct")
+        minimum: 0
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+      - `Optional<Boolean> enableZoom`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+        Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+      - `Optional<List<InputExample>> inputExamples`
 
-
+      - `Optional<Boolean> strict`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+        When true, guarantees schema validation on tool names and inputs
 
-Create a cache control breakpoint at this content block.
+    - `class BetaComputerToolset20260801:`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+      The computer toolset: a single `tools[]` entry (carrying no
+      `name`) that declares the computer tool family. The model is
+      served the family's tool with any members disabled via `configs`
+      removed from its schema. Every member is enabled by default, zoom
+      included. The single-tool options `display_number` and
+      `enable_zoom` are not fields of a toolset entry — it carries only
+      `type`, `configs`, and `cache_control`; zoom is controlled
+      via `configs.zoom.enabled`.
 
-
+      - `JsonValue type = "computer_toolset_20260801"`
 
-Optional<Ttl> ttl
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-The time-to-live for the cache control breakpoint.
+        Create a cache control breakpoint at this content block.
 
-This may be one the following values:
+      - `Optional<BetaComputerToolsetConfigs> configs`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        Per-member configuration for `computer_toolset_20260801`: one
+        optional field per member tool, keyed by the member name — the same
+        name the member's `tool_use` blocks carry. Every member is an
+        accepted key, and a member's defaults apply wherever its key is
+        absent. Unknown keys are rejected: the field set is this toolset
+        version's complete member set.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        - `Optional<BetaComputerCursorPositionConfig> cursorPosition`
 
-One of the following:
+          `cursor_position`'s config overrides.
 
-TTL\_5M("5m")
+          - `Optional<Boolean> deferLoading`
 
-TTL\_1H("1h")
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Optional<Boolean> deferLoading
+          - `Optional<Boolean> enabled`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Optional<List<InputExample>> inputExamples
+        - `Optional<BetaComputerDoubleClickConfig> doubleClick`
 
-Optional<Boolean> strict
+          `double_click`'s config overrides.
 
-When true, guarantees schema validation on tool names and inputs
+          - `Optional<Boolean> deferLoading`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-class BetaToolTextEditor20250429:
+          - `Optional<Boolean> enabled`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-JsonValue; name "str\_replace\_based\_edit\_tool"constant"str\_replace\_based\_edit\_tool"constant
+        - `Optional<BetaComputerHoldKeyConfig> holdKey`
 
-Name of the tool.
+          `hold_key`'s config overrides.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          - `Optional<Boolean> deferLoading`
 
-JsonValue; type "text\_editor\_20250429"constant"text\_editor\_20250429"constant
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Optional<Boolean> enabled`
 
-Optional<List<AllowedCaller>> allowedCallers
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-One of the following:
+        - `Optional<BetaComputerKeyConfig> key`
 
-DIRECT("direct")
+          `key`'s config overrides.
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+          - `Optional<Boolean> deferLoading`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+          - `Optional<Boolean> enabled`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+        - `Optional<BetaComputerLeftClickConfig> leftClick`
 
-Create a cache control breakpoint at this content block.
+          `left_click`'s config overrides.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+          - `Optional<Boolean> deferLoading`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Optional<Ttl> ttl
+          - `Optional<Boolean> enabled`
 
-The time-to-live for the cache control breakpoint.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-This may be one the following values:
+        - `Optional<BetaComputerLeftClickDragConfig> leftClickDrag`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          `left_click_drag`'s config overrides.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          - `Optional<Boolean> deferLoading`
 
-One of the following:
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-TTL\_5M("5m")
+          - `Optional<Boolean> enabled`
 
-TTL\_1H("1h")
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Optional<Boolean> deferLoading
+        - `Optional<BetaComputerLeftMouseDownConfig> leftMouseDown`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          `left_mouse_down`'s config overrides.
 
-Optional<List<InputExample>> inputExamples
+          - `Optional<Boolean> deferLoading`
 
-Optional<Boolean> strict
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-When true, guarantees schema validation on tool names and inputs
+          - `Optional<Boolean> enabled`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-class BetaToolTextEditor20250728:
+        - `Optional<BetaComputerLeftMouseUpConfig> leftMouseUp`
 
-
+          `left_mouse_up`'s config overrides.
 
-JsonValue; name "str\_replace\_based\_edit\_tool"constant"str\_replace\_based\_edit\_tool"constant
+          - `Optional<Boolean> deferLoading`
 
-Name of the tool.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          - `Optional<Boolean> enabled`
 
-JsonValue; type "text\_editor\_20250728"constant"text\_editor\_20250728"constant
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+        - `Optional<BetaComputerMiddleClickConfig> middleClick`
 
-Optional<List<AllowedCaller>> allowedCallers
+          `middle_click`'s config overrides.
 
-One of the following:
+          - `Optional<Boolean> deferLoading`
 
-DIRECT("direct")
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+          - `Optional<Boolean> enabled`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+        - `Optional<BetaComputerMouseMoveConfig> mouseMove`
 
-
+          `mouse_move`'s config overrides.
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+          - `Optional<Boolean> deferLoading`
 
-Create a cache control breakpoint at this content block.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+          - `Optional<Boolean> enabled`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Optional<Ttl> ttl
+        - `Optional<BetaComputerRightClickConfig> rightClick`
 
-The time-to-live for the cache control breakpoint.
+          `right_click`'s config overrides.
 
-This may be one the following values:
+          - `Optional<Boolean> deferLoading`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          - `Optional<Boolean> enabled`
 
-One of the following:
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-TTL\_5M("5m")
+        - `Optional<BetaComputerScreenshotConfig> screenshot`
 
-TTL\_1H("1h")
+          `screenshot`'s config overrides.
 
-Optional<Boolean> deferLoading
+          - `Optional<Boolean> deferLoading`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Optional<List<InputExample>> inputExamples
+          - `Optional<Boolean> enabled`
 
-Optional<Long> maxCharacters
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
+        - `Optional<BetaComputerScrollConfig> scroll`
 
-Optional<Boolean> strict
+          `scroll`'s config overrides.
 
-When true, guarantees schema validation on tool names and inputs
+          - `Optional<Boolean> deferLoading`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-class BetaWebSearchTool20250305:
+          - `Optional<Boolean> enabled`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-JsonValue; name "web\_search"constant"web\_search"constant
+        - `Optional<BetaComputerTripleClickConfig> tripleClick`
 
-Name of the tool.
+          `triple_click`'s config overrides.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          - `Optional<Boolean> deferLoading`
 
-JsonValue; type "web\_search\_20250305"constant"web\_search\_20250305"constant
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Optional<Boolean> enabled`
 
-Optional<List<AllowedCaller>> allowedCallers
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-One of the following:
+        - `Optional<BetaComputerTypeConfig> type`
 
-DIRECT("direct")
+          `type`'s config overrides.
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+          - `Optional<Boolean> deferLoading`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+          - `Optional<Boolean> enabled`
 
-Optional<List<String>> allowedDomains
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+        - `Optional<BetaComputerWaitConfig> wait`
 
-Optional<List<String>> blockedDomains
+          `wait`'s config overrides.
 
-If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+          - `Optional<Boolean> deferLoading`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+          - `Optional<Boolean> enabled`
 
-Create a cache control breakpoint at this content block.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+        - `Optional<BetaComputerZoomConfig> zoom`
 
-
+          `zoom`'s config overrides.
 
-Optional<Ttl> ttl
+          - `Optional<Boolean> deferLoading`
 
-The time-to-live for the cache control breakpoint.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-This may be one the following values:
+          - `Optional<Boolean> enabled`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+    - `class BetaToolTextEditor20250124:`
 
-One of the following:
+      - `JsonValue name = "str_replace_editor"`
 
-TTL\_5M("5m")
+        Name of the tool.
 
-TTL\_1H("1h")
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Optional<Boolean> deferLoading
+      - `JsonValue type = "text_editor_20250124"`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-Optional<Long> maxUses
+        - `DIRECT("direct")`
 
-Maximum number of times the tool can be used in the API request.
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-Optional<Boolean> strict
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-When true, guarantees schema validation on tool names and inputs
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-Optional<[BetaUserLocation](api/beta/messages.md)> userLocation
+        Create a cache control breakpoint at this content block.
 
-Parameters for the user's location. Used to provide more relevant search results.
+      - `Optional<Boolean> deferLoading`
 
-JsonValue; type "approximate"constant"approximate"constant
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-Optional<String> city
+      - `Optional<List<InputExample>> inputExamples`
 
-The city of the user.
+      - `Optional<Boolean> strict`
 
-Optional<String> country
+        When true, guarantees schema validation on tool names and inputs
 
-The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+    - `class BetaToolTextEditor20250429:`
 
-Optional<String> region
+      - `JsonValue name = "str_replace_based_edit_tool"`
 
-The region of the user.
+        Name of the tool.
 
-Optional<String> timezone
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+      - `JsonValue type = "text_editor_20250429"`
 
-
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-class BetaWebFetchTool20250910:
+        - `DIRECT("direct")`
 
-
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-JsonValue; name "web\_fetch"constant"web\_fetch"constant
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-Name of the tool.
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-JsonValue; type "web\_fetch\_20250910"constant"web\_fetch\_20250910"constant
+        Create a cache control breakpoint at this content block.
 
-
+      - `Optional<Boolean> deferLoading`
 
-Optional<List<AllowedCaller>> allowedCallers
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-One of the following:
+      - `Optional<List<InputExample>> inputExamples`
 
-DIRECT("direct")
+      - `Optional<Boolean> strict`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+        When true, guarantees schema validation on tool names and inputs
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+    - `class BetaToolTextEditor20250728:`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+      - `JsonValue name = "str_replace_based_edit_tool"`
 
-Optional<List<String>> allowedDomains
+        Name of the tool.
 
-List of domains to allow fetching from
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Optional<List<String>> blockedDomains
+      - `JsonValue type = "text_editor_20250728"`
 
-List of domains to block fetching from
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-
+        - `DIRECT("direct")`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-Create a cache control breakpoint at this content block.
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-Optional<Ttl> ttl
+        Create a cache control breakpoint at this content block.
 
-The time-to-live for the cache control breakpoint.
+      - `Optional<Boolean> deferLoading`
 
-This may be one the following values:
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      - `Optional<List<InputExample>> inputExamples`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      - `Optional<Long> maxCharacters`
 
-One of the following:
+        Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-TTL\_5M("5m")
+        minimum: 1
 
-TTL\_1H("1h")
+      - `Optional<Boolean> strict`
 
-
+        When true, guarantees schema validation on tool names and inputs
 
-Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
+    - `class BetaWebSearchTool20250305:`
 
-Citations configuration for fetched documents. Citations are disabled by default.
+      - `JsonValue name = "web_search"`
 
-Optional<Boolean> enabled
+        Name of the tool.
 
-Optional<Boolean> deferLoading
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      - `JsonValue type = "web_search_20250305"`
 
-Optional<Long> maxContentTokens
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+        - `DIRECT("direct")`
 
-Optional<Long> maxUses
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-Maximum number of times the tool can be used in the API request.
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-Optional<Boolean> strict
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-When true, guarantees schema validation on tool names and inputs
+      - `Optional<List<String>> allowedDomains`
 
-
+        If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-class BetaWebSearchTool20260209:
+      - `Optional<List<String>> blockedDomains`
 
-
+        If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-JsonValue; name "web\_search"constant"web\_search"constant
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-Name of the tool.
+        Create a cache control breakpoint at this content block.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      - `Optional<Boolean> deferLoading`
 
-JsonValue; type "web\_search\_20260209"constant"web\_search\_20260209"constant
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-
+      - `Optional<Long> maxUses`
 
-Optional<List<AllowedCaller>> allowedCallers
+        Maximum number of times the tool can be used in the API request.
 
-One of the following:
+        exclusiveMinimum: 0
 
-DIRECT("direct")
+      - `Optional<Boolean> strict`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+        When true, guarantees schema validation on tool names and inputs
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+      - `Optional<BetaUserLocation> userLocation`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+        Parameters for the user's location. Used to provide more relevant search results.
 
-Optional<List<String>> allowedDomains
+        - `JsonValue type = "approximate"`
 
-If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+        - `Optional<String> city`
 
-Optional<List<String>> blockedDomains
+          The city of the user.
 
-If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+          maxLength: 255, minLength: 1
 
-
+        - `Optional<String> country`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+          The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-Create a cache control breakpoint at this content block.
+          maxLength: 2, minLength: 2
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+        - `Optional<String> region`
 
-
+          The region of the user.
 
-Optional<Ttl> ttl
+          maxLength: 255, minLength: 1
 
-The time-to-live for the cache control breakpoint.
+        - `Optional<String> timezone`
 
-This may be one the following values:
+          The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          maxLength: 255, minLength: 1
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+    - `class BetaWebFetchTool20250910:`
 
-One of the following:
+      - `JsonValue name = "web_fetch"`
 
-TTL\_5M("5m")
+        Name of the tool.
 
-TTL\_1H("1h")
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Optional<Boolean> deferLoading
+      - `JsonValue type = "web_fetch_20250910"`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-Optional<Long> maxUses
+        - `DIRECT("direct")`
 
-Maximum number of times the tool can be used in the API request.
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-Optional<Boolean> strict
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-When true, guarantees schema validation on tool names and inputs
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-
+      - `Optional<List<String>> allowedDomains`
 
-Optional<[BetaUserLocation](api/beta/messages.md)> userLocation
+        List of domains to allow fetching from
 
-Parameters for the user's location. Used to provide more relevant search results.
+      - `Optional<List<String>> blockedDomains`
 
-JsonValue; type "approximate"constant"approximate"constant
+        List of domains to block fetching from
 
-Optional<String> city
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-The city of the user.
+        Create a cache control breakpoint at this content block.
 
-Optional<String> country
+      - `Optional<BetaCitationsConfigParam> citations`
 
-The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+        Citations configuration for fetched documents. Citations are disabled by default.
 
-Optional<String> region
+      - `Optional<Boolean> deferLoading`
 
-The region of the user.
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-Optional<String> timezone
+      - `Optional<Long> maxContentTokens`
 
-The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+        Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-
+        exclusiveMinimum: 0
 
-class BetaWebFetchTool20260209:
+      - `Optional<Long> maxUses`
 
-
+        Maximum number of times the tool can be used in the API request.
 
-JsonValue; name "web\_fetch"constant"web\_fetch"constant
+        exclusiveMinimum: 0
 
-Name of the tool.
+      - `Optional<Boolean> strict`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        When true, guarantees schema validation on tool names and inputs
 
-JsonValue; type "web\_fetch\_20260209"constant"web\_fetch\_20260209"constant
+    - `class BetaWebSearchTool20260209:`
 
-
+      - `JsonValue name = "web_search"`
 
-Optional<List<AllowedCaller>> allowedCallers
+        Name of the tool.
 
-One of the following:
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-DIRECT("direct")
+      - `JsonValue type = "web_search_20260209"`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+        - `DIRECT("direct")`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-Optional<List<String>> allowedDomains
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-List of domains to allow fetching from
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-Optional<List<String>> blockedDomains
+      - `Optional<List<String>> allowedDomains`
 
-List of domains to block fetching from
+        If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-
+      - `Optional<List<String>> blockedDomains`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+        If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-Create a cache control breakpoint at this content block.
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+        Create a cache control breakpoint at this content block.
 
-
+      - `Optional<Boolean> deferLoading`
 
-Optional<Ttl> ttl
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-The time-to-live for the cache control breakpoint.
+      - `Optional<Long> maxUses`
 
-This may be one the following values:
+        Maximum number of times the tool can be used in the API request.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        exclusiveMinimum: 0
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      - `Optional<Boolean> strict`
 
-One of the following:
+        When true, guarantees schema validation on tool names and inputs
 
-TTL\_5M("5m")
+      - `Optional<BetaUserLocation> userLocation`
 
-TTL\_1H("1h")
+        Parameters for the user's location. Used to provide more relevant search results.
 
-
+    - `class BetaWebFetchTool20260209:`
 
-Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
+      - `JsonValue name = "web_fetch"`
 
-Citations configuration for fetched documents. Citations are disabled by default.
+        Name of the tool.
 
-Optional<Boolean> enabled
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Optional<Boolean> deferLoading
+      - `JsonValue type = "web_fetch_20260209"`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-Optional<Long> maxContentTokens
+        - `DIRECT("direct")`
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-Optional<Long> maxUses
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-Maximum number of times the tool can be used in the API request.
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-Optional<Boolean> strict
+      - `Optional<List<String>> allowedDomains`
 
-When true, guarantees schema validation on tool names and inputs
+        List of domains to allow fetching from
 
-
+      - `Optional<List<String>> blockedDomains`
 
-class BetaWebFetchTool20260309:
+        List of domains to block fetching from
 
-Web fetch tool with use\_cache parameter for bypassing cached content.
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-
+        Create a cache control breakpoint at this content block.
 
-JsonValue; name "web\_fetch"constant"web\_fetch"constant
+      - `Optional<BetaCitationsConfigParam> citations`
 
-Name of the tool.
+        Citations configuration for fetched documents. Citations are disabled by default.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      - `Optional<Boolean> deferLoading`
 
-JsonValue; type "web\_fetch\_20260309"constant"web\_fetch\_20260309"constant
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-
+      - `Optional<Long> maxContentTokens`
 
-Optional<List<AllowedCaller>> allowedCallers
+        Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-One of the following:
+        exclusiveMinimum: 0
 
-DIRECT("direct")
+      - `Optional<Long> maxUses`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+        Maximum number of times the tool can be used in the API request.
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+        exclusiveMinimum: 0
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+      - `Optional<Boolean> strict`
 
-Optional<List<String>> allowedDomains
+        When true, guarantees schema validation on tool names and inputs
 
-List of domains to allow fetching from
+    - `class BetaWebFetchTool20260309:`
 
-Optional<List<String>> blockedDomains
+      Web fetch tool with use_cache parameter for bypassing cached content.
 
-List of domains to block fetching from
+      - `JsonValue name = "web_fetch"`
 
-
+        Name of the tool.
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Create a cache control breakpoint at this content block.
+      - `JsonValue type = "web_fetch_20260309"`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-
+        - `DIRECT("direct")`
 
-Optional<Ttl> ttl
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-The time-to-live for the cache control breakpoint.
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-This may be one the following values:
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      - `Optional<List<String>> allowedDomains`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        List of domains to allow fetching from
 
-One of the following:
+      - `Optional<List<String>> blockedDomains`
 
-TTL\_5M("5m")
+        List of domains to block fetching from
 
-TTL\_1H("1h")
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-
+        Create a cache control breakpoint at this content block.
 
-Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
+      - `Optional<BetaCitationsConfigParam> citations`
 
-Citations configuration for fetched documents. Citations are disabled by default.
+        Citations configuration for fetched documents. Citations are disabled by default.
 
-Optional<Boolean> enabled
+      - `Optional<Boolean> deferLoading`
 
-Optional<Boolean> deferLoading
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      - `Optional<Long> maxContentTokens`
 
-Optional<Long> maxContentTokens
+        Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+        exclusiveMinimum: 0
 
-Optional<Long> maxUses
+      - `Optional<Long> maxUses`
 
-Maximum number of times the tool can be used in the API request.
+        Maximum number of times the tool can be used in the API request.
 
-Optional<Boolean> strict
+        exclusiveMinimum: 0
 
-When true, guarantees schema validation on tool names and inputs
+      - `Optional<Boolean> strict`
 
-Optional<Boolean> useCache
+        When true, guarantees schema validation on tool names and inputs
 
-Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+      - `Optional<Boolean> useCache`
 
-
+        Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-class BetaWebSearchTool20260318:
+    - `class BetaWebSearchTool20260318:`
 
-
+      - `JsonValue name = "web_search"`
 
-JsonValue; name "web\_search"constant"web\_search"constant
+        Name of the tool.
 
-Name of the tool.
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      - `JsonValue type = "web_search_20260318"`
 
-JsonValue; type "web\_search\_20260318"constant"web\_search\_20260318"constant
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-
+        - `DIRECT("direct")`
 
-Optional<List<AllowedCaller>> allowedCallers
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-One of the following:
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-DIRECT("direct")
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+      - `Optional<List<String>> allowedDomains`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+        If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+      - `Optional<List<String>> blockedDomains`
 
-Optional<List<String>> allowedDomains
+        If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-Optional<List<String>> blockedDomains
+        Create a cache control breakpoint at this content block.
 
-If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+      - `Optional<Boolean> deferLoading`
 
-
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+      - `Optional<Long> maxUses`
 
-Create a cache control breakpoint at this content block.
+        Maximum number of times the tool can be used in the API request.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+        exclusiveMinimum: 0
 
-
+      - `Optional<ResponseInclusion> responseInclusion`
 
-Optional<Ttl> ttl
+        How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
-The time-to-live for the cache control breakpoint.
+        - `FULL("full")`
 
-This may be one the following values:
+        - `EXCLUDED("excluded")`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      - `Optional<Boolean> strict`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        When true, guarantees schema validation on tool names and inputs
 
-One of the following:
+      - `Optional<BetaUserLocation> userLocation`
 
-TTL\_5M("5m")
+        Parameters for the user's location. Used to provide more relevant search results.
 
-TTL\_1H("1h")
+    - `class BetaWebFetchTool20260318:`
 
-Optional<Boolean> deferLoading
+      - `JsonValue name = "web_fetch"`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+        Name of the tool.
 
-Optional<Long> maxUses
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Maximum number of times the tool can be used in the API request.
+      - `JsonValue type = "web_fetch_20260318"`
 
-
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-Optional<ResponseInclusion> responseInclusion
+        - `DIRECT("direct")`
 
-How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-One of the following:
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-FULL("full")
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-EXCLUDED("excluded")
+      - `Optional<List<String>> allowedDomains`
 
-Optional<Boolean> strict
+        List of domains to allow fetching from
 
-When true, guarantees schema validation on tool names and inputs
+      - `Optional<List<String>> blockedDomains`
 
-
+        List of domains to block fetching from
 
-Optional<[BetaUserLocation](api/beta/messages.md)> userLocation
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-Parameters for the user's location. Used to provide more relevant search results.
+        Create a cache control breakpoint at this content block.
 
-JsonValue; type "approximate"constant"approximate"constant
+      - `Optional<BetaCitationsConfigParam> citations`
 
-Optional<String> city
+        Citations configuration for fetched documents. Citations are disabled by default.
 
-The city of the user.
+      - `Optional<Boolean> deferLoading`
 
-Optional<String> country
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+      - `Optional<Long> maxContentTokens`
 
-Optional<String> region
+        Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-The region of the user.
+        exclusiveMinimum: 0
 
-Optional<String> timezone
+      - `Optional<Long> maxUses`
 
-The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+        Maximum number of times the tool can be used in the API request.
 
-
+        exclusiveMinimum: 0
 
-class BetaWebFetchTool20260318:
+      - `Optional<ResponseInclusion> responseInclusion`
 
-
+        How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
-JsonValue; name "web\_fetch"constant"web\_fetch"constant
+        - `FULL("full")`
 
-Name of the tool.
+        - `EXCLUDED("excluded")`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      - `Optional<Boolean> strict`
 
-JsonValue; type "web\_fetch\_20260318"constant"web\_fetch\_20260318"constant
+        When true, guarantees schema validation on tool names and inputs
 
-
+      - `Optional<Boolean> useCache`
 
-Optional<List<AllowedCaller>> allowedCallers
+        Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-One of the following:
+    - `class BetaAdvisorTool20260301:`
 
-DIRECT("direct")
+      - `Model model`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+        The model that will complete your prompt.
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+      - `JsonValue name = "advisor"`
 
-Optional<List<String>> allowedDomains
+        Name of the tool.
 
-List of domains to allow fetching from
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Optional<List<String>> blockedDomains
+      - `JsonValue type = "advisor_20260301"`
 
-List of domains to block fetching from
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-
+        - `DIRECT("direct")`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-Create a cache control breakpoint at this content block.
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-Optional<Ttl> ttl
+        Create a cache control breakpoint at this content block.
 
-The time-to-live for the cache control breakpoint.
+      - `Optional<BetaCacheControlEphemeral> caching`
 
-This may be one the following values:
+        Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      - `Optional<Boolean> deferLoading`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-One of the following:
+      - `Optional<Long> maxTokens`
 
-TTL\_5M("5m")
+        Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
-TTL\_1H("1h")
+        minimum: 1024
 
-
+      - `Optional<Long> maxUses`
 
-Optional<[BetaCitationsConfigParam](api/beta/messages.md)> citations
+        Maximum number of times the tool can be used in the API request.
 
-Citations configuration for fetched documents. Citations are disabled by default.
+        exclusiveMinimum: 0
 
-Optional<Boolean> enabled
+      - `Optional<Boolean> strict`
 
-Optional<Boolean> deferLoading
+        When true, guarantees schema validation on tool names and inputs
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+    - `class BetaToolSearchToolBm25_20251119:`
 
-Optional<Long> maxContentTokens
+      - `JsonValue name = "tool_search_tool_bm25"`
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+        Name of the tool.
 
-Optional<Long> maxUses
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Maximum number of times the tool can be used in the API request.
+      - `Type type`
 
-
+        - `TOOL_SEARCH_TOOL_BM25_20251119("tool_search_tool_bm25_20251119")`
 
-Optional<ResponseInclusion> responseInclusion
+        - `TOOL_SEARCH_TOOL_BM25("tool_search_tool_bm25")`
 
-How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-One of the following:
+        - `DIRECT("direct")`
 
-FULL("full")
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-EXCLUDED("excluded")
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-Optional<Boolean> strict
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-When true, guarantees schema validation on tool names and inputs
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-Optional<Boolean> useCache
+        Create a cache control breakpoint at this content block.
 
-Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+      - `Optional<Boolean> deferLoading`
 
-
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-class BetaAdvisorTool20260301:
+      - `Optional<Boolean> strict`
 
-
+        When true, guarantees schema validation on tool names and inputs
 
-Model model
+    - `class BetaToolSearchToolRegex20251119:`
 
-The model that will complete your prompt.
+      - `JsonValue name = "tool_search_tool_regex"`
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+        Name of the tool.
 
-One of the following:
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-CLAUDE\_SONNET\_5("claude-sonnet-5")
+      - `Type type`
 
-High-performance model for coding and agents
+        - `TOOL_SEARCH_TOOL_REGEX_20251119("tool_search_tool_regex_20251119")`
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+        - `TOOL_SEARCH_TOOL_REGEX("tool_search_tool_regex")`
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+      - `Optional<List<AllowedCaller>> allowedCallers`
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+        - `DIRECT("direct")`
 
-Most capable model for cybersecurity and biology research
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
-Frontier intelligence for long-running agents and coding
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-Frontier intelligence for long-running agents and coding
+        Create a cache control breakpoint at this content block.
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+      - `Optional<Boolean> deferLoading`
 
-New class of intelligence, strongest in coding and cybersecurity
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+      - `Optional<Boolean> strict`
 
-Frontier intelligence for long-running agents and coding
+        When true, guarantees schema validation on tool names and inputs
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+    - `class BetaMcpToolset:`
 
-Best combination of speed and intelligence
+      Configuration for a group of tools from an MCP server.
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+      Allows configuring enabled status and defer_loading for all tools
+      from an MCP server, with optional per-tool overrides.
 
-Fastest model with near-frontier intelligence
+      - `String mcpServerName`
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+        Name of the MCP server to configure tools for
 
-Fastest model with near-frontier intelligence
+        maxLength: 255, minLength: 1
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+      - `JsonValue type = "mcp_toolset"`
 
-Premium model combining maximum intelligence with practical performance
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+        Create a cache control breakpoint at this content block.
 
-Premium model combining maximum intelligence with practical performance
+      - `Optional<Configs> configs`
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+        Configuration overrides for specific tools, keyed by tool name
 
-High-performance model for agents and coding
+        - `Optional<Boolean> deferLoading`
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+        - `Optional<Boolean> enabled`
 
-High-performance model for agents and coding
+      - `Optional<BetaMcpToolDefaultConfig> defaultConfig`
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+        Default configuration applied to all tools from this server
 
-Exceptional model for specialized complex tasks
+        - `Optional<Boolean> deferLoading`
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+        - `Optional<Boolean> enabled`
 
-Exceptional model for specialized complex tasks
+  - `Optional<BetaJsonOutputFormat> outputFormat`
 
-
+    **Deprecated**
 
-JsonValue; name "advisor"constant"advisor"constant
+    Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
 
-Name of the tool.
+    A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+  - `Optional<Double> temperature`
 
-JsonValue; type "advisor\_20260301"constant"advisor\_20260301"constant
+    **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-
+    Amount of randomness injected into the response.
 
-Optional<List<AllowedCaller>> allowedCallers
+    Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
 
-One of the following:
+    Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
-DIRECT("direct")
+    maximum: 1, minimum: 0
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+  - `Optional<Long> topK`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+    **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not accept top_k; any value will be rejected with a 400 error.
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+    Only sample from the top K options for each subsequent token.
 
-
+    Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+    Recommended for advanced use cases only.
 
-Create a cache control breakpoint at this content block.
+    minimum: 0
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+  - `Optional<Double> topP`
 
-
+    **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting top_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-Optional<Ttl> ttl
+    Use nucleus sampling.
 
-The time-to-live for the cache control breakpoint.
+    In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-This may be one the following values:
+    Recommended for advanced use cases only.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+    maximum: 1, minimum: 0
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+## Returns
 
-One of the following:
+- `class BetaMessage:`
 
-TTL\_5M("5m")
+  - `String id`
 
-TTL\_1H("1h")
+    Unique object identifier.
 
-
+    The format and length of IDs may change over time.
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> caching
+  - `Optional<BetaContainer> container`
 
-Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+    Information about the container used in the request (for the code execution tool)
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+    - `String id`
 
-
+      Identifier for the container used in this request
 
-Optional<Ttl> ttl
+    - `LocalDateTime expiresAt`
 
-The time-to-live for the cache control breakpoint.
+      The time at which the container will expire.
 
-This may be one the following values:
+      format: date-time
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+    - `Optional<List<BetaContainerSkill>> skills`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Skills loaded in the container
 
-One of the following:
+      - `String skillId`
 
-TTL\_5M("5m")
+        Skill ID
 
-TTL\_1H("1h")
+        maxLength: 64, minLength: 1
 
-Optional<Boolean> deferLoading
+      - `Type type`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+        Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Optional<Long> maxTokens
+        - `ANTHROPIC("anthropic")`
 
-Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor\_result or advisor\_redacted\_result block carries stop\_reason='max\_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+        - `CUSTOM("custom")`
 
-Optional<Long> maxUses
+      - `String version`
 
-Maximum number of times the tool can be used in the API request.
+        The resolved version: a skill version ID for custom skills.
 
-Optional<Boolean> strict
+        maxLength: 64, minLength: 1
 
-When true, guarantees schema validation on tool names and inputs
+  - `List<BetaContentBlock> content`
 
-
+    Content generated by the model.
 
-class BetaToolSearchToolBm25\_20251119:
+    This is an array of content blocks, each of which has a `type` that determines its shape.
 
-
+    Example:
 
-JsonValue; name "tool\_search\_tool\_bm25"constant"tool\_search\_tool\_bm25"constant
+    ```json
+    [{"type": "text", "text": "Hi, I'm Claude."}]
+    ```
 
-Name of the tool.
+    If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    For example, if the input `messages` were:
 
-
+    ```json
+    [
+      {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+      {"role": "assistant", "content": "The best answer is ("}
+    ]
+    ```
 
-Type type
+    Then the response `content` might be:
 
-One of the following:
+    ```json
+    [{"type": "text", "text": "B)"}]
+    ```
 
-TOOL\_SEARCH\_TOOL\_BM25\_20251119("tool\_search\_tool\_bm25\_20251119")
+    - `class BetaTextBlock:`
 
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+      - `Optional<List<BetaTextCitation>> citations`
 
-
+        Citations supporting the text block.
 
-Optional<List<AllowedCaller>> allowedCallers
+        The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-One of the following:
+        - `class BetaCitationCharLocation:`
 
-DIRECT("direct")
+          - `String citedText`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+          - `long documentIndex`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+            minimum: 0
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+          - `Optional<String> documentTitle`
 
-
+          - `long endCharIndex`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+          - `Optional<String> fileId`
 
-Create a cache control breakpoint at this content block.
+          - `long startCharIndex`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+            minimum: 0
 
-
+          - `JsonValue type = "char_location"`
 
-Optional<Ttl> ttl
+        - `class BetaCitationPageLocation:`
 
-The time-to-live for the cache control breakpoint.
+          - `String citedText`
 
-This may be one the following values:
+          - `long documentIndex`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            minimum: 0
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          - `Optional<String> documentTitle`
 
-One of the following:
+          - `long endPageNumber`
 
-TTL\_5M("5m")
+          - `Optional<String> fileId`
 
-TTL\_1H("1h")
+          - `long startPageNumber`
 
-Optional<Boolean> deferLoading
+            minimum: 1
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          - `JsonValue type = "page_location"`
 
-Optional<Boolean> strict
+        - `class BetaCitationContentBlockLocation:`
 
-When true, guarantees schema validation on tool names and inputs
+          - `String citedText`
 
-
+            The full text of the cited block range, concatenated.
 
-class BetaToolSearchToolRegex20251119:
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-
+          - `long documentIndex`
 
-JsonValue; name "tool\_search\_tool\_regex"constant"tool\_search\_tool\_regex"constant
+            minimum: 0
 
-Name of the tool.
+          - `Optional<String> documentTitle`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          - `long endBlockIndex`
 
-
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-Type type
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-One of the following:
+          - `Optional<String> fileId`
 
-TOOL\_SEARCH\_TOOL\_REGEX\_20251119("tool\_search\_tool\_regex\_20251119")
+          - `long startBlockIndex`
 
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+            0-based index of the first cited block in the source's `content` array.
 
-
+            minimum: 0
 
-Optional<List<AllowedCaller>> allowedCallers
+          - `JsonValue type = "content_block_location"`
 
-One of the following:
+        - `class BetaCitationsWebSearchResultLocation:`
 
-DIRECT("direct")
+          - `String citedText`
 
-CODE\_EXECUTION\_20250825("code\_execution\_20250825")
+          - `String encryptedIndex`
 
-CODE\_EXECUTION\_20260120("code\_execution\_20260120")
+          - `Optional<String> title`
 
-CODE\_EXECUTION\_20260521("code\_execution\_20260521")
+            maxLength: 512
 
-
+          - `JsonValue type = "web_search_result_location"`
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+          - `String url`
 
-Create a cache control breakpoint at this content block.
+        - `class BetaCitationSearchResultLocation:`
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+          - `String citedText`
 
-
+            The full text of the cited block range, concatenated.
 
-Optional<Ttl> ttl
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-The time-to-live for the cache control breakpoint.
+          - `long endBlockIndex`
 
-This may be one the following values:
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          - `long searchResultIndex`
 
-One of the following:
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
-TTL\_5M("5m")
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
-TTL\_1H("1h")
+            minimum: 0
 
-Optional<Boolean> deferLoading
+          - `String source`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          - `long startBlockIndex`
 
-Optional<Boolean> strict
+            0-based index of the first cited block in the source's `content` array.
 
-When true, guarantees schema validation on tool names and inputs
+            minimum: 0
 
-
+          - `Optional<String> title`
 
-class BetaMcpToolset:
+          - `JsonValue type = "search_result_location"`
 
-Configuration for a group of tools from an MCP server.
+      - `String text`
 
-Allows configuring enabled status and defer\_loading for all tools
-from an MCP server, with optional per-tool overrides.
+        maxLength: 5000000, minLength: 0
 
-String mcpServerName
+      - `JsonValue type = "text"`
 
-Name of the MCP server to configure tools for
+    - `class BetaThinkingBlock:`
 
-JsonValue; type "mcp\_toolset"constant"mcp\_toolset"constant
+      - `String signature`
 
-
+        A value used to verify that this thinking block was generated by Claude when it is passed back to the API.
 
-Optional<[BetaCacheControlEphemeral](api/beta/messages.md)> cacheControl
+        This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-Create a cache control breakpoint at this content block.
+        See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-JsonValue; type "ephemeral"constant"ephemeral"constant
+      - `String thinking`
 
-
+        The text of Claude's thinking process for this block.
 
-Optional<Ttl> ttl
+      - `JsonValue type = "thinking"`
 
-The time-to-live for the cache control breakpoint.
+    - `class BetaRedactedThinkingBlock:`
 
-This may be one the following values:
+      - `String data`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        The contents of this redacted thinking block, returned when portions of the model's thinking were safety-redacted. This field is opaque and encrypted, with no readable content.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-One of the following:
+        See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-TTL\_5M("5m")
+      - `JsonValue type = "redacted_thinking"`
 
-TTL\_1H("1h")
+    - `class BetaToolUseBlock:`
 
-
+      - `String id`
 
-Optional<Configs> configs
+        pattern: ^[a-zA-Z0-9_-]+$
 
-Configuration overrides for specific tools, keyed by tool name
+      - `Input input`
 
-Optional<Boolean> deferLoading
+      - `String name`
 
-Optional<Boolean> enabled
+        minLength: 1
 
-
+      - `JsonValue type = "tool_use"`
 
-Optional<[BetaMcpToolDefaultConfig](api/beta/messages.md)> defaultConfig
+      - `Optional<Caller> caller`
 
-Default configuration applied to all tools from this server
+        Tool invocation directly from the model.
 
-Optional<Boolean> deferLoading
+        - `class BetaDirectCaller:`
 
-Optional<Boolean> enabled
+          Tool invocation directly from the model.
 
-
+          - `JsonValue type = "direct"`
 
-Optional<[BetaJsonOutputFormat](api/beta/messages.md)> outputFormat⁠Deprecated
+        - `class BetaServerToolCaller:`
 
-Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+          Tool invocation generated by a server-side tool.
 
-A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
+          - `String toolId`
 
-
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Optional<Double> temperature⁠Deprecated
+          - `JsonValue type = "code_execution_20250825"`
 
-Amount of randomness injected into the response.
+        - `class BetaServerToolCaller20260120:`
 
-Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+          - `String toolId`
 
-Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
+          - `JsonValue type = "code_execution_20260120"`
 
-maximum1
+      - `Optional<String> toolsetName`
 
-minimum0
+        For a toolset member tool_use, the toolset family.
 
-
+        maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-Optional<Long> topK⁠Deprecated
+    - `class BetaServerToolUseBlock:`
 
-Only sample from the top K options for each subsequent token.
+      - `String id`
 
-Deprecated. Models released after Claude Opus 4.6 do not accept top\_k; any value will be rejected with a 400 error.
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
+      - `Input input`
 
-Recommended for advanced use cases only.
+      - `Name name`
 
-minimum0
+        - `ADVISOR("advisor")`
 
-
+        - `WEB_SEARCH("web_search")`
 
-Optional<Double> topP⁠Deprecated
+        - `WEB_FETCH("web_fetch")`
 
-Use nucleus sampling.
+        - `CODE_EXECUTION("code_execution")`
 
-Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+        - `BASH_CODE_EXECUTION("bash_code_execution")`
 
-In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
+        - `TEXT_EDITOR_CODE_EXECUTION("text_editor_code_execution")`
 
-Recommended for advanced use cases only.
+        - `TOOL_SEARCH_TOOL_REGEX("tool_search_tool_regex")`
 
-maximum1
+        - `TOOL_SEARCH_TOOL_BM25("tool_search_tool_bm25")`
 
-minimum0
+      - `JsonValue type = "server_tool_use"`
 
-##### ReturnsExpand Collapse
+      - `Optional<Caller> caller`
 
-
+        Tool invocation directly from the model.
 
-class BetaMessage:
+        - `class BetaDirectCaller:`
 
-
+          Tool invocation directly from the model.
 
-String id
+        - `class BetaServerToolCaller:`
 
-Unique object identifier.
+          Tool invocation generated by a server-side tool.
 
-The format and length of IDs may change over time.
+        - `class BetaServerToolCaller20260120:`
 
-
+    - `class BetaWebSearchToolResultBlock:`
 
-Optional<[BetaContainer](api/beta/messages.md)> container
+      - `BetaWebSearchToolResultBlockContent content`
 
-Information about the container used in the request (for the code execution tool)
+        - `class BetaWebSearchToolResultError:`
 
-String id
+          - `BetaWebSearchToolResultErrorCode errorCode`
 
-Identifier for the container used in this request
+            - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
-LocalDateTime expiresAt
+            - `UNAVAILABLE("unavailable")`
 
-The time at which the container will expire.
+            - `MAX_USES_EXCEEDED("max_uses_exceeded")`
 
-
+            - `TOO_MANY_REQUESTS("too_many_requests")`
 
-Optional<List<[BetaSkill](api/beta/messages.md)>> skills
+            - `QUERY_TOO_LONG("query_too_long")`
 
-Skills loaded in the container
+            - `REQUEST_TOO_LARGE("request_too_large")`
 
-String skillId
+          - `JsonValue type = "web_search_tool_result_error"`
 
-Skill ID
+        - `List<BetaWebSearchResultBlock>`
 
-
+          - `String encryptedContent`
 
-Type type
+          - `Optional<String> pageAge`
 
-Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+          - `String title`
 
-One of the following:
+          - `JsonValue type = "web_search_result"`
 
-ANTHROPIC("anthropic")
+          - `String url`
 
-CUSTOM("custom")
+      - `String toolUseId`
 
-String version
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Skill version or 'latest' for most recent version
+      - `JsonValue type = "web_search_tool_result"`
 
-
+      - `Optional<Caller> caller`
 
-List<[BetaContentBlock](api/beta/messages.md)> content
+        Tool invocation directly from the model.
 
-Content generated by the model.
+        - `class BetaDirectCaller:`
 
-This is an array of content blocks, each of which has a `type` that determines its shape.
+          Tool invocation directly from the model.
 
-Example:
+        - `class BetaServerToolCaller:`
 
-```shiki
-[{"type": "text", "text": "Hi, I'm Claude."}]
-```
+          Tool invocation generated by a server-side tool.
 
-
+        - `class BetaServerToolCaller20260120:`
 
-If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
+    - `class BetaWebFetchToolResultBlock:`
 
-For example, if the input `messages` were:
+      - `Content content`
 
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("}
-]
-```
+        - `class BetaWebFetchToolResultErrorBlock:`
 
-
+          - `BetaWebFetchToolResultErrorCode errorCode`
 
-Then the response `content` might be:
+            - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
-```shiki
-[{"type": "text", "text": "B)"}]
-```
+            - `URL_TOO_LONG("url_too_long")`
 
-
+            - `URL_NOT_ALLOWED("url_not_allowed")`
 
-One of the following:
+            - `URL_NOT_IN_PRIOR_CONTEXT("url_not_in_prior_context")`
 
-
+            - `URL_NOT_ACCESSIBLE("url_not_accessible")`
 
-class BetaTextBlock:
+            - `UNSUPPORTED_CONTENT_TYPE("unsupported_content_type")`
 
-
+            - `TOO_MANY_REQUESTS("too_many_requests")`
 
-Optional<List<[BetaTextCitation](api/beta/messages.md)>> citations
+            - `MAX_USES_EXCEEDED("max_uses_exceeded")`
 
-Citations supporting the text block.
+            - `UNAVAILABLE("unavailable")`
 
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+          - `JsonValue type = "web_fetch_tool_result_error"`
 
-One of the following:
+        - `class BetaWebFetchBlock:`
 
-
+          - `BetaDocumentBlock content`
 
-class BetaCitationCharLocation:
+            - `Optional<BetaCitationConfig> citations`
 
-String citedText
+              Citation configuration for the document
 
-long documentIndex
+              - `boolean enabled`
 
-Optional<String> documentTitle
+            - `Source source`
 
-long endCharIndex
+              - `class BetaBase64PdfSource:`
 
-Optional<String> fileId
+                - `String data`
 
-long startCharIndex
+                  format: byte
 
-JsonValue; type "char\_location"constant"char\_location"constant
+                - `JsonValue mediaType = "application/pdf"`
 
-
+                - `JsonValue type = "base64"`
 
-class BetaCitationPageLocation:
+              - `class BetaPlainTextSource:`
 
-String citedText
+                - `String data`
 
-long documentIndex
+                - `JsonValue mediaType = "text/plain"`
 
-Optional<String> documentTitle
+                - `JsonValue type = "text"`
 
-long endPageNumber
+            - `Optional<String> title`
 
-Optional<String> fileId
+              The title of the document
 
-long startPageNumber
+            - `JsonValue type = "document"`
 
-JsonValue; type "page\_location"constant"page\_location"constant
+          - `Optional<String> retrievedAt`
 
-
+            ISO 8601 timestamp when the content was retrieved
 
-class BetaCitationContentBlockLocation:
+          - `JsonValue type = "web_fetch_result"`
 
-
+          - `String url`
 
-String citedText
+            Fetched content URL
 
-The full text of the cited block range, concatenated.
+      - `String toolUseId`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-long documentIndex
+      - `JsonValue type = "web_fetch_tool_result"`
 
-Optional<String> documentTitle
+      - `Optional<Caller> caller`
 
-
+        Tool invocation directly from the model.
 
-long endBlockIndex
+        - `class BetaDirectCaller:`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+          Tool invocation directly from the model.
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+        - `class BetaServerToolCaller:`
 
-Optional<String> fileId
+          Tool invocation generated by a server-side tool.
 
-long startBlockIndex
+        - `class BetaServerToolCaller20260120:`
 
-0-based index of the first cited block in the source's `content` array.
+    - `class BetaAdvisorToolResultBlock:`
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+      - `Content content`
 
-
+        - `class BetaAdvisorToolResultError:`
 
-class BetaCitationsWebSearchResultLocation:
+          - `ErrorCode errorCode`
 
-String citedText
+            - `MAX_USES_EXCEEDED("max_uses_exceeded")`
 
-String encryptedIndex
+            - `PROMPT_TOO_LONG("prompt_too_long")`
 
-Optional<String> title
+            - `TOO_MANY_REQUESTS("too_many_requests")`
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+            - `OVERLOADED("overloaded")`
 
-String url
+            - `UNAVAILABLE("unavailable")`
 
-
+            - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-class BetaCitationSearchResultLocation:
+            - `MODEL_NOT_FOUND("model_not_found")`
 
-
+          - `JsonValue type = "advisor_tool_result_error"`
 
-String citedText
+        - `class BetaAdvisorResultBlock:`
 
-The full text of the cited block range, concatenated.
+          - `Optional<String> stopReason`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
-
+          - `String text`
 
-long endBlockIndex
+          - `JsonValue type = "advisor_result"`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+        - `class BetaAdvisorRedactedResultBlock:`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+          - `String encryptedContent`
 
-
+            Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-long searchResultIndex
+          - `Optional<String> stopReason`
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+          - `JsonValue type = "advisor_redacted_result"`
 
-minimum0
+      - `String toolUseId`
 
-String source
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-long startBlockIndex
+      - `JsonValue type = "advisor_tool_result"`
 
-0-based index of the first cited block in the source's `content` array.
+    - `class BetaCodeExecutionToolResultBlock:`
 
-Optional<String> title
+      - `BetaCodeExecutionToolResultBlockContent content`
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+        Code execution result with encrypted stdout for PFC + web_search results.
 
-String text
+        - `class BetaCodeExecutionToolResultError:`
 
-JsonValue; type "text"constant"text"constant
+          - `BetaCodeExecutionToolResultErrorCode errorCode`
 
-
+            - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
-class BetaThinkingBlock:
+            - `UNAVAILABLE("unavailable")`
 
-String signature
+            - `TOO_MANY_REQUESTS("too_many_requests")`
 
-String thinking
+            - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-JsonValue; type "thinking"constant"thinking"constant
+          - `JsonValue type = "code_execution_tool_result_error"`
 
-
+        - `class BetaCodeExecutionResultBlock:`
 
-class BetaRedactedThinkingBlock:
+          - `List<BetaCodeExecutionOutputBlock> content`
 
-String data
+            - `String fileId`
 
-JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
+            - `JsonValue type = "code_execution_output"`
 
-
+          - `long returnCode`
 
-class BetaToolUseBlock:
+          - `String stderr`
 
-String id
+          - `String stdout`
 
-Input input
+          - `JsonValue type = "code_execution_result"`
 
-String name
+        - `class BetaEncryptedCodeExecutionResultBlock:`
 
-JsonValue; type "tool\_use"constant"tool\_use"constant
+          Code execution result with encrypted stdout for PFC + web_search results.
 
-
+          - `List<BetaCodeExecutionOutputBlock> content`
 
-Optional<Caller> caller
+            - `String fileId`
 
-Tool invocation directly from the model.
+            - `JsonValue type = "code_execution_output"`
 
-One of the following:
+          - `String encryptedStdout`
 
-
+          - `long returnCode`
 
-class BetaDirectCaller:
+          - `String stderr`
 
-Tool invocation directly from the model.
+          - `JsonValue type = "encrypted_code_execution_result"`
 
-JsonValue; type "direct"constant"direct"constant
+      - `String toolUseId`
 
-
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-class BetaServerToolCaller:
+      - `JsonValue type = "code_execution_tool_result"`
 
-Tool invocation generated by a server-side tool.
+    - `class BetaBashCodeExecutionToolResultBlock:`
 
-String toolId
+      - `Content content`
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+        - `class BetaBashCodeExecutionToolResultError:`
 
-
+          - `ErrorCode errorCode`
 
-class BetaServerToolCaller20260120:
+            - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
-String toolId
+            - `UNAVAILABLE("unavailable")`
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+            - `TOO_MANY_REQUESTS("too_many_requests")`
 
-
+            - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-class BetaServerToolUseBlock:
+            - `OUTPUT_FILE_TOO_LARGE("output_file_too_large")`
 
-String id
+          - `JsonValue type = "bash_code_execution_tool_result_error"`
 
-Input input
+        - `class BetaBashCodeExecutionResultBlock:`
 
-
+          - `List<BetaBashCodeExecutionOutputBlock> content`
 
-Name name
+            - `String fileId`
 
-One of the following:
+            - `JsonValue type = "bash_code_execution_output"`
 
-ADVISOR("advisor")
+          - `long returnCode`
 
-WEB\_SEARCH("web\_search")
+          - `String stderr`
 
-WEB\_FETCH("web\_fetch")
+          - `String stdout`
 
-CODE\_EXECUTION("code\_execution")
+          - `JsonValue type = "bash_code_execution_result"`
 
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
+      - `String toolUseId`
 
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
+      - `JsonValue type = "bash_code_execution_tool_result"`
 
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
+    - `class BetaTextEditorCodeExecutionToolResultBlock:`
 
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
+      - `Content content`
 
-
+        - `class BetaTextEditorCodeExecutionToolResultError:`
 
-Optional<Caller> caller
+          - `ErrorCode errorCode`
 
-Tool invocation directly from the model.
+            - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
-One of the following:
+            - `UNAVAILABLE("unavailable")`
 
-
+            - `TOO_MANY_REQUESTS("too_many_requests")`
 
-class BetaDirectCaller:
+            - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-Tool invocation directly from the model.
+            - `FILE_NOT_FOUND("file_not_found")`
 
-JsonValue; type "direct"constant"direct"constant
+          - `Optional<String> errorMessage`
 
-
+          - `JsonValue type = "text_editor_code_execution_tool_result_error"`
 
-class BetaServerToolCaller:
+        - `class BetaTextEditorCodeExecutionViewResultBlock:`
 
-Tool invocation generated by a server-side tool.
+          - `String content`
 
-String toolId
+          - `FileType fileType`
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+            - `TEXT("text")`
 
-
+            - `IMAGE("image")`
 
-class BetaServerToolCaller20260120:
+            - `PDF("pdf")`
 
-String toolId
+          - `Optional<Long> numLines`
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+          - `Optional<Long> startLine`
 
-
+          - `Optional<Long> totalLines`
 
-class BetaWebSearchToolResultBlock:
+          - `JsonValue type = "text_editor_code_execution_view_result"`
 
-
+        - `class BetaTextEditorCodeExecutionCreateResultBlock:`
 
-[BetaWebSearchToolResultBlockContent](api/beta/messages.md) content
+          - `boolean isFileUpdate`
 
-One of the following:
+          - `JsonValue type = "text_editor_code_execution_create_result"`
 
-
+        - `class BetaTextEditorCodeExecutionStrReplaceResultBlock:`
 
-class BetaWebSearchToolResultError:
+          - `Optional<List<String>> lines`
 
-
+          - `Optional<Long> newLines`
 
-[BetaWebSearchToolResultErrorCode](api/beta/messages.md) errorCode
+          - `Optional<Long> newStart`
 
-One of the following:
+          - `Optional<Long> oldLines`
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+          - `Optional<Long> oldStart`
 
-UNAVAILABLE("unavailable")
+          - `JsonValue type = "text_editor_code_execution_str_replace_result"`
 
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+      - `String toolUseId`
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-QUERY\_TOO\_LONG("query\_too\_long")
+      - `JsonValue type = "text_editor_code_execution_tool_result"`
 
-REQUEST\_TOO\_LARGE("request\_too\_large")
+    - `class BetaToolSearchToolResultBlock:`
 
-JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
+      - `Content content`
 
-
+        - `class BetaToolSearchToolResultError:`
 
-List<[BetaWebSearchResultBlock](api/beta/messages.md)>
+          - `ErrorCode errorCode`
 
-String encryptedContent
+            - `INVALID_TOOL_INPUT("invalid_tool_input")`
 
-Optional<String> pageAge
+            - `UNAVAILABLE("unavailable")`
 
-String title
+            - `TOO_MANY_REQUESTS("too_many_requests")`
 
-JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
+            - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-String url
+          - `Optional<String> errorMessage`
 
-String toolUseId
+          - `JsonValue type = "tool_search_tool_result_error"`
 
-JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
+        - `class BetaToolSearchToolSearchResultBlock:`
 
-
+          - `List<BetaToolReferenceBlock> toolReferences`
 
-Optional<Caller> caller
+            - `String toolName`
 
-Tool invocation directly from the model.
+              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-One of the following:
+            - `JsonValue type = "tool_reference"`
 
-
+          - `JsonValue type = "tool_search_tool_search_result"`
 
-class BetaDirectCaller:
+      - `String toolUseId`
 
-Tool invocation directly from the model.
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-JsonValue; type "direct"constant"direct"constant
+      - `JsonValue type = "tool_search_tool_result"`
 
-
+    - `class BetaMcpToolUseBlock:`
 
-class BetaServerToolCaller:
+      - `String id`
 
-Tool invocation generated by a server-side tool.
+        pattern: ^[a-zA-Z0-9_-]+$
 
-String toolId
+      - `Input input`
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+      - `String name`
 
-
+        The name of the MCP tool
 
-class BetaServerToolCaller20260120:
+      - `String serverName`
 
-String toolId
+        The name of the MCP server
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+      - `JsonValue type = "mcp_tool_use"`
 
-
+    - `class BetaMcpToolResultBlock:`
 
-class BetaWebFetchToolResultBlock:
+      - `Content content`
 
-
+        - `String`
 
-Content content
+        - `List<BetaTextBlock>`
 
-One of the following:
+          - `Optional<List<BetaTextCitation>> citations`
 
-
+            Citations supporting the text block.
 
-class BetaWebFetchToolResultErrorBlock:
+            The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-
+          - `String text`
 
-[BetaWebFetchToolResultErrorCode](api/beta/messages.md) errorCode
+            maxLength: 5000000, minLength: 0
 
-One of the following:
+          - `JsonValue type = "text"`
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+      - `boolean isError`
 
-URL\_TOO\_LONG("url\_too\_long")
+      - `String toolUseId`
 
-URL\_NOT\_ALLOWED("url\_not\_allowed")
+        pattern: ^[a-zA-Z0-9_-]+$
 
-URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
+      - `JsonValue type = "mcp_tool_result"`
 
-URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
+    - `class BetaContainerUploadBlock:`
 
-UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
+      Response model for a file uploaded to the container.
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+      - `String fileId`
 
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+      - `JsonValue type = "container_upload"`
 
-UNAVAILABLE("unavailable")
+    - `class BetaCompactionBlock:`
 
-JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
+      A compaction block returned when autocompact is triggered.
 
-
+      When content is None, it indicates the compaction failed to produce a valid
+      summary (e.g., malformed output from the model). Clients may round-trip
+      compaction blocks with null content; the server treats them as no-ops.
 
-class BetaWebFetchBlock:
+      - `Optional<String> content`
 
-
+        Summary of compacted content, or null if compaction failed
 
-[BetaDocumentBlock](api/beta/messages.md) content
+      - `Optional<String> encryptedContent`
 
-
+        Opaque metadata from prior compaction, to be round-tripped verbatim
 
-Optional<[BetaCitationConfig](api/beta/messages.md)> citations
+      - `JsonValue type = "compaction"`
 
-Citation configuration for the document
+    - `class BetaFallbackBlock:`
 
-boolean enabled
+      Marks the point in `content` where one model's output gives way to the next.
 
-
+      One block appears per hop where a preceding model actually ran this turn and
+      declined. A turn where no preceding model ran and declined has no such
+      boundary and carries no block — the signal for whether a fallback model
+      served the response is the presence of a `fallback_message` entry in
+      `usage.iterations`, not this block.
 
-Source source
+      The block is treated like a server-tool content block for streaming: it
+      arrives via the standard `content_block_start` / `content_block_stop`
+      pair and carries no deltas.
 
-One of the following:
+      - `BetaFallbackInfo from`
 
-
+        The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-class BetaBase64PdfSource:
+        - `Model model`
 
-String data
+          The model that will complete your prompt.
 
-JsonValue; mediaType "application/pdf"constant"application/pdf"constant
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-JsonValue; type "base64"constant"base64"constant
+          - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
-
+            Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
-class BetaPlainTextSource:
+          - `CLAUDE_MYTHOS_5_1("claude-mythos-5-1")`
 
-String data
+            Our most capable model for cybersecurity and biology research, available through trusted access programs
 
-JsonValue; mediaType "text/plain"constant"text/plain"constant
+          - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-JsonValue; type "text"constant"text"constant
+            High-performance model for coding and agents
 
-Optional<String> title
+          - `CLAUDE_FABLE_5("claude-fable-5")`
 
-The title of the document
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
-JsonValue; type "document"constant"document"constant
+          - `CLAUDE_MYTHOS_5("claude-mythos-5")`
 
-Optional<String> retrievedAt
+            Most capable model for cybersecurity and biology research
 
-ISO 8601 timestamp when the content was retrieved
+          - `CLAUDE_OPUS_5("claude-opus-5")`
 
-JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
+            Powerful intelligence for long-running agents and coding
 
-String url
+          - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-Fetched content URL
+            Powerful intelligence for long-running agents and coding
 
-String toolUseId
+          - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
+            Powerful intelligence for long-running agents and coding
 
-
+          - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
-Optional<Caller> caller
+            New class of intelligence, strongest in coding and cybersecurity
 
-Tool invocation directly from the model.
+          - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-One of the following:
+            Powerful intelligence for long-running agents and coding
 
-
+          - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
-class BetaDirectCaller:
+            Best combination of speed and intelligence
 
-Tool invocation directly from the model.
+          - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
 
-JsonValue; type "direct"constant"direct"constant
+            Fastest model with near-frontier intelligence
 
-
+          - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
 
-class BetaServerToolCaller:
+            Fastest model with near-frontier intelligence
 
-Tool invocation generated by a server-side tool.
+          - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-String toolId
+            Powerful intelligence for long-running agents and coding
 
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
+          - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-
+            Powerful intelligence for long-running agents and coding
 
-class BetaServerToolCaller20260120:
+          - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
-String toolId
+            High-performance model for agents and coding
 
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
+          - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
 
-
+            High-performance model for agents and coding
 
-class BetaAdvisorToolResultBlock:
+      - `BetaFallbackInfo to`
 
-
+        The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-Content content
+      - `BetaFallbackRefusalTrigger trigger`
 
-One of the following:
+        What caused the `from` model to hand over at this hop.
 
-
+        - `Optional<Category> category`
 
-class BetaAdvisorToolResultError:
+          The policy category that triggered a refusal.
 
-
+          - `CYBER("cyber")`
 
-ErrorCode errorCode
+            The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
 
-One of the following:
+          - `BIO("bio")`
 
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
+            The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
-PROMPT\_TOO\_LONG("prompt\_too\_long")
+          - `FRONTIER_LLM("frontier_llm")`
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+            The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
 
-OVERLOADED("overloaded")
+          - `REASONING_EXTRACTION("reasoning_extraction")`
 
-UNAVAILABLE("unavailable")
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+          - `GENERAL_HARMS("general_harms")`
 
-MODEL\_NOT\_FOUND("model\_not\_found")
+            The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
+        - `JsonValue type = "refusal"`
 
-
+      - `JsonValue type = "fallback"`
 
-class BetaAdvisorResultBlock:
+  - `Optional<BetaContextManagementResponse> contextManagement`
 
-Optional<String> stopReason
+    Context management response.
 
-The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+    Information about context management strategies applied during the request.
 
-String text
+    - `List<AppliedEdit> appliedEdits`
 
-JsonValue; type "advisor\_result"constant"advisor\_result"constant
+      List of context management edits that were applied.
 
-
+      - `class BetaClearToolUses20250919EditResponse:`
 
-class BetaAdvisorRedactedResultBlock:
+        - `long clearedInputTokens`
 
-String encryptedContent
+          Number of input tokens cleared by this edit.
 
-Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+          minimum: 0
 
-Optional<String> stopReason
+        - `long clearedToolUses`
 
-The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
+          Number of tool uses that were cleared.
 
-JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+          minimum: 0
 
-String toolUseId
+        - `JsonValue type = "clear_tool_uses_20250919"`
 
-JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
+          The type of context management edit applied.
 
-
+      - `class BetaClearThinking20251015EditResponse:`
 
-class BetaCodeExecutionToolResultBlock:
+        - `long clearedInputTokens`
 
-
+          Number of input tokens cleared by this edit.
 
-[BetaCodeExecutionToolResultBlockContent](api/beta/messages.md) content
+          minimum: 0
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+        - `long clearedThinkingTurns`
 
-One of the following:
+          Number of thinking turns that were cleared.
 
-
+          minimum: 0
 
-class BetaCodeExecutionToolResultError:
+        - `JsonValue type = "clear_thinking_20251015"`
 
-
+          The type of context management edit applied.
 
-[BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) errorCode
+  - `Optional<BetaDiagnostics> diagnostics`
 
-One of the following:
+    Response envelope for request-level diagnostics. Present (possibly
+    null) whenever the caller supplied `diagnostics` on the request.
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+    - `Optional<CacheMissReason> cacheMissReason`
 
-UNAVAILABLE("unavailable")
+      Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+      - `class BetaCacheMissModelChanged:`
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+        - `long cacheMissedInputTokens`
 
-JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-
+        - `JsonValue type = "model_changed"`
 
-class BetaCodeExecutionResultBlock:
+      - `class BetaCacheMissSystemChanged:`
 
-
+        - `long cacheMissedInputTokens`
 
-List<[BetaCodeExecutionOutputBlock](api/beta/messages.md)> content
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-String fileId
+        - `JsonValue type = "system_changed"`
 
-JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+      - `class BetaCacheMissToolsChanged:`
 
-long returnCode
+        - `long cacheMissedInputTokens`
 
-String stderr
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-String stdout
+        - `JsonValue type = "tools_changed"`
 
-JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
+      - `class BetaCacheMissMessagesChanged:`
 
-
+        - `long cacheMissedInputTokens`
 
-class BetaEncryptedCodeExecutionResultBlock:
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+        - `JsonValue type = "messages_changed"`
 
-
+      - `class BetaCacheMissPreviousMessageNotFound:`
 
-List<[BetaCodeExecutionOutputBlock](api/beta/messages.md)> content
+        - `JsonValue type = "previous_message_not_found"`
 
-String fileId
+      - `class BetaCacheMissUnavailable:`
 
-JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
+        - `JsonValue type = "unavailable"`
 
-String encryptedStdout
+  - `Model model`
 
-long returnCode
+    The model that will complete your prompt.
 
-String stderr
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
+  - `JsonValue role = "assistant"`
 
-String toolUseId
+    Conversational role of the generated message.
 
-JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
+    This will always be `"assistant"`.
 
-
+  - `Optional<BetaRefusalStopDetails> stopDetails`
 
-class BetaBashCodeExecutionToolResultBlock:
+    Structured information about a refusal.
 
-
+    - `Optional<Category> category`
 
-Content content
+      The policy category that triggered a refusal.
 
-One of the following:
+      - `CYBER("cyber")`
 
-
+        The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
 
-class BetaBashCodeExecutionToolResultError:
+      - `BIO("bio")`
 
-
+        The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
-ErrorCode errorCode
+      - `FRONTIER_LLM("frontier_llm")`
 
-One of the following:
+        The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+      - `REASONING_EXTRACTION("reasoning_extraction")`
 
-UNAVAILABLE("unavailable")
+        The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+      - `GENERAL_HARMS("general_harms")`
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+        The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
+    - `Optional<String> explanation`
 
-JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
+      Human-readable explanation of the refusal.
 
-
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-class BetaBashCodeExecutionResultBlock:
+    - `Optional<String> fallbackCreditToken`
 
-
+      Opaque code that refunds the cache-miss cost when retrying this refused
+      request on the fallback model. Pass it as `fallback_credit_token` on the
+      retry request. Expires 5 minutes after the refusal.
 
-List<[BetaBashCodeExecutionOutputBlock](api/beta/messages.md)> content
+      The retry is sent either with the same request body (`system`, `messages`,
+      `tools`, and other render-shaping fields), or with the same body plus one
+      appended `assistant` message whose content is the partial text (with any
+      trailing whitespace stripped from the final text block) and paired
+      server-tool blocks from this refusal — which also authorizes that
+      appended turn as an assistant-prefill continuation on models that otherwise
+      disallow prefill. A token minted mid-server-tool-loop whose partial content
+      was continuable may only be redeemed the second way — if a same-body retry
+      is rejected with a 400 saying the token must be redeemed by continuing the
+      partial response, retry the second way instead. Either way: same workspace,
+      same platform; a mismatch is a 400. Resending a token for an already-warm
+      prefix is permitted but yields no additional credit.
 
-String fileId
+      `null` when the refused model isn't eligible for a fallback credit.
 
-JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
+    - `Optional<Boolean> fallbackHasPrefillClaim`
 
-long returnCode
+      Whether the accompanying `fallback_credit_token` may be redeemed with the
+      appended-assistant retry form. Only set when `fallback_credit_token` is
+      present.
 
-String stderr
+      `true`: retry by resending the same request body plus one appended
+      `assistant` message whose content is this response's `content` with any
+      trailing whitespace stripped from the final text block and unpaired
+      `tool_use` blocks omitted (the same appended-turn shape described on
+      `fallback_credit_token`), with the token attached. `false`: retry by
+      resending the original request body unchanged, with the token attached —
+      the appended-assistant form is not available for this refusal (no
+      continuable partial content, or the request uses `output_format` or a
+      `tool_choice` that forces tool use). One exception: when the request used
+      `output_format` or a forced `tool_choice` and the refusal arrived after
+      server tools (including MCP connector tools) had already executed, the
+      token may not be redeemable by either retry form; if the exact-body retry
+      is then rejected with a 400 saying the token must be redeemed by
+      continuing the partial response, discard the token and retry without it.
 
-String stdout
+      Advisory: if an appended-assistant retry is rejected with a 400 despite
+      `true`, fall back to resending the original request body with the token.
 
-JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
+    - `Optional<String> recommendedModel`
 
-String toolUseId
+      The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
+    - `JsonValue type = "refusal"`
 
-
+  - `Optional<BetaStopReason> stopReason`
 
-class BetaTextEditorCodeExecutionToolResultBlock:
+    The reason that we stopped.
 
-
+    This may be one the following values:
 
-Content content
+    * `"end_turn"`: the model reached a natural stopping point
+    * `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
+    * `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
+    * `"tool_use"`: the model invoked one or more tools
+    * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
+    * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+    * `"model_context_window_exceeded"`: we exceeded the model's context window
 
-One of the following:
+    In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-
+    - `END_TURN("end_turn")`
 
-class BetaTextEditorCodeExecutionToolResultError:
+    - `MAX_TOKENS("max_tokens")`
 
-
+    - `STOP_SEQUENCE("stop_sequence")`
 
-ErrorCode errorCode
+    - `TOOL_USE("tool_use")`
 
-One of the following:
+    - `PAUSE_TURN("pause_turn")`
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+    - `COMPACTION("compaction")`
 
-UNAVAILABLE("unavailable")
+    - `REFUSAL("refusal")`
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED("model_context_window_exceeded")`
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+  - `Optional<String> stopSequence`
 
-FILE\_NOT\_FOUND("file\_not\_found")
+    Which custom stop sequence was generated, if any.
 
-Optional<String> errorMessage
+    This value will be a non-null string if one of your custom stop sequences was generated.
 
-JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
+  - `JsonValue type = "message"`
 
-
+    Object type.
 
-class BetaTextEditorCodeExecutionViewResultBlock:
+    For Messages, this is always `"message"`.
 
-String content
+  - `BetaUsage usage`
 
-
+    Billing and rate-limit usage.
 
-FileType fileType
+    Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
 
-One of the following:
+    Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
 
-TEXT("text")
+    For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
 
-IMAGE("image")
+    Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-PDF("pdf")
+    - `Optional<BetaCacheCreation> cacheCreation`
 
-Optional<Long> numLines
+      Breakdown of cached tokens by TTL
 
-Optional<Long> startLine
+      - `long ephemeral1hInputTokens`
 
-Optional<Long> totalLines
+        The number of input tokens used to create the 1 hour cache entry.
 
-JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
+        minimum: 0
 
-
+      - `long ephemeral5mInputTokens`
 
-class BetaTextEditorCodeExecutionCreateResultBlock:
+        The number of input tokens used to create the 5 minute cache entry.
 
-boolean isFileUpdate
+        minimum: 0
 
-JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
+    - `Optional<Long> cacheCreationInputTokens`
 
-
+      The number of input tokens used to create the cache entry.
 
-class BetaTextEditorCodeExecutionStrReplaceResultBlock:
+      minimum: 0
 
-Optional<List<String>> lines
+    - `Optional<Long> cacheReadInputTokens`
 
-Optional<Long> newLines
+      The number of input tokens read from the cache.
 
-Optional<Long> newStart
+      minimum: 0
 
-Optional<Long> oldLines
+    - `Optional<BetaFallbackCreditUsage> fallbackCredit`
 
-Optional<Long> oldStart
+      Outcome of the `fallback_credit_token` presented on this request.
 
-JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
+      - `Status status`
 
-String toolUseId
+        Whether the fallback-credit reprice was applied to this response's billing.
 
-JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
+        A union discriminated on `type`. `redeemed`: the retry is billed as if
+        the conversation had been on the retry model all along — including when the
+        resulting shift is zero because there was nothing to move. `not_applied`:
+        no reprice was applied; the arm's `reason` says why.
 
-
+        - `class BetaFallbackCreditRedeemed:`
 
-class BetaToolSearchToolResultBlock:
+          The reprice was applied: the retry is billed as if the conversation
+          had been on the retry model all along.
 
-
+          - `JsonValue type = "redeemed"`
 
-Content content
+        - `class BetaFallbackCreditNotApplied:`
 
-One of the following:
+          No reprice was applied; `reason` says why.
 
-
+          - `Reason reason`
 
-class BetaToolSearchToolResultError:
+            Why the reprice was not applied.
 
-
+            A closed enum; additions to the redemption-check vocabulary arrive as
+            deliberate schema updates.
 
-ErrorCode errorCode
+            - `BODY_MISMATCH("body_mismatch")`
 
-One of the following:
+            - `CONTINUATION_EXCLUDED("continuation_excluded")`
 
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
+            - `CONTINUATION_ONLY("continuation_only")`
 
-UNAVAILABLE("unavailable")
+            - `EXPIRED("expired")`
 
-TOO\_MANY\_REQUESTS("too\_many\_requests")
+            - `INVALID_TARGET_MODEL("invalid_target_model")`
 
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
+            - `NOT_ENABLED("not_enabled")`
 
-Optional<String> errorMessage
+            - `REPRICE_UNAVAILABLE("reprice_unavailable")`
 
-JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+            - `TEMPORARILY_UNAVAILABLE("temporarily_unavailable")`
 
-
+            - `VARIANT_FIELDS_PRESENT("variant_fields_present")`
 
-class BetaToolSearchToolSearchResultBlock:
+            - `WRONG_ORGANIZATION("wrong_organization")`
 
-
+            - `WRONG_PLATFORM("wrong_platform")`
 
-List<[BetaToolReferenceBlock](api/beta/messages.md)> toolReferences
+            - `WRONG_WORKSPACE("wrong_workspace")`
 
-String toolName
+          - `JsonValue type = "not_applied"`
 
-JsonValue; type "tool\_reference"constant"tool\_reference"constant
+          - `Optional<List<String>> removeToRedeem`
 
-JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
+            Request fields to remove before retrying, so the retry can redeem this
+            token.
 
-String toolUseId
+            Present exactly when `reason` is `variant_fields_present` — never null,
+            never an empty array; absent otherwise. Fields are named only from your own request, and only after
+            the sealed variant hash matched. A served best-effort retry has already
+            been billed at normal price; nothing redeems retroactively, but a corrected
+            re-send inside the token's five-minute window can still redeem.
 
-JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
+    - `Optional<String> inferenceGeo`
 
-
+      The geographic region where inference was performed for this request.
 
-class BetaMcpToolUseBlock:
+    - `long inputTokens`
 
-String id
+      The number of input tokens which were used.
 
-Input input
+      minimum: 0
 
-String name
+    - `Optional<List<Iteration>> iterations`
 
-The name of the MCP tool
+      Per-iteration token usage breakdown.
 
-String serverName
+      Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
-The name of the MCP server
+      - Determine which iterations exceeded long context thresholds (>=200k tokens)
+      - Calculate the context window size from the last `message` entry
+      - Understand token accumulation across server-side tool use loops
 
-JsonValue; type "mcp\_tool\_use"constant"mcp\_tool\_use"constant
+      A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-
+      - `class BetaMessageIterationUsage:`
 
-class BetaMcpToolResultBlock:
+        Token usage for a sampling iteration.
 
-
+        - `Optional<BetaCacheCreation> cacheCreation`
 
-Content content
+          Breakdown of cached tokens by TTL
 
-One of the following:
+        - `long cacheCreationInputTokens`
 
-String
+          The number of input tokens used to create the cache entry.
 
-
+          minimum: 0
 
-List<[BetaTextBlock](api/beta/messages.md)>
+        - `long cacheReadInputTokens`
 
-
+          The number of input tokens read from the cache.
 
-Optional<List<[BetaTextCitation](api/beta/messages.md)>> citations
+          minimum: 0
 
-Citations supporting the text block.
+        - `long inputTokens`
 
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+          The number of input tokens which were used.
 
-One of the following:
+          minimum: 0
 
-
+        - `Model model`
 
-class BetaCitationCharLocation:
+          The model that will complete your prompt.
 
-String citedText
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-long documentIndex
+        - `long outputTokens`
 
-Optional<String> documentTitle
+          The number of output tokens which were used.
 
-long endCharIndex
+          minimum: 0
 
-Optional<String> fileId
+        - `JsonValue type = "message"`
 
-long startCharIndex
+          Usage for a sampling iteration
 
-JsonValue; type "char\_location"constant"char\_location"constant
+      - `class BetaCompactionIterationUsage:`
 
-
+        Token usage for a compaction iteration.
 
-class BetaCitationPageLocation:
+        - `Optional<BetaCacheCreation> cacheCreation`
 
-String citedText
+          Breakdown of cached tokens by TTL
 
-long documentIndex
+        - `long cacheCreationInputTokens`
 
-Optional<String> documentTitle
+          The number of input tokens used to create the cache entry.
 
-long endPageNumber
+          minimum: 0
 
-Optional<String> fileId
+        - `long cacheReadInputTokens`
 
-long startPageNumber
+          The number of input tokens read from the cache.
 
-JsonValue; type "page\_location"constant"page\_location"constant
+          minimum: 0
 
-
+        - `long inputTokens`
 
-class BetaCitationContentBlockLocation:
+          The number of input tokens which were used.
 
-
+          minimum: 0
 
-String citedText
+        - `long outputTokens`
 
-The full text of the cited block range, concatenated.
+          The number of output tokens which were used.
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+          minimum: 0
 
-long documentIndex
+        - `JsonValue type = "compaction"`
 
-Optional<String> documentTitle
+          Usage for a compaction iteration
 
-
+      - `class BetaAdvisorMessageIterationUsage:`
 
-long endBlockIndex
+        Token usage for an advisor sub-inference iteration.
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+        - `Optional<BetaCacheCreation> cacheCreation`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+          Breakdown of cached tokens by TTL
 
-Optional<String> fileId
+        - `long cacheCreationInputTokens`
 
-long startBlockIndex
+          The number of input tokens used to create the cache entry.
 
-0-based index of the first cited block in the source's `content` array.
+          minimum: 0
 
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+        - `long cacheReadInputTokens`
 
-
+          The number of input tokens read from the cache.
 
-class BetaCitationsWebSearchResultLocation:
+          minimum: 0
 
-String citedText
+        - `long inputTokens`
 
-String encryptedIndex
+          The number of input tokens which were used.
 
-Optional<String> title
+          minimum: 0
 
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+        - `Model model`
 
-String url
+          The model that will complete your prompt.
 
-
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-class BetaCitationSearchResultLocation:
+        - `long outputTokens`
 
-
+          The number of output tokens which were used.
 
-String citedText
+          minimum: 0
 
-The full text of the cited block range, concatenated.
+        - `JsonValue type = "advisor_message"`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+          Usage for an advisor sub-inference iteration
 
-
+      - `class BetaFallbackMessageIterationUsage:`
 
-long endBlockIndex
+        Token usage for the fallback-model attempt of a server-side fallback request.
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+        Produced in place of a `message` entry for whichever hop served the
+        response. A declined hop produces the existing `message` entry. Whether
+        a fallback model served the response is signalled by the presence of this
+        entry in `usage.iterations`.
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+        - `Optional<BetaCacheCreation> cacheCreation`
 
-
+          Breakdown of cached tokens by TTL
 
-long searchResultIndex
+        - `long cacheCreationInputTokens`
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+          The number of input tokens used to create the cache entry.
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+          minimum: 0
 
-minimum0
+        - `long cacheReadInputTokens`
 
-String source
+          The number of input tokens read from the cache.
 
-long startBlockIndex
+          minimum: 0
 
-0-based index of the first cited block in the source's `content` array.
+        - `long inputTokens`
 
-Optional<String> title
+          The number of input tokens which were used.
 
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+          minimum: 0
 
-String text
+        - `Model model`
 
-JsonValue; type "text"constant"text"constant
+          The model that will complete your prompt.
 
-boolean isError
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-String toolUseId
+        - `long outputTokens`
 
-JsonValue; type "mcp\_tool\_result"constant"mcp\_tool\_result"constant
+          The number of output tokens which were used.
 
-
+          minimum: 0
 
-class BetaContainerUploadBlock:
+        - `JsonValue type = "fallback_message"`
 
-Response model for a file uploaded to the container.
+          Usage for the fallback-model attempt that served the response
 
-String fileId
+    - `long outputTokens`
 
-JsonValue; type "container\_upload"constant"container\_upload"constant
+      The number of output tokens which were used.
 
-
+      minimum: 0
 
-class BetaCompactionBlock:
+    - `Optional<BetaOutputTokensDetails> outputTokensDetails`
 
-A compaction block returned when autocompact is triggered.
+      Breakdown of output tokens by category.
 
-When content is None, it indicates the compaction failed to produce a valid
-summary (e.g., malformed output from the model). Clients may round-trip
-compaction blocks with null content; the server treats them as no-ops.
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
 
-Optional<String> content
+      - `long thinkingTokens`
 
-Summary of compacted content, or null if compaction failed
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
 
-Optional<String> encryptedContent
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
-Opaque metadata from prior compaction, to be round-tripped verbatim
+        minimum: 0
 
-JsonValue; type "compaction"constant"compaction"constant
+    - `Optional<BetaServerToolUsage> serverToolUse`
 
-
+      The number of server tool requests.
 
-class BetaFallbackBlock:
+      - `long webFetchRequests`
 
-Marks the point in `content` where one model's output gives way to the next.
+        The number of web fetch tool requests.
 
-One block appears per hop where a preceding model actually ran this turn and
-declined. A turn where no preceding model ran and declined has no such
-boundary and carries no block — the signal for whether a fallback model
-served the response is the presence of a `fallback_message` entry in
-`usage.iterations`, not this block.
+        minimum: 0
 
-The block is treated like a server-tool content block for streaming: it
-arrives via the standard `content_block_start` / `content_block_stop`
-pair and carries no deltas.
+      - `long webSearchRequests`
 
-
+        The number of web search tool requests.
 
-[BetaFallbackInfo](api/beta/messages.md) from
+        minimum: 0
 
-The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+    - `Optional<ServiceTier> serviceTier`
 
-
+      If the request used the priority, standard, or batch tier.
 
-Model model
+      - `STANDARD("standard")`
 
-The model that will complete your prompt.
+      - `PRIORITY("priority")`
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+      - `BATCH("batch")`
 
-One of the following:
+    - `Optional<Speed> speed`
 
-CLAUDE\_SONNET\_5("claude-sonnet-5")
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-High-performance model for coding and agents
+      - `STANDARD("standard")`
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+      - `FAST("fast")`
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+  - `Optional<List<BetaThinkingDroppedInputTransformation>> inputTransformations`
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+    Changes the API made to the request's input before showing it to the model:
+    one entry per change, in request order. Today the only entry type is
+    `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
+    block from the request's `messages` that was removed from the prompt instead
+    of being shown to the model because it failed a binding check. More entry
+    types may be added over time; ignore types you do not recognize.
 
-Most capable model for cybersecurity and biology research
+    Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
+    every such response from a model that supports extended thinking, as `[]`
+    when nothing was changed; without the beta, blocks are removed all the same
+    but nothing is reported. Removed blocks contribute nothing to
+    `usage.input_tokens`. When streaming, the array is final in `message_start`;
+    the final `message_delta` event carries it only when a server-side model
+    fallback happened mid-stream, in which case it holds the serving model's
+    entries and replaces the one in `message_start`.
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+    - `String path`
 
-Frontier intelligence for long-running agents and coding
+      Where the removed block was in your request, as `messages.{i}.content.{j}`:
+      `i` indexes the `messages` array you sent and `j` that message's `content`
+      array — the same form error messages use.
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+    - `Reason reason`
 
-Frontier intelligence for long-running agents and coding
+      Which binding check removed the block: `model_binding_mismatch` — it was
+      created by a model whose reasoning the requested model may not read;
+      `prefix_binding_mismatch` — the conversation before it differs from the
+      conversation it was created in (the rest of that turn's consecutive thinking
+      blocks are removed with it, each with this reason);
+      `organization_binding_mismatch` — it was created under a different
+      organization (an Anthropic organization, AWS account or Google Cloud project)
+      and this organization is not one of its additional organizations;
+      `end_user_binding_mismatch` — it was created for a different end user, or
+      was removed by the consumer-organization binding. A block that would fail
+      several checks reports one reason, in this order of precedence:
+      `organization_binding_mismatch`, `end_user_binding_mismatch`,
+      `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+      - `MODEL_BINDING_MISMATCH("model_binding_mismatch")`
 
-New class of intelligence, strongest in coding and cybersecurity
+      - `PREFIX_BINDING_MISMATCH("prefix_binding_mismatch")`
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+      - `ORGANIZATION_BINDING_MISMATCH("organization_binding_mismatch")`
 
-Frontier intelligence for long-running agents and coding
+      - `END_USER_BINDING_MISMATCH("end_user_binding_mismatch")`
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+    - `JsonValue type = "thinking_dropped"`
 
-Best combination of speed and intelligence
+      Always `thinking_dropped` for this entry type.
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+- `class BetaRawMessageStreamEvent: union`
 
-Fastest model with near-frontier intelligence
+  - `class BetaRawMessageStartEvent:`
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+    - `BetaMessage message`
 
-Fastest model with near-frontier intelligence
+    - `JsonValue type = "message_start"`
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+  - `class BetaRawMessageDeltaEvent:`
 
-Premium model combining maximum intelligence with practical performance
+    - `Optional<BetaContextManagementResponse> contextManagement`
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+      Information about context management strategies applied during the request
 
-Premium model combining maximum intelligence with practical performance
+    - `Delta delta`
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+      - `Optional<BetaContainer> container`
 
-High-performance model for agents and coding
+        Information about the container used in the request (for the code execution tool)
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+      - `Optional<BetaRefusalStopDetails> stopDetails`
 
-High-performance model for agents and coding
+        Structured information about a refusal.
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+      - `Optional<BetaStopReason> stopReason`
 
-Exceptional model for specialized complex tasks
+      - `Optional<String> stopSequence`
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+    - `JsonValue type = "message_delta"`
 
-Exceptional model for specialized complex tasks
+    - `BetaMessageDeltaUsage usage`
 
-
+      Billing and rate-limit usage.
 
-[BetaFallbackInfo](api/beta/messages.md) to
+      Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
 
-The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+      Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
 
-
+      For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
 
-Model model
+      Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-The model that will complete your prompt.
+      - `Optional<Long> cacheCreationInputTokens`
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+        The cumulative number of input tokens used to create the cache entry.
 
-One of the following:
+        minimum: 0
 
-CLAUDE\_SONNET\_5("claude-sonnet-5")
+      - `Optional<Long> cacheReadInputTokens`
 
-High-performance model for coding and agents
+        The cumulative number of input tokens read from the cache.
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+        minimum: 0
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+      - `Optional<BetaFallbackCreditUsage> fallbackCredit`
 
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
+        Outcome of the `fallback_credit_token` presented on this request.
 
-Most capable model for cybersecurity and biology research
+      - `Optional<Long> inputTokens`
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+        The cumulative number of input tokens which were used.
 
-Frontier intelligence for long-running agents and coding
+        minimum: 0
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+      - `Optional<List<Iteration>> iterations`
 
-Frontier intelligence for long-running agents and coding
+        Per-iteration token usage breakdown.
 
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+        Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
-New class of intelligence, strongest in coding and cybersecurity
+        - Determine which iterations exceeded long context thresholds (>=200k tokens)
+        - Calculate the context window size from the last `message` entry
+        - Understand token accumulation across server-side tool use loops
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+        A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-Frontier intelligence for long-running agents and coding
+        - `class BetaMessageIterationUsage:`
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+          Token usage for a sampling iteration.
 
-Best combination of speed and intelligence
+        - `class BetaCompactionIterationUsage:`
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+          Token usage for a compaction iteration.
 
-Fastest model with near-frontier intelligence
+        - `class BetaAdvisorMessageIterationUsage:`
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+          Token usage for an advisor sub-inference iteration.
 
-Fastest model with near-frontier intelligence
+        - `class BetaFallbackMessageIterationUsage:`
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+          Token usage for the fallback-model attempt of a server-side fallback request.
 
-Premium model combining maximum intelligence with practical performance
+          Produced in place of a `message` entry for whichever hop served the
+          response. A declined hop produces the existing `message` entry. Whether
+          a fallback model served the response is signalled by the presence of this
+          entry in `usage.iterations`.
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+      - `long outputTokens`
 
-Premium model combining maximum intelligence with practical performance
+        The cumulative number of output tokens which were used.
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+      - `Optional<BetaOutputTokensDetails> outputTokensDetails`
 
-High-performance model for agents and coding
+        Breakdown of output tokens by category.
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
 
-High-performance model for agents and coding
+      - `Optional<BetaServerToolUsage> serverToolUse`
 
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+        The number of server tool requests.
 
-Exceptional model for specialized complex tasks
+    - `Optional<List<BetaThinkingDroppedInputTransformation>> inputTransformations`
 
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+      Changes the API made to the request's input before showing it to the model:
+      one entry per change, in request order. Today the only entry type is
+      `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
+      block from the request's `messages` that was removed from the prompt instead
+      of being shown to the model because it failed a binding check. More entry
+      types may be added over time; ignore types you do not recognize.
 
-Exceptional model for specialized complex tasks
+      Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
+      every such response from a model that supports extended thinking, as `[]`
+      when nothing was changed; without the beta, blocks are removed all the same
+      but nothing is reported. Removed blocks contribute nothing to
+      `usage.input_tokens`. When streaming, the array is final in `message_start`;
+      the final `message_delta` event carries it only when a server-side model
+      fallback happened mid-stream, in which case it holds the serving model's
+      entries and replaces the one in `message_start`.
 
-
+      - `String path`
 
-[BetaFallbackRefusalTrigger](api/beta/messages.md) trigger
+        Where the removed block was in your request, as `messages.{i}.content.{j}`:
+        `i` indexes the `messages` array you sent and `j` that message's `content`
+        array — the same form error messages use.
 
-What caused the `from` model to hand over at this hop.
+      - `Reason reason`
 
-
+        Which binding check removed the block: `model_binding_mismatch` — it was
+        created by a model whose reasoning the requested model may not read;
+        `prefix_binding_mismatch` — the conversation before it differs from the
+        conversation it was created in (the rest of that turn's consecutive thinking
+        blocks are removed with it, each with this reason);
+        `organization_binding_mismatch` — it was created under a different
+        organization (an Anthropic organization, AWS account or Google Cloud project)
+        and this organization is not one of its additional organizations;
+        `end_user_binding_mismatch` — it was created for a different end user, or
+        was removed by the consumer-organization binding. A block that would fail
+        several checks reports one reason, in this order of precedence:
+        `organization_binding_mismatch`, `end_user_binding_mismatch`,
+        `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-Optional<Category> category
+      - `JsonValue type = "thinking_dropped"`
 
-The policy category that triggered a refusal.
+        Always `thinking_dropped` for this entry type.
 
-One of the following:
+  - `class BetaRawMessageStopEvent:`
 
-CYBER("cyber")
+    - `JsonValue type = "message_stop"`
 
-BIO("bio")
+  - `class BetaRawContentBlockStartEvent:`
 
-FRONTIER\_LLM("frontier\_llm")
+    - `ContentBlock contentBlock`
 
-REASONING\_EXTRACTION("reasoning\_extraction")
+      Response model for a file uploaded to the container.
 
-JsonValue; type "refusal"constant"refusal"constant
+      - `class BetaTextBlock:`
 
-JsonValue; type "fallback"constant"fallback"constant
+      - `class BetaThinkingBlock:`
 
-
+      - `class BetaRedactedThinkingBlock:`
 
-Optional<[BetaContextManagementResponse](api/beta/messages.md)> contextManagement
+      - `class BetaToolUseBlock:`
 
-Context management response.
+      - `class BetaServerToolUseBlock:`
 
-Information about context management strategies applied during the request.
+      - `class BetaWebSearchToolResultBlock:`
 
-
+      - `class BetaWebFetchToolResultBlock:`
 
-List<AppliedEdit> appliedEdits
+      - `class BetaAdvisorToolResultBlock:`
 
-List of context management edits that were applied.
+      - `class BetaCodeExecutionToolResultBlock:`
 
-One of the following:
+      - `class BetaBashCodeExecutionToolResultBlock:`
 
-
+      - `class BetaTextEditorCodeExecutionToolResultBlock:`
 
-class BetaClearToolUses20250919EditResponse:
+      - `class BetaToolSearchToolResultBlock:`
 
-long clearedInputTokens
+      - `class BetaMcpToolUseBlock:`
 
-Number of input tokens cleared by this edit.
+      - `class BetaMcpToolResultBlock:`
 
-long clearedToolUses
+      - `class BetaContainerUploadBlock:`
 
-Number of tool uses that were cleared.
+        Response model for a file uploaded to the container.
 
-JsonValue; type "clear\_tool\_uses\_20250919"constant"clear\_tool\_uses\_20250919"constant
+      - `class BetaCompactionBlock:`
 
-The type of context management edit applied.
+        A compaction block returned when autocompact is triggered.
 
-
+        When content is None, it indicates the compaction failed to produce a valid
+        summary (e.g., malformed output from the model). Clients may round-trip
+        compaction blocks with null content; the server treats them as no-ops.
 
-class BetaClearThinking20251015EditResponse:
+      - `class BetaFallbackBlock:`
 
-long clearedInputTokens
+        Marks the point in `content` where one model's output gives way to the next.
 
-Number of input tokens cleared by this edit.
+        One block appears per hop where a preceding model actually ran this turn and
+        declined. A turn where no preceding model ran and declined has no such
+        boundary and carries no block — the signal for whether a fallback model
+        served the response is the presence of a `fallback_message` entry in
+        `usage.iterations`, not this block.
 
-long clearedThinkingTurns
+        The block is treated like a server-tool content block for streaming: it
+        arrives via the standard `content_block_start` / `content_block_stop`
+        pair and carries no deltas.
 
-Number of thinking turns that were cleared.
+    - `long index`
 
-JsonValue; type "clear\_thinking\_20251015"constant"clear\_thinking\_20251015"constant
+    - `JsonValue type = "content_block_start"`
 
-The type of context management edit applied.
+  - `class BetaRawContentBlockDeltaEvent:`
 
-
+    - `BetaRawContentBlockDelta delta`
 
-Optional<[BetaDiagnostics](api/beta/messages.md)> diagnostics
+      - `class BetaTextDelta:`
 
-Response envelope for request-level diagnostics. Present (possibly
-null) whenever the caller supplied `diagnostics` on the request.
+        - `String text`
 
-
+        - `JsonValue type = "text_delta"`
 
-Optional<CacheMissReason> cacheMissReason
+      - `class BetaInputJsonDelta:`
 
-Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+        - `String partialJson`
 
-One of the following:
+        - `JsonValue type = "input_json_delta"`
 
-
+      - `class BetaCitationsDelta:`
 
-class BetaCacheMissModelChanged:
+        - `Citation citation`
 
-long cacheMissedInputTokens
+          - `class BetaCitationCharLocation:`
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+          - `class BetaCitationPageLocation:`
 
-JsonValue; type "model\_changed"constant"model\_changed"constant
+          - `class BetaCitationContentBlockLocation:`
 
-
+          - `class BetaCitationsWebSearchResultLocation:`
 
-class BetaCacheMissSystemChanged:
+          - `class BetaCitationSearchResultLocation:`
 
-long cacheMissedInputTokens
+        - `JsonValue type = "citations_delta"`
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+      - `class BetaThinkingDelta:`
 
-JsonValue; type "system\_changed"constant"system\_changed"constant
+        - `Optional<Long> estimatedTokens`
 
-
+          Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
-class BetaCacheMissToolsChanged:
+        - `String thinking`
 
-long cacheMissedInputTokens
+          The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+        - `JsonValue type = "thinking_delta"`
 
-JsonValue; type "tools\_changed"constant"tools\_changed"constant
+      - `class BetaSignatureDelta:`
 
-
+        - `String signature`
 
-class BetaCacheMissMessagesChanged:
+          The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
-long cacheMissedInputTokens
+        - `JsonValue type = "signature_delta"`
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+      - `class BetaCompactionContentBlockDelta:`
 
-JsonValue; type "messages\_changed"constant"messages\_changed"constant
+        - `Optional<String> content`
 
-
+        - `Optional<String> encryptedContent`
 
-class BetaCacheMissPreviousMessageNotFound:
+          Opaque metadata from prior compaction, to be round-tripped verbatim
 
-JsonValue; type "previous\_message\_not\_found"constant"previous\_message\_not\_found"constant
+        - `JsonValue type = "compaction_delta"`
 
-
+    - `long index`
 
-class BetaCacheMissUnavailable:
+    - `JsonValue type = "content_block_delta"`
 
-JsonValue; type "unavailable"constant"unavailable"constant
+  - `class BetaRawContentBlockStopEvent:`
 
-
+    - `long index`
 
-Model model
+    - `JsonValue type = "content_block_stop"`
 
-The model that will complete your prompt.
+## Example
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-CLAUDE\_SONNET\_5("claude-sonnet-5")
-
-High-performance model for coding and agents
-
-CLAUDE\_FABLE\_5("claude-fable-5")
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
-
-Most capable model for cybersecurity and biology research
-
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
-
-New class of intelligence, strongest in coding and cybersecurity
-
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
-
-Best combination of speed and intelligence
-
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-High-performance model for agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-High-performance model for agents and coding
-
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
-
-Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
-
-Exceptional model for specialized complex tasks
-
-
-
-JsonValue; role "assistant"constant"assistant"constant
-
-Conversational role of the generated message.
-
-This will always be `"assistant"`.
-
-
-
-Optional<[BetaRefusalStopDetails](api/beta/messages.md)> stopDetails
-
-Structured information about a refusal.
-
-
-
-Optional<Category> category
-
-The policy category that triggered a refusal.
-
-One of the following:
-
-CYBER("cyber")
-
-BIO("bio")
-
-FRONTIER\_LLM("frontier\_llm")
-
-REASONING\_EXTRACTION("reasoning\_extraction")
-
-
-
-Optional<String> explanation
-
-Human-readable explanation of the refusal.
-
-This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-
-
-Optional<String> fallbackCreditToken
-
-Opaque code that refunds the cache-miss cost when retrying this refused
-request on the fallback model. Pass it as `fallback_credit_token` on the
-retry request. Expires 5 minutes after the refusal.
-
-The retry is sent either with the same request body (`system`, `messages`,
-`tools`, and other render-shaping fields), or with the same body plus one
-appended `assistant` message whose content is the partial text (with any
-trailing whitespace stripped from the final text block) and paired
-server-tool blocks from this refusal — which also authorizes that
-appended turn as an assistant-prefill continuation on models that otherwise
-disallow prefill. A token minted mid-server-tool-loop whose partial content
-was continuable may only be redeemed the second way — if a same-body retry
-is rejected with a 400 saying the token must be redeemed by continuing the
-partial response, retry the second way instead. Either way: same workspace,
-same platform; a mismatch is a 400. Resending a token for an already-warm
-prefix is permitted but yields no additional credit.
-
-`null` when the refused model isn't eligible for a fallback credit.
-
-
-
-Optional<Boolean> fallbackHasPrefillClaim
-
-Whether the accompanying `fallback_credit_token` may be redeemed with the
-appended-assistant retry form. Only set when `fallback_credit_token` is
-present.
-
-`true`: retry by resending the same request body plus one appended
-`assistant` message whose content is this response's `content` with any
-trailing whitespace stripped from the final text block and unpaired
-`tool_use` blocks omitted (the same appended-turn shape described on
-`fallback_credit_token`), with the token attached. `false`: retry by
-resending the original request body unchanged, with the token attached —
-the appended-assistant form is not available for this refusal (no
-continuable partial content, or the request uses `output_format` or a
-`tool_choice` that forces tool use). One exception: when the request used
-`output_format` or a forced `tool_choice` and the refusal arrived after
-server tools (including MCP connector tools) had already executed, the
-token may not be redeemable by either retry form; if the exact-body retry
-is then rejected with a 400 saying the token must be redeemed by
-continuing the partial response, discard the token and retry without it.
-
-Advisory: if an appended-assistant retry is rejected with a 400 despite
-`true`, fall back to resending the original request body with the token.
-
-Optional<String> recommendedModel
-
-The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
-
-JsonValue; type "refusal"constant"refusal"constant
-
-
-
-Optional<[BetaStopReason](api/beta/messages.md)> stopReason
-
-The reason that we stopped.
-
-This may be one the following values:
-
-- `"end_turn"`: the model reached a natural stopping point
-- `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
-- `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
-- `"tool_use"`: the model invoked one or more tools
-- `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
-- `"refusal"`: when streaming classifiers intervene to handle potential policy violations
-
-In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
-
-One of the following:
-
-END\_TURN("end\_turn")
-
-MAX\_TOKENS("max\_tokens")
-
-STOP\_SEQUENCE("stop\_sequence")
-
-TOOL\_USE("tool\_use")
-
-PAUSE\_TURN("pause\_turn")
-
-COMPACTION("compaction")
-
-REFUSAL("refusal")
-
-MODEL\_CONTEXT\_WINDOW\_EXCEEDED("model\_context\_window\_exceeded")
-
-
-
-Optional<String> stopSequence
-
-Which custom stop sequence was generated, if any.
-
-This value will be a non-null string if one of your custom stop sequences was generated.
-
-
-
-JsonValue; type "message"constant"message"constant
-
-Object type.
-
-For Messages, this is always `"message"`.
-
-
-
-[BetaUsage](api/beta/messages.md) usage
-
-Billing and rate-limit usage.
-
-Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
-
-Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
-
-For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
-
-Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
-
-
-
-Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
-
-Breakdown of cached tokens by TTL
-
-long ephemeral1hInputTokens
-
-The number of input tokens used to create the 1 hour cache entry.
-
-long ephemeral5mInputTokens
-
-The number of input tokens used to create the 5 minute cache entry.
-
-Optional<Long> cacheCreationInputTokens
-
-The number of input tokens used to create the cache entry.
-
-Optional<Long> cacheReadInputTokens
-
-The number of input tokens read from the cache.
-
-Optional<String> inferenceGeo
-
-The geographic region where inference was performed for this request.
-
-long inputTokens
-
-The number of input tokens which were used.
-
-
-
-Optional<List<BetaIterationsUsageItems>> iterations
-
-Per-iteration token usage breakdown.
-
-Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
-
-- Determine which iterations exceeded long context thresholds (>=200k tokens)
-- Calculate the true context window size from the last iteration
-- Understand token accumulation across server-side tool use loops
-
-One of the following:
-
-
-
-class BetaMessageIterationUsage:
-
-Token usage for a sampling iteration.
-
-
-
-Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
-
-Breakdown of cached tokens by TTL
-
-long ephemeral1hInputTokens
-
-The number of input tokens used to create the 1 hour cache entry.
-
-long ephemeral5mInputTokens
-
-The number of input tokens used to create the 5 minute cache entry.
-
-long cacheCreationInputTokens
-
-The number of input tokens used to create the cache entry.
-
-long cacheReadInputTokens
-
-The number of input tokens read from the cache.
-
-long inputTokens
-
-The number of input tokens which were used.
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-CLAUDE\_SONNET\_5("claude-sonnet-5")
-
-High-performance model for coding and agents
-
-CLAUDE\_FABLE\_5("claude-fable-5")
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
-
-Most capable model for cybersecurity and biology research
-
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
-
-New class of intelligence, strongest in coding and cybersecurity
-
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
-
-Best combination of speed and intelligence
-
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-High-performance model for agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-High-performance model for agents and coding
-
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
-
-Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
-
-Exceptional model for specialized complex tasks
-
-long outputTokens
-
-The number of output tokens which were used.
-
-JsonValue; type "message"constant"message"constant
-
-Usage for a sampling iteration
-
-
-
-class BetaCompactionIterationUsage:
-
-Token usage for a compaction iteration.
-
-
-
-Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
-
-Breakdown of cached tokens by TTL
-
-long ephemeral1hInputTokens
-
-The number of input tokens used to create the 1 hour cache entry.
-
-long ephemeral5mInputTokens
-
-The number of input tokens used to create the 5 minute cache entry.
-
-long cacheCreationInputTokens
-
-The number of input tokens used to create the cache entry.
-
-long cacheReadInputTokens
-
-The number of input tokens read from the cache.
-
-long inputTokens
-
-The number of input tokens which were used.
-
-long outputTokens
-
-The number of output tokens which were used.
-
-JsonValue; type "compaction"constant"compaction"constant
-
-Usage for a compaction iteration
-
-
-
-class BetaAdvisorMessageIterationUsage:
-
-Token usage for an advisor sub-inference iteration.
-
-
-
-Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
-
-Breakdown of cached tokens by TTL
-
-long ephemeral1hInputTokens
-
-The number of input tokens used to create the 1 hour cache entry.
-
-long ephemeral5mInputTokens
-
-The number of input tokens used to create the 5 minute cache entry.
-
-long cacheCreationInputTokens
-
-The number of input tokens used to create the cache entry.
-
-long cacheReadInputTokens
-
-The number of input tokens read from the cache.
-
-long inputTokens
-
-The number of input tokens which were used.
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-CLAUDE\_SONNET\_5("claude-sonnet-5")
-
-High-performance model for coding and agents
-
-CLAUDE\_FABLE\_5("claude-fable-5")
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
-
-Most capable model for cybersecurity and biology research
-
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
-
-New class of intelligence, strongest in coding and cybersecurity
-
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
-
-Best combination of speed and intelligence
-
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-High-performance model for agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-High-performance model for agents and coding
-
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
-
-Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
-
-Exceptional model for specialized complex tasks
-
-long outputTokens
-
-The number of output tokens which were used.
-
-JsonValue; type "advisor\_message"constant"advisor\_message"constant
-
-Usage for an advisor sub-inference iteration
-
-
-
-class BetaFallbackMessageIterationUsage:
-
-Token usage for the fallback-model attempt of a server-side fallback request.
-
-Produced in place of a `message` entry for whichever hop served the
-response. A declined hop produces the existing `message` entry. Whether
-a fallback model served the response is signalled by the presence of this
-entry in `usage.iterations`.
-
-
-
-Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
-
-Breakdown of cached tokens by TTL
-
-long ephemeral1hInputTokens
-
-The number of input tokens used to create the 1 hour cache entry.
-
-long ephemeral5mInputTokens
-
-The number of input tokens used to create the 5 minute cache entry.
-
-long cacheCreationInputTokens
-
-The number of input tokens used to create the cache entry.
-
-long cacheReadInputTokens
-
-The number of input tokens read from the cache.
-
-long inputTokens
-
-The number of input tokens which were used.
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-CLAUDE\_SONNET\_5("claude-sonnet-5")
-
-High-performance model for coding and agents
-
-CLAUDE\_FABLE\_5("claude-fable-5")
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
-
-Most capable model for cybersecurity and biology research
-
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
-
-New class of intelligence, strongest in coding and cybersecurity
-
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
-
-Best combination of speed and intelligence
-
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-High-performance model for agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-High-performance model for agents and coding
-
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
-
-Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
-
-Exceptional model for specialized complex tasks
-
-long outputTokens
-
-The number of output tokens which were used.
-
-JsonValue; type "fallback\_message"constant"fallback\_message"constant
-
-Usage for the fallback-model attempt that served the response
-
-long outputTokens
-
-The number of output tokens which were used.
-
-
-
-Optional<[BetaOutputTokensDetails](api/beta/messages.md)> outputTokensDetails
-
-Breakdown of output tokens by category.
-
-`output_tokens` remains the inclusive, authoritative total used for billing.
-This object provides a read-only decomposition for observability — for example,
-how many of the billed output tokens were spent on internal reasoning that may
-have been summarized before being returned to you.
-
-
-
-long thinkingTokens
-
-Number of output tokens the model generated as internal reasoning, including
-the thinking-block delimiter tokens.
-
-Reflects the raw reasoning the model produced, not the (possibly shorter)
-summarized thinking text returned in the response body. Computed by
-re-tokenizing the raw reasoning text, so it may differ from the model's exact
-generation count by a small number of tokens. Always ≤ `output_tokens`;
-`output_tokens - thinking_tokens` approximates the non-reasoning output.
-
-minimum0
-
-
-
-Optional<[BetaServerToolUsage](api/beta/messages.md)> serverToolUse
-
-The number of server tool requests.
-
-long webFetchRequests
-
-The number of web fetch tool requests.
-
-long webSearchRequests
-
-The number of web search tool requests.
-
-
-
-Optional<ServiceTier> serviceTier
-
-If the request used the priority, standard, or batch tier.
-
-One of the following:
-
-STANDARD("standard")
-
-PRIORITY("priority")
-
-BATCH("batch")
-
-
-
-Optional<Speed> speed
-
-The inference speed mode used for this request.
-
-One of the following:
-
-STANDARD("standard")
-
-FAST("fast")
-
-
-
-class BetaRawMessageStreamEvent: A class that can be one of several variants.union 
-
-
-
-class BetaRawMessageStartEvent:
-
-
-
-[BetaMessage](api/beta/messages.md) message
-
-
-
-String id
-
-Unique object identifier.
-
-The format and length of IDs may change over time.
-
-
-
-Optional<[BetaContainer](api/beta/messages.md)> container
-
-Information about the container used in the request (for the code execution tool)
-
-String id
-
-Identifier for the container used in this request
-
-LocalDateTime expiresAt
-
-The time at which the container will expire.
-
-
-
-Optional<List<[BetaSkill](api/beta/messages.md)>> skills
-
-Skills loaded in the container
-
-String skillId
-
-Skill ID
-
-
-
-Type type
-
-Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
-
-One of the following:
-
-ANTHROPIC("anthropic")
-
-CUSTOM("custom")
-
-String version
-
-Skill version or 'latest' for most recent version
-
-
-
-List<[BetaContentBlock](api/beta/messages.md)> content
-
-Content generated by the model.
-
-This is an array of content blocks, each of which has a `type` that determines its shape.
-
-Example:
-
-```shiki
-[{"type": "text", "text": "Hi, I'm Claude."}]
-```
-
-
-
-If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
-
-For example, if the input `messages` were:
-
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("}
-]
-```
-
-
-
-Then the response `content` might be:
-
-```shiki
-[{"type": "text", "text": "B)"}]
-```
-
-
-
-One of the following:
-
-
-
-class BetaTextBlock:
-
-
-
-Optional<List<[BetaTextCitation](api/beta/messages.md)>> citations
-
-Citations supporting the text block.
-
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-One of the following:
-
-
-
-class BetaCitationCharLocation:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endCharIndex
-
-Optional<String> fileId
-
-long startCharIndex
-
-JsonValue; type "char\_location"constant"char\_location"constant
-
-
-
-class BetaCitationPageLocation:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endPageNumber
-
-Optional<String> fileId
-
-long startPageNumber
-
-JsonValue; type "page\_location"constant"page\_location"constant
-
-
-
-class BetaCitationContentBlockLocation:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-long documentIndex
-
-Optional<String> documentTitle
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-Optional<String> fileId
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
-
-
-
-class BetaCitationsWebSearchResultLocation:
-
-String citedText
-
-String encryptedIndex
-
-Optional<String> title
-
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-String url
-
-
-
-class BetaCitationSearchResultLocation:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-long searchResultIndex
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-String source
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-Optional<String> title
-
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-String text
-
-JsonValue; type "text"constant"text"constant
-
-
-
-class BetaThinkingBlock:
-
-String signature
-
-String thinking
-
-JsonValue; type "thinking"constant"thinking"constant
-
-
-
-class BetaRedactedThinkingBlock:
-
-String data
-
-JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
-
-
-
-class BetaToolUseBlock:
-
-String id
-
-Input input
-
-String name
-
-JsonValue; type "tool\_use"constant"tool\_use"constant
-
-
-
-Optional<Caller> caller
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller:
-
-Tool invocation directly from the model.
-
-JsonValue; type "direct"constant"direct"constant
-
-
-
-class BetaServerToolCaller:
-
-Tool invocation generated by a server-side tool.
-
-String toolId
-
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
-
-
-
-class BetaServerToolCaller20260120:
-
-String toolId
-
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
-
-
-
-class BetaServerToolUseBlock:
-
-String id
-
-Input input
-
-
-
-Name name
-
-One of the following:
-
-ADVISOR("advisor")
-
-WEB\_SEARCH("web\_search")
-
-WEB\_FETCH("web\_fetch")
-
-CODE\_EXECUTION("code\_execution")
-
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
-
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
-
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
-
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
-
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-
-
-Optional<Caller> caller
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller:
-
-Tool invocation directly from the model.
-
-JsonValue; type "direct"constant"direct"constant
-
-
-
-class BetaServerToolCaller:
-
-Tool invocation generated by a server-side tool.
-
-String toolId
-
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
-
-
-
-class BetaServerToolCaller20260120:
-
-String toolId
-
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
-
-
-
-class BetaWebSearchToolResultBlock:
-
-
-
-[BetaWebSearchToolResultBlockContent](api/beta/messages.md) content
-
-One of the following:
-
-
-
-class BetaWebSearchToolResultError:
-
-
-
-[BetaWebSearchToolResultErrorCode](api/beta/messages.md) errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-QUERY\_TOO\_LONG("query\_too\_long")
-
-REQUEST\_TOO\_LARGE("request\_too\_large")
-
-JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
-
-
-
-List<[BetaWebSearchResultBlock](api/beta/messages.md)>
-
-String encryptedContent
-
-Optional<String> pageAge
-
-String title
-
-JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
-
-String url
-
-String toolUseId
-
-JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
-
-
-
-Optional<Caller> caller
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller:
-
-Tool invocation directly from the model.
-
-JsonValue; type "direct"constant"direct"constant
-
-
-
-class BetaServerToolCaller:
-
-Tool invocation generated by a server-side tool.
-
-String toolId
-
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
-
-
-
-class BetaServerToolCaller20260120:
-
-String toolId
-
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
-
-
-
-class BetaWebFetchToolResultBlock:
-
-
-
-Content content
-
-One of the following:
-
-
-
-class BetaWebFetchToolResultErrorBlock:
-
-
-
-[BetaWebFetchToolResultErrorCode](api/beta/messages.md) errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-URL\_TOO\_LONG("url\_too\_long")
-
-URL\_NOT\_ALLOWED("url\_not\_allowed")
-
-URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
-
-URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
-
-UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
-
-UNAVAILABLE("unavailable")
-
-JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
-
-
-
-class BetaWebFetchBlock:
-
-
-
-[BetaDocumentBlock](api/beta/messages.md) content
-
-
-
-Optional<[BetaCitationConfig](api/beta/messages.md)> citations
-
-Citation configuration for the document
-
-boolean enabled
-
-
-
-Source source
-
-One of the following:
-
-
-
-class BetaBase64PdfSource:
-
-String data
-
-JsonValue; mediaType "application/pdf"constant"application/pdf"constant
-
-JsonValue; type "base64"constant"base64"constant
-
-
-
-class BetaPlainTextSource:
-
-String data
-
-JsonValue; mediaType "text/plain"constant"text/plain"constant
-
-JsonValue; type "text"constant"text"constant
-
-Optional<String> title
-
-The title of the document
-
-JsonValue; type "document"constant"document"constant
-
-Optional<String> retrievedAt
-
-ISO 8601 timestamp when the content was retrieved
-
-JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
-
-String url
-
-Fetched content URL
-
-String toolUseId
-
-JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
-
-
-
-Optional<Caller> caller
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller:
-
-Tool invocation directly from the model.
-
-JsonValue; type "direct"constant"direct"constant
-
-
-
-class BetaServerToolCaller:
-
-Tool invocation generated by a server-side tool.
-
-String toolId
-
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
-
-
-
-class BetaServerToolCaller20260120:
-
-String toolId
-
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
-
-
-
-class BetaAdvisorToolResultBlock:
-
-
-
-Content content
-
-One of the following:
-
-
-
-class BetaAdvisorToolResultError:
-
-
-
-ErrorCode errorCode
-
-One of the following:
-
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
-
-PROMPT\_TOO\_LONG("prompt\_too\_long")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-OVERLOADED("overloaded")
-
-UNAVAILABLE("unavailable")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-MODEL\_NOT\_FOUND("model\_not\_found")
-
-JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
-
-
-
-class BetaAdvisorResultBlock:
-
-Optional<String> stopReason
-
-The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
-
-String text
-
-JsonValue; type "advisor\_result"constant"advisor\_result"constant
-
-
-
-class BetaAdvisorRedactedResultBlock:
-
-String encryptedContent
-
-Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
-
-Optional<String> stopReason
-
-The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
-
-JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
-
-String toolUseId
-
-JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
-
-
-
-class BetaCodeExecutionToolResultBlock:
-
-
-
-[BetaCodeExecutionToolResultBlockContent](api/beta/messages.md) content
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-One of the following:
-
-
-
-class BetaCodeExecutionToolResultError:
-
-
-
-[BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
-
-
-
-class BetaCodeExecutionResultBlock:
-
-
-
-List<[BetaCodeExecutionOutputBlock](api/beta/messages.md)> content
-
-String fileId
-
-JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
-
-long returnCode
-
-String stderr
-
-String stdout
-
-JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
-
-
-
-class BetaEncryptedCodeExecutionResultBlock:
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-
-
-List<[BetaCodeExecutionOutputBlock](api/beta/messages.md)> content
-
-String fileId
-
-JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
-
-String encryptedStdout
-
-long returnCode
-
-String stderr
-
-JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
-
-String toolUseId
-
-JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
-
-
-
-class BetaBashCodeExecutionToolResultBlock:
-
-
-
-Content content
-
-One of the following:
-
-
-
-class BetaBashCodeExecutionToolResultError:
-
-
-
-ErrorCode errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
-
-JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
-
-
-
-class BetaBashCodeExecutionResultBlock:
-
-
-
-List<[BetaBashCodeExecutionOutputBlock](api/beta/messages.md)> content
-
-String fileId
-
-JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
-
-long returnCode
-
-String stderr
-
-String stdout
-
-JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
-
-String toolUseId
-
-JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
-
-
-
-class BetaTextEditorCodeExecutionToolResultBlock:
-
-
-
-Content content
-
-One of the following:
-
-
-
-class BetaTextEditorCodeExecutionToolResultError:
-
-
-
-ErrorCode errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-FILE\_NOT\_FOUND("file\_not\_found")
-
-Optional<String> errorMessage
-
-JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
-
-
-
-class BetaTextEditorCodeExecutionViewResultBlock:
-
-String content
-
-
-
-FileType fileType
-
-One of the following:
-
-TEXT("text")
-
-IMAGE("image")
-
-PDF("pdf")
-
-Optional<Long> numLines
-
-Optional<Long> startLine
-
-Optional<Long> totalLines
-
-JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
-
-
-
-class BetaTextEditorCodeExecutionCreateResultBlock:
-
-boolean isFileUpdate
-
-JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
-
-
-
-class BetaTextEditorCodeExecutionStrReplaceResultBlock:
-
-Optional<List<String>> lines
-
-Optional<Long> newLines
-
-Optional<Long> newStart
-
-Optional<Long> oldLines
-
-Optional<Long> oldStart
-
-JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
-
-String toolUseId
-
-JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
-
-
-
-class BetaToolSearchToolResultBlock:
-
-
-
-Content content
-
-One of the following:
-
-
-
-class BetaToolSearchToolResultError:
-
-
-
-ErrorCode errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-Optional<String> errorMessage
-
-JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
-
-
-
-class BetaToolSearchToolSearchResultBlock:
-
-
-
-List<[BetaToolReferenceBlock](api/beta/messages.md)> toolReferences
-
-String toolName
-
-JsonValue; type "tool\_reference"constant"tool\_reference"constant
-
-JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
-
-String toolUseId
-
-JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
-
-
-
-class BetaMcpToolUseBlock:
-
-String id
-
-Input input
-
-String name
-
-The name of the MCP tool
-
-String serverName
-
-The name of the MCP server
-
-JsonValue; type "mcp\_tool\_use"constant"mcp\_tool\_use"constant
-
-
-
-class BetaMcpToolResultBlock:
-
-
-
-Content content
-
-One of the following:
-
-String
-
-
-
-List<[BetaTextBlock](api/beta/messages.md)>
-
-
-
-Optional<List<[BetaTextCitation](api/beta/messages.md)>> citations
-
-Citations supporting the text block.
-
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-One of the following:
-
-
-
-class BetaCitationCharLocation:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endCharIndex
-
-Optional<String> fileId
-
-long startCharIndex
-
-JsonValue; type "char\_location"constant"char\_location"constant
-
-
-
-class BetaCitationPageLocation:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endPageNumber
-
-Optional<String> fileId
-
-long startPageNumber
-
-JsonValue; type "page\_location"constant"page\_location"constant
-
-
-
-class BetaCitationContentBlockLocation:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-long documentIndex
-
-Optional<String> documentTitle
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-Optional<String> fileId
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
-
-
-
-class BetaCitationsWebSearchResultLocation:
-
-String citedText
-
-String encryptedIndex
-
-Optional<String> title
-
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-String url
-
-
-
-class BetaCitationSearchResultLocation:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-long searchResultIndex
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-String source
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-Optional<String> title
-
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-String text
-
-JsonValue; type "text"constant"text"constant
-
-boolean isError
-
-String toolUseId
-
-JsonValue; type "mcp\_tool\_result"constant"mcp\_tool\_result"constant
-
-
-
-class BetaContainerUploadBlock:
-
-Response model for a file uploaded to the container.
-
-String fileId
-
-JsonValue; type "container\_upload"constant"container\_upload"constant
-
-
-
-class BetaCompactionBlock:
-
-A compaction block returned when autocompact is triggered.
-
-When content is None, it indicates the compaction failed to produce a valid
-summary (e.g., malformed output from the model). Clients may round-trip
-compaction blocks with null content; the server treats them as no-ops.
-
-Optional<String> content
-
-Summary of compacted content, or null if compaction failed
-
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
-JsonValue; type "compaction"constant"compaction"constant
-
-
-
-class BetaFallbackBlock:
-
-Marks the point in `content` where one model's output gives way to the next.
-
-One block appears per hop where a preceding model actually ran this turn and
-declined. A turn where no preceding model ran and declined has no such
-boundary and carries no block — the signal for whether a fallback model
-served the response is the presence of a `fallback_message` entry in
-`usage.iterations`, not this block.
-
-The block is treated like a server-tool content block for streaming: it
-arrives via the standard `content_block_start` / `content_block_stop`
-pair and carries no deltas.
-
-
-
-[BetaFallbackInfo](api/beta/messages.md) from
-
-The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-CLAUDE\_SONNET\_5("claude-sonnet-5")
-
-High-performance model for coding and agents
-
-CLAUDE\_FABLE\_5("claude-fable-5")
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
-
-Most capable model for cybersecurity and biology research
-
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
-
-New class of intelligence, strongest in coding and cybersecurity
-
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
-
-Best combination of speed and intelligence
-
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-High-performance model for agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-High-performance model for agents and coding
-
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
-
-Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
-
-Exceptional model for specialized complex tasks
-
-
-
-[BetaFallbackInfo](api/beta/messages.md) to
-
-The fallback model producing the content that follows this block. Its `model` is always the canonical id.
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-CLAUDE\_SONNET\_5("claude-sonnet-5")
-
-High-performance model for coding and agents
-
-CLAUDE\_FABLE\_5("claude-fable-5")
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
-
-Most capable model for cybersecurity and biology research
-
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
-
-New class of intelligence, strongest in coding and cybersecurity
-
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
-
-Best combination of speed and intelligence
-
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-High-performance model for agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-High-performance model for agents and coding
-
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
-
-Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
-
-Exceptional model for specialized complex tasks
-
-
-
-[BetaFallbackRefusalTrigger](api/beta/messages.md) trigger
-
-What caused the `from` model to hand over at this hop.
-
-
-
-Optional<Category> category
-
-The policy category that triggered a refusal.
-
-One of the following:
-
-CYBER("cyber")
-
-BIO("bio")
-
-FRONTIER\_LLM("frontier\_llm")
-
-REASONING\_EXTRACTION("reasoning\_extraction")
-
-JsonValue; type "refusal"constant"refusal"constant
-
-JsonValue; type "fallback"constant"fallback"constant
-
-
-
-Optional<[BetaContextManagementResponse](api/beta/messages.md)> contextManagement
-
-Context management response.
-
-Information about context management strategies applied during the request.
-
-
-
-List<AppliedEdit> appliedEdits
-
-List of context management edits that were applied.
-
-One of the following:
-
-
-
-class BetaClearToolUses20250919EditResponse:
-
-long clearedInputTokens
-
-Number of input tokens cleared by this edit.
-
-long clearedToolUses
-
-Number of tool uses that were cleared.
-
-JsonValue; type "clear\_tool\_uses\_20250919"constant"clear\_tool\_uses\_20250919"constant
-
-The type of context management edit applied.
-
-
-
-class BetaClearThinking20251015EditResponse:
-
-long clearedInputTokens
-
-Number of input tokens cleared by this edit.
-
-long clearedThinkingTurns
-
-Number of thinking turns that were cleared.
-
-JsonValue; type "clear\_thinking\_20251015"constant"clear\_thinking\_20251015"constant
-
-The type of context management edit applied.
-
-
-
-Optional<[BetaDiagnostics](api/beta/messages.md)> diagnostics
-
-Response envelope for request-level diagnostics. Present (possibly
-null) whenever the caller supplied `diagnostics` on the request.
-
-
-
-Optional<CacheMissReason> cacheMissReason
-
-Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
-
-One of the following:
-
-
-
-class BetaCacheMissModelChanged:
-
-long cacheMissedInputTokens
-
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-JsonValue; type "model\_changed"constant"model\_changed"constant
-
-
-
-class BetaCacheMissSystemChanged:
-
-long cacheMissedInputTokens
-
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-JsonValue; type "system\_changed"constant"system\_changed"constant
-
-
-
-class BetaCacheMissToolsChanged:
-
-long cacheMissedInputTokens
-
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-JsonValue; type "tools\_changed"constant"tools\_changed"constant
-
-
-
-class BetaCacheMissMessagesChanged:
-
-long cacheMissedInputTokens
-
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-JsonValue; type "messages\_changed"constant"messages\_changed"constant
-
-
-
-class BetaCacheMissPreviousMessageNotFound:
-
-JsonValue; type "previous\_message\_not\_found"constant"previous\_message\_not\_found"constant
-
-
-
-class BetaCacheMissUnavailable:
-
-JsonValue; type "unavailable"constant"unavailable"constant
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-CLAUDE\_SONNET\_5("claude-sonnet-5")
-
-High-performance model for coding and agents
-
-CLAUDE\_FABLE\_5("claude-fable-5")
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
-
-Most capable model for cybersecurity and biology research
-
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
-
-New class of intelligence, strongest in coding and cybersecurity
-
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
-
-Best combination of speed and intelligence
-
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-High-performance model for agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-High-performance model for agents and coding
-
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
-
-Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
-
-Exceptional model for specialized complex tasks
-
-
-
-JsonValue; role "assistant"constant"assistant"constant
-
-Conversational role of the generated message.
-
-This will always be `"assistant"`.
-
-
-
-Optional<[BetaRefusalStopDetails](api/beta/messages.md)> stopDetails
-
-Structured information about a refusal.
-
-
-
-Optional<Category> category
-
-The policy category that triggered a refusal.
-
-One of the following:
-
-CYBER("cyber")
-
-BIO("bio")
-
-FRONTIER\_LLM("frontier\_llm")
-
-REASONING\_EXTRACTION("reasoning\_extraction")
-
-
-
-Optional<String> explanation
-
-Human-readable explanation of the refusal.
-
-This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-
-
-Optional<String> fallbackCreditToken
-
-Opaque code that refunds the cache-miss cost when retrying this refused
-request on the fallback model. Pass it as `fallback_credit_token` on the
-retry request. Expires 5 minutes after the refusal.
-
-The retry is sent either with the same request body (`system`, `messages`,
-`tools`, and other render-shaping fields), or with the same body plus one
-appended `assistant` message whose content is the partial text (with any
-trailing whitespace stripped from the final text block) and paired
-server-tool blocks from this refusal — which also authorizes that
-appended turn as an assistant-prefill continuation on models that otherwise
-disallow prefill. A token minted mid-server-tool-loop whose partial content
-was continuable may only be redeemed the second way — if a same-body retry
-is rejected with a 400 saying the token must be redeemed by continuing the
-partial response, retry the second way instead. Either way: same workspace,
-same platform; a mismatch is a 400. Resending a token for an already-warm
-prefix is permitted but yields no additional credit.
-
-`null` when the refused model isn't eligible for a fallback credit.
-
-
-
-Optional<Boolean> fallbackHasPrefillClaim
-
-Whether the accompanying `fallback_credit_token` may be redeemed with the
-appended-assistant retry form. Only set when `fallback_credit_token` is
-present.
-
-`true`: retry by resending the same request body plus one appended
-`assistant` message whose content is this response's `content` with any
-trailing whitespace stripped from the final text block and unpaired
-`tool_use` blocks omitted (the same appended-turn shape described on
-`fallback_credit_token`), with the token attached. `false`: retry by
-resending the original request body unchanged, with the token attached —
-the appended-assistant form is not available for this refusal (no
-continuable partial content, or the request uses `output_format` or a
-`tool_choice` that forces tool use). One exception: when the request used
-`output_format` or a forced `tool_choice` and the refusal arrived after
-server tools (including MCP connector tools) had already executed, the
-token may not be redeemable by either retry form; if the exact-body retry
-is then rejected with a 400 saying the token must be redeemed by
-continuing the partial response, discard the token and retry without it.
-
-Advisory: if an appended-assistant retry is rejected with a 400 despite
-`true`, fall back to resending the original request body with the token.
-
-Optional<String> recommendedModel
-
-The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
-
-JsonValue; type "refusal"constant"refusal"constant
-
-
-
-Optional<[BetaStopReason](api/beta/messages.md)> stopReason
-
-The reason that we stopped.
-
-This may be one the following values:
-
-- `"end_turn"`: the model reached a natural stopping point
-- `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
-- `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
-- `"tool_use"`: the model invoked one or more tools
-- `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
-- `"refusal"`: when streaming classifiers intervene to handle potential policy violations
-
-In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
-
-One of the following:
-
-END\_TURN("end\_turn")
-
-MAX\_TOKENS("max\_tokens")
-
-STOP\_SEQUENCE("stop\_sequence")
-
-TOOL\_USE("tool\_use")
-
-PAUSE\_TURN("pause\_turn")
-
-COMPACTION("compaction")
-
-REFUSAL("refusal")
-
-MODEL\_CONTEXT\_WINDOW\_EXCEEDED("model\_context\_window\_exceeded")
-
-
-
-Optional<String> stopSequence
-
-Which custom stop sequence was generated, if any.
-
-This value will be a non-null string if one of your custom stop sequences was generated.
-
-
-
-JsonValue; type "message"constant"message"constant
-
-Object type.
-
-For Messages, this is always `"message"`.
-
-
-
-[BetaUsage](api/beta/messages.md) usage
-
-Billing and rate-limit usage.
-
-Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
-
-Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
-
-For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
-
-Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
-
-
-
-Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
-
-Breakdown of cached tokens by TTL
-
-long ephemeral1hInputTokens
-
-The number of input tokens used to create the 1 hour cache entry.
-
-long ephemeral5mInputTokens
-
-The number of input tokens used to create the 5 minute cache entry.
-
-Optional<Long> cacheCreationInputTokens
-
-The number of input tokens used to create the cache entry.
-
-Optional<Long> cacheReadInputTokens
-
-The number of input tokens read from the cache.
-
-Optional<String> inferenceGeo
-
-The geographic region where inference was performed for this request.
-
-long inputTokens
-
-The number of input tokens which were used.
-
-
-
-Optional<List<BetaIterationsUsageItems>> iterations
-
-Per-iteration token usage breakdown.
-
-Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
-
-- Determine which iterations exceeded long context thresholds (>=200k tokens)
-- Calculate the true context window size from the last iteration
-- Understand token accumulation across server-side tool use loops
-
-One of the following:
-
-
-
-class BetaMessageIterationUsage:
-
-Token usage for a sampling iteration.
-
-
-
-Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
-
-Breakdown of cached tokens by TTL
-
-long ephemeral1hInputTokens
-
-The number of input tokens used to create the 1 hour cache entry.
-
-long ephemeral5mInputTokens
-
-The number of input tokens used to create the 5 minute cache entry.
-
-long cacheCreationInputTokens
-
-The number of input tokens used to create the cache entry.
-
-long cacheReadInputTokens
-
-The number of input tokens read from the cache.
-
-long inputTokens
-
-The number of input tokens which were used.
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-CLAUDE\_SONNET\_5("claude-sonnet-5")
-
-High-performance model for coding and agents
-
-CLAUDE\_FABLE\_5("claude-fable-5")
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
-
-Most capable model for cybersecurity and biology research
-
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
-
-New class of intelligence, strongest in coding and cybersecurity
-
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
-
-Best combination of speed and intelligence
-
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-High-performance model for agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-High-performance model for agents and coding
-
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
-
-Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
-
-Exceptional model for specialized complex tasks
-
-long outputTokens
-
-The number of output tokens which were used.
-
-JsonValue; type "message"constant"message"constant
-
-Usage for a sampling iteration
-
-
-
-class BetaCompactionIterationUsage:
-
-Token usage for a compaction iteration.
-
-
-
-Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
-
-Breakdown of cached tokens by TTL
-
-long ephemeral1hInputTokens
-
-The number of input tokens used to create the 1 hour cache entry.
-
-long ephemeral5mInputTokens
-
-The number of input tokens used to create the 5 minute cache entry.
-
-long cacheCreationInputTokens
-
-The number of input tokens used to create the cache entry.
-
-long cacheReadInputTokens
-
-The number of input tokens read from the cache.
-
-long inputTokens
-
-The number of input tokens which were used.
-
-long outputTokens
-
-The number of output tokens which were used.
-
-JsonValue; type "compaction"constant"compaction"constant
-
-Usage for a compaction iteration
-
-
-
-class BetaAdvisorMessageIterationUsage:
-
-Token usage for an advisor sub-inference iteration.
-
-
-
-Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
-
-Breakdown of cached tokens by TTL
-
-long ephemeral1hInputTokens
-
-The number of input tokens used to create the 1 hour cache entry.
-
-long ephemeral5mInputTokens
-
-The number of input tokens used to create the 5 minute cache entry.
-
-long cacheCreationInputTokens
-
-The number of input tokens used to create the cache entry.
-
-long cacheReadInputTokens
-
-The number of input tokens read from the cache.
-
-long inputTokens
-
-The number of input tokens which were used.
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-CLAUDE\_SONNET\_5("claude-sonnet-5")
-
-High-performance model for coding and agents
-
-CLAUDE\_FABLE\_5("claude-fable-5")
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
-
-Most capable model for cybersecurity and biology research
-
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
-
-New class of intelligence, strongest in coding and cybersecurity
-
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
-
-Best combination of speed and intelligence
-
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-High-performance model for agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-High-performance model for agents and coding
-
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
-
-Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
-
-Exceptional model for specialized complex tasks
-
-long outputTokens
-
-The number of output tokens which were used.
-
-JsonValue; type "advisor\_message"constant"advisor\_message"constant
-
-Usage for an advisor sub-inference iteration
-
-
-
-class BetaFallbackMessageIterationUsage:
-
-Token usage for the fallback-model attempt of a server-side fallback request.
-
-Produced in place of a `message` entry for whichever hop served the
-response. A declined hop produces the existing `message` entry. Whether
-a fallback model served the response is signalled by the presence of this
-entry in `usage.iterations`.
-
-
-
-Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
-
-Breakdown of cached tokens by TTL
-
-long ephemeral1hInputTokens
-
-The number of input tokens used to create the 1 hour cache entry.
-
-long ephemeral5mInputTokens
-
-The number of input tokens used to create the 5 minute cache entry.
-
-long cacheCreationInputTokens
-
-The number of input tokens used to create the cache entry.
-
-long cacheReadInputTokens
-
-The number of input tokens read from the cache.
-
-long inputTokens
-
-The number of input tokens which were used.
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-CLAUDE\_SONNET\_5("claude-sonnet-5")
-
-High-performance model for coding and agents
-
-CLAUDE\_FABLE\_5("claude-fable-5")
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
-
-Most capable model for cybersecurity and biology research
-
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
-
-New class of intelligence, strongest in coding and cybersecurity
-
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
-
-Best combination of speed and intelligence
-
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-High-performance model for agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-High-performance model for agents and coding
-
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
-
-Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
-
-Exceptional model for specialized complex tasks
-
-long outputTokens
-
-The number of output tokens which were used.
-
-JsonValue; type "fallback\_message"constant"fallback\_message"constant
-
-Usage for the fallback-model attempt that served the response
-
-long outputTokens
-
-The number of output tokens which were used.
-
-
-
-Optional<[BetaOutputTokensDetails](api/beta/messages.md)> outputTokensDetails
-
-Breakdown of output tokens by category.
-
-`output_tokens` remains the inclusive, authoritative total used for billing.
-This object provides a read-only decomposition for observability — for example,
-how many of the billed output tokens were spent on internal reasoning that may
-have been summarized before being returned to you.
-
-
-
-long thinkingTokens
-
-Number of output tokens the model generated as internal reasoning, including
-the thinking-block delimiter tokens.
-
-Reflects the raw reasoning the model produced, not the (possibly shorter)
-summarized thinking text returned in the response body. Computed by
-re-tokenizing the raw reasoning text, so it may differ from the model's exact
-generation count by a small number of tokens. Always ≤ `output_tokens`;
-`output_tokens - thinking_tokens` approximates the non-reasoning output.
-
-minimum0
-
-
-
-Optional<[BetaServerToolUsage](api/beta/messages.md)> serverToolUse
-
-The number of server tool requests.
-
-long webFetchRequests
-
-The number of web fetch tool requests.
-
-long webSearchRequests
-
-The number of web search tool requests.
-
-
-
-Optional<ServiceTier> serviceTier
-
-If the request used the priority, standard, or batch tier.
-
-One of the following:
-
-STANDARD("standard")
-
-PRIORITY("priority")
-
-BATCH("batch")
-
-
-
-Optional<Speed> speed
-
-The inference speed mode used for this request.
-
-One of the following:
-
-STANDARD("standard")
-
-FAST("fast")
-
-JsonValue; type "message\_start"constant"message\_start"constant
-
-
-
-class BetaRawMessageDeltaEvent:
-
-
-
-Optional<[BetaContextManagementResponse](api/beta/messages.md)> contextManagement
-
-Information about context management strategies applied during the request
-
-
-
-List<AppliedEdit> appliedEdits
-
-List of context management edits that were applied.
-
-One of the following:
-
-
-
-class BetaClearToolUses20250919EditResponse:
-
-long clearedInputTokens
-
-Number of input tokens cleared by this edit.
-
-long clearedToolUses
-
-Number of tool uses that were cleared.
-
-JsonValue; type "clear\_tool\_uses\_20250919"constant"clear\_tool\_uses\_20250919"constant
-
-The type of context management edit applied.
-
-
-
-class BetaClearThinking20251015EditResponse:
-
-long clearedInputTokens
-
-Number of input tokens cleared by this edit.
-
-long clearedThinkingTurns
-
-Number of thinking turns that were cleared.
-
-JsonValue; type "clear\_thinking\_20251015"constant"clear\_thinking\_20251015"constant
-
-The type of context management edit applied.
-
-
-
-Delta delta
-
-
-
-Optional<[BetaContainer](api/beta/messages.md)> container
-
-Information about the container used in the request (for the code execution tool)
-
-String id
-
-Identifier for the container used in this request
-
-LocalDateTime expiresAt
-
-The time at which the container will expire.
-
-
-
-Optional<List<[BetaSkill](api/beta/messages.md)>> skills
-
-Skills loaded in the container
-
-String skillId
-
-Skill ID
-
-
-
-Type type
-
-Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
-
-One of the following:
-
-ANTHROPIC("anthropic")
-
-CUSTOM("custom")
-
-String version
-
-Skill version or 'latest' for most recent version
-
-
-
-Optional<[BetaRefusalStopDetails](api/beta/messages.md)> stopDetails
-
-Structured information about a refusal.
-
-
-
-Optional<Category> category
-
-The policy category that triggered a refusal.
-
-One of the following:
-
-CYBER("cyber")
-
-BIO("bio")
-
-FRONTIER\_LLM("frontier\_llm")
-
-REASONING\_EXTRACTION("reasoning\_extraction")
-
-
-
-Optional<String> explanation
-
-Human-readable explanation of the refusal.
-
-This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-
-
-Optional<String> fallbackCreditToken
-
-Opaque code that refunds the cache-miss cost when retrying this refused
-request on the fallback model. Pass it as `fallback_credit_token` on the
-retry request. Expires 5 minutes after the refusal.
-
-The retry is sent either with the same request body (`system`, `messages`,
-`tools`, and other render-shaping fields), or with the same body plus one
-appended `assistant` message whose content is the partial text (with any
-trailing whitespace stripped from the final text block) and paired
-server-tool blocks from this refusal — which also authorizes that
-appended turn as an assistant-prefill continuation on models that otherwise
-disallow prefill. A token minted mid-server-tool-loop whose partial content
-was continuable may only be redeemed the second way — if a same-body retry
-is rejected with a 400 saying the token must be redeemed by continuing the
-partial response, retry the second way instead. Either way: same workspace,
-same platform; a mismatch is a 400. Resending a token for an already-warm
-prefix is permitted but yields no additional credit.
-
-`null` when the refused model isn't eligible for a fallback credit.
-
-
-
-Optional<Boolean> fallbackHasPrefillClaim
-
-Whether the accompanying `fallback_credit_token` may be redeemed with the
-appended-assistant retry form. Only set when `fallback_credit_token` is
-present.
-
-`true`: retry by resending the same request body plus one appended
-`assistant` message whose content is this response's `content` with any
-trailing whitespace stripped from the final text block and unpaired
-`tool_use` blocks omitted (the same appended-turn shape described on
-`fallback_credit_token`), with the token attached. `false`: retry by
-resending the original request body unchanged, with the token attached —
-the appended-assistant form is not available for this refusal (no
-continuable partial content, or the request uses `output_format` or a
-`tool_choice` that forces tool use). One exception: when the request used
-`output_format` or a forced `tool_choice` and the refusal arrived after
-server tools (including MCP connector tools) had already executed, the
-token may not be redeemable by either retry form; if the exact-body retry
-is then rejected with a 400 saying the token must be redeemed by
-continuing the partial response, discard the token and retry without it.
-
-Advisory: if an appended-assistant retry is rejected with a 400 despite
-`true`, fall back to resending the original request body with the token.
-
-Optional<String> recommendedModel
-
-The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
-
-JsonValue; type "refusal"constant"refusal"constant
-
-
-
-Optional<[BetaStopReason](api/beta/messages.md)> stopReason
-
-One of the following:
-
-END\_TURN("end\_turn")
-
-MAX\_TOKENS("max\_tokens")
-
-STOP\_SEQUENCE("stop\_sequence")
-
-TOOL\_USE("tool\_use")
-
-PAUSE\_TURN("pause\_turn")
-
-COMPACTION("compaction")
-
-REFUSAL("refusal")
-
-MODEL\_CONTEXT\_WINDOW\_EXCEEDED("model\_context\_window\_exceeded")
-
-Optional<String> stopSequence
-
-JsonValue; type "message\_delta"constant"message\_delta"constant
-
-
-
-[BetaMessageDeltaUsage](api/beta/messages.md) usage
-
-Billing and rate-limit usage.
-
-Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
-
-Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
-
-For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
-
-Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
-
-Optional<Long> cacheCreationInputTokens
-
-The cumulative number of input tokens used to create the cache entry.
-
-Optional<Long> cacheReadInputTokens
-
-The cumulative number of input tokens read from the cache.
-
-Optional<Long> inputTokens
-
-The cumulative number of input tokens which were used.
-
-
-
-Optional<List<BetaIterationsUsageItems>> iterations
-
-Per-iteration token usage breakdown.
-
-Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
-
-- Determine which iterations exceeded long context thresholds (>=200k tokens)
-- Calculate the true context window size from the last iteration
-- Understand token accumulation across server-side tool use loops
-
-One of the following:
-
-
-
-class BetaMessageIterationUsage:
-
-Token usage for a sampling iteration.
-
-
-
-Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
-
-Breakdown of cached tokens by TTL
-
-long ephemeral1hInputTokens
-
-The number of input tokens used to create the 1 hour cache entry.
-
-long ephemeral5mInputTokens
-
-The number of input tokens used to create the 5 minute cache entry.
-
-long cacheCreationInputTokens
-
-The number of input tokens used to create the cache entry.
-
-long cacheReadInputTokens
-
-The number of input tokens read from the cache.
-
-long inputTokens
-
-The number of input tokens which were used.
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-CLAUDE\_SONNET\_5("claude-sonnet-5")
-
-High-performance model for coding and agents
-
-CLAUDE\_FABLE\_5("claude-fable-5")
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
-
-Most capable model for cybersecurity and biology research
-
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
-
-New class of intelligence, strongest in coding and cybersecurity
-
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
-
-Best combination of speed and intelligence
-
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-High-performance model for agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-High-performance model for agents and coding
-
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
-
-Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
-
-Exceptional model for specialized complex tasks
-
-long outputTokens
-
-The number of output tokens which were used.
-
-JsonValue; type "message"constant"message"constant
-
-Usage for a sampling iteration
-
-
-
-class BetaCompactionIterationUsage:
-
-Token usage for a compaction iteration.
-
-
-
-Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
-
-Breakdown of cached tokens by TTL
-
-long ephemeral1hInputTokens
-
-The number of input tokens used to create the 1 hour cache entry.
-
-long ephemeral5mInputTokens
-
-The number of input tokens used to create the 5 minute cache entry.
-
-long cacheCreationInputTokens
-
-The number of input tokens used to create the cache entry.
-
-long cacheReadInputTokens
-
-The number of input tokens read from the cache.
-
-long inputTokens
-
-The number of input tokens which were used.
-
-long outputTokens
-
-The number of output tokens which were used.
-
-JsonValue; type "compaction"constant"compaction"constant
-
-Usage for a compaction iteration
-
-
-
-class BetaAdvisorMessageIterationUsage:
-
-Token usage for an advisor sub-inference iteration.
-
-
-
-Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
-
-Breakdown of cached tokens by TTL
-
-long ephemeral1hInputTokens
-
-The number of input tokens used to create the 1 hour cache entry.
-
-long ephemeral5mInputTokens
-
-The number of input tokens used to create the 5 minute cache entry.
-
-long cacheCreationInputTokens
-
-The number of input tokens used to create the cache entry.
-
-long cacheReadInputTokens
-
-The number of input tokens read from the cache.
-
-long inputTokens
-
-The number of input tokens which were used.
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-CLAUDE\_SONNET\_5("claude-sonnet-5")
-
-High-performance model for coding and agents
-
-CLAUDE\_FABLE\_5("claude-fable-5")
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
-
-Most capable model for cybersecurity and biology research
-
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
-
-New class of intelligence, strongest in coding and cybersecurity
-
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
-
-Best combination of speed and intelligence
-
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-High-performance model for agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-High-performance model for agents and coding
-
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
-
-Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
-
-Exceptional model for specialized complex tasks
-
-long outputTokens
-
-The number of output tokens which were used.
-
-JsonValue; type "advisor\_message"constant"advisor\_message"constant
-
-Usage for an advisor sub-inference iteration
-
-
-
-class BetaFallbackMessageIterationUsage:
-
-Token usage for the fallback-model attempt of a server-side fallback request.
-
-Produced in place of a `message` entry for whichever hop served the
-response. A declined hop produces the existing `message` entry. Whether
-a fallback model served the response is signalled by the presence of this
-entry in `usage.iterations`.
-
-
-
-Optional<[BetaCacheCreation](api/beta/messages.md)> cacheCreation
-
-Breakdown of cached tokens by TTL
-
-long ephemeral1hInputTokens
-
-The number of input tokens used to create the 1 hour cache entry.
-
-long ephemeral5mInputTokens
-
-The number of input tokens used to create the 5 minute cache entry.
-
-long cacheCreationInputTokens
-
-The number of input tokens used to create the cache entry.
-
-long cacheReadInputTokens
-
-The number of input tokens read from the cache.
-
-long inputTokens
-
-The number of input tokens which were used.
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-CLAUDE\_SONNET\_5("claude-sonnet-5")
-
-High-performance model for coding and agents
-
-CLAUDE\_FABLE\_5("claude-fable-5")
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
-
-Most capable model for cybersecurity and biology research
-
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
-
-New class of intelligence, strongest in coding and cybersecurity
-
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
-
-Best combination of speed and intelligence
-
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-High-performance model for agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-High-performance model for agents and coding
-
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
-
-Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
-
-Exceptional model for specialized complex tasks
-
-long outputTokens
-
-The number of output tokens which were used.
-
-JsonValue; type "fallback\_message"constant"fallback\_message"constant
-
-Usage for the fallback-model attempt that served the response
-
-long outputTokens
-
-The cumulative number of output tokens which were used.
-
-
-
-Optional<[BetaOutputTokensDetails](api/beta/messages.md)> outputTokensDetails
-
-Breakdown of output tokens by category.
-
-`output_tokens` remains the inclusive, authoritative total used for billing.
-This object provides a read-only decomposition for observability — for example,
-how many of the billed output tokens were spent on internal reasoning that may
-have been summarized before being returned to you.
-
-
-
-long thinkingTokens
-
-Number of output tokens the model generated as internal reasoning, including
-the thinking-block delimiter tokens.
-
-Reflects the raw reasoning the model produced, not the (possibly shorter)
-summarized thinking text returned in the response body. Computed by
-re-tokenizing the raw reasoning text, so it may differ from the model's exact
-generation count by a small number of tokens. Always ≤ `output_tokens`;
-`output_tokens - thinking_tokens` approximates the non-reasoning output.
-
-minimum0
-
-
-
-Optional<[BetaServerToolUsage](api/beta/messages.md)> serverToolUse
-
-The number of server tool requests.
-
-long webFetchRequests
-
-The number of web fetch tool requests.
-
-long webSearchRequests
-
-The number of web search tool requests.
-
-
-
-class BetaRawMessageStopEvent:
-
-JsonValue; type "message\_stop"constant"message\_stop"constant
-
-
-
-class BetaRawContentBlockStartEvent:
-
-
-
-ContentBlock contentBlock
-
-Response model for a file uploaded to the container.
-
-One of the following:
-
-
-
-class BetaTextBlock:
-
-
-
-Optional<List<[BetaTextCitation](api/beta/messages.md)>> citations
-
-Citations supporting the text block.
-
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-One of the following:
-
-
-
-class BetaCitationCharLocation:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endCharIndex
-
-Optional<String> fileId
-
-long startCharIndex
-
-JsonValue; type "char\_location"constant"char\_location"constant
-
-
-
-class BetaCitationPageLocation:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endPageNumber
-
-Optional<String> fileId
-
-long startPageNumber
-
-JsonValue; type "page\_location"constant"page\_location"constant
-
-
-
-class BetaCitationContentBlockLocation:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-long documentIndex
-
-Optional<String> documentTitle
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-Optional<String> fileId
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
-
-
-
-class BetaCitationsWebSearchResultLocation:
-
-String citedText
-
-String encryptedIndex
-
-Optional<String> title
-
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-String url
-
-
-
-class BetaCitationSearchResultLocation:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-long searchResultIndex
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-String source
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-Optional<String> title
-
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-String text
-
-JsonValue; type "text"constant"text"constant
-
-
-
-class BetaThinkingBlock:
-
-String signature
-
-String thinking
-
-JsonValue; type "thinking"constant"thinking"constant
-
-
-
-class BetaRedactedThinkingBlock:
-
-String data
-
-JsonValue; type "redacted\_thinking"constant"redacted\_thinking"constant
-
-
-
-class BetaToolUseBlock:
-
-String id
-
-Input input
-
-String name
-
-JsonValue; type "tool\_use"constant"tool\_use"constant
-
-
-
-Optional<Caller> caller
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller:
-
-Tool invocation directly from the model.
-
-JsonValue; type "direct"constant"direct"constant
-
-
-
-class BetaServerToolCaller:
-
-Tool invocation generated by a server-side tool.
-
-String toolId
-
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
-
-
-
-class BetaServerToolCaller20260120:
-
-String toolId
-
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
-
-
-
-class BetaServerToolUseBlock:
-
-String id
-
-Input input
-
-
-
-Name name
-
-One of the following:
-
-ADVISOR("advisor")
-
-WEB\_SEARCH("web\_search")
-
-WEB\_FETCH("web\_fetch")
-
-CODE\_EXECUTION("code\_execution")
-
-BASH\_CODE\_EXECUTION("bash\_code\_execution")
-
-TEXT\_EDITOR\_CODE\_EXECUTION("text\_editor\_code\_execution")
-
-TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
-
-TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
-
-JsonValue; type "server\_tool\_use"constant"server\_tool\_use"constant
-
-
-
-Optional<Caller> caller
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller:
-
-Tool invocation directly from the model.
-
-JsonValue; type "direct"constant"direct"constant
-
-
-
-class BetaServerToolCaller:
-
-Tool invocation generated by a server-side tool.
-
-String toolId
-
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
-
-
-
-class BetaServerToolCaller20260120:
-
-String toolId
-
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
-
-
-
-class BetaWebSearchToolResultBlock:
-
-
-
-[BetaWebSearchToolResultBlockContent](api/beta/messages.md) content
-
-One of the following:
-
-
-
-class BetaWebSearchToolResultError:
-
-
-
-[BetaWebSearchToolResultErrorCode](api/beta/messages.md) errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-QUERY\_TOO\_LONG("query\_too\_long")
-
-REQUEST\_TOO\_LARGE("request\_too\_large")
-
-JsonValue; type "web\_search\_tool\_result\_error"constant"web\_search\_tool\_result\_error"constant
-
-
-
-List<[BetaWebSearchResultBlock](api/beta/messages.md)>
-
-String encryptedContent
-
-Optional<String> pageAge
-
-String title
-
-JsonValue; type "web\_search\_result"constant"web\_search\_result"constant
-
-String url
-
-String toolUseId
-
-JsonValue; type "web\_search\_tool\_result"constant"web\_search\_tool\_result"constant
-
-
-
-Optional<Caller> caller
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller:
-
-Tool invocation directly from the model.
-
-JsonValue; type "direct"constant"direct"constant
-
-
-
-class BetaServerToolCaller:
-
-Tool invocation generated by a server-side tool.
-
-String toolId
-
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
-
-
-
-class BetaServerToolCaller20260120:
-
-String toolId
-
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
-
-
-
-class BetaWebFetchToolResultBlock:
-
-
-
-Content content
-
-One of the following:
-
-
-
-class BetaWebFetchToolResultErrorBlock:
-
-
-
-[BetaWebFetchToolResultErrorCode](api/beta/messages.md) errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-URL\_TOO\_LONG("url\_too\_long")
-
-URL\_NOT\_ALLOWED("url\_not\_allowed")
-
-URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
-
-URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
-
-UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
-
-UNAVAILABLE("unavailable")
-
-JsonValue; type "web\_fetch\_tool\_result\_error"constant"web\_fetch\_tool\_result\_error"constant
-
-
-
-class BetaWebFetchBlock:
-
-
-
-[BetaDocumentBlock](api/beta/messages.md) content
-
-
-
-Optional<[BetaCitationConfig](api/beta/messages.md)> citations
-
-Citation configuration for the document
-
-boolean enabled
-
-
-
-Source source
-
-One of the following:
-
-
-
-class BetaBase64PdfSource:
-
-String data
-
-JsonValue; mediaType "application/pdf"constant"application/pdf"constant
-
-JsonValue; type "base64"constant"base64"constant
-
-
-
-class BetaPlainTextSource:
-
-String data
-
-JsonValue; mediaType "text/plain"constant"text/plain"constant
-
-JsonValue; type "text"constant"text"constant
-
-Optional<String> title
-
-The title of the document
-
-JsonValue; type "document"constant"document"constant
-
-Optional<String> retrievedAt
-
-ISO 8601 timestamp when the content was retrieved
-
-JsonValue; type "web\_fetch\_result"constant"web\_fetch\_result"constant
-
-String url
-
-Fetched content URL
-
-String toolUseId
-
-JsonValue; type "web\_fetch\_tool\_result"constant"web\_fetch\_tool\_result"constant
-
-
-
-Optional<Caller> caller
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller:
-
-Tool invocation directly from the model.
-
-JsonValue; type "direct"constant"direct"constant
-
-
-
-class BetaServerToolCaller:
-
-Tool invocation generated by a server-side tool.
-
-String toolId
-
-JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"constant
-
-
-
-class BetaServerToolCaller20260120:
-
-String toolId
-
-JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"constant
-
-
-
-class BetaAdvisorToolResultBlock:
-
-
-
-Content content
-
-One of the following:
-
-
-
-class BetaAdvisorToolResultError:
-
-
-
-ErrorCode errorCode
-
-One of the following:
-
-MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
-
-PROMPT\_TOO\_LONG("prompt\_too\_long")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-OVERLOADED("overloaded")
-
-UNAVAILABLE("unavailable")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-MODEL\_NOT\_FOUND("model\_not\_found")
-
-JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
-
-
-
-class BetaAdvisorResultBlock:
-
-Optional<String> stopReason
-
-The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
-
-String text
-
-JsonValue; type "advisor\_result"constant"advisor\_result"constant
-
-
-
-class BetaAdvisorRedactedResultBlock:
-
-String encryptedContent
-
-Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
-
-Optional<String> stopReason
-
-The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
-
-JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
-
-String toolUseId
-
-JsonValue; type "advisor\_tool\_result"constant"advisor\_tool\_result"constant
-
-
-
-class BetaCodeExecutionToolResultBlock:
-
-
-
-[BetaCodeExecutionToolResultBlockContent](api/beta/messages.md) content
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-One of the following:
-
-
-
-class BetaCodeExecutionToolResultError:
-
-
-
-[BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-JsonValue; type "code\_execution\_tool\_result\_error"constant"code\_execution\_tool\_result\_error"constant
-
-
-
-class BetaCodeExecutionResultBlock:
-
-
-
-List<[BetaCodeExecutionOutputBlock](api/beta/messages.md)> content
-
-String fileId
-
-JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
-
-long returnCode
-
-String stderr
-
-String stdout
-
-JsonValue; type "code\_execution\_result"constant"code\_execution\_result"constant
-
-
-
-class BetaEncryptedCodeExecutionResultBlock:
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-
-
-List<[BetaCodeExecutionOutputBlock](api/beta/messages.md)> content
-
-String fileId
-
-JsonValue; type "code\_execution\_output"constant"code\_execution\_output"constant
-
-String encryptedStdout
-
-long returnCode
-
-String stderr
-
-JsonValue; type "encrypted\_code\_execution\_result"constant"encrypted\_code\_execution\_result"constant
-
-String toolUseId
-
-JsonValue; type "code\_execution\_tool\_result"constant"code\_execution\_tool\_result"constant
-
-
-
-class BetaBashCodeExecutionToolResultBlock:
-
-
-
-Content content
-
-One of the following:
-
-
-
-class BetaBashCodeExecutionToolResultError:
-
-
-
-ErrorCode errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-OUTPUT\_FILE\_TOO\_LARGE("output\_file\_too\_large")
-
-JsonValue; type "bash\_code\_execution\_tool\_result\_error"constant"bash\_code\_execution\_tool\_result\_error"constant
-
-
-
-class BetaBashCodeExecutionResultBlock:
-
-
-
-List<[BetaBashCodeExecutionOutputBlock](api/beta/messages.md)> content
-
-String fileId
-
-JsonValue; type "bash\_code\_execution\_output"constant"bash\_code\_execution\_output"constant
-
-long returnCode
-
-String stderr
-
-String stdout
-
-JsonValue; type "bash\_code\_execution\_result"constant"bash\_code\_execution\_result"constant
-
-String toolUseId
-
-JsonValue; type "bash\_code\_execution\_tool\_result"constant"bash\_code\_execution\_tool\_result"constant
-
-
-
-class BetaTextEditorCodeExecutionToolResultBlock:
-
-
-
-Content content
-
-One of the following:
-
-
-
-class BetaTextEditorCodeExecutionToolResultError:
-
-
-
-ErrorCode errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-FILE\_NOT\_FOUND("file\_not\_found")
-
-Optional<String> errorMessage
-
-JsonValue; type "text\_editor\_code\_execution\_tool\_result\_error"constant"text\_editor\_code\_execution\_tool\_result\_error"constant
-
-
-
-class BetaTextEditorCodeExecutionViewResultBlock:
-
-String content
-
-
-
-FileType fileType
-
-One of the following:
-
-TEXT("text")
-
-IMAGE("image")
-
-PDF("pdf")
-
-Optional<Long> numLines
-
-Optional<Long> startLine
-
-Optional<Long> totalLines
-
-JsonValue; type "text\_editor\_code\_execution\_view\_result"constant"text\_editor\_code\_execution\_view\_result"constant
-
-
-
-class BetaTextEditorCodeExecutionCreateResultBlock:
-
-boolean isFileUpdate
-
-JsonValue; type "text\_editor\_code\_execution\_create\_result"constant"text\_editor\_code\_execution\_create\_result"constant
-
-
-
-class BetaTextEditorCodeExecutionStrReplaceResultBlock:
-
-Optional<List<String>> lines
-
-Optional<Long> newLines
-
-Optional<Long> newStart
-
-Optional<Long> oldLines
-
-Optional<Long> oldStart
-
-JsonValue; type "text\_editor\_code\_execution\_str\_replace\_result"constant"text\_editor\_code\_execution\_str\_replace\_result"constant
-
-String toolUseId
-
-JsonValue; type "text\_editor\_code\_execution\_tool\_result"constant"text\_editor\_code\_execution\_tool\_result"constant
-
-
-
-class BetaToolSearchToolResultBlock:
-
-
-
-Content content
-
-One of the following:
-
-
-
-class BetaToolSearchToolResultError:
-
-
-
-ErrorCode errorCode
-
-One of the following:
-
-INVALID\_TOOL\_INPUT("invalid\_tool\_input")
-
-UNAVAILABLE("unavailable")
-
-TOO\_MANY\_REQUESTS("too\_many\_requests")
-
-EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
-
-Optional<String> errorMessage
-
-JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
-
-
-
-class BetaToolSearchToolSearchResultBlock:
-
-
-
-List<[BetaToolReferenceBlock](api/beta/messages.md)> toolReferences
-
-String toolName
-
-JsonValue; type "tool\_reference"constant"tool\_reference"constant
-
-JsonValue; type "tool\_search\_tool\_search\_result"constant"tool\_search\_tool\_search\_result"constant
-
-String toolUseId
-
-JsonValue; type "tool\_search\_tool\_result"constant"tool\_search\_tool\_result"constant
-
-
-
-class BetaMcpToolUseBlock:
-
-String id
-
-Input input
-
-String name
-
-The name of the MCP tool
-
-String serverName
-
-The name of the MCP server
-
-JsonValue; type "mcp\_tool\_use"constant"mcp\_tool\_use"constant
-
-
-
-class BetaMcpToolResultBlock:
-
-
-
-Content content
-
-One of the following:
-
-String
-
-
-
-List<[BetaTextBlock](api/beta/messages.md)>
-
-
-
-Optional<List<[BetaTextCitation](api/beta/messages.md)>> citations
-
-Citations supporting the text block.
-
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-One of the following:
-
-
-
-class BetaCitationCharLocation:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endCharIndex
-
-Optional<String> fileId
-
-long startCharIndex
-
-JsonValue; type "char\_location"constant"char\_location"constant
-
-
-
-class BetaCitationPageLocation:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endPageNumber
-
-Optional<String> fileId
-
-long startPageNumber
-
-JsonValue; type "page\_location"constant"page\_location"constant
-
-
-
-class BetaCitationContentBlockLocation:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-long documentIndex
-
-Optional<String> documentTitle
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-Optional<String> fileId
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
-
-
-
-class BetaCitationsWebSearchResultLocation:
-
-String citedText
-
-String encryptedIndex
-
-Optional<String> title
-
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-String url
-
-
-
-class BetaCitationSearchResultLocation:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-long searchResultIndex
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-String source
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-Optional<String> title
-
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-String text
-
-JsonValue; type "text"constant"text"constant
-
-boolean isError
-
-String toolUseId
-
-JsonValue; type "mcp\_tool\_result"constant"mcp\_tool\_result"constant
-
-
-
-class BetaContainerUploadBlock:
-
-Response model for a file uploaded to the container.
-
-String fileId
-
-JsonValue; type "container\_upload"constant"container\_upload"constant
-
-
-
-class BetaCompactionBlock:
-
-A compaction block returned when autocompact is triggered.
-
-When content is None, it indicates the compaction failed to produce a valid
-summary (e.g., malformed output from the model). Clients may round-trip
-compaction blocks with null content; the server treats them as no-ops.
-
-Optional<String> content
-
-Summary of compacted content, or null if compaction failed
-
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
-JsonValue; type "compaction"constant"compaction"constant
-
-
-
-class BetaFallbackBlock:
-
-Marks the point in `content` where one model's output gives way to the next.
-
-One block appears per hop where a preceding model actually ran this turn and
-declined. A turn where no preceding model ran and declined has no such
-boundary and carries no block — the signal for whether a fallback model
-served the response is the presence of a `fallback_message` entry in
-`usage.iterations`, not this block.
-
-The block is treated like a server-tool content block for streaming: it
-arrives via the standard `content_block_start` / `content_block_stop`
-pair and carries no deltas.
-
-
-
-[BetaFallbackInfo](api/beta/messages.md) from
-
-The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-CLAUDE\_SONNET\_5("claude-sonnet-5")
-
-High-performance model for coding and agents
-
-CLAUDE\_FABLE\_5("claude-fable-5")
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
-
-Most capable model for cybersecurity and biology research
-
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
-
-New class of intelligence, strongest in coding and cybersecurity
-
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
-
-Best combination of speed and intelligence
-
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-High-performance model for agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-High-performance model for agents and coding
-
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
-
-Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
-
-Exceptional model for specialized complex tasks
-
-
-
-[BetaFallbackInfo](api/beta/messages.md) to
-
-The fallback model producing the content that follows this block. Its `model` is always the canonical id.
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-CLAUDE\_SONNET\_5("claude-sonnet-5")
-
-High-performance model for coding and agents
-
-CLAUDE\_FABLE\_5("claude-fable-5")
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-CLAUDE\_MYTHOS\_5("claude-mythos-5")
-
-Most capable model for cybersecurity and biology research
-
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
-
-New class of intelligence, strongest in coding and cybersecurity
-
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
-
-Frontier intelligence for long-running agents and coding
-
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
-
-Best combination of speed and intelligence
-
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
-
-Fastest model with near-frontier intelligence
-
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
-
-Premium model combining maximum intelligence with practical performance
-
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
-
-High-performance model for agents and coding
-
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
-
-High-performance model for agents and coding
-
-CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
-
-Exceptional model for specialized complex tasks
-
-CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
-
-Exceptional model for specialized complex tasks
-
-
-
-[BetaFallbackRefusalTrigger](api/beta/messages.md) trigger
-
-What caused the `from` model to hand over at this hop.
-
-
-
-Optional<Category> category
-
-The policy category that triggered a refusal.
-
-One of the following:
-
-CYBER("cyber")
-
-BIO("bio")
-
-FRONTIER\_LLM("frontier\_llm")
-
-REASONING\_EXTRACTION("reasoning\_extraction")
-
-JsonValue; type "refusal"constant"refusal"constant
-
-JsonValue; type "fallback"constant"fallback"constant
-
-long index
-
-JsonValue; type "content\_block\_start"constant"content\_block\_start"constant
-
-
-
-class BetaRawContentBlockDeltaEvent:
-
-
-
-[BetaRawContentBlockDelta](api/beta/messages.md) delta
-
-One of the following:
-
-
-
-class BetaTextDelta:
-
-String text
-
-JsonValue; type "text\_delta"constant"text\_delta"constant
-
-
-
-class BetaInputJsonDelta:
-
-String partialJson
-
-JsonValue; type "input\_json\_delta"constant"input\_json\_delta"constant
-
-
-
-class BetaCitationsDelta:
-
-
-
-Citation citation
-
-One of the following:
-
-
-
-class BetaCitationCharLocation:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endCharIndex
-
-Optional<String> fileId
-
-long startCharIndex
-
-JsonValue; type "char\_location"constant"char\_location"constant
-
-
-
-class BetaCitationPageLocation:
-
-String citedText
-
-long documentIndex
-
-Optional<String> documentTitle
-
-long endPageNumber
-
-Optional<String> fileId
-
-long startPageNumber
-
-JsonValue; type "page\_location"constant"page\_location"constant
-
-
-
-class BetaCitationContentBlockLocation:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-long documentIndex
-
-Optional<String> documentTitle
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-Optional<String> fileId
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
-
-
-
-class BetaCitationsWebSearchResultLocation:
-
-String citedText
-
-String encryptedIndex
-
-Optional<String> title
-
-JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
-
-String url
-
-
-
-class BetaCitationSearchResultLocation:
-
-
-
-String citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-long endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-long searchResultIndex
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-String source
-
-long startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-Optional<String> title
-
-JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
-
-JsonValue; type "citations\_delta"constant"citations\_delta"constant
-
-
-
-class BetaThinkingDelta:
-
-Optional<Long> estimatedTokens
-
-Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
-
-String thinking
-
-JsonValue; type "thinking\_delta"constant"thinking\_delta"constant
-
-
-
-class BetaSignatureDelta:
-
-String signature
-
-JsonValue; type "signature\_delta"constant"signature\_delta"constant
-
-
-
-class BetaCompactionContentBlockDelta:
-
-Optional<String> content
-
-Optional<String> encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
-JsonValue; type "compaction\_delta"constant"compaction\_delta"constant
-
-long index
-
-JsonValue; type "content\_block\_delta"constant"content\_block\_delta"constant
-
-
-
-class BetaRawContentBlockStopEvent:
-
-long index
-
-JsonValue; type "content\_block\_stop"constant"content\_block\_stop"constant
-
-Create a Message
-
-Java
-
-```shiki
+```java
 package com.anthropic.example;
 
 import com.anthropic.client.AnthropicClient;
@@ -13096,22 +5531,20 @@ public final class Main {
         MessageCreateParams params = MessageCreateParams.builder()
             .maxTokens(1024L)
             .addUserMessage("Hello, world")
-            .model(Model.CLAUDE_OPUS_4_6)
+            .model(Model.CLAUDE_OPUS_5)
             .build();
         BetaMessage betaMessage = client.beta().messages().create(params);
     }
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
   "container": {
-    "id": "id",
+    "id": "container_011CpZohnwH4vuy7gazohgSP",
     "expires_at": "2019-12-27T18:11:19.117Z",
     "skills": [
       {
@@ -13125,11 +5558,11 @@ Response 200
     {
       "citations": [
         {
-          "cited_text": "cited_text",
+          "cited_text": "The grass is green. The sky is blue.",
           "document_index": 0,
-          "document_title": "document_title",
+          "document_title": "My Document",
           "end_char_index": 0,
-          "file_id": "file_id",
+          "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
           "start_char_index": 0,
           "type": "char_location"
         }
@@ -13153,14 +5586,14 @@ Response 200
       "type": "model_changed"
     }
   },
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-5",
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
-    "explanation": "explanation",
-    "fallback_credit_token": "fallback_credit_token",
+    "explanation": "This request was declined because it conflicts with Anthropic's Usage Policy.",
+    "fallback_credit_token": "QW50aHJvcGljL0NsYXVkZQ==",
     "fallback_has_prefill_claim": true,
-    "recommended_model": "recommended_model",
+    "recommended_model": "claude-opus-4-8",
     "type": "refusal"
   },
   "stop_reason": "end_turn",
@@ -13173,7 +5606,12 @@ Response 200
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
-    "inference_geo": "inference_geo",
+    "fallback_credit": {
+      "status": {
+        "type": "redeemed"
+      }
+    },
+    "inference_geo": "global",
     "input_tokens": 2095,
     "iterations": [
       {
@@ -13184,7 +5622,7 @@ Response 200
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
-        "model": "claude-sonnet-5",
+        "model": "claude-fable-5-1",
         "output_tokens": 0,
         "type": "message"
       }
@@ -13199,109 +5637,14 @@ Response 200
     },
     "service_tier": "standard",
     "speed": "standard"
-  }
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
-  "container": {
-    "id": "id",
-    "expires_at": "2019-12-27T18:11:19.117Z",
-    "skills": [
-      {
-        "skill_id": "pdf",
-        "type": "anthropic",
-        "version": "latest"
-      }
-    ]
   },
-  "content": [
+  "input_transformations": [
     {
-      "citations": [
-        {
-          "cited_text": "cited_text",
-          "document_index": 0,
-          "document_title": "document_title",
-          "end_char_index": 0,
-          "file_id": "file_id",
-          "start_char_index": 0,
-          "type": "char_location"
-        }
-      ],
-      "text": "Hi! My name is Claude.",
-      "type": "text"
+      "path": "path",
+      "reason": "model_binding_mismatch",
+      "type": "thinking_dropped"
     }
-  ],
-  "context_management": {
-    "applied_edits": [
-      {
-        "cleared_input_tokens": 0,
-        "cleared_tool_uses": 0,
-        "type": "clear_tool_uses_20250919"
-      }
-    ]
-  },
-  "diagnostics": {
-    "cache_miss_reason": {
-      "cache_missed_input_tokens": 0,
-      "type": "model_changed"
-    }
-  },
-  "model": "claude-opus-4-6",
-  "role": "assistant",
-  "stop_details": {
-    "category": "cyber",
-    "explanation": "explanation",
-    "fallback_credit_token": "fallback_credit_token",
-    "fallback_has_prefill_claim": true,
-    "recommended_model": "recommended_model",
-    "type": "refusal"
-  },
-  "stop_reason": "end_turn",
-  "stop_sequence": null,
-  "type": "message",
-  "usage": {
-    "cache_creation": {
-      "ephemeral_1h_input_tokens": 0,
-      "ephemeral_5m_input_tokens": 0
-    },
-    "cache_creation_input_tokens": 2051,
-    "cache_read_input_tokens": 2051,
-    "inference_geo": "inference_geo",
-    "input_tokens": 2095,
-    "iterations": [
-      {
-        "cache_creation": {
-          "ephemeral_1h_input_tokens": 0,
-          "ephemeral_5m_input_tokens": 0
-        },
-        "cache_creation_input_tokens": 0,
-        "cache_read_input_tokens": 0,
-        "input_tokens": 0,
-        "model": "claude-sonnet-5",
-        "output_tokens": 0,
-        "type": "message"
-      }
-    ],
-    "output_tokens": 503,
-    "output_tokens_details": {
-      "thinking_tokens": 0
-    },
-    "server_tool_use": {
-      "web_fetch_requests": 2,
-      "web_search_requests": 0
-    },
-    "service_tier": "standard",
-    "speed": "standard"
-  }
+  ]
 }
 ```
 

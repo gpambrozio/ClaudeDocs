@@ -1,78 +1,47 @@
 # Delete Session Resource
 
-Copy page
+`$ ant beta:sessions:resources delete`
 
-
-
-CLI
-
-# Delete Session Resource
-
-$ ant beta:sessions:resources delete
-
-DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
+**DELETE** `/v1/sessions/{session_id}/resources/{resource_id}`
 
 Delete Session Resource
 
-##### ParametersExpand Collapse
+## Parameters
 
---session-id: string
+- `--session-id: string`
 
-Path param: Path parameter session\_id
+  Path param: Path parameter session_id
 
---resource-id: string
+- `--resource-id: string`
 
-Path param: Path parameter resource\_id
+  Path param: Path parameter resource_id
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--beta: optional array of AnthropicBeta`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `beta_managed_agents_delete_session_resource: object`
 
-beta\_managed\_agents\_delete\_session\_resource: object { id, type } 
+  Confirmation of resource deletion.
 
-Confirmation of resource deletion.
+  - `id: string`
 
-id: string
+  - `type: "session_resource_deleted"`
 
-
+## Example
 
-type: "session\_resource\_deleted"
-
-"session\_resource\_deleted"
-
-Delete Session Resource
-
-CLI
-
-```shiki
+```bash
 ant beta:sessions:resources delete \
   --api-key my-anthropic-api-key \
   --session-id sesn_011CZkZAtmR3yMPDzynEDxu7 \
   --resource-id sesrsc_011CZkZBJq5dWxk9fVLNcPht
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
-  "type": "session_resource_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
   "type": "session_resource_deleted"

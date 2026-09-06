@@ -1,182 +1,470 @@
 # Models
 
-Copy page
+## List Models
 
-
+`$client->models->list(?string afterID, ?string beforeID, ?int limit, ?list<AnthropicBeta> betas): Page<ModelInfo>`
 
-PHP
+**GET** `/v1/models`
 
-# Models
+List available models.
 
-##### [List Models](api/models/list.md)
+The Models API response can be used to determine which models are available for use in the API. More recently released models are listed first.
 
-$client->models->list(?string afterID, ?string beforeID, ?int limit, ?list<AnthropicBeta> betas): Page<[ModelInfo](api/models.md)>
+### Parameters
 
-GET/v1/models
+- `afterID?:optional string`
 
-##### [Get a Model](api/models/retrieve.md)
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-$client->models->retrieve(string modelID, ?list<AnthropicBeta> betas): [ModelInfo](api/models.md)
+- `beforeID?:optional string`
 
-GET/v1/models/{model\_id}
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-##### ModelsExpand Collapse
+- `limit?:optional int`
 
-
+  Number of items to return per page.
 
-[CapabilitySupport](api/models.md)
+  Defaults to `20`. Ranges from `1` to `1000`.
 
-bool supported
+  default: 20
 
-Whether this capability is supported by the model.
+- `betas?:optional list<AnthropicBeta>`
 
-
+  Optional header to specify the beta version(s) you want to use.
 
-[ContextManagementCapability](api/models.md)
+### Returns
 
-?[CapabilitySupport](api/models.md) clearThinking20251015
+- `ModelInfo`
 
-Indicates whether a capability is supported.
+  - `string id`
 
-?[CapabilitySupport](api/models.md) clearToolUses20250919
+    Unique model identifier.
 
-Indicates whether a capability is supported.
+  - `?ModelCapabilities capabilities`
 
-?[CapabilitySupport](api/models.md) compact20260112
+    Model capability information.
 
-Indicates whether a capability is supported.
+  - `\Datetime createdAt`
 
-bool supported
+    RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-Whether this capability is supported by the model.
+  - `string displayName`
 
-
+    A human-readable name for the model.
 
-[EffortCapability](api/models.md)
+  - `?int maxInputTokens`
 
-[CapabilitySupport](api/models.md) high
+    Maximum input context window size in tokens for this model.
 
-Whether the model supports high effort level.
+  - `?int maxTokens`
 
-[CapabilitySupport](api/models.md) low
+    Maximum value for the `max_tokens` parameter when using this model.
 
-Whether the model supports low effort level.
+  - `"model" type`
+
+    Object type.
+
+    For Models, this is always `"model"`.
+
+### Example
+
+```php
+<?php
 
-[CapabilitySupport](api/models.md) max
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-Whether the model supports max effort level.
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-[CapabilitySupport](api/models.md) medium
+$page = $client->models->list(
+  afterID: 'after_id',
+  beforeID: 'before_id',
+  limit: 1,
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-Whether the model supports medium effort level.
+var_dump($page);
+```
 
-bool supported
+#### Response (200)
 
-Whether this capability is supported by the model.
+```json
+{
+  "data": [
+    {
+      "id": "claude-opus-5",
+      "capabilities": {
+        "batch": {
+          "supported": true
+        },
+        "citations": {
+          "supported": true
+        },
+        "code_execution": {
+          "supported": true
+        },
+        "context_management": {
+          "clear_thinking_20251015": {
+            "supported": true
+          },
+          "clear_tool_uses_20250919": {
+            "supported": true
+          },
+          "compact_20260112": {
+            "supported": true
+          },
+          "supported": true
+        },
+        "effort": {
+          "high": {
+            "supported": true
+          },
+          "low": {
+            "supported": true
+          },
+          "max": {
+            "supported": true
+          },
+          "medium": {
+            "supported": true
+          },
+          "supported": true,
+          "xhigh": {
+            "supported": true
+          }
+        },
+        "image_input": {
+          "supported": true
+        },
+        "pdf_input": {
+          "supported": true
+        },
+        "structured_outputs": {
+          "supported": true
+        },
+        "thinking": {
+          "supported": true,
+          "types": {
+            "adaptive": {
+              "supported": true
+            },
+            "enabled": {
+              "supported": true
+            }
+          }
+        }
+      },
+      "created_at": "2026-07-24T00:00:00Z",
+      "display_name": "Claude Opus 5",
+      "max_input_tokens": 0,
+      "max_tokens": 0,
+      "type": "model"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
+
+## Get a Model
+
+`$client->models->retrieve(string modelID, ?list<AnthropicBeta> betas): ModelInfo`
+
+**GET** `/v1/models/{model_id}`
+
+Get a specific model.
+
+The Models API response can be used to determine information about a specific model or resolve a model alias to a model ID.
+
+### Parameters
+
+- `modelID: string`
+
+  Model identifier or alias.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `ModelInfo`
+
+  - `string id`
+
+    Unique model identifier.
+
+  - `?ModelCapabilities capabilities`
+
+    Model capability information.
+
+  - `\Datetime createdAt`
+
+    RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
+
+  - `string displayName`
+
+    A human-readable name for the model.
+
+  - `?int maxInputTokens`
+
+    Maximum input context window size in tokens for this model.
+
+  - `?int maxTokens`
+
+    Maximum value for the `max_tokens` parameter when using this model.
+
+  - `"model" type`
+
+    Object type.
+
+    For Models, this is always `"model"`.
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$modelInfo = $client->models->retrieve(
+  'model_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+);
+
+var_dump($modelInfo);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "claude-opus-5",
+  "capabilities": {
+    "batch": {
+      "supported": true
+    },
+    "citations": {
+      "supported": true
+    },
+    "code_execution": {
+      "supported": true
+    },
+    "context_management": {
+      "clear_thinking_20251015": {
+        "supported": true
+      },
+      "clear_tool_uses_20250919": {
+        "supported": true
+      },
+      "compact_20260112": {
+        "supported": true
+      },
+      "supported": true
+    },
+    "effort": {
+      "high": {
+        "supported": true
+      },
+      "low": {
+        "supported": true
+      },
+      "max": {
+        "supported": true
+      },
+      "medium": {
+        "supported": true
+      },
+      "supported": true,
+      "xhigh": {
+        "supported": true
+      }
+    },
+    "image_input": {
+      "supported": true
+    },
+    "pdf_input": {
+      "supported": true
+    },
+    "structured_outputs": {
+      "supported": true
+    },
+    "thinking": {
+      "supported": true,
+      "types": {
+        "adaptive": {
+          "supported": true
+        },
+        "enabled": {
+          "supported": true
+        }
+      }
+    }
+  },
+  "created_at": "2026-07-24T00:00:00Z",
+  "display_name": "Claude Opus 5",
+  "max_input_tokens": 0,
+  "max_tokens": 0,
+  "type": "model"
+}
+```
 
-?[CapabilitySupport](api/models.md) xhigh
+## Domain types
 
-Indicates whether a capability is supported.
+### Capability Support
 
-
+- `CapabilitySupport`
 
-[ModelCapabilities](api/models.md)
+  - `bool supported`
 
-[CapabilitySupport](api/models.md) batch
+    Whether this capability is supported by the model.
 
-Whether the model supports the Batch API.
+### Context Management Capability
 
-[CapabilitySupport](api/models.md) citations
+- `ContextManagementCapability`
 
-Whether the model supports citation generation.
+  - `?CapabilitySupport clearThinking20251015`
 
-[CapabilitySupport](api/models.md) codeExecution
+    Indicates whether a capability is supported.
 
-Whether the model supports code execution tools.
+  - `?CapabilitySupport clearToolUses20250919`
 
-[ContextManagementCapability](api/models.md) contextManagement
+    Indicates whether a capability is supported.
 
-Context management support and available strategies.
+  - `?CapabilitySupport compact20260112`
 
-[EffortCapability](api/models.md) effort
+    Indicates whether a capability is supported.
 
-Effort (reasoning\_effort) support and available levels.
+  - `bool supported`
 
-[CapabilitySupport](api/models.md) imageInput
+    Whether this capability is supported by the model.
 
-Whether the model accepts image content blocks.
+### Effort Capability
 
-[CapabilitySupport](api/models.md) pdfInput
+- `EffortCapability`
 
-Whether the model accepts PDF content blocks.
+  - `CapabilitySupport high`
 
-[CapabilitySupport](api/models.md) structuredOutputs
+    Whether the model supports high effort level.
 
-Whether the model supports structured output / JSON mode / strict tool schemas.
+  - `CapabilitySupport low`
 
-[ThinkingCapability](api/models.md) thinking
+    Whether the model supports low effort level.
 
-Thinking capability and supported type configurations.
+  - `CapabilitySupport max`
 
-
+    Whether the model supports max effort level.
 
-[ModelInfo](api/models.md)
+  - `CapabilitySupport medium`
 
-string id
+    Whether the model supports medium effort level.
 
-Unique model identifier.
+  - `bool supported`
 
-?[ModelCapabilities](api/models.md) capabilities
+    Whether this capability is supported by the model.
 
-Model capability information.
+  - `?CapabilitySupport xhigh`
 
-\Datetime createdAt
+    Indicates whether a capability is supported.
 
-RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
+### Model Capabilities
 
-string displayName
+- `ModelCapabilities`
 
-A human-readable name for the model.
+  - `CapabilitySupport batch`
 
-?int maxInputTokens
+    Whether the model supports the Batch API.
 
-Maximum input context window size in tokens for this model.
+  - `CapabilitySupport citations`
 
-?int maxTokens
+    Whether the model supports citation generation.
 
-Maximum value for the `max_tokens` parameter when using this model.
+  - `CapabilitySupport codeExecution`
 
-
+    Whether the model supports code execution tools.
 
-"model" type
+  - `ContextManagementCapability contextManagement`
 
-Object type.
+    Context management support and available strategies.
 
-For Models, this is always `"model"`.
+  - `EffortCapability effort`
 
-
+    Effort (reasoning_effort) support and available levels.
 
-[ThinkingCapability](api/models.md)
+  - `CapabilitySupport imageInput`
 
-bool supported
+    Whether the model accepts image content blocks.
 
-Whether this capability is supported by the model.
+  - `CapabilitySupport pdfInput`
 
-[ThinkingTypes](api/models.md) types
+    Whether the model accepts PDF content blocks.
 
-Supported thinking type configurations.
+  - `CapabilitySupport structuredOutputs`
 
-
+    Whether the model supports structured output / JSON mode / strict tool schemas.
 
-[ThinkingTypes](api/models.md)
+  - `ThinkingCapability thinking`
 
-[CapabilitySupport](api/models.md) adaptive
+    Thinking capability and supported type configurations.
 
-Whether the model supports thinking with type 'adaptive' (auto).
+### Model Info
 
-[CapabilitySupport](api/models.md) enabled
+- `ModelInfo`
 
-Whether the model supports thinking with type 'enabled'.
+  - `string id`
+
+    Unique model identifier.
+
+  - `?ModelCapabilities capabilities`
+
+    Model capability information.
+
+  - `\Datetime createdAt`
+
+    RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
+
+  - `string displayName`
+
+    A human-readable name for the model.
+
+  - `?int maxInputTokens`
+
+    Maximum input context window size in tokens for this model.
+
+  - `?int maxTokens`
+
+    Maximum value for the `max_tokens` parameter when using this model.
+
+  - `"model" type`
+
+    Object type.
+
+    For Models, this is always `"model"`.
+
+### Thinking Capability
+
+- `ThinkingCapability`
+
+  - `bool supported`
+
+    Whether this capability is supported by the model.
+
+  - `ThinkingTypes types`
+
+    Supported thinking type configurations.
+
+### Thinking Types
+
+- `ThinkingTypes`
+
+  - `CapabilitySupport adaptive`
+
+    Whether the model supports thinking with type 'adaptive' (auto).
+
+  - `CapabilitySupport enabled`
+
+    Whether the model supports thinking with type 'enabled'.
 
 ---
 

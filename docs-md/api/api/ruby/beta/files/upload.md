@@ -1,174 +1,198 @@
 # Upload File
 
-Copy page
+`beta.files.upload(**kwargs) -> BetaFileMetadata`
 
-
-
-Ruby
-
-# Upload File
-
-beta.files.upload(\*\*kwargs) -> [FileMetadata](api/beta/files.md) { id, created\_at, filename, 5 more }
-
-POST/v1/files
+**POST** `/v1/files`
 
 Upload File
 
-##### ParametersExpand Collapse
+## Parameters
 
-file: FileInput
+- `file: String`
 
-The file to upload
+  The file to upload
 
-
+  format: binary
 
-betas: Array[[AnthropicBeta](api/beta.md)]
+- `expires_in_seconds: Integer`
 
-Optional header to specify the beta version(s) you want to use.
+  Seconds from upload until the file expires and its bytes become permanently unavailable. Must be between 3600 (one hour) and 7776000 (ninety days).
 
-One of the following:
+  minimum: 3600, maximum: 7776000
 
-String = String
+- `betas: Array[AnthropicBeta]`
 
-
+  Optional header to specify the beta version(s) you want to use.
 
-AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more
+  - `String = String`
 
-One of the following:
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
 
-:"message-batches-2024-09-24"
+    - `:"message-batches-2024-09-24"`
 
-:"prompt-caching-2024-07-31"
+    - `:"prompt-caching-2024-07-31"`
 
-:"computer-use-2024-10-22"
+    - `:"computer-use-2024-10-22"`
 
-:"computer-use-2025-01-24"
+    - `:"computer-use-2025-01-24"`
 
-:"pdfs-2024-09-25"
+    - `:"pdfs-2024-09-25"`
 
-:"token-counting-2024-11-01"
+    - `:"token-counting-2024-11-01"`
 
-:"token-efficient-tools-2025-02-19"
+    - `:"token-efficient-tools-2025-02-19"`
 
-:"output-128k-2025-02-19"
+    - `:"output-128k-2025-02-19"`
 
-:"files-api-2025-04-14"
+    - `:"files-api-2025-04-14"`
 
-:"mcp-client-2025-04-04"
+    - `:"mcp-client-2025-04-04"`
 
-:"mcp-client-2025-11-20"
+    - `:"mcp-client-2025-11-20"`
 
-:"dev-full-thinking-2025-05-14"
+    - `:"dev-full-thinking-2025-05-14"`
 
-:"interleaved-thinking-2025-05-14"
+    - `:"interleaved-thinking-2025-05-14"`
 
-:"code-execution-2025-05-22"
+    - `:"code-execution-2025-05-22"`
 
-:"extended-cache-ttl-2025-04-11"
+    - `:"extended-cache-ttl-2025-04-11"`
 
-:"context-1m-2025-08-07"
+    - `:"context-1m-2025-08-07"`
 
-:"context-management-2025-06-27"
+    - `:"context-management-2025-06-27"`
 
-:"model-context-window-exceeded-2025-08-26"
+    - `:"model-context-window-exceeded-2025-08-26"`
 
-:"skills-2025-10-02"
+    - `:"skills-2025-10-02"`
 
-:"fast-mode-2026-02-01"
+    - `:"fast-mode-2026-02-01"`
 
-:"output-300k-2026-03-24"
+    - `:"output-300k-2026-03-24"`
 
-:"user-profiles-2026-03-24"
+    - `:"user-profiles-2026-03-24"`
 
-:"advisor-tool-2026-03-01"
+    - `:"user-profiles-2026-08-18"`
 
-:"managed-agents-2026-04-01"
+    - `:"advisor-tool-2026-03-01"`
 
-:"cache-diagnosis-2026-04-07"
+    - `:"managed-agents-2026-04-01"`
 
-:"thinking-token-count-2026-05-13"
+    - `:"cache-diagnosis-2026-04-07"`
 
-:"server-side-fallback-2026-06-01"
+    - `:"dreaming-2026-04-21"`
 
-:"fallback-credit-2026-06-01"
+    - `:"thinking-token-count-2026-05-13"`
 
-:"agent-memory-2026-07-22"
+    - `:"server-side-fallback-2026-06-01"`
 
-##### ReturnsExpand Collapse
+    - `:"server-side-fallback-2026-07-01"`
 
-
+    - `:"fallback-credit-2026-06-01"`
 
-class FileMetadata { id, created\_at, filename, 5 more } 
+    - `:"fallback-credit-2026-07-01"`
 
-
+    - `:"agent-memory-2026-07-22"`
 
-id: String
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
-Unique object identifier.
+    - `:"compact-2026-01-12"`
 
-The format and length of IDs may change over time.
+    - `:"computer-use-2025-11-24"`
 
-created\_at: Time
+    - `:"mcp-tunnels-2026-06-22"`
 
-RFC 3339 datetime string representing when the file was created.
+    - `:"structured-outputs-2025-11-13"`
 
-filename: String
+    - `:"task-budgets-2026-03-13"`
 
-Original filename of the uploaded file.
+    - `:"thinking-display-updates-2026-08-18"`
 
-mime\_type: String
+    - `:"ce-user-management-2026-07-13"`
 
-MIME type of the file.
+    - `:"mid-conversation-output-config-2026-07-01"`
 
-size\_bytes: Integer
+    - `:"thinking-binding-controls-2026-08-01"`
 
-Size of the file in bytes.
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
 
-
+## Returns
 
-type: :file
+- `class BetaFileMetadata`
 
-Object type.
+  - `id: String`
 
-For files, this is always `"file"`.
+    Unique object identifier.
 
-downloadable: bool
+    The format and length of IDs may change over time.
 
-Whether the file can be downloaded.
+  - `created_at: Time`
 
-
+    RFC 3339 datetime string representing when the file was created.
 
-scope: [BetaFileScope](api/beta/files.md) { id, type } 
+    format: date-time
 
-The scope of this file, indicating the context in which it was created (e.g., a session).
+  - `filename: String`
 
-id: String
+    Original filename of the uploaded file.
 
-The ID of the scoping resource (e.g., the session ID).
+    maxLength: 500, minLength: 1
 
-type: :session
+  - `mime_type: String`
 
-The type of scope (e.g., `"session"`).
+    MIME type of the file.
 
-Upload File
+    maxLength: 255, minLength: 1
 
-Ruby
+  - `size_bytes: Integer`
 
-```shiki
+    Size of the file in bytes.
+
+    minimum: 0
+
+  - `type: :file`
+
+    Object type.
+
+    For files, this is always `"file"`.
+
+  - `downloadable: bool`
+
+    Whether the file can be downloaded.
+
+  - `expires_at: Time`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
+
+  - `scope: BetaFileScope`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `id: String`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `type: :session`
+
+      The type of scope (e.g., `"session"`).
+
+## Example
+
+```ruby
 require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-file_metadata = anthropic.beta.files.upload(file: StringIO.new("Example data"))
+beta_file_metadata = anthropic.beta.files.upload(file: StringIO.new("Example data"))
 
-puts(file_metadata)
+puts(beta_file_metadata)
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "file_011CNha8iCJcU1wXNR6q4V8w",
   "created_at": "2025-04-15T18:37:24.100435Z",
@@ -177,28 +201,7 @@ Response 200
   "size_bytes": 102400,
   "type": "file",
   "downloadable": false,
-  "scope": {
-    "id": "id",
-    "type": "session"
-  }
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "created_at": "2025-04-15T18:37:24.100435Z",
-  "filename": "document.pdf",
-  "mime_type": "application/pdf",
-  "size_bytes": 102400,
-  "type": "file",
-  "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z",
   "scope": {
     "id": "id",
     "type": "session"

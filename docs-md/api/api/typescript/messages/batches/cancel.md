@@ -1,16 +1,8 @@
 # Cancel a Message Batch
 
-Copy page
+`client.messages.batches.cancel(messageBatchID, options?): MessageBatch`
 
-
-
-TypeScript
-
-# Cancel a Message Batch
-
-client.messages.batches.cancel(stringmessageBatchID, RequestOptionsoptions?): [MessageBatch](api/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
-
-POST/v1/messages/batches/{message\_batch\_id}/cancel
+**POST** `/v1/messages/batches/{message_batch_id}/cancel`
 
 Batches may be canceled any time before processing ends. Once cancellation is initiated, the batch enters a `canceling` state, at which time the system may complete any in-progress, non-interruptible requests before finalizing cancellation.
 
@@ -18,174 +10,139 @@ The number of canceled requests is specified in `request_counts`. To determine w
 
 Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
-messageBatchID: string
+- `messageBatchID: string`
 
-ID of the Message Batch.
+  ID of the Message Batch.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `MessageBatch`
 
-MessageBatch { id, archived\_at, cancel\_initiated\_at, 7 more } 
+  - `id: string`
 
-
+    Unique object identifier.
 
-id: string
+    The format and length of IDs may change over time.
 
-Unique object identifier.
+  - `archived_at: string | null`
 
-The format and length of IDs may change over time.
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-archived\_at: string | null
+    format: date-time
 
-RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+  - `cancel_initiated_at: string | null`
 
-cancel\_initiated\_at: string | null
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+    format: date-time
 
-created\_at: string
+  - `created_at: string`
 
-RFC 3339 datetime string representing the time at which the Message Batch was created.
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-
+    format: date-time
 
-ended\_at: string | null
+  - `ended_at: string | null`
 
-RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
-Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
-formatdate-time
+    format: date-time
 
-expires\_at: string
+  - `expires_at: string`
 
-RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-
+    format: date-time
 
-processing\_status: "in\_progress" | "canceling" | "ended"
+  - `processing_status: "in_progress" | "canceling" | "ended"`
 
-Processing status of the Message Batch.
+    Processing status of the Message Batch.
 
-One of the following:
+    - `"in_progress"`
 
-"in\_progress"
+    - `"canceling"`
 
-"canceling"
+    - `"ended"`
 
-"ended"
+  - `request_counts: MessageBatchRequestCounts`
 
-
+    Tallies requests within the Message Batch, categorized by their status.
 
-request\_counts: [MessageBatchRequestCounts](api/messages/batches.md) { canceled, errored, expired, 2 more } 
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-Tallies requests within the Message Batch, categorized by their status.
+    - `canceled: number`
 
-Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+      Number of requests in the Message Batch that have been canceled.
 
-
+      This is zero until processing of the entire Message Batch has ended.
 
-canceled: number
+      default: 0
 
-Number of requests in the Message Batch that have been canceled.
+    - `errored: number`
 
-This is zero until processing of the entire Message Batch has ended.
+      Number of requests in the Message Batch that encountered an error.
 
-
+      This is zero until processing of the entire Message Batch has ended.
 
-errored: number
+      default: 0
 
-Number of requests in the Message Batch that encountered an error.
+    - `expired: number`
 
-This is zero until processing of the entire Message Batch has ended.
+      Number of requests in the Message Batch that have expired.
 
-
+      This is zero until processing of the entire Message Batch has ended.
 
-expired: number
+      default: 0
 
-Number of requests in the Message Batch that have expired.
+    - `processing: number`
 
-This is zero until processing of the entire Message Batch has ended.
+      Number of requests in the Message Batch that are processing.
 
-processing: number
+      default: 0
 
-Number of requests in the Message Batch that are processing.
+    - `succeeded: number`
 
-
+      Number of requests in the Message Batch that have completed successfully.
 
-succeeded: number
+      This is zero until processing of the entire Message Batch has ended.
 
-Number of requests in the Message Batch that have completed successfully.
+      default: 0
 
-This is zero until processing of the entire Message Batch has ended.
+  - `results_url: string | null`
 
-
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
-results\_url: string | null
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
+  - `type: "message_batch"`
 
-Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+    Object type.
 
-
+    For Message Batches, this is always `"message_batch"`.
 
-type: "message\_batch"
+    default: message_batch
 
-Object type.
+## Example
 
-For Message Batches, this is always `"message_batch"`.
-
-Cancel a Message Batch
-
-TypeScript
-
-```shiki
-import Anthropic from '@anthropic-ai/sdk';
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const messageBatch = await client.messages.batches.cancel('message_batch_id');
+const messageBatch = await client.messages.batches.cancel("message_batch_id");
 
 console.log(messageBatch.id);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "archived_at": "2024-08-20T18:37:24.100435Z",
-  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
-  "created_at": "2024-08-20T18:37:24.100435Z",
-  "ended_at": "2024-08-20T18:37:24.100435Z",
-  "expires_at": "2024-08-20T18:37:24.100435Z",
-  "processing_status": "in_progress",
-  "request_counts": {
-    "canceled": 10,
-    "errored": 30,
-    "expired": 10,
-    "processing": 100,
-    "succeeded": 50
-  },
-  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
-  "type": "message_batch"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
   "archived_at": "2024-08-20T18:37:24.100435Z",

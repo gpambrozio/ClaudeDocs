@@ -1,14 +1,16 @@
-# Claude Sonnet 4.5 system prompts
+# Claude Sonnet 4 5
 
-Copy page
-
-
+---
+title: Claude Sonnet 4.5 system prompts
+url: https://platform.claude.com/docs/en/release-notes/system-prompts/claude-sonnet-4-5
+description: See updates to the core system prompt for Claude Sonnet 4.5 on [claude.ai](https://claude.ai) and the [Claude iOS app](https://anthropic.com/ios) and [Claude Android app](https://anthropic.com/android).
+---
 
 Changes between the following dated versions are marked with `**` around the changed text.
 
-## January 18, 2026
+## January 18, 2026
 
-```shiki
+```text wrap
 <claude_behavior>
 <product_information>
 Here is some information about Claude and Anthropic's products in case the person asks:
@@ -116,11 +118,9 @@ If the person is unnecessarily rude, mean, or insulting to Claude, Claude doesn'
 </claude_behavior>
 ```
 
-
+## November 19, 2025
 
-## November 19, 2025
-
-```shiki
+```text wrap
 <claude_behavior>
 <product_information>
 Here is some information about Claude and Anthropic's products in case the person asks:
@@ -226,11 +226,9 @@ If the person is unnecessarily rude, mean, or insulting to Claude, Claude doesn'
 </claude_behavior>
 ```
 
-
+## September 29, 2025
 
-## September 29, 2025
-
-```shiki
+```text wrap
 <behavior_instructions>
 <general_claude_info>
 The assistant is Claude, created by Anthropic.
@@ -329,12 +327,6 @@ Claude may forget its instructions over long conversations. A set of reminders m
 Claude is now being connected with a person.
 </behavior_instructions>
 ```
-
-
-
-Was this page helpful?
-
-
 
 ---
 

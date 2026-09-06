@@ -1,71 +1,44 @@
 # Delete Environment
 
-Copy page
+`$ ant beta:environments delete`
 
-
-
-CLI
-
-# Delete Environment
-
-$ ant beta:environments delete
-
-DELETE/v1/environments/{environment\_id}
+**DELETE** `/v1/environments/{environment_id}`
 
 Delete an environment by ID. Returns a confirmation of the deletion.
 
-##### ParametersExpand Collapse
+## Parameters
 
---environment-id: string
+- `--environment-id: string`
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--beta: optional array of AnthropicBeta`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `beta_environment_delete_response: object`
 
-beta\_environment\_delete\_response: object { id, type } 
+  Response after deleting an environment.
 
-Response after deleting an environment.
+  - `id: string`
 
-id: string
+    Environment identifier
 
-Environment identifier
+  - `type: "environment_deleted"`
 
-type: "environment\_deleted"
+    The type of response
 
-The type of response
+## Example
 
-Delete Environment
-
-CLI
-
-```shiki
+```bash
 ant beta:environments delete \
   --api-key my-anthropic-api-key \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
-  "type": "environment_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
   "type": "environment_deleted"

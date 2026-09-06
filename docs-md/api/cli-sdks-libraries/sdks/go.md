@@ -1,36 +1,36 @@
-# Go SDK
+# Go
 
-Copy page
-
-
+---
+title: Go SDK
+url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/go
+description: Install and configure the Anthropic Go SDK with context-based cancellation and functional options
+---
 
 The Anthropic Go library provides convenient access to the Claude API from applications written in Go.
 
-## Installation
+For API feature documentation with code examples, see the [API reference](api/overview.md). This page covers Go-specific SDK features and configuration.
 
-```shiki
+## Installation
+
+```go
 import (
 	"github.com/anthropics/anthropic-sdk-go" // imported as anthropic
 )
 ```
 
-
-
 Install with `go get`:
 
-```shiki
+```bash
 go get github.com/anthropics/anthropic-sdk-go
 ```
 
-
-
-## Requirements
+## Requirements
 
 This library requires Go 1.24+.
 
-## Usage
+## Usage
 
-```shiki
+```go
 package main
 
 import (
@@ -63,13 +63,11 @@ func main() {
 }
 ```
 
-
-
 For authentication options including Workload Identity Federation, see [Authentication](manage-claude/authentication.md). If your API key is a [personal or service account key](manage-claude/authentication.md) with access to multiple workspaces, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](manage-claude/authentication.md) shows the per-request option for this SDK.
 
-### Conversations
+**Conversations**
 
-```shiki
+```go
 messages := []anthropic.MessageParam{
 	anthropic.NewUserMessage(anthropic.NewTextBlock("What is my first name?")),
 }
@@ -102,11 +100,9 @@ if err != nil {
 fmt.Printf("%+v\n", message.Content)
 ```
 
-
+**System prompts**
 
-### System prompts
-
-```shiki
+```go
 message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 	Model:     anthropic.ModelClaudeOpus5,
 	MaxTokens: 1024,
@@ -121,11 +117,9 @@ if err != nil {
 fmt.Printf("%+v\n", message.Content)
 ```
 
-
+**Streaming**
 
-### Streaming
-
-```shiki
+```go
 content := "What is a quaternion?"
 
 stream := client.Messages.NewStreaming(context.TODO(), anthropic.MessageNewParams{
@@ -159,11 +153,9 @@ if stream.Err() != nil {
 }
 ```
 
-
+**Tool calling**
 
-### Tool calling
-
-```shiki
+```go
 messages := []anthropic.MessageParam{
 	anthropic.NewUserMessage(anthropic.NewTextBlock(content)),
 }
@@ -246,24 +238,19 @@ for {
 }
 ```
 
-
+## Request fields
 
-## Request fields
+The anthropic library uses the [`omitzero`](https://tip.golang.org/doc/go1.24#encodingjsonpkgencodingjson) semantics from the Go 1.24+ `encoding/json` release for request fields.
 
-The anthropic library uses the [`omitzero`](https://tip.golang.org/doc/go1.24#encodingjsonpkgencodingjson)
-semantics from the Go 1.24+ `encoding/json` release for request fields.
-
-Required primitive fields (such as `int64` or `string`) feature the tag `` `json:"...,required"` ``. These
-fields are always serialized, even their zero values.
+Required primitive fields (such as `int64` or `string`) feature the tag `` `json:"...,required"` ``. These fields are always serialized, even their zero values.
 
 Optional primitive types are wrapped in a `param.Opt[T]`. These fields can be set with the provided constructors, such as `anthropic.String(string)` or `anthropic.Int(int64)`.
 
-Any `param.Opt[T]`, map, slice, struct or string enum uses the
-tag `` `json:"...,omitzero"` ``. Its zero value is considered omitted.
+Any `param.Opt[T]`, map, slice, struct or string enum uses the tag `` `json:"...,omitzero"` ``. Its zero value is considered omitted.
 
 The `param.IsOmitted(any)` function can confirm the presence of any `omitzero` field.
 
-```shiki
+```go
 p := anthropic.ExampleParams{
 	ID:   "id_xxx",                // required property
 	Name: anthropic.String("..."), // optional property
@@ -278,12 +265,9 @@ p := anthropic.ExampleParams{
 }
 ```
 
-
+To send `null` instead of a `param.Opt[T]`, use `param.Null[T]()`. To send `null` instead of a struct `T`, use `param.NullStruct[T]()`.
 
-To send `null` instead of a `param.Opt[T]`, use `param.Null[T]()`.
-To send `null` instead of a struct `T`, use `param.NullStruct[T]()`.
-
-```shiki
+```go
 p.Name = param.Null[string]()       // 'null' instead of string
 p.Point = param.NullStruct[Point]() // 'null' instead of struct
 
@@ -291,15 +275,13 @@ param.IsNull(p.Name)  // true
 param.IsNull(p.Point) // true
 ```
 
-
+Request structs contain a `.SetExtraFields(map[string]any)` method which can send non-conforming fields in the request body. Extra fields overwrite any struct fields with a matching key.
 
-Request structs contain a `.SetExtraFields(map[string]any)` method which can send non-conforming
-fields in the request body. Extra fields overwrite any struct fields with a matching
-key.
+For security reasons, only use `SetExtraFields` with trusted data.
 
-To send a custom value instead of a struct, use the generic function `param.Override` (for example, `param.Override[anthropic.FooParams](12)`).
+To send a custom value instead of a struct, use the generic function `param.Override` (for example, `param.Override[anthropic.FooParams](cli-sdks-libraries/sdks/12.md)`).
 
-```shiki
+```go
 // In cases where the API specifies a given type,
 // but you want to send something else, use [SetExtraFields]:
 p.SetExtraFields(map[string]any{
@@ -307,20 +289,16 @@ p.SetExtraFields(map[string]any{
 })
 
 // Send a number instead of an object
-custom := param.Override[anthropic.FooParams](12)
+custom := param.Override[anthropic.FooParams](cli-sdks-libraries/sdks/12.md)
 ```
 
-
+### Request unions
 
-### Request unions
+Unions are represented as a struct with fields prefixed by "Of" for each of its variants, only one field can be non-zero. The non-zero field will be serialized.
 
-Unions are represented as a struct with fields prefixed by "Of" for each of its variants,
-only one field can be non-zero. The non-zero field will be serialized.
+Subproperties of the union can be accessed through methods on the union struct. These methods return a mutable pointer to the underlying data, if present.
 
-Subproperties of the union can be accessed through methods on the union struct.
-These methods return a mutable pointer to the underlying data, if present.
-
-```shiki
+```go
 // Only one field can be non-zero, use param.IsOmitted() to check if a field is set
 type AnimalUnionParam struct {
 	OfCat *Cat `json:",omitzero,inline"`
@@ -342,15 +320,15 @@ if address := animal.GetOwner().GetAddress(); address != nil {
 }
 ```
 
-
+### Deserializing params
 
-### Deserializing params
+`param.SetJSON` requires SDK v1.20.0 or later.
 
 Param types (types ending in `Param`, such as `MessageNewParams` or `ToolUnionParam`) are designed for outgoing requests only. They marshal correctly to JSON but do not fully support round-trip deserialization. If you unmarshal raw JSON into a param struct, typed union fields like `OfBashTool20250124` will be nil even when the underlying JSON is valid.
 
 If you need to reconstruct params from raw JSON (for example, from a database, middleware, or a previous request), call `UnmarshalJSON` to populate non-union fields, then use `param.SetJSON` to attach the raw bytes for correct re-serialization:
 
-```shiki
+```go
 // Serialize params (for example, for storage or forwarding)
 b, err := json.Marshal(original)
 if err != nil {
@@ -372,17 +350,13 @@ b2, _ := json.Marshal(params)
 fmt.Println(string(b) == string(b2)) // true
 ```
 
-
+For this use case, `param.SetJSON` (available since v1.20.0) is preferred over the more general `param.Override[T](cli-sdks-libraries/sdks/any.md)` because it doesn't require spelling out the type parameter and makes the round-trip intent explicit.
 
-For this use case, `param.SetJSON` (available since v1.20.0) is preferred over the more general `param.Override[T](any)` because it doesn't require spelling out the type parameter and makes the round-trip intent explicit.
+## Response objects
 
-## Response objects
+All fields in response structs are ordinary value types (not pointers or wrappers). Response structs also include a special `JSON` field containing metadata about each property.
 
-All fields in response structs are ordinary value types (not pointers or wrappers).
-Response structs also include a special `JSON` field containing metadata about
-each property.
-
-```shiki
+```go
 type Animal struct {
 	Name   string `json:"name,nullable"`
 	Owners int    `json:"owners"`
@@ -396,14 +370,11 @@ type Animal struct {
 }
 ```
 
-
-
-To handle optional data, use the `.Valid()` method on the JSON field.
-`.Valid()` returns true when the field is present, non-`null`, and was unmarshaled successfully.
+To handle optional data, use the `.Valid()` method on the JSON field. `.Valid()` returns true when the field is present, non-`null`, and was unmarshaled successfully.
 
 If `.Valid()` is false, the corresponding field will be its zero value.
 
-```shiki
+```go
 raw := `{"owners": 1, "name": null}`
 
 var res Animal
@@ -430,29 +401,19 @@ res.JSON.Age.Raw() == ""               // true
 res.JSON.Age.Raw() == respjson.Omitted // true
 ```
 
-
+These `.JSON` structs also include an `ExtraFields` map containing any properties in the json response that were not specified in the struct. This can be useful for API features not yet present in the SDK.
 
-These `.JSON` structs also include an `ExtraFields` map containing
-any properties in the json response that were not specified
-in the struct. This can be useful for API features not yet
-present in the SDK.
-
-```shiki
+```go
 body := res.JSON.ExtraFields["my_unexpected_field"].Raw()
 ```
 
-
+### Response unions
 
-### Response unions
+In responses, unions are represented by a flattened struct containing all possible fields from each of the object variants. To convert it to a variant use the `.AsFooVariant()` method or the `.AsAny()` method if present.
 
-In responses, unions are represented by a flattened struct containing all possible fields from each of the
-object variants.
-To convert it to a variant use the `.AsFooVariant()` method or the `.AsAny()` method if present.
+If a response value union contains primitive values, primitive fields will be alongside the properties but prefixed with `Of` and feature the tag `json:"...,inline"`.
 
-If a response value union contains primitive values, primitive fields will be alongside
-the properties but prefixed with `Of` and feature the tag `json:"...,inline"`.
-
-```shiki
+```go
 type AnimalUnion struct {
 	// From variants [Dog], [Cat]
 	Owner Person `json:"owner"`
@@ -482,19 +443,13 @@ default:
 }
 ```
 
-
+## Error handling
 
-## Error handling
-
-When the API returns a non-success status code, the SDK returns an error with type
-`*anthropic.Error`. This contains the `StatusCode`, `*http.Request`, and
-`*http.Response` values of the request, along with the JSON of the error body
-(much like other response objects in the SDK). The error also includes the `RequestID`
-from the response headers, which is useful for troubleshooting with Anthropic support.
+When the API returns a non-success status code, the SDK returns an error with type `*anthropic.Error`. This contains the `StatusCode`, `*http.Request`, and `*http.Response` values of the request, along with the JSON of the error body (much like other response objects in the SDK). The error also includes the `RequestID` from the response headers, which is useful for troubleshooting with Anthropic support.
 
 To handle errors, use the `errors.As` pattern:
 
-```shiki
+```go
 _, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{{
@@ -518,20 +473,15 @@ if err != nil {
 }
 ```
 
-
+When other errors occur, they are returned unwrapped; for example, if HTTP transport fails, you might receive `*url.Error` wrapping `*net.OpError`.
 
-When other errors occur, they are returned unwrapped; for example,
-if HTTP transport fails, you might receive `*url.Error` wrapping `*net.OpError`.
+## Retries
 
-## Retries
-
-Certain errors will be automatically retried 2 times by default, with a short exponential backoff.
-The SDK retries by default all connection errors, 408 Request Timeout, 409 Conflict, 429 Rate Limit,
-and >=500 Internal errors.
+Certain errors will be automatically retried 2 times by default, with a short exponential backoff. The SDK retries by default all connection errors, 408 Request Timeout, 409 Conflict, 429 Rate Limit, and >=500 Internal errors.
 
 You can use the `WithMaxRetries` option to configure or disable this:
 
-```shiki
+```go
 // Configure the default for all requests:
 client := anthropic.NewClient(
 	option.WithMaxRetries(0), // default is 2
@@ -557,16 +507,13 @@ client := anthropic.NewClient(
 	)
 ```
 
-
-
-## Timeouts
+## Timeouts
 
 Non-streaming Messages requests time out after 10 minutes by default; other requests have no default timeout. Use context to configure a timeout for a request lifecycle.
 
-Note that if a request is [retried](#retries), the context timeout does not start over.
-To set a per-retry timeout, use `option.WithRequestTimeout()`.
+Note that if a request is [retried](cli-sdks-libraries/sdks/go.md), the context timeout does not start over. To set a per-retry timeout, use `option.WithRequestTimeout()`.
 
-```shiki
+```go
 // This sets the timeout for the request, including all the retries.
 ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
 defer cancel()
@@ -590,24 +537,19 @@ defer cancel()
 	)
 ```
 
-
+## Long requests
 
-## Long requests
+Consider using the streaming Messages API for longer running requests.
 
-Avoid setting a large `MaxTokens` value without using streaming as some networks may drop idle connections after a certain period of time, which
-can cause the request to fail or [timeout](#timeouts) without receiving a response from Anthropic.
+Avoid setting a large `MaxTokens` value without using streaming as some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](cli-sdks-libraries/sdks/go.md) without receiving a response from Anthropic.
 
-This SDK will also return an error if a non-streaming request is expected to be above roughly 10 minutes long.
-Calling `.Messages.NewStreaming()` or [setting a custom timeout](#timeouts) disables this error.
+This SDK will also return an error if a non-streaming request is expected to be above roughly 10 minutes long. Calling `.Messages.NewStreaming()` or [setting a custom timeout](cli-sdks-libraries/sdks/go.md) disables this error.
 
-## File uploads
+## File uploads
 
-Request parameters that correspond to file uploads in multipart requests are typed as
-`io.Reader`. The contents of the `io.Reader` will by default be sent as a multipart form
-part with the file name of "anonymous\_file" and content-type of "application/octet-stream", so the recommended approach is to specify a custom content-type with the `anthropic.File(reader io.Reader, filename string, contentType string)`
-helper, which wraps any `io.Reader` with the appropriate file name and content type.
+Request parameters that correspond to file uploads in multipart requests are typed as `io.Reader`. The contents of the `io.Reader` will by default be sent as a multipart form part with the file name of "anonymous\_file" and content-type of "application/octet-stream", so the recommended approach is to specify a custom content-type with the `anthropic.File(reader io.Reader, filename string, contentType string)` helper, which wraps any `io.Reader` with the appropriate file name and content type.
 
-```shiki
+```go
 // A file from the file system
 file, err := os.Open("/path/to/file.json")
 anthropic.FileUploadParams{
@@ -620,18 +562,15 @@ anthropic.FileUploadParams{
 }
 ```
 
-
+The file name and content-type can also be customized by implementing `Name() string` or `ContentType() string` on the run-time type of `io.Reader`. Note that `os.File` implements `Name() string`, so a file returned by `os.Open` will be sent with the file name on disk.
 
-The file name and content-type can also be customized by implementing `Name() string` or `ContentType() string` on the run-time type of `io.Reader`. Note that `os.File` implements `Name() string`, so a
-file returned by `os.Open` will be sent with the file name on disk.
-
-## Pagination
+## Pagination
 
 This library provides some conveniences for working with paginated list endpoints.
 
 You can use `.ListAutoPaging()` methods to iterate through items across all pages:
 
-```shiki
+```go
 iter := client.Messages.Batches.ListAutoPaging(context.TODO(), anthropic.MessageBatchListParams{
 	Limit: anthropic.Int(20),
 })
@@ -645,12 +584,9 @@ if err := iter.Err(); err != nil {
 }
 ```
 
-
+Or you can use simple `.List()` methods to fetch a single page and receive a standard response object with additional helper methods like `.GetNextPage()`:
 
-Or you can use simple `.List()` methods to fetch a single page and receive a standard response object
-with additional helper methods like `.GetNextPage()`:
-
-```shiki
+```go
 page, err := client.Messages.Batches.List(context.TODO(), anthropic.MessageBatchListParams{
 	Limit: anthropic.Int(20),
 })
@@ -665,16 +601,11 @@ if err != nil {
 }
 ```
 
-
+## RequestOptions
 
-## RequestOptions
+This library uses the functional options pattern. Functions defined in the `option` package return a `RequestOption`, which is a closure that mutates a `RequestConfig`. These options can be supplied to the client or at individual requests. For example:
 
-This library uses the functional options pattern. Functions defined in the
-`option` package return a `RequestOption`, which is a closure that mutates a
-`RequestConfig`. These options can be supplied to the client or at individual
-requests. For example:
-
-```shiki
+```go
 client := anthropic.NewClient(
 	// Adds a header to every request made by the client
 	option.WithHeader("X-Some-Header", "custom_header_info"),
@@ -688,35 +619,39 @@ client.Messages.New(context.TODO(), // ...,
 )
 ```
 
-
-
 The request option `option.WithDebugLog(nil)` may be helpful while debugging.
 
 See the [full list of request options](https://pkg.go.dev/github.com/anthropics/anthropic-sdk-go/option).
 
-## HTTP client customization
+## HTTP client customization
 
 For request middleware (`option.WithMiddleware`) and replacing the default `http.Client` (`option.WithHTTPClient`), see [SDK middleware](cli-sdks-libraries/middleware.md).
 
-## Platform integrations
+## Platform integrations
+
+For detailed platform setup guides with code examples, see:
+
+* [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
+* [Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md)
+* [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)
+* [Google Cloud](build-with-claude/claude-on-vertex-ai.md)
 
 The Go SDK supports the following platforms:
 
-- **Agent Platform:** `import "github.com/anthropics/anthropic-sdk-go/vertex"`. Use `vertex.WithGoogleAuth(ctx, region, projectID)` or `vertex.WithCredentials(ctx, region, projectID, creds)`.
-- **Bedrock:** `import "github.com/anthropics/anthropic-sdk-go/bedrock"`. Use `bedrock.NewMantleClient` for the Messages-API Bedrock endpoint (streams over SSE), or `bedrock.WithLoadDefaultConfig(ctx)` / `bedrock.WithConfig(cfg)` (`bedrock-runtime` path). Importing the `bedrock` package globally registers a decoder for `application/vnd.amazon.eventstream` with the SDK's streaming layer (through package `init()`). This applies whether you use the `bedrock-runtime` `WithConfig`/`WithLoadDefaultConfig` path or `NewMantleClient`.
-- **Claude Platform on AWS:** `import anthropicaws "github.com/anthropics/anthropic-sdk-go/aws"`. Use `anthropicaws.NewClient(ctx, cfg)` with an `anthropicaws.ClientConfig` value to construct a client; set `WorkspaceID` on the config or the `ANTHROPIC_AWS_WORKSPACE_ID` environment variable. The `anthropicaws` import alias avoids a name collision with `github.com/aws/aws-sdk-go-v2/aws` when both are imported. Available in beta.
-- **Foundry:** Not currently supported in the Go SDK. See [Claude in Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) for supported SDKs.
+* **Agent Platform:** `import "github.com/anthropics/anthropic-sdk-go/vertex"`. Use `vertex.WithGoogleAuth(ctx, region, projectID)` or `vertex.WithCredentials(ctx, region, projectID, creds)`.
+* **Bedrock:** `import "github.com/anthropics/anthropic-sdk-go/bedrock"`. Use `bedrock.NewMantleClient` for the Messages-API Bedrock endpoint (streams over SSE), or `bedrock.WithLoadDefaultConfig(ctx)` / `bedrock.WithConfig(cfg)` (`bedrock-runtime` path). Importing the `bedrock` package globally registers a decoder for `application/vnd.amazon.eventstream` with the SDK's streaming layer (through package `init()`). This applies whether you use the `bedrock-runtime` `WithConfig`/`WithLoadDefaultConfig` path or `NewMantleClient`.
+* **Claude Platform on AWS:** `import anthropicaws "github.com/anthropics/anthropic-sdk-go/aws"`. Use `anthropicaws.NewClient(ctx, cfg)` with an `anthropicaws.ClientConfig` value to construct a client; set `WorkspaceID` on the config or the `ANTHROPIC_AWS_WORKSPACE_ID` environment variable. The `anthropicaws` import alias avoids a name collision with `github.com/aws/aws-sdk-go-v2/aws` when both are imported. Available in beta.
+* **Foundry:** Not currently supported in the Go SDK. See [Claude in Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) for supported SDKs.
 
 Use `bedrock.NewMantleClient` for new projects; `bedrock.WithLoadDefaultConfig`/`WithConfig` remain for existing applications using the Bedrock `InvokeModel` API.
 
-## Advanced usage
+## Advanced usage
 
-### Accessing raw response data (for example, response headers)
+### Accessing raw response data (for example, response headers)
 
-You can access the raw HTTP response data by using the `option.WithResponseInto()` request option. This is useful when
-you need to examine response headers, status codes, or other details.
+You can access the raw HTTP response data by using the `option.WithResponseInto()` request option. This is useful when you need to examine response headers, status codes, or other details.
 
-```shiki
+```go
 // Create a variable to store the HTTP response
 var response *http.Response
 message, err := client.Messages.New(
@@ -744,19 +679,15 @@ fmt.Printf("Status Code: %d\n", response.StatusCode)
 fmt.Printf("Headers: %+#v\n", response.Header)
 ```
 
-
+### Making custom/undocumented requests
 
-### Making custom/undocumented requests
+This library is typed for convenient access to the documented API. If you need to access undocumented endpoints, params, or response properties, the library can still be used.
 
-This library is typed for convenient access to the documented API. If you need to access undocumented
-endpoints, params, or response properties, the library can still be used.
+#### Undocumented endpoints
 
-#### Undocumented endpoints
+To make requests to undocumented endpoints, you can use `client.Get`, `client.Post`, and other HTTP verbs. `RequestOptions` on the client, such as retries, will be respected when making these requests.
 
-To make requests to undocumented endpoints, you can use `client.Get`, `client.Post`, and other HTTP verbs.
-`RequestOptions` on the client, such as retries, will be respected when making these requests.
-
-```shiki
+```go
 var (
 	// params can be an io.Reader, a []byte, an encoding/json serializable object,
 	// or a "...Params" struct defined in this library.
@@ -772,14 +703,11 @@ if err != nil {
 }
 ```
 
-
+#### Undocumented request params
 
-#### Undocumented request params
+To make requests using undocumented parameters, you may use either the `option.WithQuerySet()` or the `option.WithJSONSet()` methods.
 
-To make requests using undocumented parameters, you may use either the `option.WithQuerySet()`
-or the `option.WithJSONSet()` methods.
-
-```shiki
+```go
 params := FooNewParams{
 	ID: "id_xxxx",
 	Data: FooNewParamsData{
@@ -789,17 +717,13 @@ params := FooNewParams{
 client.Foo.New(context.Background(), params, option.WithJSONSet("data.last_name", "Doe"))
 ```
 
-
+#### Undocumented response properties
 
-#### Undocumented response properties
-
-To access undocumented response properties, you may either access the raw JSON of the response as a string
-with `result.JSON.RawJSON()`, or get the raw JSON of a particular field on the result with
-`result.JSON.Foo.Raw()`.
+To access undocumented response properties, you may either access the raw JSON of the response as a string with `result.JSON.RawJSON()`, or get the raw JSON of a particular field on the result with `result.JSON.Foo.Raw()`.
 
 Any fields that are not present on the response struct are saved and can be accessed through `result.JSON.ExtraFields`, which is a `map[string]respjson.Field`.
 
-## Semantic versioning
+## Semantic versioning
 
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backward-incompatible changes may be released as minor versions:
 
@@ -810,16 +734,12 @@ Backward-compatibility is taken seriously to ensure you can rely on a smooth upg
 
 Your feedback is welcome; open an [issue](https://github.com/anthropics/anthropic-sdk-go/issues) with questions, bugs, or suggestions.
 
-## Additional resources
+## Additional resources
 
-- [GitHub repository](https://github.com/anthropics/anthropic-sdk-go)
-- [Go package documentation](https://pkg.go.dev/github.com/anthropics/anthropic-sdk-go)
-- [API reference](api/overview.md)
-- [Streaming Messages](build-with-claude/streaming.md)
-
-Was this page helpful?
-
-
+* [GitHub repository](https://github.com/anthropics/anthropic-sdk-go)
+* [Go package documentation](https://pkg.go.dev/github.com/anthropics/anthropic-sdk-go)
+* [API reference](api/overview.md)
+* [Streaming Messages](build-with-claude/streaming.md)
 
 ---
 

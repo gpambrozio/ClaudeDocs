@@ -1,16 +1,6 @@
 # Retrieve remote session messages
 
-To enable the Compliance API, see the setup guide.
-
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
-
-Copy page
-
-
-
-# Retrieve remote session messages
-
-GET/v1/compliance/apps/sessions/remote/{claude\_remote\_session\_id}/messages
+**GET** `/v1/compliance/apps/sessions/remote/{claude_remote_session_id}/messages`
 
 Retrieve one remote session's transcript: user prompts, assistant
 responses, and tool calls and results. Thinking blocks and images are
@@ -33,366 +23,248 @@ Returns 404 while the session is still `pending`, for deleted sessions,
 and for sessions outside the organizations the key may read. A
 malformed session identifier returns 400.
 
-##### Path parameters
+## Path parameters
 
-claude\_remote\_session\_id: string
+- `claude_remote_session_id: string`
 
-The remote session identifier (`cse_...`) to retrieve
+  The remote session identifier (`cse_...`) to retrieve
 
-##### Query parameters
+## Query parameters
 
-
+- `limit: optional number`
 
-limit: optional number
+  Maximum results (default: 100, max: 1000)
 
-Maximum results (default: 100, max: 1000)
+  default: 100, maximum: 1000, minimum: 1
 
-default100
+- `order: optional "asc" or "desc"`
 
-maximum1000
+  Sort direction. `asc` (oldest-first) or `desc`.
 
-minimum1
+  default: asc
 
-
+  - `"asc"`
 
-order: optional "asc" or "desc"
+  - `"desc"`
 
-Sort direction. `asc` (oldest-first) or `desc`.
+- `page: optional string`
 
-defaultasc
+  Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
-One of the following:
+- `tool_result_max_bytes: optional number`
 
-"asc"
+  Truncate each text item inside a tool result to at most this many bytes (cut on a code-point boundary). Pass `-1` to request the server maximum. `0` is not a valid value.
 
-"desc"
+  default: 10000, maximum: 2147483647, minimum: -1
 
-page: optional string
+- `tool_use_input_max_bytes: optional number`
 
-Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
+  Truncate each tool-use input to at most this many bytes (cut on a code-point boundary so the result is valid UTF-8). Pass `-1` to request the server maximum. `0` is not a valid value.
 
-
+  default: 10000, maximum: 2147483647, minimum: -1
 
-tool\_result\_max\_bytes: optional number
+## Headers
 
-Truncate each text item inside a tool result to at most this many bytes (cut on a code-point boundary). Pass `-1` to request the server maximum. `0` is not a valid value.
+- `"x-api-key": optional string`
 
-default10000
+## Returns
 
-maximum2147483647
+- `data: array of object`
 
-minimum-1
+  Transcript turns for this page, ordered by transcript position. `created_at` is a commit timestamp and may tie or invert under concurrent writes; do not re-sort by it.
 
-
+  - `id: string`
 
-tool\_use\_input\_max\_bytes: optional number
+    Unique identifier for the message, e.g. `csev_abc123`
 
-Truncate each tool-use input to at most this many bytes (cut on a code-point boundary so the result is valid UTF-8). Pass `-1` to request the server maximum. `0` is not a valid value.
+  - `content: array of object or object or object`
 
-default10000
+    Content blocks within the message
 
-maximum2147483647
+    - `Text object`
 
-minimum-1
+      Text content block.
 
-##### Headers
+      - `text: string`
 
-"x-api-key": optional string
+        Text content from the user or the assistant
 
-##### Returns
+      - `truncated: boolean`
 
-
+        True when `text` exceeded the server-defined maximum (approximately 1 MiB) and was shortened.
 
-data: array of object{ id, content, content\_unavailable, 3 more }
+        default: false
 
-Transcript turns for this page, ordered by transcript position. `created_at` is a commit timestamp and may tie or invert under concurrent writes; do not re-sort by it.
+      - `type: "text"`
 
-id: string
+        default: text
 
-Unique identifier for the message, e.g. `csev_abc123`
+    - `ToolUse object`
 
-
+      Tool invocation requested by the assistant.
 
-content: array of object{ text, truncated, type } or object{ id, input, name, 2 more } or object{ content, is\_error, name, 3 more }
+      - `id: string or null`
 
-Content blocks within the message
+        Tool-use ID, e.g. 'toolu_01AbC...'
 
-One of the following:
+      - `input: string`
 
-
+        Arguments passed to the tool, as a JSON-encoded string. May be shortened — see the `truncated` field
 
-Text object{ text, truncated, type }
+      - `name: string`
 
-Text content block.
+        Name of the tool invoked
 
-text: string
+      - `truncated: boolean`
 
-Text content from the user or the assistant
+        True when `input` was shortened. Pass `tool_use_input_max_bytes=-1` to request full content, subject to the server-side maximum.
 
-
+        default: false
 
-truncated: boolean
+      - `type: "tool_use"`
 
-True when `text` exceeded the server-defined maximum (approximately 1 MiB) and was shortened.
+        default: tool_use
 
-defaultfalse
+    - `ToolResult object`
 
-
+      Result returned by a tool invocation.
 
-type: "text"
+      - `content: array of object`
 
-defaulttext
+        Text content returned by the tool. Non-text item types are omitted.
 
-
+        - `text: string`
 
-ToolUse object{ id, input, name, 2 more }
+          Text returned by the tool
 
-Tool invocation requested by the assistant.
+        - `type: "text"`
 
-id: string or null
+          default: text
 
-Tool-use ID, e.g. 'toolu\_01AbC...'
+      - `is_error: boolean`
 
-input: string
+        True when the tool reported an error
 
-Arguments passed to the tool, as a JSON-encoded string. May be shortened — see the `truncated` field
+      - `name: string`
 
-name: string
+        Name of the tool that produced this result
 
-Name of the tool invoked
+      - `tool_use_id: string or null`
 
-
+        ID of the tool_use block this result responds to
 
-truncated: boolean
+      - `truncated: boolean`
 
-True when `input` was shortened. Pass `tool_use_input_max_bytes=-1` to request full content, subject to the server-side maximum.
+        True when one or more text items in `content` were shortened. Pass `tool_result_max_bytes=-1` to request full content, subject to the server-side maximum.
 
-defaultfalse
+        default: false
 
-
+      - `type: "tool_result"`
 
-type: "tool\_use"
+        default: tool_result
 
-defaulttool\_use
+  - `content_unavailable: boolean`
 
-
+    True when the stored content could not be returned — it could not be decrypted, or it exceeded the server's per-event size bound. `content` is empty in that case; this distinguishes 'no content' from 'content withheld'.
 
-ToolResult object{ content, is\_error, name, 3 more }
+    default: false
 
-Result returned by a tool invocation.
+  - `created_at: string`
 
-
+    When the message was recorded (RFC 3339, UTC)
 
-content: array of object{ text, type }
+    format: date-time
 
-Text content returned by the tool. Non-text item types are omitted.
+  - `role: "assistant" or "user"`
 
-text: string
+    Message sender (`user` or `assistant`)
 
-Text returned by the tool
+    - `"assistant"`
 
-
+    - `"user"`
 
-type: "text"
+  - `sent_by_user_id: string or null`
 
-defaulttext
+    Identifier of the human account that sent this turn on an agent-owned session. Null on user-owned sessions, where every user-role turn was sent by the session's `user`.
 
-is\_error: boolean
+- `next_page: string or null`
 
-True when the tool reported an error
+  Opaque page token; pass as `page` to retrieve the next page. Null when no rows exist after this page. Treat this value as opaque; do not parse or store it long-term, as the format may change without notice.
 
-name: string
+- `session: object`
 
-Name of the tool that produced this result
+  Session metadata. `started_by_user`, `user.email_address`, and `claude_project_id` are always null on this endpoint; the messages endpoint resolves neither email addresses nor project bindings.
 
-tool\_use\_id: string or null
+  - `id: string`
 
-ID of the tool\_use block this result responds to
+    Remote session identifier
 
-
+  - `agent_id: string or null`
 
-truncated: boolean
+    Identifier of the automated agent that owns the session. Null for user-owned sessions. At most one of `user` and `agent_id` is set.
 
-True when one or more text items in `content` were shortened. Pass `tool_result_max_bytes=-1` to request full content, subject to the server-side maximum.
+  - `claude_project_id: string or null`
 
-defaultfalse
+    ID of the project the session is bound to. Null when the session has no project binding.
 
-
+  - `created_at: string`
 
-type: "tool\_result"
+    When the session was created (RFC 3339, UTC)
 
-defaulttool\_result
+    format: date-time
 
-
+  - `organization_uuid: string`
 
-content\_unavailable: boolean
+    UUID of the organization the session belongs to
 
-True when the stored content could not be returned — it could not be decrypted, or it exceeded the server's per-event size bound. `content` is empty in that case; this distinguishes 'no content' from 'content withheld'.
+  - `product_surface: string or null`
 
-defaultfalse
+    The Claude product the session was created from. Currently `cowork_remote`, for Cowork sessions started on claude.ai web or mobile. More values will appear as other surfaces launch, so treat any unrecognized value as an unclassified surface rather than an error. Null for sessions created before this field was recorded, for surfaces that do not stamp it, and for unrecognized tag values.
 
-
+  - `started_by_user: object or null`
 
-created\_at: string
+    A user associated with a remote session.
 
-When the message was recorded (RFC 3339, UTC)
+    - `id: string`
 
-formatdate-time
+      User identifier
 
-
+    - `email_address: string or null`
 
-role: "assistant" or "user"
+      User's email address. Null when the user is no longer a member of an organization the key may read — `id` remains set so attribution is preserved. The messages endpoint does not resolve email addresses; this field is always null there.
 
-Message sender (`user` or `assistant`)
+  - `status: string`
 
-One of the following:
+    Session lifecycle state. One of `active`, `paused`, `archived`, or `failed` — the lifecycle states the owning product surface exposes — plus `pending`, a brief transient state that resolves before any transcript content exists. The list endpoint includes `pending`; the messages endpoint returns 404 for it. Deleted sessions are not returned on either endpoint. Treat unrecognized values as an unknown state rather than an error.
 
-"assistant"
+  - `updated_at: string`
 
-"user"
+    When the session was last modified (RFC 3339, UTC)
 
-sent\_by\_user\_id: string or null
+    format: date-time
 
-Identifier of the human account that sent this turn on an agent-owned session. Null on user-owned sessions, where every user-role turn was sent by the session's `user`.
+  - `user: object or null`
 
-next\_page: string or null
+    A user associated with a remote session.
 
-Opaque page token; pass as `page` to retrieve the next page. Null when no rows exist after this page. Treat this value as opaque; do not parse or store it long-term, as the format may change without notice.
+    - `id: string`
 
-
+      User identifier
 
-session: object{ id, agent\_id, claude\_project\_id, 7 more }
+    - `email_address: string or null`
 
-Session metadata. `started_by_user`, `user.email_address`, and `claude_project_id` are always null on this endpoint; the messages endpoint resolves neither email addresses nor project bindings.
+      User's email address. Null when the user is no longer a member of an organization the key may read — `id` remains set so attribution is preserved. The messages endpoint does not resolve email addresses; this field is always null there.
 
-id: string
+## Example
 
-Remote session identifier
-
-agent\_id: string or null
-
-Identifier of the automated agent that owns the session. Null for user-owned sessions. At most one of `user` and `agent_id` is set.
-
-claude\_project\_id: string or null
-
-ID of the project the session is bound to. Null when the session has no project binding.
-
-
-
-created\_at: string
-
-When the session was created (RFC 3339, UTC)
-
-formatdate-time
-
-organization\_uuid: string
-
-UUID of the organization the session belongs to
-
-product\_surface: string or null
-
-The Claude product the session was created from. Currently `cowork_remote`, for Cowork sessions started on claude.ai web or mobile. More values will appear as other surfaces launch, so treat any unrecognized value as an unclassified surface rather than an error. Null for sessions created before this field was recorded, for surfaces that do not stamp it, and for unrecognized tag values.
-
-
-
-started\_by\_user: object{ id, email\_address } or null
-
-A user associated with a remote session.
-
-id: string
-
-User identifier
-
-email\_address: string or null
-
-User's email address. Null when the user is no longer a member of an organization the key may read — `id` remains set so attribution is preserved. The messages endpoint does not resolve email addresses; this field is always null there.
-
-status: string
-
-Session lifecycle state. One of `active`, `paused`, `archived`, or `failed` — the lifecycle states the owning product surface exposes — plus `pending`, a brief transient state that resolves before any transcript content exists. The list endpoint includes `pending`; the messages endpoint returns 404 for it. Deleted sessions are not returned on either endpoint. Treat unrecognized values as an unknown state rather than an error.
-
-
-
-updated\_at: string
-
-When the session was last modified (RFC 3339, UTC)
-
-formatdate-time
-
-
-
-user: object{ id, email\_address } or null
-
-A user associated with a remote session.
-
-id: string
-
-User identifier
-
-email\_address: string or null
-
-User's email address. Null when the user is no longer a member of an organization the key may read — `id` remains set so attribution is preserved. The messages endpoint does not resolve email addresses; this field is always null there.
-
-Retrieve remote session messages
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/sessions/remote/$CLAUDE_REMOTE_SESSION_ID/messages \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "content": [
-        {
-          "text": "text",
-          "truncated": true,
-          "type": "text"
-        }
-      ],
-      "content_unavailable": true,
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "role": "assistant",
-      "sent_by_user_id": "sent_by_user_id"
-    }
-  ],
-  "next_page": "next_page",
-  "session": {
-    "id": "id",
-    "agent_id": "agent_id",
-    "claude_project_id": "claude_project_id",
-    "created_at": "2019-12-27T18:11:19.117Z",
-    "organization_uuid": "organization_uuid",
-    "product_surface": "product_surface",
-    "started_by_user": {
-      "id": "id",
-      "email_address": "email_address"
-    },
-    "status": "status",
-    "updated_at": "2019-12-27T18:11:19.117Z",
-    "user": {
-      "id": "id",
-      "email_address": "email_address"
-    }
-  }
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

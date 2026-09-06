@@ -1,124 +1,87 @@
 # List Vaults
 
-Copy page
+`$ ant beta:vaults list`
 
-
-
-CLI
-
-# List Vaults
-
-$ ant beta:vaults list
-
-GET/v1/vaults
+**GET** `/v1/vaults`
 
 List Vaults
 
-##### ParametersExpand Collapse
+## Parameters
 
---include-archived: optional boolean
+- `--include-archived: optional boolean`
 
-Query param: Whether to include archived vaults in the results.
+  Query param: Whether to include archived vaults in the results.
 
---limit: optional number
+- `--limit: optional number`
 
-Query param: Maximum number of vaults to return per page. Defaults to 20, maximum 100.
+  Query param: Maximum number of vaults to return per page. Defaults to 20, maximum 100.
 
---page: optional string
+  format: int32
 
-Query param: Opaque pagination token from a previous `list_vaults` response.
+- `--page: optional string`
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+  Query param: Opaque pagination token from a previous `list_vaults` response.
 
-Header param: Optional header to specify the beta version(s) you want to use.
+- `--beta: optional array of AnthropicBeta`
 
-##### ReturnsExpand Collapse
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-
+## Returns
 
-BetaManagedAgentsListVaultsResponse: object { data, next\_page } 
+- `BetaManagedAgentsListVaultsResponse: object`
 
-Response containing a paginated list of vaults.
+  Response containing a paginated list of vaults.
 
-
+  - `data: optional array of BetaManagedAgentsVault`
 
-data: optional array of [BetaManagedAgentsVault](api/beta/vaults.md) { id, archived\_at, created\_at, 4 more } 
+    List of vaults.
 
-List of vaults.
+    - `id: string`
 
-id: string
+      Unique identifier for the vault.
 
-Unique identifier for the vault.
+    - `archived_at: string`
 
-archived\_at: string
+      A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+      format: date-time
 
-created\_at: string
+    - `created_at: string`
 
-A timestamp in RFC 3339 format
+      A timestamp in RFC 3339 format
 
-display\_name: string
+      format: date-time
 
-Human-readable name for the vault.
+    - `display_name: string`
 
-metadata: map[string]
+      Human-readable name for the vault.
 
-Arbitrary key-value metadata attached to the vault.
+    - `metadata: map[string]`
 
-
+      Arbitrary key-value metadata attached to the vault.
 
-type: "vault"
+    - `type: "vault"`
 
-"vault"
+    - `updated_at: string`
 
-updated\_at: string
+      A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+      format: date-time
 
-next\_page: optional string
+  - `next_page: optional string`
 
-Pagination token for the next page, or null if no more results.
+    Pagination token for the next page, or null if no more results.
 
-List Vaults
+## Example
 
-CLI
-
-```shiki
+```bash
 ant beta:vaults list \
   --api-key my-anthropic-api-key
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
-      "archived_at": null,
-      "created_at": "2026-03-15T10:00:00Z",
-      "display_name": "Example vault",
-      "metadata": {
-        "environment": "production"
-      },
-      "type": "vault",
-      "updated_at": "2026-03-15T10:00:00Z"
-    }
-  ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

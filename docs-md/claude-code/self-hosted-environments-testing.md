@@ -1,22 +1,25 @@
 # Test self-hosted environments end to end
 
+> Verify a self-hosted runner image from CI: dispatch a session with the CLI, read Claude's replies through a Stop hook, and script the full loop.
+
 Self-hosted environments are in public beta on Team and Enterprise plans; [Availability and limitations](self-hosted-environments.md) covers the enablement path. This page is the CI test recipe; see the [quickstart](self-hosted-environments-quickstart.md) for setup and [Deploy to production](self-hosted-environments-deploy.md) for the fleet recipes.
 
-In a [self-hosted environment](self-hosted-environments.md), Claude Code [cloud sessions](claude-code-on-the-web.md) run on a runner image you build and maintain. Before rolling a new image to your production environment, drive a full session against a test environment from a script: create a session, read Claude’s reply, send a follow-up, and read that reply too. This is the shape of a CI smoke test that verifies your runner image, git access, and any custom tools before you promote a change.
-This recipe assumes you’ve already [set up an environment and a runner](self-hosted-environments-quickstart.md), and that your CI job starts the runner process on the same host as the test script, the natural setup for testing a new runner image. A Stop hook you install on the runner writes each turn’s final reply to a local file, and the script reads it from there, so the only calls to the Anthropic API are the two dispatches themselves. If your test runners are on separate infrastructure, see [Remote test runners](#remote-test-runners).
+In a [self-hosted environment](self-hosted-environments.md), Claude Code [cloud sessions](claude-code-on-the-web.md) run on a runner image you build and maintain. Before rolling a new image to your production environment, drive a full session against a test environment from a script: create a session, read Claude's reply, send a follow-up, and read that reply too. This is the shape of a CI smoke test that verifies your runner image, git access, and any custom tools before you promote a change.
 
-## [​](#install-the-capture-hook-on-your-test-runner) Install the capture hook on your test runner
+This recipe assumes you've already [set up an environment and a runner](self-hosted-environments-quickstart.md), and that your CI job starts the runner process on the same host as the test script, the natural setup for testing a new runner image. A Stop hook you install on the runner writes each turn's final reply to a local file, and the script reads it from there, so the only calls to the Anthropic API are the two dispatches themselves. If your test runners are on separate infrastructure, see [Remote test runners](#remote-test-runners).
 
-The read-back works through a Claude Code [Stop hook](hooks.md): when Claude finishes a turn, the hook receives the final assistant message as `last_assistant_message` in its stdin JSON and appends it to `$E2E_REPLY_DIR/<session_id>.txt`. Install it the same way as the [commit-nudge Stop hook](self-hosted-environments-configuration.md), on the runner host’s `~/.claude/`, which the runner seeds into every session.
+## Install the capture hook on your test runner
 
-### [​](#save-the-hook-files) Save the hook files
+The read-back works through a Claude Code [Stop hook](hooks.md): when Claude finishes a turn, the hook receives the final assistant message as `last_assistant_message` in its stdin JSON and appends it to `$E2E_REPLY_DIR/<session_id>.txt`. Install it the same way as the [commit-nudge Stop hook](self-hosted-environments-configuration.md), on the runner host's `~/.claude/`, which the runner seeds into every session.
+
+### Save the hook files
 
 Save the two files below on the runner host:
 
-- The settings block: merge into `~/.claude/settings.json` on the runner host
-- The script: save as `~/.claude/hooks/e2e-stop-hook-capture.sh` on the runner host and make it executable
+* The settings block: merge into `~/.claude/settings.json` on the runner host
+* The script: save as `~/.claude/hooks/e2e-stop-hook-capture.sh` on the runner host and make it executable
 
-```shiki
+```json
 {
   "hooks": {
     "Stop": [
@@ -34,7 +37,7 @@ Save the two files below on the runner host:
 }
 ```
 
-```shiki
+```sh
 #!/bin/sh
 # Stop hook for testing a self-hosted environment end to end: writes each
 # turn's final assistant reply to $E2E_REPLY_DIR/<session_id>.txt so a
@@ -57,34 +60,35 @@ jq -r '.last_assistant_message // empty' >> "$E2E_REPLY_DIR/$sid.txt" 2>/dev/nul
 exit 0
 ```
 
-### [​](#before-you-start-the-runner) Before you start the runner
+### Before you start the runner
 
 Two things the hook depends on:
 
-- Install it before you start the runner. The runner snapshots `~/.claude/` once at startup, so a hook added to a running runner takes effect only after a restart.
-- Export `E2E_REPLY_DIR` to the runner process. The hook is a no-op when the variable is unset or the directory doesn’t exist, so set it wherever you start the runner, such as the systemd unit, pod spec, or CI step. The test script below requires it too.
+* Install it before you start the runner. The runner snapshots `~/.claude/` once at startup, so a hook added to a running runner takes effect only after a restart.
+* Export `E2E_REPLY_DIR` to the runner process. The hook is a no-op when the variable is unset or the directory doesn't exist, so set it wherever you start the runner, such as the systemd unit, pod spec, or CI step. The test script below requires it too.
 
-Install this hook only on runners serving your test environment. It writes every session’s final reply to disk whenever `E2E_REPLY_DIR` exists, which is harmless on a throwaway CI runner but not something to carry into a production-environment runner image where the variable might be set by accident.
+Install this hook only on runners serving your test environment. It writes every session's final reply to disk whenever `E2E_REPLY_DIR` exists, which is harmless on a throwaway CI runner but not something to carry into a production-environment runner image where the variable might be set by accident.
 
-## [​](#run-the-test-loop) Run the test loop
+## Run the test loop
 
 The `--environment` and `--ref` dispatch flags require Claude Code v2.1.224 or later on the machine that runs the script, the same floor as the runner itself. With the hook in place and a runner started on this host, the test script:
 
-1. Creates a session on the test environment with `claude -p "<prompt>" --environment <environment-id> --output-format json`, run from a git checkout so the CLI can auto-detect the repository from the `origin` remote. The optional `--ref <branch>` bases the session’s checkout on a named ref instead of local HEAD. The command creates the session, prints one line of JSON containing `session_id`, and exits without waiting for Claude’s reply.
+1. Creates a session on the test environment with `claude -p "<prompt>" --environment <environment-id> --output-format json`, run from a git checkout so the CLI can auto-detect the repository from the `origin` remote. The optional `--ref <branch>` bases the session's checkout on a named ref instead of local HEAD. The command creates the session, prints one line of JSON containing `session_id`, and exits without waiting for Claude's reply.
 2. Waits for the reply to appear in `$E2E_REPLY_DIR/<session_id>.txt`, written by the Stop hook on the runner once the turn completes.
 3. Sends a follow-up with `claude -p "<message>" --cloud <session_id> --output-format json` (see [Send a follow-up message to a running session](claude-code-on-the-web.md)), which posts a user event to the existing session and exits.
-4. Waits for the follow-up’s reply the same way as step 2.
+4. Waits for the follow-up's reply the same way as step 2.
 
-### [​](#environment-dispatch-behavior) `--environment` dispatch behavior
+### `--environment` dispatch behavior
 
 Claude Code creates the session, prints the session ID and a link to it, and exits.
-The flag takes precedence over the [`remote.defaultEnvironmentId`](settings-reference.md) setting. It doesn’t support `--output-format stream-json`, and can’t be combined with flags that resume, attach to, or preconfigure a session, such as `--resume`, `--continue`, `--teleport`, `--session-id`, or `--init-only`. `--cloud` is rejected with a session ID or URL, and in non-interactive runs when it carries a description. A bare `--cloud` is treated as absent. From a terminal, you can pass the task as the `--cloud` description instead of a positional prompt.
 
-## [​](#example-script) Example script
+The flag takes precedence over the [`remote.defaultEnvironmentId`](settings-reference.md) setting. It doesn't support `--output-format stream-json`, and can't be combined with flags that resume, attach to, or preconfigure a session, such as `--resume`, `--continue`, `--teleport`, `--session-id`, or `--init-only`. `--cloud` is rejected with a session ID or URL, and in non-interactive runs when it carries a description. A bare `--cloud` is treated as absent. From a terminal, you can pass the task as the `--cloud` description instead of a positional prompt.
 
-The script below runs the full loop against `$CLAUDE_TEST_ENVIRONMENT_ID`, your test environment’s `ccpool_...` ID, shown in the environment’s detail dialog on the admin page or returned by the [create-environment call](#create-a-dedicated-test-environment), and asserts on a sentinel phrase in each reply. Run it from a git checkout of the repository you want the session to work in, after starting a runner on this host with the capture hook installed and `E2E_REPLY_DIR` exported.
+## Example script
 
-```shiki
+The script below runs the full loop against `$CLAUDE_TEST_ENVIRONMENT_ID`, your test environment's `ccpool_...` ID, shown in the environment's detail dialog on the admin page or returned by the [create-environment call](#create-a-dedicated-test-environment), and asserts on a sentinel phrase in each reply. Run it from a git checkout of the repository you want the session to work in, after starting a runner on this host with the capture hook installed and `E2E_REPLY_DIR` exported.
+
+```bash
 #!/usr/bin/env bash
 # End-to-end test against a self-hosted environment, using Stop-hook read-back.
 # Prereqs: `claude auth login` has been run on this machine (see "Authenticate
@@ -154,11 +158,11 @@ echo "PASS: test-environment round-trip (session $SESSION_ID)"
 
 Replace the `TURN1`/`TURN2` prompts and `EXPECT1`/`EXPECT2` sentinels with whatever exercises your setup, such as asking Claude to run one of your custom MCP tools and asserting on its output.
 
-## [​](#remote-test-runners) Remote test runners
+## Remote test runners
 
-If your test runners are on separate infrastructure, such as a persistent Kubernetes fleet your CI job can’t share a filesystem with, swap the file write in the Stop hook for a POST to an endpoint your driver listens on:
+If your test runners are on separate infrastructure, such as a persistent Kubernetes fleet your CI job can't share a filesystem with, swap the file write in the Stop hook for a POST to an endpoint your driver listens on:
 
-```shiki
+```sh
 #!/bin/sh
 # Variant of the capture hook for runners on separate infrastructure.
 # Set E2E_REPLY_URL on the runner to an endpoint the driver controls.
@@ -172,37 +176,39 @@ exit 0
 
 On the driver side, run anything that accepts the POST and holds the reply until the test asks for it, such as a small HTTP listener inside the CI job or a webhook receiver you already run. The hook runs on your infrastructure, so the endpoint only needs to be reachable from your runners.
 
-## [​](#authenticate-from-ci) Authenticate from CI
+## Authenticate from CI
 
-Both `claude -p ... --environment` and `claude -p ... --cloud` authenticate with a claude.ai OAuth token; API keys, such as `sk-ant-xxxxx`, aren’t accepted for either call. Two approaches make a token available in CI.
+Both `claude -p ... --environment` and `claude -p ... --cloud` authenticate with a claude.ai OAuth token; API keys, such as `sk-ant-xxxxx`, aren't accepted for either call. Two approaches make a token available in CI.
 
-### [​](#long-lived-ci-host) Long-lived CI host
+### Long-lived CI host
 
-Run `claude auth login` once interactively on the machine that executes the script, using a dedicated user account for automation. Claude Code stores the token in the OS keychain on macOS, or in `~/.claude/.credentials.json` on Linux and Windows. On a macOS host whose Keychain can’t be written, as is typical in an SSH session where the login Keychain stays locked, Claude Code stores the token in `~/.claude/.credentials.json` there too. See [Credential management](authentication.md).
+Run `claude auth login` once interactively on the machine that executes the script, using a dedicated user account for automation. Claude Code stores the token in the OS keychain on macOS, or in `~/.claude/.credentials.json` on Linux and Windows. On a macOS host whose Keychain can't be written, as is typical in an SSH session where the login Keychain stays locked, Claude Code stores the token in `~/.claude/.credentials.json` there too. See [Credential management](authentication.md).
+
 The CLI refreshes the short-lived access token automatically on each invocation, but the underlying refresh-token grant is capped at 30 days from the initial login, so re-run `claude auth login` interactively on that host every 30 days.
 
-### [​](#ephemeral-ci-runners) Ephemeral CI runners
+### Ephemeral CI runners
 
-There is no long-lived CI token for this today. The scope that grants remote-session control, `user:sessions:claude_code`, is capped server-side at 30 days, so `claude setup-token`, which mints a one-year inference-only token, doesn’t cover it. The [environment secret](self-hosted-environments-quickstart.md) isn’t accepted either, since it only authorizes a runner to register with the environment, not to create sessions.
-To provision a stored login onto an ephemeral runner, set [`CLAUDE_CODE_OAUTH_REFRESH_TOKEN` and `CLAUDE_CODE_OAUTH_SCOPES`](env-vars.md) so `claude auth login` exchanges the token without a browser; the same 30-day cap applies to the refresh grant. Contact your Anthropic account team if you need a machine-identity path that isn’t bound to a human account.
+There is no long-lived CI token for this today. The scope that grants remote-session control, `user:sessions:claude_code`, is capped server-side at 30 days, so `claude setup-token`, which mints a one-year inference-only token, doesn't cover it. The [environment secret](self-hosted-environments-quickstart.md) isn't accepted either, since it only authorizes a runner to register with the environment, not to create sessions.
 
-## [​](#create-a-dedicated-test-environment) Create a dedicated test environment
+To provision a stored login onto an ephemeral runner, set [`CLAUDE_CODE_OAUTH_REFRESH_TOKEN` and `CLAUDE_CODE_OAUTH_SCOPES`](env-vars.md) so `claude auth login` exchanges the token without a browser; the same 30-day cap applies to the refresh grant. Contact your Anthropic account team if you need a machine-identity path that isn't bound to a human account.
+
+## Create a dedicated test environment
 
 Create and delete environments programmatically so each CI run gets a clean one; the runner your CI job starts registers into the fresh environment. The create and delete calls below are the same endpoints that the **Cloud environments** admin page on claude.ai uses, and they require the `anthropic-beta: ccr-byoc-2025-07-29` header.
 
-### [​](#mint-the-admin-token) Mint the admin token
+### Mint the admin token
 
 `$ADMIN_TOKEN` is a claude.ai OAuth access token for an account that holds an Owner role, minted the same way as [Authenticate from CI](#authenticate-from-ci):
 
-- **Mint it**: run `claude auth login` with an account that holds an Owner role, then read the current access token from wherever [Long-lived CI host](#long-lived-ci-host) says Claude Code stored it.
-- **Read it fresh each run**: the CLI rotates the access token, and the same 30-day refresh-grant cap applies, so don’t store a copy.
-- **Pass it via stdin**: as the example does, so the token never lands in curl’s argument list or your build log.
+* **Mint it**: run `claude auth login` with an account that holds an Owner role, then read the current access token from wherever [Long-lived CI host](#long-lived-ci-host) says Claude Code stored it.
+* **Read it fresh each run**: the CLI rotates the access token, and the same 30-day refresh-grant cap applies, so don't store a copy.
+* **Pass it via stdin**: as the example does, so the token never lands in curl's argument list or your build log.
 
-### [​](#create-the-environment) Create the environment
+### Create the environment
 
 Capture the response without echoing it: `pool_secret` is a long-lived credential that can register runners into the environment, so store it as a masked CI secret and print only the environment ID. The `-H @-` form that keeps the token out of the process list requires curl 7.55 or later; older curl treats `@-` as a literal header and sends the request without authorization.
 
-```shiki
+```bash
 create=$(curl -fsS -X POST -H @- \
   -H "anthropic-beta: ccr-byoc-2025-07-29" -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
@@ -214,13 +220,14 @@ ENVIRONMENT_SECRET=$(jq -er .pool_secret <<<"$create")
 ```
 
 Until an [Owner turns on **Allow self-hosted environments**](self-hosted-environments.md) for the organization, the call fails with a `403` `permission_error` reading `self-hosted runners are disabled by your organization's policy`.
+
 Start a runner on this host with `SELF_HOSTED_RUNNER_ENVIRONMENT_SECRET=$ENVIRONMENT_SECRET`, plus the capture hook and `E2E_REPLY_DIR` per [Install the capture hook](#install-the-capture-hook-on-your-test-runner), then run the test script.
 
-### [​](#delete-the-environment) Delete the environment
+### Delete the environment
 
 Delete the environment when the run finishes, so each CI run starts clean:
 
-```shiki
+```bash
 curl -fsS -X DELETE -H @- \
   -H "anthropic-beta: ccr-byoc-2025-07-29" -H "anthropic-version: 2023-06-01" \
   "https://api.anthropic.com/v1/code/runners/self-hosted/pools/$ENVIRONMENT_ID" \

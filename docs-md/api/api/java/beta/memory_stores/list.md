@@ -1,152 +1,178 @@
 # List memory stores
 
-Copy page
+`MemoryStoreListPage beta().memoryStores().list(params = MemoryStoreListParams.none(), requestOptions = RequestOptions.none())`
 
-
-
-Java
-
-# List memory stores
-
-MemoryStoreListPage beta().memoryStores().list(MemoryStoreListParamsparams = MemoryStoreListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
-
-GET/v1/memory\_stores
+**GET** `/v1/memory_stores`
 
 List memory stores
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `MemoryStoreListParams params`
 
-MemoryStoreListParams params
+  - `Optional<LocalDateTime> createdAtGte`
 
-Optional<LocalDateTime> createdAtGte
+    Return only stores whose `created_at` is at or after this time (inclusive). Sent on the wire as `created_at[gte]`.
 
-Return only stores whose `created_at` is at or after this time (inclusive). Sent on the wire as `created_at[gte]`.
+    format: date-time
 
-Optional<LocalDateTime> createdAtLte
+  - `Optional<LocalDateTime> createdAtLte`
 
-Return only stores whose `created_at` is at or before this time (inclusive). Sent on the wire as `created_at[lte]`.
+    Return only stores whose `created_at` is at or before this time (inclusive). Sent on the wire as `created_at[lte]`.
 
-Optional<Boolean> includeArchived
+    format: date-time
 
-When `true`, archived stores are included in the results. Defaults to `false` (archived stores are excluded).
+  - `Optional<Boolean> includeArchived`
 
-Optional<Long> limit
+    When `true`, archived stores are included in the results. Defaults to `false` (archived stores are excluded).
 
-Maximum number of stores to return per page. Must be between 1 and 100. Defaults to 20 when omitted.
+  - `Optional<Long> limit`
 
-Optional<String> page
+    Maximum number of stores to return per page. Must be between 1 and 100. Defaults to 20 when omitted.
 
-Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
+    format: int32
 
-
+  - `Optional<String> page`
 
-Optional<List<AnthropicBeta>> betas
+    Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
-Optional header to specify the beta version(s) you want to use.
+  - `Optional<List<AnthropicBeta>> betas`
 
-MESSAGE\_BATCHES\_2024\_09\_24("message-batches-2024-09-24")
+    Optional header to specify the beta version(s) you want to use.
 
-PROMPT\_CACHING\_2024\_07\_31("prompt-caching-2024-07-31")
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
-COMPUTER\_USE\_2024\_10\_22("computer-use-2024-10-22")
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
 
-COMPUTER\_USE\_2025\_01\_24("computer-use-2025-01-24")
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
-PDFS\_2024\_09\_25("pdfs-2024-09-25")
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-TOKEN\_COUNTING\_2024\_11\_01("token-counting-2024-11-01")
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
 
-TOKEN\_EFFICIENT\_TOOLS\_2025\_02\_19("token-efficient-tools-2025-02-19")
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
 
-OUTPUT\_128K\_2025\_02\_19("output-128k-2025-02-19")
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
 
-FILES\_API\_2025\_04\_14("files-api-2025-04-14")
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
 
-MCP\_CLIENT\_2025\_04\_04("mcp-client-2025-04-04")
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
-MCP\_CLIENT\_2025\_11\_20("mcp-client-2025-11-20")
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
-DEV\_FULL\_THINKING\_2025\_05\_14("dev-full-thinking-2025-05-14")
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
 
-INTERLEAVED\_THINKING\_2025\_05\_14("interleaved-thinking-2025-05-14")
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
 
-CODE\_EXECUTION\_2025\_05\_22("code-execution-2025-05-22")
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
 
-EXTENDED\_CACHE\_TTL\_2025\_04\_11("extended-cache-ttl-2025-04-11")
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-CONTEXT\_1M\_2025\_08\_07("context-1m-2025-08-07")
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
 
-CONTEXT\_MANAGEMENT\_2025\_06\_27("context-management-2025-06-27")
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
-MODEL\_CONTEXT\_WINDOW\_EXCEEDED\_2025\_08\_26("model-context-window-exceeded-2025-08-26")
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
-SKILLS\_2025\_10\_02("skills-2025-10-02")
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
-OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
-USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
-MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
-CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
-SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
-FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
-AGENT\_MEMORY\_2026\_07\_22("agent-memory-2026-07-22")
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-##### ReturnsExpand Collapse
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
-
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
 
-class BetaManagedAgentsMemoryStore:
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
-A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
-String id
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
-Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-LocalDateTime createdAt
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
 
-A timestamp in RFC 3339 format
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
 
-String name
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
 
-Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
 
-Type type
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
 
-LocalDateTime updatedAt
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-A timestamp in RFC 3339 format
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
 
-Optional<LocalDateTime> archivedAt
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-A timestamp in RFC 3339 format
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
 
-Optional<String> description
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+## Returns
 
-Optional<Metadata> metadata
+- `class BetaManagedAgentsMemoryStore:`
 
-Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+  A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
-List memory stores
+  - `String id`
 
-Java
+    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
 
-```shiki
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `String name`
+
+    Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
+
+  - `Type type`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `Optional<String> description`
+
+    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+
+  - `Optional<Metadata> metadata`
+
+    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+
+## Example
+
+```java
 package com.anthropic.example;
 
 import com.anthropic.client.AnthropicClient;
@@ -165,37 +191,9 @@ public final class Main {
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "name": "name",
-      "type": "memory_store",
-      "updated_at": "2019-12-27T18:11:19.117Z",
-      "archived_at": "2019-12-27T18:11:19.117Z",
-      "description": "description",
-      "metadata": {
-        "foo": "string"
-      }
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

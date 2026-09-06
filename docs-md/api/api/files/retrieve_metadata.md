@@ -1,131 +1,78 @@
 # Get File Metadata
 
-Copy page
-
-
-
-cURL
-
-# Get File Metadata
-
-GET/v1/files/{file\_id}
+**GET** `/v1/files/{file_id}`
 
 Get File Metadata
 
-##### Path parameters
+## Path parameters
 
-file\_id: string
+- `file_id: string`
 
-ID of the File.
+  ID of the File.
 
-##### Returns
+## Returns
 
-
+- `FileMetadata object`
 
-FileMetadata object{ id, created\_at, filename, 5 more }
+  - `id: string`
 
-
+    Unique object identifier.
 
-id: string
+    The format and length of IDs may change over time.
 
-Unique object identifier.
+  - `created_at: string`
 
-The format and length of IDs may change over time.
+    RFC 3339 datetime string representing when the file was created.
 
-
+    format: date-time
 
-created\_at: string
+  - `filename: string`
 
-RFC 3339 datetime string representing when the file was created.
+    Original filename of the uploaded file.
 
-formatdate-time
+    maxLength: 500, minLength: 1
 
-
+  - `mime_type: string`
 
-filename: string
+    MIME type of the file.
 
-Original filename of the uploaded file.
+    maxLength: 255, minLength: 1
 
-maxLength500
+  - `size_bytes: number`
 
-minLength1
+    Size of the file in bytes.
 
-
+    minimum: 0
 
-mime\_type: string
+  - `type: "file"`
 
-MIME type of the file.
+    Object type.
 
-maxLength255
+    For files, this is always `"file"`.
 
-minLength1
+  - `downloadable: optional boolean`
 
-
+    Whether the file can be downloaded.
 
-size\_bytes: number
+    default: false
 
-Size of the file in bytes.
+  - `expires_at: optional string or null`
 
-minimum0
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
 
-
+    format: date-time
 
-type: "file"
+## Example
 
-Object type.
-
-For files, this is always `"file"`.
-
-
-
-downloadable: optional boolean
-
-Whether the file can be downloaded.
-
-defaultfalse
-
-
-
-expires\_at: optional string or null
-
-RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
-
-formatdate-time
-
-Get File Metadata
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/files/$FILE_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "created_at": "2025-04-15T18:37:24.100435Z",
-  "filename": "document.pdf",
-  "mime_type": "application/pdf",
-  "size_bytes": 102400,
-  "type": "file",
-  "downloadable": false,
-  "expires_at": "2025-05-15T18:37:24.100435Z"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "file_011CNha8iCJcU1wXNR6q4V8w",
   "created_at": "2025-04-15T18:37:24.100435Z",

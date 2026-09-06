@@ -1,211 +1,144 @@
 # List Workspaces
 
-Copy page
-
-
-
-# List Workspaces
-
-GET/v1/organizations/workspaces
+**GET** `/v1/organizations/workspaces`
 
 List Workspaces
 
-##### Query parameters
+## Query parameters
 
-after\_id: optional string
+- `after_id: optional string`
 
-ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-before\_id: optional string
+- `before_id: optional string`
 
-ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-
+- `include_archived: optional boolean`
 
-include\_archived: optional boolean
+  Whether to include Workspaces that have been archived in the response
 
-Whether to include Workspaces that have been archived in the response
+  default: false
 
-defaultfalse
+- `limit: optional number`
 
-
+  Number of items to return per page.
 
-limit: optional number
+  Defaults to `20`. Ranges from `1` to `1000`.
 
-Number of items to return per page.
+  default: 20, maximum: 1000, minimum: 1
 
-Defaults to `20`. Ranges from `1` to `1000`.
+## Returns
 
-default20
+- `data: array of Workspace`
 
-maximum1000
+  - `id: string`
 
-minimum1
+    ID of the Workspace.
 
-##### Returns
+  - `archived_at: string or null`
 
-
+    RFC 3339 datetime string indicating when the Workspace was archived, or `null` if the Workspace is not archived.
 
-data: array of [Workspace](api/http/$shared.md) { id, archived\_at, compartment\_id, 7 more }
+    format: date-time
 
-id: string
+  - `compartment_id: string`
 
-ID of the Workspace.
+    Identifier for this Workspace's encryption compartment. When you configure a
+    customer-managed encryption key (CMEK) on AWS, reference this value in your
+    KMS key-policy condition so the key is scoped to this compartment. On GCP and
+    Azure, Anthropic enforces the compartment binding automatically; you do not
+    need to reference this value in your key configuration. See the CMEK
+    integration guide for the required key configuration; unless your organization
+    is on Claude Platform on AWS, it includes a separate value used during key
+    validation. On Claude Platform on AWS there is no separate validation value:
+    the key is validated against this Workspace's own value when it is attached, so
+    if your key policy uses the compartment condition, add this value to it before
+    attaching the key.
 
-
+  - `created_at: string`
 
-archived\_at: string or null
+    RFC 3339 datetime string indicating when the Workspace was created.
 
-RFC 3339 datetime string indicating when the Workspace was archived, or `null` if the Workspace is not archived.
+    format: date-time
 
-formatdate-time
+  - `data_residency: object`
 
-compartment\_id: string
+    Data residency configuration.
 
-Identifier for this Workspace's encryption compartment. When you configure a
-customer-managed encryption key (CMEK) on AWS, reference this value in your
-KMS key-policy condition so the key is scoped to this compartment. On GCP and
-Azure, Anthropic enforces the compartment binding automatically; you do not
-need to reference this value in your key configuration. See the CMEK
-integration guide for the required key configuration; unless your organization
-is on Claude Platform on AWS, it includes a separate value used during key
-validation. On Claude Platform on AWS there is no separate validation value:
-the key is validated against this Workspace's own value when it is attached, so
-if your key policy uses the compartment condition, add this value to it before
-attaching the key.
+    - `allowed_inference_geos: array of string or "unrestricted"`
 
-
+      Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
-created\_at: string
+      - `array of string`
 
-RFC 3339 datetime string indicating when the Workspace was created.
+      - `"unrestricted"`
 
-formatdate-time
+    - `default_inference_geo: string`
 
-
+      Default inference geo applied when requests omit the parameter.
 
-data\_residency: object{ allowed\_inference\_geos, default\_inference\_geo, workspace\_geo }
+    - `workspace_geo: string`
 
-Data residency configuration.
+      Geographic region for workspace data storage. Immutable after creation.
 
-
+  - `display_color: string`
 
-allowed\_inference\_geos: array of string or "unrestricted"
+    Hex color code representing the Workspace in the Anthropic Console.
 
-Permitted inference geo values. 'unrestricted' means all geos are allowed.
+  - `external_key_id: string or null`
 
-One of the following:
+    ID of the customer-managed encryption key (CMEK) configuration to use for this
+    Workspace. Setting this field requires CMEK to be enabled for your
+    organization. When set, data stored for this Workspace is encrypted with the
+    referenced key. Create key configurations with the External Keys API. On
+    Claude Platform on AWS the value is the AWS KMS key ARN, and the key must be a
+    single-Region key in the same AWS account and Region as the Workspace. On that
+    platform the key is validated against this Workspace when it is attached, so a
+    key-policy problem is reported as an error on this request. This field is write-once:
+    once a key is attached to a Workspace it cannot be detached or replaced. To
+    rotate key material, rotate the underlying key on your cloud KMS; the
+    `external_key_id` stays the same.
 
-array of string
+  - `name: string`
 
-"unrestricted"
+    Name of the Workspace.
 
-default\_inference\_geo: string
+  - `tags: map[string]`
 
-Default inference geo applied when requests omit the parameter.
+    User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
-workspace\_geo: string
+  - `type: "workspace"`
 
-Geographic region for workspace data storage. Immutable after creation.
+    Object type.
 
-display\_color: string
+    For Workspaces, this is always `"workspace"`.
 
-Hex color code representing the Workspace in the Anthropic Console.
+    default: workspace
 
-external\_key\_id: string or null
+- `first_id: string or null`
 
-ID of the customer-managed encryption key (CMEK) configuration to use for this
-Workspace. Setting this field requires CMEK to be enabled for your
-organization. When set, data stored for this Workspace is encrypted with the
-referenced key. Create key configurations with the External Keys API. On
-Claude Platform on AWS the value is the AWS KMS key ARN, and the key must be a
-single-Region key in the same AWS account and Region as the Workspace. On that
-platform the key is validated against this Workspace when it is attached, so a
-key-policy problem is reported as an error on this request. This field is write-once:
-once a key is attached to a Workspace it cannot be detached or replaced. To
-rotate key material, rotate the underlying key on your cloud KMS; the
-`external_key_id` stays the same.
+  First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
-name: string
+- `has_more: boolean`
 
-Name of the Workspace.
+  Indicates if there are more results in the requested page direction.
 
-tags: map[string]
+- `last_id: string or null`
 
-User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+  Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
-
+## Example
 
-type: "workspace"
-
-Object type.
-
-For Workspaces, this is always `"workspace"`.
-
-defaultworkspace
-
-first\_id: string or null
-
-First ID in the `data` list. Can be used as the `before_id` for the previous page.
-
-has\_more: boolean
-
-Indicates if there are more results in the requested page direction.
-
-last\_id: string or null
-
-Last ID in the `data` list. Can be used as the `after_id` for the next page.
-
-List Workspaces
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/workspaces \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-      "archived_at": "2024-11-01T23:59:27.427722Z",
-      "compartment_id": "f8a7b6c5-4d3e-4f1a-8b9c-0d1e2f3a4b5c",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "data_residency": {
-        "allowed_inference_geos": "unrestricted",
-        "default_inference_geo": "default_inference_geo",
-        "workspace_geo": "workspace_geo"
-      },
-      "display_color": "#6C5BB9",
-      "external_key_id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",
-      "name": "Workspace Name",
-      "tags": {
-        "env": "prod",
-        "team": "platform"
-      },
-      "type": "workspace"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

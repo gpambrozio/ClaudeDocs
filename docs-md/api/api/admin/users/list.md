@@ -1,168 +1,114 @@
 # List Users
 
-Copy page
-
-
-
-# List Users
-
-GET/v1/organizations/users
+**GET** `/v1/organizations/users`
 
 List the organization's members.
 
-##### Query parameters
+## Query parameters
 
-after\_id: optional string
+- `after_id: optional string`
 
-ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-before\_id: optional string
+- `before_id: optional string`
 
-ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-
+- `email: optional string`
 
-email: optional string
+  Filter by user email.
 
-Filter by user email.
+  format: email
 
-formatemail
+- `limit: optional number`
 
-
+  Number of items to return per page.
 
-limit: optional number
+  Defaults to `20`. Ranges from `1` to `1000`.
 
-Number of items to return per page.
+  default: 20, maximum: 1000, minimum: 1
 
-Defaults to `20`. Ranges from `1` to `1000`.
+- `roles: optional array of string`
 
-default20
+  Filter to items whose `role` equals one of the supplied values. Repeatable; values are OR'ed together.
 
-maximum1000
+  Accepted values depend on the organization type: Console and API organizations accept `user`, `developer`, `billing`, `admin`, and `claude_code_user`; Claude Enterprise organizations accept `user`, `owner`, `primary_owner`, `membership_admin`, and `managed`.
 
-minimum1
+## Returns
 
-
+- `data: array of User`
 
-roles: optional array of string
+  - `id: string`
 
-Filter to items whose `role` equals one of the supplied values. Repeatable; values are OR'ed together.
+    ID of the User.
 
-Accepted values depend on the organization type: Console and API organizations accept `user`, `developer`, `billing`, `admin`, and `claude_code_user`; Claude Enterprise organizations accept `user`, `owner`, `primary_owner`, `membership_admin`, and `managed`.
+  - `added_at: string`
 
-##### Returns
+    RFC 3339 datetime string indicating when the User joined the Organization.
 
-
+    format: date-time
 
-data: array of [User](api/http/admin/users.md) { id, added\_at, email, 3 more }
+  - `email: string`
 
-id: string
+    Email of the User.
 
-ID of the User.
+  - `name: string`
 
-
+    Name of the User.
 
-added\_at: string
+  - `role: "admin" or "billing" or "claude_code_user" or 6 more`
 
-RFC 3339 datetime string indicating when the User joined the Organization.
+    Organization role of the User.
 
-formatdate-time
+    - `"admin"`
 
-email: string
+    - `"billing"`
 
-Email of the User.
+    - `"claude_code_user"`
 
-name: string
+    - `"developer"`
 
-Name of the User.
+    - `"managed"`
 
-
+    - `"membership_admin"`
 
-role: "admin" or "billing" or "claude\_code\_user" or 6 more
+    - `"owner"`
 
-Organization role of the User.
+    - `"primary_owner"`
 
-One of the following:
+    - `"user"`
 
-"admin"
+  - `type: "user"`
 
-"billing"
+    Object type.
 
-"claude\_code\_user"
+    For Users, this is always `"user"`.
 
-"developer"
+    default: user
 
-"managed"
+- `first_id: string or null`
 
-"membership\_admin"
+  First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
-"owner"
+- `has_more: boolean`
 
-"primary\_owner"
+  Indicates if there are more results in the requested page direction.
 
-"user"
+- `last_id: string or null`
 
-
+  Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
-type: "user"
+## Example
 
-Object type.
-
-For Users, this is always `"user"`.
-
-defaultuser
-
-first\_id: string or null
-
-First ID in the `data` list. Can be used as the `before_id` for the previous page.
-
-has\_more: boolean
-
-Indicates if there are more results in the requested page direction.
-
-last\_id: string or null
-
-Last ID in the `data` list. Can be used as the `after_id` for the next page.
-
-List Users
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/users \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-      "added_at": "2024-10-30T23:58:27.427722Z",
-      "email": "user@emaildomain.com",
-      "name": "Jane Doe",
-      "role": "user",
-      "type": "user"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

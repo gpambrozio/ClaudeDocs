@@ -1,124 +1,91 @@
 # Retrieve a memory
 
-Copy page
+`$ ant beta:memory-stores:memories retrieve`
 
-
-
-CLI
-
-# Retrieve a memory
-
-$ ant beta:memory-stores:memories retrieve
-
-GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+**GET** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
 Retrieve a memory
 
-##### ParametersExpand Collapse
+## Parameters
 
---memory-store-id: string
+- `--memory-store-id: string`
 
-Path param: Path parameter memory\_store\_id
+  Path param: Path parameter memory_store_id
 
---memory-id: string
+- `--memory-id: string`
 
-Path param: Path parameter memory\_id
+  Path param: Path parameter memory_id
 
---view: optional "basic" or "full"
+- `--view: optional "basic" or "full"`
 
-Query param: Query parameter for view
+  Query param: Query parameter for view
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--beta: optional array of AnthropicBeta`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `beta_managed_agents_memory: object`
 
-beta\_managed\_agents\_memory: object { id, content\_sha256, content\_size\_bytes, 7 more } 
+  A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
-A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+  - `id: string`
 
-id: string
+    Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
 
-Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+  - `content_sha256: string`
 
-content\_sha256: string
+    Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
 
-Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
+  - `content_size_bytes: number`
 
-content\_size\_bytes: number
+    Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
-Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+    format: int32
 
-created\_at: string
+  - `created_at: string`
 
-A timestamp in RFC 3339 format
+    A timestamp in RFC 3339 format
 
-memory\_store\_id: string
+    format: date-time
 
-ID of the memory store this memory belongs to (a `memstore_...` value).
+  - `memory_store_id: string`
 
-memory\_version\_id: string
+    ID of the memory store this memory belongs to (a `memstore_...` value).
 
-ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+  - `memory_version_id: string`
 
-path: string
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
 
-Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
+  - `path: string`
 
-
+    Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-type: "memory"
+  - `type: "memory"`
 
-"memory"
+  - `updated_at: string`
 
-updated\_at: string
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+    format: date-time
 
-content: optional string
+  - `content: optional string`
 
-The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+    The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-Retrieve a memory
+## Example
 
-CLI
-
-```shiki
+```bash
 ant beta:memory-stores:memories retrieve \
   --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id \
   --memory-id memory_id
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "id",
-  "content_sha256": "content_sha256",
-  "content_size_bytes": 0,
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "memory_store_id": "memory_store_id",
-  "memory_version_id": "memory_version_id",
-  "path": "path",
-  "type": "memory",
-  "updated_at": "2019-12-27T18:11:19.117Z",
-  "content": "content"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "id",
   "content_sha256": "content_sha256",

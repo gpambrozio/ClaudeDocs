@@ -1,94 +1,61 @@
 # Delete Skill
 
-Copy page
+`$client->beta->skills->delete(string skillID, ?list<AnthropicBeta> betas): BetaDeletedSkill`
 
-
-
-PHP
-
-# Delete Skill
-
-$client->beta->skills->delete(string skillID, ?list<AnthropicBeta> betas): [SkillDeleteResponse](api/beta/skills.md)
-
-DELETE/v1/skills/{skill\_id}
+**DELETE** `/v1/skills/{skill_id}`
 
 Delete Skill
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `skillID: string`
 
-skillID: string
+  Unique identifier for the skill.
 
-Unique identifier for the skill.
+  The format and length of IDs may change over time.
 
-The format and length of IDs may change over time.
+- `betas?:optional list<AnthropicBeta>`
 
-betas?:optional list<AnthropicBeta>
+  Optional header to specify the beta version(s) you want to use.
 
-Optional header to specify the beta version(s) you want to use.
+## Returns
 
-##### ReturnsExpand Collapse
+- `BetaDeletedSkill`
 
-
+  - `string id`
 
-[SkillDeleteResponse](api/beta/skills.md)
+    Unique identifier for the skill.
 
-
+    The format and length of IDs may change over time.
 
-string id
+  - `"skill_deleted" type`
 
-Unique identifier for the skill.
+    Deleted object type.
 
-The format and length of IDs may change over time.
+    For Skills, this is always `"skill_deleted"`.
 
-
+## Example
 
-string type
-
-Deleted object type.
-
-For Skills, this is always `"skill_deleted"`.
-
-Delete Skill
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
-$skill = $client->beta->skills->delete(
-  'skill_id', betas: ['message-batches-2024-09-24']
+$betaDeletedSkill = $client->beta->skills->delete(
+  'skill_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
 );
 
-var_dump($skill);
+var_dump($betaDeletedSkill);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type"
+  "type": "skill_deleted"
 }
 ```
 

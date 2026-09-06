@@ -1,566 +1,1206 @@
 # Credentials
 
-Copy page
+## Create Credential
 
-
+`$client->beta->vaults->credentials->create(string vaultID, Auth auth, ?string displayName, ?array<string,string> metadata, ?list<AnthropicBeta> betas): ManagedAgentsCredential`
 
-PHP
+**POST** `/v1/vaults/{vault_id}/credentials`
 
-# Credentials
+Create Credential
 
-##### [Create Credential](api/beta/vaults/credentials/create.md)
+### Parameters
 
-$client->beta->vaults->credentials->create(string vaultID, [Auth](api/beta/vaults/credentials/create.md) auth, ?string displayName, ?array<string,string> metadata, ?list<AnthropicBeta> betas): [ManagedAgentsCredential](api/beta/vaults/credentials.md)
+- `vaultID: string`
 
-POST/v1/vaults/{vault\_id}/credentials
+- `auth: Auth`
 
-##### [List Credentials](api/beta/vaults/credentials/list.md)
+  Authentication details for creating a credential.
 
-$client->beta->vaults->credentials->list(string vaultID, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsCredential](api/beta/vaults/credentials.md)>
+- `displayName?:optional string`
 
-GET/v1/vaults/{vault\_id}/credentials
+  Human-readable name for the credential. Up to 255 characters.
 
-##### [Get Credential](api/beta/vaults/credentials/retrieve.md)
+- `metadata?:optional array<string,string>`
 
-$client->beta->vaults->credentials->retrieve(string credentialID, string vaultID, ?list<AnthropicBeta> betas): [ManagedAgentsCredential](api/beta/vaults/credentials.md)
+  Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-GET/v1/vaults/{vault\_id}/credentials/{credential\_id}
+- `betas?:optional list<AnthropicBeta>`
 
-##### [Update Credential](api/beta/vaults/credentials/update.md)
+  Optional header to specify the beta version(s) you want to use.
 
-$client->beta->vaults->credentials->update(string credentialID, string vaultID, ?[Auth](api/beta/vaults/credentials/update.md) auth, ?string displayName, ?array<string,string> metadata, ?list<AnthropicBeta> betas): [ManagedAgentsCredential](api/beta/vaults/credentials.md)
+### Returns
 
-POST/v1/vaults/{vault\_id}/credentials/{credential\_id}
+- `ManagedAgentsCredential`
 
-##### [Delete Credential](api/beta/vaults/credentials/delete.md)
+  - `string id`
 
-$client->beta->vaults->credentials->delete(string credentialID, string vaultID, ?list<AnthropicBeta> betas): [ManagedAgentsDeletedCredential](api/beta/vaults/credentials.md)
+    Unique identifier for the credential.
 
-DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
+  - `?\Datetime archivedAt`
 
-##### [Archive Credential](api/beta/vaults/credentials/archive.md)
+    A timestamp in RFC 3339 format
 
-$client->beta->vaults->credentials->archive(string credentialID, string vaultID, ?list<AnthropicBeta> betas): [ManagedAgentsCredential](api/beta/vaults/credentials.md)
+  - `Auth auth`
 
-POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/archive
+    Authentication details for a credential.
 
-##### [Validate Credential](api/beta/vaults/credentials/mcp_oauth_validate.md)
+  - `\Datetime createdAt`
 
-$client->beta->vaults->credentials->mcpOAuthValidate(string credentialID, string vaultID, ?list<AnthropicBeta> betas): [ManagedAgentsCredentialValidation](api/beta/vaults/credentials.md)
+    A timestamp in RFC 3339 format
 
-POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
+  - `array<string,string> metadata`
 
-##### ModelsExpand Collapse
+    Arbitrary key-value metadata attached to the credential.
 
-
+  - `Type type`
 
-[ManagedAgentsCredential](api/beta/vaults/credentials.md)
+  - `\Datetime updatedAt`
 
-string id
+    A timestamp in RFC 3339 format
 
-Unique identifier for the credential.
+  - `string vaultID`
 
-?\Datetime archivedAt
+    Identifier of the vault this credential belongs to.
 
-A timestamp in RFC 3339 format
+  - `?string displayName`
 
-Auth auth
+    Human-readable name for the credential.
 
-Authentication details for a credential.
+### Example
 
-\Datetime createdAt
+```php
+<?php
 
-A timestamp in RFC 3339 format
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-array<string,string> metadata
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-Arbitrary key-value metadata attached to the credential.
+$betaManagedAgentsCredential = $client->beta->vaults->credentials->create(
+  'vlt_011CZkZDLs7fYzm1hXNPeRjv',
+  auth: [
+    'token' => 'bearer_exampletoken',
+    'mcpServerURL' => 'https://example-server.modelcontextprotocol.io/sse',
+    'type' => 'static_bearer',
+  ],
+  displayName: 'Example credential',
+  metadata: ['environment' => 'production'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-Type type
+var_dump($betaManagedAgentsCredential);
+```
 
-\Datetime updatedAt
+#### Response (200)
 
-A timestamp in RFC 3339 format
+```json
+{
+  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "archived_at": null,
+  "auth": {
+    "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
+    "type": "static_bearer"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {
+    "environment": "production"
+  },
+  "type": "vault_credential",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "display_name": "Example credential"
+}
+```
 
-string vaultID
+## List Credentials
 
-Identifier of the vault this credential belongs to.
+`$client->beta->vaults->credentials->list(string vaultID, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<ManagedAgentsCredential>`
 
-?string displayName
+**GET** `/v1/vaults/{vault_id}/credentials`
 
-Human-readable name for the credential.
+List Credentials
 
-
+### Parameters
 
-[ManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md)
+- `vaultID: string`
 
-One of the following:
+- `includeArchived?:optional bool`
 
-
+  Whether to include archived credentials in the results.
 
-[ManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta/vaults/credentials.md)
+- `limit?:optional int`
 
-Type type
+  Maximum number of credentials to return per page. Defaults to 20, maximum 100.
 
-
+- `page?:optional string`
 
-[ManagedAgentsLimitedCredentialNetworkingParams](api/beta/vaults/credentials.md)
+  Opaque pagination token from a previous `list_credentials` response.
 
-list<string> allowedHosts
+- `betas?:optional list<AnthropicBeta>`
 
-Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+  Optional header to specify the beta version(s) you want to use.
 
-Type type
+### Returns
 
-
+- `ManagedAgentsCredential`
 
-[ManagedAgentsCredentialValidation](api/beta/vaults/credentials.md)
+  - `string id`
 
-string credentialID
+    Unique identifier for the credential.
 
-Unique identifier of the credential that was validated.
+  - `?\Datetime archivedAt`
 
-bool hasRefreshToken
+    A timestamp in RFC 3339 format
 
-Whether the credential has a refresh token configured.
+  - `Auth auth`
 
-?[ManagedAgentsMCPProbe](api/beta/vaults/credentials.md) mcpProbe
+    Authentication details for a credential.
 
-The failing step of an MCP validation probe.
+  - `\Datetime createdAt`
 
-?[ManagedAgentsRefreshObject](api/beta/vaults/credentials.md) refresh
+    A timestamp in RFC 3339 format
 
-Outcome of a refresh-token exchange attempted during credential validation.
+  - `array<string,string> metadata`
 
-[ManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md) status
+    Arbitrary key-value metadata attached to the credential.
 
-Overall verdict of a credential validation probe.
+  - `Type type`
 
-Type type
+  - `\Datetime updatedAt`
 
-\Datetime validatedAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `string vaultID`
 
-string vaultID
+    Identifier of the vault this credential belongs to.
 
-Identifier of the vault containing the credential.
+  - `?string displayName`
 
-
+    Human-readable name for the credential.
 
-[ManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md)
+### Example
 
-One of the following:
+```php
+<?php
 
-"valid"
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-"invalid"
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-"unknown"
+$page = $client->beta->vaults->credentials->list(
+  'vlt_011CZkZDLs7fYzm1hXNPeRjv',
+  includeArchived: true,
+  limit: 0,
+  page: 'page',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-
+var_dump($page);
+```
 
-[ManagedAgentsDeletedCredential](api/beta/vaults/credentials.md)
+#### Response (200)
 
-string id
+```json
+{
+  "data": [
+    {
+      "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+      "archived_at": null,
+      "auth": {
+        "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
+        "type": "static_bearer"
+      },
+      "created_at": "2026-03-15T10:00:00Z",
+      "metadata": {
+        "environment": "production"
+      },
+      "type": "vault_credential",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+      "display_name": "Example credential"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
 
-Unique identifier of the deleted credential.
+## Get Credential
 
-Type type
+`$client->beta->vaults->credentials->retrieve(string credentialID, string vaultID, ?list<AnthropicBeta> betas): ManagedAgentsCredential`
 
-
+**GET** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-[ManagedAgentsEnvironmentVariableAuthResponse](api/beta/vaults/credentials.md)
+Get Credential
 
-[ManagedAgentsInjectionLocationResponse](api/beta/vaults/credentials.md) injectionLocation
+### Parameters
 
-Where in the outbound request the secret value is substituted.
+- `vaultID: string`
 
-Networking networking
+- `credentialID: string`
 
-Outbound hosts the secret value is substituted on.
+- `betas?:optional list<AnthropicBeta>`
 
-string secretName
+  Optional header to specify the beta version(s) you want to use.
 
-Name of the environment variable.
+### Returns
 
-Type type
+- `ManagedAgentsCredential`
 
-
+  - `string id`
 
-[ManagedAgentsEnvironmentVariableCreateParams](api/beta/vaults/credentials.md)
+    Unique identifier for the credential.
 
-[ManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md) networking
+  - `?\Datetime archivedAt`
 
-Outbound hosts the secret value is substituted on.
+    A timestamp in RFC 3339 format
 
-string secretName
+  - `Auth auth`
 
-Name of the environment variable. Immutable after create.
+    Authentication details for a credential.
 
-string secretValue
+  - `\Datetime createdAt`
 
-Secret value. Write-only; never returned in responses.
+    A timestamp in RFC 3339 format
 
-Type type
+  - `array<string,string> metadata`
 
-?[ManagedAgentsInjectionLocationParams](api/beta/vaults/credentials.md) injectionLocation
+    Arbitrary key-value metadata attached to the credential.
 
-Where in the outbound request the secret value may be substituted.
+  - `Type type`
 
-
+  - `\Datetime updatedAt`
 
-[ManagedAgentsEnvironmentVariableUpdateParams](api/beta/vaults/credentials.md)
+    A timestamp in RFC 3339 format
 
-Type type
+  - `string vaultID`
 
-?[ManagedAgentsInjectionLocationUpdateParams](api/beta/vaults/credentials.md) injectionLocation
+    Identifier of the vault this credential belongs to.
 
-Updated injection location.
+  - `?string displayName`
 
-?[ManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md) networking
+    Human-readable name for the credential.
 
-Updated networking scope. Full replacement.
+### Example
 
-?string secretValue
+```php
+<?php
 
-Updated secret value.
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-[ManagedAgentsInjectionLocationParams](api/beta/vaults/credentials.md)
+$betaManagedAgentsCredential = $client->beta->vaults->credentials->retrieve(
+  'vcrd_011CZkZEMt8gZan2iYOQfSkw',
+  vaultID: 'vlt_011CZkZDLs7fYzm1hXNPeRjv',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-?bool body
+var_dump($betaManagedAgentsCredential);
+```
 
-Substitute when the placeholder appears in the request body.
+#### Response (200)
 
-?bool header
+```json
+{
+  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "archived_at": null,
+  "auth": {
+    "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
+    "type": "static_bearer"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {
+    "environment": "production"
+  },
+  "type": "vault_credential",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "display_name": "Example credential"
+}
+```
 
-Substitute when the placeholder appears in a request header value.
+## Update Credential
 
-
+`$client->beta->vaults->credentials->update(string credentialID, string vaultID, ?Auth auth, ?string displayName, ?array<string,string> metadata, ?list<AnthropicBeta> betas): ManagedAgentsCredential`
 
-[ManagedAgentsInjectionLocationResponse](api/beta/vaults/credentials.md)
+**POST** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-bool body
+Update Credential
 
-Whether the placeholder is substituted in the request body.
+### Parameters
 
-bool header
+- `vaultID: string`
 
-Whether the placeholder is substituted in request header values.
+- `credentialID: string`
 
-
+- `auth?:optional Auth`
 
-[ManagedAgentsInjectionLocationUpdateParams](api/beta/vaults/credentials.md)
+  Updated authentication details for a credential.
 
-?bool body
+- `displayName?:optional string`
 
-Substitute when the placeholder appears in the request body.
+  Updated human-readable name for the credential. 1-255 characters.
 
-?bool header
+- `metadata?:optional array<string,string>`
 
-Substitute when the placeholder appears in a request header value.
+  Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
-
+- `betas?:optional list<AnthropicBeta>`
 
-[ManagedAgentsLimitedCredentialNetworkingParams](api/beta/vaults/credentials.md)
+  Optional header to specify the beta version(s) you want to use.
 
-list<string> allowedHosts
+### Returns
 
-Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+- `ManagedAgentsCredential`
 
-Type type
+  - `string id`
 
-
+    Unique identifier for the credential.
 
-[ManagedAgentsLimitedCredentialNetworkingResponse](api/beta/vaults/credentials.md)
+  - `?\Datetime archivedAt`
 
-list<string> allowedHosts
+    A timestamp in RFC 3339 format
 
-Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+  - `Auth auth`
 
-Type type
+    Authentication details for a credential.
 
-
+  - `\Datetime createdAt`
 
-[ManagedAgentsMCPOAuthAuthResponse](api/beta/vaults/credentials.md)
+    A timestamp in RFC 3339 format
 
-string mcpServerURL
+  - `array<string,string> metadata`
 
-URL of the MCP server this credential authenticates against.
+    Arbitrary key-value metadata attached to the credential.
 
-Type type
+  - `Type type`
 
-?\Datetime expiresAt
+  - `\Datetime updatedAt`
 
-A timestamp in RFC 3339 format
+    A timestamp in RFC 3339 format
 
-?[ManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md) refresh
+  - `string vaultID`
 
-OAuth refresh token configuration returned in credential responses.
+    Identifier of the vault this credential belongs to.
 
-
+  - `?string displayName`
 
-[ManagedAgentsMCPOAuthCreateParams](api/beta/vaults/credentials.md)
+    Human-readable name for the credential.
 
-string accessToken
+### Example
 
-OAuth access token.
+```php
+<?php
 
-string mcpServerURL
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-URL of the MCP server this credential authenticates against.
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-Type type
+$betaManagedAgentsCredential = $client->beta->vaults->credentials->update(
+  'vcrd_011CZkZEMt8gZan2iYOQfSkw',
+  vaultID: 'vlt_011CZkZDLs7fYzm1hXNPeRjv',
+  auth: [
+    'type' => 'mcp_oauth',
+    'accessToken' => 'x',
+    'expiresAt' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+    'refresh' => [
+      'refreshToken' => 'x',
+      'scope' => 'scope',
+      'tokenEndpointAuth' => [
+        'type' => 'client_secret_basic', 'clientSecret' => 'x'
+      ],
+    ],
+  ],
+  displayName: 'Example credential',
+  metadata: ['environment' => 'production'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-?\Datetime expiresAt
+var_dump($betaManagedAgentsCredential);
+```
 
-A timestamp in RFC 3339 format
+#### Response (200)
 
-?[ManagedAgentsMCPOAuthRefreshParams](api/beta/vaults/credentials.md) refresh
+```json
+{
+  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "archived_at": null,
+  "auth": {
+    "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
+    "type": "static_bearer"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {
+    "environment": "production"
+  },
+  "type": "vault_credential",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "display_name": "Example credential"
+}
+```
 
-OAuth refresh token parameters for creating a credential with refresh support.
+## Delete Credential
 
-
+`$client->beta->vaults->credentials->delete(string credentialID, string vaultID, ?list<AnthropicBeta> betas): ManagedAgentsDeletedCredential`
 
-[ManagedAgentsMCPOAuthRefreshParams](api/beta/vaults/credentials.md)
+**DELETE** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-string clientID
+Delete Credential
 
-OAuth client ID.
+### Parameters
 
-string refreshToken
+- `vaultID: string`
 
-OAuth refresh token.
+- `credentialID: string`
 
-string tokenEndpoint
+- `betas?:optional list<AnthropicBeta>`
 
-Token endpoint URL used to refresh the access token.
+  Optional header to specify the beta version(s) you want to use.
 
-TokenEndpointAuth tokenEndpointAuth
+### Returns
 
-Token endpoint requires no client authentication.
+- `ManagedAgentsDeletedCredential`
 
-?string resource
+  - `string id`
 
-OAuth resource indicator.
+    Unique identifier of the deleted credential.
 
-?string scope
+  - `Type type`
 
-OAuth scope for the refresh request.
+### Example
 
-
+```php
+<?php
 
-[ManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md)
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-string clientID
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-OAuth client ID.
+$betaManagedAgentsDeletedCredential = $client
+  ->beta
+  ->vaults
+  ->credentials
+  ->delete(
+  'vcrd_011CZkZEMt8gZan2iYOQfSkw',
+  vaultID: 'vlt_011CZkZDLs7fYzm1hXNPeRjv',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-string tokenEndpoint
+var_dump($betaManagedAgentsDeletedCredential);
+```
 
-Token endpoint URL used to refresh the access token.
+#### Response (200)
 
-TokenEndpointAuth tokenEndpointAuth
+```json
+{
+  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "type": "vault_credential_deleted"
+}
+```
 
-Token endpoint requires no client authentication.
+## Archive Credential
 
-?string resource
+`$client->beta->vaults->credentials->archive(string credentialID, string vaultID, ?list<AnthropicBeta> betas): ManagedAgentsCredential`
 
-OAuth resource indicator.
+**POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/archive`
 
-?string scope
+Archive Credential
 
-OAuth scope for the refresh request.
+### Parameters
 
-
+- `vaultID: string`
 
-[ManagedAgentsMCPOAuthRefreshUpdateParams](api/beta/vaults/credentials.md)
+- `credentialID: string`
 
-?string refreshToken
+- `betas?:optional list<AnthropicBeta>`
 
-Updated OAuth refresh token.
+  Optional header to specify the beta version(s) you want to use.
 
-?string scope
+### Returns
 
-Updated OAuth scope for the refresh request.
+- `ManagedAgentsCredential`
 
-?TokenEndpointAuth tokenEndpointAuth
+  - `string id`
 
-Updated HTTP Basic authentication parameters for the token endpoint.
+    Unique identifier for the credential.
 
-
+  - `?\Datetime archivedAt`
 
-[ManagedAgentsMCPOAuthUpdateParams](api/beta/vaults/credentials.md)
+    A timestamp in RFC 3339 format
 
-Type type
+  - `Auth auth`
 
-?string accessToken
+    Authentication details for a credential.
 
-Updated OAuth access token.
+  - `\Datetime createdAt`
 
-?\Datetime expiresAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `array<string,string> metadata`
 
-?[ManagedAgentsMCPOAuthRefreshUpdateParams](api/beta/vaults/credentials.md) refresh
+    Arbitrary key-value metadata attached to the credential.
 
-Parameters for updating OAuth refresh token configuration.
+  - `Type type`
 
-
+  - `\Datetime updatedAt`
 
-[ManagedAgentsMCPProbe](api/beta/vaults/credentials.md)
+    A timestamp in RFC 3339 format
 
-?[ManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md) httpResponse
+  - `string vaultID`
 
-An HTTP response captured during a credential validation probe.
+    Identifier of the vault this credential belongs to.
 
-string method
+  - `?string displayName`
 
-The MCP method that failed (for example `initialize` or `tools/list`).
+    Human-readable name for the credential.
 
-
+### Example
 
-[ManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md)
+```php
+<?php
 
-string body
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-Response body. May be truncated and has sensitive values scrubbed.
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-bool bodyTruncated
+$betaManagedAgentsCredential = $client->beta->vaults->credentials->archive(
+  'vcrd_011CZkZEMt8gZan2iYOQfSkw',
+  vaultID: 'vlt_011CZkZDLs7fYzm1hXNPeRjv',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-Whether `body` was truncated.
+var_dump($betaManagedAgentsCredential);
+```
 
-string contentType
+#### Response (200)
 
-Value of the `Content-Type` response header.
+```json
+{
+  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "archived_at": null,
+  "auth": {
+    "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
+    "type": "static_bearer"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {
+    "environment": "production"
+  },
+  "type": "vault_credential",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "display_name": "Example credential"
+}
+```
 
-int statusCode
+## Validate Credential
 
-HTTP status code.
+`$client->beta->vaults->credentials->mcpOAuthValidate(string credentialID, string vaultID, ?list<AnthropicBeta> betas): ManagedAgentsCredentialValidation`
 
-
+**POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
 
-[ManagedAgentsRefreshObject](api/beta/vaults/credentials.md)
+Validate Credential
 
-?[ManagedAgentsRefreshHTTPResponse](api/beta/vaults/credentials.md) httpResponse
+### Parameters
 
-An HTTP response captured during a credential validation probe.
+- `vaultID: string`
 
-Status status
+- `credentialID: string`
 
-Outcome of a refresh-token exchange attempted during credential validation.
+- `betas?:optional list<AnthropicBeta>`
 
-
+  Optional header to specify the beta version(s) you want to use.
 
-[ManagedAgentsStaticBearerAuthResponse](api/beta/vaults/credentials.md)
+### Returns
 
-string mcpServerURL
+- `ManagedAgentsCredentialValidation`
 
-URL of the MCP server this credential authenticates against.
+  - `string credentialID`
 
-Type type
+    Unique identifier of the credential that was validated.
 
-
+  - `bool hasRefreshToken`
 
-[ManagedAgentsStaticBearerCreateParams](api/beta/vaults/credentials.md)
+    Whether the credential has a refresh token configured.
 
-string token
+  - `?ManagedAgentsMCPProbe mcpProbe`
 
-Static bearer token value.
+    The failing step of an MCP validation probe.
 
-string mcpServerURL
+  - `?ManagedAgentsRefreshObject refresh`
 
-URL of the MCP server this credential authenticates against.
+    Outcome of a refresh-token exchange attempted during credential validation.
 
-Type type
+  - `ManagedAgentsCredentialValidationStatus status`
 
-
+    Overall verdict of a credential validation probe.
 
-[ManagedAgentsStaticBearerUpdateParams](api/beta/vaults/credentials.md)
+  - `Type type`
 
-Type type
+  - `\Datetime validatedAt`
 
-?string token
+    A timestamp in RFC 3339 format
 
-Updated static bearer token value.
+  - `string vaultID`
 
-
+    Identifier of the vault containing the credential.
 
-[ManagedAgentsTokenEndpointAuthBasicParam](api/beta/vaults/credentials.md)
+### Example
 
-string clientSecret
+```php
+<?php
 
-OAuth client secret.
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-Type type
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-
+$betaManagedAgentsCredentialValidation = $client
+  ->beta
+  ->vaults
+  ->credentials
+  ->mcpOAuthValidate(
+  'vcrd_011CZkZEMt8gZan2iYOQfSkw',
+  vaultID: 'vlt_011CZkZDLs7fYzm1hXNPeRjv',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-[ManagedAgentsTokenEndpointAuthBasicResponse](api/beta/vaults/credentials.md)
+var_dump($betaManagedAgentsCredentialValidation);
+```
 
-Type type
+#### Response (200)
 
-
+```json
+{
+  "credential_id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "has_refresh_token": true,
+  "mcp_probe": {
+    "http_response": {
+      "body": "body",
+      "body_truncated": true,
+      "content_type": "content_type",
+      "status_code": 0
+    },
+    "method": "method"
+  },
+  "refresh": {
+    "http_response": {
+      "body": "body",
+      "body_truncated": true,
+      "content_type": "content_type",
+      "status_code": 0
+    },
+    "status": "succeeded"
+  },
+  "status": "valid",
+  "type": "vault_credential_validation",
+  "validated_at": "2026-03-15T10:00:00Z",
+  "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+}
+```
 
-[ManagedAgentsTokenEndpointAuthBasicUpdateParam](api/beta/vaults/credentials.md)
+## Domain types
 
-Type type
+### Beta Managed Agents Credential
 
-?string clientSecret
+- `ManagedAgentsCredential`
 
-Updated OAuth client secret.
+  - `string id`
 
-
+    Unique identifier for the credential.
 
-[ManagedAgentsTokenEndpointAuthNoneParam](api/beta/vaults/credentials.md)
+  - `?\Datetime archivedAt`
 
-Type type
+    A timestamp in RFC 3339 format
 
-
+  - `Auth auth`
 
-[ManagedAgentsTokenEndpointAuthNoneResponse](api/beta/vaults/credentials.md)
+    Authentication details for a credential.
 
-Type type
+  - `\Datetime createdAt`
 
-
+    A timestamp in RFC 3339 format
 
-[ManagedAgentsTokenEndpointAuthPostParam](api/beta/vaults/credentials.md)
+  - `array<string,string> metadata`
 
-string clientSecret
+    Arbitrary key-value metadata attached to the credential.
 
-OAuth client secret.
+  - `Type type`
 
-Type type
+  - `\Datetime updatedAt`
 
-
+    A timestamp in RFC 3339 format
 
-[ManagedAgentsTokenEndpointAuthPostResponse](api/beta/vaults/credentials.md)
+  - `string vaultID`
 
-Type type
+    Identifier of the vault this credential belongs to.
 
-
+  - `?string displayName`
 
-[ManagedAgentsTokenEndpointAuthPostUpdateParam](api/beta/vaults/credentials.md)
+    Human-readable name for the credential.
 
-Type type
+### Beta Managed Agents Credential Networking Params
 
-?string clientSecret
+- `ManagedAgentsCredentialNetworkingParams`
 
-Updated OAuth client secret.
+  - `ManagedAgentsUnrestrictedCredentialNetworkingParams`
 
-
+    - `Type type`
 
-[ManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta/vaults/credentials.md)
+  - `ManagedAgentsLimitedCredentialNetworkingParams`
 
-Type type
+    - `list<string> allowedHosts`
 
-
+      Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
 
-[ManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta/vaults/credentials.md)
+    - `Type type`
 
-Type type
+### Beta Managed Agents Credential Validation
+
+- `ManagedAgentsCredentialValidation`
+
+  - `string credentialID`
+
+    Unique identifier of the credential that was validated.
+
+  - `bool hasRefreshToken`
+
+    Whether the credential has a refresh token configured.
+
+  - `?ManagedAgentsMCPProbe mcpProbe`
+
+    The failing step of an MCP validation probe.
+
+  - `?ManagedAgentsRefreshObject refresh`
+
+    Outcome of a refresh-token exchange attempted during credential validation.
+
+  - `ManagedAgentsCredentialValidationStatus status`
+
+    Overall verdict of a credential validation probe.
+
+  - `Type type`
+
+  - `\Datetime validatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string vaultID`
+
+    Identifier of the vault containing the credential.
+
+### Beta Managed Agents Credential Validation Status
+
+- `ManagedAgentsCredentialValidationStatus`
+
+  - `"valid"`
+
+  - `"invalid"`
+
+  - `"unknown"`
+
+### Beta Managed Agents Deleted Credential
+
+- `ManagedAgentsDeletedCredential`
+
+  - `string id`
+
+    Unique identifier of the deleted credential.
+
+  - `Type type`
+
+### Beta Managed Agents Environment Variable Auth Response
+
+- `ManagedAgentsEnvironmentVariableAuthResponse`
+
+  - `ManagedAgentsInjectionLocationResponse injectionLocation`
+
+    Where in the outbound request the secret value is substituted.
+
+  - `Networking networking`
+
+    Outbound hosts the secret value is substituted on.
+
+  - `string secretName`
+
+    Name of the environment variable.
+
+  - `Type type`
+
+### Beta Managed Agents Environment Variable Create Params
+
+- `ManagedAgentsEnvironmentVariableCreateParams`
+
+  - `ManagedAgentsCredentialNetworkingParams networking`
+
+    Outbound hosts the secret value is substituted on.
+
+  - `string secretName`
+
+    Name of the environment variable. Immutable after create.
+
+  - `string secretValue`
+
+    Secret value. Write-only; never returned in responses.
+
+  - `Type type`
+
+  - `?ManagedAgentsInjectionLocationParams injectionLocation`
+
+    Where in the outbound request the secret value may be substituted.
+
+### Beta Managed Agents Environment Variable Update Params
+
+- `ManagedAgentsEnvironmentVariableUpdateParams`
+
+  - `Type type`
+
+  - `?ManagedAgentsInjectionLocationUpdateParams injectionLocation`
+
+    Updated injection location.
+
+  - `?ManagedAgentsCredentialNetworkingParams networking`
+
+    Updated networking scope. Full replacement.
+
+  - `?string secretValue`
+
+    Updated secret value.
+
+### Beta Managed Agents Injection Location Params
+
+- `ManagedAgentsInjectionLocationParams`
+
+  - `?bool body`
+
+    Substitute when the placeholder appears in the request body.
+
+  - `?bool header`
+
+    Substitute when the placeholder appears in a request header value.
+
+### Beta Managed Agents Injection Location Response
+
+- `ManagedAgentsInjectionLocationResponse`
+
+  - `bool body`
+
+    Whether the placeholder is substituted in the request body.
+
+  - `bool header`
+
+    Whether the placeholder is substituted in request header values.
+
+### Beta Managed Agents Injection Location Update Params
+
+- `ManagedAgentsInjectionLocationUpdateParams`
+
+  - `?bool body`
+
+    Substitute when the placeholder appears in the request body.
+
+  - `?bool header`
+
+    Substitute when the placeholder appears in a request header value.
+
+### Beta Managed Agents Limited Credential Networking Params
+
+- `ManagedAgentsLimitedCredentialNetworkingParams`
+
+  - `list<string> allowedHosts`
+
+    Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+  - `Type type`
+
+### Beta Managed Agents Limited Credential Networking Response
+
+- `ManagedAgentsLimitedCredentialNetworkingResponse`
+
+  - `list<string> allowedHosts`
+
+    Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+  - `Type type`
+
+### Beta Managed Agents MCP OAuth Auth Response
+
+- `ManagedAgentsMCPOAuthAuthResponse`
+
+  - `string mcpServerURL`
+
+    URL of the MCP server this credential authenticates against.
+
+  - `Type type`
+
+  - `?\Datetime expiresAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?ManagedAgentsMCPOAuthRefreshResponse refresh`
+
+    OAuth refresh token configuration returned in credential responses.
+
+### Beta Managed Agents MCP OAuth Create Params
+
+- `ManagedAgentsMCPOAuthCreateParams`
+
+  - `string accessToken`
+
+    OAuth access token.
+
+  - `string mcpServerURL`
+
+    URL of the MCP server this credential authenticates against.
+
+  - `Type type`
+
+  - `?\Datetime expiresAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?ManagedAgentsMCPOAuthRefreshParams refresh`
+
+    OAuth refresh token parameters for creating a credential with refresh support.
+
+### Beta Managed Agents MCP OAuth Refresh Params
+
+- `ManagedAgentsMCPOAuthRefreshParams`
+
+  - `string clientID`
+
+    OAuth client ID.
+
+  - `string refreshToken`
+
+    OAuth refresh token.
+
+  - `string tokenEndpoint`
+
+    Token endpoint URL used to refresh the access token.
+
+  - `TokenEndpointAuth tokenEndpointAuth`
+
+    Token endpoint requires no client authentication.
+
+  - `?string resource`
+
+    OAuth resource indicator.
+
+  - `?string scope`
+
+    OAuth scope for the refresh request.
+
+### Beta Managed Agents MCP OAuth Refresh Response
+
+- `ManagedAgentsMCPOAuthRefreshResponse`
+
+  - `string clientID`
+
+    OAuth client ID.
+
+  - `string tokenEndpoint`
+
+    Token endpoint URL used to refresh the access token.
+
+  - `TokenEndpointAuth tokenEndpointAuth`
+
+    Token endpoint requires no client authentication.
+
+  - `?string resource`
+
+    OAuth resource indicator.
+
+  - `?string scope`
+
+    OAuth scope for the refresh request.
+
+### Beta Managed Agents MCP OAuth Refresh Update Params
+
+- `ManagedAgentsMCPOAuthRefreshUpdateParams`
+
+  - `?string refreshToken`
+
+    Updated OAuth refresh token.
+
+  - `?string scope`
+
+    Updated OAuth scope for the refresh request.
+
+  - `?TokenEndpointAuth tokenEndpointAuth`
+
+    Updated HTTP Basic authentication parameters for the token endpoint.
+
+### Beta Managed Agents MCP OAuth Update Params
+
+- `ManagedAgentsMCPOAuthUpdateParams`
+
+  - `Type type`
+
+  - `?string accessToken`
+
+    Updated OAuth access token.
+
+  - `?\Datetime expiresAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?ManagedAgentsMCPOAuthRefreshUpdateParams refresh`
+
+    Parameters for updating OAuth refresh token configuration.
+
+### Beta Managed Agents MCP Probe
+
+- `ManagedAgentsMCPProbe`
+
+  - `?ManagedAgentsRefreshHTTPResponse httpResponse`
+
+    An HTTP response captured during a credential validation probe.
+
+  - `string method`
+
+    The MCP method that failed (for example `initialize` or `tools/list`).
+
+### Beta Managed Agents Refresh HTTP Response
+
+- `ManagedAgentsRefreshHTTPResponse`
+
+  - `string body`
+
+    Response body. May be truncated and has sensitive values scrubbed.
+
+  - `bool bodyTruncated`
+
+    Whether `body` was truncated.
+
+  - `string contentType`
+
+    Value of the `Content-Type` response header.
+
+  - `int statusCode`
+
+    HTTP status code.
+
+### Beta Managed Agents Refresh Object
+
+- `ManagedAgentsRefreshObject`
+
+  - `?ManagedAgentsRefreshHTTPResponse httpResponse`
+
+    An HTTP response captured during a credential validation probe.
+
+  - `Status status`
+
+    Outcome of a refresh-token exchange attempted during credential validation.
+
+### Beta Managed Agents Static Bearer Auth Response
+
+- `ManagedAgentsStaticBearerAuthResponse`
+
+  - `string mcpServerURL`
+
+    URL of the MCP server this credential authenticates against.
+
+  - `Type type`
+
+### Beta Managed Agents Static Bearer Create Params
+
+- `ManagedAgentsStaticBearerCreateParams`
+
+  - `string token`
+
+    Static bearer token value.
+
+  - `string mcpServerURL`
+
+    URL of the MCP server this credential authenticates against.
+
+  - `Type type`
+
+### Beta Managed Agents Static Bearer Update Params
+
+- `ManagedAgentsStaticBearerUpdateParams`
+
+  - `Type type`
+
+  - `?string token`
+
+    Updated static bearer token value.
+
+### Beta Managed Agents Token Endpoint Auth Basic Param
+
+- `ManagedAgentsTokenEndpointAuthBasicParam`
+
+  - `string clientSecret`
+
+    OAuth client secret.
+
+  - `Type type`
+
+### Beta Managed Agents Token Endpoint Auth Basic Response
+
+- `ManagedAgentsTokenEndpointAuthBasicResponse`
+
+  - `Type type`
+
+### Beta Managed Agents Token Endpoint Auth Basic Update Param
+
+- `ManagedAgentsTokenEndpointAuthBasicUpdateParam`
+
+  - `Type type`
+
+  - `?string clientSecret`
+
+    Updated OAuth client secret.
+
+### Beta Managed Agents Token Endpoint Auth None Param
+
+- `ManagedAgentsTokenEndpointAuthNoneParam`
+
+  - `Type type`
+
+### Beta Managed Agents Token Endpoint Auth None Response
+
+- `ManagedAgentsTokenEndpointAuthNoneResponse`
+
+  - `Type type`
+
+### Beta Managed Agents Token Endpoint Auth Post Param
+
+- `ManagedAgentsTokenEndpointAuthPostParam`
+
+  - `string clientSecret`
+
+    OAuth client secret.
+
+  - `Type type`
+
+### Beta Managed Agents Token Endpoint Auth Post Response
+
+- `ManagedAgentsTokenEndpointAuthPostResponse`
+
+  - `Type type`
+
+### Beta Managed Agents Token Endpoint Auth Post Update Param
+
+- `ManagedAgentsTokenEndpointAuthPostUpdateParam`
+
+  - `Type type`
+
+  - `?string clientSecret`
+
+    Updated OAuth client secret.
+
+### Beta Managed Agents Unrestricted Credential Networking Params
+
+- `ManagedAgentsUnrestrictedCredentialNetworkingParams`
+
+  - `Type type`
+
+### Beta Managed Agents Unrestricted Credential Networking Response
+
+- `ManagedAgentsUnrestrictedCredentialNetworkingResponse`
+
+  - `Type type`
 
 ---
 

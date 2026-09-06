@@ -1,100 +1,102 @@
 # Upload File
 
-Copy page
+`$ ant beta:files upload`
 
-
-
-CLI
-
-# Upload File
-
-$ ant beta:files upload
-
-POST/v1/files
+**POST** `/v1/files`
 
 Upload File
 
-##### ParametersExpand Collapse
+## Parameters
 
---file: file path
+- `--file: string`
 
-Body param: The file to upload
+  Body param: The file to upload
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+  format: binary
 
-Header param: Optional header to specify the beta version(s) you want to use.
+- `--expires-in-seconds: optional number`
 
-##### ReturnsExpand Collapse
+  Body param: Seconds from upload until the file expires and its bytes become permanently unavailable. Must be between 3600 (one hour) and 7776000 (ninety days).
 
-
+  minimum: 3600, maximum: 7776000
 
-file\_metadata: object { id, created\_at, filename, 5 more } 
+- `--beta: optional array of AnthropicBeta`
 
-
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-id: string
+## Returns
 
-Unique object identifier.
+- `beta_file_metadata: object`
 
-The format and length of IDs may change over time.
+  - `id: string`
 
-created\_at: string
+    Unique object identifier.
 
-RFC 3339 datetime string representing when the file was created.
+    The format and length of IDs may change over time.
 
-filename: string
+  - `created_at: string`
 
-Original filename of the uploaded file.
+    RFC 3339 datetime string representing when the file was created.
 
-mime\_type: string
+    format: date-time
 
-MIME type of the file.
+  - `filename: string`
 
-size\_bytes: number
+    Original filename of the uploaded file.
 
-Size of the file in bytes.
+    maxLength: 500, minLength: 1
 
-
+  - `mime_type: string`
 
-type: "file"
+    MIME type of the file.
 
-Object type.
+    maxLength: 255, minLength: 1
 
-For files, this is always `"file"`.
+  - `size_bytes: number`
 
-downloadable: optional boolean
+    Size of the file in bytes.
 
-Whether the file can be downloaded.
+    minimum: 0
 
-
+  - `type: "file"`
 
-scope: optional object { id, type } 
+    Object type.
 
-The scope of this file, indicating the context in which it was created (e.g., a session).
+    For files, this is always `"file"`.
 
-id: string
+  - `downloadable: optional boolean`
 
-The ID of the scoping resource (e.g., the session ID).
+    Whether the file can be downloaded.
 
-type: "session"
+  - `expires_at: optional string`
 
-The type of scope (e.g., `"session"`).
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
 
-Upload File
+    format: date-time
 
-CLI
+  - `scope: optional object`
 
-```shiki
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `id: string`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `type: "session"`
+
+      The type of scope (e.g., `"session"`).
+
+## Example
+
+```bash
 ant beta:files upload \
   --api-key my-anthropic-api-key \
   --file 'Example data'
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "file_011CNha8iCJcU1wXNR6q4V8w",
   "created_at": "2025-04-15T18:37:24.100435Z",
@@ -103,28 +105,7 @@ Response 200
   "size_bytes": 102400,
   "type": "file",
   "downloadable": false,
-  "scope": {
-    "id": "id",
-    "type": "session"
-  }
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "created_at": "2025-04-15T18:37:24.100435Z",
-  "filename": "document.pdf",
-  "mime_type": "application/pdf",
-  "size_bytes": 102400,
-  "type": "file",
-  "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z",
   "scope": {
     "id": "id",
     "type": "session"

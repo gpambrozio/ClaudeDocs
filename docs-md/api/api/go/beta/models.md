@@ -1,638 +1,1091 @@
 # Models
 
-Copy page
+## List Models
 
-
+`client.Beta.Models.List(ctx, params) (*Page[BetaModelInfo], error)`
 
-Go
+**GET** `/v1/models`
 
-# Models
+List available models.
 
-##### [List Models](api/beta/models/list.md)
+The Models API response can be used to determine which models are available for use in the API. More recently released models are listed first.
 
-client.Beta.Models.List(ctx, params) (\*Page[[BetaModelInfo](api/beta/models.md)], error)
+### Parameters
 
-GET/v1/models
+- `params BetaModelListParams`
 
-##### [Get a Model](api/beta/models/retrieve.md)
+  - `AfterID param.Field[string] Optional`
 
-client.Beta.Models.Get(ctx, modelID, query) (\*[BetaModelInfo](api/beta/models.md), error)
+    Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-GET/v1/models/{model\_id}
+  - `BeforeID param.Field[string] Optional`
 
-##### ModelsExpand Collapse
+    Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-
+  - `Limit param.Field[int64] Optional`
 
-type BetaCapabilitySupport struct{…}
+    Query param: Number of items to return per page.
 
-Indicates whether a capability is supported.
+    Defaults to `20`. Ranges from `1` to `1000`.
 
-Supported bool
+    maximum: 1000, minimum: 1
 
-Whether this capability is supported by the model.
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
-
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-type BetaContextManagementCapability struct{…}
+    - `string`
 
-Context management capability details.
+    - `type AnthropicBeta string`
 
-
+      - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
 
-ClearThinking20251015 [BetaCapabilitySupport](api/beta/models.md)
+      - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
 
-Indicates whether a capability is supported.
+      - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
 
-Supported bool
+      - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
 
-Whether this capability is supported by the model.
+      - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
 
-
+      - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
 
-ClearToolUses20250919 [BetaCapabilitySupport](api/beta/models.md)
+      - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
 
-Indicates whether a capability is supported.
+      - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
 
-Supported bool
+      - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
 
-Whether this capability is supported by the model.
+      - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
 
-
+      - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
 
-Compact20260112 [BetaCapabilitySupport](api/beta/models.md)
+      - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
 
-Indicates whether a capability is supported.
+      - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
 
-Supported bool
+      - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
 
-Whether this capability is supported by the model.
+      - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
 
-Supported bool
+      - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
 
-Whether this capability is supported by the model.
+      - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
 
-
+      - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
 
-type BetaEffortCapability struct{…}
+      - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
 
-Effort (reasoning\_effort) capability details.
+      - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
-
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
-High [BetaCapabilitySupport](api/beta/models.md)
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
-Whether the model supports high effort level.
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
-Supported bool
+      - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
-Whether this capability is supported by the model.
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
-
+      - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
-Low [BetaCapabilitySupport](api/beta/models.md)
+      - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
 
-Whether the model supports low effort level.
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
-Supported bool
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
 
-Whether this capability is supported by the model.
+      - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
 
-
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
 
-Max [BetaCapabilitySupport](api/beta/models.md)
+      - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
-Whether the model supports max effort level.
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
-Supported bool
+      - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-Whether this capability is supported by the model.
+      - `const AnthropicBetaCompact2026_01_12 AnthropicBeta = "compact-2026-01-12"`
 
-
+      - `const AnthropicBetaComputerUse2025_11_24 AnthropicBeta = "computer-use-2025-11-24"`
 
-Medium [BetaCapabilitySupport](api/beta/models.md)
+      - `const AnthropicBetaMCPTunnels2026_06_22 AnthropicBeta = "mcp-tunnels-2026-06-22"`
 
-Whether the model supports medium effort level.
+      - `const AnthropicBetaStructuredOutputs2025_11_13 AnthropicBeta = "structured-outputs-2025-11-13"`
 
-Supported bool
+      - `const AnthropicBetaTaskBudgets2026_03_13 AnthropicBeta = "task-budgets-2026-03-13"`
 
-Whether this capability is supported by the model.
+      - `const AnthropicBetaThinkingDisplayUpdates2026_08_18 AnthropicBeta = "thinking-display-updates-2026-08-18"`
 
-Supported bool
+      - `const AnthropicBetaCEUserManagement2026_07_13 AnthropicBeta = "ce-user-management-2026-07-13"`
 
-Whether this capability is supported by the model.
+      - `const AnthropicBetaMidConversationOutputConfig2026_07_01 AnthropicBeta = "mid-conversation-output-config-2026-07-01"`
 
-
+      - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
 
-Xhigh [BetaCapabilitySupport](api/beta/models.md)
+      - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
-Indicates whether a capability is supported.
+### Returns
 
-Supported bool
+- `type BetaModelInfo struct{…}`
 
-Whether this capability is supported by the model.
+  - `ID string`
 
-
+    Unique model identifier.
 
-type BetaModelCapabilities struct{…}
+  - `AllowedFallbackModels []string`
 
-Model capability information.
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
-
+  - `Capabilities BetaModelCapabilities`
 
-Batch [BetaCapabilitySupport](api/beta/models.md)
+    Model capability information.
 
-Whether the model supports the Batch API.
+    - `Batch BetaCapabilitySupport`
 
-Supported bool
+      Whether the model supports the Batch API.
 
-Whether this capability is supported by the model.
+      - `Supported bool`
 
-
+        Whether this capability is supported by the model.
 
-Citations [BetaCapabilitySupport](api/beta/models.md)
+    - `Citations BetaCapabilitySupport`
 
-Whether the model supports citation generation.
+      Whether the model supports citation generation.
 
-Supported bool
+    - `CodeExecution BetaCapabilitySupport`
 
-Whether this capability is supported by the model.
+      Whether the model supports code execution tools.
 
-
+    - `ContextManagement BetaContextManagementCapability`
 
-CodeExecution [BetaCapabilitySupport](api/beta/models.md)
+      Context management support and available strategies.
 
-Whether the model supports code execution tools.
+      - `ClearThinking20251015 BetaCapabilitySupport`
 
-Supported bool
+        Indicates whether a capability is supported.
 
-Whether this capability is supported by the model.
+      - `ClearToolUses20250919 BetaCapabilitySupport`
 
-
+        Indicates whether a capability is supported.
 
-ContextManagement [BetaContextManagementCapability](api/beta/models.md)
+      - `Compact20260112 BetaCapabilitySupport`
 
-Context management support and available strategies.
+        Indicates whether a capability is supported.
 
-
+      - `Supported bool`
 
-ClearThinking20251015 [BetaCapabilitySupport](api/beta/models.md)
+        Whether this capability is supported by the model.
 
-Indicates whether a capability is supported.
+    - `Effort BetaEffortCapability`
 
-Supported bool
+      Effort (reasoning_effort) support and available levels.
 
-Whether this capability is supported by the model.
+      - `High BetaCapabilitySupport`
 
-
+        Whether the model supports high effort level.
 
-ClearToolUses20250919 [BetaCapabilitySupport](api/beta/models.md)
+      - `Low BetaCapabilitySupport`
 
-Indicates whether a capability is supported.
+        Whether the model supports low effort level.
 
-Supported bool
+      - `Max BetaCapabilitySupport`
 
-Whether this capability is supported by the model.
+        Whether the model supports max effort level.
 
-
+      - `Medium BetaCapabilitySupport`
 
-Compact20260112 [BetaCapabilitySupport](api/beta/models.md)
+        Whether the model supports medium effort level.
 
-Indicates whether a capability is supported.
+      - `Supported bool`
 
-Supported bool
+        Whether this capability is supported by the model.
 
-Whether this capability is supported by the model.
+      - `Xhigh BetaCapabilitySupport`
 
-Supported bool
+        Indicates whether a capability is supported.
 
-Whether this capability is supported by the model.
+    - `ImageInput BetaCapabilitySupport`
 
-
+      Whether the model accepts image content blocks.
 
-Effort [BetaEffortCapability](api/beta/models.md)
+    - `PDFInput BetaCapabilitySupport`
 
-Effort (reasoning\_effort) support and available levels.
+      Whether the model accepts PDF content blocks.
 
-
+    - `StructuredOutputs BetaCapabilitySupport`
 
-High [BetaCapabilitySupport](api/beta/models.md)
+      Whether the model supports structured output / JSON mode / strict tool schemas.
 
-Whether the model supports high effort level.
+    - `Thinking BetaThinkingCapability`
 
-Supported bool
+      Thinking capability and supported type configurations.
 
-Whether this capability is supported by the model.
+      - `Supported bool`
 
-
+        Whether this capability is supported by the model.
 
-Low [BetaCapabilitySupport](api/beta/models.md)
+      - `Types BetaThinkingTypes`
 
-Whether the model supports low effort level.
+        Supported thinking type configurations.
 
-Supported bool
+        - `Adaptive BetaCapabilitySupport`
 
-Whether this capability is supported by the model.
+          Whether the model supports thinking with type 'adaptive' (auto).
 
-
+        - `Enabled BetaCapabilitySupport`
 
-Max [BetaCapabilitySupport](api/beta/models.md)
+          Whether the model supports thinking with type 'enabled'.
 
-Whether the model supports max effort level.
+  - `CreatedAt Time`
 
-Supported bool
+    RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-Whether this capability is supported by the model.
+    format: date-time
 
-
+  - `DisplayName string`
 
-Medium [BetaCapabilitySupport](api/beta/models.md)
+    A human-readable name for the model.
 
-Whether the model supports medium effort level.
+  - `MaxInputTokens int64`
 
-Supported bool
+    Maximum input context window size in tokens for this model.
 
-Whether this capability is supported by the model.
+  - `MaxTokens int64`
 
-Supported bool
+    Maximum value for the `max_tokens` parameter when using this model.
 
-Whether this capability is supported by the model.
+  - `Type Model`
 
-
+    Object type.
 
-Xhigh [BetaCapabilitySupport](api/beta/models.md)
+    For Models, this is always `"model"`.
 
-Indicates whether a capability is supported.
+    default: model
 
-Supported bool
+### Example
 
-Whether this capability is supported by the model.
+```go
+package main
 
-
+import (
+	"context"
+	"fmt"
 
-ImageInput [BetaCapabilitySupport](api/beta/models.md)
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
+)
 
-Whether the model accepts image content blocks.
+func main() {
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	page, err := client.Beta.Models.List(context.TODO(), anthropic.BetaModelListParams{})
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", page)
+}
+```
 
-Supported bool
+#### Response (200)
 
-Whether this capability is supported by the model.
+```json
+{
+  "data": [
+    {
+      "id": "claude-opus-5",
+      "allowed_fallback_models": [
+        "string"
+      ],
+      "capabilities": {
+        "batch": {
+          "supported": true
+        },
+        "citations": {
+          "supported": true
+        },
+        "code_execution": {
+          "supported": true
+        },
+        "context_management": {
+          "clear_thinking_20251015": {
+            "supported": true
+          },
+          "clear_tool_uses_20250919": {
+            "supported": true
+          },
+          "compact_20260112": {
+            "supported": true
+          },
+          "supported": true
+        },
+        "effort": {
+          "high": {
+            "supported": true
+          },
+          "low": {
+            "supported": true
+          },
+          "max": {
+            "supported": true
+          },
+          "medium": {
+            "supported": true
+          },
+          "supported": true,
+          "xhigh": {
+            "supported": true
+          }
+        },
+        "image_input": {
+          "supported": true
+        },
+        "pdf_input": {
+          "supported": true
+        },
+        "structured_outputs": {
+          "supported": true
+        },
+        "thinking": {
+          "supported": true,
+          "types": {
+            "adaptive": {
+              "supported": true
+            },
+            "enabled": {
+              "supported": true
+            }
+          }
+        }
+      },
+      "created_at": "2026-07-24T00:00:00Z",
+      "display_name": "Claude Opus 5",
+      "max_input_tokens": 0,
+      "max_tokens": 0,
+      "type": "model"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
 
-
+## Get a Model
 
-PDFInput [BetaCapabilitySupport](api/beta/models.md)
+`client.Beta.Models.Get(ctx, modelID, query) (*BetaModelInfo, error)`
 
-Whether the model accepts PDF content blocks.
+**GET** `/v1/models/{model_id}`
 
-Supported bool
+Get a specific model.
 
-Whether this capability is supported by the model.
+The Models API response can be used to determine information about a specific model or resolve a model alias to a model ID.
 
-
+### Parameters
 
-StructuredOutputs [BetaCapabilitySupport](api/beta/models.md)
+- `modelID string`
 
-Whether the model supports structured output / JSON mode / strict tool schemas.
+  Model identifier or alias.
 
-Supported bool
+- `query BetaModelGetParams`
 
-Whether this capability is supported by the model.
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
-
+    Optional header to specify the beta version(s) you want to use.
 
-Thinking [BetaThinkingCapability](api/beta/models.md)
+    - `string`
 
-Thinking capability and supported type configurations.
+    - `type AnthropicBeta string`
 
-Supported bool
+      - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
 
-Whether this capability is supported by the model.
+      - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
 
-
+      - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
 
-Types [BetaThinkingTypes](api/beta/models.md)
+      - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
 
-Supported thinking type configurations.
+      - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
 
-
+      - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
 
-Adaptive [BetaCapabilitySupport](api/beta/models.md)
+      - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
 
-Whether the model supports thinking with type 'adaptive' (auto).
+      - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
 
-Supported bool
+      - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
 
-Whether this capability is supported by the model.
+      - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
 
-
+      - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
 
-Enabled [BetaCapabilitySupport](api/beta/models.md)
+      - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
 
-Whether the model supports thinking with type 'enabled'.
+      - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
 
-Supported bool
+      - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
 
-Whether this capability is supported by the model.
+      - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
 
-
+      - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
 
-type BetaModelInfo struct{…}
+      - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
 
-ID string
+      - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
 
-Unique model identifier.
+      - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
 
-AllowedFallbackModels []string
+      - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
-Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
-
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
-Capabilities [BetaModelCapabilities](api/beta/models.md)
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
-Model capability information.
+      - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
-
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
-Batch [BetaCapabilitySupport](api/beta/models.md)
+      - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
-Whether the model supports the Batch API.
+      - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
 
-Supported bool
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
-Whether this capability is supported by the model.
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
 
-
+      - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
 
-Citations [BetaCapabilitySupport](api/beta/models.md)
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
 
-Whether the model supports citation generation.
+      - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
-Supported bool
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
-Whether this capability is supported by the model.
+      - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-
+      - `const AnthropicBetaCompact2026_01_12 AnthropicBeta = "compact-2026-01-12"`
 
-CodeExecution [BetaCapabilitySupport](api/beta/models.md)
+      - `const AnthropicBetaComputerUse2025_11_24 AnthropicBeta = "computer-use-2025-11-24"`
 
-Whether the model supports code execution tools.
+      - `const AnthropicBetaMCPTunnels2026_06_22 AnthropicBeta = "mcp-tunnels-2026-06-22"`
 
-Supported bool
+      - `const AnthropicBetaStructuredOutputs2025_11_13 AnthropicBeta = "structured-outputs-2025-11-13"`
 
-Whether this capability is supported by the model.
+      - `const AnthropicBetaTaskBudgets2026_03_13 AnthropicBeta = "task-budgets-2026-03-13"`
 
-
+      - `const AnthropicBetaThinkingDisplayUpdates2026_08_18 AnthropicBeta = "thinking-display-updates-2026-08-18"`
 
-ContextManagement [BetaContextManagementCapability](api/beta/models.md)
+      - `const AnthropicBetaCEUserManagement2026_07_13 AnthropicBeta = "ce-user-management-2026-07-13"`
 
-Context management support and available strategies.
+      - `const AnthropicBetaMidConversationOutputConfig2026_07_01 AnthropicBeta = "mid-conversation-output-config-2026-07-01"`
 
-
+      - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
 
-ClearThinking20251015 [BetaCapabilitySupport](api/beta/models.md)
+      - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
-Indicates whether a capability is supported.
+### Returns
 
-Supported bool
+- `type BetaModelInfo struct{…}`
 
-Whether this capability is supported by the model.
+  - `ID string`
 
-
+    Unique model identifier.
 
-ClearToolUses20250919 [BetaCapabilitySupport](api/beta/models.md)
+  - `AllowedFallbackModels []string`
 
-Indicates whether a capability is supported.
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
-Supported bool
+  - `Capabilities BetaModelCapabilities`
 
-Whether this capability is supported by the model.
+    Model capability information.
 
-
+    - `Batch BetaCapabilitySupport`
 
-Compact20260112 [BetaCapabilitySupport](api/beta/models.md)
+      Whether the model supports the Batch API.
 
-Indicates whether a capability is supported.
+      - `Supported bool`
 
-Supported bool
+        Whether this capability is supported by the model.
 
-Whether this capability is supported by the model.
+    - `Citations BetaCapabilitySupport`
 
-Supported bool
+      Whether the model supports citation generation.
 
-Whether this capability is supported by the model.
+    - `CodeExecution BetaCapabilitySupport`
 
-
+      Whether the model supports code execution tools.
 
-Effort [BetaEffortCapability](api/beta/models.md)
+    - `ContextManagement BetaContextManagementCapability`
 
-Effort (reasoning\_effort) support and available levels.
+      Context management support and available strategies.
 
-
+      - `ClearThinking20251015 BetaCapabilitySupport`
 
-High [BetaCapabilitySupport](api/beta/models.md)
+        Indicates whether a capability is supported.
 
-Whether the model supports high effort level.
+      - `ClearToolUses20250919 BetaCapabilitySupport`
 
-Supported bool
+        Indicates whether a capability is supported.
 
-Whether this capability is supported by the model.
+      - `Compact20260112 BetaCapabilitySupport`
 
-
+        Indicates whether a capability is supported.
 
-Low [BetaCapabilitySupport](api/beta/models.md)
+      - `Supported bool`
 
-Whether the model supports low effort level.
+        Whether this capability is supported by the model.
 
-Supported bool
+    - `Effort BetaEffortCapability`
 
-Whether this capability is supported by the model.
+      Effort (reasoning_effort) support and available levels.
 
-
+      - `High BetaCapabilitySupport`
 
-Max [BetaCapabilitySupport](api/beta/models.md)
+        Whether the model supports high effort level.
 
-Whether the model supports max effort level.
+      - `Low BetaCapabilitySupport`
 
-Supported bool
+        Whether the model supports low effort level.
 
-Whether this capability is supported by the model.
+      - `Max BetaCapabilitySupport`
 
-
+        Whether the model supports max effort level.
 
-Medium [BetaCapabilitySupport](api/beta/models.md)
+      - `Medium BetaCapabilitySupport`
 
-Whether the model supports medium effort level.
+        Whether the model supports medium effort level.
 
-Supported bool
+      - `Supported bool`
 
-Whether this capability is supported by the model.
+        Whether this capability is supported by the model.
 
-Supported bool
+      - `Xhigh BetaCapabilitySupport`
 
-Whether this capability is supported by the model.
+        Indicates whether a capability is supported.
 
-
+    - `ImageInput BetaCapabilitySupport`
 
-Xhigh [BetaCapabilitySupport](api/beta/models.md)
+      Whether the model accepts image content blocks.
 
-Indicates whether a capability is supported.
+    - `PDFInput BetaCapabilitySupport`
 
-Supported bool
+      Whether the model accepts PDF content blocks.
 
-Whether this capability is supported by the model.
+    - `StructuredOutputs BetaCapabilitySupport`
 
-
+      Whether the model supports structured output / JSON mode / strict tool schemas.
 
-ImageInput [BetaCapabilitySupport](api/beta/models.md)
+    - `Thinking BetaThinkingCapability`
 
-Whether the model accepts image content blocks.
+      Thinking capability and supported type configurations.
 
-Supported bool
+      - `Supported bool`
 
-Whether this capability is supported by the model.
+        Whether this capability is supported by the model.
 
-
+      - `Types BetaThinkingTypes`
 
-PDFInput [BetaCapabilitySupport](api/beta/models.md)
+        Supported thinking type configurations.
 
-Whether the model accepts PDF content blocks.
+        - `Adaptive BetaCapabilitySupport`
 
-Supported bool
+          Whether the model supports thinking with type 'adaptive' (auto).
 
-Whether this capability is supported by the model.
+        - `Enabled BetaCapabilitySupport`
 
-
+          Whether the model supports thinking with type 'enabled'.
 
-StructuredOutputs [BetaCapabilitySupport](api/beta/models.md)
+  - `CreatedAt Time`
 
-Whether the model supports structured output / JSON mode / strict tool schemas.
+    RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-Supported bool
+    format: date-time
 
-Whether this capability is supported by the model.
+  - `DisplayName string`
 
-
+    A human-readable name for the model.
 
-Thinking [BetaThinkingCapability](api/beta/models.md)
+  - `MaxInputTokens int64`
 
-Thinking capability and supported type configurations.
+    Maximum input context window size in tokens for this model.
 
-Supported bool
+  - `MaxTokens int64`
 
-Whether this capability is supported by the model.
+    Maximum value for the `max_tokens` parameter when using this model.
 
-
+  - `Type Model`
 
-Types [BetaThinkingTypes](api/beta/models.md)
+    Object type.
 
-Supported thinking type configurations.
+    For Models, this is always `"model"`.
 
-
+    default: model
 
-Adaptive [BetaCapabilitySupport](api/beta/models.md)
+### Example
 
-Whether the model supports thinking with type 'adaptive' (auto).
+```go
+package main
 
-Supported bool
+import (
+	"context"
+	"fmt"
 
-Whether this capability is supported by the model.
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
+)
 
-
+func main() {
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaModelInfo, err := client.Beta.Models.Get(
+		context.TODO(),
+		"model_id",
+		anthropic.BetaModelGetParams{},
+	)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaModelInfo.ID)
+}
+```
 
-Enabled [BetaCapabilitySupport](api/beta/models.md)
+#### Response (200)
 
-Whether the model supports thinking with type 'enabled'.
+```json
+{
+  "id": "claude-opus-5",
+  "allowed_fallback_models": [
+    "string"
+  ],
+  "capabilities": {
+    "batch": {
+      "supported": true
+    },
+    "citations": {
+      "supported": true
+    },
+    "code_execution": {
+      "supported": true
+    },
+    "context_management": {
+      "clear_thinking_20251015": {
+        "supported": true
+      },
+      "clear_tool_uses_20250919": {
+        "supported": true
+      },
+      "compact_20260112": {
+        "supported": true
+      },
+      "supported": true
+    },
+    "effort": {
+      "high": {
+        "supported": true
+      },
+      "low": {
+        "supported": true
+      },
+      "max": {
+        "supported": true
+      },
+      "medium": {
+        "supported": true
+      },
+      "supported": true,
+      "xhigh": {
+        "supported": true
+      }
+    },
+    "image_input": {
+      "supported": true
+    },
+    "pdf_input": {
+      "supported": true
+    },
+    "structured_outputs": {
+      "supported": true
+    },
+    "thinking": {
+      "supported": true,
+      "types": {
+        "adaptive": {
+          "supported": true
+        },
+        "enabled": {
+          "supported": true
+        }
+      }
+    }
+  },
+  "created_at": "2026-07-24T00:00:00Z",
+  "display_name": "Claude Opus 5",
+  "max_input_tokens": 0,
+  "max_tokens": 0,
+  "type": "model"
+}
+```
 
-Supported bool
+## Domain types
 
-Whether this capability is supported by the model.
+### Beta Capability Support
 
-CreatedAt Time
+- `type BetaCapabilitySupport struct{…}`
 
-RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
+  Indicates whether a capability is supported.
 
-DisplayName string
+  - `Supported bool`
 
-A human-readable name for the model.
+    Whether this capability is supported by the model.
 
-MaxInputTokens int64
+### Beta Context Management Capability
 
-Maximum input context window size in tokens for this model.
+- `type BetaContextManagementCapability struct{…}`
 
-MaxTokens int64
+  Context management capability details.
 
-Maximum value for the `max_tokens` parameter when using this model.
+  - `ClearThinking20251015 BetaCapabilitySupport`
 
-
+    Indicates whether a capability is supported.
 
-Type Model
+    - `Supported bool`
 
-Object type.
+      Whether this capability is supported by the model.
 
-For Models, this is always `"model"`.
+  - `ClearToolUses20250919 BetaCapabilitySupport`
 
-
+    Indicates whether a capability is supported.
 
-type BetaThinkingCapability struct{…}
+  - `Compact20260112 BetaCapabilitySupport`
 
-Thinking capability details.
+    Indicates whether a capability is supported.
 
-Supported bool
+  - `Supported bool`
 
-Whether this capability is supported by the model.
+    Whether this capability is supported by the model.
 
-
+### Beta Effort Capability
 
-Types [BetaThinkingTypes](api/beta/models.md)
+- `type BetaEffortCapability struct{…}`
 
-Supported thinking type configurations.
+  Effort (reasoning_effort) capability details.
 
-
+  - `High BetaCapabilitySupport`
 
-Adaptive [BetaCapabilitySupport](api/beta/models.md)
+    Whether the model supports high effort level.
 
-Whether the model supports thinking with type 'adaptive' (auto).
+    - `Supported bool`
 
-Supported bool
+      Whether this capability is supported by the model.
 
-Whether this capability is supported by the model.
+  - `Low BetaCapabilitySupport`
 
-
+    Whether the model supports low effort level.
 
-Enabled [BetaCapabilitySupport](api/beta/models.md)
+  - `Max BetaCapabilitySupport`
 
-Whether the model supports thinking with type 'enabled'.
+    Whether the model supports max effort level.
 
-Supported bool
+  - `Medium BetaCapabilitySupport`
 
-Whether this capability is supported by the model.
+    Whether the model supports medium effort level.
 
-
+  - `Supported bool`
 
-type BetaThinkingTypes struct{…}
+    Whether this capability is supported by the model.
 
-Supported thinking type configurations.
+  - `Xhigh BetaCapabilitySupport`
 
-
+    Indicates whether a capability is supported.
 
-Adaptive [BetaCapabilitySupport](api/beta/models.md)
+### Beta Model Capabilities
 
-Whether the model supports thinking with type 'adaptive' (auto).
+- `type BetaModelCapabilities struct{…}`
 
-Supported bool
+  Model capability information.
 
-Whether this capability is supported by the model.
+  - `Batch BetaCapabilitySupport`
 
-
+    Whether the model supports the Batch API.
 
-Enabled [BetaCapabilitySupport](api/beta/models.md)
+    - `Supported bool`
 
-Whether the model supports thinking with type 'enabled'.
+      Whether this capability is supported by the model.
 
-Supported bool
+  - `Citations BetaCapabilitySupport`
 
-Whether this capability is supported by the model.
+    Whether the model supports citation generation.
+
+  - `CodeExecution BetaCapabilitySupport`
+
+    Whether the model supports code execution tools.
+
+  - `ContextManagement BetaContextManagementCapability`
+
+    Context management support and available strategies.
+
+    - `ClearThinking20251015 BetaCapabilitySupport`
+
+      Indicates whether a capability is supported.
+
+    - `ClearToolUses20250919 BetaCapabilitySupport`
+
+      Indicates whether a capability is supported.
+
+    - `Compact20260112 BetaCapabilitySupport`
+
+      Indicates whether a capability is supported.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+  - `Effort BetaEffortCapability`
+
+    Effort (reasoning_effort) support and available levels.
+
+    - `High BetaCapabilitySupport`
+
+      Whether the model supports high effort level.
+
+    - `Low BetaCapabilitySupport`
+
+      Whether the model supports low effort level.
+
+    - `Max BetaCapabilitySupport`
+
+      Whether the model supports max effort level.
+
+    - `Medium BetaCapabilitySupport`
+
+      Whether the model supports medium effort level.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+    - `Xhigh BetaCapabilitySupport`
+
+      Indicates whether a capability is supported.
+
+  - `ImageInput BetaCapabilitySupport`
+
+    Whether the model accepts image content blocks.
+
+  - `PDFInput BetaCapabilitySupport`
+
+    Whether the model accepts PDF content blocks.
+
+  - `StructuredOutputs BetaCapabilitySupport`
+
+    Whether the model supports structured output / JSON mode / strict tool schemas.
+
+  - `Thinking BetaThinkingCapability`
+
+    Thinking capability and supported type configurations.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+    - `Types BetaThinkingTypes`
+
+      Supported thinking type configurations.
+
+      - `Adaptive BetaCapabilitySupport`
+
+        Whether the model supports thinking with type 'adaptive' (auto).
+
+      - `Enabled BetaCapabilitySupport`
+
+        Whether the model supports thinking with type 'enabled'.
+
+### Beta Model Info
+
+- `type BetaModelInfo struct{…}`
+
+  - `ID string`
+
+    Unique model identifier.
+
+  - `AllowedFallbackModels []string`
+
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
+
+  - `Capabilities BetaModelCapabilities`
+
+    Model capability information.
+
+    - `Batch BetaCapabilitySupport`
+
+      Whether the model supports the Batch API.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `Citations BetaCapabilitySupport`
+
+      Whether the model supports citation generation.
+
+    - `CodeExecution BetaCapabilitySupport`
+
+      Whether the model supports code execution tools.
+
+    - `ContextManagement BetaContextManagementCapability`
+
+      Context management support and available strategies.
+
+      - `ClearThinking20251015 BetaCapabilitySupport`
+
+        Indicates whether a capability is supported.
+
+      - `ClearToolUses20250919 BetaCapabilitySupport`
+
+        Indicates whether a capability is supported.
+
+      - `Compact20260112 BetaCapabilitySupport`
+
+        Indicates whether a capability is supported.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `Effort BetaEffortCapability`
+
+      Effort (reasoning_effort) support and available levels.
+
+      - `High BetaCapabilitySupport`
+
+        Whether the model supports high effort level.
+
+      - `Low BetaCapabilitySupport`
+
+        Whether the model supports low effort level.
+
+      - `Max BetaCapabilitySupport`
+
+        Whether the model supports max effort level.
+
+      - `Medium BetaCapabilitySupport`
+
+        Whether the model supports medium effort level.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+      - `Xhigh BetaCapabilitySupport`
+
+        Indicates whether a capability is supported.
+
+    - `ImageInput BetaCapabilitySupport`
+
+      Whether the model accepts image content blocks.
+
+    - `PDFInput BetaCapabilitySupport`
+
+      Whether the model accepts PDF content blocks.
+
+    - `StructuredOutputs BetaCapabilitySupport`
+
+      Whether the model supports structured output / JSON mode / strict tool schemas.
+
+    - `Thinking BetaThinkingCapability`
+
+      Thinking capability and supported type configurations.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+      - `Types BetaThinkingTypes`
+
+        Supported thinking type configurations.
+
+        - `Adaptive BetaCapabilitySupport`
+
+          Whether the model supports thinking with type 'adaptive' (auto).
+
+        - `Enabled BetaCapabilitySupport`
+
+          Whether the model supports thinking with type 'enabled'.
+
+  - `CreatedAt Time`
+
+    RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
+
+    format: date-time
+
+  - `DisplayName string`
+
+    A human-readable name for the model.
+
+  - `MaxInputTokens int64`
+
+    Maximum input context window size in tokens for this model.
+
+  - `MaxTokens int64`
+
+    Maximum value for the `max_tokens` parameter when using this model.
+
+  - `Type Model`
+
+    Object type.
+
+    For Models, this is always `"model"`.
+
+    default: model
+
+### Beta Thinking Capability
+
+- `type BetaThinkingCapability struct{…}`
+
+  Thinking capability details.
+
+  - `Supported bool`
+
+    Whether this capability is supported by the model.
+
+  - `Types BetaThinkingTypes`
+
+    Supported thinking type configurations.
+
+    - `Adaptive BetaCapabilitySupport`
+
+      Whether the model supports thinking with type 'adaptive' (auto).
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+    - `Enabled BetaCapabilitySupport`
+
+      Whether the model supports thinking with type 'enabled'.
+
+### Beta Thinking Types
+
+- `type BetaThinkingTypes struct{…}`
+
+  Supported thinking type configurations.
+
+  - `Adaptive BetaCapabilitySupport`
+
+    Whether the model supports thinking with type 'adaptive' (auto).
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+  - `Enabled BetaCapabilitySupport`
+
+    Whether the model supports thinking with type 'enabled'.
 
 ---
 

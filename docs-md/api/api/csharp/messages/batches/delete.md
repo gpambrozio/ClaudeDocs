@@ -1,16 +1,8 @@
 # Delete a Message Batch
 
-Copy page
+`DeletedMessageBatch Messages.Batches.Delete(parameters, cancellationToken = default)`
 
-
-
-C#
-
-# Delete a Message Batch
-
-[DeletedMessageBatch](api/messages/batches.md) Messages.Batches.Delete(BatchDeleteParamsparameters, CancellationTokencancellationToken = default)
-
-DELETE/v1/messages/batches/{message\_batch\_id}
+**DELETE** `/v1/messages/batches/{message_batch_id}`
 
 Delete a Message Batch.
 
@@ -18,39 +10,31 @@ Message Batches can only be deleted once they've finished processing. If you'd l
 
 Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `BatchDeleteParams parameters`
 
-BatchDeleteParams parameters
+  - `required string messageBatchID`
 
-required string messageBatchID
+    ID of the Message Batch.
 
-ID of the Message Batch.
+## Returns
 
-##### ReturnsExpand Collapse
+- `class DeletedMessageBatch:`
 
-
+  - `required string ID`
 
-class DeletedMessageBatch:
+    ID of the Message Batch.
 
-required string ID
+  - `JsonElement Type = "message_batch_deleted"`
 
-ID of the Message Batch.
+    Deleted object type.
 
-
+    For Message Batches, this is always `"message_batch_deleted"`.
 
-JsonElement Type "message\_batch\_deleted"constant
+## Example
 
-Deleted object type.
-
-For Message Batches, this is always `"message_batch_deleted"`.
-
-Delete a Message Batch
-
-C#
-
-```shiki
+```csharp
 BatchDeleteParams parameters = new() { MessageBatchID = "message_batch_id" };
 
 var deletedMessageBatch = await client.Messages.Batches.Delete(parameters);
@@ -58,24 +42,9 @@ var deletedMessageBatch = await client.Messages.Batches.Delete(parameters);
 Console.WriteLine(deletedMessageBatch);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "type": "message_batch_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
   "type": "message_batch_deleted"

@@ -1,42 +1,74 @@
 # Organizations
 
-Copy page
+## Get Current Organization
 
-
+**GET** `/v1/organizations/me`
 
-# Organizations
+Retrieve information about the organization associated with the authenticated API key.
 
-##### [Get Current Organization](api/http/admin/organizations/me.md)
+### Returns
 
-GET/v1/organizations/me
+- `Organization object`
 
-##### Models
+  - `id: string`
 
-
+    ID of the Organization.
 
-Organization object{ id, name, type }
+    format: uuid
 
-
+  - `name: string`
 
-id: string
+    Name of the Organization.
 
-ID of the Organization.
+  - `type: "organization"`
 
-formatuuid
+    Object type.
 
-name: string
+    For Organizations, this is always `"organization"`.
 
-Name of the Organization.
+    default: organization
 
-
+### Example
 
-type: "organization"
+```bash
+curl https://api.anthropic.com/v1/organizations/me \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+```
 
-Object type.
+#### Response (200)
 
-For Organizations, this is always `"organization"`.
+```json
+{
+  "id": "12345678-1234-5678-1234-567812345678",
+  "name": "Organization Name",
+  "type": "organization"
+}
+```
 
-defaultorganization
+## Domain types
+
+### Organization
+
+- `Organization object`
+
+  - `id: string`
+
+    ID of the Organization.
+
+    format: uuid
+
+  - `name: string`
+
+    Name of the Organization.
+
+  - `type: "organization"`
+
+    Object type.
+
+    For Organizations, this is always `"organization"`.
+
+    default: organization
 
 ---
 

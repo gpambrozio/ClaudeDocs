@@ -1,72 +1,43 @@
 # Delete File
 
-Copy page
-
-
-
-cURL
-
-# Delete File
-
-DELETE/v1/files/{file\_id}
+**DELETE** `/v1/files/{file_id}`
 
 Delete File
 
-##### Path parameters
+## Path parameters
 
-file\_id: string
+- `file_id: string`
 
-ID of the File.
+  ID of the File.
 
-##### Returns
+## Returns
 
-
+- `DeletedFile object`
 
-DeletedFile object{ id, type }
+  - `id: string`
 
-id: string
+    ID of the deleted file.
 
-ID of the deleted file.
+  - `type: optional "file_deleted"`
 
-
+    Deleted object type.
 
-type: optional "file\_deleted"
+    For file deletion, this is always `"file_deleted"`.
 
-Deleted object type.
+    default: file_deleted
 
-For file deletion, this is always `"file_deleted"`.
+## Example
 
-defaultfile\_deleted
-
-Delete File
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/files/$FILE_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "type": "file_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "file_011CNha8iCJcU1wXNR6q4V8w",
   "type": "file_deleted"

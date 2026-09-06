@@ -1,38 +1,28 @@
 # Download File
 
-Copy page
+`$client->beta->files->download(string fileID, ?list<AnthropicBeta> betas): download`
 
-
-
-PHP
-
-# Download File
-
-$client->beta->files->download(string fileID, ?list<AnthropicBeta> betas): download
-
-GET/v1/files/{file\_id}/content
+**GET** `/v1/files/{file_id}/content`
 
 Download File
 
-##### ParametersExpand Collapse
+## Parameters
 
-fileID: string
+- `fileID: string`
 
-ID of the File.
+  ID of the File.
 
-betas?:optional list<AnthropicBeta>
+- `betas?:optional list<AnthropicBeta>`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-mixed
+- `mixed`
 
-Download File
+## Example
 
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -40,13 +30,11 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $response = $client->beta->files->download(
-  'file_id', betas: ['message-batches-2024-09-24']
+  'file_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
 );
 
 var_dump($response);
 ```
-
-##### Returns Examples
 
 ---
 

@@ -1,99 +1,90 @@
 # Upload File
 
-Copy page
+`$client->beta->files->upload(string file, ?int expiresInSeconds, ?list<AnthropicBeta> betas): BetaFileMetadata`
 
-
-
-PHP
-
-# Upload File
-
-$client->beta->files->upload(string file, ?list<AnthropicBeta> betas): [FileMetadata](api/beta/files.md)
-
-POST/v1/files
+**POST** `/v1/files`
 
 Upload File
 
-##### ParametersExpand Collapse
+## Parameters
 
-file: string
+- `file: string`
 
-The file to upload
+  The file to upload
 
-betas?:optional list<AnthropicBeta>
+- `expiresInSeconds?:optional int`
 
-Optional header to specify the beta version(s) you want to use.
+  Seconds from upload until the file expires and its bytes become permanently unavailable. Must be between 3600 (one hour) and 7776000 (ninety days).
 
-##### ReturnsExpand Collapse
+- `betas?:optional list<AnthropicBeta>`
 
-
+  Optional header to specify the beta version(s) you want to use.
 
-[FileMetadata](api/beta/files.md)
+## Returns
 
-
+- `BetaFileMetadata`
 
-string id
+  - `string id`
 
-Unique object identifier.
+    Unique object identifier.
 
-The format and length of IDs may change over time.
+    The format and length of IDs may change over time.
 
-\Datetime createdAt
+  - `\Datetime createdAt`
 
-RFC 3339 datetime string representing when the file was created.
+    RFC 3339 datetime string representing when the file was created.
 
-string filename
+  - `string filename`
 
-Original filename of the uploaded file.
+    Original filename of the uploaded file.
 
-string mimeType
+  - `string mimeType`
 
-MIME type of the file.
+    MIME type of the file.
 
-int sizeBytes
+  - `int sizeBytes`
 
-Size of the file in bytes.
+    Size of the file in bytes.
 
-
+  - `"file" type`
 
-"file" type
+    Object type.
 
-Object type.
+    For files, this is always `"file"`.
 
-For files, this is always `"file"`.
+  - `?bool downloadable`
 
-?bool downloadable
+    Whether the file can be downloaded.
 
-Whether the file can be downloaded.
+  - `?\Datetime expiresAt`
 
-?[BetaFileScope](api/beta/files.md) scope
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
 
-The scope of this file, indicating the context in which it was created (e.g., a session).
+  - `?BetaFileScope scope`
 
-Upload File
+    The scope of this file, indicating the context in which it was created (e.g., a session).
 
-PHP
+## Example
 
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
-$fileMetadata = $client->beta->files->upload(
+$betaFileMetadata = $client->beta->files->upload(
   file: FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
-  betas: ['message-batches-2024-09-24'],
+  expiresInSeconds: 3600,
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
-var_dump($fileMetadata);
+var_dump($betaFileMetadata);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "file_011CNha8iCJcU1wXNR6q4V8w",
   "created_at": "2025-04-15T18:37:24.100435Z",
@@ -102,28 +93,7 @@ Response 200
   "size_bytes": 102400,
   "type": "file",
   "downloadable": false,
-  "scope": {
-    "id": "id",
-    "type": "session"
-  }
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "created_at": "2025-04-15T18:37:24.100435Z",
-  "filename": "document.pdf",
-  "mime_type": "application/pdf",
-  "size_bytes": 102400,
-  "type": "file",
-  "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z",
   "scope": {
     "id": "id",
     "type": "session"

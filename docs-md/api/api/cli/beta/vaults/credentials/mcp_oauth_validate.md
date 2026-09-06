@@ -1,200 +1,141 @@
 # Validate Credential
 
-Copy page
+`$ ant beta:vaults:credentials mcp-oauth-validate`
 
-
-
-CLI
-
-# Validate Credential
-
-$ ant beta:vaults:credentials mcp-oauth-validate
-
-POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
+**POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
 
 Validate Credential
 
-##### ParametersExpand Collapse
+## Parameters
 
---vault-id: string
+- `--vault-id: string`
 
-Path param: Path parameter vault\_id
+  Path param: Path parameter vault_id
 
---credential-id: string
+- `--credential-id: string`
 
-Path param: Path parameter credential\_id
+  Path param: Path parameter credential_id
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--beta: optional array of AnthropicBeta`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `beta_managed_agents_credential_validation: object`
 
-beta\_managed\_agents\_credential\_validation: object { credential\_id, has\_refresh\_token, mcp\_probe, 5 more } 
+  Result of live-probing a credential against its configured MCP server.
 
-Result of live-probing a credential against its configured MCP server.
+  - `credential_id: string`
 
-credential\_id: string
+    Unique identifier of the credential that was validated.
 
-Unique identifier of the credential that was validated.
+  - `has_refresh_token: boolean`
 
-has\_refresh\_token: boolean
+    Whether the credential has a refresh token configured.
 
-Whether the credential has a refresh token configured.
+  - `mcp_probe: object`
 
-
+    The failing step of an MCP validation probe.
 
-mcp\_probe: object { http\_response, method } 
+    - `http_response: object`
 
-The failing step of an MCP validation probe.
+      An HTTP response captured during a credential validation probe.
 
-
+      - `body: string`
 
-http\_response: object { body, body\_truncated, content\_type, status\_code } 
+        Response body. May be truncated and has sensitive values scrubbed.
 
-An HTTP response captured during a credential validation probe.
+      - `body_truncated: boolean`
 
-body: string
+        Whether `body` was truncated.
 
-Response body. May be truncated and has sensitive values scrubbed.
+      - `content_type: string`
 
-body\_truncated: boolean
+        Value of the `Content-Type` response header.
 
-Whether `body` was truncated.
+      - `status_code: number`
 
-content\_type: string
+        HTTP status code.
 
-Value of the `Content-Type` response header.
+        format: int32
 
-status\_code: number
+    - `method: string`
 
-HTTP status code.
+      The MCP method that failed (for example `initialize` or `tools/list`).
 
-method: string
+  - `refresh: object`
 
-The MCP method that failed (for example `initialize` or `tools/list`).
+    Outcome of a refresh-token exchange attempted during credential validation.
 
-
+    - `http_response: object`
 
-refresh: object { http\_response, status } 
+      An HTTP response captured during a credential validation probe.
 
-Outcome of a refresh-token exchange attempted during credential validation.
+      - `body: string`
 
-
+        Response body. May be truncated and has sensitive values scrubbed.
 
-http\_response: object { body, body\_truncated, content\_type, status\_code } 
+      - `body_truncated: boolean`
 
-An HTTP response captured during a credential validation probe.
+        Whether `body` was truncated.
 
-body: string
+      - `content_type: string`
 
-Response body. May be truncated and has sensitive values scrubbed.
+        Value of the `Content-Type` response header.
 
-body\_truncated: boolean
+      - `status_code: number`
 
-Whether `body` was truncated.
+        HTTP status code.
 
-content\_type: string
+        format: int32
 
-Value of the `Content-Type` response header.
+    - `status: "succeeded" or "failed" or "connect_error" or "no_refresh_token"`
 
-status\_code: number
+      Outcome of a refresh-token exchange attempted during credential validation.
 
-HTTP status code.
+      - `"succeeded"`
 
-
+      - `"failed"`
 
-status: "succeeded" or "failed" or "connect\_error" or "no\_refresh\_token"
+      - `"connect_error"`
 
-Outcome of a refresh-token exchange attempted during credential validation.
+      - `"no_refresh_token"`
 
-"succeeded"
+  - `status: "valid" or "invalid" or "unknown"`
 
-"failed"
+    Overall verdict of a credential validation probe.
 
-"connect\_error"
+    - `"valid"`
 
-"no\_refresh\_token"
+    - `"invalid"`
 
-
+    - `"unknown"`
 
-status: "valid" or "invalid" or "unknown"
+  - `type: "vault_credential_validation"`
 
-Overall verdict of a credential validation probe.
+  - `validated_at: string`
 
-"valid"
+    A timestamp in RFC 3339 format
 
-"invalid"
+    format: date-time
 
-"unknown"
+  - `vault_id: string`
 
-
+    Identifier of the vault containing the credential.
 
-type: "vault\_credential\_validation"
+## Example
 
-"vault\_credential\_validation"
-
-validated\_at: string
-
-A timestamp in RFC 3339 format
-
-vault\_id: string
-
-Identifier of the vault containing the credential.
-
-Validate Credential
-
-CLI
-
-```shiki
+```bash
 ant beta:vaults:credentials mcp-oauth-validate \
   --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv \
   --credential-id vcrd_011CZkZEMt8gZan2iYOQfSkw
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "credential_id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
-  "has_refresh_token": true,
-  "mcp_probe": {
-    "http_response": {
-      "body": "body",
-      "body_truncated": true,
-      "content_type": "content_type",
-      "status_code": 0
-    },
-    "method": "method"
-  },
-  "refresh": {
-    "http_response": {
-      "body": "body",
-      "body_truncated": true,
-      "content_type": "content_type",
-      "status_code": 0
-    },
-    "status": "succeeded"
-  },
-  "status": "valid",
-  "type": "vault_credential_validation",
-  "validated_at": "2026-03-15T10:00:00Z",
-  "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "credential_id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
   "has_refresh_token": true,

@@ -1,12 +1,6 @@
 # Create Federation Issuer
 
-Copy page
-
-
-
-# Create Federation Issuer
-
-POST/v1/organizations/federation\_issuers
+**POST** `/v1/organizations/federation_issuers`
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -22,134 +16,234 @@ publicly reachable over HTTPS so Anthropic can fetch the discovery
 document; for `explicit_url` and `inline` modes the issuer URL is only
 matched as the JWT's `iss` claim and is not fetched.
 
-##### Headers
+## Headers
 
-
+- `"anthropic-beta": optional array of string`
 
-"anthropic-beta": optional array of string
+  Optional header to specify the beta version(s) you want to use.
 
-Optional header to specify the beta version(s) you want to use.
+  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
+## Body parameters
 
-##### Body
+- `issuer_url: string`
 
-
+  The `iss` claim value to match against.
 
-issuer\_url: string
+  minLength: 1
 
-The `iss` claim value to match against.
+- `name: string`
 
-minLength1
+  Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
-
+  maxLength: 255, minLength: 1
 
-name: string
+- `check_jti: optional boolean or null`
 
-Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
+  Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Defaults to true. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
 
-maxLength255
+- `jwks: optional object or object or object`
 
-minLength1
+  How signing keys are obtained. Defaults to OIDC discovery.
 
-check\_jti: optional boolean or null
+  - `Discovery object`
 
-Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Defaults to true. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
+    JWKS via the issuer's OIDC discovery document.
 
-
+    - `type: "discovery"`
 
-jwks: optional object{ type, ca\_cert\_pem, discovery\_base } or object{ type, url, ca\_cert\_pem } or object{ keys, type }
+    - `ca_cert_pem: optional string or null`
 
-How signing keys are obtained. Defaults to OIDC discovery.
+      Optional custom CA (PEM) for TLS verification of the JWKS fetch.
 
-One of the following:
+      maxLength: 8192
 
-
+    - `discovery_base: optional string or null`
 
-Discovery object{ type, ca\_cert\_pem, discovery\_base }
+      Set when the discovery URL differs from `issuer_url`.
 
-JWKS via the issuer's OIDC discovery document.
+  - `ExplicitURL object`
 
-type: "discovery"
+    JWKS fetched from a fixed endpoint.
 
-
+    - `type: "explicit_url"`
 
-ca\_cert\_pem: optional string or null
+    - `url: string`
 
-Optional custom CA (PEM) for TLS verification of the JWKS fetch.
+      JWKS endpoint.
 
-maxLength8192
+      minLength: 1
 
-discovery\_base: optional string or null
+    - `ca_cert_pem: optional string or null`
 
-Set when the discovery URL differs from `issuer_url`.
+      Optional custom CA (PEM) for TLS verification of the JWKS fetch.
 
-
+      maxLength: 8192
 
-ExplicitURL object{ type, url, ca\_cert\_pem }
+  - `Inline object`
 
-JWKS fetched from a fixed endpoint.
+    JWKS supplied directly; no network fetch.
 
-type: "explicit\_url"
+    - `keys: array of map[unknown]`
 
-
+      Inline JWK objects.
 
-url: string
+      minItems: 1
 
-JWKS endpoint.
+    - `type: "inline"`
 
-minLength1
+- `max_jwt_lifetime_seconds: optional number or null`
 
-
+  Maximum allowed iat→exp spread for assertions from this issuer (1-176400 seconds, i.e. up to 49h). Defaults to 3600 (1h). Assertions must carry both `iat` and `exp`; a missing `iat` is rejected.
 
-ca\_cert\_pem: optional string or null
+  maximum: 176400, exclusiveMinimum: 0
 
-Optional custom CA (PEM) for TLS verification of the JWKS fetch.
+## Returns
 
-maxLength8192
+- `FederationIssuer object`
 
-
+  Registered external OIDC identity provider.
 
-Inline object{ keys, type }
+  Records an external IdP the organization trusts for the RFC 7523
+  jwt-bearer grant. The `issuer_url` must match the JWT `iss` claim exactly.
 
-JWKS supplied directly; no network fetch.
+  - `id: string`
 
-
+    Tagged ID of the federation issuer.
 
-keys: array of map[unknown]
+  - `archived_at: string or null`
 
-Inline JWK objects.
+    If set, all rules referencing this issuer reject token exchange.
 
-minItems1
+    format: date-time
 
-type: "inline"
+  - `archived_by_actor_id: string or null`
 
-
+    Tagged ID (`user_`/`svac_`) of the actor that archived this issuer.
 
-max\_jwt\_lifetime\_seconds: optional number or null
+  - `check_jti: boolean`
 
-Maximum allowed iat→exp spread for assertions from this issuer (1-176400 seconds, i.e. up to 49h). Defaults to 3600 (1h). Assertions must carry both `iat` and `exp`; a missing `iat` is rejected.
+    Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
 
-maximum176400
+  - `created_at: string`
 
-exclusiveMinimum0
+    When this issuer was created.
 
-##### Returns
+    format: date-time
 
-
+  - `created_by_actor_id: string or null`
 
-FederationIssuer object{ id, archived\_at, archived\_by\_actor\_id, 12 more }
+    Tagged ID (`user_`/`svac_`) of the actor that created this issuer.
 
-Registered external OIDC identity provider.
+  - `issuer_url: string`
 
-Records an external IdP the organization trusts for the RFC 7523
-jwt-bearer grant. The `issuer_url` must match the JWT `iss` claim exactly.
+    The `iss` claim value. Incoming JWTs must match exactly.
 
-Create Federation Issuer
+  - `jwks: object or object or object`
 
-cURL
+    How signing keys are obtained for signature verification.
 
-```shiki
+    - `Discovery object`
+
+      JWKS via the issuer's OIDC discovery document.
+
+      - `type: "discovery"`
+
+      - `ca_cert_pem: optional string or null`
+
+        Optional custom CA (PEM) for TLS verification of the JWKS fetch.
+
+        maxLength: 8192
+
+      - `discovery_base: optional string or null`
+
+        Set when the discovery URL differs from `issuer_url`.
+
+    - `ExplicitURL object`
+
+      JWKS fetched from a fixed endpoint.
+
+      - `type: "explicit_url"`
+
+      - `url: string`
+
+        JWKS endpoint.
+
+        minLength: 1
+
+      - `ca_cert_pem: optional string or null`
+
+        Optional custom CA (PEM) for TLS verification of the JWKS fetch.
+
+        maxLength: 8192
+
+    - `Inline object`
+
+      JWKS supplied directly; no network fetch.
+
+      - `keys: array of map[unknown]`
+
+        Inline JWK objects.
+
+        minItems: 1
+
+      - `type: "inline"`
+
+  - `jwks_polling_disabled_at: string or null`
+
+    If set, Anthropic's JWKS poller has paused polling for this issuer after repeated fetch failures. Re-enable by sending `jwks_polling_disabled: false` via the issuer update endpoint (POST) once the upstream JWKS endpoint is fixed. An OAuth caller cannot send this when the issuer backs a rule with any scope other than `workspace:developer` or `workspace:inference`; use a Console session.
+
+    format: date-time
+
+  - `max_jwt_lifetime_seconds: number`
+
+    Maximum allowed iat→exp spread for assertions from this issuer (1-176400 seconds, i.e. up to 49h). Assertions must carry both `iat` and `exp`; a missing `iat` is rejected.
+
+  - `name: string`
+
+    Admin-chosen slug identifier.
+
+  - `poll_status: object or null`
+
+    Status of automatic JWKS polling for a federation issuer.
+
+    Anthropic periodically fetches the issuer's signing keys in the
+    background. These fields summarize the most recent fetches so the
+    health of the JWKS endpoint can be monitored.
+
+    - `consecutive_failures: number`
+
+      Consecutive fetch failures since the last success.
+
+    - `last_fetched_at: string or null`
+
+      When the last successful fetch completed.
+
+      format: date-time
+
+    - `next_poll_at: string or null`
+
+      When the next fetch is scheduled. Null if paused.
+
+      format: date-time
+
+  - `type: "federation_issuer"`
+
+    default: federation_issuer
+
+  - `updated_at: string`
+
+    When this issuer was last updated.
+
+    format: date-time
+
+  - `updated_by_actor_id: string or null`
+
+    Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
+
+## Example
+
+```bash
 curl https://api.anthropic.com/v1/organizations/federation_issuers \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -160,45 +254,9 @@ curl https://api.anthropic.com/v1/organizations/federation_issuers \
         }'
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "fdis_01SDCCSbTxrXDpWc1phhtcfK",
-  "archived_at": "2019-12-27T18:11:19.117Z",
-  "archived_by_actor_id": "archived_by_actor_id",
-  "check_jti": true,
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "created_by_actor_id": "created_by_actor_id",
-  "issuer_url": "https://token.actions.githubusercontent.com",
-  "jwks": {
-    "type": "discovery",
-    "ca_cert_pem": "ca_cert_pem",
-    "discovery_base": "discovery_base"
-  },
-  "jwks_polling_disabled_at": "2019-12-27T18:11:19.117Z",
-  "max_jwt_lifetime_seconds": 0,
-  "name": "github-actions",
-  "poll_status": {
-    "consecutive_failures": 0,
-    "last_fetched_at": "2019-12-27T18:11:19.117Z",
-    "next_poll_at": "2019-12-27T18:11:19.117Z"
-  },
-  "type": "federation_issuer",
-  "updated_at": "2024-10-30T23:58:27.427722Z",
-  "updated_by_actor_id": "updated_by_actor_id"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "fdis_01SDCCSbTxrXDpWc1phhtcfK",
   "archived_at": "2019-12-27T18:11:19.117Z",

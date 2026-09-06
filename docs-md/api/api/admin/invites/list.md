@@ -1,219 +1,148 @@
 # List Invites
 
-Copy page
-
-
-
-# List Invites
-
-GET/v1/organizations/invites
+**GET** `/v1/organizations/invites`
 
 List the organization's invites.
 
-##### Query parameters
+## Query parameters
 
-after\_id: optional string
+- `after_id: optional string`
 
-ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-before\_id: optional string
+- `before_id: optional string`
 
-ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-
+- `email: optional string`
 
-email: optional string
+  Filter by the email address the Invite was sent to. Matches the same way as the Users list's `email` filter (normalized, case-insensitive).
 
-Filter by the email address the Invite was sent to. Matches the same way as the Users list's `email` filter (normalized, case-insensitive).
+  format: email
 
-formatemail
+- `limit: optional number`
 
-
+  Number of items to return per page.
 
-limit: optional number
+  Defaults to `20`. Ranges from `1` to `1000`.
 
-Number of items to return per page.
+  default: 20, maximum: 1000, minimum: 1
 
-Defaults to `20`. Ranges from `1` to `1000`.
+- `roles: optional array of string`
 
-default20
+  Filter to items whose `role` equals one of the supplied values. Repeatable; values are OR'ed together.
 
-maximum1000
+  Accepted values depend on the organization type: Console and API organizations accept `user`, `developer`, `billing`, `admin`, and `claude_code_user`; Claude Enterprise organizations accept `user`, `owner`, `primary_owner`, `membership_admin`, and `managed`.
 
-minimum1
+- `statuses: optional array of "accepted" or "expired" or "pending"`
 
-
+  Filter by Invite status. Repeatable; values are OR'ed together. Omit to return `pending`, `accepted`, and `expired` Invites alike.
 
-roles: optional array of string
+  - `"accepted"`
 
-Filter to items whose `role` equals one of the supplied values. Repeatable; values are OR'ed together.
+  - `"expired"`
 
-Accepted values depend on the organization type: Console and API organizations accept `user`, `developer`, `billing`, `admin`, and `claude_code_user`; Claude Enterprise organizations accept `user`, `owner`, `primary_owner`, `membership_admin`, and `managed`.
+  - `"pending"`
 
-
+## Returns
 
-statuses: optional array of "accepted" or "expired" or "pending"
+- `data: array of Invite`
 
-Filter by Invite status. Repeatable; values are OR'ed together. Omit to return `pending`, `accepted`, and `expired` Invites alike.
+  - `id: string`
 
-One of the following:
+    ID of the Invite.
 
-"accepted"
+  - `accepted_at: string or null`
 
-"expired"
+    RFC 3339 datetime string indicating when the Invite was accepted, or null.
 
-"pending"
+    format: date-time
 
-##### Returns
+  - `email: string`
 
-
+    Email of the User being invited.
 
-data: array of [Invite](api/http/admin/invites.md) { id, accepted\_at, email, 6 more }
+  - `expires_at: string`
 
-id: string
+    RFC 3339 datetime string indicating when the Invite expires.
 
-ID of the Invite.
+    format: date-time
 
-
+  - `invited_at: string`
 
-accepted\_at: string or null
+    RFC 3339 datetime string indicating when the Invite was created.
 
-RFC 3339 datetime string indicating when the Invite was accepted, or null.
+    format: date-time
 
-formatdate-time
+  - `rbac_group_ids: array of string`
 
-email: string
+    RBAC group IDs recorded on the Invite (Claude Enterprise organizations), to be assigned to the User when the Invite is accepted. `[]` when none.
 
-Email of the User being invited.
+  - `role: "admin" or "billing" or "claude_code_user" or 6 more`
 
-
+    Organization role of the User.
 
-expires\_at: string
+    - `"admin"`
 
-RFC 3339 datetime string indicating when the Invite expires.
+    - `"billing"`
 
-formatdate-time
+    - `"claude_code_user"`
 
-
+    - `"developer"`
 
-invited\_at: string
+    - `"managed"`
 
-RFC 3339 datetime string indicating when the Invite was created.
+    - `"membership_admin"`
 
-formatdate-time
+    - `"owner"`
 
-rbac\_group\_ids: array of string
+    - `"primary_owner"`
 
-RBAC group IDs recorded on the Invite (Claude Enterprise organizations), to be assigned to the User when the Invite is accepted. `[]` when none.
+    - `"user"`
 
-
+  - `status: "accepted" or "deleted" or "expired" or "pending"`
 
-role: "admin" or "billing" or "claude\_code\_user" or 6 more
+    Status of the Invite.
 
-Organization role of the User.
+    - `"accepted"`
 
-One of the following:
+    - `"deleted"`
 
-"admin"
+    - `"expired"`
 
-"billing"
+    - `"pending"`
 
-"claude\_code\_user"
+  - `type: "invite"`
 
-"developer"
+    Object type.
 
-"managed"
+    For Invites, this is always `"invite"`.
 
-"membership\_admin"
+    default: invite
 
-"owner"
+- `first_id: string or null`
 
-"primary\_owner"
+  First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
-"user"
+- `has_more: boolean`
 
-
+  Indicates if there are more results in the requested page direction.
 
-status: "accepted" or "deleted" or "expired" or "pending"
+- `last_id: string or null`
 
-Status of the Invite.
+  Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
-One of the following:
+## Example
 
-"accepted"
-
-"deleted"
-
-"expired"
-
-"pending"
-
-
-
-type: "invite"
-
-Object type.
-
-For Invites, this is always `"invite"`.
-
-defaultinvite
-
-first\_id: string or null
-
-First ID in the `data` list. Can be used as the `before_id` for the previous page.
-
-has\_more: boolean
-
-Indicates if there are more results in the requested page direction.
-
-last\_id: string or null
-
-Last ID in the `data` list. Can be used as the `after_id` for the next page.
-
-List Invites
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/invites \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "invite_015gWxCN9Hfg2QhZwTK7Mdeu",
-      "accepted_at": "2019-12-27T18:11:19.117Z",
-      "email": "user@emaildomain.com",
-      "expires_at": "2024-11-20T23:58:27.427722Z",
-      "invited_at": "2024-10-30T23:58:27.427722Z",
-      "rbac_group_ids": [
-        "string"
-      ],
-      "role": "user",
-      "status": "pending",
-      "type": "invite"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

@@ -1,198 +1,206 @@
 # List Work Items
 
-Copy page
+`WorkListPage Beta.Environments.Work.List(parameters, cancellationToken = default)`
 
-
-
-C#
-
-# List Work Items
-
-[BetaSelfHostedWorkListResponse](api/beta/environments/work.md) Beta.Environments.Work.List(WorkListParamsparameters, CancellationTokencancellationToken = default)
-
-GET/v1/environments/{environment\_id}/work
+**GET** `/v1/environments/{environment_id}/work`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 List work items in an environment.
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `WorkListParams parameters`
 
-WorkListParams parameters
+  - `required string environmentID`
 
-required string environmentID
+    Path param
 
-Path param
+  - `long limit`
 
-Long limit
+    Query param: Maximum number of work items to return
 
-Query param: Maximum number of work items to return
+    maximum: 1000, minimum: 1
 
-string? page
+  - `string? page`
 
-Query param: Opaque cursor from previous response for pagination
+    Query param: Opaque cursor from previous response for pagination
 
-
+  - `IReadOnlyList<AnthropicBeta> betas`
 
-IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-Header param: Optional header to specify the beta version(s) you want to use.
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
-"message-batches-2024-09-24"MessageBatches2024\_09\_24
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
 
-"prompt-caching-2024-07-31"PromptCaching2024\_07\_31
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
 
-"computer-use-2024-10-22"ComputerUse2024\_10\_22
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
 
-"computer-use-2025-01-24"ComputerUse2025\_01\_24
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
 
-"pdfs-2024-09-25"Pdfs2024\_09\_25
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
 
-"token-counting-2024-11-01"TokenCounting2024\_11\_01
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
 
-"token-efficient-tools-2025-02-19"TokenEfficientTools2025\_02\_19
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
 
-"output-128k-2025-02-19"Output128k2025\_02\_19
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
 
-"files-api-2025-04-14"FilesApi2025\_04\_14
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
 
-"mcp-client-2025-04-04"McpClient2025\_04\_04
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
 
-"mcp-client-2025-11-20"McpClient2025\_11\_20
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
 
-"dev-full-thinking-2025-05-14"DevFullThinking2025\_05\_14
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
 
-"interleaved-thinking-2025-05-14"InterleavedThinking2025\_05\_14
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
 
-"code-execution-2025-05-22"CodeExecution2025\_05\_22
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
 
-"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025\_04\_11
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
 
-"context-1m-2025-08-07"Context1m2025\_08\_07
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
 
-"context-management-2025-06-27"ContextManagement2025\_06\_27
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025\_08\_26
+    - `Skills2025_10_02("skills-2025-10-02")`
 
-"skills-2025-10-02"Skills2025\_10\_02
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
 
-"fast-mode-2026-02-01"FastMode2026\_02\_01
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
 
-"output-300k-2026-03-24"Output300k2026\_03\_24
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
 
-"user-profiles-2026-03-24"UserProfiles2026\_03\_24
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
-"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
-"managed-agents-2026-04-01"ManagedAgents2026\_04\_01
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
 
-"cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
 
-"thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
 
-"server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
 
-"fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
 
-"agent-memory-2026-07-22"AgentMemory2026\_07\_22
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
 
-##### ReturnsExpand Collapse
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
 
-
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
 
-class BetaSelfHostedWorkListResponse:
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
 
-Response when listing work items with cursor-based pagination.
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-
+    - `Compact2026_01_12("compact-2026-01-12")`
 
-required IReadOnlyList<[BetaSelfHostedWork](api/beta/environments/work.md)> Data
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
 
-List of work items
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
 
-required string ID
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
 
-Work identifier (e.g., 'work\_...')
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
 
-required string? AcknowledgedAt
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
 
-RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
 
-required string CreatedAt
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-RFC 3339 timestamp when work was created
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
 
-
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-required [BetaSessionWorkData](api/beta/environments/work.md) Data
+## Returns
 
-The actual work to be performed
+- `class BetaSelfHostedWork:`
 
-required string ID
+  Work resource representing a unit of work in a self-hosted environment.
 
-Session identifier (e.g., 'session\_...')
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
 
-JsonElement Type "session"constant
+  - `required string ID`
 
-Type of work data
+    Work identifier (e.g., 'work_...')
 
-required string EnvironmentID
+  - `required string? AcknowledgedAt`
 
-Environment identifier this work belongs to (e.g., `env_...`)
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-required string? LatestHeartbeatAt
+  - `required string CreatedAt`
 
-RFC 3339 timestamp of the most recent heartbeat
+    RFC 3339 timestamp when work was created
 
-required IReadOnlyDictionary<string, string> Metadata
+  - `required BetaSessionWorkData Data`
 
-User-provided metadata key-value pairs associated with this work item
+    The actual work to be performed
 
-required string? StartedAt
+    - `required string ID`
 
-RFC 3339 timestamp when work execution started
+      Session identifier (e.g., 'session_...')
 
-
+    - `JsonElement Type = "session"`
 
-required State State
+      Type of work data
 
-Current state of the work item
+  - `required string EnvironmentID`
 
-One of the following:
+    Environment identifier this work belongs to (e.g., `env_...`)
 
-"queued"Queued
+  - `required string? LatestHeartbeatAt`
 
-"starting"Starting
+    RFC 3339 timestamp of the most recent heartbeat
 
-"active"Active
+  - `required IReadOnlyDictionary<string, string> Metadata`
 
-"stopping"Stopping
+    User-provided metadata key-value pairs associated with this work item
 
-"stopped"Stopped
+  - `required string? Secret`
 
-required string? StopRequestedAt
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
-RFC 3339 timestamp when stop was requested
+  - `required string? StartedAt`
 
-required string? StoppedAt
+    RFC 3339 timestamp when work execution started
 
-RFC 3339 timestamp when work execution stopped
+  - `required State State`
 
-JsonElement Type "work"constant
+    Current state of the work item
 
-The type of object (always 'work')
+    - `Queued("queued")`
 
-required string? NextPage
+    - `Starting("starting")`
 
-Opaque cursor for fetching the next page of results
+    - `Active("active")`
 
-List Work Items
+    - `Stopping("stopping")`
 
-C#
+    - `Stopped("stopped")`
 
-```shiki
+  - `required string? StopRequestedAt`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `required string? StoppedAt`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `JsonElement Type = "work"`
+
+    The type of object (always 'work')
+
+## Example
+
+```csharp
 WorkListParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
@@ -205,11 +213,9 @@ await foreach (var item in page.Paginate())
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
@@ -225,39 +231,7 @@ Response 200
       "metadata": {
         "foo": "string"
       },
-      "started_at": "started_at",
-      "state": "queued",
-      "stop_requested_at": "stop_requested_at",
-      "stopped_at": "stopped_at",
-      "type": "work"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "acknowledged_at": "acknowledged_at",
-      "created_at": "created_at",
-      "data": {
-        "id": "id",
-        "type": "session"
-      },
-      "environment_id": "environment_id",
-      "latest_heartbeat_at": "latest_heartbeat_at",
-      "metadata": {
-        "foo": "string"
-      },
+      "secret": "secret",
       "started_at": "started_at",
       "state": "queued",
       "stop_requested_at": "stop_requested_at",

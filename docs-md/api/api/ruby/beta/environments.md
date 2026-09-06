@@ -1,589 +1,4101 @@
 # Environments
 
-Copy page
+## Create Environment
 
-
+`beta.environments.create(**kwargs) -> BetaEnvironment`
 
-Ruby
+**POST** `/v1/environments`
 
-# Environments
+Create a new environment with the specified configuration.
 
-##### [Create Environment](api/beta/environments/create.md)
+### Parameters
 
-beta.environments.create(\*\*kwargs) -> [BetaEnvironment](api/beta/environments.md) { id, archived\_at, config, 7 more }
+- `name: String`
 
-POST/v1/environments
+  Human-readable name for the environment
 
-##### [List Environments](api/beta/environments/list.md)
+  maxLength: 256, minLength: 1
 
-beta.environments.list(\*\*kwargs) -> PageCursor<[BetaEnvironment](api/beta/environments.md) { id, archived\_at, config, 7 more } >
+- `config: BetaCloudConfigParams | BetaSelfHostedConfigParams`
 
-GET/v1/environments
+  Environment configuration
 
-##### [Get Environment](api/beta/environments/retrieve.md)
+  - `class BetaCloudConfigParams`
 
-beta.environments.retrieve(environment\_id, \*\*kwargs) -> [BetaEnvironment](api/beta/environments.md) { id, archived\_at, config, 7 more }
+    Request params for `cloud` environment configuration.
 
-GET/v1/environments/{environment\_id}
+    Fields default to null; on update, omitted fields preserve the
+    existing value.
 
-##### [Update Environment](api/beta/environments/update.md)
+    - `type: :cloud`
 
-beta.environments.update(environment\_id, \*\*kwargs) -> [BetaEnvironment](api/beta/environments.md) { id, archived\_at, config, 7 more }
+      Environment type
 
-POST/v1/environments/{environment\_id}
+    - `networking: BetaUnrestrictedNetwork | BetaLimitedNetworkParams`
 
-##### [Delete Environment](api/beta/environments/delete.md)
+      Network configuration policy. Omit on update to preserve the existing value.
 
-beta.environments.delete(environment\_id, \*\*kwargs) -> [BetaEnvironmentDeleteResponse](api/beta/environments.md) { id, type }
+      - `class BetaUnrestrictedNetwork`
 
-DELETE/v1/environments/{environment\_id}
+        Unrestricted network access.
 
-##### [Archive Environment](api/beta/environments/archive.md)
+        - `type: :unrestricted`
 
-beta.environments.archive(environment\_id, \*\*kwargs) -> [BetaEnvironment](api/beta/environments.md) { id, archived\_at, config, 7 more }
+          Network policy type
 
-POST/v1/environments/{environment\_id}/archive
+      - `class BetaLimitedNetworkParams`
 
-##### ModelsExpand Collapse
+        Limited network request params.
 
-
+        Fields default to null; on update, omitted fields preserve the
+        existing value.
 
-class BetaCloudConfig { networking, packages, type } 
+        - `type: :limited`
 
-`cloud` environment configuration.
+          Network policy type
 
-
+        - `allow_mcp_servers: bool`
 
-networking: [BetaUnrestrictedNetwork](api/beta/environments.md) { type }  | [BetaLimitedNetwork](api/beta/environments.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
+          Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-Network configuration policy.
+        - `allow_package_managers: bool`
 
-One of the following:
+          Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
 
-
+        - `allowed_hosts: Array[String]`
 
-class BetaUnrestrictedNetwork { type } 
+          Specifies domains the container can reach.
 
-Unrestricted network access.
+    - `packages: BetaPackagesParams`
 
-type: :unrestricted
+      Specify packages (and optionally their versions) available in this environment.
 
-Network policy type
+      When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-
+      Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
 
-class BetaLimitedNetwork { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
+      - `apt: Array[String]`
 
-Limited network access.
+        Ubuntu/Debian packages to install
 
-allow\_mcp\_servers: bool
+      - `cargo: Array[String]`
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+        Rust packages to install
 
-allow\_package\_managers: bool
+      - `gem_: Array[String]`
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+        Ruby packages to install
 
-allowed\_hosts: Array[String]
+      - `go: Array[String]`
 
-Specifies domains the container can reach.
+        Go packages to install
 
-type: :limited
+      - `npm: Array[String]`
 
-Network policy type
+        Node.js packages to install
 
-
+      - `pip: Array[String]`
 
-packages: [BetaPackages](api/beta/environments.md) { apt, cargo, gem\_, 4 more } 
+        Python packages to install
 
-Package manager configuration.
+      - `type: :packages`
 
-apt: Array[String]
+        Package configuration type
 
-Ubuntu/Debian packages to install
+  - `class BetaSelfHostedConfigParams`
 
-cargo: Array[String]
+    Request params for `self_hosted` environment configuration.
 
-Rust packages to install
+    - `type: :self_hosted`
 
-gem\_: Array[String]
+      Environment type
 
-Ruby packages to install
+- `description: String`
 
-go: Array[String]
+  Optional description of the environment
 
-Go packages to install
+  maxLength: 1024
 
-npm: Array[String]
+- `metadata: Hash[Symbol, String]`
 
-Node.js packages to install
+  User-provided metadata key-value pairs
 
-pip: Array[String]
+- `scope: :organization | :account`
 
-Python packages to install
+  The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. Only applicable for self-hosted environments. If not specified, defaults based on organization type.
 
-type: :packages
+  - `:organization`
 
-Package configuration type
+  - `:account`
 
-type: :cloud
+- `betas: Array[AnthropicBeta]`
 
-Environment type
+  Optional header to specify the beta version(s) you want to use.
 
-
+  - `String = String`
 
-class BetaCloudConfigParams { type, networking, packages } 
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
 
-Request params for `cloud` environment configuration.
+    - `:"message-batches-2024-09-24"`
 
-Fields default to null; on update, omitted fields preserve the
-existing value.
+    - `:"prompt-caching-2024-07-31"`
 
-type: :cloud
+    - `:"computer-use-2024-10-22"`
 
-Environment type
+    - `:"computer-use-2025-01-24"`
 
-
+    - `:"pdfs-2024-09-25"`
 
-networking: [BetaUnrestrictedNetwork](api/beta/environments.md) { type }  | [BetaLimitedNetworkParams](api/beta/environments.md) { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts } 
+    - `:"token-counting-2024-11-01"`
 
-Network configuration policy. Omit on update to preserve the existing value.
+    - `:"token-efficient-tools-2025-02-19"`
 
-One of the following:
+    - `:"output-128k-2025-02-19"`
 
-
+    - `:"files-api-2025-04-14"`
 
-class BetaUnrestrictedNetwork { type } 
+    - `:"mcp-client-2025-04-04"`
 
-Unrestricted network access.
+    - `:"mcp-client-2025-11-20"`
 
-type: :unrestricted
+    - `:"dev-full-thinking-2025-05-14"`
 
-Network policy type
+    - `:"interleaved-thinking-2025-05-14"`
 
-
+    - `:"code-execution-2025-05-22"`
 
-class BetaLimitedNetworkParams { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts } 
+    - `:"extended-cache-ttl-2025-04-11"`
 
-Limited network request params.
+    - `:"context-1m-2025-08-07"`
 
-Fields default to null; on update, omitted fields preserve the
-existing value.
+    - `:"context-management-2025-06-27"`
 
-type: :limited
+    - `:"model-context-window-exceeded-2025-08-26"`
 
-Network policy type
+    - `:"skills-2025-10-02"`
 
-allow\_mcp\_servers: bool
+    - `:"fast-mode-2026-02-01"`
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+    - `:"output-300k-2026-03-24"`
 
-allow\_package\_managers: bool
+    - `:"user-profiles-2026-03-24"`
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+    - `:"user-profiles-2026-08-18"`
 
-allowed\_hosts: Array[String]
+    - `:"advisor-tool-2026-03-01"`
 
-Specifies domains the container can reach.
+    - `:"managed-agents-2026-04-01"`
 
-
+    - `:"cache-diagnosis-2026-04-07"`
 
-packages: [BetaPackagesParams](api/beta/environments.md) { apt, cargo, gem\_, 4 more } 
+    - `:"dreaming-2026-04-21"`
 
-Specify packages (and optionally their versions) available in this environment.
+    - `:"thinking-token-count-2026-05-13"`
 
-When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+    - `:"server-side-fallback-2026-06-01"`
 
-apt: Array[String]
+    - `:"server-side-fallback-2026-07-01"`
 
-Ubuntu/Debian packages to install
+    - `:"fallback-credit-2026-06-01"`
 
-cargo: Array[String]
+    - `:"fallback-credit-2026-07-01"`
 
-Rust packages to install
+    - `:"agent-memory-2026-07-22"`
 
-gem\_: Array[String]
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
-Ruby packages to install
+    - `:"compact-2026-01-12"`
 
-go: Array[String]
+    - `:"computer-use-2025-11-24"`
 
-Go packages to install
+    - `:"mcp-tunnels-2026-06-22"`
 
-npm: Array[String]
+    - `:"structured-outputs-2025-11-13"`
 
-Node.js packages to install
+    - `:"task-budgets-2026-03-13"`
 
-pip: Array[String]
+    - `:"thinking-display-updates-2026-08-18"`
 
-Python packages to install
+    - `:"ce-user-management-2026-07-13"`
 
-type: :packages
+    - `:"mid-conversation-output-config-2026-07-01"`
 
-Package configuration type
+    - `:"thinking-binding-controls-2026-08-01"`
 
-
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
 
-class BetaEnvironment { id, archived\_at, config, 7 more } 
+### Returns
 
-Unified Environment resource for both cloud and self-hosted environments.
+- `class BetaEnvironment`
 
-id: String
+  Unified Environment resource for both cloud and self-hosted environments.
 
-Environment identifier (e.g., 'env\_...')
+  - `id: String`
 
-archived\_at: String
+    Environment identifier (e.g., 'env_...')
 
-RFC 3339 timestamp when environment was archived, or null if not archived
+  - `archived_at: String`
 
-
+    RFC 3339 timestamp when environment was archived, or null if not archived
 
-config: [BetaCloudConfig](api/beta/environments.md) { networking, packages, type }  | [BetaSelfHostedConfig](api/beta/environments.md) { type } 
+  - `config: BetaCloudConfig | BetaSelfHostedConfig`
 
-Environment configuration (either Anthropic Cloud or self-hosted)
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-One of the following:
+    - `class BetaCloudConfig`
 
-
+      `cloud` environment configuration.
 
-class BetaCloudConfig { networking, packages, type } 
+      - `networking: BetaUnrestrictedNetwork | BetaLimitedNetwork`
 
-`cloud` environment configuration.
+        Network configuration policy.
 
-
+        - `class BetaUnrestrictedNetwork`
 
-networking: [BetaUnrestrictedNetwork](api/beta/environments.md) { type }  | [BetaLimitedNetwork](api/beta/environments.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
+          Unrestricted network access.
 
-Network configuration policy.
+          - `type: :unrestricted`
 
-One of the following:
+            Network policy type
 
-
+        - `class BetaLimitedNetwork`
 
-class BetaUnrestrictedNetwork { type } 
+          Limited network access.
 
-Unrestricted network access.
+          - `allow_mcp_servers: bool`
 
-type: :unrestricted
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-Network policy type
+          - `allow_package_managers: bool`
 
-
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-class BetaLimitedNetwork { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
+          - `allowed_hosts: Array[String]`
 
-Limited network access.
+            Specifies domains the container can reach.
 
-allow\_mcp\_servers: bool
+          - `type: :limited`
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+            Network policy type
 
-allow\_package\_managers: bool
+      - `packages: BetaPackages`
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+        Package manager configuration.
 
-allowed\_hosts: Array[String]
+        - `apt: Array[String]`
 
-Specifies domains the container can reach.
+          Ubuntu/Debian packages to install
 
-type: :limited
+        - `cargo: Array[String]`
 
-Network policy type
+          Rust packages to install
 
-
+        - `gem_: Array[String]`
 
-packages: [BetaPackages](api/beta/environments.md) { apt, cargo, gem\_, 4 more } 
+          Ruby packages to install
 
-Package manager configuration.
+        - `go: Array[String]`
 
-apt: Array[String]
+          Go packages to install
 
-Ubuntu/Debian packages to install
+        - `npm: Array[String]`
 
-cargo: Array[String]
+          Node.js packages to install
 
-Rust packages to install
+        - `pip: Array[String]`
 
-gem\_: Array[String]
+          Python packages to install
 
-Ruby packages to install
+        - `type: :packages`
 
-go: Array[String]
+          Package configuration type
 
-Go packages to install
+      - `type: :cloud`
 
-npm: Array[String]
+        Environment type
 
-Node.js packages to install
+    - `class BetaSelfHostedConfig`
 
-pip: Array[String]
+      Configuration for self-hosted environments.
 
-Python packages to install
+      - `type: :self_hosted`
 
-type: :packages
+        Environment type
 
-Package configuration type
+  - `created_at: String`
 
-type: :cloud
+    RFC 3339 timestamp when environment was created
 
-Environment type
+  - `description: String`
 
-
+    User-provided description for the environment; null when unset
 
-class BetaSelfHostedConfig { type } 
+  - `metadata: Hash[Symbol, String]`
 
-Configuration for self-hosted environments.
+    User-provided metadata key-value pairs
 
-type: :self\_hosted
+  - `name: String`
 
-Environment type
+    Human-readable name for the environment
 
-created\_at: String
+  - `type: :environment`
 
-RFC 3339 timestamp when environment was created
+    The type of object (always 'environment')
 
-description: String
+  - `updated_at: String`
 
-User-provided description for the environment
+    RFC 3339 timestamp when environment was last updated
 
-metadata: Hash[Symbol, String]
+  - `scope: :organization | :account`
 
-User-provided metadata key-value pairs
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-name: String
+    - `:organization`
 
-Human-readable name for the environment
+    - `:account`
 
-type: :environment
+### Example
 
-The type of object (always 'environment')
+```ruby
+require "anthropic"
 
-updated\_at: String
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-RFC 3339 timestamp when environment was last updated
+beta_environment = anthropic.beta.environments.create(name: "python-data-analysis")
 
-
+puts(beta_environment)
+```
 
-scope: :organization | :account
+#### Response (200)
 
-The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "archived_at": null,
+  "config": {
+    "networking": {
+      "allow_mcp_servers": false,
+      "allow_package_managers": true,
+      "allowed_hosts": [
+        "api.example.com"
+      ],
+      "type": "limited"
+    },
+    "packages": {
+      "apt": [
+        "string"
+      ],
+      "cargo": [
+        "string"
+      ],
+      "gem": [
+        "string"
+      ],
+      "go": [
+        "string"
+      ],
+      "npm": [
+        "string"
+      ],
+      "pip": [
+        "pandas",
+        "numpy"
+      ],
+      "type": "packages"
+    },
+    "type": "cloud"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Python environment with data-analysis packages.",
+  "metadata": {},
+  "name": "python-data-analysis",
+  "type": "environment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
+}
+```
 
-One of the following:
+## List Environments
 
-:organization
+`beta.environments.list(**kwargs) -> PageCursor<BetaEnvironment>`
 
-:account
+**GET** `/v1/environments`
 
-
+List environments with pagination support.
 
-class BetaEnvironmentDeleteResponse { id, type } 
+### Parameters
 
-Response after deleting an environment.
+- `include_archived: bool`
 
-id: String
+  Include archived environments in the response
 
-Environment identifier
+- `limit: Integer`
 
-type: :environment\_deleted
+  Maximum number of environments to return
 
-The type of response
+  maximum: 1000, minimum: 1
 
-
+- `page: String`
 
-class BetaLimitedNetwork { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
+  Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
 
-Limited network access.
+- `betas: Array[AnthropicBeta]`
 
-allow\_mcp\_servers: bool
+  Optional header to specify the beta version(s) you want to use.
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+  - `String = String`
 
-allow\_package\_managers: bool
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+    - `:"message-batches-2024-09-24"`
 
-allowed\_hosts: Array[String]
+    - `:"prompt-caching-2024-07-31"`
 
-Specifies domains the container can reach.
+    - `:"computer-use-2024-10-22"`
 
-type: :limited
+    - `:"computer-use-2025-01-24"`
 
-Network policy type
+    - `:"pdfs-2024-09-25"`
 
-
+    - `:"token-counting-2024-11-01"`
 
-class BetaLimitedNetworkParams { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts } 
+    - `:"token-efficient-tools-2025-02-19"`
 
-Limited network request params.
+    - `:"output-128k-2025-02-19"`
 
-Fields default to null; on update, omitted fields preserve the
-existing value.
+    - `:"files-api-2025-04-14"`
 
-type: :limited
+    - `:"mcp-client-2025-04-04"`
 
-Network policy type
+    - `:"mcp-client-2025-11-20"`
 
-allow\_mcp\_servers: bool
+    - `:"dev-full-thinking-2025-05-14"`
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+    - `:"interleaved-thinking-2025-05-14"`
 
-allow\_package\_managers: bool
+    - `:"code-execution-2025-05-22"`
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+    - `:"extended-cache-ttl-2025-04-11"`
 
-allowed\_hosts: Array[String]
+    - `:"context-1m-2025-08-07"`
 
-Specifies domains the container can reach.
+    - `:"context-management-2025-06-27"`
 
-
+    - `:"model-context-window-exceeded-2025-08-26"`
 
-class BetaPackages { apt, cargo, gem\_, 4 more } 
+    - `:"skills-2025-10-02"`
 
-Packages (and their versions) available in this environment.
+    - `:"fast-mode-2026-02-01"`
 
-apt: Array[String]
+    - `:"output-300k-2026-03-24"`
 
-Ubuntu/Debian packages to install
+    - `:"user-profiles-2026-03-24"`
 
-cargo: Array[String]
+    - `:"user-profiles-2026-08-18"`
 
-Rust packages to install
+    - `:"advisor-tool-2026-03-01"`
 
-gem\_: Array[String]
+    - `:"managed-agents-2026-04-01"`
 
-Ruby packages to install
+    - `:"cache-diagnosis-2026-04-07"`
 
-go: Array[String]
+    - `:"dreaming-2026-04-21"`
 
-Go packages to install
+    - `:"thinking-token-count-2026-05-13"`
 
-npm: Array[String]
+    - `:"server-side-fallback-2026-06-01"`
 
-Node.js packages to install
+    - `:"server-side-fallback-2026-07-01"`
 
-pip: Array[String]
+    - `:"fallback-credit-2026-06-01"`
 
-Python packages to install
+    - `:"fallback-credit-2026-07-01"`
 
-type: :packages
+    - `:"agent-memory-2026-07-22"`
 
-Package configuration type
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
-
+    - `:"compact-2026-01-12"`
 
-class BetaPackagesParams { apt, cargo, gem\_, 4 more } 
+    - `:"computer-use-2025-11-24"`
 
-Specify packages (and optionally their versions) available in this environment.
+    - `:"mcp-tunnels-2026-06-22"`
 
-When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+    - `:"structured-outputs-2025-11-13"`
 
-apt: Array[String]
+    - `:"task-budgets-2026-03-13"`
 
-Ubuntu/Debian packages to install
+    - `:"thinking-display-updates-2026-08-18"`
 
-cargo: Array[String]
+    - `:"ce-user-management-2026-07-13"`
 
-Rust packages to install
+    - `:"mid-conversation-output-config-2026-07-01"`
 
-gem\_: Array[String]
+    - `:"thinking-binding-controls-2026-08-01"`
 
-Ruby packages to install
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
 
-go: Array[String]
+### Returns
 
-Go packages to install
+- `class BetaEnvironment`
 
-npm: Array[String]
+  Unified Environment resource for both cloud and self-hosted environments.
 
-Node.js packages to install
+  - `id: String`
 
-pip: Array[String]
+    Environment identifier (e.g., 'env_...')
 
-Python packages to install
+  - `archived_at: String`
 
-type: :packages
+    RFC 3339 timestamp when environment was archived, or null if not archived
 
-Package configuration type
+  - `config: BetaCloudConfig | BetaSelfHostedConfig`
 
-
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-class BetaSelfHostedConfig { type } 
+    - `class BetaCloudConfig`
 
-Configuration for self-hosted environments.
+      `cloud` environment configuration.
 
-type: :self\_hosted
+      - `networking: BetaUnrestrictedNetwork | BetaLimitedNetwork`
 
-Environment type
+        Network configuration policy.
 
-
+        - `class BetaUnrestrictedNetwork`
 
-class BetaSelfHostedConfigParams { type } 
+          Unrestricted network access.
 
-Request params for `self_hosted` environment configuration.
+          - `type: :unrestricted`
 
-type: :self\_hosted
+            Network policy type
 
-Environment type
+        - `class BetaLimitedNetwork`
 
-
+          Limited network access.
 
-class BetaUnrestrictedNetwork { type } 
+          - `allow_mcp_servers: bool`
 
-Unrestricted network access.
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-type: :unrestricted
+          - `allow_package_managers: bool`
 
-Network policy type
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-#### EnvironmentsWork
+          - `allowed_hosts: Array[String]`
 
-##### [Get Work Item](api/beta/environments/work/retrieve.md)
+            Specifies domains the container can reach.
 
-beta.environments.work.retrieve(work\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }
+          - `type: :limited`
 
-GET/v1/environments/{environment\_id}/work/{work\_id}
+            Network policy type
 
-##### [Poll for Work](api/beta/environments/work/poll.md)
+      - `packages: BetaPackages`
 
-beta.environments.work.poll(environment\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }
+        Package manager configuration.
 
-GET/v1/environments/{environment\_id}/work/poll
+        - `apt: Array[String]`
 
-##### [Acknowledge Work](api/beta/environments/work/ack.md)
+          Ubuntu/Debian packages to install
 
-beta.environments.work.ack(work\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }
+        - `cargo: Array[String]`
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/ack
+          Rust packages to install
 
-##### [Record Heartbeat](api/beta/environments/work/heartbeat.md)
+        - `gem_: Array[String]`
 
-beta.environments.work.heartbeat(work\_id, \*\*kwargs) -> [BetaSelfHostedWorkHeartbeatResponse](api/beta/environments/work.md) { last\_heartbeat, lease\_extended, state, 2 more }
+          Ruby packages to install
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
+        - `go: Array[String]`
 
-##### [Stop Work](api/beta/environments/work/stop.md)
+          Go packages to install
 
-beta.environments.work.stop(work\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }
+        - `npm: Array[String]`
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/stop
+          Node.js packages to install
 
-##### [List Work Items](api/beta/environments/work/list.md)
+        - `pip: Array[String]`
 
-beta.environments.work.list(environment\_id, \*\*kwargs) -> PageCursor<[BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more } >
+          Python packages to install
 
-GET/v1/environments/{environment\_id}/work
+        - `type: :packages`
 
-##### [Update Work Item](api/beta/environments/work/update.md)
+          Package configuration type
 
-beta.environments.work.update(work\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }
+      - `type: :cloud`
 
-POST/v1/environments/{environment\_id}/work/{work\_id}
+        Environment type
 
-##### [Get Queue Statistics](api/beta/environments/work/stats.md)
+    - `class BetaSelfHostedConfig`
 
-beta.environments.work.stats(environment\_id, \*\*kwargs) -> [BetaSelfHostedWorkQueueStats](api/beta/environments/work.md) { depth, oldest\_queued\_at, pending, 2 more }
+      Configuration for self-hosted environments.
 
-GET/v1/environments/{environment\_id}/work/stats
+      - `type: :self_hosted`
+
+        Environment type
+
+  - `created_at: String`
+
+    RFC 3339 timestamp when environment was created
+
+  - `description: String`
+
+    User-provided description for the environment; null when unset
+
+  - `metadata: Hash[Symbol, String]`
+
+    User-provided metadata key-value pairs
+
+  - `name: String`
+
+    Human-readable name for the environment
+
+  - `type: :environment`
+
+    The type of object (always 'environment')
+
+  - `updated_at: String`
+
+    RFC 3339 timestamp when environment was last updated
+
+  - `scope: :organization | :account`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `:organization`
+
+    - `:account`
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+page = anthropic.beta.environments.list
+
+puts(page)
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+      "archived_at": null,
+      "config": {
+        "networking": {
+          "allow_mcp_servers": false,
+          "allow_package_managers": true,
+          "allowed_hosts": [
+            "api.example.com"
+          ],
+          "type": "limited"
+        },
+        "packages": {
+          "apt": [
+            "string"
+          ],
+          "cargo": [
+            "string"
+          ],
+          "gem": [
+            "string"
+          ],
+          "go": [
+            "string"
+          ],
+          "npm": [
+            "string"
+          ],
+          "pip": [
+            "pandas",
+            "numpy"
+          ],
+          "type": "packages"
+        },
+        "type": "cloud"
+      },
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": "Python environment with data-analysis packages.",
+      "metadata": {},
+      "name": "python-data-analysis",
+      "type": "environment",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "scope": "organization"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
+
+## Get Environment
+
+`beta.environments.retrieve(environment_id, **kwargs) -> BetaEnvironment`
+
+**GET** `/v1/environments/{environment_id}`
+
+Retrieve a specific environment by ID.
+
+### Parameters
+
+- `environment_id: String`
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"server-side-fallback-2026-07-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+    - `:"fallback-credit-2026-07-01"`
+
+    - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
+
+    - `:"mid-conversation-output-config-2026-07-01"`
+
+    - `:"thinking-binding-controls-2026-08-01"`
+
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaEnvironment`
+
+  Unified Environment resource for both cloud and self-hosted environments.
+
+  - `id: String`
+
+    Environment identifier (e.g., 'env_...')
+
+  - `archived_at: String`
+
+    RFC 3339 timestamp when environment was archived, or null if not archived
+
+  - `config: BetaCloudConfig | BetaSelfHostedConfig`
+
+    Environment configuration (either Anthropic Cloud or self-hosted)
+
+    - `class BetaCloudConfig`
+
+      `cloud` environment configuration.
+
+      - `networking: BetaUnrestrictedNetwork | BetaLimitedNetwork`
+
+        Network configuration policy.
+
+        - `class BetaUnrestrictedNetwork`
+
+          Unrestricted network access.
+
+          - `type: :unrestricted`
+
+            Network policy type
+
+        - `class BetaLimitedNetwork`
+
+          Limited network access.
+
+          - `allow_mcp_servers: bool`
+
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+          - `allow_package_managers: bool`
+
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+          - `allowed_hosts: Array[String]`
+
+            Specifies domains the container can reach.
+
+          - `type: :limited`
+
+            Network policy type
+
+      - `packages: BetaPackages`
+
+        Package manager configuration.
+
+        - `apt: Array[String]`
+
+          Ubuntu/Debian packages to install
+
+        - `cargo: Array[String]`
+
+          Rust packages to install
+
+        - `gem_: Array[String]`
+
+          Ruby packages to install
+
+        - `go: Array[String]`
+
+          Go packages to install
+
+        - `npm: Array[String]`
+
+          Node.js packages to install
+
+        - `pip: Array[String]`
+
+          Python packages to install
+
+        - `type: :packages`
+
+          Package configuration type
+
+      - `type: :cloud`
+
+        Environment type
+
+    - `class BetaSelfHostedConfig`
+
+      Configuration for self-hosted environments.
+
+      - `type: :self_hosted`
+
+        Environment type
+
+  - `created_at: String`
+
+    RFC 3339 timestamp when environment was created
+
+  - `description: String`
+
+    User-provided description for the environment; null when unset
+
+  - `metadata: Hash[Symbol, String]`
+
+    User-provided metadata key-value pairs
+
+  - `name: String`
+
+    Human-readable name for the environment
+
+  - `type: :environment`
+
+    The type of object (always 'environment')
+
+  - `updated_at: String`
+
+    RFC 3339 timestamp when environment was last updated
+
+  - `scope: :organization | :account`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `:organization`
+
+    - `:account`
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_environment = anthropic.beta.environments.retrieve("env_011CZkZ9X2dpNyB7HsEFoRfW")
+
+puts(beta_environment)
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "archived_at": null,
+  "config": {
+    "networking": {
+      "allow_mcp_servers": false,
+      "allow_package_managers": true,
+      "allowed_hosts": [
+        "api.example.com"
+      ],
+      "type": "limited"
+    },
+    "packages": {
+      "apt": [
+        "string"
+      ],
+      "cargo": [
+        "string"
+      ],
+      "gem": [
+        "string"
+      ],
+      "go": [
+        "string"
+      ],
+      "npm": [
+        "string"
+      ],
+      "pip": [
+        "pandas",
+        "numpy"
+      ],
+      "type": "packages"
+    },
+    "type": "cloud"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Python environment with data-analysis packages.",
+  "metadata": {},
+  "name": "python-data-analysis",
+  "type": "environment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
+}
+```
+
+## Update Environment
+
+`beta.environments.update(environment_id, **kwargs) -> BetaEnvironment`
+
+**POST** `/v1/environments/{environment_id}`
+
+Update an existing environment's configuration.
+
+### Parameters
+
+- `environment_id: String`
+
+- `config: BetaCloudConfigParams | BetaSelfHostedConfigParams`
+
+  Updated environment configuration
+
+  - `class BetaCloudConfigParams`
+
+    Request params for `cloud` environment configuration.
+
+    Fields default to null; on update, omitted fields preserve the
+    existing value.
+
+    - `type: :cloud`
+
+      Environment type
+
+    - `networking: BetaUnrestrictedNetwork | BetaLimitedNetworkParams`
+
+      Network configuration policy. Omit on update to preserve the existing value.
+
+      - `class BetaUnrestrictedNetwork`
+
+        Unrestricted network access.
+
+        - `type: :unrestricted`
+
+          Network policy type
+
+      - `class BetaLimitedNetworkParams`
+
+        Limited network request params.
+
+        Fields default to null; on update, omitted fields preserve the
+        existing value.
+
+        - `type: :limited`
+
+          Network policy type
+
+        - `allow_mcp_servers: bool`
+
+          Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+        - `allow_package_managers: bool`
+
+          Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
+
+        - `allowed_hosts: Array[String]`
+
+          Specifies domains the container can reach.
+
+    - `packages: BetaPackagesParams`
+
+      Specify packages (and optionally their versions) available in this environment.
+
+      When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+      Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
+
+      - `apt: Array[String]`
+
+        Ubuntu/Debian packages to install
+
+      - `cargo: Array[String]`
+
+        Rust packages to install
+
+      - `gem_: Array[String]`
+
+        Ruby packages to install
+
+      - `go: Array[String]`
+
+        Go packages to install
+
+      - `npm: Array[String]`
+
+        Node.js packages to install
+
+      - `pip: Array[String]`
+
+        Python packages to install
+
+      - `type: :packages`
+
+        Package configuration type
+
+  - `class BetaSelfHostedConfigParams`
+
+    Request params for `self_hosted` environment configuration.
+
+    - `type: :self_hosted`
+
+      Environment type
+
+- `description: String`
+
+  Updated description of the environment. Omit to preserve; null clears to null; an empty string is stored as an empty string.
+
+  maxLength: 1024
+
+- `metadata: Hash[Symbol, String]`
+
+  User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
+
+- `name: String`
+
+  Updated name for the environment
+
+  maxLength: 256, minLength: 1
+
+- `scope: :organization | :account`
+
+  The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
+
+  - `:organization`
+
+  - `:account`
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"server-side-fallback-2026-07-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+    - `:"fallback-credit-2026-07-01"`
+
+    - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
+
+    - `:"mid-conversation-output-config-2026-07-01"`
+
+    - `:"thinking-binding-controls-2026-08-01"`
+
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaEnvironment`
+
+  Unified Environment resource for both cloud and self-hosted environments.
+
+  - `id: String`
+
+    Environment identifier (e.g., 'env_...')
+
+  - `archived_at: String`
+
+    RFC 3339 timestamp when environment was archived, or null if not archived
+
+  - `config: BetaCloudConfig | BetaSelfHostedConfig`
+
+    Environment configuration (either Anthropic Cloud or self-hosted)
+
+    - `class BetaCloudConfig`
+
+      `cloud` environment configuration.
+
+      - `networking: BetaUnrestrictedNetwork | BetaLimitedNetwork`
+
+        Network configuration policy.
+
+        - `class BetaUnrestrictedNetwork`
+
+          Unrestricted network access.
+
+          - `type: :unrestricted`
+
+            Network policy type
+
+        - `class BetaLimitedNetwork`
+
+          Limited network access.
+
+          - `allow_mcp_servers: bool`
+
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+          - `allow_package_managers: bool`
+
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+          - `allowed_hosts: Array[String]`
+
+            Specifies domains the container can reach.
+
+          - `type: :limited`
+
+            Network policy type
+
+      - `packages: BetaPackages`
+
+        Package manager configuration.
+
+        - `apt: Array[String]`
+
+          Ubuntu/Debian packages to install
+
+        - `cargo: Array[String]`
+
+          Rust packages to install
+
+        - `gem_: Array[String]`
+
+          Ruby packages to install
+
+        - `go: Array[String]`
+
+          Go packages to install
+
+        - `npm: Array[String]`
+
+          Node.js packages to install
+
+        - `pip: Array[String]`
+
+          Python packages to install
+
+        - `type: :packages`
+
+          Package configuration type
+
+      - `type: :cloud`
+
+        Environment type
+
+    - `class BetaSelfHostedConfig`
+
+      Configuration for self-hosted environments.
+
+      - `type: :self_hosted`
+
+        Environment type
+
+  - `created_at: String`
+
+    RFC 3339 timestamp when environment was created
+
+  - `description: String`
+
+    User-provided description for the environment; null when unset
+
+  - `metadata: Hash[Symbol, String]`
+
+    User-provided metadata key-value pairs
+
+  - `name: String`
+
+    Human-readable name for the environment
+
+  - `type: :environment`
+
+    The type of object (always 'environment')
+
+  - `updated_at: String`
+
+    RFC 3339 timestamp when environment was last updated
+
+  - `scope: :organization | :account`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `:organization`
+
+    - `:account`
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_environment = anthropic.beta.environments.update("env_011CZkZ9X2dpNyB7HsEFoRfW")
+
+puts(beta_environment)
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "archived_at": null,
+  "config": {
+    "networking": {
+      "allow_mcp_servers": false,
+      "allow_package_managers": true,
+      "allowed_hosts": [
+        "api.example.com"
+      ],
+      "type": "limited"
+    },
+    "packages": {
+      "apt": [
+        "string"
+      ],
+      "cargo": [
+        "string"
+      ],
+      "gem": [
+        "string"
+      ],
+      "go": [
+        "string"
+      ],
+      "npm": [
+        "string"
+      ],
+      "pip": [
+        "pandas",
+        "numpy"
+      ],
+      "type": "packages"
+    },
+    "type": "cloud"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Python environment with data-analysis packages.",
+  "metadata": {},
+  "name": "python-data-analysis",
+  "type": "environment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
+}
+```
+
+## Delete Environment
+
+`beta.environments.delete(environment_id, **kwargs) -> BetaEnvironmentDeleteResponse`
+
+**DELETE** `/v1/environments/{environment_id}`
+
+Delete an environment by ID. Returns a confirmation of the deletion.
+
+### Parameters
+
+- `environment_id: String`
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"server-side-fallback-2026-07-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+    - `:"fallback-credit-2026-07-01"`
+
+    - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
+
+    - `:"mid-conversation-output-config-2026-07-01"`
+
+    - `:"thinking-binding-controls-2026-08-01"`
+
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaEnvironmentDeleteResponse`
+
+  Response after deleting an environment.
+
+  - `id: String`
+
+    Environment identifier
+
+  - `type: :environment_deleted`
+
+    The type of response
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_environment_delete_response = anthropic.beta.environments.delete("env_011CZkZ9X2dpNyB7HsEFoRfW")
+
+puts(beta_environment_delete_response)
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "type": "environment_deleted"
+}
+```
+
+## Archive Environment
+
+`beta.environments.archive(environment_id, **kwargs) -> BetaEnvironment`
+
+**POST** `/v1/environments/{environment_id}/archive`
+
+Archive an environment by ID. Archived environments cannot be used to create new sessions.
+
+### Parameters
+
+- `environment_id: String`
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"server-side-fallback-2026-07-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+    - `:"fallback-credit-2026-07-01"`
+
+    - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
+
+    - `:"mid-conversation-output-config-2026-07-01"`
+
+    - `:"thinking-binding-controls-2026-08-01"`
+
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaEnvironment`
+
+  Unified Environment resource for both cloud and self-hosted environments.
+
+  - `id: String`
+
+    Environment identifier (e.g., 'env_...')
+
+  - `archived_at: String`
+
+    RFC 3339 timestamp when environment was archived, or null if not archived
+
+  - `config: BetaCloudConfig | BetaSelfHostedConfig`
+
+    Environment configuration (either Anthropic Cloud or self-hosted)
+
+    - `class BetaCloudConfig`
+
+      `cloud` environment configuration.
+
+      - `networking: BetaUnrestrictedNetwork | BetaLimitedNetwork`
+
+        Network configuration policy.
+
+        - `class BetaUnrestrictedNetwork`
+
+          Unrestricted network access.
+
+          - `type: :unrestricted`
+
+            Network policy type
+
+        - `class BetaLimitedNetwork`
+
+          Limited network access.
+
+          - `allow_mcp_servers: bool`
+
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+          - `allow_package_managers: bool`
+
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+          - `allowed_hosts: Array[String]`
+
+            Specifies domains the container can reach.
+
+          - `type: :limited`
+
+            Network policy type
+
+      - `packages: BetaPackages`
+
+        Package manager configuration.
+
+        - `apt: Array[String]`
+
+          Ubuntu/Debian packages to install
+
+        - `cargo: Array[String]`
+
+          Rust packages to install
+
+        - `gem_: Array[String]`
+
+          Ruby packages to install
+
+        - `go: Array[String]`
+
+          Go packages to install
+
+        - `npm: Array[String]`
+
+          Node.js packages to install
+
+        - `pip: Array[String]`
+
+          Python packages to install
+
+        - `type: :packages`
+
+          Package configuration type
+
+      - `type: :cloud`
+
+        Environment type
+
+    - `class BetaSelfHostedConfig`
+
+      Configuration for self-hosted environments.
+
+      - `type: :self_hosted`
+
+        Environment type
+
+  - `created_at: String`
+
+    RFC 3339 timestamp when environment was created
+
+  - `description: String`
+
+    User-provided description for the environment; null when unset
+
+  - `metadata: Hash[Symbol, String]`
+
+    User-provided metadata key-value pairs
+
+  - `name: String`
+
+    Human-readable name for the environment
+
+  - `type: :environment`
+
+    The type of object (always 'environment')
+
+  - `updated_at: String`
+
+    RFC 3339 timestamp when environment was last updated
+
+  - `scope: :organization | :account`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `:organization`
+
+    - `:account`
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_environment = anthropic.beta.environments.archive("env_011CZkZ9X2dpNyB7HsEFoRfW")
+
+puts(beta_environment)
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "archived_at": null,
+  "config": {
+    "networking": {
+      "allow_mcp_servers": false,
+      "allow_package_managers": true,
+      "allowed_hosts": [
+        "api.example.com"
+      ],
+      "type": "limited"
+    },
+    "packages": {
+      "apt": [
+        "string"
+      ],
+      "cargo": [
+        "string"
+      ],
+      "gem": [
+        "string"
+      ],
+      "go": [
+        "string"
+      ],
+      "npm": [
+        "string"
+      ],
+      "pip": [
+        "pandas",
+        "numpy"
+      ],
+      "type": "packages"
+    },
+    "type": "cloud"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Python environment with data-analysis packages.",
+  "metadata": {},
+  "name": "python-data-analysis",
+  "type": "environment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
+}
+```
+
+## Domain types
+
+### Beta Cloud Config
+
+- `class BetaCloudConfig`
+
+  `cloud` environment configuration.
+
+  - `networking: BetaUnrestrictedNetwork | BetaLimitedNetwork`
+
+    Network configuration policy.
+
+    - `class BetaUnrestrictedNetwork`
+
+      Unrestricted network access.
+
+      - `type: :unrestricted`
+
+        Network policy type
+
+    - `class BetaLimitedNetwork`
+
+      Limited network access.
+
+      - `allow_mcp_servers: bool`
+
+        Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+      - `allow_package_managers: bool`
+
+        Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+      - `allowed_hosts: Array[String]`
+
+        Specifies domains the container can reach.
+
+      - `type: :limited`
+
+        Network policy type
+
+  - `packages: BetaPackages`
+
+    Package manager configuration.
+
+    - `apt: Array[String]`
+
+      Ubuntu/Debian packages to install
+
+    - `cargo: Array[String]`
+
+      Rust packages to install
+
+    - `gem_: Array[String]`
+
+      Ruby packages to install
+
+    - `go: Array[String]`
+
+      Go packages to install
+
+    - `npm: Array[String]`
+
+      Node.js packages to install
+
+    - `pip: Array[String]`
+
+      Python packages to install
+
+    - `type: :packages`
+
+      Package configuration type
+
+  - `type: :cloud`
+
+    Environment type
+
+### Beta Cloud Config Params
+
+- `class BetaCloudConfigParams`
+
+  Request params for `cloud` environment configuration.
+
+  Fields default to null; on update, omitted fields preserve the
+  existing value.
+
+  - `type: :cloud`
+
+    Environment type
+
+  - `networking: BetaUnrestrictedNetwork | BetaLimitedNetworkParams`
+
+    Network configuration policy. Omit on update to preserve the existing value.
+
+    - `class BetaUnrestrictedNetwork`
+
+      Unrestricted network access.
+
+      - `type: :unrestricted`
+
+        Network policy type
+
+    - `class BetaLimitedNetworkParams`
+
+      Limited network request params.
+
+      Fields default to null; on update, omitted fields preserve the
+      existing value.
+
+      - `type: :limited`
+
+        Network policy type
+
+      - `allow_mcp_servers: bool`
+
+        Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+      - `allow_package_managers: bool`
+
+        Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
+
+      - `allowed_hosts: Array[String]`
+
+        Specifies domains the container can reach.
+
+  - `packages: BetaPackagesParams`
+
+    Specify packages (and optionally their versions) available in this environment.
+
+    When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+    Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
+
+    - `apt: Array[String]`
+
+      Ubuntu/Debian packages to install
+
+    - `cargo: Array[String]`
+
+      Rust packages to install
+
+    - `gem_: Array[String]`
+
+      Ruby packages to install
+
+    - `go: Array[String]`
+
+      Go packages to install
+
+    - `npm: Array[String]`
+
+      Node.js packages to install
+
+    - `pip: Array[String]`
+
+      Python packages to install
+
+    - `type: :packages`
+
+      Package configuration type
+
+### Beta Environment
+
+- `class BetaEnvironment`
+
+  Unified Environment resource for both cloud and self-hosted environments.
+
+  - `id: String`
+
+    Environment identifier (e.g., 'env_...')
+
+  - `archived_at: String`
+
+    RFC 3339 timestamp when environment was archived, or null if not archived
+
+  - `config: BetaCloudConfig | BetaSelfHostedConfig`
+
+    Environment configuration (either Anthropic Cloud or self-hosted)
+
+    - `class BetaCloudConfig`
+
+      `cloud` environment configuration.
+
+      - `networking: BetaUnrestrictedNetwork | BetaLimitedNetwork`
+
+        Network configuration policy.
+
+        - `class BetaUnrestrictedNetwork`
+
+          Unrestricted network access.
+
+          - `type: :unrestricted`
+
+            Network policy type
+
+        - `class BetaLimitedNetwork`
+
+          Limited network access.
+
+          - `allow_mcp_servers: bool`
+
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+          - `allow_package_managers: bool`
+
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+          - `allowed_hosts: Array[String]`
+
+            Specifies domains the container can reach.
+
+          - `type: :limited`
+
+            Network policy type
+
+      - `packages: BetaPackages`
+
+        Package manager configuration.
+
+        - `apt: Array[String]`
+
+          Ubuntu/Debian packages to install
+
+        - `cargo: Array[String]`
+
+          Rust packages to install
+
+        - `gem_: Array[String]`
+
+          Ruby packages to install
+
+        - `go: Array[String]`
+
+          Go packages to install
+
+        - `npm: Array[String]`
+
+          Node.js packages to install
+
+        - `pip: Array[String]`
+
+          Python packages to install
+
+        - `type: :packages`
+
+          Package configuration type
+
+      - `type: :cloud`
+
+        Environment type
+
+    - `class BetaSelfHostedConfig`
+
+      Configuration for self-hosted environments.
+
+      - `type: :self_hosted`
+
+        Environment type
+
+  - `created_at: String`
+
+    RFC 3339 timestamp when environment was created
+
+  - `description: String`
+
+    User-provided description for the environment; null when unset
+
+  - `metadata: Hash[Symbol, String]`
+
+    User-provided metadata key-value pairs
+
+  - `name: String`
+
+    Human-readable name for the environment
+
+  - `type: :environment`
+
+    The type of object (always 'environment')
+
+  - `updated_at: String`
+
+    RFC 3339 timestamp when environment was last updated
+
+  - `scope: :organization | :account`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `:organization`
+
+    - `:account`
+
+### Beta Environment Delete Response
+
+- `class BetaEnvironmentDeleteResponse`
+
+  Response after deleting an environment.
+
+  - `id: String`
+
+    Environment identifier
+
+  - `type: :environment_deleted`
+
+    The type of response
+
+### Beta Limited Network
+
+- `class BetaLimitedNetwork`
+
+  Limited network access.
+
+  - `allow_mcp_servers: bool`
+
+    Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+  - `allow_package_managers: bool`
+
+    Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+  - `allowed_hosts: Array[String]`
+
+    Specifies domains the container can reach.
+
+  - `type: :limited`
+
+    Network policy type
+
+### Beta Limited Network Params
+
+- `class BetaLimitedNetworkParams`
+
+  Limited network request params.
+
+  Fields default to null; on update, omitted fields preserve the
+  existing value.
+
+  - `type: :limited`
+
+    Network policy type
+
+  - `allow_mcp_servers: bool`
+
+    Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+  - `allow_package_managers: bool`
+
+    Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
+
+  - `allowed_hosts: Array[String]`
+
+    Specifies domains the container can reach.
+
+### Beta Packages
+
+- `class BetaPackages`
+
+  Packages (and their versions) available in this environment.
+
+  - `apt: Array[String]`
+
+    Ubuntu/Debian packages to install
+
+  - `cargo: Array[String]`
+
+    Rust packages to install
+
+  - `gem_: Array[String]`
+
+    Ruby packages to install
+
+  - `go: Array[String]`
+
+    Go packages to install
+
+  - `npm: Array[String]`
+
+    Node.js packages to install
+
+  - `pip: Array[String]`
+
+    Python packages to install
+
+  - `type: :packages`
+
+    Package configuration type
+
+### Beta Packages Params
+
+- `class BetaPackagesParams`
+
+  Specify packages (and optionally their versions) available in this environment.
+
+  When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+  Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
+
+  - `apt: Array[String]`
+
+    Ubuntu/Debian packages to install
+
+  - `cargo: Array[String]`
+
+    Rust packages to install
+
+  - `gem_: Array[String]`
+
+    Ruby packages to install
+
+  - `go: Array[String]`
+
+    Go packages to install
+
+  - `npm: Array[String]`
+
+    Node.js packages to install
+
+  - `pip: Array[String]`
+
+    Python packages to install
+
+  - `type: :packages`
+
+    Package configuration type
+
+### Beta Self Hosted Config
+
+- `class BetaSelfHostedConfig`
+
+  Configuration for self-hosted environments.
+
+  - `type: :self_hosted`
+
+    Environment type
+
+### Beta Self Hosted Config Params
+
+- `class BetaSelfHostedConfigParams`
+
+  Request params for `self_hosted` environment configuration.
+
+  - `type: :self_hosted`
+
+    Environment type
+
+### Beta Unrestricted Network
+
+- `class BetaUnrestrictedNetwork`
+
+  Unrestricted network access.
+
+  - `type: :unrestricted`
+
+    Network policy type
+
+## Environments › Work
+
+### Get Work Item
+
+`beta.environments.work.retrieve(work_id, **kwargs) -> BetaSelfHostedWork`
+
+**GET** `/v1/environments/{environment_id}/work/{work_id}`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Retrieve detailed information about a specific work item.
+
+#### Parameters
+
+- `environment_id: String`
+
+- `work_id: String`
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"server-side-fallback-2026-07-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+    - `:"fallback-credit-2026-07-01"`
+
+    - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
+
+    - `:"mid-conversation-output-config-2026-07-01"`
+
+    - `:"thinking-binding-controls-2026-08-01"`
+
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+#### Returns
+
+- `class BetaSelfHostedWork`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `id: String`
+
+    Work identifier (e.g., 'work_...')
+
+  - `acknowledged_at: String`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `created_at: String`
+
+    RFC 3339 timestamp when work was created
+
+  - `data: BetaSessionWorkData`
+
+    The actual work to be performed
+
+    - `id: String`
+
+      Session identifier (e.g., 'session_...')
+
+    - `type: :session`
+
+      Type of work data
+
+  - `environment_id: String`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `latest_heartbeat_at: String`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `metadata: Hash[Symbol, String]`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `secret: String`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `started_at: String`
+
+    RFC 3339 timestamp when work execution started
+
+  - `state: :queued | :starting | :active | 2 more`
+
+    Current state of the work item
+
+    - `:queued`
+
+    - `:starting`
+
+    - `:active`
+
+    - `:stopping`
+
+    - `:stopped`
+
+  - `stop_requested_at: String`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `stopped_at: String`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `type: :work`
+
+    The type of object (always 'work')
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_self_hosted_work = anthropic.beta.environments.work.retrieve("work_id", environment_id: "env_011CZkZ9X2dpNyB7HsEFoRfW")
+
+puts(beta_self_hosted_work)
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+### Poll for Work
+
+`beta.environments.work.poll(environment_id, **kwargs) -> BetaSelfHostedWork`
+
+**GET** `/v1/environments/{environment_id}/work/poll`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Long poll for work items in the queue.
+
+#### Parameters
+
+- `environment_id: String`
+
+- `block_ms: Integer`
+
+  How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
+
+  minimum: 1
+
+- `reclaim_older_than_ms: Integer`
+
+  Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
+
+  minimum: 1
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"server-side-fallback-2026-07-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+    - `:"fallback-credit-2026-07-01"`
+
+    - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
+
+    - `:"mid-conversation-output-config-2026-07-01"`
+
+    - `:"thinking-binding-controls-2026-08-01"`
+
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+- `anthropic_worker_id: String`
+
+  Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
+
+#### Returns
+
+- `class BetaSelfHostedWork`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `id: String`
+
+    Work identifier (e.g., 'work_...')
+
+  - `acknowledged_at: String`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `created_at: String`
+
+    RFC 3339 timestamp when work was created
+
+  - `data: BetaSessionWorkData`
+
+    The actual work to be performed
+
+    - `id: String`
+
+      Session identifier (e.g., 'session_...')
+
+    - `type: :session`
+
+      Type of work data
+
+  - `environment_id: String`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `latest_heartbeat_at: String`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `metadata: Hash[Symbol, String]`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `secret: String`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `started_at: String`
+
+    RFC 3339 timestamp when work execution started
+
+  - `state: :queued | :starting | :active | 2 more`
+
+    Current state of the work item
+
+    - `:queued`
+
+    - `:starting`
+
+    - `:active`
+
+    - `:stopping`
+
+    - `:stopped`
+
+  - `stop_requested_at: String`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `stopped_at: String`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `type: :work`
+
+    The type of object (always 'work')
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_self_hosted_work = anthropic.beta.environments.work.poll("env_011CZkZ9X2dpNyB7HsEFoRfW")
+
+puts(beta_self_hosted_work)
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+### Acknowledge Work
+
+`beta.environments.work.ack(work_id, **kwargs) -> BetaSelfHostedWork`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}/ack`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting' and removing it from the queue.
+
+#### Parameters
+
+- `environment_id: String`
+
+- `work_id: String`
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"server-side-fallback-2026-07-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+    - `:"fallback-credit-2026-07-01"`
+
+    - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
+
+    - `:"mid-conversation-output-config-2026-07-01"`
+
+    - `:"thinking-binding-controls-2026-08-01"`
+
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+#### Returns
+
+- `class BetaSelfHostedWork`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `id: String`
+
+    Work identifier (e.g., 'work_...')
+
+  - `acknowledged_at: String`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `created_at: String`
+
+    RFC 3339 timestamp when work was created
+
+  - `data: BetaSessionWorkData`
+
+    The actual work to be performed
+
+    - `id: String`
+
+      Session identifier (e.g., 'session_...')
+
+    - `type: :session`
+
+      Type of work data
+
+  - `environment_id: String`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `latest_heartbeat_at: String`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `metadata: Hash[Symbol, String]`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `secret: String`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `started_at: String`
+
+    RFC 3339 timestamp when work execution started
+
+  - `state: :queued | :starting | :active | 2 more`
+
+    Current state of the work item
+
+    - `:queued`
+
+    - `:starting`
+
+    - `:active`
+
+    - `:stopping`
+
+    - `:stopped`
+
+  - `stop_requested_at: String`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `stopped_at: String`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `type: :work`
+
+    The type of object (always 'work')
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_self_hosted_work = anthropic.beta.environments.work.ack("work_id", environment_id: "env_011CZkZ9X2dpNyB7HsEFoRfW")
+
+puts(beta_self_hosted_work)
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+### Record Heartbeat
+
+`beta.environments.work.heartbeat(work_id, **kwargs) -> BetaSelfHostedWorkHeartbeatResponse`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Record a heartbeat for a work item to maintain the lease.
+
+#### Parameters
+
+- `environment_id: String`
+
+- `work_id: String`
+
+- `desired_ttl_seconds: Integer`
+
+  Desired TTL in seconds
+
+- `expected_last_heartbeat: String`
+
+  Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"server-side-fallback-2026-07-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+    - `:"fallback-credit-2026-07-01"`
+
+    - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
+
+    - `:"mid-conversation-output-config-2026-07-01"`
+
+    - `:"thinking-binding-controls-2026-08-01"`
+
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+#### Returns
+
+- `class BetaSelfHostedWorkHeartbeatResponse`
+
+  Response after recording a heartbeat for a work item.
+
+  - `last_heartbeat: String`
+
+    RFC 3339 timestamp of the actual heartbeat from DB
+
+  - `lease_extended: bool`
+
+    Whether the heartbeat succeeded in extending the lease
+
+  - `state: :queued | :starting | :active | 2 more`
+
+    Current state of the work item (active/stopping/stopped)
+
+    - `:queued`
+
+    - `:starting`
+
+    - `:active`
+
+    - `:stopping`
+
+    - `:stopped`
+
+  - `ttl_seconds: Integer`
+
+    Effective TTL applied to the lease
+
+  - `type: :work_heartbeat`
+
+    The type of response
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_self_hosted_work_heartbeat_response = anthropic.beta.environments.work.heartbeat("work_id", environment_id: "env_011CZkZ9X2dpNyB7HsEFoRfW")
+
+puts(beta_self_hosted_work_heartbeat_response)
+```
+
+##### Response (200)
+
+```json
+{
+  "last_heartbeat": "last_heartbeat",
+  "lease_extended": true,
+  "state": "queued",
+  "ttl_seconds": 0,
+  "type": "work_heartbeat"
+}
+```
+
+### Stop Work
+
+`beta.environments.work.stop(work_id, **kwargs) -> BetaSelfHostedWork`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}/stop`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Stop a work item, initiating graceful or forced shutdown.
+
+#### Parameters
+
+- `environment_id: String`
+
+- `work_id: String`
+
+- `force: bool`
+
+  If true, immediately stop work without graceful shutdown
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"server-side-fallback-2026-07-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+    - `:"fallback-credit-2026-07-01"`
+
+    - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
+
+    - `:"mid-conversation-output-config-2026-07-01"`
+
+    - `:"thinking-binding-controls-2026-08-01"`
+
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+#### Returns
+
+- `class BetaSelfHostedWork`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `id: String`
+
+    Work identifier (e.g., 'work_...')
+
+  - `acknowledged_at: String`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `created_at: String`
+
+    RFC 3339 timestamp when work was created
+
+  - `data: BetaSessionWorkData`
+
+    The actual work to be performed
+
+    - `id: String`
+
+      Session identifier (e.g., 'session_...')
+
+    - `type: :session`
+
+      Type of work data
+
+  - `environment_id: String`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `latest_heartbeat_at: String`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `metadata: Hash[Symbol, String]`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `secret: String`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `started_at: String`
+
+    RFC 3339 timestamp when work execution started
+
+  - `state: :queued | :starting | :active | 2 more`
+
+    Current state of the work item
+
+    - `:queued`
+
+    - `:starting`
+
+    - `:active`
+
+    - `:stopping`
+
+    - `:stopped`
+
+  - `stop_requested_at: String`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `stopped_at: String`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `type: :work`
+
+    The type of object (always 'work')
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_self_hosted_work = anthropic.beta.environments.work.stop("work_id", environment_id: "env_011CZkZ9X2dpNyB7HsEFoRfW")
+
+puts(beta_self_hosted_work)
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+### List Work Items
+
+`beta.environments.work.list(environment_id, **kwargs) -> PageCursor<BetaSelfHostedWork>`
+
+**GET** `/v1/environments/{environment_id}/work`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+List work items in an environment.
+
+#### Parameters
+
+- `environment_id: String`
+
+- `limit: Integer`
+
+  Maximum number of work items to return
+
+  maximum: 1000, minimum: 1
+
+- `page: String`
+
+  Opaque cursor from previous response for pagination
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"server-side-fallback-2026-07-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+    - `:"fallback-credit-2026-07-01"`
+
+    - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
+
+    - `:"mid-conversation-output-config-2026-07-01"`
+
+    - `:"thinking-binding-controls-2026-08-01"`
+
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+#### Returns
+
+- `class BetaSelfHostedWork`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `id: String`
+
+    Work identifier (e.g., 'work_...')
+
+  - `acknowledged_at: String`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `created_at: String`
+
+    RFC 3339 timestamp when work was created
+
+  - `data: BetaSessionWorkData`
+
+    The actual work to be performed
+
+    - `id: String`
+
+      Session identifier (e.g., 'session_...')
+
+    - `type: :session`
+
+      Type of work data
+
+  - `environment_id: String`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `latest_heartbeat_at: String`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `metadata: Hash[Symbol, String]`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `secret: String`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `started_at: String`
+
+    RFC 3339 timestamp when work execution started
+
+  - `state: :queued | :starting | :active | 2 more`
+
+    Current state of the work item
+
+    - `:queued`
+
+    - `:starting`
+
+    - `:active`
+
+    - `:stopping`
+
+    - `:stopped`
+
+  - `stop_requested_at: String`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `stopped_at: String`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `type: :work`
+
+    The type of object (always 'work')
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+page = anthropic.beta.environments.work.list("env_011CZkZ9X2dpNyB7HsEFoRfW")
+
+puts(page)
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "acknowledged_at": "acknowledged_at",
+      "created_at": "created_at",
+      "data": {
+        "id": "id",
+        "type": "session"
+      },
+      "environment_id": "environment_id",
+      "latest_heartbeat_at": "latest_heartbeat_at",
+      "metadata": {
+        "foo": "string"
+      },
+      "secret": "secret",
+      "started_at": "started_at",
+      "state": "queued",
+      "stop_requested_at": "stop_requested_at",
+      "stopped_at": "stopped_at",
+      "type": "work"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+### Update Work Item
+
+`beta.environments.work.update(work_id, **kwargs) -> BetaSelfHostedWork`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Update work item metadata with merge semantics.
+
+#### Parameters
+
+- `environment_id: String`
+
+- `work_id: String`
+
+- `metadata: Hash[Symbol, String]`
+
+  Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"server-side-fallback-2026-07-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+    - `:"fallback-credit-2026-07-01"`
+
+    - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
+
+    - `:"mid-conversation-output-config-2026-07-01"`
+
+    - `:"thinking-binding-controls-2026-08-01"`
+
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+#### Returns
+
+- `class BetaSelfHostedWork`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `id: String`
+
+    Work identifier (e.g., 'work_...')
+
+  - `acknowledged_at: String`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `created_at: String`
+
+    RFC 3339 timestamp when work was created
+
+  - `data: BetaSessionWorkData`
+
+    The actual work to be performed
+
+    - `id: String`
+
+      Session identifier (e.g., 'session_...')
+
+    - `type: :session`
+
+      Type of work data
+
+  - `environment_id: String`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `latest_heartbeat_at: String`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `metadata: Hash[Symbol, String]`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `secret: String`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `started_at: String`
+
+    RFC 3339 timestamp when work execution started
+
+  - `state: :queued | :starting | :active | 2 more`
+
+    Current state of the work item
+
+    - `:queued`
+
+    - `:starting`
+
+    - `:active`
+
+    - `:stopping`
+
+    - `:stopped`
+
+  - `stop_requested_at: String`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `stopped_at: String`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `type: :work`
+
+    The type of object (always 'work')
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_self_hosted_work = anthropic.beta.environments.work.update(
+  "work_id",
+  environment_id: "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  metadata: {foo: "string"}
+)
+
+puts(beta_self_hosted_work)
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+### Get Queue Statistics
+
+`beta.environments.work.stats(environment_id, **kwargs) -> BetaSelfHostedWorkQueueStats`
+
+**GET** `/v1/environments/{environment_id}/work/stats`
+
+Get statistics about the work queue for an environment.
+
+#### Parameters
+
+- `environment_id: String`
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"server-side-fallback-2026-07-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+    - `:"fallback-credit-2026-07-01"`
+
+    - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
+
+    - `:"mid-conversation-output-config-2026-07-01"`
+
+    - `:"thinking-binding-controls-2026-08-01"`
+
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+#### Returns
+
+- `class BetaSelfHostedWorkQueueStats`
+
+  Statistics about the work queue for an environment.
+
+  Uses Redis Stream consumer group metrics for O(1) queries.
+
+  - `depth: Integer`
+
+    Number of work items waiting to be picked up (lag from consumer group)
+
+  - `oldest_queued_at: String`
+
+    RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
+
+  - `pending: Integer`
+
+    Number of work items being processed (polled but not acknowledged)
+
+  - `type: :work_queue_stats`
+
+    The type of object
+
+  - `workers_polling: Integer`
+
+    Number of workers that have polled for work in the last 30 seconds. Requires worker_id to be sent with poll requests.
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_self_hosted_work_queue_stats = anthropic.beta.environments.work.stats("env_011CZkZ9X2dpNyB7HsEFoRfW")
+
+puts(beta_self_hosted_work_queue_stats)
+```
+
+##### Response (200)
+
+```json
+{
+  "depth": 0,
+  "oldest_queued_at": "oldest_queued_at",
+  "pending": 0,
+  "type": "work_queue_stats",
+  "workers_polling": 0
+}
+```
 
 ---
 

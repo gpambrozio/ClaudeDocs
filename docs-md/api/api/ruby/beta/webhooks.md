@@ -1,2233 +1,1825 @@
 # Webhooks
 
-Copy page
+## Unwrap
 
-
+`beta.webhooks.unwrap() -> void`
 
-Ruby
+Verifies the webhook signature from the `webhook-id`, `webhook-timestamp` and `webhook-signature`
+headers using your webhook signing key, then parses the payload into an event. Fails if the
+signature is missing or invalid.
 
-# Webhooks
+### Example
 
-Helpers for receiving and verifying webhook events. Use `unwrap` in your SDK to verify signatures and parse payloads; see the [webhooks guide](managed-agents/webhooks.md) for handler examples.
+```ruby
+require "anthropic"
 
-Possible `data.type` values:
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-- `agent.archived`
-- `agent.created`
-- `agent.deleted`
-- `agent.updated`
-- `deployment.archived`
-- `deployment.created`
-- `deployment.deleted`
-- `deployment.paused`
-- `deployment.unpaused`
-- `deployment.updated`
-- `deployment_run.failed`
-- `deployment_run.started`
-- `deployment_run.succeeded`
-- `session.archived`
-- `session.created`
-- `session.deleted`
-- `session.idled`
-- `session.outcome_evaluation_ended`
-- `session.pending`
-- `session.requires_action`
-- `session.running`
-- `session.status_idled`
-- `session.status_rescheduled`
-- `session.status_run_started`
-- `session.status_terminated`
-- `session.thread_created`
-- `session.thread_idled`
-- `session.thread_terminated`
-- `session.updated`
-- `vault.archived`
-- `vault.created`
-- `vault.deleted`
-- `vault_credential.archived`
-- `vault_credential.created`
-- `vault_credential.deleted`
-- `vault_credential.refresh_failed`
+result = anthropic.beta.webhooks.unwrap
 
-##### ModelsExpand Collapse
+puts(result)
+```
 
-
+## Parse Unverified
 
-class BetaWebhookAgentArchivedEventData { id, organization\_id, type, workspace\_id } 
+`beta.webhooks.parse_unverified() -> void`
 
-id: String
+Parses a webhook payload into an event without verifying its signature. Prefer `unwrap()` unless
+you have already verified the signature yourself.
 
-ID of the agent that triggered the event.
+### Example
 
-organization\_id: String
+```ruby
+require "anthropic"
 
-type: :"agent.archived"
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-workspace\_id: String
+result = anthropic.beta.webhooks.parse_unverified
 
-
+puts(result)
+```
 
-class BetaWebhookAgentCreatedEventData { id, organization\_id, type, workspace\_id } 
+## Domain types
 
-id: String
+### Beta Webhook Agent Archived Event Data
 
-ID of the agent that triggered the event.
+- `class BetaWebhookAgentArchivedEventData`
 
-organization\_id: String
+  - `id: String`
 
-type: :"agent.created"
+    ID of the agent that triggered the event.
 
-workspace\_id: String
+  - `organization_id: String`
 
-
+  - `type: :"agent.archived"`
 
-class BetaWebhookAgentDeletedEventData { id, organization\_id, type, workspace\_id } 
+  - `workspace_id: String`
 
-id: String
+### Beta Webhook Agent Created Event Data
 
-ID of the agent that triggered the event.
+- `class BetaWebhookAgentCreatedEventData`
 
-organization\_id: String
+  - `id: String`
 
-type: :"agent.deleted"
+    ID of the agent that triggered the event.
 
-workspace\_id: String
+  - `organization_id: String`
 
-
+  - `type: :"agent.created"`
 
-class BetaWebhookAgentUpdatedEventData { id, organization\_id, type, workspace\_id } 
+  - `workspace_id: String`
 
-id: String
+### Beta Webhook Agent Deleted Event Data
 
-ID of the agent that triggered the event.
+- `class BetaWebhookAgentDeletedEventData`
 
-organization\_id: String
+  - `id: String`
 
-type: :"agent.updated"
+    ID of the agent that triggered the event.
 
-workspace\_id: String
+  - `organization_id: String`
 
-
+  - `type: :"agent.deleted"`
 
-class BetaWebhookDeploymentArchivedEventData { id, organization\_id, type, workspace\_id } 
+  - `workspace_id: String`
 
-id: String
+### Beta Webhook Agent Updated Event Data
 
-ID of the deployment that triggered the event.
+- `class BetaWebhookAgentUpdatedEventData`
 
-organization\_id: String
+  - `id: String`
 
-type: :"deployment.archived"
+    ID of the agent that triggered the event.
 
-workspace\_id: String
+  - `organization_id: String`
 
-
+  - `type: :"agent.updated"`
 
-class BetaWebhookDeploymentCreatedEventData { id, organization\_id, type, workspace\_id } 
+  - `workspace_id: String`
 
-id: String
+### Beta Webhook Deployment Archived Event Data
 
-ID of the deployment that triggered the event.
+- `class BetaWebhookDeploymentArchivedEventData`
 
-organization\_id: String
+  - `id: String`
 
-type: :"deployment.created"
+    ID of the deployment that triggered the event.
 
-workspace\_id: String
+  - `organization_id: String`
 
-
+  - `type: :"deployment.archived"`
 
-class BetaWebhookDeploymentDeletedEventData { id, organization\_id, type, workspace\_id } 
+  - `workspace_id: String`
 
-id: String
+### Beta Webhook Deployment Created Event Data
 
-ID of the deployment that triggered the event.
+- `class BetaWebhookDeploymentCreatedEventData`
 
-organization\_id: String
+  - `id: String`
 
-type: :"deployment.deleted"
+    ID of the deployment that triggered the event.
 
-workspace\_id: String
+  - `organization_id: String`
 
-
+  - `type: :"deployment.created"`
 
-class BetaWebhookDeploymentPausedEventData { id, organization\_id, type, workspace\_id } 
+  - `workspace_id: String`
 
-id: String
+### Beta Webhook Deployment Deleted Event Data
 
-ID of the deployment that triggered the event.
+- `class BetaWebhookDeploymentDeletedEventData`
 
-organization\_id: String
+  - `id: String`
 
-type: :"deployment.paused"
+    ID of the deployment that triggered the event.
 
-workspace\_id: String
+  - `organization_id: String`
 
-
+  - `type: :"deployment.deleted"`
 
-class BetaWebhookDeploymentRunFailedEventData { id, organization\_id, type, workspace\_id } 
+  - `workspace_id: String`
 
-id: String
+### Beta Webhook Deployment Paused Event Data
 
-ID of the deployment run that triggered the event.
+- `class BetaWebhookDeploymentPausedEventData`
 
-organization\_id: String
+  - `id: String`
 
-type: :"deployment\_run.failed"
+    ID of the deployment that triggered the event.
 
-workspace\_id: String
+  - `organization_id: String`
 
-
+  - `type: :"deployment.paused"`
 
-class BetaWebhookDeploymentRunStartedEventData { id, organization\_id, type, workspace\_id } 
+  - `workspace_id: String`
 
-id: String
+### Beta Webhook Deployment Run Failed Event Data
 
-ID of the deployment run that triggered the event.
+- `class BetaWebhookDeploymentRunFailedEventData`
 
-organization\_id: String
+  - `id: String`
 
-type: :"deployment\_run.started"
+    ID of the deployment run that triggered the event.
 
-workspace\_id: String
+  - `organization_id: String`
 
-
+  - `type: :"deployment_run.failed"`
 
-class BetaWebhookDeploymentRunSucceededEventData { id, organization\_id, type, workspace\_id } 
+  - `workspace_id: String`
 
-id: String
+### Beta Webhook Deployment Run Started Event Data
 
-ID of the deployment run that triggered the event.
+- `class BetaWebhookDeploymentRunStartedEventData`
 
-organization\_id: String
+  - `id: String`
 
-type: :"deployment\_run.succeeded"
+    ID of the deployment run that triggered the event.
 
-workspace\_id: String
+  - `organization_id: String`
 
-
+  - `type: :"deployment_run.started"`
 
-class BetaWebhookDeploymentUnpausedEventData { id, organization\_id, type, workspace\_id } 
+  - `workspace_id: String`
 
-id: String
+### Beta Webhook Deployment Run Succeeded Event Data
 
-ID of the deployment that triggered the event.
+- `class BetaWebhookDeploymentRunSucceededEventData`
 
-organization\_id: String
+  - `id: String`
 
-type: :"deployment.unpaused"
+    ID of the deployment run that triggered the event.
 
-workspace\_id: String
+  - `organization_id: String`
 
-
+  - `type: :"deployment_run.succeeded"`
 
-class BetaWebhookDeploymentUpdatedEventData { id, organization\_id, type, workspace\_id } 
+  - `workspace_id: String`
 
-id: String
+### Beta Webhook Deployment Unpaused Event Data
 
-ID of the deployment that triggered the event.
+- `class BetaWebhookDeploymentUnpausedEventData`
 
-organization\_id: String
+  - `id: String`
 
-type: :"deployment.updated"
+    ID of the deployment that triggered the event.
 
-workspace\_id: String
+  - `organization_id: String`
 
-
+  - `type: :"deployment.unpaused"`
 
-class BetaWebhookEvent { id, created\_at, data, type } 
+  - `workspace_id: String`
 
-id: String
+### Beta Webhook Deployment Updated Event Data
 
-Unique event identifier for idempotency.
+- `class BetaWebhookDeploymentUpdatedEventData`
 
-created\_at: Time
+  - `id: String`
 
-RFC 3339 timestamp when the event occurred.
+    ID of the deployment that triggered the event.
 
-
+  - `organization_id: String`
 
-data: [BetaWebhookEventData](api/beta/webhooks.md)
+  - `type: :"deployment.updated"`
 
-One of the following:
+  - `workspace_id: String`
 
-
+### Beta Webhook Environment Archived Event Data
 
-class BetaWebhookSessionCreatedEventData { id, organization\_id, type, workspace\_id } 
+- `class BetaWebhookEnvironmentArchivedEventData`
 
-id: String
+  - `id: String`
 
-ID of the session that triggered the event.
+    ID of the environment that triggered the event.
 
-organization\_id: String
+  - `organization_id: String`
 
-type: :"session.created"
+  - `type: :"environment.archived"`
 
-workspace\_id: String
+  - `workspace_id: String`
 
-
+### Beta Webhook Environment Created Event Data
 
-class BetaWebhookSessionPendingEventData { id, organization\_id, type, workspace\_id } 
+- `class BetaWebhookEnvironmentCreatedEventData`
 
-id: String
+  - `id: String`
 
-ID of the session that triggered the event.
+    ID of the environment that triggered the event.
 
-organization\_id: String
+  - `organization_id: String`
 
-type: :"session.pending"
+  - `type: :"environment.created"`
 
-workspace\_id: String
+  - `workspace_id: String`
 
-
+### Beta Webhook Environment Deleted Event Data
 
-class BetaWebhookSessionRunningEventData { id, organization\_id, type, workspace\_id } 
+- `class BetaWebhookEnvironmentDeletedEventData`
 
-id: String
+  - `id: String`
 
-ID of the session that triggered the event.
+    ID of the environment that triggered the event.
 
-organization\_id: String
+  - `organization_id: String`
 
-type: :"session.running"
+  - `type: :"environment.deleted"`
 
-workspace\_id: String
+  - `workspace_id: String`
 
-
+### Beta Webhook Environment Updated Event Data
 
-class BetaWebhookSessionIdledEventData { id, organization\_id, type, workspace\_id } 
+- `class BetaWebhookEnvironmentUpdatedEventData`
 
-id: String
+  - `id: String`
 
-ID of the session that triggered the event.
+    ID of the environment that triggered the event.
 
-organization\_id: String
+  - `organization_id: String`
 
-type: :"session.idled"
+  - `type: :"environment.updated"`
 
-workspace\_id: String
+  - `workspace_id: String`
 
-
+### Beta Webhook Event
 
-class BetaWebhookSessionRequiresActionEventData { id, organization\_id, type, workspace\_id } 
+- `class BetaWebhookEvent`
 
-id: String
+  - `id: String`
 
-ID of the session that triggered the event.
+    Unique event identifier for idempotency.
 
-organization\_id: String
+  - `created_at: Time`
 
-type: :"session.requires\_action"
+    RFC 3339 timestamp when the event occurred.
 
-workspace\_id: String
+    format: date-time
 
-
+  - `data: BetaWebhookEventData`
 
-class BetaWebhookSessionArchivedEventData { id, organization\_id, type, workspace\_id } 
+    - `class BetaWebhookSessionCreatedEventData`
 
-id: String
+      - `id: String`
 
-ID of the session that triggered the event.
+        ID of the session that triggered the event.
 
-organization\_id: String
+      - `organization_id: String`
 
-type: :"session.archived"
+      - `type: :"session.created"`
 
-workspace\_id: String
+      - `workspace_id: String`
 
-
+    - `class BetaWebhookSessionPendingEventData`
 
-class BetaWebhookSessionDeletedEventData { id, organization\_id, type, workspace\_id } 
+      - `id: String`
 
-id: String
+        ID of the session that triggered the event.
 
-ID of the session that triggered the event.
+      - `organization_id: String`
 
-organization\_id: String
+      - `type: :"session.pending"`
 
-type: :"session.deleted"
+      - `workspace_id: String`
 
-workspace\_id: String
+    - `class BetaWebhookSessionRunningEventData`
 
-
+      - `id: String`
 
-class BetaWebhookSessionStatusRescheduledEventData { id, organization\_id, type, workspace\_id } 
+        ID of the session that triggered the event.
 
-id: String
+      - `organization_id: String`
 
-ID of the session that triggered the event.
+      - `type: :"session.running"`
 
-organization\_id: String
+      - `workspace_id: String`
 
-type: :"session.status\_rescheduled"
+    - `class BetaWebhookSessionIdledEventData`
 
-workspace\_id: String
+      - `id: String`
 
-
+        ID of the session that triggered the event.
 
-class BetaWebhookSessionStatusRunStartedEventData { id, organization\_id, type, workspace\_id } 
+      - `organization_id: String`
 
-id: String
+      - `type: :"session.idled"`
 
-ID of the session that triggered the event.
+      - `workspace_id: String`
 
-organization\_id: String
+    - `class BetaWebhookSessionRequiresActionEventData`
 
-type: :"session.status\_run\_started"
+      - `id: String`
 
-workspace\_id: String
+        ID of the session that triggered the event.
 
-
+      - `organization_id: String`
 
-class BetaWebhookSessionStatusIdledEventData { id, organization\_id, type, workspace\_id } 
+      - `type: :"session.requires_action"`
 
-id: String
+      - `workspace_id: String`
 
-ID of the session that triggered the event.
+    - `class BetaWebhookSessionArchivedEventData`
 
-organization\_id: String
+      - `id: String`
 
-type: :"session.status\_idled"
+        ID of the session that triggered the event.
 
-workspace\_id: String
+      - `organization_id: String`
 
-
+      - `type: :"session.archived"`
 
-class BetaWebhookSessionStatusTerminatedEventData { id, organization\_id, type, workspace\_id } 
+      - `workspace_id: String`
 
-id: String
+    - `class BetaWebhookSessionDeletedEventData`
 
-ID of the session that triggered the event.
+      - `id: String`
 
-organization\_id: String
+        ID of the session that triggered the event.
 
-type: :"session.status\_terminated"
+      - `organization_id: String`
 
-workspace\_id: String
+      - `type: :"session.deleted"`
 
-
+      - `workspace_id: String`
 
-class BetaWebhookSessionThreadCreatedEventData { id, organization\_id, session\_thread\_id, 2 more } 
+    - `class BetaWebhookSessionStatusRescheduledEventData`
 
-id: String
+      - `id: String`
 
-ID of the session that triggered the event.
+        ID of the session that triggered the event.
 
-organization\_id: String
+      - `organization_id: String`
 
-session\_thread\_id: String
+      - `type: :"session.status_rescheduled"`
 
-ID of the session thread this event refers to.
+      - `workspace_id: String`
 
-type: :"session.thread\_created"
+    - `class BetaWebhookSessionStatusRunStartedEventData`
 
-workspace\_id: String
+      - `id: String`
 
-
+        ID of the session that triggered the event.
 
-class BetaWebhookSessionThreadIdledEventData { id, organization\_id, session\_thread\_id, 2 more } 
+      - `organization_id: String`
 
-id: String
+      - `type: :"session.status_run_started"`
 
-ID of the session that triggered the event.
+      - `workspace_id: String`
 
-organization\_id: String
+    - `class BetaWebhookSessionStatusIdledEventData`
 
-session\_thread\_id: String
+      - `id: String`
 
-ID of the session thread this event refers to.
+        ID of the session that triggered the event.
 
-type: :"session.thread\_idled"
+      - `organization_id: String`
 
-workspace\_id: String
+      - `type: :"session.status_idled"`
 
-
+      - `workspace_id: String`
 
-class BetaWebhookSessionThreadTerminatedEventData { id, organization\_id, session\_thread\_id, 2 more } 
+    - `class BetaWebhookSessionStatusTerminatedEventData`
 
-id: String
+      - `id: String`
 
-ID of the session that triggered the event.
+        ID of the session that triggered the event.
 
-organization\_id: String
+      - `organization_id: String`
 
-session\_thread\_id: String
+      - `type: :"session.status_terminated"`
 
-ID of the session thread this event refers to.
+      - `workspace_id: String`
 
-type: :"session.thread\_terminated"
+    - `class BetaWebhookSessionThreadCreatedEventData`
 
-workspace\_id: String
+      - `id: String`
 
-
+        ID of the session that triggered the event.
 
-class BetaWebhookSessionOutcomeEvaluationEndedEventData { id, organization\_id, type, workspace\_id } 
+      - `organization_id: String`
 
-id: String
+      - `session_thread_id: String`
 
-ID of the session that triggered the event.
+        ID of the session thread this event refers to.
 
-organization\_id: String
+      - `type: :"session.thread_created"`
 
-type: :"session.outcome\_evaluation\_ended"
+      - `workspace_id: String`
 
-workspace\_id: String
+    - `class BetaWebhookSessionThreadIdledEventData`
 
-
+      - `id: String`
 
-class BetaWebhookVaultCreatedEventData { id, organization\_id, type, workspace\_id } 
+        ID of the session that triggered the event.
 
-id: String
+      - `organization_id: String`
 
-ID of the vault that triggered the event.
+      - `session_thread_id: String`
 
-organization\_id: String
+        ID of the session thread this event refers to.
 
-type: :"vault.created"
+      - `type: :"session.thread_idled"`
 
-workspace\_id: String
+      - `workspace_id: String`
 
-
+    - `class BetaWebhookSessionThreadTerminatedEventData`
 
-class BetaWebhookVaultArchivedEventData { id, organization\_id, type, workspace\_id } 
+      - `id: String`
 
-id: String
+        ID of the session that triggered the event.
 
-ID of the vault that triggered the event.
+      - `organization_id: String`
 
-organization\_id: String
+      - `session_thread_id: String`
 
-type: :"vault.archived"
+        ID of the session thread this event refers to.
 
-workspace\_id: String
+      - `type: :"session.thread_terminated"`
 
-
+      - `workspace_id: String`
 
-class BetaWebhookVaultDeletedEventData { id, organization\_id, type, workspace\_id } 
+    - `class BetaWebhookSessionOutcomeEvaluationEndedEventData`
 
-id: String
+      - `id: String`
 
-ID of the vault that triggered the event.
+        ID of the session that triggered the event.
 
-organization\_id: String
+      - `organization_id: String`
 
-type: :"vault.deleted"
+      - `type: :"session.outcome_evaluation_ended"`
 
-workspace\_id: String
+      - `workspace_id: String`
 
-
+    - `class BetaWebhookVaultCreatedEventData`
 
-class BetaWebhookVaultCredentialCreatedEventData { id, organization\_id, type, 2 more } 
+      - `id: String`
 
-id: String
+        ID of the vault that triggered the event.
 
-ID of the vault credential that triggered the event.
+      - `organization_id: String`
 
-organization\_id: String
+      - `type: :"vault.created"`
 
-type: :"vault\_credential.created"
+      - `workspace_id: String`
 
-vault\_id: String
+    - `class BetaWebhookVaultArchivedEventData`
 
-ID of the vault that owns this credential.
+      - `id: String`
 
-workspace\_id: String
+        ID of the vault that triggered the event.
 
-
+      - `organization_id: String`
 
-class BetaWebhookVaultCredentialArchivedEventData { id, organization\_id, type, 2 more } 
+      - `type: :"vault.archived"`
 
-id: String
+      - `workspace_id: String`
 
-ID of the vault credential that triggered the event.
+    - `class BetaWebhookVaultDeletedEventData`
 
-organization\_id: String
+      - `id: String`
 
-type: :"vault\_credential.archived"
+        ID of the vault that triggered the event.
 
-vault\_id: String
+      - `organization_id: String`
 
-ID of the vault that owns this credential.
+      - `type: :"vault.deleted"`
 
-workspace\_id: String
+      - `workspace_id: String`
 
-
+    - `class BetaWebhookVaultCredentialCreatedEventData`
 
-class BetaWebhookVaultCredentialDeletedEventData { id, organization\_id, type, 2 more } 
+      - `id: String`
 
-id: String
+        ID of the vault credential that triggered the event.
 
-ID of the vault credential that triggered the event.
+      - `organization_id: String`
 
-organization\_id: String
+      - `type: :"vault_credential.created"`
 
-type: :"vault\_credential.deleted"
+      - `vault_id: String`
 
-vault\_id: String
+        ID of the vault that owns this credential.
 
-ID of the vault that owns this credential.
+      - `workspace_id: String`
 
-workspace\_id: String
+    - `class BetaWebhookVaultCredentialArchivedEventData`
 
-
+      - `id: String`
 
-class BetaWebhookVaultCredentialRefreshFailedEventData { id, organization\_id, type, 2 more } 
+        ID of the vault credential that triggered the event.
 
-id: String
+      - `organization_id: String`
 
-ID of the vault credential that triggered the event.
+      - `type: :"vault_credential.archived"`
 
-organization\_id: String
+      - `vault_id: String`
 
-type: :"vault\_credential.refresh\_failed"
+        ID of the vault that owns this credential.
 
-vault\_id: String
+      - `workspace_id: String`
 
-ID of the vault that owns this credential.
+    - `class BetaWebhookVaultCredentialDeletedEventData`
 
-workspace\_id: String
+      - `id: String`
 
-
+        ID of the vault credential that triggered the event.
 
-class BetaWebhookSessionUpdatedEventData { id, organization\_id, type, workspace\_id } 
+      - `organization_id: String`
 
-id: String
+      - `type: :"vault_credential.deleted"`
 
-ID of the session that triggered the event.
+      - `vault_id: String`
 
-organization\_id: String
+        ID of the vault that owns this credential.
 
-type: :"session.updated"
+      - `workspace_id: String`
 
-workspace\_id: String
+    - `class BetaWebhookVaultCredentialRefreshFailedEventData`
 
-
+      - `id: String`
 
-class BetaWebhookAgentCreatedEventData { id, organization\_id, type, workspace\_id } 
+        ID of the vault credential that triggered the event.
 
-id: String
+      - `organization_id: String`
 
-ID of the agent that triggered the event.
+      - `type: :"vault_credential.refresh_failed"`
 
-organization\_id: String
+      - `vault_id: String`
 
-type: :"agent.created"
+        ID of the vault that owns this credential.
 
-workspace\_id: String
+      - `workspace_id: String`
 
-
+    - `class BetaWebhookSessionUpdatedEventData`
 
-class BetaWebhookAgentArchivedEventData { id, organization\_id, type, workspace\_id } 
+      - `id: String`
 
-id: String
+        ID of the session that triggered the event.
 
-ID of the agent that triggered the event.
+      - `organization_id: String`
 
-organization\_id: String
+      - `type: :"session.updated"`
 
-type: :"agent.archived"
+      - `workspace_id: String`
 
-workspace\_id: String
+    - `class BetaWebhookAgentCreatedEventData`
 
-
+      - `id: String`
 
-class BetaWebhookAgentDeletedEventData { id, organization\_id, type, workspace\_id } 
+        ID of the agent that triggered the event.
 
-id: String
+      - `organization_id: String`
 
-ID of the agent that triggered the event.
+      - `type: :"agent.created"`
 
-organization\_id: String
+      - `workspace_id: String`
 
-type: :"agent.deleted"
+    - `class BetaWebhookAgentArchivedEventData`
 
-workspace\_id: String
+      - `id: String`
 
-
+        ID of the agent that triggered the event.
 
-class BetaWebhookDeploymentPausedEventData { id, organization\_id, type, workspace\_id } 
+      - `organization_id: String`
 
-id: String
+      - `type: :"agent.archived"`
 
-ID of the deployment that triggered the event.
+      - `workspace_id: String`
 
-organization\_id: String
+    - `class BetaWebhookAgentDeletedEventData`
 
-type: :"deployment.paused"
+      - `id: String`
 
-workspace\_id: String
+        ID of the agent that triggered the event.
 
-
+      - `organization_id: String`
 
-class BetaWebhookDeploymentRunFailedEventData { id, organization\_id, type, workspace\_id } 
+      - `type: :"agent.deleted"`
 
-id: String
+      - `workspace_id: String`
 
-ID of the deployment run that triggered the event.
+    - `class BetaWebhookDeploymentPausedEventData`
 
-organization\_id: String
+      - `id: String`
 
-type: :"deployment\_run.failed"
+        ID of the deployment that triggered the event.
 
-workspace\_id: String
+      - `organization_id: String`
 
-
+      - `type: :"deployment.paused"`
 
-class BetaWebhookDeploymentCreatedEventData { id, organization\_id, type, workspace\_id } 
+      - `workspace_id: String`
 
-id: String
+    - `class BetaWebhookDeploymentRunFailedEventData`
 
-ID of the deployment that triggered the event.
+      - `id: String`
 
-organization\_id: String
+        ID of the deployment run that triggered the event.
 
-type: :"deployment.created"
+      - `organization_id: String`
 
-workspace\_id: String
+      - `type: :"deployment_run.failed"`
 
-
+      - `workspace_id: String`
 
-class BetaWebhookDeploymentUpdatedEventData { id, organization\_id, type, workspace\_id } 
+    - `class BetaWebhookDeploymentCreatedEventData`
 
-id: String
+      - `id: String`
 
-ID of the deployment that triggered the event.
+        ID of the deployment that triggered the event.
 
-organization\_id: String
+      - `organization_id: String`
 
-type: :"deployment.updated"
+      - `type: :"deployment.created"`
 
-workspace\_id: String
+      - `workspace_id: String`
 
-
+    - `class BetaWebhookDeploymentUpdatedEventData`
 
-class BetaWebhookDeploymentUnpausedEventData { id, organization\_id, type, workspace\_id } 
+      - `id: String`
 
-id: String
+        ID of the deployment that triggered the event.
 
-ID of the deployment that triggered the event.
+      - `organization_id: String`
 
-organization\_id: String
+      - `type: :"deployment.updated"`
 
-type: :"deployment.unpaused"
+      - `workspace_id: String`
 
-workspace\_id: String
+    - `class BetaWebhookDeploymentUnpausedEventData`
 
-
+      - `id: String`
 
-class BetaWebhookAgentUpdatedEventData { id, organization\_id, type, workspace\_id } 
+        ID of the deployment that triggered the event.
 
-id: String
+      - `organization_id: String`
 
-ID of the agent that triggered the event.
+      - `type: :"deployment.unpaused"`
 
-organization\_id: String
+      - `workspace_id: String`
 
-type: :"agent.updated"
+    - `class BetaWebhookAgentUpdatedEventData`
 
-workspace\_id: String
+      - `id: String`
 
-
+        ID of the agent that triggered the event.
 
-class BetaWebhookDeploymentArchivedEventData { id, organization\_id, type, workspace\_id } 
+      - `organization_id: String`
 
-id: String
+      - `type: :"agent.updated"`
 
-ID of the deployment that triggered the event.
+      - `workspace_id: String`
 
-organization\_id: String
+    - `class BetaWebhookDeploymentArchivedEventData`
 
-type: :"deployment.archived"
+      - `id: String`
 
-workspace\_id: String
+        ID of the deployment that triggered the event.
 
-
+      - `organization_id: String`
 
-class BetaWebhookDeploymentRunStartedEventData { id, organization\_id, type, workspace\_id } 
+      - `type: :"deployment.archived"`
 
-id: String
+      - `workspace_id: String`
 
-ID of the deployment run that triggered the event.
+    - `class BetaWebhookDeploymentRunStartedEventData`
 
-organization\_id: String
+      - `id: String`
 
-type: :"deployment\_run.started"
+        ID of the deployment run that triggered the event.
 
-workspace\_id: String
+      - `organization_id: String`
 
-
+      - `type: :"deployment_run.started"`
 
-class BetaWebhookDeploymentDeletedEventData { id, organization\_id, type, workspace\_id } 
+      - `workspace_id: String`
 
-id: String
+    - `class BetaWebhookDeploymentDeletedEventData`
 
-ID of the deployment that triggered the event.
+      - `id: String`
 
-organization\_id: String
+        ID of the deployment that triggered the event.
 
-type: :"deployment.deleted"
+      - `organization_id: String`
 
-workspace\_id: String
+      - `type: :"deployment.deleted"`
 
-
+      - `workspace_id: String`
 
-class BetaWebhookDeploymentRunSucceededEventData { id, organization\_id, type, workspace\_id } 
+    - `class BetaWebhookDeploymentRunSucceededEventData`
 
-id: String
+      - `id: String`
 
-ID of the deployment run that triggered the event.
+        ID of the deployment run that triggered the event.
 
-organization\_id: String
+      - `organization_id: String`
 
-type: :"deployment\_run.succeeded"
+      - `type: :"deployment_run.succeeded"`
 
-workspace\_id: String
+      - `workspace_id: String`
 
-type: :event
+    - `class BetaWebhookEnvironmentCreatedEventData`
 
-Object type. Always `event` for webhook payloads.
+      - `id: String`
 
-
+        ID of the environment that triggered the event.
 
-BetaWebhookEventData = [BetaWebhookSessionCreatedEventData](api/beta/webhooks.md) { id, organization\_id, type, workspace\_id }  | [BetaWebhookSessionPendingEventData](api/beta/webhooks.md) { id, organization\_id, type, workspace\_id }  | [BetaWebhookSessionRunningEventData](api/beta/webhooks.md) { id, organization\_id, type, workspace\_id }  | 33 more
+      - `organization_id: String`
 
-One of the following:
+      - `type: :"environment.created"`
 
-
+      - `workspace_id: String`
 
-class BetaWebhookSessionCreatedEventData { id, organization\_id, type, workspace\_id } 
+    - `class BetaWebhookEnvironmentUpdatedEventData`
 
-id: String
+      - `id: String`
 
-ID of the session that triggered the event.
+        ID of the environment that triggered the event.
 
-organization\_id: String
+      - `organization_id: String`
 
-type: :"session.created"
+      - `type: :"environment.updated"`
 
-workspace\_id: String
+      - `workspace_id: String`
 
-
+    - `class BetaWebhookEnvironmentArchivedEventData`
 
-class BetaWebhookSessionPendingEventData { id, organization\_id, type, workspace\_id } 
+      - `id: String`
 
-id: String
+        ID of the environment that triggered the event.
 
-ID of the session that triggered the event.
+      - `organization_id: String`
 
-organization\_id: String
+      - `type: :"environment.archived"`
 
-type: :"session.pending"
+      - `workspace_id: String`
 
-workspace\_id: String
+    - `class BetaWebhookEnvironmentDeletedEventData`
 
-
+      - `id: String`
 
-class BetaWebhookSessionRunningEventData { id, organization\_id, type, workspace\_id } 
+        ID of the environment that triggered the event.
 
-id: String
+      - `organization_id: String`
 
-ID of the session that triggered the event.
+      - `type: :"environment.deleted"`
 
-organization\_id: String
+      - `workspace_id: String`
 
-type: :"session.running"
+    - `class BetaWebhookMemoryStoreCreatedEventData`
 
-workspace\_id: String
+      - `id: String`
 
-
+        ID of the memory store that triggered the event.
 
-class BetaWebhookSessionIdledEventData { id, organization\_id, type, workspace\_id } 
+      - `organization_id: String`
 
-id: String
+      - `type: :"memory_store.created"`
 
-ID of the session that triggered the event.
+      - `workspace_id: String`
 
-organization\_id: String
+    - `class BetaWebhookMemoryStoreArchivedEventData`
 
-type: :"session.idled"
+      - `id: String`
 
-workspace\_id: String
+        ID of the memory store that triggered the event.
 
-
+      - `organization_id: String`
 
-class BetaWebhookSessionRequiresActionEventData { id, organization\_id, type, workspace\_id } 
+      - `type: :"memory_store.archived"`
 
-id: String
+      - `workspace_id: String`
 
-ID of the session that triggered the event.
+    - `class BetaWebhookMemoryStoreDeletedEventData`
 
-organization\_id: String
+      - `id: String`
 
-type: :"session.requires\_action"
+        ID of the memory store that triggered the event.
 
-workspace\_id: String
+      - `organization_id: String`
 
-
+      - `type: :"memory_store.deleted"`
 
-class BetaWebhookSessionArchivedEventData { id, organization\_id, type, workspace\_id } 
+      - `workspace_id: String`
 
-id: String
+    - `class BetaWebhookSessionBudgetReachedEventData`
 
-ID of the session that triggered the event.
+      - `id: String`
 
-organization\_id: String
+        ID of the session that triggered the event.
 
-type: :"session.archived"
+      - `organization_id: String`
 
-workspace\_id: String
+      - `type: :"session.budget_reached"`
 
-
+      - `workspace_id: String`
 
-class BetaWebhookSessionDeletedEventData { id, organization\_id, type, workspace\_id } 
+  - `type: :event`
 
-id: String
+    Object type. Always `event` for webhook payloads.
 
-ID of the session that triggered the event.
+### Beta Webhook Event Data
 
-organization\_id: String
+- `BetaWebhookEventData = BetaWebhookSessionCreatedEventData | BetaWebhookSessionPendingEventData | BetaWebhookSessionRunningEventData | 41 more`
 
-type: :"session.deleted"
+  - `class BetaWebhookSessionCreatedEventData`
 
-workspace\_id: String
+    - `id: String`
 
-
+      ID of the session that triggered the event.
 
-class BetaWebhookSessionStatusRescheduledEventData { id, organization\_id, type, workspace\_id } 
+    - `organization_id: String`
 
-id: String
+    - `type: :"session.created"`
 
-ID of the session that triggered the event.
+    - `workspace_id: String`
 
-organization\_id: String
+  - `class BetaWebhookSessionPendingEventData`
 
-type: :"session.status\_rescheduled"
+    - `id: String`
 
-workspace\_id: String
+      ID of the session that triggered the event.
 
-
+    - `organization_id: String`
 
-class BetaWebhookSessionStatusRunStartedEventData { id, organization\_id, type, workspace\_id } 
+    - `type: :"session.pending"`
 
-id: String
+    - `workspace_id: String`
 
-ID of the session that triggered the event.
+  - `class BetaWebhookSessionRunningEventData`
 
-organization\_id: String
+    - `id: String`
 
-type: :"session.status\_run\_started"
+      ID of the session that triggered the event.
 
-workspace\_id: String
+    - `organization_id: String`
 
-
+    - `type: :"session.running"`
 
-class BetaWebhookSessionStatusIdledEventData { id, organization\_id, type, workspace\_id } 
+    - `workspace_id: String`
 
-id: String
+  - `class BetaWebhookSessionIdledEventData`
 
-ID of the session that triggered the event.
+    - `id: String`
 
-organization\_id: String
+      ID of the session that triggered the event.
 
-type: :"session.status\_idled"
+    - `organization_id: String`
 
-workspace\_id: String
+    - `type: :"session.idled"`
 
-
+    - `workspace_id: String`
 
-class BetaWebhookSessionStatusTerminatedEventData { id, organization\_id, type, workspace\_id } 
+  - `class BetaWebhookSessionRequiresActionEventData`
 
-id: String
+    - `id: String`
 
-ID of the session that triggered the event.
+      ID of the session that triggered the event.
 
-organization\_id: String
+    - `organization_id: String`
 
-type: :"session.status\_terminated"
+    - `type: :"session.requires_action"`
 
-workspace\_id: String
+    - `workspace_id: String`
 
-
+  - `class BetaWebhookSessionArchivedEventData`
 
-class BetaWebhookSessionThreadCreatedEventData { id, organization\_id, session\_thread\_id, 2 more } 
+    - `id: String`
 
-id: String
+      ID of the session that triggered the event.
 
-ID of the session that triggered the event.
+    - `organization_id: String`
 
-organization\_id: String
+    - `type: :"session.archived"`
 
-session\_thread\_id: String
+    - `workspace_id: String`
 
-ID of the session thread this event refers to.
+  - `class BetaWebhookSessionDeletedEventData`
 
-type: :"session.thread\_created"
+    - `id: String`
 
-workspace\_id: String
+      ID of the session that triggered the event.
 
-
+    - `organization_id: String`
 
-class BetaWebhookSessionThreadIdledEventData { id, organization\_id, session\_thread\_id, 2 more } 
+    - `type: :"session.deleted"`
 
-id: String
+    - `workspace_id: String`
 
-ID of the session that triggered the event.
+  - `class BetaWebhookSessionStatusRescheduledEventData`
 
-organization\_id: String
+    - `id: String`
 
-session\_thread\_id: String
+      ID of the session that triggered the event.
 
-ID of the session thread this event refers to.
+    - `organization_id: String`
 
-type: :"session.thread\_idled"
+    - `type: :"session.status_rescheduled"`
 
-workspace\_id: String
+    - `workspace_id: String`
 
-
+  - `class BetaWebhookSessionStatusRunStartedEventData`
 
-class BetaWebhookSessionThreadTerminatedEventData { id, organization\_id, session\_thread\_id, 2 more } 
+    - `id: String`
 
-id: String
+      ID of the session that triggered the event.
 
-ID of the session that triggered the event.
+    - `organization_id: String`
 
-organization\_id: String
+    - `type: :"session.status_run_started"`
 
-session\_thread\_id: String
+    - `workspace_id: String`
 
-ID of the session thread this event refers to.
+  - `class BetaWebhookSessionStatusIdledEventData`
 
-type: :"session.thread\_terminated"
+    - `id: String`
 
-workspace\_id: String
+      ID of the session that triggered the event.
 
-
+    - `organization_id: String`
 
-class BetaWebhookSessionOutcomeEvaluationEndedEventData { id, organization\_id, type, workspace\_id } 
+    - `type: :"session.status_idled"`
 
-id: String
+    - `workspace_id: String`
 
-ID of the session that triggered the event.
+  - `class BetaWebhookSessionStatusTerminatedEventData`
 
-organization\_id: String
+    - `id: String`
 
-type: :"session.outcome\_evaluation\_ended"
+      ID of the session that triggered the event.
 
-workspace\_id: String
+    - `organization_id: String`
 
-
+    - `type: :"session.status_terminated"`
 
-class BetaWebhookVaultCreatedEventData { id, organization\_id, type, workspace\_id } 
+    - `workspace_id: String`
 
-id: String
+  - `class BetaWebhookSessionThreadCreatedEventData`
 
-ID of the vault that triggered the event.
+    - `id: String`
 
-organization\_id: String
+      ID of the session that triggered the event.
 
-type: :"vault.created"
+    - `organization_id: String`
 
-workspace\_id: String
+    - `session_thread_id: String`
 
-
+      ID of the session thread this event refers to.
 
-class BetaWebhookVaultArchivedEventData { id, organization\_id, type, workspace\_id } 
+    - `type: :"session.thread_created"`
 
-id: String
+    - `workspace_id: String`
 
-ID of the vault that triggered the event.
+  - `class BetaWebhookSessionThreadIdledEventData`
 
-organization\_id: String
+    - `id: String`
 
-type: :"vault.archived"
+      ID of the session that triggered the event.
 
-workspace\_id: String
+    - `organization_id: String`
 
-
+    - `session_thread_id: String`
 
-class BetaWebhookVaultDeletedEventData { id, organization\_id, type, workspace\_id } 
+      ID of the session thread this event refers to.
 
-id: String
+    - `type: :"session.thread_idled"`
 
-ID of the vault that triggered the event.
+    - `workspace_id: String`
 
-organization\_id: String
+  - `class BetaWebhookSessionThreadTerminatedEventData`
 
-type: :"vault.deleted"
+    - `id: String`
 
-workspace\_id: String
+      ID of the session that triggered the event.
 
-
+    - `organization_id: String`
 
-class BetaWebhookVaultCredentialCreatedEventData { id, organization\_id, type, 2 more } 
+    - `session_thread_id: String`
 
-id: String
+      ID of the session thread this event refers to.
 
-ID of the vault credential that triggered the event.
+    - `type: :"session.thread_terminated"`
 
-organization\_id: String
+    - `workspace_id: String`
 
-type: :"vault\_credential.created"
+  - `class BetaWebhookSessionOutcomeEvaluationEndedEventData`
 
-vault\_id: String
+    - `id: String`
 
-ID of the vault that owns this credential.
+      ID of the session that triggered the event.
 
-workspace\_id: String
+    - `organization_id: String`
 
-
+    - `type: :"session.outcome_evaluation_ended"`
 
-class BetaWebhookVaultCredentialArchivedEventData { id, organization\_id, type, 2 more } 
+    - `workspace_id: String`
 
-id: String
+  - `class BetaWebhookVaultCreatedEventData`
 
-ID of the vault credential that triggered the event.
+    - `id: String`
 
-organization\_id: String
+      ID of the vault that triggered the event.
 
-type: :"vault\_credential.archived"
+    - `organization_id: String`
 
-vault\_id: String
+    - `type: :"vault.created"`
 
-ID of the vault that owns this credential.
+    - `workspace_id: String`
 
-workspace\_id: String
+  - `class BetaWebhookVaultArchivedEventData`
 
-
+    - `id: String`
 
-class BetaWebhookVaultCredentialDeletedEventData { id, organization\_id, type, 2 more } 
+      ID of the vault that triggered the event.
 
-id: String
+    - `organization_id: String`
 
-ID of the vault credential that triggered the event.
+    - `type: :"vault.archived"`
 
-organization\_id: String
+    - `workspace_id: String`
 
-type: :"vault\_credential.deleted"
+  - `class BetaWebhookVaultDeletedEventData`
 
-vault\_id: String
+    - `id: String`
 
-ID of the vault that owns this credential.
+      ID of the vault that triggered the event.
 
-workspace\_id: String
+    - `organization_id: String`
 
-
+    - `type: :"vault.deleted"`
 
-class BetaWebhookVaultCredentialRefreshFailedEventData { id, organization\_id, type, 2 more } 
+    - `workspace_id: String`
 
-id: String
+  - `class BetaWebhookVaultCredentialCreatedEventData`
 
-ID of the vault credential that triggered the event.
+    - `id: String`
 
-organization\_id: String
+      ID of the vault credential that triggered the event.
 
-type: :"vault\_credential.refresh\_failed"
+    - `organization_id: String`
 
-vault\_id: String
+    - `type: :"vault_credential.created"`
 
-ID of the vault that owns this credential.
+    - `vault_id: String`
 
-workspace\_id: String
+      ID of the vault that owns this credential.
 
-
+    - `workspace_id: String`
 
-class BetaWebhookSessionUpdatedEventData { id, organization\_id, type, workspace\_id } 
+  - `class BetaWebhookVaultCredentialArchivedEventData`
 
-id: String
+    - `id: String`
 
-ID of the session that triggered the event.
+      ID of the vault credential that triggered the event.
 
-organization\_id: String
+    - `organization_id: String`
 
-type: :"session.updated"
+    - `type: :"vault_credential.archived"`
 
-workspace\_id: String
+    - `vault_id: String`
 
-
+      ID of the vault that owns this credential.
 
-class BetaWebhookAgentCreatedEventData { id, organization\_id, type, workspace\_id } 
+    - `workspace_id: String`
 
-id: String
+  - `class BetaWebhookVaultCredentialDeletedEventData`
 
-ID of the agent that triggered the event.
+    - `id: String`
 
-organization\_id: String
+      ID of the vault credential that triggered the event.
 
-type: :"agent.created"
+    - `organization_id: String`
 
-workspace\_id: String
+    - `type: :"vault_credential.deleted"`
 
-
+    - `vault_id: String`
 
-class BetaWebhookAgentArchivedEventData { id, organization\_id, type, workspace\_id } 
+      ID of the vault that owns this credential.
 
-id: String
+    - `workspace_id: String`
 
-ID of the agent that triggered the event.
+  - `class BetaWebhookVaultCredentialRefreshFailedEventData`
 
-organization\_id: String
+    - `id: String`
 
-type: :"agent.archived"
+      ID of the vault credential that triggered the event.
 
-workspace\_id: String
+    - `organization_id: String`
 
-
+    - `type: :"vault_credential.refresh_failed"`
 
-class BetaWebhookAgentDeletedEventData { id, organization\_id, type, workspace\_id } 
+    - `vault_id: String`
 
-id: String
+      ID of the vault that owns this credential.
 
-ID of the agent that triggered the event.
+    - `workspace_id: String`
 
-organization\_id: String
+  - `class BetaWebhookSessionUpdatedEventData`
 
-type: :"agent.deleted"
+    - `id: String`
 
-workspace\_id: String
+      ID of the session that triggered the event.
 
-
+    - `organization_id: String`
 
-class BetaWebhookDeploymentPausedEventData { id, organization\_id, type, workspace\_id } 
+    - `type: :"session.updated"`
 
-id: String
+    - `workspace_id: String`
 
-ID of the deployment that triggered the event.
+  - `class BetaWebhookAgentCreatedEventData`
 
-organization\_id: String
+    - `id: String`
 
-type: :"deployment.paused"
+      ID of the agent that triggered the event.
 
-workspace\_id: String
+    - `organization_id: String`
 
-
+    - `type: :"agent.created"`
 
-class BetaWebhookDeploymentRunFailedEventData { id, organization\_id, type, workspace\_id } 
+    - `workspace_id: String`
 
-id: String
+  - `class BetaWebhookAgentArchivedEventData`
 
-ID of the deployment run that triggered the event.
+    - `id: String`
 
-organization\_id: String
+      ID of the agent that triggered the event.
 
-type: :"deployment\_run.failed"
+    - `organization_id: String`
 
-workspace\_id: String
+    - `type: :"agent.archived"`
 
-
+    - `workspace_id: String`
 
-class BetaWebhookDeploymentCreatedEventData { id, organization\_id, type, workspace\_id } 
+  - `class BetaWebhookAgentDeletedEventData`
 
-id: String
+    - `id: String`
 
-ID of the deployment that triggered the event.
+      ID of the agent that triggered the event.
 
-organization\_id: String
+    - `organization_id: String`
 
-type: :"deployment.created"
+    - `type: :"agent.deleted"`
 
-workspace\_id: String
+    - `workspace_id: String`
 
-
+  - `class BetaWebhookDeploymentPausedEventData`
 
-class BetaWebhookDeploymentUpdatedEventData { id, organization\_id, type, workspace\_id } 
+    - `id: String`
 
-id: String
+      ID of the deployment that triggered the event.
 
-ID of the deployment that triggered the event.
+    - `organization_id: String`
 
-organization\_id: String
+    - `type: :"deployment.paused"`
 
-type: :"deployment.updated"
+    - `workspace_id: String`
 
-workspace\_id: String
+  - `class BetaWebhookDeploymentRunFailedEventData`
 
-
+    - `id: String`
 
-class BetaWebhookDeploymentUnpausedEventData { id, organization\_id, type, workspace\_id } 
+      ID of the deployment run that triggered the event.
 
-id: String
+    - `organization_id: String`
 
-ID of the deployment that triggered the event.
+    - `type: :"deployment_run.failed"`
 
-organization\_id: String
+    - `workspace_id: String`
 
-type: :"deployment.unpaused"
+  - `class BetaWebhookDeploymentCreatedEventData`
 
-workspace\_id: String
+    - `id: String`
 
-
+      ID of the deployment that triggered the event.
 
-class BetaWebhookAgentUpdatedEventData { id, organization\_id, type, workspace\_id } 
+    - `organization_id: String`
 
-id: String
+    - `type: :"deployment.created"`
 
-ID of the agent that triggered the event.
+    - `workspace_id: String`
 
-organization\_id: String
+  - `class BetaWebhookDeploymentUpdatedEventData`
 
-type: :"agent.updated"
+    - `id: String`
 
-workspace\_id: String
+      ID of the deployment that triggered the event.
 
-
+    - `organization_id: String`
 
-class BetaWebhookDeploymentArchivedEventData { id, organization\_id, type, workspace\_id } 
+    - `type: :"deployment.updated"`
 
-id: String
+    - `workspace_id: String`
 
-ID of the deployment that triggered the event.
+  - `class BetaWebhookDeploymentUnpausedEventData`
 
-organization\_id: String
+    - `id: String`
 
-type: :"deployment.archived"
+      ID of the deployment that triggered the event.
 
-workspace\_id: String
+    - `organization_id: String`
 
-
+    - `type: :"deployment.unpaused"`
 
-class BetaWebhookDeploymentRunStartedEventData { id, organization\_id, type, workspace\_id } 
+    - `workspace_id: String`
 
-id: String
+  - `class BetaWebhookAgentUpdatedEventData`
 
-ID of the deployment run that triggered the event.
+    - `id: String`
 
-organization\_id: String
+      ID of the agent that triggered the event.
 
-type: :"deployment\_run.started"
+    - `organization_id: String`
 
-workspace\_id: String
+    - `type: :"agent.updated"`
 
-
+    - `workspace_id: String`
 
-class BetaWebhookDeploymentDeletedEventData { id, organization\_id, type, workspace\_id } 
+  - `class BetaWebhookDeploymentArchivedEventData`
 
-id: String
+    - `id: String`
 
-ID of the deployment that triggered the event.
+      ID of the deployment that triggered the event.
 
-organization\_id: String
+    - `organization_id: String`
 
-type: :"deployment.deleted"
+    - `type: :"deployment.archived"`
 
-workspace\_id: String
+    - `workspace_id: String`
 
-
+  - `class BetaWebhookDeploymentRunStartedEventData`
 
-class BetaWebhookDeploymentRunSucceededEventData { id, organization\_id, type, workspace\_id } 
+    - `id: String`
 
-id: String
+      ID of the deployment run that triggered the event.
 
-ID of the deployment run that triggered the event.
+    - `organization_id: String`
 
-organization\_id: String
+    - `type: :"deployment_run.started"`
 
-type: :"deployment\_run.succeeded"
+    - `workspace_id: String`
 
-workspace\_id: String
+  - `class BetaWebhookDeploymentDeletedEventData`
 
-
+    - `id: String`
 
-class BetaWebhookSessionArchivedEventData { id, organization\_id, type, workspace\_id } 
+      ID of the deployment that triggered the event.
 
-id: String
+    - `organization_id: String`
 
-ID of the session that triggered the event.
+    - `type: :"deployment.deleted"`
 
-organization\_id: String
+    - `workspace_id: String`
 
-type: :"session.archived"
+  - `class BetaWebhookDeploymentRunSucceededEventData`
 
-workspace\_id: String
+    - `id: String`
 
-
+      ID of the deployment run that triggered the event.
 
-class BetaWebhookSessionCreatedEventData { id, organization\_id, type, workspace\_id } 
+    - `organization_id: String`
 
-id: String
+    - `type: :"deployment_run.succeeded"`
 
-ID of the session that triggered the event.
+    - `workspace_id: String`
 
-organization\_id: String
+  - `class BetaWebhookEnvironmentCreatedEventData`
 
-type: :"session.created"
+    - `id: String`
 
-workspace\_id: String
+      ID of the environment that triggered the event.
 
-
+    - `organization_id: String`
 
-class BetaWebhookSessionDeletedEventData { id, organization\_id, type, workspace\_id } 
+    - `type: :"environment.created"`
 
-id: String
+    - `workspace_id: String`
 
-ID of the session that triggered the event.
+  - `class BetaWebhookEnvironmentUpdatedEventData`
 
-organization\_id: String
+    - `id: String`
 
-type: :"session.deleted"
+      ID of the environment that triggered the event.
 
-workspace\_id: String
+    - `organization_id: String`
 
-
+    - `type: :"environment.updated"`
 
-class BetaWebhookSessionIdledEventData { id, organization\_id, type, workspace\_id } 
+    - `workspace_id: String`
 
-id: String
+  - `class BetaWebhookEnvironmentArchivedEventData`
 
-ID of the session that triggered the event.
+    - `id: String`
 
-organization\_id: String
+      ID of the environment that triggered the event.
 
-type: :"session.idled"
+    - `organization_id: String`
 
-workspace\_id: String
+    - `type: :"environment.archived"`
 
-
+    - `workspace_id: String`
 
-class BetaWebhookSessionOutcomeEvaluationEndedEventData { id, organization\_id, type, workspace\_id } 
+  - `class BetaWebhookEnvironmentDeletedEventData`
 
-id: String
+    - `id: String`
 
-ID of the session that triggered the event.
+      ID of the environment that triggered the event.
 
-organization\_id: String
+    - `organization_id: String`
 
-type: :"session.outcome\_evaluation\_ended"
+    - `type: :"environment.deleted"`
 
-workspace\_id: String
+    - `workspace_id: String`
 
-
+  - `class BetaWebhookMemoryStoreCreatedEventData`
 
-class BetaWebhookSessionPendingEventData { id, organization\_id, type, workspace\_id } 
+    - `id: String`
 
-id: String
+      ID of the memory store that triggered the event.
 
-ID of the session that triggered the event.
+    - `organization_id: String`
 
-organization\_id: String
+    - `type: :"memory_store.created"`
 
-type: :"session.pending"
+    - `workspace_id: String`
 
-workspace\_id: String
+  - `class BetaWebhookMemoryStoreArchivedEventData`
 
-
+    - `id: String`
 
-class BetaWebhookSessionRequiresActionEventData { id, organization\_id, type, workspace\_id } 
+      ID of the memory store that triggered the event.
 
-id: String
+    - `organization_id: String`
 
-ID of the session that triggered the event.
+    - `type: :"memory_store.archived"`
 
-organization\_id: String
+    - `workspace_id: String`
 
-type: :"session.requires\_action"
+  - `class BetaWebhookMemoryStoreDeletedEventData`
 
-workspace\_id: String
+    - `id: String`
 
-
+      ID of the memory store that triggered the event.
 
-class BetaWebhookSessionRunningEventData { id, organization\_id, type, workspace\_id } 
+    - `organization_id: String`
 
-id: String
+    - `type: :"memory_store.deleted"`
 
-ID of the session that triggered the event.
+    - `workspace_id: String`
 
-organization\_id: String
+  - `class BetaWebhookSessionBudgetReachedEventData`
 
-type: :"session.running"
+    - `id: String`
 
-workspace\_id: String
+      ID of the session that triggered the event.
 
-
+    - `organization_id: String`
 
-class BetaWebhookSessionStatusIdledEventData { id, organization\_id, type, workspace\_id } 
+    - `type: :"session.budget_reached"`
 
-id: String
+    - `workspace_id: String`
 
-ID of the session that triggered the event.
+### Beta Webhook Memory Store Archived Event Data
 
-organization\_id: String
+- `class BetaWebhookMemoryStoreArchivedEventData`
 
-type: :"session.status\_idled"
+  - `id: String`
 
-workspace\_id: String
+    ID of the memory store that triggered the event.
 
-
+  - `organization_id: String`
 
-class BetaWebhookSessionStatusRescheduledEventData { id, organization\_id, type, workspace\_id } 
+  - `type: :"memory_store.archived"`
 
-id: String
+  - `workspace_id: String`
 
-ID of the session that triggered the event.
+### Beta Webhook Memory Store Created Event Data
 
-organization\_id: String
+- `class BetaWebhookMemoryStoreCreatedEventData`
 
-type: :"session.status\_rescheduled"
+  - `id: String`
 
-workspace\_id: String
+    ID of the memory store that triggered the event.
 
-
+  - `organization_id: String`
 
-class BetaWebhookSessionStatusRunStartedEventData { id, organization\_id, type, workspace\_id } 
+  - `type: :"memory_store.created"`
 
-id: String
+  - `workspace_id: String`
 
-ID of the session that triggered the event.
+### Beta Webhook Memory Store Deleted Event Data
 
-organization\_id: String
+- `class BetaWebhookMemoryStoreDeletedEventData`
 
-type: :"session.status\_run\_started"
+  - `id: String`
 
-workspace\_id: String
+    ID of the memory store that triggered the event.
 
-
+  - `organization_id: String`
 
-class BetaWebhookSessionStatusTerminatedEventData { id, organization\_id, type, workspace\_id } 
+  - `type: :"memory_store.deleted"`
 
-id: String
+  - `workspace_id: String`
 
-ID of the session that triggered the event.
+### Beta Webhook Session Archived Event Data
 
-organization\_id: String
+- `class BetaWebhookSessionArchivedEventData`
 
-type: :"session.status\_terminated"
+  - `id: String`
 
-workspace\_id: String
+    ID of the session that triggered the event.
 
-
+  - `organization_id: String`
 
-class BetaWebhookSessionThreadCreatedEventData { id, organization\_id, session\_thread\_id, 2 more } 
+  - `type: :"session.archived"`
 
-id: String
+  - `workspace_id: String`
 
-ID of the session that triggered the event.
+### Beta Webhook Session Budget Reached Event Data
 
-organization\_id: String
+- `class BetaWebhookSessionBudgetReachedEventData`
 
-session\_thread\_id: String
+  - `id: String`
 
-ID of the session thread this event refers to.
+    ID of the session that triggered the event.
 
-type: :"session.thread\_created"
+  - `organization_id: String`
 
-workspace\_id: String
+  - `type: :"session.budget_reached"`
 
-
+  - `workspace_id: String`
 
-class BetaWebhookSessionThreadIdledEventData { id, organization\_id, session\_thread\_id, 2 more } 
+### Beta Webhook Session Created Event Data
 
-id: String
+- `class BetaWebhookSessionCreatedEventData`
 
-ID of the session that triggered the event.
+  - `id: String`
 
-organization\_id: String
+    ID of the session that triggered the event.
 
-session\_thread\_id: String
+  - `organization_id: String`
 
-ID of the session thread this event refers to.
+  - `type: :"session.created"`
 
-type: :"session.thread\_idled"
+  - `workspace_id: String`
 
-workspace\_id: String
+### Beta Webhook Session Deleted Event Data
 
-
+- `class BetaWebhookSessionDeletedEventData`
 
-class BetaWebhookSessionThreadTerminatedEventData { id, organization\_id, session\_thread\_id, 2 more } 
+  - `id: String`
 
-id: String
+    ID of the session that triggered the event.
 
-ID of the session that triggered the event.
+  - `organization_id: String`
 
-organization\_id: String
+  - `type: :"session.deleted"`
 
-session\_thread\_id: String
+  - `workspace_id: String`
 
-ID of the session thread this event refers to.
+### Beta Webhook Session Idled Event Data
 
-type: :"session.thread\_terminated"
+- `class BetaWebhookSessionIdledEventData`
 
-workspace\_id: String
+  - `id: String`
 
-
+    ID of the session that triggered the event.
 
-class BetaWebhookSessionUpdatedEventData { id, organization\_id, type, workspace\_id } 
+  - `organization_id: String`
 
-id: String
+  - `type: :"session.idled"`
 
-ID of the session that triggered the event.
+  - `workspace_id: String`
 
-organization\_id: String
+### Beta Webhook Session Outcome Evaluation Ended Event Data
 
-type: :"session.updated"
+- `class BetaWebhookSessionOutcomeEvaluationEndedEventData`
 
-workspace\_id: String
+  - `id: String`
 
-
+    ID of the session that triggered the event.
 
-class BetaWebhookVaultArchivedEventData { id, organization\_id, type, workspace\_id } 
+  - `organization_id: String`
 
-id: String
+  - `type: :"session.outcome_evaluation_ended"`
 
-ID of the vault that triggered the event.
+  - `workspace_id: String`
 
-organization\_id: String
+### Beta Webhook Session Pending Event Data
 
-type: :"vault.archived"
+- `class BetaWebhookSessionPendingEventData`
 
-workspace\_id: String
+  - `id: String`
 
-
+    ID of the session that triggered the event.
 
-class BetaWebhookVaultCreatedEventData { id, organization\_id, type, workspace\_id } 
+  - `organization_id: String`
 
-id: String
+  - `type: :"session.pending"`
 
-ID of the vault that triggered the event.
+  - `workspace_id: String`
 
-organization\_id: String
+### Beta Webhook Session Requires Action Event Data
 
-type: :"vault.created"
+- `class BetaWebhookSessionRequiresActionEventData`
 
-workspace\_id: String
+  - `id: String`
 
-
+    ID of the session that triggered the event.
 
-class BetaWebhookVaultCredentialArchivedEventData { id, organization\_id, type, 2 more } 
+  - `organization_id: String`
 
-id: String
+  - `type: :"session.requires_action"`
 
-ID of the vault credential that triggered the event.
+  - `workspace_id: String`
 
-organization\_id: String
+### Beta Webhook Session Running Event Data
 
-type: :"vault\_credential.archived"
+- `class BetaWebhookSessionRunningEventData`
 
-vault\_id: String
+  - `id: String`
 
-ID of the vault that owns this credential.
+    ID of the session that triggered the event.
 
-workspace\_id: String
+  - `organization_id: String`
 
-
+  - `type: :"session.running"`
 
-class BetaWebhookVaultCredentialCreatedEventData { id, organization\_id, type, 2 more } 
+  - `workspace_id: String`
 
-id: String
+### Beta Webhook Session Status Idled Event Data
 
-ID of the vault credential that triggered the event.
+- `class BetaWebhookSessionStatusIdledEventData`
 
-organization\_id: String
+  - `id: String`
 
-type: :"vault\_credential.created"
+    ID of the session that triggered the event.
 
-vault\_id: String
+  - `organization_id: String`
 
-ID of the vault that owns this credential.
+  - `type: :"session.status_idled"`
 
-workspace\_id: String
+  - `workspace_id: String`
 
-
+### Beta Webhook Session Status Rescheduled Event Data
 
-class BetaWebhookVaultCredentialDeletedEventData { id, organization\_id, type, 2 more } 
+- `class BetaWebhookSessionStatusRescheduledEventData`
 
-id: String
+  - `id: String`
 
-ID of the vault credential that triggered the event.
+    ID of the session that triggered the event.
 
-organization\_id: String
+  - `organization_id: String`
 
-type: :"vault\_credential.deleted"
+  - `type: :"session.status_rescheduled"`
 
-vault\_id: String
+  - `workspace_id: String`
 
-ID of the vault that owns this credential.
+### Beta Webhook Session Status Run Started Event Data
 
-workspace\_id: String
+- `class BetaWebhookSessionStatusRunStartedEventData`
 
-
+  - `id: String`
 
-class BetaWebhookVaultCredentialRefreshFailedEventData { id, organization\_id, type, 2 more } 
+    ID of the session that triggered the event.
 
-id: String
+  - `organization_id: String`
 
-ID of the vault credential that triggered the event.
+  - `type: :"session.status_run_started"`
 
-organization\_id: String
+  - `workspace_id: String`
 
-type: :"vault\_credential.refresh\_failed"
+### Beta Webhook Session Status Terminated Event Data
 
-vault\_id: String
+- `class BetaWebhookSessionStatusTerminatedEventData`
 
-ID of the vault that owns this credential.
+  - `id: String`
 
-workspace\_id: String
+    ID of the session that triggered the event.
 
-
+  - `organization_id: String`
 
-class BetaWebhookVaultDeletedEventData { id, organization\_id, type, workspace\_id } 
+  - `type: :"session.status_terminated"`
 
-id: String
+  - `workspace_id: String`
 
-ID of the vault that triggered the event.
+### Beta Webhook Session Thread Created Event Data
 
-organization\_id: String
+- `class BetaWebhookSessionThreadCreatedEventData`
 
-type: :"vault.deleted"
+  - `id: String`
 
-workspace\_id: String
+    ID of the session that triggered the event.
 
-
+  - `organization_id: String`
 
-class UnwrapWebhookEvent { id, created\_at, data, type } 
+  - `session_thread_id: String`
 
-id: String
+    ID of the session thread this event refers to.
 
-Unique event identifier for idempotency.
+  - `type: :"session.thread_created"`
 
-created\_at: Time
+  - `workspace_id: String`
 
-RFC 3339 timestamp when the event occurred.
+### Beta Webhook Session Thread Idled Event Data
 
-
+- `class BetaWebhookSessionThreadIdledEventData`
 
-data: [BetaWebhookEventData](api/beta/webhooks.md)
+  - `id: String`
 
-One of the following:
+    ID of the session that triggered the event.
 
-
+  - `organization_id: String`
 
-class BetaWebhookSessionCreatedEventData { id, organization\_id, type, workspace\_id } 
+  - `session_thread_id: String`
 
-id: String
+    ID of the session thread this event refers to.
 
-ID of the session that triggered the event.
+  - `type: :"session.thread_idled"`
 
-organization\_id: String
+  - `workspace_id: String`
 
-type: :"session.created"
+### Beta Webhook Session Thread Terminated Event Data
 
-workspace\_id: String
+- `class BetaWebhookSessionThreadTerminatedEventData`
 
-
+  - `id: String`
 
-class BetaWebhookSessionPendingEventData { id, organization\_id, type, workspace\_id } 
+    ID of the session that triggered the event.
 
-id: String
+  - `organization_id: String`
 
-ID of the session that triggered the event.
+  - `session_thread_id: String`
 
-organization\_id: String
+    ID of the session thread this event refers to.
 
-type: :"session.pending"
+  - `type: :"session.thread_terminated"`
 
-workspace\_id: String
+  - `workspace_id: String`
 
-
+### Beta Webhook Session Updated Event Data
 
-class BetaWebhookSessionRunningEventData { id, organization\_id, type, workspace\_id } 
+- `class BetaWebhookSessionUpdatedEventData`
 
-id: String
+  - `id: String`
 
-ID of the session that triggered the event.
+    ID of the session that triggered the event.
 
-organization\_id: String
+  - `organization_id: String`
 
-type: :"session.running"
+  - `type: :"session.updated"`
 
-workspace\_id: String
+  - `workspace_id: String`
 
-
+### Beta Webhook Vault Archived Event Data
 
-class BetaWebhookSessionIdledEventData { id, organization\_id, type, workspace\_id } 
+- `class BetaWebhookVaultArchivedEventData`
 
-id: String
+  - `id: String`
 
-ID of the session that triggered the event.
+    ID of the vault that triggered the event.
 
-organization\_id: String
+  - `organization_id: String`
 
-type: :"session.idled"
+  - `type: :"vault.archived"`
 
-workspace\_id: String
+  - `workspace_id: String`
 
-
+### Beta Webhook Vault Created Event Data
 
-class BetaWebhookSessionRequiresActionEventData { id, organization\_id, type, workspace\_id } 
+- `class BetaWebhookVaultCreatedEventData`
 
-id: String
+  - `id: String`
 
-ID of the session that triggered the event.
+    ID of the vault that triggered the event.
 
-organization\_id: String
+  - `organization_id: String`
 
-type: :"session.requires\_action"
+  - `type: :"vault.created"`
 
-workspace\_id: String
+  - `workspace_id: String`
 
-
+### Beta Webhook Vault Credential Archived Event Data
 
-class BetaWebhookSessionArchivedEventData { id, organization\_id, type, workspace\_id } 
+- `class BetaWebhookVaultCredentialArchivedEventData`
 
-id: String
+  - `id: String`
 
-ID of the session that triggered the event.
+    ID of the vault credential that triggered the event.
 
-organization\_id: String
+  - `organization_id: String`
 
-type: :"session.archived"
+  - `type: :"vault_credential.archived"`
 
-workspace\_id: String
+  - `vault_id: String`
 
-
+    ID of the vault that owns this credential.
 
-class BetaWebhookSessionDeletedEventData { id, organization\_id, type, workspace\_id } 
+  - `workspace_id: String`
 
-id: String
+### Beta Webhook Vault Credential Created Event Data
 
-ID of the session that triggered the event.
+- `class BetaWebhookVaultCredentialCreatedEventData`
 
-organization\_id: String
+  - `id: String`
 
-type: :"session.deleted"
+    ID of the vault credential that triggered the event.
 
-workspace\_id: String
+  - `organization_id: String`
 
-
+  - `type: :"vault_credential.created"`
 
-class BetaWebhookSessionStatusRescheduledEventData { id, organization\_id, type, workspace\_id } 
+  - `vault_id: String`
 
-id: String
+    ID of the vault that owns this credential.
 
-ID of the session that triggered the event.
+  - `workspace_id: String`
 
-organization\_id: String
+### Beta Webhook Vault Credential Deleted Event Data
 
-type: :"session.status\_rescheduled"
+- `class BetaWebhookVaultCredentialDeletedEventData`
 
-workspace\_id: String
+  - `id: String`
 
-
+    ID of the vault credential that triggered the event.
 
-class BetaWebhookSessionStatusRunStartedEventData { id, organization\_id, type, workspace\_id } 
+  - `organization_id: String`
 
-id: String
+  - `type: :"vault_credential.deleted"`
 
-ID of the session that triggered the event.
+  - `vault_id: String`
 
-organization\_id: String
+    ID of the vault that owns this credential.
 
-type: :"session.status\_run\_started"
+  - `workspace_id: String`
 
-workspace\_id: String
+### Beta Webhook Vault Credential Refresh Failed Event Data
 
-
+- `class BetaWebhookVaultCredentialRefreshFailedEventData`
 
-class BetaWebhookSessionStatusIdledEventData { id, organization\_id, type, workspace\_id } 
+  - `id: String`
 
-id: String
+    ID of the vault credential that triggered the event.
 
-ID of the session that triggered the event.
+  - `organization_id: String`
 
-organization\_id: String
+  - `type: :"vault_credential.refresh_failed"`
 
-type: :"session.status\_idled"
+  - `vault_id: String`
 
-workspace\_id: String
+    ID of the vault that owns this credential.
 
-
+  - `workspace_id: String`
 
-class BetaWebhookSessionStatusTerminatedEventData { id, organization\_id, type, workspace\_id } 
+### Beta Webhook Vault Deleted Event Data
 
-id: String
+- `class BetaWebhookVaultDeletedEventData`
 
-ID of the session that triggered the event.
+  - `id: String`
 
-organization\_id: String
+    ID of the vault that triggered the event.
 
-type: :"session.status\_terminated"
+  - `organization_id: String`
 
-workspace\_id: String
+  - `type: :"vault.deleted"`
 
-
-
-class BetaWebhookSessionThreadCreatedEventData { id, organization\_id, session\_thread\_id, 2 more } 
-
-id: String
-
-ID of the session that triggered the event.
-
-organization\_id: String
-
-session\_thread\_id: String
-
-ID of the session thread this event refers to.
-
-type: :"session.thread\_created"
-
-workspace\_id: String
-
-
-
-class BetaWebhookSessionThreadIdledEventData { id, organization\_id, session\_thread\_id, 2 more } 
-
-id: String
-
-ID of the session that triggered the event.
-
-organization\_id: String
-
-session\_thread\_id: String
-
-ID of the session thread this event refers to.
-
-type: :"session.thread\_idled"
-
-workspace\_id: String
-
-
-
-class BetaWebhookSessionThreadTerminatedEventData { id, organization\_id, session\_thread\_id, 2 more } 
-
-id: String
-
-ID of the session that triggered the event.
-
-organization\_id: String
-
-session\_thread\_id: String
-
-ID of the session thread this event refers to.
-
-type: :"session.thread\_terminated"
-
-workspace\_id: String
-
-
-
-class BetaWebhookSessionOutcomeEvaluationEndedEventData { id, organization\_id, type, workspace\_id } 
-
-id: String
-
-ID of the session that triggered the event.
-
-organization\_id: String
-
-type: :"session.outcome\_evaluation\_ended"
-
-workspace\_id: String
-
-
-
-class BetaWebhookVaultCreatedEventData { id, organization\_id, type, workspace\_id } 
-
-id: String
-
-ID of the vault that triggered the event.
-
-organization\_id: String
-
-type: :"vault.created"
-
-workspace\_id: String
-
-
-
-class BetaWebhookVaultArchivedEventData { id, organization\_id, type, workspace\_id } 
-
-id: String
-
-ID of the vault that triggered the event.
-
-organization\_id: String
-
-type: :"vault.archived"
-
-workspace\_id: String
-
-
-
-class BetaWebhookVaultDeletedEventData { id, organization\_id, type, workspace\_id } 
-
-id: String
-
-ID of the vault that triggered the event.
-
-organization\_id: String
-
-type: :"vault.deleted"
-
-workspace\_id: String
-
-
-
-class BetaWebhookVaultCredentialCreatedEventData { id, organization\_id, type, 2 more } 
-
-id: String
-
-ID of the vault credential that triggered the event.
-
-organization\_id: String
-
-type: :"vault\_credential.created"
-
-vault\_id: String
-
-ID of the vault that owns this credential.
-
-workspace\_id: String
-
-
-
-class BetaWebhookVaultCredentialArchivedEventData { id, organization\_id, type, 2 more } 
-
-id: String
-
-ID of the vault credential that triggered the event.
-
-organization\_id: String
-
-type: :"vault\_credential.archived"
-
-vault\_id: String
-
-ID of the vault that owns this credential.
-
-workspace\_id: String
-
-
-
-class BetaWebhookVaultCredentialDeletedEventData { id, organization\_id, type, 2 more } 
-
-id: String
-
-ID of the vault credential that triggered the event.
-
-organization\_id: String
-
-type: :"vault\_credential.deleted"
-
-vault\_id: String
-
-ID of the vault that owns this credential.
-
-workspace\_id: String
-
-
-
-class BetaWebhookVaultCredentialRefreshFailedEventData { id, organization\_id, type, 2 more } 
-
-id: String
-
-ID of the vault credential that triggered the event.
-
-organization\_id: String
-
-type: :"vault\_credential.refresh\_failed"
-
-vault\_id: String
-
-ID of the vault that owns this credential.
-
-workspace\_id: String
-
-
-
-class BetaWebhookSessionUpdatedEventData { id, organization\_id, type, workspace\_id } 
-
-id: String
-
-ID of the session that triggered the event.
-
-organization\_id: String
-
-type: :"session.updated"
-
-workspace\_id: String
-
-
-
-class BetaWebhookAgentCreatedEventData { id, organization\_id, type, workspace\_id } 
-
-id: String
-
-ID of the agent that triggered the event.
-
-organization\_id: String
-
-type: :"agent.created"
-
-workspace\_id: String
-
-
-
-class BetaWebhookAgentArchivedEventData { id, organization\_id, type, workspace\_id } 
-
-id: String
-
-ID of the agent that triggered the event.
-
-organization\_id: String
-
-type: :"agent.archived"
-
-workspace\_id: String
-
-
-
-class BetaWebhookAgentDeletedEventData { id, organization\_id, type, workspace\_id } 
-
-id: String
-
-ID of the agent that triggered the event.
-
-organization\_id: String
-
-type: :"agent.deleted"
-
-workspace\_id: String
-
-
-
-class BetaWebhookDeploymentPausedEventData { id, organization\_id, type, workspace\_id } 
-
-id: String
-
-ID of the deployment that triggered the event.
-
-organization\_id: String
-
-type: :"deployment.paused"
-
-workspace\_id: String
-
-
-
-class BetaWebhookDeploymentRunFailedEventData { id, organization\_id, type, workspace\_id } 
-
-id: String
-
-ID of the deployment run that triggered the event.
-
-organization\_id: String
-
-type: :"deployment\_run.failed"
-
-workspace\_id: String
-
-
-
-class BetaWebhookDeploymentCreatedEventData { id, organization\_id, type, workspace\_id } 
-
-id: String
-
-ID of the deployment that triggered the event.
-
-organization\_id: String
-
-type: :"deployment.created"
-
-workspace\_id: String
-
-
-
-class BetaWebhookDeploymentUpdatedEventData { id, organization\_id, type, workspace\_id } 
-
-id: String
-
-ID of the deployment that triggered the event.
-
-organization\_id: String
-
-type: :"deployment.updated"
-
-workspace\_id: String
-
-
-
-class BetaWebhookDeploymentUnpausedEventData { id, organization\_id, type, workspace\_id } 
-
-id: String
-
-ID of the deployment that triggered the event.
-
-organization\_id: String
-
-type: :"deployment.unpaused"
-
-workspace\_id: String
-
-
-
-class BetaWebhookAgentUpdatedEventData { id, organization\_id, type, workspace\_id } 
-
-id: String
-
-ID of the agent that triggered the event.
-
-organization\_id: String
-
-type: :"agent.updated"
-
-workspace\_id: String
-
-
-
-class BetaWebhookDeploymentArchivedEventData { id, organization\_id, type, workspace\_id } 
-
-id: String
-
-ID of the deployment that triggered the event.
-
-organization\_id: String
-
-type: :"deployment.archived"
-
-workspace\_id: String
-
-
-
-class BetaWebhookDeploymentRunStartedEventData { id, organization\_id, type, workspace\_id } 
-
-id: String
-
-ID of the deployment run that triggered the event.
-
-organization\_id: String
-
-type: :"deployment\_run.started"
-
-workspace\_id: String
-
-
-
-class BetaWebhookDeploymentDeletedEventData { id, organization\_id, type, workspace\_id } 
-
-id: String
-
-ID of the deployment that triggered the event.
-
-organization\_id: String
-
-type: :"deployment.deleted"
-
-workspace\_id: String
-
-
-
-class BetaWebhookDeploymentRunSucceededEventData { id, organization\_id, type, workspace\_id } 
-
-id: String
-
-ID of the deployment run that triggered the event.
-
-organization\_id: String
-
-type: :"deployment\_run.succeeded"
-
-workspace\_id: String
-
-type: :event
-
-Object type. Always `event` for webhook payloads.
+  - `workspace_id: String`
 
 ---
 

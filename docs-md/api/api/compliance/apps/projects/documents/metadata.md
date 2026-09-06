@@ -1,16 +1,6 @@
 # Get project document metadata
 
-To enable the Compliance API, see the setup guide.
-
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
-
-Copy page
-
-
-
-# Get project document metadata
-
-GET/v1/compliance/apps/projects/documents/{document\_id}/metadata
+**GET** `/v1/compliance/apps/projects/documents/{document_id}/metadata`
 
 Returns metadata for a project document, without the content body.
 
@@ -19,108 +9,76 @@ endpoint to fetch the document text. The `md5` and `size_bytes`
 fields here are computed over the UTF-8 encoding of that text, so a DLP
 consumer can dedupe or match hashes without downloading every document.
 
-##### Path parameters
+## Path parameters
 
-document\_id: string
+- `document_id: string`
 
-The document ID (tagged ID, e.g., claude\_proj\_doc\_abc123)
+  The document ID (tagged ID, e.g., claude_proj_doc_abc123)
 
-##### Headers
+## Headers
 
-"x-api-key": optional string
+- `"x-api-key": optional string`
 
-##### Returns
+## Returns
 
-id: string
+- `id: string`
 
-Project document identifier (tagged ID)
+  Project document identifier (tagged ID)
 
-claude\_project\_id: string
+- `claude_project_id: string`
 
-The project this document belongs to
+  The project this document belongs to
 
-
+- `created_at: string`
 
-created\_at: string
+  Document creation timestamp
 
-Document creation timestamp
+  format: date-time
 
-formatdate-time
+- `filename: string`
 
-filename: string
+  Document filename
 
-Document filename
+- `md5: string`
 
-md5: string
+  Lowercase hex MD5 of the document content (UTF-8 encoded). Matches the `content` field returned by the sibling content endpoint.
 
-Lowercase hex MD5 of the document content (UTF-8 encoded). Matches the `content` field returned by the sibling content endpoint.
+- `mime_type: "text/plain"`
 
-
+  MIME type of the document content, always plain text
 
-mime\_type: "text/plain"
+  default: text/plain
 
-MIME type of the document content, always plain text
+- `size_bytes: number`
 
-defaulttext/plain
+  Size in bytes of the document content (UTF-8 encoded)
 
-size\_bytes: number
+- `user: object or null`
 
-Size in bytes of the document content (UTF-8 encoded)
+  The user who created a project or project document.
 
-
+  Fields that reference this type are null when the creator's account has
+  been deleted or the creator is no longer a member of an organization the
+  key may read.
 
-user: object{ id, email\_address } or null
+  - `id: string`
 
-The user who created a project or project document.
+    User identifier (tagged ID)
 
-Fields that reference this type are null when the creator's account has
-been deleted or the creator is no longer a member of an organization the
-key may read.
+  - `email_address: string`
 
-id: string
+    User's email address
 
-User identifier (tagged ID)
+## Example
 
-email\_address: string
-
-User's email address
-
-Get project document metadata
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID/metadata \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "id",
-  "claude_project_id": "claude_project_id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "filename",
-  "md5": "md5",
-  "mime_type": "text/plain",
-  "size_bytes": 0,
-  "user": {
-    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-    "email_address": "jane.doe@example.com"
-  }
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "id",
   "claude_project_id": "claude_project_id",

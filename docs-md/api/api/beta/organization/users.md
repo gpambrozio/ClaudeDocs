@@ -1,108 +1,438 @@
 # Users
 
-Copy page
+## List Users
 
-
+**GET** `/v1/organizations/users`
 
-cURL
+List the organization's members.
 
-# Users
+### Query parameters
 
-##### [List Users](api/http/beta/organization/users/list.md)
+- `after_id: optional string`
 
-GET/v1/organizations/users
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-##### [Get User](api/http/beta/organization/users/retrieve.md)
+- `before_id: optional string`
 
-GET/v1/organizations/users/{user\_id}
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-##### [Update User](api/http/beta/organization/users/update.md)
+- `email: optional string`
 
-POST/v1/organizations/users/{user\_id}
+  Filter by user email.
 
-##### [Remove User](api/http/beta/organization/users/remove.md)
+  format: email
 
-DELETE/v1/organizations/users/{user\_id}
+- `limit: optional number`
 
-##### Models
+  Number of items to return per page.
 
-
+  Defaults to `20`. Ranges from `1` to `1000`.
 
-BetaOrganizationUser object{ id, added\_at, email, 3 more }
+  default: 20, maximum: 1000, minimum: 1
 
-id: string
+- `roles: optional array of string`
 
-ID of the User.
+  Filter to items whose `role` equals one of the supplied values. Repeatable; values are OR'ed together.
 
-
+  Accepted values depend on the organization type: Console and API organizations accept `user`, `developer`, `billing`, `admin`, and `claude_code_user`; Claude Enterprise organizations accept `user`, `owner`, `primary_owner`, `membership_admin`, and `managed`.
 
-added\_at: string
+### Returns
 
-RFC 3339 datetime string indicating when the User joined the Organization.
+- `data: array of BetaOrganizationUser`
 
-formatdate-time
+  - `id: string`
 
-email: string
+    ID of the User.
 
-Email of the User.
+  - `added_at: string`
 
-name: string
+    RFC 3339 datetime string indicating when the User joined the Organization.
 
-Name of the User.
+    format: date-time
 
-
+  - `email: string`
 
-role: [BetaOrganizationRole](api/http/beta/organization.md)
+    Email of the User.
 
-Organization role of the User.
+  - `name: string`
 
-One of the following:
+    Name of the User.
 
-"admin"
+  - `role: BetaOrganizationRole`
 
-"billing"
+    Organization role of the User.
 
-"claude\_code\_user"
+    - `"admin"`
 
-"developer"
+    - `"billing"`
 
-"managed"
+    - `"claude_code_user"`
 
-"membership\_admin"
+    - `"developer"`
 
-"owner"
+    - `"managed"`
 
-"primary\_owner"
+    - `"membership_admin"`
 
-"user"
+    - `"owner"`
 
-
+    - `"primary_owner"`
 
-type: "user"
+    - `"user"`
 
-Object type.
+  - `type: "user"`
 
-For Users, this is always `"user"`.
+    Object type.
 
-defaultuser
+    For Users, this is always `"user"`.
 
-
+    default: user
 
-UserRemoveResponse object{ id, type }
+- `first_id: string or null`
 
-id: string
+  First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
-ID of the User.
+- `has_more: boolean`
 
-
+  Indicates if there are more results in the requested page direction.
 
-type: "user\_deleted"
+- `last_id: string or null`
 
-Deleted object type.
+  Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
-For Users, this is always `"user_deleted"`.
+### Example
 
-defaultuser\_deleted
+```bash
+curl https://api.anthropic.com/v1/organizations/users \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "added_at": "2024-10-30T23:58:27.427722Z",
+      "email": "user@emaildomain.com",
+      "name": "Jane Doe",
+      "role": "admin",
+      "type": "user"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
+
+## Get User
+
+**GET** `/v1/organizations/users/{user_id}`
+
+Retrieve a member of the organization by user ID.
+
+### Path parameters
+
+- `user_id: string`
+
+  ID of the User.
+
+### Returns
+
+- `BetaOrganizationUser object`
+
+  - `id: string`
+
+    ID of the User.
+
+  - `added_at: string`
+
+    RFC 3339 datetime string indicating when the User joined the Organization.
+
+    format: date-time
+
+  - `email: string`
+
+    Email of the User.
+
+  - `name: string`
+
+    Name of the User.
+
+  - `role: BetaOrganizationRole`
+
+    Organization role of the User.
+
+    - `"admin"`
+
+    - `"billing"`
+
+    - `"claude_code_user"`
+
+    - `"developer"`
+
+    - `"managed"`
+
+    - `"membership_admin"`
+
+    - `"owner"`
+
+    - `"primary_owner"`
+
+    - `"user"`
+
+  - `type: "user"`
+
+    Object type.
+
+    For Users, this is always `"user"`.
+
+    default: user
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "added_at": "2024-10-30T23:58:27.427722Z",
+  "email": "user@emaildomain.com",
+  "name": "Jane Doe",
+  "role": "admin",
+  "type": "user"
+}
+```
+
+## Update User
+
+**POST** `/v1/organizations/users/{user_id}`
+
+Update a member's organization role.
+
+### Path parameters
+
+- `user_id: string`
+
+  ID of the User.
+
+### Body parameters
+
+- `role: "billing" or "claude_code_user" or "developer" or 2 more`
+
+  New role for the User.
+
+  The accepted values depend on the organization type. Console and API organizations accept `user`, `developer`, `billing`, and `claude_code_user`; `admin` cannot be assigned through the API. Claude Enterprise organizations accept `user` and `managed`.
+
+  - `"billing"`
+
+  - `"claude_code_user"`
+
+  - `"developer"`
+
+  - `"managed"`
+
+  - `"user"`
+
+### Returns
+
+- `BetaOrganizationUser object`
+
+  - `id: string`
+
+    ID of the User.
+
+  - `added_at: string`
+
+    RFC 3339 datetime string indicating when the User joined the Organization.
+
+    format: date-time
+
+  - `email: string`
+
+    Email of the User.
+
+  - `name: string`
+
+    Name of the User.
+
+  - `role: BetaOrganizationRole`
+
+    Organization role of the User.
+
+    - `"admin"`
+
+    - `"billing"`
+
+    - `"claude_code_user"`
+
+    - `"developer"`
+
+    - `"managed"`
+
+    - `"membership_admin"`
+
+    - `"owner"`
+
+    - `"primary_owner"`
+
+    - `"user"`
+
+  - `type: "user"`
+
+    Object type.
+
+    For Users, this is always `"user"`.
+
+    default: user
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
+    -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -d '{
+          "role": "user"
+        }'
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "added_at": "2024-10-30T23:58:27.427722Z",
+  "email": "user@emaildomain.com",
+  "name": "Jane Doe",
+  "role": "admin",
+  "type": "user"
+}
+```
+
+## Remove User
+
+**DELETE** `/v1/organizations/users/{user_id}`
+
+Remove a member from the organization.
+
+### Path parameters
+
+- `user_id: string`
+
+  ID of the User.
+
+### Returns
+
+- `id: string`
+
+  ID of the User.
+
+- `type: "user_deleted"`
+
+  Deleted object type.
+
+  For Users, this is always `"user_deleted"`.
+
+  default: user_deleted
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
+    -X DELETE \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "type": "user_deleted"
+}
+```
+
+## Domain types
+
+### Beta Organization User
+
+- `BetaOrganizationUser object`
+
+  - `id: string`
+
+    ID of the User.
+
+  - `added_at: string`
+
+    RFC 3339 datetime string indicating when the User joined the Organization.
+
+    format: date-time
+
+  - `email: string`
+
+    Email of the User.
+
+  - `name: string`
+
+    Name of the User.
+
+  - `role: BetaOrganizationRole`
+
+    Organization role of the User.
+
+    - `"admin"`
+
+    - `"billing"`
+
+    - `"claude_code_user"`
+
+    - `"developer"`
+
+    - `"managed"`
+
+    - `"membership_admin"`
+
+    - `"owner"`
+
+    - `"primary_owner"`
+
+    - `"user"`
+
+  - `type: "user"`
+
+    Object type.
+
+    For Users, this is always `"user"`.
+
+    default: user
+
+### User Remove Response
+
+- `UserRemoveResponse object`
+
+  - `id: string`
+
+    ID of the User.
+
+  - `type: "user_deleted"`
+
+    Deleted object type.
+
+    For Users, this is always `"user_deleted"`.
+
+    default: user_deleted
 
 ---
 

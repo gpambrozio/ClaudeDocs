@@ -1,252 +1,190 @@
 # List Skill Versions
 
-Copy page
-
-
-
-cURL
-
-# List Skill Versions
-
-GET/v1/skills/{skill\_id}/versions
+**GET** `/v1/skills/{skill_id}/versions`
 
 List Skill Versions
 
-##### Path parameters
+## Path parameters
 
-
+- `skill_id: string`
 
-skill\_id: string
+  Unique identifier for the skill.
 
-Unique identifier for the skill.
+  The format and length of IDs may change over time.
 
-The format and length of IDs may change over time.
+## Query parameters
 
-##### Query parameters
+- `limit: optional number`
 
-
+  Number of results to return per page.
 
-limit: optional number
+  Ranges from `1` to `1000`. Defaults to `20`.
 
-Number of results to return per page.
+  default: 20, minimum: 1, maximum: 1000
 
-Ranges from `1` to `1000`. Defaults to `20`.
+- `page: optional string`
 
-default20
+  Optionally set to the `next_page` token from the previous response.
 
-minimum1
+## Headers
 
-maximum1000
+- `"anthropic-beta": optional array of AnthropicBeta`
 
-page: optional string
+  Optional header to specify the beta version(s) you want to use.
 
-Optionally set to the `next_page` token from the previous response.
+  - `string`
 
-##### Headers
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
-
+    - `"message-batches-2024-09-24"`
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+    - `"prompt-caching-2024-07-31"`
 
-Optional header to specify the beta version(s) you want to use.
+    - `"computer-use-2024-10-22"`
 
-One of the following:
+    - `"computer-use-2025-01-24"`
 
-string
+    - `"pdfs-2024-09-25"`
 
-
+    - `"token-counting-2024-11-01"`
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
+    - `"token-efficient-tools-2025-02-19"`
 
-One of the following:
+    - `"output-128k-2025-02-19"`
 
-"message-batches-2024-09-24"
+    - `"files-api-2025-04-14"`
 
-"prompt-caching-2024-07-31"
+    - `"mcp-client-2025-04-04"`
 
-"computer-use-2024-10-22"
+    - `"mcp-client-2025-11-20"`
 
-"computer-use-2025-01-24"
+    - `"dev-full-thinking-2025-05-14"`
 
-"pdfs-2024-09-25"
+    - `"interleaved-thinking-2025-05-14"`
 
-"token-counting-2024-11-01"
+    - `"code-execution-2025-05-22"`
 
-"token-efficient-tools-2025-02-19"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"output-128k-2025-02-19"
+    - `"context-1m-2025-08-07"`
 
-"files-api-2025-04-14"
+    - `"context-management-2025-06-27"`
 
-"mcp-client-2025-04-04"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"mcp-client-2025-11-20"
+    - `"skills-2025-10-02"`
 
-"dev-full-thinking-2025-05-14"
+    - `"fast-mode-2026-02-01"`
 
-"interleaved-thinking-2025-05-14"
+    - `"output-300k-2026-03-24"`
 
-"code-execution-2025-05-22"
+    - `"user-profiles-2026-03-24"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"user-profiles-2026-08-18"`
 
-"context-1m-2025-08-07"
+    - `"advisor-tool-2026-03-01"`
 
-"context-management-2025-06-27"
+    - `"managed-agents-2026-04-01"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"cache-diagnosis-2026-04-07"`
 
-"skills-2025-10-02"
+    - `"dreaming-2026-04-21"`
 
-"fast-mode-2026-02-01"
+    - `"thinking-token-count-2026-05-13"`
 
-"output-300k-2026-03-24"
+    - `"server-side-fallback-2026-06-01"`
 
-"user-profiles-2026-03-24"
+    - `"server-side-fallback-2026-07-01"`
 
-"user-profiles-2026-08-18"
+    - `"fallback-credit-2026-06-01"`
 
-"advisor-tool-2026-03-01"
+    - `"fallback-credit-2026-07-01"`
 
-"managed-agents-2026-04-01"
+    - `"agent-memory-2026-07-22"`
 
-"cache-diagnosis-2026-04-07"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-"dreaming-2026-04-21"
+    - `"compact-2026-01-12"`
 
-"thinking-token-count-2026-05-13"
+    - `"computer-use-2025-11-24"`
 
-"server-side-fallback-2026-06-01"
+    - `"mcp-tunnels-2026-06-22"`
 
-"server-side-fallback-2026-07-01"
+    - `"structured-outputs-2025-11-13"`
 
-"fallback-credit-2026-06-01"
+    - `"task-budgets-2026-03-13"`
 
-"fallback-credit-2026-07-01"
+    - `"thinking-display-updates-2026-08-18"`
 
-"agent-memory-2026-07-22"
+    - `"ce-user-management-2026-07-13"`
 
-"mid-conversation-tool-changes-2026-07-01"
+    - `"mid-conversation-output-config-2026-07-01"`
 
-"compact-2026-01-12"
+    - `"thinking-binding-controls-2026-08-01"`
 
-"computer-use-2025-11-24"
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"mcp-tunnels-2026-06-22"
+## Returns
 
-"structured-outputs-2025-11-13"
+- `data: array of BetaSkillVersion`
 
-"task-budgets-2026-03-13"
+  List of skills.
 
-"thinking-display-updates-2026-08-18"
+  - `id: string`
 
-"ce-user-management-2026-07-13"
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
 
-"mid-conversation-output-config-2026-07-01"
+  - `created_at: string`
 
-"thinking-binding-controls-2026-08-01"
+    ISO 8601 timestamp of when the skill was created.
 
-"mid-conversation-system-clear-at-2026-08-21"
+    format: date-time
 
-##### Returns
+  - `description: string`
 
-
+    Description of the skill version.
 
-data: array of [BetaSkillVersion](api/http/beta/skills/versions.md) { id, created\_at, description, 3 more }
+    This is extracted from the SKILL.md file in the skill upload.
 
-List of skills.
+  - `name: string`
 
-id: string
+    The Skill's immutable kebab-case slug, set at creation from the first
+    upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
+    later upload must resolve to the same value. Also the top-level directory
+    of the Skill's mounted files and the base name of a downloaded archive.
 
-Unique identifier for this Skill Version. The id addresses the version in
-paths and pins it in references.
+  - `skill_id: string`
 
-
+    Unique identifier for the skill.
 
-created\_at: string
+    The format and length of IDs may change over time.
 
-ISO 8601 timestamp of when the skill was created.
+  - `type: "skill_version"`
 
-formatdate-time
+    Object type.
 
-
+    For Skill Versions, this is always `"skill_version"`.
 
-description: string
+    default: skill_version
 
-Description of the skill version.
+- `next_page: string or null`
 
-This is extracted from the SKILL.md file in the skill upload.
+  Token for fetching the next page of results.
 
-name: string
+  If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
 
-The Skill's immutable kebab-case slug, set at creation from the first
-upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
-later upload must resolve to the same value. Also the top-level directory
-of the Skill's mounted files and the base name of a downloaded archive.
+## Example
 
-
-
-skill\_id: string
-
-Unique identifier for the skill.
-
-The format and length of IDs may change over time.
-
-
-
-type: "skill\_version"
-
-Object type.
-
-For Skill Versions, this is always `"skill_version"`.
-
-defaultskill\_version
-
-
-
-next\_page: string or null
-
-Token for fetching the next page of results.
-
-If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
-
-List Skill Versions
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "description": "description",
-      "name": "name",
-      "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-      "type": "skill_version"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

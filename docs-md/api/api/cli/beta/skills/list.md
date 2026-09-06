@@ -1,183 +1,143 @@
 # List Skills
 
-Copy page
+`$ ant beta:skills list`
 
-
-
-CLI
-
-# List Skills
-
-$ ant beta:skills list
-
-GET/v1/skills
+**GET** `/v1/skills`
 
 List Skills
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `--limit: optional number`
 
---limit: optional number
+  Query param: Number of results to return per page.
 
-Query param: Number of results to return per page.
+  Ranges from `1` to `1000`. Defaults to `20`.
 
-Maximum value is 100. Defaults to 20.
+  minimum: 1, maximum: 1000
 
-
+- `--page: optional string`
 
---page: optional string
+  Query param: Pagination token for fetching a specific page of results.
 
-Query param: Pagination token for fetching a specific page of results.
+  Pass the value from a previous response's `next_page` field to get the next page of results.
 
-Pass the value from a previous response's `next_page` field to get the next page of results.
+- `--source: optional string`
 
-
+  Query param: Filter skills by source.
 
---source: optional string
+  If provided, only skills from the specified source will be returned:
 
-Query param: Filter skills by source.
+  * `"custom"`: only return user-created skills
+  * `"anthropic"`: only return Anthropic-created skills
 
-If provided, only skills from the specified source will be returned:
+- `--beta: optional array of AnthropicBeta`
 
-- `"custom"`: only return user-created skills
-- `"anthropic"`: only return Anthropic-created skills
+  Header param: Optional header to specify the beta version(s) you want to use.
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+## Returns
 
-Header param: Optional header to specify the beta version(s) you want to use.
+- `BetaListSkillsResponse: object`
 
-##### ReturnsExpand Collapse
+  - `data: array of BetaSkill`
 
-
+    List of skills.
 
-BetaListSkillsResponse: object { data, has\_more, next\_page } 
+    - `id: string`
 
-
+      Unique identifier for the skill.
 
-data: array of object { id, created\_at, display\_title, 4 more } 
+      The format and length of IDs may change over time.
 
-List of skills.
+    - `created_at: string`
 
-
+      ISO 8601 timestamp of when the skill was created.
 
-id: string
+      format: date-time
 
-Unique identifier for the skill.
+    - `display_name: string`
 
-The format and length of IDs may change over time.
+      Human-readable, single-line label for the Skill. Maximum 255 characters.
+      Always set: derived from the SKILL.md frontmatter `name` when omitted at
+      creation. Not unique.
 
-created\_at: string
+    - `latest_version_id: string`
 
-ISO 8601 timestamp of when the skill was created.
+      ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
 
-
+    - `source: object`
 
-display\_title: string
+      Where the Skill comes from.
 
-Display title for the skill.
+      Possible values:
 
-This is a human-readable label that is not included in the prompt sent to the model.
+      * `"custom"`: authored by the platform user; private to their workspace
+      * `"anthropic"`: published by Anthropic; shared and read-only
+      * `"anthropic_example"`: Anthropic-published sample Skill
+      * `"plugin"`: resolved from an installed plugin
 
-
+      - `type: "custom" or "anthropic" or "anthropic_example" or "plugin"`
 
-latest\_version: string
+        Where the Skill comes from.
 
-The latest version identifier for the skill.
+        Possible values:
 
-This represents the most recent version of the skill that has been created.
+        * `"custom"`: authored by the platform user; private to their workspace
+        * `"anthropic"`: published by Anthropic; shared and read-only
+        * `"anthropic_example"`: Anthropic-published sample Skill
+        * `"plugin"`: resolved from an installed plugin
 
-
+        - `"custom"`
 
-source: string
+        - `"anthropic"`
 
-Source of the skill.
+        - `"anthropic_example"`
 
-This may be one of the following values:
+        - `"plugin"`
 
-- `"custom"`: the skill was created by a user
-- `"anthropic"`: the skill was created by Anthropic
+    - `type: "skill"`
 
-
+      Object type.
 
-type: string
+      For Skills, this is always `"skill"`.
 
-Object type.
+    - `updated_at: string`
 
-For Skills, this is always `"skill"`.
+      ISO 8601 timestamp of when the skill was last updated.
 
-updated\_at: string
+      format: date-time
 
-ISO 8601 timestamp of when the skill was last updated.
+  - `next_page: string`
 
-
+    Token for fetching the next page of results.
 
-has\_more: boolean
+    If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
 
-Whether there are more results available.
+## Example
 
-If `true`, there are additional results that can be fetched using the `next_page` token.
-
-
-
-next\_page: string
-
-Token for fetching the next page of results.
-
-If `null`, there are no more results available. Pass this value to the `page_token` parameter in the next request to get the next page.
-
-List Skills
-
-CLI
-
-```shiki
+```bash
 ant beta:skills list \
   --api-key my-anthropic-api-key
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
       "id": "skill_01JAbcdefghijklmnopqrstuvw",
       "created_at": "2024-10-30T23:58:27.427722Z",
-      "display_title": "My Custom Skill",
-      "latest_version": "1759178010641129",
-      "source": "custom",
-      "type": "type",
+      "display_name": "display_name",
+      "latest_version_id": "latest_version_id",
+      "source": {
+        "type": "custom"
+      },
+      "type": "skill",
       "updated_at": "2024-10-30T23:58:27.427722Z"
     }
   ],
-  "has_more": true,
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "skill_01JAbcdefghijklmnopqrstuvw",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "display_title": "My Custom Skill",
-      "latest_version": "1759178010641129",
-      "source": "custom",
-      "type": "type",
-      "updated_at": "2024-10-30T23:58:27.427722Z"
-    }
-  ],
-  "has_more": true,
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+  "next_page": "next_page"
 }
 ```
 

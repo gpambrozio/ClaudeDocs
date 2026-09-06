@@ -1,130 +1,111 @@
 # Get Skill
 
-Copy page
+`$ ant beta:skills retrieve`
 
-
-
-CLI
-
-# Get Skill
-
-$ ant beta:skills retrieve
-
-GET/v1/skills/{skill\_id}
+**GET** `/v1/skills/{skill_id}`
 
 Get Skill
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `--skill-id: string`
 
---skill-id: string
+  Unique identifier for the skill.
 
-Unique identifier for the skill.
+  The format and length of IDs may change over time.
 
-The format and length of IDs may change over time.
+- `--beta: optional array of AnthropicBeta`
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+  Optional header to specify the beta version(s) you want to use.
 
-Optional header to specify the beta version(s) you want to use.
+## Returns
 
-##### ReturnsExpand Collapse
+- `beta_skill: object`
 
-
+  - `id: string`
 
-BetaSkillGetResponse: object { id, created\_at, display\_title, 4 more } 
+    Unique identifier for the skill.
 
-
+    The format and length of IDs may change over time.
 
-id: string
+  - `created_at: string`
 
-Unique identifier for the skill.
+    ISO 8601 timestamp of when the skill was created.
 
-The format and length of IDs may change over time.
+    format: date-time
 
-created\_at: string
+  - `display_name: string`
 
-ISO 8601 timestamp of when the skill was created.
+    Human-readable, single-line label for the Skill. Maximum 255 characters.
+    Always set: derived from the SKILL.md frontmatter `name` when omitted at
+    creation. Not unique.
 
-
+  - `latest_version_id: string`
 
-display\_title: string
+    ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
 
-Display title for the skill.
+  - `source: object`
 
-This is a human-readable label that is not included in the prompt sent to the model.
+    Where the Skill comes from.
 
-
+    Possible values:
 
-latest\_version: string
+    * `"custom"`: authored by the platform user; private to their workspace
+    * `"anthropic"`: published by Anthropic; shared and read-only
+    * `"anthropic_example"`: Anthropic-published sample Skill
+    * `"plugin"`: resolved from an installed plugin
 
-The latest version identifier for the skill.
+    - `type: "custom" or "anthropic" or "anthropic_example" or "plugin"`
 
-This represents the most recent version of the skill that has been created.
+      Where the Skill comes from.
 
-
+      Possible values:
 
-source: string
+      * `"custom"`: authored by the platform user; private to their workspace
+      * `"anthropic"`: published by Anthropic; shared and read-only
+      * `"anthropic_example"`: Anthropic-published sample Skill
+      * `"plugin"`: resolved from an installed plugin
 
-Source of the skill.
+      - `"custom"`
 
-This may be one of the following values:
+      - `"anthropic"`
 
-- `"custom"`: the skill was created by a user
-- `"anthropic"`: the skill was created by Anthropic
+      - `"anthropic_example"`
 
-
+      - `"plugin"`
 
-type: string
+  - `type: "skill"`
 
-Object type.
+    Object type.
 
-For Skills, this is always `"skill"`.
+    For Skills, this is always `"skill"`.
 
-updated\_at: string
+  - `updated_at: string`
 
-ISO 8601 timestamp of when the skill was last updated.
+    ISO 8601 timestamp of when the skill was last updated.
 
-Get Skill
+    format: date-time
 
-CLI
+## Example
 
-```shiki
+```bash
 ant beta:skills retrieve \
   --api-key my-anthropic-api-key \
   --skill-id skill_id
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "skill_01JAbcdefghijklmnopqrstuvw",
   "created_at": "2024-10-30T23:58:27.427722Z",
-  "display_title": "My Custom Skill",
-  "latest_version": "1759178010641129",
-  "source": "custom",
-  "type": "type",
-  "updated_at": "2024-10-30T23:58:27.427722Z"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "display_title": "My Custom Skill",
-  "latest_version": "1759178010641129",
-  "source": "custom",
-  "type": "type",
+  "display_name": "display_name",
+  "latest_version_id": "latest_version_id",
+  "source": {
+    "type": "custom"
+  },
+  "type": "skill",
   "updated_at": "2024-10-30T23:58:27.427722Z"
 }
 ```

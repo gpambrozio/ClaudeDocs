@@ -1,80 +1,50 @@
 # Create Enrollment URL
 
-Copy page
+`$ ant beta:user-profiles create-enrollment-url`
 
-
-
-CLI
-
-# Create Enrollment URL
-
-$ ant beta:user-profiles create-enrollment-url
-
-POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
+**POST** `/v1/user_profiles/{user_profile_id}/enrollment_url`
 
 Create Enrollment URL
 
-##### ParametersExpand Collapse
+## Parameters
 
---user-profile-id: string
+- `--user-profile-id: string`
 
-Path parameter user\_profile\_id
+  Path parameter user_profile_id
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--beta: optional array of AnthropicBeta`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `beta_user_profile_enrollment_url: object`
 
-beta\_user\_profile\_enrollment\_url: object { expires\_at, type, url } 
+  - `expires_at: string`
 
-expires\_at: string
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+    format: date-time
 
-
+  - `type: "enrollment_url"`
 
-type: "enrollment\_url"
+    Object type. Always `enrollment_url`.
 
-Object type. Always `enrollment_url`.
+  - `url: string`
 
-"enrollment\_url"
+    Enrollment URL to send to the end user. Valid until `expires_at`.
 
-url: string
+## Example
 
-Enrollment URL to send to the end user. Valid until `expires_at`.
-
-Create Enrollment URL
-
-CLI
-
-```shiki
+```bash
 ant beta:user-profiles create-enrollment-url \
   --api-key my-anthropic-api-key \
   --user-profile-id uprof_011CZkZCu8hGbp5mYRQgUmz9
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "expires_at": "2026-03-15T10:15:00Z",
-  "type": "enrollment_url",
-  "url": "https://platform.claude.com/user-profiles/enrollment/M3J0bGJxZ2ppMnptbnB1"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "expires_at": "2026-03-15T10:15:00Z",
   "type": "enrollment_url",

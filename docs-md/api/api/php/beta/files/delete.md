@@ -1,83 +1,54 @@
 # Delete File
 
-Copy page
+`$client->beta->files->delete(string fileID, ?list<AnthropicBeta> betas): BetaDeletedFile`
 
-
-
-PHP
-
-# Delete File
-
-$client->beta->files->delete(string fileID, ?list<AnthropicBeta> betas): [DeletedFile](api/beta/files.md)
-
-DELETE/v1/files/{file\_id}
+**DELETE** `/v1/files/{file_id}`
 
 Delete File
 
-##### ParametersExpand Collapse
+## Parameters
 
-fileID: string
+- `fileID: string`
 
-ID of the File.
+  ID of the File.
 
-betas?:optional list<AnthropicBeta>
+- `betas?:optional list<AnthropicBeta>`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `BetaDeletedFile`
 
-[DeletedFile](api/beta/files.md)
+  - `string id`
 
-string id
+    ID of the deleted file.
 
-ID of the deleted file.
+  - `?Type type`
 
-
+    Deleted object type.
 
-?Type type
+    For file deletion, this is always `"file_deleted"`.
 
-Deleted object type.
+## Example
 
-For file deletion, this is always `"file_deleted"`.
-
-Delete File
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
-$deletedFile = $client->beta->files->delete(
-  'file_id', betas: ['message-batches-2024-09-24']
+$betaDeletedFile = $client->beta->files->delete(
+  'file_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
 );
 
-var_dump($deletedFile);
+var_dump($betaDeletedFile);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "type": "file_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "file_011CNha8iCJcU1wXNR6q4V8w",
   "type": "file_deleted"

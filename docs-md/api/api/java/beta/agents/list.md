@@ -1,480 +1,662 @@
 # List Agents
 
-Copy page
+`AgentListPage beta().agents().list(params = AgentListParams.none(), requestOptions = RequestOptions.none())`
 
-
-
-Java
-
-# List Agents
-
-AgentListPage beta().agents().list(AgentListParamsparams = AgentListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
-
-GET/v1/agents
+**GET** `/v1/agents`
 
 List Agents
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `AgentListParams params`
 
-AgentListParams params
+  - `Optional<LocalDateTime> createdAtGte`
 
-Optional<LocalDateTime> createdAtGte
+    Return agents created at or after this time (inclusive).
 
-Return agents created at or after this time (inclusive).
+    format: date-time
 
-Optional<LocalDateTime> createdAtLte
+  - `Optional<LocalDateTime> createdAtLte`
 
-Return agents created at or before this time (inclusive).
+    Return agents created at or before this time (inclusive).
 
-Optional<Boolean> includeArchived
+    format: date-time
 
-Include archived agents in results. Defaults to false.
+  - `Optional<Boolean> includeArchived`
 
-Optional<Long> limit
+    Include archived agents in results. Defaults to false.
 
-Maximum results per page. Default 20, maximum 100.
+  - `Optional<Long> limit`
 
-Optional<String> page
+    Maximum results per page. Default 20, maximum 100.
 
-Opaque pagination cursor from a previous response.
+    format: int32
 
-
+  - `Optional<String> page`
 
-Optional<List<AnthropicBeta>> betas
+    Opaque pagination cursor from a previous response.
 
-Optional header to specify the beta version(s) you want to use.
+  - `Optional<List<AnthropicBeta>> betas`
 
-MESSAGE\_BATCHES\_2024\_09\_24("message-batches-2024-09-24")
+    Optional header to specify the beta version(s) you want to use.
 
-PROMPT\_CACHING\_2024\_07\_31("prompt-caching-2024-07-31")
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
-COMPUTER\_USE\_2024\_10\_22("computer-use-2024-10-22")
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
 
-COMPUTER\_USE\_2025\_01\_24("computer-use-2025-01-24")
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
-PDFS\_2024\_09\_25("pdfs-2024-09-25")
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-TOKEN\_COUNTING\_2024\_11\_01("token-counting-2024-11-01")
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
 
-TOKEN\_EFFICIENT\_TOOLS\_2025\_02\_19("token-efficient-tools-2025-02-19")
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
 
-OUTPUT\_128K\_2025\_02\_19("output-128k-2025-02-19")
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
 
-FILES\_API\_2025\_04\_14("files-api-2025-04-14")
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
 
-MCP\_CLIENT\_2025\_04\_04("mcp-client-2025-04-04")
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
-MCP\_CLIENT\_2025\_11\_20("mcp-client-2025-11-20")
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
-DEV\_FULL\_THINKING\_2025\_05\_14("dev-full-thinking-2025-05-14")
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
 
-INTERLEAVED\_THINKING\_2025\_05\_14("interleaved-thinking-2025-05-14")
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
 
-CODE\_EXECUTION\_2025\_05\_22("code-execution-2025-05-22")
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
 
-EXTENDED\_CACHE\_TTL\_2025\_04\_11("extended-cache-ttl-2025-04-11")
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-CONTEXT\_1M\_2025\_08\_07("context-1m-2025-08-07")
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
 
-CONTEXT\_MANAGEMENT\_2025\_06\_27("context-management-2025-06-27")
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
-MODEL\_CONTEXT\_WINDOW\_EXCEEDED\_2025\_08\_26("model-context-window-exceeded-2025-08-26")
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
-SKILLS\_2025\_10\_02("skills-2025-10-02")
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
-OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
-USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
-MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
-CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
-SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
-FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
-AGENT\_MEMORY\_2026\_07\_22("agent-memory-2026-07-22")
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-##### ReturnsExpand Collapse
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
-
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
 
-class BetaManagedAgentsAgent:
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
-A Managed Agents `agent`.
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
-String id
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
-Optional<LocalDateTime> archivedAt
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-A timestamp in RFC 3339 format
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
 
-LocalDateTime createdAt
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
 
-A timestamp in RFC 3339 format
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
 
-Optional<String> description
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
 
-
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
 
-List<[BetaManagedAgentsMcpServerUrlDefinition](api/beta/agents.md)> mcpServers
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-String name
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
 
-Type type
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-String url
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
 
-Metadata metadata
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-
+## Returns
 
-[BetaManagedAgentsModelConfig](api/beta/agents.md) model
+- `class BetaManagedAgentsAgent:`
 
-Model identifier and configuration.
+  A Managed Agents `agent`.
 
-
+  - `String id`
 
-BetaManagedAgentsModel id
+  - `Optional<LocalDateTime> archivedAt`
 
-The model that will power your agent.
+    A timestamp in RFC 3339 format
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+    format: date-time
 
-One of the following:
+  - `LocalDateTime createdAt`
 
-CLAUDE\_SONNET\_5("claude-sonnet-5")
+    A timestamp in RFC 3339 format
 
-High-performance model for coding and agents
+    format: date-time
 
-CLAUDE\_FABLE\_5("claude-fable-5")
+  - `Optional<String> description`
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+  - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+    - `String name`
 
-Frontier intelligence for long-running agents and coding
+    - `Type type`
 
-CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+    - `String url`
 
-Frontier intelligence for long-running agents and coding
+  - `Metadata metadata`
 
-CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+  - `BetaManagedAgentsModelConfig model`
 
-Most intelligent model for building agents and coding
+    Model identifier and configuration.
 
-CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+    - `BetaManagedAgentsModel id`
 
-Best combination of speed and intelligence
+      The model that will power your agent.
 
-CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Fastest model with near-frontier intelligence
+      - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
-CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+        Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
-Fastest model with near-frontier intelligence
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+        High-performance model for coding and agents
 
-Premium model combining maximum intelligence with practical performance
+      - `CLAUDE_FABLE_5("claude-fable-5")`
 
-CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
-Premium model combining maximum intelligence with practical performance
+      - `CLAUDE_OPUS_5("claude-opus-5")`
 
-CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+        Powerful intelligence for long-running agents and coding
 
-High-performance model for agents and coding
+      - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+        Powerful intelligence for long-running agents and coding
 
-High-performance model for agents and coding
+      - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-
+        Powerful intelligence for long-running agents and coding
 
-Optional<Speed> speed
+      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+        Powerful intelligence for long-running agents and coding
 
-One of the following:
+      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
-STANDARD("standard")
+        Best combination of speed and intelligence
 
-FAST("fast")
+      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
 
-
+        Fastest model with near-frontier intelligence
 
-Optional<[BetaManagedAgentsMultiagent](api/beta/sessions.md)> multiagent
+      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
 
-Resolved coordinator topology with a concrete agent roster.
+        Fastest model with near-frontier intelligence
 
-
+      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-List<[BetaManagedAgentsAgentReference](api/beta/agents.md)> agents
+        Powerful intelligence for long-running agents and coding
 
-Agents the coordinator may spawn as session threads, each resolved to a specific version.
+      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-String id
+        Powerful intelligence for long-running agents and coding
 
-Type type
+      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
-long version
+        High-performance model for agents and coding
 
-Type type
+      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
 
-String name
+        High-performance model for agents and coding
 
-
+    - `Optional<Effort> effort`
 
-List<Skill> skills
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-One of the following:
+      - `class BetaManagedAgentsEffortLow:`
 
-
+        Low effort. Favors latency over reasoning depth.
 
-class BetaManagedAgentsAnthropicSkill:
+        - `Type type`
 
-A resolved Anthropic-managed skill.
+      - `class BetaManagedAgentsEffortMedium:`
 
-String skillId
+        Medium effort. Balances latency and reasoning depth.
 
-Type type
+        - `Type type`
 
-String version
+      - `class BetaManagedAgentsEffortHigh:`
 
-
+        High effort. Favors reasoning depth.
 
-class BetaManagedAgentsCustomSkill:
+        - `Type type`
 
-A resolved user-created custom skill.
+      - `class BetaManagedAgentsEffortXhigh:`
 
-String skillId
+        Extra-high effort. Not all models accept this level.
 
-Type type
+        - `Type type`
 
-String version
+      - `class BetaManagedAgentsEffortMax:`
 
-Optional<String> system
+        Maximum effort. Favors reasoning depth over latency.
 
-
+        - `Type type`
 
-List<Tool> tools
+    - `Optional<String> inferenceGeo`
 
-One of the following:
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
 
-
+    - `Optional<Speed> speed`
 
-class BetaManagedAgentsAgentToolset20260401:
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-
+      - `STANDARD("standard")`
 
-List<[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)> configs
+      - `FAST("fast")`
 
-boolean enabled
+  - `Optional<BetaManagedAgentsMultiagent> multiagent`
 
-
+    Resolved coordinator topology with a concrete agent roster.
 
-Name name
+    - `List<Agent> agents`
 
-Built-in agent tool identifier.
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-One of the following:
+      - `class BetaManagedAgentsAgentReference:`
 
-BASH("bash")
+        A resolved agent reference with a concrete version.
 
-EDIT("edit")
+        - `String id`
 
-READ("read")
+        - `Type type`
 
-WRITE("write")
+        - `long version`
 
-GLOB("glob")
+          format: int32
 
-GREP("grep")
+      - `class BetaManagedAgentsAdvisor:`
 
-WEB\_FETCH("web\_fetch")
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-WEB\_SEARCH("web\_search")
+        - `String model`
 
-
+          The advisor model id.
 
-PermissionPolicy permissionPolicy
+        - `Type type`
 
-Permission policy for tool execution.
+    - `Type type`
 
-One of the following:
+  - `String name`
 
-
+  - `List<Skill> skills`
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+    - `class BetaManagedAgentsAnthropicSkill:`
 
-Tool calls are automatically approved without user confirmation.
+      A resolved Anthropic-managed skill.
 
-Type type
+      - `String skillId`
 
-
+      - `Type type`
 
-class BetaManagedAgentsAlwaysAskPolicy:
+      - `String version`
 
-Tool calls require user confirmation before execution.
+    - `class BetaManagedAgentsCustomSkill:`
 
-Type type
+      A resolved user-created custom skill.
 
-
+      - `String skillId`
 
-[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) defaultConfig
+      - `Type type`
 
-Resolved default configuration for agent tools.
+      - `String version`
 
-boolean enabled
+  - `Optional<String> system`
 
-
+  - `List<Tool> tools`
 
-PermissionPolicy permissionPolicy
+    - `class BetaManagedAgentsAgentToolset20260401:`
 
-Permission policy for tool execution.
+      - `List<BetaManagedAgentsAgentToolConfig> configs`
 
-One of the following:
+        - `class BetaManagedAgentsBashToolConfig:`
 
-
+          Configuration for the bash tool.
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+          - `boolean enabled`
 
-Tool calls are automatically approved without user confirmation.
+          - `JsonValue name = "bash"`
 
-Type type
+          - `PermissionPolicy permissionPolicy`
 
-
+            Permission policy for tool execution.
 
-class BetaManagedAgentsAlwaysAskPolicy:
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-Tool calls require user confirmation before execution.
+              Tool calls are automatically approved without user confirmation.
 
-Type type
+              - `Type type`
 
-Type type
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-
+              Tool calls require user confirmation before execution.
 
-class BetaManagedAgentsMcpToolset:
+              - `Type type`
 
-
+          - `JsonValue type = "bash"`
 
-List<[BetaManagedAgentsMcpToolConfig](api/beta/agents.md)> configs
+        - `class BetaManagedAgentsEditToolConfig:`
 
-boolean enabled
+          Configuration for the edit tool.
 
-String name
+          - `boolean enabled`
 
-
+          - `JsonValue name = "edit"`
 
-PermissionPolicy permissionPolicy
+          - `PermissionPolicy permissionPolicy`
 
-Permission policy for tool execution.
+            Permission policy for tool execution.
 
-One of the following:
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-
+              Tool calls are automatically approved without user confirmation.
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-Tool calls are automatically approved without user confirmation.
+              Tool calls require user confirmation before execution.
 
-Type type
+          - `JsonValue type = "edit"`
 
-
+        - `class BetaManagedAgentsReadToolConfig:`
 
-class BetaManagedAgentsAlwaysAskPolicy:
+          Configuration for the read tool.
 
-Tool calls require user confirmation before execution.
+          - `boolean enabled`
 
-Type type
+          - `JsonValue name = "read"`
 
-
+          - `PermissionPolicy permissionPolicy`
 
-[BetaManagedAgentsMcpToolsetDefaultConfig](api/beta/agents.md) defaultConfig
+            Permission policy for tool execution.
 
-Resolved default configuration for all tools from an MCP server.
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-boolean enabled
+              Tool calls are automatically approved without user confirmation.
 
-
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-PermissionPolicy permissionPolicy
+              Tool calls require user confirmation before execution.
 
-Permission policy for tool execution.
+          - `JsonValue type = "read"`
 
-One of the following:
+        - `class BetaManagedAgentsWriteToolConfig:`
 
-
+          Configuration for the write tool.
 
-class BetaManagedAgentsAlwaysAllowPolicy:
+          - `boolean enabled`
 
-Tool calls are automatically approved without user confirmation.
+          - `JsonValue name = "write"`
 
-Type type
+          - `PermissionPolicy permissionPolicy`
 
-
+            Permission policy for tool execution.
 
-class BetaManagedAgentsAlwaysAskPolicy:
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-Tool calls require user confirmation before execution.
+              Tool calls are automatically approved without user confirmation.
 
-Type type
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-String mcpServerName
+              Tool calls require user confirmation before execution.
 
-Type type
+          - `JsonValue type = "write"`
 
-
+        - `class BetaManagedAgentsGlobToolConfig:`
 
-class BetaManagedAgentsCustomTool:
+          Configuration for the glob tool.
 
-A custom tool as returned in API responses.
+          - `boolean enabled`
 
-String description
+          - `JsonValue name = "glob"`
 
-
+          - `PermissionPolicy permissionPolicy`
 
-[BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) inputSchema
+            Permission policy for tool execution.
 
-JSON Schema for custom tool input parameters.
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-JsonValue; type "object"constant"object"constant
+              Tool calls are automatically approved without user confirmation.
 
-Optional<Properties> properties
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-Optional<List<String>> required
+              Tool calls require user confirmation before execution.
 
-String name
+          - `JsonValue type = "glob"`
 
-Type type
+        - `class BetaManagedAgentsGrepToolConfig:`
 
-Type type
+          Configuration for the grep tool.
 
-LocalDateTime updatedAt
+          - `boolean enabled`
 
-A timestamp in RFC 3339 format
+          - `JsonValue name = "grep"`
 
-long version
+          - `PermissionPolicy permissionPolicy`
 
-The agent's current version. Starts at 1 and increments when the agent is modified.
+            Permission policy for tool execution.
 
-List Agents
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-Java
+              Tool calls are automatically approved without user confirmation.
 
-```shiki
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonValue type = "grep"`
+
+        - `class BetaManagedAgentsWebFetchToolConfig:`
+
+          Configuration for the web_fetch tool.
+
+          - `boolean enabled`
+
+          - `JsonValue name = "web_fetch"`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonValue type = "web_fetch"`
+
+          - `Optional<List<String>> allowedDomains`
+
+          - `Optional<List<String>> blockedDomains`
+
+          - `Optional<Long> maxContentTokens`
+
+            format: int32
+
+        - `class BetaManagedAgentsWebSearchToolConfig:`
+
+          Configuration for the web_search tool.
+
+          - `boolean enabled`
+
+          - `JsonValue name = "web_search"`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonValue type = "web_search"`
+
+          - `Optional<List<String>> allowedDomains`
+
+          - `Optional<List<String>> blockedDomains`
+
+          - `Optional<BetaManagedAgentsUserLocation> userLocation`
+
+            Approximate user location for search result localization.
+
+            - `JsonValue type = "approximate"`
+
+              Location precision. Only "approximate" is supported.
+
+            - `Optional<String> city`
+
+              City name.
+
+              minLength: 1, maxLength: 255
+
+            - `Optional<String> country`
+
+              Two-letter ISO 3166-1 country code, uppercase.
+
+            - `Optional<String> region`
+
+              Region or state name.
+
+              minLength: 1, maxLength: 255
+
+            - `Optional<String> timezone`
+
+              IANA timezone identifier, e.g. "America/Los_Angeles".
+
+              minLength: 1, maxLength: 255
+
+      - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for agent tools.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+      - `Type type`
+
+    - `class BetaManagedAgentsMcpToolset:`
+
+      - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `String name`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+      - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for all tools from an MCP server.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+      - `String mcpServerName`
+
+      - `Type type`
+
+    - `class BetaManagedAgentsCustomTool:`
+
+      A custom tool as returned in API responses.
+
+      - `String description`
+
+      - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+        JSON Schema for custom tool input parameters.
+
+        - `JsonValue type = "object"`
+
+        - `Optional<Properties> properties`
+
+        - `Optional<List<String>> required`
+
+      - `String name`
+
+      - `Type type`
+
+  - `Type type`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `long version`
+
+    The agent's current version. Starts at 1 and increments when the agent is modified.
+
+    format: int32
+
+## Example
+
+```java
 package com.anthropic.example;
 
 import com.anthropic.client.AnthropicClient;
@@ -493,11 +675,9 @@ public final class Main {
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
@@ -516,7 +696,11 @@ Response 200
         "foo": "bar"
       },
       "model": {
-        "id": "claude-sonnet-4-6",
+        "id": "claude-opus-5",
+        "effort": {
+          "type": "low"
+        },
+        "inference_geo": "inference_geo",
         "speed": "standard"
       },
       "multiagent": {
@@ -551,88 +735,8 @@ Response 200
               "name": "bash",
               "permission_policy": {
                 "type": "always_allow"
-              }
-            }
-          ],
-          "default_config": {
-            "enabled": true,
-            "permission_policy": {
-              "type": "always_ask"
-            }
-          },
-          "type": "agent_toolset_20260401"
-        }
-      ],
-      "type": "agent",
-      "updated_at": "2026-03-15T10:00:00Z",
-      "version": 1
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "agent_011CZkYpogX7uDKUyvBTophP",
-      "archived_at": null,
-      "created_at": "2026-03-15T10:00:00Z",
-      "description": "A general-purpose starter agent.",
-      "mcp_servers": [
-        {
-          "name": "example-mcp",
-          "type": "url",
-          "url": "https://example-server.modelcontextprotocol.io/sse"
-        }
-      ],
-      "metadata": {
-        "foo": "bar"
-      },
-      "model": {
-        "id": "claude-sonnet-4-6",
-        "speed": "standard"
-      },
-      "multiagent": {
-        "agents": [
-          {
-            "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-            "type": "agent",
-            "version": 1
-          }
-        ],
-        "type": "coordinator"
-      },
-      "name": "My First Agent",
-      "skills": [
-        {
-          "skill_id": "xlsx",
-          "type": "anthropic",
-          "version": "1"
-        },
-        {
-          "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
-          "type": "custom",
-          "version": "2"
-        }
-      ],
-      "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
-      "tools": [
-        {
-          "configs": [
-            {
-              "enabled": true,
-              "name": "bash",
-              "permission_policy": {
-                "type": "always_allow"
-              }
+              },
+              "type": "bash"
             }
           ],
           "default_config": {

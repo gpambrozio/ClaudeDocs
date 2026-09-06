@@ -1,16 +1,6 @@
 # List Code Artifacts
 
-To enable the Compliance API, see the setup guide.
-
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
-
-Copy page
-
-
-
-# List Code Artifacts
-
-GET/v1/compliance/apps/code/artifacts
+**GET** `/v1/compliance/apps/code/artifacts`
 
 List Claude Code Artifacts owned by organizations under the parent
 organization.
@@ -25,225 +15,153 @@ quiesces.
 Artifacts owned by a since-deleted child organization are not
 returned.
 
-##### Query parameters
+## Query parameters
 
-
+- `limit: optional number`
 
-limit: optional number
+  Maximum results (default: 20, max: 100)
 
-Maximum results (default: 20, max: 100)
+  default: 20, maximum: 100, minimum: 1
 
-default20
+- `organization_ids: optional array of string`
 
-maximum100
+  Filter by organization IDs (accepts `org_...` or organization UUID, up to 500). Enumerate IDs via `GET /v1/compliance/organizations`.
 
-minimum1
+  maxItems: 500
 
-
+- `page: optional string`
 
-organization\_ids: optional array of string
+  Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
-Filter by organization IDs (accepts `org_...` or organization UUID, up to 500). Enumerate IDs via `GET /v1/compliance/organizations`.
+- `updated_at: optional object`
 
-maxItems500
+  - `gt: optional string`
 
-page: optional string
+    Return only Artifacts updated after this time (RFC 3339 format). See `updated_at.gte` for the completeness caveat.
 
-Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
+    format: date-time
 
-
+  - `gte: optional string`
 
-updated\_at: optional object{ gt, gte, lt, lte }
+    Return only Artifacts updated at or after this time (RFC 3339 format). Time filters match an eventually-consistent index and Artifacts published before this field was recorded never match — omit the time filter for compliance-complete enumeration. For incremental export, apply a generous overlap margin between windows and dedupe by `id`: adjacent tiling silently misses items whose index update lagged their publish.
 
-
+    format: date-time
 
-gt: optional string
+  - `lt: optional string`
 
-Return only Artifacts updated after this time (RFC 3339 format). See `updated_at.gte` for the completeness caveat.
+    Return only Artifacts updated before this time (RFC 3339 format). Multiple time operators are AND-ed to the tightest bound. See `updated_at.gte` for the completeness caveat.
 
-formatdate-time
+    format: date-time
 
-
+  - `lte: optional string`
 
-gte: optional string
+    Return only Artifacts updated at or before this time (RFC 3339 format). See `updated_at.gte` for the completeness caveat.
 
-Return only Artifacts updated at or after this time (RFC 3339 format). Time filters match an eventually-consistent index and Artifacts published before this field was recorded never match — omit the time filter for compliance-complete enumeration. For incremental export, apply a generous overlap margin between windows and dedupe by `id`: adjacent tiling silently misses items whose index update lagged their publish.
+    format: date-time
 
-formatdate-time
+- `user_ids: optional array of string`
 
-
+  Filter by owner user IDs (up to 200). Enumerate IDs via `GET /v1/compliance/organizations/{org_uuid}/users`.
 
-lt: optional string
+  maxItems: 200
 
-Return only Artifacts updated before this time (RFC 3339 format). Multiple time operators are AND-ed to the tightest bound. See `updated_at.gte` for the completeness caveat.
+## Headers
 
-formatdate-time
+- `"x-api-key": optional string`
 
-
+## Returns
 
-lte: optional string
+- `data: array of object`
 
-Return only Artifacts updated at or before this time (RFC 3339 format). See `updated_at.gte` for the completeness caveat.
+  Page of Artifacts
 
-formatdate-time
+  - `id: string`
 
-
+    Artifact identifier (tagged ID)
 
-user\_ids: optional array of string
+  - `organization_uuid: string`
 
-Filter by owner user IDs (up to 200). Enumerate IDs via `GET /v1/compliance/organizations/{org_uuid}/users`.
+    Organization UUID this Artifact belongs to
 
-maxItems200
+  - `owner_user_id: string or null`
 
-##### Headers
+    Artifact owner's user identifier (tagged ID), or null for Artifacts published by an agent session rather than a user account. When set, it survives after the owner's account is deleted or the owner leaves every organization under the parent.
 
-"x-api-key": optional string
+  - `published_version_id: string or null`
 
-##### Returns
+    Identifier of the version a non-owner viewer would render when `read_mode` permits them — the version the owner has pinned for non-owner readers if one is pinned, otherwise the owner's latest. When `read_mode` is `owner` no non-owner renders any version; the field still reports which version would be served were read_mode widened.
 
-
+  - `read_mode: "org" or "owner" or "public" or "users"`
 
-data: array of object{ id, organization\_uuid, owner\_user\_id, 5 more }
+    Who can view this Artifact: only its owner, a named set of users, every member of its organization, or anyone on the internet (`public`)
 
-Page of Artifacts
+    - `"org"`
 
-id: string
+    - `"owner"`
 
-Artifact identifier (tagged ID)
+    - `"public"`
 
-organization\_uuid: string
+    - `"users"`
 
-Organization UUID this Artifact belongs to
+  - `updated_at: string or null`
 
-owner\_user\_id: string or null
+    Artifact last update timestamp, or null for Artifacts published before this field was recorded
 
-Artifact owner's user identifier (tagged ID), or null for Artifacts published by an agent session rather than a user account. When set, it survives after the owner's account is deleted or the owner leaves every organization under the parent.
+    format: date-time
 
-published\_version\_id: string or null
+  - `user: object or null`
 
-Identifier of the version a non-owner viewer would render when `read_mode` permits them — the version the owner has pinned for non-owner readers if one is pinned, otherwise the owner's latest. When `read_mode` is `owner` no non-owner renders any version; the field still reports which version would be served were read\_mode widened.
+    The user who owns a Code Artifact.
 
-
+    Fields that reference this type are null when the Artifact was
+    published by an agent session rather than a user account, when the
+    owner's account has been deleted, or when the owner is no longer a
+    member of an organization the key may read.
 
-read\_mode: "org" or "owner" or "public" or "users"
+    - `id: string`
 
-Who can view this Artifact: only its owner, a named set of users, every member of its organization, or anyone on the internet (`public`)
+      User identifier (tagged ID)
 
-One of the following:
+    - `email_address: string`
 
-"org"
+      User's email address
 
-"owner"
+  - `versions: array of object`
 
-"public"
+    Up to roughly 20 most-recently-published versions of this Artifact (older versions are not retained). Metadata only — use `GET /v1/compliance/apps/code/artifacts/{artifact_id}/versions/{version_id}` to download a version's content.
 
-"users"
+    - `id: string`
 
-
+      Opaque version identifier
 
-updated\_at: string or null
+    - `created_at: string or null`
 
-Artifact last update timestamp, or null for Artifacts published before this field was recorded
+      When this version was published
 
-formatdate-time
+      format: date-time
 
-
+    - `name: string`
 
-user: object{ id, email\_address } or null
+      Artifact title at this version. Falls back to the version identifier when the title for an older version is no longer retained.
 
-The user who owns a Code Artifact.
+- `has_more: boolean`
 
-Fields that reference this type are null when the Artifact was
-published by an agent session rather than a user account, when the
-owner's account has been deleted, or when the owner is no longer a
-member of an organization the key may read.
+  Whether `next_page` is set. May be true for a page whose next page is empty — continue until `next_page` is absent.
 
-id: string
+- `next_page: string or null`
 
-User identifier (tagged ID)
+  Token to retrieve the next page. Use this as the 'page' parameter in your next request
 
-email\_address: string
+## Example
 
-User's email address
-
-
-
-versions: array of object{ id, created\_at, name }
-
-Up to roughly 20 most-recently-published versions of this Artifact (older versions are not retained). Metadata only — use `GET /v1/compliance/apps/code/artifacts/{artifact_id}/versions/{version_id}` to download a version's content.
-
-id: string
-
-Opaque version identifier
-
-
-
-created\_at: string or null
-
-When this version was published
-
-formatdate-time
-
-name: string
-
-Artifact title at this version. Falls back to the version identifier when the title for an older version is no longer retained.
-
-has\_more: boolean
-
-Whether `next_page` is set. May be true for a page whose next page is empty — continue until `next_page` is absent.
-
-next\_page: string or null
-
-Token to retrieve the next page. Use this as the 'page' parameter in your next request
-
-List Code Artifacts
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/code/artifacts \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "cart_01Tu9VwXyZaBcDeFgHiJkLmN",
-      "organization_uuid": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
-      "owner_user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-      "published_version_id": "1741803761-9f3a",
-      "read_mode": "org",
-      "updated_at": "2025-03-14T09:05:17.456789Z",
-      "user": {
-        "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-        "email_address": "jane.doe@example.com"
-      },
-      "versions": [
-        {
-          "id": "1741803761-9f3a",
-          "created_at": "2025-03-12T18:22:41.123456Z",
-          "name": "Team dashboard"
-        }
-      ]
-    }
-  ],
-  "has_more": true,
-  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

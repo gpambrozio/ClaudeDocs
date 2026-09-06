@@ -1,172 +1,128 @@
 # List memories
 
-Copy page
+`$ ant beta:memory-stores:memories list`
 
-
-
-CLI
-
-# List memories
-
-$ ant beta:memory-stores:memories list
-
-GET/v1/memory\_stores/{memory\_store\_id}/memories
+**GET** `/v1/memory_stores/{memory_store_id}/memories`
 
 List memories
 
-##### ParametersExpand Collapse
+## Parameters
 
---memory-store-id: string
+- `--memory-store-id: string`
 
-Path param: Path parameter memory\_store\_id
+  Path param: Path parameter memory_store_id
 
---depth: optional number
+- `--depth: optional number`
 
-Query param: `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` returns immediate children only; deeper entries roll up as `memory_prefix` items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
+  Query param: `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` returns immediate children only; deeper entries roll up as `memory_prefix` items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
 
---limit: optional number
+  format: int32
 
-Query param: Maximum number of items to return per page. Must be between 1 and 100. Defaults to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and `memory_prefix` items count toward the limit.
+- `--limit: optional number`
 
---page: optional string
+  Query param: Maximum number of items to return per page. Must be between 1 and 100. Defaults to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and `memory_prefix` items count toward the limit.
 
-Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
+  format: int32
 
---path-prefix: optional string
+- `--page: optional string`
 
-Query param: Optional path prefix filter. Must end with `/` (segment-aligned), e.g., `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
+  Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
---view: optional "basic" or "full"
+- `--path-prefix: optional string`
 
-Query param: Which projection of each `memory` to return. Defaults to `basic` (content omitted). `full` populates `content` on each item and caps `limit` at 20; use this as the bulk-read path for export and sync.
+  Query param: Optional path prefix filter. Must end with `/` (segment-aligned), e.g., `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--view: optional "basic" or "full"`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+  Query param: Which projection of each `memory` to return. Defaults to `basic` (content omitted). `full` populates `content` on each item and caps `limit` at 20; use this as the bulk-read path for export and sync.
 
-##### ReturnsExpand Collapse
+- `--beta: optional array of AnthropicBeta`
 
-
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-BetaManagedAgentsListMemoriesResult: object { data, next\_page } 
+## Returns
 
-Response payload for [List memories](api/beta/memory_stores/memories/list.md).
+- `BetaManagedAgentsListMemoriesResult: object`
 
-
+  Response payload for [List memories](api/beta/memory_stores/memories/list.md).
 
-data: optional array of [BetaManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)
+  - `data: optional array of BetaManagedAgentsMemoryListItem`
 
-One page of results. Each item is either a `memory` object or, when `depth` was set, a `memory_prefix` rollup marker. Items are returned in a stable, server-defined order.
+    One page of results. Each item is either a `memory` object or, when `depth` was set, a `memory_prefix` rollup marker. Items are returned in a stable, server-defined order.
 
-
+    - `beta_managed_agents_memory: object`
 
-beta\_managed\_agents\_memory: object { id, content\_sha256, content\_size\_bytes, 7 more } 
+      A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
-A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+      - `id: string`
 
-id: string
+        Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
 
-Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+      - `content_sha256: string`
 
-content\_sha256: string
+        Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
 
-Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
+      - `content_size_bytes: number`
 
-content\_size\_bytes: number
+        Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
-Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+        format: int32
 
-created\_at: string
+      - `created_at: string`
 
-A timestamp in RFC 3339 format
+        A timestamp in RFC 3339 format
 
-memory\_store\_id: string
+        format: date-time
 
-ID of the memory store this memory belongs to (a `memstore_...` value).
+      - `memory_store_id: string`
 
-memory\_version\_id: string
+        ID of the memory store this memory belongs to (a `memstore_...` value).
 
-ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+      - `memory_version_id: string`
 
-path: string
+        ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
 
-Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
+      - `path: string`
 
-
+        Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-type: "memory"
+      - `type: "memory"`
 
-"memory"
+      - `updated_at: string`
 
-updated\_at: string
+        A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+        format: date-time
 
-content: optional string
+      - `content: optional string`
 
-The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+        The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-
+    - `beta_managed_agents_memory_prefix: object`
 
-beta\_managed\_agents\_memory\_prefix: object { path, type } 
+      A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
-A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+      - `path: string`
 
-path: string
+        The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
 
-The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
+      - `type: "memory_prefix"`
 
-
+  - `next_page: optional string`
 
-type: "memory\_prefix"
+    Opaque cursor for the next page (a `page_...` value), or `null` if there are no more results. Pass as `page` on the next request.
 
-"memory\_prefix"
+## Example
 
-next\_page: optional string
-
-Opaque cursor for the next page (a `page_...` value), or `null` if there are no more results. Pass as `page` on the next request.
-
-List memories
-
-CLI
-
-```shiki
+```bash
 ant beta:memory-stores:memories list \
   --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "content_sha256": "content_sha256",
-      "content_size_bytes": 0,
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "memory_store_id": "memory_store_id",
-      "memory_version_id": "memory_version_id",
-      "path": "path",
-      "type": "memory",
-      "updated_at": "2019-12-27T18:11:19.117Z",
-      "content": "content"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

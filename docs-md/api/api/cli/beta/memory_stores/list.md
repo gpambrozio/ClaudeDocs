@@ -1,137 +1,103 @@
 # List memory stores
 
-Copy page
+`$ ant beta:memory-stores list`
 
-
-
-CLI
-
-# List memory stores
-
-$ ant beta:memory-stores list
-
-GET/v1/memory\_stores
+**GET** `/v1/memory_stores`
 
 List memory stores
 
-##### ParametersExpand Collapse
+## Parameters
 
---created-at-gte: optional string
+- `--created-at-gte: optional string`
 
-Query param: Return only stores whose `created_at` is at or after this time (inclusive). Sent on the wire as `created_at[gte]`.
+  Query param: Return only stores whose `created_at` is at or after this time (inclusive). Sent on the wire as `created_at[gte]`.
 
---created-at-lte: optional string
+  format: date-time
 
-Query param: Return only stores whose `created_at` is at or before this time (inclusive). Sent on the wire as `created_at[lte]`.
+- `--created-at-lte: optional string`
 
---include-archived: optional boolean
+  Query param: Return only stores whose `created_at` is at or before this time (inclusive). Sent on the wire as `created_at[lte]`.
 
-Query param: When `true`, archived stores are included in the results. Defaults to `false` (archived stores are excluded).
+  format: date-time
 
---limit: optional number
+- `--include-archived: optional boolean`
 
-Query param: Maximum number of stores to return per page. Must be between 1 and 100. Defaults to 20 when omitted.
+  Query param: When `true`, archived stores are included in the results. Defaults to `false` (archived stores are excluded).
 
---page: optional string
+- `--limit: optional number`
 
-Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
+  Query param: Maximum number of stores to return per page. Must be between 1 and 100. Defaults to 20 when omitted.
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+  format: int32
 
-Header param: Optional header to specify the beta version(s) you want to use.
+- `--page: optional string`
 
-##### ReturnsExpand Collapse
+  Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
-
+- `--beta: optional array of AnthropicBeta`
 
-BetaManagedAgentsListMemoryStoresResponse: object { data, next\_page } 
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-A page of `memory_store` results, ordered by `created_at` descending (newest first).
+## Returns
 
-
+- `BetaManagedAgentsListMemoryStoresResponse: object`
 
-data: optional array of [BetaManagedAgentsMemoryStore](api/beta/memory_stores.md) { id, created\_at, name, 5 more } 
+  A page of `memory_store` results, ordered by `created_at` descending (newest first).
 
-Memory stores on this page, newest first. Empty when there are no stores matching the filters.
+  - `data: optional array of BetaManagedAgentsMemoryStore`
 
-id: string
+    Memory stores on this page, newest first. Empty when there are no stores matching the filters.
 
-Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+    - `id: string`
 
-created\_at: string
+      Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
 
-A timestamp in RFC 3339 format
+    - `created_at: string`
 
-name: string
+      A timestamp in RFC 3339 format
 
-Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
+      format: date-time
 
-
+    - `name: string`
 
-type: "memory\_store"
+      Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
-"memory\_store"
+    - `type: "memory_store"`
 
-updated\_at: string
+    - `updated_at: string`
 
-A timestamp in RFC 3339 format
+      A timestamp in RFC 3339 format
 
-archived\_at: optional string
+      format: date-time
 
-A timestamp in RFC 3339 format
+    - `archived_at: optional string`
 
-description: optional string
+      A timestamp in RFC 3339 format
 
-Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+      format: date-time
 
-metadata: optional map[string]
+    - `description: optional string`
 
-Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+      Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
-next\_page: optional string
+    - `metadata: optional map[string]`
 
-Opaque cursor for the next page (a `page_...` value). Pass as `page` on the next request. `null` when there are no more results.
+      Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 
-List memory stores
+  - `next_page: optional string`
 
-CLI
+    Opaque cursor for the next page (a `page_...` value). Pass as `page` on the next request. `null` when there are no more results.
 
-```shiki
+## Example
+
+```bash
 ant beta:memory-stores list \
   --api-key my-anthropic-api-key
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "name": "name",
-      "type": "memory_store",
-      "updated_at": "2019-12-27T18:11:19.117Z",
-      "archived_at": "2019-12-27T18:11:19.117Z",
-      "description": "description",
-      "metadata": {
-        "foo": "string"
-      }
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {
