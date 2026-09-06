@@ -1,281 +1,251 @@
 # List Session Resources
 
-Copy page
+`client.beta.sessions.resources.list(sessionID, params?, options?): PageCursor<BetaManagedAgentsSessionResource>`
 
-
-
-TypeScript
-
-# List Session Resources
-
-client.beta.sessions.resources.list(stringsessionID, ResourceListParams { limit, page, betas } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsSessionResource](api/beta/sessions/resources.md)>
-
-GET/v1/sessions/{session\_id}/resources
+**GET** `/v1/sessions/{session_id}/resources`
 
 List Session Resources
 
-##### ParametersExpand Collapse
+## Parameters
 
-sessionID: string
+- `sessionID: string`
 
-
+- `params: ResourceListParams`
 
-params: ResourceListParams { limit, page, betas } 
+  - `limit?: number`
 
-limit?: number
+    Query param: Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
 
-Query param: Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
+    format: int32
 
-page?: string
+  - `page?: string`
 
-Query param: Opaque cursor from a previous response's next\_page field.
+    Query param: Opaque cursor from a previous response's `next_page` field.
 
-
+  - `betas?: Array<AnthropicBeta>`
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-Header param: Optional header to specify the beta version(s) you want to use.
+    - `(string & {})`
 
-One of the following:
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
 
-(string & {})
+      - `"message-batches-2024-09-24"`
 
-
+      - `"prompt-caching-2024-07-31"`
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more
+      - `"computer-use-2024-10-22"`
 
-"message-batches-2024-09-24"
+      - `"computer-use-2025-01-24"`
 
-"prompt-caching-2024-07-31"
+      - `"pdfs-2024-09-25"`
 
-"computer-use-2024-10-22"
+      - `"token-counting-2024-11-01"`
 
-"computer-use-2025-01-24"
+      - `"token-efficient-tools-2025-02-19"`
 
-"pdfs-2024-09-25"
+      - `"output-128k-2025-02-19"`
 
-"token-counting-2024-11-01"
+      - `"files-api-2025-04-14"`
 
-"token-efficient-tools-2025-02-19"
+      - `"mcp-client-2025-04-04"`
 
-"output-128k-2025-02-19"
+      - `"mcp-client-2025-11-20"`
 
-"files-api-2025-04-14"
+      - `"dev-full-thinking-2025-05-14"`
 
-"mcp-client-2025-04-04"
+      - `"interleaved-thinking-2025-05-14"`
 
-"mcp-client-2025-11-20"
+      - `"code-execution-2025-05-22"`
 
-"dev-full-thinking-2025-05-14"
+      - `"extended-cache-ttl-2025-04-11"`
 
-"interleaved-thinking-2025-05-14"
+      - `"context-1m-2025-08-07"`
 
-"code-execution-2025-05-22"
+      - `"context-management-2025-06-27"`
 
-"extended-cache-ttl-2025-04-11"
+      - `"model-context-window-exceeded-2025-08-26"`
 
-"context-1m-2025-08-07"
+      - `"skills-2025-10-02"`
 
-"context-management-2025-06-27"
+      - `"fast-mode-2026-02-01"`
 
-"model-context-window-exceeded-2025-08-26"
+      - `"output-300k-2026-03-24"`
 
-"skills-2025-10-02"
+      - `"user-profiles-2026-03-24"`
 
-"fast-mode-2026-02-01"
+      - `"user-profiles-2026-08-18"`
 
-"output-300k-2026-03-24"
+      - `"advisor-tool-2026-03-01"`
 
-"user-profiles-2026-03-24"
+      - `"managed-agents-2026-04-01"`
 
-"advisor-tool-2026-03-01"
+      - `"cache-diagnosis-2026-04-07"`
 
-"managed-agents-2026-04-01"
+      - `"dreaming-2026-04-21"`
 
-"cache-diagnosis-2026-04-07"
+      - `"thinking-token-count-2026-05-13"`
 
-"thinking-token-count-2026-05-13"
+      - `"server-side-fallback-2026-06-01"`
 
-"server-side-fallback-2026-06-01"
+      - `"server-side-fallback-2026-07-01"`
 
-"fallback-credit-2026-06-01"
+      - `"fallback-credit-2026-06-01"`
 
-"agent-memory-2026-07-22"
+      - `"fallback-credit-2026-07-01"`
 
-##### ReturnsExpand Collapse
+      - `"agent-memory-2026-07-22"`
 
-
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
-BetaManagedAgentsSessionResource = [BetaManagedAgentsGitHubRepositoryResource](api/beta/sessions/resources.md) { id, created\_at, mount\_path, 4 more }  | [BetaManagedAgentsFileResource](api/beta/sessions/resources.md) { id, created\_at, file\_id, 3 more }  | [BetaManagedAgentsMemoryStoreResource](api/beta/sessions/resources.md) { memory\_store\_id, type, access, 4 more } 
+      - `"compact-2026-01-12"`
 
-A memory store attached to an agent session.
+      - `"computer-use-2025-11-24"`
 
-One of the following:
+      - `"mcp-tunnels-2026-06-22"`
 
-
+      - `"structured-outputs-2025-11-13"`
 
-BetaManagedAgentsGitHubRepositoryResource { id, created\_at, mount\_path, 4 more } 
+      - `"task-budgets-2026-03-13"`
 
-id: string
+      - `"thinking-display-updates-2026-08-18"`
 
-created\_at: string
+      - `"ce-user-management-2026-07-13"`
 
-A timestamp in RFC 3339 format
+      - `"mid-conversation-output-config-2026-07-01"`
 
-mount\_path: string
+      - `"thinking-binding-controls-2026-08-01"`
 
-type: "github\_repository"
+      - `"mid-conversation-system-clear-at-2026-08-21"`
 
-updated\_at: string
+## Returns
 
-A timestamp in RFC 3339 format
+- `BetaManagedAgentsSessionResource = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource | BetaManagedAgentsMemoryStoreResource`
 
-url: string
+  A memory store attached to an agent session.
 
-
+  - `BetaManagedAgentsGitHubRepositoryResource`
 
-checkout?: [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type }  | null
+    - `id: string`
 
-One of the following:
+    - `created_at: string`
 
-
+      A timestamp in RFC 3339 format
 
-BetaManagedAgentsBranchCheckout { name, type } 
+      format: date-time
 
-name: string
+    - `mount_path: string`
 
-Branch name to check out.
+    - `type: "github_repository"`
 
-type: "branch"
+    - `updated_at: string`
 
-
+      A timestamp in RFC 3339 format
 
-BetaManagedAgentsCommitCheckout { sha, type } 
+      format: date-time
 
-sha: string
+    - `url: string`
 
-Full commit SHA to check out.
+    - `checkout?: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout | null`
 
-type: "commit"
+      - `BetaManagedAgentsBranchCheckout`
 
-
+        - `name: string`
 
-BetaManagedAgentsFileResource { id, created\_at, file\_id, 3 more } 
+          Branch name to check out.
 
-id: string
+          minLength: 1, maxLength: 255
 
-created\_at: string
+        - `type: "branch"`
 
-A timestamp in RFC 3339 format
+      - `BetaManagedAgentsCommitCheckout`
 
-file\_id: string
+        - `sha: string`
 
-mount\_path: string
+          Full commit SHA to check out.
 
-type: "file"
+          minLength: 7, maxLength: 64
 
-updated\_at: string
+        - `type: "commit"`
 
-A timestamp in RFC 3339 format
+  - `BetaManagedAgentsFileResource`
 
-
+    - `id: string`
 
-BetaManagedAgentsMemoryStoreResource { memory\_store\_id, type, access, 4 more } 
+    - `created_at: string`
 
-A memory store attached to an agent session.
+      A timestamp in RFC 3339 format
 
-memory\_store\_id: string
+      format: date-time
 
-The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+    - `file_id: string`
 
-type: "memory\_store"
+    - `mount_path: string`
 
-
+    - `type: "file"`
 
-access?: "read\_write" | "read\_only" | null
+    - `updated_at: string`
 
-Access mode for an attached memory store.
+      A timestamp in RFC 3339 format
 
-One of the following:
+      format: date-time
 
-"read\_write"
+  - `BetaManagedAgentsMemoryStoreResource`
 
-"read\_only"
+    A memory store attached to an agent session.
 
-description?: string
+    - `memory_store_id: string`
 
-Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-instructions?: string | null
+    - `type: "memory_store"`
 
-Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+    - `access?: "read_write" | "read_only" | null`
 
-mount\_path?: string | null
+      Access mode for an attached memory store.
 
-Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+      - `"read_write"`
 
-name?: string | null
+      - `"read_only"`
 
-Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+    - `description?: string`
 
-List Session Resources
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-TypeScript
+    - `instructions?: string | null`
 
-```shiki
-import Anthropic from '@anthropic-ai/sdk';
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
+
+    - `mount_path?: string | null`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `name?: string | null`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
+## Example
+
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 // Automatically fetches more pages as needed.
 for await (const betaManagedAgentsSessionResource of client.beta.sessions.resources.list(
-  'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  "sesn_011CZkZAtmR3yMPDzynEDxu7"
 )) {
   console.log(betaManagedAgentsSessionResource);
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
-      "created_at": "2026-03-15T10:00:00Z",
-      "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-      "mount_path": "/uploads/receipt.pdf",
-      "type": "file",
-      "updated_at": "2026-03-15T10:00:00Z"
-    },
-    {
-      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
-      "created_at": "2026-03-15T10:00:00Z",
-      "mount_path": "/workspace/example-repo",
-      "type": "github_repository",
-      "updated_at": "2026-03-15T10:00:00Z",
-      "url": "https://github.com/example-org/example-repo",
-      "checkout": {
-        "name": "main",
-        "type": "branch"
-      }
-    }
-  ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

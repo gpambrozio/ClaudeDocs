@@ -1,116 +1,80 @@
 # Get Tunnel Certificate
 
-Copy page
+**GET** `/v1/organizations/tunnels/{tunnel_id}/certificates/{certificate_id}`
 
-
-
-# Get Tunnel Certificate
-
-Deprecated
-
-GET/v1/organizations/tunnels/{tunnel\_id}/certificates/{certificate\_id}
+**Deprecated**
 
 **Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](api/beta/tunnels.md) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
 Retrieve a single certificate registered on a tunnel by ID.
 
-##### Path parameters
+## Path parameters
 
-tunnel\_id: string
+- `tunnel_id: string`
 
-ID of the Tunnel.
+  ID of the Tunnel.
 
-certificate\_id: string
+- `certificate_id: string`
 
-ID of the Tunnel Certificate.
+  ID of the Tunnel Certificate.
 
-##### Headers
+## Headers
 
-"anthropic-beta": array of "mcp-tunnels-2026-05-19"
+- `"anthropic-beta": array of "mcp-tunnels-2026-05-19"`
 
-Required for all Tunnel endpoints.
+  Required for all Tunnel endpoints.
 
-##### Returns
+## Returns
 
-id: string
+- `id: string`
 
-ID of the Tunnel Certificate.
+  ID of the Tunnel Certificate.
 
-
+- `archived_at: string or null`
 
-archived\_at: string or null
+  RFC 3339 datetime string indicating when the certificate was archived, or
+  `null` if it is not archived.
 
-RFC 3339 datetime string indicating when the certificate was archived, or
-`null` if it is not archived.
+  format: date-time
 
-formatdate-time
+- `created_at: string`
 
-
+  RFC 3339 datetime string indicating when the certificate was registered.
 
-created\_at: string
+  format: date-time
 
-RFC 3339 datetime string indicating when the certificate was registered.
+- `expires_at: string or null`
 
-formatdate-time
+  RFC 3339 datetime string indicating when the certificate expires, or
+  `null` if it does not expire.
 
-
+  format: date-time
 
-expires\_at: string or null
+- `fingerprint: string`
 
-RFC 3339 datetime string indicating when the certificate expires, or
-`null` if it does not expire.
+  The certificate's SHA-256 fingerprint, as a lowercase hex string.
 
-formatdate-time
+- `tunnel_id: string`
 
-fingerprint: string
+  ID of the Tunnel this certificate is registered against.
 
-The certificate's SHA-256 fingerprint, as a lowercase hex string.
+- `type: "tunnel_certificate"`
 
-tunnel\_id: string
+  Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
-ID of the Tunnel this certificate is registered against.
+  default: tunnel_certificate
 
-
+## Example
 
-type: "tunnel\_certificate"
-
-Object type. Always `tunnel_certificate` for Tunnel Certificates.
-
-defaulttunnel\_certificate
-
-Get Tunnel Certificate
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/$CERTIFICATE_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "tcrt_01JmWq4ZxnBvR7tKpY2sLdH9",
-  "archived_at": "2024-11-01T23:59:27.427722Z",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "expires_at": "2024-10-30T23:58:27.427722Z",
-  "fingerprint": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
-  "tunnel_id": "tnl_01Hx9Kp2RtQvMn3sWbYdLcF8",
-  "type": "tunnel_certificate"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "tcrt_01JmWq4ZxnBvR7tKpY2sLdH9",
   "archived_at": "2024-11-01T23:59:27.427722Z",

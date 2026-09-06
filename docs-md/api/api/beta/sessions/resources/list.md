@@ -1,243 +1,247 @@
 # List Session Resources
 
-Copy page
-
-
-
-cURL
-
-# List Session Resources
-
-GET/v1/sessions/{session\_id}/resources
+**GET** `/v1/sessions/{session_id}/resources`
 
 List Session Resources
 
-##### Path parameters
+## Path parameters
 
-session\_id: string
+- `session_id: string`
 
-##### Query parameters
+## Query parameters
 
-
+- `limit: optional number`
 
-limit: optional number
+  Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
 
-Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
+  format: int32
 
-formatint32
+- `page: optional string`
 
-page: optional string
+  Opaque cursor from a previous response's `next_page` field.
 
-Opaque cursor from a previous response's `next_page` field.
+## Headers
 
-##### Headers
+- `"anthropic-beta": optional array of AnthropicBeta`
 
-
+  Optional header to specify the beta version(s) you want to use.
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+  - `string`
 
-Optional header to specify the beta version(s) you want to use.
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
-One of the following:
+    - `"message-batches-2024-09-24"`
 
-string
+    - `"prompt-caching-2024-07-31"`
 
-
+    - `"computer-use-2024-10-22"`
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
+    - `"computer-use-2025-01-24"`
 
-One of the following:
+    - `"pdfs-2024-09-25"`
 
-"message-batches-2024-09-24"
+    - `"token-counting-2024-11-01"`
 
-"prompt-caching-2024-07-31"
+    - `"token-efficient-tools-2025-02-19"`
 
-"computer-use-2024-10-22"
+    - `"output-128k-2025-02-19"`
 
-"computer-use-2025-01-24"
+    - `"files-api-2025-04-14"`
 
-"pdfs-2024-09-25"
+    - `"mcp-client-2025-04-04"`
 
-"token-counting-2024-11-01"
+    - `"mcp-client-2025-11-20"`
 
-"token-efficient-tools-2025-02-19"
+    - `"dev-full-thinking-2025-05-14"`
 
-"output-128k-2025-02-19"
+    - `"interleaved-thinking-2025-05-14"`
 
-"files-api-2025-04-14"
+    - `"code-execution-2025-05-22"`
 
-"mcp-client-2025-04-04"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"mcp-client-2025-11-20"
+    - `"context-1m-2025-08-07"`
 
-"dev-full-thinking-2025-05-14"
+    - `"context-management-2025-06-27"`
 
-"interleaved-thinking-2025-05-14"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"code-execution-2025-05-22"
+    - `"skills-2025-10-02"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"fast-mode-2026-02-01"`
 
-"context-1m-2025-08-07"
+    - `"output-300k-2026-03-24"`
 
-"context-management-2025-06-27"
+    - `"user-profiles-2026-03-24"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"user-profiles-2026-08-18"`
 
-"skills-2025-10-02"
+    - `"advisor-tool-2026-03-01"`
 
-"fast-mode-2026-02-01"
+    - `"managed-agents-2026-04-01"`
 
-"output-300k-2026-03-24"
+    - `"cache-diagnosis-2026-04-07"`
 
-"user-profiles-2026-03-24"
+    - `"dreaming-2026-04-21"`
 
-"user-profiles-2026-08-18"
+    - `"thinking-token-count-2026-05-13"`
 
-"advisor-tool-2026-03-01"
+    - `"server-side-fallback-2026-06-01"`
 
-"managed-agents-2026-04-01"
+    - `"server-side-fallback-2026-07-01"`
 
-"cache-diagnosis-2026-04-07"
+    - `"fallback-credit-2026-06-01"`
 
-"dreaming-2026-04-21"
+    - `"fallback-credit-2026-07-01"`
 
-"thinking-token-count-2026-05-13"
+    - `"agent-memory-2026-07-22"`
 
-"server-side-fallback-2026-06-01"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-"server-side-fallback-2026-07-01"
+    - `"compact-2026-01-12"`
 
-"fallback-credit-2026-06-01"
+    - `"computer-use-2025-11-24"`
 
-"fallback-credit-2026-07-01"
+    - `"mcp-tunnels-2026-06-22"`
 
-"agent-memory-2026-07-22"
+    - `"structured-outputs-2025-11-13"`
 
-"mid-conversation-tool-changes-2026-07-01"
+    - `"task-budgets-2026-03-13"`
 
-"compact-2026-01-12"
+    - `"thinking-display-updates-2026-08-18"`
 
-"computer-use-2025-11-24"
+    - `"ce-user-management-2026-07-13"`
 
-"mcp-tunnels-2026-06-22"
+    - `"mid-conversation-output-config-2026-07-01"`
 
-"structured-outputs-2025-11-13"
+    - `"thinking-binding-controls-2026-08-01"`
 
-"task-budgets-2026-03-13"
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"thinking-display-updates-2026-08-18"
+## Returns
 
-"ce-user-management-2026-07-13"
+- `data: array of BetaManagedAgentsSessionResource`
 
-"mid-conversation-output-config-2026-07-01"
+  Resources for the session, ordered by `created_at`.
 
-"thinking-binding-controls-2026-08-01"
+  - `BetaManagedAgentsGitHubRepositoryResource object`
 
-"mid-conversation-system-clear-at-2026-08-21"
+    - `id: string`
 
-##### Returns
+    - `created_at: string`
 
-
+      A timestamp in RFC 3339 format
 
-data: array of [BetaManagedAgentsSessionResource](api/http/beta/sessions/resources.md)
+      format: date-time
 
-Resources for the session, ordered by `created_at`.
+    - `mount_path: string`
 
-One of the following:
+    - `type: "github_repository"`
 
-
+    - `updated_at: string`
 
-BetaManagedAgentsGitHubRepositoryResource object{ id, created\_at, mount\_path, 4 more }
+      A timestamp in RFC 3339 format
 
-
+      format: date-time
 
-BetaManagedAgentsFileResource object{ id, created\_at, file\_id, 3 more }
+    - `url: string`
 
-id: string
+    - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout or null`
 
-
+      - `BetaManagedAgentsBranchCheckout object`
 
-created\_at: string
+        - `name: string`
 
-A timestamp in RFC 3339 format
+          Branch name to check out.
 
-formatdate-time
+          minLength: 1, maxLength: 255
 
-file\_id: string
+        - `type: "branch"`
 
-mount\_path: string
+      - `BetaManagedAgentsCommitCheckout object`
 
-type: "file"
+        - `sha: string`
 
-
+          Full commit SHA to check out.
 
-updated\_at: string
+          minLength: 7, maxLength: 64
 
-A timestamp in RFC 3339 format
+        - `type: "commit"`
 
-formatdate-time
+  - `BetaManagedAgentsFileResource object`
 
-
+    - `id: string`
 
-BetaManagedAgentsMemoryStoreResource object{ memory\_store\_id, type, access, 4 more }
+    - `created_at: string`
 
-A memory store attached to an agent session.
+      A timestamp in RFC 3339 format
 
-next\_page: optional string or null
+      format: date-time
 
-Opaque cursor for the next page. Null when no more results.
+    - `file_id: string`
 
-List Session Resources
+    - `mount_path: string`
 
-cURL
+    - `type: "file"`
 
-```shiki
+    - `updated_at: string`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+  - `BetaManagedAgentsMemoryStoreResource object`
+
+    A memory store attached to an agent session.
+
+    - `memory_store_id: string`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `type: "memory_store"`
+
+    - `access: optional "read_write" or "read_only" or null`
+
+      Access mode for an attached memory store.
+
+      - `"read_write"`
+
+      - `"read_only"`
+
+    - `description: optional string`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `instructions: optional string or null`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
+
+    - `mount_path: optional string or null`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `name: optional string or null`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
+- `next_page: optional string or null`
+
+  Opaque cursor for the next page. Null when no more results.
+
+## Example
+
+```bash
 curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
-      "created_at": "2026-03-15T10:00:00Z",
-      "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-      "mount_path": "/uploads/receipt.pdf",
-      "type": "file",
-      "updated_at": "2026-03-15T10:00:00Z"
-    },
-    {
-      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
-      "created_at": "2026-03-15T10:00:00Z",
-      "mount_path": "/workspace/example-repo",
-      "type": "github_repository",
-      "updated_at": "2026-03-15T10:00:00Z",
-      "url": "https://github.com/example-org/example-repo",
-      "checkout": {
-        "name": "main",
-        "type": "branch"
-      }
-    }
-  ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

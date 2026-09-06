@@ -1,57 +1,41 @@
 # Download Skill Version Content
 
-Copy page
+`$ ant beta:skills:versions download`
 
-
-
-CLI
-
-# Download Skill Version Content
-
-$ ant beta:skills:versions download
-
-GET/v1/skills/{skill\_id}/versions/{version}/content
+**GET** `/v1/skills/{skill_id}/versions/{version}/content`
 
 Download a skill version's content as a zip archive.
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `--skill-id: string`
 
---skill-id: string
+  Path param: Unique identifier for the skill.
 
-Path param: Unique identifier for the skill.
+  The format and length of IDs may change over time.
 
-The format and length of IDs may change over time.
+- `--version: string`
 
-
+  Path param: Identifies the skill version by its version ID.
 
---version: string
+  Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
-Path param: Version identifier for the skill.
+- `--beta: optional array of AnthropicBeta`
 
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+  Header param: Optional header to specify the beta version(s) you want to use.
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+## Returns
 
-Header param: Optional header to specify the beta version(s) you want to use.
+- `unnamed_schema_2: file path`
 
-##### ReturnsExpand Collapse
+## Example
 
-unnamed\_schema\_1: file path
-
-Download Skill Version Content
-
-CLI
-
-```shiki
+```bash
 ant beta:skills:versions download \
   --api-key my-anthropic-api-key \
   --skill-id skill_id \
   --version version
 ```
-
-##### Returns Examples
 
 ---
 

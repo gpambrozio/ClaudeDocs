@@ -1,1052 +1,998 @@
 # Create Deployment
 
-Copy page
+`BetaManagedAgentsDeployment beta().deployments().create(params, requestOptions = RequestOptions.none())`
 
-
-
-Java
-
-# Create Deployment
-
-[BetaManagedAgentsDeployment](api/beta/deployments.md) beta().deployments().create(DeploymentCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
-
-POST/v1/deployments
+**POST** `/v1/deployments`
 
 Create Deployment
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `DeploymentCreateParams params`
 
-DeploymentCreateParams params
+  - `Optional<List<AnthropicBeta>> betas`
 
-
+    Optional header to specify the beta version(s) you want to use.
 
-Optional<List<AnthropicBeta>> betas
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
-Optional header to specify the beta version(s) you want to use.
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
 
-MESSAGE\_BATCHES\_2024\_09\_24("message-batches-2024-09-24")
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
-PROMPT\_CACHING\_2024\_07\_31("prompt-caching-2024-07-31")
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-COMPUTER\_USE\_2024\_10\_22("computer-use-2024-10-22")
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
 
-COMPUTER\_USE\_2025\_01\_24("computer-use-2025-01-24")
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
 
-PDFS\_2024\_09\_25("pdfs-2024-09-25")
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
 
-TOKEN\_COUNTING\_2024\_11\_01("token-counting-2024-11-01")
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
 
-TOKEN\_EFFICIENT\_TOOLS\_2025\_02\_19("token-efficient-tools-2025-02-19")
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
-OUTPUT\_128K\_2025\_02\_19("output-128k-2025-02-19")
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
-FILES\_API\_2025\_04\_14("files-api-2025-04-14")
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
 
-MCP\_CLIENT\_2025\_04\_04("mcp-client-2025-04-04")
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
 
-MCP\_CLIENT\_2025\_11\_20("mcp-client-2025-11-20")
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
 
-DEV\_FULL\_THINKING\_2025\_05\_14("dev-full-thinking-2025-05-14")
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-INTERLEAVED\_THINKING\_2025\_05\_14("interleaved-thinking-2025-05-14")
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
 
-CODE\_EXECUTION\_2025\_05\_22("code-execution-2025-05-22")
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
-EXTENDED\_CACHE\_TTL\_2025\_04\_11("extended-cache-ttl-2025-04-11")
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
-CONTEXT\_1M\_2025\_08\_07("context-1m-2025-08-07")
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-CONTEXT\_MANAGEMENT\_2025\_06\_27("context-management-2025-06-27")
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
-MODEL\_CONTEXT\_WINDOW\_EXCEEDED\_2025\_08\_26("model-context-window-exceeded-2025-08-26")
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
-SKILLS\_2025\_10\_02("skills-2025-10-02")
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
-OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
-USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
-MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
-CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
-THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
-FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
 
-AGENT\_MEMORY\_2026\_07\_22("agent-memory-2026-07-22")
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
-
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
-Agent agent
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
-Agent to deploy. Accepts the `agent` ID string, which pins the latest version, or an `agent` object with both id and version specified. The agent must exist and not be archived.
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-String
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
 
-
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
 
-class BetaManagedAgentsAgentParams:
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
 
-Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
 
-String id
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
 
-The `agent` ID.
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-Type type
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
 
-Optional<Long> version
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
 
-String environmentId
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-ID of the `environment` defining the container configuration for sessions created from this deployment.
+  - `Agent agent`
 
-
+    Agent to deploy. Accepts the `agent` ID string, which pins the latest version, or an `agent` object with both id and version specified. The agent must exist and not be archived.
 
-List<[BetaManagedAgentsDeploymentInitialEventParams](api/beta/deployments.md)> initialEvents
+    - `String`
 
-Events to send to each session immediately after creation. At least 1, maximum 50.
+    - `class BetaManagedAgentsAgentParams:`
 
-
+      Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
-class BetaManagedAgentsUserMessageEventParams:
+      - `String id`
 
-Parameters for sending a user message to the session.
+        The `agent` ID.
 
-
+        minLength: 1, maxLength: 128
 
-List<Content> content
+      - `Type type`
 
-Array of content blocks for the user message.
+      - `Optional<Long> version`
 
-One of the following:
+        The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
-
+        format: int32
 
-class BetaManagedAgentsTextBlock:
+  - `String environmentId`
 
-Regular text content.
+    ID of the `environment` defining the container configuration for sessions created from this deployment.
 
-String text
+    minLength: 1, maxLength: 128
 
-The text content.
+  - `List<BetaManagedAgentsDeploymentInitialEventParams> initialEvents`
 
-Type type
+    Events to send to each session immediately after creation. At least 1, maximum 50.
 
-
+    - `class BetaManagedAgentsUserMessageEventParams:`
 
-class BetaManagedAgentsImageBlock:
+      Parameters for sending a user message to the session.
 
-Image content specified directly as base64 data or as a reference via a URL.
+      - `List<Content> content`
 
-
+        Array of content blocks for the user message.
 
-Source source
+        - `class BetaManagedAgentsTextBlock:`
 
-Union type for image source variants.
+          Regular text content.
 
-One of the following:
+          - `String text`
 
-
+            The text content.
 
-class BetaManagedAgentsBase64ImageSource:
+            minLength: 1
 
-Base64-encoded image data.
+          - `Type type`
 
-String data
+        - `class BetaManagedAgentsImageBlock:`
 
-Base64-encoded image data.
+          Image content specified directly as base64 data or as a reference via a URL.
 
-String mediaType
+          - `Source source`
 
-MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+            Union type for image source variants.
 
-Type type
+            - `class BetaManagedAgentsBase64ImageSource:`
 
-
+              Base64-encoded image data.
 
-class BetaManagedAgentsUrlImageSource:
+              - `String data`
 
-Image referenced by URL.
+                Base64-encoded image data.
 
-Type type
+                minLength: 1
 
-String url
+              - `String mediaType`
 
-URL of the image to fetch.
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-
+                minLength: 1
 
-class BetaManagedAgentsFileImageSource:
+              - `Type type`
 
-Image referenced by file ID.
+            - `class BetaManagedAgentsUrlImageSource:`
 
-String fileId
+              Image referenced by URL.
 
-ID of a previously uploaded file.
+              - `Type type`
 
-Type type
+              - `String url`
 
-Type type
+                URL of the image to fetch.
 
-
+                minLength: 1
 
-class BetaManagedAgentsDocumentBlock:
+            - `class BetaManagedAgentsFileImageSource:`
 
-Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+              Image referenced by file ID.
 
-
+              - `String fileId`
 
-Source source
+                ID of a previously uploaded file.
 
-Union type for document source variants.
+                minLength: 1
 
-One of the following:
+              - `Type type`
 
-
+          - `Type type`
 
-class BetaManagedAgentsBase64DocumentSource:
+        - `class BetaManagedAgentsDocumentBlock:`
 
-Base64-encoded document data.
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-String data
+          - `Source source`
 
-Base64-encoded document data.
+            Union type for document source variants.
 
-String mediaType
+            - `class BetaManagedAgentsBase64DocumentSource:`
 
-MIME type of the document (e.g., "application/pdf").
+              Base64-encoded document data.
 
-Type type
+              - `String data`
 
-
+                Base64-encoded document data.
 
-class BetaManagedAgentsPlainTextDocumentSource:
+                minLength: 1
 
-Plain text document content.
+              - `String mediaType`
 
-String data
+                MIME type of the document (e.g., "application/pdf").
 
-The plain text content.
+                minLength: 1
 
-MediaType mediaType
+              - `Type type`
 
-MIME type of the text content. Must be "text/plain".
+            - `class BetaManagedAgentsPlainTextDocumentSource:`
 
-Type type
+              Plain text document content.
 
-
+              - `String data`
 
-class BetaManagedAgentsUrlDocumentSource:
+                The plain text content.
 
-Document referenced by URL.
+                minLength: 1
 
-Type type
+              - `MediaType mediaType`
 
-String url
+                MIME type of the text content. Must be "text/plain".
 
-URL of the document to fetch.
+              - `Type type`
 
-
+            - `class BetaManagedAgentsUrlDocumentSource:`
 
-class BetaManagedAgentsFileDocumentSource:
+              Document referenced by URL.
 
-Document referenced by file ID.
+              - `Type type`
 
-String fileId
+              - `String url`
 
-ID of a previously uploaded file.
+                URL of the document to fetch.
 
-Type type
+                minLength: 1
 
-Type type
+            - `class BetaManagedAgentsFileDocumentSource:`
 
-Optional<String> context
+              Document referenced by file ID.
 
-Additional context about the document for the model.
+              - `String fileId`
 
-Optional<String> title
+                ID of a previously uploaded file.
 
-The title of the document.
+                minLength: 1
 
-Type type
+              - `Type type`
 
-
+          - `Type type`
 
-class BetaManagedAgentsUserDefineOutcomeEventParams:
+          - `Optional<String> context`
 
-Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+            Additional context about the document for the model.
 
-String description
+          - `Optional<String> title`
 
-What the agent should produce. This is the task specification.
+            The title of the document.
 
-
+        - `class BetaManagedAgentsRedactedBlock:`
 
-Rubric rubric
+          Placeholder for content withheld by Anthropic model policy.
 
-Rubric for grading the quality of an outcome.
+          - `Type type`
 
-One of the following:
+      - `Type type`
 
-
+    - `class BetaManagedAgentsUserDefineOutcomeEventParams:`
 
-class BetaManagedAgentsFileRubricParams:
+      Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
-Rubric referenced by a file uploaded via the Files API.
+      - `String description`
 
-String fileId
+        What the agent should produce. This is the task specification.
 
-ID of the rubric file.
+      - `Rubric rubric`
 
-Type type
+        Rubric for grading the quality of an outcome.
 
-
+        - `class BetaManagedAgentsFileRubricParams:`
 
-class BetaManagedAgentsTextRubricParams:
+          Rubric referenced by a file uploaded via the Files API.
 
-Rubric content provided inline as text.
+          - `String fileId`
 
-String content
+            ID of the rubric file.
 
-Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+          - `Type type`
 
-Type type
+        - `class BetaManagedAgentsTextRubricParams:`
 
-Type type
+          Rubric content provided inline as text.
 
-Optional<Long> maxIterations
+          - `String content`
 
-Eval→revision cycles before giving up. Default 3, max 20.
+            Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
-
+            maxLength: 262144
 
-class BetaManagedAgentsSystemMessageEventParams:
+          - `Type type`
 
-Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+      - `Type type`
 
-
+      - `Optional<Long> maxIterations`
 
-List<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> content
+        Eval→revision cycles before giving up. Default 3, max 20.
 
-System content blocks to append. Text-only.
+        format: int32
 
-String text
+    - `class BetaManagedAgentsSystemMessageEventParams:`
 
-The text content.
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
-Type type
+      - `List<BetaManagedAgentsSystemContentBlock> content`
 
-Type type
+        System content blocks to append. Text-only.
 
-String name
+        - `String text`
 
-Human-readable name for the deployment.
+          The text content.
 
-Optional<String> description
+          minLength: 1
 
-Description of what the deployment does.
+        - `Type type`
 
-Optional<Metadata> metadata
+      - `Type type`
 
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+  - `String name`
 
-
+    Human-readable name for the deployment.
 
-Optional<List<Resource>> resources
+    minLength: 1, maxLength: 256
 
-Resources (e.g. repositories, files) to mount into each session's container. Maximum 500.
+  - `Optional<BetaManagedAgentsBudgetLimit> budget`
 
-
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-class BetaManagedAgentsGitHubRepositoryResourceParams:
+  - `Optional<String> description`
 
-Mount a GitHub repository into the session's container.
+    Description of what the deployment does.
 
-String authorizationToken
+    maxLength: 2048
 
-GitHub authorization token used to clone the repository.
+  - `Optional<Metadata> metadata`
 
-Type type
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-String url
+  - `Optional<List<Resource>> resources`
 
-Github URL of the repository
+    Resources (e.g. repositories, files) to mount into each session's container. Maximum 500.
 
-
+    - `class BetaManagedAgentsGitHubRepositoryResourceParams:`
 
-Optional<Checkout> checkout
+      Mount a GitHub repository into the session's container.
 
-Branch or commit to check out. Defaults to the repository's default branch.
+      - `String authorizationToken`
 
-One of the following:
+        GitHub authorization token used to clone the repository.
 
-
+        minLength: 1, maxLength: 4096
 
-class BetaManagedAgentsBranchCheckout:
+      - `Type type`
 
-String name
+      - `String url`
 
-Branch name to check out.
+        Github URL of the repository
 
-Type type
+        minLength: 1, maxLength: 2048
 
-
+      - `Optional<Checkout> checkout`
 
-class BetaManagedAgentsCommitCheckout:
+        Branch or commit to check out. Defaults to the repository's default branch.
 
-String sha
+        - `class BetaManagedAgentsBranchCheckout:`
 
-Full commit SHA to check out.
+          - `String name`
 
-Type type
+            Branch name to check out.
 
-Optional<String> mountPath
+            minLength: 1, maxLength: 255
 
-Mount path in the container. Defaults to `/workspace/<repo-name>`.
+          - `Type type`
 
-
+        - `class BetaManagedAgentsCommitCheckout:`
 
-class BetaManagedAgentsFileResourceParams:
+          - `String sha`
 
-Mount a file uploaded via the Files API into the session.
+            Full commit SHA to check out.
 
-String fileId
+            minLength: 7, maxLength: 64
 
-ID of a previously uploaded file.
+          - `Type type`
 
-Type type
+      - `Optional<String> mountPath`
 
-Optional<String> mountPath
+        Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+        minLength: 1, maxLength: 4096
 
-
+    - `class BetaManagedAgentsFileResourceParams:`
 
-class BetaManagedAgentsMemoryStoreResourceParam:
+      Mount a file uploaded via the Files API into the session.
 
-Parameters for attaching a memory store to an agent session.
+      - `String fileId`
 
-String memoryStoreId
+        ID of a previously uploaded file.
 
-The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+        minLength: 1, maxLength: 128
 
-Type type
+      - `Type type`
 
-
+      - `Optional<String> mountPath`
 
-Optional<Access> access
+        Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-Access mode for an attached memory store.
+        minLength: 1, maxLength: 4096
 
-One of the following:
+    - `class BetaManagedAgentsMemoryStoreResourceParam:`
 
-READ\_WRITE("read\_write")
+      Parameters for attaching a memory store to an agent session.
 
-READ\_ONLY("read\_only")
+      - `String memoryStoreId`
 
-Optional<String> instructions
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+      - `Type type`
 
-Optional<[BetaManagedAgentsScheduleParams](api/beta/deployments.md)> schedule
+      - `Optional<Access> access`
 
-5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
+        Access mode for an attached memory store.
 
-Optional<List<String>> vaultIds
+        - `READ_WRITE("read_write")`
 
-Vault IDs for stored credentials the agent can use during sessions created from this deployment. Maximum 50.
+        - `READ_ONLY("read_only")`
 
-##### ReturnsExpand Collapse
+      - `Optional<String> instructions`
 
-
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-class BetaManagedAgentsDeployment:
+        maxLength: 4096
 
-A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+  - `Optional<BetaManagedAgentsScheduleParams> schedule`
 
-String id
+    5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
 
-Unique identifier for this deployment.
+  - `Optional<List<String>> vaultIds`
 
-
+    Vault IDs for stored credentials the agent can use during sessions created from this deployment. Maximum 50.
 
-[BetaManagedAgentsAgentReference](api/beta/agents.md) agent
+## Returns
 
-A resolved agent reference with a concrete version.
+- `class BetaManagedAgentsDeployment:`
 
-String id
+  A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
-Type type
+  - `String id`
 
-long version
+    Unique identifier for this deployment.
 
-Optional<LocalDateTime> archivedAt
+  - `BetaManagedAgentsAgentReference agent`
 
-A timestamp in RFC 3339 format
+    A resolved agent reference with a concrete version.
 
-LocalDateTime createdAt
+    - `String id`
 
-A timestamp in RFC 3339 format
+    - `Type type`
 
-Optional<String> description
+    - `long version`
 
-Description of what the deployment does.
+      format: int32
 
-String environmentId
+  - `Optional<LocalDateTime> archivedAt`
 
-ID of the `environment` where sessions run.
+    A timestamp in RFC 3339 format
 
-
+    format: date-time
 
-List<[BetaManagedAgentsDeploymentInitialEvent](api/beta/deployments.md)> initialEvents
+  - `LocalDateTime createdAt`
 
-Events sent to each session immediately after creation.
+    A timestamp in RFC 3339 format
 
-One of the following:
+    format: date-time
 
-
+  - `Optional<String> description`
 
-class BetaManagedAgentsDeploymentUserMessageEvent:
+    Description of what the deployment does.
 
-A user message sent to the session.
+  - `String environmentId`
 
-
+    ID of the `environment` where sessions run.
 
-List<Content> content
+  - `List<BetaManagedAgentsDeploymentInitialEvent> initialEvents`
 
-Array of content blocks for the user message.
+    Events sent to each session immediately after creation.
 
-One of the following:
+    - `class BetaManagedAgentsDeploymentUserMessageEvent:`
 
-
+      A user message sent to the session.
 
-class BetaManagedAgentsTextBlock:
+      - `List<Content> content`
 
-Regular text content.
+        Array of content blocks for the user message.
 
-String text
+        - `class BetaManagedAgentsTextBlock:`
 
-The text content.
+          Regular text content.
 
-Type type
+          - `String text`
 
-
+            The text content.
 
-class BetaManagedAgentsImageBlock:
+            minLength: 1
 
-Image content specified directly as base64 data or as a reference via a URL.
+          - `Type type`
 
-
+        - `class BetaManagedAgentsImageBlock:`
 
-Source source
+          Image content specified directly as base64 data or as a reference via a URL.
 
-Union type for image source variants.
+          - `Source source`
 
-One of the following:
+            Union type for image source variants.
 
-
+            - `class BetaManagedAgentsBase64ImageSource:`
 
-class BetaManagedAgentsBase64ImageSource:
+              Base64-encoded image data.
 
-Base64-encoded image data.
+              - `String data`
 
-String data
+                Base64-encoded image data.
 
-Base64-encoded image data.
+                minLength: 1
 
-String mediaType
+              - `String mediaType`
 
-MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-Type type
+                minLength: 1
 
-
+              - `Type type`
 
-class BetaManagedAgentsUrlImageSource:
+            - `class BetaManagedAgentsUrlImageSource:`
 
-Image referenced by URL.
+              Image referenced by URL.
 
-Type type
+              - `Type type`
 
-String url
+              - `String url`
 
-URL of the image to fetch.
+                URL of the image to fetch.
 
-
+                minLength: 1
 
-class BetaManagedAgentsFileImageSource:
+            - `class BetaManagedAgentsFileImageSource:`
 
-Image referenced by file ID.
+              Image referenced by file ID.
 
-String fileId
+              - `String fileId`
 
-ID of a previously uploaded file.
+                ID of a previously uploaded file.
 
-Type type
+                minLength: 1
 
-Type type
+              - `Type type`
 
-
+          - `Type type`
 
-class BetaManagedAgentsDocumentBlock:
+        - `class BetaManagedAgentsDocumentBlock:`
 
-Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-
+          - `Source source`
 
-Source source
+            Union type for document source variants.
 
-Union type for document source variants.
+            - `class BetaManagedAgentsBase64DocumentSource:`
 
-One of the following:
+              Base64-encoded document data.
 
-
+              - `String data`
 
-class BetaManagedAgentsBase64DocumentSource:
+                Base64-encoded document data.
 
-Base64-encoded document data.
+                minLength: 1
 
-String data
+              - `String mediaType`
 
-Base64-encoded document data.
+                MIME type of the document (e.g., "application/pdf").
 
-String mediaType
+                minLength: 1
 
-MIME type of the document (e.g., "application/pdf").
+              - `Type type`
 
-Type type
+            - `class BetaManagedAgentsPlainTextDocumentSource:`
 
-
+              Plain text document content.
 
-class BetaManagedAgentsPlainTextDocumentSource:
+              - `String data`
 
-Plain text document content.
+                The plain text content.
 
-String data
+                minLength: 1
 
-The plain text content.
+              - `MediaType mediaType`
 
-MediaType mediaType
+                MIME type of the text content. Must be "text/plain".
 
-MIME type of the text content. Must be "text/plain".
+              - `Type type`
 
-Type type
+            - `class BetaManagedAgentsUrlDocumentSource:`
 
-
+              Document referenced by URL.
 
-class BetaManagedAgentsUrlDocumentSource:
+              - `Type type`
 
-Document referenced by URL.
+              - `String url`
 
-Type type
+                URL of the document to fetch.
 
-String url
+                minLength: 1
 
-URL of the document to fetch.
+            - `class BetaManagedAgentsFileDocumentSource:`
 
-
+              Document referenced by file ID.
 
-class BetaManagedAgentsFileDocumentSource:
+              - `String fileId`
 
-Document referenced by file ID.
+                ID of a previously uploaded file.
 
-String fileId
+                minLength: 1
 
-ID of a previously uploaded file.
+              - `Type type`
 
-Type type
+          - `Type type`
 
-Type type
+          - `Optional<String> context`
 
-Optional<String> context
+            Additional context about the document for the model.
 
-Additional context about the document for the model.
+          - `Optional<String> title`
 
-Optional<String> title
+            The title of the document.
 
-The title of the document.
+        - `class BetaManagedAgentsRedactedBlock:`
 
-Type type
+          Placeholder for content withheld by Anthropic model policy.
 
-
+          - `Type type`
 
-class BetaManagedAgentsDeploymentUserDefineOutcomeEvent:
+      - `Type type`
 
-An outcome the agent should work toward. The agent begins work on receipt.
+    - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent:`
 
-String description
+      An outcome the agent should work toward. The agent begins work on receipt.
 
-What the agent should produce. This is the task specification.
+      - `String description`
 
-
+        What the agent should produce. This is the task specification.
 
-Rubric rubric
+      - `Rubric rubric`
 
-Rubric for grading the quality of an outcome.
+        Rubric for grading the quality of an outcome.
 
-One of the following:
+        - `class BetaManagedAgentsFileRubric:`
 
-
+          Rubric referenced by a file uploaded via the Files API.
 
-class BetaManagedAgentsFileRubric:
+          - `String fileId`
 
-Rubric referenced by a file uploaded via the Files API.
+            ID of the rubric file.
 
-String fileId
+          - `Type type`
 
-ID of the rubric file.
+        - `class BetaManagedAgentsTextRubric:`
 
-Type type
+          Rubric content provided inline as text.
 
-
+          - `String content`
 
-class BetaManagedAgentsTextRubric:
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-Rubric content provided inline as text.
+          - `Type type`
 
-String content
+      - `Type type`
 
-Rubric content. Plain text or markdown — the grader treats it as freeform text.
+      - `Optional<Long> maxIterations`
 
-Type type
+        Eval→revision cycles before giving up. Default 3, max 20.
 
-Type type
+        format: int32
 
-Optional<Long> maxIterations
+    - `class BetaManagedAgentsDeploymentSystemMessageEvent:`
 
-Eval→revision cycles before giving up. Default 3, max 20.
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-
+      - `List<BetaManagedAgentsSystemContentBlock> content`
 
-class BetaManagedAgentsDeploymentSystemMessageEvent:
+        System content blocks to append. Text-only.
 
-Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+        - `String text`
 
-
+          The text content.
 
-List<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> content
+          minLength: 1
 
-System content blocks to append. Text-only.
+        - `Type type`
 
-String text
+      - `Type type`
 
-The text content.
+  - `Metadata metadata`
 
-Type type
+    Arbitrary key-value metadata. Maximum 16 pairs.
 
-Type type
+  - `String name`
 
-Metadata metadata
+    Human-readable name.
 
-Arbitrary key-value metadata. Maximum 16 pairs.
+  - `Optional<BetaManagedAgentsDeploymentPausedReason> pausedReason`
 
-String name
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-Human-readable name.
+    - `class BetaManagedAgentsManualDeploymentPausedReason:`
 
-
+      The caller invoked the pause endpoint on the deployment.
 
-Optional<[BetaManagedAgentsDeploymentPausedReason](api/beta/deployments.md)> pausedReason
+      - `Type type`
 
-Why a deployment is paused. Non-null exactly when `status` is `paused`.
+    - `class BetaManagedAgentsErrorDeploymentPausedReason:`
 
-One of the following:
+      A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-
+      - `BetaManagedAgentsDeploymentPausedReasonError error`
 
-class BetaManagedAgentsManualDeploymentPausedReason:
+        The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-The caller invoked the pause endpoint on the deployment.
+        - `class BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError:`
 
-Type type
+          The deployment's environment was archived.
 
-
+          - `Type type`
 
-class BetaManagedAgentsErrorDeploymentPausedReason:
+        - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError:`
 
-A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+          The deployment's agent was archived.
 
-
+          - `Type type`
 
-[BetaManagedAgentsDeploymentPausedReasonError](api/beta/deployments.md) error
+        - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError:`
 
-The error that triggered an auto-pause. Matches the failed run's `error.type`.
+          The deployment's environment no longer exists.
 
-One of the following:
+          - `Type type`
 
-
+        - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError:`
 
-class BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError:
+          A vault referenced by the deployment no longer exists.
 
-The deployment's environment was archived.
+          - `Type type`
 
-Type type
+        - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError:`
 
-
+          A file resource referenced by the deployment no longer exists.
 
-class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError:
+          - `Type type`
 
-The deployment's agent was archived.
+        - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError:`
 
-Type type
+          A referenced resource no longer exists and its kind was not reported.
 
-
+          - `Type type`
 
-class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError:
+        - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError:`
 
-The deployment's environment no longer exists.
+          The deployment's workspace was archived.
 
-Type type
+          - `Type type`
 
-
+        - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError:`
 
-class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError:
+          The deployment's organization is disabled.
 
-A vault referenced by the deployment no longer exists.
+          - `Type type`
 
-Type type
+        - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError:`
 
-
+          A memory store referenced by the deployment is archived.
 
-class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError:
+          - `Type type`
 
-A file resource referenced by the deployment no longer exists.
+        - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError:`
 
-Type type
+          A skill referenced by the deployment's agent no longer exists.
 
-
+          - `Type type`
 
-class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError:
+        - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError:`
 
-A referenced resource no longer exists and its kind was not reported.
+          A vault referenced by the deployment is archived.
 
-Type type
+          - `Type type`
 
-
+        - `class BetaManagedAgentsUnknownDeploymentPausedReasonError:`
 
-class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError:
+          An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-The deployment's workspace was archived.
+          - `Type type`
 
-Type type
+        - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError:`
 
-
+          The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError:
+          - `Type type`
 
-The deployment's organization is disabled.
+        - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError:`
 
-Type type
+          An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-
+          - `Type type`
 
-class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError:
+      - `Type type`
 
-A memory store referenced by the deployment is archived.
+  - `List<BetaManagedAgentsSessionResourceConfig> resources`
 
-Type type
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-
+    - `class BetaManagedAgentsGitHubRepositoryResourceConfig:`
 
-class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError:
+      A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-A skill referenced by the deployment's agent no longer exists.
+      - `Type type`
 
-Type type
+      - `String url`
 
-
+        Github URL of the repository
 
-class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError:
+      - `Optional<Checkout> checkout`
 
-A vault referenced by the deployment is archived.
+        Branch or commit to check out. Defaults to the repository's default branch.
 
-Type type
+        - `class BetaManagedAgentsBranchCheckout:`
 
-
+          - `String name`
 
-class BetaManagedAgentsUnknownDeploymentPausedReasonError:
+            Branch name to check out.
 
-An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+            minLength: 1, maxLength: 255
 
-Type type
+          - `Type type`
 
-
+        - `class BetaManagedAgentsCommitCheckout:`
 
-class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError:
+          - `String sha`
 
-The deployment configures resources, but its environment is self-hosted and cannot mount them.
+            Full commit SHA to check out.
 
-Type type
+            minLength: 7, maxLength: 64
 
-
+          - `Type type`
 
-class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError:
+      - `Optional<String> mountPath`
 
-An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+        Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-Type type
+    - `class BetaManagedAgentsFileResourceConfig:`
 
-Type type
+      A file mounted into each session's container.
 
-
+      - `String fileId`
 
-List<[BetaManagedAgentsSessionResourceConfig](api/beta/deployments.md)> resources
+        ID of a previously uploaded file.
 
-Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+      - `Type type`
 
-One of the following:
+      - `Optional<String> mountPath`
 
-
+        Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-class BetaManagedAgentsGitHubRepositoryResourceConfig:
+    - `class BetaManagedAgentsMemoryStoreResourceConfig:`
 
-A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+      A memory store attached to each session created from this deployment.
 
-Type type
+      - `String memoryStoreId`
 
-String url
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-Github URL of the repository
+      - `Type type`
 
-
+      - `Optional<Access> access`
 
-Optional<Checkout> checkout
+        Access mode for an attached memory store.
 
-Branch or commit to check out. Defaults to the repository's default branch.
+        - `READ_WRITE("read_write")`
 
-One of the following:
+        - `READ_ONLY("read_only")`
 
-
+      - `Optional<String> instructions`
 
-class BetaManagedAgentsBranchCheckout:
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-String name
+  - `Optional<BetaManagedAgentsSchedule> schedule`
 
-Branch name to check out.
+    5-field POSIX cron schedule with computed runtime timestamps.
 
-Type type
+    - `String expression`
 
-
+      5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
-class BetaManagedAgentsCommitCheckout:
+      minLength: 1, maxLength: 256
 
-String sha
+    - `String timezone`
 
-Full commit SHA to check out.
+      IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
-Type type
+      minLength: 1
 
-Optional<String> mountPath
+    - `Type type`
 
-Mount path in the container. Defaults to `/workspace/<repo-name>`.
+    - `Optional<LocalDateTime> lastRunAt`
 
-
+      A timestamp in RFC 3339 format
 
-class BetaManagedAgentsFileResourceConfig:
+      format: date-time
 
-A file mounted into each session's container.
+    - `Optional<List<LocalDateTime>> upcomingRunsAt`
 
-String fileId
+      Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
-ID of a previously uploaded file.
+  - `BetaManagedAgentsDeploymentStatus status`
 
-Type type
+    Lifecycle status of a deployment.
 
-Optional<String> mountPath
+    - `ACTIVE("active")`
 
-Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+    - `PAUSED("paused")`
 
-
+  - `Type type`
 
-class BetaManagedAgentsMemoryStoreResourceConfig:
+  - `LocalDateTime updatedAt`
 
-A memory store attached to each session created from this deployment.
+    A timestamp in RFC 3339 format
 
-String memoryStoreId
+    format: date-time
 
-The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+  - `List<String> vaultIds`
 
-Type type
+    Vault IDs supplying stored credentials for sessions created from this deployment.
 
-
+  - `Optional<BetaManagedAgentsBudgetLimit> budget`
 
-Optional<Access> access
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-Access mode for an attached memory store.
+    - `BetaMonetaryAmount maxListCost`
 
-One of the following:
+      A monetary amount in a specific currency.
 
-READ\_WRITE("read\_write")
+      - `String amount`
 
-READ\_ONLY("read\_only")
+        Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
 
-Optional<String> instructions
+      - `BetaCurrency currency`
 
-Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+        Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-
+    - `Type type`
 
-Optional<[BetaManagedAgentsSchedule](api/beta/deployments.md)> schedule
+## Example
 
-5-field POSIX cron schedule with computed runtime timestamps.
-
-String expression
-
-5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
-
-String timezone
-
-IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC").
-
-Type type
-
-Optional<LocalDateTime> lastRunAt
-
-A timestamp in RFC 3339 format
-
-Optional<List<LocalDateTime>> upcomingRunsAt
-
-Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
-
-
-
-[BetaManagedAgentsDeploymentStatus](api/beta/deployments.md) status
-
-Lifecycle status of a deployment.
-
-One of the following:
-
-ACTIVE("active")
-
-PAUSED("paused")
-
-Type type
-
-LocalDateTime updatedAt
-
-A timestamp in RFC 3339 format
-
-List<String> vaultIds
-
-Vault IDs supplying stored credentials for sessions created from this deployment.
-
-Create Deployment
-
-Java
-
-```shiki
+```java
 package com.anthropic.example;
 
 import com.anthropic.client.AnthropicClient;
@@ -1077,11 +1023,9 @@ public final class Main {
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "depl_011CZkZcDH3vPqd7xnEfwTai",
   "agent": {
@@ -1135,71 +1079,14 @@ Response 200
   "updated_at": "2026-03-15T10:00:00Z",
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "depl_011CZkZcDH3vPqd7xnEfwTai",
-  "agent": {
-    "id": "agent_011CZkYpogX7uDKUyvBTophP",
-    "type": "agent",
-    "version": 1
-  },
-  "archived_at": null,
-  "created_at": "2026-03-15T10:00:00Z",
-  "description": "Compiles yesterday's orders into a report every weekday morning.",
-  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
-  "initial_events": [
-    {
-      "content": [
-        {
-          "text": "Compile yesterday's orders into report.md.",
-          "type": "text"
-        }
-      ],
-      "type": "user.message"
-    }
   ],
-  "metadata": {},
-  "name": "Daily order report",
-  "paused_reason": {
-    "type": "manual"
-  },
-  "resources": [
-    {
-      "type": "github_repository",
-      "url": "url",
-      "checkout": {
-        "name": "main",
-        "type": "branch"
-      },
-      "mount_path": "mount_path"
-    }
-  ],
-  "schedule": {
-    "expression": "0 9 * * 1-5",
-    "timezone": "America/Los_Angeles",
-    "type": "cron",
-    "last_run_at": "2026-03-16T16:00:09Z",
-    "upcoming_runs_at": [
-      "2026-03-17T16:00:00Z",
-      "2026-03-18T16:00:00Z"
-    ]
-  },
-  "status": "active",
-  "type": "deployment",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "vault_ids": [
-    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  "budget": {
+    "max_list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "type": "limit"
+  }
 }
 ```
 

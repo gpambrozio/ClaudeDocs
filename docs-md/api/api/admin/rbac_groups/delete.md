@@ -1,72 +1,45 @@
 # Delete RBAC Group
 
-Copy page
-
-
-
-# Delete RBAC Group
-
-DELETE/v1/organizations/rbac\_groups/{group\_id}
+**DELETE** `/v1/organizations/rbac_groups/{group_id}`
 
 Delete an RBAC Group. Groups provisioned by an identity provider (source type `"scim"`) cannot be deleted via the API while an organization in the tenant uses SCIM provisioning.
 
 The RBAC Groups API is available to Claude Enterprise organizations only.
 
-##### Path parameters
+## Path parameters
 
-group\_id: string
+- `group_id: string`
 
-ID of the RBAC Group.
+  ID of the RBAC Group.
 
-##### Returns
+## Returns
 
-
+- `RbacGroupDeleted object`
 
-RbacGroupDeleted object{ id, type }
+  - `id: string`
 
-id: string
+    ID of the RBAC Group.
 
-ID of the RBAC Group.
+  - `type: "rbac_group_deleted"`
 
-
+    Deleted object type.
 
-type: "rbac\_group\_deleted"
+    For RBAC Groups, this is always `"rbac_group_deleted"`.
 
-Deleted object type.
+    default: rbac_group_deleted
 
-For RBAC Groups, this is always `"rbac_group_deleted"`.
+## Example
 
-defaultrbac\_group\_deleted
-
-Delete RBAC Group
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
-  "type": "rbac_group_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
   "type": "rbac_group_deleted"

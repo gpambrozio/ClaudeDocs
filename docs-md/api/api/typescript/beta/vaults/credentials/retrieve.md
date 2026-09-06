@@ -1,334 +1,293 @@
 # Get Credential
 
-Copy page
+`client.beta.vaults.credentials.retrieve(credentialID, params, options?): BetaManagedAgentsCredential`
 
-
-
-TypeScript
-
-# Get Credential
-
-client.beta.vaults.credentials.retrieve(stringcredentialID, CredentialRetrieveParams { vault\_id, betas } params, RequestOptionsoptions?): [BetaManagedAgentsCredential](api/beta/vaults/credentials.md) { id, archived\_at, auth, 6 more }
-
-GET/v1/vaults/{vault\_id}/credentials/{credential\_id}
+**GET** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
 Get Credential
 
-##### ParametersExpand Collapse
+## Parameters
 
-credentialID: string
+- `credentialID: string`
 
-
+- `params: CredentialRetrieveParams`
 
-params: CredentialRetrieveParams { vault\_id, betas } 
+  - `vault_id: string`
 
-vault\_id: string
+    Path param: Path parameter vault_id
 
-Path param: Path parameter vault\_id
+  - `betas?: Array<AnthropicBeta>`
 
-
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+    - `(string & {})`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
 
-One of the following:
+      - `"message-batches-2024-09-24"`
 
-(string & {})
+      - `"prompt-caching-2024-07-31"`
 
-
+      - `"computer-use-2024-10-22"`
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more
+      - `"computer-use-2025-01-24"`
 
-"message-batches-2024-09-24"
+      - `"pdfs-2024-09-25"`
 
-"prompt-caching-2024-07-31"
+      - `"token-counting-2024-11-01"`
 
-"computer-use-2024-10-22"
+      - `"token-efficient-tools-2025-02-19"`
 
-"computer-use-2025-01-24"
+      - `"output-128k-2025-02-19"`
 
-"pdfs-2024-09-25"
+      - `"files-api-2025-04-14"`
 
-"token-counting-2024-11-01"
+      - `"mcp-client-2025-04-04"`
 
-"token-efficient-tools-2025-02-19"
+      - `"mcp-client-2025-11-20"`
 
-"output-128k-2025-02-19"
+      - `"dev-full-thinking-2025-05-14"`
 
-"files-api-2025-04-14"
+      - `"interleaved-thinking-2025-05-14"`
 
-"mcp-client-2025-04-04"
+      - `"code-execution-2025-05-22"`
 
-"mcp-client-2025-11-20"
+      - `"extended-cache-ttl-2025-04-11"`
 
-"dev-full-thinking-2025-05-14"
+      - `"context-1m-2025-08-07"`
 
-"interleaved-thinking-2025-05-14"
+      - `"context-management-2025-06-27"`
 
-"code-execution-2025-05-22"
+      - `"model-context-window-exceeded-2025-08-26"`
 
-"extended-cache-ttl-2025-04-11"
+      - `"skills-2025-10-02"`
 
-"context-1m-2025-08-07"
+      - `"fast-mode-2026-02-01"`
 
-"context-management-2025-06-27"
+      - `"output-300k-2026-03-24"`
 
-"model-context-window-exceeded-2025-08-26"
+      - `"user-profiles-2026-03-24"`
 
-"skills-2025-10-02"
+      - `"user-profiles-2026-08-18"`
 
-"fast-mode-2026-02-01"
+      - `"advisor-tool-2026-03-01"`
 
-"output-300k-2026-03-24"
+      - `"managed-agents-2026-04-01"`
 
-"user-profiles-2026-03-24"
+      - `"cache-diagnosis-2026-04-07"`
 
-"advisor-tool-2026-03-01"
+      - `"dreaming-2026-04-21"`
 
-"managed-agents-2026-04-01"
+      - `"thinking-token-count-2026-05-13"`
 
-"cache-diagnosis-2026-04-07"
+      - `"server-side-fallback-2026-06-01"`
 
-"thinking-token-count-2026-05-13"
+      - `"server-side-fallback-2026-07-01"`
 
-"server-side-fallback-2026-06-01"
+      - `"fallback-credit-2026-06-01"`
 
-"fallback-credit-2026-06-01"
+      - `"fallback-credit-2026-07-01"`
 
-"agent-memory-2026-07-22"
+      - `"agent-memory-2026-07-22"`
 
-##### ReturnsExpand Collapse
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
-
+      - `"compact-2026-01-12"`
 
-BetaManagedAgentsCredential { id, archived\_at, auth, 6 more } 
+      - `"computer-use-2025-11-24"`
 
-A credential stored in a vault. Sensitive fields are never returned in responses.
+      - `"mcp-tunnels-2026-06-22"`
 
-id: string
+      - `"structured-outputs-2025-11-13"`
 
-Unique identifier for the credential.
+      - `"task-budgets-2026-03-13"`
 
-archived\_at: string | null
+      - `"thinking-display-updates-2026-08-18"`
 
-A timestamp in RFC 3339 format
+      - `"ce-user-management-2026-07-13"`
 
-
+      - `"mid-conversation-output-config-2026-07-01"`
 
-auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta/vaults/credentials.md) { mcp\_server\_url, type, expires\_at, refresh }  | [BetaManagedAgentsStaticBearerAuthResponse](api/beta/vaults/credentials.md) { mcp\_server\_url, type }  | [BetaManagedAgentsEnvironmentVariableAuthResponse](api/beta/vaults/credentials.md) { injection\_location, networking, secret\_name, type } 
+      - `"thinking-binding-controls-2026-08-01"`
 
-Authentication details for a credential.
+      - `"mid-conversation-system-clear-at-2026-08-21"`
 
-One of the following:
+## Returns
 
-
+- `BetaManagedAgentsCredential`
 
-BetaManagedAgentsMCPOAuthAuthResponse { mcp\_server\_url, type, expires\_at, refresh } 
+  A credential stored in a vault. Sensitive fields are never returned in responses.
 
-OAuth credential details for an MCP server.
+  - `id: string`
 
-mcp\_server\_url: string
+    Unique identifier for the credential.
 
-URL of the MCP server this credential authenticates against.
+  - `archived_at: string | null`
 
-type: "mcp\_oauth"
+    A timestamp in RFC 3339 format
 
-expires\_at?: string | null
+    format: date-time
 
-A timestamp in RFC 3339 format
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse | BetaManagedAgentsStaticBearerAuthResponse | BetaManagedAgentsEnvironmentVariableAuthResponse`
 
-
+    Authentication details for a credential.
 
-refresh?: [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md) { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more }  | null
+    - `BetaManagedAgentsMCPOAuthAuthResponse`
 
-OAuth refresh token configuration returned in credential responses.
+      OAuth credential details for an MCP server.
 
-client\_id: string
+      - `mcp_server_url: string`
 
-OAuth client ID.
+        URL of the MCP server this credential authenticates against.
 
-token\_endpoint: string
+      - `type: "mcp_oauth"`
 
-Token endpoint URL used to refresh the access token.
+      - `expires_at?: string | null`
 
-
+        A timestamp in RFC 3339 format
 
-token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta/vaults/credentials.md) { type }  | [BetaManagedAgentsTokenEndpointAuthBasicResponse](api/beta/vaults/credentials.md) { type }  | [BetaManagedAgentsTokenEndpointAuthPostResponse](api/beta/vaults/credentials.md) { type } 
+        format: date-time
 
-Token endpoint requires no client authentication.
+      - `refresh?: BetaManagedAgentsMCPOAuthRefreshResponse | null`
 
-One of the following:
+        OAuth refresh token configuration returned in credential responses.
 
-
+        - `client_id: string`
 
-BetaManagedAgentsTokenEndpointAuthNoneResponse { type } 
+          OAuth client ID.
 
-Token endpoint requires no client authentication.
+        - `token_endpoint: string`
 
-type: "none"
+          Token endpoint URL used to refresh the access token.
 
-
+        - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse | BetaManagedAgentsTokenEndpointAuthBasicResponse | BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-BetaManagedAgentsTokenEndpointAuthBasicResponse { type } 
+          Token endpoint requires no client authentication.
 
-Token endpoint uses HTTP Basic authentication with client credentials.
+          - `BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
-type: "client\_secret\_basic"
+            Token endpoint requires no client authentication.
 
-
+            - `type: "none"`
 
-BetaManagedAgentsTokenEndpointAuthPostResponse { type } 
+          - `BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
-Token endpoint uses POST body authentication with client credentials.
+            Token endpoint uses HTTP Basic authentication with client credentials.
 
-type: "client\_secret\_post"
+            - `type: "client_secret_basic"`
 
-resource?: string | null
+          - `BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-OAuth resource indicator.
+            Token endpoint uses POST body authentication with client credentials.
 
-scope?: string | null
+            - `type: "client_secret_post"`
 
-OAuth scope for the refresh request.
+        - `resource?: string | null`
 
-
+          OAuth resource indicator.
 
-BetaManagedAgentsStaticBearerAuthResponse { mcp\_server\_url, type } 
+        - `scope?: string | null`
 
-Static bearer token credential details for an MCP server.
+          OAuth scope for the refresh request.
 
-mcp\_server\_url: string
+    - `BetaManagedAgentsStaticBearerAuthResponse`
 
-URL of the MCP server this credential authenticates against.
+      Static bearer token credential details for an MCP server.
 
-type: "static\_bearer"
+      - `mcp_server_url: string`
 
-
+        URL of the MCP server this credential authenticates against.
 
-BetaManagedAgentsEnvironmentVariableAuthResponse { injection\_location, networking, secret\_name, type } 
+      - `type: "static_bearer"`
 
-Environment variable credential details. The secret value is never returned.
+    - `BetaManagedAgentsEnvironmentVariableAuthResponse`
 
-
+      Environment variable credential details. The secret value is never returned.
 
-injection\_location: [BetaManagedAgentsInjectionLocationResponse](api/beta/vaults/credentials.md) { body, header } 
+      - `injection_location: BetaManagedAgentsInjectionLocationResponse`
 
-Where in the outbound request the secret value is substituted.
+        Where in the outbound request the secret value is substituted.
 
-body: boolean
+        - `body: boolean`
 
-Whether the placeholder is substituted in the request body.
+          Whether the placeholder is substituted in the request body.
 
-header: boolean
+        - `header: boolean`
 
-Whether the placeholder is substituted in request header values.
+          Whether the placeholder is substituted in request header values.
 
-
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse | BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
-networking: [BetaManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta/vaults/credentials.md) { type }  | [BetaManagedAgentsLimitedCredentialNetworkingResponse](api/beta/vaults/credentials.md) { allowed\_hosts, type } 
+        Outbound hosts the secret value is substituted on.
 
-Outbound hosts the secret value is substituted on.
+        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
-One of the following:
+          The secret is substituted on any host the session's Environment network policy permits egress to.
 
-
+          - `type: "unrestricted"`
 
-BetaManagedAgentsUnrestrictedCredentialNetworkingResponse { type } 
+        - `BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
-The secret is substituted on any host the session's Environment network policy permits egress to.
+          The secret is substituted only on requests to the listed hosts.
 
-type: "unrestricted"
+          - `allowed_hosts: Array<string>`
 
-
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-BetaManagedAgentsLimitedCredentialNetworkingResponse { allowed\_hosts, type } 
+          - `type: "limited"`
 
-The secret is substituted only on requests to the listed hosts.
+      - `secret_name: string`
 
-allowed\_hosts: Array<string>
+        Name of the environment variable.
 
-Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+      - `type: "environment_variable"`
 
-type: "limited"
+  - `created_at: string`
 
-secret\_name: string
+    A timestamp in RFC 3339 format
 
-Name of the environment variable.
+    format: date-time
 
-type: "environment\_variable"
+  - `metadata: Record<string, string>`
 
-created\_at: string
+    Arbitrary key-value metadata attached to the credential.
 
-A timestamp in RFC 3339 format
+  - `type: "vault_credential"`
 
-metadata: Record<string, string>
+  - `updated_at: string`
 
-Arbitrary key-value metadata attached to the credential.
+    A timestamp in RFC 3339 format
 
-type: "vault\_credential"
+    format: date-time
 
-updated\_at: string
+  - `vault_id: string`
 
-A timestamp in RFC 3339 format
+    Identifier of the vault this credential belongs to.
 
-vault\_id: string
+  - `display_name?: string | null`
 
-Identifier of the vault this credential belongs to.
+    Human-readable name for the credential.
 
-display\_name?: string | null
+## Example
 
-Human-readable name for the credential.
-
-Get Credential
-
-TypeScript
-
-```shiki
-import Anthropic from '@anthropic-ai/sdk';
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 const betaManagedAgentsCredential = await client.beta.vaults.credentials.retrieve(
-  'vcrd_011CZkZEMt8gZan2iYOQfSkw',
-  { vault_id: 'vlt_011CZkZDLs7fYzm1hXNPeRjv' },
+  "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  { vault_id: "vlt_011CZkZDLs7fYzm1hXNPeRjv" }
 );
 
 console.log(betaManagedAgentsCredential.id);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
-  "archived_at": null,
-  "auth": {
-    "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
-    "type": "static_bearer"
-  },
-  "created_at": "2026-03-15T10:00:00Z",
-  "metadata": {
-    "environment": "production"
-  },
-  "type": "vault_credential",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
-  "display_name": "Example credential"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
   "archived_at": null,

@@ -1,102 +1,65 @@
 # Get project document content
 
-To enable the Compliance API, see the setup guide.
-
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
-
-Copy page
-
-
-
-# Get project document content
-
-GET/v1/compliance/apps/projects/documents/{document\_id}
+**GET** `/v1/compliance/apps/projects/documents/{document_id}`
 
 Get detailed information for a specific project document.
 
-##### Path parameters
+## Path parameters
 
-document\_id: string
+- `document_id: string`
 
-The document ID (tagged ID, e.g., claude\_proj\_doc\_abc123)
+  The document ID (tagged ID, e.g., claude_proj_doc_abc123)
 
-##### Headers
+## Headers
 
-"x-api-key": optional string
+- `"x-api-key": optional string`
 
-##### Returns
+## Returns
 
-id: string
+- `id: string`
 
-Project document identifier (tagged ID)
+  Project document identifier (tagged ID)
 
-content: string
+- `content: string`
 
-Document text content
+  Document text content
 
-
+- `created_at: string`
 
-created\_at: string
+  Document creation timestamp
 
-Document creation timestamp
+  format: date-time
 
-formatdate-time
+- `filename: string`
 
-filename: string
+  Document filename
 
-Document filename
+- `user: object or null`
 
-
+  The user who created a project or project document.
 
-user: object{ id, email\_address } or null
+  Fields that reference this type are null when the creator's account has
+  been deleted or the creator is no longer a member of an organization the
+  key may read.
 
-The user who created a project or project document.
+  - `id: string`
 
-Fields that reference this type are null when the creator's account has
-been deleted or the creator is no longer a member of an organization the
-key may read.
+    User identifier (tagged ID)
 
-id: string
+  - `email_address: string`
 
-User identifier (tagged ID)
+    User's email address
 
-email\_address: string
+## Example
 
-User's email address
-
-Get project document content
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "claude_proj_doc_01Qr8StUvWxYzAbCdEfGhJjK",
-  "content": "# Design notes\n\n- Item one\n- Item two\n",
-  "created_at": "2025-03-12T18:22:41.123456Z",
-  "filename": "design-notes.txt",
-  "user": {
-    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-    "email_address": "jane.doe@example.com"
-  }
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "claude_proj_doc_01Qr8StUvWxYzAbCdEfGhJjK",
   "content": "# Design notes\n\n- Item one\n- Item two\n",

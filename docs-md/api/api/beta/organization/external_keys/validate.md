@@ -1,14 +1,6 @@
 # Validate External Key
 
-Copy page
-
-
-
-cURL
-
-# Validate External Key
-
-POST/v1/organizations/external\_keys/{external\_key\_id}/validate
+**POST** `/v1/organizations/external_keys/{external_key_id}/validate`
 
 Validate an external key config against the customer's KMS.
 
@@ -17,70 +9,44 @@ KMS key and waits up to 30 seconds for the result. The response status is
 `success` if the roundtrip succeeded, or `failure` with an error
 message if it failed or timed out.
 
-##### Path parameters
+## Path parameters
 
-
+- `external_key_id: string`
 
-external\_key\_id: string
+  ID of the External Key.
 
-ID of the External Key.
+  maxLength: 2048
 
-maxLength2048
+## Returns
 
-##### Returns
+- `error: string or null`
 
-error: string or null
+  Error message when status is `failure`. Null otherwise.
 
-Error message when status is `failure`. Null otherwise.
+- `status: "failure" or "success"`
 
-
+  `success` — encrypt/decrypt roundtrip succeeded. `failure` — the roundtrip failed or timed out; see `error`.
 
-status: "failure" or "success"
+  - `"failure"`
 
-`success` — encrypt/decrypt roundtrip succeeded. `failure` — the roundtrip failed or timed out; see `error`.
+  - `"success"`
 
-One of the following:
+- `type: "external_key_validation"`
 
-"failure"
+  default: external_key_validation
 
-"success"
+## Example
 
-
-
-type: "external\_key\_validation"
-
-defaultexternal\_key\_validation
-
-Validate External Key
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID/validate \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "error": "error",
-  "status": "failure",
-  "type": "external_key_validation"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "error": "error",
   "status": "failure",

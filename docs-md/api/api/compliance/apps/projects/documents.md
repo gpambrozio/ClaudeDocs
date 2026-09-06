@@ -1,99 +1,336 @@
 # Documents
 
-To enable the Compliance API, see the setup guide.
+## Get project document content
 
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
+**GET** `/v1/compliance/apps/projects/documents/{document_id}`
 
-Copy page
+Get detailed information for a specific project document.
 
-
+### Path parameters
 
-# Documents
+- `document_id: string`
 
-##### [Get project document content](api/http/compliance/apps/projects/documents/retrieve.md)
+  The document ID (tagged ID, e.g., claude_proj_doc_abc123)
 
-GET/v1/compliance/apps/projects/documents/{document\_id}
+### Headers
 
-##### [Get project document metadata](api/http/compliance/apps/projects/documents/metadata.md)
+- `"x-api-key": optional string`
 
-GET/v1/compliance/apps/projects/documents/{document\_id}/metadata
+### Returns
 
-##### [Delete project document](api/http/compliance/apps/projects/documents/delete.md)
+- `id: string`
 
-DELETE/v1/compliance/apps/projects/documents/{document\_id}
+  Project document identifier (tagged ID)
 
-##### Models
+- `content: string`
 
-
+  Document text content
 
-DocumentRetrieveResponse object{ id, content, created\_at, 2 more }
+- `created_at: string`
 
-Project document information for compliance responses.
+  Document creation timestamp
 
-id: string
+  format: date-time
 
-Project document identifier (tagged ID)
+- `filename: string`
 
-content: string
+  Document filename
 
-Document text content
+- `user: object or null`
 
-
+  The user who created a project or project document.
 
-created\_at: string
+  Fields that reference this type are null when the creator's account has
+  been deleted or the creator is no longer a member of an organization the
+  key may read.
 
-Document creation timestamp
+  - `id: string`
 
-formatdate-time
+    User identifier (tagged ID)
 
-filename: string
+  - `email_address: string`
 
-Document filename
+    User's email address
 
-
+### Example
 
-user: object{ id, email\_address } or null
+```bash
+curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
 
-The user who created a project or project document.
+#### Response (200)
 
-Fields that reference this type are null when the creator's account has
-been deleted or the creator is no longer a member of an organization the
-key may read.
+```json
+{
+  "id": "claude_proj_doc_01Qr8StUvWxYzAbCdEfGhJjK",
+  "content": "# Design notes\n\n- Item one\n- Item two\n",
+  "created_at": "2025-03-12T18:22:41.123456Z",
+  "filename": "design-notes.txt",
+  "user": {
+    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "email_address": "jane.doe@example.com"
+  }
+}
+```
 
-id: string
+## Get project document metadata
 
-User identifier (tagged ID)
+**GET** `/v1/compliance/apps/projects/documents/{document_id}/metadata`
 
-email\_address: string
+Returns metadata for a project document, without the content body.
 
-User's email address
+Use the sibling `GET /v1/compliance/apps/projects/documents/{document_id}`
+endpoint to fetch the document text. The `md5` and `size_bytes`
+fields here are computed over the UTF-8 encoding of that text, so a DLP
+consumer can dedupe or match hashes without downloading every document.
 
-
+### Path parameters
 
-DocumentDeleteResponse object{ id, type }
+- `document_id: string`
 
-Response for deleting a project document.
+  The document ID (tagged ID, e.g., claude_proj_doc_abc123)
 
-id: string
+### Headers
 
-The ID of the project document that was deleted
+- `"x-api-key": optional string`
 
-
+### Returns
 
-type: "claude\_project\_document\_deleted"
+- `id: string`
 
-Constant string confirming deletion.
+  Project document identifier (tagged ID)
 
-defaultclaude\_project\_document\_deleted
+- `claude_project_id: string`
 
-
+  The project this document belongs to
 
-DocumentMetadataResponse object{ id, claude\_project\_id, created\_at, 5 more }
+- `created_at: string`
 
-Project document metadata for GET /v1/compliance/apps/projects/documents/{document\_id}/metadata.
+  Document creation timestamp
 
-Returns metadata only. Use the sibling endpoint (without `/metadata`)
-to fetch the document text content.
+  format: date-time
+
+- `filename: string`
+
+  Document filename
+
+- `md5: string`
+
+  Lowercase hex MD5 of the document content (UTF-8 encoded). Matches the `content` field returned by the sibling content endpoint.
+
+- `mime_type: "text/plain"`
+
+  MIME type of the document content, always plain text
+
+  default: text/plain
+
+- `size_bytes: number`
+
+  Size in bytes of the document content (UTF-8 encoded)
+
+- `user: object or null`
+
+  The user who created a project or project document.
+
+  Fields that reference this type are null when the creator's account has
+  been deleted or the creator is no longer a member of an organization the
+  key may read.
+
+  - `id: string`
+
+    User identifier (tagged ID)
+
+  - `email_address: string`
+
+    User's email address
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID/metadata \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "claude_project_id": "claude_project_id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "filename": "filename",
+  "md5": "md5",
+  "mime_type": "text/plain",
+  "size_bytes": 0,
+  "user": {
+    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "email_address": "jane.doe@example.com"
+  }
+}
+```
+
+## Delete project document
+
+**DELETE** `/v1/compliance/apps/projects/documents/{document_id}`
+
+Delete a project document for compliance purposes.
+
+Hard-deletes the project document permanently.
+
+### Path parameters
+
+- `document_id: string`
+
+  The document ID (tagged ID, e.g., claude_proj_doc_abc123)
+
+### Headers
+
+- `"x-api-key": optional string`
+
+### Returns
+
+- `id: string`
+
+  The ID of the project document that was deleted
+
+- `type: "claude_project_document_deleted"`
+
+  Constant string confirming deletion.
+
+  default: claude_project_document_deleted
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID \
+    -X DELETE \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "type": "claude_project_document_deleted"
+}
+```
+
+## Domain types
+
+### Document Retrieve Response
+
+- `DocumentRetrieveResponse object`
+
+  Project document information for compliance responses.
+
+  - `id: string`
+
+    Project document identifier (tagged ID)
+
+  - `content: string`
+
+    Document text content
+
+  - `created_at: string`
+
+    Document creation timestamp
+
+    format: date-time
+
+  - `filename: string`
+
+    Document filename
+
+  - `user: object or null`
+
+    The user who created a project or project document.
+
+    Fields that reference this type are null when the creator's account has
+    been deleted or the creator is no longer a member of an organization the
+    key may read.
+
+    - `id: string`
+
+      User identifier (tagged ID)
+
+    - `email_address: string`
+
+      User's email address
+
+### Document Delete Response
+
+- `DocumentDeleteResponse object`
+
+  Response for deleting a project document.
+
+  - `id: string`
+
+    The ID of the project document that was deleted
+
+  - `type: "claude_project_document_deleted"`
+
+    Constant string confirming deletion.
+
+    default: claude_project_document_deleted
+
+### Document Metadata Response
+
+- `DocumentMetadataResponse object`
+
+  Project document metadata for GET /v1/compliance/apps/projects/documents/{document_id}/metadata.
+
+  Returns metadata only. Use the sibling endpoint (without `/metadata`)
+  to fetch the document text content.
+
+  - `id: string`
+
+    Project document identifier (tagged ID)
+
+  - `claude_project_id: string`
+
+    The project this document belongs to
+
+  - `created_at: string`
+
+    Document creation timestamp
+
+    format: date-time
+
+  - `filename: string`
+
+    Document filename
+
+  - `md5: string`
+
+    Lowercase hex MD5 of the document content (UTF-8 encoded). Matches the `content` field returned by the sibling content endpoint.
+
+  - `mime_type: "text/plain"`
+
+    MIME type of the document content, always plain text
+
+    default: text/plain
+
+  - `size_bytes: number`
+
+    Size in bytes of the document content (UTF-8 encoded)
+
+  - `user: object or null`
+
+    The user who created a project or project document.
+
+    Fields that reference this type are null when the creator's account has
+    been deleted or the creator is no longer a member of an organization the
+    key may read.
+
+    - `id: string`
+
+      User identifier (tagged ID)
+
+    - `email_address: string`
+
+      User's email address
 
 ---
 

@@ -1,12 +1,14 @@
-# Claude Opus 4.7 system prompts
+# Claude Opus 4 7
 
-Copy page
+---
+title: Claude Opus 4.7 system prompts
+url: https://platform.claude.com/docs/en/release-notes/system-prompts/claude-opus-4-7
+description: See updates to the core system prompt for Claude Opus 4.7 on [claude.ai](https://claude.ai) and the [Claude iOS app](https://anthropic.com/ios) and [Claude Android app](https://anthropic.com/android).
+---
 
-
+## April 16, 2026
 
-## April 16, 2026
-
-```shiki
+```text wrap
 <claude_behavior>
 <product_information>
 Here is some information about Claude and Anthropic's products in case the person asks:
@@ -156,12 +158,6 @@ Claude's reliable knowledge cutoff date - the date past which it cannot answer q
 </knowledge_cutoff>
 </claude_behavior>
 ```
-
-
-
-Was this page helpful?
-
-
 
 ---
 

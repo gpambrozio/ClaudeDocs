@@ -1,112 +1,88 @@
 # Update User
 
-Copy page
-
-
-
-cURL
-
-# Update User
-
-POST/v1/organizations/users/{user\_id}
+**POST** `/v1/organizations/users/{user_id}`
 
 Update a member's organization role.
 
-##### Path parameters
+## Path parameters
 
-user\_id: string
+- `user_id: string`
 
-ID of the User.
+  ID of the User.
 
-##### Body
+## Body parameters
 
-
+- `role: "billing" or "claude_code_user" or "developer" or 2 more`
 
-role: "billing" or "claude\_code\_user" or "developer" or 2 more
+  New role for the User.
 
-New role for the User.
+  The accepted values depend on the organization type. Console and API organizations accept `user`, `developer`, `billing`, and `claude_code_user`; `admin` cannot be assigned through the API. Claude Enterprise organizations accept `user` and `managed`.
 
-The accepted values depend on the organization type. Console and API organizations accept `user`, `developer`, `billing`, and `claude_code_user`; `admin` cannot be assigned through the API. Claude Enterprise organizations accept `user` and `managed`.
+  - `"billing"`
 
-One of the following:
+  - `"claude_code_user"`
 
-"billing"
+  - `"developer"`
 
-"claude\_code\_user"
+  - `"managed"`
 
-"developer"
+  - `"user"`
 
-"managed"
+## Returns
 
-"user"
+- `BetaOrganizationUser object`
 
-##### Returns
+  - `id: string`
 
-
+    ID of the User.
 
-BetaOrganizationUser object{ id, added\_at, email, 3 more }
+  - `added_at: string`
 
-id: string
+    RFC 3339 datetime string indicating when the User joined the Organization.
 
-ID of the User.
+    format: date-time
 
-
+  - `email: string`
 
-added\_at: string
+    Email of the User.
 
-RFC 3339 datetime string indicating when the User joined the Organization.
+  - `name: string`
 
-formatdate-time
+    Name of the User.
 
-email: string
+  - `role: BetaOrganizationRole`
 
-Email of the User.
+    Organization role of the User.
 
-name: string
+    - `"admin"`
 
-Name of the User.
+    - `"billing"`
 
-
+    - `"claude_code_user"`
 
-role: [BetaOrganizationRole](api/http/beta/organization.md)
+    - `"developer"`
 
-Organization role of the User.
+    - `"managed"`
 
-One of the following:
+    - `"membership_admin"`
 
-"admin"
+    - `"owner"`
 
-"billing"
+    - `"primary_owner"`
 
-"claude\_code\_user"
+    - `"user"`
 
-"developer"
+  - `type: "user"`
 
-"managed"
+    Object type.
 
-"membership\_admin"
+    For Users, this is always `"user"`.
 
-"owner"
+    default: user
 
-"primary\_owner"
+## Example
 
-"user"
-
-
-
-type: "user"
-
-Object type.
-
-For Users, this is always `"user"`.
-
-defaultuser
-
-Update User
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -116,28 +92,9 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
         }'
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-  "added_at": "2024-10-30T23:58:27.427722Z",
-  "email": "user@emaildomain.com",
-  "name": "Jane Doe",
-  "role": "admin",
-  "type": "user"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
   "added_at": "2024-10-30T23:58:27.427722Z",

@@ -1,465 +1,451 @@
 # Create Credential
 
-Copy page
+`beta.vaults.credentials.create(vault_id, **kwargs)  -> BetaManagedAgentsCredential`
 
-
-
-Python
-
-# Create Credential
-
-beta.vaults.credentials.create(strvault\_id, CredentialCreateParams\*\*kwargs)  -> [BetaManagedAgentsCredential](api/beta/vaults/credentials.md)
-
-POST/v1/vaults/{vault\_id}/credentials
+**POST** `/v1/vaults/{vault_id}/credentials`
 
 Create Credential
 
-##### ParametersExpand Collapse
+## Parameters
 
-vault\_id: str
+- `vault_id: str`
 
-
+- `auth: Auth`
 
-auth: [Auth](api/beta/vaults/credentials/create.md)
+  Authentication details for creating a credential.
 
-Authentication details for creating a credential.
+  - `class BetaManagedAgentsMCPOAuthCreateParams: …`
 
-One of the following:
+    Parameters for creating an MCP OAuth credential.
 
-
+    - `access_token: str`
 
-class BetaManagedAgentsMCPOAuthCreateParams: …
+      OAuth access token.
 
-Parameters for creating an MCP OAuth credential.
+      minLength: 1, maxLength: 8192
 
-access\_token: str
+    - `mcp_server_url: str`
 
-OAuth access token.
+      URL of the MCP server this credential authenticates against.
 
-mcp\_server\_url: str
+      minLength: 1, maxLength: 2047
 
-URL of the MCP server this credential authenticates against.
+    - `type: Literal["mcp_oauth"]`
 
-type: Literal["mcp\_oauth"]
+    - `expires_at: Optional[datetime]`
 
-expires\_at: Optional[datetime]
+      A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+      format: date-time
 
-
+    - `refresh: Optional[BetaManagedAgentsMCPOAuthRefreshParams]`
 
-refresh: Optional[BetaManagedAgentsMCPOAuthRefreshParams]
+      OAuth refresh token parameters for creating a credential with refresh support.
 
-OAuth refresh token parameters for creating a credential with refresh support.
+      - `client_id: str`
 
-client\_id: str
+        OAuth client ID.
 
-OAuth client ID.
+        minLength: 1, maxLength: 1024
 
-refresh\_token: str
+      - `refresh_token: str`
 
-OAuth refresh token.
+        OAuth refresh token.
 
-token\_endpoint: str
+        minLength: 1, maxLength: 4096
 
-Token endpoint URL used to refresh the access token.
+      - `token_endpoint: str`
 
-
+        Token endpoint URL used to refresh the access token.
 
-token\_endpoint\_auth: TokenEndpointAuth
+        minLength: 1, maxLength: 2047
 
-Token endpoint requires no client authentication.
+      - `token_endpoint_auth: TokenEndpointAuth`
 
-One of the following:
+        Token endpoint requires no client authentication.
 
-
+        - `class BetaManagedAgentsTokenEndpointAuthNoneParam: …`
 
-class BetaManagedAgentsTokenEndpointAuthNoneParam: …
+          Token endpoint requires no client authentication.
 
-Token endpoint requires no client authentication.
+          - `type: Literal["none"]`
 
-type: Literal["none"]
+        - `class BetaManagedAgentsTokenEndpointAuthBasicParam: …`
 
-
+          Token endpoint uses HTTP Basic authentication with client credentials.
 
-class BetaManagedAgentsTokenEndpointAuthBasicParam: …
+          - `client_secret: str`
 
-Token endpoint uses HTTP Basic authentication with client credentials.
+            OAuth client secret.
 
-client\_secret: str
+            minLength: 1, maxLength: 512
 
-OAuth client secret.
+          - `type: Literal["client_secret_basic"]`
 
-type: Literal["client\_secret\_basic"]
+        - `class BetaManagedAgentsTokenEndpointAuthPostParam: …`
 
-
+          Token endpoint uses POST body authentication with client credentials.
 
-class BetaManagedAgentsTokenEndpointAuthPostParam: …
+          - `client_secret: str`
 
-Token endpoint uses POST body authentication with client credentials.
+            OAuth client secret.
 
-client\_secret: str
+            minLength: 1, maxLength: 512
 
-OAuth client secret.
+          - `type: Literal["client_secret_post"]`
 
-type: Literal["client\_secret\_post"]
+      - `resource: Optional[str]`
 
-resource: Optional[str]
+        OAuth resource indicator.
 
-OAuth resource indicator.
+        minLength: 1, maxLength: 2047
 
-scope: Optional[str]
+      - `scope: Optional[str]`
 
-OAuth scope for the refresh request.
+        OAuth scope for the refresh request.
 
-
+        minLength: 1, maxLength: 8192
 
-class BetaManagedAgentsStaticBearerCreateParams: …
+  - `class BetaManagedAgentsStaticBearerCreateParams: …`
 
-Parameters for creating a static bearer token credential.
+    Parameters for creating a static bearer token credential.
 
-token: str
+    - `token: str`
 
-Static bearer token value.
+      Static bearer token value.
 
-mcp\_server\_url: str
+      minLength: 1, maxLength: 8192
 
-URL of the MCP server this credential authenticates against.
+    - `mcp_server_url: str`
 
-type: Literal["static\_bearer"]
+      URL of the MCP server this credential authenticates against.
 
-
+      minLength: 1, maxLength: 2047
 
-class BetaManagedAgentsEnvironmentVariableCreateParams: …
+    - `type: Literal["static_bearer"]`
 
-Parameters for creating an environment variable credential.
+  - `class BetaManagedAgentsEnvironmentVariableCreateParams: …`
 
-
+    Parameters for creating an environment variable credential.
 
-networking: [BetaManagedAgentsCredentialNetworkingParams](api/beta/vaults/credentials.md)
+    - `networking: BetaManagedAgentsCredentialNetworkingParams`
 
-Outbound hosts the secret value is substituted on.
+      Outbound hosts the secret value is substituted on.
 
-One of the following:
+      - `class BetaManagedAgentsUnrestrictedCredentialNetworkingParams: …`
 
-
+        Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
-class BetaManagedAgentsUnrestrictedCredentialNetworkingParams: …
+        - `type: Literal["unrestricted"]`
 
-Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+      - `class BetaManagedAgentsLimitedCredentialNetworkingParams: …`
 
-type: Literal["unrestricted"]
+        Substitute the secret only on requests to the listed hosts.
 
-
+        - `allowed_hosts: List[str]`
 
-class BetaManagedAgentsLimitedCredentialNetworkingParams: …
+          Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
 
-Substitute the secret only on requests to the listed hosts.
+        - `type: Literal["limited"]`
 
-allowed\_hosts: List[str]
+    - `secret_name: str`
 
-Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+      Name of the environment variable. Immutable after create.
 
-type: Literal["limited"]
+      minLength: 1, maxLength: 255
 
-secret\_name: str
+    - `secret_value: str`
 
-Name of the environment variable. Immutable after create.
+      Secret value. Write-only; never returned in responses.
 
-secret\_value: str
+      minLength: 1, maxLength: 4096
 
-Secret value. Write-only; never returned in responses.
+    - `type: Literal["environment_variable"]`
 
-type: Literal["environment\_variable"]
+    - `injection_location: Optional[BetaManagedAgentsInjectionLocationParams]`
 
-
+      Where in the outbound request the secret value may be substituted.
 
-injection\_location: Optional[BetaManagedAgentsInjectionLocationParams]
+      - `body: Optional[bool]`
 
-Where in the outbound request the secret value may be substituted.
+        Substitute when the placeholder appears in the request body.
 
-body: Optional[bool]
+      - `header: Optional[bool]`
 
-Substitute when the placeholder appears in the request body.
+        Substitute when the placeholder appears in a request header value.
 
-header: Optional[bool]
+- `display_name: Optional[str]`
 
-Substitute when the placeholder appears in a request header value.
+  Human-readable name for the credential. Up to 255 characters.
 
-display\_name: Optional[str]
+  maxLength: 255
 
-Human-readable name for the credential. Up to 255 characters.
+- `metadata: Optional[Dict[str, str]]`
 
-metadata: Optional[Dict[str, str]]
+  Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+- `betas: Optional[List[AnthropicBetaParam]]`
 
-
+  Optional header to specify the beta version(s) you want to use.
 
-betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
+  - `str`
 
-Optional header to specify the beta version(s) you want to use.
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
 
-One of the following:
+    - `"message-batches-2024-09-24"`
 
-str
+    - `"prompt-caching-2024-07-31"`
 
-
+    - `"computer-use-2024-10-22"`
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]
+    - `"computer-use-2025-01-24"`
 
-One of the following:
+    - `"pdfs-2024-09-25"`
 
-"message-batches-2024-09-24"
+    - `"token-counting-2024-11-01"`
 
-"prompt-caching-2024-07-31"
+    - `"token-efficient-tools-2025-02-19"`
 
-"computer-use-2024-10-22"
+    - `"output-128k-2025-02-19"`
 
-"computer-use-2025-01-24"
+    - `"files-api-2025-04-14"`
 
-"pdfs-2024-09-25"
+    - `"mcp-client-2025-04-04"`
 
-"token-counting-2024-11-01"
+    - `"mcp-client-2025-11-20"`
 
-"token-efficient-tools-2025-02-19"
+    - `"dev-full-thinking-2025-05-14"`
 
-"output-128k-2025-02-19"
+    - `"interleaved-thinking-2025-05-14"`
 
-"files-api-2025-04-14"
+    - `"code-execution-2025-05-22"`
 
-"mcp-client-2025-04-04"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"mcp-client-2025-11-20"
+    - `"context-1m-2025-08-07"`
 
-"dev-full-thinking-2025-05-14"
+    - `"context-management-2025-06-27"`
 
-"interleaved-thinking-2025-05-14"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"code-execution-2025-05-22"
+    - `"skills-2025-10-02"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"fast-mode-2026-02-01"`
 
-"context-1m-2025-08-07"
+    - `"output-300k-2026-03-24"`
 
-"context-management-2025-06-27"
+    - `"user-profiles-2026-03-24"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"user-profiles-2026-08-18"`
 
-"skills-2025-10-02"
+    - `"advisor-tool-2026-03-01"`
 
-"fast-mode-2026-02-01"
+    - `"managed-agents-2026-04-01"`
 
-"output-300k-2026-03-24"
+    - `"cache-diagnosis-2026-04-07"`
 
-"user-profiles-2026-03-24"
+    - `"dreaming-2026-04-21"`
 
-"advisor-tool-2026-03-01"
+    - `"thinking-token-count-2026-05-13"`
 
-"managed-agents-2026-04-01"
+    - `"server-side-fallback-2026-06-01"`
 
-"cache-diagnosis-2026-04-07"
+    - `"server-side-fallback-2026-07-01"`
 
-"thinking-token-count-2026-05-13"
+    - `"fallback-credit-2026-06-01"`
 
-"server-side-fallback-2026-06-01"
+    - `"fallback-credit-2026-07-01"`
 
-"fallback-credit-2026-06-01"
+    - `"agent-memory-2026-07-22"`
 
-"agent-memory-2026-07-22"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-##### ReturnsExpand Collapse
+    - `"compact-2026-01-12"`
 
-
+    - `"computer-use-2025-11-24"`
 
-class BetaManagedAgentsCredential: …
+    - `"mcp-tunnels-2026-06-22"`
 
-A credential stored in a vault. Sensitive fields are never returned in responses.
+    - `"structured-outputs-2025-11-13"`
 
-id: str
+    - `"task-budgets-2026-03-13"`
 
-Unique identifier for the credential.
+    - `"thinking-display-updates-2026-08-18"`
 
-archived\_at: Optional[datetime]
+    - `"ce-user-management-2026-07-13"`
 
-A timestamp in RFC 3339 format
+    - `"mid-conversation-output-config-2026-07-01"`
 
-
+    - `"thinking-binding-controls-2026-08-01"`
 
-auth: Auth
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-Authentication details for a credential.
+## Returns
 
-One of the following:
+- `class BetaManagedAgentsCredential: …`
 
-
+  A credential stored in a vault. Sensitive fields are never returned in responses.
 
-class BetaManagedAgentsMCPOAuthAuthResponse: …
+  - `id: str`
 
-OAuth credential details for an MCP server.
+    Unique identifier for the credential.
 
-mcp\_server\_url: str
+  - `archived_at: Optional[datetime]`
 
-URL of the MCP server this credential authenticates against.
+    A timestamp in RFC 3339 format
 
-type: Literal["mcp\_oauth"]
+    format: date-time
 
-expires\_at: Optional[datetime]
+  - `auth: Auth`
 
-A timestamp in RFC 3339 format
+    Authentication details for a credential.
 
-
+    - `class BetaManagedAgentsMCPOAuthAuthResponse: …`
 
-refresh: Optional[BetaManagedAgentsMCPOAuthRefreshResponse]
+      OAuth credential details for an MCP server.
 
-OAuth refresh token configuration returned in credential responses.
+      - `mcp_server_url: str`
 
-client\_id: str
+        URL of the MCP server this credential authenticates against.
 
-OAuth client ID.
+      - `type: Literal["mcp_oauth"]`
 
-token\_endpoint: str
+      - `expires_at: Optional[datetime]`
 
-Token endpoint URL used to refresh the access token.
+        A timestamp in RFC 3339 format
 
-
+        format: date-time
 
-token\_endpoint\_auth: TokenEndpointAuth
+      - `refresh: Optional[BetaManagedAgentsMCPOAuthRefreshResponse]`
 
-Token endpoint requires no client authentication.
+        OAuth refresh token configuration returned in credential responses.
 
-One of the following:
+        - `client_id: str`
 
-
+          OAuth client ID.
 
-class BetaManagedAgentsTokenEndpointAuthNoneResponse: …
+        - `token_endpoint: str`
 
-Token endpoint requires no client authentication.
+          Token endpoint URL used to refresh the access token.
 
-type: Literal["none"]
+        - `token_endpoint_auth: TokenEndpointAuth`
 
-
+          Token endpoint requires no client authentication.
 
-class BetaManagedAgentsTokenEndpointAuthBasicResponse: …
+          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse: …`
 
-Token endpoint uses HTTP Basic authentication with client credentials.
+            Token endpoint requires no client authentication.
 
-type: Literal["client\_secret\_basic"]
+            - `type: Literal["none"]`
 
-
+          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse: …`
 
-class BetaManagedAgentsTokenEndpointAuthPostResponse: …
+            Token endpoint uses HTTP Basic authentication with client credentials.
 
-Token endpoint uses POST body authentication with client credentials.
+            - `type: Literal["client_secret_basic"]`
 
-type: Literal["client\_secret\_post"]
+          - `class BetaManagedAgentsTokenEndpointAuthPostResponse: …`
 
-resource: Optional[str]
+            Token endpoint uses POST body authentication with client credentials.
 
-OAuth resource indicator.
+            - `type: Literal["client_secret_post"]`
 
-scope: Optional[str]
+        - `resource: Optional[str]`
 
-OAuth scope for the refresh request.
+          OAuth resource indicator.
 
-
+        - `scope: Optional[str]`
 
-class BetaManagedAgentsStaticBearerAuthResponse: …
+          OAuth scope for the refresh request.
 
-Static bearer token credential details for an MCP server.
+    - `class BetaManagedAgentsStaticBearerAuthResponse: …`
 
-mcp\_server\_url: str
+      Static bearer token credential details for an MCP server.
 
-URL of the MCP server this credential authenticates against.
+      - `mcp_server_url: str`
 
-type: Literal["static\_bearer"]
+        URL of the MCP server this credential authenticates against.
 
-
+      - `type: Literal["static_bearer"]`
 
-class BetaManagedAgentsEnvironmentVariableAuthResponse: …
+    - `class BetaManagedAgentsEnvironmentVariableAuthResponse: …`
 
-Environment variable credential details. The secret value is never returned.
+      Environment variable credential details. The secret value is never returned.
 
-
+      - `injection_location: BetaManagedAgentsInjectionLocationResponse`
 
-injection\_location: [BetaManagedAgentsInjectionLocationResponse](api/beta/vaults/credentials.md)
+        Where in the outbound request the secret value is substituted.
 
-Where in the outbound request the secret value is substituted.
+        - `body: bool`
 
-body: bool
+          Whether the placeholder is substituted in the request body.
 
-Whether the placeholder is substituted in the request body.
+        - `header: bool`
 
-header: bool
+          Whether the placeholder is substituted in request header values.
 
-Whether the placeholder is substituted in request header values.
+      - `networking: Networking`
 
-
+        Outbound hosts the secret value is substituted on.
 
-networking: Networking
+        - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse: …`
 
-Outbound hosts the secret value is substituted on.
+          The secret is substituted on any host the session's Environment network policy permits egress to.
 
-One of the following:
+          - `type: Literal["unrestricted"]`
 
-
+        - `class BetaManagedAgentsLimitedCredentialNetworkingResponse: …`
 
-class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse: …
+          The secret is substituted only on requests to the listed hosts.
 
-The secret is substituted on any host the session's Environment network policy permits egress to.
+          - `allowed_hosts: List[str]`
 
-type: Literal["unrestricted"]
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-
+          - `type: Literal["limited"]`
 
-class BetaManagedAgentsLimitedCredentialNetworkingResponse: …
+      - `secret_name: str`
 
-The secret is substituted only on requests to the listed hosts.
+        Name of the environment variable.
 
-allowed\_hosts: List[str]
+      - `type: Literal["environment_variable"]`
 
-Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+  - `created_at: datetime`
 
-type: Literal["limited"]
+    A timestamp in RFC 3339 format
 
-secret\_name: str
+    format: date-time
 
-Name of the environment variable.
+  - `metadata: Dict[str, str]`
 
-type: Literal["environment\_variable"]
+    Arbitrary key-value metadata attached to the credential.
 
-created\_at: datetime
+  - `type: Literal["vault_credential"]`
 
-A timestamp in RFC 3339 format
+  - `updated_at: datetime`
 
-metadata: Dict[str, str]
+    A timestamp in RFC 3339 format
 
-Arbitrary key-value metadata attached to the credential.
+    format: date-time
 
-type: Literal["vault\_credential"]
+  - `vault_id: str`
 
-updated\_at: datetime
+    Identifier of the vault this credential belongs to.
 
-A timestamp in RFC 3339 format
+  - `display_name: Optional[str]`
 
-vault\_id: str
+    Human-readable name for the credential.
 
-Identifier of the vault this credential belongs to.
+## Example
 
-display\_name: Optional[str]
-
-Human-readable name for the credential.
-
-Create Credential
-
-Python
-
-```shiki
+```python
 import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
 )
 beta_managed_agents_credential = client.beta.vaults.credentials.create(
     vault_id="vlt_011CZkZDLs7fYzm1hXNPeRjv",
@@ -472,36 +458,9 @@ beta_managed_agents_credential = client.beta.vaults.credentials.create(
 print(beta_managed_agents_credential.id)
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
-  "archived_at": null,
-  "auth": {
-    "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
-    "type": "static_bearer"
-  },
-  "created_at": "2026-03-15T10:00:00Z",
-  "metadata": {
-    "environment": "production"
-  },
-  "type": "vault_credential",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
-  "display_name": "Example credential"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
   "archived_at": null,

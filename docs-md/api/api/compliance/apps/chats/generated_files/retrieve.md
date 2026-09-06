@@ -1,97 +1,63 @@
 # Get Claude-generated file metadata
 
-To enable the Compliance API, see the setup guide.
-
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
-
-Copy page
-
-
-
-# Get Claude-generated file metadata
-
-GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}
+**GET** `/v1/compliance/apps/chats/generated-files/{claude_gen_file_id}`
 
 Returns metadata for a file the assistant created via tool use.
 
 Use the sibling `/content` endpoint to download the bytes.
 
-##### Path parameters
+## Path parameters
 
-claude\_gen\_file\_id: string
+- `claude_gen_file_id: string`
 
-The generated-file id (e.g., 'claude\_gen\_file\_abc123') as returned in `chat_messages[].generated_files[].id` from GET /apps/chats/{claude\_chat\_id}/messages.
+  The generated-file id (e.g., 'claude_gen_file_abc123') as returned in `chat_messages[].generated_files[].id` from GET /apps/chats/{claude_chat_id}/messages.
 
-##### Headers
+## Headers
 
-"x-api-key": optional string
+- `"x-api-key": optional string`
 
-##### Returns
+## Returns
 
-id: string
+- `id: string`
 
-Opaque generated-file id, e.g. 'claude\_gen\_file\_abc123'.
+  Opaque generated-file id, e.g. 'claude_gen_file_abc123'.
 
-claude\_chat\_id: string
+- `claude_chat_id: string`
 
-The chat this generated file belongs to
+  The chat this generated file belongs to
 
-
+- `created_at: string or null`
 
-created\_at: string or null
+  File creation timestamp, when available
 
-File creation timestamp, when available
+  format: date-time
 
-formatdate-time
+- `filename: string`
 
-filename: string
+  Display name of the generated file
 
-Display name of the generated file
+- `md5: string or null`
 
-md5: string or null
+  Lowercase hex MD5 of the stored file. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes.
 
-Lowercase hex MD5 of the stored file. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes.
+- `mime_type: string or null`
 
-mime\_type: string or null
+  MIME type of the stored file, when available
 
-MIME type of the stored file, when available
+- `size_bytes: number or null`
 
-size\_bytes: number or null
+  Size in bytes of the stored file, when available
 
-Size in bytes of the stored file, when available
+## Example
 
-Get Claude-generated file metadata
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats/generated-files/$CLAUDE_GEN_FILE_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "id",
-  "claude_chat_id": "claude_chat_id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "filename": "filename",
-  "md5": "md5",
-  "mime_type": "mime_type",
-  "size_bytes": 0
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "id",
   "claude_chat_id": "claude_chat_id",

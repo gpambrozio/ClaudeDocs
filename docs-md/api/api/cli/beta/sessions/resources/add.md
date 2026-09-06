@@ -1,72 +1,64 @@
 # Add Session Resource
 
-Copy page
+`$ ant beta:sessions:resources add`
 
-
-
-CLI
-
-# Add Session Resource
-
-$ ant beta:sessions:resources add
-
-POST/v1/sessions/{session\_id}/resources
+**POST** `/v1/sessions/{session_id}/resources`
 
 Add Session Resource
 
-##### ParametersExpand Collapse
+## Parameters
 
---session-id: string
+- `--session-id: string`
 
-Path param: Path parameter session\_id
+  Path param: Path parameter session_id
 
---file-id: string
+- `--file-id: string`
 
-Body param: ID of a previously uploaded file.
+  Body param: ID of a previously uploaded file.
 
---type: "file"
+  minLength: 1, maxLength: 128
 
-Body param
+- `--type: "file"`
 
---mount-path: optional string
+  Body param
 
-Body param: Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+- `--mount-path: optional string`
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+  Body param: Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-Header param: Optional header to specify the beta version(s) you want to use.
+  minLength: 1, maxLength: 4096
 
-##### ReturnsExpand Collapse
+- `--beta: optional array of AnthropicBeta`
 
-
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-beta\_managed\_agents\_file\_resource: object { id, created\_at, file\_id, 3 more } 
+## Returns
 
-id: string
+- `beta_managed_agents_file_resource: object`
 
-created\_at: string
+  - `id: string`
 
-A timestamp in RFC 3339 format
+  - `created_at: string`
 
-file\_id: string
+    A timestamp in RFC 3339 format
 
-mount\_path: string
+    format: date-time
 
-
+  - `file_id: string`
 
-type: "file"
+  - `mount_path: string`
 
-"file"
+  - `type: "file"`
 
-updated\_at: string
+  - `updated_at: string`
 
-A timestamp in RFC 3339 format
+    A timestamp in RFC 3339 format
 
-Add Session Resource
+    format: date-time
 
-CLI
+## Example
 
-```shiki
+```bash
 ant beta:sessions:resources add \
   --api-key my-anthropic-api-key \
   --session-id sesn_011CZkZAtmR3yMPDzynEDxu7 \
@@ -74,28 +66,9 @@ ant beta:sessions:resources add \
   --type file
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
-  "created_at": "2026-03-15T10:00:00Z",
-  "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "mount_path": "/uploads/receipt.pdf",
-  "type": "file",
-  "updated_at": "2026-03-15T10:00:00Z"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
   "created_at": "2026-03-15T10:00:00Z",

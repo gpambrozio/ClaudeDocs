@@ -1,142 +1,272 @@
 # Archive Credential
 
-Copy page
-
-
-
-cURL
-
-# Archive Credential
-
-POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/archive
+**POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/archive`
 
 Archive Credential
 
-##### Path parameters
+## Path parameters
 
-vault\_id: string
+- `vault_id: string`
 
-credential\_id: string
+- `credential_id: string`
 
-##### Headers
+## Headers
 
-
+- `"anthropic-beta": optional array of AnthropicBeta`
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+  Optional header to specify the beta version(s) you want to use.
 
-Optional header to specify the beta version(s) you want to use.
+  - `string`
 
-One of the following:
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
-string
+    - `"message-batches-2024-09-24"`
 
-
+    - `"prompt-caching-2024-07-31"`
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
+    - `"computer-use-2024-10-22"`
 
-One of the following:
+    - `"computer-use-2025-01-24"`
 
-"message-batches-2024-09-24"
+    - `"pdfs-2024-09-25"`
 
-"prompt-caching-2024-07-31"
+    - `"token-counting-2024-11-01"`
 
-"computer-use-2024-10-22"
+    - `"token-efficient-tools-2025-02-19"`
 
-"computer-use-2025-01-24"
+    - `"output-128k-2025-02-19"`
 
-"pdfs-2024-09-25"
+    - `"files-api-2025-04-14"`
 
-"token-counting-2024-11-01"
+    - `"mcp-client-2025-04-04"`
 
-"token-efficient-tools-2025-02-19"
+    - `"mcp-client-2025-11-20"`
 
-"output-128k-2025-02-19"
+    - `"dev-full-thinking-2025-05-14"`
 
-"files-api-2025-04-14"
+    - `"interleaved-thinking-2025-05-14"`
 
-"mcp-client-2025-04-04"
+    - `"code-execution-2025-05-22"`
 
-"mcp-client-2025-11-20"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"dev-full-thinking-2025-05-14"
+    - `"context-1m-2025-08-07"`
 
-"interleaved-thinking-2025-05-14"
+    - `"context-management-2025-06-27"`
 
-"code-execution-2025-05-22"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"skills-2025-10-02"`
 
-"context-1m-2025-08-07"
+    - `"fast-mode-2026-02-01"`
 
-"context-management-2025-06-27"
+    - `"output-300k-2026-03-24"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"user-profiles-2026-03-24"`
 
-"skills-2025-10-02"
+    - `"user-profiles-2026-08-18"`
 
-"fast-mode-2026-02-01"
+    - `"advisor-tool-2026-03-01"`
 
-"output-300k-2026-03-24"
+    - `"managed-agents-2026-04-01"`
 
-"user-profiles-2026-03-24"
+    - `"cache-diagnosis-2026-04-07"`
 
-"user-profiles-2026-08-18"
+    - `"dreaming-2026-04-21"`
 
-"advisor-tool-2026-03-01"
+    - `"thinking-token-count-2026-05-13"`
 
-"managed-agents-2026-04-01"
+    - `"server-side-fallback-2026-06-01"`
 
-"cache-diagnosis-2026-04-07"
+    - `"server-side-fallback-2026-07-01"`
 
-"dreaming-2026-04-21"
+    - `"fallback-credit-2026-06-01"`
 
-"thinking-token-count-2026-05-13"
+    - `"fallback-credit-2026-07-01"`
 
-"server-side-fallback-2026-06-01"
+    - `"agent-memory-2026-07-22"`
 
-"server-side-fallback-2026-07-01"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-"fallback-credit-2026-06-01"
+    - `"compact-2026-01-12"`
 
-"fallback-credit-2026-07-01"
+    - `"computer-use-2025-11-24"`
 
-"agent-memory-2026-07-22"
+    - `"mcp-tunnels-2026-06-22"`
 
-"mid-conversation-tool-changes-2026-07-01"
+    - `"structured-outputs-2025-11-13"`
 
-"compact-2026-01-12"
+    - `"task-budgets-2026-03-13"`
 
-"computer-use-2025-11-24"
+    - `"thinking-display-updates-2026-08-18"`
 
-"mcp-tunnels-2026-06-22"
+    - `"ce-user-management-2026-07-13"`
 
-"structured-outputs-2025-11-13"
+    - `"mid-conversation-output-config-2026-07-01"`
 
-"task-budgets-2026-03-13"
+    - `"thinking-binding-controls-2026-08-01"`
 
-"thinking-display-updates-2026-08-18"
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"ce-user-management-2026-07-13"
+## Returns
 
-"mid-conversation-output-config-2026-07-01"
+- `BetaManagedAgentsCredential object`
 
-"thinking-binding-controls-2026-08-01"
+  A credential stored in a vault. Sensitive fields are never returned in responses.
 
-"mid-conversation-system-clear-at-2026-08-21"
+  - `id: string`
 
-##### Returns
+    Unique identifier for the credential.
 
-
+  - `archived_at: string or null`
 
-BetaManagedAgentsCredential object{ id, archived\_at, auth, 6 more }
+    A timestamp in RFC 3339 format
 
-A credential stored in a vault. Sensitive fields are never returned in responses.
+    format: date-time
 
-Archive Credential
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
-cURL
+    Authentication details for a credential.
 
-```shiki
+    - `BetaManagedAgentsMCPOAuthAuthResponse object`
+
+      OAuth credential details for an MCP server.
+
+      - `mcp_server_url: string`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `type: "mcp_oauth"`
+
+      - `expires_at: optional string or null`
+
+        A timestamp in RFC 3339 format
+
+        format: date-time
+
+      - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse or null`
+
+        OAuth refresh token configuration returned in credential responses.
+
+        - `client_id: string`
+
+          OAuth client ID.
+
+        - `token_endpoint: string`
+
+          Token endpoint URL used to refresh the access token.
+
+        - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse or BetaManagedAgentsTokenEndpointAuthBasicResponse or BetaManagedAgentsTokenEndpointAuthPostResponse`
+
+          Token endpoint requires no client authentication.
+
+          - `BetaManagedAgentsTokenEndpointAuthNoneResponse object`
+
+            Token endpoint requires no client authentication.
+
+            - `type: "none"`
+
+          - `BetaManagedAgentsTokenEndpointAuthBasicResponse object`
+
+            Token endpoint uses HTTP Basic authentication with client credentials.
+
+            - `type: "client_secret_basic"`
+
+          - `BetaManagedAgentsTokenEndpointAuthPostResponse object`
+
+            Token endpoint uses POST body authentication with client credentials.
+
+            - `type: "client_secret_post"`
+
+        - `resource: optional string or null`
+
+          OAuth resource indicator.
+
+        - `scope: optional string or null`
+
+          OAuth scope for the refresh request.
+
+    - `BetaManagedAgentsStaticBearerAuthResponse object`
+
+      Static bearer token credential details for an MCP server.
+
+      - `mcp_server_url: string`
+
+        URL of the MCP server this credential authenticates against.
+
+      - `type: "static_bearer"`
+
+    - `BetaManagedAgentsEnvironmentVariableAuthResponse object`
+
+      Environment variable credential details. The secret value is never returned.
+
+      - `injection_location: BetaManagedAgentsInjectionLocationResponse`
+
+        Where in the outbound request the secret value is substituted.
+
+        - `body: boolean`
+
+          Whether the placeholder is substituted in the request body.
+
+        - `header: boolean`
+
+          Whether the placeholder is substituted in request header values.
+
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+        Outbound hosts the secret value is substituted on.
+
+        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object`
+
+          The secret is substituted on any host the session's Environment network policy permits egress to.
+
+          - `type: "unrestricted"`
+
+        - `BetaManagedAgentsLimitedCredentialNetworkingResponse object`
+
+          The secret is substituted only on requests to the listed hosts.
+
+          - `allowed_hosts: array of string`
+
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+          - `type: "limited"`
+
+      - `secret_name: string`
+
+        Name of the environment variable.
+
+      - `type: "environment_variable"`
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `metadata: map[string]`
+
+    Arbitrary key-value metadata attached to the credential.
+
+  - `type: "vault_credential"`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `vault_id: string`
+
+    Identifier of the vault this credential belongs to.
+
+  - `display_name: optional string or null`
+
+    Human-readable name for the credential.
+
+## Example
+
+```bash
 curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/archive \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
@@ -144,36 +274,9 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/ar
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
-  "archived_at": null,
-  "auth": {
-    "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
-    "type": "static_bearer"
-  },
-  "created_at": "2026-03-15T10:00:00Z",
-  "metadata": {
-    "environment": "production"
-  },
-  "type": "vault_credential",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
-  "display_name": "Example credential"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
   "archived_at": null,

@@ -1,110 +1,336 @@
 # Workspaces
 
-Copy page
+## List Federation Rule Workspaces
 
-
+**GET** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces`
 
-# Workspaces
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
-##### [List Federation Rule Workspaces](api/http/admin/federation_rules/workspaces/list.md)
+List workspaces where this federation rule is enabled.
 
-GET/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
+Returns all workspace enablements in a single response; the `limit` and
+`page` parameters are accepted but have no effect, and `next_page` is
+always `null`. Returns explicit per-workspace enablements only; for
+rules with `applies_to_all_workspaces` or a legacy single
+`workspace_id`, check those fields on the rule itself.
 
-##### [Add Federation Rule Workspace](api/http/admin/federation_rules/workspaces/create.md)
+### Path parameters
 
-POST/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
+- `federation_rule_id: string`
 
-##### [Remove Federation Rule Workspace](api/http/admin/federation_rules/workspaces/delete.md)
+  ID of the federation rule.
 
-DELETE/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces/{workspace\_id}
+### Query parameters
 
-##### Models
+- `limit: optional number`
 
-
+  Number of results per page.
 
-WorkspaceCreateResponse object{ created\_at, created\_by\_actor\_id, federation\_rule\_id, 3 more }
+  default: 20, maximum: 100, minimum: 1
 
-
+- `page: optional string`
 
-created\_at: string
+  Opaque cursor from a previous response's `next_page`.
 
-When this workspace was enabled for the rule.
+### Headers
 
-formatdate-time
+- `"anthropic-beta": optional array of string`
 
-created\_by\_actor\_id: string or null
+  Optional header to specify the beta version(s) you want to use.
 
-Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
+  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-federation\_rule\_id: string
+### Returns
 
-Tagged ID of the federation rule.
+- `data: array of object`
 
-
+  - `created_at: string`
 
-type: "federation\_rule\_workspace"
+    When this workspace was enabled for the rule.
 
-defaultfederation\_rule\_workspace
+    format: date-time
 
-workspace\_id: string
+  - `created_by_actor_id: string or null`
 
-Tagged ID of the workspace this rule is enabled for.
+    Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
 
-workspace\_name: string or null
+  - `federation_rule_id: string`
 
-Workspace display name. Populated when listing; null in the enable response.
+    Tagged ID of the federation rule.
 
-
+  - `type: "federation_rule_workspace"`
 
-WorkspaceListResponse object{ created\_at, created\_by\_actor\_id, federation\_rule\_id, 3 more }
+    default: federation_rule_workspace
 
-
+  - `workspace_id: string`
 
-created\_at: string
+    Tagged ID of the workspace this rule is enabled for.
 
-When this workspace was enabled for the rule.
+  - `workspace_name: string or null`
 
-formatdate-time
+    Workspace display name. Populated when listing; null in the enable response.
 
-created\_by\_actor\_id: string or null
+- `next_page: string or null`
 
-Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
+  Opaque cursor for the next page; null when there are no more results.
 
-federation\_rule\_id: string
+### Example
 
-Tagged ID of the federation rule.
+```bash
+curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RULE_ID/workspaces \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+```
 
-
+#### Response (200)
 
-type: "federation\_rule\_workspace"
+```json
+{
+  "data": [
+    {
+      "created_at": "2024-10-30T23:58:27.427722Z",
+      "created_by_actor_id": "created_by_actor_id",
+      "federation_rule_id": "federation_rule_id",
+      "type": "federation_rule_workspace",
+      "workspace_id": "workspace_id",
+      "workspace_name": "workspace_name"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
 
-defaultfederation\_rule\_workspace
+## Add Federation Rule Workspace
 
-workspace\_id: string
+**POST** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces`
 
-Tagged ID of the workspace this rule is enabled for.
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
-workspace\_name: string or null
+Enable a federation rule for a workspace.
 
-Workspace display name. Populated when listing; null in the enable response.
+Idempotent; re-enabling returns the existing enablement. The rule and
+workspace must both belong to your organization. Membership of the
+rule's target service account in this workspace is not checked at
+enablement: token exchange into this workspace is rejected unless the
+target is a member (it is implicitly a member of the default workspace).
+Archived rules are rejected with 400. OAuth callers may only manage rules
+whose `oauth_scope` is `workspace:developer` or `workspace:inference`;
+other scopes require a Console session.
 
-
+### Path parameters
 
-WorkspaceDeleteResponse object{ federation\_rule\_id, type, workspace\_id }
+- `federation_rule_id: string`
 
-federation\_rule\_id: string
+  ID of the federation rule.
 
-Tagged ID of the federation rule.
+### Headers
 
-
+- `"anthropic-beta": optional array of string`
 
-type: "federation\_rule\_workspace\_deleted"
+  Optional header to specify the beta version(s) you want to use.
 
-defaultfederation\_rule\_workspace\_deleted
+  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-workspace\_id: string
+### Body parameters
 
-Tagged ID of the workspace named in the delete request. Removal is idempotent.
+- `workspace_id: string`
+
+  Tagged ID of the workspace to enable this rule for.
+
+### Returns
+
+- `created_at: string`
+
+  When this workspace was enabled for the rule.
+
+  format: date-time
+
+- `created_by_actor_id: string or null`
+
+  Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
+
+- `federation_rule_id: string`
+
+  Tagged ID of the federation rule.
+
+- `type: "federation_rule_workspace"`
+
+  default: federation_rule_workspace
+
+- `workspace_id: string`
+
+  Tagged ID of the workspace this rule is enabled for.
+
+- `workspace_name: string or null`
+
+  Workspace display name. Populated when listing; null in the enable response.
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RULE_ID/workspaces \
+    -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
+    -d '{
+          "workspace_id": "workspace_id"
+        }'
+```
+
+#### Response (200)
+
+```json
+{
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "created_by_actor_id": "created_by_actor_id",
+  "federation_rule_id": "federation_rule_id",
+  "type": "federation_rule_workspace",
+  "workspace_id": "workspace_id",
+  "workspace_name": "workspace_name"
+}
+```
+
+## Remove Federation Rule Workspace
+
+**DELETE** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces/{workspace_id}`
+
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+
+Disable a federation rule for a workspace.
+
+Idempotent; succeeds even if the enablement was already removed. OAuth
+callers may only manage rules whose `oauth_scope` is
+`workspace:developer` or `workspace:inference`; other scopes require a
+Console session.
+
+### Path parameters
+
+- `federation_rule_id: string`
+
+  ID of the federation rule.
+
+- `workspace_id: string`
+
+  ID of the workspace to disable for.
+
+### Headers
+
+- `"anthropic-beta": optional array of string`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
+
+### Returns
+
+- `federation_rule_id: string`
+
+  Tagged ID of the federation rule.
+
+- `type: "federation_rule_workspace_deleted"`
+
+  default: federation_rule_workspace_deleted
+
+- `workspace_id: string`
+
+  Tagged ID of the workspace named in the delete request. Removal is idempotent.
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RULE_ID/workspaces/$WORKSPACE_ID \
+    -X DELETE \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+```
+
+#### Response (200)
+
+```json
+{
+  "federation_rule_id": "federation_rule_id",
+  "type": "federation_rule_workspace_deleted",
+  "workspace_id": "workspace_id"
+}
+```
+
+## Domain types
+
+### Workspace Create Response
+
+- `WorkspaceCreateResponse object`
+
+  - `created_at: string`
+
+    When this workspace was enabled for the rule.
+
+    format: date-time
+
+  - `created_by_actor_id: string or null`
+
+    Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
+
+  - `federation_rule_id: string`
+
+    Tagged ID of the federation rule.
+
+  - `type: "federation_rule_workspace"`
+
+    default: federation_rule_workspace
+
+  - `workspace_id: string`
+
+    Tagged ID of the workspace this rule is enabled for.
+
+  - `workspace_name: string or null`
+
+    Workspace display name. Populated when listing; null in the enable response.
+
+### Workspace List Response
+
+- `WorkspaceListResponse object`
+
+  - `created_at: string`
+
+    When this workspace was enabled for the rule.
+
+    format: date-time
+
+  - `created_by_actor_id: string or null`
+
+    Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
+
+  - `federation_rule_id: string`
+
+    Tagged ID of the federation rule.
+
+  - `type: "federation_rule_workspace"`
+
+    default: federation_rule_workspace
+
+  - `workspace_id: string`
+
+    Tagged ID of the workspace this rule is enabled for.
+
+  - `workspace_name: string or null`
+
+    Workspace display name. Populated when listing; null in the enable response.
+
+### Workspace Delete Response
+
+- `WorkspaceDeleteResponse object`
+
+  - `federation_rule_id: string`
+
+    Tagged ID of the federation rule.
+
+  - `type: "federation_rule_workspace_deleted"`
+
+    default: federation_rule_workspace_deleted
+
+  - `workspace_id: string`
+
+    Tagged ID of the workspace named in the delete request. Removal is idempotent.
 
 ---
 

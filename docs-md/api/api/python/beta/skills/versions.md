@@ -1,244 +1,953 @@
 # Versions
 
-Copy page
+## Create Skill Version
 
-
+`beta.skills.versions.create(skill_id, **kwargs)  -> BetaSkillVersion`
 
-Python
+**POST** `/v1/skills/{skill_id}/versions`
 
-# Versions
+Create Skill Version
 
-##### [Create Skill Version](api/beta/skills/versions/create.md)
+### Parameters
 
-beta.skills.versions.create(strskill\_id, VersionCreateParams\*\*kwargs)  -> [VersionCreateResponse](api/beta/skills/versions.md)
+- `skill_id: str`
 
-POST/v1/skills/{skill\_id}/versions
+  Unique identifier for the skill.
 
-##### [List Skill Versions](api/beta/skills/versions/list.md)
+  The format and length of IDs may change over time.
 
-beta.skills.versions.list(strskill\_id, VersionListParams\*\*kwargs)  -> SyncPageCursor[[VersionListResponse](api/beta/skills/versions.md)]
+- `files: Sequence[FileTypes]`
 
-GET/v1/skills/{skill\_id}/versions
+  Files to upload for the skill.
 
-##### [Download Skill Version Content](api/beta/skills/versions/download.md)
+  All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
-beta.skills.versions.download(strversion, VersionDownloadParams\*\*kwargs)  -> BinaryResponseContent
+- `betas: Optional[List[AnthropicBetaParam]]`
 
-GET/v1/skills/{skill\_id}/versions/{version}/content
+  Optional header to specify the beta version(s) you want to use.
 
-##### [Get Skill Version](api/beta/skills/versions/retrieve.md)
+  - `str`
 
-beta.skills.versions.retrieve(strversion, VersionRetrieveParams\*\*kwargs)  -> [VersionRetrieveResponse](api/beta/skills/versions.md)
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
 
-GET/v1/skills/{skill\_id}/versions/{version}
+    - `"message-batches-2024-09-24"`
 
-##### [Delete Skill Version](api/beta/skills/versions/delete.md)
+    - `"prompt-caching-2024-07-31"`
 
-beta.skills.versions.delete(strversion, VersionDeleteParams\*\*kwargs)  -> [VersionDeleteResponse](api/beta/skills/versions.md)
+    - `"computer-use-2024-10-22"`
 
-DELETE/v1/skills/{skill\_id}/versions/{version}
+    - `"computer-use-2025-01-24"`
 
-##### ModelsExpand Collapse
+    - `"pdfs-2024-09-25"`
 
-
+    - `"token-counting-2024-11-01"`
 
-class VersionCreateResponse: …
+    - `"token-efficient-tools-2025-02-19"`
 
-
+    - `"output-128k-2025-02-19"`
 
-id: str
+    - `"files-api-2025-04-14"`
 
-Unique identifier for the skill version.
+    - `"mcp-client-2025-04-04"`
 
-The format and length of IDs may change over time.
+    - `"mcp-client-2025-11-20"`
 
-created\_at: str
+    - `"dev-full-thinking-2025-05-14"`
 
-ISO 8601 timestamp of when the skill version was created.
+    - `"interleaved-thinking-2025-05-14"`
 
-
+    - `"code-execution-2025-05-22"`
 
-description: str
+    - `"extended-cache-ttl-2025-04-11"`
 
-Description of the skill version.
+    - `"context-1m-2025-08-07"`
 
-This is extracted from the SKILL.md file in the skill upload.
+    - `"context-management-2025-06-27"`
 
-
+    - `"model-context-window-exceeded-2025-08-26"`
 
-directory: str
+    - `"skills-2025-10-02"`
 
-Directory name of the skill version.
+    - `"fast-mode-2026-02-01"`
 
-This is the top-level directory name that was extracted from the uploaded files.
+    - `"output-300k-2026-03-24"`
 
-
+    - `"user-profiles-2026-03-24"`
 
-name: str
+    - `"user-profiles-2026-08-18"`
 
-Human-readable name of the skill version.
+    - `"advisor-tool-2026-03-01"`
 
-This is extracted from the SKILL.md file in the skill upload.
+    - `"managed-agents-2026-04-01"`
 
-skill\_id: str
+    - `"cache-diagnosis-2026-04-07"`
 
-Identifier for the skill that this version belongs to.
+    - `"dreaming-2026-04-21"`
 
-
+    - `"thinking-token-count-2026-05-13"`
 
-type: str
+    - `"server-side-fallback-2026-06-01"`
 
-Object type.
+    - `"server-side-fallback-2026-07-01"`
 
-For Skill Versions, this is always `"skill_version"`.
+    - `"fallback-credit-2026-06-01"`
 
-
+    - `"fallback-credit-2026-07-01"`
 
-version: str
+    - `"agent-memory-2026-07-22"`
 
-Version identifier for the skill.
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+    - `"compact-2026-01-12"`
 
-
+    - `"computer-use-2025-11-24"`
 
-class VersionListResponse: …
+    - `"mcp-tunnels-2026-06-22"`
 
-
+    - `"structured-outputs-2025-11-13"`
 
-id: str
+    - `"task-budgets-2026-03-13"`
 
-Unique identifier for the skill version.
+    - `"thinking-display-updates-2026-08-18"`
 
-The format and length of IDs may change over time.
+    - `"ce-user-management-2026-07-13"`
 
-created\_at: str
+    - `"mid-conversation-output-config-2026-07-01"`
 
-ISO 8601 timestamp of when the skill version was created.
+    - `"thinking-binding-controls-2026-08-01"`
 
-
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-description: str
+### Returns
 
-Description of the skill version.
+- `class BetaSkillVersion: …`
 
-This is extracted from the SKILL.md file in the skill upload.
+  - `id: str`
 
-
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
 
-directory: str
+  - `created_at: datetime`
 
-Directory name of the skill version.
+    ISO 8601 timestamp of when the skill was created.
 
-This is the top-level directory name that was extracted from the uploaded files.
+    format: date-time
 
-
+  - `description: str`
 
-name: str
+    Description of the skill version.
 
-Human-readable name of the skill version.
+    This is extracted from the SKILL.md file in the skill upload.
 
-This is extracted from the SKILL.md file in the skill upload.
+  - `name: str`
 
-skill\_id: str
+    The Skill's immutable kebab-case slug, set at creation from the first
+    upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
+    later upload must resolve to the same value. Also the top-level directory
+    of the Skill's mounted files and the base name of a downloaded archive.
 
-Identifier for the skill that this version belongs to.
+  - `skill_id: str`
 
-
+    Unique identifier for the skill.
 
-type: str
+    The format and length of IDs may change over time.
 
-Object type.
+  - `type: Literal["skill_version"]`
 
-For Skill Versions, this is always `"skill_version"`.
+    Object type.
 
-
+    For Skill Versions, this is always `"skill_version"`.
 
-version: str
+    default: skill_version
 
-Version identifier for the skill.
+### Example
 
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+```python
+import os
+from anthropic import Anthropic
 
-
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+beta_skill_version = client.beta.skills.versions.create(
+    skill_id="skill_id",
+    files=[b"Example data"],
+)
+print(beta_skill_version.id)
+```
 
-class VersionRetrieveResponse: …
+#### Response (200)
 
-
+```json
+{
+  "id": "id",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "description": "description",
+  "name": "name",
+  "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "skill_version"
+}
+```
 
-id: str
+## List Skill Versions
 
-Unique identifier for the skill version.
+`beta.skills.versions.list(skill_id, **kwargs)  -> SyncPageCursor[BetaSkillVersion]`
 
-The format and length of IDs may change over time.
+**GET** `/v1/skills/{skill_id}/versions`
 
-created\_at: str
+List Skill Versions
 
-ISO 8601 timestamp of when the skill version was created.
+### Parameters
 
-
+- `skill_id: str`
 
-description: str
+  Unique identifier for the skill.
 
-Description of the skill version.
+  The format and length of IDs may change over time.
 
-This is extracted from the SKILL.md file in the skill upload.
+- `limit: Optional[int]`
 
-
+  Number of results to return per page.
 
-directory: str
+  Ranges from `1` to `1000`. Defaults to `20`.
 
-Directory name of the skill version.
+  default: 20, minimum: 1, maximum: 1000
 
-This is the top-level directory name that was extracted from the uploaded files.
+- `page: Optional[str]`
 
-
+  Optionally set to the `next_page` token from the previous response.
 
-name: str
+- `betas: Optional[List[AnthropicBetaParam]]`
 
-Human-readable name of the skill version.
+  Optional header to specify the beta version(s) you want to use.
 
-This is extracted from the SKILL.md file in the skill upload.
+  - `str`
 
-skill\_id: str
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
 
-Identifier for the skill that this version belongs to.
+    - `"message-batches-2024-09-24"`
 
-
+    - `"prompt-caching-2024-07-31"`
 
-type: str
+    - `"computer-use-2024-10-22"`
 
-Object type.
+    - `"computer-use-2025-01-24"`
 
-For Skill Versions, this is always `"skill_version"`.
+    - `"pdfs-2024-09-25"`
 
-
+    - `"token-counting-2024-11-01"`
 
-version: str
+    - `"token-efficient-tools-2025-02-19"`
 
-Version identifier for the skill.
+    - `"output-128k-2025-02-19"`
 
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+    - `"files-api-2025-04-14"`
 
-
+    - `"mcp-client-2025-04-04"`
 
-class VersionDeleteResponse: …
+    - `"mcp-client-2025-11-20"`
 
-
+    - `"dev-full-thinking-2025-05-14"`
 
-id: str
+    - `"interleaved-thinking-2025-05-14"`
 
-Version identifier for the skill.
+    - `"code-execution-2025-05-22"`
 
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+    - `"extended-cache-ttl-2025-04-11"`
 
-
+    - `"context-1m-2025-08-07"`
 
-type: str
+    - `"context-management-2025-06-27"`
 
-Deleted object type.
+    - `"model-context-window-exceeded-2025-08-26"`
 
-For Skill Versions, this is always `"skill_version_deleted"`.
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaSkillVersion: …`
+
+  - `id: str`
+
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
+
+  - `created_at: datetime`
+
+    ISO 8601 timestamp of when the skill was created.
+
+    format: date-time
+
+  - `description: str`
+
+    Description of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `name: str`
+
+    The Skill's immutable kebab-case slug, set at creation from the first
+    upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
+    later upload must resolve to the same value. Also the top-level directory
+    of the Skill's mounted files and the base name of a downloaded archive.
+
+  - `skill_id: str`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `type: Literal["skill_version"]`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
+
+    default: skill_version
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+page = client.beta.skills.versions.list(
+    skill_id="skill_id",
+)
+page = page.data[0]
+print(page.id)
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2024-10-30T23:58:27.427722Z",
+      "description": "description",
+      "name": "name",
+      "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
+      "type": "skill_version"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Download Skill Version Content
+
+`beta.skills.versions.download(version, **kwargs)  -> BinaryResponseContent`
+
+**GET** `/v1/skills/{skill_id}/versions/{version}/content`
+
+Download a skill version's content as a zip archive.
+
+### Parameters
+
+- `skill_id: str`
+
+  Unique identifier for the skill.
+
+  The format and length of IDs may change over time.
+
+- `version: str`
+
+  Identifies the skill version by its version ID.
+
+  Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `BinaryResponseContent`
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+response = client.beta.skills.versions.download(
+    version="version",
+    skill_id="skill_id",
+)
+print(response)
+content = response.read()
+print(content)
+```
+
+## Get Skill Version
+
+`beta.skills.versions.retrieve(version, **kwargs)  -> BetaSkillVersion`
+
+**GET** `/v1/skills/{skill_id}/versions/{version}`
+
+Get Skill Version
+
+### Parameters
+
+- `skill_id: str`
+
+  Unique identifier for the skill.
+
+  The format and length of IDs may change over time.
+
+- `version: str`
+
+  Identifies the skill version: a version ID, or the literal `latest` for the skill's most recent version.
+
+  Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaSkillVersion: …`
+
+  - `id: str`
+
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
+
+  - `created_at: datetime`
+
+    ISO 8601 timestamp of when the skill was created.
+
+    format: date-time
+
+  - `description: str`
+
+    Description of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `name: str`
+
+    The Skill's immutable kebab-case slug, set at creation from the first
+    upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
+    later upload must resolve to the same value. Also the top-level directory
+    of the Skill's mounted files and the base name of a downloaded archive.
+
+  - `skill_id: str`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `type: Literal["skill_version"]`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
+
+    default: skill_version
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+beta_skill_version = client.beta.skills.versions.retrieve(
+    version="version",
+    skill_id="skill_id",
+)
+print(beta_skill_version.id)
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "description": "description",
+  "name": "name",
+  "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "skill_version"
+}
+```
+
+## Delete Skill Version
+
+`beta.skills.versions.delete(version, **kwargs)  -> BetaDeletedSkillVersion`
+
+**DELETE** `/v1/skills/{skill_id}/versions/{version}`
+
+Delete Skill Version
+
+### Parameters
+
+- `skill_id: str`
+
+  Unique identifier for the skill.
+
+  The format and length of IDs may change over time.
+
+- `version: str`
+
+  Identifies the skill version by its version ID.
+
+  Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaDeletedSkillVersion: …`
+
+  - `id: str`
+
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
+
+  - `type: Literal["skill_version_deleted"]`
+
+    Deleted object type.
+
+    For Skill Versions, this is always `"skill_version_deleted"`.
+
+    default: skill_version_deleted
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+beta_deleted_skill_version = client.beta.skills.versions.delete(
+    version="version",
+    skill_id="skill_id",
+)
+print(beta_deleted_skill_version.id)
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "type": "skill_version_deleted"
+}
+```
+
+## Domain types
+
+### Beta Deleted Skill Version
+
+- `class BetaDeletedSkillVersion: …`
+
+  - `id: str`
+
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
+
+  - `type: Literal["skill_version_deleted"]`
+
+    Deleted object type.
+
+    For Skill Versions, this is always `"skill_version_deleted"`.
+
+    default: skill_version_deleted
+
+### Beta Skill Version
+
+- `class BetaSkillVersion: …`
+
+  - `id: str`
+
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
+
+  - `created_at: datetime`
+
+    ISO 8601 timestamp of when the skill was created.
+
+    format: date-time
+
+  - `description: str`
+
+    Description of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `name: str`
+
+    The Skill's immutable kebab-case slug, set at creation from the first
+    upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
+    later upload must resolve to the same value. Also the top-level directory
+    of the Skill's mounted files and the base name of a downloaded archive.
+
+  - `skill_id: str`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `type: Literal["skill_version"]`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
+
+    default: skill_version
 
 ---
 

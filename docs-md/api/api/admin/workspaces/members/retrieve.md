@@ -1,97 +1,64 @@
 # Get Workspace Member
 
-Copy page
-
-
-
-# Get Workspace Member
-
-GET/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+**GET** `/v1/organizations/workspaces/{workspace_id}/members/{user_id}`
 
 Get Workspace Member
 
-##### Path parameters
+## Path parameters
 
-workspace\_id: string
+- `workspace_id: string`
 
-ID of the Workspace.
+  ID of the Workspace.
 
-user\_id: string
+- `user_id: string`
 
-ID of the User.
+  ID of the User.
 
-##### Returns
+## Returns
 
-
+- `WorkspaceMember object`
 
-WorkspaceMember object{ type, user\_id, workspace\_id, workspace\_role }
+  - `type: "workspace_member"`
 
-
+    Object type.
 
-type: "workspace\_member"
+    For Workspace Members, this is always `"workspace_member"`.
 
-Object type.
+    default: workspace_member
 
-For Workspace Members, this is always `"workspace_member"`.
+  - `user_id: string`
 
-defaultworkspace\_member
+    ID of the User.
 
-user\_id: string
+  - `workspace_id: string`
 
-ID of the User.
+    ID of the Workspace.
 
-workspace\_id: string
+  - `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
 
-ID of the Workspace.
+    Role of the Workspace Member.
 
-
+    - `"workspace_admin"`
 
-workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
+    - `"workspace_billing"`
 
-Role of the Workspace Member.
+    - `"workspace_developer"`
 
-One of the following:
+    - `"workspace_restricted_developer"`
 
-"workspace\_admin"
+    - `"workspace_user"`
 
-"workspace\_billing"
+## Example
 
-"workspace\_developer"
-
-"workspace\_restricted\_developer"
-
-"workspace\_user"
-
-Get Workspace Member
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members/$USER_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "type": "workspace_member",
-  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-  "workspace_role": "workspace_user"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "type": "workspace_member",
   "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",

@@ -1,188 +1,123 @@
 # List Skills
 
-Copy page
-
-
-
-cURL
-
-# List Skills
-
-GET/v1/skills
+**GET** `/v1/skills`
 
 List Skills
 
-##### Query parameters
+## Query parameters
 
-
+- `limit: optional number`
 
-limit: optional number
+  Number of results to return per page.
 
-Number of results to return per page.
+  Ranges from `1` to `1000`. Defaults to `20`.
 
-Ranges from `1` to `1000`. Defaults to `20`.
+  default: 20, minimum: 1, maximum: 1000
 
-default20
+- `page: optional string`
 
-minimum1
+  Pagination token for fetching a specific page of results.
 
-maximum1000
+  Pass the value from a previous response's `next_page` field to get the next page of results.
 
-
+- `source: optional string`
 
-page: optional string
+  Filter skills by source.
 
-Pagination token for fetching a specific page of results.
+  If provided, only skills from the specified source will be returned:
 
-Pass the value from a previous response's `next_page` field to get the next page of results.
+  * `"custom"`: only return user-created skills
+  * `"anthropic"`: only return Anthropic-created skills
 
-
+## Returns
 
-source: optional string
+- `data: array of Skill`
 
-Filter skills by source.
+  List of skills.
 
-If provided, only skills from the specified source will be returned:
+  - `id: string`
 
-- `"custom"`: only return user-created skills
-- `"anthropic"`: only return Anthropic-created skills
+    Unique identifier for the skill.
 
-##### Returns
+    The format and length of IDs may change over time.
 
-
+  - `created_at: string`
 
-data: array of [Skill](api/http/skills.md) { id, created\_at, display\_name, 4 more }
+    ISO 8601 timestamp of when the skill was created.
 
-List of skills.
+    format: date-time
 
-
+  - `display_name: string`
 
-id: string
+    Human-readable, single-line label for the Skill. Maximum 255 characters.
+    Always set: derived from the SKILL.md frontmatter `name` when omitted at
+    creation. Not unique.
 
-Unique identifier for the skill.
+  - `latest_version_id: string`
 
-The format and length of IDs may change over time.
+    ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
 
-
+  - `source: SkillSource`
 
-created\_at: string
+    Where the Skill comes from.
 
-ISO 8601 timestamp of when the skill was created.
+    Possible values:
 
-formatdate-time
+    * `"custom"`: authored by the platform user; private to their workspace
+    * `"anthropic"`: published by Anthropic; shared and read-only
+    * `"anthropic_example"`: Anthropic-published sample Skill
+    * `"plugin"`: resolved from an installed plugin
 
-display\_name: string
+    - `type: "custom" or "anthropic" or "anthropic_example" or "plugin"`
 
-Human-readable, single-line label for the Skill. Maximum 255 characters.
-Always set: derived from the SKILL.md frontmatter `name` when omitted at
-creation. Not unique.
+      Where the Skill comes from.
 
-latest\_version\_id: string
+      Possible values:
 
-ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
+      * `"custom"`: authored by the platform user; private to their workspace
+      * `"anthropic"`: published by Anthropic; shared and read-only
+      * `"anthropic_example"`: Anthropic-published sample Skill
+      * `"plugin"`: resolved from an installed plugin
 
-
+      - `"custom"`
 
-source: [SkillSource](api/http/skills.md) { type }
+      - `"anthropic"`
 
-Where the Skill comes from.
+      - `"anthropic_example"`
 
-Possible values:
+      - `"plugin"`
 
-- `"custom"`: authored by the platform user; private to their workspace
-- `"anthropic"`: published by Anthropic; shared and read-only
-- `"anthropic_example"`: Anthropic-published sample Skill
-- `"plugin"`: resolved from an installed plugin
+  - `type: "skill"`
 
-
+    Object type.
 
-type: "custom" or "anthropic" or "anthropic\_example" or "plugin"
+    For Skills, this is always `"skill"`.
 
-Where the Skill comes from.
+    default: skill
 
-Possible values:
+  - `updated_at: string`
 
-- `"custom"`: authored by the platform user; private to their workspace
-- `"anthropic"`: published by Anthropic; shared and read-only
-- `"anthropic_example"`: Anthropic-published sample Skill
-- `"plugin"`: resolved from an installed plugin
+    ISO 8601 timestamp of when the skill was last updated.
 
-One of the following:
+    format: date-time
 
-"custom"
+- `next_page: string or null`
 
-"anthropic"
+  Token for fetching the next page of results.
 
-"anthropic\_example"
+  If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
 
-"plugin"
+## Example
 
-
-
-type: "skill"
-
-Object type.
-
-For Skills, this is always `"skill"`.
-
-defaultskill
-
-
-
-updated\_at: string
-
-ISO 8601 timestamp of when the skill was last updated.
-
-formatdate-time
-
-
-
-next\_page: string or null
-
-Token for fetching the next page of results.
-
-If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
-
-List Skills
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/skills \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "skill_01JAbcdefghijklmnopqrstuvw",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "display_name": "display_name",
-      "latest_version_id": "latest_version_id",
-      "source": {
-        "type": "custom"
-      },
-      "type": "skill",
-      "updated_at": "2024-10-30T23:58:27.427722Z"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

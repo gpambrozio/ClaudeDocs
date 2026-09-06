@@ -1,14 +1,6 @@
 # List Service Accounts
 
-Copy page
-
-
-
-cURL
-
-# List Service Accounts
-
-GET/v1/organizations/service\_accounts
+**GET** `/v1/organizations/service_accounts`
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -18,256 +10,195 @@ Results are ordered by creation time, newest first. Use `limit` and the
 `next_page` cursor to paginate; set `include_archived=true` to include
 archived service accounts.
 
-##### Query parameters
+## Query parameters
 
-
+- `include_archived: optional boolean`
 
-include\_archived: optional boolean
+  Include archived resources. Defaults to false.
 
-Include archived resources. Defaults to false.
+  default: false
 
-defaultfalse
+- `limit: optional number`
 
-
+  Number of results per page.
 
-limit: optional number
+  default: 20, maximum: 100, minimum: 1
 
-Number of results per page.
+- `page: optional string`
 
-default20
+  Opaque cursor from a previous response's `next_page`.
 
-maximum100
+## Headers
 
-minimum1
+- `"anthropic-beta": optional array of AnthropicBeta`
 
-page: optional string
+  Optional header to specify the beta version(s) you want to use.
 
-Opaque cursor from a previous response's `next_page`.
+  - `string`
 
-##### Headers
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
-
+    - `"message-batches-2024-09-24"`
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+    - `"prompt-caching-2024-07-31"`
 
-Optional header to specify the beta version(s) you want to use.
+    - `"computer-use-2024-10-22"`
 
-One of the following:
+    - `"computer-use-2025-01-24"`
 
-string
+    - `"pdfs-2024-09-25"`
 
-
+    - `"token-counting-2024-11-01"`
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
+    - `"token-efficient-tools-2025-02-19"`
 
-One of the following:
+    - `"output-128k-2025-02-19"`
 
-"message-batches-2024-09-24"
+    - `"files-api-2025-04-14"`
 
-"prompt-caching-2024-07-31"
+    - `"mcp-client-2025-04-04"`
 
-"computer-use-2024-10-22"
+    - `"mcp-client-2025-11-20"`
 
-"computer-use-2025-01-24"
+    - `"dev-full-thinking-2025-05-14"`
 
-"pdfs-2024-09-25"
+    - `"interleaved-thinking-2025-05-14"`
 
-"token-counting-2024-11-01"
+    - `"code-execution-2025-05-22"`
 
-"token-efficient-tools-2025-02-19"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"output-128k-2025-02-19"
+    - `"context-1m-2025-08-07"`
 
-"files-api-2025-04-14"
+    - `"context-management-2025-06-27"`
 
-"mcp-client-2025-04-04"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"mcp-client-2025-11-20"
+    - `"skills-2025-10-02"`
 
-"dev-full-thinking-2025-05-14"
+    - `"fast-mode-2026-02-01"`
 
-"interleaved-thinking-2025-05-14"
+    - `"output-300k-2026-03-24"`
 
-"code-execution-2025-05-22"
+    - `"user-profiles-2026-03-24"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"user-profiles-2026-08-18"`
 
-"context-1m-2025-08-07"
+    - `"advisor-tool-2026-03-01"`
 
-"context-management-2025-06-27"
+    - `"managed-agents-2026-04-01"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"cache-diagnosis-2026-04-07"`
 
-"skills-2025-10-02"
+    - `"dreaming-2026-04-21"`
 
-"fast-mode-2026-02-01"
+    - `"thinking-token-count-2026-05-13"`
 
-"output-300k-2026-03-24"
+    - `"server-side-fallback-2026-06-01"`
 
-"user-profiles-2026-03-24"
+    - `"server-side-fallback-2026-07-01"`
 
-"user-profiles-2026-08-18"
+    - `"fallback-credit-2026-06-01"`
 
-"advisor-tool-2026-03-01"
+    - `"fallback-credit-2026-07-01"`
 
-"managed-agents-2026-04-01"
+    - `"agent-memory-2026-07-22"`
 
-"cache-diagnosis-2026-04-07"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-"dreaming-2026-04-21"
+    - `"compact-2026-01-12"`
 
-"thinking-token-count-2026-05-13"
+    - `"computer-use-2025-11-24"`
 
-"server-side-fallback-2026-06-01"
+    - `"mcp-tunnels-2026-06-22"`
 
-"server-side-fallback-2026-07-01"
+    - `"structured-outputs-2025-11-13"`
 
-"fallback-credit-2026-06-01"
+    - `"task-budgets-2026-03-13"`
 
-"fallback-credit-2026-07-01"
+    - `"thinking-display-updates-2026-08-18"`
 
-"agent-memory-2026-07-22"
+    - `"ce-user-management-2026-07-13"`
 
-"mid-conversation-tool-changes-2026-07-01"
+    - `"mid-conversation-output-config-2026-07-01"`
 
-"compact-2026-01-12"
+    - `"thinking-binding-controls-2026-08-01"`
 
-"computer-use-2025-11-24"
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"mcp-tunnels-2026-06-22"
+## Returns
 
-"structured-outputs-2025-11-13"
+- `data: array of BetaServiceAccount`
 
-"task-budgets-2026-03-13"
+  - `id: string`
 
-"thinking-display-updates-2026-08-18"
+    Tagged ID of the service account.
 
-"ce-user-management-2026-07-13"
+  - `archived_at: string or null`
 
-"mid-conversation-output-config-2026-07-01"
+    If set, this service account is archived.
 
-"thinking-binding-controls-2026-08-01"
+    format: date-time
 
-"mid-conversation-system-clear-at-2026-08-21"
+  - `archived_by_actor_id: string or null`
 
-##### Returns
+    Tagged ID (`user_`/`svac_`) of the actor that archived this service account.
 
-
+  - `created_at: string`
 
-data: array of [BetaServiceAccount](api/http/beta/organization/service_accounts.md) { id, archived\_at, archived\_by\_actor\_id, 8 more }
+    When this service account was created.
 
-id: string
+    format: date-time
 
-Tagged ID of the service account.
+  - `created_by_actor_id: string or null`
 
-
+    Tagged ID (`user_`/`svac_`) of the actor that created this service account.
 
-archived\_at: string or null
+  - `description: string or null`
 
-If set, this service account is archived.
+    Optional free-text description.
 
-formatdate-time
+  - `name: string`
 
-archived\_by\_actor\_id: string or null
+    Admin-chosen slug identifier.
 
-Tagged ID (`user_`/`svac_`) of the actor that archived this service account.
+  - `organization_role: "admin" or "developer"`
 
-
+    Org-level role. A federation rule may only be created or retargeted to grant `org:admin` scope when this is `admin`. A rule granting `org:admin` whose target is later demoted to `developer` is rejected at token exchange. Rules granting `org:admin` are managed in the Console.
 
-created\_at: string
+    - `"admin"`
 
-When this service account was created.
+    - `"developer"`
 
-formatdate-time
+  - `type: "service_account"`
 
-created\_by\_actor\_id: string or null
+    default: service_account
 
-Tagged ID (`user_`/`svac_`) of the actor that created this service account.
+  - `updated_at: string`
 
-description: string or null
+    When this service account was last updated.
 
-Optional free-text description.
+    format: date-time
 
-name: string
+  - `updated_by_actor_id: string or null`
 
-Admin-chosen slug identifier.
+    Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
 
-
+- `next_page: string or null`
 
-organization\_role: "admin" or "developer"
+  Opaque cursor for the next page, or null if no more results.
 
-Org-level role. A federation rule may only be created or retargeted to grant `org:admin` scope when this is `admin`. A rule granting `org:admin` whose target is later demoted to `developer` is rejected at token exchange. Rules granting `org:admin` are managed in the Console.
+## Example
 
-One of the following:
-
-"admin"
-
-"developer"
-
-
-
-type: "service\_account"
-
-defaultservice\_account
-
-
-
-updated\_at: string
-
-When this service account was last updated.
-
-formatdate-time
-
-updated\_by\_actor\_id: string or null
-
-Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
-
-next\_page: string or null
-
-Opaque cursor for the next page, or null if no more results.
-
-List Service Accounts
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/service_accounts \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "svac_01SDCCSbTxrXDpWc1phhtcfK",
-      "archived_at": "2019-12-27T18:11:19.117Z",
-      "archived_by_actor_id": "archived_by_actor_id",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "created_by_actor_id": "created_by_actor_id",
-      "description": "description",
-      "name": "ci-deploy-bot",
-      "organization_role": "admin",
-      "type": "service_account",
-      "updated_at": "2024-10-30T23:58:27.427722Z",
-      "updated_by_actor_id": "updated_by_actor_id"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

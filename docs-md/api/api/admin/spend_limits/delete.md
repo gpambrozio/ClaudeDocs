@@ -1,12 +1,6 @@
 # Delete Spend Limit
 
-Copy page
-
-
-
-# Delete Spend Limit
-
-DELETE/v1/organizations/spend\_limits/{spend\_limit\_id}
+**DELETE** `/v1/organizations/spend_limits/{spend_limit_id}`
 
 Delete a per-user spend limit override.
 
@@ -14,51 +8,32 @@ The member falls back to any inherited spend limit at that period.
 Seat-tier, group, and organization-level rows cannot be deleted via
 this endpoint.
 
-##### Path parameters
+## Path parameters
 
-spend\_limit\_id: string
+- `spend_limit_id: string`
 
-ID of the Spend Limit.
+  ID of the Spend Limit.
 
-##### Returns
+## Returns
 
-id: string
+- `id: string`
 
-
+- `type: "spend_limit_deleted"`
 
-type: "spend\_limit\_deleted"
+  default: spend_limit_deleted
 
-defaultspend\_limit\_deleted
+## Example
 
-Delete Spend Limit
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/spend_limits/$SPEND_LIMIT_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "id",
-  "type": "spend_limit_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "id",
   "type": "spend_limit_deleted"

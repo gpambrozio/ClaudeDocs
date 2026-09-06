@@ -1,589 +1,4113 @@
 # Environments
 
-Copy page
+## Create Environment
 
-
+`BetaEnvironment Beta.Environments.Create(parameters, cancellationToken = default)`
 
-C#
+**POST** `/v1/environments`
 
-# Environments
+Create a new environment with the specified configuration.
 
-##### [Create Environment](api/beta/environments/create.md)
+### Parameters
 
-[BetaEnvironment](api/beta/environments.md) Beta.Environments.Create(EnvironmentCreateParamsparameters, CancellationTokencancellationToken = default)
+- `EnvironmentCreateParams parameters`
 
-POST/v1/environments
+  - `required string name`
 
-##### [List Environments](api/beta/environments/list.md)
+    Body param: Human-readable name for the environment
 
-[EnvironmentListPageResponse](api/beta/environments.md) Beta.Environments.List(EnvironmentListParams?parameters, CancellationTokencancellationToken = default)
+    maxLength: 256, minLength: 1
 
-GET/v1/environments
+  - `Config? config`
 
-##### [Get Environment](api/beta/environments/retrieve.md)
+    Body param: Environment configuration
 
-[BetaEnvironment](api/beta/environments.md) Beta.Environments.Retrieve(EnvironmentRetrieveParamsparameters, CancellationTokencancellationToken = default)
+    - `class BetaCloudConfigParams:`
 
-GET/v1/environments/{environment\_id}
+      Request params for `cloud` environment configuration.
 
-##### [Update Environment](api/beta/environments/update.md)
+      Fields default to null; on update, omitted fields preserve the
+      existing value.
 
-[BetaEnvironment](api/beta/environments.md) Beta.Environments.Update(EnvironmentUpdateParamsparameters, CancellationTokencancellationToken = default)
+      - `JsonElement Type = "cloud"`
 
-POST/v1/environments/{environment\_id}
+        Environment type
 
-##### [Delete Environment](api/beta/environments/delete.md)
+      - `Networking? Networking`
 
-[BetaEnvironmentDeleteResponse](api/beta/environments.md) Beta.Environments.Delete(EnvironmentDeleteParamsparameters, CancellationTokencancellationToken = default)
+        Network configuration policy. Omit on update to preserve the existing value.
 
-DELETE/v1/environments/{environment\_id}
+        - `class BetaUnrestrictedNetwork:`
 
-##### [Archive Environment](api/beta/environments/archive.md)
+          Unrestricted network access.
 
-[BetaEnvironment](api/beta/environments.md) Beta.Environments.Archive(EnvironmentArchiveParamsparameters, CancellationTokencancellationToken = default)
+          - `JsonElement Type = "unrestricted"`
 
-POST/v1/environments/{environment\_id}/archive
+            Network policy type
 
-##### ModelsExpand Collapse
+        - `class BetaLimitedNetworkParams:`
 
-
+          Limited network request params.
 
-class BetaCloudConfig:
+          Fields default to null; on update, omitted fields preserve the
+          existing value.
 
-`cloud` environment configuration.
+          - `JsonElement Type = "limited"`
 
-
+            Network policy type
 
-required Networking Networking
+          - `bool? AllowMcpServers`
 
-Network configuration policy.
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-One of the following:
+          - `bool? AllowPackageManagers`
 
-
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
 
-class BetaUnrestrictedNetwork:
+          - `IReadOnlyList<string>? AllowedHosts`
 
-Unrestricted network access.
+            Specifies domains the container can reach.
 
-JsonElement Type "unrestricted"constant
+      - `BetaPackagesParams? Packages`
 
-Network policy type
+        Specify packages (and optionally their versions) available in this environment.
 
-
+        When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-class BetaLimitedNetwork:
+        Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
 
-Limited network access.
+        - `IReadOnlyList<string>? Apt`
 
-required Boolean AllowMcpServers
+          Ubuntu/Debian packages to install
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+        - `IReadOnlyList<string>? Cargo`
 
-required Boolean AllowPackageManagers
+          Rust packages to install
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+        - `IReadOnlyList<string>? Gem`
 
-required IReadOnlyList<string> AllowedHosts
+          Ruby packages to install
 
-Specifies domains the container can reach.
+        - `IReadOnlyList<string>? Go`
 
-JsonElement Type "limited"constant
+          Go packages to install
 
-Network policy type
+        - `IReadOnlyList<string>? Npm`
 
-
+          Node.js packages to install
 
-required [BetaPackages](api/beta/environments.md) Packages
+        - `IReadOnlyList<string>? Pip`
 
-Package manager configuration.
+          Python packages to install
 
-required IReadOnlyList<string> Apt
+        - `Type Type`
 
-Ubuntu/Debian packages to install
+          Package configuration type
 
-required IReadOnlyList<string> Cargo
+    - `class BetaSelfHostedConfigParams:`
 
-Rust packages to install
+      Request params for `self_hosted` environment configuration.
 
-required IReadOnlyList<string> Gem
+      - `JsonElement Type = "self_hosted"`
 
-Ruby packages to install
+        Environment type
 
-required IReadOnlyList<string> Go
+  - `string? description`
 
-Go packages to install
+    Body param: Optional description of the environment
 
-required IReadOnlyList<string> Npm
+    maxLength: 1024
 
-Node.js packages to install
+  - `IReadOnlyDictionary<string, string> metadata`
 
-required IReadOnlyList<string> Pip
+    Body param: User-provided metadata key-value pairs
 
-Python packages to install
+  - `Scope? scope`
 
-Type Type
+    Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. Only applicable for self-hosted environments. If not specified, defaults based on organization type.
 
-Package configuration type
+    - `Organization("organization")`
 
-JsonElement Type "cloud"constant
+    - `Account("account")`
 
-Environment type
+  - `IReadOnlyList<AnthropicBeta> betas`
 
-
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-class BetaCloudConfigParams:
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
-Request params for `cloud` environment configuration.
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
 
-Fields default to null; on update, omitted fields preserve the
-existing value.
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
 
-JsonElement Type "cloud"constant
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
 
-Environment type
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
 
-
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
 
-Networking? Networking
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
 
-Network configuration policy. Omit on update to preserve the existing value.
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
 
-One of the following:
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
 
-
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
 
-class BetaUnrestrictedNetwork:
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
 
-Unrestricted network access.
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
 
-JsonElement Type "unrestricted"constant
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
 
-Network policy type
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
 
-
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
 
-class BetaLimitedNetworkParams:
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
 
-Limited network request params.
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
 
-Fields default to null; on update, omitted fields preserve the
-existing value.
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-JsonElement Type "limited"constant
+    - `Skills2025_10_02("skills-2025-10-02")`
 
-Network policy type
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
 
-Boolean? AllowMcpServers
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
 
-Boolean? AllowPackageManagers
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
-IReadOnlyList<string>? AllowedHosts
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
 
-Specifies domains the container can reach.
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
 
-
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
 
-[BetaPackagesParams](api/beta/environments.md)? Packages
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
 
-Specify packages (and optionally their versions) available in this environment.
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
 
-When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
 
-IReadOnlyList<string>? Apt
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
 
-Ubuntu/Debian packages to install
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
 
-IReadOnlyList<string>? Cargo
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
 
-Rust packages to install
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-IReadOnlyList<string>? Gem
+    - `Compact2026_01_12("compact-2026-01-12")`
 
-Ruby packages to install
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
 
-IReadOnlyList<string>? Go
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
 
-Go packages to install
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
 
-IReadOnlyList<string>? Npm
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
 
-Node.js packages to install
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
 
-IReadOnlyList<string>? Pip
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
 
-Python packages to install
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-Type Type
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
 
-Package configuration type
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-
+### Returns
 
-class BetaEnvironment:
+- `class BetaEnvironment:`
 
-Unified Environment resource for both cloud and self-hosted environments.
+  Unified Environment resource for both cloud and self-hosted environments.
 
-required string ID
+  - `required string ID`
 
-Environment identifier (e.g., 'env\_...')
+    Environment identifier (e.g., 'env_...')
 
-required string? ArchivedAt
+  - `required string? ArchivedAt`
 
-RFC 3339 timestamp when environment was archived, or null if not archived
+    RFC 3339 timestamp when environment was archived, or null if not archived
 
-
+  - `required Config Config`
 
-required Config Config
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-Environment configuration (either Anthropic Cloud or self-hosted)
+    - `class BetaCloudConfig:`
 
-One of the following:
+      `cloud` environment configuration.
 
-
+      - `required Networking Networking`
 
-class BetaCloudConfig:
+        Network configuration policy.
 
-`cloud` environment configuration.
+        - `class BetaUnrestrictedNetwork:`
 
-
+          Unrestricted network access.
 
-required Networking Networking
+          - `JsonElement Type = "unrestricted"`
 
-Network configuration policy.
+            Network policy type
 
-One of the following:
+        - `class BetaLimitedNetwork:`
 
-
+          Limited network access.
 
-class BetaUnrestrictedNetwork:
+          - `required bool AllowMcpServers`
 
-Unrestricted network access.
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-JsonElement Type "unrestricted"constant
+          - `required bool AllowPackageManagers`
 
-Network policy type
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-
+          - `required IReadOnlyList<string> AllowedHosts`
 
-class BetaLimitedNetwork:
+            Specifies domains the container can reach.
 
-Limited network access.
+          - `JsonElement Type = "limited"`
 
-required Boolean AllowMcpServers
+            Network policy type
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+      - `required BetaPackages Packages`
 
-required Boolean AllowPackageManagers
+        Package manager configuration.
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+        - `required IReadOnlyList<string> Apt`
 
-required IReadOnlyList<string> AllowedHosts
+          Ubuntu/Debian packages to install
 
-Specifies domains the container can reach.
+        - `required IReadOnlyList<string> Cargo`
 
-JsonElement Type "limited"constant
+          Rust packages to install
 
-Network policy type
+        - `required IReadOnlyList<string> Gem`
 
-
+          Ruby packages to install
 
-required [BetaPackages](api/beta/environments.md) Packages
+        - `required IReadOnlyList<string> Go`
 
-Package manager configuration.
+          Go packages to install
 
-required IReadOnlyList<string> Apt
+        - `required IReadOnlyList<string> Npm`
 
-Ubuntu/Debian packages to install
+          Node.js packages to install
 
-required IReadOnlyList<string> Cargo
+        - `required IReadOnlyList<string> Pip`
 
-Rust packages to install
+          Python packages to install
 
-required IReadOnlyList<string> Gem
+        - `Type Type`
 
-Ruby packages to install
+          Package configuration type
 
-required IReadOnlyList<string> Go
+      - `JsonElement Type = "cloud"`
 
-Go packages to install
+        Environment type
 
-required IReadOnlyList<string> Npm
+    - `class BetaSelfHostedConfig:`
 
-Node.js packages to install
+      Configuration for self-hosted environments.
 
-required IReadOnlyList<string> Pip
+      - `JsonElement Type = "self_hosted"`
 
-Python packages to install
+        Environment type
 
-Type Type
+  - `required string CreatedAt`
 
-Package configuration type
+    RFC 3339 timestamp when environment was created
 
-JsonElement Type "cloud"constant
+  - `required string? Description`
 
-Environment type
+    User-provided description for the environment; null when unset
 
-
+  - `required IReadOnlyDictionary<string, string> Metadata`
 
-class BetaSelfHostedConfig:
+    User-provided metadata key-value pairs
 
-Configuration for self-hosted environments.
+  - `required string Name`
 
-JsonElement Type "self\_hosted"constant
+    Human-readable name for the environment
 
-Environment type
+  - `JsonElement Type = "environment"`
 
-required string CreatedAt
+    The type of object (always 'environment')
 
-RFC 3339 timestamp when environment was created
+  - `required string UpdatedAt`
 
-required string Description
+    RFC 3339 timestamp when environment was last updated
 
-User-provided description for the environment
+  - `Scope Scope`
 
-required IReadOnlyDictionary<string, string> Metadata
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-User-provided metadata key-value pairs
+    - `Organization("organization")`
 
-required string Name
+    - `Account("account")`
 
-Human-readable name for the environment
+### Example
 
-JsonElement Type "environment"constant
+```csharp
+EnvironmentCreateParams parameters = new() { Name = "python-data-analysis" };
 
-The type of object (always 'environment')
+var betaEnvironment = await client.Beta.Environments.Create(parameters);
 
-required string UpdatedAt
+Console.WriteLine(betaEnvironment);
+```
 
-RFC 3339 timestamp when environment was last updated
+#### Response (200)
 
-
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "archived_at": null,
+  "config": {
+    "networking": {
+      "allow_mcp_servers": false,
+      "allow_package_managers": true,
+      "allowed_hosts": [
+        "api.example.com"
+      ],
+      "type": "limited"
+    },
+    "packages": {
+      "apt": [
+        "string"
+      ],
+      "cargo": [
+        "string"
+      ],
+      "gem": [
+        "string"
+      ],
+      "go": [
+        "string"
+      ],
+      "npm": [
+        "string"
+      ],
+      "pip": [
+        "pandas",
+        "numpy"
+      ],
+      "type": "packages"
+    },
+    "type": "cloud"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Python environment with data-analysis packages.",
+  "metadata": {},
+  "name": "python-data-analysis",
+  "type": "environment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
+}
+```
 
-Scope Scope
+## List Environments
 
-The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+`EnvironmentListPage Beta.Environments.List(parameters, cancellationToken = default)`
 
-One of the following:
+**GET** `/v1/environments`
 
-"organization"Organization
+List environments with pagination support.
 
-"account"Account
+### Parameters
 
-
+- `EnvironmentListParams parameters`
 
-class BetaEnvironmentDeleteResponse:
+  - `bool includeArchived`
 
-Response after deleting an environment.
+    Query param: Include archived environments in the response
 
-required string ID
+  - `long limit`
 
-Environment identifier
+    Query param: Maximum number of environments to return
 
-JsonElement Type "environment\_deleted"constant
+    maximum: 1000, minimum: 1
 
-The type of response
+  - `string? page`
 
-
+    Query param: Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
 
-class BetaLimitedNetwork:
+  - `IReadOnlyList<AnthropicBeta> betas`
 
-Limited network access.
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-required Boolean AllowMcpServers
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
 
-required Boolean AllowPackageManagers
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
 
-required IReadOnlyList<string> AllowedHosts
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
 
-Specifies domains the container can reach.
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
 
-JsonElement Type "limited"constant
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
 
-Network policy type
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
 
-
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
 
-class BetaLimitedNetworkParams:
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
 
-Limited network request params.
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
 
-Fields default to null; on update, omitted fields preserve the
-existing value.
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
 
-JsonElement Type "limited"constant
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
 
-Network policy type
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
 
-Boolean? AllowMcpServers
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
 
-Boolean? AllowPackageManagers
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-IReadOnlyList<string>? AllowedHosts
+    - `Skills2025_10_02("skills-2025-10-02")`
 
-Specifies domains the container can reach.
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
 
-
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
 
-class BetaPackages:
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
 
-Packages (and their versions) available in this environment.
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
-required IReadOnlyList<string> Apt
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
-Ubuntu/Debian packages to install
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
 
-required IReadOnlyList<string> Cargo
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
 
-Rust packages to install
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
 
-required IReadOnlyList<string> Gem
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
 
-Ruby packages to install
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
 
-required IReadOnlyList<string> Go
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
 
-Go packages to install
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
 
-required IReadOnlyList<string> Npm
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
 
-Node.js packages to install
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
 
-required IReadOnlyList<string> Pip
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-Python packages to install
+    - `Compact2026_01_12("compact-2026-01-12")`
 
-Type Type
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
 
-Package configuration type
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
 
-
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
 
-class BetaPackagesParams:
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
 
-Specify packages (and optionally their versions) available in this environment.
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
 
-When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
 
-IReadOnlyList<string>? Apt
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-Ubuntu/Debian packages to install
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
 
-IReadOnlyList<string>? Cargo
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-Rust packages to install
+### Returns
 
-IReadOnlyList<string>? Gem
+- `class BetaEnvironment:`
 
-Ruby packages to install
+  Unified Environment resource for both cloud and self-hosted environments.
 
-IReadOnlyList<string>? Go
+  - `required string ID`
 
-Go packages to install
+    Environment identifier (e.g., 'env_...')
 
-IReadOnlyList<string>? Npm
+  - `required string? ArchivedAt`
 
-Node.js packages to install
+    RFC 3339 timestamp when environment was archived, or null if not archived
 
-IReadOnlyList<string>? Pip
+  - `required Config Config`
 
-Python packages to install
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-Type Type
+    - `class BetaCloudConfig:`
 
-Package configuration type
+      `cloud` environment configuration.
 
-
+      - `required Networking Networking`
 
-class BetaSelfHostedConfig:
+        Network configuration policy.
 
-Configuration for self-hosted environments.
+        - `class BetaUnrestrictedNetwork:`
 
-JsonElement Type "self\_hosted"constant
+          Unrestricted network access.
 
-Environment type
+          - `JsonElement Type = "unrestricted"`
 
-
+            Network policy type
 
-class BetaSelfHostedConfigParams:
+        - `class BetaLimitedNetwork:`
 
-Request params for `self_hosted` environment configuration.
+          Limited network access.
 
-JsonElement Type "self\_hosted"constant
+          - `required bool AllowMcpServers`
 
-Environment type
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-
+          - `required bool AllowPackageManagers`
 
-class BetaUnrestrictedNetwork:
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-Unrestricted network access.
+          - `required IReadOnlyList<string> AllowedHosts`
 
-JsonElement Type "unrestricted"constant
+            Specifies domains the container can reach.
 
-Network policy type
+          - `JsonElement Type = "limited"`
 
-#### EnvironmentsWork
+            Network policy type
 
-##### [Get Work Item](api/beta/environments/work/retrieve.md)
+      - `required BetaPackages Packages`
 
-[BetaSelfHostedWork](api/beta/environments/work.md) Beta.Environments.Work.Retrieve(WorkRetrieveParamsparameters, CancellationTokencancellationToken = default)
+        Package manager configuration.
 
-GET/v1/environments/{environment\_id}/work/{work\_id}
+        - `required IReadOnlyList<string> Apt`
 
-##### [Poll for Work](api/beta/environments/work/poll.md)
+          Ubuntu/Debian packages to install
 
-[BetaSelfHostedWork](api/beta/environments/work.md)? Beta.Environments.Work.Poll(WorkPollParamsparameters, CancellationTokencancellationToken = default)
+        - `required IReadOnlyList<string> Cargo`
 
-GET/v1/environments/{environment\_id}/work/poll
+          Rust packages to install
 
-##### [Acknowledge Work](api/beta/environments/work/ack.md)
+        - `required IReadOnlyList<string> Gem`
 
-[BetaSelfHostedWork](api/beta/environments/work.md) Beta.Environments.Work.Ack(WorkAckParamsparameters, CancellationTokencancellationToken = default)
+          Ruby packages to install
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/ack
+        - `required IReadOnlyList<string> Go`
 
-##### [Record Heartbeat](api/beta/environments/work/heartbeat.md)
+          Go packages to install
 
-[BetaSelfHostedWorkHeartbeatResponse](api/beta/environments/work.md) Beta.Environments.Work.Heartbeat(WorkHeartbeatParamsparameters, CancellationTokencancellationToken = default)
+        - `required IReadOnlyList<string> Npm`
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
+          Node.js packages to install
 
-##### [Stop Work](api/beta/environments/work/stop.md)
+        - `required IReadOnlyList<string> Pip`
 
-[BetaSelfHostedWork](api/beta/environments/work.md) Beta.Environments.Work.Stop(WorkStopParamsparameters, CancellationTokencancellationToken = default)
+          Python packages to install
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/stop
+        - `Type Type`
 
-##### [List Work Items](api/beta/environments/work/list.md)
+          Package configuration type
 
-[BetaSelfHostedWorkListResponse](api/beta/environments/work.md) Beta.Environments.Work.List(WorkListParamsparameters, CancellationTokencancellationToken = default)
+      - `JsonElement Type = "cloud"`
 
-GET/v1/environments/{environment\_id}/work
+        Environment type
 
-##### [Update Work Item](api/beta/environments/work/update.md)
+    - `class BetaSelfHostedConfig:`
 
-[BetaSelfHostedWork](api/beta/environments/work.md) Beta.Environments.Work.Update(WorkUpdateParamsparameters, CancellationTokencancellationToken = default)
+      Configuration for self-hosted environments.
 
-POST/v1/environments/{environment\_id}/work/{work\_id}
+      - `JsonElement Type = "self_hosted"`
 
-##### [Get Queue Statistics](api/beta/environments/work/stats.md)
+        Environment type
 
-[BetaSelfHostedWorkQueueStats](api/beta/environments/work.md) Beta.Environments.Work.Stats(WorkStatsParamsparameters, CancellationTokencancellationToken = default)
+  - `required string CreatedAt`
 
-GET/v1/environments/{environment\_id}/work/stats
+    RFC 3339 timestamp when environment was created
+
+  - `required string? Description`
+
+    User-provided description for the environment; null when unset
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    User-provided metadata key-value pairs
+
+  - `required string Name`
+
+    Human-readable name for the environment
+
+  - `JsonElement Type = "environment"`
+
+    The type of object (always 'environment')
+
+  - `required string UpdatedAt`
+
+    RFC 3339 timestamp when environment was last updated
+
+  - `Scope Scope`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `Organization("organization")`
+
+    - `Account("account")`
+
+### Example
+
+```csharp
+EnvironmentListParams parameters = new();
+
+var page = await client.Beta.Environments.List(parameters);
+await foreach (var item in page.Paginate())
+{
+    Console.WriteLine(item);
+}
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+      "archived_at": null,
+      "config": {
+        "networking": {
+          "allow_mcp_servers": false,
+          "allow_package_managers": true,
+          "allowed_hosts": [
+            "api.example.com"
+          ],
+          "type": "limited"
+        },
+        "packages": {
+          "apt": [
+            "string"
+          ],
+          "cargo": [
+            "string"
+          ],
+          "gem": [
+            "string"
+          ],
+          "go": [
+            "string"
+          ],
+          "npm": [
+            "string"
+          ],
+          "pip": [
+            "pandas",
+            "numpy"
+          ],
+          "type": "packages"
+        },
+        "type": "cloud"
+      },
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": "Python environment with data-analysis packages.",
+      "metadata": {},
+      "name": "python-data-analysis",
+      "type": "environment",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "scope": "organization"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
+
+## Get Environment
+
+`BetaEnvironment Beta.Environments.Retrieve(parameters, cancellationToken = default)`
+
+**GET** `/v1/environments/{environment_id}`
+
+Retrieve a specific environment by ID.
+
+### Parameters
+
+- `EnvironmentRetrieveParams parameters`
+
+  - `required string environmentID`
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+### Returns
+
+- `class BetaEnvironment:`
+
+  Unified Environment resource for both cloud and self-hosted environments.
+
+  - `required string ID`
+
+    Environment identifier (e.g., 'env_...')
+
+  - `required string? ArchivedAt`
+
+    RFC 3339 timestamp when environment was archived, or null if not archived
+
+  - `required Config Config`
+
+    Environment configuration (either Anthropic Cloud or self-hosted)
+
+    - `class BetaCloudConfig:`
+
+      `cloud` environment configuration.
+
+      - `required Networking Networking`
+
+        Network configuration policy.
+
+        - `class BetaUnrestrictedNetwork:`
+
+          Unrestricted network access.
+
+          - `JsonElement Type = "unrestricted"`
+
+            Network policy type
+
+        - `class BetaLimitedNetwork:`
+
+          Limited network access.
+
+          - `required bool AllowMcpServers`
+
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+          - `required bool AllowPackageManagers`
+
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+          - `required IReadOnlyList<string> AllowedHosts`
+
+            Specifies domains the container can reach.
+
+          - `JsonElement Type = "limited"`
+
+            Network policy type
+
+      - `required BetaPackages Packages`
+
+        Package manager configuration.
+
+        - `required IReadOnlyList<string> Apt`
+
+          Ubuntu/Debian packages to install
+
+        - `required IReadOnlyList<string> Cargo`
+
+          Rust packages to install
+
+        - `required IReadOnlyList<string> Gem`
+
+          Ruby packages to install
+
+        - `required IReadOnlyList<string> Go`
+
+          Go packages to install
+
+        - `required IReadOnlyList<string> Npm`
+
+          Node.js packages to install
+
+        - `required IReadOnlyList<string> Pip`
+
+          Python packages to install
+
+        - `Type Type`
+
+          Package configuration type
+
+      - `JsonElement Type = "cloud"`
+
+        Environment type
+
+    - `class BetaSelfHostedConfig:`
+
+      Configuration for self-hosted environments.
+
+      - `JsonElement Type = "self_hosted"`
+
+        Environment type
+
+  - `required string CreatedAt`
+
+    RFC 3339 timestamp when environment was created
+
+  - `required string? Description`
+
+    User-provided description for the environment; null when unset
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    User-provided metadata key-value pairs
+
+  - `required string Name`
+
+    Human-readable name for the environment
+
+  - `JsonElement Type = "environment"`
+
+    The type of object (always 'environment')
+
+  - `required string UpdatedAt`
+
+    RFC 3339 timestamp when environment was last updated
+
+  - `Scope Scope`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `Organization("organization")`
+
+    - `Account("account")`
+
+### Example
+
+```csharp
+EnvironmentRetrieveParams parameters = new()
+{
+    EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
+};
+
+var betaEnvironment = await client.Beta.Environments.Retrieve(parameters);
+
+Console.WriteLine(betaEnvironment);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "archived_at": null,
+  "config": {
+    "networking": {
+      "allow_mcp_servers": false,
+      "allow_package_managers": true,
+      "allowed_hosts": [
+        "api.example.com"
+      ],
+      "type": "limited"
+    },
+    "packages": {
+      "apt": [
+        "string"
+      ],
+      "cargo": [
+        "string"
+      ],
+      "gem": [
+        "string"
+      ],
+      "go": [
+        "string"
+      ],
+      "npm": [
+        "string"
+      ],
+      "pip": [
+        "pandas",
+        "numpy"
+      ],
+      "type": "packages"
+    },
+    "type": "cloud"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Python environment with data-analysis packages.",
+  "metadata": {},
+  "name": "python-data-analysis",
+  "type": "environment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
+}
+```
+
+## Update Environment
+
+`BetaEnvironment Beta.Environments.Update(parameters, cancellationToken = default)`
+
+**POST** `/v1/environments/{environment_id}`
+
+Update an existing environment's configuration.
+
+### Parameters
+
+- `EnvironmentUpdateParams parameters`
+
+  - `required string environmentID`
+
+    Path param
+
+  - `Config? config`
+
+    Body param: Updated environment configuration
+
+    - `class BetaCloudConfigParams:`
+
+      Request params for `cloud` environment configuration.
+
+      Fields default to null; on update, omitted fields preserve the
+      existing value.
+
+      - `JsonElement Type = "cloud"`
+
+        Environment type
+
+      - `Networking? Networking`
+
+        Network configuration policy. Omit on update to preserve the existing value.
+
+        - `class BetaUnrestrictedNetwork:`
+
+          Unrestricted network access.
+
+          - `JsonElement Type = "unrestricted"`
+
+            Network policy type
+
+        - `class BetaLimitedNetworkParams:`
+
+          Limited network request params.
+
+          Fields default to null; on update, omitted fields preserve the
+          existing value.
+
+          - `JsonElement Type = "limited"`
+
+            Network policy type
+
+          - `bool? AllowMcpServers`
+
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+          - `bool? AllowPackageManagers`
+
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
+
+          - `IReadOnlyList<string>? AllowedHosts`
+
+            Specifies domains the container can reach.
+
+      - `BetaPackagesParams? Packages`
+
+        Specify packages (and optionally their versions) available in this environment.
+
+        When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+        Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
+
+        - `IReadOnlyList<string>? Apt`
+
+          Ubuntu/Debian packages to install
+
+        - `IReadOnlyList<string>? Cargo`
+
+          Rust packages to install
+
+        - `IReadOnlyList<string>? Gem`
+
+          Ruby packages to install
+
+        - `IReadOnlyList<string>? Go`
+
+          Go packages to install
+
+        - `IReadOnlyList<string>? Npm`
+
+          Node.js packages to install
+
+        - `IReadOnlyList<string>? Pip`
+
+          Python packages to install
+
+        - `Type Type`
+
+          Package configuration type
+
+    - `class BetaSelfHostedConfigParams:`
+
+      Request params for `self_hosted` environment configuration.
+
+      - `JsonElement Type = "self_hosted"`
+
+        Environment type
+
+  - `string? description`
+
+    Body param: Updated description of the environment. Omit to preserve; null clears to null; an empty string is stored as an empty string.
+
+    maxLength: 1024
+
+  - `IReadOnlyDictionary<string, string> metadata`
+
+    Body param: User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
+
+  - `string? name`
+
+    Body param: Updated name for the environment
+
+    maxLength: 256, minLength: 1
+
+  - `Scope? scope`
+
+    Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
+
+    - `Organization("organization")`
+
+    - `Account("account")`
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+### Returns
+
+- `class BetaEnvironment:`
+
+  Unified Environment resource for both cloud and self-hosted environments.
+
+  - `required string ID`
+
+    Environment identifier (e.g., 'env_...')
+
+  - `required string? ArchivedAt`
+
+    RFC 3339 timestamp when environment was archived, or null if not archived
+
+  - `required Config Config`
+
+    Environment configuration (either Anthropic Cloud or self-hosted)
+
+    - `class BetaCloudConfig:`
+
+      `cloud` environment configuration.
+
+      - `required Networking Networking`
+
+        Network configuration policy.
+
+        - `class BetaUnrestrictedNetwork:`
+
+          Unrestricted network access.
+
+          - `JsonElement Type = "unrestricted"`
+
+            Network policy type
+
+        - `class BetaLimitedNetwork:`
+
+          Limited network access.
+
+          - `required bool AllowMcpServers`
+
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+          - `required bool AllowPackageManagers`
+
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+          - `required IReadOnlyList<string> AllowedHosts`
+
+            Specifies domains the container can reach.
+
+          - `JsonElement Type = "limited"`
+
+            Network policy type
+
+      - `required BetaPackages Packages`
+
+        Package manager configuration.
+
+        - `required IReadOnlyList<string> Apt`
+
+          Ubuntu/Debian packages to install
+
+        - `required IReadOnlyList<string> Cargo`
+
+          Rust packages to install
+
+        - `required IReadOnlyList<string> Gem`
+
+          Ruby packages to install
+
+        - `required IReadOnlyList<string> Go`
+
+          Go packages to install
+
+        - `required IReadOnlyList<string> Npm`
+
+          Node.js packages to install
+
+        - `required IReadOnlyList<string> Pip`
+
+          Python packages to install
+
+        - `Type Type`
+
+          Package configuration type
+
+      - `JsonElement Type = "cloud"`
+
+        Environment type
+
+    - `class BetaSelfHostedConfig:`
+
+      Configuration for self-hosted environments.
+
+      - `JsonElement Type = "self_hosted"`
+
+        Environment type
+
+  - `required string CreatedAt`
+
+    RFC 3339 timestamp when environment was created
+
+  - `required string? Description`
+
+    User-provided description for the environment; null when unset
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    User-provided metadata key-value pairs
+
+  - `required string Name`
+
+    Human-readable name for the environment
+
+  - `JsonElement Type = "environment"`
+
+    The type of object (always 'environment')
+
+  - `required string UpdatedAt`
+
+    RFC 3339 timestamp when environment was last updated
+
+  - `Scope Scope`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `Organization("organization")`
+
+    - `Account("account")`
+
+### Example
+
+```csharp
+EnvironmentUpdateParams parameters = new()
+{
+    EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
+};
+
+var betaEnvironment = await client.Beta.Environments.Update(parameters);
+
+Console.WriteLine(betaEnvironment);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "archived_at": null,
+  "config": {
+    "networking": {
+      "allow_mcp_servers": false,
+      "allow_package_managers": true,
+      "allowed_hosts": [
+        "api.example.com"
+      ],
+      "type": "limited"
+    },
+    "packages": {
+      "apt": [
+        "string"
+      ],
+      "cargo": [
+        "string"
+      ],
+      "gem": [
+        "string"
+      ],
+      "go": [
+        "string"
+      ],
+      "npm": [
+        "string"
+      ],
+      "pip": [
+        "pandas",
+        "numpy"
+      ],
+      "type": "packages"
+    },
+    "type": "cloud"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Python environment with data-analysis packages.",
+  "metadata": {},
+  "name": "python-data-analysis",
+  "type": "environment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
+}
+```
+
+## Delete Environment
+
+`BetaEnvironmentDeleteResponse Beta.Environments.Delete(parameters, cancellationToken = default)`
+
+**DELETE** `/v1/environments/{environment_id}`
+
+Delete an environment by ID. Returns a confirmation of the deletion.
+
+### Parameters
+
+- `EnvironmentDeleteParams parameters`
+
+  - `required string environmentID`
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+### Returns
+
+- `class BetaEnvironmentDeleteResponse:`
+
+  Response after deleting an environment.
+
+  - `required string ID`
+
+    Environment identifier
+
+  - `required Type Type`
+
+    The type of response
+
+### Example
+
+```csharp
+EnvironmentDeleteParams parameters = new()
+{
+    EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
+};
+
+var betaEnvironmentDeleteResponse = await client.Beta.Environments.Delete(parameters);
+
+Console.WriteLine(betaEnvironmentDeleteResponse);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "type": "environment_deleted"
+}
+```
+
+## Archive Environment
+
+`BetaEnvironment Beta.Environments.Archive(parameters, cancellationToken = default)`
+
+**POST** `/v1/environments/{environment_id}/archive`
+
+Archive an environment by ID. Archived environments cannot be used to create new sessions.
+
+### Parameters
+
+- `EnvironmentArchiveParams parameters`
+
+  - `required string environmentID`
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+### Returns
+
+- `class BetaEnvironment:`
+
+  Unified Environment resource for both cloud and self-hosted environments.
+
+  - `required string ID`
+
+    Environment identifier (e.g., 'env_...')
+
+  - `required string? ArchivedAt`
+
+    RFC 3339 timestamp when environment was archived, or null if not archived
+
+  - `required Config Config`
+
+    Environment configuration (either Anthropic Cloud or self-hosted)
+
+    - `class BetaCloudConfig:`
+
+      `cloud` environment configuration.
+
+      - `required Networking Networking`
+
+        Network configuration policy.
+
+        - `class BetaUnrestrictedNetwork:`
+
+          Unrestricted network access.
+
+          - `JsonElement Type = "unrestricted"`
+
+            Network policy type
+
+        - `class BetaLimitedNetwork:`
+
+          Limited network access.
+
+          - `required bool AllowMcpServers`
+
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+          - `required bool AllowPackageManagers`
+
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+          - `required IReadOnlyList<string> AllowedHosts`
+
+            Specifies domains the container can reach.
+
+          - `JsonElement Type = "limited"`
+
+            Network policy type
+
+      - `required BetaPackages Packages`
+
+        Package manager configuration.
+
+        - `required IReadOnlyList<string> Apt`
+
+          Ubuntu/Debian packages to install
+
+        - `required IReadOnlyList<string> Cargo`
+
+          Rust packages to install
+
+        - `required IReadOnlyList<string> Gem`
+
+          Ruby packages to install
+
+        - `required IReadOnlyList<string> Go`
+
+          Go packages to install
+
+        - `required IReadOnlyList<string> Npm`
+
+          Node.js packages to install
+
+        - `required IReadOnlyList<string> Pip`
+
+          Python packages to install
+
+        - `Type Type`
+
+          Package configuration type
+
+      - `JsonElement Type = "cloud"`
+
+        Environment type
+
+    - `class BetaSelfHostedConfig:`
+
+      Configuration for self-hosted environments.
+
+      - `JsonElement Type = "self_hosted"`
+
+        Environment type
+
+  - `required string CreatedAt`
+
+    RFC 3339 timestamp when environment was created
+
+  - `required string? Description`
+
+    User-provided description for the environment; null when unset
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    User-provided metadata key-value pairs
+
+  - `required string Name`
+
+    Human-readable name for the environment
+
+  - `JsonElement Type = "environment"`
+
+    The type of object (always 'environment')
+
+  - `required string UpdatedAt`
+
+    RFC 3339 timestamp when environment was last updated
+
+  - `Scope Scope`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `Organization("organization")`
+
+    - `Account("account")`
+
+### Example
+
+```csharp
+EnvironmentArchiveParams parameters = new()
+{
+    EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
+};
+
+var betaEnvironment = await client.Beta.Environments.Archive(parameters);
+
+Console.WriteLine(betaEnvironment);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "archived_at": null,
+  "config": {
+    "networking": {
+      "allow_mcp_servers": false,
+      "allow_package_managers": true,
+      "allowed_hosts": [
+        "api.example.com"
+      ],
+      "type": "limited"
+    },
+    "packages": {
+      "apt": [
+        "string"
+      ],
+      "cargo": [
+        "string"
+      ],
+      "gem": [
+        "string"
+      ],
+      "go": [
+        "string"
+      ],
+      "npm": [
+        "string"
+      ],
+      "pip": [
+        "pandas",
+        "numpy"
+      ],
+      "type": "packages"
+    },
+    "type": "cloud"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Python environment with data-analysis packages.",
+  "metadata": {},
+  "name": "python-data-analysis",
+  "type": "environment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
+}
+```
+
+## Domain types
+
+### Beta Cloud Config
+
+- `class BetaCloudConfig:`
+
+  `cloud` environment configuration.
+
+  - `required Networking Networking`
+
+    Network configuration policy.
+
+    - `class BetaUnrestrictedNetwork:`
+
+      Unrestricted network access.
+
+      - `JsonElement Type = "unrestricted"`
+
+        Network policy type
+
+    - `class BetaLimitedNetwork:`
+
+      Limited network access.
+
+      - `required bool AllowMcpServers`
+
+        Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+      - `required bool AllowPackageManagers`
+
+        Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+      - `required IReadOnlyList<string> AllowedHosts`
+
+        Specifies domains the container can reach.
+
+      - `JsonElement Type = "limited"`
+
+        Network policy type
+
+  - `required BetaPackages Packages`
+
+    Package manager configuration.
+
+    - `required IReadOnlyList<string> Apt`
+
+      Ubuntu/Debian packages to install
+
+    - `required IReadOnlyList<string> Cargo`
+
+      Rust packages to install
+
+    - `required IReadOnlyList<string> Gem`
+
+      Ruby packages to install
+
+    - `required IReadOnlyList<string> Go`
+
+      Go packages to install
+
+    - `required IReadOnlyList<string> Npm`
+
+      Node.js packages to install
+
+    - `required IReadOnlyList<string> Pip`
+
+      Python packages to install
+
+    - `Type Type`
+
+      Package configuration type
+
+  - `JsonElement Type = "cloud"`
+
+    Environment type
+
+### Beta Cloud Config Params
+
+- `class BetaCloudConfigParams:`
+
+  Request params for `cloud` environment configuration.
+
+  Fields default to null; on update, omitted fields preserve the
+  existing value.
+
+  - `JsonElement Type = "cloud"`
+
+    Environment type
+
+  - `Networking? Networking`
+
+    Network configuration policy. Omit on update to preserve the existing value.
+
+    - `class BetaUnrestrictedNetwork:`
+
+      Unrestricted network access.
+
+      - `JsonElement Type = "unrestricted"`
+
+        Network policy type
+
+    - `class BetaLimitedNetworkParams:`
+
+      Limited network request params.
+
+      Fields default to null; on update, omitted fields preserve the
+      existing value.
+
+      - `JsonElement Type = "limited"`
+
+        Network policy type
+
+      - `bool? AllowMcpServers`
+
+        Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+      - `bool? AllowPackageManagers`
+
+        Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
+
+      - `IReadOnlyList<string>? AllowedHosts`
+
+        Specifies domains the container can reach.
+
+  - `BetaPackagesParams? Packages`
+
+    Specify packages (and optionally their versions) available in this environment.
+
+    When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+    Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
+
+    - `IReadOnlyList<string>? Apt`
+
+      Ubuntu/Debian packages to install
+
+    - `IReadOnlyList<string>? Cargo`
+
+      Rust packages to install
+
+    - `IReadOnlyList<string>? Gem`
+
+      Ruby packages to install
+
+    - `IReadOnlyList<string>? Go`
+
+      Go packages to install
+
+    - `IReadOnlyList<string>? Npm`
+
+      Node.js packages to install
+
+    - `IReadOnlyList<string>? Pip`
+
+      Python packages to install
+
+    - `Type Type`
+
+      Package configuration type
+
+### Beta Environment
+
+- `class BetaEnvironment:`
+
+  Unified Environment resource for both cloud and self-hosted environments.
+
+  - `required string ID`
+
+    Environment identifier (e.g., 'env_...')
+
+  - `required string? ArchivedAt`
+
+    RFC 3339 timestamp when environment was archived, or null if not archived
+
+  - `required Config Config`
+
+    Environment configuration (either Anthropic Cloud or self-hosted)
+
+    - `class BetaCloudConfig:`
+
+      `cloud` environment configuration.
+
+      - `required Networking Networking`
+
+        Network configuration policy.
+
+        - `class BetaUnrestrictedNetwork:`
+
+          Unrestricted network access.
+
+          - `JsonElement Type = "unrestricted"`
+
+            Network policy type
+
+        - `class BetaLimitedNetwork:`
+
+          Limited network access.
+
+          - `required bool AllowMcpServers`
+
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+          - `required bool AllowPackageManagers`
+
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+          - `required IReadOnlyList<string> AllowedHosts`
+
+            Specifies domains the container can reach.
+
+          - `JsonElement Type = "limited"`
+
+            Network policy type
+
+      - `required BetaPackages Packages`
+
+        Package manager configuration.
+
+        - `required IReadOnlyList<string> Apt`
+
+          Ubuntu/Debian packages to install
+
+        - `required IReadOnlyList<string> Cargo`
+
+          Rust packages to install
+
+        - `required IReadOnlyList<string> Gem`
+
+          Ruby packages to install
+
+        - `required IReadOnlyList<string> Go`
+
+          Go packages to install
+
+        - `required IReadOnlyList<string> Npm`
+
+          Node.js packages to install
+
+        - `required IReadOnlyList<string> Pip`
+
+          Python packages to install
+
+        - `Type Type`
+
+          Package configuration type
+
+      - `JsonElement Type = "cloud"`
+
+        Environment type
+
+    - `class BetaSelfHostedConfig:`
+
+      Configuration for self-hosted environments.
+
+      - `JsonElement Type = "self_hosted"`
+
+        Environment type
+
+  - `required string CreatedAt`
+
+    RFC 3339 timestamp when environment was created
+
+  - `required string? Description`
+
+    User-provided description for the environment; null when unset
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    User-provided metadata key-value pairs
+
+  - `required string Name`
+
+    Human-readable name for the environment
+
+  - `JsonElement Type = "environment"`
+
+    The type of object (always 'environment')
+
+  - `required string UpdatedAt`
+
+    RFC 3339 timestamp when environment was last updated
+
+  - `Scope Scope`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `Organization("organization")`
+
+    - `Account("account")`
+
+### Beta Environment Delete Response
+
+- `class BetaEnvironmentDeleteResponse:`
+
+  Response after deleting an environment.
+
+  - `required string ID`
+
+    Environment identifier
+
+  - `required Type Type`
+
+    The type of response
+
+### Beta Limited Network
+
+- `class BetaLimitedNetwork:`
+
+  Limited network access.
+
+  - `required bool AllowMcpServers`
+
+    Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+  - `required bool AllowPackageManagers`
+
+    Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+  - `required IReadOnlyList<string> AllowedHosts`
+
+    Specifies domains the container can reach.
+
+  - `JsonElement Type = "limited"`
+
+    Network policy type
+
+### Beta Limited Network Params
+
+- `class BetaLimitedNetworkParams:`
+
+  Limited network request params.
+
+  Fields default to null; on update, omitted fields preserve the
+  existing value.
+
+  - `JsonElement Type = "limited"`
+
+    Network policy type
+
+  - `bool? AllowMcpServers`
+
+    Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+  - `bool? AllowPackageManagers`
+
+    Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
+
+  - `IReadOnlyList<string>? AllowedHosts`
+
+    Specifies domains the container can reach.
+
+### Beta Packages
+
+- `class BetaPackages:`
+
+  Packages (and their versions) available in this environment.
+
+  - `required IReadOnlyList<string> Apt`
+
+    Ubuntu/Debian packages to install
+
+  - `required IReadOnlyList<string> Cargo`
+
+    Rust packages to install
+
+  - `required IReadOnlyList<string> Gem`
+
+    Ruby packages to install
+
+  - `required IReadOnlyList<string> Go`
+
+    Go packages to install
+
+  - `required IReadOnlyList<string> Npm`
+
+    Node.js packages to install
+
+  - `required IReadOnlyList<string> Pip`
+
+    Python packages to install
+
+  - `Type Type`
+
+    Package configuration type
+
+### Beta Packages Params
+
+- `class BetaPackagesParams:`
+
+  Specify packages (and optionally their versions) available in this environment.
+
+  When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+  Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
+
+  - `IReadOnlyList<string>? Apt`
+
+    Ubuntu/Debian packages to install
+
+  - `IReadOnlyList<string>? Cargo`
+
+    Rust packages to install
+
+  - `IReadOnlyList<string>? Gem`
+
+    Ruby packages to install
+
+  - `IReadOnlyList<string>? Go`
+
+    Go packages to install
+
+  - `IReadOnlyList<string>? Npm`
+
+    Node.js packages to install
+
+  - `IReadOnlyList<string>? Pip`
+
+    Python packages to install
+
+  - `Type Type`
+
+    Package configuration type
+
+### Beta Self Hosted Config
+
+- `class BetaSelfHostedConfig:`
+
+  Configuration for self-hosted environments.
+
+  - `JsonElement Type = "self_hosted"`
+
+    Environment type
+
+### Beta Self Hosted Config Params
+
+- `class BetaSelfHostedConfigParams:`
+
+  Request params for `self_hosted` environment configuration.
+
+  - `JsonElement Type = "self_hosted"`
+
+    Environment type
+
+### Beta Unrestricted Network
+
+- `class BetaUnrestrictedNetwork:`
+
+  Unrestricted network access.
+
+  - `JsonElement Type = "unrestricted"`
+
+    Network policy type
+
+## Environments › Work
+
+### Get Work Item
+
+`BetaSelfHostedWork Beta.Environments.Work.Retrieve(parameters, cancellationToken = default)`
+
+**GET** `/v1/environments/{environment_id}/work/{work_id}`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Retrieve detailed information about a specific work item.
+
+#### Parameters
+
+- `WorkRetrieveParams parameters`
+
+  - `required string environmentID`
+
+    Path param
+
+  - `required string workID`
+
+    Path param
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+#### Returns
+
+- `class BetaSelfHostedWork:`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `required string ID`
+
+    Work identifier (e.g., 'work_...')
+
+  - `required string? AcknowledgedAt`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `required string CreatedAt`
+
+    RFC 3339 timestamp when work was created
+
+  - `required BetaSessionWorkData Data`
+
+    The actual work to be performed
+
+    - `required string ID`
+
+      Session identifier (e.g., 'session_...')
+
+    - `JsonElement Type = "session"`
+
+      Type of work data
+
+  - `required string EnvironmentID`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `required string? LatestHeartbeatAt`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `required string? Secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `required string? StartedAt`
+
+    RFC 3339 timestamp when work execution started
+
+  - `required State State`
+
+    Current state of the work item
+
+    - `Queued("queued")`
+
+    - `Starting("starting")`
+
+    - `Active("active")`
+
+    - `Stopping("stopping")`
+
+    - `Stopped("stopped")`
+
+  - `required string? StopRequestedAt`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `required string? StoppedAt`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `JsonElement Type = "work"`
+
+    The type of object (always 'work')
+
+#### Example
+
+```csharp
+WorkRetrieveParams parameters = new()
+{
+    EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW",
+    WorkID = "work_id",
+};
+
+var betaSelfHostedWork = await client.Beta.Environments.Work.Retrieve(parameters);
+
+Console.WriteLine(betaSelfHostedWork);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+### Poll for Work
+
+`BetaSelfHostedWork? Beta.Environments.Work.Poll(parameters, cancellationToken = default)`
+
+**GET** `/v1/environments/{environment_id}/work/poll`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Long poll for work items in the queue.
+
+#### Parameters
+
+- `WorkPollParams parameters`
+
+  - `required string environmentID`
+
+    Path param
+
+  - `long? blockMs`
+
+    Query param: How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
+
+    minimum: 1
+
+  - `long? reclaimOlderThanMs`
+
+    Query param: Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
+
+    minimum: 1
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+  - `string anthropicWorkerID`
+
+    Header param: Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
+
+#### Returns
+
+- `class BetaSelfHostedWork:`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `required string ID`
+
+    Work identifier (e.g., 'work_...')
+
+  - `required string? AcknowledgedAt`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `required string CreatedAt`
+
+    RFC 3339 timestamp when work was created
+
+  - `required BetaSessionWorkData Data`
+
+    The actual work to be performed
+
+    - `required string ID`
+
+      Session identifier (e.g., 'session_...')
+
+    - `JsonElement Type = "session"`
+
+      Type of work data
+
+  - `required string EnvironmentID`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `required string? LatestHeartbeatAt`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `required string? Secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `required string? StartedAt`
+
+    RFC 3339 timestamp when work execution started
+
+  - `required State State`
+
+    Current state of the work item
+
+    - `Queued("queued")`
+
+    - `Starting("starting")`
+
+    - `Active("active")`
+
+    - `Stopping("stopping")`
+
+    - `Stopped("stopped")`
+
+  - `required string? StopRequestedAt`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `required string? StoppedAt`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `JsonElement Type = "work"`
+
+    The type of object (always 'work')
+
+#### Example
+
+```csharp
+WorkPollParams parameters = new()
+{
+    EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
+};
+
+var betaSelfHostedWork = await client.Beta.Environments.Work.Poll(parameters);
+
+Console.WriteLine(betaSelfHostedWork);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+### Acknowledge Work
+
+`BetaSelfHostedWork Beta.Environments.Work.Ack(parameters, cancellationToken = default)`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}/ack`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting' and removing it from the queue.
+
+#### Parameters
+
+- `WorkAckParams parameters`
+
+  - `required string environmentID`
+
+    Path param
+
+  - `required string workID`
+
+    Path param
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+#### Returns
+
+- `class BetaSelfHostedWork:`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `required string ID`
+
+    Work identifier (e.g., 'work_...')
+
+  - `required string? AcknowledgedAt`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `required string CreatedAt`
+
+    RFC 3339 timestamp when work was created
+
+  - `required BetaSessionWorkData Data`
+
+    The actual work to be performed
+
+    - `required string ID`
+
+      Session identifier (e.g., 'session_...')
+
+    - `JsonElement Type = "session"`
+
+      Type of work data
+
+  - `required string EnvironmentID`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `required string? LatestHeartbeatAt`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `required string? Secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `required string? StartedAt`
+
+    RFC 3339 timestamp when work execution started
+
+  - `required State State`
+
+    Current state of the work item
+
+    - `Queued("queued")`
+
+    - `Starting("starting")`
+
+    - `Active("active")`
+
+    - `Stopping("stopping")`
+
+    - `Stopped("stopped")`
+
+  - `required string? StopRequestedAt`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `required string? StoppedAt`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `JsonElement Type = "work"`
+
+    The type of object (always 'work')
+
+#### Example
+
+```csharp
+WorkAckParams parameters = new()
+{
+    EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW",
+    WorkID = "work_id",
+};
+
+var betaSelfHostedWork = await client.Beta.Environments.Work.Ack(parameters);
+
+Console.WriteLine(betaSelfHostedWork);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+### Record Heartbeat
+
+`BetaSelfHostedWorkHeartbeatResponse Beta.Environments.Work.Heartbeat(parameters, cancellationToken = default)`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Record a heartbeat for a work item to maintain the lease.
+
+#### Parameters
+
+- `WorkHeartbeatParams parameters`
+
+  - `required string environmentID`
+
+    Path param
+
+  - `required string workID`
+
+    Path param
+
+  - `long? desiredTtlSeconds`
+
+    Query param: Desired TTL in seconds
+
+  - `string? expectedLastHeartbeat`
+
+    Query param: Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+#### Returns
+
+- `class BetaSelfHostedWorkHeartbeatResponse:`
+
+  Response after recording a heartbeat for a work item.
+
+  - `required string LastHeartbeat`
+
+    RFC 3339 timestamp of the actual heartbeat from DB
+
+  - `required bool LeaseExtended`
+
+    Whether the heartbeat succeeded in extending the lease
+
+  - `required State State`
+
+    Current state of the work item (active/stopping/stopped)
+
+    - `Queued("queued")`
+
+    - `Starting("starting")`
+
+    - `Active("active")`
+
+    - `Stopping("stopping")`
+
+    - `Stopped("stopped")`
+
+  - `required long TtlSeconds`
+
+    Effective TTL applied to the lease
+
+  - `JsonElement Type = "work_heartbeat"`
+
+    The type of response
+
+#### Example
+
+```csharp
+WorkHeartbeatParams parameters = new()
+{
+    EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW",
+    WorkID = "work_id",
+};
+
+var betaSelfHostedWorkHeartbeatResponse = await client.Beta.Environments.Work.Heartbeat(parameters);
+
+Console.WriteLine(betaSelfHostedWorkHeartbeatResponse);
+```
+
+##### Response (200)
+
+```json
+{
+  "last_heartbeat": "last_heartbeat",
+  "lease_extended": true,
+  "state": "queued",
+  "ttl_seconds": 0,
+  "type": "work_heartbeat"
+}
+```
+
+### Stop Work
+
+`BetaSelfHostedWork Beta.Environments.Work.Stop(parameters, cancellationToken = default)`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}/stop`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Stop a work item, initiating graceful or forced shutdown.
+
+#### Parameters
+
+- `WorkStopParams parameters`
+
+  - `required string environmentID`
+
+    Path param
+
+  - `required string workID`
+
+    Path param
+
+  - `bool force`
+
+    Body param: If true, immediately stop work without graceful shutdown
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+#### Returns
+
+- `class BetaSelfHostedWork:`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `required string ID`
+
+    Work identifier (e.g., 'work_...')
+
+  - `required string? AcknowledgedAt`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `required string CreatedAt`
+
+    RFC 3339 timestamp when work was created
+
+  - `required BetaSessionWorkData Data`
+
+    The actual work to be performed
+
+    - `required string ID`
+
+      Session identifier (e.g., 'session_...')
+
+    - `JsonElement Type = "session"`
+
+      Type of work data
+
+  - `required string EnvironmentID`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `required string? LatestHeartbeatAt`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `required string? Secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `required string? StartedAt`
+
+    RFC 3339 timestamp when work execution started
+
+  - `required State State`
+
+    Current state of the work item
+
+    - `Queued("queued")`
+
+    - `Starting("starting")`
+
+    - `Active("active")`
+
+    - `Stopping("stopping")`
+
+    - `Stopped("stopped")`
+
+  - `required string? StopRequestedAt`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `required string? StoppedAt`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `JsonElement Type = "work"`
+
+    The type of object (always 'work')
+
+#### Example
+
+```csharp
+WorkStopParams parameters = new()
+{
+    EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW",
+    WorkID = "work_id",
+};
+
+var betaSelfHostedWork = await client.Beta.Environments.Work.Stop(parameters);
+
+Console.WriteLine(betaSelfHostedWork);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+### List Work Items
+
+`WorkListPage Beta.Environments.Work.List(parameters, cancellationToken = default)`
+
+**GET** `/v1/environments/{environment_id}/work`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+List work items in an environment.
+
+#### Parameters
+
+- `WorkListParams parameters`
+
+  - `required string environmentID`
+
+    Path param
+
+  - `long limit`
+
+    Query param: Maximum number of work items to return
+
+    maximum: 1000, minimum: 1
+
+  - `string? page`
+
+    Query param: Opaque cursor from previous response for pagination
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+#### Returns
+
+- `class BetaSelfHostedWork:`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `required string ID`
+
+    Work identifier (e.g., 'work_...')
+
+  - `required string? AcknowledgedAt`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `required string CreatedAt`
+
+    RFC 3339 timestamp when work was created
+
+  - `required BetaSessionWorkData Data`
+
+    The actual work to be performed
+
+    - `required string ID`
+
+      Session identifier (e.g., 'session_...')
+
+    - `JsonElement Type = "session"`
+
+      Type of work data
+
+  - `required string EnvironmentID`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `required string? LatestHeartbeatAt`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `required string? Secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `required string? StartedAt`
+
+    RFC 3339 timestamp when work execution started
+
+  - `required State State`
+
+    Current state of the work item
+
+    - `Queued("queued")`
+
+    - `Starting("starting")`
+
+    - `Active("active")`
+
+    - `Stopping("stopping")`
+
+    - `Stopped("stopped")`
+
+  - `required string? StopRequestedAt`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `required string? StoppedAt`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `JsonElement Type = "work"`
+
+    The type of object (always 'work')
+
+#### Example
+
+```csharp
+WorkListParams parameters = new()
+{
+    EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
+};
+
+var page = await client.Beta.Environments.Work.List(parameters);
+await foreach (var item in page.Paginate())
+{
+    Console.WriteLine(item);
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "acknowledged_at": "acknowledged_at",
+      "created_at": "created_at",
+      "data": {
+        "id": "id",
+        "type": "session"
+      },
+      "environment_id": "environment_id",
+      "latest_heartbeat_at": "latest_heartbeat_at",
+      "metadata": {
+        "foo": "string"
+      },
+      "secret": "secret",
+      "started_at": "started_at",
+      "state": "queued",
+      "stop_requested_at": "stop_requested_at",
+      "stopped_at": "stopped_at",
+      "type": "work"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+### Update Work Item
+
+`BetaSelfHostedWork Beta.Environments.Work.Update(parameters, cancellationToken = default)`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Update work item metadata with merge semantics.
+
+#### Parameters
+
+- `WorkUpdateParams parameters`
+
+  - `required string environmentID`
+
+    Path param
+
+  - `required string workID`
+
+    Path param
+
+  - `required IReadOnlyDictionary<string, string> metadata`
+
+    Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+#### Returns
+
+- `class BetaSelfHostedWork:`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `required string ID`
+
+    Work identifier (e.g., 'work_...')
+
+  - `required string? AcknowledgedAt`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `required string CreatedAt`
+
+    RFC 3339 timestamp when work was created
+
+  - `required BetaSessionWorkData Data`
+
+    The actual work to be performed
+
+    - `required string ID`
+
+      Session identifier (e.g., 'session_...')
+
+    - `JsonElement Type = "session"`
+
+      Type of work data
+
+  - `required string EnvironmentID`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `required string? LatestHeartbeatAt`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `required string? Secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `required string? StartedAt`
+
+    RFC 3339 timestamp when work execution started
+
+  - `required State State`
+
+    Current state of the work item
+
+    - `Queued("queued")`
+
+    - `Starting("starting")`
+
+    - `Active("active")`
+
+    - `Stopping("stopping")`
+
+    - `Stopped("stopped")`
+
+  - `required string? StopRequestedAt`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `required string? StoppedAt`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `JsonElement Type = "work"`
+
+    The type of object (always 'work')
+
+#### Example
+
+```csharp
+WorkUpdateParams parameters = new()
+{
+    EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW",
+    WorkID = "work_id",
+    Metadata = new Dictionary<string, string?>() { { "foo", "string" } },
+};
+
+var betaSelfHostedWork = await client.Beta.Environments.Work.Update(parameters);
+
+Console.WriteLine(betaSelfHostedWork);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+### Get Queue Statistics
+
+`BetaSelfHostedWorkQueueStats Beta.Environments.Work.Stats(parameters, cancellationToken = default)`
+
+**GET** `/v1/environments/{environment_id}/work/stats`
+
+Get statistics about the work queue for an environment.
+
+#### Parameters
+
+- `WorkStatsParams parameters`
+
+  - `required string environmentID`
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+#### Returns
+
+- `class BetaSelfHostedWorkQueueStats:`
+
+  Statistics about the work queue for an environment.
+
+  Uses Redis Stream consumer group metrics for O(1) queries.
+
+  - `required long Depth`
+
+    Number of work items waiting to be picked up (lag from consumer group)
+
+  - `required string? OldestQueuedAt`
+
+    RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
+
+  - `required long Pending`
+
+    Number of work items being processed (polled but not acknowledged)
+
+  - `JsonElement Type = "work_queue_stats"`
+
+    The type of object
+
+  - `required long? WorkersPolling`
+
+    Number of workers that have polled for work in the last 30 seconds. Requires worker_id to be sent with poll requests.
+
+#### Example
+
+```csharp
+WorkStatsParams parameters = new()
+{
+    EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
+};
+
+var betaSelfHostedWorkQueueStats = await client.Beta.Environments.Work.Stats(parameters);
+
+Console.WriteLine(betaSelfHostedWorkQueueStats);
+```
+
+##### Response (200)
+
+```json
+{
+  "depth": 0,
+  "oldest_queued_at": "oldest_queued_at",
+  "pending": 0,
+  "type": "work_queue_stats",
+  "workers_polling": 0
+}
+```
 
 ---
 

@@ -1,100 +1,43 @@
 # Explore the .claude directory
 
-Claude Code reads instructions, settings, skills, subagents, and memory from your project directory and from `~/.claude` in your home directory. Commit project files to git to share them with your team; files in `~/.claude` are personal configuration that applies across all your projects.
-On Windows, `~/.claude` resolves to `%USERPROFILE%\.claude`. If you set [`CLAUDE_CONFIG_DIR`](env-vars.md), every `~/.claude` path on this page lives under that directory instead.
-Most users only edit `CLAUDE.md` and `settings.json`. The rest of the directory is optional: add skills, rules, or subagents as you need them.
+> Where Claude Code reads CLAUDE.md, settings.json, hooks, skills, commands, subagents, workflows, rules, and auto memory. Explore the .claude directory in your project and ~/.claude in your home directory.
 
-## [​](#explore-the-directory) Explore the directory
-
-Click files in the tree to see what each one does, when it loads, and an example.
-
-The interactive explorer works best on a larger screen. See the [file reference table](#file-reference) below, or show the explorer anyway.
-
-ProjectGlobal (~/)⊞⛶
-
-CLAUDE.md
-
-{}.mcp.json
-
-.worktreeinclude
-
-▾.claude/
-
-{}settings.json
-
-{}settings.local.json
-
-▾rules/
-
-testing.md
-
-api-design.md
-
-▾skills/
-
-▾security-review/
-
-SKILL.md
-
-checklist.md
-
-▾commands/
-
-fix-issue.md
-
-▸output-styles/
-
-▾agents/
-
-code-reviewer.md
-
-▸workflows/
-
-▾agent-memory/
-
-▾<agent-name>/
-
-MEMORY.md
-
-CLAUDE.md selected
-
-your-project / CLAUDE.md
-
-CLAUDE.md
-
-Project instructions Claude reads every session
-
-committed
-
-When it loads
-
-Loaded into context at the start of every session
-
-Project-specific instructions that shape how Claude works in this repository. Put your conventions, common commands, and architectural context here so Claude operates with the same assumptions your team does.
-
-Tips
-
-●Target under 200 lines. Longer files still load in full but may reduce adherence
-
-●CLAUDE.md loads into every session. If something only matters for specific tasks, move it to a [skill](skills.md) or a path-scoped [rule](memory.md) so it loads only when needed
-
-●List the commands you run most, like build, test, and format, so Claude knows them without you spelling them out each time
-
-●Run `/memory` to open and edit CLAUDE.md from within a session
-
-●Also works at `.claude/CLAUDE.md` if you prefer to keep the project root clean
-
-This example is for a TypeScript and React project. It lists the build and test commands, the framework conventions Claude should follow, and project-specific rules like export style and file layout.
-
-CLAUDE.mdCopy
-
-```
-# Project conventions
+export const ClaudeExplorer = () => {
+  const A = useMemo(() => ({href, children}) => <a href={href} style={{
+    color: 'var(--ce-accent)',
+    textDecoration: 'none',
+    borderBottom: '1px dotted var(--ce-accent)'
+  }}>{children}</a>, []);
+  const C = useMemo(() => ({children}) => <code style={{
+    fontFamily: 'var(--ce-mono)',
+    fontSize: '0.92em',
+    padding: '1px 4px',
+    borderRadius: '3px',
+    background: 'var(--ce-surface)',
+    border: '0.5px solid var(--ce-border-subtle)'
+  }}>{children}</code>, []);
+  const commandsNote = useMemo(() => <>Commands and skills are now the same mechanism. For new workflows, use skills/ instead: same /name invocation, plus you can bundle supporting files.</>, []);
+  const FILE_TREE = useMemo(() => ({
+    project: {
+      label: 'your-project/',
+      children: [{
+        id: 'claude-md',
+        label: 'CLAUDE.md',
+        type: 'file',
+        icon: 'md',
+        color: '#6A9BCC',
+        badge: 'committed',
+        oneLiner: 'Project instructions Claude reads every session',
+        when: 'Loaded into context at the start of every session',
+        description: 'Project-specific instructions that shape how Claude works in this repository. Put your conventions, common commands, and architectural context here so Claude operates with the same assumptions your team does.',
+        tips: ['Target under 200 lines. Longer files still load in full but may reduce adherence', <>CLAUDE.md loads into every session. If something only matters for specific tasks, move it to a skill or a path-scoped rule so it loads only when needed</>, 'List the commands you run most, like build, test, and format, so Claude knows them without you spelling them out each time', <>Run /memory to open and edit CLAUDE.md from within a session</>, <>Also works at .claude/CLAUDE.md if you prefer to keep the project root clean</>],
+        exampleIntro: 'This example is for a TypeScript and React project. It lists the build and test commands, the framework conventions Claude should follow, and project-specific rules like export style and file layout.',
+        example: `# Project conventions
 
 ## Commands
-- Build: `npm run build`
-- Test: `npm test`
-- Lint: `npm run lint`
+- Build: \`npm run build\`
+- Test: \`npm test\`
+- Lint: \`npm run lint\`
 
 ## Stack
 - TypeScript with strict mode
@@ -102,165 +45,1338 @@ CLAUDE.mdCopy
 
 ## Rules
 - Named exports, never default exports
-- Tests live next to source: `foo.ts` -> `foo.test.ts`
-- All API routes return `{ data, error }` shape
-```
+- Tests live next to source: \`foo.ts\` -> \`foo.test.ts\`
+- All API routes return \`{ data, error }\` shape`,
+        docsLink: '/en/memory'
+      }, {
+        id: 'mcp-json',
+        label: '.mcp.json',
+        type: 'file',
+        icon: 'json',
+        color: '#9B7BC4',
+        badge: 'committed',
+        oneLiner: 'Project-scoped MCP servers, shared with your team',
+        when: <>Servers connect when the session begins. Tool schemas are deferred by default and load on demand via tool search</>,
+        description: <>Configures Model Context Protocol (MCP) servers that give Claude access to external tools: databases, APIs, browsers, and more. This file holds the project-scoped servers your whole team uses. Personal servers you want to keep to yourself go in ~/.claude.json instead.</>,
+        tips: [<>Use environment variable references for secrets: {'${NOTION_TOKEN}'}</>, <>Lives at the project root, not inside .claude/</>, <>For servers only you need, run claude mcp add --scope user. This writes to ~/.claude.json instead of .mcp.json</>],
+        exampleIntro: <>This example configures the Notion MCP server so Claude can read and update pages in your workspace. The {'${NOTION_TOKEN}'} reference is read from your shell environment when Claude Code starts the server, so the token never lands in the file.</>,
+        example: `{
+  "mcpServers": {
+    "notion": {
+      "command": "npx",
+      "args": ["-y", "@notionhq/notion-mcp-server"],
+      "env": {
+        "NOTION_TOKEN": "\${NOTION_TOKEN}"
+      }
+    }
+  }
+}`,
+        docsLink: '/en/mcp'
+      }, {
+        id: 'worktreeinclude',
+        label: '.worktreeinclude',
+        type: 'file',
+        icon: 'md',
+        color: '#8FA876',
+        badge: 'committed',
+        oneLiner: 'Gitignored files to copy into new worktrees',
+        when: <>Read when Claude creates a git worktree via --worktree, the EnterWorktree tool, or subagent isolation: worktree</>,
+        description: <>Lists gitignored files to copy from your main repository into each new worktree. Worktrees are fresh checkouts, so untracked files like .env are missing by default. Patterns here use .gitignore syntax. Only files that match a pattern and are also gitignored get copied, so tracked files are never duplicated.</>,
+        tips: [<>Lives at the project root, not inside .claude/</>, <>Git-only: if you configure a WorktreeCreate hook for a different VCS, this file is not read. Copy files inside your hook script instead</>, <>Also applies to parallel sessions in the desktop app</>],
+        exampleIntro: 'This example copies your local environment files and a secrets config into every worktree Claude creates. Comments start with # and blank lines are ignored, same as .gitignore.',
+        example: `# Local environment
+.env
+.env.local
 
-[Full docs →](memory.md)
+# API credentials
+config/secrets.json`,
+        docsLink: '/en/worktrees#copy-gitignored-files-into-worktrees'
+      }, {
+        id: 'dot-claude',
+        label: '.claude/',
+        type: 'folder',
+        icon: 'folder',
+        color: 'var(--ce-accent)',
+        oneLiner: 'Project-level configuration, rules, and extensions',
+        description: 'Everything Claude Code reads that is specific to this project. If you use git, commit most files here so your team shares them; a few, like settings.local.json, are gitignored when Claude Code saves settings to them. Each file badge shows which.',
+        children: [{
+          id: 'settings-json',
+          label: 'settings.json',
+          type: 'file',
+          icon: 'json',
+          color: 'var(--ce-text-3)',
+          badge: 'committed',
+          oneLiner: 'Permissions, hooks, and configuration',
+          when: <>Overrides global ~/.claude/settings.json. Local settings, CLI flags, and managed settings override this</>,
+          description: 'Settings that Claude Code applies directly. Permissions control which commands and tools Claude can use; hooks run your scripts at specific points in a session. Unlike CLAUDE.md, which Claude reads as guidance, these are enforced whether Claude follows them or not.',
+          contains: [<>permissions: allow, deny, or prompt before Claude uses specific tools or commands</>, <>hooks: run your own scripts on events like before a tool call or after a file edit</>, <>statusLine: customize the line shown at the bottom while Claude works</>, <>model: pick a default model for this project</>, <>env: environment variables set in every session</>, <>outputStyle: select a custom system-prompt style from output-styles/</>],
+          tips: [<>Bash permission patterns support wildcards: Bash(npm test *) matches any command starting with npm test</>, <>Array settings like permissions.allow combine across all scopes; scalar settings like model use the most specific value</>],
+          exampleIntro: <>This example allows npm test and npm run commands without prompting, blocks rm -rf, and runs Prettier on files after Claude edits or writes them.</>,
+          example: `{
+  "permissions": {
+    "allow": [
+      "Bash(npm test *)",
+      "Bash(npm run *)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [{
+      "matcher": "Edit|Write",
+      "hooks": [{
+        "type": "command",
+        "command": "jq -r '.tool_input.file_path' | xargs npx prettier --write"
+      }]
+    }]
+  }
+}`,
+          docsLink: '/en/settings'
+        }, {
+          id: 'settings-local-json',
+          label: 'settings.local.json',
+          type: 'file',
+          icon: 'json',
+          color: 'var(--ce-text-3)',
+          badge: 'gitignored',
+          oneLiner: 'Your personal settings overrides for this project',
+          when: 'Highest of the user-editable settings files; CLI flags and managed settings still take precedence',
+          description: 'Personal settings that take precedence over the project defaults. Same JSON format as settings.json, gitignored when Claude Code saves a setting to it. Use this when you need different permissions or defaults than the team config.',
+          tips: [<>Same schema as settings.json. Array settings like permissions.allow combine across scopes; scalar settings like model use the local value</>, <>When Claude Code saves a setting to this file in a repository that doesn't already ignore it, it adds **/.claude/settings.local.json to your global git excludes file: core.excludesFile from your global git config when it's set to an absolute or ~-prefixed path, otherwise $XDG_CONFIG_HOME/git/ignore, or ~/.config/git/ignore. To share the ignore rule with your team, also add it to the project .gitignore</>],
+          exampleIntro: 'This example adds Docker permissions on top of whatever the team settings.json allows.',
+          example: `{
+  "permissions": {
+    "allow": [
+      "Bash(docker *)"
+    ]
+  }
+}`,
+          docsLink: '/en/settings'
+        }, {
+          id: 'rules',
+          label: 'rules/',
+          type: 'folder',
+          icon: 'folder',
+          color: '#9B7BC4',
+          oneLiner: 'Topic-scoped instructions, optionally gated by file paths',
+          when: <>Rules without paths: load at session start. Rules with paths: load when a matching file enters context</>,
+          description: [<>Project instructions split into topic files that can load conditionally based on file paths. A rule without paths: frontmatter loads at session start like CLAUDE.md; a rule with paths: loads only when Claude reads a matching file.</>, <>Like CLAUDE.md, rules are guidance Claude reads, not configuration Claude Code enforces. For guaranteed behavior use hooks or permissions.</>],
+          tips: [<>Use paths: frontmatter with globs to scope rules to directories or file types</>, <>Subdirectories work: .claude/rules/frontend/react.md is discovered automatically</>, 'When CLAUDE.md approaches 200 lines, start splitting into rules'],
+          docsLink: '/en/memory#organize-rules-with-claude/rules/',
+          children: [{
+            id: 'rule-testing',
+            label: 'testing.md',
+            type: 'file',
+            icon: 'md',
+            color: '#9B7BC4',
+            badge: 'committed',
+            oneLiner: 'Test conventions scoped to test files',
+            when: <>Loaded when Claude reads a file matching the paths: globs below</>,
+            description: <>An example rule that only loads when Claude is working on test files. The paths: globs in the frontmatter define which files trigger it; here, anything ending in .test.ts or .test.tsx. For other files, this rule is not loaded into context.</>,
+            example: `---
+paths:
+  - "**/*.test.ts"
+  - "**/*.test.tsx"
+---
 
-## [​](#what’s-not-shown) What’s not shown
+# Testing Rules
+
+- Use descriptive test names: "should [expected] when [condition]"
+- Mock external dependencies, not internal modules
+- Clean up side effects in afterEach`
+          }, {
+            id: 'rule-api',
+            label: 'api-design.md',
+            type: 'file',
+            icon: 'md',
+            color: '#9B7BC4',
+            badge: 'committed',
+            oneLiner: 'API conventions scoped to backend code',
+            when: <>Loaded when Claude reads a file matching the paths: glob below</>,
+            description: <>A second example showing a rule scoped to backend code. The paths: glob matches files under src/api/, so these conventions load only when Claude is editing API routes.</>,
+            example: `---
+paths:
+  - "src/api/**/*.ts"
+---
+
+# API Design Rules
+
+- All endpoints must validate input with Zod schemas
+- Return shape: { data: T } | { error: string }
+- Rate limit all public endpoints`
+          }]
+        }, {
+          id: 'skills',
+          label: 'skills/',
+          type: 'folder',
+          icon: 'folder',
+          color: '#D4A843',
+          oneLiner: 'Reusable prompts you or Claude invoke by name',
+          when: <>Invoked with /skill-name or when Claude matches the task to a skill</>,
+          description: <>Each skill is a folder with a SKILL.md file plus any supporting files it needs. By default, both you and Claude can invoke a skill. Use frontmatter to control that: disable-model-invocation: true for user-only workflows like /deploy, or user-invocable: false to hide from the / menu while Claude can still invoke it.</>,
+          tips: [<>Skills accept arguments: /deploy staging passes "staging" as $ARGUMENTS. Use $0, $1, and so on for positional access</>, <>The description frontmatter determines when Claude auto-invokes the skill</>, 'Bundle reference docs alongside SKILL.md. Claude knows the skill directory path and can read supporting files when you mention them'],
+          docsLink: '/en/skills',
+          children: [{
+            id: 'skill-review',
+            label: 'security-review/',
+            type: 'folder',
+            icon: 'folder',
+            color: '#D4A843',
+            oneLiner: 'A skill bundling SKILL.md with supporting files',
+            children: [{
+              id: 'skill-review-md',
+              label: 'SKILL.md',
+              type: 'file',
+              icon: 'md',
+              color: '#D4A843',
+              badge: 'committed',
+              oneLiner: 'Entrypoint: trigger, invocability, instructions',
+              when: <>User types /security-review &lt;target&gt;; Claude cannot auto-invoke this skill</>,
+              description: [<>This skill uses disable-model-invocation: true so only you can trigger it; Claude never invokes it on its own.</>, <>The !`...` line runs a shell command and injects its output into the prompt. $ARGUMENTS substitutes whatever you typed after the skill name. Claude sees the skill directory path, so mentioning a bundled file like checklist.md lets Claude read it.</>],
+              example: `---
+description: Reviews code changes for security vulnerabilities, authentication gaps, and injection risks
+disable-model-invocation: true
+argument-hint: <branch-or-path>
+---
+
+## Diff to review
+
+!\`git diff $ARGUMENTS\`
+
+Audit the changes above for:
+
+1. Injection vulnerabilities (SQL, XSS, command)
+2. Authentication and authorization gaps
+3. Hardcoded secrets or credentials
+
+Use checklist.md in this skill directory for the full review checklist.
+
+Report findings with severity ratings and remediation steps.`
+            }, {
+              id: 'skill-checklist',
+              label: 'checklist.md',
+              type: 'file',
+              icon: 'md',
+              color: '#D4A843',
+              badge: 'committed',
+              oneLiner: 'Supporting file bundled with the skill',
+              when: 'Claude reads it on demand while running the skill',
+              description: <>Skills can bundle any supporting files: reference docs, templates, scripts. The skill directory path is prepended to SKILL.md, so Claude can read bundled files by name. For scripts in bash injection commands, use the {'${CLAUDE_SKILL_DIR}'} placeholder.</>,
+              example: `# Security Review Checklist
+
+## Input Validation
+- [ ] All user input sanitized before DB queries
+- [ ] File upload MIME types validated
+- [ ] Path traversal prevented on file operations
+
+## Authentication
+- [ ] JWT tokens expire after 24 hours
+- [ ] API keys stored in environment variables
+- [ ] Passwords hashed with bcrypt or argon2`
+            }]
+          }]
+        }, {
+          id: 'commands',
+          label: 'commands/',
+          type: 'folder',
+          icon: 'folder',
+          color: '#788C5D',
+          oneLiner: <>Single-file prompts invoked with /name</>,
+          note: commandsNote,
+          when: <>User types /command-name</>,
+          description: <>A file at commands/deploy.md creates /deploy the same way a skill at skills/deploy/SKILL.md does, and both can be auto-invoked by Claude. Skills use a directory with SKILL.md, letting you bundle reference docs, templates, or scripts alongside the prompt.</>,
+          tips: [<>Use $ARGUMENTS in the file to accept parameters: /fix-issue 123</>, 'If a skill and command share a name, the skill takes precedence', 'New commands should usually be skills instead; commands remain supported'],
+          docsLink: '/en/skills',
+          children: [{
+            id: 'cmd-example',
+            label: 'fix-issue.md',
+            type: 'file',
+            icon: 'md',
+            color: '#788C5D',
+            badge: 'committed',
+            oneLiner: <>Invoked as /fix-issue &lt;number&gt;</>,
+            note: commandsNote,
+            description: [<>An example command for fixing a GitHub issue. Type /fix-issue 123 and the !`...` line runs gh issue view 123 in your shell, injecting the output into the prompt before Claude sees it.</>, <>$ARGUMENTS substitutes whatever you typed after the command name. For positional access, use $0 $1 and so on.</>],
+            example: `---
+argument-hint: <issue-number>
+---
+
+!\`gh issue view $ARGUMENTS\`
+
+Investigate and fix the issue above.
+
+1. Trace the bug to its root cause
+2. Implement the fix
+3. Write or update tests
+4. Summarize what you changed and why`
+          }]
+        }, {
+          id: 'output-styles',
+          label: 'output-styles/',
+          type: 'folder',
+          icon: 'folder',
+          color: '#5AA7A7',
+          oneLiner: 'Project-scoped output styles, if your team shares any',
+          when: 'Applied at session start when selected via the outputStyle setting',
+          description: <>Output styles are usually personal, so most live in ~/.claude/output-styles/. Put one here if your team shares a style, like a review mode everyone uses. See the Global tab for the full explanation and example.</>,
+          docsLink: '/en/output-styles',
+          children: []
+        }, {
+          id: 'agents',
+          label: 'agents/',
+          type: 'folder',
+          icon: 'folder',
+          color: '#C46686',
+          oneLiner: 'Specialized subagents with their own context window',
+          when: 'Runs in its own context window when you or Claude invoke it',
+          description: 'Each markdown file defines a subagent with its own system prompt, tool access, and optionally its own model. Subagents run in a fresh context window, keeping the main conversation clean. Useful for parallel work or isolated tasks.',
+          tips: ['Each agent gets a fresh context window, separate from your main session', <>Restrict tool access per agent with the tools: frontmatter field</>, 'Type @ and pick an agent from the autocomplete to delegate directly'],
+          docsLink: '/en/sub-agents',
+          children: [{
+            id: 'agent-reviewer',
+            label: 'code-reviewer.md',
+            type: 'file',
+            icon: 'md',
+            color: '#C46686',
+            badge: 'committed',
+            oneLiner: 'Subagent for isolated code review',
+            when: 'Claude spawns it for review tasks, or you @-mention it from the autocomplete',
+            description: <>An example subagent restricted to read-only tools. The description frontmatter tells Claude when to delegate to it automatically; tools: limits it to Read, Grep, and Glob so it can inspect code but never edit. The body becomes the subagent's system prompt.</>,
+            example: `---
+name: code-reviewer
+description: Reviews code for correctness, security, and maintainability
+tools: Read, Grep, Glob
+---
+
+You are a senior code reviewer. Review for:
+
+1. Correctness: logic errors, edge cases, null handling
+2. Security: injection, auth bypass, data exposure
+3. Maintainability: naming, complexity, duplication
+
+Every finding must include a concrete fix.`
+          }]
+        }, {
+          id: 'workflows',
+          label: 'workflows/',
+          type: 'folder',
+          icon: 'folder',
+          color: '#C46686',
+          oneLiner: 'Dynamic workflow scripts that orchestrate many subagents',
+          when: 'Loaded at startup; each file becomes a /<name> command',
+          description: <>Each .js file is a dynamic workflow: a script the runtime executes to spawn and coordinate many subagents. Workflows are written by Claude and saved here from /workflows rather than authored from scratch.</>,
+          tips: [<>Save a run from /workflows with s to create one of these</>, <>A project workflow takes precedence over a personal one in ~/.claude/workflows/ with the same name</>],
+          docsLink: '/en/workflows'
+        }, {
+          id: 'agent-memory',
+          label: 'agent-memory/',
+          type: 'folder',
+          icon: 'folder',
+          color: '#C46686',
+          badge: 'committed',
+          autogen: true,
+          oneLiner: 'Subagent persistent memory, separate from your main session auto memory',
+          when: 'First 200 lines (capped at 25KB) of MEMORY.md loaded into the subagent system prompt when it runs',
+          description: <>Subagents with memory: project in their frontmatter get a dedicated memory directory here. This is distinct from your main session auto memory at ~/.claude/projects/: each subagent reads and writes its own MEMORY.md, not yours.</>,
+          tips: [<>Only created for subagents that set the memory: frontmatter field</>, <>This directory holds project-scoped subagent memory, meant to be shared with your team. To keep memory out of version control use memory: local, which writes to .claude/agent-memory-local/ instead. For cross-project memory use memory: user, which writes to ~/.claude/agent-memory/</>, <>The main session auto memory is a different feature; see ~/.claude/projects/ in the Global tab</>],
+          docsLink: '/en/sub-agents#enable-persistent-memory',
+          children: [{
+            id: 'agent-memory-sub',
+            label: '<agent-name>/',
+            type: 'folder',
+            icon: 'folder',
+            color: '#C46686',
+            autogen: true,
+            children: [{
+              id: 'agent-memory-md',
+              label: 'MEMORY.md',
+              type: 'file',
+              icon: 'md',
+              color: '#C46686',
+              badge: 'committed',
+              autogen: true,
+              oneLiner: 'The subagent writes and maintains this file automatically',
+              when: 'Loaded into the subagent system prompt when the subagent starts',
+              description: <>Works the same as your main auto memory: the subagent creates and updates this file itself. You do not write it. The subagent reads it at the start of each task and writes back what it learns.</>,
+              example: `# code-reviewer memory
+
+## Patterns seen
+- Project uses custom Result<T, E> type, not exceptions
+- Auth middleware expects Bearer token in Authorization header
+- Tests use factory functions in test/factories/
+
+## Recurring issues
+- Missing null checks on API responses (src/api/*)
+- Unhandled promise rejections in background jobs`
+            }]
+          }]
+        }]
+      }]
+    },
+    global: {
+      label: '~/',
+      children: [{
+        id: 'claude-json',
+        label: '.claude.json',
+        type: 'file',
+        icon: 'json',
+        color: 'var(--ce-text-3)',
+        badge: 'local',
+        oneLiner: 'App state and UI preferences',
+        when: <>Read at session start for your preferences and MCP servers. Claude Code writes back to it when you change settings in /config or approve trust prompts</>,
+        description: <>Holds state that does not belong in settings.json: theme, OAuth session, per-project trust decisions, your personal MCP servers, and UI toggles. Mostly managed through /config rather than editing directly.</>,
+        tips: [<>IDE toggles like autoConnectIde and externalEditorContext live here, not in settings.json</>, <>The projects key tracks per-project state like trust-dialog acceptance and last-session metrics. Permission rules you approve in-session go to .claude/settings.local.json instead</>, <>MCP servers here are yours only: user scope applies across all projects, local scope is per-project but not committed. Team-shared servers go in .mcp.json at the project root instead</>],
+        example: `{
+  "autoConnectIde": true,
+  "externalEditorContext": true,
+  "mcpServers": {
+    "my-tools": {
+      "command": "npx",
+      "args": ["-y", "@example/mcp-server"]
+    }
+  }
+}`,
+        docsLink: '/en/settings-reference#global-config-settings'
+      }, {
+        id: 'global-dot-claude',
+        label: '.claude/',
+        type: 'folder',
+        icon: 'folder',
+        color: 'var(--ce-accent)',
+        oneLiner: 'Your personal configuration across all projects',
+        description: 'The global counterpart to your project .claude/ directory. Files here apply to every project you work in and are never committed to any repository.',
+        children: [{
+          id: 'global-claude-md',
+          label: 'CLAUDE.md',
+          type: 'file',
+          icon: 'md',
+          color: '#6A9BCC',
+          badge: 'local',
+          oneLiner: 'Personal preferences across every project',
+          when: 'Loaded at the start of every session, in every project',
+          description: 'Your global instruction file. Loaded alongside the project CLAUDE.md at session start, so both are in context together. When instructions conflict, project-level instructions take priority. Keep this to preferences that apply everywhere: response style, commit format, personal conventions.',
+          tips: ['Keep it short since it loads into context for every project, alongside that project\'s own CLAUDE.md', 'Good for response style, commit format, and personal conventions'],
+          example: `# Global preferences
+
+- Keep explanations concise
+- Use conventional commit format
+- Show the terminal command to verify changes
+- Prefer composition over inheritance`,
+          docsLink: '/en/memory'
+        }, {
+          id: 'global-settings',
+          label: 'settings.json',
+          type: 'file',
+          icon: 'json',
+          color: 'var(--ce-text-3)',
+          badge: 'local',
+          oneLiner: 'Default settings for all projects',
+          when: 'Your defaults. Project and local settings.json override any keys you also set there',
+          description: [<>Same keys as project settings.json: permissions, hooks, model, environment variables, and the rest. Put settings here that you want in every project, like permissions you always allow, a preferred model, or a notification hook that runs regardless of which project you're in.</>, <>Settings follow a precedence order: project settings.json overrides any matching keys you set here. This is different from CLAUDE.md, where global and project files are both loaded into context rather than merged key by key.</>],
+          example: `{
+  "permissions": {
+    "allow": [
+      "Bash(git log *)",
+      "Bash(git diff *)"
+    ]
+  }
+}`,
+          docsLink: '/en/settings'
+        }, {
+          id: 'keybindings',
+          label: 'keybindings.json',
+          type: 'file',
+          icon: 'json',
+          color: 'var(--ce-text-3)',
+          badge: 'local',
+          oneLiner: 'Custom keyboard shortcuts',
+          when: 'Read at session start and hot-reloaded when you edit the file',
+          description: <>Rebind keyboard shortcuts in the interactive CLI. Run /keybindings to create or open this file with a schema reference. Ctrl+C, Ctrl+D, Ctrl+M, and Caps Lock are reserved and cannot be rebound.</>,
+          exampleIntro: <>This example binds Ctrl+E to open your external editor and unbinds Ctrl+U by setting it to null. The context field scopes bindings to a specific part of the CLI, here the main chat input.</>,
+          example: `{
+  "$schema": "https://www.schemastore.org/claude-code-keybindings.json",
+  "$docs": "https://code.claude.com/docs/en/keybindings",
+  "bindings": [
+    {
+      "context": "Chat",
+      "bindings": {
+        "ctrl+e": "chat:externalEditor",
+        "ctrl+u": null
+      }
+    }
+  ]
+}`,
+          docsLink: '/en/keybindings'
+        }, {
+          id: 'themes',
+          label: 'themes/',
+          type: 'folder',
+          icon: 'folder',
+          color: '#5AA7A7',
+          oneLiner: 'Custom color themes',
+          when: <>Read at session start and hot-reloaded when files change. Listed in /theme</>,
+          description: <>Each .json file defines a custom color theme: a built-in base preset plus an overrides map of color tokens. Create one interactively with /theme or write the JSON by hand. Selecting a custom theme stores custom:&lt;slug&gt; as your theme preference.</>,
+          example: `{
+  "name": "Dracula",
+  "base": "dark",
+  "overrides": {
+    "claude": "#bd93f9",
+    "error": "#ff5555",
+    "success": "#50fa7b"
+  }
+}`,
+          docsLink: '/en/terminal-config#create-a-custom-theme',
+          children: []
+        }, {
+          id: 'global-projects',
+          label: 'projects/',
+          type: 'folder',
+          icon: 'folder',
+          color: '#E8A45C',
+          autogen: true,
+          oneLiner: "Auto memory: Claude's notes to itself, per project",
+          when: 'MEMORY.md loaded at session start; topic files read on demand',
+          description: 'Auto memory lets Claude accumulate knowledge across sessions without you writing anything. Claude saves notes as it works: build commands, debugging insights, architecture notes. Each project gets its own memory directory keyed by the repository path.',
+          tips: [<>On by default. Toggle with /memory or autoMemoryEnabled in settings</>, 'MEMORY.md is the index loaded each session. The first 200 lines, or 25KB, whichever comes first, are read', 'Topic files like debugging.md are read on demand, not at startup', 'These are plain markdown. Edit or delete them anytime'],
+          docsLink: '/en/memory#auto-memory',
+          children: [{
+            id: 'memory-dir',
+            label: '<project>/memory/',
+            type: 'folder',
+            icon: 'folder',
+            color: '#E8A45C',
+            autogen: true,
+            oneLiner: "Claude's accumulated knowledge for one project",
+            children: [{
+              id: 'memory-md',
+              label: 'MEMORY.md',
+              type: 'file',
+              icon: 'md',
+              color: '#E8A45C',
+              badge: 'local',
+              autogen: true,
+              oneLiner: 'Claude writes and maintains this file automatically',
+              when: 'First 200 lines (capped at 25KB) loaded at session start',
+              description: 'Claude creates and updates this file as it works; you do not write it yourself. It acts as an index that Claude reads at the start of every session, pointing to topic files for detail. You can edit or delete it, but Claude will keep updating it.',
+              example: `# Memory Index
+
+## Project
+- [build-and-test.md](build-and-test.md.md): npm run build (~45s), Vitest, dev server on 3001
+- [architecture.md](architecture.md.md): API client singleton, refresh-token auth
+
+## Reference
+- [debugging.md](debugging.md.md): auth token rotation and DB connection troubleshooting`,
+              docsLink: '/en/memory'
+            }, {
+              id: 'memory-topic',
+              label: 'debugging.md',
+              type: 'file',
+              icon: 'md',
+              color: '#E8A45C',
+              badge: 'local',
+              autogen: true,
+              oneLiner: 'Topic notes Claude writes when MEMORY.md gets long',
+              when: 'Claude reads this when a related task comes up',
+              description: 'An example of a topic file Claude creates when MEMORY.md grows too long. Claude picks the filename based on what it splits out: debugging.md, architecture.md, build-commands.md, or similar. You never create these yourself. Claude reads a topic file back only when the current task relates to it.',
+              example: `---
+name: Debugging patterns
+description: Auth token rotation and database connection troubleshooting for this project
+type: reference
+---
+
+## Auth Token Issues
+- Refresh token rotation: old token invalidated immediately
+- If 401 after refresh: check clock skew between client and server
+
+## Database Connection Drops
+- Connection pool: max 10 in dev, 50 in prod
+- Always check \`docker compose ps\` first`
+            }]
+          }]
+        }, {
+          id: 'global-rules',
+          label: 'rules/',
+          type: 'folder',
+          icon: 'folder',
+          color: '#9B7BC4',
+          oneLiner: 'User-level rules that apply to every project',
+          when: <>Rules without paths: load at session start. Rules with paths: load when a matching file enters context</>,
+          description: 'Same as project .claude/rules/ but applies everywhere. Use this for conventions you want across all your work, like personal code style or commit message format.',
+          docsLink: '/en/memory#organize-rules-with-claude/rules/',
+          children: []
+        }, {
+          id: 'global-skills',
+          label: 'skills/',
+          type: 'folder',
+          icon: 'folder',
+          color: '#D4A843',
+          oneLiner: 'Personal skills available in every project',
+          when: <>Invoked with /skill-name in any project</>,
+          description: 'Skills you built for yourself that work everywhere. Same structure as project skills: each is a folder with SKILL.md, scoped to your user account instead of a single project.',
+          docsLink: '/en/skills',
+          children: []
+        }, {
+          id: 'global-commands',
+          label: 'commands/',
+          type: 'folder',
+          icon: 'folder',
+          color: '#788C5D',
+          oneLiner: 'Personal single-file commands available in every project',
+          note: commandsNote,
+          when: <>User types /command-name in any project</>,
+          description: 'Same as project commands/ but scoped to your user account. Each markdown file becomes a command available everywhere.',
+          docsLink: '/en/skills',
+          children: []
+        }, {
+          id: 'global-output-styles',
+          label: 'output-styles/',
+          type: 'folder',
+          icon: 'folder',
+          color: '#5AA7A7',
+          oneLiner: 'Custom system-prompt sections that adjust how Claude works',
+          when: 'Applied at session start when selected via the outputStyle setting',
+          description: [<>Each markdown file defines an output style: a section appended to the system prompt that, by default, also drops the built-in software-engineering task instructions. Use this to adapt Claude Code for uses beyond coding, or to add teaching or review modes.</>, <>Select a built-in or custom style with /config or the outputStyle key in settings. Styles here are available in every project; project-level styles with the same name take precedence.</>],
+          tips: ['Built-in styles Default, Proactive, Concise, Explanatory, and Learning are included with Claude Code; custom styles go here', <>Set keep-coding-instructions: true in frontmatter to keep the default task instructions alongside your additions</>, 'Changes take effect on the next session since the system prompt is fixed at startup for caching'],
+          docsLink: '/en/output-styles',
+          children: [{
+            id: 'output-style-example',
+            label: 'teaching.md',
+            type: 'file',
+            icon: 'md',
+            color: '#5AA7A7',
+            badge: 'local',
+            oneLiner: 'Example style that adds explanations and leaves small changes for you',
+            when: <>Active when outputStyle in settings is set to teaching</>,
+            description: <>This style appends instructions to the system prompt: Claude adds a "Why this approach" note after each task and leaves TODO(human) markers for changes under 10 lines instead of writing them itself. Select it by setting outputStyle to the filename without .md, or to the name field if you set one in frontmatter.</>,
+            example: `---
+description: Explains reasoning and asks you to implement small pieces
+keep-coding-instructions: true
+---
+
+After completing each task, add a brief "Why this approach" note
+explaining the key design decision.
+
+When a change is under 10 lines, ask the user to implement it
+themselves by leaving a TODO(human) marker instead of writing it.`
+          }]
+        }, {
+          id: 'global-agents',
+          label: 'agents/',
+          type: 'folder',
+          icon: 'folder',
+          color: '#C46686',
+          oneLiner: 'Personal subagents available in every project',
+          when: 'Claude delegates or you @-mention in any project',
+          description: 'Subagents defined here are available across all your projects. Same format as project agents.',
+          docsLink: '/en/sub-agents',
+          children: []
+        }, {
+          id: 'global-workflows',
+          label: 'workflows/',
+          type: 'folder',
+          icon: 'folder',
+          color: '#C46686',
+          oneLiner: 'Personal dynamic workflows available in every project',
+          when: 'Loaded at startup; each file becomes a /<name> command',
+          description: <>Workflow scripts saved here are available across all your projects. A project workflow with the same name in .claude/workflows/ takes precedence.</>,
+          docsLink: '/en/workflows',
+          children: []
+        }, {
+          id: 'global-agent-memory',
+          label: 'agent-memory/',
+          type: 'folder',
+          icon: 'folder',
+          color: '#C46686',
+          autogen: true,
+          oneLiner: <>Persistent memory for subagents with memory: user</>,
+          when: 'Loaded into the subagent system prompt when the subagent starts',
+          description: <>Subagents with memory: user in their frontmatter store knowledge here that persists across all projects. For project-scoped subagent memory, see .claude/agent-memory/ instead.</>,
+          docsLink: '/en/sub-agents#enable-persistent-memory',
+          children: []
+        }]
+      }]
+    }
+  }), []);
+  const BADGE_STYLES = useMemo(() => ({
+    committed: {
+      bg: 'rgba(85,138,66,0.08)',
+      color: 'var(--ce-badge-committed)',
+      border: 'rgba(85,138,66,0.15)',
+      label: 'committed'
+    },
+    gitignored: {
+      bg: 'rgba(217,119,87,0.06)',
+      color: 'var(--ce-badge-gitignored)',
+      border: 'rgba(217,119,87,0.15)',
+      label: 'gitignored'
+    },
+    local: {
+      bg: 'rgba(115,114,108,0.06)',
+      color: 'var(--ce-badge-local)',
+      border: 'rgba(115,114,108,0.12)',
+      label: 'local only'
+    },
+    autogen: {
+      bg: 'rgba(232,164,92,0.1)',
+      color: 'var(--ce-badge-autogen)',
+      border: 'rgba(232,164,92,0.2)',
+      label: 'Claude writes'
+    }
+  }), []);
+  const allNodes = useMemo(() => {
+    const flatten = (nodes, acc, path, parentId) => {
+      for (const node of nodes) {
+        const nextPath = [...path, node.label];
+        acc[node.id] = {
+          ...node,
+          path: nextPath,
+          parentId
+        };
+        if (node.children) flatten(node.children, acc, nextPath, node.id);
+      }
+      return acc;
+    };
+    const project = flatten(FILE_TREE.project.children, {}, [FILE_TREE.project.label]);
+    const global = flatten(FILE_TREE.global.children, {}, [FILE_TREE.global.label]);
+    for (const id in project) project[id].root = 'project';
+    for (const id in global) global[id].root = 'global';
+    return {
+      ...project,
+      ...global
+    };
+  }, [FILE_TREE]);
+  const allFolderIds = useMemo(() => Object.keys(allNodes).filter(id => allNodes[id].type === 'folder'), [allNodes]);
+  const DEFAULT_EXPANDED = ['dot-claude', 'rules', 'skills', 'skill-review', 'commands', 'agents', 'agent-memory', 'agent-memory-sub', 'global-dot-claude', 'global-output-styles', 'global-projects', 'memory-dir'];
+  const [mounted, setMounted] = useState(false);
+  const [activeRoot, setActiveRoot] = useState('project');
+  const [selectedId, setSelectedId] = useState('claude-md');
+  const [expandedFolders, setExpandedFolders] = useState(() => new Set(DEFAULT_EXPANDED));
+  const [forceMobile, setForceMobile] = useState(false);
+  const [copiedId, setCopiedId] = useState(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const copyTimeoutRef = useRef(null);
+  const rootRef = useRef(null);
+  useEffect(() => {
+    setMounted(true);
+    const applyHash = scroll => {
+      const hash = window.location.hash.slice(1);
+      if (!hash.startsWith('ce-')) return;
+      const id = hash.slice(3);
+      const node = allNodes[id];
+      if (!node) return;
+      setActiveRoot(node.root);
+      setSelectedId(id);
+      setExpandedFolders(new Set(allFolderIds));
+      if (scroll && rootRef.current) rootRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    };
+    applyHash(false);
+    const onHashChange = () => applyHash(true);
+    const onFsChange = () => setIsFullscreen(!!document.fullscreenElement);
+    window.addEventListener('hashchange', onHashChange);
+    document.addEventListener('fullscreenchange', onFsChange);
+    return () => {
+      if (copyTimeoutRef.current) clearTimeout(copyTimeoutRef.current);
+      window.removeEventListener('hashchange', onHashChange);
+      document.removeEventListener('fullscreenchange', onFsChange);
+    };
+  }, []);
+  useEffect(() => {
+    if (!mounted || !rootRef.current) return;
+    const hash = window.location.hash.slice(1);
+    if (hash.startsWith('ce-') && allNodes[hash.slice(3)]) {
+      rootRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  }, [mounted]);
+  if (!mounted) return null;
+  const selected = allNodes[selectedId];
+  const tree = FILE_TREE[activeRoot];
+  const isCopied = copiedId === selected.id;
+  const toggleFolder = id => {
+    const next = new Set(expandedFolders);
+    next.has(id) ? next.delete(id) : next.add(id);
+    setExpandedFolders(next);
+  };
+  const switchRoot = root => {
+    if (root === activeRoot) return;
+    setActiveRoot(root);
+    const firstId = FILE_TREE[root].children[0].id;
+    setSelectedId(firstId);
+    try {
+      history.replaceState(null, '', '#ce-' + firstId);
+    } catch (e) {}
+  };
+  const toggleFullscreen = () => {
+    if (!rootRef.current) return;
+    if (document.fullscreenElement) document.exitFullscreen(); else rootRef.current.requestFullscreen().catch(() => {});
+  };
+  const selectNode = n => {
+    setSelectedId(n.id);
+    if (n.type === 'folder' && !expandedFolders.has(n.id)) toggleFolder(n.id);
+    try {
+      history.replaceState(null, '', '#ce-' + n.id);
+    } catch (e) {}
+  };
+  const iconBtn = {
+    width: 28,
+    flexShrink: 0,
+    borderRadius: '6px',
+    border: 'none',
+    cursor: 'pointer',
+    background: 'transparent',
+    color: 'var(--ce-text-4)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  };
+  const visibleFolderIds = allFolderIds.filter(id => allNodes[id].root === activeRoot);
+  const allExpanded = visibleFolderIds.every(id => expandedFolders.has(id));
+  const toggleAllFolders = () => {
+    const next = new Set(expandedFolders);
+    visibleFolderIds.forEach(id => allExpanded ? next.delete(id) : next.add(id));
+    setExpandedFolders(next);
+  };
+  const onTreeKeyDown = e => {
+    if (!['ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft'].includes(e.key)) return;
+    const visible = [];
+    const walk = nodes => {
+      for (const n of nodes) {
+        visible.push(n.id);
+        if (n.children && expandedFolders.has(n.id)) walk(n.children);
+      }
+    };
+    walk(tree.children);
+    const i = visible.indexOf(selectedId);
+    if (i === -1) return;
+    e.preventDefault();
+    if (e.key === 'ArrowDown' && i < visible.length - 1) selectNode(allNodes[visible[i + 1]]); else if (e.key === 'ArrowUp' && i > 0) selectNode(allNodes[visible[i - 1]]); else if (e.key === 'ArrowRight' && selected.type === 'folder') {
+      if (!expandedFolders.has(selectedId)) toggleFolder(selectedId); else if (selected.children && selected.children.length) selectNode(allNodes[selected.children[0].id]);
+    } else if (e.key === 'ArrowLeft') {
+      if (selected.type === 'folder' && expandedFolders.has(selectedId)) toggleFolder(selectedId); else if (selected.parentId) selectNode(allNodes[selected.parentId]);
+    }
+  };
+  const copyExample = (id, text) => {
+    const done = () => {
+      setCopiedId(id);
+      if (copyTimeoutRef.current) clearTimeout(copyTimeoutRef.current);
+      copyTimeoutRef.current = setTimeout(() => setCopiedId(null), 2000);
+    };
+    const fallback = () => {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        if (document.execCommand('copy')) done();
+      } catch (e) {}
+      document.body.removeChild(ta);
+    };
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } else {
+      fallback();
+    }
+  };
+  const renderIcon = (icon, color, size) => {
+    const sz = size || 14;
+    if (icon === 'folder') {
+      return <svg width={sz} height={sz} viewBox="0 0 14 14" fill="none">
+          <path d="M1.5 3.5a1 1 0 0 1 1-1h2.6l1 1.2h5.4a1 1 0 0 1 1 1v5.8a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1V3.5z" fill={color} fillOpacity="0.15" stroke={color} strokeWidth="1" />
+        </svg>;
+    }
+    if (icon === 'json') {
+      return <svg width={sz} height={sz} viewBox="0 0 14 14" fill="none">
+          <rect x="2" y="1.5" width="10" height="11" rx="1.5" fill={color} fillOpacity="0.15" stroke={color} strokeWidth="1" />
+          <text x="7" y="9" fontSize="6" fontFamily="monospace" fill={color} textAnchor="middle" fontWeight="700">{'{}'}</text>
+        </svg>;
+    }
+    return <svg width={sz} height={sz} viewBox="0 0 14 14" fill="none">
+        <rect x="2" y="1.5" width="10" height="11" rx="1.5" fill={color} fillOpacity="0.15" stroke={color} strokeWidth="1" />
+        <line x1="4.5" y1="5" x2="9.5" y2="5" stroke={color} strokeWidth="1" />
+        <line x1="4.5" y1="7" x2="9.5" y2="7" stroke={color} strokeWidth="1" />
+        <line x1="4.5" y1="9" x2="8" y2="9" stroke={color} strokeWidth="1" />
+      </svg>;
+  };
+  const renderNode = (node, depth) => {
+    const isFolder = node.type === 'folder';
+    const isExpanded = expandedFolders.has(node.id);
+    const isSelected = selectedId === node.id;
+    return 
+        <button role="treeitem" tabIndex={-1} onClick={() => selectNode(node)} aria-selected={isSelected} aria-expanded={isFolder ? isExpanded : undefined} style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '5px',
+      width: '100%',
+      padding: `4px 8px 4px ${8 + depth * 16}px`,
+      background: isSelected ? 'var(--ce-accent-bg)' : 'transparent',
+      borderTop: 'none',
+      borderRight: 'none',
+      borderBottom: 'none',
+      borderLeft: isSelected ? '2px solid var(--ce-accent)' : '2px solid transparent',
+      outline: 'none',
+      cursor: 'pointer',
+      textAlign: 'left',
+      fontFamily: 'var(--ce-mono)',
+      fontSize: '13.5px',
+      color: isSelected ? 'var(--ce-accent)' : 'var(--ce-text-2)',
+      fontWeight: isSelected ? 550 : 400,
+      transition: 'all 0.1s'
+    }}>
+          {isFolder ?  {
+      e.stopPropagation();
+      toggleFolder(node.id);
+    }} style={{
+      fontSize: '14px',
+      color: 'var(--ce-text-4)',
+      width: '20px',
+      height: '20px',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      cursor: 'pointer',
+      borderRadius: '4px',
+      marginLeft: '-6px',
+      flexShrink: 0
+    }} onMouseEnter={e => {
+      e.currentTarget.style.background = 'var(--ce-arrow-hover)';
+      e.currentTarget.style.color = 'var(--ce-text-2)';
+    }} onMouseLeave={e => {
+      e.currentTarget.style.background = 'transparent';
+      e.currentTarget.style.color = 'var(--ce-text-4)';
+    }}>{isExpanded ? '▾' : '▸'} : }
+          {renderIcon(node.icon, node.color)}
+          {node.label}
+          {node.badge && BADGE_STYLES[node.badge] && }
+        </button>
+        {isFolder && isExpanded && node.children && {node.children.map(child => renderNode(child, depth + 1))}}
+      ;
+  };
+  return <>
+    <style>{`
+      .ce-root {
+        --ce-mono: var(--font-mono, ui-monospace, monospace);
+        --ce-accent: #D97757;
+        --ce-accent-bg: rgba(217,119,87,0.06);
+        --ce-accent-border: rgba(217,119,87,0.12);
+        --ce-bg: #fff;
+        --ce-surface: #FAFAF7;
+        --ce-surface-hover: #F0EEE6;
+        --ce-border: #E8E6DC;
+        --ce-border-subtle: #F0EEE6;
+        --ce-text: #141413;
+        --ce-text-2: #5E5D59;
+        --ce-text-3: #73726C;
+        --ce-text-4: #9C9A92;
+        --ce-text-5: #B8B6AE;
+        --ce-sep: #D1CFC5;
+        --ce-code-header: #F5F4ED;
+        --ce-code-bg: #1A1918;
+        --ce-arrow-hover: rgba(0,0,0,0.08);
+        --ce-badge-committed: #3d6b2e;
+        --ce-badge-gitignored: #b85c3a;
+        --ce-badge-local: #5e5d59;
+        --ce-badge-autogen: #b07520;
+        --ce-when-text: #4a7fb5;
+      }
+      .dark .ce-root {
+        --ce-bg: #1a1918;
+        --ce-surface: #232221;
+        --ce-surface-hover: #2e2d2b;
+        --ce-border: #3a3936;
+        --ce-border-subtle: #2e2d2b;
+        --ce-text: #e8e6dc;
+        --ce-text-2: #c4c2b8;
+        --ce-text-3: #9c9a92;
+        --ce-text-4: #73726c;
+        --ce-text-5: #5e5d59;
+        --ce-sep: #4a4946;
+        --ce-code-header: #2e2d2b;
+        --ce-code-bg: #0d0d0c;
+        --ce-arrow-hover: rgba(255,255,255,0.08);
+        --ce-badge-committed: #6fa85c;
+        --ce-badge-gitignored: #e08a60;
+        --ce-badge-local: #9c9a92;
+        --ce-badge-autogen: #e8a45c;
+        --ce-when-text: #8bb4e0;
+      }
+      .ce-mobile-fallback { display: none; border: 1px solid rgba(0,0,0,0.1); background: rgba(0,0,0,0.03); }
+      .dark .ce-mobile-fallback { border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.04); }
+      @media (max-width: 700px) {
+        .ce-root:not(.ce-force) { display: none !important; }
+        .ce-mobile-fallback { display: block; }
+      }
+    `}</style>
+    {!forceMobile && 
+      The interactive explorer works best on a larger screen. See the <a href="#file-reference" style={{
+    color: '#D97757'
+  }}>file reference table</a> below, or <button onClick={() => setForceMobile(true)} style={{
+    border: 'none',
+    background: 'none',
+    padding: 0,
+    color: '#D97757',
+    textDecoration: 'underline',
+    cursor: 'pointer',
+    font: 'inherit'
+  }}>show the explorer anyway</button>.
+    }
+    
+      {}
+      
+        
+          {['project', 'global'].map(root => <button key={root} onClick={() => switchRoot(root)} style={{
+    flex: 1,
+    padding: '6px 0',
+    borderRadius: '6px',
+    border: 'none',
+    cursor: 'pointer',
+    fontFamily: 'var(--ce-mono)',
+    fontSize: '11.5px',
+    background: activeRoot === root ? 'var(--ce-accent-bg)' : 'transparent',
+    color: activeRoot === root ? 'var(--ce-accent)' : 'var(--ce-text-4)',
+    fontWeight: activeRoot === root ? 600 : 430
+  }}>
+              {root === 'project' ? 'Project' : 'Global (~/)'}
+            </button>)}
+          <button onClick={toggleAllFolders} title={allExpanded ? 'Collapse all' : 'Expand all'} style={{
+    ...iconBtn,
+    fontSize: 11
+  }}>
+            {allExpanded ? '⊟' : '⊞'}
+          </button>
+          <button onClick={toggleFullscreen} title={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'} style={{
+    ...iconBtn,
+    fontSize: 13
+  }}>
+            {isFullscreen ? '⤡' : '⛶'}
+          </button>
+        
+        
+          {tree.children.map(node => renderNode(node, 0))}
+        
+      
+
+      {}
+      
+            {selected.label} selected
+            {}
+            
+              {selected.path.map((seg, i) => <span key={i}>
+                  <span style={{
+    color: i === selected.path.length - 1 ? 'var(--ce-accent)' : 'var(--ce-text-4)'
+  }}>{seg.replace(/\/$/, '')}
+                  {i < selected.path.length - 1 &&  / }
+                )}
+            
+
+            {}
+            
+              {renderIcon(selected.icon, selected.color, 24)}
+              
+                {selected.label}
+                {selected.oneLiner && {selected.oneLiner}}
+              
+              
+                {[selected.autogen && 'autogen', selected.badge].filter(Boolean).map(k => {
+    const s = BADGE_STYLES[k];
+    if (!s) return null;
+    return {s.label};
+  })}
+              
+            
+
+            {}
+            {selected.note && 
+                {selected.note}
+              }
+
+            {}
+            {selected.when && 
+                When it loads
+                {selected.when}
+              }
+
+            {}
+            {selected.description && 
+                {Array.isArray(selected.description) ? selected.description.map((para, i) => <div key={i} style={{
+    marginBottom: i < selected.description.length - 1 ? '12px' : 0
+  }}>{para}) : selected.description}
+              }
+
+            {}
+            {selected.contains && selected.contains.length > 0 && 
+                Common keys
+                {selected.contains.map((item, i) => 
+                    ●
+                    {item}
+                  )}
+              }
+
+            {}
+            {selected.tips && selected.tips.length > 0 && 
+                Tips
+                {selected.tips.map((tip, i) => <div key={i} style={{
+    display: 'flex',
+    gap: '7px',
+    fontSize: '14.5px',
+    color: 'var(--ce-text-2)',
+    marginBottom: i < selected.tips.length - 1 ? '5px' : 0
+  }}>
+                    ●
+                    {tip}
+                  )}
+              }
+
+            {}
+            {selected.example && 
+                {selected.exampleIntro && 
+                    {selected.exampleIntro}
+                  }
+                
+                  {selected.label}
+                  <button onClick={() => copyExample(selected.id, selected.example)} style={{
+    padding: '3px 8px',
+    borderRadius: '4px',
+    fontSize: '11px',
+    fontWeight: 600,
+    cursor: 'pointer',
+    transition: 'all 0.15s',
+    background: isCopied ? 'rgba(85,138,66,0.08)' : 'var(--ce-code-header)',
+    border: isCopied ? '0.5px solid rgba(85,138,66,0.2)' : '0.5px solid var(--ce-border)',
+    color: isCopied ? '#558A42' : 'var(--ce-text-3)'
+  }}>
+                    {isCopied ? '✓ Copied' : 'Copy'}
+                  </button>
+                
+                <pre style={{
+    margin: 0,
+    padding: '12px 14px',
+    background: 'var(--ce-code-bg)',
+    color: '#E8E6DC',
+    fontFamily: 'var(--ce-mono)',
+    fontSize: '13px',
+    lineHeight: 1.65,
+    borderRadius: '0 0 8px 8px',
+    overflowX: 'auto',
+    whiteSpace: 'pre'
+  }}>{selected.example}</pre>
+              }
+
+            {}
+            {selected.docsLink && <a href={selected.docsLink} style={{
+    display: 'inline-flex',
+    padding: '5px 12px',
+    borderRadius: '6px',
+    background: 'var(--ce-accent-bg)',
+    border: '1px solid var(--ce-accent-border)',
+    color: 'var(--ce-accent)',
+    fontSize: '12px',
+    fontWeight: 600,
+    textDecoration: 'none'
+  }}>Full docs →</a>}
+
+            {}
+            {selected.children && selected.children.length > 0 && 
+                Contents
+                
+                  {selected.children.map(child => <button key={child.id} onClick={() => selectNode(child)} style={{
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    padding: '6px 8px',
+    width: '100%',
+    background: 'var(--ce-surface)',
+    borderRadius: '6px',
+    border: 'none',
+    cursor: 'pointer',
+    textAlign: 'left',
+    transition: 'background 0.1s'
+  }} onMouseEnter={e => e.currentTarget.style.background = 'var(--ce-surface-hover)'} onMouseLeave={e => e.currentTarget.style.background = 'var(--ce-surface)'}>
+                      {renderIcon(child.icon, child.color, 13)}
+                      {child.label}
+                      {child.oneLiner && {child.oneLiner}}
+                    </button>)}
+                
+              }
+      </div>
+    </div>
+    </>;
+};
+
+Claude Code reads instructions, settings, skills, subagents, and memory from your project directory and from `~/.claude` in your home directory. Commit project files to git to share them with your team; files in `~/.claude` are personal configuration that applies across all your projects.
+
+On Windows, `~/.claude` resolves to `%USERPROFILE%\.claude`. If you set [`CLAUDE_CONFIG_DIR`](env-vars.md), every `~/.claude` path on this page lives under that directory instead.
+
+Most users only edit `CLAUDE.md` and `settings.json`. The rest of the directory is optional: add skills, rules, or subagents as you need them.
+
+## Explore the directory
+
+Click files in the tree to see what each one does, when it loads, and an example.
+
+## What's not shown
 
 The explorer covers files you author and edit. A few related files live elsewhere:
 
-| File | Location | Purpose |
-| --- | --- | --- |
-| `managed-settings.json` | System-level, varies by OS | Enterprise-enforced settings that you can’t override, apart from [narrow exceptions](settings.md). See [where to save the file](managed-settings.md) and [which managed source Claude Code uses](managed-settings.md). |
-| `CLAUDE.local.md` | Project root | Your private preferences for this project, loaded alongside CLAUDE.md. Create it manually and add it to `.gitignore`. |
-| Installed plugins | `~/.claude/plugins` | Cloned marketplaces, installed plugin versions, and per-plugin data, managed by `claude plugin` commands. For a plugin installed from a marketplace [`command` source](plugin-marketplaces.md) in link mode, Claude Code stores links here instead of a copy, and the plugin’s files stay in the directory the command prints. See [plugin caching](plugins-reference.md) for how orphaned versions are cleaned up. |
+| File                    | Location                   | Purpose                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ----------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `managed-settings.json` | System-level, varies by OS | Enterprise-enforced settings that you can't override, apart from [narrow exceptions](settings.md). See [where to save the file](managed-settings.md) and [which managed source Claude Code uses](managed-settings.md).                                                                                                                               |
+| `CLAUDE.local.md`       | Project root               | Your private preferences for this project, loaded alongside CLAUDE.md. Create it manually and add it to `.gitignore`.                                                                                                                                                                                                                                                                                                                                                    |
+| Installed plugins       | `~/.claude/plugins`        | Cloned marketplaces, installed plugin versions, and per-plugin data, managed by `claude plugin` commands. For a plugin installed from a marketplace [`command` source](plugin-marketplaces.md) in link mode, Claude Code stores links here instead of a copy, and the plugin's files stay in the directory the command prints. See [plugin caching](plugins-reference.md) for how orphaned versions are cleaned up. |
 
 `~/.claude` also holds data Claude Code writes as you work: transcripts, prompt history, file snapshots, caches, and logs. See [application data](#application-data) below.
 
-## [​](#choose-the-right-file) Choose the right file
+## Choose the right file
 
 Different kinds of customization live in different files. Use this table to find where a change belongs.
 
-| You want to | Edit | Scope | Reference |
-| --- | --- | --- | --- |
-| Give Claude project context and conventions | `CLAUDE.md` | project or global | [Memory](memory.md) |
-| Allow or block specific tool calls | `settings.json` `permissions` or `hooks` | project or global | [Permissions](permissions.md), [Hooks](hooks.md) |
-| Run a script before or after tool calls | `settings.json` `hooks` | project or global | [Hooks](hooks.md) |
-| Set environment variables for the session | `settings.json` `env` | project or global | [Settings](settings-reference.md) |
-| Keep personal overrides out of git | `settings.local.json` | project only | [Settings scopes](settings.md) |
-| Add a prompt or capability you invoke with `/name` | `skills/<name>/SKILL.md` | project or global | [Skills](skills.md) |
-| Define a specialized subagent with its own tools | `agents/*.md` | project or global | [Subagents](sub-agents.md) |
-| Orchestrate many subagents from a script | `workflows/*.js` | project or global | [Dynamic workflows](workflows.md) |
-| Connect external tools over MCP | `.mcp.json` | project only | [MCP](mcp.md) |
-| Change how Claude formats responses | `output-styles/*.md` | project or global | [Output styles](output-styles.md) |
+| You want to                                        | Edit                                     | Scope             | Reference                                           |
+| :------------------------------------------------- | :--------------------------------------- | :---------------- | :-------------------------------------------------- |
+| Give Claude project context and conventions        | `CLAUDE.md`                              | project or global | [Memory](memory.md)                                |
+| Allow or block specific tool calls                 | `settings.json` `permissions` or `hooks` | project or global | [Permissions](permissions.md), [Hooks](hooks.md)  |
+| Run a script before or after tool calls            | `settings.json` `hooks`                  | project or global | [Hooks](hooks.md)                                  |
+| Set environment variables for the session          | `settings.json` `env`                    | project or global | [Settings](settings-reference.md)     |
+| Keep personal overrides out of git                 | `settings.local.json`                    | project only      | [Settings scopes](settings.md) |
+| Add a prompt or capability you invoke with `/name` | `skills/<name>/SKILL.md`                 | project or global | [Skills](skills.md)                                |
+| Define a specialized subagent with its own tools   | `agents/*.md`                            | project or global | [Subagents](sub-agents.md)                         |
+| Orchestrate many subagents from a script           | `workflows/*.js`                         | project or global | [Dynamic workflows](workflows.md)                  |
+| Connect external tools over MCP                    | `.mcp.json`                              | project only      | [MCP](mcp.md)                                      |
+| Change how Claude formats responses                | `output-styles/*.md`                     | project or global | [Output styles](output-styles.md)                  |
 
-## [​](#file-reference) File reference
+## File reference
 
 This table lists every file the explorer covers. Project-scope files live in your repo under `.claude/` (or at the root for `CLAUDE.md`, `.mcp.json`, and `.worktreeinclude`). Global-scope files live in `~/.claude/` and apply across all projects.
 
 Several things can override what you put in these files:
 
-- [Managed settings](server-managed-settings.md) deployed by your organization take precedence over everything, apart from the [exceptions under Settings precedence](settings.md)
-- CLI flags like `--permission-mode` or `--settings` override `settings.json` for that session
-- Some environment variables take precedence over their equivalent setting, but this varies: check the [environment variables reference](env-vars.md) for each one
+* [Managed settings](server-managed-settings.md) deployed by your organization take precedence over everything, apart from the [exceptions under Settings precedence](settings.md)
+* CLI flags like `--permission-mode` or `--settings` override `settings.json` for that session
+* Some environment variables take precedence over their equivalent setting, but this varies: check the [environment variables reference](env-vars.md) for each one
 
 See [settings precedence](settings.md) for the full order.
 
 Click a filename to open that node in the explorer above.
 
-| File | Scope | Commit | What it does | Reference |
-| --- | --- | --- | --- | --- |
-| [`CLAUDE.md`](#ce-claude-md) | Project and global | ✓ | Instructions loaded every session | [Memory](memory.md) |
-| [`rules/*.md`](#ce-rules) | Project and global | ✓ | Topic-scoped instructions, optionally path-gated | [Rules](memory.md) |
-| [`settings.json`](#ce-settings-json) | Project and global | ✓ | Permissions, hooks, env vars, model defaults | [Settings](settings.md) |
-| [`settings.local.json`](#ce-settings-local-json) | Project only |  | Your personal overrides, gitignored when Claude Code saves a setting to it | [Settings scopes](settings.md) |
-| [`.mcp.json`](#ce-mcp-json) | Project only | ✓ | Team-shared MCP servers | [MCP scopes](mcp.md) |
-| [`.worktreeinclude`](#ce-worktreeinclude) | Project only | ✓ | Gitignored files to copy into new worktrees | [Worktrees](worktrees.md) |
-| [`skills/<name>/SKILL.md`](#ce-skills) | Project and global | ✓ | Reusable prompts invoked with `/name` or auto-invoked | [Skills](skills.md) |
-| [`commands/*.md`](#ce-commands) | Project and global | ✓ | Single-file prompts; same mechanism as skills | [Skills](skills.md) |
-| [`output-styles/*.md`](#ce-output-styles) | Project and global | ✓ | Custom system-prompt sections | [Output styles](output-styles.md) |
-| [`agents/*.md`](#ce-agents) | Project and global | ✓ | Subagent definitions with their own prompt and tools | [Subagents](sub-agents.md) |
-| [`workflows/*.js`](#ce-workflows) | Project and global | ✓ | Dynamic workflow scripts written by Claude and saved from `/workflows`; each file becomes a `/<name>` command | [Dynamic workflows](workflows.md) |
-| [`agent-memory/<name>/`](#ce-agent-memory) | Project and global | ✓ | Persistent memory for subagents | [Persistent memory](sub-agents.md) |
-| [`~/.claude.json`](#ce-claude-json) | Global only |  | App state, OAuth, UI toggles, personal MCP servers | [Global config](settings-reference.md) |
-| [`projects/<project>/memory/`](#ce-global-projects) | Global only |  | Auto memory: Claude’s notes to itself across sessions | [Auto memory](memory.md) |
-| [`keybindings.json`](#ce-keybindings) | Global only |  | Custom keyboard shortcuts | [Keybindings](keybindings.md) |
-| [`themes/*.json`](#ce-themes) | Global only |  | Custom color themes | [Custom themes](terminal-config.md) |
+| File                                                | Scope              | Commit | What it does                                                                                                  | Reference                                                       |
+| --------------------------------------------------- | ------------------ | ------ | ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| [`CLAUDE.md`](#ce-claude-md)                        | Project and global | ✓      | Instructions loaded every session                                                                             | [Memory](memory.md)                                            |
+| [`rules/*.md`](#ce-rules)                           | Project and global | ✓      | Topic-scoped instructions, optionally path-gated                                                              | [Rules](memory.md)           |
+| [`settings.json`](#ce-settings-json)                | Project and global | ✓      | Permissions, hooks, env vars, model defaults                                                                  | [Settings](settings.md)                                        |
+| [`settings.local.json`](#ce-settings-local-json)    | Project only       |        | Your personal overrides, gitignored when Claude Code saves a setting to it                                    | [Settings scopes](settings.md)             |
+| [`.mcp.json`](#ce-mcp-json)                         | Project only       | ✓      | Team-shared MCP servers                                                                                       | [MCP scopes](mcp.md)                   |
+| [`.worktreeinclude`](#ce-worktreeinclude)           | Project only       | ✓      | Gitignored files to copy into new worktrees                                                                   | [Worktrees](worktrees.md) |
+| [`skills/<name>/SKILL.md`](#ce-skills)              | Project and global | ✓      | Reusable prompts invoked with `/name` or auto-invoked                                                         | [Skills](skills.md)                                            |
+| [`commands/*.md`](#ce-commands)                     | Project and global | ✓      | Single-file prompts; same mechanism as skills                                                                 | [Skills](skills.md)                                            |
+| [`output-styles/*.md`](#ce-output-styles)           | Project and global | ✓      | Custom system-prompt sections                                                                                 | [Output styles](output-styles.md)                              |
+| [`agents/*.md`](#ce-agents)                         | Project and global | ✓      | Subagent definitions with their own prompt and tools                                                          | [Subagents](sub-agents.md)                                     |
+| [`workflows/*.js`](#ce-workflows)                   | Project and global | ✓      | Dynamic workflow scripts written by Claude and saved from `/workflows`; each file becomes a `/<name>` command | [Dynamic workflows](workflows.md)                              |
+| [`agent-memory/<name>/`](#ce-agent-memory)          | Project and global | ✓      | Persistent memory for subagents                                                                               | [Persistent memory](sub-agents.md)    |
+| [`~/.claude.json`](#ce-claude-json)                 | Global only        |        | App state, OAuth, UI toggles, personal MCP servers                                                            | [Global config](settings-reference.md)  |
+| [`projects/<project>/memory/`](#ce-global-projects) | Global only        |        | Auto memory: Claude's notes to itself across sessions                                                         | [Auto memory](memory.md)                           |
+| [`keybindings.json`](#ce-keybindings)               | Global only        |        | Custom keyboard shortcuts                                                                                     | [Keybindings](keybindings.md)                                  |
+| [`themes/*.json`](#ce-themes)                       | Global only        |        | Custom color themes                                                                                           | [Custom themes](terminal-config.md)      |
 
-## [​](#troubleshoot-configuration) Troubleshoot configuration
+## Troubleshoot configuration
 
-If a setting, hook, or file isn’t taking effect, see [Debug your configuration](debug-your-config.md) for the inspection commands and a symptom-first lookup table.
+If a setting, hook, or file isn't taking effect, see [Debug your configuration](debug-your-config.md) for the inspection commands and a symptom-first lookup table.
 
-## [​](#application-data) Application data
+## Application data
 
 Beyond the config you author, `~/.claude` holds data Claude Code writes during sessions. These files are plaintext. Anything that passes through a tool lands in a transcript on disk: file contents, command output, pasted text.
 
-### [​](#cleaned-up-automatically) Cleaned up automatically
+### Cleaned up automatically
 
-Claude Code deletes the files in the paths below once they’re older than [`cleanupPeriodDays`](settings-reference.md), as long as it can safely determine the retention period. The default is 30 days and the minimum is 1; setting `0` fails with a validation error. The same age cutoff applies to automatic removal of [orphaned worktrees](worktrees.md).
+Claude Code deletes the files in the paths below once they're older than [`cleanupPeriodDays`](settings-reference.md), as long as it can safely determine the retention period. The default is 30 days and the minimum is 1; setting `0` fails with a validation error. The same age cutoff applies to automatic removal of [orphaned worktrees](worktrees.md).
 
-| Path under `~/.claude/` | Contents |
-| --- | --- |
-| `projects/<project>/<session>.jsonl` | Full conversation transcript: every message, tool call, and tool result |
-| `projects/<project>/<session>.orphaned-<timestamp>-<suffix>.jsonl`, `projects/<project>/<session>.jsonl.superseded-<timestamp>` | A previous transcript for the session that Claude Code set aside instead of overwriting or deleting it. It doesn’t appear in the session picker |
-| `projects/<project>/<session>/subagents/` | [Subagent](sub-agents.md) conversation transcripts, removed with the parent session transcript when it ages out |
-| `projects/<project>/<session>/tool-results/` | Large tool outputs spilled to separate files |
-| `file-history/<session>/` | Pre-edit snapshots of files Claude changed, used for [checkpoint restore](checkpointing.md). Holds snapshots for the 100 most recent checkpoints; snapshot files that no retained checkpoint references are deleted, except each file’s first snapshot |
-| `plans/` | Plan files written during [plan mode](permission-modes.md) |
-| `debug/` | Per-session debug logs, written while debug logging is on, such as when you start with [`--debug`](cli-reference.md) or run `/debug` |
-| `paste-cache/` | Contents of large pastes |
-| `image-cache/<session>/` | Attached images. On each sweep, Claude Code removes the directories of all other sessions, whatever their age. |
-| `uploads/<session>/` | Files you attach from the web or mobile app, and photos you attach from the mobile app, when messaging a [Remote Control](remote-control.md) session. An attachment to a [cloud session](claude-code-on-the-web.md) is saved in that session’s own cloud environment instead, not on your machine. |
-| `session-env/` | Per-session environment metadata |
-| `tasks/` | Task lists written by the task tools, one directory per list |
-| `shell-snapshots/` | Aliases, functions, and shell options captured at startup and applied by the [Bash tool](tools-reference.md) to each command. Removed on clean exit. The sweep clears any left after a crash. |
-| `backups/` | Earlier versions of `~/.claude.json`, copied when Claude Code rewrites the file. Claude Code keeps the five newest, plus a copy of any version it couldn’t parse. |
-| `feedback-bundles/` | Redacted transcript archives written by `/feedback` on third-party providers or when no Anthropic credentials are configured, for sending to your Anthropic account team |
-| `feedback/drafts/` | Queued [Claude-drafted feedback](tools-reference.md) awaiting your review in `/feedback`. Swept after `cleanupPeriodDays` or 30 days, whichever is shorter. When the queue is at its 10-draft limit, Claude Code deletes the oldest draft to make room. |
-| `usage-data/` | `report.html` and timestamped report copies written by [`/insights`](costs.md), plus cached per-session analysis data used to build them |
-| `todos/`, `statsig/`, `logs/` | Legacy directories from older versions. No longer written. The sweep removes their contents and then the empty directory. |
+| Path under `~/.claude/`                                                                                                         | Contents                                                                                                                                                                                                                                                                                             |
+| ------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `projects/<project>/<session>.jsonl`                                                                                            | Full conversation transcript: every message, tool call, and tool result                                                                                                                                                                                                                              |
+| `projects/<project>/<session>.orphaned-<timestamp>-<suffix>.jsonl`, `projects/<project>/<session>.jsonl.superseded-<timestamp>` | A previous transcript for the session that Claude Code set aside instead of overwriting or deleting it. It doesn't appear in the session picker                                                                                                                                                      |
+| `projects/<project>/<session>/subagents/`                                                                                       | [Subagent](sub-agents.md) conversation transcripts, removed with the parent session transcript when it ages out                                                                                                                                                                                     |
+| `projects/<project>/<session>/tool-results/`                                                                                    | Large tool outputs spilled to separate files                                                                                                                                                                                                                                                         |
+| `file-history/<session>/`                                                                                                       | Pre-edit snapshots of files Claude changed, used for [checkpoint restore](checkpointing.md). Holds snapshots for the 100 most recent checkpoints; snapshot files that no retained checkpoint references are deleted, except each file's first snapshot                                              |
+| `plans/`                                                                                                                        | Plan files written during [plan mode](permission-modes.md)                                                                                                                                                                                                   |
+| `debug/`                                                                                                                        | Per-session debug logs, written while debug logging is on, such as when you start with [`--debug`](cli-reference.md) or run `/debug`                                                                                                                                                      |
+| `paste-cache/`                                                                                                                  | Contents of large pastes                                                                                                                                                                                                                                                                             |
+| `image-cache/<session>/`                                                                                                        | Attached images. On each sweep, Claude Code removes the directories of all other sessions, whatever their age.                                                                                                                                                                                       |
+| `uploads/<session>/`                                                                                                            | Files you attach from the web or mobile app, and photos you attach from the mobile app, when messaging a [Remote Control](remote-control.md) session. An attachment to a [cloud session](claude-code-on-the-web.md) is saved in that session's own cloud environment instead, not on your machine. |
+| `session-env/`                                                                                                                  | Per-session environment metadata                                                                                                                                                                                                                                                                     |
+| `tasks/`                                                                                                                        | Task lists written by the task tools, one directory per list                                                                                                                                                                                                                                         |
+| `shell-snapshots/`                                                                                                              | Aliases, functions, and shell options captured at startup and applied by the [Bash tool](tools-reference.md) to each command. Removed on clean exit. The sweep clears any left after a crash.                                                                                    |
+| `backups/`                                                                                                                      | Earlier versions of `~/.claude.json`, copied when Claude Code rewrites the file. Claude Code keeps the five newest, plus a copy of any version it couldn't parse.                                                                                                                                    |
+| `feedback-bundles/`                                                                                                             | Redacted transcript archives written by `/feedback` on third-party providers or when no Anthropic credentials are configured, for sending to your Anthropic account team                                                                                                                             |
+| `feedback/drafts/`                                                                                                              | Queued [Claude-drafted feedback](tools-reference.md) awaiting your review in `/feedback`. Swept after `cleanupPeriodDays` or 30 days, whichever is shorter. When the queue is at its 10-draft limit, Claude Code deletes the oldest draft to make room.                  |
+| `usage-data/`                                                                                                                   | `report.html` and timestamped report copies written by [`/insights`](costs.md), plus cached per-session analysis data used to build them                                                                                                                                |
+| `todos/`, `statsig/`, `logs/`                                                                                                   | Legacy directories from older versions. No longer written. The sweep removes their contents and then the empty directory.                                                                                                                                                                            |
 
 Session files in `sessions/`, auto memory, and Claude Desktop and Cowork transcripts each follow their own retention rule:
 
-- **`sessions/`**: holds one small file per running session, used to detect concurrent sessions and crashes. It isn’t part of the age-based sweep: Claude Code removes each file when its session exits and clears crash leftovers on the next launch.
-- **Auto memory**: the sweep doesn’t delete the memory files in a project’s [auto memory](memory.md) directory, `projects/<project>/memory/`. Claude Code removes that directory only if it has been empty for the whole retention period. Before v2.1.228, the sweep treated folders inside the memory directory as session data and could delete old files beneath it.
-- **Claude Desktop and Cowork transcripts**: Claude Code keeps the transcript of a session you started or most recently continued in Claude Desktop or Cowork at any age. To give these transcripts an age limit, set [`desktopSessionCleanupPeriodDays`](settings-reference.md). When [managed settings](managed-settings.md) set `cleanupPeriodDays`, Claude Code deletes these transcripts after that period instead. Requires Claude Code v2.1.248 or later; earlier versions delete them after `cleanupPeriodDays`.
+* **`sessions/`**: holds one small file per running session, used to detect concurrent sessions and crashes. It isn't part of the age-based sweep: Claude Code removes each file when its session exits and clears crash leftovers on the next launch.
+* **Auto memory**: the sweep doesn't delete the memory files in a project's [auto memory](memory.md) directory, `projects/<project>/memory/`. Claude Code removes that directory only if it has been empty for the whole retention period. Before v2.1.228, the sweep treated folders inside the memory directory as session data and could delete old files beneath it.
+* **Claude Desktop and Cowork transcripts**: Claude Code keeps the transcript of a session you started or most recently continued in Claude Desktop or Cowork at any age. To give these transcripts an age limit, set [`desktopSessionCleanupPeriodDays`](settings-reference.md). When [managed settings](managed-settings.md) set `cleanupPeriodDays`, Claude Code deletes these transcripts after that period instead. Requires Claude Code v2.1.248 or later; earlier versions delete them after `cleanupPeriodDays`.
 
 Claude Code skips the sweep entirely in these cases:
 
-- **Bare mode**: when you run `claude -p` with [`--bare`](headless.md), Claude Code doesn’t run the sweep in that session.
-- **Paused sweep**: if Claude Code can’t safely determine the retention period, it pauses the retention cleanup sweep; the [`retention_sweep` event](monitoring-usage.md) lists each configuration that pauses it. When the cause is a settings file that can’t be read or parsed, or settings errors with `cleanupPeriodDays` or `desktopSessionCleanupPeriodDays` explicitly set, Claude Code also shows a warning in `/status` until you fix the settings errors. When [managed settings](server-managed-settings.md) provide `cleanupPeriodDays`, Claude Code runs the sweep at the managed value in either case.
+* **Bare mode**: when you run `claude -p` with [`--bare`](headless.md), Claude Code doesn't run the sweep in that session.
+* **Paused sweep**: if Claude Code can't safely determine the retention period, it pauses the retention cleanup sweep; the [`retention_sweep` event](monitoring-usage.md) lists each configuration that pauses it. When the cause is a settings file that can't be read or parsed, or settings errors with `cleanupPeriodDays` or `desktopSessionCleanupPeriodDays` explicitly set, Claude Code also shows a warning in `/status` until you fix the settings errors. When [managed settings](server-managed-settings.md) provide `cleanupPeriodDays`, Claude Code runs the sweep at the managed value in either case.
 
-### [​](#kept-until-you-delete-them) Kept until you delete them
+### Kept until you delete them
 
-The retention cleanup sweep doesn’t remove the paths below. Claude Code keeps them until you delete them, apart from the two caches it deletes when you log out.
+The retention cleanup sweep doesn't remove the paths below. Claude Code keeps them until you delete them, apart from the two caches it deletes when you log out.
 
-| Path under `~/.claude/` | Contents |
-| --- | --- |
-| `history.jsonl` | Every prompt you’ve typed, with timestamp and project path. Used for up-arrow recall, `Ctrl+R` history search, and `!` shell-command completion. |
-| `stats-cache.json` | Aggregated token and cost counts shown by `/usage` |
-| `remote-settings.json` | Cached copy of [server-managed settings](server-managed-settings.md) for your organization, or `{}` when your organization has configured none. Only present when the session [fetches them](server-managed-settings.md). Claude Code checks for updates at startup and hourly during a session. Claude Code deletes it when you log out. |
-| `cache/changelog.md` | Cached copy of the Claude Code changelog, shown by `/release-notes`. Refreshed in the background. |
-| `policy-limits.json` | Cached feature policy settings for your organization. Only present for some account types. Refreshed automatically. Claude Code deletes it when you log out. |
+| Path under `~/.claude/` | Contents                                                                                                                                                                                                                                                                                                                                                          |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `history.jsonl`         | Every prompt you've typed, with timestamp and project path. Used for up-arrow recall, `Ctrl+R` history search, and `!` shell-command completion.                                                                                                                                                                                                                  |
+| `stats-cache.json`      | Aggregated token and cost counts shown by `/usage`                                                                                                                                                                                                                                                                                                                |
+| `remote-settings.json`  | Cached copy of [server-managed settings](server-managed-settings.md) for your organization, or `{}` when your organization has configured none. Only present when the session [fetches them](server-managed-settings.md). Claude Code checks for updates at startup and hourly during a session. Claude Code deletes it when you log out. |
+| `cache/changelog.md`    | Cached copy of the Claude Code changelog, shown by `/release-notes`. Refreshed in the background.                                                                                                                                                                                                                                                                 |
+| `policy-limits.json`    | Cached feature policy settings for your organization. Only present for some account types. Refreshed automatically. Claude Code deletes it when you log out.                                                                                                                                                                                                      |
+
+<span id="state-files-to-keep" />
 
 Other files appear depending on which features you use. Caches and lock files are safe to delete. Keep these state files:
 
-- `.credentials.json`: your [login credentials](authentication.md)
-- `agent-memory/`: [subagent memory](sub-agents.md)
-- `jobs/` and `daemon/`: [background session](agent-view.md) state
+* `.credentials.json`: your [login credentials](authentication.md)
+* `agent-memory/`: [subagent memory](sub-agents.md)
+* `jobs/` and `daemon/`: [background session](agent-view.md) state
 
-### [​](#plaintext-storage) Plaintext storage
+### Plaintext storage
 
 Transcripts and history are not encrypted at rest. OS file permissions are the only protection. If a tool reads a `.env` file or a command prints a credential, that value is written to `projects/<project>/<session>.jsonl`. To reduce exposure:
 
-- Lower `cleanupPeriodDays` to shorten how long Claude Code keeps transcripts
-- Set [`desktopSessionCleanupPeriodDays`](settings-reference.md) to give Claude Desktop and Cowork transcripts an age limit too
-- Set the [`CLAUDE_CODE_SKIP_PROMPT_HISTORY`](env-vars.md) environment variable to skip writing transcripts and prompt history in any mode. In non-interactive mode, you can instead pass `--no-session-persistence` alongside `-p`, or set `persistSession: false` in the TypeScript Agent SDK; the Python SDK has no equivalent option.
-- Use [permission rules](permissions.md) to deny reads of credential files
+* Lower `cleanupPeriodDays` to shorten how long Claude Code keeps transcripts
+* Set [`desktopSessionCleanupPeriodDays`](settings-reference.md) to give Claude Desktop and Cowork transcripts an age limit too
+* Set the [`CLAUDE_CODE_SKIP_PROMPT_HISTORY`](env-vars.md) environment variable to skip writing transcripts and prompt history in any mode. In non-interactive mode, you can instead pass `--no-session-persistence` alongside `-p`, or set `persistSession: false` in the TypeScript Agent SDK; the Python SDK has no equivalent option.
+* Use [permission rules](permissions.md) to deny reads of credential files
 
-### [​](#clear-local-data) Clear local data
+### Clear local data
 
 Run `claude project purge` to delete the state Claude Code holds for one project. It deletes:
 
-- Transcripts and auto memory under `projects/`
-- Per-session `tasks/`, `debug/`, and `file-history/` entries
-- Matching prompt lines in `history.jsonl`
-- The project’s entry in `~/.claude.json`
+* Transcripts and auto memory under `projects/`
+* Per-session `tasks/`, `debug/`, and `file-history/` entries
+* Matching prompt lines in `history.jsonl`
+* The project's entry in `~/.claude.json`
 
 The command prints the full deletion plan and asks for confirmation before removing anything.
+
 The examples below use `~/work/my-repo` as a placeholder. Replace it with the path to your project. If no state matches the path, the command prints an error and exits with status 1.
+
 Preview the plan without deleting anything:
 
-```shiki
+```bash
 claude project purge ~/work/my-repo --dry-run
 ```
 
 The plan lists each matching item and why it is included:
 
-```shiki
+```text
 Purge plan for /home/user/work/my-repo:
 
   dir:    /home/user/.claude/projects/-home-user-work-my-repo
@@ -277,48 +1393,52 @@ Dry run: 3 item(s) would be deleted.
 
 Delete with a single confirmation prompt:
 
-```shiki
+```bash
 claude project purge ~/work/my-repo
 ```
 
 The command prints the same plan, then asks `Delete 3 item(s) for /home/user/work/my-repo? This cannot be undone. [y/N]` and deletes only if you answer `y`.
+
 Omit the path to pick a project from an interactive list.
+
 Skip the confirmation prompt for use in scripts:
 
-```shiki
+```bash
 claude project purge ~/work/my-repo --yes
 ```
 
 Pass `--all` instead of a path to purge state for every project at once, which deletes `history.jsonl` outright rather than filtering it. Pass `-i` to step through the deletion plan one item at a time.
+
 The command leaves `shell-snapshots/` and `backups/` alone because those are not project-scoped, and warns about them in the plan output.
+
 You can also delete any of the application-data paths above by hand, apart from the [state files to keep](#state-files-to-keep). New sessions are unaffected. The table below shows what you lose for past sessions.
 
-| Delete | You lose |
-| --- | --- |
-| `~/.claude/projects/` | Resume, continue, and rewind for past sessions, and auto memory for every project |
-| `~/.claude/history.jsonl` | Up-arrow prompt recall, `Ctrl+R` history search, and `!` shell-command completion |
-| `~/.claude/paste-cache/` | Pasted text in recalled prompts; see [paste large content](terminal-config.md) |
-| `~/.claude/uploads/` | Attachments that past [Remote Control](remote-control.md) sessions refer to by path |
-| `~/.claude/file-history/` | Checkpoint restore for past sessions |
-| `~/.claude/stats-cache.json` | Historical totals shown by `/usage` |
-| `~/.claude/usage-data/` | Past [`/insights`](costs.md) reports and the cached analysis data used to build them |
-| `~/.claude/feedback-bundles/` | Feedback and bug-report archives you haven’t yet sent to your Anthropic account team |
-| `~/.claude/feedback/drafts/` | [Claude-drafted feedback](tools-reference.md) you haven’t sent |
-| `~/.claude/remote-settings.json` | Nothing. Re-fetched on next launch. |
-| `~/.claude/cache/changelog.md` | Nothing. Refreshed in the background. |
-| `~/.claude/policy-limits.json` | Nothing. Refreshed automatically. |
-| `~/.claude/tasks/` | Task lists that a resumed session would pick up |
-| `~/.claude/debug/`, `~/.claude/plans/`, `~/.claude/image-cache/`, `~/.claude/session-env/`, `~/.claude/shell-snapshots/`, `~/.claude/backups/` | Nothing user-facing |
-| `~/.claude/todos/`, `~/.claude/statsig/`, `~/.claude/logs/` | Nothing. Legacy directories not written by current versions. |
+| Delete                                                                                                                                         | You lose                                                                                                          |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `~/.claude/projects/`                                                                                                                          | Resume, continue, and rewind for past sessions, and auto memory for every project                                 |
+| `~/.claude/history.jsonl`                                                                                                                      | Up-arrow prompt recall, `Ctrl+R` history search, and `!` shell-command completion                                 |
+| `~/.claude/paste-cache/`                                                                                                                       | Pasted text in recalled prompts; see [paste large content](terminal-config.md)               |
+| `~/.claude/uploads/`                                                                                                                           | Attachments that past [Remote Control](remote-control.md) sessions refer to by path                              |
+| `~/.claude/file-history/`                                                                                                                      | Checkpoint restore for past sessions                                                                              |
+| `~/.claude/stats-cache.json`                                                                                                                   | Historical totals shown by `/usage`                                                                               |
+| `~/.claude/usage-data/`                                                                                                                        | Past [`/insights`](costs.md) reports and the cached analysis data used to build them |
+| `~/.claude/feedback-bundles/`                                                                                                                  | Feedback and bug-report archives you haven't yet sent to your Anthropic account team                              |
+| `~/.claude/feedback/drafts/`                                                                                                                   | [Claude-drafted feedback](tools-reference.md) you haven't sent                        |
+| `~/.claude/remote-settings.json`                                                                                                               | Nothing. Re-fetched on next launch.                                                                               |
+| `~/.claude/cache/changelog.md`                                                                                                                 | Nothing. Refreshed in the background.                                                                             |
+| `~/.claude/policy-limits.json`                                                                                                                 | Nothing. Refreshed automatically.                                                                                 |
+| `~/.claude/tasks/`                                                                                                                             | Task lists that a resumed session would pick up                                                                   |
+| `~/.claude/debug/`, `~/.claude/plans/`, `~/.claude/image-cache/`, `~/.claude/session-env/`, `~/.claude/shell-snapshots/`, `~/.claude/backups/` | Nothing user-facing                                                                                               |
+| `~/.claude/todos/`, `~/.claude/statsig/`, `~/.claude/logs/`                                                                                    | Nothing. Legacy directories not written by current versions.                                                      |
 
-Don’t delete `~/.claude.json`, `~/.claude/settings.json`, or `~/.claude/plugins/`: those hold your auth, preferences, and installed plugins.
+Don't delete `~/.claude.json`, `~/.claude/settings.json`, or `~/.claude/plugins/`: those hold your auth, preferences, and installed plugins.
 
-## [​](#related-resources) Related resources
+## Related resources
 
-- [Manage Claude’s memory](memory.md): write and organize CLAUDE.md, rules, and auto memory
-- [Configure settings](settings.md): set permissions, hooks, environment variables, and model defaults
-- [Create skills](skills.md): build reusable prompts and workflows
-- [Configure subagents](sub-agents.md): define specialized agents with their own context
+* [Manage Claude's memory](memory.md): write and organize CLAUDE.md, rules, and auto memory
+* [Configure settings](settings.md): set permissions, hooks, environment variables, and model defaults
+* [Create skills](skills.md): build reusable prompts and workflows
+* [Configure subagents](sub-agents.md): define specialized agents with their own context
 
 ---
 

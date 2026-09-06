@@ -1,14 +1,6 @@
 # Get Compliance Settings
 
-Copy page
-
-
-
-cURL
-
-# Get Compliance Settings
-
-GET/v1/organizations/compliance\_settings
+**GET** `/v1/organizations/compliance_settings`
 
 Retrieve your organization's Compliance Settings.
 
@@ -17,76 +9,41 @@ organization, addressed without an identifier. The `state` field reflects
 whether the Compliance API is enabled. An organization with a parent
 organization reads the state inherited from the parent's configuration.
 
-##### Returns
+## Returns
 
-
+- `BetaComplianceSettings object`
 
-BetaComplianceSettings object{ state, type }
+  - `state: BetaComplianceSettingsStateEnabled or BetaComplianceSettingsStateDisabled`
 
-
+    Whether the Compliance API is enabled for this organization.
 
-state: [BetaComplianceSettingsStateEnabled](api/http/beta/organization/compliance_settings.md) { type } or [BetaComplianceSettingsStateDisabled](api/http/beta/organization/compliance_settings.md) { type }
+    - `BetaComplianceSettingsStateEnabled object`
 
-Whether the Compliance API is enabled for this organization.
+      - `type: "enabled"`
 
-One of the following:
+        default: enabled
 
-
+    - `BetaComplianceSettingsStateDisabled object`
 
-BetaComplianceSettingsStateEnabled object{ type }
+      - `type: "disabled"`
 
-
+        default: disabled
 
-type: "enabled"
+  - `type: "compliance_settings"`
 
-defaultenabled
+    default: compliance_settings
 
-
+## Example
 
-BetaComplianceSettingsStateDisabled object{ type }
-
-
-
-type: "disabled"
-
-defaultdisabled
-
-
-
-type: "compliance\_settings"
-
-defaultcompliance\_settings
-
-Get Compliance Settings
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/compliance_settings \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "state": {
-    "type": "enabled"
-  },
-  "type": "compliance_settings"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "state": {
     "type": "enabled"

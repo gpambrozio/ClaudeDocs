@@ -1,234 +1,240 @@
 # Stop Work
 
-Copy page
+`client.Beta.Environments.Work.Stop(ctx, workID, params) (*BetaSelfHostedWork, error)`
 
-
-
-Go
-
-# Stop Work
-
-client.Beta.Environments.Work.Stop(ctx, workID, params) (\*[BetaSelfHostedWork](api/beta/environments/work.md), error)
-
-POST/v1/environments/{environment\_id}/work/{work\_id}/stop
+**POST** `/v1/environments/{environment_id}/work/{work_id}/stop`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Stop a work item, initiating graceful or forced shutdown.
 
-##### ParametersExpand Collapse
+## Parameters
 
-workID string
+- `workID string`
 
-
+- `params BetaEnvironmentWorkStopParams`
 
-params BetaEnvironmentWorkStopParams
+  - `EnvironmentID param.Field[string]`
 
-EnvironmentID param.Field[string]
+    Path param
 
-Path param
+  - `BetaSelfHostedWorkStopRequest param.Field[BetaSelfHostedWorkStopRequest]`
 
-BetaSelfHostedWorkStopRequest param.Field[[BetaSelfHostedWorkStopRequest](api/beta/environments/work.md)]
+    Body param: Request to stop a work item.
 
-Body param: Request to stop a work item.
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
-
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-Betas param.Field[[]AnthropicBeta]Optional
+    - `string`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+    - `type AnthropicBeta string`
 
-string
+      - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
 
-
+      - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
 
-type AnthropicBeta string
+      - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
 
-One of the following:
+      - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
 
-const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
+      - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
 
-const AnthropicBetaPromptCaching2024\_07\_31 AnthropicBeta = "prompt-caching-2024-07-31"
+      - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
 
-const AnthropicBetaComputerUse2024\_10\_22 AnthropicBeta = "computer-use-2024-10-22"
+      - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
 
-const AnthropicBetaComputerUse2025\_01\_24 AnthropicBeta = "computer-use-2025-01-24"
+      - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
 
-const AnthropicBetaPDFs2024\_09\_25 AnthropicBeta = "pdfs-2024-09-25"
+      - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
 
-const AnthropicBetaTokenCounting2024\_11\_01 AnthropicBeta = "token-counting-2024-11-01"
+      - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
 
-const AnthropicBetaTokenEfficientTools2025\_02\_19 AnthropicBeta = "token-efficient-tools-2025-02-19"
+      - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
 
-const AnthropicBetaOutput128k2025\_02\_19 AnthropicBeta = "output-128k-2025-02-19"
+      - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
 
-const AnthropicBetaFilesAPI2025\_04\_14 AnthropicBeta = "files-api-2025-04-14"
+      - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
 
-const AnthropicBetaMCPClient2025\_04\_04 AnthropicBeta = "mcp-client-2025-04-04"
+      - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
 
-const AnthropicBetaMCPClient2025\_11\_20 AnthropicBeta = "mcp-client-2025-11-20"
+      - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
 
-const AnthropicBetaDevFullThinking2025\_05\_14 AnthropicBeta = "dev-full-thinking-2025-05-14"
+      - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
 
-const AnthropicBetaInterleavedThinking2025\_05\_14 AnthropicBeta = "interleaved-thinking-2025-05-14"
+      - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
 
-const AnthropicBetaCodeExecution2025\_05\_22 AnthropicBeta = "code-execution-2025-05-22"
+      - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
 
-const AnthropicBetaExtendedCacheTTL2025\_04\_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"
+      - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
 
-const AnthropicBetaContext1m2025\_08\_07 AnthropicBeta = "context-1m-2025-08-07"
+      - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
-const AnthropicBetaContextManagement2025\_06\_27 AnthropicBeta = "context-management-2025-06-27"
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
-const AnthropicBetaModelContextWindowExceeded2025\_08\_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
-const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
-const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
+      - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
-const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
-const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
+      - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
-const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
+      - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
 
-const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
-const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2026-04-07"
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
 
-const AnthropicBetaThinkingTokenCount2026\_05\_13 AnthropicBeta = "thinking-token-count-2026-05-13"
+      - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
 
-const AnthropicBetaServerSideFallback2026\_06\_01 AnthropicBeta = "server-side-fallback-2026-06-01"
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
 
-const AnthropicBetaFallbackCredit2026\_06\_01 AnthropicBeta = "fallback-credit-2026-06-01"
+      - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
-const AnthropicBetaAgentMemory2026\_07\_22 AnthropicBeta = "agent-memory-2026-07-22"
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
-##### ReturnsExpand Collapse
+      - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-
+      - `const AnthropicBetaCompact2026_01_12 AnthropicBeta = "compact-2026-01-12"`
 
-type BetaSelfHostedWork struct{…}
+      - `const AnthropicBetaComputerUse2025_11_24 AnthropicBeta = "computer-use-2025-11-24"`
 
-Work resource representing a unit of work in a self-hosted environment.
+      - `const AnthropicBetaMCPTunnels2026_06_22 AnthropicBeta = "mcp-tunnels-2026-06-22"`
 
-Work items are queued when sessions are created or when long-dormant sessions
-receive new messages. The environment worker polls for work to execute in a
-self-hosted sandbox.
+      - `const AnthropicBetaStructuredOutputs2025_11_13 AnthropicBeta = "structured-outputs-2025-11-13"`
 
-ID string
+      - `const AnthropicBetaTaskBudgets2026_03_13 AnthropicBeta = "task-budgets-2026-03-13"`
 
-Work identifier (e.g., 'work\_...')
+      - `const AnthropicBetaThinkingDisplayUpdates2026_08_18 AnthropicBeta = "thinking-display-updates-2026-08-18"`
 
-AcknowledgedAt string
+      - `const AnthropicBetaCEUserManagement2026_07_13 AnthropicBeta = "ce-user-management-2026-07-13"`
 
-RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+      - `const AnthropicBetaMidConversationOutputConfig2026_07_01 AnthropicBeta = "mid-conversation-output-config-2026-07-01"`
 
-CreatedAt string
+      - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
 
-RFC 3339 timestamp when work was created
+      - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
-
+## Returns
 
-Data [BetaSessionWorkData](api/beta/environments/work.md)
+- `type BetaSelfHostedWork struct{…}`
 
-The actual work to be performed
+  Work resource representing a unit of work in a self-hosted environment.
 
-ID string
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
 
-Session identifier (e.g., 'session\_...')
+  - `ID string`
 
-Type Session
+    Work identifier (e.g., 'work_...')
 
-Type of work data
+  - `AcknowledgedAt string`
 
-EnvironmentID string
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-Environment identifier this work belongs to (e.g., `env_...`)
+  - `CreatedAt string`
 
-LatestHeartbeatAt string
+    RFC 3339 timestamp when work was created
 
-RFC 3339 timestamp of the most recent heartbeat
+  - `Data BetaSessionWorkData`
 
-Metadata map[string, string]
+    The actual work to be performed
 
-User-provided metadata key-value pairs associated with this work item
+    - `ID string`
 
-StartedAt string
+      Session identifier (e.g., 'session_...')
 
-RFC 3339 timestamp when work execution started
+    - `Type Session`
 
-
+      Type of work data
 
-State BetaSelfHostedWorkState
+  - `EnvironmentID string`
 
-Current state of the work item
+    Environment identifier this work belongs to (e.g., `env_...`)
 
-One of the following:
+  - `LatestHeartbeatAt string`
 
-const BetaSelfHostedWorkStateQueued BetaSelfHostedWorkState = "queued"
+    RFC 3339 timestamp of the most recent heartbeat
 
-const BetaSelfHostedWorkStateStarting BetaSelfHostedWorkState = "starting"
+  - `Metadata map[string, string]`
 
-const BetaSelfHostedWorkStateActive BetaSelfHostedWorkState = "active"
+    User-provided metadata key-value pairs associated with this work item
 
-const BetaSelfHostedWorkStateStopping BetaSelfHostedWorkState = "stopping"
+  - `Secret string`
 
-const BetaSelfHostedWorkStateStopped BetaSelfHostedWorkState = "stopped"
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
-StopRequestedAt string
+  - `StartedAt string`
 
-RFC 3339 timestamp when stop was requested
+    RFC 3339 timestamp when work execution started
 
-StoppedAt string
+  - `State BetaSelfHostedWorkState`
 
-RFC 3339 timestamp when work execution stopped
+    Current state of the work item
 
-Type Work
+    - `const BetaSelfHostedWorkStateQueued BetaSelfHostedWorkState = "queued"`
 
-The type of object (always 'work')
+    - `const BetaSelfHostedWorkStateStarting BetaSelfHostedWorkState = "starting"`
 
-Stop Work
+    - `const BetaSelfHostedWorkStateActive BetaSelfHostedWorkState = "active"`
 
-Go
+    - `const BetaSelfHostedWorkStateStopping BetaSelfHostedWorkState = "stopping"`
 
-```shiki
+    - `const BetaSelfHostedWorkStateStopped BetaSelfHostedWorkState = "stopped"`
+
+  - `StopRequestedAt string`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `StoppedAt string`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `Type Work`
+
+    The type of object (always 'work')
+
+    default: work
+
+## Example
+
+```go
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  betaSelfHostedWork, err := client.Beta.Environments.Work.Stop(
-    context.TODO(),
-    "work_id",
-    anthropic.BetaEnvironmentWorkStopParams{
-      EnvironmentID: "env_011CZkZ9X2dpNyB7HsEFoRfW",
-      BetaSelfHostedWorkStopRequest: anthropic.BetaSelfHostedWorkStopRequestParam{
-
-      },
-    },
-  )
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", betaSelfHostedWork.ID)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaSelfHostedWork, err := client.Beta.Environments.Work.Stop(
+		context.TODO(),
+		"work_id",
+		anthropic.BetaEnvironmentWorkStopParams{
+			EnvironmentID:                 "env_011CZkZ9X2dpNyB7HsEFoRfW",
+			BetaSelfHostedWorkStopRequest: anthropic.BetaSelfHostedWorkStopRequestParam{},
+		},
+	)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaSelfHostedWork.ID)
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "id",
   "acknowledged_at": "acknowledged_at",
@@ -242,34 +248,7 @@ Response 200
   "metadata": {
     "foo": "string"
   },
-  "started_at": "started_at",
-  "state": "queued",
-  "stop_requested_at": "stop_requested_at",
-  "stopped_at": "stopped_at",
-  "type": "work"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "id",
-  "acknowledged_at": "acknowledged_at",
-  "created_at": "created_at",
-  "data": {
-    "id": "id",
-    "type": "session"
-  },
-  "environment_id": "environment_id",
-  "latest_heartbeat_at": "latest_heartbeat_at",
-  "metadata": {
-    "foo": "string"
-  },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",

@@ -1,212 +1,226 @@
 # Poll for Work
 
-Copy page
+`client.beta.environments.work.poll(environmentID, params?, options?): BetaSelfHostedWork | null`
 
-
-
-TypeScript
-
-# Poll for Work
-
-client.beta.environments.work.poll(stringenvironmentID, WorkPollParams { block\_ms, reclaim\_older\_than\_ms, betas, Anthropic-Worker-ID } params?, RequestOptionsoptions?): [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }  | null
-
-GET/v1/environments/{environment\_id}/work/poll
+**GET** `/v1/environments/{environment_id}/work/poll`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Long poll for work items in the queue.
 
-##### ParametersExpand Collapse
+## Parameters
 
-environmentID: string
+- `environmentID: string`
 
-
+- `params: WorkPollParams`
 
-params: WorkPollParams { block\_ms, reclaim\_older\_than\_ms, betas, Anthropic-Worker-ID } 
+  - `block_ms?: number | null`
 
-block\_ms?: number | null
+    Query param: How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
 
-Query param: How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
+    minimum: 1
 
-reclaim\_older\_than\_ms?: number | null
+  - `reclaim_older_than_ms?: number | null`
 
-Query param: Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
+    Query param: Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
 
-
+    minimum: 1
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+  - `betas?: Array<AnthropicBeta>`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-One of the following:
+    - `(string & {})`
 
-(string & {})
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
 
-
+      - `"message-batches-2024-09-24"`
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more
+      - `"prompt-caching-2024-07-31"`
 
-"message-batches-2024-09-24"
+      - `"computer-use-2024-10-22"`
 
-"prompt-caching-2024-07-31"
+      - `"computer-use-2025-01-24"`
 
-"computer-use-2024-10-22"
+      - `"pdfs-2024-09-25"`
 
-"computer-use-2025-01-24"
+      - `"token-counting-2024-11-01"`
 
-"pdfs-2024-09-25"
+      - `"token-efficient-tools-2025-02-19"`
 
-"token-counting-2024-11-01"
+      - `"output-128k-2025-02-19"`
 
-"token-efficient-tools-2025-02-19"
+      - `"files-api-2025-04-14"`
 
-"output-128k-2025-02-19"
+      - `"mcp-client-2025-04-04"`
 
-"files-api-2025-04-14"
+      - `"mcp-client-2025-11-20"`
 
-"mcp-client-2025-04-04"
+      - `"dev-full-thinking-2025-05-14"`
 
-"mcp-client-2025-11-20"
+      - `"interleaved-thinking-2025-05-14"`
 
-"dev-full-thinking-2025-05-14"
+      - `"code-execution-2025-05-22"`
 
-"interleaved-thinking-2025-05-14"
+      - `"extended-cache-ttl-2025-04-11"`
 
-"code-execution-2025-05-22"
+      - `"context-1m-2025-08-07"`
 
-"extended-cache-ttl-2025-04-11"
+      - `"context-management-2025-06-27"`
 
-"context-1m-2025-08-07"
+      - `"model-context-window-exceeded-2025-08-26"`
 
-"context-management-2025-06-27"
+      - `"skills-2025-10-02"`
 
-"model-context-window-exceeded-2025-08-26"
+      - `"fast-mode-2026-02-01"`
 
-"skills-2025-10-02"
+      - `"output-300k-2026-03-24"`
 
-"fast-mode-2026-02-01"
+      - `"user-profiles-2026-03-24"`
 
-"output-300k-2026-03-24"
+      - `"user-profiles-2026-08-18"`
 
-"user-profiles-2026-03-24"
+      - `"advisor-tool-2026-03-01"`
 
-"advisor-tool-2026-03-01"
+      - `"managed-agents-2026-04-01"`
 
-"managed-agents-2026-04-01"
+      - `"cache-diagnosis-2026-04-07"`
 
-"cache-diagnosis-2026-04-07"
+      - `"dreaming-2026-04-21"`
 
-"thinking-token-count-2026-05-13"
+      - `"thinking-token-count-2026-05-13"`
 
-"server-side-fallback-2026-06-01"
+      - `"server-side-fallback-2026-06-01"`
 
-"fallback-credit-2026-06-01"
+      - `"server-side-fallback-2026-07-01"`
 
-"agent-memory-2026-07-22"
+      - `"fallback-credit-2026-06-01"`
 
-"Anthropic-Worker-ID"?: string
+      - `"fallback-credit-2026-07-01"`
 
-Header param: Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
+      - `"agent-memory-2026-07-22"`
 
-##### ReturnsExpand Collapse
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
-
+      - `"compact-2026-01-12"`
 
-[BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more }  | null
+      - `"computer-use-2025-11-24"`
 
-id: string
+      - `"mcp-tunnels-2026-06-22"`
 
-Work identifier (e.g., 'work\_...')
+      - `"structured-outputs-2025-11-13"`
 
-acknowledged\_at: string | null
+      - `"task-budgets-2026-03-13"`
 
-RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+      - `"thinking-display-updates-2026-08-18"`
 
-created\_at: string
+      - `"ce-user-management-2026-07-13"`
 
-RFC 3339 timestamp when work was created
+      - `"mid-conversation-output-config-2026-07-01"`
 
-
+      - `"thinking-binding-controls-2026-08-01"`
 
-data: [BetaSessionWorkData](api/beta/environments/work.md) { id, type } 
+      - `"mid-conversation-system-clear-at-2026-08-21"`
 
-The actual work to be performed
+  - `"Anthropic-Worker-ID"?: string`
 
-id: string
+    Header param: Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
 
-Session identifier (e.g., 'session\_...')
+## Returns
 
-type: "session"
+- `BetaSelfHostedWork | null`
 
-Type of work data
+  - `id: string`
 
-environment\_id: string
+    Work identifier (e.g., 'work_...')
 
-Environment identifier this work belongs to (e.g., `env_...`)
+  - `acknowledged_at: string | null`
 
-latest\_heartbeat\_at: string | null
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-RFC 3339 timestamp of the most recent heartbeat
+  - `created_at: string`
 
-metadata: Record<string, string>
+    RFC 3339 timestamp when work was created
 
-User-provided metadata key-value pairs associated with this work item
+  - `data: BetaSessionWorkData`
 
-started\_at: string | null
+    The actual work to be performed
 
-RFC 3339 timestamp when work execution started
+    - `id: string`
 
-
+      Session identifier (e.g., 'session_...')
 
-state: "queued" | "starting" | "active" | 2 more
+    - `type: "session"`
 
-Current state of the work item
+      Type of work data
 
-One of the following:
+  - `environment_id: string`
 
-"queued"
+    Environment identifier this work belongs to (e.g., `env_...`)
 
-"starting"
+  - `latest_heartbeat_at: string | null`
 
-"active"
+    RFC 3339 timestamp of the most recent heartbeat
 
-"stopping"
+  - `metadata: Record<string, string>`
 
-"stopped"
+    User-provided metadata key-value pairs associated with this work item
 
-stop\_requested\_at: string | null
+  - `secret: string | null`
 
-RFC 3339 timestamp when stop was requested
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
-stopped\_at: string | null
+  - `started_at: string | null`
 
-RFC 3339 timestamp when work execution stopped
+    RFC 3339 timestamp when work execution started
 
-type: "work"
+  - `state: "queued" | "starting" | "active" | 2 more`
 
-The type of object (always 'work')
+    Current state of the work item
 
-Poll for Work
+    - `"queued"`
 
-TypeScript
+    - `"starting"`
 
-```shiki
-import Anthropic from '@anthropic-ai/sdk';
+    - `"active"`
+
+    - `"stopping"`
+
+    - `"stopped"`
+
+  - `stop_requested_at: string | null`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `stopped_at: string | null`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `type: "work"`
+
+    The type of object (always 'work')
+
+    default: work
+
+## Example
+
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const betaSelfHostedWork = await client.beta.environments.work.poll('env_011CZkZ9X2dpNyB7HsEFoRfW');
+const betaSelfHostedWork = await client.beta.environments.work.poll(
+  "env_011CZkZ9X2dpNyB7HsEFoRfW"
+);
 
 console.log(betaSelfHostedWork.id);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "id",
   "acknowledged_at": "acknowledged_at",
@@ -220,34 +234,7 @@ Response 200
   "metadata": {
     "foo": "string"
   },
-  "started_at": "started_at",
-  "state": "queued",
-  "stop_requested_at": "stop_requested_at",
-  "stopped_at": "stopped_at",
-  "type": "work"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "id",
-  "acknowledged_at": "acknowledged_at",
-  "created_at": "created_at",
-  "data": {
-    "id": "id",
-    "type": "session"
-  },
-  "environment_id": "environment_id",
-  "latest_heartbeat_at": "latest_heartbeat_at",
-  "metadata": {
-    "foo": "string"
-  },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",

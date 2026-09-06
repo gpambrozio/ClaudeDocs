@@ -1,92 +1,194 @@
 # Compliance Settings
 
-Copy page
+## Get Compliance Settings
 
-
+**GET** `/v1/organizations/compliance_settings`
 
-cURL
+Retrieve your organization's Compliance Settings.
 
-# Compliance Settings
+Compliance Settings is a singleton resource: there is exactly one per
+organization, addressed without an identifier. The `state` field reflects
+whether the Compliance API is enabled. An organization with a parent
+organization reads the state inherited from the parent's configuration.
 
-##### [Get Compliance Settings](api/http/beta/organization/compliance_settings/retrieve.md)
+### Returns
 
-GET/v1/organizations/compliance\_settings
+- `BetaComplianceSettings object`
 
-##### [Update Compliance Settings](api/http/beta/organization/compliance_settings/update.md)
+  - `state: BetaComplianceSettingsStateEnabled or BetaComplianceSettingsStateDisabled`
 
-POST/v1/organizations/compliance\_settings
+    Whether the Compliance API is enabled for this organization.
 
-##### Models
+    - `BetaComplianceSettingsStateEnabled object`
 
-
+      - `type: "enabled"`
 
-BetaComplianceSettings object{ state, type }
+        default: enabled
 
-
+    - `BetaComplianceSettingsStateDisabled object`
 
-state: [BetaComplianceSettingsStateEnabled](api/http/beta/organization/compliance_settings.md) { type } or [BetaComplianceSettingsStateDisabled](api/http/beta/organization/compliance_settings.md) { type }
+      - `type: "disabled"`
 
-Whether the Compliance API is enabled for this organization.
+        default: disabled
 
-One of the following:
+  - `type: "compliance_settings"`
 
-
+    default: compliance_settings
 
-BetaComplianceSettingsStateEnabled object{ type }
+### Example
 
-
+```bash
+curl https://api.anthropic.com/v1/organizations/compliance_settings \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
 
-type: "enabled"
+#### Response (200)
 
-defaultenabled
+```json
+{
+  "state": {
+    "type": "enabled"
+  },
+  "type": "compliance_settings"
+}
+```
 
-
+## Update Compliance Settings
 
-BetaComplianceSettingsStateDisabled object{ type }
+**POST** `/v1/organizations/compliance_settings`
 
-
+Update your organization's Compliance Settings.
 
-type: "disabled"
+Setting `state` to `enabled` turns on the Compliance API and begins
+capturing organization activity events. Setting it to `disabled` turns
+both off. `state` reflects whether the Compliance API is enabled.
 
-defaultdisabled
+A request that sets `state` to its current value succeeds and leaves the
+resource unchanged. A `disabled` request stays in effect until a later
+`enabled` request or the organization's next provisioning action that
+enables Access Transparency: enabling Access Transparency also enables
+the Compliance API, which serves its activity events, so such
+provisioning (including re-runs) re-enables the Compliance API even
+after a `disabled` request. Automated provisioning never disables
+compliance settings.
 
-
+### Body parameters
 
-type: "compliance\_settings"
+- `state: BetaComplianceSettingsStateEnabledParam or BetaComplianceSettingsStateDisabledParam`
 
-defaultcompliance\_settings
+  Desired state. Accepts the string shorthand "enabled" or "disabled" in place of the object form; the response always returns the canonical object form.
 
-
+  - `BetaComplianceSettingsStateEnabledParam object`
 
-BetaComplianceSettingsStateDisabled object{ type }
+    - `type: "enabled"`
 
-
+  - `BetaComplianceSettingsStateDisabledParam object`
 
-type: "disabled"
+    - `type: "disabled"`
 
-defaultdisabled
+### Returns
 
-
+- `BetaComplianceSettings object`
 
-BetaComplianceSettingsStateDisabledParam object{ type }
+  - `state: BetaComplianceSettingsStateEnabled or BetaComplianceSettingsStateDisabled`
 
-type: "disabled"
+    Whether the Compliance API is enabled for this organization.
 
-
+    - `BetaComplianceSettingsStateEnabled object`
 
-BetaComplianceSettingsStateEnabled object{ type }
+      - `type: "enabled"`
 
-
+        default: enabled
 
-type: "enabled"
+    - `BetaComplianceSettingsStateDisabled object`
 
-defaultenabled
+      - `type: "disabled"`
 
-
+        default: disabled
 
-BetaComplianceSettingsStateEnabledParam object{ type }
+  - `type: "compliance_settings"`
 
-type: "enabled"
+    default: compliance_settings
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/compliance_settings \
+    -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -d '{
+          "state": {
+            "type": "enabled"
+          }
+        }'
+```
+
+#### Response (200)
+
+```json
+{
+  "state": {
+    "type": "enabled"
+  },
+  "type": "compliance_settings"
+}
+```
+
+## Domain types
+
+### Beta Compliance Settings
+
+- `BetaComplianceSettings object`
+
+  - `state: BetaComplianceSettingsStateEnabled or BetaComplianceSettingsStateDisabled`
+
+    Whether the Compliance API is enabled for this organization.
+
+    - `BetaComplianceSettingsStateEnabled object`
+
+      - `type: "enabled"`
+
+        default: enabled
+
+    - `BetaComplianceSettingsStateDisabled object`
+
+      - `type: "disabled"`
+
+        default: disabled
+
+  - `type: "compliance_settings"`
+
+    default: compliance_settings
+
+### Beta Compliance Settings State Disabled
+
+- `BetaComplianceSettingsStateDisabled object`
+
+  - `type: "disabled"`
+
+    default: disabled
+
+### Beta Compliance Settings State Disabled Param
+
+- `BetaComplianceSettingsStateDisabledParam object`
+
+  - `type: "disabled"`
+
+### Beta Compliance Settings State Enabled
+
+- `BetaComplianceSettingsStateEnabled object`
+
+  - `type: "enabled"`
+
+    default: enabled
+
+### Beta Compliance Settings State Enabled Param
+
+- `BetaComplianceSettingsStateEnabledParam object`
+
+  - `type: "enabled"`
 
 ---
 

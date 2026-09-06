@@ -1,160 +1,96 @@
 # List Files
 
-Copy page
-
-
-
-cURL
-
-# List Files
-
-GET/v1/files
+**GET** `/v1/files`
 
 List Files
 
-##### Query parameters
+## Query parameters
 
-ids: optional array of string
+- `ids: optional array of string`
 
-Restrict the result set to Files whose `id` is in this list. At most 100 entries (after de-duplication). Mutually exclusive with `page` and `limit`. When supplied, the response is always a single page (`next_page` is null). IDs that do not resolve to a visible File — including deleted Files — are silently omitted.
+  Restrict the result set to Files whose `id` is in this list. At most 100 entries (after de-duplication). Mutually exclusive with `page` and `limit`. When supplied, the response is always a single page (`next_page` is null). IDs that do not resolve to a visible File — including deleted Files — are silently omitted.
 
-
+- `limit: optional number`
 
-limit: optional number
+  Number of items to return per page.
 
-Number of items to return per page.
+  Defaults to `20`. Ranges from `1` to `1000`.
 
-Defaults to `20`. Ranges from `1` to `1000`.
+  default: 20, maximum: 1000, minimum: 1
 
-default20
+- `page: optional string`
 
-maximum1000
+  Opaque page cursor returned in a prior list response's `next_page`. Prefixed `page_`.
 
-minimum1
+## Returns
 
-page: optional string
+- `data: array of FileMetadata`
 
-Opaque page cursor returned in a prior list response's `next_page`. Prefixed `page_`.
+  List of file metadata objects.
 
-##### Returns
+  - `id: string`
 
-
+    Unique object identifier.
 
-data: array of [FileMetadata](api/http/files.md) { id, created\_at, filename, 5 more }
+    The format and length of IDs may change over time.
 
-List of file metadata objects.
+  - `created_at: string`
 
-
+    RFC 3339 datetime string representing when the file was created.
 
-id: string
+    format: date-time
 
-Unique object identifier.
+  - `filename: string`
 
-The format and length of IDs may change over time.
+    Original filename of the uploaded file.
 
-
+    maxLength: 500, minLength: 1
 
-created\_at: string
+  - `mime_type: string`
 
-RFC 3339 datetime string representing when the file was created.
+    MIME type of the file.
 
-formatdate-time
+    maxLength: 255, minLength: 1
 
-
+  - `size_bytes: number`
 
-filename: string
+    Size of the file in bytes.
 
-Original filename of the uploaded file.
+    minimum: 0
 
-maxLength500
+  - `type: "file"`
 
-minLength1
+    Object type.
 
-
+    For files, this is always `"file"`.
 
-mime\_type: string
+  - `downloadable: optional boolean`
 
-MIME type of the file.
+    Whether the file can be downloaded.
 
-maxLength255
+    default: false
 
-minLength1
+  - `expires_at: optional string or null`
 
-
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
 
-size\_bytes: number
+    format: date-time
 
-Size of the file in bytes.
+- `next_page: optional string or null`
 
-minimum0
+  Opaque cursor for the next page. Supply as `?page=` to fetch the next page; null when there are no more results.
 
-
+## Example
 
-type: "file"
-
-Object type.
-
-For files, this is always `"file"`.
-
-
-
-downloadable: optional boolean
-
-Whether the file can be downloaded.
-
-defaultfalse
-
-
-
-expires\_at: optional string or null
-
-RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
-
-formatdate-time
-
-next\_page: optional string or null
-
-Opaque cursor for the next page. Supply as `?page=` to fetch the next page; null when there are no more results.
-
-List Files
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/files \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "file_011CNha8iCJcU1wXNR6q4V8w",
-      "created_at": "2025-04-15T18:37:24.100435Z",
-      "filename": "document.pdf",
-      "mime_type": "application/pdf",
-      "size_bytes": 102400,
-      "type": "file",
-      "downloadable": false,
-      "expires_at": "2025-05-15T18:37:24.100435Z"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

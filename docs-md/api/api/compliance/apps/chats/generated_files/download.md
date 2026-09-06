@@ -1,34 +1,22 @@
 # Download a Claude-generated file
 
-To enable the Compliance API, see the setup guide.
-
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
-
-Copy page
-
-
-
-# Download a Claude-generated file
-
-GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}/content
+**GET** `/v1/compliance/apps/chats/generated-files/{claude_gen_file_id}/content`
 
 Downloads the binary content of a file the assistant created via tool use.
 
-##### Path parameters
+## Path parameters
 
-claude\_gen\_file\_id: string
+- `claude_gen_file_id: string`
 
-The generated-file id (e.g., 'claude\_gen\_file\_abc123') as returned in `chat_messages[].generated_files[].id` from GET /apps/chats/{claude\_chat\_id}/messages.
+  The generated-file id (e.g., 'claude_gen_file_abc123') as returned in `chat_messages[].generated_files[].id` from GET /apps/chats/{claude_chat_id}/messages.
 
-##### Headers
+## Headers
 
-"x-api-key": optional string
+- `"x-api-key": optional string`
 
-Download a Claude-generated file
+## Example
 
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats/generated-files/$CLAUDE_GEN_FILE_ID/content \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```

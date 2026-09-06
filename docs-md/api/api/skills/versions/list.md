@@ -1,146 +1,92 @@
 # List Skill Versions
 
-Copy page
-
-
-
-cURL
-
-# List Skill Versions
-
-GET/v1/skills/{skill\_id}/versions
+**GET** `/v1/skills/{skill_id}/versions`
 
 List Skill Versions
 
-##### Path parameters
+## Path parameters
 
-
+- `skill_id: string`
 
-skill\_id: string
+  Unique identifier for the skill.
 
-Unique identifier for the skill.
+  The format and length of IDs may change over time.
 
-The format and length of IDs may change over time.
+## Query parameters
 
-##### Query parameters
+- `limit: optional number`
 
-
+  Number of results to return per page.
 
-limit: optional number
+  Ranges from `1` to `1000`. Defaults to `20`.
 
-Number of results to return per page.
+  default: 20, minimum: 1, maximum: 1000
 
-Ranges from `1` to `1000`. Defaults to `20`.
+- `page: optional string`
 
-default20
+  Optionally set to the `next_page` token from the previous response.
 
-minimum1
+## Returns
 
-maximum1000
+- `data: array of SkillVersion`
 
-page: optional string
+  List of skills.
 
-Optionally set to the `next_page` token from the previous response.
+  - `id: string`
 
-##### Returns
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
 
-
+  - `created_at: string`
 
-data: array of [SkillVersion](api/http/skills/versions.md) { id, created\_at, description, 3 more }
+    ISO 8601 timestamp of when the skill was created.
 
-List of skills.
+    format: date-time
 
-id: string
+  - `description: string`
 
-Unique identifier for this Skill Version. The id addresses the version in
-paths and pins it in references.
+    Description of the skill version.
 
-
+    This is extracted from the SKILL.md file in the skill upload.
 
-created\_at: string
+  - `name: string`
 
-ISO 8601 timestamp of when the skill was created.
+    The Skill's immutable kebab-case slug, set at creation from the first
+    upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
+    later upload must resolve to the same value. Also the top-level directory
+    of the Skill's mounted files and the base name of a downloaded archive.
 
-formatdate-time
+  - `skill_id: string`
 
-
+    Unique identifier for the skill.
 
-description: string
+    The format and length of IDs may change over time.
 
-Description of the skill version.
+  - `type: "skill_version"`
 
-This is extracted from the SKILL.md file in the skill upload.
+    Object type.
 
-name: string
+    For Skill Versions, this is always `"skill_version"`.
 
-The Skill's immutable kebab-case slug, set at creation from the first
-upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
-later upload must resolve to the same value. Also the top-level directory
-of the Skill's mounted files and the base name of a downloaded archive.
+    default: skill_version
 
-
+- `next_page: string or null`
 
-skill\_id: string
+  Token for fetching the next page of results.
 
-Unique identifier for the skill.
+  If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
 
-The format and length of IDs may change over time.
+## Example
 
-
-
-type: "skill\_version"
-
-Object type.
-
-For Skill Versions, this is always `"skill_version"`.
-
-defaultskill\_version
-
-
-
-next\_page: string or null
-
-Token for fetching the next page of results.
-
-If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
-
-List Skill Versions
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "description": "description",
-      "name": "name",
-      "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-      "type": "skill_version"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

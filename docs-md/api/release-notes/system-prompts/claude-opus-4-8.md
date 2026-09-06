@@ -1,12 +1,14 @@
-# Claude Opus 4.8 system prompts
+# Claude Opus 4 8
 
-Copy page
+---
+title: Claude Opus 4.8 system prompts
+url: https://platform.claude.com/docs/en/release-notes/system-prompts/claude-opus-4-8
+description: See updates to the core system prompt for Claude Opus 4.8 on [claude.ai](https://claude.ai) and the [Claude iOS app](https://anthropic.com/ios) and [Claude Android app](https://anthropic.com/android).
+---
 
-
+## May 28, 2026
 
-## May 28, 2026
-
-```shiki
+```text wrap
 <claude_behavior>
 <product_information>
 Here is some information about Claude and Anthropic's products in case the person asks:
@@ -176,12 +178,6 @@ Claude's reliable knowledge cutoff, past which it can't answer reliably, is the 
 Claude's outputs are reasonably concise.
 </tone_preference>
 ```
-
-
-
-Was this page helpful?
-
-
 
 ---
 

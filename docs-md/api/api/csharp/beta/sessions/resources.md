@@ -1,272 +1,1335 @@
 # Resources
 
-Copy page
+## Add Session Resource
 
-
+`BetaManagedAgentsFileResource Beta.Sessions.Resources.Add(parameters, cancellationToken = default)`
 
-C#
+**POST** `/v1/sessions/{session_id}/resources`
 
-# Resources
+Add Session Resource
 
-##### [Add Session Resource](api/beta/sessions/resources/add.md)
+### Parameters
 
-[BetaManagedAgentsFileResource](api/beta/sessions/resources.md) Beta.Sessions.Resources.Add(ResourceAddParamsparameters, CancellationTokencancellationToken = default)
+- `ResourceAddParams parameters`
 
-POST/v1/sessions/{session\_id}/resources
+  - `required string sessionID`
 
-##### [List Session Resources](api/beta/sessions/resources/list.md)
+    Path param: Path parameter session_id
 
-[ResourceListPageResponse](api/beta/sessions/resources.md) Beta.Sessions.Resources.List(ResourceListParamsparameters, CancellationTokencancellationToken = default)
+  - `required string fileID`
 
-GET/v1/sessions/{session\_id}/resources
+    Body param: ID of a previously uploaded file.
 
-##### [Get Session Resource](api/beta/sessions/resources/retrieve.md)
+    minLength: 1, maxLength: 128
 
-[ResourceRetrieveResponse](api/beta/sessions/resources.md) Beta.Sessions.Resources.Retrieve(ResourceRetrieveParamsparameters, CancellationTokencancellationToken = default)
+  - `required Type type`
 
-GET/v1/sessions/{session\_id}/resources/{resource\_id}
+    Body param
 
-##### [Update Session Resource](api/beta/sessions/resources/update.md)
+    - `File("file")`
 
-[ResourceUpdateResponse](api/beta/sessions/resources.md) Beta.Sessions.Resources.Update(ResourceUpdateParamsparameters, CancellationTokencancellationToken = default)
+  - `string? mountPath`
 
-POST/v1/sessions/{session\_id}/resources/{resource\_id}
+    Body param: Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-##### [Delete Session Resource](api/beta/sessions/resources/delete.md)
+    minLength: 1, maxLength: 4096
 
-[BetaManagedAgentsDeleteSessionResource](api/beta/sessions/resources.md) Beta.Sessions.Resources.Delete(ResourceDeleteParamsparameters, CancellationTokencancellationToken = default)
+  - `IReadOnlyList<AnthropicBeta> betas`
 
-DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-##### ModelsExpand Collapse
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
-
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
 
-class BetaManagedAgentsDeleteSessionResource:
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
 
-Confirmation of resource deletion.
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
 
-required string ID
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
 
-required Type Type
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
 
-
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
 
-class BetaManagedAgentsFileResource:
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
 
-required string ID
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
 
-required DateTimeOffset CreatedAt
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
 
-A timestamp in RFC 3339 format
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
 
-required string FileID
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
 
-required string MountPath
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
 
-required Type Type
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
 
-required DateTimeOffset UpdatedAt
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
 
-A timestamp in RFC 3339 format
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
 
-
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
 
-class BetaManagedAgentsGitHubRepositoryResource:
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-required string ID
+    - `Skills2025_10_02("skills-2025-10-02")`
 
-required DateTimeOffset CreatedAt
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
 
-A timestamp in RFC 3339 format
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
 
-required string MountPath
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
 
-required Type Type
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
-required DateTimeOffset UpdatedAt
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
-A timestamp in RFC 3339 format
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
 
-required string Url
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
 
-
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
 
-Checkout? Checkout
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
 
-One of the following:
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
 
-
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
 
-class BetaManagedAgentsBranchCheckout:
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
 
-required string Name
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
 
-Branch name to check out.
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
 
-required Type Type
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-
+    - `Compact2026_01_12("compact-2026-01-12")`
 
-class BetaManagedAgentsCommitCheckout:
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
 
-required string Sha
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
 
-Full commit SHA to check out.
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
 
-required Type Type
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
 
-
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
 
-class BetaManagedAgentsMemoryStoreResource:
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
 
-A memory store attached to an agent session.
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-required string MemoryStoreID
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
 
-The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-required Type Type
+### Returns
 
-
+- `class BetaManagedAgentsFileResource:`
 
-Access? Access
+  - `required string ID`
 
-Access mode for an attached memory store.
+  - `required DateTimeOffset CreatedAt`
 
-One of the following:
+    A timestamp in RFC 3339 format
 
-"read\_write"ReadWrite
+    format: date-time
 
-"read\_only"ReadOnly
+  - `required string FileID`
 
-string Description
+  - `required string MountPath`
 
-Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+  - `required Type Type`
 
-string? Instructions
+  - `required DateTimeOffset UpdatedAt`
 
-Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+    A timestamp in RFC 3339 format
 
-string? MountPath
+    format: date-time
 
-Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+### Example
 
-string? Name
+```csharp
+ResourceAddParams parameters = new()
+{
+    SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
+    FileID = "file_011CNha8iCJcU1wXNR6q4V8w",
+    Type = Type.File,
+};
 
-Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+var betaManagedAgentsFileResource = await client.Beta.Sessions.Resources.Add(parameters);
 
-
+Console.WriteLine(betaManagedAgentsFileResource);
+```
 
-class BetaManagedAgentsSessionResource: A class that can be one of several variants.union 
+#### Response (200)
 
-A memory store attached to an agent session.
+```json
+{
+  "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+  "created_at": "2026-03-15T10:00:00Z",
+  "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "mount_path": "/uploads/receipt.pdf",
+  "type": "file",
+  "updated_at": "2026-03-15T10:00:00Z"
+}
+```
 
-
+## List Session Resources
 
-class BetaManagedAgentsGitHubRepositoryResource:
+`ResourceListPage Beta.Sessions.Resources.List(parameters, cancellationToken = default)`
 
-required string ID
+**GET** `/v1/sessions/{session_id}/resources`
 
-required DateTimeOffset CreatedAt
+List Session Resources
 
-A timestamp in RFC 3339 format
+### Parameters
 
-required string MountPath
+- `ResourceListParams parameters`
 
-required Type Type
+  - `required string sessionID`
 
-required DateTimeOffset UpdatedAt
+    Path param: Path parameter session_id
 
-A timestamp in RFC 3339 format
+  - `int limit`
 
-required string Url
+    Query param: Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
 
-
+    format: int32
 
-Checkout? Checkout
+  - `string page`
 
-One of the following:
+    Query param: Opaque cursor from a previous response's `next_page` field.
 
-
+  - `IReadOnlyList<AnthropicBeta> betas`
 
-class BetaManagedAgentsBranchCheckout:
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-required string Name
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
-Branch name to check out.
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
 
-required Type Type
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
 
-
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
 
-class BetaManagedAgentsCommitCheckout:
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
 
-required string Sha
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
 
-Full commit SHA to check out.
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
 
-required Type Type
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
 
-
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
 
-class BetaManagedAgentsFileResource:
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
 
-required string ID
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
 
-required DateTimeOffset CreatedAt
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
 
-A timestamp in RFC 3339 format
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
 
-required string FileID
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
 
-required string MountPath
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
 
-required Type Type
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
 
-required DateTimeOffset UpdatedAt
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
 
-A timestamp in RFC 3339 format
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-
+    - `Skills2025_10_02("skills-2025-10-02")`
 
-class BetaManagedAgentsMemoryStoreResource:
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
 
-A memory store attached to an agent session.
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
 
-required string MemoryStoreID
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
 
-The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
-required Type Type
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
-
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
 
-Access? Access
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
 
-Access mode for an attached memory store.
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
 
-One of the following:
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
 
-"read\_write"ReadWrite
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
 
-"read\_only"ReadOnly
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
 
-string Description
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
 
-Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
 
-string? Instructions
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
 
-Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-string? MountPath
+    - `Compact2026_01_12("compact-2026-01-12")`
 
-Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
 
-string? Name
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
 
-Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+### Returns
+
+- `class BetaManagedAgentsSessionResource: union`
+
+  A memory store attached to an agent session.
+
+  - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+    - `required string ID`
+
+    - `required DateTimeOffset CreatedAt`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `required string MountPath`
+
+    - `required Type Type`
+
+    - `required DateTimeOffset UpdatedAt`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `required string Url`
+
+    - `Checkout? Checkout`
+
+      - `class BetaManagedAgentsBranchCheckout:`
+
+        - `required string Name`
+
+          Branch name to check out.
+
+          minLength: 1, maxLength: 255
+
+        - `required Type Type`
+
+      - `class BetaManagedAgentsCommitCheckout:`
+
+        - `required string Sha`
+
+          Full commit SHA to check out.
+
+          minLength: 7, maxLength: 64
+
+        - `required Type Type`
+
+  - `class BetaManagedAgentsFileResource:`
+
+    - `required string ID`
+
+    - `required DateTimeOffset CreatedAt`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `required string FileID`
+
+    - `required string MountPath`
+
+    - `required Type Type`
+
+    - `required DateTimeOffset UpdatedAt`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+  - `class BetaManagedAgentsMemoryStoreResource:`
+
+    A memory store attached to an agent session.
+
+    - `required string MemoryStoreID`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `required Type Type`
+
+    - `Access? Access`
+
+      Access mode for an attached memory store.
+
+      - `ReadWrite("read_write")`
+
+      - `ReadOnly("read_only")`
+
+    - `string Description`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `string? Instructions`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
+
+    - `string? MountPath`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `string? Name`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
+### Example
+
+```csharp
+ResourceListParams parameters = new()
+{
+    SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7"
+};
+
+var page = await client.Beta.Sessions.Resources.List(parameters);
+await foreach (var item in page.Paginate())
+{
+    Console.WriteLine(item);
+}
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+      "created_at": "2026-03-15T10:00:00Z",
+      "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "mount_path": "/uploads/receipt.pdf",
+      "type": "file",
+      "updated_at": "2026-03-15T10:00:00Z"
+    },
+    {
+      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+      "created_at": "2026-03-15T10:00:00Z",
+      "mount_path": "/workspace/example-repo",
+      "type": "github_repository",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "url": "https://github.com/example-org/example-repo",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      }
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
+
+## Get Session Resource
+
+`ResourceRetrieveResponse Beta.Sessions.Resources.Retrieve(parameters, cancellationToken = default)`
+
+**GET** `/v1/sessions/{session_id}/resources/{resource_id}`
+
+Get Session Resource
+
+### Parameters
+
+- `ResourceRetrieveParams parameters`
+
+  - `required string sessionID`
+
+    Path param: Path parameter session_id
+
+  - `required string resourceID`
+
+    Path param: Path parameter resource_id
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+### Returns
+
+- `class ResourceRetrieveResponse: union`
+
+  The requested session resource.
+
+  - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+    - `required string ID`
+
+    - `required DateTimeOffset CreatedAt`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `required string MountPath`
+
+    - `required Type Type`
+
+    - `required DateTimeOffset UpdatedAt`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `required string Url`
+
+    - `Checkout? Checkout`
+
+      - `class BetaManagedAgentsBranchCheckout:`
+
+        - `required string Name`
+
+          Branch name to check out.
+
+          minLength: 1, maxLength: 255
+
+        - `required Type Type`
+
+      - `class BetaManagedAgentsCommitCheckout:`
+
+        - `required string Sha`
+
+          Full commit SHA to check out.
+
+          minLength: 7, maxLength: 64
+
+        - `required Type Type`
+
+  - `class BetaManagedAgentsFileResource:`
+
+    - `required string ID`
+
+    - `required DateTimeOffset CreatedAt`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `required string FileID`
+
+    - `required string MountPath`
+
+    - `required Type Type`
+
+    - `required DateTimeOffset UpdatedAt`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+  - `class BetaManagedAgentsMemoryStoreResource:`
+
+    A memory store attached to an agent session.
+
+    - `required string MemoryStoreID`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `required Type Type`
+
+    - `Access? Access`
+
+      Access mode for an attached memory store.
+
+      - `ReadWrite("read_write")`
+
+      - `ReadOnly("read_only")`
+
+    - `string Description`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `string? Instructions`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
+
+    - `string? MountPath`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `string? Name`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
+### Example
+
+```csharp
+ResourceRetrieveParams parameters = new()
+{
+    SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
+    ResourceID = "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+};
+
+var resource = await client.Beta.Sessions.Resources.Retrieve(parameters);
+
+Console.WriteLine(resource);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+  "created_at": "2026-03-15T10:00:00Z",
+  "mount_path": "/workspace/example-repo",
+  "type": "github_repository",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "url": "https://github.com/example-org/example-repo",
+  "checkout": {
+    "name": "main",
+    "type": "branch"
+  }
+}
+```
+
+## Update Session Resource
+
+`ResourceUpdateResponse Beta.Sessions.Resources.Update(parameters, cancellationToken = default)`
+
+**POST** `/v1/sessions/{session_id}/resources/{resource_id}`
+
+Update Session Resource
+
+### Parameters
+
+- `ResourceUpdateParams parameters`
+
+  - `required string sessionID`
+
+    Path param: Path parameter session_id
+
+  - `required string resourceID`
+
+    Path param: Path parameter resource_id
+
+  - `required string authorizationToken`
+
+    Body param: New authorization token for the resource. Currently only `github_repository` resources support token rotation.
+
+    minLength: 1, maxLength: 4096
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+### Returns
+
+- `class ResourceUpdateResponse: union`
+
+  The updated session resource.
+
+  - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+    - `required string ID`
+
+    - `required DateTimeOffset CreatedAt`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `required string MountPath`
+
+    - `required Type Type`
+
+    - `required DateTimeOffset UpdatedAt`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `required string Url`
+
+    - `Checkout? Checkout`
+
+      - `class BetaManagedAgentsBranchCheckout:`
+
+        - `required string Name`
+
+          Branch name to check out.
+
+          minLength: 1, maxLength: 255
+
+        - `required Type Type`
+
+      - `class BetaManagedAgentsCommitCheckout:`
+
+        - `required string Sha`
+
+          Full commit SHA to check out.
+
+          minLength: 7, maxLength: 64
+
+        - `required Type Type`
+
+  - `class BetaManagedAgentsFileResource:`
+
+    - `required string ID`
+
+    - `required DateTimeOffset CreatedAt`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `required string FileID`
+
+    - `required string MountPath`
+
+    - `required Type Type`
+
+    - `required DateTimeOffset UpdatedAt`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+  - `class BetaManagedAgentsMemoryStoreResource:`
+
+    A memory store attached to an agent session.
+
+    - `required string MemoryStoreID`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `required Type Type`
+
+    - `Access? Access`
+
+      Access mode for an attached memory store.
+
+      - `ReadWrite("read_write")`
+
+      - `ReadOnly("read_only")`
+
+    - `string Description`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `string? Instructions`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
+
+    - `string? MountPath`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `string? Name`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
+### Example
+
+```csharp
+ResourceUpdateParams parameters = new()
+{
+    SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
+    ResourceID = "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+    AuthorizationToken = "ghp_exampletoken",
+};
+
+var resource = await client.Beta.Sessions.Resources.Update(parameters);
+
+Console.WriteLine(resource);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+  "created_at": "2026-03-15T10:00:00Z",
+  "mount_path": "/workspace/example-repo",
+  "type": "github_repository",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "url": "https://github.com/example-org/example-repo",
+  "checkout": {
+    "name": "main",
+    "type": "branch"
+  }
+}
+```
+
+## Delete Session Resource
+
+`BetaManagedAgentsDeleteSessionResource Beta.Sessions.Resources.Delete(parameters, cancellationToken = default)`
+
+**DELETE** `/v1/sessions/{session_id}/resources/{resource_id}`
+
+Delete Session Resource
+
+### Parameters
+
+- `ResourceDeleteParams parameters`
+
+  - `required string sessionID`
+
+    Path param: Path parameter session_id
+
+  - `required string resourceID`
+
+    Path param: Path parameter resource_id
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+### Returns
+
+- `class BetaManagedAgentsDeleteSessionResource:`
+
+  Confirmation of resource deletion.
+
+  - `required string ID`
+
+  - `required Type Type`
+
+### Example
+
+```csharp
+ResourceDeleteParams parameters = new()
+{
+    SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
+    ResourceID = "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+};
+
+var betaManagedAgentsDeleteSessionResource = await client.Beta.Sessions.Resources.Delete(parameters);
+
+Console.WriteLine(betaManagedAgentsDeleteSessionResource);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+  "type": "session_resource_deleted"
+}
+```
+
+## Domain types
+
+### Beta Managed Agents Delete Session Resource
+
+- `class BetaManagedAgentsDeleteSessionResource:`
+
+  Confirmation of resource deletion.
+
+  - `required string ID`
+
+  - `required Type Type`
+
+### Beta Managed Agents File Resource
+
+- `class BetaManagedAgentsFileResource:`
+
+  - `required string ID`
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `required string FileID`
+
+  - `required string MountPath`
+
+  - `required Type Type`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+### Beta Managed Agents GitHub Repository Resource
+
+- `class BetaManagedAgentsGitHubRepositoryResource:`
+
+  - `required string ID`
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `required string MountPath`
+
+  - `required Type Type`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `required string Url`
+
+  - `Checkout? Checkout`
+
+    - `class BetaManagedAgentsBranchCheckout:`
+
+      - `required string Name`
+
+        Branch name to check out.
+
+        minLength: 1, maxLength: 255
+
+      - `required Type Type`
+
+    - `class BetaManagedAgentsCommitCheckout:`
+
+      - `required string Sha`
+
+        Full commit SHA to check out.
+
+        minLength: 7, maxLength: 64
+
+      - `required Type Type`
+
+### Beta Managed Agents Memory Store Resource
+
+- `class BetaManagedAgentsMemoryStoreResource:`
+
+  A memory store attached to an agent session.
+
+  - `required string MemoryStoreID`
+
+    The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+  - `required Type Type`
+
+  - `Access? Access`
+
+    Access mode for an attached memory store.
+
+    - `ReadWrite("read_write")`
+
+    - `ReadOnly("read_only")`
+
+  - `string Description`
+
+    Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+  - `string? Instructions`
+
+    Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    maxLength: 4096
+
+  - `string? MountPath`
+
+    Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+  - `string? Name`
+
+    Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
+### Beta Managed Agents Session Resource
+
+- `class BetaManagedAgentsSessionResource: union`
+
+  A memory store attached to an agent session.
+
+  - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+    - `required string ID`
+
+    - `required DateTimeOffset CreatedAt`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `required string MountPath`
+
+    - `required Type Type`
+
+    - `required DateTimeOffset UpdatedAt`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `required string Url`
+
+    - `Checkout? Checkout`
+
+      - `class BetaManagedAgentsBranchCheckout:`
+
+        - `required string Name`
+
+          Branch name to check out.
+
+          minLength: 1, maxLength: 255
+
+        - `required Type Type`
+
+      - `class BetaManagedAgentsCommitCheckout:`
+
+        - `required string Sha`
+
+          Full commit SHA to check out.
+
+          minLength: 7, maxLength: 64
+
+        - `required Type Type`
+
+  - `class BetaManagedAgentsFileResource:`
+
+    - `required string ID`
+
+    - `required DateTimeOffset CreatedAt`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `required string FileID`
+
+    - `required string MountPath`
+
+    - `required Type Type`
+
+    - `required DateTimeOffset UpdatedAt`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+  - `class BetaManagedAgentsMemoryStoreResource:`
+
+    A memory store attached to an agent session.
+
+    - `required string MemoryStoreID`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `required Type Type`
+
+    - `Access? Access`
+
+      Access mode for an attached memory store.
+
+      - `ReadWrite("read_write")`
+
+      - `ReadOnly("read_only")`
+
+    - `string Description`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `string? Instructions`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
+
+    - `string? MountPath`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `string? Name`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 ---
 

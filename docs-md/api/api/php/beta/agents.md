@@ -1,660 +1,2354 @@
 # Agents
 
-Copy page
+## Create Agent
 
-
+`$client->beta->agents->create(Model model, string name, ?string description, ?list<BetaManagedAgentsURLMCPServerParams> mcpServers, ?array<string,string> metadata, ?BetaManagedAgentsMultiagentParams multiagent, ?list<BetaManagedAgentsSkillParams> skills, ?string system, ?list<Tool> tools, ?list<AnthropicBeta> betas): BetaManagedAgentsAgent`
 
-PHP
+**POST** `/v1/agents`
 
-# Agents
+Create Agent
 
-##### [Create Agent](api/beta/agents/create.md)
+### Parameters
 
-$client->beta->agents->create([Model](api/beta/agents/create.md) model, string name, ?string description, ?list<[BetaManagedAgentsURLMCPServerParams](api/beta/agents.md)> mcpServers, ?array<string,string> metadata, ?[BetaManagedAgentsMultiagentParams](api/beta/sessions.md) multiagent, ?list<[BetaManagedAgentsSkillParams](api/beta/agents.md)> skills, ?string system, ?list<Tool> tools, ?list<AnthropicBeta> betas): [BetaManagedAgentsAgent](api/beta/agents.md)
+- `model: Model`
 
-POST/v1/agents
+  Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
 
-##### [List Agents](api/beta/agents/list.md)
+- `name: string`
 
-$client->beta->agents->list(?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsAgent](api/beta/agents.md)>
+  Human-readable name for the agent.
 
-GET/v1/agents
+- `description?:optional string`
 
-##### [Get Agent](api/beta/agents/retrieve.md)
+  Description of what the agent does.
 
-$client->beta->agents->retrieve(string agentID, ?int version, ?list<AnthropicBeta> betas): [BetaManagedAgentsAgent](api/beta/agents.md)
+- `mcpServers?:optional list<BetaManagedAgentsURLMCPServerParams>`
 
-GET/v1/agents/{agent\_id}
+  MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](managed-agents/mcp-connector.md).
 
-##### [Update Agent](api/beta/agents/update.md)
+- `metadata?:optional array<string,string>`
 
-$client->beta->agents->update(string agentID, int version, ?string description, ?list<[BetaManagedAgentsURLMCPServerParams](api/beta/agents.md)> mcpServers, ?array<string,string> metadata, ?[Model](api/beta/agents/update.md) model, ?[BetaManagedAgentsMultiagentParams](api/beta/sessions.md) multiagent, ?string name, ?list<[BetaManagedAgentsSkillParams](api/beta/agents.md)> skills, ?string system, ?list<Tool> tools, ?list<AnthropicBeta> betas): [BetaManagedAgentsAgent](api/beta/agents.md)
+  Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-POST/v1/agents/{agent\_id}
+- `multiagent?:optional BetaManagedAgentsMultiagentParams`
 
-##### [Archive Agent](api/beta/agents/archive.md)
+  A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
-$client->beta->agents->archive(string agentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsAgent](api/beta/agents.md)
+- `skills?:optional list<BetaManagedAgentsSkillParams>`
 
-POST/v1/agents/{agent\_id}/archive
+  Skills available to the agent.
 
-##### ModelsExpand Collapse
+- `system?:optional string`
 
-
+  System prompt for the agent.
 
-[BetaManagedAgentsAgent](api/beta/agents.md)
+- `tools?:optional list<Tool>`
 
-string id
+  Tool configurations available to the agent. Maximum of 128 tools across all toolsets allowed.
 
-?\Datetime archivedAt
+- `betas?:optional list<AnthropicBeta>`
 
-A timestamp in RFC 3339 format
+  Optional header to specify the beta version(s) you want to use.
 
-\Datetime createdAt
+### Returns
 
-A timestamp in RFC 3339 format
+- `BetaManagedAgentsAgent`
 
-?string description
+  - `string id`
 
-list<[BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md)> mcpServers
+  - `?\Datetime archivedAt`
 
-array<string,string> metadata
+    A timestamp in RFC 3339 format
 
-[BetaManagedAgentsModelConfig](api/beta/agents.md) model
+  - `\Datetime createdAt`
 
-Model identifier and configuration.
+    A timestamp in RFC 3339 format
 
-?[BetaManagedAgentsMultiagent](api/beta/sessions.md) multiagent
+  - `?string description`
 
-Resolved coordinator topology with a concrete agent roster.
+  - `list<BetaManagedAgentsMCPServerURLDefinition> mcpServers`
 
-string name
+  - `array<string,string> metadata`
 
-list<Skill> skills
+  - `BetaManagedAgentsModelConfig model`
 
-?string system
+    Model identifier and configuration.
 
-list<Tool> tools
+  - `?BetaManagedAgentsMultiagent multiagent`
 
-Type type
+    Resolved coordinator topology with a concrete agent roster.
 
-\Datetime updatedAt
+  - `string name`
 
-A timestamp in RFC 3339 format
+  - `list<Skill> skills`
 
-int version
+  - `?string system`
 
-The agent's current version. Starts at 1 and increments when the agent is modified.
+  - `list<Tool> tools`
 
-
+  - `Type type`
 
-[BetaManagedAgentsAgentReference](api/beta/agents.md)
+  - `\Datetime updatedAt`
 
-string id
+    A timestamp in RFC 3339 format
 
-Type type
+  - `int version`
 
-int version
+    The agent's current version. Starts at 1 and increments when the agent is modified.
 
-
+### Example
 
-[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)
+```php
+<?php
 
-bool enabled
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsAgent = $client->beta->agents->create(
+  model: BetaManagedAgentsModel::CLAUDE_OPUS_5,
+  name: 'My First Agent',
+  description: 'A general-purpose starter agent.',
+  mcpServers: [
+    [
+      'name' => 'example-mcp',
+      'type' => 'url',
+      'url' => 'https://example-server.modelcontextprotocol.io/sse',
+    ],
+  ],
+  metadata: ['foo' => 'bar'],
+  multiagent: [
+    'agents' => ['agent_011CZkYqphY8vELVzwCUpqiQ', ['type' => 'self']],
+    'type' => 'coordinator',
+  ],
+  skills: [['skillID' => 'xlsx', 'type' => 'anthropic', 'version' => '1']],
+  system: 'You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user\'s task end to end.',
+  tools: [
+    [
+      'type' => 'agent_toolset_20260401',
+      'configs' => [
+        [
+          'name' => 'bash',
+          'enabled' => true,
+          'permissionPolicy' => ['type' => 'always_allow'],
+          'type' => 'bash',
+        ],
+      ],
+      'defaultConfig' => [
+        'enabled' => true, 'permissionPolicy' => ['type' => 'always_allow']
+      ],
+    ],
+  ],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsAgent);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "agent_011CZkYpogX7uDKUyvBTophP",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "A general-purpose starter agent.",
+  "mcp_servers": [
+    {
+      "name": "example-mcp",
+      "type": "url",
+      "url": "https://example-server.modelcontextprotocol.io/sse"
+    }
+  ],
+  "metadata": {
+    "foo": "bar"
+  },
+  "model": {
+    "id": "claude-opus-5",
+    "effort": {
+      "type": "low"
+    },
+    "inference_geo": "inference_geo",
+    "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
+  "name": "My First Agent",
+  "skills": [
+    {
+      "skill_id": "xlsx",
+      "type": "anthropic",
+      "version": "1"
+    },
+    {
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "type": "custom",
+      "version": "2"
+    }
+  ],
+  "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+  "tools": [
+    {
+      "configs": [
+        {
+          "enabled": true,
+          "name": "bash",
+          "permission_policy": {
+            "type": "always_allow"
+          },
+          "type": "bash"
+        }
+      ],
+      "default_config": {
+        "enabled": true,
+        "permission_policy": {
+          "type": "always_ask"
+        }
+      },
+      "type": "agent_toolset_20260401"
+    }
+  ],
+  "type": "agent",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "version": 1
+}
+```
+
+## List Agents
+
+`$client->beta->agents->list(?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<BetaManagedAgentsAgent>`
+
+**GET** `/v1/agents`
+
+List Agents
+
+### Parameters
+
+- `createdAtGte?:optional \Datetime`
+
+  Return agents created at or after this time (inclusive).
+
+- `createdAtLte?:optional \Datetime`
+
+  Return agents created at or before this time (inclusive).
+
+- `includeArchived?:optional bool`
+
+  Include archived agents in results. Defaults to false.
+
+- `limit?:optional int`
+
+  Maximum results per page. Default 20, maximum 100.
+
+- `page?:optional string`
+
+  Opaque pagination cursor from a previous response.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaManagedAgentsAgent`
+
+  - `string id`
+
+  - `?\Datetime archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `\Datetime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?string description`
+
+  - `list<BetaManagedAgentsMCPServerURLDefinition> mcpServers`
+
+  - `array<string,string> metadata`
+
+  - `BetaManagedAgentsModelConfig model`
+
+    Model identifier and configuration.
+
+  - `?BetaManagedAgentsMultiagent multiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+  - `string name`
+
+  - `list<Skill> skills`
+
+  - `?string system`
+
+  - `list<Tool> tools`
+
+  - `Type type`
+
+  - `\Datetime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `int version`
+
+    The agent's current version. Starts at 1 and increments when the agent is modified.
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$page = $client->beta->agents->list(
+  createdAtGte: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  createdAtLte: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  includeArchived: true,
+  limit: 0,
+  page: 'page',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($page);
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "agent_011CZkYpogX7uDKUyvBTophP",
+      "archived_at": null,
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": "A general-purpose starter agent.",
+      "mcp_servers": [
+        {
+          "name": "example-mcp",
+          "type": "url",
+          "url": "https://example-server.modelcontextprotocol.io/sse"
+        }
+      ],
+      "metadata": {
+        "foo": "bar"
+      },
+      "model": {
+        "id": "claude-opus-5",
+        "effort": {
+          "type": "low"
+        },
+        "inference_geo": "inference_geo",
+        "speed": "standard"
+      },
+      "multiagent": {
+        "agents": [
+          {
+            "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+            "type": "agent",
+            "version": 1
+          }
+        ],
+        "type": "coordinator"
+      },
+      "name": "My First Agent",
+      "skills": [
+        {
+          "skill_id": "xlsx",
+          "type": "anthropic",
+          "version": "1"
+        },
+        {
+          "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+          "type": "custom",
+          "version": "2"
+        }
+      ],
+      "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+      "tools": [
+        {
+          "configs": [
+            {
+              "enabled": true,
+              "name": "bash",
+              "permission_policy": {
+                "type": "always_allow"
+              },
+              "type": "bash"
+            }
+          ],
+          "default_config": {
+            "enabled": true,
+            "permission_policy": {
+              "type": "always_ask"
+            }
+          },
+          "type": "agent_toolset_20260401"
+        }
+      ],
+      "type": "agent",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "version": 1
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Get Agent
+
+`$client->beta->agents->retrieve(string agentID, ?int version, ?list<AnthropicBeta> betas): BetaManagedAgentsAgent`
+
+**GET** `/v1/agents/{agent_id}`
+
+Get Agent
+
+### Parameters
+
+- `agentID: string`
+
+- `version?:optional int`
+
+  Agent version. Omit for the most recent version. Must be at least 1 if specified.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaManagedAgentsAgent`
+
+  - `string id`
+
+  - `?\Datetime archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `\Datetime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?string description`
+
+  - `list<BetaManagedAgentsMCPServerURLDefinition> mcpServers`
+
+  - `array<string,string> metadata`
+
+  - `BetaManagedAgentsModelConfig model`
+
+    Model identifier and configuration.
+
+  - `?BetaManagedAgentsMultiagent multiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+  - `string name`
+
+  - `list<Skill> skills`
+
+  - `?string system`
+
+  - `list<Tool> tools`
+
+  - `Type type`
+
+  - `\Datetime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `int version`
+
+    The agent's current version. Starts at 1 and increments when the agent is modified.
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsAgent = $client->beta->agents->retrieve(
+  'agent_011CZkYpogX7uDKUyvBTophP',
+  version: 0,
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsAgent);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "agent_011CZkYpogX7uDKUyvBTophP",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "A general-purpose starter agent.",
+  "mcp_servers": [
+    {
+      "name": "example-mcp",
+      "type": "url",
+      "url": "https://example-server.modelcontextprotocol.io/sse"
+    }
+  ],
+  "metadata": {
+    "foo": "bar"
+  },
+  "model": {
+    "id": "claude-opus-5",
+    "effort": {
+      "type": "low"
+    },
+    "inference_geo": "inference_geo",
+    "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
+  "name": "My First Agent",
+  "skills": [
+    {
+      "skill_id": "xlsx",
+      "type": "anthropic",
+      "version": "1"
+    },
+    {
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "type": "custom",
+      "version": "2"
+    }
+  ],
+  "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+  "tools": [
+    {
+      "configs": [
+        {
+          "enabled": true,
+          "name": "bash",
+          "permission_policy": {
+            "type": "always_allow"
+          },
+          "type": "bash"
+        }
+      ],
+      "default_config": {
+        "enabled": true,
+        "permission_policy": {
+          "type": "always_ask"
+        }
+      },
+      "type": "agent_toolset_20260401"
+    }
+  ],
+  "type": "agent",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "version": 1
+}
+```
 
-Name name
+## Update Agent
 
-Built-in agent tool identifier.
+`$client->beta->agents->update(string agentID, ?string description, ?list<BetaManagedAgentsURLMCPServerParams> mcpServers, ?array<string,string> metadata, ?Model model, ?BetaManagedAgentsMultiagentParams multiagent, ?string name, ?list<BetaManagedAgentsSkillParams> skills, ?string system, ?list<Tool> tools, ?int version, ?list<AnthropicBeta> betas): BetaManagedAgentsAgent`
 
-PermissionPolicy permissionPolicy
+**POST** `/v1/agents/{agent_id}`
 
-Permission policy for tool execution.
+Update Agent
 
-
+### Parameters
 
-[BetaManagedAgentsAgentToolConfigParams](api/beta/agents.md)
+- `agentID: string`
 
-Name name
+- `description?:optional string`
 
-Built-in agent tool identifier.
+  Description. Omit to preserve; send empty string or null to clear.
 
-?bool enabled
+- `mcpServers?:optional list<BetaManagedAgentsURLMCPServerParams>`
 
-Whether this tool is enabled and available to Claude. Overrides the default\_config setting.
+  MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](managed-agents/mcp-connector.md).
 
-?PermissionPolicy permissionPolicy
+- `metadata?:optional array<string,string>`
 
-Permission policy for tool execution.
+  Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
-
+- `model?:optional Model`
 
-[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md)
+  Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
-bool enabled
+- `multiagent?:optional BetaManagedAgentsMultiagentParams`
 
-PermissionPolicy permissionPolicy
+  A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
-Permission policy for tool execution.
+- `name?:optional string`
 
-
+  Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
-[BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta/agents.md)
+- `skills?:optional list<BetaManagedAgentsSkillParams>`
 
-?bool enabled
+  Skills. Full replacement. Omit to preserve; send empty array or null to clear.
+
+- `system?:optional string`
+
+  System prompt. Omit to preserve; send empty string or null to clear.
+
+- `tools?:optional list<Tool>`
+
+  Tool configurations available to the agent. Full replacement. Omit to preserve; send empty array or null to clear. Maximum of 128 tools across all toolsets allowed.
+
+- `version?:optional int`
+
+  The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. Must be at least 1 if specified. When supplied, the request fails if it does not match the server's current version; omit to apply the update unconditionally.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaManagedAgentsAgent`
+
+  - `string id`
+
+  - `?\Datetime archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `\Datetime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?string description`
+
+  - `list<BetaManagedAgentsMCPServerURLDefinition> mcpServers`
+
+  - `array<string,string> metadata`
+
+  - `BetaManagedAgentsModelConfig model`
+
+    Model identifier and configuration.
+
+  - `?BetaManagedAgentsMultiagent multiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+  - `string name`
+
+  - `list<Skill> skills`
+
+  - `?string system`
+
+  - `list<Tool> tools`
+
+  - `Type type`
+
+  - `\Datetime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `int version`
+
+    The agent's current version. Starts at 1 and increments when the agent is modified.
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsAgent = $client->beta->agents->update(
+  'agent_011CZkYpogX7uDKUyvBTophP',
+  description: 'updated',
+  mcpServers: [
+    [
+      'name' => 'example-mcp',
+      'type' => 'url',
+      'url' => 'https://example-server.modelcontextprotocol.io/sse',
+    ],
+  ],
+  metadata: ['foo' => 'string'],
+  model: [
+    'id' => BetaManagedAgentsModel::CLAUDE_OPUS_5,
+    'effort' => 'low',
+    'inferenceGeo' => 'inference_geo',
+    'speed' => 'standard',
+  ],
+  multiagent: [
+    'agents' => ['agent_011CZkYqphY8vELVzwCUpqiQ', ['type' => 'self']],
+    'type' => 'coordinator',
+  ],
+  name: 'name',
+  skills: [['skillID' => 'xlsx', 'type' => 'anthropic', 'version' => '1']],
+  system: 'You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user\'s task end to end.',
+  tools: [
+    [
+      'type' => 'agent_toolset_20260401',
+      'configs' => [
+        [
+          'name' => 'bash',
+          'enabled' => true,
+          'permissionPolicy' => ['type' => 'always_allow'],
+          'type' => 'bash',
+        ],
+      ],
+      'defaultConfig' => [
+        'enabled' => true, 'permissionPolicy' => ['type' => 'always_allow']
+      ],
+    ],
+  ],
+  version: 1,
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsAgent);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "agent_011CZkYpogX7uDKUyvBTophP",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "A general-purpose starter agent.",
+  "mcp_servers": [
+    {
+      "name": "example-mcp",
+      "type": "url",
+      "url": "https://example-server.modelcontextprotocol.io/sse"
+    }
+  ],
+  "metadata": {
+    "foo": "bar"
+  },
+  "model": {
+    "id": "claude-opus-5",
+    "effort": {
+      "type": "low"
+    },
+    "inference_geo": "inference_geo",
+    "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
+  "name": "My First Agent",
+  "skills": [
+    {
+      "skill_id": "xlsx",
+      "type": "anthropic",
+      "version": "1"
+    },
+    {
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "type": "custom",
+      "version": "2"
+    }
+  ],
+  "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+  "tools": [
+    {
+      "configs": [
+        {
+          "enabled": true,
+          "name": "bash",
+          "permission_policy": {
+            "type": "always_allow"
+          },
+          "type": "bash"
+        }
+      ],
+      "default_config": {
+        "enabled": true,
+        "permission_policy": {
+          "type": "always_ask"
+        }
+      },
+      "type": "agent_toolset_20260401"
+    }
+  ],
+  "type": "agent",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "version": 1
+}
+```
+
+## Archive Agent
+
+`$client->beta->agents->archive(string agentID, ?list<AnthropicBeta> betas): BetaManagedAgentsAgent`
+
+**POST** `/v1/agents/{agent_id}/archive`
+
+Archive Agent
+
+### Parameters
+
+- `agentID: string`
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaManagedAgentsAgent`
+
+  - `string id`
+
+  - `?\Datetime archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `\Datetime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?string description`
+
+  - `list<BetaManagedAgentsMCPServerURLDefinition> mcpServers`
+
+  - `array<string,string> metadata`
+
+  - `BetaManagedAgentsModelConfig model`
+
+    Model identifier and configuration.
+
+  - `?BetaManagedAgentsMultiagent multiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+  - `string name`
+
+  - `list<Skill> skills`
+
+  - `?string system`
+
+  - `list<Tool> tools`
+
+  - `Type type`
+
+  - `\Datetime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `int version`
+
+    The agent's current version. Starts at 1 and increments when the agent is modified.
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsAgent = $client->beta->agents->archive(
+  'agent_011CZkYpogX7uDKUyvBTophP',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsAgent);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "agent_011CZkYpogX7uDKUyvBTophP",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "A general-purpose starter agent.",
+  "mcp_servers": [
+    {
+      "name": "example-mcp",
+      "type": "url",
+      "url": "https://example-server.modelcontextprotocol.io/sse"
+    }
+  ],
+  "metadata": {
+    "foo": "bar"
+  },
+  "model": {
+    "id": "claude-opus-5",
+    "effort": {
+      "type": "low"
+    },
+    "inference_geo": "inference_geo",
+    "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
+  "name": "My First Agent",
+  "skills": [
+    {
+      "skill_id": "xlsx",
+      "type": "anthropic",
+      "version": "1"
+    },
+    {
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "type": "custom",
+      "version": "2"
+    }
+  ],
+  "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+  "tools": [
+    {
+      "configs": [
+        {
+          "enabled": true,
+          "name": "bash",
+          "permission_policy": {
+            "type": "always_allow"
+          },
+          "type": "bash"
+        }
+      ],
+      "default_config": {
+        "enabled": true,
+        "permission_policy": {
+          "type": "always_ask"
+        }
+      },
+      "type": "agent_toolset_20260401"
+    }
+  ],
+  "type": "agent",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "version": 1
+}
+```
 
-Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
+## Domain types
 
-?PermissionPolicy permissionPolicy
+### Beta Managed Agents Advisor
 
-Permission policy for tool execution.
+- `BetaManagedAgentsAdvisor`
 
-
+  - `string model`
 
-[BetaManagedAgentsAgentToolset20260401](api/beta/agents.md)
+    The advisor model id.
 
-list<[BetaManagedAgentsAgentToolConfig](api/beta/agents.md)> configs
+  - `Type type`
 
-[BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) defaultConfig
+### Beta Managed Agents Agent
 
-Resolved default configuration for agent tools.
+- `BetaManagedAgentsAgent`
 
-Type type
+  - `string id`
 
-
+  - `?\Datetime archivedAt`
 
-[BetaManagedAgentsAgentToolset20260401BashInput](api/beta/agents.md)
+    A timestamp in RFC 3339 format
 
-?string command
+  - `\Datetime createdAt`
 
-Shell command to execute. Omit only when `restart` is true.
+    A timestamp in RFC 3339 format
 
-?bool restart
+  - `?string description`
 
-When true, restart the persistent bash session instead of
-running a command. Subsequent calls without `restart` will
-run against the fresh session.
+  - `list<BetaManagedAgentsMCPServerURLDefinition> mcpServers`
 
-?int timeoutMs
+  - `array<string,string> metadata`
 
-Per-call timeout in milliseconds. Defaults to the
-runner-wide tool timeout when omitted or zero.
+  - `BetaManagedAgentsModelConfig model`
 
-
+    Model identifier and configuration.
 
-[BetaManagedAgentsAgentToolset20260401EditInput](api/beta/agents.md)
+  - `?BetaManagedAgentsMultiagent multiagent`
 
-string filePath
+    Resolved coordinator topology with a concrete agent roster.
 
-Path of the file to edit.
+  - `string name`
 
-string newString
+  - `list<Skill> skills`
 
-Replacement text.
+  - `?string system`
 
-string oldString
+  - `list<Tool> tools`
 
-Substring to find and replace.
+  - `Type type`
 
-?bool replaceAll
+  - `\Datetime updatedAt`
 
-When true, replace every occurrence of `old_string`
-instead of requiring a unique match.
+    A timestamp in RFC 3339 format
 
-
+  - `int version`
 
-[BetaManagedAgentsAgentToolset20260401GlobInput](api/beta/agents.md)
+    The agent's current version. Starts at 1 and increments when the agent is modified.
 
-string pattern
+### Beta Managed Agents Agent Reference
 
-Doublestar glob pattern (e.g. `**/*.go`). Absolute patterns
-are only permitted when the runner is configured to allow
-them.
+- `BetaManagedAgentsAgentReference`
 
-?string path
+  - `string id`
 
-Optional directory root to search under. Defaults to the
-runner's working directory.
+  - `Type type`
 
-
+  - `int version`
 
-[BetaManagedAgentsAgentToolset20260401GrepInput](api/beta/agents.md)
+### Beta Managed Agents Agent Tool Config
 
-string pattern
+- `BetaManagedAgentsAgentToolConfig`
 
-Regular expression to search for.
+  - `BetaManagedAgentsBashToolConfig`
 
-?string path
+    - `bool enabled`
 
-Optional directory root to search under. Defaults to the
-runner's working directory.
+    - `"bash" name`
 
-
+    - `PermissionPolicy permissionPolicy`
 
-[BetaManagedAgentsAgentToolset20260401Params](api/beta/agents.md)
+      Permission policy for tool execution.
 
-Type type
+    - `"bash" type`
 
-?list<[BetaManagedAgentsAgentToolConfigParams](api/beta/agents.md)> configs
+  - `BetaManagedAgentsEditToolConfig`
 
-Per-tool configuration overrides.
+    - `bool enabled`
 
-?[BetaManagedAgentsAgentToolsetDefaultConfigParams](api/beta/agents.md) defaultConfig
+    - `"edit" name`
 
-Default configuration for all tools in a toolset.
+    - `PermissionPolicy permissionPolicy`
 
-
+      Permission policy for tool execution.
 
-[BetaManagedAgentsAgentToolset20260401ReadInput](api/beta/agents.md)
+    - `"edit" type`
 
-string filePath
+  - `BetaManagedAgentsReadToolConfig`
 
-Path of the file to read.
+    - `bool enabled`
 
-?list<int> viewRange
+    - `"read" name`
 
-Optional `[start_line, end_line]` 1-indexed inclusive
-range. When omitted the entire file is returned.
-`end_line` of 0 or negative means "to end of file".
+    - `PermissionPolicy permissionPolicy`
 
-
+      Permission policy for tool execution.
 
-[BetaManagedAgentsAgentToolset20260401WriteInput](api/beta/agents.md)
+    - `"read" type`
 
-string content
+  - `BetaManagedAgentsWriteToolConfig`
 
-Full file contents to write.
+    - `bool enabled`
 
-string filePath
+    - `"write" name`
 
-Path of the file to write.
+    - `PermissionPolicy permissionPolicy`
 
-
+      Permission policy for tool execution.
 
-[BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md)
+    - `"write" type`
 
-Type type
+  - `BetaManagedAgentsGlobToolConfig`
 
-
+    - `bool enabled`
 
-[BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md)
+    - `"glob" name`
 
-Type type
+    - `PermissionPolicy permissionPolicy`
 
-
+      Permission policy for tool execution.
 
-[BetaManagedAgentsAnthropicSkill](api/beta/agents.md)
+    - `"glob" type`
 
-string skillID
+  - `BetaManagedAgentsGrepToolConfig`
 
-Type type
+    - `bool enabled`
 
-string version
+    - `"grep" name`
 
-
+    - `PermissionPolicy permissionPolicy`
 
-[BetaManagedAgentsAnthropicSkillParams](api/beta/agents.md)
+      Permission policy for tool execution.
 
-string skillID
+    - `"grep" type`
 
-Identifier of the Anthropic skill (e.g., "xlsx").
+  - `BetaManagedAgentsWebFetchToolConfig`
 
-Type type
+    - `bool enabled`
 
-?string version
+    - `"web_fetch" name`
 
-Version to pin. Defaults to latest if omitted.
+    - `PermissionPolicy permissionPolicy`
 
-
+      Permission policy for tool execution.
 
-[BetaManagedAgentsCustomSkill](api/beta/agents.md)
+    - `"web_fetch" type`
 
-string skillID
+    - `?list<string> allowedDomains`
 
-Type type
+    - `?list<string> blockedDomains`
 
-string version
+    - `?int maxContentTokens`
 
-
+  - `BetaManagedAgentsWebSearchToolConfig`
 
-[BetaManagedAgentsCustomSkillParams](api/beta/agents.md)
+    - `bool enabled`
 
-string skillID
+    - `"web_search" name`
 
-Tagged ID of the custom skill (e.g., "skill\_01XJ5...").
+    - `PermissionPolicy permissionPolicy`
 
-Type type
+      Permission policy for tool execution.
 
-?string version
+    - `"web_search" type`
 
-Version to pin. Defaults to latest if omitted.
+    - `?list<string> allowedDomains`
 
-
+    - `?list<string> blockedDomains`
 
-[BetaManagedAgentsCustomTool](api/beta/agents.md)
+    - `?BetaManagedAgentsUserLocation userLocation`
 
-string description
+      Approximate user location for search result localization.
 
-[BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) inputSchema
+### Beta Managed Agents Agent Tool Config Params
 
-JSON Schema for custom tool input parameters.
+- `BetaManagedAgentsAgentToolConfigParams`
 
-string name
+  - `BetaManagedAgentsBashToolConfigParams`
 
-Type type
+    - `"bash" name`
 
-
+      Must be "bash".
 
-[BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md)
+    - `?bool enabled`
 
-"object" type
+      Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-?array<string,mixed> properties
+    - `?PermissionPolicy permissionPolicy`
 
-?list<string> required
+      Permission policy for tool execution.
 
-
+    - `?Type type`
 
-[BetaManagedAgentsCustomToolParams](api/beta/agents.md)
+  - `BetaManagedAgentsEditToolConfigParams`
 
-string description
+    - `"edit" name`
 
-Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
+      Must be "edit".
 
-[BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) inputSchema
+    - `?bool enabled`
 
-JSON Schema for custom tool input parameters.
+      Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-string name
+    - `?PermissionPolicy permissionPolicy`
 
-Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
+      Permission policy for tool execution.
 
-Type type
+    - `?Type type`
 
-
+  - `BetaManagedAgentsReadToolConfigParams`
 
-[BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md)
+    - `"read" name`
 
-string name
+      Must be "read".
 
-Type type
+    - `?bool enabled`
 
-string url
+      Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-
+    - `?PermissionPolicy permissionPolicy`
 
-[BetaManagedAgentsMCPToolConfig](api/beta/agents.md)
+      Permission policy for tool execution.
 
-bool enabled
+    - `?Type type`
 
-string name
+  - `BetaManagedAgentsWriteToolConfigParams`
 
-PermissionPolicy permissionPolicy
+    - `"write" name`
 
-Permission policy for tool execution.
+      Must be "write".
 
-
+    - `?bool enabled`
 
-[BetaManagedAgentsMCPToolConfigParams](api/beta/agents.md)
+      Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-string name
+    - `?PermissionPolicy permissionPolicy`
 
-Name of the MCP tool to configure. 1-128 characters.
+      Permission policy for tool execution.
 
-?bool enabled
+    - `?Type type`
 
-Whether this tool is enabled. Overrides the `default_config` setting.
+  - `BetaManagedAgentsGlobToolConfigParams`
 
-?PermissionPolicy permissionPolicy
+    - `"glob" name`
 
-Permission policy for tool execution.
+      Must be "glob".
 
-
+    - `?bool enabled`
 
-[BetaManagedAgentsMCPToolset](api/beta/agents.md)
+      Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-list<[BetaManagedAgentsMCPToolConfig](api/beta/agents.md)> configs
+    - `?PermissionPolicy permissionPolicy`
 
-[BetaManagedAgentsMCPToolsetDefaultConfig](api/beta/agents.md) defaultConfig
+      Permission policy for tool execution.
 
-Resolved default configuration for all tools from an MCP server.
+    - `?Type type`
 
-string mcpServerName
+  - `BetaManagedAgentsGrepToolConfigParams`
 
-Type type
+    - `"grep" name`
 
-
+      Must be "grep".
 
-[BetaManagedAgentsMCPToolsetDefaultConfig](api/beta/agents.md)
+    - `?bool enabled`
 
-bool enabled
+      Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-PermissionPolicy permissionPolicy
+    - `?PermissionPolicy permissionPolicy`
 
-Permission policy for tool execution.
+      Permission policy for tool execution.
 
-
+    - `?Type type`
 
-[BetaManagedAgentsMCPToolsetDefaultConfigParams](api/beta/agents.md)
+  - `BetaManagedAgentsWebFetchToolConfigParams`
 
-?bool enabled
+    - `"web_fetch" name`
 
-Whether tools are enabled by default. Defaults to true if not specified.
+      Must be "web_fetch".
 
-?PermissionPolicy permissionPolicy
+    - `?list<string> allowedDomains`
 
-Permission policy for tool execution.
+      Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-
+    - `?list<string> blockedDomains`
 
-[BetaManagedAgentsMCPToolsetParams](api/beta/agents.md)
+      Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
-string mcpServerName
+    - `?bool enabled`
 
-Name of the MCP server. Must match a server name from the mcp\_servers array. 1-255 characters.
+      Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-Type type
+    - `?int maxContentTokens`
 
-?list<[BetaManagedAgentsMCPToolConfigParams](api/beta/agents.md)> configs
+      Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
 
-Per-tool configuration overrides.
+    - `?PermissionPolicy permissionPolicy`
 
-?[BetaManagedAgentsMCPToolsetDefaultConfigParams](api/beta/agents.md) defaultConfig
+      Permission policy for tool execution.
 
-Default configuration for all tools from an MCP server.
+    - `?Type type`
 
-
+  - `BetaManagedAgentsWebSearchToolConfigParams`
 
-BetaManagedAgentsModel
+    - `"web_search" name`
 
-One of the following:
+      Must be "web_search".
 
-"claude-sonnet-5"
+    - `?list<string> allowedDomains`
 
-High-performance model for coding and agents
+      Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-"claude-fable-5"
+    - `?list<string> blockedDomains`
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+      Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
-"claude-opus-4-8"
+    - `?bool enabled`
 
-Frontier intelligence for long-running agents and coding
+      Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-"claude-opus-4-7"
+    - `?PermissionPolicy permissionPolicy`
 
-Frontier intelligence for long-running agents and coding
+      Permission policy for tool execution.
 
-"claude-opus-4-6"
+    - `?Type type`
 
-Most intelligent model for building agents and coding
+    - `?BetaManagedAgentsUserLocation userLocation`
 
-"claude-sonnet-4-6"
+      Approximate user location for search result localization.
 
-Best combination of speed and intelligence
+### Beta Managed Agents Agent Toolset Default Config
 
-"claude-haiku-4-5"
+- `BetaManagedAgentsAgentToolsetDefaultConfig`
 
-Fastest model with near-frontier intelligence
+  - `bool enabled`
 
-"claude-haiku-4-5-20251001"
+  - `PermissionPolicy permissionPolicy`
 
-Fastest model with near-frontier intelligence
+    Permission policy for tool execution.
 
-"claude-opus-4-5"
+### Beta Managed Agents Agent Toolset Default Config Params
 
-Premium model combining maximum intelligence with practical performance
+- `BetaManagedAgentsAgentToolsetDefaultConfigParams`
 
-"claude-opus-4-5-20251101"
+  - `?bool enabled`
 
-Premium model combining maximum intelligence with practical performance
+    Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-"claude-sonnet-4-5"
+  - `?PermissionPolicy permissionPolicy`
 
-High-performance model for agents and coding
+    Permission policy for tool execution.
 
-"claude-sonnet-4-5-20250929"
+### Beta Managed Agents Agent Toolset20260401
 
-High-performance model for agents and coding
+- `BetaManagedAgentsAgentToolset20260401`
 
-
+  - `list<BetaManagedAgentsAgentToolConfig> configs`
 
-[BetaManagedAgentsModelConfig](api/beta/agents.md)
+  - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
 
-
+    Resolved default configuration for agent tools.
 
-BetaManagedAgentsModel id
+  - `Type type`
 
-The model that will power your agent.
+### Beta Managed Agents Agent Toolset20260401 Bash Input
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+- `BetaManagedAgentsAgentToolset20260401BashInput`
 
-?Speed speed
+  - `?string command`
 
-Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+    Shell command to execute. Omit only when `restart` is true.
 
-
+  - `?bool restart`
 
-[BetaManagedAgentsModelConfigParams](api/beta/agents.md)
+    When true, restart the persistent bash session instead of
+    running a command. Subsequent calls without `restart` will
+    run against the fresh session.
 
-
+  - `?int timeoutMs`
 
-BetaManagedAgentsModel id
+    Per-call timeout in milliseconds. Defaults to the
+    runner-wide tool timeout when omitted or zero.
 
-The model that will power your agent.
+### Beta Managed Agents Agent Toolset20260401 Edit Input
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+- `BetaManagedAgentsAgentToolset20260401EditInput`
 
-?Speed speed
+  - `string filePath`
 
-Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+    Path of the file to edit.
 
-
+  - `string newString`
 
-[BetaManagedAgentsMultiagentCoordinator](api/beta/agents.md)
+    Replacement text.
 
-list<[BetaManagedAgentsAgentReference](api/beta/agents.md)> agents
+  - `string oldString`
 
-Agents the coordinator may spawn as session threads, each resolved to a specific version.
+    Substring to find and replace.
 
-Type type
+  - `?bool replaceAll`
 
-
+    When true, replace every occurrence of `old_string`
+    instead of requiring a unique match.
 
-[BetaManagedAgentsMultiagentCoordinatorParams](api/beta/agents.md)
+### Beta Managed Agents Agent Toolset20260401 Glob Input
 
-list<[BetaManagedAgentsMultiagentRosterEntryParams](api/beta/sessions.md)> agents
+- `BetaManagedAgentsAgentToolset20260401GlobInput`
 
-Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+  - `string pattern`
 
-Type type
+    Doublestar glob pattern (e.g. `**/*.go`). Absolute patterns
+    are only permitted when the runner is configured to allow
+    them.
 
-
+  - `?string path`
 
-[BetaManagedAgentsMultiagentSelfParams](api/beta/agents.md)
+    Optional directory root to search under. Defaults to the
+    runner's working directory.
 
-Type type
+### Beta Managed Agents Agent Toolset20260401 Grep Input
 
-
+- `BetaManagedAgentsAgentToolset20260401GrepInput`
 
-[BetaManagedAgentsSessionThreadAgent](api/beta/agents.md)
+  - `string pattern`
 
-string id
+    Regular expression to search for.
 
-?string description
+  - `?string path`
 
-list<[BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md)> mcpServers
+    Optional directory root to search under. Defaults to the
+    runner's working directory.
 
-[BetaManagedAgentsModelConfig](api/beta/agents.md) model
+### Beta Managed Agents Agent Toolset20260401 Params
 
-Model identifier and configuration.
+- `BetaManagedAgentsAgentToolset20260401Params`
 
-string name
+  - `Type type`
 
-list<Skill> skills
+  - `?list<BetaManagedAgentsAgentToolConfigParams> configs`
 
-?string system
+    Per-tool configuration overrides.
 
-list<Tool> tools
+  - `?BetaManagedAgentsAgentToolsetDefaultConfigParams defaultConfig`
 
-Type type
+    Default configuration for all tools in a toolset.
 
-int version
+### Beta Managed Agents Agent Toolset20260401 Read Input
 
-
+- `BetaManagedAgentsAgentToolset20260401ReadInput`
 
-[BetaManagedAgentsSkillParams](api/beta/agents.md)
+  - `string filePath`
 
-One of the following:
+    Path of the file to read.
 
-
+  - `?list<int> viewRange`
 
-[BetaManagedAgentsAnthropicSkillParams](api/beta/agents.md)
+    Optional `[start_line, end_line]` 1-indexed inclusive
+    range. When omitted the entire file is returned.
+    `end_line` of 0 or negative means "to end of file".
 
-string skillID
+### Beta Managed Agents Agent Toolset20260401 Write Input
 
-Identifier of the Anthropic skill (e.g., "xlsx").
+- `BetaManagedAgentsAgentToolset20260401WriteInput`
 
-Type type
+  - `string content`
 
-?string version
+    Full file contents to write.
 
-Version to pin. Defaults to latest if omitted.
+  - `string filePath`
 
-
+    Path of the file to write.
 
-[BetaManagedAgentsCustomSkillParams](api/beta/agents.md)
+### Beta Managed Agents Always Allow Policy
 
-string skillID
+- `BetaManagedAgentsAlwaysAllowPolicy`
 
-Tagged ID of the custom skill (e.g., "skill\_01XJ5...").
+  - `Type type`
 
-Type type
+### Beta Managed Agents Always Ask Policy
 
-?string version
+- `BetaManagedAgentsAlwaysAskPolicy`
 
-Version to pin. Defaults to latest if omitted.
+  - `Type type`
 
-
+### Beta Managed Agents Anthropic Skill
 
-[BetaManagedAgentsURLMCPServerParams](api/beta/agents.md)
+- `BetaManagedAgentsAnthropicSkill`
 
-string name
+  - `string skillID`
 
-Unique name for this server, referenced by mcp\_toolset configurations. 1-255 characters.
+  - `Type type`
 
-Type type
+  - `string version`
 
-string url
+### Beta Managed Agents Anthropic Skill Params
 
-Endpoint URL for the MCP server.
+- `BetaManagedAgentsAnthropicSkillParams`
 
-#### AgentsVersions
+  - `string skillID`
 
-##### [List Agent Versions](api/beta/agents/versions/list.md)
+    Identifier of the Anthropic skill (e.g., "xlsx").
 
-$client->beta->agents->versions->list(string agentID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsAgent](api/beta/agents.md)>
+  - `Type type`
 
-GET/v1/agents/{agent\_id}/versions
+  - `?string version`
+
+    Version to pin. Defaults to latest if omitted.
+
+### Beta Managed Agents Bash Tool Config
+
+- `BetaManagedAgentsBashToolConfig`
+
+  - `bool enabled`
+
+  - `"bash" name`
+
+  - `PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+  - `"bash" type`
+
+### Beta Managed Agents Bash Tool Config Params
+
+- `BetaManagedAgentsBashToolConfigParams`
+
+  - `"bash" name`
+
+    Must be "bash".
+
+  - `?bool enabled`
+
+    Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+  - `?PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+  - `?Type type`
+
+### Beta Managed Agents Custom Skill
+
+- `BetaManagedAgentsCustomSkill`
+
+  - `string skillID`
+
+  - `Type type`
+
+  - `string version`
+
+### Beta Managed Agents Custom Skill Params
+
+- `BetaManagedAgentsCustomSkillParams`
+
+  - `string skillID`
+
+    Tagged ID of the custom skill (e.g., "skill_01XJ5...").
+
+  - `Type type`
+
+  - `?string version`
+
+    Version to pin. Defaults to latest if omitted.
+
+### Beta Managed Agents Custom Tool
+
+- `BetaManagedAgentsCustomTool`
+
+  - `string description`
+
+  - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+    JSON Schema for custom tool input parameters.
+
+  - `string name`
+
+  - `Type type`
+
+### Beta Managed Agents Custom Tool Input Schema
+
+- `BetaManagedAgentsCustomToolInputSchema`
+
+  - `"object" type`
+
+  - `?array<string,mixed> properties`
+
+  - `?list<string> required`
+
+### Beta Managed Agents Custom Tool Params
+
+- `BetaManagedAgentsCustomToolParams`
+
+  - `string description`
+
+    Description of what the tool does, shown to the agent to help it decide when to use the tool.
+
+  - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+    JSON Schema for custom tool input parameters.
+
+  - `string name`
+
+    Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
+
+  - `Type type`
+
+### Beta Managed Agents Edit Tool Config
+
+- `BetaManagedAgentsEditToolConfig`
+
+  - `bool enabled`
+
+  - `"edit" name`
+
+  - `PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+  - `"edit" type`
+
+### Beta Managed Agents Edit Tool Config Params
+
+- `BetaManagedAgentsEditToolConfigParams`
+
+  - `"edit" name`
+
+    Must be "edit".
+
+  - `?bool enabled`
+
+    Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+  - `?PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+  - `?Type type`
+
+### Beta Managed Agents Effort High
+
+- `BetaManagedAgentsEffortHigh`
+
+  - `Type type`
+
+### Beta Managed Agents Effort Low
+
+- `BetaManagedAgentsEffortLow`
+
+  - `Type type`
+
+### Beta Managed Agents Effort Max
+
+- `BetaManagedAgentsEffortMax`
+
+  - `Type type`
+
+### Beta Managed Agents Effort Medium
+
+- `BetaManagedAgentsEffortMedium`
+
+  - `Type type`
+
+### Beta Managed Agents Effort Xhigh
+
+- `BetaManagedAgentsEffortXhigh`
+
+  - `Type type`
+
+### Beta Managed Agents Glob Tool Config
+
+- `BetaManagedAgentsGlobToolConfig`
+
+  - `bool enabled`
+
+  - `"glob" name`
+
+  - `PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+  - `"glob" type`
+
+### Beta Managed Agents Glob Tool Config Params
+
+- `BetaManagedAgentsGlobToolConfigParams`
+
+  - `"glob" name`
+
+    Must be "glob".
+
+  - `?bool enabled`
+
+    Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+  - `?PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+  - `?Type type`
+
+### Beta Managed Agents Grep Tool Config
+
+- `BetaManagedAgentsGrepToolConfig`
+
+  - `bool enabled`
+
+  - `"grep" name`
+
+  - `PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+  - `"grep" type`
+
+### Beta Managed Agents Grep Tool Config Params
+
+- `BetaManagedAgentsGrepToolConfigParams`
+
+  - `"grep" name`
+
+    Must be "grep".
+
+  - `?bool enabled`
+
+    Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+  - `?PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+  - `?Type type`
+
+### Beta Managed Agents MCP Server URL Definition
+
+- `BetaManagedAgentsMCPServerURLDefinition`
+
+  - `string name`
+
+  - `Type type`
+
+  - `string url`
+
+### Beta Managed Agents MCP Tool Config
+
+- `BetaManagedAgentsMCPToolConfig`
+
+  - `bool enabled`
+
+  - `string name`
+
+  - `PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+### Beta Managed Agents MCP Tool Config Params
+
+- `BetaManagedAgentsMCPToolConfigParams`
+
+  - `string name`
+
+    Name of the MCP tool to configure. 1-128 characters.
+
+  - `?bool enabled`
+
+    Whether this tool is enabled. Overrides the `default_config` setting.
+
+  - `?PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+### Beta Managed Agents MCP Toolset
+
+- `BetaManagedAgentsMCPToolset`
+
+  - `list<BetaManagedAgentsMCPToolConfig> configs`
+
+  - `BetaManagedAgentsMCPToolsetDefaultConfig defaultConfig`
+
+    Resolved default configuration for all tools from an MCP server.
+
+  - `string mcpServerName`
+
+  - `Type type`
+
+### Beta Managed Agents MCP Toolset Default Config
+
+- `BetaManagedAgentsMCPToolsetDefaultConfig`
+
+  - `bool enabled`
+
+  - `PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+### Beta Managed Agents MCP Toolset Default Config Params
+
+- `BetaManagedAgentsMCPToolsetDefaultConfigParams`
+
+  - `?bool enabled`
+
+    Whether tools are enabled by default. Defaults to true if not specified.
+
+  - `?PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+### Beta Managed Agents MCP Toolset Params
+
+- `BetaManagedAgentsMCPToolsetParams`
+
+  - `string mcpServerName`
+
+    Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
+
+  - `Type type`
+
+  - `?list<BetaManagedAgentsMCPToolConfigParams> configs`
+
+    Per-tool configuration overrides.
+
+  - `?BetaManagedAgentsMCPToolsetDefaultConfigParams defaultConfig`
+
+    Default configuration for all tools from an MCP server.
+
+### Beta Managed Agents Model
+
+- `BetaManagedAgentsModel`
+
+  - `"claude-fable-5-1"`
+
+    Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+  - `"claude-sonnet-5"`
+
+    High-performance model for coding and agents
+
+  - `"claude-fable-5"`
+
+    Next generation of intelligence for the hardest knowledge work and coding problems
+
+  - `"claude-opus-5"`
+
+    Powerful intelligence for long-running agents and coding
+
+  - `"claude-opus-4-8"`
+
+    Powerful intelligence for long-running agents and coding
+
+  - `"claude-opus-4-7"`
+
+    Powerful intelligence for long-running agents and coding
+
+  - `"claude-opus-4-6"`
+
+    Powerful intelligence for long-running agents and coding
+
+  - `"claude-sonnet-4-6"`
+
+    Best combination of speed and intelligence
+
+  - `"claude-haiku-4-5"`
+
+    Fastest model with near-frontier intelligence
+
+  - `"claude-haiku-4-5-20251001"`
+
+    Fastest model with near-frontier intelligence
+
+  - `"claude-opus-4-5"`
+
+    Powerful intelligence for long-running agents and coding
+
+  - `"claude-opus-4-5-20251101"`
+
+    Powerful intelligence for long-running agents and coding
+
+  - `"claude-sonnet-4-5"`
+
+    High-performance model for agents and coding
+
+  - `"claude-sonnet-4-5-20250929"`
+
+    High-performance model for agents and coding
+
+### Beta Managed Agents Model Config
+
+- `BetaManagedAgentsModelConfig`
+
+  - `BetaManagedAgentsModel id`
+
+    The model that will power your agent.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+  - `?Effort effort`
+
+    How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+  - `?string inferenceGeo`
+
+    Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
+  - `?Speed speed`
+
+    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+### Beta Managed Agents Model Config Params
+
+- `BetaManagedAgentsModelConfigParams`
+
+  - `BetaManagedAgentsModel id`
+
+    The model that will power your agent.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+  - `?Effort effort`
+
+    How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
+
+  - `?string inferenceGeo`
+
+    Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
+
+  - `?Speed speed`
+
+    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+### Beta Managed Agents Multiagent Coordinator
+
+- `BetaManagedAgentsMultiagentCoordinator`
+
+  - `list<Agent> agents`
+
+    Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+  - `Type type`
+
+### Beta Managed Agents Multiagent Coordinator Params
+
+- `BetaManagedAgentsMultiagentCoordinatorParams`
+
+  - `list<BetaManagedAgentsMultiagentRosterEntryParams> agents`
+
+    Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+  - `Type type`
+
+### Beta Managed Agents Multiagent Self Params
+
+- `BetaManagedAgentsMultiagentSelfParams`
+
+  - `Type type`
+
+### Beta Managed Agents Read Tool Config
+
+- `BetaManagedAgentsReadToolConfig`
+
+  - `bool enabled`
+
+  - `"read" name`
+
+  - `PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+  - `"read" type`
+
+### Beta Managed Agents Read Tool Config Params
+
+- `BetaManagedAgentsReadToolConfigParams`
+
+  - `"read" name`
+
+    Must be "read".
+
+  - `?bool enabled`
+
+    Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+  - `?PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+  - `?Type type`
+
+### Beta Managed Agents Session Thread Agent
+
+- `BetaManagedAgentsSessionThreadAgent`
+
+  - `string id`
+
+  - `?string description`
+
+  - `list<BetaManagedAgentsMCPServerURLDefinition> mcpServers`
+
+  - `BetaManagedAgentsModelConfig model`
+
+    Model identifier and configuration.
+
+  - `string name`
+
+  - `list<Skill> skills`
+
+  - `?string system`
+
+  - `list<Tool> tools`
+
+  - `Type type`
+
+  - `int version`
+
+### Beta Managed Agents Skill Params
+
+- `BetaManagedAgentsSkillParams`
+
+  - `BetaManagedAgentsAnthropicSkillParams`
+
+    - `string skillID`
+
+      Identifier of the Anthropic skill (e.g., "xlsx").
+
+    - `Type type`
+
+    - `?string version`
+
+      Version to pin. Defaults to latest if omitted.
+
+  - `BetaManagedAgentsCustomSkillParams`
+
+    - `string skillID`
+
+      Tagged ID of the custom skill (e.g., "skill_01XJ5...").
+
+    - `Type type`
+
+    - `?string version`
+
+      Version to pin. Defaults to latest if omitted.
+
+### Beta Managed Agents URL MCP Server Params
+
+- `BetaManagedAgentsURLMCPServerParams`
+
+  - `string name`
+
+    Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
+
+  - `Type type`
+
+  - `string url`
+
+    Endpoint URL for the MCP server.
+
+### Beta Managed Agents User Location
+
+- `BetaManagedAgentsUserLocation`
+
+  - `"approximate" type`
+
+    Location precision. Only "approximate" is supported.
+
+  - `?string city`
+
+    City name.
+
+  - `?string country`
+
+    Two-letter ISO 3166-1 country code, uppercase.
+
+  - `?string region`
+
+    Region or state name.
+
+  - `?string timezone`
+
+    IANA timezone identifier, e.g. "America/Los_Angeles".
+
+### Beta Managed Agents Web Fetch Tool Config
+
+- `BetaManagedAgentsWebFetchToolConfig`
+
+  - `bool enabled`
+
+  - `"web_fetch" name`
+
+  - `PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+  - `"web_fetch" type`
+
+  - `?list<string> allowedDomains`
+
+  - `?list<string> blockedDomains`
+
+  - `?int maxContentTokens`
+
+### Beta Managed Agents Web Fetch Tool Config Params
+
+- `BetaManagedAgentsWebFetchToolConfigParams`
+
+  - `"web_fetch" name`
+
+    Must be "web_fetch".
+
+  - `?list<string> allowedDomains`
+
+    Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
+
+  - `?list<string> blockedDomains`
+
+    Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
+
+  - `?bool enabled`
+
+    Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+  - `?int maxContentTokens`
+
+    Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
+
+  - `?PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+  - `?Type type`
+
+### Beta Managed Agents Web Search Tool Config
+
+- `BetaManagedAgentsWebSearchToolConfig`
+
+  - `bool enabled`
+
+  - `"web_search" name`
+
+  - `PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+  - `"web_search" type`
+
+  - `?list<string> allowedDomains`
+
+  - `?list<string> blockedDomains`
+
+  - `?BetaManagedAgentsUserLocation userLocation`
+
+    Approximate user location for search result localization.
+
+### Beta Managed Agents Web Search Tool Config Params
+
+- `BetaManagedAgentsWebSearchToolConfigParams`
+
+  - `"web_search" name`
+
+    Must be "web_search".
+
+  - `?list<string> allowedDomains`
+
+    Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
+
+  - `?list<string> blockedDomains`
+
+    Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
+
+  - `?bool enabled`
+
+    Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+  - `?PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+  - `?Type type`
+
+  - `?BetaManagedAgentsUserLocation userLocation`
+
+    Approximate user location for search result localization.
+
+### Beta Managed Agents Write Tool Config
+
+- `BetaManagedAgentsWriteToolConfig`
+
+  - `bool enabled`
+
+  - `"write" name`
+
+  - `PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+  - `"write" type`
+
+### Beta Managed Agents Write Tool Config Params
+
+- `BetaManagedAgentsWriteToolConfigParams`
+
+  - `"write" name`
+
+    Must be "write".
+
+  - `?bool enabled`
+
+    Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+  - `?PermissionPolicy permissionPolicy`
+
+    Permission policy for tool execution.
+
+  - `?Type type`
+
+## Agents › Versions
+
+### List Agent Versions
+
+`$client->beta->agents->versions->list(string agentID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<BetaManagedAgentsAgent>`
+
+**GET** `/v1/agents/{agent_id}/versions`
+
+List Agent Versions
+
+#### Parameters
+
+- `agentID: string`
+
+- `limit?:optional int`
+
+  Maximum results per page. Default 20, maximum 100.
+
+- `page?:optional string`
+
+  Opaque pagination cursor.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `BetaManagedAgentsAgent`
+
+  - `string id`
+
+  - `?\Datetime archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `\Datetime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?string description`
+
+  - `list<BetaManagedAgentsMCPServerURLDefinition> mcpServers`
+
+  - `array<string,string> metadata`
+
+  - `BetaManagedAgentsModelConfig model`
+
+    Model identifier and configuration.
+
+  - `?BetaManagedAgentsMultiagent multiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+  - `string name`
+
+  - `list<Skill> skills`
+
+  - `?string system`
+
+  - `list<Tool> tools`
+
+  - `Type type`
+
+  - `\Datetime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `int version`
+
+    The agent's current version. Starts at 1 and increments when the agent is modified.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$page = $client->beta->agents->versions->list(
+  'agent_011CZkYpogX7uDKUyvBTophP',
+  limit: 0,
+  page: 'page',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($page);
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "agent_011CZkYpogX7uDKUyvBTophP",
+      "archived_at": null,
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": "A general-purpose starter agent.",
+      "mcp_servers": [
+        {
+          "name": "example-mcp",
+          "type": "url",
+          "url": "https://example-server.modelcontextprotocol.io/sse"
+        }
+      ],
+      "metadata": {
+        "foo": "bar"
+      },
+      "model": {
+        "id": "claude-opus-5",
+        "effort": {
+          "type": "low"
+        },
+        "inference_geo": "inference_geo",
+        "speed": "standard"
+      },
+      "multiagent": {
+        "agents": [
+          {
+            "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+            "type": "agent",
+            "version": 1
+          }
+        ],
+        "type": "coordinator"
+      },
+      "name": "My First Agent",
+      "skills": [
+        {
+          "skill_id": "xlsx",
+          "type": "anthropic",
+          "version": "1"
+        },
+        {
+          "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+          "type": "custom",
+          "version": "2"
+        }
+      ],
+      "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+      "tools": [
+        {
+          "configs": [
+            {
+              "enabled": true,
+              "name": "bash",
+              "permission_policy": {
+                "type": "always_allow"
+              },
+              "type": "bash"
+            }
+          ],
+          "default_config": {
+            "enabled": true,
+            "permission_policy": {
+              "type": "always_ask"
+            }
+          },
+          "type": "agent_toolset_20260401"
+        }
+      ],
+      "type": "agent",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "version": 1
+    }
+  ],
+  "next_page": "next_page"
+}
+```
 
 ---
 

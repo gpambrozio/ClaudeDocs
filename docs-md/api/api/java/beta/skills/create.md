@@ -1,173 +1,196 @@
 # Create Skill
 
-Copy page
+`BetaSkill beta().skills().create(params, requestOptions = RequestOptions.none())`
 
-
-
-Java
-
-# Create Skill
-
-[SkillCreateResponse](api/beta/skills.md) beta().skills().create(SkillCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
-
-POST/v1/skills
+**POST** `/v1/skills`
 
 Create Skill
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `SkillCreateParams params`
 
-SkillCreateParams params
+  - `Optional<List<AnthropicBeta>> betas`
 
-
+    Optional header to specify the beta version(s) you want to use.
 
-Optional<List<AnthropicBeta>> betas
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
-Optional header to specify the beta version(s) you want to use.
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
 
-MESSAGE\_BATCHES\_2024\_09\_24("message-batches-2024-09-24")
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
-PROMPT\_CACHING\_2024\_07\_31("prompt-caching-2024-07-31")
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-COMPUTER\_USE\_2024\_10\_22("computer-use-2024-10-22")
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
 
-COMPUTER\_USE\_2025\_01\_24("computer-use-2025-01-24")
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
 
-PDFS\_2024\_09\_25("pdfs-2024-09-25")
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
 
-TOKEN\_COUNTING\_2024\_11\_01("token-counting-2024-11-01")
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
 
-TOKEN\_EFFICIENT\_TOOLS\_2025\_02\_19("token-efficient-tools-2025-02-19")
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
-OUTPUT\_128K\_2025\_02\_19("output-128k-2025-02-19")
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
-FILES\_API\_2025\_04\_14("files-api-2025-04-14")
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
 
-MCP\_CLIENT\_2025\_04\_04("mcp-client-2025-04-04")
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
 
-MCP\_CLIENT\_2025\_11\_20("mcp-client-2025-11-20")
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
 
-DEV\_FULL\_THINKING\_2025\_05\_14("dev-full-thinking-2025-05-14")
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-INTERLEAVED\_THINKING\_2025\_05\_14("interleaved-thinking-2025-05-14")
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
 
-CODE\_EXECUTION\_2025\_05\_22("code-execution-2025-05-22")
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
-EXTENDED\_CACHE\_TTL\_2025\_04\_11("extended-cache-ttl-2025-04-11")
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
-CONTEXT\_1M\_2025\_08\_07("context-1m-2025-08-07")
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-CONTEXT\_MANAGEMENT\_2025\_06\_27("context-management-2025-06-27")
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
-MODEL\_CONTEXT\_WINDOW\_EXCEEDED\_2025\_08\_26("model-context-window-exceeded-2025-08-26")
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
-SKILLS\_2025\_10\_02("skills-2025-10-02")
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
-OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
-USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
-MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
-CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
-THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
-FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
 
-AGENT\_MEMORY\_2026\_07\_22("agent-memory-2026-07-22")
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
-
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
-List<String> files
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
-Files to upload for the skill.
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
 
-
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
 
-Optional<String> displayTitle
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
 
-Display title for the skill.
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
 
-This is a human-readable label that is not included in the prompt sent to the model.
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
 
-##### ReturnsExpand Collapse
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
 
-class SkillCreateResponse:
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
 
-String id
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-Unique identifier for the skill.
+  - `List<String> files`
 
-The format and length of IDs may change over time.
+    Files to upload for the skill.
 
-String createdAt
+    All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
-ISO 8601 timestamp of when the skill was created.
+  - `Optional<String> displayName`
 
-
+    Human-readable, single-line label for the Skill. Maximum 255 characters.
+    Always set: derived from the SKILL.md frontmatter `name` when omitted at
+    creation. Not unique.
 
-Optional<String> displayTitle
+## Returns
 
-Display title for the skill.
+- `class BetaSkill:`
 
-This is a human-readable label that is not included in the prompt sent to the model.
+  - `String id`
 
-
+    Unique identifier for the skill.
 
-Optional<String> latestVersion
+    The format and length of IDs may change over time.
 
-The latest version identifier for the skill.
+  - `LocalDateTime createdAt`
 
-This represents the most recent version of the skill that has been created.
+    ISO 8601 timestamp of when the skill was created.
 
-
+    format: date-time
 
-String source
+  - `String displayName`
 
-Source of the skill.
+    Human-readable, single-line label for the Skill. Maximum 255 characters.
+    Always set: derived from the SKILL.md frontmatter `name` when omitted at
+    creation. Not unique.
 
-This may be one of the following values:
+  - `String latestVersionId`
 
-- `"custom"`: the skill was created by a user
-- `"anthropic"`: the skill was created by Anthropic
+    ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
 
-
+  - `BetaSkillSource source`
 
-String type
+    Where the Skill comes from.
 
-Object type.
+    Possible values:
 
-For Skills, this is always `"skill"`.
+    * `"custom"`: authored by the platform user; private to their workspace
+    * `"anthropic"`: published by Anthropic; shared and read-only
+    * `"anthropic_example"`: Anthropic-published sample Skill
+    * `"plugin"`: resolved from an installed plugin
 
-String updatedAt
+    - `Type type`
 
-ISO 8601 timestamp of when the skill was last updated.
+      Where the Skill comes from.
 
-Create Skill
+      Possible values:
 
-Java
+      * `"custom"`: authored by the platform user; private to their workspace
+      * `"anthropic"`: published by Anthropic; shared and read-only
+      * `"anthropic_example"`: Anthropic-published sample Skill
+      * `"plugin"`: resolved from an installed plugin
 
-```shiki
+      - `CUSTOM("custom")`
+
+      - `ANTHROPIC("anthropic")`
+
+      - `ANTHROPIC_EXAMPLE("anthropic_example")`
+
+      - `PLUGIN("plugin")`
+
+  - `JsonValue type = "skill"`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
+
+  - `LocalDateTime updatedAt`
+
+    ISO 8601 timestamp of when the skill was last updated.
+
+    format: date-time
+
+## Example
+
+```java
 package com.anthropic.example;
 
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.skills.BetaSkill;
 import com.anthropic.models.beta.skills.SkillCreateParams;
-import com.anthropic.models.beta.skills.SkillCreateResponse;
 import java.io.ByteArrayInputStream;
 
 public final class Main {
@@ -179,41 +202,23 @@ public final class Main {
         SkillCreateParams params = SkillCreateParams.builder()
             .addFile(new ByteArrayInputStream("Example data".getBytes()))
             .build();
-        SkillCreateResponse skill = client.beta().skills().create(params);
+        BetaSkill betaSkill = client.beta().skills().create(params);
     }
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "skill_01JAbcdefghijklmnopqrstuvw",
   "created_at": "2024-10-30T23:58:27.427722Z",
-  "display_title": "My Custom Skill",
-  "latest_version": "1759178010641129",
-  "source": "custom",
-  "type": "type",
-  "updated_at": "2024-10-30T23:58:27.427722Z"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "display_title": "My Custom Skill",
-  "latest_version": "1759178010641129",
-  "source": "custom",
-  "type": "type",
+  "display_name": "display_name",
+  "latest_version_id": "latest_version_id",
+  "source": {
+    "type": "custom"
+  },
+  "type": "skill",
   "updated_at": "2024-10-30T23:58:27.427722Z"
 }
 ```

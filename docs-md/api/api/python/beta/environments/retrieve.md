@@ -1,261 +1,255 @@
 # Get Environment
 
-Copy page
+`beta.environments.retrieve(environment_id, **kwargs)  -> BetaEnvironment`
 
-
-
-Python
-
-# Get Environment
-
-beta.environments.retrieve(strenvironment\_id, EnvironmentRetrieveParams\*\*kwargs)  -> [BetaEnvironment](api/beta/environments.md)
-
-GET/v1/environments/{environment\_id}
+**GET** `/v1/environments/{environment_id}`
 
 Retrieve a specific environment by ID.
 
-##### ParametersExpand Collapse
+## Parameters
 
-environment\_id: str
+- `environment_id: str`
 
-
+- `betas: Optional[List[AnthropicBetaParam]]`
 
-betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
+  Optional header to specify the beta version(s) you want to use.
 
-Optional header to specify the beta version(s) you want to use.
+  - `str`
 
-One of the following:
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
 
-str
+    - `"message-batches-2024-09-24"`
 
-
+    - `"prompt-caching-2024-07-31"`
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]
+    - `"computer-use-2024-10-22"`
 
-One of the following:
+    - `"computer-use-2025-01-24"`
 
-"message-batches-2024-09-24"
+    - `"pdfs-2024-09-25"`
 
-"prompt-caching-2024-07-31"
+    - `"token-counting-2024-11-01"`
 
-"computer-use-2024-10-22"
+    - `"token-efficient-tools-2025-02-19"`
 
-"computer-use-2025-01-24"
+    - `"output-128k-2025-02-19"`
 
-"pdfs-2024-09-25"
+    - `"files-api-2025-04-14"`
 
-"token-counting-2024-11-01"
+    - `"mcp-client-2025-04-04"`
 
-"token-efficient-tools-2025-02-19"
+    - `"mcp-client-2025-11-20"`
 
-"output-128k-2025-02-19"
+    - `"dev-full-thinking-2025-05-14"`
 
-"files-api-2025-04-14"
+    - `"interleaved-thinking-2025-05-14"`
 
-"mcp-client-2025-04-04"
+    - `"code-execution-2025-05-22"`
 
-"mcp-client-2025-11-20"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"dev-full-thinking-2025-05-14"
+    - `"context-1m-2025-08-07"`
 
-"interleaved-thinking-2025-05-14"
+    - `"context-management-2025-06-27"`
 
-"code-execution-2025-05-22"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"skills-2025-10-02"`
 
-"context-1m-2025-08-07"
+    - `"fast-mode-2026-02-01"`
 
-"context-management-2025-06-27"
+    - `"output-300k-2026-03-24"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"user-profiles-2026-03-24"`
 
-"skills-2025-10-02"
+    - `"user-profiles-2026-08-18"`
 
-"fast-mode-2026-02-01"
+    - `"advisor-tool-2026-03-01"`
 
-"output-300k-2026-03-24"
+    - `"managed-agents-2026-04-01"`
 
-"user-profiles-2026-03-24"
+    - `"cache-diagnosis-2026-04-07"`
 
-"advisor-tool-2026-03-01"
+    - `"dreaming-2026-04-21"`
 
-"managed-agents-2026-04-01"
+    - `"thinking-token-count-2026-05-13"`
 
-"cache-diagnosis-2026-04-07"
+    - `"server-side-fallback-2026-06-01"`
 
-"thinking-token-count-2026-05-13"
+    - `"server-side-fallback-2026-07-01"`
 
-"server-side-fallback-2026-06-01"
+    - `"fallback-credit-2026-06-01"`
 
-"fallback-credit-2026-06-01"
+    - `"fallback-credit-2026-07-01"`
 
-"agent-memory-2026-07-22"
+    - `"agent-memory-2026-07-22"`
 
-##### ReturnsExpand Collapse
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-
+    - `"compact-2026-01-12"`
 
-class BetaEnvironment: …
+    - `"computer-use-2025-11-24"`
 
-Unified Environment resource for both cloud and self-hosted environments.
+    - `"mcp-tunnels-2026-06-22"`
 
-id: str
+    - `"structured-outputs-2025-11-13"`
 
-Environment identifier (e.g., 'env\_...')
+    - `"task-budgets-2026-03-13"`
 
-archived\_at: Optional[str]
+    - `"thinking-display-updates-2026-08-18"`
 
-RFC 3339 timestamp when environment was archived, or null if not archived
+    - `"ce-user-management-2026-07-13"`
 
-
+    - `"mid-conversation-output-config-2026-07-01"`
 
-config: Config
+    - `"thinking-binding-controls-2026-08-01"`
 
-Environment configuration (either Anthropic Cloud or self-hosted)
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-One of the following:
+## Returns
 
-
+- `class BetaEnvironment: …`
 
-class BetaCloudConfig: …
+  Unified Environment resource for both cloud and self-hosted environments.
 
-`cloud` environment configuration.
+  - `id: str`
 
-
+    Environment identifier (e.g., 'env_...')
 
-networking: Networking
+  - `archived_at: Optional[str]`
 
-Network configuration policy.
+    RFC 3339 timestamp when environment was archived, or null if not archived
 
-One of the following:
+  - `config: Config`
 
-
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-class BetaUnrestrictedNetwork: …
+    - `class BetaCloudConfig: …`
 
-Unrestricted network access.
+      `cloud` environment configuration.
 
-type: Literal["unrestricted"]
+      - `networking: Networking`
 
-Network policy type
+        Network configuration policy.
 
-
+        - `class BetaUnrestrictedNetwork: …`
 
-class BetaLimitedNetwork: …
+          Unrestricted network access.
 
-Limited network access.
+          - `type: Literal["unrestricted"]`
 
-allow\_mcp\_servers: bool
+            Network policy type
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+        - `class BetaLimitedNetwork: …`
 
-allow\_package\_managers: bool
+          Limited network access.
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+          - `allow_mcp_servers: bool`
 
-allowed\_hosts: List[str]
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-Specifies domains the container can reach.
+          - `allow_package_managers: bool`
 
-type: Literal["limited"]
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-Network policy type
+          - `allowed_hosts: List[str]`
 
-
+            Specifies domains the container can reach.
 
-packages: [BetaPackages](api/beta/environments.md)
+          - `type: Literal["limited"]`
 
-Package manager configuration.
+            Network policy type
 
-apt: List[str]
+      - `packages: BetaPackages`
 
-Ubuntu/Debian packages to install
+        Package manager configuration.
 
-cargo: List[str]
+        - `apt: List[str]`
 
-Rust packages to install
+          Ubuntu/Debian packages to install
 
-gem: List[str]
+        - `cargo: List[str]`
 
-Ruby packages to install
+          Rust packages to install
 
-go: List[str]
+        - `gem: List[str]`
 
-Go packages to install
+          Ruby packages to install
 
-npm: List[str]
+        - `go: List[str]`
 
-Node.js packages to install
+          Go packages to install
 
-pip: List[str]
+        - `npm: List[str]`
 
-Python packages to install
+          Node.js packages to install
 
-type: Optional[Literal["packages"]]
+        - `pip: List[str]`
 
-Package configuration type
+          Python packages to install
 
-type: Literal["cloud"]
+        - `type: Optional[Literal["packages"]]`
 
-Environment type
+          Package configuration type
 
-
+          default: packages
 
-class BetaSelfHostedConfig: …
+      - `type: Literal["cloud"]`
 
-Configuration for self-hosted environments.
+        Environment type
 
-type: Literal["self\_hosted"]
+    - `class BetaSelfHostedConfig: …`
 
-Environment type
+      Configuration for self-hosted environments.
 
-created\_at: str
+      - `type: Literal["self_hosted"]`
 
-RFC 3339 timestamp when environment was created
+        Environment type
 
-description: str
+  - `created_at: str`
 
-User-provided description for the environment
+    RFC 3339 timestamp when environment was created
 
-metadata: Dict[str, str]
+  - `description: Optional[str]`
 
-User-provided metadata key-value pairs
+    User-provided description for the environment; null when unset
 
-name: str
+  - `metadata: Dict[str, str]`
 
-Human-readable name for the environment
+    User-provided metadata key-value pairs
 
-type: Literal["environment"]
+  - `name: str`
 
-The type of object (always 'environment')
+    Human-readable name for the environment
 
-updated\_at: str
+  - `type: Literal["environment"]`
 
-RFC 3339 timestamp when environment was last updated
+    The type of object (always 'environment')
 
-
+    default: environment
 
-scope: Optional[Literal["organization", "account"]]
+  - `updated_at: str`
 
-The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+    RFC 3339 timestamp when environment was last updated
 
-One of the following:
+  - `scope: Optional[Literal["organization", "account"]]`
 
-"organization"
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-"account"
+    - `"organization"`
 
-Get Environment
+    - `"account"`
 
-Python
+## Example
 
-```shiki
+```python
 import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
 )
 beta_environment = client.beta.environments.retrieve(
     environment_id="env_011CZkZ9X2dpNyB7HsEFoRfW",
@@ -263,64 +257,9 @@ beta_environment = client.beta.environments.retrieve(
 print(beta_environment.id)
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
-  "archived_at": null,
-  "config": {
-    "networking": {
-      "allow_mcp_servers": false,
-      "allow_package_managers": true,
-      "allowed_hosts": [
-        "api.example.com"
-      ],
-      "type": "limited"
-    },
-    "packages": {
-      "apt": [
-        "string"
-      ],
-      "cargo": [
-        "string"
-      ],
-      "gem": [
-        "string"
-      ],
-      "go": [
-        "string"
-      ],
-      "npm": [
-        "string"
-      ],
-      "pip": [
-        "pandas",
-        "numpy"
-      ],
-      "type": "packages"
-    },
-    "type": "cloud"
-  },
-  "created_at": "2026-03-15T10:00:00Z",
-  "description": "Python environment with data-analysis packages.",
-  "metadata": {},
-  "name": "python-data-analysis",
-  "type": "environment",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "scope": "organization"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
   "archived_at": null,

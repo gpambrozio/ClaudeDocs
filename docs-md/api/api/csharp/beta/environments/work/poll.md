@@ -1,196 +1,212 @@
 # Poll for Work
 
-Copy page
+`BetaSelfHostedWork? Beta.Environments.Work.Poll(parameters, cancellationToken = default)`
 
-
-
-C#
-
-# Poll for Work
-
-[BetaSelfHostedWork](api/beta/environments/work.md)? Beta.Environments.Work.Poll(WorkPollParamsparameters, CancellationTokencancellationToken = default)
-
-GET/v1/environments/{environment\_id}/work/poll
+**GET** `/v1/environments/{environment_id}/work/poll`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Long poll for work items in the queue.
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `WorkPollParams parameters`
 
-WorkPollParams parameters
+  - `required string environmentID`
 
-required string environmentID
+    Path param
 
-Path param
+  - `long? blockMs`
 
-Long? blockMs
+    Query param: How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
 
-Query param: How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
+    minimum: 1
 
-Long? reclaimOlderThanMs
+  - `long? reclaimOlderThanMs`
 
-Query param: Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
+    Query param: Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
 
-
+    minimum: 1
 
-IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
+  - `IReadOnlyList<AnthropicBeta> betas`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-"message-batches-2024-09-24"MessageBatches2024\_09\_24
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
-"prompt-caching-2024-07-31"PromptCaching2024\_07\_31
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
 
-"computer-use-2024-10-22"ComputerUse2024\_10\_22
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
 
-"computer-use-2025-01-24"ComputerUse2025\_01\_24
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
 
-"pdfs-2024-09-25"Pdfs2024\_09\_25
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
 
-"token-counting-2024-11-01"TokenCounting2024\_11\_01
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
 
-"token-efficient-tools-2025-02-19"TokenEfficientTools2025\_02\_19
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
 
-"output-128k-2025-02-19"Output128k2025\_02\_19
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
 
-"files-api-2025-04-14"FilesApi2025\_04\_14
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
 
-"mcp-client-2025-04-04"McpClient2025\_04\_04
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
 
-"mcp-client-2025-11-20"McpClient2025\_11\_20
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
 
-"dev-full-thinking-2025-05-14"DevFullThinking2025\_05\_14
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
 
-"interleaved-thinking-2025-05-14"InterleavedThinking2025\_05\_14
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
 
-"code-execution-2025-05-22"CodeExecution2025\_05\_22
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
 
-"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025\_04\_11
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
 
-"context-1m-2025-08-07"Context1m2025\_08\_07
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
 
-"context-management-2025-06-27"ContextManagement2025\_06\_27
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
 
-"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025\_08\_26
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-"skills-2025-10-02"Skills2025\_10\_02
+    - `Skills2025_10_02("skills-2025-10-02")`
 
-"fast-mode-2026-02-01"FastMode2026\_02\_01
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
 
-"output-300k-2026-03-24"Output300k2026\_03\_24
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
 
-"user-profiles-2026-03-24"UserProfiles2026\_03\_24
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
 
-"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
-"managed-agents-2026-04-01"ManagedAgents2026\_04\_01
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
-"cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
 
-"thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
 
-"server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
 
-"fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
 
-"agent-memory-2026-07-22"AgentMemory2026\_07\_22
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
 
-string anthropicWorkerID
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
 
-Header param: Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
 
-##### ReturnsExpand Collapse
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
 
-
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
 
-class BetaSelfHostedWork:
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-Work resource representing a unit of work in a self-hosted environment.
+    - `Compact2026_01_12("compact-2026-01-12")`
 
-Work items are queued when sessions are created or when long-dormant sessions
-receive new messages. The environment worker polls for work to execute in a
-self-hosted sandbox.
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
 
-required string ID
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
 
-Work identifier (e.g., 'work\_...')
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
 
-required string? AcknowledgedAt
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
 
-RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
 
-required string CreatedAt
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
 
-RFC 3339 timestamp when work was created
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
 
-required [BetaSessionWorkData](api/beta/environments/work.md) Data
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-The actual work to be performed
+  - `string anthropicWorkerID`
 
-required string ID
+    Header param: Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
 
-Session identifier (e.g., 'session\_...')
+## Returns
 
-JsonElement Type "session"constant
+- `class BetaSelfHostedWork:`
 
-Type of work data
+  Work resource representing a unit of work in a self-hosted environment.
 
-required string EnvironmentID
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
 
-Environment identifier this work belongs to (e.g., `env_...`)
+  - `required string ID`
 
-required string? LatestHeartbeatAt
+    Work identifier (e.g., 'work_...')
 
-RFC 3339 timestamp of the most recent heartbeat
+  - `required string? AcknowledgedAt`
 
-required IReadOnlyDictionary<string, string> Metadata
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-User-provided metadata key-value pairs associated with this work item
+  - `required string CreatedAt`
 
-required string? StartedAt
+    RFC 3339 timestamp when work was created
 
-RFC 3339 timestamp when work execution started
+  - `required BetaSessionWorkData Data`
 
-
+    The actual work to be performed
 
-required State State
+    - `required string ID`
 
-Current state of the work item
+      Session identifier (e.g., 'session_...')
 
-One of the following:
+    - `JsonElement Type = "session"`
 
-"queued"Queued
+      Type of work data
 
-"starting"Starting
+  - `required string EnvironmentID`
 
-"active"Active
+    Environment identifier this work belongs to (e.g., `env_...`)
 
-"stopping"Stopping
+  - `required string? LatestHeartbeatAt`
 
-"stopped"Stopped
+    RFC 3339 timestamp of the most recent heartbeat
 
-required string? StopRequestedAt
+  - `required IReadOnlyDictionary<string, string> Metadata`
 
-RFC 3339 timestamp when stop was requested
+    User-provided metadata key-value pairs associated with this work item
 
-required string? StoppedAt
+  - `required string? Secret`
 
-RFC 3339 timestamp when work execution stopped
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
-JsonElement Type "work"constant
+  - `required string? StartedAt`
 
-The type of object (always 'work')
+    RFC 3339 timestamp when work execution started
 
-Poll for Work
+  - `required State State`
 
-C#
+    Current state of the work item
 
-```shiki
+    - `Queued("queued")`
+
+    - `Starting("starting")`
+
+    - `Active("active")`
+
+    - `Stopping("stopping")`
+
+    - `Stopped("stopped")`
+
+  - `required string? StopRequestedAt`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `required string? StoppedAt`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `JsonElement Type = "work"`
+
+    The type of object (always 'work')
+
+## Example
+
+```csharp
 WorkPollParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
@@ -201,11 +217,9 @@ var betaSelfHostedWork = await client.Beta.Environments.Work.Poll(parameters);
 Console.WriteLine(betaSelfHostedWork);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "id",
   "acknowledged_at": "acknowledged_at",
@@ -219,34 +233,7 @@ Response 200
   "metadata": {
     "foo": "string"
   },
-  "started_at": "started_at",
-  "state": "queued",
-  "stop_requested_at": "stop_requested_at",
-  "stopped_at": "stopped_at",
-  "type": "work"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "id",
-  "acknowledged_at": "acknowledged_at",
-  "created_at": "created_at",
-  "data": {
-    "id": "id",
-    "type": "session"
-  },
-  "environment_id": "environment_id",
-  "latest_heartbeat_at": "latest_heartbeat_at",
-  "metadata": {
-    "foo": "string"
-  },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",

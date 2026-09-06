@@ -1,16 +1,8 @@
 # Delete a Message Batch
 
-Copy page
+`DeletedMessageBatch messages().batches().delete(params = BatchDeleteParams.none(), requestOptions = RequestOptions.none())`
 
-
-
-Java
-
-# Delete a Message Batch
-
-[DeletedMessageBatch](api/messages/batches.md) messages().batches().delete(BatchDeleteParamsparams = BatchDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
-
-DELETE/v1/messages/batches/{message\_batch\_id}
+**DELETE** `/v1/messages/batches/{message_batch_id}`
 
 Delete a Message Batch.
 
@@ -18,39 +10,31 @@ Message Batches can only be deleted once they've finished processing. If you'd l
 
 Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `BatchDeleteParams params`
 
-BatchDeleteParams params
+  - `Optional<String> messageBatchId`
 
-Optional<String> messageBatchId
+    ID of the Message Batch.
 
-ID of the Message Batch.
+## Returns
 
-##### ReturnsExpand Collapse
+- `class DeletedMessageBatch:`
 
-
+  - `String id`
 
-class DeletedMessageBatch:
+    ID of the Message Batch.
 
-String id
+  - `JsonValue type = "message_batch_deleted"`
 
-ID of the Message Batch.
+    Deleted object type.
 
-
+    For Message Batches, this is always `"message_batch_deleted"`.
 
-JsonValue; type "message\_batch\_deleted"constant"message\_batch\_deleted"constant
+## Example
 
-Deleted object type.
-
-For Message Batches, this is always `"message_batch_deleted"`.
-
-Delete a Message Batch
-
-Java
-
-```shiki
+```java
 package com.anthropic.example;
 
 import com.anthropic.client.AnthropicClient;
@@ -69,24 +53,9 @@ public final class Main {
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "type": "message_batch_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
   "type": "message_batch_deleted"

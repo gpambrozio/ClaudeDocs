@@ -1,168 +1,182 @@
 # Create a memory
 
-Copy page
+`beta.memory_stores.memories.create(memory_store_id, **kwargs) -> BetaManagedAgentsMemory`
 
-
-
-Ruby
-
-# Create a memory
-
-beta.memory\_stores.memories.create(memory\_store\_id, \*\*kwargs) -> [BetaManagedAgentsMemory](api/beta/memory_stores/memories.md) { id, content\_sha256, content\_size\_bytes, 7 more }
-
-POST/v1/memory\_stores/{memory\_store\_id}/memories
+**POST** `/v1/memory_stores/{memory_store_id}/memories`
 
 Create a memory
 
-##### ParametersExpand Collapse
+## Parameters
 
-memory\_store\_id: String
+- `memory_store_id: String`
 
-content: String
+- `content: String`
 
-UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required; pass `""` explicitly to create an empty memory.
+  UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required; pass `""` explicitly to create an empty memory.
 
-path: String
+- `path: String`
 
-Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, and must be NFC-normalized. Paths are case-sensitive.
+  Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, or the Unicode line and paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are case-sensitive.
 
-
+  minLength: 2, maxLength: 1024
 
-view: [BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)
+- `view: BetaManagedAgentsMemoryView`
 
-Query parameter for view
+  Query parameter for view
 
-One of the following:
+  - `:basic`
 
-:basic
+  - `:full`
 
-:full
+- `betas: Array[AnthropicBeta]`
 
-
+  Optional header to specify the beta version(s) you want to use.
 
-betas: Array[[AnthropicBeta](api/beta.md)]
+  - `String = String`
 
-Optional header to specify the beta version(s) you want to use.
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
 
-One of the following:
+    - `:"message-batches-2024-09-24"`
 
-String = String
+    - `:"prompt-caching-2024-07-31"`
 
-
+    - `:"computer-use-2024-10-22"`
 
-AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more
+    - `:"computer-use-2025-01-24"`
 
-One of the following:
+    - `:"pdfs-2024-09-25"`
 
-:"message-batches-2024-09-24"
+    - `:"token-counting-2024-11-01"`
 
-:"prompt-caching-2024-07-31"
+    - `:"token-efficient-tools-2025-02-19"`
 
-:"computer-use-2024-10-22"
+    - `:"output-128k-2025-02-19"`
 
-:"computer-use-2025-01-24"
+    - `:"files-api-2025-04-14"`
 
-:"pdfs-2024-09-25"
+    - `:"mcp-client-2025-04-04"`
 
-:"token-counting-2024-11-01"
+    - `:"mcp-client-2025-11-20"`
 
-:"token-efficient-tools-2025-02-19"
+    - `:"dev-full-thinking-2025-05-14"`
 
-:"output-128k-2025-02-19"
+    - `:"interleaved-thinking-2025-05-14"`
 
-:"files-api-2025-04-14"
+    - `:"code-execution-2025-05-22"`
 
-:"mcp-client-2025-04-04"
+    - `:"extended-cache-ttl-2025-04-11"`
 
-:"mcp-client-2025-11-20"
+    - `:"context-1m-2025-08-07"`
 
-:"dev-full-thinking-2025-05-14"
+    - `:"context-management-2025-06-27"`
 
-:"interleaved-thinking-2025-05-14"
+    - `:"model-context-window-exceeded-2025-08-26"`
 
-:"code-execution-2025-05-22"
+    - `:"skills-2025-10-02"`
 
-:"extended-cache-ttl-2025-04-11"
+    - `:"fast-mode-2026-02-01"`
 
-:"context-1m-2025-08-07"
+    - `:"output-300k-2026-03-24"`
 
-:"context-management-2025-06-27"
+    - `:"user-profiles-2026-03-24"`
 
-:"model-context-window-exceeded-2025-08-26"
+    - `:"user-profiles-2026-08-18"`
 
-:"skills-2025-10-02"
+    - `:"advisor-tool-2026-03-01"`
 
-:"fast-mode-2026-02-01"
+    - `:"managed-agents-2026-04-01"`
 
-:"output-300k-2026-03-24"
+    - `:"cache-diagnosis-2026-04-07"`
 
-:"user-profiles-2026-03-24"
+    - `:"dreaming-2026-04-21"`
 
-:"advisor-tool-2026-03-01"
+    - `:"thinking-token-count-2026-05-13"`
 
-:"managed-agents-2026-04-01"
+    - `:"server-side-fallback-2026-06-01"`
 
-:"cache-diagnosis-2026-04-07"
+    - `:"server-side-fallback-2026-07-01"`
 
-:"thinking-token-count-2026-05-13"
+    - `:"fallback-credit-2026-06-01"`
 
-:"server-side-fallback-2026-06-01"
+    - `:"fallback-credit-2026-07-01"`
 
-:"fallback-credit-2026-06-01"
+    - `:"agent-memory-2026-07-22"`
 
-:"agent-memory-2026-07-22"
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
-##### ReturnsExpand Collapse
+    - `:"compact-2026-01-12"`
 
-
+    - `:"computer-use-2025-11-24"`
 
-class BetaManagedAgentsMemory { id, content\_sha256, content\_size\_bytes, 7 more } 
+    - `:"mcp-tunnels-2026-06-22"`
 
-A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+    - `:"structured-outputs-2025-11-13"`
 
-id: String
+    - `:"task-budgets-2026-03-13"`
 
-Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+    - `:"thinking-display-updates-2026-08-18"`
 
-content\_sha256: String
+    - `:"ce-user-management-2026-07-13"`
 
-Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
+    - `:"mid-conversation-output-config-2026-07-01"`
 
-content\_size\_bytes: Integer
+    - `:"thinking-binding-controls-2026-08-01"`
 
-Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
 
-created\_at: Time
+## Returns
 
-A timestamp in RFC 3339 format
+- `class BetaManagedAgentsMemory`
 
-memory\_store\_id: String
+  A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
-ID of the memory store this memory belongs to (a `memstore_...` value).
+  - `id: String`
 
-memory\_version\_id: String
+    Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
 
-ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+  - `content_sha256: String`
 
-path: String
+    Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
 
-Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
+  - `content_size_bytes: Integer`
 
-type: :memory
+    Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
-updated\_at: Time
+    format: int32
 
-A timestamp in RFC 3339 format
+  - `created_at: Time`
 
-content: String
+    A timestamp in RFC 3339 format
 
-The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+    format: date-time
 
-Create a memory
+  - `memory_store_id: String`
 
-Ruby
+    ID of the memory store this memory belongs to (a `memstore_...` value).
 
-```shiki
+  - `memory_version_id: String`
+
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+
+  - `path: String`
+
+    Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
+
+  - `type: :memory`
+
+  - `updated_at: Time`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `content: String`
+
+    The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+
+## Example
+
+```ruby
 require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
@@ -172,32 +186,9 @@ beta_managed_agents_memory = anthropic.beta.memory_stores.memories.create("memor
 puts(beta_managed_agents_memory)
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "id",
-  "content_sha256": "content_sha256",
-  "content_size_bytes": 0,
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "memory_store_id": "memory_store_id",
-  "memory_version_id": "memory_version_id",
-  "path": "path",
-  "type": "memory",
-  "updated_at": "2019-12-27T18:11:19.117Z",
-  "content": "content"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "id",
   "content_sha256": "content_sha256",

@@ -1,14 +1,6 @@
 # Delete a Message Batch
 
-Copy page
-
-
-
-cURL
-
-# Delete a Message Batch
-
-DELETE/v1/messages/batches/{message\_batch\_id}
+**DELETE** `/v1/messages/batches/{message_batch_id}`
 
 Delete a Message Batch.
 
@@ -16,61 +8,40 @@ Message Batches can only be deleted once they've finished processing. If you'd l
 
 Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-##### Path parameters
+## Path parameters
 
-message\_batch\_id: string
+- `message_batch_id: string`
 
-ID of the Message Batch.
+  ID of the Message Batch.
 
-##### Returns
+## Returns
 
-
+- `DeletedMessageBatch object`
 
-DeletedMessageBatch object{ id, type }
+  - `id: string`
 
-id: string
+    ID of the Message Batch.
 
-ID of the Message Batch.
+  - `type: "message_batch_deleted"`
 
-
+    Deleted object type.
 
-type: "message\_batch\_deleted"
+    For Message Batches, this is always `"message_batch_deleted"`.
 
-Deleted object type.
+    default: message_batch_deleted
 
-For Message Batches, this is always `"message_batch_deleted"`.
+## Example
 
-defaultmessage\_batch\_deleted
-
-Delete a Message Batch
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "type": "message_batch_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
   "type": "message_batch_deleted"

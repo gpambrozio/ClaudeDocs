@@ -1,88 +1,80 @@
 # List Environments
 
-Copy page
+`$client->beta->environments->list(?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<BetaEnvironment>`
 
-
-
-PHP
-
-# List Environments
-
-$client->beta->environments->list(?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[BetaEnvironment](api/beta/environments.md)>
-
-GET/v1/environments
+**GET** `/v1/environments`
 
 List environments with pagination support.
 
-##### ParametersExpand Collapse
+## Parameters
 
-includeArchived?:optional bool
+- `includeArchived?:optional bool`
 
-Include archived environments in the response
+  Include archived environments in the response
 
-limit?:optional int
+  default: false
 
-Maximum number of environments to return
+- `limit?:optional int`
 
-page?:optional string
+  Maximum number of environments to return
 
-Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
+  default: 20
 
-betas?:optional list<AnthropicBeta>
+- `page?:optional string`
 
-Optional header to specify the beta version(s) you want to use.
+  Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
 
-##### ReturnsExpand Collapse
+- `betas?:optional list<AnthropicBeta>`
 
-
+  Optional header to specify the beta version(s) you want to use.
 
-[BetaEnvironment](api/beta/environments.md)
+## Returns
 
-string id
+- `BetaEnvironment`
 
-Environment identifier (e.g., 'env\_...')
+  - `string id`
 
-?string archivedAt
+    Environment identifier (e.g., 'env_...')
 
-RFC 3339 timestamp when environment was archived, or null if not archived
+  - `?string archivedAt`
 
-Config config
+    RFC 3339 timestamp when environment was archived, or null if not archived
 
-Environment configuration (either Anthropic Cloud or self-hosted)
+  - `Config config`
 
-string createdAt
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-RFC 3339 timestamp when environment was created
+  - `string createdAt`
 
-string description
+    RFC 3339 timestamp when environment was created
 
-User-provided description for the environment
+  - `?string description`
 
-array<string,string> metadata
+    User-provided description for the environment; null when unset
 
-User-provided metadata key-value pairs
+  - `array<string,string> metadata`
 
-string name
+    User-provided metadata key-value pairs
 
-Human-readable name for the environment
+  - `string name`
 
-"environment" type
+    Human-readable name for the environment
 
-The type of object (always 'environment')
+  - `"environment" type`
 
-string updatedAt
+    The type of object (always 'environment')
 
-RFC 3339 timestamp when environment was last updated
+  - `string updatedAt`
 
-?Scope scope
+    RFC 3339 timestamp when environment was last updated
 
-The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+  - `?Scope scope`
 
-List Environments
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-PHP
+## Example
 
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -93,75 +85,15 @@ $page = $client->beta->environments->list(
   includeArchived: true,
   limit: 1,
   page: 'page',
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($page);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
-      "archived_at": null,
-      "config": {
-        "networking": {
-          "allow_mcp_servers": false,
-          "allow_package_managers": true,
-          "allowed_hosts": [
-            "api.example.com"
-          ],
-          "type": "limited"
-        },
-        "packages": {
-          "apt": [
-            "string"
-          ],
-          "cargo": [
-            "string"
-          ],
-          "gem": [
-            "string"
-          ],
-          "go": [
-            "string"
-          ],
-          "npm": [
-            "string"
-          ],
-          "pip": [
-            "pandas",
-            "numpy"
-          ],
-          "type": "packages"
-        },
-        "type": "cloud"
-      },
-      "created_at": "2026-03-15T10:00:00Z",
-      "description": "Python environment with data-analysis packages.",
-      "metadata": {},
-      "name": "python-data-analysis",
-      "type": "environment",
-      "updated_at": "2026-03-15T10:00:00Z",
-      "scope": "organization"
-    }
-  ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

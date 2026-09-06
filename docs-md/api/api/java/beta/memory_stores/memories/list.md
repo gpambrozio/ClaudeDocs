@@ -1,180 +1,200 @@
 # List memories
 
-Copy page
+`MemoryListPage beta().memoryStores().memories().list(params = MemoryListParams.none(), requestOptions = RequestOptions.none())`
 
-
-
-Java
-
-# List memories
-
-MemoryListPage beta().memoryStores().memories().list(MemoryListParamsparams = MemoryListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
-
-GET/v1/memory\_stores/{memory\_store\_id}/memories
+**GET** `/v1/memory_stores/{memory_store_id}/memories`
 
 List memories
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `MemoryListParams params`
 
-MemoryListParams params
+  - `Optional<String> memoryStoreId`
 
-Optional<String> memoryStoreId
+  - `Optional<Long> depth`
 
-Optional<Long> depth
+    `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` returns immediate children only; deeper entries roll up as `memory_prefix` items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
 
-`0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` returns immediate children only; deeper entries roll up as `memory_prefix` items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
+    format: int32
 
-Optional<Long> limit
+  - `Optional<Long> limit`
 
-Maximum number of items to return per page. Must be between 1 and 100. Defaults to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and `memory_prefix` items count toward the limit.
+    Maximum number of items to return per page. Must be between 1 and 100. Defaults to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and `memory_prefix` items count toward the limit.
 
-Optional<String> page
+    format: int32
 
-Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
+  - `Optional<String> page`
 
-Optional<String> pathPrefix
+    Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
-Optional path prefix filter. Must end with `/` (segment-aligned), e.g., `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
+  - `Optional<String> pathPrefix`
 
-Optional<[BetaManagedAgentsMemoryView](api/beta/memory_stores/memories.md)> view
+    Optional path prefix filter. Must end with `/` (segment-aligned), e.g., `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
 
-Which projection of each `memory` to return. Defaults to `basic` (content omitted). `full` populates `content` on each item and caps `limit` at 20; use this as the bulk-read path for export and sync.
+  - `Optional<BetaManagedAgentsMemoryView> view`
 
-
+    Which projection of each `memory` to return. Defaults to `basic` (content omitted). `full` populates `content` on each item and caps `limit` at 20; use this as the bulk-read path for export and sync.
 
-Optional<List<AnthropicBeta>> betas
+  - `Optional<List<AnthropicBeta>> betas`
 
-Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
-MESSAGE\_BATCHES\_2024\_09\_24("message-batches-2024-09-24")
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
-PROMPT\_CACHING\_2024\_07\_31("prompt-caching-2024-07-31")
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
 
-COMPUTER\_USE\_2024\_10\_22("computer-use-2024-10-22")
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
-COMPUTER\_USE\_2025\_01\_24("computer-use-2025-01-24")
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-PDFS\_2024\_09\_25("pdfs-2024-09-25")
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
 
-TOKEN\_COUNTING\_2024\_11\_01("token-counting-2024-11-01")
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
 
-TOKEN\_EFFICIENT\_TOOLS\_2025\_02\_19("token-efficient-tools-2025-02-19")
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
 
-OUTPUT\_128K\_2025\_02\_19("output-128k-2025-02-19")
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
 
-FILES\_API\_2025\_04\_14("files-api-2025-04-14")
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
-MCP\_CLIENT\_2025\_04\_04("mcp-client-2025-04-04")
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
-MCP\_CLIENT\_2025\_11\_20("mcp-client-2025-11-20")
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
 
-DEV\_FULL\_THINKING\_2025\_05\_14("dev-full-thinking-2025-05-14")
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
 
-INTERLEAVED\_THINKING\_2025\_05\_14("interleaved-thinking-2025-05-14")
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
 
-CODE\_EXECUTION\_2025\_05\_22("code-execution-2025-05-22")
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-EXTENDED\_CACHE\_TTL\_2025\_04\_11("extended-cache-ttl-2025-04-11")
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
 
-CONTEXT\_1M\_2025\_08\_07("context-1m-2025-08-07")
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
-CONTEXT\_MANAGEMENT\_2025\_06\_27("context-management-2025-06-27")
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
-MODEL\_CONTEXT\_WINDOW\_EXCEEDED\_2025\_08\_26("model-context-window-exceeded-2025-08-26")
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-SKILLS\_2025\_10\_02("skills-2025-10-02")
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
-FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
-OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
-ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
-MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
-THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
-SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
-FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-AGENT\_MEMORY\_2026\_07\_22("agent-memory-2026-07-22")
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
-##### ReturnsExpand Collapse
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
 
-
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
-class BetaManagedAgentsMemoryListItem: A class that can be one of several variants.union 
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
-One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
-
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-class BetaManagedAgentsMemory:
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
 
-A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
 
-String id
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
 
-Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
 
-String contentSha256
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
 
-Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-long contentSizeBytes
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
 
-Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-LocalDateTime createdAt
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
 
-A timestamp in RFC 3339 format
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-String memoryStoreId
+## Returns
 
-ID of the memory store this memory belongs to (a `memstore_...` value).
+- `class BetaManagedAgentsMemoryListItem: union`
 
-String memoryVersionId
+  One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
-ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+  - `class BetaManagedAgentsMemory:`
 
-String path
+    A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
-Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
+    - `String id`
 
-Type type
+      Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
 
-LocalDateTime updatedAt
+    - `String contentSha256`
 
-A timestamp in RFC 3339 format
+      Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
 
-Optional<String> content
+    - `long contentSizeBytes`
 
-The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+      Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
-
+      format: int32
 
-class BetaManagedAgentsMemoryPrefix:
+    - `LocalDateTime createdAt`
 
-A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+      A timestamp in RFC 3339 format
 
-String path
+      format: date-time
 
-The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
+    - `String memoryStoreId`
 
-Type type
+      ID of the memory store this memory belongs to (a `memstore_...` value).
 
-List memories
+    - `String memoryVersionId`
 
-Java
+      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
 
-```shiki
+    - `String path`
+
+      Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
+
+    - `Type type`
+
+    - `LocalDateTime updatedAt`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `Optional<String> content`
+
+      The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+
+  - `class BetaManagedAgentsMemoryPrefix:`
+
+    A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+
+    - `String path`
+
+      The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
+
+    - `Type type`
+
+## Example
+
+```java
 package com.anthropic.example;
 
 import com.anthropic.client.AnthropicClient;
@@ -193,37 +213,9 @@ public final class Main {
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "content_sha256": "content_sha256",
-      "content_size_bytes": 0,
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "memory_store_id": "memory_store_id",
-      "memory_version_id": "memory_version_id",
-      "path": "path",
-      "type": "memory",
-      "updated_at": "2019-12-27T18:11:19.117Z",
-      "content": "content"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

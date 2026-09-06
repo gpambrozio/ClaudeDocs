@@ -1,208 +1,225 @@
 # Poll for Work
 
-Copy page
-
-
-
-cURL
-
-# Poll for Work
-
-GET/v1/environments/{environment\_id}/work/poll
+**GET** `/v1/environments/{environment_id}/work/poll`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Long poll for work items in the queue.
 
-##### Path parameters
+## Path parameters
 
-environment\_id: string
+- `environment_id: string`
 
-##### Query parameters
+## Query parameters
 
-
+- `block_ms: optional number`
 
-block\_ms: optional number
+  How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
 
-How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
+  minimum: 1
 
-minimum1
+- `reclaim_older_than_ms: optional number`
 
-
+  Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
 
-reclaim\_older\_than\_ms: optional number
+  minimum: 1
 
-Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
+## Headers
 
-minimum1
+- `"anthropic-beta": optional array of AnthropicBeta`
 
-##### Headers
+  Optional header to specify the beta version(s) you want to use.
 
-
+  - `string`
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
-Optional header to specify the beta version(s) you want to use.
+    - `"message-batches-2024-09-24"`
 
-One of the following:
+    - `"prompt-caching-2024-07-31"`
 
-string
+    - `"computer-use-2024-10-22"`
 
-
+    - `"computer-use-2025-01-24"`
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
+    - `"pdfs-2024-09-25"`
 
-One of the following:
+    - `"token-counting-2024-11-01"`
 
-"message-batches-2024-09-24"
+    - `"token-efficient-tools-2025-02-19"`
 
-"prompt-caching-2024-07-31"
+    - `"output-128k-2025-02-19"`
 
-"computer-use-2024-10-22"
+    - `"files-api-2025-04-14"`
 
-"computer-use-2025-01-24"
+    - `"mcp-client-2025-04-04"`
 
-"pdfs-2024-09-25"
+    - `"mcp-client-2025-11-20"`
 
-"token-counting-2024-11-01"
+    - `"dev-full-thinking-2025-05-14"`
 
-"token-efficient-tools-2025-02-19"
+    - `"interleaved-thinking-2025-05-14"`
 
-"output-128k-2025-02-19"
+    - `"code-execution-2025-05-22"`
 
-"files-api-2025-04-14"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"mcp-client-2025-04-04"
+    - `"context-1m-2025-08-07"`
 
-"mcp-client-2025-11-20"
+    - `"context-management-2025-06-27"`
 
-"dev-full-thinking-2025-05-14"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"interleaved-thinking-2025-05-14"
+    - `"skills-2025-10-02"`
 
-"code-execution-2025-05-22"
+    - `"fast-mode-2026-02-01"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"output-300k-2026-03-24"`
 
-"context-1m-2025-08-07"
+    - `"user-profiles-2026-03-24"`
 
-"context-management-2025-06-27"
+    - `"user-profiles-2026-08-18"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"advisor-tool-2026-03-01"`
 
-"skills-2025-10-02"
+    - `"managed-agents-2026-04-01"`
 
-"fast-mode-2026-02-01"
+    - `"cache-diagnosis-2026-04-07"`
 
-"output-300k-2026-03-24"
+    - `"dreaming-2026-04-21"`
 
-"user-profiles-2026-03-24"
+    - `"thinking-token-count-2026-05-13"`
 
-"user-profiles-2026-08-18"
+    - `"server-side-fallback-2026-06-01"`
 
-"advisor-tool-2026-03-01"
+    - `"server-side-fallback-2026-07-01"`
 
-"managed-agents-2026-04-01"
+    - `"fallback-credit-2026-06-01"`
 
-"cache-diagnosis-2026-04-07"
+    - `"fallback-credit-2026-07-01"`
 
-"dreaming-2026-04-21"
+    - `"agent-memory-2026-07-22"`
 
-"thinking-token-count-2026-05-13"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-"server-side-fallback-2026-06-01"
+    - `"compact-2026-01-12"`
 
-"server-side-fallback-2026-07-01"
+    - `"computer-use-2025-11-24"`
 
-"fallback-credit-2026-06-01"
+    - `"mcp-tunnels-2026-06-22"`
 
-"fallback-credit-2026-07-01"
+    - `"structured-outputs-2025-11-13"`
 
-"agent-memory-2026-07-22"
+    - `"task-budgets-2026-03-13"`
 
-"mid-conversation-tool-changes-2026-07-01"
+    - `"thinking-display-updates-2026-08-18"`
 
-"compact-2026-01-12"
+    - `"ce-user-management-2026-07-13"`
 
-"computer-use-2025-11-24"
+    - `"mid-conversation-output-config-2026-07-01"`
 
-"mcp-tunnels-2026-06-22"
+    - `"thinking-binding-controls-2026-08-01"`
 
-"structured-outputs-2025-11-13"
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"task-budgets-2026-03-13"
+- `"Anthropic-Worker-ID": optional string`
 
-"thinking-display-updates-2026-08-18"
+  Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
 
-"ce-user-management-2026-07-13"
+## Returns
 
-"mid-conversation-output-config-2026-07-01"
+- `BetaSelfHostedWork object`
 
-"thinking-binding-controls-2026-08-01"
+  Work resource representing a unit of work in a self-hosted environment.
 
-"mid-conversation-system-clear-at-2026-08-21"
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
 
-"Anthropic-Worker-ID": optional string
+  - `id: string`
 
-Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
+    Work identifier (e.g., 'work_...')
 
-##### Returns
+  - `acknowledged_at: string or null`
 
-
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-BetaSelfHostedWork object{ id, acknowledged\_at, created\_at, 10 more }
+  - `created_at: string`
 
-Work resource representing a unit of work in a self-hosted environment.
+    RFC 3339 timestamp when work was created
 
-Work items are queued when sessions are created or when long-dormant sessions
-receive new messages. The environment worker polls for work to execute in a
-self-hosted sandbox.
+  - `data: BetaSessionWorkData`
 
-Poll for Work
+    The actual work to be performed
 
-cURL
+    - `id: string`
 
-```shiki
+      Session identifier (e.g., 'session_...')
+
+    - `type: "session"`
+
+      Type of work data
+
+  - `environment_id: string`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `latest_heartbeat_at: string or null`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `metadata: map[string]`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `secret: string or null`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `started_at: string or null`
+
+    RFC 3339 timestamp when work execution started
+
+  - `state: "queued" or "starting" or "active" or 2 more`
+
+    Current state of the work item
+
+    - `"queued"`
+
+    - `"starting"`
+
+    - `"active"`
+
+    - `"stopping"`
+
+    - `"stopped"`
+
+  - `stop_requested_at: string or null`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `stopped_at: string or null`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `type: "work"`
+
+    The type of object (always 'work')
+
+    default: work
+
+## Example
+
+```bash
 curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/poll \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "id",
-  "acknowledged_at": "acknowledged_at",
-  "created_at": "created_at",
-  "data": {
-    "id": "id",
-    "type": "session"
-  },
-  "environment_id": "environment_id",
-  "latest_heartbeat_at": "latest_heartbeat_at",
-  "metadata": {
-    "foo": "string"
-  },
-  "secret": "secret",
-  "started_at": "started_at",
-  "state": "queued",
-  "stop_requested_at": "stop_requested_at",
-  "stopped_at": "stopped_at",
-  "type": "work"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "id",
   "acknowledged_at": "acknowledged_at",

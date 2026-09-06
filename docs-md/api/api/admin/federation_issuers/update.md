@@ -1,12 +1,6 @@
 # Update Federation Issuer
 
-Copy page
-
-
-
-# Update Federation Issuer
-
-POST/v1/organizations/federation\_issuers/{federation\_issuer\_id}
+**POST** `/v1/organizations/federation_issuers/{federation_issuer_id}`
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -19,144 +13,244 @@ Updating an issuer that backs a rule with a scope outside
 `workspace:developer` or `workspace:inference` requires a Console
 session.
 
-##### Path parameters
+## Path parameters
 
-federation\_issuer\_id: string
+- `federation_issuer_id: string`
 
-ID of the federation issuer to update.
+  ID of the federation issuer to update.
 
-##### Headers
+## Headers
 
-
+- `"anthropic-beta": optional array of string`
 
-"anthropic-beta": optional array of string
+  Optional header to specify the beta version(s) you want to use.
 
-Optional header to specify the beta version(s) you want to use.
+  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
+## Body parameters
 
-##### Body
+- `check_jti: optional boolean or null`
 
-check\_jti: optional boolean or null
+  Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
 
-Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
+- `issuer_url: optional string or null`
 
-
+  Replaces the `iss` claim value to match against. For discovery-mode issuers without a `discovery_base`, this is also the URL Anthropic fetches the OIDC discovery document and signing keys from, so changing it repoints the JWKS source. Changing the issuer URL to a well-known shared platform is rejected while any live rule under this issuer would not constrain tenant identity.
 
-issuer\_url: optional string or null
+  minLength: 1
 
-Replaces the `iss` claim value to match against. For discovery-mode issuers without a `discovery_base`, this is also the URL Anthropic fetches the OIDC discovery document and signing keys from, so changing it repoints the JWKS source. Changing the issuer URL to a well-known shared platform is rejected while any live rule under this issuer would not constrain tenant identity.
+- `jwks: optional object or object or object or null`
 
-minLength1
+  Replaces the entire JWKS configuration.
 
-
+  - `Discovery object`
 
-jwks: optional object{ type, ca\_cert\_pem, discovery\_base } or object{ type, url, ca\_cert\_pem } or object{ keys, type } or null
+    JWKS via the issuer's OIDC discovery document.
 
-Replaces the entire JWKS configuration.
+    - `type: "discovery"`
 
-One of the following:
+    - `ca_cert_pem: optional string or null`
 
-
+      Optional custom CA (PEM) for TLS verification of the JWKS fetch.
 
-Discovery object{ type, ca\_cert\_pem, discovery\_base }
+      maxLength: 8192
 
-JWKS via the issuer's OIDC discovery document.
+    - `discovery_base: optional string or null`
 
-type: "discovery"
+      Set when the discovery URL differs from `issuer_url`.
 
-
+  - `ExplicitURL object`
 
-ca\_cert\_pem: optional string or null
+    JWKS fetched from a fixed endpoint.
 
-Optional custom CA (PEM) for TLS verification of the JWKS fetch.
+    - `type: "explicit_url"`
 
-maxLength8192
+    - `url: string`
 
-discovery\_base: optional string or null
+      JWKS endpoint.
 
-Set when the discovery URL differs from `issuer_url`.
+      minLength: 1
 
-
+    - `ca_cert_pem: optional string or null`
 
-ExplicitURL object{ type, url, ca\_cert\_pem }
+      Optional custom CA (PEM) for TLS verification of the JWKS fetch.
 
-JWKS fetched from a fixed endpoint.
+      maxLength: 8192
 
-type: "explicit\_url"
+  - `Inline object`
 
-
+    JWKS supplied directly; no network fetch.
 
-url: string
+    - `keys: array of map[unknown]`
 
-JWKS endpoint.
+      Inline JWK objects.
 
-minLength1
+      minItems: 1
 
-
+    - `type: "inline"`
 
-ca\_cert\_pem: optional string or null
+- `jwks_polling_disabled: optional boolean or null`
 
-Optional custom CA (PEM) for TLS verification of the JWKS fetch.
+  Only `false` is accepted, to re-enable polling after the system pauses it. Polling is paused automatically; sending `true` is rejected.
 
-maxLength8192
+- `max_jwt_lifetime_seconds: optional number or null`
 
-
+  Maximum allowed iat→exp spread for assertions from this issuer (1-176400 seconds, i.e. up to 49h). Assertions must carry both `iat` and `exp`; a missing `iat` is rejected.
 
-Inline object{ keys, type }
+  maximum: 176400, exclusiveMinimum: 0
 
-JWKS supplied directly; no network fetch.
+- `name: optional string or null`
 
-
+  Replaces the slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
-keys: array of map[unknown]
+  maxLength: 255, minLength: 1
 
-Inline JWK objects.
+## Returns
 
-minItems1
+- `FederationIssuer object`
 
-type: "inline"
+  Registered external OIDC identity provider.
 
-jwks\_polling\_disabled: optional boolean or null
+  Records an external IdP the organization trusts for the RFC 7523
+  jwt-bearer grant. The `issuer_url` must match the JWT `iss` claim exactly.
 
-Only `false` is accepted, to re-enable polling after the system pauses it. Polling is paused automatically; sending `true` is rejected.
+  - `id: string`
 
-
+    Tagged ID of the federation issuer.
 
-max\_jwt\_lifetime\_seconds: optional number or null
+  - `archived_at: string or null`
 
-Maximum allowed iat→exp spread for assertions from this issuer (1-176400 seconds, i.e. up to 49h). Assertions must carry both `iat` and `exp`; a missing `iat` is rejected.
+    If set, all rules referencing this issuer reject token exchange.
 
-maximum176400
+    format: date-time
 
-exclusiveMinimum0
+  - `archived_by_actor_id: string or null`
 
-
+    Tagged ID (`user_`/`svac_`) of the actor that archived this issuer.
 
-name: optional string or null
+  - `check_jti: boolean`
 
-Replaces the slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
+    Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
 
-maxLength255
+  - `created_at: string`
 
-minLength1
+    When this issuer was created.
 
-##### Returns
+    format: date-time
 
-
+  - `created_by_actor_id: string or null`
 
-FederationIssuer object{ id, archived\_at, archived\_by\_actor\_id, 12 more }
+    Tagged ID (`user_`/`svac_`) of the actor that created this issuer.
 
-Registered external OIDC identity provider.
+  - `issuer_url: string`
 
-Records an external IdP the organization trusts for the RFC 7523
-jwt-bearer grant. The `issuer_url` must match the JWT `iss` claim exactly.
+    The `iss` claim value. Incoming JWTs must match exactly.
 
-Update Federation Issuer
+  - `jwks: object or object or object`
 
-cURL
+    How signing keys are obtained for signature verification.
 
-```shiki
+    - `Discovery object`
+
+      JWKS via the issuer's OIDC discovery document.
+
+      - `type: "discovery"`
+
+      - `ca_cert_pem: optional string or null`
+
+        Optional custom CA (PEM) for TLS verification of the JWKS fetch.
+
+        maxLength: 8192
+
+      - `discovery_base: optional string or null`
+
+        Set when the discovery URL differs from `issuer_url`.
+
+    - `ExplicitURL object`
+
+      JWKS fetched from a fixed endpoint.
+
+      - `type: "explicit_url"`
+
+      - `url: string`
+
+        JWKS endpoint.
+
+        minLength: 1
+
+      - `ca_cert_pem: optional string or null`
+
+        Optional custom CA (PEM) for TLS verification of the JWKS fetch.
+
+        maxLength: 8192
+
+    - `Inline object`
+
+      JWKS supplied directly; no network fetch.
+
+      - `keys: array of map[unknown]`
+
+        Inline JWK objects.
+
+        minItems: 1
+
+      - `type: "inline"`
+
+  - `jwks_polling_disabled_at: string or null`
+
+    If set, Anthropic's JWKS poller has paused polling for this issuer after repeated fetch failures. Re-enable by sending `jwks_polling_disabled: false` via the issuer update endpoint (POST) once the upstream JWKS endpoint is fixed. An OAuth caller cannot send this when the issuer backs a rule with any scope other than `workspace:developer` or `workspace:inference`; use a Console session.
+
+    format: date-time
+
+  - `max_jwt_lifetime_seconds: number`
+
+    Maximum allowed iat→exp spread for assertions from this issuer (1-176400 seconds, i.e. up to 49h). Assertions must carry both `iat` and `exp`; a missing `iat` is rejected.
+
+  - `name: string`
+
+    Admin-chosen slug identifier.
+
+  - `poll_status: object or null`
+
+    Status of automatic JWKS polling for a federation issuer.
+
+    Anthropic periodically fetches the issuer's signing keys in the
+    background. These fields summarize the most recent fetches so the
+    health of the JWKS endpoint can be monitored.
+
+    - `consecutive_failures: number`
+
+      Consecutive fetch failures since the last success.
+
+    - `last_fetched_at: string or null`
+
+      When the last successful fetch completed.
+
+      format: date-time
+
+    - `next_poll_at: string or null`
+
+      When the next fetch is scheduled. Null if paused.
+
+      format: date-time
+
+  - `type: "federation_issuer"`
+
+    default: federation_issuer
+
+  - `updated_at: string`
+
+    When this issuer was last updated.
+
+    format: date-time
+
+  - `updated_by_actor_id: string or null`
+
+    Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
+
+## Example
+
+```bash
 curl https://api.anthropic.com/v1/organizations/federation_issuers/$FEDERATION_ISSUER_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -164,45 +258,9 @@ curl https://api.anthropic.com/v1/organizations/federation_issuers/$FEDERATION_I
     -d '{}'
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "fdis_01SDCCSbTxrXDpWc1phhtcfK",
-  "archived_at": "2019-12-27T18:11:19.117Z",
-  "archived_by_actor_id": "archived_by_actor_id",
-  "check_jti": true,
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "created_by_actor_id": "created_by_actor_id",
-  "issuer_url": "https://token.actions.githubusercontent.com",
-  "jwks": {
-    "type": "discovery",
-    "ca_cert_pem": "ca_cert_pem",
-    "discovery_base": "discovery_base"
-  },
-  "jwks_polling_disabled_at": "2019-12-27T18:11:19.117Z",
-  "max_jwt_lifetime_seconds": 0,
-  "name": "github-actions",
-  "poll_status": {
-    "consecutive_failures": 0,
-    "last_fetched_at": "2019-12-27T18:11:19.117Z",
-    "next_poll_at": "2019-12-27T18:11:19.117Z"
-  },
-  "type": "federation_issuer",
-  "updated_at": "2024-10-30T23:58:27.427722Z",
-  "updated_by_actor_id": "updated_by_actor_id"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "fdis_01SDCCSbTxrXDpWc1phhtcfK",
   "archived_at": "2019-12-27T18:11:19.117Z",

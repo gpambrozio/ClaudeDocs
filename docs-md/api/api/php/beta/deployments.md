@@ -1,654 +1,1992 @@
 # Deployments
 
-Copy page
+## Create Deployment
 
-
+`$client->beta->deployments->create(Agent agent, string environmentID, list<BetaManagedAgentsDeploymentInitialEventParams> initialEvents, string name, ?BetaManagedAgentsBudgetLimit budget, ?string description, ?array<string,string> metadata, ?list<Resource> resources, ?BetaManagedAgentsScheduleParams schedule, ?list<string> vaultIDs, ?list<AnthropicBeta> betas): BetaManagedAgentsDeployment`
 
-PHP
+**POST** `/v1/deployments`
 
-# Deployments
+Create Deployment
 
-##### [Create Deployment](api/beta/deployments/create.md)
+### Parameters
 
-$client->beta->deployments->create([Agent](api/beta/deployments/create.md) agent, string environmentID, list<[BetaManagedAgentsDeploymentInitialEventParams](api/beta/deployments.md)> initialEvents, string name, ?string description, ?array<string,string> metadata, ?list<Resource> resources, ?[BetaManagedAgentsScheduleParams](api/beta/deployments.md) schedule, ?list<string> vaultIDs, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta/deployments.md)
+- `agent: Agent`
 
-POST/v1/deployments
+  Agent to deploy. Accepts the `agent` ID string, which pins the latest version, or an `agent` object with both id and version specified. The agent must exist and not be archived.
 
-##### [List Deployments](api/beta/deployments/list.md)
+- `environmentID: string`
 
-$client->beta->deployments->list(?string agentID, ?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?[BetaManagedAgentsDeploymentStatus](api/beta/deployments.md) status, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsDeployment](api/beta/deployments.md)>
+  ID of the `environment` defining the container configuration for sessions created from this deployment.
 
-GET/v1/deployments
+- `initialEvents: list<BetaManagedAgentsDeploymentInitialEventParams>`
 
-##### [Get Deployment](api/beta/deployments/retrieve.md)
+  Events to send to each session immediately after creation. At least 1, maximum 50.
 
-$client->beta->deployments->retrieve(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta/deployments.md)
+- `name: string`
 
-GET/v1/deployments/{deployment\_id}
+  Human-readable name for the deployment.
 
-##### [Update Deployment](api/beta/deployments/update.md)
+- `budget?:optional BetaManagedAgentsBudgetLimit`
 
-$client->beta->deployments->update(string deploymentID, ?[Agent](api/beta/deployments/update.md) agent, ?string description, ?string environmentID, ?list<[BetaManagedAgentsDeploymentInitialEventParams](api/beta/deployments.md)> initialEvents, ?array<string,string> metadata, ?string name, ?list<Resource> resources, ?[BetaManagedAgentsScheduleParams](api/beta/deployments.md) schedule, ?list<string> vaultIDs, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta/deployments.md)
+  A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-POST/v1/deployments/{deployment\_id}
+- `description?:optional string`
 
-##### [Archive Deployment](api/beta/deployments/archive.md)
+  Description of what the deployment does.
 
-$client->beta->deployments->archive(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta/deployments.md)
+- `metadata?:optional array<string,string>`
 
-POST/v1/deployments/{deployment\_id}/archive
+  Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-##### [Run Deployment Now](api/beta/deployments/run.md)
+- `resources?:optional list<Resource>`
 
-$client->beta->deployments->run(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)
+  Resources (e.g. repositories, files) to mount into each session's container. Maximum 500.
 
-POST/v1/deployments/{deployment\_id}/run
+- `schedule?:optional BetaManagedAgentsScheduleParams`
 
-##### [Pause Deployment](api/beta/deployments/pause.md)
+  5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
 
-$client->beta->deployments->pause(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta/deployments.md)
+- `vaultIDs?:optional list<string>`
 
-POST/v1/deployments/{deployment\_id}/pause
+  Vault IDs for stored credentials the agent can use during sessions created from this deployment. Maximum 50.
 
-##### [Unpause Deployment](api/beta/deployments/unpause.md)
+- `betas?:optional list<AnthropicBeta>`
 
-$client->beta->deployments->unpause(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta/deployments.md)
+  Optional header to specify the beta version(s) you want to use.
 
-POST/v1/deployments/{deployment\_id}/unpause
+### Returns
 
-##### ModelsExpand Collapse
+- `BetaManagedAgentsDeployment`
 
-
+  - `string id`
 
-[BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta/deployments.md)
+    Unique identifier for this deployment.
 
-Type type
+  - `BetaManagedAgentsAgentReference agent`
 
-
+    A resolved agent reference with a concrete version.
 
-[BetaManagedAgentsCronSchedule](api/beta/deployments.md)
+  - `?\Datetime archivedAt`
 
-string expression
+    A timestamp in RFC 3339 format
 
-5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+  - `\Datetime createdAt`
 
-string timezone
+    A timestamp in RFC 3339 format
 
-IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC").
+  - `?string description`
 
-Type type
+    Description of what the deployment does.
 
-?\Datetime lastRunAt
+  - `string environmentID`
 
-A timestamp in RFC 3339 format
+    ID of the `environment` where sessions run.
 
-?list<\Datetime> upcomingRunsAt
+  - `list<BetaManagedAgentsDeploymentInitialEvent> initialEvents`
 
-Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+    Events sent to each session immediately after creation.
 
-
+  - `array<string,string> metadata`
 
-[BetaManagedAgentsCronScheduleParams](api/beta/deployments.md)
+    Arbitrary key-value metadata. Maximum 16 pairs.
 
-string expression
+  - `string name`
 
-5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+    Human-readable name.
 
-string timezone
+  - `?BetaManagedAgentsDeploymentPausedReason pausedReason`
 
-Required. IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC"). Validated against the IANA timezone database.
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-Type type
+  - `list<BetaManagedAgentsSessionResourceConfig> resources`
 
-
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+  - `?BetaManagedAgentsSchedule schedule`
+
+    5-field POSIX cron schedule with computed runtime timestamps.
+
+  - `BetaManagedAgentsDeploymentStatus status`
+
+    Lifecycle status of a deployment.
+
+  - `Type type`
+
+  - `\Datetime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `list<string> vaultIDs`
+
+    Vault IDs supplying stored credentials for sessions created from this deployment.
+
+  - `?BetaManagedAgentsBudgetLimit budget`
+
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsDeployment = $client->beta->deployments->create(
+  agent: 'string',
+  environmentID: 'x',
+  initialEvents: [
+    [
+      'content' => [['text' => 'Where is my order #1234?', 'type' => 'text']],
+      'type' => 'user.message',
+    ],
+  ],
+  name: 'x',
+  budget: [
+    'maxListCost' => ['amount' => '2500', 'currency' => BetaCurrency::USD],
+    'type' => 'limit',
+  ],
+  description: 'description',
+  metadata: ['foo' => 'string'],
+  resources: [
+    [
+      'fileID' => 'file_011CNha8iCJcU1wXNR6q4V8w',
+      'type' => 'file',
+      'mountPath' => '/uploads/receipt.pdf',
+    ],
+  ],
+  schedule: [
+    'expression' => '0 9 * * 1-5',
+    'timezone' => 'America/Los_Angeles',
+    'type' => 'cron',
+  ],
+  vaultIDs: ['string'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsDeployment);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "depl_011CZkZcDH3vPqd7xnEfwTai",
+  "agent": {
+    "id": "agent_011CZkYpogX7uDKUyvBTophP",
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Compiles yesterday's orders into a report every weekday morning.",
+  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "initial_events": [
+    {
+      "content": [
+        {
+          "text": "Compile yesterday's orders into report.md.",
+          "type": "text"
+        }
+      ],
+      "type": "user.message"
+    }
+  ],
+  "metadata": {},
+  "name": "Daily order report",
+  "paused_reason": {
+    "type": "manual"
+  },
+  "resources": [
+    {
+      "type": "github_repository",
+      "url": "url",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      },
+      "mount_path": "mount_path"
+    }
+  ],
+  "schedule": {
+    "expression": "0 9 * * 1-5",
+    "timezone": "America/Los_Angeles",
+    "type": "cron",
+    "last_run_at": "2026-03-16T16:00:09Z",
+    "upcoming_runs_at": [
+      "2026-03-17T16:00:00Z",
+      "2026-03-18T16:00:00Z"
+    ]
+  },
+  "status": "active",
+  "type": "deployment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "vault_ids": [
+    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+  ],
+  "budget": {
+    "max_list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "type": "limit"
+  }
+}
+```
 
-[BetaManagedAgentsDeployment](api/beta/deployments.md)
+## List Deployments
 
-string id
+`$client->beta->deployments->list(?string agentID, ?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?BetaManagedAgentsDeploymentStatus status, ?list<AnthropicBeta> betas): PageCursor<BetaManagedAgentsDeployment>`
 
-Unique identifier for this deployment.
+**GET** `/v1/deployments`
 
-[BetaManagedAgentsAgentReference](api/beta/agents.md) agent
+List Deployments
 
-A resolved agent reference with a concrete version.
+### Parameters
 
-?\Datetime archivedAt
+- `agentID?:optional string`
 
-A timestamp in RFC 3339 format
+  Filter by agent ID.
 
-\Datetime createdAt
+- `createdAtGte?:optional \Datetime`
 
-A timestamp in RFC 3339 format
+  Return deployments created at or after this time (inclusive).
 
-?string description
+- `createdAtLte?:optional \Datetime`
 
-Description of what the deployment does.
+  Return deployments created at or before this time (inclusive).
 
-string environmentID
+- `includeArchived?:optional bool`
 
-ID of the `environment` where sessions run.
+  When true, includes archived deployments. Default: false (exclude archived).
 
-list<[BetaManagedAgentsDeploymentInitialEvent](api/beta/deployments.md)> initialEvents
+- `limit?:optional int`
 
-Events sent to each session immediately after creation.
+  Maximum results per page. Default 20, maximum 100.
 
-array<string,string> metadata
+- `page?:optional string`
 
-Arbitrary key-value metadata. Maximum 16 pairs.
+  Opaque pagination cursor.
 
-string name
+- `status?:optional BetaManagedAgentsDeploymentStatus`
 
-Human-readable name.
+  Filter by status: `active` or `paused`. Omit for both. To include archived deployments, use `include_archived` instead; the two cannot be combined.
 
-?[BetaManagedAgentsDeploymentPausedReason](api/beta/deployments.md) pausedReason
+- `betas?:optional list<AnthropicBeta>`
 
-Why a deployment is paused. Non-null exactly when `status` is `paused`.
+  Optional header to specify the beta version(s) you want to use.
 
-list<[BetaManagedAgentsSessionResourceConfig](api/beta/deployments.md)> resources
+### Returns
 
-Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+- `BetaManagedAgentsDeployment`
 
-?[BetaManagedAgentsSchedule](api/beta/deployments.md) schedule
+  - `string id`
 
-5-field POSIX cron schedule with computed runtime timestamps.
+    Unique identifier for this deployment.
 
-[BetaManagedAgentsDeploymentStatus](api/beta/deployments.md) status
+  - `BetaManagedAgentsAgentReference agent`
 
-Lifecycle status of a deployment.
+    A resolved agent reference with a concrete version.
 
-Type type
+  - `?\Datetime archivedAt`
 
-\Datetime updatedAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `\Datetime createdAt`
 
-list<string> vaultIDs
+    A timestamp in RFC 3339 format
 
-Vault IDs supplying stored credentials for sessions created from this deployment.
+  - `?string description`
 
-
+    Description of what the deployment does.
 
-[BetaManagedAgentsDeploymentInitialEvent](api/beta/deployments.md)
+  - `string environmentID`
 
-One of the following:
+    ID of the `environment` where sessions run.
 
-
+  - `list<BetaManagedAgentsDeploymentInitialEvent> initialEvents`
 
-[BetaManagedAgentsDeploymentUserMessageEvent](api/beta/deployments.md)
+    Events sent to each session immediately after creation.
 
-list<Content> content
+  - `array<string,string> metadata`
 
-Array of content blocks for the user message.
+    Arbitrary key-value metadata. Maximum 16 pairs.
 
-Type type
+  - `string name`
 
-
+    Human-readable name.
 
-[BetaManagedAgentsDeploymentUserDefineOutcomeEvent](api/beta/deployments.md)
+  - `?BetaManagedAgentsDeploymentPausedReason pausedReason`
 
-string description
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-What the agent should produce. This is the task specification.
+  - `list<BetaManagedAgentsSessionResourceConfig> resources`
 
-Rubric rubric
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-Rubric for grading the quality of an outcome.
+  - `?BetaManagedAgentsSchedule schedule`
 
-Type type
+    5-field POSIX cron schedule with computed runtime timestamps.
 
-?int maxIterations
+  - `BetaManagedAgentsDeploymentStatus status`
 
-Eval→revision cycles before giving up. Default 3, max 20.
+    Lifecycle status of a deployment.
 
-
+  - `Type type`
+
+  - `\Datetime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `list<string> vaultIDs`
+
+    Vault IDs supplying stored credentials for sessions created from this deployment.
+
+  - `?BetaManagedAgentsBudgetLimit budget`
+
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+### Example
 
-[BetaManagedAgentsDeploymentSystemMessageEvent](api/beta/deployments.md)
+```php
+<?php
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> content
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-System content blocks to append. Text-only.
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-Type type
+$page = $client->beta->deployments->list(
+  agentID: 'agent_id',
+  createdAtGte: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  createdAtLte: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  includeArchived: true,
+  limit: 0,
+  page: 'page',
+  status: BetaManagedAgentsDeploymentStatus::ACTIVE,
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-
+var_dump($page);
+```
 
-[BetaManagedAgentsDeploymentInitialEventParams](api/beta/deployments.md)
+#### Response (200)
 
-One of the following:
+```json
+{
+  "data": [
+    {
+      "id": "depl_011CZkZcDH3vPqd7xnEfwTai",
+      "agent": {
+        "id": "agent_011CZkYpogX7uDKUyvBTophP",
+        "type": "agent",
+        "version": 1
+      },
+      "archived_at": null,
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": "Compiles yesterday's orders into a report every weekday morning.",
+      "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+      "initial_events": [
+        {
+          "content": [
+            {
+              "text": "Compile yesterday's orders into report.md.",
+              "type": "text"
+            }
+          ],
+          "type": "user.message"
+        }
+      ],
+      "metadata": {},
+      "name": "Daily order report",
+      "paused_reason": {
+        "type": "manual"
+      },
+      "resources": [
+        {
+          "type": "github_repository",
+          "url": "url",
+          "checkout": {
+            "name": "main",
+            "type": "branch"
+          },
+          "mount_path": "mount_path"
+        }
+      ],
+      "schedule": {
+        "expression": "0 9 * * 1-5",
+        "timezone": "America/Los_Angeles",
+        "type": "cron",
+        "last_run_at": "2026-03-16T16:00:09Z",
+        "upcoming_runs_at": [
+          "2026-03-17T16:00:00Z",
+          "2026-03-18T16:00:00Z"
+        ]
+      },
+      "status": "active",
+      "type": "deployment",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "vault_ids": [
+        "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+      ],
+      "budget": {
+        "max_list_cost": {
+          "amount": "2500",
+          "currency": "USD"
+        },
+        "type": "limit"
+      }
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
 
-
+## Get Deployment
 
-[ManagedAgentsUserMessageEventParams](api/beta/sessions/events.md)
+`$client->beta->deployments->retrieve(string deploymentID, ?list<AnthropicBeta> betas): BetaManagedAgentsDeployment`
 
-list<Content> content
+**GET** `/v1/deployments/{deployment_id}`
 
-Array of content blocks for the user message.
+Get Deployment
 
-Type type
+### Parameters
 
-
+- `deploymentID: string`
 
-[ManagedAgentsUserDefineOutcomeEventParams](api/beta/sessions/events.md)
+- `betas?:optional list<AnthropicBeta>`
 
-string description
+  Optional header to specify the beta version(s) you want to use.
 
-What the agent should produce. This is the task specification.
+### Returns
 
-Rubric rubric
+- `BetaManagedAgentsDeployment`
 
-Rubric for grading the quality of an outcome.
+  - `string id`
 
-Type type
+    Unique identifier for this deployment.
 
-?int maxIterations
+  - `BetaManagedAgentsAgentReference agent`
 
-Eval→revision cycles before giving up. Default 3, max 20.
+    A resolved agent reference with a concrete version.
 
-
+  - `?\Datetime archivedAt`
 
-[ManagedAgentsSystemMessageEventParams](api/beta/sessions/events.md)
+    A timestamp in RFC 3339 format
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> content
+  - `\Datetime createdAt`
 
-System content blocks to append. Text-only.
+    A timestamp in RFC 3339 format
 
-Type type
+  - `?string description`
 
-
+    Description of what the deployment does.
 
-[BetaManagedAgentsDeploymentPausedReason](api/beta/deployments.md)
+  - `string environmentID`
 
-One of the following:
+    ID of the `environment` where sessions run.
 
-
+  - `list<BetaManagedAgentsDeploymentInitialEvent> initialEvents`
 
-[BetaManagedAgentsManualDeploymentPausedReason](api/beta/deployments.md)
+    Events sent to each session immediately after creation.
 
-Type type
+  - `array<string,string> metadata`
 
-
+    Arbitrary key-value metadata. Maximum 16 pairs.
 
-[BetaManagedAgentsErrorDeploymentPausedReason](api/beta/deployments.md)
+  - `string name`
 
-[BetaManagedAgentsDeploymentPausedReasonError](api/beta/deployments.md) error
+    Human-readable name.
 
-The error that triggered an auto-pause. Matches the failed run's `error.type`.
+  - `?BetaManagedAgentsDeploymentPausedReason pausedReason`
 
-Type type
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-
+  - `list<BetaManagedAgentsSessionResourceConfig> resources`
 
-[BetaManagedAgentsDeploymentPausedReasonError](api/beta/deployments.md)
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-One of the following:
+  - `?BetaManagedAgentsSchedule schedule`
 
-
+    5-field POSIX cron schedule with computed runtime timestamps.
 
-[BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta/deployments.md)
+  - `BetaManagedAgentsDeploymentStatus status`
 
-Type type
+    Lifecycle status of a deployment.
 
-
+  - `Type type`
 
-[BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta/deployments.md)
+  - `\Datetime updatedAt`
 
-Type type
+    A timestamp in RFC 3339 format
 
-
+  - `list<string> vaultIDs`
 
-[BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta/deployments.md)
+    Vault IDs supplying stored credentials for sessions created from this deployment.
 
-Type type
+  - `?BetaManagedAgentsBudgetLimit budget`
 
-
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-[BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError](api/beta/deployments.md)
+### Example
 
-Type type
+```php
+<?php
 
-
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-[BetaManagedAgentsFileNotFoundDeploymentPausedReasonError](api/beta/deployments.md)
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-Type type
+$betaManagedAgentsDeployment = $client->beta->deployments->retrieve(
+  'depl_011CZkZcDH3vPqd7xnEfwTai',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-
+var_dump($betaManagedAgentsDeployment);
+```
 
-[BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError](api/beta/deployments.md)
+#### Response (200)
 
-Type type
+```json
+{
+  "id": "depl_011CZkZcDH3vPqd7xnEfwTai",
+  "agent": {
+    "id": "agent_011CZkYpogX7uDKUyvBTophP",
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Compiles yesterday's orders into a report every weekday morning.",
+  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "initial_events": [
+    {
+      "content": [
+        {
+          "text": "Compile yesterday's orders into report.md.",
+          "type": "text"
+        }
+      ],
+      "type": "user.message"
+    }
+  ],
+  "metadata": {},
+  "name": "Daily order report",
+  "paused_reason": {
+    "type": "manual"
+  },
+  "resources": [
+    {
+      "type": "github_repository",
+      "url": "url",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      },
+      "mount_path": "mount_path"
+    }
+  ],
+  "schedule": {
+    "expression": "0 9 * * 1-5",
+    "timezone": "America/Los_Angeles",
+    "type": "cron",
+    "last_run_at": "2026-03-16T16:00:09Z",
+    "upcoming_runs_at": [
+      "2026-03-17T16:00:00Z",
+      "2026-03-18T16:00:00Z"
+    ]
+  },
+  "status": "active",
+  "type": "deployment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "vault_ids": [
+    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+  ],
+  "budget": {
+    "max_list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "type": "limit"
+  }
+}
+```
 
-
+## Update Deployment
 
-[BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError](api/beta/deployments.md)
+`$client->beta->deployments->update(string deploymentID, ?Agent agent, ?BetaManagedAgentsBudgetLimit budget, ?string description, ?string environmentID, ?list<BetaManagedAgentsDeploymentInitialEventParams> initialEvents, ?array<string,string> metadata, ?string name, ?list<Resource> resources, ?BetaManagedAgentsScheduleParams schedule, ?list<string> vaultIDs, ?list<AnthropicBeta> betas): BetaManagedAgentsDeployment`
 
-Type type
+**POST** `/v1/deployments/{deployment_id}`
 
-
+Update Deployment
 
-[BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError](api/beta/deployments.md)
+### Parameters
 
-Type type
+- `deploymentID: string`
 
-
+- `agent?:optional Agent`
 
-[BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError](api/beta/deployments.md)
+  Agent to deploy. Accepts the `agent` ID string, which re-pins to the latest version, or an `agent` object with both id and version specified. Omit to preserve. Cannot be cleared.
 
-Type type
+- `budget?:optional BetaManagedAgentsBudgetLimit`
 
-
+  A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-[BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError](api/beta/deployments.md)
+- `description?:optional string`
 
-Type type
+  Description. Omit to preserve; send empty string or null to clear.
 
-
+- `environmentID?:optional string`
 
-[BetaManagedAgentsVaultArchivedDeploymentPausedReasonError](api/beta/deployments.md)
+  ID of the `environment` where sessions run. Omit to preserve. Cannot be cleared.
 
-Type type
+- `initialEvents?:optional list<BetaManagedAgentsDeploymentInitialEventParams>`
 
-
+  Initial events. Full replacement. Omit to preserve. Cannot be cleared. At least 1, maximum 50.
 
-[BetaManagedAgentsUnknownDeploymentPausedReasonError](api/beta/deployments.md)
+- `metadata?:optional array<string,string>`
 
-Type type
+  Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
-
+- `name?:optional string`
 
-[BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError](api/beta/deployments.md)
+  Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
-Type type
+- `resources?:optional list<Resource>`
 
-
+  Session resources. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 500.
 
-[BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError](api/beta/deployments.md)
+- `schedule?:optional BetaManagedAgentsScheduleParams`
 
-Type type
+  5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
 
-
+- `vaultIDs?:optional list<string>`
 
-[BetaManagedAgentsDeploymentStatus](api/beta/deployments.md)
+  Vault IDs. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 50.
 
-One of the following:
+- `betas?:optional list<AnthropicBeta>`
 
-"active"
+  Optional header to specify the beta version(s) you want to use.
 
-"paused"
+### Returns
 
-
+- `BetaManagedAgentsDeployment`
 
-[BetaManagedAgentsDeploymentSystemMessageEvent](api/beta/deployments.md)
+  - `string id`
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> content
+    Unique identifier for this deployment.
 
-System content blocks to append. Text-only.
+  - `BetaManagedAgentsAgentReference agent`
 
-Type type
+    A resolved agent reference with a concrete version.
 
-
+  - `?\Datetime archivedAt`
 
-[BetaManagedAgentsDeploymentUserDefineOutcomeEvent](api/beta/deployments.md)
+    A timestamp in RFC 3339 format
 
-string description
+  - `\Datetime createdAt`
 
-What the agent should produce. This is the task specification.
+    A timestamp in RFC 3339 format
 
-Rubric rubric
+  - `?string description`
 
-Rubric for grading the quality of an outcome.
+    Description of what the deployment does.
 
-Type type
+  - `string environmentID`
 
-?int maxIterations
+    ID of the `environment` where sessions run.
 
-Eval→revision cycles before giving up. Default 3, max 20.
+  - `list<BetaManagedAgentsDeploymentInitialEvent> initialEvents`
 
-
+    Events sent to each session immediately after creation.
 
-[BetaManagedAgentsDeploymentUserMessageEvent](api/beta/deployments.md)
+  - `array<string,string> metadata`
 
-list<Content> content
+    Arbitrary key-value metadata. Maximum 16 pairs.
 
-Array of content blocks for the user message.
+  - `string name`
 
-Type type
+    Human-readable name.
 
-
+  - `?BetaManagedAgentsDeploymentPausedReason pausedReason`
 
-[BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta/deployments.md)
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-Type type
+  - `list<BetaManagedAgentsSessionResourceConfig> resources`
 
-
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-[BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta/deployments.md)
+  - `?BetaManagedAgentsSchedule schedule`
 
-Type type
+    5-field POSIX cron schedule with computed runtime timestamps.
 
-
+  - `BetaManagedAgentsDeploymentStatus status`
 
-[BetaManagedAgentsErrorDeploymentPausedReason](api/beta/deployments.md)
+    Lifecycle status of a deployment.
 
-[BetaManagedAgentsDeploymentPausedReasonError](api/beta/deployments.md) error
+  - `Type type`
 
-The error that triggered an auto-pause. Matches the failed run's `error.type`.
+  - `\Datetime updatedAt`
 
-Type type
+    A timestamp in RFC 3339 format
 
-
+  - `list<string> vaultIDs`
 
-[BetaManagedAgentsFileNotFoundDeploymentPausedReasonError](api/beta/deployments.md)
+    Vault IDs supplying stored credentials for sessions created from this deployment.
 
-Type type
+  - `?BetaManagedAgentsBudgetLimit budget`
 
-
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-[BetaManagedAgentsFileResourceConfig](api/beta/deployments.md)
+### Example
 
-string fileID
+```php
+<?php
 
-ID of a previously uploaded file.
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-Type type
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-?string mountPath
+$betaManagedAgentsDeployment = $client->beta->deployments->update(
+  'depl_011CZkZcDH3vPqd7xnEfwTai',
+  agent: 'string',
+  budget: [
+    'maxListCost' => ['amount' => '2500', 'currency' => BetaCurrency::USD],
+    'type' => 'limit',
+  ],
+  description: 'description',
+  environmentID: 'environment_id',
+  initialEvents: [
+    [
+      'content' => [['text' => 'Where is my order #1234?', 'type' => 'text']],
+      'type' => 'user.message',
+    ],
+  ],
+  metadata: ['foo' => 'string'],
+  name: 'name',
+  resources: [
+    [
+      'fileID' => 'file_011CNha8iCJcU1wXNR6q4V8w',
+      'type' => 'file',
+      'mountPath' => '/uploads/receipt.pdf',
+    ],
+  ],
+  schedule: [
+    'expression' => '0 9 * * 1-5',
+    'timezone' => 'America/Los_Angeles',
+    'type' => 'cron',
+  ],
+  vaultIDs: ['string'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+var_dump($betaManagedAgentsDeployment);
+```
 
-
+#### Response (200)
 
-[BetaManagedAgentsGitHubRepositoryResourceConfig](api/beta/deployments.md)
+```json
+{
+  "id": "depl_011CZkZcDH3vPqd7xnEfwTai",
+  "agent": {
+    "id": "agent_011CZkYpogX7uDKUyvBTophP",
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Compiles yesterday's orders into a report every weekday morning.",
+  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "initial_events": [
+    {
+      "content": [
+        {
+          "text": "Compile yesterday's orders into report.md.",
+          "type": "text"
+        }
+      ],
+      "type": "user.message"
+    }
+  ],
+  "metadata": {},
+  "name": "Daily order report",
+  "paused_reason": {
+    "type": "manual"
+  },
+  "resources": [
+    {
+      "type": "github_repository",
+      "url": "url",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      },
+      "mount_path": "mount_path"
+    }
+  ],
+  "schedule": {
+    "expression": "0 9 * * 1-5",
+    "timezone": "America/Los_Angeles",
+    "type": "cron",
+    "last_run_at": "2026-03-16T16:00:09Z",
+    "upcoming_runs_at": [
+      "2026-03-17T16:00:00Z",
+      "2026-03-18T16:00:00Z"
+    ]
+  },
+  "status": "active",
+  "type": "deployment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "vault_ids": [
+    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+  ],
+  "budget": {
+    "max_list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "type": "limit"
+  }
+}
+```
 
-Type type
+## Archive Deployment
 
-string url
+`$client->beta->deployments->archive(string deploymentID, ?list<AnthropicBeta> betas): BetaManagedAgentsDeployment`
 
-Github URL of the repository
+**POST** `/v1/deployments/{deployment_id}/archive`
 
-?Checkout checkout
+Archive Deployment
 
-Branch or commit to check out. Defaults to the repository's default branch.
+### Parameters
 
-?string mountPath
+- `deploymentID: string`
 
-Mount path in the container. Defaults to `/workspace/<repo-name>`.
+- `betas?:optional list<AnthropicBeta>`
 
-
+  Optional header to specify the beta version(s) you want to use.
 
-[BetaManagedAgentsManualDeploymentPausedReason](api/beta/deployments.md)
+### Returns
 
-Type type
+- `BetaManagedAgentsDeployment`
 
-
+  - `string id`
 
-[BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError](api/beta/deployments.md)
+    Unique identifier for this deployment.
 
-Type type
+  - `BetaManagedAgentsAgentReference agent`
 
-
+    A resolved agent reference with a concrete version.
 
-[BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError](api/beta/deployments.md)
+  - `?\Datetime archivedAt`
 
-Type type
+    A timestamp in RFC 3339 format
 
-
+  - `\Datetime createdAt`
 
-[BetaManagedAgentsMemoryStoreResourceConfig](api/beta/deployments.md)
+    A timestamp in RFC 3339 format
 
-string memoryStoreID
+  - `?string description`
 
-The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+    Description of what the deployment does.
 
-Type type
+  - `string environmentID`
 
-?Access access
+    ID of the `environment` where sessions run.
 
-Access mode for an attached memory store.
+  - `list<BetaManagedAgentsDeploymentInitialEvent> initialEvents`
 
-?string instructions
+    Events sent to each session immediately after creation.
 
-Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+  - `array<string,string> metadata`
 
-
+    Arbitrary key-value metadata. Maximum 16 pairs.
 
-[BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError](api/beta/deployments.md)
+  - `string name`
 
-Type type
+    Human-readable name.
 
-
+  - `?BetaManagedAgentsDeploymentPausedReason pausedReason`
 
-[BetaManagedAgentsSchedule](api/beta/deployments.md)
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-string expression
+  - `list<BetaManagedAgentsSessionResourceConfig> resources`
 
-5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-string timezone
+  - `?BetaManagedAgentsSchedule schedule`
 
-IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC").
+    5-field POSIX cron schedule with computed runtime timestamps.
 
-Type type
+  - `BetaManagedAgentsDeploymentStatus status`
 
-?\Datetime lastRunAt
+    Lifecycle status of a deployment.
 
-A timestamp in RFC 3339 format
+  - `Type type`
 
-?list<\Datetime> upcomingRunsAt
+  - `\Datetime updatedAt`
 
-Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+    A timestamp in RFC 3339 format
 
-
+  - `list<string> vaultIDs`
 
-[BetaManagedAgentsScheduleParams](api/beta/deployments.md)
+    Vault IDs supplying stored credentials for sessions created from this deployment.
 
-string expression
+  - `?BetaManagedAgentsBudgetLimit budget`
 
-5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-string timezone
+### Example
 
-Required. IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC"). Validated against the IANA timezone database.
+```php
+<?php
 
-Type type
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-[BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError](api/beta/deployments.md)
+$betaManagedAgentsDeployment = $client->beta->deployments->archive(
+  'depl_011CZkZcDH3vPqd7xnEfwTai',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-Type type
+var_dump($betaManagedAgentsDeployment);
+```
 
-
+#### Response (200)
 
-[BetaManagedAgentsSessionResourceConfig](api/beta/deployments.md)
+```json
+{
+  "id": "depl_011CZkZcDH3vPqd7xnEfwTai",
+  "agent": {
+    "id": "agent_011CZkYpogX7uDKUyvBTophP",
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Compiles yesterday's orders into a report every weekday morning.",
+  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "initial_events": [
+    {
+      "content": [
+        {
+          "text": "Compile yesterday's orders into report.md.",
+          "type": "text"
+        }
+      ],
+      "type": "user.message"
+    }
+  ],
+  "metadata": {},
+  "name": "Daily order report",
+  "paused_reason": {
+    "type": "manual"
+  },
+  "resources": [
+    {
+      "type": "github_repository",
+      "url": "url",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      },
+      "mount_path": "mount_path"
+    }
+  ],
+  "schedule": {
+    "expression": "0 9 * * 1-5",
+    "timezone": "America/Los_Angeles",
+    "type": "cron",
+    "last_run_at": "2026-03-16T16:00:09Z",
+    "upcoming_runs_at": [
+      "2026-03-17T16:00:00Z",
+      "2026-03-18T16:00:00Z"
+    ]
+  },
+  "status": "active",
+  "type": "deployment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "vault_ids": [
+    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+  ],
+  "budget": {
+    "max_list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "type": "limit"
+  }
+}
+```
 
-One of the following:
+## Run Deployment Now
 
-
+`$client->beta->deployments->run(string deploymentID, ?list<AnthropicBeta> betas): BetaManagedAgentsDeploymentRun`
 
-[BetaManagedAgentsGitHubRepositoryResourceConfig](api/beta/deployments.md)
+**POST** `/v1/deployments/{deployment_id}/run`
 
-Type type
+Run Deployment Now
 
-string url
+### Parameters
 
-Github URL of the repository
+- `deploymentID: string`
 
-?Checkout checkout
+- `betas?:optional list<AnthropicBeta>`
 
-Branch or commit to check out. Defaults to the repository's default branch.
+  Optional header to specify the beta version(s) you want to use.
 
-?string mountPath
+### Returns
 
-Mount path in the container. Defaults to `/workspace/<repo-name>`.
+- `BetaManagedAgentsDeploymentRun`
 
-
+  - `string id`
 
-[BetaManagedAgentsFileResourceConfig](api/beta/deployments.md)
+    Unique identifier for this run (`drun_...`).
 
-string fileID
+  - `BetaManagedAgentsAgentReference agent`
 
-ID of a previously uploaded file.
+    A resolved agent reference with a concrete version.
 
-Type type
+  - `\Datetime createdAt`
 
-?string mountPath
+    A timestamp in RFC 3339 format
 
-Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+  - `string deploymentID`
 
-
+    ID of the deployment that produced this run.
 
-[BetaManagedAgentsMemoryStoreResourceConfig](api/beta/deployments.md)
+  - `?Error error`
 
-string memoryStoreID
+    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
-The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+  - `?string sessionID`
 
-Type type
+    Populated on success. Null on creation failure. Exactly one of `session_id` or `error` is non-null.
 
-?Access access
+  - `BetaManagedAgentsTriggerContext triggerContext`
 
-Access mode for an attached memory store.
+    Describes what triggered a deployment run, with trigger-specific metadata.
 
-?string instructions
+  - `Type type`
 
-Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+### Example
 
-
+```php
+<?php
 
-[BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError](api/beta/deployments.md)
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-Type type
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-
+$betaManagedAgentsDeploymentRun = $client->beta->deployments->run(
+  'depl_011CZkZcDH3vPqd7xnEfwTai',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-[BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError](api/beta/deployments.md)
+var_dump($betaManagedAgentsDeploymentRun);
+```
 
-Type type
+#### Response (200)
 
-
+```json
+{
+  "id": "id",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "type": "agent",
+    "version": 1
+  },
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "deployment_id": "deployment_id",
+  "error": {
+    "message": "message",
+    "type": "environment_archived_error"
+  },
+  "session_id": "session_id",
+  "trigger_context": {
+    "scheduled_at": "2019-12-27T18:11:19.117Z",
+    "type": "schedule"
+  },
+  "type": "deployment_run"
+}
+```
 
-[BetaManagedAgentsUnknownDeploymentPausedReasonError](api/beta/deployments.md)
+## Pause Deployment
 
-Type type
+`$client->beta->deployments->pause(string deploymentID, ?list<AnthropicBeta> betas): BetaManagedAgentsDeployment`
 
-
+**POST** `/v1/deployments/{deployment_id}/pause`
 
-[BetaManagedAgentsVaultArchivedDeploymentPausedReasonError](api/beta/deployments.md)
+Pause Deployment
 
-Type type
+### Parameters
 
-
+- `deploymentID: string`
 
-[BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError](api/beta/deployments.md)
+- `betas?:optional list<AnthropicBeta>`
 
-Type type
+  Optional header to specify the beta version(s) you want to use.
 
-
+### Returns
 
-[BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError](api/beta/deployments.md)
+- `BetaManagedAgentsDeployment`
 
-Type type
+  - `string id`
+
+    Unique identifier for this deployment.
+
+  - `BetaManagedAgentsAgentReference agent`
+
+    A resolved agent reference with a concrete version.
+
+  - `?\Datetime archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `\Datetime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?string description`
+
+    Description of what the deployment does.
+
+  - `string environmentID`
+
+    ID of the `environment` where sessions run.
+
+  - `list<BetaManagedAgentsDeploymentInitialEvent> initialEvents`
+
+    Events sent to each session immediately after creation.
+
+  - `array<string,string> metadata`
+
+    Arbitrary key-value metadata. Maximum 16 pairs.
+
+  - `string name`
+
+    Human-readable name.
+
+  - `?BetaManagedAgentsDeploymentPausedReason pausedReason`
+
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+  - `list<BetaManagedAgentsSessionResourceConfig> resources`
+
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+  - `?BetaManagedAgentsSchedule schedule`
+
+    5-field POSIX cron schedule with computed runtime timestamps.
+
+  - `BetaManagedAgentsDeploymentStatus status`
+
+    Lifecycle status of a deployment.
+
+  - `Type type`
+
+  - `\Datetime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `list<string> vaultIDs`
+
+    Vault IDs supplying stored credentials for sessions created from this deployment.
+
+  - `?BetaManagedAgentsBudgetLimit budget`
+
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsDeployment = $client->beta->deployments->pause(
+  'depl_011CZkZcDH3vPqd7xnEfwTai',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsDeployment);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "depl_011CZkZcDH3vPqd7xnEfwTai",
+  "agent": {
+    "id": "agent_011CZkYpogX7uDKUyvBTophP",
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Compiles yesterday's orders into a report every weekday morning.",
+  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "initial_events": [
+    {
+      "content": [
+        {
+          "text": "Compile yesterday's orders into report.md.",
+          "type": "text"
+        }
+      ],
+      "type": "user.message"
+    }
+  ],
+  "metadata": {},
+  "name": "Daily order report",
+  "paused_reason": {
+    "type": "manual"
+  },
+  "resources": [
+    {
+      "type": "github_repository",
+      "url": "url",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      },
+      "mount_path": "mount_path"
+    }
+  ],
+  "schedule": {
+    "expression": "0 9 * * 1-5",
+    "timezone": "America/Los_Angeles",
+    "type": "cron",
+    "last_run_at": "2026-03-16T16:00:09Z",
+    "upcoming_runs_at": [
+      "2026-03-17T16:00:00Z",
+      "2026-03-18T16:00:00Z"
+    ]
+  },
+  "status": "active",
+  "type": "deployment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "vault_ids": [
+    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+  ],
+  "budget": {
+    "max_list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "type": "limit"
+  }
+}
+```
+
+## Unpause Deployment
+
+`$client->beta->deployments->unpause(string deploymentID, ?list<AnthropicBeta> betas): BetaManagedAgentsDeployment`
+
+**POST** `/v1/deployments/{deployment_id}/unpause`
+
+Unpause Deployment
+
+### Parameters
+
+- `deploymentID: string`
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaManagedAgentsDeployment`
+
+  - `string id`
+
+    Unique identifier for this deployment.
+
+  - `BetaManagedAgentsAgentReference agent`
+
+    A resolved agent reference with a concrete version.
+
+  - `?\Datetime archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `\Datetime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?string description`
+
+    Description of what the deployment does.
+
+  - `string environmentID`
+
+    ID of the `environment` where sessions run.
+
+  - `list<BetaManagedAgentsDeploymentInitialEvent> initialEvents`
+
+    Events sent to each session immediately after creation.
+
+  - `array<string,string> metadata`
+
+    Arbitrary key-value metadata. Maximum 16 pairs.
+
+  - `string name`
+
+    Human-readable name.
+
+  - `?BetaManagedAgentsDeploymentPausedReason pausedReason`
+
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+  - `list<BetaManagedAgentsSessionResourceConfig> resources`
+
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+  - `?BetaManagedAgentsSchedule schedule`
+
+    5-field POSIX cron schedule with computed runtime timestamps.
+
+  - `BetaManagedAgentsDeploymentStatus status`
+
+    Lifecycle status of a deployment.
+
+  - `Type type`
+
+  - `\Datetime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `list<string> vaultIDs`
+
+    Vault IDs supplying stored credentials for sessions created from this deployment.
+
+  - `?BetaManagedAgentsBudgetLimit budget`
+
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsDeployment = $client->beta->deployments->unpause(
+  'depl_011CZkZcDH3vPqd7xnEfwTai',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsDeployment);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "depl_011CZkZcDH3vPqd7xnEfwTai",
+  "agent": {
+    "id": "agent_011CZkYpogX7uDKUyvBTophP",
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Compiles yesterday's orders into a report every weekday morning.",
+  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "initial_events": [
+    {
+      "content": [
+        {
+          "text": "Compile yesterday's orders into report.md.",
+          "type": "text"
+        }
+      ],
+      "type": "user.message"
+    }
+  ],
+  "metadata": {},
+  "name": "Daily order report",
+  "paused_reason": {
+    "type": "manual"
+  },
+  "resources": [
+    {
+      "type": "github_repository",
+      "url": "url",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      },
+      "mount_path": "mount_path"
+    }
+  ],
+  "schedule": {
+    "expression": "0 9 * * 1-5",
+    "timezone": "America/Los_Angeles",
+    "type": "cron",
+    "last_run_at": "2026-03-16T16:00:09Z",
+    "upcoming_runs_at": [
+      "2026-03-17T16:00:00Z",
+      "2026-03-18T16:00:00Z"
+    ]
+  },
+  "status": "active",
+  "type": "deployment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "vault_ids": [
+    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+  ],
+  "budget": {
+    "max_list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "type": "limit"
+  }
+}
+```
+
+## Domain types
+
+### Beta Managed Agents Agent Archived Deployment Paused Reason Error
+
+- `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+
+  - `Type type`
+
+### Beta Managed Agents Cron Schedule
+
+- `BetaManagedAgentsCronSchedule`
+
+  - `string expression`
+
+    5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+  - `string timezone`
+
+    IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+  - `Type type`
+
+  - `?\Datetime lastRunAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?list<\Datetime> upcomingRunsAt`
+
+    Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+### Beta Managed Agents Cron Schedule Params
+
+- `BetaManagedAgentsCronScheduleParams`
+
+  - `string expression`
+
+    5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+  - `string timezone`
+
+    Required. IANA timezone identifier (e.g., "America/Los_Angeles", "UTC"). Validated against the IANA timezone database.
+
+  - `Type type`
+
+### Beta Managed Agents Deployment
+
+- `BetaManagedAgentsDeployment`
+
+  - `string id`
+
+    Unique identifier for this deployment.
+
+  - `BetaManagedAgentsAgentReference agent`
+
+    A resolved agent reference with a concrete version.
+
+  - `?\Datetime archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `\Datetime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?string description`
+
+    Description of what the deployment does.
+
+  - `string environmentID`
+
+    ID of the `environment` where sessions run.
+
+  - `list<BetaManagedAgentsDeploymentInitialEvent> initialEvents`
+
+    Events sent to each session immediately after creation.
+
+  - `array<string,string> metadata`
+
+    Arbitrary key-value metadata. Maximum 16 pairs.
+
+  - `string name`
+
+    Human-readable name.
+
+  - `?BetaManagedAgentsDeploymentPausedReason pausedReason`
+
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+  - `list<BetaManagedAgentsSessionResourceConfig> resources`
+
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+  - `?BetaManagedAgentsSchedule schedule`
+
+    5-field POSIX cron schedule with computed runtime timestamps.
+
+  - `BetaManagedAgentsDeploymentStatus status`
+
+    Lifecycle status of a deployment.
+
+  - `Type type`
+
+  - `\Datetime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `list<string> vaultIDs`
+
+    Vault IDs supplying stored credentials for sessions created from this deployment.
+
+  - `?BetaManagedAgentsBudgetLimit budget`
+
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+### Beta Managed Agents Deployment Initial Event
+
+- `BetaManagedAgentsDeploymentInitialEvent`
+
+  - `BetaManagedAgentsDeploymentUserMessageEvent`
+
+    - `list<Content> content`
+
+      Array of content blocks for the user message.
+
+    - `Type type`
+
+  - `BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
+
+    - `string description`
+
+      What the agent should produce. This is the task specification.
+
+    - `Rubric rubric`
+
+      Rubric for grading the quality of an outcome.
+
+    - `Type type`
+
+    - `?int maxIterations`
+
+      Eval→revision cycles before giving up. Default 3, max 20.
+
+  - `BetaManagedAgentsDeploymentSystemMessageEvent`
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks to append. Text-only.
+
+    - `Type type`
+
+### Beta Managed Agents Deployment Initial Event Params
+
+- `BetaManagedAgentsDeploymentInitialEventParams`
+
+  - `ManagedAgentsUserMessageEventParams`
+
+    - `list<Content> content`
+
+      Array of content blocks for the user message.
+
+    - `Type type`
+
+  - `ManagedAgentsUserDefineOutcomeEventParams`
+
+    - `string description`
+
+      What the agent should produce. This is the task specification.
+
+    - `Rubric rubric`
+
+      Rubric for grading the quality of an outcome.
+
+    - `Type type`
+
+    - `?int maxIterations`
+
+      Eval→revision cycles before giving up. Default 3, max 20.
+
+  - `ManagedAgentsSystemMessageEventParams`
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks to append. Text-only.
+
+    - `Type type`
+
+### Beta Managed Agents Deployment Paused Reason
+
+- `BetaManagedAgentsDeploymentPausedReason`
+
+  - `BetaManagedAgentsManualDeploymentPausedReason`
+
+    - `Type type`
+
+  - `BetaManagedAgentsErrorDeploymentPausedReason`
+
+    - `BetaManagedAgentsDeploymentPausedReasonError error`
+
+      The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+    - `Type type`
+
+### Beta Managed Agents Deployment Paused Reason Error
+
+- `BetaManagedAgentsDeploymentPausedReasonError`
+
+  - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+
+    - `Type type`
+
+  - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+
+    - `Type type`
+
+  - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+
+    - `Type type`
+
+  - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+
+    - `Type type`
+
+  - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+
+    - `Type type`
+
+  - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+
+    - `Type type`
+
+  - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+
+    - `Type type`
+
+  - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+
+    - `Type type`
+
+  - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+
+    - `Type type`
+
+  - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+
+    - `Type type`
+
+  - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+
+    - `Type type`
+
+  - `BetaManagedAgentsUnknownDeploymentPausedReasonError`
+
+    - `Type type`
+
+  - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+
+    - `Type type`
+
+  - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+
+    - `Type type`
+
+### Beta Managed Agents Deployment Status
+
+- `BetaManagedAgentsDeploymentStatus`
+
+  - `"active"`
+
+  - `"paused"`
+
+### Beta Managed Agents Deployment System Message Event
+
+- `BetaManagedAgentsDeploymentSystemMessageEvent`
+
+  - `list<BetaManagedAgentsSystemContentBlock> content`
+
+    System content blocks to append. Text-only.
+
+  - `Type type`
+
+### Beta Managed Agents Deployment User Define Outcome Event
+
+- `BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
+
+  - `string description`
+
+    What the agent should produce. This is the task specification.
+
+  - `Rubric rubric`
+
+    Rubric for grading the quality of an outcome.
+
+  - `Type type`
+
+  - `?int maxIterations`
+
+    Eval→revision cycles before giving up. Default 3, max 20.
+
+### Beta Managed Agents Deployment User Message Event
+
+- `BetaManagedAgentsDeploymentUserMessageEvent`
+
+  - `list<Content> content`
+
+    Array of content blocks for the user message.
+
+  - `Type type`
+
+### Beta Managed Agents Environment Archived Deployment Paused Reason Error
+
+- `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+
+  - `Type type`
+
+### Beta Managed Agents Environment Not Found Deployment Paused Reason Error
+
+- `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+
+  - `Type type`
+
+### Beta Managed Agents Error Deployment Paused Reason
+
+- `BetaManagedAgentsErrorDeploymentPausedReason`
+
+  - `BetaManagedAgentsDeploymentPausedReasonError error`
+
+    The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+  - `Type type`
+
+### Beta Managed Agents File Not Found Deployment Paused Reason Error
+
+- `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+
+  - `Type type`
+
+### Beta Managed Agents File Resource Config
+
+- `BetaManagedAgentsFileResourceConfig`
+
+  - `string fileID`
+
+    ID of a previously uploaded file.
+
+  - `Type type`
+
+  - `?string mountPath`
+
+    Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+### Beta Managed Agents GitHub Repository Resource Config
+
+- `BetaManagedAgentsGitHubRepositoryResourceConfig`
+
+  - `Type type`
+
+  - `string url`
+
+    Github URL of the repository
+
+  - `?Checkout checkout`
+
+    Branch or commit to check out. Defaults to the repository's default branch.
+
+  - `?string mountPath`
+
+    Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+### Beta Managed Agents Manual Deployment Paused Reason
+
+- `BetaManagedAgentsManualDeploymentPausedReason`
+
+  - `Type type`
+
+### Beta Managed Agents MCP Egress Blocked Deployment Paused Reason Error
+
+- `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+
+  - `Type type`
+
+### Beta Managed Agents Memory Store Archived Deployment Paused Reason Error
+
+- `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+
+  - `Type type`
+
+### Beta Managed Agents Memory Store Resource Config
+
+- `BetaManagedAgentsMemoryStoreResourceConfig`
+
+  - `string memoryStoreID`
+
+    The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+  - `Type type`
+
+  - `?Access access`
+
+    Access mode for an attached memory store.
+
+  - `?string instructions`
+
+    Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+### Beta Managed Agents Organization Disabled Deployment Paused Reason Error
+
+- `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+
+  - `Type type`
+
+### Beta Managed Agents Schedule
+
+- `BetaManagedAgentsSchedule`
+
+  - `string expression`
+
+    5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+  - `string timezone`
+
+    IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+  - `Type type`
+
+  - `?\Datetime lastRunAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?list<\Datetime> upcomingRunsAt`
+
+    Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+### Beta Managed Agents Schedule Params
+
+- `BetaManagedAgentsScheduleParams`
+
+  - `string expression`
+
+    5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+  - `string timezone`
+
+    Required. IANA timezone identifier (e.g., "America/Los_Angeles", "UTC"). Validated against the IANA timezone database.
+
+  - `Type type`
+
+### Beta Managed Agents Self Hosted Resources Unsupported Deployment Paused Reason Error
+
+- `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+
+  - `Type type`
+
+### Beta Managed Agents Session Resource Config
+
+- `BetaManagedAgentsSessionResourceConfig`
+
+  - `BetaManagedAgentsGitHubRepositoryResourceConfig`
+
+    - `Type type`
+
+    - `string url`
+
+      Github URL of the repository
+
+    - `?Checkout checkout`
+
+      Branch or commit to check out. Defaults to the repository's default branch.
+
+    - `?string mountPath`
+
+      Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+  - `BetaManagedAgentsFileResourceConfig`
+
+    - `string fileID`
+
+      ID of a previously uploaded file.
+
+    - `Type type`
+
+    - `?string mountPath`
+
+      Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+  - `BetaManagedAgentsMemoryStoreResourceConfig`
+
+    - `string memoryStoreID`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `Type type`
+
+    - `?Access access`
+
+      Access mode for an attached memory store.
+
+    - `?string instructions`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+### Beta Managed Agents Session Resource Not Found Deployment Paused Reason Error
+
+- `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+
+  - `Type type`
+
+### Beta Managed Agents Skill Not Found Deployment Paused Reason Error
+
+- `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+
+  - `Type type`
+
+### Beta Managed Agents Unknown Deployment Paused Reason Error
+
+- `BetaManagedAgentsUnknownDeploymentPausedReasonError`
+
+  - `Type type`
+
+### Beta Managed Agents Vault Archived Deployment Paused Reason Error
+
+- `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+
+  - `Type type`
+
+### Beta Managed Agents Vault Not Found Deployment Paused Reason Error
+
+- `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+
+  - `Type type`
+
+### Beta Managed Agents Workspace Archived Deployment Paused Reason Error
+
+- `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+
+  - `Type type`
 
 ---
 

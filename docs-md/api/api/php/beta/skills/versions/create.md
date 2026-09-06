@@ -1,158 +1,97 @@
 # Create Skill Version
 
-Copy page
+`$client->beta->skills->versions->create(string skillID, list<string> files, ?list<AnthropicBeta> betas): SkillVersion`
 
-
-
-PHP
-
-# Create Skill Version
-
-$client->beta->skills->versions->create(string skillID, list<string> files, ?list<AnthropicBeta> betas): [VersionNewResponse](api/beta/skills/versions.md)
-
-POST/v1/skills/{skill\_id}/versions
+**POST** `/v1/skills/{skill_id}/versions`
 
 Create Skill Version
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `skillID: string`
 
-skillID: string
+  Unique identifier for the skill.
 
-Unique identifier for the skill.
+  The format and length of IDs may change over time.
 
-The format and length of IDs may change over time.
+- `files: list<string>`
 
-
+  Files to upload for the skill.
 
-files: list<string>
+  All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
-Files to upload for the skill.
+- `betas?:optional list<AnthropicBeta>`
 
-All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
+  Optional header to specify the beta version(s) you want to use.
 
-betas?:optional list<AnthropicBeta>
+## Returns
 
-Optional header to specify the beta version(s) you want to use.
+- `SkillVersion`
 
-##### ReturnsExpand Collapse
+  - `string id`
 
-
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
 
-[VersionNewResponse](api/beta/skills/versions.md)
+  - `\Datetime createdAt`
 
-
+    ISO 8601 timestamp of when the skill was created.
 
-string id
+  - `string description`
 
-Unique identifier for the skill version.
+    Description of the skill version.
 
-The format and length of IDs may change over time.
+    This is extracted from the SKILL.md file in the skill upload.
 
-string createdAt
+  - `string name`
 
-ISO 8601 timestamp of when the skill version was created.
+    The Skill's immutable kebab-case slug, set at creation from the first
+    upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
+    later upload must resolve to the same value. Also the top-level directory
+    of the Skill's mounted files and the base name of a downloaded archive.
 
-
+  - `string skillID`
 
-string description
+    Unique identifier for the skill.
 
-Description of the skill version.
+    The format and length of IDs may change over time.
 
-This is extracted from the SKILL.md file in the skill upload.
+  - `"skill_version" type`
 
-
+    Object type.
 
-string directory
+    For Skill Versions, this is always `"skill_version"`.
 
-Directory name of the skill version.
+## Example
 
-This is the top-level directory name that was extracted from the uploaded files.
-
-
-
-string name
-
-Human-readable name of the skill version.
-
-This is extracted from the SKILL.md file in the skill upload.
-
-string skillID
-
-Identifier for the skill that this version belongs to.
-
-
-
-string type
-
-Object type.
-
-For Skill Versions, this is always `"skill_version"`.
-
-
-
-string version
-
-Version identifier for the skill.
-
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
-
-Create Skill Version
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
-$version = $client->beta->skills->versions->create(
+$betaSkillVersion = $client->beta->skills->versions->create(
   'skill_id',
   files: [
     FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
   ],
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
-var_dump($version);
+var_dump($betaSkillVersion);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
-  "id": "skillver_01JAbcdefghijklmnopqrstuvw",
+  "id": "id",
   "created_at": "2024-10-30T23:58:27.427722Z",
-  "description": "A custom skill for doing something useful",
-  "directory": "my-skill",
-  "name": "my-skill",
+  "description": "description",
+  "name": "name",
   "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type",
-  "version": "1759178010641129"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "skillver_01JAbcdefghijklmnopqrstuvw",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "description": "A custom skill for doing something useful",
-  "directory": "my-skill",
-  "name": "my-skill",
-  "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type",
-  "version": "1759178010641129"
+  "type": "skill_version"
 }
 ```
 

@@ -1,142 +1,128 @@
 # List Work Items
 
-Copy page
+`$ ant beta:environments:work list`
 
-
-
-CLI
-
-# List Work Items
-
-$ ant beta:environments:work list
-
-GET/v1/environments/{environment\_id}/work
+**GET** `/v1/environments/{environment_id}/work`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 List work items in an environment.
 
-##### ParametersExpand Collapse
+## Parameters
 
---environment-id: string
+- `--environment-id: string`
 
-Path param
+  Path param
 
---limit: optional number
+- `--limit: optional number`
 
-Query param: Maximum number of work items to return
+  Query param: Maximum number of work items to return
 
---page: optional string
+  maximum: 1000, minimum: 1
 
-Query param: Opaque cursor from previous response for pagination
+- `--page: optional string`
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+  Query param: Opaque cursor from previous response for pagination
 
-Header param: Optional header to specify the beta version(s) you want to use.
+- `--beta: optional array of AnthropicBeta`
 
-##### ReturnsExpand Collapse
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-
+## Returns
 
-beta\_self\_hosted\_work\_list\_response: object { data, next\_page } 
+- `beta_self_hosted_work_list_response: object`
 
-Response when listing work items with cursor-based pagination.
+  Response when listing work items with cursor-based pagination.
 
-
+  - `data: array of BetaSelfHostedWork`
 
-data: array of [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more } 
+    List of work items
 
-List of work items
+    - `id: string`
 
-id: string
+      Work identifier (e.g., 'work_...')
 
-Work identifier (e.g., 'work\_...')
+    - `acknowledged_at: string`
 
-acknowledged\_at: string
+      RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+    - `created_at: string`
 
-created\_at: string
+      RFC 3339 timestamp when work was created
 
-RFC 3339 timestamp when work was created
+    - `data: object`
 
-
+      The actual work to be performed
 
-data: object { id, type } 
+      - `id: string`
 
-The actual work to be performed
+        Session identifier (e.g., 'session_...')
 
-id: string
+      - `type: "session"`
 
-Session identifier (e.g., 'session\_...')
+        Type of work data
 
-type: "session"
+    - `environment_id: string`
 
-Type of work data
+      Environment identifier this work belongs to (e.g., `env_...`)
 
-environment\_id: string
+    - `latest_heartbeat_at: string`
 
-Environment identifier this work belongs to (e.g., `env_...`)
+      RFC 3339 timestamp of the most recent heartbeat
 
-latest\_heartbeat\_at: string
+    - `metadata: map[string]`
 
-RFC 3339 timestamp of the most recent heartbeat
+      User-provided metadata key-value pairs associated with this work item
 
-metadata: map[string]
+    - `secret: string`
 
-User-provided metadata key-value pairs associated with this work item
+      Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
-started\_at: string
+    - `started_at: string`
 
-RFC 3339 timestamp when work execution started
+      RFC 3339 timestamp when work execution started
 
-
+    - `state: "queued" or "starting" or "active" or 2 more`
 
-state: "queued" or "starting" or "active" or 2 more
+      Current state of the work item
 
-Current state of the work item
+      - `"queued"`
 
-"queued"
+      - `"starting"`
 
-"starting"
+      - `"active"`
 
-"active"
+      - `"stopping"`
 
-"stopping"
+      - `"stopped"`
 
-"stopped"
+    - `stop_requested_at: string`
 
-stop\_requested\_at: string
+      RFC 3339 timestamp when stop was requested
 
-RFC 3339 timestamp when stop was requested
+    - `stopped_at: string`
 
-stopped\_at: string
+      RFC 3339 timestamp when work execution stopped
 
-RFC 3339 timestamp when work execution stopped
+    - `type: "work"`
 
-type: "work"
+      The type of object (always 'work')
 
-The type of object (always 'work')
+  - `next_page: string`
 
-next\_page: string
+    Opaque cursor for fetching the next page of results
 
-Opaque cursor for fetching the next page of results
+## Example
 
-List Work Items
-
-CLI
-
-```shiki
+```bash
 ant beta:environments:work list \
   --api-key my-anthropic-api-key \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
@@ -152,39 +138,7 @@ Response 200
       "metadata": {
         "foo": "string"
       },
-      "started_at": "started_at",
-      "state": "queued",
-      "stop_requested_at": "stop_requested_at",
-      "stopped_at": "stopped_at",
-      "type": "work"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "acknowledged_at": "acknowledged_at",
-      "created_at": "created_at",
-      "data": {
-        "id": "id",
-        "type": "session"
-      },
-      "environment_id": "environment_id",
-      "latest_heartbeat_at": "latest_heartbeat_at",
-      "metadata": {
-        "foo": "string"
-      },
+      "secret": "secret",
       "started_at": "started_at",
       "state": "queued",
       "stop_requested_at": "stop_requested_at",

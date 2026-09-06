@@ -1,14 +1,6 @@
 # List Federation Rules
 
-Copy page
-
-
-
-cURL
-
-# List Federation Rules
-
-GET/v1/organizations/federation\_rules
+**GET** `/v1/organizations/federation_rules`
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -17,354 +9,263 @@ List federation rules in your organization.
 Optionally filter by issuer with `issuer_id`. Archived rules are excluded
 unless `include_archived=true`.
 
-##### Query parameters
+## Query parameters
 
-
+- `include_archived: optional boolean`
 
-include\_archived: optional boolean
+  Include archived resources. Defaults to false.
 
-Include archived resources. Defaults to false.
+  default: false
 
-defaultfalse
+- `issuer_id: optional string`
 
-issuer\_id: optional string
+  Filter to rules referencing this federation issuer.
 
-Filter to rules referencing this federation issuer.
+- `limit: optional number`
 
-
+  Number of results per page.
 
-limit: optional number
+  default: 20, maximum: 100, minimum: 1
 
-Number of results per page.
+- `page: optional string`
 
-default20
+  Opaque cursor from a previous response's `next_page`.
 
-maximum100
+## Headers
 
-minimum1
+- `"anthropic-beta": optional array of AnthropicBeta`
 
-page: optional string
+  Optional header to specify the beta version(s) you want to use.
 
-Opaque cursor from a previous response's `next_page`.
+  - `string`
 
-##### Headers
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
-
+    - `"message-batches-2024-09-24"`
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+    - `"prompt-caching-2024-07-31"`
 
-Optional header to specify the beta version(s) you want to use.
+    - `"computer-use-2024-10-22"`
 
-One of the following:
+    - `"computer-use-2025-01-24"`
 
-string
+    - `"pdfs-2024-09-25"`
 
-
+    - `"token-counting-2024-11-01"`
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
+    - `"token-efficient-tools-2025-02-19"`
 
-One of the following:
+    - `"output-128k-2025-02-19"`
 
-"message-batches-2024-09-24"
+    - `"files-api-2025-04-14"`
 
-"prompt-caching-2024-07-31"
+    - `"mcp-client-2025-04-04"`
 
-"computer-use-2024-10-22"
+    - `"mcp-client-2025-11-20"`
 
-"computer-use-2025-01-24"
+    - `"dev-full-thinking-2025-05-14"`
 
-"pdfs-2024-09-25"
+    - `"interleaved-thinking-2025-05-14"`
 
-"token-counting-2024-11-01"
+    - `"code-execution-2025-05-22"`
 
-"token-efficient-tools-2025-02-19"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"output-128k-2025-02-19"
+    - `"context-1m-2025-08-07"`
 
-"files-api-2025-04-14"
+    - `"context-management-2025-06-27"`
 
-"mcp-client-2025-04-04"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"mcp-client-2025-11-20"
+    - `"skills-2025-10-02"`
 
-"dev-full-thinking-2025-05-14"
+    - `"fast-mode-2026-02-01"`
 
-"interleaved-thinking-2025-05-14"
+    - `"output-300k-2026-03-24"`
 
-"code-execution-2025-05-22"
+    - `"user-profiles-2026-03-24"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"user-profiles-2026-08-18"`
 
-"context-1m-2025-08-07"
+    - `"advisor-tool-2026-03-01"`
 
-"context-management-2025-06-27"
+    - `"managed-agents-2026-04-01"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"cache-diagnosis-2026-04-07"`
 
-"skills-2025-10-02"
+    - `"dreaming-2026-04-21"`
 
-"fast-mode-2026-02-01"
+    - `"thinking-token-count-2026-05-13"`
 
-"output-300k-2026-03-24"
+    - `"server-side-fallback-2026-06-01"`
 
-"user-profiles-2026-03-24"
+    - `"server-side-fallback-2026-07-01"`
 
-"user-profiles-2026-08-18"
+    - `"fallback-credit-2026-06-01"`
 
-"advisor-tool-2026-03-01"
+    - `"fallback-credit-2026-07-01"`
 
-"managed-agents-2026-04-01"
+    - `"agent-memory-2026-07-22"`
 
-"cache-diagnosis-2026-04-07"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-"dreaming-2026-04-21"
+    - `"compact-2026-01-12"`
 
-"thinking-token-count-2026-05-13"
+    - `"computer-use-2025-11-24"`
 
-"server-side-fallback-2026-06-01"
+    - `"mcp-tunnels-2026-06-22"`
 
-"server-side-fallback-2026-07-01"
+    - `"structured-outputs-2025-11-13"`
 
-"fallback-credit-2026-06-01"
+    - `"task-budgets-2026-03-13"`
 
-"fallback-credit-2026-07-01"
+    - `"thinking-display-updates-2026-08-18"`
 
-"agent-memory-2026-07-22"
+    - `"ce-user-management-2026-07-13"`
 
-"mid-conversation-tool-changes-2026-07-01"
+    - `"mid-conversation-output-config-2026-07-01"`
 
-"compact-2026-01-12"
+    - `"thinking-binding-controls-2026-08-01"`
 
-"computer-use-2025-11-24"
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"mcp-tunnels-2026-06-22"
+## Returns
 
-"structured-outputs-2025-11-13"
+- `data: array of BetaFederationRule`
 
-"task-budgets-2026-03-13"
+  - `id: string`
 
-"thinking-display-updates-2026-08-18"
+    Tagged ID of the federation rule.
 
-"ce-user-management-2026-07-13"
+  - `applies_to_all_workspaces: boolean`
 
-"mid-conversation-output-config-2026-07-01"
+    When true, this rule is enabled for every workspace in the org (including ones created after the rule). `workspace_ids` is ignored at exchange time.
 
-"thinking-binding-controls-2026-08-01"
+  - `archived_at: string or null`
 
-"mid-conversation-system-clear-at-2026-08-21"
+    If set, this rule is archived and rejects token exchange.
 
-##### Returns
+    format: date-time
 
-
+  - `archived_by_actor_id: string or null`
 
-data: array of [BetaFederationRule](api/http/beta/organization/federation/rules.md) { id, applies\_to\_all\_workspaces, archived\_at, 17 more }
+    Tagged ID (`user_`/`svac_`) of the actor that archived this rule.
 
-id: string
+  - `attributes: map[string] or null`
 
-Tagged ID of the federation rule.
+    CEL expressions extracting named values from claims. Not yet supported; always null.
 
-applies\_to\_all\_workspaces: boolean
+  - `created_at: string`
 
-When true, this rule is enabled for every workspace in the org (including ones created after the rule). `workspace_ids` is ignored at exchange time.
+    When this rule was created.
 
-
+    format: date-time
 
-archived\_at: string or null
+  - `created_by_actor_id: string or null`
 
-If set, this rule is archived and rejects token exchange.
+    Tagged ID (`user_`/`svac_`) of the actor that created this rule.
 
-formatdate-time
+  - `description: string or null`
 
-archived\_by\_actor\_id: string or null
+    Optional free-text description.
 
-Tagged ID (`user_`/`svac_`) of the actor that archived this rule.
+  - `issuer_id: string`
 
-attributes: map[string] or null
+    Tagged ID of the issuer whose tokens this rule accepts.
 
-CEL expressions extracting named values from claims. Not yet supported; always null.
+  - `issuer_name: string or null`
 
-
+    Issuer's display name at read time.
 
-created\_at: string
+  - `match: BetaFederationRuleMatch`
 
-When this rule was created.
+    Conditions the verified JWT must satisfy for this rule to apply. All populated matcher fields must pass.
 
-formatdate-time
+    - `audience: optional string or null`
 
-created\_by\_actor\_id: string or null
+      Exact match against the `aud` claim (any element if array). When omitted, the JWT's `aud` must still equal Anthropic's expected audience for the issuer; setting this field overrides that default.
 
-Tagged ID (`user_`/`svac_`) of the actor that created this rule.
+      maxLength: 1024
 
-description: string or null
+    - `claims: optional map[string] or null`
 
-Optional free-text description.
+      Exact-match `{claim: value}` pairs against top-level claims. Only string-valued claims can be matched; use `condition` for non-string claims.
 
-issuer\_id: string
+    - `condition: optional string or null`
 
-Tagged ID of the issuer whose tokens this rule accepts.
+      CEL expression over claims for logic the structural fields can't express. Must evaluate to a boolean and may reference only the `claims` variable; a constant-true expression (such as `true`) is rejected with 400.
 
-issuer\_name: string or null
+      maxLength: 4096
 
-Issuer's display name at read time.
+    - `subject_prefix: optional string or null`
 
-
+      Match the verified JWT `sub` claim. Exact match unless the value ends with `*`, in which case it is a prefix match. Example: `repo:my-org/my-repo:ref:refs/heads/main`.
 
-match: [BetaFederationRuleMatch](api/http/beta/organization/federation/rules.md) { audience, claims, condition, subject\_prefix }
+      maxLength: 1024
 
-Conditions the verified JWT must satisfy for this rule to apply. All populated matcher fields must pass.
+  - `name: string`
 
-
+    Admin-chosen slug identifier.
 
-audience: optional string or null
+  - `oauth_scope: string`
 
-Exact match against the `aud` claim (any element if array). When omitted, the JWT's `aud` must still equal Anthropic's expected audience for the issuer; setting this field overrides that default.
+    Space-separated OAuth scopes granted on the minted token.
 
-maxLength1024
+  - `target: BetaServiceAccountTarget`
 
-claims: optional map[string] or null
+    Identity that tokens minted via this rule act as. Currently always a `service_account` target.
 
-Exact-match `{claim: value}` pairs against top-level claims. Only string-valued claims can be matched; use `condition` for non-string claims.
+    - `service_account_id: string`
 
-
+      Tagged ID of the service account to mint tokens for.
 
-condition: optional string or null
+    - `type: "service_account"`
 
-CEL expression over claims for logic the structural fields can't express. Must evaluate to a boolean and may reference only the `claims` variable; a constant-true expression (such as `true`) is rejected with 400.
+    - `service_account_name: optional string or null`
 
-maxLength4096
+      Service account's display name at read time. Ignored on writes.
 
-
+  - `token_lifetime_seconds: number`
 
-subject\_prefix: optional string or null
+    Lifetime in seconds of access tokens minted via this rule. Minted tokens are capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.
 
-Match the verified JWT `sub` claim. Exact match unless the value ends with `*`, in which case it is a prefix match. Example: `repo:my-org/my-repo:ref:refs/heads/main`.
+  - `type: "federation_rule"`
 
-maxLength1024
+    default: federation_rule
 
-name: string
+  - `updated_at: string`
 
-Admin-chosen slug identifier.
+    When this rule was last updated.
 
-oauth\_scope: string
+    format: date-time
 
-Space-separated OAuth scopes granted on the minted token.
+  - `updated_by_actor_id: string or null`
 
-
+    Tagged ID (`user_`/`svac_`) of the actor that last updated this rule.
 
-target: [BetaServiceAccountTarget](api/http/beta/organization/federation/rules.md) { service\_account\_id, type, service\_account\_name }
+  - `workspace_id: string or null`
 
-Identity that tokens minted via this rule act as. Currently always a `service_account` target.
+    Legacy single-workspace binding. Prefer `workspace_ids` and the `/federation_rules/{federation_rule_id}/workspaces` sub-resource for managing workspace enablement.
 
-service\_account\_id: string
+  - `workspace_ids: array of string`
 
-Tagged ID of the service account to mint tokens for.
+    Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
 
-type: "service\_account"
+- `next_page: string or null`
 
-service\_account\_name: optional string or null
+  Opaque cursor for the next page, or null if no more results.
 
-Service account's display name at read time. Ignored on writes.
+## Example
 
-token\_lifetime\_seconds: number
-
-Lifetime in seconds of access tokens minted via this rule. Minted tokens are capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.
-
-
-
-type: "federation\_rule"
-
-defaultfederation\_rule
-
-
-
-updated\_at: string
-
-When this rule was last updated.
-
-formatdate-time
-
-updated\_by\_actor\_id: string or null
-
-Tagged ID (`user_`/`svac_`) of the actor that last updated this rule.
-
-workspace\_id: string or null
-
-Legacy single-workspace binding. Prefer `workspace_ids` and the `/federation_rules/{federation_rule_id}/workspaces` sub-resource for managing workspace enablement.
-
-workspace\_ids: array of string
-
-Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
-
-next\_page: string or null
-
-Opaque cursor for the next page, or null if no more results.
-
-List Federation Rules
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/federation_rules \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "fdrl_01SDCCSbTxrXDpWc1phhtcfK",
-      "applies_to_all_workspaces": true,
-      "archived_at": "2019-12-27T18:11:19.117Z",
-      "archived_by_actor_id": "archived_by_actor_id",
-      "attributes": {
-        "foo": "string"
-      },
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "created_by_actor_id": "created_by_actor_id",
-      "description": "description",
-      "issuer_id": "issuer_id",
-      "issuer_name": "issuer_name",
-      "match": {
-        "audience": "audience",
-        "claims": {
-          "foo": "string"
-        },
-        "condition": "condition",
-        "subject_prefix": "subject_prefix"
-      },
-      "name": "prod-deploy-pipeline",
-      "oauth_scope": "oauth_scope",
-      "target": {
-        "service_account_id": "svac_01SDCCSbTxrXDpWc1phhtcfK",
-        "type": "service_account",
-        "service_account_name": "service_account_name"
-      },
-      "token_lifetime_seconds": 0,
-      "type": "federation_rule",
-      "updated_at": "2024-10-30T23:58:27.427722Z",
-      "updated_by_actor_id": "updated_by_actor_id",
-      "workspace_id": "workspace_id",
-      "workspace_ids": [
-        "string"
-      ]
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

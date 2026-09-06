@@ -1,16 +1,8 @@
 # Cancel a Message Batch
 
-Copy page
+`beta.messages.batches.cancel(message_batch_id, **kwargs)  -> BetaMessageBatch`
 
-
-
-Python
-
-# Cancel a Message Batch
-
-beta.messages.batches.cancel(strmessage\_batch\_id, BatchCancelParams\*\*kwargs)  -> [BetaMessageBatch](api/beta/messages/batches.md)
-
-POST/v1/messages/batches/{message\_batch\_id}/cancel
+**POST** `/v1/messages/batches/{message_batch_id}/cancel`
 
 Batches may be canceled any time before processing ends. Once cancellation is initiated, the batch enters a `canceling` state, at which time the system may complete any in-progress, non-interruptible requests before finalizing cancellation.
 
@@ -18,210 +10,228 @@ The number of canceled requests is specified in `request_counts`. To determine w
 
 Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
-message\_batch\_id: str
+- `message_batch_id: str`
 
-ID of the Message Batch.
+  ID of the Message Batch.
 
-
+- `betas: Optional[List[AnthropicBetaParam]]`
 
-betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
+  Optional header to specify the beta version(s) you want to use.
 
-Optional header to specify the beta version(s) you want to use.
+  - `str`
 
-One of the following:
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
 
-str
+    - `"message-batches-2024-09-24"`
 
-
+    - `"prompt-caching-2024-07-31"`
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]
+    - `"computer-use-2024-10-22"`
 
-One of the following:
+    - `"computer-use-2025-01-24"`
 
-"message-batches-2024-09-24"
+    - `"pdfs-2024-09-25"`
 
-"prompt-caching-2024-07-31"
+    - `"token-counting-2024-11-01"`
 
-"computer-use-2024-10-22"
+    - `"token-efficient-tools-2025-02-19"`
 
-"computer-use-2025-01-24"
+    - `"output-128k-2025-02-19"`
 
-"pdfs-2024-09-25"
+    - `"files-api-2025-04-14"`
 
-"token-counting-2024-11-01"
+    - `"mcp-client-2025-04-04"`
 
-"token-efficient-tools-2025-02-19"
+    - `"mcp-client-2025-11-20"`
 
-"output-128k-2025-02-19"
+    - `"dev-full-thinking-2025-05-14"`
 
-"files-api-2025-04-14"
+    - `"interleaved-thinking-2025-05-14"`
 
-"mcp-client-2025-04-04"
+    - `"code-execution-2025-05-22"`
 
-"mcp-client-2025-11-20"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"dev-full-thinking-2025-05-14"
+    - `"context-1m-2025-08-07"`
 
-"interleaved-thinking-2025-05-14"
+    - `"context-management-2025-06-27"`
 
-"code-execution-2025-05-22"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"skills-2025-10-02"`
 
-"context-1m-2025-08-07"
+    - `"fast-mode-2026-02-01"`
 
-"context-management-2025-06-27"
+    - `"output-300k-2026-03-24"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"user-profiles-2026-03-24"`
 
-"skills-2025-10-02"
+    - `"user-profiles-2026-08-18"`
 
-"fast-mode-2026-02-01"
+    - `"advisor-tool-2026-03-01"`
 
-"output-300k-2026-03-24"
+    - `"managed-agents-2026-04-01"`
 
-"user-profiles-2026-03-24"
+    - `"cache-diagnosis-2026-04-07"`
 
-"advisor-tool-2026-03-01"
+    - `"dreaming-2026-04-21"`
 
-"managed-agents-2026-04-01"
+    - `"thinking-token-count-2026-05-13"`
 
-"cache-diagnosis-2026-04-07"
+    - `"server-side-fallback-2026-06-01"`
 
-"thinking-token-count-2026-05-13"
+    - `"server-side-fallback-2026-07-01"`
 
-"server-side-fallback-2026-06-01"
+    - `"fallback-credit-2026-06-01"`
 
-"fallback-credit-2026-06-01"
+    - `"fallback-credit-2026-07-01"`
 
-"agent-memory-2026-07-22"
+    - `"agent-memory-2026-07-22"`
 
-##### ReturnsExpand Collapse
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-
+    - `"compact-2026-01-12"`
 
-class BetaMessageBatch: …
+    - `"computer-use-2025-11-24"`
 
-
+    - `"mcp-tunnels-2026-06-22"`
 
-id: str
+    - `"structured-outputs-2025-11-13"`
 
-Unique object identifier.
+    - `"task-budgets-2026-03-13"`
 
-The format and length of IDs may change over time.
+    - `"thinking-display-updates-2026-08-18"`
 
-archived\_at: Optional[datetime]
+    - `"ce-user-management-2026-07-13"`
 
-RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+    - `"mid-conversation-output-config-2026-07-01"`
 
-cancel\_initiated\_at: Optional[datetime]
+    - `"thinking-binding-controls-2026-08-01"`
 
-RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-created\_at: datetime
+## Returns
 
-RFC 3339 datetime string representing the time at which the Message Batch was created.
+- `class BetaMessageBatch: …`
 
-
+  - `id: str`
 
-ended\_at: Optional[datetime]
+    Unique object identifier.
 
-RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+    The format and length of IDs may change over time.
 
-Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+  - `archived_at: Optional[datetime]`
 
-formatdate-time
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-expires\_at: datetime
+    format: date-time
 
-RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+  - `cancel_initiated_at: Optional[datetime]`
 
-
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-processing\_status: Literal["in\_progress", "canceling", "ended"]
+    format: date-time
 
-Processing status of the Message Batch.
+  - `created_at: datetime`
 
-One of the following:
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-"in\_progress"
+    format: date-time
 
-"canceling"
+  - `ended_at: Optional[datetime]`
 
-"ended"
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
-
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
-request\_counts: [BetaMessageBatchRequestCounts](api/beta/messages/batches.md)
+    format: date-time
 
-Tallies requests within the Message Batch, categorized by their status.
+  - `expires_at: datetime`
 
-Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-
+    format: date-time
 
-canceled: int
+  - `processing_status: Literal["in_progress", "canceling", "ended"]`
 
-Number of requests in the Message Batch that have been canceled.
+    Processing status of the Message Batch.
 
-This is zero until processing of the entire Message Batch has ended.
+    - `"in_progress"`
 
-
+    - `"canceling"`
 
-errored: int
+    - `"ended"`
 
-Number of requests in the Message Batch that encountered an error.
+  - `request_counts: BetaMessageBatchRequestCounts`
 
-This is zero until processing of the entire Message Batch has ended.
+    Tallies requests within the Message Batch, categorized by their status.
 
-
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-expired: int
+    - `canceled: int`
 
-Number of requests in the Message Batch that have expired.
+      Number of requests in the Message Batch that have been canceled.
 
-This is zero until processing of the entire Message Batch has ended.
+      This is zero until processing of the entire Message Batch has ended.
 
-processing: int
+      default: 0
 
-Number of requests in the Message Batch that are processing.
+    - `errored: int`
 
-
+      Number of requests in the Message Batch that encountered an error.
 
-succeeded: int
+      This is zero until processing of the entire Message Batch has ended.
 
-Number of requests in the Message Batch that have completed successfully.
+      default: 0
 
-This is zero until processing of the entire Message Batch has ended.
+    - `expired: int`
 
-
+      Number of requests in the Message Batch that have expired.
 
-results\_url: Optional[str]
+      This is zero until processing of the entire Message Batch has ended.
 
-URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
+      default: 0
 
-Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+    - `processing: int`
 
-
+      Number of requests in the Message Batch that are processing.
 
-type: Literal["message\_batch"]
+      default: 0
 
-Object type.
+    - `succeeded: int`
 
-For Message Batches, this is always `"message_batch"`.
+      Number of requests in the Message Batch that have completed successfully.
 
-Cancel a Message Batch
+      This is zero until processing of the entire Message Batch has ended.
 
-Python
+      default: 0
 
-```shiki
+  - `results_url: Optional[str]`
+
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
+
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+
+  - `type: Literal["message_batch"]`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
+
+## Example
+
+```python
 import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
 )
 beta_message_batch = client.beta.messages.batches.cancel(
     message_batch_id="message_batch_id",
@@ -229,38 +239,9 @@ beta_message_batch = client.beta.messages.batches.cancel(
 print(beta_message_batch.id)
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "archived_at": "2024-08-20T18:37:24.100435Z",
-  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
-  "created_at": "2024-08-20T18:37:24.100435Z",
-  "ended_at": "2024-08-20T18:37:24.100435Z",
-  "expires_at": "2024-08-20T18:37:24.100435Z",
-  "processing_status": "in_progress",
-  "request_counts": {
-    "canceled": 10,
-    "errored": 30,
-    "expired": 10,
-    "processing": 100,
-    "succeeded": 50
-  },
-  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
-  "type": "message_batch"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
   "archived_at": "2024-08-20T18:37:24.100435Z",

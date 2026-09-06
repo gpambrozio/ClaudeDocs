@@ -1,86 +1,74 @@
 # List memory stores
 
-Copy page
+`$client->beta->memoryStores->list(?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<BetaManagedAgentsMemoryStore>`
 
-
-
-PHP
-
-# List memory stores
-
-$client->beta->memoryStores->list(?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md)>
-
-GET/v1/memory\_stores
+**GET** `/v1/memory_stores`
 
 List memory stores
 
-##### ParametersExpand Collapse
+## Parameters
 
-createdAtGte?:optional \Datetime
+- `createdAtGte?:optional \Datetime`
 
-Return only stores whose `created_at` is at or after this time (inclusive). Sent on the wire as `created_at[gte]`.
+  Return only stores whose `created_at` is at or after this time (inclusive). Sent on the wire as `created_at[gte]`.
 
-createdAtLte?:optional \Datetime
+- `createdAtLte?:optional \Datetime`
 
-Return only stores whose `created_at` is at or before this time (inclusive). Sent on the wire as `created_at[lte]`.
+  Return only stores whose `created_at` is at or before this time (inclusive). Sent on the wire as `created_at[lte]`.
 
-includeArchived?:optional bool
+- `includeArchived?:optional bool`
 
-When `true`, archived stores are included in the results. Defaults to `false` (archived stores are excluded).
+  When `true`, archived stores are included in the results. Defaults to `false` (archived stores are excluded).
 
-limit?:optional int
+- `limit?:optional int`
 
-Maximum number of stores to return per page. Must be between 1 and 100. Defaults to 20 when omitted.
+  Maximum number of stores to return per page. Must be between 1 and 100. Defaults to 20 when omitted.
 
-page?:optional string
+- `page?:optional string`
 
-Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
+  Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
-betas?:optional list<AnthropicBeta>
+- `betas?:optional list<AnthropicBeta>`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `BetaManagedAgentsMemoryStore`
 
-[BetaManagedAgentsMemoryStore](api/beta/memory_stores.md)
+  - `string id`
 
-string id
+    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
 
-Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+  - `\Datetime createdAt`
 
-\Datetime createdAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `string name`
 
-string name
+    Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
-Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
+  - `Type type`
 
-Type type
+  - `\Datetime updatedAt`
 
-\Datetime updatedAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `?\Datetime archivedAt`
 
-?\Datetime archivedAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `?string description`
 
-?string description
+    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
-Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+  - `?array<string,string> metadata`
 
-?array<string,string> metadata
+    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 
-Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+## Example
 
-List memory stores
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -93,43 +81,15 @@ $page = $client->beta->memoryStores->list(
   includeArchived: true,
   limit: 0,
   page: 'page',
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($page);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "name": "name",
-      "type": "memory_store",
-      "updated_at": "2019-12-27T18:11:19.117Z",
-      "archived_at": "2019-12-27T18:11:19.117Z",
-      "description": "description",
-      "metadata": {
-        "foo": "string"
-      }
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

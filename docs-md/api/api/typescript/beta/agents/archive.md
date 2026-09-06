@@ -1,492 +1,662 @@
 # Archive Agent
 
-Copy page
+`client.beta.agents.archive(agentID, params?, options?): BetaManagedAgentsAgent`
 
-
-
-TypeScript
-
-# Archive Agent
-
-client.beta.agents.archive(stringagentID, AgentArchiveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsAgent](api/beta/agents.md) { id, archived\_at, created\_at, 12 more }
-
-POST/v1/agents/{agent\_id}/archive
+**POST** `/v1/agents/{agent_id}/archive`
 
 Archive Agent
 
-##### ParametersExpand Collapse
+## Parameters
 
-agentID: string
+- `agentID: string`
 
-
+- `params: AgentArchiveParams`
 
-params: AgentArchiveParams { betas } 
+  - `betas?: Array<AnthropicBeta>`
 
-
+    Optional header to specify the beta version(s) you want to use.
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+    - `(string & {})`
 
-Optional header to specify the beta version(s) you want to use.
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
 
-One of the following:
+      - `"message-batches-2024-09-24"`
 
-(string & {})
+      - `"prompt-caching-2024-07-31"`
 
-
+      - `"computer-use-2024-10-22"`
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more
+      - `"computer-use-2025-01-24"`
 
-"message-batches-2024-09-24"
+      - `"pdfs-2024-09-25"`
 
-"prompt-caching-2024-07-31"
+      - `"token-counting-2024-11-01"`
 
-"computer-use-2024-10-22"
+      - `"token-efficient-tools-2025-02-19"`
 
-"computer-use-2025-01-24"
+      - `"output-128k-2025-02-19"`
 
-"pdfs-2024-09-25"
+      - `"files-api-2025-04-14"`
 
-"token-counting-2024-11-01"
+      - `"mcp-client-2025-04-04"`
 
-"token-efficient-tools-2025-02-19"
+      - `"mcp-client-2025-11-20"`
 
-"output-128k-2025-02-19"
+      - `"dev-full-thinking-2025-05-14"`
 
-"files-api-2025-04-14"
+      - `"interleaved-thinking-2025-05-14"`
 
-"mcp-client-2025-04-04"
+      - `"code-execution-2025-05-22"`
 
-"mcp-client-2025-11-20"
+      - `"extended-cache-ttl-2025-04-11"`
 
-"dev-full-thinking-2025-05-14"
+      - `"context-1m-2025-08-07"`
 
-"interleaved-thinking-2025-05-14"
+      - `"context-management-2025-06-27"`
 
-"code-execution-2025-05-22"
+      - `"model-context-window-exceeded-2025-08-26"`
 
-"extended-cache-ttl-2025-04-11"
+      - `"skills-2025-10-02"`
 
-"context-1m-2025-08-07"
+      - `"fast-mode-2026-02-01"`
 
-"context-management-2025-06-27"
+      - `"output-300k-2026-03-24"`
 
-"model-context-window-exceeded-2025-08-26"
+      - `"user-profiles-2026-03-24"`
 
-"skills-2025-10-02"
+      - `"user-profiles-2026-08-18"`
 
-"fast-mode-2026-02-01"
+      - `"advisor-tool-2026-03-01"`
 
-"output-300k-2026-03-24"
+      - `"managed-agents-2026-04-01"`
 
-"user-profiles-2026-03-24"
+      - `"cache-diagnosis-2026-04-07"`
 
-"advisor-tool-2026-03-01"
+      - `"dreaming-2026-04-21"`
 
-"managed-agents-2026-04-01"
+      - `"thinking-token-count-2026-05-13"`
 
-"cache-diagnosis-2026-04-07"
+      - `"server-side-fallback-2026-06-01"`
 
-"thinking-token-count-2026-05-13"
+      - `"server-side-fallback-2026-07-01"`
 
-"server-side-fallback-2026-06-01"
+      - `"fallback-credit-2026-06-01"`
 
-"fallback-credit-2026-06-01"
+      - `"fallback-credit-2026-07-01"`
 
-"agent-memory-2026-07-22"
+      - `"agent-memory-2026-07-22"`
 
-##### ReturnsExpand Collapse
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
-
+      - `"compact-2026-01-12"`
 
-BetaManagedAgentsAgent { id, archived\_at, created\_at, 12 more } 
+      - `"computer-use-2025-11-24"`
 
-A Managed Agents `agent`.
+      - `"mcp-tunnels-2026-06-22"`
 
-id: string
+      - `"structured-outputs-2025-11-13"`
 
-archived\_at: string | null
+      - `"task-budgets-2026-03-13"`
 
-A timestamp in RFC 3339 format
+      - `"thinking-display-updates-2026-08-18"`
 
-created\_at: string
+      - `"ce-user-management-2026-07-13"`
 
-A timestamp in RFC 3339 format
+      - `"mid-conversation-output-config-2026-07-01"`
 
-description: string | null
+      - `"thinking-binding-controls-2026-08-01"`
 
-
+      - `"mid-conversation-system-clear-at-2026-08-21"`
 
-mcp\_servers: Array<[BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md) { name, type, url } >
+## Returns
 
-name: string
+- `BetaManagedAgentsAgent`
 
-type: "url"
+  A Managed Agents `agent`.
 
-url: string
+  - `id: string`
 
-metadata: Record<string, string>
+  - `archived_at: string | null`
 
-
+    A timestamp in RFC 3339 format
 
-model: [BetaManagedAgentsModelConfig](api/beta/agents.md) { id, speed } 
+    format: date-time
 
-Model identifier and configuration.
+  - `created_at: string`
 
-
+    A timestamp in RFC 3339 format
 
-id: [BetaManagedAgentsModel](api/beta/agents.md)
+    format: date-time
 
-The model that will power your agent.
+  - `description: string | null`
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+  - `mcp_servers: Array<BetaManagedAgentsMCPServerURLDefinition>`
 
-One of the following:
+    - `name: string`
 
-
+    - `type: "url"`
 
-"claude-sonnet-5" | "claude-fable-5" | "claude-opus-4-8" | 9 more
+    - `url: string`
 
-"claude-sonnet-5"
+  - `metadata: Record<string, string>`
 
-High-performance model for coding and agents
+  - `model: BetaManagedAgentsModelConfig`
 
-"claude-fable-5"
+    Model identifier and configuration.
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+    - `id: BetaManagedAgentsModel`
 
-"claude-opus-4-8"
+      The model that will power your agent.
 
-Frontier intelligence for long-running agents and coding
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-"claude-opus-4-7"
+      - `"claude-fable-5-1" | "claude-sonnet-5" | "claude-fable-5" | 11 more`
 
-Frontier intelligence for long-running agents and coding
+        - `"claude-fable-5-1"`
 
-"claude-opus-4-6"
+          Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
-Most intelligent model for building agents and coding
+        - `"claude-sonnet-5"`
 
-"claude-sonnet-4-6"
+          High-performance model for coding and agents
 
-Best combination of speed and intelligence
+        - `"claude-fable-5"`
 
-"claude-haiku-4-5"
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
-Fastest model with near-frontier intelligence
+        - `"claude-opus-5"`
 
-"claude-haiku-4-5-20251001"
+          Powerful intelligence for long-running agents and coding
 
-Fastest model with near-frontier intelligence
+        - `"claude-opus-4-8"`
 
-"claude-opus-4-5"
+          Powerful intelligence for long-running agents and coding
 
-Premium model combining maximum intelligence with practical performance
+        - `"claude-opus-4-7"`
 
-"claude-opus-4-5-20251101"
+          Powerful intelligence for long-running agents and coding
 
-Premium model combining maximum intelligence with practical performance
+        - `"claude-opus-4-6"`
 
-"claude-sonnet-4-5"
+          Powerful intelligence for long-running agents and coding
 
-High-performance model for agents and coding
+        - `"claude-sonnet-4-6"`
 
-"claude-sonnet-4-5-20250929"
+          Best combination of speed and intelligence
 
-High-performance model for agents and coding
+        - `"claude-haiku-4-5"`
 
-(string & {})
+          Fastest model with near-frontier intelligence
 
-
+        - `"claude-haiku-4-5-20251001"`
 
-speed?: "standard" | "fast"
+          Fastest model with near-frontier intelligence
 
-Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+        - `"claude-opus-4-5"`
 
-One of the following:
+          Powerful intelligence for long-running agents and coding
 
-"standard"
+        - `"claude-opus-4-5-20251101"`
 
-"fast"
+          Powerful intelligence for long-running agents and coding
 
-
+        - `"claude-sonnet-4-5"`
 
-multiagent: [BetaManagedAgentsMultiagent](api/beta/sessions.md) { agents, type }  | null
+          High-performance model for agents and coding
 
-Resolved coordinator topology with a concrete agent roster.
+        - `"claude-sonnet-4-5-20250929"`
 
-
+          High-performance model for agents and coding
 
-agents: Array<[BetaManagedAgentsAgentReference](api/beta/agents.md) { id, type, version } >
+      - `(string & {})`
 
-Agents the coordinator may spawn as session threads, each resolved to a specific version.
+    - `effort?: BetaManagedAgentsEffortLow | BetaManagedAgentsEffortMedium | BetaManagedAgentsEffortHigh | 2 more`
 
-id: string
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-type: "agent"
+      - `BetaManagedAgentsEffortLow`
 
-version: number
+        Low effort. Favors latency over reasoning depth.
 
-type: "coordinator"
+        - `type: "low"`
 
-name: string
+      - `BetaManagedAgentsEffortMedium`
 
-
+        Medium effort. Balances latency and reasoning depth.
 
-skills: Array<[BetaManagedAgentsAnthropicSkill](api/beta/agents.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta/agents.md) { skill\_id, type, version } >
+        - `type: "medium"`
 
-One of the following:
+      - `BetaManagedAgentsEffortHigh`
 
-
+        High effort. Favors reasoning depth.
 
-BetaManagedAgentsAnthropicSkill { skill\_id, type, version } 
+        - `type: "high"`
 
-A resolved Anthropic-managed skill.
+      - `BetaManagedAgentsEffortXhigh`
 
-skill\_id: string
+        Extra-high effort. Not all models accept this level.
 
-type: "anthropic"
+        - `type: "xhigh"`
 
-version: string
+      - `BetaManagedAgentsEffortMax`
 
-
+        Maximum effort. Favors reasoning depth over latency.
 
-BetaManagedAgentsCustomSkill { skill\_id, type, version } 
+        - `type: "max"`
 
-A resolved user-created custom skill.
+    - `inference_geo?: string`
 
-skill\_id: string
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
 
-type: "custom"
+    - `speed?: "standard" | "fast"`
 
-version: string
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-system: string | null
+      - `"standard"`
 
-
+      - `"fast"`
 
-tools: Array<[BetaManagedAgentsAgentToolset20260401](api/beta/agents.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta/agents.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta/agents.md) { description, input\_schema, name, type } >
+  - `multiagent: BetaManagedAgentsMultiagent | null`
 
-One of the following:
+    Resolved coordinator topology with a concrete agent roster.
 
-
+    - `agents: Array<BetaManagedAgentsAgentReference | BetaManagedAgentsAdvisor>`
 
-BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type } 
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-
+      - `BetaManagedAgentsAgentReference`
 
-configs: Array<[BetaManagedAgentsAgentToolConfig](api/beta/agents.md) { enabled, name, permission\_policy } >
+        A resolved agent reference with a concrete version.
 
-enabled: boolean
+        - `id: string`
 
-
+        - `type: "agent"`
 
-name: "bash" | "edit" | "read" | 5 more
+        - `version: number`
 
-Built-in agent tool identifier.
+          format: int32
 
-One of the following:
+      - `BetaManagedAgentsAdvisor`
 
-"bash"
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-"edit"
+        - `model: string`
 
-"read"
+          The advisor model id.
 
-"write"
+        - `type: "advisor"`
 
-"glob"
+    - `type: "coordinator"`
 
-"grep"
+  - `name: string`
 
-"web\_fetch"
+  - `skills: Array<BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill>`
 
-"web\_search"
+    - `BetaManagedAgentsAnthropicSkill`
 
-
+      A resolved Anthropic-managed skill.
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
+      - `skill_id: string`
 
-Permission policy for tool execution.
+      - `type: "anthropic"`
 
-One of the following:
+      - `version: string`
 
-
+    - `BetaManagedAgentsCustomSkill`
 
-BetaManagedAgentsAlwaysAllowPolicy { type } 
+      A resolved user-created custom skill.
 
-Tool calls are automatically approved without user confirmation.
+      - `skill_id: string`
 
-type: "always\_allow"
+      - `type: "custom"`
 
-
+      - `version: string`
 
-BetaManagedAgentsAlwaysAskPolicy { type } 
+  - `system: string | null`
 
-Tool calls require user confirmation before execution.
+  - `tools: Array<BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool>`
 
-type: "always\_ask"
+    - `BetaManagedAgentsAgentToolset20260401`
 
-
+      - `configs: Array<BetaManagedAgentsAgentToolConfig>`
 
-default\_config: [BetaManagedAgentsAgentToolsetDefaultConfig](api/beta/agents.md) { enabled, permission\_policy } 
+        - `BetaManagedAgentsBashToolConfig`
 
-Resolved default configuration for agent tools.
+          Configuration for the bash tool.
 
-enabled: boolean
+          - `enabled: boolean`
 
-
+          - `name: "bash"`
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
-Permission policy for tool execution.
+            Permission policy for tool execution.
 
-One of the following:
+            - `BetaManagedAgentsAlwaysAllowPolicy`
 
-
+              Tool calls are automatically approved without user confirmation.
 
-BetaManagedAgentsAlwaysAllowPolicy { type } 
+              - `type: "always_allow"`
 
-Tool calls are automatically approved without user confirmation.
+            - `BetaManagedAgentsAlwaysAskPolicy`
 
-type: "always\_allow"
+              Tool calls require user confirmation before execution.
 
-
+              - `type: "always_ask"`
 
-BetaManagedAgentsAlwaysAskPolicy { type } 
+          - `type: "bash"`
 
-Tool calls require user confirmation before execution.
+        - `BetaManagedAgentsEditToolConfig`
 
-type: "always\_ask"
+          Configuration for the edit tool.
 
-type: "agent\_toolset\_20260401"
+          - `enabled: boolean`
 
-
+          - `name: "edit"`
 
-BetaManagedAgentsMCPToolset { configs, default\_config, mcp\_server\_name, type } 
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
-
+            Permission policy for tool execution.
 
-configs: Array<[BetaManagedAgentsMCPToolConfig](api/beta/agents.md) { enabled, name, permission\_policy } >
+            - `BetaManagedAgentsAlwaysAllowPolicy`
 
-enabled: boolean
+              Tool calls are automatically approved without user confirmation.
 
-name: string
+            - `BetaManagedAgentsAlwaysAskPolicy`
 
-
+              Tool calls require user confirmation before execution.
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
+          - `type: "edit"`
 
-Permission policy for tool execution.
+        - `BetaManagedAgentsReadToolConfig`
 
-One of the following:
+          Configuration for the read tool.
 
-
+          - `enabled: boolean`
 
-BetaManagedAgentsAlwaysAllowPolicy { type } 
+          - `name: "read"`
 
-Tool calls are automatically approved without user confirmation.
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
-type: "always\_allow"
+            Permission policy for tool execution.
 
-
+            - `BetaManagedAgentsAlwaysAllowPolicy`
 
-BetaManagedAgentsAlwaysAskPolicy { type } 
+              Tool calls are automatically approved without user confirmation.
 
-Tool calls require user confirmation before execution.
+            - `BetaManagedAgentsAlwaysAskPolicy`
 
-type: "always\_ask"
+              Tool calls require user confirmation before execution.
 
-
+          - `type: "read"`
 
-default\_config: [BetaManagedAgentsMCPToolsetDefaultConfig](api/beta/agents.md) { enabled, permission\_policy } 
+        - `BetaManagedAgentsWriteToolConfig`
 
-Resolved default configuration for all tools from an MCP server.
+          Configuration for the write tool.
 
-enabled: boolean
+          - `enabled: boolean`
 
-
+          - `name: "write"`
 
-permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta/agents.md) { type }  | [BetaManagedAgentsAlwaysAskPolicy](api/beta/agents.md) { type } 
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
-Permission policy for tool execution.
+            Permission policy for tool execution.
 
-One of the following:
+            - `BetaManagedAgentsAlwaysAllowPolicy`
 
-
+              Tool calls are automatically approved without user confirmation.
 
-BetaManagedAgentsAlwaysAllowPolicy { type } 
+            - `BetaManagedAgentsAlwaysAskPolicy`
 
-Tool calls are automatically approved without user confirmation.
+              Tool calls require user confirmation before execution.
 
-type: "always\_allow"
+          - `type: "write"`
 
-
+        - `BetaManagedAgentsGlobToolConfig`
 
-BetaManagedAgentsAlwaysAskPolicy { type } 
+          Configuration for the glob tool.
 
-Tool calls require user confirmation before execution.
+          - `enabled: boolean`
 
-type: "always\_ask"
+          - `name: "glob"`
 
-mcp\_server\_name: string
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
-type: "mcp\_toolset"
+            Permission policy for tool execution.
 
-
+            - `BetaManagedAgentsAlwaysAllowPolicy`
 
-BetaManagedAgentsCustomTool { description, input\_schema, name, type } 
+              Tool calls are automatically approved without user confirmation.
 
-A custom tool as returned in API responses.
+            - `BetaManagedAgentsAlwaysAskPolicy`
 
-description: string
+              Tool calls require user confirmation before execution.
 
-
+          - `type: "glob"`
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta/agents.md) { type, properties, required } 
+        - `BetaManagedAgentsGrepToolConfig`
 
-JSON Schema for custom tool input parameters.
+          Configuration for the grep tool.
 
-type: "object"
+          - `enabled: boolean`
 
-properties?: Record<string, unknown> | null
+          - `name: "grep"`
 
-required?: Array<string> | null
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
-name: string
+            Permission policy for tool execution.
 
-type: "custom"
+            - `BetaManagedAgentsAlwaysAllowPolicy`
 
-type: "agent"
+              Tool calls are automatically approved without user confirmation.
 
-updated\_at: string
+            - `BetaManagedAgentsAlwaysAskPolicy`
 
-A timestamp in RFC 3339 format
+              Tool calls require user confirmation before execution.
 
-version: number
+          - `type: "grep"`
 
-The agent's current version. Starts at 1 and increments when the agent is modified.
+        - `BetaManagedAgentsWebFetchToolConfig`
 
-Archive Agent
+          Configuration for the web_fetch tool.
 
-TypeScript
+          - `enabled: boolean`
 
-```shiki
-import Anthropic from '@anthropic-ai/sdk';
+          - `name: "web_fetch"`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+          - `type: "web_fetch"`
+
+          - `allowed_domains?: Array<string>`
+
+          - `blocked_domains?: Array<string>`
+
+          - `max_content_tokens?: number | null`
+
+            format: int32
+
+        - `BetaManagedAgentsWebSearchToolConfig`
+
+          Configuration for the web_search tool.
+
+          - `enabled: boolean`
+
+          - `name: "web_search"`
+
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+            Permission policy for tool execution.
+
+            - `BetaManagedAgentsAlwaysAllowPolicy`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `BetaManagedAgentsAlwaysAskPolicy`
+
+              Tool calls require user confirmation before execution.
+
+          - `type: "web_search"`
+
+          - `allowed_domains?: Array<string>`
+
+          - `blocked_domains?: Array<string>`
+
+          - `user_location?: BetaManagedAgentsUserLocation | null`
+
+            Approximate user location for search result localization.
+
+            - `type: "approximate"`
+
+              Location precision. Only "approximate" is supported.
+
+            - `city?: string | null`
+
+              City name.
+
+              minLength: 1, maxLength: 255
+
+            - `country?: string | null`
+
+              Two-letter ISO 3166-1 country code, uppercase.
+
+            - `region?: string | null`
+
+              Region or state name.
+
+              minLength: 1, maxLength: 255
+
+            - `timezone?: string | null`
+
+              IANA timezone identifier, e.g. "America/Los_Angeles".
+
+              minLength: 1, maxLength: 255
+
+      - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
+
+        Resolved default configuration for agent tools.
+
+        - `enabled: boolean`
+
+        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+          Permission policy for tool execution.
+
+          - `BetaManagedAgentsAlwaysAllowPolicy`
+
+            Tool calls are automatically approved without user confirmation.
+
+          - `BetaManagedAgentsAlwaysAskPolicy`
+
+            Tool calls require user confirmation before execution.
+
+      - `type: "agent_toolset_20260401"`
+
+    - `BetaManagedAgentsMCPToolset`
+
+      - `configs: Array<BetaManagedAgentsMCPToolConfig>`
+
+        - `enabled: boolean`
+
+        - `name: string`
+
+        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+          Permission policy for tool execution.
+
+          - `BetaManagedAgentsAlwaysAllowPolicy`
+
+            Tool calls are automatically approved without user confirmation.
+
+          - `BetaManagedAgentsAlwaysAskPolicy`
+
+            Tool calls require user confirmation before execution.
+
+      - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
+
+        Resolved default configuration for all tools from an MCP server.
+
+        - `enabled: boolean`
+
+        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+
+          Permission policy for tool execution.
+
+          - `BetaManagedAgentsAlwaysAllowPolicy`
+
+            Tool calls are automatically approved without user confirmation.
+
+          - `BetaManagedAgentsAlwaysAskPolicy`
+
+            Tool calls require user confirmation before execution.
+
+      - `mcp_server_name: string`
+
+      - `type: "mcp_toolset"`
+
+    - `BetaManagedAgentsCustomTool`
+
+      A custom tool as returned in API responses.
+
+      - `description: string`
+
+      - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+
+        JSON Schema for custom tool input parameters.
+
+        - `type: "object"`
+
+        - `properties?: Record<string, unknown> | null`
+
+        - `required?: Array<string> | null`
+
+      - `name: string`
+
+      - `type: "custom"`
+
+  - `type: "agent"`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `version: number`
+
+    The agent's current version. Starts at 1 and increments when the agent is modified.
+
+    format: int32
+
+## Example
+
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const betaManagedAgentsAgent = await client.beta.agents.archive('agent_011CZkYpogX7uDKUyvBTophP');
+const betaManagedAgentsAgent = await client.beta.agents.archive(
+  "agent_011CZkYpogX7uDKUyvBTophP"
+);
 
 console.log(betaManagedAgentsAgent.id);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "agent_011CZkYpogX7uDKUyvBTophP",
   "archived_at": null,
@@ -503,7 +673,11 @@ Response 200
     "foo": "bar"
   },
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "claude-opus-5",
+    "effort": {
+      "type": "low"
+    },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {
@@ -538,83 +712,8 @@ Response 200
           "name": "bash",
           "permission_policy": {
             "type": "always_allow"
-          }
-        }
-      ],
-      "default_config": {
-        "enabled": true,
-        "permission_policy": {
-          "type": "always_ask"
-        }
-      },
-      "type": "agent_toolset_20260401"
-    }
-  ],
-  "type": "agent",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "version": 1
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "agent_011CZkYpogX7uDKUyvBTophP",
-  "archived_at": null,
-  "created_at": "2026-03-15T10:00:00Z",
-  "description": "A general-purpose starter agent.",
-  "mcp_servers": [
-    {
-      "name": "example-mcp",
-      "type": "url",
-      "url": "https://example-server.modelcontextprotocol.io/sse"
-    }
-  ],
-  "metadata": {
-    "foo": "bar"
-  },
-  "model": {
-    "id": "claude-sonnet-4-6",
-    "speed": "standard"
-  },
-  "multiagent": {
-    "agents": [
-      {
-        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-        "type": "agent",
-        "version": 1
-      }
-    ],
-    "type": "coordinator"
-  },
-  "name": "My First Agent",
-  "skills": [
-    {
-      "skill_id": "xlsx",
-      "type": "anthropic",
-      "version": "1"
-    },
-    {
-      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
-      "type": "custom",
-      "version": "2"
-    }
-  ],
-  "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
-  "tools": [
-    {
-      "configs": [
-        {
-          "enabled": true,
-          "name": "bash",
-          "permission_policy": {
-            "type": "always_allow"
-          }
+          },
+          "type": "bash"
         }
       ],
       "default_config": {

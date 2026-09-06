@@ -1,117 +1,100 @@
 # Get User Profile
 
-Copy page
+`$ ant beta:user-profiles retrieve`
 
-
-
-CLI
-
-# Get User Profile
-
-$ ant beta:user-profiles retrieve
-
-GET/v1/user\_profiles/{user\_profile\_id}
+**GET** `/v1/user_profiles/{user_profile_id}`
 
 Get User Profile
 
-##### ParametersExpand Collapse
+## Parameters
 
---user-profile-id: string
+- `--user-profile-id: string`
 
-Path parameter user\_profile\_id
+  Path parameter user_profile_id
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--beta: optional array of AnthropicBeta`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `beta_user_profile: object`
 
-beta\_user\_profile: object { id, created\_at, metadata, 6 more } 
+  - `id: string`
 
-id: string
+    Unique identifier for this user profile, prefixed `uprof_`.
 
-Unique identifier for this user profile, prefixed `uprof_`.
+  - `created_at: string`
 
-created\_at: string
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+    format: date-time
 
-metadata: map[string]
+  - `metadata: map[string]`
 
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-
+  - `trust_grants: map[BetaUserProfileTrustGrant]`
 
-relationship: "external" or "resold" or "internal"
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+    - `status: "active" or "pending" or "rejected"`
 
-"external"
+      Status of the trust grant.
 
-"resold"
+      - `"active"`
 
-"internal"
+      - `"pending"`
 
-
+      - `"rejected"`
 
-trust\_grants: map[[BetaUserProfileTrustGrant](api/beta/user_profiles.md) { status } ]
+  - `type: "user_profile"`
 
-Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+    Object type. Always `user_profile`.
 
-
+  - `updated_at: string`
 
-status: "active" or "pending" or "rejected"
+    A timestamp in RFC 3339 format
 
-Status of the trust grant.
+    format: date-time
 
-"active"
+  - `access_type: optional "application" or "passthrough"`
 
-"pending"
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
-"rejected"
+    - `"application"`
 
-
+    - `"passthrough"`
 
-type: "user\_profile"
+  - `external_id: optional string`
 
-Object type. Always `user_profile`.
+    Platform's own identifier for this user. Not enforced unique.
 
-"user\_profile"
+  - `external_user_onboarded_at: optional string`
 
-updated\_at: string
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+    format: date-time
 
-external\_id: optional string
+  - `name: optional string`
 
-Platform's own identifier for this user. Not enforced unique.
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
 
-name: optional string
+## Example
 
-Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
-
-Get User Profile
-
-CLI
-
-```shiki
+```bash
 ant beta:user-profiles retrieve \
   --api-key my-anthropic-api-key \
   --user-profile-id uprof_011CZkZCu8hGbp5mYRQgUmz9
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
-  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -119,31 +102,9 @@ Response 200
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
+  "access_type": "application",
   "external_id": "user_12345",
-  "name": "Example User"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
-  "created_at": "2026-03-15T10:00:00Z",
-  "metadata": {},
-  "relationship": "external",
-  "trust_grants": {
-    "cyber": {
-      "status": "active"
-    }
-  },
-  "type": "user_profile",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "external_id": "user_12345",
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
   "name": "Example User"
 }
 ```

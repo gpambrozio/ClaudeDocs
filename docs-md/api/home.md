@@ -1,214 +1,131 @@
-# Start building
-with Claude
+# Home
 
-Claude Platform
+---
+title: Documentation
+url: https://platform.claude.com/docs/en/home
+description: Claude API Documentation
+---
 
-# Start building with Claude
+  
+    Quickstart
 
-Everything you need to integrate Claude into your applications. From first API call to production.
+    Get API key
 
-Search`Ctrl``K`
+    API reference
+  
 
-[Quickstart](get-started.md)[Get API key](/settings/keys)[API reference](api/overview.md)
+  Quickstart
 
-PythonTypeScriptGoJavaRubyPHPC#cURLCLI
+  API reference
 
-
+  Client SDKs
 
-```shiki
-import anthropic
+  Quickstart
 
-client = anthropic.Anthropic()
+  API reference
 
-message = client.messages.create(
-  model="claude-opus-5",
-  max_tokens=1024,
-  messages=[{
-    "role": "user",
-    "content": "Hello, Claude"
-  }]
-)
-for block in message.content:
-    if block.type == "text":
-        print(block.text)
-```
+  Define your agent
 
-Platform
+  Amazon Bedrock
 
-## Choose how you build
+  Google Cloud
 
-Pick the developer surface that matches your approach, and the infrastructure that fits your stack.
+  Microsoft Foundry
 
-### Messages
+  Quickstart
 
-Direct model access. You construct every turn, manage conversation state, and write your own tool loop.
+  Get API key
 
-[Quickstart](get-started.md)[API reference](api/messages/create.md)[Client SDKs](cli-sdks-libraries/overview.md)
+  Choose a model
 
-### Managed Agents
+  Install an SDK
 
-Fully managed agent infrastructure. Deploy and manage autonomous agents in stateful sessions with persistent event history.
+  Try the API in playground
 
-[Quickstart](managed-agents/quickstart.md)[API reference](api/beta/sessions.md)[Define your agent](managed-agents/agent-setup.md)
+  Messages API
 
-Claude is also available on these cloud platforms:
+  Thinking
 
-[Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
+  Vision
 
-[Google Cloud](build-with-claude/claude-on-vertex-ai.md)
+  Tool use
 
-[Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)
+  Web search
 
-Developer journey
+  Code execution
 
-## From idea to production
+  Structured outputs
 
-Follow the lifecycle or jump to what you need.
+  Prompt caching
 
-MessagesManaged Agents
+  Streaming
 
-1. 1
+  Prompting best practices
 
-   ### Get started
+  Run evals
 
-   [Quickstart](get-started.md)
+  Batch testing
 
-   [Get API key](/settings/keys)
+  Safety and guardrails
 
-   [Choose a model](models/overview.md)
+  Rate limits and errors
 
-   [Install an SDK](cli-sdks-libraries/overview.md)
+  Cost optimization
 
-   [Try the API in playground](/playground)
-2. 2
+  Workspaces and admin
 
-   ### Build
+  API key management
 
-   [Messages API](api/messages/create.md)
+  Usage monitoring
 
-   [Thinking](build-with-claude/thinking.md)
+  Model migration
 
-   [Vision](build-with-claude/vision.md)
+  Quickstart
 
-   [Tool use](agents-and-tools/tool-use/overview.md)
+  Get API key
 
-   [Web search](agents-and-tools/tool-use/web-search-tool.md)
+  Build in Console
 
-   [Code execution](agents-and-tools/tool-use/code-execution-tool.md)
+  Agent setup
 
-   [Structured outputs](build-with-claude/structured-outputs.md)
+  Tools
 
-   [Prompt caching](build-with-claude/prompt-caching.md)
+  Tool permissions
 
-   [Streaming](build-with-claude/streaming.md)
-3. 3
+  Streaming and events
 
-   ### Evaluate and ship
+  Sessions API reference
 
-   [Prompting best practices](build-with-claude/prompt-engineering/overview.md)
+  Workspaces and admin
 
-   [Run evals](test-and-evaluate/develop-tests.md)
+  API key management
 
-   [Batch testing](build-with-claude/batch-processing.md)
+  Usage monitoring
 
-   [Safety and guardrails](test-and-evaluate/strengthen-guardrails/increase-consistency.md)
+  * [Claude Fable 5.1](models/fable-5-1/overview.md) (`claude-fable-5-1`) — New — *For demanding reasoning and long-horizon agentic work* — Most capable · Research · Multi-day tasks
+  * [Claude Opus 5](models/opus-5/overview.md) (`claude-opus-5`) — *For complex agentic coding and enterprise work* — Complex projects · Agents · Coding
+  * [Claude Sonnet 5](models/sonnet-5/overview.md) (`claude-sonnet-5`) — *The best combination of speed and intelligence* — Everyday tasks · Writing · Cost-efficient
+  * [Claude Haiku 4.5](models/haiku-4-5/overview.md) (`claude-haiku-4-5`) — *The fastest model with near-frontier intelligence* — Fastest · Lowest cost · High volume
 
-   [Rate limits and errors](api/rate-limits.md)
+  **Courses**
 
-   [Cost optimization](about-claude/pricing.md)
-4. 4
+  Interactive courses to master Claude.
 
-   ### Operate
+  **Cookbook**
 
-   [Workspaces and admin](build-with-claude/workspaces.md)
+  Code samples and patterns.
 
-   [API key management](/settings/keys)
+  **Quickstarts**
 
-   [Usage monitoring](build-with-claude/usage-cost-api.md)
+  Deployable starter apps.
 
-   [Model migration](about-claude/models/migration-guide.md)
+  **What's new**
 
-Models
+  Latest features and updates.
 
-## The Claude model family
+  **Claude Code**
 
-Choose the right model for your use case.
-
-![](/images/dashboard-discovery/head.svg)
-
-![](/images/dashboard-discovery/head.svg)
-
-### [Fable 5.1](models/fable-5-1/overview.md)
-
-New
-
-Most capableResearchMulti-day tasks
-
-For demanding reasoning and long-horizon agentic work
-
-![](/images/dashboard-discovery/cursor.svg)
-
-![](/images/dashboard-discovery/cursor.svg)
-
-### [Opus 5](models/opus-5/overview.md)
-
-Complex projectsAgentsCoding
-
-For complex agentic coding and enterprise work
-
-![](/images/dashboard-discovery/bubble.svg)
-
-![](/images/dashboard-discovery/bubble.svg)
-
-### [Sonnet 5](models/sonnet-5/overview.md)
-
-Everyday tasksWritingCost-efficient
-
-The best combination of speed and intelligence
-
-![](/images/dashboard-discovery/bird.svg)
-
-![](/images/dashboard-discovery/bird.svg)
-
-### [Haiku 4.5](models/haiku-4-5/overview.md)
-
-FastestLowest costHigh volume
-
-The fastest model with near-frontier intelligence
-
-Resources
-
-## Keep learning
-
-
-
-[Courses](https://academy.claude.com/courses)
-
-Interactive courses to master Claude.
-
-
-
-[Cookbook](https://platform.claude.com/cookbook)
-
-Code samples and patterns.
-
-
-
-[Quickstarts](https://github.com/anthropics/anthropic-quickstarts)
-
-Deployable starter apps.
-
-
-
-[What's new](release-notes/overview.md)
-
-Latest features and updates.
-
-
-
-[Claude Code](https://code.claude.com/docs)
-
-An agentic coding assistant in your terminal.
+  An agentic coding assistant in your terminal.
 
 ---
 

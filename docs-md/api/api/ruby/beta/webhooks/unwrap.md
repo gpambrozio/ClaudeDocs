@@ -1,18 +1,14 @@
 # Unwrap
 
-Copy page
+`beta.webhooks.unwrap() -> void`
 
-Ruby
+Verifies the webhook signature from the `webhook-id`, `webhook-timestamp` and `webhook-signature`
+headers using your webhook signing key, then parses the payload into an event. Fails if the
+signature is missing or invalid.
 
-# Unwrap
+## Example
 
-beta.webhooks.unwrap() -> void
-
-Function
-
-Ruby
-
-```shiki
+```ruby
 require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
@@ -21,8 +17,6 @@ result = anthropic.beta.webhooks.unwrap
 
 puts(result)
 ```
-
-##### Returns Examples
 
 ---
 

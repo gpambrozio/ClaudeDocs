@@ -1,307 +1,275 @@
 # List Environments
 
-Copy page
-
-
-
-cURL
-
-# List Environments
-
-GET/v1/environments
+**GET** `/v1/environments`
 
 List environments with pagination support.
 
-##### Query parameters
+## Query parameters
 
-
+- `include_archived: optional boolean`
 
-include\_archived: optional boolean
+  Include archived environments in the response
 
-Include archived environments in the response
+  default: false
 
-defaultfalse
+- `limit: optional number`
 
-
+  Maximum number of environments to return
 
-limit: optional number
+  default: 20, maximum: 1000, minimum: 1
 
-Maximum number of environments to return
+- `page: optional string`
 
-default20
+  Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
 
-maximum1000
+## Headers
 
-minimum1
+- `"anthropic-beta": optional array of AnthropicBeta`
 
-page: optional string
+  Optional header to specify the beta version(s) you want to use.
 
-Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
+  - `string`
 
-##### Headers
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
-
+    - `"message-batches-2024-09-24"`
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+    - `"prompt-caching-2024-07-31"`
 
-Optional header to specify the beta version(s) you want to use.
+    - `"computer-use-2024-10-22"`
 
-One of the following:
+    - `"computer-use-2025-01-24"`
 
-string
+    - `"pdfs-2024-09-25"`
 
-
+    - `"token-counting-2024-11-01"`
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
+    - `"token-efficient-tools-2025-02-19"`
 
-One of the following:
+    - `"output-128k-2025-02-19"`
 
-"message-batches-2024-09-24"
+    - `"files-api-2025-04-14"`
 
-"prompt-caching-2024-07-31"
+    - `"mcp-client-2025-04-04"`
 
-"computer-use-2024-10-22"
+    - `"mcp-client-2025-11-20"`
 
-"computer-use-2025-01-24"
+    - `"dev-full-thinking-2025-05-14"`
 
-"pdfs-2024-09-25"
+    - `"interleaved-thinking-2025-05-14"`
 
-"token-counting-2024-11-01"
+    - `"code-execution-2025-05-22"`
 
-"token-efficient-tools-2025-02-19"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"output-128k-2025-02-19"
+    - `"context-1m-2025-08-07"`
 
-"files-api-2025-04-14"
+    - `"context-management-2025-06-27"`
 
-"mcp-client-2025-04-04"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"mcp-client-2025-11-20"
+    - `"skills-2025-10-02"`
 
-"dev-full-thinking-2025-05-14"
+    - `"fast-mode-2026-02-01"`
 
-"interleaved-thinking-2025-05-14"
+    - `"output-300k-2026-03-24"`
 
-"code-execution-2025-05-22"
+    - `"user-profiles-2026-03-24"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"user-profiles-2026-08-18"`
 
-"context-1m-2025-08-07"
+    - `"advisor-tool-2026-03-01"`
 
-"context-management-2025-06-27"
+    - `"managed-agents-2026-04-01"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"cache-diagnosis-2026-04-07"`
 
-"skills-2025-10-02"
+    - `"dreaming-2026-04-21"`
 
-"fast-mode-2026-02-01"
+    - `"thinking-token-count-2026-05-13"`
 
-"output-300k-2026-03-24"
+    - `"server-side-fallback-2026-06-01"`
 
-"user-profiles-2026-03-24"
+    - `"server-side-fallback-2026-07-01"`
 
-"user-profiles-2026-08-18"
+    - `"fallback-credit-2026-06-01"`
 
-"advisor-tool-2026-03-01"
+    - `"fallback-credit-2026-07-01"`
 
-"managed-agents-2026-04-01"
+    - `"agent-memory-2026-07-22"`
 
-"cache-diagnosis-2026-04-07"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-"dreaming-2026-04-21"
+    - `"compact-2026-01-12"`
 
-"thinking-token-count-2026-05-13"
+    - `"computer-use-2025-11-24"`
 
-"server-side-fallback-2026-06-01"
+    - `"mcp-tunnels-2026-06-22"`
 
-"server-side-fallback-2026-07-01"
+    - `"structured-outputs-2025-11-13"`
 
-"fallback-credit-2026-06-01"
+    - `"task-budgets-2026-03-13"`
 
-"fallback-credit-2026-07-01"
+    - `"thinking-display-updates-2026-08-18"`
 
-"agent-memory-2026-07-22"
+    - `"ce-user-management-2026-07-13"`
 
-"mid-conversation-tool-changes-2026-07-01"
+    - `"mid-conversation-output-config-2026-07-01"`
 
-"compact-2026-01-12"
+    - `"thinking-binding-controls-2026-08-01"`
 
-"computer-use-2025-11-24"
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"mcp-tunnels-2026-06-22"
+## Returns
 
-"structured-outputs-2025-11-13"
+- `data: array of BetaEnvironment`
 
-"task-budgets-2026-03-13"
+  List of environments.
 
-"thinking-display-updates-2026-08-18"
+  - `id: string`
 
-"ce-user-management-2026-07-13"
+    Environment identifier (e.g., 'env_...')
 
-"mid-conversation-output-config-2026-07-01"
+  - `archived_at: string or null`
 
-"thinking-binding-controls-2026-08-01"
+    RFC 3339 timestamp when environment was archived, or null if not archived
 
-"mid-conversation-system-clear-at-2026-08-21"
+  - `config: BetaCloudConfig or BetaSelfHostedConfig`
 
-##### Returns
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-
+    - `BetaCloudConfig object`
 
-data: array of [BetaEnvironment](api/http/beta/environments.md) { id, archived\_at, config, 7 more }
+      `cloud` environment configuration.
 
-List of environments.
+      - `networking: BetaUnrestrictedNetwork or BetaLimitedNetwork`
 
-id: string
+        Network configuration policy.
 
-Environment identifier (e.g., 'env\_...')
+        - `BetaUnrestrictedNetwork object`
 
-archived\_at: string or null
+          Unrestricted network access.
 
-RFC 3339 timestamp when environment was archived, or null if not archived
+          - `type: "unrestricted"`
 
-
+            Network policy type
 
-config: [BetaCloudConfig](api/http/beta/environments.md) { networking, packages, type } or [BetaSelfHostedConfig](api/http/beta/environments.md) { type }
+        - `BetaLimitedNetwork object`
 
-Environment configuration (either Anthropic Cloud or self-hosted)
+          Limited network access.
 
-One of the following:
+          - `allow_mcp_servers: boolean`
 
-
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-BetaCloudConfig object{ networking, packages, type }
+          - `allow_package_managers: boolean`
 
-`cloud` environment configuration.
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-
+          - `allowed_hosts: array of string`
 
-BetaSelfHostedConfig object{ type }
+            Specifies domains the container can reach.
 
-Configuration for self-hosted environments.
+          - `type: "limited"`
 
-type: "self\_hosted"
+            Network policy type
 
-Environment type
+      - `packages: BetaPackages`
 
-created\_at: string
+        Package manager configuration.
 
-RFC 3339 timestamp when environment was created
+        - `apt: array of string`
 
-description: string or null
+          Ubuntu/Debian packages to install
 
-User-provided description for the environment; null when unset
+        - `cargo: array of string`
 
-metadata: map[string]
+          Rust packages to install
 
-User-provided metadata key-value pairs
+        - `gem: array of string`
 
-name: string
+          Ruby packages to install
 
-Human-readable name for the environment
+        - `go: array of string`
 
-
+          Go packages to install
 
-type: "environment"
+        - `npm: array of string`
 
-The type of object (always 'environment')
+          Node.js packages to install
 
-defaultenvironment
+        - `pip: array of string`
 
-updated\_at: string
+          Python packages to install
 
-RFC 3339 timestamp when environment was last updated
+        - `type: optional "packages"`
 
-
+          Package configuration type
 
-scope: optional "organization" or "account"
+          default: packages
 
-The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+      - `type: "cloud"`
 
-One of the following:
+        Environment type
 
-"organization"
+    - `BetaSelfHostedConfig object`
 
-"account"
+      Configuration for self-hosted environments.
 
-next\_page: string or null
+      - `type: "self_hosted"`
 
-Token for fetching the next page of results. If `null`, there are no more results available. Pass this value to the `page` parameter in the next request.
+        Environment type
 
-List Environments
+  - `created_at: string`
 
-cURL
+    RFC 3339 timestamp when environment was created
 
-```shiki
+  - `description: string or null`
+
+    User-provided description for the environment; null when unset
+
+  - `metadata: map[string]`
+
+    User-provided metadata key-value pairs
+
+  - `name: string`
+
+    Human-readable name for the environment
+
+  - `type: "environment"`
+
+    The type of object (always 'environment')
+
+    default: environment
+
+  - `updated_at: string`
+
+    RFC 3339 timestamp when environment was last updated
+
+  - `scope: optional "organization" or "account"`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `"organization"`
+
+    - `"account"`
+
+- `next_page: string or null`
+
+  Token for fetching the next page of results. If `null`, there are no more results available. Pass this value to the `page` parameter in the next request.
+
+## Example
+
+```bash
 curl https://api.anthropic.com/v1/environments \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
-      "archived_at": null,
-      "config": {
-        "networking": {
-          "allow_mcp_servers": false,
-          "allow_package_managers": true,
-          "allowed_hosts": [
-            "api.example.com"
-          ],
-          "type": "limited"
-        },
-        "packages": {
-          "apt": [
-            "string"
-          ],
-          "cargo": [
-            "string"
-          ],
-          "gem": [
-            "string"
-          ],
-          "go": [
-            "string"
-          ],
-          "npm": [
-            "string"
-          ],
-          "pip": [
-            "pandas",
-            "numpy"
-          ],
-          "type": "packages"
-        },
-        "type": "cloud"
-      },
-      "created_at": "2026-03-15T10:00:00Z",
-      "description": "Python environment with data-analysis packages.",
-      "metadata": {},
-      "name": "python-data-analysis",
-      "type": "environment",
-      "updated_at": "2026-03-15T10:00:00Z",
-      "scope": "organization"
-    }
-  ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

@@ -1,94 +1,60 @@
 # Get RBAC Role
 
-Copy page
-
-
-
-# Get RBAC Role
-
-GET/v1/organizations/rbac\_roles/{role\_id}
+**GET** `/v1/organizations/rbac_roles/{role_id}`
 
 Retrieve an RBAC Role by ID.
 
 The RBAC Roles API is available to Claude Enterprise organizations only.
 
-##### Path parameters
+## Path parameters
 
-role\_id: string
+- `role_id: string`
 
-ID of the RBAC Role.
+  ID of the RBAC Role.
 
-##### Returns
+## Returns
 
-
+- `RbacRole object`
 
-RbacRole object{ id, created\_at, name, 2 more }
+  - `id: string`
 
-id: string
+    ID of the RBAC Role.
 
-ID of the RBAC Role.
+  - `created_at: string`
 
-
+    RFC 3339 datetime string indicating when the RBAC Role was created.
 
-created\_at: string
+    format: date-time
 
-RFC 3339 datetime string indicating when the RBAC Role was created.
+  - `name: string`
 
-formatdate-time
+    Name of the RBAC Role.
 
-name: string
+  - `type: "rbac_role"`
 
-Name of the RBAC Role.
+    Object type.
 
-
+    For RBAC Roles, this is always `"rbac_role"`.
 
-type: "rbac\_role"
+    default: rbac_role
 
-Object type.
+  - `updated_at: string`
 
-For RBAC Roles, this is always `"rbac_role"`.
+    RFC 3339 datetime string indicating when the RBAC Role was last updated.
 
-defaultrbac\_role
+    format: date-time
 
-
+## Example
 
-updated\_at: string
-
-RFC 3339 datetime string indicating when the RBAC Role was last updated.
-
-formatdate-time
-
-Get RBAC Role
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/rbac_roles/$ROLE_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "rbac_role_016J8xVtKpDq3Wy9ZmN2hR4s",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "name": "Project Editor",
-  "type": "rbac_role",
-  "updated_at": "2024-10-30T23:58:27.427722Z"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "rbac_role_016J8xVtKpDq3Wy9ZmN2hR4s",
   "created_at": "2024-10-30T23:58:27.427722Z",

@@ -1,28 +1,18 @@
 # Download File
 
-Copy page
-
-
-
-cURL
-
-# Download File
-
-GET/v1/files/{file\_id}/content
+**GET** `/v1/files/{file_id}/content`
 
 Download File
 
-##### Path parameters
+## Path parameters
 
-file\_id: string
+- `file_id: string`
 
-ID of the File.
+  ID of the File.
 
-Download File
+## Example
 
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/files/$FILE_ID/content \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"

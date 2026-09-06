@@ -1,16 +1,6 @@
 # Get artifact metadata
 
-To enable the Compliance API, see the setup guide.
-
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
-
-Copy page
-
-
-
-# Get artifact metadata
-
-GET/v1/compliance/apps/artifacts/{artifact\_version\_id}
+**GET** `/v1/compliance/apps/artifacts/{artifact_version_id}`
 
 Returns metadata for an artifact version, without the content body.
 
@@ -19,87 +9,62 @@ Use the sibling `/content` endpoint to fetch the artifact text. The
 encoding of that text, so a DLP consumer can dedupe or match hashes
 without downloading every artifact.
 
-##### Path parameters
+## Path parameters
 
-artifact\_version\_id: string
+- `artifact_version_id: string`
 
-The artifact version ID (tagged ID, e.g., claude\_artifact\_version\_abc123)
+  The artifact version ID (tagged ID, e.g., claude_artifact_version_abc123)
 
-##### Headers
+## Headers
 
-"x-api-key": optional string
+- `"x-api-key": optional string`
 
-##### Returns
+## Returns
 
-id: string
+- `id: string`
 
-Artifact ID e.g. 'claude\_artifact\_abc123'
+  Artifact ID e.g. 'claude_artifact_abc123'
 
-artifact\_type: string or null
+- `artifact_type: string or null`
 
-MIME-like artifact type e.g. 'application/vnd.ant.code'
+  MIME-like artifact type e.g. 'application/vnd.ant.code'
 
-claude\_chat\_id: string
+- `claude_chat_id: string`
 
-The chat this artifact belongs to
+  The chat this artifact belongs to
 
-
+- `created_at: string`
 
-created\_at: string
+  Artifact version creation timestamp
 
-Artifact version creation timestamp
+  format: date-time
 
-formatdate-time
+- `md5: string`
 
-md5: string
+  Lowercase hex MD5 of the artifact content (UTF-8 encoded). Matches the `content` field returned by the sibling `/content` endpoint.
 
-Lowercase hex MD5 of the artifact content (UTF-8 encoded). Matches the `content` field returned by the sibling `/content` endpoint.
+- `size_bytes: number`
 
-size\_bytes: number
+  Size in bytes of the artifact content (UTF-8 encoded)
 
-Size in bytes of the artifact content (UTF-8 encoded)
+- `title: string or null`
 
-title: string or null
+  Artifact title
 
-Artifact title
+- `version_id: string`
 
-version\_id: string
+  Artifact version ID e.g. 'claude_artifact_version_abc123'
 
-Artifact version ID e.g. 'claude\_artifact\_version\_abc123'
+## Example
 
-Get artifact metadata
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/artifacts/$ARTIFACT_VERSION_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "id",
-  "artifact_type": "artifact_type",
-  "claude_chat_id": "claude_chat_id",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "md5": "md5",
-  "size_bytes": 0,
-  "title": "title",
-  "version_id": "version_id"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "id",
   "artifact_type": "artifact_type",

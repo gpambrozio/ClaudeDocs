@@ -1,346 +1,1353 @@
 # Memories
 
-Copy page
+## Create a memory
 
-
+`beta.memory_stores.memories.create(memory_store_id, **kwargs)  -> BetaManagedAgentsMemory`
 
-Python
+**POST** `/v1/memory_stores/{memory_store_id}/memories`
 
-# Memories
+Create a memory
 
-##### [Create a memory](api/beta/memory_stores/memories/create.md)
+### Parameters
 
-beta.memory\_stores.memories.create(strmemory\_store\_id, MemoryCreateParams\*\*kwargs)  -> [BetaManagedAgentsMemory](api/beta/memory_stores/memories.md)
+- `memory_store_id: str`
 
-POST/v1/memory\_stores/{memory\_store\_id}/memories
+- `content: Optional[str]`
 
-##### [List memories](api/beta/memory_stores/memories/list.md)
+  UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required; pass `""` explicitly to create an empty memory.
 
-beta.memory\_stores.memories.list(strmemory\_store\_id, MemoryListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)]
+- `path: str`
 
-GET/v1/memory\_stores/{memory\_store\_id}/memories
+  Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, or the Unicode line and paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are case-sensitive.
 
-##### [Retrieve a memory](api/beta/memory_stores/memories/retrieve.md)
+  minLength: 2, maxLength: 1024
 
-beta.memory\_stores.memories.retrieve(strmemory\_id, MemoryRetrieveParams\*\*kwargs)  -> [BetaManagedAgentsMemory](api/beta/memory_stores/memories.md)
+- `view: Optional[BetaManagedAgentsMemoryView]`
 
-GET/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+  Query parameter for view
 
-##### [Update a memory](api/beta/memory_stores/memories/update.md)
+  - `"basic"`
 
-beta.memory\_stores.memories.update(strmemory\_id, MemoryUpdateParams\*\*kwargs)  -> [BetaManagedAgentsMemory](api/beta/memory_stores/memories.md)
+  - `"full"`
 
-POST/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+- `betas: Optional[List[AnthropicBetaParam]]`
 
-##### [Delete a memory](api/beta/memory_stores/memories/delete.md)
+  Optional header to specify the beta version(s) you want to use.
 
-beta.memory\_stores.memories.delete(strmemory\_id, MemoryDeleteParams\*\*kwargs)  -> [BetaManagedAgentsDeletedMemory](api/beta/memory_stores/memories.md)
+  - `str`
 
-DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
 
-##### ModelsExpand Collapse
+    - `"message-batches-2024-09-24"`
 
-
+    - `"prompt-caching-2024-07-31"`
 
-class BetaManagedAgentsConflictError: …
+    - `"computer-use-2024-10-22"`
 
-type: Literal["conflict\_error"]
+    - `"computer-use-2025-01-24"`
 
-message: Optional[str]
+    - `"pdfs-2024-09-25"`
 
-
+    - `"token-counting-2024-11-01"`
 
-class BetaManagedAgentsContentSha256Precondition: …
+    - `"token-efficient-tools-2025-02-19"`
 
-Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
+    - `"output-128k-2025-02-19"`
 
-type: Literal["content\_sha256"]
+    - `"files-api-2025-04-14"`
 
-content\_sha256: Optional[str]
+    - `"mcp-client-2025-04-04"`
 
-Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
+    - `"mcp-client-2025-11-20"`
 
-
+    - `"dev-full-thinking-2025-05-14"`
 
-class BetaManagedAgentsDeletedMemory: …
+    - `"interleaved-thinking-2025-05-14"`
 
-Tombstone returned by [Delete a memory](api/beta/memory_stores/memories/delete.md). The memory's version history persists and remains listable via [List memory versions](api/beta/memory_stores/memory_versions/list.md) until the store itself is deleted.
+    - `"code-execution-2025-05-22"`
 
-id: str
+    - `"extended-cache-ttl-2025-04-11"`
 
-ID of the deleted memory (a `mem_...` value).
+    - `"context-1m-2025-08-07"`
 
-type: Literal["memory\_deleted"]
+    - `"context-management-2025-06-27"`
 
-
+    - `"model-context-window-exceeded-2025-08-26"`
 
-[BetaManagedAgentsError](api/beta/memory_stores/memories.md)
+    - `"skills-2025-10-02"`
 
-One of the following:
+    - `"fast-mode-2026-02-01"`
 
-
+    - `"output-300k-2026-03-24"`
 
-class BetaInvalidRequestError: …
+    - `"user-profiles-2026-03-24"`
 
-message: str
+    - `"user-profiles-2026-08-18"`
 
-type: Literal["invalid\_request\_error"]
+    - `"advisor-tool-2026-03-01"`
 
-
+    - `"managed-agents-2026-04-01"`
 
-class BetaAuthenticationError: …
+    - `"cache-diagnosis-2026-04-07"`
 
-message: str
+    - `"dreaming-2026-04-21"`
 
-type: Literal["authentication\_error"]
+    - `"thinking-token-count-2026-05-13"`
 
-
+    - `"server-side-fallback-2026-06-01"`
 
-class BetaBillingError: …
+    - `"server-side-fallback-2026-07-01"`
 
-message: str
+    - `"fallback-credit-2026-06-01"`
 
-type: Literal["billing\_error"]
+    - `"fallback-credit-2026-07-01"`
 
-
+    - `"agent-memory-2026-07-22"`
 
-class BetaPermissionError: …
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-message: str
+    - `"compact-2026-01-12"`
 
-type: Literal["permission\_error"]
+    - `"computer-use-2025-11-24"`
 
-
+    - `"mcp-tunnels-2026-06-22"`
 
-class BetaNotFoundError: …
+    - `"structured-outputs-2025-11-13"`
 
-message: str
+    - `"task-budgets-2026-03-13"`
 
-type: Literal["not\_found\_error"]
+    - `"thinking-display-updates-2026-08-18"`
 
-
+    - `"ce-user-management-2026-07-13"`
 
-class BetaRateLimitError: …
+    - `"mid-conversation-output-config-2026-07-01"`
 
-message: str
+    - `"thinking-binding-controls-2026-08-01"`
 
-type: Literal["rate\_limit\_error"]
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-
+### Returns
 
-class BetaGatewayTimeoutError: …
+- `class BetaManagedAgentsMemory: …`
 
-message: str
+  A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
-type: Literal["timeout\_error"]
+  - `id: str`
 
-
+    Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
 
-class BetaAPIError: …
+  - `content_sha256: str`
 
-message: str
+    Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
 
-type: Literal["api\_error"]
+  - `content_size_bytes: int`
 
-
+    Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
-class BetaOverloadedError: …
+    format: int32
 
-message: str
+  - `created_at: datetime`
 
-type: Literal["overloaded\_error"]
+    A timestamp in RFC 3339 format
 
-
+    format: date-time
 
-class BetaManagedAgentsMemoryPreconditionFailedError: …
+  - `memory_store_id: str`
 
-type: Literal["memory\_precondition\_failed\_error"]
+    ID of the memory store this memory belongs to (a `memstore_...` value).
 
-message: Optional[str]
+  - `memory_version_id: str`
 
-
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
 
-class BetaManagedAgentsMemoryPathConflictError: …
+  - `path: str`
 
-type: Literal["memory\_path\_conflict\_error"]
+    Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-conflicting\_memory\_id: Optional[str]
+  - `type: Literal["memory"]`
 
-conflicting\_path: Optional[str]
+  - `updated_at: datetime`
 
-message: Optional[str]
+    A timestamp in RFC 3339 format
 
-
+    format: date-time
 
-class BetaManagedAgentsConflictError: …
+  - `content: Optional[str]`
 
-type: Literal["conflict\_error"]
+    The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-message: Optional[str]
+### Example
 
-
+```python
+import os
+from anthropic import Anthropic
 
-class BetaManagedAgentsMemory: …
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+beta_managed_agents_memory = client.beta.memory_stores.memories.create(
+    memory_store_id="memory_store_id",
+    content="content",
+    path="xx",
+)
+print(beta_managed_agents_memory.id)
+```
 
-A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+#### Response (200)
 
-id: str
+```json
+{
+  "id": "id",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_store_id": "memory_store_id",
+  "memory_version_id": "memory_version_id",
+  "path": "path",
+  "type": "memory",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "content": "content"
+}
+```
 
-Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+## List memories
 
-content\_sha256: str
+`beta.memory_stores.memories.list(memory_store_id, **kwargs)  -> SyncPageCursor[BetaManagedAgentsMemoryListItem]`
 
-Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
+**GET** `/v1/memory_stores/{memory_store_id}/memories`
 
-content\_size\_bytes: int
+List memories
 
-Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+### Parameters
 
-created\_at: datetime
+- `memory_store_id: str`
 
-A timestamp in RFC 3339 format
+- `depth: Optional[int]`
 
-memory\_store\_id: str
+  `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` returns immediate children only; deeper entries roll up as `memory_prefix` items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
 
-ID of the memory store this memory belongs to (a `memstore_...` value).
+  format: int32
 
-memory\_version\_id: str
+- `limit: Optional[int]`
 
-ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+  Maximum number of items to return per page. Must be between 1 and 100. Defaults to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and `memory_prefix` items count toward the limit.
 
-path: str
+  format: int32
 
-Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
+- `page: Optional[str]`
 
-type: Literal["memory"]
+  Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
-updated\_at: datetime
+- `path_prefix: Optional[str]`
 
-A timestamp in RFC 3339 format
+  Optional path prefix filter. Must end with `/` (segment-aligned), e.g., `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
 
-content: Optional[str]
+- `view: Optional[BetaManagedAgentsMemoryView]`
 
-The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+  Which projection of each `memory` to return. Defaults to `basic` (content omitted). `full` populates `content` on each item and caps `limit` at 20; use this as the bulk-read path for export and sync.
 
-
+  - `"basic"`
 
-[BetaManagedAgentsMemoryListItem](api/beta/memory_stores/memories.md)
+  - `"full"`
 
-One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
+- `betas: Optional[List[AnthropicBetaParam]]`
 
-One of the following:
+  Optional header to specify the beta version(s) you want to use.
 
-
+  - `str`
 
-class BetaManagedAgentsMemory: …
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
 
-A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+    - `"message-batches-2024-09-24"`
 
-id: str
+    - `"prompt-caching-2024-07-31"`
 
-Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+    - `"computer-use-2024-10-22"`
 
-content\_sha256: str
+    - `"computer-use-2025-01-24"`
 
-Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
+    - `"pdfs-2024-09-25"`
 
-content\_size\_bytes: int
+    - `"token-counting-2024-11-01"`
 
-Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+    - `"token-efficient-tools-2025-02-19"`
 
-created\_at: datetime
+    - `"output-128k-2025-02-19"`
 
-A timestamp in RFC 3339 format
+    - `"files-api-2025-04-14"`
 
-memory\_store\_id: str
+    - `"mcp-client-2025-04-04"`
 
-ID of the memory store this memory belongs to (a `memstore_...` value).
+    - `"mcp-client-2025-11-20"`
 
-memory\_version\_id: str
+    - `"dev-full-thinking-2025-05-14"`
 
-ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+    - `"interleaved-thinking-2025-05-14"`
 
-path: str
+    - `"code-execution-2025-05-22"`
 
-Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
+    - `"extended-cache-ttl-2025-04-11"`
 
-type: Literal["memory"]
+    - `"context-1m-2025-08-07"`
 
-updated\_at: datetime
+    - `"context-management-2025-06-27"`
 
-A timestamp in RFC 3339 format
+    - `"model-context-window-exceeded-2025-08-26"`
 
-content: Optional[str]
+    - `"skills-2025-10-02"`
 
-The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+    - `"fast-mode-2026-02-01"`
 
-
+    - `"output-300k-2026-03-24"`
 
-class BetaManagedAgentsMemoryPrefix: …
+    - `"user-profiles-2026-03-24"`
 
-A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+    - `"user-profiles-2026-08-18"`
 
-path: str
+    - `"advisor-tool-2026-03-01"`
 
-The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
+    - `"managed-agents-2026-04-01"`
 
-type: Literal["memory\_prefix"]
+    - `"cache-diagnosis-2026-04-07"`
 
-
+    - `"dreaming-2026-04-21"`
 
-class BetaManagedAgentsMemoryPathConflictError: …
+    - `"thinking-token-count-2026-05-13"`
 
-type: Literal["memory\_path\_conflict\_error"]
+    - `"server-side-fallback-2026-06-01"`
 
-conflicting\_memory\_id: Optional[str]
+    - `"server-side-fallback-2026-07-01"`
 
-conflicting\_path: Optional[str]
+    - `"fallback-credit-2026-06-01"`
 
-message: Optional[str]
+    - `"fallback-credit-2026-07-01"`
 
-
+    - `"agent-memory-2026-07-22"`
 
-class BetaManagedAgentsMemoryPreconditionFailedError: …
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-type: Literal["memory\_precondition\_failed\_error"]
+    - `"compact-2026-01-12"`
 
-message: Optional[str]
+    - `"computer-use-2025-11-24"`
 
-
+    - `"mcp-tunnels-2026-06-22"`
 
-class BetaManagedAgentsMemoryPrefix: …
+    - `"structured-outputs-2025-11-13"`
 
-A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+    - `"task-budgets-2026-03-13"`
 
-path: str
+    - `"thinking-display-updates-2026-08-18"`
 
-The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
+    - `"ce-user-management-2026-07-13"`
 
-type: Literal["memory\_prefix"]
+    - `"mid-conversation-output-config-2026-07-01"`
 
-
+    - `"thinking-binding-controls-2026-08-01"`
 
-Literal["basic", "full"]
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+### Returns
 
-One of the following:
+- `BetaManagedAgentsMemoryListItem`
 
-"basic"
+  One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
-"full"
+  - `class BetaManagedAgentsMemory: …`
 
-
+    A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
-class BetaManagedAgentsPrecondition: …
+    - `id: str`
 
-Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
+      Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
 
-type: Literal["content\_sha256"]
+    - `content_sha256: str`
 
-content\_sha256: Optional[str]
+      Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
 
-Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
+    - `content_size_bytes: int`
+
+      Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+
+      format: int32
+
+    - `created_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `memory_store_id: str`
+
+      ID of the memory store this memory belongs to (a `memstore_...` value).
+
+    - `memory_version_id: str`
+
+      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+
+    - `path: str`
+
+      Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
+
+    - `type: Literal["memory"]`
+
+    - `updated_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `content: Optional[str]`
+
+      The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+
+  - `class BetaManagedAgentsMemoryPrefix: …`
+
+    A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+
+    - `path: str`
+
+      The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
+
+    - `type: Literal["memory_prefix"]`
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+page = client.beta.memory_stores.memories.list(
+    memory_store_id="memory_store_id",
+)
+page = page.data[0]
+print(page)
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "content_sha256": "content_sha256",
+      "content_size_bytes": 0,
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "memory_store_id": "memory_store_id",
+      "memory_version_id": "memory_version_id",
+      "path": "path",
+      "type": "memory",
+      "updated_at": "2019-12-27T18:11:19.117Z",
+      "content": "content"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Retrieve a memory
+
+`beta.memory_stores.memories.retrieve(memory_id, **kwargs)  -> BetaManagedAgentsMemory`
+
+**GET** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+
+Retrieve a memory
+
+### Parameters
+
+- `memory_store_id: str`
+
+- `memory_id: str`
+
+- `view: Optional[BetaManagedAgentsMemoryView]`
+
+  Query parameter for view
+
+  - `"basic"`
+
+  - `"full"`
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaManagedAgentsMemory: …`
+
+  A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+  - `id: str`
+
+    Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+
+  - `content_sha256: str`
+
+    Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
+
+  - `content_size_bytes: int`
+
+    Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+
+    format: int32
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `memory_store_id: str`
+
+    ID of the memory store this memory belongs to (a `memstore_...` value).
+
+  - `memory_version_id: str`
+
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+
+  - `path: str`
+
+    Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
+
+  - `type: Literal["memory"]`
+
+  - `updated_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `content: Optional[str]`
+
+    The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+beta_managed_agents_memory = client.beta.memory_stores.memories.retrieve(
+    memory_id="memory_id",
+    memory_store_id="memory_store_id",
+)
+print(beta_managed_agents_memory.id)
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_store_id": "memory_store_id",
+  "memory_version_id": "memory_version_id",
+  "path": "path",
+  "type": "memory",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "content": "content"
+}
+```
+
+## Update a memory
+
+`beta.memory_stores.memories.update(memory_id, **kwargs)  -> BetaManagedAgentsMemory`
+
+**POST** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+
+Update a memory
+
+### Parameters
+
+- `memory_store_id: str`
+
+- `memory_id: str`
+
+- `view: Optional[BetaManagedAgentsMemoryView]`
+
+  Query parameter for view
+
+  - `"basic"`
+
+  - `"full"`
+
+- `content: Optional[str]`
+
+  New UTF-8 text content for the memory. Maximum 100 kB (102,400 bytes). Omit to leave the content unchanged (e.g., for a rename-only update).
+
+- `path: Optional[str]`
+
+  New path for the memory (a rename). Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, or the Unicode line and paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are case-sensitive. The memory's `id` is preserved across renames. Omit to leave the path unchanged.
+
+  minLength: 2, maxLength: 1024
+
+- `precondition: Optional[BetaManagedAgentsPreconditionParam]`
+
+  Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
+
+  - `type: Literal["content_sha256"]`
+
+  - `content_sha256: Optional[str]`
+
+    Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaManagedAgentsMemory: …`
+
+  A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+  - `id: str`
+
+    Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+
+  - `content_sha256: str`
+
+    Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
+
+  - `content_size_bytes: int`
+
+    Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+
+    format: int32
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `memory_store_id: str`
+
+    ID of the memory store this memory belongs to (a `memstore_...` value).
+
+  - `memory_version_id: str`
+
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+
+  - `path: str`
+
+    Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
+
+  - `type: Literal["memory"]`
+
+  - `updated_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `content: Optional[str]`
+
+    The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+beta_managed_agents_memory = client.beta.memory_stores.memories.update(
+    memory_id="memory_id",
+    memory_store_id="memory_store_id",
+)
+print(beta_managed_agents_memory.id)
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_store_id": "memory_store_id",
+  "memory_version_id": "memory_version_id",
+  "path": "path",
+  "type": "memory",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "content": "content"
+}
+```
+
+## Delete a memory
+
+`beta.memory_stores.memories.delete(memory_id, **kwargs)  -> BetaManagedAgentsDeletedMemory`
+
+**DELETE** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+
+Delete a memory
+
+### Parameters
+
+- `memory_store_id: str`
+
+- `memory_id: str`
+
+- `expected_content_sha256: Optional[str]`
+
+  Query parameter for expected_content_sha256
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaManagedAgentsDeletedMemory: …`
+
+  Tombstone returned by [Delete a memory](api/beta/memory_stores/memories/delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](api/beta/memory_stores/memory_versions/list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
+
+  - `id: str`
+
+    ID of the deleted memory (a `mem_...` value).
+
+  - `type: Literal["memory_deleted"]`
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+beta_managed_agents_deleted_memory = client.beta.memory_stores.memories.delete(
+    memory_id="memory_id",
+    memory_store_id="memory_store_id",
+)
+print(beta_managed_agents_deleted_memory.id)
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "type": "memory_deleted"
+}
+```
+
+## Domain types
+
+### Beta Managed Agents Conflict Error
+
+- `class BetaManagedAgentsConflictError: …`
+
+  - `type: Literal["conflict_error"]`
+
+  - `message: Optional[str]`
+
+### Beta Managed Agents Content Sha256 Precondition
+
+- `class BetaManagedAgentsContentSha256Precondition: …`
+
+  Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
+
+  - `type: Literal["content_sha256"]`
+
+  - `content_sha256: Optional[str]`
+
+    Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
+
+### Beta Managed Agents Deleted Memory
+
+- `class BetaManagedAgentsDeletedMemory: …`
+
+  Tombstone returned by [Delete a memory](api/beta/memory_stores/memories/delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](api/beta/memory_stores/memory_versions/list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
+
+  - `id: str`
+
+    ID of the deleted memory (a `mem_...` value).
+
+  - `type: Literal["memory_deleted"]`
+
+### Beta Managed Agents Error
+
+- `BetaManagedAgentsError`
+
+  - `class BetaInvalidRequestError: …`
+
+    - `message: str`
+
+      default: Invalid request
+
+    - `type: Literal["invalid_request_error"]`
+
+      default: invalid_request_error
+
+  - `class BetaAuthenticationError: …`
+
+    - `message: str`
+
+      default: Authentication error
+
+    - `type: Literal["authentication_error"]`
+
+      default: authentication_error
+
+  - `class BetaBillingError: …`
+
+    - `message: str`
+
+      default: Billing error
+
+    - `type: Literal["billing_error"]`
+
+      default: billing_error
+
+  - `class BetaPermissionError: …`
+
+    - `message: str`
+
+      default: Permission denied
+
+    - `type: Literal["permission_error"]`
+
+      default: permission_error
+
+  - `class BetaNotFoundError: …`
+
+    - `message: str`
+
+      default: Not found
+
+    - `type: Literal["not_found_error"]`
+
+      default: not_found_error
+
+  - `class BetaRateLimitError: …`
+
+    - `message: str`
+
+      default: Rate limited
+
+    - `type: Literal["rate_limit_error"]`
+
+      default: rate_limit_error
+
+  - `class BetaGatewayTimeoutError: …`
+
+    - `message: str`
+
+      default: Request timeout
+
+    - `type: Literal["timeout_error"]`
+
+      default: timeout_error
+
+  - `class BetaAPIError: …`
+
+    - `message: str`
+
+      default: Internal server error
+
+    - `type: Literal["api_error"]`
+
+      default: api_error
+
+  - `class BetaOverloadedError: …`
+
+    - `message: str`
+
+      default: Overloaded
+
+    - `type: Literal["overloaded_error"]`
+
+      default: overloaded_error
+
+  - `class BetaManagedAgentsMemoryPreconditionFailedError: …`
+
+    - `type: Literal["memory_precondition_failed_error"]`
+
+    - `message: Optional[str]`
+
+  - `class BetaManagedAgentsMemoryPathConflictError: …`
+
+    - `type: Literal["memory_path_conflict_error"]`
+
+    - `conflicting_memory_id: Optional[str]`
+
+    - `conflicting_path: Optional[str]`
+
+    - `message: Optional[str]`
+
+  - `class BetaManagedAgentsConflictError: …`
+
+    - `type: Literal["conflict_error"]`
+
+    - `message: Optional[str]`
+
+### Beta Managed Agents Memory
+
+- `class BetaManagedAgentsMemory: …`
+
+  A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+  - `id: str`
+
+    Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+
+  - `content_sha256: str`
+
+    Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
+
+  - `content_size_bytes: int`
+
+    Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+
+    format: int32
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `memory_store_id: str`
+
+    ID of the memory store this memory belongs to (a `memstore_...` value).
+
+  - `memory_version_id: str`
+
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+
+  - `path: str`
+
+    Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
+
+  - `type: Literal["memory"]`
+
+  - `updated_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `content: Optional[str]`
+
+    The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+
+### Beta Managed Agents Memory List Item
+
+- `BetaManagedAgentsMemoryListItem`
+
+  One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
+
+  - `class BetaManagedAgentsMemory: …`
+
+    A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+    - `id: str`
+
+      Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+
+    - `content_sha256: str`
+
+      Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
+
+    - `content_size_bytes: int`
+
+      Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+
+      format: int32
+
+    - `created_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `memory_store_id: str`
+
+      ID of the memory store this memory belongs to (a `memstore_...` value).
+
+    - `memory_version_id: str`
+
+      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+
+    - `path: str`
+
+      Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
+
+    - `type: Literal["memory"]`
+
+    - `updated_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `content: Optional[str]`
+
+      The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+
+  - `class BetaManagedAgentsMemoryPrefix: …`
+
+    A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+
+    - `path: str`
+
+      The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
+
+    - `type: Literal["memory_prefix"]`
+
+### Beta Managed Agents Memory Path Conflict Error
+
+- `class BetaManagedAgentsMemoryPathConflictError: …`
+
+  - `type: Literal["memory_path_conflict_error"]`
+
+  - `conflicting_memory_id: Optional[str]`
+
+  - `conflicting_path: Optional[str]`
+
+  - `message: Optional[str]`
+
+### Beta Managed Agents Memory Precondition Failed Error
+
+- `class BetaManagedAgentsMemoryPreconditionFailedError: …`
+
+  - `type: Literal["memory_precondition_failed_error"]`
+
+  - `message: Optional[str]`
+
+### Beta Managed Agents Memory Prefix
+
+- `class BetaManagedAgentsMemoryPrefix: …`
+
+  A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+
+  - `path: str`
+
+    The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
+
+  - `type: Literal["memory_prefix"]`
+
+### Beta Managed Agents Memory View
+
+- `Literal["basic", "full"]`
+
+  Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+
+  - `"basic"`
+
+  - `"full"`
+
+### Beta Managed Agents Precondition
+
+- `class BetaManagedAgentsPrecondition: …`
+
+  Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
+
+  - `type: Literal["content_sha256"]`
+
+  - `content_sha256: Optional[str]`
+
+    Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
 
 ---
 

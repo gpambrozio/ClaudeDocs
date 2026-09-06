@@ -1,66 +1,41 @@
 # Remove User
 
-Copy page
-
-
-
-# Remove User
-
-DELETE/v1/organizations/users/{user\_id}
+**DELETE** `/v1/organizations/users/{user_id}`
 
 Remove a member from the organization.
 
-##### Path parameters
+## Path parameters
 
-user\_id: string
+- `user_id: string`
 
-ID of the User.
+  ID of the User.
 
-##### Returns
+## Returns
 
-id: string
+- `id: string`
 
-ID of the User.
+  ID of the User.
 
-
+- `type: "user_deleted"`
 
-type: "user\_deleted"
+  Deleted object type.
 
-Deleted object type.
+  For Users, this is always `"user_deleted"`.
 
-For Users, this is always `"user_deleted"`.
+  default: user_deleted
 
-defaultuser\_deleted
+## Example
 
-Remove User
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-  "type": "user_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
   "type": "user_deleted"

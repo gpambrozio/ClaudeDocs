@@ -1,674 +1,6650 @@
 # Sessions
 
-Copy page
+## Create Session
 
-
+`$client->beta->sessions->create(Agent agent, string environmentID, ?BetaManagedAgentsBudgetLimit budget, ?list<InitialEvent> initialEvents, ?array<string,string> metadata, ?list<Resource> resources, ?string title, ?list<string> vaultIDs, ?list<AnthropicBeta> betas): BetaManagedAgentsSession`
 
-PHP
+**POST** `/v1/sessions`
 
-# Sessions
+Create Session
 
-##### [Create Session](api/beta/sessions/create.md)
+### Parameters
 
-$client->beta->sessions->create([Agent](api/beta/sessions/create.md) agent, string environmentID, ?array<string,string> metadata, ?list<Resource> resources, ?string title, ?list<string> vaultIDs, ?list<AnthropicBeta> betas): [BetaManagedAgentsSession](api/beta/sessions.md)
+- `agent: Agent`
 
-POST/v1/sessions
+  Agent identifier. Accepts the `agent` ID string, which pins the latest version for the session, or an `agent` object with both id and version specified.
 
-##### [List Sessions](api/beta/sessions/list.md)
+- `environmentID: string`
 
-$client->beta->sessions->list(?string agentID, ?int agentVersion, ?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?string deploymentID, ?bool includeArchived, ?int limit, ?string memoryStoreID, ?[Order](api/beta/sessions/list.md) order, ?string page, ?list<Status> statuses, ?list<AnthropicBeta> betas): BidirectionalPageCursor<[BetaManagedAgentsSession](api/beta/sessions.md)>
+  ID of the `environment` defining the container configuration for this session.
 
-GET/v1/sessions
+- `budget?:optional BetaManagedAgentsBudgetLimit`
 
-##### [Get Session](api/beta/sessions/retrieve.md)
+  A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-$client->beta->sessions->retrieve(string sessionID, ?list<AnthropicBeta> betas): [BetaManagedAgentsSession](api/beta/sessions.md)
+- `initialEvents?:optional list<InitialEvent>`
 
-GET/v1/sessions/{session\_id}
+  Initial events to send to the `session` at creation, processed in order. Supports `user.message` and `user.define_outcome` events. Maximum 50 events.
 
-##### [Update Session](api/beta/sessions/update.md)
+- `metadata?:optional array<string,string>`
 
-$client->beta->sessions->update(string sessionID, ?[BetaManagedAgentsSessionAgentUpdate](api/beta/sessions.md) agent, ?array<string,string> metadata, ?string title, ?list<string> vaultIDs, ?list<AnthropicBeta> betas): [BetaManagedAgentsSession](api/beta/sessions.md)
+  Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-POST/v1/sessions/{session\_id}
+- `resources?:optional list<Resource>`
 
-##### [Delete Session](api/beta/sessions/delete.md)
+  Resources (e.g. repositories, files) to mount into the session's container.
 
-$client->beta->sessions->delete(string sessionID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeletedSession](api/beta/sessions.md)
+- `title?:optional string`
 
-DELETE/v1/sessions/{session\_id}
+  Human-readable session title.
 
-##### [Archive Session](api/beta/sessions/archive.md)
+- `vaultIDs?:optional list<string>`
 
-$client->beta->sessions->archive(string sessionID, ?list<AnthropicBeta> betas): [BetaManagedAgentsSession](api/beta/sessions.md)
+  Vault IDs for stored credentials the agent can use during the session.
 
-POST/v1/sessions/{session\_id}/archive
+- `betas?:optional list<AnthropicBeta>`
 
-##### ModelsExpand Collapse
+  Optional header to specify the beta version(s) you want to use.
 
-
+### Returns
 
-[BetaManagedAgentsAgentMessagePreview](api/beta/sessions.md)
+- `BetaManagedAgentsSession`
 
-string id
+  - `string id`
 
-The id the buffered agent.message will carry if it is emitted. Matches the event\_id on this preview's event\_delta events.
+  - `BetaManagedAgentsSessionAgent agent`
 
-Type type
+    Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-
+  - `?\Datetime archivedAt`
 
-[BetaManagedAgentsAgentParams](api/beta/sessions.md)
+    A timestamp in RFC 3339 format
 
-string id
+  - `?BetaManagedAgentsBudgetLimit budget`
 
-The `agent` ID.
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-Type type
+  - `\Datetime createdAt`
 
-?int version
+    A timestamp in RFC 3339 format
 
-The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+  - `string environmentID`
 
-
+  - `array<string,string> metadata`
 
-[BetaManagedAgentsAgentThinkingPreview](api/beta/sessions.md)
+  - `list<BetaManagedAgentsOutcomeEvaluationResource> outcomeEvaluations`
 
-string id
+    Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
 
-The id the buffered agent.thinking will carry if it is emitted. Start-only — no event\_delta events follow.
+  - `list<ManagedAgentsSessionResource> resources`
 
-Type type
+  - `BetaManagedAgentsSessionStats stats`
 
-
+    Timing statistics for a session.
 
-[BetaManagedAgentsAgentWithOverridesParams](api/beta/sessions.md)
+  - `Status status`
 
-string id
+    SessionStatus enum
 
-The `agent` ID.
+  - `?string title`
 
-Type type
+  - `Type type`
 
-?list<[BetaManagedAgentsURLMCPServerParams](api/beta/agents.md)> mcpServers
+  - `\Datetime updatedAt`
 
-Replacement MCP server list. Full replacement: the provided array becomes the MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
+    A timestamp in RFC 3339 format
 
-?Model model
+  - `BetaManagedAgentsSessionUsage usage`
 
-Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a `model_config` object. Omit to use the agent's model.
+    Cumulative token usage for a session across all turns.
 
-?list<[BetaManagedAgentsSkillParams](api/beta/agents.md)> skills
+  - `list<string> vaultIDs`
 
-Replacement skill list. Full replacement: the provided array becomes the skills. Send an empty array to clear; omit to preserve the agent's skills.
+    Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+  - `?string deploymentID`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsSession = $client->beta->sessions->create(
+  agent: 'agent_011CZkYpogX7uDKUyvBTophP',
+  environmentID: 'env_011CZkZ9X2dpNyB7HsEFoRfW',
+  budget: [
+    'maxListCost' => ['amount' => '2500', 'currency' => BetaCurrency::USD],
+    'type' => 'limit',
+  ],
+  initialEvents: [
+    [
+      'content' => [['text' => 'Where is my order #1234?', 'type' => 'text']],
+      'type' => 'user.message',
+    ],
+  ],
+  metadata: ['foo' => 'string'],
+  resources: [
+    [
+      'fileID' => 'file_011CNha8iCJcU1wXNR6q4V8w',
+      'type' => 'file',
+      'mountPath' => '/uploads/receipt.pdf',
+    ],
+  ],
+  title: 'Order #1234 inquiry',
+  vaultIDs: ['string'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsSession);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "agent": {
+    "id": "agent_011CZkYpogX7uDKUyvBTophP",
+    "description": "A general-purpose starter agent.",
+    "mcp_servers": [
+      {
+        "name": "example-mcp",
+        "type": "url",
+        "url": "https://example-server.modelcontextprotocol.io/sse"
+      }
+    ],
+    "model": {
+      "id": "claude-opus-5",
+      "effort": {
+        "type": "low"
+      },
+      "inference_geo": "inference_geo",
+      "speed": "standard"
+    },
+    "multiagent": {
+      "agents": [
+        {
+          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+          "description": "A focused research subagent.",
+          "mcp_servers": [
+            {
+              "name": "example-mcp",
+              "type": "url",
+              "url": "https://example-server.modelcontextprotocol.io/sse"
+            }
+          ],
+          "model": {
+            "id": "claude-opus-5",
+            "effort": {
+              "type": "low"
+            },
+            "inference_geo": "inference_geo",
+            "speed": "standard"
+          },
+          "name": "Researcher",
+          "skills": [
+            {
+              "skill_id": "xlsx",
+              "type": "anthropic",
+              "version": "1"
+            }
+          ],
+          "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+          "tools": [
+            {
+              "configs": [
+                {
+                  "enabled": true,
+                  "name": "bash",
+                  "permission_policy": {
+                    "type": "always_allow"
+                  },
+                  "type": "bash"
+                }
+              ],
+              "default_config": {
+                "enabled": true,
+                "permission_policy": {
+                  "type": "always_ask"
+                }
+              },
+              "type": "agent_toolset_20260401"
+            }
+          ],
+          "type": "agent",
+          "version": 1
+        }
+      ],
+      "type": "coordinator"
+    },
+    "name": "My First Agent",
+    "skills": [
+      {
+        "skill_id": "xlsx",
+        "type": "anthropic",
+        "version": "1"
+      },
+      {
+        "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+        "type": "custom",
+        "version": "2"
+      }
+    ],
+    "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+    "tools": [
+      {
+        "configs": [
+          {
+            "enabled": true,
+            "name": "bash",
+            "permission_policy": {
+              "type": "always_allow"
+            },
+            "type": "bash"
+          }
+        ],
+        "default_config": {
+          "enabled": true,
+          "permission_policy": {
+            "type": "always_ask"
+          }
+        },
+        "type": "agent_toolset_20260401"
+      }
+    ],
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "budget": {
+    "max_list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "type": "limit"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "metadata": {},
+  "outcome_evaluations": [
+    {
+      "completed_at": "2026-03-15T10:02:31Z",
+      "description": "Produce a 2-page summary as summary.md",
+      "explanation": "All five sections present with inline citations.",
+      "iteration": 0,
+      "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
+      "result": "satisfied",
+      "type": "outcome_evaluation"
+    }
+  ],
+  "resources": [
+    {
+      "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+      "created_at": "2026-03-15T10:00:00Z",
+      "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "mount_path": "/uploads/receipt.pdf",
+      "type": "file",
+      "updated_at": "2026-03-15T10:00:00Z"
+    },
+    {
+      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+      "created_at": "2026-03-15T10:00:00Z",
+      "mount_path": "/workspace/example-repo",
+      "type": "github_repository",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "url": "https://github.com/example-org/example-repo",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      }
+    }
+  ],
+  "stats": {
+    "active_seconds": 0,
+    "duration_seconds": 0
+  },
+  "status": "idle",
+  "title": "Order #1234 inquiry",
+  "type": "session",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "usage": {
+    "active_seconds": 0,
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "output_tokens": 0,
+    "server_tool_use": {
+      "web_fetch_requests": 0,
+      "web_search_requests": 3
+    }
+  },
+  "vault_ids": [
+    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+  ],
+  "deployment_id": "deployment_id"
+}
+```
+
+## List Sessions
+
+`$client->beta->sessions->list(?string agentID, ?int agentVersion, ?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?string deploymentID, ?bool includeArchived, ?int limit, ?string memoryStoreID, ?Order order, ?string page, ?list<Status> statuses, ?list<AnthropicBeta> betas): BidirectionalPageCursor<BetaManagedAgentsSession>`
+
+**GET** `/v1/sessions`
+
+List Sessions
+
+### Parameters
+
+- `agentID?:optional string`
+
+  Filter sessions created with this agent ID.
+
+- `agentVersion?:optional int`
+
+  Filter by agent version. Only applies when `agent_id` is also set.
+
+- `createdAtGt?:optional \Datetime`
+
+  Return sessions created after this time (exclusive).
+
+- `createdAtGte?:optional \Datetime`
+
+  Return sessions created at or after this time (inclusive).
+
+- `createdAtLt?:optional \Datetime`
+
+  Return sessions created before this time (exclusive).
+
+- `createdAtLte?:optional \Datetime`
+
+  Return sessions created at or before this time (inclusive).
+
+- `deploymentID?:optional string`
+
+  Filter sessions created by this deployment ID.
+
+- `includeArchived?:optional bool`
+
+  When true, includes archived sessions. Default: false (exclude archived).
+
+- `limit?:optional int`
+
+  Maximum number of results to return.
+
+- `memoryStoreID?:optional string`
+
+  Filter sessions whose resources contain a `memory_store` with this memory store ID.
+
+- `order?:optional Order`
+
+  Sort direction for results, ordered by `created_at`. Defaults to `desc` (newest first).
+
+- `page?:optional string`
+
+  Opaque pagination cursor from a previous response.
+
+- `statuses?:optional list<Status>`
+
+  Filter by session status. Repeat the parameter to match any of multiple statuses.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaManagedAgentsSession`
+
+  - `string id`
+
+  - `BetaManagedAgentsSessionAgent agent`
+
+    Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+  - `?\Datetime archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?BetaManagedAgentsBudgetLimit budget`
+
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+  - `\Datetime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string environmentID`
+
+  - `array<string,string> metadata`
+
+  - `list<BetaManagedAgentsOutcomeEvaluationResource> outcomeEvaluations`
+
+    Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
+
+  - `list<ManagedAgentsSessionResource> resources`
+
+  - `BetaManagedAgentsSessionStats stats`
+
+    Timing statistics for a session.
+
+  - `Status status`
+
+    SessionStatus enum
+
+  - `?string title`
+
+  - `Type type`
+
+  - `\Datetime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionUsage usage`
+
+    Cumulative token usage for a session across all turns.
+
+  - `list<string> vaultIDs`
+
+    Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+  - `?string deploymentID`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$page = $client->beta->sessions->list(
+  agentID: 'agent_id',
+  agentVersion: 0,
+  createdAtGt: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  createdAtGte: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  createdAtLt: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  createdAtLte: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  deploymentID: 'deployment_id',
+  includeArchived: true,
+  limit: 0,
+  memoryStoreID: 'memory_store_id',
+  order: 'asc',
+  page: 'page',
+  statuses: ['rescheduling'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($page);
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+      "agent": {
+        "id": "agent_011CZkYpogX7uDKUyvBTophP",
+        "description": "A general-purpose starter agent.",
+        "mcp_servers": [
+          {
+            "name": "example-mcp",
+            "type": "url",
+            "url": "https://example-server.modelcontextprotocol.io/sse"
+          }
+        ],
+        "model": {
+          "id": "claude-opus-5",
+          "effort": {
+            "type": "low"
+          },
+          "inference_geo": "inference_geo",
+          "speed": "standard"
+        },
+        "multiagent": {
+          "agents": [
+            {
+              "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+              "description": "A focused research subagent.",
+              "mcp_servers": [
+                {
+                  "name": "example-mcp",
+                  "type": "url",
+                  "url": "https://example-server.modelcontextprotocol.io/sse"
+                }
+              ],
+              "model": {
+                "id": "claude-opus-5",
+                "effort": {
+                  "type": "low"
+                },
+                "inference_geo": "inference_geo",
+                "speed": "standard"
+              },
+              "name": "Researcher",
+              "skills": [
+                {
+                  "skill_id": "xlsx",
+                  "type": "anthropic",
+                  "version": "1"
+                }
+              ],
+              "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+              "tools": [
+                {
+                  "configs": [
+                    {
+                      "enabled": true,
+                      "name": "bash",
+                      "permission_policy": {
+                        "type": "always_allow"
+                      },
+                      "type": "bash"
+                    }
+                  ],
+                  "default_config": {
+                    "enabled": true,
+                    "permission_policy": {
+                      "type": "always_ask"
+                    }
+                  },
+                  "type": "agent_toolset_20260401"
+                }
+              ],
+              "type": "agent",
+              "version": 1
+            }
+          ],
+          "type": "coordinator"
+        },
+        "name": "My First Agent",
+        "skills": [
+          {
+            "skill_id": "xlsx",
+            "type": "anthropic",
+            "version": "1"
+          },
+          {
+            "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+            "type": "custom",
+            "version": "2"
+          }
+        ],
+        "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+        "tools": [
+          {
+            "configs": [
+              {
+                "enabled": true,
+                "name": "bash",
+                "permission_policy": {
+                  "type": "always_allow"
+                },
+                "type": "bash"
+              }
+            ],
+            "default_config": {
+              "enabled": true,
+              "permission_policy": {
+                "type": "always_ask"
+              }
+            },
+            "type": "agent_toolset_20260401"
+          }
+        ],
+        "type": "agent",
+        "version": 1
+      },
+      "archived_at": null,
+      "budget": {
+        "max_list_cost": {
+          "amount": "2500",
+          "currency": "USD"
+        },
+        "type": "limit"
+      },
+      "created_at": "2026-03-15T10:00:00Z",
+      "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+      "metadata": {},
+      "outcome_evaluations": [
+        {
+          "completed_at": "2026-03-15T10:02:31Z",
+          "description": "Produce a 2-page summary as summary.md",
+          "explanation": "All five sections present with inline citations.",
+          "iteration": 0,
+          "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
+          "result": "satisfied",
+          "type": "outcome_evaluation"
+        }
+      ],
+      "resources": [
+        {
+          "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+          "created_at": "2026-03-15T10:00:00Z",
+          "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+          "mount_path": "/uploads/receipt.pdf",
+          "type": "file",
+          "updated_at": "2026-03-15T10:00:00Z"
+        },
+        {
+          "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+          "created_at": "2026-03-15T10:00:00Z",
+          "mount_path": "/workspace/example-repo",
+          "type": "github_repository",
+          "updated_at": "2026-03-15T10:00:00Z",
+          "url": "https://github.com/example-org/example-repo",
+          "checkout": {
+            "name": "main",
+            "type": "branch"
+          }
+        }
+      ],
+      "stats": {
+        "active_seconds": 0,
+        "duration_seconds": 0
+      },
+      "status": "idle",
+      "title": "Order #1234 inquiry",
+      "type": "session",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "usage": {
+        "active_seconds": 0,
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_read_input_tokens": 0,
+        "input_tokens": 0,
+        "list_cost": {
+          "amount": "2500",
+          "currency": "USD"
+        },
+        "output_tokens": 0,
+        "server_tool_use": {
+          "web_fetch_requests": 0,
+          "web_search_requests": 3
+        }
+      },
+      "vault_ids": [
+        "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+      ],
+      "deployment_id": "deployment_id"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo=",
+  "prev_page": "page_MjAyNS0wNS0xM1QwMDowMDowMFo="
+}
+```
+
+## Get Session
+
+`$client->beta->sessions->retrieve(string sessionID, ?list<AnthropicBeta> betas): BetaManagedAgentsSession`
+
+**GET** `/v1/sessions/{session_id}`
+
+Get Session
+
+### Parameters
+
+- `sessionID: string`
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaManagedAgentsSession`
+
+  - `string id`
+
+  - `BetaManagedAgentsSessionAgent agent`
+
+    Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+  - `?\Datetime archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?BetaManagedAgentsBudgetLimit budget`
+
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+  - `\Datetime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string environmentID`
+
+  - `array<string,string> metadata`
+
+  - `list<BetaManagedAgentsOutcomeEvaluationResource> outcomeEvaluations`
+
+    Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
+
+  - `list<ManagedAgentsSessionResource> resources`
+
+  - `BetaManagedAgentsSessionStats stats`
+
+    Timing statistics for a session.
+
+  - `Status status`
+
+    SessionStatus enum
+
+  - `?string title`
+
+  - `Type type`
+
+  - `\Datetime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionUsage usage`
+
+    Cumulative token usage for a session across all turns.
+
+  - `list<string> vaultIDs`
+
+    Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+  - `?string deploymentID`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsSession = $client->beta->sessions->retrieve(
+  'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsSession);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "agent": {
+    "id": "agent_011CZkYpogX7uDKUyvBTophP",
+    "description": "A general-purpose starter agent.",
+    "mcp_servers": [
+      {
+        "name": "example-mcp",
+        "type": "url",
+        "url": "https://example-server.modelcontextprotocol.io/sse"
+      }
+    ],
+    "model": {
+      "id": "claude-opus-5",
+      "effort": {
+        "type": "low"
+      },
+      "inference_geo": "inference_geo",
+      "speed": "standard"
+    },
+    "multiagent": {
+      "agents": [
+        {
+          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+          "description": "A focused research subagent.",
+          "mcp_servers": [
+            {
+              "name": "example-mcp",
+              "type": "url",
+              "url": "https://example-server.modelcontextprotocol.io/sse"
+            }
+          ],
+          "model": {
+            "id": "claude-opus-5",
+            "effort": {
+              "type": "low"
+            },
+            "inference_geo": "inference_geo",
+            "speed": "standard"
+          },
+          "name": "Researcher",
+          "skills": [
+            {
+              "skill_id": "xlsx",
+              "type": "anthropic",
+              "version": "1"
+            }
+          ],
+          "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+          "tools": [
+            {
+              "configs": [
+                {
+                  "enabled": true,
+                  "name": "bash",
+                  "permission_policy": {
+                    "type": "always_allow"
+                  },
+                  "type": "bash"
+                }
+              ],
+              "default_config": {
+                "enabled": true,
+                "permission_policy": {
+                  "type": "always_ask"
+                }
+              },
+              "type": "agent_toolset_20260401"
+            }
+          ],
+          "type": "agent",
+          "version": 1
+        }
+      ],
+      "type": "coordinator"
+    },
+    "name": "My First Agent",
+    "skills": [
+      {
+        "skill_id": "xlsx",
+        "type": "anthropic",
+        "version": "1"
+      },
+      {
+        "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+        "type": "custom",
+        "version": "2"
+      }
+    ],
+    "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+    "tools": [
+      {
+        "configs": [
+          {
+            "enabled": true,
+            "name": "bash",
+            "permission_policy": {
+              "type": "always_allow"
+            },
+            "type": "bash"
+          }
+        ],
+        "default_config": {
+          "enabled": true,
+          "permission_policy": {
+            "type": "always_ask"
+          }
+        },
+        "type": "agent_toolset_20260401"
+      }
+    ],
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "budget": {
+    "max_list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "type": "limit"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "metadata": {},
+  "outcome_evaluations": [
+    {
+      "completed_at": "2026-03-15T10:02:31Z",
+      "description": "Produce a 2-page summary as summary.md",
+      "explanation": "All five sections present with inline citations.",
+      "iteration": 0,
+      "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
+      "result": "satisfied",
+      "type": "outcome_evaluation"
+    }
+  ],
+  "resources": [
+    {
+      "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+      "created_at": "2026-03-15T10:00:00Z",
+      "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "mount_path": "/uploads/receipt.pdf",
+      "type": "file",
+      "updated_at": "2026-03-15T10:00:00Z"
+    },
+    {
+      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+      "created_at": "2026-03-15T10:00:00Z",
+      "mount_path": "/workspace/example-repo",
+      "type": "github_repository",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "url": "https://github.com/example-org/example-repo",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      }
+    }
+  ],
+  "stats": {
+    "active_seconds": 0,
+    "duration_seconds": 0
+  },
+  "status": "idle",
+  "title": "Order #1234 inquiry",
+  "type": "session",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "usage": {
+    "active_seconds": 0,
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "output_tokens": 0,
+    "server_tool_use": {
+      "web_fetch_requests": 0,
+      "web_search_requests": 3
+    }
+  },
+  "vault_ids": [
+    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+  ],
+  "deployment_id": "deployment_id"
+}
+```
+
+## Update Session
+
+`$client->beta->sessions->update(string sessionID, ?BetaManagedAgentsSessionAgentUpdate agent, ?BetaManagedAgentsBudgetLimit budget, ?array<string,string> metadata, ?string title, ?list<string> vaultIDs, ?list<AnthropicBeta> betas): BetaManagedAgentsSession`
+
+**POST** `/v1/sessions/{session_id}`
+
+Update Session
+
+### Parameters
+
+- `sessionID: string`
+
+- `agent?:optional BetaManagedAgentsSessionAgentUpdate`
+
+  Mid-session agent configuration update. Only `tools` and `mcp_servers` are updatable. Full replacement: the provided array becomes the new value. To preserve existing entries, GET the session, modify the array, and POST it back.
+
+- `budget?:optional BetaManagedAgentsBudgetLimit`
+
+  A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+- `metadata?:optional array<string,string>`
+
+  Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve.
+
+- `title?:optional string`
+
+  Human-readable session title.
+
+- `vaultIDs?:optional list<string>`
+
+  Vault IDs (`vlt_*`) to attach to the session. Not yet supported; requests setting this field are rejected. Reserved for future use.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaManagedAgentsSession`
+
+  - `string id`
+
+  - `BetaManagedAgentsSessionAgent agent`
+
+    Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+  - `?\Datetime archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?BetaManagedAgentsBudgetLimit budget`
+
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+  - `\Datetime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string environmentID`
+
+  - `array<string,string> metadata`
+
+  - `list<BetaManagedAgentsOutcomeEvaluationResource> outcomeEvaluations`
+
+    Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
+
+  - `list<ManagedAgentsSessionResource> resources`
+
+  - `BetaManagedAgentsSessionStats stats`
+
+    Timing statistics for a session.
+
+  - `Status status`
+
+    SessionStatus enum
+
+  - `?string title`
+
+  - `Type type`
+
+  - `\Datetime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionUsage usage`
+
+    Cumulative token usage for a session across all turns.
+
+  - `list<string> vaultIDs`
+
+    Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+  - `?string deploymentID`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsSession = $client->beta->sessions->update(
+  'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  agent: [
+    'mcpServers' => [
+      [
+        'name' => 'example-mcp',
+        'type' => 'url',
+        'url' => 'https://example-server.modelcontextprotocol.io/sse',
+      ],
+    ],
+    'tools' => [
+      [
+        'type' => 'agent_toolset_20260401',
+        'configs' => [
+          [
+            'name' => 'bash',
+            'enabled' => true,
+            'permissionPolicy' => ['type' => 'always_allow'],
+            'type' => 'bash',
+          ],
+        ],
+        'defaultConfig' => [
+          'enabled' => true, 'permissionPolicy' => ['type' => 'always_allow']
+        ],
+      ],
+    ],
+  ],
+  budget: [
+    'maxListCost' => ['amount' => '2500', 'currency' => BetaCurrency::USD],
+    'type' => 'limit',
+  ],
+  metadata: ['foo' => 'string'],
+  title: 'Order #1234 inquiry',
+  vaultIDs: ['string'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsSession);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "agent": {
+    "id": "agent_011CZkYpogX7uDKUyvBTophP",
+    "description": "A general-purpose starter agent.",
+    "mcp_servers": [
+      {
+        "name": "example-mcp",
+        "type": "url",
+        "url": "https://example-server.modelcontextprotocol.io/sse"
+      }
+    ],
+    "model": {
+      "id": "claude-opus-5",
+      "effort": {
+        "type": "low"
+      },
+      "inference_geo": "inference_geo",
+      "speed": "standard"
+    },
+    "multiagent": {
+      "agents": [
+        {
+          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+          "description": "A focused research subagent.",
+          "mcp_servers": [
+            {
+              "name": "example-mcp",
+              "type": "url",
+              "url": "https://example-server.modelcontextprotocol.io/sse"
+            }
+          ],
+          "model": {
+            "id": "claude-opus-5",
+            "effort": {
+              "type": "low"
+            },
+            "inference_geo": "inference_geo",
+            "speed": "standard"
+          },
+          "name": "Researcher",
+          "skills": [
+            {
+              "skill_id": "xlsx",
+              "type": "anthropic",
+              "version": "1"
+            }
+          ],
+          "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+          "tools": [
+            {
+              "configs": [
+                {
+                  "enabled": true,
+                  "name": "bash",
+                  "permission_policy": {
+                    "type": "always_allow"
+                  },
+                  "type": "bash"
+                }
+              ],
+              "default_config": {
+                "enabled": true,
+                "permission_policy": {
+                  "type": "always_ask"
+                }
+              },
+              "type": "agent_toolset_20260401"
+            }
+          ],
+          "type": "agent",
+          "version": 1
+        }
+      ],
+      "type": "coordinator"
+    },
+    "name": "My First Agent",
+    "skills": [
+      {
+        "skill_id": "xlsx",
+        "type": "anthropic",
+        "version": "1"
+      },
+      {
+        "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+        "type": "custom",
+        "version": "2"
+      }
+    ],
+    "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+    "tools": [
+      {
+        "configs": [
+          {
+            "enabled": true,
+            "name": "bash",
+            "permission_policy": {
+              "type": "always_allow"
+            },
+            "type": "bash"
+          }
+        ],
+        "default_config": {
+          "enabled": true,
+          "permission_policy": {
+            "type": "always_ask"
+          }
+        },
+        "type": "agent_toolset_20260401"
+      }
+    ],
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "budget": {
+    "max_list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "type": "limit"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "metadata": {},
+  "outcome_evaluations": [
+    {
+      "completed_at": "2026-03-15T10:02:31Z",
+      "description": "Produce a 2-page summary as summary.md",
+      "explanation": "All five sections present with inline citations.",
+      "iteration": 0,
+      "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
+      "result": "satisfied",
+      "type": "outcome_evaluation"
+    }
+  ],
+  "resources": [
+    {
+      "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+      "created_at": "2026-03-15T10:00:00Z",
+      "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "mount_path": "/uploads/receipt.pdf",
+      "type": "file",
+      "updated_at": "2026-03-15T10:00:00Z"
+    },
+    {
+      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+      "created_at": "2026-03-15T10:00:00Z",
+      "mount_path": "/workspace/example-repo",
+      "type": "github_repository",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "url": "https://github.com/example-org/example-repo",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      }
+    }
+  ],
+  "stats": {
+    "active_seconds": 0,
+    "duration_seconds": 0
+  },
+  "status": "idle",
+  "title": "Order #1234 inquiry",
+  "type": "session",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "usage": {
+    "active_seconds": 0,
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "output_tokens": 0,
+    "server_tool_use": {
+      "web_fetch_requests": 0,
+      "web_search_requests": 3
+    }
+  },
+  "vault_ids": [
+    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+  ],
+  "deployment_id": "deployment_id"
+}
+```
+
+## Delete Session
+
+`$client->beta->sessions->delete(string sessionID, ?list<AnthropicBeta> betas): BetaManagedAgentsDeletedSession`
+
+**DELETE** `/v1/sessions/{session_id}`
+
+Delete Session
+
+### Parameters
+
+- `sessionID: string`
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaManagedAgentsDeletedSession`
+
+  - `string id`
+
+  - `Type type`
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsDeletedSession = $client->beta->sessions->delete(
+  'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsDeletedSession);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "type": "session_deleted"
+}
+```
+
+## Archive Session
+
+`$client->beta->sessions->archive(string sessionID, ?list<AnthropicBeta> betas): BetaManagedAgentsSession`
+
+**POST** `/v1/sessions/{session_id}/archive`
+
+Archive Session
+
+### Parameters
+
+- `sessionID: string`
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaManagedAgentsSession`
+
+  - `string id`
+
+  - `BetaManagedAgentsSessionAgent agent`
+
+    Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+  - `?\Datetime archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?BetaManagedAgentsBudgetLimit budget`
+
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+  - `\Datetime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string environmentID`
+
+  - `array<string,string> metadata`
+
+  - `list<BetaManagedAgentsOutcomeEvaluationResource> outcomeEvaluations`
+
+    Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
+
+  - `list<ManagedAgentsSessionResource> resources`
+
+  - `BetaManagedAgentsSessionStats stats`
+
+    Timing statistics for a session.
+
+  - `Status status`
+
+    SessionStatus enum
+
+  - `?string title`
+
+  - `Type type`
+
+  - `\Datetime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionUsage usage`
+
+    Cumulative token usage for a session across all turns.
+
+  - `list<string> vaultIDs`
+
+    Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+  - `?string deploymentID`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsSession = $client->beta->sessions->archive(
+  'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsSession);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "agent": {
+    "id": "agent_011CZkYpogX7uDKUyvBTophP",
+    "description": "A general-purpose starter agent.",
+    "mcp_servers": [
+      {
+        "name": "example-mcp",
+        "type": "url",
+        "url": "https://example-server.modelcontextprotocol.io/sse"
+      }
+    ],
+    "model": {
+      "id": "claude-opus-5",
+      "effort": {
+        "type": "low"
+      },
+      "inference_geo": "inference_geo",
+      "speed": "standard"
+    },
+    "multiagent": {
+      "agents": [
+        {
+          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+          "description": "A focused research subagent.",
+          "mcp_servers": [
+            {
+              "name": "example-mcp",
+              "type": "url",
+              "url": "https://example-server.modelcontextprotocol.io/sse"
+            }
+          ],
+          "model": {
+            "id": "claude-opus-5",
+            "effort": {
+              "type": "low"
+            },
+            "inference_geo": "inference_geo",
+            "speed": "standard"
+          },
+          "name": "Researcher",
+          "skills": [
+            {
+              "skill_id": "xlsx",
+              "type": "anthropic",
+              "version": "1"
+            }
+          ],
+          "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+          "tools": [
+            {
+              "configs": [
+                {
+                  "enabled": true,
+                  "name": "bash",
+                  "permission_policy": {
+                    "type": "always_allow"
+                  },
+                  "type": "bash"
+                }
+              ],
+              "default_config": {
+                "enabled": true,
+                "permission_policy": {
+                  "type": "always_ask"
+                }
+              },
+              "type": "agent_toolset_20260401"
+            }
+          ],
+          "type": "agent",
+          "version": 1
+        }
+      ],
+      "type": "coordinator"
+    },
+    "name": "My First Agent",
+    "skills": [
+      {
+        "skill_id": "xlsx",
+        "type": "anthropic",
+        "version": "1"
+      },
+      {
+        "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+        "type": "custom",
+        "version": "2"
+      }
+    ],
+    "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+    "tools": [
+      {
+        "configs": [
+          {
+            "enabled": true,
+            "name": "bash",
+            "permission_policy": {
+              "type": "always_allow"
+            },
+            "type": "bash"
+          }
+        ],
+        "default_config": {
+          "enabled": true,
+          "permission_policy": {
+            "type": "always_ask"
+          }
+        },
+        "type": "agent_toolset_20260401"
+      }
+    ],
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "budget": {
+    "max_list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "type": "limit"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "metadata": {},
+  "outcome_evaluations": [
+    {
+      "completed_at": "2026-03-15T10:02:31Z",
+      "description": "Produce a 2-page summary as summary.md",
+      "explanation": "All five sections present with inline citations.",
+      "iteration": 0,
+      "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
+      "result": "satisfied",
+      "type": "outcome_evaluation"
+    }
+  ],
+  "resources": [
+    {
+      "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+      "created_at": "2026-03-15T10:00:00Z",
+      "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "mount_path": "/uploads/receipt.pdf",
+      "type": "file",
+      "updated_at": "2026-03-15T10:00:00Z"
+    },
+    {
+      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+      "created_at": "2026-03-15T10:00:00Z",
+      "mount_path": "/workspace/example-repo",
+      "type": "github_repository",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "url": "https://github.com/example-org/example-repo",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      }
+    }
+  ],
+  "stats": {
+    "active_seconds": 0,
+    "duration_seconds": 0
+  },
+  "status": "idle",
+  "title": "Order #1234 inquiry",
+  "type": "session",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "usage": {
+    "active_seconds": 0,
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "output_tokens": 0,
+    "server_tool_use": {
+      "web_fetch_requests": 0,
+      "web_search_requests": 3
+    }
+  },
+  "vault_ids": [
+    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+  ],
+  "deployment_id": "deployment_id"
+}
+```
+
+## Domain types
+
+### Beta Managed Agents Advisor Params
+
+- `BetaManagedAgentsAdvisorParams`
+
+  - `string model`
+
+    A Claude model id. The model must be permitted as an advisor for this agent's model — see the sessions/threads/advisor spec.
+
+  - `Type type`
+
+### Beta Managed Agents Agent Message Preview
+
+- `BetaManagedAgentsAgentMessagePreview`
+
+  - `string id`
+
+    The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+  - `Type type`
+
+### Beta Managed Agents Agent Params
+
+- `BetaManagedAgentsAgentParams`
+
+  - `string id`
+
+    The `agent` ID.
+
+  - `Type type`
+
+  - `?int version`
+
+    The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+### Beta Managed Agents Agent Thinking Preview
+
+- `BetaManagedAgentsAgentThinkingPreview`
+
+  - `string id`
+
+    The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+  - `Type type`
+
+### Beta Managed Agents Agent With Overrides Params
+
+- `BetaManagedAgentsAgentWithOverridesParams`
+
+  - `string id`
+
+    The `agent` ID.
+
+  - `Type type`
+
+  - `?list<BetaManagedAgentsURLMCPServerParams> mcpServers`
+
+    Replacement MCP server list. Full replacement: the provided array becomes the MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
+
+  - `?Model model`
+
+    Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
+
+  - `?list<BetaManagedAgentsSkillParams> skills`
+
+    Replacement skill list. Full replacement: the provided array becomes the skills. Send an empty array to clear; omit to preserve the agent's skills.
+
+  - `?string system`
+
+    Replacement system prompt. Up to 100,000 characters. Set to null to clear the agent's system prompt; omit to preserve it.
+
+  - `?list<Tool> tools`
+
+    Replacement tool list. Full replacement: the provided array becomes the tool configuration. Send an empty array to clear; omit to preserve the agent's tools.
+
+  - `?int version`
+
+    The specific `agent` version to use. Omit to use the latest version.
+
+### Beta Managed Agents Branch Checkout
+
+- `BetaManagedAgentsBranchCheckout`
+
+  - `string name`
+
+    Branch name to check out.
+
+  - `Type type`
+
+### Beta Managed Agents Budget Limit
+
+- `BetaManagedAgentsBudgetLimit`
+
+  - `BetaMonetaryAmount maxListCost`
+
+    A monetary amount in a specific currency.
+
+  - `Type type`
+
+### Beta Managed Agents Cache Creation Usage
+
+- `BetaManagedAgentsCacheCreationUsage`
+
+  - `?int ephemeral1hInputTokens`
+
+    Tokens used to create 1-hour ephemeral cache entries.
+
+  - `?int ephemeral5mInputTokens`
+
+    Tokens used to create 5-minute ephemeral cache entries.
+
+### Beta Managed Agents Commit Checkout
+
+- `BetaManagedAgentsCommitCheckout`
+
+  - `string sha`
+
+    Full commit SHA to check out.
+
+  - `Type type`
+
+### Beta Managed Agents Deleted Session
+
+- `BetaManagedAgentsDeletedSession`
+
+  - `string id`
+
+  - `Type type`
+
+### Beta Managed Agents Delta Content
+
+- `BetaManagedAgentsDeltaContent`
+
+  - `ManagedAgentsTextBlock content`
+
+    Regular text content.
+
+  - `Type type`
+
+  - `?int index`
+
+    Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+### Beta Managed Agents Delta Event
+
+- `BetaManagedAgentsDeltaEvent`
+
+  - `BetaManagedAgentsDeltaContent delta`
+
+    One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+  - `string eventID`
+
+    The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+  - `Type type`
+
+### Beta Managed Agents Delta Type
+
+- `BetaManagedAgentsDeltaType`
+
+  - `"agent.message"`
+
+  - `"agent.thinking"`
+
+### Beta Managed Agents File Resource Params
+
+- `BetaManagedAgentsFileResourceParams`
+
+  - `string fileID`
+
+    ID of a previously uploaded file.
+
+  - `Type type`
+
+  - `?string mountPath`
+
+    Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+### Beta Managed Agents GitHub Repository Resource Params
+
+- `BetaManagedAgentsGitHubRepositoryResourceParams`
+
+  - `string authorizationToken`
+
+    GitHub authorization token used to clone the repository.
+
+  - `Type type`
+
+  - `string url`
+
+    Github URL of the repository
+
+  - `?Checkout checkout`
+
+    Branch or commit to check out. Defaults to the repository's default branch.
+
+  - `?string mountPath`
+
+    Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+### Beta Managed Agents Memory Store Resource Param
+
+- `BetaManagedAgentsMemoryStoreResourceParam`
+
+  - `string memoryStoreID`
+
+    The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+  - `Type type`
+
+  - `?Access access`
+
+    Access mode for an attached memory store.
+
+  - `?string instructions`
+
+    Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+### Beta Managed Agents Multiagent
+
+- `BetaManagedAgentsMultiagent`
+
+  - `list<Agent> agents`
+
+    Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+  - `Type type`
+
+### Beta Managed Agents Multiagent Params
+
+- `BetaManagedAgentsMultiagentParams`
+
+  - `list<BetaManagedAgentsMultiagentRosterEntryParams> agents`
+
+    Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+  - `Type type`
+
+### Beta Managed Agents Multiagent Roster Entry Params
+
+- `BetaManagedAgentsMultiagentRosterEntryParams`
+
+  - `string`
+
+  - `BetaManagedAgentsAgentParams`
+
+    - `string id`
+
+      The `agent` ID.
+
+    - `Type type`
+
+    - `?int version`
+
+      The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+  - `BetaManagedAgentsMultiagentSelfParams`
+
+    - `Type type`
+
+  - `BetaManagedAgentsAdvisorParams`
+
+    - `string model`
+
+      A Claude model id. The model must be permitted as an advisor for this agent's model — see the sessions/threads/advisor spec.
+
+    - `Type type`
+
+### Beta Managed Agents Outcome Evaluation Resource
+
+- `BetaManagedAgentsOutcomeEvaluationResource`
+
+  - `?\Datetime completedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string description`
+
+    What the agent should produce.
+
+  - `?string explanation`
+
+    Grader's verdict text from the most recent evaluation. For `satisfied`, explains why criteria are met; for `needs_revision` (intermediate), what's missing; for `failed`, why unrecoverable.
+
+  - `int iteration`
+
+    0-indexed revision cycle the outcome is currently on.
+
+  - `string outcomeID`
+
+    Server-generated outc_ ID for this outcome.
+
+  - `string result`
+
+    Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
+
+  - `Type type`
+
+### Beta Managed Agents Server Tool Usage
+
+- `BetaManagedAgentsServerToolUsage`
+
+  - `?int webFetchRequests`
+
+    Number of server-executed web fetch requests.
+
+  - `?int webSearchRequests`
+
+    Number of server-executed web search requests.
+
+### Beta Managed Agents Session
+
+- `BetaManagedAgentsSession`
+
+  - `string id`
+
+  - `BetaManagedAgentsSessionAgent agent`
+
+    Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+  - `?\Datetime archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?BetaManagedAgentsBudgetLimit budget`
+
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+  - `\Datetime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string environmentID`
+
+  - `array<string,string> metadata`
+
+  - `list<BetaManagedAgentsOutcomeEvaluationResource> outcomeEvaluations`
+
+    Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
+
+  - `list<ManagedAgentsSessionResource> resources`
+
+  - `BetaManagedAgentsSessionStats stats`
+
+    Timing statistics for a session.
+
+  - `Status status`
+
+    SessionStatus enum
+
+  - `?string title`
+
+  - `Type type`
+
+  - `\Datetime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionUsage usage`
+
+    Cumulative token usage for a session across all turns.
+
+  - `list<string> vaultIDs`
+
+    Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+  - `?string deploymentID`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
+### Beta Managed Agents Session Agent
+
+- `BetaManagedAgentsSessionAgent`
+
+  - `string id`
+
+  - `?string description`
+
+  - `list<BetaManagedAgentsMCPServerURLDefinition> mcpServers`
+
+  - `BetaManagedAgentsModelConfig model`
+
+    Model identifier and configuration.
+
+  - `?BetaManagedAgentsSessionMultiagentCoordinator multiagent`
+
+    Resolved coordinator topology with full agent definitions for each roster member.
+
+  - `string name`
+
+  - `list<Skill> skills`
+
+  - `?string system`
+
+  - `list<Tool> tools`
+
+  - `Type type`
+
+  - `int version`
+
+### Beta Managed Agents Session Agent Update
+
+- `BetaManagedAgentsSessionAgentUpdate`
+
+  - `?list<BetaManagedAgentsURLMCPServerParams> mcpServers`
+
+    Replacement MCP server list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
+
+  - `?list<Tool> tools`
+
+    Replacement tool list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
+
+### Beta Managed Agents Session Multiagent Coordinator
+
+- `BetaManagedAgentsSessionMultiagentCoordinator`
+
+  - `list<Agent> agents`
+
+    Full `agent` definitions the coordinator may spawn as session threads.
+
+  - `Type type`
+
+### Beta Managed Agents Session Stats
+
+- `BetaManagedAgentsSessionStats`
+
+  - `?float activeSeconds`
+
+    Cumulative time in seconds the session spent in `running` status. Excludes idle time.
+
+  - `?float durationSeconds`
+
+    Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
+
+### Beta Managed Agents Session Updated Event
+
+- `BetaManagedAgentsSessionUpdatedEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+  - `?BetaManagedAgentsSessionAgent agent`
+
+    Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+  - `?BetaManagedAgentsBudgetLimit budget`
+
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+  - `?array<string,string> metadata`
 
-?string system
+    The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-Replacement system prompt. Up to 100,000 characters. Set to null to clear the agent's system prompt; omit to preserve it.
+  - `?string title`
 
-?list<Tool> tools
+    The session's new title. Present only when the update changed it.
 
-Replacement tool list. Full replacement: the provided array becomes the tool configuration. Send an empty array to clear; omit to preserve the agent's tools.
+### Beta Managed Agents Session Usage
 
-?int version
+- `BetaManagedAgentsSessionUsage`
 
-The specific `agent` version to use. Omit to use the latest version.
+  - `?float activeSeconds`
 
-
+    Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once, unlike `stats.active_seconds`, which sums each thread's own active time. This is the duration the session's runtime cost is priced on.
 
-[BetaManagedAgentsBranchCheckout](api/beta/sessions.md)
+  - `?BetaManagedAgentsCacheCreationUsage cacheCreation`
 
-string name
+    Prompt-cache creation token usage broken down by cache lifetime.
 
-Branch name to check out.
+  - `?int cacheReadInputTokens`
 
-Type type
+    Total tokens read from prompt cache.
 
-
+  - `?int inputTokens`
 
-[BetaManagedAgentsCacheCreationUsage](api/beta/sessions.md)
+    Total input tokens consumed across all turns.
 
-?int ephemeral1hInputTokens
+  - `?BetaMonetaryAmount listCost`
 
-Tokens used to create 1-hour ephemeral cache entries.
+    A monetary amount in a specific currency.
 
-?int ephemeral5mInputTokens
+  - `?int outputTokens`
 
-Tokens used to create 5-minute ephemeral cache entries.
+    Total output tokens generated across all turns.
 
-
+  - `?BetaManagedAgentsServerToolUsage serverToolUse`
 
-[BetaManagedAgentsCommitCheckout](api/beta/sessions.md)
+    Cumulative count of server-executed tool invocations, broken down by tool.
 
-string sha
+### Beta Managed Agents Session Usage Event
 
-Full commit SHA to check out.
+- `BetaManagedAgentsSessionUsageEvent`
 
-Type type
+  - `string id`
 
-
+    Unique identifier for this event.
 
-[BetaManagedAgentsDeletedSession](api/beta/sessions.md)
+  - `\Datetime processedAt`
 
-string id
+    A timestamp in RFC 3339 format
 
-Type type
+  - `Type type`
 
-
+  - `ManagedAgentsSessionUsageSnapshot usage`
 
-[BetaManagedAgentsDeltaContent](api/beta/sessions.md)
+    Point-in-time snapshot of a session's cumulative usage.
 
-[ManagedAgentsTextBlock](api/beta/sessions/events.md) content
+  - `?BetaManagedAgentsBudgetLimit budget`
 
-Regular text content.
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-Type type
+### Beta Managed Agents Start Event
 
-?int index
+- `BetaManagedAgentsStartEvent`
 
-Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+  - `BetaManagedAgentsStartEventPreview event`
 
-
+    The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
 
-[BetaManagedAgentsDeltaEvent](api/beta/sessions.md)
+  - `Type type`
 
-[BetaManagedAgentsDeltaContent](api/beta/sessions.md) delta
+### Beta Managed Agents Start Event Preview
 
-One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content\_delta fragments, each a partial element of the content array.
+- `BetaManagedAgentsStartEventPreview`
 
-string eventID
+  - `BetaManagedAgentsAgentMessagePreview`
 
-The id of the event being previewed. Matches event.id on the corresponding event\_start and the buffered event that reconciles the preview.
+    - `string id`
 
-Type type
+      The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
 
-
+    - `Type type`
 
-[BetaManagedAgentsDeltaType](api/beta/sessions.md)
+  - `BetaManagedAgentsAgentThinkingPreview`
 
-One of the following:
+    - `string id`
 
-"agent.message"
+      The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
 
-"agent.thinking"
+    - `Type type`
 
-
+### Beta Managed Agents System Content Block
 
-[BetaManagedAgentsFileResourceParams](api/beta/sessions.md)
+- `BetaManagedAgentsSystemContentBlock`
 
-string fileID
+  - `string text`
 
-ID of a previously uploaded file.
+    The text content.
 
-Type type
+  - `Type type`
 
-?string mountPath
+### Beta Managed Agents System Message Event
 
-Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+- `BetaManagedAgentsSystemMessageEvent`
 
-
+  - `string id`
 
-[BetaManagedAgentsGitHubRepositoryResourceParams](api/beta/sessions.md)
+    Unique identifier for this event.
 
-string authorizationToken
+  - `list<BetaManagedAgentsSystemContentBlock> content`
 
-GitHub authorization token used to clone the repository.
+    System content blocks. Text-only.
 
-Type type
+  - `Type type`
 
-string url
+  - `?\Datetime processedAt`
 
-Github URL of the repository
+    A timestamp in RFC 3339 format
 
-?Checkout checkout
+### Beta Managed Agents User Tool Result Event
 
-Branch or commit to check out. Defaults to the repository's default branch.
+- `BetaManagedAgentsUserToolResultEvent`
 
-?string mountPath
+  - `string id`
 
-Mount path in the container. Defaults to `/workspace/<repo-name>`.
+    Unique identifier for this event.
 
-
+  - `string toolUseID`
 
-[BetaManagedAgentsMemoryStoreResourceParam](api/beta/sessions.md)
+    The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-string memoryStoreID
+  - `Type type`
 
-The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+  - `?list<Content> content`
 
-Type type
+    The result content returned by the tool.
 
-?Access access
+  - `?bool isError`
 
-Access mode for an attached memory store.
+    Whether the tool execution resulted in an error.
 
-?string instructions
+  - `?\Datetime processedAt`
 
-Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+    A timestamp in RFC 3339 format
 
-
+  - `?string sessionThreadID`
 
-[BetaManagedAgentsMultiagent](api/beta/sessions.md)
+    Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-list<[BetaManagedAgentsAgentReference](api/beta/agents.md)> agents
+## Sessions › Events
 
-Agents the coordinator may spawn as session threads, each resolved to a specific version.
+### List Events
 
-Type type
+`$client->beta->sessions->events->list(string sessionID, ?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?int limit, ?Order order, ?string page, ?list<string> types, ?list<AnthropicBeta> betas): PageCursor<ManagedAgentsSessionEvent>`
 
-
+**GET** `/v1/sessions/{session_id}/events`
 
-[BetaManagedAgentsMultiagentParams](api/beta/sessions.md)
+List Events
 
-list<[BetaManagedAgentsMultiagentRosterEntryParams](api/beta/sessions.md)> agents
+#### Parameters
 
-Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+- `sessionID: string`
 
-Type type
+- `createdAtGt?:optional \Datetime`
 
-
+  Return events created after this time (exclusive). Compared against the event's `processed_at` value.
 
-[BetaManagedAgentsMultiagentRosterEntryParams](api/beta/sessions.md)
+- `createdAtGte?:optional \Datetime`
 
-One of the following:
+  Return events created at or after this time (inclusive). Compared against the event's `processed_at` value.
 
-string
+- `createdAtLt?:optional \Datetime`
 
-
+  Return events created before this time (exclusive). Compared against the event's `processed_at` value.
 
-[BetaManagedAgentsAgentParams](api/beta/sessions.md)
+- `createdAtLte?:optional \Datetime`
 
-string id
+  Return events created at or before this time (inclusive). Compared against the event's `processed_at` value.
 
-The `agent` ID.
+- `limit?:optional int`
 
-Type type
+  Query parameter for limit
 
-?int version
+- `order?:optional Order`
 
-The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+  Sort direction for results, ordered by the event's `processed_at`. Defaults to `asc` (chronological).
 
-
+- `page?:optional string`
 
-[BetaManagedAgentsMultiagentSelfParams](api/beta/agents.md)
+  Opaque pagination cursor from a previous response's `next_page`.
 
-Type type
+- `types?:optional list<string>`
 
-
+  Filter by event type. Values match the `type` field on returned events (for example, `user.message` or `agent.tool_use`). Omit to return all event types.
 
-[BetaManagedAgentsOutcomeEvaluationResource](api/beta/sessions.md)
+- `betas?:optional list<AnthropicBeta>`
 
-?\Datetime completedAt
+  Optional header to specify the beta version(s) you want to use.
 
-A timestamp in RFC 3339 format
+#### Returns
 
-string description
+- `ManagedAgentsSessionEvent`
 
-What the agent should produce.
+  - `ManagedAgentsUserMessageEvent`
 
-?string explanation
+    - `string id`
 
-Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs\_revision (intermediate), what's missing; for failed, why unrecoverable.
+      Unique identifier for this event.
 
-int iteration
+    - `list<Content> content`
 
-0-indexed revision cycle the outcome is currently on.
+      Array of content blocks comprising the user message.
 
-string outcomeID
+    - `Type type`
 
-Server-generated outc\_ ID for this outcome.
+    - `?\Datetime processedAt`
 
-string result
+      A timestamp in RFC 3339 format
 
-Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
+  - `ManagedAgentsUserInterruptEvent`
 
-Type type
+    - `string id`
 
-
+      Unique identifier for this event.
 
-[BetaManagedAgentsSession](api/beta/sessions.md)
+    - `Type type`
 
-string id
+    - `?\Datetime processedAt`
 
-[BetaManagedAgentsSessionAgent](api/beta/sessions.md) agent
+      A timestamp in RFC 3339 format
 
-Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+    - `?string sessionThreadID`
 
-?\Datetime archivedAt
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-A timestamp in RFC 3339 format
+  - `ManagedAgentsUserToolConfirmationEvent`
 
-\Datetime createdAt
+    - `string id`
 
-A timestamp in RFC 3339 format
+      Unique identifier for this event.
 
-string environmentID
+    - `Result result`
 
-array<string,string> metadata
+      UserToolConfirmationResult enum
 
-list<[BetaManagedAgentsOutcomeEvaluationResource](api/beta/sessions.md)> outcomeEvaluations
+    - `string toolUseID`
 
-Per-outcome evaluation state. One entry per define\_outcome event sent to the session.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-list<[ManagedAgentsSessionResource](api/beta/sessions/resources.md)> resources
+    - `Type type`
 
-[BetaManagedAgentsSessionStats](api/beta/sessions.md) stats
+    - `?string denyMessage`
 
-Timing statistics for a session.
+      Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-Status status
+    - `?\Datetime processedAt`
 
-SessionStatus enum
+      A timestamp in RFC 3339 format
 
-?string title
+    - `?string sessionThreadID`
 
-Type type
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-\Datetime updatedAt
+  - `ManagedAgentsUserCustomToolResultEvent`
 
-A timestamp in RFC 3339 format
+    - `string id`
 
-[BetaManagedAgentsSessionUsage](api/beta/sessions.md) usage
+      Unique identifier for this event.
 
-Cumulative token usage for a session across all turns.
+    - `string customToolUseID`
 
-list<string> vaultIDs
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+    - `Type type`
 
-?string deploymentID
+    - `?list<Content> content`
 
-Deployment ID when the session was created from a deployment reference. Null otherwise.
+      The result content returned by the tool.
 
-
+    - `?bool isError`
 
-[BetaManagedAgentsSessionAgent](api/beta/sessions.md)
+      Whether the tool execution resulted in an error.
 
-string id
+    - `?\Datetime processedAt`
 
-?string description
+      A timestamp in RFC 3339 format
 
-list<[BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md)> mcpServers
+    - `?string sessionThreadID`
 
-[BetaManagedAgentsModelConfig](api/beta/agents.md) model
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-Model identifier and configuration.
+  - `ManagedAgentsAgentCustomToolUseEvent`
 
-?[BetaManagedAgentsSessionMultiagentCoordinator](api/beta/sessions.md) multiagent
+    - `string id`
 
-Resolved coordinator topology with full agent definitions for each roster member.
+      Unique identifier for this event.
 
-string name
+    - `array<string,mixed> input`
 
-list<Skill> skills
+      Input parameters for the tool call.
 
-?string system
+    - `string name`
 
-list<Tool> tools
+      Name of the custom tool being called.
 
-Type type
+    - `\Datetime processedAt`
 
-int version
+      A timestamp in RFC 3339 format
 
-
+    - `Type type`
 
-[BetaManagedAgentsSessionAgentUpdate](api/beta/sessions.md)
+    - `?string sessionThreadID`
 
-?list<[BetaManagedAgentsURLMCPServerParams](api/beta/agents.md)> mcpServers
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-Replacement MCP server list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
+  - `ManagedAgentsAgentMessageEvent`
 
-?list<Tool> tools
+    - `string id`
 
-Replacement tool list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
+      Unique identifier for this event.
 
-
+    - `list<Content> content`
 
-[BetaManagedAgentsSessionMultiagentCoordinator](api/beta/sessions.md)
+      Array of text blocks comprising the agent response.
 
-list<[BetaManagedAgentsSessionThreadAgent](api/beta/agents.md)> agents
+    - `\Datetime processedAt`
 
-Full `agent` definitions the coordinator may spawn as session threads.
+      A timestamp in RFC 3339 format
 
-Type type
+    - `Type type`
 
-
+  - `ManagedAgentsAgentThinkingEvent`
 
-[BetaManagedAgentsSessionStats](api/beta/sessions.md)
+    - `string id`
 
-?float activeSeconds
+      Unique identifier for this event.
 
-Cumulative time in seconds the session spent in running status. Excludes idle time.
+    - `\Datetime processedAt`
 
-?float durationSeconds
+      A timestamp in RFC 3339 format
 
-Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
+    - `Type type`
 
-
+  - `ManagedAgentsAgentMCPToolUseEvent`
 
-[BetaManagedAgentsSessionUpdatedEvent](api/beta/sessions.md)
+    - `string id`
 
-string id
+      Unique identifier for this event.
 
-Unique identifier for this event.
+    - `array<string,mixed> input`
 
-\Datetime processedAt
+      Input parameters for the tool call.
 
-A timestamp in RFC 3339 format
+    - `string mcpServerName`
 
-Type type
+      Name of the MCP server providing the tool.
 
-?[BetaManagedAgentsSessionAgent](api/beta/sessions.md) agent
+    - `string name`
 
-Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+      Name of the MCP tool being used.
 
-?array<string,string> metadata
+    - `\Datetime processedAt`
 
-The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
+      A timestamp in RFC 3339 format
 
-?string title
+    - `Type type`
 
-The session's new title. Present only when the update changed it.
+    - `?EvaluatedPermission evaluatedPermission`
 
-
+      AgentEvaluatedPermission enum
 
-[BetaManagedAgentsSessionUsage](api/beta/sessions.md)
+    - `?string sessionThreadID`
 
-?[BetaManagedAgentsCacheCreationUsage](api/beta/sessions.md) cacheCreation
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-Prompt-cache creation token usage broken down by cache lifetime.
+  - `ManagedAgentsAgentMCPToolResultEvent`
 
-?int cacheReadInputTokens
+    - `string id`
 
-Total tokens read from prompt cache.
+      Unique identifier for this event.
 
-?int inputTokens
+    - `string mcpToolUseID`
 
-Total input tokens consumed across all turns.
+      The id of the `agent.mcp_tool_use` event this result corresponds to.
 
-?int outputTokens
+    - `\Datetime processedAt`
 
-Total output tokens generated across all turns.
+      A timestamp in RFC 3339 format
 
-
+    - `Type type`
 
-[BetaManagedAgentsStartEvent](api/beta/sessions.md)
+    - `?list<Content> content`
 
-[BetaManagedAgentsStartEventPreview](api/beta/sessions.md) event
+      The result content returned by the tool.
 
-The previewed event's type and id. The event type determines which delta types the preview's event\_delta events carry: agent.message events stream content\_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+    - `?bool isError`
 
-Type type
+      Whether the tool execution resulted in an error.
 
-
+  - `ManagedAgentsAgentToolUseEvent`
 
-[BetaManagedAgentsStartEventPreview](api/beta/sessions.md)
+    - `string id`
 
-One of the following:
+      Unique identifier for this event.
 
-
+    - `array<string,mixed> input`
 
-[BetaManagedAgentsAgentMessagePreview](api/beta/sessions.md)
+      Input parameters for the tool call.
 
-string id
+    - `string name`
 
-The id the buffered agent.message will carry if it is emitted. Matches the event\_id on this preview's event\_delta events.
+      Name of the agent tool being used.
 
-Type type
+    - `\Datetime processedAt`
 
-
+      A timestamp in RFC 3339 format
 
-[BetaManagedAgentsAgentThinkingPreview](api/beta/sessions.md)
+    - `Type type`
 
-string id
+    - `?EvaluatedPermission evaluatedPermission`
 
-The id the buffered agent.thinking will carry if it is emitted. Start-only — no event\_delta events follow.
+      AgentEvaluatedPermission enum
 
-Type type
+    - `?string sessionThreadID`
 
-
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)
+  - `ManagedAgentsAgentToolResultEvent`
 
-string text
+    - `string id`
 
-The text content.
+      Unique identifier for this event.
 
-Type type
+    - `\Datetime processedAt`
 
-
+      A timestamp in RFC 3339 format
 
-[BetaManagedAgentsSystemMessageEvent](api/beta/sessions.md)
+    - `string toolUseID`
 
-string id
+      The id of the `agent.tool_use` event this result corresponds to.
 
-Unique identifier for this event.
+    - `Type type`
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> content
+    - `?list<Content> content`
 
-System content blocks. Text-only.
+      The result content returned by the tool.
 
-Type type
+    - `?bool isError`
 
-?\Datetime processedAt
+      Whether the tool execution resulted in an error.
 
-A timestamp in RFC 3339 format
+  - `ManagedAgentsAgentThreadMessageReceivedEvent`
 
-
+    - `string id`
 
-[BetaManagedAgentsUserToolResultEvent](api/beta/sessions.md)
+      Unique identifier for this event.
 
-string id
+    - `list<Content> content`
 
-Unique identifier for this event.
+      Message content blocks.
 
-string toolUseID
+    - `string fromSessionThreadID`
 
-The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      Public `sthr_` ID of the thread that sent the message.
 
-Type type
+    - `\Datetime processedAt`
 
-?list<Content> content
+      A timestamp in RFC 3339 format
 
-The result content returned by the tool.
+    - `Type type`
 
-?bool isError
+    - `?string fromAgentName`
 
-Whether the tool execution resulted in an error.
+      Name of the callable agent this message came from. Absent when received from the primary agent.
 
-?\Datetime processedAt
+  - `ManagedAgentsAgentThreadMessageSentEvent`
 
-A timestamp in RFC 3339 format
+    - `string id`
 
-?string sessionThreadID
+      Unique identifier for this event.
 
-Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+    - `list<Content> content`
 
-#### SessionsEvents
+      Message content blocks.
 
-##### [List Events](api/beta/sessions/events/list.md)
+    - `\Datetime processedAt`
 
-$client->beta->sessions->events->list(string sessionID, ?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?int limit, ?[Order](api/beta/sessions/events/list.md) order, ?string page, ?list<string> types, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsSessionEvent](api/beta/sessions/events.md)>
+      A timestamp in RFC 3339 format
 
-GET/v1/sessions/{session\_id}/events
+    - `string toSessionThreadID`
 
-##### [Send Events](api/beta/sessions/events/send.md)
+      Public `sthr_` ID of the thread the message was sent to.
 
-$client->beta->sessions->events->send(string sessionID, list<[ManagedAgentsEventParams](api/beta/sessions/events.md)> events, ?list<AnthropicBeta> betas): [ManagedAgentsSendSessionEvents](api/beta/sessions/events.md)
+    - `Type type`
 
-POST/v1/sessions/{session\_id}/events
+    - `?string toAgentName`
 
-##### [Stream Events](api/beta/sessions/events/stream.md)
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-$client->beta->sessions->events->stream(string sessionID, ?list<[BetaManagedAgentsDeltaType](api/beta/sessions.md)> eventDeltas, ?list<AnthropicBeta> betas): [ManagedAgentsStreamSessionEvents](api/beta/sessions/events.md)
+  - `ManagedAgentsAgentThreadContextCompactedEvent`
 
-GET/v1/sessions/{session\_id}/events/stream
+    - `string id`
 
-#### SessionsResources
+      Unique identifier for this event.
 
-##### [Add Session Resource](api/beta/sessions/resources/add.md)
+    - `\Datetime processedAt`
 
-$client->beta->sessions->resources->add(string sessionID, string fileID, [Type](api/beta/sessions/resources/add.md) type, ?string mountPath, ?list<AnthropicBeta> betas): [ManagedAgentsFileResource](api/beta/sessions/resources.md)
+      A timestamp in RFC 3339 format
 
-POST/v1/sessions/{session\_id}/resources
+    - `Type type`
 
-##### [List Session Resources](api/beta/sessions/resources/list.md)
+  - `ManagedAgentsSessionErrorEvent`
 
-$client->beta->sessions->resources->list(string sessionID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsSessionResource](api/beta/sessions/resources.md)>
+    - `string id`
 
-GET/v1/sessions/{session\_id}/resources
+      Unique identifier for this event.
 
-##### [Get Session Resource](api/beta/sessions/resources/retrieve.md)
+    - `Error error`
 
-$client->beta->sessions->resources->retrieve(string resourceID, string sessionID, ?list<AnthropicBeta> betas): [ResourceGetResponse](api/beta/sessions/resources.md)
+      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-GET/v1/sessions/{session\_id}/resources/{resource\_id}
+    - `\Datetime processedAt`
 
-##### [Update Session Resource](api/beta/sessions/resources/update.md)
+      A timestamp in RFC 3339 format
 
-$client->beta->sessions->resources->update(string resourceID, string sessionID, string authorizationToken, ?list<AnthropicBeta> betas): [ResourceUpdateResponse](api/beta/sessions/resources.md)
+    - `Type type`
 
-POST/v1/sessions/{session\_id}/resources/{resource\_id}
+  - `ManagedAgentsSessionStatusRescheduledEvent`
 
-##### [Delete Session Resource](api/beta/sessions/resources/delete.md)
+    - `string id`
 
-$client->beta->sessions->resources->delete(string resourceID, string sessionID, ?list<AnthropicBeta> betas): [ManagedAgentsDeleteSessionResource](api/beta/sessions/resources.md)
+      Unique identifier for this event.
 
-DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
+    - `\Datetime processedAt`
 
-#### SessionsThreads
+      A timestamp in RFC 3339 format
 
-##### [List Session Threads](api/beta/sessions/threads/list.md)
+    - `Type type`
 
-$client->beta->sessions->threads->list(string sessionID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsSessionThread](api/beta/sessions/threads.md)>
+  - `ManagedAgentsSessionStatusRunningEvent`
 
-GET/v1/sessions/{session\_id}/threads
+    - `string id`
 
-##### [Get Session Thread](api/beta/sessions/threads/retrieve.md)
+      Unique identifier for this event.
 
-$client->beta->sessions->threads->retrieve(string threadID, string sessionID, ?list<AnthropicBeta> betas): [ManagedAgentsSessionThread](api/beta/sessions/threads.md)
+    - `\Datetime processedAt`
 
-GET/v1/sessions/{session\_id}/threads/{thread\_id}
+      A timestamp in RFC 3339 format
 
-##### [Archive Session Thread](api/beta/sessions/threads/archive.md)
+    - `Type type`
 
-$client->beta->sessions->threads->archive(string threadID, string sessionID, ?list<AnthropicBeta> betas): [ManagedAgentsSessionThread](api/beta/sessions/threads.md)
+  - `ManagedAgentsSessionStatusIdleEvent`
 
-POST/v1/sessions/{session\_id}/threads/{thread\_id}/archive
+    - `string id`
 
-#### SessionsThreadsEvents
+      Unique identifier for this event.
 
-##### [List Session Thread Events](api/beta/sessions/threads/events/list.md)
+    - `\Datetime processedAt`
 
-$client->beta->sessions->threads->events->list(string threadID, string sessionID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsSessionEvent](api/beta/sessions/events.md)>
+      A timestamp in RFC 3339 format
 
-GET/v1/sessions/{session\_id}/threads/{thread\_id}/events
+    - `StopReason stopReason`
 
-##### [Stream Session Thread Events](api/beta/sessions/threads/events/stream.md)
+      The agent completed its turn naturally and is ready for the next user message.
 
-$client->beta->sessions->threads->events->stream(string threadID, string sessionID, ?list<AnthropicBeta> betas): [ManagedAgentsStreamSessionThreadEvents](api/beta/sessions/threads.md)
+    - `Type type`
 
-GET/v1/sessions/{session\_id}/threads/{thread\_id}/stream
+  - `ManagedAgentsSessionStatusTerminatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionThreadCreatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the callable agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `Type type`
+
+  - `ManagedAgentsSpanOutcomeEvaluationStartEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `int iteration`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `string outcomeID`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSpanOutcomeEvaluationEndEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string explanation`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `int iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `string outcomeEvaluationStartID`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `string outcomeID`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string result`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `Type type`
+
+    - `ManagedAgentsSpanModelUsage usage`
+
+      Token usage for a single model request.
+
+  - `ManagedAgentsSpanModelRequestStartEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSpanModelRequestEndEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `?bool isError`
+
+      Whether the model request resulted in an error.
+
+    - `string modelRequestStartID`
+
+      The id of the corresponding `span.model_request_start` event.
+
+    - `ManagedAgentsSpanModelUsage modelUsage`
+
+      Token usage for a single model request.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `int iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `string outcomeID`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsUserDefineOutcomeEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string description`
+
+      What the agent should produce. Copied from the input event.
+
+    - `?int maxIterations`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `string outcomeID`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Rubric rubric`
+
+      Rubric for grading the quality of an outcome.
+
+    - `Type type`
+
+  - `ManagedAgentsSessionDeletedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionThreadStatusRunningEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `Type type`
+
+  - `ManagedAgentsSessionThreadStatusIdleEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+    - `Type type`
+
+  - `ManagedAgentsSessionThreadStatusTerminatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `Type type`
+
+  - `BetaManagedAgentsUserToolResultEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string toolUseID`
+
+      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+    - `?list<Content> content`
+
+      The result content returned by the tool.
+
+    - `?bool isError`
+
+      Whether the tool execution resulted in an error.
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `?string sessionThreadID`
+
+      Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+
+  - `ManagedAgentsSessionThreadStatusRescheduledEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `Type type`
+
+  - `BetaManagedAgentsSessionUpdatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?BetaManagedAgentsSessionAgent agent`
+
+      Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+    - `?BetaManagedAgentsBudgetLimit budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+    - `?array<string,string> metadata`
+
+      The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
+
+    - `?string title`
+
+      The session's new title. Present only when the update changed it.
+
+  - `BetaManagedAgentsSystemMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks. Text-only.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionUsageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `ManagedAgentsSessionUsageSnapshot usage`
+
+      Point-in-time snapshot of a session's cumulative usage.
+
+    - `?BetaManagedAgentsBudgetLimit budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$page = $client->beta->sessions->events->list(
+  'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  createdAtGt: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  createdAtGte: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  createdAtLt: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  createdAtLte: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  limit: 0,
+  order: 'asc',
+  page: 'page',
+  types: ['string'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($page);
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message",
+      "processed_at": "2026-03-15T10:00:00Z"
+    },
+    {
+      "id": "sevt_011CZkZHPq1jCdq5lbRTjiVnz",
+      "content": [
+        {
+          "text": "Let me look up order #1234 for you.",
+          "type": "text"
+        }
+      ],
+      "processed_at": "2026-03-15T10:00:00Z",
+      "type": "agent.message"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
+
+### Send Events
+
+`$client->beta->sessions->events->send(string sessionID, list<ManagedAgentsEventParams> events, ?list<AnthropicBeta> betas): ManagedAgentsSendSessionEvents`
+
+**POST** `/v1/sessions/{session_id}/events`
+
+Send Events
+
+#### Parameters
+
+- `sessionID: string`
+
+- `events: list<ManagedAgentsEventParams>`
+
+  Events to send to the `session`.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `ManagedAgentsSendSessionEvents`
+
+  - `?list<Data> data`
+
+    Sent events
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsSendSessionEvents = $client->beta->sessions->events->send(
+  'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  events: [
+    [
+      'content' => [['text' => 'Where is my order #1234?', 'type' => 'text']],
+      'type' => 'user.message',
+    ],
+  ],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsSendSessionEvents);
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message",
+      "processed_at": "2026-03-15T10:00:00Z"
+    }
+  ]
+}
+```
+
+### Stream Events
+
+`$client->beta->sessions->events->stream(string sessionID, ?list<BetaManagedAgentsDeltaType> eventDeltas, ?list<AnthropicBeta> betas): ManagedAgentsStreamSessionEvents`
+
+**GET** `/v1/sessions/{session_id}/events/stream`
+
+Stream Events
+
+#### Parameters
+
+- `sessionID: string`
+
+- `eventDeltas?:optional list<BetaManagedAgentsDeltaType>`
+
+  When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `ManagedAgentsStreamSessionEvents`
+
+  - `ManagedAgentsUserMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<Content> content`
+
+      Array of content blocks comprising the user message.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `ManagedAgentsUserInterruptEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `?string sessionThreadID`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
+  - `ManagedAgentsUserToolConfirmationEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `Result result`
+
+      UserToolConfirmationResult enum
+
+    - `string toolUseID`
+
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+    - `?string denyMessage`
+
+      Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `?string sessionThreadID`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+
+  - `ManagedAgentsUserCustomToolResultEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string customToolUseID`
+
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+    - `?list<Content> content`
+
+      The result content returned by the tool.
+
+    - `?bool isError`
+
+      Whether the tool execution resulted in an error.
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `?string sessionThreadID`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+  - `ManagedAgentsAgentCustomToolUseEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `array<string,mixed> input`
+
+      Input parameters for the tool call.
+
+    - `string name`
+
+      Name of the custom tool being called.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?string sessionThreadID`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+
+  - `ManagedAgentsAgentMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<Content> content`
+
+      Array of text blocks comprising the agent response.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsAgentThinkingEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsAgentMCPToolUseEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `array<string,mixed> input`
+
+      Input parameters for the tool call.
+
+    - `string mcpServerName`
+
+      Name of the MCP server providing the tool.
+
+    - `string name`
+
+      Name of the MCP tool being used.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?EvaluatedPermission evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+    - `?string sessionThreadID`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
+  - `ManagedAgentsAgentMCPToolResultEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string mcpToolUseID`
+
+      The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?list<Content> content`
+
+      The result content returned by the tool.
+
+    - `?bool isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `ManagedAgentsAgentToolUseEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `array<string,mixed> input`
+
+      Input parameters for the tool call.
+
+    - `string name`
+
+      Name of the agent tool being used.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?EvaluatedPermission evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+    - `?string sessionThreadID`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
+  - `ManagedAgentsAgentToolResultEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string toolUseID`
+
+      The id of the `agent.tool_use` event this result corresponds to.
+
+    - `Type type`
+
+    - `?list<Content> content`
+
+      The result content returned by the tool.
+
+    - `?bool isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `ManagedAgentsAgentThreadMessageReceivedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<Content> content`
+
+      Message content blocks.
+
+    - `string fromSessionThreadID`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?string fromAgentName`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `ManagedAgentsAgentThreadMessageSentEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<Content> content`
+
+      Message content blocks.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string toSessionThreadID`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `Type type`
+
+    - `?string toAgentName`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
+
+  - `ManagedAgentsAgentThreadContextCompactedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionErrorEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `Error error`
+
+      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionStatusRescheduledEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionStatusRunningEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionStatusIdleEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+    - `Type type`
+
+  - `ManagedAgentsSessionStatusTerminatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionThreadCreatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the callable agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `Type type`
+
+  - `ManagedAgentsSpanOutcomeEvaluationStartEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `int iteration`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `string outcomeID`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSpanOutcomeEvaluationEndEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string explanation`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `int iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `string outcomeEvaluationStartID`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `string outcomeID`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string result`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `Type type`
+
+    - `ManagedAgentsSpanModelUsage usage`
+
+      Token usage for a single model request.
+
+  - `ManagedAgentsSpanModelRequestStartEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSpanModelRequestEndEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `?bool isError`
+
+      Whether the model request resulted in an error.
+
+    - `string modelRequestStartID`
+
+      The id of the corresponding `span.model_request_start` event.
+
+    - `ManagedAgentsSpanModelUsage modelUsage`
+
+      Token usage for a single model request.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `int iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `string outcomeID`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsUserDefineOutcomeEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string description`
+
+      What the agent should produce. Copied from the input event.
+
+    - `?int maxIterations`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `string outcomeID`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Rubric rubric`
+
+      Rubric for grading the quality of an outcome.
+
+    - `Type type`
+
+  - `ManagedAgentsSessionDeletedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionThreadStatusRunningEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `Type type`
+
+  - `ManagedAgentsSessionThreadStatusIdleEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+    - `Type type`
+
+  - `ManagedAgentsSessionThreadStatusTerminatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `Type type`
+
+  - `BetaManagedAgentsUserToolResultEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string toolUseID`
+
+      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+    - `?list<Content> content`
+
+      The result content returned by the tool.
+
+    - `?bool isError`
+
+      Whether the tool execution resulted in an error.
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `?string sessionThreadID`
+
+      Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+
+  - `ManagedAgentsSessionThreadStatusRescheduledEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `Type type`
+
+  - `BetaManagedAgentsSessionUpdatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?BetaManagedAgentsSessionAgent agent`
+
+      Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+    - `?BetaManagedAgentsBudgetLimit budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+    - `?array<string,string> metadata`
+
+      The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
+
+    - `?string title`
+
+      The session's new title. Present only when the update changed it.
+
+  - `BetaManagedAgentsStartEvent`
+
+    - `BetaManagedAgentsStartEventPreview event`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+    - `Type type`
+
+  - `BetaManagedAgentsDeltaEvent`
+
+    - `BetaManagedAgentsDeltaContent delta`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+    - `string eventID`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `Type type`
+
+  - `BetaManagedAgentsSystemMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks. Text-only.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionUsageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `ManagedAgentsSessionUsageSnapshot usage`
+
+      Point-in-time snapshot of a session's cumulative usage.
+
+    - `?BetaManagedAgentsBudgetLimit budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+- `ManagedAgentsStreamSessionEvents`
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsStreamSessionEvents = $client
+  ->beta
+  ->sessions
+  ->events
+  ->streamStream(
+  'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  eventDeltas: [BetaManagedAgentsDeltaType::AGENT_MESSAGE],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsStreamSessionEvents);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+  "content": [
+    {
+      "text": "Where is my order #1234?",
+      "type": "text"
+    }
+  ],
+  "type": "user.message",
+  "processed_at": "2026-03-15T10:00:00Z"
+}
+```
+
+## Sessions › Resources
+
+### Add Session Resource
+
+`$client->beta->sessions->resources->add(string sessionID, string fileID, Type type, ?string mountPath, ?list<AnthropicBeta> betas): ManagedAgentsFileResource`
+
+**POST** `/v1/sessions/{session_id}/resources`
+
+Add Session Resource
+
+#### Parameters
+
+- `sessionID: string`
+
+- `fileID: string`
+
+  ID of a previously uploaded file.
+
+- `type: Type`
+
+- `mountPath?:optional string`
+
+  Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `ManagedAgentsFileResource`
+
+  - `string id`
+
+  - `\Datetime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string fileID`
+
+  - `string mountPath`
+
+  - `Type type`
+
+  - `\Datetime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsFileResource = $client->beta->sessions->resources->add(
+  'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  fileID: 'file_011CNha8iCJcU1wXNR6q4V8w',
+  type: 'file',
+  mountPath: '/uploads/receipt.pdf',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsFileResource);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+  "created_at": "2026-03-15T10:00:00Z",
+  "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "mount_path": "/uploads/receipt.pdf",
+  "type": "file",
+  "updated_at": "2026-03-15T10:00:00Z"
+}
+```
+
+### List Session Resources
+
+`$client->beta->sessions->resources->list(string sessionID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<ManagedAgentsSessionResource>`
+
+**GET** `/v1/sessions/{session_id}/resources`
+
+List Session Resources
+
+#### Parameters
+
+- `sessionID: string`
+
+- `limit?:optional int`
+
+  Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
+
+- `page?:optional string`
+
+  Opaque cursor from a previous response's `next_page` field.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `ManagedAgentsSessionResource`
+
+  - `ManagedAgentsGitHubRepositoryResource`
+
+    - `string id`
+
+    - `\Datetime createdAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string mountPath`
+
+    - `Type type`
+
+    - `\Datetime updatedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string url`
+
+    - `?Checkout checkout`
+
+  - `ManagedAgentsFileResource`
+
+    - `string id`
+
+    - `\Datetime createdAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string fileID`
+
+    - `string mountPath`
+
+    - `Type type`
+
+    - `\Datetime updatedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `ManagedAgentsMemoryStoreResource`
+
+    - `string memoryStoreID`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `Type type`
+
+    - `?Access access`
+
+      Access mode for an attached memory store.
+
+    - `?string description`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `?string instructions`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `?string mountPath`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `?string name`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$page = $client->beta->sessions->resources->list(
+  'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  limit: 0,
+  page: 'page',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($page);
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+      "created_at": "2026-03-15T10:00:00Z",
+      "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "mount_path": "/uploads/receipt.pdf",
+      "type": "file",
+      "updated_at": "2026-03-15T10:00:00Z"
+    },
+    {
+      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+      "created_at": "2026-03-15T10:00:00Z",
+      "mount_path": "/workspace/example-repo",
+      "type": "github_repository",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "url": "https://github.com/example-org/example-repo",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      }
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
+
+### Get Session Resource
+
+`$client->beta->sessions->resources->retrieve(string resourceID, string sessionID, ?list<AnthropicBeta> betas): ResourceGetResponse`
+
+**GET** `/v1/sessions/{session_id}/resources/{resource_id}`
+
+Get Session Resource
+
+#### Parameters
+
+- `sessionID: string`
+
+- `resourceID: string`
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `ResourceGetResponse`
+
+  - `ManagedAgentsGitHubRepositoryResource`
+
+    - `string id`
+
+    - `\Datetime createdAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string mountPath`
+
+    - `Type type`
+
+    - `\Datetime updatedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string url`
+
+    - `?Checkout checkout`
+
+  - `ManagedAgentsFileResource`
+
+    - `string id`
+
+    - `\Datetime createdAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string fileID`
+
+    - `string mountPath`
+
+    - `Type type`
+
+    - `\Datetime updatedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `ManagedAgentsMemoryStoreResource`
+
+    - `string memoryStoreID`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `Type type`
+
+    - `?Access access`
+
+      Access mode for an attached memory store.
+
+    - `?string description`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `?string instructions`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `?string mountPath`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `?string name`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$resource = $client->beta->sessions->resources->retrieve(
+  'sesrsc_011CZkZBJq5dWxk9fVLNcPht',
+  sessionID: 'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($resource);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+  "created_at": "2026-03-15T10:00:00Z",
+  "mount_path": "/workspace/example-repo",
+  "type": "github_repository",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "url": "https://github.com/example-org/example-repo",
+  "checkout": {
+    "name": "main",
+    "type": "branch"
+  }
+}
+```
+
+### Update Session Resource
+
+`$client->beta->sessions->resources->update(string resourceID, string sessionID, string authorizationToken, ?list<AnthropicBeta> betas): ResourceUpdateResponse`
+
+**POST** `/v1/sessions/{session_id}/resources/{resource_id}`
+
+Update Session Resource
+
+#### Parameters
+
+- `sessionID: string`
+
+- `resourceID: string`
+
+- `authorizationToken: string`
+
+  New authorization token for the resource. Currently only `github_repository` resources support token rotation.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `ResourceUpdateResponse`
+
+  - `ManagedAgentsGitHubRepositoryResource`
+
+    - `string id`
+
+    - `\Datetime createdAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string mountPath`
+
+    - `Type type`
+
+    - `\Datetime updatedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string url`
+
+    - `?Checkout checkout`
+
+  - `ManagedAgentsFileResource`
+
+    - `string id`
+
+    - `\Datetime createdAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string fileID`
+
+    - `string mountPath`
+
+    - `Type type`
+
+    - `\Datetime updatedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `ManagedAgentsMemoryStoreResource`
+
+    - `string memoryStoreID`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `Type type`
+
+    - `?Access access`
+
+      Access mode for an attached memory store.
+
+    - `?string description`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `?string instructions`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `?string mountPath`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `?string name`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$resource = $client->beta->sessions->resources->update(
+  'sesrsc_011CZkZBJq5dWxk9fVLNcPht',
+  sessionID: 'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  authorizationToken: 'ghp_exampletoken',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($resource);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+  "created_at": "2026-03-15T10:00:00Z",
+  "mount_path": "/workspace/example-repo",
+  "type": "github_repository",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "url": "https://github.com/example-org/example-repo",
+  "checkout": {
+    "name": "main",
+    "type": "branch"
+  }
+}
+```
+
+### Delete Session Resource
+
+`$client->beta->sessions->resources->delete(string resourceID, string sessionID, ?list<AnthropicBeta> betas): ManagedAgentsDeleteSessionResource`
+
+**DELETE** `/v1/sessions/{session_id}/resources/{resource_id}`
+
+Delete Session Resource
+
+#### Parameters
+
+- `sessionID: string`
+
+- `resourceID: string`
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `ManagedAgentsDeleteSessionResource`
+
+  - `string id`
+
+  - `Type type`
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsDeleteSessionResource = $client
+  ->beta
+  ->sessions
+  ->resources
+  ->delete(
+  'sesrsc_011CZkZBJq5dWxk9fVLNcPht',
+  sessionID: 'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsDeleteSessionResource);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+  "type": "session_resource_deleted"
+}
+```
+
+## Sessions › Threads
+
+### List Session Threads
+
+`$client->beta->sessions->threads->list(string sessionID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<ManagedAgentsSessionThread>`
+
+**GET** `/v1/sessions/{session_id}/threads`
+
+List Session Threads
+
+#### Parameters
+
+- `sessionID: string`
+
+- `limit?:optional int`
+
+  Maximum results per page. Defaults to 1000.
+
+- `page?:optional string`
+
+  Opaque pagination cursor from a previous response's `next_page`. Forward-only.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `ManagedAgentsSessionThread`
+
+  - `string id`
+
+    Unique identifier for this thread.
+
+  - `Agent agent`
+
+    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+
+  - `?\Datetime archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `\Datetime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?string parentThreadID`
+
+    Parent thread that spawned this thread. Null for the primary thread.
+
+  - `string sessionID`
+
+    The session this thread belongs to.
+
+  - `?ManagedAgentsSessionThreadStats stats`
+
+    Timing statistics for a session thread.
+
+  - `ManagedAgentsSessionThreadStatus status`
+
+    SessionThreadStatus enum
+
+  - `Type type`
+
+  - `\Datetime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?ManagedAgentsSessionThreadUsage usage`
+
+    Cumulative token usage for a session thread across all turns.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$page = $client->beta->sessions->threads->list(
+  'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  limit: 0,
+  page: 'page',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($page);
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "sthr_011CZkZVWa6oIjw0rgXZpnBt",
+      "agent": {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "description": "A focused research subagent.",
+        "mcp_servers": [
+          {
+            "name": "example-mcp",
+            "type": "url",
+            "url": "https://example-server.modelcontextprotocol.io/sse"
+          }
+        ],
+        "model": {
+          "id": "claude-opus-5",
+          "effort": {
+            "type": "low"
+          },
+          "inference_geo": "inference_geo",
+          "speed": "standard"
+        },
+        "name": "Researcher",
+        "skills": [
+          {
+            "skill_id": "xlsx",
+            "type": "anthropic",
+            "version": "1"
+          }
+        ],
+        "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+        "tools": [
+          {
+            "configs": [
+              {
+                "enabled": true,
+                "name": "bash",
+                "permission_policy": {
+                  "type": "always_allow"
+                },
+                "type": "bash"
+              }
+            ],
+            "default_config": {
+              "enabled": true,
+              "permission_policy": {
+                "type": "always_ask"
+              }
+            },
+            "type": "agent_toolset_20260401"
+          }
+        ],
+        "type": "agent",
+        "version": 1
+      },
+      "archived_at": null,
+      "created_at": "2026-03-15T10:00:00Z",
+      "parent_thread_id": null,
+      "session_id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+      "stats": {
+        "active_seconds": 0,
+        "duration_seconds": 0,
+        "startup_seconds": 0
+      },
+      "status": "idle",
+      "type": "session_thread",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "usage": {
+        "active_seconds": 0,
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_read_input_tokens": 0,
+        "input_tokens": 0,
+        "list_cost": {
+          "amount": "2500",
+          "currency": "USD"
+        },
+        "output_tokens": 0,
+        "server_tool_use": {
+          "web_fetch_requests": 0,
+          "web_search_requests": 3
+        }
+      }
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
+
+### Get Session Thread
+
+`$client->beta->sessions->threads->retrieve(string threadID, string sessionID, ?list<AnthropicBeta> betas): ManagedAgentsSessionThread`
+
+**GET** `/v1/sessions/{session_id}/threads/{thread_id}`
+
+Get Session Thread
+
+#### Parameters
+
+- `sessionID: string`
+
+- `threadID: string`
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `ManagedAgentsSessionThread`
+
+  - `string id`
+
+    Unique identifier for this thread.
+
+  - `Agent agent`
+
+    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+
+  - `?\Datetime archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `\Datetime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?string parentThreadID`
+
+    Parent thread that spawned this thread. Null for the primary thread.
+
+  - `string sessionID`
+
+    The session this thread belongs to.
+
+  - `?ManagedAgentsSessionThreadStats stats`
+
+    Timing statistics for a session thread.
+
+  - `ManagedAgentsSessionThreadStatus status`
+
+    SessionThreadStatus enum
+
+  - `Type type`
+
+  - `\Datetime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?ManagedAgentsSessionThreadUsage usage`
+
+    Cumulative token usage for a session thread across all turns.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsSessionThread = $client->beta->sessions->threads->retrieve(
+  'sthr_011CZkZVWa6oIjw0rgXZpnBt',
+  sessionID: 'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsSessionThread);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "sthr_011CZkZVWa6oIjw0rgXZpnBt",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "description": "A focused research subagent.",
+    "mcp_servers": [
+      {
+        "name": "example-mcp",
+        "type": "url",
+        "url": "https://example-server.modelcontextprotocol.io/sse"
+      }
+    ],
+    "model": {
+      "id": "claude-opus-5",
+      "effort": {
+        "type": "low"
+      },
+      "inference_geo": "inference_geo",
+      "speed": "standard"
+    },
+    "name": "Researcher",
+    "skills": [
+      {
+        "skill_id": "xlsx",
+        "type": "anthropic",
+        "version": "1"
+      }
+    ],
+    "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+    "tools": [
+      {
+        "configs": [
+          {
+            "enabled": true,
+            "name": "bash",
+            "permission_policy": {
+              "type": "always_allow"
+            },
+            "type": "bash"
+          }
+        ],
+        "default_config": {
+          "enabled": true,
+          "permission_policy": {
+            "type": "always_ask"
+          }
+        },
+        "type": "agent_toolset_20260401"
+      }
+    ],
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "parent_thread_id": null,
+  "session_id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "stats": {
+    "active_seconds": 0,
+    "duration_seconds": 0,
+    "startup_seconds": 0
+  },
+  "status": "idle",
+  "type": "session_thread",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "usage": {
+    "active_seconds": 0,
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "output_tokens": 0,
+    "server_tool_use": {
+      "web_fetch_requests": 0,
+      "web_search_requests": 3
+    }
+  }
+}
+```
+
+### Archive Session Thread
+
+`$client->beta->sessions->threads->archive(string threadID, string sessionID, ?list<AnthropicBeta> betas): ManagedAgentsSessionThread`
+
+**POST** `/v1/sessions/{session_id}/threads/{thread_id}/archive`
+
+Archive Session Thread
+
+#### Parameters
+
+- `sessionID: string`
+
+- `threadID: string`
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `ManagedAgentsSessionThread`
+
+  - `string id`
+
+    Unique identifier for this thread.
+
+  - `Agent agent`
+
+    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+
+  - `?\Datetime archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `\Datetime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?string parentThreadID`
+
+    Parent thread that spawned this thread. Null for the primary thread.
+
+  - `string sessionID`
+
+    The session this thread belongs to.
+
+  - `?ManagedAgentsSessionThreadStats stats`
+
+    Timing statistics for a session thread.
+
+  - `ManagedAgentsSessionThreadStatus status`
+
+    SessionThreadStatus enum
+
+  - `Type type`
+
+  - `\Datetime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?ManagedAgentsSessionThreadUsage usage`
+
+    Cumulative token usage for a session thread across all turns.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsSessionThread = $client->beta->sessions->threads->archive(
+  'sthr_011CZkZVWa6oIjw0rgXZpnBt',
+  sessionID: 'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsSessionThread);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "sthr_011CZkZVWa6oIjw0rgXZpnBt",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "description": "A focused research subagent.",
+    "mcp_servers": [
+      {
+        "name": "example-mcp",
+        "type": "url",
+        "url": "https://example-server.modelcontextprotocol.io/sse"
+      }
+    ],
+    "model": {
+      "id": "claude-opus-5",
+      "effort": {
+        "type": "low"
+      },
+      "inference_geo": "inference_geo",
+      "speed": "standard"
+    },
+    "name": "Researcher",
+    "skills": [
+      {
+        "skill_id": "xlsx",
+        "type": "anthropic",
+        "version": "1"
+      }
+    ],
+    "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+    "tools": [
+      {
+        "configs": [
+          {
+            "enabled": true,
+            "name": "bash",
+            "permission_policy": {
+              "type": "always_allow"
+            },
+            "type": "bash"
+          }
+        ],
+        "default_config": {
+          "enabled": true,
+          "permission_policy": {
+            "type": "always_ask"
+          }
+        },
+        "type": "agent_toolset_20260401"
+      }
+    ],
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "parent_thread_id": null,
+  "session_id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "stats": {
+    "active_seconds": 0,
+    "duration_seconds": 0,
+    "startup_seconds": 0
+  },
+  "status": "idle",
+  "type": "session_thread",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "usage": {
+    "active_seconds": 0,
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "output_tokens": 0,
+    "server_tool_use": {
+      "web_fetch_requests": 0,
+      "web_search_requests": 3
+    }
+  }
+}
+```
+
+## Sessions › Threads › Events
+
+### List Session Thread Events
+
+`$client->beta->sessions->threads->events->list(string threadID, string sessionID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<ManagedAgentsSessionEvent>`
+
+**GET** `/v1/sessions/{session_id}/threads/{thread_id}/events`
+
+List Session Thread Events
+
+#### Parameters
+
+- `sessionID: string`
+
+- `threadID: string`
+
+- `limit?:optional int`
+
+  Query parameter for limit
+
+- `page?:optional string`
+
+  Query parameter for page
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `ManagedAgentsSessionEvent`
+
+  - `ManagedAgentsUserMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<Content> content`
+
+      Array of content blocks comprising the user message.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `ManagedAgentsUserInterruptEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `?string sessionThreadID`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
+  - `ManagedAgentsUserToolConfirmationEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `Result result`
+
+      UserToolConfirmationResult enum
+
+    - `string toolUseID`
+
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+    - `?string denyMessage`
+
+      Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `?string sessionThreadID`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+
+  - `ManagedAgentsUserCustomToolResultEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string customToolUseID`
+
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+    - `?list<Content> content`
+
+      The result content returned by the tool.
+
+    - `?bool isError`
+
+      Whether the tool execution resulted in an error.
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `?string sessionThreadID`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+  - `ManagedAgentsAgentCustomToolUseEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `array<string,mixed> input`
+
+      Input parameters for the tool call.
+
+    - `string name`
+
+      Name of the custom tool being called.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?string sessionThreadID`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+
+  - `ManagedAgentsAgentMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<Content> content`
+
+      Array of text blocks comprising the agent response.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsAgentThinkingEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsAgentMCPToolUseEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `array<string,mixed> input`
+
+      Input parameters for the tool call.
+
+    - `string mcpServerName`
+
+      Name of the MCP server providing the tool.
+
+    - `string name`
+
+      Name of the MCP tool being used.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?EvaluatedPermission evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+    - `?string sessionThreadID`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
+  - `ManagedAgentsAgentMCPToolResultEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string mcpToolUseID`
+
+      The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?list<Content> content`
+
+      The result content returned by the tool.
+
+    - `?bool isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `ManagedAgentsAgentToolUseEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `array<string,mixed> input`
+
+      Input parameters for the tool call.
+
+    - `string name`
+
+      Name of the agent tool being used.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?EvaluatedPermission evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+    - `?string sessionThreadID`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
+  - `ManagedAgentsAgentToolResultEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string toolUseID`
+
+      The id of the `agent.tool_use` event this result corresponds to.
+
+    - `Type type`
+
+    - `?list<Content> content`
+
+      The result content returned by the tool.
+
+    - `?bool isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `ManagedAgentsAgentThreadMessageReceivedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<Content> content`
+
+      Message content blocks.
+
+    - `string fromSessionThreadID`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?string fromAgentName`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `ManagedAgentsAgentThreadMessageSentEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<Content> content`
+
+      Message content blocks.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string toSessionThreadID`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `Type type`
+
+    - `?string toAgentName`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
+
+  - `ManagedAgentsAgentThreadContextCompactedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionErrorEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `Error error`
+
+      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionStatusRescheduledEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionStatusRunningEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionStatusIdleEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+    - `Type type`
+
+  - `ManagedAgentsSessionStatusTerminatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionThreadCreatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the callable agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `Type type`
+
+  - `ManagedAgentsSpanOutcomeEvaluationStartEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `int iteration`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `string outcomeID`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSpanOutcomeEvaluationEndEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string explanation`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `int iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `string outcomeEvaluationStartID`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `string outcomeID`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string result`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `Type type`
+
+    - `ManagedAgentsSpanModelUsage usage`
+
+      Token usage for a single model request.
+
+  - `ManagedAgentsSpanModelRequestStartEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSpanModelRequestEndEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `?bool isError`
+
+      Whether the model request resulted in an error.
+
+    - `string modelRequestStartID`
+
+      The id of the corresponding `span.model_request_start` event.
+
+    - `ManagedAgentsSpanModelUsage modelUsage`
+
+      Token usage for a single model request.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `int iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `string outcomeID`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsUserDefineOutcomeEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string description`
+
+      What the agent should produce. Copied from the input event.
+
+    - `?int maxIterations`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `string outcomeID`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Rubric rubric`
+
+      Rubric for grading the quality of an outcome.
+
+    - `Type type`
+
+  - `ManagedAgentsSessionDeletedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionThreadStatusRunningEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `Type type`
+
+  - `ManagedAgentsSessionThreadStatusIdleEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+    - `Type type`
+
+  - `ManagedAgentsSessionThreadStatusTerminatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `Type type`
+
+  - `BetaManagedAgentsUserToolResultEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string toolUseID`
+
+      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+    - `?list<Content> content`
+
+      The result content returned by the tool.
+
+    - `?bool isError`
+
+      Whether the tool execution resulted in an error.
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `?string sessionThreadID`
+
+      Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+
+  - `ManagedAgentsSessionThreadStatusRescheduledEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `Type type`
+
+  - `BetaManagedAgentsSessionUpdatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?BetaManagedAgentsSessionAgent agent`
+
+      Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+    - `?BetaManagedAgentsBudgetLimit budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+    - `?array<string,string> metadata`
+
+      The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
+
+    - `?string title`
+
+      The session's new title. Present only when the update changed it.
+
+  - `BetaManagedAgentsSystemMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks. Text-only.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionUsageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `ManagedAgentsSessionUsageSnapshot usage`
+
+      Point-in-time snapshot of a session's cumulative usage.
+
+    - `?BetaManagedAgentsBudgetLimit budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$page = $client->beta->sessions->threads->events->list(
+  'sthr_011CZkZVWa6oIjw0rgXZpnBt',
+  sessionID: 'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  limit: 0,
+  page: 'page',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($page);
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message",
+      "processed_at": "2026-03-15T10:00:00Z"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+### Stream Session Thread Events
+
+`$client->beta->sessions->threads->events->stream(string threadID, string sessionID, ?list<BetaManagedAgentsDeltaType> eventDeltas, ?list<AnthropicBeta> betas): ManagedAgentsStreamSessionThreadEvents`
+
+**GET** `/v1/sessions/{session_id}/threads/{thread_id}/stream`
+
+Stream Session Thread Events
+
+#### Parameters
+
+- `sessionID: string`
+
+- `threadID: string`
+
+- `eventDeltas?:optional list<BetaManagedAgentsDeltaType>`
+
+  When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `ManagedAgentsStreamSessionThreadEvents`
+
+  - `ManagedAgentsUserMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<Content> content`
+
+      Array of content blocks comprising the user message.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `ManagedAgentsUserInterruptEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `?string sessionThreadID`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
+  - `ManagedAgentsUserToolConfirmationEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `Result result`
+
+      UserToolConfirmationResult enum
+
+    - `string toolUseID`
+
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+    - `?string denyMessage`
+
+      Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `?string sessionThreadID`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+
+  - `ManagedAgentsUserCustomToolResultEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string customToolUseID`
+
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+    - `?list<Content> content`
+
+      The result content returned by the tool.
+
+    - `?bool isError`
+
+      Whether the tool execution resulted in an error.
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `?string sessionThreadID`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+  - `ManagedAgentsAgentCustomToolUseEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `array<string,mixed> input`
+
+      Input parameters for the tool call.
+
+    - `string name`
+
+      Name of the custom tool being called.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?string sessionThreadID`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+
+  - `ManagedAgentsAgentMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<Content> content`
+
+      Array of text blocks comprising the agent response.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsAgentThinkingEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsAgentMCPToolUseEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `array<string,mixed> input`
+
+      Input parameters for the tool call.
+
+    - `string mcpServerName`
+
+      Name of the MCP server providing the tool.
+
+    - `string name`
+
+      Name of the MCP tool being used.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?EvaluatedPermission evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+    - `?string sessionThreadID`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
+  - `ManagedAgentsAgentMCPToolResultEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string mcpToolUseID`
+
+      The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?list<Content> content`
+
+      The result content returned by the tool.
+
+    - `?bool isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `ManagedAgentsAgentToolUseEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `array<string,mixed> input`
+
+      Input parameters for the tool call.
+
+    - `string name`
+
+      Name of the agent tool being used.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?EvaluatedPermission evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+    - `?string sessionThreadID`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
+  - `ManagedAgentsAgentToolResultEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string toolUseID`
+
+      The id of the `agent.tool_use` event this result corresponds to.
+
+    - `Type type`
+
+    - `?list<Content> content`
+
+      The result content returned by the tool.
+
+    - `?bool isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `ManagedAgentsAgentThreadMessageReceivedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<Content> content`
+
+      Message content blocks.
+
+    - `string fromSessionThreadID`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?string fromAgentName`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `ManagedAgentsAgentThreadMessageSentEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<Content> content`
+
+      Message content blocks.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string toSessionThreadID`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `Type type`
+
+    - `?string toAgentName`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
+
+  - `ManagedAgentsAgentThreadContextCompactedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionErrorEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `Error error`
+
+      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionStatusRescheduledEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionStatusRunningEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionStatusIdleEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+    - `Type type`
+
+  - `ManagedAgentsSessionStatusTerminatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionThreadCreatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the callable agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `Type type`
+
+  - `ManagedAgentsSpanOutcomeEvaluationStartEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `int iteration`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `string outcomeID`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSpanOutcomeEvaluationEndEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string explanation`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `int iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `string outcomeEvaluationStartID`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `string outcomeID`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string result`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `Type type`
+
+    - `ManagedAgentsSpanModelUsage usage`
+
+      Token usage for a single model request.
+
+  - `ManagedAgentsSpanModelRequestStartEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSpanModelRequestEndEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `?bool isError`
+
+      Whether the model request resulted in an error.
+
+    - `string modelRequestStartID`
+
+      The id of the corresponding `span.model_request_start` event.
+
+    - `ManagedAgentsSpanModelUsage modelUsage`
+
+      Token usage for a single model request.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `int iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `string outcomeID`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsUserDefineOutcomeEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string description`
+
+      What the agent should produce. Copied from the input event.
+
+    - `?int maxIterations`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `string outcomeID`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Rubric rubric`
+
+      Rubric for grading the quality of an outcome.
+
+    - `Type type`
+
+  - `ManagedAgentsSessionDeletedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionThreadStatusRunningEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `Type type`
+
+  - `ManagedAgentsSessionThreadStatusIdleEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+    - `Type type`
+
+  - `ManagedAgentsSessionThreadStatusTerminatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `Type type`
+
+  - `BetaManagedAgentsUserToolResultEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string toolUseID`
+
+      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+    - `?list<Content> content`
+
+      The result content returned by the tool.
+
+    - `?bool isError`
+
+      Whether the tool execution resulted in an error.
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `?string sessionThreadID`
+
+      Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+
+  - `ManagedAgentsSessionThreadStatusRescheduledEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `Type type`
+
+  - `BetaManagedAgentsSessionUpdatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?BetaManagedAgentsSessionAgent agent`
+
+      Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+    - `?BetaManagedAgentsBudgetLimit budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+    - `?array<string,string> metadata`
+
+      The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
+
+    - `?string title`
+
+      The session's new title. Present only when the update changed it.
+
+  - `BetaManagedAgentsStartEvent`
+
+    - `BetaManagedAgentsStartEventPreview event`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+    - `Type type`
+
+  - `BetaManagedAgentsDeltaEvent`
+
+    - `BetaManagedAgentsDeltaContent delta`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+    - `string eventID`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `Type type`
+
+  - `BetaManagedAgentsSystemMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks. Text-only.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionUsageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `ManagedAgentsSessionUsageSnapshot usage`
+
+      Point-in-time snapshot of a session's cumulative usage.
+
+    - `?BetaManagedAgentsBudgetLimit budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+- `ManagedAgentsStreamSessionThreadEvents`
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaManagedAgentsStreamSessionThreadEvents = $client
+  ->beta
+  ->sessions
+  ->threads
+  ->events
+  ->streamStream(
+  'sthr_011CZkZVWa6oIjw0rgXZpnBt',
+  sessionID: 'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  eventDeltas: [BetaManagedAgentsDeltaType::AGENT_MESSAGE],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaManagedAgentsStreamSessionThreadEvents);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+  "content": [
+    {
+      "text": "Where is my order #1234?",
+      "type": "text"
+    }
+  ],
+  "type": "user.message",
+  "processed_at": "2026-03-15T10:00:00Z"
+}
+```
 
 ---
 

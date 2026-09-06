@@ -1,44 +1,42 @@
 # Give Claude custom tools
 
-Custom tools extend the Agent SDK by letting you define your own functions that Claude can call during a conversation. Using the SDK’s in-process MCP server, you can give Claude access to databases, external APIs, domain-specific logic, or any other capability your application needs.
+> Define custom tools with the Claude Agent SDK's in-process MCP server so Claude can call your functions, hit your APIs, and perform domain-specific operations.
 
-## [​](#quick-reference) Quick reference
+Custom tools extend the Agent SDK by letting you define your own functions that Claude can call during a conversation. Using the SDK's in-process MCP server, you can give Claude access to databases, external APIs, domain-specific logic, or any other capability your application needs.
 
-| If you want to… | Do this |
-| --- | --- |
-| Define a tool | Use [`@tool`](agent-sdk/python.md) (Python) or [`tool()`](agent-sdk/typescript.md) (TypeScript) with a name, description, schema, and handler. See [Create a custom tool](#create-a-custom-tool). |
-| Register a tool with Claude | Wrap in `create_sdk_mcp_server` / `createSdkMcpServer` and pass to `mcpServers` in `query()`. See [Call a custom tool](#call-a-custom-tool). |
-| Pre-approve a tool | Add to your allowed tools. See [Configure allowed tools](#configure-allowed-tools). |
-| Remove a built-in tool from Claude’s context | Pass a `tools` array listing only the built-ins you want. See [Configure allowed tools](#configure-allowed-tools). |
-| Let Claude call tools in parallel | Set `readOnlyHint: true` on tools with no side effects. See [Add tool annotations](#add-tool-annotations). |
-| Control the error message Claude reads | Return `isError: true` to compose the message instead of surfacing the raw exception. See [Handle errors](#handle-errors). |
-| Return images or files | Use `image` or `resource` blocks in the content array. See [Return images and resources](#return-images-and-resources). |
-| Return a machine-readable JSON result | Set `structuredContent` on the result. See [Return structured data](#return-structured-data). |
-| Scale to many tools | Use [tool search](agent-sdk/tool-search.md) to load tools on demand. |
+## Quick reference
 
-## [​](#create-a-custom-tool) Create a custom tool
+| If you want to...                            | Do this                                                                                                                                                                                                       |
+| :------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Define a tool                                | Use [`@tool`](agent-sdk/python.md) (Python) or [`tool()`](agent-sdk/typescript.md) (TypeScript) with a name, description, schema, and handler. See [Create a custom tool](#create-a-custom-tool). |
+| Register a tool with Claude                  | Wrap in `create_sdk_mcp_server` / `createSdkMcpServer` and pass to `mcpServers` in `query()`. See [Call a custom tool](#call-a-custom-tool).                                                                  |
+| Pre-approve a tool                           | Add to your allowed tools. See [Configure allowed tools](#configure-allowed-tools).                                                                                                                           |
+| Remove a built-in tool from Claude's context | Pass a `tools` array listing only the built-ins you want. See [Configure allowed tools](#configure-allowed-tools).                                                                                            |
+| Let Claude call tools in parallel            | Set `readOnlyHint: true` on tools with no side effects. See [Add tool annotations](#add-tool-annotations).                                                                                                    |
+| Control the error message Claude reads       | Return `isError: true` to compose the message instead of surfacing the raw exception. See [Handle errors](#handle-errors).                                                                                    |
+| Return images or files                       | Use `image` or `resource` blocks in the content array. See [Return images and resources](#return-images-and-resources).                                                                                       |
+| Return a machine-readable JSON result        | Set `structuredContent` on the result. See [Return structured data](#return-structured-data).                                                                                                                 |
+| Scale to many tools                          | Use [tool search](agent-sdk/tool-search.md) to load tools on demand.                                                                                                                                         |
+
+## Create a custom tool
 
 A tool is defined by four parts, passed as arguments to the [`tool()`](agent-sdk/typescript.md) helper in TypeScript or the [`@tool`](agent-sdk/python.md) decorator in Python:
 
-- **Name:** a unique identifier Claude uses to call the tool.
-- **Description:** what the tool does. Claude reads this to decide when to call it.
-- **Input schema:** the arguments Claude must provide. In TypeScript this is always a [Zod schema](https://zod.dev/), and the handler’s `args` are typed from it automatically. In Python this is a dict mapping names to types, like `{"latitude": float}`, which the SDK converts to JSON Schema for you. The Python decorator also accepts a full [JSON Schema](https://json-schema.org/understanding-json-schema/about) dict directly when you need enums, ranges, optional fields, or nested objects.
-- **Handler:** the async function that runs when Claude calls the tool. It receives the validated arguments and must return an object with:
-  - `content` (required): an array of result blocks, each with a `type` of `"text"`, `"image"`, `"audio"`, `"resource"`, or `"resource_link"`. See [Return images and resources](#return-images-and-resources) for non-text blocks.
-  - `structuredContent` (optional): a JSON object holding the result as machine-readable data, returned alongside `content`. See [Return structured data](#return-structured-data).
-  - `isError` (optional): set to `true` to signal a tool failure so Claude can react to it. See [Handle errors](#handle-errors).
+* **Name:** a unique identifier Claude uses to call the tool.
+* **Description:** what the tool does. Claude reads this to decide when to call it.
+* **Input schema:** the arguments Claude must provide. In TypeScript this is always a [Zod schema](https://zod.dev/), and the handler's `args` are typed from it automatically. In Python this is a dict mapping names to types, like `{"latitude": float}`, which the SDK converts to JSON Schema for you. The Python decorator also accepts a full [JSON Schema](https://json-schema.org/understanding-json-schema/about) dict directly when you need enums, ranges, optional fields, or nested objects.
+* **Handler:** the async function that runs when Claude calls the tool. It receives the validated arguments and must return an object with:
+  * `content` (required): an array of result blocks, each with a `type` of `"text"`, `"image"`, `"audio"`, `"resource"`, or `"resource_link"`. See [Return images and resources](#return-images-and-resources) for non-text blocks.
+  * `structuredContent` (optional): a JSON object holding the result as machine-readable data, returned alongside `content`. See [Return structured data](#return-structured-data).
+  * `isError` (optional): set to `true` to signal a tool failure so Claude can react to it. See [Handle errors](#handle-errors).
 
 After defining a tool, wrap it in a server with [`createSdkMcpServer`](agent-sdk/typescript.md) (TypeScript) or [`create_sdk_mcp_server`](agent-sdk/python.md) (Python). The server runs in-process inside your application, not as a separate process.
 
-### [​](#weather-tool-example) Weather tool example
+### Weather tool example
 
 This example defines a `get_temperature` tool and wraps it in an MCP server. It only sets up the tool; to pass it to `query` and run it, see [Call a custom tool](#call-a-custom-tool) below.
 
-Python
-
-TypeScript
-
-```shiki
+```python Python
 from typing import Any
 import httpx
 from claude_agent_sdk import tool, create_sdk_mcp_server
@@ -80,7 +78,7 @@ weather_server = create_sdk_mcp_server(
 )
 ```
 
-```shiki
+```typescript TypeScript
 import { tool, createSdkMcpServer } from "@anthropic-ai/claude-agent-sdk";
 import { z } from "zod";
 
@@ -118,16 +116,13 @@ See the [`tool()`](agent-sdk/typescript.md) TypeScript reference or the [`@tool`
 
 To make a parameter optional: in TypeScript, add `.default()` to the Zod field. In Python, the dict schema treats every key as required, so leave the parameter out of the schema, mention it in the description string, and read it with `args.get()` in the handler. The [`get_precipitation_chance` tool below](#add-more-tools) shows both patterns.
 
-### [​](#call-a-custom-tool) Call a custom tool
+### Call a custom tool
 
-Pass the MCP server you created to `query` via the `mcpServers` option. The key in `mcpServers` becomes the `{server_name}` segment in each tool’s fully qualified name: `mcp__{server_name}__{tool_name}`. List that name in `allowedTools` so the tool runs without a permission prompt.
+Pass the MCP server you created to `query` via the `mcpServers` option. The key in `mcpServers` becomes the `{server_name}` segment in each tool's fully qualified name: `mcp__{server_name}__{tool_name}`. List that name in `allowedTools` so the tool runs without a permission prompt.
+
 These snippets reuse the `weatherServer` from the [example above](#weather-tool-example) to ask Claude what the weather is in a specific location.
 
-Python
-
-TypeScript
-
-```shiki
+```python Python
 import asyncio
 from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage
 
@@ -148,7 +143,7 @@ async def main():
 asyncio.run(main())
 ```
 
-```shiki
+```typescript TypeScript
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
 for await (const message of query({
@@ -167,16 +162,13 @@ for await (const message of query({
 
 Combine this snippet with the tool and server definitions from the [weather tool example](#weather-tool-example) in one file, then run it with `python weather.py` for Python or `npx tsx weather.ts` for TypeScript. Claude calls `get_temperature` and the script prints a one-line answer with the current temperature in San Francisco.
 
-### [​](#add-more-tools) Add more tools
+### Add more tools
 
 A server holds as many tools as you list in its `tools` array. With more than one tool on a server, you can list each one in `allowedTools` individually or use the wildcard `mcp__weather__*` to cover every tool the server exposes.
+
 The example below defines a second tool, `get_precipitation_chance`, and replaces the `weatherServer` definition from the [weather tool example](#weather-tool-example) with one that lists both tools in the array.
 
-Python
-
-TypeScript
-
-```shiki
+```python Python
 # Define a second tool for the same server
 @tool(
     "get_precipitation_chance",
@@ -217,7 +209,7 @@ weather_server = create_sdk_mcp_server(
 )
 ```
 
-```shiki
+```typescript TypeScript
 // Define a second tool for the same server
 const getPrecipitationChance = tool(
   "get_precipitation_chance",
@@ -254,27 +246,24 @@ const weatherServer = createSdkMcpServer({
 });
 ```
 
-[Tool search](agent-sdk/tool-search.md) is on by default and defers SDK MCP tools: Claude sees each tool’s name in a compact list and loads its full schema on demand. With tool search disabled, every tool in this array consumes context window space on every turn. In TypeScript, pass `alwaysLoad: true` in the `extras` argument of [`tool()`](agent-sdk/typescript.md) or in the options of [`createSdkMcpServer()`](agent-sdk/typescript.md) to keep a tool’s full schema in the initial prompt.
+[Tool search](agent-sdk/tool-search.md) is on by default and defers SDK MCP tools: Claude sees each tool's name in a compact list and loads its full schema on demand. With tool search disabled, every tool in this array consumes context window space on every turn. In TypeScript, pass `alwaysLoad: true` in the `extras` argument of [`tool()`](agent-sdk/typescript.md) or in the options of [`createSdkMcpServer()`](agent-sdk/typescript.md) to keep a tool's full schema in the initial prompt.
 
-### [​](#add-tool-annotations) Add tool annotations
+### Add tool annotations
 
 [Tool annotations](https://modelcontextprotocol.io/docs/concepts/tools#tool-annotations) are optional metadata describing how a tool behaves. Pass them as the fifth argument to `tool()` helper in TypeScript or via the `annotations` keyword argument for the `@tool` decorator in Python. All hint fields are Booleans.
 
-| Field | Default | Meaning |
-| --- | --- | --- |
-| `readOnlyHint` | `false` | Tool does not modify its environment. Controls whether the tool can be called in parallel with other read-only tools. |
-| `destructiveHint` | `true` | Tool may perform destructive updates. Informational only. |
-| `idempotentHint` | `false` | Repeated calls with the same arguments have no additional effect. Informational only. |
-| `openWorldHint` | `true` | Tool reaches systems outside your process. Informational only. |
+| Field             | Default | Meaning                                                                                                               |
+| :---------------- | :------ | :-------------------------------------------------------------------------------------------------------------------- |
+| `readOnlyHint`    | `false` | Tool does not modify its environment. Controls whether the tool can be called in parallel with other read-only tools. |
+| `destructiveHint` | `true`  | Tool may perform destructive updates. Informational only.                                                             |
+| `idempotentHint`  | `false` | Repeated calls with the same arguments have no additional effect. Informational only.                                 |
+| `openWorldHint`   | `true`  | Tool reaches systems outside your process. Informational only.                                                        |
 
-Annotations are metadata, not enforcement. A tool marked `readOnlyHint: true` can still write to disk if that’s what the handler does. Keep the annotation accurate to the handler.
+Annotations are metadata, not enforcement. A tool marked `readOnlyHint: true` can still write to disk if that's what the handler does. Keep the annotation accurate to the handler.
+
 This example adds `readOnlyHint` to the `get_temperature` tool from the [weather tool example](#weather-tool-example).
 
-Python
-
-TypeScript
-
-```shiki
+```python Python
 from claude_agent_sdk import tool, ToolAnnotations
 
 @tool(
@@ -289,7 +278,7 @@ async def get_temperature(args):
     return {"content": [{"type": "text", "text": "..."}]}
 ```
 
-```shiki
+```typescript TypeScript
 import { tool } from "@anthropic-ai/claude-agent-sdk";
 import { z } from "zod";
 
@@ -304,40 +293,37 @@ tool(
 
 See `ToolAnnotations` in the [TypeScript](agent-sdk/typescript.md) or [Python](agent-sdk/python.md) reference.
 
-## [​](#control-tool-access) Control tool access
+## Control tool access
 
 The [weather tool example](#weather-tool-example) registered a server and listed tools in `allowedTools`. This section covers how to scope access when you have multiple tools or want to restrict built-ins. For how tool names are constructed, see [Call a custom tool](#call-a-custom-tool).
 
-### [​](#configure-allowed-tools) Configure allowed tools
+### Configure allowed tools
 
-The `tools` option and the allowed/disallowed lists affect two layers: availability, which controls whether a tool appears in Claude’s context, and permission, which controls whether a call is approved once Claude attempts it. `tools` and bare-name `disallowedTools` entries change availability. `allowedTools` and scoped `disallowedTools` rules change permission. If you name one of the [task-tracking tools](agent-sdk/todo-tracking.md) in `allowedTools`, Claude Code also opts the session in.
+The `tools` option and the allowed/disallowed lists affect two layers: availability, which controls whether a tool appears in Claude's context, and permission, which controls whether a call is approved once Claude attempts it. `tools` and bare-name `disallowedTools` entries change availability. `allowedTools` and scoped `disallowedTools` rules change permission. If you name one of the [task-tracking tools](agent-sdk/todo-tracking.md) in `allowedTools`, Claude Code also opts the session in.
 
-| Option | Layer | Effect |
-| --- | --- | --- |
-| `tools: ["Read", "Grep"]` | Availability | Only the listed built-ins are in Claude’s context. Unlisted built-ins are removed. MCP tools are unaffected. |
-| `tools: []` | Availability | All built-ins are removed. Claude can only use your MCP tools. |
-| allowed tools | Permission | Listed tools run without a permission prompt. Other unlisted tools remain available; calls go through the [permission flow](agent-sdk/permissions.md). |
-| disallowed tools | Both | A bare tool name such as `"Bash"` removes the tool from Claude’s context, the same as omitting it from `tools`. A scoped rule such as `"Bash(rm *)"` leaves the tool in context and denies only matching calls. |
+| Option                    | Layer        | Effect                                                                                                                                                                                                          |
+| :------------------------ | :----------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tools: ["Read", "Grep"]` | Availability | Only the listed built-ins are in Claude's context. Unlisted built-ins are removed. MCP tools are unaffected.                                                                                                    |
+| `tools: []`               | Availability | All built-ins are removed. Claude can only use your MCP tools.                                                                                                                                                  |
+| allowed tools             | Permission   | Listed tools run without a permission prompt. Other unlisted tools remain available; calls go through the [permission flow](agent-sdk/permissions.md).                                                         |
+| disallowed tools          | Both         | A bare tool name such as `"Bash"` removes the tool from Claude's context, the same as omitting it from `tools`. A scoped rule such as `"Bash(rm *)"` leaves the tool in context and denies only matching calls. |
 
 To remove a built-in entirely, omit it from `tools` or list its bare name in `disallowedTools` (Python: `disallowed_tools`); both keep the tool out of context so Claude never attempts it. A scoped `disallowedTools` rule blocks matching calls but leaves the tool visible, so Claude may waste a turn trying it. See [Configure permissions](agent-sdk/permissions.md) for the full evaluation order.
 
-## [​](#handle-errors) Handle errors
+## Handle errors
 
-A handler error doesn’t stop the agent loop. The SDK’s in-process MCP server catches uncaught exceptions and returns them as error results, so how you report an error determines what Claude reads, not whether the query fails:
+A handler error doesn't stop the agent loop. The SDK's in-process MCP server catches uncaught exceptions and returns them as error results, so how you report an error determines what Claude reads, not whether the query fails:
 
-| What happens | Result |
-| --- | --- |
-| Handler throws an uncaught exception | The MCP server converts it to an error result carrying the raw exception message. Claude sees that message, and the agent loop continues. |
-| Handler catches the error and returns `isError: true` (TS) / `"is_error": True` (Python) | Claude sees the message you compose. You can add context the raw exception lacks, such as which request failed or what to try instead. |
+| What happens                                                                             | Result                                                                                                                                    |
+| :--------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| Handler throws an uncaught exception                                                     | The MCP server converts it to an error result carrying the raw exception message. Claude sees that message, and the agent loop continues. |
+| Handler catches the error and returns `isError: true` (TS) / `"is_error": True` (Python) | Claude sees the message you compose. You can add context the raw exception lacks, such as which request failed or what to try instead.    |
 
-In both cases Claude can retry, try a different tool, or explain the failure. Catch errors yourself when the raw exception message isn’t enough for Claude to act on.
+In both cases Claude can retry, try a different tool, or explain the failure. Catch errors yourself when the raw exception message isn't enough for Claude to act on.
+
 The example below catches two kinds of failures inside the handler and composes the error message Claude reads. A non-200 HTTP status is caught from the response and returned as an error result. A network error or invalid JSON is caught by the surrounding `try/except` (Python) or `try/catch` (TypeScript) and also returned as an error result. In both cases Claude receives a message that describes the failure instead of a bare exception string.
 
-Python
-
-TypeScript
-
-```shiki
+```python Python
 import json
 import httpx
 from typing import Any
@@ -376,7 +362,7 @@ async def fetch_data(args: dict[str, Any]) -> dict[str, Any]:
         }
 ```
 
-```shiki
+```typescript TypeScript
 import { tool } from "@anthropic-ai/claude-agent-sdk";
 import { z } from "zod";
 
@@ -430,26 +416,23 @@ tool(
 );
 ```
 
-## [​](#return-images-and-resources) Return images and resources
+## Return images and resources
 
 The `content` array in a tool result accepts `text`, `image`, `audio`, `resource`, and `resource_link` blocks. You can mix them in the same response. In TypeScript, the SDK saves audio blocks to disk and Claude receives a text block with the saved file path; in Python, the SDK drops audio blocks from the tool result and logs a warning.
-Claude receives each resource link block as a text block containing the link’s name, URI, and description. In TypeScript, your application also receives the links themselves as [`resourceLinks`](agent-sdk/typescript.md) on the user message’s `tool_use_result`; in Python, the SDK flattens them to text before the CLI sees the result, so the Python [`resourceLinks` key](agent-sdk/python.md) is never produced for in-process tools.
 
-### [​](#images) Images
+Claude receives each resource link block as a text block containing the link's name, URI, and description. In TypeScript, your application also receives the links themselves as [`resourceLinks`](agent-sdk/typescript.md) on the user message's `tool_use_result`; in Python, the SDK flattens them to text before the CLI sees the result, so the Python [`resourceLinks` key](agent-sdk/python.md) is never produced for in-process tools.
+
+### Images
 
 An image block carries the image bytes inline, encoded as base64. There is no URL field. To return an image that lives at a URL, fetch it in the handler, read the response bytes, and base64-encode them before returning. The result is processed as visual input.
 
-| Field | Type | Notes |
-| --- | --- | --- |
-| `type` | `"image"` |  |
-| `data` | `string` | Base64-encoded bytes. Raw base64 only, no `data:image/...;base64,` prefix |
-| `mimeType` | `string` | Required. For example `image/png`, `image/jpeg`, `image/webp`, `image/gif` |
+| Field      | Type      | Notes                                                                      |
+| :--------- | :-------- | :------------------------------------------------------------------------- |
+| `type`     | `"image"` |                                                                            |
+| `data`     | `string`  | Base64-encoded bytes. Raw base64 only, no `data:image/...;base64,` prefix  |
+| `mimeType` | `string`  | Required. For example `image/png`, `image/jpeg`, `image/webp`, `image/gif` |
 
-Python
-
-TypeScript
-
-```shiki
+```python Python
 import base64
 import httpx
 from claude_agent_sdk import tool
@@ -475,7 +458,7 @@ async def fetch_image(args):
     }
 ```
 
-```shiki
+```typescript TypeScript
 import { tool } from "@anthropic-ai/claude-agent-sdk";
 import { z } from "zod";
 
@@ -503,25 +486,21 @@ tool(
 );
 ```
 
-### [​](#resources) Resources
+### Resources
 
-A resource block embeds a piece of content identified by a URI. The URI is a label for Claude to reference; the actual content rides in the block’s `text` or `blob` field. Use this when your tool produces something that makes sense to address by name later, such as a generated file or a record from an external system.
+A resource block embeds a piece of content identified by a URI. The URI is a label for Claude to reference; the actual content rides in the block's `text` or `blob` field. Use this when your tool produces something that makes sense to address by name later, such as a generated file or a record from an external system.
 
-| Field | Type | Notes |
-| --- | --- | --- |
-| `type` | `"resource"` |  |
-| `resource.uri` | `string` | Identifier for the content. Any URI scheme |
-| `resource.text` | `string` | The content, if it’s text. Provide this or `blob`, not both |
-| `resource.blob` | `string` | The content base64-encoded, if it’s binary. TypeScript only: the Python SDK drops binary resources from the tool result and logs a warning |
-| `resource.mimeType` | `string` | Optional |
+| Field               | Type         | Notes                                                                                                                                      |
+| :------------------ | :----------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`              | `"resource"` |                                                                                                                                            |
+| `resource.uri`      | `string`     | Identifier for the content. Any URI scheme                                                                                                 |
+| `resource.text`     | `string`     | The content, if it's text. Provide this or `blob`, not both                                                                                |
+| `resource.blob`     | `string`     | The content base64-encoded, if it's binary. TypeScript only: the Python SDK drops binary resources from the tool result and logs a warning |
+| `resource.mimeType` | `string`     | Optional                                                                                                                                   |
 
 This example shows a resource block returned from inside a tool handler. The URI `file:///tmp/report.md` is a label that Claude can reference later; the SDK does not read from that path.
 
-TypeScript
-
-Python
-
-```shiki
+```typescript TypeScript
 return {
   content: [
     {
@@ -536,7 +515,7 @@ return {
 };
 ```
 
-```shiki
+```python Python
 return {
     "content": [
         {
@@ -553,14 +532,13 @@ return {
 
 These block shapes come from the MCP `CallToolResult` type. See the [MCP specification](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#tool-result) for the full definition.
 
-## [​](#return-structured-data) Return structured data
+## Return structured data
 
 `structuredContent` is an optional JSON object on the result, separate from the `content` array. Use it to return raw values that Claude can read as exact fields instead of parsing them out of a text string or image.
+
 When `structuredContent` is set, Claude receives the JSON plus any image or resource blocks from `content`. Text blocks in `content` are not forwarded, since they are assumed to duplicate the structured data. The example below renders a chart as an image block and returns the data points behind it in `structuredContent` from the same handler. In the snippet, `chartPngBuffer` is a `Buffer` holding the rendered PNG bytes.
 
-TypeScript
-
-```shiki
+```typescript TypeScript
 return {
   content: [
     {
@@ -577,21 +555,18 @@ return {
 };
 ```
 
-The Python `@tool` decorator forwards only `content` and `is_error` from the handler’s return dict. To return `structuredContent` from Python, run a [standalone MCP server](agent-sdk/mcp.md) instead of an in-process SDK server.
+The Python `@tool` decorator forwards only `content` and `is_error` from the handler's return dict. To return `structuredContent` from Python, run a [standalone MCP server](agent-sdk/mcp.md) instead of an in-process SDK server.
 
-## [​](#example-unit-converter) Example: unit converter
+## Example: unit converter
 
-This tool converts values between units of length, temperature, and weight. A user can ask “convert 100 kilometers to miles” or “what is 72°F in Celsius,” and Claude picks the right unit type and units from the request.
+This tool converts values between units of length, temperature, and weight. A user can ask "convert 100 kilometers to miles" or "what is 72°F in Celsius," and Claude picks the right unit type and units from the request.
+
 It demonstrates two patterns:
 
-- **Enum schemas:** `unit_type` is constrained to a fixed set of values. In TypeScript, use `z.enum()`. In Python, the dict schema doesn’t support enums, so the full JSON Schema dict is required.
-- **Unsupported input handling:** when a conversion pair isn’t found, the handler returns `isError: true` so Claude can tell the user what went wrong rather than treating a failure as a normal result.
+* **Enum schemas:** `unit_type` is constrained to a fixed set of values. In TypeScript, use `z.enum()`. In Python, the dict schema doesn't support enums, so the full JSON Schema dict is required.
+* **Unsupported input handling:** when a conversion pair isn't found, the handler returns `isError: true` so Claude can tell the user what went wrong rather than treating a failure as a normal result.
 
-Python
-
-TypeScript
-
-```shiki
+```python Python
 from typing import Any
 from claude_agent_sdk import tool, create_sdk_mcp_server
 
@@ -671,7 +646,7 @@ converter_server = create_sdk_mcp_server(
 )
 ```
 
-```shiki
+```typescript TypeScript
 import { tool, createSdkMcpServer } from "@anthropic-ai/claude-agent-sdk";
 import { z } from "zod";
 
@@ -745,13 +720,10 @@ const converterServer = createSdkMcpServer({
 ```
 
 Once the server is defined, pass it to `query` the same way as the weather example. This example sends three different prompts in a loop to show the same tool handling different unit types. For each response, it inspects `AssistantMessage` objects (which contain the tool calls Claude made during that turn) and prints each `ToolUseBlock` before printing the final `ResultMessage` text. This lets you see when Claude is using the tool versus answering from its own knowledge.
+
 Because [tool search](agent-sdk/tool-search.md) is on by default, the output may also include a `ToolSearch` call as Claude loads the deferred tool schema.
 
-Python
-
-TypeScript
-
-```shiki
+```python Python
 import asyncio
 from claude_agent_sdk import (
     query,
@@ -791,7 +763,7 @@ async def main():
 asyncio.run(main())
 ```
 
-```shiki
+```typescript TypeScript
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
 const prompts = [
@@ -828,14 +800,15 @@ for (const prompt of prompts) {
 }
 ```
 
-## [​](#next-steps) Next steps
+## Next steps
 
 You can mix the patterns on this page in the same server: a single server can hold a database tool, an API gateway tool, and an image renderer alongside each other.
+
 From here:
 
-- If your server grows to dozens of tools, see [tool search](agent-sdk/tool-search.md) to defer loading them until Claude needs them.
-- To connect to external MCP servers (filesystem, GitHub, Slack) instead of building your own, see [Connect MCP servers](agent-sdk/mcp.md).
-- To control which tools run automatically versus requiring approval, see [Configure permissions](agent-sdk/permissions.md).
+* If your server grows to dozens of tools, see [tool search](agent-sdk/tool-search.md) to defer loading them until Claude needs them.
+* To connect to external MCP servers (filesystem, GitHub, Slack) instead of building your own, see [Connect MCP servers](agent-sdk/mcp.md).
+* To control which tools run automatically versus requiring approval, see [Configure permissions](agent-sdk/permissions.md).
 
 ---
 

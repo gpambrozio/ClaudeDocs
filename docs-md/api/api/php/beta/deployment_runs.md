@@ -1,268 +1,470 @@
 # Deployment Runs
 
-Copy page
+## List Deployment Runs
 
-
+`$client->beta->deploymentRuns->list(?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?string deploymentID, ?bool hasError, ?int limit, ?string page, ?BetaManagedAgentsTriggerType triggerType, ?list<AnthropicBeta> betas): PageCursor<BetaManagedAgentsDeploymentRun>`
 
-PHP
+**GET** `/v1/deployment_runs`
 
-# Deployment Runs
+List Deployment Runs
 
-##### [List Deployment Runs](api/beta/deployment_runs/list.md)
+### Parameters
 
-$client->beta->deploymentRuns->list(?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?string deploymentID, ?bool hasError, ?int limit, ?string page, ?[BetaManagedAgentsTriggerType](api/beta/deployment_runs.md) triggerType, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)>
+- `createdAtGt?:optional \Datetime`
 
-GET/v1/deployment\_runs
+  Return runs created strictly after this time (exclusive).
 
-##### [Get Deployment Run](api/beta/deployment_runs/retrieve.md)
+- `createdAtGte?:optional \Datetime`
 
-$client->beta->deploymentRuns->retrieve(string deploymentRunID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)
+  Return runs created at or after this time (inclusive).
 
-GET/v1/deployment\_runs/{deployment\_run\_id}
+- `createdAtLt?:optional \Datetime`
 
-##### ModelsExpand Collapse
+  Return runs created strictly before this time (exclusive).
 
-
+- `createdAtLte?:optional \Datetime`
 
-[BetaManagedAgentsAgentArchivedRunError](api/beta/deployment_runs.md)
+  Return runs created at or before this time (inclusive).
 
-string message
+- `deploymentID?:optional string`
 
-Human-readable error description.
+  Filter to a specific deployment. Omit to list across all deployments in the workspace. Filtering by a non-existent `deployment_id` returns 200 with empty data.
 
-Type type
+- `hasError?:optional bool`
 
-
+  Filter: true for runs with non-null `error`, false for runs with non-null `session_id`. Omit for all.
 
-[BetaManagedAgentsDeploymentRun](api/beta/deployment_runs.md)
+- `limit?:optional int`
 
-string id
+  Maximum results per page. Default 20, maximum 1000.
 
-Unique identifier for this run (`drun_...`).
+- `page?:optional string`
 
-[BetaManagedAgentsAgentReference](api/beta/agents.md) agent
+  Opaque pagination cursor. Pass `next_page` from the previous response. Invalid or expired cursors return 400.
 
-A resolved agent reference with a concrete version.
+- `triggerType?:optional BetaManagedAgentsTriggerType`
 
-\Datetime createdAt
+  Filter runs by what triggered them. Omit to return all runs.
 
-A timestamp in RFC 3339 format
+- `betas?:optional list<AnthropicBeta>`
 
-string deploymentID
+  Optional header to specify the beta version(s) you want to use.
 
-ID of the deployment that produced this run.
+### Returns
 
-?Error error
+- `BetaManagedAgentsDeploymentRun`
 
-Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+  - `string id`
 
-?string sessionID
+    Unique identifier for this run (`drun_...`).
 
-Populated on success. Null on creation failure. Exactly one of session\_id or error is non-null.
+  - `BetaManagedAgentsAgentReference agent`
 
-[BetaManagedAgentsTriggerContext](api/beta/deployment_runs.md) triggerContext
+    A resolved agent reference with a concrete version.
 
-Describes what triggered a deployment run, with trigger-specific metadata.
+  - `\Datetime createdAt`
 
-Type type
+    A timestamp in RFC 3339 format
 
-
+  - `string deploymentID`
 
-[BetaManagedAgentsEnvironmentArchivedRunError](api/beta/deployment_runs.md)
+    ID of the deployment that produced this run.
 
-string message
+  - `?Error error`
 
-Human-readable error description.
+    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
-Type type
+  - `?string sessionID`
 
-
+    Populated on success. Null on creation failure. Exactly one of `session_id` or `error` is non-null.
 
-[BetaManagedAgentsEnvironmentNotFoundRunError](api/beta/deployment_runs.md)
+  - `BetaManagedAgentsTriggerContext triggerContext`
 
-string message
+    Describes what triggered a deployment run, with trigger-specific metadata.
 
-Human-readable error description.
+  - `Type type`
 
-Type type
+### Example
 
-
+```php
+<?php
 
-[BetaManagedAgentsFileNotFoundRunError](api/beta/deployment_runs.md)
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-string message
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-Human-readable error description.
+$page = $client->beta->deploymentRuns->list(
+  createdAtGt: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  createdAtGte: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  createdAtLt: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  createdAtLte: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  deploymentID: 'deployment_id',
+  hasError: true,
+  limit: 0,
+  page: 'page',
+  triggerType: BetaManagedAgentsTriggerType::SCHEDULE,
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-Type type
+var_dump($page);
+```
 
-
+#### Response (200)
 
-[BetaManagedAgentsManualTriggerContext](api/beta/deployment_runs.md)
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "agent": {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      },
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "deployment_id": "deployment_id",
+      "error": {
+        "message": "message",
+        "type": "environment_archived_error"
+      },
+      "session_id": "session_id",
+      "trigger_context": {
+        "scheduled_at": "2019-12-27T18:11:19.117Z",
+        "type": "schedule"
+      },
+      "type": "deployment_run"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
 
-Type type
+## Get Deployment Run
 
-
+`$client->beta->deploymentRuns->retrieve(string deploymentRunID, ?list<AnthropicBeta> betas): BetaManagedAgentsDeploymentRun`
 
-[BetaManagedAgentsMCPEgressBlockedRunError](api/beta/deployment_runs.md)
+**GET** `/v1/deployment_runs/{deployment_run_id}`
 
-string message
+Get Deployment Run
 
-Human-readable error description.
+### Parameters
 
-Type type
+- `deploymentRunID: string`
 
-
+- `betas?:optional list<AnthropicBeta>`
 
-[BetaManagedAgentsMemoryStoreArchivedRunError](api/beta/deployment_runs.md)
+  Optional header to specify the beta version(s) you want to use.
 
-string message
+### Returns
 
-Human-readable error description.
+- `BetaManagedAgentsDeploymentRun`
 
-Type type
+  - `string id`
 
-
+    Unique identifier for this run (`drun_...`).
 
-[BetaManagedAgentsOrganizationDisabledRunError](api/beta/deployment_runs.md)
+  - `BetaManagedAgentsAgentReference agent`
 
-string message
+    A resolved agent reference with a concrete version.
 
-Human-readable error description.
+  - `\Datetime createdAt`
 
-Type type
+    A timestamp in RFC 3339 format
 
-
+  - `string deploymentID`
 
-[BetaManagedAgentsScheduleTriggerContext](api/beta/deployment_runs.md)
+    ID of the deployment that produced this run.
 
-\Datetime scheduledAt
+  - `?Error error`
 
-A timestamp in RFC 3339 format
+    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
-Type type
+  - `?string sessionID`
 
-
+    Populated on success. Null on creation failure. Exactly one of `session_id` or `error` is non-null.
 
-[BetaManagedAgentsSelfHostedResourcesUnsupportedRunError](api/beta/deployment_runs.md)
+  - `BetaManagedAgentsTriggerContext triggerContext`
 
-string message
+    Describes what triggered a deployment run, with trigger-specific metadata.
 
-Human-readable error description.
+  - `Type type`
 
-Type type
+### Example
 
-
+```php
+<?php
 
-[BetaManagedAgentsSessionCreationRejectedRunError](api/beta/deployment_runs.md)
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-string message
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-Human-readable error description.
+$betaManagedAgentsDeploymentRun = $client->beta->deploymentRuns->retrieve(
+  'deployment_run_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+);
 
-Type type
+var_dump($betaManagedAgentsDeploymentRun);
+```
 
-
+#### Response (200)
 
-[BetaManagedAgentsSessionRateLimitedRunError](api/beta/deployment_runs.md)
+```json
+{
+  "id": "id",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "type": "agent",
+    "version": 1
+  },
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "deployment_id": "deployment_id",
+  "error": {
+    "message": "message",
+    "type": "environment_archived_error"
+  },
+  "session_id": "session_id",
+  "trigger_context": {
+    "scheduled_at": "2019-12-27T18:11:19.117Z",
+    "type": "schedule"
+  },
+  "type": "deployment_run"
+}
+```
 
-string message
+## Domain types
 
-Human-readable error description.
+### Beta Managed Agents Agent Archived Run Error
 
-Type type
+- `BetaManagedAgentsAgentArchivedRunError`
 
-
+  - `string message`
 
-[BetaManagedAgentsSessionResourceNotFoundRunError](api/beta/deployment_runs.md)
+    Human-readable error description.
 
-string message
+  - `Type type`
 
-Human-readable error description.
+### Beta Managed Agents Deployment Run
 
-Type type
+- `BetaManagedAgentsDeploymentRun`
 
-
+  - `string id`
 
-[BetaManagedAgentsSkillNotFoundRunError](api/beta/deployment_runs.md)
+    Unique identifier for this run (`drun_...`).
 
-string message
+  - `BetaManagedAgentsAgentReference agent`
 
-Human-readable error description.
+    A resolved agent reference with a concrete version.
 
-Type type
+  - `\Datetime createdAt`
 
-
+    A timestamp in RFC 3339 format
 
-[BetaManagedAgentsTriggerContext](api/beta/deployment_runs.md)
+  - `string deploymentID`
 
-One of the following:
+    ID of the deployment that produced this run.
 
-
+  - `?Error error`
 
-[BetaManagedAgentsScheduleTriggerContext](api/beta/deployment_runs.md)
+    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
-\Datetime scheduledAt
+  - `?string sessionID`
 
-A timestamp in RFC 3339 format
+    Populated on success. Null on creation failure. Exactly one of `session_id` or `error` is non-null.
 
-Type type
+  - `BetaManagedAgentsTriggerContext triggerContext`
 
-
+    Describes what triggered a deployment run, with trigger-specific metadata.
 
-[BetaManagedAgentsManualTriggerContext](api/beta/deployment_runs.md)
+  - `Type type`
 
-Type type
+### Beta Managed Agents Environment Archived Run Error
 
-
+- `BetaManagedAgentsEnvironmentArchivedRunError`
 
-[BetaManagedAgentsTriggerType](api/beta/deployment_runs.md)
+  - `string message`
 
-One of the following:
+    Human-readable error description.
 
-"schedule"
+  - `Type type`
 
-"manual"
+### Beta Managed Agents Environment Not Found Run Error
 
-
+- `BetaManagedAgentsEnvironmentNotFoundRunError`
 
-[BetaManagedAgentsUnknownRunError](api/beta/deployment_runs.md)
+  - `string message`
 
-string message
+    Human-readable error description.
 
-Human-readable error description.
+  - `Type type`
 
-Type type
+### Beta Managed Agents File Not Found Run Error
 
-
+- `BetaManagedAgentsFileNotFoundRunError`
 
-[BetaManagedAgentsVaultArchivedRunError](api/beta/deployment_runs.md)
+  - `string message`
 
-string message
+    Human-readable error description.
 
-Human-readable error description.
+  - `Type type`
 
-Type type
+### Beta Managed Agents Manual Trigger Context
 
-
+- `BetaManagedAgentsManualTriggerContext`
 
-[BetaManagedAgentsVaultNotFoundRunError](api/beta/deployment_runs.md)
+  - `Type type`
 
-string message
+### Beta Managed Agents MCP Egress Blocked Run Error
 
-Human-readable error description.
+- `BetaManagedAgentsMCPEgressBlockedRunError`
 
-Type type
+  - `string message`
 
-
+    Human-readable error description.
 
-[BetaManagedAgentsWorkspaceArchivedRunError](api/beta/deployment_runs.md)
+  - `Type type`
 
-string message
+### Beta Managed Agents Memory Store Archived Run Error
 
-Human-readable error description.
+- `BetaManagedAgentsMemoryStoreArchivedRunError`
 
-Type type
+  - `string message`
+
+    Human-readable error description.
+
+  - `Type type`
+
+### Beta Managed Agents Organization Disabled Run Error
+
+- `BetaManagedAgentsOrganizationDisabledRunError`
+
+  - `string message`
+
+    Human-readable error description.
+
+  - `Type type`
+
+### Beta Managed Agents Schedule Trigger Context
+
+- `BetaManagedAgentsScheduleTriggerContext`
+
+  - `\Datetime scheduledAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+### Beta Managed Agents Self Hosted Resources Unsupported Run Error
+
+- `BetaManagedAgentsSelfHostedResourcesUnsupportedRunError`
+
+  - `string message`
+
+    Human-readable error description.
+
+  - `Type type`
+
+### Beta Managed Agents Session Creation Rejected Run Error
+
+- `BetaManagedAgentsSessionCreationRejectedRunError`
+
+  - `string message`
+
+    Human-readable error description.
+
+  - `Type type`
+
+### Beta Managed Agents Session Rate Limited Run Error
+
+- `BetaManagedAgentsSessionRateLimitedRunError`
+
+  - `string message`
+
+    Human-readable error description.
+
+  - `Type type`
+
+### Beta Managed Agents Session Resource Not Found Run Error
+
+- `BetaManagedAgentsSessionResourceNotFoundRunError`
+
+  - `string message`
+
+    Human-readable error description.
+
+  - `Type type`
+
+### Beta Managed Agents Skill Not Found Run Error
+
+- `BetaManagedAgentsSkillNotFoundRunError`
+
+  - `string message`
+
+    Human-readable error description.
+
+  - `Type type`
+
+### Beta Managed Agents Trigger Context
+
+- `BetaManagedAgentsTriggerContext`
+
+  - `BetaManagedAgentsScheduleTriggerContext`
+
+    - `\Datetime scheduledAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `BetaManagedAgentsManualTriggerContext`
+
+    - `Type type`
+
+### Beta Managed Agents Trigger Type
+
+- `BetaManagedAgentsTriggerType`
+
+  - `"schedule"`
+
+  - `"manual"`
+
+### Beta Managed Agents Unknown Run Error
+
+- `BetaManagedAgentsUnknownRunError`
+
+  - `string message`
+
+    Human-readable error description.
+
+  - `Type type`
+
+### Beta Managed Agents Vault Archived Run Error
+
+- `BetaManagedAgentsVaultArchivedRunError`
+
+  - `string message`
+
+    Human-readable error description.
+
+  - `Type type`
+
+### Beta Managed Agents Vault Not Found Run Error
+
+- `BetaManagedAgentsVaultNotFoundRunError`
+
+  - `string message`
+
+    Human-readable error description.
+
+  - `Type type`
+
+### Beta Managed Agents Workspace Archived Run Error
+
+- `BetaManagedAgentsWorkspaceArchivedRunError`
+
+  - `string message`
+
+    Human-readable error description.
+
+  - `Type type`
 
 ---
 

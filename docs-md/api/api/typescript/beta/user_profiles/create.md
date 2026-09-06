@@ -1,200 +1,212 @@
 # Create User Profile
 
-Copy page
+`client.beta.userProfiles.create(params, options?): BetaUserProfile`
 
-
-
-TypeScript
-
-# Create User Profile
-
-client.beta.userProfiles.create(UserProfileCreateParams { external\_id, metadata, name, 2 more } params, RequestOptionsoptions?): [BetaUserProfile](api/beta/user_profiles.md) { id, created\_at, metadata, 6 more }
-
-POST/v1/user\_profiles
+**POST** `/v1/user_profiles`
 
 Create User Profile
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `params: UserProfileCreateParams`
 
-params: UserProfileCreateParams { external\_id, metadata, name, 2 more } 
+  - `access_type?: "application" | "passthrough"`
 
-external\_id?: string | null
+    Body param: How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
-Body param: Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
+    - `"application"`
 
-metadata?: Record<string, string>
+    - `"passthrough"`
 
-Body param: Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
+  - `external_id?: string | null`
 
-name?: string | null
+    Body param: Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
 
-Body param: Display name of the entity this profile represents. Required when relationship is `resold` (the resold-to company's name); optional otherwise. Maximum 255 characters.
+    minLength: 1, maxLength: 255
 
-
+  - `external_user_onboarded_at?: string`
 
-relationship?: "external" | "resold" | "internal"
+    Body param: A timestamp in RFC 3339 format
 
-Body param: How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+    format: date-time
 
-One of the following:
+  - `metadata?: Record<string, string>`
 
-"external"
+    Body param: Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
 
-"resold"
+  - `name?: string | null`
 
-"internal"
+    Body param: Optional for all profiles. Real-world name of the entity this profile represents (company or individual); for a company the platform resells Claude access to (`access_type` `passthrough`), that company's name where known. Maximum 255 characters.
 
-
+    minLength: 1, maxLength: 255
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+  - `betas?: Array<AnthropicBeta>`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-One of the following:
+    - `(string & {})`
 
-(string & {})
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
 
-
+      - `"message-batches-2024-09-24"`
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more
+      - `"prompt-caching-2024-07-31"`
 
-"message-batches-2024-09-24"
+      - `"computer-use-2024-10-22"`
 
-"prompt-caching-2024-07-31"
+      - `"computer-use-2025-01-24"`
 
-"computer-use-2024-10-22"
+      - `"pdfs-2024-09-25"`
 
-"computer-use-2025-01-24"
+      - `"token-counting-2024-11-01"`
 
-"pdfs-2024-09-25"
+      - `"token-efficient-tools-2025-02-19"`
 
-"token-counting-2024-11-01"
+      - `"output-128k-2025-02-19"`
 
-"token-efficient-tools-2025-02-19"
+      - `"files-api-2025-04-14"`
 
-"output-128k-2025-02-19"
+      - `"mcp-client-2025-04-04"`
 
-"files-api-2025-04-14"
+      - `"mcp-client-2025-11-20"`
 
-"mcp-client-2025-04-04"
+      - `"dev-full-thinking-2025-05-14"`
 
-"mcp-client-2025-11-20"
+      - `"interleaved-thinking-2025-05-14"`
 
-"dev-full-thinking-2025-05-14"
+      - `"code-execution-2025-05-22"`
 
-"interleaved-thinking-2025-05-14"
+      - `"extended-cache-ttl-2025-04-11"`
 
-"code-execution-2025-05-22"
+      - `"context-1m-2025-08-07"`
 
-"extended-cache-ttl-2025-04-11"
+      - `"context-management-2025-06-27"`
 
-"context-1m-2025-08-07"
+      - `"model-context-window-exceeded-2025-08-26"`
 
-"context-management-2025-06-27"
+      - `"skills-2025-10-02"`
 
-"model-context-window-exceeded-2025-08-26"
+      - `"fast-mode-2026-02-01"`
 
-"skills-2025-10-02"
+      - `"output-300k-2026-03-24"`
 
-"fast-mode-2026-02-01"
+      - `"user-profiles-2026-03-24"`
 
-"output-300k-2026-03-24"
+      - `"user-profiles-2026-08-18"`
 
-"user-profiles-2026-03-24"
+      - `"advisor-tool-2026-03-01"`
 
-"advisor-tool-2026-03-01"
+      - `"managed-agents-2026-04-01"`
 
-"managed-agents-2026-04-01"
+      - `"cache-diagnosis-2026-04-07"`
 
-"cache-diagnosis-2026-04-07"
+      - `"dreaming-2026-04-21"`
 
-"thinking-token-count-2026-05-13"
+      - `"thinking-token-count-2026-05-13"`
 
-"server-side-fallback-2026-06-01"
+      - `"server-side-fallback-2026-06-01"`
 
-"fallback-credit-2026-06-01"
+      - `"server-side-fallback-2026-07-01"`
 
-"agent-memory-2026-07-22"
+      - `"fallback-credit-2026-06-01"`
 
-##### ReturnsExpand Collapse
+      - `"fallback-credit-2026-07-01"`
 
-
+      - `"agent-memory-2026-07-22"`
 
-BetaUserProfile { id, created\_at, metadata, 6 more } 
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
-id: string
+      - `"compact-2026-01-12"`
 
-Unique identifier for this user profile, prefixed `uprof_`.
+      - `"computer-use-2025-11-24"`
 
-created\_at: string
+      - `"mcp-tunnels-2026-06-22"`
 
-A timestamp in RFC 3339 format
+      - `"structured-outputs-2025-11-13"`
 
-metadata: Record<string, string>
+      - `"task-budgets-2026-03-13"`
 
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+      - `"thinking-display-updates-2026-08-18"`
 
-
+      - `"ce-user-management-2026-07-13"`
 
-relationship: "external" | "resold" | "internal"
+      - `"mid-conversation-output-config-2026-07-01"`
 
-How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+      - `"thinking-binding-controls-2026-08-01"`
 
-One of the following:
+      - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"external"
+## Returns
 
-"resold"
+- `BetaUserProfile`
 
-"internal"
+  - `id: string`
 
-
+    Unique identifier for this user profile, prefixed `uprof_`.
 
-trust\_grants: Record<string, [BetaUserProfileTrustGrant](api/beta/user_profiles.md) { status } >
+  - `created_at: string`
 
-Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+    A timestamp in RFC 3339 format
 
-
+    format: date-time
 
-status: "active" | "pending" | "rejected"
+  - `metadata: Record<string, string>`
 
-Status of the trust grant.
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-One of the following:
+  - `trust_grants: Record<string, BetaUserProfileTrustGrant>`
 
-"active"
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-"pending"
+    - `status: "active" | "pending" | "rejected"`
 
-"rejected"
+      Status of the trust grant.
 
-type: "user\_profile"
+      - `"active"`
 
-Object type. Always `user_profile`.
+      - `"pending"`
 
-updated\_at: string
+      - `"rejected"`
 
-A timestamp in RFC 3339 format
+  - `type: "user_profile"`
 
-external\_id?: string | null
+    Object type. Always `user_profile`.
 
-Platform's own identifier for this user. Not enforced unique.
+  - `updated_at: string`
 
-name?: string | null
+    A timestamp in RFC 3339 format
 
-Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    format: date-time
 
-Create User Profile
+  - `access_type?: "application" | "passthrough"`
 
-TypeScript
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
-```shiki
-import Anthropic from '@anthropic-ai/sdk';
+    - `"application"`
+
+    - `"passthrough"`
+
+  - `external_id?: string | null`
+
+    Platform's own identifier for this user. Not enforced unique.
+
+  - `external_user_onboarded_at?: string | null`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `name?: string | null`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
+
+## Example
+
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 const betaUserProfile = await client.beta.userProfiles.create();
@@ -202,16 +214,13 @@ const betaUserProfile = await client.beta.userProfiles.create();
 console.log(betaUserProfile.id);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
-  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -219,31 +228,9 @@ Response 200
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
+  "access_type": "application",
   "external_id": "user_12345",
-  "name": "Example User"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
-  "created_at": "2026-03-15T10:00:00Z",
-  "metadata": {},
-  "relationship": "external",
-  "trust_grants": {
-    "cyber": {
-      "status": "active"
-    }
-  },
-  "type": "user_profile",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "external_id": "user_12345",
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
   "name": "Example User"
 }
 ```

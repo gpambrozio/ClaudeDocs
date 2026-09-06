@@ -1,320 +1,1923 @@
 # Environments
 
-Copy page
+## Create Environment
 
-
+`$client->beta->environments->create(string name, ?Config config, ?string description, ?array<string,string> metadata, ?Scope scope, ?list<AnthropicBeta> betas): BetaEnvironment`
 
-PHP
+**POST** `/v1/environments`
 
-# Environments
+Create a new environment with the specified configuration.
 
-##### [Create Environment](api/beta/environments/create.md)
+### Parameters
 
-$client->beta->environments->create(string name, ?[Config](api/beta/environments/create.md) config, ?string description, ?array<string,string> metadata, ?[Scope](api/beta/environments/create.md) scope, ?list<AnthropicBeta> betas): [BetaEnvironment](api/beta/environments.md)
+- `name: string`
 
-POST/v1/environments
+  Human-readable name for the environment
 
-##### [List Environments](api/beta/environments/list.md)
+- `config?:optional Config`
 
-$client->beta->environments->list(?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[BetaEnvironment](api/beta/environments.md)>
+  Environment configuration
 
-GET/v1/environments
+- `description?:optional string`
 
-##### [Get Environment](api/beta/environments/retrieve.md)
+  Optional description of the environment
 
-$client->beta->environments->retrieve(string environmentID, ?list<AnthropicBeta> betas): [BetaEnvironment](api/beta/environments.md)
+- `metadata?:optional array<string,string>`
 
-GET/v1/environments/{environment\_id}
+  User-provided metadata key-value pairs
 
-##### [Update Environment](api/beta/environments/update.md)
+- `scope?:optional Scope`
 
-$client->beta->environments->update(string environmentID, ?[Config](api/beta/environments/update.md) config, ?string description, ?array<string,string> metadata, ?string name, ?[Scope](api/beta/environments/update.md) scope, ?list<AnthropicBeta> betas): [BetaEnvironment](api/beta/environments.md)
+  The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. Only applicable for self-hosted environments. If not specified, defaults based on organization type.
 
-POST/v1/environments/{environment\_id}
+- `betas?:optional list<AnthropicBeta>`
 
-##### [Delete Environment](api/beta/environments/delete.md)
+  Optional header to specify the beta version(s) you want to use.
 
-$client->beta->environments->delete(string environmentID, ?list<AnthropicBeta> betas): [BetaEnvironmentDeleteResponse](api/beta/environments.md)
+### Returns
 
-DELETE/v1/environments/{environment\_id}
+- `BetaEnvironment`
 
-##### [Archive Environment](api/beta/environments/archive.md)
+  - `string id`
 
-$client->beta->environments->archive(string environmentID, ?list<AnthropicBeta> betas): [BetaEnvironment](api/beta/environments.md)
+    Environment identifier (e.g., 'env_...')
 
-POST/v1/environments/{environment\_id}/archive
+  - `?string archivedAt`
 
-##### ModelsExpand Collapse
+    RFC 3339 timestamp when environment was archived, or null if not archived
 
-
+  - `Config config`
 
-[BetaCloudConfig](api/beta/environments.md)
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-Networking networking
+  - `string createdAt`
 
-Network configuration policy.
+    RFC 3339 timestamp when environment was created
 
-[BetaPackages](api/beta/environments.md) packages
+  - `?string description`
 
-Package manager configuration.
+    User-provided description for the environment; null when unset
 
-"cloud" type
+  - `array<string,string> metadata`
 
-Environment type
+    User-provided metadata key-value pairs
 
-
+  - `string name`
 
-[BetaCloudConfigParams](api/beta/environments.md)
+    Human-readable name for the environment
 
-"cloud" type
+  - `"environment" type`
 
-Environment type
+    The type of object (always 'environment')
 
-?Networking networking
+  - `string updatedAt`
 
-Network configuration policy. Omit on update to preserve the existing value.
+    RFC 3339 timestamp when environment was last updated
 
-
+  - `?Scope scope`
 
-?[BetaPackagesParams](api/beta/environments.md) packages
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-Specify packages (and optionally their versions) available in this environment.
+### Example
 
-When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+```php
+<?php
 
-
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-[BetaEnvironment](api/beta/environments.md)
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-string id
+$betaEnvironment = $client->beta->environments->create(
+  name: 'python-data-analysis',
+  config: [
+    'type' => 'cloud',
+    'networking' => [
+      'type' => 'limited',
+      'allowMCPServers' => true,
+      'allowPackageManagers' => true,
+      'allowedHosts' => ['api.example.com'],
+    ],
+    'packages' => [
+      'apt' => ['string'],
+      'cargo' => ['string'],
+      'gem' => ['string'],
+      'go' => ['string'],
+      'npm' => ['string'],
+      'pip' => ['pandas', 'numpy'],
+      'type' => 'packages',
+    ],
+  ],
+  description: 'Python environment with data-analysis packages.',
+  metadata: ['foo' => 'string'],
+  scope: 'organization',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaEnvironment);
+```
 
-Environment identifier (e.g., 'env\_...')
+#### Response (200)
 
-?string archivedAt
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "archived_at": null,
+  "config": {
+    "networking": {
+      "allow_mcp_servers": false,
+      "allow_package_managers": true,
+      "allowed_hosts": [
+        "api.example.com"
+      ],
+      "type": "limited"
+    },
+    "packages": {
+      "apt": [
+        "string"
+      ],
+      "cargo": [
+        "string"
+      ],
+      "gem": [
+        "string"
+      ],
+      "go": [
+        "string"
+      ],
+      "npm": [
+        "string"
+      ],
+      "pip": [
+        "pandas",
+        "numpy"
+      ],
+      "type": "packages"
+    },
+    "type": "cloud"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Python environment with data-analysis packages.",
+  "metadata": {},
+  "name": "python-data-analysis",
+  "type": "environment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
+}
+```
 
-RFC 3339 timestamp when environment was archived, or null if not archived
+## List Environments
 
-Config config
+`$client->beta->environments->list(?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<BetaEnvironment>`
 
-Environment configuration (either Anthropic Cloud or self-hosted)
+**GET** `/v1/environments`
 
-string createdAt
+List environments with pagination support.
 
-RFC 3339 timestamp when environment was created
+### Parameters
 
-string description
+- `includeArchived?:optional bool`
 
-User-provided description for the environment
+  Include archived environments in the response
 
-array<string,string> metadata
+  default: false
 
-User-provided metadata key-value pairs
+- `limit?:optional int`
 
-string name
+  Maximum number of environments to return
 
-Human-readable name for the environment
+  default: 20
 
-"environment" type
+- `page?:optional string`
 
-The type of object (always 'environment')
+  Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
 
-string updatedAt
+- `betas?:optional list<AnthropicBeta>`
 
-RFC 3339 timestamp when environment was last updated
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaEnvironment`
+
+  - `string id`
+
+    Environment identifier (e.g., 'env_...')
+
+  - `?string archivedAt`
+
+    RFC 3339 timestamp when environment was archived, or null if not archived
+
+  - `Config config`
+
+    Environment configuration (either Anthropic Cloud or self-hosted)
+
+  - `string createdAt`
+
+    RFC 3339 timestamp when environment was created
+
+  - `?string description`
+
+    User-provided description for the environment; null when unset
+
+  - `array<string,string> metadata`
+
+    User-provided metadata key-value pairs
+
+  - `string name`
+
+    Human-readable name for the environment
+
+  - `"environment" type`
 
-?Scope scope
+    The type of object (always 'environment')
 
-The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+  - `string updatedAt`
 
-
+    RFC 3339 timestamp when environment was last updated
 
-[BetaEnvironmentDeleteResponse](api/beta/environments.md)
+  - `?Scope scope`
 
-string id
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-Environment identifier
+### Example
 
-"environment\_deleted" type
+```php
+<?php
 
-The type of response
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-[BetaLimitedNetwork](api/beta/environments.md)
+$page = $client->beta->environments->list(
+  includeArchived: true,
+  limit: 1,
+  page: 'page',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-bool allowMCPServers
+var_dump($page);
+```
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+#### Response (200)
 
-bool allowPackageManagers
+```json
+{
+  "data": [
+    {
+      "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+      "archived_at": null,
+      "config": {
+        "networking": {
+          "allow_mcp_servers": false,
+          "allow_package_managers": true,
+          "allowed_hosts": [
+            "api.example.com"
+          ],
+          "type": "limited"
+        },
+        "packages": {
+          "apt": [
+            "string"
+          ],
+          "cargo": [
+            "string"
+          ],
+          "gem": [
+            "string"
+          ],
+          "go": [
+            "string"
+          ],
+          "npm": [
+            "string"
+          ],
+          "pip": [
+            "pandas",
+            "numpy"
+          ],
+          "type": "packages"
+        },
+        "type": "cloud"
+      },
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": "Python environment with data-analysis packages.",
+      "metadata": {},
+      "name": "python-data-analysis",
+      "type": "environment",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "scope": "organization"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+## Get Environment
 
-list<string> allowedHosts
+`$client->beta->environments->retrieve(string environmentID, ?list<AnthropicBeta> betas): BetaEnvironment`
 
-Specifies domains the container can reach.
+**GET** `/v1/environments/{environment_id}`
 
-"limited" type
+Retrieve a specific environment by ID.
 
-Network policy type
+### Parameters
 
-
+- `environmentID: string`
 
-[BetaLimitedNetworkParams](api/beta/environments.md)
+- `betas?:optional list<AnthropicBeta>`
 
-"limited" type
+  Optional header to specify the beta version(s) you want to use.
 
-Network policy type
+### Returns
 
-?bool allowMCPServers
+- `BetaEnvironment`
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+  - `string id`
 
-?bool allowPackageManagers
+    Environment identifier (e.g., 'env_...')
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+  - `?string archivedAt`
 
-?list<string> allowedHosts
+    RFC 3339 timestamp when environment was archived, or null if not archived
 
-Specifies domains the container can reach.
+  - `Config config`
 
-
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-[BetaPackages](api/beta/environments.md)
+  - `string createdAt`
 
-list<string> apt
+    RFC 3339 timestamp when environment was created
 
-Ubuntu/Debian packages to install
+  - `?string description`
 
-list<string> cargo
+    User-provided description for the environment; null when unset
 
-Rust packages to install
+  - `array<string,string> metadata`
 
-list<string> gem
+    User-provided metadata key-value pairs
 
-Ruby packages to install
+  - `string name`
 
-list<string> go
+    Human-readable name for the environment
 
-Go packages to install
+  - `"environment" type`
 
-list<string> npm
+    The type of object (always 'environment')
 
-Node.js packages to install
+  - `string updatedAt`
 
-list<string> pip
+    RFC 3339 timestamp when environment was last updated
 
-Python packages to install
+  - `?Scope scope`
 
-?Type type
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-Package configuration type
+### Example
 
-
+```php
+<?php
 
-[BetaPackagesParams](api/beta/environments.md)
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-?list<string> apt
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-Ubuntu/Debian packages to install
+$betaEnvironment = $client->beta->environments->retrieve(
+  'env_011CZkZ9X2dpNyB7HsEFoRfW',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-?list<string> cargo
+var_dump($betaEnvironment);
+```
 
-Rust packages to install
+#### Response (200)
 
-?list<string> gem
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "archived_at": null,
+  "config": {
+    "networking": {
+      "allow_mcp_servers": false,
+      "allow_package_managers": true,
+      "allowed_hosts": [
+        "api.example.com"
+      ],
+      "type": "limited"
+    },
+    "packages": {
+      "apt": [
+        "string"
+      ],
+      "cargo": [
+        "string"
+      ],
+      "gem": [
+        "string"
+      ],
+      "go": [
+        "string"
+      ],
+      "npm": [
+        "string"
+      ],
+      "pip": [
+        "pandas",
+        "numpy"
+      ],
+      "type": "packages"
+    },
+    "type": "cloud"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Python environment with data-analysis packages.",
+  "metadata": {},
+  "name": "python-data-analysis",
+  "type": "environment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
+}
+```
 
-Ruby packages to install
+## Update Environment
 
-?list<string> go
+`$client->beta->environments->update(string environmentID, ?Config config, ?string description, ?array<string,string> metadata, ?string name, ?Scope scope, ?list<AnthropicBeta> betas): BetaEnvironment`
 
-Go packages to install
+**POST** `/v1/environments/{environment_id}`
 
-?list<string> npm
+Update an existing environment's configuration.
 
-Node.js packages to install
+### Parameters
 
-?list<string> pip
+- `environmentID: string`
 
-Python packages to install
+- `config?:optional Config`
 
-?Type type
+  Updated environment configuration
 
-Package configuration type
+- `description?:optional string`
 
-
+  Updated description of the environment. Omit to preserve; null clears to null; an empty string is stored as an empty string.
 
-[BetaSelfHostedConfig](api/beta/environments.md)
+- `metadata?:optional array<string,string>`
 
-"self\_hosted" type
+  User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
 
-Environment type
+- `name?:optional string`
 
-
+  Updated name for the environment
 
-[BetaSelfHostedConfigParams](api/beta/environments.md)
+- `scope?:optional Scope`
 
-"self\_hosted" type
+  The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
 
-Environment type
+- `betas?:optional list<AnthropicBeta>`
 
-
+  Optional header to specify the beta version(s) you want to use.
 
-[BetaUnrestrictedNetwork](api/beta/environments.md)
+### Returns
 
-"unrestricted" type
+- `BetaEnvironment`
 
-Network policy type
+  - `string id`
 
-#### EnvironmentsWork
+    Environment identifier (e.g., 'env_...')
 
-##### [Get Work Item](api/beta/environments/work/retrieve.md)
+  - `?string archivedAt`
 
-$client->beta->environments->work->retrieve(string workID, string environmentID, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta/environments/work.md)
+    RFC 3339 timestamp when environment was archived, or null if not archived
 
-GET/v1/environments/{environment\_id}/work/{work\_id}
+  - `Config config`
 
-##### [Poll for Work](api/beta/environments/work/poll.md)
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-$client->beta->environments->work->poll(string environmentID, ?int blockMs, ?int reclaimOlderThanMs, ?list<AnthropicBeta> betas, ?string anthropicWorkerID): [SelfHostedWork](api/beta/environments/work.md)
+  - `string createdAt`
 
-GET/v1/environments/{environment\_id}/work/poll
+    RFC 3339 timestamp when environment was created
 
-##### [Acknowledge Work](api/beta/environments/work/ack.md)
+  - `?string description`
 
-$client->beta->environments->work->ack(string workID, string environmentID, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta/environments/work.md)
+    User-provided description for the environment; null when unset
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/ack
+  - `array<string,string> metadata`
 
-##### [Record Heartbeat](api/beta/environments/work/heartbeat.md)
+    User-provided metadata key-value pairs
 
-$client->beta->environments->work->heartbeat(string workID, string environmentID, ?int desiredTTLSeconds, ?string expectedLastHeartbeat, ?list<AnthropicBeta> betas): [SelfHostedWorkHeartbeatResponse](api/beta/environments/work.md)
+  - `string name`
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
+    Human-readable name for the environment
 
-##### [Stop Work](api/beta/environments/work/stop.md)
+  - `"environment" type`
 
-$client->beta->environments->work->stop(string workID, string environmentID, ?bool force, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta/environments/work.md)
+    The type of object (always 'environment')
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/stop
+  - `string updatedAt`
 
-##### [List Work Items](api/beta/environments/work/list.md)
+    RFC 3339 timestamp when environment was last updated
 
-$client->beta->environments->work->list(string environmentID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[SelfHostedWork](api/beta/environments/work.md)>
+  - `?Scope scope`
 
-GET/v1/environments/{environment\_id}/work
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-##### [Update Work Item](api/beta/environments/work/update.md)
+### Example
 
-$client->beta->environments->work->update(string workID, string environmentID, array<string,string> metadata, ?list<AnthropicBeta> betas): [SelfHostedWork](api/beta/environments/work.md)
+```php
+<?php
 
-POST/v1/environments/{environment\_id}/work/{work\_id}
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-##### [Get Queue Statistics](api/beta/environments/work/stats.md)
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-$client->beta->environments->work->stats(string environmentID, ?list<AnthropicBeta> betas): [SelfHostedWorkQueueStats](api/beta/environments/work.md)
+$betaEnvironment = $client->beta->environments->update(
+  'env_011CZkZ9X2dpNyB7HsEFoRfW',
+  config: [
+    'type' => 'cloud',
+    'networking' => [
+      'type' => 'limited',
+      'allowMCPServers' => true,
+      'allowPackageManagers' => true,
+      'allowedHosts' => ['api.example.com'],
+    ],
+    'packages' => [
+      'apt' => ['string'],
+      'cargo' => ['string'],
+      'gem' => ['string'],
+      'go' => ['string'],
+      'npm' => ['string'],
+      'pip' => ['pandas', 'numpy'],
+      'type' => 'packages',
+    ],
+  ],
+  description: 'Python environment with data-analysis packages.',
+  metadata: ['foo' => 'string'],
+  name: 'x',
+  scope: 'organization',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-GET/v1/environments/{environment\_id}/work/stats
+var_dump($betaEnvironment);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "archived_at": null,
+  "config": {
+    "networking": {
+      "allow_mcp_servers": false,
+      "allow_package_managers": true,
+      "allowed_hosts": [
+        "api.example.com"
+      ],
+      "type": "limited"
+    },
+    "packages": {
+      "apt": [
+        "string"
+      ],
+      "cargo": [
+        "string"
+      ],
+      "gem": [
+        "string"
+      ],
+      "go": [
+        "string"
+      ],
+      "npm": [
+        "string"
+      ],
+      "pip": [
+        "pandas",
+        "numpy"
+      ],
+      "type": "packages"
+    },
+    "type": "cloud"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Python environment with data-analysis packages.",
+  "metadata": {},
+  "name": "python-data-analysis",
+  "type": "environment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
+}
+```
+
+## Delete Environment
+
+`$client->beta->environments->delete(string environmentID, ?list<AnthropicBeta> betas): BetaEnvironmentDeleteResponse`
+
+**DELETE** `/v1/environments/{environment_id}`
+
+Delete an environment by ID. Returns a confirmation of the deletion.
+
+### Parameters
+
+- `environmentID: string`
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaEnvironmentDeleteResponse`
+
+  - `string id`
+
+    Environment identifier
+
+  - `Type type`
+
+    The type of response
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaEnvironmentDeleteResponse = $client->beta->environments->delete(
+  'env_011CZkZ9X2dpNyB7HsEFoRfW',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaEnvironmentDeleteResponse);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "type": "environment_deleted"
+}
+```
+
+## Archive Environment
+
+`$client->beta->environments->archive(string environmentID, ?list<AnthropicBeta> betas): BetaEnvironment`
+
+**POST** `/v1/environments/{environment_id}/archive`
+
+Archive an environment by ID. Archived environments cannot be used to create new sessions.
+
+### Parameters
+
+- `environmentID: string`
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaEnvironment`
+
+  - `string id`
+
+    Environment identifier (e.g., 'env_...')
+
+  - `?string archivedAt`
+
+    RFC 3339 timestamp when environment was archived, or null if not archived
+
+  - `Config config`
+
+    Environment configuration (either Anthropic Cloud or self-hosted)
+
+  - `string createdAt`
+
+    RFC 3339 timestamp when environment was created
+
+  - `?string description`
+
+    User-provided description for the environment; null when unset
+
+  - `array<string,string> metadata`
+
+    User-provided metadata key-value pairs
+
+  - `string name`
+
+    Human-readable name for the environment
+
+  - `"environment" type`
+
+    The type of object (always 'environment')
+
+  - `string updatedAt`
+
+    RFC 3339 timestamp when environment was last updated
+
+  - `?Scope scope`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaEnvironment = $client->beta->environments->archive(
+  'env_011CZkZ9X2dpNyB7HsEFoRfW',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaEnvironment);
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "archived_at": null,
+  "config": {
+    "networking": {
+      "allow_mcp_servers": false,
+      "allow_package_managers": true,
+      "allowed_hosts": [
+        "api.example.com"
+      ],
+      "type": "limited"
+    },
+    "packages": {
+      "apt": [
+        "string"
+      ],
+      "cargo": [
+        "string"
+      ],
+      "gem": [
+        "string"
+      ],
+      "go": [
+        "string"
+      ],
+      "npm": [
+        "string"
+      ],
+      "pip": [
+        "pandas",
+        "numpy"
+      ],
+      "type": "packages"
+    },
+    "type": "cloud"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Python environment with data-analysis packages.",
+  "metadata": {},
+  "name": "python-data-analysis",
+  "type": "environment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
+}
+```
+
+## Domain types
+
+### Beta Cloud Config
+
+- `BetaCloudConfig`
+
+  - `Networking networking`
+
+    Network configuration policy.
+
+  - `BetaPackages packages`
+
+    Package manager configuration.
+
+  - `"cloud" type`
+
+    Environment type
+
+### Beta Cloud Config Params
+
+- `BetaCloudConfigParams`
+
+  - `"cloud" type`
+
+    Environment type
+
+  - `?Networking networking`
+
+    Network configuration policy. Omit on update to preserve the existing value.
+
+  - `?BetaPackagesParams packages`
+
+    Specify packages (and optionally their versions) available in this environment.
+
+    When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+    Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
+
+### Beta Environment
+
+- `BetaEnvironment`
+
+  - `string id`
+
+    Environment identifier (e.g., 'env_...')
+
+  - `?string archivedAt`
+
+    RFC 3339 timestamp when environment was archived, or null if not archived
+
+  - `Config config`
+
+    Environment configuration (either Anthropic Cloud or self-hosted)
+
+  - `string createdAt`
+
+    RFC 3339 timestamp when environment was created
+
+  - `?string description`
+
+    User-provided description for the environment; null when unset
+
+  - `array<string,string> metadata`
+
+    User-provided metadata key-value pairs
+
+  - `string name`
+
+    Human-readable name for the environment
+
+  - `"environment" type`
+
+    The type of object (always 'environment')
+
+  - `string updatedAt`
+
+    RFC 3339 timestamp when environment was last updated
+
+  - `?Scope scope`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+### Beta Environment Delete Response
+
+- `BetaEnvironmentDeleteResponse`
+
+  - `string id`
+
+    Environment identifier
+
+  - `Type type`
+
+    The type of response
+
+### Beta Limited Network
+
+- `BetaLimitedNetwork`
+
+  - `bool allowMCPServers`
+
+    Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+  - `bool allowPackageManagers`
+
+    Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+  - `list<string> allowedHosts`
+
+    Specifies domains the container can reach.
+
+  - `"limited" type`
+
+    Network policy type
+
+### Beta Limited Network Params
+
+- `BetaLimitedNetworkParams`
+
+  - `"limited" type`
+
+    Network policy type
+
+  - `?bool allowMCPServers`
+
+    Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+  - `?bool allowPackageManagers`
+
+    Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
+
+  - `?list<string> allowedHosts`
+
+    Specifies domains the container can reach.
+
+### Beta Packages
+
+- `BetaPackages`
+
+  - `list<string> apt`
+
+    Ubuntu/Debian packages to install
+
+  - `list<string> cargo`
+
+    Rust packages to install
+
+  - `list<string> gem`
+
+    Ruby packages to install
+
+  - `list<string> go`
+
+    Go packages to install
+
+  - `list<string> npm`
+
+    Node.js packages to install
+
+  - `list<string> pip`
+
+    Python packages to install
+
+  - `?Type type`
+
+    Package configuration type
+
+### Beta Packages Params
+
+- `BetaPackagesParams`
+
+  - `?list<string> apt`
+
+    Ubuntu/Debian packages to install
+
+  - `?list<string> cargo`
+
+    Rust packages to install
+
+  - `?list<string> gem`
+
+    Ruby packages to install
+
+  - `?list<string> go`
+
+    Go packages to install
+
+  - `?list<string> npm`
+
+    Node.js packages to install
+
+  - `?list<string> pip`
+
+    Python packages to install
+
+  - `?Type type`
+
+    Package configuration type
+
+### Beta Self Hosted Config
+
+- `BetaSelfHostedConfig`
+
+  - `"self_hosted" type`
+
+    Environment type
+
+### Beta Self Hosted Config Params
+
+- `BetaSelfHostedConfigParams`
+
+  - `"self_hosted" type`
+
+    Environment type
+
+### Beta Unrestricted Network
+
+- `BetaUnrestrictedNetwork`
+
+  - `"unrestricted" type`
+
+    Network policy type
+
+## Environments › Work
+
+### Get Work Item
+
+`$client->beta->environments->work->retrieve(string workID, string environmentID, ?list<AnthropicBeta> betas): SelfHostedWork`
+
+**GET** `/v1/environments/{environment_id}/work/{work_id}`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Retrieve detailed information about a specific work item.
+
+#### Parameters
+
+- `environmentID: string`
+
+- `workID: string`
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `SelfHostedWork`
+
+  - `string id`
+
+    Work identifier (e.g., 'work_...')
+
+  - `?string acknowledgedAt`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `string createdAt`
+
+    RFC 3339 timestamp when work was created
+
+  - `SessionWorkData data`
+
+    The actual work to be performed
+
+  - `string environmentID`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `?string latestHeartbeatAt`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `array<string,string> metadata`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `?string secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `?string startedAt`
+
+    RFC 3339 timestamp when work execution started
+
+  - `State state`
+
+    Current state of the work item
+
+  - `?string stopRequestedAt`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `?string stoppedAt`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `"work" type`
+
+    The type of object (always 'work')
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaSelfHostedWork = $client->beta->environments->work->retrieve(
+  'work_id',
+  environmentID: 'env_011CZkZ9X2dpNyB7HsEFoRfW',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaSelfHostedWork);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+### Poll for Work
+
+`$client->beta->environments->work->poll(string environmentID, ?int blockMs, ?int reclaimOlderThanMs, ?list<AnthropicBeta> betas, ?string anthropicWorkerID): SelfHostedWork`
+
+**GET** `/v1/environments/{environment_id}/work/poll`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Long poll for work items in the queue.
+
+#### Parameters
+
+- `environmentID: string`
+
+- `blockMs?:optional int`
+
+  How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
+
+- `reclaimOlderThanMs?:optional int`
+
+  Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+- `anthropicWorkerID?:optional string`
+
+  Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
+
+#### Returns
+
+- `SelfHostedWork`
+
+  - `string id`
+
+    Work identifier (e.g., 'work_...')
+
+  - `?string acknowledgedAt`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `string createdAt`
+
+    RFC 3339 timestamp when work was created
+
+  - `SessionWorkData data`
+
+    The actual work to be performed
+
+  - `string environmentID`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `?string latestHeartbeatAt`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `array<string,string> metadata`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `?string secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `?string startedAt`
+
+    RFC 3339 timestamp when work execution started
+
+  - `State state`
+
+    Current state of the work item
+
+  - `?string stopRequestedAt`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `?string stoppedAt`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `"work" type`
+
+    The type of object (always 'work')
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaSelfHostedWork = $client->beta->environments->work->poll(
+  'env_011CZkZ9X2dpNyB7HsEFoRfW',
+  blockMs: 1,
+  reclaimOlderThanMs: 1,
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  anthropicWorkerID: 'Anthropic-Worker-ID',
+);
+
+var_dump($betaSelfHostedWork);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+### Acknowledge Work
+
+`$client->beta->environments->work->ack(string workID, string environmentID, ?list<AnthropicBeta> betas): SelfHostedWork`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}/ack`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting' and removing it from the queue.
+
+#### Parameters
+
+- `environmentID: string`
+
+- `workID: string`
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `SelfHostedWork`
+
+  - `string id`
+
+    Work identifier (e.g., 'work_...')
+
+  - `?string acknowledgedAt`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `string createdAt`
+
+    RFC 3339 timestamp when work was created
+
+  - `SessionWorkData data`
+
+    The actual work to be performed
+
+  - `string environmentID`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `?string latestHeartbeatAt`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `array<string,string> metadata`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `?string secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `?string startedAt`
+
+    RFC 3339 timestamp when work execution started
+
+  - `State state`
+
+    Current state of the work item
+
+  - `?string stopRequestedAt`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `?string stoppedAt`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `"work" type`
+
+    The type of object (always 'work')
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaSelfHostedWork = $client->beta->environments->work->ack(
+  'work_id',
+  environmentID: 'env_011CZkZ9X2dpNyB7HsEFoRfW',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaSelfHostedWork);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+### Record Heartbeat
+
+`$client->beta->environments->work->heartbeat(string workID, string environmentID, ?int desiredTTLSeconds, ?string expectedLastHeartbeat, ?list<AnthropicBeta> betas): SelfHostedWorkHeartbeatResponse`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Record a heartbeat for a work item to maintain the lease.
+
+#### Parameters
+
+- `environmentID: string`
+
+- `workID: string`
+
+- `desiredTTLSeconds?:optional int`
+
+  Desired TTL in seconds
+
+- `expectedLastHeartbeat?:optional string`
+
+  Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `SelfHostedWorkHeartbeatResponse`
+
+  - `string lastHeartbeat`
+
+    RFC 3339 timestamp of the actual heartbeat from DB
+
+  - `bool leaseExtended`
+
+    Whether the heartbeat succeeded in extending the lease
+
+  - `State state`
+
+    Current state of the work item (active/stopping/stopped)
+
+  - `int ttlSeconds`
+
+    Effective TTL applied to the lease
+
+  - `"work_heartbeat" type`
+
+    The type of response
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaSelfHostedWorkHeartbeatResponse = $client
+  ->beta
+  ->environments
+  ->work
+  ->heartbeat(
+  'work_id',
+  environmentID: 'env_011CZkZ9X2dpNyB7HsEFoRfW',
+  desiredTTLSeconds: 0,
+  expectedLastHeartbeat: 'expected_last_heartbeat',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaSelfHostedWorkHeartbeatResponse);
+```
+
+##### Response (200)
+
+```json
+{
+  "last_heartbeat": "last_heartbeat",
+  "lease_extended": true,
+  "state": "queued",
+  "ttl_seconds": 0,
+  "type": "work_heartbeat"
+}
+```
+
+### Stop Work
+
+`$client->beta->environments->work->stop(string workID, string environmentID, ?bool force, ?list<AnthropicBeta> betas): SelfHostedWork`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}/stop`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Stop a work item, initiating graceful or forced shutdown.
+
+#### Parameters
+
+- `environmentID: string`
+
+- `workID: string`
+
+- `force?:optional bool`
+
+  If true, immediately stop work without graceful shutdown
+
+  default: false
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `SelfHostedWork`
+
+  - `string id`
+
+    Work identifier (e.g., 'work_...')
+
+  - `?string acknowledgedAt`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `string createdAt`
+
+    RFC 3339 timestamp when work was created
+
+  - `SessionWorkData data`
+
+    The actual work to be performed
+
+  - `string environmentID`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `?string latestHeartbeatAt`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `array<string,string> metadata`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `?string secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `?string startedAt`
+
+    RFC 3339 timestamp when work execution started
+
+  - `State state`
+
+    Current state of the work item
+
+  - `?string stopRequestedAt`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `?string stoppedAt`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `"work" type`
+
+    The type of object (always 'work')
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaSelfHostedWork = $client->beta->environments->work->stop(
+  'work_id',
+  environmentID: 'env_011CZkZ9X2dpNyB7HsEFoRfW',
+  force: true,
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaSelfHostedWork);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+### List Work Items
+
+`$client->beta->environments->work->list(string environmentID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<SelfHostedWork>`
+
+**GET** `/v1/environments/{environment_id}/work`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+List work items in an environment.
+
+#### Parameters
+
+- `environmentID: string`
+
+- `limit?:optional int`
+
+  Maximum number of work items to return
+
+  default: 20
+
+- `page?:optional string`
+
+  Opaque cursor from previous response for pagination
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `SelfHostedWork`
+
+  - `string id`
+
+    Work identifier (e.g., 'work_...')
+
+  - `?string acknowledgedAt`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `string createdAt`
+
+    RFC 3339 timestamp when work was created
+
+  - `SessionWorkData data`
+
+    The actual work to be performed
+
+  - `string environmentID`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `?string latestHeartbeatAt`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `array<string,string> metadata`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `?string secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `?string startedAt`
+
+    RFC 3339 timestamp when work execution started
+
+  - `State state`
+
+    Current state of the work item
+
+  - `?string stopRequestedAt`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `?string stoppedAt`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `"work" type`
+
+    The type of object (always 'work')
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$page = $client->beta->environments->work->list(
+  'env_011CZkZ9X2dpNyB7HsEFoRfW',
+  limit: 1,
+  page: 'page',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($page);
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "acknowledged_at": "acknowledged_at",
+      "created_at": "created_at",
+      "data": {
+        "id": "id",
+        "type": "session"
+      },
+      "environment_id": "environment_id",
+      "latest_heartbeat_at": "latest_heartbeat_at",
+      "metadata": {
+        "foo": "string"
+      },
+      "secret": "secret",
+      "started_at": "started_at",
+      "state": "queued",
+      "stop_requested_at": "stop_requested_at",
+      "stopped_at": "stopped_at",
+      "type": "work"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+### Update Work Item
+
+`$client->beta->environments->work->update(string workID, string environmentID, array<string,string> metadata, ?list<AnthropicBeta> betas): SelfHostedWork`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Update work item metadata with merge semantics.
+
+#### Parameters
+
+- `environmentID: string`
+
+- `workID: string`
+
+- `metadata: array<string,string>`
+
+  Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `SelfHostedWork`
+
+  - `string id`
+
+    Work identifier (e.g., 'work_...')
+
+  - `?string acknowledgedAt`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `string createdAt`
+
+    RFC 3339 timestamp when work was created
+
+  - `SessionWorkData data`
+
+    The actual work to be performed
+
+  - `string environmentID`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `?string latestHeartbeatAt`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `array<string,string> metadata`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `?string secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `?string startedAt`
+
+    RFC 3339 timestamp when work execution started
+
+  - `State state`
+
+    Current state of the work item
+
+  - `?string stopRequestedAt`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `?string stoppedAt`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `"work" type`
+
+    The type of object (always 'work')
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaSelfHostedWork = $client->beta->environments->work->update(
+  'work_id',
+  environmentID: 'env_011CZkZ9X2dpNyB7HsEFoRfW',
+  metadata: ['foo' => 'string'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaSelfHostedWork);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+### Get Queue Statistics
+
+`$client->beta->environments->work->stats(string environmentID, ?list<AnthropicBeta> betas): SelfHostedWorkQueueStats`
+
+**GET** `/v1/environments/{environment_id}/work/stats`
+
+Get statistics about the work queue for an environment.
+
+#### Parameters
+
+- `environmentID: string`
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `SelfHostedWorkQueueStats`
+
+  - `int depth`
+
+    Number of work items waiting to be picked up (lag from consumer group)
+
+  - `?string oldestQueuedAt`
+
+    RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
+
+  - `int pending`
+
+    Number of work items being processed (polled but not acknowledged)
+
+  - `"work_queue_stats" type`
+
+    The type of object
+
+  - `?int workersPolling`
+
+    Number of workers that have polled for work in the last 30 seconds. Requires worker_id to be sent with poll requests.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaSelfHostedWorkQueueStats = $client->beta->environments->work->stats(
+  'env_011CZkZ9X2dpNyB7HsEFoRfW',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaSelfHostedWorkQueueStats);
+```
+
+##### Response (200)
+
+```json
+{
+  "depth": 0,
+  "oldest_queued_at": "oldest_queued_at",
+  "pending": 0,
+  "type": "work_queue_stats",
+  "workers_polling": 0
+}
+```
 
 ---
 

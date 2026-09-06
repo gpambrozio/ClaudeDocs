@@ -1,90 +1,82 @@
 # Archive Session
 
-Copy page
+`$client->beta->sessions->archive(string sessionID, ?list<AnthropicBeta> betas): BetaManagedAgentsSession`
 
-
-
-PHP
-
-# Archive Session
-
-$client->beta->sessions->archive(string sessionID, ?list<AnthropicBeta> betas): [BetaManagedAgentsSession](api/beta/sessions.md)
-
-POST/v1/sessions/{session\_id}/archive
+**POST** `/v1/sessions/{session_id}/archive`
 
 Archive Session
 
-##### ParametersExpand Collapse
+## Parameters
 
-sessionID: string
+- `sessionID: string`
 
-betas?:optional list<AnthropicBeta>
+- `betas?:optional list<AnthropicBeta>`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `BetaManagedAgentsSession`
 
-[BetaManagedAgentsSession](api/beta/sessions.md)
+  - `string id`
 
-string id
+  - `BetaManagedAgentsSessionAgent agent`
 
-[BetaManagedAgentsSessionAgent](api/beta/sessions.md) agent
+    Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+  - `?\Datetime archivedAt`
 
-?\Datetime archivedAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `?BetaManagedAgentsBudgetLimit budget`
 
-\Datetime createdAt
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-A timestamp in RFC 3339 format
+  - `\Datetime createdAt`
 
-string environmentID
+    A timestamp in RFC 3339 format
 
-array<string,string> metadata
+  - `string environmentID`
 
-list<[BetaManagedAgentsOutcomeEvaluationResource](api/beta/sessions.md)> outcomeEvaluations
+  - `array<string,string> metadata`
 
-Per-outcome evaluation state. One entry per define\_outcome event sent to the session.
+  - `list<BetaManagedAgentsOutcomeEvaluationResource> outcomeEvaluations`
 
-list<[ManagedAgentsSessionResource](api/beta/sessions/resources.md)> resources
+    Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
 
-[BetaManagedAgentsSessionStats](api/beta/sessions.md) stats
+  - `list<ManagedAgentsSessionResource> resources`
 
-Timing statistics for a session.
+  - `BetaManagedAgentsSessionStats stats`
 
-Status status
+    Timing statistics for a session.
 
-SessionStatus enum
+  - `Status status`
 
-?string title
+    SessionStatus enum
 
-Type type
+  - `?string title`
 
-\Datetime updatedAt
+  - `Type type`
 
-A timestamp in RFC 3339 format
+  - `\Datetime updatedAt`
 
-[BetaManagedAgentsSessionUsage](api/beta/sessions.md) usage
+    A timestamp in RFC 3339 format
 
-Cumulative token usage for a session across all turns.
+  - `BetaManagedAgentsSessionUsage usage`
 
-list<string> vaultIDs
+    Cumulative token usage for a session across all turns.
 
-Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+  - `list<string> vaultIDs`
 
-?string deploymentID
+    Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
-Deployment ID when the session was created from a deployment reference. Null otherwise.
+  - `?string deploymentID`
 
-Archive Session
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
 
-PHP
+## Example
 
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -92,17 +84,16 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsSession = $client->beta->sessions->archive(
-  'sesn_011CZkZAtmR3yMPDzynEDxu7', betas: ['message-batches-2024-09-24']
+  'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaManagedAgentsSession);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
   "agent": {
@@ -116,7 +107,11 @@ Response 200
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
+      "effort": {
+        "type": "low"
+      },
+      "inference_geo": "inference_geo",
       "speed": "standard"
     },
     "multiagent": {
@@ -132,7 +127,11 @@ Response 200
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
+            "effort": {
+              "type": "low"
+            },
+            "inference_geo": "inference_geo",
             "speed": "standard"
           },
           "name": "Researcher",
@@ -152,7 +151,8 @@ Response 200
                   "name": "bash",
                   "permission_policy": {
                     "type": "always_allow"
-                  }
+                  },
+                  "type": "bash"
                 }
               ],
               "default_config": {
@@ -192,7 +192,8 @@ Response 200
             "name": "bash",
             "permission_policy": {
               "type": "always_allow"
-            }
+            },
+            "type": "bash"
           }
         ],
         "default_config": {
@@ -208,6 +209,13 @@ Response 200
     "version": 1
   },
   "archived_at": null,
+  "budget": {
+    "max_list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "type": "limit"
+  },
   "created_at": "2026-03-15T10:00:00Z",
   "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
   "metadata": {},
@@ -253,185 +261,22 @@ Response 200
   "type": "session",
   "updated_at": "2026-03-15T10:00:00Z",
   "usage": {
-    "cache_creation": {
-      "ephemeral_1h_input_tokens": 0,
-      "ephemeral_5m_input_tokens": 0
-    },
-    "cache_read_input_tokens": 0,
-    "input_tokens": 0,
-    "output_tokens": 0
-  },
-  "vault_ids": [
-    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ],
-  "deployment_id": "deployment_id"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
-  "agent": {
-    "id": "agent_011CZkYpogX7uDKUyvBTophP",
-    "description": "A general-purpose starter agent.",
-    "mcp_servers": [
-      {
-        "name": "example-mcp",
-        "type": "url",
-        "url": "https://example-server.modelcontextprotocol.io/sse"
-      }
-    ],
-    "model": {
-      "id": "claude-sonnet-4-6",
-      "speed": "standard"
-    },
-    "multiagent": {
-      "agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "description": "A focused research subagent.",
-          "mcp_servers": [
-            {
-              "name": "example-mcp",
-              "type": "url",
-              "url": "https://example-server.modelcontextprotocol.io/sse"
-            }
-          ],
-          "model": {
-            "id": "claude-sonnet-4-6",
-            "speed": "standard"
-          },
-          "name": "Researcher",
-          "skills": [
-            {
-              "skill_id": "xlsx",
-              "type": "anthropic",
-              "version": "1"
-            }
-          ],
-          "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
-          "tools": [
-            {
-              "configs": [
-                {
-                  "enabled": true,
-                  "name": "bash",
-                  "permission_policy": {
-                    "type": "always_allow"
-                  }
-                }
-              ],
-              "default_config": {
-                "enabled": true,
-                "permission_policy": {
-                  "type": "always_ask"
-                }
-              },
-              "type": "agent_toolset_20260401"
-            }
-          ],
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "coordinator"
-    },
-    "name": "My First Agent",
-    "skills": [
-      {
-        "skill_id": "xlsx",
-        "type": "anthropic",
-        "version": "1"
-      },
-      {
-        "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
-        "type": "custom",
-        "version": "2"
-      }
-    ],
-    "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
-    "tools": [
-      {
-        "configs": [
-          {
-            "enabled": true,
-            "name": "bash",
-            "permission_policy": {
-              "type": "always_allow"
-            }
-          }
-        ],
-        "default_config": {
-          "enabled": true,
-          "permission_policy": {
-            "type": "always_ask"
-          }
-        },
-        "type": "agent_toolset_20260401"
-      }
-    ],
-    "type": "agent",
-    "version": 1
-  },
-  "archived_at": null,
-  "created_at": "2026-03-15T10:00:00Z",
-  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
-  "metadata": {},
-  "outcome_evaluations": [
-    {
-      "completed_at": "2026-03-15T10:02:31Z",
-      "description": "Produce a 2-page summary as summary.md",
-      "explanation": "All five sections present with inline citations.",
-      "iteration": 0,
-      "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
-      "result": "satisfied",
-      "type": "outcome_evaluation"
-    }
-  ],
-  "resources": [
-    {
-      "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
-      "created_at": "2026-03-15T10:00:00Z",
-      "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-      "mount_path": "/uploads/receipt.pdf",
-      "type": "file",
-      "updated_at": "2026-03-15T10:00:00Z"
-    },
-    {
-      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
-      "created_at": "2026-03-15T10:00:00Z",
-      "mount_path": "/workspace/example-repo",
-      "type": "github_repository",
-      "updated_at": "2026-03-15T10:00:00Z",
-      "url": "https://github.com/example-org/example-repo",
-      "checkout": {
-        "name": "main",
-        "type": "branch"
-      }
-    }
-  ],
-  "stats": {
     "active_seconds": 0,
-    "duration_seconds": 0
-  },
-  "status": "idle",
-  "title": "Order #1234 inquiry",
-  "type": "session",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "usage": {
     "cache_creation": {
       "ephemeral_1h_input_tokens": 0,
       "ephemeral_5m_input_tokens": 0
     },
     "cache_read_input_tokens": 0,
     "input_tokens": 0,
-    "output_tokens": 0
+    "list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "output_tokens": 0,
+    "server_tool_use": {
+      "web_fetch_requests": 0,
+      "web_search_requests": 3
+    }
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"

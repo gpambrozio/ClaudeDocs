@@ -1,114 +1,102 @@
 # Create Agent
 
-Copy page
+`$client->beta->agents->create(Model model, string name, ?string description, ?list<BetaManagedAgentsURLMCPServerParams> mcpServers, ?array<string,string> metadata, ?BetaManagedAgentsMultiagentParams multiagent, ?list<BetaManagedAgentsSkillParams> skills, ?string system, ?list<Tool> tools, ?list<AnthropicBeta> betas): BetaManagedAgentsAgent`
 
-
-
-PHP
-
-# Create Agent
-
-$client->beta->agents->create([Model](api/beta/agents/create.md) model, string name, ?string description, ?list<[BetaManagedAgentsURLMCPServerParams](api/beta/agents.md)> mcpServers, ?array<string,string> metadata, ?[BetaManagedAgentsMultiagentParams](api/beta/sessions.md) multiagent, ?list<[BetaManagedAgentsSkillParams](api/beta/agents.md)> skills, ?string system, ?list<Tool> tools, ?list<AnthropicBeta> betas): [BetaManagedAgentsAgent](api/beta/agents.md)
-
-POST/v1/agents
+**POST** `/v1/agents`
 
 Create Agent
 
-##### ParametersExpand Collapse
+## Parameters
 
-model: [Model](api/beta/agents/create.md)
+- `model: Model`
 
-Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
+  Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
 
-name: string
+- `name: string`
 
-Human-readable name for the agent.
+  Human-readable name for the agent.
 
-description?:optional string
+- `description?:optional string`
 
-Description of what the agent does.
+  Description of what the agent does.
 
-mcpServers?:optional list<[BetaManagedAgentsURLMCPServerParams](api/beta/agents.md)>
+- `mcpServers?:optional list<BetaManagedAgentsURLMCPServerParams>`
 
-MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](managed-agents/mcp-connector.md).
+  MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](managed-agents/mcp-connector.md).
 
-metadata?:optional array<string,string>
+- `metadata?:optional array<string,string>`
 
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+  Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-multiagent?:optional [BetaManagedAgentsMultiagentParams](api/beta/sessions.md)
+- `multiagent?:optional BetaManagedAgentsMultiagentParams`
 
-A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+  A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
-skills?:optional list<[BetaManagedAgentsSkillParams](api/beta/agents.md)>
+- `skills?:optional list<BetaManagedAgentsSkillParams>`
 
-Skills available to the agent.
+  Skills available to the agent.
 
-system?:optional string
+- `system?:optional string`
 
-System prompt for the agent.
+  System prompt for the agent.
 
-tools?:optional list<Tool>
+- `tools?:optional list<Tool>`
 
-Tool configurations available to the agent. Maximum of 128 tools across all toolsets allowed.
+  Tool configurations available to the agent. Maximum of 128 tools across all toolsets allowed.
 
-betas?:optional list<AnthropicBeta>
+- `betas?:optional list<AnthropicBeta>`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `BetaManagedAgentsAgent`
 
-[BetaManagedAgentsAgent](api/beta/agents.md)
+  - `string id`
 
-string id
+  - `?\Datetime archivedAt`
 
-?\Datetime archivedAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `\Datetime createdAt`
 
-\Datetime createdAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `?string description`
 
-?string description
+  - `list<BetaManagedAgentsMCPServerURLDefinition> mcpServers`
 
-list<[BetaManagedAgentsMCPServerURLDefinition](api/beta/agents.md)> mcpServers
+  - `array<string,string> metadata`
 
-array<string,string> metadata
+  - `BetaManagedAgentsModelConfig model`
 
-[BetaManagedAgentsModelConfig](api/beta/agents.md) model
+    Model identifier and configuration.
 
-Model identifier and configuration.
+  - `?BetaManagedAgentsMultiagent multiagent`
 
-?[BetaManagedAgentsMultiagent](api/beta/sessions.md) multiagent
+    Resolved coordinator topology with a concrete agent roster.
 
-Resolved coordinator topology with a concrete agent roster.
+  - `string name`
 
-string name
+  - `list<Skill> skills`
 
-list<Skill> skills
+  - `?string system`
 
-?string system
+  - `list<Tool> tools`
 
-list<Tool> tools
+  - `Type type`
 
-Type type
+  - `\Datetime updatedAt`
 
-\Datetime updatedAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `int version`
 
-int version
+    The agent's current version. Starts at 1 and increments when the agent is modified.
 
-The agent's current version. Starts at 1 and increments when the agent is modified.
+## Example
 
-Create Agent
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -116,7 +104,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsAgent = $client->beta->agents->create(
-  model: 'claude-sonnet-4-6',
+  model: BetaManagedAgentsModel::CLAUDE_OPUS_5,
   name: 'My First Agent',
   description: 'A general-purpose starter agent.',
   mcpServers: [
@@ -141,6 +129,7 @@ $betaManagedAgentsAgent = $client->beta->agents->create(
           'name' => 'bash',
           'enabled' => true,
           'permissionPolicy' => ['type' => 'always_allow'],
+          'type' => 'bash',
         ],
       ],
       'defaultConfig' => [
@@ -148,17 +137,15 @@ $betaManagedAgentsAgent = $client->beta->agents->create(
       ],
     ],
   ],
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaManagedAgentsAgent);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "agent_011CZkYpogX7uDKUyvBTophP",
   "archived_at": null,
@@ -175,7 +162,11 @@ Response 200
     "foo": "bar"
   },
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "claude-opus-5",
+    "effort": {
+      "type": "low"
+    },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {
@@ -210,83 +201,8 @@ Response 200
           "name": "bash",
           "permission_policy": {
             "type": "always_allow"
-          }
-        }
-      ],
-      "default_config": {
-        "enabled": true,
-        "permission_policy": {
-          "type": "always_ask"
-        }
-      },
-      "type": "agent_toolset_20260401"
-    }
-  ],
-  "type": "agent",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "version": 1
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "agent_011CZkYpogX7uDKUyvBTophP",
-  "archived_at": null,
-  "created_at": "2026-03-15T10:00:00Z",
-  "description": "A general-purpose starter agent.",
-  "mcp_servers": [
-    {
-      "name": "example-mcp",
-      "type": "url",
-      "url": "https://example-server.modelcontextprotocol.io/sse"
-    }
-  ],
-  "metadata": {
-    "foo": "bar"
-  },
-  "model": {
-    "id": "claude-sonnet-4-6",
-    "speed": "standard"
-  },
-  "multiagent": {
-    "agents": [
-      {
-        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-        "type": "agent",
-        "version": 1
-      }
-    ],
-    "type": "coordinator"
-  },
-  "name": "My First Agent",
-  "skills": [
-    {
-      "skill_id": "xlsx",
-      "type": "anthropic",
-      "version": "1"
-    },
-    {
-      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
-      "type": "custom",
-      "version": "2"
-    }
-  ],
-  "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
-  "tools": [
-    {
-      "configs": [
-        {
-          "enabled": true,
-          "name": "bash",
-          "permission_policy": {
-            "type": "always_allow"
-          }
+          },
+          "type": "bash"
         }
       ],
       "default_config": {

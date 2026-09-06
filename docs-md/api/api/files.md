@@ -1,124 +1,434 @@
 # Files
 
-Copy page
+## Upload File
 
-
+**POST** `/v1/files`
 
-cURL
+Upload File
 
-# Files
+### Body parameters (form-data)
 
-##### [Upload File](api/http/files/upload.md)
+- `file: string`
 
-POST/v1/files
+  The file to upload
 
-##### [List Files](api/http/files/list.md)
+  format: binary
 
-GET/v1/files
+- `expires_in_seconds: optional number`
 
-##### [Download File](api/http/files/download.md)
+  Seconds from upload until the file expires and its bytes become permanently unavailable. Must be between 3600 (one hour) and 7776000 (ninety days).
 
-GET/v1/files/{file\_id}/content
+  minimum: 3600, maximum: 7776000
 
-##### [Get File Metadata](api/http/files/retrieve_metadata.md)
+### Returns
 
-GET/v1/files/{file\_id}
+- `FileMetadata object`
 
-##### [Delete File](api/http/files/delete.md)
+  - `id: string`
 
-DELETE/v1/files/{file\_id}
+    Unique object identifier.
 
-##### Models
+    The format and length of IDs may change over time.
 
-
+  - `created_at: string`
 
-DeletedFile object{ id, type }
+    RFC 3339 datetime string representing when the file was created.
 
-id: string
+    format: date-time
 
-ID of the deleted file.
+  - `filename: string`
 
-
+    Original filename of the uploaded file.
 
-type: optional "file\_deleted"
+    maxLength: 500, minLength: 1
 
-Deleted object type.
+  - `mime_type: string`
 
-For file deletion, this is always `"file_deleted"`.
+    MIME type of the file.
 
-defaultfile\_deleted
+    maxLength: 255, minLength: 1
 
-
+  - `size_bytes: number`
 
-FileMetadata object{ id, created\_at, filename, 5 more }
+    Size of the file in bytes.
 
-
+    minimum: 0
 
-id: string
+  - `type: "file"`
 
-Unique object identifier.
+    Object type.
 
-The format and length of IDs may change over time.
+    For files, this is always `"file"`.
 
-
+  - `downloadable: optional boolean`
 
-created\_at: string
+    Whether the file can be downloaded.
 
-RFC 3339 datetime string representing when the file was created.
+    default: false
 
-formatdate-time
+  - `expires_at: optional string or null`
 
-
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
 
-filename: string
+    format: date-time
 
-Original filename of the uploaded file.
+### Example
 
-maxLength500
+```bash
+curl https://api.anthropic.com/v1/files \
+    -H 'Content-Type: multipart/form-data' \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -F 'file=@/path/to/file'
+```
 
-minLength1
+#### Response (200)
 
-
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
+  "type": "file",
+  "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z"
+}
+```
 
-mime\_type: string
+## List Files
 
-MIME type of the file.
+**GET** `/v1/files`
 
-maxLength255
+List Files
 
-minLength1
+### Query parameters
 
-
+- `ids: optional array of string`
 
-size\_bytes: number
+  Restrict the result set to Files whose `id` is in this list. At most 100 entries (after de-duplication). Mutually exclusive with `page` and `limit`. When supplied, the response is always a single page (`next_page` is null). IDs that do not resolve to a visible File — including deleted Files — are silently omitted.
 
-Size of the file in bytes.
+- `limit: optional number`
 
-minimum0
+  Number of items to return per page.
 
-
+  Defaults to `20`. Ranges from `1` to `1000`.
 
-type: "file"
+  default: 20, maximum: 1000, minimum: 1
 
-Object type.
+- `page: optional string`
 
-For files, this is always `"file"`.
+  Opaque page cursor returned in a prior list response's `next_page`. Prefixed `page_`.
 
-
+### Returns
 
-downloadable: optional boolean
+- `data: array of FileMetadata`
 
-Whether the file can be downloaded.
+  List of file metadata objects.
 
-defaultfalse
+  - `id: string`
 
-
+    Unique object identifier.
 
-expires\_at: optional string or null
+    The format and length of IDs may change over time.
 
-RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+  - `created_at: string`
 
-formatdate-time
+    RFC 3339 datetime string representing when the file was created.
+
+    format: date-time
+
+  - `filename: string`
+
+    Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
+
+  - `mime_type: string`
+
+    MIME type of the file.
+
+    maxLength: 255, minLength: 1
+
+  - `size_bytes: number`
+
+    Size of the file in bytes.
+
+    minimum: 0
+
+  - `type: "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
+
+  - `downloadable: optional boolean`
+
+    Whether the file can be downloaded.
+
+    default: false
+
+  - `expires_at: optional string or null`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
+
+- `next_page: optional string or null`
+
+  Opaque cursor for the next page. Supply as `?page=` to fetch the next page; null when there are no more results.
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/files \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "created_at": "2025-04-15T18:37:24.100435Z",
+      "filename": "document.pdf",
+      "mime_type": "application/pdf",
+      "size_bytes": 102400,
+      "type": "file",
+      "downloadable": false,
+      "expires_at": "2025-05-15T18:37:24.100435Z"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Download File
+
+**GET** `/v1/files/{file_id}/content`
+
+Download File
+
+### Path parameters
+
+- `file_id: string`
+
+  ID of the File.
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/files/$FILE_ID/content \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+## Get File Metadata
+
+**GET** `/v1/files/{file_id}`
+
+Get File Metadata
+
+### Path parameters
+
+- `file_id: string`
+
+  ID of the File.
+
+### Returns
+
+- `FileMetadata object`
+
+  - `id: string`
+
+    Unique object identifier.
+
+    The format and length of IDs may change over time.
+
+  - `created_at: string`
+
+    RFC 3339 datetime string representing when the file was created.
+
+    format: date-time
+
+  - `filename: string`
+
+    Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
+
+  - `mime_type: string`
+
+    MIME type of the file.
+
+    maxLength: 255, minLength: 1
+
+  - `size_bytes: number`
+
+    Size of the file in bytes.
+
+    minimum: 0
+
+  - `type: "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
+
+  - `downloadable: optional boolean`
+
+    Whether the file can be downloaded.
+
+    default: false
+
+  - `expires_at: optional string or null`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/files/$FILE_ID \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
+  "type": "file",
+  "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z"
+}
+```
+
+## Delete File
+
+**DELETE** `/v1/files/{file_id}`
+
+Delete File
+
+### Path parameters
+
+- `file_id: string`
+
+  ID of the File.
+
+### Returns
+
+- `DeletedFile object`
+
+  - `id: string`
+
+    ID of the deleted file.
+
+  - `type: optional "file_deleted"`
+
+    Deleted object type.
+
+    For file deletion, this is always `"file_deleted"`.
+
+    default: file_deleted
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/files/$FILE_ID \
+    -X DELETE \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "type": "file_deleted"
+}
+```
+
+## Domain types
+
+### Deleted File
+
+- `DeletedFile object`
+
+  - `id: string`
+
+    ID of the deleted file.
+
+  - `type: optional "file_deleted"`
+
+    Deleted object type.
+
+    For file deletion, this is always `"file_deleted"`.
+
+    default: file_deleted
+
+### File Metadata
+
+- `FileMetadata object`
+
+  - `id: string`
+
+    Unique object identifier.
+
+    The format and length of IDs may change over time.
+
+  - `created_at: string`
+
+    RFC 3339 datetime string representing when the file was created.
+
+    format: date-time
+
+  - `filename: string`
+
+    Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
+
+  - `mime_type: string`
+
+    MIME type of the file.
+
+    maxLength: 255, minLength: 1
+
+  - `size_bytes: number`
+
+    Size of the file in bytes.
+
+    minimum: 0
+
+  - `type: "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
+
+  - `downloadable: optional boolean`
+
+    Whether the file can be downloaded.
+
+    default: false
+
+  - `expires_at: optional string or null`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
 
 ---
 

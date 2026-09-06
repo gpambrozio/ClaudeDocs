@@ -1,294 +1,221 @@
 # List Skills
 
-Copy page
-
-
-
-cURL
-
-# List Skills
-
-GET/v1/skills
+**GET** `/v1/skills`
 
 List Skills
 
-##### Query parameters
+## Query parameters
 
-
+- `limit: optional number`
 
-limit: optional number
+  Number of results to return per page.
 
-Number of results to return per page.
+  Ranges from `1` to `1000`. Defaults to `20`.
 
-Ranges from `1` to `1000`. Defaults to `20`.
+  default: 20, minimum: 1, maximum: 1000
 
-default20
+- `page: optional string`
 
-minimum1
+  Pagination token for fetching a specific page of results.
 
-maximum1000
+  Pass the value from a previous response's `next_page` field to get the next page of results.
 
-
+- `source: optional string`
 
-page: optional string
+  Filter skills by source.
 
-Pagination token for fetching a specific page of results.
+  If provided, only skills from the specified source will be returned:
 
-Pass the value from a previous response's `next_page` field to get the next page of results.
+  * `"custom"`: only return user-created skills
+  * `"anthropic"`: only return Anthropic-created skills
 
-
+## Headers
 
-source: optional string
+- `"anthropic-beta": optional array of AnthropicBeta`
 
-Filter skills by source.
+  Optional header to specify the beta version(s) you want to use.
 
-If provided, only skills from the specified source will be returned:
+  - `string`
 
-- `"custom"`: only return user-created skills
-- `"anthropic"`: only return Anthropic-created skills
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
-##### Headers
+    - `"message-batches-2024-09-24"`
 
-
+    - `"prompt-caching-2024-07-31"`
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+    - `"computer-use-2024-10-22"`
 
-Optional header to specify the beta version(s) you want to use.
+    - `"computer-use-2025-01-24"`
 
-One of the following:
+    - `"pdfs-2024-09-25"`
 
-string
+    - `"token-counting-2024-11-01"`
 
-
+    - `"token-efficient-tools-2025-02-19"`
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
+    - `"output-128k-2025-02-19"`
 
-One of the following:
+    - `"files-api-2025-04-14"`
 
-"message-batches-2024-09-24"
+    - `"mcp-client-2025-04-04"`
 
-"prompt-caching-2024-07-31"
+    - `"mcp-client-2025-11-20"`
 
-"computer-use-2024-10-22"
+    - `"dev-full-thinking-2025-05-14"`
 
-"computer-use-2025-01-24"
+    - `"interleaved-thinking-2025-05-14"`
 
-"pdfs-2024-09-25"
+    - `"code-execution-2025-05-22"`
 
-"token-counting-2024-11-01"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"token-efficient-tools-2025-02-19"
+    - `"context-1m-2025-08-07"`
 
-"output-128k-2025-02-19"
+    - `"context-management-2025-06-27"`
 
-"files-api-2025-04-14"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"mcp-client-2025-04-04"
+    - `"skills-2025-10-02"`
 
-"mcp-client-2025-11-20"
+    - `"fast-mode-2026-02-01"`
 
-"dev-full-thinking-2025-05-14"
+    - `"output-300k-2026-03-24"`
 
-"interleaved-thinking-2025-05-14"
+    - `"user-profiles-2026-03-24"`
 
-"code-execution-2025-05-22"
+    - `"user-profiles-2026-08-18"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"advisor-tool-2026-03-01"`
 
-"context-1m-2025-08-07"
+    - `"managed-agents-2026-04-01"`
 
-"context-management-2025-06-27"
+    - `"cache-diagnosis-2026-04-07"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"dreaming-2026-04-21"`
 
-"skills-2025-10-02"
+    - `"thinking-token-count-2026-05-13"`
 
-"fast-mode-2026-02-01"
+    - `"server-side-fallback-2026-06-01"`
 
-"output-300k-2026-03-24"
+    - `"server-side-fallback-2026-07-01"`
 
-"user-profiles-2026-03-24"
+    - `"fallback-credit-2026-06-01"`
 
-"user-profiles-2026-08-18"
+    - `"fallback-credit-2026-07-01"`
 
-"advisor-tool-2026-03-01"
+    - `"agent-memory-2026-07-22"`
 
-"managed-agents-2026-04-01"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-"cache-diagnosis-2026-04-07"
+    - `"compact-2026-01-12"`
 
-"dreaming-2026-04-21"
+    - `"computer-use-2025-11-24"`
 
-"thinking-token-count-2026-05-13"
+    - `"mcp-tunnels-2026-06-22"`
 
-"server-side-fallback-2026-06-01"
+    - `"structured-outputs-2025-11-13"`
 
-"server-side-fallback-2026-07-01"
+    - `"task-budgets-2026-03-13"`
 
-"fallback-credit-2026-06-01"
+    - `"thinking-display-updates-2026-08-18"`
 
-"fallback-credit-2026-07-01"
+    - `"ce-user-management-2026-07-13"`
 
-"agent-memory-2026-07-22"
+    - `"mid-conversation-output-config-2026-07-01"`
 
-"mid-conversation-tool-changes-2026-07-01"
+    - `"thinking-binding-controls-2026-08-01"`
 
-"compact-2026-01-12"
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"computer-use-2025-11-24"
+## Returns
 
-"mcp-tunnels-2026-06-22"
+- `data: array of BetaSkill`
 
-"structured-outputs-2025-11-13"
+  List of skills.
 
-"task-budgets-2026-03-13"
+  - `id: string`
 
-"thinking-display-updates-2026-08-18"
+    Unique identifier for the skill.
 
-"ce-user-management-2026-07-13"
+    The format and length of IDs may change over time.
 
-"mid-conversation-output-config-2026-07-01"
+  - `created_at: string`
 
-"thinking-binding-controls-2026-08-01"
+    ISO 8601 timestamp of when the skill was created.
 
-"mid-conversation-system-clear-at-2026-08-21"
+    format: date-time
 
-##### Returns
+  - `display_name: string`
 
-
+    Human-readable, single-line label for the Skill. Maximum 255 characters.
+    Always set: derived from the SKILL.md frontmatter `name` when omitted at
+    creation. Not unique.
 
-data: array of [BetaSkill](api/http/beta/skills.md) { id, created\_at, display\_name, 4 more }
+  - `latest_version_id: string`
 
-List of skills.
+    ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
 
-
+  - `source: BetaSkillSource`
 
-id: string
+    Where the Skill comes from.
 
-Unique identifier for the skill.
+    Possible values:
 
-The format and length of IDs may change over time.
+    * `"custom"`: authored by the platform user; private to their workspace
+    * `"anthropic"`: published by Anthropic; shared and read-only
+    * `"anthropic_example"`: Anthropic-published sample Skill
+    * `"plugin"`: resolved from an installed plugin
 
-
+    - `type: "custom" or "anthropic" or "anthropic_example" or "plugin"`
 
-created\_at: string
+      Where the Skill comes from.
 
-ISO 8601 timestamp of when the skill was created.
+      Possible values:
 
-formatdate-time
+      * `"custom"`: authored by the platform user; private to their workspace
+      * `"anthropic"`: published by Anthropic; shared and read-only
+      * `"anthropic_example"`: Anthropic-published sample Skill
+      * `"plugin"`: resolved from an installed plugin
 
-display\_name: string
+      - `"custom"`
 
-Human-readable, single-line label for the Skill. Maximum 255 characters.
-Always set: derived from the SKILL.md frontmatter `name` when omitted at
-creation. Not unique.
+      - `"anthropic"`
 
-latest\_version\_id: string
+      - `"anthropic_example"`
 
-ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
+      - `"plugin"`
 
-
+  - `type: "skill"`
 
-source: [BetaSkillSource](api/http/beta/skills.md) { type }
+    Object type.
 
-Where the Skill comes from.
+    For Skills, this is always `"skill"`.
 
-Possible values:
+    default: skill
 
-- `"custom"`: authored by the platform user; private to their workspace
-- `"anthropic"`: published by Anthropic; shared and read-only
-- `"anthropic_example"`: Anthropic-published sample Skill
-- `"plugin"`: resolved from an installed plugin
+  - `updated_at: string`
 
-
+    ISO 8601 timestamp of when the skill was last updated.
 
-type: "custom" or "anthropic" or "anthropic\_example" or "plugin"
+    format: date-time
 
-Where the Skill comes from.
+- `next_page: string or null`
 
-Possible values:
+  Token for fetching the next page of results.
 
-- `"custom"`: authored by the platform user; private to their workspace
-- `"anthropic"`: published by Anthropic; shared and read-only
-- `"anthropic_example"`: Anthropic-published sample Skill
-- `"plugin"`: resolved from an installed plugin
+  If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
 
-One of the following:
+## Example
 
-"custom"
-
-"anthropic"
-
-"anthropic\_example"
-
-"plugin"
-
-
-
-type: "skill"
-
-Object type.
-
-For Skills, this is always `"skill"`.
-
-defaultskill
-
-
-
-updated\_at: string
-
-ISO 8601 timestamp of when the skill was last updated.
-
-formatdate-time
-
-
-
-next\_page: string or null
-
-Token for fetching the next page of results.
-
-If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
-
-List Skills
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/skills \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "skill_01JAbcdefghijklmnopqrstuvw",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "display_name": "display_name",
-      "latest_version_id": "latest_version_id",
-      "source": {
-        "type": "custom"
-      },
-      "type": "skill",
-      "updated_at": "2024-10-30T23:58:27.427722Z"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

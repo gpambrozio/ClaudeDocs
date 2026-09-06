@@ -1,140 +1,130 @@
 # Poll for Work
 
-Copy page
+`$ ant beta:environments:work poll`
 
-
-
-CLI
-
-# Poll for Work
-
-$ ant beta:environments:work poll
-
-GET/v1/environments/{environment\_id}/work/poll
+**GET** `/v1/environments/{environment_id}/work/poll`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Long poll for work items in the queue.
 
-##### ParametersExpand Collapse
+## Parameters
 
---environment-id: string
+- `--environment-id: string`
 
-Path param
+  Path param
 
---block-ms: optional number
+- `--block-ms: optional number`
 
-Query param: How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
+  Query param: How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
 
---reclaim-older-than-ms: optional number
+  minimum: 1
 
-Query param: Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
+- `--reclaim-older-than-ms: optional number`
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+  Query param: Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
 
-Header param: Optional header to specify the beta version(s) you want to use.
+  minimum: 1
 
---anthropic-worker-id: optional string
+- `--beta: optional array of AnthropicBeta`
 
-Header param: Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+- `--anthropic-worker-id: optional string`
 
-
+  Header param: Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
 
-beta\_self\_hosted\_work: object { id, acknowledged\_at, created\_at, 9 more } 
+## Returns
 
-Work resource representing a unit of work in a self-hosted environment.
+- `beta_self_hosted_work: object`
 
-Work items are queued when sessions are created or when long-dormant sessions
-receive new messages. The environment worker polls for work to execute in a
-self-hosted sandbox.
+  Work resource representing a unit of work in a self-hosted environment.
 
-id: string
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
 
-Work identifier (e.g., 'work\_...')
+  - `id: string`
 
-acknowledged\_at: string
+    Work identifier (e.g., 'work_...')
 
-RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+  - `acknowledged_at: string`
 
-created\_at: string
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-RFC 3339 timestamp when work was created
+  - `created_at: string`
 
-
+    RFC 3339 timestamp when work was created
 
-data: object { id, type } 
+  - `data: object`
 
-The actual work to be performed
+    The actual work to be performed
 
-id: string
+    - `id: string`
 
-Session identifier (e.g., 'session\_...')
+      Session identifier (e.g., 'session_...')
 
-type: "session"
+    - `type: "session"`
 
-Type of work data
+      Type of work data
 
-environment\_id: string
+  - `environment_id: string`
 
-Environment identifier this work belongs to (e.g., `env_...`)
+    Environment identifier this work belongs to (e.g., `env_...`)
 
-latest\_heartbeat\_at: string
+  - `latest_heartbeat_at: string`
 
-RFC 3339 timestamp of the most recent heartbeat
+    RFC 3339 timestamp of the most recent heartbeat
 
-metadata: map[string]
+  - `metadata: map[string]`
 
-User-provided metadata key-value pairs associated with this work item
+    User-provided metadata key-value pairs associated with this work item
 
-started\_at: string
+  - `secret: string`
 
-RFC 3339 timestamp when work execution started
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
-
+  - `started_at: string`
 
-state: "queued" or "starting" or "active" or 2 more
+    RFC 3339 timestamp when work execution started
 
-Current state of the work item
+  - `state: "queued" or "starting" or "active" or 2 more`
 
-"queued"
+    Current state of the work item
 
-"starting"
+    - `"queued"`
 
-"active"
+    - `"starting"`
 
-"stopping"
+    - `"active"`
 
-"stopped"
+    - `"stopping"`
 
-stop\_requested\_at: string
+    - `"stopped"`
 
-RFC 3339 timestamp when stop was requested
+  - `stop_requested_at: string`
 
-stopped\_at: string
+    RFC 3339 timestamp when stop was requested
 
-RFC 3339 timestamp when work execution stopped
+  - `stopped_at: string`
 
-type: "work"
+    RFC 3339 timestamp when work execution stopped
 
-The type of object (always 'work')
+  - `type: "work"`
 
-Poll for Work
+    The type of object (always 'work')
 
-CLI
+## Example
 
-```shiki
+```bash
 ant beta:environments:work poll \
   --api-key my-anthropic-api-key \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "id",
   "acknowledged_at": "acknowledged_at",
@@ -148,34 +138,7 @@ Response 200
   "metadata": {
     "foo": "string"
   },
-  "started_at": "started_at",
-  "state": "queued",
-  "stop_requested_at": "stop_requested_at",
-  "stopped_at": "stopped_at",
-  "type": "work"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "id",
-  "acknowledged_at": "acknowledged_at",
-  "created_at": "created_at",
-  "data": {
-    "id": "id",
-    "type": "session"
-  },
-  "environment_id": "environment_id",
-  "latest_heartbeat_at": "latest_heartbeat_at",
-  "metadata": {
-    "foo": "string"
-  },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",

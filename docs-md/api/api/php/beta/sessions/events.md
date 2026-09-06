@@ -1,2908 +1,4526 @@
 # Events
 
-Copy page
+## List Events
 
-
+`$client->beta->sessions->events->list(string sessionID, ?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?int limit, ?Order order, ?string page, ?list<string> types, ?list<AnthropicBeta> betas): PageCursor<ManagedAgentsSessionEvent>`
 
-PHP
+**GET** `/v1/sessions/{session_id}/events`
 
-# Events
+List Events
 
-##### [List Events](api/beta/sessions/events/list.md)
+### Parameters
 
-$client->beta->sessions->events->list(string sessionID, ?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?int limit, ?[Order](api/beta/sessions/events/list.md) order, ?string page, ?list<string> types, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsSessionEvent](api/beta/sessions/events.md)>
+- `sessionID: string`
 
-GET/v1/sessions/{session\_id}/events
+- `createdAtGt?:optional \Datetime`
 
-##### [Send Events](api/beta/sessions/events/send.md)
+  Return events created after this time (exclusive). Compared against the event's `processed_at` value.
 
-$client->beta->sessions->events->send(string sessionID, list<[ManagedAgentsEventParams](api/beta/sessions/events.md)> events, ?list<AnthropicBeta> betas): [ManagedAgentsSendSessionEvents](api/beta/sessions/events.md)
+- `createdAtGte?:optional \Datetime`
 
-POST/v1/sessions/{session\_id}/events
+  Return events created at or after this time (inclusive). Compared against the event's `processed_at` value.
 
-##### [Stream Events](api/beta/sessions/events/stream.md)
+- `createdAtLt?:optional \Datetime`
 
-$client->beta->sessions->events->stream(string sessionID, ?list<[BetaManagedAgentsDeltaType](api/beta/sessions.md)> eventDeltas, ?list<AnthropicBeta> betas): [ManagedAgentsStreamSessionEvents](api/beta/sessions/events.md)
+  Return events created before this time (exclusive). Compared against the event's `processed_at` value.
 
-GET/v1/sessions/{session\_id}/events/stream
+- `createdAtLte?:optional \Datetime`
 
-##### ModelsExpand Collapse
+  Return events created at or before this time (inclusive). Compared against the event's `processed_at` value.
 
-
+- `limit?:optional int`
 
-[ManagedAgentsAgentCustomToolUseEvent](api/beta/sessions/events.md)
+  Query parameter for limit
 
-string id
+- `order?:optional Order`
 
-Unique identifier for this event.
+  Sort direction for results, ordered by the event's `processed_at`. Defaults to `asc` (chronological).
 
-array<string,mixed> input
+- `page?:optional string`
 
-Input parameters for the tool call.
+  Opaque pagination cursor from a previous response's `next_page`.
 
-string name
+- `types?:optional list<string>`
 
-Name of the custom tool being called.
+  Filter by event type. Values match the `type` field on returned events (for example, `user.message` or `agent.tool_use`). Omit to return all event types.
 
-\Datetime processedAt
+- `betas?:optional list<AnthropicBeta>`
 
-A timestamp in RFC 3339 format
+  Optional header to specify the beta version(s) you want to use.
 
-Type type
+### Returns
 
-?string sessionThreadID
+- `ManagedAgentsSessionEvent`
 
-When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+  - `ManagedAgentsUserMessageEvent`
 
-
+    - `string id`
 
-[ManagedAgentsAgentMCPToolResultEvent](api/beta/sessions/events.md)
+      Unique identifier for this event.
 
-string id
+    - `list<Content> content`
 
-Unique identifier for this event.
+      Array of content blocks comprising the user message.
 
-string mcpToolUseID
+    - `Type type`
 
-The id of the `agent.mcp_tool_use` event this result corresponds to.
+    - `?\Datetime processedAt`
 
-\Datetime processedAt
+      A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `ManagedAgentsUserInterruptEvent`
 
-Type type
+    - `string id`
 
-?list<Content> content
+      Unique identifier for this event.
 
-The result content returned by the tool.
+    - `Type type`
 
-?bool isError
+    - `?\Datetime processedAt`
 
-Whether the tool execution resulted in an error.
+      A timestamp in RFC 3339 format
 
-
+    - `?string sessionThreadID`
 
-[ManagedAgentsAgentMCPToolUseEvent](api/beta/sessions/events.md)
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-string id
+  - `ManagedAgentsUserToolConfirmationEvent`
 
-Unique identifier for this event.
+    - `string id`
 
-array<string,mixed> input
+      Unique identifier for this event.
 
-Input parameters for the tool call.
+    - `Result result`
 
-string mcpServerName
+      UserToolConfirmationResult enum
 
-Name of the MCP server providing the tool.
+    - `string toolUseID`
 
-string name
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Name of the MCP tool being used.
+    - `Type type`
 
-\Datetime processedAt
+    - `?string denyMessage`
 
-A timestamp in RFC 3339 format
+      Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-Type type
+    - `?\Datetime processedAt`
 
-?EvaluatedPermission evaluatedPermission
+      A timestamp in RFC 3339 format
 
-AgentEvaluatedPermission enum
+    - `?string sessionThreadID`
 
-?string sessionThreadID
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+  - `ManagedAgentsUserCustomToolResultEvent`
 
-
+    - `string id`
 
-[ManagedAgentsAgentMessageEvent](api/beta/sessions/events.md)
+      Unique identifier for this event.
 
-string id
+    - `string customToolUseID`
 
-Unique identifier for this event.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-list<[ManagedAgentsTextBlock](api/beta/sessions/events.md)> content
+    - `Type type`
 
-Array of text blocks comprising the agent response.
+    - `?list<Content> content`
 
-\Datetime processedAt
+      The result content returned by the tool.
 
-A timestamp in RFC 3339 format
+    - `?bool isError`
 
-Type type
+      Whether the tool execution resulted in an error.
 
-
+    - `?\Datetime processedAt`
 
-[ManagedAgentsAgentThinkingEvent](api/beta/sessions/events.md)
+      A timestamp in RFC 3339 format
 
-string id
+    - `?string sessionThreadID`
 
-Unique identifier for this event.
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-\Datetime processedAt
+  - `ManagedAgentsAgentCustomToolUseEvent`
 
-A timestamp in RFC 3339 format
+    - `string id`
 
-Type type
+      Unique identifier for this event.
 
-
+    - `array<string,mixed> input`
 
-[ManagedAgentsAgentThreadContextCompactedEvent](api/beta/sessions/events.md)
+      Input parameters for the tool call.
 
-string id
+    - `string name`
 
-Unique identifier for this event.
+      Name of the custom tool being called.
 
-\Datetime processedAt
+    - `\Datetime processedAt`
 
-A timestamp in RFC 3339 format
+      A timestamp in RFC 3339 format
 
-Type type
+    - `Type type`
 
-
+    - `?string sessionThreadID`
 
-[ManagedAgentsAgentThreadMessageReceivedEvent](api/beta/sessions/events.md)
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-string id
+  - `ManagedAgentsAgentMessageEvent`
 
-Unique identifier for this event.
+    - `string id`
 
-list<Content> content
+      Unique identifier for this event.
 
-Message content blocks.
+    - `list<Content> content`
 
-string fromSessionThreadID
+      Array of text blocks comprising the agent response.
 
-Public `sthr_` ID of the thread that sent the message.
+    - `\Datetime processedAt`
 
-\Datetime processedAt
+      A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+    - `Type type`
 
-Type type
+  - `ManagedAgentsAgentThinkingEvent`
 
-?string fromAgentName
+    - `string id`
 
-Name of the callable agent this message came from. Absent when received from the primary agent.
+      Unique identifier for this event.
 
-
+    - `\Datetime processedAt`
 
-[ManagedAgentsAgentThreadMessageSentEvent](api/beta/sessions/events.md)
+      A timestamp in RFC 3339 format
 
-string id
+    - `Type type`
 
-Unique identifier for this event.
+  - `ManagedAgentsAgentMCPToolUseEvent`
 
-list<Content> content
+    - `string id`
 
-Message content blocks.
+      Unique identifier for this event.
 
-\Datetime processedAt
+    - `array<string,mixed> input`
 
-A timestamp in RFC 3339 format
+      Input parameters for the tool call.
 
-string toSessionThreadID
+    - `string mcpServerName`
 
-Public `sthr_` ID of the thread the message was sent to.
+      Name of the MCP server providing the tool.
 
-Type type
+    - `string name`
 
-?string toAgentName
+      Name of the MCP tool being used.
 
-Name of the callable agent this message was sent to. Absent when sent to the primary agent.
+    - `\Datetime processedAt`
 
-
+      A timestamp in RFC 3339 format
 
-[ManagedAgentsAgentToolResultEvent](api/beta/sessions/events.md)
+    - `Type type`
 
-string id
+    - `?EvaluatedPermission evaluatedPermission`
 
-Unique identifier for this event.
+      AgentEvaluatedPermission enum
 
-\Datetime processedAt
+    - `?string sessionThreadID`
 
-A timestamp in RFC 3339 format
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-string toolUseID
+  - `ManagedAgentsAgentMCPToolResultEvent`
 
-The id of the `agent.tool_use` event this result corresponds to.
+    - `string id`
 
-Type type
+      Unique identifier for this event.
 
-?list<Content> content
+    - `string mcpToolUseID`
 
-The result content returned by the tool.
+      The id of the `agent.mcp_tool_use` event this result corresponds to.
 
-?bool isError
+    - `\Datetime processedAt`
 
-Whether the tool execution resulted in an error.
+      A timestamp in RFC 3339 format
 
-
+    - `Type type`
 
-[ManagedAgentsAgentToolUseEvent](api/beta/sessions/events.md)
+    - `?list<Content> content`
 
-string id
+      The result content returned by the tool.
 
-Unique identifier for this event.
+    - `?bool isError`
 
-array<string,mixed> input
+      Whether the tool execution resulted in an error.
 
-Input parameters for the tool call.
+  - `ManagedAgentsAgentToolUseEvent`
 
-string name
+    - `string id`
 
-Name of the agent tool being used.
+      Unique identifier for this event.
 
-\Datetime processedAt
+    - `array<string,mixed> input`
 
-A timestamp in RFC 3339 format
+      Input parameters for the tool call.
 
-Type type
+    - `string name`
 
-?EvaluatedPermission evaluatedPermission
+      Name of the agent tool being used.
 
-AgentEvaluatedPermission enum
+    - `\Datetime processedAt`
 
-?string sessionThreadID
+      A timestamp in RFC 3339 format
 
-When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+    - `Type type`
 
-
+    - `?EvaluatedPermission evaluatedPermission`
 
-[ManagedAgentsBase64DocumentSource](api/beta/sessions/events.md)
+      AgentEvaluatedPermission enum
 
-string data
+    - `?string sessionThreadID`
 
-Base64-encoded document data.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-string mediaType
+  - `ManagedAgentsAgentToolResultEvent`
 
-MIME type of the document (e.g., "application/pdf").
+    - `string id`
 
-Type type
+      Unique identifier for this event.
 
-
+    - `\Datetime processedAt`
 
-[ManagedAgentsBase64ImageSource](api/beta/sessions/events.md)
+      A timestamp in RFC 3339 format
 
-string data
+    - `string toolUseID`
 
-Base64-encoded image data.
+      The id of the `agent.tool_use` event this result corresponds to.
 
-string mediaType
+    - `Type type`
 
-MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+    - `?list<Content> content`
 
-Type type
+      The result content returned by the tool.
 
-
+    - `?bool isError`
 
-[ManagedAgentsBillingError](api/beta/sessions/events.md)
+      Whether the tool execution resulted in an error.
 
-string message
+  - `ManagedAgentsAgentThreadMessageReceivedEvent`
 
-Human-readable error description.
+    - `string id`
 
-RetryStatus retryStatus
+      Unique identifier for this event.
 
-What the client should do next in response to this error.
+    - `list<Content> content`
 
-Type type
+      Message content blocks.
 
-
+    - `string fromSessionThreadID`
 
-[ManagedAgentsCredentialHostUnreachableError](api/beta/sessions/events.md)
+      Public `sthr_` ID of the thread that sent the message.
 
-string credentialID
+    - `\Datetime processedAt`
 
-ID of the affected credential.
+      A timestamp in RFC 3339 format
 
-string message
+    - `Type type`
 
-Human-readable error description.
+    - `?string fromAgentName`
 
-RetryStatus retryStatus
+      Name of the callable agent this message came from. Absent when received from the primary agent.
 
-What the client should do next in response to this error.
+  - `ManagedAgentsAgentThreadMessageSentEvent`
 
-Type type
+    - `string id`
 
-string vaultID
+      Unique identifier for this event.
 
-ID of the vault containing the affected credential.
+    - `list<Content> content`
 
-
+      Message content blocks.
 
-[ManagedAgentsDocumentBlock](api/beta/sessions/events.md)
+    - `\Datetime processedAt`
 
-Source source
+      A timestamp in RFC 3339 format
 
-Union type for document source variants.
+    - `string toSessionThreadID`
 
-Type type
+      Public `sthr_` ID of the thread the message was sent to.
 
-?string context
+    - `Type type`
 
-Additional context about the document for the model.
+    - `?string toAgentName`
 
-?string title
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-The title of the document.
+  - `ManagedAgentsAgentThreadContextCompactedEvent`
 
-
+    - `string id`
 
-[ManagedAgentsEventParams](api/beta/sessions/events.md)
+      Unique identifier for this event.
 
-One of the following:
+    - `\Datetime processedAt`
 
-
+      A timestamp in RFC 3339 format
 
-[ManagedAgentsUserMessageEventParams](api/beta/sessions/events.md)
+    - `Type type`
 
-list<Content> content
+  - `ManagedAgentsSessionErrorEvent`
 
-Array of content blocks for the user message.
+    - `string id`
 
-Type type
+      Unique identifier for this event.
 
-
+    - `Error error`
 
-[ManagedAgentsUserInterruptEventParams](api/beta/sessions/events.md)
+      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Type type
+    - `\Datetime processedAt`
 
-?string sessionThreadID
+      A timestamp in RFC 3339 format
 
-If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+    - `Type type`
 
-
+  - `ManagedAgentsSessionStatusRescheduledEvent`
 
-[ManagedAgentsUserToolConfirmationEventParams](api/beta/sessions/events.md)
+    - `string id`
 
-Result result
+      Unique identifier for this event.
 
-UserToolConfirmationResult enum
+    - `\Datetime processedAt`
 
-string toolUseID
+      A timestamp in RFC 3339 format
 
-The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+    - `Type type`
 
-Type type
+  - `ManagedAgentsSessionStatusRunningEvent`
 
-?string denyMessage
+    - `string id`
 
-Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+      Unique identifier for this event.
 
-
+    - `\Datetime processedAt`
 
-[ManagedAgentsUserCustomToolResultEventParams](api/beta/sessions/events.md)
+      A timestamp in RFC 3339 format
 
-string customToolUseID
+    - `Type type`
 
-The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+  - `ManagedAgentsSessionStatusIdleEvent`
 
-Type type
+    - `string id`
 
-?list<Content> content
+      Unique identifier for this event.
 
-The result content returned by the tool.
+    - `\Datetime processedAt`
 
-?bool isError
+      A timestamp in RFC 3339 format
 
-Whether the tool execution resulted in an error.
+    - `StopReason stopReason`
 
-
+      The agent completed its turn naturally and is ready for the next user message.
 
-[ManagedAgentsUserDefineOutcomeEventParams](api/beta/sessions/events.md)
+    - `Type type`
 
-string description
+  - `ManagedAgentsSessionStatusTerminatedEvent`
 
-What the agent should produce. This is the task specification.
+    - `string id`
 
-Rubric rubric
+      Unique identifier for this event.
 
-Rubric for grading the quality of an outcome.
+    - `\Datetime processedAt`
 
-Type type
+      A timestamp in RFC 3339 format
 
-?int maxIterations
+    - `Type type`
 
-Eval→revision cycles before giving up. Default 3, max 20.
+  - `ManagedAgentsSessionThreadCreatedEvent`
 
-
+    - `string id`
 
-[ManagedAgentsUserToolResultEventParams](api/beta/sessions/events.md)
+      Unique identifier for this event.
 
-string toolUseID
+    - `string agentName`
 
-The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      Name of the callable agent the thread runs.
 
-Type type
+    - `\Datetime processedAt`
 
-?list<Content> content
+      A timestamp in RFC 3339 format
 
-The result content returned by the tool.
+    - `string sessionThreadID`
 
-?bool isError
+      Public `sthr_` ID of the newly created thread.
 
-Whether the tool execution resulted in an error.
+    - `Type type`
 
-
+  - `ManagedAgentsSpanOutcomeEvaluationStartEvent`
 
-[ManagedAgentsSystemMessageEventParams](api/beta/sessions/events.md)
+    - `string id`
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> content
+      Unique identifier for this event.
 
-System content blocks to append. Text-only.
+    - `int iteration`
 
-Type type
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
-
+    - `string outcomeID`
 
-[ManagedAgentsFileDocumentSource](api/beta/sessions/events.md)
+      The `outc_` ID of the outcome being evaluated.
 
-string fileID
+    - `\Datetime processedAt`
 
-ID of a previously uploaded file.
+      A timestamp in RFC 3339 format
 
-Type type
+    - `Type type`
 
-
+  - `ManagedAgentsSpanOutcomeEvaluationEndEvent`
 
-[ManagedAgentsFileImageSource](api/beta/sessions/events.md)
+    - `string id`
 
-string fileID
+      Unique identifier for this event.
 
-ID of a previously uploaded file.
+    - `string explanation`
 
-Type type
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
 
-
+    - `int iteration`
 
-[ManagedAgentsFileRubric](api/beta/sessions/events.md)
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
-string fileID
+    - `string outcomeEvaluationStartID`
 
-ID of the rubric file.
+      The id of the corresponding `span.outcome_evaluation_start` event.
 
-Type type
+    - `string outcomeID`
 
-
+      The `outc_` ID of the outcome being evaluated.
 
-[ManagedAgentsFileRubricParams](api/beta/sessions/events.md)
+    - `\Datetime processedAt`
 
-string fileID
+      A timestamp in RFC 3339 format
 
-ID of the rubric file.
+    - `string result`
 
-Type type
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
-
+    - `Type type`
 
-[ManagedAgentsImageBlock](api/beta/sessions/events.md)
+    - `ManagedAgentsSpanModelUsage usage`
 
-Source source
+      Token usage for a single model request.
 
-Union type for image source variants.
+  - `ManagedAgentsSpanModelRequestStartEvent`
 
-Type type
+    - `string id`
 
-
+      Unique identifier for this event.
 
-[ManagedAgentsMCPAuthenticationFailedError](api/beta/sessions/events.md)
+    - `\Datetime processedAt`
 
-string mcpServerName
+      A timestamp in RFC 3339 format
 
-Name of the MCP server that failed authentication.
+    - `Type type`
 
-string message
+  - `ManagedAgentsSpanModelRequestEndEvent`
 
-Human-readable error description.
+    - `string id`
 
-RetryStatus retryStatus
+      Unique identifier for this event.
 
-What the client should do next in response to this error.
+    - `?bool isError`
 
-Type type
+      Whether the model request resulted in an error.
 
-
+    - `string modelRequestStartID`
 
-[ManagedAgentsMCPConnectionFailedError](api/beta/sessions/events.md)
+      The id of the corresponding `span.model_request_start` event.
 
-string mcpServerName
+    - `ManagedAgentsSpanModelUsage modelUsage`
 
-Name of the MCP server that failed to connect.
+      Token usage for a single model request.
 
-string message
+    - `\Datetime processedAt`
 
-Human-readable error description.
+      A timestamp in RFC 3339 format
 
-RetryStatus retryStatus
+    - `Type type`
 
-What the client should do next in response to this error.
+  - `ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
-Type type
+    - `string id`
 
-
+      Unique identifier for this event.
 
-[ManagedAgentsModelOverloadedError](api/beta/sessions/events.md)
+    - `int iteration`
 
-string message
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
-Human-readable error description.
+    - `string outcomeID`
 
-RetryStatus retryStatus
+      The `outc_` ID of the outcome being evaluated.
 
-What the client should do next in response to this error.
+    - `\Datetime processedAt`
 
-Type type
+      A timestamp in RFC 3339 format
 
-
+    - `Type type`
 
-[ManagedAgentsModelRateLimitedError](api/beta/sessions/events.md)
+  - `ManagedAgentsUserDefineOutcomeEvent`
 
-string message
+    - `string id`
 
-Human-readable error description.
+      Unique identifier for this event.
 
-RetryStatus retryStatus
+    - `string description`
 
-What the client should do next in response to this error.
+      What the agent should produce. Copied from the input event.
 
-Type type
+    - `?int maxIterations`
 
-
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
-[ManagedAgentsModelRequestFailedError](api/beta/sessions/events.md)
+    - `string outcomeID`
 
-string message
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
 
-Human-readable error description.
+    - `\Datetime processedAt`
 
-RetryStatus retryStatus
+      A timestamp in RFC 3339 format
 
-What the client should do next in response to this error.
+    - `Rubric rubric`
 
-Type type
+      Rubric for grading the quality of an outcome.
 
-
+    - `Type type`
 
-[ManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md)
+  - `ManagedAgentsSessionDeletedEvent`
 
-string data
+    - `string id`
 
-The plain text content.
+      Unique identifier for this event.
 
-MediaType mediaType
+    - `\Datetime processedAt`
 
-MIME type of the text content. Must be "text/plain".
+      A timestamp in RFC 3339 format
 
-Type type
+    - `Type type`
 
-
+  - `ManagedAgentsSessionThreadStatusRunningEvent`
 
-[ManagedAgentsRetryStatusExhausted](api/beta/sessions/events.md)
+    - `string id`
 
-Type type
+      Unique identifier for this event.
 
-
+    - `string agentName`
 
-[ManagedAgentsRetryStatusRetrying](api/beta/sessions/events.md)
+      Name of the agent the thread runs.
 
-Type type
+    - `\Datetime processedAt`
 
-
+      A timestamp in RFC 3339 format
 
-[ManagedAgentsRetryStatusTerminal](api/beta/sessions/events.md)
+    - `string sessionThreadID`
 
-Type type
+      Public sthr_ ID of the thread that started running.
 
-
+    - `Type type`
 
-[ManagedAgentsSearchResultBlock](api/beta/sessions/events.md)
+  - `ManagedAgentsSessionThreadStatusIdleEvent`
 
-[ManagedAgentsSearchResultCitations](api/beta/sessions/events.md) citations
+    - `string id`
 
-Citation settings for a search result.
+      Unique identifier for this event.
 
-list<[ManagedAgentsSearchResultContent](api/beta/sessions/events.md)> content
+    - `string agentName`
 
-Array of text content blocks from the search result.
+      Name of the agent the thread runs.
 
-string source
+    - `\Datetime processedAt`
 
-The URL source of the search result.
+      A timestamp in RFC 3339 format
 
-string title
+    - `string sessionThreadID`
 
-The title of the search result.
+      Public sthr_ ID of the thread that went idle.
 
-Type type
+    - `StopReason stopReason`
 
-
+      The agent completed its turn naturally and is ready for the next user message.
 
-[ManagedAgentsSearchResultCitations](api/beta/sessions/events.md)
+    - `Type type`
 
-bool enabled
+  - `ManagedAgentsSessionThreadStatusTerminatedEvent`
 
-Whether citations are enabled for this search result.
+    - `string id`
 
-
+      Unique identifier for this event.
 
-[ManagedAgentsSearchResultContent](api/beta/sessions/events.md)
+    - `string agentName`
 
-string text
+      Name of the agent the thread runs.
 
-The text content.
+    - `\Datetime processedAt`
 
-Type type
+      A timestamp in RFC 3339 format
 
-
+    - `string sessionThreadID`
 
-[ManagedAgentsSendSessionEvents](api/beta/sessions/events.md)
+      Public sthr_ ID of the thread that terminated.
 
-?list<Data> data
+    - `Type type`
 
-Sent events
+  - `BetaManagedAgentsUserToolResultEvent`
 
-
+    - `string id`
 
-[ManagedAgentsSessionDeletedEvent](api/beta/sessions/events.md)
+      Unique identifier for this event.
 
-string id
+    - `string toolUseID`
 
-Unique identifier for this event.
+      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-\Datetime processedAt
+    - `Type type`
 
-A timestamp in RFC 3339 format
+    - `?list<Content> content`
 
-Type type
+      The result content returned by the tool.
 
-
+    - `?bool isError`
 
-[ManagedAgentsSessionEndTurn](api/beta/sessions/events.md)
+      Whether the tool execution resulted in an error.
 
-Type type
+    - `?\Datetime processedAt`
 
-
+      A timestamp in RFC 3339 format
 
-[ManagedAgentsSessionErrorEvent](api/beta/sessions/events.md)
+    - `?string sessionThreadID`
 
-string id
+      Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-Unique identifier for this event.
+  - `ManagedAgentsSessionThreadStatusRescheduledEvent`
 
-Error error
+    - `string id`
 
-An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+      Unique identifier for this event.
 
-\Datetime processedAt
+    - `string agentName`
 
-A timestamp in RFC 3339 format
+      Name of the agent the thread runs.
 
-Type type
+    - `\Datetime processedAt`
 
-
+      A timestamp in RFC 3339 format
 
-[ManagedAgentsSessionEvent](api/beta/sessions/events.md)
+    - `string sessionThreadID`
 
-One of the following:
+      Public sthr_ ID of the thread that is retrying.
 
-
+    - `Type type`
 
-[ManagedAgentsUserMessageEvent](api/beta/sessions/events.md)
+  - `BetaManagedAgentsSessionUpdatedEvent`
 
-string id
+    - `string id`
 
-Unique identifier for this event.
+      Unique identifier for this event.
 
-list<Content> content
+    - `\Datetime processedAt`
 
-Array of content blocks comprising the user message.
+      A timestamp in RFC 3339 format
 
-Type type
+    - `Type type`
 
-?\Datetime processedAt
+    - `?BetaManagedAgentsSessionAgent agent`
 
-A timestamp in RFC 3339 format
+      Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-
+    - `?BetaManagedAgentsBudgetLimit budget`
 
-[ManagedAgentsUserInterruptEvent](api/beta/sessions/events.md)
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-string id
+    - `?array<string,string> metadata`
 
-Unique identifier for this event.
+      The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-Type type
+    - `?string title`
 
-?\Datetime processedAt
+      The session's new title. Present only when the update changed it.
 
-A timestamp in RFC 3339 format
+  - `BetaManagedAgentsSystemMessageEvent`
 
-?string sessionThreadID
+    - `string id`
 
-If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+      Unique identifier for this event.
 
-
+    - `list<BetaManagedAgentsSystemContentBlock> content`
 
-[ManagedAgentsUserToolConfirmationEvent](api/beta/sessions/events.md)
+      System content blocks. Text-only.
 
-string id
+    - `Type type`
 
-Unique identifier for this event.
+    - `?\Datetime processedAt`
 
-Result result
+      A timestamp in RFC 3339 format
 
-UserToolConfirmationResult enum
+  - `BetaManagedAgentsSessionUsageEvent`
 
-string toolUseID
+    - `string id`
 
-The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      Unique identifier for this event.
 
-Type type
+    - `\Datetime processedAt`
 
-?string denyMessage
+      A timestamp in RFC 3339 format
 
-Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+    - `Type type`
 
-?\Datetime processedAt
+    - `ManagedAgentsSessionUsageSnapshot usage`
 
-A timestamp in RFC 3339 format
+      Point-in-time snapshot of a session's cumulative usage.
 
-?string sessionThreadID
+    - `?BetaManagedAgentsBudgetLimit budget`
 
-When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-
+### Example
 
-[ManagedAgentsUserCustomToolResultEvent](api/beta/sessions/events.md)
+```php
+<?php
 
-string id
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-Unique identifier for this event.
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-string customToolUseID
+$page = $client->beta->sessions->events->list(
+  'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  createdAtGt: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  createdAtGte: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  createdAtLt: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  createdAtLte: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  limit: 0,
+  order: 'asc',
+  page: 'page',
+  types: ['string'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+var_dump($page);
+```
 
-Type type
+#### Response (200)
 
-?list<Content> content
+```json
+{
+  "data": [
+    {
+      "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message",
+      "processed_at": "2026-03-15T10:00:00Z"
+    },
+    {
+      "id": "sevt_011CZkZHPq1jCdq5lbRTjiVnz",
+      "content": [
+        {
+          "text": "Let me look up order #1234 for you.",
+          "type": "text"
+        }
+      ],
+      "processed_at": "2026-03-15T10:00:00Z",
+      "type": "agent.message"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
 
-The result content returned by the tool.
+## Send Events
 
-?bool isError
+`$client->beta->sessions->events->send(string sessionID, list<ManagedAgentsEventParams> events, ?list<AnthropicBeta> betas): ManagedAgentsSendSessionEvents`
 
-Whether the tool execution resulted in an error.
+**POST** `/v1/sessions/{session_id}/events`
 
-?\Datetime processedAt
+Send Events
 
-A timestamp in RFC 3339 format
+### Parameters
 
-?string sessionThreadID
+- `sessionID: string`
 
-Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+- `events: list<ManagedAgentsEventParams>`
 
-
+  Events to send to the `session`.
 
-[ManagedAgentsAgentCustomToolUseEvent](api/beta/sessions/events.md)
+- `betas?:optional list<AnthropicBeta>`
 
-string id
+  Optional header to specify the beta version(s) you want to use.
 
-Unique identifier for this event.
+### Returns
 
-array<string,mixed> input
+- `ManagedAgentsSendSessionEvents`
 
-Input parameters for the tool call.
+  - `?list<Data> data`
 
-string name
+    Sent events
 
-Name of the custom tool being called.
+### Example
 
-\Datetime processedAt
+```php
+<?php
 
-A timestamp in RFC 3339 format
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-Type type
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-?string sessionThreadID
+$betaManagedAgentsSendSessionEvents = $client->beta->sessions->events->send(
+  'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  events: [
+    [
+      'content' => [['text' => 'Where is my order #1234?', 'type' => 'text']],
+      'type' => 'user.message',
+    ],
+  ],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+var_dump($betaManagedAgentsSendSessionEvents);
+```
 
-
+#### Response (200)
 
-[ManagedAgentsAgentMessageEvent](api/beta/sessions/events.md)
+```json
+{
+  "data": [
+    {
+      "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message",
+      "processed_at": "2026-03-15T10:00:00Z"
+    }
+  ]
+}
+```
 
-string id
+## Stream Events
 
-Unique identifier for this event.
+`$client->beta->sessions->events->stream(string sessionID, ?list<BetaManagedAgentsDeltaType> eventDeltas, ?list<AnthropicBeta> betas): ManagedAgentsStreamSessionEvents`
 
-list<[ManagedAgentsTextBlock](api/beta/sessions/events.md)> content
+**GET** `/v1/sessions/{session_id}/events/stream`
 
-Array of text blocks comprising the agent response.
+Stream Events
 
-\Datetime processedAt
+### Parameters
 
-A timestamp in RFC 3339 format
+- `sessionID: string`
 
-Type type
+- `eventDeltas?:optional list<BetaManagedAgentsDeltaType>`
 
-
+  When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
 
-[ManagedAgentsAgentThinkingEvent](api/beta/sessions/events.md)
+- `betas?:optional list<AnthropicBeta>`
 
-string id
+  Optional header to specify the beta version(s) you want to use.
 
-Unique identifier for this event.
+### Returns
 
-\Datetime processedAt
+- `ManagedAgentsStreamSessionEvents`
 
-A timestamp in RFC 3339 format
+  - `ManagedAgentsUserMessageEvent`
 
-Type type
+    - `string id`
 
-
+      Unique identifier for this event.
 
-[ManagedAgentsAgentMCPToolUseEvent](api/beta/sessions/events.md)
+    - `list<Content> content`
 
-string id
+      Array of content blocks comprising the user message.
 
-Unique identifier for this event.
+    - `Type type`
 
-array<string,mixed> input
+    - `?\Datetime processedAt`
 
-Input parameters for the tool call.
+      A timestamp in RFC 3339 format
 
-string mcpServerName
+  - `ManagedAgentsUserInterruptEvent`
 
-Name of the MCP server providing the tool.
+    - `string id`
 
-string name
+      Unique identifier for this event.
 
-Name of the MCP tool being used.
+    - `Type type`
 
-\Datetime processedAt
+    - `?\Datetime processedAt`
 
-A timestamp in RFC 3339 format
+      A timestamp in RFC 3339 format
 
-Type type
+    - `?string sessionThreadID`
 
-?EvaluatedPermission evaluatedPermission
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-AgentEvaluatedPermission enum
+  - `ManagedAgentsUserToolConfirmationEvent`
 
-?string sessionThreadID
+    - `string id`
 
-When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      Unique identifier for this event.
 
-
+    - `Result result`
 
-[ManagedAgentsAgentMCPToolResultEvent](api/beta/sessions/events.md)
+      UserToolConfirmationResult enum
 
-string id
+    - `string toolUseID`
 
-Unique identifier for this event.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-string mcpToolUseID
+    - `Type type`
 
-The id of the `agent.mcp_tool_use` event this result corresponds to.
+    - `?string denyMessage`
 
-\Datetime processedAt
+      Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-A timestamp in RFC 3339 format
+    - `?\Datetime processedAt`
 
-Type type
+      A timestamp in RFC 3339 format
 
-?list<Content> content
+    - `?string sessionThreadID`
 
-The result content returned by the tool.
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-?bool isError
+  - `ManagedAgentsUserCustomToolResultEvent`
 
-Whether the tool execution resulted in an error.
+    - `string id`
 
-
+      Unique identifier for this event.
 
-[ManagedAgentsAgentToolUseEvent](api/beta/sessions/events.md)
+    - `string customToolUseID`
 
-string id
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Unique identifier for this event.
+    - `Type type`
 
-array<string,mixed> input
+    - `?list<Content> content`
 
-Input parameters for the tool call.
+      The result content returned by the tool.
 
-string name
+    - `?bool isError`
 
-Name of the agent tool being used.
+      Whether the tool execution resulted in an error.
 
-\Datetime processedAt
+    - `?\Datetime processedAt`
 
-A timestamp in RFC 3339 format
+      A timestamp in RFC 3339 format
 
-Type type
+    - `?string sessionThreadID`
 
-?EvaluatedPermission evaluatedPermission
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-AgentEvaluatedPermission enum
+  - `ManagedAgentsAgentCustomToolUseEvent`
 
-?string sessionThreadID
+    - `string id`
 
-When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      Unique identifier for this event.
 
-
+    - `array<string,mixed> input`
 
-[ManagedAgentsAgentToolResultEvent](api/beta/sessions/events.md)
+      Input parameters for the tool call.
 
-string id
+    - `string name`
 
-Unique identifier for this event.
+      Name of the custom tool being called.
 
-\Datetime processedAt
+    - `\Datetime processedAt`
 
-A timestamp in RFC 3339 format
+      A timestamp in RFC 3339 format
 
-string toolUseID
+    - `Type type`
 
-The id of the `agent.tool_use` event this result corresponds to.
+    - `?string sessionThreadID`
 
-Type type
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-?list<Content> content
+  - `ManagedAgentsAgentMessageEvent`
 
-The result content returned by the tool.
+    - `string id`
 
-?bool isError
+      Unique identifier for this event.
 
-Whether the tool execution resulted in an error.
+    - `list<Content> content`
 
-
+      Array of text blocks comprising the agent response.
 
-[ManagedAgentsAgentThreadMessageReceivedEvent](api/beta/sessions/events.md)
+    - `\Datetime processedAt`
 
-string id
+      A timestamp in RFC 3339 format
 
-Unique identifier for this event.
+    - `Type type`
 
-list<Content> content
+  - `ManagedAgentsAgentThinkingEvent`
 
-Message content blocks.
+    - `string id`
 
-string fromSessionThreadID
+      Unique identifier for this event.
 
-Public `sthr_` ID of the thread that sent the message.
+    - `\Datetime processedAt`
 
-\Datetime processedAt
+      A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+    - `Type type`
 
-Type type
+  - `ManagedAgentsAgentMCPToolUseEvent`
 
-?string fromAgentName
+    - `string id`
 
-Name of the callable agent this message came from. Absent when received from the primary agent.
+      Unique identifier for this event.
 
-
+    - `array<string,mixed> input`
 
-[ManagedAgentsAgentThreadMessageSentEvent](api/beta/sessions/events.md)
+      Input parameters for the tool call.
 
-string id
+    - `string mcpServerName`
 
-Unique identifier for this event.
+      Name of the MCP server providing the tool.
 
-list<Content> content
+    - `string name`
 
-Message content blocks.
+      Name of the MCP tool being used.
 
-\Datetime processedAt
+    - `\Datetime processedAt`
 
-A timestamp in RFC 3339 format
+      A timestamp in RFC 3339 format
 
-string toSessionThreadID
+    - `Type type`
 
-Public `sthr_` ID of the thread the message was sent to.
+    - `?EvaluatedPermission evaluatedPermission`
 
-Type type
+      AgentEvaluatedPermission enum
 
-?string toAgentName
+    - `?string sessionThreadID`
 
-Name of the callable agent this message was sent to. Absent when sent to the primary agent.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-
+  - `ManagedAgentsAgentMCPToolResultEvent`
 
-[ManagedAgentsAgentThreadContextCompactedEvent](api/beta/sessions/events.md)
+    - `string id`
 
-string id
+      Unique identifier for this event.
 
-Unique identifier for this event.
+    - `string mcpToolUseID`
 
-\Datetime processedAt
+      The id of the `agent.mcp_tool_use` event this result corresponds to.
 
-A timestamp in RFC 3339 format
+    - `\Datetime processedAt`
 
-Type type
+      A timestamp in RFC 3339 format
 
-
+    - `Type type`
 
-[ManagedAgentsSessionErrorEvent](api/beta/sessions/events.md)
+    - `?list<Content> content`
 
-string id
+      The result content returned by the tool.
 
-Unique identifier for this event.
+    - `?bool isError`
 
-Error error
+      Whether the tool execution resulted in an error.
 
-An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+  - `ManagedAgentsAgentToolUseEvent`
 
-\Datetime processedAt
+    - `string id`
 
-A timestamp in RFC 3339 format
+      Unique identifier for this event.
 
-Type type
+    - `array<string,mixed> input`
 
-
+      Input parameters for the tool call.
 
-[ManagedAgentsSessionStatusRescheduledEvent](api/beta/sessions/events.md)
+    - `string name`
 
-string id
+      Name of the agent tool being used.
 
-Unique identifier for this event.
+    - `\Datetime processedAt`
 
-\Datetime processedAt
+      A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+    - `Type type`
 
-Type type
+    - `?EvaluatedPermission evaluatedPermission`
 
-
+      AgentEvaluatedPermission enum
 
-[ManagedAgentsSessionStatusRunningEvent](api/beta/sessions/events.md)
+    - `?string sessionThreadID`
 
-string id
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-Unique identifier for this event.
+  - `ManagedAgentsAgentToolResultEvent`
 
-\Datetime processedAt
+    - `string id`
 
-A timestamp in RFC 3339 format
+      Unique identifier for this event.
 
-Type type
+    - `\Datetime processedAt`
 
-
+      A timestamp in RFC 3339 format
 
-[ManagedAgentsSessionStatusIdleEvent](api/beta/sessions/events.md)
+    - `string toolUseID`
 
-string id
+      The id of the `agent.tool_use` event this result corresponds to.
 
-Unique identifier for this event.
+    - `Type type`
 
-\Datetime processedAt
+    - `?list<Content> content`
 
-A timestamp in RFC 3339 format
+      The result content returned by the tool.
 
-StopReason stopReason
+    - `?bool isError`
 
-The agent completed its turn naturally and is ready for the next user message.
+      Whether the tool execution resulted in an error.
 
-Type type
+  - `ManagedAgentsAgentThreadMessageReceivedEvent`
 
-
+    - `string id`
 
-[ManagedAgentsSessionStatusTerminatedEvent](api/beta/sessions/events.md)
+      Unique identifier for this event.
 
-string id
+    - `list<Content> content`
 
-Unique identifier for this event.
+      Message content blocks.
 
-\Datetime processedAt
+    - `string fromSessionThreadID`
 
-A timestamp in RFC 3339 format
+      Public `sthr_` ID of the thread that sent the message.
 
-Type type
+    - `\Datetime processedAt`
 
-
+      A timestamp in RFC 3339 format
 
-[ManagedAgentsSessionThreadCreatedEvent](api/beta/sessions/events.md)
+    - `Type type`
 
-string id
+    - `?string fromAgentName`
 
-Unique identifier for this event.
+      Name of the callable agent this message came from. Absent when received from the primary agent.
 
-string agentName
+  - `ManagedAgentsAgentThreadMessageSentEvent`
 
-Name of the callable agent the thread runs.
+    - `string id`
 
-\Datetime processedAt
+      Unique identifier for this event.
 
-A timestamp in RFC 3339 format
+    - `list<Content> content`
 
-string sessionThreadID
+      Message content blocks.
 
-Public `sthr_` ID of the newly created thread.
+    - `\Datetime processedAt`
 
-Type type
+      A timestamp in RFC 3339 format
 
-
+    - `string toSessionThreadID`
 
-[ManagedAgentsSpanOutcomeEvaluationStartEvent](api/beta/sessions/events.md)
+      Public `sthr_` ID of the thread the message was sent to.
 
-string id
+    - `Type type`
 
-Unique identifier for this event.
+    - `?string toAgentName`
 
-int iteration
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+  - `ManagedAgentsAgentThreadContextCompactedEvent`
 
-string outcomeID
+    - `string id`
 
-The `outc_` ID of the outcome being evaluated.
+      Unique identifier for this event.
 
-\Datetime processedAt
+    - `\Datetime processedAt`
 
-A timestamp in RFC 3339 format
+      A timestamp in RFC 3339 format
 
-Type type
+    - `Type type`
 
-
+  - `ManagedAgentsSessionErrorEvent`
 
-[ManagedAgentsSpanOutcomeEvaluationEndEvent](api/beta/sessions/events.md)
+    - `string id`
 
-string id
+      Unique identifier for this event.
 
-Unique identifier for this event.
+    - `Error error`
 
-string explanation
+      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+    - `\Datetime processedAt`
 
-int iteration
+      A timestamp in RFC 3339 format
 
-0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+    - `Type type`
 
-string outcomeEvaluationStartID
+  - `ManagedAgentsSessionStatusRescheduledEvent`
 
-The id of the corresponding `span.outcome_evaluation_start` event.
+    - `string id`
 
-string outcomeID
+      Unique identifier for this event.
 
-The `outc_` ID of the outcome being evaluated.
+    - `\Datetime processedAt`
 
-\Datetime processedAt
+      A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+    - `Type type`
 
-string result
+  - `ManagedAgentsSessionStatusRunningEvent`
 
-Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs\_revision': criteria not met, another revision cycle follows. 'max\_iterations\_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+    - `string id`
 
-Type type
+      Unique identifier for this event.
 
-[ManagedAgentsSpanModelUsage](api/beta/sessions/events.md) usage
+    - `\Datetime processedAt`
 
-Token usage for a single model request.
+      A timestamp in RFC 3339 format
 
-
+    - `Type type`
 
-[ManagedAgentsSpanModelRequestStartEvent](api/beta/sessions/events.md)
+  - `ManagedAgentsSessionStatusIdleEvent`
 
-string id
+    - `string id`
 
-Unique identifier for this event.
+      Unique identifier for this event.
 
-\Datetime processedAt
+    - `\Datetime processedAt`
 
-A timestamp in RFC 3339 format
+      A timestamp in RFC 3339 format
 
-Type type
+    - `StopReason stopReason`
 
-
+      The agent completed its turn naturally and is ready for the next user message.
 
-[ManagedAgentsSpanModelRequestEndEvent](api/beta/sessions/events.md)
+    - `Type type`
 
-string id
+  - `ManagedAgentsSessionStatusTerminatedEvent`
 
-Unique identifier for this event.
+    - `string id`
 
-?bool isError
+      Unique identifier for this event.
 
-Whether the model request resulted in an error.
+    - `\Datetime processedAt`
 
-string modelRequestStartID
+      A timestamp in RFC 3339 format
 
-The id of the corresponding `span.model_request_start` event.
+    - `Type type`
 
-[ManagedAgentsSpanModelUsage](api/beta/sessions/events.md) modelUsage
+  - `ManagedAgentsSessionThreadCreatedEvent`
 
-Token usage for a single model request.
+    - `string id`
 
-\Datetime processedAt
+      Unique identifier for this event.
 
-A timestamp in RFC 3339 format
+    - `string agentName`
 
-Type type
+      Name of the callable agent the thread runs.
 
-
+    - `\Datetime processedAt`
 
-[ManagedAgentsSpanOutcomeEvaluationOngoingEvent](api/beta/sessions/events.md)
+      A timestamp in RFC 3339 format
 
-string id
+    - `string sessionThreadID`
 
-Unique identifier for this event.
+      Public `sthr_` ID of the newly created thread.
 
-int iteration
+    - `Type type`
 
-0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+  - `ManagedAgentsSpanOutcomeEvaluationStartEvent`
 
-string outcomeID
+    - `string id`
 
-The `outc_` ID of the outcome being evaluated.
+      Unique identifier for this event.
 
-\Datetime processedAt
+    - `int iteration`
 
-A timestamp in RFC 3339 format
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
-Type type
+    - `string outcomeID`
 
-
+      The `outc_` ID of the outcome being evaluated.
 
-[ManagedAgentsUserDefineOutcomeEvent](api/beta/sessions/events.md)
+    - `\Datetime processedAt`
 
-string id
+      A timestamp in RFC 3339 format
 
-Unique identifier for this event.
+    - `Type type`
 
-string description
+  - `ManagedAgentsSpanOutcomeEvaluationEndEvent`
 
-What the agent should produce. Copied from the input event.
+    - `string id`
 
-?int maxIterations
+      Unique identifier for this event.
 
-Evaluate-then-revise cycles before giving up. Default 3, max 20.
+    - `string explanation`
 
-string outcomeID
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
 
-Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+    - `int iteration`
 
-\Datetime processedAt
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
-A timestamp in RFC 3339 format
+    - `string outcomeEvaluationStartID`
 
-Rubric rubric
+      The id of the corresponding `span.outcome_evaluation_start` event.
 
-Rubric for grading the quality of an outcome.
+    - `string outcomeID`
 
-Type type
+      The `outc_` ID of the outcome being evaluated.
 
-
+    - `\Datetime processedAt`
 
-[ManagedAgentsSessionDeletedEvent](api/beta/sessions/events.md)
+      A timestamp in RFC 3339 format
 
-string id
+    - `string result`
 
-Unique identifier for this event.
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
-\Datetime processedAt
+    - `Type type`
 
-A timestamp in RFC 3339 format
+    - `ManagedAgentsSpanModelUsage usage`
 
-Type type
+      Token usage for a single model request.
 
-
+  - `ManagedAgentsSpanModelRequestStartEvent`
 
-[ManagedAgentsSessionThreadStatusRunningEvent](api/beta/sessions/events.md)
+    - `string id`
 
-string id
+      Unique identifier for this event.
 
-Unique identifier for this event.
+    - `\Datetime processedAt`
 
-string agentName
+      A timestamp in RFC 3339 format
 
-Name of the agent the thread runs.
+    - `Type type`
 
-\Datetime processedAt
+  - `ManagedAgentsSpanModelRequestEndEvent`
 
-A timestamp in RFC 3339 format
+    - `string id`
 
-string sessionThreadID
+      Unique identifier for this event.
 
-Public sthr\_ ID of the thread that started running.
+    - `?bool isError`
 
-Type type
+      Whether the model request resulted in an error.
 
-
+    - `string modelRequestStartID`
 
-[ManagedAgentsSessionThreadStatusIdleEvent](api/beta/sessions/events.md)
+      The id of the corresponding `span.model_request_start` event.
 
-string id
+    - `ManagedAgentsSpanModelUsage modelUsage`
 
-Unique identifier for this event.
+      Token usage for a single model request.
 
-string agentName
+    - `\Datetime processedAt`
 
-Name of the agent the thread runs.
+      A timestamp in RFC 3339 format
 
-\Datetime processedAt
+    - `Type type`
 
-A timestamp in RFC 3339 format
+  - `ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
-string sessionThreadID
+    - `string id`
 
-Public sthr\_ ID of the thread that went idle.
+      Unique identifier for this event.
 
-StopReason stopReason
+    - `int iteration`
 
-The agent completed its turn naturally and is ready for the next user message.
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
-Type type
+    - `string outcomeID`
 
-
+      The `outc_` ID of the outcome being evaluated.
 
-[ManagedAgentsSessionThreadStatusTerminatedEvent](api/beta/sessions/events.md)
+    - `\Datetime processedAt`
 
-string id
+      A timestamp in RFC 3339 format
 
-Unique identifier for this event.
+    - `Type type`
 
-string agentName
+  - `ManagedAgentsUserDefineOutcomeEvent`
 
-Name of the agent the thread runs.
+    - `string id`
 
-\Datetime processedAt
+      Unique identifier for this event.
 
-A timestamp in RFC 3339 format
+    - `string description`
 
-string sessionThreadID
+      What the agent should produce. Copied from the input event.
 
-Public sthr\_ ID of the thread that terminated.
+    - `?int maxIterations`
 
-Type type
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
-
+    - `string outcomeID`
 
-[BetaManagedAgentsUserToolResultEvent](api/beta/sessions.md)
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
 
-string id
+    - `\Datetime processedAt`
 
-Unique identifier for this event.
+      A timestamp in RFC 3339 format
 
-string toolUseID
+    - `Rubric rubric`
 
-The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      Rubric for grading the quality of an outcome.
 
-Type type
+    - `Type type`
 
-?list<Content> content
+  - `ManagedAgentsSessionDeletedEvent`
 
-The result content returned by the tool.
+    - `string id`
 
-?bool isError
+      Unique identifier for this event.
 
-Whether the tool execution resulted in an error.
+    - `\Datetime processedAt`
 
-?\Datetime processedAt
+      A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+    - `Type type`
 
-?string sessionThreadID
+  - `ManagedAgentsSessionThreadStatusRunningEvent`
 
-Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+    - `string id`
 
-
+      Unique identifier for this event.
 
-[ManagedAgentsSessionThreadStatusRescheduledEvent](api/beta/sessions/events.md)
+    - `string agentName`
 
-string id
+      Name of the agent the thread runs.
 
-Unique identifier for this event.
+    - `\Datetime processedAt`
 
-string agentName
+      A timestamp in RFC 3339 format
 
-Name of the agent the thread runs.
+    - `string sessionThreadID`
 
-\Datetime processedAt
+      Public sthr_ ID of the thread that started running.
 
-A timestamp in RFC 3339 format
+    - `Type type`
 
-string sessionThreadID
+  - `ManagedAgentsSessionThreadStatusIdleEvent`
 
-Public sthr\_ ID of the thread that is retrying.
+    - `string id`
 
-Type type
+      Unique identifier for this event.
 
-
+    - `string agentName`
 
-[BetaManagedAgentsSessionUpdatedEvent](api/beta/sessions.md)
+      Name of the agent the thread runs.
 
-string id
+    - `\Datetime processedAt`
 
-Unique identifier for this event.
+      A timestamp in RFC 3339 format
 
-\Datetime processedAt
+    - `string sessionThreadID`
 
-A timestamp in RFC 3339 format
+      Public sthr_ ID of the thread that went idle.
 
-Type type
+    - `StopReason stopReason`
 
-?[BetaManagedAgentsSessionAgent](api/beta/sessions.md) agent
+      The agent completed its turn naturally and is ready for the next user message.
 
-Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+    - `Type type`
 
-?array<string,string> metadata
+  - `ManagedAgentsSessionThreadStatusTerminatedEvent`
 
-The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
+    - `string id`
 
-?string title
+      Unique identifier for this event.
 
-The session's new title. Present only when the update changed it.
+    - `string agentName`
 
-
+      Name of the agent the thread runs.
 
-[BetaManagedAgentsSystemMessageEvent](api/beta/sessions.md)
+    - `\Datetime processedAt`
 
-string id
+      A timestamp in RFC 3339 format
 
-Unique identifier for this event.
+    - `string sessionThreadID`
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> content
+      Public sthr_ ID of the thread that terminated.
 
-System content blocks. Text-only.
+    - `Type type`
 
-Type type
+  - `BetaManagedAgentsUserToolResultEvent`
 
-?\Datetime processedAt
+    - `string id`
 
-A timestamp in RFC 3339 format
+      Unique identifier for this event.
 
-
+    - `string toolUseID`
 
-[ManagedAgentsSessionRequiresAction](api/beta/sessions/events.md)
+      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-list<string> eventIDs
+    - `Type type`
 
-The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+    - `?list<Content> content`
 
-Type type
+      The result content returned by the tool.
 
-
+    - `?bool isError`
 
-[ManagedAgentsSessionRetriesExhausted](api/beta/sessions/events.md)
+      Whether the tool execution resulted in an error.
 
-Type type
+    - `?\Datetime processedAt`
 
-
+      A timestamp in RFC 3339 format
 
-[ManagedAgentsSessionStatusIdleEvent](api/beta/sessions/events.md)
+    - `?string sessionThreadID`
 
-string id
+      Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-Unique identifier for this event.
+  - `ManagedAgentsSessionThreadStatusRescheduledEvent`
 
-\Datetime processedAt
+    - `string id`
 
-A timestamp in RFC 3339 format
+      Unique identifier for this event.
 
-StopReason stopReason
+    - `string agentName`
 
-The agent completed its turn naturally and is ready for the next user message.
+      Name of the agent the thread runs.
 
-Type type
+    - `\Datetime processedAt`
 
-
+      A timestamp in RFC 3339 format
 
-[ManagedAgentsSessionStatusRescheduledEvent](api/beta/sessions/events.md)
+    - `string sessionThreadID`
 
-string id
+      Public sthr_ ID of the thread that is retrying.
 
-Unique identifier for this event.
+    - `Type type`
 
-\Datetime processedAt
+  - `BetaManagedAgentsSessionUpdatedEvent`
 
-A timestamp in RFC 3339 format
+    - `string id`
 
-Type type
+      Unique identifier for this event.
 
-
+    - `\Datetime processedAt`
 
-[ManagedAgentsSessionStatusRunningEvent](api/beta/sessions/events.md)
+      A timestamp in RFC 3339 format
 
-string id
+    - `Type type`
 
-Unique identifier for this event.
+    - `?BetaManagedAgentsSessionAgent agent`
 
-\Datetime processedAt
+      Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-A timestamp in RFC 3339 format
+    - `?BetaManagedAgentsBudgetLimit budget`
 
-Type type
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-
+    - `?array<string,string> metadata`
 
-[ManagedAgentsSessionStatusTerminatedEvent](api/beta/sessions/events.md)
+      The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-string id
+    - `?string title`
 
-Unique identifier for this event.
+      The session's new title. Present only when the update changed it.
 
-\Datetime processedAt
+  - `BetaManagedAgentsStartEvent`
 
-A timestamp in RFC 3339 format
+    - `BetaManagedAgentsStartEventPreview event`
 
-Type type
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
 
-
+    - `Type type`
 
-[ManagedAgentsSessionThreadCreatedEvent](api/beta/sessions/events.md)
+  - `BetaManagedAgentsDeltaEvent`
 
-string id
+    - `BetaManagedAgentsDeltaContent delta`
 
-Unique identifier for this event.
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
 
-string agentName
+    - `string eventID`
 
-Name of the callable agent the thread runs.
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
 
-\Datetime processedAt
+    - `Type type`
 
-A timestamp in RFC 3339 format
+  - `BetaManagedAgentsSystemMessageEvent`
 
-string sessionThreadID
+    - `string id`
 
-Public `sthr_` ID of the newly created thread.
+      Unique identifier for this event.
 
-Type type
+    - `list<BetaManagedAgentsSystemContentBlock> content`
 
-
+      System content blocks. Text-only.
 
-[ManagedAgentsSessionThreadStatusIdleEvent](api/beta/sessions/events.md)
+    - `Type type`
 
-string id
+    - `?\Datetime processedAt`
 
-Unique identifier for this event.
+      A timestamp in RFC 3339 format
 
-string agentName
+  - `BetaManagedAgentsSessionUsageEvent`
 
-Name of the agent the thread runs.
+    - `string id`
 
-\Datetime processedAt
+      Unique identifier for this event.
 
-A timestamp in RFC 3339 format
+    - `\Datetime processedAt`
 
-string sessionThreadID
+      A timestamp in RFC 3339 format
 
-Public sthr\_ ID of the thread that went idle.
+    - `Type type`
 
-StopReason stopReason
+    - `ManagedAgentsSessionUsageSnapshot usage`
 
-The agent completed its turn naturally and is ready for the next user message.
+      Point-in-time snapshot of a session's cumulative usage.
 
-Type type
+    - `?BetaManagedAgentsBudgetLimit budget`
 
-
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-[ManagedAgentsSessionThreadStatusRescheduledEvent](api/beta/sessions/events.md)
+- `ManagedAgentsStreamSessionEvents`
 
-string id
+### Example
 
-Unique identifier for this event.
+```php
+<?php
 
-string agentName
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-Name of the agent the thread runs.
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-\Datetime processedAt
+$betaManagedAgentsStreamSessionEvents = $client
+  ->beta
+  ->sessions
+  ->events
+  ->streamStream(
+  'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  eventDeltas: [BetaManagedAgentsDeltaType::AGENT_MESSAGE],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
 
-A timestamp in RFC 3339 format
+var_dump($betaManagedAgentsStreamSessionEvents);
+```
 
-string sessionThreadID
+#### Response (200)
 
-Public sthr\_ ID of the thread that is retrying.
+```json
+{
+  "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+  "content": [
+    {
+      "text": "Where is my order #1234?",
+      "type": "text"
+    }
+  ],
+  "type": "user.message",
+  "processed_at": "2026-03-15T10:00:00Z"
+}
+```
 
-Type type
+## Domain types
 
-
+### Beta Managed Agents Agent Custom Tool Use Event
 
-[ManagedAgentsSessionThreadStatusRunningEvent](api/beta/sessions/events.md)
+- `ManagedAgentsAgentCustomToolUseEvent`
 
-string id
+  - `string id`
 
-Unique identifier for this event.
+    Unique identifier for this event.
 
-string agentName
+  - `array<string,mixed> input`
 
-Name of the agent the thread runs.
+    Input parameters for the tool call.
 
-\Datetime processedAt
+  - `string name`
 
-A timestamp in RFC 3339 format
+    Name of the custom tool being called.
 
-string sessionThreadID
+  - `\Datetime processedAt`
 
-Public sthr\_ ID of the thread that started running.
+    A timestamp in RFC 3339 format
 
-Type type
+  - `Type type`
 
-
+  - `?string sessionThreadID`
 
-[ManagedAgentsSessionThreadStatusTerminatedEvent](api/beta/sessions/events.md)
+    When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-string id
+### Beta Managed Agents Agent MCP Tool Result Event
 
-Unique identifier for this event.
+- `ManagedAgentsAgentMCPToolResultEvent`
 
-string agentName
+  - `string id`
 
-Name of the agent the thread runs.
+    Unique identifier for this event.
 
-\Datetime processedAt
+  - `string mcpToolUseID`
 
-A timestamp in RFC 3339 format
+    The id of the `agent.mcp_tool_use` event this result corresponds to.
 
-string sessionThreadID
+  - `\Datetime processedAt`
 
-Public sthr\_ ID of the thread that terminated.
+    A timestamp in RFC 3339 format
 
-Type type
+  - `Type type`
 
-
+  - `?list<Content> content`
 
-[ManagedAgentsSpanModelRequestEndEvent](api/beta/sessions/events.md)
+    The result content returned by the tool.
 
-string id
+  - `?bool isError`
 
-Unique identifier for this event.
+    Whether the tool execution resulted in an error.
 
-?bool isError
+### Beta Managed Agents Agent MCP Tool Use Event
 
-Whether the model request resulted in an error.
+- `ManagedAgentsAgentMCPToolUseEvent`
 
-string modelRequestStartID
+  - `string id`
 
-The id of the corresponding `span.model_request_start` event.
+    Unique identifier for this event.
 
-[ManagedAgentsSpanModelUsage](api/beta/sessions/events.md) modelUsage
+  - `array<string,mixed> input`
 
-Token usage for a single model request.
+    Input parameters for the tool call.
 
-\Datetime processedAt
+  - `string mcpServerName`
 
-A timestamp in RFC 3339 format
+    Name of the MCP server providing the tool.
 
-Type type
+  - `string name`
 
-
+    Name of the MCP tool being used.
 
-[ManagedAgentsSpanModelRequestStartEvent](api/beta/sessions/events.md)
+  - `\Datetime processedAt`
 
-string id
+    A timestamp in RFC 3339 format
 
-Unique identifier for this event.
+  - `Type type`
 
-\Datetime processedAt
+  - `?EvaluatedPermission evaluatedPermission`
 
-A timestamp in RFC 3339 format
+    AgentEvaluatedPermission enum
 
-Type type
+  - `?string sessionThreadID`
 
-
+    When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-[ManagedAgentsSpanModelUsage](api/beta/sessions/events.md)
+### Beta Managed Agents Agent Message Event
 
-int cacheCreationInputTokens
+- `ManagedAgentsAgentMessageEvent`
 
-Tokens used to create prompt cache in this request.
+  - `string id`
 
-int cacheReadInputTokens
+    Unique identifier for this event.
 
-Tokens read from prompt cache in this request.
+  - `list<Content> content`
 
-int inputTokens
+    Array of text blocks comprising the agent response.
 
-Input tokens consumed by this request.
+  - `\Datetime processedAt`
 
-int outputTokens
+    A timestamp in RFC 3339 format
 
-Output tokens generated by this request.
+  - `Type type`
 
-?Speed speed
+### Beta Managed Agents Agent Thinking Event
 
-Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+- `ManagedAgentsAgentThinkingEvent`
 
-
+  - `string id`
 
-[ManagedAgentsSpanOutcomeEvaluationEndEvent](api/beta/sessions/events.md)
+    Unique identifier for this event.
 
-string id
+  - `\Datetime processedAt`
 
-Unique identifier for this event.
+    A timestamp in RFC 3339 format
 
-string explanation
+  - `Type type`
 
-Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+### Beta Managed Agents Agent Thread Context Compacted Event
 
-int iteration
+- `ManagedAgentsAgentThreadContextCompactedEvent`
 
-0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+  - `string id`
 
-string outcomeEvaluationStartID
+    Unique identifier for this event.
 
-The id of the corresponding `span.outcome_evaluation_start` event.
+  - `\Datetime processedAt`
 
-string outcomeID
+    A timestamp in RFC 3339 format
 
-The `outc_` ID of the outcome being evaluated.
+  - `Type type`
 
-\Datetime processedAt
+### Beta Managed Agents Agent Thread Message Received Event
 
-A timestamp in RFC 3339 format
+- `ManagedAgentsAgentThreadMessageReceivedEvent`
 
-string result
+  - `string id`
 
-Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs\_revision': criteria not met, another revision cycle follows. 'max\_iterations\_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+    Unique identifier for this event.
 
-Type type
+  - `list<Content> content`
 
-[ManagedAgentsSpanModelUsage](api/beta/sessions/events.md) usage
+    Message content blocks.
 
-Token usage for a single model request.
+  - `string fromSessionThreadID`
 
-
+    Public `sthr_` ID of the thread that sent the message.
 
-[ManagedAgentsSpanOutcomeEvaluationOngoingEvent](api/beta/sessions/events.md)
+  - `\Datetime processedAt`
 
-string id
+    A timestamp in RFC 3339 format
 
-Unique identifier for this event.
+  - `Type type`
 
-int iteration
+  - `?string fromAgentName`
 
-0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+    Name of the callable agent this message came from. Absent when received from the primary agent.
 
-string outcomeID
+### Beta Managed Agents Agent Thread Message Sent Event
 
-The `outc_` ID of the outcome being evaluated.
+- `ManagedAgentsAgentThreadMessageSentEvent`
 
-\Datetime processedAt
+  - `string id`
 
-A timestamp in RFC 3339 format
+    Unique identifier for this event.
 
-Type type
+  - `list<Content> content`
 
-
+    Message content blocks.
 
-[ManagedAgentsSpanOutcomeEvaluationStartEvent](api/beta/sessions/events.md)
+  - `\Datetime processedAt`
 
-string id
+    A timestamp in RFC 3339 format
 
-Unique identifier for this event.
+  - `string toSessionThreadID`
 
-int iteration
+    Public `sthr_` ID of the thread the message was sent to.
 
-0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+  - `Type type`
 
-string outcomeID
+  - `?string toAgentName`
 
-The `outc_` ID of the outcome being evaluated.
+    Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-\Datetime processedAt
+### Beta Managed Agents Agent Tool Result Event
 
-A timestamp in RFC 3339 format
+- `ManagedAgentsAgentToolResultEvent`
 
-Type type
+  - `string id`
 
-
+    Unique identifier for this event.
 
-[ManagedAgentsStreamSessionEvents](api/beta/sessions/events.md)
+  - `\Datetime processedAt`
 
-One of the following:
+    A timestamp in RFC 3339 format
 
-
+  - `string toolUseID`
 
-[ManagedAgentsUserMessageEvent](api/beta/sessions/events.md)
+    The id of the `agent.tool_use` event this result corresponds to.
 
-string id
+  - `Type type`
 
-Unique identifier for this event.
+  - `?list<Content> content`
 
-list<Content> content
+    The result content returned by the tool.
 
-Array of content blocks comprising the user message.
+  - `?bool isError`
 
-Type type
+    Whether the tool execution resulted in an error.
 
-?\Datetime processedAt
+### Beta Managed Agents Agent Tool Use Event
 
-A timestamp in RFC 3339 format
+- `ManagedAgentsAgentToolUseEvent`
 
-
+  - `string id`
 
-[ManagedAgentsUserInterruptEvent](api/beta/sessions/events.md)
+    Unique identifier for this event.
 
-string id
+  - `array<string,mixed> input`
 
-Unique identifier for this event.
+    Input parameters for the tool call.
 
-Type type
+  - `string name`
 
-?\Datetime processedAt
+    Name of the agent tool being used.
 
-A timestamp in RFC 3339 format
+  - `\Datetime processedAt`
 
-?string sessionThreadID
+    A timestamp in RFC 3339 format
 
-If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+  - `Type type`
 
-
+  - `?EvaluatedPermission evaluatedPermission`
 
-[ManagedAgentsUserToolConfirmationEvent](api/beta/sessions/events.md)
+    AgentEvaluatedPermission enum
 
-string id
+  - `?string sessionThreadID`
 
-Unique identifier for this event.
+    When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-Result result
+### Beta Managed Agents Base64 Document Source
 
-UserToolConfirmationResult enum
+- `ManagedAgentsBase64DocumentSource`
 
-string toolUseID
+  - `string data`
 
-The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+    Base64-encoded document data.
 
-Type type
+  - `string mediaType`
 
-?string denyMessage
+    MIME type of the document (e.g., "application/pdf").
 
-Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+  - `Type type`
 
-?\Datetime processedAt
+### Beta Managed Agents Base64 Image Source
 
-A timestamp in RFC 3339 format
+- `ManagedAgentsBase64ImageSource`
 
-?string sessionThreadID
+  - `string data`
 
-When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+    Base64-encoded image data.
 
-
+  - `string mediaType`
 
-[ManagedAgentsUserCustomToolResultEvent](api/beta/sessions/events.md)
+    MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-string id
+  - `Type type`
 
-Unique identifier for this event.
+### Beta Managed Agents Billing Error
 
-string customToolUseID
+- `ManagedAgentsBillingError`
 
-The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+  - `string message`
 
-Type type
+    Human-readable error description.
 
-?list<Content> content
+  - `RetryStatus retryStatus`
 
-The result content returned by the tool.
+    What the client should do next in response to this error.
 
-?bool isError
+  - `Type type`
 
-Whether the tool execution resulted in an error.
+### Beta Managed Agents Credential Host Unreachable Error
 
-?\Datetime processedAt
+- `ManagedAgentsCredentialHostUnreachableError`
 
-A timestamp in RFC 3339 format
+  - `string credentialID`
 
-?string sessionThreadID
+    ID of the affected credential.
 
-Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+  - `string message`
 
-
+    Human-readable error description.
 
-[ManagedAgentsAgentCustomToolUseEvent](api/beta/sessions/events.md)
+  - `RetryStatus retryStatus`
 
-string id
+    What the client should do next in response to this error.
 
-Unique identifier for this event.
+  - `Type type`
 
-array<string,mixed> input
+  - `string vaultID`
 
-Input parameters for the tool call.
+    ID of the vault containing the affected credential.
 
-string name
+### Beta Managed Agents Document Block
 
-Name of the custom tool being called.
+- `ManagedAgentsDocumentBlock`
 
-\Datetime processedAt
+  - `Source source`
 
-A timestamp in RFC 3339 format
+    Union type for document source variants.
 
-Type type
+  - `Type type`
 
-?string sessionThreadID
+  - `?string context`
 
-When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+    Additional context about the document for the model.
 
-
+  - `?string title`
 
-[ManagedAgentsAgentMessageEvent](api/beta/sessions/events.md)
+    The title of the document.
 
-string id
+### Beta Managed Agents Event Params
 
-Unique identifier for this event.
+- `ManagedAgentsEventParams`
 
-list<[ManagedAgentsTextBlock](api/beta/sessions/events.md)> content
+  - `ManagedAgentsUserMessageEventParams`
 
-Array of text blocks comprising the agent response.
+    - `list<Content> content`
 
-\Datetime processedAt
+      Array of content blocks for the user message.
 
-A timestamp in RFC 3339 format
+    - `Type type`
 
-Type type
+  - `ManagedAgentsUserInterruptEventParams`
 
-
+    - `Type type`
 
-[ManagedAgentsAgentThinkingEvent](api/beta/sessions/events.md)
+    - `?string sessionThreadID`
 
-string id
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-Unique identifier for this event.
+  - `ManagedAgentsUserToolConfirmationEventParams`
 
-\Datetime processedAt
+    - `Result result`
 
-A timestamp in RFC 3339 format
+      UserToolConfirmationResult enum
 
-Type type
+    - `string toolUseID`
 
-
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-[ManagedAgentsAgentMCPToolUseEvent](api/beta/sessions/events.md)
+    - `Type type`
 
-string id
+    - `?string denyMessage`
 
-Unique identifier for this event.
+      Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-array<string,mixed> input
+  - `ManagedAgentsUserCustomToolResultEventParams`
 
-Input parameters for the tool call.
+    - `string customToolUseID`
 
-string mcpServerName
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-Name of the MCP server providing the tool.
+    - `Type type`
 
-string name
+    - `?list<Content> content`
 
-Name of the MCP tool being used.
+      The result content returned by the tool.
 
-\Datetime processedAt
+    - `?bool isError`
 
-A timestamp in RFC 3339 format
+      Whether the tool execution resulted in an error.
 
-Type type
+  - `ManagedAgentsUserDefineOutcomeEventParams`
 
-?EvaluatedPermission evaluatedPermission
+    - `string description`
 
-AgentEvaluatedPermission enum
+      What the agent should produce. This is the task specification.
 
-?string sessionThreadID
+    - `Rubric rubric`
 
-When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      Rubric for grading the quality of an outcome.
 
-
+    - `Type type`
 
-[ManagedAgentsAgentMCPToolResultEvent](api/beta/sessions/events.md)
+    - `?int maxIterations`
 
-string id
+      Eval→revision cycles before giving up. Default 3, max 20.
 
-Unique identifier for this event.
+  - `ManagedAgentsUserToolResultEventParams`
 
-string mcpToolUseID
+    - `string toolUseID`
 
-The id of the `agent.mcp_tool_use` event this result corresponds to.
+      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-\Datetime processedAt
+    - `Type type`
 
-A timestamp in RFC 3339 format
+    - `?list<Content> content`
 
-Type type
+      The result content returned by the tool.
 
-?list<Content> content
+    - `?bool isError`
 
-The result content returned by the tool.
+      Whether the tool execution resulted in an error.
 
-?bool isError
+  - `ManagedAgentsSystemMessageEventParams`
 
-Whether the tool execution resulted in an error.
+    - `list<BetaManagedAgentsSystemContentBlock> content`
 
-
+      System content blocks to append. Text-only.
 
-[ManagedAgentsAgentToolUseEvent](api/beta/sessions/events.md)
+    - `Type type`
 
-string id
+### Beta Managed Agents File Document Source
 
-Unique identifier for this event.
+- `ManagedAgentsFileDocumentSource`
 
-array<string,mixed> input
+  - `string fileID`
 
-Input parameters for the tool call.
+    ID of a previously uploaded file.
 
-string name
+  - `Type type`
 
-Name of the agent tool being used.
+### Beta Managed Agents File Image Source
 
-\Datetime processedAt
+- `ManagedAgentsFileImageSource`
 
-A timestamp in RFC 3339 format
+  - `string fileID`
 
-Type type
+    ID of a previously uploaded file.
 
-?EvaluatedPermission evaluatedPermission
+  - `Type type`
 
-AgentEvaluatedPermission enum
+### Beta Managed Agents File Rubric
 
-?string sessionThreadID
+- `ManagedAgentsFileRubric`
 
-When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+  - `string fileID`
 
-
+    ID of the rubric file.
 
-[ManagedAgentsAgentToolResultEvent](api/beta/sessions/events.md)
+  - `Type type`
 
-string id
+### Beta Managed Agents File Rubric Params
 
-Unique identifier for this event.
+- `ManagedAgentsFileRubricParams`
 
-\Datetime processedAt
+  - `string fileID`
 
-A timestamp in RFC 3339 format
+    ID of the rubric file.
 
-string toolUseID
+  - `Type type`
 
-The id of the `agent.tool_use` event this result corresponds to.
+### Beta Managed Agents Image Block
 
-Type type
+- `ManagedAgentsImageBlock`
 
-?list<Content> content
+  - `Source source`
 
-The result content returned by the tool.
+    Union type for image source variants.
 
-?bool isError
+  - `Type type`
 
-Whether the tool execution resulted in an error.
+### Beta Managed Agents MCP Authentication Failed Error
 
-
+- `ManagedAgentsMCPAuthenticationFailedError`
 
-[ManagedAgentsAgentThreadMessageReceivedEvent](api/beta/sessions/events.md)
+  - `string mcpServerName`
 
-string id
+    Name of the MCP server that failed authentication.
 
-Unique identifier for this event.
+  - `string message`
 
-list<Content> content
+    Human-readable error description.
 
-Message content blocks.
+  - `RetryStatus retryStatus`
 
-string fromSessionThreadID
+    What the client should do next in response to this error.
 
-Public `sthr_` ID of the thread that sent the message.
+  - `Type type`
 
-\Datetime processedAt
+### Beta Managed Agents MCP Connection Failed Error
 
-A timestamp in RFC 3339 format
+- `ManagedAgentsMCPConnectionFailedError`
 
-Type type
+  - `string mcpServerName`
 
-?string fromAgentName
+    Name of the MCP server that failed to connect.
 
-Name of the callable agent this message came from. Absent when received from the primary agent.
+  - `string message`
 
-
+    Human-readable error description.
 
-[ManagedAgentsAgentThreadMessageSentEvent](api/beta/sessions/events.md)
+  - `RetryStatus retryStatus`
 
-string id
+    What the client should do next in response to this error.
 
-Unique identifier for this event.
+  - `Type type`
 
-list<Content> content
+### Beta Managed Agents Model Overloaded Error
 
-Message content blocks.
+- `ManagedAgentsModelOverloadedError`
 
-\Datetime processedAt
+  - `string message`
 
-A timestamp in RFC 3339 format
+    Human-readable error description.
 
-string toSessionThreadID
+  - `RetryStatus retryStatus`
 
-Public `sthr_` ID of the thread the message was sent to.
+    What the client should do next in response to this error.
 
-Type type
+  - `Type type`
 
-?string toAgentName
+### Beta Managed Agents Model Rate Limited Error
 
-Name of the callable agent this message was sent to. Absent when sent to the primary agent.
+- `ManagedAgentsModelRateLimitedError`
 
-
+  - `string message`
 
-[ManagedAgentsAgentThreadContextCompactedEvent](api/beta/sessions/events.md)
+    Human-readable error description.
 
-string id
+  - `RetryStatus retryStatus`
 
-Unique identifier for this event.
+    What the client should do next in response to this error.
 
-\Datetime processedAt
+  - `Type type`
 
-A timestamp in RFC 3339 format
+### Beta Managed Agents Model Request Failed Error
 
-Type type
+- `ManagedAgentsModelRequestFailedError`
 
-
+  - `string message`
 
-[ManagedAgentsSessionErrorEvent](api/beta/sessions/events.md)
+    Human-readable error description.
 
-string id
+  - `RetryStatus retryStatus`
 
-Unique identifier for this event.
+    What the client should do next in response to this error.
 
-Error error
+  - `Type type`
 
-An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+### Beta Managed Agents Plain Text Document Source
 
-\Datetime processedAt
+- `ManagedAgentsPlainTextDocumentSource`
 
-A timestamp in RFC 3339 format
+  - `string data`
 
-Type type
+    The plain text content.
 
-
+  - `MediaType mediaType`
 
-[ManagedAgentsSessionStatusRescheduledEvent](api/beta/sessions/events.md)
+    MIME type of the text content. Must be "text/plain".
 
-string id
+  - `Type type`
 
-Unique identifier for this event.
+### Beta Managed Agents Redacted Block
 
-\Datetime processedAt
+- `ManagedAgentsRedactedBlock`
 
-A timestamp in RFC 3339 format
+  - `Type type`
 
-Type type
+### Beta Managed Agents Retry Status Exhausted
 
-
+- `ManagedAgentsRetryStatusExhausted`
 
-[ManagedAgentsSessionStatusRunningEvent](api/beta/sessions/events.md)
+  - `Type type`
 
-string id
+### Beta Managed Agents Retry Status Retrying
 
-Unique identifier for this event.
+- `ManagedAgentsRetryStatusRetrying`
 
-\Datetime processedAt
+  - `Type type`
 
-A timestamp in RFC 3339 format
+### Beta Managed Agents Retry Status Terminal
 
-Type type
+- `ManagedAgentsRetryStatusTerminal`
 
-
+  - `Type type`
 
-[ManagedAgentsSessionStatusIdleEvent](api/beta/sessions/events.md)
+### Beta Managed Agents Search Result Block
 
-string id
+- `ManagedAgentsSearchResultBlock`
 
-Unique identifier for this event.
+  - `ManagedAgentsSearchResultCitations citations`
 
-\Datetime processedAt
+    Citation settings for a search result.
 
-A timestamp in RFC 3339 format
+  - `list<ManagedAgentsSearchResultContent> content`
 
-StopReason stopReason
+    Array of text content blocks from the search result.
 
-The agent completed its turn naturally and is ready for the next user message.
+  - `string source`
 
-Type type
+    The URL source of the search result.
 
-
+  - `string title`
 
-[ManagedAgentsSessionStatusTerminatedEvent](api/beta/sessions/events.md)
+    The title of the search result.
 
-string id
+  - `Type type`
 
-Unique identifier for this event.
+### Beta Managed Agents Search Result Citations
 
-\Datetime processedAt
+- `ManagedAgentsSearchResultCitations`
 
-A timestamp in RFC 3339 format
+  - `bool enabled`
 
-Type type
+    Whether citations are enabled for this search result.
 
-
+### Beta Managed Agents Search Result Content
 
-[ManagedAgentsSessionThreadCreatedEvent](api/beta/sessions/events.md)
+- `ManagedAgentsSearchResultContent`
 
-string id
+  - `string text`
 
-Unique identifier for this event.
+    The text content.
 
-string agentName
+  - `Type type`
 
-Name of the callable agent the thread runs.
+### Beta Managed Agents Send Session Events
 
-\Datetime processedAt
+- `ManagedAgentsSendSessionEvents`
 
-A timestamp in RFC 3339 format
+  - `?list<Data> data`
 
-string sessionThreadID
+    Sent events
 
-Public `sthr_` ID of the newly created thread.
+### Beta Managed Agents Session Budget Reached
 
-Type type
+- `ManagedAgentsSessionBudgetReached`
 
-
+  - `Type type`
 
-[ManagedAgentsSpanOutcomeEvaluationStartEvent](api/beta/sessions/events.md)
+### Beta Managed Agents Session Deleted Event
 
-string id
+- `ManagedAgentsSessionDeletedEvent`
 
-Unique identifier for this event.
+  - `string id`
 
-int iteration
+    Unique identifier for this event.
 
-0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+  - `\Datetime processedAt`
 
-string outcomeID
+    A timestamp in RFC 3339 format
 
-The `outc_` ID of the outcome being evaluated.
+  - `Type type`
 
-\Datetime processedAt
+### Beta Managed Agents Session End Turn
 
-A timestamp in RFC 3339 format
+- `ManagedAgentsSessionEndTurn`
 
-Type type
+  - `Type type`
 
-
+### Beta Managed Agents Session Error Event
 
-[ManagedAgentsSpanOutcomeEvaluationEndEvent](api/beta/sessions/events.md)
+- `ManagedAgentsSessionErrorEvent`
 
-string id
+  - `string id`
 
-Unique identifier for this event.
+    Unique identifier for this event.
 
-string explanation
+  - `Error error`
 
-Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+    An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-int iteration
+  - `\Datetime processedAt`
 
-0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+    A timestamp in RFC 3339 format
 
-string outcomeEvaluationStartID
+  - `Type type`
 
-The id of the corresponding `span.outcome_evaluation_start` event.
+### Beta Managed Agents Session Event
 
-string outcomeID
+- `ManagedAgentsSessionEvent`
 
-The `outc_` ID of the outcome being evaluated.
+  - `ManagedAgentsUserMessageEvent`
 
-\Datetime processedAt
+    - `string id`
 
-A timestamp in RFC 3339 format
+      Unique identifier for this event.
 
-string result
+    - `list<Content> content`
 
-Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs\_revision': criteria not met, another revision cycle follows. 'max\_iterations\_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+      Array of content blocks comprising the user message.
 
-Type type
+    - `Type type`
 
-[ManagedAgentsSpanModelUsage](api/beta/sessions/events.md) usage
+    - `?\Datetime processedAt`
 
-Token usage for a single model request.
+      A timestamp in RFC 3339 format
 
-
+  - `ManagedAgentsUserInterruptEvent`
 
-[ManagedAgentsSpanModelRequestStartEvent](api/beta/sessions/events.md)
+    - `string id`
 
-string id
+      Unique identifier for this event.
 
-Unique identifier for this event.
+    - `Type type`
 
-\Datetime processedAt
+    - `?\Datetime processedAt`
 
-A timestamp in RFC 3339 format
+      A timestamp in RFC 3339 format
 
-Type type
+    - `?string sessionThreadID`
 
-
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-[ManagedAgentsSpanModelRequestEndEvent](api/beta/sessions/events.md)
+  - `ManagedAgentsUserToolConfirmationEvent`
 
-string id
+    - `string id`
 
-Unique identifier for this event.
+      Unique identifier for this event.
 
-?bool isError
+    - `Result result`
 
-Whether the model request resulted in an error.
+      UserToolConfirmationResult enum
 
-string modelRequestStartID
+    - `string toolUseID`
 
-The id of the corresponding `span.model_request_start` event.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-[ManagedAgentsSpanModelUsage](api/beta/sessions/events.md) modelUsage
+    - `Type type`
 
-Token usage for a single model request.
+    - `?string denyMessage`
 
-\Datetime processedAt
+      Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-A timestamp in RFC 3339 format
+    - `?\Datetime processedAt`
 
-Type type
+      A timestamp in RFC 3339 format
 
-
+    - `?string sessionThreadID`
 
-[ManagedAgentsSpanOutcomeEvaluationOngoingEvent](api/beta/sessions/events.md)
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-string id
+  - `ManagedAgentsUserCustomToolResultEvent`
 
-Unique identifier for this event.
+    - `string id`
 
-int iteration
+      Unique identifier for this event.
 
-0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+    - `string customToolUseID`
 
-string outcomeID
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-The `outc_` ID of the outcome being evaluated.
+    - `Type type`
 
-\Datetime processedAt
+    - `?list<Content> content`
 
-A timestamp in RFC 3339 format
+      The result content returned by the tool.
 
-Type type
+    - `?bool isError`
 
-
+      Whether the tool execution resulted in an error.
 
-[ManagedAgentsUserDefineOutcomeEvent](api/beta/sessions/events.md)
+    - `?\Datetime processedAt`
 
-string id
+      A timestamp in RFC 3339 format
 
-Unique identifier for this event.
+    - `?string sessionThreadID`
 
-string description
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-What the agent should produce. Copied from the input event.
+  - `ManagedAgentsAgentCustomToolUseEvent`
 
-?int maxIterations
+    - `string id`
 
-Evaluate-then-revise cycles before giving up. Default 3, max 20.
+      Unique identifier for this event.
 
-string outcomeID
+    - `array<string,mixed> input`
 
-Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+      Input parameters for the tool call.
 
-\Datetime processedAt
+    - `string name`
 
-A timestamp in RFC 3339 format
+      Name of the custom tool being called.
 
-Rubric rubric
+    - `\Datetime processedAt`
 
-Rubric for grading the quality of an outcome.
+      A timestamp in RFC 3339 format
 
-Type type
+    - `Type type`
 
-
+    - `?string sessionThreadID`
 
-[ManagedAgentsSessionDeletedEvent](api/beta/sessions/events.md)
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-string id
+  - `ManagedAgentsAgentMessageEvent`
 
-Unique identifier for this event.
+    - `string id`
 
-\Datetime processedAt
+      Unique identifier for this event.
 
-A timestamp in RFC 3339 format
+    - `list<Content> content`
 
-Type type
+      Array of text blocks comprising the agent response.
 
-
+    - `\Datetime processedAt`
 
-[ManagedAgentsSessionThreadStatusRunningEvent](api/beta/sessions/events.md)
+      A timestamp in RFC 3339 format
 
-string id
+    - `Type type`
 
-Unique identifier for this event.
+  - `ManagedAgentsAgentThinkingEvent`
 
-string agentName
+    - `string id`
 
-Name of the agent the thread runs.
+      Unique identifier for this event.
 
-\Datetime processedAt
+    - `\Datetime processedAt`
 
-A timestamp in RFC 3339 format
+      A timestamp in RFC 3339 format
 
-string sessionThreadID
+    - `Type type`
 
-Public sthr\_ ID of the thread that started running.
+  - `ManagedAgentsAgentMCPToolUseEvent`
 
-Type type
+    - `string id`
 
-
+      Unique identifier for this event.
 
-[ManagedAgentsSessionThreadStatusIdleEvent](api/beta/sessions/events.md)
+    - `array<string,mixed> input`
 
-string id
+      Input parameters for the tool call.
 
-Unique identifier for this event.
+    - `string mcpServerName`
 
-string agentName
+      Name of the MCP server providing the tool.
 
-Name of the agent the thread runs.
+    - `string name`
 
-\Datetime processedAt
+      Name of the MCP tool being used.
 
-A timestamp in RFC 3339 format
+    - `\Datetime processedAt`
 
-string sessionThreadID
+      A timestamp in RFC 3339 format
 
-Public sthr\_ ID of the thread that went idle.
+    - `Type type`
 
-StopReason stopReason
+    - `?EvaluatedPermission evaluatedPermission`
 
-The agent completed its turn naturally and is ready for the next user message.
+      AgentEvaluatedPermission enum
 
-Type type
+    - `?string sessionThreadID`
 
-
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-[ManagedAgentsSessionThreadStatusTerminatedEvent](api/beta/sessions/events.md)
+  - `ManagedAgentsAgentMCPToolResultEvent`
 
-string id
+    - `string id`
 
-Unique identifier for this event.
+      Unique identifier for this event.
 
-string agentName
+    - `string mcpToolUseID`
 
-Name of the agent the thread runs.
+      The id of the `agent.mcp_tool_use` event this result corresponds to.
 
-\Datetime processedAt
+    - `\Datetime processedAt`
 
-A timestamp in RFC 3339 format
+      A timestamp in RFC 3339 format
 
-string sessionThreadID
+    - `Type type`
 
-Public sthr\_ ID of the thread that terminated.
+    - `?list<Content> content`
 
-Type type
+      The result content returned by the tool.
 
-
+    - `?bool isError`
 
-[BetaManagedAgentsUserToolResultEvent](api/beta/sessions.md)
+      Whether the tool execution resulted in an error.
 
-string id
+  - `ManagedAgentsAgentToolUseEvent`
 
-Unique identifier for this event.
+    - `string id`
 
-string toolUseID
+      Unique identifier for this event.
 
-The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+    - `array<string,mixed> input`
 
-Type type
+      Input parameters for the tool call.
 
-?list<Content> content
+    - `string name`
 
-The result content returned by the tool.
+      Name of the agent tool being used.
 
-?bool isError
+    - `\Datetime processedAt`
 
-Whether the tool execution resulted in an error.
+      A timestamp in RFC 3339 format
 
-?\Datetime processedAt
+    - `Type type`
 
-A timestamp in RFC 3339 format
+    - `?EvaluatedPermission evaluatedPermission`
 
-?string sessionThreadID
+      AgentEvaluatedPermission enum
 
-Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+    - `?string sessionThreadID`
 
-
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-[ManagedAgentsSessionThreadStatusRescheduledEvent](api/beta/sessions/events.md)
+  - `ManagedAgentsAgentToolResultEvent`
 
-string id
+    - `string id`
 
-Unique identifier for this event.
+      Unique identifier for this event.
 
-string agentName
+    - `\Datetime processedAt`
 
-Name of the agent the thread runs.
+      A timestamp in RFC 3339 format
 
-\Datetime processedAt
+    - `string toolUseID`
 
-A timestamp in RFC 3339 format
+      The id of the `agent.tool_use` event this result corresponds to.
 
-string sessionThreadID
+    - `Type type`
 
-Public sthr\_ ID of the thread that is retrying.
+    - `?list<Content> content`
 
-Type type
+      The result content returned by the tool.
 
-
+    - `?bool isError`
 
-[BetaManagedAgentsSessionUpdatedEvent](api/beta/sessions.md)
+      Whether the tool execution resulted in an error.
 
-string id
+  - `ManagedAgentsAgentThreadMessageReceivedEvent`
 
-Unique identifier for this event.
+    - `string id`
 
-\Datetime processedAt
+      Unique identifier for this event.
 
-A timestamp in RFC 3339 format
+    - `list<Content> content`
 
-Type type
+      Message content blocks.
 
-?[BetaManagedAgentsSessionAgent](api/beta/sessions.md) agent
+    - `string fromSessionThreadID`
 
-Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+      Public `sthr_` ID of the thread that sent the message.
 
-?array<string,string> metadata
+    - `\Datetime processedAt`
 
-The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
+      A timestamp in RFC 3339 format
 
-?string title
+    - `Type type`
 
-The session's new title. Present only when the update changed it.
+    - `?string fromAgentName`
 
-
+      Name of the callable agent this message came from. Absent when received from the primary agent.
 
-[BetaManagedAgentsStartEvent](api/beta/sessions.md)
+  - `ManagedAgentsAgentThreadMessageSentEvent`
 
-[BetaManagedAgentsStartEventPreview](api/beta/sessions.md) event
+    - `string id`
 
-The previewed event's type and id. The event type determines which delta types the preview's event\_delta events carry: agent.message events stream content\_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+      Unique identifier for this event.
 
-Type type
+    - `list<Content> content`
 
-
+      Message content blocks.
 
-[BetaManagedAgentsDeltaEvent](api/beta/sessions.md)
+    - `\Datetime processedAt`
 
-[BetaManagedAgentsDeltaContent](api/beta/sessions.md) delta
+      A timestamp in RFC 3339 format
 
-One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content\_delta fragments, each a partial element of the content array.
+    - `string toSessionThreadID`
 
-string eventID
+      Public `sthr_` ID of the thread the message was sent to.
 
-The id of the event being previewed. Matches event.id on the corresponding event\_start and the buffered event that reconciles the preview.
+    - `Type type`
 
-Type type
+    - `?string toAgentName`
 
-
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-[BetaManagedAgentsSystemMessageEvent](api/beta/sessions.md)
+  - `ManagedAgentsAgentThreadContextCompactedEvent`
 
-string id
+    - `string id`
 
-Unique identifier for this event.
+      Unique identifier for this event.
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> content
+    - `\Datetime processedAt`
 
-System content blocks. Text-only.
+      A timestamp in RFC 3339 format
 
-Type type
+    - `Type type`
 
-?\Datetime processedAt
+  - `ManagedAgentsSessionErrorEvent`
 
-A timestamp in RFC 3339 format
+    - `string id`
 
-
+      Unique identifier for this event.
 
-[ManagedAgentsSystemMessageEventParams](api/beta/sessions/events.md)
+    - `Error error`
 
-list<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md)> content
+      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-System content blocks to append. Text-only.
+    - `\Datetime processedAt`
 
-Type type
+      A timestamp in RFC 3339 format
 
-
+    - `Type type`
 
-[ManagedAgentsTextBlock](api/beta/sessions/events.md)
+  - `ManagedAgentsSessionStatusRescheduledEvent`
 
-string text
+    - `string id`
 
-The text content.
+      Unique identifier for this event.
 
-Type type
+    - `\Datetime processedAt`
 
-
+      A timestamp in RFC 3339 format
 
-[ManagedAgentsTextRubric](api/beta/sessions/events.md)
+    - `Type type`
 
-string content
+  - `ManagedAgentsSessionStatusRunningEvent`
 
-Rubric content. Plain text or markdown — the grader treats it as freeform text.
+    - `string id`
 
-Type type
+      Unique identifier for this event.
 
-
+    - `\Datetime processedAt`
 
-[ManagedAgentsTextRubricParams](api/beta/sessions/events.md)
+      A timestamp in RFC 3339 format
 
-string content
+    - `Type type`
 
-Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+  - `ManagedAgentsSessionStatusIdleEvent`
 
-Type type
+    - `string id`
 
-
+      Unique identifier for this event.
 
-[ManagedAgentsUnknownError](api/beta/sessions/events.md)
+    - `\Datetime processedAt`
 
-string message
+      A timestamp in RFC 3339 format
 
-Human-readable error description.
+    - `StopReason stopReason`
 
-RetryStatus retryStatus
+      The agent completed its turn naturally and is ready for the next user message.
 
-What the client should do next in response to this error.
+    - `Type type`
 
-Type type
+  - `ManagedAgentsSessionStatusTerminatedEvent`
 
-
+    - `string id`
 
-[ManagedAgentsURLDocumentSource](api/beta/sessions/events.md)
+      Unique identifier for this event.
 
-Type type
+    - `\Datetime processedAt`
 
-string url
+      A timestamp in RFC 3339 format
 
-URL of the document to fetch.
+    - `Type type`
 
-
+  - `ManagedAgentsSessionThreadCreatedEvent`
 
-[ManagedAgentsURLImageSource](api/beta/sessions/events.md)
+    - `string id`
 
-Type type
+      Unique identifier for this event.
 
-string url
+    - `string agentName`
 
-URL of the image to fetch.
+      Name of the callable agent the thread runs.
 
-
+    - `\Datetime processedAt`
 
-[ManagedAgentsUserCustomToolResultEvent](api/beta/sessions/events.md)
+      A timestamp in RFC 3339 format
 
-string id
+    - `string sessionThreadID`
 
-Unique identifier for this event.
+      Public `sthr_` ID of the newly created thread.
 
-string customToolUseID
+    - `Type type`
 
-The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+  - `ManagedAgentsSpanOutcomeEvaluationStartEvent`
 
-Type type
+    - `string id`
 
-?list<Content> content
+      Unique identifier for this event.
 
-The result content returned by the tool.
+    - `int iteration`
 
-?bool isError
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
-Whether the tool execution resulted in an error.
+    - `string outcomeID`
 
-?\Datetime processedAt
+      The `outc_` ID of the outcome being evaluated.
 
-A timestamp in RFC 3339 format
+    - `\Datetime processedAt`
 
-?string sessionThreadID
+      A timestamp in RFC 3339 format
 
-Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+    - `Type type`
 
-
+  - `ManagedAgentsSpanOutcomeEvaluationEndEvent`
 
-[ManagedAgentsUserCustomToolResultEventParams](api/beta/sessions/events.md)
+    - `string id`
 
-string customToolUseID
+      Unique identifier for this event.
 
-The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+    - `string explanation`
 
-Type type
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
 
-?list<Content> content
+    - `int iteration`
 
-The result content returned by the tool.
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
-?bool isError
+    - `string outcomeEvaluationStartID`
 
-Whether the tool execution resulted in an error.
+      The id of the corresponding `span.outcome_evaluation_start` event.
 
-
+    - `string outcomeID`
 
-[ManagedAgentsUserDefineOutcomeEvent](api/beta/sessions/events.md)
+      The `outc_` ID of the outcome being evaluated.
 
-string id
+    - `\Datetime processedAt`
 
-Unique identifier for this event.
+      A timestamp in RFC 3339 format
 
-string description
+    - `string result`
 
-What the agent should produce. Copied from the input event.
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
-?int maxIterations
+    - `Type type`
 
-Evaluate-then-revise cycles before giving up. Default 3, max 20.
+    - `ManagedAgentsSpanModelUsage usage`
 
-string outcomeID
+      Token usage for a single model request.
 
-Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+  - `ManagedAgentsSpanModelRequestStartEvent`
 
-\Datetime processedAt
+    - `string id`
 
-A timestamp in RFC 3339 format
+      Unique identifier for this event.
 
-Rubric rubric
+    - `\Datetime processedAt`
 
-Rubric for grading the quality of an outcome.
+      A timestamp in RFC 3339 format
 
-Type type
+    - `Type type`
 
-
+  - `ManagedAgentsSpanModelRequestEndEvent`
 
-[ManagedAgentsUserDefineOutcomeEventParams](api/beta/sessions/events.md)
+    - `string id`
 
-string description
+      Unique identifier for this event.
 
-What the agent should produce. This is the task specification.
+    - `?bool isError`
 
-Rubric rubric
+      Whether the model request resulted in an error.
 
-Rubric for grading the quality of an outcome.
+    - `string modelRequestStartID`
 
-Type type
+      The id of the corresponding `span.model_request_start` event.
 
-?int maxIterations
+    - `ManagedAgentsSpanModelUsage modelUsage`
 
-Eval→revision cycles before giving up. Default 3, max 20.
+      Token usage for a single model request.
 
-
+    - `\Datetime processedAt`
 
-[ManagedAgentsUserInterruptEvent](api/beta/sessions/events.md)
+      A timestamp in RFC 3339 format
 
-string id
+    - `Type type`
 
-Unique identifier for this event.
+  - `ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
-Type type
+    - `string id`
 
-?\Datetime processedAt
+      Unique identifier for this event.
 
-A timestamp in RFC 3339 format
+    - `int iteration`
 
-?string sessionThreadID
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
-If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+    - `string outcomeID`
 
-
+      The `outc_` ID of the outcome being evaluated.
 
-[ManagedAgentsUserInterruptEventParams](api/beta/sessions/events.md)
+    - `\Datetime processedAt`
 
-Type type
+      A timestamp in RFC 3339 format
 
-?string sessionThreadID
+    - `Type type`
 
-If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+  - `ManagedAgentsUserDefineOutcomeEvent`
 
-
+    - `string id`
 
-[ManagedAgentsUserMessageEvent](api/beta/sessions/events.md)
+      Unique identifier for this event.
 
-string id
+    - `string description`
 
-Unique identifier for this event.
+      What the agent should produce. Copied from the input event.
 
-list<Content> content
+    - `?int maxIterations`
 
-Array of content blocks comprising the user message.
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
-Type type
+    - `string outcomeID`
 
-?\Datetime processedAt
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
 
-A timestamp in RFC 3339 format
+    - `\Datetime processedAt`
 
-
+      A timestamp in RFC 3339 format
 
-[ManagedAgentsUserMessageEventParams](api/beta/sessions/events.md)
+    - `Rubric rubric`
 
-list<Content> content
+      Rubric for grading the quality of an outcome.
 
-Array of content blocks for the user message.
+    - `Type type`
 
-Type type
+  - `ManagedAgentsSessionDeletedEvent`
 
-
+    - `string id`
 
-[ManagedAgentsUserToolConfirmationEvent](api/beta/sessions/events.md)
+      Unique identifier for this event.
 
-string id
+    - `\Datetime processedAt`
 
-Unique identifier for this event.
+      A timestamp in RFC 3339 format
 
-Result result
+    - `Type type`
 
-UserToolConfirmationResult enum
+  - `ManagedAgentsSessionThreadStatusRunningEvent`
 
-string toolUseID
+    - `string id`
 
-The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      Unique identifier for this event.
 
-Type type
+    - `string agentName`
 
-?string denyMessage
+      Name of the agent the thread runs.
 
-Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+    - `\Datetime processedAt`
 
-?\Datetime processedAt
+      A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+    - `string sessionThreadID`
 
-?string sessionThreadID
+      Public sthr_ ID of the thread that started running.
 
-When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+    - `Type type`
 
-
+  - `ManagedAgentsSessionThreadStatusIdleEvent`
 
-[ManagedAgentsUserToolConfirmationEventParams](api/beta/sessions/events.md)
+    - `string id`
 
-Result result
+      Unique identifier for this event.
 
-UserToolConfirmationResult enum
+    - `string agentName`
 
-string toolUseID
+      Name of the agent the thread runs.
 
-The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+    - `\Datetime processedAt`
 
-Type type
+      A timestamp in RFC 3339 format
 
-?string denyMessage
+    - `string sessionThreadID`
 
-Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+      Public sthr_ ID of the thread that went idle.
 
-
+    - `StopReason stopReason`
 
-[ManagedAgentsUserToolResultEventParams](api/beta/sessions/events.md)
+      The agent completed its turn naturally and is ready for the next user message.
 
-string toolUseID
+    - `Type type`
 
-The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+  - `ManagedAgentsSessionThreadStatusTerminatedEvent`
 
-Type type
+    - `string id`
 
-?list<Content> content
+      Unique identifier for this event.
 
-The result content returned by the tool.
+    - `string agentName`
 
-?bool isError
+      Name of the agent the thread runs.
 
-Whether the tool execution resulted in an error.
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `Type type`
+
+  - `BetaManagedAgentsUserToolResultEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string toolUseID`
+
+      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+    - `?list<Content> content`
+
+      The result content returned by the tool.
+
+    - `?bool isError`
+
+      Whether the tool execution resulted in an error.
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `?string sessionThreadID`
+
+      Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+
+  - `ManagedAgentsSessionThreadStatusRescheduledEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `Type type`
+
+  - `BetaManagedAgentsSessionUpdatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?BetaManagedAgentsSessionAgent agent`
+
+      Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+    - `?BetaManagedAgentsBudgetLimit budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+    - `?array<string,string> metadata`
+
+      The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
+
+    - `?string title`
+
+      The session's new title. Present only when the update changed it.
+
+  - `BetaManagedAgentsSystemMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks. Text-only.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionUsageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `ManagedAgentsSessionUsageSnapshot usage`
+
+      Point-in-time snapshot of a session's cumulative usage.
+
+    - `?BetaManagedAgentsBudgetLimit budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+### Beta Managed Agents Session Requires Action
+
+- `ManagedAgentsSessionRequiresAction`
+
+  - `list<string> eventIDs`
+
+    The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+  - `Type type`
+
+### Beta Managed Agents Session Retries Exhausted
+
+- `ManagedAgentsSessionRetriesExhausted`
+
+  - `Type type`
+
+### Beta Managed Agents Session Status Idle Event
+
+- `ManagedAgentsSessionStatusIdleEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `StopReason stopReason`
+
+    The agent completed its turn naturally and is ready for the next user message.
+
+  - `Type type`
+
+### Beta Managed Agents Session Status Rescheduled Event
+
+- `ManagedAgentsSessionStatusRescheduledEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+### Beta Managed Agents Session Status Running Event
+
+- `ManagedAgentsSessionStatusRunningEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+### Beta Managed Agents Session Status Terminated Event
+
+- `ManagedAgentsSessionStatusTerminatedEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+### Beta Managed Agents Session Thread Created Event
+
+- `ManagedAgentsSessionThreadCreatedEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `string agentName`
+
+    Name of the callable agent the thread runs.
+
+  - `\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string sessionThreadID`
+
+    Public `sthr_` ID of the newly created thread.
+
+  - `Type type`
+
+### Beta Managed Agents Session Thread Status Idle Event
+
+- `ManagedAgentsSessionThreadStatusIdleEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `string agentName`
+
+    Name of the agent the thread runs.
+
+  - `\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string sessionThreadID`
+
+    Public sthr_ ID of the thread that went idle.
+
+  - `StopReason stopReason`
+
+    The agent completed its turn naturally and is ready for the next user message.
+
+  - `Type type`
+
+### Beta Managed Agents Session Thread Status Rescheduled Event
+
+- `ManagedAgentsSessionThreadStatusRescheduledEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `string agentName`
+
+    Name of the agent the thread runs.
+
+  - `\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string sessionThreadID`
+
+    Public sthr_ ID of the thread that is retrying.
+
+  - `Type type`
+
+### Beta Managed Agents Session Thread Status Running Event
+
+- `ManagedAgentsSessionThreadStatusRunningEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `string agentName`
+
+    Name of the agent the thread runs.
+
+  - `\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string sessionThreadID`
+
+    Public sthr_ ID of the thread that started running.
+
+  - `Type type`
+
+### Beta Managed Agents Session Thread Status Terminated Event
+
+- `ManagedAgentsSessionThreadStatusTerminatedEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `string agentName`
+
+    Name of the agent the thread runs.
+
+  - `\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string sessionThreadID`
+
+    Public sthr_ ID of the thread that terminated.
+
+  - `Type type`
+
+### Beta Managed Agents Session Usage Snapshot
+
+- `ManagedAgentsSessionUsageSnapshot`
+
+  - `?float activeSeconds`
+
+    Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
+
+  - `?BetaManagedAgentsCacheCreationUsage cacheCreation`
+
+    Prompt-cache creation token usage broken down by cache lifetime.
+
+  - `?int cacheReadInputTokens`
+
+    Total tokens read from prompt cache.
+
+  - `?int inputTokens`
+
+    Total input tokens consumed across all turns.
+
+  - `?BetaMonetaryAmount listCost`
+
+    A monetary amount in a specific currency.
+
+  - `?int outputTokens`
+
+    Total output tokens generated across all turns.
+
+  - `?BetaManagedAgentsServerToolUsage serverToolUse`
+
+    Cumulative count of server-executed tool invocations, broken down by tool.
+
+### Beta Managed Agents Span Model Request End Event
+
+- `ManagedAgentsSpanModelRequestEndEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `?bool isError`
+
+    Whether the model request resulted in an error.
+
+  - `string modelRequestStartID`
+
+    The id of the corresponding `span.model_request_start` event.
+
+  - `ManagedAgentsSpanModelUsage modelUsage`
+
+    Token usage for a single model request.
+
+  - `\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+### Beta Managed Agents Span Model Request Start Event
+
+- `ManagedAgentsSpanModelRequestStartEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+### Beta Managed Agents Span Model Usage
+
+- `ManagedAgentsSpanModelUsage`
+
+  - `int cacheCreationInputTokens`
+
+    Tokens used to create prompt cache in this request.
+
+  - `int cacheReadInputTokens`
+
+    Tokens read from prompt cache in this request.
+
+  - `int inputTokens`
+
+    Input tokens consumed by this request.
+
+  - `int outputTokens`
+
+    Output tokens generated by this request.
+
+  - `?Speed speed`
+
+    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+### Beta Managed Agents Span Outcome Evaluation End Event
+
+- `ManagedAgentsSpanOutcomeEvaluationEndEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `string explanation`
+
+    Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+  - `int iteration`
+
+    0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+  - `string outcomeEvaluationStartID`
+
+    The id of the corresponding `span.outcome_evaluation_start` event.
+
+  - `string outcomeID`
+
+    The `outc_` ID of the outcome being evaluated.
+
+  - `\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string result`
+
+    Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+  - `Type type`
+
+  - `ManagedAgentsSpanModelUsage usage`
+
+    Token usage for a single model request.
+
+### Beta Managed Agents Span Outcome Evaluation Ongoing Event
+
+- `ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `int iteration`
+
+    0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+  - `string outcomeID`
+
+    The `outc_` ID of the outcome being evaluated.
+
+  - `\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+### Beta Managed Agents Span Outcome Evaluation Start Event
+
+- `ManagedAgentsSpanOutcomeEvaluationStartEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `int iteration`
+
+    0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+  - `string outcomeID`
+
+    The `outc_` ID of the outcome being evaluated.
+
+  - `\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+### Beta Managed Agents Stream Session Events
+
+- `ManagedAgentsStreamSessionEvents`
+
+  - `ManagedAgentsUserMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<Content> content`
+
+      Array of content blocks comprising the user message.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `ManagedAgentsUserInterruptEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `?string sessionThreadID`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
+  - `ManagedAgentsUserToolConfirmationEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `Result result`
+
+      UserToolConfirmationResult enum
+
+    - `string toolUseID`
+
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+    - `?string denyMessage`
+
+      Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `?string sessionThreadID`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+
+  - `ManagedAgentsUserCustomToolResultEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string customToolUseID`
+
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+    - `?list<Content> content`
+
+      The result content returned by the tool.
+
+    - `?bool isError`
+
+      Whether the tool execution resulted in an error.
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `?string sessionThreadID`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+  - `ManagedAgentsAgentCustomToolUseEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `array<string,mixed> input`
+
+      Input parameters for the tool call.
+
+    - `string name`
+
+      Name of the custom tool being called.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?string sessionThreadID`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+
+  - `ManagedAgentsAgentMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<Content> content`
+
+      Array of text blocks comprising the agent response.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsAgentThinkingEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsAgentMCPToolUseEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `array<string,mixed> input`
+
+      Input parameters for the tool call.
+
+    - `string mcpServerName`
+
+      Name of the MCP server providing the tool.
+
+    - `string name`
+
+      Name of the MCP tool being used.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?EvaluatedPermission evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+    - `?string sessionThreadID`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
+  - `ManagedAgentsAgentMCPToolResultEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string mcpToolUseID`
+
+      The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?list<Content> content`
+
+      The result content returned by the tool.
+
+    - `?bool isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `ManagedAgentsAgentToolUseEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `array<string,mixed> input`
+
+      Input parameters for the tool call.
+
+    - `string name`
+
+      Name of the agent tool being used.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?EvaluatedPermission evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+    - `?string sessionThreadID`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
+  - `ManagedAgentsAgentToolResultEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string toolUseID`
+
+      The id of the `agent.tool_use` event this result corresponds to.
+
+    - `Type type`
+
+    - `?list<Content> content`
+
+      The result content returned by the tool.
+
+    - `?bool isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `ManagedAgentsAgentThreadMessageReceivedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<Content> content`
+
+      Message content blocks.
+
+    - `string fromSessionThreadID`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?string fromAgentName`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `ManagedAgentsAgentThreadMessageSentEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<Content> content`
+
+      Message content blocks.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string toSessionThreadID`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `Type type`
+
+    - `?string toAgentName`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
+
+  - `ManagedAgentsAgentThreadContextCompactedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionErrorEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `Error error`
+
+      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionStatusRescheduledEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionStatusRunningEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionStatusIdleEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+    - `Type type`
+
+  - `ManagedAgentsSessionStatusTerminatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionThreadCreatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the callable agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `Type type`
+
+  - `ManagedAgentsSpanOutcomeEvaluationStartEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `int iteration`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `string outcomeID`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSpanOutcomeEvaluationEndEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string explanation`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `int iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `string outcomeEvaluationStartID`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `string outcomeID`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string result`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `Type type`
+
+    - `ManagedAgentsSpanModelUsage usage`
+
+      Token usage for a single model request.
+
+  - `ManagedAgentsSpanModelRequestStartEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSpanModelRequestEndEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `?bool isError`
+
+      Whether the model request resulted in an error.
+
+    - `string modelRequestStartID`
+
+      The id of the corresponding `span.model_request_start` event.
+
+    - `ManagedAgentsSpanModelUsage modelUsage`
+
+      Token usage for a single model request.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `int iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `string outcomeID`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsUserDefineOutcomeEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string description`
+
+      What the agent should produce. Copied from the input event.
+
+    - `?int maxIterations`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `string outcomeID`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Rubric rubric`
+
+      Rubric for grading the quality of an outcome.
+
+    - `Type type`
+
+  - `ManagedAgentsSessionDeletedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+  - `ManagedAgentsSessionThreadStatusRunningEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `Type type`
+
+  - `ManagedAgentsSessionThreadStatusIdleEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+    - `Type type`
+
+  - `ManagedAgentsSessionThreadStatusTerminatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `Type type`
+
+  - `BetaManagedAgentsUserToolResultEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string toolUseID`
+
+      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+    - `?list<Content> content`
+
+      The result content returned by the tool.
+
+    - `?bool isError`
+
+      Whether the tool execution resulted in an error.
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `?string sessionThreadID`
+
+      Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+
+  - `ManagedAgentsSessionThreadStatusRescheduledEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string agentName`
+
+      Name of the agent the thread runs.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string sessionThreadID`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `Type type`
+
+  - `BetaManagedAgentsSessionUpdatedEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `?BetaManagedAgentsSessionAgent agent`
+
+      Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+    - `?BetaManagedAgentsBudgetLimit budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+    - `?array<string,string> metadata`
+
+      The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
+
+    - `?string title`
+
+      The session's new title. Present only when the update changed it.
+
+  - `BetaManagedAgentsStartEvent`
+
+    - `BetaManagedAgentsStartEventPreview event`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+    - `Type type`
+
+  - `BetaManagedAgentsDeltaEvent`
+
+    - `BetaManagedAgentsDeltaContent delta`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+    - `string eventID`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `Type type`
+
+  - `BetaManagedAgentsSystemMessageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `list<BetaManagedAgentsSystemContentBlock> content`
+
+      System content blocks. Text-only.
+
+    - `Type type`
+
+    - `?\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionUsageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `ManagedAgentsSessionUsageSnapshot usage`
+
+      Point-in-time snapshot of a session's cumulative usage.
+
+    - `?BetaManagedAgentsBudgetLimit budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+### Beta Managed Agents System Message Event Params
+
+- `ManagedAgentsSystemMessageEventParams`
+
+  - `list<BetaManagedAgentsSystemContentBlock> content`
+
+    System content blocks to append. Text-only.
+
+  - `Type type`
+
+### Beta Managed Agents Text Block
+
+- `ManagedAgentsTextBlock`
+
+  - `string text`
+
+    The text content.
+
+  - `Type type`
+
+### Beta Managed Agents Text Rubric
+
+- `ManagedAgentsTextRubric`
+
+  - `string content`
+
+    Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+  - `Type type`
+
+### Beta Managed Agents Text Rubric Params
+
+- `ManagedAgentsTextRubricParams`
+
+  - `string content`
+
+    Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+  - `Type type`
+
+### Beta Managed Agents Unknown Error
+
+- `ManagedAgentsUnknownError`
+
+  - `string message`
+
+    Human-readable error description.
+
+  - `RetryStatus retryStatus`
+
+    What the client should do next in response to this error.
+
+  - `Type type`
+
+### Beta Managed Agents URL Document Source
+
+- `ManagedAgentsURLDocumentSource`
+
+  - `Type type`
+
+  - `string url`
+
+    URL of the document to fetch.
+
+### Beta Managed Agents URL Image Source
+
+- `ManagedAgentsURLImageSource`
+
+  - `Type type`
+
+  - `string url`
+
+    URL of the image to fetch.
+
+### Beta Managed Agents User Custom Tool Result Event
+
+- `ManagedAgentsUserCustomToolResultEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `string customToolUseID`
+
+    The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+  - `Type type`
+
+  - `?list<Content> content`
+
+    The result content returned by the tool.
+
+  - `?bool isError`
+
+    Whether the tool execution resulted in an error.
+
+  - `?\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?string sessionThreadID`
+
+    Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+### Beta Managed Agents User Custom Tool Result Event Params
+
+- `ManagedAgentsUserCustomToolResultEventParams`
+
+  - `string customToolUseID`
+
+    The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+  - `Type type`
+
+  - `?list<Content> content`
+
+    The result content returned by the tool.
+
+  - `?bool isError`
+
+    Whether the tool execution resulted in an error.
+
+### Beta Managed Agents User Define Outcome Event
+
+- `ManagedAgentsUserDefineOutcomeEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `string description`
+
+    What the agent should produce. Copied from the input event.
+
+  - `?int maxIterations`
+
+    Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+  - `string outcomeID`
+
+    Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+  - `\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Rubric rubric`
+
+    Rubric for grading the quality of an outcome.
+
+  - `Type type`
+
+### Beta Managed Agents User Define Outcome Event Params
+
+- `ManagedAgentsUserDefineOutcomeEventParams`
+
+  - `string description`
+
+    What the agent should produce. This is the task specification.
+
+  - `Rubric rubric`
+
+    Rubric for grading the quality of an outcome.
+
+  - `Type type`
+
+  - `?int maxIterations`
+
+    Eval→revision cycles before giving up. Default 3, max 20.
+
+### Beta Managed Agents User Interrupt Event
+
+- `ManagedAgentsUserInterruptEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `Type type`
+
+  - `?\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?string sessionThreadID`
+
+    If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
+### Beta Managed Agents User Interrupt Event Params
+
+- `ManagedAgentsUserInterruptEventParams`
+
+  - `Type type`
+
+  - `?string sessionThreadID`
+
+    If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
+### Beta Managed Agents User Message Event
+
+- `ManagedAgentsUserMessageEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `list<Content> content`
+
+    Array of content blocks comprising the user message.
+
+  - `Type type`
+
+  - `?\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
+
+### Beta Managed Agents User Message Event Params
+
+- `ManagedAgentsUserMessageEventParams`
+
+  - `list<Content> content`
+
+    Array of content blocks for the user message.
+
+  - `Type type`
+
+### Beta Managed Agents User Tool Confirmation Event
+
+- `ManagedAgentsUserToolConfirmationEvent`
+
+  - `string id`
+
+    Unique identifier for this event.
+
+  - `Result result`
+
+    UserToolConfirmationResult enum
+
+  - `string toolUseID`
+
+    The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+  - `Type type`
+
+  - `?string denyMessage`
+
+    Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+  - `?\Datetime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `?string sessionThreadID`
+
+    When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+
+### Beta Managed Agents User Tool Confirmation Event Params
+
+- `ManagedAgentsUserToolConfirmationEventParams`
+
+  - `Result result`
+
+    UserToolConfirmationResult enum
+
+  - `string toolUseID`
+
+    The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+  - `Type type`
+
+  - `?string denyMessage`
+
+    Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+### Beta Managed Agents User Tool Result Event Params
+
+- `ManagedAgentsUserToolResultEventParams`
+
+  - `string toolUseID`
+
+    The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+
+  - `Type type`
+
+  - `?list<Content> content`
+
+    The result content returned by the tool.
+
+  - `?bool isError`
+
+    Whether the tool execution resulted in an error.
 
 ---
 

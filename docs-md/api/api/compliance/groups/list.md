@@ -1,134 +1,83 @@
 # List Compliance Groups
 
-To enable the Compliance API, see the setup guide.
-
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
-
-Copy page
-
-
-
-# List Compliance Groups
-
-GET/v1/compliance/groups
+**GET** `/v1/compliance/groups`
 
 List Compliance Groups
 
-##### Query parameters
+## Query parameters
 
-
+- `limit: optional number`
 
-limit: optional number
+  Maximum results (default: 500, max: 1000)
 
-Maximum results (default: 500, max: 1000)
+  default: 500, maximum: 1000, minimum: 1
 
-default500
+- `name_prefix: optional string`
 
-maximum1000
+  Filter groups by name prefix
 
-minimum1
+  default: ""
 
-
+- `page: optional string`
 
-name\_prefix: optional string
+  Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
-Filter groups by name prefix
+## Headers
 
-default""
+- `"x-api-key": optional string`
 
-page: optional string
+## Returns
 
-Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
+- `data: array of object`
 
-##### Headers
+  List of groups
 
-"x-api-key": optional string
+  - `id: string`
 
-##### Returns
+    Group identifier (tagged ID)
 
-
+  - `created_at: string or null`
 
-data: array of object{ id, created\_at, description, 4 more }
+    Group creation timestamp (ISO 8601)
 
-List of groups
+  - `description: string`
 
-id: string
+    Group description
 
-Group identifier (tagged ID)
+  - `name: string`
 
-created\_at: string or null
+    Group name
 
-Group creation timestamp (ISO 8601)
+  - `roles: array of string or null`
 
-description: string
+    Role IDs assigned to this group.
 
-Group description
+  - `source_type: string`
 
-name: string
+    How the group was created ('direct' or 'scim')
 
-Group name
+  - `updated_at: string or null`
 
-roles: array of string or null
+    Group last-updated timestamp (ISO 8601)
 
-Role IDs assigned to this group.
+- `has_more: boolean`
 
-source\_type: string
+  Whether more records exist beyond the current result set
 
-How the group was created ('direct' or 'scim')
+- `next_page: string or null`
 
-updated\_at: string or null
+  Token to retrieve the next page. Use this as the 'page' parameter in your next request
 
-Group last-updated timestamp (ISO 8601)
+## Example
 
-has\_more: boolean
-
-Whether more records exist beyond the current result set
-
-next\_page: string or null
-
-Token to retrieve the next page. Use this as the 'page' parameter in your next request
-
-List Compliance Groups
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/compliance/groups \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
-      "created_at": "2025-03-12T18:22:41.123456",
-      "description": "All members of the engineering organization",
-      "name": "Engineering Team",
-      "roles": [
-        "rbac_role_01SGBg3kEnZrdsVR2QmyJbvD",
-        "rbac_role_01HtCd4mFoAseWS3RnzKcwE7"
-      ],
-      "source_type": "scim",
-      "updated_at": "2025-03-14T09:05:17.456789"
-    }
-  ],
-  "has_more": true,
-  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

@@ -1,110 +1,76 @@
 # Get Tunnel
 
-Copy page
+**GET** `/v1/organizations/tunnels/{tunnel_id}`
 
-
-
-# Get Tunnel
-
-Deprecated
-
-GET/v1/organizations/tunnels/{tunnel\_id}
+**Deprecated**
 
 **Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](api/beta/tunnels.md) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
 Retrieve a single tunnel in the caller's organization by ID.
 
-##### Path parameters
+## Path parameters
 
-tunnel\_id: string
+- `tunnel_id: string`
 
-ID of the Tunnel.
+  ID of the Tunnel.
 
-##### Headers
+## Headers
 
-"anthropic-beta": array of "mcp-tunnels-2026-05-19"
+- `"anthropic-beta": array of "mcp-tunnels-2026-05-19"`
 
-Required for all Tunnel endpoints.
+  Required for all Tunnel endpoints.
 
-##### Returns
+## Returns
 
-id: string
+- `id: string`
 
-ID of the Tunnel.
+  ID of the Tunnel.
 
-
+- `archived_at: string or null`
 
-archived\_at: string or null
+  RFC 3339 datetime string indicating when the Tunnel was archived, or
+  `null` if it is not archived.
 
-RFC 3339 datetime string indicating when the Tunnel was archived, or
-`null` if it is not archived.
+  format: date-time
 
-formatdate-time
+- `created_at: string`
 
-
+  RFC 3339 datetime string indicating when the Tunnel was created.
 
-created\_at: string
+  format: date-time
 
-RFC 3339 datetime string indicating when the Tunnel was created.
+- `display_name: string or null`
 
-formatdate-time
+  Human-readable name for the Tunnel (1–255 characters), or `null` if unset.
 
-display\_name: string or null
+- `domain: string`
 
-Human-readable name for the Tunnel (1–255 characters), or `null` if unset.
+  Anthropic-assigned hostname for the Tunnel. MCP server URLs whose host is a
+  subdomain of this value are routed through the Tunnel. Globally unique and
+  never reused, even after the Tunnel is archived.
 
-domain: string
+- `type: "tunnel"`
 
-Anthropic-assigned hostname for the Tunnel. MCP server URLs whose host is a
-subdomain of this value are routed through the Tunnel. Globally unique and
-never reused, even after the Tunnel is archived.
+  Object type. Always `tunnel` for Tunnels.
 
-
+  default: tunnel
 
-type: "tunnel"
+- `workspace_id: string or null`
 
-Object type. Always `tunnel` for Tunnels.
+  ID of the Workspace this Tunnel belongs to, or `null` for the default
+  Workspace. Immutable after creation.
 
-defaulttunnel
+## Example
 
-workspace\_id: string or null
-
-ID of the Workspace this Tunnel belongs to, or `null` for the default
-Workspace. Immutable after creation.
-
-Get Tunnel
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "tnl_01Hx9Kp2RtQvMn3sWbYdLcF8",
-  "archived_at": "2024-11-01T23:59:27.427722Z",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "display_name": "Production",
-  "domain": "a1b2c3d4.tunnel.anthropic.com",
-  "type": "tunnel",
-  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "tnl_01Hx9Kp2RtQvMn3sWbYdLcF8",
   "archived_at": "2024-11-01T23:59:27.427722Z",

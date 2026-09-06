@@ -1,84 +1,72 @@
 # List Credentials
 
-Copy page
+`$client->beta->vaults->credentials->list(string vaultID, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<ManagedAgentsCredential>`
 
-
-
-PHP
-
-# List Credentials
-
-$client->beta->vaults->credentials->list(string vaultID, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<[ManagedAgentsCredential](api/beta/vaults/credentials.md)>
-
-GET/v1/vaults/{vault\_id}/credentials
+**GET** `/v1/vaults/{vault_id}/credentials`
 
 List Credentials
 
-##### ParametersExpand Collapse
+## Parameters
 
-vaultID: string
+- `vaultID: string`
 
-includeArchived?:optional bool
+- `includeArchived?:optional bool`
 
-Whether to include archived credentials in the results.
+  Whether to include archived credentials in the results.
 
-limit?:optional int
+- `limit?:optional int`
 
-Maximum number of credentials to return per page. Defaults to 20, maximum 100.
+  Maximum number of credentials to return per page. Defaults to 20, maximum 100.
 
-page?:optional string
+- `page?:optional string`
 
-Opaque pagination token from a previous `list_credentials` response.
+  Opaque pagination token from a previous `list_credentials` response.
 
-betas?:optional list<AnthropicBeta>
+- `betas?:optional list<AnthropicBeta>`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `ManagedAgentsCredential`
 
-[ManagedAgentsCredential](api/beta/vaults/credentials.md)
+  - `string id`
 
-string id
+    Unique identifier for the credential.
 
-Unique identifier for the credential.
+  - `?\Datetime archivedAt`
 
-?\Datetime archivedAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `Auth auth`
 
-Auth auth
+    Authentication details for a credential.
 
-Authentication details for a credential.
+  - `\Datetime createdAt`
 
-\Datetime createdAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `array<string,string> metadata`
 
-array<string,string> metadata
+    Arbitrary key-value metadata attached to the credential.
 
-Arbitrary key-value metadata attached to the credential.
+  - `Type type`
 
-Type type
+  - `\Datetime updatedAt`
 
-\Datetime updatedAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `string vaultID`
 
-string vaultID
+    Identifier of the vault this credential belongs to.
 
-Identifier of the vault this credential belongs to.
+  - `?string displayName`
 
-?string displayName
+    Human-readable name for the credential.
 
-Human-readable name for the credential.
+## Example
 
-List Credentials
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -90,47 +78,15 @@ $page = $client->beta->vaults->credentials->list(
   includeArchived: true,
   limit: 0,
   page: 'page',
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($page);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
-      "archived_at": null,
-      "auth": {
-        "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
-        "type": "static_bearer"
-      },
-      "created_at": "2026-03-15T10:00:00Z",
-      "metadata": {
-        "environment": "production"
-      },
-      "type": "vault_credential",
-      "updated_at": "2026-03-15T10:00:00Z",
-      "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
-      "display_name": "Example credential"
-    }
-  ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

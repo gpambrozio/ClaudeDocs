@@ -1,94 +1,72 @@
 # Update Workspace Member
 
-Copy page
-
-
-
-cURL
-
-# Update Workspace Member
-
-POST/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+**POST** `/v1/organizations/workspaces/{workspace_id}/members/{user_id}`
 
 Update Workspace Member
 
-##### Path parameters
+## Path parameters
 
-workspace\_id: string
+- `workspace_id: string`
 
-ID of the Workspace.
+  ID of the Workspace.
 
-user\_id: string
+- `user_id: string`
 
-ID of the User.
+  ID of the User.
 
-##### Body
+## Body parameters
 
-
+- `workspace_role: BetaWorkspaceRole`
 
-workspace\_role: [BetaWorkspaceRole](api/http/beta/organization/workspaces.md)
+  New workspace role for the User.
 
-New workspace role for the User.
+  - `"workspace_admin"`
 
-One of the following:
+  - `"workspace_billing"`
 
-"workspace\_admin"
+  - `"workspace_developer"`
 
-"workspace\_billing"
+  - `"workspace_restricted_developer"`
 
-"workspace\_developer"
+  - `"workspace_user"`
 
-"workspace\_restricted\_developer"
+## Returns
 
-"workspace\_user"
+- `BetaWorkspaceMember object`
 
-##### Returns
+  - `type: "workspace_member"`
 
-
+    Object type.
 
-BetaWorkspaceMember object{ type, user\_id, workspace\_id, workspace\_role }
+    For Workspace Members, this is always `"workspace_member"`.
 
-
+    default: workspace_member
 
-type: "workspace\_member"
+  - `user_id: string`
 
-Object type.
+    ID of the User.
 
-For Workspace Members, this is always `"workspace_member"`.
+  - `workspace_id: string`
 
-defaultworkspace\_member
+    ID of the Workspace.
 
-user\_id: string
+  - `workspace_role: BetaWorkspaceRole`
 
-ID of the User.
+    Role of the Workspace Member.
 
-workspace\_id: string
+    - `"workspace_admin"`
 
-ID of the Workspace.
+    - `"workspace_billing"`
 
-
+    - `"workspace_developer"`
 
-workspace\_role: [BetaWorkspaceRole](api/http/beta/organization/workspaces.md)
+    - `"workspace_restricted_developer"`
 
-Role of the Workspace Member.
+    - `"workspace_user"`
 
-One of the following:
+## Example
 
-"workspace\_admin"
-
-"workspace\_billing"
-
-"workspace\_developer"
-
-"workspace\_restricted\_developer"
-
-"workspace\_user"
-
-Update Workspace Member
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members/$USER_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -98,26 +76,9 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
         }'
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "type": "workspace_member",
-  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-  "workspace_role": "workspace_admin"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "type": "workspace_member",
   "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",

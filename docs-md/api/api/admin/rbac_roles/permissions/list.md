@@ -1,237 +1,164 @@
 # List RBAC Role Permissions
 
-Copy page
-
-
-
-# List RBAC Role Permissions
-
-GET/v1/organizations/rbac\_roles/{role\_id}/permissions
+**GET** `/v1/organizations/rbac_roles/{role_id}/permissions`
 
 List the permissions an RBAC Role grants.
 
 The RBAC Roles API is available to Claude Enterprise organizations only.
 
-##### Path parameters
+## Path parameters
 
-role\_id: string
+- `role_id: string`
 
-ID of the RBAC Role.
+  ID of the RBAC Role.
 
-##### Query parameters
+## Query parameters
 
-
+- `limit: optional number`
 
-limit: optional number
+  Number of items to return per page.
 
-Number of items to return per page.
+  Defaults to `20`. Ranges from `1` to `1000`.
 
-Defaults to `20`. Ranges from `1` to `1000`.
+  default: 20, maximum: 1000, minimum: 1
 
-default20
+- `page: optional string`
 
-maximum1000
+  Optionally set to the `next_page` token from the previous response.
 
-minimum1
+## Returns
 
-page: optional string
+- `data: array of RbacRolePermission`
 
-Optionally set to the `next_page` token from the previous response.
+  - `action: string`
 
-##### Returns
+    Action the permission grants on the resource.
 
-
+    The vocabulary follows the resource: an `organization` grant carries a
+    product-feature entitlement (for example `chat`), an admin-panel
+    permission entitlement (`permission_*`), or a blanket capability-access
+    mode — `capability_access_all` grants every product-feature entitlement,
+    and `capability_access_all_ga` grants the generally-available subset as
+    it stands at permission-check time; neither mode grants model-access
+    entitlements. A consumer enumerating a role's per-feature grants should
+    treat a blanket row as granting every product-feature entitlement it
+    covers, or it will under-report the role's effective access. A `connector_tool` grant carries
+    a tool-access action (`use` or `always_allow`); a `connector_scope` grant
+    carries the scope action `grant` (the role may receive the named OAuth
+    scope when tokens are minted for the connector); `connector` and
+    `all_connectors` grants carry a tool-access action, the scope action, or
+    an authentication-method action (`interactive` or `managed`).
 
-data: array of [RbacRolePermission](api/http/admin/rbac_roles/permissions.md) { action, resource, type }
+  - `resource: object or object or object or 2 more`
 
-
+    What the permission applies to.
 
-action: string
+    A tagged union: `type` names the kind of resource and determines which
+    identifier fields are present.
 
-Action the permission grants on the resource.
+    - `Organization object`
 
-The vocabulary follows the resource: an `organization` grant carries a
-product-feature entitlement (for example `chat`), an admin-panel
-permission entitlement (`permission_*`), or a blanket capability-access
-mode — `capability_access_all` grants every product-feature entitlement,
-and `capability_access_all_ga` grants the generally-available subset as
-it stands at permission-check time; neither mode grants model-access
-entitlements. A consumer enumerating a role's per-feature grants should
-treat a blanket row as granting every product-feature entitlement it
-covers, or it will under-report the role's effective access. A `connector_tool` grant carries
-a tool-access action (`use` or `always_allow`); a `connector_scope` grant
-carries the scope action `grant` (the role may receive the named OAuth
-scope when tokens are minted for the connector); `connector` and
-`all_connectors` grants carry a tool-access action, the scope action, or
-an authentication-method action (`interactive` or `managed`).
+      - `organization_id: string`
 
-
+        UUID of the organization the permission applies to.
 
-resource: object{ organization\_id, type } or object{ connector\_id, tool\_name, type } or object{ connector\_id, scope, type } or 2 more
+      - `type: "organization"`
 
-What the permission applies to.
+        Kind of resource the permission applies to.
 
-A tagged union: `type` names the kind of resource and determines which
-identifier fields are present.
+        default: organization
 
-One of the following:
+    - `ConnectorTool object`
 
-
+      - `connector_id: string`
 
-Organization object{ organization\_id, type }
+        ID of the connector the permission applies to.
 
-organization\_id: string
+      - `tool_name: string`
 
-UUID of the organization the permission applies to.
+        Published name of the connector tool the permission applies to.
 
-
+        When the published name contains characters outside `[a-zA-Z0-9_-]` (or
+        collides with a reserved form), it is server-encoded into a stable
+        `{prefix}_{32-hex}` form — a shortened readable prefix of the name plus
+        a hash — from which the published name is not recoverable.
 
-type: "organization"
+      - `type: "connector_tool"`
 
-Kind of resource the permission applies to.
+        Kind of resource the permission applies to.
 
-defaultorganization
+        default: connector_tool
 
-
+    - `ConnectorScope object`
 
-ConnectorTool object{ connector\_id, tool\_name, type }
+      - `connector_id: string`
 
-connector\_id: string
+        ID of the connector the permission applies to.
 
-ID of the connector the permission applies to.
+      - `scope: string`
 
-
+        OAuth scope the permission names — the role may receive this scope when
+        tokens are minted for the connector.
 
-tool\_name: string
+        Subject to the same encoding rule as `tool_name`: a scope containing
+        characters outside `[a-zA-Z0-9_-]` (or colliding with a reserved form)
+        appears server-encoded in a stable `{prefix}_{32-hex}` form. OAuth
+        scopes routinely contain `:` and `/`, so most appear encoded.
 
-Published name of the connector tool the permission applies to.
+      - `type: "connector_scope"`
 
-When the published name contains characters outside `[a-zA-Z0-9_-]` (or
-collides with a reserved form), it is server-encoded into a stable
-`{prefix}_{32-hex}` form — a shortened readable prefix of the name plus
-a hash — from which the published name is not recoverable.
+        Kind of resource the permission applies to.
 
-
+        default: connector_scope
 
-type: "connector\_tool"
+    - `Connector object`
 
-Kind of resource the permission applies to.
+      - `connector_id: string`
 
-defaultconnector\_tool
+        ID of the connector the permission applies to.
 
-
+      - `type: "connector"`
 
-ConnectorScope object{ connector\_id, scope, type }
+        Kind of resource the permission applies to.
 
-connector\_id: string
+        default: connector
 
-ID of the connector the permission applies to.
+    - `AllConnectors object`
 
-
+      - `type: "all_connectors"`
 
-scope: string
+        Kind of resource the permission applies to.
 
-OAuth scope the permission names — the role may receive this scope when
-tokens are minted for the connector.
+        default: all_connectors
 
-Subject to the same encoding rule as `tool_name`: a scope containing
-characters outside `[a-zA-Z0-9_-]` (or colliding with a reserved form)
-appears server-encoded in a stable `{prefix}_{32-hex}` form. OAuth
-scopes routinely contain `:` and `/`, so most appear encoded.
+  - `type: "rbac_role_permission"`
 
-
+    Object type.
 
-type: "connector\_scope"
+    For RBAC Role Permissions, this is always `"rbac_role_permission"`.
 
-Kind of resource the permission applies to.
+    default: rbac_role_permission
 
-defaultconnector\_scope
+- `has_more: boolean`
 
-
+  Indicates whether there are more results beyond this page.
 
-Connector object{ connector\_id, type }
+- `next_page: string or null`
 
-connector\_id: string
+  Opaque cursor for the next page. Pass as the `page` parameter on the next
+  request.
 
-ID of the connector the permission applies to.
+## Example
 
-
-
-type: "connector"
-
-Kind of resource the permission applies to.
-
-defaultconnector
-
-
-
-AllConnectors object{ type }
-
-
-
-type: "all\_connectors"
-
-Kind of resource the permission applies to.
-
-defaultall\_connectors
-
-
-
-type: "rbac\_role\_permission"
-
-Object type.
-
-For RBAC Role Permissions, this is always `"rbac_role_permission"`.
-
-defaultrbac\_role\_permission
-
-has\_more: boolean
-
-Indicates whether there are more results beyond this page.
-
-next\_page: string or null
-
-Opaque cursor for the next page. Pass as the `page` parameter on the next
-request.
-
-List RBAC Role Permissions
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/rbac_roles/$ROLE_ID/permissions \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "action": "use",
-      "resource": {
-        "organization_id": "3c4f5e6d-7a8b-49c0-9d1e-2f3a4b5c6d7e",
-        "type": "organization"
-      },
-      "type": "rbac_role_permission"
-    }
-  ],
-  "has_more": true,
-  "next_page": "eyJjdXJzb3IiOiAicmJhY19yb2xlXzAxIn0"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

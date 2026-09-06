@@ -1,599 +1,2611 @@
 # Environments
 
-Copy page
+## Create Environment
 
-
+`$ ant beta:environments create`
 
-CLI
+**POST** `/v1/environments`
 
-# Environments
+Create a new environment with the specified configuration.
 
-##### [Create Environment](api/beta/environments/create.md)
+### Parameters
 
-$ ant beta:environments create
+- `--name: string`
 
-POST/v1/environments
+  Body param: Human-readable name for the environment
 
-##### [List Environments](api/beta/environments/list.md)
+  maxLength: 256, minLength: 1
 
-$ ant beta:environments list
+- `--config: optional BetaCloudConfigParams or BetaSelfHostedConfigParams`
 
-GET/v1/environments
+  Body param: Environment configuration
 
-##### [Get Environment](api/beta/environments/retrieve.md)
+- `--description: optional string`
 
-$ ant beta:environments retrieve
+  Body param: Optional description of the environment
 
-GET/v1/environments/{environment\_id}
+  maxLength: 1024
 
-##### [Update Environment](api/beta/environments/update.md)
+- `--metadata: optional map[string]`
 
-$ ant beta:environments update
+  Body param: User-provided metadata key-value pairs
 
-POST/v1/environments/{environment\_id}
+- `--scope: optional "organization" or "account"`
 
-##### [Delete Environment](api/beta/environments/delete.md)
+  Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. Only applicable for self-hosted environments. If not specified, defaults based on organization type.
 
-$ ant beta:environments delete
+- `--beta: optional array of AnthropicBeta`
 
-DELETE/v1/environments/{environment\_id}
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-##### [Archive Environment](api/beta/environments/archive.md)
+### Returns
 
-$ ant beta:environments archive
+- `beta_environment: object`
 
-POST/v1/environments/{environment\_id}/archive
+  Unified Environment resource for both cloud and self-hosted environments.
 
-##### ModelsExpand Collapse
+  - `id: string`
 
-
+    Environment identifier (e.g., 'env_...')
 
-beta\_cloud\_config: object { networking, packages, type } 
+  - `archived_at: string`
 
-`cloud` environment configuration.
+    RFC 3339 timestamp when environment was archived, or null if not archived
 
-
+  - `config: BetaCloudConfig or BetaSelfHostedConfig`
 
-networking: [BetaUnrestrictedNetwork](api/beta/environments.md) { type }  or [BetaLimitedNetwork](api/beta/environments.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-Network configuration policy.
+    - `beta_cloud_config: object`
 
-
+      `cloud` environment configuration.
 
-beta\_unrestricted\_network: object { type } 
+      - `networking: BetaUnrestrictedNetwork or BetaLimitedNetwork`
 
-Unrestricted network access.
+        Network configuration policy.
 
-type: "unrestricted"
+        - `beta_unrestricted_network: object`
 
-Network policy type
+          Unrestricted network access.
 
-
+          - `type: "unrestricted"`
 
-beta\_limited\_network: object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
+            Network policy type
 
-Limited network access.
+        - `beta_limited_network: object`
 
-allow\_mcp\_servers: boolean
+          Limited network access.
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+          - `allow_mcp_servers: boolean`
 
-allow\_package\_managers: boolean
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+          - `allow_package_managers: boolean`
 
-allowed\_hosts: array of string
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-Specifies domains the container can reach.
+          - `allowed_hosts: array of string`
 
-type: "limited"
+            Specifies domains the container can reach.
 
-Network policy type
+          - `type: "limited"`
 
-
+            Network policy type
 
-packages: object { apt, cargo, gem, 4 more } 
+      - `packages: object`
 
-Package manager configuration.
+        Package manager configuration.
 
-apt: array of string
+        - `apt: array of string`
 
-Ubuntu/Debian packages to install
+          Ubuntu/Debian packages to install
 
-cargo: array of string
+        - `cargo: array of string`
 
-Rust packages to install
+          Rust packages to install
 
-gem: array of string
+        - `gem: array of string`
 
-Ruby packages to install
+          Ruby packages to install
 
-go: array of string
+        - `go: array of string`
 
-Go packages to install
+          Go packages to install
 
-npm: array of string
+        - `npm: array of string`
 
-Node.js packages to install
+          Node.js packages to install
 
-pip: array of string
+        - `pip: array of string`
 
-Python packages to install
+          Python packages to install
 
-
+        - `type: optional "packages"`
 
-type: optional "packages"
+          Package configuration type
 
-Package configuration type
+      - `type: "cloud"`
 
-"packages"
+        Environment type
 
-type: "cloud"
+    - `beta_self_hosted_config: object`
 
-Environment type
+      Configuration for self-hosted environments.
 
-
+      - `type: "self_hosted"`
 
-beta\_cloud\_config\_params: object { type, networking, packages } 
+        Environment type
 
-Request params for `cloud` environment configuration.
+  - `created_at: string`
 
-Fields default to null; on update, omitted fields preserve the
-existing value.
+    RFC 3339 timestamp when environment was created
 
-type: "cloud"
+  - `description: string`
 
-Environment type
+    User-provided description for the environment; null when unset
 
-
+  - `metadata: map[string]`
 
-networking: optional [BetaUnrestrictedNetwork](api/beta/environments.md) { type }  or [BetaLimitedNetworkParams](api/beta/environments.md) { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts } 
+    User-provided metadata key-value pairs
 
-Network configuration policy. Omit on update to preserve the existing value.
+  - `name: string`
 
-
+    Human-readable name for the environment
 
-beta\_unrestricted\_network: object { type } 
+  - `type: "environment"`
 
-Unrestricted network access.
+    The type of object (always 'environment')
 
-type: "unrestricted"
+  - `updated_at: string`
 
-Network policy type
+    RFC 3339 timestamp when environment was last updated
 
-
+  - `scope: optional "organization" or "account"`
 
-beta\_limited\_network\_params: object { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts } 
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-Limited network request params.
+    - `"organization"`
 
-Fields default to null; on update, omitted fields preserve the
-existing value.
+    - `"account"`
 
-type: "limited"
+### Example
 
-Network policy type
+```bash
+ant beta:environments create \
+  --api-key my-anthropic-api-key \
+  --name python-data-analysis
+```
 
-allow\_mcp\_servers: optional boolean
+#### Response (200)
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "archived_at": null,
+  "config": {
+    "networking": {
+      "allow_mcp_servers": false,
+      "allow_package_managers": true,
+      "allowed_hosts": [
+        "api.example.com"
+      ],
+      "type": "limited"
+    },
+    "packages": {
+      "apt": [
+        "string"
+      ],
+      "cargo": [
+        "string"
+      ],
+      "gem": [
+        "string"
+      ],
+      "go": [
+        "string"
+      ],
+      "npm": [
+        "string"
+      ],
+      "pip": [
+        "pandas",
+        "numpy"
+      ],
+      "type": "packages"
+    },
+    "type": "cloud"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Python environment with data-analysis packages.",
+  "metadata": {},
+  "name": "python-data-analysis",
+  "type": "environment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
+}
+```
 
-allow\_package\_managers: optional boolean
+## List Environments
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+`$ ant beta:environments list`
 
-allowed\_hosts: optional array of string
+**GET** `/v1/environments`
 
-Specifies domains the container can reach.
+List environments with pagination support.
 
-
+### Parameters
 
-packages: optional object { apt, cargo, gem, 4 more } 
+- `--include-archived: optional boolean`
 
-Specify packages (and optionally their versions) available in this environment.
+  Query param: Include archived environments in the response
 
-When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+- `--limit: optional number`
 
-apt: optional array of string
+  Query param: Maximum number of environments to return
 
-Ubuntu/Debian packages to install
+  maximum: 1000, minimum: 1
 
-cargo: optional array of string
+- `--page: optional string`
 
-Rust packages to install
+  Query param: Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
 
-gem: optional array of string
+- `--beta: optional array of AnthropicBeta`
 
-Ruby packages to install
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-go: optional array of string
+### Returns
 
-Go packages to install
+- `BetaEnvironmentListResponse: object`
 
-npm: optional array of string
+  Response when listing environments.
 
-Node.js packages to install
+  This response model uses opaque cursor-based pagination. Use the `page`
+  query parameter with the value from `next_page` to fetch the next page.
 
-pip: optional array of string
+  - `data: array of BetaEnvironment`
 
-Python packages to install
+    List of environments.
 
-
+    - `id: string`
 
-type: optional "packages"
+      Environment identifier (e.g., 'env_...')
 
-Package configuration type
+    - `archived_at: string`
 
-"packages"
+      RFC 3339 timestamp when environment was archived, or null if not archived
 
-
+    - `config: BetaCloudConfig or BetaSelfHostedConfig`
 
-beta\_environment: object { id, archived\_at, config, 7 more } 
+      Environment configuration (either Anthropic Cloud or self-hosted)
 
-Unified Environment resource for both cloud and self-hosted environments.
+      - `beta_cloud_config: object`
 
-id: string
+        `cloud` environment configuration.
 
-Environment identifier (e.g., 'env\_...')
+        - `networking: BetaUnrestrictedNetwork or BetaLimitedNetwork`
 
-archived\_at: string
+          Network configuration policy.
 
-RFC 3339 timestamp when environment was archived, or null if not archived
+          - `beta_unrestricted_network: object`
 
-
+            Unrestricted network access.
 
-config: [BetaCloudConfig](api/beta/environments.md) { networking, packages, type }  or [BetaSelfHostedConfig](api/beta/environments.md) { type } 
+            - `type: "unrestricted"`
 
-Environment configuration (either Anthropic Cloud or self-hosted)
+              Network policy type
 
-
+          - `beta_limited_network: object`
 
-beta\_cloud\_config: object { networking, packages, type } 
+            Limited network access.
 
-`cloud` environment configuration.
+            - `allow_mcp_servers: boolean`
 
-
+              Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-networking: [BetaUnrestrictedNetwork](api/beta/environments.md) { type }  or [BetaLimitedNetwork](api/beta/environments.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
+            - `allow_package_managers: boolean`
 
-Network configuration policy.
+              Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-
+            - `allowed_hosts: array of string`
 
-beta\_unrestricted\_network: object { type } 
+              Specifies domains the container can reach.
 
-Unrestricted network access.
+            - `type: "limited"`
 
-type: "unrestricted"
+              Network policy type
 
-Network policy type
+        - `packages: object`
 
-
+          Package manager configuration.
 
-beta\_limited\_network: object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
+          - `apt: array of string`
 
-Limited network access.
+            Ubuntu/Debian packages to install
 
-allow\_mcp\_servers: boolean
+          - `cargo: array of string`
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+            Rust packages to install
 
-allow\_package\_managers: boolean
+          - `gem: array of string`
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+            Ruby packages to install
 
-allowed\_hosts: array of string
+          - `go: array of string`
 
-Specifies domains the container can reach.
+            Go packages to install
 
-type: "limited"
+          - `npm: array of string`
 
-Network policy type
+            Node.js packages to install
 
-
+          - `pip: array of string`
 
-packages: object { apt, cargo, gem, 4 more } 
+            Python packages to install
 
-Package manager configuration.
+          - `type: optional "packages"`
 
-apt: array of string
+            Package configuration type
 
-Ubuntu/Debian packages to install
+        - `type: "cloud"`
 
-cargo: array of string
+          Environment type
 
-Rust packages to install
+      - `beta_self_hosted_config: object`
 
-gem: array of string
+        Configuration for self-hosted environments.
 
-Ruby packages to install
+        - `type: "self_hosted"`
 
-go: array of string
+          Environment type
 
-Go packages to install
+    - `created_at: string`
 
-npm: array of string
+      RFC 3339 timestamp when environment was created
 
-Node.js packages to install
+    - `description: string`
 
-pip: array of string
+      User-provided description for the environment; null when unset
 
-Python packages to install
+    - `metadata: map[string]`
 
-
+      User-provided metadata key-value pairs
 
-type: optional "packages"
+    - `name: string`
 
-Package configuration type
+      Human-readable name for the environment
 
-"packages"
+    - `type: "environment"`
 
-type: "cloud"
+      The type of object (always 'environment')
 
-Environment type
+    - `updated_at: string`
 
-
+      RFC 3339 timestamp when environment was last updated
 
-beta\_self\_hosted\_config: object { type } 
+    - `scope: optional "organization" or "account"`
 
-Configuration for self-hosted environments.
+      The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-type: "self\_hosted"
+      - `"organization"`
 
-Environment type
+      - `"account"`
 
-created\_at: string
+  - `next_page: string`
 
-RFC 3339 timestamp when environment was created
+    Token for fetching the next page of results. If `null`, there are no more results available. Pass this value to the `page` parameter in the next request.
 
-description: string
+### Example
 
-User-provided description for the environment
+```bash
+ant beta:environments list \
+  --api-key my-anthropic-api-key
+```
 
-metadata: map[string]
+#### Response (200)
 
-User-provided metadata key-value pairs
+```json
+{
+  "data": [
+    {
+      "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+      "archived_at": null,
+      "config": {
+        "networking": {
+          "allow_mcp_servers": false,
+          "allow_package_managers": true,
+          "allowed_hosts": [
+            "api.example.com"
+          ],
+          "type": "limited"
+        },
+        "packages": {
+          "apt": [
+            "string"
+          ],
+          "cargo": [
+            "string"
+          ],
+          "gem": [
+            "string"
+          ],
+          "go": [
+            "string"
+          ],
+          "npm": [
+            "string"
+          ],
+          "pip": [
+            "pandas",
+            "numpy"
+          ],
+          "type": "packages"
+        },
+        "type": "cloud"
+      },
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": "Python environment with data-analysis packages.",
+      "metadata": {},
+      "name": "python-data-analysis",
+      "type": "environment",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "scope": "organization"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
 
-name: string
+## Get Environment
 
-Human-readable name for the environment
+`$ ant beta:environments retrieve`
 
-type: "environment"
+**GET** `/v1/environments/{environment_id}`
 
-The type of object (always 'environment')
+Retrieve a specific environment by ID.
 
-updated\_at: string
+### Parameters
 
-RFC 3339 timestamp when environment was last updated
+- `--environment-id: string`
 
-
+- `--beta: optional array of AnthropicBeta`
 
-scope: optional "organization" or "account"
+  Optional header to specify the beta version(s) you want to use.
 
-The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+### Returns
 
-"organization"
+- `beta_environment: object`
 
-"account"
+  Unified Environment resource for both cloud and self-hosted environments.
 
-
+  - `id: string`
 
-beta\_environment\_delete\_response: object { id, type } 
+    Environment identifier (e.g., 'env_...')
 
-Response after deleting an environment.
+  - `archived_at: string`
 
-id: string
+    RFC 3339 timestamp when environment was archived, or null if not archived
 
-Environment identifier
+  - `config: BetaCloudConfig or BetaSelfHostedConfig`
 
-type: "environment\_deleted"
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-The type of response
+    - `beta_cloud_config: object`
 
-
+      `cloud` environment configuration.
 
-beta\_limited\_network: object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
+      - `networking: BetaUnrestrictedNetwork or BetaLimitedNetwork`
 
-Limited network access.
+        Network configuration policy.
 
-allow\_mcp\_servers: boolean
+        - `beta_unrestricted_network: object`
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+          Unrestricted network access.
 
-allow\_package\_managers: boolean
+          - `type: "unrestricted"`
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+            Network policy type
 
-allowed\_hosts: array of string
+        - `beta_limited_network: object`
 
-Specifies domains the container can reach.
+          Limited network access.
 
-type: "limited"
+          - `allow_mcp_servers: boolean`
 
-Network policy type
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-
+          - `allow_package_managers: boolean`
 
-beta\_limited\_network\_params: object { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts } 
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-Limited network request params.
+          - `allowed_hosts: array of string`
 
-Fields default to null; on update, omitted fields preserve the
-existing value.
+            Specifies domains the container can reach.
 
-type: "limited"
+          - `type: "limited"`
 
-Network policy type
+            Network policy type
 
-allow\_mcp\_servers: optional boolean
+      - `packages: object`
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+        Package manager configuration.
 
-allow\_package\_managers: optional boolean
+        - `apt: array of string`
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+          Ubuntu/Debian packages to install
 
-allowed\_hosts: optional array of string
+        - `cargo: array of string`
 
-Specifies domains the container can reach.
+          Rust packages to install
 
-
+        - `gem: array of string`
 
-beta\_packages: object { apt, cargo, gem, 4 more } 
+          Ruby packages to install
 
-Packages (and their versions) available in this environment.
+        - `go: array of string`
 
-apt: array of string
+          Go packages to install
 
-Ubuntu/Debian packages to install
+        - `npm: array of string`
 
-cargo: array of string
+          Node.js packages to install
 
-Rust packages to install
+        - `pip: array of string`
 
-gem: array of string
+          Python packages to install
 
-Ruby packages to install
+        - `type: optional "packages"`
 
-go: array of string
+          Package configuration type
 
-Go packages to install
+      - `type: "cloud"`
 
-npm: array of string
+        Environment type
 
-Node.js packages to install
+    - `beta_self_hosted_config: object`
 
-pip: array of string
+      Configuration for self-hosted environments.
 
-Python packages to install
+      - `type: "self_hosted"`
 
-
+        Environment type
 
-type: optional "packages"
+  - `created_at: string`
 
-Package configuration type
+    RFC 3339 timestamp when environment was created
 
-"packages"
+  - `description: string`
 
-
+    User-provided description for the environment; null when unset
 
-beta\_packages\_params: object { apt, cargo, gem, 4 more } 
+  - `metadata: map[string]`
 
-Specify packages (and optionally their versions) available in this environment.
+    User-provided metadata key-value pairs
 
-When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+  - `name: string`
 
-apt: optional array of string
+    Human-readable name for the environment
 
-Ubuntu/Debian packages to install
+  - `type: "environment"`
 
-cargo: optional array of string
+    The type of object (always 'environment')
 
-Rust packages to install
+  - `updated_at: string`
 
-gem: optional array of string
+    RFC 3339 timestamp when environment was last updated
 
-Ruby packages to install
+  - `scope: optional "organization" or "account"`
 
-go: optional array of string
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-Go packages to install
+    - `"organization"`
 
-npm: optional array of string
+    - `"account"`
 
-Node.js packages to install
+### Example
 
-pip: optional array of string
+```bash
+ant beta:environments retrieve \
+  --api-key my-anthropic-api-key \
+  --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
+```
 
-Python packages to install
+#### Response (200)
 
-
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "archived_at": null,
+  "config": {
+    "networking": {
+      "allow_mcp_servers": false,
+      "allow_package_managers": true,
+      "allowed_hosts": [
+        "api.example.com"
+      ],
+      "type": "limited"
+    },
+    "packages": {
+      "apt": [
+        "string"
+      ],
+      "cargo": [
+        "string"
+      ],
+      "gem": [
+        "string"
+      ],
+      "go": [
+        "string"
+      ],
+      "npm": [
+        "string"
+      ],
+      "pip": [
+        "pandas",
+        "numpy"
+      ],
+      "type": "packages"
+    },
+    "type": "cloud"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Python environment with data-analysis packages.",
+  "metadata": {},
+  "name": "python-data-analysis",
+  "type": "environment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
+}
+```
 
-type: optional "packages"
+## Update Environment
 
-Package configuration type
+`$ ant beta:environments update`
 
-"packages"
+**POST** `/v1/environments/{environment_id}`
 
-
+Update an existing environment's configuration.
 
-beta\_self\_hosted\_config: object { type } 
+### Parameters
 
-Configuration for self-hosted environments.
+- `--environment-id: string`
 
-type: "self\_hosted"
+  Path param
 
-Environment type
+- `--config: optional BetaCloudConfigParams or BetaSelfHostedConfigParams`
 
-
+  Body param: Updated environment configuration
 
-beta\_self\_hosted\_config\_params: object { type } 
+- `--description: optional string`
 
-Request params for `self_hosted` environment configuration.
+  Body param: Updated description of the environment. Omit to preserve; null clears to null; an empty string is stored as an empty string.
 
-type: "self\_hosted"
+  maxLength: 1024
 
-Environment type
+- `--metadata: optional map[string]`
 
-
+  Body param: User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
 
-beta\_unrestricted\_network: object { type } 
+- `--name: optional string`
 
-Unrestricted network access.
+  Body param: Updated name for the environment
 
-type: "unrestricted"
+  maxLength: 256, minLength: 1
 
-Network policy type
+- `--scope: optional "organization" or "account"`
 
-#### EnvironmentsWork
+  Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
 
-##### [Get Work Item](api/beta/environments/work/retrieve.md)
+- `--beta: optional array of AnthropicBeta`
 
-$ ant beta:environments:work retrieve
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-GET/v1/environments/{environment\_id}/work/{work\_id}
+### Returns
 
-##### [Poll for Work](api/beta/environments/work/poll.md)
+- `beta_environment: object`
 
-$ ant beta:environments:work poll
+  Unified Environment resource for both cloud and self-hosted environments.
 
-GET/v1/environments/{environment\_id}/work/poll
+  - `id: string`
 
-##### [Acknowledge Work](api/beta/environments/work/ack.md)
+    Environment identifier (e.g., 'env_...')
 
-$ ant beta:environments:work ack
+  - `archived_at: string`
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/ack
+    RFC 3339 timestamp when environment was archived, or null if not archived
 
-##### [Record Heartbeat](api/beta/environments/work/heartbeat.md)
+  - `config: BetaCloudConfig or BetaSelfHostedConfig`
 
-$ ant beta:environments:work heartbeat
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
+    - `beta_cloud_config: object`
 
-##### [Stop Work](api/beta/environments/work/stop.md)
+      `cloud` environment configuration.
 
-$ ant beta:environments:work stop
+      - `networking: BetaUnrestrictedNetwork or BetaLimitedNetwork`
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/stop
+        Network configuration policy.
 
-##### [List Work Items](api/beta/environments/work/list.md)
+        - `beta_unrestricted_network: object`
 
-$ ant beta:environments:work list
+          Unrestricted network access.
 
-GET/v1/environments/{environment\_id}/work
+          - `type: "unrestricted"`
 
-##### [Update Work Item](api/beta/environments/work/update.md)
+            Network policy type
 
-$ ant beta:environments:work update
+        - `beta_limited_network: object`
 
-POST/v1/environments/{environment\_id}/work/{work\_id}
+          Limited network access.
 
-##### [Get Queue Statistics](api/beta/environments/work/stats.md)
+          - `allow_mcp_servers: boolean`
 
-$ ant beta:environments:work stats
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-GET/v1/environments/{environment\_id}/work/stats
+          - `allow_package_managers: boolean`
+
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+          - `allowed_hosts: array of string`
+
+            Specifies domains the container can reach.
+
+          - `type: "limited"`
+
+            Network policy type
+
+      - `packages: object`
+
+        Package manager configuration.
+
+        - `apt: array of string`
+
+          Ubuntu/Debian packages to install
+
+        - `cargo: array of string`
+
+          Rust packages to install
+
+        - `gem: array of string`
+
+          Ruby packages to install
+
+        - `go: array of string`
+
+          Go packages to install
+
+        - `npm: array of string`
+
+          Node.js packages to install
+
+        - `pip: array of string`
+
+          Python packages to install
+
+        - `type: optional "packages"`
+
+          Package configuration type
+
+      - `type: "cloud"`
+
+        Environment type
+
+    - `beta_self_hosted_config: object`
+
+      Configuration for self-hosted environments.
+
+      - `type: "self_hosted"`
+
+        Environment type
+
+  - `created_at: string`
+
+    RFC 3339 timestamp when environment was created
+
+  - `description: string`
+
+    User-provided description for the environment; null when unset
+
+  - `metadata: map[string]`
+
+    User-provided metadata key-value pairs
+
+  - `name: string`
+
+    Human-readable name for the environment
+
+  - `type: "environment"`
+
+    The type of object (always 'environment')
+
+  - `updated_at: string`
+
+    RFC 3339 timestamp when environment was last updated
+
+  - `scope: optional "organization" or "account"`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `"organization"`
+
+    - `"account"`
+
+### Example
+
+```bash
+ant beta:environments update \
+  --api-key my-anthropic-api-key \
+  --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "archived_at": null,
+  "config": {
+    "networking": {
+      "allow_mcp_servers": false,
+      "allow_package_managers": true,
+      "allowed_hosts": [
+        "api.example.com"
+      ],
+      "type": "limited"
+    },
+    "packages": {
+      "apt": [
+        "string"
+      ],
+      "cargo": [
+        "string"
+      ],
+      "gem": [
+        "string"
+      ],
+      "go": [
+        "string"
+      ],
+      "npm": [
+        "string"
+      ],
+      "pip": [
+        "pandas",
+        "numpy"
+      ],
+      "type": "packages"
+    },
+    "type": "cloud"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Python environment with data-analysis packages.",
+  "metadata": {},
+  "name": "python-data-analysis",
+  "type": "environment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
+}
+```
+
+## Delete Environment
+
+`$ ant beta:environments delete`
+
+**DELETE** `/v1/environments/{environment_id}`
+
+Delete an environment by ID. Returns a confirmation of the deletion.
+
+### Parameters
+
+- `--environment-id: string`
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_environment_delete_response: object`
+
+  Response after deleting an environment.
+
+  - `id: string`
+
+    Environment identifier
+
+  - `type: "environment_deleted"`
+
+    The type of response
+
+### Example
+
+```bash
+ant beta:environments delete \
+  --api-key my-anthropic-api-key \
+  --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "type": "environment_deleted"
+}
+```
+
+## Archive Environment
+
+`$ ant beta:environments archive`
+
+**POST** `/v1/environments/{environment_id}/archive`
+
+Archive an environment by ID. Archived environments cannot be used to create new sessions.
+
+### Parameters
+
+- `--environment-id: string`
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_environment: object`
+
+  Unified Environment resource for both cloud and self-hosted environments.
+
+  - `id: string`
+
+    Environment identifier (e.g., 'env_...')
+
+  - `archived_at: string`
+
+    RFC 3339 timestamp when environment was archived, or null if not archived
+
+  - `config: BetaCloudConfig or BetaSelfHostedConfig`
+
+    Environment configuration (either Anthropic Cloud or self-hosted)
+
+    - `beta_cloud_config: object`
+
+      `cloud` environment configuration.
+
+      - `networking: BetaUnrestrictedNetwork or BetaLimitedNetwork`
+
+        Network configuration policy.
+
+        - `beta_unrestricted_network: object`
+
+          Unrestricted network access.
+
+          - `type: "unrestricted"`
+
+            Network policy type
+
+        - `beta_limited_network: object`
+
+          Limited network access.
+
+          - `allow_mcp_servers: boolean`
+
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+          - `allow_package_managers: boolean`
+
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+          - `allowed_hosts: array of string`
+
+            Specifies domains the container can reach.
+
+          - `type: "limited"`
+
+            Network policy type
+
+      - `packages: object`
+
+        Package manager configuration.
+
+        - `apt: array of string`
+
+          Ubuntu/Debian packages to install
+
+        - `cargo: array of string`
+
+          Rust packages to install
+
+        - `gem: array of string`
+
+          Ruby packages to install
+
+        - `go: array of string`
+
+          Go packages to install
+
+        - `npm: array of string`
+
+          Node.js packages to install
+
+        - `pip: array of string`
+
+          Python packages to install
+
+        - `type: optional "packages"`
+
+          Package configuration type
+
+      - `type: "cloud"`
+
+        Environment type
+
+    - `beta_self_hosted_config: object`
+
+      Configuration for self-hosted environments.
+
+      - `type: "self_hosted"`
+
+        Environment type
+
+  - `created_at: string`
+
+    RFC 3339 timestamp when environment was created
+
+  - `description: string`
+
+    User-provided description for the environment; null when unset
+
+  - `metadata: map[string]`
+
+    User-provided metadata key-value pairs
+
+  - `name: string`
+
+    Human-readable name for the environment
+
+  - `type: "environment"`
+
+    The type of object (always 'environment')
+
+  - `updated_at: string`
+
+    RFC 3339 timestamp when environment was last updated
+
+  - `scope: optional "organization" or "account"`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `"organization"`
+
+    - `"account"`
+
+### Example
+
+```bash
+ant beta:environments archive \
+  --api-key my-anthropic-api-key \
+  --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "archived_at": null,
+  "config": {
+    "networking": {
+      "allow_mcp_servers": false,
+      "allow_package_managers": true,
+      "allowed_hosts": [
+        "api.example.com"
+      ],
+      "type": "limited"
+    },
+    "packages": {
+      "apt": [
+        "string"
+      ],
+      "cargo": [
+        "string"
+      ],
+      "gem": [
+        "string"
+      ],
+      "go": [
+        "string"
+      ],
+      "npm": [
+        "string"
+      ],
+      "pip": [
+        "pandas",
+        "numpy"
+      ],
+      "type": "packages"
+    },
+    "type": "cloud"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "Python environment with data-analysis packages.",
+  "metadata": {},
+  "name": "python-data-analysis",
+  "type": "environment",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "scope": "organization"
+}
+```
+
+## Domain types
+
+### Beta Cloud Config
+
+- `beta_cloud_config: object`
+
+  `cloud` environment configuration.
+
+  - `networking: BetaUnrestrictedNetwork or BetaLimitedNetwork`
+
+    Network configuration policy.
+
+    - `beta_unrestricted_network: object`
+
+      Unrestricted network access.
+
+      - `type: "unrestricted"`
+
+        Network policy type
+
+    - `beta_limited_network: object`
+
+      Limited network access.
+
+      - `allow_mcp_servers: boolean`
+
+        Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+      - `allow_package_managers: boolean`
+
+        Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+      - `allowed_hosts: array of string`
+
+        Specifies domains the container can reach.
+
+      - `type: "limited"`
+
+        Network policy type
+
+  - `packages: object`
+
+    Package manager configuration.
+
+    - `apt: array of string`
+
+      Ubuntu/Debian packages to install
+
+    - `cargo: array of string`
+
+      Rust packages to install
+
+    - `gem: array of string`
+
+      Ruby packages to install
+
+    - `go: array of string`
+
+      Go packages to install
+
+    - `npm: array of string`
+
+      Node.js packages to install
+
+    - `pip: array of string`
+
+      Python packages to install
+
+    - `type: optional "packages"`
+
+      Package configuration type
+
+  - `type: "cloud"`
+
+    Environment type
+
+### Beta Cloud Config Params
+
+- `beta_cloud_config_params: object`
+
+  Request params for `cloud` environment configuration.
+
+  Fields default to null; on update, omitted fields preserve the
+  existing value.
+
+  - `type: "cloud"`
+
+    Environment type
+
+  - `networking: optional BetaUnrestrictedNetwork or BetaLimitedNetworkParams`
+
+    Network configuration policy. Omit on update to preserve the existing value.
+
+    - `beta_unrestricted_network: object`
+
+      Unrestricted network access.
+
+      - `type: "unrestricted"`
+
+        Network policy type
+
+    - `beta_limited_network_params: object`
+
+      Limited network request params.
+
+      Fields default to null; on update, omitted fields preserve the
+      existing value.
+
+      - `type: "limited"`
+
+        Network policy type
+
+      - `allow_mcp_servers: optional boolean`
+
+        Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+      - `allow_package_managers: optional boolean`
+
+        Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
+
+      - `allowed_hosts: optional array of string`
+
+        Specifies domains the container can reach.
+
+  - `packages: optional object`
+
+    Specify packages (and optionally their versions) available in this environment.
+
+    When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+    Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
+
+    - `apt: optional array of string`
+
+      Ubuntu/Debian packages to install
+
+    - `cargo: optional array of string`
+
+      Rust packages to install
+
+    - `gem: optional array of string`
+
+      Ruby packages to install
+
+    - `go: optional array of string`
+
+      Go packages to install
+
+    - `npm: optional array of string`
+
+      Node.js packages to install
+
+    - `pip: optional array of string`
+
+      Python packages to install
+
+    - `type: optional "packages"`
+
+      Package configuration type
+
+### Beta Environment
+
+- `beta_environment: object`
+
+  Unified Environment resource for both cloud and self-hosted environments.
+
+  - `id: string`
+
+    Environment identifier (e.g., 'env_...')
+
+  - `archived_at: string`
+
+    RFC 3339 timestamp when environment was archived, or null if not archived
+
+  - `config: BetaCloudConfig or BetaSelfHostedConfig`
+
+    Environment configuration (either Anthropic Cloud or self-hosted)
+
+    - `beta_cloud_config: object`
+
+      `cloud` environment configuration.
+
+      - `networking: BetaUnrestrictedNetwork or BetaLimitedNetwork`
+
+        Network configuration policy.
+
+        - `beta_unrestricted_network: object`
+
+          Unrestricted network access.
+
+          - `type: "unrestricted"`
+
+            Network policy type
+
+        - `beta_limited_network: object`
+
+          Limited network access.
+
+          - `allow_mcp_servers: boolean`
+
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+          - `allow_package_managers: boolean`
+
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+          - `allowed_hosts: array of string`
+
+            Specifies domains the container can reach.
+
+          - `type: "limited"`
+
+            Network policy type
+
+      - `packages: object`
+
+        Package manager configuration.
+
+        - `apt: array of string`
+
+          Ubuntu/Debian packages to install
+
+        - `cargo: array of string`
+
+          Rust packages to install
+
+        - `gem: array of string`
+
+          Ruby packages to install
+
+        - `go: array of string`
+
+          Go packages to install
+
+        - `npm: array of string`
+
+          Node.js packages to install
+
+        - `pip: array of string`
+
+          Python packages to install
+
+        - `type: optional "packages"`
+
+          Package configuration type
+
+      - `type: "cloud"`
+
+        Environment type
+
+    - `beta_self_hosted_config: object`
+
+      Configuration for self-hosted environments.
+
+      - `type: "self_hosted"`
+
+        Environment type
+
+  - `created_at: string`
+
+    RFC 3339 timestamp when environment was created
+
+  - `description: string`
+
+    User-provided description for the environment; null when unset
+
+  - `metadata: map[string]`
+
+    User-provided metadata key-value pairs
+
+  - `name: string`
+
+    Human-readable name for the environment
+
+  - `type: "environment"`
+
+    The type of object (always 'environment')
+
+  - `updated_at: string`
+
+    RFC 3339 timestamp when environment was last updated
+
+  - `scope: optional "organization" or "account"`
+
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+
+    - `"organization"`
+
+    - `"account"`
+
+### Beta Environment Delete Response
+
+- `beta_environment_delete_response: object`
+
+  Response after deleting an environment.
+
+  - `id: string`
+
+    Environment identifier
+
+  - `type: "environment_deleted"`
+
+    The type of response
+
+### Beta Limited Network
+
+- `beta_limited_network: object`
+
+  Limited network access.
+
+  - `allow_mcp_servers: boolean`
+
+    Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+
+  - `allow_package_managers: boolean`
+
+    Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+
+  - `allowed_hosts: array of string`
+
+    Specifies domains the container can reach.
+
+  - `type: "limited"`
+
+    Network policy type
+
+### Beta Limited Network Params
+
+- `beta_limited_network_params: object`
+
+  Limited network request params.
+
+  Fields default to null; on update, omitted fields preserve the
+  existing value.
+
+  - `type: "limited"`
+
+    Network policy type
+
+  - `allow_mcp_servers: optional boolean`
+
+    Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+
+  - `allow_package_managers: optional boolean`
+
+    Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
+
+  - `allowed_hosts: optional array of string`
+
+    Specifies domains the container can reach.
+
+### Beta Packages
+
+- `beta_packages: object`
+
+  Packages (and their versions) available in this environment.
+
+  - `apt: array of string`
+
+    Ubuntu/Debian packages to install
+
+  - `cargo: array of string`
+
+    Rust packages to install
+
+  - `gem: array of string`
+
+    Ruby packages to install
+
+  - `go: array of string`
+
+    Go packages to install
+
+  - `npm: array of string`
+
+    Node.js packages to install
+
+  - `pip: array of string`
+
+    Python packages to install
+
+  - `type: optional "packages"`
+
+    Package configuration type
+
+### Beta Packages Params
+
+- `beta_packages_params: object`
+
+  Specify packages (and optionally their versions) available in this environment.
+
+  When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+  Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
+
+  - `apt: optional array of string`
+
+    Ubuntu/Debian packages to install
+
+  - `cargo: optional array of string`
+
+    Rust packages to install
+
+  - `gem: optional array of string`
+
+    Ruby packages to install
+
+  - `go: optional array of string`
+
+    Go packages to install
+
+  - `npm: optional array of string`
+
+    Node.js packages to install
+
+  - `pip: optional array of string`
+
+    Python packages to install
+
+  - `type: optional "packages"`
+
+    Package configuration type
+
+### Beta Self Hosted Config
+
+- `beta_self_hosted_config: object`
+
+  Configuration for self-hosted environments.
+
+  - `type: "self_hosted"`
+
+    Environment type
+
+### Beta Self Hosted Config Params
+
+- `beta_self_hosted_config_params: object`
+
+  Request params for `self_hosted` environment configuration.
+
+  - `type: "self_hosted"`
+
+    Environment type
+
+### Beta Unrestricted Network
+
+- `beta_unrestricted_network: object`
+
+  Unrestricted network access.
+
+  - `type: "unrestricted"`
+
+    Network policy type
+
+## Environments › Work
+
+### Get Work Item
+
+`$ ant beta:environments:work retrieve`
+
+**GET** `/v1/environments/{environment_id}/work/{work_id}`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Retrieve detailed information about a specific work item.
+
+#### Parameters
+
+- `--environment-id: string`
+
+  Path param
+
+- `--work-id: string`
+
+  Path param
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `beta_self_hosted_work: object`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `id: string`
+
+    Work identifier (e.g., 'work_...')
+
+  - `acknowledged_at: string`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `created_at: string`
+
+    RFC 3339 timestamp when work was created
+
+  - `data: object`
+
+    The actual work to be performed
+
+    - `id: string`
+
+      Session identifier (e.g., 'session_...')
+
+    - `type: "session"`
+
+      Type of work data
+
+  - `environment_id: string`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `latest_heartbeat_at: string`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `metadata: map[string]`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `secret: string`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `started_at: string`
+
+    RFC 3339 timestamp when work execution started
+
+  - `state: "queued" or "starting" or "active" or 2 more`
+
+    Current state of the work item
+
+    - `"queued"`
+
+    - `"starting"`
+
+    - `"active"`
+
+    - `"stopping"`
+
+    - `"stopped"`
+
+  - `stop_requested_at: string`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `stopped_at: string`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `type: "work"`
+
+    The type of object (always 'work')
+
+#### Example
+
+```bash
+ant beta:environments:work retrieve \
+  --api-key my-anthropic-api-key \
+  --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW \
+  --work-id work_id
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+### Poll for Work
+
+`$ ant beta:environments:work poll`
+
+**GET** `/v1/environments/{environment_id}/work/poll`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Long poll for work items in the queue.
+
+#### Parameters
+
+- `--environment-id: string`
+
+  Path param
+
+- `--block-ms: optional number`
+
+  Query param: How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
+
+  minimum: 1
+
+- `--reclaim-older-than-ms: optional number`
+
+  Query param: Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
+
+  minimum: 1
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+- `--anthropic-worker-id: optional string`
+
+  Header param: Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
+
+#### Returns
+
+- `beta_self_hosted_work: object`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `id: string`
+
+    Work identifier (e.g., 'work_...')
+
+  - `acknowledged_at: string`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `created_at: string`
+
+    RFC 3339 timestamp when work was created
+
+  - `data: object`
+
+    The actual work to be performed
+
+    - `id: string`
+
+      Session identifier (e.g., 'session_...')
+
+    - `type: "session"`
+
+      Type of work data
+
+  - `environment_id: string`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `latest_heartbeat_at: string`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `metadata: map[string]`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `secret: string`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `started_at: string`
+
+    RFC 3339 timestamp when work execution started
+
+  - `state: "queued" or "starting" or "active" or 2 more`
+
+    Current state of the work item
+
+    - `"queued"`
+
+    - `"starting"`
+
+    - `"active"`
+
+    - `"stopping"`
+
+    - `"stopped"`
+
+  - `stop_requested_at: string`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `stopped_at: string`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `type: "work"`
+
+    The type of object (always 'work')
+
+#### Example
+
+```bash
+ant beta:environments:work poll \
+  --api-key my-anthropic-api-key \
+  --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+### Acknowledge Work
+
+`$ ant beta:environments:work ack`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}/ack`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting' and removing it from the queue.
+
+#### Parameters
+
+- `--environment-id: string`
+
+  Path param
+
+- `--work-id: string`
+
+  Path param
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `beta_self_hosted_work: object`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `id: string`
+
+    Work identifier (e.g., 'work_...')
+
+  - `acknowledged_at: string`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `created_at: string`
+
+    RFC 3339 timestamp when work was created
+
+  - `data: object`
+
+    The actual work to be performed
+
+    - `id: string`
+
+      Session identifier (e.g., 'session_...')
+
+    - `type: "session"`
+
+      Type of work data
+
+  - `environment_id: string`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `latest_heartbeat_at: string`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `metadata: map[string]`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `secret: string`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `started_at: string`
+
+    RFC 3339 timestamp when work execution started
+
+  - `state: "queued" or "starting" or "active" or 2 more`
+
+    Current state of the work item
+
+    - `"queued"`
+
+    - `"starting"`
+
+    - `"active"`
+
+    - `"stopping"`
+
+    - `"stopped"`
+
+  - `stop_requested_at: string`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `stopped_at: string`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `type: "work"`
+
+    The type of object (always 'work')
+
+#### Example
+
+```bash
+ant beta:environments:work ack \
+  --api-key my-anthropic-api-key \
+  --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW \
+  --work-id work_id
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+### Record Heartbeat
+
+`$ ant beta:environments:work heartbeat`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Record a heartbeat for a work item to maintain the lease.
+
+#### Parameters
+
+- `--environment-id: string`
+
+  Path param
+
+- `--work-id: string`
+
+  Path param
+
+- `--desired-ttl-seconds: optional number`
+
+  Query param: Desired TTL in seconds
+
+- `--expected-last-heartbeat: optional string`
+
+  Query param: Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `beta_self_hosted_work_heartbeat_response: object`
+
+  Response after recording a heartbeat for a work item.
+
+  - `last_heartbeat: string`
+
+    RFC 3339 timestamp of the actual heartbeat from DB
+
+  - `lease_extended: boolean`
+
+    Whether the heartbeat succeeded in extending the lease
+
+  - `state: "queued" or "starting" or "active" or 2 more`
+
+    Current state of the work item (active/stopping/stopped)
+
+    - `"queued"`
+
+    - `"starting"`
+
+    - `"active"`
+
+    - `"stopping"`
+
+    - `"stopped"`
+
+  - `ttl_seconds: number`
+
+    Effective TTL applied to the lease
+
+  - `type: "work_heartbeat"`
+
+    The type of response
+
+#### Example
+
+```bash
+ant beta:environments:work heartbeat \
+  --api-key my-anthropic-api-key \
+  --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW \
+  --work-id work_id
+```
+
+##### Response (200)
+
+```json
+{
+  "last_heartbeat": "last_heartbeat",
+  "lease_extended": true,
+  "state": "queued",
+  "ttl_seconds": 0,
+  "type": "work_heartbeat"
+}
+```
+
+### Stop Work
+
+`$ ant beta:environments:work stop`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}/stop`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Stop a work item, initiating graceful or forced shutdown.
+
+#### Parameters
+
+- `--environment-id: string`
+
+  Path param
+
+- `--work-id: string`
+
+  Path param
+
+- `--force: optional boolean`
+
+  Body param: If true, immediately stop work without graceful shutdown
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `beta_self_hosted_work: object`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `id: string`
+
+    Work identifier (e.g., 'work_...')
+
+  - `acknowledged_at: string`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `created_at: string`
+
+    RFC 3339 timestamp when work was created
+
+  - `data: object`
+
+    The actual work to be performed
+
+    - `id: string`
+
+      Session identifier (e.g., 'session_...')
+
+    - `type: "session"`
+
+      Type of work data
+
+  - `environment_id: string`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `latest_heartbeat_at: string`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `metadata: map[string]`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `secret: string`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `started_at: string`
+
+    RFC 3339 timestamp when work execution started
+
+  - `state: "queued" or "starting" or "active" or 2 more`
+
+    Current state of the work item
+
+    - `"queued"`
+
+    - `"starting"`
+
+    - `"active"`
+
+    - `"stopping"`
+
+    - `"stopped"`
+
+  - `stop_requested_at: string`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `stopped_at: string`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `type: "work"`
+
+    The type of object (always 'work')
+
+#### Example
+
+```bash
+ant beta:environments:work stop \
+  --api-key my-anthropic-api-key \
+  --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW \
+  --work-id work_id
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+### List Work Items
+
+`$ ant beta:environments:work list`
+
+**GET** `/v1/environments/{environment_id}/work`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+List work items in an environment.
+
+#### Parameters
+
+- `--environment-id: string`
+
+  Path param
+
+- `--limit: optional number`
+
+  Query param: Maximum number of work items to return
+
+  maximum: 1000, minimum: 1
+
+- `--page: optional string`
+
+  Query param: Opaque cursor from previous response for pagination
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `beta_self_hosted_work_list_response: object`
+
+  Response when listing work items with cursor-based pagination.
+
+  - `data: array of BetaSelfHostedWork`
+
+    List of work items
+
+    - `id: string`
+
+      Work identifier (e.g., 'work_...')
+
+    - `acknowledged_at: string`
+
+      RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+    - `created_at: string`
+
+      RFC 3339 timestamp when work was created
+
+    - `data: object`
+
+      The actual work to be performed
+
+      - `id: string`
+
+        Session identifier (e.g., 'session_...')
+
+      - `type: "session"`
+
+        Type of work data
+
+    - `environment_id: string`
+
+      Environment identifier this work belongs to (e.g., `env_...`)
+
+    - `latest_heartbeat_at: string`
+
+      RFC 3339 timestamp of the most recent heartbeat
+
+    - `metadata: map[string]`
+
+      User-provided metadata key-value pairs associated with this work item
+
+    - `secret: string`
+
+      Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+    - `started_at: string`
+
+      RFC 3339 timestamp when work execution started
+
+    - `state: "queued" or "starting" or "active" or 2 more`
+
+      Current state of the work item
+
+      - `"queued"`
+
+      - `"starting"`
+
+      - `"active"`
+
+      - `"stopping"`
+
+      - `"stopped"`
+
+    - `stop_requested_at: string`
+
+      RFC 3339 timestamp when stop was requested
+
+    - `stopped_at: string`
+
+      RFC 3339 timestamp when work execution stopped
+
+    - `type: "work"`
+
+      The type of object (always 'work')
+
+  - `next_page: string`
+
+    Opaque cursor for fetching the next page of results
+
+#### Example
+
+```bash
+ant beta:environments:work list \
+  --api-key my-anthropic-api-key \
+  --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "acknowledged_at": "acknowledged_at",
+      "created_at": "created_at",
+      "data": {
+        "id": "id",
+        "type": "session"
+      },
+      "environment_id": "environment_id",
+      "latest_heartbeat_at": "latest_heartbeat_at",
+      "metadata": {
+        "foo": "string"
+      },
+      "secret": "secret",
+      "started_at": "started_at",
+      "state": "queued",
+      "stop_requested_at": "stop_requested_at",
+      "stopped_at": "stopped_at",
+      "type": "work"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+### Update Work Item
+
+`$ ant beta:environments:work update`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Update work item metadata with merge semantics.
+
+#### Parameters
+
+- `--environment-id: string`
+
+  Path param
+
+- `--work-id: string`
+
+  Path param
+
+- `--metadata: map[string]`
+
+  Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `beta_self_hosted_work: object`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `id: string`
+
+    Work identifier (e.g., 'work_...')
+
+  - `acknowledged_at: string`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `created_at: string`
+
+    RFC 3339 timestamp when work was created
+
+  - `data: object`
+
+    The actual work to be performed
+
+    - `id: string`
+
+      Session identifier (e.g., 'session_...')
+
+    - `type: "session"`
+
+      Type of work data
+
+  - `environment_id: string`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `latest_heartbeat_at: string`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `metadata: map[string]`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `secret: string`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `started_at: string`
+
+    RFC 3339 timestamp when work execution started
+
+  - `state: "queued" or "starting" or "active" or 2 more`
+
+    Current state of the work item
+
+    - `"queued"`
+
+    - `"starting"`
+
+    - `"active"`
+
+    - `"stopping"`
+
+    - `"stopped"`
+
+  - `stop_requested_at: string`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `stopped_at: string`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `type: "work"`
+
+    The type of object (always 'work')
+
+#### Example
+
+```bash
+ant beta:environments:work update \
+  --api-key my-anthropic-api-key \
+  --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW \
+  --work-id work_id \
+  --metadata '{foo: string}'
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+### Get Queue Statistics
+
+`$ ant beta:environments:work stats`
+
+**GET** `/v1/environments/{environment_id}/work/stats`
+
+Get statistics about the work queue for an environment.
+
+#### Parameters
+
+- `--environment-id: string`
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `beta_self_hosted_work_queue_stats: object`
+
+  Statistics about the work queue for an environment.
+
+  Uses Redis Stream consumer group metrics for O(1) queries.
+
+  - `depth: number`
+
+    Number of work items waiting to be picked up (lag from consumer group)
+
+  - `oldest_queued_at: string`
+
+    RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
+
+  - `pending: number`
+
+    Number of work items being processed (polled but not acknowledged)
+
+  - `type: "work_queue_stats"`
+
+    The type of object
+
+  - `workers_polling: number`
+
+    Number of workers that have polled for work in the last 30 seconds. Requires worker_id to be sent with poll requests.
+
+#### Example
+
+```bash
+ant beta:environments:work stats \
+  --api-key my-anthropic-api-key \
+  --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
+```
+
+##### Response (200)
+
+```json
+{
+  "depth": 0,
+  "oldest_queued_at": "oldest_queued_at",
+  "pending": 0,
+  "type": "work_queue_stats",
+  "workers_polling": 0
+}
+```
 
 ---
 

@@ -1,16 +1,6 @@
 # Download Code Artifact Version Content
 
-To enable the Compliance API, see the setup guide.
-
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
-
-Copy page
-
-
-
-# Download Code Artifact Version Content
-
-GET/v1/compliance/apps/code/artifacts/{artifact\_id}/versions/{version\_id}
+**GET** `/v1/compliance/apps/code/artifacts/{artifact_id}/versions/{version_id}`
 
 Streams the content of one version of a Claude Code Artifact as the
 response body.
@@ -25,25 +15,23 @@ but the body terminates early — an aborted chunked transfer is the
 only truncation signal for encoded content. `Content-MD5` is emitted
 only for identity-stored content; validate against it when present.
 
-##### Path parameters
+## Path parameters
 
-artifact\_id: string
+- `artifact_id: string`
 
-The Artifact ID (tagged ID, e.g., cart\_abc123)
+  The Artifact ID (tagged ID, e.g., cart_abc123)
 
-version\_id: string
+- `version_id: string`
 
-Opaque version identifier from the Artifact's `versions` list
+  Opaque version identifier from the Artifact's `versions` list
 
-##### Headers
+## Headers
 
-"x-api-key": optional string
+- `"x-api-key": optional string`
 
-Download Code Artifact Version Content
+## Example
 
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/code/artifacts/$ARTIFACT_ID/versions/$VERSION_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```

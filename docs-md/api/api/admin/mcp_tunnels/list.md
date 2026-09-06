@@ -1,14 +1,8 @@
 # List Tunnels
 
-Copy page
+**GET** `/v1/organizations/tunnels`
 
-
-
-# List Tunnels
-
-Deprecated
-
-GET/v1/organizations/tunnels
+**Deprecated**
 
 **Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](api/beta/tunnels.md) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
@@ -18,137 +12,94 @@ Results span the caller's organization, ordered by creation time
 (newest first). Use `workspace_id` to filter to a single workspace;
 archived tunnels are excluded unless `include_archived` is set.
 
-##### Query parameters
+## Query parameters
 
-
+- `include_archived: optional boolean`
 
-include\_archived: optional boolean
+  Include archived tunnels in the results. Archived tunnels are excluded by
+  default.
 
-Include archived tunnels in the results. Archived tunnels are excluded by
-default.
+  default: false
 
-defaultfalse
+- `limit: optional number`
 
-
+  Maximum number of tunnels to return in a single page.
 
-limit: optional number
+  default: 20, maximum: 1000, minimum: 1
 
-Maximum number of tunnels to return in a single page.
+- `page: optional string`
 
-default20
+  Opaque pagination cursor from a previous response's `next_page`. Omit to
+  fetch the first page.
 
-maximum1000
+- `workspace_id: optional string`
 
-minimum1
+  Return only tunnels in this Workspace. Accepts a `wrkspc_`-prefixed
+  Workspace ID; omit to list tunnels across all Workspaces.
 
-page: optional string
+## Headers
 
-Opaque pagination cursor from a previous response's `next_page`. Omit to
-fetch the first page.
+- `"anthropic-beta": array of "mcp-tunnels-2026-05-19"`
 
-workspace\_id: optional string
+  Required for all Tunnel endpoints.
 
-Return only tunnels in this Workspace. Accepts a `wrkspc_`-prefixed
-Workspace ID; omit to list tunnels across all Workspaces.
+## Returns
 
-##### Headers
+- `data: array of object`
 
-"anthropic-beta": array of "mcp-tunnels-2026-05-19"
+  - `id: string`
 
-Required for all Tunnel endpoints.
+    ID of the Tunnel.
 
-##### Returns
+  - `archived_at: string or null`
 
-
+    RFC 3339 datetime string indicating when the Tunnel was archived, or
+    `null` if it is not archived.
 
-data: array of object{ id, archived\_at, created\_at, 4 more }
+    format: date-time
 
-id: string
+  - `created_at: string`
 
-ID of the Tunnel.
+    RFC 3339 datetime string indicating when the Tunnel was created.
 
-
+    format: date-time
 
-archived\_at: string or null
+  - `display_name: string or null`
 
-RFC 3339 datetime string indicating when the Tunnel was archived, or
-`null` if it is not archived.
+    Human-readable name for the Tunnel (1–255 characters), or `null` if unset.
 
-formatdate-time
+  - `domain: string`
 
-
+    Anthropic-assigned hostname for the Tunnel. MCP server URLs whose host is a
+    subdomain of this value are routed through the Tunnel. Globally unique and
+    never reused, even after the Tunnel is archived.
 
-created\_at: string
+  - `type: "tunnel"`
 
-RFC 3339 datetime string indicating when the Tunnel was created.
+    Object type. Always `tunnel` for Tunnels.
 
-formatdate-time
+    default: tunnel
 
-display\_name: string or null
+  - `workspace_id: string or null`
 
-Human-readable name for the Tunnel (1–255 characters), or `null` if unset.
+    ID of the Workspace this Tunnel belongs to, or `null` for the default
+    Workspace. Immutable after creation.
 
-domain: string
+- `next_page: string or null`
 
-Anthropic-assigned hostname for the Tunnel. MCP server URLs whose host is a
-subdomain of this value are routed through the Tunnel. Globally unique and
-never reused, even after the Tunnel is archived.
+  Opaque cursor for the next page, or `null` if there are no more results.
 
-
+## Example
 
-type: "tunnel"
-
-Object type. Always `tunnel` for Tunnels.
-
-defaulttunnel
-
-workspace\_id: string or null
-
-ID of the Workspace this Tunnel belongs to, or `null` for the default
-Workspace. Immutable after creation.
-
-next\_page: string or null
-
-Opaque cursor for the next page, or `null` if there are no more results.
-
-List Tunnels
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/tunnels \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "tnl_01Hx9Kp2RtQvMn3sWbYdLcF8",
-      "archived_at": "2024-11-01T23:59:27.427722Z",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "display_name": "Production",
-      "domain": "a1b2c3d4.tunnel.anthropic.com",
-      "type": "tunnel",
-      "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
-    }
-  ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

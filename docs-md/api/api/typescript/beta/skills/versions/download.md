@@ -1,137 +1,145 @@
 # Download Skill Version Content
 
-Copy page
+`client.beta.skills.versions.download(version, params, options?): Response`
 
-
-
-TypeScript
-
-# Download Skill Version Content
-
-client.beta.skills.versions.download(stringversion, VersionDownloadParams { skill\_id, betas } params, RequestOptionsoptions?): Response
-
-GET/v1/skills/{skill\_id}/versions/{version}/content
+**GET** `/v1/skills/{skill_id}/versions/{version}/content`
 
 Download a skill version's content as a zip archive.
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `version: string`
 
-version: string
+  Identifies the skill version by its version ID.
 
-Version identifier for the skill.
+  Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+- `params: VersionDownloadParams`
 
-
+  - `skill_id: string`
 
-params: VersionDownloadParams { skill\_id, betas } 
+    Path param: Unique identifier for the skill.
 
-
+    The format and length of IDs may change over time.
 
-skill\_id: string
+  - `betas?: Array<AnthropicBeta>`
 
-Path param: Unique identifier for the skill.
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-The format and length of IDs may change over time.
+    - `(string & {})`
 
-
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+      - `"message-batches-2024-09-24"`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+      - `"prompt-caching-2024-07-31"`
 
-One of the following:
+      - `"computer-use-2024-10-22"`
 
-(string & {})
+      - `"computer-use-2025-01-24"`
 
-
+      - `"pdfs-2024-09-25"`
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more
+      - `"token-counting-2024-11-01"`
 
-"message-batches-2024-09-24"
+      - `"token-efficient-tools-2025-02-19"`
 
-"prompt-caching-2024-07-31"
+      - `"output-128k-2025-02-19"`
 
-"computer-use-2024-10-22"
+      - `"files-api-2025-04-14"`
 
-"computer-use-2025-01-24"
+      - `"mcp-client-2025-04-04"`
 
-"pdfs-2024-09-25"
+      - `"mcp-client-2025-11-20"`
 
-"token-counting-2024-11-01"
+      - `"dev-full-thinking-2025-05-14"`
 
-"token-efficient-tools-2025-02-19"
+      - `"interleaved-thinking-2025-05-14"`
 
-"output-128k-2025-02-19"
+      - `"code-execution-2025-05-22"`
 
-"files-api-2025-04-14"
+      - `"extended-cache-ttl-2025-04-11"`
 
-"mcp-client-2025-04-04"
+      - `"context-1m-2025-08-07"`
 
-"mcp-client-2025-11-20"
+      - `"context-management-2025-06-27"`
 
-"dev-full-thinking-2025-05-14"
+      - `"model-context-window-exceeded-2025-08-26"`
 
-"interleaved-thinking-2025-05-14"
+      - `"skills-2025-10-02"`
 
-"code-execution-2025-05-22"
+      - `"fast-mode-2026-02-01"`
 
-"extended-cache-ttl-2025-04-11"
+      - `"output-300k-2026-03-24"`
 
-"context-1m-2025-08-07"
+      - `"user-profiles-2026-03-24"`
 
-"context-management-2025-06-27"
+      - `"user-profiles-2026-08-18"`
 
-"model-context-window-exceeded-2025-08-26"
+      - `"advisor-tool-2026-03-01"`
 
-"skills-2025-10-02"
+      - `"managed-agents-2026-04-01"`
 
-"fast-mode-2026-02-01"
+      - `"cache-diagnosis-2026-04-07"`
 
-"output-300k-2026-03-24"
+      - `"dreaming-2026-04-21"`
 
-"user-profiles-2026-03-24"
+      - `"thinking-token-count-2026-05-13"`
 
-"advisor-tool-2026-03-01"
+      - `"server-side-fallback-2026-06-01"`
 
-"managed-agents-2026-04-01"
+      - `"server-side-fallback-2026-07-01"`
 
-"cache-diagnosis-2026-04-07"
+      - `"fallback-credit-2026-06-01"`
 
-"thinking-token-count-2026-05-13"
+      - `"fallback-credit-2026-07-01"`
 
-"server-side-fallback-2026-06-01"
+      - `"agent-memory-2026-07-22"`
 
-"fallback-credit-2026-06-01"
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
-"agent-memory-2026-07-22"
+      - `"compact-2026-01-12"`
 
-##### ReturnsExpand Collapse
+      - `"computer-use-2025-11-24"`
 
-unnamed\_schema\_3 = Response
+      - `"mcp-tunnels-2026-06-22"`
 
-Download Skill Version Content
+      - `"structured-outputs-2025-11-13"`
 
-TypeScript
+      - `"task-budgets-2026-03-13"`
 
-```shiki
-import Anthropic from '@anthropic-ai/sdk';
+      - `"thinking-display-updates-2026-08-18"`
+
+      - `"ce-user-management-2026-07-13"`
+
+      - `"mid-conversation-output-config-2026-07-01"`
+
+      - `"thinking-binding-controls-2026-08-01"`
+
+      - `"mid-conversation-system-clear-at-2026-08-21"`
+
+## Returns
+
+- `unnamed_schema_2 = Response`
+
+## Example
+
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const response = await client.beta.skills.versions.download('version', { skill_id: 'skill_id' });
+const response = await client.beta.skills.versions.download("version", {
+  skill_id: "skill_id"
+});
 
 console.log(response);
 
 const content = await response.blob();
 console.log(content);
 ```
-
-##### Returns Examples
 
 ---
 

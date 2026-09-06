@@ -1,14 +1,6 @@
 # Remove Workspace From Service Account
 
-Copy page
-
-
-
-cURL
-
-# Remove Workspace From Service Account
-
-DELETE/v1/organizations/service\_accounts/{service\_account\_id}/workspaces/{workspace\_id}
+**DELETE** `/v1/organizations/service_accounts/{service_account_id}/workspaces/{workspace_id}`
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -22,168 +14,140 @@ membership persists; deleting an explicit default-workspace row reverts
 to the implicit `workspace_user` membership. Archived workspaces return
 400.
 
-##### Path parameters
+## Path parameters
 
-service\_account\_id: string
+- `service_account_id: string`
 
-ID of the service account.
+  ID of the service account.
 
-workspace\_id: string
+- `workspace_id: string`
 
-ID of the workspace.
+  ID of the workspace.
 
-##### Headers
+## Headers
 
-
+- `"anthropic-beta": optional array of AnthropicBeta`
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+  Optional header to specify the beta version(s) you want to use.
 
-Optional header to specify the beta version(s) you want to use.
+  - `string`
 
-One of the following:
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
-string
+    - `"message-batches-2024-09-24"`
 
-
+    - `"prompt-caching-2024-07-31"`
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
+    - `"computer-use-2024-10-22"`
 
-One of the following:
+    - `"computer-use-2025-01-24"`
 
-"message-batches-2024-09-24"
+    - `"pdfs-2024-09-25"`
 
-"prompt-caching-2024-07-31"
+    - `"token-counting-2024-11-01"`
 
-"computer-use-2024-10-22"
+    - `"token-efficient-tools-2025-02-19"`
 
-"computer-use-2025-01-24"
+    - `"output-128k-2025-02-19"`
 
-"pdfs-2024-09-25"
+    - `"files-api-2025-04-14"`
 
-"token-counting-2024-11-01"
+    - `"mcp-client-2025-04-04"`
 
-"token-efficient-tools-2025-02-19"
+    - `"mcp-client-2025-11-20"`
 
-"output-128k-2025-02-19"
+    - `"dev-full-thinking-2025-05-14"`
 
-"files-api-2025-04-14"
+    - `"interleaved-thinking-2025-05-14"`
 
-"mcp-client-2025-04-04"
+    - `"code-execution-2025-05-22"`
 
-"mcp-client-2025-11-20"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"dev-full-thinking-2025-05-14"
+    - `"context-1m-2025-08-07"`
 
-"interleaved-thinking-2025-05-14"
+    - `"context-management-2025-06-27"`
 
-"code-execution-2025-05-22"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"skills-2025-10-02"`
 
-"context-1m-2025-08-07"
+    - `"fast-mode-2026-02-01"`
 
-"context-management-2025-06-27"
+    - `"output-300k-2026-03-24"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"user-profiles-2026-03-24"`
 
-"skills-2025-10-02"
+    - `"user-profiles-2026-08-18"`
 
-"fast-mode-2026-02-01"
+    - `"advisor-tool-2026-03-01"`
 
-"output-300k-2026-03-24"
+    - `"managed-agents-2026-04-01"`
 
-"user-profiles-2026-03-24"
+    - `"cache-diagnosis-2026-04-07"`
 
-"user-profiles-2026-08-18"
+    - `"dreaming-2026-04-21"`
 
-"advisor-tool-2026-03-01"
+    - `"thinking-token-count-2026-05-13"`
 
-"managed-agents-2026-04-01"
+    - `"server-side-fallback-2026-06-01"`
 
-"cache-diagnosis-2026-04-07"
+    - `"server-side-fallback-2026-07-01"`
 
-"dreaming-2026-04-21"
+    - `"fallback-credit-2026-06-01"`
 
-"thinking-token-count-2026-05-13"
+    - `"fallback-credit-2026-07-01"`
 
-"server-side-fallback-2026-06-01"
+    - `"agent-memory-2026-07-22"`
 
-"server-side-fallback-2026-07-01"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-"fallback-credit-2026-06-01"
+    - `"compact-2026-01-12"`
 
-"fallback-credit-2026-07-01"
+    - `"computer-use-2025-11-24"`
 
-"agent-memory-2026-07-22"
+    - `"mcp-tunnels-2026-06-22"`
 
-"mid-conversation-tool-changes-2026-07-01"
+    - `"structured-outputs-2025-11-13"`
 
-"compact-2026-01-12"
+    - `"task-budgets-2026-03-13"`
 
-"computer-use-2025-11-24"
+    - `"thinking-display-updates-2026-08-18"`
 
-"mcp-tunnels-2026-06-22"
+    - `"ce-user-management-2026-07-13"`
 
-"structured-outputs-2025-11-13"
+    - `"mid-conversation-output-config-2026-07-01"`
 
-"task-budgets-2026-03-13"
+    - `"thinking-binding-controls-2026-08-01"`
 
-"thinking-display-updates-2026-08-18"
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"ce-user-management-2026-07-13"
+## Returns
 
-"mid-conversation-output-config-2026-07-01"
+- `service_account_id: string`
 
-"thinking-binding-controls-2026-08-01"
+  Tagged service account ID (`svac_...`) named in the delete request. Removal is idempotent; see the endpoint description for the implicit-membership no-op.
 
-"mid-conversation-system-clear-at-2026-08-21"
+- `type: "service_account_workspace_member_deleted"`
 
-##### Returns
+  default: service_account_workspace_member_deleted
 
-service\_account\_id: string
+- `workspace_id: string`
 
-Tagged service account ID (`svac_...`) named in the delete request. Removal is idempotent; see the endpoint description for the implicit-membership no-op.
+  Tagged workspace ID (`wrkspc_...`) named in the delete request.
 
-
+## Example
 
-type: "service\_account\_workspace\_member\_deleted"
-
-defaultservice\_account\_workspace\_member\_deleted
-
-workspace\_id: string
-
-Tagged workspace ID (`wrkspc_...`) named in the delete request.
-
-Remove Workspace From Service Account
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUNT_ID/workspaces/$WORKSPACE_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "service_account_id": "service_account_id",
-  "type": "service_account_workspace_member_deleted",
-  "workspace_id": "workspace_id"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "service_account_id": "service_account_id",
   "type": "service_account_workspace_member_deleted",

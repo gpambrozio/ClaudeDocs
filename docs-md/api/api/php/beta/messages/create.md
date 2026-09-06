@@ -1,16 +1,8 @@
 # Create a Message
 
-Copy page
+`$client->beta->messages->create(int maxTokens, list<BetaMessageParam> messages, Model model, ?BetaCacheControlEphemeral cacheControl, ?Container container, ?BetaContextManagementConfig contextManagement, ?BetaDiagnosticsParam diagnostics, ?FallbackCreditToken fallbackCreditToken, ?BetaFallbacksParam fallbacks, ?string inferenceGeo, ?list<BetaRequestMCPServerURLDefinition> mcpServers, ?BetaMetadata metadata, ?BetaOutputConfig outputConfig, ?BetaJSONOutputFormat outputFormat, ?ServiceTier serviceTier, ?Speed speed, ?list<string> stopSequences, ?System system, ?float temperature, ?BetaThinkingConfigParam thinking, ?BetaToolChoice toolChoice, ?list<BetaToolUnion> tools, ?int topK, ?float topP, ?list<AnthropicBeta> betas, ?string userProfileID): BetaMessage`
 
-
-
-PHP
-
-# Create a Message
-
-$client->beta->messages->create(int maxTokens, list<[BetaMessageParam](api/beta/messages.md)> messages, Model model, ?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl, ?[Container](api/beta/messages/create.md) container, ?[BetaContextManagementConfig](api/beta/messages.md) contextManagement, ?[BetaDiagnosticsParam](api/beta/messages.md) diagnostics, ?string fallbackCreditToken, ?list<[BetaFallbackParam](api/beta/messages.md)> fallbacks, ?string inferenceGeo, ?list<[BetaRequestMCPServerURLDefinition](api/beta/messages.md)> mcpServers, ?[BetaMetadata](api/beta/messages.md) metadata, ?[BetaOutputConfig](api/beta/messages.md) outputConfig, ?[BetaJSONOutputFormat](api/beta/messages.md) outputFormat, ?[ServiceTier](api/beta/messages/create.md) serviceTier, ?[Speed](api/beta/messages/create.md) speed, ?list<string> stopSequences, ?[System](api/beta/messages/create.md) system, ?float temperature, ?[BetaThinkingConfigParam](api/beta/messages.md) thinking, ?[BetaToolChoice](api/beta/messages.md) toolChoice, ?list<[BetaToolUnion](api/beta/messages.md)> tools, ?int topK, ?float topP, ?list<AnthropicBeta> betas, ?string userProfileID): [BetaMessage](api/beta/messages.md)
-
-POST/v1/messages
+**POST** `/v1/messages`
 
 Send a structured list of input messages with text and/or image content, and the model will generate the next message in the conversation.
 
@@ -18,549 +10,496 @@ The Messages API can be used for either single queries or stateless multi-turn c
 
 Learn more about the Messages API in our [user guide](get-started.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `maxTokens: int`
 
-maxTokens: int
+  The maximum number of tokens to generate before stopping.
 
-The maximum number of tokens to generate before stopping.
+  Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-Note that our models may stop *before* reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
+  Set to `0` to populate the [prompt cache](build-with-claude/prompt-caching.md) without generating a response.
 
-Set to `0` to populate the [prompt cache](build-with-claude/prompt-caching.md) without generating a response.
+  Different models have different maximum values for this parameter.  See [models](about-claude/models/overview.md) for details.
 
-Different models have different maximum values for this parameter. See [models](about-claude/models/overview.md) for details.
+- `messages: list<BetaMessageParam>`
 
-
+  Input messages.
 
-messages: list<[BetaMessageParam](api/beta/messages.md)>
+  Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
 
-Input messages.
+  Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
 
-Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
+  If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
 
-Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
+  Example with a single `user` message:
 
-If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
+  ```json
+  [{"role": "user", "content": "Hello, Claude"}]
+  ```
 
-Example with a single `user` message:
+  Example with multiple conversational turns:
 
-```shiki
-[{"role": "user", "content": "Hello, Claude"}]
-```
+  ```json
+  [
+    {"role": "user", "content": "Hello there."},
+    {"role": "assistant", "content": "Hi, I'm Claude. How can I help you?"},
+    {"role": "user", "content": "Can you explain LLMs in plain English?"},
+  ]
+  ```
 
-
+  Example with a partially-filled response from Claude:
 
-Example with multiple conversational turns:
+  ```json
+  [
+    {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+    {"role": "assistant", "content": "The best answer is ("},
+  ]
+  ```
 
-```shiki
-[
-  {"role": "user", "content": "Hello there."},
-  {"role": "assistant", "content": "Hi, I'm Claude. How can I help you?"},
-  {"role": "user", "content": "Can you explain LLMs in plain English?"},
-]
-```
+  Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
 
-
+  ```json
+  {"role": "user", "content": "Hello, Claude"}
+  ```
 
-Example with a partially-filled response from Claude:
+  ```json
+  {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
+  ```
 
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("},
-]
-```
+  See [input examples](build-with-claude/working-with-messages.md).
 
-
+  Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
-Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
+  There is a limit of 100,000 messages in a single request.
 
-```shiki
-{"role": "user", "content": "Hello, Claude"}
-```
+- `model: Model`
 
-
+  The model that will complete your prompt.
 
-```shiki
-{"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
-```
+  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-
+- `cacheControl?:optional BetaCacheControlEphemeral`
 
-See [input examples](build-with-claude/working-with-messages.md).
+  Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
-Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+- `container?:optional Container`
 
-There is a limit of 100,000 messages in a single request.
+  Container identifier for reuse across requests.
 
-
+- `contextManagement?:optional BetaContextManagementConfig`
 
-model: Model
+  Context management configuration.
 
-The model that will complete your prompt.
+  This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+- `diagnostics?:optional BetaDiagnosticsParam`
 
-cacheControl?:optional [BetaCacheControlEphemeral](api/beta/messages.md)
+  Request-level diagnostics. Currently carries the previous response
+  id for prompt-cache divergence reporting.
 
-Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
+- `fallbackCreditToken?:optional FallbackCreditToken`
 
-container?:optional [Container](api/beta/messages/create.md)
+  The `fallback_credit_token` from a prior refusal's `stop_details`.
 
-Container identifier for reuse across requests.
+  When a preceding request was refused and returned a `fallback_credit_token`,
+  pass that code here on the retry to have the retry's cache-creation tokens
+  for the prefix that was warm on the refused model billed at the cache-read
+  rate. Must be redeemed by the same organization and workspace, with the same
+  request body (optionally extended by one appended `assistant` message whose
+  content is the partial text — with any trailing whitespace stripped from
+  the final text block — and paired server-tool blocks streamed before the
+  refusal; the appended-assistant form is not available for requests with
+  `output_format` set or forced `tool_choice`), on an eligible fallback
+  model, on the same platform,
+  and within 5 minutes of the refusal; a mismatch is a 400. A token minted
+  mid-server-tool-loop whose partial content was continuable may only be
+  redeemed with the appended-assistant form — if an exact-body retry is
+  rejected with a 400 saying the token must be redeemed by continuing the
+  partial response, retry with the appended-assistant form instead.
 
-
+  When the appended-assistant form is used on a model that otherwise disallows
+  assistant-turn prefill, this token also authorizes that one prefill.
 
-contextManagement?:optional [BetaContextManagementConfig](api/beta/messages.md)
+- `fallbacks?:optional BetaFallbacksParam`
 
-Context management configuration.
+  Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
 
-This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
+- `inferenceGeo?:optional string`
 
-diagnostics?:optional [BetaDiagnosticsParam](api/beta/messages.md)
+  Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
-Request-level diagnostics. Currently carries the previous response
-id for prompt-cache divergence reporting.
+- `mcpServers?:optional list<BetaRequestMCPServerURLDefinition>`
 
-
+  MCP servers to be utilized in this request
 
-fallbackCreditToken?:optional string
+- `metadata?:optional BetaMetadata`
 
-The `fallback_credit_token` from a prior refusal's `stop_details`.
+  An object describing metadata about the request.
 
-When a preceding request was refused and returned a `fallback_credit_token`,
-pass that code here on the retry to have the retry's cache-creation tokens
-for the prefix that was warm on the refused model billed at the cache-read
-rate. Must be redeemed by the same organization and workspace, with the same
-request body (optionally extended by one appended `assistant` message whose
-content is the partial text — with any trailing whitespace stripped from
-the final text block — and paired server-tool blocks streamed before the
-refusal; the appended-assistant form is not available for requests with
-`output_format` set or forced `tool_choice`), on an eligible fallback
-model, on the same platform,
-and within 5 minutes of the refusal; a mismatch is a 400. A token minted
-mid-server-tool-loop whose partial content was continuable may only be
-redeemed with the appended-assistant form — if an exact-body retry is
-rejected with a 400 saying the token must be redeemed by continuing the
-partial response, retry with the appended-assistant form instead.
+- `outputConfig?:optional BetaOutputConfig`
 
-When the appended-assistant form is used on a model that otherwise disallows
-assistant-turn prefill, this token also authorizes that one prefill.
+  Configuration options for the model's output, such as the output format.
 
-fallbacks?:optional list<[BetaFallbackParam](api/beta/messages.md)>
+- `serviceTier?:optional ServiceTier`
 
-Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
+  Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-inferenceGeo?:optional string
+  Anthropic offers different levels of service for your API requests. See [service-tiers](api/service-tiers.md) for details.
 
-Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+- `speed?:optional Speed`
 
-mcpServers?:optional list<[BetaRequestMCPServerURLDefinition](api/beta/messages.md)>
+  Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-MCP servers to be utilized in this request
+- `stopSequences?:optional list<string>`
 
-metadata?:optional [BetaMetadata](api/beta/messages.md)
+  Custom text sequences that will cause the model to stop generating.
 
-An object describing metadata about the request.
+  Our models will normally stop when they have naturally completed their turn, which will result in a response `stop_reason` of `"end_turn"`.
 
-outputConfig?:optional [BetaOutputConfig](api/beta/messages.md)
+  If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
 
-Configuration options for the model's output, such as the output format.
+- `stream?:optional bool`
 
-
+  Whether to incrementally stream the response using server-sent events.
 
-serviceTier?:optional [ServiceTier](api/beta/messages/create.md)
+  See [streaming](build-with-claude/streaming.md) for details.
 
-Determines whether to use priority capacity (if available) or standard capacity for this request.
+- `system?:optional System`
 
-Anthropic offers different levels of service for your API requests. See [service-tiers](api/service-tiers.md) for details.
+  System prompt.
 
-speed?:optional [Speed](api/beta/messages/create.md)
+  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
-The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+- `thinking?:optional BetaThinkingConfigParam`
 
-
+  Configuration for enabling Claude's extended thinking.
 
-stopSequences?:optional list<string>
+  When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-Custom text sequences that will cause the model to stop generating.
+  See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-Our models will normally stop when they have naturally completed their turn, which will result in a response `stop_reason` of `"end_turn"`.
+- `toolChoice?:optional BetaToolChoice`
 
-If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
+  How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-
+- `tools?:optional list<BetaToolUnion>`
 
-stream?:optional bool
+  Definitions of tools that the model may use.
 
-Whether to incrementally stream the response using server-sent events.
+  If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-See [streaming](build-with-claude/streaming.md) for details.
+  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
 
-
+  Each tool definition includes:
 
-system?:optional [System](api/beta/messages/create.md)
+  * `name`: Name of the tool.
+  * `description`: Optional, but strongly-recommended description of the tool.
+  * `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
 
-System prompt.
+  For example, if you defined `tools` as:
 
-A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
-
-
-
-thinking?:optional [BetaThinkingConfigParam](api/beta/messages.md)
-
-Configuration for enabling Claude's extended thinking.
-
-When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
-
-See [extended thinking](build-with-claude/extended-thinking.md) for details.
-
-toolChoice?:optional [BetaToolChoice](api/beta/messages.md)
-
-How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
-
-
-
-tools?:optional list<[BetaToolUnion](api/beta/messages.md)>
-
-Definitions of tools that the model may use.
-
-If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
-
-There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
-
-Each tool definition includes:
-
-- `name`: Name of the tool.
-- `description`: Optional, but strongly-recommended description of the tool.
-- `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
-
-For example, if you defined `tools` as:
-
-```shiki
-[
-  {
-    "name": "get_stock_price",
-    "description": "Get the current stock price for a given ticker symbol.",
-    "input_schema": {
-      "type": "object",
-      "properties": {
-        "ticker": {
-          "type": "string",
-          "description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
-        }
-      },
-      "required": ["ticker"]
+  ```json
+  [
+    {
+      "name": "get_stock_price",
+      "description": "Get the current stock price for a given ticker symbol.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
+          }
+        },
+        "required": ["ticker"]
+      }
     }
-  }
-]
-```
+  ]
+  ```
 
-
+  And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
 
-And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
+  ```json
+  [
+    {
+      "type": "tool_use",
+      "id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+      "name": "get_stock_price",
+      "input": { "ticker": "^GSPC" }
+    }
+  ]
+  ```
 
-```shiki
-[
-  {
-    "type": "tool_use",
-    "id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
-    "name": "get_stock_price",
-    "input": { "ticker": "^GSPC" }
-  }
-]
-```
+  You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
 
-
+  ```json
+  [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+      "content": "259.75 USD"
+    }
+  ]
+  ```
 
-You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
+  Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-```shiki
-[
-  {
-    "type": "tool_result",
-    "tool_use_id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
-    "content": "259.75 USD"
-  }
-]
-```
+  See our [guide](agents-and-tools/tool-use/overview.md) for more details.
 
-
+- `betas?:optional list<AnthropicBeta>`
 
-Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
+  Optional header to specify the beta version(s) you want to use.
 
-See our [guide](agents-and-tools/tool-use/overview.md) for more details.
+- `userProfileID?:optional string`
 
-betas?:optional list<AnthropicBeta>
+  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
-Optional header to specify the beta version(s) you want to use.
+- `outputFormat?:optional BetaJSONOutputFormat`
 
-userProfileID?:optional string
+  **Deprecated**
 
-The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+  Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
 
-
+  A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
-outputFormat?:optional [BetaJSONOutputFormat](api/beta/messages.md)⁠Deprecated
+- `temperature?:optional float`
 
-Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+  **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
+  Amount of randomness injected into the response.
 
-
+  Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
 
-temperature?:optional float⁠Deprecated
+  Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
-Amount of randomness injected into the response.
+- `topK?:optional int`
 
-Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+  **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not accept top_k; any value will be rejected with a 400 error.
 
-Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
+  Only sample from the top K options for each subsequent token.
 
-Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
+  Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-
+  Recommended for advanced use cases only.
 
-topK?:optional int⁠Deprecated
+- `topP?:optional float`
 
-Only sample from the top K options for each subsequent token.
+  **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting top_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-Deprecated. Models released after Claude Opus 4.6 do not accept top\_k; any value will be rejected with a 400 error.
+  Use nucleus sampling.
 
-Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
+  In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-Recommended for advanced use cases only.
+  Recommended for advanced use cases only.
 
-
+## Returns
 
-topP?:optional float⁠Deprecated
+- `BetaMessage`
 
-Use nucleus sampling.
+  - `string id`
 
-Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+    Unique object identifier.
 
-In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
+    The format and length of IDs may change over time.
 
-Recommended for advanced use cases only.
+  - `?BetaContainer container`
 
-##### ReturnsExpand Collapse
+    Information about the container used in the request (for the code execution tool)
 
-
+  - `list<BetaContentBlock> content`
 
-[BetaMessage](api/beta/messages.md)
+    Content generated by the model.
 
-
+    This is an array of content blocks, each of which has a `type` that determines its shape.
 
-string id
+    Example:
 
-Unique object identifier.
+    ```json
+    [{"type": "text", "text": "Hi, I'm Claude."}]
+    ```
 
-The format and length of IDs may change over time.
+    If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
 
-?[BetaContainer](api/beta/messages.md) container
+    For example, if the input `messages` were:
 
-Information about the container used in the request (for the code execution tool)
+    ```json
+    [
+      {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+      {"role": "assistant", "content": "The best answer is ("}
+    ]
+    ```
 
-
+    Then the response `content` might be:
 
-list<[BetaContentBlock](api/beta/messages.md)> content
+    ```json
+    [{"type": "text", "text": "B)"}]
+    ```
 
-Content generated by the model.
+  - `?BetaContextManagementResponse contextManagement`
 
-This is an array of content blocks, each of which has a `type` that determines its shape.
+    Context management response.
 
-Example:
+    Information about context management strategies applied during the request.
 
-```shiki
-[{"type": "text", "text": "Hi, I'm Claude."}]
-```
+  - `?BetaDiagnostics diagnostics`
 
-
+    Response envelope for request-level diagnostics. Present (possibly
+    null) whenever the caller supplied `diagnostics` on the request.
 
-If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
+  - `Model model`
 
-For example, if the input `messages` were:
+    The model that will complete your prompt.
 
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("}
-]
-```
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-
+  - `"assistant" role`
 
-Then the response `content` might be:
+    Conversational role of the generated message.
 
-```shiki
-[{"type": "text", "text": "B)"}]
-```
+    This will always be `"assistant"`.
 
-
+  - `?BetaRefusalStopDetails stopDetails`
 
-
+    Structured information about a refusal.
 
-?[BetaContextManagementResponse](api/beta/messages.md) contextManagement
+  - `?BetaStopReason stopReason`
 
-Context management response.
+    The reason that we stopped.
 
-Information about context management strategies applied during the request.
+    This may be one the following values:
 
-?[BetaDiagnostics](api/beta/messages.md) diagnostics
+    * `"end_turn"`: the model reached a natural stopping point
+    * `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
+    * `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
+    * `"tool_use"`: the model invoked one or more tools
+    * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
+    * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+    * `"model_context_window_exceeded"`: we exceeded the model's context window
 
-Response envelope for request-level diagnostics. Present (possibly
-null) whenever the caller supplied `diagnostics` on the request.
+    In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-
+  - `?string stopSequence`
 
-Model model
+    Which custom stop sequence was generated, if any.
 
-The model that will complete your prompt.
+    This value will be a non-null string if one of your custom stop sequences was generated.
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+  - `"message" type`
 
-
+    Object type.
 
-"assistant" role
+    For Messages, this is always `"message"`.
 
-Conversational role of the generated message.
+  - `BetaUsage usage`
 
-This will always be `"assistant"`.
+    Billing and rate-limit usage.
 
-?[BetaRefusalStopDetails](api/beta/messages.md) stopDetails
+    Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
 
-Structured information about a refusal.
+    Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
 
-
+    For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
 
-?[BetaStopReason](api/beta/messages.md) stopReason
+    Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-The reason that we stopped.
+  - `?list<BetaThinkingDroppedInputTransformation> inputTransformations`
 
-This may be one the following values:
+    Changes the API made to the request's input before showing it to the model:
+    one entry per change, in request order. Today the only entry type is
+    `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
+    block from the request's `messages` that was removed from the prompt instead
+    of being shown to the model because it failed a binding check. More entry
+    types may be added over time; ignore types you do not recognize.
 
-- `"end_turn"`: the model reached a natural stopping point
-- `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
-- `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
-- `"tool_use"`: the model invoked one or more tools
-- `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
-- `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+    Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
+    every such response from a model that supports extended thinking, as `[]`
+    when nothing was changed; without the beta, blocks are removed all the same
+    but nothing is reported. Removed blocks contribute nothing to
+    `usage.input_tokens`. When streaming, the array is final in `message_start`;
+    the final `message_delta` event carries it only when a server-side model
+    fallback happened mid-stream, in which case it holds the serving model's
+    entries and replaces the one in `message_start`.
 
-In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
+- `BetaRawMessageStreamEvent`
 
-
+  - `BetaRawMessageStartEvent`
 
-?string stopSequence
+    - `BetaMessage message`
 
-Which custom stop sequence was generated, if any.
+    - `"message_start" type`
 
-This value will be a non-null string if one of your custom stop sequences was generated.
+  - `BetaRawMessageDeltaEvent`
 
-
+    - `?BetaContextManagementResponse contextManagement`
 
-"message" type
+      Information about context management strategies applied during the request
 
-Object type.
+    - `Delta delta`
 
-For Messages, this is always `"message"`.
+    - `"message_delta" type`
 
-
+    - `BetaMessageDeltaUsage usage`
 
-[BetaUsage](api/beta/messages.md) usage
+      Billing and rate-limit usage.
 
-Billing and rate-limit usage.
+      Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
 
-Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+      Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
 
-Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+      For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
 
-For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+      Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+    - `?list<BetaThinkingDroppedInputTransformation> inputTransformations`
 
-
+      Changes the API made to the request's input before showing it to the model:
+      one entry per change, in request order. Today the only entry type is
+      `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
+      block from the request's `messages` that was removed from the prompt instead
+      of being shown to the model because it failed a binding check. More entry
+      types may be added over time; ignore types you do not recognize.
 
-[BetaRawMessageStreamEvent](api/beta/messages.md)
+      Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
+      every such response from a model that supports extended thinking, as `[]`
+      when nothing was changed; without the beta, blocks are removed all the same
+      but nothing is reported. Removed blocks contribute nothing to
+      `usage.input_tokens`. When streaming, the array is final in `message_start`;
+      the final `message_delta` event carries it only when a server-side model
+      fallback happened mid-stream, in which case it holds the serving model's
+      entries and replaces the one in `message_start`.
 
-One of the following:
+  - `BetaRawMessageStopEvent`
 
-
+    - `"message_stop" type`
 
-[BetaRawMessageStartEvent](api/beta/messages.md)
+  - `BetaRawContentBlockStartEvent`
 
-[BetaMessage](api/beta/messages.md) message
+    - `ContentBlock contentBlock`
 
-"message\_start" type
+      Response model for a file uploaded to the container.
 
-
+    - `int index`
 
-[BetaRawMessageDeltaEvent](api/beta/messages.md)
+    - `"content_block_start" type`
 
-?[BetaContextManagementResponse](api/beta/messages.md) contextManagement
+  - `BetaRawContentBlockDeltaEvent`
 
-Information about context management strategies applied during the request
+    - `BetaRawContentBlockDelta delta`
 
-Delta delta
+    - `int index`
 
-"message\_delta" type
+    - `"content_block_delta" type`
 
-
+  - `BetaRawContentBlockStopEvent`
 
-[BetaMessageDeltaUsage](api/beta/messages.md) usage
+    - `int index`
 
-Billing and rate-limit usage.
+    - `"content_block_stop" type`
 
-Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+## Example
 
-Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
-
-For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
-
-Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
-
-
-
-[BetaRawMessageStopEvent](api/beta/messages.md)
-
-"message\_stop" type
-
-
-
-[BetaRawContentBlockStartEvent](api/beta/messages.md)
-
-ContentBlock contentBlock
-
-Response model for a file uploaded to the container.
-
-int index
-
-"content\_block\_start" type
-
-
-
-[BetaRawContentBlockDeltaEvent](api/beta/messages.md)
-
-[BetaRawContentBlockDelta](api/beta/messages.md) delta
-
-int index
-
-"content\_block\_delta" type
-
-
-
-[BetaRawContentBlockStopEvent](api/beta/messages.md)
-
-int index
-
-"content\_block\_stop" type
-
-Create a Message
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -569,8 +508,15 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaMessage = $client->beta->messages->create(
   maxTokens: 1024,
-  messages: [['content' => 'Hello, world', 'role' => 'user']],
-  model: 'claude-opus-4-6',
+  messages: [
+    [
+      'content' => 'Hello, world',
+      'role' => 'user',
+      'clearAt' => 'next_user_message',
+      'outputConfig' => ['effort' => 'low'],
+    ],
+  ],
+  model: Model::CLAUDE_OPUS_5,
   cacheControl: ['type' => 'ephemeral', 'ttl' => '5m'],
   container: [
     'id' => 'id',
@@ -592,21 +538,7 @@ $betaMessage = $client->beta->messages->create(
   ],
   diagnostics: ['previousMessageID' => 'previous_message_id'],
   fallbackCreditToken: 'x',
-  fallbacks: [
-    [
-      'model' => 'claude-sonnet-5',
-      'maxTokens' => 0,
-      'outputConfig' => [
-        'effort' => 'low',
-        'format' => ['schema' => ['foo' => 'bar'], 'type' => 'json_schema'],
-        'taskBudget' => ['total' => 1024, 'type' => 'tokens', 'remaining' => 0],
-      ],
-      'speed' => 'standard',
-      'thinking' => [
-        'budgetTokens' => 1024, 'type' => 'enabled', 'display' => 'summarized'
-      ],
-    ],
-  ],
+  fallbacks: 'default',
   inferenceGeo: 'inference_geo',
   mcpServers: [
     [
@@ -634,7 +566,7 @@ $betaMessage = $client->beta->messages->create(
       'cacheControl' => ['type' => 'ephemeral', 'ttl' => '5m'],
       'citations' => [
         [
-          'citedText' => 'cited_text',
+          'citedText' => 'The grass is green. The sky is blue.',
           'documentIndex' => 0,
           'documentTitle' => 'x',
           'endCharIndex' => 0,
@@ -645,7 +577,13 @@ $betaMessage = $client->beta->messages->create(
     ],
   ],
   temperature: 1,
-  thinking: ['type' => 'adaptive', 'display' => 'summarized'],
+  thinking: [
+    'type' => 'adaptive',
+    'blockBinding' => [
+      'prefixMismatchBehavior' => BetaThinkingPrefixMismatchBehavior::ERROR
+    ],
+    'display' => 'summarized',
+  ],
   toolChoice: ['type' => 'auto', 'disableParallelToolUse' => true],
   tools: [
     [
@@ -667,22 +605,20 @@ $betaMessage = $client->beta->messages->create(
   ],
   topK: 5,
   topP: 0.7,
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
   userProfileID: 'anthropic-user-profile-id',
 );
 
 var_dump($betaMessage);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
   "container": {
-    "id": "id",
+    "id": "container_011CpZohnwH4vuy7gazohgSP",
     "expires_at": "2019-12-27T18:11:19.117Z",
     "skills": [
       {
@@ -696,11 +632,11 @@ Response 200
     {
       "citations": [
         {
-          "cited_text": "cited_text",
+          "cited_text": "The grass is green. The sky is blue.",
           "document_index": 0,
-          "document_title": "document_title",
+          "document_title": "My Document",
           "end_char_index": 0,
-          "file_id": "file_id",
+          "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
           "start_char_index": 0,
           "type": "char_location"
         }
@@ -724,14 +660,14 @@ Response 200
       "type": "model_changed"
     }
   },
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-5",
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
-    "explanation": "explanation",
-    "fallback_credit_token": "fallback_credit_token",
+    "explanation": "This request was declined because it conflicts with Anthropic's Usage Policy.",
+    "fallback_credit_token": "QW50aHJvcGljL0NsYXVkZQ==",
     "fallback_has_prefill_claim": true,
-    "recommended_model": "recommended_model",
+    "recommended_model": "claude-opus-4-8",
     "type": "refusal"
   },
   "stop_reason": "end_turn",
@@ -744,7 +680,12 @@ Response 200
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
-    "inference_geo": "inference_geo",
+    "fallback_credit": {
+      "status": {
+        "type": "redeemed"
+      }
+    },
+    "inference_geo": "global",
     "input_tokens": 2095,
     "iterations": [
       {
@@ -755,7 +696,7 @@ Response 200
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
-        "model": "claude-sonnet-5",
+        "model": "claude-fable-5-1",
         "output_tokens": 0,
         "type": "message"
       }
@@ -770,109 +711,14 @@ Response 200
     },
     "service_tier": "standard",
     "speed": "standard"
-  }
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
-  "container": {
-    "id": "id",
-    "expires_at": "2019-12-27T18:11:19.117Z",
-    "skills": [
-      {
-        "skill_id": "pdf",
-        "type": "anthropic",
-        "version": "latest"
-      }
-    ]
   },
-  "content": [
+  "input_transformations": [
     {
-      "citations": [
-        {
-          "cited_text": "cited_text",
-          "document_index": 0,
-          "document_title": "document_title",
-          "end_char_index": 0,
-          "file_id": "file_id",
-          "start_char_index": 0,
-          "type": "char_location"
-        }
-      ],
-      "text": "Hi! My name is Claude.",
-      "type": "text"
+      "path": "path",
+      "reason": "model_binding_mismatch",
+      "type": "thinking_dropped"
     }
-  ],
-  "context_management": {
-    "applied_edits": [
-      {
-        "cleared_input_tokens": 0,
-        "cleared_tool_uses": 0,
-        "type": "clear_tool_uses_20250919"
-      }
-    ]
-  },
-  "diagnostics": {
-    "cache_miss_reason": {
-      "cache_missed_input_tokens": 0,
-      "type": "model_changed"
-    }
-  },
-  "model": "claude-opus-4-6",
-  "role": "assistant",
-  "stop_details": {
-    "category": "cyber",
-    "explanation": "explanation",
-    "fallback_credit_token": "fallback_credit_token",
-    "fallback_has_prefill_claim": true,
-    "recommended_model": "recommended_model",
-    "type": "refusal"
-  },
-  "stop_reason": "end_turn",
-  "stop_sequence": null,
-  "type": "message",
-  "usage": {
-    "cache_creation": {
-      "ephemeral_1h_input_tokens": 0,
-      "ephemeral_5m_input_tokens": 0
-    },
-    "cache_creation_input_tokens": 2051,
-    "cache_read_input_tokens": 2051,
-    "inference_geo": "inference_geo",
-    "input_tokens": 2095,
-    "iterations": [
-      {
-        "cache_creation": {
-          "ephemeral_1h_input_tokens": 0,
-          "ephemeral_5m_input_tokens": 0
-        },
-        "cache_creation_input_tokens": 0,
-        "cache_read_input_tokens": 0,
-        "input_tokens": 0,
-        "model": "claude-sonnet-5",
-        "output_tokens": 0,
-        "type": "message"
-      }
-    ],
-    "output_tokens": 503,
-    "output_tokens_details": {
-      "thinking_tokens": 0
-    },
-    "server_tool_use": {
-      "web_fetch_requests": 2,
-      "web_search_requests": 0
-    },
-    "service_tier": "standard",
-    "speed": "standard"
-  }
+  ]
 }
 ```
 

@@ -1,223 +1,173 @@
 # List Tunnels
 
-Copy page
-
-
-
-cURL
-
-# List Tunnels
-
-GET/v1/tunnels
+**GET** `/v1/tunnels`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
-Lists tunnels. Results are ordered by creation time, newest first; archived tunnels are excluded unless include\_archived is set.
+Lists tunnels. Results are ordered by creation time, newest first; archived tunnels are excluded unless include_archived is set.
 
-##### Query parameters
+## Query parameters
 
-include\_archived: optional boolean
+- `include_archived: optional boolean`
 
-Whether to include archived tunnels in the results. Defaults to false.
+  Whether to include archived tunnels in the results. Defaults to false.
 
-
+- `limit: optional number`
 
-limit: optional number
+  Maximum number of tunnels to return per page. Defaults to 20, maximum 1000.
 
-Maximum number of tunnels to return per page. Defaults to 20, maximum 1000.
+  format: int32
 
-formatint32
+- `page: optional string`
 
-page: optional string
+  Opaque pagination cursor from a previous `list_tunnels` response.
 
-Opaque pagination cursor from a previous `list_tunnels` response.
+## Headers
 
-##### Headers
+- `"anthropic-beta": optional array of AnthropicBeta`
 
-
+  Optional header to specify the beta version(s) you want to use.
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+  - `string`
 
-Optional header to specify the beta version(s) you want to use.
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
-One of the following:
+    - `"message-batches-2024-09-24"`
 
-string
+    - `"prompt-caching-2024-07-31"`
 
-
+    - `"computer-use-2024-10-22"`
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
+    - `"computer-use-2025-01-24"`
 
-One of the following:
+    - `"pdfs-2024-09-25"`
 
-"message-batches-2024-09-24"
+    - `"token-counting-2024-11-01"`
 
-"prompt-caching-2024-07-31"
+    - `"token-efficient-tools-2025-02-19"`
 
-"computer-use-2024-10-22"
+    - `"output-128k-2025-02-19"`
 
-"computer-use-2025-01-24"
+    - `"files-api-2025-04-14"`
 
-"pdfs-2024-09-25"
+    - `"mcp-client-2025-04-04"`
 
-"token-counting-2024-11-01"
+    - `"mcp-client-2025-11-20"`
 
-"token-efficient-tools-2025-02-19"
+    - `"dev-full-thinking-2025-05-14"`
 
-"output-128k-2025-02-19"
+    - `"interleaved-thinking-2025-05-14"`
 
-"files-api-2025-04-14"
+    - `"code-execution-2025-05-22"`
 
-"mcp-client-2025-04-04"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"mcp-client-2025-11-20"
+    - `"context-1m-2025-08-07"`
 
-"dev-full-thinking-2025-05-14"
+    - `"context-management-2025-06-27"`
 
-"interleaved-thinking-2025-05-14"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"code-execution-2025-05-22"
+    - `"skills-2025-10-02"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"fast-mode-2026-02-01"`
 
-"context-1m-2025-08-07"
+    - `"output-300k-2026-03-24"`
 
-"context-management-2025-06-27"
+    - `"user-profiles-2026-03-24"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"user-profiles-2026-08-18"`
 
-"skills-2025-10-02"
+    - `"advisor-tool-2026-03-01"`
 
-"fast-mode-2026-02-01"
+    - `"managed-agents-2026-04-01"`
 
-"output-300k-2026-03-24"
+    - `"cache-diagnosis-2026-04-07"`
 
-"user-profiles-2026-03-24"
+    - `"dreaming-2026-04-21"`
 
-"user-profiles-2026-08-18"
+    - `"thinking-token-count-2026-05-13"`
 
-"advisor-tool-2026-03-01"
+    - `"server-side-fallback-2026-06-01"`
 
-"managed-agents-2026-04-01"
+    - `"server-side-fallback-2026-07-01"`
 
-"cache-diagnosis-2026-04-07"
+    - `"fallback-credit-2026-06-01"`
 
-"dreaming-2026-04-21"
+    - `"fallback-credit-2026-07-01"`
 
-"thinking-token-count-2026-05-13"
+    - `"agent-memory-2026-07-22"`
 
-"server-side-fallback-2026-06-01"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-"server-side-fallback-2026-07-01"
+    - `"compact-2026-01-12"`
 
-"fallback-credit-2026-06-01"
+    - `"computer-use-2025-11-24"`
 
-"fallback-credit-2026-07-01"
+    - `"mcp-tunnels-2026-06-22"`
 
-"agent-memory-2026-07-22"
+    - `"structured-outputs-2025-11-13"`
 
-"mid-conversation-tool-changes-2026-07-01"
+    - `"task-budgets-2026-03-13"`
 
-"compact-2026-01-12"
+    - `"thinking-display-updates-2026-08-18"`
 
-"computer-use-2025-11-24"
+    - `"ce-user-management-2026-07-13"`
 
-"mcp-tunnels-2026-06-22"
+    - `"mid-conversation-output-config-2026-07-01"`
 
-"structured-outputs-2025-11-13"
+    - `"thinking-binding-controls-2026-08-01"`
 
-"task-budgets-2026-03-13"
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"thinking-display-updates-2026-08-18"
+## Returns
 
-"ce-user-management-2026-07-13"
+- `data: array of BetaTunnel`
 
-"mid-conversation-output-config-2026-07-01"
+  List of tunnels, ordered by created_at descending.
 
-"thinking-binding-controls-2026-08-01"
+  - `id: string`
 
-"mid-conversation-system-clear-at-2026-08-21"
+    Unique identifier for the tunnel, prefixed with `tnl_`.
 
-##### Returns
+  - `archived_at: string or null`
 
-
+    A timestamp in RFC 3339 format
 
-data: array of [BetaTunnel](api/http/beta/tunnels.md) { id, archived\_at, created\_at, 3 more }
+    format: date-time
 
-List of tunnels, ordered by created\_at descending.
+  - `created_at: string`
 
-id: string
+    A timestamp in RFC 3339 format
 
-Unique identifier for the tunnel, prefixed with `tnl_`.
+    format: date-time
 
-
+  - `display_name: string or null`
 
-archived\_at: string or null
+    Human-readable name for the tunnel (1-255 characters). Null if unset.
 
-A timestamp in RFC 3339 format
+  - `domain: string`
 
-formatdate-time
+    Anthropic-assigned hostname for the tunnel. MCP server URLs whose host is a subdomain of this value are routed through the tunnel. Globally unique and never reused, even after the tunnel is archived.
 
-
+  - `type: "tunnel"`
 
-created\_at: string
+- `next_page: string or null`
 
-A timestamp in RFC 3339 format
+  Pagination cursor for the next page, or null if no more results.
 
-formatdate-time
+## Example
 
-display\_name: string or null
-
-Human-readable name for the tunnel (1-255 characters). Null if unset.
-
-domain: string
-
-Anthropic-assigned hostname for the tunnel. MCP server URLs whose host is a subdomain of this value are routed through the tunnel. Globally unique and never reused, even after the tunnel is archived.
-
-type: "tunnel"
-
-next\_page: string or null
-
-Pagination cursor for the next page, or null if no more results.
-
-List Tunnels
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/tunnels \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: mcp-tunnels-2026-06-22' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "archived_at": "2019-12-27T18:11:19.117Z",
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "display_name": "display_name",
-      "domain": "domain",
-      "type": "tunnel"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

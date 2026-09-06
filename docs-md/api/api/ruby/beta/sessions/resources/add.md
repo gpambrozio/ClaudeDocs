@@ -1,134 +1,152 @@
 # Add Session Resource
 
-Copy page
+`beta.sessions.resources.add(session_id, **kwargs) -> BetaManagedAgentsFileResource`
 
-
-
-Ruby
-
-# Add Session Resource
-
-beta.sessions.resources.add(session\_id, \*\*kwargs) -> [BetaManagedAgentsFileResource](api/beta/sessions/resources.md) { id, created\_at, file\_id, 3 more }
-
-POST/v1/sessions/{session\_id}/resources
+**POST** `/v1/sessions/{session_id}/resources`
 
 Add Session Resource
 
-##### ParametersExpand Collapse
+## Parameters
 
-session\_id: String
+- `session_id: String`
 
-file\_id: String
+- `file_id: String`
 
-ID of a previously uploaded file.
+  ID of a previously uploaded file.
 
-type: :file
+  minLength: 1, maxLength: 128
 
-mount\_path: String
+- `type: :file`
 
-Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+- `mount_path: String`
 
-
+  Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-betas: Array[[AnthropicBeta](api/beta.md)]
+  minLength: 1, maxLength: 4096
 
-Optional header to specify the beta version(s) you want to use.
+- `betas: Array[AnthropicBeta]`
 
-One of the following:
+  Optional header to specify the beta version(s) you want to use.
 
-String = String
+  - `String = String`
 
-
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
 
-AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more
+    - `:"message-batches-2024-09-24"`
 
-One of the following:
+    - `:"prompt-caching-2024-07-31"`
 
-:"message-batches-2024-09-24"
+    - `:"computer-use-2024-10-22"`
 
-:"prompt-caching-2024-07-31"
+    - `:"computer-use-2025-01-24"`
 
-:"computer-use-2024-10-22"
+    - `:"pdfs-2024-09-25"`
 
-:"computer-use-2025-01-24"
+    - `:"token-counting-2024-11-01"`
 
-:"pdfs-2024-09-25"
+    - `:"token-efficient-tools-2025-02-19"`
 
-:"token-counting-2024-11-01"
+    - `:"output-128k-2025-02-19"`
 
-:"token-efficient-tools-2025-02-19"
+    - `:"files-api-2025-04-14"`
 
-:"output-128k-2025-02-19"
+    - `:"mcp-client-2025-04-04"`
 
-:"files-api-2025-04-14"
+    - `:"mcp-client-2025-11-20"`
 
-:"mcp-client-2025-04-04"
+    - `:"dev-full-thinking-2025-05-14"`
 
-:"mcp-client-2025-11-20"
+    - `:"interleaved-thinking-2025-05-14"`
 
-:"dev-full-thinking-2025-05-14"
+    - `:"code-execution-2025-05-22"`
 
-:"interleaved-thinking-2025-05-14"
+    - `:"extended-cache-ttl-2025-04-11"`
 
-:"code-execution-2025-05-22"
+    - `:"context-1m-2025-08-07"`
 
-:"extended-cache-ttl-2025-04-11"
+    - `:"context-management-2025-06-27"`
 
-:"context-1m-2025-08-07"
+    - `:"model-context-window-exceeded-2025-08-26"`
 
-:"context-management-2025-06-27"
+    - `:"skills-2025-10-02"`
 
-:"model-context-window-exceeded-2025-08-26"
+    - `:"fast-mode-2026-02-01"`
 
-:"skills-2025-10-02"
+    - `:"output-300k-2026-03-24"`
 
-:"fast-mode-2026-02-01"
+    - `:"user-profiles-2026-03-24"`
 
-:"output-300k-2026-03-24"
+    - `:"user-profiles-2026-08-18"`
 
-:"user-profiles-2026-03-24"
+    - `:"advisor-tool-2026-03-01"`
 
-:"advisor-tool-2026-03-01"
+    - `:"managed-agents-2026-04-01"`
 
-:"managed-agents-2026-04-01"
+    - `:"cache-diagnosis-2026-04-07"`
 
-:"cache-diagnosis-2026-04-07"
+    - `:"dreaming-2026-04-21"`
 
-:"thinking-token-count-2026-05-13"
+    - `:"thinking-token-count-2026-05-13"`
 
-:"server-side-fallback-2026-06-01"
+    - `:"server-side-fallback-2026-06-01"`
 
-:"fallback-credit-2026-06-01"
+    - `:"server-side-fallback-2026-07-01"`
 
-:"agent-memory-2026-07-22"
+    - `:"fallback-credit-2026-06-01"`
 
-##### ReturnsExpand Collapse
+    - `:"fallback-credit-2026-07-01"`
 
-
+    - `:"agent-memory-2026-07-22"`
 
-class BetaManagedAgentsFileResource { id, created\_at, file\_id, 3 more } 
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
-id: String
+    - `:"compact-2026-01-12"`
 
-created\_at: Time
+    - `:"computer-use-2025-11-24"`
 
-A timestamp in RFC 3339 format
+    - `:"mcp-tunnels-2026-06-22"`
 
-file\_id: String
+    - `:"structured-outputs-2025-11-13"`
 
-mount\_path: String
+    - `:"task-budgets-2026-03-13"`
 
-type: :file
+    - `:"thinking-display-updates-2026-08-18"`
 
-updated\_at: Time
+    - `:"ce-user-management-2026-07-13"`
 
-A timestamp in RFC 3339 format
+    - `:"mid-conversation-output-config-2026-07-01"`
 
-Add Session Resource
+    - `:"thinking-binding-controls-2026-08-01"`
 
-Ruby
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
 
-```shiki
+## Returns
+
+- `class BetaManagedAgentsFileResource`
+
+  - `id: String`
+
+  - `created_at: Time`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `file_id: String`
+
+  - `mount_path: String`
+
+  - `type: :file`
+
+  - `updated_at: Time`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+## Example
+
+```ruby
 require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
@@ -142,28 +160,9 @@ beta_managed_agents_file_resource = anthropic.beta.sessions.resources.add(
 puts(beta_managed_agents_file_resource)
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
-  "created_at": "2026-03-15T10:00:00Z",
-  "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "mount_path": "/uploads/receipt.pdf",
-  "type": "file",
-  "updated_at": "2026-03-15T10:00:00Z"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
   "created_at": "2026-03-15T10:00:00Z",

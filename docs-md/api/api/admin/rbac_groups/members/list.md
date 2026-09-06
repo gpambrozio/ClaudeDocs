@@ -1,124 +1,80 @@
 # List RBAC Group Members
 
-Copy page
-
-
-
-# List RBAC Group Members
-
-GET/v1/organizations/rbac\_groups/{group\_id}/members
+**GET** `/v1/organizations/rbac_groups/{group_id}/members`
 
 List members of an RBAC Group.
 
 The RBAC Groups API is available to Claude Enterprise organizations only.
 
-##### Path parameters
+## Path parameters
 
-group\_id: string
+- `group_id: string`
 
-ID of the RBAC Group.
+  ID of the RBAC Group.
 
-##### Query parameters
+## Query parameters
 
-
+- `limit: optional number`
 
-limit: optional number
+  Number of items to return per page.
 
-Number of items to return per page.
+  Defaults to `20`. Ranges from `1` to `1000`.
 
-Defaults to `20`. Ranges from `1` to `1000`.
+  default: 20, maximum: 1000, minimum: 1
 
-default20
+- `page: optional string`
 
-maximum1000
+  Optionally set to the `next_page` token from the previous response.
 
-minimum1
+## Returns
 
-page: optional string
+- `data: array of RbacGroupMember`
 
-Optionally set to the `next_page` token from the previous response.
+  - `created_at: string`
 
-##### Returns
+    RFC 3339 timestamp of when the User was added to the RBAC Group.
 
-
+    format: date-time
 
-data: array of [RbacGroupMember](api/http/admin/rbac_groups/members.md) { created\_at, email, group\_id, 2 more }
+  - `email: string`
 
-
+    Email of the User.
 
-created\_at: string
+  - `group_id: string`
 
-RFC 3339 timestamp of when the User was added to the RBAC Group.
+    ID of the RBAC Group.
 
-formatdate-time
+  - `type: "rbac_group_member"`
 
-email: string
+    Object type.
 
-Email of the User.
+    For RBAC Group Members, this is always `"rbac_group_member"`.
 
-group\_id: string
+    default: rbac_group_member
 
-ID of the RBAC Group.
+  - `user_id: string`
 
-
+    ID of the User.
 
-type: "rbac\_group\_member"
+- `has_more: boolean`
 
-Object type.
+  Indicates if there are more results in the requested page direction.
 
-For RBAC Group Members, this is always `"rbac_group_member"`.
+- `next_page: string or null`
 
-defaultrbac\_group\_member
+  Token to provide in as `page` in the subsequent request to retrieve the next page of data.
 
-user\_id: string
+## Example
 
-ID of the User.
-
-has\_more: boolean
-
-Indicates if there are more results in the requested page direction.
-
-next\_page: string or null
-
-Token to provide in as `page` in the subsequent request to retrieve the next page of data.
-
-List RBAC Group Members
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "email": "user@emaildomain.com",
-      "group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
-      "type": "rbac_group_member",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
-    }
-  ],
-  "has_more": false,
-  "next_page": "eyJjdXJzb3IiOiAicmJhY19ncm91cF8wMSJ9"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

@@ -1,12 +1,14 @@
-# Claude Fable 5 system prompts
+# Claude Fable 5
 
-Copy page
+---
+title: Claude Fable 5 system prompts
+url: https://platform.claude.com/docs/en/release-notes/system-prompts/claude-fable-5
+description: See updates to the core system prompt for Claude Fable 5 on [claude.ai](https://claude.ai) and the [Claude iOS app](https://anthropic.com/ios) and [Claude Android app](https://anthropic.com/android).
+---
 
-
+## June 9, 2026
 
-## June 9, 2026
-
-```shiki
+```text wrap
 <claude_behavior>
 <product_information>
 Here is some information about Claude and Anthropic's products in case the person asks:
@@ -153,12 +155,6 @@ Claude's reliable knowledge cutoff, past which it can't answer reliably, is the 
 </knowledge_cutoff>
 </claude_behavior>
 ```
-
-
-
-Was this page helpful?
-
-
 
 ---
 

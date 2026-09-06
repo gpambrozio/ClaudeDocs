@@ -1,36 +1,42 @@
-## [​](#overview) Overview
+# Migrate to Claude Agent SDK
 
-The Claude Code SDK has been renamed to the **Claude Agent SDK** and its documentation has been reorganized. This change reflects the SDK’s broader capabilities for building AI agents beyond just coding tasks.
+> Guide for migrating the Claude Code TypeScript and Python SDKs to the Claude Agent SDK
+
+## Overview
+
+The Claude Code SDK has been renamed to the **Claude Agent SDK** and its documentation has been reorganized. This change reflects the SDK's broader capabilities for building AI agents beyond just coding tasks.
+
 Migrating from the OpenAI Agents SDK instead? The [OpenAI Agents SDK migration recipe](https://platform.claude.com/cookbook/claude-agent-sdk-04-migrating-from-openai-agents-sdk) maps each primitive onto the Claude Agent SDK through a single worked example.
 
-## [​](#what’s-changed) What’s Changed
+## What's Changed
 
-| Aspect | Old | New |
-| --- | --- | --- |
-| **Package Name (TS/JS)** | `@anthropic-ai/claude-code` | `@anthropic-ai/claude-agent-sdk` |
-| **Python Package** | `claude-code-sdk` | `claude-agent-sdk` |
-| **Documentation Location** | Claude Code docs | Claude Code docs → dedicated [Agent SDK](agent-sdk/overview.md) section |
+| Aspect                     | Old                         | New                                                                      |
+| :------------------------- | :-------------------------- | :----------------------------------------------------------------------- |
+| **Package Name (TS/JS)**   | `@anthropic-ai/claude-code` | `@anthropic-ai/claude-agent-sdk`                                         |
+| **Python Package**         | `claude-code-sdk`           | `claude-agent-sdk`                                                       |
+| **Documentation Location** | Claude Code docs            | Claude Code docs → dedicated [Agent SDK](agent-sdk/overview.md) section |
 
-## [​](#migration-steps) Migration Steps
+## Migration Steps
 
-### [​](#for-typescript/javascript-projects) For TypeScript/JavaScript Projects
+### For TypeScript/JavaScript Projects
 
 **1. Uninstall the old package:**
 
-```shiki
+```bash
 npm uninstall @anthropic-ai/claude-code
 ```
 
 **2. Install the new package:**
 
-```shiki
+```bash
 npm install @anthropic-ai/claude-agent-sdk
 ```
 
 **3. Update your imports:**
+
 Change all imports from `@anthropic-ai/claude-code` to `@anthropic-ai/claude-agent-sdk`:
 
-```shiki
+```typescript
 // Before
 import { query, tool, createSdkMcpServer } from "@anthropic-ai/claude-code";
 
@@ -39,30 +45,36 @@ import { query, tool, createSdkMcpServer } from "@anthropic-ai/claude-agent-sdk"
 ```
 
 **4. Update package.json:**
+
 If `@anthropic-ai/claude-code` is still listed in your `package.json`, replace it with `@anthropic-ai/claude-agent-sdk` and update the version range as well, for example from `"^0.0.42"` to `"^0.3.0"`.
+
 **5. Review [breaking changes](#breaking-changes)**
+
 Make any code changes needed to complete the migration.
 
-### [​](#for-python-projects) For Python Projects
+### For Python Projects
 
 **1. Uninstall the old package:**
 
-```shiki
+```bash
 pip uninstall -y claude-code-sdk
 ```
 
-If the old package isn’t installed, pip prints `WARNING: Skipping claude-code-sdk as it is not installed.` That’s expected and you can continue to the next step.
+If the old package isn't installed, pip prints `WARNING: Skipping claude-code-sdk as it is not installed.` That's expected and you can continue to the next step.
+
 **2. Install the new package:**
 
-```shiki
+```bash
 pip install claude-agent-sdk
 ```
 
 If `claude-code-sdk` is listed in your `requirements.txt` or `pyproject.toml`, replace it with `claude-agent-sdk`.
+
 **3. Update your imports:**
+
 Change all imports from `claude_code_sdk` to `claude_agent_sdk`:
 
-```shiki
+```python
 # Before
 from claude_code_sdk import query, ClaudeCodeOptions
 
@@ -71,18 +83,20 @@ from claude_agent_sdk import query, ClaudeAgentOptions
 ```
 
 **4. Review [breaking changes](#breaking-changes)**
+
 Make any code changes needed to complete the migration.
 
-## [​](#breaking-changes) Breaking changes
+## Breaking changes
 
 To improve isolation and explicit configuration, Claude Agent SDK v0.1.0 introduces breaking changes for users migrating from Claude Code SDK.
 
-### [​](#python-claudecodeoptions-renamed-to-claudeagentoptions) Python: ClaudeCodeOptions renamed to ClaudeAgentOptions
+### Python: ClaudeCodeOptions renamed to ClaudeAgentOptions
 
 **What changed:** The Python SDK type `ClaudeCodeOptions` has been renamed to `ClaudeAgentOptions`.
+
 **Migration:**
 
-```shiki
+```python
 # BEFORE (claude-code-sdk)
 from claude_code_sdk import query, ClaudeCodeOptions
 
@@ -94,16 +108,13 @@ from claude_agent_sdk import query, ClaudeAgentOptions
 options = ClaudeAgentOptions(model="claude-opus-4-7", permission_mode="acceptEdits")
 ```
 
-### [​](#system-prompt-no-longer-default) System prompt no longer default
+### System prompt no longer default
 
-**What changed:** The SDK no longer uses Claude Code’s system prompt by default.
+**What changed:** The SDK no longer uses Claude Code's system prompt by default.
+
 **Migration:**
 
-TypeScript
-
-Python
-
-```shiki
+```typescript TypeScript
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
 // BEFORE (v0.0.x) - Used Claude Code's system prompt by default
@@ -127,7 +138,7 @@ const customResult = query({
 });
 ```
 
-```shiki
+```python Python
 from claude_agent_sdk import query, ClaudeAgentOptions
 import asyncio
 
@@ -156,21 +167,24 @@ async def main():
 asyncio.run(main())
 ```
 
-### [​](#settings-sources-default) Settings sources default
+### Settings sources default
 
 This default was briefly changed in v0.1.0 to load no filesystem settings and then reverted, so no migration action is needed.
+
 **Current behavior:** Omitting `settingSources` on `query()` loads user, project, and local filesystem settings, matching the CLI. This includes `~/.claude/settings.json`, `.claude/settings.json`, `.claude/settings.local.json`, CLAUDE.md files, and custom commands.
+
 To run isolated from filesystem settings, pass `settingSources: []`, or `setting_sources=[]` in Python. See [Control filesystem settings with settingSources](agent-sdk/claude-code-features.md) for what each source loads.
+
 Isolation is especially important for CI/CD pipelines, deployed applications, test environments, and multi-tenant systems where local customizations should not leak in.
 
 Python SDK 0.1.59 and earlier treated an empty list the same as omitting the option, so upgrade before relying on `setting_sources=[]`. See [What settingSources does not control](agent-sdk/claude-code-features.md) for inputs that are read even when `settingSources` is `[]`.
 
-## [​](#next-steps) Next Steps
+## Next Steps
 
-- Explore the [Agent SDK Overview](agent-sdk/overview.md) to learn about available features
-- Check out the [TypeScript SDK Reference](agent-sdk/typescript.md) for detailed API documentation
-- Review the [Python SDK Reference](agent-sdk/python.md) for Python-specific documentation
-- Learn about [Custom Tools](agent-sdk/custom-tools.md) and [MCP Integration](agent-sdk/mcp.md)
+* Explore the [Agent SDK Overview](agent-sdk/overview.md) to learn about available features
+* Check out the [TypeScript SDK Reference](agent-sdk/typescript.md) for detailed API documentation
+* Review the [Python SDK Reference](agent-sdk/python.md) for Python-specific documentation
+* Learn about [Custom Tools](agent-sdk/custom-tools.md) and [MCP Integration](agent-sdk/mcp.md)
 
 ---
 

@@ -1,14 +1,6 @@
 # List Workspaces For Service Account
 
-Copy page
-
-
-
-cURL
-
-# List Workspaces For Service Account
-
-GET/v1/organizations/service\_accounts/{service\_account\_id}/workspaces
+**GET** `/v1/organizations/service_accounts/{service_account_id}/workspaces`
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -28,223 +20,175 @@ stops matching when the membership is removed, the workspace is deleted,
 or the service account is archived. Restart pagination from the first
 page to recover.
 
-##### Path parameters
+## Path parameters
 
-service\_account\_id: string
+- `service_account_id: string`
 
-ID of the service account.
+  ID of the service account.
 
-##### Query parameters
+## Query parameters
 
-
+- `limit: optional number`
 
-limit: optional number
+  Number of results per page.
 
-Number of results per page.
+  default: 20, maximum: 100, minimum: 1
 
-default20
+- `page: optional string`
 
-maximum100
+  Opaque cursor from a previous response's `next_page`.
 
-minimum1
+## Headers
 
-page: optional string
+- `"anthropic-beta": optional array of AnthropicBeta`
 
-Opaque cursor from a previous response's `next_page`.
+  Optional header to specify the beta version(s) you want to use.
 
-##### Headers
+  - `string`
 
-
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+    - `"message-batches-2024-09-24"`
 
-Optional header to specify the beta version(s) you want to use.
+    - `"prompt-caching-2024-07-31"`
 
-One of the following:
+    - `"computer-use-2024-10-22"`
 
-string
+    - `"computer-use-2025-01-24"`
 
-
+    - `"pdfs-2024-09-25"`
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
+    - `"token-counting-2024-11-01"`
 
-One of the following:
+    - `"token-efficient-tools-2025-02-19"`
 
-"message-batches-2024-09-24"
+    - `"output-128k-2025-02-19"`
 
-"prompt-caching-2024-07-31"
+    - `"files-api-2025-04-14"`
 
-"computer-use-2024-10-22"
+    - `"mcp-client-2025-04-04"`
 
-"computer-use-2025-01-24"
+    - `"mcp-client-2025-11-20"`
 
-"pdfs-2024-09-25"
+    - `"dev-full-thinking-2025-05-14"`
 
-"token-counting-2024-11-01"
+    - `"interleaved-thinking-2025-05-14"`
 
-"token-efficient-tools-2025-02-19"
+    - `"code-execution-2025-05-22"`
 
-"output-128k-2025-02-19"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"files-api-2025-04-14"
+    - `"context-1m-2025-08-07"`
 
-"mcp-client-2025-04-04"
+    - `"context-management-2025-06-27"`
 
-"mcp-client-2025-11-20"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"dev-full-thinking-2025-05-14"
+    - `"skills-2025-10-02"`
 
-"interleaved-thinking-2025-05-14"
+    - `"fast-mode-2026-02-01"`
 
-"code-execution-2025-05-22"
+    - `"output-300k-2026-03-24"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"user-profiles-2026-03-24"`
 
-"context-1m-2025-08-07"
+    - `"user-profiles-2026-08-18"`
 
-"context-management-2025-06-27"
+    - `"advisor-tool-2026-03-01"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"managed-agents-2026-04-01"`
 
-"skills-2025-10-02"
+    - `"cache-diagnosis-2026-04-07"`
 
-"fast-mode-2026-02-01"
+    - `"dreaming-2026-04-21"`
 
-"output-300k-2026-03-24"
+    - `"thinking-token-count-2026-05-13"`
 
-"user-profiles-2026-03-24"
+    - `"server-side-fallback-2026-06-01"`
 
-"user-profiles-2026-08-18"
+    - `"server-side-fallback-2026-07-01"`
 
-"advisor-tool-2026-03-01"
+    - `"fallback-credit-2026-06-01"`
 
-"managed-agents-2026-04-01"
+    - `"fallback-credit-2026-07-01"`
 
-"cache-diagnosis-2026-04-07"
+    - `"agent-memory-2026-07-22"`
 
-"dreaming-2026-04-21"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-"thinking-token-count-2026-05-13"
+    - `"compact-2026-01-12"`
 
-"server-side-fallback-2026-06-01"
+    - `"computer-use-2025-11-24"`
 
-"server-side-fallback-2026-07-01"
+    - `"mcp-tunnels-2026-06-22"`
 
-"fallback-credit-2026-06-01"
+    - `"structured-outputs-2025-11-13"`
 
-"fallback-credit-2026-07-01"
+    - `"task-budgets-2026-03-13"`
 
-"agent-memory-2026-07-22"
+    - `"thinking-display-updates-2026-08-18"`
 
-"mid-conversation-tool-changes-2026-07-01"
+    - `"ce-user-management-2026-07-13"`
 
-"compact-2026-01-12"
+    - `"mid-conversation-output-config-2026-07-01"`
 
-"computer-use-2025-11-24"
+    - `"thinking-binding-controls-2026-08-01"`
 
-"mcp-tunnels-2026-06-22"
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"structured-outputs-2025-11-13"
+## Returns
 
-"task-budgets-2026-03-13"
+- `data: array of BetaServiceAccountWorkspaceMember`
 
-"thinking-display-updates-2026-08-18"
+  - `created_by_actor_id: string or null`
 
-"ce-user-management-2026-07-13"
+    Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
 
-"mid-conversation-output-config-2026-07-01"
+  - `implicit: boolean or null`
 
-"thinking-binding-controls-2026-08-01"
+    True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
 
-"mid-conversation-system-clear-at-2026-08-21"
+  - `service_account_id: string`
 
-##### Returns
+    Tagged service account ID (`svac_...`).
 
-
+  - `type: "service_account_workspace_member"`
 
-data: array of [BetaServiceAccountWorkspaceMember](api/http/beta/organization/service_accounts.md) { created\_by\_actor\_id, implicit, service\_account\_id, 3 more }
+    default: service_account_workspace_member
 
-created\_by\_actor\_id: string or null
+  - `workspace_id: string`
 
-Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
+    Tagged workspace ID (`wrkspc_...`).
 
-implicit: boolean or null
+  - `workspace_role: BetaWorkspaceRole`
 
-True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
+    Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
 
-service\_account\_id: string
+    - `"workspace_admin"`
 
-Tagged service account ID (`svac_...`).
+    - `"workspace_billing"`
 
-
+    - `"workspace_developer"`
 
-type: "service\_account\_workspace\_member"
+    - `"workspace_restricted_developer"`
 
-defaultservice\_account\_workspace\_member
+    - `"workspace_user"`
 
-workspace\_id: string
+- `next_page: string or null`
 
-Tagged workspace ID (`wrkspc_...`).
+  Opaque cursor for the next page, or null if no more results.
 
-
+## Example
 
-workspace\_role: [BetaWorkspaceRole](api/http/beta/organization/workspaces.md)
-
-Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
-
-One of the following:
-
-"workspace\_admin"
-
-"workspace\_billing"
-
-"workspace\_developer"
-
-"workspace\_restricted\_developer"
-
-"workspace\_user"
-
-next\_page: string or null
-
-Opaque cursor for the next page, or null if no more results.
-
-List Workspaces For Service Account
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUNT_ID/workspaces \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "created_by_actor_id": "created_by_actor_id",
-      "implicit": true,
-      "service_account_id": "service_account_id",
-      "type": "service_account_workspace_member",
-      "workspace_id": "workspace_id",
-      "workspace_role": "workspace_admin"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

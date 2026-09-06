@@ -1,75 +1,44 @@
 # Delete a memory store
 
-Copy page
+`$ ant beta:memory-stores delete`
 
-
-
-CLI
-
-# Delete a memory store
-
-$ ant beta:memory-stores delete
-
-DELETE/v1/memory\_stores/{memory\_store\_id}
+**DELETE** `/v1/memory_stores/{memory_store_id}`
 
 Delete a memory store
 
-##### ParametersExpand Collapse
+## Parameters
 
---memory-store-id: string
+- `--memory-store-id: string`
 
-Path parameter memory\_store\_id
+  Path parameter memory_store_id
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--beta: optional array of AnthropicBeta`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `beta_managed_agents_deleted_memory_store: object`
 
-beta\_managed\_agents\_deleted\_memory\_store: object { id, type } 
+  Confirmation that a `memory_store` was deleted.
 
-Confirmation that a `memory_store` was deleted.
+  - `id: string`
 
-id: string
+    ID of the deleted memory store (a `memstore_...` identifier). The store and all its memories and versions are no longer retrievable.
 
-ID of the deleted memory store (a `memstore_...` identifier). The store and all its memories and versions are no longer retrievable.
+  - `type: "memory_store_deleted"`
 
-
+## Example
 
-type: "memory\_store\_deleted"
-
-"memory\_store\_deleted"
-
-Delete a memory store
-
-CLI
-
-```shiki
+```bash
 ant beta:memory-stores delete \
   --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "id",
-  "type": "memory_store_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "id",
   "type": "memory_store_deleted"

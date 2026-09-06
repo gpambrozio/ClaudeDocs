@@ -1,273 +1,254 @@
 # List Environments
 
-Copy page
+`EnvironmentListPage Beta.Environments.List(parameters, cancellationToken = default)`
 
-
-
-C#
-
-# List Environments
-
-[EnvironmentListPageResponse](api/beta/environments.md) Beta.Environments.List(EnvironmentListParams?parameters, CancellationTokencancellationToken = default)
-
-GET/v1/environments
+**GET** `/v1/environments`
 
 List environments with pagination support.
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `EnvironmentListParams parameters`
 
-EnvironmentListParams parameters
+  - `bool includeArchived`
 
-Boolean includeArchived
+    Query param: Include archived environments in the response
 
-Query param: Include archived environments in the response
+  - `long limit`
 
-Long limit
+    Query param: Maximum number of environments to return
 
-Query param: Maximum number of environments to return
+    maximum: 1000, minimum: 1
 
-string? page
+  - `string? page`
 
-Query param: Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
+    Query param: Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
 
-
+  - `IReadOnlyList<AnthropicBeta> betas`
 
-IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-Header param: Optional header to specify the beta version(s) you want to use.
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
-"message-batches-2024-09-24"MessageBatches2024\_09\_24
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
 
-"prompt-caching-2024-07-31"PromptCaching2024\_07\_31
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
 
-"computer-use-2024-10-22"ComputerUse2024\_10\_22
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
 
-"computer-use-2025-01-24"ComputerUse2025\_01\_24
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
 
-"pdfs-2024-09-25"Pdfs2024\_09\_25
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
 
-"token-counting-2024-11-01"TokenCounting2024\_11\_01
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
 
-"token-efficient-tools-2025-02-19"TokenEfficientTools2025\_02\_19
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
 
-"output-128k-2025-02-19"Output128k2025\_02\_19
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
 
-"files-api-2025-04-14"FilesApi2025\_04\_14
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
 
-"mcp-client-2025-04-04"McpClient2025\_04\_04
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
 
-"mcp-client-2025-11-20"McpClient2025\_11\_20
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
 
-"dev-full-thinking-2025-05-14"DevFullThinking2025\_05\_14
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
 
-"interleaved-thinking-2025-05-14"InterleavedThinking2025\_05\_14
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
 
-"code-execution-2025-05-22"CodeExecution2025\_05\_22
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
 
-"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025\_04\_11
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
 
-"context-1m-2025-08-07"Context1m2025\_08\_07
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
 
-"context-management-2025-06-27"ContextManagement2025\_06\_27
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025\_08\_26
+    - `Skills2025_10_02("skills-2025-10-02")`
 
-"skills-2025-10-02"Skills2025\_10\_02
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
 
-"fast-mode-2026-02-01"FastMode2026\_02\_01
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
 
-"output-300k-2026-03-24"Output300k2026\_03\_24
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
 
-"user-profiles-2026-03-24"UserProfiles2026\_03\_24
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
-"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
-"managed-agents-2026-04-01"ManagedAgents2026\_04\_01
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
 
-"cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
 
-"thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
 
-"server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
 
-"fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
 
-"agent-memory-2026-07-22"AgentMemory2026\_07\_22
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
 
-##### ReturnsExpand Collapse
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
 
-
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
 
-class EnvironmentListPageResponse:
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
 
-Response when listing environments.
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-This response model uses opaque cursor-based pagination. Use the `page`
-query parameter with the value from `next_page` to fetch the next page.
+    - `Compact2026_01_12("compact-2026-01-12")`
 
-
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
 
-required IReadOnlyList<[BetaEnvironment](api/beta/environments.md)> Data
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
 
-List of environments.
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
 
-required string ID
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
 
-Environment identifier (e.g., 'env\_...')
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
 
-required string? ArchivedAt
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
 
-RFC 3339 timestamp when environment was archived, or null if not archived
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
 
-required Config Config
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-Environment configuration (either Anthropic Cloud or self-hosted)
+## Returns
 
-One of the following:
+- `class BetaEnvironment:`
 
-
+  Unified Environment resource for both cloud and self-hosted environments.
 
-class BetaCloudConfig:
+  - `required string ID`
 
-`cloud` environment configuration.
+    Environment identifier (e.g., 'env_...')
 
-
+  - `required string? ArchivedAt`
 
-required Networking Networking
+    RFC 3339 timestamp when environment was archived, or null if not archived
 
-Network configuration policy.
+  - `required Config Config`
 
-One of the following:
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-
+    - `class BetaCloudConfig:`
 
-class BetaUnrestrictedNetwork:
+      `cloud` environment configuration.
 
-Unrestricted network access.
+      - `required Networking Networking`
 
-JsonElement Type "unrestricted"constant
+        Network configuration policy.
 
-Network policy type
+        - `class BetaUnrestrictedNetwork:`
 
-
+          Unrestricted network access.
 
-class BetaLimitedNetwork:
+          - `JsonElement Type = "unrestricted"`
 
-Limited network access.
+            Network policy type
 
-required Boolean AllowMcpServers
+        - `class BetaLimitedNetwork:`
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+          Limited network access.
 
-required Boolean AllowPackageManagers
+          - `required bool AllowMcpServers`
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-required IReadOnlyList<string> AllowedHosts
+          - `required bool AllowPackageManagers`
 
-Specifies domains the container can reach.
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-JsonElement Type "limited"constant
+          - `required IReadOnlyList<string> AllowedHosts`
 
-Network policy type
+            Specifies domains the container can reach.
 
-
+          - `JsonElement Type = "limited"`
 
-required [BetaPackages](api/beta/environments.md) Packages
+            Network policy type
 
-Package manager configuration.
+      - `required BetaPackages Packages`
 
-required IReadOnlyList<string> Apt
+        Package manager configuration.
 
-Ubuntu/Debian packages to install
+        - `required IReadOnlyList<string> Apt`
 
-required IReadOnlyList<string> Cargo
+          Ubuntu/Debian packages to install
 
-Rust packages to install
+        - `required IReadOnlyList<string> Cargo`
 
-required IReadOnlyList<string> Gem
+          Rust packages to install
 
-Ruby packages to install
+        - `required IReadOnlyList<string> Gem`
 
-required IReadOnlyList<string> Go
+          Ruby packages to install
 
-Go packages to install
+        - `required IReadOnlyList<string> Go`
 
-required IReadOnlyList<string> Npm
+          Go packages to install
 
-Node.js packages to install
+        - `required IReadOnlyList<string> Npm`
 
-required IReadOnlyList<string> Pip
+          Node.js packages to install
 
-Python packages to install
+        - `required IReadOnlyList<string> Pip`
 
-Type Type
+          Python packages to install
 
-Package configuration type
+        - `Type Type`
 
-JsonElement Type "cloud"constant
+          Package configuration type
 
-Environment type
+      - `JsonElement Type = "cloud"`
 
-
+        Environment type
 
-class BetaSelfHostedConfig:
+    - `class BetaSelfHostedConfig:`
 
-Configuration for self-hosted environments.
+      Configuration for self-hosted environments.
 
-JsonElement Type "self\_hosted"constant
+      - `JsonElement Type = "self_hosted"`
 
-Environment type
+        Environment type
 
-required string CreatedAt
+  - `required string CreatedAt`
 
-RFC 3339 timestamp when environment was created
+    RFC 3339 timestamp when environment was created
 
-required string Description
+  - `required string? Description`
 
-User-provided description for the environment
+    User-provided description for the environment; null when unset
 
-required IReadOnlyDictionary<string, string> Metadata
+  - `required IReadOnlyDictionary<string, string> Metadata`
 
-User-provided metadata key-value pairs
+    User-provided metadata key-value pairs
 
-required string Name
+  - `required string Name`
 
-Human-readable name for the environment
+    Human-readable name for the environment
 
-JsonElement Type "environment"constant
+  - `JsonElement Type = "environment"`
 
-The type of object (always 'environment')
+    The type of object (always 'environment')
 
-required string UpdatedAt
+  - `required string UpdatedAt`
 
-RFC 3339 timestamp when environment was last updated
+    RFC 3339 timestamp when environment was last updated
 
-
+  - `Scope Scope`
 
-Scope Scope
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
+    - `Organization("organization")`
 
-One of the following:
+    - `Account("account")`
 
-"organization"Organization
+## Example
 
-"account"Account
-
-required string? NextPage
-
-Token for fetching the next page of results. If `null`, there are no more results available. Pass this value to the `page` parameter in the next request.
-
-List Environments
-
-C#
-
-```shiki
+```csharp
 EnvironmentListParams parameters = new();
 
 var page = await client.Beta.Environments.List(parameters);
@@ -277,69 +258,9 @@ await foreach (var item in page.Paginate())
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
-      "archived_at": null,
-      "config": {
-        "networking": {
-          "allow_mcp_servers": false,
-          "allow_package_managers": true,
-          "allowed_hosts": [
-            "api.example.com"
-          ],
-          "type": "limited"
-        },
-        "packages": {
-          "apt": [
-            "string"
-          ],
-          "cargo": [
-            "string"
-          ],
-          "gem": [
-            "string"
-          ],
-          "go": [
-            "string"
-          ],
-          "npm": [
-            "string"
-          ],
-          "pip": [
-            "pandas",
-            "numpy"
-          ],
-          "type": "packages"
-        },
-        "type": "cloud"
-      },
-      "created_at": "2026-03-15T10:00:00Z",
-      "description": "Python environment with data-analysis packages.",
-      "metadata": {},
-      "name": "python-data-analysis",
-      "type": "environment",
-      "updated_at": "2026-03-15T10:00:00Z",
-      "scope": "organization"
-    }
-  ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

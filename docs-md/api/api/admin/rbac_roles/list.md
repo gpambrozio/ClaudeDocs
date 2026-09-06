@@ -1,123 +1,77 @@
 # List RBAC Roles
 
-Copy page
-
-
-
-# List RBAC Roles
-
-GET/v1/organizations/rbac\_roles
+**GET** `/v1/organizations/rbac_roles`
 
 List RBAC Roles in the organization.
 
 The RBAC Roles API is available to Claude Enterprise organizations only.
 
-##### Query parameters
+## Query parameters
 
-
+- `limit: optional number`
 
-limit: optional number
+  Number of items to return per page.
 
-Number of items to return per page.
+  Defaults to `20`. Ranges from `1` to `1000`.
 
-Defaults to `20`. Ranges from `1` to `1000`.
+  default: 20, maximum: 1000, minimum: 1
 
-default20
+- `page: optional string`
 
-maximum1000
+  Optionally set to the `next_page` token from the previous response.
 
-minimum1
+## Returns
 
-page: optional string
+- `data: array of RbacRole`
 
-Optionally set to the `next_page` token from the previous response.
+  - `id: string`
 
-##### Returns
+    ID of the RBAC Role.
 
-
+  - `created_at: string`
 
-data: array of [RbacRole](api/http/admin/rbac_roles.md) { id, created\_at, name, 2 more }
+    RFC 3339 datetime string indicating when the RBAC Role was created.
 
-id: string
+    format: date-time
 
-ID of the RBAC Role.
+  - `name: string`
 
-
+    Name of the RBAC Role.
 
-created\_at: string
+  - `type: "rbac_role"`
 
-RFC 3339 datetime string indicating when the RBAC Role was created.
+    Object type.
 
-formatdate-time
+    For RBAC Roles, this is always `"rbac_role"`.
 
-name: string
+    default: rbac_role
 
-Name of the RBAC Role.
+  - `updated_at: string`
 
-
+    RFC 3339 datetime string indicating when the RBAC Role was last updated.
 
-type: "rbac\_role"
+    format: date-time
 
-Object type.
+- `has_more: boolean`
 
-For RBAC Roles, this is always `"rbac_role"`.
+  Indicates whether there are more results beyond this page.
 
-defaultrbac\_role
+- `next_page: string or null`
 
-
+  Opaque cursor for the next page. Pass as the `page` parameter on the next
+  request.
 
-updated\_at: string
+## Example
 
-RFC 3339 datetime string indicating when the RBAC Role was last updated.
-
-formatdate-time
-
-has\_more: boolean
-
-Indicates whether there are more results beyond this page.
-
-next\_page: string or null
-
-Opaque cursor for the next page. Pass as the `page` parameter on the next
-request.
-
-List RBAC Roles
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/rbac_roles \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "rbac_role_016J8xVtKpDq3Wy9ZmN2hR4s",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "name": "Project Editor",
-      "type": "rbac_role",
-      "updated_at": "2024-10-30T23:58:27.427722Z"
-    }
-  ],
-  "has_more": true,
-  "next_page": "eyJjdXJzb3IiOiAicmJhY19yb2xlXzAxIn0"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

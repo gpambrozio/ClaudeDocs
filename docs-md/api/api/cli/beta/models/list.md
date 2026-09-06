@@ -1,317 +1,259 @@
 # List Models
 
-Copy page
+`$ ant beta:models list`
 
-
-
-CLI
-
-# List Models
-
-$ ant beta:models list
-
-GET/v1/models
+**GET** `/v1/models`
 
 List available models.
 
 The Models API response can be used to determine which models are available for use in the API. More recently released models are listed first.
 
-##### ParametersExpand Collapse
+## Parameters
 
---after-id: optional string
+- `--after-id: optional string`
 
-Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+  Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
---before-id: optional string
+- `--before-id: optional string`
 
-Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+  Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-
+- `--limit: optional number`
 
---limit: optional number
+  Query param: Number of items to return per page.
 
-Query param: Number of items to return per page.
+  Defaults to `20`. Ranges from `1` to `1000`.
 
-Defaults to `20`. Ranges from `1` to `1000`.
+  maximum: 1000, minimum: 1
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--beta: optional array of AnthropicBeta`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `BetaListResponse_ModelInfo_: object`
 
-BetaListResponse\_ModelInfo\_: object { data, first\_id, has\_more, last\_id } 
+  - `data: array of BetaModelInfo`
 
-
+    - `id: string`
 
-data: array of [BetaModelInfo](api/beta/models.md) { id, allowed\_fallback\_models, capabilities, 5 more } 
+      Unique model identifier.
 
-id: string
+    - `allowed_fallback_models: array of string`
 
-Unique model identifier.
+      Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
-allowed\_fallback\_models: array of string
+    - `capabilities: object`
 
-Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
+      Model capability information.
 
-
+      - `batch: object`
 
-capabilities: object { batch, citations, code\_execution, 6 more } 
+        Whether the model supports the Batch API.
 
-Model capability information.
+        - `supported: boolean`
 
-
+          Whether this capability is supported by the model.
 
-batch: object { supported } 
+      - `citations: object`
 
-Whether the model supports the Batch API.
+        Whether the model supports citation generation.
 
-supported: boolean
+        - `supported: boolean`
 
-Whether this capability is supported by the model.
+          Whether this capability is supported by the model.
 
-
+      - `code_execution: object`
 
-citations: object { supported } 
+        Whether the model supports code execution tools.
 
-Whether the model supports citation generation.
+        - `supported: boolean`
 
-supported: boolean
+          Whether this capability is supported by the model.
 
-Whether this capability is supported by the model.
+      - `context_management: object`
 
-
+        Context management support and available strategies.
 
-code\_execution: object { supported } 
+        - `clear_thinking_20251015: object`
 
-Whether the model supports code execution tools.
+          Indicates whether a capability is supported.
 
-supported: boolean
+          - `supported: boolean`
 
-Whether this capability is supported by the model.
+            Whether this capability is supported by the model.
 
-
+        - `clear_tool_uses_20250919: object`
 
-context\_management: object { clear\_thinking\_20251015, clear\_tool\_uses\_20250919, compact\_20260112, supported } 
+          Indicates whether a capability is supported.
 
-Context management support and available strategies.
+          - `supported: boolean`
 
-
+            Whether this capability is supported by the model.
 
-clear\_thinking\_20251015: object { supported } 
+        - `compact_20260112: object`
 
-Indicates whether a capability is supported.
+          Indicates whether a capability is supported.
 
-supported: boolean
+          - `supported: boolean`
 
-Whether this capability is supported by the model.
+            Whether this capability is supported by the model.
 
-
+        - `supported: boolean`
 
-clear\_tool\_uses\_20250919: object { supported } 
+          Whether this capability is supported by the model.
 
-Indicates whether a capability is supported.
+      - `effort: object`
 
-supported: boolean
+        Effort (reasoning_effort) support and available levels.
 
-Whether this capability is supported by the model.
+        - `high: object`
 
-
+          Whether the model supports high effort level.
 
-compact\_20260112: object { supported } 
+          - `supported: boolean`
 
-Indicates whether a capability is supported.
+            Whether this capability is supported by the model.
 
-supported: boolean
+        - `low: object`
 
-Whether this capability is supported by the model.
+          Whether the model supports low effort level.
 
-supported: boolean
+          - `supported: boolean`
 
-Whether this capability is supported by the model.
+            Whether this capability is supported by the model.
 
-
+        - `max: object`
 
-effort: object { high, low, max, 3 more } 
+          Whether the model supports max effort level.
 
-Effort (reasoning\_effort) support and available levels.
+          - `supported: boolean`
 
-
+            Whether this capability is supported by the model.
 
-high: object { supported } 
+        - `medium: object`
 
-Whether the model supports high effort level.
+          Whether the model supports medium effort level.
 
-supported: boolean
+          - `supported: boolean`
 
-Whether this capability is supported by the model.
+            Whether this capability is supported by the model.
 
-
+        - `supported: boolean`
 
-low: object { supported } 
+          Whether this capability is supported by the model.
 
-Whether the model supports low effort level.
+        - `xhigh: object`
 
-supported: boolean
+          Indicates whether a capability is supported.
 
-Whether this capability is supported by the model.
+          - `supported: boolean`
 
-
+            Whether this capability is supported by the model.
 
-max: object { supported } 
+      - `image_input: object`
 
-Whether the model supports max effort level.
+        Whether the model accepts image content blocks.
 
-supported: boolean
+        - `supported: boolean`
 
-Whether this capability is supported by the model.
+          Whether this capability is supported by the model.
 
-
+      - `pdf_input: object`
 
-medium: object { supported } 
+        Whether the model accepts PDF content blocks.
 
-Whether the model supports medium effort level.
+        - `supported: boolean`
 
-supported: boolean
+          Whether this capability is supported by the model.
 
-Whether this capability is supported by the model.
+      - `structured_outputs: object`
 
-supported: boolean
+        Whether the model supports structured output / JSON mode / strict tool schemas.
 
-Whether this capability is supported by the model.
+        - `supported: boolean`
 
-
+          Whether this capability is supported by the model.
 
-xhigh: object { supported } 
+      - `thinking: object`
 
-Indicates whether a capability is supported.
+        Thinking capability and supported type configurations.
 
-supported: boolean
+        - `supported: boolean`
 
-Whether this capability is supported by the model.
+          Whether this capability is supported by the model.
 
-
+        - `types: object`
 
-image\_input: object { supported } 
+          Supported thinking type configurations.
 
-Whether the model accepts image content blocks.
+          - `adaptive: object`
 
-supported: boolean
+            Whether the model supports thinking with type 'adaptive' (auto).
 
-Whether this capability is supported by the model.
+            - `supported: boolean`
 
-
+              Whether this capability is supported by the model.
 
-pdf\_input: object { supported } 
+          - `enabled: object`
 
-Whether the model accepts PDF content blocks.
+            Whether the model supports thinking with type 'enabled'.
 
-supported: boolean
+            - `supported: boolean`
 
-Whether this capability is supported by the model.
+              Whether this capability is supported by the model.
 
-
+    - `created_at: string`
 
-structured\_outputs: object { supported } 
+      RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
-Whether the model supports structured output / JSON mode / strict tool schemas.
+      format: date-time
 
-supported: boolean
+    - `display_name: string`
 
-Whether this capability is supported by the model.
+      A human-readable name for the model.
 
-
+    - `max_input_tokens: number`
 
-thinking: object { supported, types } 
+      Maximum input context window size in tokens for this model.
 
-Thinking capability and supported type configurations.
+    - `max_tokens: number`
 
-supported: boolean
+      Maximum value for the `max_tokens` parameter when using this model.
 
-Whether this capability is supported by the model.
+    - `type: "model"`
 
-
+      Object type.
 
-types: object { adaptive, enabled } 
+      For Models, this is always `"model"`.
 
-Supported thinking type configurations.
+  - `first_id: string`
 
-
+    First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
-adaptive: object { supported } 
+  - `has_more: boolean`
 
-Whether the model supports thinking with type 'adaptive' (auto).
+    Indicates if there are more results in the requested page direction.
 
-supported: boolean
+  - `last_id: string`
 
-Whether this capability is supported by the model.
+    Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
-
+## Example
 
-enabled: object { supported } 
-
-Whether the model supports thinking with type 'enabled'.
-
-supported: boolean
-
-Whether this capability is supported by the model.
-
-created\_at: string
-
-RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
-
-display\_name: string
-
-A human-readable name for the model.
-
-max\_input\_tokens: number
-
-Maximum input context window size in tokens for this model.
-
-max\_tokens: number
-
-Maximum value for the `max_tokens` parameter when using this model.
-
-
-
-type: "model"
-
-Object type.
-
-For Models, this is always `"model"`.
-
-first\_id: string
-
-First ID in the `data` list. Can be used as the `before_id` for the previous page.
-
-has\_more: boolean
-
-Indicates if there are more results in the requested page direction.
-
-last\_id: string
-
-Last ID in the `data` list. Can be used as the `after_id` for the next page.
-
-List Models
-
-CLI
-
-```shiki
+```bash
 ant beta:models list \
   --api-key my-anthropic-api-key
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
-      "id": "claude-opus-4-6",
+      "id": "claude-opus-5",
       "allowed_fallback_models": [
         "string"
       ],
@@ -376,96 +318,8 @@ Response 200
           }
         }
       },
-      "created_at": "2026-02-04T00:00:00Z",
-      "display_name": "Claude Opus 4.6",
-      "max_input_tokens": 0,
-      "max_tokens": 0,
-      "type": "model"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "claude-opus-4-6",
-      "allowed_fallback_models": [
-        "string"
-      ],
-      "capabilities": {
-        "batch": {
-          "supported": true
-        },
-        "citations": {
-          "supported": true
-        },
-        "code_execution": {
-          "supported": true
-        },
-        "context_management": {
-          "clear_thinking_20251015": {
-            "supported": true
-          },
-          "clear_tool_uses_20250919": {
-            "supported": true
-          },
-          "compact_20260112": {
-            "supported": true
-          },
-          "supported": true
-        },
-        "effort": {
-          "high": {
-            "supported": true
-          },
-          "low": {
-            "supported": true
-          },
-          "max": {
-            "supported": true
-          },
-          "medium": {
-            "supported": true
-          },
-          "supported": true,
-          "xhigh": {
-            "supported": true
-          }
-        },
-        "image_input": {
-          "supported": true
-        },
-        "pdf_input": {
-          "supported": true
-        },
-        "structured_outputs": {
-          "supported": true
-        },
-        "thinking": {
-          "supported": true,
-          "types": {
-            "adaptive": {
-              "supported": true
-            },
-            "enabled": {
-              "supported": true
-            }
-          }
-        }
-      },
-      "created_at": "2026-02-04T00:00:00Z",
-      "display_name": "Claude Opus 4.6",
+      "created_at": "2026-07-24T00:00:00Z",
+      "display_name": "Claude Opus 5",
       "max_input_tokens": 0,
       "max_tokens": 0,
       "type": "model"

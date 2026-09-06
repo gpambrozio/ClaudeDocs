@@ -1,98 +1,84 @@
 # Get File Metadata
 
-Copy page
+`$client->beta->files->retrieveMetadata(string fileID, ?list<AnthropicBeta> betas): BetaFileMetadata`
 
-
-
-PHP
-
-# Get File Metadata
-
-$client->beta->files->retrieveMetadata(string fileID, ?list<AnthropicBeta> betas): [FileMetadata](api/beta/files.md)
-
-GET/v1/files/{file\_id}
+**GET** `/v1/files/{file_id}`
 
 Get File Metadata
 
-##### ParametersExpand Collapse
+## Parameters
 
-fileID: string
+- `fileID: string`
 
-ID of the File.
+  ID of the File.
 
-betas?:optional list<AnthropicBeta>
+- `betas?:optional list<AnthropicBeta>`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `BetaFileMetadata`
 
-[FileMetadata](api/beta/files.md)
+  - `string id`
 
-
+    Unique object identifier.
 
-string id
+    The format and length of IDs may change over time.
 
-Unique object identifier.
+  - `\Datetime createdAt`
 
-The format and length of IDs may change over time.
+    RFC 3339 datetime string representing when the file was created.
 
-\Datetime createdAt
+  - `string filename`
 
-RFC 3339 datetime string representing when the file was created.
+    Original filename of the uploaded file.
 
-string filename
+  - `string mimeType`
 
-Original filename of the uploaded file.
+    MIME type of the file.
 
-string mimeType
+  - `int sizeBytes`
 
-MIME type of the file.
+    Size of the file in bytes.
 
-int sizeBytes
+  - `"file" type`
 
-Size of the file in bytes.
+    Object type.
 
-
+    For files, this is always `"file"`.
 
-"file" type
+  - `?bool downloadable`
 
-Object type.
+    Whether the file can be downloaded.
 
-For files, this is always `"file"`.
+  - `?\Datetime expiresAt`
 
-?bool downloadable
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
 
-Whether the file can be downloaded.
+  - `?BetaFileScope scope`
 
-?[BetaFileScope](api/beta/files.md) scope
+    The scope of this file, indicating the context in which it was created (e.g., a session).
 
-The scope of this file, indicating the context in which it was created (e.g., a session).
+## Example
 
-Get File Metadata
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
-$fileMetadata = $client->beta->files->retrieveMetadata(
-  'file_id', betas: ['message-batches-2024-09-24']
+$betaFileMetadata = $client->beta->files->retrieveMetadata(
+  'file_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
 );
 
-var_dump($fileMetadata);
+var_dump($betaFileMetadata);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "file_011CNha8iCJcU1wXNR6q4V8w",
   "created_at": "2025-04-15T18:37:24.100435Z",
@@ -101,28 +87,7 @@ Response 200
   "size_bytes": 102400,
   "type": "file",
   "downloadable": false,
-  "scope": {
-    "id": "id",
-    "type": "session"
-  }
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "created_at": "2025-04-15T18:37:24.100435Z",
-  "filename": "document.pdf",
-  "mime_type": "application/pdf",
-  "size_bytes": 102400,
-  "type": "file",
-  "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z",
   "scope": {
     "id": "id",
     "type": "session"

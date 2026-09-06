@@ -1,180 +1,194 @@
 # List Files
 
-Copy page
+`beta.files.list(**kwargs) -> PageCursor<BetaFileMetadata>`
 
-
-
-Ruby
-
-# List Files
-
-beta.files.list(\*\*kwargs) -> Page<[FileMetadata](api/beta/files.md) { id, created\_at, filename, 5 more } >
-
-GET/v1/files
+**GET** `/v1/files`
 
 List Files
 
-##### ParametersExpand Collapse
+## Parameters
 
-after\_id: String
+- `ids: Array[String]`
 
-ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+  Restrict the result set to Files whose `id` is in this list. At most 100 entries (after de-duplication). Mutually exclusive with `page` and `limit`. When supplied, the response is always a single page (`next_page` is null). IDs that do not resolve to a visible File — including deleted Files — are silently omitted.
 
-before\_id: String
+- `limit: Integer`
 
-ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+  Number of items to return per page.
 
-
+  Defaults to `20`. Ranges from `1` to `1000`.
 
-limit: Integer
+  maximum: 1000, minimum: 1
 
-Number of items to return per page.
+- `page: String`
 
-Defaults to `20`. Ranges from `1` to `1000`.
+  Opaque page cursor returned in a prior list response's `next_page`. Prefixed `page_`.
 
-maximum1000
+- `scope_id: String`
 
-minimum1
+  Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
 
-scope\_id: String
+- `betas: Array[AnthropicBeta]`
 
-Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
+  Optional header to specify the beta version(s) you want to use.
 
-
+  - `String = String`
 
-betas: Array[[AnthropicBeta](api/beta.md)]
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
 
-Optional header to specify the beta version(s) you want to use.
+    - `:"message-batches-2024-09-24"`
 
-One of the following:
+    - `:"prompt-caching-2024-07-31"`
 
-String = String
+    - `:"computer-use-2024-10-22"`
 
-
+    - `:"computer-use-2025-01-24"`
 
-AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more
+    - `:"pdfs-2024-09-25"`
 
-One of the following:
+    - `:"token-counting-2024-11-01"`
 
-:"message-batches-2024-09-24"
+    - `:"token-efficient-tools-2025-02-19"`
 
-:"prompt-caching-2024-07-31"
+    - `:"output-128k-2025-02-19"`
 
-:"computer-use-2024-10-22"
+    - `:"files-api-2025-04-14"`
 
-:"computer-use-2025-01-24"
+    - `:"mcp-client-2025-04-04"`
 
-:"pdfs-2024-09-25"
+    - `:"mcp-client-2025-11-20"`
 
-:"token-counting-2024-11-01"
+    - `:"dev-full-thinking-2025-05-14"`
 
-:"token-efficient-tools-2025-02-19"
+    - `:"interleaved-thinking-2025-05-14"`
 
-:"output-128k-2025-02-19"
+    - `:"code-execution-2025-05-22"`
 
-:"files-api-2025-04-14"
+    - `:"extended-cache-ttl-2025-04-11"`
 
-:"mcp-client-2025-04-04"
+    - `:"context-1m-2025-08-07"`
 
-:"mcp-client-2025-11-20"
+    - `:"context-management-2025-06-27"`
 
-:"dev-full-thinking-2025-05-14"
+    - `:"model-context-window-exceeded-2025-08-26"`
 
-:"interleaved-thinking-2025-05-14"
+    - `:"skills-2025-10-02"`
 
-:"code-execution-2025-05-22"
+    - `:"fast-mode-2026-02-01"`
 
-:"extended-cache-ttl-2025-04-11"
+    - `:"output-300k-2026-03-24"`
 
-:"context-1m-2025-08-07"
+    - `:"user-profiles-2026-03-24"`
 
-:"context-management-2025-06-27"
+    - `:"user-profiles-2026-08-18"`
 
-:"model-context-window-exceeded-2025-08-26"
+    - `:"advisor-tool-2026-03-01"`
 
-:"skills-2025-10-02"
+    - `:"managed-agents-2026-04-01"`
 
-:"fast-mode-2026-02-01"
+    - `:"cache-diagnosis-2026-04-07"`
 
-:"output-300k-2026-03-24"
+    - `:"dreaming-2026-04-21"`
 
-:"user-profiles-2026-03-24"
+    - `:"thinking-token-count-2026-05-13"`
 
-:"advisor-tool-2026-03-01"
+    - `:"server-side-fallback-2026-06-01"`
 
-:"managed-agents-2026-04-01"
+    - `:"server-side-fallback-2026-07-01"`
 
-:"cache-diagnosis-2026-04-07"
+    - `:"fallback-credit-2026-06-01"`
 
-:"thinking-token-count-2026-05-13"
+    - `:"fallback-credit-2026-07-01"`
 
-:"server-side-fallback-2026-06-01"
+    - `:"agent-memory-2026-07-22"`
 
-:"fallback-credit-2026-06-01"
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
-:"agent-memory-2026-07-22"
+    - `:"compact-2026-01-12"`
 
-##### ReturnsExpand Collapse
+    - `:"computer-use-2025-11-24"`
 
-
+    - `:"mcp-tunnels-2026-06-22"`
 
-class FileMetadata { id, created\_at, filename, 5 more } 
+    - `:"structured-outputs-2025-11-13"`
 
-
+    - `:"task-budgets-2026-03-13"`
 
-id: String
+    - `:"thinking-display-updates-2026-08-18"`
 
-Unique object identifier.
+    - `:"ce-user-management-2026-07-13"`
 
-The format and length of IDs may change over time.
+    - `:"mid-conversation-output-config-2026-07-01"`
 
-created\_at: Time
+    - `:"thinking-binding-controls-2026-08-01"`
 
-RFC 3339 datetime string representing when the file was created.
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
 
-filename: String
+## Returns
 
-Original filename of the uploaded file.
+- `class BetaFileMetadata`
 
-mime\_type: String
+  - `id: String`
 
-MIME type of the file.
+    Unique object identifier.
 
-size\_bytes: Integer
+    The format and length of IDs may change over time.
 
-Size of the file in bytes.
+  - `created_at: Time`
 
-
+    RFC 3339 datetime string representing when the file was created.
 
-type: :file
+    format: date-time
 
-Object type.
+  - `filename: String`
 
-For files, this is always `"file"`.
+    Original filename of the uploaded file.
 
-downloadable: bool
+    maxLength: 500, minLength: 1
 
-Whether the file can be downloaded.
+  - `mime_type: String`
 
-
+    MIME type of the file.
 
-scope: [BetaFileScope](api/beta/files.md) { id, type } 
+    maxLength: 255, minLength: 1
 
-The scope of this file, indicating the context in which it was created (e.g., a session).
+  - `size_bytes: Integer`
 
-id: String
+    Size of the file in bytes.
 
-The ID of the scoping resource (e.g., the session ID).
+    minimum: 0
 
-type: :session
+  - `type: :file`
 
-The type of scope (e.g., `"session"`).
+    Object type.
 
-List Files
+    For files, this is always `"file"`.
 
-Ruby
+  - `downloadable: bool`
 
-```shiki
+    Whether the file can be downloaded.
+
+  - `expires_at: Time`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
+
+  - `scope: BetaFileScope`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `id: String`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `type: :session`
+
+      The type of scope (e.g., `"session"`).
+
+## Example
+
+```ruby
 require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
@@ -184,11 +198,9 @@ page = anthropic.beta.files.list
 puts(page)
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
@@ -199,44 +211,14 @@ Response 200
       "size_bytes": 102400,
       "type": "file",
       "downloadable": false,
+      "expires_at": "2025-05-15T18:37:24.100435Z",
       "scope": {
         "id": "id",
         "type": "session"
       }
     }
   ],
-  "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "has_more": true,
-  "last_id": "file_013Zva2CMHLNnXjNJJKqJ2EF"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "file_011CNha8iCJcU1wXNR6q4V8w",
-      "created_at": "2025-04-15T18:37:24.100435Z",
-      "filename": "document.pdf",
-      "mime_type": "application/pdf",
-      "size_bytes": 102400,
-      "type": "file",
-      "downloadable": false,
-      "scope": {
-        "id": "id",
-        "type": "session"
-      }
-    }
-  ],
-  "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "has_more": true,
-  "last_id": "file_013Zva2CMHLNnXjNJJKqJ2EF"
+  "next_page": "next_page"
 }
 ```
 

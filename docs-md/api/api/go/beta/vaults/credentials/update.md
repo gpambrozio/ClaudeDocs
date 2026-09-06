@@ -1,490 +1,439 @@
 # Update Credential
 
-Copy page
+`client.Beta.Vaults.Credentials.Update(ctx, credentialID, params) (*BetaManagedAgentsCredential, error)`
 
-
-
-Go
-
-# Update Credential
-
-client.Beta.Vaults.Credentials.Update(ctx, credentialID, params) (\*[BetaManagedAgentsCredential](api/beta/vaults/credentials.md), error)
-
-POST/v1/vaults/{vault\_id}/credentials/{credential\_id}
+**POST** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
 Update Credential
 
-##### ParametersExpand Collapse
+## Parameters
 
-credentialID string
+- `credentialID string`
 
-
+- `params BetaVaultCredentialUpdateParams`
 
-params BetaVaultCredentialUpdateParams
+  - `VaultID param.Field[string]`
 
-VaultID param.Field[string]
+    Path param: Path parameter vault_id
 
-Path param: Path parameter vault\_id
+  - `Auth param.Field[BetaVaultCredentialUpdateParamsAuthUnion] Optional`
 
-
+    Body param: Updated authentication details for a credential.
 
-Auth param.Field[[BetaVaultCredentialUpdateParamsAuthUnion](api/beta/vaults/credentials/update.md)]Optional
+    - `type BetaManagedAgentsMCPOAuthUpdateParamsResp struct{…}`
 
-Body param: Updated authentication details for a credential.
+      Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
 
-
+      - `Type BetaManagedAgentsMCPOAuthUpdateParamsType`
 
-type BetaManagedAgentsMCPOAuthUpdateParamsResp struct{…}
+      - `AccessToken string Optional`
 
-Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
+        Updated OAuth access token.
 
-Type BetaManagedAgentsMCPOAuthUpdateParamsType
+        minLength: 1, maxLength: 8192
 
-AccessToken stringOptional
+      - `ExpiresAt Time Optional`
 
-Updated OAuth access token.
+        A timestamp in RFC 3339 format
 
-ExpiresAt TimeOptional
+        format: date-time
 
-A timestamp in RFC 3339 format
+      - `Refresh BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp Optional`
 
-
+        Parameters for updating OAuth refresh token configuration.
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp](api/beta/vaults/credentials.md)Optional
+        - `RefreshToken string Optional`
 
-Parameters for updating OAuth refresh token configuration.
+          Updated OAuth refresh token.
 
-RefreshToken stringOptional
+          minLength: 1, maxLength: 4096
 
-Updated OAuth refresh token.
+        - `Scope string Optional`
 
-Scope stringOptional
+          Updated OAuth scope for the refresh request.
 
-Updated OAuth scope for the refresh request.
+          maxLength: 8192
 
-
+        - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionResp Optional`
 
-TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionRespOptional
+          Updated HTTP Basic authentication parameters for the token endpoint.
 
-Updated HTTP Basic authentication parameters for the token endpoint.
+          - `type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp struct{…}`
 
-One of the following:
+            Updated HTTP Basic authentication parameters for the token endpoint.
 
-
+            - `Type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamType`
 
-type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp struct{…}
+            - `ClientSecret string Optional`
 
-Updated HTTP Basic authentication parameters for the token endpoint.
+              Updated OAuth client secret.
 
-Type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamType
+              minLength: 1, maxLength: 512
 
-ClientSecret stringOptional
+          - `type BetaManagedAgentsTokenEndpointAuthPostUpdateParamResp struct{…}`
 
-Updated OAuth client secret.
+            Updated POST body authentication parameters for the token endpoint.
 
-
+            - `Type BetaManagedAgentsTokenEndpointAuthPostUpdateParamType`
 
-type BetaManagedAgentsTokenEndpointAuthPostUpdateParamResp struct{…}
+            - `ClientSecret string Optional`
 
-Updated POST body authentication parameters for the token endpoint.
+              Updated OAuth client secret.
 
-Type BetaManagedAgentsTokenEndpointAuthPostUpdateParamType
+              minLength: 1, maxLength: 512
 
-ClientSecret stringOptional
+    - `type BetaManagedAgentsStaticBearerUpdateParamsResp struct{…}`
 
-Updated OAuth client secret.
+      Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
 
-
+      - `Type BetaManagedAgentsStaticBearerUpdateParamsType`
 
-type BetaManagedAgentsStaticBearerUpdateParamsResp struct{…}
+      - `Token string Optional`
 
-Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
+        Updated static bearer token value.
 
-Type BetaManagedAgentsStaticBearerUpdateParamsType
+        minLength: 1, maxLength: 8192
 
-Token stringOptional
+    - `type BetaManagedAgentsEnvironmentVariableUpdateParamsResp struct{…}`
 
-Updated static bearer token value.
+      Parameters for updating an environment variable credential. `secret_name` is immutable.
 
-
+      - `Type BetaManagedAgentsEnvironmentVariableUpdateParamsType`
 
-type BetaManagedAgentsEnvironmentVariableUpdateParamsResp struct{…}
+      - `InjectionLocation BetaManagedAgentsInjectionLocationUpdateParamsResp Optional`
 
-Parameters for updating an environment variable credential. `secret_name` is immutable.
+        Updated injection location.
 
-Type BetaManagedAgentsEnvironmentVariableUpdateParamsType
+        - `Body bool Optional`
 
-
+          Substitute when the placeholder appears in the request body.
 
-InjectionLocation [BetaManagedAgentsInjectionLocationUpdateParamsResp](api/beta/vaults/credentials.md)Optional
+        - `Header bool Optional`
 
-Updated injection location.
+          Substitute when the placeholder appears in a request header value.
 
-Body boolOptional
+      - `Networking BetaManagedAgentsCredentialNetworkingParamsUnionResp Optional`
 
-Substitute when the placeholder appears in the request body.
+        Updated networking scope. Full replacement.
 
-Header boolOptional
+        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp struct{…}`
 
-Substitute when the placeholder appears in a request header value.
+          Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
-
+          - `Type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsType`
 
-Networking [BetaManagedAgentsCredentialNetworkingParamsUnionResp](api/beta/vaults/credentials.md)Optional
+        - `type BetaManagedAgentsLimitedCredentialNetworkingParamsResp struct{…}`
 
-Updated networking scope. Full replacement.
+          Substitute the secret only on requests to the listed hosts.
 
-One of the following:
+          - `AllowedHosts []string`
 
-
+            Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
 
-type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp struct{…}
+          - `Type BetaManagedAgentsLimitedCredentialNetworkingParamsType`
 
-Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+      - `SecretValue string Optional`
 
-Type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsType
+        Updated secret value.
 
-
+        minLength: 1, maxLength: 4096
 
-type BetaManagedAgentsLimitedCredentialNetworkingParamsResp struct{…}
+  - `DisplayName param.Field[string] Optional`
 
-Substitute the secret only on requests to the listed hosts.
+    Body param: Updated human-readable name for the credential. 1-255 characters.
 
-AllowedHosts []string
+    minLength: 1, maxLength: 255
 
-Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+  - `Metadata param.Field[map[string, string]] Optional`
 
-Type BetaManagedAgentsLimitedCredentialNetworkingParamsType
+    Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
-SecretValue stringOptional
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
-Updated secret value.
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-DisplayName param.Field[string]Optional
+    - `string`
 
-Body param: Updated human-readable name for the credential. 1-255 characters.
+    - `type AnthropicBeta string`
 
-Metadata param.Field[map[string, string]]Optional
+      - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
 
-Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
+      - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
 
-
+      - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
 
-Betas param.Field[[]AnthropicBeta]Optional
+      - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+      - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
 
-string
+      - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
 
-
+      - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
 
-type AnthropicBeta string
+      - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
 
-One of the following:
+      - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
 
-const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
+      - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
 
-const AnthropicBetaPromptCaching2024\_07\_31 AnthropicBeta = "prompt-caching-2024-07-31"
+      - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
 
-const AnthropicBetaComputerUse2024\_10\_22 AnthropicBeta = "computer-use-2024-10-22"
+      - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
 
-const AnthropicBetaComputerUse2025\_01\_24 AnthropicBeta = "computer-use-2025-01-24"
+      - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
 
-const AnthropicBetaPDFs2024\_09\_25 AnthropicBeta = "pdfs-2024-09-25"
+      - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
 
-const AnthropicBetaTokenCounting2024\_11\_01 AnthropicBeta = "token-counting-2024-11-01"
+      - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
 
-const AnthropicBetaTokenEfficientTools2025\_02\_19 AnthropicBeta = "token-efficient-tools-2025-02-19"
+      - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
 
-const AnthropicBetaOutput128k2025\_02\_19 AnthropicBeta = "output-128k-2025-02-19"
+      - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
 
-const AnthropicBetaFilesAPI2025\_04\_14 AnthropicBeta = "files-api-2025-04-14"
+      - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
 
-const AnthropicBetaMCPClient2025\_04\_04 AnthropicBeta = "mcp-client-2025-04-04"
+      - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
 
-const AnthropicBetaMCPClient2025\_11\_20 AnthropicBeta = "mcp-client-2025-11-20"
+      - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
 
-const AnthropicBetaDevFullThinking2025\_05\_14 AnthropicBeta = "dev-full-thinking-2025-05-14"
+      - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
-const AnthropicBetaInterleavedThinking2025\_05\_14 AnthropicBeta = "interleaved-thinking-2025-05-14"
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
-const AnthropicBetaCodeExecution2025\_05\_22 AnthropicBeta = "code-execution-2025-05-22"
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
-const AnthropicBetaExtendedCacheTTL2025\_04\_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"
+      - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
-const AnthropicBetaContext1m2025\_08\_07 AnthropicBeta = "context-1m-2025-08-07"
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
-const AnthropicBetaContextManagement2025\_06\_27 AnthropicBeta = "context-management-2025-06-27"
+      - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
-const AnthropicBetaModelContextWindowExceeded2025\_08\_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"
+      - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
 
-const AnthropicBetaSkills2025\_10\_02 AnthropicBeta = "skills-2025-10-02"
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 
-const AnthropicBetaFastMode2026\_02\_01 AnthropicBeta = "fast-mode-2026-02-01"
+      - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
 
-const AnthropicBetaOutput300k2026\_03\_24 AnthropicBeta = "output-300k-2026-03-24"
+      - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
 
-const AnthropicBetaUserProfiles2026\_03\_24 AnthropicBeta = "user-profiles-2026-03-24"
+      - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
 
-const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03-01"
+      - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
-const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
+      - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
-const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2026-04-07"
+      - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-const AnthropicBetaThinkingTokenCount2026\_05\_13 AnthropicBeta = "thinking-token-count-2026-05-13"
+      - `const AnthropicBetaCompact2026_01_12 AnthropicBeta = "compact-2026-01-12"`
 
-const AnthropicBetaServerSideFallback2026\_06\_01 AnthropicBeta = "server-side-fallback-2026-06-01"
+      - `const AnthropicBetaComputerUse2025_11_24 AnthropicBeta = "computer-use-2025-11-24"`
 
-const AnthropicBetaFallbackCredit2026\_06\_01 AnthropicBeta = "fallback-credit-2026-06-01"
+      - `const AnthropicBetaMCPTunnels2026_06_22 AnthropicBeta = "mcp-tunnels-2026-06-22"`
 
-const AnthropicBetaAgentMemory2026\_07\_22 AnthropicBeta = "agent-memory-2026-07-22"
+      - `const AnthropicBetaStructuredOutputs2025_11_13 AnthropicBeta = "structured-outputs-2025-11-13"`
 
-##### ReturnsExpand Collapse
+      - `const AnthropicBetaTaskBudgets2026_03_13 AnthropicBeta = "task-budgets-2026-03-13"`
 
-
+      - `const AnthropicBetaThinkingDisplayUpdates2026_08_18 AnthropicBeta = "thinking-display-updates-2026-08-18"`
 
-type BetaManagedAgentsCredential struct{…}
+      - `const AnthropicBetaCEUserManagement2026_07_13 AnthropicBeta = "ce-user-management-2026-07-13"`
 
-A credential stored in a vault. Sensitive fields are never returned in responses.
+      - `const AnthropicBetaMidConversationOutputConfig2026_07_01 AnthropicBeta = "mid-conversation-output-config-2026-07-01"`
 
-ID string
+      - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
 
-Unique identifier for the credential.
+      - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
-ArchivedAt Time
+## Returns
 
-A timestamp in RFC 3339 format
+- `type BetaManagedAgentsCredential struct{…}`
 
-
+  A credential stored in a vault. Sensitive fields are never returned in responses.
 
-Auth BetaManagedAgentsCredentialAuthUnion
+  - `ID string`
 
-Authentication details for a credential.
+    Unique identifier for the credential.
 
-One of the following:
+  - `ArchivedAt Time`
 
-
+    A timestamp in RFC 3339 format
 
-type BetaManagedAgentsMCPOAuthAuthResponse struct{…}
+    format: date-time
 
-OAuth credential details for an MCP server.
+  - `Auth BetaManagedAgentsCredentialAuthUnion`
 
-MCPServerURL string
+    Authentication details for a credential.
 
-URL of the MCP server this credential authenticates against.
+    - `type BetaManagedAgentsMCPOAuthAuthResponse struct{…}`
 
-Type BetaManagedAgentsMCPOAuthAuthResponseType
+      OAuth credential details for an MCP server.
 
-ExpiresAt TimeOptional
+      - `MCPServerURL string`
 
-A timestamp in RFC 3339 format
+        URL of the MCP server this credential authenticates against.
 
-
+      - `Type BetaManagedAgentsMCPOAuthAuthResponseType`
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta/vaults/credentials.md)Optional
+      - `ExpiresAt Time Optional`
 
-OAuth refresh token configuration returned in credential responses.
+        A timestamp in RFC 3339 format
 
-ClientID string
+        format: date-time
 
-OAuth client ID.
+      - `Refresh BetaManagedAgentsMCPOAuthRefreshResponse Optional`
 
-TokenEndpoint string
+        OAuth refresh token configuration returned in credential responses.
 
-Token endpoint URL used to refresh the access token.
+        - `ClientID string`
 
-
+          OAuth client ID.
 
-TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion
+        - `TokenEndpoint string`
 
-Token endpoint requires no client authentication.
+          Token endpoint URL used to refresh the access token.
 
-One of the following:
+        - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion`
 
-
+          Token endpoint requires no client authentication.
 
-type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}
+          - `type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}`
 
-Token endpoint requires no client authentication.
+            Token endpoint requires no client authentication.
 
-Type BetaManagedAgentsTokenEndpointAuthNoneResponseType
+            - `Type BetaManagedAgentsTokenEndpointAuthNoneResponseType`
 
-
+          - `type BetaManagedAgentsTokenEndpointAuthBasicResponse struct{…}`
 
-type BetaManagedAgentsTokenEndpointAuthBasicResponse struct{…}
+            Token endpoint uses HTTP Basic authentication with client credentials.
 
-Token endpoint uses HTTP Basic authentication with client credentials.
+            - `Type BetaManagedAgentsTokenEndpointAuthBasicResponseType`
 
-Type BetaManagedAgentsTokenEndpointAuthBasicResponseType
+          - `type BetaManagedAgentsTokenEndpointAuthPostResponse struct{…}`
 
-
+            Token endpoint uses POST body authentication with client credentials.
 
-type BetaManagedAgentsTokenEndpointAuthPostResponse struct{…}
+            - `Type BetaManagedAgentsTokenEndpointAuthPostResponseType`
 
-Token endpoint uses POST body authentication with client credentials.
+        - `Resource string Optional`
 
-Type BetaManagedAgentsTokenEndpointAuthPostResponseType
+          OAuth resource indicator.
 
-Resource stringOptional
+        - `Scope string Optional`
 
-OAuth resource indicator.
+          OAuth scope for the refresh request.
 
-Scope stringOptional
+    - `type BetaManagedAgentsStaticBearerAuthResponse struct{…}`
 
-OAuth scope for the refresh request.
+      Static bearer token credential details for an MCP server.
 
-
+      - `MCPServerURL string`
 
-type BetaManagedAgentsStaticBearerAuthResponse struct{…}
+        URL of the MCP server this credential authenticates against.
 
-Static bearer token credential details for an MCP server.
+      - `Type BetaManagedAgentsStaticBearerAuthResponseType`
 
-MCPServerURL string
+    - `type BetaManagedAgentsEnvironmentVariableAuthResponse struct{…}`
 
-URL of the MCP server this credential authenticates against.
+      Environment variable credential details. The secret value is never returned.
 
-Type BetaManagedAgentsStaticBearerAuthResponseType
+      - `InjectionLocation BetaManagedAgentsInjectionLocationResponse`
 
-
+        Where in the outbound request the secret value is substituted.
 
-type BetaManagedAgentsEnvironmentVariableAuthResponse struct{…}
+        - `Body bool`
 
-Environment variable credential details. The secret value is never returned.
+          Whether the placeholder is substituted in the request body.
 
-
+        - `Header bool`
 
-InjectionLocation [BetaManagedAgentsInjectionLocationResponse](api/beta/vaults/credentials.md)
+          Whether the placeholder is substituted in request header values.
 
-Where in the outbound request the secret value is substituted.
+      - `Networking BetaManagedAgentsEnvironmentVariableAuthResponseNetworkingUnion`
 
-Body bool
+        Outbound hosts the secret value is substituted on.
 
-Whether the placeholder is substituted in the request body.
+        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingResponse struct{…}`
 
-Header bool
+          The secret is substituted on any host the session's Environment network policy permits egress to.
 
-Whether the placeholder is substituted in request header values.
+          - `Type BetaManagedAgentsUnrestrictedCredentialNetworkingResponseType`
 
-
+        - `type BetaManagedAgentsLimitedCredentialNetworkingResponse struct{…}`
 
-Networking BetaManagedAgentsEnvironmentVariableAuthResponseNetworkingUnion
+          The secret is substituted only on requests to the listed hosts.
 
-Outbound hosts the secret value is substituted on.
+          - `AllowedHosts []string`
 
-One of the following:
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-
+          - `Type BetaManagedAgentsLimitedCredentialNetworkingResponseType`
 
-type BetaManagedAgentsUnrestrictedCredentialNetworkingResponse struct{…}
+      - `SecretName string`
 
-The secret is substituted on any host the session's Environment network policy permits egress to.
+        Name of the environment variable.
 
-Type BetaManagedAgentsUnrestrictedCredentialNetworkingResponseType
+      - `Type BetaManagedAgentsEnvironmentVariableAuthResponseType`
 
-
+  - `CreatedAt Time`
 
-type BetaManagedAgentsLimitedCredentialNetworkingResponse struct{…}
+    A timestamp in RFC 3339 format
 
-The secret is substituted only on requests to the listed hosts.
+    format: date-time
 
-AllowedHosts []string
+  - `Metadata map[string, string]`
 
-Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+    Arbitrary key-value metadata attached to the credential.
 
-Type BetaManagedAgentsLimitedCredentialNetworkingResponseType
+  - `Type BetaManagedAgentsCredentialType`
 
-SecretName string
+  - `UpdatedAt Time`
 
-Name of the environment variable.
+    A timestamp in RFC 3339 format
 
-Type BetaManagedAgentsEnvironmentVariableAuthResponseType
+    format: date-time
 
-CreatedAt Time
+  - `VaultID string`
 
-A timestamp in RFC 3339 format
+    Identifier of the vault this credential belongs to.
 
-Metadata map[string, string]
+  - `DisplayName string Optional`
 
-Arbitrary key-value metadata attached to the credential.
+    Human-readable name for the credential.
 
-Type BetaManagedAgentsCredentialType
+## Example
 
-UpdatedAt Time
-
-A timestamp in RFC 3339 format
-
-VaultID string
-
-Identifier of the vault this credential belongs to.
-
-DisplayName stringOptional
-
-Human-readable name for the credential.
-
-Update Credential
-
-Go
-
-```shiki
+```go
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  betaManagedAgentsCredential, err := client.Beta.Vaults.Credentials.Update(
-    context.TODO(),
-    "vcrd_011CZkZEMt8gZan2iYOQfSkw",
-    anthropic.BetaVaultCredentialUpdateParams{
-      VaultID: "vlt_011CZkZDLs7fYzm1hXNPeRjv",
-    },
-  )
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", betaManagedAgentsCredential.ID)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaManagedAgentsCredential, err := client.Beta.Vaults.Credentials.Update(
+		context.TODO(),
+		"vcrd_011CZkZEMt8gZan2iYOQfSkw",
+		anthropic.BetaVaultCredentialUpdateParams{
+			VaultID: "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+		},
+	)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaManagedAgentsCredential.ID)
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
-  "archived_at": null,
-  "auth": {
-    "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
-    "type": "static_bearer"
-  },
-  "created_at": "2026-03-15T10:00:00Z",
-  "metadata": {
-    "environment": "production"
-  },
-  "type": "vault_credential",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
-  "display_name": "Example credential"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
   "archived_at": null,

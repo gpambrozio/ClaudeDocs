@@ -1,174 +1,192 @@
 # List Files
 
-Copy page
+`FileListPage beta().files().list(params = FileListParams.none(), requestOptions = RequestOptions.none())`
 
-
-
-Java
-
-# List Files
-
-FileListPage beta().files().list(FileListParamsparams = FileListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
-
-GET/v1/files
+**GET** `/v1/files`
 
 List Files
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `FileListParams params`
 
-FileListParams params
+  - `Optional<List<String>> ids`
 
-Optional<String> afterId
+    Restrict the result set to Files whose `id` is in this list. At most 100 entries (after de-duplication). Mutually exclusive with `page` and `limit`. When supplied, the response is always a single page (`next_page` is null). IDs that do not resolve to a visible File — including deleted Files — are silently omitted.
 
-ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+  - `Optional<Long> limit`
 
-Optional<String> beforeId
+    Number of items to return per page.
 
-ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+    Defaults to `20`. Ranges from `1` to `1000`.
 
-
+    maximum: 1000, minimum: 1
 
-Optional<Long> limit
+  - `Optional<String> page`
 
-Number of items to return per page.
+    Opaque page cursor returned in a prior list response's `next_page`. Prefixed `page_`.
 
-Defaults to `20`. Ranges from `1` to `1000`.
+  - `Optional<String> scopeId`
 
-maximum1000
+    Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
 
-minimum1
+  - `Optional<List<AnthropicBeta>> betas`
 
-Optional<String> scopeId
+    Optional header to specify the beta version(s) you want to use.
 
-Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
-
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
 
-Optional<List<AnthropicBeta>> betas
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
-Optional header to specify the beta version(s) you want to use.
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-MESSAGE\_BATCHES\_2024\_09\_24("message-batches-2024-09-24")
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
 
-PROMPT\_CACHING\_2024\_07\_31("prompt-caching-2024-07-31")
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
 
-COMPUTER\_USE\_2024\_10\_22("computer-use-2024-10-22")
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
 
-COMPUTER\_USE\_2025\_01\_24("computer-use-2025-01-24")
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
 
-PDFS\_2024\_09\_25("pdfs-2024-09-25")
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
-TOKEN\_COUNTING\_2024\_11\_01("token-counting-2024-11-01")
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
-TOKEN\_EFFICIENT\_TOOLS\_2025\_02\_19("token-efficient-tools-2025-02-19")
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
 
-OUTPUT\_128K\_2025\_02\_19("output-128k-2025-02-19")
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
 
-FILES\_API\_2025\_04\_14("files-api-2025-04-14")
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
 
-MCP\_CLIENT\_2025\_04\_04("mcp-client-2025-04-04")
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-MCP\_CLIENT\_2025\_11\_20("mcp-client-2025-11-20")
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
 
-DEV\_FULL\_THINKING\_2025\_05\_14("dev-full-thinking-2025-05-14")
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
-INTERLEAVED\_THINKING\_2025\_05\_14("interleaved-thinking-2025-05-14")
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
-CODE\_EXECUTION\_2025\_05\_22("code-execution-2025-05-22")
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-EXTENDED\_CACHE\_TTL\_2025\_04\_11("extended-cache-ttl-2025-04-11")
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
-CONTEXT\_1M\_2025\_08\_07("context-1m-2025-08-07")
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
-CONTEXT\_MANAGEMENT\_2025\_06\_27("context-management-2025-06-27")
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-MODEL\_CONTEXT\_WINDOW\_EXCEEDED\_2025\_08\_26("model-context-window-exceeded-2025-08-26")
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
-SKILLS\_2025\_10\_02("skills-2025-10-02")
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
-FAST\_MODE\_2026\_02\_01("fast-mode-2026-02-01")
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-OUTPUT\_300K\_2026\_03\_24("output-300k-2026-03-24")
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
-USER\_PROFILES\_2026\_03\_24("user-profiles-2026-03-24")
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
-ADVISOR\_TOOL\_2026\_03\_01("advisor-tool-2026-03-01")
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
-MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
-THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
 
-SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
-FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
-AGENT\_MEMORY\_2026\_07\_22("agent-memory-2026-07-22")
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
-##### ReturnsExpand Collapse
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
 
-class FileMetadata:
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
 
-
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
 
-String id
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
 
-Unique object identifier.
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
 
-The format and length of IDs may change over time.
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-LocalDateTime createdAt
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
 
-RFC 3339 datetime string representing when the file was created.
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-String filename
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
 
-Original filename of the uploaded file.
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-String mimeType
+## Returns
 
-MIME type of the file.
+- `class BetaFileMetadata:`
 
-long sizeBytes
+  - `String id`
 
-Size of the file in bytes.
+    Unique object identifier.
 
-
+    The format and length of IDs may change over time.
 
-JsonValue; type "file"constant"file"constant
+  - `LocalDateTime createdAt`
 
-Object type.
+    RFC 3339 datetime string representing when the file was created.
 
-For files, this is always `"file"`.
+    format: date-time
 
-Optional<Boolean> downloadable
+  - `String filename`
 
-Whether the file can be downloaded.
+    Original filename of the uploaded file.
 
-
+    maxLength: 500, minLength: 1
 
-Optional<[BetaFileScope](api/beta/files.md)> scope
+  - `String mimeType`
 
-The scope of this file, indicating the context in which it was created (e.g., a session).
+    MIME type of the file.
 
-String id
+    maxLength: 255, minLength: 1
 
-The ID of the scoping resource (e.g., the session ID).
+  - `long sizeBytes`
 
-JsonValue; type "session"constant"session"constant
+    Size of the file in bytes.
 
-The type of scope (e.g., `"session"`).
+    minimum: 0
 
-List Files
+  - `JsonValue type = "file"`
 
-Java
+    Object type.
 
-```shiki
+    For files, this is always `"file"`.
+
+  - `Optional<Boolean> downloadable`
+
+    Whether the file can be downloaded.
+
+  - `Optional<LocalDateTime> expiresAt`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
+
+  - `Optional<BetaFileScope> scope`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `String id`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `JsonValue type = "session"`
+
+      The type of scope (e.g., `"session"`).
+
+## Example
+
+```java
 package com.anthropic.example;
 
 import com.anthropic.client.AnthropicClient;
@@ -187,11 +205,9 @@ public final class Main {
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
@@ -202,44 +218,14 @@ Response 200
       "size_bytes": 102400,
       "type": "file",
       "downloadable": false,
+      "expires_at": "2025-05-15T18:37:24.100435Z",
       "scope": {
         "id": "id",
         "type": "session"
       }
     }
   ],
-  "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "has_more": true,
-  "last_id": "file_013Zva2CMHLNnXjNJJKqJ2EF"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "file_011CNha8iCJcU1wXNR6q4V8w",
-      "created_at": "2025-04-15T18:37:24.100435Z",
-      "filename": "document.pdf",
-      "mime_type": "application/pdf",
-      "size_bytes": 102400,
-      "type": "file",
-      "downloadable": false,
-      "scope": {
-        "id": "id",
-        "type": "session"
-      }
-    }
-  ],
-  "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "has_more": true,
-  "last_id": "file_013Zva2CMHLNnXjNJJKqJ2EF"
+  "next_page": "next_page"
 }
 ```
 

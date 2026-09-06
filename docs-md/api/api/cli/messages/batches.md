@@ -1,3706 +1,5007 @@
 # Batches
 
-Copy page
+## Create a Message Batch
 
-
+`$ ant messages:batches create`
 
-CLI
+**POST** `/v1/messages/batches`
 
-# Batches
+Send a batch of Message creation requests.
 
-##### [Create a Message Batch](api/messages/batches/create.md)
+The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created, it begins processing immediately. Batches can take up to 24 hours to complete.
 
-$ ant messages:batches create
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-POST/v1/messages/batches
+### Parameters
 
-##### [Retrieve a Message Batch](api/messages/batches/retrieve.md)
+- `--request: array of object`
 
-$ ant messages:batches retrieve
+  Body param: List of requests for prompt completion. Each is an individual request to create a Message.
 
-GET/v1/messages/batches/{message\_batch\_id}
+  maxItems: 100000, minItems: 1
 
-##### [List Message Batches](api/messages/batches/list.md)
+- `--user-profile-id: optional string`
 
-$ ant messages:batches list
+  Header param: The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
-GET/v1/messages/batches
+### Returns
 
-##### [Cancel a Message Batch](api/messages/batches/cancel.md)
+- `message_batch: object`
 
-$ ant messages:batches cancel
+  - `id: string`
 
-POST/v1/messages/batches/{message\_batch\_id}/cancel
+    Unique object identifier.
 
-##### [Delete a Message Batch](api/messages/batches/delete.md)
+    The format and length of IDs may change over time.
 
-$ ant messages:batches delete
+  - `archived_at: string`
 
-DELETE/v1/messages/batches/{message\_batch\_id}
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-##### [Retrieve Message Batch results](api/messages/batches/results.md)
+    format: date-time
 
-$ ant messages:batches results
+  - `cancel_initiated_at: string`
 
-GET/v1/messages/batches/{message\_batch\_id}/results
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-##### ModelsExpand Collapse
+    format: date-time
 
-
+  - `created_at: string`
 
-deleted\_message\_batch: object { id, type } 
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-id: string
+    format: date-time
 
-ID of the Message Batch.
+  - `ended_at: string`
 
-
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
-type: "message\_batch\_deleted"
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
-Deleted object type.
+    format: date-time
 
-For Message Batches, this is always `"message_batch_deleted"`.
+  - `expires_at: string`
 
-
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-message\_batch: object { id, archived\_at, cancel\_initiated\_at, 7 more } 
+    format: date-time
 
-
+  - `processing_status: "in_progress" or "canceling" or "ended"`
 
-id: string
+    Processing status of the Message Batch.
 
-Unique object identifier.
+    - `"in_progress"`
 
-The format and length of IDs may change over time.
+    - `"canceling"`
 
-archived\_at: string
+    - `"ended"`
 
-RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+  - `request_counts: object`
 
-cancel\_initiated\_at: string
+    Tallies requests within the Message Batch, categorized by their status.
 
-RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-created\_at: string
+    - `canceled: number`
 
-RFC 3339 datetime string representing the time at which the Message Batch was created.
+      Number of requests in the Message Batch that have been canceled.
 
-
+      This is zero until processing of the entire Message Batch has ended.
 
-ended\_at: string
+    - `errored: number`
 
-RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+      Number of requests in the Message Batch that encountered an error.
 
-Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+      This is zero until processing of the entire Message Batch has ended.
 
-expires\_at: string
+    - `expired: number`
 
-RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+      Number of requests in the Message Batch that have expired.
 
-
+      This is zero until processing of the entire Message Batch has ended.
 
-processing\_status: "in\_progress" or "canceling" or "ended"
+    - `processing: number`
 
-Processing status of the Message Batch.
+      Number of requests in the Message Batch that are processing.
 
-"in\_progress"
+    - `succeeded: number`
 
-"canceling"
+      Number of requests in the Message Batch that have completed successfully.
 
-"ended"
+      This is zero until processing of the entire Message Batch has ended.
 
-
+  - `results_url: string`
 
-request\_counts: object { canceled, errored, expired, 2 more } 
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
-Tallies requests within the Message Batch, categorized by their status.
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+  - `type: "message_batch"`
 
-
+    Object type.
 
-canceled: number
+    For Message Batches, this is always `"message_batch"`.
 
-Number of requests in the Message Batch that have been canceled.
+### Example
 
-This is zero until processing of the entire Message Batch has ended.
-
-
-
-errored: number
-
-Number of requests in the Message Batch that encountered an error.
-
-This is zero until processing of the entire Message Batch has ended.
-
-
-
-expired: number
-
-Number of requests in the Message Batch that have expired.
-
-This is zero until processing of the entire Message Batch has ended.
-
-processing: number
-
-Number of requests in the Message Batch that are processing.
-
-
-
-succeeded: number
-
-Number of requests in the Message Batch that have completed successfully.
-
-This is zero until processing of the entire Message Batch has ended.
-
-
-
-results\_url: string
-
-URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
-
-Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-
-
-type: "message\_batch"
-
-Object type.
-
-For Message Batches, this is always `"message_batch"`.
-
-
-
-message\_batch\_canceled\_result: object { type } 
-
-type: "canceled"
-
-
-
-message\_batch\_errored\_result: object { error, type } 
-
-
-
-error: object { error, request\_id, type } 
-
-
-
-error: [InvalidRequestError](api/$shared.md) { message, type }  or [AuthenticationError](api/$shared.md) { message, type }  or [BillingError](api/$shared.md) { message, type }  or 6 more
-
-
-
-invalid\_request\_error: object { message, type } 
-
-message: string
-
-type: "invalid\_request\_error"
-
-
-
-authentication\_error: object { message, type } 
-
-message: string
-
-type: "authentication\_error"
-
-
-
-billing\_error: object { message, type } 
-
-message: string
-
-type: "billing\_error"
-
-
-
-permission\_error: object { message, type } 
-
-message: string
-
-type: "permission\_error"
-
-
-
-not\_found\_error: object { message, type } 
-
-message: string
-
-type: "not\_found\_error"
-
-
-
-rate\_limit\_error: object { message, type } 
-
-message: string
-
-type: "rate\_limit\_error"
-
-
-
-gateway\_timeout\_error: object { message, type } 
-
-message: string
-
-type: "timeout\_error"
-
-
-
-api\_error\_object: object { message, type } 
-
-message: string
-
-type: "api\_error"
-
-
-
-overloaded\_error: object { message, type } 
-
-message: string
-
-type: "overloaded\_error"
-
-request\_id: string
-
-type: "error"
-
-type: "errored"
-
-
-
-message\_batch\_expired\_result: object { type } 
-
-type: "expired"
-
-
-
-message\_batch\_individual\_response: object { custom\_id, result } 
-
-This is a single line in the response `.jsonl` file and does not represent the response as a whole.
-
-
-
-custom\_id: string
-
-Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
-
-Must be unique for each request within the Message Batch.
-
-
-
-result: [MessageBatchSucceededResult](api/messages/batches.md) { message, type }  or [MessageBatchErroredResult](api/messages/batches.md) { error, type }  or [MessageBatchCanceledResult](api/messages/batches.md) { type }  or [MessageBatchExpiredResult](api/messages/batches.md) { type } 
-
-Processing result for this request.
-
-Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
-
-
-
-message\_batch\_succeeded\_result: object { message, type } 
-
-
-
-message: object { id, container, content, 7 more } 
-
-
-
-id: string
-
-Unique object identifier.
-
-The format and length of IDs may change over time.
-
-
-
-container: object { id, expires\_at } 
-
-Information about the container used in the request (for the code execution tool)
-
-id: string
-
-Identifier for the container used in this request
-
-expires\_at: string
-
-The time at which the container will expire.
-
-
-
-content: array of [ContentBlock](api/messages.md)
-
-Content generated by the model.
-
-This is an array of content blocks, each of which has a `type` that determines its shape.
-
-Example:
-
-```shiki
-[{"type": "text", "text": "Hi, I'm Claude."}]
+```bash
+ant messages:batches create \
+  --api-key my-anthropic-api-key \
+  --request '{custom_id: my-custom-id-1, params: {max_tokens: 1024, messages: [{content: [{text: x, type: text}], role: user}], model: claude-opus-5}}'
 ```
 
-
+#### Response (200)
 
-If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
-
-For example, if the input `messages` were:
-
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("}
-]
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
 ```
 
-
+## Retrieve a Message Batch
 
-Then the response `content` might be:
+`$ ant messages:batches retrieve`
 
-```shiki
-[{"type": "text", "text": "B)"}]
+**GET** `/v1/messages/batches/{message_batch_id}`
+
+This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
+
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+
+### Parameters
+
+- `--message-batch-id: string`
+
+  ID of the Message Batch.
+
+### Returns
+
+- `message_batch: object`
+
+  - `id: string`
+
+    Unique object identifier.
+
+    The format and length of IDs may change over time.
+
+  - `archived_at: string`
+
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+
+    format: date-time
+
+  - `cancel_initiated_at: string`
+
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+
+    format: date-time
+
+  - `created_at: string`
+
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+    format: date-time
+
+  - `ended_at: string`
+
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+
+    format: date-time
+
+  - `expires_at: string`
+
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+    format: date-time
+
+  - `processing_status: "in_progress" or "canceling" or "ended"`
+
+    Processing status of the Message Batch.
+
+    - `"in_progress"`
+
+    - `"canceling"`
+
+    - `"ended"`
+
+  - `request_counts: object`
+
+    Tallies requests within the Message Batch, categorized by their status.
+
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+
+    - `canceled: number`
+
+      Number of requests in the Message Batch that have been canceled.
+
+      This is zero until processing of the entire Message Batch has ended.
+
+    - `errored: number`
+
+      Number of requests in the Message Batch that encountered an error.
+
+      This is zero until processing of the entire Message Batch has ended.
+
+    - `expired: number`
+
+      Number of requests in the Message Batch that have expired.
+
+      This is zero until processing of the entire Message Batch has ended.
+
+    - `processing: number`
+
+      Number of requests in the Message Batch that are processing.
+
+    - `succeeded: number`
+
+      Number of requests in the Message Batch that have completed successfully.
+
+      This is zero until processing of the entire Message Batch has ended.
+
+  - `results_url: string`
+
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
+
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+### Example
+
+```bash
+ant messages:batches retrieve \
+  --api-key my-anthropic-api-key \
+  --message-batch-id message_batch_id
 ```
 
-
-
-
-
-text\_block: object { citations, text, type } 
-
-
-
-citations: array of [TextCitation](api/messages.md)
-
-Citations supporting the text block.
-
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-
-
-citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
-
-cited\_text: string
-
-document\_index: number
-
-document\_title: string
-
-end\_char\_index: number
-
-file\_id: string
-
-start\_char\_index: number
-
-type: "char\_location"
-
-
-
-citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
-
-cited\_text: string
-
-document\_index: number
-
-document\_title: string
-
-end\_page\_number: number
-
-file\_id: string
-
-start\_page\_number: number
-
-type: "page\_location"
-
-
-
-citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
-
-
-
-cited\_text: string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-document\_index: number
-
-document\_title: string
-
-
-
-end\_block\_index: number
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-file\_id: string
-
-start\_block\_index: number
-
-0-based index of the first cited block in the source's `content` array.
-
-type: "content\_block\_location"
-
-
-
-citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
-
-cited\_text: string
-
-encrypted\_index: string
-
-title: string
-
-type: "web\_search\_result\_location"
-
-url: string
-
-
-
-citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
-
-
-
-cited\_text: string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-end\_block\_index: number
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-search\_result\_index: number
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-source: string
-
-start\_block\_index: number
-
-0-based index of the first cited block in the source's `content` array.
-
-title: string
-
-type: "search\_result\_location"
-
-text: string
-
-type: "text"
-
-
-
-thinking\_block: object { signature, thinking, type } 
-
-signature: string
-
-thinking: string
-
-type: "thinking"
-
-
-
-redacted\_thinking\_block: object { data, type } 
-
-data: string
-
-type: "redacted\_thinking"
-
-
-
-tool\_use\_block: object { id, caller, input, 2 more } 
-
-id: string
-
-
-
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
-
-Tool invocation directly from the model.
-
-
-
-direct\_caller: object { type } 
-
-Tool invocation directly from the model.
-
-type: "direct"
-
-
-
-server\_tool\_caller: object { tool\_id, type } 
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: string
-
-type: "code\_execution\_20250825"
-
-
-
-server\_tool\_caller\_20260120: object { tool\_id, type } 
-
-tool\_id: string
-
-type: "code\_execution\_20260120"
-
-input: map[unknown]
-
-name: string
-
-type: "tool\_use"
-
-
-
-server\_tool\_use\_block: object { id, caller, input, 2 more } 
-
-id: string
-
-
-
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
-
-Tool invocation directly from the model.
-
-
-
-direct\_caller: object { type } 
-
-Tool invocation directly from the model.
-
-type: "direct"
-
-
-
-server\_tool\_caller: object { tool\_id, type } 
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: string
-
-type: "code\_execution\_20250825"
-
-
-
-server\_tool\_caller\_20260120: object { tool\_id, type } 
-
-tool\_id: string
-
-type: "code\_execution\_20260120"
-
-input: map[unknown]
-
-
-
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
-
-"web\_search"
-
-"web\_fetch"
-
-"code\_execution"
-
-"bash\_code\_execution"
-
-"text\_editor\_code\_execution"
-
-"tool\_search\_tool\_regex"
-
-"tool\_search\_tool\_bm25"
-
-type: "server\_tool\_use"
-
-
-
-web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
-
-
-
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
-
-Tool invocation directly from the model.
-
-
-
-direct\_caller: object { type } 
-
-Tool invocation directly from the model.
-
-type: "direct"
-
-
-
-server\_tool\_caller: object { tool\_id, type } 
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: string
-
-type: "code\_execution\_20250825"
-
-
-
-server\_tool\_caller\_20260120: object { tool\_id, type } 
-
-tool\_id: string
-
-type: "code\_execution\_20260120"
-
-
-
-content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
-
-
-
-web\_search\_tool\_result\_error: object { error\_code, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"max\_uses\_exceeded"
-
-"too\_many\_requests"
-
-"query\_too\_long"
-
-"request\_too\_large"
-
-type: "web\_search\_tool\_result\_error"
-
-
-
-union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
-
-encrypted\_content: string
-
-page\_age: string
-
-title: string
-
-type: "web\_search\_result"
-
-url: string
-
-tool\_use\_id: string
-
-type: "web\_search\_tool\_result"
-
-
-
-web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
-
-
-
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
-
-Tool invocation directly from the model.
-
-
-
-direct\_caller: object { type } 
-
-Tool invocation directly from the model.
-
-type: "direct"
-
-
-
-server\_tool\_caller: object { tool\_id, type } 
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: string
-
-type: "code\_execution\_20250825"
-
-
-
-server\_tool\_caller\_20260120: object { tool\_id, type } 
-
-tool\_id: string
-
-type: "code\_execution\_20260120"
-
-
-
-content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url } 
-
-
-
-web\_fetch\_tool\_result\_error\_block: object { error\_code, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
-
-"invalid\_tool\_input"
-
-"url\_too\_long"
-
-"url\_not\_allowed"
-
-"url\_not\_in\_prior\_context"
-
-"url\_not\_accessible"
-
-"unsupported\_content\_type"
-
-"too\_many\_requests"
-
-"max\_uses\_exceeded"
-
-"unavailable"
-
-type: "web\_fetch\_tool\_result\_error"
-
-
-
-web\_fetch\_block: object { content, retrieved\_at, type, url } 
-
-
-
-content: object { citations, source, title, type } 
-
-
-
-citations: object { enabled } 
-
-Citation configuration for the document
-
-enabled: boolean
-
-
-
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type } 
-
-
-
-base64\_pdf\_source: object { data, media\_type, type } 
-
-data: string
-
-media\_type: "application/pdf"
-
-type: "base64"
-
-
-
-plain\_text\_source: object { data, media\_type, type } 
-
-data: string
-
-media\_type: "text/plain"
-
-type: "text"
-
-title: string
-
-The title of the document
-
-type: "document"
-
-retrieved\_at: string
-
-ISO 8601 timestamp when the content was retrieved
-
-type: "web\_fetch\_result"
-
-url: string
-
-Fetched content URL
-
-tool\_use\_id: string
-
-type: "web\_fetch\_tool\_result"
-
-
-
-code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
-
-
-
-content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-
-
-code\_execution\_tool\_result\_error: object { error\_code, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-
-
-code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
-
-
-
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-
-
-encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more } 
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-
-
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-encrypted\_stdout: string
-
-return\_code: number
-
-stderr: string
-
-type: "encrypted\_code\_execution\_result"
-
-tool\_use\_id: string
-
-type: "code\_execution\_tool\_result"
-
-
-
-bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
-
-
-
-content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more } 
-
-
-
-bash\_code\_execution\_tool\_result\_error: object { error\_code, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-"output\_file\_too\_large"
-
-type: "bash\_code\_execution\_tool\_result\_error"
-
-
-
-bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
-
-
-
-content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
-
-file\_id: string
-
-type: "bash\_code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "bash\_code\_execution\_result"
-
-tool\_use\_id: string
-
-type: "bash\_code\_execution\_tool\_result"
-
-
-
-text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
-
-
-
-content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more } 
-
-
-
-text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-"file\_not\_found"
-
-error\_message: string
-
-type: "text\_editor\_code\_execution\_tool\_result\_error"
-
-
-
-text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more } 
-
-content: string
-
-
-
-file\_type: "text" or "image" or "pdf"
-
-"text"
-
-"image"
-
-"pdf"
-
-num\_lines: number
-
-start\_line: number
-
-total\_lines: number
-
-type: "text\_editor\_code\_execution\_view\_result"
-
-
-
-text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type } 
-
-is\_file\_update: boolean
-
-type: "text\_editor\_code\_execution\_create\_result"
-
-
-
-text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more } 
-
-lines: array of string
-
-new\_lines: number
-
-new\_start: number
-
-old\_lines: number
-
-old\_start: number
-
-type: "text\_editor\_code\_execution\_str\_replace\_result"
-
-tool\_use\_id: string
-
-type: "text\_editor\_code\_execution\_tool\_result"
-
-
-
-tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type } 
-
-
-
-content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type } 
-
-
-
-tool\_search\_tool\_result\_error: object { error\_code, error\_message, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-error\_message: string
-
-type: "tool\_search\_tool\_result\_error"
-
-
-
-tool\_search\_tool\_search\_result\_block: object { tool\_references, type } 
-
-
-
-tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type } 
-
-tool\_name: string
-
-type: "tool\_reference"
-
-type: "tool\_search\_tool\_search\_result"
-
-tool\_use\_id: string
-
-type: "tool\_search\_tool\_result"
-
-
-
-container\_upload\_block: object { file\_id, type } 
-
-Response model for a file uploaded to the container.
-
-file\_id: string
-
-type: "container\_upload"
-
-
-
-model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-
-
-role: "assistant"
-
-Conversational role of the generated message.
-
-This will always be `"assistant"`.
-
-
-
-stop\_details: object { category, explanation, type } 
-
-Structured information about a refusal.
-
-
-
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
-
-The policy category that triggered a refusal.
-
-"cyber"
-
-"bio"
-
-"frontier\_llm"
-
-"reasoning\_extraction"
-
-
-
-explanation: string
-
-Human-readable explanation of the refusal.
-
-This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-type: "refusal"
-
-
-
-stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
-
-The reason that we stopped.
-
-This may be one the following values:
-
-- `"end_turn"`: the model reached a natural stopping point
-- `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
-- `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
-- `"tool_use"`: the model invoked one or more tools
-- `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
-- `"refusal"`: when streaming classifiers intervene to handle potential policy violations
-
-In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
-
-"end\_turn"
-
-"max\_tokens"
-
-"stop\_sequence"
-
-"tool\_use"
-
-"pause\_turn"
-
-"refusal"
-
-
-
-stop\_sequence: string
-
-Which custom stop sequence was generated, if any.
-
-This value will be a non-null string if one of your custom stop sequences was generated.
-
-
-
-type: "message"
-
-Object type.
-
-For Messages, this is always `"message"`.
-
-
-
-usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more } 
-
-Billing and rate-limit usage.
-
-Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
-
-Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
-
-For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
-
-Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
-
-
-
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: number
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: number
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: number
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: number
-
-The number of input tokens read from the cache.
-
-inference\_geo: string
-
-The geographic region where inference was performed for this request.
-
-input\_tokens: number
-
-The number of input tokens which were used.
-
-output\_tokens: number
-
-The number of output tokens which were used.
-
-
-
-output\_tokens\_details: object { thinking\_tokens } 
-
-Breakdown of output tokens by category.
-
-`output_tokens` remains the inclusive, authoritative total used for billing.
-This object provides a read-only decomposition for observability — for example,
-how many of the billed output tokens were spent on internal reasoning that may
-have been summarized before being returned to you.
-
-
-
-thinking\_tokens: number
-
-Number of output tokens the model generated as internal reasoning, including
-the thinking-block delimiter tokens.
-
-Reflects the raw reasoning the model produced, not the (possibly shorter)
-summarized thinking text returned in the response body. Computed by
-re-tokenizing the raw reasoning text, so it may differ from the model's exact
-generation count by a small number of tokens. Always ≤ `output_tokens`;
-`output_tokens - thinking_tokens` approximates the non-reasoning output.
-
-
-
-server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests } 
-
-The number of server tool requests.
-
-web\_fetch\_requests: number
-
-The number of web fetch tool requests.
-
-web\_search\_requests: number
-
-The number of web search tool requests.
-
-
-
-service\_tier: "standard" or "priority" or "batch"
-
-If the request used the priority, standard, or batch tier.
-
-"standard"
-
-"priority"
-
-"batch"
-
-type: "succeeded"
-
-
-
-message\_batch\_errored\_result: object { error, type } 
-
-
-
-error: object { error, request\_id, type } 
-
-
-
-error: [InvalidRequestError](api/$shared.md) { message, type }  or [AuthenticationError](api/$shared.md) { message, type }  or [BillingError](api/$shared.md) { message, type }  or 6 more
-
-
-
-invalid\_request\_error: object { message, type } 
-
-message: string
-
-type: "invalid\_request\_error"
-
-
-
-authentication\_error: object { message, type } 
-
-message: string
-
-type: "authentication\_error"
-
-
-
-billing\_error: object { message, type } 
-
-message: string
-
-type: "billing\_error"
-
-
-
-permission\_error: object { message, type } 
-
-message: string
-
-type: "permission\_error"
-
-
-
-not\_found\_error: object { message, type } 
-
-message: string
-
-type: "not\_found\_error"
-
-
-
-rate\_limit\_error: object { message, type } 
-
-message: string
-
-type: "rate\_limit\_error"
-
-
-
-gateway\_timeout\_error: object { message, type } 
-
-message: string
-
-type: "timeout\_error"
-
-
-
-api\_error\_object: object { message, type } 
-
-message: string
-
-type: "api\_error"
-
-
-
-overloaded\_error: object { message, type } 
-
-message: string
-
-type: "overloaded\_error"
-
-request\_id: string
-
-type: "error"
-
-type: "errored"
-
-
-
-message\_batch\_canceled\_result: object { type } 
-
-type: "canceled"
-
-
-
-message\_batch\_expired\_result: object { type } 
-
-type: "expired"
-
-
-
-message\_batch\_request\_counts: object { canceled, errored, expired, 2 more } 
-
-
-
-canceled: number
-
-Number of requests in the Message Batch that have been canceled.
-
-This is zero until processing of the entire Message Batch has ended.
-
-
-
-errored: number
-
-Number of requests in the Message Batch that encountered an error.
-
-This is zero until processing of the entire Message Batch has ended.
-
-
-
-expired: number
-
-Number of requests in the Message Batch that have expired.
-
-This is zero until processing of the entire Message Batch has ended.
-
-processing: number
-
-Number of requests in the Message Batch that are processing.
-
-
-
-succeeded: number
-
-Number of requests in the Message Batch that have completed successfully.
-
-This is zero until processing of the entire Message Batch has ended.
-
-
-
-message\_batch\_result: [MessageBatchSucceededResult](api/messages/batches.md) { message, type }  or [MessageBatchErroredResult](api/messages/batches.md) { error, type }  or [MessageBatchCanceledResult](api/messages/batches.md) { type }  or [MessageBatchExpiredResult](api/messages/batches.md) { type } 
-
-Processing result for this request.
-
-Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
-
-
-
-message\_batch\_succeeded\_result: object { message, type } 
-
-
-
-message: object { id, container, content, 7 more } 
-
-
-
-id: string
-
-Unique object identifier.
-
-The format and length of IDs may change over time.
-
-
-
-container: object { id, expires\_at } 
-
-Information about the container used in the request (for the code execution tool)
-
-id: string
-
-Identifier for the container used in this request
-
-expires\_at: string
-
-The time at which the container will expire.
-
-
-
-content: array of [ContentBlock](api/messages.md)
-
-Content generated by the model.
-
-This is an array of content blocks, each of which has a `type` that determines its shape.
-
-Example:
-
-```shiki
-[{"type": "text", "text": "Hi, I'm Claude."}]
+#### Response (200)
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
 ```
 
-
+## List Message Batches
 
-If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
+`$ ant messages:batches list`
 
-For example, if the input `messages` were:
+**GET** `/v1/messages/batches`
 
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("}
-]
+List all Message Batches within a Workspace. Most recently created batches are returned first.
+
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+
+### Parameters
+
+- `--after-id: optional string`
+
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+
+- `--before-id: optional string`
+
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+
+- `--limit: optional number`
+
+  Number of items to return per page.
+
+  Defaults to `20`. Ranges from `1` to `1000`.
+
+  maximum: 1000, minimum: 1
+
+### Returns
+
+- `ListResponse_MessageBatch_: object`
+
+  - `data: array of MessageBatch`
+
+    - `id: string`
+
+      Unique object identifier.
+
+      The format and length of IDs may change over time.
+
+    - `archived_at: string`
+
+      RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+
+      format: date-time
+
+    - `cancel_initiated_at: string`
+
+      RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+
+      format: date-time
+
+    - `created_at: string`
+
+      RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+      format: date-time
+
+    - `ended_at: string`
+
+      RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+
+      Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+
+      format: date-time
+
+    - `expires_at: string`
+
+      RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+      format: date-time
+
+    - `processing_status: "in_progress" or "canceling" or "ended"`
+
+      Processing status of the Message Batch.
+
+      - `"in_progress"`
+
+      - `"canceling"`
+
+      - `"ended"`
+
+    - `request_counts: object`
+
+      Tallies requests within the Message Batch, categorized by their status.
+
+      Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+
+      - `canceled: number`
+
+        Number of requests in the Message Batch that have been canceled.
+
+        This is zero until processing of the entire Message Batch has ended.
+
+      - `errored: number`
+
+        Number of requests in the Message Batch that encountered an error.
+
+        This is zero until processing of the entire Message Batch has ended.
+
+      - `expired: number`
+
+        Number of requests in the Message Batch that have expired.
+
+        This is zero until processing of the entire Message Batch has ended.
+
+      - `processing: number`
+
+        Number of requests in the Message Batch that are processing.
+
+      - `succeeded: number`
+
+        Number of requests in the Message Batch that have completed successfully.
+
+        This is zero until processing of the entire Message Batch has ended.
+
+    - `results_url: string`
+
+      URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
+
+      Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+
+    - `type: "message_batch"`
+
+      Object type.
+
+      For Message Batches, this is always `"message_batch"`.
+
+  - `first_id: string`
+
+    First ID in the `data` list. Can be used as the `before_id` for the previous page.
+
+  - `has_more: boolean`
+
+    Indicates if there are more results in the requested page direction.
+
+  - `last_id: string`
+
+    Last ID in the `data` list. Can be used as the `after_id` for the next page.
+
+### Example
+
+```bash
+ant messages:batches list \
+  --api-key my-anthropic-api-key
 ```
 
-
+#### Response (200)
 
-Then the response `content` might be:
-
-```shiki
-[{"type": "text", "text": "B)"}]
+```json
+{
+  "data": [
+    {
+      "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+      "archived_at": "2024-08-20T18:37:24.100435Z",
+      "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+      "created_at": "2024-08-20T18:37:24.100435Z",
+      "ended_at": "2024-08-20T18:37:24.100435Z",
+      "expires_at": "2024-08-20T18:37:24.100435Z",
+      "processing_status": "in_progress",
+      "request_counts": {
+        "canceled": 10,
+        "errored": 30,
+        "expired": 10,
+        "processing": 100,
+        "succeeded": 50
+      },
+      "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+      "type": "message_batch"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
 ```
 
-
+## Cancel a Message Batch
 
-
+`$ ant messages:batches cancel`
 
-text\_block: object { citations, text, type } 
+**POST** `/v1/messages/batches/{message_batch_id}/cancel`
 
-
+Batches may be canceled any time before processing ends. Once cancellation is initiated, the batch enters a `canceling` state, at which time the system may complete any in-progress, non-interruptible requests before finalizing cancellation.
 
-citations: array of [TextCitation](api/messages.md)
+The number of canceled requests is specified in `request_counts`. To determine which requests were canceled, check the individual results within the batch. Note that cancellation may not result in any canceled requests if they were non-interruptible.
 
-Citations supporting the text block.
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+### Parameters
 
-
+- `--message-batch-id: string`
 
-citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+  ID of the Message Batch.
 
-cited\_text: string
+### Returns
 
-document\_index: number
+- `message_batch: object`
 
-document\_title: string
+  - `id: string`
 
-end\_char\_index: number
+    Unique object identifier.
 
-file\_id: string
+    The format and length of IDs may change over time.
 
-start\_char\_index: number
+  - `archived_at: string`
 
-type: "char\_location"
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-
+    format: date-time
 
-citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+  - `cancel_initiated_at: string`
 
-cited\_text: string
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-document\_index: number
+    format: date-time
 
-document\_title: string
+  - `created_at: string`
 
-end\_page\_number: number
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-file\_id: string
+    format: date-time
 
-start\_page\_number: number
+  - `ended_at: string`
 
-type: "page\_location"
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
-
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
-citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+    format: date-time
 
-
+  - `expires_at: string`
 
-cited\_text: string
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-The full text of the cited block range, concatenated.
+    format: date-time
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+  - `processing_status: "in_progress" or "canceling" or "ended"`
 
-document\_index: number
+    Processing status of the Message Batch.
 
-document\_title: string
+    - `"in_progress"`
 
-
+    - `"canceling"`
 
-end\_block\_index: number
+    - `"ended"`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+  - `request_counts: object`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+    Tallies requests within the Message Batch, categorized by their status.
 
-file\_id: string
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-start\_block\_index: number
+    - `canceled: number`
 
-0-based index of the first cited block in the source's `content` array.
+      Number of requests in the Message Batch that have been canceled.
 
-type: "content\_block\_location"
+      This is zero until processing of the entire Message Batch has ended.
 
-
+    - `errored: number`
 
-citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
+      Number of requests in the Message Batch that encountered an error.
 
-cited\_text: string
+      This is zero until processing of the entire Message Batch has ended.
 
-encrypted\_index: string
+    - `expired: number`
 
-title: string
+      Number of requests in the Message Batch that have expired.
 
-type: "web\_search\_result\_location"
+      This is zero until processing of the entire Message Batch has ended.
 
-url: string
+    - `processing: number`
 
-
+      Number of requests in the Message Batch that are processing.
 
-citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+    - `succeeded: number`
 
-
+      Number of requests in the Message Batch that have completed successfully.
 
-cited\_text: string
+      This is zero until processing of the entire Message Batch has ended.
 
-The full text of the cited block range, concatenated.
+  - `results_url: string`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
-
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-end\_block\_index: number
+  - `type: "message_batch"`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+    Object type.
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+    For Message Batches, this is always `"message_batch"`.
 
-
+### Example
 
-search\_result\_index: number
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-source: string
-
-start\_block\_index: number
-
-0-based index of the first cited block in the source's `content` array.
-
-title: string
-
-type: "search\_result\_location"
-
-text: string
-
-type: "text"
-
-
-
-thinking\_block: object { signature, thinking, type } 
-
-signature: string
-
-thinking: string
-
-type: "thinking"
-
-
-
-redacted\_thinking\_block: object { data, type } 
-
-data: string
-
-type: "redacted\_thinking"
-
-
-
-tool\_use\_block: object { id, caller, input, 2 more } 
-
-id: string
-
-
-
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
-
-Tool invocation directly from the model.
-
-
-
-direct\_caller: object { type } 
-
-Tool invocation directly from the model.
-
-type: "direct"
-
-
-
-server\_tool\_caller: object { tool\_id, type } 
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: string
-
-type: "code\_execution\_20250825"
-
-
-
-server\_tool\_caller\_20260120: object { tool\_id, type } 
-
-tool\_id: string
-
-type: "code\_execution\_20260120"
-
-input: map[unknown]
-
-name: string
-
-type: "tool\_use"
-
-
-
-server\_tool\_use\_block: object { id, caller, input, 2 more } 
-
-id: string
-
-
-
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
-
-Tool invocation directly from the model.
-
-
-
-direct\_caller: object { type } 
-
-Tool invocation directly from the model.
-
-type: "direct"
-
-
-
-server\_tool\_caller: object { tool\_id, type } 
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: string
-
-type: "code\_execution\_20250825"
-
-
-
-server\_tool\_caller\_20260120: object { tool\_id, type } 
-
-tool\_id: string
-
-type: "code\_execution\_20260120"
-
-input: map[unknown]
-
-
-
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
-
-"web\_search"
-
-"web\_fetch"
-
-"code\_execution"
-
-"bash\_code\_execution"
-
-"text\_editor\_code\_execution"
-
-"tool\_search\_tool\_regex"
-
-"tool\_search\_tool\_bm25"
-
-type: "server\_tool\_use"
-
-
-
-web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
-
-
-
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
-
-Tool invocation directly from the model.
-
-
-
-direct\_caller: object { type } 
-
-Tool invocation directly from the model.
-
-type: "direct"
-
-
-
-server\_tool\_caller: object { tool\_id, type } 
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: string
-
-type: "code\_execution\_20250825"
-
-
-
-server\_tool\_caller\_20260120: object { tool\_id, type } 
-
-tool\_id: string
-
-type: "code\_execution\_20260120"
-
-
-
-content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
-
-
-
-web\_search\_tool\_result\_error: object { error\_code, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"max\_uses\_exceeded"
-
-"too\_many\_requests"
-
-"query\_too\_long"
-
-"request\_too\_large"
-
-type: "web\_search\_tool\_result\_error"
-
-
-
-union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
-
-encrypted\_content: string
-
-page\_age: string
-
-title: string
-
-type: "web\_search\_result"
-
-url: string
-
-tool\_use\_id: string
-
-type: "web\_search\_tool\_result"
-
-
-
-web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
-
-
-
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
-
-Tool invocation directly from the model.
-
-
-
-direct\_caller: object { type } 
-
-Tool invocation directly from the model.
-
-type: "direct"
-
-
-
-server\_tool\_caller: object { tool\_id, type } 
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: string
-
-type: "code\_execution\_20250825"
-
-
-
-server\_tool\_caller\_20260120: object { tool\_id, type } 
-
-tool\_id: string
-
-type: "code\_execution\_20260120"
-
-
-
-content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url } 
-
-
-
-web\_fetch\_tool\_result\_error\_block: object { error\_code, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
-
-"invalid\_tool\_input"
-
-"url\_too\_long"
-
-"url\_not\_allowed"
-
-"url\_not\_in\_prior\_context"
-
-"url\_not\_accessible"
-
-"unsupported\_content\_type"
-
-"too\_many\_requests"
-
-"max\_uses\_exceeded"
-
-"unavailable"
-
-type: "web\_fetch\_tool\_result\_error"
-
-
-
-web\_fetch\_block: object { content, retrieved\_at, type, url } 
-
-
-
-content: object { citations, source, title, type } 
-
-
-
-citations: object { enabled } 
-
-Citation configuration for the document
-
-enabled: boolean
-
-
-
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type } 
-
-
-
-base64\_pdf\_source: object { data, media\_type, type } 
-
-data: string
-
-media\_type: "application/pdf"
-
-type: "base64"
-
-
-
-plain\_text\_source: object { data, media\_type, type } 
-
-data: string
-
-media\_type: "text/plain"
-
-type: "text"
-
-title: string
-
-The title of the document
-
-type: "document"
-
-retrieved\_at: string
-
-ISO 8601 timestamp when the content was retrieved
-
-type: "web\_fetch\_result"
-
-url: string
-
-Fetched content URL
-
-tool\_use\_id: string
-
-type: "web\_fetch\_tool\_result"
-
-
-
-code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
-
-
-
-content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-
-
-code\_execution\_tool\_result\_error: object { error\_code, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-type: "code\_execution\_tool\_result\_error"
-
-
-
-code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
-
-
-
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "code\_execution\_result"
-
-
-
-encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more } 
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-
-
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
-
-file\_id: string
-
-type: "code\_execution\_output"
-
-encrypted\_stdout: string
-
-return\_code: number
-
-stderr: string
-
-type: "encrypted\_code\_execution\_result"
-
-tool\_use\_id: string
-
-type: "code\_execution\_tool\_result"
-
-
-
-bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
-
-
-
-content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more } 
-
-
-
-bash\_code\_execution\_tool\_result\_error: object { error\_code, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-"output\_file\_too\_large"
-
-type: "bash\_code\_execution\_tool\_result\_error"
-
-
-
-bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
-
-
-
-content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
-
-file\_id: string
-
-type: "bash\_code\_execution\_output"
-
-return\_code: number
-
-stderr: string
-
-stdout: string
-
-type: "bash\_code\_execution\_result"
-
-tool\_use\_id: string
-
-type: "bash\_code\_execution\_tool\_result"
-
-
-
-text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
-
-
-
-content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more } 
-
-
-
-text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-"file\_not\_found"
-
-error\_message: string
-
-type: "text\_editor\_code\_execution\_tool\_result\_error"
-
-
-
-text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more } 
-
-content: string
-
-
-
-file\_type: "text" or "image" or "pdf"
-
-"text"
-
-"image"
-
-"pdf"
-
-num\_lines: number
-
-start\_line: number
-
-total\_lines: number
-
-type: "text\_editor\_code\_execution\_view\_result"
-
-
-
-text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type } 
-
-is\_file\_update: boolean
-
-type: "text\_editor\_code\_execution\_create\_result"
-
-
-
-text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more } 
-
-lines: array of string
-
-new\_lines: number
-
-new\_start: number
-
-old\_lines: number
-
-old\_start: number
-
-type: "text\_editor\_code\_execution\_str\_replace\_result"
-
-tool\_use\_id: string
-
-type: "text\_editor\_code\_execution\_tool\_result"
-
-
-
-tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type } 
-
-
-
-content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type } 
-
-
-
-tool\_search\_tool\_result\_error: object { error\_code, error\_message, type } 
-
-
-
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-error\_message: string
-
-type: "tool\_search\_tool\_result\_error"
-
-
-
-tool\_search\_tool\_search\_result\_block: object { tool\_references, type } 
-
-
-
-tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type } 
-
-tool\_name: string
-
-type: "tool\_reference"
-
-type: "tool\_search\_tool\_search\_result"
-
-tool\_use\_id: string
-
-type: "tool\_search\_tool\_result"
-
-
-
-container\_upload\_block: object { file\_id, type } 
-
-Response model for a file uploaded to the container.
-
-file\_id: string
-
-type: "container\_upload"
-
-
-
-model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-
-
-role: "assistant"
-
-Conversational role of the generated message.
-
-This will always be `"assistant"`.
-
-
-
-stop\_details: object { category, explanation, type } 
-
-Structured information about a refusal.
-
-
-
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
-
-The policy category that triggered a refusal.
-
-"cyber"
-
-"bio"
-
-"frontier\_llm"
-
-"reasoning\_extraction"
-
-
-
-explanation: string
-
-Human-readable explanation of the refusal.
-
-This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-type: "refusal"
-
-
-
-stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
-
-The reason that we stopped.
-
-This may be one the following values:
-
-- `"end_turn"`: the model reached a natural stopping point
-- `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
-- `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
-- `"tool_use"`: the model invoked one or more tools
-- `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
-- `"refusal"`: when streaming classifiers intervene to handle potential policy violations
-
-In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
-
-"end\_turn"
-
-"max\_tokens"
-
-"stop\_sequence"
-
-"tool\_use"
-
-"pause\_turn"
-
-"refusal"
-
-
-
-stop\_sequence: string
-
-Which custom stop sequence was generated, if any.
-
-This value will be a non-null string if one of your custom stop sequences was generated.
-
-
-
-type: "message"
-
-Object type.
-
-For Messages, this is always `"message"`.
-
-
-
-usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more } 
-
-Billing and rate-limit usage.
-
-Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
-
-Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
-
-For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
-
-Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
-
-
-
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
-
-Breakdown of cached tokens by TTL
-
-ephemeral\_1h\_input\_tokens: number
-
-The number of input tokens used to create the 1 hour cache entry.
-
-ephemeral\_5m\_input\_tokens: number
-
-The number of input tokens used to create the 5 minute cache entry.
-
-cache\_creation\_input\_tokens: number
-
-The number of input tokens used to create the cache entry.
-
-cache\_read\_input\_tokens: number
-
-The number of input tokens read from the cache.
-
-inference\_geo: string
-
-The geographic region where inference was performed for this request.
-
-input\_tokens: number
-
-The number of input tokens which were used.
-
-output\_tokens: number
-
-The number of output tokens which were used.
-
-
-
-output\_tokens\_details: object { thinking\_tokens } 
-
-Breakdown of output tokens by category.
-
-`output_tokens` remains the inclusive, authoritative total used for billing.
-This object provides a read-only decomposition for observability — for example,
-how many of the billed output tokens were spent on internal reasoning that may
-have been summarized before being returned to you.
-
-
-
-thinking\_tokens: number
-
-Number of output tokens the model generated as internal reasoning, including
-the thinking-block delimiter tokens.
-
-Reflects the raw reasoning the model produced, not the (possibly shorter)
-summarized thinking text returned in the response body. Computed by
-re-tokenizing the raw reasoning text, so it may differ from the model's exact
-generation count by a small number of tokens. Always ≤ `output_tokens`;
-`output_tokens - thinking_tokens` approximates the non-reasoning output.
-
-
-
-server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests } 
-
-The number of server tool requests.
-
-web\_fetch\_requests: number
-
-The number of web fetch tool requests.
-
-web\_search\_requests: number
-
-The number of web search tool requests.
-
-
-
-service\_tier: "standard" or "priority" or "batch"
-
-If the request used the priority, standard, or batch tier.
-
-"standard"
-
-"priority"
-
-"batch"
-
-type: "succeeded"
-
-
-
-message\_batch\_errored\_result: object { error, type } 
-
-
-
-error: object { error, request\_id, type } 
-
-
-
-error: [InvalidRequestError](api/$shared.md) { message, type }  or [AuthenticationError](api/$shared.md) { message, type }  or [BillingError](api/$shared.md) { message, type }  or 6 more
-
-
-
-invalid\_request\_error: object { message, type } 
-
-message: string
-
-type: "invalid\_request\_error"
-
-
-
-authentication\_error: object { message, type } 
-
-message: string
-
-type: "authentication\_error"
-
-
-
-billing\_error: object { message, type } 
-
-message: string
-
-type: "billing\_error"
-
-
-
-permission\_error: object { message, type } 
-
-message: string
-
-type: "permission\_error"
-
-
-
-not\_found\_error: object { message, type } 
-
-message: string
-
-type: "not\_found\_error"
-
-
-
-rate\_limit\_error: object { message, type } 
-
-message: string
-
-type: "rate\_limit\_error"
-
-
-
-gateway\_timeout\_error: object { message, type } 
-
-message: string
-
-type: "timeout\_error"
-
-
-
-api\_error\_object: object { message, type } 
-
-message: string
-
-type: "api\_error"
-
-
-
-overloaded\_error: object { message, type } 
-
-message: string
-
-type: "overloaded\_error"
-
-request\_id: string
-
-type: "error"
-
-type: "errored"
-
-
-
-message\_batch\_canceled\_result: object { type } 
-
-type: "canceled"
-
-
-
-message\_batch\_expired\_result: object { type } 
-
-type: "expired"
-
-
-
-message\_batch\_succeeded\_result: object { message, type } 
-
-
-
-message: object { id, container, content, 7 more } 
-
-
-
-id: string
-
-Unique object identifier.
-
-The format and length of IDs may change over time.
-
-
-
-container: object { id, expires\_at } 
-
-Information about the container used in the request (for the code execution tool)
-
-id: string
-
-Identifier for the container used in this request
-
-expires\_at: string
-
-The time at which the container will expire.
-
-
-
-content: array of [ContentBlock](api/messages.md)
-
-Content generated by the model.
-
-This is an array of content blocks, each of which has a `type` that determines its shape.
-
-Example:
-
-```shiki
-[{"type": "text", "text": "Hi, I'm Claude."}]
+```bash
+ant messages:batches cancel \
+  --api-key my-anthropic-api-key \
+  --message-batch-id message_batch_id
 ```
 
-
+#### Response (200)
 
-If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
-
-For example, if the input `messages` were:
-
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("}
-]
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
 ```
 
-
+## Delete a Message Batch
 
-Then the response `content` might be:
+`$ ant messages:batches delete`
 
-```shiki
-[{"type": "text", "text": "B)"}]
+**DELETE** `/v1/messages/batches/{message_batch_id}`
+
+Delete a Message Batch.
+
+Message Batches can only be deleted once they've finished processing. If you'd like to delete an in-progress batch, you must first cancel it.
+
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+
+### Parameters
+
+- `--message-batch-id: string`
+
+  ID of the Message Batch.
+
+### Returns
+
+- `deleted_message_batch: object`
+
+  - `id: string`
+
+    ID of the Message Batch.
+
+  - `type: "message_batch_deleted"`
+
+    Deleted object type.
+
+    For Message Batches, this is always `"message_batch_deleted"`.
+
+### Example
+
+```bash
+ant messages:batches delete \
+  --api-key my-anthropic-api-key \
+  --message-batch-id message_batch_id
 ```
 
-
+#### Response (200)
 
-
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
+```
 
-text\_block: object { citations, text, type } 
+## Retrieve Message Batch results
 
-
+`$ ant messages:batches results`
 
-citations: array of [TextCitation](api/messages.md)
+**GET** `/v1/messages/batches/{message_batch_id}/results`
 
-Citations supporting the text block.
+Streams the results of a Message Batch as a `.jsonl` file.
 
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-citation\_char\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+### Parameters
 
-cited\_text: string
+- `--message-batch-id: string`
 
-document\_index: number
+  ID of the Message Batch.
 
-document\_title: string
+### Returns
 
-end\_char\_index: number
+- `message_batch_individual_response: object`
 
-file\_id: string
+  This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
-start\_char\_index: number
+  - `custom_id: string`
 
-type: "char\_location"
+    Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
 
-
+    Must be unique for each request within the Message Batch.
 
-citation\_page\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+  - `result: MessageBatchSucceededResult or MessageBatchErroredResult or MessageBatchCanceledResult or MessageBatchExpiredResult`
 
-cited\_text: string
+    Processing result for this request.
 
-document\_index: number
+    Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-document\_title: string
+    - `message_batch_succeeded_result: object`
 
-end\_page\_number: number
+      - `message: object`
 
-file\_id: string
+        - `id: string`
 
-start\_page\_number: number
+          Unique object identifier.
 
-type: "page\_location"
+          The format and length of IDs may change over time.
 
-
+        - `container: object`
 
-citation\_content\_block\_location: object { cited\_text, document\_index, document\_title, 4 more } 
+          Information about the container used in the request (for the code execution tool)
 
-
+          - `id: string`
 
-cited\_text: string
+            Identifier for the container used in this request
 
-The full text of the cited block range, concatenated.
+          - `expires_at: string`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+            The time at which the container will expire.
 
-document\_index: number
+            format: date-time
 
-document\_title: string
+          - `skills: array of ContainerSkill`
 
-
+            Skills loaded in the container
 
-end\_block\_index: number
+            - `skill_id: string`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+              Skill ID
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+              maxLength: 64, minLength: 1
 
-file\_id: string
+            - `type: "anthropic" or "custom"`
 
-start\_block\_index: number
+              Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-0-based index of the first cited block in the source's `content` array.
+              - `"anthropic"`
 
-type: "content\_block\_location"
+              - `"custom"`
 
-
+            - `version: string`
 
-citations\_web\_search\_result\_location: object { cited\_text, encrypted\_index, title, 2 more } 
+              The resolved version: a skill version ID for custom skills.
 
-cited\_text: string
+              maxLength: 64, minLength: 1
 
-encrypted\_index: string
+        - `content: array of ContentBlock`
 
-title: string
+          Content generated by the model.
 
-type: "web\_search\_result\_location"
+          This is an array of content blocks, each of which has a `type` that determines its shape.
 
-url: string
+          Example:
 
-
+          ```json
+          [{"type": "text", "text": "Hi, I'm Claude."}]
+          ```
 
-citations\_search\_result\_location: object { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+          If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
 
-
+          For example, if the input `messages` were:
 
-cited\_text: string
+          ```json
+          [
+            {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+            {"role": "assistant", "content": "The best answer is ("}
+          ]
+          ```
 
-The full text of the cited block range, concatenated.
+          Then the response `content` might be:
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+          ```json
+          [{"type": "text", "text": "B)"}]
+          ```
 
-
+          - `text_block: object`
 
-end\_block\_index: number
+            - `citations: array of TextCitation`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+              Citations supporting the text block.
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+              The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-
+              - `citation_char_location: object`
 
-search\_result\_index: number
+                - `cited_text: string`
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+                - `document_index: number`
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+                  minimum: 0
 
-source: string
+                - `document_title: string`
 
-start\_block\_index: number
+                - `end_char_index: number`
 
-0-based index of the first cited block in the source's `content` array.
+                - `file_id: string`
 
-title: string
+                - `start_char_index: number`
 
-type: "search\_result\_location"
+                  minimum: 0
 
-text: string
+                - `type: "char_location"`
 
-type: "text"
+              - `citation_page_location: object`
 
-
+                - `cited_text: string`
 
-thinking\_block: object { signature, thinking, type } 
+                - `document_index: number`
 
-signature: string
+                  minimum: 0
 
-thinking: string
+                - `document_title: string`
 
-type: "thinking"
+                - `end_page_number: number`
 
-
+                - `file_id: string`
 
-redacted\_thinking\_block: object { data, type } 
+                - `start_page_number: number`
 
-data: string
+                  minimum: 1
 
-type: "redacted\_thinking"
+                - `type: "page_location"`
 
-
+              - `citation_content_block_location: object`
 
-tool\_use\_block: object { id, caller, input, 2 more } 
+                - `cited_text: string`
 
-id: string
+                  The full text of the cited block range, concatenated.
 
-
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
+                - `document_index: number`
 
-Tool invocation directly from the model.
+                  minimum: 0
 
-
+                - `document_title: string`
 
-direct\_caller: object { type } 
+                - `end_block_index: number`
 
-Tool invocation directly from the model.
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-type: "direct"
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-
+                - `file_id: string`
 
-server\_tool\_caller: object { tool\_id, type } 
+                - `start_block_index: number`
 
-Tool invocation generated by a server-side tool.
+                  0-based index of the first cited block in the source's `content` array.
 
-tool\_id: string
+                  minimum: 0
 
-type: "code\_execution\_20250825"
+                - `type: "content_block_location"`
 
-
+              - `citations_web_search_result_location: object`
 
-server\_tool\_caller\_20260120: object { tool\_id, type } 
+                - `cited_text: string`
 
-tool\_id: string
+                - `encrypted_index: string`
 
-type: "code\_execution\_20260120"
+                - `title: string`
 
-input: map[unknown]
+                  maxLength: 512
 
-name: string
+                - `type: "web_search_result_location"`
 
-type: "tool\_use"
+                - `url: string`
 
-
+              - `citations_search_result_location: object`
 
-server\_tool\_use\_block: object { id, caller, input, 2 more } 
+                - `cited_text: string`
 
-id: string
+                  The full text of the cited block range, concatenated.
 
-
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
+                - `end_block_index: number`
 
-Tool invocation directly from the model.
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-direct\_caller: object { type } 
+                - `search_result_index: number`
 
-Tool invocation directly from the model.
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
-type: "direct"
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
-
+                  minimum: 0
 
-server\_tool\_caller: object { tool\_id, type } 
+                - `source: string`
 
-Tool invocation generated by a server-side tool.
+                - `start_block_index: number`
 
-tool\_id: string
+                  0-based index of the first cited block in the source's `content` array.
 
-type: "code\_execution\_20250825"
+                  minimum: 0
 
-
+                - `title: string`
 
-server\_tool\_caller\_20260120: object { tool\_id, type } 
+                - `type: "search_result_location"`
 
-tool\_id: string
+            - `text: string`
 
-type: "code\_execution\_20260120"
+              maxLength: 5000000, minLength: 0
 
-input: map[unknown]
+            - `type: "text"`
 
-
+          - `thinking_block: object`
 
-name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
+            - `signature: string`
 
-"web\_search"
+              A value used to verify that this thinking block was generated by Claude when it is passed back to the API.
 
-"web\_fetch"
+              This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-"code\_execution"
+              See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-"bash\_code\_execution"
+            - `thinking: string`
 
-"text\_editor\_code\_execution"
+              The text of Claude's thinking process for this block.
 
-"tool\_search\_tool\_regex"
+            - `type: "thinking"`
 
-"tool\_search\_tool\_bm25"
+          - `redacted_thinking_block: object`
 
-type: "server\_tool\_use"
+            - `data: string`
 
-
+              The contents of this redacted thinking block, returned when portions of the model's thinking were safety-redacted. This field is opaque and encrypted, with no readable content.
 
-web\_search\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+              Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-
+              See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
+            - `type: "redacted_thinking"`
 
-Tool invocation directly from the model.
+          - `tool_use_block: object`
 
-
+            - `id: string`
 
-direct\_caller: object { type } 
+              pattern: ^[a-zA-Z0-9_-]+$
 
-Tool invocation directly from the model.
+            - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-type: "direct"
+              Tool invocation directly from the model.
 
-
+              - `direct_caller: object`
 
-server\_tool\_caller: object { tool\_id, type } 
+                Tool invocation directly from the model.
 
-Tool invocation generated by a server-side tool.
+                - `type: "direct"`
 
-tool\_id: string
+              - `server_tool_caller: object`
 
-type: "code\_execution\_20250825"
+                Tool invocation generated by a server-side tool.
 
-
+                - `tool_id: string`
 
-server\_tool\_caller\_20260120: object { tool\_id, type } 
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-tool\_id: string
+                - `type: "code_execution_20250825"`
 
-type: "code\_execution\_20260120"
+              - `server_tool_caller_20260120: object`
 
-
+                - `tool_id: string`
 
-content: [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-
+                - `type: "code_execution_20260120"`
 
-web\_search\_tool\_result\_error: object { error\_code, type } 
+            - `input: map[unknown]`
 
-
+            - `name: string`
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
+              minLength: 1
 
-"invalid\_tool\_input"
+            - `type: "tool_use"`
 
-"unavailable"
+            - `toolset_name: optional string`
 
-"max\_uses\_exceeded"
+              For a toolset member tool_use, the toolset family.
 
-"too\_many\_requests"
+              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-"query\_too\_long"
+          - `server_tool_use_block: object`
 
-"request\_too\_large"
+            - `id: string`
 
-type: "web\_search\_tool\_result\_error"
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-
+            - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-union\_member\_1: array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } 
+              Tool invocation directly from the model.
 
-encrypted\_content: string
+              - `direct_caller: object`
 
-page\_age: string
+                Tool invocation directly from the model.
 
-title: string
+              - `server_tool_caller: object`
 
-type: "web\_search\_result"
+                Tool invocation generated by a server-side tool.
 
-url: string
+              - `server_tool_caller_20260120: object`
 
-tool\_use\_id: string
+            - `input: map[unknown]`
 
-type: "web\_search\_tool\_result"
+            - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
 
-
+              - `"web_search"`
 
-web\_fetch\_tool\_result\_block: object { caller, content, tool\_use\_id, type } 
+              - `"web_fetch"`
 
-
+              - `"code_execution"`
 
-caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type } 
+              - `"bash_code_execution"`
 
-Tool invocation directly from the model.
+              - `"text_editor_code_execution"`
 
-
+              - `"tool_search_tool_regex"`
 
-direct\_caller: object { type } 
+              - `"tool_search_tool_bm25"`
 
-Tool invocation directly from the model.
+            - `type: "server_tool_use"`
 
-type: "direct"
+          - `web_search_tool_result_block: object`
 
-
+            - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-server\_tool\_caller: object { tool\_id, type } 
+              Tool invocation directly from the model.
 
-Tool invocation generated by a server-side tool.
+              - `direct_caller: object`
 
-tool\_id: string
+                Tool invocation directly from the model.
 
-type: "code\_execution\_20250825"
+              - `server_tool_caller: object`
 
-
+                Tool invocation generated by a server-side tool.
 
-server\_tool\_caller\_20260120: object { tool\_id, type } 
+              - `server_tool_caller_20260120: object`
 
-tool\_id: string
+            - `content: WebSearchToolResultError or array of WebSearchResultBlock`
 
-type: "code\_execution\_20260120"
+              - `web_search_tool_result_error: object`
 
-
+                - `error_code: "invalid_tool_input" or "unavailable" or "max_uses_exceeded" or 3 more`
 
-content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url } 
+                  - `"invalid_tool_input"`
 
-
+                  - `"unavailable"`
 
-web\_fetch\_tool\_result\_error\_block: object { error\_code, type } 
+                  - `"max_uses_exceeded"`
 
-
+                  - `"too_many_requests"`
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
+                  - `"query_too_long"`
 
-"invalid\_tool\_input"
+                  - `"request_too_large"`
 
-"url\_too\_long"
+                - `type: "web_search_tool_result_error"`
 
-"url\_not\_allowed"
+              - `union_member_1: array of WebSearchResultBlock`
 
-"url\_not\_in\_prior\_context"
+                - `encrypted_content: string`
 
-"url\_not\_accessible"
+                - `page_age: string`
 
-"unsupported\_content\_type"
+                - `title: string`
 
-"too\_many\_requests"
+                - `type: "web_search_result"`
 
-"max\_uses\_exceeded"
+                - `url: string`
 
-"unavailable"
+            - `tool_use_id: string`
 
-type: "web\_fetch\_tool\_result\_error"
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-
+            - `type: "web_search_tool_result"`
 
-web\_fetch\_block: object { content, retrieved\_at, type, url } 
+          - `web_fetch_tool_result_block: object`
 
-
+            - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-content: object { citations, source, title, type } 
+              Tool invocation directly from the model.
 
-
+              - `direct_caller: object`
 
-citations: object { enabled } 
+                Tool invocation directly from the model.
 
-Citation configuration for the document
+              - `server_tool_caller: object`
 
-enabled: boolean
+                Tool invocation generated by a server-side tool.
 
-
+              - `server_tool_caller_20260120: object`
 
-source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type } 
+            - `content: WebFetchToolResultErrorBlock or WebFetchBlock`
 
-
+              - `web_fetch_tool_result_error_block: object`
 
-base64\_pdf\_source: object { data, media\_type, type } 
+                - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
-data: string
+                  - `"invalid_tool_input"`
 
-media\_type: "application/pdf"
+                  - `"url_too_long"`
 
-type: "base64"
+                  - `"url_not_allowed"`
 
-
+                  - `"url_not_in_prior_context"`
 
-plain\_text\_source: object { data, media\_type, type } 
+                  - `"url_not_accessible"`
 
-data: string
+                  - `"unsupported_content_type"`
 
-media\_type: "text/plain"
+                  - `"too_many_requests"`
 
-type: "text"
+                  - `"max_uses_exceeded"`
 
-title: string
+                  - `"unavailable"`
 
-The title of the document
+                - `type: "web_fetch_tool_result_error"`
 
-type: "document"
+              - `web_fetch_block: object`
 
-retrieved\_at: string
+                - `content: object`
 
-ISO 8601 timestamp when the content was retrieved
+                  - `citations: object`
 
-type: "web\_fetch\_result"
+                    Citation configuration for the document
 
-url: string
+                    - `enabled: boolean`
 
-Fetched content URL
+                  - `source: Base64PDFSource or PlainTextSource`
 
-tool\_use\_id: string
+                    - `base64_pdf_source: object`
 
-type: "web\_fetch\_tool\_result"
+                      - `data: string`
 
-
+                        format: byte
 
-code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
+                      - `media_type: "application/pdf"`
 
-
+                      - `type: "base64"`
 
-content: [CodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [CodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }  or [EncryptedCodeExecutionResultBlock](api/messages.md) { content, encrypted\_stdout, return\_code, 2 more } 
+                    - `plain_text_source: object`
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+                      - `data: string`
 
-
+                      - `media_type: "text/plain"`
 
-code\_execution\_tool\_result\_error: object { error\_code, type } 
+                      - `type: "text"`
 
-
+                  - `title: string`
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+                    The title of the document
 
-"invalid\_tool\_input"
+                  - `type: "document"`
 
-"unavailable"
+                - `retrieved_at: string`
 
-"too\_many\_requests"
+                  ISO 8601 timestamp when the content was retrieved
 
-"execution\_time\_exceeded"
+                - `type: "web_fetch_result"`
 
-type: "code\_execution\_tool\_result\_error"
+                - `url: string`
 
-
+                  Fetched content URL
 
-code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
+            - `tool_use_id: string`
 
-
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
+            - `type: "web_fetch_tool_result"`
 
-file\_id: string
+          - `code_execution_tool_result_block: object`
 
-type: "code\_execution\_output"
+            - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
 
-return\_code: number
+              Code execution result with encrypted stdout for PFC + web_search results.
 
-stderr: string
+              - `code_execution_tool_result_error: object`
 
-stdout: string
+                - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
-type: "code\_execution\_result"
+                  - `"invalid_tool_input"`
 
-
+                  - `"unavailable"`
 
-encrypted\_code\_execution\_result\_block: object { content, encrypted\_stdout, return\_code, 2 more } 
+                  - `"too_many_requests"`
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+                  - `"execution_time_exceeded"`
 
-
+                - `type: "code_execution_tool_result_error"`
 
-content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
+              - `code_execution_result_block: object`
 
-file\_id: string
+                - `content: array of CodeExecutionOutputBlock`
 
-type: "code\_execution\_output"
+                  - `file_id: string`
 
-encrypted\_stdout: string
+                  - `type: "code_execution_output"`
 
-return\_code: number
+                - `return_code: number`
 
-stderr: string
+                - `stderr: string`
 
-type: "encrypted\_code\_execution\_result"
+                - `stdout: string`
 
-tool\_use\_id: string
+                - `type: "code_execution_result"`
 
-type: "code\_execution\_tool\_result"
+              - `encrypted_code_execution_result_block: object`
 
-
+                Code execution result with encrypted stdout for PFC + web_search results.
 
-bash\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
+                - `content: array of CodeExecutionOutputBlock`
 
-
+                  - `file_id: string`
 
-content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more } 
+                  - `type: "code_execution_output"`
 
-
+                - `encrypted_stdout: string`
 
-bash\_code\_execution\_tool\_result\_error: object { error\_code, type } 
+                - `return_code: number`
 
-
+                - `stderr: string`
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+                - `type: "encrypted_code_execution_result"`
 
-"invalid\_tool\_input"
+            - `tool_use_id: string`
 
-"unavailable"
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-"too\_many\_requests"
+            - `type: "code_execution_tool_result"`
 
-"execution\_time\_exceeded"
+          - `bash_code_execution_tool_result_block: object`
 
-"output\_file\_too\_large"
+            - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
 
-type: "bash\_code\_execution\_tool\_result\_error"
+              - `bash_code_execution_tool_result_error: object`
 
-
+                - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
-bash\_code\_execution\_result\_block: object { content, return\_code, stderr, 2 more } 
+                  - `"invalid_tool_input"`
 
-
+                  - `"unavailable"`
 
-content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type } 
+                  - `"too_many_requests"`
 
-file\_id: string
+                  - `"execution_time_exceeded"`
 
-type: "bash\_code\_execution\_output"
+                  - `"output_file_too_large"`
 
-return\_code: number
+                - `type: "bash_code_execution_tool_result_error"`
 
-stderr: string
+              - `bash_code_execution_result_block: object`
 
-stdout: string
+                - `content: array of BashCodeExecutionOutputBlock`
 
-type: "bash\_code\_execution\_result"
+                  - `file_id: string`
 
-tool\_use\_id: string
+                  - `type: "bash_code_execution_output"`
 
-type: "bash\_code\_execution\_tool\_result"
+                - `return_code: number`
 
-
+                - `stderr: string`
 
-text\_editor\_code\_execution\_tool\_result\_block: object { content, tool\_use\_id, type } 
+                - `stdout: string`
 
-
+                - `type: "bash_code_execution_result"`
 
-content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more } 
+            - `tool_use_id: string`
 
-
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-text\_editor\_code\_execution\_tool\_result\_error: object { error\_code, error\_message, type } 
+            - `type: "bash_code_execution_tool_result"`
 
-
+          - `text_editor_code_execution_tool_result_block: object`
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
+            - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-"invalid\_tool\_input"
+              - `text_editor_code_execution_tool_result_error: object`
 
-"unavailable"
+                - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
-"too\_many\_requests"
+                  - `"invalid_tool_input"`
 
-"execution\_time\_exceeded"
+                  - `"unavailable"`
 
-"file\_not\_found"
+                  - `"too_many_requests"`
 
-error\_message: string
+                  - `"execution_time_exceeded"`
 
-type: "text\_editor\_code\_execution\_tool\_result\_error"
+                  - `"file_not_found"`
 
-
+                - `error_message: string`
 
-text\_editor\_code\_execution\_view\_result\_block: object { content, file\_type, num\_lines, 3 more } 
+                - `type: "text_editor_code_execution_tool_result_error"`
 
-content: string
+              - `text_editor_code_execution_view_result_block: object`
 
-
+                - `content: string`
 
-file\_type: "text" or "image" or "pdf"
+                - `file_type: "text" or "image" or "pdf"`
 
-"text"
+                  - `"text"`
 
-"image"
+                  - `"image"`
 
-"pdf"
+                  - `"pdf"`
 
-num\_lines: number
+                - `num_lines: number`
 
-start\_line: number
+                - `start_line: number`
 
-total\_lines: number
+                - `total_lines: number`
 
-type: "text\_editor\_code\_execution\_view\_result"
+                - `type: "text_editor_code_execution_view_result"`
 
-
+              - `text_editor_code_execution_create_result_block: object`
 
-text\_editor\_code\_execution\_create\_result\_block: object { is\_file\_update, type } 
+                - `is_file_update: boolean`
 
-is\_file\_update: boolean
+                - `type: "text_editor_code_execution_create_result"`
 
-type: "text\_editor\_code\_execution\_create\_result"
+              - `text_editor_code_execution_str_replace_result_block: object`
 
-
+                - `lines: array of string`
 
-text\_editor\_code\_execution\_str\_replace\_result\_block: object { lines, new\_lines, new\_start, 3 more } 
+                - `new_lines: number`
 
-lines: array of string
+                - `new_start: number`
 
-new\_lines: number
+                - `old_lines: number`
 
-new\_start: number
+                - `old_start: number`
 
-old\_lines: number
+                - `type: "text_editor_code_execution_str_replace_result"`
 
-old\_start: number
+            - `tool_use_id: string`
 
-type: "text\_editor\_code\_execution\_str\_replace\_result"
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-tool\_use\_id: string
+            - `type: "text_editor_code_execution_tool_result"`
 
-type: "text\_editor\_code\_execution\_tool\_result"
+          - `tool_search_tool_result_block: object`
 
-
+            - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
 
-tool\_search\_tool\_result\_block: object { content, tool\_use\_id, type } 
+              - `tool_search_tool_result_error: object`
 
-
+                - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
-content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type } 
+                  - `"invalid_tool_input"`
 
-
+                  - `"unavailable"`
 
-tool\_search\_tool\_result\_error: object { error\_code, error\_message, type } 
+                  - `"too_many_requests"`
 
-
+                  - `"execution_time_exceeded"`
 
-error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
+                - `error_message: string`
 
-"invalid\_tool\_input"
+                - `type: "tool_search_tool_result_error"`
 
-"unavailable"
+              - `tool_search_tool_search_result_block: object`
 
-"too\_many\_requests"
+                - `tool_references: array of ToolReferenceBlock`
 
-"execution\_time\_exceeded"
+                  - `tool_name: string`
 
-error\_message: string
+                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-type: "tool\_search\_tool\_result\_error"
+                  - `type: "tool_reference"`
 
-
+                - `type: "tool_search_tool_search_result"`
 
-tool\_search\_tool\_search\_result\_block: object { tool\_references, type } 
+            - `tool_use_id: string`
 
-
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type } 
+            - `type: "tool_search_tool_result"`
 
-tool\_name: string
+          - `container_upload_block: object`
 
-type: "tool\_reference"
+            Response model for a file uploaded to the container.
 
-type: "tool\_search\_tool\_search\_result"
+            - `file_id: string`
 
-tool\_use\_id: string
+            - `type: "container_upload"`
 
-type: "tool\_search\_tool\_result"
+        - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
 
-
+          The model that will complete your prompt.
 
-container\_upload\_block: object { file\_id, type } 
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Response model for a file uploaded to the container.
+          - `"claude-fable-5-1"`
 
-file\_id: string
+            Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
-type: "container\_upload"
+          - `"claude-mythos-5-1"`
 
-
+            Our most capable model for cybersecurity and biology research, available through trusted access programs
 
-model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string
+          - `"claude-sonnet-5"`
 
-The model that will complete your prompt.
+            High-performance model for coding and agents
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+          - `"claude-fable-5"`
 
-"claude-sonnet-5"
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
-High-performance model for coding and agents
+          - `"claude-mythos-5"`
 
-"claude-fable-5"
+            Most capable model for cybersecurity and biology research
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+          - `"claude-opus-5"`
 
-"claude-mythos-5"
+            Powerful intelligence for long-running agents and coding
 
-Most capable model for cybersecurity and biology research
+          - `"claude-opus-4-8"`
 
-"claude-opus-4-8"
+            Powerful intelligence for long-running agents and coding
 
-Frontier intelligence for long-running agents and coding
+          - `"claude-opus-4-7"`
 
-"claude-opus-4-7"
+            Powerful intelligence for long-running agents and coding
 
-Frontier intelligence for long-running agents and coding
+          - `"claude-mythos-preview"`
 
-"claude-mythos-preview"
+            New class of intelligence, strongest in coding and cybersecurity
 
-New class of intelligence, strongest in coding and cybersecurity
+          - `"claude-opus-4-6"`
 
-"claude-opus-4-6"
+            Powerful intelligence for long-running agents and coding
 
-Frontier intelligence for long-running agents and coding
+          - `"claude-sonnet-4-6"`
 
-"claude-sonnet-4-6"
+            Best combination of speed and intelligence
 
-Best combination of speed and intelligence
+          - `"claude-haiku-4-5"`
 
-"claude-haiku-4-5"
+            Fastest model with near-frontier intelligence
 
-Fastest model with near-frontier intelligence
+          - `"claude-haiku-4-5-20251001"`
 
-"claude-haiku-4-5-20251001"
+            Fastest model with near-frontier intelligence
 
-Fastest model with near-frontier intelligence
+          - `"claude-opus-4-5"`
 
-"claude-opus-4-5"
+            Powerful intelligence for long-running agents and coding
 
-Premium model combining maximum intelligence with practical performance
+          - `"claude-opus-4-5-20251101"`
 
-"claude-opus-4-5-20251101"
+            Powerful intelligence for long-running agents and coding
 
-Premium model combining maximum intelligence with practical performance
+          - `"claude-sonnet-4-5"`
 
-"claude-sonnet-4-5"
+            High-performance model for agents and coding
 
-High-performance model for agents and coding
+          - `"claude-sonnet-4-5-20250929"`
 
-"claude-sonnet-4-5-20250929"
+            High-performance model for agents and coding
 
-High-performance model for agents and coding
+        - `role: "assistant"`
 
-"claude-opus-4-1"
+          Conversational role of the generated message.
 
-Exceptional model for specialized complex tasks
+          This will always be `"assistant"`.
 
-"claude-opus-4-1-20250805"
+        - `stop_details: object`
 
-Exceptional model for specialized complex tasks
+          Structured information about a refusal.
 
-
+          - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
-role: "assistant"
+            The policy category that triggered a refusal.
 
-Conversational role of the generated message.
+            - `"cyber"`
 
-This will always be `"assistant"`.
+              The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
 
-
+            - `"bio"`
 
-stop\_details: object { category, explanation, type } 
+              The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
-Structured information about a refusal.
+            - `"frontier_llm"`
 
-
+              The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
 
-category: "cyber" or "bio" or "frontier\_llm" or "reasoning\_extraction"
+            - `"reasoning_extraction"`
 
-The policy category that triggered a refusal.
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
 
-"cyber"
+            - `"general_harms"`
 
-"bio"
+              The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-"frontier\_llm"
+          - `explanation: string`
 
-"reasoning\_extraction"
+            Human-readable explanation of the refusal.
 
-
+            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-explanation: string
+          - `type: "refusal"`
 
-Human-readable explanation of the refusal.
+        - `stop_reason: "end_turn" or "max_tokens" or "stop_sequence" or 4 more`
 
-This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+          The reason that we stopped.
 
-type: "refusal"
+          This may be one the following values:
 
-
+          * `"end_turn"`: the model reached a natural stopping point
+          * `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
+          * `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
+          * `"tool_use"`: the model invoked one or more tools
+          * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
+          * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+          * `"model_context_window_exceeded"`: we exceeded the model's context window
 
-stop\_reason: "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
+          In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-The reason that we stopped.
+          - `"end_turn"`
 
-This may be one the following values:
+          - `"max_tokens"`
 
-- `"end_turn"`: the model reached a natural stopping point
-- `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
-- `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
-- `"tool_use"`: the model invoked one or more tools
-- `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
-- `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+          - `"stop_sequence"`
 
-In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
+          - `"tool_use"`
 
-"end\_turn"
+          - `"pause_turn"`
 
-"max\_tokens"
+          - `"refusal"`
 
-"stop\_sequence"
+          - `"model_context_window_exceeded"`
 
-"tool\_use"
+        - `stop_sequence: string`
 
-"pause\_turn"
+          Which custom stop sequence was generated, if any.
 
-"refusal"
+          This value will be a non-null string if one of your custom stop sequences was generated.
 
-
+        - `type: "message"`
 
-stop\_sequence: string
+          Object type.
 
-Which custom stop sequence was generated, if any.
+          For Messages, this is always `"message"`.
 
-This value will be a non-null string if one of your custom stop sequences was generated.
+        - `usage: object`
 
-
+          Billing and rate-limit usage.
 
-type: "message"
+          Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
 
-Object type.
+          Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
 
-For Messages, this is always `"message"`.
+          For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
 
-
+          Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more } 
+          - `cache_creation: object`
 
-Billing and rate-limit usage.
+            Breakdown of cached tokens by TTL
 
-Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+            - `ephemeral_1h_input_tokens: number`
 
-Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+              The number of input tokens used to create the 1 hour cache entry.
 
-For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+              minimum: 0
 
-Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+            - `ephemeral_5m_input_tokens: number`
 
-
+              The number of input tokens used to create the 5 minute cache entry.
 
-cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens } 
+              minimum: 0
 
-Breakdown of cached tokens by TTL
+          - `cache_creation_input_tokens: number`
 
-ephemeral\_1h\_input\_tokens: number
+            The number of input tokens used to create the cache entry.
 
-The number of input tokens used to create the 1 hour cache entry.
+            minimum: 0
 
-ephemeral\_5m\_input\_tokens: number
+          - `cache_read_input_tokens: number`
 
-The number of input tokens used to create the 5 minute cache entry.
+            The number of input tokens read from the cache.
 
-cache\_creation\_input\_tokens: number
+            minimum: 0
 
-The number of input tokens used to create the cache entry.
+          - `inference_geo: string`
 
-cache\_read\_input\_tokens: number
+            The geographic region where inference was performed for this request.
 
-The number of input tokens read from the cache.
+          - `input_tokens: number`
 
-inference\_geo: string
+            The number of input tokens which were used.
 
-The geographic region where inference was performed for this request.
+            minimum: 0
 
-input\_tokens: number
+          - `output_tokens: number`
 
-The number of input tokens which were used.
+            The number of output tokens which were used.
 
-output\_tokens: number
+            minimum: 0
 
-The number of output tokens which were used.
+          - `output_tokens_details: object`
 
-
+            Breakdown of output tokens by category.
 
-output\_tokens\_details: object { thinking\_tokens } 
+            `output_tokens` remains the inclusive, authoritative total used for billing.
+            This object provides a read-only decomposition for observability — for example,
+            how many of the billed output tokens were spent on internal reasoning that may
+            have been summarized before being returned to you.
 
-Breakdown of output tokens by category.
+            - `thinking_tokens: number`
 
-`output_tokens` remains the inclusive, authoritative total used for billing.
-This object provides a read-only decomposition for observability — for example,
-how many of the billed output tokens were spent on internal reasoning that may
-have been summarized before being returned to you.
+              Number of output tokens the model generated as internal reasoning, including
+              the thinking-block delimiter tokens.
 
-
+              Reflects the raw reasoning the model produced, not the (possibly shorter)
+              summarized thinking text returned in the response body. Computed by
+              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              generation count by a small number of tokens. Always ≤ `output_tokens`;
+              `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
-thinking\_tokens: number
+              minimum: 0
 
-Number of output tokens the model generated as internal reasoning, including
-the thinking-block delimiter tokens.
+          - `server_tool_use: object`
 
-Reflects the raw reasoning the model produced, not the (possibly shorter)
-summarized thinking text returned in the response body. Computed by
-re-tokenizing the raw reasoning text, so it may differ from the model's exact
-generation count by a small number of tokens. Always ≤ `output_tokens`;
-`output_tokens - thinking_tokens` approximates the non-reasoning output.
+            The number of server tool requests.
 
-
+            - `web_fetch_requests: number`
 
-server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests } 
+              The number of web fetch tool requests.
 
-The number of server tool requests.
+              minimum: 0
 
-web\_fetch\_requests: number
+            - `web_search_requests: number`
 
-The number of web fetch tool requests.
+              The number of web search tool requests.
 
-web\_search\_requests: number
+              minimum: 0
 
-The number of web search tool requests.
+          - `service_tier: "standard" or "priority" or "batch"`
 
-
+            If the request used the priority, standard, or batch tier.
 
-service\_tier: "standard" or "priority" or "batch"
+            - `"standard"`
 
-If the request used the priority, standard, or batch tier.
+            - `"priority"`
 
-"standard"
+            - `"batch"`
 
-"priority"
+      - `type: "succeeded"`
 
-"batch"
+    - `message_batch_errored_result: object`
 
-type: "succeeded"
+      - `error: object`
+
+        - `error: InvalidRequestError or AuthenticationError or BillingError or 6 more`
+
+          - `invalid_request_error: object`
+
+            - `message: string`
+
+            - `type: "invalid_request_error"`
+
+          - `authentication_error: object`
+
+            - `message: string`
+
+            - `type: "authentication_error"`
+
+          - `billing_error: object`
+
+            - `message: string`
+
+            - `type: "billing_error"`
+
+          - `permission_error: object`
+
+            - `message: string`
+
+            - `type: "permission_error"`
+
+          - `not_found_error: object`
+
+            - `message: string`
+
+            - `type: "not_found_error"`
+
+          - `rate_limit_error: object`
+
+            - `message: string`
+
+            - `type: "rate_limit_error"`
+
+          - `gateway_timeout_error: object`
+
+            - `message: string`
+
+            - `type: "timeout_error"`
+
+          - `api_error_object: object`
+
+            - `message: string`
+
+            - `type: "api_error"`
+
+          - `overloaded_error: object`
+
+            - `message: string`
+
+            - `type: "overloaded_error"`
+
+        - `request_id: string`
+
+        - `type: "error"`
+
+      - `type: "errored"`
+
+    - `message_batch_canceled_result: object`
+
+      - `type: "canceled"`
+
+    - `message_batch_expired_result: object`
+
+      - `type: "expired"`
+
+### Example
+
+```bash
+ant messages:batches results \
+  --api-key my-anthropic-api-key \
+  --message-batch-id message_batch_id
+```
+
+## Domain types
+
+### Deleted Message Batch
+
+- `deleted_message_batch: object`
+
+  - `id: string`
+
+    ID of the Message Batch.
+
+  - `type: "message_batch_deleted"`
+
+    Deleted object type.
+
+    For Message Batches, this is always `"message_batch_deleted"`.
+
+### Message Batch
+
+- `message_batch: object`
+
+  - `id: string`
+
+    Unique object identifier.
+
+    The format and length of IDs may change over time.
+
+  - `archived_at: string`
+
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+
+    format: date-time
+
+  - `cancel_initiated_at: string`
+
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+
+    format: date-time
+
+  - `created_at: string`
+
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+    format: date-time
+
+  - `ended_at: string`
+
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+
+    format: date-time
+
+  - `expires_at: string`
+
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+    format: date-time
+
+  - `processing_status: "in_progress" or "canceling" or "ended"`
+
+    Processing status of the Message Batch.
+
+    - `"in_progress"`
+
+    - `"canceling"`
+
+    - `"ended"`
+
+  - `request_counts: object`
+
+    Tallies requests within the Message Batch, categorized by their status.
+
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+
+    - `canceled: number`
+
+      Number of requests in the Message Batch that have been canceled.
+
+      This is zero until processing of the entire Message Batch has ended.
+
+    - `errored: number`
+
+      Number of requests in the Message Batch that encountered an error.
+
+      This is zero until processing of the entire Message Batch has ended.
+
+    - `expired: number`
+
+      Number of requests in the Message Batch that have expired.
+
+      This is zero until processing of the entire Message Batch has ended.
+
+    - `processing: number`
+
+      Number of requests in the Message Batch that are processing.
+
+    - `succeeded: number`
+
+      Number of requests in the Message Batch that have completed successfully.
+
+      This is zero until processing of the entire Message Batch has ended.
+
+  - `results_url: string`
+
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
+
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+### Message Batch Canceled Result
+
+- `message_batch_canceled_result: object`
+
+  - `type: "canceled"`
+
+### Message Batch Errored Result
+
+- `message_batch_errored_result: object`
+
+  - `error: object`
+
+    - `error: InvalidRequestError or AuthenticationError or BillingError or 6 more`
+
+      - `invalid_request_error: object`
+
+        - `message: string`
+
+        - `type: "invalid_request_error"`
+
+      - `authentication_error: object`
+
+        - `message: string`
+
+        - `type: "authentication_error"`
+
+      - `billing_error: object`
+
+        - `message: string`
+
+        - `type: "billing_error"`
+
+      - `permission_error: object`
+
+        - `message: string`
+
+        - `type: "permission_error"`
+
+      - `not_found_error: object`
+
+        - `message: string`
+
+        - `type: "not_found_error"`
+
+      - `rate_limit_error: object`
+
+        - `message: string`
+
+        - `type: "rate_limit_error"`
+
+      - `gateway_timeout_error: object`
+
+        - `message: string`
+
+        - `type: "timeout_error"`
+
+      - `api_error_object: object`
+
+        - `message: string`
+
+        - `type: "api_error"`
+
+      - `overloaded_error: object`
+
+        - `message: string`
+
+        - `type: "overloaded_error"`
+
+    - `request_id: string`
+
+    - `type: "error"`
+
+  - `type: "errored"`
+
+### Message Batch Expired Result
+
+- `message_batch_expired_result: object`
+
+  - `type: "expired"`
+
+### Message Batch Individual Response
+
+- `message_batch_individual_response: object`
+
+  This is a single line in the response `.jsonl` file and does not represent the response as a whole.
+
+  - `custom_id: string`
+
+    Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
+
+    Must be unique for each request within the Message Batch.
+
+  - `result: MessageBatchSucceededResult or MessageBatchErroredResult or MessageBatchCanceledResult or MessageBatchExpiredResult`
+
+    Processing result for this request.
+
+    Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
+
+    - `message_batch_succeeded_result: object`
+
+      - `message: object`
+
+        - `id: string`
+
+          Unique object identifier.
+
+          The format and length of IDs may change over time.
+
+        - `container: object`
+
+          Information about the container used in the request (for the code execution tool)
+
+          - `id: string`
+
+            Identifier for the container used in this request
+
+          - `expires_at: string`
+
+            The time at which the container will expire.
+
+            format: date-time
+
+          - `skills: array of ContainerSkill`
+
+            Skills loaded in the container
+
+            - `skill_id: string`
+
+              Skill ID
+
+              maxLength: 64, minLength: 1
+
+            - `type: "anthropic" or "custom"`
+
+              Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+
+              - `"anthropic"`
+
+              - `"custom"`
+
+            - `version: string`
+
+              The resolved version: a skill version ID for custom skills.
+
+              maxLength: 64, minLength: 1
+
+        - `content: array of ContentBlock`
+
+          Content generated by the model.
+
+          This is an array of content blocks, each of which has a `type` that determines its shape.
+
+          Example:
+
+          ```json
+          [{"type": "text", "text": "Hi, I'm Claude."}]
+          ```
+
+          If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
+
+          For example, if the input `messages` were:
+
+          ```json
+          [
+            {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+            {"role": "assistant", "content": "The best answer is ("}
+          ]
+          ```
+
+          Then the response `content` might be:
+
+          ```json
+          [{"type": "text", "text": "B)"}]
+          ```
+
+          - `text_block: object`
+
+            - `citations: array of TextCitation`
+
+              Citations supporting the text block.
+
+              The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+
+              - `citation_char_location: object`
+
+                - `cited_text: string`
+
+                - `document_index: number`
+
+                  minimum: 0
+
+                - `document_title: string`
+
+                - `end_char_index: number`
+
+                - `file_id: string`
+
+                - `start_char_index: number`
+
+                  minimum: 0
+
+                - `type: "char_location"`
+
+              - `citation_page_location: object`
+
+                - `cited_text: string`
+
+                - `document_index: number`
+
+                  minimum: 0
+
+                - `document_title: string`
+
+                - `end_page_number: number`
+
+                - `file_id: string`
+
+                - `start_page_number: number`
+
+                  minimum: 1
+
+                - `type: "page_location"`
+
+              - `citation_content_block_location: object`
+
+                - `cited_text: string`
+
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+                - `document_index: number`
+
+                  minimum: 0
+
+                - `document_title: string`
+
+                - `end_block_index: number`
+
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+                - `file_id: string`
+
+                - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
+
+                  minimum: 0
+
+                - `type: "content_block_location"`
+
+              - `citations_web_search_result_location: object`
+
+                - `cited_text: string`
+
+                - `encrypted_index: string`
+
+                - `title: string`
+
+                  maxLength: 512
+
+                - `type: "web_search_result_location"`
+
+                - `url: string`
+
+              - `citations_search_result_location: object`
+
+                - `cited_text: string`
+
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+                - `end_block_index: number`
+
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+                - `search_result_index: number`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
+
+                  minimum: 0
+
+                - `source: string`
+
+                - `start_block_index: number`
+
+                  0-based index of the first cited block in the source's `content` array.
+
+                  minimum: 0
+
+                - `title: string`
+
+                - `type: "search_result_location"`
+
+            - `text: string`
+
+              maxLength: 5000000, minLength: 0
+
+            - `type: "text"`
+
+          - `thinking_block: object`
+
+            - `signature: string`
+
+              A value used to verify that this thinking block was generated by Claude when it is passed back to the API.
+
+              This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
+
+              See [extended thinking](build-with-claude/extended-thinking.md) for details.
+
+            - `thinking: string`
+
+              The text of Claude's thinking process for this block.
+
+            - `type: "thinking"`
+
+          - `redacted_thinking_block: object`
+
+            - `data: string`
+
+              The contents of this redacted thinking block, returned when portions of the model's thinking were safety-redacted. This field is opaque and encrypted, with no readable content.
+
+              Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
+
+              See [extended thinking](build-with-claude/extended-thinking.md) for details.
+
+            - `type: "redacted_thinking"`
+
+          - `tool_use_block: object`
+
+            - `id: string`
+
+              pattern: ^[a-zA-Z0-9_-]+$
+
+            - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
+
+              Tool invocation directly from the model.
+
+              - `direct_caller: object`
+
+                Tool invocation directly from the model.
+
+                - `type: "direct"`
+
+              - `server_tool_caller: object`
+
+                Tool invocation generated by a server-side tool.
+
+                - `tool_id: string`
+
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+                - `type: "code_execution_20250825"`
+
+              - `server_tool_caller_20260120: object`
+
+                - `tool_id: string`
+
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+                - `type: "code_execution_20260120"`
+
+            - `input: map[unknown]`
+
+            - `name: string`
+
+              minLength: 1
+
+            - `type: "tool_use"`
+
+            - `toolset_name: optional string`
+
+              For a toolset member tool_use, the toolset family.
+
+              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
+          - `server_tool_use_block: object`
+
+            - `id: string`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
+
+              Tool invocation directly from the model.
+
+              - `direct_caller: object`
+
+                Tool invocation directly from the model.
+
+              - `server_tool_caller: object`
+
+                Tool invocation generated by a server-side tool.
+
+              - `server_tool_caller_20260120: object`
+
+            - `input: map[unknown]`
+
+            - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+
+              - `"web_search"`
+
+              - `"web_fetch"`
+
+              - `"code_execution"`
+
+              - `"bash_code_execution"`
+
+              - `"text_editor_code_execution"`
+
+              - `"tool_search_tool_regex"`
+
+              - `"tool_search_tool_bm25"`
+
+            - `type: "server_tool_use"`
+
+          - `web_search_tool_result_block: object`
+
+            - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
+
+              Tool invocation directly from the model.
+
+              - `direct_caller: object`
+
+                Tool invocation directly from the model.
+
+              - `server_tool_caller: object`
+
+                Tool invocation generated by a server-side tool.
+
+              - `server_tool_caller_20260120: object`
+
+            - `content: WebSearchToolResultError or array of WebSearchResultBlock`
+
+              - `web_search_tool_result_error: object`
+
+                - `error_code: "invalid_tool_input" or "unavailable" or "max_uses_exceeded" or 3 more`
+
+                  - `"invalid_tool_input"`
+
+                  - `"unavailable"`
+
+                  - `"max_uses_exceeded"`
+
+                  - `"too_many_requests"`
+
+                  - `"query_too_long"`
+
+                  - `"request_too_large"`
+
+                - `type: "web_search_tool_result_error"`
+
+              - `union_member_1: array of WebSearchResultBlock`
+
+                - `encrypted_content: string`
+
+                - `page_age: string`
+
+                - `title: string`
+
+                - `type: "web_search_result"`
+
+                - `url: string`
+
+            - `tool_use_id: string`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: "web_search_tool_result"`
+
+          - `web_fetch_tool_result_block: object`
+
+            - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
+
+              Tool invocation directly from the model.
+
+              - `direct_caller: object`
+
+                Tool invocation directly from the model.
+
+              - `server_tool_caller: object`
+
+                Tool invocation generated by a server-side tool.
+
+              - `server_tool_caller_20260120: object`
+
+            - `content: WebFetchToolResultErrorBlock or WebFetchBlock`
+
+              - `web_fetch_tool_result_error_block: object`
+
+                - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
+
+                  - `"invalid_tool_input"`
+
+                  - `"url_too_long"`
+
+                  - `"url_not_allowed"`
+
+                  - `"url_not_in_prior_context"`
+
+                  - `"url_not_accessible"`
+
+                  - `"unsupported_content_type"`
+
+                  - `"too_many_requests"`
+
+                  - `"max_uses_exceeded"`
+
+                  - `"unavailable"`
+
+                - `type: "web_fetch_tool_result_error"`
+
+              - `web_fetch_block: object`
+
+                - `content: object`
+
+                  - `citations: object`
+
+                    Citation configuration for the document
+
+                    - `enabled: boolean`
+
+                  - `source: Base64PDFSource or PlainTextSource`
+
+                    - `base64_pdf_source: object`
+
+                      - `data: string`
+
+                        format: byte
+
+                      - `media_type: "application/pdf"`
+
+                      - `type: "base64"`
+
+                    - `plain_text_source: object`
+
+                      - `data: string`
+
+                      - `media_type: "text/plain"`
+
+                      - `type: "text"`
+
+                  - `title: string`
+
+                    The title of the document
+
+                  - `type: "document"`
+
+                - `retrieved_at: string`
+
+                  ISO 8601 timestamp when the content was retrieved
+
+                - `type: "web_fetch_result"`
+
+                - `url: string`
+
+                  Fetched content URL
+
+            - `tool_use_id: string`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: "web_fetch_tool_result"`
+
+          - `code_execution_tool_result_block: object`
+
+            - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
+
+              Code execution result with encrypted stdout for PFC + web_search results.
+
+              - `code_execution_tool_result_error: object`
+
+                - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
+
+                  - `"invalid_tool_input"`
+
+                  - `"unavailable"`
+
+                  - `"too_many_requests"`
+
+                  - `"execution_time_exceeded"`
+
+                - `type: "code_execution_tool_result_error"`
+
+              - `code_execution_result_block: object`
+
+                - `content: array of CodeExecutionOutputBlock`
+
+                  - `file_id: string`
+
+                  - `type: "code_execution_output"`
+
+                - `return_code: number`
+
+                - `stderr: string`
+
+                - `stdout: string`
+
+                - `type: "code_execution_result"`
+
+              - `encrypted_code_execution_result_block: object`
+
+                Code execution result with encrypted stdout for PFC + web_search results.
+
+                - `content: array of CodeExecutionOutputBlock`
+
+                  - `file_id: string`
+
+                  - `type: "code_execution_output"`
+
+                - `encrypted_stdout: string`
+
+                - `return_code: number`
+
+                - `stderr: string`
+
+                - `type: "encrypted_code_execution_result"`
+
+            - `tool_use_id: string`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: "code_execution_tool_result"`
+
+          - `bash_code_execution_tool_result_block: object`
+
+            - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
+
+              - `bash_code_execution_tool_result_error: object`
+
+                - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
+
+                  - `"invalid_tool_input"`
+
+                  - `"unavailable"`
+
+                  - `"too_many_requests"`
+
+                  - `"execution_time_exceeded"`
+
+                  - `"output_file_too_large"`
+
+                - `type: "bash_code_execution_tool_result_error"`
+
+              - `bash_code_execution_result_block: object`
+
+                - `content: array of BashCodeExecutionOutputBlock`
+
+                  - `file_id: string`
+
+                  - `type: "bash_code_execution_output"`
+
+                - `return_code: number`
+
+                - `stderr: string`
+
+                - `stdout: string`
+
+                - `type: "bash_code_execution_result"`
+
+            - `tool_use_id: string`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: "bash_code_execution_tool_result"`
+
+          - `text_editor_code_execution_tool_result_block: object`
+
+            - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
+
+              - `text_editor_code_execution_tool_result_error: object`
+
+                - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
+
+                  - `"invalid_tool_input"`
+
+                  - `"unavailable"`
+
+                  - `"too_many_requests"`
+
+                  - `"execution_time_exceeded"`
+
+                  - `"file_not_found"`
+
+                - `error_message: string`
+
+                - `type: "text_editor_code_execution_tool_result_error"`
+
+              - `text_editor_code_execution_view_result_block: object`
+
+                - `content: string`
+
+                - `file_type: "text" or "image" or "pdf"`
+
+                  - `"text"`
+
+                  - `"image"`
+
+                  - `"pdf"`
+
+                - `num_lines: number`
+
+                - `start_line: number`
+
+                - `total_lines: number`
+
+                - `type: "text_editor_code_execution_view_result"`
+
+              - `text_editor_code_execution_create_result_block: object`
+
+                - `is_file_update: boolean`
+
+                - `type: "text_editor_code_execution_create_result"`
+
+              - `text_editor_code_execution_str_replace_result_block: object`
+
+                - `lines: array of string`
+
+                - `new_lines: number`
+
+                - `new_start: number`
+
+                - `old_lines: number`
+
+                - `old_start: number`
+
+                - `type: "text_editor_code_execution_str_replace_result"`
+
+            - `tool_use_id: string`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: "text_editor_code_execution_tool_result"`
+
+          - `tool_search_tool_result_block: object`
+
+            - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
+
+              - `tool_search_tool_result_error: object`
+
+                - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
+
+                  - `"invalid_tool_input"`
+
+                  - `"unavailable"`
+
+                  - `"too_many_requests"`
+
+                  - `"execution_time_exceeded"`
+
+                - `error_message: string`
+
+                - `type: "tool_search_tool_result_error"`
+
+              - `tool_search_tool_search_result_block: object`
+
+                - `tool_references: array of ToolReferenceBlock`
+
+                  - `tool_name: string`
+
+                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
+                  - `type: "tool_reference"`
+
+                - `type: "tool_search_tool_search_result"`
+
+            - `tool_use_id: string`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: "tool_search_tool_result"`
+
+          - `container_upload_block: object`
+
+            Response model for a file uploaded to the container.
+
+            - `file_id: string`
+
+            - `type: "container_upload"`
+
+        - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5-1"`
+
+            Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+          - `"claude-mythos-5-1"`
+
+            Our most capable model for cybersecurity and biology research, available through trusted access programs
+
+          - `"claude-sonnet-5"`
+
+            High-performance model for coding and agents
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
+
+          - `"claude-opus-5"`
+
+            Powerful intelligence for long-running agents and coding
+
+          - `"claude-opus-4-8"`
+
+            Powerful intelligence for long-running agents and coding
+
+          - `"claude-opus-4-7"`
+
+            Powerful intelligence for long-running agents and coding
+
+          - `"claude-mythos-preview"`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"`
+
+            Powerful intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Powerful intelligence for long-running agents and coding
+
+          - `"claude-opus-4-5-20251101"`
+
+            Powerful intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+        - `role: "assistant"`
+
+          Conversational role of the generated message.
+
+          This will always be `"assistant"`.
+
+        - `stop_details: object`
+
+          Structured information about a refusal.
+
+          - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
+
+            The policy category that triggered a refusal.
+
+            - `"cyber"`
+
+              The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
+            - `"bio"`
+
+              The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+
+            - `"frontier_llm"`
+
+              The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
+            - `"reasoning_extraction"`
+
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+
+            - `"general_harms"`
+
+              The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
+          - `explanation: string`
+
+            Human-readable explanation of the refusal.
+
+            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `type: "refusal"`
+
+        - `stop_reason: "end_turn" or "max_tokens" or "stop_sequence" or 4 more`
+
+          The reason that we stopped.
+
+          This may be one the following values:
+
+          * `"end_turn"`: the model reached a natural stopping point
+          * `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
+          * `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
+          * `"tool_use"`: the model invoked one or more tools
+          * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
+          * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+          * `"model_context_window_exceeded"`: we exceeded the model's context window
+
+          In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
+
+          - `"end_turn"`
+
+          - `"max_tokens"`
+
+          - `"stop_sequence"`
+
+          - `"tool_use"`
+
+          - `"pause_turn"`
+
+          - `"refusal"`
+
+          - `"model_context_window_exceeded"`
+
+        - `stop_sequence: string`
+
+          Which custom stop sequence was generated, if any.
+
+          This value will be a non-null string if one of your custom stop sequences was generated.
+
+        - `type: "message"`
+
+          Object type.
+
+          For Messages, this is always `"message"`.
+
+        - `usage: object`
+
+          Billing and rate-limit usage.
+
+          Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+
+          Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+
+          For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+
+          Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+
+          - `cache_creation: object`
+
+            Breakdown of cached tokens by TTL
+
+            - `ephemeral_1h_input_tokens: number`
+
+              The number of input tokens used to create the 1 hour cache entry.
+
+              minimum: 0
+
+            - `ephemeral_5m_input_tokens: number`
+
+              The number of input tokens used to create the 5 minute cache entry.
+
+              minimum: 0
+
+          - `cache_creation_input_tokens: number`
+
+            The number of input tokens used to create the cache entry.
+
+            minimum: 0
+
+          - `cache_read_input_tokens: number`
+
+            The number of input tokens read from the cache.
+
+            minimum: 0
+
+          - `inference_geo: string`
+
+            The geographic region where inference was performed for this request.
+
+          - `input_tokens: number`
+
+            The number of input tokens which were used.
+
+            minimum: 0
+
+          - `output_tokens: number`
+
+            The number of output tokens which were used.
+
+            minimum: 0
+
+          - `output_tokens_details: object`
+
+            Breakdown of output tokens by category.
+
+            `output_tokens` remains the inclusive, authoritative total used for billing.
+            This object provides a read-only decomposition for observability — for example,
+            how many of the billed output tokens were spent on internal reasoning that may
+            have been summarized before being returned to you.
+
+            - `thinking_tokens: number`
+
+              Number of output tokens the model generated as internal reasoning, including
+              the thinking-block delimiter tokens.
+
+              Reflects the raw reasoning the model produced, not the (possibly shorter)
+              summarized thinking text returned in the response body. Computed by
+              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              generation count by a small number of tokens. Always ≤ `output_tokens`;
+              `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+              minimum: 0
+
+          - `server_tool_use: object`
+
+            The number of server tool requests.
+
+            - `web_fetch_requests: number`
+
+              The number of web fetch tool requests.
+
+              minimum: 0
+
+            - `web_search_requests: number`
+
+              The number of web search tool requests.
+
+              minimum: 0
+
+          - `service_tier: "standard" or "priority" or "batch"`
+
+            If the request used the priority, standard, or batch tier.
+
+            - `"standard"`
+
+            - `"priority"`
+
+            - `"batch"`
+
+      - `type: "succeeded"`
+
+    - `message_batch_errored_result: object`
+
+      - `error: object`
+
+        - `error: InvalidRequestError or AuthenticationError or BillingError or 6 more`
+
+          - `invalid_request_error: object`
+
+            - `message: string`
+
+            - `type: "invalid_request_error"`
+
+          - `authentication_error: object`
+
+            - `message: string`
+
+            - `type: "authentication_error"`
+
+          - `billing_error: object`
+
+            - `message: string`
+
+            - `type: "billing_error"`
+
+          - `permission_error: object`
+
+            - `message: string`
+
+            - `type: "permission_error"`
+
+          - `not_found_error: object`
+
+            - `message: string`
+
+            - `type: "not_found_error"`
+
+          - `rate_limit_error: object`
+
+            - `message: string`
+
+            - `type: "rate_limit_error"`
+
+          - `gateway_timeout_error: object`
+
+            - `message: string`
+
+            - `type: "timeout_error"`
+
+          - `api_error_object: object`
+
+            - `message: string`
+
+            - `type: "api_error"`
+
+          - `overloaded_error: object`
+
+            - `message: string`
+
+            - `type: "overloaded_error"`
+
+        - `request_id: string`
+
+        - `type: "error"`
+
+      - `type: "errored"`
+
+    - `message_batch_canceled_result: object`
+
+      - `type: "canceled"`
+
+    - `message_batch_expired_result: object`
+
+      - `type: "expired"`
+
+### Message Batch Request Counts
+
+- `message_batch_request_counts: object`
+
+  - `canceled: number`
+
+    Number of requests in the Message Batch that have been canceled.
+
+    This is zero until processing of the entire Message Batch has ended.
+
+  - `errored: number`
+
+    Number of requests in the Message Batch that encountered an error.
+
+    This is zero until processing of the entire Message Batch has ended.
+
+  - `expired: number`
+
+    Number of requests in the Message Batch that have expired.
+
+    This is zero until processing of the entire Message Batch has ended.
+
+  - `processing: number`
+
+    Number of requests in the Message Batch that are processing.
+
+  - `succeeded: number`
+
+    Number of requests in the Message Batch that have completed successfully.
+
+    This is zero until processing of the entire Message Batch has ended.
+
+### Message Batch Result
+
+- `message_batch_result: MessageBatchSucceededResult or MessageBatchErroredResult or MessageBatchCanceledResult or MessageBatchExpiredResult`
+
+  Processing result for this request.
+
+  Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
+
+  - `message_batch_succeeded_result: object`
+
+    - `message: object`
+
+      - `id: string`
+
+        Unique object identifier.
+
+        The format and length of IDs may change over time.
+
+      - `container: object`
+
+        Information about the container used in the request (for the code execution tool)
+
+        - `id: string`
+
+          Identifier for the container used in this request
+
+        - `expires_at: string`
+
+          The time at which the container will expire.
+
+          format: date-time
+
+        - `skills: array of ContainerSkill`
+
+          Skills loaded in the container
+
+          - `skill_id: string`
+
+            Skill ID
+
+            maxLength: 64, minLength: 1
+
+          - `type: "anthropic" or "custom"`
+
+            Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+
+            - `"anthropic"`
+
+            - `"custom"`
+
+          - `version: string`
+
+            The resolved version: a skill version ID for custom skills.
+
+            maxLength: 64, minLength: 1
+
+      - `content: array of ContentBlock`
+
+        Content generated by the model.
+
+        This is an array of content blocks, each of which has a `type` that determines its shape.
+
+        Example:
+
+        ```json
+        [{"type": "text", "text": "Hi, I'm Claude."}]
+        ```
+
+        If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
+
+        For example, if the input `messages` were:
+
+        ```json
+        [
+          {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+          {"role": "assistant", "content": "The best answer is ("}
+        ]
+        ```
+
+        Then the response `content` might be:
+
+        ```json
+        [{"type": "text", "text": "B)"}]
+        ```
+
+        - `text_block: object`
+
+          - `citations: array of TextCitation`
+
+            Citations supporting the text block.
+
+            The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+
+            - `citation_char_location: object`
+
+              - `cited_text: string`
+
+              - `document_index: number`
+
+                minimum: 0
+
+              - `document_title: string`
+
+              - `end_char_index: number`
+
+              - `file_id: string`
+
+              - `start_char_index: number`
+
+                minimum: 0
+
+              - `type: "char_location"`
+
+            - `citation_page_location: object`
+
+              - `cited_text: string`
+
+              - `document_index: number`
+
+                minimum: 0
+
+              - `document_title: string`
+
+              - `end_page_number: number`
+
+              - `file_id: string`
+
+              - `start_page_number: number`
+
+                minimum: 1
+
+              - `type: "page_location"`
+
+            - `citation_content_block_location: object`
+
+              - `cited_text: string`
+
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+              - `document_index: number`
+
+                minimum: 0
+
+              - `document_title: string`
+
+              - `end_block_index: number`
+
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+              - `file_id: string`
+
+              - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
+
+                minimum: 0
+
+              - `type: "content_block_location"`
+
+            - `citations_web_search_result_location: object`
+
+              - `cited_text: string`
+
+              - `encrypted_index: string`
+
+              - `title: string`
+
+                maxLength: 512
+
+              - `type: "web_search_result_location"`
+
+              - `url: string`
+
+            - `citations_search_result_location: object`
+
+              - `cited_text: string`
+
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+              - `end_block_index: number`
+
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+              - `search_result_index: number`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
+
+                minimum: 0
+
+              - `source: string`
+
+              - `start_block_index: number`
+
+                0-based index of the first cited block in the source's `content` array.
+
+                minimum: 0
+
+              - `title: string`
+
+              - `type: "search_result_location"`
+
+          - `text: string`
+
+            maxLength: 5000000, minLength: 0
+
+          - `type: "text"`
+
+        - `thinking_block: object`
+
+          - `signature: string`
+
+            A value used to verify that this thinking block was generated by Claude when it is passed back to the API.
+
+            This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
+
+            See [extended thinking](build-with-claude/extended-thinking.md) for details.
+
+          - `thinking: string`
+
+            The text of Claude's thinking process for this block.
+
+          - `type: "thinking"`
+
+        - `redacted_thinking_block: object`
+
+          - `data: string`
+
+            The contents of this redacted thinking block, returned when portions of the model's thinking were safety-redacted. This field is opaque and encrypted, with no readable content.
+
+            Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
+
+            See [extended thinking](build-with-claude/extended-thinking.md) for details.
+
+          - `type: "redacted_thinking"`
+
+        - `tool_use_block: object`
+
+          - `id: string`
+
+            pattern: ^[a-zA-Z0-9_-]+$
+
+          - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
+
+            Tool invocation directly from the model.
+
+            - `direct_caller: object`
+
+              Tool invocation directly from the model.
+
+              - `type: "direct"`
+
+            - `server_tool_caller: object`
+
+              Tool invocation generated by a server-side tool.
+
+              - `tool_id: string`
+
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+              - `type: "code_execution_20250825"`
+
+            - `server_tool_caller_20260120: object`
+
+              - `tool_id: string`
+
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+              - `type: "code_execution_20260120"`
+
+          - `input: map[unknown]`
+
+          - `name: string`
+
+            minLength: 1
+
+          - `type: "tool_use"`
+
+          - `toolset_name: optional string`
+
+            For a toolset member tool_use, the toolset family.
+
+            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
+        - `server_tool_use_block: object`
+
+          - `id: string`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
+
+            Tool invocation directly from the model.
+
+            - `direct_caller: object`
+
+              Tool invocation directly from the model.
+
+            - `server_tool_caller: object`
+
+              Tool invocation generated by a server-side tool.
+
+            - `server_tool_caller_20260120: object`
+
+          - `input: map[unknown]`
+
+          - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+
+            - `"web_search"`
+
+            - `"web_fetch"`
+
+            - `"code_execution"`
+
+            - `"bash_code_execution"`
+
+            - `"text_editor_code_execution"`
+
+            - `"tool_search_tool_regex"`
+
+            - `"tool_search_tool_bm25"`
+
+          - `type: "server_tool_use"`
+
+        - `web_search_tool_result_block: object`
+
+          - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
+
+            Tool invocation directly from the model.
+
+            - `direct_caller: object`
+
+              Tool invocation directly from the model.
+
+            - `server_tool_caller: object`
+
+              Tool invocation generated by a server-side tool.
+
+            - `server_tool_caller_20260120: object`
+
+          - `content: WebSearchToolResultError or array of WebSearchResultBlock`
+
+            - `web_search_tool_result_error: object`
+
+              - `error_code: "invalid_tool_input" or "unavailable" or "max_uses_exceeded" or 3 more`
+
+                - `"invalid_tool_input"`
+
+                - `"unavailable"`
+
+                - `"max_uses_exceeded"`
+
+                - `"too_many_requests"`
+
+                - `"query_too_long"`
+
+                - `"request_too_large"`
+
+              - `type: "web_search_tool_result_error"`
+
+            - `union_member_1: array of WebSearchResultBlock`
+
+              - `encrypted_content: string`
+
+              - `page_age: string`
+
+              - `title: string`
+
+              - `type: "web_search_result"`
+
+              - `url: string`
+
+          - `tool_use_id: string`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `type: "web_search_tool_result"`
+
+        - `web_fetch_tool_result_block: object`
+
+          - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
+
+            Tool invocation directly from the model.
+
+            - `direct_caller: object`
+
+              Tool invocation directly from the model.
+
+            - `server_tool_caller: object`
+
+              Tool invocation generated by a server-side tool.
+
+            - `server_tool_caller_20260120: object`
+
+          - `content: WebFetchToolResultErrorBlock or WebFetchBlock`
+
+            - `web_fetch_tool_result_error_block: object`
+
+              - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
+
+                - `"invalid_tool_input"`
+
+                - `"url_too_long"`
+
+                - `"url_not_allowed"`
+
+                - `"url_not_in_prior_context"`
+
+                - `"url_not_accessible"`
+
+                - `"unsupported_content_type"`
+
+                - `"too_many_requests"`
+
+                - `"max_uses_exceeded"`
+
+                - `"unavailable"`
+
+              - `type: "web_fetch_tool_result_error"`
+
+            - `web_fetch_block: object`
+
+              - `content: object`
+
+                - `citations: object`
+
+                  Citation configuration for the document
+
+                  - `enabled: boolean`
+
+                - `source: Base64PDFSource or PlainTextSource`
+
+                  - `base64_pdf_source: object`
+
+                    - `data: string`
+
+                      format: byte
+
+                    - `media_type: "application/pdf"`
+
+                    - `type: "base64"`
+
+                  - `plain_text_source: object`
+
+                    - `data: string`
+
+                    - `media_type: "text/plain"`
+
+                    - `type: "text"`
+
+                - `title: string`
+
+                  The title of the document
+
+                - `type: "document"`
+
+              - `retrieved_at: string`
+
+                ISO 8601 timestamp when the content was retrieved
+
+              - `type: "web_fetch_result"`
+
+              - `url: string`
+
+                Fetched content URL
+
+          - `tool_use_id: string`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `type: "web_fetch_tool_result"`
+
+        - `code_execution_tool_result_block: object`
+
+          - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
+
+            Code execution result with encrypted stdout for PFC + web_search results.
+
+            - `code_execution_tool_result_error: object`
+
+              - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
+
+                - `"invalid_tool_input"`
+
+                - `"unavailable"`
+
+                - `"too_many_requests"`
+
+                - `"execution_time_exceeded"`
+
+              - `type: "code_execution_tool_result_error"`
+
+            - `code_execution_result_block: object`
+
+              - `content: array of CodeExecutionOutputBlock`
+
+                - `file_id: string`
+
+                - `type: "code_execution_output"`
+
+              - `return_code: number`
+
+              - `stderr: string`
+
+              - `stdout: string`
+
+              - `type: "code_execution_result"`
+
+            - `encrypted_code_execution_result_block: object`
+
+              Code execution result with encrypted stdout for PFC + web_search results.
+
+              - `content: array of CodeExecutionOutputBlock`
+
+                - `file_id: string`
+
+                - `type: "code_execution_output"`
+
+              - `encrypted_stdout: string`
+
+              - `return_code: number`
+
+              - `stderr: string`
+
+              - `type: "encrypted_code_execution_result"`
+
+          - `tool_use_id: string`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `type: "code_execution_tool_result"`
+
+        - `bash_code_execution_tool_result_block: object`
+
+          - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
+
+            - `bash_code_execution_tool_result_error: object`
+
+              - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
+
+                - `"invalid_tool_input"`
+
+                - `"unavailable"`
+
+                - `"too_many_requests"`
+
+                - `"execution_time_exceeded"`
+
+                - `"output_file_too_large"`
+
+              - `type: "bash_code_execution_tool_result_error"`
+
+            - `bash_code_execution_result_block: object`
+
+              - `content: array of BashCodeExecutionOutputBlock`
+
+                - `file_id: string`
+
+                - `type: "bash_code_execution_output"`
+
+              - `return_code: number`
+
+              - `stderr: string`
+
+              - `stdout: string`
+
+              - `type: "bash_code_execution_result"`
+
+          - `tool_use_id: string`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `type: "bash_code_execution_tool_result"`
+
+        - `text_editor_code_execution_tool_result_block: object`
+
+          - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
+
+            - `text_editor_code_execution_tool_result_error: object`
+
+              - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
+
+                - `"invalid_tool_input"`
+
+                - `"unavailable"`
+
+                - `"too_many_requests"`
+
+                - `"execution_time_exceeded"`
+
+                - `"file_not_found"`
+
+              - `error_message: string`
+
+              - `type: "text_editor_code_execution_tool_result_error"`
+
+            - `text_editor_code_execution_view_result_block: object`
+
+              - `content: string`
+
+              - `file_type: "text" or "image" or "pdf"`
+
+                - `"text"`
+
+                - `"image"`
+
+                - `"pdf"`
+
+              - `num_lines: number`
+
+              - `start_line: number`
+
+              - `total_lines: number`
+
+              - `type: "text_editor_code_execution_view_result"`
+
+            - `text_editor_code_execution_create_result_block: object`
+
+              - `is_file_update: boolean`
+
+              - `type: "text_editor_code_execution_create_result"`
+
+            - `text_editor_code_execution_str_replace_result_block: object`
+
+              - `lines: array of string`
+
+              - `new_lines: number`
+
+              - `new_start: number`
+
+              - `old_lines: number`
+
+              - `old_start: number`
+
+              - `type: "text_editor_code_execution_str_replace_result"`
+
+          - `tool_use_id: string`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `type: "text_editor_code_execution_tool_result"`
+
+        - `tool_search_tool_result_block: object`
+
+          - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
+
+            - `tool_search_tool_result_error: object`
+
+              - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
+
+                - `"invalid_tool_input"`
+
+                - `"unavailable"`
+
+                - `"too_many_requests"`
+
+                - `"execution_time_exceeded"`
+
+              - `error_message: string`
+
+              - `type: "tool_search_tool_result_error"`
+
+            - `tool_search_tool_search_result_block: object`
+
+              - `tool_references: array of ToolReferenceBlock`
+
+                - `tool_name: string`
+
+                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
+                - `type: "tool_reference"`
+
+              - `type: "tool_search_tool_search_result"`
+
+          - `tool_use_id: string`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `type: "tool_search_tool_result"`
+
+        - `container_upload_block: object`
+
+          Response model for a file uploaded to the container.
+
+          - `file_id: string`
+
+          - `type: "container_upload"`
+
+      - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5-1"`
+
+          Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+        - `"claude-mythos-5-1"`
+
+          Our most capable model for cybersecurity and biology research, available through trusted access programs
+
+        - `"claude-sonnet-5"`
+
+          High-performance model for coding and agents
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `"claude-mythos-5"`
+
+          Most capable model for cybersecurity and biology research
+
+        - `"claude-opus-5"`
+
+          Powerful intelligence for long-running agents and coding
+
+        - `"claude-opus-4-8"`
+
+          Powerful intelligence for long-running agents and coding
+
+        - `"claude-opus-4-7"`
+
+          Powerful intelligence for long-running agents and coding
+
+        - `"claude-mythos-preview"`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `"claude-opus-4-6"`
+
+          Powerful intelligence for long-running agents and coding
+
+        - `"claude-sonnet-4-6"`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"`
+
+          Powerful intelligence for long-running agents and coding
+
+        - `"claude-opus-4-5-20251101"`
+
+          Powerful intelligence for long-running agents and coding
+
+        - `"claude-sonnet-4-5"`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"`
+
+          High-performance model for agents and coding
+
+      - `role: "assistant"`
+
+        Conversational role of the generated message.
+
+        This will always be `"assistant"`.
+
+      - `stop_details: object`
+
+        Structured information about a refusal.
+
+        - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
+
+          The policy category that triggered a refusal.
+
+          - `"cyber"`
+
+            The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
+          - `"bio"`
+
+            The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+
+          - `"frontier_llm"`
+
+            The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
+          - `"reasoning_extraction"`
+
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+
+          - `"general_harms"`
+
+            The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
+        - `explanation: string`
+
+          Human-readable explanation of the refusal.
+
+          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `type: "refusal"`
+
+      - `stop_reason: "end_turn" or "max_tokens" or "stop_sequence" or 4 more`
+
+        The reason that we stopped.
+
+        This may be one the following values:
+
+        * `"end_turn"`: the model reached a natural stopping point
+        * `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
+        * `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
+        * `"tool_use"`: the model invoked one or more tools
+        * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
+        * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+        * `"model_context_window_exceeded"`: we exceeded the model's context window
+
+        In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
+
+        - `"end_turn"`
+
+        - `"max_tokens"`
+
+        - `"stop_sequence"`
+
+        - `"tool_use"`
+
+        - `"pause_turn"`
+
+        - `"refusal"`
+
+        - `"model_context_window_exceeded"`
+
+      - `stop_sequence: string`
+
+        Which custom stop sequence was generated, if any.
+
+        This value will be a non-null string if one of your custom stop sequences was generated.
+
+      - `type: "message"`
+
+        Object type.
+
+        For Messages, this is always `"message"`.
+
+      - `usage: object`
+
+        Billing and rate-limit usage.
+
+        Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+
+        Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+
+        For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+
+        Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+
+        - `cache_creation: object`
+
+          Breakdown of cached tokens by TTL
+
+          - `ephemeral_1h_input_tokens: number`
+
+            The number of input tokens used to create the 1 hour cache entry.
+
+            minimum: 0
+
+          - `ephemeral_5m_input_tokens: number`
+
+            The number of input tokens used to create the 5 minute cache entry.
+
+            minimum: 0
+
+        - `cache_creation_input_tokens: number`
+
+          The number of input tokens used to create the cache entry.
+
+          minimum: 0
+
+        - `cache_read_input_tokens: number`
+
+          The number of input tokens read from the cache.
+
+          minimum: 0
+
+        - `inference_geo: string`
+
+          The geographic region where inference was performed for this request.
+
+        - `input_tokens: number`
+
+          The number of input tokens which were used.
+
+          minimum: 0
+
+        - `output_tokens: number`
+
+          The number of output tokens which were used.
+
+          minimum: 0
+
+        - `output_tokens_details: object`
+
+          Breakdown of output tokens by category.
+
+          `output_tokens` remains the inclusive, authoritative total used for billing.
+          This object provides a read-only decomposition for observability — for example,
+          how many of the billed output tokens were spent on internal reasoning that may
+          have been summarized before being returned to you.
+
+          - `thinking_tokens: number`
+
+            Number of output tokens the model generated as internal reasoning, including
+            the thinking-block delimiter tokens.
+
+            Reflects the raw reasoning the model produced, not the (possibly shorter)
+            summarized thinking text returned in the response body. Computed by
+            re-tokenizing the raw reasoning text, so it may differ from the model's exact
+            generation count by a small number of tokens. Always ≤ `output_tokens`;
+            `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+            minimum: 0
+
+        - `server_tool_use: object`
+
+          The number of server tool requests.
+
+          - `web_fetch_requests: number`
+
+            The number of web fetch tool requests.
+
+            minimum: 0
+
+          - `web_search_requests: number`
+
+            The number of web search tool requests.
+
+            minimum: 0
+
+        - `service_tier: "standard" or "priority" or "batch"`
+
+          If the request used the priority, standard, or batch tier.
+
+          - `"standard"`
+
+          - `"priority"`
+
+          - `"batch"`
+
+    - `type: "succeeded"`
+
+  - `message_batch_errored_result: object`
+
+    - `error: object`
+
+      - `error: InvalidRequestError or AuthenticationError or BillingError or 6 more`
+
+        - `invalid_request_error: object`
+
+          - `message: string`
+
+          - `type: "invalid_request_error"`
+
+        - `authentication_error: object`
+
+          - `message: string`
+
+          - `type: "authentication_error"`
+
+        - `billing_error: object`
+
+          - `message: string`
+
+          - `type: "billing_error"`
+
+        - `permission_error: object`
+
+          - `message: string`
+
+          - `type: "permission_error"`
+
+        - `not_found_error: object`
+
+          - `message: string`
+
+          - `type: "not_found_error"`
+
+        - `rate_limit_error: object`
+
+          - `message: string`
+
+          - `type: "rate_limit_error"`
+
+        - `gateway_timeout_error: object`
+
+          - `message: string`
+
+          - `type: "timeout_error"`
+
+        - `api_error_object: object`
+
+          - `message: string`
+
+          - `type: "api_error"`
+
+        - `overloaded_error: object`
+
+          - `message: string`
+
+          - `type: "overloaded_error"`
+
+      - `request_id: string`
+
+      - `type: "error"`
+
+    - `type: "errored"`
+
+  - `message_batch_canceled_result: object`
+
+    - `type: "canceled"`
+
+  - `message_batch_expired_result: object`
+
+    - `type: "expired"`
+
+### Message Batch Succeeded Result
+
+- `message_batch_succeeded_result: object`
+
+  - `message: object`
+
+    - `id: string`
+
+      Unique object identifier.
+
+      The format and length of IDs may change over time.
+
+    - `container: object`
+
+      Information about the container used in the request (for the code execution tool)
+
+      - `id: string`
+
+        Identifier for the container used in this request
+
+      - `expires_at: string`
+
+        The time at which the container will expire.
+
+        format: date-time
+
+      - `skills: array of ContainerSkill`
+
+        Skills loaded in the container
+
+        - `skill_id: string`
+
+          Skill ID
+
+          maxLength: 64, minLength: 1
+
+        - `type: "anthropic" or "custom"`
+
+          Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+
+          - `"anthropic"`
+
+          - `"custom"`
+
+        - `version: string`
+
+          The resolved version: a skill version ID for custom skills.
+
+          maxLength: 64, minLength: 1
+
+    - `content: array of ContentBlock`
+
+      Content generated by the model.
+
+      This is an array of content blocks, each of which has a `type` that determines its shape.
+
+      Example:
+
+      ```json
+      [{"type": "text", "text": "Hi, I'm Claude."}]
+      ```
+
+      If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
+
+      For example, if the input `messages` were:
+
+      ```json
+      [
+        {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+        {"role": "assistant", "content": "The best answer is ("}
+      ]
+      ```
+
+      Then the response `content` might be:
+
+      ```json
+      [{"type": "text", "text": "B)"}]
+      ```
+
+      - `text_block: object`
+
+        - `citations: array of TextCitation`
+
+          Citations supporting the text block.
+
+          The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+
+          - `citation_char_location: object`
+
+            - `cited_text: string`
+
+            - `document_index: number`
+
+              minimum: 0
+
+            - `document_title: string`
+
+            - `end_char_index: number`
+
+            - `file_id: string`
+
+            - `start_char_index: number`
+
+              minimum: 0
+
+            - `type: "char_location"`
+
+          - `citation_page_location: object`
+
+            - `cited_text: string`
+
+            - `document_index: number`
+
+              minimum: 0
+
+            - `document_title: string`
+
+            - `end_page_number: number`
+
+            - `file_id: string`
+
+            - `start_page_number: number`
+
+              minimum: 1
+
+            - `type: "page_location"`
+
+          - `citation_content_block_location: object`
+
+            - `cited_text: string`
+
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+            - `document_index: number`
+
+              minimum: 0
+
+            - `document_title: string`
+
+            - `end_block_index: number`
+
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+            - `file_id: string`
+
+            - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
+
+              minimum: 0
+
+            - `type: "content_block_location"`
+
+          - `citations_web_search_result_location: object`
+
+            - `cited_text: string`
+
+            - `encrypted_index: string`
+
+            - `title: string`
+
+              maxLength: 512
+
+            - `type: "web_search_result_location"`
+
+            - `url: string`
+
+          - `citations_search_result_location: object`
+
+            - `cited_text: string`
+
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+            - `end_block_index: number`
+
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+            - `search_result_index: number`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
+
+              minimum: 0
+
+            - `source: string`
+
+            - `start_block_index: number`
+
+              0-based index of the first cited block in the source's `content` array.
+
+              minimum: 0
+
+            - `title: string`
+
+            - `type: "search_result_location"`
+
+        - `text: string`
+
+          maxLength: 5000000, minLength: 0
+
+        - `type: "text"`
+
+      - `thinking_block: object`
+
+        - `signature: string`
+
+          A value used to verify that this thinking block was generated by Claude when it is passed back to the API.
+
+          This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
+
+          See [extended thinking](build-with-claude/extended-thinking.md) for details.
+
+        - `thinking: string`
+
+          The text of Claude's thinking process for this block.
+
+        - `type: "thinking"`
+
+      - `redacted_thinking_block: object`
+
+        - `data: string`
+
+          The contents of this redacted thinking block, returned when portions of the model's thinking were safety-redacted. This field is opaque and encrypted, with no readable content.
+
+          Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
+
+          See [extended thinking](build-with-claude/extended-thinking.md) for details.
+
+        - `type: "redacted_thinking"`
+
+      - `tool_use_block: object`
+
+        - `id: string`
+
+          pattern: ^[a-zA-Z0-9_-]+$
+
+        - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
+
+          Tool invocation directly from the model.
+
+          - `direct_caller: object`
+
+            Tool invocation directly from the model.
+
+            - `type: "direct"`
+
+          - `server_tool_caller: object`
+
+            Tool invocation generated by a server-side tool.
+
+            - `tool_id: string`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: "code_execution_20250825"`
+
+          - `server_tool_caller_20260120: object`
+
+            - `tool_id: string`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+            - `type: "code_execution_20260120"`
+
+        - `input: map[unknown]`
+
+        - `name: string`
+
+          minLength: 1
+
+        - `type: "tool_use"`
+
+        - `toolset_name: optional string`
+
+          For a toolset member tool_use, the toolset family.
+
+          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
+      - `server_tool_use_block: object`
+
+        - `id: string`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+        - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
+
+          Tool invocation directly from the model.
+
+          - `direct_caller: object`
+
+            Tool invocation directly from the model.
+
+          - `server_tool_caller: object`
+
+            Tool invocation generated by a server-side tool.
+
+          - `server_tool_caller_20260120: object`
+
+        - `input: map[unknown]`
+
+        - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
+
+          - `"web_search"`
+
+          - `"web_fetch"`
+
+          - `"code_execution"`
+
+          - `"bash_code_execution"`
+
+          - `"text_editor_code_execution"`
+
+          - `"tool_search_tool_regex"`
+
+          - `"tool_search_tool_bm25"`
+
+        - `type: "server_tool_use"`
+
+      - `web_search_tool_result_block: object`
+
+        - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
+
+          Tool invocation directly from the model.
+
+          - `direct_caller: object`
+
+            Tool invocation directly from the model.
+
+          - `server_tool_caller: object`
+
+            Tool invocation generated by a server-side tool.
+
+          - `server_tool_caller_20260120: object`
+
+        - `content: WebSearchToolResultError or array of WebSearchResultBlock`
+
+          - `web_search_tool_result_error: object`
+
+            - `error_code: "invalid_tool_input" or "unavailable" or "max_uses_exceeded" or 3 more`
+
+              - `"invalid_tool_input"`
+
+              - `"unavailable"`
+
+              - `"max_uses_exceeded"`
+
+              - `"too_many_requests"`
+
+              - `"query_too_long"`
+
+              - `"request_too_large"`
+
+            - `type: "web_search_tool_result_error"`
+
+          - `union_member_1: array of WebSearchResultBlock`
+
+            - `encrypted_content: string`
+
+            - `page_age: string`
+
+            - `title: string`
+
+            - `type: "web_search_result"`
+
+            - `url: string`
+
+        - `tool_use_id: string`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+        - `type: "web_search_tool_result"`
+
+      - `web_fetch_tool_result_block: object`
+
+        - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
+
+          Tool invocation directly from the model.
+
+          - `direct_caller: object`
+
+            Tool invocation directly from the model.
+
+          - `server_tool_caller: object`
+
+            Tool invocation generated by a server-side tool.
+
+          - `server_tool_caller_20260120: object`
+
+        - `content: WebFetchToolResultErrorBlock or WebFetchBlock`
+
+          - `web_fetch_tool_result_error_block: object`
+
+            - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
+
+              - `"invalid_tool_input"`
+
+              - `"url_too_long"`
+
+              - `"url_not_allowed"`
+
+              - `"url_not_in_prior_context"`
+
+              - `"url_not_accessible"`
+
+              - `"unsupported_content_type"`
+
+              - `"too_many_requests"`
+
+              - `"max_uses_exceeded"`
+
+              - `"unavailable"`
+
+            - `type: "web_fetch_tool_result_error"`
+
+          - `web_fetch_block: object`
+
+            - `content: object`
+
+              - `citations: object`
+
+                Citation configuration for the document
+
+                - `enabled: boolean`
+
+              - `source: Base64PDFSource or PlainTextSource`
+
+                - `base64_pdf_source: object`
+
+                  - `data: string`
+
+                    format: byte
+
+                  - `media_type: "application/pdf"`
+
+                  - `type: "base64"`
+
+                - `plain_text_source: object`
+
+                  - `data: string`
+
+                  - `media_type: "text/plain"`
+
+                  - `type: "text"`
+
+              - `title: string`
+
+                The title of the document
+
+              - `type: "document"`
+
+            - `retrieved_at: string`
+
+              ISO 8601 timestamp when the content was retrieved
+
+            - `type: "web_fetch_result"`
+
+            - `url: string`
+
+              Fetched content URL
+
+        - `tool_use_id: string`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+        - `type: "web_fetch_tool_result"`
+
+      - `code_execution_tool_result_block: object`
+
+        - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
+
+          Code execution result with encrypted stdout for PFC + web_search results.
+
+          - `code_execution_tool_result_error: object`
+
+            - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
+
+              - `"invalid_tool_input"`
+
+              - `"unavailable"`
+
+              - `"too_many_requests"`
+
+              - `"execution_time_exceeded"`
+
+            - `type: "code_execution_tool_result_error"`
+
+          - `code_execution_result_block: object`
+
+            - `content: array of CodeExecutionOutputBlock`
+
+              - `file_id: string`
+
+              - `type: "code_execution_output"`
+
+            - `return_code: number`
+
+            - `stderr: string`
+
+            - `stdout: string`
+
+            - `type: "code_execution_result"`
+
+          - `encrypted_code_execution_result_block: object`
+
+            Code execution result with encrypted stdout for PFC + web_search results.
+
+            - `content: array of CodeExecutionOutputBlock`
+
+              - `file_id: string`
+
+              - `type: "code_execution_output"`
+
+            - `encrypted_stdout: string`
+
+            - `return_code: number`
+
+            - `stderr: string`
+
+            - `type: "encrypted_code_execution_result"`
+
+        - `tool_use_id: string`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+        - `type: "code_execution_tool_result"`
+
+      - `bash_code_execution_tool_result_block: object`
+
+        - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
+
+          - `bash_code_execution_tool_result_error: object`
+
+            - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
+
+              - `"invalid_tool_input"`
+
+              - `"unavailable"`
+
+              - `"too_many_requests"`
+
+              - `"execution_time_exceeded"`
+
+              - `"output_file_too_large"`
+
+            - `type: "bash_code_execution_tool_result_error"`
+
+          - `bash_code_execution_result_block: object`
+
+            - `content: array of BashCodeExecutionOutputBlock`
+
+              - `file_id: string`
+
+              - `type: "bash_code_execution_output"`
+
+            - `return_code: number`
+
+            - `stderr: string`
+
+            - `stdout: string`
+
+            - `type: "bash_code_execution_result"`
+
+        - `tool_use_id: string`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+        - `type: "bash_code_execution_tool_result"`
+
+      - `text_editor_code_execution_tool_result_block: object`
+
+        - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
+
+          - `text_editor_code_execution_tool_result_error: object`
+
+            - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
+
+              - `"invalid_tool_input"`
+
+              - `"unavailable"`
+
+              - `"too_many_requests"`
+
+              - `"execution_time_exceeded"`
+
+              - `"file_not_found"`
+
+            - `error_message: string`
+
+            - `type: "text_editor_code_execution_tool_result_error"`
+
+          - `text_editor_code_execution_view_result_block: object`
+
+            - `content: string`
+
+            - `file_type: "text" or "image" or "pdf"`
+
+              - `"text"`
+
+              - `"image"`
+
+              - `"pdf"`
+
+            - `num_lines: number`
+
+            - `start_line: number`
+
+            - `total_lines: number`
+
+            - `type: "text_editor_code_execution_view_result"`
+
+          - `text_editor_code_execution_create_result_block: object`
+
+            - `is_file_update: boolean`
+
+            - `type: "text_editor_code_execution_create_result"`
+
+          - `text_editor_code_execution_str_replace_result_block: object`
+
+            - `lines: array of string`
+
+            - `new_lines: number`
+
+            - `new_start: number`
+
+            - `old_lines: number`
+
+            - `old_start: number`
+
+            - `type: "text_editor_code_execution_str_replace_result"`
+
+        - `tool_use_id: string`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+        - `type: "text_editor_code_execution_tool_result"`
+
+      - `tool_search_tool_result_block: object`
+
+        - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
+
+          - `tool_search_tool_result_error: object`
+
+            - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
+
+              - `"invalid_tool_input"`
+
+              - `"unavailable"`
+
+              - `"too_many_requests"`
+
+              - `"execution_time_exceeded"`
+
+            - `error_message: string`
+
+            - `type: "tool_search_tool_result_error"`
+
+          - `tool_search_tool_search_result_block: object`
+
+            - `tool_references: array of ToolReferenceBlock`
+
+              - `tool_name: string`
+
+                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
+              - `type: "tool_reference"`
+
+            - `type: "tool_search_tool_search_result"`
+
+        - `tool_use_id: string`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+        - `type: "tool_search_tool_result"`
+
+      - `container_upload_block: object`
+
+        Response model for a file uploaded to the container.
+
+        - `file_id: string`
+
+        - `type: "container_upload"`
+
+    - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5-1"`
+
+        Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+      - `"claude-mythos-5-1"`
+
+        Our most capable model for cybersecurity and biology research, available through trusted access programs
+
+      - `"claude-sonnet-5"`
+
+        High-performance model for coding and agents
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `"claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
+
+      - `"claude-opus-5"`
+
+        Powerful intelligence for long-running agents and coding
+
+      - `"claude-opus-4-8"`
+
+        Powerful intelligence for long-running agents and coding
+
+      - `"claude-opus-4-7"`
+
+        Powerful intelligence for long-running agents and coding
+
+      - `"claude-mythos-preview"`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
+      - `"claude-opus-4-6"`
+
+        Powerful intelligence for long-running agents and coding
+
+      - `"claude-sonnet-4-6"`
+
+        Best combination of speed and intelligence
+
+      - `"claude-haiku-4-5"`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-haiku-4-5-20251001"`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-opus-4-5"`
+
+        Powerful intelligence for long-running agents and coding
+
+      - `"claude-opus-4-5-20251101"`
+
+        Powerful intelligence for long-running agents and coding
+
+      - `"claude-sonnet-4-5"`
+
+        High-performance model for agents and coding
+
+      - `"claude-sonnet-4-5-20250929"`
+
+        High-performance model for agents and coding
+
+    - `role: "assistant"`
+
+      Conversational role of the generated message.
+
+      This will always be `"assistant"`.
+
+    - `stop_details: object`
+
+      Structured information about a refusal.
+
+      - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
+
+        The policy category that triggered a refusal.
+
+        - `"cyber"`
+
+          The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
+        - `"bio"`
+
+          The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+
+        - `"frontier_llm"`
+
+          The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
+        - `"reasoning_extraction"`
+
+          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+
+        - `"general_harms"`
+
+          The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
+      - `explanation: string`
+
+        Human-readable explanation of the refusal.
+
+        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `type: "refusal"`
+
+    - `stop_reason: "end_turn" or "max_tokens" or "stop_sequence" or 4 more`
+
+      The reason that we stopped.
+
+      This may be one the following values:
+
+      * `"end_turn"`: the model reached a natural stopping point
+      * `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
+      * `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
+      * `"tool_use"`: the model invoked one or more tools
+      * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
+      * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+      * `"model_context_window_exceeded"`: we exceeded the model's context window
+
+      In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
+
+      - `"end_turn"`
+
+      - `"max_tokens"`
+
+      - `"stop_sequence"`
+
+      - `"tool_use"`
+
+      - `"pause_turn"`
+
+      - `"refusal"`
+
+      - `"model_context_window_exceeded"`
+
+    - `stop_sequence: string`
+
+      Which custom stop sequence was generated, if any.
+
+      This value will be a non-null string if one of your custom stop sequences was generated.
+
+    - `type: "message"`
+
+      Object type.
+
+      For Messages, this is always `"message"`.
+
+    - `usage: object`
+
+      Billing and rate-limit usage.
+
+      Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+
+      Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+
+      For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+
+      Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+
+      - `cache_creation: object`
+
+        Breakdown of cached tokens by TTL
+
+        - `ephemeral_1h_input_tokens: number`
+
+          The number of input tokens used to create the 1 hour cache entry.
+
+          minimum: 0
+
+        - `ephemeral_5m_input_tokens: number`
+
+          The number of input tokens used to create the 5 minute cache entry.
+
+          minimum: 0
+
+      - `cache_creation_input_tokens: number`
+
+        The number of input tokens used to create the cache entry.
+
+        minimum: 0
+
+      - `cache_read_input_tokens: number`
+
+        The number of input tokens read from the cache.
+
+        minimum: 0
+
+      - `inference_geo: string`
+
+        The geographic region where inference was performed for this request.
+
+      - `input_tokens: number`
+
+        The number of input tokens which were used.
+
+        minimum: 0
+
+      - `output_tokens: number`
+
+        The number of output tokens which were used.
+
+        minimum: 0
+
+      - `output_tokens_details: object`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+        - `thinking_tokens: number`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+          minimum: 0
+
+      - `server_tool_use: object`
+
+        The number of server tool requests.
+
+        - `web_fetch_requests: number`
+
+          The number of web fetch tool requests.
+
+          minimum: 0
+
+        - `web_search_requests: number`
+
+          The number of web search tool requests.
+
+          minimum: 0
+
+      - `service_tier: "standard" or "priority" or "batch"`
+
+        If the request used the priority, standard, or batch tier.
+
+        - `"standard"`
+
+        - `"priority"`
+
+        - `"batch"`
+
+  - `type: "succeeded"`
 
 ---
 

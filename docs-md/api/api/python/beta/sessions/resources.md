@@ -1,502 +1,1560 @@
 # Resources
 
-Copy page
+## Add Session Resource
 
-
+`beta.sessions.resources.add(session_id, **kwargs)  -> BetaManagedAgentsFileResource`
 
-Python
+**POST** `/v1/sessions/{session_id}/resources`
 
-# Resources
+Add Session Resource
 
-##### [Add Session Resource](api/beta/sessions/resources/add.md)
+### Parameters
 
-beta.sessions.resources.add(strsession\_id, ResourceAddParams\*\*kwargs)  -> [BetaManagedAgentsFileResource](api/beta/sessions/resources.md)
+- `session_id: str`
 
-POST/v1/sessions/{session\_id}/resources
+- `file_id: str`
 
-##### [List Session Resources](api/beta/sessions/resources/list.md)
+  ID of a previously uploaded file.
 
-beta.sessions.resources.list(strsession\_id, ResourceListParams\*\*kwargs)  -> SyncPageCursor[[BetaManagedAgentsSessionResource](api/beta/sessions/resources.md)]
+  minLength: 1, maxLength: 128
 
-GET/v1/sessions/{session\_id}/resources
+- `type: Literal["file"]`
 
-##### [Get Session Resource](api/beta/sessions/resources/retrieve.md)
+- `mount_path: Optional[str]`
 
-beta.sessions.resources.retrieve(strresource\_id, ResourceRetrieveParams\*\*kwargs)  -> [ResourceRetrieveResponse](api/beta/sessions/resources.md)
+  Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-GET/v1/sessions/{session\_id}/resources/{resource\_id}
+  minLength: 1, maxLength: 4096
 
-##### [Update Session Resource](api/beta/sessions/resources/update.md)
+- `betas: Optional[List[AnthropicBetaParam]]`
 
-beta.sessions.resources.update(strresource\_id, ResourceUpdateParams\*\*kwargs)  -> [ResourceUpdateResponse](api/beta/sessions/resources.md)
+  Optional header to specify the beta version(s) you want to use.
 
-POST/v1/sessions/{session\_id}/resources/{resource\_id}
+  - `str`
 
-##### [Delete Session Resource](api/beta/sessions/resources/delete.md)
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
 
-beta.sessions.resources.delete(strresource\_id, ResourceDeleteParams\*\*kwargs)  -> [BetaManagedAgentsDeleteSessionResource](api/beta/sessions/resources.md)
+    - `"message-batches-2024-09-24"`
 
-DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
+    - `"prompt-caching-2024-07-31"`
 
-##### ModelsExpand Collapse
+    - `"computer-use-2024-10-22"`
 
-
+    - `"computer-use-2025-01-24"`
 
-class BetaManagedAgentsDeleteSessionResource: …
+    - `"pdfs-2024-09-25"`
 
-Confirmation of resource deletion.
+    - `"token-counting-2024-11-01"`
 
-id: str
+    - `"token-efficient-tools-2025-02-19"`
 
-type: Literal["session\_resource\_deleted"]
+    - `"output-128k-2025-02-19"`
 
-
+    - `"files-api-2025-04-14"`
 
-class BetaManagedAgentsFileResource: …
+    - `"mcp-client-2025-04-04"`
 
-id: str
+    - `"mcp-client-2025-11-20"`
 
-created\_at: datetime
+    - `"dev-full-thinking-2025-05-14"`
 
-A timestamp in RFC 3339 format
+    - `"interleaved-thinking-2025-05-14"`
 
-file\_id: str
+    - `"code-execution-2025-05-22"`
 
-mount\_path: str
+    - `"extended-cache-ttl-2025-04-11"`
 
-type: Literal["file"]
+    - `"context-1m-2025-08-07"`
 
-updated\_at: datetime
+    - `"context-management-2025-06-27"`
 
-A timestamp in RFC 3339 format
+    - `"model-context-window-exceeded-2025-08-26"`
 
-
+    - `"skills-2025-10-02"`
 
-class BetaManagedAgentsGitHubRepositoryResource: …
+    - `"fast-mode-2026-02-01"`
 
-id: str
+    - `"output-300k-2026-03-24"`
 
-created\_at: datetime
+    - `"user-profiles-2026-03-24"`
 
-A timestamp in RFC 3339 format
+    - `"user-profiles-2026-08-18"`
 
-mount\_path: str
+    - `"advisor-tool-2026-03-01"`
 
-type: Literal["github\_repository"]
+    - `"managed-agents-2026-04-01"`
 
-updated\_at: datetime
+    - `"cache-diagnosis-2026-04-07"`
 
-A timestamp in RFC 3339 format
+    - `"dreaming-2026-04-21"`
 
-url: str
+    - `"thinking-token-count-2026-05-13"`
 
-
+    - `"server-side-fallback-2026-06-01"`
 
-checkout: Optional[Checkout]
+    - `"server-side-fallback-2026-07-01"`
 
-One of the following:
+    - `"fallback-credit-2026-06-01"`
 
-
+    - `"fallback-credit-2026-07-01"`
 
-class BetaManagedAgentsBranchCheckout: …
+    - `"agent-memory-2026-07-22"`
 
-name: str
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-Branch name to check out.
+    - `"compact-2026-01-12"`
 
-type: Literal["branch"]
+    - `"computer-use-2025-11-24"`
 
-
+    - `"mcp-tunnels-2026-06-22"`
 
-class BetaManagedAgentsCommitCheckout: …
+    - `"structured-outputs-2025-11-13"`
 
-sha: str
+    - `"task-budgets-2026-03-13"`
 
-Full commit SHA to check out.
+    - `"thinking-display-updates-2026-08-18"`
 
-type: Literal["commit"]
+    - `"ce-user-management-2026-07-13"`
 
-
+    - `"mid-conversation-output-config-2026-07-01"`
 
-class BetaManagedAgentsMemoryStoreResource: …
+    - `"thinking-binding-controls-2026-08-01"`
 
-A memory store attached to an agent session.
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-memory\_store\_id: str
+### Returns
 
-The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+- `class BetaManagedAgentsFileResource: …`
 
-type: Literal["memory\_store"]
+  - `id: str`
 
-
+  - `created_at: datetime`
 
-access: Optional[Literal["read\_write", "read\_only"]]
+    A timestamp in RFC 3339 format
 
-Access mode for an attached memory store.
+    format: date-time
 
-One of the following:
+  - `file_id: str`
 
-"read\_write"
+  - `mount_path: str`
 
-"read\_only"
+  - `type: Literal["file"]`
 
-description: Optional[str]
+  - `updated_at: datetime`
 
-Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+    A timestamp in RFC 3339 format
 
-instructions: Optional[str]
+    format: date-time
 
-Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+### Example
 
-mount\_path: Optional[str]
+```python
+import os
+from anthropic import Anthropic
 
-Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+beta_managed_agents_file_resource = client.beta.sessions.resources.add(
+    session_id="sesn_011CZkZAtmR3yMPDzynEDxu7",
+    file_id="file_011CNha8iCJcU1wXNR6q4V8w",
+    type="file",
+)
+print(beta_managed_agents_file_resource.id)
+```
 
-name: Optional[str]
+#### Response (200)
 
-Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+```json
+{
+  "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+  "created_at": "2026-03-15T10:00:00Z",
+  "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "mount_path": "/uploads/receipt.pdf",
+  "type": "file",
+  "updated_at": "2026-03-15T10:00:00Z"
+}
+```
 
-
+## List Session Resources
 
-[BetaManagedAgentsSessionResource](api/beta/sessions/resources.md)
+`beta.sessions.resources.list(session_id, **kwargs)  -> SyncPageCursor[BetaManagedAgentsSessionResource]`
 
-A memory store attached to an agent session.
+**GET** `/v1/sessions/{session_id}/resources`
 
-One of the following:
+List Session Resources
 
-
+### Parameters
 
-class BetaManagedAgentsGitHubRepositoryResource: …
+- `session_id: str`
 
-id: str
+- `limit: Optional[int]`
 
-created\_at: datetime
+  Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
 
-A timestamp in RFC 3339 format
+  format: int32
 
-mount\_path: str
+- `page: Optional[str]`
 
-type: Literal["github\_repository"]
+  Opaque cursor from a previous response's `next_page` field.
 
-updated\_at: datetime
+- `betas: Optional[List[AnthropicBetaParam]]`
 
-A timestamp in RFC 3339 format
+  Optional header to specify the beta version(s) you want to use.
 
-url: str
+  - `str`
 
-
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
 
-checkout: Optional[Checkout]
+    - `"message-batches-2024-09-24"`
 
-One of the following:
+    - `"prompt-caching-2024-07-31"`
 
-
+    - `"computer-use-2024-10-22"`
 
-class BetaManagedAgentsBranchCheckout: …
+    - `"computer-use-2025-01-24"`
 
-name: str
+    - `"pdfs-2024-09-25"`
 
-Branch name to check out.
+    - `"token-counting-2024-11-01"`
 
-type: Literal["branch"]
+    - `"token-efficient-tools-2025-02-19"`
 
-
+    - `"output-128k-2025-02-19"`
 
-class BetaManagedAgentsCommitCheckout: …
+    - `"files-api-2025-04-14"`
 
-sha: str
+    - `"mcp-client-2025-04-04"`
 
-Full commit SHA to check out.
+    - `"mcp-client-2025-11-20"`
 
-type: Literal["commit"]
+    - `"dev-full-thinking-2025-05-14"`
 
-
+    - `"interleaved-thinking-2025-05-14"`
 
-class BetaManagedAgentsFileResource: …
+    - `"code-execution-2025-05-22"`
 
-id: str
+    - `"extended-cache-ttl-2025-04-11"`
 
-created\_at: datetime
+    - `"context-1m-2025-08-07"`
 
-A timestamp in RFC 3339 format
+    - `"context-management-2025-06-27"`
 
-file\_id: str
+    - `"model-context-window-exceeded-2025-08-26"`
 
-mount\_path: str
+    - `"skills-2025-10-02"`
 
-type: Literal["file"]
+    - `"fast-mode-2026-02-01"`
 
-updated\_at: datetime
+    - `"output-300k-2026-03-24"`
 
-A timestamp in RFC 3339 format
+    - `"user-profiles-2026-03-24"`
 
-
+    - `"user-profiles-2026-08-18"`
 
-class BetaManagedAgentsMemoryStoreResource: …
+    - `"advisor-tool-2026-03-01"`
 
-A memory store attached to an agent session.
+    - `"managed-agents-2026-04-01"`
 
-memory\_store\_id: str
+    - `"cache-diagnosis-2026-04-07"`
 
-The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+    - `"dreaming-2026-04-21"`
 
-type: Literal["memory\_store"]
+    - `"thinking-token-count-2026-05-13"`
 
-
+    - `"server-side-fallback-2026-06-01"`
 
-access: Optional[Literal["read\_write", "read\_only"]]
+    - `"server-side-fallback-2026-07-01"`
 
-Access mode for an attached memory store.
+    - `"fallback-credit-2026-06-01"`
 
-One of the following:
+    - `"fallback-credit-2026-07-01"`
 
-"read\_write"
+    - `"agent-memory-2026-07-22"`
 
-"read\_only"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-description: Optional[str]
+    - `"compact-2026-01-12"`
 
-Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+    - `"computer-use-2025-11-24"`
 
-instructions: Optional[str]
+    - `"mcp-tunnels-2026-06-22"`
 
-Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+    - `"structured-outputs-2025-11-13"`
 
-mount\_path: Optional[str]
+    - `"task-budgets-2026-03-13"`
 
-Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+    - `"thinking-display-updates-2026-08-18"`
 
-name: Optional[str]
+    - `"ce-user-management-2026-07-13"`
 
-Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+    - `"mid-conversation-output-config-2026-07-01"`
 
-
+    - `"thinking-binding-controls-2026-08-01"`
 
-[ResourceRetrieveResponse](api/beta/sessions/resources.md)
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-The requested session resource.
+### Returns
 
-One of the following:
+- `BetaManagedAgentsSessionResource`
 
-
+  A memory store attached to an agent session.
 
-class BetaManagedAgentsGitHubRepositoryResource: …
+  - `class BetaManagedAgentsGitHubRepositoryResource: …`
 
-id: str
+    - `id: str`
 
-created\_at: datetime
+    - `created_at: datetime`
 
-A timestamp in RFC 3339 format
+      A timestamp in RFC 3339 format
 
-mount\_path: str
+      format: date-time
 
-type: Literal["github\_repository"]
+    - `mount_path: str`
 
-updated\_at: datetime
+    - `type: Literal["github_repository"]`
 
-A timestamp in RFC 3339 format
+    - `updated_at: datetime`
 
-url: str
+      A timestamp in RFC 3339 format
 
-
+      format: date-time
 
-checkout: Optional[Checkout]
+    - `url: str`
 
-One of the following:
+    - `checkout: Optional[Checkout]`
 
-
+      - `class BetaManagedAgentsBranchCheckout: …`
 
-class BetaManagedAgentsBranchCheckout: …
+        - `name: str`
 
-name: str
+          Branch name to check out.
 
-Branch name to check out.
+          minLength: 1, maxLength: 255
 
-type: Literal["branch"]
+        - `type: Literal["branch"]`
 
-
+      - `class BetaManagedAgentsCommitCheckout: …`
 
-class BetaManagedAgentsCommitCheckout: …
+        - `sha: str`
 
-sha: str
+          Full commit SHA to check out.
 
-Full commit SHA to check out.
+          minLength: 7, maxLength: 64
 
-type: Literal["commit"]
+        - `type: Literal["commit"]`
 
-
+  - `class BetaManagedAgentsFileResource: …`
 
-class BetaManagedAgentsFileResource: …
+    - `id: str`
 
-id: str
+    - `created_at: datetime`
 
-created\_at: datetime
+      A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+      format: date-time
 
-file\_id: str
+    - `file_id: str`
 
-mount\_path: str
+    - `mount_path: str`
 
-type: Literal["file"]
+    - `type: Literal["file"]`
 
-updated\_at: datetime
+    - `updated_at: datetime`
 
-A timestamp in RFC 3339 format
+      A timestamp in RFC 3339 format
 
-
+      format: date-time
 
-class BetaManagedAgentsMemoryStoreResource: …
+  - `class BetaManagedAgentsMemoryStoreResource: …`
 
-A memory store attached to an agent session.
+    A memory store attached to an agent session.
 
-memory\_store\_id: str
+    - `memory_store_id: str`
 
-The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-type: Literal["memory\_store"]
+    - `type: Literal["memory_store"]`
 
-
+    - `access: Optional[Literal["read_write", "read_only"]]`
 
-access: Optional[Literal["read\_write", "read\_only"]]
+      Access mode for an attached memory store.
 
-Access mode for an attached memory store.
+      - `"read_write"`
 
-One of the following:
+      - `"read_only"`
 
-"read\_write"
+    - `description: Optional[str]`
 
-"read\_only"
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-description: Optional[str]
+    - `instructions: Optional[str]`
 
-Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-instructions: Optional[str]
+      maxLength: 4096
 
-Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+    - `mount_path: Optional[str]`
 
-mount\_path: Optional[str]
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+    - `name: Optional[str]`
 
-name: Optional[str]
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
-Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+### Example
 
-
+```python
+import os
+from anthropic import Anthropic
 
-[ResourceUpdateResponse](api/beta/sessions/resources.md)
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+page = client.beta.sessions.resources.list(
+    session_id="sesn_011CZkZAtmR3yMPDzynEDxu7",
+)
+page = page.data[0]
+print(page)
+```
 
-The updated session resource.
+#### Response (200)
 
-One of the following:
+```json
+{
+  "data": [
+    {
+      "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+      "created_at": "2026-03-15T10:00:00Z",
+      "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "mount_path": "/uploads/receipt.pdf",
+      "type": "file",
+      "updated_at": "2026-03-15T10:00:00Z"
+    },
+    {
+      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+      "created_at": "2026-03-15T10:00:00Z",
+      "mount_path": "/workspace/example-repo",
+      "type": "github_repository",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "url": "https://github.com/example-org/example-repo",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      }
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
 
-
+## Get Session Resource
 
-class BetaManagedAgentsGitHubRepositoryResource: …
+`beta.sessions.resources.retrieve(resource_id, **kwargs)  -> ResourceRetrieveResponse`
 
-id: str
+**GET** `/v1/sessions/{session_id}/resources/{resource_id}`
 
-created\_at: datetime
+Get Session Resource
 
-A timestamp in RFC 3339 format
+### Parameters
 
-mount\_path: str
+- `session_id: str`
 
-type: Literal["github\_repository"]
+- `resource_id: str`
 
-updated\_at: datetime
+- `betas: Optional[List[AnthropicBetaParam]]`
 
-A timestamp in RFC 3339 format
+  Optional header to specify the beta version(s) you want to use.
 
-url: str
+  - `str`
 
-
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
 
-checkout: Optional[Checkout]
+    - `"message-batches-2024-09-24"`
 
-One of the following:
+    - `"prompt-caching-2024-07-31"`
 
-
+    - `"computer-use-2024-10-22"`
 
-class BetaManagedAgentsBranchCheckout: …
+    - `"computer-use-2025-01-24"`
 
-name: str
+    - `"pdfs-2024-09-25"`
 
-Branch name to check out.
+    - `"token-counting-2024-11-01"`
 
-type: Literal["branch"]
+    - `"token-efficient-tools-2025-02-19"`
 
-
+    - `"output-128k-2025-02-19"`
 
-class BetaManagedAgentsCommitCheckout: …
+    - `"files-api-2025-04-14"`
 
-sha: str
+    - `"mcp-client-2025-04-04"`
 
-Full commit SHA to check out.
+    - `"mcp-client-2025-11-20"`
 
-type: Literal["commit"]
+    - `"dev-full-thinking-2025-05-14"`
 
-
+    - `"interleaved-thinking-2025-05-14"`
 
-class BetaManagedAgentsFileResource: …
+    - `"code-execution-2025-05-22"`
 
-id: str
+    - `"extended-cache-ttl-2025-04-11"`
 
-created\_at: datetime
+    - `"context-1m-2025-08-07"`
 
-A timestamp in RFC 3339 format
+    - `"context-management-2025-06-27"`
 
-file\_id: str
+    - `"model-context-window-exceeded-2025-08-26"`
 
-mount\_path: str
+    - `"skills-2025-10-02"`
 
-type: Literal["file"]
+    - `"fast-mode-2026-02-01"`
 
-updated\_at: datetime
+    - `"output-300k-2026-03-24"`
 
-A timestamp in RFC 3339 format
+    - `"user-profiles-2026-03-24"`
 
-
+    - `"user-profiles-2026-08-18"`
 
-class BetaManagedAgentsMemoryStoreResource: …
+    - `"advisor-tool-2026-03-01"`
 
-A memory store attached to an agent session.
+    - `"managed-agents-2026-04-01"`
 
-memory\_store\_id: str
+    - `"cache-diagnosis-2026-04-07"`
 
-The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+    - `"dreaming-2026-04-21"`
 
-type: Literal["memory\_store"]
+    - `"thinking-token-count-2026-05-13"`
 
-
+    - `"server-side-fallback-2026-06-01"`
 
-access: Optional[Literal["read\_write", "read\_only"]]
+    - `"server-side-fallback-2026-07-01"`
 
-Access mode for an attached memory store.
+    - `"fallback-credit-2026-06-01"`
 
-One of the following:
+    - `"fallback-credit-2026-07-01"`
 
-"read\_write"
+    - `"agent-memory-2026-07-22"`
 
-"read\_only"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-description: Optional[str]
+    - `"compact-2026-01-12"`
 
-Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+    - `"computer-use-2025-11-24"`
 
-instructions: Optional[str]
+    - `"mcp-tunnels-2026-06-22"`
 
-Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+    - `"structured-outputs-2025-11-13"`
 
-mount\_path: Optional[str]
+    - `"task-budgets-2026-03-13"`
 
-Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+    - `"thinking-display-updates-2026-08-18"`
 
-name: Optional[str]
+    - `"ce-user-management-2026-07-13"`
 
-Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `ResourceRetrieveResponse`
+
+  The requested session resource.
+
+  - `class BetaManagedAgentsGitHubRepositoryResource: …`
+
+    - `id: str`
+
+    - `created_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `mount_path: str`
+
+    - `type: Literal["github_repository"]`
+
+    - `updated_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `url: str`
+
+    - `checkout: Optional[Checkout]`
+
+      - `class BetaManagedAgentsBranchCheckout: …`
+
+        - `name: str`
+
+          Branch name to check out.
+
+          minLength: 1, maxLength: 255
+
+        - `type: Literal["branch"]`
+
+      - `class BetaManagedAgentsCommitCheckout: …`
+
+        - `sha: str`
+
+          Full commit SHA to check out.
+
+          minLength: 7, maxLength: 64
+
+        - `type: Literal["commit"]`
+
+  - `class BetaManagedAgentsFileResource: …`
+
+    - `id: str`
+
+    - `created_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `file_id: str`
+
+    - `mount_path: str`
+
+    - `type: Literal["file"]`
+
+    - `updated_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+  - `class BetaManagedAgentsMemoryStoreResource: …`
+
+    A memory store attached to an agent session.
+
+    - `memory_store_id: str`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `type: Literal["memory_store"]`
+
+    - `access: Optional[Literal["read_write", "read_only"]]`
+
+      Access mode for an attached memory store.
+
+      - `"read_write"`
+
+      - `"read_only"`
+
+    - `description: Optional[str]`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `instructions: Optional[str]`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
+
+    - `mount_path: Optional[str]`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `name: Optional[str]`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+resource = client.beta.sessions.resources.retrieve(
+    resource_id="sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+    session_id="sesn_011CZkZAtmR3yMPDzynEDxu7",
+)
+print(resource)
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+  "created_at": "2026-03-15T10:00:00Z",
+  "mount_path": "/workspace/example-repo",
+  "type": "github_repository",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "url": "https://github.com/example-org/example-repo",
+  "checkout": {
+    "name": "main",
+    "type": "branch"
+  }
+}
+```
+
+## Update Session Resource
+
+`beta.sessions.resources.update(resource_id, **kwargs)  -> ResourceUpdateResponse`
+
+**POST** `/v1/sessions/{session_id}/resources/{resource_id}`
+
+Update Session Resource
+
+### Parameters
+
+- `session_id: str`
+
+- `resource_id: str`
+
+- `authorization_token: str`
+
+  New authorization token for the resource. Currently only `github_repository` resources support token rotation.
+
+  minLength: 1, maxLength: 4096
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `ResourceUpdateResponse`
+
+  The updated session resource.
+
+  - `class BetaManagedAgentsGitHubRepositoryResource: …`
+
+    - `id: str`
+
+    - `created_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `mount_path: str`
+
+    - `type: Literal["github_repository"]`
+
+    - `updated_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `url: str`
+
+    - `checkout: Optional[Checkout]`
+
+      - `class BetaManagedAgentsBranchCheckout: …`
+
+        - `name: str`
+
+          Branch name to check out.
+
+          minLength: 1, maxLength: 255
+
+        - `type: Literal["branch"]`
+
+      - `class BetaManagedAgentsCommitCheckout: …`
+
+        - `sha: str`
+
+          Full commit SHA to check out.
+
+          minLength: 7, maxLength: 64
+
+        - `type: Literal["commit"]`
+
+  - `class BetaManagedAgentsFileResource: …`
+
+    - `id: str`
+
+    - `created_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `file_id: str`
+
+    - `mount_path: str`
+
+    - `type: Literal["file"]`
+
+    - `updated_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+  - `class BetaManagedAgentsMemoryStoreResource: …`
+
+    A memory store attached to an agent session.
+
+    - `memory_store_id: str`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `type: Literal["memory_store"]`
+
+    - `access: Optional[Literal["read_write", "read_only"]]`
+
+      Access mode for an attached memory store.
+
+      - `"read_write"`
+
+      - `"read_only"`
+
+    - `description: Optional[str]`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `instructions: Optional[str]`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
+
+    - `mount_path: Optional[str]`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `name: Optional[str]`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+resource = client.beta.sessions.resources.update(
+    resource_id="sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+    session_id="sesn_011CZkZAtmR3yMPDzynEDxu7",
+    authorization_token="ghp_exampletoken",
+)
+print(resource)
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+  "created_at": "2026-03-15T10:00:00Z",
+  "mount_path": "/workspace/example-repo",
+  "type": "github_repository",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "url": "https://github.com/example-org/example-repo",
+  "checkout": {
+    "name": "main",
+    "type": "branch"
+  }
+}
+```
+
+## Delete Session Resource
+
+`beta.sessions.resources.delete(resource_id, **kwargs)  -> BetaManagedAgentsDeleteSessionResource`
+
+**DELETE** `/v1/sessions/{session_id}/resources/{resource_id}`
+
+Delete Session Resource
+
+### Parameters
+
+- `session_id: str`
+
+- `resource_id: str`
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+### Returns
+
+- `class BetaManagedAgentsDeleteSessionResource: …`
+
+  Confirmation of resource deletion.
+
+  - `id: str`
+
+  - `type: Literal["session_resource_deleted"]`
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
+)
+beta_managed_agents_delete_session_resource = client.beta.sessions.resources.delete(
+    resource_id="sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+    session_id="sesn_011CZkZAtmR3yMPDzynEDxu7",
+)
+print(beta_managed_agents_delete_session_resource.id)
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+  "type": "session_resource_deleted"
+}
+```
+
+## Domain types
+
+### Beta Managed Agents Delete Session Resource
+
+- `class BetaManagedAgentsDeleteSessionResource: …`
+
+  Confirmation of resource deletion.
+
+  - `id: str`
+
+  - `type: Literal["session_resource_deleted"]`
+
+### Beta Managed Agents File Resource
+
+- `class BetaManagedAgentsFileResource: …`
+
+  - `id: str`
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `file_id: str`
+
+  - `mount_path: str`
+
+  - `type: Literal["file"]`
+
+  - `updated_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+### Beta Managed Agents GitHub Repository Resource
+
+- `class BetaManagedAgentsGitHubRepositoryResource: …`
+
+  - `id: str`
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `mount_path: str`
+
+  - `type: Literal["github_repository"]`
+
+  - `updated_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `url: str`
+
+  - `checkout: Optional[Checkout]`
+
+    - `class BetaManagedAgentsBranchCheckout: …`
+
+      - `name: str`
+
+        Branch name to check out.
+
+        minLength: 1, maxLength: 255
+
+      - `type: Literal["branch"]`
+
+    - `class BetaManagedAgentsCommitCheckout: …`
+
+      - `sha: str`
+
+        Full commit SHA to check out.
+
+        minLength: 7, maxLength: 64
+
+      - `type: Literal["commit"]`
+
+### Beta Managed Agents Memory Store Resource
+
+- `class BetaManagedAgentsMemoryStoreResource: …`
+
+  A memory store attached to an agent session.
+
+  - `memory_store_id: str`
+
+    The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+  - `type: Literal["memory_store"]`
+
+  - `access: Optional[Literal["read_write", "read_only"]]`
+
+    Access mode for an attached memory store.
+
+    - `"read_write"`
+
+    - `"read_only"`
+
+  - `description: Optional[str]`
+
+    Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+  - `instructions: Optional[str]`
+
+    Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    maxLength: 4096
+
+  - `mount_path: Optional[str]`
+
+    Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+  - `name: Optional[str]`
+
+    Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
+### Beta Managed Agents Session Resource
+
+- `BetaManagedAgentsSessionResource`
+
+  A memory store attached to an agent session.
+
+  - `class BetaManagedAgentsGitHubRepositoryResource: …`
+
+    - `id: str`
+
+    - `created_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `mount_path: str`
+
+    - `type: Literal["github_repository"]`
+
+    - `updated_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `url: str`
+
+    - `checkout: Optional[Checkout]`
+
+      - `class BetaManagedAgentsBranchCheckout: …`
+
+        - `name: str`
+
+          Branch name to check out.
+
+          minLength: 1, maxLength: 255
+
+        - `type: Literal["branch"]`
+
+      - `class BetaManagedAgentsCommitCheckout: …`
+
+        - `sha: str`
+
+          Full commit SHA to check out.
+
+          minLength: 7, maxLength: 64
+
+        - `type: Literal["commit"]`
+
+  - `class BetaManagedAgentsFileResource: …`
+
+    - `id: str`
+
+    - `created_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `file_id: str`
+
+    - `mount_path: str`
+
+    - `type: Literal["file"]`
+
+    - `updated_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+  - `class BetaManagedAgentsMemoryStoreResource: …`
+
+    A memory store attached to an agent session.
+
+    - `memory_store_id: str`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `type: Literal["memory_store"]`
+
+    - `access: Optional[Literal["read_write", "read_only"]]`
+
+      Access mode for an attached memory store.
+
+      - `"read_write"`
+
+      - `"read_only"`
+
+    - `description: Optional[str]`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `instructions: Optional[str]`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
+
+    - `mount_path: Optional[str]`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `name: Optional[str]`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
+### Resource Retrieve Response
+
+- `ResourceRetrieveResponse`
+
+  The requested session resource.
+
+  - `class BetaManagedAgentsGitHubRepositoryResource: …`
+
+    - `id: str`
+
+    - `created_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `mount_path: str`
+
+    - `type: Literal["github_repository"]`
+
+    - `updated_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `url: str`
+
+    - `checkout: Optional[Checkout]`
+
+      - `class BetaManagedAgentsBranchCheckout: …`
+
+        - `name: str`
+
+          Branch name to check out.
+
+          minLength: 1, maxLength: 255
+
+        - `type: Literal["branch"]`
+
+      - `class BetaManagedAgentsCommitCheckout: …`
+
+        - `sha: str`
+
+          Full commit SHA to check out.
+
+          minLength: 7, maxLength: 64
+
+        - `type: Literal["commit"]`
+
+  - `class BetaManagedAgentsFileResource: …`
+
+    - `id: str`
+
+    - `created_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `file_id: str`
+
+    - `mount_path: str`
+
+    - `type: Literal["file"]`
+
+    - `updated_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+  - `class BetaManagedAgentsMemoryStoreResource: …`
+
+    A memory store attached to an agent session.
+
+    - `memory_store_id: str`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `type: Literal["memory_store"]`
+
+    - `access: Optional[Literal["read_write", "read_only"]]`
+
+      Access mode for an attached memory store.
+
+      - `"read_write"`
+
+      - `"read_only"`
+
+    - `description: Optional[str]`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `instructions: Optional[str]`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
+
+    - `mount_path: Optional[str]`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `name: Optional[str]`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
+### Resource Update Response
+
+- `ResourceUpdateResponse`
+
+  The updated session resource.
+
+  - `class BetaManagedAgentsGitHubRepositoryResource: …`
+
+    - `id: str`
+
+    - `created_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `mount_path: str`
+
+    - `type: Literal["github_repository"]`
+
+    - `updated_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `url: str`
+
+    - `checkout: Optional[Checkout]`
+
+      - `class BetaManagedAgentsBranchCheckout: …`
+
+        - `name: str`
+
+          Branch name to check out.
+
+          minLength: 1, maxLength: 255
+
+        - `type: Literal["branch"]`
+
+      - `class BetaManagedAgentsCommitCheckout: …`
+
+        - `sha: str`
+
+          Full commit SHA to check out.
+
+          minLength: 7, maxLength: 64
+
+        - `type: Literal["commit"]`
+
+  - `class BetaManagedAgentsFileResource: …`
+
+    - `id: str`
+
+    - `created_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+    - `file_id: str`
+
+    - `mount_path: str`
+
+    - `type: Literal["file"]`
+
+    - `updated_at: datetime`
+
+      A timestamp in RFC 3339 format
+
+      format: date-time
+
+  - `class BetaManagedAgentsMemoryStoreResource: …`
+
+    A memory store attached to an agent session.
+
+    - `memory_store_id: str`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `type: Literal["memory_store"]`
+
+    - `access: Optional[Literal["read_write", "read_only"]]`
+
+      Access mode for an attached memory store.
+
+      - `"read_write"`
+
+      - `"read_only"`
+
+    - `description: Optional[str]`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `instructions: Optional[str]`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
+
+    - `mount_path: Optional[str]`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `name: Optional[str]`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 ---
 

@@ -1,16 +1,8 @@
 # Delete a Message Batch
 
-Copy page
+`$ ant messages:batches delete`
 
-
-
-CLI
-
-# Delete a Message Batch
-
-$ ant messages:batches delete
-
-DELETE/v1/messages/batches/{message\_batch\_id}
+**DELETE** `/v1/messages/batches/{message_batch_id}`
 
 Delete a Message Batch.
 
@@ -18,58 +10,37 @@ Message Batches can only be deleted once they've finished processing. If you'd l
 
 Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
---message-batch-id: string
+- `--message-batch-id: string`
 
-ID of the Message Batch.
+  ID of the Message Batch.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `deleted_message_batch: object`
 
-deleted\_message\_batch: object { id, type } 
+  - `id: string`
 
-id: string
+    ID of the Message Batch.
 
-ID of the Message Batch.
+  - `type: "message_batch_deleted"`
 
-
+    Deleted object type.
 
-type: "message\_batch\_deleted"
+    For Message Batches, this is always `"message_batch_deleted"`.
 
-Deleted object type.
+## Example
 
-For Message Batches, this is always `"message_batch_deleted"`.
-
-Delete a Message Batch
-
-CLI
-
-```shiki
+```bash
 ant messages:batches delete \
   --api-key my-anthropic-api-key \
   --message-batch-id message_batch_id
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "type": "message_batch_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
   "type": "message_batch_deleted"

@@ -1,132 +1,152 @@
 # Get Vault
 
-Copy page
+`BetaManagedAgentsVault Beta.Vaults.Retrieve(parameters, cancellationToken = default)`
 
-
-
-C#
-
-# Get Vault
-
-[BetaManagedAgentsVault](api/beta/vaults.md) Beta.Vaults.Retrieve(VaultRetrieveParamsparameters, CancellationTokencancellationToken = default)
-
-GET/v1/vaults/{vault\_id}
+**GET** `/v1/vaults/{vault_id}`
 
 Get Vault
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `VaultRetrieveParams parameters`
 
-VaultRetrieveParams parameters
+  - `required string vaultID`
 
-required string vaultID
+    Path parameter vault_id
 
-Path parameter vault\_id
+  - `IReadOnlyList<AnthropicBeta> betas`
 
-
+    Optional header to specify the beta version(s) you want to use.
 
-IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
-Optional header to specify the beta version(s) you want to use.
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
 
-"message-batches-2024-09-24"MessageBatches2024\_09\_24
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
 
-"prompt-caching-2024-07-31"PromptCaching2024\_07\_31
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
 
-"computer-use-2024-10-22"ComputerUse2024\_10\_22
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
 
-"computer-use-2025-01-24"ComputerUse2025\_01\_24
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
 
-"pdfs-2024-09-25"Pdfs2024\_09\_25
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
 
-"token-counting-2024-11-01"TokenCounting2024\_11\_01
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
 
-"token-efficient-tools-2025-02-19"TokenEfficientTools2025\_02\_19
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
 
-"output-128k-2025-02-19"Output128k2025\_02\_19
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
 
-"files-api-2025-04-14"FilesApi2025\_04\_14
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
 
-"mcp-client-2025-04-04"McpClient2025\_04\_04
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
 
-"mcp-client-2025-11-20"McpClient2025\_11\_20
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
 
-"dev-full-thinking-2025-05-14"DevFullThinking2025\_05\_14
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
 
-"interleaved-thinking-2025-05-14"InterleavedThinking2025\_05\_14
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
 
-"code-execution-2025-05-22"CodeExecution2025\_05\_22
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
 
-"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025\_04\_11
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
 
-"context-1m-2025-08-07"Context1m2025\_08\_07
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-"context-management-2025-06-27"ContextManagement2025\_06\_27
+    - `Skills2025_10_02("skills-2025-10-02")`
 
-"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025\_08\_26
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
 
-"skills-2025-10-02"Skills2025\_10\_02
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
 
-"fast-mode-2026-02-01"FastMode2026\_02\_01
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
 
-"output-300k-2026-03-24"Output300k2026\_03\_24
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
-"user-profiles-2026-03-24"UserProfiles2026\_03\_24
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
-"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
 
-"managed-agents-2026-04-01"ManagedAgents2026\_04\_01
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
 
-"cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
 
-"thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
 
-"server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
 
-"fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
 
-"agent-memory-2026-07-22"AgentMemory2026\_07\_22
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
 
-##### ReturnsExpand Collapse
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
 
-
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
 
-class BetaManagedAgentsVault:
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-A vault that stores credentials for use by agents during sessions.
+    - `Compact2026_01_12("compact-2026-01-12")`
 
-required string ID
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
 
-Unique identifier for the vault.
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
 
-required DateTimeOffset? ArchivedAt
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
 
-A timestamp in RFC 3339 format
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
 
-required DateTimeOffset CreatedAt
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
 
-A timestamp in RFC 3339 format
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
 
-required string DisplayName
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-Human-readable name for the vault.
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
 
-required IReadOnlyDictionary<string, string> Metadata
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-Arbitrary key-value metadata attached to the vault.
+## Returns
 
-required Type Type
+- `class BetaManagedAgentsVault:`
 
-required DateTimeOffset UpdatedAt
+  A vault that stores credentials for use by agents during sessions.
 
-A timestamp in RFC 3339 format
+  - `required string ID`
 
-Get Vault
+    Unique identifier for the vault.
 
-C#
+  - `required DateTimeOffset? ArchivedAt`
 
-```shiki
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `required string DisplayName`
+
+    Human-readable name for the vault.
+
+  - `required IReadOnlyDictionary<string, string> Metadata`
+
+    Arbitrary key-value metadata attached to the vault.
+
+  - `required Type Type`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+## Example
+
+```csharp
 VaultRetrieveParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv"
@@ -137,31 +157,9 @@ var betaManagedAgentsVault = await client.Beta.Vaults.Retrieve(parameters);
 Console.WriteLine(betaManagedAgentsVault);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
-  "archived_at": null,
-  "created_at": "2026-03-15T10:00:00Z",
-  "display_name": "Example vault",
-  "metadata": {
-    "environment": "production"
-  },
-  "type": "vault",
-  "updated_at": "2026-03-15T10:00:00Z"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
   "archived_at": null,

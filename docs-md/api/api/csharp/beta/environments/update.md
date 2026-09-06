@@ -1,382 +1,362 @@
 # Update Environment
 
-Copy page
+`BetaEnvironment Beta.Environments.Update(parameters, cancellationToken = default)`
 
-
-
-C#
-
-# Update Environment
-
-[BetaEnvironment](api/beta/environments.md) Beta.Environments.Update(EnvironmentUpdateParamsparameters, CancellationTokencancellationToken = default)
-
-POST/v1/environments/{environment\_id}
+**POST** `/v1/environments/{environment_id}`
 
 Update an existing environment's configuration.
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `EnvironmentUpdateParams parameters`
 
-EnvironmentUpdateParams parameters
+  - `required string environmentID`
 
-required string environmentID
+    Path param
 
-Path param
+  - `Config? config`
 
-
+    Body param: Updated environment configuration
 
-[Config](api/beta/environments/update.md)? config
+    - `class BetaCloudConfigParams:`
 
-Body param: Updated environment configuration
+      Request params for `cloud` environment configuration.
 
-
+      Fields default to null; on update, omitted fields preserve the
+      existing value.
 
-class BetaCloudConfigParams:
+      - `JsonElement Type = "cloud"`
 
-Request params for `cloud` environment configuration.
+        Environment type
 
-Fields default to null; on update, omitted fields preserve the
-existing value.
+      - `Networking? Networking`
 
-JsonElement Type "cloud"constant
+        Network configuration policy. Omit on update to preserve the existing value.
 
-Environment type
+        - `class BetaUnrestrictedNetwork:`
 
-
+          Unrestricted network access.
 
-Networking? Networking
+          - `JsonElement Type = "unrestricted"`
 
-Network configuration policy. Omit on update to preserve the existing value.
+            Network policy type
 
-One of the following:
+        - `class BetaLimitedNetworkParams:`
 
-
+          Limited network request params.
 
-class BetaUnrestrictedNetwork:
+          Fields default to null; on update, omitted fields preserve the
+          existing value.
 
-Unrestricted network access.
+          - `JsonElement Type = "limited"`
 
-JsonElement Type "unrestricted"constant
+            Network policy type
 
-Network policy type
+          - `bool? AllowMcpServers`
 
-
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-class BetaLimitedNetworkParams:
+          - `bool? AllowPackageManagers`
 
-Limited network request params.
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
 
-Fields default to null; on update, omitted fields preserve the
-existing value.
+          - `IReadOnlyList<string>? AllowedHosts`
 
-JsonElement Type "limited"constant
+            Specifies domains the container can reach.
 
-Network policy type
+      - `BetaPackagesParams? Packages`
 
-Boolean? AllowMcpServers
+        Specify packages (and optionally their versions) available in this environment.
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+        When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-Boolean? AllowPackageManagers
+        Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+        - `IReadOnlyList<string>? Apt`
 
-IReadOnlyList<string>? AllowedHosts
+          Ubuntu/Debian packages to install
 
-Specifies domains the container can reach.
+        - `IReadOnlyList<string>? Cargo`
 
-
+          Rust packages to install
 
-[BetaPackagesParams](api/beta/environments.md)? Packages
+        - `IReadOnlyList<string>? Gem`
 
-Specify packages (and optionally their versions) available in this environment.
+          Ruby packages to install
 
-When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+        - `IReadOnlyList<string>? Go`
 
-IReadOnlyList<string>? Apt
+          Go packages to install
 
-Ubuntu/Debian packages to install
+        - `IReadOnlyList<string>? Npm`
 
-IReadOnlyList<string>? Cargo
+          Node.js packages to install
 
-Rust packages to install
+        - `IReadOnlyList<string>? Pip`
 
-IReadOnlyList<string>? Gem
+          Python packages to install
 
-Ruby packages to install
+        - `Type Type`
 
-IReadOnlyList<string>? Go
+          Package configuration type
 
-Go packages to install
+    - `class BetaSelfHostedConfigParams:`
 
-IReadOnlyList<string>? Npm
+      Request params for `self_hosted` environment configuration.
 
-Node.js packages to install
+      - `JsonElement Type = "self_hosted"`
 
-IReadOnlyList<string>? Pip
+        Environment type
 
-Python packages to install
+  - `string? description`
 
-Type Type
+    Body param: Updated description of the environment. Omit to preserve; null clears to null; an empty string is stored as an empty string.
 
-Package configuration type
+    maxLength: 1024
 
-
+  - `IReadOnlyDictionary<string, string> metadata`
 
-class BetaSelfHostedConfigParams:
+    Body param: User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
 
-Request params for `self_hosted` environment configuration.
+  - `string? name`
 
-JsonElement Type "self\_hosted"constant
+    Body param: Updated name for the environment
 
-Environment type
+    maxLength: 256, minLength: 1
 
-string? description
+  - `Scope? scope`
 
-Body param: Updated description of the environment
+    Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
 
-IReadOnlyDictionary<string, string> metadata
+    - `Organization("organization")`
 
-Body param: User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
+    - `Account("account")`
 
-string? name
+  - `IReadOnlyList<AnthropicBeta> betas`
 
-Body param: Updated name for the environment
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
-[Scope](api/beta/environments/update.md)? scope
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
 
-Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
 
-"organization"Organization
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
 
-"account"Account
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
 
-
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
 
-IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
 
-"message-batches-2024-09-24"MessageBatches2024\_09\_24
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
 
-"prompt-caching-2024-07-31"PromptCaching2024\_07\_31
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
 
-"computer-use-2024-10-22"ComputerUse2024\_10\_22
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
 
-"computer-use-2025-01-24"ComputerUse2025\_01\_24
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
 
-"pdfs-2024-09-25"Pdfs2024\_09\_25
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
 
-"token-counting-2024-11-01"TokenCounting2024\_11\_01
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
 
-"token-efficient-tools-2025-02-19"TokenEfficientTools2025\_02\_19
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
 
-"output-128k-2025-02-19"Output128k2025\_02\_19
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
 
-"files-api-2025-04-14"FilesApi2025\_04\_14
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
 
-"mcp-client-2025-04-04"McpClient2025\_04\_04
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-"mcp-client-2025-11-20"McpClient2025\_11\_20
+    - `Skills2025_10_02("skills-2025-10-02")`
 
-"dev-full-thinking-2025-05-14"DevFullThinking2025\_05\_14
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
 
-"interleaved-thinking-2025-05-14"InterleavedThinking2025\_05\_14
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
 
-"code-execution-2025-05-22"CodeExecution2025\_05\_22
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
 
-"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025\_04\_11
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
-"context-1m-2025-08-07"Context1m2025\_08\_07
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
-"context-management-2025-06-27"ContextManagement2025\_06\_27
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
 
-"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025\_08\_26
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
 
-"skills-2025-10-02"Skills2025\_10\_02
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
 
-"fast-mode-2026-02-01"FastMode2026\_02\_01
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
 
-"output-300k-2026-03-24"Output300k2026\_03\_24
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
 
-"user-profiles-2026-03-24"UserProfiles2026\_03\_24
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
 
-"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
 
-"managed-agents-2026-04-01"ManagedAgents2026\_04\_01
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
 
-"cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
 
-"thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-"server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
+    - `Compact2026_01_12("compact-2026-01-12")`
 
-"fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
 
-"agent-memory-2026-07-22"AgentMemory2026\_07\_22
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
 
-##### ReturnsExpand Collapse
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
 
-
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
 
-class BetaEnvironment:
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
 
-Unified Environment resource for both cloud and self-hosted environments.
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
 
-required string ID
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-Environment identifier (e.g., 'env\_...')
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
 
-required string? ArchivedAt
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-RFC 3339 timestamp when environment was archived, or null if not archived
+## Returns
 
-
+- `class BetaEnvironment:`
 
-required Config Config
+  Unified Environment resource for both cloud and self-hosted environments.
 
-Environment configuration (either Anthropic Cloud or self-hosted)
+  - `required string ID`
 
-One of the following:
+    Environment identifier (e.g., 'env_...')
 
-
+  - `required string? ArchivedAt`
 
-class BetaCloudConfig:
+    RFC 3339 timestamp when environment was archived, or null if not archived
 
-`cloud` environment configuration.
+  - `required Config Config`
 
-
+    Environment configuration (either Anthropic Cloud or self-hosted)
 
-required Networking Networking
+    - `class BetaCloudConfig:`
 
-Network configuration policy.
+      `cloud` environment configuration.
 
-One of the following:
+      - `required Networking Networking`
 
-
+        Network configuration policy.
 
-class BetaUnrestrictedNetwork:
+        - `class BetaUnrestrictedNetwork:`
 
-Unrestricted network access.
+          Unrestricted network access.
 
-JsonElement Type "unrestricted"constant
+          - `JsonElement Type = "unrestricted"`
 
-Network policy type
+            Network policy type
 
-
+        - `class BetaLimitedNetwork:`
 
-class BetaLimitedNetwork:
+          Limited network access.
 
-Limited network access.
+          - `required bool AllowMcpServers`
 
-required Boolean AllowMcpServers
+            Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+          - `required bool AllowPackageManagers`
 
-required Boolean AllowPackageManagers
+            Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+          - `required IReadOnlyList<string> AllowedHosts`
 
-required IReadOnlyList<string> AllowedHosts
+            Specifies domains the container can reach.
 
-Specifies domains the container can reach.
+          - `JsonElement Type = "limited"`
 
-JsonElement Type "limited"constant
+            Network policy type
 
-Network policy type
+      - `required BetaPackages Packages`
 
-
+        Package manager configuration.
 
-required [BetaPackages](api/beta/environments.md) Packages
+        - `required IReadOnlyList<string> Apt`
 
-Package manager configuration.
+          Ubuntu/Debian packages to install
 
-required IReadOnlyList<string> Apt
+        - `required IReadOnlyList<string> Cargo`
 
-Ubuntu/Debian packages to install
+          Rust packages to install
 
-required IReadOnlyList<string> Cargo
+        - `required IReadOnlyList<string> Gem`
 
-Rust packages to install
+          Ruby packages to install
 
-required IReadOnlyList<string> Gem
+        - `required IReadOnlyList<string> Go`
 
-Ruby packages to install
+          Go packages to install
 
-required IReadOnlyList<string> Go
+        - `required IReadOnlyList<string> Npm`
 
-Go packages to install
+          Node.js packages to install
 
-required IReadOnlyList<string> Npm
+        - `required IReadOnlyList<string> Pip`
 
-Node.js packages to install
+          Python packages to install
 
-required IReadOnlyList<string> Pip
+        - `Type Type`
 
-Python packages to install
+          Package configuration type
 
-Type Type
+      - `JsonElement Type = "cloud"`
 
-Package configuration type
+        Environment type
 
-JsonElement Type "cloud"constant
+    - `class BetaSelfHostedConfig:`
 
-Environment type
+      Configuration for self-hosted environments.
 
-
+      - `JsonElement Type = "self_hosted"`
 
-class BetaSelfHostedConfig:
+        Environment type
 
-Configuration for self-hosted environments.
+  - `required string CreatedAt`
 
-JsonElement Type "self\_hosted"constant
+    RFC 3339 timestamp when environment was created
 
-Environment type
+  - `required string? Description`
 
-required string CreatedAt
+    User-provided description for the environment; null when unset
 
-RFC 3339 timestamp when environment was created
+  - `required IReadOnlyDictionary<string, string> Metadata`
 
-required string Description
+    User-provided metadata key-value pairs
 
-User-provided description for the environment
+  - `required string Name`
 
-required IReadOnlyDictionary<string, string> Metadata
+    Human-readable name for the environment
 
-User-provided metadata key-value pairs
+  - `JsonElement Type = "environment"`
 
-required string Name
+    The type of object (always 'environment')
 
-Human-readable name for the environment
+  - `required string UpdatedAt`
 
-JsonElement Type "environment"constant
+    RFC 3339 timestamp when environment was last updated
 
-The type of object (always 'environment')
+  - `Scope Scope`
 
-required string UpdatedAt
+    The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-RFC 3339 timestamp when environment was last updated
+    - `Organization("organization")`
 
-
+    - `Account("account")`
 
-Scope Scope
+## Example
 
-The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
-
-One of the following:
-
-"organization"Organization
-
-"account"Account
-
-Update Environment
-
-C#
-
-```shiki
+```csharp
 EnvironmentUpdateParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
@@ -387,64 +367,9 @@ var betaEnvironment = await client.Beta.Environments.Update(parameters);
 Console.WriteLine(betaEnvironment);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
-  "archived_at": null,
-  "config": {
-    "networking": {
-      "allow_mcp_servers": false,
-      "allow_package_managers": true,
-      "allowed_hosts": [
-        "api.example.com"
-      ],
-      "type": "limited"
-    },
-    "packages": {
-      "apt": [
-        "string"
-      ],
-      "cargo": [
-        "string"
-      ],
-      "gem": [
-        "string"
-      ],
-      "go": [
-        "string"
-      ],
-      "npm": [
-        "string"
-      ],
-      "pip": [
-        "pandas",
-        "numpy"
-      ],
-      "type": "packages"
-    },
-    "type": "cloud"
-  },
-  "created_at": "2026-03-15T10:00:00Z",
-  "description": "Python environment with data-analysis packages.",
-  "metadata": {},
-  "name": "python-data-analysis",
-  "type": "environment",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "scope": "organization"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
   "archived_at": null,

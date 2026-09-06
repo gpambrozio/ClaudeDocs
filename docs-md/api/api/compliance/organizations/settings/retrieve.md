@@ -1,16 +1,6 @@
 # Get effective organization settings
 
-To enable the Compliance API, see the setup guide.
-
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
-
-Copy page
-
-
-
-# Get effective organization settings
-
-GET/v1/compliance/organizations/{organization\_id}/settings
+**GET** `/v1/compliance/organizations/{organization_id}/settings`
 
 Retrieve the effective settings for an organization.
 
@@ -23,433 +13,321 @@ policy or not available to the organization) are omitted from the list.
 The organization must belong to the API key's organization hierarchy;
 unknown organizations and organizations outside the hierarchy return 404.
 
-##### Path parameters
+## Path parameters
 
-organization\_id: string
+- `organization_id: string`
 
-The organization's UUID
+  The organization's UUID
 
-##### Headers
+## Headers
 
-"x-api-key": optional string
+- `"x-api-key": optional string`
 
-##### Returns
+## Returns
 
-
+- `api_keys: array of object`
 
-api\_keys: array of object{ id, created\_at, created\_by\_id, 5 more }
+  Compliance API keys configured for the organization hierarchy, ordered by creation time ascending. Key secret values are never included.
 
-Compliance API keys configured for the organization hierarchy, ordered by creation time ascending. Key secret values are never included.
+  - `id: string`
 
-id: string
+    Unique identifier for the API key.
 
-Unique identifier for the API key.
+  - `created_at: string`
 
-
+    When the key was created.
 
-created\_at: string
+    format: date-time
 
-When the key was created.
+  - `created_by_id: string or null`
 
-formatdate-time
+    Identifier of the user who created the key, or null when the key was created by automation or its creator's account no longer exists.
 
-created\_by\_id: string or null
+  - `is_active: boolean`
 
-Identifier of the user who created the key, or null when the key was created by automation or its creator's account no longer exists.
+    Whether the key is currently active. A deactivated key is listed for audit visibility but cannot authenticate requests.
 
-is\_active: boolean
+  - `name: string`
 
-Whether the key is currently active. A deactivated key is listed for audit visibility but cannot authenticate requests.
+    The name given to the API key when it was created.
 
-name: string
+  - `scopes: array of string`
 
-The name given to the API key when it was created.
+    The permission scopes granted to the key.
 
-scopes: array of string
+  - `expires_at: optional string or null`
 
-The permission scopes granted to the key.
+    When the key will stop authenticating, or null when the key does not expire.
 
-
+    format: date-time
 
-expires\_at: optional string or null
+  - `type: optional "compliance_api_key"`
 
-When the key will stop authenticating, or null when the key does not expire.
+    default: compliance_api_key
 
-formatdate-time
+- `organization_id: string`
 
-
+- `settings: array of object or object or object or 3 more`
 
-type: optional "compliance\_api\_key"
+  - `Boolean object`
 
-defaultcompliance\_api\_key
+    A setting whose enforced value is a single true/false flag.
 
-organization\_id: string
+    - `name: "ai_powered_artifacts_enabled" or "api_workbench_feedback_collection_enabled" or "artifact_connectors_enabled" or 52 more`
 
-
+      - `"ai_powered_artifacts_enabled"`
 
-settings: array of object{ name, value, type } or object{ name, value, type } or object{ name, value, type } or 3 more
+      - `"api_workbench_feedback_collection_enabled"`
 
-One of the following:
+      - `"artifact_connectors_enabled"`
 
-
+      - `"ask_your_org_enabled"`
 
-Boolean object{ name, value, type }
+      - `"chat_enabled"`
 
-A setting whose enforced value is a single true/false flag.
+      - `"claude_ai_chat_sharing_enabled"`
 
-
+      - `"claude_ai_feedback_collection_enabled"`
 
-name: "ai\_powered\_artifacts\_enabled" or "api\_workbench\_feedback\_collection\_enabled" or "artifact\_connectors\_enabled" or 52 more
+      - `"claude_ai_integration_sharing_enabled"`
 
-One of the following:
+      - `"claude_code_desktop_bypass_permissions_enabled"`
 
-"ai\_powered\_artifacts\_enabled"
+      - `"claude_code_desktop_enabled"`
 
-"api\_workbench\_feedback\_collection\_enabled"
+      - `"claude_code_fast_mode_enabled"`
 
-"artifact\_connectors\_enabled"
+      - `"claude_code_metrics_logging_enabled"`
 
-"ask\_your\_org\_enabled"
+      - `"claude_code_remote_control_enabled"`
 
-"chat\_enabled"
+      - `"claude_code_review_enabled"`
 
-"claude\_ai\_chat\_sharing\_enabled"
+      - `"claude_code_routines_enabled"`
 
-"claude\_ai\_feedback\_collection\_enabled"
+      - `"claude_code_security_enabled"`
 
-"claude\_ai\_integration\_sharing\_enabled"
+      - `"claude_code_trusted_devices_required"`
 
-"claude\_code\_desktop\_bypass\_permissions\_enabled"
+      - `"claude_code_web_enabled"`
 
-"claude\_code\_desktop\_enabled"
+      - `"claude_code_workflows_enabled"`
 
-"claude\_code\_fast\_mode\_enabled"
+      - `"claude_design_enabled"`
 
-"claude\_code\_metrics\_logging\_enabled"
+      - `"claude_in_slack_enabled"`
 
-"claude\_code\_remote\_control\_enabled"
+      - `"claude_science_custom_connectors_enabled"`
 
-"claude\_code\_review\_enabled"
+      - `"claude_science_custom_skills_enabled"`
 
-"claude\_code\_routines\_enabled"
+      - `"claude_science_enabled"`
 
-"claude\_code\_security\_enabled"
+      - `"claude_science_managed_network_allowlist_enabled"`
 
-"claude\_code\_trusted\_devices\_required"
+      - `"claude_science_memory_enabled"`
 
-"claude\_code\_web\_enabled"
+      - `"claude_science_modal_enabled"`
 
-"claude\_code\_workflows\_enabled"
+      - `"claude_science_scientific_model_endpoints_enabled"`
 
-"claude\_design\_enabled"
+      - `"claude_science_ssh_hosts_enabled"`
 
-"claude\_in\_slack\_enabled"
+      - `"code_execution_enabled"`
 
-"claude\_science\_custom\_connectors\_enabled"
+      - `"code_execution_network_egress_enabled"`
 
-"claude\_science\_custom\_skills\_enabled"
+      - `"connector_tools_default_always_allow"`
 
-"claude\_science\_enabled"
+      - `"content_redaction_enabled"`
 
-"claude\_science\_managed\_network\_allowlist\_enabled"
+      - `"cowork_trusted_devices_required"`
 
-"claude\_science\_memory\_enabled"
+      - `"desktop_extension_allowlist_enabled"`
 
-"claude\_science\_modal\_enabled"
+      - `"directory_sync_enabled"`
 
-"claude\_science\_scientific\_model\_endpoints\_enabled"
+      - `"frontier_data_use_enabled"`
 
-"claude\_science\_ssh\_hosts\_enabled"
+      - `"group_skill_sharing_enabled"`
 
-"code\_execution\_enabled"
+      - `"hipaa_compliance_enabled"`
 
-"code\_execution\_network\_egress\_enabled"
+      - `"inline_visualizations_enabled"`
 
-"connector\_tools\_default\_always\_allow"
+      - `"ip_allowlist_enabled"`
 
-"content\_redaction\_enabled"
+      - `"location_metadata_enabled"`
 
-"cowork\_trusted\_devices\_required"
+      - `"member_usage_dashboard_visible"`
 
-"desktop\_extension\_allowlist\_enabled"
+      - `"memory_enabled"`
 
-"directory\_sync\_enabled"
+      - `"org_wide_skill_sharing_enabled"`
 
-"frontier\_data\_use\_enabled"
+      - `"public_projects_enabled"`
 
-"group\_skill\_sharing\_enabled"
+      - `"skill_sharing_enabled"`
 
-"hipaa\_compliance\_enabled"
+      - `"skills_enabled"`
 
-"inline\_visualizations\_enabled"
+      - `"sso_claude_ai_enforced"`
 
-"ip\_allowlist\_enabled"
+      - `"sso_console_enforced"`
 
-"location\_metadata\_enabled"
+      - `"sso_enabled"`
 
-"member\_usage\_dashboard\_visible"
+      - `"third_party_interactive_content_enabled"`
 
-"memory\_enabled"
+      - `"user_skill_creation_enabled"`
 
-"org\_wide\_skill\_sharing\_enabled"
+      - `"web_search_enabled"`
 
-"public\_projects\_enabled"
+      - `"work_across_apps_enabled"`
 
-"skill\_sharing\_enabled"
+    - `value: boolean`
 
-"skills\_enabled"
+    - `type: optional "boolean"`
 
-"sso\_claude\_ai\_enforced"
+      default: boolean
 
-"sso\_console\_enforced"
+  - `Integer object`
 
-"sso\_enabled"
+    A setting whose enforced value is a whole number; null means no limit
+    is in force.
 
-"third\_party\_interactive\_content\_enabled"
+    - `name: "account_session_duration_seconds"`
 
-"user\_skill\_creation\_enabled"
+    - `value: number or null`
 
-"web\_search\_enabled"
+    - `type: optional "integer"`
 
-"work\_across\_apps\_enabled"
+      default: integer
 
-value: boolean
+  - `String object`
 
-
+    A setting whose enforced value is a single string; null means no value
+    is configured.
 
-type: optional "boolean"
+    - `name: "claude_code_default_worker_environment_id" or "claude_code_default_worker_pool_id"`
 
-defaultboolean
+      - `"claude_code_default_worker_environment_id"`
 
-
+      - `"claude_code_default_worker_pool_id"`
 
-Integer object{ name, value, type }
+    - `value: string or null`
 
-A setting whose enforced value is a whole number; null means no limit
-is in force.
+    - `type: optional "string"`
 
-name: "account\_session\_duration\_seconds"
+      default: string
 
-value: number or null
+  - `StringList object`
 
-
+    A setting whose enforced value is a list of strings.
 
-type: optional "integer"
+    - `name: "allowed_invite_domains" or "disabled_admin_request_types" or "ip_allowlist_ip_ranges"`
 
-defaultinteger
+      - `"allowed_invite_domains"`
 
-
+      - `"disabled_admin_request_types"`
 
-String object{ name, value, type }
+      - `"ip_allowlist_ip_ranges"`
 
-A setting whose enforced value is a single string; null means no value
-is configured.
+    - `value: array of string`
 
-
+    - `type: optional "string_list"`
 
-name: "claude\_code\_default\_worker\_environment\_id" or "claude\_code\_default\_worker\_pool\_id"
+      default: string_list
 
-One of the following:
+  - `ProvisioningMode object`
 
-"claude\_code\_default\_worker\_environment\_id"
+    How organization members are provisioned, resolved to the enforced mode.
 
-"claude\_code\_default\_worker\_pool\_id"
+    A configured mode is reported only while the mechanism that enforces it is
+    active: just-in-time modes require single sign-on to be enabled, and SCIM
+    modes require directory sync to be enabled. Otherwise `login_only` is
+    reported, regardless of any stored configuration.
 
-value: string or null
+    - `value: "jit_advanced" or "jit_permissive" or "login_only" or 2 more`
 
-
+      How organization members are provisioned under SSO.
 
-type: optional "string"
+      - `"jit_advanced"`
 
-defaultstring
+      - `"jit_permissive"`
 
-
+      - `"login_only"`
 
-StringList object{ name, value, type }
+      - `"scim_advanced"`
 
-A setting whose enforced value is a list of strings.
+      - `"scim_permissive"`
 
-
+    - `name: optional "sso_provisioning_mode"`
 
-name: "allowed\_invite\_domains" or "disabled\_admin\_request\_types" or "ip\_allowlist\_ip\_ranges"
+      default: sso_provisioning_mode
 
-One of the following:
+    - `type: optional "provisioning_mode"`
 
-"allowed\_invite\_domains"
+      default: provisioning_mode
 
-"disabled\_admin\_request\_types"
+  - `DataRetention object`
 
-"ip\_allowlist\_ip\_ranges"
+    The data retention periods in force, keyed by the type of data they
+    apply to.
 
-value: array of string
+    A key of `all` covers every data type and is exclusive: when present it
+    is the only key. A missing key means no organization-level
+    administrator-configured retention period is in force for that data type;
+    Anthropic's service defaults may still apply.
 
-
+    - `value: map[object or object]`
 
-type: optional "string\_list"
+      - `Fixed object`
 
-defaultstring\_list
+        A fixed retention window measured from each item's last activity.
 
-
+        - `duration: number`
 
-ProvisioningMode object{ value, name, type }
+        - `timescale: "day" or "month"`
 
-How organization members are provisioned, resolved to the enforced mode.
+          - `"day"`
 
-A configured mode is reported only while the mechanism that enforces it is
-active: just-in-time modes require single sign-on to be enabled, and SCIM
-modes require directory sync to be enabled. Otherwise `login_only` is
-reported, regardless of any stored configuration.
+          - `"month"`
 
-
+        - `type: optional "fixed"`
 
-value: "jit\_advanced" or "jit\_permissive" or "login\_only" or 2 more
+          default: fixed
 
-How organization members are provisioned under SSO.
+      - `Indefinite object`
 
-One of the following:
+        An indefinite retention period: data is kept with no time limit.
 
-"jit\_advanced"
+        - `type: optional "indefinite"`
 
-"jit\_permissive"
+          default: indefinite
 
-"login\_only"
+    - `name: optional "data_retention_periods"`
 
-"scim\_advanced"
+      default: data_retention_periods
 
-"scim\_permissive"
+    - `type: optional "data_retention"`
 
-
+      default: data_retention
 
-name: optional "sso\_provisioning\_mode"
+- `type: optional "effective_organization_settings"`
 
-defaultsso\_provisioning\_mode
+  default: effective_organization_settings
 
-
+## Example
 
-type: optional "provisioning\_mode"
-
-defaultprovisioning\_mode
-
-
-
-DataRetention object{ value, name, type }
-
-The data retention periods in force, keyed by the type of data they
-apply to.
-
-A key of `all` covers every data type and is exclusive: when present it
-is the only key. A missing key means no organization-level
-administrator-configured retention period is in force for that data type;
-Anthropic's service defaults may still apply.
-
-
-
-value: map[object{ duration, timescale, type } or object{ type }]
-
-One of the following:
-
-
-
-Fixed object{ duration, timescale, type }
-
-A fixed retention window measured from each item's last activity.
-
-duration: number
-
-
-
-timescale: "day" or "month"
-
-One of the following:
-
-"day"
-
-"month"
-
-
-
-type: optional "fixed"
-
-defaultfixed
-
-
-
-Indefinite object{ type }
-
-An indefinite retention period: data is kept with no time limit.
-
-
-
-type: optional "indefinite"
-
-defaultindefinite
-
-
-
-name: optional "data\_retention\_periods"
-
-defaultdata\_retention\_periods
-
-
-
-type: optional "data\_retention"
-
-defaultdata\_retention
-
-
-
-type: optional "effective\_organization\_settings"
-
-defaulteffective\_organization\_settings
-
-Get effective organization settings
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/compliance/organizations/$ORGANIZATION_ID/settings \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "api_keys": [
-    {
-      "id": "id",
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "created_by_id": "created_by_id",
-      "is_active": true,
-      "name": "name",
-      "scopes": [
-        "string"
-      ],
-      "expires_at": "2019-12-27T18:11:19.117Z",
-      "type": "compliance_api_key"
-    }
-  ],
-  "organization_id": "organization_id",
-  "settings": [
-    {
-      "name": "ai_powered_artifacts_enabled",
-      "value": true,
-      "type": "boolean"
-    }
-  ],
-  "type": "effective_organization_settings"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "api_keys": [
     {

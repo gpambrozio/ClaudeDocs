@@ -1,12 +1,6 @@
 # Remove Federation Rule Workspace
 
-Copy page
-
-
-
-# Remove Federation Rule Workspace
-
-DELETE/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces/{workspace\_id}
+**DELETE** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces/{workspace_id}`
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -17,72 +11,50 @@ callers may only manage rules whose `oauth_scope` is
 `workspace:developer` or `workspace:inference`; other scopes require a
 Console session.
 
-##### Path parameters
+## Path parameters
 
-federation\_rule\_id: string
+- `federation_rule_id: string`
 
-ID of the federation rule.
+  ID of the federation rule.
 
-workspace\_id: string
+- `workspace_id: string`
 
-ID of the workspace to disable for.
+  ID of the workspace to disable for.
 
-##### Headers
+## Headers
 
-
+- `"anthropic-beta": optional array of string`
 
-"anthropic-beta": optional array of string
+  Optional header to specify the beta version(s) you want to use.
 
-Optional header to specify the beta version(s) you want to use.
+  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
+## Returns
 
-##### Returns
+- `federation_rule_id: string`
 
-federation\_rule\_id: string
+  Tagged ID of the federation rule.
 
-Tagged ID of the federation rule.
+- `type: "federation_rule_workspace_deleted"`
 
-
+  default: federation_rule_workspace_deleted
 
-type: "federation\_rule\_workspace\_deleted"
+- `workspace_id: string`
 
-defaultfederation\_rule\_workspace\_deleted
+  Tagged ID of the workspace named in the delete request. Removal is idempotent.
 
-workspace\_id: string
+## Example
 
-Tagged ID of the workspace named in the delete request. Removal is idempotent.
-
-Remove Federation Rule Workspace
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RULE_ID/workspaces/$WORKSPACE_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "federation_rule_id": "federation_rule_id",
-  "type": "federation_rule_workspace_deleted",
-  "workspace_id": "workspace_id"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "federation_rule_id": "federation_rule_id",
   "type": "federation_rule_workspace_deleted",

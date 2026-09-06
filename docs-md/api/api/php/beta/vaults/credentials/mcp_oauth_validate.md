@@ -1,70 +1,58 @@
 # Validate Credential
 
-Copy page
+`$client->beta->vaults->credentials->mcpOAuthValidate(string credentialID, string vaultID, ?list<AnthropicBeta> betas): ManagedAgentsCredentialValidation`
 
-
-
-PHP
-
-# Validate Credential
-
-$client->beta->vaults->credentials->mcpOAuthValidate(string credentialID, string vaultID, ?list<AnthropicBeta> betas): [ManagedAgentsCredentialValidation](api/beta/vaults/credentials.md)
-
-POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
+**POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
 
 Validate Credential
 
-##### ParametersExpand Collapse
+## Parameters
 
-vaultID: string
+- `vaultID: string`
 
-credentialID: string
+- `credentialID: string`
 
-betas?:optional list<AnthropicBeta>
+- `betas?:optional list<AnthropicBeta>`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `ManagedAgentsCredentialValidation`
 
-[ManagedAgentsCredentialValidation](api/beta/vaults/credentials.md)
+  - `string credentialID`
 
-string credentialID
+    Unique identifier of the credential that was validated.
 
-Unique identifier of the credential that was validated.
+  - `bool hasRefreshToken`
 
-bool hasRefreshToken
+    Whether the credential has a refresh token configured.
 
-Whether the credential has a refresh token configured.
+  - `?ManagedAgentsMCPProbe mcpProbe`
 
-?[ManagedAgentsMCPProbe](api/beta/vaults/credentials.md) mcpProbe
+    The failing step of an MCP validation probe.
 
-The failing step of an MCP validation probe.
+  - `?ManagedAgentsRefreshObject refresh`
 
-?[ManagedAgentsRefreshObject](api/beta/vaults/credentials.md) refresh
+    Outcome of a refresh-token exchange attempted during credential validation.
 
-Outcome of a refresh-token exchange attempted during credential validation.
+  - `ManagedAgentsCredentialValidationStatus status`
 
-[ManagedAgentsCredentialValidationStatus](api/beta/vaults/credentials.md) status
+    Overall verdict of a credential validation probe.
 
-Overall verdict of a credential validation probe.
+  - `Type type`
 
-Type type
+  - `\Datetime validatedAt`
 
-\Datetime validatedAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `string vaultID`
 
-string vaultID
+    Identifier of the vault containing the credential.
 
-Identifier of the vault containing the credential.
+## Example
 
-Validate Credential
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -78,52 +66,15 @@ $betaManagedAgentsCredentialValidation = $client
   ->mcpOAuthValidate(
   'vcrd_011CZkZEMt8gZan2iYOQfSkw',
   vaultID: 'vlt_011CZkZDLs7fYzm1hXNPeRjv',
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaManagedAgentsCredentialValidation);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "credential_id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
-  "has_refresh_token": true,
-  "mcp_probe": {
-    "http_response": {
-      "body": "body",
-      "body_truncated": true,
-      "content_type": "content_type",
-      "status_code": 0
-    },
-    "method": "method"
-  },
-  "refresh": {
-    "http_response": {
-      "body": "body",
-      "body_truncated": true,
-      "content_type": "content_type",
-      "status_code": 0
-    },
-    "status": "succeeded"
-  },
-  "status": "valid",
-  "type": "vault_credential_validation",
-  "validated_at": "2026-03-15T10:00:00Z",
-  "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "credential_id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
   "has_refresh_token": true,

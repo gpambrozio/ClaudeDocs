@@ -1,102 +1,70 @@
 # Archive Vault
 
-Copy page
+`$ ant beta:vaults archive`
 
-
-
-CLI
-
-# Archive Vault
-
-$ ant beta:vaults archive
-
-POST/v1/vaults/{vault\_id}/archive
+**POST** `/v1/vaults/{vault_id}/archive`
 
 Archive Vault
 
-##### ParametersExpand Collapse
+## Parameters
 
---vault-id: string
+- `--vault-id: string`
 
-Path parameter vault\_id
+  Path parameter vault_id
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--beta: optional array of AnthropicBeta`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `beta_managed_agents_vault: object`
 
-beta\_managed\_agents\_vault: object { id, archived\_at, created\_at, 4 more } 
+  A vault that stores credentials for use by agents during sessions.
 
-A vault that stores credentials for use by agents during sessions.
+  - `id: string`
 
-id: string
+    Unique identifier for the vault.
 
-Unique identifier for the vault.
+  - `archived_at: string`
 
-archived\_at: string
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+    format: date-time
 
-created\_at: string
+  - `created_at: string`
 
-A timestamp in RFC 3339 format
+    A timestamp in RFC 3339 format
 
-display\_name: string
+    format: date-time
 
-Human-readable name for the vault.
+  - `display_name: string`
 
-metadata: map[string]
+    Human-readable name for the vault.
 
-Arbitrary key-value metadata attached to the vault.
+  - `metadata: map[string]`
 
-
+    Arbitrary key-value metadata attached to the vault.
 
-type: "vault"
+  - `type: "vault"`
 
-"vault"
+  - `updated_at: string`
 
-updated\_at: string
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+    format: date-time
 
-Archive Vault
+## Example
 
-CLI
-
-```shiki
+```bash
 ant beta:vaults archive \
   --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
-  "archived_at": null,
-  "created_at": "2026-03-15T10:00:00Z",
-  "display_name": "Example vault",
-  "metadata": {
-    "environment": "production"
-  },
-  "type": "vault",
-  "updated_at": "2026-03-15T10:00:00Z"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
   "archived_at": null,

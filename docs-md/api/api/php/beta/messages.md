@@ -1,6234 +1,8830 @@
 # Messages
 
-Copy page
+## Create a Message
 
-
+`$client->beta->messages->create(int maxTokens, list<BetaMessageParam> messages, Model model, ?BetaCacheControlEphemeral cacheControl, ?Container container, ?BetaContextManagementConfig contextManagement, ?BetaDiagnosticsParam diagnostics, ?FallbackCreditToken fallbackCreditToken, ?BetaFallbacksParam fallbacks, ?string inferenceGeo, ?list<BetaRequestMCPServerURLDefinition> mcpServers, ?BetaMetadata metadata, ?BetaOutputConfig outputConfig, ?BetaJSONOutputFormat outputFormat, ?ServiceTier serviceTier, ?Speed speed, ?list<string> stopSequences, ?System system, ?float temperature, ?BetaThinkingConfigParam thinking, ?BetaToolChoice toolChoice, ?list<BetaToolUnion> tools, ?int topK, ?float topP, ?list<AnthropicBeta> betas, ?string userProfileID): BetaMessage`
 
-PHP
+**POST** `/v1/messages`
 
-# Messages
+Send a structured list of input messages with text and/or image content, and the model will generate the next message in the conversation.
 
-##### [Create a Message](api/beta/messages/create.md)
+The Messages API can be used for either single queries or stateless multi-turn conversations.
 
-$client->beta->messages->create(int maxTokens, list<[BetaMessageParam](api/beta/messages.md)> messages, Model model, ?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl, ?[Container](api/beta/messages/create.md) container, ?[BetaContextManagementConfig](api/beta/messages.md) contextManagement, ?[BetaDiagnosticsParam](api/beta/messages.md) diagnostics, ?string fallbackCreditToken, ?list<[BetaFallbackParam](api/beta/messages.md)> fallbacks, ?string inferenceGeo, ?list<[BetaRequestMCPServerURLDefinition](api/beta/messages.md)> mcpServers, ?[BetaMetadata](api/beta/messages.md) metadata, ?[BetaOutputConfig](api/beta/messages.md) outputConfig, ?[BetaJSONOutputFormat](api/beta/messages.md) outputFormat, ?[ServiceTier](api/beta/messages/create.md) serviceTier, ?[Speed](api/beta/messages/create.md) speed, ?list<string> stopSequences, ?[System](api/beta/messages/create.md) system, ?float temperature, ?[BetaThinkingConfigParam](api/beta/messages.md) thinking, ?[BetaToolChoice](api/beta/messages.md) toolChoice, ?list<[BetaToolUnion](api/beta/messages.md)> tools, ?int topK, ?float topP, ?list<AnthropicBeta> betas, ?string userProfileID): [BetaMessage](api/beta/messages.md)
+Learn more about the Messages API in our [user guide](get-started.md)
 
-POST/v1/messages
+### Parameters
 
-##### [Count tokens in a Message](api/beta/messages/count_tokens.md)
+- `maxTokens: int`
 
-$client->beta->messages->countTokens(list<[BetaMessageParam](api/beta/messages.md)> messages, Model model, ?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl, ?[BetaContextManagementConfig](api/beta/messages.md) contextManagement, ?list<[BetaRequestMCPServerURLDefinition](api/beta/messages.md)> mcpServers, ?[BetaOutputConfig](api/beta/messages.md) outputConfig, ?[BetaJSONOutputFormat](api/beta/messages.md) outputFormat, ?[Speed](api/beta/messages/count_tokens.md) speed, ?[System](api/beta/messages/count_tokens.md) system, ?[BetaThinkingConfigParam](api/beta/messages.md) thinking, ?[BetaToolChoice](api/beta/messages.md) toolChoice, ?list<Tool> tools, ?list<AnthropicBeta> betas, ?string userProfileID): [BetaMessageTokensCount](api/beta/messages.md)
+  The maximum number of tokens to generate before stopping.
 
-POST/v1/messages/count\_tokens
+  Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-##### ModelsExpand Collapse
+  Set to `0` to populate the [prompt cache](build-with-claude/prompt-caching.md) without generating a response.
 
-
+  Different models have different maximum values for this parameter.  See [models](about-claude/models/overview.md) for details.
 
-[BetaAdvisorMessageIterationUsage](api/beta/messages.md)
+- `messages: list<BetaMessageParam>`
 
-?[BetaCacheCreation](api/beta/messages.md) cacheCreation
+  Input messages.
 
-Breakdown of cached tokens by TTL
+  Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
 
-int cacheCreationInputTokens
+  Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
 
-The number of input tokens used to create the cache entry.
+  If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
 
-int cacheReadInputTokens
+  Example with a single `user` message:
 
-The number of input tokens read from the cache.
+  ```json
+  [{"role": "user", "content": "Hello, Claude"}]
+  ```
 
-int inputTokens
+  Example with multiple conversational turns:
 
-The number of input tokens which were used.
+  ```json
+  [
+    {"role": "user", "content": "Hello there."},
+    {"role": "assistant", "content": "Hi, I'm Claude. How can I help you?"},
+    {"role": "user", "content": "Can you explain LLMs in plain English?"},
+  ]
+  ```
 
-
+  Example with a partially-filled response from Claude:
 
-Model model
+  ```json
+  [
+    {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+    {"role": "assistant", "content": "The best answer is ("},
+  ]
+  ```
 
-The model that will complete your prompt.
+  Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+  ```json
+  {"role": "user", "content": "Hello, Claude"}
+  ```
 
-int outputTokens
+  ```json
+  {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
+  ```
 
-The number of output tokens which were used.
+  See [input examples](build-with-claude/working-with-messages.md).
 
-"advisor\_message" type
+  Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
-Usage for an advisor sub-inference iteration
+  There is a limit of 100,000 messages in a single request.
 
-
+- `model: Model`
 
-[BetaAdvisorRedactedResultBlock](api/beta/messages.md)
+  The model that will complete your prompt.
 
-string encryptedContent
+  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+- `cacheControl?:optional BetaCacheControlEphemeral`
 
-?string stopReason
+  Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
-The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
+- `container?:optional Container`
 
-"advisor\_redacted\_result" type
+  Container identifier for reuse across requests.
 
-
+- `contextManagement?:optional BetaContextManagementConfig`
 
-[BetaAdvisorRedactedResultBlockParam](api/beta/messages.md)
+  Context management configuration.
 
-string encryptedContent
+  This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-Opaque blob produced by a prior response; must be round-tripped verbatim.
+- `diagnostics?:optional BetaDiagnosticsParam`
 
-"advisor\_redacted\_result" type
+  Request-level diagnostics. Currently carries the previous response
+  id for prompt-cache divergence reporting.
 
-?string stopReason
+- `fallbackCreditToken?:optional FallbackCreditToken`
 
-
+  The `fallback_credit_token` from a prior refusal's `stop_details`.
 
-[BetaAdvisorResultBlock](api/beta/messages.md)
+  When a preceding request was refused and returned a `fallback_credit_token`,
+  pass that code here on the retry to have the retry's cache-creation tokens
+  for the prefix that was warm on the refused model billed at the cache-read
+  rate. Must be redeemed by the same organization and workspace, with the same
+  request body (optionally extended by one appended `assistant` message whose
+  content is the partial text — with any trailing whitespace stripped from
+  the final text block — and paired server-tool blocks streamed before the
+  refusal; the appended-assistant form is not available for requests with
+  `output_format` set or forced `tool_choice`), on an eligible fallback
+  model, on the same platform,
+  and within 5 minutes of the refusal; a mismatch is a 400. A token minted
+  mid-server-tool-loop whose partial content was continuable may only be
+  redeemed with the appended-assistant form — if an exact-body retry is
+  rejected with a 400 saying the token must be redeemed by continuing the
+  partial response, retry with the appended-assistant form instead.
 
-?string stopReason
+  When the appended-assistant form is used on a model that otherwise disallows
+  assistant-turn prefill, this token also authorizes that one prefill.
 
-The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+- `fallbacks?:optional BetaFallbacksParam`
 
-string text
+  Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
 
-"advisor\_result" type
+- `inferenceGeo?:optional string`
 
-
+  Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
-[BetaAdvisorResultBlockParam](api/beta/messages.md)
+- `mcpServers?:optional list<BetaRequestMCPServerURLDefinition>`
 
-string text
+  MCP servers to be utilized in this request
 
-"advisor\_result" type
+- `metadata?:optional BetaMetadata`
 
-?string stopReason
+  An object describing metadata about the request.
 
-
+- `outputConfig?:optional BetaOutputConfig`
 
-[BetaAdvisorTool20260301](api/beta/messages.md)
+  Configuration options for the model's output, such as the output format.
 
-
+- `serviceTier?:optional ServiceTier`
 
-Model model
+  Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-The model that will complete your prompt.
+  Anthropic offers different levels of service for your API requests. See [service-tiers](api/service-tiers.md) for details.
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+- `speed?:optional Speed`
 
-
+  Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-"advisor" name
+- `stopSequences?:optional list<string>`
 
-Name of the tool.
+  Custom text sequences that will cause the model to stop generating.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+  Our models will normally stop when they have naturally completed their turn, which will result in a response `stop_reason` of `"end_turn"`.
 
-"advisor\_20260301" type
+  If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
 
-?list<AllowedCaller> allowedCallers
+- `stream?:optional bool`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  Whether to incrementally stream the response using server-sent events.
 
-Create a cache control breakpoint at this content block.
+  See [streaming](build-with-claude/streaming.md) for details.
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) caching
+- `system?:optional System`
 
-Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+  System prompt.
 
-?bool deferLoading
+  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+- `thinking?:optional BetaThinkingConfigParam`
 
-?int maxTokens
+  Configuration for enabling Claude's extended thinking.
 
-Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor\_result or advisor\_redacted\_result block carries stop\_reason='max\_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+  When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-?int maxUses
+  See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-Maximum number of times the tool can be used in the API request.
+- `toolChoice?:optional BetaToolChoice`
 
-?bool strict
+  How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-When true, guarantees schema validation on tool names and inputs
+- `tools?:optional list<BetaToolUnion>`
 
-
+  Definitions of tools that the model may use.
 
-[BetaAdvisorToolResultBlock](api/beta/messages.md)
+  If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-Content content
+  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
 
-string toolUseID
+  Each tool definition includes:
 
-"advisor\_tool\_result" type
+  * `name`: Name of the tool.
+  * `description`: Optional, but strongly-recommended description of the tool.
+  * `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
 
-
+  For example, if you defined `tools` as:
 
-[BetaAdvisorToolResultBlockParam](api/beta/messages.md)
+  ```json
+  [
+    {
+      "name": "get_stock_price",
+      "description": "Get the current stock price for a given ticker symbol.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
+          }
+        },
+        "required": ["ticker"]
+      }
+    }
+  ]
+  ```
 
-Content content
+  And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
 
-string toolUseID
+  ```json
+  [
+    {
+      "type": "tool_use",
+      "id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+      "name": "get_stock_price",
+      "input": { "ticker": "^GSPC" }
+    }
+  ]
+  ```
 
-"advisor\_tool\_result" type
+  You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  ```json
+  [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+      "content": "259.75 USD"
+    }
+  ]
+  ```
 
-Create a cache control breakpoint at this content block.
+  Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-
+  See our [guide](agents-and-tools/tool-use/overview.md) for more details.
 
-[BetaAdvisorToolResultError](api/beta/messages.md)
+- `betas?:optional list<AnthropicBeta>`
 
-ErrorCode errorCode
+  Optional header to specify the beta version(s) you want to use.
 
-"advisor\_tool\_result\_error" type
+- `userProfileID?:optional string`
 
-
+  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
-[BetaAdvisorToolResultErrorParam](api/beta/messages.md)
+- `outputFormat?:optional BetaJSONOutputFormat`
 
-ErrorCode errorCode
+  **Deprecated**
 
-"advisor\_tool\_result\_error" type
+  Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
 
-
+  A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
-[BetaAllThinkingTurns](api/beta/messages.md)
+- `temperature?:optional float`
 
-"all" type
+  **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-
+  Amount of randomness injected into the response.
 
-[BetaBase64ImageSource](api/beta/messages.md)
+  Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
 
-string data
+  Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
-MediaType mediaType
+- `topK?:optional int`
 
-"base64" type
+  **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not accept top_k; any value will be rejected with a 400 error.
 
-
+  Only sample from the top K options for each subsequent token.
 
-[BetaBase64PDFSource](api/beta/messages.md)
+  Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-string data
+  Recommended for advanced use cases only.
 
-"application/pdf" mediaType
+- `topP?:optional float`
 
-"base64" type
+  **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting top_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-
+  Use nucleus sampling.
 
-[BetaBashCodeExecutionOutputBlock](api/beta/messages.md)
+  In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-string fileID
+  Recommended for advanced use cases only.
 
-"bash\_code\_execution\_output" type
+### Returns
 
-
+- `BetaMessage`
 
-[BetaBashCodeExecutionOutputBlockParam](api/beta/messages.md)
+  - `string id`
 
-string fileID
+    Unique object identifier.
 
-"bash\_code\_execution\_output" type
+    The format and length of IDs may change over time.
 
-
+  - `?BetaContainer container`
 
-[BetaBashCodeExecutionResultBlock](api/beta/messages.md)
+    Information about the container used in the request (for the code execution tool)
 
-list<[BetaBashCodeExecutionOutputBlock](api/beta/messages.md)> content
+  - `list<BetaContentBlock> content`
 
-int returnCode
+    Content generated by the model.
 
-string stderr
+    This is an array of content blocks, each of which has a `type` that determines its shape.
 
-string stdout
+    Example:
 
-"bash\_code\_execution\_result" type
+    ```json
+    [{"type": "text", "text": "Hi, I'm Claude."}]
+    ```
 
-
+    If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
 
-[BetaBashCodeExecutionResultBlockParam](api/beta/messages.md)
+    For example, if the input `messages` were:
 
-list<[BetaBashCodeExecutionOutputBlockParam](api/beta/messages.md)> content
+    ```json
+    [
+      {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+      {"role": "assistant", "content": "The best answer is ("}
+    ]
+    ```
 
-int returnCode
+    Then the response `content` might be:
 
-string stderr
+    ```json
+    [{"type": "text", "text": "B)"}]
+    ```
 
-string stdout
+  - `?BetaContextManagementResponse contextManagement`
 
-"bash\_code\_execution\_result" type
+    Context management response.
 
-
+    Information about context management strategies applied during the request.
 
-[BetaBashCodeExecutionToolResultBlock](api/beta/messages.md)
+  - `?BetaDiagnostics diagnostics`
 
-Content content
+    Response envelope for request-level diagnostics. Present (possibly
+    null) whenever the caller supplied `diagnostics` on the request.
 
-string toolUseID
+  - `Model model`
 
-"bash\_code\_execution\_tool\_result" type
+    The model that will complete your prompt.
 
-
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-[BetaBashCodeExecutionToolResultBlockParam](api/beta/messages.md)
+  - `"assistant" role`
 
-Content content
+    Conversational role of the generated message.
 
-string toolUseID
+    This will always be `"assistant"`.
 
-"bash\_code\_execution\_tool\_result" type
+  - `?BetaRefusalStopDetails stopDetails`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    Structured information about a refusal.
 
-Create a cache control breakpoint at this content block.
+  - `?BetaStopReason stopReason`
 
-
+    The reason that we stopped.
 
-[BetaBashCodeExecutionToolResultError](api/beta/messages.md)
+    This may be one the following values:
 
-ErrorCode errorCode
+    * `"end_turn"`: the model reached a natural stopping point
+    * `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
+    * `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
+    * `"tool_use"`: the model invoked one or more tools
+    * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
+    * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+    * `"model_context_window_exceeded"`: we exceeded the model's context window
 
-"bash\_code\_execution\_tool\_result\_error" type
+    In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-
+  - `?string stopSequence`
 
-[BetaBashCodeExecutionToolResultErrorParam](api/beta/messages.md)
+    Which custom stop sequence was generated, if any.
 
-ErrorCode errorCode
+    This value will be a non-null string if one of your custom stop sequences was generated.
 
-"bash\_code\_execution\_tool\_result\_error" type
+  - `"message" type`
 
-
+    Object type.
 
-[BetaCacheControlEphemeral](api/beta/messages.md)
+    For Messages, this is always `"message"`.
 
-"ephemeral" type
+  - `BetaUsage usage`
 
-
+    Billing and rate-limit usage.
 
-?TTL ttl
+    Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
 
-The time-to-live for the cache control breakpoint.
+    Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
 
-This may be one the following values:
+    For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+    Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+  - `?list<BetaThinkingDroppedInputTransformation> inputTransformations`
 
-
+    Changes the API made to the request's input before showing it to the model:
+    one entry per change, in request order. Today the only entry type is
+    `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
+    block from the request's `messages` that was removed from the prompt instead
+    of being shown to the model because it failed a binding check. More entry
+    types may be added over time; ignore types you do not recognize.
 
-[BetaCacheCreation](api/beta/messages.md)
+    Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
+    every such response from a model that supports extended thinking, as `[]`
+    when nothing was changed; without the beta, blocks are removed all the same
+    but nothing is reported. Removed blocks contribute nothing to
+    `usage.input_tokens`. When streaming, the array is final in `message_start`;
+    the final `message_delta` event carries it only when a server-side model
+    fallback happened mid-stream, in which case it holds the serving model's
+    entries and replaces the one in `message_start`.
 
-int ephemeral1hInputTokens
+- `BetaRawMessageStreamEvent`
 
-The number of input tokens used to create the 1 hour cache entry.
+  - `BetaRawMessageStartEvent`
 
-int ephemeral5mInputTokens
+    - `BetaMessage message`
 
-The number of input tokens used to create the 5 minute cache entry.
+    - `"message_start" type`
 
-
+  - `BetaRawMessageDeltaEvent`
 
-[BetaCacheMissMessagesChanged](api/beta/messages.md)
+    - `?BetaContextManagementResponse contextManagement`
 
-int cacheMissedInputTokens
+      Information about context management strategies applied during the request
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+    - `Delta delta`
 
-"messages\_changed" type
+    - `"message_delta" type`
 
-
+    - `BetaMessageDeltaUsage usage`
 
-[BetaCacheMissModelChanged](api/beta/messages.md)
+      Billing and rate-limit usage.
 
-int cacheMissedInputTokens
+      Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+      Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
 
-"model\_changed" type
+      For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
 
-
+      Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-[BetaCacheMissPreviousMessageNotFound](api/beta/messages.md)
+    - `?list<BetaThinkingDroppedInputTransformation> inputTransformations`
 
-"previous\_message\_not\_found" type
+      Changes the API made to the request's input before showing it to the model:
+      one entry per change, in request order. Today the only entry type is
+      `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
+      block from the request's `messages` that was removed from the prompt instead
+      of being shown to the model because it failed a binding check. More entry
+      types may be added over time; ignore types you do not recognize.
 
-
+      Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
+      every such response from a model that supports extended thinking, as `[]`
+      when nothing was changed; without the beta, blocks are removed all the same
+      but nothing is reported. Removed blocks contribute nothing to
+      `usage.input_tokens`. When streaming, the array is final in `message_start`;
+      the final `message_delta` event carries it only when a server-side model
+      fallback happened mid-stream, in which case it holds the serving model's
+      entries and replaces the one in `message_start`.
 
-[BetaCacheMissSystemChanged](api/beta/messages.md)
+  - `BetaRawMessageStopEvent`
 
-int cacheMissedInputTokens
+    - `"message_stop" type`
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+  - `BetaRawContentBlockStartEvent`
 
-"system\_changed" type
+    - `ContentBlock contentBlock`
 
-
+      Response model for a file uploaded to the container.
 
-[BetaCacheMissToolsChanged](api/beta/messages.md)
+    - `int index`
 
-int cacheMissedInputTokens
+    - `"content_block_start" type`
 
-Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+  - `BetaRawContentBlockDeltaEvent`
 
-"tools\_changed" type
+    - `BetaRawContentBlockDelta delta`
 
-
+    - `int index`
 
-[BetaCacheMissUnavailable](api/beta/messages.md)
+    - `"content_block_delta" type`
 
-"unavailable" type
+  - `BetaRawContentBlockStopEvent`
 
-
+    - `int index`
 
-[BetaCitationCharLocation](api/beta/messages.md)
+    - `"content_block_stop" type`
 
-string citedText
+### Example
 
-int documentIndex
+```php
+<?php
 
-?string documentTitle
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-int endCharIndex
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-?string fileID
+$betaMessage = $client->beta->messages->create(
+  maxTokens: 1024,
+  messages: [
+    [
+      'content' => 'Hello, world',
+      'role' => 'user',
+      'clearAt' => 'next_user_message',
+      'outputConfig' => ['effort' => 'low'],
+    ],
+  ],
+  model: Model::CLAUDE_OPUS_5,
+  cacheControl: ['type' => 'ephemeral', 'ttl' => '5m'],
+  container: [
+    'id' => 'id',
+    'skills' => [
+      ['skillID' => 'pdf', 'type' => 'anthropic', 'version' => 'latest']
+    ],
+  ],
+  contextManagement: [
+    'edits' => [
+      [
+        'type' => 'clear_tool_uses_20250919',
+        'clearAtLeast' => ['type' => 'input_tokens', 'value' => 0],
+        'clearToolInputs' => true,
+        'excludeTools' => ['string'],
+        'keep' => ['type' => 'tool_uses', 'value' => 0],
+        'trigger' => ['type' => 'input_tokens', 'value' => 1],
+      ],
+    ],
+  ],
+  diagnostics: ['previousMessageID' => 'previous_message_id'],
+  fallbackCreditToken: 'x',
+  fallbacks: 'default',
+  inferenceGeo: 'inference_geo',
+  mcpServers: [
+    [
+      'name' => 'name',
+      'type' => 'url',
+      'url' => 'url',
+      'authorizationToken' => 'authorization_token',
+      'toolConfiguration' => ['allowedTools' => ['string'], 'enabled' => true],
+    ],
+  ],
+  metadata: ['userID' => '13803d75-b4b5-4c3e-b2a2-6f21399b021b'],
+  outputConfig: [
+    'effort' => 'low',
+    'format' => ['schema' => ['foo' => 'bar'], 'type' => 'json_schema'],
+    'taskBudget' => ['total' => 1024, 'type' => 'tokens', 'remaining' => 0],
+  ],
+  outputFormat: ['schema' => ['foo' => 'bar'], 'type' => 'json_schema'],
+  serviceTier: 'auto',
+  speed: 'standard',
+  stopSequences: ['string'],
+  system: [
+    [
+      'text' => 'Today\'s date is 2024-06-01.',
+      'type' => 'text',
+      'cacheControl' => ['type' => 'ephemeral', 'ttl' => '5m'],
+      'citations' => [
+        [
+          'citedText' => 'The grass is green. The sky is blue.',
+          'documentIndex' => 0,
+          'documentTitle' => 'x',
+          'endCharIndex' => 0,
+          'startCharIndex' => 0,
+          'type' => 'char_location',
+        ],
+      ],
+    ],
+  ],
+  temperature: 1,
+  thinking: [
+    'type' => 'adaptive',
+    'blockBinding' => [
+      'prefixMismatchBehavior' => BetaThinkingPrefixMismatchBehavior::ERROR
+    ],
+    'display' => 'summarized',
+  ],
+  toolChoice: ['type' => 'auto', 'disableParallelToolUse' => true],
+  tools: [
+    [
+      'inputSchema' => [
+        'type' => 'object',
+        'properties' => ['location' => 'bar', 'unit' => 'bar'],
+        'required' => ['location'],
+      ],
+      'name' => 'name',
+      'allowedCallers' => ['direct'],
+      'cacheControl' => ['type' => 'ephemeral', 'ttl' => '5m'],
+      'deferLoading' => true,
+      'description' => 'Get the current weather in a given location',
+      'eagerInputStreaming' => true,
+      'inputExamples' => [['foo' => 'bar']],
+      'strict' => true,
+      'type' => 'custom',
+    ],
+  ],
+  topK: 5,
+  topP: 0.7,
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  userProfileID: 'anthropic-user-profile-id',
+);
 
-int startCharIndex
-
-"char\_location" type
-
-
-
-[BetaCitationCharLocationParam](api/beta/messages.md)
-
-string citedText
-
-int documentIndex
-
-?string documentTitle
-
-int endCharIndex
-
-int startCharIndex
-
-"char\_location" type
-
-
-
-[BetaCitationConfig](api/beta/messages.md)
-
-bool enabled
-
-
-
-[BetaCitationContentBlockLocation](api/beta/messages.md)
-
-
-
-string citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-int documentIndex
-
-?string documentTitle
-
-
-
-int endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-?string fileID
-
-int startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-"content\_block\_location" type
-
-
-
-[BetaCitationContentBlockLocationParam](api/beta/messages.md)
-
-
-
-string citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-int documentIndex
-
-?string documentTitle
-
-
-
-int endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-int startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-"content\_block\_location" type
-
-
-
-[BetaCitationPageLocation](api/beta/messages.md)
-
-string citedText
-
-int documentIndex
-
-?string documentTitle
-
-int endPageNumber
-
-?string fileID
-
-int startPageNumber
-
-"page\_location" type
-
-
-
-[BetaCitationPageLocationParam](api/beta/messages.md)
-
-string citedText
-
-int documentIndex
-
-?string documentTitle
-
-int endPageNumber
-
-int startPageNumber
-
-"page\_location" type
-
-
-
-[BetaCitationSearchResultLocation](api/beta/messages.md)
-
-
-
-string citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-int endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-int searchResultIndex
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-string source
-
-int startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-?string title
-
-"search\_result\_location" type
-
-
-
-[BetaCitationSearchResultLocationParam](api/beta/messages.md)
-
-
-
-string citedText
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-int endBlockIndex
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-int searchResultIndex
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-string source
-
-int startBlockIndex
-
-0-based index of the first cited block in the source's `content` array.
-
-?string title
-
-"search\_result\_location" type
-
-
-
-[BetaCitationWebSearchResultLocationParam](api/beta/messages.md)
-
-string citedText
-
-string encryptedIndex
-
-?string title
-
-"web\_search\_result\_location" type
-
-string url
-
-
-
-[BetaCitationsConfigParam](api/beta/messages.md)
-
-?bool enabled
-
-
-
-[BetaCitationsDelta](api/beta/messages.md)
-
-Citation citation
-
-"citations\_delta" type
-
-
-
-[BetaCitationsWebSearchResultLocation](api/beta/messages.md)
-
-string citedText
-
-string encryptedIndex
-
-?string title
-
-"web\_search\_result\_location" type
-
-string url
-
-
-
-[BetaClearThinking20251015Edit](api/beta/messages.md)
-
-"clear\_thinking\_20251015" type
-
-?Keep keep
-
-Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
-
-
-
-[BetaClearThinking20251015EditResponse](api/beta/messages.md)
-
-int clearedInputTokens
-
-Number of input tokens cleared by this edit.
-
-int clearedThinkingTurns
-
-Number of thinking turns that were cleared.
-
-"clear\_thinking\_20251015" type
-
-The type of context management edit applied.
-
-
-
-[BetaClearToolUses20250919Edit](api/beta/messages.md)
-
-"clear\_tool\_uses\_20250919" type
-
-?[BetaInputTokensClearAtLeast](api/beta/messages.md) clearAtLeast
-
-Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
-
-?ClearToolInputs clearToolInputs
-
-Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
-
-?list<string> excludeTools
-
-Tool names whose uses are preserved from clearing
-
-?[BetaToolUsesKeep](api/beta/messages.md) keep
-
-Number of tool uses to retain in the conversation
-
-?Trigger trigger
-
-Condition that triggers the context management strategy
-
-
-
-[BetaClearToolUses20250919EditResponse](api/beta/messages.md)
-
-int clearedInputTokens
-
-Number of input tokens cleared by this edit.
-
-int clearedToolUses
-
-Number of tool uses that were cleared.
-
-"clear\_tool\_uses\_20250919" type
-
-The type of context management edit applied.
-
-
-
-[BetaCodeExecutionOutputBlock](api/beta/messages.md)
-
-string fileID
-
-"code\_execution\_output" type
-
-
-
-[BetaCodeExecutionOutputBlockParam](api/beta/messages.md)
-
-string fileID
-
-"code\_execution\_output" type
-
-
-
-[BetaCodeExecutionResultBlock](api/beta/messages.md)
-
-list<[BetaCodeExecutionOutputBlock](api/beta/messages.md)> content
-
-int returnCode
-
-string stderr
-
-string stdout
-
-"code\_execution\_result" type
-
-
-
-[BetaCodeExecutionResultBlockParam](api/beta/messages.md)
-
-list<[BetaCodeExecutionOutputBlockParam](api/beta/messages.md)> content
-
-int returnCode
-
-string stderr
-
-string stdout
-
-"code\_execution\_result" type
-
-
-
-[BetaCodeExecutionTool20250522](api/beta/messages.md)
-
-
-
-"code\_execution" name
-
-Name of the tool.
-
-This is how the tool will be called by the model and in `tool_use` blocks.
-
-"code\_execution\_20250522" type
-
-?list<AllowedCaller> allowedCallers
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?bool deferLoading
-
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
-
-?bool strict
-
-When true, guarantees schema validation on tool names and inputs
-
-
-
-[BetaCodeExecutionTool20250825](api/beta/messages.md)
-
-
-
-"code\_execution" name
-
-Name of the tool.
-
-This is how the tool will be called by the model and in `tool_use` blocks.
-
-"code\_execution\_20250825" type
-
-?list<AllowedCaller> allowedCallers
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?bool deferLoading
-
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
-
-?bool strict
-
-When true, guarantees schema validation on tool names and inputs
-
-
-
-[BetaCodeExecutionTool20260120](api/beta/messages.md)
-
-
-
-"code\_execution" name
-
-Name of the tool.
-
-This is how the tool will be called by the model and in `tool_use` blocks.
-
-"code\_execution\_20260120" type
-
-?list<AllowedCaller> allowedCallers
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?bool deferLoading
-
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
-
-?bool strict
-
-When true, guarantees schema validation on tool names and inputs
-
-
-
-[BetaCodeExecutionTool20260521](api/beta/messages.md)
-
-
-
-"code\_execution" name
-
-Name of the tool.
-
-This is how the tool will be called by the model and in `tool_use` blocks.
-
-"code\_execution\_20260521" type
-
-?list<AllowedCaller> allowedCallers
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?bool deferLoading
-
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
-
-?bool strict
-
-When true, guarantees schema validation on tool names and inputs
-
-
-
-[BetaCodeExecutionToolResultBlock](api/beta/messages.md)
-
-[BetaCodeExecutionToolResultBlockContent](api/beta/messages.md) content
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-string toolUseID
-
-"code\_execution\_tool\_result" type
-
-
-
-[BetaCodeExecutionToolResultBlockContent](api/beta/messages.md)
-
-One of the following:
-
-
-
-[BetaCodeExecutionToolResultError](api/beta/messages.md)
-
-[BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) errorCode
-
-"code\_execution\_tool\_result\_error" type
-
-
-
-[BetaCodeExecutionResultBlock](api/beta/messages.md)
-
-list<[BetaCodeExecutionOutputBlock](api/beta/messages.md)> content
-
-int returnCode
-
-string stderr
-
-string stdout
-
-"code\_execution\_result" type
-
-
-
-[BetaEncryptedCodeExecutionResultBlock](api/beta/messages.md)
-
-list<[BetaCodeExecutionOutputBlock](api/beta/messages.md)> content
-
-string encryptedStdout
-
-int returnCode
-
-string stderr
-
-"encrypted\_code\_execution\_result" type
-
-
-
-[BetaCodeExecutionToolResultBlockParam](api/beta/messages.md)
-
-[BetaCodeExecutionToolResultBlockParamContent](api/beta/messages.md) content
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-string toolUseID
-
-"code\_execution\_tool\_result" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-
-
-[BetaCodeExecutionToolResultBlockParamContent](api/beta/messages.md)
-
-One of the following:
-
-
-
-[BetaCodeExecutionToolResultErrorParam](api/beta/messages.md)
-
-[BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) errorCode
-
-"code\_execution\_tool\_result\_error" type
-
-
-
-[BetaCodeExecutionResultBlockParam](api/beta/messages.md)
-
-list<[BetaCodeExecutionOutputBlockParam](api/beta/messages.md)> content
-
-int returnCode
-
-string stderr
-
-string stdout
-
-"code\_execution\_result" type
-
-
-
-[BetaEncryptedCodeExecutionResultBlockParam](api/beta/messages.md)
-
-list<[BetaCodeExecutionOutputBlockParam](api/beta/messages.md)> content
-
-string encryptedStdout
-
-int returnCode
-
-string stderr
-
-"encrypted\_code\_execution\_result" type
-
-
-
-[BetaCodeExecutionToolResultError](api/beta/messages.md)
-
-[BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) errorCode
-
-"code\_execution\_tool\_result\_error" type
-
-
-
-[BetaCodeExecutionToolResultErrorCode](api/beta/messages.md)
-
-One of the following:
-
-"invalid\_tool\_input"
-
-"unavailable"
-
-"too\_many\_requests"
-
-"execution\_time\_exceeded"
-
-
-
-[BetaCodeExecutionToolResultErrorParam](api/beta/messages.md)
-
-[BetaCodeExecutionToolResultErrorCode](api/beta/messages.md) errorCode
-
-"code\_execution\_tool\_result\_error" type
-
-
-
-[BetaCompact20260112Edit](api/beta/messages.md)
-
-"compact\_20260112" type
-
-?string instructions
-
-Additional instructions for summarization.
-
-?bool pauseAfterCompaction
-
-Whether to pause after compaction and return the compaction block to the user.
-
-?[BetaInputTokensTrigger](api/beta/messages.md) trigger
-
-When to trigger compaction. Defaults to 150000 input tokens.
-
-
-
-[BetaCompactionBlock](api/beta/messages.md)
-
-?string content
-
-Summary of compacted content, or null if compaction failed
-
-?string encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
-"compaction" type
-
-
-
-[BetaCompactionBlockParam](api/beta/messages.md)
-
-"compaction" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?string content
-
-Summary of previously compacted content, or null if compaction failed
-
-?string encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
-
-
-[BetaCompactionContentBlockDelta](api/beta/messages.md)
-
-?string content
-
-?string encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
-"compaction\_delta" type
-
-
-
-[BetaCompactionIterationUsage](api/beta/messages.md)
-
-?[BetaCacheCreation](api/beta/messages.md) cacheCreation
-
-Breakdown of cached tokens by TTL
-
-int cacheCreationInputTokens
-
-The number of input tokens used to create the cache entry.
-
-int cacheReadInputTokens
-
-The number of input tokens read from the cache.
-
-int inputTokens
-
-The number of input tokens which were used.
-
-int outputTokens
-
-The number of output tokens which were used.
-
-"compaction" type
-
-Usage for a compaction iteration
-
-
-
-[BetaContainer](api/beta/messages.md)
-
-string id
-
-Identifier for the container used in this request
-
-\Datetime expiresAt
-
-The time at which the container will expire.
-
-?list<[BetaSkill](api/beta/messages.md)> skills
-
-Skills loaded in the container
-
-
-
-[BetaContainerParams](api/beta/messages.md)
-
-?string id
-
-Container id
-
-?list<[BetaSkillParams](api/beta/messages.md)> skills
-
-List of skills to load in the container
-
-
-
-[BetaContainerUploadBlock](api/beta/messages.md)
-
-string fileID
-
-"container\_upload" type
-
-
-
-[BetaContainerUploadBlockParam](api/beta/messages.md)
-
-string fileID
-
-"container\_upload" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-
-
-[BetaContentBlock](api/beta/messages.md)
-
-One of the following:
-
-
-
-[BetaTextBlock](api/beta/messages.md)
-
-
-
-?list<[BetaTextCitation](api/beta/messages.md)> citations
-
-Citations supporting the text block.
-
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-string text
-
-"text" type
-
-
-
-[BetaThinkingBlock](api/beta/messages.md)
-
-string signature
-
-string thinking
-
-"thinking" type
-
-
-
-[BetaRedactedThinkingBlock](api/beta/messages.md)
-
-string data
-
-"redacted\_thinking" type
-
-
-
-[BetaToolUseBlock](api/beta/messages.md)
-
-string id
-
-array<string,mixed> input
-
-string name
-
-"tool\_use" type
-
-?Caller caller
-
-Tool invocation directly from the model.
-
-
-
-[BetaServerToolUseBlock](api/beta/messages.md)
-
-string id
-
-array<string,mixed> input
-
-Name name
-
-"server\_tool\_use" type
-
-?Caller caller
-
-Tool invocation directly from the model.
-
-
-
-[BetaWebSearchToolResultBlock](api/beta/messages.md)
-
-[BetaWebSearchToolResultBlockContent](api/beta/messages.md) content
-
-string toolUseID
-
-"web\_search\_tool\_result" type
-
-?Caller caller
-
-Tool invocation directly from the model.
-
-
-
-[BetaWebFetchToolResultBlock](api/beta/messages.md)
-
-Content content
-
-string toolUseID
-
-"web\_fetch\_tool\_result" type
-
-?Caller caller
-
-Tool invocation directly from the model.
-
-
-
-[BetaAdvisorToolResultBlock](api/beta/messages.md)
-
-Content content
-
-string toolUseID
-
-"advisor\_tool\_result" type
-
-
-
-[BetaCodeExecutionToolResultBlock](api/beta/messages.md)
-
-[BetaCodeExecutionToolResultBlockContent](api/beta/messages.md) content
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-string toolUseID
-
-"code\_execution\_tool\_result" type
-
-
-
-[BetaBashCodeExecutionToolResultBlock](api/beta/messages.md)
-
-Content content
-
-string toolUseID
-
-"bash\_code\_execution\_tool\_result" type
-
-
-
-[BetaTextEditorCodeExecutionToolResultBlock](api/beta/messages.md)
-
-Content content
-
-string toolUseID
-
-"text\_editor\_code\_execution\_tool\_result" type
-
-
-
-[BetaToolSearchToolResultBlock](api/beta/messages.md)
-
-Content content
-
-string toolUseID
-
-"tool\_search\_tool\_result" type
-
-
-
-[BetaMCPToolUseBlock](api/beta/messages.md)
-
-string id
-
-array<string,mixed> input
-
-string name
-
-The name of the MCP tool
-
-string serverName
-
-The name of the MCP server
-
-"mcp\_tool\_use" type
-
-
-
-[BetaMCPToolResultBlock](api/beta/messages.md)
-
-Content content
-
-bool isError
-
-string toolUseID
-
-"mcp\_tool\_result" type
-
-
-
-[BetaContainerUploadBlock](api/beta/messages.md)
-
-string fileID
-
-"container\_upload" type
-
-
-
-[BetaCompactionBlock](api/beta/messages.md)
-
-?string content
-
-Summary of compacted content, or null if compaction failed
-
-?string encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
-"compaction" type
-
-
-
-[BetaFallbackBlock](api/beta/messages.md)
-
-[BetaFallbackInfo](api/beta/messages.md) from
-
-The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
-
-[BetaFallbackInfo](api/beta/messages.md) to
-
-The fallback model producing the content that follows this block. Its `model` is always the canonical id.
-
-[BetaFallbackRefusalTrigger](api/beta/messages.md) trigger
-
-What caused the `from` model to hand over at this hop.
-
-"fallback" type
-
-
-
-[BetaContentBlockParam](api/beta/messages.md)
-
-One of the following:
-
-
-
-[BetaTextBlockParam](api/beta/messages.md)
-
-string text
-
-"text" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?list<[BetaTextCitationParam](api/beta/messages.md)> citations
-
-
-
-[BetaImageBlockParam](api/beta/messages.md)
-
-Source source
-
-"image" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-
-
-[BetaRequestDocumentBlock](api/beta/messages.md)
-
-Source source
-
-"document" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?[BetaCitationsConfigParam](api/beta/messages.md) citations
-
-?string context
-
-?string title
-
-
-
-[BetaSearchResultBlockParam](api/beta/messages.md)
-
-list<[BetaTextBlockParam](api/beta/messages.md)> content
-
-string source
-
-string title
-
-"search\_result" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?[BetaCitationsConfigParam](api/beta/messages.md) citations
-
-
-
-[BetaThinkingBlockParam](api/beta/messages.md)
-
-string signature
-
-string thinking
-
-"thinking" type
-
-
-
-[BetaRedactedThinkingBlockParam](api/beta/messages.md)
-
-string data
-
-"redacted\_thinking" type
-
-
-
-[BetaToolUseBlockParam](api/beta/messages.md)
-
-string id
-
-array<string,mixed> input
-
-string name
-
-"tool\_use" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?Caller caller
-
-Tool invocation directly from the model.
-
-
-
-[BetaToolResultBlockParam](api/beta/messages.md)
-
-string toolUseID
-
-"tool\_result" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?Content content
-
-?bool isError
-
-
-
-[BetaServerToolUseBlockParam](api/beta/messages.md)
-
-string id
-
-array<string,mixed> input
-
-Name name
-
-"server\_tool\_use" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?Caller caller
-
-Tool invocation directly from the model.
-
-
-
-[BetaWebSearchToolResultBlockParam](api/beta/messages.md)
-
-[BetaWebSearchToolResultBlockParamContent](api/beta/messages.md) content
-
-string toolUseID
-
-"web\_search\_tool\_result" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?Caller caller
-
-Tool invocation directly from the model.
-
-
-
-[BetaWebFetchToolResultBlockParam](api/beta/messages.md)
-
-Content content
-
-string toolUseID
-
-"web\_fetch\_tool\_result" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?Caller caller
-
-Tool invocation directly from the model.
-
-
-
-[BetaAdvisorToolResultBlockParam](api/beta/messages.md)
-
-Content content
-
-string toolUseID
-
-"advisor\_tool\_result" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-
-
-[BetaCodeExecutionToolResultBlockParam](api/beta/messages.md)
-
-[BetaCodeExecutionToolResultBlockParamContent](api/beta/messages.md) content
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-string toolUseID
-
-"code\_execution\_tool\_result" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-
-
-[BetaBashCodeExecutionToolResultBlockParam](api/beta/messages.md)
-
-Content content
-
-string toolUseID
-
-"bash\_code\_execution\_tool\_result" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-
-
-[BetaTextEditorCodeExecutionToolResultBlockParam](api/beta/messages.md)
-
-Content content
-
-string toolUseID
-
-"text\_editor\_code\_execution\_tool\_result" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-
-
-[BetaToolSearchToolResultBlockParam](api/beta/messages.md)
-
-Content content
-
-string toolUseID
-
-"tool\_search\_tool\_result" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-
-
-[BetaMCPToolUseBlockParam](api/beta/messages.md)
-
-string id
-
-array<string,mixed> input
-
-string name
-
-string serverName
-
-The name of the MCP server
-
-"mcp\_tool\_use" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-
-
-[BetaRequestMCPToolResultBlockParam](api/beta/messages.md)
-
-string toolUseID
-
-"mcp\_tool\_result" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?Content content
-
-?bool isError
-
-
-
-[BetaContainerUploadBlockParam](api/beta/messages.md)
-
-string fileID
-
-"container\_upload" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-
-
-[BetaCompactionBlockParam](api/beta/messages.md)
-
-"compaction" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?string content
-
-Summary of previously compacted content, or null if compaction failed
-
-?string encryptedContent
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
-
-
-[BetaMidConversationSystemBlockParam](api/beta/messages.md)
-
-list<[BetaTextBlockParam](api/beta/messages.md)> content
-
-System instruction text blocks.
-
-"mid\_conv\_system" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-
-
-[BetaFallbackBlockParam](api/beta/messages.md)
-
-[BetaFallbackInfoParam](api/beta/messages.md) from
-
-Identifies one hop of a fallback transition.
-
-[BetaFallbackInfoParam](api/beta/messages.md) to
-
-Identifies one hop of a fallback transition.
-
-"fallback" type
-
-?mixed trigger
-
-The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
-
-
-
-[BetaContentBlockSource](api/beta/messages.md)
-
-Content content
-
-"content" type
-
-
-
-[BetaContentBlockSourceContent](api/beta/messages.md)
-
-One of the following:
-
-
-
-[BetaTextBlockParam](api/beta/messages.md)
-
-string text
-
-"text" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?list<[BetaTextCitationParam](api/beta/messages.md)> citations
-
-
-
-[BetaImageBlockParam](api/beta/messages.md)
-
-Source source
-
-"image" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-
-
-[BetaContextManagementConfig](api/beta/messages.md)
-
-?list<Edit> edits
-
-List of context management edits to apply
-
-
-
-[BetaContextManagementResponse](api/beta/messages.md)
-
-list<AppliedEdit> appliedEdits
-
-List of context management edits that were applied.
-
-
-
-[BetaCountTokensContextManagementResponse](api/beta/messages.md)
-
-int originalInputTokens
-
-The original token count before context management was applied
-
-
-
-[BetaDiagnostics](api/beta/messages.md)
-
-?CacheMissReason cacheMissReason
-
-Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
-
-
-
-[BetaDiagnosticsParam](api/beta/messages.md)
-
-?string previousMessageID
-
-The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
-
-
-
-[BetaDirectCaller](api/beta/messages.md)
-
-"direct" type
-
-
-
-[BetaDocumentBlock](api/beta/messages.md)
-
-?[BetaCitationConfig](api/beta/messages.md) citations
-
-Citation configuration for the document
-
-Source source
-
-?string title
-
-The title of the document
-
-"document" type
-
-
-
-[BetaEncryptedCodeExecutionResultBlock](api/beta/messages.md)
-
-list<[BetaCodeExecutionOutputBlock](api/beta/messages.md)> content
-
-string encryptedStdout
-
-int returnCode
-
-string stderr
-
-"encrypted\_code\_execution\_result" type
-
-
-
-[BetaEncryptedCodeExecutionResultBlockParam](api/beta/messages.md)
-
-list<[BetaCodeExecutionOutputBlockParam](api/beta/messages.md)> content
-
-string encryptedStdout
-
-int returnCode
-
-string stderr
-
-"encrypted\_code\_execution\_result" type
-
-
-
-[BetaFallbackBlock](api/beta/messages.md)
-
-[BetaFallbackInfo](api/beta/messages.md) from
-
-The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
-
-[BetaFallbackInfo](api/beta/messages.md) to
-
-The fallback model producing the content that follows this block. Its `model` is always the canonical id.
-
-[BetaFallbackRefusalTrigger](api/beta/messages.md) trigger
-
-What caused the `from` model to hand over at this hop.
-
-"fallback" type
-
-
-
-[BetaFallbackBlockParam](api/beta/messages.md)
-
-[BetaFallbackInfoParam](api/beta/messages.md) from
-
-Identifies one hop of a fallback transition.
-
-[BetaFallbackInfoParam](api/beta/messages.md) to
-
-Identifies one hop of a fallback transition.
-
-"fallback" type
-
-?mixed trigger
-
-The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
-
-
-
-[BetaFallbackInfo](api/beta/messages.md)
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-
-
-[BetaFallbackInfoParam](api/beta/messages.md)
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-
-
-[BetaFallbackMessageIterationUsage](api/beta/messages.md)
-
-?[BetaCacheCreation](api/beta/messages.md) cacheCreation
-
-Breakdown of cached tokens by TTL
-
-int cacheCreationInputTokens
-
-The number of input tokens used to create the cache entry.
-
-int cacheReadInputTokens
-
-The number of input tokens read from the cache.
-
-int inputTokens
-
-The number of input tokens which were used.
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-int outputTokens
-
-The number of output tokens which were used.
-
-"fallback\_message" type
-
-Usage for the fallback-model attempt that served the response
-
-
-
-[BetaFallbackParam](api/beta/messages.md)
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-?int maxTokens
-
-?[BetaOutputConfig](api/beta/messages.md) outputConfig
-
-?Speed speed
-
-?Thinking thinking
-
-
-
-[BetaFallbackRefusalTrigger](api/beta/messages.md)
-
-?Category category
-
-The policy category that triggered a refusal.
-
-"refusal" type
-
-
-
-[BetaFileDocumentSource](api/beta/messages.md)
-
-string fileID
-
-"file" type
-
-
-
-[BetaFileImageSource](api/beta/messages.md)
-
-string fileID
-
-"file" type
-
-
-
-[BetaImageBlockParam](api/beta/messages.md)
-
-Source source
-
-"image" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-
-
-[BetaInputJSONDelta](api/beta/messages.md)
-
-string partialJSON
-
-"input\_json\_delta" type
-
-
-
-[BetaInputTokensClearAtLeast](api/beta/messages.md)
-
-"input\_tokens" type
-
-int value
-
-
-
-[BetaInputTokensTrigger](api/beta/messages.md)
-
-"input\_tokens" type
-
-int value
-
-
-
-list<BetaIterationsUsageItem>
-
-One of the following:
-
-
-
-[BetaMessageIterationUsage](api/beta/messages.md)
-
-?[BetaCacheCreation](api/beta/messages.md) cacheCreation
-
-Breakdown of cached tokens by TTL
-
-int cacheCreationInputTokens
-
-The number of input tokens used to create the cache entry.
-
-int cacheReadInputTokens
-
-The number of input tokens read from the cache.
-
-int inputTokens
-
-The number of input tokens which were used.
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-int outputTokens
-
-The number of output tokens which were used.
-
-"message" type
-
-Usage for a sampling iteration
-
-
-
-[BetaCompactionIterationUsage](api/beta/messages.md)
-
-?[BetaCacheCreation](api/beta/messages.md) cacheCreation
-
-Breakdown of cached tokens by TTL
-
-int cacheCreationInputTokens
-
-The number of input tokens used to create the cache entry.
-
-int cacheReadInputTokens
-
-The number of input tokens read from the cache.
-
-int inputTokens
-
-The number of input tokens which were used.
-
-int outputTokens
-
-The number of output tokens which were used.
-
-"compaction" type
-
-Usage for a compaction iteration
-
-
-
-[BetaAdvisorMessageIterationUsage](api/beta/messages.md)
-
-?[BetaCacheCreation](api/beta/messages.md) cacheCreation
-
-Breakdown of cached tokens by TTL
-
-int cacheCreationInputTokens
-
-The number of input tokens used to create the cache entry.
-
-int cacheReadInputTokens
-
-The number of input tokens read from the cache.
-
-int inputTokens
-
-The number of input tokens which were used.
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-int outputTokens
-
-The number of output tokens which were used.
-
-"advisor\_message" type
-
-Usage for an advisor sub-inference iteration
-
-
-
-[BetaFallbackMessageIterationUsage](api/beta/messages.md)
-
-?[BetaCacheCreation](api/beta/messages.md) cacheCreation
-
-Breakdown of cached tokens by TTL
-
-int cacheCreationInputTokens
-
-The number of input tokens used to create the cache entry.
-
-int cacheReadInputTokens
-
-The number of input tokens read from the cache.
-
-int inputTokens
-
-The number of input tokens which were used.
-
-
-
-Model model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-int outputTokens
-
-The number of output tokens which were used.
-
-"fallback\_message" type
-
-Usage for the fallback-model attempt that served the response
-
-
-
-[BetaJSONOutputFormat](api/beta/messages.md)
-
-array<string,mixed> schema
-
-The JSON schema of the format
-
-"json\_schema" type
-
-
-
-[BetaMCPToolConfig](api/beta/messages.md)
-
-?bool deferLoading
-
-?bool enabled
-
-
-
-[BetaMCPToolDefaultConfig](api/beta/messages.md)
-
-?bool deferLoading
-
-?bool enabled
-
-
-
-[BetaMCPToolResultBlock](api/beta/messages.md)
-
-Content content
-
-bool isError
-
-string toolUseID
-
-"mcp\_tool\_result" type
-
-
-
-[BetaMCPToolUseBlock](api/beta/messages.md)
-
-string id
-
-array<string,mixed> input
-
-string name
-
-The name of the MCP tool
-
-string serverName
-
-The name of the MCP server
-
-"mcp\_tool\_use" type
-
-
-
-[BetaMCPToolUseBlockParam](api/beta/messages.md)
-
-string id
-
-array<string,mixed> input
-
-string name
-
-string serverName
-
-The name of the MCP server
-
-"mcp\_tool\_use" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-
-
-[BetaMCPToolset](api/beta/messages.md)
-
-string mcpServerName
-
-Name of the MCP server to configure tools for
-
-"mcp\_toolset" type
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?array<string,[BetaMCPToolConfig](api/beta/messages.md)> configs
-
-Configuration overrides for specific tools, keyed by tool name
-
-?[BetaMCPToolDefaultConfig](api/beta/messages.md) defaultConfig
-
-Default configuration applied to all tools from this server
-
-
-
-[BetaMemoryTool20250818](api/beta/messages.md)
-
-
-
-"memory" name
-
-Name of the tool.
-
-This is how the tool will be called by the model and in `tool_use` blocks.
-
-"memory\_20250818" type
-
-?list<AllowedCaller> allowedCallers
-
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
-
-Create a cache control breakpoint at this content block.
-
-?bool deferLoading
-
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
-
-?list<array<string,mixed>> inputExamples
-
-?bool strict
-
-When true, guarantees schema validation on tool names and inputs
-
-
-
-[BetaMemoryTool20250818Command](api/beta/messages.md)
-
-One of the following:
-
-
-
-[BetaMemoryTool20250818ViewCommand](api/beta/messages.md)
-
-"view" command
-
-Command type identifier
-
-string path
-
-Path to directory or file to view
-
-?list<int> viewRange
-
-Optional line range for viewing specific lines
-
-
-
-[BetaMemoryTool20250818CreateCommand](api/beta/messages.md)
-
-"create" command
-
-Command type identifier
-
-string fileText
-
-Content to write to the file
-
-string path
-
-Path where the file should be created
-
-
-
-[BetaMemoryTool20250818StrReplaceCommand](api/beta/messages.md)
-
-"str\_replace" command
-
-Command type identifier
-
-string newStr
-
-Text to replace with
-
-string oldStr
-
-Text to search for and replace
-
-string path
-
-Path to the file where text should be replaced
-
-
-
-[BetaMemoryTool20250818InsertCommand](api/beta/messages.md)
-
-"insert" command
-
-Command type identifier
-
-int insertLine
-
-Line number where text should be inserted
-
-string insertText
-
-Text to insert at the specified line
-
-string path
-
-Path to the file where text should be inserted
-
-
-
-[BetaMemoryTool20250818DeleteCommand](api/beta/messages.md)
-
-"delete" command
-
-Command type identifier
-
-string path
-
-Path to the file or directory to delete
-
-
-
-[BetaMemoryTool20250818RenameCommand](api/beta/messages.md)
-
-"rename" command
-
-Command type identifier
-
-string newPath
-
-New path for the file or directory
-
-string oldPath
-
-Current path of the file or directory
-
-
-
-[BetaMemoryTool20250818CreateCommand](api/beta/messages.md)
-
-"create" command
-
-Command type identifier
-
-string fileText
-
-Content to write to the file
-
-string path
-
-Path where the file should be created
-
-
-
-[BetaMemoryTool20250818DeleteCommand](api/beta/messages.md)
-
-"delete" command
-
-Command type identifier
-
-string path
-
-Path to the file or directory to delete
-
-
-
-[BetaMemoryTool20250818InsertCommand](api/beta/messages.md)
-
-"insert" command
-
-Command type identifier
-
-int insertLine
-
-Line number where text should be inserted
-
-string insertText
-
-Text to insert at the specified line
-
-string path
-
-Path to the file where text should be inserted
-
-
-
-[BetaMemoryTool20250818RenameCommand](api/beta/messages.md)
-
-"rename" command
-
-Command type identifier
-
-string newPath
-
-New path for the file or directory
-
-string oldPath
-
-Current path of the file or directory
-
-
-
-[BetaMemoryTool20250818StrReplaceCommand](api/beta/messages.md)
-
-"str\_replace" command
-
-Command type identifier
-
-string newStr
-
-Text to replace with
-
-string oldStr
-
-Text to search for and replace
-
-string path
-
-Path to the file where text should be replaced
-
-
-
-[BetaMemoryTool20250818ViewCommand](api/beta/messages.md)
-
-"view" command
-
-Command type identifier
-
-string path
-
-Path to directory or file to view
-
-?list<int> viewRange
-
-Optional line range for viewing specific lines
-
-
-
-[BetaMessage](api/beta/messages.md)
-
-
-
-string id
-
-Unique object identifier.
-
-The format and length of IDs may change over time.
-
-?[BetaContainer](api/beta/messages.md) container
-
-Information about the container used in the request (for the code execution tool)
-
-
-
-list<[BetaContentBlock](api/beta/messages.md)> content
-
-Content generated by the model.
-
-This is an array of content blocks, each of which has a `type` that determines its shape.
-
-Example:
-
-```shiki
-[{"type": "text", "text": "Hi, I'm Claude."}]
+var_dump($betaMessage);
 ```
 
-
+#### Response (200)
 
-If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
-
-For example, if the input `messages` were:
-
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("}
-]
+```json
+{
+  "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
+  "container": {
+    "id": "container_011CpZohnwH4vuy7gazohgSP",
+    "expires_at": "2019-12-27T18:11:19.117Z",
+    "skills": [
+      {
+        "skill_id": "pdf",
+        "type": "anthropic",
+        "version": "latest"
+      }
+    ]
+  },
+  "content": [
+    {
+      "citations": [
+        {
+          "cited_text": "The grass is green. The sky is blue.",
+          "document_index": 0,
+          "document_title": "My Document",
+          "end_char_index": 0,
+          "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+          "start_char_index": 0,
+          "type": "char_location"
+        }
+      ],
+      "text": "Hi! My name is Claude.",
+      "type": "text"
+    }
+  ],
+  "context_management": {
+    "applied_edits": [
+      {
+        "cleared_input_tokens": 0,
+        "cleared_tool_uses": 0,
+        "type": "clear_tool_uses_20250919"
+      }
+    ]
+  },
+  "diagnostics": {
+    "cache_miss_reason": {
+      "cache_missed_input_tokens": 0,
+      "type": "model_changed"
+    }
+  },
+  "model": "claude-opus-5",
+  "role": "assistant",
+  "stop_details": {
+    "category": "cyber",
+    "explanation": "This request was declined because it conflicts with Anthropic's Usage Policy.",
+    "fallback_credit_token": "QW50aHJvcGljL0NsYXVkZQ==",
+    "fallback_has_prefill_claim": true,
+    "recommended_model": "claude-opus-4-8",
+    "type": "refusal"
+  },
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 2051,
+    "cache_read_input_tokens": 2051,
+    "fallback_credit": {
+      "status": {
+        "type": "redeemed"
+      }
+    },
+    "inference_geo": "global",
+    "input_tokens": 2095,
+    "iterations": [
+      {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "input_tokens": 0,
+        "model": "claude-fable-5-1",
+        "output_tokens": 0,
+        "type": "message"
+      }
+    ],
+    "output_tokens": 503,
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
+    "server_tool_use": {
+      "web_fetch_requests": 2,
+      "web_search_requests": 0
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+  },
+  "input_transformations": [
+    {
+      "path": "path",
+      "reason": "model_binding_mismatch",
+      "type": "thinking_dropped"
+    }
+  ]
+}
 ```
 
-
+## Count tokens in a Message
 
-Then the response `content` might be:
+`$client->beta->messages->countTokens(list<BetaMessageParam> messages, Model model, ?BetaCacheControlEphemeral cacheControl, ?BetaContextManagementConfig contextManagement, ?list<BetaRequestMCPServerURLDefinition> mcpServers, ?BetaOutputConfig outputConfig, ?BetaJSONOutputFormat outputFormat, ?Speed speed, ?System system, ?BetaThinkingConfigParam thinking, ?BetaToolChoice toolChoice, ?list<Tool> tools, ?list<AnthropicBeta> betas, ?string userProfileID): BetaMessageTokensCount`
 
-```shiki
-[{"type": "text", "text": "B)"}]
+**POST** `/v1/messages/count_tokens`
+
+Count the number of tokens in a Message.
+
+The Token Count API can be used to count the number of tokens in a Message, including tools, images, and documents, without creating it.
+
+Learn more about token counting in our [user guide](build-with-claude/token-counting.md)
+
+### Parameters
+
+- `messages: list<BetaMessageParam>`
+
+  Input messages.
+
+  Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
+
+  Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
+
+  If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
+
+  Example with a single `user` message:
+
+  ```json
+  [{"role": "user", "content": "Hello, Claude"}]
+  ```
+
+  Example with multiple conversational turns:
+
+  ```json
+  [
+    {"role": "user", "content": "Hello there."},
+    {"role": "assistant", "content": "Hi, I'm Claude. How can I help you?"},
+    {"role": "user", "content": "Can you explain LLMs in plain English?"},
+  ]
+  ```
+
+  Example with a partially-filled response from Claude:
+
+  ```json
+  [
+    {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+    {"role": "assistant", "content": "The best answer is ("},
+  ]
+  ```
+
+  Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
+
+  ```json
+  {"role": "user", "content": "Hello, Claude"}
+  ```
+
+  ```json
+  {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
+  ```
+
+  See [input examples](build-with-claude/working-with-messages.md).
+
+  Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+
+  There is a limit of 100,000 messages in a single request.
+
+- `model: Model`
+
+  The model that will complete your prompt.
+
+  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+- `cacheControl?:optional BetaCacheControlEphemeral`
+
+  Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
+- `contextManagement?:optional BetaContextManagementConfig`
+
+  Context management configuration.
+
+  This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
+
+- `mcpServers?:optional list<BetaRequestMCPServerURLDefinition>`
+
+  MCP servers to be utilized in this request
+
+- `outputConfig?:optional BetaOutputConfig`
+
+  Configuration options for the model's output, such as the output format.
+
+- `speed?:optional Speed`
+
+  Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+- `system?:optional System`
+
+  System prompt.
+
+  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
+
+- `thinking?:optional BetaThinkingConfigParam`
+
+  Configuration for enabling Claude's extended thinking.
+
+  When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
+
+  See [extended thinking](build-with-claude/extended-thinking.md) for details.
+
+- `toolChoice?:optional BetaToolChoice`
+
+  How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
+
+- `tools?:optional list<Tool>`
+
+  Definitions of tools that the model may use.
+
+  If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
+
+  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
+
+  Each tool definition includes:
+
+  * `name`: Name of the tool.
+  * `description`: Optional, but strongly-recommended description of the tool.
+  * `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
+
+  For example, if you defined `tools` as:
+
+  ```json
+  [
+    {
+      "name": "get_stock_price",
+      "description": "Get the current stock price for a given ticker symbol.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
+          }
+        },
+        "required": ["ticker"]
+      }
+    }
+  ]
+  ```
+
+  And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
+
+  ```json
+  [
+    {
+      "type": "tool_use",
+      "id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+      "name": "get_stock_price",
+      "input": { "ticker": "^GSPC" }
+    }
+  ]
+  ```
+
+  You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
+
+  ```json
+  [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+      "content": "259.75 USD"
+    }
+  ]
+  ```
+
+  Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
+
+  See our [guide](agents-and-tools/tool-use/overview.md) for more details.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+- `userProfileID?:optional string`
+
+  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
+- `outputFormat?:optional BetaJSONOutputFormat`
+
+  **Deprecated**
+
+  Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+
+  A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
+
+### Returns
+
+- `BetaMessageTokensCount`
+
+  - `?BetaCountTokensContextManagementResponse contextManagement`
+
+    Information about context management applied to the message.
+
+  - `int inputTokens`
+
+    The total number of tokens across the provided list of messages, system prompt, and tools.
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaMessageTokensCount = $client->beta->messages->countTokens(
+  messages: [
+    [
+      'content' => 'Hello, world',
+      'role' => 'user',
+      'clearAt' => 'next_user_message',
+      'outputConfig' => ['effort' => 'low'],
+    ],
+  ],
+  model: Model::CLAUDE_OPUS_5,
+  cacheControl: ['type' => 'ephemeral', 'ttl' => '5m'],
+  contextManagement: [
+    'edits' => [
+      [
+        'type' => 'clear_tool_uses_20250919',
+        'clearAtLeast' => ['type' => 'input_tokens', 'value' => 0],
+        'clearToolInputs' => true,
+        'excludeTools' => ['string'],
+        'keep' => ['type' => 'tool_uses', 'value' => 0],
+        'trigger' => ['type' => 'input_tokens', 'value' => 1],
+      ],
+    ],
+  ],
+  mcpServers: [
+    [
+      'name' => 'name',
+      'type' => 'url',
+      'url' => 'url',
+      'authorizationToken' => 'authorization_token',
+      'toolConfiguration' => ['allowedTools' => ['string'], 'enabled' => true],
+    ],
+  ],
+  outputConfig: [
+    'effort' => 'low',
+    'format' => ['schema' => ['foo' => 'bar'], 'type' => 'json_schema'],
+    'taskBudget' => ['total' => 1024, 'type' => 'tokens', 'remaining' => 0],
+  ],
+  outputFormat: ['schema' => ['foo' => 'bar'], 'type' => 'json_schema'],
+  speed: 'standard',
+  system: [
+    [
+      'text' => 'Today\'s date is 2024-06-01.',
+      'type' => 'text',
+      'cacheControl' => ['type' => 'ephemeral', 'ttl' => '5m'],
+      'citations' => [
+        [
+          'citedText' => 'The grass is green. The sky is blue.',
+          'documentIndex' => 0,
+          'documentTitle' => 'x',
+          'endCharIndex' => 0,
+          'startCharIndex' => 0,
+          'type' => 'char_location',
+        ],
+      ],
+    ],
+  ],
+  thinking: [
+    'type' => 'adaptive',
+    'blockBinding' => [
+      'prefixMismatchBehavior' => BetaThinkingPrefixMismatchBehavior::ERROR
+    ],
+    'display' => 'summarized',
+  ],
+  toolChoice: ['type' => 'auto', 'disableParallelToolUse' => true],
+  tools: [
+    [
+      'inputSchema' => [
+        'type' => 'object',
+        'properties' => ['location' => 'bar', 'unit' => 'bar'],
+        'required' => ['location'],
+      ],
+      'name' => 'name',
+      'allowedCallers' => ['direct'],
+      'cacheControl' => ['type' => 'ephemeral', 'ttl' => '5m'],
+      'deferLoading' => true,
+      'description' => 'Get the current weather in a given location',
+      'eagerInputStreaming' => true,
+      'inputExamples' => [['foo' => 'bar']],
+      'strict' => true,
+      'type' => 'custom',
+    ],
+  ],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  userProfileID: 'anthropic-user-profile-id',
+);
+
+var_dump($betaMessageTokensCount);
 ```
 
-
+#### Response (200)
 
-
+```json
+{
+  "context_management": {
+    "original_input_tokens": 0
+  },
+  "input_tokens": 2095
+}
+```
 
-?[BetaContextManagementResponse](api/beta/messages.md) contextManagement
+## Domain types
 
-Context management response.
+### Beta Advisor Message Iteration Usage
 
-Information about context management strategies applied during the request.
+- `BetaAdvisorMessageIterationUsage`
 
-?[BetaDiagnostics](api/beta/messages.md) diagnostics
+  - `?BetaCacheCreation cacheCreation`
 
-Response envelope for request-level diagnostics. Present (possibly
-null) whenever the caller supplied `diagnostics` on the request.
+    Breakdown of cached tokens by TTL
 
-
+  - `int cacheCreationInputTokens`
 
-Model model
+    The number of input tokens used to create the cache entry.
 
-The model that will complete your prompt.
+  - `int cacheReadInputTokens`
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+    The number of input tokens read from the cache.
 
-
+  - `int inputTokens`
 
-"assistant" role
+    The number of input tokens which were used.
 
-Conversational role of the generated message.
+  - `Model model`
 
-This will always be `"assistant"`.
+    The model that will complete your prompt.
 
-?[BetaRefusalStopDetails](api/beta/messages.md) stopDetails
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Structured information about a refusal.
+  - `int outputTokens`
 
-
+    The number of output tokens which were used.
 
-?[BetaStopReason](api/beta/messages.md) stopReason
+  - `"advisor_message" type`
 
-The reason that we stopped.
+    Usage for an advisor sub-inference iteration
 
-This may be one the following values:
+### Beta Advisor Redacted Result Block
 
-- `"end_turn"`: the model reached a natural stopping point
-- `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
-- `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
-- `"tool_use"`: the model invoked one or more tools
-- `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
-- `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+- `BetaAdvisorRedactedResultBlock`
 
-In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
+  - `string encryptedContent`
 
-
+    Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-?string stopSequence
+  - `?string stopReason`
 
-Which custom stop sequence was generated, if any.
+    The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-This value will be a non-null string if one of your custom stop sequences was generated.
+  - `"advisor_redacted_result" type`
 
-
+### Beta Advisor Redacted Result Block Param
 
-"message" type
+- `BetaAdvisorRedactedResultBlockParam`
 
-Object type.
+  - `string encryptedContent`
 
-For Messages, this is always `"message"`.
+    Opaque blob produced by a prior response; must be round-tripped verbatim.
 
-
+  - `"advisor_redacted_result" type`
 
-[BetaUsage](api/beta/messages.md) usage
+  - `?string stopReason`
 
-Billing and rate-limit usage.
+### Beta Advisor Result Block
 
-Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+- `BetaAdvisorResultBlock`
 
-Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+  - `?string stopReason`
 
-For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+    The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
-Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+  - `string text`
 
-
+  - `"advisor_result" type`
 
-[BetaMessageDeltaUsage](api/beta/messages.md)
+### Beta Advisor Result Block Param
 
-?int cacheCreationInputTokens
+- `BetaAdvisorResultBlockParam`
 
-The cumulative number of input tokens used to create the cache entry.
+  - `string text`
 
-?int cacheReadInputTokens
+  - `"advisor_result" type`
 
-The cumulative number of input tokens read from the cache.
+  - `?string stopReason`
 
-?int inputTokens
+### Beta Advisor Tool 20260301
 
-The cumulative number of input tokens which were used.
+- `BetaAdvisorTool20260301`
 
-
+  - `Model model`
 
-?list<BetaIterationsUsageItem> iterations
+    The model that will complete your prompt.
 
-Per-iteration token usage breakdown.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+  - `"advisor" name`
 
-- Determine which iterations exceeded long context thresholds (>=200k tokens)
-- Calculate the true context window size from the last iteration
-- Understand token accumulation across server-side tool use loops
+    Name of the tool.
 
-int outputTokens
+    This is how the tool will be called by the model and in `tool_use` blocks.
 
-The cumulative number of output tokens which were used.
+  - `"advisor_20260301" type`
 
-
+  - `?list<AllowedCaller> allowedCallers`
 
-?[BetaOutputTokensDetails](api/beta/messages.md) outputTokensDetails
+  - `?BetaCacheControlEphemeral cacheControl`
 
-Breakdown of output tokens by category.
+    Create a cache control breakpoint at this content block.
 
-`output_tokens` remains the inclusive, authoritative total used for billing.
-This object provides a read-only decomposition for observability — for example,
-how many of the billed output tokens were spent on internal reasoning that may
-have been summarized before being returned to you.
+  - `?BetaCacheControlEphemeral caching`
 
-?[BetaServerToolUsage](api/beta/messages.md) serverToolUse
+    Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
 
-The number of server tool requests.
+  - `?bool deferLoading`
 
-
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-[BetaMessageIterationUsage](api/beta/messages.md)
+  - `?int maxTokens`
 
-?[BetaCacheCreation](api/beta/messages.md) cacheCreation
+    Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
-Breakdown of cached tokens by TTL
+  - `?int maxUses`
 
-int cacheCreationInputTokens
+    Maximum number of times the tool can be used in the API request.
 
-The number of input tokens used to create the cache entry.
+  - `?bool strict`
 
-int cacheReadInputTokens
+    When true, guarantees schema validation on tool names and inputs
 
-The number of input tokens read from the cache.
+### Beta Advisor Tool Result Block
 
-int inputTokens
+- `BetaAdvisorToolResultBlock`
 
-The number of input tokens which were used.
+  - `Content content`
 
-
+  - `string toolUseID`
 
-Model model
+  - `"advisor_tool_result" type`
 
-The model that will complete your prompt.
+### Beta Advisor Tool Result Block Param
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+- `BetaAdvisorToolResultBlockParam`
 
-int outputTokens
+  - `Content content`
 
-The number of output tokens which were used.
+  - `string toolUseID`
 
-"message" type
+  - `"advisor_tool_result" type`
 
-Usage for a sampling iteration
+  - `?BetaCacheControlEphemeral cacheControl`
 
-
+    Create a cache control breakpoint at this content block.
 
-[BetaMessageParam](api/beta/messages.md)
+### Beta Advisor Tool Result Error
 
-Content content
+- `BetaAdvisorToolResultError`
 
-Role role
+  - `ErrorCode errorCode`
 
-
+  - `"advisor_tool_result_error" type`
 
-[BetaMessageTokensCount](api/beta/messages.md)
+### Beta Advisor Tool Result Error Param
 
-?[BetaCountTokensContextManagementResponse](api/beta/messages.md) contextManagement
+- `BetaAdvisorToolResultErrorParam`
 
-Information about context management applied to the message.
+  - `ErrorCode errorCode`
 
-int inputTokens
+  - `"advisor_tool_result_error" type`
 
-The total number of tokens across the provided list of messages, system prompt, and tools.
+### Beta All Thinking Turns
 
-
+- `BetaAllThinkingTurns`
 
-[BetaMetadata](api/beta/messages.md)
+  - `"all" type`
 
-
+### Beta Base64 Image Source
 
-?string userID
+- `BetaBase64ImageSource`
 
-An external identifier for the user who is associated with the request.
+  - `string data`
 
-This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
+  - `MediaType mediaType`
 
-
+  - `"base64" type`
 
-[BetaMidConversationSystemBlockParam](api/beta/messages.md)
+### Beta Base64 PDF Source
 
-list<[BetaTextBlockParam](api/beta/messages.md)> content
+- `BetaBase64PDFSource`
 
-System instruction text blocks.
+  - `string data`
 
-"mid\_conv\_system" type
+  - `"application/pdf" mediaType`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  - `"base64" type`
 
-Create a cache control breakpoint at this content block.
+### Beta Bash Code Execution Output Block
 
-
+- `BetaBashCodeExecutionOutputBlock`
 
-[BetaOutputConfig](api/beta/messages.md)
+  - `string fileID`
 
-?Effort effort
+  - `"bash_code_execution_output" type`
 
-All possible effort levels.
+### Beta Bash Code Execution Output Block Param
 
-?[BetaJSONOutputFormat](api/beta/messages.md) format
+- `BetaBashCodeExecutionOutputBlockParam`
 
-A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+  - `string fileID`
 
-?[BetaTokenTaskBudget](api/beta/messages.md) taskBudget
+  - `"bash_code_execution_output" type`
 
-User-configurable total token budget across contexts.
+### Beta Bash Code Execution Result Block
 
-
+- `BetaBashCodeExecutionResultBlock`
 
-[BetaOutputTokensDetails](api/beta/messages.md)
+  - `list<BetaBashCodeExecutionOutputBlock> content`
 
-
+  - `int returnCode`
 
-int thinkingTokens
+  - `string stderr`
 
-Number of output tokens the model generated as internal reasoning, including
-the thinking-block delimiter tokens.
+  - `string stdout`
 
-Reflects the raw reasoning the model produced, not the (possibly shorter)
-summarized thinking text returned in the response body. Computed by
-re-tokenizing the raw reasoning text, so it may differ from the model's exact
-generation count by a small number of tokens. Always ≤ `output_tokens`;
-`output_tokens - thinking_tokens` approximates the non-reasoning output.
+  - `"bash_code_execution_result" type`
 
-
+### Beta Bash Code Execution Result Block Param
 
-[BetaPlainTextSource](api/beta/messages.md)
+- `BetaBashCodeExecutionResultBlockParam`
 
-string data
+  - `list<BetaBashCodeExecutionOutputBlockParam> content`
 
-"text/plain" mediaType
+  - `int returnCode`
 
-"text" type
+  - `string stderr`
 
-
+  - `string stdout`
 
-[BetaRawContentBlockDelta](api/beta/messages.md)
+  - `"bash_code_execution_result" type`
 
-One of the following:
+### Beta Bash Code Execution Tool Result Block
 
-
+- `BetaBashCodeExecutionToolResultBlock`
 
-[BetaTextDelta](api/beta/messages.md)
+  - `Content content`
 
-string text
+  - `string toolUseID`
 
-"text\_delta" type
+  - `"bash_code_execution_tool_result" type`
 
-
+### Beta Bash Code Execution Tool Result Block Param
 
-[BetaInputJSONDelta](api/beta/messages.md)
+- `BetaBashCodeExecutionToolResultBlockParam`
 
-string partialJSON
+  - `Content content`
 
-"input\_json\_delta" type
+  - `string toolUseID`
 
-
+  - `"bash_code_execution_tool_result" type`
 
-[BetaCitationsDelta](api/beta/messages.md)
+  - `?BetaCacheControlEphemeral cacheControl`
 
-Citation citation
+    Create a cache control breakpoint at this content block.
 
-"citations\_delta" type
+### Beta Bash Code Execution Tool Result Error
 
-
+- `BetaBashCodeExecutionToolResultError`
 
-[BetaThinkingDelta](api/beta/messages.md)
+  - `ErrorCode errorCode`
 
-?int estimatedTokens
+  - `"bash_code_execution_tool_result_error" type`
 
-Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
+### Beta Bash Code Execution Tool Result Error Param
 
-string thinking
+- `BetaBashCodeExecutionToolResultErrorParam`
 
-"thinking\_delta" type
+  - `ErrorCode errorCode`
 
-
+  - `"bash_code_execution_tool_result_error" type`
 
-[BetaSignatureDelta](api/beta/messages.md)
+### Beta Browser Close Tab Config
 
-string signature
+- `BetaBrowserCloseTabConfig`
 
-"signature\_delta" type
+  - `?bool deferLoading`
 
-
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-[BetaCompactionContentBlockDelta](api/beta/messages.md)
+  - `?bool enabled`
 
-?string content
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-?string encryptedContent
+### Beta Browser Double Click Config
 
-Opaque metadata from prior compaction, to be round-tripped verbatim
+- `BetaBrowserDoubleClickConfig`
 
-"compaction\_delta" type
+  - `?bool deferLoading`
 
-
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-[BetaRawContentBlockDeltaEvent](api/beta/messages.md)
+  - `?bool enabled`
 
-[BetaRawContentBlockDelta](api/beta/messages.md) delta
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-int index
+### Beta Browser File Upload Config
 
-"content\_block\_delta" type
+- `BetaBrowserFileUploadConfig`
 
-
+  - `?bool deferLoading`
 
-[BetaRawContentBlockStartEvent](api/beta/messages.md)
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-ContentBlock contentBlock
+  - `?bool enabled`
 
-Response model for a file uploaded to the container.
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-int index
+### Beta Browser Find Config
 
-"content\_block\_start" type
+- `BetaBrowserFindConfig`
 
-
+  - `?bool deferLoading`
 
-[BetaRawContentBlockStopEvent](api/beta/messages.md)
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-int index
+  - `?bool enabled`
 
-"content\_block\_stop" type
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+### Beta Browser Form Input Config
 
-[BetaRawMessageDeltaEvent](api/beta/messages.md)
+- `BetaBrowserFormInputConfig`
 
-?[BetaContextManagementResponse](api/beta/messages.md) contextManagement
+  - `?bool deferLoading`
 
-Information about context management strategies applied during the request
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Delta delta
+  - `?bool enabled`
 
-"message\_delta" type
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+### Beta Browser Get Page Text Config
 
-[BetaMessageDeltaUsage](api/beta/messages.md) usage
+- `BetaBrowserGetPageTextConfig`
 
-Billing and rate-limit usage.
+  - `?bool deferLoading`
 
-Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+  - `?bool enabled`
 
-For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+### Beta Browser Hold Key Config
 
-
+- `BetaBrowserHoldKeyConfig`
 
-[BetaRawMessageStartEvent](api/beta/messages.md)
+  - `?bool deferLoading`
 
-[BetaMessage](api/beta/messages.md) message
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-"message\_start" type
+  - `?bool enabled`
 
-
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-[BetaRawMessageStopEvent](api/beta/messages.md)
+### Beta Browser Hover Config
 
-"message\_stop" type
+- `BetaBrowserHoverConfig`
 
-
+  - `?bool deferLoading`
 
-[BetaRawMessageStreamEvent](api/beta/messages.md)
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-One of the following:
+  - `?bool enabled`
 
-
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-[BetaRawMessageStartEvent](api/beta/messages.md)
+### Beta Browser Javascript Exec Config
 
-[BetaMessage](api/beta/messages.md) message
+- `BetaBrowserJavascriptExecConfig`
 
-"message\_start" type
+  - `?bool deferLoading`
 
-
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-[BetaRawMessageDeltaEvent](api/beta/messages.md)
+  - `?bool enabled`
 
-?[BetaContextManagementResponse](api/beta/messages.md) contextManagement
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Information about context management strategies applied during the request
+### Beta Browser Key Config
 
-Delta delta
+- `BetaBrowserKeyConfig`
 
-"message\_delta" type
+  - `?bool deferLoading`
 
-
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-[BetaMessageDeltaUsage](api/beta/messages.md) usage
+  - `?bool enabled`
 
-Billing and rate-limit usage.
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+### Beta Browser Left Click Config
 
-Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+- `BetaBrowserLeftClickConfig`
 
-For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+  - `?bool deferLoading`
 
-Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+  - `?bool enabled`
 
-[BetaRawMessageStopEvent](api/beta/messages.md)
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-"message\_stop" type
+### Beta Browser Left Click Drag Config
 
-
+- `BetaBrowserLeftClickDragConfig`
 
-[BetaRawContentBlockStartEvent](api/beta/messages.md)
+  - `?bool deferLoading`
 
-ContentBlock contentBlock
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Response model for a file uploaded to the container.
+  - `?bool enabled`
 
-int index
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-"content\_block\_start" type
+### Beta Browser Left Mouse Down Config
 
-
+- `BetaBrowserLeftMouseDownConfig`
 
-[BetaRawContentBlockDeltaEvent](api/beta/messages.md)
+  - `?bool deferLoading`
 
-[BetaRawContentBlockDelta](api/beta/messages.md) delta
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-int index
+  - `?bool enabled`
 
-"content\_block\_delta" type
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+### Beta Browser Left Mouse Up Config
 
-[BetaRawContentBlockStopEvent](api/beta/messages.md)
+- `BetaBrowserLeftMouseUpConfig`
 
-int index
+  - `?bool deferLoading`
 
-"content\_block\_stop" type
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+  - `?bool enabled`
 
-[BetaRedactedThinkingBlock](api/beta/messages.md)
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-string data
+### Beta Browser List Tabs Config
 
-"redacted\_thinking" type
+- `BetaBrowserListTabsConfig`
 
-
+  - `?bool deferLoading`
 
-[BetaRedactedThinkingBlockParam](api/beta/messages.md)
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-string data
+  - `?bool enabled`
 
-"redacted\_thinking" type
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+### Beta Browser Middle Click Config
 
-[BetaRefusalStopDetails](api/beta/messages.md)
+- `BetaBrowserMiddleClickConfig`
 
-?Category category
+  - `?bool deferLoading`
 
-The policy category that triggered a refusal.
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+  - `?bool enabled`
 
-?string explanation
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Human-readable explanation of the refusal.
+### Beta Browser Mouse Move Config
 
-This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+- `BetaBrowserMouseMoveConfig`
 
-
+  - `?bool deferLoading`
 
-?string fallbackCreditToken
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Opaque code that refunds the cache-miss cost when retrying this refused
-request on the fallback model. Pass it as `fallback_credit_token` on the
-retry request. Expires 5 minutes after the refusal.
+  - `?bool enabled`
 
-The retry is sent either with the same request body (`system`, `messages`,
-`tools`, and other render-shaping fields), or with the same body plus one
-appended `assistant` message whose content is the partial text (with any
-trailing whitespace stripped from the final text block) and paired
-server-tool blocks from this refusal — which also authorizes that
-appended turn as an assistant-prefill continuation on models that otherwise
-disallow prefill. A token minted mid-server-tool-loop whose partial content
-was continuable may only be redeemed the second way — if a same-body retry
-is rejected with a 400 saying the token must be redeemed by continuing the
-partial response, retry the second way instead. Either way: same workspace,
-same platform; a mismatch is a 400. Resending a token for an already-warm
-prefix is permitted but yields no additional credit.
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-`null` when the refused model isn't eligible for a fallback credit.
+### Beta Browser Navigate Config
 
-
+- `BetaBrowserNavigateConfig`
 
-?bool fallbackHasPrefillClaim
+  - `?bool deferLoading`
 
-Whether the accompanying `fallback_credit_token` may be redeemed with the
-appended-assistant retry form. Only set when `fallback_credit_token` is
-present.
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-`true`: retry by resending the same request body plus one appended
-`assistant` message whose content is this response's `content` with any
-trailing whitespace stripped from the final text block and unpaired
-`tool_use` blocks omitted (the same appended-turn shape described on
-`fallback_credit_token`), with the token attached. `false`: retry by
-resending the original request body unchanged, with the token attached —
-the appended-assistant form is not available for this refusal (no
-continuable partial content, or the request uses `output_format` or a
-`tool_choice` that forces tool use). One exception: when the request used
-`output_format` or a forced `tool_choice` and the refusal arrived after
-server tools (including MCP connector tools) had already executed, the
-token may not be redeemable by either retry form; if the exact-body retry
-is then rejected with a 400 saying the token must be redeemed by
-continuing the partial response, discard the token and retry without it.
+  - `?bool enabled`
 
-Advisory: if an appended-assistant retry is rejected with a 400 despite
-`true`, fall back to resending the original request body with the token.
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-?string recommendedModel
+### Beta Browser New Tab Config
 
-The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
+- `BetaBrowserNewTabConfig`
 
-"refusal" type
+  - `?bool deferLoading`
 
-
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-[BetaRequestDocumentBlock](api/beta/messages.md)
+  - `?bool enabled`
 
-Source source
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-"document" type
+### Beta Browser Read Console Config
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+- `BetaBrowserReadConsoleConfig`
 
-Create a cache control breakpoint at this content block.
+  - `?bool deferLoading`
 
-?[BetaCitationsConfigParam](api/beta/messages.md) citations
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-?string context
+  - `?bool enabled`
 
-?string title
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+### Beta Browser Read Network Config
 
-[BetaRequestMCPServerToolConfiguration](api/beta/messages.md)
+- `BetaBrowserReadNetworkConfig`
 
-?list<string> allowedTools
+  - `?bool deferLoading`
 
-?bool enabled
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+  - `?bool enabled`
 
-[BetaRequestMCPServerURLDefinition](api/beta/messages.md)
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-string name
+### Beta Browser Read Page Config
 
-"url" type
+- `BetaBrowserReadPageConfig`
 
-string url
+  - `?bool deferLoading`
 
-?string authorizationToken
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-?[BetaRequestMCPServerToolConfiguration](api/beta/messages.md) toolConfiguration
+  - `?bool enabled`
 
-
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-[BetaRequestMCPToolResultBlockParam](api/beta/messages.md)
+### Beta Browser Right Click Config
 
-string toolUseID
+- `BetaBrowserRightClickConfig`
 
-"mcp\_tool\_result" type
+  - `?bool deferLoading`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Create a cache control breakpoint at this content block.
+  - `?bool enabled`
 
-?Content content
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-?bool isError
+### Beta Browser Screenshot Config
 
-
+- `BetaBrowserScreenshotConfig`
 
-[BetaSearchResultBlockParam](api/beta/messages.md)
+  - `?bool deferLoading`
 
-list<[BetaTextBlockParam](api/beta/messages.md)> content
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-string source
+  - `?bool enabled`
 
-string title
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-"search\_result" type
+### Beta Browser Scroll Config
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+- `BetaBrowserScrollConfig`
 
-Create a cache control breakpoint at this content block.
+  - `?bool deferLoading`
 
-?[BetaCitationsConfigParam](api/beta/messages.md) citations
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+  - `?bool enabled`
 
-[BetaServerToolCaller](api/beta/messages.md)
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-string toolID
+### Beta Browser Scroll To Config
 
-"code\_execution\_20250825" type
+- `BetaBrowserScrollToConfig`
 
-
+  - `?bool deferLoading`
 
-[BetaServerToolCaller20260120](api/beta/messages.md)
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-string toolID
+  - `?bool enabled`
 
-"code\_execution\_20260120" type
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+### Beta Browser State Block Param
 
-[BetaServerToolUsage](api/beta/messages.md)
+- `BetaBrowserStateBlockParam`
 
-int webFetchRequests
+  - `list<BetaBrowserStateTabEntry> tabs`
 
-The number of web fetch tool requests.
+    All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
-int webSearchRequests
+  - `"browser_state" type`
 
-The number of web search tool requests.
+  - `?BetaCacheControlEphemeral cacheControl`
 
-
+    Create a cache control breakpoint at this content block.
 
-[BetaServerToolUseBlock](api/beta/messages.md)
+  - `?list<BetaBrowserStateChange> stateChanges`
 
-string id
+    Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-array<string,mixed> input
+### Beta Browser State Change
 
-Name name
+- `BetaBrowserStateChange`
 
-"server\_tool\_use" type
+  - `BetaBrowserStateChangeTabOpened`
 
-?Caller caller
+    - `string tabID`
 
-Tool invocation directly from the model.
+      The `tab_id` of the opened tab, present in `tabs`.
 
-
+    - `"tab_opened" type`
 
-[BetaServerToolUseBlockParam](api/beta/messages.md)
+  - `BetaBrowserStateChangeDownloadStarted`
 
-string id
+    - `string downloadID`
 
-array<string,mixed> input
+      The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-Name name
+    - `"download_started" type`
 
-"server\_tool\_use" type
+    - `string url`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+      The final post-redirect URL the download was served from.
 
-Create a cache control breakpoint at this content block.
+  - `BetaBrowserStateChangeDownloadCompleted`
 
-?Caller caller
+    - `string downloadID`
 
-Tool invocation directly from the model.
+      The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-
+    - `"download_completed" type`
 
-[BetaSignatureDelta](api/beta/messages.md)
+    - `string url`
 
-string signature
+      The final post-redirect URL the download was served from.
 
-"signature\_delta" type
+    - `?string path`
 
-
+      Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-[BetaSkill](api/beta/messages.md)
+    - `?int sizeBytes`
 
-string skillID
+      The completed download's size.
 
-Skill ID
+  - `BetaBrowserStateChangeDownloadFailed`
 
-Type type
+    - `string downloadID`
 
-Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+      The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-string version
+    - `"download_failed" type`
 
-Skill version or 'latest' for most recent version
+    - `string url`
 
-
+      The final post-redirect URL the download was served from.
 
-[BetaSkillParams](api/beta/messages.md)
+    - `?string error`
 
-string skillID
+      The failure or cancellation detail, when known.
 
-Skill ID
+### Beta Browser State Change Download Completed
 
-Type type
+- `BetaBrowserStateChangeDownloadCompleted`
 
-Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+  - `string downloadID`
 
-?string version
+    The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-Skill version or 'latest' for most recent version
+  - `"download_completed" type`
 
-
+  - `string url`
 
-[BetaStopReason](api/beta/messages.md)
+    The final post-redirect URL the download was served from.
 
-One of the following:
+  - `?string path`
 
-"end\_turn"
+    Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-"max\_tokens"
+  - `?int sizeBytes`
 
-"stop\_sequence"
+    The completed download's size.
 
-"tool\_use"
+### Beta Browser State Change Download Failed
 
-"pause\_turn"
+- `BetaBrowserStateChangeDownloadFailed`
 
-"compaction"
+  - `string downloadID`
 
-"refusal"
+    The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-"model\_context\_window\_exceeded"
+  - `"download_failed" type`
 
-
+  - `string url`
 
-[BetaTextBlock](api/beta/messages.md)
+    The final post-redirect URL the download was served from.
 
-
+  - `?string error`
 
-?list<[BetaTextCitation](api/beta/messages.md)> citations
+    The failure or cancellation detail, when known.
 
-Citations supporting the text block.
+### Beta Browser State Change Download Started
 
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+- `BetaBrowserStateChangeDownloadStarted`
 
-string text
+  - `string downloadID`
 
-"text" type
+    The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-
+  - `"download_started" type`
 
-[BetaTextBlockParam](api/beta/messages.md)
+  - `string url`
 
-string text
+    The final post-redirect URL the download was served from.
 
-"text" type
+### Beta Browser State Change Tab Opened
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+- `BetaBrowserStateChangeTabOpened`
 
-Create a cache control breakpoint at this content block.
+  - `string tabID`
 
-?list<[BetaTextCitationParam](api/beta/messages.md)> citations
+    The `tab_id` of the opened tab, present in `tabs`.
 
-
+  - `"tab_opened" type`
 
-[BetaTextCitation](api/beta/messages.md)
+### Beta Browser State Tab Entry
 
-One of the following:
+- `BetaBrowserStateTabEntry`
 
-
+  - `string tabID`
 
-[BetaCitationCharLocation](api/beta/messages.md)
+    The caller-assigned identifier for this tab, unique within the inventory.
 
-string citedText
+  - `string title`
 
-int documentIndex
+    The title of the page the tab is showing. May be empty.
 
-?string documentTitle
+  - `string url`
 
-int endCharIndex
+    The URL of the page the tab is showing. May be empty.
 
-?string fileID
+  - `?bool active`
 
-int startCharIndex
+    Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-"char\_location" type
+### Beta Browser Switch Tab Config
 
-
+- `BetaBrowserSwitchTabConfig`
 
-[BetaCitationPageLocation](api/beta/messages.md)
+  - `?bool deferLoading`
 
-string citedText
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-int documentIndex
+  - `?bool enabled`
 
-?string documentTitle
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-int endPageNumber
+### Beta Browser Toolset 20260801
 
-?string fileID
+- `BetaBrowserToolset20260801`
 
-int startPageNumber
+  - `"browser_toolset_20260801" type`
 
-"page\_location" type
+  - `?BetaCacheControlEphemeral cacheControl`
 
-
+    Create a cache control breakpoint at this content block.
 
-[BetaCitationContentBlockLocation](api/beta/messages.md)
+  - `?BetaBrowserToolsetConfigs configs`
 
-
+    Per-member configuration for `browser_toolset_20260801`: one
+    optional field per member tool, keyed by the member name — the same
+    name the member's `tool_use` blocks carry. Every member is an
+    accepted key, and a member's defaults apply wherever its key is
+    absent. Unknown keys are rejected: the field set is this toolset
+    version's complete member set.
 
-string citedText
+### Beta Browser Toolset Configs
 
-The full text of the cited block range, concatenated.
+- `BetaBrowserToolsetConfigs`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+  - `?BetaBrowserCloseTabConfig closeTab`
 
-int documentIndex
+    `close_tab`'s config overrides.
 
-?string documentTitle
+  - `?BetaBrowserDoubleClickConfig doubleClick`
 
-
+    `double_click`'s config overrides.
 
-int endBlockIndex
+  - `?BetaBrowserFileUploadConfig fileUpload`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+    `file_upload`'s config overrides.
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+  - `?BetaBrowserFindConfig find`
 
-?string fileID
+    `find`'s config overrides.
 
-int startBlockIndex
+  - `?BetaBrowserFormInputConfig formInput`
 
-0-based index of the first cited block in the source's `content` array.
+    `form_input`'s config overrides.
 
-"content\_block\_location" type
+  - `?BetaBrowserGetPageTextConfig getPageText`
 
-
+    `get_page_text`'s config overrides.
 
-[BetaCitationsWebSearchResultLocation](api/beta/messages.md)
+  - `?BetaBrowserHoldKeyConfig holdKey`
 
-string citedText
+    `hold_key`'s config overrides.
 
-string encryptedIndex
+  - `?BetaBrowserHoverConfig hover`
 
-?string title
+    `hover`'s config overrides.
 
-"web\_search\_result\_location" type
+  - `?BetaBrowserJavascriptExecConfig javascriptExec`
 
-string url
+    `javascript_exec`'s config overrides.
 
-
+  - `?BetaBrowserKeyConfig key`
 
-[BetaCitationSearchResultLocation](api/beta/messages.md)
+    `key`'s config overrides.
 
-
+  - `?BetaBrowserLeftClickConfig leftClick`
 
-string citedText
+    `left_click`'s config overrides.
 
-The full text of the cited block range, concatenated.
+  - `?BetaBrowserLeftClickDragConfig leftClickDrag`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+    `left_click_drag`'s config overrides.
 
-
+  - `?BetaBrowserLeftMouseDownConfig leftMouseDown`
 
-int endBlockIndex
+    `left_mouse_down`'s config overrides.
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+  - `?BetaBrowserLeftMouseUpConfig leftMouseUp`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+    `left_mouse_up`'s config overrides.
 
-
+  - `?BetaBrowserListTabsConfig listTabs`
 
-int searchResultIndex
+    `list_tabs`'s config overrides.
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+  - `?BetaBrowserMiddleClickConfig middleClick`
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+    `middle_click`'s config overrides.
 
-string source
+  - `?BetaBrowserMouseMoveConfig mouseMove`
 
-int startBlockIndex
+    `mouse_move`'s config overrides.
 
-0-based index of the first cited block in the source's `content` array.
+  - `?BetaBrowserNavigateConfig navigate`
 
-?string title
+    `navigate`'s config overrides.
 
-"search\_result\_location" type
+  - `?BetaBrowserNewTabConfig newTab`
 
-
+    `new_tab`'s config overrides.
 
-[BetaTextCitationParam](api/beta/messages.md)
+  - `?BetaBrowserReadConsoleConfig readConsole`
 
-One of the following:
+    `read_console`'s config overrides.
 
-
+  - `?BetaBrowserReadNetworkConfig readNetwork`
 
-[BetaCitationCharLocationParam](api/beta/messages.md)
+    `read_network`'s config overrides.
 
-string citedText
+  - `?BetaBrowserReadPageConfig readPage`
 
-int documentIndex
+    `read_page`'s config overrides.
 
-?string documentTitle
+  - `?BetaBrowserRightClickConfig rightClick`
 
-int endCharIndex
+    `right_click`'s config overrides.
 
-int startCharIndex
+  - `?BetaBrowserScreenshotConfig screenshot`
 
-"char\_location" type
+    `screenshot`'s config overrides.
 
-
+  - `?BetaBrowserScrollConfig scroll`
 
-[BetaCitationPageLocationParam](api/beta/messages.md)
+    `scroll`'s config overrides.
 
-string citedText
+  - `?BetaBrowserScrollToConfig scrollTo`
 
-int documentIndex
+    `scroll_to`'s config overrides.
 
-?string documentTitle
+  - `?BetaBrowserSwitchTabConfig switchTab`
 
-int endPageNumber
+    `switch_tab`'s config overrides.
 
-int startPageNumber
+  - `?BetaBrowserTripleClickConfig tripleClick`
 
-"page\_location" type
+    `triple_click`'s config overrides.
 
-
+  - `?BetaBrowserTypeConfig type`
 
-[BetaCitationContentBlockLocationParam](api/beta/messages.md)
+    `type`'s config overrides.
 
-
+  - `?BetaBrowserWaitConfig wait`
 
-string citedText
+    `wait`'s config overrides.
 
-The full text of the cited block range, concatenated.
+  - `?BetaBrowserZoomConfig zoom`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+    `zoom`'s config overrides.
 
-int documentIndex
+### Beta Browser Triple Click Config
 
-?string documentTitle
+- `BetaBrowserTripleClickConfig`
 
-
+  - `?bool deferLoading`
 
-int endBlockIndex
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+  - `?bool enabled`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-int startBlockIndex
+### Beta Browser Type Config
 
-0-based index of the first cited block in the source's `content` array.
+- `BetaBrowserTypeConfig`
 
-"content\_block\_location" type
+  - `?bool deferLoading`
 
-
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-[BetaCitationWebSearchResultLocationParam](api/beta/messages.md)
+  - `?bool enabled`
 
-string citedText
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-string encryptedIndex
+### Beta Browser Wait Config
 
-?string title
+- `BetaBrowserWaitConfig`
 
-"web\_search\_result\_location" type
+  - `?bool deferLoading`
 
-string url
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+  - `?bool enabled`
 
-[BetaCitationSearchResultLocationParam](api/beta/messages.md)
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+### Beta Browser Zoom Config
 
-string citedText
+- `BetaBrowserZoomConfig`
 
-The full text of the cited block range, concatenated.
+  - `?bool deferLoading`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+  - `?bool enabled`
 
-int endBlockIndex
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+### Beta Cache Control Ephemeral
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+- `BetaCacheControlEphemeral`
 
-
+  - `"ephemeral" type`
 
-int searchResultIndex
+  - `?TTL ttl`
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+    The time-to-live for the cache control breakpoint.
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+    This may be one the following values:
 
-string source
+    - `5m`: 5 minutes
+    - `1h`: 1 hour
 
-int startBlockIndex
+    Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
-0-based index of the first cited block in the source's `content` array.
+### Beta Cache Creation
 
-?string title
+- `BetaCacheCreation`
 
-"search\_result\_location" type
+  - `int ephemeral1hInputTokens`
 
-
+    The number of input tokens used to create the 1 hour cache entry.
 
-[BetaTextDelta](api/beta/messages.md)
+  - `int ephemeral5mInputTokens`
 
-string text
+    The number of input tokens used to create the 5 minute cache entry.
 
-"text\_delta" type
+### Beta Cache Miss Messages Changed
 
-
+- `BetaCacheMissMessagesChanged`
 
-[BetaTextEditorCodeExecutionCreateResultBlock](api/beta/messages.md)
+  - `int cacheMissedInputTokens`
 
-bool isFileUpdate
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-"text\_editor\_code\_execution\_create\_result" type
+  - `"messages_changed" type`
 
-
+### Beta Cache Miss Model Changed
 
-[BetaTextEditorCodeExecutionCreateResultBlockParam](api/beta/messages.md)
+- `BetaCacheMissModelChanged`
 
-bool isFileUpdate
+  - `int cacheMissedInputTokens`
 
-"text\_editor\_code\_execution\_create\_result" type
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-
+  - `"model_changed" type`
 
-[BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta/messages.md)
+### Beta Cache Miss Previous Message Not Found
 
-?list<string> lines
+- `BetaCacheMissPreviousMessageNotFound`
 
-?int newLines
+  - `"previous_message_not_found" type`
 
-?int newStart
+### Beta Cache Miss System Changed
 
-?int oldLines
+- `BetaCacheMissSystemChanged`
 
-?int oldStart
+  - `int cacheMissedInputTokens`
 
-"text\_editor\_code\_execution\_str\_replace\_result" type
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-
+  - `"system_changed" type`
 
-[BetaTextEditorCodeExecutionStrReplaceResultBlockParam](api/beta/messages.md)
+### Beta Cache Miss Tools Changed
 
-"text\_editor\_code\_execution\_str\_replace\_result" type
+- `BetaCacheMissToolsChanged`
 
-?list<string> lines
+  - `int cacheMissedInputTokens`
 
-?int newLines
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-?int newStart
+  - `"tools_changed" type`
 
-?int oldLines
+### Beta Cache Miss Unavailable
 
-?int oldStart
+- `BetaCacheMissUnavailable`
 
-
+  - `"unavailable" type`
 
-[BetaTextEditorCodeExecutionToolResultBlock](api/beta/messages.md)
+### Beta Citation Char Location
 
-Content content
+- `BetaCitationCharLocation`
 
-string toolUseID
+  - `string citedText`
 
-"text\_editor\_code\_execution\_tool\_result" type
+  - `int documentIndex`
 
-
+  - `?string documentTitle`
 
-[BetaTextEditorCodeExecutionToolResultBlockParam](api/beta/messages.md)
+  - `int endCharIndex`
 
-Content content
+  - `?string fileID`
 
-string toolUseID
+  - `int startCharIndex`
 
-"text\_editor\_code\_execution\_tool\_result" type
+  - `"char_location" type`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+### Beta Citation Char Location Param
 
-Create a cache control breakpoint at this content block.
+- `BetaCitationCharLocationParam`
 
-
+  - `string citedText`
 
-[BetaTextEditorCodeExecutionToolResultError](api/beta/messages.md)
+  - `int documentIndex`
 
-ErrorCode errorCode
+  - `?string documentTitle`
 
-?string errorMessage
+  - `int endCharIndex`
 
-"text\_editor\_code\_execution\_tool\_result\_error" type
+  - `int startCharIndex`
 
-
+  - `"char_location" type`
 
-[BetaTextEditorCodeExecutionToolResultErrorParam](api/beta/messages.md)
+### Beta Citation Config
 
-ErrorCode errorCode
+- `BetaCitationConfig`
 
-"text\_editor\_code\_execution\_tool\_result\_error" type
+  - `bool enabled`
 
-?string errorMessage
+### Beta Citation Content Block Location
 
-
+- `BetaCitationContentBlockLocation`
 
-[BetaTextEditorCodeExecutionViewResultBlock](api/beta/messages.md)
+  - `string citedText`
 
-string content
+    The full text of the cited block range, concatenated.
 
-FileType fileType
+    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-?int numLines
+  - `int documentIndex`
 
-?int startLine
+  - `?string documentTitle`
 
-?int totalLines
+  - `int endBlockIndex`
 
-"text\_editor\_code\_execution\_view\_result" type
+    Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-
+    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-[BetaTextEditorCodeExecutionViewResultBlockParam](api/beta/messages.md)
+  - `?string fileID`
 
-string content
+  - `int startBlockIndex`
 
-FileType fileType
+    0-based index of the first cited block in the source's `content` array.
 
-"text\_editor\_code\_execution\_view\_result" type
+  - `"content_block_location" type`
 
-?int numLines
+### Beta Citation Content Block Location Param
 
-?int startLine
+- `BetaCitationContentBlockLocationParam`
 
-?int totalLines
+  - `string citedText`
 
-
+    The full text of the cited block range, concatenated.
 
-[BetaThinkingBlock](api/beta/messages.md)
+    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-string signature
+  - `int documentIndex`
 
-string thinking
+  - `?string documentTitle`
 
-"thinking" type
+  - `int endBlockIndex`
 
-
+    Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-[BetaThinkingBlockParam](api/beta/messages.md)
+    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-string signature
+  - `int startBlockIndex`
 
-string thinking
+    0-based index of the first cited block in the source's `content` array.
 
-"thinking" type
+  - `"content_block_location" type`
 
-
+### Beta Citation Page Location
 
-[BetaThinkingConfigAdaptive](api/beta/messages.md)
+- `BetaCitationPageLocation`
 
-"adaptive" type
+  - `string citedText`
 
-?Display display
+  - `int documentIndex`
 
-Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+  - `?string documentTitle`
 
-
+  - `int endPageNumber`
 
-[BetaThinkingConfigDisabled](api/beta/messages.md)
+  - `?string fileID`
 
-"disabled" type
+  - `int startPageNumber`
 
-
+  - `"page_location" type`
 
-[BetaThinkingConfigEnabled](api/beta/messages.md)
+### Beta Citation Page Location Param
 
-
+- `BetaCitationPageLocationParam`
 
-int budgetTokens
+  - `string citedText`
 
-Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+  - `int documentIndex`
 
-Must be ≥1024 and less than `max_tokens`.
+  - `?string documentTitle`
 
-See [extended thinking](build-with-claude/extended-thinking.md) for details.
+  - `int endPageNumber`
 
-"enabled" type
+  - `int startPageNumber`
 
-?Display display
+  - `"page_location" type`
 
-Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+### Beta Citation Search Result Location
 
-
+- `BetaCitationSearchResultLocation`
 
-[BetaThinkingConfigParam](api/beta/messages.md)
+  - `string citedText`
 
-One of the following:
+    The full text of the cited block range, concatenated.
 
-
+    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-[BetaThinkingConfigEnabled](api/beta/messages.md)
+  - `int endBlockIndex`
 
-
+    Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-int budgetTokens
+    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+  - `int searchResultIndex`
 
-Must be ≥1024 and less than `max_tokens`.
+    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
-See [extended thinking](build-with-claude/extended-thinking.md) for details.
+    Counted separately from `document_index`; server-side web search results are not included in this count.
 
-"enabled" type
+  - `string source`
 
-?Display display
+  - `int startBlockIndex`
 
-Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+    0-based index of the first cited block in the source's `content` array.
 
-
+  - `?string title`
 
-[BetaThinkingConfigDisabled](api/beta/messages.md)
+  - `"search_result_location" type`
 
-"disabled" type
+### Beta Citation Search Result Location Param
 
-
+- `BetaCitationSearchResultLocationParam`
 
-[BetaThinkingConfigAdaptive](api/beta/messages.md)
+  - `string citedText`
 
-"adaptive" type
+    The full text of the cited block range, concatenated.
 
-?Display display
+    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+  - `int endBlockIndex`
 
-
+    Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-[BetaThinkingDelta](api/beta/messages.md)
+    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-?int estimatedTokens
+  - `int searchResultIndex`
 
-Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
+    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
-string thinking
+    Counted separately from `document_index`; server-side web search results are not included in this count.
 
-"thinking\_delta" type
+  - `string source`
 
-
+  - `int startBlockIndex`
 
-[BetaThinkingTurns](api/beta/messages.md)
+    0-based index of the first cited block in the source's `content` array.
 
-"thinking\_turns" type
+  - `?string title`
 
-int value
+  - `"search_result_location" type`
 
-
+### Beta Citation Web Search Result Location Param
 
-[BetaTokenTaskBudget](api/beta/messages.md)
+- `BetaCitationWebSearchResultLocationParam`
 
-int total
+  - `string citedText`
 
-Total token budget across all contexts in the session.
+  - `string encryptedIndex`
 
-"tokens" type
+  - `?string title`
 
-The budget type. Currently only 'tokens' is supported.
+  - `"web_search_result_location" type`
 
-?int remaining
+  - `string url`
 
-Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+### Beta Citations Config Param
 
-
+- `BetaCitationsConfigParam`
 
-[BetaTool](api/beta/messages.md)
+  - `?bool enabled`
 
-
+### Beta Citations Delta
 
-InputSchema inputSchema
+- `BetaCitationsDelta`
 
-[JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
+  - `Citation citation`
 
-This defines the shape of the `input` that your tool accepts and that the model will produce.
+  - `"citations_delta" type`
 
-
+### Beta Citations Web Search Result Location
 
-string name
+- `BetaCitationsWebSearchResultLocation`
 
-Name of the tool.
+  - `string citedText`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+  - `string encryptedIndex`
 
-?list<AllowedCaller> allowedCallers
+  - `?string title`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  - `"web_search_result_location" type`
 
-Create a cache control breakpoint at this content block.
+  - `string url`
 
-?bool deferLoading
+### Beta Clear Thinking 20251015 Edit
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+- `BetaClearThinking20251015Edit`
 
-
+  - `"clear_thinking_20251015" type`
 
-?string description
+  - `?Keep keep`
 
-Description of what this tool does.
+    Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+### Beta Clear Thinking 20251015 Edit Response
 
-?bool eagerInputStreaming
+- `BetaClearThinking20251015EditResponse`
 
-Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+  - `int clearedInputTokens`
 
-?list<array<string,mixed>> inputExamples
+    Number of input tokens cleared by this edit.
 
-?bool strict
+  - `int clearedThinkingTurns`
 
-When true, guarantees schema validation on tool names and inputs
+    Number of thinking turns that were cleared.
 
-?Type type
+  - `"clear_thinking_20251015" type`
 
-
+    The type of context management edit applied.
 
-[BetaToolBash20241022](api/beta/messages.md)
+### Beta Clear Tool Uses 20250919 Edit
 
-
+- `BetaClearToolUses20250919Edit`
 
-"bash" name
+  - `"clear_tool_uses_20250919" type`
 
-Name of the tool.
+  - `?BetaInputTokensClearAtLeast clearAtLeast`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
 
-"bash\_20241022" type
+  - `?ClearToolInputs clearToolInputs`
 
-?list<AllowedCaller> allowedCallers
+    Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  - `?list<string> excludeTools`
 
-Create a cache control breakpoint at this content block.
+    Tool names whose uses are preserved from clearing
 
-?bool deferLoading
+  - `?BetaToolUsesKeep keep`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+    Number of tool uses to retain in the conversation
 
-?list<array<string,mixed>> inputExamples
+  - `?Trigger trigger`
 
-?bool strict
+    Condition that triggers the context management strategy
 
-When true, guarantees schema validation on tool names and inputs
+### Beta Clear Tool Uses 20250919 Edit Response
 
-
+- `BetaClearToolUses20250919EditResponse`
 
-[BetaToolBash20250124](api/beta/messages.md)
+  - `int clearedInputTokens`
 
-
+    Number of input tokens cleared by this edit.
 
-"bash" name
+  - `int clearedToolUses`
 
-Name of the tool.
+    Number of tool uses that were cleared.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+  - `"clear_tool_uses_20250919" type`
 
-"bash\_20250124" type
+    The type of context management edit applied.
 
-?list<AllowedCaller> allowedCallers
+### Beta Code Execution Output Block
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+- `BetaCodeExecutionOutputBlock`
 
-Create a cache control breakpoint at this content block.
+  - `string fileID`
 
-?bool deferLoading
+  - `"code_execution_output" type`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+### Beta Code Execution Output Block Param
 
-?list<array<string,mixed>> inputExamples
+- `BetaCodeExecutionOutputBlockParam`
 
-?bool strict
+  - `string fileID`
 
-When true, guarantees schema validation on tool names and inputs
+  - `"code_execution_output" type`
 
-
+### Beta Code Execution Result Block
 
-[BetaToolChoice](api/beta/messages.md)
+- `BetaCodeExecutionResultBlock`
 
-One of the following:
+  - `list<BetaCodeExecutionOutputBlock> content`
 
-
+  - `int returnCode`
 
-[BetaToolChoiceAuto](api/beta/messages.md)
+  - `string stderr`
 
-"auto" type
+  - `string stdout`
 
-
+  - `"code_execution_result" type`
 
-?bool disableParallelToolUse
+### Beta Code Execution Result Block Param
 
-Whether to disable parallel tool use.
+- `BetaCodeExecutionResultBlockParam`
 
-Defaults to `false`. If set to `true`, the model will output at most one tool use.
+  - `list<BetaCodeExecutionOutputBlockParam> content`
 
-
+  - `int returnCode`
 
-[BetaToolChoiceAny](api/beta/messages.md)
+  - `string stderr`
 
-"any" type
+  - `string stdout`
 
-
+  - `"code_execution_result" type`
 
-?bool disableParallelToolUse
+### Beta Code Execution Tool 20250522
 
-Whether to disable parallel tool use.
+- `BetaCodeExecutionTool20250522`
 
-Defaults to `false`. If set to `true`, the model will output exactly one tool use.
+  - `"code_execution" name`
 
-
+    Name of the tool.
 
-[BetaToolChoiceTool](api/beta/messages.md)
+    This is how the tool will be called by the model and in `tool_use` blocks.
 
-string name
+  - `"code_execution_20250522" type`
 
-The name of the tool to use.
+  - `?list<AllowedCaller> allowedCallers`
 
-"tool" type
+  - `?BetaCacheControlEphemeral cacheControl`
 
-
+    Create a cache control breakpoint at this content block.
 
-?bool disableParallelToolUse
+  - `?bool deferLoading`
 
-Whether to disable parallel tool use.
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-Defaults to `false`. If set to `true`, the model will output exactly one tool use.
+  - `?bool strict`
 
-
+    When true, guarantees schema validation on tool names and inputs
 
-[BetaToolChoiceNone](api/beta/messages.md)
+### Beta Code Execution Tool 20250825
 
-"none" type
+- `BetaCodeExecutionTool20250825`
 
-
+  - `"code_execution" name`
 
-[BetaToolChoiceAny](api/beta/messages.md)
+    Name of the tool.
 
-"any" type
+    This is how the tool will be called by the model and in `tool_use` blocks.
 
-
+  - `"code_execution_20250825" type`
 
-?bool disableParallelToolUse
+  - `?list<AllowedCaller> allowedCallers`
 
-Whether to disable parallel tool use.
+  - `?BetaCacheControlEphemeral cacheControl`
 
-Defaults to `false`. If set to `true`, the model will output exactly one tool use.
+    Create a cache control breakpoint at this content block.
 
-
+  - `?bool deferLoading`
 
-[BetaToolChoiceAuto](api/beta/messages.md)
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-"auto" type
+  - `?bool strict`
 
-
+    When true, guarantees schema validation on tool names and inputs
 
-?bool disableParallelToolUse
+### Beta Code Execution Tool 20260120
 
-Whether to disable parallel tool use.
+- `BetaCodeExecutionTool20260120`
 
-Defaults to `false`. If set to `true`, the model will output at most one tool use.
+  - `"code_execution" name`
 
-
+    Name of the tool.
 
-[BetaToolChoiceNone](api/beta/messages.md)
+    This is how the tool will be called by the model and in `tool_use` blocks.
 
-"none" type
+  - `"code_execution_20260120" type`
 
-
+  - `?list<AllowedCaller> allowedCallers`
 
-[BetaToolChoiceTool](api/beta/messages.md)
+  - `?BetaCacheControlEphemeral cacheControl`
 
-string name
+    Create a cache control breakpoint at this content block.
 
-The name of the tool to use.
+  - `?bool deferLoading`
 
-"tool" type
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-
+  - `?bool strict`
 
-?bool disableParallelToolUse
+    When true, guarantees schema validation on tool names and inputs
 
-Whether to disable parallel tool use.
+### Beta Code Execution Tool 20260521
 
-Defaults to `false`. If set to `true`, the model will output exactly one tool use.
+- `BetaCodeExecutionTool20260521`
 
-
+  - `"code_execution" name`
 
-[BetaToolComputerUse20241022](api/beta/messages.md)
+    Name of the tool.
 
-int displayHeightPx
+    This is how the tool will be called by the model and in `tool_use` blocks.
 
-The height of the display in pixels.
+  - `"code_execution_20260521" type`
 
-int displayWidthPx
+  - `?list<AllowedCaller> allowedCallers`
 
-The width of the display in pixels.
+  - `?BetaCacheControlEphemeral cacheControl`
 
-
+    Create a cache control breakpoint at this content block.
 
-"computer" name
+  - `?bool deferLoading`
 
-Name of the tool.
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+  - `?bool strict`
 
-"computer\_20241022" type
+    When true, guarantees schema validation on tool names and inputs
 
-?list<AllowedCaller> allowedCallers
+### Beta Code Execution Tool Result Block
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+- `BetaCodeExecutionToolResultBlock`
 
-Create a cache control breakpoint at this content block.
+  - `BetaCodeExecutionToolResultBlockContent content`
 
-?bool deferLoading
+    Code execution result with encrypted stdout for PFC + web_search results.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+  - `string toolUseID`
 
-?int displayNumber
+  - `"code_execution_tool_result" type`
 
-The X11 display number (e.g. 0, 1) for the display.
+### Beta Code Execution Tool Result Block Content
 
-?list<array<string,mixed>> inputExamples
+- `BetaCodeExecutionToolResultBlockContent`
 
-?bool strict
+  - `BetaCodeExecutionToolResultError`
 
-When true, guarantees schema validation on tool names and inputs
+    - `BetaCodeExecutionToolResultErrorCode errorCode`
 
-
+    - `"code_execution_tool_result_error" type`
 
-[BetaToolComputerUse20250124](api/beta/messages.md)
+  - `BetaCodeExecutionResultBlock`
 
-int displayHeightPx
+    - `list<BetaCodeExecutionOutputBlock> content`
 
-The height of the display in pixels.
+    - `int returnCode`
 
-int displayWidthPx
+    - `string stderr`
 
-The width of the display in pixels.
+    - `string stdout`
 
-
+    - `"code_execution_result" type`
 
-"computer" name
+  - `BetaEncryptedCodeExecutionResultBlock`
 
-Name of the tool.
+    - `list<BetaCodeExecutionOutputBlock> content`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    - `string encryptedStdout`
 
-"computer\_20250124" type
+    - `int returnCode`
 
-?list<AllowedCaller> allowedCallers
+    - `string stderr`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    - `"encrypted_code_execution_result" type`
 
-Create a cache control breakpoint at this content block.
+### Beta Code Execution Tool Result Block Param
 
-?bool deferLoading
+- `BetaCodeExecutionToolResultBlockParam`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+  - `BetaCodeExecutionToolResultBlockParamContent content`
 
-?int displayNumber
+    Code execution result with encrypted stdout for PFC + web_search results.
 
-The X11 display number (e.g. 0, 1) for the display.
+  - `string toolUseID`
 
-?list<array<string,mixed>> inputExamples
+  - `"code_execution_tool_result" type`
 
-?bool strict
+  - `?BetaCacheControlEphemeral cacheControl`
 
-When true, guarantees schema validation on tool names and inputs
+    Create a cache control breakpoint at this content block.
 
-
+### Beta Code Execution Tool Result Block Param Content
 
-[BetaToolComputerUse20251124](api/beta/messages.md)
+- `BetaCodeExecutionToolResultBlockParamContent`
 
-int displayHeightPx
+  - `BetaCodeExecutionToolResultErrorParam`
 
-The height of the display in pixels.
+    - `BetaCodeExecutionToolResultErrorCode errorCode`
 
-int displayWidthPx
+    - `"code_execution_tool_result_error" type`
 
-The width of the display in pixels.
+  - `BetaCodeExecutionResultBlockParam`
 
-
+    - `list<BetaCodeExecutionOutputBlockParam> content`
 
-"computer" name
+    - `int returnCode`
 
-Name of the tool.
+    - `string stderr`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    - `string stdout`
 
-"computer\_20251124" type
+    - `"code_execution_result" type`
 
-?list<AllowedCaller> allowedCallers
+  - `BetaEncryptedCodeExecutionResultBlockParam`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    - `list<BetaCodeExecutionOutputBlockParam> content`
 
-Create a cache control breakpoint at this content block.
+    - `string encryptedStdout`
 
-?bool deferLoading
+    - `int returnCode`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+    - `string stderr`
 
-?int displayNumber
+    - `"encrypted_code_execution_result" type`
 
-The X11 display number (e.g. 0, 1) for the display.
+### Beta Code Execution Tool Result Error
 
-?bool enableZoom
+- `BetaCodeExecutionToolResultError`
 
-Whether to enable an action to take a zoomed-in screenshot of the screen.
+  - `BetaCodeExecutionToolResultErrorCode errorCode`
 
-?list<array<string,mixed>> inputExamples
+  - `"code_execution_tool_result_error" type`
 
-?bool strict
+### Beta Code Execution Tool Result Error Code
 
-When true, guarantees schema validation on tool names and inputs
+- `BetaCodeExecutionToolResultErrorCode`
 
-
+  - `"invalid_tool_input"`
 
-[BetaToolReferenceBlock](api/beta/messages.md)
+  - `"unavailable"`
 
-string toolName
+  - `"too_many_requests"`
 
-"tool\_reference" type
+  - `"execution_time_exceeded"`
 
-
+### Beta Code Execution Tool Result Error Param
 
-[BetaToolReferenceBlockParam](api/beta/messages.md)
+- `BetaCodeExecutionToolResultErrorParam`
 
-string toolName
+  - `BetaCodeExecutionToolResultErrorCode errorCode`
 
-"tool\_reference" type
+  - `"code_execution_tool_result_error" type`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+### Beta Compact 20260112 Edit
 
-Create a cache control breakpoint at this content block.
+- `BetaCompact20260112Edit`
 
-
+  - `"compact_20260112" type`
 
-[BetaToolResultBlockParam](api/beta/messages.md)
+  - `?string instructions`
 
-string toolUseID
+    Additional instructions for summarization.
 
-"tool\_result" type
+  - `?bool pauseAfterCompaction`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    Whether to pause after compaction and return the compaction block to the user.
 
-Create a cache control breakpoint at this content block.
+  - `?BetaInputTokensTrigger trigger`
 
-?Content content
+    When to trigger compaction. Defaults to 150000 input tokens.
 
-?bool isError
+### Beta Compaction Block
 
-
+- `BetaCompactionBlock`
 
-[BetaToolSearchToolBm25\_20251119](api/beta/messages.md)
+  - `?string content`
 
-
+    Summary of compacted content, or null if compaction failed
 
-"tool\_search\_tool\_bm25" name
+  - `?string encryptedContent`
 
-Name of the tool.
+    Opaque metadata from prior compaction, to be round-tripped verbatim
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+  - `"compaction" type`
 
-Type type
+### Beta Compaction Block Param
 
-?list<AllowedCaller> allowedCallers
+- `BetaCompactionBlockParam`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  - `"compaction" type`
 
-Create a cache control breakpoint at this content block.
+  - `?BetaCacheControlEphemeral cacheControl`
 
-?bool deferLoading
+    Create a cache control breakpoint at this content block.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+  - `?string content`
 
-?bool strict
+    Summary of previously compacted content, or null if compaction failed
 
-When true, guarantees schema validation on tool names and inputs
+  - `?string encryptedContent`
 
-
+    Opaque metadata from prior compaction, to be round-tripped verbatim
 
-[BetaToolSearchToolRegex20251119](api/beta/messages.md)
+### Beta Compaction Content Block Delta
 
-
+- `BetaCompactionContentBlockDelta`
 
-"tool\_search\_tool\_regex" name
+  - `?string content`
 
-Name of the tool.
+  - `?string encryptedContent`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    Opaque metadata from prior compaction, to be round-tripped verbatim
 
-Type type
+  - `"compaction_delta" type`
 
-?list<AllowedCaller> allowedCallers
+### Beta Compaction Iteration Usage
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+- `BetaCompactionIterationUsage`
 
-Create a cache control breakpoint at this content block.
+  - `?BetaCacheCreation cacheCreation`
 
-?bool deferLoading
+    Breakdown of cached tokens by TTL
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+  - `int cacheCreationInputTokens`
 
-?bool strict
+    The number of input tokens used to create the cache entry.
 
-When true, guarantees schema validation on tool names and inputs
+  - `int cacheReadInputTokens`
 
-
+    The number of input tokens read from the cache.
 
-[BetaToolSearchToolResultBlock](api/beta/messages.md)
+  - `int inputTokens`
 
-Content content
+    The number of input tokens which were used.
 
-string toolUseID
+  - `int outputTokens`
 
-"tool\_search\_tool\_result" type
+    The number of output tokens which were used.
 
-
+  - `"compaction" type`
 
-[BetaToolSearchToolResultBlockParam](api/beta/messages.md)
+    Usage for a compaction iteration
 
-Content content
+### Beta Computer Cursor Position Config
 
-string toolUseID
+- `BetaComputerCursorPositionConfig`
 
-"tool\_search\_tool\_result" type
+  - `?bool deferLoading`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Create a cache control breakpoint at this content block.
+  - `?bool enabled`
 
-
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-[BetaToolSearchToolResultError](api/beta/messages.md)
+### Beta Computer Double Click Config
 
-ErrorCode errorCode
+- `BetaComputerDoubleClickConfig`
 
-?string errorMessage
+  - `?bool deferLoading`
 
-"tool\_search\_tool\_result\_error" type
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+  - `?bool enabled`
 
-[BetaToolSearchToolResultErrorParam](api/beta/messages.md)
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-ErrorCode errorCode
+### Beta Computer Hold Key Config
 
-"tool\_search\_tool\_result\_error" type
+- `BetaComputerHoldKeyConfig`
 
-?string errorMessage
+  - `?bool deferLoading`
 
-
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-[BetaToolSearchToolSearchResultBlock](api/beta/messages.md)
+  - `?bool enabled`
 
-list<[BetaToolReferenceBlock](api/beta/messages.md)> toolReferences
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-"tool\_search\_tool\_search\_result" type
+### Beta Computer Key Config
 
-
+- `BetaComputerKeyConfig`
 
-[BetaToolSearchToolSearchResultBlockParam](api/beta/messages.md)
+  - `?bool deferLoading`
 
-list<[BetaToolReferenceBlockParam](api/beta/messages.md)> toolReferences
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-"tool\_search\_tool\_search\_result" type
+  - `?bool enabled`
 
-
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-[BetaToolTextEditor20241022](api/beta/messages.md)
+### Beta Computer Left Click Config
 
-
+- `BetaComputerLeftClickConfig`
 
-"str\_replace\_editor" name
+  - `?bool deferLoading`
 
-Name of the tool.
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+  - `?bool enabled`
 
-"text\_editor\_20241022" type
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-?list<AllowedCaller> allowedCallers
+### Beta Computer Left Click Drag Config
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+- `BetaComputerLeftClickDragConfig`
 
-Create a cache control breakpoint at this content block.
+  - `?bool deferLoading`
 
-?bool deferLoading
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+  - `?bool enabled`
 
-?list<array<string,mixed>> inputExamples
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-?bool strict
+### Beta Computer Left Mouse Down Config
 
-When true, guarantees schema validation on tool names and inputs
+- `BetaComputerLeftMouseDownConfig`
 
-
+  - `?bool deferLoading`
 
-[BetaToolTextEditor20250124](api/beta/messages.md)
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+  - `?bool enabled`
 
-"str\_replace\_editor" name
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Name of the tool.
+### Beta Computer Left Mouse Up Config
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+- `BetaComputerLeftMouseUpConfig`
 
-"text\_editor\_20250124" type
+  - `?bool deferLoading`
 
-?list<AllowedCaller> allowedCallers
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  - `?bool enabled`
 
-Create a cache control breakpoint at this content block.
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-?bool deferLoading
+### Beta Computer Middle Click Config
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+- `BetaComputerMiddleClickConfig`
 
-?list<array<string,mixed>> inputExamples
+  - `?bool deferLoading`
 
-?bool strict
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-When true, guarantees schema validation on tool names and inputs
+  - `?bool enabled`
 
-
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-[BetaToolTextEditor20250429](api/beta/messages.md)
+### Beta Computer Mouse Move Config
 
-
+- `BetaComputerMouseMoveConfig`
 
-"str\_replace\_based\_edit\_tool" name
+  - `?bool deferLoading`
 
-Name of the tool.
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+  - `?bool enabled`
 
-"text\_editor\_20250429" type
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-?list<AllowedCaller> allowedCallers
+### Beta Computer Right Click Config
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+- `BetaComputerRightClickConfig`
 
-Create a cache control breakpoint at this content block.
+  - `?bool deferLoading`
 
-?bool deferLoading
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+  - `?bool enabled`
 
-?list<array<string,mixed>> inputExamples
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-?bool strict
+### Beta Computer Screenshot Config
 
-When true, guarantees schema validation on tool names and inputs
+- `BetaComputerScreenshotConfig`
 
-
+  - `?bool deferLoading`
 
-[BetaToolTextEditor20250728](api/beta/messages.md)
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+  - `?bool enabled`
 
-"str\_replace\_based\_edit\_tool" name
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Name of the tool.
+### Beta Computer Scroll Config
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+- `BetaComputerScrollConfig`
 
-"text\_editor\_20250728" type
+  - `?bool deferLoading`
 
-?list<AllowedCaller> allowedCallers
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  - `?bool enabled`
 
-Create a cache control breakpoint at this content block.
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-?bool deferLoading
+### Beta Computer Toolset 20260801
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+- `BetaComputerToolset20260801`
 
-?list<array<string,mixed>> inputExamples
+  - `"computer_toolset_20260801" type`
 
-?int maxCharacters
+  - `?BetaCacheControlEphemeral cacheControl`
 
-Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
+    Create a cache control breakpoint at this content block.
 
-?bool strict
+  - `?BetaComputerToolsetConfigs configs`
 
-When true, guarantees schema validation on tool names and inputs
+    Per-member configuration for `computer_toolset_20260801`: one
+    optional field per member tool, keyed by the member name — the same
+    name the member's `tool_use` blocks carry. Every member is an
+    accepted key, and a member's defaults apply wherever its key is
+    absent. Unknown keys are rejected: the field set is this toolset
+    version's complete member set.
 
-
+### Beta Computer Toolset Configs
 
-[BetaToolUnion](api/beta/messages.md)
+- `BetaComputerToolsetConfigs`
 
-One of the following:
+  - `?BetaComputerCursorPositionConfig cursorPosition`
 
-
+    `cursor_position`'s config overrides.
 
-[BetaTool](api/beta/messages.md)
+  - `?BetaComputerDoubleClickConfig doubleClick`
 
-
+    `double_click`'s config overrides.
 
-InputSchema inputSchema
+  - `?BetaComputerHoldKeyConfig holdKey`
 
-[JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
+    `hold_key`'s config overrides.
 
-This defines the shape of the `input` that your tool accepts and that the model will produce.
+  - `?BetaComputerKeyConfig key`
 
-
+    `key`'s config overrides.
 
-string name
+  - `?BetaComputerLeftClickConfig leftClick`
 
-Name of the tool.
+    `left_click`'s config overrides.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+  - `?BetaComputerLeftClickDragConfig leftClickDrag`
 
-?list<AllowedCaller> allowedCallers
+    `left_click_drag`'s config overrides.
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  - `?BetaComputerLeftMouseDownConfig leftMouseDown`
 
-Create a cache control breakpoint at this content block.
+    `left_mouse_down`'s config overrides.
 
-?bool deferLoading
+  - `?BetaComputerLeftMouseUpConfig leftMouseUp`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+    `left_mouse_up`'s config overrides.
 
-
+  - `?BetaComputerMiddleClickConfig middleClick`
 
-?string description
+    `middle_click`'s config overrides.
 
-Description of what this tool does.
+  - `?BetaComputerMouseMoveConfig mouseMove`
 
-Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+    `mouse_move`'s config overrides.
 
-?bool eagerInputStreaming
+  - `?BetaComputerRightClickConfig rightClick`
 
-Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+    `right_click`'s config overrides.
 
-?list<array<string,mixed>> inputExamples
+  - `?BetaComputerScreenshotConfig screenshot`
 
-?bool strict
+    `screenshot`'s config overrides.
 
-When true, guarantees schema validation on tool names and inputs
+  - `?BetaComputerScrollConfig scroll`
 
-?Type type
+    `scroll`'s config overrides.
 
-
+  - `?BetaComputerTripleClickConfig tripleClick`
 
-[BetaToolBash20241022](api/beta/messages.md)
+    `triple_click`'s config overrides.
 
-
+  - `?BetaComputerTypeConfig type`
 
-"bash" name
+    `type`'s config overrides.
 
-Name of the tool.
+  - `?BetaComputerWaitConfig wait`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    `wait`'s config overrides.
 
-"bash\_20241022" type
+  - `?BetaComputerZoomConfig zoom`
 
-?list<AllowedCaller> allowedCallers
+    `zoom`'s config overrides.
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+### Beta Computer Triple Click Config
 
-Create a cache control breakpoint at this content block.
+- `BetaComputerTripleClickConfig`
 
-?bool deferLoading
+  - `?bool deferLoading`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-?list<array<string,mixed>> inputExamples
+  - `?bool enabled`
 
-?bool strict
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-When true, guarantees schema validation on tool names and inputs
+### Beta Computer Type Config
 
-
+- `BetaComputerTypeConfig`
 
-[BetaToolBash20250124](api/beta/messages.md)
+  - `?bool deferLoading`
 
-
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-"bash" name
+  - `?bool enabled`
 
-Name of the tool.
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+### Beta Computer Wait Config
 
-"bash\_20250124" type
+- `BetaComputerWaitConfig`
 
-?list<AllowedCaller> allowedCallers
+  - `?bool deferLoading`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Create a cache control breakpoint at this content block.
+  - `?bool enabled`
 
-?bool deferLoading
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+### Beta Computer Zoom Config
 
-?list<array<string,mixed>> inputExamples
+- `BetaComputerZoomConfig`
 
-?bool strict
+  - `?bool deferLoading`
 
-When true, guarantees schema validation on tool names and inputs
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+  - `?bool enabled`
 
-[BetaCodeExecutionTool20250522](api/beta/messages.md)
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+### Beta Container
 
-"code\_execution" name
+- `BetaContainer`
 
-Name of the tool.
+  - `string id`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    Identifier for the container used in this request
 
-"code\_execution\_20250522" type
+  - `\Datetime expiresAt`
 
-?list<AllowedCaller> allowedCallers
+    The time at which the container will expire.
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  - `?list<BetaContainerSkill> skills`
 
-Create a cache control breakpoint at this content block.
+    Skills loaded in the container
 
-?bool deferLoading
+### Beta Container Params
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+- `BetaContainerParams`
 
-?bool strict
+  - `?string id`
 
-When true, guarantees schema validation on tool names and inputs
+    Container id
 
-
+  - `?list<BetaSkillParams> skills`
 
-[BetaCodeExecutionTool20250825](api/beta/messages.md)
+    List of skills to load in the container
 
-
+### Beta Container Skill
 
-"code\_execution" name
+- `BetaContainerSkill`
 
-Name of the tool.
+  - `string skillID`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    Skill ID
 
-"code\_execution\_20250825" type
+  - `Type type`
 
-?list<AllowedCaller> allowedCallers
+    Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  - `string version`
 
-Create a cache control breakpoint at this content block.
+    The resolved version: a skill version ID for custom skills.
 
-?bool deferLoading
+### Beta Container Upload Block
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+- `BetaContainerUploadBlock`
 
-?bool strict
+  - `string fileID`
 
-When true, guarantees schema validation on tool names and inputs
+  - `"container_upload" type`
 
-
+### Beta Container Upload Block Param
 
-[BetaCodeExecutionTool20260120](api/beta/messages.md)
+- `BetaContainerUploadBlockParam`
 
-
+  - `string fileID`
 
-"code\_execution" name
+  - `"container_upload" type`
 
-Name of the tool.
+  - `?BetaCacheControlEphemeral cacheControl`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    Create a cache control breakpoint at this content block.
 
-"code\_execution\_20260120" type
+### Beta Content Block
 
-?list<AllowedCaller> allowedCallers
+- `BetaContentBlock`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  - `BetaTextBlock`
 
-Create a cache control breakpoint at this content block.
+    - `?list<BetaTextCitation> citations`
 
-?bool deferLoading
+      Citations supporting the text block.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-?bool strict
+    - `string text`
 
-When true, guarantees schema validation on tool names and inputs
+    - `"text" type`
 
-
+  - `BetaThinkingBlock`
 
-[BetaCodeExecutionTool20260521](api/beta/messages.md)
+    - `string signature`
 
-
+      A value used to verify that this thinking block was generated by Claude when it is passed back to the API.
 
-"code\_execution" name
+      This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-Name of the tool.
+      See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    - `string thinking`
 
-"code\_execution\_20260521" type
+      The text of Claude's thinking process for this block.
 
-?list<AllowedCaller> allowedCallers
+    - `"thinking" type`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  - `BetaRedactedThinkingBlock`
 
-Create a cache control breakpoint at this content block.
+    - `string data`
 
-?bool deferLoading
+      The contents of this redacted thinking block, returned when portions of the model's thinking were safety-redacted. This field is opaque and encrypted, with no readable content.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-?bool strict
+      See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-When true, guarantees schema validation on tool names and inputs
+    - `"redacted_thinking" type`
 
-
+  - `BetaToolUseBlock`
 
-[BetaToolComputerUse20241022](api/beta/messages.md)
+    - `string id`
 
-int displayHeightPx
+    - `array<string,mixed> input`
 
-The height of the display in pixels.
+    - `string name`
 
-int displayWidthPx
+    - `"tool_use" type`
 
-The width of the display in pixels.
+    - `?Caller caller`
 
-
+      Tool invocation directly from the model.
 
-"computer" name
+    - `?string toolsetName`
 
-Name of the tool.
+      For a toolset member tool_use, the toolset family.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+  - `BetaServerToolUseBlock`
 
-"computer\_20241022" type
+    - `string id`
 
-?list<AllowedCaller> allowedCallers
+    - `array<string,mixed> input`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    - `Name name`
 
-Create a cache control breakpoint at this content block.
+    - `"server_tool_use" type`
 
-?bool deferLoading
+    - `?Caller caller`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      Tool invocation directly from the model.
 
-?int displayNumber
+  - `BetaWebSearchToolResultBlock`
 
-The X11 display number (e.g. 0, 1) for the display.
+    - `BetaWebSearchToolResultBlockContent content`
 
-?list<array<string,mixed>> inputExamples
+    - `string toolUseID`
 
-?bool strict
+    - `"web_search_tool_result" type`
 
-When true, guarantees schema validation on tool names and inputs
+    - `?Caller caller`
 
-
+      Tool invocation directly from the model.
 
-[BetaMemoryTool20250818](api/beta/messages.md)
+  - `BetaWebFetchToolResultBlock`
 
-
+    - `Content content`
 
-"memory" name
+    - `string toolUseID`
 
-Name of the tool.
+    - `"web_fetch_tool_result" type`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    - `?Caller caller`
 
-"memory\_20250818" type
+      Tool invocation directly from the model.
 
-?list<AllowedCaller> allowedCallers
+  - `BetaAdvisorToolResultBlock`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    - `Content content`
 
-Create a cache control breakpoint at this content block.
+    - `string toolUseID`
 
-?bool deferLoading
+    - `"advisor_tool_result" type`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+  - `BetaCodeExecutionToolResultBlock`
 
-?list<array<string,mixed>> inputExamples
+    - `BetaCodeExecutionToolResultBlockContent content`
 
-?bool strict
+      Code execution result with encrypted stdout for PFC + web_search results.
 
-When true, guarantees schema validation on tool names and inputs
+    - `string toolUseID`
 
-
+    - `"code_execution_tool_result" type`
 
-[BetaToolComputerUse20250124](api/beta/messages.md)
+  - `BetaBashCodeExecutionToolResultBlock`
 
-int displayHeightPx
+    - `Content content`
 
-The height of the display in pixels.
+    - `string toolUseID`
 
-int displayWidthPx
+    - `"bash_code_execution_tool_result" type`
 
-The width of the display in pixels.
+  - `BetaTextEditorCodeExecutionToolResultBlock`
 
-
+    - `Content content`
 
-"computer" name
+    - `string toolUseID`
 
-Name of the tool.
+    - `"text_editor_code_execution_tool_result" type`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+  - `BetaToolSearchToolResultBlock`
 
-"computer\_20250124" type
+    - `Content content`
 
-?list<AllowedCaller> allowedCallers
+    - `string toolUseID`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    - `"tool_search_tool_result" type`
 
-Create a cache control breakpoint at this content block.
+  - `BetaMCPToolUseBlock`
 
-?bool deferLoading
+    - `string id`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+    - `array<string,mixed> input`
 
-?int displayNumber
+    - `string name`
 
-The X11 display number (e.g. 0, 1) for the display.
+      The name of the MCP tool
 
-?list<array<string,mixed>> inputExamples
+    - `string serverName`
 
-?bool strict
+      The name of the MCP server
 
-When true, guarantees schema validation on tool names and inputs
+    - `"mcp_tool_use" type`
 
-
+  - `BetaMCPToolResultBlock`
 
-[BetaToolTextEditor20241022](api/beta/messages.md)
+    - `Content content`
 
-
+    - `bool isError`
 
-"str\_replace\_editor" name
+    - `string toolUseID`
 
-Name of the tool.
+    - `"mcp_tool_result" type`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+  - `BetaContainerUploadBlock`
 
-"text\_editor\_20241022" type
+    - `string fileID`
 
-?list<AllowedCaller> allowedCallers
+    - `"container_upload" type`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  - `BetaCompactionBlock`
 
-Create a cache control breakpoint at this content block.
+    - `?string content`
 
-?bool deferLoading
+      Summary of compacted content, or null if compaction failed
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+    - `?string encryptedContent`
 
-?list<array<string,mixed>> inputExamples
+      Opaque metadata from prior compaction, to be round-tripped verbatim
 
-?bool strict
+    - `"compaction" type`
 
-When true, guarantees schema validation on tool names and inputs
+  - `BetaFallbackBlock`
 
-
+    - `BetaFallbackInfo from`
 
-[BetaToolComputerUse20251124](api/beta/messages.md)
+      The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-int displayHeightPx
+    - `BetaFallbackInfo to`
 
-The height of the display in pixels.
+      The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-int displayWidthPx
+    - `BetaFallbackRefusalTrigger trigger`
 
-The width of the display in pixels.
+      What caused the `from` model to hand over at this hop.
 
-
+    - `"fallback" type`
 
-"computer" name
+### Beta Content Block Param
 
-Name of the tool.
+- `BetaContentBlockParam`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+  - `BetaTextBlockParam`
 
-"computer\_20251124" type
+    - `string text`
 
-?list<AllowedCaller> allowedCallers
+    - `"text" type`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    - `?BetaCacheControlEphemeral cacheControl`
 
-Create a cache control breakpoint at this content block.
+      Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+    - `?list<BetaTextCitationParam> citations`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+  - `BetaImageBlockParam`
 
-?int displayNumber
+    - `Source source`
 
-The X11 display number (e.g. 0, 1) for the display.
+    - `"image" type`
 
-?bool enableZoom
+    - `?BetaCacheControlEphemeral cacheControl`
 
-Whether to enable an action to take a zoomed-in screenshot of the screen.
+      Create a cache control breakpoint at this content block.
 
-?list<array<string,mixed>> inputExamples
+    - `?BetaImageTransformationsParam transformations`
 
-?bool strict
+      Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
 
-When true, guarantees schema validation on tool names and inputs
+  - `BetaRequestDocumentBlock`
 
-
+    - `Source source`
 
-[BetaToolTextEditor20250124](api/beta/messages.md)
+    - `"document" type`
 
-
+    - `?BetaCacheControlEphemeral cacheControl`
 
-"str\_replace\_editor" name
+      Create a cache control breakpoint at this content block.
 
-Name of the tool.
+    - `?BetaCitationsConfigParam citations`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    - `?string context`
 
-"text\_editor\_20250124" type
+    - `?string title`
 
-?list<AllowedCaller> allowedCallers
+  - `BetaSearchResultBlockParam`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    - `list<BetaTextBlockParam> content`
 
-Create a cache control breakpoint at this content block.
+    - `string source`
 
-?bool deferLoading
+    - `string title`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+    - `"search_result" type`
 
-?list<array<string,mixed>> inputExamples
+    - `?BetaCacheControlEphemeral cacheControl`
 
-?bool strict
+      Create a cache control breakpoint at this content block.
 
-When true, guarantees schema validation on tool names and inputs
+    - `?BetaCitationsConfigParam citations`
 
-
+  - `BetaThinkingBlockParam`
 
-[BetaToolTextEditor20250429](api/beta/messages.md)
+    - `string signature`
 
-
+      The `signature` value of this thinking block, exactly as returned by the API in a previous response. Used to verify that the block was generated by Claude.
 
-"str\_replace\_based\_edit\_tool" name
+      Thinking blocks must be passed back unmodified and in their original order; a modified block results in a 400 `invalid_request_error`.
 
-Name of the tool.
+    - `string thinking`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      The `thinking` text of this block as returned by the API.
 
-"text\_editor\_20250429" type
+    - `"thinking" type`
 
-?list<AllowedCaller> allowedCallers
+  - `BetaRedactedThinkingBlockParam`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    - `string data`
 
-Create a cache control breakpoint at this content block.
+      The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-?bool deferLoading
+    - `"redacted_thinking" type`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+  - `BetaToolUseBlockParam`
 
-?list<array<string,mixed>> inputExamples
+    - `string id`
 
-?bool strict
+    - `array<string,mixed> input`
 
-When true, guarantees schema validation on tool names and inputs
+    - `string name`
 
-
+    - `"tool_use" type`
 
-[BetaToolTextEditor20250728](api/beta/messages.md)
+    - `?BetaCacheControlEphemeral cacheControl`
 
-
+      Create a cache control breakpoint at this content block.
 
-"str\_replace\_based\_edit\_tool" name
+    - `?Caller caller`
 
-Name of the tool.
+      Tool invocation directly from the model.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    - `?string toolsetName`
 
-"text\_editor\_20250728" type
+      For a toolset member tool_use, the toolset family this member belongs to.
 
-?list<AllowedCaller> allowedCallers
+  - `BetaToolResultBlockParam`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    - `string toolUseID`
 
-Create a cache control breakpoint at this content block.
+    - `"tool_result" type`
 
-?bool deferLoading
+    - `?BetaCacheControlEphemeral cacheControl`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      Create a cache control breakpoint at this content block.
 
-?list<array<string,mixed>> inputExamples
+    - `?Content content`
 
-?int maxCharacters
+    - `?bool isError`
 
-Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
+    - `?string toolsetName`
 
-?bool strict
+      For a toolset member tool_result, the toolset family of the paired tool_use.
 
-When true, guarantees schema validation on tool names and inputs
+  - `BetaServerToolUseBlockParam`
 
-
+    - `string id`
 
-[BetaWebSearchTool20250305](api/beta/messages.md)
+    - `array<string,mixed> input`
 
-
+    - `Name name`
 
-"web\_search" name
+    - `"server_tool_use" type`
 
-Name of the tool.
+    - `?BetaCacheControlEphemeral cacheControl`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      Create a cache control breakpoint at this content block.
 
-"web\_search\_20250305" type
+    - `?Caller caller`
 
-?list<AllowedCaller> allowedCallers
+      Tool invocation directly from the model.
 
-?list<string> allowedDomains
+  - `BetaWebSearchToolResultBlockParam`
 
-If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+    - `BetaWebSearchToolResultBlockParamContent content`
 
-?list<string> blockedDomains
+    - `string toolUseID`
 
-If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+    - `"web_search_tool_result" type`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    - `?BetaCacheControlEphemeral cacheControl`
 
-Create a cache control breakpoint at this content block.
+      Create a cache control breakpoint at this content block.
 
-?bool deferLoading
+    - `?Caller caller`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      Tool invocation directly from the model.
 
-?int maxUses
+  - `BetaWebFetchToolResultBlockParam`
 
-Maximum number of times the tool can be used in the API request.
+    - `Content content`
 
-?bool strict
+    - `string toolUseID`
 
-When true, guarantees schema validation on tool names and inputs
+    - `"web_fetch_tool_result" type`
 
-?[BetaUserLocation](api/beta/messages.md) userLocation
+    - `?BetaCacheControlEphemeral cacheControl`
 
-Parameters for the user's location. Used to provide more relevant search results.
+      Create a cache control breakpoint at this content block.
 
-
+    - `?Caller caller`
 
-[BetaWebFetchTool20250910](api/beta/messages.md)
+      Tool invocation directly from the model.
 
-
+  - `BetaAdvisorToolResultBlockParam`
 
-"web\_fetch" name
+    - `Content content`
 
-Name of the tool.
+    - `string toolUseID`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    - `"advisor_tool_result" type`
 
-"web\_fetch\_20250910" type
+    - `?BetaCacheControlEphemeral cacheControl`
 
-?list<AllowedCaller> allowedCallers
+      Create a cache control breakpoint at this content block.
 
-?list<string> allowedDomains
+  - `BetaCodeExecutionToolResultBlockParam`
 
-List of domains to allow fetching from
+    - `BetaCodeExecutionToolResultBlockParamContent content`
 
-?list<string> blockedDomains
+      Code execution result with encrypted stdout for PFC + web_search results.
 
-List of domains to block fetching from
+    - `string toolUseID`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    - `"code_execution_tool_result" type`
 
-Create a cache control breakpoint at this content block.
+    - `?BetaCacheControlEphemeral cacheControl`
 
-?[BetaCitationsConfigParam](api/beta/messages.md) citations
+      Create a cache control breakpoint at this content block.
 
-Citations configuration for fetched documents. Citations are disabled by default.
+  - `BetaBashCodeExecutionToolResultBlockParam`
 
-?bool deferLoading
+    - `Content content`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+    - `string toolUseID`
 
-?int maxContentTokens
+    - `"bash_code_execution_tool_result" type`
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+    - `?BetaCacheControlEphemeral cacheControl`
 
-?int maxUses
+      Create a cache control breakpoint at this content block.
 
-Maximum number of times the tool can be used in the API request.
+  - `BetaTextEditorCodeExecutionToolResultBlockParam`
 
-?bool strict
+    - `Content content`
 
-When true, guarantees schema validation on tool names and inputs
+    - `string toolUseID`
 
-
+    - `"text_editor_code_execution_tool_result" type`
 
-[BetaWebSearchTool20260209](api/beta/messages.md)
+    - `?BetaCacheControlEphemeral cacheControl`
 
-
+      Create a cache control breakpoint at this content block.
 
-"web\_search" name
+  - `BetaToolSearchToolResultBlockParam`
 
-Name of the tool.
+    - `Content content`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    - `string toolUseID`
 
-"web\_search\_20260209" type
+    - `"tool_search_tool_result" type`
 
-?list<AllowedCaller> allowedCallers
+    - `?BetaCacheControlEphemeral cacheControl`
 
-?list<string> allowedDomains
+      Create a cache control breakpoint at this content block.
 
-If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+  - `BetaMCPToolUseBlockParam`
 
-?list<string> blockedDomains
+    - `string id`
 
-If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+    - `array<string,mixed> input`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    - `string name`
 
-Create a cache control breakpoint at this content block.
+    - `string serverName`
 
-?bool deferLoading
+      The name of the MCP server
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+    - `"mcp_tool_use" type`
 
-?int maxUses
+    - `?BetaCacheControlEphemeral cacheControl`
 
-Maximum number of times the tool can be used in the API request.
+      Create a cache control breakpoint at this content block.
 
-?bool strict
+  - `BetaRequestMCPToolResultBlockParam`
 
-When true, guarantees schema validation on tool names and inputs
+    - `string toolUseID`
 
-?[BetaUserLocation](api/beta/messages.md) userLocation
+    - `"mcp_tool_result" type`
 
-Parameters for the user's location. Used to provide more relevant search results.
+    - `?BetaCacheControlEphemeral cacheControl`
 
-
+      Create a cache control breakpoint at this content block.
 
-[BetaWebFetchTool20260209](api/beta/messages.md)
+    - `?Content content`
 
-
+    - `?bool isError`
 
-"web\_fetch" name
+  - `BetaContainerUploadBlockParam`
 
-Name of the tool.
+    - `string fileID`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    - `"container_upload" type`
 
-"web\_fetch\_20260209" type
+    - `?BetaCacheControlEphemeral cacheControl`
 
-?list<AllowedCaller> allowedCallers
+      Create a cache control breakpoint at this content block.
 
-?list<string> allowedDomains
+  - `BetaCompactionBlockParam`
 
-List of domains to allow fetching from
+    - `"compaction" type`
 
-?list<string> blockedDomains
+    - `?BetaCacheControlEphemeral cacheControl`
 
-List of domains to block fetching from
+      Create a cache control breakpoint at this content block.
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    - `?string content`
 
-Create a cache control breakpoint at this content block.
+      Summary of previously compacted content, or null if compaction failed
 
-?[BetaCitationsConfigParam](api/beta/messages.md) citations
+    - `?string encryptedContent`
 
-Citations configuration for fetched documents. Citations are disabled by default.
+      Opaque metadata from prior compaction, to be round-tripped verbatim
 
-?bool deferLoading
+  - `BetaRequestToolAdditionBlock`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+    - `Tool tool`
 
-?int maxContentTokens
+      Reference to a single tool the caller declared directly in
+      `tools[]`. Does not accept the composed `{server}_{name}` form the
+      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+      `mcp_toolset_reference` for those.
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+    - `"tool_addition" type`
 
-?int maxUses
+    - `?BetaCacheControlEphemeral cacheControl`
 
-Maximum number of times the tool can be used in the API request.
+      Create a cache control breakpoint at this content block.
 
-?bool strict
+  - `BetaRequestToolRemovalBlock`
 
-When true, guarantees schema validation on tool names and inputs
+    - `Tool tool`
 
-
+      Reference to a single tool the caller declared directly in
+      `tools[]`. Does not accept the composed `{server}_{name}` form the
+      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+      `mcp_toolset_reference` for those.
 
-[BetaWebFetchTool20260309](api/beta/messages.md)
+    - `"tool_removal" type`
 
-
+    - `?BetaCacheControlEphemeral cacheControl`
 
-"web\_fetch" name
+      Create a cache control breakpoint at this content block.
 
-Name of the tool.
+  - `BetaFallbackBlockParam`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    - `BetaFallbackInfoParam from`
 
-"web\_fetch\_20260309" type
+      Identifies one hop of a fallback transition.
 
-?list<AllowedCaller> allowedCallers
+    - `BetaFallbackInfoParam to`
 
-?list<string> allowedDomains
+      Identifies one hop of a fallback transition.
 
-List of domains to allow fetching from
+    - `"fallback" type`
 
-?list<string> blockedDomains
+    - `?mixed trigger`
 
-List of domains to block fetching from
+      The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+### Beta Content Block Source
 
-Create a cache control breakpoint at this content block.
+- `BetaContentBlockSource`
 
-?[BetaCitationsConfigParam](api/beta/messages.md) citations
+  - `Content content`
 
-Citations configuration for fetched documents. Citations are disabled by default.
+  - `"content" type`
 
-?bool deferLoading
+### Beta Content Block Source Content
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+- `BetaContentBlockSourceContent`
 
-?int maxContentTokens
+  - `BetaTextBlockParam`
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+    - `string text`
 
-?int maxUses
+    - `"text" type`
 
-Maximum number of times the tool can be used in the API request.
+    - `?BetaCacheControlEphemeral cacheControl`
 
-?bool strict
+      Create a cache control breakpoint at this content block.
 
-When true, guarantees schema validation on tool names and inputs
+    - `?list<BetaTextCitationParam> citations`
 
-?bool useCache
+  - `BetaImageBlockParam`
 
-Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+    - `Source source`
 
-
+    - `"image" type`
 
-[BetaWebSearchTool20260318](api/beta/messages.md)
+    - `?BetaCacheControlEphemeral cacheControl`
 
-
+      Create a cache control breakpoint at this content block.
 
-"web\_search" name
+    - `?BetaImageTransformationsParam transformations`
 
-Name of the tool.
+      Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+### Beta Context Management Config
 
-"web\_search\_20260318" type
+- `BetaContextManagementConfig`
 
-?list<AllowedCaller> allowedCallers
+  - `?list<Edit> edits`
 
-?list<string> allowedDomains
+    List of context management edits to apply
 
-If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+### Beta Context Management Response
 
-?list<string> blockedDomains
+- `BetaContextManagementResponse`
 
-If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+  - `list<AppliedEdit> appliedEdits`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    List of context management edits that were applied.
 
-Create a cache control breakpoint at this content block.
+### Beta Count Tokens Context Management Response
 
-?bool deferLoading
+- `BetaCountTokensContextManagementResponse`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+  - `int originalInputTokens`
 
-?int maxUses
+    The original token count before context management was applied
 
-Maximum number of times the tool can be used in the API request.
+### Beta Diagnostics
 
-?ResponseInclusion responseInclusion
+- `BetaDiagnostics`
 
-How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+  - `?CacheMissReason cacheMissReason`
 
-?bool strict
+    Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-When true, guarantees schema validation on tool names and inputs
+### Beta Diagnostics Param
 
-?[BetaUserLocation](api/beta/messages.md) userLocation
+- `BetaDiagnosticsParam`
 
-Parameters for the user's location. Used to provide more relevant search results.
+  - `?string previousMessageID`
 
-
+    The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
 
-[BetaWebFetchTool20260318](api/beta/messages.md)
+### Beta Direct Caller
 
-
+- `BetaDirectCaller`
 
-"web\_fetch" name
+  - `"direct" type`
 
-Name of the tool.
+### Beta Document Block
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+- `BetaDocumentBlock`
 
-"web\_fetch\_20260318" type
+  - `?BetaCitationConfig citations`
 
-?list<AllowedCaller> allowedCallers
+    Citation configuration for the document
 
-?list<string> allowedDomains
+  - `Source source`
 
-List of domains to allow fetching from
+  - `?string title`
 
-?list<string> blockedDomains
+    The title of the document
 
-List of domains to block fetching from
+  - `"document" type`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+### Beta Encrypted Code Execution Result Block
 
-Create a cache control breakpoint at this content block.
+- `BetaEncryptedCodeExecutionResultBlock`
 
-?[BetaCitationsConfigParam](api/beta/messages.md) citations
+  - `list<BetaCodeExecutionOutputBlock> content`
 
-Citations configuration for fetched documents. Citations are disabled by default.
+  - `string encryptedStdout`
 
-?bool deferLoading
+  - `int returnCode`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+  - `string stderr`
 
-?int maxContentTokens
+  - `"encrypted_code_execution_result" type`
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+### Beta Encrypted Code Execution Result Block Param
 
-?int maxUses
+- `BetaEncryptedCodeExecutionResultBlockParam`
 
-Maximum number of times the tool can be used in the API request.
+  - `list<BetaCodeExecutionOutputBlockParam> content`
 
-?ResponseInclusion responseInclusion
+  - `string encryptedStdout`
 
-How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+  - `int returnCode`
 
-?bool strict
+  - `string stderr`
 
-When true, guarantees schema validation on tool names and inputs
+  - `"encrypted_code_execution_result" type`
 
-?bool useCache
+### Beta Fallback Block
 
-Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+- `BetaFallbackBlock`
 
-
+  - `BetaFallbackInfo from`
 
-[BetaAdvisorTool20260301](api/beta/messages.md)
+    The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-
+  - `BetaFallbackInfo to`
 
-Model model
+    The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-The model that will complete your prompt.
+  - `BetaFallbackRefusalTrigger trigger`
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+    What caused the `from` model to hand over at this hop.
 
-
+  - `"fallback" type`
 
-"advisor" name
+### Beta Fallback Block Param
 
-Name of the tool.
+- `BetaFallbackBlockParam`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+  - `BetaFallbackInfoParam from`
 
-"advisor\_20260301" type
+    Identifies one hop of a fallback transition.
 
-?list<AllowedCaller> allowedCallers
+  - `BetaFallbackInfoParam to`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    Identifies one hop of a fallback transition.
 
-Create a cache control breakpoint at this content block.
+  - `"fallback" type`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) caching
+  - `?mixed trigger`
 
-Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+    The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
 
-?bool deferLoading
+### Beta Fallback Credit Not Applied
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+- `BetaFallbackCreditNotApplied`
 
-?int maxTokens
+  - `Reason reason`
 
-Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor\_result or advisor\_redacted\_result block carries stop\_reason='max\_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+    Why the reprice was not applied.
 
-?int maxUses
+    A closed enum; additions to the redemption-check vocabulary arrive as
+    deliberate schema updates.
 
-Maximum number of times the tool can be used in the API request.
+  - `"not_applied" type`
 
-?bool strict
+  - `?list<string> removeToRedeem`
 
-When true, guarantees schema validation on tool names and inputs
+    Request fields to remove before retrying, so the retry can redeem this
+    token.
 
-
+    Present exactly when `reason` is `variant_fields_present` — never null,
+    never an empty array; absent otherwise. Fields are named only from your own request, and only after
+    the sealed variant hash matched. A served best-effort retry has already
+    been billed at normal price; nothing redeems retroactively, but a corrected
+    re-send inside the token's five-minute window can still redeem.
 
-[BetaToolSearchToolBm25\_20251119](api/beta/messages.md)
+### Beta Fallback Credit Redeemed
 
-
+- `BetaFallbackCreditRedeemed`
 
-"tool\_search\_tool\_bm25" name
+  - `"redeemed" type`
 
-Name of the tool.
+### Beta Fallback Credit Token Param
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+- `BetaFallbackCreditTokenParam`
 
-Type type
+  - `string token`
 
-?list<AllowedCaller> allowedCallers
+    The opaque `fallback_credit_token` from a prior refusal's `stop_details` — the same string the bare-string form carries.
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  - `?Mode mode`
 
-Create a cache control breakpoint at this content block.
+    How a failing token affects the retry. `strict` (the default, and the bare-string behavior): a failing redemption is a 400 and the retry is not served. `best_effort`: the retry is served either way — a token-layer failure no longer rejects the request; the retry proceeds at normal price and the outcome is reported on the response's `usage.fallback_credit`. Two failures stay hard in both modes: a malformed token, and combining `fallback_credit_token` with `fallbacks`.
 
-?bool deferLoading
+### Beta Fallback Credit Usage
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+- `BetaFallbackCreditUsage`
 
-?bool strict
+  - `Status status`
 
-When true, guarantees schema validation on tool names and inputs
+    Whether the fallback-credit reprice was applied to this response's billing.
 
-
+    A union discriminated on `type`. `redeemed`: the retry is billed as if
+    the conversation had been on the retry model all along — including when the
+    resulting shift is zero because there was nothing to move. `not_applied`:
+    no reprice was applied; the arm's `reason` says why.
 
-[BetaToolSearchToolRegex20251119](api/beta/messages.md)
+### Beta Fallback Info
 
-
+- `BetaFallbackInfo`
 
-"tool\_search\_tool\_regex" name
+  - `Model model`
 
-Name of the tool.
+    The model that will complete your prompt.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Type type
+### Beta Fallback Info Param
 
-?list<AllowedCaller> allowedCallers
+- `BetaFallbackInfoParam`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  - `Model model`
 
-Create a cache control breakpoint at this content block.
+    The model that will complete your prompt.
 
-?bool deferLoading
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+### Beta Fallback Message Iteration Usage
 
-?bool strict
+- `BetaFallbackMessageIterationUsage`
 
-When true, guarantees schema validation on tool names and inputs
+  - `?BetaCacheCreation cacheCreation`
 
-
+    Breakdown of cached tokens by TTL
 
-[BetaMCPToolset](api/beta/messages.md)
+  - `int cacheCreationInputTokens`
 
-string mcpServerName
+    The number of input tokens used to create the cache entry.
 
-Name of the MCP server to configure tools for
+  - `int cacheReadInputTokens`
 
-"mcp\_toolset" type
+    The number of input tokens read from the cache.
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  - `int inputTokens`
 
-Create a cache control breakpoint at this content block.
+    The number of input tokens which were used.
 
-?array<string,[BetaMCPToolConfig](api/beta/messages.md)> configs
+  - `Model model`
 
-Configuration overrides for specific tools, keyed by tool name
+    The model that will complete your prompt.
 
-?[BetaMCPToolDefaultConfig](api/beta/messages.md) defaultConfig
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Default configuration applied to all tools from this server
+  - `int outputTokens`
 
-
+    The number of output tokens which were used.
 
-[BetaToolUseBlock](api/beta/messages.md)
+  - `"fallback_message" type`
 
-string id
+    Usage for the fallback-model attempt that served the response
 
-array<string,mixed> input
+### Beta Fallback Param
 
-string name
+- `BetaFallbackParam`
 
-"tool\_use" type
+  - `Model model`
 
-?Caller caller
+    The model that will complete your prompt.
 
-Tool invocation directly from the model.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-
+  - `?int maxTokens`
 
-[BetaToolUseBlockParam](api/beta/messages.md)
+  - `?BetaOutputConfig outputConfig`
 
-string id
+  - `?Speed speed`
 
-array<string,mixed> input
+    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-string name
+  - `?Thinking thinking`
 
-"tool\_use" type
+### Beta Fallback Refusal Trigger
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+- `BetaFallbackRefusalTrigger`
 
-Create a cache control breakpoint at this content block.
+  - `?Category category`
 
-?Caller caller
+    The policy category that triggered a refusal.
 
-Tool invocation directly from the model.
+  - `"refusal" type`
 
-
+### Beta Fallbacks Param
 
-[BetaToolUsesKeep](api/beta/messages.md)
+- `BetaFallbacksParam`
 
-"tool\_uses" type
+  - `list<BetaFallbackParam>`
 
-int value
+    - `Model model`
 
-
+      The model that will complete your prompt.
 
-[BetaToolUsesTrigger](api/beta/messages.md)
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-"tool\_uses" type
+    - `?int maxTokens`
 
-int value
+    - `?BetaOutputConfig outputConfig`
 
-
+    - `?Speed speed`
 
-[BetaURLImageSource](api/beta/messages.md)
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-"url" type
+    - `?Thinking thinking`
 
-string url
+  - `"default"`
 
-
+### Beta File Document Source
 
-[BetaURLPDFSource](api/beta/messages.md)
+- `BetaFileDocumentSource`
 
-"url" type
+  - `string fileID`
 
-string url
+  - `"file" type`
 
-
+### Beta File Image Source
 
-[BetaUsage](api/beta/messages.md)
+- `BetaFileImageSource`
 
-?[BetaCacheCreation](api/beta/messages.md) cacheCreation
+  - `string fileID`
 
-Breakdown of cached tokens by TTL
+  - `"file" type`
 
-?int cacheCreationInputTokens
+### Beta Image Block Param
 
-The number of input tokens used to create the cache entry.
+- `BetaImageBlockParam`
 
-?int cacheReadInputTokens
+  - `Source source`
 
-The number of input tokens read from the cache.
+  - `"image" type`
 
-?string inferenceGeo
+  - `?BetaCacheControlEphemeral cacheControl`
 
-The geographic region where inference was performed for this request.
+    Create a cache control breakpoint at this content block.
 
-int inputTokens
+  - `?BetaImageTransformationsParam transformations`
 
-The number of input tokens which were used.
+    Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
 
-
+### Beta Image Transformations Param
 
-?list<BetaIterationsUsageItem> iterations
+- `BetaImageTransformationsParam`
 
-Per-iteration token usage breakdown.
+  - `?OversizedImage oversizedImage`
 
-Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+    What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
 
-- Determine which iterations exceeded long context thresholds (>=200k tokens)
-- Calculate the true context window size from the last iteration
-- Understand token accumulation across server-side tool use loops
+### Beta Input JSON Delta
 
-int outputTokens
+- `BetaInputJSONDelta`
 
-The number of output tokens which were used.
+  - `string partialJSON`
 
-
+  - `"input_json_delta" type`
 
-?[BetaOutputTokensDetails](api/beta/messages.md) outputTokensDetails
+### Beta Input Tokens Clear At Least
 
-Breakdown of output tokens by category.
+- `BetaInputTokensClearAtLeast`
 
-`output_tokens` remains the inclusive, authoritative total used for billing.
-This object provides a read-only decomposition for observability — for example,
-how many of the billed output tokens were spent on internal reasoning that may
-have been summarized before being returned to you.
+  - `"input_tokens" type`
 
-?[BetaServerToolUsage](api/beta/messages.md) serverToolUse
+  - `int value`
 
-The number of server tool requests.
+### Beta Input Tokens Trigger
 
-?ServiceTier serviceTier
+- `BetaInputTokensTrigger`
 
-If the request used the priority, standard, or batch tier.
+  - `"input_tokens" type`
 
-?Speed speed
+  - `int value`
 
-The inference speed mode used for this request.
+### Beta Iterations Usage
 
-
+- `list<BetaIterationsUsageItem>`
 
-[BetaUserLocation](api/beta/messages.md)
+  - `BetaMessageIterationUsage`
 
-"approximate" type
+    - `?BetaCacheCreation cacheCreation`
 
-?string city
+      Breakdown of cached tokens by TTL
 
-The city of the user.
+    - `int cacheCreationInputTokens`
 
-?string country
+      The number of input tokens used to create the cache entry.
 
-The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+    - `int cacheReadInputTokens`
 
-?string region
+      The number of input tokens read from the cache.
 
-The region of the user.
+    - `int inputTokens`
 
-?string timezone
+      The number of input tokens which were used.
 
-The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+    - `Model model`
 
-
+      The model that will complete your prompt.
 
-[BetaWebFetchBlock](api/beta/messages.md)
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-[BetaDocumentBlock](api/beta/messages.md) content
+    - `int outputTokens`
 
-?string retrievedAt
+      The number of output tokens which were used.
 
-ISO 8601 timestamp when the content was retrieved
+    - `"message" type`
 
-"web\_fetch\_result" type
+      Usage for a sampling iteration
 
-string url
+  - `BetaCompactionIterationUsage`
 
-Fetched content URL
+    - `?BetaCacheCreation cacheCreation`
 
-
+      Breakdown of cached tokens by TTL
 
-[BetaWebFetchBlockParam](api/beta/messages.md)
+    - `int cacheCreationInputTokens`
 
-[BetaRequestDocumentBlock](api/beta/messages.md) content
+      The number of input tokens used to create the cache entry.
 
-"web\_fetch\_result" type
+    - `int cacheReadInputTokens`
 
-string url
+      The number of input tokens read from the cache.
 
-Fetched content URL
+    - `int inputTokens`
 
-?string retrievedAt
+      The number of input tokens which were used.
 
-ISO 8601 timestamp when the content was retrieved
+    - `int outputTokens`
 
-
+      The number of output tokens which were used.
 
-[BetaWebFetchTool20250910](api/beta/messages.md)
+    - `"compaction" type`
 
-
+      Usage for a compaction iteration
 
-"web\_fetch" name
+  - `BetaAdvisorMessageIterationUsage`
 
-Name of the tool.
+    - `?BetaCacheCreation cacheCreation`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      Breakdown of cached tokens by TTL
 
-"web\_fetch\_20250910" type
+    - `int cacheCreationInputTokens`
 
-?list<AllowedCaller> allowedCallers
+      The number of input tokens used to create the cache entry.
 
-?list<string> allowedDomains
+    - `int cacheReadInputTokens`
 
-List of domains to allow fetching from
+      The number of input tokens read from the cache.
 
-?list<string> blockedDomains
+    - `int inputTokens`
 
-List of domains to block fetching from
+      The number of input tokens which were used.
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    - `Model model`
 
-Create a cache control breakpoint at this content block.
+      The model that will complete your prompt.
 
-?[BetaCitationsConfigParam](api/beta/messages.md) citations
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Citations configuration for fetched documents. Citations are disabled by default.
+    - `int outputTokens`
 
-?bool deferLoading
+      The number of output tokens which were used.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+    - `"advisor_message" type`
 
-?int maxContentTokens
+      Usage for an advisor sub-inference iteration
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+  - `BetaFallbackMessageIterationUsage`
 
-?int maxUses
+    - `?BetaCacheCreation cacheCreation`
 
-Maximum number of times the tool can be used in the API request.
+      Breakdown of cached tokens by TTL
 
-?bool strict
+    - `int cacheCreationInputTokens`
 
-When true, guarantees schema validation on tool names and inputs
+      The number of input tokens used to create the cache entry.
 
-
+    - `int cacheReadInputTokens`
 
-[BetaWebFetchTool20260209](api/beta/messages.md)
+      The number of input tokens read from the cache.
 
-
+    - `int inputTokens`
 
-"web\_fetch" name
+      The number of input tokens which were used.
 
-Name of the tool.
+    - `Model model`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      The model that will complete your prompt.
 
-"web\_fetch\_20260209" type
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-?list<AllowedCaller> allowedCallers
+    - `int outputTokens`
 
-?list<string> allowedDomains
+      The number of output tokens which were used.
 
-List of domains to allow fetching from
+    - `"fallback_message" type`
 
-?list<string> blockedDomains
+      Usage for the fallback-model attempt that served the response
 
-List of domains to block fetching from
+### Beta JSON Output Format
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+- `BetaJSONOutputFormat`
 
-Create a cache control breakpoint at this content block.
+  - `array<string,mixed> schema`
 
-?[BetaCitationsConfigParam](api/beta/messages.md) citations
+    The JSON schema of the format
 
-Citations configuration for fetched documents. Citations are disabled by default.
+  - `"json_schema" type`
 
-?bool deferLoading
+### Beta MCP Tool Config
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+- `BetaMCPToolConfig`
 
-?int maxContentTokens
+  - `?bool deferLoading`
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+  - `?bool enabled`
 
-?int maxUses
+### Beta MCP Tool Default Config
 
-Maximum number of times the tool can be used in the API request.
+- `BetaMCPToolDefaultConfig`
 
-?bool strict
+  - `?bool deferLoading`
 
-When true, guarantees schema validation on tool names and inputs
+  - `?bool enabled`
 
-
+### Beta MCP Tool Result Block
 
-[BetaWebFetchTool20260309](api/beta/messages.md)
+- `BetaMCPToolResultBlock`
 
-
+  - `Content content`
 
-"web\_fetch" name
+  - `bool isError`
 
-Name of the tool.
+  - `string toolUseID`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+  - `"mcp_tool_result" type`
 
-"web\_fetch\_20260309" type
+### Beta MCP Tool Use Block
 
-?list<AllowedCaller> allowedCallers
+- `BetaMCPToolUseBlock`
 
-?list<string> allowedDomains
+  - `string id`
 
-List of domains to allow fetching from
+  - `array<string,mixed> input`
 
-?list<string> blockedDomains
+  - `string name`
 
-List of domains to block fetching from
+    The name of the MCP tool
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  - `string serverName`
 
-Create a cache control breakpoint at this content block.
+    The name of the MCP server
 
-?[BetaCitationsConfigParam](api/beta/messages.md) citations
+  - `"mcp_tool_use" type`
 
-Citations configuration for fetched documents. Citations are disabled by default.
+### Beta MCP Tool Use Block Param
 
-?bool deferLoading
+- `BetaMCPToolUseBlockParam`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+  - `string id`
 
-?int maxContentTokens
+  - `array<string,mixed> input`
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+  - `string name`
 
-?int maxUses
+  - `string serverName`
 
-Maximum number of times the tool can be used in the API request.
+    The name of the MCP server
 
-?bool strict
+  - `"mcp_tool_use" type`
 
-When true, guarantees schema validation on tool names and inputs
+  - `?BetaCacheControlEphemeral cacheControl`
 
-?bool useCache
+    Create a cache control breakpoint at this content block.
 
-Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+### Beta MCP Toolset
 
-
+- `BetaMCPToolset`
 
-[BetaWebFetchTool20260318](api/beta/messages.md)
+  - `string mcpServerName`
 
-
+    Name of the MCP server to configure tools for
 
-"web\_fetch" name
+  - `"mcp_toolset" type`
 
-Name of the tool.
+  - `?BetaCacheControlEphemeral cacheControl`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    Create a cache control breakpoint at this content block.
 
-"web\_fetch\_20260318" type
+  - `?array<string,BetaMCPToolConfig> configs`
 
-?list<AllowedCaller> allowedCallers
+    Configuration overrides for specific tools, keyed by tool name
 
-?list<string> allowedDomains
+  - `?BetaMCPToolDefaultConfig defaultConfig`
 
-List of domains to allow fetching from
+    Default configuration applied to all tools from this server
 
-?list<string> blockedDomains
+### Beta Memory Tool 20250818
 
-List of domains to block fetching from
+- `BetaMemoryTool20250818`
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  - `"memory" name`
 
-Create a cache control breakpoint at this content block.
+    Name of the tool.
 
-?[BetaCitationsConfigParam](api/beta/messages.md) citations
+    This is how the tool will be called by the model and in `tool_use` blocks.
 
-Citations configuration for fetched documents. Citations are disabled by default.
+  - `"memory_20250818" type`
 
-?bool deferLoading
+  - `?list<AllowedCaller> allowedCallers`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+  - `?BetaCacheControlEphemeral cacheControl`
 
-?int maxContentTokens
+    Create a cache control breakpoint at this content block.
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+  - `?bool deferLoading`
 
-?int maxUses
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-Maximum number of times the tool can be used in the API request.
+  - `?list<array<string,mixed>> inputExamples`
 
-?ResponseInclusion responseInclusion
+  - `?bool strict`
 
-How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+    When true, guarantees schema validation on tool names and inputs
 
-?bool strict
+### Beta Memory Tool 20250818 Command
 
-When true, guarantees schema validation on tool names and inputs
+- `BetaMemoryTool20250818Command`
 
-?bool useCache
+  - `BetaMemoryTool20250818ViewCommand`
 
-Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+    - `"view" command`
 
-
+      Command type identifier
 
-[BetaWebFetchToolResultBlock](api/beta/messages.md)
+    - `string path`
 
-Content content
+      Path to directory or file to view
 
-string toolUseID
+    - `?list<int> viewRange`
 
-"web\_fetch\_tool\_result" type
+      Optional line range for viewing specific lines
 
-?Caller caller
+  - `BetaMemoryTool20250818CreateCommand`
 
-Tool invocation directly from the model.
+    - `"create" command`
 
-
+      Command type identifier
 
-[BetaWebFetchToolResultBlockParam](api/beta/messages.md)
+    - `string fileText`
 
-Content content
+      Content to write to the file
 
-string toolUseID
+    - `string path`
 
-"web\_fetch\_tool\_result" type
+      Path where the file should be created
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  - `BetaMemoryTool20250818StrReplaceCommand`
 
-Create a cache control breakpoint at this content block.
+    - `"str_replace" command`
 
-?Caller caller
+      Command type identifier
 
-Tool invocation directly from the model.
+    - `string newStr`
 
-
+      Text to replace with
 
-[BetaWebFetchToolResultErrorBlock](api/beta/messages.md)
+    - `string oldStr`
 
-[BetaWebFetchToolResultErrorCode](api/beta/messages.md) errorCode
+      Text to search for and replace
 
-"web\_fetch\_tool\_result\_error" type
+    - `string path`
 
-
+      Path to the file where text should be replaced
 
-[BetaWebFetchToolResultErrorBlockParam](api/beta/messages.md)
+  - `BetaMemoryTool20250818InsertCommand`
 
-[BetaWebFetchToolResultErrorCode](api/beta/messages.md) errorCode
+    - `"insert" command`
 
-"web\_fetch\_tool\_result\_error" type
+      Command type identifier
 
-
+    - `int insertLine`
 
-[BetaWebFetchToolResultErrorCode](api/beta/messages.md)
+      Line number where text should be inserted
 
-One of the following:
+    - `string insertText`
 
-"invalid\_tool\_input"
+      Text to insert at the specified line
 
-"url\_too\_long"
+    - `string path`
 
-"url\_not\_allowed"
+      Path to the file where text should be inserted
 
-"url\_not\_in\_prior\_context"
+  - `BetaMemoryTool20250818DeleteCommand`
 
-"url\_not\_accessible"
+    - `"delete" command`
 
-"unsupported\_content\_type"
+      Command type identifier
 
-"too\_many\_requests"
+    - `string path`
 
-"max\_uses\_exceeded"
+      Path to the file or directory to delete
 
-"unavailable"
+  - `BetaMemoryTool20250818RenameCommand`
 
-
+    - `"rename" command`
 
-[BetaWebSearchResultBlock](api/beta/messages.md)
+      Command type identifier
 
-string encryptedContent
+    - `string newPath`
 
-?string pageAge
+      New path for the file or directory
 
-string title
+    - `string oldPath`
 
-"web\_search\_result" type
+      Current path of the file or directory
 
-string url
+### Beta Memory Tool 20250818 Create Command
 
-
+- `BetaMemoryTool20250818CreateCommand`
 
-[BetaWebSearchResultBlockParam](api/beta/messages.md)
+  - `"create" command`
 
-string encryptedContent
+    Command type identifier
 
-string title
+  - `string fileText`
 
-"web\_search\_result" type
+    Content to write to the file
 
-string url
+  - `string path`
 
-?string pageAge
+    Path where the file should be created
 
-
+### Beta Memory Tool 20250818 Delete Command
 
-[BetaWebSearchTool20250305](api/beta/messages.md)
+- `BetaMemoryTool20250818DeleteCommand`
 
-
+  - `"delete" command`
 
-"web\_search" name
+    Command type identifier
 
-Name of the tool.
+  - `string path`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    Path to the file or directory to delete
 
-"web\_search\_20250305" type
+### Beta Memory Tool 20250818 Insert Command
 
-?list<AllowedCaller> allowedCallers
+- `BetaMemoryTool20250818InsertCommand`
 
-?list<string> allowedDomains
+  - `"insert" command`
 
-If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+    Command type identifier
 
-?list<string> blockedDomains
+  - `int insertLine`
 
-If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+    Line number where text should be inserted
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  - `string insertText`
 
-Create a cache control breakpoint at this content block.
+    Text to insert at the specified line
 
-?bool deferLoading
+  - `string path`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+    Path to the file where text should be inserted
 
-?int maxUses
+### Beta Memory Tool 20250818 Rename Command
 
-Maximum number of times the tool can be used in the API request.
+- `BetaMemoryTool20250818RenameCommand`
 
-?bool strict
+  - `"rename" command`
 
-When true, guarantees schema validation on tool names and inputs
+    Command type identifier
 
-?[BetaUserLocation](api/beta/messages.md) userLocation
+  - `string newPath`
 
-Parameters for the user's location. Used to provide more relevant search results.
+    New path for the file or directory
 
-
+  - `string oldPath`
 
-[BetaWebSearchTool20260209](api/beta/messages.md)
+    Current path of the file or directory
 
-
+### Beta Memory Tool 20250818 Str Replace Command
 
-"web\_search" name
+- `BetaMemoryTool20250818StrReplaceCommand`
 
-Name of the tool.
+  - `"str_replace" command`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    Command type identifier
 
-"web\_search\_20260209" type
+  - `string newStr`
 
-?list<AllowedCaller> allowedCallers
+    Text to replace with
 
-?list<string> allowedDomains
+  - `string oldStr`
 
-If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+    Text to search for and replace
 
-?list<string> blockedDomains
+  - `string path`
 
-If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+    Path to the file where text should be replaced
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+### Beta Memory Tool 20250818 View Command
 
-Create a cache control breakpoint at this content block.
+- `BetaMemoryTool20250818ViewCommand`
 
-?bool deferLoading
+  - `"view" command`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+    Command type identifier
 
-?int maxUses
+  - `string path`
 
-Maximum number of times the tool can be used in the API request.
+    Path to directory or file to view
 
-?bool strict
+  - `?list<int> viewRange`
 
-When true, guarantees schema validation on tool names and inputs
+    Optional line range for viewing specific lines
 
-?[BetaUserLocation](api/beta/messages.md) userLocation
+### Beta Message
 
-Parameters for the user's location. Used to provide more relevant search results.
+- `BetaMessage`
 
-
+  - `string id`
 
-[BetaWebSearchTool20260318](api/beta/messages.md)
+    Unique object identifier.
 
-
+    The format and length of IDs may change over time.
 
-"web\_search" name
+  - `?BetaContainer container`
 
-Name of the tool.
+    Information about the container used in the request (for the code execution tool)
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+  - `list<BetaContentBlock> content`
 
-"web\_search\_20260318" type
+    Content generated by the model.
 
-?list<AllowedCaller> allowedCallers
+    This is an array of content blocks, each of which has a `type` that determines its shape.
 
-?list<string> allowedDomains
+    Example:
 
-If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+    ```json
+    [{"type": "text", "text": "Hi, I'm Claude."}]
+    ```
 
-?list<string> blockedDomains
+    If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
 
-If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+    For example, if the input `messages` were:
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+    ```json
+    [
+      {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+      {"role": "assistant", "content": "The best answer is ("}
+    ]
+    ```
 
-Create a cache control breakpoint at this content block.
+    Then the response `content` might be:
 
-?bool deferLoading
+    ```json
+    [{"type": "text", "text": "B)"}]
+    ```
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+  - `?BetaContextManagementResponse contextManagement`
 
-?int maxUses
+    Context management response.
 
-Maximum number of times the tool can be used in the API request.
+    Information about context management strategies applied during the request.
 
-?ResponseInclusion responseInclusion
+  - `?BetaDiagnostics diagnostics`
 
-How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+    Response envelope for request-level diagnostics. Present (possibly
+    null) whenever the caller supplied `diagnostics` on the request.
 
-?bool strict
+  - `Model model`
 
-When true, guarantees schema validation on tool names and inputs
+    The model that will complete your prompt.
 
-?[BetaUserLocation](api/beta/messages.md) userLocation
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Parameters for the user's location. Used to provide more relevant search results.
+  - `"assistant" role`
 
-
+    Conversational role of the generated message.
 
-[BetaWebSearchToolRequestError](api/beta/messages.md)
+    This will always be `"assistant"`.
 
-[BetaWebSearchToolResultErrorCode](api/beta/messages.md) errorCode
+  - `?BetaRefusalStopDetails stopDetails`
 
-"web\_search\_tool\_result\_error" type
+    Structured information about a refusal.
 
-
+  - `?BetaStopReason stopReason`
 
-[BetaWebSearchToolResultBlock](api/beta/messages.md)
+    The reason that we stopped.
 
-[BetaWebSearchToolResultBlockContent](api/beta/messages.md) content
+    This may be one the following values:
 
-string toolUseID
+    * `"end_turn"`: the model reached a natural stopping point
+    * `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
+    * `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
+    * `"tool_use"`: the model invoked one or more tools
+    * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
+    * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+    * `"model_context_window_exceeded"`: we exceeded the model's context window
 
-"web\_search\_tool\_result" type
+    In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-?Caller caller
+  - `?string stopSequence`
 
-Tool invocation directly from the model.
+    Which custom stop sequence was generated, if any.
 
-
+    This value will be a non-null string if one of your custom stop sequences was generated.
 
-[BetaWebSearchToolResultBlockContent](api/beta/messages.md)
+  - `"message" type`
 
-One of the following:
+    Object type.
 
-
+    For Messages, this is always `"message"`.
 
-[BetaWebSearchToolResultError](api/beta/messages.md)
+  - `BetaUsage usage`
 
-[BetaWebSearchToolResultErrorCode](api/beta/messages.md) errorCode
+    Billing and rate-limit usage.
 
-"web\_search\_tool\_result\_error" type
+    Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
 
-
+    Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
 
-list<[BetaWebSearchResultBlock](api/beta/messages.md)>
+    For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
 
-string encryptedContent
+    Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-?string pageAge
+  - `?list<BetaThinkingDroppedInputTransformation> inputTransformations`
 
-string title
+    Changes the API made to the request's input before showing it to the model:
+    one entry per change, in request order. Today the only entry type is
+    `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
+    block from the request's `messages` that was removed from the prompt instead
+    of being shown to the model because it failed a binding check. More entry
+    types may be added over time; ignore types you do not recognize.
 
-"web\_search\_result" type
+    Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
+    every such response from a model that supports extended thinking, as `[]`
+    when nothing was changed; without the beta, blocks are removed all the same
+    but nothing is reported. Removed blocks contribute nothing to
+    `usage.input_tokens`. When streaming, the array is final in `message_start`;
+    the final `message_delta` event carries it only when a server-side model
+    fallback happened mid-stream, in which case it holds the serving model's
+    entries and replaces the one in `message_start`.
 
-string url
+### Beta Message Delta Usage
 
-
+- `BetaMessageDeltaUsage`
 
-[BetaWebSearchToolResultBlockParam](api/beta/messages.md)
+  - `?int cacheCreationInputTokens`
 
-[BetaWebSearchToolResultBlockParamContent](api/beta/messages.md) content
+    The cumulative number of input tokens used to create the cache entry.
 
-string toolUseID
+  - `?int cacheReadInputTokens`
 
-"web\_search\_tool\_result" type
+    The cumulative number of input tokens read from the cache.
 
-?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl
+  - `?BetaFallbackCreditUsage fallbackCredit`
 
-Create a cache control breakpoint at this content block.
+    Outcome of the `fallback_credit_token` presented on this request.
 
-?Caller caller
+  - `?int inputTokens`
 
-Tool invocation directly from the model.
+    The cumulative number of input tokens which were used.
 
-
+  - `?list<BetaIterationsUsageItem> iterations`
 
-[BetaWebSearchToolResultBlockParamContent](api/beta/messages.md)
+    Per-iteration token usage breakdown.
 
-One of the following:
+    Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
-
+    - Determine which iterations exceeded long context thresholds (>=200k tokens)
+    - Calculate the context window size from the last `message` entry
+    - Understand token accumulation across server-side tool use loops
 
-list<[BetaWebSearchResultBlockParam](api/beta/messages.md)>
+    A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-string encryptedContent
+  - `int outputTokens`
 
-string title
+    The cumulative number of output tokens which were used.
 
-"web\_search\_result" type
+  - `?BetaOutputTokensDetails outputTokensDetails`
 
-string url
+    Breakdown of output tokens by category.
 
-?string pageAge
+    `output_tokens` remains the inclusive, authoritative total used for billing.
+    This object provides a read-only decomposition for observability — for example,
+    how many of the billed output tokens were spent on internal reasoning that may
+    have been summarized before being returned to you.
 
-
+  - `?BetaServerToolUsage serverToolUse`
 
-[BetaWebSearchToolRequestError](api/beta/messages.md)
+    The number of server tool requests.
 
-[BetaWebSearchToolResultErrorCode](api/beta/messages.md) errorCode
+### Beta Message Iteration Usage
 
-"web\_search\_tool\_result\_error" type
+- `BetaMessageIterationUsage`
 
-
+  - `?BetaCacheCreation cacheCreation`
 
-[BetaWebSearchToolResultError](api/beta/messages.md)
+    Breakdown of cached tokens by TTL
 
-[BetaWebSearchToolResultErrorCode](api/beta/messages.md) errorCode
+  - `int cacheCreationInputTokens`
 
-"web\_search\_tool\_result\_error" type
+    The number of input tokens used to create the cache entry.
 
-
+  - `int cacheReadInputTokens`
 
-[BetaWebSearchToolResultErrorCode](api/beta/messages.md)
+    The number of input tokens read from the cache.
 
-One of the following:
+  - `int inputTokens`
 
-"invalid\_tool\_input"
+    The number of input tokens which were used.
 
-"unavailable"
+  - `Model model`
 
-"max\_uses\_exceeded"
+    The model that will complete your prompt.
 
-"too\_many\_requests"
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-"query\_too\_long"
+  - `int outputTokens`
 
-"request\_too\_large"
+    The number of output tokens which were used.
 
-#### MessagesBatches
+  - `"message" type`
 
-##### [Create a Message Batch](api/beta/messages/batches/create.md)
+    Usage for a sampling iteration
 
-$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas, ?string userProfileID): [MessageBatch](api/beta/messages/batches.md)
+### Beta Message Param
 
-POST/v1/messages/batches
+- `BetaMessageParam`
 
-##### [Retrieve a Message Batch](api/beta/messages/batches/retrieve.md)
+  - `Content content`
 
-$client->beta->messages->batches->retrieve(string messageBatchID, ?list<AnthropicBeta> betas): [MessageBatch](api/beta/messages/batches.md)
+  - `Role role`
 
-GET/v1/messages/batches/{message\_batch\_id}
+  - `?ClearAt clearAt`
 
-##### [List Message Batches](api/beta/messages/batches/list.md)
+    How long this system message's text stays in front of the model. `"never"` (the default) renders it on every request that includes it. `"next_user_message"` renders it only for the user turn it follows: once a later `role: "user"` message exists in `messages` the message stays in the array (send it unchanged) but is no longer shown to the model. Only permitted on `role: "system"` messages.
 
-$client->beta->messages->batches->list(?string afterID, ?string beforeID, ?int limit, ?list<AnthropicBeta> betas): Page<[MessageBatch](api/beta/messages/batches.md)>
+  - `?BetaSystemMessageOutputConfig outputConfig`
 
-GET/v1/messages/batches
+    Per-message output configuration on a role:"system" input message.
 
-##### [Cancel a Message Batch](api/beta/messages/batches/cancel.md)
+    Fields here apply per-turn; `format` remains top-level only. An
+    empty `{}` is accepted on a message that carries content; a message
+    with neither content nor output_config fields is rejected.
 
-$client->beta->messages->batches->cancel(string messageBatchID, ?list<AnthropicBeta> betas): [MessageBatch](api/beta/messages/batches.md)
+### Beta Message Tokens Count
 
-POST/v1/messages/batches/{message\_batch\_id}/cancel
+- `BetaMessageTokensCount`
 
-##### [Delete a Message Batch](api/beta/messages/batches/delete.md)
+  - `?BetaCountTokensContextManagementResponse contextManagement`
 
-$client->beta->messages->batches->delete(string messageBatchID, ?list<AnthropicBeta> betas): [DeletedMessageBatch](api/beta/messages/batches.md)
+    Information about context management applied to the message.
 
-DELETE/v1/messages/batches/{message\_batch\_id}
+  - `int inputTokens`
 
-##### [Retrieve Message Batch results](api/beta/messages/batches/results.md)
+    The total number of tokens across the provided list of messages, system prompt, and tools.
 
-$client->beta->messages->batches->results(string messageBatchID, ?list<AnthropicBeta> betas): [MessageBatchIndividualResponse](api/beta/messages/batches.md)
+### Beta Metadata
 
-GET/v1/messages/batches/{message\_batch\_id}/results
+- `BetaMetadata`
+
+  - `?string userID`
+
+    An external identifier for the user who is associated with the request.
+
+    This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
+
+### Beta Output Config
+
+- `BetaOutputConfig`
+
+  - `?Effort effort`
+
+    All possible effort levels.
+
+  - `?BetaJSONOutputFormat format`
+
+    A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+  - `?BetaTokenTaskBudget taskBudget`
+
+    User-configurable total token budget across contexts.
+
+### Beta Output Tokens Details
+
+- `BetaOutputTokensDetails`
+
+  - `int thinkingTokens`
+
+    Number of output tokens the model generated as internal reasoning, including
+    the thinking-block delimiter tokens.
+
+    Reflects the raw reasoning the model produced, not the (possibly shorter)
+    summarized thinking text returned in the response body. Computed by
+    re-tokenizing the raw reasoning text, so it may differ from the model's exact
+    generation count by a small number of tokens. Always ≤ `output_tokens`;
+    `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+### Beta Plain Text Source
+
+- `BetaPlainTextSource`
+
+  - `string data`
+
+  - `"text/plain" mediaType`
+
+  - `"text" type`
+
+### Beta Raw Content Block Delta
+
+- `BetaRawContentBlockDelta`
+
+  - `BetaTextDelta`
+
+    - `string text`
+
+    - `"text_delta" type`
+
+  - `BetaInputJSONDelta`
+
+    - `string partialJSON`
+
+    - `"input_json_delta" type`
+
+  - `BetaCitationsDelta`
+
+    - `Citation citation`
+
+    - `"citations_delta" type`
+
+  - `BetaThinkingDelta`
+
+    - `?int estimatedTokens`
+
+      Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
+
+    - `string thinking`
+
+      The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
+
+    - `"thinking_delta" type`
+
+  - `BetaSignatureDelta`
+
+    - `string signature`
+
+      The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
+
+    - `"signature_delta" type`
+
+  - `BetaCompactionContentBlockDelta`
+
+    - `?string content`
+
+    - `?string encryptedContent`
+
+      Opaque metadata from prior compaction, to be round-tripped verbatim
+
+    - `"compaction_delta" type`
+
+### Beta Raw Content Block Delta Event
+
+- `BetaRawContentBlockDeltaEvent`
+
+  - `BetaRawContentBlockDelta delta`
+
+  - `int index`
+
+  - `"content_block_delta" type`
+
+### Beta Raw Content Block Start Event
+
+- `BetaRawContentBlockStartEvent`
+
+  - `ContentBlock contentBlock`
+
+    Response model for a file uploaded to the container.
+
+  - `int index`
+
+  - `"content_block_start" type`
+
+### Beta Raw Content Block Stop Event
+
+- `BetaRawContentBlockStopEvent`
+
+  - `int index`
+
+  - `"content_block_stop" type`
+
+### Beta Raw Message Delta Event
+
+- `BetaRawMessageDeltaEvent`
+
+  - `?BetaContextManagementResponse contextManagement`
+
+    Information about context management strategies applied during the request
+
+  - `Delta delta`
+
+  - `"message_delta" type`
+
+  - `BetaMessageDeltaUsage usage`
+
+    Billing and rate-limit usage.
+
+    Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+
+    Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+
+    For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+
+    Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+
+  - `?list<BetaThinkingDroppedInputTransformation> inputTransformations`
+
+    Changes the API made to the request's input before showing it to the model:
+    one entry per change, in request order. Today the only entry type is
+    `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
+    block from the request's `messages` that was removed from the prompt instead
+    of being shown to the model because it failed a binding check. More entry
+    types may be added over time; ignore types you do not recognize.
+
+    Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
+    every such response from a model that supports extended thinking, as `[]`
+    when nothing was changed; without the beta, blocks are removed all the same
+    but nothing is reported. Removed blocks contribute nothing to
+    `usage.input_tokens`. When streaming, the array is final in `message_start`;
+    the final `message_delta` event carries it only when a server-side model
+    fallback happened mid-stream, in which case it holds the serving model's
+    entries and replaces the one in `message_start`.
+
+### Beta Raw Message Start Event
+
+- `BetaRawMessageStartEvent`
+
+  - `BetaMessage message`
+
+  - `"message_start" type`
+
+### Beta Raw Message Stop Event
+
+- `BetaRawMessageStopEvent`
+
+  - `"message_stop" type`
+
+### Beta Raw Message Stream Event
+
+- `BetaRawMessageStreamEvent`
+
+  - `BetaRawMessageStartEvent`
+
+    - `BetaMessage message`
+
+    - `"message_start" type`
+
+  - `BetaRawMessageDeltaEvent`
+
+    - `?BetaContextManagementResponse contextManagement`
+
+      Information about context management strategies applied during the request
+
+    - `Delta delta`
+
+    - `"message_delta" type`
+
+    - `BetaMessageDeltaUsage usage`
+
+      Billing and rate-limit usage.
+
+      Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+
+      Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+
+      For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+
+      Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+
+    - `?list<BetaThinkingDroppedInputTransformation> inputTransformations`
+
+      Changes the API made to the request's input before showing it to the model:
+      one entry per change, in request order. Today the only entry type is
+      `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
+      block from the request's `messages` that was removed from the prompt instead
+      of being shown to the model because it failed a binding check. More entry
+      types may be added over time; ignore types you do not recognize.
+
+      Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
+      every such response from a model that supports extended thinking, as `[]`
+      when nothing was changed; without the beta, blocks are removed all the same
+      but nothing is reported. Removed blocks contribute nothing to
+      `usage.input_tokens`. When streaming, the array is final in `message_start`;
+      the final `message_delta` event carries it only when a server-side model
+      fallback happened mid-stream, in which case it holds the serving model's
+      entries and replaces the one in `message_start`.
+
+  - `BetaRawMessageStopEvent`
+
+    - `"message_stop" type`
+
+  - `BetaRawContentBlockStartEvent`
+
+    - `ContentBlock contentBlock`
+
+      Response model for a file uploaded to the container.
+
+    - `int index`
+
+    - `"content_block_start" type`
+
+  - `BetaRawContentBlockDeltaEvent`
+
+    - `BetaRawContentBlockDelta delta`
+
+    - `int index`
+
+    - `"content_block_delta" type`
+
+  - `BetaRawContentBlockStopEvent`
+
+    - `int index`
+
+    - `"content_block_stop" type`
+
+### Beta Redacted Thinking Block
+
+- `BetaRedactedThinkingBlock`
+
+  - `string data`
+
+    The contents of this redacted thinking block, returned when portions of the model's thinking were safety-redacted. This field is opaque and encrypted, with no readable content.
+
+    Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
+
+    See [extended thinking](build-with-claude/extended-thinking.md) for details.
+
+  - `"redacted_thinking" type`
+
+### Beta Redacted Thinking Block Param
+
+- `BetaRedactedThinkingBlockParam`
+
+  - `string data`
+
+    The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
+
+  - `"redacted_thinking" type`
+
+### Beta Refusal Stop Details
+
+- `BetaRefusalStopDetails`
+
+  - `?Category category`
+
+    The policy category that triggered a refusal.
+
+  - `?string explanation`
+
+    Human-readable explanation of the refusal.
+
+    This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+  - `?string fallbackCreditToken`
+
+    Opaque code that refunds the cache-miss cost when retrying this refused
+    request on the fallback model. Pass it as `fallback_credit_token` on the
+    retry request. Expires 5 minutes after the refusal.
+
+    The retry is sent either with the same request body (`system`, `messages`,
+    `tools`, and other render-shaping fields), or with the same body plus one
+    appended `assistant` message whose content is the partial text (with any
+    trailing whitespace stripped from the final text block) and paired
+    server-tool blocks from this refusal — which also authorizes that
+    appended turn as an assistant-prefill continuation on models that otherwise
+    disallow prefill. A token minted mid-server-tool-loop whose partial content
+    was continuable may only be redeemed the second way — if a same-body retry
+    is rejected with a 400 saying the token must be redeemed by continuing the
+    partial response, retry the second way instead. Either way: same workspace,
+    same platform; a mismatch is a 400. Resending a token for an already-warm
+    prefix is permitted but yields no additional credit.
+
+    `null` when the refused model isn't eligible for a fallback credit.
+
+  - `?bool fallbackHasPrefillClaim`
+
+    Whether the accompanying `fallback_credit_token` may be redeemed with the
+    appended-assistant retry form. Only set when `fallback_credit_token` is
+    present.
+
+    `true`: retry by resending the same request body plus one appended
+    `assistant` message whose content is this response's `content` with any
+    trailing whitespace stripped from the final text block and unpaired
+    `tool_use` blocks omitted (the same appended-turn shape described on
+    `fallback_credit_token`), with the token attached. `false`: retry by
+    resending the original request body unchanged, with the token attached —
+    the appended-assistant form is not available for this refusal (no
+    continuable partial content, or the request uses `output_format` or a
+    `tool_choice` that forces tool use). One exception: when the request used
+    `output_format` or a forced `tool_choice` and the refusal arrived after
+    server tools (including MCP connector tools) had already executed, the
+    token may not be redeemable by either retry form; if the exact-body retry
+    is then rejected with a 400 saying the token must be redeemed by
+    continuing the partial response, discard the token and retry without it.
+
+    Advisory: if an appended-assistant retry is rejected with a 400 despite
+    `true`, fall back to resending the original request body with the token.
+
+  - `?string recommendedModel`
+
+    The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
+
+  - `"refusal" type`
+
+### Beta Request Document Block
+
+- `BetaRequestDocumentBlock`
+
+  - `Source source`
+
+  - `"document" type`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?BetaCitationsConfigParam citations`
+
+  - `?string context`
+
+  - `?string title`
+
+### Beta Request MCP Server Tool Configuration
+
+- `BetaRequestMCPServerToolConfiguration`
+
+  - `?list<string> allowedTools`
+
+  - `?bool enabled`
+
+### Beta Request MCP Server URL Definition
+
+- `BetaRequestMCPServerURLDefinition`
+
+  - `string name`
+
+  - `"url" type`
+
+  - `string url`
+
+  - `?string authorizationToken`
+
+  - `?BetaRequestMCPServerToolConfiguration toolConfiguration`
+
+### Beta Request MCP Tool Result Block Param
+
+- `BetaRequestMCPToolResultBlockParam`
+
+  - `string toolUseID`
+
+  - `"mcp_tool_result" type`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?Content content`
+
+  - `?bool isError`
+
+### Beta Request Tool Addition Block
+
+- `BetaRequestToolAdditionBlock`
+
+  - `Tool tool`
+
+    Reference to a single tool the caller declared directly in
+    `tools[]`. Does not accept the composed `{server}_{name}` form the
+    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+    `mcp_toolset_reference` for those.
+
+  - `"tool_addition" type`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+### Beta Request Tool Removal Block
+
+- `BetaRequestToolRemovalBlock`
+
+  - `Tool tool`
+
+    Reference to a single tool the caller declared directly in
+    `tools[]`. Does not accept the composed `{server}_{name}` form the
+    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+    `mcp_toolset_reference` for those.
+
+  - `"tool_removal" type`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+### Beta Search Result Block Param
+
+- `BetaSearchResultBlockParam`
+
+  - `list<BetaTextBlockParam> content`
+
+  - `string source`
+
+  - `string title`
+
+  - `"search_result" type`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?BetaCitationsConfigParam citations`
+
+### Beta Server Tool Caller
+
+- `BetaServerToolCaller`
+
+  - `string toolID`
+
+  - `"code_execution_20250825" type`
+
+### Beta Server Tool Caller 20260120
+
+- `BetaServerToolCaller20260120`
+
+  - `string toolID`
+
+  - `"code_execution_20260120" type`
+
+### Beta Server Tool Usage
+
+- `BetaServerToolUsage`
+
+  - `int webFetchRequests`
+
+    The number of web fetch tool requests.
+
+  - `int webSearchRequests`
+
+    The number of web search tool requests.
+
+### Beta Server Tool Use Block
+
+- `BetaServerToolUseBlock`
+
+  - `string id`
+
+  - `array<string,mixed> input`
+
+  - `Name name`
+
+  - `"server_tool_use" type`
+
+  - `?Caller caller`
+
+    Tool invocation directly from the model.
+
+### Beta Server Tool Use Block Param
+
+- `BetaServerToolUseBlockParam`
+
+  - `string id`
+
+  - `array<string,mixed> input`
+
+  - `Name name`
+
+  - `"server_tool_use" type`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?Caller caller`
+
+    Tool invocation directly from the model.
+
+### Beta Signature Delta
+
+- `BetaSignatureDelta`
+
+  - `string signature`
+
+    The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
+
+  - `"signature_delta" type`
+
+### Beta Skill Params
+
+- `BetaSkillParams`
+
+  - `string skillID`
+
+    Skill ID
+
+  - `Type type`
+
+    Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+
+  - `?string version`
+
+    Skill version or 'latest' for most recent version
+
+### Beta Stop Reason
+
+- `BetaStopReason`
+
+  - `"end_turn"`
+
+  - `"max_tokens"`
+
+  - `"stop_sequence"`
+
+  - `"tool_use"`
+
+  - `"pause_turn"`
+
+  - `"compaction"`
+
+  - `"refusal"`
+
+  - `"model_context_window_exceeded"`
+
+### Beta System Message Output Config
+
+- `BetaSystemMessageOutputConfig`
+
+  - `?Effort effort`
+
+    All possible effort levels.
+
+### Beta Text Block
+
+- `BetaTextBlock`
+
+  - `?list<BetaTextCitation> citations`
+
+    Citations supporting the text block.
+
+    The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+
+  - `string text`
+
+  - `"text" type`
+
+### Beta Text Block Param
+
+- `BetaTextBlockParam`
+
+  - `string text`
+
+  - `"text" type`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?list<BetaTextCitationParam> citations`
+
+### Beta Text Citation
+
+- `BetaTextCitation`
+
+  - `BetaCitationCharLocation`
+
+    - `string citedText`
+
+    - `int documentIndex`
+
+    - `?string documentTitle`
+
+    - `int endCharIndex`
+
+    - `?string fileID`
+
+    - `int startCharIndex`
+
+    - `"char_location" type`
+
+  - `BetaCitationPageLocation`
+
+    - `string citedText`
+
+    - `int documentIndex`
+
+    - `?string documentTitle`
+
+    - `int endPageNumber`
+
+    - `?string fileID`
+
+    - `int startPageNumber`
+
+    - `"page_location" type`
+
+  - `BetaCitationContentBlockLocation`
+
+    - `string citedText`
+
+      The full text of the cited block range, concatenated.
+
+      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+    - `int documentIndex`
+
+    - `?string documentTitle`
+
+    - `int endBlockIndex`
+
+      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+    - `?string fileID`
+
+    - `int startBlockIndex`
+
+      0-based index of the first cited block in the source's `content` array.
+
+    - `"content_block_location" type`
+
+  - `BetaCitationsWebSearchResultLocation`
+
+    - `string citedText`
+
+    - `string encryptedIndex`
+
+    - `?string title`
+
+    - `"web_search_result_location" type`
+
+    - `string url`
+
+  - `BetaCitationSearchResultLocation`
+
+    - `string citedText`
+
+      The full text of the cited block range, concatenated.
+
+      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+    - `int endBlockIndex`
+
+      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+    - `int searchResultIndex`
+
+      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+      Counted separately from `document_index`; server-side web search results are not included in this count.
+
+    - `string source`
+
+    - `int startBlockIndex`
+
+      0-based index of the first cited block in the source's `content` array.
+
+    - `?string title`
+
+    - `"search_result_location" type`
+
+### Beta Text Citation Param
+
+- `BetaTextCitationParam`
+
+  - `BetaCitationCharLocationParam`
+
+    - `string citedText`
+
+    - `int documentIndex`
+
+    - `?string documentTitle`
+
+    - `int endCharIndex`
+
+    - `int startCharIndex`
+
+    - `"char_location" type`
+
+  - `BetaCitationPageLocationParam`
+
+    - `string citedText`
+
+    - `int documentIndex`
+
+    - `?string documentTitle`
+
+    - `int endPageNumber`
+
+    - `int startPageNumber`
+
+    - `"page_location" type`
+
+  - `BetaCitationContentBlockLocationParam`
+
+    - `string citedText`
+
+      The full text of the cited block range, concatenated.
+
+      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+    - `int documentIndex`
+
+    - `?string documentTitle`
+
+    - `int endBlockIndex`
+
+      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+    - `int startBlockIndex`
+
+      0-based index of the first cited block in the source's `content` array.
+
+    - `"content_block_location" type`
+
+  - `BetaCitationWebSearchResultLocationParam`
+
+    - `string citedText`
+
+    - `string encryptedIndex`
+
+    - `?string title`
+
+    - `"web_search_result_location" type`
+
+    - `string url`
+
+  - `BetaCitationSearchResultLocationParam`
+
+    - `string citedText`
+
+      The full text of the cited block range, concatenated.
+
+      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+    - `int endBlockIndex`
+
+      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+    - `int searchResultIndex`
+
+      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+      Counted separately from `document_index`; server-side web search results are not included in this count.
+
+    - `string source`
+
+    - `int startBlockIndex`
+
+      0-based index of the first cited block in the source's `content` array.
+
+    - `?string title`
+
+    - `"search_result_location" type`
+
+### Beta Text Delta
+
+- `BetaTextDelta`
+
+  - `string text`
+
+  - `"text_delta" type`
+
+### Beta Text Editor Code Execution Create Result Block
+
+- `BetaTextEditorCodeExecutionCreateResultBlock`
+
+  - `bool isFileUpdate`
+
+  - `"text_editor_code_execution_create_result" type`
+
+### Beta Text Editor Code Execution Create Result Block Param
+
+- `BetaTextEditorCodeExecutionCreateResultBlockParam`
+
+  - `bool isFileUpdate`
+
+  - `"text_editor_code_execution_create_result" type`
+
+### Beta Text Editor Code Execution Str Replace Result Block
+
+- `BetaTextEditorCodeExecutionStrReplaceResultBlock`
+
+  - `?list<string> lines`
+
+  - `?int newLines`
+
+  - `?int newStart`
+
+  - `?int oldLines`
+
+  - `?int oldStart`
+
+  - `"text_editor_code_execution_str_replace_result" type`
+
+### Beta Text Editor Code Execution Str Replace Result Block Param
+
+- `BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
+
+  - `"text_editor_code_execution_str_replace_result" type`
+
+  - `?list<string> lines`
+
+  - `?int newLines`
+
+  - `?int newStart`
+
+  - `?int oldLines`
+
+  - `?int oldStart`
+
+### Beta Text Editor Code Execution Tool Result Block
+
+- `BetaTextEditorCodeExecutionToolResultBlock`
+
+  - `Content content`
+
+  - `string toolUseID`
+
+  - `"text_editor_code_execution_tool_result" type`
+
+### Beta Text Editor Code Execution Tool Result Block Param
+
+- `BetaTextEditorCodeExecutionToolResultBlockParam`
+
+  - `Content content`
+
+  - `string toolUseID`
+
+  - `"text_editor_code_execution_tool_result" type`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+### Beta Text Editor Code Execution Tool Result Error
+
+- `BetaTextEditorCodeExecutionToolResultError`
+
+  - `ErrorCode errorCode`
+
+  - `?string errorMessage`
+
+  - `"text_editor_code_execution_tool_result_error" type`
+
+### Beta Text Editor Code Execution Tool Result Error Param
+
+- `BetaTextEditorCodeExecutionToolResultErrorParam`
+
+  - `ErrorCode errorCode`
+
+  - `"text_editor_code_execution_tool_result_error" type`
+
+  - `?string errorMessage`
+
+### Beta Text Editor Code Execution View Result Block
+
+- `BetaTextEditorCodeExecutionViewResultBlock`
+
+  - `string content`
+
+  - `FileType fileType`
+
+  - `?int numLines`
+
+  - `?int startLine`
+
+  - `?int totalLines`
+
+  - `"text_editor_code_execution_view_result" type`
+
+### Beta Text Editor Code Execution View Result Block Param
+
+- `BetaTextEditorCodeExecutionViewResultBlockParam`
+
+  - `string content`
+
+  - `FileType fileType`
+
+  - `"text_editor_code_execution_view_result" type`
+
+  - `?int numLines`
+
+  - `?int startLine`
+
+  - `?int totalLines`
+
+### Beta Thinking Block
+
+- `BetaThinkingBlock`
+
+  - `string signature`
+
+    A value used to verify that this thinking block was generated by Claude when it is passed back to the API.
+
+    This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
+
+    See [extended thinking](build-with-claude/extended-thinking.md) for details.
+
+  - `string thinking`
+
+    The text of Claude's thinking process for this block.
+
+  - `"thinking" type`
+
+### Beta Thinking Block Binding
+
+- `BetaThinkingBlockBinding`
+
+  - `?BetaThinkingPrefixMismatchBehavior prefixMismatchBehavior`
+
+    What happens when a thinking block in `messages` fails the conversation
+    check: it was created in a different conversation, or the messages before
+    it have changed since. `"error"` (the default) fails the request with a
+    400 error. `"drop_block"` removes the failing blocks and the request
+    proceeds; the model no longer sees the dropped reasoning.
+
+### Beta Thinking Block Param
+
+- `BetaThinkingBlockParam`
+
+  - `string signature`
+
+    The `signature` value of this thinking block, exactly as returned by the API in a previous response. Used to verify that the block was generated by Claude.
+
+    Thinking blocks must be passed back unmodified and in their original order; a modified block results in a 400 `invalid_request_error`.
+
+  - `string thinking`
+
+    The `thinking` text of this block as returned by the API.
+
+  - `"thinking" type`
+
+### Beta Thinking Config Adaptive
+
+- `BetaThinkingConfigAdaptive`
+
+  - `"adaptive" type`
+
+  - `?BetaThinkingBlockBinding blockBinding`
+
+    Controls for block binding: what happens when a thinking block this
+    request sends back fails the conversation check. Every field is optional;
+    an empty object means every default.
+
+  - `?Display display`
+
+    Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+### Beta Thinking Config Disabled
+
+- `BetaThinkingConfigDisabled`
+
+  - `"disabled" type`
+
+### Beta Thinking Config Enabled
+
+- `BetaThinkingConfigEnabled`
+
+  - `int budgetTokens`
+
+    Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+
+    Must be ≥1024 and less than `max_tokens`.
+
+    See [extended thinking](build-with-claude/extended-thinking.md) for details.
+
+  - `"enabled" type`
+
+  - `?BetaThinkingBlockBinding blockBinding`
+
+    Controls for block binding: what happens when a thinking block this
+    request sends back fails the conversation check. Every field is optional;
+    an empty object means every default.
+
+  - `?Display display`
+
+    Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+### Beta Thinking Config Param
+
+- `BetaThinkingConfigParam`
+
+  - `BetaThinkingConfigEnabled`
+
+    - `int budgetTokens`
+
+      Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+
+      Must be ≥1024 and less than `max_tokens`.
+
+      See [extended thinking](build-with-claude/extended-thinking.md) for details.
+
+    - `"enabled" type`
+
+    - `?BetaThinkingBlockBinding blockBinding`
+
+      Controls for block binding: what happens when a thinking block this
+      request sends back fails the conversation check. Every field is optional;
+      an empty object means every default.
+
+    - `?Display display`
+
+      Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+  - `BetaThinkingConfigDisabled`
+
+    - `"disabled" type`
+
+  - `BetaThinkingConfigAdaptive`
+
+    - `"adaptive" type`
+
+    - `?BetaThinkingBlockBinding blockBinding`
+
+      Controls for block binding: what happens when a thinking block this
+      request sends back fails the conversation check. Every field is optional;
+      an empty object means every default.
+
+    - `?Display display`
+
+      Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+### Beta Thinking Delta
+
+- `BetaThinkingDelta`
+
+  - `?int estimatedTokens`
+
+    Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
+
+  - `string thinking`
+
+    The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
+
+  - `"thinking_delta" type`
+
+### Beta Thinking Dropped Input Transformation
+
+- `BetaThinkingDroppedInputTransformation`
+
+  - `string path`
+
+    Where the removed block was in your request, as `messages.{i}.content.{j}`:
+    `i` indexes the `messages` array you sent and `j` that message's `content`
+    array — the same form error messages use.
+
+  - `Reason reason`
+
+    Which binding check removed the block: `model_binding_mismatch` — it was
+    created by a model whose reasoning the requested model may not read;
+    `prefix_binding_mismatch` — the conversation before it differs from the
+    conversation it was created in (the rest of that turn's consecutive thinking
+    blocks are removed with it, each with this reason);
+    `organization_binding_mismatch` — it was created under a different
+    organization (an Anthropic organization, AWS account or Google Cloud project)
+    and this organization is not one of its additional organizations;
+    `end_user_binding_mismatch` — it was created for a different end user, or
+    was removed by the consumer-organization binding. A block that would fail
+    several checks reports one reason, in this order of precedence:
+    `organization_binding_mismatch`, `end_user_binding_mismatch`,
+    `model_binding_mismatch`, `prefix_binding_mismatch`.
+
+  - `"thinking_dropped" type`
+
+    Always `thinking_dropped` for this entry type.
+
+### Beta Thinking Prefix Mismatch Behavior
+
+- `BetaThinkingPrefixMismatchBehavior`
+
+  - `"error"`
+
+  - `"drop_block"`
+
+### Beta Thinking Turns
+
+- `BetaThinkingTurns`
+
+  - `"thinking_turns" type`
+
+  - `int value`
+
+### Beta Token Task Budget
+
+- `BetaTokenTaskBudget`
+
+  - `int total`
+
+    Total token budget across all contexts in the session.
+
+  - `"tokens" type`
+
+    The budget type. Currently only 'tokens' is supported.
+
+  - `?int remaining`
+
+    Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+### Beta Tool
+
+- `BetaTool`
+
+  - `InputSchema inputSchema`
+
+    [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
+
+    This defines the shape of the `input` that your tool accepts and that the model will produce.
+
+  - `string name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?string description`
+
+    Description of what this tool does.
+
+    Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+  - `?bool eagerInputStreaming`
+
+    Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+
+  - `?list<array<string,mixed>> inputExamples`
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+  - `?Type type`
+
+### Beta Tool Bash 20241022
+
+- `BetaToolBash20241022`
+
+  - `"bash" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"bash_20241022" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?list<array<string,mixed>> inputExamples`
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Beta Tool Bash 20250124
+
+- `BetaToolBash20250124`
+
+  - `"bash" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"bash_20250124" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?list<array<string,mixed>> inputExamples`
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Beta Tool Change MCP Tool Reference
+
+- `BetaToolChangeMCPToolReference`
+
+  - `string name`
+
+  - `string serverName`
+
+  - `"mcp_tool_reference" type`
+
+### Beta Tool Change MCP Toolset Reference
+
+- `BetaToolChangeMCPToolsetReference`
+
+  - `string serverName`
+
+  - `"mcp_toolset_reference" type`
+
+### Beta Tool Change Tool Reference
+
+- `BetaToolChangeToolReference`
+
+  - `string name`
+
+  - `"tool_reference" type`
+
+### Beta Tool Choice
+
+- `BetaToolChoice`
+
+  - `BetaToolChoiceAuto`
+
+    - `"auto" type`
+
+    - `?bool disableParallelToolUse`
+
+      Whether to disable parallel tool use.
+
+      Defaults to `false`. If set to `true`, the model will output at most one tool use.
+
+  - `BetaToolChoiceAny`
+
+    - `"any" type`
+
+    - `?bool disableParallelToolUse`
+
+      Whether to disable parallel tool use.
+
+      Defaults to `false`. If set to `true`, the model will output exactly one tool use.
+
+  - `BetaToolChoiceTool`
+
+    - `string name`
+
+      The name of the tool to use.
+
+    - `"tool" type`
+
+    - `?bool disableParallelToolUse`
+
+      Whether to disable parallel tool use.
+
+      Defaults to `false`. If set to `true`, the model will output exactly one tool use.
+
+  - `BetaToolChoiceNone`
+
+    - `"none" type`
+
+### Beta Tool Choice Any
+
+- `BetaToolChoiceAny`
+
+  - `"any" type`
+
+  - `?bool disableParallelToolUse`
+
+    Whether to disable parallel tool use.
+
+    Defaults to `false`. If set to `true`, the model will output exactly one tool use.
+
+### Beta Tool Choice Auto
+
+- `BetaToolChoiceAuto`
+
+  - `"auto" type`
+
+  - `?bool disableParallelToolUse`
+
+    Whether to disable parallel tool use.
+
+    Defaults to `false`. If set to `true`, the model will output at most one tool use.
+
+### Beta Tool Choice None
+
+- `BetaToolChoiceNone`
+
+  - `"none" type`
+
+### Beta Tool Choice Tool
+
+- `BetaToolChoiceTool`
+
+  - `string name`
+
+    The name of the tool to use.
+
+  - `"tool" type`
+
+  - `?bool disableParallelToolUse`
+
+    Whether to disable parallel tool use.
+
+    Defaults to `false`. If set to `true`, the model will output exactly one tool use.
+
+### Beta Tool Computer Use 20241022
+
+- `BetaToolComputerUse20241022`
+
+  - `int displayHeightPx`
+
+    The height of the display in pixels.
+
+  - `int displayWidthPx`
+
+    The width of the display in pixels.
+
+  - `"computer" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"computer_20241022" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?int displayNumber`
+
+    The X11 display number (e.g. 0, 1) for the display.
+
+  - `?list<array<string,mixed>> inputExamples`
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Beta Tool Computer Use 20250124
+
+- `BetaToolComputerUse20250124`
+
+  - `int displayHeightPx`
+
+    The height of the display in pixels.
+
+  - `int displayWidthPx`
+
+    The width of the display in pixels.
+
+  - `"computer" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"computer_20250124" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?int displayNumber`
+
+    The X11 display number (e.g. 0, 1) for the display.
+
+  - `?list<array<string,mixed>> inputExamples`
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Beta Tool Computer Use 20251124
+
+- `BetaToolComputerUse20251124`
+
+  - `int displayHeightPx`
+
+    The height of the display in pixels.
+
+  - `int displayWidthPx`
+
+    The width of the display in pixels.
+
+  - `"computer" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"computer_20251124" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?int displayNumber`
+
+    The X11 display number (e.g. 0, 1) for the display.
+
+  - `?bool enableZoom`
+
+    Whether to enable an action to take a zoomed-in screenshot of the screen.
+
+  - `?list<array<string,mixed>> inputExamples`
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Beta Tool Reference Block
+
+- `BetaToolReferenceBlock`
+
+  - `string toolName`
+
+  - `"tool_reference" type`
+
+### Beta Tool Reference Block Param
+
+- `BetaToolReferenceBlockParam`
+
+  - `string toolName`
+
+  - `"tool_reference" type`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+### Beta Tool Result Block Param
+
+- `BetaToolResultBlockParam`
+
+  - `string toolUseID`
+
+  - `"tool_result" type`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?Content content`
+
+  - `?bool isError`
+
+  - `?string toolsetName`
+
+    For a toolset member tool_result, the toolset family of the paired tool_use.
+
+### Beta Tool Search Tool Bm25 20251119
+
+- `BetaToolSearchToolBm25_20251119`
+
+  - `"tool_search_tool_bm25" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `Type type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Beta Tool Search Tool Regex 20251119
+
+- `BetaToolSearchToolRegex20251119`
+
+  - `"tool_search_tool_regex" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `Type type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Beta Tool Search Tool Result Block
+
+- `BetaToolSearchToolResultBlock`
+
+  - `Content content`
+
+  - `string toolUseID`
+
+  - `"tool_search_tool_result" type`
+
+### Beta Tool Search Tool Result Block Param
+
+- `BetaToolSearchToolResultBlockParam`
+
+  - `Content content`
+
+  - `string toolUseID`
+
+  - `"tool_search_tool_result" type`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+### Beta Tool Search Tool Result Error
+
+- `BetaToolSearchToolResultError`
+
+  - `ErrorCode errorCode`
+
+  - `?string errorMessage`
+
+  - `"tool_search_tool_result_error" type`
+
+### Beta Tool Search Tool Result Error Param
+
+- `BetaToolSearchToolResultErrorParam`
+
+  - `ErrorCode errorCode`
+
+  - `"tool_search_tool_result_error" type`
+
+  - `?string errorMessage`
+
+### Beta Tool Search Tool Search Result Block
+
+- `BetaToolSearchToolSearchResultBlock`
+
+  - `list<BetaToolReferenceBlock> toolReferences`
+
+  - `"tool_search_tool_search_result" type`
+
+### Beta Tool Search Tool Search Result Block Param
+
+- `BetaToolSearchToolSearchResultBlockParam`
+
+  - `list<BetaToolReferenceBlockParam> toolReferences`
+
+  - `"tool_search_tool_search_result" type`
+
+### Beta Tool Text Editor 20241022
+
+- `BetaToolTextEditor20241022`
+
+  - `"str_replace_editor" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"text_editor_20241022" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?list<array<string,mixed>> inputExamples`
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Beta Tool Text Editor 20250124
+
+- `BetaToolTextEditor20250124`
+
+  - `"str_replace_editor" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"text_editor_20250124" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?list<array<string,mixed>> inputExamples`
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Beta Tool Text Editor 20250429
+
+- `BetaToolTextEditor20250429`
+
+  - `"str_replace_based_edit_tool" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"text_editor_20250429" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?list<array<string,mixed>> inputExamples`
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Beta Tool Text Editor 20250728
+
+- `BetaToolTextEditor20250728`
+
+  - `"str_replace_based_edit_tool" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"text_editor_20250728" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?list<array<string,mixed>> inputExamples`
+
+  - `?int maxCharacters`
+
+    Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Beta Tool Union
+
+- `BetaToolUnion`
+
+  - `BetaTool`
+
+    - `InputSchema inputSchema`
+
+      [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
+
+      This defines the shape of the `input` that your tool accepts and that the model will produce.
+
+    - `string name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?string description`
+
+      Description of what this tool does.
+
+      Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+
+    - `?bool eagerInputStreaming`
+
+      Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+
+    - `?list<array<string,mixed>> inputExamples`
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+    - `?Type type`
+
+  - `BetaToolBash20241022`
+
+    - `"bash" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"bash_20241022" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?list<array<string,mixed>> inputExamples`
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaToolBash20250124`
+
+    - `"bash" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"bash_20250124" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?list<array<string,mixed>> inputExamples`
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaCodeExecutionTool20250522`
+
+    - `"code_execution" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"code_execution_20250522" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaCodeExecutionTool20250825`
+
+    - `"code_execution" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"code_execution_20250825" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaCodeExecutionTool20260120`
+
+    - `"code_execution" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"code_execution_20260120" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaCodeExecutionTool20260521`
+
+    - `"code_execution" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"code_execution_20260521" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaBrowserToolset20260801`
+
+    - `"browser_toolset_20260801" type`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?BetaBrowserToolsetConfigs configs`
+
+      Per-member configuration for `browser_toolset_20260801`: one
+      optional field per member tool, keyed by the member name — the same
+      name the member's `tool_use` blocks carry. Every member is an
+      accepted key, and a member's defaults apply wherever its key is
+      absent. Unknown keys are rejected: the field set is this toolset
+      version's complete member set.
+
+  - `BetaToolComputerUse20241022`
+
+    - `int displayHeightPx`
+
+      The height of the display in pixels.
+
+    - `int displayWidthPx`
+
+      The width of the display in pixels.
+
+    - `"computer" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"computer_20241022" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?int displayNumber`
+
+      The X11 display number (e.g. 0, 1) for the display.
+
+    - `?list<array<string,mixed>> inputExamples`
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaMemoryTool20250818`
+
+    - `"memory" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"memory_20250818" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?list<array<string,mixed>> inputExamples`
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaToolComputerUse20250124`
+
+    - `int displayHeightPx`
+
+      The height of the display in pixels.
+
+    - `int displayWidthPx`
+
+      The width of the display in pixels.
+
+    - `"computer" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"computer_20250124" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?int displayNumber`
+
+      The X11 display number (e.g. 0, 1) for the display.
+
+    - `?list<array<string,mixed>> inputExamples`
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaToolTextEditor20241022`
+
+    - `"str_replace_editor" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"text_editor_20241022" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?list<array<string,mixed>> inputExamples`
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaToolComputerUse20251124`
+
+    - `int displayHeightPx`
+
+      The height of the display in pixels.
+
+    - `int displayWidthPx`
+
+      The width of the display in pixels.
+
+    - `"computer" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"computer_20251124" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?int displayNumber`
+
+      The X11 display number (e.g. 0, 1) for the display.
+
+    - `?bool enableZoom`
+
+      Whether to enable an action to take a zoomed-in screenshot of the screen.
+
+    - `?list<array<string,mixed>> inputExamples`
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaComputerToolset20260801`
+
+    - `"computer_toolset_20260801" type`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?BetaComputerToolsetConfigs configs`
+
+      Per-member configuration for `computer_toolset_20260801`: one
+      optional field per member tool, keyed by the member name — the same
+      name the member's `tool_use` blocks carry. Every member is an
+      accepted key, and a member's defaults apply wherever its key is
+      absent. Unknown keys are rejected: the field set is this toolset
+      version's complete member set.
+
+  - `BetaToolTextEditor20250124`
+
+    - `"str_replace_editor" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"text_editor_20250124" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?list<array<string,mixed>> inputExamples`
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaToolTextEditor20250429`
+
+    - `"str_replace_based_edit_tool" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"text_editor_20250429" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?list<array<string,mixed>> inputExamples`
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaToolTextEditor20250728`
+
+    - `"str_replace_based_edit_tool" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"text_editor_20250728" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?list<array<string,mixed>> inputExamples`
+
+    - `?int maxCharacters`
+
+      Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaWebSearchTool20250305`
+
+    - `"web_search" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"web_search_20250305" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?list<string> allowedDomains`
+
+      If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+    - `?list<string> blockedDomains`
+
+      If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?int maxUses`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+    - `?BetaUserLocation userLocation`
+
+      Parameters for the user's location. Used to provide more relevant search results.
+
+  - `BetaWebFetchTool20250910`
+
+    - `"web_fetch" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"web_fetch_20250910" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?list<string> allowedDomains`
+
+      List of domains to allow fetching from
+
+    - `?list<string> blockedDomains`
+
+      List of domains to block fetching from
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?BetaCitationsConfigParam citations`
+
+      Citations configuration for fetched documents. Citations are disabled by default.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?int maxContentTokens`
+
+      Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+    - `?int maxUses`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaWebSearchTool20260209`
+
+    - `"web_search" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"web_search_20260209" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?list<string> allowedDomains`
+
+      If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+    - `?list<string> blockedDomains`
+
+      If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?int maxUses`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+    - `?BetaUserLocation userLocation`
+
+      Parameters for the user's location. Used to provide more relevant search results.
+
+  - `BetaWebFetchTool20260209`
+
+    - `"web_fetch" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"web_fetch_20260209" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?list<string> allowedDomains`
+
+      List of domains to allow fetching from
+
+    - `?list<string> blockedDomains`
+
+      List of domains to block fetching from
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?BetaCitationsConfigParam citations`
+
+      Citations configuration for fetched documents. Citations are disabled by default.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?int maxContentTokens`
+
+      Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+    - `?int maxUses`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaWebFetchTool20260309`
+
+    - `"web_fetch" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"web_fetch_20260309" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?list<string> allowedDomains`
+
+      List of domains to allow fetching from
+
+    - `?list<string> blockedDomains`
+
+      List of domains to block fetching from
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?BetaCitationsConfigParam citations`
+
+      Citations configuration for fetched documents. Citations are disabled by default.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?int maxContentTokens`
+
+      Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+    - `?int maxUses`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+    - `?bool useCache`
+
+      Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
+  - `BetaWebSearchTool20260318`
+
+    - `"web_search" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"web_search_20260318" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?list<string> allowedDomains`
+
+      If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+    - `?list<string> blockedDomains`
+
+      If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?int maxUses`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `?ResponseInclusion responseInclusion`
+
+      How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+    - `?BetaUserLocation userLocation`
+
+      Parameters for the user's location. Used to provide more relevant search results.
+
+  - `BetaWebFetchTool20260318`
+
+    - `"web_fetch" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"web_fetch_20260318" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?list<string> allowedDomains`
+
+      List of domains to allow fetching from
+
+    - `?list<string> blockedDomains`
+
+      List of domains to block fetching from
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?BetaCitationsConfigParam citations`
+
+      Citations configuration for fetched documents. Citations are disabled by default.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?int maxContentTokens`
+
+      Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+    - `?int maxUses`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `?ResponseInclusion responseInclusion`
+
+      How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+    - `?bool useCache`
+
+      Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
+  - `BetaAdvisorTool20260301`
+
+    - `Model model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"advisor" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `"advisor_20260301" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?BetaCacheControlEphemeral caching`
+
+      Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?int maxTokens`
+
+      Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+
+    - `?int maxUses`
+
+      Maximum number of times the tool can be used in the API request.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaToolSearchToolBm25_20251119`
+
+    - `"tool_search_tool_bm25" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `Type type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaToolSearchToolRegex20251119`
+
+    - `"tool_search_tool_regex" name`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
+
+    - `Type type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?bool deferLoading`
+
+      If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `?bool strict`
+
+      When true, guarantees schema validation on tool names and inputs
+
+  - `BetaMCPToolset`
+
+    - `string mcpServerName`
+
+      Name of the MCP server to configure tools for
+
+    - `"mcp_toolset" type`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?array<string,BetaMCPToolConfig> configs`
+
+      Configuration overrides for specific tools, keyed by tool name
+
+    - `?BetaMCPToolDefaultConfig defaultConfig`
+
+      Default configuration applied to all tools from this server
+
+### Beta Tool Use Block
+
+- `BetaToolUseBlock`
+
+  - `string id`
+
+  - `array<string,mixed> input`
+
+  - `string name`
+
+  - `"tool_use" type`
+
+  - `?Caller caller`
+
+    Tool invocation directly from the model.
+
+  - `?string toolsetName`
+
+    For a toolset member tool_use, the toolset family.
+
+### Beta Tool Use Block Param
+
+- `BetaToolUseBlockParam`
+
+  - `string id`
+
+  - `array<string,mixed> input`
+
+  - `string name`
+
+  - `"tool_use" type`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?Caller caller`
+
+    Tool invocation directly from the model.
+
+  - `?string toolsetName`
+
+    For a toolset member tool_use, the toolset family this member belongs to.
+
+### Beta Tool Uses Keep
+
+- `BetaToolUsesKeep`
+
+  - `"tool_uses" type`
+
+  - `int value`
+
+### Beta Tool Uses Trigger
+
+- `BetaToolUsesTrigger`
+
+  - `"tool_uses" type`
+
+  - `int value`
+
+### Beta URL Image Source
+
+- `BetaURLImageSource`
+
+  - `"url" type`
+
+  - `string url`
+
+### Beta URL PDF Source
+
+- `BetaURLPDFSource`
+
+  - `"url" type`
+
+  - `string url`
+
+### Beta Usage
+
+- `BetaUsage`
+
+  - `?BetaCacheCreation cacheCreation`
+
+    Breakdown of cached tokens by TTL
+
+  - `?int cacheCreationInputTokens`
+
+    The number of input tokens used to create the cache entry.
+
+  - `?int cacheReadInputTokens`
+
+    The number of input tokens read from the cache.
+
+  - `?BetaFallbackCreditUsage fallbackCredit`
+
+    Outcome of the `fallback_credit_token` presented on this request.
+
+  - `?string inferenceGeo`
+
+    The geographic region where inference was performed for this request.
+
+  - `int inputTokens`
+
+    The number of input tokens which were used.
+
+  - `?list<BetaIterationsUsageItem> iterations`
+
+    Per-iteration token usage breakdown.
+
+    Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
+
+    - Determine which iterations exceeded long context thresholds (>=200k tokens)
+    - Calculate the context window size from the last `message` entry
+    - Understand token accumulation across server-side tool use loops
+
+    A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
+
+  - `int outputTokens`
+
+    The number of output tokens which were used.
+
+  - `?BetaOutputTokensDetails outputTokensDetails`
+
+    Breakdown of output tokens by category.
+
+    `output_tokens` remains the inclusive, authoritative total used for billing.
+    This object provides a read-only decomposition for observability — for example,
+    how many of the billed output tokens were spent on internal reasoning that may
+    have been summarized before being returned to you.
+
+  - `?BetaServerToolUsage serverToolUse`
+
+    The number of server tool requests.
+
+  - `?ServiceTier serviceTier`
+
+    If the request used the priority, standard, or batch tier.
+
+  - `?Speed speed`
+
+    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+### Beta User Location
+
+- `BetaUserLocation`
+
+  - `"approximate" type`
+
+  - `?string city`
+
+    The city of the user.
+
+  - `?string country`
+
+    The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+  - `?string region`
+
+    The region of the user.
+
+  - `?string timezone`
+
+    The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+### Beta Web Fetch Block
+
+- `BetaWebFetchBlock`
+
+  - `BetaDocumentBlock content`
+
+  - `?string retrievedAt`
+
+    ISO 8601 timestamp when the content was retrieved
+
+  - `"web_fetch_result" type`
+
+  - `string url`
+
+    Fetched content URL
+
+### Beta Web Fetch Block Param
+
+- `BetaWebFetchBlockParam`
+
+  - `BetaRequestDocumentBlock content`
+
+  - `"web_fetch_result" type`
+
+  - `string url`
+
+    Fetched content URL
+
+  - `?string retrievedAt`
+
+    ISO 8601 timestamp when the content was retrieved
+
+### Beta Web Fetch Tool 20250910
+
+- `BetaWebFetchTool20250910`
+
+  - `"web_fetch" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"web_fetch_20250910" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?list<string> allowedDomains`
+
+    List of domains to allow fetching from
+
+  - `?list<string> blockedDomains`
+
+    List of domains to block fetching from
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?BetaCitationsConfigParam citations`
+
+    Citations configuration for fetched documents. Citations are disabled by default.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?int maxContentTokens`
+
+    Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+  - `?int maxUses`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Beta Web Fetch Tool 20260209
+
+- `BetaWebFetchTool20260209`
+
+  - `"web_fetch" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"web_fetch_20260209" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?list<string> allowedDomains`
+
+    List of domains to allow fetching from
+
+  - `?list<string> blockedDomains`
+
+    List of domains to block fetching from
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?BetaCitationsConfigParam citations`
+
+    Citations configuration for fetched documents. Citations are disabled by default.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?int maxContentTokens`
+
+    Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+  - `?int maxUses`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+### Beta Web Fetch Tool 20260309
+
+- `BetaWebFetchTool20260309`
+
+  - `"web_fetch" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"web_fetch_20260309" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?list<string> allowedDomains`
+
+    List of domains to allow fetching from
+
+  - `?list<string> blockedDomains`
+
+    List of domains to block fetching from
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?BetaCitationsConfigParam citations`
+
+    Citations configuration for fetched documents. Citations are disabled by default.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?int maxContentTokens`
+
+    Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+  - `?int maxUses`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+  - `?bool useCache`
+
+    Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
+### Beta Web Fetch Tool 20260318
+
+- `BetaWebFetchTool20260318`
+
+  - `"web_fetch" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"web_fetch_20260318" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?list<string> allowedDomains`
+
+    List of domains to allow fetching from
+
+  - `?list<string> blockedDomains`
+
+    List of domains to block fetching from
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?BetaCitationsConfigParam citations`
+
+    Citations configuration for fetched documents. Citations are disabled by default.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?int maxContentTokens`
+
+    Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+
+  - `?int maxUses`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `?ResponseInclusion responseInclusion`
+
+    How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+  - `?bool useCache`
+
+    Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+
+### Beta Web Fetch Tool Result Block
+
+- `BetaWebFetchToolResultBlock`
+
+  - `Content content`
+
+  - `string toolUseID`
+
+  - `"web_fetch_tool_result" type`
+
+  - `?Caller caller`
+
+    Tool invocation directly from the model.
+
+### Beta Web Fetch Tool Result Block Param
+
+- `BetaWebFetchToolResultBlockParam`
+
+  - `Content content`
+
+  - `string toolUseID`
+
+  - `"web_fetch_tool_result" type`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?Caller caller`
+
+    Tool invocation directly from the model.
+
+### Beta Web Fetch Tool Result Error Block
+
+- `BetaWebFetchToolResultErrorBlock`
+
+  - `BetaWebFetchToolResultErrorCode errorCode`
+
+  - `"web_fetch_tool_result_error" type`
+
+### Beta Web Fetch Tool Result Error Block Param
+
+- `BetaWebFetchToolResultErrorBlockParam`
+
+  - `BetaWebFetchToolResultErrorCode errorCode`
+
+  - `"web_fetch_tool_result_error" type`
+
+### Beta Web Fetch Tool Result Error Code
+
+- `BetaWebFetchToolResultErrorCode`
+
+  - `"invalid_tool_input"`
+
+  - `"url_too_long"`
+
+  - `"url_not_allowed"`
+
+  - `"url_not_in_prior_context"`
+
+  - `"url_not_accessible"`
+
+  - `"unsupported_content_type"`
+
+  - `"too_many_requests"`
+
+  - `"max_uses_exceeded"`
+
+  - `"unavailable"`
+
+### Beta Web Search Result Block
+
+- `BetaWebSearchResultBlock`
+
+  - `string encryptedContent`
+
+  - `?string pageAge`
+
+  - `string title`
+
+  - `"web_search_result" type`
+
+  - `string url`
+
+### Beta Web Search Result Block Param
+
+- `BetaWebSearchResultBlockParam`
+
+  - `string encryptedContent`
+
+  - `string title`
+
+  - `"web_search_result" type`
+
+  - `string url`
+
+  - `?string pageAge`
+
+### Beta Web Search Tool 20250305
+
+- `BetaWebSearchTool20250305`
+
+  - `"web_search" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"web_search_20250305" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?list<string> allowedDomains`
+
+    If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+  - `?list<string> blockedDomains`
+
+    If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?int maxUses`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+  - `?BetaUserLocation userLocation`
+
+    Parameters for the user's location. Used to provide more relevant search results.
+
+### Beta Web Search Tool 20260209
+
+- `BetaWebSearchTool20260209`
+
+  - `"web_search" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"web_search_20260209" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?list<string> allowedDomains`
+
+    If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+  - `?list<string> blockedDomains`
+
+    If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?int maxUses`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+  - `?BetaUserLocation userLocation`
+
+    Parameters for the user's location. Used to provide more relevant search results.
+
+### Beta Web Search Tool 20260318
+
+- `BetaWebSearchTool20260318`
+
+  - `"web_search" name`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
+
+  - `"web_search_20260318" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?list<string> allowedDomains`
+
+    If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+
+  - `?list<string> blockedDomains`
+
+    If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?bool deferLoading`
+
+    If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+  - `?int maxUses`
+
+    Maximum number of times the tool can be used in the API request.
+
+  - `?ResponseInclusion responseInclusion`
+
+    How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+
+  - `?bool strict`
+
+    When true, guarantees schema validation on tool names and inputs
+
+  - `?BetaUserLocation userLocation`
+
+    Parameters for the user's location. Used to provide more relevant search results.
+
+### Beta Web Search Tool Request Error
+
+- `BetaWebSearchToolRequestError`
+
+  - `BetaWebSearchToolResultErrorCode errorCode`
+
+  - `"web_search_tool_result_error" type`
+
+### Beta Web Search Tool Result Block
+
+- `BetaWebSearchToolResultBlock`
+
+  - `BetaWebSearchToolResultBlockContent content`
+
+  - `string toolUseID`
+
+  - `"web_search_tool_result" type`
+
+  - `?Caller caller`
+
+    Tool invocation directly from the model.
+
+### Beta Web Search Tool Result Block Content
+
+- `BetaWebSearchToolResultBlockContent`
+
+  - `BetaWebSearchToolResultError`
+
+    - `BetaWebSearchToolResultErrorCode errorCode`
+
+    - `"web_search_tool_result_error" type`
+
+  - `list<BetaWebSearchResultBlock>`
+
+    - `string encryptedContent`
+
+    - `?string pageAge`
+
+    - `string title`
+
+    - `"web_search_result" type`
+
+    - `string url`
+
+### Beta Web Search Tool Result Block Param
+
+- `BetaWebSearchToolResultBlockParam`
+
+  - `BetaWebSearchToolResultBlockParamContent content`
+
+  - `string toolUseID`
+
+  - `"web_search_tool_result" type`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?Caller caller`
+
+    Tool invocation directly from the model.
+
+### Beta Web Search Tool Result Block Param Content
+
+- `BetaWebSearchToolResultBlockParamContent`
+
+  - `list<BetaWebSearchResultBlockParam>`
+
+    - `string encryptedContent`
+
+    - `string title`
+
+    - `"web_search_result" type`
+
+    - `string url`
+
+    - `?string pageAge`
+
+  - `BetaWebSearchToolRequestError`
+
+    - `BetaWebSearchToolResultErrorCode errorCode`
+
+    - `"web_search_tool_result_error" type`
+
+### Beta Web Search Tool Result Error
+
+- `BetaWebSearchToolResultError`
+
+  - `BetaWebSearchToolResultErrorCode errorCode`
+
+  - `"web_search_tool_result_error" type`
+
+### Beta Web Search Tool Result Error Code
+
+- `BetaWebSearchToolResultErrorCode`
+
+  - `"invalid_tool_input"`
+
+  - `"unavailable"`
+
+  - `"max_uses_exceeded"`
+
+  - `"too_many_requests"`
+
+  - `"query_too_long"`
+
+  - `"request_too_large"`
+
+## Messages › Batches
+
+### Create a Message Batch
+
+`$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas, ?string userProfileID): MessageBatch`
+
+**POST** `/v1/messages/batches`
+
+Send a batch of Message creation requests.
+
+The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created, it begins processing immediately. Batches can take up to 24 hours to complete.
+
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+
+#### Parameters
+
+- `requests: list<Request>`
+
+  List of requests for prompt completion. Each is an individual request to create a Message.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+- `userProfileID?:optional string`
+
+  The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
+
+#### Returns
+
+- `MessageBatch`
+
+  - `string id`
+
+    Unique object identifier.
+
+    The format and length of IDs may change over time.
+
+  - `?\Datetime archivedAt`
+
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+
+  - `?\Datetime cancelInitiatedAt`
+
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+
+  - `\Datetime createdAt`
+
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+  - `?\Datetime endedAt`
+
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+
+  - `\Datetime expiresAt`
+
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+  - `ProcessingStatus processingStatus`
+
+    Processing status of the Message Batch.
+
+  - `MessageBatchRequestCounts requestCounts`
+
+    Tallies requests within the Message Batch, categorized by their status.
+
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+
+  - `?string resultsURL`
+
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
+
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+
+  - `"message_batch" type`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaMessageBatch = $client->beta->messages->batches->create(
+  requests: [
+    [
+      'customID' => 'my-custom-id-1',
+      'params' => [
+        'maxTokens' => 1024,
+        'messages' => [
+          [
+            'content' => 'Hello, world',
+            'role' => 'user',
+            'clearAt' => 'next_user_message',
+            'outputConfig' => ['effort' => 'low'],
+          ],
+        ],
+        'model' => Model::CLAUDE_OPUS_5,
+        'cacheControl' => ['type' => 'ephemeral', 'ttl' => '5m'],
+        'container' => [
+          'id' => 'id',
+          'skills' => [
+            ['skillID' => 'pdf', 'type' => 'anthropic', 'version' => 'latest']
+          ],
+        ],
+        'contextManagement' => [
+          'edits' => [
+            [
+              'type' => 'clear_tool_uses_20250919',
+              'clearAtLeast' => ['type' => 'input_tokens', 'value' => 0],
+              'clearToolInputs' => true,
+              'excludeTools' => ['string'],
+              'keep' => ['type' => 'tool_uses', 'value' => 0],
+              'trigger' => ['type' => 'input_tokens', 'value' => 1],
+            ],
+          ],
+        ],
+        'diagnostics' => ['previousMessageID' => 'previous_message_id'],
+        'fallbackCreditToken' => 'x',
+        'fallbacks' => 'default',
+        'inferenceGeo' => 'inference_geo',
+        'mcpServers' => [
+          [
+            'name' => 'name',
+            'type' => 'url',
+            'url' => 'url',
+            'authorizationToken' => 'authorization_token',
+            'toolConfiguration' => [
+              'allowedTools' => ['string'], 'enabled' => true
+            ],
+          ],
+        ],
+        'metadata' => ['userID' => '13803d75-b4b5-4c3e-b2a2-6f21399b021b'],
+        'outputConfig' => [
+          'effort' => 'low',
+          'format' => ['schema' => ['foo' => 'bar'], 'type' => 'json_schema'],
+          'taskBudget' => [
+            'total' => 1024, 'type' => 'tokens', 'remaining' => 0
+          ],
+        ],
+        'outputFormat' => [
+          'schema' => ['foo' => 'bar'], 'type' => 'json_schema'
+        ],
+        'serviceTier' => 'auto',
+        'speed' => 'standard',
+        'stopSequences' => ['string'],
+        'stream' => false,
+        'system' => [
+          [
+            'text' => 'Today\'s date is 2024-06-01.',
+            'type' => 'text',
+            'cacheControl' => ['type' => 'ephemeral', 'ttl' => '5m'],
+            'citations' => [
+              [
+                'citedText' => 'The grass is green. The sky is blue.',
+                'documentIndex' => 0,
+                'documentTitle' => 'x',
+                'endCharIndex' => 0,
+                'startCharIndex' => 0,
+                'type' => 'char_location',
+              ],
+            ],
+          ],
+        ],
+        'temperature' => 1,
+        'thinking' => [
+          'type' => 'adaptive',
+          'blockBinding' => [
+            'prefixMismatchBehavior' => BetaThinkingPrefixMismatchBehavior::ERROR,
+          ],
+          'display' => 'summarized',
+        ],
+        'toolChoice' => ['type' => 'auto', 'disableParallelToolUse' => true],
+        'tools' => [
+          [
+            'inputSchema' => [
+              'type' => 'object',
+              'properties' => ['location' => 'bar', 'unit' => 'bar'],
+              'required' => ['location'],
+            ],
+            'name' => 'name',
+            'allowedCallers' => ['direct'],
+            'cacheControl' => ['type' => 'ephemeral', 'ttl' => '5m'],
+            'deferLoading' => true,
+            'description' => 'Get the current weather in a given location',
+            'eagerInputStreaming' => true,
+            'inputExamples' => [['foo' => 'bar']],
+            'strict' => true,
+            'type' => 'custom',
+          ],
+        ],
+        'topK' => 5,
+        'topP' => 0.7,
+      ],
+    ],
+  ],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  userProfileID: 'anthropic-user-profile-id',
+);
+
+var_dump($betaMessageBatch);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
+```
+
+### Retrieve a Message Batch
+
+`$client->beta->messages->batches->retrieve(string messageBatchID, ?list<AnthropicBeta> betas): MessageBatch`
+
+**GET** `/v1/messages/batches/{message_batch_id}`
+
+This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
+
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+
+#### Parameters
+
+- `messageBatchID: string`
+
+  ID of the Message Batch.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `MessageBatch`
+
+  - `string id`
+
+    Unique object identifier.
+
+    The format and length of IDs may change over time.
+
+  - `?\Datetime archivedAt`
+
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+
+  - `?\Datetime cancelInitiatedAt`
+
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+
+  - `\Datetime createdAt`
+
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+  - `?\Datetime endedAt`
+
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+
+  - `\Datetime expiresAt`
+
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+  - `ProcessingStatus processingStatus`
+
+    Processing status of the Message Batch.
+
+  - `MessageBatchRequestCounts requestCounts`
+
+    Tallies requests within the Message Batch, categorized by their status.
+
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+
+  - `?string resultsURL`
+
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
+
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+
+  - `"message_batch" type`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaMessageBatch = $client->beta->messages->batches->retrieve(
+  'message_batch_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+);
+
+var_dump($betaMessageBatch);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
+```
+
+### List Message Batches
+
+`$client->beta->messages->batches->list(?string afterID, ?string beforeID, ?int limit, ?list<AnthropicBeta> betas): Page<MessageBatch>`
+
+**GET** `/v1/messages/batches`
+
+List all Message Batches within a Workspace. Most recently created batches are returned first.
+
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+
+#### Parameters
+
+- `afterID?:optional string`
+
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+
+- `beforeID?:optional string`
+
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+
+- `limit?:optional int`
+
+  Number of items to return per page.
+
+  Defaults to `20`. Ranges from `1` to `1000`.
+
+  default: 20
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `MessageBatch`
+
+  - `string id`
+
+    Unique object identifier.
+
+    The format and length of IDs may change over time.
+
+  - `?\Datetime archivedAt`
+
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+
+  - `?\Datetime cancelInitiatedAt`
+
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+
+  - `\Datetime createdAt`
+
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+  - `?\Datetime endedAt`
+
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+
+  - `\Datetime expiresAt`
+
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+  - `ProcessingStatus processingStatus`
+
+    Processing status of the Message Batch.
+
+  - `MessageBatchRequestCounts requestCounts`
+
+    Tallies requests within the Message Batch, categorized by their status.
+
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+
+  - `?string resultsURL`
+
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
+
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+
+  - `"message_batch" type`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$page = $client->beta->messages->batches->list(
+  afterID: 'after_id',
+  beforeID: 'before_id',
+  limit: 1,
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($page);
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+      "archived_at": "2024-08-20T18:37:24.100435Z",
+      "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+      "created_at": "2024-08-20T18:37:24.100435Z",
+      "ended_at": "2024-08-20T18:37:24.100435Z",
+      "expires_at": "2024-08-20T18:37:24.100435Z",
+      "processing_status": "in_progress",
+      "request_counts": {
+        "canceled": 10,
+        "errored": 30,
+        "expired": 10,
+        "processing": 100,
+        "succeeded": 50
+      },
+      "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+      "type": "message_batch"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
+
+### Cancel a Message Batch
+
+`$client->beta->messages->batches->cancel(string messageBatchID, ?list<AnthropicBeta> betas): MessageBatch`
+
+**POST** `/v1/messages/batches/{message_batch_id}/cancel`
+
+Batches may be canceled any time before processing ends. Once cancellation is initiated, the batch enters a `canceling` state, at which time the system may complete any in-progress, non-interruptible requests before finalizing cancellation.
+
+The number of canceled requests is specified in `request_counts`. To determine which requests were canceled, check the individual results within the batch. Note that cancellation may not result in any canceled requests if they were non-interruptible.
+
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+
+#### Parameters
+
+- `messageBatchID: string`
+
+  ID of the Message Batch.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `MessageBatch`
+
+  - `string id`
+
+    Unique object identifier.
+
+    The format and length of IDs may change over time.
+
+  - `?\Datetime archivedAt`
+
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+
+  - `?\Datetime cancelInitiatedAt`
+
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+
+  - `\Datetime createdAt`
+
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+  - `?\Datetime endedAt`
+
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+
+  - `\Datetime expiresAt`
+
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+  - `ProcessingStatus processingStatus`
+
+    Processing status of the Message Batch.
+
+  - `MessageBatchRequestCounts requestCounts`
+
+    Tallies requests within the Message Batch, categorized by their status.
+
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+
+  - `?string resultsURL`
+
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
+
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+
+  - `"message_batch" type`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaMessageBatch = $client->beta->messages->batches->cancel(
+  'message_batch_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+);
+
+var_dump($betaMessageBatch);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
+```
+
+### Delete a Message Batch
+
+`$client->beta->messages->batches->delete(string messageBatchID, ?list<AnthropicBeta> betas): DeletedMessageBatch`
+
+**DELETE** `/v1/messages/batches/{message_batch_id}`
+
+Delete a Message Batch.
+
+Message Batches can only be deleted once they've finished processing. If you'd like to delete an in-progress batch, you must first cancel it.
+
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+
+#### Parameters
+
+- `messageBatchID: string`
+
+  ID of the Message Batch.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `DeletedMessageBatch`
+
+  - `string id`
+
+    ID of the Message Batch.
+
+  - `"message_batch_deleted" type`
+
+    Deleted object type.
+
+    For Message Batches, this is always `"message_batch_deleted"`.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaDeletedMessageBatch = $client->beta->messages->batches->delete(
+  'message_batch_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+);
+
+var_dump($betaDeletedMessageBatch);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
+```
+
+### Retrieve Message Batch results
+
+`$client->beta->messages->batches->results(string messageBatchID, ?list<AnthropicBeta> betas): MessageBatchIndividualResponse`
+
+**GET** `/v1/messages/batches/{message_batch_id}/results`
+
+Streams the results of a Message Batch as a `.jsonl` file.
+
+Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+
+Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+
+#### Parameters
+
+- `messageBatchID: string`
+
+  ID of the Message Batch.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+#### Returns
+
+- `MessageBatchIndividualResponse`
+
+  - `string customID`
+
+    Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
+
+    Must be unique for each request within the Message Batch.
+
+  - `MessageBatchResult result`
+
+    Processing result for this request.
+
+    Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaMessageBatchIndividualResponse = $client
+  ->beta
+  ->messages
+  ->batches
+  ->resultsStream(
+  'message_batch_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+);
+
+var_dump($betaMessageBatchIndividualResponse);
+```
 
 ---
 

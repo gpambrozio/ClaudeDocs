@@ -1,212 +1,213 @@
 # Create Skill
 
-Copy page
+`beta.skills.create(**kwargs) -> BetaSkill`
 
-
-
-Ruby
-
-# Create Skill
-
-beta.skills.create(\*\*kwargs) -> [SkillCreateResponse](api/beta/skills.md) { id, created\_at, display\_title, 4 more }
-
-POST/v1/skills
+**POST** `/v1/skills`
 
 Create Skill
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `files: Array[String]`
 
-files: Array[String]
+  Files to upload for the skill.
 
-Files to upload for the skill.
+  All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
-All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
+- `display_name: String`
 
-
+  Human-readable, single-line label for the Skill. Maximum 255 characters.
+  Always set: derived from the SKILL.md frontmatter `name` when omitted at
+  creation. Not unique.
 
-display\_title: String
+- `betas: Array[AnthropicBeta]`
 
-Display title for the skill.
+  Optional header to specify the beta version(s) you want to use.
 
-This is a human-readable label that is not included in the prompt sent to the model.
+  - `String = String`
 
-
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
 
-betas: Array[[AnthropicBeta](api/beta.md)]
+    - `:"message-batches-2024-09-24"`
 
-Optional header to specify the beta version(s) you want to use.
+    - `:"prompt-caching-2024-07-31"`
 
-One of the following:
+    - `:"computer-use-2024-10-22"`
 
-String = String
+    - `:"computer-use-2025-01-24"`
 
-
+    - `:"pdfs-2024-09-25"`
 
-AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more
+    - `:"token-counting-2024-11-01"`
 
-One of the following:
+    - `:"token-efficient-tools-2025-02-19"`
 
-:"message-batches-2024-09-24"
+    - `:"output-128k-2025-02-19"`
 
-:"prompt-caching-2024-07-31"
+    - `:"files-api-2025-04-14"`
 
-:"computer-use-2024-10-22"
+    - `:"mcp-client-2025-04-04"`
 
-:"computer-use-2025-01-24"
+    - `:"mcp-client-2025-11-20"`
 
-:"pdfs-2024-09-25"
+    - `:"dev-full-thinking-2025-05-14"`
 
-:"token-counting-2024-11-01"
+    - `:"interleaved-thinking-2025-05-14"`
 
-:"token-efficient-tools-2025-02-19"
+    - `:"code-execution-2025-05-22"`
 
-:"output-128k-2025-02-19"
+    - `:"extended-cache-ttl-2025-04-11"`
 
-:"files-api-2025-04-14"
+    - `:"context-1m-2025-08-07"`
 
-:"mcp-client-2025-04-04"
+    - `:"context-management-2025-06-27"`
 
-:"mcp-client-2025-11-20"
+    - `:"model-context-window-exceeded-2025-08-26"`
 
-:"dev-full-thinking-2025-05-14"
+    - `:"skills-2025-10-02"`
 
-:"interleaved-thinking-2025-05-14"
+    - `:"fast-mode-2026-02-01"`
 
-:"code-execution-2025-05-22"
+    - `:"output-300k-2026-03-24"`
 
-:"extended-cache-ttl-2025-04-11"
+    - `:"user-profiles-2026-03-24"`
 
-:"context-1m-2025-08-07"
+    - `:"user-profiles-2026-08-18"`
 
-:"context-management-2025-06-27"
+    - `:"advisor-tool-2026-03-01"`
 
-:"model-context-window-exceeded-2025-08-26"
+    - `:"managed-agents-2026-04-01"`
 
-:"skills-2025-10-02"
+    - `:"cache-diagnosis-2026-04-07"`
 
-:"fast-mode-2026-02-01"
+    - `:"dreaming-2026-04-21"`
 
-:"output-300k-2026-03-24"
+    - `:"thinking-token-count-2026-05-13"`
 
-:"user-profiles-2026-03-24"
+    - `:"server-side-fallback-2026-06-01"`
 
-:"advisor-tool-2026-03-01"
+    - `:"server-side-fallback-2026-07-01"`
 
-:"managed-agents-2026-04-01"
+    - `:"fallback-credit-2026-06-01"`
 
-:"cache-diagnosis-2026-04-07"
+    - `:"fallback-credit-2026-07-01"`
 
-:"thinking-token-count-2026-05-13"
+    - `:"agent-memory-2026-07-22"`
 
-:"server-side-fallback-2026-06-01"
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
-:"fallback-credit-2026-06-01"
+    - `:"compact-2026-01-12"`
 
-:"agent-memory-2026-07-22"
+    - `:"computer-use-2025-11-24"`
 
-##### ReturnsExpand Collapse
+    - `:"mcp-tunnels-2026-06-22"`
 
-
+    - `:"structured-outputs-2025-11-13"`
 
-class SkillCreateResponse { id, created\_at, display\_title, 4 more } 
+    - `:"task-budgets-2026-03-13"`
 
-
+    - `:"thinking-display-updates-2026-08-18"`
 
-id: String
+    - `:"ce-user-management-2026-07-13"`
 
-Unique identifier for the skill.
+    - `:"mid-conversation-output-config-2026-07-01"`
 
-The format and length of IDs may change over time.
+    - `:"thinking-binding-controls-2026-08-01"`
 
-created\_at: String
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
 
-ISO 8601 timestamp of when the skill was created.
+## Returns
 
-
+- `class BetaSkill`
 
-display\_title: String
+  - `id: String`
 
-Display title for the skill.
+    Unique identifier for the skill.
 
-This is a human-readable label that is not included in the prompt sent to the model.
+    The format and length of IDs may change over time.
 
-
+  - `created_at: Time`
 
-latest\_version: String
+    ISO 8601 timestamp of when the skill was created.
 
-The latest version identifier for the skill.
+    format: date-time
 
-This represents the most recent version of the skill that has been created.
+  - `display_name: String`
 
-
+    Human-readable, single-line label for the Skill. Maximum 255 characters.
+    Always set: derived from the SKILL.md frontmatter `name` when omitted at
+    creation. Not unique.
 
-source: String
+  - `latest_version_id: String`
 
-Source of the skill.
+    ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
 
-This may be one of the following values:
+  - `source: BetaSkillSource`
 
-- `"custom"`: the skill was created by a user
-- `"anthropic"`: the skill was created by Anthropic
+    Where the Skill comes from.
 
-
+    Possible values:
 
-type: String
+    * `"custom"`: authored by the platform user; private to their workspace
+    * `"anthropic"`: published by Anthropic; shared and read-only
+    * `"anthropic_example"`: Anthropic-published sample Skill
+    * `"plugin"`: resolved from an installed plugin
 
-Object type.
+    - `type: :custom | :anthropic | :anthropic_example | :plugin`
 
-For Skills, this is always `"skill"`.
+      Where the Skill comes from.
 
-updated\_at: String
+      Possible values:
 
-ISO 8601 timestamp of when the skill was last updated.
+      * `"custom"`: authored by the platform user; private to their workspace
+      * `"anthropic"`: published by Anthropic; shared and read-only
+      * `"anthropic_example"`: Anthropic-published sample Skill
+      * `"plugin"`: resolved from an installed plugin
 
-Create Skill
+      - `:custom`
 
-Ruby
+      - `:anthropic`
 
-```shiki
+      - `:anthropic_example`
+
+      - `:plugin`
+
+  - `type: :skill`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
+
+  - `updated_at: Time`
+
+    ISO 8601 timestamp of when the skill was last updated.
+
+    format: date-time
+
+## Example
+
+```ruby
 require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-skill = anthropic.beta.skills.create(files: [StringIO.new("Example data")])
+beta_skill = anthropic.beta.skills.create(files: [StringIO.new("Example data")])
 
-puts(skill)
+puts(beta_skill)
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "skill_01JAbcdefghijklmnopqrstuvw",
   "created_at": "2024-10-30T23:58:27.427722Z",
-  "display_title": "My Custom Skill",
-  "latest_version": "1759178010641129",
-  "source": "custom",
-  "type": "type",
-  "updated_at": "2024-10-30T23:58:27.427722Z"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "display_title": "My Custom Skill",
-  "latest_version": "1759178010641129",
-  "source": "custom",
-  "type": "type",
+  "display_name": "display_name",
+  "latest_version_id": "latest_version_id",
+  "source": {
+    "type": "custom"
+  },
+  "type": "skill",
   "updated_at": "2024-10-30T23:58:27.427722Z"
 }
 ```

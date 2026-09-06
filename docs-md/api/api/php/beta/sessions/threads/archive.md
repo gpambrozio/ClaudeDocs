@@ -1,82 +1,70 @@
 # Archive Session Thread
 
-Copy page
+`$client->beta->sessions->threads->archive(string threadID, string sessionID, ?list<AnthropicBeta> betas): ManagedAgentsSessionThread`
 
-
-
-PHP
-
-# Archive Session Thread
-
-$client->beta->sessions->threads->archive(string threadID, string sessionID, ?list<AnthropicBeta> betas): [ManagedAgentsSessionThread](api/beta/sessions/threads.md)
-
-POST/v1/sessions/{session\_id}/threads/{thread\_id}/archive
+**POST** `/v1/sessions/{session_id}/threads/{thread_id}/archive`
 
 Archive Session Thread
 
-##### ParametersExpand Collapse
+## Parameters
 
-sessionID: string
+- `sessionID: string`
 
-threadID: string
+- `threadID: string`
 
-betas?:optional list<AnthropicBeta>
+- `betas?:optional list<AnthropicBeta>`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `ManagedAgentsSessionThread`
 
-[ManagedAgentsSessionThread](api/beta/sessions/threads.md)
+  - `string id`
 
-string id
+    Unique identifier for this thread.
 
-Unique identifier for this thread.
+  - `Agent agent`
 
-[BetaManagedAgentsSessionThreadAgent](api/beta/agents.md) agent
+    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
 
-Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
+  - `?\Datetime archivedAt`
 
-?\Datetime archivedAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `\Datetime createdAt`
 
-\Datetime createdAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `?string parentThreadID`
 
-?string parentThreadID
+    Parent thread that spawned this thread. Null for the primary thread.
 
-Parent thread that spawned this thread. Null for the primary thread.
+  - `string sessionID`
 
-string sessionID
+    The session this thread belongs to.
 
-The session this thread belongs to.
+  - `?ManagedAgentsSessionThreadStats stats`
 
-?[ManagedAgentsSessionThreadStats](api/beta/sessions/threads.md) stats
+    Timing statistics for a session thread.
 
-Timing statistics for a session thread.
+  - `ManagedAgentsSessionThreadStatus status`
 
-[ManagedAgentsSessionThreadStatus](api/beta/sessions/threads.md) status
+    SessionThreadStatus enum
 
-SessionThreadStatus enum
+  - `Type type`
 
-Type type
+  - `\Datetime updatedAt`
 
-\Datetime updatedAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `?ManagedAgentsSessionThreadUsage usage`
 
-?[ManagedAgentsSessionThreadUsage](api/beta/sessions/threads.md) usage
+    Cumulative token usage for a session thread across all turns.
 
-Cumulative token usage for a session thread across all turns.
+## Example
 
-Archive Session Thread
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -86,17 +74,15 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 $betaManagedAgentsSessionThread = $client->beta->sessions->threads->archive(
   'sthr_011CZkZVWa6oIjw0rgXZpnBt',
   sessionID: 'sesn_011CZkZAtmR3yMPDzynEDxu7',
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaManagedAgentsSessionThread);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "sthr_011CZkZVWa6oIjw0rgXZpnBt",
   "agent": {
@@ -110,7 +96,11 @@ Response 200
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
+      "effort": {
+        "type": "low"
+      },
+      "inference_geo": "inference_geo",
       "speed": "standard"
     },
     "name": "Researcher",
@@ -130,7 +120,8 @@ Response 200
             "name": "bash",
             "permission_policy": {
               "type": "always_allow"
-            }
+            },
+            "type": "bash"
           }
         ],
         "default_config": {
@@ -158,92 +149,22 @@ Response 200
   "type": "session_thread",
   "updated_at": "2026-03-15T10:00:00Z",
   "usage": {
-    "cache_creation": {
-      "ephemeral_1h_input_tokens": 0,
-      "ephemeral_5m_input_tokens": 0
-    },
-    "cache_read_input_tokens": 0,
-    "input_tokens": 0,
-    "output_tokens": 0
-  }
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "sthr_011CZkZVWa6oIjw0rgXZpnBt",
-  "agent": {
-    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-    "description": "A focused research subagent.",
-    "mcp_servers": [
-      {
-        "name": "example-mcp",
-        "type": "url",
-        "url": "https://example-server.modelcontextprotocol.io/sse"
-      }
-    ],
-    "model": {
-      "id": "claude-sonnet-4-6",
-      "speed": "standard"
-    },
-    "name": "Researcher",
-    "skills": [
-      {
-        "skill_id": "xlsx",
-        "type": "anthropic",
-        "version": "1"
-      }
-    ],
-    "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
-    "tools": [
-      {
-        "configs": [
-          {
-            "enabled": true,
-            "name": "bash",
-            "permission_policy": {
-              "type": "always_allow"
-            }
-          }
-        ],
-        "default_config": {
-          "enabled": true,
-          "permission_policy": {
-            "type": "always_ask"
-          }
-        },
-        "type": "agent_toolset_20260401"
-      }
-    ],
-    "type": "agent",
-    "version": 1
-  },
-  "archived_at": null,
-  "created_at": "2026-03-15T10:00:00Z",
-  "parent_thread_id": null,
-  "session_id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
-  "stats": {
     "active_seconds": 0,
-    "duration_seconds": 0,
-    "startup_seconds": 0
-  },
-  "status": "idle",
-  "type": "session_thread",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "usage": {
     "cache_creation": {
       "ephemeral_1h_input_tokens": 0,
       "ephemeral_5m_input_tokens": 0
     },
     "cache_read_input_tokens": 0,
     "input_tokens": 0,
-    "output_tokens": 0
+    "list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "output_tokens": 0,
+    "server_tool_use": {
+      "web_fetch_requests": 0,
+      "web_search_requests": 3
+    }
   }
 }
 ```

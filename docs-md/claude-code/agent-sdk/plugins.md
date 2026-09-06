@@ -1,24 +1,23 @@
 # Plugins in the SDK
 
+> Load custom plugins to extend Claude Code with skills, agents, hooks, and MCP servers through the Agent SDK
+
 Plugins allow you to extend Claude Code with custom functionality that can be shared across projects. Through the Agent SDK, you can programmatically load plugins from local directories to add capabilities to your agent sessions. A plugin can include:
 
-- **Skills**: capabilities Claude invokes autonomously when relevant. You can also invoke a plugin skill directly with `/plugin-name:skill-name`.
-- **Agents**: specialized subagents for specific tasks
-- **Hooks**: event handlers that respond to tool use and other events
-- **MCP servers**: external tool integrations via Model Context Protocol
+* **Skills**: capabilities Claude invokes autonomously when relevant. You can also invoke a plugin skill directly with `/plugin-name:skill-name`.
+* **Agents**: specialized subagents for specific tasks
+* **Hooks**: event handlers that respond to tool use and other events
+* **MCP servers**: external tool integrations via Model Context Protocol
 
 For complete information on plugin structure and how to create plugins, see [Plugins](plugins.md).
 
-## [​](#loading-plugins) Loading plugins
+## Loading plugins
 
 Load plugins by providing their local file system paths in your options configuration. The `type` field must be `"local"`, the only value the SDK accepts. The SDK supports loading multiple plugins from different locations.
+
 To use a plugin distributed through a [marketplace](plugin-marketplaces.md) or remote repository, download it first and provide the local directory path. For the directory layout a plugin needs, see the [Plugin structure reference](#plugin-structure-reference) below.
 
-TypeScript
-
-Python
-
-```shiki
+```typescript TypeScript
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
 for await (const message of query({
@@ -34,7 +33,7 @@ for await (const message of query({
 }
 ```
 
-```shiki
+```python Python
 import asyncio
 from claude_agent_sdk import query, ClaudeAgentOptions
 
@@ -54,24 +53,20 @@ async def main():
 asyncio.run(main())
 ```
 
-### [​](#path-specifications) Path specifications
+### Path specifications
 
 Plugin paths can be:
 
-- **Relative paths**: resolved relative to your current working directory (for example, `"./plugins/my-plugin"`)
-- **Absolute paths**: full file system paths (for example, `"/home/user/plugins/my-plugin"`)
+* **Relative paths**: resolved relative to your current working directory (for example, `"./plugins/my-plugin"`)
+* **Absolute paths**: full file system paths (for example, `"/home/user/plugins/my-plugin"`)
 
-The path should point to the plugin’s root directory: the parent of `skills/`, `agents/`, `hooks/`, `commands/`, or `.claude-plugin/`.
+The path should point to the plugin's root directory: the parent of `skills/`, `agents/`, `hooks/`, `commands/`, or `.claude-plugin/`.
 
-## [​](#verifying-plugin-installation) Verifying plugin installation
+## Verifying plugin installation
 
 When plugins load successfully, they appear in the system initialization message. You can verify that your plugins are available:
 
-TypeScript
-
-Python
-
-```shiki
+```typescript TypeScript
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
 for await (const message of query({
@@ -96,7 +91,7 @@ for await (const message of query({
 }
 ```
 
-```shiki
+```python Python
 import asyncio
 from claude_agent_sdk import query, ClaudeAgentOptions, SystemMessage
 
@@ -123,15 +118,11 @@ async def main():
 asyncio.run(main())
 ```
 
-## [​](#using-plugin-skills) Using plugin skills
+## Using plugin skills
 
 Skills from plugins are automatically namespaced with the plugin name to avoid conflicts. To invoke one directly, send `/plugin-name:skill-name` as the prompt.
 
-TypeScript
-
-Python
-
-```shiki
+```typescript TypeScript
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
 // Load a plugin with a custom /greet skill
@@ -148,7 +139,7 @@ for await (const message of query({
 }
 ```
 
-```shiki
+```python Python
 import asyncio
 from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, TextBlock
 
@@ -171,15 +162,11 @@ asyncio.run(main())
 
 If you installed a plugin via the CLI (for example, `/plugin install my-plugin@marketplace`), you can still use it in the SDK by providing its installation path. Check `~/.claude/plugins/` for CLI-installed plugins.
 
-## [​](#complete-example) Complete example
+## Complete example
 
-Here’s a full example demonstrating plugin loading and usage:
+Here's a full example demonstrating plugin loading and usage:
 
-TypeScript
-
-Python
-
-```shiki
+```typescript TypeScript
 import { query } from "@anthropic-ai/claude-agent-sdk";
 import { fileURLToPath } from "node:url";
 
@@ -210,7 +197,7 @@ async function runWithPlugin() {
 runWithPlugin().catch(console.error);
 ```
 
-```shiki
+```python Python
 #!/usr/bin/env python3
 """Example demonstrating how to use plugins with the Agent SDK."""
 
@@ -253,11 +240,11 @@ if __name__ == "__main__":
     asyncio.run(run_with_plugin())
 ```
 
-## [​](#plugin-structure-reference) Plugin structure reference
+## Plugin structure reference
 
 A plugin directory typically contains a `.claude-plugin/plugin.json` manifest file. The manifest is optional. When omitted, Claude Code auto-discovers components from the directory layout. The directory can include:
 
-```shiki
+```text
 my-plugin/
 ├── .claude-plugin/
 │   └── plugin.json          # Plugin manifest (optional, components auto-discovered without it)
@@ -275,11 +262,11 @@ my-plugin/
 
 The `commands/` directory holds skills as flat Markdown files. Use `skills/` for new plugins. Claude Code supports both locations.
 
-## [​](#multiple-plugin-sources) Multiple plugin sources
+## Multiple plugin sources
 
 Combine plugins from different locations:
 
-```shiki
+```typescript
 import * as os from "node:os";
 import * as path from "node:path";
 
@@ -292,34 +279,34 @@ plugins: [
 ];
 ```
 
-The SDK doesn’t expand tilde paths like `~/plugins`. If a plugin path doesn’t exist, the SDK skips that plugin and the session continues, so check the `plugins` list in the init message to confirm each plugin loaded.
+The SDK doesn't expand tilde paths like `~/plugins`. If a plugin path doesn't exist, the SDK skips that plugin and the session continues, so check the `plugins` list in the init message to confirm each plugin loaded.
 
-## [​](#troubleshooting) Troubleshooting
+## Troubleshooting
 
-### [​](#plugin-not-loading) Plugin not loading
+### Plugin not loading
 
-If your plugin doesn’t appear in the init message:
+If your plugin doesn't appear in the init message:
 
 1. **Check the path**: ensure the path points to the plugin root directory, the parent of `skills/`, `agents/`, `hooks/`, `commands/`, or `.claude-plugin/`
 2. **Validate plugin.json**: if your plugin includes a manifest, ensure it has valid JSON syntax
 3. **Check file permissions**: ensure the plugin directory is readable
-4. **Confirm the directory exists**: the SDK skips a nonexistent path, and the plugin doesn’t appear in the init message’s `plugins` list
+4. **Confirm the directory exists**: the SDK skips a nonexistent path, and the plugin doesn't appear in the init message's `plugins` list
 
-### [​](#skills-not-appearing) Skills not appearing
+### Skills not appearing
 
-If plugin skills don’t work:
+If plugin skills don't work:
 
 1. **Use the namespace**: invoke plugin skills as `/plugin-name:skill-name`
 2. **Check init message**: verify the skill appears in the `skills` list with the correct namespace
 3. **Validate skill files**: ensure each skill has a `SKILL.md` file in its own subdirectory under `skills/`, for example `skills/my-skill/SKILL.md`
 
-## [​](#see-also) See also
+## See also
 
-- [Plugins](plugins.md) - Complete plugin development guide
-- [Plugins reference](plugins-reference.md) - Technical specifications
-- [Commands](agent-sdk/skills.md) - Dispatching commands in the SDK
-- [Subagents](agent-sdk/subagents.md) - Working with specialized agents
-- [Skills](agent-sdk/skills.md) - Using Agent Skills
+* [Plugins](plugins.md) - Complete plugin development guide
+* [Plugins reference](plugins-reference.md) - Technical specifications
+* [Commands](agent-sdk/skills.md) - Dispatching commands in the SDK
+* [Subagents](agent-sdk/subagents.md) - Working with specialized agents
+* [Skills](agent-sdk/skills.md) - Using Agent Skills
 
 ---
 

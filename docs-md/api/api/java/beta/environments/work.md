@@ -1,337 +1,2104 @@
 # Work
 
-Copy page
+## Get Work Item
 
-
+`BetaSelfHostedWork beta().environments().work().retrieve(params, requestOptions = RequestOptions.none())`
 
-Java
+**GET** `/v1/environments/{environment_id}/work/{work_id}`
 
-# Work
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
-##### [Get Work Item](api/beta/environments/work/retrieve.md)
+Retrieve detailed information about a specific work item.
 
-[BetaSelfHostedWork](api/beta/environments/work.md) beta().environments().work().retrieve(WorkRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+### Parameters
 
-GET/v1/environments/{environment\_id}/work/{work\_id}
+- `WorkRetrieveParams params`
 
-##### [Poll for Work](api/beta/environments/work/poll.md)
+  - `String environmentId`
 
-[BetaSelfHostedWork](api/beta/environments/work.md) beta().environments().work().poll(WorkPollParamsparams = WorkPollParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+  - `Optional<String> workId`
 
-GET/v1/environments/{environment\_id}/work/poll
+  - `Optional<List<AnthropicBeta>> betas`
 
-##### [Acknowledge Work](api/beta/environments/work/ack.md)
+    Optional header to specify the beta version(s) you want to use.
 
-[BetaSelfHostedWork](api/beta/environments/work.md) beta().environments().work().ack(WorkAckParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/ack
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
 
-##### [Record Heartbeat](api/beta/environments/work/heartbeat.md)
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
-[BetaSelfHostedWorkHeartbeatResponse](api/beta/environments/work.md) beta().environments().work().heartbeat(WorkHeartbeatParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
 
-##### [Stop Work](api/beta/environments/work/stop.md)
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
 
-[BetaSelfHostedWork](api/beta/environments/work.md) beta().environments().work().stop(WorkStopParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/stop
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
 
-##### [List Work Items](api/beta/environments/work/list.md)
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
-WorkListPage beta().environments().work().list(WorkListParamsparams = WorkListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
-GET/v1/environments/{environment\_id}/work
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
 
-##### [Update Work Item](api/beta/environments/work/update.md)
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
 
-[BetaSelfHostedWork](api/beta/environments/work.md) beta().environments().work().update(WorkUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
 
-POST/v1/environments/{environment\_id}/work/{work\_id}
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-##### [Get Queue Statistics](api/beta/environments/work/stats.md)
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
 
-[BetaSelfHostedWorkQueueStats](api/beta/environments/work.md) beta().environments().work().stats(WorkStatsParamsparams = WorkStatsParams.none(), RequestOptionsrequestOptions = RequestOptions.none())
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
-GET/v1/environments/{environment\_id}/work/stats
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
-##### ModelsExpand Collapse
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
-class BetaSelfHostedWork:
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
-Work resource representing a unit of work in a self-hosted environment.
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-Work items are queued when sessions are created or when long-dormant sessions
-receive new messages. The environment worker polls for work to execute in a
-self-hosted sandbox.
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
-String id
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
-Work identifier (e.g., 'work\_...')
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-Optional<String> acknowledgedAt
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
-RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
-String createdAt
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
-RFC 3339 timestamp when work was created
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
-[BetaSessionWorkData](api/beta/environments/work.md) data
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
 
-The actual work to be performed
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
-String id
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
-Session identifier (e.g., 'session\_...')
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
-JsonValue; type "session"constant"session"constant
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-Type of work data
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
 
-String environmentId
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
 
-Environment identifier this work belongs to (e.g., `env_...`)
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
 
-Optional<String> latestHeartbeatAt
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
 
-RFC 3339 timestamp of the most recent heartbeat
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
 
-Metadata metadata
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-User-provided metadata key-value pairs associated with this work item
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
 
-Optional<String> startedAt
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-RFC 3339 timestamp when work execution started
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
 
-
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-State state
+### Returns
 
-Current state of the work item
+- `class BetaSelfHostedWork:`
 
-One of the following:
+  Work resource representing a unit of work in a self-hosted environment.
 
-QUEUED("queued")
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
 
-STARTING("starting")
+  - `String id`
 
-ACTIVE("active")
+    Work identifier (e.g., 'work_...')
 
-STOPPING("stopping")
+  - `Optional<String> acknowledgedAt`
 
-STOPPED("stopped")
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-Optional<String> stopRequestedAt
+  - `String createdAt`
 
-RFC 3339 timestamp when stop was requested
+    RFC 3339 timestamp when work was created
 
-Optional<String> stoppedAt
+  - `BetaSessionWorkData data`
 
-RFC 3339 timestamp when work execution stopped
+    The actual work to be performed
 
-JsonValue; type "work"constant"work"constant
+    - `String id`
 
-The type of object (always 'work')
+      Session identifier (e.g., 'session_...')
 
-
+    - `JsonValue type = "session"`
 
-class BetaSelfHostedWorkHeartbeatResponse:
+      Type of work data
 
-Response after recording a heartbeat for a work item.
+  - `String environmentId`
 
-String lastHeartbeat
+    Environment identifier this work belongs to (e.g., `env_...`)
 
-RFC 3339 timestamp of the actual heartbeat from DB
+  - `Optional<String> latestHeartbeatAt`
 
-boolean leaseExtended
+    RFC 3339 timestamp of the most recent heartbeat
 
-Whether the heartbeat succeeded in extending the lease
+  - `Metadata metadata`
 
-
+    User-provided metadata key-value pairs associated with this work item
 
-State state
+  - `Optional<String> secret`
 
-Current state of the work item (active/stopping/stopped)
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
-One of the following:
+  - `Optional<String> startedAt`
 
-QUEUED("queued")
+    RFC 3339 timestamp when work execution started
 
-STARTING("starting")
+  - `State state`
 
-ACTIVE("active")
+    Current state of the work item
 
-STOPPING("stopping")
+    - `QUEUED("queued")`
 
-STOPPED("stopped")
+    - `STARTING("starting")`
 
-long ttlSeconds
+    - `ACTIVE("active")`
 
-Effective TTL applied to the lease
+    - `STOPPING("stopping")`
 
-JsonValue; type "work\_heartbeat"constant"work\_heartbeat"constant
+    - `STOPPED("stopped")`
 
-The type of response
+  - `Optional<String> stopRequestedAt`
 
-
+    RFC 3339 timestamp when stop was requested
 
-class BetaSelfHostedWorkListResponse:
+  - `Optional<String> stoppedAt`
 
-Response when listing work items with cursor-based pagination.
+    RFC 3339 timestamp when work execution stopped
 
-
+  - `JsonValue type = "work"`
 
-List<[BetaSelfHostedWork](api/beta/environments/work.md)> data
+    The type of object (always 'work')
 
-List of work items
+### Example
 
-String id
+```java
+package com.anthropic.example;
 
-Work identifier (e.g., 'work\_...')
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.environments.work.BetaSelfHostedWork;
+import com.anthropic.models.beta.environments.work.WorkRetrieveParams;
 
-Optional<String> acknowledgedAt
+public final class Main {
+    private Main() {}
 
-RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-String createdAt
+        WorkRetrieveParams params = WorkRetrieveParams.builder()
+            .environmentId("env_011CZkZ9X2dpNyB7HsEFoRfW")
+            .workId("work_id")
+            .build();
+        BetaSelfHostedWork betaSelfHostedWork = client.beta().environments().work().retrieve(params);
+    }
+}
+```
 
-RFC 3339 timestamp when work was created
+#### Response (200)
 
-
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
 
-[BetaSessionWorkData](api/beta/environments/work.md) data
+## Poll for Work
 
-The actual work to be performed
+`BetaSelfHostedWork beta().environments().work().poll(params = WorkPollParams.none(), requestOptions = RequestOptions.none())`
 
-String id
+**GET** `/v1/environments/{environment_id}/work/poll`
 
-Session identifier (e.g., 'session\_...')
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
-JsonValue; type "session"constant"session"constant
+Long poll for work items in the queue.
 
-Type of work data
+### Parameters
 
-String environmentId
+- `WorkPollParams params`
 
-Environment identifier this work belongs to (e.g., `env_...`)
+  - `Optional<String> environmentId`
 
-Optional<String> latestHeartbeatAt
+  - `Optional<Long> blockMs`
 
-RFC 3339 timestamp of the most recent heartbeat
+    How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
 
-Metadata metadata
+    minimum: 1
 
-User-provided metadata key-value pairs associated with this work item
+  - `Optional<Long> reclaimOlderThanMs`
 
-Optional<String> startedAt
+    Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
 
-RFC 3339 timestamp when work execution started
+    minimum: 1
 
-
+  - `Optional<List<AnthropicBeta>> betas`
 
-State state
+    Optional header to specify the beta version(s) you want to use.
 
-Current state of the work item
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
-One of the following:
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
 
-QUEUED("queued")
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
-STARTING("starting")
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-ACTIVE("active")
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
 
-STOPPING("stopping")
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
 
-STOPPED("stopped")
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
 
-Optional<String> stopRequestedAt
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
 
-RFC 3339 timestamp when stop was requested
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
-Optional<String> stoppedAt
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
-RFC 3339 timestamp when work execution stopped
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
 
-JsonValue; type "work"constant"work"constant
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
 
-The type of object (always 'work')
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
 
-Optional<String> nextPage
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-Opaque cursor for fetching the next page of results
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
 
-
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
-class BetaSelfHostedWorkQueueStats:
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
-Statistics about the work queue for an environment.
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-Uses Redis Stream consumer group metrics for O(1) queries.
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
-long depth
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
-Number of work items waiting to be picked up (lag from consumer group)
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
-Optional<String> oldestQueuedAt
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
-RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
-long pending
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-Number of work items being processed (polled but not acknowledged)
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
-JsonValue; type "work\_queue\_stats"constant"work\_queue\_stats"constant
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
-The type of object
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
-Optional<Long> workersPolling
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
-Number of workers that have polled for work in the last 30 seconds. Requires worker\_id to be sent with poll requests.
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
-
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
 
-class BetaSelfHostedWorkStopRequest:
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
 
-Request to stop a work item.
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
-Optional<Boolean> force
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
-If true, immediately stop work without graceful shutdown
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
 
-class BetaSelfHostedWorkUpdateRequest:
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
 
-Request to update work item metadata.
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
 
-Metadata metadata
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
 
-Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
 
-
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-class BetaSessionWorkData:
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
 
-Work data for session work items.
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-This resource type is used when work represents a session that needs to be executed
-in a self-hosted environment.
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
 
-String id
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-Session identifier (e.g., 'session\_...')
+  - `Optional<String> anthropicWorkerId`
 
-JsonValue; type "session"constant"session"constant
+    Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
 
-Type of work data
+### Returns
+
+- `class BetaSelfHostedWork:`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `String id`
+
+    Work identifier (e.g., 'work_...')
+
+  - `Optional<String> acknowledgedAt`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `String createdAt`
+
+    RFC 3339 timestamp when work was created
+
+  - `BetaSessionWorkData data`
+
+    The actual work to be performed
+
+    - `String id`
+
+      Session identifier (e.g., 'session_...')
+
+    - `JsonValue type = "session"`
+
+      Type of work data
+
+  - `String environmentId`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `Optional<String> latestHeartbeatAt`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `Metadata metadata`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `Optional<String> secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `Optional<String> startedAt`
+
+    RFC 3339 timestamp when work execution started
+
+  - `State state`
+
+    Current state of the work item
+
+    - `QUEUED("queued")`
+
+    - `STARTING("starting")`
+
+    - `ACTIVE("active")`
+
+    - `STOPPING("stopping")`
+
+    - `STOPPED("stopped")`
+
+  - `Optional<String> stopRequestedAt`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `Optional<String> stoppedAt`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `JsonValue type = "work"`
+
+    The type of object (always 'work')
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.environments.work.BetaSelfHostedWork;
+import com.anthropic.models.beta.environments.work.WorkPollParams;
+import java.util.Optional;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        Optional<BetaSelfHostedWork> betaSelfHostedWork = client.beta().environments().work().poll("env_011CZkZ9X2dpNyB7HsEFoRfW");
+    }
+}
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+## Acknowledge Work
+
+`BetaSelfHostedWork beta().environments().work().ack(params, requestOptions = RequestOptions.none())`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}/ack`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting' and removing it from the queue.
+
+### Parameters
+
+- `WorkAckParams params`
+
+  - `String environmentId`
+
+  - `Optional<String> workId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
+
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
+
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
+
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+### Returns
+
+- `class BetaSelfHostedWork:`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `String id`
+
+    Work identifier (e.g., 'work_...')
+
+  - `Optional<String> acknowledgedAt`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `String createdAt`
+
+    RFC 3339 timestamp when work was created
+
+  - `BetaSessionWorkData data`
+
+    The actual work to be performed
+
+    - `String id`
+
+      Session identifier (e.g., 'session_...')
+
+    - `JsonValue type = "session"`
+
+      Type of work data
+
+  - `String environmentId`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `Optional<String> latestHeartbeatAt`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `Metadata metadata`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `Optional<String> secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `Optional<String> startedAt`
+
+    RFC 3339 timestamp when work execution started
+
+  - `State state`
+
+    Current state of the work item
+
+    - `QUEUED("queued")`
+
+    - `STARTING("starting")`
+
+    - `ACTIVE("active")`
+
+    - `STOPPING("stopping")`
+
+    - `STOPPED("stopped")`
+
+  - `Optional<String> stopRequestedAt`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `Optional<String> stoppedAt`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `JsonValue type = "work"`
+
+    The type of object (always 'work')
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.environments.work.BetaSelfHostedWork;
+import com.anthropic.models.beta.environments.work.WorkAckParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        WorkAckParams params = WorkAckParams.builder()
+            .environmentId("env_011CZkZ9X2dpNyB7HsEFoRfW")
+            .workId("work_id")
+            .build();
+        BetaSelfHostedWork betaSelfHostedWork = client.beta().environments().work().ack(params);
+    }
+}
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+## Record Heartbeat
+
+`BetaSelfHostedWorkHeartbeatResponse beta().environments().work().heartbeat(params, requestOptions = RequestOptions.none())`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Record a heartbeat for a work item to maintain the lease.
+
+### Parameters
+
+- `WorkHeartbeatParams params`
+
+  - `String environmentId`
+
+  - `Optional<String> workId`
+
+  - `Optional<Long> desiredTtlSeconds`
+
+    Desired TTL in seconds
+
+  - `Optional<String> expectedLastHeartbeat`
+
+    Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
+
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
+
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
+
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+### Returns
+
+- `class BetaSelfHostedWorkHeartbeatResponse:`
+
+  Response after recording a heartbeat for a work item.
+
+  - `String lastHeartbeat`
+
+    RFC 3339 timestamp of the actual heartbeat from DB
+
+  - `boolean leaseExtended`
+
+    Whether the heartbeat succeeded in extending the lease
+
+  - `State state`
+
+    Current state of the work item (active/stopping/stopped)
+
+    - `QUEUED("queued")`
+
+    - `STARTING("starting")`
+
+    - `ACTIVE("active")`
+
+    - `STOPPING("stopping")`
+
+    - `STOPPED("stopped")`
+
+  - `long ttlSeconds`
+
+    Effective TTL applied to the lease
+
+  - `JsonValue type = "work_heartbeat"`
+
+    The type of response
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.environments.work.BetaSelfHostedWorkHeartbeatResponse;
+import com.anthropic.models.beta.environments.work.WorkHeartbeatParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        WorkHeartbeatParams params = WorkHeartbeatParams.builder()
+            .environmentId("env_011CZkZ9X2dpNyB7HsEFoRfW")
+            .workId("work_id")
+            .build();
+        BetaSelfHostedWorkHeartbeatResponse betaSelfHostedWorkHeartbeatResponse = client.beta().environments().work().heartbeat(params);
+    }
+}
+```
+
+#### Response (200)
+
+```json
+{
+  "last_heartbeat": "last_heartbeat",
+  "lease_extended": true,
+  "state": "queued",
+  "ttl_seconds": 0,
+  "type": "work_heartbeat"
+}
+```
+
+## Stop Work
+
+`BetaSelfHostedWork beta().environments().work().stop(params, requestOptions = RequestOptions.none())`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}/stop`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Stop a work item, initiating graceful or forced shutdown.
+
+### Parameters
+
+- `WorkStopParams params`
+
+  - `String environmentId`
+
+  - `Optional<String> workId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
+
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
+
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
+
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+  - `BetaSelfHostedWorkStopRequest betaSelfHostedWorkStopRequest`
+
+    Request to stop a work item.
+
+### Returns
+
+- `class BetaSelfHostedWork:`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `String id`
+
+    Work identifier (e.g., 'work_...')
+
+  - `Optional<String> acknowledgedAt`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `String createdAt`
+
+    RFC 3339 timestamp when work was created
+
+  - `BetaSessionWorkData data`
+
+    The actual work to be performed
+
+    - `String id`
+
+      Session identifier (e.g., 'session_...')
+
+    - `JsonValue type = "session"`
+
+      Type of work data
+
+  - `String environmentId`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `Optional<String> latestHeartbeatAt`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `Metadata metadata`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `Optional<String> secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `Optional<String> startedAt`
+
+    RFC 3339 timestamp when work execution started
+
+  - `State state`
+
+    Current state of the work item
+
+    - `QUEUED("queued")`
+
+    - `STARTING("starting")`
+
+    - `ACTIVE("active")`
+
+    - `STOPPING("stopping")`
+
+    - `STOPPED("stopped")`
+
+  - `Optional<String> stopRequestedAt`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `Optional<String> stoppedAt`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `JsonValue type = "work"`
+
+    The type of object (always 'work')
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.environments.work.BetaSelfHostedWork;
+import com.anthropic.models.beta.environments.work.BetaSelfHostedWorkStopRequest;
+import com.anthropic.models.beta.environments.work.WorkStopParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        WorkStopParams params = WorkStopParams.builder()
+            .environmentId("env_011CZkZ9X2dpNyB7HsEFoRfW")
+            .workId("work_id")
+            .betaSelfHostedWorkStopRequest(BetaSelfHostedWorkStopRequest.builder().build())
+            .build();
+        BetaSelfHostedWork betaSelfHostedWork = client.beta().environments().work().stop(params);
+    }
+}
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+## List Work Items
+
+`WorkListPage beta().environments().work().list(params = WorkListParams.none(), requestOptions = RequestOptions.none())`
+
+**GET** `/v1/environments/{environment_id}/work`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+List work items in an environment.
+
+### Parameters
+
+- `WorkListParams params`
+
+  - `Optional<String> environmentId`
+
+  - `Optional<Long> limit`
+
+    Maximum number of work items to return
+
+    maximum: 1000, minimum: 1
+
+  - `Optional<String> page`
+
+    Opaque cursor from previous response for pagination
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
+
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
+
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
+
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+### Returns
+
+- `class BetaSelfHostedWork:`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `String id`
+
+    Work identifier (e.g., 'work_...')
+
+  - `Optional<String> acknowledgedAt`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `String createdAt`
+
+    RFC 3339 timestamp when work was created
+
+  - `BetaSessionWorkData data`
+
+    The actual work to be performed
+
+    - `String id`
+
+      Session identifier (e.g., 'session_...')
+
+    - `JsonValue type = "session"`
+
+      Type of work data
+
+  - `String environmentId`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `Optional<String> latestHeartbeatAt`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `Metadata metadata`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `Optional<String> secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `Optional<String> startedAt`
+
+    RFC 3339 timestamp when work execution started
+
+  - `State state`
+
+    Current state of the work item
+
+    - `QUEUED("queued")`
+
+    - `STARTING("starting")`
+
+    - `ACTIVE("active")`
+
+    - `STOPPING("stopping")`
+
+    - `STOPPED("stopped")`
+
+  - `Optional<String> stopRequestedAt`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `Optional<String> stoppedAt`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `JsonValue type = "work"`
+
+    The type of object (always 'work')
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.environments.work.WorkListPage;
+import com.anthropic.models.beta.environments.work.WorkListParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        WorkListPage page = client.beta().environments().work().list("env_011CZkZ9X2dpNyB7HsEFoRfW");
+    }
+}
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "acknowledged_at": "acknowledged_at",
+      "created_at": "created_at",
+      "data": {
+        "id": "id",
+        "type": "session"
+      },
+      "environment_id": "environment_id",
+      "latest_heartbeat_at": "latest_heartbeat_at",
+      "metadata": {
+        "foo": "string"
+      },
+      "secret": "secret",
+      "started_at": "started_at",
+      "state": "queued",
+      "stop_requested_at": "stop_requested_at",
+      "stopped_at": "stopped_at",
+      "type": "work"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Update Work Item
+
+`BetaSelfHostedWork beta().environments().work().update(params, requestOptions = RequestOptions.none())`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Update work item metadata with merge semantics.
+
+### Parameters
+
+- `WorkUpdateParams params`
+
+  - `String environmentId`
+
+  - `Optional<String> workId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
+
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
+
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
+
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+  - `BetaSelfHostedWorkUpdateRequest betaSelfHostedWorkUpdateRequest`
+
+    Request to update work item metadata.
+
+### Returns
+
+- `class BetaSelfHostedWork:`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `String id`
+
+    Work identifier (e.g., 'work_...')
+
+  - `Optional<String> acknowledgedAt`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `String createdAt`
+
+    RFC 3339 timestamp when work was created
+
+  - `BetaSessionWorkData data`
+
+    The actual work to be performed
+
+    - `String id`
+
+      Session identifier (e.g., 'session_...')
+
+    - `JsonValue type = "session"`
+
+      Type of work data
+
+  - `String environmentId`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `Optional<String> latestHeartbeatAt`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `Metadata metadata`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `Optional<String> secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `Optional<String> startedAt`
+
+    RFC 3339 timestamp when work execution started
+
+  - `State state`
+
+    Current state of the work item
+
+    - `QUEUED("queued")`
+
+    - `STARTING("starting")`
+
+    - `ACTIVE("active")`
+
+    - `STOPPING("stopping")`
+
+    - `STOPPED("stopped")`
+
+  - `Optional<String> stopRequestedAt`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `Optional<String> stoppedAt`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `JsonValue type = "work"`
+
+    The type of object (always 'work')
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.JsonValue;
+import com.anthropic.models.beta.environments.work.BetaSelfHostedWork;
+import com.anthropic.models.beta.environments.work.BetaSelfHostedWorkUpdateRequest;
+import com.anthropic.models.beta.environments.work.WorkUpdateParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        WorkUpdateParams params = WorkUpdateParams.builder()
+            .environmentId("env_011CZkZ9X2dpNyB7HsEFoRfW")
+            .workId("work_id")
+            .betaSelfHostedWorkUpdateRequest(BetaSelfHostedWorkUpdateRequest.of(BetaSelfHostedWorkUpdateRequest.Metadata.builder()
+                .putAdditionalProperty("foo", JsonValue.from("string"))
+                .build()))
+            .build();
+        BetaSelfHostedWork betaSelfHostedWork = client.beta().environments().work().update(params);
+    }
+}
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+## Get Queue Statistics
+
+`BetaSelfHostedWorkQueueStats beta().environments().work().stats(params = WorkStatsParams.none(), requestOptions = RequestOptions.none())`
+
+**GET** `/v1/environments/{environment_id}/work/stats`
+
+Get statistics about the work queue for an environment.
+
+### Parameters
+
+- `WorkStatsParams params`
+
+  - `Optional<String> environmentId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
+
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
+
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
+
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+### Returns
+
+- `class BetaSelfHostedWorkQueueStats:`
+
+  Statistics about the work queue for an environment.
+
+  Uses Redis Stream consumer group metrics for O(1) queries.
+
+  - `long depth`
+
+    Number of work items waiting to be picked up (lag from consumer group)
+
+  - `Optional<String> oldestQueuedAt`
+
+    RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
+
+  - `long pending`
+
+    Number of work items being processed (polled but not acknowledged)
+
+  - `JsonValue type = "work_queue_stats"`
+
+    The type of object
+
+  - `Optional<Long> workersPolling`
+
+    Number of workers that have polled for work in the last 30 seconds. Requires worker_id to be sent with poll requests.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.environments.work.BetaSelfHostedWorkQueueStats;
+import com.anthropic.models.beta.environments.work.WorkStatsParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaSelfHostedWorkQueueStats betaSelfHostedWorkQueueStats = client.beta().environments().work().stats("env_011CZkZ9X2dpNyB7HsEFoRfW");
+    }
+}
+```
+
+#### Response (200)
+
+```json
+{
+  "depth": 0,
+  "oldest_queued_at": "oldest_queued_at",
+  "pending": 0,
+  "type": "work_queue_stats",
+  "workers_polling": 0
+}
+```
+
+## Domain types
+
+### Beta Self Hosted Work
+
+- `class BetaSelfHostedWork:`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `String id`
+
+    Work identifier (e.g., 'work_...')
+
+  - `Optional<String> acknowledgedAt`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `String createdAt`
+
+    RFC 3339 timestamp when work was created
+
+  - `BetaSessionWorkData data`
+
+    The actual work to be performed
+
+    - `String id`
+
+      Session identifier (e.g., 'session_...')
+
+    - `JsonValue type = "session"`
+
+      Type of work data
+
+  - `String environmentId`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `Optional<String> latestHeartbeatAt`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `Metadata metadata`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `Optional<String> secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `Optional<String> startedAt`
+
+    RFC 3339 timestamp when work execution started
+
+  - `State state`
+
+    Current state of the work item
+
+    - `QUEUED("queued")`
+
+    - `STARTING("starting")`
+
+    - `ACTIVE("active")`
+
+    - `STOPPING("stopping")`
+
+    - `STOPPED("stopped")`
+
+  - `Optional<String> stopRequestedAt`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `Optional<String> stoppedAt`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `JsonValue type = "work"`
+
+    The type of object (always 'work')
+
+### Beta Self Hosted Work Heartbeat Response
+
+- `class BetaSelfHostedWorkHeartbeatResponse:`
+
+  Response after recording a heartbeat for a work item.
+
+  - `String lastHeartbeat`
+
+    RFC 3339 timestamp of the actual heartbeat from DB
+
+  - `boolean leaseExtended`
+
+    Whether the heartbeat succeeded in extending the lease
+
+  - `State state`
+
+    Current state of the work item (active/stopping/stopped)
+
+    - `QUEUED("queued")`
+
+    - `STARTING("starting")`
+
+    - `ACTIVE("active")`
+
+    - `STOPPING("stopping")`
+
+    - `STOPPED("stopped")`
+
+  - `long ttlSeconds`
+
+    Effective TTL applied to the lease
+
+  - `JsonValue type = "work_heartbeat"`
+
+    The type of response
+
+### Beta Self Hosted Work List Response
+
+- `class BetaSelfHostedWorkListResponse:`
+
+  Response when listing work items with cursor-based pagination.
+
+  - `List<BetaSelfHostedWork> data`
+
+    List of work items
+
+    - `String id`
+
+      Work identifier (e.g., 'work_...')
+
+    - `Optional<String> acknowledgedAt`
+
+      RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+    - `String createdAt`
+
+      RFC 3339 timestamp when work was created
+
+    - `BetaSessionWorkData data`
+
+      The actual work to be performed
+
+      - `String id`
+
+        Session identifier (e.g., 'session_...')
+
+      - `JsonValue type = "session"`
+
+        Type of work data
+
+    - `String environmentId`
+
+      Environment identifier this work belongs to (e.g., `env_...`)
+
+    - `Optional<String> latestHeartbeatAt`
+
+      RFC 3339 timestamp of the most recent heartbeat
+
+    - `Metadata metadata`
+
+      User-provided metadata key-value pairs associated with this work item
+
+    - `Optional<String> secret`
+
+      Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+    - `Optional<String> startedAt`
+
+      RFC 3339 timestamp when work execution started
+
+    - `State state`
+
+      Current state of the work item
+
+      - `QUEUED("queued")`
+
+      - `STARTING("starting")`
+
+      - `ACTIVE("active")`
+
+      - `STOPPING("stopping")`
+
+      - `STOPPED("stopped")`
+
+    - `Optional<String> stopRequestedAt`
+
+      RFC 3339 timestamp when stop was requested
+
+    - `Optional<String> stoppedAt`
+
+      RFC 3339 timestamp when work execution stopped
+
+    - `JsonValue type = "work"`
+
+      The type of object (always 'work')
+
+  - `Optional<String> nextPage`
+
+    Opaque cursor for fetching the next page of results
+
+### Beta Self Hosted Work Queue Stats
+
+- `class BetaSelfHostedWorkQueueStats:`
+
+  Statistics about the work queue for an environment.
+
+  Uses Redis Stream consumer group metrics for O(1) queries.
+
+  - `long depth`
+
+    Number of work items waiting to be picked up (lag from consumer group)
+
+  - `Optional<String> oldestQueuedAt`
+
+    RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
+
+  - `long pending`
+
+    Number of work items being processed (polled but not acknowledged)
+
+  - `JsonValue type = "work_queue_stats"`
+
+    The type of object
+
+  - `Optional<Long> workersPolling`
+
+    Number of workers that have polled for work in the last 30 seconds. Requires worker_id to be sent with poll requests.
+
+### Beta Self Hosted Work Stop Request
+
+- `class BetaSelfHostedWorkStopRequest:`
+
+  Request to stop a work item.
+
+  - `Optional<Boolean> force`
+
+    If true, immediately stop work without graceful shutdown
+
+### Beta Self Hosted Work Update Request
+
+- `class BetaSelfHostedWorkUpdateRequest:`
+
+  Request to update work item metadata.
+
+  - `Metadata metadata`
+
+    Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
+
+### Beta Session Work Data
+
+- `class BetaSessionWorkData:`
+
+  Work data for session work items.
+
+  This resource type is used when work represents a session that needs to be executed
+  in a self-hosted environment.
+
+  - `String id`
+
+    Session identifier (e.g., 'session_...')
+
+  - `JsonValue type = "session"`
+
+    Type of work data
 
 ---
 

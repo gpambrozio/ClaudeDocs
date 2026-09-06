@@ -1,44 +1,32 @@
 # Download File
 
-Copy page
+`$ ant beta:files download`
 
-
-
-CLI
-
-# Download File
-
-$ ant beta:files download
-
-GET/v1/files/{file\_id}/content
+**GET** `/v1/files/{file_id}/content`
 
 Download File
 
-##### ParametersExpand Collapse
+## Parameters
 
---file-id: string
+- `--file-id: string`
 
-ID of the File.
+  ID of the File.
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--beta: optional array of AnthropicBeta`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-unnamed\_schema\_0: file path
+- `unnamed_schema_1: file path`
 
-Download File
+## Example
 
-CLI
-
-```shiki
+```bash
 ant beta:files download \
   --api-key my-anthropic-api-key \
   --file-id file_id
 ```
-
-##### Returns Examples
 
 ---
 

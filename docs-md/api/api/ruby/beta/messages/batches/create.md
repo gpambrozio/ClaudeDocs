@@ -1,16 +1,8 @@
 # Create a Message Batch
 
-Copy page
+`beta.messages.batches.create(**kwargs) -> BetaMessageBatch`
 
-
-
-Ruby
-
-# Create a Message Batch
-
-beta.messages.batches.create(\*\*kwargs) -> [BetaMessageBatch](api/beta/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
-
-POST/v1/messages/batches
+**POST** `/v1/messages/batches`
 
 Send a batch of Message creation requests.
 
@@ -18,7198 +10,4066 @@ The Message Batches API can be used to process multiple Messages API requests at
 
 Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `requests: Array[Request]`
 
-requests: Array[Request{ custom\_id, params}]
+  List of requests for prompt completion. Each is an individual request to create a Message.
 
-List of requests for prompt completion. Each is an individual request to create a Message.
+  maxItems: 100000, minItems: 1
 
-
+  - `custom_id: String`
 
-custom\_id: String
+    Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
 
-Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
+    Must be unique for each request within the Message Batch.
 
-Must be unique for each request within the Message Batch.
+    maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,64}$
 
-maxLength64
+  - `params: Params`
 
-minLength1
+    Messages API creation parameters for the individual request.
 
-
+    See the [Messages API reference](api/messages.md) for full documentation on available parameters.
 
-params: Params{ max\_tokens, messages, model, 22 more}
+    - `max_tokens: Integer`
 
-Messages API creation parameters for the individual request.
+      The maximum number of tokens to generate before stopping.
 
-See the [Messages API reference](api/messages.md) for full documentation on available parameters.
+      Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-
+      Set to `0` to populate the [prompt cache](build-with-claude/prompt-caching.md) without generating a response.
 
-max\_tokens: Integer
+      Different models have different maximum values for this parameter.  See [models](about-claude/models/overview.md) for details.
 
-The maximum number of tokens to generate before stopping.
+      minimum: 0
 
-Note that our models may stop *before* reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
+    - `messages: Array[BetaMessageParam]`
 
-Set to `0` to populate the [prompt cache](build-with-claude/prompt-caching.md) without generating a response.
+      Input messages.
 
-Different models have different maximum values for this parameter. See [models](about-claude/models/overview.md) for details.
+      Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
 
-minimum0
+      Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
 
-
+      If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
 
-messages: Array[[BetaMessageParam](api/beta/messages.md) { content, role } ]
+      Example with a single `user` message:
 
-Input messages.
+      ```json
+      [{"role": "user", "content": "Hello, Claude"}]
+      ```
 
-Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
+      Example with multiple conversational turns:
 
-Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
+      ```json
+      [
+        {"role": "user", "content": "Hello there."},
+        {"role": "assistant", "content": "Hi, I'm Claude. How can I help you?"},
+        {"role": "user", "content": "Can you explain LLMs in plain English?"},
+      ]
+      ```
 
-If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
+      Example with a partially-filled response from Claude:
 
-Example with a single `user` message:
+      ```json
+      [
+        {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+        {"role": "assistant", "content": "The best answer is ("},
+      ]
+      ```
 
-```shiki
-[{"role": "user", "content": "Hello, Claude"}]
-```
+      Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
 
-
+      ```json
+      {"role": "user", "content": "Hello, Claude"}
+      ```
 
-Example with multiple conversational turns:
+      ```json
+      {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
+      ```
 
-```shiki
-[
-  {"role": "user", "content": "Hello there."},
-  {"role": "assistant", "content": "Hi, I'm Claude. How can I help you?"},
-  {"role": "user", "content": "Can you explain LLMs in plain English?"},
-]
-```
+      See [input examples](build-with-claude/working-with-messages.md).
 
-
+      Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
-Example with a partially-filled response from Claude:
+      There is a limit of 100,000 messages in a single request.
 
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("},
-]
-```
+      - `content: String | Array[BetaContentBlockParam]`
 
-
+        - `String = String`
 
-Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
+        - `UnionMember1 = Array[BetaContentBlockParam]`
 
-```shiki
-{"role": "user", "content": "Hello, Claude"}
-```
+          - `class BetaTextBlockParam`
 
-
+            - `text: String`
 
-```shiki
-{"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
-```
+              minLength: 1
 
-
+            - `type: :text`
 
-See [input examples](build-with-claude/working-with-messages.md).
+            - `cache_control: BetaCacheControlEphemeral`
 
-Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+              Create a cache control breakpoint at this content block.
 
-There is a limit of 100,000 messages in a single request.
+              - `type: :ephemeral`
 
-
+              - `ttl: :"5m" | :"1h"`
 
-content: String | Array[[BetaContentBlockParam](api/beta/messages.md)]
+                The time-to-live for the cache control breakpoint.
 
-One of the following:
+                This may be one the following values:
 
-String = String
+                - `5m`: 5 minutes
+                - `1h`: 1 hour
 
-
+                Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
-UnionMember1 = Array[[BetaContentBlockParam](api/beta/messages.md)]
+                - `:"5m"`
 
-One of the following:
+                - `:"1h"`
 
-
+            - `citations: Array[BetaTextCitationParam]`
 
-class BetaTextBlockParam { text, type, cache\_control, citations } 
+              - `class BetaCitationCharLocationParam`
 
-text: String
+                - `cited_text: String`
 
-type: :text
+                - `document_index: Integer`
 
-
+                  minimum: 0
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+                - `document_title: String`
 
-Create a cache control breakpoint at this content block.
+                  maxLength: 500, minLength: 1
 
-type: :ephemeral
+                - `end_char_index: Integer`
 
-
+                - `start_char_index: Integer`
 
-ttl: :"5m" | :"1h"
+                  minimum: 0
 
-The time-to-live for the cache control breakpoint.
+                - `type: :char_location`
 
-This may be one the following values:
+              - `class BetaCitationPageLocationParam`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+                - `cited_text: String`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+                - `document_index: Integer`
 
-One of the following:
+                  minimum: 0
 
-:"5m"
+                - `document_title: String`
 
-:"1h"
+                  maxLength: 500, minLength: 1
 
-
+                - `end_page_number: Integer`
 
-citations: Array[[BetaTextCitationParam](api/beta/messages.md)]
+                - `start_page_number: Integer`
 
-One of the following:
+                  minimum: 1
 
-
+                - `type: :page_location`
 
-class BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+              - `class BetaCitationContentBlockLocationParam`
 
-cited\_text: String
+                - `cited_text: String`
 
-document\_index: Integer
+                  The full text of the cited block range, concatenated.
 
-document\_title: String
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-end\_char\_index: Integer
+                - `document_index: Integer`
 
-start\_char\_index: Integer
+                  minimum: 0
 
-type: :char\_location
+                - `document_title: String`
 
-
+                  maxLength: 500, minLength: 1
 
-class BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+                - `end_block_index: Integer`
 
-cited\_text: String
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-document\_index: Integer
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-document\_title: String
+                - `start_block_index: Integer`
 
-end\_page\_number: Integer
+                  0-based index of the first cited block in the source's `content` array.
 
-start\_page\_number: Integer
+                  minimum: 0
 
-type: :page\_location
+                - `type: :content_block_location`
 
-
+              - `class BetaCitationWebSearchResultLocationParam`
 
-class BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+                - `cited_text: String`
 
-
+                - `encrypted_index: String`
 
-cited\_text: String
+                - `title: String`
 
-The full text of the cited block range, concatenated.
+                  maxLength: 512, minLength: 1
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+                - `type: :web_search_result_location`
 
-document\_index: Integer
+                - `url: String`
 
-document\_title: String
+                  minLength: 1
 
-
+              - `class BetaCitationSearchResultLocationParam`
 
-end\_block\_index: Integer
+                - `cited_text: String`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+                  The full text of the cited block range, concatenated.
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-start\_block\_index: Integer
+                - `end_block_index: Integer`
 
-0-based index of the first cited block in the source's `content` array.
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-type: :content\_block\_location
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-
+                - `search_result_index: Integer`
 
-class BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more } 
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
-cited\_text: String
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
-encrypted\_index: String
+                  minimum: 0
 
-title: String
+                - `source: String`
 
-type: :web\_search\_result\_location
+                - `start_block_index: Integer`
 
-url: String
+                  0-based index of the first cited block in the source's `content` array.
 
-
+                  minimum: 0
 
-class BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+                - `title: String`
 
-
+                - `type: :search_result_location`
 
-cited\_text: String
+          - `class BetaImageBlockParam`
 
-The full text of the cited block range, concatenated.
+            - `source: BetaBase64ImageSource | BetaURLImageSource | BetaFileImageSource`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+              - `class BetaBase64ImageSource`
 
-
+                - `data: String`
 
-end\_block\_index: Integer
+                  format: byte
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+                - `media_type: :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+                  - `:"image/jpeg"`
 
-
+                  - `:"image/png"`
 
-search\_result\_index: Integer
+                  - `:"image/gif"`
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+                  - `:"image/webp"`
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+                - `type: :base64`
 
-minimum0
+              - `class BetaURLImageSource`
 
-source: String
+                - `type: :url`
 
-start\_block\_index: Integer
+                - `url: String`
 
-0-based index of the first cited block in the source's `content` array.
+              - `class BetaFileImageSource`
 
-title: String
+                - `file_id: String`
 
-type: :search\_result\_location
+                - `type: :file`
 
-
+            - `type: :image`
 
-class BetaImageBlockParam { source, type, cache\_control } 
+            - `cache_control: BetaCacheControlEphemeral`
 
-
+              Create a cache control breakpoint at this content block.
 
-source: [BetaBase64ImageSource](api/beta/messages.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta/messages.md) { type, url }  | [BetaFileImageSource](api/beta/messages.md) { file\_id, type } 
+            - `transformations: BetaImageTransformationsParam`
 
-One of the following:
+              Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
 
-
+              - `oversized_image: :downsize | :error`
 
-class BetaBase64ImageSource { data, media\_type, type } 
+                What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
 
-data: String
+                - `:downsize`
 
-
+                - `:error`
 
-media\_type: :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"
+          - `class BetaRequestDocumentBlock`
 
-One of the following:
+            - `source: BetaBase64PDFSource | BetaPlainTextSource | BetaContentBlockSource | 2 more`
 
-:"image/jpeg"
+              - `class BetaBase64PDFSource`
 
-:"image/png"
+                - `data: String`
 
-:"image/gif"
+                  format: byte
 
-:"image/webp"
+                - `media_type: :"application/pdf"`
 
-type: :base64
+                - `type: :base64`
 
-
+              - `class BetaPlainTextSource`
 
-class BetaURLImageSource { type, url } 
+                - `data: String`
 
-type: :url
+                - `media_type: :"text/plain"`
 
-url: String
+                - `type: :text`
 
-
+              - `class BetaContentBlockSource`
 
-class BetaFileImageSource { file\_id, type } 
+                - `content: String | Array[BetaContentBlockSourceContent]`
 
-file\_id: String
+                  - `String = String`
 
-type: :file
+                  - `BetaContentBlockSourceContent = Array[BetaContentBlockSourceContent]`
 
-type: :image
+                    - `class BetaTextBlockParam`
 
-
+                    - `class BetaImageBlockParam`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+                - `type: :content`
 
-Create a cache control breakpoint at this content block.
+              - `class BetaURLPDFSource`
 
-type: :ephemeral
+                - `type: :url`
 
-
+                - `url: String`
 
-ttl: :"5m" | :"1h"
+              - `class BetaFileDocumentSource`
 
-The time-to-live for the cache control breakpoint.
+                - `file_id: String`
 
-This may be one the following values:
+                - `type: :file`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            - `type: :document`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            - `cache_control: BetaCacheControlEphemeral`
 
-One of the following:
+              Create a cache control breakpoint at this content block.
 
-:"5m"
+            - `citations: BetaCitationsConfigParam`
 
-:"1h"
+              - `enabled: bool`
 
-
+            - `context: String`
 
-class BetaRequestDocumentBlock { source, type, cache\_control, 3 more } 
+              minLength: 1
 
-
+            - `title: String`
 
-source: [BetaBase64PDFSource](api/beta/messages.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta/messages.md) { data, media\_type, type }  | [BetaContentBlockSource](api/beta/messages.md) { content, type }  | 2 more
+              maxLength: 500, minLength: 1
 
-One of the following:
+          - `class BetaSearchResultBlockParam`
 
-
+            - `content: Array[BetaTextBlockParam]`
 
-class BetaBase64PDFSource { data, media\_type, type } 
+              - `text: String`
 
-data: String
+                minLength: 1
 
-media\_type: :"application/pdf"
+              - `type: :text`
 
-type: :base64
+              - `cache_control: BetaCacheControlEphemeral`
 
-
+                Create a cache control breakpoint at this content block.
 
-class BetaPlainTextSource { data, media\_type, type } 
+              - `citations: Array[BetaTextCitationParam]`
 
-data: String
+            - `source: String`
 
-media\_type: :"text/plain"
+            - `title: String`
 
-type: :text
+            - `type: :search_result`
 
-
+            - `cache_control: BetaCacheControlEphemeral`
 
-class BetaContentBlockSource { content, type } 
+              Create a cache control breakpoint at this content block.
 
-
+            - `citations: BetaCitationsConfigParam`
 
-content: String | Array[[BetaContentBlockSourceContent](api/beta/messages.md)]
+          - `class BetaThinkingBlockParam`
 
-One of the following:
+            - `signature: String`
 
-String = String
+              The `signature` value of this thinking block, exactly as returned by the API in a previous response. Used to verify that the block was generated by Claude.
 
-
+              Thinking blocks must be passed back unmodified and in their original order; a modified block results in a 400 `invalid_request_error`.
 
-BetaContentBlockSourceContent = Array[[BetaContentBlockSourceContent](api/beta/messages.md)]
+            - `thinking: String`
 
-One of the following:
+              The `thinking` text of this block as returned by the API.
 
-
+            - `type: :thinking`
 
-class BetaTextBlockParam { text, type, cache\_control, citations } 
+          - `class BetaRedactedThinkingBlockParam`
 
-text: String
+            - `data: String`
 
-type: :text
+              The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-
+            - `type: :redacted_thinking`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+          - `class BetaToolUseBlockParam`
 
-Create a cache control breakpoint at this content block.
+            - `id: String`
 
-type: :ephemeral
+              pattern: ^[a-zA-Z0-9_-]+$
 
-
+            - `input: Hash[Symbol, untyped]`
 
-ttl: :"5m" | :"1h"
+            - `name: String`
 
-The time-to-live for the cache control breakpoint.
+              maxLength: 200, minLength: 1
 
-This may be one the following values:
+            - `type: :tool_use`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            - `cache_control: BetaCacheControlEphemeral`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+              Create a cache control breakpoint at this content block.
 
-One of the following:
+            - `caller_: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-:"5m"
+              Tool invocation directly from the model.
 
-:"1h"
+              - `class BetaDirectCaller`
 
-
+                Tool invocation directly from the model.
 
-citations: Array[[BetaTextCitationParam](api/beta/messages.md)]
+                - `type: :direct`
 
-One of the following:
+              - `class BetaServerToolCaller`
 
-
+                Tool invocation generated by a server-side tool.
 
-class BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+                - `tool_id: String`
 
-cited\_text: String
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-document\_index: Integer
+                - `type: :code_execution_20250825`
 
-document\_title: String
+              - `class BetaServerToolCaller20260120`
 
-end\_char\_index: Integer
+                - `tool_id: String`
 
-start\_char\_index: Integer
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-type: :char\_location
+                - `type: :code_execution_20260120`
 
-
+            - `toolset_name: String`
 
-class BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+              For a toolset member tool_use, the toolset family this member belongs to.
 
-cited\_text: String
+              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-document\_index: Integer
+          - `class BetaToolResultBlockParam`
 
-document\_title: String
+            - `tool_use_id: String`
 
-end\_page\_number: Integer
+              pattern: ^[a-zA-Z0-9_-]+$
 
-start\_page\_number: Integer
+            - `type: :tool_result`
 
-type: :page\_location
+            - `cache_control: BetaCacheControlEphemeral`
 
-
+              Create a cache control breakpoint at this content block.
 
-class BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+            - `content: String | Array[BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 3 more]`
 
-
+              - `String = String`
 
-cited\_text: String
+              - `Content = Array[BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 3 more]`
 
-The full text of the cited block range, concatenated.
+                - `class BetaTextBlockParam`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+                - `class BetaImageBlockParam`
 
-document\_index: Integer
+                - `class BetaSearchResultBlockParam`
 
-document\_title: String
+                - `class BetaRequestDocumentBlock`
 
-
+                - `class BetaToolReferenceBlockParam`
 
-end\_block\_index: Integer
+                  Tool reference block that can be included in tool_result content.
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+                  - `tool_name: String`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-start\_block\_index: Integer
+                  - `type: :tool_reference`
 
-0-based index of the first cited block in the source's `content` array.
+                  - `cache_control: BetaCacheControlEphemeral`
 
-type: :content\_block\_location
+                    Create a cache control breakpoint at this content block.
 
-
+                - `class BetaBrowserStateBlockParam`
 
-class BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more } 
+                  The caller's browser state after a browser toolset member call —
+                  the full inventory of open tabs, which tab is active, and any side
+                  effects (tabs opened, download state changes) the call produced.
 
-cited\_text: String
+                  At most one per `tool_result`, only on a non-error result answering a
+                  browser toolset member `tool_use`. The server renders the
+                  model-visible text from it; the model never sees the raw fields.
 
-encrypted\_index: String
+                  - `tabs: Array[BetaBrowserStateTabEntry]`
 
-title: String
+                    All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
-type: :web\_search\_result\_location
+                    maxItems: 100
 
-url: String
+                    - `tab_id: String`
 
-
+                      The caller-assigned identifier for this tab, unique within the inventory.
 
-class BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-
+                    - `title: String`
 
-cited\_text: String
+                      The title of the page the tab is showing. May be empty.
 
-The full text of the cited block range, concatenated.
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+                    - `url: String`
 
-
+                      The URL of the page the tab is showing. May be empty.
 
-end\_block\_index: Integer
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+                    - `active: bool`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+                      Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-
+                  - `type: :browser_state`
 
-search\_result\_index: Integer
+                  - `cache_control: BetaCacheControlEphemeral`
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+                    Create a cache control breakpoint at this content block.
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+                  - `state_changes: Array[BetaBrowserStateChange]`
 
-minimum0
+                    Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-source: String
+                    maxItems: 200, minItems: 1
 
-start\_block\_index: Integer
+                    - `class BetaBrowserStateChangeTabOpened`
 
-0-based index of the first cited block in the source's `content` array.
+                      A tab this call's execution opened that remains open at its end —
+                      the creation delta of the `tabs` inventory, not an event log.
 
-title: String
+                      Carries only the `tab_id`; the tab's `title` and `url` live on its
+                      `tabs` entry, which must include the same `tab_id`. A tab opened
+                      during a failed call gets no deferred `tab_opened`; it simply appears
+                      in the next result's `tabs` inventory.
 
-type: :search\_result\_location
+                      - `tab_id: String`
 
-
+                        The `tab_id` of the opened tab, present in `tabs`.
 
-class BetaImageBlockParam { source, type, cache\_control } 
+                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-
+                      - `type: :tab_opened`
 
-source: [BetaBase64ImageSource](api/beta/messages.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta/messages.md) { type, url }  | [BetaFileImageSource](api/beta/messages.md) { file\_id, type } 
+                    - `class BetaBrowserStateChangeDownloadStarted`
 
-One of the following:
+                      A file download that started during this call.
 
-
+                      - `download_id: String`
 
-class BetaBase64ImageSource { data, media\_type, type } 
+                        The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-data: String
+                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-
+                      - `type: :download_started`
 
-media\_type: :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"
+                      - `url: String`
 
-One of the following:
+                        The final post-redirect URL the download was served from.
 
-:"image/jpeg"
+                        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-:"image/png"
+                    - `class BetaBrowserStateChangeDownloadCompleted`
 
-:"image/gif"
+                      A file download that finished during this call, reported with the
+                      same `download_id` as its `download_started` — or without a prior
+                      `download_started`, when the download finished during the call that
+                      started it (at most one state change per `download_id` per result).
 
-:"image/webp"
+                      - `download_id: String`
 
-type: :base64
+                        The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-
+                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-class BetaURLImageSource { type, url } 
+                      - `type: :download_completed`
 
-type: :url
+                      - `url: String`
 
-url: String
+                        The final post-redirect URL the download was served from.
 
-
+                        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-class BetaFileImageSource { file\_id, type } 
+                      - `path: String`
 
-file\_id: String
+                        Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-type: :file
+                        pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
 
-type: :image
+                      - `size_bytes: Integer`
 
-
+                        The completed download's size.
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+                        minimum: 0
 
-Create a cache control breakpoint at this content block.
+                    - `class BetaBrowserStateChangeDownloadFailed`
 
-type: :ephemeral
+                      A file download that failed — or was cancelled — during this call.
 
-
+                      - `download_id: String`
 
-ttl: :"5m" | :"1h"
+                        The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-The time-to-live for the cache control breakpoint.
+                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-This may be one the following values:
+                      - `type: :download_failed`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+                      - `url: String`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+                        The final post-redirect URL the download was served from.
 
-One of the following:
+                        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-:"5m"
+                      - `error: String`
 
-:"1h"
+                        The failure or cancellation detail, when known.
 
-type: :content
+                        pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
 
-
+            - `is_error: bool`
 
-class BetaURLPDFSource { type, url } 
+            - `toolset_name: String`
 
-type: :url
+              For a toolset member tool_result, the toolset family of the paired tool_use.
 
-url: String
+              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-
+          - `class BetaServerToolUseBlockParam`
 
-class BetaFileDocumentSource { file\_id, type } 
+            - `id: String`
 
-file\_id: String
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-type: :file
+            - `input: Hash[Symbol, untyped]`
 
-type: :document
+            - `name: :advisor | :web_search | :web_fetch | 5 more`
 
-
+              - `:advisor`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+              - `:web_search`
 
-Create a cache control breakpoint at this content block.
+              - `:web_fetch`
 
-type: :ephemeral
+              - `:code_execution`
 
-
+              - `:bash_code_execution`
 
-ttl: :"5m" | :"1h"
+              - `:text_editor_code_execution`
 
-The time-to-live for the cache control breakpoint.
+              - `:tool_search_tool_regex`
 
-This may be one the following values:
+              - `:tool_search_tool_bm25`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            - `type: :server_tool_use`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            - `cache_control: BetaCacheControlEphemeral`
 
-One of the following:
+              Create a cache control breakpoint at this content block.
 
-:"5m"
+            - `caller_: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-:"1h"
+              Tool invocation directly from the model.
 
-
+              - `class BetaDirectCaller`
 
-citations: [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+                Tool invocation directly from the model.
 
-enabled: bool
+              - `class BetaServerToolCaller`
 
-context: String
+                Tool invocation generated by a server-side tool.
 
-title: String
+              - `class BetaServerToolCaller20260120`
 
-
+          - `class BetaWebSearchToolResultBlockParam`
 
-class BetaSearchResultBlockParam { content, source, title, 3 more } 
+            - `content: BetaWebSearchToolResultBlockParamContent`
 
-
+              - `ResultBlock = Array[BetaWebSearchResultBlockParam]`
 
-content: Array[[BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations } ]
+                - `encrypted_content: String`
 
-text: String
+                - `title: String`
 
-type: :text
+                - `type: :web_search_result`
 
-
+                - `url: String`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+                - `page_age: String`
 
-Create a cache control breakpoint at this content block.
+              - `class BetaWebSearchToolRequestError`
 
-type: :ephemeral
+                - `error_code: BetaWebSearchToolResultErrorCode`
 
-
+                  - `:invalid_tool_input`
 
-ttl: :"5m" | :"1h"
+                  - `:unavailable`
 
-The time-to-live for the cache control breakpoint.
+                  - `:max_uses_exceeded`
 
-This may be one the following values:
+                  - `:too_many_requests`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+                  - `:query_too_long`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+                  - `:request_too_large`
 
-One of the following:
+                - `type: :web_search_tool_result_error`
 
-:"5m"
+            - `tool_use_id: String`
 
-:"1h"
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-
+            - `type: :web_search_tool_result`
 
-citations: Array[[BetaTextCitationParam](api/beta/messages.md)]
+            - `cache_control: BetaCacheControlEphemeral`
 
-One of the following:
+              Create a cache control breakpoint at this content block.
 
-
+            - `caller_: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-class BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+              Tool invocation directly from the model.
 
-cited\_text: String
+              - `class BetaDirectCaller`
 
-document\_index: Integer
+                Tool invocation directly from the model.
 
-document\_title: String
+              - `class BetaServerToolCaller`
 
-end\_char\_index: Integer
+                Tool invocation generated by a server-side tool.
 
-start\_char\_index: Integer
+              - `class BetaServerToolCaller20260120`
 
-type: :char\_location
+          - `class BetaWebFetchToolResultBlockParam`
 
-
+            - `content: BetaWebFetchToolResultErrorBlockParam | BetaWebFetchBlockParam`
 
-class BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+              - `class BetaWebFetchToolResultErrorBlockParam`
 
-cited\_text: String
+                - `error_code: BetaWebFetchToolResultErrorCode`
 
-document\_index: Integer
+                  - `:invalid_tool_input`
 
-document\_title: String
+                  - `:url_too_long`
 
-end\_page\_number: Integer
+                  - `:url_not_allowed`
 
-start\_page\_number: Integer
+                  - `:url_not_in_prior_context`
 
-type: :page\_location
+                  - `:url_not_accessible`
 
-
+                  - `:unsupported_content_type`
 
-class BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+                  - `:too_many_requests`
 
-
+                  - `:max_uses_exceeded`
 
-cited\_text: String
+                  - `:unavailable`
 
-The full text of the cited block range, concatenated.
+                - `type: :web_fetch_tool_result_error`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+              - `class BetaWebFetchBlockParam`
 
-document\_index: Integer
+                - `content: BetaRequestDocumentBlock`
 
-document\_title: String
+                - `type: :web_fetch_result`
 
-
+                - `url: String`
 
-end\_block\_index: Integer
+                  Fetched content URL
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+                - `retrieved_at: String`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+                  ISO 8601 timestamp when the content was retrieved
 
-start\_block\_index: Integer
+            - `tool_use_id: String`
 
-0-based index of the first cited block in the source's `content` array.
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-type: :content\_block\_location
+            - `type: :web_fetch_tool_result`
 
-
+            - `cache_control: BetaCacheControlEphemeral`
 
-class BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more } 
+              Create a cache control breakpoint at this content block.
 
-cited\_text: String
+            - `caller_: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-encrypted\_index: String
+              Tool invocation directly from the model.
 
-title: String
+              - `class BetaDirectCaller`
 
-type: :web\_search\_result\_location
+                Tool invocation directly from the model.
 
-url: String
+              - `class BetaServerToolCaller`
 
-
+                Tool invocation generated by a server-side tool.
 
-class BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+              - `class BetaServerToolCaller20260120`
 
-
+          - `class BetaAdvisorToolResultBlockParam`
 
-cited\_text: String
+            - `content: BetaAdvisorToolResultErrorParam | BetaAdvisorResultBlockParam | BetaAdvisorRedactedResultBlockParam`
 
-The full text of the cited block range, concatenated.
+              - `class BetaAdvisorToolResultErrorParam`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+                - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
-
+                  - `:max_uses_exceeded`
 
-end\_block\_index: Integer
+                  - `:prompt_too_long`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+                  - `:too_many_requests`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+                  - `:overloaded`
 
-
+                  - `:unavailable`
 
-search\_result\_index: Integer
+                  - `:execution_time_exceeded`
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+                  - `:model_not_found`
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+                - `type: :advisor_tool_result_error`
 
-minimum0
+              - `class BetaAdvisorResultBlockParam`
 
-source: String
+                - `text: String`
 
-start\_block\_index: Integer
+                - `type: :advisor_result`
 
-0-based index of the first cited block in the source's `content` array.
+                - `stop_reason: String`
 
-title: String
+              - `class BetaAdvisorRedactedResultBlockParam`
 
-type: :search\_result\_location
+                - `encrypted_content: String`
 
-source: String
+                  Opaque blob produced by a prior response; must be round-tripped verbatim.
 
-title: String
+                - `type: :advisor_redacted_result`
 
-type: :search\_result
+                - `stop_reason: String`
 
-
+            - `tool_use_id: String`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Create a cache control breakpoint at this content block.
+            - `type: :advisor_tool_result`
 
-type: :ephemeral
+            - `cache_control: BetaCacheControlEphemeral`
 
-
+              Create a cache control breakpoint at this content block.
 
-ttl: :"5m" | :"1h"
+          - `class BetaCodeExecutionToolResultBlockParam`
 
-The time-to-live for the cache control breakpoint.
+            - `content: BetaCodeExecutionToolResultBlockParamContent`
 
-This may be one the following values:
+              Code execution result with encrypted stdout for PFC + web_search results.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+              - `class BetaCodeExecutionToolResultErrorParam`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+                - `error_code: BetaCodeExecutionToolResultErrorCode`
 
-One of the following:
+                  - `:invalid_tool_input`
 
-:"5m"
+                  - `:unavailable`
 
-:"1h"
+                  - `:too_many_requests`
 
-
+                  - `:execution_time_exceeded`
 
-citations: [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+                - `type: :code_execution_tool_result_error`
 
-enabled: bool
+              - `class BetaCodeExecutionResultBlockParam`
 
-
+                - `content: Array[BetaCodeExecutionOutputBlockParam]`
 
-class BetaThinkingBlockParam { signature, thinking, type } 
+                  - `file_id: String`
 
-signature: String
+                  - `type: :code_execution_output`
 
-thinking: String
+                - `return_code: Integer`
 
-type: :thinking
+                - `stderr: String`
 
-
+                - `stdout: String`
 
-class BetaRedactedThinkingBlockParam { data, type } 
+                - `type: :code_execution_result`
 
-data: String
+              - `class BetaEncryptedCodeExecutionResultBlockParam`
 
-type: :redacted\_thinking
+                Code execution result with encrypted stdout for PFC + web_search results.
 
-
+                - `content: Array[BetaCodeExecutionOutputBlockParam]`
 
-class BetaToolUseBlockParam { id, input, name, 3 more } 
+                  - `file_id: String`
 
-id: String
+                  - `type: :code_execution_output`
 
-input: Hash[Symbol, untyped]
+                - `encrypted_stdout: String`
 
-name: String
+                - `return_code: Integer`
 
-type: :tool\_use
+                - `stderr: String`
 
-
+                - `type: :encrypted_code_execution_result`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+            - `tool_use_id: String`
 
-Create a cache control breakpoint at this content block.
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-type: :ephemeral
+            - `type: :code_execution_tool_result`
 
-
+            - `cache_control: BetaCacheControlEphemeral`
 
-ttl: :"5m" | :"1h"
+              Create a cache control breakpoint at this content block.
 
-The time-to-live for the cache control breakpoint.
+          - `class BetaBashCodeExecutionToolResultBlockParam`
 
-This may be one the following values:
+            - `content: BetaBashCodeExecutionToolResultErrorParam | BetaBashCodeExecutionResultBlockParam`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+              - `class BetaBashCodeExecutionToolResultErrorParam`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+                - `error_code: :invalid_tool_input | :unavailable | :too_many_requests | 2 more`
 
-One of the following:
+                  - `:invalid_tool_input`
 
-:"5m"
+                  - `:unavailable`
 
-:"1h"
+                  - `:too_many_requests`
 
-
+                  - `:execution_time_exceeded`
 
-caller\_: [BetaDirectCaller](api/beta/messages.md) { type }  | [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
+                  - `:output_file_too_large`
 
-Tool invocation directly from the model.
+                - `type: :bash_code_execution_tool_result_error`
 
-One of the following:
+              - `class BetaBashCodeExecutionResultBlockParam`
 
-
+                - `content: Array[BetaBashCodeExecutionOutputBlockParam]`
 
-class BetaDirectCaller { type } 
+                  - `file_id: String`
 
-Tool invocation directly from the model.
+                  - `type: :bash_code_execution_output`
 
-type: :direct
+                - `return_code: Integer`
 
-
+                - `stderr: String`
 
-class BetaServerToolCaller { tool\_id, type } 
+                - `stdout: String`
 
-Tool invocation generated by a server-side tool.
+                - `type: :bash_code_execution_result`
 
-tool\_id: String
+            - `tool_use_id: String`
 
-type: :code\_execution\_20250825
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-
+            - `type: :bash_code_execution_tool_result`
 
-class BetaServerToolCaller20260120 { tool\_id, type } 
+            - `cache_control: BetaCacheControlEphemeral`
 
-tool\_id: String
+              Create a cache control breakpoint at this content block.
 
-type: :code\_execution\_20260120
+          - `class BetaTextEditorCodeExecutionToolResultBlockParam`
 
-
+            - `content: BetaTextEditorCodeExecutionToolResultErrorParam | BetaTextEditorCodeExecutionViewResultBlockParam | BetaTextEditorCodeExecutionCreateResultBlockParam | BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
-class BetaToolResultBlockParam { tool\_use\_id, type, cache\_control, 2 more } 
+              - `class BetaTextEditorCodeExecutionToolResultErrorParam`
 
-tool\_use\_id: String
+                - `error_code: :invalid_tool_input | :unavailable | :too_many_requests | 2 more`
 
-type: :tool\_result
+                  - `:invalid_tool_input`
 
-
+                  - `:unavailable`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+                  - `:too_many_requests`
 
-Create a cache control breakpoint at this content block.
+                  - `:execution_time_exceeded`
 
-type: :ephemeral
+                  - `:file_not_found`
 
-
+                - `type: :text_editor_code_execution_tool_result_error`
 
-ttl: :"5m" | :"1h"
+                - `error_message: String`
 
-The time-to-live for the cache control breakpoint.
+              - `class BetaTextEditorCodeExecutionViewResultBlockParam`
 
-This may be one the following values:
+                - `content: String`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+                - `file_type: :text | :image | :pdf`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+                  - `:text`
 
-One of the following:
+                  - `:image`
 
-:"5m"
+                  - `:pdf`
 
-:"1h"
+                - `type: :text_editor_code_execution_view_result`
 
-
+                - `num_lines: Integer`
 
-content: String | Array[[BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations }  | [BetaImageBlockParam](api/beta/messages.md) { source, type, cache\_control }  | [BetaSearchResultBlockParam](api/beta/messages.md) { content, source, title, 3 more }  | 2 more]
+                - `start_line: Integer`
 
-One of the following:
+                - `total_lines: Integer`
 
-String = String
+              - `class BetaTextEditorCodeExecutionCreateResultBlockParam`
 
-
+                - `is_file_update: bool`
 
-Content = Array[[BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations }  | [BetaImageBlockParam](api/beta/messages.md) { source, type, cache\_control }  | [BetaSearchResultBlockParam](api/beta/messages.md) { content, source, title, 3 more }  | 2 more]
+                - `type: :text_editor_code_execution_create_result`
 
-One of the following:
+              - `class BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
-
+                - `type: :text_editor_code_execution_str_replace_result`
 
-class BetaTextBlockParam { text, type, cache\_control, citations } 
+                - `lines: Array[String]`
 
-text: String
+                - `new_lines: Integer`
 
-type: :text
+                - `new_start: Integer`
 
-
+                - `old_lines: Integer`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+                - `old_start: Integer`
 
-Create a cache control breakpoint at this content block.
+            - `tool_use_id: String`
 
-type: :ephemeral
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-
+            - `type: :text_editor_code_execution_tool_result`
 
-ttl: :"5m" | :"1h"
+            - `cache_control: BetaCacheControlEphemeral`
 
-The time-to-live for the cache control breakpoint.
+              Create a cache control breakpoint at this content block.
 
-This may be one the following values:
+          - `class BetaToolSearchToolResultBlockParam`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            - `content: BetaToolSearchToolResultErrorParam | BetaToolSearchToolSearchResultBlockParam`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+              - `class BetaToolSearchToolResultErrorParam`
 
-One of the following:
+                - `error_code: :invalid_tool_input | :unavailable | :too_many_requests | :execution_time_exceeded`
 
-:"5m"
+                  - `:invalid_tool_input`
 
-:"1h"
+                  - `:unavailable`
 
-
+                  - `:too_many_requests`
 
-citations: Array[[BetaTextCitationParam](api/beta/messages.md)]
+                  - `:execution_time_exceeded`
 
-One of the following:
+                - `type: :tool_search_tool_result_error`
 
-
+                - `error_message: String`
 
-class BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+              - `class BetaToolSearchToolSearchResultBlockParam`
 
-cited\_text: String
+                - `tool_references: Array[BetaToolReferenceBlockParam]`
 
-document\_index: Integer
+                  - `tool_name: String`
 
-document\_title: String
+                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-end\_char\_index: Integer
+                  - `type: :tool_reference`
 
-start\_char\_index: Integer
+                  - `cache_control: BetaCacheControlEphemeral`
 
-type: :char\_location
+                    Create a cache control breakpoint at this content block.
 
-
+                - `type: :tool_search_tool_search_result`
 
-class BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+            - `tool_use_id: String`
 
-cited\_text: String
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-document\_index: Integer
+            - `type: :tool_search_tool_result`
 
-document\_title: String
+            - `cache_control: BetaCacheControlEphemeral`
 
-end\_page\_number: Integer
+              Create a cache control breakpoint at this content block.
 
-start\_page\_number: Integer
+          - `class BetaMCPToolUseBlockParam`
 
-type: :page\_location
+            - `id: String`
 
-
+              pattern: ^[a-zA-Z0-9_-]+$
 
-class BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+            - `input: Hash[Symbol, untyped]`
 
-
+            - `name: String`
 
-cited\_text: String
+            - `server_name: String`
 
-The full text of the cited block range, concatenated.
+              The name of the MCP server
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+            - `type: :mcp_tool_use`
 
-document\_index: Integer
+            - `cache_control: BetaCacheControlEphemeral`
 
-document\_title: String
+              Create a cache control breakpoint at this content block.
 
-
+          - `class BetaRequestMCPToolResultBlockParam`
 
-end\_block\_index: Integer
+            - `tool_use_id: String`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+              pattern: ^[a-zA-Z0-9_-]+$
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+            - `type: :mcp_tool_result`
 
-start\_block\_index: Integer
+            - `cache_control: BetaCacheControlEphemeral`
 
-0-based index of the first cited block in the source's `content` array.
+              Create a cache control breakpoint at this content block.
 
-type: :content\_block\_location
+            - `content: String | Array[BetaTextBlockParam]`
 
-
+              - `String = String`
 
-class BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more } 
+              - `BetaMCPToolResultBlockParamContent = Array[BetaTextBlockParam]`
 
-cited\_text: String
+                - `text: String`
 
-encrypted\_index: String
+                  minLength: 1
 
-title: String
+                - `type: :text`
 
-type: :web\_search\_result\_location
+                - `cache_control: BetaCacheControlEphemeral`
 
-url: String
+                  Create a cache control breakpoint at this content block.
 
-
+                - `citations: Array[BetaTextCitationParam]`
 
-class BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+            - `is_error: bool`
 
-
+          - `class BetaContainerUploadBlockParam`
 
-cited\_text: String
+            A content block that represents a file to be uploaded to the container
+            Files uploaded via this block will be available in the container's input directory.
 
-The full text of the cited block range, concatenated.
+            - `file_id: String`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+            - `type: :container_upload`
 
-
+            - `cache_control: BetaCacheControlEphemeral`
 
-end\_block\_index: Integer
+              Create a cache control breakpoint at this content block.
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+          - `class BetaCompactionBlockParam`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+            A compaction block containing summary of previous context.
 
-
+            Users should round-trip these blocks from responses to subsequent requests
+            to maintain context across compaction boundaries.
 
-search\_result\_index: Integer
+            When content is None, the block represents a failed compaction. The server
+            treats these as no-ops. Empty string content is not allowed.
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+            - `type: :compaction`
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+            - `cache_control: BetaCacheControlEphemeral`
 
-minimum0
+              Create a cache control breakpoint at this content block.
 
-source: String
+            - `content: String`
 
-start\_block\_index: Integer
+              Summary of previously compacted content, or null if compaction failed
 
-0-based index of the first cited block in the source's `content` array.
+            - `encrypted_content: String`
 
-title: String
+              Opaque metadata from prior compaction, to be round-tripped verbatim
 
-type: :search\_result\_location
+          - `class BetaRequestToolAdditionBlock`
 
-
+            Mid-conversation directive to surface a declared tool.
 
-class BetaImageBlockParam { source, type, cache\_control } 
+            `tool` references a tool (or MCP toolset) by name from the request's
+            `tools`; it is offered to the model from this point in the
+            conversation onward.
 
-
+            - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
-source: [BetaBase64ImageSource](api/beta/messages.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta/messages.md) { type, url }  | [BetaFileImageSource](api/beta/messages.md) { file\_id, type } 
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
 
-One of the following:
+              - `class BetaToolChangeToolReference`
 
-
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
 
-class BetaBase64ImageSource { data, media\_type, type } 
+                - `name: String`
 
-data: String
+                  pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-
+                - `type: :tool_reference`
 
-media\_type: :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"
+              - `class BetaToolChangeMCPToolReference`
 
-One of the following:
+                Reference to a single MCP tool by its server and remote name — the
+                same `server_name`/`name` pair `mcp_tool_use` carries.
 
-:"image/jpeg"
+                - `name: String`
 
-:"image/png"
+                - `server_name: String`
 
-:"image/gif"
+                - `type: :mcp_tool_reference`
 
-:"image/webp"
+              - `class BetaToolChangeMCPToolsetReference`
 
-type: :base64
+                Reference to every tool in the named MCP server's toolset.
 
-
+                - `server_name: String`
 
-class BetaURLImageSource { type, url } 
+                - `type: :mcp_toolset_reference`
 
-type: :url
+            - `type: :tool_addition`
 
-url: String
+            - `cache_control: BetaCacheControlEphemeral`
 
-
+              Create a cache control breakpoint at this content block.
 
-class BetaFileImageSource { file\_id, type } 
+          - `class BetaRequestToolRemovalBlock`
 
-file\_id: String
+            Mid-conversation directive to withdraw a tool.
 
-type: :file
+            `tool` references a tool (or MCP toolset) by name from the request's
+            `tools`; it is no longer offered to the model from this point in the
+            conversation onward.
 
-type: :image
+            - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
-
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+              - `class BetaToolChangeToolReference`
 
-Create a cache control breakpoint at this content block.
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
 
-type: :ephemeral
+              - `class BetaToolChangeMCPToolReference`
 
-
+                Reference to a single MCP tool by its server and remote name — the
+                same `server_name`/`name` pair `mcp_tool_use` carries.
 
-ttl: :"5m" | :"1h"
+              - `class BetaToolChangeMCPToolsetReference`
 
-The time-to-live for the cache control breakpoint.
+                Reference to every tool in the named MCP server's toolset.
 
-This may be one the following values:
+            - `type: :tool_removal`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            - `cache_control: BetaCacheControlEphemeral`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+              Create a cache control breakpoint at this content block.
 
-One of the following:
+          - `class BetaFallbackBlockParam`
 
-:"5m"
+            A `fallback` block echoed back from a prior response.
 
-:"1h"
+            Accepted in `messages[].content` and not rendered into the prompt; not
+            validated against the request's `fallbacks` chain or top-level `model`.
 
-
+            Echo the assistant turn back verbatim, including this block in its
+            original position. The block marks the boundary between content produced
+            before and after a fallback hop, and the server relies on that boundary
+            to validate the turn: when thinking runs flank the boundary, omitting
+            the block merges them into one span the server cannot validate (the
+            request is rejected), and moving it into the middle of a single run is
+            likewise rejected; between non-thinking blocks the block's placement has
+            no validation effect.
 
-class BetaSearchResultBlockParam { content, source, title, 3 more } 
+            - `from: BetaFallbackInfoParam`
 
-
+              Identifies one hop of a fallback transition.
 
-content: Array[[BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations } ]
+              - `model: Model`
 
-text: String
+                The model that will complete your prompt.
 
-type: :text
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-
+                - `Model = :"claude-fable-5-1" | :"claude-mythos-5-1" | :"claude-sonnet-5" | 14 more`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+                  The model that will complete your prompt.
 
-Create a cache control breakpoint at this content block.
+                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-type: :ephemeral
+                  - `:"claude-fable-5-1"`
 
-
+                    Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
-ttl: :"5m" | :"1h"
+                  - `:"claude-mythos-5-1"`
 
-The time-to-live for the cache control breakpoint.
+                    Our most capable model for cybersecurity and biology research, available through trusted access programs
 
-This may be one the following values:
+                  - `:"claude-sonnet-5"`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+                    High-performance model for coding and agents
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+                  - `:"claude-fable-5"`
 
-One of the following:
+                    Next generation of intelligence for the hardest knowledge work and coding problems
 
-:"5m"
+                  - `:"claude-mythos-5"`
 
-:"1h"
+                    Most capable model for cybersecurity and biology research
 
-
+                  - `:"claude-opus-5"`
 
-citations: Array[[BetaTextCitationParam](api/beta/messages.md)]
+                    Powerful intelligence for long-running agents and coding
 
-One of the following:
+                  - `:"claude-opus-4-8"`
 
-
+                    Powerful intelligence for long-running agents and coding
 
-class BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+                  - `:"claude-opus-4-7"`
 
-cited\_text: String
+                    Powerful intelligence for long-running agents and coding
 
-document\_index: Integer
+                  - `:"claude-mythos-preview"`
 
-document\_title: String
+                    New class of intelligence, strongest in coding and cybersecurity
 
-end\_char\_index: Integer
+                  - `:"claude-opus-4-6"`
 
-start\_char\_index: Integer
+                    Powerful intelligence for long-running agents and coding
 
-type: :char\_location
+                  - `:"claude-sonnet-4-6"`
 
-
+                    Best combination of speed and intelligence
 
-class BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+                  - `:"claude-haiku-4-5"`
 
-cited\_text: String
+                    Fastest model with near-frontier intelligence
 
-document\_index: Integer
+                  - `:"claude-haiku-4-5-20251001"`
 
-document\_title: String
+                    Fastest model with near-frontier intelligence
 
-end\_page\_number: Integer
+                  - `:"claude-opus-4-5"`
 
-start\_page\_number: Integer
+                    Powerful intelligence for long-running agents and coding
 
-type: :page\_location
+                  - `:"claude-opus-4-5-20251101"`
 
-
+                    Powerful intelligence for long-running agents and coding
 
-class BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+                  - `:"claude-sonnet-4-5"`
 
-
+                    High-performance model for agents and coding
 
-cited\_text: String
+                  - `:"claude-sonnet-4-5-20250929"`
 
-The full text of the cited block range, concatenated.
+                    High-performance model for agents and coding
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+                - `String = String`
 
-document\_index: Integer
+            - `to: BetaFallbackInfoParam`
 
-document\_title: String
+              Identifies one hop of a fallback transition.
 
-
+            - `type: :fallback`
 
-end\_block\_index: Integer
+            - `trigger: untyped`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+              The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+      - `role: :user | :assistant | :system`
 
-start\_block\_index: Integer
+        - `:user`
 
-0-based index of the first cited block in the source's `content` array.
+        - `:assistant`
 
-type: :content\_block\_location
+        - `:system`
 
-
+      - `clear_at: :next_user_message | :never`
 
-class BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more } 
+        How long this system message's text stays in front of the model. `"never"` (the default) renders it on every request that includes it. `"next_user_message"` renders it only for the user turn it follows: once a later `role: "user"` message exists in `messages` the message stays in the array (send it unchanged) but is no longer shown to the model. Only permitted on `role: "system"` messages.
 
-cited\_text: String
+        - `:next_user_message`
 
-encrypted\_index: String
+        - `:never`
 
-title: String
+      - `output_config: BetaSystemMessageOutputConfig`
 
-type: :web\_search\_result\_location
+        Per-message output configuration on a role:"system" input message.
 
-url: String
+        Fields here apply per-turn; `format` remains top-level only. An
+        empty `{}` is accepted on a message that carries content; a message
+        with neither content nor output_config fields is rejected.
 
-
+        - `effort: :low | :medium | :high | 2 more`
 
-class BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+          All possible effort levels.
 
-
+          - `:low`
 
-cited\_text: String
+          - `:medium`
 
-The full text of the cited block range, concatenated.
+          - `:high`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+          - `:xhigh`
 
-
+          - `:max`
 
-end\_block\_index: Integer
+    - `model: Model`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+      The model that will complete your prompt.
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-
+    - `cache_control: BetaCacheControlEphemeral`
 
-search\_result\_index: Integer
+      Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+    - `container: BetaContainerParams | String`
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+      Container identifier for reuse across requests.
 
-minimum0
+      - `class BetaContainerParams`
 
-source: String
+        Container parameters with skills to be loaded.
 
-start\_block\_index: Integer
+        - `id: String`
 
-0-based index of the first cited block in the source's `content` array.
+          Container id
 
-title: String
+        - `skills: Array[BetaSkillParams]`
 
-type: :search\_result\_location
+          List of skills to load in the container
 
-source: String
+          maxItems: 20
 
-title: String
+          - `skill_id: String`
 
-type: :search\_result
+            Skill ID
 
-
+            maxLength: 64, minLength: 1
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+          - `type: :anthropic | :custom`
 
-Create a cache control breakpoint at this content block.
+            Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-type: :ephemeral
+            - `:anthropic`
 
-
+            - `:custom`
 
-ttl: :"5m" | :"1h"
+          - `version: String`
 
-The time-to-live for the cache control breakpoint.
+            Skill version or 'latest' for most recent version
 
-This may be one the following values:
+            maxLength: 64, minLength: 1
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      - `String = String`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+    - `context_management: BetaContextManagementConfig`
 
-One of the following:
+      Context management configuration.
 
-:"5m"
+      This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-:"1h"
+      - `edits: Array[BetaClearToolUses20250919Edit | BetaClearThinking20251015Edit | BetaCompact20260112Edit]`
 
-
+        List of context management edits to apply
 
-citations: [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+        minItems: 0
 
-enabled: bool
+        - `class BetaClearToolUses20250919Edit`
 
-
+          - `type: :clear_tool_uses_20250919`
 
-class BetaRequestDocumentBlock { source, type, cache\_control, 3 more } 
+          - `clear_at_least: BetaInputTokensClearAtLeast`
 
-
+            Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
 
-source: [BetaBase64PDFSource](api/beta/messages.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta/messages.md) { data, media\_type, type }  | [BetaContentBlockSource](api/beta/messages.md) { content, type }  | 2 more
+            - `type: :input_tokens`
 
-One of the following:
+            - `value: Integer`
 
-
+              minimum: 0
 
-class BetaBase64PDFSource { data, media\_type, type } 
+          - `clear_tool_inputs: bool | Array[String]`
 
-data: String
+            Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
-media\_type: :"application/pdf"
+            - `UnionMember0 = bool`
 
-type: :base64
+            - `UnionMember1 = Array[String]`
 
-
+          - `exclude_tools: Array[String]`
 
-class BetaPlainTextSource { data, media\_type, type } 
+            Tool names whose uses are preserved from clearing
 
-data: String
+          - `keep: BetaToolUsesKeep`
 
-media\_type: :"text/plain"
+            Number of tool uses to retain in the conversation
 
-type: :text
+            - `type: :tool_uses`
 
-
+            - `value: Integer`
 
-class BetaContentBlockSource { content, type } 
+              minimum: 0
 
-
+          - `trigger: BetaInputTokensTrigger | BetaToolUsesTrigger`
 
-content: String | Array[[BetaContentBlockSourceContent](api/beta/messages.md)]
+            Condition that triggers the context management strategy
 
-One of the following:
+            - `class BetaInputTokensTrigger`
 
-String = String
+              - `type: :input_tokens`
 
-
+              - `value: Integer`
 
-BetaContentBlockSourceContent = Array[[BetaContentBlockSourceContent](api/beta/messages.md)]
+                minimum: 1
 
-One of the following:
+            - `class BetaToolUsesTrigger`
 
-
+              - `type: :tool_uses`
 
-class BetaTextBlockParam { text, type, cache\_control, citations } 
+              - `value: Integer`
 
-text: String
+                minimum: 1
 
-type: :text
+        - `class BetaClearThinking20251015Edit`
 
-
+          - `type: :clear_thinking_20251015`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+          - `keep: BetaThinkingTurns | BetaAllThinkingTurns | :all`
 
-Create a cache control breakpoint at this content block.
+            Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-type: :ephemeral
+            - `class BetaThinkingTurns`
 
-
+              - `type: :thinking_turns`
 
-ttl: :"5m" | :"1h"
+              - `value: Integer`
 
-The time-to-live for the cache control breakpoint.
+                minimum: 1
 
-This may be one the following values:
+            - `class BetaAllThinkingTurns`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+              - `type: :all`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            - `Keep = :all`
 
-One of the following:
+        - `class BetaCompact20260112Edit`
 
-:"5m"
+          Automatically compact older context when reaching the configured trigger threshold.
 
-:"1h"
+          - `type: :compact_20260112`
 
-
+          - `instructions: String`
 
-citations: Array[[BetaTextCitationParam](api/beta/messages.md)]
+            Additional instructions for summarization.
 
-One of the following:
+          - `pause_after_compaction: bool`
 
-
+            Whether to pause after compaction and return the compaction block to the user.
 
-class BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+          - `trigger: BetaInputTokensTrigger`
 
-cited\_text: String
+            When to trigger compaction. Defaults to 150000 input tokens.
 
-document\_index: Integer
+    - `diagnostics: BetaDiagnosticsParam`
 
-document\_title: String
+      Request-level diagnostics. Currently carries the previous response
+      id for prompt-cache divergence reporting.
 
-end\_char\_index: Integer
+      - `previous_message_id: String`
 
-start\_char\_index: Integer
+        The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
 
-type: :char\_location
+        maxLength: 256
 
-
+    - `fallback_credit_token: String | BetaFallbackCreditTokenParam`
 
-class BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+      The `fallback_credit_token` from a prior refusal's `stop_details`.
 
-cited\_text: String
+      When a preceding request was refused and returned a `fallback_credit_token`,
+      pass that code here on the retry to have the retry's cache-creation tokens
+      for the prefix that was warm on the refused model billed at the cache-read
+      rate. Must be redeemed by the same organization and workspace, with the same
+      request body (optionally extended by one appended `assistant` message whose
+      content is the partial text — with any trailing whitespace stripped from
+      the final text block — and paired server-tool blocks streamed before the
+      refusal; the appended-assistant form is not available for requests with
+      `output_format` set or forced `tool_choice`), on an eligible fallback
+      model, on the same platform,
+      and within 5 minutes of the refusal; a mismatch is a 400. A token minted
+      mid-server-tool-loop whose partial content was continuable may only be
+      redeemed with the appended-assistant form — if an exact-body retry is
+      rejected with a 400 saying the token must be redeemed by continuing the
+      partial response, retry with the appended-assistant form instead.
 
-document\_index: Integer
+      When the appended-assistant form is used on a model that otherwise disallows
+      assistant-turn prefill, this token also authorizes that one prefill.
 
-document\_title: String
+      - `String = String`
 
-end\_page\_number: Integer
+      - `class BetaFallbackCreditTokenParam`
 
-start\_page\_number: Integer
+        Object form of `fallback_credit_token`: the token plus a redemption
+        mode.
 
-type: :page\_location
+        Requires `anthropic-beta: fallback-credit-2026-07-01`; without that
+        header the field accepts the bare string only. The bare string and the
+        mode-less object are equivalent (both select `strict`), so wrapping
+        an existing token changes nothing by itself.
 
-
+        - `token: String`
 
-class BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more } 
+          The opaque `fallback_credit_token` from a prior refusal's `stop_details` — the same string the bare-string form carries.
 
-
+          maxLength: 2048, minLength: 1
 
-cited\_text: String
+        - `mode: :strict | :best_effort`
 
-The full text of the cited block range, concatenated.
+          How a failing token affects the retry. `strict` (the default, and the bare-string behavior): a failing redemption is a 400 and the retry is not served. `best_effort`: the retry is served either way — a token-layer failure no longer rejects the request; the retry proceeds at normal price and the outcome is reported on the response's `usage.fallback_credit`. Two failures stay hard in both modes: a malformed token, and combining `fallback_credit_token` with `fallbacks`.
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+          - `:strict`
 
-document\_index: Integer
+          - `:best_effort`
 
-document\_title: String
+    - `fallbacks: BetaFallbacksParam`
 
-
+      Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
 
-end\_block\_index: Integer
+      - `UnionMember0 = Array[BetaFallbackParam]`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+        - `model: Model`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+          The model that will complete your prompt.
 
-start\_block\_index: Integer
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-0-based index of the first cited block in the source's `content` array.
+        - `max_tokens: Integer`
 
-type: :content\_block\_location
+        - `output_config: BetaOutputConfig`
 
-
+          - `effort: :low | :medium | :high | 2 more`
 
-class BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more } 
+            All possible effort levels.
 
-cited\_text: String
+            - `:low`
 
-encrypted\_index: String
+            - `:medium`
 
-title: String
+            - `:high`
 
-type: :web\_search\_result\_location
+            - `:xhigh`
 
-url: String
+            - `:max`
 
-
+          - `format_: BetaJSONOutputFormat`
 
-class BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
+            A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
-
+            - `schema: Hash[Symbol, untyped]`
 
-cited\_text: String
+              The JSON schema of the format
 
-The full text of the cited block range, concatenated.
+            - `type: :json_schema`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+          - `task_budget: BetaTokenTaskBudget`
 
-
+            User-configurable total token budget across contexts.
 
-end\_block\_index: Integer
+            - `total: Integer`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+              Total token budget across all contexts in the session.
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+              minimum: 1024
 
-
+            - `type: :tokens`
 
-search\_result\_index: Integer
+              The budget type. Currently only 'tokens' is supported.
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+            - `remaining: Integer`
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+              Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
-minimum0
+              minimum: 0
 
-source: String
+        - `speed: :standard | :fast`
 
-start\_block\_index: Integer
+          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-0-based index of the first cited block in the source's `content` array.
+          - `:standard`
 
-title: String
+          - `:fast`
 
-type: :search\_result\_location
+        - `thinking: BetaThinkingConfigEnabled | BetaThinkingConfigDisabled | BetaThinkingConfigAdaptive`
 
-
+          - `class BetaThinkingConfigEnabled`
 
-class BetaImageBlockParam { source, type, cache\_control } 
+            - `budget_tokens: Integer`
 
-
+              Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
 
-source: [BetaBase64ImageSource](api/beta/messages.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta/messages.md) { type, url }  | [BetaFileImageSource](api/beta/messages.md) { file\_id, type } 
+              Must be ≥1024 and less than `max_tokens`.
 
-One of the following:
+              See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-
+              minimum: 1024
 
-class BetaBase64ImageSource { data, media\_type, type } 
+            - `type: :enabled`
 
-data: String
+            - `block_binding: BetaThinkingBlockBinding`
 
-
+              Controls for block binding: what happens when a thinking block this
+              request sends back fails the conversation check. Every field is optional;
+              an empty object means every default.
 
-media\_type: :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"
+              - `prefix_mismatch_behavior: BetaThinkingPrefixMismatchBehavior`
 
-One of the following:
+                What happens when a thinking block in `messages` fails the conversation
+                check: it was created in a different conversation, or the messages before
+                it have changed since. `"error"` (the default) fails the request with a
+                400 error. `"drop_block"` removes the failing blocks and the request
+                proceeds; the model no longer sees the dropped reasoning.
 
-:"image/jpeg"
+                - `:error`
 
-:"image/png"
+                - `:drop_block`
 
-:"image/gif"
+            - `display_: :summarized | :omitted | :updates`
 
-:"image/webp"
+              Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-type: :base64
+              - `:summarized`
 
-
+              - `:omitted`
 
-class BetaURLImageSource { type, url } 
+              - `:updates`
 
-type: :url
+          - `class BetaThinkingConfigDisabled`
 
-url: String
+            - `type: :disabled`
 
-
+          - `class BetaThinkingConfigAdaptive`
 
-class BetaFileImageSource { file\_id, type } 
+            - `type: :adaptive`
 
-file\_id: String
+            - `block_binding: BetaThinkingBlockBinding`
 
-type: :file
+              Controls for block binding: what happens when a thinking block this
+              request sends back fails the conversation check. Every field is optional;
+              an empty object means every default.
 
-type: :image
+            - `display_: :summarized | :omitted | :updates`
 
-
+              Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+              - `:summarized`
 
-Create a cache control breakpoint at this content block.
+              - `:omitted`
 
-type: :ephemeral
+              - `:updates`
 
-
+      - `BetaFallbacksParam = :default`
 
-ttl: :"5m" | :"1h"
+    - `inference_geo: String`
 
-The time-to-live for the cache control breakpoint.
+      Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
-This may be one the following values:
+    - `mcp_servers: Array[BetaRequestMCPServerURLDefinition]`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      MCP servers to be utilized in this request
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      maxItems: 20
 
-One of the following:
+      - `name: String`
 
-:"5m"
+      - `type: :url`
 
-:"1h"
+      - `url: String`
 
-type: :content
+      - `authorization_token: String`
 
-
+      - `tool_configuration: BetaRequestMCPServerToolConfiguration`
 
-class BetaURLPDFSource { type, url } 
+        - `allowed_tools: Array[String]`
 
-type: :url
+        - `enabled: bool`
 
-url: String
+    - `metadata: BetaMetadata`
 
-
+      An object describing metadata about the request.
 
-class BetaFileDocumentSource { file\_id, type } 
+      - `user_id: String`
 
-file\_id: String
+        An external identifier for the user who is associated with the request.
 
-type: :file
+        This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
-type: :document
+        maxLength: 512
 
-
+    - `output_config: BetaOutputConfig`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+      Configuration options for the model's output, such as the output format.
 
-Create a cache control breakpoint at this content block.
+    - `service_tier: :auto | :standard_only`
 
-type: :ephemeral
+      Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-
+      Anthropic offers different levels of service for your API requests. See [service-tiers](api/service-tiers.md) for details.
 
-ttl: :"5m" | :"1h"
+      - `:auto`
 
-The time-to-live for the cache control breakpoint.
+      - `:standard_only`
 
-This may be one the following values:
+    - `speed: :standard | :fast`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      - `:standard`
 
-One of the following:
+      - `:fast`
 
-:"5m"
+    - `stop_sequences: Array[String]`
 
-:"1h"
+      Custom text sequences that will cause the model to stop generating.
 
-
+      Our models will normally stop when they have naturally completed their turn, which will result in a response `stop_reason` of `"end_turn"`.
 
-citations: [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+      If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
 
-enabled: bool
+    - `stream: bool`
 
-context: String
+      Whether to incrementally stream the response using server-sent events.
 
-title: String
+      See [streaming](build-with-claude/streaming.md) for details.
 
-
+    - `system_: String | Array[BetaTextBlockParam]`
 
-class BetaToolReferenceBlockParam { tool\_name, type, cache\_control } 
+      System prompt.
 
-Tool reference block that can be included in tool\_result content.
+      A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
-tool\_name: String
+      - `String = String`
 
-type: :tool\_reference
+      - `UnionMember1 = Array[BetaTextBlockParam]`
 
-
+        - `text: String`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+          minLength: 1
 
-Create a cache control breakpoint at this content block.
+        - `type: :text`
 
-type: :ephemeral
+        - `cache_control: BetaCacheControlEphemeral`
 
-
+          Create a cache control breakpoint at this content block.
 
-ttl: :"5m" | :"1h"
+        - `citations: Array[BetaTextCitationParam]`
 
-The time-to-live for the cache control breakpoint.
+    - `thinking: BetaThinkingConfigParam`
 
-This may be one the following values:
+      Configuration for enabling Claude's extended thinking.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-One of the following:
+      - `class BetaThinkingConfigEnabled`
 
-:"5m"
+      - `class BetaThinkingConfigDisabled`
 
-:"1h"
+      - `class BetaThinkingConfigAdaptive`
 
-is\_error: bool
+    - `tool_choice: BetaToolChoice`
 
-
+      How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-class BetaServerToolUseBlockParam { id, input, name, 3 more } 
+      - `class BetaToolChoiceAuto`
 
-id: String
+        The model will automatically decide whether to use tools.
 
-input: Hash[Symbol, untyped]
+        - `type: :auto`
 
-
+        - `disable_parallel_tool_use: bool`
 
-name: :advisor | :web\_search | :web\_fetch | 5 more
+          Whether to disable parallel tool use.
 
-One of the following:
+          Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-:advisor
+      - `class BetaToolChoiceAny`
 
-:web\_search
+        The model will use any available tools.
 
-:web\_fetch
+        - `type: :any`
 
-:code\_execution
+        - `disable_parallel_tool_use: bool`
 
-:bash\_code\_execution
+          Whether to disable parallel tool use.
 
-:text\_editor\_code\_execution
+          Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-:tool\_search\_tool\_regex
+      - `class BetaToolChoiceTool`
 
-:tool\_search\_tool\_bm25
+        The model will use the specified tool with `tool_choice.name`.
 
-type: :server\_tool\_use
+        - `name: String`
 
-
+          The name of the tool to use.
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+        - `type: :tool`
 
-Create a cache control breakpoint at this content block.
+        - `disable_parallel_tool_use: bool`
 
-type: :ephemeral
+          Whether to disable parallel tool use.
 
-
+          Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-ttl: :"5m" | :"1h"
+      - `class BetaToolChoiceNone`
 
-The time-to-live for the cache control breakpoint.
+        The model will not be allowed to use tools.
 
-This may be one the following values:
+        - `type: :none`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+    - `tools: Array[BetaToolUnion]`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Definitions of tools that the model may use.
 
-One of the following:
+      If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-:"5m"
+      There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
 
-:"1h"
+      Each tool definition includes:
 
-
+      * `name`: Name of the tool.
+      * `description`: Optional, but strongly-recommended description of the tool.
+      * `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
 
-caller\_: [BetaDirectCaller](api/beta/messages.md) { type }  | [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
+      For example, if you defined `tools` as:
 
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller { type } 
-
-Tool invocation directly from the model.
-
-type: :direct
-
-
-
-class BetaServerToolCaller { tool\_id, type } 
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: String
-
-type: :code\_execution\_20250825
-
-
-
-class BetaServerToolCaller20260120 { tool\_id, type } 
-
-tool\_id: String
-
-type: :code\_execution\_20260120
-
-
-
-class BetaWebSearchToolResultBlockParam { content, tool\_use\_id, type, 2 more } 
-
-
-
-content: [BetaWebSearchToolResultBlockParamContent](api/beta/messages.md)
-
-One of the following:
-
-
-
-ResultBlock = Array[[BetaWebSearchResultBlockParam](api/beta/messages.md) { encrypted\_content, title, type, 2 more } ]
-
-encrypted\_content: String
-
-title: String
-
-type: :web\_search\_result
-
-url: String
-
-page\_age: String
-
-
-
-class BetaWebSearchToolRequestError { error\_code, type } 
-
-
-
-error\_code: [BetaWebSearchToolResultErrorCode](api/beta/messages.md)
-
-One of the following:
-
-:invalid\_tool\_input
-
-:unavailable
-
-:max\_uses\_exceeded
-
-:too\_many\_requests
-
-:query\_too\_long
-
-:request\_too\_large
-
-type: :web\_search\_tool\_result\_error
-
-tool\_use\_id: String
-
-type: :web\_search\_tool\_result
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Create a cache control breakpoint at this content block.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-
-
-caller\_: [BetaDirectCaller](api/beta/messages.md) { type }  | [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller { type } 
-
-Tool invocation directly from the model.
-
-type: :direct
-
-
-
-class BetaServerToolCaller { tool\_id, type } 
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: String
-
-type: :code\_execution\_20250825
-
-
-
-class BetaServerToolCaller20260120 { tool\_id, type } 
-
-tool\_id: String
-
-type: :code\_execution\_20260120
-
-
-
-class BetaWebFetchToolResultBlockParam { content, tool\_use\_id, type, 2 more } 
-
-
-
-content: [BetaWebFetchToolResultErrorBlockParam](api/beta/messages.md) { error\_code, type }  | [BetaWebFetchBlockParam](api/beta/messages.md) { content, type, url, retrieved\_at } 
-
-One of the following:
-
-
-
-class BetaWebFetchToolResultErrorBlockParam { error\_code, type } 
-
-
-
-error\_code: [BetaWebFetchToolResultErrorCode](api/beta/messages.md)
-
-One of the following:
-
-:invalid\_tool\_input
-
-:url\_too\_long
-
-:url\_not\_allowed
-
-:url\_not\_in\_prior\_context
-
-:url\_not\_accessible
-
-:unsupported\_content\_type
-
-:too\_many\_requests
-
-:max\_uses\_exceeded
-
-:unavailable
-
-type: :web\_fetch\_tool\_result\_error
-
-
-
-class BetaWebFetchBlockParam { content, type, url, retrieved\_at } 
-
-
-
-content: [BetaRequestDocumentBlock](api/beta/messages.md) { source, type, cache\_control, 3 more } 
-
-
-
-source: [BetaBase64PDFSource](api/beta/messages.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta/messages.md) { data, media\_type, type }  | [BetaContentBlockSource](api/beta/messages.md) { content, type }  | 2 more
-
-One of the following:
-
-
-
-class BetaBase64PDFSource { data, media\_type, type } 
-
-data: String
-
-media\_type: :"application/pdf"
-
-type: :base64
-
-
-
-class BetaPlainTextSource { data, media\_type, type } 
-
-data: String
-
-media\_type: :"text/plain"
-
-type: :text
-
-
-
-class BetaContentBlockSource { content, type } 
-
-
-
-content: String | Array[[BetaContentBlockSourceContent](api/beta/messages.md)]
-
-One of the following:
-
-String = String
-
-
-
-BetaContentBlockSourceContent = Array[[BetaContentBlockSourceContent](api/beta/messages.md)]
-
-One of the following:
-
-
-
-class BetaTextBlockParam { text, type, cache\_control, citations } 
-
-text: String
-
-type: :text
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Create a cache control breakpoint at this content block.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-
-
-citations: Array[[BetaTextCitationParam](api/beta/messages.md)]
-
-One of the following:
-
-
-
-class BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more } 
-
-cited\_text: String
-
-document\_index: Integer
-
-document\_title: String
-
-end\_char\_index: Integer
-
-start\_char\_index: Integer
-
-type: :char\_location
-
-
-
-class BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more } 
-
-cited\_text: String
-
-document\_index: Integer
-
-document\_title: String
-
-end\_page\_number: Integer
-
-start\_page\_number: Integer
-
-type: :page\_location
-
-
-
-class BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more } 
-
-
-
-cited\_text: String
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-document\_index: Integer
-
-document\_title: String
-
-
-
-end\_block\_index: Integer
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-start\_block\_index: Integer
-
-0-based index of the first cited block in the source's `content` array.
-
-type: :content\_block\_location
-
-
-
-class BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more } 
-
-cited\_text: String
-
-encrypted\_index: String
-
-title: String
-
-type: :web\_search\_result\_location
-
-url: String
-
-
-
-class BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
-
-
-
-cited\_text: String
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-end\_block\_index: Integer
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-search\_result\_index: Integer
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-source: String
-
-start\_block\_index: Integer
-
-0-based index of the first cited block in the source's `content` array.
-
-title: String
-
-type: :search\_result\_location
-
-
-
-class BetaImageBlockParam { source, type, cache\_control } 
-
-
-
-source: [BetaBase64ImageSource](api/beta/messages.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta/messages.md) { type, url }  | [BetaFileImageSource](api/beta/messages.md) { file\_id, type } 
-
-One of the following:
-
-
-
-class BetaBase64ImageSource { data, media\_type, type } 
-
-data: String
-
-
-
-media\_type: :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"
-
-One of the following:
-
-:"image/jpeg"
-
-:"image/png"
-
-:"image/gif"
-
-:"image/webp"
-
-type: :base64
-
-
-
-class BetaURLImageSource { type, url } 
-
-type: :url
-
-url: String
-
-
-
-class BetaFileImageSource { file\_id, type } 
-
-file\_id: String
-
-type: :file
-
-type: :image
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Create a cache control breakpoint at this content block.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-type: :content
-
-
-
-class BetaURLPDFSource { type, url } 
-
-type: :url
-
-url: String
-
-
-
-class BetaFileDocumentSource { file\_id, type } 
-
-file\_id: String
-
-type: :file
-
-type: :document
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Create a cache control breakpoint at this content block.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-
-
-citations: [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
-
-enabled: bool
-
-context: String
-
-title: String
-
-type: :web\_fetch\_result
-
-url: String
-
-Fetched content URL
-
-retrieved\_at: String
-
-ISO 8601 timestamp when the content was retrieved
-
-tool\_use\_id: String
-
-type: :web\_fetch\_tool\_result
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Create a cache control breakpoint at this content block.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-
-
-caller\_: [BetaDirectCaller](api/beta/messages.md) { type }  | [BetaServerToolCaller](api/beta/messages.md) { tool\_id, type }  | [BetaServerToolCaller20260120](api/beta/messages.md) { tool\_id, type } 
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-class BetaDirectCaller { type } 
-
-Tool invocation directly from the model.
-
-type: :direct
-
-
-
-class BetaServerToolCaller { tool\_id, type } 
-
-Tool invocation generated by a server-side tool.
-
-tool\_id: String
-
-type: :code\_execution\_20250825
-
-
-
-class BetaServerToolCaller20260120 { tool\_id, type } 
-
-tool\_id: String
-
-type: :code\_execution\_20260120
-
-
-
-class BetaAdvisorToolResultBlockParam { content, tool\_use\_id, type, cache\_control } 
-
-
-
-content: [BetaAdvisorToolResultErrorParam](api/beta/messages.md) { error\_code, type }  | [BetaAdvisorResultBlockParam](api/beta/messages.md) { text, type, stop\_reason }  | [BetaAdvisorRedactedResultBlockParam](api/beta/messages.md) { encrypted\_content, type, stop\_reason } 
-
-One of the following:
-
-
-
-class BetaAdvisorToolResultErrorParam { error\_code, type } 
-
-
-
-error\_code: :max\_uses\_exceeded | :prompt\_too\_long | :too\_many\_requests | 4 more
-
-One of the following:
-
-:max\_uses\_exceeded
-
-:prompt\_too\_long
-
-:too\_many\_requests
-
-:overloaded
-
-:unavailable
-
-:execution\_time\_exceeded
-
-:model\_not\_found
-
-type: :advisor\_tool\_result\_error
-
-
-
-class BetaAdvisorResultBlockParam { text, type, stop\_reason } 
-
-text: String
-
-type: :advisor\_result
-
-stop\_reason: String
-
-
-
-class BetaAdvisorRedactedResultBlockParam { encrypted\_content, type, stop\_reason } 
-
-encrypted\_content: String
-
-Opaque blob produced by a prior response; must be round-tripped verbatim.
-
-type: :advisor\_redacted\_result
-
-stop\_reason: String
-
-tool\_use\_id: String
-
-type: :advisor\_tool\_result
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Create a cache control breakpoint at this content block.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-
-
-class BetaCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control } 
-
-
-
-content: [BetaCodeExecutionToolResultBlockParamContent](api/beta/messages.md)
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-One of the following:
-
-
-
-class BetaCodeExecutionToolResultErrorParam { error\_code, type } 
-
-
-
-error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta/messages.md)
-
-One of the following:
-
-:invalid\_tool\_input
-
-:unavailable
-
-:too\_many\_requests
-
-:execution\_time\_exceeded
-
-type: :code\_execution\_tool\_result\_error
-
-
-
-class BetaCodeExecutionResultBlockParam { content, return\_code, stderr, 2 more } 
-
-
-
-content: Array[[BetaCodeExecutionOutputBlockParam](api/beta/messages.md) { file\_id, type } ]
-
-file\_id: String
-
-type: :code\_execution\_output
-
-return\_code: Integer
-
-stderr: String
-
-stdout: String
-
-type: :code\_execution\_result
-
-
-
-class BetaEncryptedCodeExecutionResultBlockParam { content, encrypted\_stdout, return\_code, 2 more } 
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-
-
-content: Array[[BetaCodeExecutionOutputBlockParam](api/beta/messages.md) { file\_id, type } ]
-
-file\_id: String
-
-type: :code\_execution\_output
-
-encrypted\_stdout: String
-
-return\_code: Integer
-
-stderr: String
-
-type: :encrypted\_code\_execution\_result
-
-tool\_use\_id: String
-
-type: :code\_execution\_tool\_result
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Create a cache control breakpoint at this content block.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-
-
-class BetaBashCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control } 
-
-
-
-content: [BetaBashCodeExecutionToolResultErrorParam](api/beta/messages.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlockParam](api/beta/messages.md) { content, return\_code, stderr, 2 more } 
-
-One of the following:
-
-
-
-class BetaBashCodeExecutionToolResultErrorParam { error\_code, type } 
-
-
-
-error\_code: :invalid\_tool\_input | :unavailable | :too\_many\_requests | 2 more
-
-One of the following:
-
-:invalid\_tool\_input
-
-:unavailable
-
-:too\_many\_requests
-
-:execution\_time\_exceeded
-
-:output\_file\_too\_large
-
-type: :bash\_code\_execution\_tool\_result\_error
-
-
-
-class BetaBashCodeExecutionResultBlockParam { content, return\_code, stderr, 2 more } 
-
-
-
-content: Array[[BetaBashCodeExecutionOutputBlockParam](api/beta/messages.md) { file\_id, type } ]
-
-file\_id: String
-
-type: :bash\_code\_execution\_output
-
-return\_code: Integer
-
-stderr: String
-
-stdout: String
-
-type: :bash\_code\_execution\_result
-
-tool\_use\_id: String
-
-type: :bash\_code\_execution\_tool\_result
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Create a cache control breakpoint at this content block.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-
-
-class BetaTextEditorCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_control } 
-
-
-
-content: [BetaTextEditorCodeExecutionToolResultErrorParam](api/beta/messages.md) { error\_code, type, error\_message }  | [BetaTextEditorCodeExecutionViewResultBlockParam](api/beta/messages.md) { content, file\_type, type, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlockParam](api/beta/messages.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlockParam](api/beta/messages.md) { type, lines, new\_lines, 3 more } 
-
-One of the following:
-
-
-
-class BetaTextEditorCodeExecutionToolResultErrorParam { error\_code, type, error\_message } 
-
-
-
-error\_code: :invalid\_tool\_input | :unavailable | :too\_many\_requests | 2 more
-
-One of the following:
-
-:invalid\_tool\_input
-
-:unavailable
-
-:too\_many\_requests
-
-:execution\_time\_exceeded
-
-:file\_not\_found
-
-type: :text\_editor\_code\_execution\_tool\_result\_error
-
-error\_message: String
-
-
-
-class BetaTextEditorCodeExecutionViewResultBlockParam { content, file\_type, type, 3 more } 
-
-content: String
-
-
-
-file\_type: :text | :image | :pdf
-
-One of the following:
-
-:text
-
-:image
-
-:pdf
-
-type: :text\_editor\_code\_execution\_view\_result
-
-num\_lines: Integer
-
-start\_line: Integer
-
-total\_lines: Integer
-
-
-
-class BetaTextEditorCodeExecutionCreateResultBlockParam { is\_file\_update, type } 
-
-is\_file\_update: bool
-
-type: :text\_editor\_code\_execution\_create\_result
-
-
-
-class BetaTextEditorCodeExecutionStrReplaceResultBlockParam { type, lines, new\_lines, 3 more } 
-
-type: :text\_editor\_code\_execution\_str\_replace\_result
-
-lines: Array[String]
-
-new\_lines: Integer
-
-new\_start: Integer
-
-old\_lines: Integer
-
-old\_start: Integer
-
-tool\_use\_id: String
-
-type: :text\_editor\_code\_execution\_tool\_result
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Create a cache control breakpoint at this content block.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-
-
-class BetaToolSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_control } 
-
-
-
-content: [BetaToolSearchToolResultErrorParam](api/beta/messages.md) { error\_code, type, error\_message }  | [BetaToolSearchToolSearchResultBlockParam](api/beta/messages.md) { tool\_references, type } 
-
-One of the following:
-
-
-
-class BetaToolSearchToolResultErrorParam { error\_code, type, error\_message } 
-
-
-
-error\_code: :invalid\_tool\_input | :unavailable | :too\_many\_requests | :execution\_time\_exceeded
-
-One of the following:
-
-:invalid\_tool\_input
-
-:unavailable
-
-:too\_many\_requests
-
-:execution\_time\_exceeded
-
-type: :tool\_search\_tool\_result\_error
-
-error\_message: String
-
-
-
-class BetaToolSearchToolSearchResultBlockParam { tool\_references, type } 
-
-
-
-tool\_references: Array[[BetaToolReferenceBlockParam](api/beta/messages.md) { tool\_name, type, cache\_control } ]
-
-tool\_name: String
-
-type: :tool\_reference
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Create a cache control breakpoint at this content block.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-type: :tool\_search\_tool\_search\_result
-
-tool\_use\_id: String
-
-type: :tool\_search\_tool\_result
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Create a cache control breakpoint at this content block.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-
-
-class BetaMCPToolUseBlockParam { id, input, name, 3 more } 
-
-id: String
-
-input: Hash[Symbol, untyped]
-
-name: String
-
-server\_name: String
-
-The name of the MCP server
-
-type: :mcp\_tool\_use
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Create a cache control breakpoint at this content block.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-
-
-class BetaRequestMCPToolResultBlockParam { tool\_use\_id, type, cache\_control, 2 more } 
-
-tool\_use\_id: String
-
-type: :mcp\_tool\_result
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Create a cache control breakpoint at this content block.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-
-
-content: String | Array[[BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations } ]
-
-One of the following:
-
-String = String
-
-
-
-BetaMCPToolResultBlockParamContent = Array[[BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations } ]
-
-text: String
-
-type: :text
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Create a cache control breakpoint at this content block.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-
-
-citations: Array[[BetaTextCitationParam](api/beta/messages.md)]
-
-One of the following:
-
-
-
-class BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more } 
-
-cited\_text: String
-
-document\_index: Integer
-
-document\_title: String
-
-end\_char\_index: Integer
-
-start\_char\_index: Integer
-
-type: :char\_location
-
-
-
-class BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more } 
-
-cited\_text: String
-
-document\_index: Integer
-
-document\_title: String
-
-end\_page\_number: Integer
-
-start\_page\_number: Integer
-
-type: :page\_location
-
-
-
-class BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more } 
-
-
-
-cited\_text: String
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-document\_index: Integer
-
-document\_title: String
-
-
-
-end\_block\_index: Integer
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-start\_block\_index: Integer
-
-0-based index of the first cited block in the source's `content` array.
-
-type: :content\_block\_location
-
-
-
-class BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more } 
-
-cited\_text: String
-
-encrypted\_index: String
-
-title: String
-
-type: :web\_search\_result\_location
-
-url: String
-
-
-
-class BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
-
-
-
-cited\_text: String
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-end\_block\_index: Integer
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-search\_result\_index: Integer
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-source: String
-
-start\_block\_index: Integer
-
-0-based index of the first cited block in the source's `content` array.
-
-title: String
-
-type: :search\_result\_location
-
-is\_error: bool
-
-
-
-class BetaContainerUploadBlockParam { file\_id, type, cache\_control } 
-
-A content block that represents a file to be uploaded to the container
-Files uploaded via this block will be available in the container's input directory.
-
-file\_id: String
-
-type: :container\_upload
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Create a cache control breakpoint at this content block.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-
-
-class BetaCompactionBlockParam { type, cache\_control, content, encrypted\_content } 
-
-A compaction block containing summary of previous context.
-
-Users should round-trip these blocks from responses to subsequent requests
-to maintain context across compaction boundaries.
-
-When content is None, the block represents a failed compaction. The server
-treats these as no-ops. Empty string content is not allowed.
-
-type: :compaction
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Create a cache control breakpoint at this content block.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-content: String
-
-Summary of previously compacted content, or null if compaction failed
-
-encrypted\_content: String
-
-Opaque metadata from prior compaction, to be round-tripped verbatim
-
-
-
-class BetaMidConversationSystemBlockParam { content, type, cache\_control } 
-
-System instructions that appear mid-conversation.
-
-Use this block to provide or update system-level instructions at a specific
-point in the conversation, rather than only via the top-level `system` parameter.
-
-
-
-content: Array[[BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations } ]
-
-System instruction text blocks.
-
-text: String
-
-type: :text
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Create a cache control breakpoint at this content block.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-
-
-citations: Array[[BetaTextCitationParam](api/beta/messages.md)]
-
-One of the following:
-
-
-
-class BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more } 
-
-cited\_text: String
-
-document\_index: Integer
-
-document\_title: String
-
-end\_char\_index: Integer
-
-start\_char\_index: Integer
-
-type: :char\_location
-
-
-
-class BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more } 
-
-cited\_text: String
-
-document\_index: Integer
-
-document\_title: String
-
-end\_page\_number: Integer
-
-start\_page\_number: Integer
-
-type: :page\_location
-
-
-
-class BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more } 
-
-
-
-cited\_text: String
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-document\_index: Integer
-
-document\_title: String
-
-
-
-end\_block\_index: Integer
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-start\_block\_index: Integer
-
-0-based index of the first cited block in the source's `content` array.
-
-type: :content\_block\_location
-
-
-
-class BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more } 
-
-cited\_text: String
-
-encrypted\_index: String
-
-title: String
-
-type: :web\_search\_result\_location
-
-url: String
-
-
-
-class BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
-
-
-
-cited\_text: String
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-end\_block\_index: Integer
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-search\_result\_index: Integer
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-source: String
-
-start\_block\_index: Integer
-
-0-based index of the first cited block in the source's `content` array.
-
-title: String
-
-type: :search\_result\_location
-
-type: :mid\_conv\_system
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Create a cache control breakpoint at this content block.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-
-
-class BetaFallbackBlockParam { from, to, type, trigger } 
-
-A `fallback` block echoed back from a prior response.
-
-Accepted in `messages[].content` and not rendered into the prompt; not
-validated against the request's `fallbacks` chain or top-level `model`.
-
-Echo the assistant turn back verbatim, including this block in its
-original position. The block marks the boundary between content produced
-before and after a fallback hop, and the server relies on that boundary
-to validate the turn: when thinking runs flank the boundary, omitting
-the block merges them into one span the server cannot validate (the
-request is rejected), and moving it into the middle of a single run is
-likewise rejected; between non-thinking blocks the block's placement has
-no validation effect.
-
-
-
-from: [BetaFallbackInfoParam](api/beta/messages.md) { model } 
-
-Identifies one hop of a fallback transition.
-
-
-
-model: [Model](api/messages.md)
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-
-
-Model = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-mythos-5" | 13 more
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-:"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-:"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-:"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-:"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-:"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-:"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-:"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-:"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-:"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-:"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-:"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-:"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-:"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-:"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-:"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-:"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-String = String
-
-
-
-to: [BetaFallbackInfoParam](api/beta/messages.md) { model } 
-
-Identifies one hop of a fallback transition.
-
-
-
-model: [Model](api/messages.md)
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-
-
-Model = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-mythos-5" | 13 more
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-:"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-:"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-:"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-:"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-:"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-:"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-:"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-:"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-:"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-:"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-:"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-:"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-:"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-:"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-:"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-:"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-String = String
-
-type: :fallback
-
-trigger: untyped
-
-The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
-
-
-
-role: :user | :assistant | :system
-
-One of the following:
-
-:user
-
-:assistant
-
-:system
-
-
-
-model: [Model](api/messages.md)
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-
-
-Model = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-mythos-5" | 13 more
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-:"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-:"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-:"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-:"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-:"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-:"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-:"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-:"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-:"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-:"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-:"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-:"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-:"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-:"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-:"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-:"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-String = String
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-
-
-container: [BetaContainerParams](api/beta/messages.md) { id, skills }  | String
-
-Container identifier for reuse across requests.
-
-One of the following:
-
-
-
-class BetaContainerParams { id, skills } 
-
-Container parameters with skills to be loaded.
-
-id: String
-
-Container id
-
-
-
-skills: Array[[BetaSkillParams](api/beta/messages.md) { skill\_id, type, version } ]
-
-List of skills to load in the container
-
-skill\_id: String
-
-Skill ID
-
-
-
-type: :anthropic | :custom
-
-Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
-
-One of the following:
-
-:anthropic
-
-:custom
-
-version: String
-
-Skill version or 'latest' for most recent version
-
-String = String
-
-
-
-context\_management: [BetaContextManagementConfig](api/beta/messages.md) { edits } 
-
-Context management configuration.
-
-This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
-
-
-
-edits: Array[[BetaClearToolUses20250919Edit](api/beta/messages.md) { type, clear\_at\_least, clear\_tool\_inputs, 3 more }  | [BetaClearThinking20251015Edit](api/beta/messages.md) { type, keep }  | [BetaCompact20260112Edit](api/beta/messages.md) { type, instructions, pause\_after\_compaction, trigger } ]
-
-List of context management edits to apply
-
-One of the following:
-
-
-
-class BetaClearToolUses20250919Edit { type, clear\_at\_least, clear\_tool\_inputs, 3 more } 
-
-type: :clear\_tool\_uses\_20250919
-
-
-
-clear\_at\_least: [BetaInputTokensClearAtLeast](api/beta/messages.md) { type, value } 
-
-Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
-
-type: :input\_tokens
-
-value: Integer
-
-
-
-clear\_tool\_inputs: bool | Array[String]
-
-Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
-
-One of the following:
-
-UnionMember0 = bool
-
-UnionMember1 = Array[String]
-
-exclude\_tools: Array[String]
-
-Tool names whose uses are preserved from clearing
-
-
-
-keep: [BetaToolUsesKeep](api/beta/messages.md) { type, value } 
-
-Number of tool uses to retain in the conversation
-
-type: :tool\_uses
-
-value: Integer
-
-
-
-trigger: [BetaInputTokensTrigger](api/beta/messages.md) { type, value }  | [BetaToolUsesTrigger](api/beta/messages.md) { type, value } 
-
-Condition that triggers the context management strategy
-
-One of the following:
-
-
-
-class BetaInputTokensTrigger { type, value } 
-
-type: :input\_tokens
-
-value: Integer
-
-
-
-class BetaToolUsesTrigger { type, value } 
-
-type: :tool\_uses
-
-value: Integer
-
-
-
-class BetaClearThinking20251015Edit { type, keep } 
-
-type: :clear\_thinking\_20251015
-
-
-
-keep: [BetaThinkingTurns](api/beta/messages.md) { type, value }  | [BetaAllThinkingTurns](api/beta/messages.md) { type }  | :all
-
-Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
-
-One of the following:
-
-
-
-class BetaThinkingTurns { type, value } 
-
-type: :thinking\_turns
-
-value: Integer
-
-
-
-class BetaAllThinkingTurns { type } 
-
-type: :all
-
-Keep = :all
-
-
-
-class BetaCompact20260112Edit { type, instructions, pause\_after\_compaction, trigger } 
-
-Automatically compact older context when reaching the configured trigger threshold.
-
-type: :compact\_20260112
-
-instructions: String
-
-Additional instructions for summarization.
-
-pause\_after\_compaction: bool
-
-Whether to pause after compaction and return the compaction block to the user.
-
-
-
-trigger: [BetaInputTokensTrigger](api/beta/messages.md) { type, value } 
-
-When to trigger compaction. Defaults to 150000 input tokens.
-
-type: :input\_tokens
-
-value: Integer
-
-
-
-diagnostics: [BetaDiagnosticsParam](api/beta/messages.md) { previous\_message\_id } 
-
-Request-level diagnostics. Currently carries the previous response
-id for prompt-cache divergence reporting.
-
-previous\_message\_id: String
-
-The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
-
-
-
-fallback\_credit\_token: String
-
-The `fallback_credit_token` from a prior refusal's `stop_details`.
-
-When a preceding request was refused and returned a `fallback_credit_token`,
-pass that code here on the retry to have the retry's cache-creation tokens
-for the prefix that was warm on the refused model billed at the cache-read
-rate. Must be redeemed by the same organization and workspace, with the same
-request body (optionally extended by one appended `assistant` message whose
-content is the partial text — with any trailing whitespace stripped from
-the final text block — and paired server-tool blocks streamed before the
-refusal; the appended-assistant form is not available for requests with
-`output_format` set or forced `tool_choice`), on an eligible fallback
-model, on the same platform,
-and within 5 minutes of the refusal; a mismatch is a 400. A token minted
-mid-server-tool-loop whose partial content was continuable may only be
-redeemed with the appended-assistant form — if an exact-body retry is
-rejected with a 400 saying the token must be redeemed by continuing the
-partial response, retry with the appended-assistant form instead.
-
-When the appended-assistant form is used on a model that otherwise disallows
-assistant-turn prefill, this token also authorizes that one prefill.
-
-maxLength2048
-
-minLength1
-
-
-
-fallbacks: Array[[BetaFallbackParam](api/beta/messages.md) { model, max\_tokens, output\_config, 2 more } ]
-
-Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
-
-
-
-model: [Model](api/messages.md)
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-
-
-Model = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-mythos-5" | 13 more
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-:"claude-sonnet-5"
-
-High-performance model for coding and agents
-
-:"claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-:"claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-:"claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-:"claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-:"claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-:"claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-:"claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-:"claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-:"claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-:"claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-:"claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-:"claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-:"claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-:"claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-:"claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-String = String
-
-max\_tokens: Integer
-
-
-
-output\_config: [BetaOutputConfig](api/beta/messages.md) { effort, format\_, task\_budget } 
-
-
-
-effort: :low | :medium | :high | 2 more
-
-All possible effort levels.
-
-One of the following:
-
-:low
-
-:medium
-
-:high
-
-:xhigh
-
-:max
-
-
-
-format\_: [BetaJSONOutputFormat](api/beta/messages.md) { schema, type } 
-
-A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
-
-schema: Hash[Symbol, untyped]
-
-The JSON schema of the format
-
-type: :json\_schema
-
-
-
-task\_budget: [BetaTokenTaskBudget](api/beta/messages.md) { total, type, remaining } 
-
-User-configurable total token budget across contexts.
-
-total: Integer
-
-Total token budget across all contexts in the session.
-
-type: :tokens
-
-The budget type. Currently only 'tokens' is supported.
-
-remaining: Integer
-
-Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
-
-
-
-speed: :standard | :fast
-
-One of the following:
-
-:standard
-
-:fast
-
-
-
-thinking: [BetaThinkingConfigEnabled](api/beta/messages.md) { budget\_tokens, type, display\_ }  | [BetaThinkingConfigDisabled](api/beta/messages.md) { type }  | [BetaThinkingConfigAdaptive](api/beta/messages.md) { type, display\_ } 
-
-One of the following:
-
-
-
-class BetaThinkingConfigEnabled { budget\_tokens, type, display\_ } 
-
-
-
-budget\_tokens: Integer
-
-Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
-
-Must be ≥1024 and less than `max_tokens`.
-
-See [extended thinking](build-with-claude/extended-thinking.md) for details.
-
-minimum1024
-
-type: :enabled
-
-
-
-display\_: :summarized | :omitted
-
-Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-One of the following:
-
-:summarized
-
-:omitted
-
-
-
-class BetaThinkingConfigDisabled { type } 
-
-type: :disabled
-
-
-
-class BetaThinkingConfigAdaptive { type, display\_ } 
-
-type: :adaptive
-
-
-
-display\_: :summarized | :omitted
-
-Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-One of the following:
-
-:summarized
-
-:omitted
-
-inference\_geo: String
-
-Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
-
-
-
-mcp\_servers: Array[[BetaRequestMCPServerURLDefinition](api/beta/messages.md) { name, type, url, 2 more } ]
-
-MCP servers to be utilized in this request
-
-name: String
-
-type: :url
-
-url: String
-
-authorization\_token: String
-
-
-
-tool\_configuration: [BetaRequestMCPServerToolConfiguration](api/beta/messages.md) { allowed\_tools, enabled } 
-
-allowed\_tools: Array[String]
-
-enabled: bool
-
-
-
-metadata: [BetaMetadata](api/beta/messages.md) { user\_id } 
-
-An object describing metadata about the request.
-
-
-
-user\_id: String
-
-An external identifier for the user who is associated with the request.
-
-This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
-
-maxLength512
-
-
-
-output\_config: [BetaOutputConfig](api/beta/messages.md) { effort, format\_, task\_budget } 
-
-Configuration options for the model's output, such as the output format.
-
-
-
-effort: :low | :medium | :high | 2 more
-
-All possible effort levels.
-
-One of the following:
-
-:low
-
-:medium
-
-:high
-
-:xhigh
-
-:max
-
-
-
-format\_: [BetaJSONOutputFormat](api/beta/messages.md) { schema, type } 
-
-A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
-
-schema: Hash[Symbol, untyped]
-
-The JSON schema of the format
-
-type: :json\_schema
-
-
-
-task\_budget: [BetaTokenTaskBudget](api/beta/messages.md) { total, type, remaining } 
-
-User-configurable total token budget across contexts.
-
-total: Integer
-
-Total token budget across all contexts in the session.
-
-type: :tokens
-
-The budget type. Currently only 'tokens' is supported.
-
-remaining: Integer
-
-Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
-
-
-
-service\_tier: :auto | :standard\_only
-
-Determines whether to use priority capacity (if available) or standard capacity for this request.
-
-Anthropic offers different levels of service for your API requests. See [service-tiers](api/service-tiers.md) for details.
-
-One of the following:
-
-:auto
-
-:standard\_only
-
-
-
-speed: :standard | :fast
-
-The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
-
-One of the following:
-
-:standard
-
-:fast
-
-
-
-stop\_sequences: Array[String]
-
-Custom text sequences that will cause the model to stop generating.
-
-Our models will normally stop when they have naturally completed their turn, which will result in a response `stop_reason` of `"end_turn"`.
-
-If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
-
-
-
-stream: bool
-
-Whether to incrementally stream the response using server-sent events.
-
-See [streaming](build-with-claude/streaming.md) for details.
-
-
-
-system\_: String | Array[[BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations } ]
-
-System prompt.
-
-A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
-
-One of the following:
-
-String = String
-
-
-
-UnionMember1 = Array[[BetaTextBlockParam](api/beta/messages.md) { text, type, cache\_control, citations } ]
-
-text: String
-
-type: :text
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Create a cache control breakpoint at this content block.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-
-
-citations: Array[[BetaTextCitationParam](api/beta/messages.md)]
-
-One of the following:
-
-
-
-class BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more } 
-
-cited\_text: String
-
-document\_index: Integer
-
-document\_title: String
-
-end\_char\_index: Integer
-
-start\_char\_index: Integer
-
-type: :char\_location
-
-
-
-class BetaCitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more } 
-
-cited\_text: String
-
-document\_index: Integer
-
-document\_title: String
-
-end\_page\_number: Integer
-
-start\_page\_number: Integer
-
-type: :page\_location
-
-
-
-class BetaCitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more } 
-
-
-
-cited\_text: String
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-document\_index: Integer
-
-document\_title: String
-
-
-
-end\_block\_index: Integer
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-start\_block\_index: Integer
-
-0-based index of the first cited block in the source's `content` array.
-
-type: :content\_block\_location
-
-
-
-class BetaCitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more } 
-
-cited\_text: String
-
-encrypted\_index: String
-
-title: String
-
-type: :web\_search\_result\_location
-
-url: String
-
-
-
-class BetaCitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more } 
-
-
-
-cited\_text: String
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-end\_block\_index: Integer
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-search\_result\_index: Integer
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-source: String
-
-start\_block\_index: Integer
-
-0-based index of the first cited block in the source's `content` array.
-
-title: String
-
-type: :search\_result\_location
-
-
-
-thinking: [BetaThinkingConfigParam](api/beta/messages.md)
-
-Configuration for enabling Claude's extended thinking.
-
-When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
-
-See [extended thinking](build-with-claude/extended-thinking.md) for details.
-
-One of the following:
-
-
-
-class BetaThinkingConfigEnabled { budget\_tokens, type, display\_ } 
-
-
-
-budget\_tokens: Integer
-
-Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
-
-Must be ≥1024 and less than `max_tokens`.
-
-See [extended thinking](build-with-claude/extended-thinking.md) for details.
-
-minimum1024
-
-type: :enabled
-
-
-
-display\_: :summarized | :omitted
-
-Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-One of the following:
-
-:summarized
-
-:omitted
-
-
-
-class BetaThinkingConfigDisabled { type } 
-
-type: :disabled
-
-
-
-class BetaThinkingConfigAdaptive { type, display\_ } 
-
-type: :adaptive
-
-
-
-display\_: :summarized | :omitted
-
-Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-One of the following:
-
-:summarized
-
-:omitted
-
-
-
-tool\_choice: [BetaToolChoice](api/beta/messages.md)
-
-How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
-
-One of the following:
-
-
-
-class BetaToolChoiceAuto { type, disable\_parallel\_tool\_use } 
-
-The model will automatically decide whether to use tools.
-
-type: :auto
-
-
-
-disable\_parallel\_tool\_use: bool
-
-Whether to disable parallel tool use.
-
-Defaults to `false`. If set to `true`, the model will output at most one tool use.
-
-
-
-class BetaToolChoiceAny { type, disable\_parallel\_tool\_use } 
-
-The model will use any available tools.
-
-type: :any
-
-
-
-disable\_parallel\_tool\_use: bool
-
-Whether to disable parallel tool use.
-
-Defaults to `false`. If set to `true`, the model will output exactly one tool use.
-
-
-
-class BetaToolChoiceTool { name, type, disable\_parallel\_tool\_use } 
-
-The model will use the specified tool with `tool_choice.name`.
-
-name: String
-
-The name of the tool to use.
-
-type: :tool
-
-
-
-disable\_parallel\_tool\_use: bool
-
-Whether to disable parallel tool use.
-
-Defaults to `false`. If set to `true`, the model will output exactly one tool use.
-
-
-
-class BetaToolChoiceNone { type } 
-
-The model will not be allowed to use tools.
-
-type: :none
-
-
-
-tools: Array[[BetaToolUnion](api/beta/messages.md)]
-
-Definitions of tools that the model may use.
-
-If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
-
-There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
-
-Each tool definition includes:
-
-- `name`: Name of the tool.
-- `description`: Optional, but strongly-recommended description of the tool.
-- `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
-
-For example, if you defined `tools` as:
-
-```shiki
-[
-  {
-    "name": "get_stock_price",
-    "description": "Get the current stock price for a given ticker symbol.",
-    "input_schema": {
-      "type": "object",
-      "properties": {
-        "ticker": {
-          "type": "string",
-          "description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
+      ```json
+      [
+        {
+          "name": "get_stock_price",
+          "description": "Get the current stock price for a given ticker symbol.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "ticker": {
+                "type": "string",
+                "description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
+              }
+            },
+            "required": ["ticker"]
+          }
         }
-      },
-      "required": ["ticker"]
-    }
-  }
-]
-```
+      ]
+      ```
 
-
+      And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
 
-And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
+      ```json
+      [
+        {
+          "type": "tool_use",
+          "id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+          "name": "get_stock_price",
+          "input": { "ticker": "^GSPC" }
+        }
+      ]
+      ```
 
-```shiki
-[
-  {
-    "type": "tool_use",
-    "id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
-    "name": "get_stock_price",
-    "input": { "ticker": "^GSPC" }
-  }
-]
-```
+      You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
 
-
+      ```json
+      [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+          "content": "259.75 USD"
+        }
+      ]
+      ```
 
-You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
+      Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-```shiki
-[
-  {
-    "type": "tool_result",
-    "tool_use_id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
-    "content": "259.75 USD"
-  }
-]
-```
+      See our [guide](agents-and-tools/tool-use/overview.md) for more details.
 
-
+      - `class BetaTool`
 
-Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
+        - `input_schema: InputSchema`
 
-See our [guide](agents-and-tools/tool-use/overview.md) for more details.
+          [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
-One of the following:
+          This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-
+          - `type: :object`
 
-class BetaTool { input\_schema, name, allowed\_callers, 7 more } 
+          - `properties: Hash[Symbol, untyped]`
 
-
+          - `required: Array[String]`
 
-input\_schema: InputSchema{ type, properties, required}
+        - `name: String`
 
-[JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
+          Name of the tool.
 
-This defines the shape of the `input` that your tool accepts and that the model will produce.
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: :object
+          maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-properties: Hash[Symbol, untyped]
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-required: Array[String]
+          - `:direct`
 
-
+          - `:code_execution_20250825`
 
-name: String
+          - `:code_execution_20260120`
 
-Name of the tool.
+          - `:code_execution_20260521`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        - `cache_control: BetaCacheControlEphemeral`
 
-maxLength128
+          Create a cache control breakpoint at this content block.
 
-minLength1
+        - `defer_loading: bool`
 
-
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+        - `description: String`
 
-One of the following:
+          Description of what this tool does.
 
-:direct
+          Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-:code\_execution\_20250825
+        - `eager_input_streaming: bool`
 
-:code\_execution\_20260120
+          Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-:code\_execution\_20260521
+        - `input_examples: Array[Hash[Symbol, untyped]]`
 
-
+        - `strict: bool`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+          When true, guarantees schema validation on tool names and inputs
 
-Create a cache control breakpoint at this content block.
+        - `type: :custom`
 
-type: :ephemeral
+      - `class BetaToolBash20241022`
 
-
+        - `name: :bash`
 
-ttl: :"5m" | :"1h"
+          Name of the tool.
 
-The time-to-live for the cache control breakpoint.
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-This may be one the following values:
+        - `type: :bash_20241022`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          - `:direct`
 
-One of the following:
+          - `:code_execution_20250825`
 
-:"5m"
+          - `:code_execution_20260120`
 
-:"1h"
+          - `:code_execution_20260521`
 
-defer\_loading: bool
+        - `cache_control: BetaCacheControlEphemeral`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          Create a cache control breakpoint at this content block.
 
-
+        - `defer_loading: bool`
 
-description: String
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-Description of what this tool does.
+        - `input_examples: Array[Hash[Symbol, untyped]]`
 
-Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+        - `strict: bool`
 
-eager\_input\_streaming: bool
+          When true, guarantees schema validation on tool names and inputs
 
-Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+      - `class BetaToolBash20250124`
 
-input\_examples: Array[Hash[Symbol, untyped]]
+        - `name: :bash`
 
-strict: bool
+          Name of the tool.
 
-When true, guarantees schema validation on tool names and inputs
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: :custom
+        - `type: :bash_20250124`
 
-
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-class BetaToolBash20241022 { name, type, allowed\_callers, 4 more } 
+          - `:direct`
 
-
+          - `:code_execution_20250825`
 
-name: :bash
+          - `:code_execution_20260120`
 
-Name of the tool.
+          - `:code_execution_20260521`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        - `cache_control: BetaCacheControlEphemeral`
 
-type: :bash\_20241022
+          Create a cache control breakpoint at this content block.
 
-
+        - `defer_loading: bool`
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-One of the following:
+        - `input_examples: Array[Hash[Symbol, untyped]]`
 
-:direct
+        - `strict: bool`
 
-:code\_execution\_20250825
+          When true, guarantees schema validation on tool names and inputs
 
-:code\_execution\_20260120
+      - `class BetaCodeExecutionTool20250522`
 
-:code\_execution\_20260521
+        - `name: :code_execution`
 
-
+          Name of the tool.
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-Create a cache control breakpoint at this content block.
+        - `type: :code_execution_20250522`
 
-type: :ephemeral
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-
+          - `:direct`
 
-ttl: :"5m" | :"1h"
+          - `:code_execution_20250825`
 
-The time-to-live for the cache control breakpoint.
+          - `:code_execution_20260120`
 
-This may be one the following values:
+          - `:code_execution_20260521`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        - `cache_control: BetaCacheControlEphemeral`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          Create a cache control breakpoint at this content block.
 
-One of the following:
+        - `defer_loading: bool`
 
-:"5m"
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-:"1h"
+        - `strict: bool`
 
-defer\_loading: bool
+          When true, guarantees schema validation on tool names and inputs
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      - `class BetaCodeExecutionTool20250825`
 
-input\_examples: Array[Hash[Symbol, untyped]]
+        - `name: :code_execution`
 
-strict: bool
+          Name of the tool.
 
-When true, guarantees schema validation on tool names and inputs
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-
+        - `type: :code_execution_20250825`
 
-class BetaToolBash20250124 { name, type, allowed\_callers, 4 more } 
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-
+          - `:direct`
 
-name: :bash
+          - `:code_execution_20250825`
 
-Name of the tool.
+          - `:code_execution_20260120`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          - `:code_execution_20260521`
 
-type: :bash\_20250124
+        - `cache_control: BetaCacheControlEphemeral`
 
-
+          Create a cache control breakpoint at this content block.
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+        - `defer_loading: bool`
 
-One of the following:
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-:direct
+        - `strict: bool`
 
-:code\_execution\_20250825
+          When true, guarantees schema validation on tool names and inputs
 
-:code\_execution\_20260120
+      - `class BetaCodeExecutionTool20260120`
 
-:code\_execution\_20260521
+        Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-
+        - `name: :code_execution`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+          Name of the tool.
 
-Create a cache control breakpoint at this content block.
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: :ephemeral
+        - `type: :code_execution_20260120`
 
-
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-ttl: :"5m" | :"1h"
+          - `:direct`
 
-The time-to-live for the cache control breakpoint.
+          - `:code_execution_20250825`
 
-This may be one the following values:
+          - `:code_execution_20260120`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          - `:code_execution_20260521`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        - `cache_control: BetaCacheControlEphemeral`
 
-One of the following:
+          Create a cache control breakpoint at this content block.
 
-:"5m"
+        - `defer_loading: bool`
 
-:"1h"
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-defer\_loading: bool
+        - `strict: bool`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          When true, guarantees schema validation on tool names and inputs
 
-input\_examples: Array[Hash[Symbol, untyped]]
+      - `class BetaCodeExecutionTool20260521`
 
-strict: bool
+        Code execution tool with REPL state persistence.
 
-When true, guarantees schema validation on tool names and inputs
+        - `name: :code_execution`
 
-
+          Name of the tool.
 
-class BetaCodeExecutionTool20250522 { name, type, allowed\_callers, 3 more } 
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-
+        - `type: :code_execution_20260521`
 
-name: :code\_execution
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-Name of the tool.
+          - `:direct`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          - `:code_execution_20250825`
 
-type: :code\_execution\_20250522
+          - `:code_execution_20260120`
 
-
+          - `:code_execution_20260521`
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+        - `cache_control: BetaCacheControlEphemeral`
 
-One of the following:
+          Create a cache control breakpoint at this content block.
 
-:direct
+        - `defer_loading: bool`
 
-:code\_execution\_20250825
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-:code\_execution\_20260120
+        - `strict: bool`
 
-:code\_execution\_20260521
+          When true, guarantees schema validation on tool names and inputs
 
-
+      - `class BetaBrowserToolset20260801`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+        The browser toolset: a single `tools[]` entry (carrying no
+        `name`) that declares the browser tool family. The model is served
+        the family's tool with any members disabled via `configs` removed
+        from its schema.
 
-Create a cache control breakpoint at this content block.
+        - `type: :browser_toolset_20260801`
 
-type: :ephemeral
+        - `cache_control: BetaCacheControlEphemeral`
 
-
+          Create a cache control breakpoint at this content block.
 
-ttl: :"5m" | :"1h"
+        - `configs: BetaBrowserToolsetConfigs`
 
-The time-to-live for the cache control breakpoint.
+          Per-member configuration for `browser_toolset_20260801`: one
+          optional field per member tool, keyed by the member name — the same
+          name the member's `tool_use` blocks carry. Every member is an
+          accepted key, and a member's defaults apply wherever its key is
+          absent. Unknown keys are rejected: the field set is this toolset
+          version's complete member set.
 
-This may be one the following values:
+          - `close_tab: BetaBrowserCloseTabConfig`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            `close_tab`'s config overrides.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            - `defer_loading: bool`
 
-One of the following:
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-:"5m"
+            - `enabled: bool`
 
-:"1h"
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-defer\_loading: bool
+          - `double_click: BetaBrowserDoubleClickConfig`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+            `double_click`'s config overrides.
 
-strict: bool
+            - `defer_loading: bool`
 
-When true, guarantees schema validation on tool names and inputs
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+            - `enabled: bool`
 
-class BetaCodeExecutionTool20250825 { name, type, allowed\_callers, 3 more } 
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+          - `file_upload: BetaBrowserFileUploadConfig`
 
-name: :code\_execution
+            `file_upload`'s config overrides.
 
-Name of the tool.
+            - `defer_loading: bool`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-type: :code\_execution\_20250825
+            - `enabled: bool`
 
-
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+          - `find: BetaBrowserFindConfig`
 
-One of the following:
+            `find`'s config overrides.
 
-:direct
+            - `defer_loading: bool`
 
-:code\_execution\_20250825
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-:code\_execution\_20260120
+            - `enabled: bool`
 
-:code\_execution\_20260521
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+          - `form_input: BetaBrowserFormInputConfig`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+            `form_input`'s config overrides.
 
-Create a cache control breakpoint at this content block.
+            - `defer_loading: bool`
 
-type: :ephemeral
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+            - `enabled: bool`
 
-ttl: :"5m" | :"1h"
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-The time-to-live for the cache control breakpoint.
+          - `get_page_text: BetaBrowserGetPageTextConfig`
 
-This may be one the following values:
+            `get_page_text`'s config overrides.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            - `defer_loading: bool`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-One of the following:
+            - `enabled: bool`
 
-:"5m"
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-:"1h"
+          - `hold_key: BetaBrowserHoldKeyConfig`
 
-defer\_loading: bool
+            `hold_key`'s config overrides.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+            - `defer_loading: bool`
 
-strict: bool
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-When true, guarantees schema validation on tool names and inputs
+            - `enabled: bool`
 
-
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-class BetaCodeExecutionTool20260120 { name, type, allowed\_callers, 3 more } 
+          - `hover: BetaBrowserHoverConfig`
 
-Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+            `hover`'s config overrides.
 
-
+            - `defer_loading: bool`
 
-name: :code\_execution
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Name of the tool.
+            - `enabled: bool`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-type: :code\_execution\_20260120
+          - `javascript_exec: BetaBrowserJavascriptExecConfig`
 
-
+            `javascript_exec`'s config overrides.
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+            - `defer_loading: bool`
 
-One of the following:
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-:direct
+            - `enabled: bool`
 
-:code\_execution\_20250825
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-:code\_execution\_20260120
+          - `key: BetaBrowserKeyConfig`
 
-:code\_execution\_20260521
+            `key`'s config overrides.
 
-
+            - `defer_loading: bool`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Create a cache control breakpoint at this content block.
+            - `enabled: bool`
 
-type: :ephemeral
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+          - `left_click: BetaBrowserLeftClickConfig`
 
-ttl: :"5m" | :"1h"
+            `left_click`'s config overrides.
 
-The time-to-live for the cache control breakpoint.
+            - `defer_loading: bool`
 
-This may be one the following values:
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            - `enabled: bool`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-One of the following:
+          - `left_click_drag: BetaBrowserLeftClickDragConfig`
 
-:"5m"
+            `left_click_drag`'s config overrides.
 
-:"1h"
+            - `defer_loading: bool`
 
-defer\_loading: bool
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+            - `enabled: bool`
 
-strict: bool
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-When true, guarantees schema validation on tool names and inputs
+          - `left_mouse_down: BetaBrowserLeftMouseDownConfig`
 
-
+            `left_mouse_down`'s config overrides.
 
-class BetaCodeExecutionTool20260521 { name, type, allowed\_callers, 3 more } 
+            - `defer_loading: bool`
 
-Code execution tool with REPL state persistence.
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+            - `enabled: bool`
 
-name: :code\_execution
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Name of the tool.
+          - `left_mouse_up: BetaBrowserLeftMouseUpConfig`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+            `left_mouse_up`'s config overrides.
 
-type: :code\_execution\_20260521
+            - `defer_loading: bool`
 
-
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+            - `enabled: bool`
 
-One of the following:
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-:direct
+          - `list_tabs: BetaBrowserListTabsConfig`
 
-:code\_execution\_20250825
+            `list_tabs`'s config overrides.
 
-:code\_execution\_20260120
+            - `defer_loading: bool`
 
-:code\_execution\_20260521
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+            - `enabled: bool`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Create a cache control breakpoint at this content block.
+          - `middle_click: BetaBrowserMiddleClickConfig`
 
-type: :ephemeral
+            `middle_click`'s config overrides.
 
-
+            - `defer_loading: bool`
 
-ttl: :"5m" | :"1h"
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-The time-to-live for the cache control breakpoint.
+            - `enabled: bool`
 
-This may be one the following values:
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          - `mouse_move: BetaBrowserMouseMoveConfig`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            `mouse_move`'s config overrides.
 
-One of the following:
+            - `defer_loading: bool`
 
-:"5m"
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-:"1h"
+            - `enabled: bool`
 
-defer\_loading: bool
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          - `navigate: BetaBrowserNavigateConfig`
 
-strict: bool
+            `navigate`'s config overrides.
 
-When true, guarantees schema validation on tool names and inputs
+            - `defer_loading: bool`
 
-
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-class BetaToolComputerUse20241022 { display\_height\_px, display\_width\_px, name, 7 more } 
+            - `enabled: bool`
 
-display\_height\_px: Integer
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-The height of the display in pixels.
+          - `new_tab: BetaBrowserNewTabConfig`
 
-display\_width\_px: Integer
+            `new_tab`'s config overrides.
 
-The width of the display in pixels.
+            - `defer_loading: bool`
 
-
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-name: :computer
+            - `enabled: bool`
 
-Name of the tool.
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          - `read_console: BetaBrowserReadConsoleConfig`
 
-type: :computer\_20241022
+            `read_console`'s config overrides.
 
-
+            - `defer_loading: bool`
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-One of the following:
+            - `enabled: bool`
 
-:direct
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-:code\_execution\_20250825
+          - `read_network: BetaBrowserReadNetworkConfig`
 
-:code\_execution\_20260120
+            `read_network`'s config overrides.
 
-:code\_execution\_20260521
+            - `defer_loading: bool`
 
-
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+            - `enabled: bool`
 
-Create a cache control breakpoint at this content block.
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-type: :ephemeral
+          - `read_page: BetaBrowserReadPageConfig`
 
-
+            `read_page`'s config overrides.
 
-ttl: :"5m" | :"1h"
+            - `defer_loading: bool`
 
-The time-to-live for the cache control breakpoint.
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-This may be one the following values:
+            - `enabled: bool`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          - `right_click: BetaBrowserRightClickConfig`
 
-One of the following:
+            `right_click`'s config overrides.
 
-:"5m"
+            - `defer_loading: bool`
 
-:"1h"
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-defer\_loading: bool
+            - `enabled: bool`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-display\_number: Integer
+          - `screenshot: BetaBrowserScreenshotConfig`
 
-The X11 display number (e.g. 0, 1) for the display.
+            `screenshot`'s config overrides.
 
-input\_examples: Array[Hash[Symbol, untyped]]
+            - `defer_loading: bool`
 
-strict: bool
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-When true, guarantees schema validation on tool names and inputs
+            - `enabled: bool`
 
-
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-class BetaMemoryTool20250818 { name, type, allowed\_callers, 4 more } 
+          - `scroll: BetaBrowserScrollConfig`
 
-
+            `scroll`'s config overrides.
 
-name: :memory
+            - `defer_loading: bool`
 
-Name of the tool.
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+            - `enabled: bool`
 
-type: :memory\_20250818
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+          - `scroll_to: BetaBrowserScrollToConfig`
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+            `scroll_to`'s config overrides.
 
-One of the following:
+            - `defer_loading: bool`
 
-:direct
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-:code\_execution\_20250825
+            - `enabled: bool`
 
-:code\_execution\_20260120
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-:code\_execution\_20260521
+          - `switch_tab: BetaBrowserSwitchTabConfig`
 
-
+            `switch_tab`'s config overrides.
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+            - `defer_loading: bool`
 
-Create a cache control breakpoint at this content block.
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-type: :ephemeral
+            - `enabled: bool`
 
-
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-ttl: :"5m" | :"1h"
+          - `triple_click: BetaBrowserTripleClickConfig`
 
-The time-to-live for the cache control breakpoint.
+            `triple_click`'s config overrides.
 
-This may be one the following values:
+            - `defer_loading: bool`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            - `enabled: bool`
 
-One of the following:
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-:"5m"
+          - `type: BetaBrowserTypeConfig`
 
-:"1h"
+            `type`'s config overrides.
 
-defer\_loading: bool
+            - `defer_loading: bool`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-input\_examples: Array[Hash[Symbol, untyped]]
+            - `enabled: bool`
 
-strict: bool
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-When true, guarantees schema validation on tool names and inputs
+          - `wait: BetaBrowserWaitConfig`
 
-
+            `wait`'s config overrides.
 
-class BetaToolComputerUse20250124 { display\_height\_px, display\_width\_px, name, 7 more } 
+            - `defer_loading: bool`
 
-display\_height\_px: Integer
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-The height of the display in pixels.
+            - `enabled: bool`
 
-display\_width\_px: Integer
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-The width of the display in pixels.
+          - `zoom: BetaBrowserZoomConfig`
 
-
+            `zoom`'s config overrides.
 
-name: :computer
+            - `defer_loading: bool`
 
-Name of the tool.
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+            - `enabled: bool`
 
-type: :computer\_20250124
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+      - `class BetaToolComputerUse20241022`
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+        - `display_height_px: Integer`
 
-One of the following:
+          The height of the display in pixels.
 
-:direct
+          minimum: 1
 
-:code\_execution\_20250825
+        - `display_width_px: Integer`
 
-:code\_execution\_20260120
+          The width of the display in pixels.
 
-:code\_execution\_20260521
+          minimum: 1
 
-
+        - `name: :computer`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+          Name of the tool.
 
-Create a cache control breakpoint at this content block.
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-type: :ephemeral
+        - `type: :computer_20241022`
 
-
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-ttl: :"5m" | :"1h"
+          - `:direct`
 
-The time-to-live for the cache control breakpoint.
+          - `:code_execution_20250825`
 
-This may be one the following values:
+          - `:code_execution_20260120`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          - `:code_execution_20260521`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        - `cache_control: BetaCacheControlEphemeral`
 
-One of the following:
+          Create a cache control breakpoint at this content block.
 
-:"5m"
+        - `defer_loading: bool`
 
-:"1h"
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-defer\_loading: bool
+        - `display_number: Integer`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          The X11 display number (e.g. 0, 1) for the display.
 
-display\_number: Integer
+          minimum: 0
 
-The X11 display number (e.g. 0, 1) for the display.
+        - `input_examples: Array[Hash[Symbol, untyped]]`
 
-input\_examples: Array[Hash[Symbol, untyped]]
+        - `strict: bool`
 
-strict: bool
+          When true, guarantees schema validation on tool names and inputs
 
-When true, guarantees schema validation on tool names and inputs
+      - `class BetaMemoryTool20250818`
 
-
+        - `name: :memory`
 
-class BetaToolTextEditor20241022 { name, type, allowed\_callers, 4 more } 
+          Name of the tool.
 
-
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-name: :str\_replace\_editor
+        - `type: :memory_20250818`
 
-Name of the tool.
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          - `:direct`
 
-type: :text\_editor\_20241022
+          - `:code_execution_20250825`
 
-
+          - `:code_execution_20260120`
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+          - `:code_execution_20260521`
 
-One of the following:
+        - `cache_control: BetaCacheControlEphemeral`
 
-:direct
+          Create a cache control breakpoint at this content block.
 
-:code\_execution\_20250825
+        - `defer_loading: bool`
 
-:code\_execution\_20260120
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-:code\_execution\_20260521
+        - `input_examples: Array[Hash[Symbol, untyped]]`
 
-
+        - `strict: bool`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+          When true, guarantees schema validation on tool names and inputs
 
-Create a cache control breakpoint at this content block.
+      - `class BetaToolComputerUse20250124`
 
-type: :ephemeral
+        - `display_height_px: Integer`
 
-
+          The height of the display in pixels.
 
-ttl: :"5m" | :"1h"
+          minimum: 1
 
-The time-to-live for the cache control breakpoint.
+        - `display_width_px: Integer`
 
-This may be one the following values:
+          The width of the display in pixels.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          minimum: 1
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        - `name: :computer`
 
-One of the following:
+          Name of the tool.
 
-:"5m"
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-:"1h"
+        - `type: :computer_20250124`
 
-defer\_loading: bool
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          - `:direct`
 
-input\_examples: Array[Hash[Symbol, untyped]]
+          - `:code_execution_20250825`
 
-strict: bool
+          - `:code_execution_20260120`
 
-When true, guarantees schema validation on tool names and inputs
+          - `:code_execution_20260521`
 
-
+        - `cache_control: BetaCacheControlEphemeral`
 
-class BetaToolComputerUse20251124 { display\_height\_px, display\_width\_px, name, 8 more } 
+          Create a cache control breakpoint at this content block.
 
-display\_height\_px: Integer
+        - `defer_loading: bool`
 
-The height of the display in pixels.
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-display\_width\_px: Integer
+        - `display_number: Integer`
 
-The width of the display in pixels.
+          The X11 display number (e.g. 0, 1) for the display.
 
-
+          minimum: 0
 
-name: :computer
+        - `input_examples: Array[Hash[Symbol, untyped]]`
 
-Name of the tool.
+        - `strict: bool`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          When true, guarantees schema validation on tool names and inputs
 
-type: :computer\_20251124
+      - `class BetaToolTextEditor20241022`
 
-
+        - `name: :str_replace_editor`
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+          Name of the tool.
 
-One of the following:
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-:direct
+        - `type: :text_editor_20241022`
 
-:code\_execution\_20250825
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-:code\_execution\_20260120
+          - `:direct`
 
-:code\_execution\_20260521
+          - `:code_execution_20250825`
 
-
+          - `:code_execution_20260120`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+          - `:code_execution_20260521`
 
-Create a cache control breakpoint at this content block.
+        - `cache_control: BetaCacheControlEphemeral`
 
-type: :ephemeral
+          Create a cache control breakpoint at this content block.
 
-
+        - `defer_loading: bool`
 
-ttl: :"5m" | :"1h"
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-The time-to-live for the cache control breakpoint.
+        - `input_examples: Array[Hash[Symbol, untyped]]`
 
-This may be one the following values:
+        - `strict: bool`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          When true, guarantees schema validation on tool names and inputs
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      - `class BetaToolComputerUse20251124`
 
-One of the following:
+        - `display_height_px: Integer`
 
-:"5m"
+          The height of the display in pixels.
 
-:"1h"
+          minimum: 1
 
-defer\_loading: bool
+        - `display_width_px: Integer`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          The width of the display in pixels.
 
-display\_number: Integer
+          minimum: 1
 
-The X11 display number (e.g. 0, 1) for the display.
+        - `name: :computer`
 
-enable\_zoom: bool
+          Name of the tool.
 
-Whether to enable an action to take a zoomed-in screenshot of the screen.
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-input\_examples: Array[Hash[Symbol, untyped]]
+        - `type: :computer_20251124`
 
-strict: bool
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-When true, guarantees schema validation on tool names and inputs
+          - `:direct`
 
-
+          - `:code_execution_20250825`
 
-class BetaToolTextEditor20250124 { name, type, allowed\_callers, 4 more } 
+          - `:code_execution_20260120`
 
-
+          - `:code_execution_20260521`
 
-name: :str\_replace\_editor
+        - `cache_control: BetaCacheControlEphemeral`
 
-Name of the tool.
+          Create a cache control breakpoint at this content block.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        - `defer_loading: bool`
 
-type: :text\_editor\_20250124
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-
+        - `display_number: Integer`
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+          The X11 display number (e.g. 0, 1) for the display.
 
-One of the following:
+          minimum: 0
 
-:direct
+        - `enable_zoom: bool`
 
-:code\_execution\_20250825
+          Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-:code\_execution\_20260120
+        - `input_examples: Array[Hash[Symbol, untyped]]`
 
-:code\_execution\_20260521
+        - `strict: bool`
 
-
+          When true, guarantees schema validation on tool names and inputs
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+      - `class BetaComputerToolset20260801`
 
-Create a cache control breakpoint at this content block.
+        The computer toolset: a single `tools[]` entry (carrying no
+        `name`) that declares the computer tool family. The model is
+        served the family's tool with any members disabled via `configs`
+        removed from its schema. Every member is enabled by default, zoom
+        included. The single-tool options `display_number` and
+        `enable_zoom` are not fields of a toolset entry — it carries only
+        `type`, `configs`, and `cache_control`; zoom is controlled
+        via `configs.zoom.enabled`.
 
-type: :ephemeral
+        - `type: :computer_toolset_20260801`
 
-
+        - `cache_control: BetaCacheControlEphemeral`
 
-ttl: :"5m" | :"1h"
+          Create a cache control breakpoint at this content block.
 
-The time-to-live for the cache control breakpoint.
+        - `configs: BetaComputerToolsetConfigs`
 
-This may be one the following values:
+          Per-member configuration for `computer_toolset_20260801`: one
+          optional field per member tool, keyed by the member name — the same
+          name the member's `tool_use` blocks carry. Every member is an
+          accepted key, and a member's defaults apply wherever its key is
+          absent. Unknown keys are rejected: the field set is this toolset
+          version's complete member set.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          - `cursor_position: BetaComputerCursorPositionConfig`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            `cursor_position`'s config overrides.
 
-One of the following:
+            - `defer_loading: bool`
 
-:"5m"
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-:"1h"
+            - `enabled: bool`
 
-defer\_loading: bool
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          - `double_click: BetaComputerDoubleClickConfig`
 
-input\_examples: Array[Hash[Symbol, untyped]]
+            `double_click`'s config overrides.
 
-strict: bool
+            - `defer_loading: bool`
 
-When true, guarantees schema validation on tool names and inputs
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+            - `enabled: bool`
 
-class BetaToolTextEditor20250429 { name, type, allowed\_callers, 4 more } 
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+          - `hold_key: BetaComputerHoldKeyConfig`
 
-name: :str\_replace\_based\_edit\_tool
+            `hold_key`'s config overrides.
 
-Name of the tool.
+            - `defer_loading: bool`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-type: :text\_editor\_20250429
+            - `enabled: bool`
 
-
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+          - `key: BetaComputerKeyConfig`
 
-One of the following:
+            `key`'s config overrides.
 
-:direct
+            - `defer_loading: bool`
 
-:code\_execution\_20250825
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-:code\_execution\_20260120
+            - `enabled: bool`
 
-:code\_execution\_20260521
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+          - `left_click: BetaComputerLeftClickConfig`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+            `left_click`'s config overrides.
 
-Create a cache control breakpoint at this content block.
+            - `defer_loading: bool`
 
-type: :ephemeral
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+            - `enabled: bool`
 
-ttl: :"5m" | :"1h"
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-The time-to-live for the cache control breakpoint.
+          - `left_click_drag: BetaComputerLeftClickDragConfig`
 
-This may be one the following values:
+            `left_click_drag`'s config overrides.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            - `defer_loading: bool`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-One of the following:
+            - `enabled: bool`
 
-:"5m"
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-:"1h"
+          - `left_mouse_down: BetaComputerLeftMouseDownConfig`
 
-defer\_loading: bool
+            `left_mouse_down`'s config overrides.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+            - `defer_loading: bool`
 
-input\_examples: Array[Hash[Symbol, untyped]]
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-strict: bool
+            - `enabled: bool`
 
-When true, guarantees schema validation on tool names and inputs
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+          - `left_mouse_up: BetaComputerLeftMouseUpConfig`
 
-class BetaToolTextEditor20250728 { name, type, allowed\_callers, 5 more } 
+            `left_mouse_up`'s config overrides.
 
-
+            - `defer_loading: bool`
 
-name: :str\_replace\_based\_edit\_tool
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Name of the tool.
+            - `enabled: bool`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-type: :text\_editor\_20250728
+          - `middle_click: BetaComputerMiddleClickConfig`
 
-
+            `middle_click`'s config overrides.
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+            - `defer_loading: bool`
 
-One of the following:
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-:direct
+            - `enabled: bool`
 
-:code\_execution\_20250825
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-:code\_execution\_20260120
+          - `mouse_move: BetaComputerMouseMoveConfig`
 
-:code\_execution\_20260521
+            `mouse_move`'s config overrides.
 
-
+            - `defer_loading: bool`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Create a cache control breakpoint at this content block.
+            - `enabled: bool`
 
-type: :ephemeral
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+          - `right_click: BetaComputerRightClickConfig`
 
-ttl: :"5m" | :"1h"
+            `right_click`'s config overrides.
 
-The time-to-live for the cache control breakpoint.
+            - `defer_loading: bool`
 
-This may be one the following values:
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            - `enabled: bool`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-One of the following:
+          - `screenshot: BetaComputerScreenshotConfig`
 
-:"5m"
+            `screenshot`'s config overrides.
 
-:"1h"
+            - `defer_loading: bool`
 
-defer\_loading: bool
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+            - `enabled: bool`
 
-input\_examples: Array[Hash[Symbol, untyped]]
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-max\_characters: Integer
+          - `scroll: BetaComputerScrollConfig`
 
-Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
+            `scroll`'s config overrides.
 
-strict: bool
+            - `defer_loading: bool`
 
-When true, guarantees schema validation on tool names and inputs
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+            - `enabled: bool`
 
-class BetaWebSearchTool20250305 { name, type, allowed\_callers, 7 more } 
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+          - `triple_click: BetaComputerTripleClickConfig`
 
-name: :web\_search
+            `triple_click`'s config overrides.
 
-Name of the tool.
+            - `defer_loading: bool`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-type: :web\_search\_20250305
+            - `enabled: bool`
 
-
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+          - `type: BetaComputerTypeConfig`
 
-One of the following:
+            `type`'s config overrides.
 
-:direct
+            - `defer_loading: bool`
 
-:code\_execution\_20250825
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-:code\_execution\_20260120
+            - `enabled: bool`
 
-:code\_execution\_20260521
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-allowed\_domains: Array[String]
+          - `wait: BetaComputerWaitConfig`
 
-If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+            `wait`'s config overrides.
 
-blocked\_domains: Array[String]
+            - `defer_loading: bool`
 
-If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+            - `enabled: bool`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Create a cache control breakpoint at this content block.
+          - `zoom: BetaComputerZoomConfig`
 
-type: :ephemeral
+            `zoom`'s config overrides.
 
-
+            - `defer_loading: bool`
 
-ttl: :"5m" | :"1h"
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-The time-to-live for the cache control breakpoint.
+            - `enabled: bool`
 
-This may be one the following values:
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      - `class BetaToolTextEditor20250124`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        - `name: :str_replace_editor`
 
-One of the following:
+          Name of the tool.
 
-:"5m"
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-:"1h"
+        - `type: :text_editor_20250124`
 
-defer\_loading: bool
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          - `:direct`
 
-max\_uses: Integer
+          - `:code_execution_20250825`
 
-Maximum number of times the tool can be used in the API request.
+          - `:code_execution_20260120`
 
-strict: bool
+          - `:code_execution_20260521`
 
-When true, guarantees schema validation on tool names and inputs
+        - `cache_control: BetaCacheControlEphemeral`
 
-
+          Create a cache control breakpoint at this content block.
 
-user\_location: [BetaUserLocation](api/beta/messages.md) { type, city, country, 2 more } 
+        - `defer_loading: bool`
 
-Parameters for the user's location. Used to provide more relevant search results.
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-type: :approximate
+        - `input_examples: Array[Hash[Symbol, untyped]]`
 
-city: String
+        - `strict: bool`
 
-The city of the user.
+          When true, guarantees schema validation on tool names and inputs
 
-country: String
+      - `class BetaToolTextEditor20250429`
 
-The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+        - `name: :str_replace_based_edit_tool`
 
-region: String
+          Name of the tool.
 
-The region of the user.
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-timezone: String
+        - `type: :text_editor_20250429`
 
-The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-
+          - `:direct`
 
-class BetaWebFetchTool20250910 { name, type, allowed\_callers, 8 more } 
+          - `:code_execution_20250825`
 
-
+          - `:code_execution_20260120`
 
-name: :web\_fetch
+          - `:code_execution_20260521`
 
-Name of the tool.
+        - `cache_control: BetaCacheControlEphemeral`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          Create a cache control breakpoint at this content block.
 
-type: :web\_fetch\_20250910
+        - `defer_loading: bool`
 
-
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+        - `input_examples: Array[Hash[Symbol, untyped]]`
 
-One of the following:
+        - `strict: bool`
 
-:direct
+          When true, guarantees schema validation on tool names and inputs
 
-:code\_execution\_20250825
+      - `class BetaToolTextEditor20250728`
 
-:code\_execution\_20260120
+        - `name: :str_replace_based_edit_tool`
 
-:code\_execution\_20260521
+          Name of the tool.
 
-allowed\_domains: Array[String]
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-List of domains to allow fetching from
+        - `type: :text_editor_20250728`
 
-blocked\_domains: Array[String]
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-List of domains to block fetching from
+          - `:direct`
 
-
+          - `:code_execution_20250825`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+          - `:code_execution_20260120`
 
-Create a cache control breakpoint at this content block.
+          - `:code_execution_20260521`
 
-type: :ephemeral
+        - `cache_control: BetaCacheControlEphemeral`
 
-
+          Create a cache control breakpoint at this content block.
 
-ttl: :"5m" | :"1h"
+        - `defer_loading: bool`
 
-The time-to-live for the cache control breakpoint.
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-This may be one the following values:
+        - `input_examples: Array[Hash[Symbol, untyped]]`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        - `max_characters: Integer`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-One of the following:
+          minimum: 1
 
-:"5m"
+        - `strict: bool`
 
-:"1h"
+          When true, guarantees schema validation on tool names and inputs
 
-
+      - `class BetaWebSearchTool20250305`
 
-citations: [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+        - `name: :web_search`
 
-Citations configuration for fetched documents. Citations are disabled by default.
+          Name of the tool.
 
-enabled: bool
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-defer\_loading: bool
+        - `type: :web_search_20250305`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-max\_content\_tokens: Integer
+          - `:direct`
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+          - `:code_execution_20250825`
 
-max\_uses: Integer
+          - `:code_execution_20260120`
 
-Maximum number of times the tool can be used in the API request.
+          - `:code_execution_20260521`
 
-strict: bool
+        - `allowed_domains: Array[String]`
 
-When true, guarantees schema validation on tool names and inputs
+          If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-
+        - `blocked_domains: Array[String]`
 
-class BetaWebSearchTool20260209 { name, type, allowed\_callers, 7 more } 
+          If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-
+        - `cache_control: BetaCacheControlEphemeral`
 
-name: :web\_search
+          Create a cache control breakpoint at this content block.
 
-Name of the tool.
+        - `defer_loading: bool`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-type: :web\_search\_20260209
+        - `max_uses: Integer`
 
-
+          Maximum number of times the tool can be used in the API request.
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+          exclusiveMinimum: 0
 
-One of the following:
+        - `strict: bool`
 
-:direct
+          When true, guarantees schema validation on tool names and inputs
 
-:code\_execution\_20250825
+        - `user_location: BetaUserLocation`
 
-:code\_execution\_20260120
+          Parameters for the user's location. Used to provide more relevant search results.
 
-:code\_execution\_20260521
+          - `type: :approximate`
 
-allowed\_domains: Array[String]
+          - `city: String`
 
-If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+            The city of the user.
 
-blocked\_domains: Array[String]
+            maxLength: 255, minLength: 1
 
-If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+          - `country: String`
 
-
+            The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+            maxLength: 2, minLength: 2
 
-Create a cache control breakpoint at this content block.
+          - `region: String`
 
-type: :ephemeral
+            The region of the user.
 
-
+            maxLength: 255, minLength: 1
 
-ttl: :"5m" | :"1h"
+          - `timezone: String`
 
-The time-to-live for the cache control breakpoint.
+            The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-This may be one the following values:
+            maxLength: 255, minLength: 1
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      - `class BetaWebFetchTool20250910`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        - `name: :web_fetch`
 
-One of the following:
+          Name of the tool.
 
-:"5m"
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-:"1h"
+        - `type: :web_fetch_20250910`
 
-defer\_loading: bool
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          - `:direct`
 
-max\_uses: Integer
+          - `:code_execution_20250825`
 
-Maximum number of times the tool can be used in the API request.
+          - `:code_execution_20260120`
 
-strict: bool
+          - `:code_execution_20260521`
 
-When true, guarantees schema validation on tool names and inputs
+        - `allowed_domains: Array[String]`
 
-
+          List of domains to allow fetching from
 
-user\_location: [BetaUserLocation](api/beta/messages.md) { type, city, country, 2 more } 
+        - `blocked_domains: Array[String]`
 
-Parameters for the user's location. Used to provide more relevant search results.
+          List of domains to block fetching from
 
-type: :approximate
+        - `cache_control: BetaCacheControlEphemeral`
 
-city: String
+          Create a cache control breakpoint at this content block.
 
-The city of the user.
+        - `citations: BetaCitationsConfigParam`
 
-country: String
+          Citations configuration for fetched documents. Citations are disabled by default.
 
-The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+        - `defer_loading: bool`
 
-region: String
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-The region of the user.
+        - `max_content_tokens: Integer`
 
-timezone: String
+          Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+          exclusiveMinimum: 0
 
-
+        - `max_uses: Integer`
 
-class BetaWebFetchTool20260209 { name, type, allowed\_callers, 8 more } 
+          Maximum number of times the tool can be used in the API request.
 
-
+          exclusiveMinimum: 0
 
-name: :web\_fetch
+        - `strict: bool`
 
-Name of the tool.
+          When true, guarantees schema validation on tool names and inputs
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      - `class BetaWebSearchTool20260209`
 
-type: :web\_fetch\_20260209
+        - `name: :web_search`
 
-
+          Name of the tool.
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-One of the following:
+        - `type: :web_search_20260209`
 
-:direct
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-:code\_execution\_20250825
+          - `:direct`
 
-:code\_execution\_20260120
+          - `:code_execution_20250825`
 
-:code\_execution\_20260521
+          - `:code_execution_20260120`
 
-allowed\_domains: Array[String]
+          - `:code_execution_20260521`
 
-List of domains to allow fetching from
+        - `allowed_domains: Array[String]`
 
-blocked\_domains: Array[String]
+          If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-List of domains to block fetching from
+        - `blocked_domains: Array[String]`
 
-
+          If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+        - `cache_control: BetaCacheControlEphemeral`
 
-Create a cache control breakpoint at this content block.
+          Create a cache control breakpoint at this content block.
 
-type: :ephemeral
+        - `defer_loading: bool`
 
-
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-ttl: :"5m" | :"1h"
+        - `max_uses: Integer`
 
-The time-to-live for the cache control breakpoint.
+          Maximum number of times the tool can be used in the API request.
 
-This may be one the following values:
+          exclusiveMinimum: 0
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        - `strict: bool`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          When true, guarantees schema validation on tool names and inputs
 
-One of the following:
+        - `user_location: BetaUserLocation`
 
-:"5m"
+          Parameters for the user's location. Used to provide more relevant search results.
 
-:"1h"
+      - `class BetaWebFetchTool20260209`
 
-
+        - `name: :web_fetch`
 
-citations: [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+          Name of the tool.
 
-Citations configuration for fetched documents. Citations are disabled by default.
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-enabled: bool
+        - `type: :web_fetch_20260209`
 
-defer\_loading: bool
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          - `:direct`
 
-max\_content\_tokens: Integer
+          - `:code_execution_20250825`
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+          - `:code_execution_20260120`
 
-max\_uses: Integer
+          - `:code_execution_20260521`
 
-Maximum number of times the tool can be used in the API request.
+        - `allowed_domains: Array[String]`
 
-strict: bool
+          List of domains to allow fetching from
 
-When true, guarantees schema validation on tool names and inputs
+        - `blocked_domains: Array[String]`
 
-
+          List of domains to block fetching from
 
-class BetaWebFetchTool20260309 { name, type, allowed\_callers, 9 more } 
+        - `cache_control: BetaCacheControlEphemeral`
 
-Web fetch tool with use\_cache parameter for bypassing cached content.
+          Create a cache control breakpoint at this content block.
 
-
+        - `citations: BetaCitationsConfigParam`
 
-name: :web\_fetch
+          Citations configuration for fetched documents. Citations are disabled by default.
 
-Name of the tool.
+        - `defer_loading: bool`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-type: :web\_fetch\_20260309
+        - `max_content_tokens: Integer`
 
-
+          Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+          exclusiveMinimum: 0
 
-One of the following:
+        - `max_uses: Integer`
 
-:direct
+          Maximum number of times the tool can be used in the API request.
 
-:code\_execution\_20250825
+          exclusiveMinimum: 0
 
-:code\_execution\_20260120
+        - `strict: bool`
 
-:code\_execution\_20260521
+          When true, guarantees schema validation on tool names and inputs
 
-allowed\_domains: Array[String]
+      - `class BetaWebFetchTool20260309`
 
-List of domains to allow fetching from
+        Web fetch tool with use_cache parameter for bypassing cached content.
 
-blocked\_domains: Array[String]
+        - `name: :web_fetch`
 
-List of domains to block fetching from
+          Name of the tool.
 
-
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+        - `type: :web_fetch_20260309`
 
-Create a cache control breakpoint at this content block.
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-type: :ephemeral
+          - `:direct`
 
-
+          - `:code_execution_20250825`
 
-ttl: :"5m" | :"1h"
+          - `:code_execution_20260120`
 
-The time-to-live for the cache control breakpoint.
+          - `:code_execution_20260521`
 
-This may be one the following values:
+        - `allowed_domains: Array[String]`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          List of domains to allow fetching from
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        - `blocked_domains: Array[String]`
 
-One of the following:
+          List of domains to block fetching from
 
-:"5m"
+        - `cache_control: BetaCacheControlEphemeral`
 
-:"1h"
+          Create a cache control breakpoint at this content block.
 
-
+        - `citations: BetaCitationsConfigParam`
 
-citations: [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+          Citations configuration for fetched documents. Citations are disabled by default.
 
-Citations configuration for fetched documents. Citations are disabled by default.
+        - `defer_loading: bool`
 
-enabled: bool
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-defer\_loading: bool
+        - `max_content_tokens: Integer`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-max\_content\_tokens: Integer
+          exclusiveMinimum: 0
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+        - `max_uses: Integer`
 
-max\_uses: Integer
+          Maximum number of times the tool can be used in the API request.
 
-Maximum number of times the tool can be used in the API request.
+          exclusiveMinimum: 0
 
-strict: bool
+        - `strict: bool`
 
-When true, guarantees schema validation on tool names and inputs
+          When true, guarantees schema validation on tool names and inputs
 
-use\_cache: bool
+        - `use_cache: bool`
 
-Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+          Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-
+      - `class BetaWebSearchTool20260318`
 
-class BetaWebSearchTool20260318 { name, type, allowed\_callers, 8 more } 
+        - `name: :web_search`
 
-
+          Name of the tool.
 
-name: :web\_search
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-Name of the tool.
+        - `type: :web_search_20260318`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-type: :web\_search\_20260318
+          - `:direct`
 
-
+          - `:code_execution_20250825`
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+          - `:code_execution_20260120`
 
-One of the following:
+          - `:code_execution_20260521`
 
-:direct
+        - `allowed_domains: Array[String]`
 
-:code\_execution\_20250825
+          If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-:code\_execution\_20260120
+        - `blocked_domains: Array[String]`
 
-:code\_execution\_20260521
+          If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-allowed\_domains: Array[String]
+        - `cache_control: BetaCacheControlEphemeral`
 
-If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+          Create a cache control breakpoint at this content block.
 
-blocked\_domains: Array[String]
+        - `defer_loading: bool`
 
-If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-
+        - `max_uses: Integer`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+          Maximum number of times the tool can be used in the API request.
 
-Create a cache control breakpoint at this content block.
+          exclusiveMinimum: 0
 
-type: :ephemeral
+        - `response_inclusion: :full | :excluded`
 
-
+          How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
-ttl: :"5m" | :"1h"
+          - `:full`
 
-The time-to-live for the cache control breakpoint.
+          - `:excluded`
 
-This may be one the following values:
+        - `strict: bool`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          When true, guarantees schema validation on tool names and inputs
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        - `user_location: BetaUserLocation`
 
-One of the following:
+          Parameters for the user's location. Used to provide more relevant search results.
 
-:"5m"
+      - `class BetaWebFetchTool20260318`
 
-:"1h"
+        - `name: :web_fetch`
 
-defer\_loading: bool
+          Name of the tool.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-max\_uses: Integer
+        - `type: :web_fetch_20260318`
 
-Maximum number of times the tool can be used in the API request.
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-
+          - `:direct`
 
-response\_inclusion: :full | :excluded
+          - `:code_execution_20250825`
 
-How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+          - `:code_execution_20260120`
 
-One of the following:
+          - `:code_execution_20260521`
 
-:full
+        - `allowed_domains: Array[String]`
 
-:excluded
+          List of domains to allow fetching from
 
-strict: bool
+        - `blocked_domains: Array[String]`
 
-When true, guarantees schema validation on tool names and inputs
+          List of domains to block fetching from
 
-
+        - `cache_control: BetaCacheControlEphemeral`
 
-user\_location: [BetaUserLocation](api/beta/messages.md) { type, city, country, 2 more } 
+          Create a cache control breakpoint at this content block.
 
-Parameters for the user's location. Used to provide more relevant search results.
+        - `citations: BetaCitationsConfigParam`
 
-type: :approximate
+          Citations configuration for fetched documents. Citations are disabled by default.
 
-city: String
+        - `defer_loading: bool`
 
-The city of the user.
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-country: String
+        - `max_content_tokens: Integer`
 
-The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+          Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-region: String
+          exclusiveMinimum: 0
 
-The region of the user.
+        - `max_uses: Integer`
 
-timezone: String
+          Maximum number of times the tool can be used in the API request.
 
-The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+          exclusiveMinimum: 0
 
-
+        - `response_inclusion: :full | :excluded`
 
-class BetaWebFetchTool20260318 { name, type, allowed\_callers, 10 more } 
+          How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
-
+          - `:full`
 
-name: :web\_fetch
+          - `:excluded`
 
-Name of the tool.
+        - `strict: bool`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          When true, guarantees schema validation on tool names and inputs
 
-type: :web\_fetch\_20260318
+        - `use_cache: bool`
 
-
+          Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+      - `class BetaAdvisorTool20260301`
 
-One of the following:
+        - `model: Model`
 
-:direct
+          The model that will complete your prompt.
 
-:code\_execution\_20250825
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-:code\_execution\_20260120
+        - `name: :advisor`
 
-:code\_execution\_20260521
+          Name of the tool.
 
-allowed\_domains: Array[String]
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-List of domains to allow fetching from
+        - `type: :advisor_20260301`
 
-blocked\_domains: Array[String]
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-List of domains to block fetching from
+          - `:direct`
 
-
+          - `:code_execution_20250825`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+          - `:code_execution_20260120`
 
-Create a cache control breakpoint at this content block.
+          - `:code_execution_20260521`
 
-type: :ephemeral
+        - `cache_control: BetaCacheControlEphemeral`
 
-
+          Create a cache control breakpoint at this content block.
 
-ttl: :"5m" | :"1h"
+        - `caching: BetaCacheControlEphemeral`
 
-The time-to-live for the cache control breakpoint.
+          Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
 
-This may be one the following values:
+        - `defer_loading: bool`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        - `max_tokens: Integer`
 
-One of the following:
+          Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
-:"5m"
+          minimum: 1024
 
-:"1h"
+        - `max_uses: Integer`
 
-
+          Maximum number of times the tool can be used in the API request.
 
-citations: [BetaCitationsConfigParam](api/beta/messages.md) { enabled } 
+          exclusiveMinimum: 0
 
-Citations configuration for fetched documents. Citations are disabled by default.
+        - `strict: bool`
 
-enabled: bool
+          When true, guarantees schema validation on tool names and inputs
 
-defer\_loading: bool
+      - `class BetaToolSearchToolBm25_20251119`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+        - `name: :tool_search_tool_bm25`
 
-max\_content\_tokens: Integer
+          Name of the tool.
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-max\_uses: Integer
+        - `type: :tool_search_tool_bm25_20251119 | :tool_search_tool_bm25`
 
-Maximum number of times the tool can be used in the API request.
+          - `:tool_search_tool_bm25_20251119`
 
-
+          - `:tool_search_tool_bm25`
 
-response\_inclusion: :full | :excluded
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+          - `:direct`
 
-One of the following:
+          - `:code_execution_20250825`
 
-:full
+          - `:code_execution_20260120`
 
-:excluded
+          - `:code_execution_20260521`
 
-strict: bool
+        - `cache_control: BetaCacheControlEphemeral`
 
-When true, guarantees schema validation on tool names and inputs
+          Create a cache control breakpoint at this content block.
 
-use\_cache: bool
+        - `defer_loading: bool`
 
-Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-
+        - `strict: bool`
 
-class BetaAdvisorTool20260301 { model, name, type, 7 more } 
+          When true, guarantees schema validation on tool names and inputs
 
-
+      - `class BetaToolSearchToolRegex20251119`
 
-model: [Model](api/messages.md)
+        - `name: :tool_search_tool_regex`
 
-The model that will complete your prompt.
+          Name of the tool.
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
-One of the following:
+        - `type: :tool_search_tool_regex_20251119 | :tool_search_tool_regex`
 
-
+          - `:tool_search_tool_regex_20251119`
 
-Model = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-mythos-5" | 13 more
+          - `:tool_search_tool_regex`
 
-The model that will complete your prompt.
+        - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+          - `:direct`
 
-One of the following:
+          - `:code_execution_20250825`
 
-:"claude-sonnet-5"
+          - `:code_execution_20260120`
 
-High-performance model for coding and agents
+          - `:code_execution_20260521`
 
-:"claude-fable-5"
+        - `cache_control: BetaCacheControlEphemeral`
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+          Create a cache control breakpoint at this content block.
 
-:"claude-mythos-5"
+        - `defer_loading: bool`
 
-Most capable model for cybersecurity and biology research
+          If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-:"claude-opus-4-8"
+        - `strict: bool`
 
-Frontier intelligence for long-running agents and coding
+          When true, guarantees schema validation on tool names and inputs
 
-:"claude-opus-4-7"
+      - `class BetaMCPToolset`
 
-Frontier intelligence for long-running agents and coding
+        Configuration for a group of tools from an MCP server.
 
-:"claude-mythos-preview"
+        Allows configuring enabled status and defer_loading for all tools
+        from an MCP server, with optional per-tool overrides.
 
-New class of intelligence, strongest in coding and cybersecurity
+        - `mcp_server_name: String`
 
-:"claude-opus-4-6"
+          Name of the MCP server to configure tools for
 
-Frontier intelligence for long-running agents and coding
+          maxLength: 255, minLength: 1
 
-:"claude-sonnet-4-6"
+        - `type: :mcp_toolset`
 
-Best combination of speed and intelligence
+        - `cache_control: BetaCacheControlEphemeral`
 
-:"claude-haiku-4-5"
+          Create a cache control breakpoint at this content block.
 
-Fastest model with near-frontier intelligence
+        - `configs: Hash[Symbol, BetaMCPToolConfig]`
 
-:"claude-haiku-4-5-20251001"
+          Configuration overrides for specific tools, keyed by tool name
 
-Fastest model with near-frontier intelligence
+          - `defer_loading: bool`
 
-:"claude-opus-4-5"
+          - `enabled: bool`
 
-Premium model combining maximum intelligence with practical performance
+        - `default_config: BetaMCPToolDefaultConfig`
 
-:"claude-opus-4-5-20251101"
+          Default configuration applied to all tools from this server
 
-Premium model combining maximum intelligence with practical performance
+          - `defer_loading: bool`
 
-:"claude-sonnet-4-5"
+          - `enabled: bool`
 
-High-performance model for agents and coding
+    - `output_format: BetaJSONOutputFormat`
 
-:"claude-sonnet-4-5-20250929"
+      **Deprecated**
 
-High-performance model for agents and coding
+      Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
 
-:"claude-opus-4-1"
+      A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
-Exceptional model for specialized complex tasks
+    - `temperature: Float`
 
-:"claude-opus-4-1-20250805"
+      **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-Exceptional model for specialized complex tasks
+      Amount of randomness injected into the response.
 
-String = String
+      Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
 
-
+      Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
-name: :advisor
+      maximum: 1, minimum: 0
 
-Name of the tool.
+    - `top_k: Integer`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not accept top_k; any value will be rejected with a 400 error.
 
-type: :advisor\_20260301
+      Only sample from the top K options for each subsequent token.
 
-
+      Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+      Recommended for advanced use cases only.
 
-One of the following:
+      minimum: 0
 
-:direct
+    - `top_p: Float`
 
-:code\_execution\_20250825
+      **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting top_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-:code\_execution\_20260120
+      Use nucleus sampling.
 
-:code\_execution\_20260521
+      In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-
+      Recommended for advanced use cases only.
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+      maximum: 1, minimum: 0
 
-Create a cache control breakpoint at this content block.
+- `betas: Array[AnthropicBeta]`
 
-type: :ephemeral
+  Optional header to specify the beta version(s) you want to use.
 
-
+  - `String = String`
 
-ttl: :"5m" | :"1h"
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
 
-The time-to-live for the cache control breakpoint.
+    - `:"message-batches-2024-09-24"`
 
-This may be one the following values:
+    - `:"prompt-caching-2024-07-31"`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+    - `:"computer-use-2024-10-22"`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+    - `:"computer-use-2025-01-24"`
 
-One of the following:
+    - `:"pdfs-2024-09-25"`
 
-:"5m"
+    - `:"token-counting-2024-11-01"`
 
-:"1h"
+    - `:"token-efficient-tools-2025-02-19"`
 
-
+    - `:"output-128k-2025-02-19"`
 
-caching: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+    - `:"files-api-2025-04-14"`
 
-Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
+    - `:"mcp-client-2025-04-04"`
 
-type: :ephemeral
+    - `:"mcp-client-2025-11-20"`
 
-
+    - `:"dev-full-thinking-2025-05-14"`
 
-ttl: :"5m" | :"1h"
+    - `:"interleaved-thinking-2025-05-14"`
 
-The time-to-live for the cache control breakpoint.
+    - `:"code-execution-2025-05-22"`
 
-This may be one the following values:
+    - `:"extended-cache-ttl-2025-04-11"`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+    - `:"context-1m-2025-08-07"`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+    - `:"context-management-2025-06-27"`
 
-One of the following:
+    - `:"model-context-window-exceeded-2025-08-26"`
 
-:"5m"
+    - `:"skills-2025-10-02"`
 
-:"1h"
+    - `:"fast-mode-2026-02-01"`
 
-defer\_loading: bool
+    - `:"output-300k-2026-03-24"`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+    - `:"user-profiles-2026-03-24"`
 
-max\_tokens: Integer
+    - `:"user-profiles-2026-08-18"`
 
-Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor\_result or advisor\_redacted\_result block carries stop\_reason='max\_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+    - `:"advisor-tool-2026-03-01"`
 
-max\_uses: Integer
+    - `:"managed-agents-2026-04-01"`
 
-Maximum number of times the tool can be used in the API request.
+    - `:"cache-diagnosis-2026-04-07"`
 
-strict: bool
+    - `:"dreaming-2026-04-21"`
 
-When true, guarantees schema validation on tool names and inputs
+    - `:"thinking-token-count-2026-05-13"`
 
-
+    - `:"server-side-fallback-2026-06-01"`
 
-class BetaToolSearchToolBm25\_20251119 { name, type, allowed\_callers, 3 more } 
+    - `:"server-side-fallback-2026-07-01"`
 
-
+    - `:"fallback-credit-2026-06-01"`
 
-name: :tool\_search\_tool\_bm25
+    - `:"fallback-credit-2026-07-01"`
 
-Name of the tool.
+    - `:"agent-memory-2026-07-22"`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
-
+    - `:"compact-2026-01-12"`
 
-type: :tool\_search\_tool\_bm25\_20251119 | :tool\_search\_tool\_bm25
+    - `:"computer-use-2025-11-24"`
 
-One of the following:
+    - `:"mcp-tunnels-2026-06-22"`
 
-:tool\_search\_tool\_bm25\_20251119
+    - `:"structured-outputs-2025-11-13"`
 
-:tool\_search\_tool\_bm25
+    - `:"task-budgets-2026-03-13"`
 
-
+    - `:"thinking-display-updates-2026-08-18"`
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+    - `:"ce-user-management-2026-07-13"`
 
-One of the following:
+    - `:"mid-conversation-output-config-2026-07-01"`
 
-:direct
+    - `:"thinking-binding-controls-2026-08-01"`
 
-:code\_execution\_20250825
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
 
-:code\_execution\_20260120
+- `user_profile_id: String`
 
-:code\_execution\_20260521
+  The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
-
+## Returns
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+- `class BetaMessageBatch`
 
-Create a cache control breakpoint at this content block.
+  - `id: String`
 
-type: :ephemeral
+    Unique object identifier.
 
-
+    The format and length of IDs may change over time.
 
-ttl: :"5m" | :"1h"
+  - `archived_at: Time`
 
-The time-to-live for the cache control breakpoint.
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-This may be one the following values:
+    format: date-time
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+  - `cancel_initiated_at: Time`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-One of the following:
+    format: date-time
 
-:"5m"
+  - `created_at: Time`
 
-:"1h"
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-defer\_loading: bool
+    format: date-time
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+  - `ended_at: Time`
 
-strict: bool
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
-When true, guarantees schema validation on tool names and inputs
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
-
+    format: date-time
 
-class BetaToolSearchToolRegex20251119 { name, type, allowed\_callers, 3 more } 
+  - `expires_at: Time`
 
-
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-name: :tool\_search\_tool\_regex
+    format: date-time
 
-Name of the tool.
+  - `processing_status: :in_progress | :canceling | :ended`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+    Processing status of the Message Batch.
 
-
+    - `:in_progress`
 
-type: :tool\_search\_tool\_regex\_20251119 | :tool\_search\_tool\_regex
+    - `:canceling`
 
-One of the following:
+    - `:ended`
 
-:tool\_search\_tool\_regex\_20251119
+  - `request_counts: BetaMessageBatchRequestCounts`
 
-:tool\_search\_tool\_regex
+    Tallies requests within the Message Batch, categorized by their status.
 
-
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120 | :code\_execution\_20260521]
+    - `canceled: Integer`
 
-One of the following:
+      Number of requests in the Message Batch that have been canceled.
 
-:direct
+      This is zero until processing of the entire Message Batch has ended.
 
-:code\_execution\_20250825
+    - `errored: Integer`
 
-:code\_execution\_20260120
+      Number of requests in the Message Batch that encountered an error.
 
-:code\_execution\_20260521
+      This is zero until processing of the entire Message Batch has ended.
 
-
+    - `expired: Integer`
 
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
+      Number of requests in the Message Batch that have expired.
 
-Create a cache control breakpoint at this content block.
+      This is zero until processing of the entire Message Batch has ended.
 
-type: :ephemeral
+    - `processing: Integer`
 
-
+      Number of requests in the Message Batch that are processing.
 
-ttl: :"5m" | :"1h"
+    - `succeeded: Integer`
 
-The time-to-live for the cache control breakpoint.
+      Number of requests in the Message Batch that have completed successfully.
 
-This may be one the following values:
+      This is zero until processing of the entire Message Batch has ended.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+  - `results_url: String`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
-One of the following:
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-:"5m"
+  - `type: :message_batch`
 
-:"1h"
+    Object type.
 
-defer\_loading: bool
+    For Message Batches, this is always `"message_batch"`.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+## Example
 
-strict: bool
-
-When true, guarantees schema validation on tool names and inputs
-
-
-
-class BetaMCPToolset { mcp\_server\_name, type, cache\_control, 2 more } 
-
-Configuration for a group of tools from an MCP server.
-
-Allows configuring enabled status and defer\_loading for all tools
-from an MCP server, with optional per-tool overrides.
-
-mcp\_server\_name: String
-
-Name of the MCP server to configure tools for
-
-type: :mcp\_toolset
-
-
-
-cache\_control: [BetaCacheControlEphemeral](api/beta/messages.md) { type, ttl } 
-
-Create a cache control breakpoint at this content block.
-
-type: :ephemeral
-
-
-
-ttl: :"5m" | :"1h"
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-:"5m"
-
-:"1h"
-
-
-
-configs: Hash[Symbol, [BetaMCPToolConfig](api/beta/messages.md) { defer\_loading, enabled } ]
-
-Configuration overrides for specific tools, keyed by tool name
-
-defer\_loading: bool
-
-enabled: bool
-
-
-
-default\_config: [BetaMCPToolDefaultConfig](api/beta/messages.md) { defer\_loading, enabled } 
-
-Default configuration applied to all tools from this server
-
-defer\_loading: bool
-
-enabled: bool
-
-
-
-output\_format: [BetaJSONOutputFormat](api/beta/messages.md) { schema, type } ⁠Deprecated
-
-Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
-
-A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
-
-schema: Hash[Symbol, untyped]
-
-The JSON schema of the format
-
-type: :json\_schema
-
-
-
-temperature: Float⁠Deprecated
-
-Amount of randomness injected into the response.
-
-Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
-
-Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
-
-Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
-
-maximum1
-
-minimum0
-
-
-
-top\_k: Integer⁠Deprecated
-
-Only sample from the top K options for each subsequent token.
-
-Deprecated. Models released after Claude Opus 4.6 do not accept top\_k; any value will be rejected with a 400 error.
-
-Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
-
-Recommended for advanced use cases only.
-
-minimum0
-
-
-
-top\_p: Float⁠Deprecated
-
-Use nucleus sampling.
-
-Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
-
-In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
-
-Recommended for advanced use cases only.
-
-maximum1
-
-minimum0
-
-
-
-betas: Array[[AnthropicBeta](api/beta.md)]
-
-Optional header to specify the beta version(s) you want to use.
-
-One of the following:
-
-String = String
-
-
-
-AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more
-
-One of the following:
-
-:"message-batches-2024-09-24"
-
-:"prompt-caching-2024-07-31"
-
-:"computer-use-2024-10-22"
-
-:"computer-use-2025-01-24"
-
-:"pdfs-2024-09-25"
-
-:"token-counting-2024-11-01"
-
-:"token-efficient-tools-2025-02-19"
-
-:"output-128k-2025-02-19"
-
-:"files-api-2025-04-14"
-
-:"mcp-client-2025-04-04"
-
-:"mcp-client-2025-11-20"
-
-:"dev-full-thinking-2025-05-14"
-
-:"interleaved-thinking-2025-05-14"
-
-:"code-execution-2025-05-22"
-
-:"extended-cache-ttl-2025-04-11"
-
-:"context-1m-2025-08-07"
-
-:"context-management-2025-06-27"
-
-:"model-context-window-exceeded-2025-08-26"
-
-:"skills-2025-10-02"
-
-:"fast-mode-2026-02-01"
-
-:"output-300k-2026-03-24"
-
-:"user-profiles-2026-03-24"
-
-:"advisor-tool-2026-03-01"
-
-:"managed-agents-2026-04-01"
-
-:"cache-diagnosis-2026-04-07"
-
-:"thinking-token-count-2026-05-13"
-
-:"server-side-fallback-2026-06-01"
-
-:"fallback-credit-2026-06-01"
-
-:"agent-memory-2026-07-22"
-
-user\_profile\_id: String
-
-The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
-
-##### ReturnsExpand Collapse
-
-
-
-class BetaMessageBatch { id, archived\_at, cancel\_initiated\_at, 7 more } 
-
-
-
-id: String
-
-Unique object identifier.
-
-The format and length of IDs may change over time.
-
-archived\_at: Time
-
-RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
-
-cancel\_initiated\_at: Time
-
-RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
-
-created\_at: Time
-
-RFC 3339 datetime string representing the time at which the Message Batch was created.
-
-
-
-ended\_at: Time
-
-RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
-
-Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
-
-formatdate-time
-
-expires\_at: Time
-
-RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
-
-
-
-processing\_status: :in\_progress | :canceling | :ended
-
-Processing status of the Message Batch.
-
-One of the following:
-
-:in\_progress
-
-:canceling
-
-:ended
-
-
-
-request\_counts: [BetaMessageBatchRequestCounts](api/beta/messages/batches.md) { canceled, errored, expired, 2 more } 
-
-Tallies requests within the Message Batch, categorized by their status.
-
-Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
-
-
-
-canceled: Integer
-
-Number of requests in the Message Batch that have been canceled.
-
-This is zero until processing of the entire Message Batch has ended.
-
-
-
-errored: Integer
-
-Number of requests in the Message Batch that encountered an error.
-
-This is zero until processing of the entire Message Batch has ended.
-
-
-
-expired: Integer
-
-Number of requests in the Message Batch that have expired.
-
-This is zero until processing of the entire Message Batch has ended.
-
-processing: Integer
-
-Number of requests in the Message Batch that are processing.
-
-
-
-succeeded: Integer
-
-Number of requests in the Message Batch that have completed successfully.
-
-This is zero until processing of the entire Message Batch has ended.
-
-
-
-results\_url: String
-
-URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
-
-Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-
-
-type: :message\_batch
-
-Object type.
-
-For Message Batches, this is always `"message_batch"`.
-
-Create a Message Batch
-
-Ruby
-
-```shiki
+```ruby
 require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
@@ -7218,7 +4078,7 @@ beta_message_batch = anthropic.beta.messages.batches.create(
   requests: [
     {
       custom_id: "my-custom-id-1",
-      params: {max_tokens: 1024, messages: [{content: "Hello, world", role: :user}], model: :"claude-opus-4-6"}
+      params: {max_tokens: 1024, messages: [{content: "Hello, world", role: :user}], model: Anthropic::Model::CLAUDE_OPUS_5}
     }
   ]
 )
@@ -7226,38 +4086,9 @@ beta_message_batch = anthropic.beta.messages.batches.create(
 puts(beta_message_batch)
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "archived_at": "2024-08-20T18:37:24.100435Z",
-  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
-  "created_at": "2024-08-20T18:37:24.100435Z",
-  "ended_at": "2024-08-20T18:37:24.100435Z",
-  "expires_at": "2024-08-20T18:37:24.100435Z",
-  "processing_status": "in_progress",
-  "request_counts": {
-    "canceled": 10,
-    "errored": 30,
-    "expired": 10,
-    "processing": 100,
-    "succeeded": 50
-  },
-  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
-  "type": "message_batch"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
   "archived_at": "2024-08-20T18:37:24.100435Z",

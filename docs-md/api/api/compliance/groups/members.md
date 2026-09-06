@@ -1,42 +1,110 @@
 # Members
 
-To enable the Compliance API, see the setup guide.
+## List Compliance Group Members
 
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
+**GET** `/v1/compliance/groups/{group_id}/members`
 
-Copy page
+List Compliance Group Members
 
-
+### Path parameters
 
-# Members
+- `group_id: string`
 
-##### [List Compliance Group Members](api/http/compliance/groups/members/list.md)
+  The group ID (tagged ID, e.g., rbac_group_abc123)
 
-GET/v1/compliance/groups/{group\_id}/members
+### Query parameters
 
-##### Models
+- `limit: optional number`
 
-
+  Maximum results (default: 500, max: 1000)
 
-MemberListResponse object{ created\_at, email, updated\_at, user\_id }
+  default: 500, maximum: 1000, minimum: 1
 
-Group member for compliance responses.
+- `page: optional string`
 
-created\_at: string or null
+  Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
-Membership creation timestamp (ISO 8601)
+### Headers
 
-email: string
+- `"x-api-key": optional string`
 
-Member email address
+### Returns
 
-updated\_at: string or null
+- `data: array of object`
 
-Membership last-updated timestamp (ISO 8601)
+  List of group members
 
-user\_id: string
+  - `created_at: string or null`
 
-Member user identifier (tagged ID)
+    Membership creation timestamp (ISO 8601)
+
+  - `email: string`
+
+    Member email address
+
+  - `updated_at: string or null`
+
+    Membership last-updated timestamp (ISO 8601)
+
+  - `user_id: string`
+
+    Member user identifier (tagged ID)
+
+- `has_more: boolean`
+
+  Whether more records exist beyond the current result set
+
+- `next_page: string or null`
+
+  Token to retrieve the next page. Use this as the 'page' parameter in your next request
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID/members \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "created_at": "2025-03-12T18:22:41.123456",
+      "email": "jane.doe@example.com",
+      "updated_at": "2025-03-14T09:05:17.456789",
+      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    }
+  ],
+  "has_more": true,
+  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
+}
+```
+
+## Domain types
+
+### Member List Response
+
+- `MemberListResponse object`
+
+  Group member for compliance responses.
+
+  - `created_at: string or null`
+
+    Membership creation timestamp (ISO 8601)
+
+  - `email: string`
+
+    Member email address
+
+  - `updated_at: string or null`
+
+    Membership last-updated timestamp (ISO 8601)
+
+  - `user_id: string`
+
+    Member user identifier (tagged ID)
 
 ---
 

@@ -1,94 +1,461 @@
 # Members
 
-Copy page
+## Create Workspace Member
 
-
+**POST** `/v1/organizations/workspaces/{workspace_id}/members`
 
-# Members
+Create Workspace Member
 
-##### [Create Workspace Member](api/http/admin/workspaces/members/create.md)
+### Path parameters
 
-POST/v1/organizations/workspaces/{workspace\_id}/members
+- `workspace_id: string`
 
-##### [Get Workspace Member](api/http/admin/workspaces/members/retrieve.md)
+  ID of the Workspace.
 
-GET/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+### Body parameters
 
-##### [List Workspace Members](api/http/admin/workspaces/members/list.md)
+- `user_id: string`
 
-GET/v1/organizations/workspaces/{workspace\_id}/members
+  ID of the User.
 
-##### [Update Workspace Member](api/http/admin/workspaces/members/update.md)
+- `workspace_role: "workspace_admin" or "workspace_developer" or "workspace_restricted_developer" or "workspace_user"`
 
-POST/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+  Role of the new Workspace Member. Cannot be `workspace_billing`.
 
-##### [Delete Workspace Member](api/http/admin/workspaces/members/delete.md)
+  - `"workspace_admin"`
 
-DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
+  - `"workspace_developer"`
 
-##### Models
+  - `"workspace_restricted_developer"`
 
-
+  - `"workspace_user"`
 
-WorkspaceMember object{ type, user\_id, workspace\_id, workspace\_role }
+### Returns
 
-
+- `WorkspaceMember object`
 
-type: "workspace\_member"
+  - `type: "workspace_member"`
 
-Object type.
+    Object type.
 
-For Workspace Members, this is always `"workspace_member"`.
+    For Workspace Members, this is always `"workspace_member"`.
 
-defaultworkspace\_member
+    default: workspace_member
 
-user\_id: string
+  - `user_id: string`
 
-ID of the User.
+    ID of the User.
 
-workspace\_id: string
+  - `workspace_id: string`
 
-ID of the Workspace.
+    ID of the Workspace.
 
-
+  - `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
 
-workspace\_role: "workspace\_admin" or "workspace\_billing" or "workspace\_developer" or 2 more
+    Role of the Workspace Member.
 
-Role of the Workspace Member.
+    - `"workspace_admin"`
 
-One of the following:
+    - `"workspace_billing"`
 
-"workspace\_admin"
+    - `"workspace_developer"`
 
-"workspace\_billing"
+    - `"workspace_restricted_developer"`
 
-"workspace\_developer"
+    - `"workspace_user"`
 
-"workspace\_restricted\_developer"
+### Example
 
-"workspace\_user"
+```bash
+curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members \
+    -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
+    -d '{
+          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+          "workspace_role": "workspace_admin"
+        }'
+```
 
-
+#### Response (200)
 
-MemberDeleteResponse object{ type, user\_id, workspace\_id }
+```json
+{
+  "type": "workspace_member",
+  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+  "workspace_role": "workspace_user"
+}
+```
 
-
+## Get Workspace Member
 
-type: "workspace\_member\_deleted"
+**GET** `/v1/organizations/workspaces/{workspace_id}/members/{user_id}`
 
-Deleted object type.
+Get Workspace Member
 
-For Workspace Members, this is always `"workspace_member_deleted"`.
+### Path parameters
 
-defaultworkspace\_member\_deleted
+- `workspace_id: string`
 
-user\_id: string
+  ID of the Workspace.
 
-ID of the User.
+- `user_id: string`
 
-workspace\_id: string
+  ID of the User.
 
-ID of the Workspace.
+### Returns
+
+- `WorkspaceMember object`
+
+  - `type: "workspace_member"`
+
+    Object type.
+
+    For Workspace Members, this is always `"workspace_member"`.
+
+    default: workspace_member
+
+  - `user_id: string`
+
+    ID of the User.
+
+  - `workspace_id: string`
+
+    ID of the Workspace.
+
+  - `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
+
+    Role of the Workspace Member.
+
+    - `"workspace_admin"`
+
+    - `"workspace_billing"`
+
+    - `"workspace_developer"`
+
+    - `"workspace_restricted_developer"`
+
+    - `"workspace_user"`
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members/$USER_ID \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+```
+
+#### Response (200)
+
+```json
+{
+  "type": "workspace_member",
+  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+  "workspace_role": "workspace_user"
+}
+```
+
+## List Workspace Members
+
+**GET** `/v1/organizations/workspaces/{workspace_id}/members`
+
+List Workspace Members
+
+### Path parameters
+
+- `workspace_id: string`
+
+  ID of the Workspace.
+
+### Query parameters
+
+- `after_id: optional string`
+
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+
+- `before_id: optional string`
+
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+
+- `limit: optional number`
+
+  Number of items to return per page.
+
+  Defaults to `20`. Ranges from `1` to `1000`.
+
+  default: 20, maximum: 1000, minimum: 1
+
+### Returns
+
+- `data: array of WorkspaceMember`
+
+  - `type: "workspace_member"`
+
+    Object type.
+
+    For Workspace Members, this is always `"workspace_member"`.
+
+    default: workspace_member
+
+  - `user_id: string`
+
+    ID of the User.
+
+  - `workspace_id: string`
+
+    ID of the Workspace.
+
+  - `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
+
+    Role of the Workspace Member.
+
+    - `"workspace_admin"`
+
+    - `"workspace_billing"`
+
+    - `"workspace_developer"`
+
+    - `"workspace_restricted_developer"`
+
+    - `"workspace_user"`
+
+- `first_id: string or null`
+
+  First ID in the `data` list. Can be used as the `before_id` for the previous page.
+
+- `has_more: boolean`
+
+  Indicates if there are more results in the requested page direction.
+
+- `last_id: string or null`
+
+  Last ID in the `data` list. Can be used as the `after_id` for the next page.
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "type": "workspace_member",
+      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+      "workspace_role": "workspace_user"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
+
+## Update Workspace Member
+
+**POST** `/v1/organizations/workspaces/{workspace_id}/members/{user_id}`
+
+Update Workspace Member
+
+### Path parameters
+
+- `workspace_id: string`
+
+  ID of the Workspace.
+
+- `user_id: string`
+
+  ID of the User.
+
+### Body parameters
+
+- `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
+
+  New workspace role for the User.
+
+  - `"workspace_admin"`
+
+  - `"workspace_billing"`
+
+  - `"workspace_developer"`
+
+  - `"workspace_restricted_developer"`
+
+  - `"workspace_user"`
+
+### Returns
+
+- `WorkspaceMember object`
+
+  - `type: "workspace_member"`
+
+    Object type.
+
+    For Workspace Members, this is always `"workspace_member"`.
+
+    default: workspace_member
+
+  - `user_id: string`
+
+    ID of the User.
+
+  - `workspace_id: string`
+
+    ID of the Workspace.
+
+  - `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
+
+    Role of the Workspace Member.
+
+    - `"workspace_admin"`
+
+    - `"workspace_billing"`
+
+    - `"workspace_developer"`
+
+    - `"workspace_restricted_developer"`
+
+    - `"workspace_user"`
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members/$USER_ID \
+    -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
+    -d '{
+          "workspace_role": "workspace_admin"
+        }'
+```
+
+#### Response (200)
+
+```json
+{
+  "type": "workspace_member",
+  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+  "workspace_role": "workspace_user"
+}
+```
+
+## Delete Workspace Member
+
+**DELETE** `/v1/organizations/workspaces/{workspace_id}/members/{user_id}`
+
+Delete Workspace Member
+
+### Path parameters
+
+- `workspace_id: string`
+
+  ID of the Workspace.
+
+- `user_id: string`
+
+  ID of the User.
+
+### Returns
+
+- `type: "workspace_member_deleted"`
+
+  Deleted object type.
+
+  For Workspace Members, this is always `"workspace_member_deleted"`.
+
+  default: workspace_member_deleted
+
+- `user_id: string`
+
+  ID of the User.
+
+- `workspace_id: string`
+
+  ID of the Workspace.
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members/$USER_ID \
+    -X DELETE \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+```
+
+#### Response (200)
+
+```json
+{
+  "type": "workspace_member_deleted",
+  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+}
+```
+
+## Domain types
+
+### Workspace Member
+
+- `WorkspaceMember object`
+
+  - `type: "workspace_member"`
+
+    Object type.
+
+    For Workspace Members, this is always `"workspace_member"`.
+
+    default: workspace_member
+
+  - `user_id: string`
+
+    ID of the User.
+
+  - `workspace_id: string`
+
+    ID of the Workspace.
+
+  - `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
+
+    Role of the Workspace Member.
+
+    - `"workspace_admin"`
+
+    - `"workspace_billing"`
+
+    - `"workspace_developer"`
+
+    - `"workspace_restricted_developer"`
+
+    - `"workspace_user"`
+
+### Member Delete Response
+
+- `MemberDeleteResponse object`
+
+  - `type: "workspace_member_deleted"`
+
+    Deleted object type.
+
+    For Workspace Members, this is always `"workspace_member_deleted"`.
+
+    default: workspace_member_deleted
+
+  - `user_id: string`
+
+    ID of the User.
+
+  - `workspace_id: string`
+
+    ID of the Workspace.
 
 ---
 

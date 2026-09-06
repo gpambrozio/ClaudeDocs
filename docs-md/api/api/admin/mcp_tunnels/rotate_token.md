@@ -1,14 +1,8 @@
 # Rotate Tunnel Token
 
-Copy page
+**POST** `/v1/organizations/tunnels/{tunnel_id}/rotate_token`
 
-
-
-# Rotate Tunnel Token
-
-Deprecated
-
-POST/v1/organizations/tunnels/{tunnel\_id}/rotate\_token
+**Deprecated**
 
 **Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](api/beta/tunnels.md) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
@@ -18,77 +12,55 @@ Established connections are not severed by rotation; a connector
 restarted after rotation must use the new value. An optional
 `reason` is captured for operational context.
 
-##### Path parameters
+## Path parameters
 
-tunnel\_id: string
+- `tunnel_id: string`
 
-ID of the Tunnel.
+  ID of the Tunnel.
 
-##### Headers
+## Headers
 
-"anthropic-beta": array of "mcp-tunnels-2026-05-19"
+- `"anthropic-beta": array of "mcp-tunnels-2026-05-19"`
 
-Required for all Tunnel endpoints.
+  Required for all Tunnel endpoints.
 
-##### Body
+## Body parameters
 
-
+- `reason: optional string or null`
 
-reason: optional string or null
+  Optional free-text reason for the rotation, recorded for audit.
 
-Optional free-text reason for the rotation, recorded for audit.
+  maxLength: 1024
 
-maxLength1024
+## Returns
 
-##### Returns
+- `id: string`
 
-id: string
+  Stable identifier for the current token value. Changes when the token is
+  rotated.
 
-Stable identifier for the current token value. Changes when the token is
-rotated.
+- `tunnel_token: string`
 
-tunnel\_token: string
+  The tunnel's connection token.
 
-The tunnel's connection token.
+- `type: "tunnel_token"`
 
-
+  Object type. Always `tunnel_token` for Tunnel Tokens.
 
-type: "tunnel\_token"
+  default: tunnel_token
 
-Object type. Always `tunnel_token` for Tunnel Tokens.
+## Example
 
-defaulttunnel\_token
-
-Rotate Tunnel Token
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/rotate_token \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "ttkn_bb97000eaec162831399ca9b6684a4fdf5be49ace5683057b017aab5c87e19e0",
-  "tunnel_token": "eyJhIjoiRVhBTVBMRSIsInQiOiJFWEFNUExFIiwicyI6IkVYQU1QTEUifQ==",
-  "type": "tunnel_token"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "ttkn_bb97000eaec162831399ca9b6684a4fdf5be49ace5683057b017aab5c87e19e0",
   "tunnel_token": "eyJhIjoiRVhBTVBMRSIsInQiOiJFWEFNUExFIiwicyI6IkVYQU1QTEUifQ==",

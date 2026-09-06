@@ -1,2231 +1,1786 @@
 # Webhooks
 
-Copy page
+## Domain types
 
-
+### Beta Webhook Agent Archived Event Data
 
-Java
+- `class BetaWebhookAgentArchivedEventData:`
 
-# Webhooks
+  - `String id`
 
-Helpers for receiving and verifying webhook events. Use `unwrap` in your SDK to verify signatures and parse payloads; see the [webhooks guide](managed-agents/webhooks.md) for handler examples.
+    ID of the agent that triggered the event.
 
-Possible `data.type` values:
+  - `String organizationId`
 
-- `agent.archived`
-- `agent.created`
-- `agent.deleted`
-- `agent.updated`
-- `deployment.archived`
-- `deployment.created`
-- `deployment.deleted`
-- `deployment.paused`
-- `deployment.unpaused`
-- `deployment.updated`
-- `deployment_run.failed`
-- `deployment_run.started`
-- `deployment_run.succeeded`
-- `session.archived`
-- `session.created`
-- `session.deleted`
-- `session.idled`
-- `session.outcome_evaluation_ended`
-- `session.pending`
-- `session.requires_action`
-- `session.running`
-- `session.status_idled`
-- `session.status_rescheduled`
-- `session.status_run_started`
-- `session.status_terminated`
-- `session.thread_created`
-- `session.thread_idled`
-- `session.thread_terminated`
-- `session.updated`
-- `vault.archived`
-- `vault.created`
-- `vault.deleted`
-- `vault_credential.archived`
-- `vault_credential.created`
-- `vault_credential.deleted`
-- `vault_credential.refresh_failed`
+  - `JsonValue type = "agent.archived"`
 
-##### ModelsExpand Collapse
+  - `String workspaceId`
 
-
+### Beta Webhook Agent Created Event Data
 
-class BetaWebhookAgentArchivedEventData:
+- `class BetaWebhookAgentCreatedEventData:`
 
-String id
+  - `String id`
 
-ID of the agent that triggered the event.
+    ID of the agent that triggered the event.
 
-String organizationId
+  - `String organizationId`
 
-JsonValue; type "agent.archived"constant"agent.archived"constant
+  - `JsonValue type = "agent.created"`
 
-String workspaceId
+  - `String workspaceId`
 
-
+### Beta Webhook Agent Deleted Event Data
 
-class BetaWebhookAgentCreatedEventData:
+- `class BetaWebhookAgentDeletedEventData:`
 
-String id
+  - `String id`
 
-ID of the agent that triggered the event.
+    ID of the agent that triggered the event.
 
-String organizationId
+  - `String organizationId`
 
-JsonValue; type "agent.created"constant"agent.created"constant
+  - `JsonValue type = "agent.deleted"`
 
-String workspaceId
+  - `String workspaceId`
 
-
+### Beta Webhook Agent Updated Event Data
 
-class BetaWebhookAgentDeletedEventData:
+- `class BetaWebhookAgentUpdatedEventData:`
 
-String id
+  - `String id`
 
-ID of the agent that triggered the event.
+    ID of the agent that triggered the event.
 
-String organizationId
+  - `String organizationId`
 
-JsonValue; type "agent.deleted"constant"agent.deleted"constant
+  - `JsonValue type = "agent.updated"`
 
-String workspaceId
+  - `String workspaceId`
 
-
+### Beta Webhook Deployment Archived Event Data
 
-class BetaWebhookAgentUpdatedEventData:
+- `class BetaWebhookDeploymentArchivedEventData:`
 
-String id
+  - `String id`
 
-ID of the agent that triggered the event.
+    ID of the deployment that triggered the event.
 
-String organizationId
+  - `String organizationId`
 
-JsonValue; type "agent.updated"constant"agent.updated"constant
+  - `JsonValue type = "deployment.archived"`
 
-String workspaceId
+  - `String workspaceId`
 
-
+### Beta Webhook Deployment Created Event Data
 
-class BetaWebhookDeploymentArchivedEventData:
+- `class BetaWebhookDeploymentCreatedEventData:`
 
-String id
+  - `String id`
 
-ID of the deployment that triggered the event.
+    ID of the deployment that triggered the event.
 
-String organizationId
+  - `String organizationId`
 
-JsonValue; type "deployment.archived"constant"deployment.archived"constant
+  - `JsonValue type = "deployment.created"`
 
-String workspaceId
+  - `String workspaceId`
 
-
+### Beta Webhook Deployment Deleted Event Data
 
-class BetaWebhookDeploymentCreatedEventData:
+- `class BetaWebhookDeploymentDeletedEventData:`
 
-String id
+  - `String id`
 
-ID of the deployment that triggered the event.
+    ID of the deployment that triggered the event.
 
-String organizationId
+  - `String organizationId`
 
-JsonValue; type "deployment.created"constant"deployment.created"constant
+  - `JsonValue type = "deployment.deleted"`
 
-String workspaceId
+  - `String workspaceId`
 
-
+### Beta Webhook Deployment Paused Event Data
 
-class BetaWebhookDeploymentDeletedEventData:
+- `class BetaWebhookDeploymentPausedEventData:`
 
-String id
+  - `String id`
 
-ID of the deployment that triggered the event.
+    ID of the deployment that triggered the event.
 
-String organizationId
+  - `String organizationId`
 
-JsonValue; type "deployment.deleted"constant"deployment.deleted"constant
+  - `JsonValue type = "deployment.paused"`
 
-String workspaceId
+  - `String workspaceId`
 
-
+### Beta Webhook Deployment Run Failed Event Data
 
-class BetaWebhookDeploymentPausedEventData:
+- `class BetaWebhookDeploymentRunFailedEventData:`
 
-String id
+  - `String id`
 
-ID of the deployment that triggered the event.
+    ID of the deployment run that triggered the event.
 
-String organizationId
+  - `String organizationId`
 
-JsonValue; type "deployment.paused"constant"deployment.paused"constant
+  - `JsonValue type = "deployment_run.failed"`
 
-String workspaceId
+  - `String workspaceId`
 
-
+### Beta Webhook Deployment Run Started Event Data
 
-class BetaWebhookDeploymentRunFailedEventData:
+- `class BetaWebhookDeploymentRunStartedEventData:`
 
-String id
+  - `String id`
 
-ID of the deployment run that triggered the event.
+    ID of the deployment run that triggered the event.
 
-String organizationId
+  - `String organizationId`
 
-JsonValue; type "deployment\_run.failed"constant"deployment\_run.failed"constant
+  - `JsonValue type = "deployment_run.started"`
 
-String workspaceId
+  - `String workspaceId`
 
-
+### Beta Webhook Deployment Run Succeeded Event Data
 
-class BetaWebhookDeploymentRunStartedEventData:
+- `class BetaWebhookDeploymentRunSucceededEventData:`
 
-String id
+  - `String id`
 
-ID of the deployment run that triggered the event.
+    ID of the deployment run that triggered the event.
 
-String organizationId
+  - `String organizationId`
 
-JsonValue; type "deployment\_run.started"constant"deployment\_run.started"constant
+  - `JsonValue type = "deployment_run.succeeded"`
 
-String workspaceId
+  - `String workspaceId`
 
-
+### Beta Webhook Deployment Unpaused Event Data
 
-class BetaWebhookDeploymentRunSucceededEventData:
+- `class BetaWebhookDeploymentUnpausedEventData:`
 
-String id
+  - `String id`
 
-ID of the deployment run that triggered the event.
+    ID of the deployment that triggered the event.
 
-String organizationId
+  - `String organizationId`
 
-JsonValue; type "deployment\_run.succeeded"constant"deployment\_run.succeeded"constant
+  - `JsonValue type = "deployment.unpaused"`
 
-String workspaceId
+  - `String workspaceId`
 
-
+### Beta Webhook Deployment Updated Event Data
 
-class BetaWebhookDeploymentUnpausedEventData:
+- `class BetaWebhookDeploymentUpdatedEventData:`
 
-String id
+  - `String id`
 
-ID of the deployment that triggered the event.
+    ID of the deployment that triggered the event.
 
-String organizationId
+  - `String organizationId`
 
-JsonValue; type "deployment.unpaused"constant"deployment.unpaused"constant
+  - `JsonValue type = "deployment.updated"`
 
-String workspaceId
+  - `String workspaceId`
 
-
+### Beta Webhook Environment Archived Event Data
 
-class BetaWebhookDeploymentUpdatedEventData:
+- `class BetaWebhookEnvironmentArchivedEventData:`
 
-String id
+  - `String id`
 
-ID of the deployment that triggered the event.
+    ID of the environment that triggered the event.
 
-String organizationId
+  - `String organizationId`
 
-JsonValue; type "deployment.updated"constant"deployment.updated"constant
+  - `JsonValue type = "environment.archived"`
 
-String workspaceId
+  - `String workspaceId`
 
-
+### Beta Webhook Environment Created Event Data
 
-class BetaWebhookEvent:
+- `class BetaWebhookEnvironmentCreatedEventData:`
 
-String id
+  - `String id`
 
-Unique event identifier for idempotency.
+    ID of the environment that triggered the event.
 
-LocalDateTime createdAt
+  - `String organizationId`
 
-RFC 3339 timestamp when the event occurred.
+  - `JsonValue type = "environment.created"`
 
-
+  - `String workspaceId`
 
-[BetaWebhookEventData](api/beta/webhooks.md) data
+### Beta Webhook Environment Deleted Event Data
 
-One of the following:
+- `class BetaWebhookEnvironmentDeletedEventData:`
 
-
+  - `String id`
 
-class BetaWebhookSessionCreatedEventData:
+    ID of the environment that triggered the event.
 
-String id
+  - `String organizationId`
 
-ID of the session that triggered the event.
+  - `JsonValue type = "environment.deleted"`
 
-String organizationId
+  - `String workspaceId`
 
-JsonValue; type "session.created"constant"session.created"constant
+### Beta Webhook Environment Updated Event Data
 
-String workspaceId
+- `class BetaWebhookEnvironmentUpdatedEventData:`
 
-
+  - `String id`
 
-class BetaWebhookSessionPendingEventData:
+    ID of the environment that triggered the event.
 
-String id
+  - `String organizationId`
 
-ID of the session that triggered the event.
+  - `JsonValue type = "environment.updated"`
 
-String organizationId
+  - `String workspaceId`
 
-JsonValue; type "session.pending"constant"session.pending"constant
+### Beta Webhook Event
 
-String workspaceId
+- `class UnwrapWebhookEvent:`
 
-
+  - `String id`
 
-class BetaWebhookSessionRunningEventData:
+    Unique event identifier for idempotency.
 
-String id
+  - `LocalDateTime createdAt`
 
-ID of the session that triggered the event.
+    RFC 3339 timestamp when the event occurred.
 
-String organizationId
+    format: date-time
 
-JsonValue; type "session.running"constant"session.running"constant
+  - `BetaWebhookEventData data`
 
-String workspaceId
+    - `class BetaWebhookSessionCreatedEventData:`
 
-
+      - `String id`
 
-class BetaWebhookSessionIdledEventData:
+        ID of the session that triggered the event.
 
-String id
+      - `String organizationId`
 
-ID of the session that triggered the event.
+      - `JsonValue type = "session.created"`
 
-String organizationId
+      - `String workspaceId`
 
-JsonValue; type "session.idled"constant"session.idled"constant
+    - `class BetaWebhookSessionPendingEventData:`
 
-String workspaceId
+      - `String id`
 
-
+        ID of the session that triggered the event.
 
-class BetaWebhookSessionRequiresActionEventData:
+      - `String organizationId`
 
-String id
+      - `JsonValue type = "session.pending"`
 
-ID of the session that triggered the event.
+      - `String workspaceId`
 
-String organizationId
+    - `class BetaWebhookSessionRunningEventData:`
 
-JsonValue; type "session.requires\_action"constant"session.requires\_action"constant
+      - `String id`
 
-String workspaceId
+        ID of the session that triggered the event.
 
-
+      - `String organizationId`
 
-class BetaWebhookSessionArchivedEventData:
+      - `JsonValue type = "session.running"`
 
-String id
+      - `String workspaceId`
 
-ID of the session that triggered the event.
+    - `class BetaWebhookSessionIdledEventData:`
 
-String organizationId
+      - `String id`
 
-JsonValue; type "session.archived"constant"session.archived"constant
+        ID of the session that triggered the event.
 
-String workspaceId
+      - `String organizationId`
 
-
+      - `JsonValue type = "session.idled"`
 
-class BetaWebhookSessionDeletedEventData:
+      - `String workspaceId`
 
-String id
+    - `class BetaWebhookSessionRequiresActionEventData:`
 
-ID of the session that triggered the event.
+      - `String id`
 
-String organizationId
+        ID of the session that triggered the event.
 
-JsonValue; type "session.deleted"constant"session.deleted"constant
+      - `String organizationId`
 
-String workspaceId
+      - `JsonValue type = "session.requires_action"`
 
-
+      - `String workspaceId`
 
-class BetaWebhookSessionStatusRescheduledEventData:
+    - `class BetaWebhookSessionArchivedEventData:`
 
-String id
+      - `String id`
 
-ID of the session that triggered the event.
+        ID of the session that triggered the event.
 
-String organizationId
+      - `String organizationId`
 
-JsonValue; type "session.status\_rescheduled"constant"session.status\_rescheduled"constant
+      - `JsonValue type = "session.archived"`
 
-String workspaceId
+      - `String workspaceId`
 
-
+    - `class BetaWebhookSessionDeletedEventData:`
 
-class BetaWebhookSessionStatusRunStartedEventData:
+      - `String id`
 
-String id
+        ID of the session that triggered the event.
 
-ID of the session that triggered the event.
+      - `String organizationId`
 
-String organizationId
+      - `JsonValue type = "session.deleted"`
 
-JsonValue; type "session.status\_run\_started"constant"session.status\_run\_started"constant
+      - `String workspaceId`
 
-String workspaceId
+    - `class BetaWebhookSessionStatusRescheduledEventData:`
 
-
+      - `String id`
 
-class BetaWebhookSessionStatusIdledEventData:
+        ID of the session that triggered the event.
 
-String id
+      - `String organizationId`
 
-ID of the session that triggered the event.
+      - `JsonValue type = "session.status_rescheduled"`
 
-String organizationId
+      - `String workspaceId`
 
-JsonValue; type "session.status\_idled"constant"session.status\_idled"constant
+    - `class BetaWebhookSessionStatusRunStartedEventData:`
 
-String workspaceId
+      - `String id`
 
-
+        ID of the session that triggered the event.
 
-class BetaWebhookSessionStatusTerminatedEventData:
+      - `String organizationId`
 
-String id
+      - `JsonValue type = "session.status_run_started"`
 
-ID of the session that triggered the event.
+      - `String workspaceId`
 
-String organizationId
+    - `class BetaWebhookSessionStatusIdledEventData:`
 
-JsonValue; type "session.status\_terminated"constant"session.status\_terminated"constant
+      - `String id`
 
-String workspaceId
+        ID of the session that triggered the event.
 
-
+      - `String organizationId`
 
-class BetaWebhookSessionThreadCreatedEventData:
+      - `JsonValue type = "session.status_idled"`
 
-String id
+      - `String workspaceId`
 
-ID of the session that triggered the event.
+    - `class BetaWebhookSessionStatusTerminatedEventData:`
 
-String organizationId
+      - `String id`
 
-String sessionThreadId
+        ID of the session that triggered the event.
 
-ID of the session thread this event refers to.
+      - `String organizationId`
 
-JsonValue; type "session.thread\_created"constant"session.thread\_created"constant
+      - `JsonValue type = "session.status_terminated"`
 
-String workspaceId
+      - `String workspaceId`
 
-
+    - `class BetaWebhookSessionThreadCreatedEventData:`
 
-class BetaWebhookSessionThreadIdledEventData:
+      - `String id`
 
-String id
+        ID of the session that triggered the event.
 
-ID of the session that triggered the event.
+      - `String organizationId`
 
-String organizationId
+      - `String sessionThreadId`
 
-String sessionThreadId
+        ID of the session thread this event refers to.
 
-ID of the session thread this event refers to.
+      - `JsonValue type = "session.thread_created"`
 
-JsonValue; type "session.thread\_idled"constant"session.thread\_idled"constant
+      - `String workspaceId`
 
-String workspaceId
+    - `class BetaWebhookSessionThreadIdledEventData:`
 
-
+      - `String id`
 
-class BetaWebhookSessionThreadTerminatedEventData:
+        ID of the session that triggered the event.
 
-String id
+      - `String organizationId`
 
-ID of the session that triggered the event.
+      - `String sessionThreadId`
 
-String organizationId
+        ID of the session thread this event refers to.
 
-String sessionThreadId
+      - `JsonValue type = "session.thread_idled"`
 
-ID of the session thread this event refers to.
+      - `String workspaceId`
 
-JsonValue; type "session.thread\_terminated"constant"session.thread\_terminated"constant
+    - `class BetaWebhookSessionThreadTerminatedEventData:`
 
-String workspaceId
+      - `String id`
 
-
+        ID of the session that triggered the event.
 
-class BetaWebhookSessionOutcomeEvaluationEndedEventData:
+      - `String organizationId`
 
-String id
+      - `String sessionThreadId`
 
-ID of the session that triggered the event.
+        ID of the session thread this event refers to.
 
-String organizationId
+      - `JsonValue type = "session.thread_terminated"`
 
-JsonValue; type "session.outcome\_evaluation\_ended"constant"session.outcome\_evaluation\_ended"constant
+      - `String workspaceId`
 
-String workspaceId
+    - `class BetaWebhookSessionOutcomeEvaluationEndedEventData:`
 
-
+      - `String id`
 
-class BetaWebhookVaultCreatedEventData:
+        ID of the session that triggered the event.
 
-String id
+      - `String organizationId`
 
-ID of the vault that triggered the event.
+      - `JsonValue type = "session.outcome_evaluation_ended"`
 
-String organizationId
+      - `String workspaceId`
 
-JsonValue; type "vault.created"constant"vault.created"constant
+    - `class BetaWebhookVaultCreatedEventData:`
 
-String workspaceId
+      - `String id`
 
-
+        ID of the vault that triggered the event.
 
-class BetaWebhookVaultArchivedEventData:
+      - `String organizationId`
 
-String id
+      - `JsonValue type = "vault.created"`
 
-ID of the vault that triggered the event.
+      - `String workspaceId`
 
-String organizationId
+    - `class BetaWebhookVaultArchivedEventData:`
 
-JsonValue; type "vault.archived"constant"vault.archived"constant
+      - `String id`
 
-String workspaceId
+        ID of the vault that triggered the event.
 
-
+      - `String organizationId`
 
-class BetaWebhookVaultDeletedEventData:
+      - `JsonValue type = "vault.archived"`
 
-String id
+      - `String workspaceId`
 
-ID of the vault that triggered the event.
+    - `class BetaWebhookVaultDeletedEventData:`
 
-String organizationId
+      - `String id`
 
-JsonValue; type "vault.deleted"constant"vault.deleted"constant
+        ID of the vault that triggered the event.
 
-String workspaceId
+      - `String organizationId`
 
-
+      - `JsonValue type = "vault.deleted"`
 
-class BetaWebhookVaultCredentialCreatedEventData:
+      - `String workspaceId`
 
-String id
+    - `class BetaWebhookVaultCredentialCreatedEventData:`
 
-ID of the vault credential that triggered the event.
+      - `String id`
 
-String organizationId
+        ID of the vault credential that triggered the event.
 
-JsonValue; type "vault\_credential.created"constant"vault\_credential.created"constant
+      - `String organizationId`
 
-String vaultId
+      - `JsonValue type = "vault_credential.created"`
 
-ID of the vault that owns this credential.
+      - `String vaultId`
 
-String workspaceId
+        ID of the vault that owns this credential.
 
-
+      - `String workspaceId`
 
-class BetaWebhookVaultCredentialArchivedEventData:
+    - `class BetaWebhookVaultCredentialArchivedEventData:`
 
-String id
+      - `String id`
 
-ID of the vault credential that triggered the event.
+        ID of the vault credential that triggered the event.
 
-String organizationId
+      - `String organizationId`
 
-JsonValue; type "vault\_credential.archived"constant"vault\_credential.archived"constant
+      - `JsonValue type = "vault_credential.archived"`
 
-String vaultId
+      - `String vaultId`
 
-ID of the vault that owns this credential.
+        ID of the vault that owns this credential.
 
-String workspaceId
+      - `String workspaceId`
 
-
+    - `class BetaWebhookVaultCredentialDeletedEventData:`
 
-class BetaWebhookVaultCredentialDeletedEventData:
+      - `String id`
 
-String id
+        ID of the vault credential that triggered the event.
 
-ID of the vault credential that triggered the event.
+      - `String organizationId`
 
-String organizationId
+      - `JsonValue type = "vault_credential.deleted"`
 
-JsonValue; type "vault\_credential.deleted"constant"vault\_credential.deleted"constant
+      - `String vaultId`
 
-String vaultId
+        ID of the vault that owns this credential.
 
-ID of the vault that owns this credential.
+      - `String workspaceId`
 
-String workspaceId
+    - `class BetaWebhookVaultCredentialRefreshFailedEventData:`
 
-
+      - `String id`
 
-class BetaWebhookVaultCredentialRefreshFailedEventData:
+        ID of the vault credential that triggered the event.
 
-String id
+      - `String organizationId`
 
-ID of the vault credential that triggered the event.
+      - `JsonValue type = "vault_credential.refresh_failed"`
 
-String organizationId
+      - `String vaultId`
 
-JsonValue; type "vault\_credential.refresh\_failed"constant"vault\_credential.refresh\_failed"constant
+        ID of the vault that owns this credential.
 
-String vaultId
+      - `String workspaceId`
 
-ID of the vault that owns this credential.
+    - `class BetaWebhookSessionUpdatedEventData:`
 
-String workspaceId
+      - `String id`
 
-
+        ID of the session that triggered the event.
 
-class BetaWebhookSessionUpdatedEventData:
+      - `String organizationId`
 
-String id
+      - `JsonValue type = "session.updated"`
 
-ID of the session that triggered the event.
+      - `String workspaceId`
 
-String organizationId
+    - `class BetaWebhookAgentCreatedEventData:`
 
-JsonValue; type "session.updated"constant"session.updated"constant
+      - `String id`
 
-String workspaceId
+        ID of the agent that triggered the event.
 
-
+      - `String organizationId`
 
-class BetaWebhookAgentCreatedEventData:
+      - `JsonValue type = "agent.created"`
 
-String id
+      - `String workspaceId`
 
-ID of the agent that triggered the event.
+    - `class BetaWebhookAgentArchivedEventData:`
 
-String organizationId
+      - `String id`
 
-JsonValue; type "agent.created"constant"agent.created"constant
+        ID of the agent that triggered the event.
 
-String workspaceId
+      - `String organizationId`
 
-
+      - `JsonValue type = "agent.archived"`
 
-class BetaWebhookAgentArchivedEventData:
+      - `String workspaceId`
 
-String id
+    - `class BetaWebhookAgentDeletedEventData:`
 
-ID of the agent that triggered the event.
+      - `String id`
 
-String organizationId
+        ID of the agent that triggered the event.
 
-JsonValue; type "agent.archived"constant"agent.archived"constant
+      - `String organizationId`
 
-String workspaceId
+      - `JsonValue type = "agent.deleted"`
 
-
+      - `String workspaceId`
 
-class BetaWebhookAgentDeletedEventData:
+    - `class BetaWebhookDeploymentPausedEventData:`
 
-String id
+      - `String id`
 
-ID of the agent that triggered the event.
+        ID of the deployment that triggered the event.
 
-String organizationId
+      - `String organizationId`
 
-JsonValue; type "agent.deleted"constant"agent.deleted"constant
+      - `JsonValue type = "deployment.paused"`
 
-String workspaceId
+      - `String workspaceId`
 
-
+    - `class BetaWebhookDeploymentRunFailedEventData:`
 
-class BetaWebhookDeploymentPausedEventData:
+      - `String id`
 
-String id
+        ID of the deployment run that triggered the event.
 
-ID of the deployment that triggered the event.
+      - `String organizationId`
 
-String organizationId
+      - `JsonValue type = "deployment_run.failed"`
 
-JsonValue; type "deployment.paused"constant"deployment.paused"constant
+      - `String workspaceId`
 
-String workspaceId
+    - `class BetaWebhookDeploymentCreatedEventData:`
 
-
+      - `String id`
 
-class BetaWebhookDeploymentRunFailedEventData:
+        ID of the deployment that triggered the event.
 
-String id
+      - `String organizationId`
 
-ID of the deployment run that triggered the event.
+      - `JsonValue type = "deployment.created"`
 
-String organizationId
+      - `String workspaceId`
 
-JsonValue; type "deployment\_run.failed"constant"deployment\_run.failed"constant
+    - `class BetaWebhookDeploymentUpdatedEventData:`
 
-String workspaceId
+      - `String id`
 
-
+        ID of the deployment that triggered the event.
 
-class BetaWebhookDeploymentCreatedEventData:
+      - `String organizationId`
 
-String id
+      - `JsonValue type = "deployment.updated"`
 
-ID of the deployment that triggered the event.
+      - `String workspaceId`
 
-String organizationId
+    - `class BetaWebhookDeploymentUnpausedEventData:`
 
-JsonValue; type "deployment.created"constant"deployment.created"constant
+      - `String id`
 
-String workspaceId
+        ID of the deployment that triggered the event.
 
-
+      - `String organizationId`
 
-class BetaWebhookDeploymentUpdatedEventData:
+      - `JsonValue type = "deployment.unpaused"`
 
-String id
+      - `String workspaceId`
 
-ID of the deployment that triggered the event.
+    - `class BetaWebhookAgentUpdatedEventData:`
 
-String organizationId
+      - `String id`
 
-JsonValue; type "deployment.updated"constant"deployment.updated"constant
+        ID of the agent that triggered the event.
 
-String workspaceId
+      - `String organizationId`
 
-
+      - `JsonValue type = "agent.updated"`
 
-class BetaWebhookDeploymentUnpausedEventData:
+      - `String workspaceId`
 
-String id
+    - `class BetaWebhookDeploymentArchivedEventData:`
 
-ID of the deployment that triggered the event.
+      - `String id`
 
-String organizationId
+        ID of the deployment that triggered the event.
 
-JsonValue; type "deployment.unpaused"constant"deployment.unpaused"constant
+      - `String organizationId`
 
-String workspaceId
+      - `JsonValue type = "deployment.archived"`
 
-
+      - `String workspaceId`
 
-class BetaWebhookAgentUpdatedEventData:
+    - `class BetaWebhookDeploymentRunStartedEventData:`
 
-String id
+      - `String id`
 
-ID of the agent that triggered the event.
+        ID of the deployment run that triggered the event.
 
-String organizationId
+      - `String organizationId`
 
-JsonValue; type "agent.updated"constant"agent.updated"constant
+      - `JsonValue type = "deployment_run.started"`
 
-String workspaceId
+      - `String workspaceId`
 
-
+    - `class BetaWebhookDeploymentDeletedEventData:`
 
-class BetaWebhookDeploymentArchivedEventData:
+      - `String id`
 
-String id
+        ID of the deployment that triggered the event.
 
-ID of the deployment that triggered the event.
+      - `String organizationId`
 
-String organizationId
+      - `JsonValue type = "deployment.deleted"`
 
-JsonValue; type "deployment.archived"constant"deployment.archived"constant
+      - `String workspaceId`
 
-String workspaceId
+    - `class BetaWebhookDeploymentRunSucceededEventData:`
 
-
+      - `String id`
 
-class BetaWebhookDeploymentRunStartedEventData:
+        ID of the deployment run that triggered the event.
 
-String id
+      - `String organizationId`
 
-ID of the deployment run that triggered the event.
+      - `JsonValue type = "deployment_run.succeeded"`
 
-String organizationId
+      - `String workspaceId`
 
-JsonValue; type "deployment\_run.started"constant"deployment\_run.started"constant
+    - `class BetaWebhookEnvironmentCreatedEventData:`
 
-String workspaceId
+      - `String id`
 
-
+        ID of the environment that triggered the event.
 
-class BetaWebhookDeploymentDeletedEventData:
+      - `String organizationId`
 
-String id
+      - `JsonValue type = "environment.created"`
 
-ID of the deployment that triggered the event.
+      - `String workspaceId`
 
-String organizationId
+    - `class BetaWebhookEnvironmentUpdatedEventData:`
 
-JsonValue; type "deployment.deleted"constant"deployment.deleted"constant
+      - `String id`
 
-String workspaceId
+        ID of the environment that triggered the event.
 
-
+      - `String organizationId`
 
-class BetaWebhookDeploymentRunSucceededEventData:
+      - `JsonValue type = "environment.updated"`
 
-String id
+      - `String workspaceId`
 
-ID of the deployment run that triggered the event.
+    - `class BetaWebhookEnvironmentArchivedEventData:`
 
-String organizationId
+      - `String id`
 
-JsonValue; type "deployment\_run.succeeded"constant"deployment\_run.succeeded"constant
+        ID of the environment that triggered the event.
 
-String workspaceId
+      - `String organizationId`
 
-JsonValue; type "event"constant"event"constant
+      - `JsonValue type = "environment.archived"`
 
-Object type. Always `event` for webhook payloads.
+      - `String workspaceId`
 
-
+    - `class BetaWebhookEnvironmentDeletedEventData:`
 
-class BetaWebhookEventData: A class that can be one of several variants.union 
+      - `String id`
 
-
+        ID of the environment that triggered the event.
 
-class BetaWebhookSessionCreatedEventData:
+      - `String organizationId`
 
-String id
+      - `JsonValue type = "environment.deleted"`
 
-ID of the session that triggered the event.
+      - `String workspaceId`
 
-String organizationId
+    - `class BetaWebhookMemoryStoreCreatedEventData:`
 
-JsonValue; type "session.created"constant"session.created"constant
+      - `String id`
 
-String workspaceId
+        ID of the memory store that triggered the event.
 
-
+      - `String organizationId`
 
-class BetaWebhookSessionPendingEventData:
+      - `JsonValue type = "memory_store.created"`
 
-String id
+      - `String workspaceId`
 
-ID of the session that triggered the event.
+    - `class BetaWebhookMemoryStoreArchivedEventData:`
 
-String organizationId
+      - `String id`
 
-JsonValue; type "session.pending"constant"session.pending"constant
+        ID of the memory store that triggered the event.
 
-String workspaceId
+      - `String organizationId`
 
-
+      - `JsonValue type = "memory_store.archived"`
 
-class BetaWebhookSessionRunningEventData:
+      - `String workspaceId`
 
-String id
+    - `class BetaWebhookMemoryStoreDeletedEventData:`
 
-ID of the session that triggered the event.
+      - `String id`
 
-String organizationId
+        ID of the memory store that triggered the event.
 
-JsonValue; type "session.running"constant"session.running"constant
+      - `String organizationId`
 
-String workspaceId
+      - `JsonValue type = "memory_store.deleted"`
 
-
+      - `String workspaceId`
 
-class BetaWebhookSessionIdledEventData:
+    - `class BetaWebhookSessionBudgetReachedEventData:`
 
-String id
+      - `String id`
 
-ID of the session that triggered the event.
+        ID of the session that triggered the event.
 
-String organizationId
+      - `String organizationId`
 
-JsonValue; type "session.idled"constant"session.idled"constant
+      - `JsonValue type = "session.budget_reached"`
 
-String workspaceId
+      - `String workspaceId`
 
-
+  - `JsonValue type = "event"`
 
-class BetaWebhookSessionRequiresActionEventData:
+    Object type. Always `event` for webhook payloads.
 
-String id
+### Beta Webhook Event Data
 
-ID of the session that triggered the event.
+- `class BetaWebhookEventData: union`
 
-String organizationId
+  - `class BetaWebhookSessionCreatedEventData:`
 
-JsonValue; type "session.requires\_action"constant"session.requires\_action"constant
+    - `String id`
 
-String workspaceId
+      ID of the session that triggered the event.
 
-
+    - `String organizationId`
 
-class BetaWebhookSessionArchivedEventData:
+    - `JsonValue type = "session.created"`
 
-String id
+    - `String workspaceId`
 
-ID of the session that triggered the event.
+  - `class BetaWebhookSessionPendingEventData:`
 
-String organizationId
+    - `String id`
 
-JsonValue; type "session.archived"constant"session.archived"constant
+      ID of the session that triggered the event.
 
-String workspaceId
+    - `String organizationId`
 
-
+    - `JsonValue type = "session.pending"`
 
-class BetaWebhookSessionDeletedEventData:
+    - `String workspaceId`
 
-String id
+  - `class BetaWebhookSessionRunningEventData:`
 
-ID of the session that triggered the event.
+    - `String id`
 
-String organizationId
+      ID of the session that triggered the event.
 
-JsonValue; type "session.deleted"constant"session.deleted"constant
+    - `String organizationId`
 
-String workspaceId
+    - `JsonValue type = "session.running"`
 
-
+    - `String workspaceId`
 
-class BetaWebhookSessionStatusRescheduledEventData:
+  - `class BetaWebhookSessionIdledEventData:`
 
-String id
+    - `String id`
 
-ID of the session that triggered the event.
+      ID of the session that triggered the event.
 
-String organizationId
+    - `String organizationId`
 
-JsonValue; type "session.status\_rescheduled"constant"session.status\_rescheduled"constant
+    - `JsonValue type = "session.idled"`
 
-String workspaceId
+    - `String workspaceId`
 
-
+  - `class BetaWebhookSessionRequiresActionEventData:`
 
-class BetaWebhookSessionStatusRunStartedEventData:
+    - `String id`
 
-String id
+      ID of the session that triggered the event.
 
-ID of the session that triggered the event.
+    - `String organizationId`
 
-String organizationId
+    - `JsonValue type = "session.requires_action"`
 
-JsonValue; type "session.status\_run\_started"constant"session.status\_run\_started"constant
+    - `String workspaceId`
 
-String workspaceId
+  - `class BetaWebhookSessionArchivedEventData:`
 
-
+    - `String id`
 
-class BetaWebhookSessionStatusIdledEventData:
+      ID of the session that triggered the event.
 
-String id
+    - `String organizationId`
 
-ID of the session that triggered the event.
+    - `JsonValue type = "session.archived"`
 
-String organizationId
+    - `String workspaceId`
 
-JsonValue; type "session.status\_idled"constant"session.status\_idled"constant
+  - `class BetaWebhookSessionDeletedEventData:`
 
-String workspaceId
+    - `String id`
 
-
+      ID of the session that triggered the event.
 
-class BetaWebhookSessionStatusTerminatedEventData:
+    - `String organizationId`
 
-String id
+    - `JsonValue type = "session.deleted"`
 
-ID of the session that triggered the event.
+    - `String workspaceId`
 
-String organizationId
+  - `class BetaWebhookSessionStatusRescheduledEventData:`
 
-JsonValue; type "session.status\_terminated"constant"session.status\_terminated"constant
+    - `String id`
 
-String workspaceId
+      ID of the session that triggered the event.
 
-
+    - `String organizationId`
 
-class BetaWebhookSessionThreadCreatedEventData:
+    - `JsonValue type = "session.status_rescheduled"`
 
-String id
+    - `String workspaceId`
 
-ID of the session that triggered the event.
+  - `class BetaWebhookSessionStatusRunStartedEventData:`
 
-String organizationId
+    - `String id`
 
-String sessionThreadId
+      ID of the session that triggered the event.
 
-ID of the session thread this event refers to.
+    - `String organizationId`
 
-JsonValue; type "session.thread\_created"constant"session.thread\_created"constant
+    - `JsonValue type = "session.status_run_started"`
 
-String workspaceId
+    - `String workspaceId`
 
-
+  - `class BetaWebhookSessionStatusIdledEventData:`
 
-class BetaWebhookSessionThreadIdledEventData:
+    - `String id`
 
-String id
+      ID of the session that triggered the event.
 
-ID of the session that triggered the event.
+    - `String organizationId`
 
-String organizationId
+    - `JsonValue type = "session.status_idled"`
 
-String sessionThreadId
+    - `String workspaceId`
 
-ID of the session thread this event refers to.
+  - `class BetaWebhookSessionStatusTerminatedEventData:`
 
-JsonValue; type "session.thread\_idled"constant"session.thread\_idled"constant
+    - `String id`
 
-String workspaceId
+      ID of the session that triggered the event.
 
-
+    - `String organizationId`
 
-class BetaWebhookSessionThreadTerminatedEventData:
+    - `JsonValue type = "session.status_terminated"`
 
-String id
+    - `String workspaceId`
 
-ID of the session that triggered the event.
+  - `class BetaWebhookSessionThreadCreatedEventData:`
 
-String organizationId
+    - `String id`
 
-String sessionThreadId
+      ID of the session that triggered the event.
 
-ID of the session thread this event refers to.
+    - `String organizationId`
 
-JsonValue; type "session.thread\_terminated"constant"session.thread\_terminated"constant
+    - `String sessionThreadId`
 
-String workspaceId
+      ID of the session thread this event refers to.
 
-
+    - `JsonValue type = "session.thread_created"`
 
-class BetaWebhookSessionOutcomeEvaluationEndedEventData:
+    - `String workspaceId`
 
-String id
+  - `class BetaWebhookSessionThreadIdledEventData:`
 
-ID of the session that triggered the event.
+    - `String id`
 
-String organizationId
+      ID of the session that triggered the event.
 
-JsonValue; type "session.outcome\_evaluation\_ended"constant"session.outcome\_evaluation\_ended"constant
+    - `String organizationId`
 
-String workspaceId
+    - `String sessionThreadId`
 
-
+      ID of the session thread this event refers to.
 
-class BetaWebhookVaultCreatedEventData:
+    - `JsonValue type = "session.thread_idled"`
 
-String id
+    - `String workspaceId`
 
-ID of the vault that triggered the event.
+  - `class BetaWebhookSessionThreadTerminatedEventData:`
 
-String organizationId
+    - `String id`
 
-JsonValue; type "vault.created"constant"vault.created"constant
+      ID of the session that triggered the event.
 
-String workspaceId
+    - `String organizationId`
 
-
+    - `String sessionThreadId`
 
-class BetaWebhookVaultArchivedEventData:
+      ID of the session thread this event refers to.
 
-String id
+    - `JsonValue type = "session.thread_terminated"`
 
-ID of the vault that triggered the event.
+    - `String workspaceId`
 
-String organizationId
+  - `class BetaWebhookSessionOutcomeEvaluationEndedEventData:`
 
-JsonValue; type "vault.archived"constant"vault.archived"constant
+    - `String id`
 
-String workspaceId
+      ID of the session that triggered the event.
 
-
+    - `String organizationId`
 
-class BetaWebhookVaultDeletedEventData:
+    - `JsonValue type = "session.outcome_evaluation_ended"`
 
-String id
+    - `String workspaceId`
 
-ID of the vault that triggered the event.
+  - `class BetaWebhookVaultCreatedEventData:`
 
-String organizationId
+    - `String id`
 
-JsonValue; type "vault.deleted"constant"vault.deleted"constant
+      ID of the vault that triggered the event.
 
-String workspaceId
+    - `String organizationId`
 
-
+    - `JsonValue type = "vault.created"`
 
-class BetaWebhookVaultCredentialCreatedEventData:
+    - `String workspaceId`
 
-String id
+  - `class BetaWebhookVaultArchivedEventData:`
 
-ID of the vault credential that triggered the event.
+    - `String id`
 
-String organizationId
+      ID of the vault that triggered the event.
 
-JsonValue; type "vault\_credential.created"constant"vault\_credential.created"constant
+    - `String organizationId`
 
-String vaultId
+    - `JsonValue type = "vault.archived"`
 
-ID of the vault that owns this credential.
+    - `String workspaceId`
 
-String workspaceId
+  - `class BetaWebhookVaultDeletedEventData:`
 
-
+    - `String id`
 
-class BetaWebhookVaultCredentialArchivedEventData:
+      ID of the vault that triggered the event.
 
-String id
+    - `String organizationId`
 
-ID of the vault credential that triggered the event.
+    - `JsonValue type = "vault.deleted"`
 
-String organizationId
+    - `String workspaceId`
 
-JsonValue; type "vault\_credential.archived"constant"vault\_credential.archived"constant
+  - `class BetaWebhookVaultCredentialCreatedEventData:`
 
-String vaultId
+    - `String id`
 
-ID of the vault that owns this credential.
+      ID of the vault credential that triggered the event.
 
-String workspaceId
+    - `String organizationId`
 
-
+    - `JsonValue type = "vault_credential.created"`
 
-class BetaWebhookVaultCredentialDeletedEventData:
+    - `String vaultId`
 
-String id
+      ID of the vault that owns this credential.
 
-ID of the vault credential that triggered the event.
+    - `String workspaceId`
 
-String organizationId
+  - `class BetaWebhookVaultCredentialArchivedEventData:`
 
-JsonValue; type "vault\_credential.deleted"constant"vault\_credential.deleted"constant
+    - `String id`
 
-String vaultId
+      ID of the vault credential that triggered the event.
 
-ID of the vault that owns this credential.
+    - `String organizationId`
 
-String workspaceId
+    - `JsonValue type = "vault_credential.archived"`
 
-
+    - `String vaultId`
 
-class BetaWebhookVaultCredentialRefreshFailedEventData:
+      ID of the vault that owns this credential.
 
-String id
+    - `String workspaceId`
 
-ID of the vault credential that triggered the event.
+  - `class BetaWebhookVaultCredentialDeletedEventData:`
 
-String organizationId
+    - `String id`
 
-JsonValue; type "vault\_credential.refresh\_failed"constant"vault\_credential.refresh\_failed"constant
+      ID of the vault credential that triggered the event.
 
-String vaultId
+    - `String organizationId`
 
-ID of the vault that owns this credential.
+    - `JsonValue type = "vault_credential.deleted"`
 
-String workspaceId
+    - `String vaultId`
 
-
+      ID of the vault that owns this credential.
 
-class BetaWebhookSessionUpdatedEventData:
+    - `String workspaceId`
 
-String id
+  - `class BetaWebhookVaultCredentialRefreshFailedEventData:`
 
-ID of the session that triggered the event.
+    - `String id`
 
-String organizationId
+      ID of the vault credential that triggered the event.
 
-JsonValue; type "session.updated"constant"session.updated"constant
+    - `String organizationId`
 
-String workspaceId
+    - `JsonValue type = "vault_credential.refresh_failed"`
 
-
+    - `String vaultId`
 
-class BetaWebhookAgentCreatedEventData:
+      ID of the vault that owns this credential.
 
-String id
+    - `String workspaceId`
 
-ID of the agent that triggered the event.
+  - `class BetaWebhookSessionUpdatedEventData:`
 
-String organizationId
+    - `String id`
 
-JsonValue; type "agent.created"constant"agent.created"constant
+      ID of the session that triggered the event.
 
-String workspaceId
+    - `String organizationId`
 
-
+    - `JsonValue type = "session.updated"`
 
-class BetaWebhookAgentArchivedEventData:
+    - `String workspaceId`
 
-String id
+  - `class BetaWebhookAgentCreatedEventData:`
 
-ID of the agent that triggered the event.
+    - `String id`
 
-String organizationId
+      ID of the agent that triggered the event.
 
-JsonValue; type "agent.archived"constant"agent.archived"constant
+    - `String organizationId`
 
-String workspaceId
+    - `JsonValue type = "agent.created"`
 
-
+    - `String workspaceId`
 
-class BetaWebhookAgentDeletedEventData:
+  - `class BetaWebhookAgentArchivedEventData:`
 
-String id
+    - `String id`
 
-ID of the agent that triggered the event.
+      ID of the agent that triggered the event.
 
-String organizationId
+    - `String organizationId`
 
-JsonValue; type "agent.deleted"constant"agent.deleted"constant
+    - `JsonValue type = "agent.archived"`
 
-String workspaceId
+    - `String workspaceId`
 
-
+  - `class BetaWebhookAgentDeletedEventData:`
 
-class BetaWebhookDeploymentPausedEventData:
+    - `String id`
 
-String id
+      ID of the agent that triggered the event.
 
-ID of the deployment that triggered the event.
+    - `String organizationId`
 
-String organizationId
+    - `JsonValue type = "agent.deleted"`
 
-JsonValue; type "deployment.paused"constant"deployment.paused"constant
+    - `String workspaceId`
 
-String workspaceId
+  - `class BetaWebhookDeploymentPausedEventData:`
 
-
+    - `String id`
 
-class BetaWebhookDeploymentRunFailedEventData:
+      ID of the deployment that triggered the event.
 
-String id
+    - `String organizationId`
 
-ID of the deployment run that triggered the event.
+    - `JsonValue type = "deployment.paused"`
 
-String organizationId
+    - `String workspaceId`
 
-JsonValue; type "deployment\_run.failed"constant"deployment\_run.failed"constant
+  - `class BetaWebhookDeploymentRunFailedEventData:`
 
-String workspaceId
+    - `String id`
 
-
+      ID of the deployment run that triggered the event.
 
-class BetaWebhookDeploymentCreatedEventData:
+    - `String organizationId`
 
-String id
+    - `JsonValue type = "deployment_run.failed"`
 
-ID of the deployment that triggered the event.
+    - `String workspaceId`
 
-String organizationId
+  - `class BetaWebhookDeploymentCreatedEventData:`
 
-JsonValue; type "deployment.created"constant"deployment.created"constant
+    - `String id`
 
-String workspaceId
+      ID of the deployment that triggered the event.
 
-
+    - `String organizationId`
 
-class BetaWebhookDeploymentUpdatedEventData:
+    - `JsonValue type = "deployment.created"`
 
-String id
+    - `String workspaceId`
 
-ID of the deployment that triggered the event.
+  - `class BetaWebhookDeploymentUpdatedEventData:`
 
-String organizationId
+    - `String id`
 
-JsonValue; type "deployment.updated"constant"deployment.updated"constant
+      ID of the deployment that triggered the event.
 
-String workspaceId
+    - `String organizationId`
 
-
+    - `JsonValue type = "deployment.updated"`
 
-class BetaWebhookDeploymentUnpausedEventData:
+    - `String workspaceId`
 
-String id
+  - `class BetaWebhookDeploymentUnpausedEventData:`
 
-ID of the deployment that triggered the event.
+    - `String id`
 
-String organizationId
+      ID of the deployment that triggered the event.
 
-JsonValue; type "deployment.unpaused"constant"deployment.unpaused"constant
+    - `String organizationId`
 
-String workspaceId
+    - `JsonValue type = "deployment.unpaused"`
 
-
+    - `String workspaceId`
 
-class BetaWebhookAgentUpdatedEventData:
+  - `class BetaWebhookAgentUpdatedEventData:`
 
-String id
+    - `String id`
 
-ID of the agent that triggered the event.
+      ID of the agent that triggered the event.
 
-String organizationId
+    - `String organizationId`
 
-JsonValue; type "agent.updated"constant"agent.updated"constant
+    - `JsonValue type = "agent.updated"`
 
-String workspaceId
+    - `String workspaceId`
 
-
+  - `class BetaWebhookDeploymentArchivedEventData:`
 
-class BetaWebhookDeploymentArchivedEventData:
+    - `String id`
 
-String id
+      ID of the deployment that triggered the event.
 
-ID of the deployment that triggered the event.
+    - `String organizationId`
 
-String organizationId
+    - `JsonValue type = "deployment.archived"`
 
-JsonValue; type "deployment.archived"constant"deployment.archived"constant
+    - `String workspaceId`
 
-String workspaceId
+  - `class BetaWebhookDeploymentRunStartedEventData:`
 
-
+    - `String id`
 
-class BetaWebhookDeploymentRunStartedEventData:
+      ID of the deployment run that triggered the event.
 
-String id
+    - `String organizationId`
 
-ID of the deployment run that triggered the event.
+    - `JsonValue type = "deployment_run.started"`
 
-String organizationId
+    - `String workspaceId`
 
-JsonValue; type "deployment\_run.started"constant"deployment\_run.started"constant
+  - `class BetaWebhookDeploymentDeletedEventData:`
 
-String workspaceId
+    - `String id`
 
-
+      ID of the deployment that triggered the event.
 
-class BetaWebhookDeploymentDeletedEventData:
+    - `String organizationId`
 
-String id
+    - `JsonValue type = "deployment.deleted"`
 
-ID of the deployment that triggered the event.
+    - `String workspaceId`
 
-String organizationId
+  - `class BetaWebhookDeploymentRunSucceededEventData:`
 
-JsonValue; type "deployment.deleted"constant"deployment.deleted"constant
+    - `String id`
 
-String workspaceId
+      ID of the deployment run that triggered the event.
 
-
+    - `String organizationId`
 
-class BetaWebhookDeploymentRunSucceededEventData:
+    - `JsonValue type = "deployment_run.succeeded"`
 
-String id
+    - `String workspaceId`
 
-ID of the deployment run that triggered the event.
+  - `class BetaWebhookEnvironmentCreatedEventData:`
 
-String organizationId
+    - `String id`
 
-JsonValue; type "deployment\_run.succeeded"constant"deployment\_run.succeeded"constant
+      ID of the environment that triggered the event.
 
-String workspaceId
+    - `String organizationId`
 
-
+    - `JsonValue type = "environment.created"`
 
-class BetaWebhookSessionArchivedEventData:
+    - `String workspaceId`
 
-String id
+  - `class BetaWebhookEnvironmentUpdatedEventData:`
 
-ID of the session that triggered the event.
+    - `String id`
 
-String organizationId
+      ID of the environment that triggered the event.
 
-JsonValue; type "session.archived"constant"session.archived"constant
+    - `String organizationId`
 
-String workspaceId
+    - `JsonValue type = "environment.updated"`
 
-
+    - `String workspaceId`
 
-class BetaWebhookSessionCreatedEventData:
+  - `class BetaWebhookEnvironmentArchivedEventData:`
 
-String id
+    - `String id`
 
-ID of the session that triggered the event.
+      ID of the environment that triggered the event.
 
-String organizationId
+    - `String organizationId`
 
-JsonValue; type "session.created"constant"session.created"constant
+    - `JsonValue type = "environment.archived"`
 
-String workspaceId
+    - `String workspaceId`
 
-
+  - `class BetaWebhookEnvironmentDeletedEventData:`
 
-class BetaWebhookSessionDeletedEventData:
+    - `String id`
 
-String id
+      ID of the environment that triggered the event.
 
-ID of the session that triggered the event.
+    - `String organizationId`
 
-String organizationId
+    - `JsonValue type = "environment.deleted"`
 
-JsonValue; type "session.deleted"constant"session.deleted"constant
+    - `String workspaceId`
 
-String workspaceId
+  - `class BetaWebhookMemoryStoreCreatedEventData:`
 
-
+    - `String id`
 
-class BetaWebhookSessionIdledEventData:
+      ID of the memory store that triggered the event.
 
-String id
+    - `String organizationId`
 
-ID of the session that triggered the event.
+    - `JsonValue type = "memory_store.created"`
 
-String organizationId
+    - `String workspaceId`
 
-JsonValue; type "session.idled"constant"session.idled"constant
+  - `class BetaWebhookMemoryStoreArchivedEventData:`
 
-String workspaceId
+    - `String id`
 
-
+      ID of the memory store that triggered the event.
 
-class BetaWebhookSessionOutcomeEvaluationEndedEventData:
+    - `String organizationId`
 
-String id
+    - `JsonValue type = "memory_store.archived"`
 
-ID of the session that triggered the event.
+    - `String workspaceId`
 
-String organizationId
+  - `class BetaWebhookMemoryStoreDeletedEventData:`
 
-JsonValue; type "session.outcome\_evaluation\_ended"constant"session.outcome\_evaluation\_ended"constant
+    - `String id`
 
-String workspaceId
+      ID of the memory store that triggered the event.
 
-
+    - `String organizationId`
 
-class BetaWebhookSessionPendingEventData:
+    - `JsonValue type = "memory_store.deleted"`
 
-String id
+    - `String workspaceId`
 
-ID of the session that triggered the event.
+  - `class BetaWebhookSessionBudgetReachedEventData:`
 
-String organizationId
+    - `String id`
 
-JsonValue; type "session.pending"constant"session.pending"constant
+      ID of the session that triggered the event.
 
-String workspaceId
+    - `String organizationId`
 
-
+    - `JsonValue type = "session.budget_reached"`
 
-class BetaWebhookSessionRequiresActionEventData:
+    - `String workspaceId`
 
-String id
+### Beta Webhook Memory Store Archived Event Data
 
-ID of the session that triggered the event.
+- `class BetaWebhookMemoryStoreArchivedEventData:`
 
-String organizationId
+  - `String id`
 
-JsonValue; type "session.requires\_action"constant"session.requires\_action"constant
+    ID of the memory store that triggered the event.
 
-String workspaceId
+  - `String organizationId`
 
-
+  - `JsonValue type = "memory_store.archived"`
 
-class BetaWebhookSessionRunningEventData:
+  - `String workspaceId`
 
-String id
+### Beta Webhook Memory Store Created Event Data
 
-ID of the session that triggered the event.
+- `class BetaWebhookMemoryStoreCreatedEventData:`
 
-String organizationId
+  - `String id`
 
-JsonValue; type "session.running"constant"session.running"constant
+    ID of the memory store that triggered the event.
 
-String workspaceId
+  - `String organizationId`
 
-
+  - `JsonValue type = "memory_store.created"`
 
-class BetaWebhookSessionStatusIdledEventData:
+  - `String workspaceId`
 
-String id
+### Beta Webhook Memory Store Deleted Event Data
 
-ID of the session that triggered the event.
+- `class BetaWebhookMemoryStoreDeletedEventData:`
 
-String organizationId
+  - `String id`
 
-JsonValue; type "session.status\_idled"constant"session.status\_idled"constant
+    ID of the memory store that triggered the event.
 
-String workspaceId
+  - `String organizationId`
 
-
+  - `JsonValue type = "memory_store.deleted"`
 
-class BetaWebhookSessionStatusRescheduledEventData:
+  - `String workspaceId`
 
-String id
+### Beta Webhook Session Archived Event Data
 
-ID of the session that triggered the event.
+- `class BetaWebhookSessionArchivedEventData:`
 
-String organizationId
+  - `String id`
 
-JsonValue; type "session.status\_rescheduled"constant"session.status\_rescheduled"constant
+    ID of the session that triggered the event.
 
-String workspaceId
+  - `String organizationId`
 
-
+  - `JsonValue type = "session.archived"`
 
-class BetaWebhookSessionStatusRunStartedEventData:
+  - `String workspaceId`
 
-String id
+### Beta Webhook Session Budget Reached Event Data
 
-ID of the session that triggered the event.
+- `class BetaWebhookSessionBudgetReachedEventData:`
 
-String organizationId
+  - `String id`
 
-JsonValue; type "session.status\_run\_started"constant"session.status\_run\_started"constant
+    ID of the session that triggered the event.
 
-String workspaceId
+  - `String organizationId`
 
-
+  - `JsonValue type = "session.budget_reached"`
 
-class BetaWebhookSessionStatusTerminatedEventData:
+  - `String workspaceId`
 
-String id
+### Beta Webhook Session Created Event Data
 
-ID of the session that triggered the event.
+- `class BetaWebhookSessionCreatedEventData:`
 
-String organizationId
+  - `String id`
 
-JsonValue; type "session.status\_terminated"constant"session.status\_terminated"constant
+    ID of the session that triggered the event.
 
-String workspaceId
+  - `String organizationId`
 
-
+  - `JsonValue type = "session.created"`
 
-class BetaWebhookSessionThreadCreatedEventData:
+  - `String workspaceId`
 
-String id
+### Beta Webhook Session Deleted Event Data
 
-ID of the session that triggered the event.
+- `class BetaWebhookSessionDeletedEventData:`
 
-String organizationId
+  - `String id`
 
-String sessionThreadId
+    ID of the session that triggered the event.
 
-ID of the session thread this event refers to.
+  - `String organizationId`
 
-JsonValue; type "session.thread\_created"constant"session.thread\_created"constant
+  - `JsonValue type = "session.deleted"`
 
-String workspaceId
+  - `String workspaceId`
 
-
+### Beta Webhook Session Idled Event Data
 
-class BetaWebhookSessionThreadIdledEventData:
+- `class BetaWebhookSessionIdledEventData:`
 
-String id
+  - `String id`
 
-ID of the session that triggered the event.
+    ID of the session that triggered the event.
 
-String organizationId
+  - `String organizationId`
 
-String sessionThreadId
+  - `JsonValue type = "session.idled"`
 
-ID of the session thread this event refers to.
+  - `String workspaceId`
 
-JsonValue; type "session.thread\_idled"constant"session.thread\_idled"constant
+### Beta Webhook Session Outcome Evaluation Ended Event Data
 
-String workspaceId
+- `class BetaWebhookSessionOutcomeEvaluationEndedEventData:`
 
-
+  - `String id`
 
-class BetaWebhookSessionThreadTerminatedEventData:
+    ID of the session that triggered the event.
 
-String id
+  - `String organizationId`
 
-ID of the session that triggered the event.
+  - `JsonValue type = "session.outcome_evaluation_ended"`
 
-String organizationId
+  - `String workspaceId`
 
-String sessionThreadId
+### Beta Webhook Session Pending Event Data
 
-ID of the session thread this event refers to.
+- `class BetaWebhookSessionPendingEventData:`
 
-JsonValue; type "session.thread\_terminated"constant"session.thread\_terminated"constant
+  - `String id`
 
-String workspaceId
+    ID of the session that triggered the event.
 
-
+  - `String organizationId`
 
-class BetaWebhookSessionUpdatedEventData:
+  - `JsonValue type = "session.pending"`
 
-String id
+  - `String workspaceId`
 
-ID of the session that triggered the event.
+### Beta Webhook Session Requires Action Event Data
 
-String organizationId
+- `class BetaWebhookSessionRequiresActionEventData:`
 
-JsonValue; type "session.updated"constant"session.updated"constant
+  - `String id`
 
-String workspaceId
+    ID of the session that triggered the event.
 
-
+  - `String organizationId`
 
-class BetaWebhookVaultArchivedEventData:
+  - `JsonValue type = "session.requires_action"`
 
-String id
+  - `String workspaceId`
 
-ID of the vault that triggered the event.
+### Beta Webhook Session Running Event Data
 
-String organizationId
+- `class BetaWebhookSessionRunningEventData:`
 
-JsonValue; type "vault.archived"constant"vault.archived"constant
+  - `String id`
 
-String workspaceId
+    ID of the session that triggered the event.
 
-
+  - `String organizationId`
 
-class BetaWebhookVaultCreatedEventData:
+  - `JsonValue type = "session.running"`
 
-String id
+  - `String workspaceId`
 
-ID of the vault that triggered the event.
+### Beta Webhook Session Status Idled Event Data
 
-String organizationId
+- `class BetaWebhookSessionStatusIdledEventData:`
 
-JsonValue; type "vault.created"constant"vault.created"constant
+  - `String id`
 
-String workspaceId
+    ID of the session that triggered the event.
 
-
+  - `String organizationId`
 
-class BetaWebhookVaultCredentialArchivedEventData:
+  - `JsonValue type = "session.status_idled"`
 
-String id
+  - `String workspaceId`
 
-ID of the vault credential that triggered the event.
+### Beta Webhook Session Status Rescheduled Event Data
 
-String organizationId
+- `class BetaWebhookSessionStatusRescheduledEventData:`
 
-JsonValue; type "vault\_credential.archived"constant"vault\_credential.archived"constant
+  - `String id`
 
-String vaultId
+    ID of the session that triggered the event.
 
-ID of the vault that owns this credential.
+  - `String organizationId`
 
-String workspaceId
+  - `JsonValue type = "session.status_rescheduled"`
 
-
+  - `String workspaceId`
 
-class BetaWebhookVaultCredentialCreatedEventData:
+### Beta Webhook Session Status Run Started Event Data
 
-String id
+- `class BetaWebhookSessionStatusRunStartedEventData:`
 
-ID of the vault credential that triggered the event.
+  - `String id`
 
-String organizationId
+    ID of the session that triggered the event.
 
-JsonValue; type "vault\_credential.created"constant"vault\_credential.created"constant
+  - `String organizationId`
 
-String vaultId
+  - `JsonValue type = "session.status_run_started"`
 
-ID of the vault that owns this credential.
+  - `String workspaceId`
 
-String workspaceId
+### Beta Webhook Session Status Terminated Event Data
 
-
+- `class BetaWebhookSessionStatusTerminatedEventData:`
 
-class BetaWebhookVaultCredentialDeletedEventData:
+  - `String id`
 
-String id
+    ID of the session that triggered the event.
 
-ID of the vault credential that triggered the event.
+  - `String organizationId`
 
-String organizationId
+  - `JsonValue type = "session.status_terminated"`
 
-JsonValue; type "vault\_credential.deleted"constant"vault\_credential.deleted"constant
+  - `String workspaceId`
 
-String vaultId
+### Beta Webhook Session Thread Created Event Data
 
-ID of the vault that owns this credential.
+- `class BetaWebhookSessionThreadCreatedEventData:`
 
-String workspaceId
+  - `String id`
 
-
+    ID of the session that triggered the event.
 
-class BetaWebhookVaultCredentialRefreshFailedEventData:
+  - `String organizationId`
 
-String id
+  - `String sessionThreadId`
 
-ID of the vault credential that triggered the event.
+    ID of the session thread this event refers to.
 
-String organizationId
+  - `JsonValue type = "session.thread_created"`
 
-JsonValue; type "vault\_credential.refresh\_failed"constant"vault\_credential.refresh\_failed"constant
+  - `String workspaceId`
 
-String vaultId
+### Beta Webhook Session Thread Idled Event Data
 
-ID of the vault that owns this credential.
+- `class BetaWebhookSessionThreadIdledEventData:`
 
-String workspaceId
+  - `String id`
 
-
+    ID of the session that triggered the event.
 
-class BetaWebhookVaultDeletedEventData:
+  - `String organizationId`
 
-String id
+  - `String sessionThreadId`
 
-ID of the vault that triggered the event.
+    ID of the session thread this event refers to.
 
-String organizationId
+  - `JsonValue type = "session.thread_idled"`
 
-JsonValue; type "vault.deleted"constant"vault.deleted"constant
+  - `String workspaceId`
 
-String workspaceId
+### Beta Webhook Session Thread Terminated Event Data
 
-
+- `class BetaWebhookSessionThreadTerminatedEventData:`
 
-class UnwrapWebhookEvent:
+  - `String id`
 
-String id
+    ID of the session that triggered the event.
 
-Unique event identifier for idempotency.
+  - `String organizationId`
 
-LocalDateTime createdAt
+  - `String sessionThreadId`
 
-RFC 3339 timestamp when the event occurred.
+    ID of the session thread this event refers to.
 
-
+  - `JsonValue type = "session.thread_terminated"`
 
-[BetaWebhookEventData](api/beta/webhooks.md) data
+  - `String workspaceId`
 
-One of the following:
+### Beta Webhook Session Updated Event Data
 
-
+- `class BetaWebhookSessionUpdatedEventData:`
 
-class BetaWebhookSessionCreatedEventData:
+  - `String id`
 
-String id
+    ID of the session that triggered the event.
 
-ID of the session that triggered the event.
+  - `String organizationId`
 
-String organizationId
+  - `JsonValue type = "session.updated"`
 
-JsonValue; type "session.created"constant"session.created"constant
+  - `String workspaceId`
 
-String workspaceId
+### Beta Webhook Vault Archived Event Data
 
-
+- `class BetaWebhookVaultArchivedEventData:`
 
-class BetaWebhookSessionPendingEventData:
+  - `String id`
 
-String id
+    ID of the vault that triggered the event.
 
-ID of the session that triggered the event.
+  - `String organizationId`
 
-String organizationId
+  - `JsonValue type = "vault.archived"`
 
-JsonValue; type "session.pending"constant"session.pending"constant
+  - `String workspaceId`
 
-String workspaceId
+### Beta Webhook Vault Created Event Data
 
-
+- `class BetaWebhookVaultCreatedEventData:`
 
-class BetaWebhookSessionRunningEventData:
+  - `String id`
 
-String id
+    ID of the vault that triggered the event.
 
-ID of the session that triggered the event.
+  - `String organizationId`
 
-String organizationId
+  - `JsonValue type = "vault.created"`
 
-JsonValue; type "session.running"constant"session.running"constant
+  - `String workspaceId`
 
-String workspaceId
+### Beta Webhook Vault Credential Archived Event Data
 
-
+- `class BetaWebhookVaultCredentialArchivedEventData:`
 
-class BetaWebhookSessionIdledEventData:
+  - `String id`
 
-String id
+    ID of the vault credential that triggered the event.
 
-ID of the session that triggered the event.
+  - `String organizationId`
 
-String organizationId
+  - `JsonValue type = "vault_credential.archived"`
 
-JsonValue; type "session.idled"constant"session.idled"constant
+  - `String vaultId`
 
-String workspaceId
+    ID of the vault that owns this credential.
 
-
+  - `String workspaceId`
 
-class BetaWebhookSessionRequiresActionEventData:
+### Beta Webhook Vault Credential Created Event Data
 
-String id
+- `class BetaWebhookVaultCredentialCreatedEventData:`
 
-ID of the session that triggered the event.
+  - `String id`
 
-String organizationId
+    ID of the vault credential that triggered the event.
 
-JsonValue; type "session.requires\_action"constant"session.requires\_action"constant
+  - `String organizationId`
 
-String workspaceId
+  - `JsonValue type = "vault_credential.created"`
 
-
+  - `String vaultId`
 
-class BetaWebhookSessionArchivedEventData:
+    ID of the vault that owns this credential.
 
-String id
+  - `String workspaceId`
 
-ID of the session that triggered the event.
+### Beta Webhook Vault Credential Deleted Event Data
 
-String organizationId
+- `class BetaWebhookVaultCredentialDeletedEventData:`
 
-JsonValue; type "session.archived"constant"session.archived"constant
+  - `String id`
 
-String workspaceId
+    ID of the vault credential that triggered the event.
 
-
+  - `String organizationId`
 
-class BetaWebhookSessionDeletedEventData:
+  - `JsonValue type = "vault_credential.deleted"`
 
-String id
+  - `String vaultId`
 
-ID of the session that triggered the event.
+    ID of the vault that owns this credential.
 
-String organizationId
+  - `String workspaceId`
 
-JsonValue; type "session.deleted"constant"session.deleted"constant
+### Beta Webhook Vault Credential Refresh Failed Event Data
 
-String workspaceId
+- `class BetaWebhookVaultCredentialRefreshFailedEventData:`
 
-
+  - `String id`
 
-class BetaWebhookSessionStatusRescheduledEventData:
+    ID of the vault credential that triggered the event.
 
-String id
+  - `String organizationId`
 
-ID of the session that triggered the event.
+  - `JsonValue type = "vault_credential.refresh_failed"`
 
-String organizationId
+  - `String vaultId`
 
-JsonValue; type "session.status\_rescheduled"constant"session.status\_rescheduled"constant
+    ID of the vault that owns this credential.
 
-String workspaceId
+  - `String workspaceId`
 
-
+### Beta Webhook Vault Deleted Event Data
 
-class BetaWebhookSessionStatusRunStartedEventData:
+- `class BetaWebhookVaultDeletedEventData:`
 
-String id
+  - `String id`
 
-ID of the session that triggered the event.
+    ID of the vault that triggered the event.
 
-String organizationId
+  - `String organizationId`
 
-JsonValue; type "session.status\_run\_started"constant"session.status\_run\_started"constant
+  - `JsonValue type = "vault.deleted"`
 
-String workspaceId
-
-
-
-class BetaWebhookSessionStatusIdledEventData:
-
-String id
-
-ID of the session that triggered the event.
-
-String organizationId
-
-JsonValue; type "session.status\_idled"constant"session.status\_idled"constant
-
-String workspaceId
-
-
-
-class BetaWebhookSessionStatusTerminatedEventData:
-
-String id
-
-ID of the session that triggered the event.
-
-String organizationId
-
-JsonValue; type "session.status\_terminated"constant"session.status\_terminated"constant
-
-String workspaceId
-
-
-
-class BetaWebhookSessionThreadCreatedEventData:
-
-String id
-
-ID of the session that triggered the event.
-
-String organizationId
-
-String sessionThreadId
-
-ID of the session thread this event refers to.
-
-JsonValue; type "session.thread\_created"constant"session.thread\_created"constant
-
-String workspaceId
-
-
-
-class BetaWebhookSessionThreadIdledEventData:
-
-String id
-
-ID of the session that triggered the event.
-
-String organizationId
-
-String sessionThreadId
-
-ID of the session thread this event refers to.
-
-JsonValue; type "session.thread\_idled"constant"session.thread\_idled"constant
-
-String workspaceId
-
-
-
-class BetaWebhookSessionThreadTerminatedEventData:
-
-String id
-
-ID of the session that triggered the event.
-
-String organizationId
-
-String sessionThreadId
-
-ID of the session thread this event refers to.
-
-JsonValue; type "session.thread\_terminated"constant"session.thread\_terminated"constant
-
-String workspaceId
-
-
-
-class BetaWebhookSessionOutcomeEvaluationEndedEventData:
-
-String id
-
-ID of the session that triggered the event.
-
-String organizationId
-
-JsonValue; type "session.outcome\_evaluation\_ended"constant"session.outcome\_evaluation\_ended"constant
-
-String workspaceId
-
-
-
-class BetaWebhookVaultCreatedEventData:
-
-String id
-
-ID of the vault that triggered the event.
-
-String organizationId
-
-JsonValue; type "vault.created"constant"vault.created"constant
-
-String workspaceId
-
-
-
-class BetaWebhookVaultArchivedEventData:
-
-String id
-
-ID of the vault that triggered the event.
-
-String organizationId
-
-JsonValue; type "vault.archived"constant"vault.archived"constant
-
-String workspaceId
-
-
-
-class BetaWebhookVaultDeletedEventData:
-
-String id
-
-ID of the vault that triggered the event.
-
-String organizationId
-
-JsonValue; type "vault.deleted"constant"vault.deleted"constant
-
-String workspaceId
-
-
-
-class BetaWebhookVaultCredentialCreatedEventData:
-
-String id
-
-ID of the vault credential that triggered the event.
-
-String organizationId
-
-JsonValue; type "vault\_credential.created"constant"vault\_credential.created"constant
-
-String vaultId
-
-ID of the vault that owns this credential.
-
-String workspaceId
-
-
-
-class BetaWebhookVaultCredentialArchivedEventData:
-
-String id
-
-ID of the vault credential that triggered the event.
-
-String organizationId
-
-JsonValue; type "vault\_credential.archived"constant"vault\_credential.archived"constant
-
-String vaultId
-
-ID of the vault that owns this credential.
-
-String workspaceId
-
-
-
-class BetaWebhookVaultCredentialDeletedEventData:
-
-String id
-
-ID of the vault credential that triggered the event.
-
-String organizationId
-
-JsonValue; type "vault\_credential.deleted"constant"vault\_credential.deleted"constant
-
-String vaultId
-
-ID of the vault that owns this credential.
-
-String workspaceId
-
-
-
-class BetaWebhookVaultCredentialRefreshFailedEventData:
-
-String id
-
-ID of the vault credential that triggered the event.
-
-String organizationId
-
-JsonValue; type "vault\_credential.refresh\_failed"constant"vault\_credential.refresh\_failed"constant
-
-String vaultId
-
-ID of the vault that owns this credential.
-
-String workspaceId
-
-
-
-class BetaWebhookSessionUpdatedEventData:
-
-String id
-
-ID of the session that triggered the event.
-
-String organizationId
-
-JsonValue; type "session.updated"constant"session.updated"constant
-
-String workspaceId
-
-
-
-class BetaWebhookAgentCreatedEventData:
-
-String id
-
-ID of the agent that triggered the event.
-
-String organizationId
-
-JsonValue; type "agent.created"constant"agent.created"constant
-
-String workspaceId
-
-
-
-class BetaWebhookAgentArchivedEventData:
-
-String id
-
-ID of the agent that triggered the event.
-
-String organizationId
-
-JsonValue; type "agent.archived"constant"agent.archived"constant
-
-String workspaceId
-
-
-
-class BetaWebhookAgentDeletedEventData:
-
-String id
-
-ID of the agent that triggered the event.
-
-String organizationId
-
-JsonValue; type "agent.deleted"constant"agent.deleted"constant
-
-String workspaceId
-
-
-
-class BetaWebhookDeploymentPausedEventData:
-
-String id
-
-ID of the deployment that triggered the event.
-
-String organizationId
-
-JsonValue; type "deployment.paused"constant"deployment.paused"constant
-
-String workspaceId
-
-
-
-class BetaWebhookDeploymentRunFailedEventData:
-
-String id
-
-ID of the deployment run that triggered the event.
-
-String organizationId
-
-JsonValue; type "deployment\_run.failed"constant"deployment\_run.failed"constant
-
-String workspaceId
-
-
-
-class BetaWebhookDeploymentCreatedEventData:
-
-String id
-
-ID of the deployment that triggered the event.
-
-String organizationId
-
-JsonValue; type "deployment.created"constant"deployment.created"constant
-
-String workspaceId
-
-
-
-class BetaWebhookDeploymentUpdatedEventData:
-
-String id
-
-ID of the deployment that triggered the event.
-
-String organizationId
-
-JsonValue; type "deployment.updated"constant"deployment.updated"constant
-
-String workspaceId
-
-
-
-class BetaWebhookDeploymentUnpausedEventData:
-
-String id
-
-ID of the deployment that triggered the event.
-
-String organizationId
-
-JsonValue; type "deployment.unpaused"constant"deployment.unpaused"constant
-
-String workspaceId
-
-
-
-class BetaWebhookAgentUpdatedEventData:
-
-String id
-
-ID of the agent that triggered the event.
-
-String organizationId
-
-JsonValue; type "agent.updated"constant"agent.updated"constant
-
-String workspaceId
-
-
-
-class BetaWebhookDeploymentArchivedEventData:
-
-String id
-
-ID of the deployment that triggered the event.
-
-String organizationId
-
-JsonValue; type "deployment.archived"constant"deployment.archived"constant
-
-String workspaceId
-
-
-
-class BetaWebhookDeploymentRunStartedEventData:
-
-String id
-
-ID of the deployment run that triggered the event.
-
-String organizationId
-
-JsonValue; type "deployment\_run.started"constant"deployment\_run.started"constant
-
-String workspaceId
-
-
-
-class BetaWebhookDeploymentDeletedEventData:
-
-String id
-
-ID of the deployment that triggered the event.
-
-String organizationId
-
-JsonValue; type "deployment.deleted"constant"deployment.deleted"constant
-
-String workspaceId
-
-
-
-class BetaWebhookDeploymentRunSucceededEventData:
-
-String id
-
-ID of the deployment run that triggered the event.
-
-String organizationId
-
-JsonValue; type "deployment\_run.succeeded"constant"deployment\_run.succeeded"constant
-
-String workspaceId
-
-JsonValue; type "event"constant"event"constant
-
-Object type. Always `event` for webhook payloads.
+  - `String workspaceId`
 
 ---
 

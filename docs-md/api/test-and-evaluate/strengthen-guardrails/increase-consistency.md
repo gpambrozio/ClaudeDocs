@@ -1,32 +1,32 @@
-# Increase output consistency
+# Increase Consistency
 
-Copy page
+---
+title: Increase output consistency
+url: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/increase-consistency
+description: Make Claude's outputs more consistent by specifying exact formats, prefilling responses, constraining with examples, and grounding answers in retrieval.
+---
 
-
+**For guaranteed JSON schema conformance**
+
+If you need Claude to always output valid JSON that conforms to a specific schema, use [Structured Outputs](build-with-claude/structured-outputs.md) instead of the prompt engineering techniques below. Structured outputs provide guaranteed schema compliance and are specifically designed for this use case.
+
+The techniques below are useful for general output consistency or when you need flexibility beyond strict JSON schemas.
 
 Here's how to make Claude's responses more consistent:
 
-## Specify the desired output format
+## Specify the desired output format
 
 Precisely define your desired output format using JSON, XML, or custom templates so that Claude follows every output formatting element you require.
 
-### Example: Standardizing customer feedback
+**Example: Standardizing customer feedback**
 
-User
-
-
-
-```block
+```text User wrap
 You're a Customer Insights AI. Analyze this feedback and output in JSON format with keys: "sentiment" (positive/negative/neutral), "key_issues" (list), and "action_items" (list of dicts with "team" and "task").
 
 "I've been a loyal user for 3 years, but the recent UI update is a disaster. Finding basic features is now a scavenger hunt. Plus, the new 'premium' pricing is outrageous. I'm considering switching unless this is fixed ASAP."
 ```
 
-Assistant
-
-
-
-```shiki
+```json Assistant
 {
   "sentiment": "negative",
   "key_issues": [
@@ -55,17 +55,23 @@ Assistant
 }
 ```
 
-## Prefill Claude's response
+## Prefill Claude's response
+
+Prefilling is not supported on Claude 4.6 and later models and 
+
+[Claude Mythos Preview](https://anthropic.com/glasswing)
+
+. Use 
+
+[structured outputs](build-with-claude/structured-outputs.md)
+
+ on models that support it, or system prompt instructions, instead.
 
 Prefill the `Assistant` turn with your desired format. This trick bypasses Claude's friendly preamble and enforces your structure.
 
-### Example: Daily sales report
+**Example: Daily sales report**
 
-User
-
-
-
-```block
+```text User wrap
 You're an insightful Sales Intelligence AI. Generate today's sales report.
 
 Structure the report like this:
@@ -99,21 +105,13 @@ Structure the report like this:
 </report>
 ```
 
-Assistant (prefill)
-
-
-
-```shiki
+```xml Assistant (prefill)
 <report>
     <summary>
         <metric name=
 ```
 
-Assistant
-
-
-
-```shiki
+```xml Assistant
 "total_revenue">$842,567.00</metric>
         <metric name="units_sold">15,238</metric>
         <metric name="avg_order_value">$55.29</metric>
@@ -160,17 +158,13 @@ Assistant
 </report>
 ```
 
-## Constrain with examples
+## Constrain with examples
 
 Provide examples of your desired output. This is more effective than abstract instructions.
 
-### Example: Generating consistent market intelligence
+**Example: Generating consistent market intelligence**
 
-User
-
-
-
-```shiki
+```text User wrap
 As a Market Intelligence AI, your task is to analyze data about our competitors. Here is our competitor data:
 <data>
 {{DATA}}
@@ -193,11 +187,7 @@ Output following this example format:
 Now, analyze AcmeGiant and AcmeDataCo using this format.
 ```
 
-Assistant
-
-
-
-```shiki
+```text Assistant wrap
 <competitor>
   <name>AcmeGiant</name>
   <overview>Global tech leader with a vast ecosystem of consumer and enterprise products. Known for innovation, strong brand, and deep customer lock-in through integrated hardware, software, and services.</overview>
@@ -255,17 +245,13 @@ Assistant
 </competitor>
 ```
 
-## Use retrieval for contextual consistency
+## Use retrieval for contextual consistency
 
 For tasks requiring consistent context (for example, chatbots, knowledge bases), use retrieval to ground Claude's responses in a fixed information set.
 
-### Example: Enhancing IT support consistency
+**Example: Enhancing IT support consistency**
 
-User
-
-
-
-```block
+```text User wrap
 You're our IT Support AI that draws on knowledge base data. Here are entries from your knowledge base:
 
 <kb>
@@ -294,11 +280,7 @@ When helping users, always check the knowledge base first. Respond in this forma
 </response> Write some test questions for yourself and answer them using the knowledge base, just to make sure you understand how to use the knowledge base properly.
 ```
 
-Assistant
-
-
-
-```block
+```text Assistant wrap
 Understood. I'll use the knowledge base for consistent responses. Let's test with a couple of scenarios.
 
 User: Hey, I can't log into my email. I think I forgot my password.
@@ -330,35 +312,28 @@ Once connected, you'll have secure access to all internal resources as if you we
 </response>
 ```
 
-## Chain prompts for complex tasks
+## Chain prompts for complex tasks
 
 Break down complex tasks into smaller, consistent subtasks. Each subtask gets Claude's full attention, reducing inconsistency errors across scaled workflows.
 
-## Keep Claude in character
+## Keep Claude in character
 
 For role-based applications, maintaining consistent character requires deliberate prompting.
 
-- **Use system prompts to set the role:** Use [system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) to define Claude's role and personality. This sets a strong foundation for consistent responses.
-- **Prepare Claude for possible scenarios:** Provide a list of common scenarios and expected responses in your prompts. This "trains" Claude to handle diverse situations without breaking character.
+* **Use system prompts to set the role:** Use [system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) to define Claude's role and personality. This sets a strong foundation for consistent responses.
+  When setting up the character, provide detailed information about the personality, background, and any specific traits or quirks. This helps the model better emulate and generalize the character's traits.
+* **Prepare Claude for possible scenarios:** Provide a list of common scenarios and expected responses in your prompts. This "trains" Claude to handle diverse situations without breaking character.
 
-### Example: Enterprise chatbot for role prompting
+**Example: Enterprise chatbot for role prompting**
 
-System
-
-
-
-```shiki
+```text System wrap
 You are AcmeBot, the enterprise-grade AI assistant for AcmeTechCo. Your role:
     - Analyze technical documents (TDDs, PRDs, RFCs)
     - Provide actionable insights for engineering, product, and ops teams
     - Maintain a professional, concise tone
 ```
 
-User
-
-
-
-```block
+```text User wrap
 Here is the user query for you to respond to:
 <user_query>
 {{USER_QUERY}}
@@ -374,10 +349,6 @@ As AcmeBot, you should handle situations along these guidelines:
     - If questioned on best practices: "Per ISO/IEC 25010, we prioritize..."
     - If unclear on a doc: "To ensure accuracy, please clarify section 3.2..."
 ```
-
-Was this page helpful?
-
-
 
 ---
 

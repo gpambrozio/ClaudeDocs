@@ -1,355 +1,261 @@
 # List Message Batches
 
-Copy page
-
-
-
-cURL
-
-# List Message Batches
-
-GET/v1/messages/batches
+**GET** `/v1/messages/batches`
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
 Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-##### Query parameters
+## Query parameters
 
-after\_id: optional string
+- `after_id: optional string`
 
-ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-before\_id: optional string
+- `before_id: optional string`
 
-ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-
+- `limit: optional number`
 
-limit: optional number
+  Number of items to return per page.
 
-Number of items to return per page.
+  Defaults to `20`. Ranges from `1` to `1000`.
 
-Defaults to `20`. Ranges from `1` to `1000`.
+  default: 20, maximum: 1000, minimum: 1
 
-default20
+## Headers
 
-maximum1000
+- `"anthropic-beta": optional array of AnthropicBeta`
 
-minimum1
+  Optional header to specify the beta version(s) you want to use.
 
-##### Headers
+  - `string`
 
-
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+    - `"message-batches-2024-09-24"`
 
-Optional header to specify the beta version(s) you want to use.
+    - `"prompt-caching-2024-07-31"`
 
-One of the following:
+    - `"computer-use-2024-10-22"`
 
-string
+    - `"computer-use-2025-01-24"`
 
-
+    - `"pdfs-2024-09-25"`
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
+    - `"token-counting-2024-11-01"`
 
-One of the following:
+    - `"token-efficient-tools-2025-02-19"`
 
-"message-batches-2024-09-24"
+    - `"output-128k-2025-02-19"`
 
-"prompt-caching-2024-07-31"
+    - `"files-api-2025-04-14"`
 
-"computer-use-2024-10-22"
+    - `"mcp-client-2025-04-04"`
 
-"computer-use-2025-01-24"
+    - `"mcp-client-2025-11-20"`
 
-"pdfs-2024-09-25"
+    - `"dev-full-thinking-2025-05-14"`
 
-"token-counting-2024-11-01"
+    - `"interleaved-thinking-2025-05-14"`
 
-"token-efficient-tools-2025-02-19"
+    - `"code-execution-2025-05-22"`
 
-"output-128k-2025-02-19"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"files-api-2025-04-14"
+    - `"context-1m-2025-08-07"`
 
-"mcp-client-2025-04-04"
+    - `"context-management-2025-06-27"`
 
-"mcp-client-2025-11-20"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"dev-full-thinking-2025-05-14"
+    - `"skills-2025-10-02"`
 
-"interleaved-thinking-2025-05-14"
+    - `"fast-mode-2026-02-01"`
 
-"code-execution-2025-05-22"
+    - `"output-300k-2026-03-24"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"user-profiles-2026-03-24"`
 
-"context-1m-2025-08-07"
+    - `"user-profiles-2026-08-18"`
 
-"context-management-2025-06-27"
+    - `"advisor-tool-2026-03-01"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"managed-agents-2026-04-01"`
 
-"skills-2025-10-02"
+    - `"cache-diagnosis-2026-04-07"`
 
-"fast-mode-2026-02-01"
+    - `"dreaming-2026-04-21"`
 
-"output-300k-2026-03-24"
+    - `"thinking-token-count-2026-05-13"`
 
-"user-profiles-2026-03-24"
+    - `"server-side-fallback-2026-06-01"`
 
-"user-profiles-2026-08-18"
+    - `"server-side-fallback-2026-07-01"`
 
-"advisor-tool-2026-03-01"
+    - `"fallback-credit-2026-06-01"`
 
-"managed-agents-2026-04-01"
+    - `"fallback-credit-2026-07-01"`
 
-"cache-diagnosis-2026-04-07"
+    - `"agent-memory-2026-07-22"`
 
-"dreaming-2026-04-21"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-"thinking-token-count-2026-05-13"
+    - `"compact-2026-01-12"`
 
-"server-side-fallback-2026-06-01"
+    - `"computer-use-2025-11-24"`
 
-"server-side-fallback-2026-07-01"
+    - `"mcp-tunnels-2026-06-22"`
 
-"fallback-credit-2026-06-01"
+    - `"structured-outputs-2025-11-13"`
 
-"fallback-credit-2026-07-01"
+    - `"task-budgets-2026-03-13"`
 
-"agent-memory-2026-07-22"
+    - `"thinking-display-updates-2026-08-18"`
 
-"mid-conversation-tool-changes-2026-07-01"
+    - `"ce-user-management-2026-07-13"`
 
-"compact-2026-01-12"
+    - `"mid-conversation-output-config-2026-07-01"`
 
-"computer-use-2025-11-24"
+    - `"thinking-binding-controls-2026-08-01"`
 
-"mcp-tunnels-2026-06-22"
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"structured-outputs-2025-11-13"
+## Returns
 
-"task-budgets-2026-03-13"
+- `data: array of BetaMessageBatch`
 
-"thinking-display-updates-2026-08-18"
+  - `id: string`
 
-"ce-user-management-2026-07-13"
+    Unique object identifier.
 
-"mid-conversation-output-config-2026-07-01"
+    The format and length of IDs may change over time.
 
-"thinking-binding-controls-2026-08-01"
+  - `archived_at: string or null`
 
-"mid-conversation-system-clear-at-2026-08-21"
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-##### Returns
+    format: date-time
 
-
+  - `cancel_initiated_at: string or null`
 
-data: array of [BetaMessageBatch](api/http/beta/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more }
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-
+    format: date-time
 
-id: string
+  - `created_at: string`
 
-Unique object identifier.
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-The format and length of IDs may change over time.
+    format: date-time
 
-
+  - `ended_at: string or null`
 
-archived\_at: string or null
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
-RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
-formatdate-time
+    format: date-time
 
-
+  - `expires_at: string`
 
-cancel\_initiated\_at: string or null
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+    format: date-time
 
-formatdate-time
+  - `processing_status: "in_progress" or "canceling" or "ended"`
 
-
+    Processing status of the Message Batch.
 
-created\_at: string
+    - `"in_progress"`
 
-RFC 3339 datetime string representing the time at which the Message Batch was created.
+    - `"canceling"`
 
-formatdate-time
+    - `"ended"`
 
-
+  - `request_counts: BetaMessageBatchRequestCounts`
 
-ended\_at: string or null
+    Tallies requests within the Message Batch, categorized by their status.
 
-RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+    - `canceled: number`
 
-formatdate-time
+      Number of requests in the Message Batch that have been canceled.
 
-
+      This is zero until processing of the entire Message Batch has ended.
 
-expires\_at: string
+      default: 0
 
-RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+    - `errored: number`
 
-formatdate-time
+      Number of requests in the Message Batch that encountered an error.
 
-
+      This is zero until processing of the entire Message Batch has ended.
 
-processing\_status: "in\_progress" or "canceling" or "ended"
+      default: 0
 
-Processing status of the Message Batch.
+    - `expired: number`
 
-One of the following:
+      Number of requests in the Message Batch that have expired.
 
-"in\_progress"
+      This is zero until processing of the entire Message Batch has ended.
 
-"canceling"
+      default: 0
 
-"ended"
+    - `processing: number`
 
-
+      Number of requests in the Message Batch that are processing.
 
-request\_counts: [BetaMessageBatchRequestCounts](api/http/beta/messages/batches.md) { canceled, errored, expired, 2 more }
+      default: 0
 
-Tallies requests within the Message Batch, categorized by their status.
+    - `succeeded: number`
 
-Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+      Number of requests in the Message Batch that have completed successfully.
 
-
+      This is zero until processing of the entire Message Batch has ended.
 
-canceled: number
+      default: 0
 
-Number of requests in the Message Batch that have been canceled.
+  - `results_url: string or null`
 
-This is zero until processing of the entire Message Batch has ended.
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
-default0
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-
+  - `type: "message_batch"`
 
-errored: number
+    Object type.
 
-Number of requests in the Message Batch that encountered an error.
+    For Message Batches, this is always `"message_batch"`.
 
-This is zero until processing of the entire Message Batch has ended.
+    default: message_batch
 
-default0
+- `first_id: string or null`
 
-
+  First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
-expired: number
+- `has_more: boolean`
 
-Number of requests in the Message Batch that have expired.
+  Indicates if there are more results in the requested page direction.
 
-This is zero until processing of the entire Message Batch has ended.
+- `last_id: string or null`
 
-default0
+  Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
-
+## Example
 
-processing: number
-
-Number of requests in the Message Batch that are processing.
-
-default0
-
-
-
-succeeded: number
-
-Number of requests in the Message Batch that have completed successfully.
-
-This is zero until processing of the entire Message Batch has ended.
-
-default0
-
-
-
-results\_url: string or null
-
-URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
-
-Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-
-
-type: "message\_batch"
-
-Object type.
-
-For Message Batches, this is always `"message_batch"`.
-
-defaultmessage\_batch
-
-first\_id: string or null
-
-First ID in the `data` list. Can be used as the `before_id` for the previous page.
-
-has\_more: boolean
-
-Indicates if there are more results in the requested page direction.
-
-last\_id: string or null
-
-Last ID in the `data` list. Can be used as the `after_id` for the next page.
-
-List Message Batches
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/messages/batches \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: message-batches-2024-09-24' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-      "archived_at": "2024-08-20T18:37:24.100435Z",
-      "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
-      "created_at": "2024-08-20T18:37:24.100435Z",
-      "ended_at": "2024-08-20T18:37:24.100435Z",
-      "expires_at": "2024-08-20T18:37:24.100435Z",
-      "processing_status": "in_progress",
-      "request_counts": {
-        "canceled": 10,
-        "errored": 30,
-        "expired": 10,
-        "processing": 100,
-        "succeeded": 50
-      },
-      "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
-      "type": "message_batch"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

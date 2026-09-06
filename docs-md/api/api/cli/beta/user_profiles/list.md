@@ -1,136 +1,123 @@
 # List User Profiles
 
-Copy page
+`$ ant beta:user-profiles list`
 
-
-
-CLI
-
-# List User Profiles
-
-$ ant beta:user-profiles list
-
-GET/v1/user\_profiles
+**GET** `/v1/user_profiles`
 
 List User Profiles
 
-##### ParametersExpand Collapse
+## Parameters
 
---limit: optional number
+- `--limit: optional number`
 
-Query param: Query parameter for limit
+  Query param: Query parameter for limit
 
---order: optional "asc" or "desc"
+  format: int32
 
-Query param: Query parameter for order
+- `--order: optional "asc" or "desc"`
 
---page: optional string
+  Query param: Query parameter for order
 
-Query param: Query parameter for page
+- `--order-by: optional "created_at" or "name"`
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+  Query param: Query parameter for order_by
 
-Header param: Optional header to specify the beta version(s) you want to use.
+- `--page: optional string`
 
-##### ReturnsExpand Collapse
+  Query param: Query parameter for page
 
-
+- `--beta: optional array of AnthropicBeta`
 
-BetaListUserProfilesResponse: object { data, next\_page } 
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-
+## Returns
 
-data: array of [BetaUserProfile](api/beta/user_profiles.md) { id, created\_at, metadata, 6 more } 
+- `BetaListUserProfilesResponse: object`
 
-User profiles on this page.
+  - `data: array of BetaUserProfile`
 
-id: string
+    User profiles on this page.
 
-Unique identifier for this user profile, prefixed `uprof_`.
+    - `id: string`
 
-created\_at: string
+      Unique identifier for this user profile, prefixed `uprof_`.
 
-A timestamp in RFC 3339 format
+    - `created_at: string`
 
-metadata: map[string]
+      A timestamp in RFC 3339 format
 
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+      format: date-time
 
-
+    - `metadata: map[string]`
 
-relationship: "external" or "resold" or "internal"
+      Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+    - `trust_grants: map[BetaUserProfileTrustGrant]`
 
-"external"
+      Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-"resold"
+      - `status: "active" or "pending" or "rejected"`
 
-"internal"
+        Status of the trust grant.
 
-
+        - `"active"`
 
-trust\_grants: map[[BetaUserProfileTrustGrant](api/beta/user_profiles.md) { status } ]
+        - `"pending"`
 
-Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+        - `"rejected"`
 
-
+    - `type: "user_profile"`
 
-status: "active" or "pending" or "rejected"
+      Object type. Always `user_profile`.
 
-Status of the trust grant.
+    - `updated_at: string`
 
-"active"
+      A timestamp in RFC 3339 format
 
-"pending"
+      format: date-time
 
-"rejected"
+    - `access_type: optional "application" or "passthrough"`
 
-
+      How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
-type: "user\_profile"
+      - `"application"`
 
-Object type. Always `user_profile`.
+      - `"passthrough"`
 
-"user\_profile"
+    - `external_id: optional string`
 
-updated\_at: string
+      Platform's own identifier for this user. Not enforced unique.
 
-A timestamp in RFC 3339 format
+    - `external_user_onboarded_at: optional string`
 
-external\_id: optional string
+      A timestamp in RFC 3339 format
 
-Platform's own identifier for this user. Not enforced unique.
+      format: date-time
 
-name: optional string
+    - `name: optional string`
 
-Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+      Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
 
-next\_page: string
+  - `next_page: string`
 
-Cursor for the next page, or `null` when there are no more results.
+    Cursor for the next page, or `null` when there are no more results.
 
-List User Profiles
+## Example
 
-CLI
-
-```shiki
+```bash
 ant beta:user-profiles list \
   --api-key my-anthropic-api-key
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
       "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
       "created_at": "2026-03-15T10:00:00Z",
       "metadata": {},
-      "relationship": "external",
       "trust_grants": {
         "cyber": {
           "status": "active"
@@ -138,36 +125,9 @@ Response 200
       },
       "type": "user_profile",
       "updated_at": "2026-03-15T10:00:00Z",
+      "access_type": "application",
       "external_id": "user_12345",
-      "name": "Example User"
-    }
-  ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
-      "created_at": "2026-03-15T10:00:00Z",
-      "metadata": {},
-      "relationship": "external",
-      "trust_grants": {
-        "cyber": {
-          "status": "active"
-        }
-      },
-      "type": "user_profile",
-      "updated_at": "2026-03-15T10:00:00Z",
-      "external_id": "user_12345",
+      "external_user_onboarded_at": "2024-11-02T08:15:00Z",
       "name": "Example User"
     }
   ],

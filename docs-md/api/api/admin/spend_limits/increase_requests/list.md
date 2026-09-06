@@ -1,279 +1,279 @@
 # List Spend Limit Increase Requests
 
-Copy page
-
-
-
-# List Spend Limit Increase Requests
-
-GET/v1/organizations/spend\_limit\_increase\_requests
+**GET** `/v1/organizations/spend_limit_increase_requests`
 
 List spend limit increase requests, most recent first.
 
 Pending requests include a live `spend_summary` for the requester.
 Requests whose requester is no longer a member are excluded.
 
-##### Query parameters
+## Query parameters
 
-actor\_ids: optional array of string
+- `actor_ids: optional array of string`
 
-Filter by requester, as `user_...` tagged IDs.
+  Filter by requester, as `user_...` tagged IDs.
 
-
+- `limit: optional number`
 
-limit: optional number
+  default: 20, maximum: 1000, minimum: 1
 
-default20
+- `page: optional string`
 
-maximum1000
+  Opaque cursor from a previous response's `next_page`.
 
-minimum1
+- `status: optional array of "approved" or "denied" or "pending"`
 
-page: optional string
+  Filter by status. Omit to return all.
 
-Opaque cursor from a previous response's `next_page`.
+  - `"approved"`
 
-
+  - `"denied"`
 
-status: optional array of "approved" or "denied" or "pending"
+  - `"pending"`
 
-Filter by status. Omit to return all.
+## Returns
 
-One of the following:
+- `data: array of SpendLimitIncreaseRequest`
 
-"approved"
+  - `id: string`
 
-"denied"
+  - `actor: object`
 
-"pending"
+    A user within the organization. `name` and `email_address` are
+    null when the underlying account is unavailable or has been deleted;
+    `deleted` is true only for deleted accounts.
 
-##### Returns
+    - `deleted: boolean`
 
-
+      True only when the underlying account has been deleted.
 
-data: array of [SpendLimitIncreaseRequest](api/http/admin/spend_limits/increase_requests.md) { id, actor, created\_at, 6 more }
+      default: false
 
-id: string
+    - `email_address: string or null`
 
-
+      The user's email address. Null when the account is unavailable or has been deleted.
 
-actor: object{ deleted, email\_address, name, 2 more }
+    - `name: string or null`
 
-A user within the organization. `name` and `email_address` are
-null when the underlying account is unavailable or has been deleted;
-`deleted` is true only for deleted accounts.
+      The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
 
-
+    - `type: "user_actor"`
 
-deleted: boolean
+      Actor type. Always `user_actor`.
 
-True only when the underlying account has been deleted.
+      default: user_actor
 
-defaultfalse
+    - `user_id: string`
 
-email\_address: string or null
+      Tagged ID of the user.
 
-The user's email address. Null when the account is unavailable or has been deleted.
+  - `created_at: string`
 
-name: string or null
+    format: date-time
 
-The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
+  - `period: "daily" or "monthly" or "weekly"`
 
-
+    - `"daily"`
 
-type: "user\_actor"
+    - `"monthly"`
 
-Actor type. Always `user_actor`.
+    - `"weekly"`
 
-defaultuser\_actor
+  - `resolved_at: string or null`
 
-user\_id: string
+    format: date-time
 
-Tagged ID of the user.
+  - `resolved_by: object or object or null`
 
-
+    A user within the organization. `name` and `email_address` are
+    null when the underlying account is unavailable or has been deleted;
+    `deleted` is true only for deleted accounts.
 
-created\_at: string
+    - `UserActor object`
 
-formatdate-time
+      A user within the organization. `name` and `email_address` are
+      null when the underlying account is unavailable or has been deleted;
+      `deleted` is true only for deleted accounts.
 
-
+      - `deleted: boolean`
 
-period: "daily" or "monthly" or "weekly"
+        True only when the underlying account has been deleted.
 
-One of the following:
+        default: false
 
-"daily"
+      - `email_address: string or null`
 
-"monthly"
+        The user's email address. Null when the account is unavailable or has been deleted.
 
-"weekly"
+      - `name: string or null`
 
-
+        The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
 
-resolved\_at: string or null
+      - `type: "user_actor"`
 
-formatdate-time
+        Actor type. Always `user_actor`.
 
-
+        default: user_actor
 
-resolved\_by: object{ deleted, email\_address, name, 2 more } or object{ scoped\_api\_key\_id, type } or null
+      - `user_id: string`
 
-A user within the organization. `name` and `email_address` are
-null when the underlying account is unavailable or has been deleted;
-`deleted` is true only for deleted accounts.
+        Tagged ID of the user.
 
-One of the following:
+    - `ScopedAPIKeyActor object`
 
-
+      A scoped Admin API key acting on behalf of the organization.
 
-UserActor object{ deleted, email\_address, name, 2 more }
+      - `scoped_api_key_id: string`
 
-A user within the organization. `name` and `email_address` are
-null when the underlying account is unavailable or has been deleted;
-`deleted` is true only for deleted accounts.
+      - `type: "scoped_api_key_actor"`
 
-
+        default: scoped_api_key_actor
 
-deleted: boolean
+  - `spend_summary: SpendSummary or null`
 
-True only when the underlying account has been deleted.
+    Per-member effective-limit report row (`GET /spend_limits/effective`).
 
-defaultfalse
+    - `actor: object`
 
-email\_address: string or null
+      A user within the organization. `name` and `email_address` are
+      null when the underlying account is unavailable or has been deleted;
+      `deleted` is true only for deleted accounts.
 
-The user's email address. Null when the account is unavailable or has been deleted.
+      - `deleted: boolean`
 
-name: string or null
+        True only when the underlying account has been deleted.
 
-The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
+        default: false
 
-
+      - `email_address: string or null`
 
-type: "user\_actor"
+        The user's email address. Null when the account is unavailable or has been deleted.
 
-Actor type. Always `user_actor`.
+      - `name: string or null`
 
-defaultuser\_actor
+        The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
 
-user\_id: string
+      - `type: "user_actor"`
 
-Tagged ID of the user.
+        Actor type. Always `user_actor`.
 
-
+        default: user_actor
 
-ScopedAPIKeyActor object{ scoped\_api\_key\_id, type }
+      - `user_id: string`
 
-A scoped Admin API key acting on behalf of the organization.
+        Tagged ID of the user.
 
-scoped\_api\_key\_id: string
+    - `amount: string or null`
 
-
+      Effective limit amount as a non-negative integer decimal string in the minor unit of `currency` (cents for USD). `null` means no limit applies for this row's `period` — each period resolves independently, so another period may still cap this member.
 
-type: "scoped\_api\_key\_actor"
+    - `currency: string`
 
-defaultscoped\_api\_key\_actor
+      ISO 4217 code of the organization's billing currency; the unit for `amount` and `period_to_date_spend`.
 
-
+    - `period: "daily" or "monthly" or "weekly"`
 
-spend\_summary: [SpendSummary](api/http/admin/spend_limits.md) { actor, amount, currency, 5 more } or null
+      Period this row's effective limit and spend are reported for.
 
-Per-member effective-limit report row (`GET /spend_limits/effective`).
+      - `"daily"`
 
-
+      - `"monthly"`
 
-status: "approved" or "denied" or "pending"
+      - `"weekly"`
 
-One of the following:
+    - `period_to_date_spend: string`
 
-"approved"
+      The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
-"denied"
+    - `scope: object`
 
-"pending"
+      Scope selecting a single member of the organization.
 
-
+      - `type: "user"`
 
-type: "spend\_limit\_increase\_request"
+        Scope type. Always `user` for this scope.
 
-defaultspend\_limit\_increase\_request
+        default: user
 
-next\_page: string or null
+      - `user_id: string`
 
-List Spend Limit Increase Requests
+        Tagged ID of the member the spend limit applies to.
 
-cURL
+    - `source: object or object or object or 2 more`
 
-```shiki
+      Scope selecting a single member of the organization.
+
+      - `User object`
+
+        Scope selecting a single member of the organization.
+
+        - `type: "user"`
+
+          Scope type. Always `user` for this scope.
+
+          default: user
+
+        - `user_id: string`
+
+          Tagged ID of the member the spend limit applies to.
+
+      - `SeatTier object`
+
+        - `seat_tier: string`
+
+        - `type: "seat_tier"`
+
+          default: seat_tier
+
+      - `RbacGroup object`
+
+        - `rbac_group_id: string`
+
+        - `type: "rbac_group"`
+
+          default: rbac_group
+
+      - `OrganizationService object`
+
+        - `service: string`
+
+        - `type: "organization_service"`
+
+          default: organization_service
+
+      - `Organization object`
+
+        - `type: "organization"`
+
+          default: organization
+
+    - `spend_limit_id: string`
+
+  - `status: "approved" or "denied" or "pending"`
+
+    - `"approved"`
+
+    - `"denied"`
+
+    - `"pending"`
+
+  - `type: "spend_limit_increase_request"`
+
+    default: spend_limit_increase_request
+
+- `next_page: string or null`
+
+## Example
+
+```bash
 curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "actor": {
-        "deleted": true,
-        "email_address": "email_address",
-        "name": "name",
-        "type": "user_actor",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
-      },
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "period": "monthly",
-      "resolved_at": "2019-12-27T18:11:19.117Z",
-      "resolved_by": {
-        "deleted": true,
-        "email_address": "email_address",
-        "name": "name",
-        "type": "user_actor",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
-      },
-      "spend_summary": {
-        "actor": {
-          "deleted": true,
-          "email_address": "email_address",
-          "name": "name",
-          "type": "user_actor",
-          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
-        },
-        "amount": "50000",
-        "currency": "USD",
-        "period": "monthly",
-        "period_to_date_spend": "12050.5",
-        "scope": {
-          "type": "user",
-          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
-        },
-        "source": {
-          "type": "user",
-          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
-        },
-        "spend_limit_id": "spend_limit_id"
-      },
-      "status": "approved",
-      "type": "spend_limit_increase_request"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

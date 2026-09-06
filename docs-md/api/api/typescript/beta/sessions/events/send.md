@@ -1,1631 +1,945 @@
 # Send Events
 
-Copy page
+`client.beta.sessions.events.send(sessionID, params, options?): BetaManagedAgentsSendSessionEvents`
 
-
-
-TypeScript
-
-# Send Events
-
-client.beta.sessions.events.send(stringsessionID, EventSendParams { events, betas } params, RequestOptionsoptions?): [BetaManagedAgentsSendSessionEvents](api/beta/sessions/events.md) { data }
-
-POST/v1/sessions/{session\_id}/events
+**POST** `/v1/sessions/{session_id}/events`
 
 Send Events
 
-##### ParametersExpand Collapse
+## Parameters
 
-sessionID: string
+- `sessionID: string`
 
-
+- `params: EventSendParams`
 
-params: EventSendParams { events, betas } 
+  - `events: Array<BetaManagedAgentsEventParams>`
 
-
+    Body param: Events to send to the `session`.
 
-events: Array<[BetaManagedAgentsEventParams](api/beta/sessions/events.md)>
+    - `BetaManagedAgentsUserMessageEventParams`
 
-Body param: Events to send to the `session`.
+      Parameters for sending a user message to the session.
 
-One of the following:
+      - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsRedactedBlock>`
 
-
+        Array of content blocks for the user message.
 
-BetaManagedAgentsUserMessageEventParams { content, type } 
+        - `BetaManagedAgentsTextBlock`
 
-Parameters for sending a user message to the session.
+          Regular text content.
 
-
+          - `text: string`
 
-content: Array<[BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  | [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  | [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } >
+            The text content.
 
-Array of content blocks for the user message.
+            minLength: 1
 
-One of the following:
+          - `type: "text"`
 
-
+        - `BetaManagedAgentsImageBlock`
 
-BetaManagedAgentsTextBlock { text, type } 
+          Image content specified directly as base64 data or as a reference via a URL.
 
-Regular text content.
+          - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
 
-text: string
+            Union type for image source variants.
 
-The text content.
+            - `BetaManagedAgentsBase64ImageSource`
 
-type: "text"
+              Base64-encoded image data.
 
-
+              - `data: string`
 
-BetaManagedAgentsImageBlock { source, type } 
+                Base64-encoded image data.
 
-Image content specified directly as base64 data or as a reference via a URL.
+                minLength: 1
 
-
+              - `media_type: string`
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  | [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  | [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-Union type for image source variants.
+                minLength: 1
 
-One of the following:
+              - `type: "base64"`
 
-
+            - `BetaManagedAgentsURLImageSource`
 
-BetaManagedAgentsBase64ImageSource { data, media\_type, type } 
+              Image referenced by URL.
 
-Base64-encoded image data.
+              - `type: "url"`
 
-data: string
+              - `url: string`
 
-Base64-encoded image data.
+                URL of the image to fetch.
 
-media\_type: string
+                minLength: 1
 
-MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+            - `BetaManagedAgentsFileImageSource`
 
-type: "base64"
+              Image referenced by file ID.
 
-
+              - `file_id: string`
 
-BetaManagedAgentsURLImageSource { type, url } 
+                ID of a previously uploaded file.
 
-Image referenced by URL.
+                minLength: 1
 
-type: "url"
+              - `type: "file"`
 
-url: string
+          - `type: "image"`
 
-URL of the image to fetch.
+        - `BetaManagedAgentsDocumentBlock`
 
-
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-BetaManagedAgentsFileImageSource { file\_id, type } 
+          - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
 
-Image referenced by file ID.
+            Union type for document source variants.
 
-file\_id: string
+            - `BetaManagedAgentsBase64DocumentSource`
 
-ID of a previously uploaded file.
+              Base64-encoded document data.
 
-type: "file"
+              - `data: string`
 
-type: "image"
+                Base64-encoded document data.
 
-
+                minLength: 1
 
-BetaManagedAgentsDocumentBlock { source, type, context, title } 
+              - `media_type: string`
 
-Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+                MIME type of the document (e.g., "application/pdf").
 
-
+                minLength: 1
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  | [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  | [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  | [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
+              - `type: "base64"`
 
-Union type for document source variants.
+            - `BetaManagedAgentsPlainTextDocumentSource`
 
-One of the following:
+              Plain text document content.
 
-
+              - `data: string`
 
-BetaManagedAgentsBase64DocumentSource { data, media\_type, type } 
+                The plain text content.
 
-Base64-encoded document data.
+                minLength: 1
 
-data: string
+              - `media_type: "text/plain"`
 
-Base64-encoded document data.
+                MIME type of the text content. Must be "text/plain".
 
-media\_type: string
+              - `type: "text"`
 
-MIME type of the document (e.g., "application/pdf").
+            - `BetaManagedAgentsURLDocumentSource`
 
-type: "base64"
+              Document referenced by URL.
 
-
+              - `type: "url"`
 
-BetaManagedAgentsPlainTextDocumentSource { data, media\_type, type } 
+              - `url: string`
 
-Plain text document content.
+                URL of the document to fetch.
 
-data: string
+                minLength: 1
 
-The plain text content.
+            - `BetaManagedAgentsFileDocumentSource`
 
-media\_type: "text/plain"
+              Document referenced by file ID.
 
-MIME type of the text content. Must be "text/plain".
+              - `file_id: string`
 
-type: "text"
+                ID of a previously uploaded file.
 
-
+                minLength: 1
 
-BetaManagedAgentsURLDocumentSource { type, url } 
+              - `type: "file"`
 
-Document referenced by URL.
+          - `type: "document"`
 
-type: "url"
+          - `context?: string | null`
 
-url: string
+            Additional context about the document for the model.
 
-URL of the document to fetch.
+          - `title?: string | null`
 
-
+            The title of the document.
 
-BetaManagedAgentsFileDocumentSource { file\_id, type } 
+        - `BetaManagedAgentsRedactedBlock`
 
-Document referenced by file ID.
+          Placeholder for content withheld by Anthropic model policy.
 
-file\_id: string
+          - `type: "redacted"`
 
-ID of a previously uploaded file.
+      - `type: "user.message"`
 
-type: "file"
+    - `BetaManagedAgentsUserInterruptEventParams`
 
-type: "document"
+      Parameters for sending an interrupt to pause the agent.
 
-context?: string | null
+      - `type: "user.interrupt"`
 
-Additional context about the document for the model.
+      - `session_thread_id?: string | null`
 
-title?: string | null
+        If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-The title of the document.
+    - `BetaManagedAgentsUserToolConfirmationEventParams`
 
-type: "user.message"
+      Parameters for confirming or denying a tool execution request.
 
-
+      - `result: "allow" | "deny"`
 
-BetaManagedAgentsUserInterruptEventParams { type, session\_thread\_id } 
+        UserToolConfirmationResult enum
 
-Parameters for sending an interrupt to pause the agent.
+        - `"allow"`
 
-type: "user.interrupt"
+        - `"deny"`
 
-session\_thread\_id?: string | null
+      - `tool_use_id: string`
 
-If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+        The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-
+        minLength: 1, maxLength: 128
 
-BetaManagedAgentsUserToolConfirmationEventParams { result, tool\_use\_id, type, deny\_message } 
+      - `type: "user.tool_confirmation"`
 
-Parameters for confirming or denying a tool execution request.
+      - `deny_message?: string | null`
 
-
+        Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-result: "allow" | "deny"
+        maxLength: 10000
 
-UserToolConfirmationResult enum
+    - `BetaManagedAgentsUserCustomToolResultEventParams`
 
-One of the following:
+      Parameters for providing the result of a custom tool execution.
 
-"allow"
+      - `custom_tool_use_id: string`
 
-"deny"
+        The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-tool\_use\_id: string
+        minLength: 1, maxLength: 128
 
-The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      - `type: "user.custom_tool_result"`
 
-type: "user.tool\_confirmation"
+      - `content?: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock>`
 
-deny\_message?: string | null
+        The result content returned by the tool.
 
-Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+        - `BetaManagedAgentsTextBlock`
 
-
+          Regular text content.
 
-BetaManagedAgentsUserCustomToolResultEventParams { custom\_tool\_use\_id, type, content, is\_error } 
+        - `BetaManagedAgentsImageBlock`
 
-Parameters for providing the result of a custom tool execution.
+          Image content specified directly as base64 data or as a reference via a URL.
 
-custom\_tool\_use\_id: string
+        - `BetaManagedAgentsDocumentBlock`
 
-The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-type: "user.custom\_tool\_result"
+        - `BetaManagedAgentsSearchResultBlock`
 
-
+          A block containing a web search result.
 
-content?: Array<[BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  | [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  | [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  | [BetaManagedAgentsSearchResultBlock](api/beta/sessions/events.md) { citations, content, source, 2 more } >
+          - `citations: BetaManagedAgentsSearchResultCitations`
 
-The result content returned by the tool.
+            Citation settings for a search result.
 
-One of the following:
+            - `enabled: boolean`
 
-
+              Whether citations are enabled for this search result.
 
-BetaManagedAgentsTextBlock { text, type } 
+          - `content: Array<BetaManagedAgentsSearchResultContent>`
 
-Regular text content.
+            Array of text content blocks from the search result.
 
-text: string
+            - `text: string`
 
-The text content.
+              The text content.
 
-type: "text"
+              minLength: 1
 
-
+            - `type: "text"`
 
-BetaManagedAgentsImageBlock { source, type } 
+          - `source: string`
 
-Image content specified directly as base64 data or as a reference via a URL.
+            The URL source of the search result.
 
-
+            minLength: 1
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  | [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  | [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
+          - `title: string`
 
-Union type for image source variants.
+            The title of the search result.
 
-One of the following:
+            minLength: 1
 
-
+          - `type: "search_result"`
 
-BetaManagedAgentsBase64ImageSource { data, media\_type, type } 
+      - `is_error?: boolean | null`
 
-Base64-encoded image data.
+        Whether the tool execution resulted in an error.
 
-data: string
+    - `BetaManagedAgentsUserDefineOutcomeEventParams`
 
-Base64-encoded image data.
+      Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
-media\_type: string
+      - `description: string`
 
-MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+        What the agent should produce. This is the task specification.
 
-type: "base64"
+      - `rubric: BetaManagedAgentsFileRubricParams | BetaManagedAgentsTextRubricParams`
 
-
+        Rubric for grading the quality of an outcome.
 
-BetaManagedAgentsURLImageSource { type, url } 
+        - `BetaManagedAgentsFileRubricParams`
 
-Image referenced by URL.
+          Rubric referenced by a file uploaded via the Files API.
 
-type: "url"
+          - `file_id: string`
 
-url: string
+            ID of the rubric file.
 
-URL of the image to fetch.
+          - `type: "file"`
 
-
+        - `BetaManagedAgentsTextRubricParams`
 
-BetaManagedAgentsFileImageSource { file\_id, type } 
+          Rubric content provided inline as text.
 
-Image referenced by file ID.
+          - `content: string`
 
-file\_id: string
+            Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
-ID of a previously uploaded file.
+            maxLength: 262144
 
-type: "file"
+          - `type: "text"`
 
-type: "image"
+      - `type: "user.define_outcome"`
 
-
+      - `max_iterations?: number | null`
 
-BetaManagedAgentsDocumentBlock { source, type, context, title } 
+        Eval→revision cycles before giving up. Default 3, max 20.
 
-Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+        format: int32
 
-
+    - `BetaManagedAgentsUserToolResultEventParams`
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  | [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  | [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  | [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
+      Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
-Union type for document source variants.
+      - `tool_use_id: string`
 
-One of the following:
+        The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-
+        minLength: 1, maxLength: 128
 
-BetaManagedAgentsBase64DocumentSource { data, media\_type, type } 
+      - `type: "user.tool_result"`
 
-Base64-encoded document data.
+      - `content?: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock>`
 
-data: string
+        The result content returned by the tool.
 
-Base64-encoded document data.
+        - `BetaManagedAgentsTextBlock`
 
-media\_type: string
+          Regular text content.
 
-MIME type of the document (e.g., "application/pdf").
+        - `BetaManagedAgentsImageBlock`
 
-type: "base64"
+          Image content specified directly as base64 data or as a reference via a URL.
 
-
+        - `BetaManagedAgentsDocumentBlock`
 
-BetaManagedAgentsPlainTextDocumentSource { data, media\_type, type } 
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-Plain text document content.
+        - `BetaManagedAgentsSearchResultBlock`
 
-data: string
+          A block containing a web search result.
 
-The plain text content.
+      - `is_error?: boolean | null`
 
-media\_type: "text/plain"
+        Whether the tool execution resulted in an error.
 
-MIME type of the text content. Must be "text/plain".
+    - `BetaManagedAgentsSystemMessageEventParams`
 
-type: "text"
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
-
+      - `content: Array<BetaManagedAgentsSystemContentBlock>`
 
-BetaManagedAgentsURLDocumentSource { type, url } 
+        System content blocks to append. Text-only.
 
-Document referenced by URL.
+        - `text: string`
 
-type: "url"
+          The text content.
 
-url: string
+          minLength: 1
 
-URL of the document to fetch.
+        - `type: "text"`
 
-
+      - `type: "system.message"`
 
-BetaManagedAgentsFileDocumentSource { file\_id, type } 
+  - `betas?: Array<AnthropicBeta>`
 
-Document referenced by file ID.
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-file\_id: string
+    - `(string & {})`
 
-ID of a previously uploaded file.
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
 
-type: "file"
+      - `"message-batches-2024-09-24"`
 
-type: "document"
+      - `"prompt-caching-2024-07-31"`
 
-context?: string | null
+      - `"computer-use-2024-10-22"`
 
-Additional context about the document for the model.
+      - `"computer-use-2025-01-24"`
 
-title?: string | null
+      - `"pdfs-2024-09-25"`
 
-The title of the document.
+      - `"token-counting-2024-11-01"`
 
-
+      - `"token-efficient-tools-2025-02-19"`
 
-BetaManagedAgentsSearchResultBlock { citations, content, source, 2 more } 
+      - `"output-128k-2025-02-19"`
 
-A block containing a web search result.
+      - `"files-api-2025-04-14"`
 
-
+      - `"mcp-client-2025-04-04"`
 
-citations: [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) { enabled } 
+      - `"mcp-client-2025-11-20"`
 
-Citation settings for a search result.
+      - `"dev-full-thinking-2025-05-14"`
 
-enabled: boolean
+      - `"interleaved-thinking-2025-05-14"`
 
-Whether citations are enabled for this search result.
+      - `"code-execution-2025-05-22"`
 
-
+      - `"extended-cache-ttl-2025-04-11"`
 
-content: Array<[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md) { text, type } >
+      - `"context-1m-2025-08-07"`
 
-Array of text content blocks from the search result.
+      - `"context-management-2025-06-27"`
 
-text: string
+      - `"model-context-window-exceeded-2025-08-26"`
 
-The text content.
+      - `"skills-2025-10-02"`
 
-type: "text"
+      - `"fast-mode-2026-02-01"`
 
-source: string
+      - `"output-300k-2026-03-24"`
 
-The URL source of the search result.
+      - `"user-profiles-2026-03-24"`
 
-title: string
+      - `"user-profiles-2026-08-18"`
 
-The title of the search result.
+      - `"advisor-tool-2026-03-01"`
 
-type: "search\_result"
+      - `"managed-agents-2026-04-01"`
 
-is\_error?: boolean | null
+      - `"cache-diagnosis-2026-04-07"`
 
-Whether the tool execution resulted in an error.
+      - `"dreaming-2026-04-21"`
 
-
+      - `"thinking-token-count-2026-05-13"`
 
-BetaManagedAgentsUserDefineOutcomeEventParams { description, rubric, type, max\_iterations } 
+      - `"server-side-fallback-2026-06-01"`
 
-Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+      - `"server-side-fallback-2026-07-01"`
 
-description: string
+      - `"fallback-credit-2026-06-01"`
 
-What the agent should produce. This is the task specification.
+      - `"fallback-credit-2026-07-01"`
 
-
+      - `"agent-memory-2026-07-22"`
 
-rubric: [BetaManagedAgentsFileRubricParams](api/beta/sessions/events.md) { file\_id, type }  | [BetaManagedAgentsTextRubricParams](api/beta/sessions/events.md) { content, type } 
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
-Rubric for grading the quality of an outcome.
+      - `"compact-2026-01-12"`
 
-One of the following:
+      - `"computer-use-2025-11-24"`
 
-
+      - `"mcp-tunnels-2026-06-22"`
 
-BetaManagedAgentsFileRubricParams { file\_id, type } 
+      - `"structured-outputs-2025-11-13"`
 
-Rubric referenced by a file uploaded via the Files API.
+      - `"task-budgets-2026-03-13"`
 
-file\_id: string
+      - `"thinking-display-updates-2026-08-18"`
 
-ID of the rubric file.
+      - `"ce-user-management-2026-07-13"`
 
-type: "file"
+      - `"mid-conversation-output-config-2026-07-01"`
 
-
+      - `"thinking-binding-controls-2026-08-01"`
 
-BetaManagedAgentsTextRubricParams { content, type } 
+      - `"mid-conversation-system-clear-at-2026-08-21"`
 
-Rubric content provided inline as text.
+## Returns
 
-content: string
+- `BetaManagedAgentsSendSessionEvents`
 
-Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+  Events that were successfully sent to the session.
 
-type: "text"
+  - `data?: Array<BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 4 more>`
 
-type: "user.define\_outcome"
+    Sent events
 
-max\_iterations?: number | null
+    - `BetaManagedAgentsUserMessageEvent`
 
-Eval→revision cycles before giving up. Default 3, max 20.
+      A user message event in the session conversation.
 
-
+      - `id: string`
 
-BetaManagedAgentsUserToolResultEventParams { tool\_use\_id, type, content, is\_error } 
+        Unique identifier for this event.
 
-Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+      - `content: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsRedactedBlock>`
 
-tool\_use\_id: string
+        Array of content blocks comprising the user message.
 
-The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+        - `BetaManagedAgentsTextBlock`
 
-type: "user.tool\_result"
+          Regular text content.
 
-
+          - `text: string`
 
-content?: Array<[BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  | [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  | [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  | [BetaManagedAgentsSearchResultBlock](api/beta/sessions/events.md) { citations, content, source, 2 more } >
+            The text content.
 
-The result content returned by the tool.
+            minLength: 1
 
-One of the following:
+          - `type: "text"`
 
-
+        - `BetaManagedAgentsImageBlock`
 
-BetaManagedAgentsTextBlock { text, type } 
+          Image content specified directly as base64 data or as a reference via a URL.
 
-Regular text content.
+          - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
 
-text: string
+            Union type for image source variants.
 
-The text content.
+            - `BetaManagedAgentsBase64ImageSource`
 
-type: "text"
+              Base64-encoded image data.
 
-
+              - `data: string`
 
-BetaManagedAgentsImageBlock { source, type } 
+                Base64-encoded image data.
 
-Image content specified directly as base64 data or as a reference via a URL.
+                minLength: 1
 
-
+              - `media_type: string`
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  | [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  | [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-Union type for image source variants.
+                minLength: 1
 
-One of the following:
+              - `type: "base64"`
 
-
+            - `BetaManagedAgentsURLImageSource`
 
-BetaManagedAgentsBase64ImageSource { data, media\_type, type } 
+              Image referenced by URL.
 
-Base64-encoded image data.
+              - `type: "url"`
 
-data: string
+              - `url: string`
 
-Base64-encoded image data.
+                URL of the image to fetch.
 
-media\_type: string
+                minLength: 1
 
-MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+            - `BetaManagedAgentsFileImageSource`
 
-type: "base64"
+              Image referenced by file ID.
 
-
+              - `file_id: string`
 
-BetaManagedAgentsURLImageSource { type, url } 
+                ID of a previously uploaded file.
 
-Image referenced by URL.
+                minLength: 1
 
-type: "url"
+              - `type: "file"`
 
-url: string
+          - `type: "image"`
 
-URL of the image to fetch.
+        - `BetaManagedAgentsDocumentBlock`
 
-
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-BetaManagedAgentsFileImageSource { file\_id, type } 
+          - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
 
-Image referenced by file ID.
+            Union type for document source variants.
 
-file\_id: string
+            - `BetaManagedAgentsBase64DocumentSource`
 
-ID of a previously uploaded file.
+              Base64-encoded document data.
 
-type: "file"
+              - `data: string`
 
-type: "image"
+                Base64-encoded document data.
 
-
+                minLength: 1
 
-BetaManagedAgentsDocumentBlock { source, type, context, title } 
+              - `media_type: string`
 
-Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+                MIME type of the document (e.g., "application/pdf").
 
-
+                minLength: 1
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  | [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  | [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  | [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
+              - `type: "base64"`
 
-Union type for document source variants.
+            - `BetaManagedAgentsPlainTextDocumentSource`
 
-One of the following:
+              Plain text document content.
 
-
+              - `data: string`
 
-BetaManagedAgentsBase64DocumentSource { data, media\_type, type } 
+                The plain text content.
 
-Base64-encoded document data.
+                minLength: 1
 
-data: string
+              - `media_type: "text/plain"`
 
-Base64-encoded document data.
+                MIME type of the text content. Must be "text/plain".
 
-media\_type: string
+              - `type: "text"`
 
-MIME type of the document (e.g., "application/pdf").
+            - `BetaManagedAgentsURLDocumentSource`
 
-type: "base64"
+              Document referenced by URL.
 
-
+              - `type: "url"`
 
-BetaManagedAgentsPlainTextDocumentSource { data, media\_type, type } 
+              - `url: string`
 
-Plain text document content.
+                URL of the document to fetch.
 
-data: string
+                minLength: 1
 
-The plain text content.
+            - `BetaManagedAgentsFileDocumentSource`
 
-media\_type: "text/plain"
+              Document referenced by file ID.
 
-MIME type of the text content. Must be "text/plain".
+              - `file_id: string`
 
-type: "text"
+                ID of a previously uploaded file.
 
-
+                minLength: 1
 
-BetaManagedAgentsURLDocumentSource { type, url } 
+              - `type: "file"`
 
-Document referenced by URL.
+          - `type: "document"`
 
-type: "url"
+          - `context?: string | null`
 
-url: string
+            Additional context about the document for the model.
 
-URL of the document to fetch.
+          - `title?: string | null`
 
-
+            The title of the document.
 
-BetaManagedAgentsFileDocumentSource { file\_id, type } 
+        - `BetaManagedAgentsRedactedBlock`
 
-Document referenced by file ID.
+          Placeholder for content withheld by Anthropic model policy.
 
-file\_id: string
+          - `type: "redacted"`
 
-ID of a previously uploaded file.
+      - `type: "user.message"`
 
-type: "file"
+      - `processed_at?: string | null`
 
-type: "document"
+        A timestamp in RFC 3339 format
 
-context?: string | null
+        format: date-time
 
-Additional context about the document for the model.
+    - `BetaManagedAgentsUserInterruptEvent`
 
-title?: string | null
+      An interrupt event that pauses agent execution and returns control to the user.
 
-The title of the document.
+      - `id: string`
 
-
+        Unique identifier for this event.
 
-BetaManagedAgentsSearchResultBlock { citations, content, source, 2 more } 
+      - `type: "user.interrupt"`
 
-A block containing a web search result.
+      - `processed_at?: string | null`
 
-
+        A timestamp in RFC 3339 format
 
-citations: [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) { enabled } 
+        format: date-time
 
-Citation settings for a search result.
+      - `session_thread_id?: string | null`
 
-enabled: boolean
+        If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-Whether citations are enabled for this search result.
+    - `BetaManagedAgentsUserToolConfirmationEvent`
 
-
+      A tool confirmation event that approves or denies a pending tool execution.
 
-content: Array<[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md) { text, type } >
+      - `id: string`
 
-Array of text content blocks from the search result.
+        Unique identifier for this event.
 
-text: string
+      - `result: "allow" | "deny"`
 
-The text content.
+        UserToolConfirmationResult enum
 
-type: "text"
+        - `"allow"`
 
-source: string
+        - `"deny"`
 
-The URL source of the search result.
+      - `tool_use_id: string`
 
-title: string
+        The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-The title of the search result.
+      - `type: "user.tool_confirmation"`
 
-type: "search\_result"
+      - `deny_message?: string | null`
 
-is\_error?: boolean | null
+        Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-Whether the tool execution resulted in an error.
+        maxLength: 10000
 
-
+      - `processed_at?: string | null`
 
-BetaManagedAgentsSystemMessageEventParams { content, type } 
+        A timestamp in RFC 3339 format
 
-Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+        format: date-time
 
-
+      - `session_thread_id?: string | null`
 
-content: Array<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md) { text, type } >
+        When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-System content blocks to append. Text-only.
+    - `BetaManagedAgentsUserCustomToolResultEvent`
 
-text: string
+      Event sent by the client providing the result of a custom tool execution.
 
-The text content.
+      - `id: string`
 
-type: "text"
+        Unique identifier for this event.
 
-type: "system.message"
+      - `custom_tool_use_id: string`
 
-
+        The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+      - `type: "user.custom_tool_result"`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+      - `content?: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock>`
 
-One of the following:
+        The result content returned by the tool.
 
-(string & {})
+        - `BetaManagedAgentsTextBlock`
 
-
+          Regular text content.
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more
+        - `BetaManagedAgentsImageBlock`
 
-"message-batches-2024-09-24"
+          Image content specified directly as base64 data or as a reference via a URL.
 
-"prompt-caching-2024-07-31"
+        - `BetaManagedAgentsDocumentBlock`
 
-"computer-use-2024-10-22"
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-"computer-use-2025-01-24"
+        - `BetaManagedAgentsSearchResultBlock`
 
-"pdfs-2024-09-25"
+          A block containing a web search result.
 
-"token-counting-2024-11-01"
+          - `citations: BetaManagedAgentsSearchResultCitations`
 
-"token-efficient-tools-2025-02-19"
+            Citation settings for a search result.
 
-"output-128k-2025-02-19"
+            - `enabled: boolean`
 
-"files-api-2025-04-14"
+              Whether citations are enabled for this search result.
 
-"mcp-client-2025-04-04"
+          - `content: Array<BetaManagedAgentsSearchResultContent>`
 
-"mcp-client-2025-11-20"
+            Array of text content blocks from the search result.
 
-"dev-full-thinking-2025-05-14"
+            - `text: string`
 
-"interleaved-thinking-2025-05-14"
+              The text content.
 
-"code-execution-2025-05-22"
+              minLength: 1
 
-"extended-cache-ttl-2025-04-11"
+            - `type: "text"`
 
-"context-1m-2025-08-07"
+          - `source: string`
 
-"context-management-2025-06-27"
+            The URL source of the search result.
 
-"model-context-window-exceeded-2025-08-26"
+            minLength: 1
 
-"skills-2025-10-02"
+          - `title: string`
 
-"fast-mode-2026-02-01"
+            The title of the search result.
 
-"output-300k-2026-03-24"
+            minLength: 1
 
-"user-profiles-2026-03-24"
+          - `type: "search_result"`
 
-"advisor-tool-2026-03-01"
+      - `is_error?: boolean | null`
 
-"managed-agents-2026-04-01"
+        Whether the tool execution resulted in an error.
 
-"cache-diagnosis-2026-04-07"
+      - `processed_at?: string | null`
 
-"thinking-token-count-2026-05-13"
+        A timestamp in RFC 3339 format
 
-"server-side-fallback-2026-06-01"
+        format: date-time
 
-"fallback-credit-2026-06-01"
+      - `session_thread_id?: string | null`
 
-"agent-memory-2026-07-22"
+        Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-##### ReturnsExpand Collapse
+    - `BetaManagedAgentsUserDefineOutcomeEvent`
 
-
+      Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
-BetaManagedAgentsSendSessionEvents { data } 
+      - `id: string`
 
-Events that were successfully sent to the session.
+        Unique identifier for this event.
 
-
+      - `description: string`
 
-data?: Array<[BetaManagedAgentsUserMessageEvent](api/beta/sessions/events.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta/sessions/events.md) { id, type, processed\_at, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta/sessions/events.md) { id, result, tool\_use\_id, 4 more }  | 4 more>
+        What the agent should produce. Copied from the input event.
 
-Sent events
+      - `max_iterations: number | null`
 
-One of the following:
+        Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
-
+        format: int32
 
-BetaManagedAgentsUserMessageEvent { id, content, type, processed\_at } 
+      - `outcome_id: string`
 
-A user message event in the session conversation.
+        Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
 
-id: string
+      - `processed_at: string`
 
-Unique identifier for this event.
+        A timestamp in RFC 3339 format
 
-
+        format: date-time
 
-content: Array<[BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  | [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  | [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title } >
+      - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
 
-Array of content blocks comprising the user message.
+        Rubric for grading the quality of an outcome.
 
-One of the following:
+        - `BetaManagedAgentsFileRubric`
 
-
+          Rubric referenced by a file uploaded via the Files API.
 
-BetaManagedAgentsTextBlock { text, type } 
+          - `file_id: string`
 
-Regular text content.
+            ID of the rubric file.
 
-text: string
+          - `type: "file"`
 
-The text content.
+        - `BetaManagedAgentsTextRubric`
 
-type: "text"
+          Rubric content provided inline as text.
 
-
+          - `content: string`
 
-BetaManagedAgentsImageBlock { source, type } 
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-Image content specified directly as base64 data or as a reference via a URL.
+          - `type: "text"`
 
-
+      - `type: "user.define_outcome"`
 
-source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  | [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  | [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
+    - `BetaManagedAgentsUserToolResultEvent`
 
-Union type for image source variants.
+      Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
-One of the following:
+      - `id: string`
 
-
+        Unique identifier for this event.
 
-BetaManagedAgentsBase64ImageSource { data, media\_type, type } 
+      - `tool_use_id: string`
 
-Base64-encoded image data.
+        The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
 
-data: string
+      - `type: "user.tool_result"`
 
-Base64-encoded image data.
+      - `content?: Array<BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock>`
 
-media\_type: string
+        The result content returned by the tool.
 
-MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+        - `BetaManagedAgentsTextBlock`
 
-type: "base64"
+          Regular text content.
 
-
+        - `BetaManagedAgentsImageBlock`
 
-BetaManagedAgentsURLImageSource { type, url } 
+          Image content specified directly as base64 data or as a reference via a URL.
 
-Image referenced by URL.
+        - `BetaManagedAgentsDocumentBlock`
 
-type: "url"
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-url: string
+        - `BetaManagedAgentsSearchResultBlock`
 
-URL of the image to fetch.
+          A block containing a web search result.
 
-
+      - `is_error?: boolean | null`
 
-BetaManagedAgentsFileImageSource { file\_id, type } 
+        Whether the tool execution resulted in an error.
 
-Image referenced by file ID.
+      - `processed_at?: string | null`
 
-file\_id: string
+        A timestamp in RFC 3339 format
 
-ID of a previously uploaded file.
+        format: date-time
 
-type: "file"
+      - `session_thread_id?: string | null`
 
-type: "image"
+        Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-
+    - `BetaManagedAgentsSystemMessageEvent`
 
-BetaManagedAgentsDocumentBlock { source, type, context, title } 
+      A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
-Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+      - `id: string`
 
-
+        Unique identifier for this event.
 
-source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  | [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  | [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  | [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
+      - `content: Array<BetaManagedAgentsSystemContentBlock>`
 
-Union type for document source variants.
+        System content blocks. Text-only.
 
-One of the following:
+        - `text: string`
 
-
+          The text content.
 
-BetaManagedAgentsBase64DocumentSource { data, media\_type, type } 
+          minLength: 1
 
-Base64-encoded document data.
+        - `type: "text"`
 
-data: string
+      - `type: "system.message"`
 
-Base64-encoded document data.
+      - `processed_at?: string | null`
 
-media\_type: string
+        A timestamp in RFC 3339 format
 
-MIME type of the document (e.g., "application/pdf").
+        format: date-time
 
-type: "base64"
+## Example
 
-
-
-BetaManagedAgentsPlainTextDocumentSource { data, media\_type, type } 
-
-Plain text document content.
-
-data: string
-
-The plain text content.
-
-media\_type: "text/plain"
-
-MIME type of the text content. Must be "text/plain".
-
-type: "text"
-
-
-
-BetaManagedAgentsURLDocumentSource { type, url } 
-
-Document referenced by URL.
-
-type: "url"
-
-url: string
-
-URL of the document to fetch.
-
-
-
-BetaManagedAgentsFileDocumentSource { file\_id, type } 
-
-Document referenced by file ID.
-
-file\_id: string
-
-ID of a previously uploaded file.
-
-type: "file"
-
-type: "document"
-
-context?: string | null
-
-Additional context about the document for the model.
-
-title?: string | null
-
-The title of the document.
-
-type: "user.message"
-
-processed\_at?: string | null
-
-A timestamp in RFC 3339 format
-
-
-
-BetaManagedAgentsUserInterruptEvent { id, type, processed\_at, session\_thread\_id } 
-
-An interrupt event that pauses agent execution and returns control to the user.
-
-id: string
-
-Unique identifier for this event.
-
-type: "user.interrupt"
-
-processed\_at?: string | null
-
-A timestamp in RFC 3339 format
-
-session\_thread\_id?: string | null
-
-If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
-
-
-
-BetaManagedAgentsUserToolConfirmationEvent { id, result, tool\_use\_id, 4 more } 
-
-A tool confirmation event that approves or denies a pending tool execution.
-
-id: string
-
-Unique identifier for this event.
-
-
-
-result: "allow" | "deny"
-
-UserToolConfirmationResult enum
-
-One of the following:
-
-"allow"
-
-"deny"
-
-tool\_use\_id: string
-
-The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
-
-type: "user.tool\_confirmation"
-
-deny\_message?: string | null
-
-Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
-
-processed\_at?: string | null
-
-A timestamp in RFC 3339 format
-
-session\_thread\_id?: string | null
-
-When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
-
-
-
-BetaManagedAgentsUserCustomToolResultEvent { id, custom\_tool\_use\_id, type, 4 more } 
-
-Event sent by the client providing the result of a custom tool execution.
-
-id: string
-
-Unique identifier for this event.
-
-custom\_tool\_use\_id: string
-
-The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
-
-type: "user.custom\_tool\_result"
-
-
-
-content?: Array<[BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  | [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  | [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  | [BetaManagedAgentsSearchResultBlock](api/beta/sessions/events.md) { citations, content, source, 2 more } >
-
-The result content returned by the tool.
-
-One of the following:
-
-
-
-BetaManagedAgentsTextBlock { text, type } 
-
-Regular text content.
-
-text: string
-
-The text content.
-
-type: "text"
-
-
-
-BetaManagedAgentsImageBlock { source, type } 
-
-Image content specified directly as base64 data or as a reference via a URL.
-
-
-
-source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  | [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  | [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
-
-Union type for image source variants.
-
-One of the following:
-
-
-
-BetaManagedAgentsBase64ImageSource { data, media\_type, type } 
-
-Base64-encoded image data.
-
-data: string
-
-Base64-encoded image data.
-
-media\_type: string
-
-MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-type: "base64"
-
-
-
-BetaManagedAgentsURLImageSource { type, url } 
-
-Image referenced by URL.
-
-type: "url"
-
-url: string
-
-URL of the image to fetch.
-
-
-
-BetaManagedAgentsFileImageSource { file\_id, type } 
-
-Image referenced by file ID.
-
-file\_id: string
-
-ID of a previously uploaded file.
-
-type: "file"
-
-type: "image"
-
-
-
-BetaManagedAgentsDocumentBlock { source, type, context, title } 
-
-Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-
-
-source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  | [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  | [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  | [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
-
-Union type for document source variants.
-
-One of the following:
-
-
-
-BetaManagedAgentsBase64DocumentSource { data, media\_type, type } 
-
-Base64-encoded document data.
-
-data: string
-
-Base64-encoded document data.
-
-media\_type: string
-
-MIME type of the document (e.g., "application/pdf").
-
-type: "base64"
-
-
-
-BetaManagedAgentsPlainTextDocumentSource { data, media\_type, type } 
-
-Plain text document content.
-
-data: string
-
-The plain text content.
-
-media\_type: "text/plain"
-
-MIME type of the text content. Must be "text/plain".
-
-type: "text"
-
-
-
-BetaManagedAgentsURLDocumentSource { type, url } 
-
-Document referenced by URL.
-
-type: "url"
-
-url: string
-
-URL of the document to fetch.
-
-
-
-BetaManagedAgentsFileDocumentSource { file\_id, type } 
-
-Document referenced by file ID.
-
-file\_id: string
-
-ID of a previously uploaded file.
-
-type: "file"
-
-type: "document"
-
-context?: string | null
-
-Additional context about the document for the model.
-
-title?: string | null
-
-The title of the document.
-
-
-
-BetaManagedAgentsSearchResultBlock { citations, content, source, 2 more } 
-
-A block containing a web search result.
-
-
-
-citations: [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) { enabled } 
-
-Citation settings for a search result.
-
-enabled: boolean
-
-Whether citations are enabled for this search result.
-
-
-
-content: Array<[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md) { text, type } >
-
-Array of text content blocks from the search result.
-
-text: string
-
-The text content.
-
-type: "text"
-
-source: string
-
-The URL source of the search result.
-
-title: string
-
-The title of the search result.
-
-type: "search\_result"
-
-is\_error?: boolean | null
-
-Whether the tool execution resulted in an error.
-
-processed\_at?: string | null
-
-A timestamp in RFC 3339 format
-
-session\_thread\_id?: string | null
-
-Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
-
-
-
-BetaManagedAgentsUserDefineOutcomeEvent { id, description, max\_iterations, 4 more } 
-
-Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
-
-id: string
-
-Unique identifier for this event.
-
-description: string
-
-What the agent should produce. Copied from the input event.
-
-max\_iterations: number | null
-
-Evaluate-then-revise cycles before giving up. Default 3, max 20.
-
-outcome\_id: string
-
-Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
-
-processed\_at: string
-
-A timestamp in RFC 3339 format
-
-
-
-rubric: [BetaManagedAgentsFileRubric](api/beta/sessions/events.md) { file\_id, type }  | [BetaManagedAgentsTextRubric](api/beta/sessions/events.md) { content, type } 
-
-Rubric for grading the quality of an outcome.
-
-One of the following:
-
-
-
-BetaManagedAgentsFileRubric { file\_id, type } 
-
-Rubric referenced by a file uploaded via the Files API.
-
-file\_id: string
-
-ID of the rubric file.
-
-type: "file"
-
-
-
-BetaManagedAgentsTextRubric { content, type } 
-
-Rubric content provided inline as text.
-
-content: string
-
-Rubric content. Plain text or markdown — the grader treats it as freeform text.
-
-type: "text"
-
-type: "user.define\_outcome"
-
-
-
-BetaManagedAgentsUserToolResultEvent { id, tool\_use\_id, type, 4 more } 
-
-Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
-
-id: string
-
-Unique identifier for this event.
-
-tool\_use\_id: string
-
-The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
-
-type: "user.tool\_result"
-
-
-
-content?: Array<[BetaManagedAgentsTextBlock](api/beta/sessions/events.md) { text, type }  | [BetaManagedAgentsImageBlock](api/beta/sessions/events.md) { source, type }  | [BetaManagedAgentsDocumentBlock](api/beta/sessions/events.md) { source, type, context, title }  | [BetaManagedAgentsSearchResultBlock](api/beta/sessions/events.md) { citations, content, source, 2 more } >
-
-The result content returned by the tool.
-
-One of the following:
-
-
-
-BetaManagedAgentsTextBlock { text, type } 
-
-Regular text content.
-
-text: string
-
-The text content.
-
-type: "text"
-
-
-
-BetaManagedAgentsImageBlock { source, type } 
-
-Image content specified directly as base64 data or as a reference via a URL.
-
-
-
-source: [BetaManagedAgentsBase64ImageSource](api/beta/sessions/events.md) { data, media\_type, type }  | [BetaManagedAgentsURLImageSource](api/beta/sessions/events.md) { type, url }  | [BetaManagedAgentsFileImageSource](api/beta/sessions/events.md) { file\_id, type } 
-
-Union type for image source variants.
-
-One of the following:
-
-
-
-BetaManagedAgentsBase64ImageSource { data, media\_type, type } 
-
-Base64-encoded image data.
-
-data: string
-
-Base64-encoded image data.
-
-media\_type: string
-
-MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
-
-type: "base64"
-
-
-
-BetaManagedAgentsURLImageSource { type, url } 
-
-Image referenced by URL.
-
-type: "url"
-
-url: string
-
-URL of the image to fetch.
-
-
-
-BetaManagedAgentsFileImageSource { file\_id, type } 
-
-Image referenced by file ID.
-
-file\_id: string
-
-ID of a previously uploaded file.
-
-type: "file"
-
-type: "image"
-
-
-
-BetaManagedAgentsDocumentBlock { source, type, context, title } 
-
-Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-
-
-
-source: [BetaManagedAgentsBase64DocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  | [BetaManagedAgentsPlainTextDocumentSource](api/beta/sessions/events.md) { data, media\_type, type }  | [BetaManagedAgentsURLDocumentSource](api/beta/sessions/events.md) { type, url }  | [BetaManagedAgentsFileDocumentSource](api/beta/sessions/events.md) { file\_id, type } 
-
-Union type for document source variants.
-
-One of the following:
-
-
-
-BetaManagedAgentsBase64DocumentSource { data, media\_type, type } 
-
-Base64-encoded document data.
-
-data: string
-
-Base64-encoded document data.
-
-media\_type: string
-
-MIME type of the document (e.g., "application/pdf").
-
-type: "base64"
-
-
-
-BetaManagedAgentsPlainTextDocumentSource { data, media\_type, type } 
-
-Plain text document content.
-
-data: string
-
-The plain text content.
-
-media\_type: "text/plain"
-
-MIME type of the text content. Must be "text/plain".
-
-type: "text"
-
-
-
-BetaManagedAgentsURLDocumentSource { type, url } 
-
-Document referenced by URL.
-
-type: "url"
-
-url: string
-
-URL of the document to fetch.
-
-
-
-BetaManagedAgentsFileDocumentSource { file\_id, type } 
-
-Document referenced by file ID.
-
-file\_id: string
-
-ID of a previously uploaded file.
-
-type: "file"
-
-type: "document"
-
-context?: string | null
-
-Additional context about the document for the model.
-
-title?: string | null
-
-The title of the document.
-
-
-
-BetaManagedAgentsSearchResultBlock { citations, content, source, 2 more } 
-
-A block containing a web search result.
-
-
-
-citations: [BetaManagedAgentsSearchResultCitations](api/beta/sessions/events.md) { enabled } 
-
-Citation settings for a search result.
-
-enabled: boolean
-
-Whether citations are enabled for this search result.
-
-
-
-content: Array<[BetaManagedAgentsSearchResultContent](api/beta/sessions/events.md) { text, type } >
-
-Array of text content blocks from the search result.
-
-text: string
-
-The text content.
-
-type: "text"
-
-source: string
-
-The URL source of the search result.
-
-title: string
-
-The title of the search result.
-
-type: "search\_result"
-
-is\_error?: boolean | null
-
-Whether the tool execution resulted in an error.
-
-processed\_at?: string | null
-
-A timestamp in RFC 3339 format
-
-session\_thread\_id?: string | null
-
-Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
-
-
-
-BetaManagedAgentsSystemMessageEvent { id, content, type, processed\_at } 
-
-A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
-
-id: string
-
-Unique identifier for this event.
-
-
-
-content: Array<[BetaManagedAgentsSystemContentBlock](api/beta/sessions.md) { text, type } >
-
-System content blocks. Text-only.
-
-text: string
-
-The text content.
-
-type: "text"
-
-type: "system.message"
-
-processed\_at?: string | null
-
-A timestamp in RFC 3339 format
-
-Send Events
-
-TypeScript
-
-```shiki
-import Anthropic from '@anthropic-ai/sdk';
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 const betaManagedAgentsSendSessionEvents = await client.beta.sessions.events.send(
-  'sesn_011CZkZAtmR3yMPDzynEDxu7',
+  "sesn_011CZkZAtmR3yMPDzynEDxu7",
   {
     events: [
-      { content: [{ text: 'Where is my order #1234?', type: 'text' }], type: 'user.message' },
-    ],
-  },
+      { content: [{ text: "Where is my order #1234?", type: "text" }], type: "user.message" }
+    ]
+  }
 );
 
 console.log(betaManagedAgentsSendSessionEvents.data);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
-      "content": [
-        {
-          "text": "Where is my order #1234?",
-          "type": "text"
-        }
-      ],
-      "type": "user.message",
-      "processed_at": "2026-03-15T10:00:00Z"
-    }
-  ]
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

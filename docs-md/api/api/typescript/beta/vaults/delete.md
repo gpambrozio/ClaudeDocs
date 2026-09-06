@@ -1,149 +1,144 @@
 # Delete Vault
 
-Copy page
+`client.beta.vaults.delete(vaultID, params?, options?): BetaManagedAgentsDeletedVault`
 
-
-
-TypeScript
-
-# Delete Vault
-
-client.beta.vaults.delete(stringvaultID, VaultDeleteParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsDeletedVault](api/beta/vaults.md) { id, type }
-
-DELETE/v1/vaults/{vault\_id}
+**DELETE** `/v1/vaults/{vault_id}`
 
 Delete Vault
 
-##### ParametersExpand Collapse
+## Parameters
 
-vaultID: string
+- `vaultID: string`
 
-
+- `params: VaultDeleteParams`
 
-params: VaultDeleteParams { betas } 
+  - `betas?: Array<AnthropicBeta>`
 
-
+    Optional header to specify the beta version(s) you want to use.
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+    - `(string & {})`
 
-Optional header to specify the beta version(s) you want to use.
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
 
-One of the following:
+      - `"message-batches-2024-09-24"`
 
-(string & {})
+      - `"prompt-caching-2024-07-31"`
 
-
+      - `"computer-use-2024-10-22"`
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more
+      - `"computer-use-2025-01-24"`
 
-"message-batches-2024-09-24"
+      - `"pdfs-2024-09-25"`
 
-"prompt-caching-2024-07-31"
+      - `"token-counting-2024-11-01"`
 
-"computer-use-2024-10-22"
+      - `"token-efficient-tools-2025-02-19"`
 
-"computer-use-2025-01-24"
+      - `"output-128k-2025-02-19"`
 
-"pdfs-2024-09-25"
+      - `"files-api-2025-04-14"`
 
-"token-counting-2024-11-01"
+      - `"mcp-client-2025-04-04"`
 
-"token-efficient-tools-2025-02-19"
+      - `"mcp-client-2025-11-20"`
 
-"output-128k-2025-02-19"
+      - `"dev-full-thinking-2025-05-14"`
 
-"files-api-2025-04-14"
+      - `"interleaved-thinking-2025-05-14"`
 
-"mcp-client-2025-04-04"
+      - `"code-execution-2025-05-22"`
 
-"mcp-client-2025-11-20"
+      - `"extended-cache-ttl-2025-04-11"`
 
-"dev-full-thinking-2025-05-14"
+      - `"context-1m-2025-08-07"`
 
-"interleaved-thinking-2025-05-14"
+      - `"context-management-2025-06-27"`
 
-"code-execution-2025-05-22"
+      - `"model-context-window-exceeded-2025-08-26"`
 
-"extended-cache-ttl-2025-04-11"
+      - `"skills-2025-10-02"`
 
-"context-1m-2025-08-07"
+      - `"fast-mode-2026-02-01"`
 
-"context-management-2025-06-27"
+      - `"output-300k-2026-03-24"`
 
-"model-context-window-exceeded-2025-08-26"
+      - `"user-profiles-2026-03-24"`
 
-"skills-2025-10-02"
+      - `"user-profiles-2026-08-18"`
 
-"fast-mode-2026-02-01"
+      - `"advisor-tool-2026-03-01"`
 
-"output-300k-2026-03-24"
+      - `"managed-agents-2026-04-01"`
 
-"user-profiles-2026-03-24"
+      - `"cache-diagnosis-2026-04-07"`
 
-"advisor-tool-2026-03-01"
+      - `"dreaming-2026-04-21"`
 
-"managed-agents-2026-04-01"
+      - `"thinking-token-count-2026-05-13"`
 
-"cache-diagnosis-2026-04-07"
+      - `"server-side-fallback-2026-06-01"`
 
-"thinking-token-count-2026-05-13"
+      - `"server-side-fallback-2026-07-01"`
 
-"server-side-fallback-2026-06-01"
+      - `"fallback-credit-2026-06-01"`
 
-"fallback-credit-2026-06-01"
+      - `"fallback-credit-2026-07-01"`
 
-"agent-memory-2026-07-22"
+      - `"agent-memory-2026-07-22"`
 
-##### ReturnsExpand Collapse
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
-
+      - `"compact-2026-01-12"`
 
-BetaManagedAgentsDeletedVault { id, type } 
+      - `"computer-use-2025-11-24"`
 
-Confirmation of a deleted vault.
+      - `"mcp-tunnels-2026-06-22"`
 
-id: string
+      - `"structured-outputs-2025-11-13"`
 
-Unique identifier of the deleted vault.
+      - `"task-budgets-2026-03-13"`
 
-type: "vault\_deleted"
+      - `"thinking-display-updates-2026-08-18"`
 
-Delete Vault
+      - `"ce-user-management-2026-07-13"`
 
-TypeScript
+      - `"mid-conversation-output-config-2026-07-01"`
 
-```shiki
-import Anthropic from '@anthropic-ai/sdk';
+      - `"thinking-binding-controls-2026-08-01"`
+
+      - `"mid-conversation-system-clear-at-2026-08-21"`
+
+## Returns
+
+- `BetaManagedAgentsDeletedVault`
+
+  Confirmation of a deleted vault.
+
+  - `id: string`
+
+    Unique identifier of the deleted vault.
+
+  - `type: "vault_deleted"`
+
+## Example
+
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 const betaManagedAgentsDeletedVault = await client.beta.vaults.delete(
-  'vlt_011CZkZDLs7fYzm1hXNPeRjv',
+  "vlt_011CZkZDLs7fYzm1hXNPeRjv"
 );
 
 console.log(betaManagedAgentsDeletedVault.id);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
-  "type": "vault_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
   "type": "vault_deleted"

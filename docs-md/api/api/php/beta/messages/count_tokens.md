@@ -1,16 +1,8 @@
 # Count tokens in a Message
 
-Copy page
+`$client->beta->messages->countTokens(list<BetaMessageParam> messages, Model model, ?BetaCacheControlEphemeral cacheControl, ?BetaContextManagementConfig contextManagement, ?list<BetaRequestMCPServerURLDefinition> mcpServers, ?BetaOutputConfig outputConfig, ?BetaJSONOutputFormat outputFormat, ?Speed speed, ?System system, ?BetaThinkingConfigParam thinking, ?BetaToolChoice toolChoice, ?list<Tool> tools, ?list<AnthropicBeta> betas, ?string userProfileID): BetaMessageTokensCount`
 
-
-
-PHP
-
-# Count tokens in a Message
-
-$client->beta->messages->countTokens(list<[BetaMessageParam](api/beta/messages.md)> messages, Model model, ?[BetaCacheControlEphemeral](api/beta/messages.md) cacheControl, ?[BetaContextManagementConfig](api/beta/messages.md) contextManagement, ?list<[BetaRequestMCPServerURLDefinition](api/beta/messages.md)> mcpServers, ?[BetaOutputConfig](api/beta/messages.md) outputConfig, ?[BetaJSONOutputFormat](api/beta/messages.md) outputFormat, ?[Speed](api/beta/messages/count_tokens.md) speed, ?[System](api/beta/messages/count_tokens.md) system, ?[BetaThinkingConfigParam](api/beta/messages.md) thinking, ?[BetaToolChoice](api/beta/messages.md) toolChoice, ?list<Tool> tools, ?list<AnthropicBeta> betas, ?string userProfileID): [BetaMessageTokensCount](api/beta/messages.md)
-
-POST/v1/messages/count\_tokens
+**POST** `/v1/messages/count_tokens`
 
 Count the number of tokens in a Message.
 
@@ -18,232 +10,200 @@ The Token Count API can be used to count the number of tokens in a Message, incl
 
 Learn more about token counting in our [user guide](build-with-claude/token-counting.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `messages: list<BetaMessageParam>`
 
-messages: list<[BetaMessageParam](api/beta/messages.md)>
+  Input messages.
 
-Input messages.
+  Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
 
-Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
+  Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
 
-Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
+  If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
 
-If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
+  Example with a single `user` message:
 
-Example with a single `user` message:
+  ```json
+  [{"role": "user", "content": "Hello, Claude"}]
+  ```
 
-```shiki
-[{"role": "user", "content": "Hello, Claude"}]
-```
+  Example with multiple conversational turns:
 
-
+  ```json
+  [
+    {"role": "user", "content": "Hello there."},
+    {"role": "assistant", "content": "Hi, I'm Claude. How can I help you?"},
+    {"role": "user", "content": "Can you explain LLMs in plain English?"},
+  ]
+  ```
 
-Example with multiple conversational turns:
+  Example with a partially-filled response from Claude:
 
-```shiki
-[
-  {"role": "user", "content": "Hello there."},
-  {"role": "assistant", "content": "Hi, I'm Claude. How can I help you?"},
-  {"role": "user", "content": "Can you explain LLMs in plain English?"},
-]
-```
+  ```json
+  [
+    {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+    {"role": "assistant", "content": "The best answer is ("},
+  ]
+  ```
 
-
+  Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
 
-Example with a partially-filled response from Claude:
+  ```json
+  {"role": "user", "content": "Hello, Claude"}
+  ```
 
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("},
-]
-```
+  ```json
+  {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
+  ```
 
-
+  See [input examples](build-with-claude/working-with-messages.md).
 
-Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
+  Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
-```shiki
-{"role": "user", "content": "Hello, Claude"}
-```
+  There is a limit of 100,000 messages in a single request.
 
-
+- `model: Model`
 
-```shiki
-{"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
-```
+  The model that will complete your prompt.
 
-
+  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-See [input examples](build-with-claude/working-with-messages.md).
+- `cacheControl?:optional BetaCacheControlEphemeral`
 
-Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+  Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
-There is a limit of 100,000 messages in a single request.
+- `contextManagement?:optional BetaContextManagementConfig`
 
-
+  Context management configuration.
 
-model: Model
+  This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-The model that will complete your prompt.
+- `mcpServers?:optional list<BetaRequestMCPServerURLDefinition>`
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+  MCP servers to be utilized in this request
 
-cacheControl?:optional [BetaCacheControlEphemeral](api/beta/messages.md)
+- `outputConfig?:optional BetaOutputConfig`
 
-Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
+  Configuration options for the model's output, such as the output format.
 
-
+- `speed?:optional Speed`
 
-contextManagement?:optional [BetaContextManagementConfig](api/beta/messages.md)
+  Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Context management configuration.
+- `system?:optional System`
 
-This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
+  System prompt.
 
-mcpServers?:optional list<[BetaRequestMCPServerURLDefinition](api/beta/messages.md)>
+  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
-MCP servers to be utilized in this request
+- `thinking?:optional BetaThinkingConfigParam`
 
-outputConfig?:optional [BetaOutputConfig](api/beta/messages.md)
+  Configuration for enabling Claude's extended thinking.
 
-Configuration options for the model's output, such as the output format.
+  When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-speed?:optional [Speed](api/beta/messages/count_tokens.md)
+  See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+- `toolChoice?:optional BetaToolChoice`
 
-
+  How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-system?:optional [System](api/beta/messages/count_tokens.md)
+- `tools?:optional list<Tool>`
 
-System prompt.
+  Definitions of tools that the model may use.
 
-A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
+  If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-
+  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
 
-thinking?:optional [BetaThinkingConfigParam](api/beta/messages.md)
+  Each tool definition includes:
 
-Configuration for enabling Claude's extended thinking.
+  * `name`: Name of the tool.
+  * `description`: Optional, but strongly-recommended description of the tool.
+  * `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
 
-When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
+  For example, if you defined `tools` as:
 
-See [extended thinking](build-with-claude/extended-thinking.md) for details.
-
-toolChoice?:optional [BetaToolChoice](api/beta/messages.md)
-
-How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
-
-
-
-tools?:optional list<Tool>
-
-Definitions of tools that the model may use.
-
-If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
-
-There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
-
-Each tool definition includes:
-
-- `name`: Name of the tool.
-- `description`: Optional, but strongly-recommended description of the tool.
-- `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
-
-For example, if you defined `tools` as:
-
-```shiki
-[
-  {
-    "name": "get_stock_price",
-    "description": "Get the current stock price for a given ticker symbol.",
-    "input_schema": {
-      "type": "object",
-      "properties": {
-        "ticker": {
-          "type": "string",
-          "description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
-        }
-      },
-      "required": ["ticker"]
+  ```json
+  [
+    {
+      "name": "get_stock_price",
+      "description": "Get the current stock price for a given ticker symbol.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
+          }
+        },
+        "required": ["ticker"]
+      }
     }
-  }
-]
-```
+  ]
+  ```
 
-
+  And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
 
-And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
+  ```json
+  [
+    {
+      "type": "tool_use",
+      "id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+      "name": "get_stock_price",
+      "input": { "ticker": "^GSPC" }
+    }
+  ]
+  ```
 
-```shiki
-[
-  {
-    "type": "tool_use",
-    "id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
-    "name": "get_stock_price",
-    "input": { "ticker": "^GSPC" }
-  }
-]
-```
+  You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
 
-
+  ```json
+  [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+      "content": "259.75 USD"
+    }
+  ]
+  ```
 
-You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
+  Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-```shiki
-[
-  {
-    "type": "tool_result",
-    "tool_use_id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
-    "content": "259.75 USD"
-  }
-]
-```
+  See our [guide](agents-and-tools/tool-use/overview.md) for more details.
 
-
+- `betas?:optional list<AnthropicBeta>`
 
-Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
+  Optional header to specify the beta version(s) you want to use.
 
-See our [guide](agents-and-tools/tool-use/overview.md) for more details.
+- `userProfileID?:optional string`
 
-betas?:optional list<AnthropicBeta>
+  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
-Optional header to specify the beta version(s) you want to use.
+- `outputFormat?:optional BetaJSONOutputFormat`
 
-userProfileID?:optional string
+  **Deprecated**
 
-The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+  Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
 
-
+  A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
-outputFormat?:optional [BetaJSONOutputFormat](api/beta/messages.md)⁠Deprecated
+## Returns
 
-Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+- `BetaMessageTokensCount`
 
-A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
+  - `?BetaCountTokensContextManagementResponse contextManagement`
 
-##### ReturnsExpand Collapse
+    Information about context management applied to the message.
 
-
+  - `int inputTokens`
 
-[BetaMessageTokensCount](api/beta/messages.md)
+    The total number of tokens across the provided list of messages, system prompt, and tools.
 
-?[BetaCountTokensContextManagementResponse](api/beta/messages.md) contextManagement
+## Example
 
-Information about context management applied to the message.
-
-int inputTokens
-
-The total number of tokens across the provided list of messages, system prompt, and tools.
-
-Count tokens in a Message
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -251,8 +211,15 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaMessageTokensCount = $client->beta->messages->countTokens(
-  messages: [['content' => 'Hello, world', 'role' => 'user']],
-  model: 'claude-opus-4-6',
+  messages: [
+    [
+      'content' => 'Hello, world',
+      'role' => 'user',
+      'clearAt' => 'next_user_message',
+      'outputConfig' => ['effort' => 'low'],
+    ],
+  ],
+  model: Model::CLAUDE_OPUS_5,
   cacheControl: ['type' => 'ephemeral', 'ttl' => '5m'],
   contextManagement: [
     'edits' => [
@@ -289,7 +256,7 @@ $betaMessageTokensCount = $client->beta->messages->countTokens(
       'cacheControl' => ['type' => 'ephemeral', 'ttl' => '5m'],
       'citations' => [
         [
-          'citedText' => 'cited_text',
+          'citedText' => 'The grass is green. The sky is blue.',
           'documentIndex' => 0,
           'documentTitle' => 'x',
           'endCharIndex' => 0,
@@ -299,7 +266,13 @@ $betaMessageTokensCount = $client->beta->messages->countTokens(
       ],
     ],
   ],
-  thinking: ['type' => 'adaptive', 'display' => 'summarized'],
+  thinking: [
+    'type' => 'adaptive',
+    'blockBinding' => [
+      'prefixMismatchBehavior' => BetaThinkingPrefixMismatchBehavior::ERROR
+    ],
+    'display' => 'summarized',
+  ],
   toolChoice: ['type' => 'auto', 'disableParallelToolUse' => true],
   tools: [
     [
@@ -319,33 +292,16 @@ $betaMessageTokensCount = $client->beta->messages->countTokens(
       'type' => 'custom',
     ],
   ],
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
   userProfileID: 'anthropic-user-profile-id',
 );
 
 var_dump($betaMessageTokensCount);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "context_management": {
-    "original_input_tokens": 0
-  },
-  "input_tokens": 2095
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "context_management": {
     "original_input_tokens": 0

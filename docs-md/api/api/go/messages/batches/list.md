@@ -1,229 +1,171 @@
 # List Message Batches
 
-Copy page
+`client.Messages.Batches.List(ctx, query) (*Page[MessageBatch], error)`
 
-
-
-Go
-
-# List Message Batches
-
-client.Messages.Batches.List(ctx, query) (\*Page[[MessageBatch](api/messages/batches.md)], error)
-
-GET/v1/messages/batches
+**GET** `/v1/messages/batches`
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
 Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `query MessageBatchListParams`
 
-query MessageBatchListParams
+  - `AfterID param.Field[string] Optional`
 
-AfterID param.Field[string]Optional
+    ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+  - `BeforeID param.Field[string] Optional`
 
-BeforeID param.Field[string]Optional
+    ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+  - `Limit param.Field[int64] Optional`
 
-
+    Number of items to return per page.
 
-Limit param.Field[int64]Optional
+    Defaults to `20`. Ranges from `1` to `1000`.
 
-Number of items to return per page.
+    maximum: 1000, minimum: 1
 
-Defaults to `20`. Ranges from `1` to `1000`.
+## Returns
 
-maximum1000
+- `type MessageBatch struct{…}`
 
-minimum1
+  - `ID string`
 
-##### ReturnsExpand Collapse
+    Unique object identifier.
 
-
+    The format and length of IDs may change over time.
 
-type MessageBatch struct{…}
+  - `ArchivedAt Time`
 
-
+    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-ID string
+    format: date-time
 
-Unique object identifier.
+  - `CancelInitiatedAt Time`
 
-The format and length of IDs may change over time.
+    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-ArchivedAt Time
+    format: date-time
 
-RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+  - `CreatedAt Time`
 
-CancelInitiatedAt Time
+    RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+    format: date-time
 
-CreatedAt Time
+  - `EndedAt Time`
 
-RFC 3339 datetime string representing the time at which the Message Batch was created.
+    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
-
+    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
-EndedAt Time
+    format: date-time
 
-RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+  - `ExpiresAt Time`
 
-Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-formatdate-time
+    format: date-time
 
-ExpiresAt Time
+  - `ProcessingStatus MessageBatchProcessingStatus`
 
-RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+    Processing status of the Message Batch.
 
-
+    - `const MessageBatchProcessingStatusInProgress MessageBatchProcessingStatus = "in_progress"`
 
-ProcessingStatus MessageBatchProcessingStatus
+    - `const MessageBatchProcessingStatusCanceling MessageBatchProcessingStatus = "canceling"`
 
-Processing status of the Message Batch.
+    - `const MessageBatchProcessingStatusEnded MessageBatchProcessingStatus = "ended"`
 
-One of the following:
+  - `RequestCounts MessageBatchRequestCounts`
 
-const MessageBatchProcessingStatusInProgress MessageBatchProcessingStatus = "in\_progress"
+    Tallies requests within the Message Batch, categorized by their status.
 
-const MessageBatchProcessingStatusCanceling MessageBatchProcessingStatus = "canceling"
+    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-const MessageBatchProcessingStatusEnded MessageBatchProcessingStatus = "ended"
+    - `Canceled int64`
 
-
+      Number of requests in the Message Batch that have been canceled.
 
-RequestCounts [MessageBatchRequestCounts](api/messages/batches.md)
+      This is zero until processing of the entire Message Batch has ended.
 
-Tallies requests within the Message Batch, categorized by their status.
+      default: 0
 
-Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+    - `Errored int64`
 
-
+      Number of requests in the Message Batch that encountered an error.
 
-Canceled int64
+      This is zero until processing of the entire Message Batch has ended.
 
-Number of requests in the Message Batch that have been canceled.
+      default: 0
 
-This is zero until processing of the entire Message Batch has ended.
+    - `Expired int64`
 
-
+      Number of requests in the Message Batch that have expired.
 
-Errored int64
+      This is zero until processing of the entire Message Batch has ended.
 
-Number of requests in the Message Batch that encountered an error.
+      default: 0
 
-This is zero until processing of the entire Message Batch has ended.
+    - `Processing int64`
 
-
+      Number of requests in the Message Batch that are processing.
 
-Expired int64
+      default: 0
 
-Number of requests in the Message Batch that have expired.
+    - `Succeeded int64`
 
-This is zero until processing of the entire Message Batch has ended.
+      Number of requests in the Message Batch that have completed successfully.
 
-Processing int64
+      This is zero until processing of the entire Message Batch has ended.
 
-Number of requests in the Message Batch that are processing.
+      default: 0
 
-
+  - `ResultsURL string`
 
-Succeeded int64
+    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
-Number of requests in the Message Batch that have completed successfully.
+    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-This is zero until processing of the entire Message Batch has ended.
+  - `Type MessageBatch`
 
-
+    Object type.
 
-ResultsURL string
+    For Message Batches, this is always `"message_batch"`.
 
-URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
+    default: message_batch
 
-Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+## Example
 
-
-
-Type MessageBatch
-
-Object type.
-
-For Message Batches, this is always `"message_batch"`.
-
-List Message Batches
-
-Go
-
-```shiki
+```go
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  page, err := client.Messages.Batches.List(context.TODO(), anthropic.MessageBatchListParams{
-
-  })
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", page)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	page, err := client.Messages.Batches.List(context.TODO(), anthropic.MessageBatchListParams{})
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", page)
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-      "archived_at": "2024-08-20T18:37:24.100435Z",
-      "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
-      "created_at": "2024-08-20T18:37:24.100435Z",
-      "ended_at": "2024-08-20T18:37:24.100435Z",
-      "expires_at": "2024-08-20T18:37:24.100435Z",
-      "processing_status": "in_progress",
-      "request_counts": {
-        "canceled": 10,
-        "errored": 30,
-        "expired": 10,
-        "processing": 100,
-        "succeeded": 50
-      },
-      "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
-      "type": "message_batch"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

@@ -1,116 +1,78 @@
 # Upload File
 
-Copy page
-
-
-
-cURL
-
-# Upload File
-
-POST/v1/files
+**POST** `/v1/files`
 
 Upload File
 
-##### Body (form-data)
+## Body parameters (form-data)
 
-
+- `file: string`
 
-file: string
+  The file to upload
 
-The file to upload
+  format: binary
 
-formatbinary
+- `expires_in_seconds: optional number`
 
-
+  Seconds from upload until the file expires and its bytes become permanently unavailable. Must be between 3600 (one hour) and 7776000 (ninety days).
 
-expires\_in\_seconds: optional number
+  minimum: 3600, maximum: 7776000
 
-Seconds from upload until the file expires and its bytes become permanently unavailable. Must be between 3600 (one hour) and 7776000 (ninety days).
+## Returns
 
-minimum3600
+- `FileMetadata object`
 
-maximum7776000
+  - `id: string`
 
-##### Returns
+    Unique object identifier.
 
-
+    The format and length of IDs may change over time.
 
-FileMetadata object{ id, created\_at, filename, 5 more }
+  - `created_at: string`
 
-
+    RFC 3339 datetime string representing when the file was created.
 
-id: string
+    format: date-time
 
-Unique object identifier.
+  - `filename: string`
 
-The format and length of IDs may change over time.
+    Original filename of the uploaded file.
 
-
+    maxLength: 500, minLength: 1
 
-created\_at: string
+  - `mime_type: string`
 
-RFC 3339 datetime string representing when the file was created.
+    MIME type of the file.
 
-formatdate-time
+    maxLength: 255, minLength: 1
 
-
+  - `size_bytes: number`
 
-filename: string
+    Size of the file in bytes.
 
-Original filename of the uploaded file.
+    minimum: 0
 
-maxLength500
+  - `type: "file"`
 
-minLength1
+    Object type.
 
-
+    For files, this is always `"file"`.
 
-mime\_type: string
+  - `downloadable: optional boolean`
 
-MIME type of the file.
+    Whether the file can be downloaded.
 
-maxLength255
+    default: false
 
-minLength1
+  - `expires_at: optional string or null`
 
-
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
 
-size\_bytes: number
+    format: date-time
 
-Size of the file in bytes.
+## Example
 
-minimum0
-
-
-
-type: "file"
-
-Object type.
-
-For files, this is always `"file"`.
-
-
-
-downloadable: optional boolean
-
-Whether the file can be downloaded.
-
-defaultfalse
-
-
-
-expires\_at: optional string or null
-
-RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
-
-formatdate-time
-
-Upload File
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/files \
     -H 'Content-Type: multipart/form-data' \
     -H 'anthropic-version: 2023-06-01' \
@@ -118,30 +80,9 @@ curl https://api.anthropic.com/v1/files \
     -F 'file=@/path/to/file'
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "created_at": "2025-04-15T18:37:24.100435Z",
-  "filename": "document.pdf",
-  "mime_type": "application/pdf",
-  "size_bytes": 102400,
-  "type": "file",
-  "downloadable": false,
-  "expires_at": "2025-05-15T18:37:24.100435Z"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "file_011CNha8iCJcU1wXNR6q4V8w",
   "created_at": "2025-04-15T18:37:24.100435Z",

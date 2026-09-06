@@ -1,142 +1,160 @@
 # Create Vault
 
-Copy page
+`beta.vaults.create(**kwargs) -> BetaManagedAgentsVault`
 
-
-
-Ruby
-
-# Create Vault
-
-beta.vaults.create(\*\*kwargs) -> [BetaManagedAgentsVault](api/beta/vaults.md) { id, archived\_at, created\_at, 4 more }
-
-POST/v1/vaults
+**POST** `/v1/vaults`
 
 Create Vault
 
-##### ParametersExpand Collapse
+## Parameters
 
-display\_name: String
+- `display_name: String`
 
-Human-readable name for the vault. 1-255 characters.
+  Human-readable name for the vault. 1-255 characters.
 
-metadata: Hash[Symbol, String]
+  minLength: 1, maxLength: 255
 
-Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+- `metadata: Hash[Symbol, String]`
 
-
+  Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-betas: Array[[AnthropicBeta](api/beta.md)]
+- `betas: Array[AnthropicBeta]`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-One of the following:
+  - `String = String`
 
-String = String
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
 
-
+    - `:"message-batches-2024-09-24"`
 
-AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more
+    - `:"prompt-caching-2024-07-31"`
 
-One of the following:
+    - `:"computer-use-2024-10-22"`
 
-:"message-batches-2024-09-24"
+    - `:"computer-use-2025-01-24"`
 
-:"prompt-caching-2024-07-31"
+    - `:"pdfs-2024-09-25"`
 
-:"computer-use-2024-10-22"
+    - `:"token-counting-2024-11-01"`
 
-:"computer-use-2025-01-24"
+    - `:"token-efficient-tools-2025-02-19"`
 
-:"pdfs-2024-09-25"
+    - `:"output-128k-2025-02-19"`
 
-:"token-counting-2024-11-01"
+    - `:"files-api-2025-04-14"`
 
-:"token-efficient-tools-2025-02-19"
+    - `:"mcp-client-2025-04-04"`
 
-:"output-128k-2025-02-19"
+    - `:"mcp-client-2025-11-20"`
 
-:"files-api-2025-04-14"
+    - `:"dev-full-thinking-2025-05-14"`
 
-:"mcp-client-2025-04-04"
+    - `:"interleaved-thinking-2025-05-14"`
 
-:"mcp-client-2025-11-20"
+    - `:"code-execution-2025-05-22"`
 
-:"dev-full-thinking-2025-05-14"
+    - `:"extended-cache-ttl-2025-04-11"`
 
-:"interleaved-thinking-2025-05-14"
+    - `:"context-1m-2025-08-07"`
 
-:"code-execution-2025-05-22"
+    - `:"context-management-2025-06-27"`
 
-:"extended-cache-ttl-2025-04-11"
+    - `:"model-context-window-exceeded-2025-08-26"`
 
-:"context-1m-2025-08-07"
+    - `:"skills-2025-10-02"`
 
-:"context-management-2025-06-27"
+    - `:"fast-mode-2026-02-01"`
 
-:"model-context-window-exceeded-2025-08-26"
+    - `:"output-300k-2026-03-24"`
 
-:"skills-2025-10-02"
+    - `:"user-profiles-2026-03-24"`
 
-:"fast-mode-2026-02-01"
+    - `:"user-profiles-2026-08-18"`
 
-:"output-300k-2026-03-24"
+    - `:"advisor-tool-2026-03-01"`
 
-:"user-profiles-2026-03-24"
+    - `:"managed-agents-2026-04-01"`
 
-:"advisor-tool-2026-03-01"
+    - `:"cache-diagnosis-2026-04-07"`
 
-:"managed-agents-2026-04-01"
+    - `:"dreaming-2026-04-21"`
 
-:"cache-diagnosis-2026-04-07"
+    - `:"thinking-token-count-2026-05-13"`
 
-:"thinking-token-count-2026-05-13"
+    - `:"server-side-fallback-2026-06-01"`
 
-:"server-side-fallback-2026-06-01"
+    - `:"server-side-fallback-2026-07-01"`
 
-:"fallback-credit-2026-06-01"
+    - `:"fallback-credit-2026-06-01"`
 
-:"agent-memory-2026-07-22"
+    - `:"fallback-credit-2026-07-01"`
 
-##### ReturnsExpand Collapse
+    - `:"agent-memory-2026-07-22"`
 
-
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
-class BetaManagedAgentsVault { id, archived\_at, created\_at, 4 more } 
+    - `:"compact-2026-01-12"`
 
-A vault that stores credentials for use by agents during sessions.
+    - `:"computer-use-2025-11-24"`
 
-id: String
+    - `:"mcp-tunnels-2026-06-22"`
 
-Unique identifier for the vault.
+    - `:"structured-outputs-2025-11-13"`
 
-archived\_at: Time
+    - `:"task-budgets-2026-03-13"`
 
-A timestamp in RFC 3339 format
+    - `:"thinking-display-updates-2026-08-18"`
 
-created\_at: Time
+    - `:"ce-user-management-2026-07-13"`
 
-A timestamp in RFC 3339 format
+    - `:"mid-conversation-output-config-2026-07-01"`
 
-display\_name: String
+    - `:"thinking-binding-controls-2026-08-01"`
 
-Human-readable name for the vault.
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
 
-metadata: Hash[Symbol, String]
+## Returns
 
-Arbitrary key-value metadata attached to the vault.
+- `class BetaManagedAgentsVault`
 
-type: :vault
+  A vault that stores credentials for use by agents during sessions.
 
-updated\_at: Time
+  - `id: String`
 
-A timestamp in RFC 3339 format
+    Unique identifier for the vault.
 
-Create Vault
+  - `archived_at: Time`
 
-Ruby
+    A timestamp in RFC 3339 format
 
-```shiki
+    format: date-time
+
+  - `created_at: Time`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `display_name: String`
+
+    Human-readable name for the vault.
+
+  - `metadata: Hash[Symbol, String]`
+
+    Arbitrary key-value metadata attached to the vault.
+
+  - `type: :vault`
+
+  - `updated_at: Time`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+## Example
+
+```ruby
 require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
@@ -146,31 +164,9 @@ beta_managed_agents_vault = anthropic.beta.vaults.create(display_name: "Example 
 puts(beta_managed_agents_vault)
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
-  "archived_at": null,
-  "created_at": "2026-03-15T10:00:00Z",
-  "display_name": "Example vault",
-  "metadata": {
-    "environment": "production"
-  },
-  "type": "vault",
-  "updated_at": "2026-03-15T10:00:00Z"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
   "archived_at": null,

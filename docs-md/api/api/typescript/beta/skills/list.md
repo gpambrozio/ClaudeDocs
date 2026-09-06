@@ -1,241 +1,237 @@
 # List Skills
 
-Copy page
+`client.beta.skills.list(params?, options?): PageCursor<BetaSkill>`
 
-
-
-TypeScript
-
-# List Skills
-
-client.beta.skills.list(SkillListParams { limit, page, source, betas } params?, RequestOptionsoptions?): PageCursor<[SkillListResponse](api/beta/skills.md) { id, created\_at, display\_title, 4 more } >
-
-GET/v1/skills
+**GET** `/v1/skills`
 
 List Skills
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `params: SkillListParams`
 
-params: SkillListParams { limit, page, source, betas } 
+  - `limit?: number`
 
-
+    Query param: Number of results to return per page.
 
-limit?: number
+    Ranges from `1` to `1000`. Defaults to `20`.
 
-Query param: Number of results to return per page.
+    minimum: 1, maximum: 1000
 
-Maximum value is 100. Defaults to 20.
+  - `page?: string | null`
 
-
+    Query param: Pagination token for fetching a specific page of results.
 
-page?: string | null
+    Pass the value from a previous response's `next_page` field to get the next page of results.
 
-Query param: Pagination token for fetching a specific page of results.
+  - `source?: string | null`
 
-Pass the value from a previous response's `next_page` field to get the next page of results.
+    Query param: Filter skills by source.
 
-
+    If provided, only skills from the specified source will be returned:
 
-source?: string | null
+    * `"custom"`: only return user-created skills
+    * `"anthropic"`: only return Anthropic-created skills
 
-Query param: Filter skills by source.
+  - `betas?: Array<AnthropicBeta>`
 
-If provided, only skills from the specified source will be returned:
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-- `"custom"`: only return user-created skills
-- `"anthropic"`: only return Anthropic-created skills
+    - `(string & {})`
 
-
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+      - `"message-batches-2024-09-24"`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+      - `"prompt-caching-2024-07-31"`
 
-One of the following:
+      - `"computer-use-2024-10-22"`
 
-(string & {})
+      - `"computer-use-2025-01-24"`
 
-
+      - `"pdfs-2024-09-25"`
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more
+      - `"token-counting-2024-11-01"`
 
-"message-batches-2024-09-24"
+      - `"token-efficient-tools-2025-02-19"`
 
-"prompt-caching-2024-07-31"
+      - `"output-128k-2025-02-19"`
 
-"computer-use-2024-10-22"
+      - `"files-api-2025-04-14"`
 
-"computer-use-2025-01-24"
+      - `"mcp-client-2025-04-04"`
 
-"pdfs-2024-09-25"
+      - `"mcp-client-2025-11-20"`
 
-"token-counting-2024-11-01"
+      - `"dev-full-thinking-2025-05-14"`
 
-"token-efficient-tools-2025-02-19"
+      - `"interleaved-thinking-2025-05-14"`
 
-"output-128k-2025-02-19"
+      - `"code-execution-2025-05-22"`
 
-"files-api-2025-04-14"
+      - `"extended-cache-ttl-2025-04-11"`
 
-"mcp-client-2025-04-04"
+      - `"context-1m-2025-08-07"`
 
-"mcp-client-2025-11-20"
+      - `"context-management-2025-06-27"`
 
-"dev-full-thinking-2025-05-14"
+      - `"model-context-window-exceeded-2025-08-26"`
 
-"interleaved-thinking-2025-05-14"
+      - `"skills-2025-10-02"`
 
-"code-execution-2025-05-22"
+      - `"fast-mode-2026-02-01"`
 
-"extended-cache-ttl-2025-04-11"
+      - `"output-300k-2026-03-24"`
 
-"context-1m-2025-08-07"
+      - `"user-profiles-2026-03-24"`
 
-"context-management-2025-06-27"
+      - `"user-profiles-2026-08-18"`
 
-"model-context-window-exceeded-2025-08-26"
+      - `"advisor-tool-2026-03-01"`
 
-"skills-2025-10-02"
+      - `"managed-agents-2026-04-01"`
 
-"fast-mode-2026-02-01"
+      - `"cache-diagnosis-2026-04-07"`
 
-"output-300k-2026-03-24"
+      - `"dreaming-2026-04-21"`
 
-"user-profiles-2026-03-24"
+      - `"thinking-token-count-2026-05-13"`
 
-"advisor-tool-2026-03-01"
+      - `"server-side-fallback-2026-06-01"`
 
-"managed-agents-2026-04-01"
+      - `"server-side-fallback-2026-07-01"`
 
-"cache-diagnosis-2026-04-07"
+      - `"fallback-credit-2026-06-01"`
 
-"thinking-token-count-2026-05-13"
+      - `"fallback-credit-2026-07-01"`
 
-"server-side-fallback-2026-06-01"
+      - `"agent-memory-2026-07-22"`
 
-"fallback-credit-2026-06-01"
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
-"agent-memory-2026-07-22"
+      - `"compact-2026-01-12"`
 
-##### ReturnsExpand Collapse
+      - `"computer-use-2025-11-24"`
 
-
+      - `"mcp-tunnels-2026-06-22"`
 
-SkillListResponse { id, created\_at, display\_title, 4 more } 
+      - `"structured-outputs-2025-11-13"`
 
-
+      - `"task-budgets-2026-03-13"`
 
-id: string
+      - `"thinking-display-updates-2026-08-18"`
 
-Unique identifier for the skill.
+      - `"ce-user-management-2026-07-13"`
 
-The format and length of IDs may change over time.
+      - `"mid-conversation-output-config-2026-07-01"`
 
-created\_at: string
+      - `"thinking-binding-controls-2026-08-01"`
 
-ISO 8601 timestamp of when the skill was created.
+      - `"mid-conversation-system-clear-at-2026-08-21"`
 
-
+## Returns
 
-display\_title: string | null
+- `BetaSkill`
 
-Display title for the skill.
+  - `id: string`
 
-This is a human-readable label that is not included in the prompt sent to the model.
+    Unique identifier for the skill.
 
-
+    The format and length of IDs may change over time.
 
-latest\_version: string | null
+  - `created_at: string`
 
-The latest version identifier for the skill.
+    ISO 8601 timestamp of when the skill was created.
 
-This represents the most recent version of the skill that has been created.
+    format: date-time
 
-
+  - `display_name: string`
 
-source: string
+    Human-readable, single-line label for the Skill. Maximum 255 characters.
+    Always set: derived from the SKILL.md frontmatter `name` when omitted at
+    creation. Not unique.
 
-Source of the skill.
+  - `latest_version_id: string`
 
-This may be one of the following values:
+    ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
 
-- `"custom"`: the skill was created by a user
-- `"anthropic"`: the skill was created by Anthropic
+  - `source: BetaSkillSource`
 
-
+    Where the Skill comes from.
 
-type: string
+    Possible values:
 
-Object type.
+    * `"custom"`: authored by the platform user; private to their workspace
+    * `"anthropic"`: published by Anthropic; shared and read-only
+    * `"anthropic_example"`: Anthropic-published sample Skill
+    * `"plugin"`: resolved from an installed plugin
 
-For Skills, this is always `"skill"`.
+    - `type: "custom" | "anthropic" | "anthropic_example" | "plugin"`
 
-updated\_at: string
+      Where the Skill comes from.
 
-ISO 8601 timestamp of when the skill was last updated.
+      Possible values:
 
-List Skills
+      * `"custom"`: authored by the platform user; private to their workspace
+      * `"anthropic"`: published by Anthropic; shared and read-only
+      * `"anthropic_example"`: Anthropic-published sample Skill
+      * `"plugin"`: resolved from an installed plugin
 
-TypeScript
+      - `"custom"`
 
-```shiki
-import Anthropic from '@anthropic-ai/sdk';
+      - `"anthropic"`
+
+      - `"anthropic_example"`
+
+      - `"plugin"`
+
+  - `type: "skill"`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
+
+    default: skill
+
+  - `updated_at: string`
+
+    ISO 8601 timestamp of when the skill was last updated.
+
+    format: date-time
+
+## Example
+
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 // Automatically fetches more pages as needed.
-for await (const skillListResponse of client.beta.skills.list()) {
-  console.log(skillListResponse.id);
+for await (const betaSkill of client.beta.skills.list()) {
+  console.log(betaSkill.id);
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
       "id": "skill_01JAbcdefghijklmnopqrstuvw",
       "created_at": "2024-10-30T23:58:27.427722Z",
-      "display_title": "My Custom Skill",
-      "latest_version": "1759178010641129",
-      "source": "custom",
-      "type": "type",
+      "display_name": "display_name",
+      "latest_version_id": "latest_version_id",
+      "source": {
+        "type": "custom"
+      },
+      "type": "skill",
       "updated_at": "2024-10-30T23:58:27.427722Z"
     }
   ],
-  "has_more": true,
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "skill_01JAbcdefghijklmnopqrstuvw",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "display_title": "My Custom Skill",
-      "latest_version": "1759178010641129",
-      "source": "custom",
-      "type": "type",
-      "updated_at": "2024-10-30T23:58:27.427722Z"
-    }
-  ],
-  "has_more": true,
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+  "next_page": "next_page"
 }
 ```
 

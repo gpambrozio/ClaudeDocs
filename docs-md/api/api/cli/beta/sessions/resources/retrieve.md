@@ -1,200 +1,145 @@
 # Get Session Resource
 
-Copy page
+`$ ant beta:sessions:resources retrieve`
 
-
-
-CLI
-
-# Get Session Resource
-
-$ ant beta:sessions:resources retrieve
-
-GET/v1/sessions/{session\_id}/resources/{resource\_id}
+**GET** `/v1/sessions/{session_id}/resources/{resource_id}`
 
 Get Session Resource
 
-##### ParametersExpand Collapse
+## Parameters
 
---session-id: string
+- `--session-id: string`
 
-Path param: Path parameter session\_id
+  Path param: Path parameter session_id
 
---resource-id: string
+- `--resource-id: string`
 
-Path param: Path parameter resource\_id
+  Path param: Path parameter resource_id
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--beta: optional array of AnthropicBeta`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `BetaSessionResourceGetResponse: BetaManagedAgentsGitHubRepositoryResource or BetaManagedAgentsFileResource or BetaManagedAgentsMemoryStoreResource`
 
-BetaSessionResourceGetResponse: [BetaManagedAgentsGitHubRepositoryResource](api/beta/sessions/resources.md) { id, created\_at, mount\_path, 4 more }  or [BetaManagedAgentsFileResource](api/beta/sessions/resources.md) { id, created\_at, file\_id, 3 more }  or [BetaManagedAgentsMemoryStoreResource](api/beta/sessions/resources.md) { memory\_store\_id, type, access, 4 more } 
+  The requested session resource.
 
-The requested session resource.
+  - `beta_managed_agents_github_repository_resource: object`
 
-
+    - `id: string`
 
-beta\_managed\_agents\_github\_repository\_resource: object { id, created\_at, mount\_path, 4 more } 
+    - `created_at: string`
 
-id: string
+      A timestamp in RFC 3339 format
 
-created\_at: string
+      format: date-time
 
-A timestamp in RFC 3339 format
+    - `mount_path: string`
 
-mount\_path: string
+    - `type: "github_repository"`
 
-
+    - `updated_at: string`
 
-type: "github\_repository"
+      A timestamp in RFC 3339 format
 
-"github\_repository"
+      format: date-time
 
-updated\_at: string
+    - `url: string`
 
-A timestamp in RFC 3339 format
+    - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
 
-url: string
+      - `beta_managed_agents_branch_checkout: object`
 
-
+        - `name: string`
 
-checkout: optional [BetaManagedAgentsBranchCheckout](api/beta/sessions.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta/sessions.md) { sha, type } 
+          Branch name to check out.
 
-
+          minLength: 1, maxLength: 255
 
-beta\_managed\_agents\_branch\_checkout: object { name, type } 
+        - `type: "branch"`
 
-name: string
+      - `beta_managed_agents_commit_checkout: object`
 
-Branch name to check out.
+        - `sha: string`
 
-
+          Full commit SHA to check out.
 
-type: "branch"
+          minLength: 7, maxLength: 64
 
-"branch"
+        - `type: "commit"`
 
-
+  - `beta_managed_agents_file_resource: object`
 
-beta\_managed\_agents\_commit\_checkout: object { sha, type } 
+    - `id: string`
 
-sha: string
+    - `created_at: string`
 
-Full commit SHA to check out.
+      A timestamp in RFC 3339 format
 
-
+      format: date-time
 
-type: "commit"
+    - `file_id: string`
 
-"commit"
+    - `mount_path: string`
 
-
+    - `type: "file"`
 
-beta\_managed\_agents\_file\_resource: object { id, created\_at, file\_id, 3 more } 
+    - `updated_at: string`
 
-id: string
+      A timestamp in RFC 3339 format
 
-created\_at: string
+      format: date-time
 
-A timestamp in RFC 3339 format
+  - `beta_managed_agents_memory_store_resource: object`
 
-file\_id: string
+    A memory store attached to an agent session.
 
-mount\_path: string
+    - `memory_store_id: string`
 
-
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-type: "file"
+    - `type: "memory_store"`
 
-"file"
+    - `access: optional "read_write" or "read_only"`
 
-updated\_at: string
+      Access mode for an attached memory store.
 
-A timestamp in RFC 3339 format
+      - `"read_write"`
 
-
+      - `"read_only"`
 
-beta\_managed\_agents\_memory\_store\_resource: object { memory\_store\_id, type, access, 4 more } 
+    - `description: optional string`
 
-A memory store attached to an agent session.
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-memory\_store\_id: string
+    - `instructions: optional string`
 
-The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-
+      maxLength: 4096
 
-type: "memory\_store"
+    - `mount_path: optional string`
 
-"memory\_store"
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-
+    - `name: optional string`
 
-access: optional "read\_write" or "read\_only"
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
-Access mode for an attached memory store.
+## Example
 
-"read\_write"
-
-"read\_only"
-
-description: optional string
-
-Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
-
-instructions: optional string
-
-Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
-
-mount\_path: optional string
-
-Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
-
-name: optional string
-
-Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
-
-Get Session Resource
-
-CLI
-
-```shiki
+```bash
 ant beta:sessions:resources retrieve \
   --api-key my-anthropic-api-key \
   --session-id sesn_011CZkZAtmR3yMPDzynEDxu7 \
   --resource-id sesrsc_011CZkZBJq5dWxk9fVLNcPht
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
-  "created_at": "2026-03-15T10:00:00Z",
-  "mount_path": "/workspace/example-repo",
-  "type": "github_repository",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "url": "https://github.com/example-org/example-repo",
-  "checkout": {
-    "name": "main",
-    "type": "branch"
-  }
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
   "created_at": "2026-03-15T10:00:00Z",

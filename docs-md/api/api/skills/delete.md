@@ -1,80 +1,47 @@
 # Delete Skill
 
-Copy page
-
-
-
-cURL
-
-# Delete Skill
-
-DELETE/v1/skills/{skill\_id}
+**DELETE** `/v1/skills/{skill_id}`
 
 Delete Skill
 
-##### Path parameters
+## Path parameters
 
-
+- `skill_id: string`
 
-skill\_id: string
+  Unique identifier for the skill.
 
-Unique identifier for the skill.
+  The format and length of IDs may change over time.
 
-The format and length of IDs may change over time.
+## Returns
 
-##### Returns
+- `DeletedSkill object`
 
-
+  - `id: string`
 
-DeletedSkill object{ id, type }
+    Unique identifier for the skill.
 
-
+    The format and length of IDs may change over time.
 
-id: string
+  - `type: "skill_deleted"`
 
-Unique identifier for the skill.
+    Deleted object type.
 
-The format and length of IDs may change over time.
+    For Skills, this is always `"skill_deleted"`.
 
-
+    default: skill_deleted
 
-type: "skill\_deleted"
+## Example
 
-Deleted object type.
-
-For Skills, this is always `"skill_deleted"`.
-
-defaultskill\_deleted
-
-Delete Skill
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/skills/$SKILL_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "skill_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "skill_01JAbcdefghijklmnopqrstuvw",
   "type": "skill_deleted"

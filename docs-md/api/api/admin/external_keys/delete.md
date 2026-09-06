@@ -1,68 +1,41 @@
 # Delete External Key
 
-Copy page
-
-
-
-# Delete External Key
-
-DELETE/v1/organizations/external\_keys/{external\_key\_id}
+**DELETE** `/v1/organizations/external_keys/{external_key_id}`
 
 Delete an external key config.
 
 The request is rejected if any workspace still references this config.
 
-##### Path parameters
+## Path parameters
 
-
+- `external_key_id: string`
 
-external\_key\_id: string
+  ID of the External Key.
 
-ID of the External Key.
+  maxLength: 2048
 
-maxLength2048
+## Returns
 
-##### Returns
+- `id: string`
 
-id: string
+  ID of the deleted External Key.
 
-ID of the deleted External Key.
+- `type: "external_key_deleted"`
 
-
+  default: external_key_deleted
 
-type: "external\_key\_deleted"
+## Example
 
-defaultexternal\_key\_deleted
-
-Delete External Key
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "ekey_01AbCdEfGhIjKlMnOpQrStUv",
-  "type": "external_key_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "ekey_01AbCdEfGhIjKlMnOpQrStUv",
   "type": "external_key_deleted"

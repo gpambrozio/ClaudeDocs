@@ -1,27 +1,32 @@
 # Track todos
 
-On the models listed under [Model availability](#model-availability), Claude tracks multi-step work without a written todo list, and Claude Code leaves the [task-tracking tools](tools-reference.md) out of sessions by default. You don’t need anything on this page for Claude to work through multi-step tasks on those models.
-In a session that has the task-tracking tools, Claude keeps a written todo list, updating each item’s status as it works. You see each change in the message stream as a structured tool call. Opt a session in only when your application reads those tool calls, whether to log task activity or to render its own progress display.
+> Track todos in Agent SDK sessions and render Claude's progress in your application from structured tool calls
 
-## [​](#model-availability) Model availability
+On the models listed under [Model availability](#model-availability), Claude tracks multi-step work without a written todo list, and Claude Code leaves the [task-tracking tools](tools-reference.md) out of sessions by default. You don't need anything on this page for Claude to work through multi-step tasks on those models.
 
-On TypeScript Agent SDK 0.3.233 and later, or Python Agent SDK 0.2.139 and later, the following restriction applies.The following tools aren’t available on Opus 4.8, Sonnet 5, Fable 5, Mythos 5, or later versions of those families unless you opt in:
+In a session that has the task-tracking tools, Claude keeps a written todo list, updating each item's status as it works. You see each change in the message stream as a structured tool call. Opt a session in only when your application reads those tool calls, whether to log task activity or to render its own progress display.
 
-- `TodoWrite`
-- `TaskCreate`
-- `TaskGet`
-- `TaskUpdate`
-- `TaskList`
+## Model availability
+
+On TypeScript Agent SDK 0.3.233 and later, or Python Agent SDK 0.2.139 and later, the following restriction applies.
+
+The following tools aren't available on Opus 4.8, Sonnet 5, Fable 5, Mythos 5, or later versions of those families unless you opt in:
+
+* `TodoWrite`
+* `TaskCreate`
+* `TaskGet`
+* `TaskUpdate`
+* `TaskList`
 
 On other models, Claude Code provides the Task tools by default and `TodoWrite` only when you set `CLAUDE_CODE_ENABLE_TASKS=0`.
 
 On the listed models, unless you opt a session in, you see no `tool_use` blocks for the tools in the message stream. The Agent SDK applies these defaults through the Claude Code binary that it bundles. If you point `pathToClaudeCodeExecutable` (TypeScript) or `cli_path` (Python) at your own Claude Code install, you get whichever tools that install provides, under its own defaults. To see the exact set in a running session, [check which tools are available](tools-reference.md). To opt a session in, do one of the following:
 
-- Name one of the tools in the [`allowedTools`](agent-sdk/permissions.md) (TypeScript) or `allowed_tools` (Python) option
-- List the tools in the `tools` option, which restricts the session’s built-in tools to the ones it names. Include the tools you want alongside the other built-in tools you use
-- Set `CLAUDE_CODE_ENABLE_TODO_TOOLS=1` in the `env` option, as the examples on this page do. In TypeScript, `env` replaces the subprocess environment, so spread `...process.env` to keep inherited variables. In Python, `env` is merged on top of the inherited environment
+* Name one of the tools in the [`allowedTools`](agent-sdk/permissions.md) (TypeScript) or `allowed_tools` (Python) option
+* List the tools in the `tools` option, which restricts the session's built-in tools to the ones it names. Include the tools you want alongside the other built-in tools you use
+* Set `CLAUDE_CODE_ENABLE_TODO_TOOLS=1` in the `env` option, as the examples on this page do. In TypeScript, `env` replaces the subprocess environment, so spread `...process.env` to keep inherited variables. In Python, `env` is merged on top of the inherited environment
 
-## [​](#todo-lifecycle) Todo lifecycle
+## Todo lifecycle
 
 Claude moves each todo through a predictable lifecycle:
 
@@ -30,37 +35,34 @@ Claude moves each todo through a predictable lifecycle:
 3. **Completed**: Claude marks it completed when the task finishes successfully
 4. **Removed**: Claude deletes a todo it no longer needs by setting `status: "deleted"` in a `TaskUpdate` call
 
-## [​](#when-claude-creates-todos) When Claude creates todos
+## When Claude creates todos
 
 In a [session that has the task-tracking tools](#model-availability), Claude creates todos for most multi-step work, such as:
 
-- **Complex multi-step tasks** requiring three or more distinct actions
-- **User-provided task lists** when multiple items are mentioned
-- **Longer operations** that benefit from progress tracking
-- **Explicit requests** when users ask for todo organization
+* **Complex multi-step tasks** requiring three or more distinct actions
+* **User-provided task lists** when multiple items are mentioned
+* **Longer operations** that benefit from progress tracking
+* **Explicit requests** when users ask for todo organization
 
 Claude may skip todos for very short or single-step requests.
 
-## [​](#examples) Examples
+## Examples
 
 Before running these examples, install the Claude Agent SDK by following the [quickstart](agent-sdk/quickstart.md). Every example on this page shares the same permission setup and exit behavior:
 
-- **Permission mode**: the example prompts ask Claude to do real work on a project, so each example sets `permissionMode: "acceptEdits"` (TypeScript) or `permission_mode="acceptEdits"` (Python) to auto-approve the file edits that work produces. See [Permission modes](agent-sdk/permissions.md) for the alternatives.
-- **Turn limit**: each example runs until the agent finishes and yields its final result message. If a session reaches its turn limit first, that result message has the `error_max_turns` subtype. Check `subtype` to detect that ending.
-- **Error handling**: these examples use single-shot `query()` calls. After yielding an `error_max_turns` result, `query()` raises an error that includes `Reached maximum number of turns`. Each example wraps its loop in a try block to exit cleanly when that happens. See [Handle the result](agent-sdk/agent-loop.md) for the result subtypes.
+* **Permission mode**: the example prompts ask Claude to do real work on a project, so each example sets `permissionMode: "acceptEdits"` (TypeScript) or `permission_mode="acceptEdits"` (Python) to auto-approve the file edits that work produces. See [Permission modes](agent-sdk/permissions.md) for the alternatives.
+* **Turn limit**: each example runs until the agent finishes and yields its final result message. If a session reaches its turn limit first, that result message has the `error_max_turns` subtype. Check `subtype` to detect that ending.
+* **Error handling**: these examples use single-shot `query()` calls. After yielding an `error_max_turns` result, `query()` raises an error that includes `Reached maximum number of turns`. Each example wraps its loop in a try block to exit cleanly when that happens. See [Handle the result](agent-sdk/agent-loop.md) for the result subtypes.
 
 The task system messages, [`SDKTaskNotificationMessage`](agent-sdk/typescript.md) (TypeScript) or [`TaskNotificationMessage`](agent-sdk/python.md) (Python) among them, report background tasks such as backgrounded commands and subagents. In the message stream, you see todo activity as `tool_use` blocks in the assistant messages.
 
-### [​](#monitor-todo-changes) Monitor todo changes
+### Monitor todo changes
 
-The following example watches the assistant stream for `TaskCreate` and `TaskUpdate` `tool_use` blocks and prints a `+` line with each new task’s subject and an update line with each status change’s task ID and new status. Use this shape when you want a log of task activity rather than a rendered display. The `+` lines don’t include the assigned IDs, so this log can’t match updates back to their creates. To keep that correlation, capture the IDs as [Display progress in real time](#display-progress-in-real-time) does.
+The following example watches the assistant stream for `TaskCreate` and `TaskUpdate` `tool_use` blocks and prints a `+` line with each new task's subject and an update line with each status change's task ID and new status. Use this shape when you want a log of task activity rather than a rendered display. The `+` lines don't include the assigned IDs, so this log can't match updates back to their creates. To keep that correlation, capture the IDs as [Display progress in real time](#display-progress-in-real-time) does.
+
 The streamed `tool_use` input is the raw shape the model emitted. Claude Code repairs some close-but-incorrect key names before execution, mapping `id` or `task_id` to `taskId` and `active_form` to `activeForm`, but that repair is not reflected in the stream. Read `TaskUpdate` input fields defensively, as both examples on this page do, rather than assuming the canonical name is always present.
 
-TypeScript
-
-Python
-
-```shiki
+```typescript TypeScript
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
 try {
@@ -93,7 +95,7 @@ try {
 }
 ```
 
-```shiki
+```python Python
 import asyncio
 
 from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, ToolUseBlock
@@ -127,16 +129,13 @@ async def main():
 asyncio.run(main())
 ```
 
-### [​](#display-progress-in-real-time) Display progress in real time
+### Display progress in real time
 
-The following example watches the assistant stream for `TaskCreate` and `TaskUpdate` `tool_use` blocks and keeps a map of tasks keyed by task ID in a `TaskTracker` class, rerendering a progress summary on every change. The summary counts completed and in-progress tasks and shows each active item’s `activeForm` label in place of its `subject`. Use this shape when your application maintains a progress display instead of logging each event.
-The assigned task ID isn’t in the `TaskCreate` input. Claude Code delivers each tool’s structured output on the user message that carries its `tool_result` block, in the `tool_use_result` field. For `TaskCreate`, that object is documented for TypeScript as `TaskCreateOutput` under [Tool Output Types](agent-sdk/typescript.md), and in Python the field is a plain dict of the same shape. The tracker pairs each `tool_result` block with its `tool_use` call by `tool_use_id` and reads `task.id` from the paired message’s `tool_use_result`. Claude can read the list back with `TaskList` and one task’s full details with `TaskGet`.
+The following example watches the assistant stream for `TaskCreate` and `TaskUpdate` `tool_use` blocks and keeps a map of tasks keyed by task ID in a `TaskTracker` class, rerendering a progress summary on every change. The summary counts completed and in-progress tasks and shows each active item's `activeForm` label in place of its `subject`. Use this shape when your application maintains a progress display instead of logging each event.
 
-TypeScript
+The assigned task ID isn't in the `TaskCreate` input. Claude Code delivers each tool's structured output on the user message that carries its `tool_result` block, in the `tool_use_result` field. For `TaskCreate`, that object is documented for TypeScript as `TaskCreateOutput` under [Tool Output Types](agent-sdk/typescript.md), and in Python the field is a plain dict of the same shape. The tracker pairs each `tool_result` block with its `tool_use` call by `tool_use_id` and reads `task.id` from the paired message's `tool_use_result`. Claude can read the list back with `TaskList` and one task's full details with `TaskGet`.
 
-Python
-
-```shiki
+```typescript TypeScript
 import { query } from "@anthropic-ai/claude-agent-sdk";
 
 type Task = { subject: string; activeForm?: string; status: string };
@@ -242,7 +241,7 @@ const tracker = new TaskTracker();
 await tracker.trackQuery("Build a complete authentication system with todos");
 ```
 
-```shiki
+```python Python
 import asyncio
 
 from claude_agent_sdk import (
@@ -356,12 +355,12 @@ async def main():
 asyncio.run(main())
 ```
 
-## [​](#related-documentation) Related documentation
+## Related documentation
 
-- [Agent SDK reference - TypeScript](agent-sdk/typescript.md): the options, types, and tool schemas for the TypeScript SDK, including the Task tool input and output types
-- [Agent SDK reference - Python](agent-sdk/python.md): the options, types, and tool documentation for the Python SDK
-- [Streaming Input](agent-sdk/streaming-vs-single-mode.md): the two input modes, and when to use streaming input instead of the single-shot calls these examples use
-- [Give Claude custom tools](agent-sdk/custom-tools.md): define your own tools with the SDK’s in-process MCP server
+* [Agent SDK reference - TypeScript](agent-sdk/typescript.md): the options, types, and tool schemas for the TypeScript SDK, including the Task tool input and output types
+* [Agent SDK reference - Python](agent-sdk/python.md): the options, types, and tool documentation for the Python SDK
+* [Streaming Input](agent-sdk/streaming-vs-single-mode.md): the two input modes, and when to use streaming input instead of the single-shot calls these examples use
+* [Give Claude custom tools](agent-sdk/custom-tools.md): define your own tools with the SDK's in-process MCP server
 
 ---
 

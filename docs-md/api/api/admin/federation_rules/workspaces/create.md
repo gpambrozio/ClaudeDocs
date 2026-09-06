@@ -1,12 +1,6 @@
 # Add Federation Rule Workspace
 
-Copy page
-
-
-
-# Add Federation Rule Workspace
-
-POST/v1/organizations/federation\_rules/{federation\_rule\_id}/workspaces
+**POST** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces`
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
 
@@ -21,65 +15,57 @@ Archived rules are rejected with 400. OAuth callers may only manage rules
 whose `oauth_scope` is `workspace:developer` or `workspace:inference`;
 other scopes require a Console session.
 
-##### Path parameters
+## Path parameters
 
-federation\_rule\_id: string
+- `federation_rule_id: string`
 
-ID of the federation rule.
+  ID of the federation rule.
 
-##### Headers
+## Headers
 
-
+- `"anthropic-beta": optional array of string`
 
-"anthropic-beta": optional array of string
+  Optional header to specify the beta version(s) you want to use.
 
-Optional header to specify the beta version(s) you want to use.
+  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
+## Body parameters
 
-##### Body
+- `workspace_id: string`
 
-workspace\_id: string
+  Tagged ID of the workspace to enable this rule for.
 
-Tagged ID of the workspace to enable this rule for.
+## Returns
 
-##### Returns
+- `created_at: string`
 
-
+  When this workspace was enabled for the rule.
 
-created\_at: string
+  format: date-time
 
-When this workspace was enabled for the rule.
+- `created_by_actor_id: string or null`
 
-formatdate-time
+  Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
 
-created\_by\_actor\_id: string or null
+- `federation_rule_id: string`
 
-Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
+  Tagged ID of the federation rule.
 
-federation\_rule\_id: string
+- `type: "federation_rule_workspace"`
 
-Tagged ID of the federation rule.
+  default: federation_rule_workspace
 
-
+- `workspace_id: string`
 
-type: "federation\_rule\_workspace"
+  Tagged ID of the workspace this rule is enabled for.
 
-defaultfederation\_rule\_workspace
+- `workspace_name: string or null`
 
-workspace\_id: string
+  Workspace display name. Populated when listing; null in the enable response.
 
-Tagged ID of the workspace this rule is enabled for.
+## Example
 
-workspace\_name: string or null
-
-Workspace display name. Populated when listing; null in the enable response.
-
-Add Federation Rule Workspace
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RULE_ID/workspaces \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -89,28 +75,9 @@ curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RUL
         }'
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "created_at": "2024-10-30T23:58:27.427722Z",
-  "created_by_actor_id": "created_by_actor_id",
-  "federation_rule_id": "federation_rule_id",
-  "type": "federation_rule_workspace",
-  "workspace_id": "workspace_id",
-  "workspace_name": "workspace_name"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "created_at": "2024-10-30T23:58:27.427722Z",
   "created_by_actor_id": "created_by_actor_id",

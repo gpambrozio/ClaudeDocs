@@ -1,216 +1,226 @@
 # Get Session Resource
 
-Copy page
+`ResourceRetrieveResponse Beta.Sessions.Resources.Retrieve(parameters, cancellationToken = default)`
 
-
-
-C#
-
-# Get Session Resource
-
-[ResourceRetrieveResponse](api/beta/sessions/resources.md) Beta.Sessions.Resources.Retrieve(ResourceRetrieveParamsparameters, CancellationTokencancellationToken = default)
-
-GET/v1/sessions/{session\_id}/resources/{resource\_id}
+**GET** `/v1/sessions/{session_id}/resources/{resource_id}`
 
 Get Session Resource
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `ResourceRetrieveParams parameters`
 
-ResourceRetrieveParams parameters
+  - `required string sessionID`
 
-required string sessionID
+    Path param: Path parameter session_id
 
-Path param: Path parameter session\_id
+  - `required string resourceID`
 
-required string resourceID
+    Path param: Path parameter resource_id
 
-Path param: Path parameter resource\_id
+  - `IReadOnlyList<AnthropicBeta> betas`
 
-
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
 
-"message-batches-2024-09-24"MessageBatches2024\_09\_24
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
 
-"prompt-caching-2024-07-31"PromptCaching2024\_07\_31
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
 
-"computer-use-2024-10-22"ComputerUse2024\_10\_22
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
 
-"computer-use-2025-01-24"ComputerUse2025\_01\_24
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
 
-"pdfs-2024-09-25"Pdfs2024\_09\_25
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
 
-"token-counting-2024-11-01"TokenCounting2024\_11\_01
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
 
-"token-efficient-tools-2025-02-19"TokenEfficientTools2025\_02\_19
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
 
-"output-128k-2025-02-19"Output128k2025\_02\_19
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
 
-"files-api-2025-04-14"FilesApi2025\_04\_14
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
 
-"mcp-client-2025-04-04"McpClient2025\_04\_04
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
 
-"mcp-client-2025-11-20"McpClient2025\_11\_20
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
 
-"dev-full-thinking-2025-05-14"DevFullThinking2025\_05\_14
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
 
-"interleaved-thinking-2025-05-14"InterleavedThinking2025\_05\_14
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
 
-"code-execution-2025-05-22"CodeExecution2025\_05\_22
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
 
-"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025\_04\_11
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
 
-"context-1m-2025-08-07"Context1m2025\_08\_07
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-"context-management-2025-06-27"ContextManagement2025\_06\_27
+    - `Skills2025_10_02("skills-2025-10-02")`
 
-"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025\_08\_26
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
 
-"skills-2025-10-02"Skills2025\_10\_02
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
 
-"fast-mode-2026-02-01"FastMode2026\_02\_01
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
 
-"output-300k-2026-03-24"Output300k2026\_03\_24
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
-"user-profiles-2026-03-24"UserProfiles2026\_03\_24
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
-"advisor-tool-2026-03-01"AdvisorTool2026\_03\_01
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
 
-"managed-agents-2026-04-01"ManagedAgents2026\_04\_01
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
 
-"cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
 
-"thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
 
-"server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
 
-"fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
 
-"agent-memory-2026-07-22"AgentMemory2026\_07\_22
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
 
-##### ReturnsExpand Collapse
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
 
-
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
 
-class ResourceRetrieveResponse: A class that can be one of several variants.union 
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-The requested session resource.
+    - `Compact2026_01_12("compact-2026-01-12")`
 
-
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
 
-class BetaManagedAgentsGitHubRepositoryResource:
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
 
-required string ID
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
 
-required DateTimeOffset CreatedAt
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
 
-A timestamp in RFC 3339 format
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
 
-required string MountPath
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
 
-required Type Type
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-required DateTimeOffset UpdatedAt
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
 
-A timestamp in RFC 3339 format
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
-required string Url
+## Returns
 
-
+- `class ResourceRetrieveResponse: union`
 
-Checkout? Checkout
+  The requested session resource.
 
-One of the following:
+  - `class BetaManagedAgentsGitHubRepositoryResource:`
 
-
+    - `required string ID`
 
-class BetaManagedAgentsBranchCheckout:
+    - `required DateTimeOffset CreatedAt`
 
-required string Name
+      A timestamp in RFC 3339 format
 
-Branch name to check out.
+      format: date-time
 
-required Type Type
+    - `required string MountPath`
 
-
+    - `required Type Type`
 
-class BetaManagedAgentsCommitCheckout:
+    - `required DateTimeOffset UpdatedAt`
 
-required string Sha
+      A timestamp in RFC 3339 format
 
-Full commit SHA to check out.
+      format: date-time
 
-required Type Type
+    - `required string Url`
 
-
+    - `Checkout? Checkout`
 
-class BetaManagedAgentsFileResource:
+      - `class BetaManagedAgentsBranchCheckout:`
 
-required string ID
+        - `required string Name`
 
-required DateTimeOffset CreatedAt
+          Branch name to check out.
 
-A timestamp in RFC 3339 format
+          minLength: 1, maxLength: 255
 
-required string FileID
+        - `required Type Type`
 
-required string MountPath
+      - `class BetaManagedAgentsCommitCheckout:`
 
-required Type Type
+        - `required string Sha`
 
-required DateTimeOffset UpdatedAt
+          Full commit SHA to check out.
 
-A timestamp in RFC 3339 format
+          minLength: 7, maxLength: 64
 
-
+        - `required Type Type`
 
-class BetaManagedAgentsMemoryStoreResource:
+  - `class BetaManagedAgentsFileResource:`
 
-A memory store attached to an agent session.
+    - `required string ID`
 
-required string MemoryStoreID
+    - `required DateTimeOffset CreatedAt`
 
-The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+      A timestamp in RFC 3339 format
 
-required Type Type
+      format: date-time
 
-
+    - `required string FileID`
 
-Access? Access
+    - `required string MountPath`
 
-Access mode for an attached memory store.
+    - `required Type Type`
 
-One of the following:
+    - `required DateTimeOffset UpdatedAt`
 
-"read\_write"ReadWrite
+      A timestamp in RFC 3339 format
 
-"read\_only"ReadOnly
+      format: date-time
 
-string Description
+  - `class BetaManagedAgentsMemoryStoreResource:`
 
-Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+    A memory store attached to an agent session.
 
-string? Instructions
+    - `required string MemoryStoreID`
 
-Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-string? MountPath
+    - `required Type Type`
 
-Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+    - `Access? Access`
 
-string? Name
+      Access mode for an attached memory store.
 
-Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+      - `ReadWrite("read_write")`
 
-Get Session Resource
+      - `ReadOnly("read_only")`
 
-C#
+    - `string Description`
 
-```shiki
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `string? Instructions`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
+
+    - `string? MountPath`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `string? Name`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
+## Example
+
+```csharp
 ResourceRetrieveParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -222,32 +232,9 @@ var resource = await client.Beta.Sessions.Resources.Retrieve(parameters);
 Console.WriteLine(resource);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
-  "created_at": "2026-03-15T10:00:00Z",
-  "mount_path": "/workspace/example-repo",
-  "type": "github_repository",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "url": "https://github.com/example-org/example-repo",
-  "checkout": {
-    "name": "main",
-    "type": "branch"
-  }
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
   "created_at": "2026-03-15T10:00:00Z",

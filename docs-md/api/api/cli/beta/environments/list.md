@@ -1,274 +1,182 @@
 # List Environments
 
-Copy page
+`$ ant beta:environments list`
 
-
-
-CLI
-
-# List Environments
-
-$ ant beta:environments list
-
-GET/v1/environments
+**GET** `/v1/environments`
 
 List environments with pagination support.
 
-##### ParametersExpand Collapse
+## Parameters
 
---include-archived: optional boolean
+- `--include-archived: optional boolean`
 
-Query param: Include archived environments in the response
+  Query param: Include archived environments in the response
 
---limit: optional number
+- `--limit: optional number`
 
-Query param: Maximum number of environments to return
+  Query param: Maximum number of environments to return
 
---page: optional string
+  maximum: 1000, minimum: 1
 
-Query param: Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
+- `--page: optional string`
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+  Query param: Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
 
-Header param: Optional header to specify the beta version(s) you want to use.
+- `--beta: optional array of AnthropicBeta`
 
-##### ReturnsExpand Collapse
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-
+## Returns
 
-BetaEnvironmentListResponse: object { data, next\_page } 
+- `BetaEnvironmentListResponse: object`
 
-Response when listing environments.
+  Response when listing environments.
 
-This response model uses opaque cursor-based pagination. Use the `page`
-query parameter with the value from `next_page` to fetch the next page.
+  This response model uses opaque cursor-based pagination. Use the `page`
+  query parameter with the value from `next_page` to fetch the next page.
 
-
+  - `data: array of BetaEnvironment`
 
-data: array of [BetaEnvironment](api/beta/environments.md) { id, archived\_at, config, 7 more } 
+    List of environments.
 
-List of environments.
+    - `id: string`
 
-id: string
+      Environment identifier (e.g., 'env_...')
 
-Environment identifier (e.g., 'env\_...')
+    - `archived_at: string`
 
-archived\_at: string
+      RFC 3339 timestamp when environment was archived, or null if not archived
 
-RFC 3339 timestamp when environment was archived, or null if not archived
+    - `config: BetaCloudConfig or BetaSelfHostedConfig`
 
-
+      Environment configuration (either Anthropic Cloud or self-hosted)
 
-config: [BetaCloudConfig](api/beta/environments.md) { networking, packages, type }  or [BetaSelfHostedConfig](api/beta/environments.md) { type } 
+      - `beta_cloud_config: object`
 
-Environment configuration (either Anthropic Cloud or self-hosted)
+        `cloud` environment configuration.
 
-
+        - `networking: BetaUnrestrictedNetwork or BetaLimitedNetwork`
 
-beta\_cloud\_config: object { networking, packages, type } 
+          Network configuration policy.
 
-`cloud` environment configuration.
+          - `beta_unrestricted_network: object`
 
-
+            Unrestricted network access.
 
-networking: [BetaUnrestrictedNetwork](api/beta/environments.md) { type }  or [BetaLimitedNetwork](api/beta/environments.md) { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
+            - `type: "unrestricted"`
 
-Network configuration policy.
+              Network policy type
 
-
+          - `beta_limited_network: object`
 
-beta\_unrestricted\_network: object { type } 
+            Limited network access.
 
-Unrestricted network access.
+            - `allow_mcp_servers: boolean`
 
-type: "unrestricted"
+              Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
 
-Network policy type
+            - `allow_package_managers: boolean`
 
-
+              Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
 
-beta\_limited\_network: object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type } 
+            - `allowed_hosts: array of string`
 
-Limited network access.
+              Specifies domains the container can reach.
 
-allow\_mcp\_servers: boolean
+            - `type: "limited"`
 
-Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
+              Network policy type
 
-allow\_package\_managers: boolean
+        - `packages: object`
 
-Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array.
+          Package manager configuration.
 
-allowed\_hosts: array of string
+          - `apt: array of string`
 
-Specifies domains the container can reach.
+            Ubuntu/Debian packages to install
 
-type: "limited"
+          - `cargo: array of string`
 
-Network policy type
+            Rust packages to install
 
-
+          - `gem: array of string`
 
-packages: object { apt, cargo, gem, 4 more } 
+            Ruby packages to install
 
-Package manager configuration.
+          - `go: array of string`
 
-apt: array of string
+            Go packages to install
 
-Ubuntu/Debian packages to install
+          - `npm: array of string`
 
-cargo: array of string
+            Node.js packages to install
 
-Rust packages to install
+          - `pip: array of string`
 
-gem: array of string
+            Python packages to install
 
-Ruby packages to install
+          - `type: optional "packages"`
 
-go: array of string
+            Package configuration type
 
-Go packages to install
+        - `type: "cloud"`
 
-npm: array of string
+          Environment type
 
-Node.js packages to install
+      - `beta_self_hosted_config: object`
 
-pip: array of string
+        Configuration for self-hosted environments.
 
-Python packages to install
+        - `type: "self_hosted"`
 
-
+          Environment type
 
-type: optional "packages"
+    - `created_at: string`
 
-Package configuration type
+      RFC 3339 timestamp when environment was created
 
-"packages"
+    - `description: string`
 
-type: "cloud"
+      User-provided description for the environment; null when unset
 
-Environment type
+    - `metadata: map[string]`
 
-
+      User-provided metadata key-value pairs
 
-beta\_self\_hosted\_config: object { type } 
+    - `name: string`
 
-Configuration for self-hosted environments.
+      Human-readable name for the environment
 
-type: "self\_hosted"
+    - `type: "environment"`
 
-Environment type
+      The type of object (always 'environment')
 
-created\_at: string
+    - `updated_at: string`
 
-RFC 3339 timestamp when environment was created
+      RFC 3339 timestamp when environment was last updated
 
-description: string
+    - `scope: optional "organization" or "account"`
 
-User-provided description for the environment
+      The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-metadata: map[string]
+      - `"organization"`
 
-User-provided metadata key-value pairs
+      - `"account"`
 
-name: string
+  - `next_page: string`
 
-Human-readable name for the environment
+    Token for fetching the next page of results. If `null`, there are no more results available. Pass this value to the `page` parameter in the next request.
 
-type: "environment"
+## Example
 
-The type of object (always 'environment')
-
-updated\_at: string
-
-RFC 3339 timestamp when environment was last updated
-
-
-
-scope: optional "organization" or "account"
-
-The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
-
-"organization"
-
-"account"
-
-next\_page: string
-
-Token for fetching the next page of results. If `null`, there are no more results available. Pass this value to the `page` parameter in the next request.
-
-List Environments
-
-CLI
-
-```shiki
+```bash
 ant beta:environments list \
   --api-key my-anthropic-api-key
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
-      "archived_at": null,
-      "config": {
-        "networking": {
-          "allow_mcp_servers": false,
-          "allow_package_managers": true,
-          "allowed_hosts": [
-            "api.example.com"
-          ],
-          "type": "limited"
-        },
-        "packages": {
-          "apt": [
-            "string"
-          ],
-          "cargo": [
-            "string"
-          ],
-          "gem": [
-            "string"
-          ],
-          "go": [
-            "string"
-          ],
-          "npm": [
-            "string"
-          ],
-          "pip": [
-            "pandas",
-            "numpy"
-          ],
-          "type": "packages"
-        },
-        "type": "cloud"
-      },
-      "created_at": "2026-03-15T10:00:00Z",
-      "description": "Python environment with data-analysis packages.",
-      "metadata": {},
-      "name": "python-data-analysis",
-      "type": "environment",
-      "updated_at": "2026-03-15T10:00:00Z",
-      "scope": "organization"
-    }
-  ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

@@ -1,242 +1,272 @@
 # Get Messages Usage Report
 
-Copy page
-
-
-
-# Get Messages Usage Report
-
-GET/v1/organizations/usage\_report/messages
+**GET** `/v1/organizations/usage_report/messages`
 
 Get Messages Usage Report
 
-##### Query parameters
+## Query parameters
 
-
+- `starting_at: string`
 
-starting\_at: string
+  Time buckets that start on or after this RFC 3339 timestamp will be returned.
+  Each time bucket will be snapped to the start of the minute/hour/day in UTC.
 
-Time buckets that start on or after this RFC 3339 timestamp will be returned.
-Each time bucket will be snapped to the start of the minute/hour/day in UTC.
+  format: date-time
 
-formatdate-time
+- `account_ids: optional array of string`
 
-account\_ids: optional array of string
+  Restrict usage returned to the specified user account ID(s).
 
-Restrict usage returned to the specified user account ID(s).
+- `api_key_ids: optional array of string`
 
-api\_key\_ids: optional array of string
+  Restrict usage returned to the specified API key ID(s).
 
-Restrict usage returned to the specified API key ID(s).
+- `bucket_width: optional "1d" or "1h" or "1m"`
 
-
+  Time granularity of the response data.
 
-bucket\_width: optional "1d" or "1h" or "1m"
+  default: 1d
 
-Time granularity of the response data.
+  - `"1d"`
 
-default1d
+  - `"1h"`
 
-One of the following:
+  - `"1m"`
 
-"1d"
+- `context_window: optional array of "0-200k" or "200k-1M"`
 
-"1h"
+  Restrict usage returned to the specified context window(s).
 
-"1m"
+  - `"0-200k"`
 
-
+  - `"200k-1M"`
 
-context\_window: optional array of "0-200k" or "200k-1M"
+- `ending_at: optional string`
 
-Restrict usage returned to the specified context window(s).
+  Time buckets that end before this RFC 3339 timestamp will be returned.
 
-One of the following:
+  format: date-time
 
-"0-200k"
+- `group_by: optional array of "account_id" or "api_key_id" or "context_window" or 6 more`
 
-"200k-1M"
+  Group by any subset of the available options. Grouping by `speed` requires the `fast-mode-2026-02-01` beta header.
 
-
+  - `"account_id"`
 
-ending\_at: optional string
+  - `"api_key_id"`
 
-Time buckets that end before this RFC 3339 timestamp will be returned.
+  - `"context_window"`
 
-formatdate-time
+  - `"inference_geo"`
 
-
+  - `"model"`
 
-group\_by: optional array of "account\_id" or "api\_key\_id" or "context\_window" or 6 more
+  - `"service_account_id"`
 
-Group by any subset of the available options. Grouping by `speed` requires the `fast-mode-2026-02-01` beta header.
+  - `"service_tier"`
 
-One of the following:
+  - `"speed"`
 
-"account\_id"
+  - `"workspace_id"`
 
-"api\_key\_id"
+- `inference_geos: optional array of "global" or "not_available" or "us"`
 
-"context\_window"
+  Restrict usage returned to the specified inference geo(s). Use `not_available` for models that do not support specifying `inference_geo`.
 
-"inference\_geo"
+  - `"global"`
 
-"model"
+  - `"not_available"`
 
-"service\_account\_id"
+  - `"us"`
 
-"service\_tier"
+- `limit: optional number`
 
-"speed"
+  Maximum number of time buckets to return in the response.
 
-"workspace\_id"
+  The default and max limits depend on `bucket_width`:
+  • `"1d"`: Default of 7 days, maximum of 31 days
+  • `"1h"`: Default of 24 hours, maximum of 168 hours
+  • `"1m"`: Default of 60 minutes, maximum of 1440 minutes
 
-
+- `models: optional array of string`
 
-inference\_geos: optional array of "global" or "not\_available" or "us"
+  Restrict usage returned to the specified model(s).
 
-Restrict usage returned to the specified inference geo(s). Use `not_available` for models that do not support specifying `inference_geo`.
+- `page: optional string`
 
-One of the following:
+  Optionally set to the `next_page` token from the previous response.
 
-"global"
+- `service_account_ids: optional array of string`
 
-"not\_available"
+  Restrict usage returned to the specified service account ID(s).
 
-"us"
+- `service_tiers: optional array of "batch" or "flex" or "flex_discount" or 3 more`
 
-
+  Restrict usage returned to the specified service tier(s).
 
-limit: optional number
+  - `"batch"`
 
-Maximum number of time buckets to return in the response.
+  - `"flex"`
 
-The default and max limits depend on `bucket_width`:
-• `"1d"`: Default of 7 days, maximum of 31 days
-• `"1h"`: Default of 24 hours, maximum of 168 hours
-• `"1m"`: Default of 60 minutes, maximum of 1440 minutes
+  - `"flex_discount"`
 
-models: optional array of string
+  - `"priority"`
 
-Restrict usage returned to the specified model(s).
+  - `"priority_on_demand"`
 
-page: optional string
+  - `"standard"`
 
-Optionally set to the `next_page` token from the previous response.
+- `speeds: optional array of "fast" or "standard"`
 
-service\_account\_ids: optional array of string
+  Restrict usage returned to the specified speed(s) (Claude Code research preview).
+  Requires the `fast-mode-2026-02-01` beta header.
 
-Restrict usage returned to the specified service account ID(s).
+  - `"fast"`
 
-
+  - `"standard"`
 
-service\_tiers: optional array of "batch" or "flex" or "flex\_discount" or 3 more
+- `workspace_ids: optional array of string`
 
-Restrict usage returned to the specified service tier(s).
+  Restrict usage returned to the specified workspace ID(s).
 
-One of the following:
+## Headers
 
-"batch"
+- `"anthropic-beta": optional array of string`
 
-"flex"
+  Optional header to specify the beta version(s) you want to use.
 
-"flex\_discount"
+  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-"priority"
+## Returns
 
-"priority\_on\_demand"
+- `MessagesUsageReport object`
 
-"standard"
+  - `data: array of object`
 
-
+    List of time buckets for this page, oldest first: one per `bucket_width` interval, including intervals with no usage (their `results` list is empty). A page holds at most `limit` buckets.
 
-speeds: optional array of "fast" or "standard"
+    - `ending_at: string`
 
-Restrict usage returned to the specified speed(s) (Claude Code research preview).
-Requires the `fast-mode-2026-02-01` beta header.
+      End of the time bucket (exclusive) in RFC 3339 format.
 
-One of the following:
+      format: date-time
 
-"fast"
+    - `results: array of object`
 
-"standard"
+      List of usage items for this time bucket.  There may be multiple items if one or more `group_by[]` parameters are specified.
 
-workspace\_ids: optional array of string
+      - `account_id: string or null`
 
-Restrict usage returned to the specified workspace ID(s).
+        ID of the user account that made the request. `null` if not grouping by account or for non-OAuth requests.
 
-##### Headers
+      - `api_key_id: string or null`
 
-
+        ID of the API key used. `null` if not grouping by API key or for usage in the Anthropic Console.
 
-"anthropic-beta": optional array of string
+      - `cache_creation: object`
 
-Optional header to specify the beta version(s) you want to use.
+        The number of input tokens for cache creation.
 
-To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
+        - `ephemeral_1h_input_tokens: number`
 
-##### Returns
+          The number of input tokens used to create the 1 hour cache entry.
 
-
+        - `ephemeral_5m_input_tokens: number`
 
-MessagesUsageReport object{ data, has\_more, next\_page }
+          The number of input tokens used to create the 5 minute cache entry.
 
-Get Messages Usage Report
+      - `cache_read_input_tokens: number`
 
-cURL
+        The number of input tokens read from the cache.
 
-```shiki
+      - `context_window: "0-200k" or "200k-1M" or null`
+
+        Context window used. `null` if not grouping by context window.
+
+        - `"0-200k"`
+
+        - `"200k-1M"`
+
+      - `inference_geo: "global" or "not_available" or "us" or null`
+
+        Inference geo used matching requests' `inference_geo` parameter if set, otherwise the workspace's `default_inference_geo`.
+        For models that do not support specifying `inference_geo` the value is `"not_available"`. Always `null` if not grouping by inference geo.
+
+        - `"global"`
+
+        - `"not_available"`
+
+        - `"us"`
+
+      - `model: string or null`
+
+        Model used. `null` if not grouping by model.
+
+      - `output_tokens: number`
+
+        The number of output tokens generated.
+
+      - `server_tool_use: object`
+
+        Server-side tool usage metrics.
+
+        - `web_search_requests: number`
+
+          The number of web search requests made.
+
+      - `service_account_id: string or null`
+
+        ID of the service account that made the request. `null` if not grouping by service account or for non-OIDC-federation requests.
+
+      - `service_tier: "batch" or "flex" or "flex_discount" or 3 more or null`
+
+        Service tier used. `null` if not grouping by service tier.
+
+        - `"batch"`
+
+        - `"flex"`
+
+        - `"flex_discount"`
+
+        - `"priority"`
+
+        - `"priority_on_demand"`
+
+        - `"standard"`
+
+      - `uncached_input_tokens: number`
+
+        The number of uncached input tokens processed.
+
+      - `workspace_id: string or null`
+
+        ID of the Workspace used. `null` if not grouping by workspace or for the default workspace.
+
+    - `starting_at: string`
+
+      Start of the time bucket (inclusive) in RFC 3339 format.
+
+      format: date-time
+
+  - `has_more: boolean`
+
+    Indicates if there are more results.
+
+  - `next_page: string or null`
+
+    Opaque cursor for the next page, or `null` when `has_more` is false. Pass it as the `page` parameter in the next request.
+
+## Example
+
+```bash
 curl https://api.anthropic.com/v1/organizations/usage_report/messages \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "ending_at": "2025-08-02T00:00:00Z",
-      "results": [
-        {
-          "account_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
-          "api_key_id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
-          "cache_creation": {
-            "ephemeral_1h_input_tokens": 1000,
-            "ephemeral_5m_input_tokens": 500
-          },
-          "cache_read_input_tokens": 200,
-          "context_window": "0-200k",
-          "inference_geo": "global",
-          "model": "claude-opus-5",
-          "output_tokens": 500,
-          "server_tool_use": {
-            "web_search_requests": 10
-          },
-          "service_account_id": "svac_01Hk3R9TWxq7CfQak00OiVw4",
-          "service_tier": "standard",
-          "uncached_input_tokens": 1500,
-          "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
-        }
-      ],
-      "starting_at": "2025-08-01T00:00:00Z"
-    }
-  ],
-  "has_more": true,
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

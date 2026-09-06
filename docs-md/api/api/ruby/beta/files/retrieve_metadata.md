@@ -1,174 +1,190 @@
 # Get File Metadata
 
-Copy page
+`beta.files.retrieve_metadata(file_id, **kwargs) -> BetaFileMetadata`
 
-
-
-Ruby
-
-# Get File Metadata
-
-beta.files.retrieve\_metadata(file\_id, \*\*kwargs) -> [FileMetadata](api/beta/files.md) { id, created\_at, filename, 5 more }
-
-GET/v1/files/{file\_id}
+**GET** `/v1/files/{file_id}`
 
 Get File Metadata
 
-##### ParametersExpand Collapse
+## Parameters
 
-file\_id: String
+- `file_id: String`
 
-ID of the File.
+  ID of the File.
 
-
+- `betas: Array[AnthropicBeta]`
 
-betas: Array[[AnthropicBeta](api/beta.md)]
+  Optional header to specify the beta version(s) you want to use.
 
-Optional header to specify the beta version(s) you want to use.
+  - `String = String`
 
-One of the following:
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
 
-String = String
+    - `:"message-batches-2024-09-24"`
 
-
+    - `:"prompt-caching-2024-07-31"`
 
-AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more
+    - `:"computer-use-2024-10-22"`
 
-One of the following:
+    - `:"computer-use-2025-01-24"`
 
-:"message-batches-2024-09-24"
+    - `:"pdfs-2024-09-25"`
 
-:"prompt-caching-2024-07-31"
+    - `:"token-counting-2024-11-01"`
 
-:"computer-use-2024-10-22"
+    - `:"token-efficient-tools-2025-02-19"`
 
-:"computer-use-2025-01-24"
+    - `:"output-128k-2025-02-19"`
 
-:"pdfs-2024-09-25"
+    - `:"files-api-2025-04-14"`
 
-:"token-counting-2024-11-01"
+    - `:"mcp-client-2025-04-04"`
 
-:"token-efficient-tools-2025-02-19"
+    - `:"mcp-client-2025-11-20"`
 
-:"output-128k-2025-02-19"
+    - `:"dev-full-thinking-2025-05-14"`
 
-:"files-api-2025-04-14"
+    - `:"interleaved-thinking-2025-05-14"`
 
-:"mcp-client-2025-04-04"
+    - `:"code-execution-2025-05-22"`
 
-:"mcp-client-2025-11-20"
+    - `:"extended-cache-ttl-2025-04-11"`
 
-:"dev-full-thinking-2025-05-14"
+    - `:"context-1m-2025-08-07"`
 
-:"interleaved-thinking-2025-05-14"
+    - `:"context-management-2025-06-27"`
 
-:"code-execution-2025-05-22"
+    - `:"model-context-window-exceeded-2025-08-26"`
 
-:"extended-cache-ttl-2025-04-11"
+    - `:"skills-2025-10-02"`
 
-:"context-1m-2025-08-07"
+    - `:"fast-mode-2026-02-01"`
 
-:"context-management-2025-06-27"
+    - `:"output-300k-2026-03-24"`
 
-:"model-context-window-exceeded-2025-08-26"
+    - `:"user-profiles-2026-03-24"`
 
-:"skills-2025-10-02"
+    - `:"user-profiles-2026-08-18"`
 
-:"fast-mode-2026-02-01"
+    - `:"advisor-tool-2026-03-01"`
 
-:"output-300k-2026-03-24"
+    - `:"managed-agents-2026-04-01"`
 
-:"user-profiles-2026-03-24"
+    - `:"cache-diagnosis-2026-04-07"`
 
-:"advisor-tool-2026-03-01"
+    - `:"dreaming-2026-04-21"`
 
-:"managed-agents-2026-04-01"
+    - `:"thinking-token-count-2026-05-13"`
 
-:"cache-diagnosis-2026-04-07"
+    - `:"server-side-fallback-2026-06-01"`
 
-:"thinking-token-count-2026-05-13"
+    - `:"server-side-fallback-2026-07-01"`
 
-:"server-side-fallback-2026-06-01"
+    - `:"fallback-credit-2026-06-01"`
 
-:"fallback-credit-2026-06-01"
+    - `:"fallback-credit-2026-07-01"`
 
-:"agent-memory-2026-07-22"
+    - `:"agent-memory-2026-07-22"`
 
-##### ReturnsExpand Collapse
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
-
+    - `:"compact-2026-01-12"`
 
-class FileMetadata { id, created\_at, filename, 5 more } 
+    - `:"computer-use-2025-11-24"`
 
-
+    - `:"mcp-tunnels-2026-06-22"`
 
-id: String
+    - `:"structured-outputs-2025-11-13"`
 
-Unique object identifier.
+    - `:"task-budgets-2026-03-13"`
 
-The format and length of IDs may change over time.
+    - `:"thinking-display-updates-2026-08-18"`
 
-created\_at: Time
+    - `:"ce-user-management-2026-07-13"`
 
-RFC 3339 datetime string representing when the file was created.
+    - `:"mid-conversation-output-config-2026-07-01"`
 
-filename: String
+    - `:"thinking-binding-controls-2026-08-01"`
 
-Original filename of the uploaded file.
+    - `:"mid-conversation-system-clear-at-2026-08-21"`
 
-mime\_type: String
+## Returns
 
-MIME type of the file.
+- `class BetaFileMetadata`
 
-size\_bytes: Integer
+  - `id: String`
 
-Size of the file in bytes.
+    Unique object identifier.
 
-
+    The format and length of IDs may change over time.
 
-type: :file
+  - `created_at: Time`
 
-Object type.
+    RFC 3339 datetime string representing when the file was created.
 
-For files, this is always `"file"`.
+    format: date-time
 
-downloadable: bool
+  - `filename: String`
 
-Whether the file can be downloaded.
+    Original filename of the uploaded file.
 
-
+    maxLength: 500, minLength: 1
 
-scope: [BetaFileScope](api/beta/files.md) { id, type } 
+  - `mime_type: String`
 
-The scope of this file, indicating the context in which it was created (e.g., a session).
+    MIME type of the file.
 
-id: String
+    maxLength: 255, minLength: 1
 
-The ID of the scoping resource (e.g., the session ID).
+  - `size_bytes: Integer`
 
-type: :session
+    Size of the file in bytes.
 
-The type of scope (e.g., `"session"`).
+    minimum: 0
 
-Get File Metadata
+  - `type: :file`
 
-Ruby
+    Object type.
 
-```shiki
+    For files, this is always `"file"`.
+
+  - `downloadable: bool`
+
+    Whether the file can be downloaded.
+
+  - `expires_at: Time`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
+
+  - `scope: BetaFileScope`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `id: String`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `type: :session`
+
+      The type of scope (e.g., `"session"`).
+
+## Example
+
+```ruby
 require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-file_metadata = anthropic.beta.files.retrieve_metadata("file_id")
+beta_file_metadata = anthropic.beta.files.retrieve_metadata("file_id")
 
-puts(file_metadata)
+puts(beta_file_metadata)
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "file_011CNha8iCJcU1wXNR6q4V8w",
   "created_at": "2025-04-15T18:37:24.100435Z",
@@ -177,28 +193,7 @@ Response 200
   "size_bytes": 102400,
   "type": "file",
   "downloadable": false,
-  "scope": {
-    "id": "id",
-    "type": "session"
-  }
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "created_at": "2025-04-15T18:37:24.100435Z",
-  "filename": "document.pdf",
-  "mime_type": "application/pdf",
-  "size_bytes": 102400,
-  "type": "file",
-  "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z",
   "scope": {
     "id": "id",
     "type": "session"

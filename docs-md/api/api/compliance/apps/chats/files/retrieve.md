@@ -1,106 +1,67 @@
 # Get file metadata
 
-To enable the Compliance API, see the setup guide.
-
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
-
-Copy page
-
-
-
-# Get file metadata
-
-GET/v1/compliance/apps/chats/files/{claude\_file\_id}
+**GET** `/v1/compliance/apps/chats/files/{claude_file_id}`
 
 Retrieves metadata for a file referenced in chat messages, without
 downloading the file content. Use the sibling `/content` endpoint to
 download the bytes.
 
-##### Path parameters
+## Path parameters
 
-claude\_file\_id: string
+- `claude_file_id: string`
 
-The file ID (tagged ID, e.g., claude\_file\_abc123)
+  The file ID (tagged ID, e.g., claude_file_abc123)
 
-##### Headers
+## Headers
 
-"x-api-key": optional string
+- `"x-api-key": optional string`
 
-##### Returns
+## Returns
 
-id: string
+- `id: string`
 
-File ID
+  File ID
 
-claude\_chat\_ids: array of string
+- `claude_chat_ids: array of string`
 
-Chats this file is attached to. A file can be referenced by messages across multiple chats.
+  Chats this file is attached to. A file can be referenced by messages across multiple chats.
 
-
+- `created_at: string`
 
-created\_at: string
+  File creation timestamp
 
-File creation timestamp
+  format: date-time
 
-formatdate-time
+- `filename: string or null`
 
-filename: string or null
+  Display name of the file, if set
 
-Display name of the file, if set
+- `md5: string or null`
 
-md5: string or null
+  Lowercase hex MD5 of the file's preferred downloadable variant, as recorded at upload time. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes; when the two disagree, the header is authoritative.
 
-Lowercase hex MD5 of the file's preferred downloadable variant, as recorded at upload time. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes; when the two disagree, the header is authoritative.
+- `message_ids: array of string`
 
-message\_ids: array of string
+  Chat message IDs this file is attached to. A file can be referenced by multiple messages.
 
-Chat message IDs this file is attached to. A file can be referenced by multiple messages.
+- `mime_type: string or null`
 
-mime\_type: string or null
+  MIME type of the file's preferred downloadable variant (e.g. 'application/pdf'). May be null for files with no downloadable content (e.g. code-interpreter outputs).
 
-MIME type of the file's preferred downloadable variant (e.g. 'application/pdf'). May be null for files with no downloadable content (e.g. code-interpreter outputs).
+- `size_bytes: number or null`
 
-size\_bytes: number or null
+  Size in bytes of the file's preferred downloadable variant, if known
 
-Size in bytes of the file's preferred downloadable variant, if known
+## Example
 
-Get file metadata
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "claude_file_xyz789",
-  "filename": "quarterly_report.pdf",
-  "mime_type": "application/pdf",
-  "size_bytes": 1048576,
-  "md5": "5d41402abc4b2a76b9719d911017c592",
-  "created_at": "2024-01-15T10:30:00Z",
-  "message_ids": [
-    "claude_chat_msg_abc123"
-  ],
-  "claude_chat_ids": [
-    "claude_chat_def456"
-  ]
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "claude_file_xyz789",
   "filename": "quarterly_report.pdf",

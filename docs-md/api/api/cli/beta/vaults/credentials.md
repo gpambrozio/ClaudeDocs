@@ -1,1444 +1,2448 @@
 # Credentials
 
-Copy page
+## Create Credential
 
-
+`$ ant beta:vaults:credentials create`
 
-CLI
+**POST** `/v1/vaults/{vault_id}/credentials`
 
-# Credentials
+Create Credential
 
-##### [Create Credential](api/beta/vaults/credentials/create.md)
+### Parameters
 
-$ ant beta:vaults:credentials create
+- `--vault-id: string`
 
-POST/v1/vaults/{vault\_id}/credentials
+  Path param: Path parameter vault_id
 
-##### [List Credentials](api/beta/vaults/credentials/list.md)
+- `--auth: BetaManagedAgentsMCPOAuthCreateParams or BetaManagedAgentsStaticBearerCreateParams or BetaManagedAgentsEnvironmentVariableCreateParams`
 
-$ ant beta:vaults:credentials list
+  Body param: Authentication details for creating a credential.
 
-GET/v1/vaults/{vault\_id}/credentials
+- `--display-name: optional string`
 
-##### [Get Credential](api/beta/vaults/credentials/retrieve.md)
+  Body param: Human-readable name for the credential. Up to 255 characters.
 
-$ ant beta:vaults:credentials retrieve
+  maxLength: 255
 
-GET/v1/vaults/{vault\_id}/credentials/{credential\_id}
+- `--metadata: optional map[string]`
 
-##### [Update Credential](api/beta/vaults/credentials/update.md)
+  Body param: Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-$ ant beta:vaults:credentials update
+- `--beta: optional array of AnthropicBeta`
 
-POST/v1/vaults/{vault\_id}/credentials/{credential\_id}
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-##### [Delete Credential](api/beta/vaults/credentials/delete.md)
+### Returns
 
-$ ant beta:vaults:credentials delete
+- `beta_managed_agents_credential: object`
 
-DELETE/v1/vaults/{vault\_id}/credentials/{credential\_id}
+  A credential stored in a vault. Sensitive fields are never returned in responses.
 
-##### [Archive Credential](api/beta/vaults/credentials/archive.md)
+  - `id: string`
 
-$ ant beta:vaults:credentials archive
+    Unique identifier for the credential.
 
-POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/archive
+  - `archived_at: string`
 
-##### [Validate Credential](api/beta/vaults/credentials/mcp_oauth_validate.md)
+    A timestamp in RFC 3339 format
 
-$ ant beta:vaults:credentials mcp-oauth-validate
+    format: date-time
 
-POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
-##### ModelsExpand Collapse
+    Authentication details for a credential.
 
-
+    - `beta_managed_agents_mcp_oauth_auth_response: object`
 
-beta\_managed\_agents\_credential: object { id, archived\_at, auth, 6 more } 
+      OAuth credential details for an MCP server.
 
-A credential stored in a vault. Sensitive fields are never returned in responses.
+      - `mcp_server_url: string`
 
-id: string
+        URL of the MCP server this credential authenticates against.
 
-Unique identifier for the credential.
+      - `type: "mcp_oauth"`
 
-archived\_at: string
+      - `expires_at: optional string`
 
-A timestamp in RFC 3339 format
+        A timestamp in RFC 3339 format
 
-
+        format: date-time
 
-auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta/vaults/credentials.md) { mcp\_server\_url, type, expires\_at, refresh }  or [BetaManagedAgentsStaticBearerAuthResponse](api/beta/vaults/credentials.md) { mcp\_server\_url, type }  or [BetaManagedAgentsEnvironmentVariableAuthResponse](api/beta/vaults/credentials.md) { injection\_location, networking, secret\_name, type } 
+      - `refresh: optional object`
 
-Authentication details for a credential.
+        OAuth refresh token configuration returned in credential responses.
 
-
+        - `client_id: string`
 
-beta\_managed\_agents\_mcp\_oauth\_auth\_response: object { mcp\_server\_url, type, expires\_at, refresh } 
+          OAuth client ID.
 
-OAuth credential details for an MCP server.
+        - `token_endpoint: string`
 
-mcp\_server\_url: string
+          Token endpoint URL used to refresh the access token.
 
-URL of the MCP server this credential authenticates against.
+        - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse or BetaManagedAgentsTokenEndpointAuthBasicResponse or BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-
+          Token endpoint requires no client authentication.
 
-type: "mcp\_oauth"
+          - `beta_managed_agents_token_endpoint_auth_none_response: object`
 
-"mcp\_oauth"
+            Token endpoint requires no client authentication.
 
-expires\_at: optional string
+            - `type: "none"`
 
-A timestamp in RFC 3339 format
+          - `beta_managed_agents_token_endpoint_auth_basic_response: object`
 
-
+            Token endpoint uses HTTP Basic authentication with client credentials.
 
-refresh: optional object { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more } 
+            - `type: "client_secret_basic"`
 
-OAuth refresh token configuration returned in credential responses.
+          - `beta_managed_agents_token_endpoint_auth_post_response: object`
 
-client\_id: string
+            Token endpoint uses POST body authentication with client credentials.
 
-OAuth client ID.
+            - `type: "client_secret_post"`
 
-token\_endpoint: string
+        - `resource: optional string`
 
-Token endpoint URL used to refresh the access token.
+          OAuth resource indicator.
 
-
+        - `scope: optional string`
 
-token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicResponse](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsTokenEndpointAuthPostResponse](api/beta/vaults/credentials.md) { type } 
+          OAuth scope for the refresh request.
 
-Token endpoint requires no client authentication.
+    - `beta_managed_agents_static_bearer_auth_response: object`
 
-
+      Static bearer token credential details for an MCP server.
 
-beta\_managed\_agents\_token\_endpoint\_auth\_none\_response: object { type } 
+      - `mcp_server_url: string`
 
-Token endpoint requires no client authentication.
+        URL of the MCP server this credential authenticates against.
 
-
+      - `type: "static_bearer"`
 
-type: "none"
+    - `beta_managed_agents_environment_variable_auth_response: object`
 
-"none"
+      Environment variable credential details. The secret value is never returned.
 
-
+      - `injection_location: object`
 
-beta\_managed\_agents\_token\_endpoint\_auth\_basic\_response: object { type } 
+        Where in the outbound request the secret value is substituted.
 
-Token endpoint uses HTTP Basic authentication with client credentials.
+        - `body: boolean`
 
-
+          Whether the placeholder is substituted in the request body.
 
-type: "client\_secret\_basic"
+        - `header: boolean`
 
-"client\_secret\_basic"
+          Whether the placeholder is substituted in request header values.
 
-
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
-beta\_managed\_agents\_token\_endpoint\_auth\_post\_response: object { type } 
+        Outbound hosts the secret value is substituted on.
 
-Token endpoint uses POST body authentication with client credentials.
+        - `beta_managed_agents_unrestricted_credential_networking_response: object`
 
-
+          The secret is substituted on any host the session's Environment network policy permits egress to.
 
-type: "client\_secret\_post"
+          - `type: "unrestricted"`
 
-"client\_secret\_post"
+        - `beta_managed_agents_limited_credential_networking_response: object`
 
-resource: optional string
+          The secret is substituted only on requests to the listed hosts.
 
-OAuth resource indicator.
+          - `allowed_hosts: array of string`
 
-scope: optional string
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-OAuth scope for the refresh request.
+          - `type: "limited"`
 
-
+      - `secret_name: string`
 
-beta\_managed\_agents\_static\_bearer\_auth\_response: object { mcp\_server\_url, type } 
+        Name of the environment variable.
 
-Static bearer token credential details for an MCP server.
+      - `type: "environment_variable"`
 
-mcp\_server\_url: string
+  - `created_at: string`
 
-URL of the MCP server this credential authenticates against.
+    A timestamp in RFC 3339 format
 
-
+    format: date-time
 
-type: "static\_bearer"
+  - `metadata: map[string]`
 
-"static\_bearer"
+    Arbitrary key-value metadata attached to the credential.
 
-
+  - `type: "vault_credential"`
 
-beta\_managed\_agents\_environment\_variable\_auth\_response: object { injection\_location, networking, secret\_name, type } 
+  - `updated_at: string`
 
-Environment variable credential details. The secret value is never returned.
+    A timestamp in RFC 3339 format
 
-
+    format: date-time
 
-injection\_location: object { body, header } 
+  - `vault_id: string`
 
-Where in the outbound request the secret value is substituted.
+    Identifier of the vault this credential belongs to.
 
-body: boolean
+  - `display_name: optional string`
 
-Whether the placeholder is substituted in the request body.
+    Human-readable name for the credential.
 
-header: boolean
+### Example
 
-Whether the placeholder is substituted in request header values.
+```bash
+ant beta:vaults:credentials create \
+  --api-key my-anthropic-api-key \
+  --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv \
+  --auth '{token: bearer_exampletoken, mcp_server_url: https://example-server.modelcontextprotocol.io/sse, type: static_bearer}'
+```
 
-
+#### Response (200)
 
-networking: [BetaManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsLimitedCredentialNetworkingResponse](api/beta/vaults/credentials.md) { allowed\_hosts, type } 
+```json
+{
+  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "archived_at": null,
+  "auth": {
+    "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
+    "type": "static_bearer"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {
+    "environment": "production"
+  },
+  "type": "vault_credential",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "display_name": "Example credential"
+}
+```
 
-Outbound hosts the secret value is substituted on.
+## List Credentials
 
-
+`$ ant beta:vaults:credentials list`
 
-beta\_managed\_agents\_unrestricted\_credential\_networking\_response: object { type } 
+**GET** `/v1/vaults/{vault_id}/credentials`
 
-The secret is substituted on any host the session's Environment network policy permits egress to.
+List Credentials
 
-
+### Parameters
 
-type: "unrestricted"
+- `--vault-id: string`
 
-"unrestricted"
+  Path param: Path parameter vault_id
 
-
+- `--include-archived: optional boolean`
 
-beta\_managed\_agents\_limited\_credential\_networking\_response: object { allowed\_hosts, type } 
+  Query param: Whether to include archived credentials in the results.
 
-The secret is substituted only on requests to the listed hosts.
+- `--limit: optional number`
 
-allowed\_hosts: array of string
+  Query param: Maximum number of credentials to return per page. Defaults to 20, maximum 100.
 
-Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+  format: int32
 
-
+- `--page: optional string`
 
-type: "limited"
+  Query param: Opaque pagination token from a previous `list_credentials` response.
 
-"limited"
+- `--beta: optional array of AnthropicBeta`
 
-secret\_name: string
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-Name of the environment variable.
+### Returns
 
-
+- `BetaManagedAgentsListCredentialsResponse: object`
 
-type: "environment\_variable"
+  Response containing a paginated list of credentials.
 
-"environment\_variable"
+  - `data: optional array of BetaManagedAgentsCredential`
 
-created\_at: string
+    List of credentials.
 
-A timestamp in RFC 3339 format
+    - `id: string`
 
-metadata: map[string]
+      Unique identifier for the credential.
 
-Arbitrary key-value metadata attached to the credential.
+    - `archived_at: string`
 
-
+      A timestamp in RFC 3339 format
 
-type: "vault\_credential"
+      format: date-time
 
-"vault\_credential"
+    - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
-updated\_at: string
+      Authentication details for a credential.
 
-A timestamp in RFC 3339 format
+      - `beta_managed_agents_mcp_oauth_auth_response: object`
 
-vault\_id: string
+        OAuth credential details for an MCP server.
 
-Identifier of the vault this credential belongs to.
+        - `mcp_server_url: string`
 
-display\_name: optional string
+          URL of the MCP server this credential authenticates against.
 
-Human-readable name for the credential.
+        - `type: "mcp_oauth"`
 
-
+        - `expires_at: optional string`
 
-beta\_managed\_agents\_credential\_networking\_params: [BetaManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsLimitedCredentialNetworkingParams](api/beta/vaults/credentials.md) { allowed\_hosts, type } 
+          A timestamp in RFC 3339 format
 
-Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+          format: date-time
 
-
+        - `refresh: optional object`
 
-beta\_managed\_agents\_unrestricted\_credential\_networking\_params: object { type } 
+          OAuth refresh token configuration returned in credential responses.
 
-Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+          - `client_id: string`
 
-
+            OAuth client ID.
 
-type: "unrestricted"
+          - `token_endpoint: string`
 
-"unrestricted"
+            Token endpoint URL used to refresh the access token.
 
-
+          - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse or BetaManagedAgentsTokenEndpointAuthBasicResponse or BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-beta\_managed\_agents\_limited\_credential\_networking\_params: object { allowed\_hosts, type } 
+            Token endpoint requires no client authentication.
 
-Substitute the secret only on requests to the listed hosts.
+            - `beta_managed_agents_token_endpoint_auth_none_response: object`
 
-allowed\_hosts: array of string
+              Token endpoint requires no client authentication.
 
-Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+              - `type: "none"`
 
-
+            - `beta_managed_agents_token_endpoint_auth_basic_response: object`
 
-type: "limited"
+              Token endpoint uses HTTP Basic authentication with client credentials.
 
-"limited"
+              - `type: "client_secret_basic"`
 
-
+            - `beta_managed_agents_token_endpoint_auth_post_response: object`
 
-beta\_managed\_agents\_credential\_validation: object { credential\_id, has\_refresh\_token, mcp\_probe, 5 more } 
+              Token endpoint uses POST body authentication with client credentials.
 
-Result of live-probing a credential against its configured MCP server.
+              - `type: "client_secret_post"`
 
-credential\_id: string
+          - `resource: optional string`
 
-Unique identifier of the credential that was validated.
+            OAuth resource indicator.
 
-has\_refresh\_token: boolean
+          - `scope: optional string`
 
-Whether the credential has a refresh token configured.
+            OAuth scope for the refresh request.
 
-
+      - `beta_managed_agents_static_bearer_auth_response: object`
 
-mcp\_probe: object { http\_response, method } 
+        Static bearer token credential details for an MCP server.
 
-The failing step of an MCP validation probe.
+        - `mcp_server_url: string`
 
-
+          URL of the MCP server this credential authenticates against.
 
-http\_response: object { body, body\_truncated, content\_type, status\_code } 
+        - `type: "static_bearer"`
 
-An HTTP response captured during a credential validation probe.
+      - `beta_managed_agents_environment_variable_auth_response: object`
 
-body: string
+        Environment variable credential details. The secret value is never returned.
 
-Response body. May be truncated and has sensitive values scrubbed.
+        - `injection_location: object`
 
-body\_truncated: boolean
+          Where in the outbound request the secret value is substituted.
 
-Whether `body` was truncated.
+          - `body: boolean`
 
-content\_type: string
+            Whether the placeholder is substituted in the request body.
 
-Value of the `Content-Type` response header.
+          - `header: boolean`
 
-status\_code: number
+            Whether the placeholder is substituted in request header values.
 
-HTTP status code.
+        - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
-method: string
+          Outbound hosts the secret value is substituted on.
 
-The MCP method that failed (for example `initialize` or `tools/list`).
+          - `beta_managed_agents_unrestricted_credential_networking_response: object`
 
-
+            The secret is substituted on any host the session's Environment network policy permits egress to.
 
-refresh: object { http\_response, status } 
+            - `type: "unrestricted"`
 
-Outcome of a refresh-token exchange attempted during credential validation.
+          - `beta_managed_agents_limited_credential_networking_response: object`
 
-
+            The secret is substituted only on requests to the listed hosts.
 
-http\_response: object { body, body\_truncated, content\_type, status\_code } 
+            - `allowed_hosts: array of string`
 
-An HTTP response captured during a credential validation probe.
+              Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-body: string
+            - `type: "limited"`
 
-Response body. May be truncated and has sensitive values scrubbed.
+        - `secret_name: string`
 
-body\_truncated: boolean
+          Name of the environment variable.
 
-Whether `body` was truncated.
+        - `type: "environment_variable"`
 
-content\_type: string
+    - `created_at: string`
 
-Value of the `Content-Type` response header.
+      A timestamp in RFC 3339 format
 
-status\_code: number
+      format: date-time
 
-HTTP status code.
+    - `metadata: map[string]`
 
-
+      Arbitrary key-value metadata attached to the credential.
 
-status: "succeeded" or "failed" or "connect\_error" or "no\_refresh\_token"
+    - `type: "vault_credential"`
 
-Outcome of a refresh-token exchange attempted during credential validation.
+    - `updated_at: string`
 
-"succeeded"
+      A timestamp in RFC 3339 format
 
-"failed"
+      format: date-time
 
-"connect\_error"
+    - `vault_id: string`
 
-"no\_refresh\_token"
+      Identifier of the vault this credential belongs to.
 
-
+    - `display_name: optional string`
 
-status: "valid" or "invalid" or "unknown"
+      Human-readable name for the credential.
 
-Overall verdict of a credential validation probe.
+  - `next_page: optional string`
 
-"valid"
+    Pagination token for the next page, or null if no more results.
 
-"invalid"
+### Example
 
-"unknown"
+```bash
+ant beta:vaults:credentials list \
+  --api-key my-anthropic-api-key \
+  --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv
+```
 
-
+#### Response (200)
 
-type: "vault\_credential\_validation"
+```json
+{
+  "data": [
+    {
+      "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+      "archived_at": null,
+      "auth": {
+        "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
+        "type": "static_bearer"
+      },
+      "created_at": "2026-03-15T10:00:00Z",
+      "metadata": {
+        "environment": "production"
+      },
+      "type": "vault_credential",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+      "display_name": "Example credential"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
 
-"vault\_credential\_validation"
+## Get Credential
 
-validated\_at: string
+`$ ant beta:vaults:credentials retrieve`
 
-A timestamp in RFC 3339 format
+**GET** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-vault\_id: string
+Get Credential
 
-Identifier of the vault containing the credential.
+### Parameters
 
-
+- `--vault-id: string`
 
-beta\_managed\_agents\_credential\_validation\_status: "valid" or "invalid" or "unknown"
+  Path param: Path parameter vault_id
 
-Overall verdict of a credential validation probe.
+- `--credential-id: string`
 
-"valid"
+  Path param: Path parameter credential_id
 
-"invalid"
+- `--beta: optional array of AnthropicBeta`
 
-"unknown"
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-
+### Returns
 
-beta\_managed\_agents\_deleted\_credential: object { id, type } 
+- `beta_managed_agents_credential: object`
 
-Confirmation of a deleted credential.
+  A credential stored in a vault. Sensitive fields are never returned in responses.
 
-id: string
+  - `id: string`
 
-Unique identifier of the deleted credential.
+    Unique identifier for the credential.
 
-
+  - `archived_at: string`
 
-type: "vault\_credential\_deleted"
+    A timestamp in RFC 3339 format
 
-"vault\_credential\_deleted"
+    format: date-time
 
-
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
-beta\_managed\_agents\_environment\_variable\_auth\_response: object { injection\_location, networking, secret\_name, type } 
+    Authentication details for a credential.
 
-Environment variable credential details. The secret value is never returned.
+    - `beta_managed_agents_mcp_oauth_auth_response: object`
 
-
+      OAuth credential details for an MCP server.
 
-injection\_location: object { body, header } 
+      - `mcp_server_url: string`
 
-Where in the outbound request the secret value is substituted.
+        URL of the MCP server this credential authenticates against.
 
-body: boolean
+      - `type: "mcp_oauth"`
 
-Whether the placeholder is substituted in the request body.
+      - `expires_at: optional string`
 
-header: boolean
+        A timestamp in RFC 3339 format
 
-Whether the placeholder is substituted in request header values.
+        format: date-time
 
-
+      - `refresh: optional object`
 
-networking: [BetaManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsLimitedCredentialNetworkingResponse](api/beta/vaults/credentials.md) { allowed\_hosts, type } 
+        OAuth refresh token configuration returned in credential responses.
 
-Outbound hosts the secret value is substituted on.
+        - `client_id: string`
 
-
+          OAuth client ID.
 
-beta\_managed\_agents\_unrestricted\_credential\_networking\_response: object { type } 
+        - `token_endpoint: string`
 
-The secret is substituted on any host the session's Environment network policy permits egress to.
+          Token endpoint URL used to refresh the access token.
 
-
+        - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse or BetaManagedAgentsTokenEndpointAuthBasicResponse or BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-type: "unrestricted"
+          Token endpoint requires no client authentication.
 
-"unrestricted"
+          - `beta_managed_agents_token_endpoint_auth_none_response: object`
 
-
+            Token endpoint requires no client authentication.
 
-beta\_managed\_agents\_limited\_credential\_networking\_response: object { allowed\_hosts, type } 
+            - `type: "none"`
 
-The secret is substituted only on requests to the listed hosts.
+          - `beta_managed_agents_token_endpoint_auth_basic_response: object`
 
-allowed\_hosts: array of string
+            Token endpoint uses HTTP Basic authentication with client credentials.
 
-Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            - `type: "client_secret_basic"`
 
-
+          - `beta_managed_agents_token_endpoint_auth_post_response: object`
 
-type: "limited"
+            Token endpoint uses POST body authentication with client credentials.
 
-"limited"
+            - `type: "client_secret_post"`
 
-secret\_name: string
+        - `resource: optional string`
 
-Name of the environment variable.
+          OAuth resource indicator.
 
-
+        - `scope: optional string`
 
-type: "environment\_variable"
+          OAuth scope for the refresh request.
 
-"environment\_variable"
+    - `beta_managed_agents_static_bearer_auth_response: object`
 
-
+      Static bearer token credential details for an MCP server.
 
-beta\_managed\_agents\_environment\_variable\_create\_params: object { networking, secret\_name, secret\_value, 2 more } 
+      - `mcp_server_url: string`
 
-Parameters for creating an environment variable credential.
+        URL of the MCP server this credential authenticates against.
 
-
+      - `type: "static_bearer"`
 
-networking: [BetaManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsLimitedCredentialNetworkingParams](api/beta/vaults/credentials.md) { allowed\_hosts, type } 
+    - `beta_managed_agents_environment_variable_auth_response: object`
 
-Outbound hosts the secret value is substituted on.
+      Environment variable credential details. The secret value is never returned.
 
-
+      - `injection_location: object`
 
-beta\_managed\_agents\_unrestricted\_credential\_networking\_params: object { type } 
+        Where in the outbound request the secret value is substituted.
 
-Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+        - `body: boolean`
 
-
+          Whether the placeholder is substituted in the request body.
 
-type: "unrestricted"
+        - `header: boolean`
 
-"unrestricted"
+          Whether the placeholder is substituted in request header values.
 
-
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
-beta\_managed\_agents\_limited\_credential\_networking\_params: object { allowed\_hosts, type } 
+        Outbound hosts the secret value is substituted on.
 
-Substitute the secret only on requests to the listed hosts.
+        - `beta_managed_agents_unrestricted_credential_networking_response: object`
 
-allowed\_hosts: array of string
+          The secret is substituted on any host the session's Environment network policy permits egress to.
 
-Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+          - `type: "unrestricted"`
 
-
+        - `beta_managed_agents_limited_credential_networking_response: object`
 
-type: "limited"
+          The secret is substituted only on requests to the listed hosts.
 
-"limited"
+          - `allowed_hosts: array of string`
 
-secret\_name: string
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-Name of the environment variable. Immutable after create.
+          - `type: "limited"`
 
-secret\_value: string
+      - `secret_name: string`
 
-Secret value. Write-only; never returned in responses.
+        Name of the environment variable.
 
-
+      - `type: "environment_variable"`
 
-type: "environment\_variable"
+  - `created_at: string`
 
-"environment\_variable"
+    A timestamp in RFC 3339 format
 
-
+    format: date-time
 
-injection\_location: optional object { body, header } 
+  - `metadata: map[string]`
 
-Where in the outbound request the secret value may be substituted.
+    Arbitrary key-value metadata attached to the credential.
 
-body: optional boolean
+  - `type: "vault_credential"`
 
-Substitute when the placeholder appears in the request body.
+  - `updated_at: string`
 
-header: optional boolean
+    A timestamp in RFC 3339 format
 
-Substitute when the placeholder appears in a request header value.
+    format: date-time
 
-
+  - `vault_id: string`
 
-beta\_managed\_agents\_environment\_variable\_update\_params: object { type, injection\_location, networking, secret\_value } 
+    Identifier of the vault this credential belongs to.
 
-Parameters for updating an environment variable credential. `secret_name` is immutable.
+  - `display_name: optional string`
 
-
+    Human-readable name for the credential.
 
-type: "environment\_variable"
+### Example
 
-"environment\_variable"
+```bash
+ant beta:vaults:credentials retrieve \
+  --api-key my-anthropic-api-key \
+  --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv \
+  --credential-id vcrd_011CZkZEMt8gZan2iYOQfSkw
+```
 
-
+#### Response (200)
 
-injection\_location: optional object { body, header } 
+```json
+{
+  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "archived_at": null,
+  "auth": {
+    "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
+    "type": "static_bearer"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {
+    "environment": "production"
+  },
+  "type": "vault_credential",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "display_name": "Example credential"
+}
+```
 
-Updated injection location.
+## Update Credential
 
-body: optional boolean
+`$ ant beta:vaults:credentials update`
 
-Substitute when the placeholder appears in the request body.
+**POST** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-header: optional boolean
+Update Credential
 
-Substitute when the placeholder appears in a request header value.
+### Parameters
 
-
+- `--vault-id: string`
 
-networking: optional [BetaManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsLimitedCredentialNetworkingParams](api/beta/vaults/credentials.md) { allowed\_hosts, type } 
+  Path param: Path parameter vault_id
 
-Updated networking scope. Full replacement.
+- `--credential-id: string`
 
-
+  Path param: Path parameter credential_id
 
-beta\_managed\_agents\_unrestricted\_credential\_networking\_params: object { type } 
+- `--auth: optional BetaManagedAgentsMCPOAuthUpdateParams or BetaManagedAgentsStaticBearerUpdateParams or BetaManagedAgentsEnvironmentVariableUpdateParams`
 
-Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+  Body param: Updated authentication details for a credential.
 
-
+- `--display-name: optional string`
 
-type: "unrestricted"
+  Body param: Updated human-readable name for the credential. 1-255 characters.
 
-"unrestricted"
+  minLength: 1, maxLength: 255
 
-
+- `--metadata: optional map[string]`
 
-beta\_managed\_agents\_limited\_credential\_networking\_params: object { allowed\_hosts, type } 
+  Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
-Substitute the secret only on requests to the listed hosts.
+- `--beta: optional array of AnthropicBeta`
 
-allowed\_hosts: array of string
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+### Returns
 
-
+- `beta_managed_agents_credential: object`
 
-type: "limited"
+  A credential stored in a vault. Sensitive fields are never returned in responses.
 
-"limited"
+  - `id: string`
 
-secret\_value: optional string
+    Unique identifier for the credential.
 
-Updated secret value.
+  - `archived_at: string`
 
-
+    A timestamp in RFC 3339 format
 
-beta\_managed\_agents\_injection\_location\_params: object { body, header } 
+    format: date-time
 
-Where in the outbound request the secret value may be substituted.
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
-body: optional boolean
+    Authentication details for a credential.
 
-Substitute when the placeholder appears in the request body.
+    - `beta_managed_agents_mcp_oauth_auth_response: object`
 
-header: optional boolean
+      OAuth credential details for an MCP server.
 
-Substitute when the placeholder appears in a request header value.
+      - `mcp_server_url: string`
 
-
+        URL of the MCP server this credential authenticates against.
 
-beta\_managed\_agents\_injection\_location\_response: object { body, header } 
+      - `type: "mcp_oauth"`
 
-Where in the outbound request the secret value is substituted.
+      - `expires_at: optional string`
 
-body: boolean
+        A timestamp in RFC 3339 format
 
-Whether the placeholder is substituted in the request body.
+        format: date-time
 
-header: boolean
+      - `refresh: optional object`
 
-Whether the placeholder is substituted in request header values.
+        OAuth refresh token configuration returned in credential responses.
 
-
+        - `client_id: string`
 
-beta\_managed\_agents\_injection\_location\_update\_params: object { body, header } 
+          OAuth client ID.
 
-Updated injection location.
+        - `token_endpoint: string`
 
-body: optional boolean
+          Token endpoint URL used to refresh the access token.
 
-Substitute when the placeholder appears in the request body.
+        - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse or BetaManagedAgentsTokenEndpointAuthBasicResponse or BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-header: optional boolean
+          Token endpoint requires no client authentication.
 
-Substitute when the placeholder appears in a request header value.
+          - `beta_managed_agents_token_endpoint_auth_none_response: object`
 
-
+            Token endpoint requires no client authentication.
 
-beta\_managed\_agents\_limited\_credential\_networking\_params: object { allowed\_hosts, type } 
+            - `type: "none"`
 
-Substitute the secret only on requests to the listed hosts.
+          - `beta_managed_agents_token_endpoint_auth_basic_response: object`
 
-allowed\_hosts: array of string
+            Token endpoint uses HTTP Basic authentication with client credentials.
 
-Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+            - `type: "client_secret_basic"`
 
-
+          - `beta_managed_agents_token_endpoint_auth_post_response: object`
 
-type: "limited"
+            Token endpoint uses POST body authentication with client credentials.
 
-"limited"
+            - `type: "client_secret_post"`
 
-
+        - `resource: optional string`
 
-beta\_managed\_agents\_limited\_credential\_networking\_response: object { allowed\_hosts, type } 
+          OAuth resource indicator.
 
-The secret is substituted only on requests to the listed hosts.
+        - `scope: optional string`
 
-allowed\_hosts: array of string
+          OAuth scope for the refresh request.
 
-Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+    - `beta_managed_agents_static_bearer_auth_response: object`
 
-
+      Static bearer token credential details for an MCP server.
 
-type: "limited"
+      - `mcp_server_url: string`
 
-"limited"
+        URL of the MCP server this credential authenticates against.
 
-
+      - `type: "static_bearer"`
 
-beta\_managed\_agents\_mcp\_oauth\_auth\_response: object { mcp\_server\_url, type, expires\_at, refresh } 
+    - `beta_managed_agents_environment_variable_auth_response: object`
 
-OAuth credential details for an MCP server.
+      Environment variable credential details. The secret value is never returned.
 
-mcp\_server\_url: string
+      - `injection_location: object`
 
-URL of the MCP server this credential authenticates against.
+        Where in the outbound request the secret value is substituted.
 
-
+        - `body: boolean`
 
-type: "mcp\_oauth"
+          Whether the placeholder is substituted in the request body.
 
-"mcp\_oauth"
+        - `header: boolean`
 
-expires\_at: optional string
+          Whether the placeholder is substituted in request header values.
 
-A timestamp in RFC 3339 format
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
-
+        Outbound hosts the secret value is substituted on.
 
-refresh: optional object { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more } 
+        - `beta_managed_agents_unrestricted_credential_networking_response: object`
 
-OAuth refresh token configuration returned in credential responses.
+          The secret is substituted on any host the session's Environment network policy permits egress to.
 
-client\_id: string
+          - `type: "unrestricted"`
 
-OAuth client ID.
+        - `beta_managed_agents_limited_credential_networking_response: object`
 
-token\_endpoint: string
+          The secret is substituted only on requests to the listed hosts.
 
-Token endpoint URL used to refresh the access token.
+          - `allowed_hosts: array of string`
 
-
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicResponse](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsTokenEndpointAuthPostResponse](api/beta/vaults/credentials.md) { type } 
+          - `type: "limited"`
 
-Token endpoint requires no client authentication.
+      - `secret_name: string`
 
-
+        Name of the environment variable.
 
-beta\_managed\_agents\_token\_endpoint\_auth\_none\_response: object { type } 
+      - `type: "environment_variable"`
 
-Token endpoint requires no client authentication.
+  - `created_at: string`
 
-
+    A timestamp in RFC 3339 format
 
-type: "none"
+    format: date-time
 
-"none"
+  - `metadata: map[string]`
 
-
+    Arbitrary key-value metadata attached to the credential.
 
-beta\_managed\_agents\_token\_endpoint\_auth\_basic\_response: object { type } 
+  - `type: "vault_credential"`
 
-Token endpoint uses HTTP Basic authentication with client credentials.
+  - `updated_at: string`
 
-
+    A timestamp in RFC 3339 format
 
-type: "client\_secret\_basic"
+    format: date-time
 
-"client\_secret\_basic"
+  - `vault_id: string`
 
-
+    Identifier of the vault this credential belongs to.
 
-beta\_managed\_agents\_token\_endpoint\_auth\_post\_response: object { type } 
+  - `display_name: optional string`
 
-Token endpoint uses POST body authentication with client credentials.
+    Human-readable name for the credential.
 
-
+### Example
 
-type: "client\_secret\_post"
+```bash
+ant beta:vaults:credentials update \
+  --api-key my-anthropic-api-key \
+  --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv \
+  --credential-id vcrd_011CZkZEMt8gZan2iYOQfSkw
+```
 
-"client\_secret\_post"
+#### Response (200)
 
-resource: optional string
+```json
+{
+  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "archived_at": null,
+  "auth": {
+    "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
+    "type": "static_bearer"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {
+    "environment": "production"
+  },
+  "type": "vault_credential",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "display_name": "Example credential"
+}
+```
 
-OAuth resource indicator.
+## Delete Credential
 
-scope: optional string
+`$ ant beta:vaults:credentials delete`
 
-OAuth scope for the refresh request.
+**DELETE** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-
+Delete Credential
 
-beta\_managed\_agents\_mcp\_oauth\_create\_params: object { access\_token, mcp\_server\_url, type, 2 more } 
+### Parameters
 
-Parameters for creating an MCP OAuth credential.
+- `--vault-id: string`
 
-access\_token: string
+  Path param: Path parameter vault_id
 
-OAuth access token.
+- `--credential-id: string`
 
-mcp\_server\_url: string
+  Path param: Path parameter credential_id
 
-URL of the MCP server this credential authenticates against.
+- `--beta: optional array of AnthropicBeta`
 
-
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-type: "mcp\_oauth"
+### Returns
 
-"mcp\_oauth"
+- `beta_managed_agents_deleted_credential: object`
 
-expires\_at: optional string
+  Confirmation of a deleted credential.
 
-A timestamp in RFC 3339 format
+  - `id: string`
 
-
+    Unique identifier of the deleted credential.
 
-refresh: optional object { client\_id, refresh\_token, token\_endpoint, 3 more } 
+  - `type: "vault_credential_deleted"`
 
-OAuth refresh token parameters for creating a credential with refresh support.
+### Example
 
-client\_id: string
+```bash
+ant beta:vaults:credentials delete \
+  --api-key my-anthropic-api-key \
+  --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv \
+  --credential-id vcrd_011CZkZEMt8gZan2iYOQfSkw
+```
 
-OAuth client ID.
+#### Response (200)
 
-refresh\_token: string
+```json
+{
+  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "type": "vault_credential_deleted"
+}
+```
 
-OAuth refresh token.
+## Archive Credential
 
-token\_endpoint: string
+`$ ant beta:vaults:credentials archive`
 
-Token endpoint URL used to refresh the access token.
+**POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/archive`
 
-
+Archive Credential
 
-token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneParam](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicParam](api/beta/vaults/credentials.md) { client\_secret, type }  or [BetaManagedAgentsTokenEndpointAuthPostParam](api/beta/vaults/credentials.md) { client\_secret, type } 
+### Parameters
 
-Token endpoint requires no client authentication.
+- `--vault-id: string`
 
-
+  Path param: Path parameter vault_id
 
-beta\_managed\_agents\_token\_endpoint\_auth\_none\_param: object { type } 
+- `--credential-id: string`
 
-Token endpoint requires no client authentication.
+  Path param: Path parameter credential_id
 
-
+- `--beta: optional array of AnthropicBeta`
 
-type: "none"
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-"none"
+### Returns
 
-
+- `beta_managed_agents_credential: object`
 
-beta\_managed\_agents\_token\_endpoint\_auth\_basic\_param: object { client\_secret, type } 
+  A credential stored in a vault. Sensitive fields are never returned in responses.
 
-Token endpoint uses HTTP Basic authentication with client credentials.
+  - `id: string`
 
-client\_secret: string
+    Unique identifier for the credential.
 
-OAuth client secret.
+  - `archived_at: string`
 
-
+    A timestamp in RFC 3339 format
 
-type: "client\_secret\_basic"
+    format: date-time
 
-"client\_secret\_basic"
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
-
+    Authentication details for a credential.
 
-beta\_managed\_agents\_token\_endpoint\_auth\_post\_param: object { client\_secret, type } 
+    - `beta_managed_agents_mcp_oauth_auth_response: object`
 
-Token endpoint uses POST body authentication with client credentials.
+      OAuth credential details for an MCP server.
 
-client\_secret: string
+      - `mcp_server_url: string`
 
-OAuth client secret.
+        URL of the MCP server this credential authenticates against.
 
-
+      - `type: "mcp_oauth"`
 
-type: "client\_secret\_post"
+      - `expires_at: optional string`
 
-"client\_secret\_post"
+        A timestamp in RFC 3339 format
 
-resource: optional string
+        format: date-time
 
-OAuth resource indicator.
+      - `refresh: optional object`
 
-scope: optional string
+        OAuth refresh token configuration returned in credential responses.
 
-OAuth scope for the refresh request.
+        - `client_id: string`
 
-
+          OAuth client ID.
 
-beta\_managed\_agents\_mcp\_oauth\_refresh\_params: object { client\_id, refresh\_token, token\_endpoint, 3 more } 
+        - `token_endpoint: string`
 
-OAuth refresh token parameters for creating a credential with refresh support.
+          Token endpoint URL used to refresh the access token.
 
-client\_id: string
+        - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse or BetaManagedAgentsTokenEndpointAuthBasicResponse or BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-OAuth client ID.
+          Token endpoint requires no client authentication.
 
-refresh\_token: string
+          - `beta_managed_agents_token_endpoint_auth_none_response: object`
 
-OAuth refresh token.
+            Token endpoint requires no client authentication.
 
-token\_endpoint: string
+            - `type: "none"`
 
-Token endpoint URL used to refresh the access token.
+          - `beta_managed_agents_token_endpoint_auth_basic_response: object`
 
-
+            Token endpoint uses HTTP Basic authentication with client credentials.
 
-token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneParam](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicParam](api/beta/vaults/credentials.md) { client\_secret, type }  or [BetaManagedAgentsTokenEndpointAuthPostParam](api/beta/vaults/credentials.md) { client\_secret, type } 
+            - `type: "client_secret_basic"`
 
-Token endpoint requires no client authentication.
+          - `beta_managed_agents_token_endpoint_auth_post_response: object`
 
-
+            Token endpoint uses POST body authentication with client credentials.
 
-beta\_managed\_agents\_token\_endpoint\_auth\_none\_param: object { type } 
+            - `type: "client_secret_post"`
 
-Token endpoint requires no client authentication.
+        - `resource: optional string`
 
-
+          OAuth resource indicator.
 
-type: "none"
+        - `scope: optional string`
 
-"none"
+          OAuth scope for the refresh request.
 
-
+    - `beta_managed_agents_static_bearer_auth_response: object`
 
-beta\_managed\_agents\_token\_endpoint\_auth\_basic\_param: object { client\_secret, type } 
+      Static bearer token credential details for an MCP server.
 
-Token endpoint uses HTTP Basic authentication with client credentials.
+      - `mcp_server_url: string`
 
-client\_secret: string
+        URL of the MCP server this credential authenticates against.
 
-OAuth client secret.
+      - `type: "static_bearer"`
 
-
+    - `beta_managed_agents_environment_variable_auth_response: object`
 
-type: "client\_secret\_basic"
+      Environment variable credential details. The secret value is never returned.
 
-"client\_secret\_basic"
+      - `injection_location: object`
 
-
+        Where in the outbound request the secret value is substituted.
 
-beta\_managed\_agents\_token\_endpoint\_auth\_post\_param: object { client\_secret, type } 
+        - `body: boolean`
 
-Token endpoint uses POST body authentication with client credentials.
+          Whether the placeholder is substituted in the request body.
 
-client\_secret: string
+        - `header: boolean`
 
-OAuth client secret.
+          Whether the placeholder is substituted in request header values.
 
-
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
-type: "client\_secret\_post"
+        Outbound hosts the secret value is substituted on.
 
-"client\_secret\_post"
+        - `beta_managed_agents_unrestricted_credential_networking_response: object`
 
-resource: optional string
+          The secret is substituted on any host the session's Environment network policy permits egress to.
 
-OAuth resource indicator.
+          - `type: "unrestricted"`
 
-scope: optional string
+        - `beta_managed_agents_limited_credential_networking_response: object`
 
-OAuth scope for the refresh request.
+          The secret is substituted only on requests to the listed hosts.
 
-
+          - `allowed_hosts: array of string`
 
-beta\_managed\_agents\_mcp\_oauth\_refresh\_response: object { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more } 
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-OAuth refresh token configuration returned in credential responses.
+          - `type: "limited"`
 
-client\_id: string
+      - `secret_name: string`
 
-OAuth client ID.
+        Name of the environment variable.
 
-token\_endpoint: string
+      - `type: "environment_variable"`
 
-Token endpoint URL used to refresh the access token.
+  - `created_at: string`
 
-
+    A timestamp in RFC 3339 format
 
-token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsTokenEndpointAuthBasicResponse](api/beta/vaults/credentials.md) { type }  or [BetaManagedAgentsTokenEndpointAuthPostResponse](api/beta/vaults/credentials.md) { type } 
+    format: date-time
 
-Token endpoint requires no client authentication.
+  - `metadata: map[string]`
 
-
+    Arbitrary key-value metadata attached to the credential.
 
-beta\_managed\_agents\_token\_endpoint\_auth\_none\_response: object { type } 
+  - `type: "vault_credential"`
 
-Token endpoint requires no client authentication.
+  - `updated_at: string`
 
-
+    A timestamp in RFC 3339 format
 
-type: "none"
+    format: date-time
 
-"none"
+  - `vault_id: string`
 
-
+    Identifier of the vault this credential belongs to.
 
-beta\_managed\_agents\_token\_endpoint\_auth\_basic\_response: object { type } 
+  - `display_name: optional string`
 
-Token endpoint uses HTTP Basic authentication with client credentials.
+    Human-readable name for the credential.
 
-
+### Example
 
-type: "client\_secret\_basic"
+```bash
+ant beta:vaults:credentials archive \
+  --api-key my-anthropic-api-key \
+  --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv \
+  --credential-id vcrd_011CZkZEMt8gZan2iYOQfSkw
+```
 
-"client\_secret\_basic"
+#### Response (200)
 
-
+```json
+{
+  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "archived_at": null,
+  "auth": {
+    "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
+    "type": "static_bearer"
+  },
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {
+    "environment": "production"
+  },
+  "type": "vault_credential",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "display_name": "Example credential"
+}
+```
 
-beta\_managed\_agents\_token\_endpoint\_auth\_post\_response: object { type } 
+## Validate Credential
 
-Token endpoint uses POST body authentication with client credentials.
+`$ ant beta:vaults:credentials mcp-oauth-validate`
 
-
+**POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
 
-type: "client\_secret\_post"
+Validate Credential
 
-"client\_secret\_post"
+### Parameters
 
-resource: optional string
+- `--vault-id: string`
 
-OAuth resource indicator.
+  Path param: Path parameter vault_id
 
-scope: optional string
+- `--credential-id: string`
 
-OAuth scope for the refresh request.
+  Path param: Path parameter credential_id
 
-
+- `--beta: optional array of AnthropicBeta`
 
-beta\_managed\_agents\_mcp\_oauth\_refresh\_update\_params: object { refresh\_token, scope, token\_endpoint\_auth } 
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-Parameters for updating OAuth refresh token configuration.
+### Returns
 
-refresh\_token: optional string
+- `beta_managed_agents_credential_validation: object`
 
-Updated OAuth refresh token.
+  Result of live-probing a credential against its configured MCP server.
 
-scope: optional string
+  - `credential_id: string`
 
-Updated OAuth scope for the refresh request.
+    Unique identifier of the credential that was validated.
 
-
+  - `has_refresh_token: boolean`
 
-token\_endpoint\_auth: optional [BetaManagedAgentsTokenEndpointAuthBasicUpdateParam](api/beta/vaults/credentials.md) { type, client\_secret }  or [BetaManagedAgentsTokenEndpointAuthPostUpdateParam](api/beta/vaults/credentials.md) { type, client\_secret } 
+    Whether the credential has a refresh token configured.
 
-Updated HTTP Basic authentication parameters for the token endpoint.
+  - `mcp_probe: object`
 
-
+    The failing step of an MCP validation probe.
 
-beta\_managed\_agents\_token\_endpoint\_auth\_basic\_update\_param: object { type, client\_secret } 
+    - `http_response: object`
 
-Updated HTTP Basic authentication parameters for the token endpoint.
+      An HTTP response captured during a credential validation probe.
 
-
+      - `body: string`
 
-type: "client\_secret\_basic"
+        Response body. May be truncated and has sensitive values scrubbed.
 
-"client\_secret\_basic"
+      - `body_truncated: boolean`
 
-client\_secret: optional string
+        Whether `body` was truncated.
 
-Updated OAuth client secret.
+      - `content_type: string`
 
-
+        Value of the `Content-Type` response header.
 
-beta\_managed\_agents\_token\_endpoint\_auth\_post\_update\_param: object { type, client\_secret } 
+      - `status_code: number`
 
-Updated POST body authentication parameters for the token endpoint.
+        HTTP status code.
 
-
+        format: int32
 
-type: "client\_secret\_post"
+    - `method: string`
 
-"client\_secret\_post"
+      The MCP method that failed (for example `initialize` or `tools/list`).
 
-client\_secret: optional string
+  - `refresh: object`
 
-Updated OAuth client secret.
+    Outcome of a refresh-token exchange attempted during credential validation.
 
-
+    - `http_response: object`
 
-beta\_managed\_agents\_mcp\_oauth\_update\_params: object { type, access\_token, expires\_at, refresh } 
+      An HTTP response captured during a credential validation probe.
 
-Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
+      - `body: string`
 
-
+        Response body. May be truncated and has sensitive values scrubbed.
 
-type: "mcp\_oauth"
+      - `body_truncated: boolean`
 
-"mcp\_oauth"
+        Whether `body` was truncated.
 
-access\_token: optional string
+      - `content_type: string`
 
-Updated OAuth access token.
+        Value of the `Content-Type` response header.
 
-expires\_at: optional string
+      - `status_code: number`
 
-A timestamp in RFC 3339 format
+        HTTP status code.
 
-
+        format: int32
 
-refresh: optional object { refresh\_token, scope, token\_endpoint\_auth } 
+    - `status: "succeeded" or "failed" or "connect_error" or "no_refresh_token"`
 
-Parameters for updating OAuth refresh token configuration.
+      Outcome of a refresh-token exchange attempted during credential validation.
 
-refresh\_token: optional string
+      - `"succeeded"`
 
-Updated OAuth refresh token.
+      - `"failed"`
 
-scope: optional string
+      - `"connect_error"`
 
-Updated OAuth scope for the refresh request.
+      - `"no_refresh_token"`
 
-
+  - `status: "valid" or "invalid" or "unknown"`
 
-token\_endpoint\_auth: optional [BetaManagedAgentsTokenEndpointAuthBasicUpdateParam](api/beta/vaults/credentials.md) { type, client\_secret }  or [BetaManagedAgentsTokenEndpointAuthPostUpdateParam](api/beta/vaults/credentials.md) { type, client\_secret } 
+    Overall verdict of a credential validation probe.
 
-Updated HTTP Basic authentication parameters for the token endpoint.
+    - `"valid"`
 
-
+    - `"invalid"`
 
-beta\_managed\_agents\_token\_endpoint\_auth\_basic\_update\_param: object { type, client\_secret } 
+    - `"unknown"`
 
-Updated HTTP Basic authentication parameters for the token endpoint.
+  - `type: "vault_credential_validation"`
 
-
+  - `validated_at: string`
 
-type: "client\_secret\_basic"
+    A timestamp in RFC 3339 format
 
-"client\_secret\_basic"
+    format: date-time
 
-client\_secret: optional string
+  - `vault_id: string`
 
-Updated OAuth client secret.
+    Identifier of the vault containing the credential.
 
-
+### Example
 
-beta\_managed\_agents\_token\_endpoint\_auth\_post\_update\_param: object { type, client\_secret } 
+```bash
+ant beta:vaults:credentials mcp-oauth-validate \
+  --api-key my-anthropic-api-key \
+  --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv \
+  --credential-id vcrd_011CZkZEMt8gZan2iYOQfSkw
+```
 
-Updated POST body authentication parameters for the token endpoint.
+#### Response (200)
 
-
+```json
+{
+  "credential_id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "has_refresh_token": true,
+  "mcp_probe": {
+    "http_response": {
+      "body": "body",
+      "body_truncated": true,
+      "content_type": "content_type",
+      "status_code": 0
+    },
+    "method": "method"
+  },
+  "refresh": {
+    "http_response": {
+      "body": "body",
+      "body_truncated": true,
+      "content_type": "content_type",
+      "status_code": 0
+    },
+    "status": "succeeded"
+  },
+  "status": "valid",
+  "type": "vault_credential_validation",
+  "validated_at": "2026-03-15T10:00:00Z",
+  "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+}
+```
 
-type: "client\_secret\_post"
+## Domain types
 
-"client\_secret\_post"
+### Beta Managed Agents Credential
 
-client\_secret: optional string
+- `beta_managed_agents_credential: object`
 
-Updated OAuth client secret.
+  A credential stored in a vault. Sensitive fields are never returned in responses.
 
-
+  - `id: string`
 
-beta\_managed\_agents\_mcp\_probe: object { http\_response, method } 
+    Unique identifier for the credential.
 
-The failing step of an MCP validation probe.
+  - `archived_at: string`
 
-
+    A timestamp in RFC 3339 format
 
-http\_response: object { body, body\_truncated, content\_type, status\_code } 
+    format: date-time
 
-An HTTP response captured during a credential validation probe.
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
-body: string
+    Authentication details for a credential.
 
-Response body. May be truncated and has sensitive values scrubbed.
+    - `beta_managed_agents_mcp_oauth_auth_response: object`
 
-body\_truncated: boolean
+      OAuth credential details for an MCP server.
 
-Whether `body` was truncated.
+      - `mcp_server_url: string`
 
-content\_type: string
+        URL of the MCP server this credential authenticates against.
 
-Value of the `Content-Type` response header.
+      - `type: "mcp_oauth"`
 
-status\_code: number
+      - `expires_at: optional string`
 
-HTTP status code.
+        A timestamp in RFC 3339 format
 
-method: string
+        format: date-time
 
-The MCP method that failed (for example `initialize` or `tools/list`).
+      - `refresh: optional object`
 
-
+        OAuth refresh token configuration returned in credential responses.
 
-beta\_managed\_agents\_refresh\_http\_response: object { body, body\_truncated, content\_type, status\_code } 
+        - `client_id: string`
 
-An HTTP response captured during a credential validation probe.
+          OAuth client ID.
 
-body: string
+        - `token_endpoint: string`
 
-Response body. May be truncated and has sensitive values scrubbed.
+          Token endpoint URL used to refresh the access token.
 
-body\_truncated: boolean
+        - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse or BetaManagedAgentsTokenEndpointAuthBasicResponse or BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-Whether `body` was truncated.
+          Token endpoint requires no client authentication.
 
-content\_type: string
+          - `beta_managed_agents_token_endpoint_auth_none_response: object`
 
-Value of the `Content-Type` response header.
+            Token endpoint requires no client authentication.
 
-status\_code: number
+            - `type: "none"`
 
-HTTP status code.
+          - `beta_managed_agents_token_endpoint_auth_basic_response: object`
 
-
+            Token endpoint uses HTTP Basic authentication with client credentials.
 
-beta\_managed\_agents\_refresh\_object: object { http\_response, status } 
+            - `type: "client_secret_basic"`
 
-Outcome of a refresh-token exchange attempted during credential validation.
+          - `beta_managed_agents_token_endpoint_auth_post_response: object`
 
-
+            Token endpoint uses POST body authentication with client credentials.
 
-http\_response: object { body, body\_truncated, content\_type, status\_code } 
+            - `type: "client_secret_post"`
 
-An HTTP response captured during a credential validation probe.
+        - `resource: optional string`
 
-body: string
+          OAuth resource indicator.
 
-Response body. May be truncated and has sensitive values scrubbed.
+        - `scope: optional string`
 
-body\_truncated: boolean
+          OAuth scope for the refresh request.
 
-Whether `body` was truncated.
+    - `beta_managed_agents_static_bearer_auth_response: object`
 
-content\_type: string
+      Static bearer token credential details for an MCP server.
 
-Value of the `Content-Type` response header.
+      - `mcp_server_url: string`
 
-status\_code: number
+        URL of the MCP server this credential authenticates against.
 
-HTTP status code.
+      - `type: "static_bearer"`
 
-
+    - `beta_managed_agents_environment_variable_auth_response: object`
 
-status: "succeeded" or "failed" or "connect\_error" or "no\_refresh\_token"
+      Environment variable credential details. The secret value is never returned.
 
-Outcome of a refresh-token exchange attempted during credential validation.
+      - `injection_location: object`
 
-"succeeded"
+        Where in the outbound request the secret value is substituted.
 
-"failed"
+        - `body: boolean`
 
-"connect\_error"
+          Whether the placeholder is substituted in the request body.
 
-"no\_refresh\_token"
+        - `header: boolean`
 
-
+          Whether the placeholder is substituted in request header values.
 
-beta\_managed\_agents\_static\_bearer\_auth\_response: object { mcp\_server\_url, type } 
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
-Static bearer token credential details for an MCP server.
+        Outbound hosts the secret value is substituted on.
 
-mcp\_server\_url: string
+        - `beta_managed_agents_unrestricted_credential_networking_response: object`
 
-URL of the MCP server this credential authenticates against.
+          The secret is substituted on any host the session's Environment network policy permits egress to.
 
-
+          - `type: "unrestricted"`
 
-type: "static\_bearer"
+        - `beta_managed_agents_limited_credential_networking_response: object`
 
-"static\_bearer"
+          The secret is substituted only on requests to the listed hosts.
 
-
+          - `allowed_hosts: array of string`
 
-beta\_managed\_agents\_static\_bearer\_create\_params: object { token, mcp\_server\_url, type } 
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-Parameters for creating a static bearer token credential.
+          - `type: "limited"`
 
-token: string
+      - `secret_name: string`
 
-Static bearer token value.
+        Name of the environment variable.
 
-mcp\_server\_url: string
+      - `type: "environment_variable"`
 
-URL of the MCP server this credential authenticates against.
+  - `created_at: string`
 
-
+    A timestamp in RFC 3339 format
 
-type: "static\_bearer"
+    format: date-time
 
-"static\_bearer"
+  - `metadata: map[string]`
 
-
+    Arbitrary key-value metadata attached to the credential.
 
-beta\_managed\_agents\_static\_bearer\_update\_params: object { type, token } 
+  - `type: "vault_credential"`
 
-Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
+  - `updated_at: string`
 
-
+    A timestamp in RFC 3339 format
 
-type: "static\_bearer"
+    format: date-time
 
-"static\_bearer"
+  - `vault_id: string`
 
-token: optional string
+    Identifier of the vault this credential belongs to.
 
-Updated static bearer token value.
+  - `display_name: optional string`
 
-
+    Human-readable name for the credential.
 
-beta\_managed\_agents\_token\_endpoint\_auth\_basic\_param: object { client\_secret, type } 
+### Beta Managed Agents Credential Networking Params
 
-Token endpoint uses HTTP Basic authentication with client credentials.
+- `beta_managed_agents_credential_networking_params: BetaManagedAgentsUnrestrictedCredentialNetworkingParams or BetaManagedAgentsLimitedCredentialNetworkingParams`
 
-client\_secret: string
+  Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
-OAuth client secret.
+  - `beta_managed_agents_unrestricted_credential_networking_params: object`
 
-
+    Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
-type: "client\_secret\_basic"
+    - `type: "unrestricted"`
 
-"client\_secret\_basic"
+  - `beta_managed_agents_limited_credential_networking_params: object`
 
-
+    Substitute the secret only on requests to the listed hosts.
 
-beta\_managed\_agents\_token\_endpoint\_auth\_basic\_response: object { type } 
+    - `allowed_hosts: array of string`
 
-Token endpoint uses HTTP Basic authentication with client credentials.
+      Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
 
-
+    - `type: "limited"`
 
-type: "client\_secret\_basic"
+### Beta Managed Agents Credential Validation
 
-"client\_secret\_basic"
+- `beta_managed_agents_credential_validation: object`
 
-
+  Result of live-probing a credential against its configured MCP server.
 
-beta\_managed\_agents\_token\_endpoint\_auth\_basic\_update\_param: object { type, client\_secret } 
+  - `credential_id: string`
 
-Updated HTTP Basic authentication parameters for the token endpoint.
+    Unique identifier of the credential that was validated.
 
-
+  - `has_refresh_token: boolean`
 
-type: "client\_secret\_basic"
+    Whether the credential has a refresh token configured.
 
-"client\_secret\_basic"
+  - `mcp_probe: object`
 
-client\_secret: optional string
+    The failing step of an MCP validation probe.
 
-Updated OAuth client secret.
+    - `http_response: object`
 
-
+      An HTTP response captured during a credential validation probe.
 
-beta\_managed\_agents\_token\_endpoint\_auth\_none\_param: object { type } 
+      - `body: string`
 
-Token endpoint requires no client authentication.
+        Response body. May be truncated and has sensitive values scrubbed.
 
-
+      - `body_truncated: boolean`
 
-type: "none"
+        Whether `body` was truncated.
 
-"none"
+      - `content_type: string`
 
-
+        Value of the `Content-Type` response header.
 
-beta\_managed\_agents\_token\_endpoint\_auth\_none\_response: object { type } 
+      - `status_code: number`
 
-Token endpoint requires no client authentication.
+        HTTP status code.
 
-
+        format: int32
 
-type: "none"
+    - `method: string`
 
-"none"
+      The MCP method that failed (for example `initialize` or `tools/list`).
 
-
+  - `refresh: object`
 
-beta\_managed\_agents\_token\_endpoint\_auth\_post\_param: object { client\_secret, type } 
+    Outcome of a refresh-token exchange attempted during credential validation.
 
-Token endpoint uses POST body authentication with client credentials.
+    - `http_response: object`
 
-client\_secret: string
+      An HTTP response captured during a credential validation probe.
 
-OAuth client secret.
+      - `body: string`
 
-
+        Response body. May be truncated and has sensitive values scrubbed.
 
-type: "client\_secret\_post"
+      - `body_truncated: boolean`
 
-"client\_secret\_post"
+        Whether `body` was truncated.
 
-
+      - `content_type: string`
 
-beta\_managed\_agents\_token\_endpoint\_auth\_post\_response: object { type } 
+        Value of the `Content-Type` response header.
 
-Token endpoint uses POST body authentication with client credentials.
+      - `status_code: number`
 
-
+        HTTP status code.
 
-type: "client\_secret\_post"
+        format: int32
 
-"client\_secret\_post"
+    - `status: "succeeded" or "failed" or "connect_error" or "no_refresh_token"`
 
-
+      Outcome of a refresh-token exchange attempted during credential validation.
 
-beta\_managed\_agents\_token\_endpoint\_auth\_post\_update\_param: object { type, client\_secret } 
+      - `"succeeded"`
 
-Updated POST body authentication parameters for the token endpoint.
+      - `"failed"`
 
-
+      - `"connect_error"`
 
-type: "client\_secret\_post"
+      - `"no_refresh_token"`
 
-"client\_secret\_post"
+  - `status: "valid" or "invalid" or "unknown"`
 
-client\_secret: optional string
+    Overall verdict of a credential validation probe.
 
-Updated OAuth client secret.
+    - `"valid"`
 
-
+    - `"invalid"`
 
-beta\_managed\_agents\_unrestricted\_credential\_networking\_params: object { type } 
+    - `"unknown"`
 
-Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+  - `type: "vault_credential_validation"`
 
-
+  - `validated_at: string`
 
-type: "unrestricted"
+    A timestamp in RFC 3339 format
 
-"unrestricted"
+    format: date-time
 
-
+  - `vault_id: string`
 
-beta\_managed\_agents\_unrestricted\_credential\_networking\_response: object { type } 
+    Identifier of the vault containing the credential.
 
-The secret is substituted on any host the session's Environment network policy permits egress to.
+### Beta Managed Agents Credential Validation Status
 
-
+- `beta_managed_agents_credential_validation_status: "valid" or "invalid" or "unknown"`
 
-type: "unrestricted"
+  Overall verdict of a credential validation probe.
 
-"unrestricted"
+  - `"valid"`
+
+  - `"invalid"`
+
+  - `"unknown"`
+
+### Beta Managed Agents Deleted Credential
+
+- `beta_managed_agents_deleted_credential: object`
+
+  Confirmation of a deleted credential.
+
+  - `id: string`
+
+    Unique identifier of the deleted credential.
+
+  - `type: "vault_credential_deleted"`
+
+### Beta Managed Agents Environment Variable Auth Response
+
+- `beta_managed_agents_environment_variable_auth_response: object`
+
+  Environment variable credential details. The secret value is never returned.
+
+  - `injection_location: object`
+
+    Where in the outbound request the secret value is substituted.
+
+    - `body: boolean`
+
+      Whether the placeholder is substituted in the request body.
+
+    - `header: boolean`
+
+      Whether the placeholder is substituted in request header values.
+
+  - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+    Outbound hosts the secret value is substituted on.
+
+    - `beta_managed_agents_unrestricted_credential_networking_response: object`
+
+      The secret is substituted on any host the session's Environment network policy permits egress to.
+
+      - `type: "unrestricted"`
+
+    - `beta_managed_agents_limited_credential_networking_response: object`
+
+      The secret is substituted only on requests to the listed hosts.
+
+      - `allowed_hosts: array of string`
+
+        Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+      - `type: "limited"`
+
+  - `secret_name: string`
+
+    Name of the environment variable.
+
+  - `type: "environment_variable"`
+
+### Beta Managed Agents Environment Variable Create Params
+
+- `beta_managed_agents_environment_variable_create_params: object`
+
+  Parameters for creating an environment variable credential.
+
+  - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingParams or BetaManagedAgentsLimitedCredentialNetworkingParams`
+
+    Outbound hosts the secret value is substituted on.
+
+    - `beta_managed_agents_unrestricted_credential_networking_params: object`
+
+      Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+      - `type: "unrestricted"`
+
+    - `beta_managed_agents_limited_credential_networking_params: object`
+
+      Substitute the secret only on requests to the listed hosts.
+
+      - `allowed_hosts: array of string`
+
+        Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+      - `type: "limited"`
+
+  - `secret_name: string`
+
+    Name of the environment variable. Immutable after create.
+
+    minLength: 1, maxLength: 255
+
+  - `secret_value: string`
+
+    Secret value. Write-only; never returned in responses.
+
+    minLength: 1, maxLength: 4096
+
+  - `type: "environment_variable"`
+
+  - `injection_location: optional object`
+
+    Where in the outbound request the secret value may be substituted.
+
+    - `body: optional boolean`
+
+      Substitute when the placeholder appears in the request body.
+
+    - `header: optional boolean`
+
+      Substitute when the placeholder appears in a request header value.
+
+### Beta Managed Agents Environment Variable Update Params
+
+- `beta_managed_agents_environment_variable_update_params: object`
+
+  Parameters for updating an environment variable credential. `secret_name` is immutable.
+
+  - `type: "environment_variable"`
+
+  - `injection_location: optional object`
+
+    Updated injection location.
+
+    - `body: optional boolean`
+
+      Substitute when the placeholder appears in the request body.
+
+    - `header: optional boolean`
+
+      Substitute when the placeholder appears in a request header value.
+
+  - `networking: optional BetaManagedAgentsUnrestrictedCredentialNetworkingParams or BetaManagedAgentsLimitedCredentialNetworkingParams`
+
+    Updated networking scope. Full replacement.
+
+    - `beta_managed_agents_unrestricted_credential_networking_params: object`
+
+      Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+      - `type: "unrestricted"`
+
+    - `beta_managed_agents_limited_credential_networking_params: object`
+
+      Substitute the secret only on requests to the listed hosts.
+
+      - `allowed_hosts: array of string`
+
+        Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+      - `type: "limited"`
+
+  - `secret_value: optional string`
+
+    Updated secret value.
+
+    minLength: 1, maxLength: 4096
+
+### Beta Managed Agents Injection Location Params
+
+- `beta_managed_agents_injection_location_params: object`
+
+  Where in the outbound request the secret value may be substituted.
+
+  - `body: optional boolean`
+
+    Substitute when the placeholder appears in the request body.
+
+  - `header: optional boolean`
+
+    Substitute when the placeholder appears in a request header value.
+
+### Beta Managed Agents Injection Location Response
+
+- `beta_managed_agents_injection_location_response: object`
+
+  Where in the outbound request the secret value is substituted.
+
+  - `body: boolean`
+
+    Whether the placeholder is substituted in the request body.
+
+  - `header: boolean`
+
+    Whether the placeholder is substituted in request header values.
+
+### Beta Managed Agents Injection Location Update Params
+
+- `beta_managed_agents_injection_location_update_params: object`
+
+  Updated injection location.
+
+  - `body: optional boolean`
+
+    Substitute when the placeholder appears in the request body.
+
+  - `header: optional boolean`
+
+    Substitute when the placeholder appears in a request header value.
+
+### Beta Managed Agents Limited Credential Networking Params
+
+- `beta_managed_agents_limited_credential_networking_params: object`
+
+  Substitute the secret only on requests to the listed hosts.
+
+  - `allowed_hosts: array of string`
+
+    Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+  - `type: "limited"`
+
+### Beta Managed Agents Limited Credential Networking Response
+
+- `beta_managed_agents_limited_credential_networking_response: object`
+
+  The secret is substituted only on requests to the listed hosts.
+
+  - `allowed_hosts: array of string`
+
+    Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+  - `type: "limited"`
+
+### Beta Managed Agents MCP OAuth Auth Response
+
+- `beta_managed_agents_mcp_oauth_auth_response: object`
+
+  OAuth credential details for an MCP server.
+
+  - `mcp_server_url: string`
+
+    URL of the MCP server this credential authenticates against.
+
+  - `type: "mcp_oauth"`
+
+  - `expires_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `refresh: optional object`
+
+    OAuth refresh token configuration returned in credential responses.
+
+    - `client_id: string`
+
+      OAuth client ID.
+
+    - `token_endpoint: string`
+
+      Token endpoint URL used to refresh the access token.
+
+    - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse or BetaManagedAgentsTokenEndpointAuthBasicResponse or BetaManagedAgentsTokenEndpointAuthPostResponse`
+
+      Token endpoint requires no client authentication.
+
+      - `beta_managed_agents_token_endpoint_auth_none_response: object`
+
+        Token endpoint requires no client authentication.
+
+        - `type: "none"`
+
+      - `beta_managed_agents_token_endpoint_auth_basic_response: object`
+
+        Token endpoint uses HTTP Basic authentication with client credentials.
+
+        - `type: "client_secret_basic"`
+
+      - `beta_managed_agents_token_endpoint_auth_post_response: object`
+
+        Token endpoint uses POST body authentication with client credentials.
+
+        - `type: "client_secret_post"`
+
+    - `resource: optional string`
+
+      OAuth resource indicator.
+
+    - `scope: optional string`
+
+      OAuth scope for the refresh request.
+
+### Beta Managed Agents MCP OAuth Create Params
+
+- `beta_managed_agents_mcp_oauth_create_params: object`
+
+  Parameters for creating an MCP OAuth credential.
+
+  - `access_token: string`
+
+    OAuth access token.
+
+    minLength: 1, maxLength: 8192
+
+  - `mcp_server_url: string`
+
+    URL of the MCP server this credential authenticates against.
+
+    minLength: 1, maxLength: 2047
+
+  - `type: "mcp_oauth"`
+
+  - `expires_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `refresh: optional object`
+
+    OAuth refresh token parameters for creating a credential with refresh support.
+
+    - `client_id: string`
+
+      OAuth client ID.
+
+      minLength: 1, maxLength: 1024
+
+    - `refresh_token: string`
+
+      OAuth refresh token.
+
+      minLength: 1, maxLength: 4096
+
+    - `token_endpoint: string`
+
+      Token endpoint URL used to refresh the access token.
+
+      minLength: 1, maxLength: 2047
+
+    - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneParam or BetaManagedAgentsTokenEndpointAuthBasicParam or BetaManagedAgentsTokenEndpointAuthPostParam`
+
+      Token endpoint requires no client authentication.
+
+      - `beta_managed_agents_token_endpoint_auth_none_param: object`
+
+        Token endpoint requires no client authentication.
+
+        - `type: "none"`
+
+      - `beta_managed_agents_token_endpoint_auth_basic_param: object`
+
+        Token endpoint uses HTTP Basic authentication with client credentials.
+
+        - `client_secret: string`
+
+          OAuth client secret.
+
+          minLength: 1, maxLength: 512
+
+        - `type: "client_secret_basic"`
+
+      - `beta_managed_agents_token_endpoint_auth_post_param: object`
+
+        Token endpoint uses POST body authentication with client credentials.
+
+        - `client_secret: string`
+
+          OAuth client secret.
+
+          minLength: 1, maxLength: 512
+
+        - `type: "client_secret_post"`
+
+    - `resource: optional string`
+
+      OAuth resource indicator.
+
+      minLength: 1, maxLength: 2047
+
+    - `scope: optional string`
+
+      OAuth scope for the refresh request.
+
+      minLength: 1, maxLength: 8192
+
+### Beta Managed Agents MCP OAuth Refresh Params
+
+- `beta_managed_agents_mcp_oauth_refresh_params: object`
+
+  OAuth refresh token parameters for creating a credential with refresh support.
+
+  - `client_id: string`
+
+    OAuth client ID.
+
+    minLength: 1, maxLength: 1024
+
+  - `refresh_token: string`
+
+    OAuth refresh token.
+
+    minLength: 1, maxLength: 4096
+
+  - `token_endpoint: string`
+
+    Token endpoint URL used to refresh the access token.
+
+    minLength: 1, maxLength: 2047
+
+  - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneParam or BetaManagedAgentsTokenEndpointAuthBasicParam or BetaManagedAgentsTokenEndpointAuthPostParam`
+
+    Token endpoint requires no client authentication.
+
+    - `beta_managed_agents_token_endpoint_auth_none_param: object`
+
+      Token endpoint requires no client authentication.
+
+      - `type: "none"`
+
+    - `beta_managed_agents_token_endpoint_auth_basic_param: object`
+
+      Token endpoint uses HTTP Basic authentication with client credentials.
+
+      - `client_secret: string`
+
+        OAuth client secret.
+
+        minLength: 1, maxLength: 512
+
+      - `type: "client_secret_basic"`
+
+    - `beta_managed_agents_token_endpoint_auth_post_param: object`
+
+      Token endpoint uses POST body authentication with client credentials.
+
+      - `client_secret: string`
+
+        OAuth client secret.
+
+        minLength: 1, maxLength: 512
+
+      - `type: "client_secret_post"`
+
+  - `resource: optional string`
+
+    OAuth resource indicator.
+
+    minLength: 1, maxLength: 2047
+
+  - `scope: optional string`
+
+    OAuth scope for the refresh request.
+
+    minLength: 1, maxLength: 8192
+
+### Beta Managed Agents MCP OAuth Refresh Response
+
+- `beta_managed_agents_mcp_oauth_refresh_response: object`
+
+  OAuth refresh token configuration returned in credential responses.
+
+  - `client_id: string`
+
+    OAuth client ID.
+
+  - `token_endpoint: string`
+
+    Token endpoint URL used to refresh the access token.
+
+  - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse or BetaManagedAgentsTokenEndpointAuthBasicResponse or BetaManagedAgentsTokenEndpointAuthPostResponse`
+
+    Token endpoint requires no client authentication.
+
+    - `beta_managed_agents_token_endpoint_auth_none_response: object`
+
+      Token endpoint requires no client authentication.
+
+      - `type: "none"`
+
+    - `beta_managed_agents_token_endpoint_auth_basic_response: object`
+
+      Token endpoint uses HTTP Basic authentication with client credentials.
+
+      - `type: "client_secret_basic"`
+
+    - `beta_managed_agents_token_endpoint_auth_post_response: object`
+
+      Token endpoint uses POST body authentication with client credentials.
+
+      - `type: "client_secret_post"`
+
+  - `resource: optional string`
+
+    OAuth resource indicator.
+
+  - `scope: optional string`
+
+    OAuth scope for the refresh request.
+
+### Beta Managed Agents MCP OAuth Refresh Update Params
+
+- `beta_managed_agents_mcp_oauth_refresh_update_params: object`
+
+  Parameters for updating OAuth refresh token configuration.
+
+  - `refresh_token: optional string`
+
+    Updated OAuth refresh token.
+
+    minLength: 1, maxLength: 4096
+
+  - `scope: optional string`
+
+    Updated OAuth scope for the refresh request.
+
+    maxLength: 8192
+
+  - `token_endpoint_auth: optional BetaManagedAgentsTokenEndpointAuthBasicUpdateParam or BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
+
+    Updated HTTP Basic authentication parameters for the token endpoint.
+
+    - `beta_managed_agents_token_endpoint_auth_basic_update_param: object`
+
+      Updated HTTP Basic authentication parameters for the token endpoint.
+
+      - `type: "client_secret_basic"`
+
+      - `client_secret: optional string`
+
+        Updated OAuth client secret.
+
+        minLength: 1, maxLength: 512
+
+    - `beta_managed_agents_token_endpoint_auth_post_update_param: object`
+
+      Updated POST body authentication parameters for the token endpoint.
+
+      - `type: "client_secret_post"`
+
+      - `client_secret: optional string`
+
+        Updated OAuth client secret.
+
+        minLength: 1, maxLength: 512
+
+### Beta Managed Agents MCP OAuth Update Params
+
+- `beta_managed_agents_mcp_oauth_update_params: object`
+
+  Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
+
+  - `type: "mcp_oauth"`
+
+  - `access_token: optional string`
+
+    Updated OAuth access token.
+
+    minLength: 1, maxLength: 8192
+
+  - `expires_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+    format: date-time
+
+  - `refresh: optional object`
+
+    Parameters for updating OAuth refresh token configuration.
+
+    - `refresh_token: optional string`
+
+      Updated OAuth refresh token.
+
+      minLength: 1, maxLength: 4096
+
+    - `scope: optional string`
+
+      Updated OAuth scope for the refresh request.
+
+      maxLength: 8192
+
+    - `token_endpoint_auth: optional BetaManagedAgentsTokenEndpointAuthBasicUpdateParam or BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
+
+      Updated HTTP Basic authentication parameters for the token endpoint.
+
+      - `beta_managed_agents_token_endpoint_auth_basic_update_param: object`
+
+        Updated HTTP Basic authentication parameters for the token endpoint.
+
+        - `type: "client_secret_basic"`
+
+        - `client_secret: optional string`
+
+          Updated OAuth client secret.
+
+          minLength: 1, maxLength: 512
+
+      - `beta_managed_agents_token_endpoint_auth_post_update_param: object`
+
+        Updated POST body authentication parameters for the token endpoint.
+
+        - `type: "client_secret_post"`
+
+        - `client_secret: optional string`
+
+          Updated OAuth client secret.
+
+          minLength: 1, maxLength: 512
+
+### Beta Managed Agents MCP Probe
+
+- `beta_managed_agents_mcp_probe: object`
+
+  The failing step of an MCP validation probe.
+
+  - `http_response: object`
+
+    An HTTP response captured during a credential validation probe.
+
+    - `body: string`
+
+      Response body. May be truncated and has sensitive values scrubbed.
+
+    - `body_truncated: boolean`
+
+      Whether `body` was truncated.
+
+    - `content_type: string`
+
+      Value of the `Content-Type` response header.
+
+    - `status_code: number`
+
+      HTTP status code.
+
+      format: int32
+
+  - `method: string`
+
+    The MCP method that failed (for example `initialize` or `tools/list`).
+
+### Beta Managed Agents Refresh HTTP Response
+
+- `beta_managed_agents_refresh_http_response: object`
+
+  An HTTP response captured during a credential validation probe.
+
+  - `body: string`
+
+    Response body. May be truncated and has sensitive values scrubbed.
+
+  - `body_truncated: boolean`
+
+    Whether `body` was truncated.
+
+  - `content_type: string`
+
+    Value of the `Content-Type` response header.
+
+  - `status_code: number`
+
+    HTTP status code.
+
+    format: int32
+
+### Beta Managed Agents Refresh Object
+
+- `beta_managed_agents_refresh_object: object`
+
+  Outcome of a refresh-token exchange attempted during credential validation.
+
+  - `http_response: object`
+
+    An HTTP response captured during a credential validation probe.
+
+    - `body: string`
+
+      Response body. May be truncated and has sensitive values scrubbed.
+
+    - `body_truncated: boolean`
+
+      Whether `body` was truncated.
+
+    - `content_type: string`
+
+      Value of the `Content-Type` response header.
+
+    - `status_code: number`
+
+      HTTP status code.
+
+      format: int32
+
+  - `status: "succeeded" or "failed" or "connect_error" or "no_refresh_token"`
+
+    Outcome of a refresh-token exchange attempted during credential validation.
+
+    - `"succeeded"`
+
+    - `"failed"`
+
+    - `"connect_error"`
+
+    - `"no_refresh_token"`
+
+### Beta Managed Agents Static Bearer Auth Response
+
+- `beta_managed_agents_static_bearer_auth_response: object`
+
+  Static bearer token credential details for an MCP server.
+
+  - `mcp_server_url: string`
+
+    URL of the MCP server this credential authenticates against.
+
+  - `type: "static_bearer"`
+
+### Beta Managed Agents Static Bearer Create Params
+
+- `beta_managed_agents_static_bearer_create_params: object`
+
+  Parameters for creating a static bearer token credential.
+
+  - `token: string`
+
+    Static bearer token value.
+
+    minLength: 1, maxLength: 8192
+
+  - `mcp_server_url: string`
+
+    URL of the MCP server this credential authenticates against.
+
+    minLength: 1, maxLength: 2047
+
+  - `type: "static_bearer"`
+
+### Beta Managed Agents Static Bearer Update Params
+
+- `beta_managed_agents_static_bearer_update_params: object`
+
+  Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
+
+  - `type: "static_bearer"`
+
+  - `token: optional string`
+
+    Updated static bearer token value.
+
+    minLength: 1, maxLength: 8192
+
+### Beta Managed Agents Token Endpoint Auth Basic Param
+
+- `beta_managed_agents_token_endpoint_auth_basic_param: object`
+
+  Token endpoint uses HTTP Basic authentication with client credentials.
+
+  - `client_secret: string`
+
+    OAuth client secret.
+
+    minLength: 1, maxLength: 512
+
+  - `type: "client_secret_basic"`
+
+### Beta Managed Agents Token Endpoint Auth Basic Response
+
+- `beta_managed_agents_token_endpoint_auth_basic_response: object`
+
+  Token endpoint uses HTTP Basic authentication with client credentials.
+
+  - `type: "client_secret_basic"`
+
+### Beta Managed Agents Token Endpoint Auth Basic Update Param
+
+- `beta_managed_agents_token_endpoint_auth_basic_update_param: object`
+
+  Updated HTTP Basic authentication parameters for the token endpoint.
+
+  - `type: "client_secret_basic"`
+
+  - `client_secret: optional string`
+
+    Updated OAuth client secret.
+
+    minLength: 1, maxLength: 512
+
+### Beta Managed Agents Token Endpoint Auth None Param
+
+- `beta_managed_agents_token_endpoint_auth_none_param: object`
+
+  Token endpoint requires no client authentication.
+
+  - `type: "none"`
+
+### Beta Managed Agents Token Endpoint Auth None Response
+
+- `beta_managed_agents_token_endpoint_auth_none_response: object`
+
+  Token endpoint requires no client authentication.
+
+  - `type: "none"`
+
+### Beta Managed Agents Token Endpoint Auth Post Param
+
+- `beta_managed_agents_token_endpoint_auth_post_param: object`
+
+  Token endpoint uses POST body authentication with client credentials.
+
+  - `client_secret: string`
+
+    OAuth client secret.
+
+    minLength: 1, maxLength: 512
+
+  - `type: "client_secret_post"`
+
+### Beta Managed Agents Token Endpoint Auth Post Response
+
+- `beta_managed_agents_token_endpoint_auth_post_response: object`
+
+  Token endpoint uses POST body authentication with client credentials.
+
+  - `type: "client_secret_post"`
+
+### Beta Managed Agents Token Endpoint Auth Post Update Param
+
+- `beta_managed_agents_token_endpoint_auth_post_update_param: object`
+
+  Updated POST body authentication parameters for the token endpoint.
+
+  - `type: "client_secret_post"`
+
+  - `client_secret: optional string`
+
+    Updated OAuth client secret.
+
+    minLength: 1, maxLength: 512
+
+### Beta Managed Agents Unrestricted Credential Networking Params
+
+- `beta_managed_agents_unrestricted_credential_networking_params: object`
+
+  Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+  - `type: "unrestricted"`
+
+### Beta Managed Agents Unrestricted Credential Networking Response
+
+- `beta_managed_agents_unrestricted_credential_networking_response: object`
+
+  The secret is substituted on any host the session's Environment network policy permits egress to.
+
+  - `type: "unrestricted"`
 
 ---
 

@@ -1,134 +1,130 @@
 # Create Deployment
 
-Copy page
+`$client->beta->deployments->create(Agent agent, string environmentID, list<BetaManagedAgentsDeploymentInitialEventParams> initialEvents, string name, ?BetaManagedAgentsBudgetLimit budget, ?string description, ?array<string,string> metadata, ?list<Resource> resources, ?BetaManagedAgentsScheduleParams schedule, ?list<string> vaultIDs, ?list<AnthropicBeta> betas): BetaManagedAgentsDeployment`
 
-
-
-PHP
-
-# Create Deployment
-
-$client->beta->deployments->create([Agent](api/beta/deployments/create.md) agent, string environmentID, list<[BetaManagedAgentsDeploymentInitialEventParams](api/beta/deployments.md)> initialEvents, string name, ?string description, ?array<string,string> metadata, ?list<Resource> resources, ?[BetaManagedAgentsScheduleParams](api/beta/deployments.md) schedule, ?list<string> vaultIDs, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta/deployments.md)
-
-POST/v1/deployments
+**POST** `/v1/deployments`
 
 Create Deployment
 
-##### ParametersExpand Collapse
+## Parameters
 
-agent: [Agent](api/beta/deployments/create.md)
+- `agent: Agent`
 
-Agent to deploy. Accepts the `agent` ID string, which pins the latest version, or an `agent` object with both id and version specified. The agent must exist and not be archived.
+  Agent to deploy. Accepts the `agent` ID string, which pins the latest version, or an `agent` object with both id and version specified. The agent must exist and not be archived.
 
-environmentID: string
+- `environmentID: string`
 
-ID of the `environment` defining the container configuration for sessions created from this deployment.
+  ID of the `environment` defining the container configuration for sessions created from this deployment.
 
-initialEvents: list<[BetaManagedAgentsDeploymentInitialEventParams](api/beta/deployments.md)>
+- `initialEvents: list<BetaManagedAgentsDeploymentInitialEventParams>`
 
-Events to send to each session immediately after creation. At least 1, maximum 50.
+  Events to send to each session immediately after creation. At least 1, maximum 50.
 
-name: string
+- `name: string`
 
-Human-readable name for the deployment.
+  Human-readable name for the deployment.
 
-description?:optional string
+- `budget?:optional BetaManagedAgentsBudgetLimit`
 
-Description of what the deployment does.
+  A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-metadata?:optional array<string,string>
+- `description?:optional string`
 
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+  Description of what the deployment does.
 
-resources?:optional list<Resource>
+- `metadata?:optional array<string,string>`
 
-Resources (e.g. repositories, files) to mount into each session's container. Maximum 500.
+  Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-schedule?:optional [BetaManagedAgentsScheduleParams](api/beta/deployments.md)
+- `resources?:optional list<Resource>`
 
-5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
+  Resources (e.g. repositories, files) to mount into each session's container. Maximum 500.
 
-vaultIDs?:optional list<string>
+- `schedule?:optional BetaManagedAgentsScheduleParams`
 
-Vault IDs for stored credentials the agent can use during sessions created from this deployment. Maximum 50.
+  5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
 
-betas?:optional list<AnthropicBeta>
+- `vaultIDs?:optional list<string>`
 
-Optional header to specify the beta version(s) you want to use.
+  Vault IDs for stored credentials the agent can use during sessions created from this deployment. Maximum 50.
 
-##### ReturnsExpand Collapse
+- `betas?:optional list<AnthropicBeta>`
 
-
+  Optional header to specify the beta version(s) you want to use.
 
-[BetaManagedAgentsDeployment](api/beta/deployments.md)
+## Returns
 
-string id
+- `BetaManagedAgentsDeployment`
 
-Unique identifier for this deployment.
+  - `string id`
 
-[BetaManagedAgentsAgentReference](api/beta/agents.md) agent
+    Unique identifier for this deployment.
 
-A resolved agent reference with a concrete version.
+  - `BetaManagedAgentsAgentReference agent`
 
-?\Datetime archivedAt
+    A resolved agent reference with a concrete version.
 
-A timestamp in RFC 3339 format
+  - `?\Datetime archivedAt`
 
-\Datetime createdAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `\Datetime createdAt`
 
-?string description
+    A timestamp in RFC 3339 format
 
-Description of what the deployment does.
+  - `?string description`
 
-string environmentID
+    Description of what the deployment does.
 
-ID of the `environment` where sessions run.
+  - `string environmentID`
 
-list<[BetaManagedAgentsDeploymentInitialEvent](api/beta/deployments.md)> initialEvents
+    ID of the `environment` where sessions run.
 
-Events sent to each session immediately after creation.
+  - `list<BetaManagedAgentsDeploymentInitialEvent> initialEvents`
 
-array<string,string> metadata
+    Events sent to each session immediately after creation.
 
-Arbitrary key-value metadata. Maximum 16 pairs.
+  - `array<string,string> metadata`
 
-string name
+    Arbitrary key-value metadata. Maximum 16 pairs.
 
-Human-readable name.
+  - `string name`
 
-?[BetaManagedAgentsDeploymentPausedReason](api/beta/deployments.md) pausedReason
+    Human-readable name.
 
-Why a deployment is paused. Non-null exactly when `status` is `paused`.
+  - `?BetaManagedAgentsDeploymentPausedReason pausedReason`
 
-list<[BetaManagedAgentsSessionResourceConfig](api/beta/deployments.md)> resources
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+  - `list<BetaManagedAgentsSessionResourceConfig> resources`
 
-?[BetaManagedAgentsSchedule](api/beta/deployments.md) schedule
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-5-field POSIX cron schedule with computed runtime timestamps.
+  - `?BetaManagedAgentsSchedule schedule`
 
-[BetaManagedAgentsDeploymentStatus](api/beta/deployments.md) status
+    5-field POSIX cron schedule with computed runtime timestamps.
 
-Lifecycle status of a deployment.
+  - `BetaManagedAgentsDeploymentStatus status`
 
-Type type
+    Lifecycle status of a deployment.
 
-\Datetime updatedAt
+  - `Type type`
 
-A timestamp in RFC 3339 format
+  - `\Datetime updatedAt`
 
-list<string> vaultIDs
+    A timestamp in RFC 3339 format
 
-Vault IDs supplying stored credentials for sessions created from this deployment.
+  - `list<string> vaultIDs`
 
-Create Deployment
+    Vault IDs supplying stored credentials for sessions created from this deployment.
 
-PHP
+  - `?BetaManagedAgentsBudgetLimit budget`
 
-```shiki
+    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+## Example
+
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -145,6 +141,10 @@ $betaManagedAgentsDeployment = $client->beta->deployments->create(
     ],
   ],
   name: 'x',
+  budget: [
+    'maxListCost' => ['amount' => '2500', 'currency' => BetaCurrency::USD],
+    'type' => 'limit',
+  ],
   description: 'description',
   metadata: ['foo' => 'string'],
   resources: [
@@ -160,17 +160,15 @@ $betaManagedAgentsDeployment = $client->beta->deployments->create(
     'type' => 'cron',
   ],
   vaultIDs: ['string'],
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaManagedAgentsDeployment);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "depl_011CZkZcDH3vPqd7xnEfwTai",
   "agent": {
@@ -224,71 +222,14 @@ Response 200
   "updated_at": "2026-03-15T10:00:00Z",
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "depl_011CZkZcDH3vPqd7xnEfwTai",
-  "agent": {
-    "id": "agent_011CZkYpogX7uDKUyvBTophP",
-    "type": "agent",
-    "version": 1
-  },
-  "archived_at": null,
-  "created_at": "2026-03-15T10:00:00Z",
-  "description": "Compiles yesterday's orders into a report every weekday morning.",
-  "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
-  "initial_events": [
-    {
-      "content": [
-        {
-          "text": "Compile yesterday's orders into report.md.",
-          "type": "text"
-        }
-      ],
-      "type": "user.message"
-    }
   ],
-  "metadata": {},
-  "name": "Daily order report",
-  "paused_reason": {
-    "type": "manual"
-  },
-  "resources": [
-    {
-      "type": "github_repository",
-      "url": "url",
-      "checkout": {
-        "name": "main",
-        "type": "branch"
-      },
-      "mount_path": "mount_path"
-    }
-  ],
-  "schedule": {
-    "expression": "0 9 * * 1-5",
-    "timezone": "America/Los_Angeles",
-    "type": "cron",
-    "last_run_at": "2026-03-16T16:00:09Z",
-    "upcoming_runs_at": [
-      "2026-03-17T16:00:00Z",
-      "2026-03-18T16:00:00Z"
-    ]
-  },
-  "status": "active",
-  "type": "deployment",
-  "updated_at": "2026-03-15T10:00:00Z",
-  "vault_ids": [
-    "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  "budget": {
+    "max_list_cost": {
+      "amount": "2500",
+      "currency": "USD"
+    },
+    "type": "limit"
+  }
 }
 ```
 

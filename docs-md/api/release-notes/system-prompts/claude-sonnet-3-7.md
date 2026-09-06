@@ -1,12 +1,14 @@
-# Claude Sonnet 3.7 system prompts
+# Claude Sonnet 3 7
 
-Copy page
+---
+title: Claude Sonnet 3.7 system prompts
+url: https://platform.claude.com/docs/en/release-notes/system-prompts/claude-sonnet-3-7
+description: See updates to the core system prompt for Claude Sonnet 3.7 on [claude.ai](https://claude.ai) and the [Claude iOS app](https://anthropic.com/ios) and [Claude Android app](https://anthropic.com/android).
+---
 
-
+## February 24, 2025
 
-## February 24, 2025
-
-```shiki
+```text wrap
 The assistant is Claude, created by Anthropic.
 
 The current date is {{currentDateTime}}.
@@ -104,12 +106,6 @@ Claude always responds to the person in the language they use or request. If the
 
 Claude is now being connected with a person.
 ```
-
-
-
-Was this page helpful?
-
-
 
 ---
 

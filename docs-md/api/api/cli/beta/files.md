@@ -1,128 +1,530 @@
 # Files
 
-Copy page
+## Upload File
 
-
+`$ ant beta:files upload`
 
-CLI
+**POST** `/v1/files`
 
-# Files
+Upload File
 
-##### [Upload File](api/beta/files/upload.md)
+### Parameters
 
-$ ant beta:files upload
+- `--file: string`
 
-POST/v1/files
+  Body param: The file to upload
 
-##### [List Files](api/beta/files/list.md)
+  format: binary
 
-$ ant beta:files list
+- `--expires-in-seconds: optional number`
 
-GET/v1/files
+  Body param: Seconds from upload until the file expires and its bytes become permanently unavailable. Must be between 3600 (one hour) and 7776000 (ninety days).
 
-##### [Download File](api/beta/files/download.md)
+  minimum: 3600, maximum: 7776000
 
-$ ant beta:files download
+- `--beta: optional array of AnthropicBeta`
 
-GET/v1/files/{file\_id}/content
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-##### [Get File Metadata](api/beta/files/retrieve_metadata.md)
+### Returns
 
-$ ant beta:files retrieve-metadata
+- `beta_file_metadata: object`
 
-GET/v1/files/{file\_id}
+  - `id: string`
 
-##### [Delete File](api/beta/files/delete.md)
+    Unique object identifier.
 
-$ ant beta:files delete
+    The format and length of IDs may change over time.
 
-DELETE/v1/files/{file\_id}
+  - `created_at: string`
 
-##### ModelsExpand Collapse
+    RFC 3339 datetime string representing when the file was created.
 
-
+    format: date-time
 
-beta\_file\_scope: object { id, type } 
+  - `filename: string`
 
-id: string
+    Original filename of the uploaded file.
 
-The ID of the scoping resource (e.g., the session ID).
+    maxLength: 500, minLength: 1
 
-type: "session"
+  - `mime_type: string`
 
-The type of scope (e.g., `"session"`).
+    MIME type of the file.
 
-
+    maxLength: 255, minLength: 1
 
-deleted\_file: object { id, type } 
+  - `size_bytes: number`
 
-id: string
+    Size of the file in bytes.
 
-ID of the deleted file.
+    minimum: 0
 
-
+  - `type: "file"`
 
-type: optional "file\_deleted"
+    Object type.
 
-Deleted object type.
+    For files, this is always `"file"`.
 
-For file deletion, this is always `"file_deleted"`.
+  - `downloadable: optional boolean`
 
-"file\_deleted"
+    Whether the file can be downloaded.
 
-
+  - `expires_at: optional string`
 
-file\_metadata: object { id, created\_at, filename, 5 more } 
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
 
-
+    format: date-time
 
-id: string
+  - `scope: optional object`
 
-Unique object identifier.
+    The scope of this file, indicating the context in which it was created (e.g., a session).
 
-The format and length of IDs may change over time.
+    - `id: string`
 
-created\_at: string
+      The ID of the scoping resource (e.g., the session ID).
 
-RFC 3339 datetime string representing when the file was created.
+    - `type: "session"`
 
-filename: string
+      The type of scope (e.g., `"session"`).
 
-Original filename of the uploaded file.
+### Example
 
-mime\_type: string
+```bash
+ant beta:files upload \
+  --api-key my-anthropic-api-key \
+  --file 'Example data'
+```
 
-MIME type of the file.
+#### Response (200)
 
-size\_bytes: number
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
+  "type": "file",
+  "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z",
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
+}
+```
 
-Size of the file in bytes.
+## List Files
 
-
+`$ ant beta:files list`
 
-type: "file"
+**GET** `/v1/files`
 
-Object type.
+List Files
 
-For files, this is always `"file"`.
+### Parameters
 
-downloadable: optional boolean
+- `--id: optional array of string`
 
-Whether the file can be downloaded.
+  Query param: Restrict the result set to Files whose `id` is in this list. At most 100 entries (after de-duplication). Mutually exclusive with `page` and `limit`. When supplied, the response is always a single page (`next_page` is null). IDs that do not resolve to a visible File — including deleted Files — are silently omitted.
 
-
+- `--limit: optional number`
 
-scope: optional object { id, type } 
+  Query param: Number of items to return per page.
 
-The scope of this file, indicating the context in which it was created (e.g., a session).
+  Defaults to `20`. Ranges from `1` to `1000`.
 
-id: string
+  maximum: 1000, minimum: 1
 
-The ID of the scoping resource (e.g., the session ID).
+- `--page: optional string`
 
-type: "session"
+  Query param: Opaque page cursor returned in a prior list response's `next_page`. Prefixed `page_`.
 
-The type of scope (e.g., `"session"`).
+- `--scope-id: optional string`
+
+  Query param: Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaFileListResponse: object`
+
+  - `data: array of BetaFileMetadata`
+
+    List of file metadata objects.
+
+    - `id: string`
+
+      Unique object identifier.
+
+      The format and length of IDs may change over time.
+
+    - `created_at: string`
+
+      RFC 3339 datetime string representing when the file was created.
+
+      format: date-time
+
+    - `filename: string`
+
+      Original filename of the uploaded file.
+
+      maxLength: 500, minLength: 1
+
+    - `mime_type: string`
+
+      MIME type of the file.
+
+      maxLength: 255, minLength: 1
+
+    - `size_bytes: number`
+
+      Size of the file in bytes.
+
+      minimum: 0
+
+    - `type: "file"`
+
+      Object type.
+
+      For files, this is always `"file"`.
+
+    - `downloadable: optional boolean`
+
+      Whether the file can be downloaded.
+
+    - `expires_at: optional string`
+
+      RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+      format: date-time
+
+    - `scope: optional object`
+
+      The scope of this file, indicating the context in which it was created (e.g., a session).
+
+      - `id: string`
+
+        The ID of the scoping resource (e.g., the session ID).
+
+      - `type: "session"`
+
+        The type of scope (e.g., `"session"`).
+
+  - `next_page: optional string`
+
+    Opaque cursor for the next page. Supply as `?page=` to fetch the next page; null when there are no more results.
+
+### Example
+
+```bash
+ant beta:files list \
+  --api-key my-anthropic-api-key
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "created_at": "2025-04-15T18:37:24.100435Z",
+      "filename": "document.pdf",
+      "mime_type": "application/pdf",
+      "size_bytes": 102400,
+      "type": "file",
+      "downloadable": false,
+      "expires_at": "2025-05-15T18:37:24.100435Z",
+      "scope": {
+        "id": "id",
+        "type": "session"
+      }
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Download File
+
+`$ ant beta:files download`
+
+**GET** `/v1/files/{file_id}/content`
+
+Download File
+
+### Parameters
+
+- `--file-id: string`
+
+  ID of the File.
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `unnamed_schema_1: file path`
+
+### Example
+
+```bash
+ant beta:files download \
+  --api-key my-anthropic-api-key \
+  --file-id file_id
+```
+
+## Get File Metadata
+
+`$ ant beta:files retrieve-metadata`
+
+**GET** `/v1/files/{file_id}`
+
+Get File Metadata
+
+### Parameters
+
+- `--file-id: string`
+
+  ID of the File.
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_file_metadata: object`
+
+  - `id: string`
+
+    Unique object identifier.
+
+    The format and length of IDs may change over time.
+
+  - `created_at: string`
+
+    RFC 3339 datetime string representing when the file was created.
+
+    format: date-time
+
+  - `filename: string`
+
+    Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
+
+  - `mime_type: string`
+
+    MIME type of the file.
+
+    maxLength: 255, minLength: 1
+
+  - `size_bytes: number`
+
+    Size of the file in bytes.
+
+    minimum: 0
+
+  - `type: "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
+
+  - `downloadable: optional boolean`
+
+    Whether the file can be downloaded.
+
+  - `expires_at: optional string`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
+
+  - `scope: optional object`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `id: string`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `type: "session"`
+
+      The type of scope (e.g., `"session"`).
+
+### Example
+
+```bash
+ant beta:files retrieve-metadata \
+  --api-key my-anthropic-api-key \
+  --file-id file_id
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
+  "type": "file",
+  "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z",
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
+}
+```
+
+## Delete File
+
+`$ ant beta:files delete`
+
+**DELETE** `/v1/files/{file_id}`
+
+Delete File
+
+### Parameters
+
+- `--file-id: string`
+
+  ID of the File.
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_deleted_file: object`
+
+  - `id: string`
+
+    ID of the deleted file.
+
+  - `type: optional "file_deleted"`
+
+    Deleted object type.
+
+    For file deletion, this is always `"file_deleted"`.
+
+### Example
+
+```bash
+ant beta:files delete \
+  --api-key my-anthropic-api-key \
+  --file-id file_id
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "type": "file_deleted"
+}
+```
+
+## Domain types
+
+### Beta Deleted File
+
+- `beta_deleted_file: object`
+
+  - `id: string`
+
+    ID of the deleted file.
+
+  - `type: optional "file_deleted"`
+
+    Deleted object type.
+
+    For file deletion, this is always `"file_deleted"`.
+
+### Beta File Metadata
+
+- `beta_file_metadata: object`
+
+  - `id: string`
+
+    Unique object identifier.
+
+    The format and length of IDs may change over time.
+
+  - `created_at: string`
+
+    RFC 3339 datetime string representing when the file was created.
+
+    format: date-time
+
+  - `filename: string`
+
+    Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
+
+  - `mime_type: string`
+
+    MIME type of the file.
+
+    maxLength: 255, minLength: 1
+
+  - `size_bytes: number`
+
+    Size of the file in bytes.
+
+    minimum: 0
+
+  - `type: "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
+
+  - `downloadable: optional boolean`
+
+    Whether the file can be downloaded.
+
+  - `expires_at: optional string`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
+
+  - `scope: optional object`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+    - `id: string`
+
+      The ID of the scoping resource (e.g., the session ID).
+
+    - `type: "session"`
+
+      The type of scope (e.g., `"session"`).
+
+### Beta File Scope
+
+- `beta_file_scope: object`
+
+  - `id: string`
+
+    The ID of the scoping resource (e.g., the session ID).
+
+  - `type: "session"`
+
+    The type of scope (e.g., `"session"`).
 
 ---
 

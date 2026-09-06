@@ -1,69 +1,153 @@
 # Artifacts
 
-To enable the Compliance API, see the setup guide.
+## Get artifact metadata
 
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
+**GET** `/v1/compliance/apps/artifacts/{artifact_version_id}`
 
-Copy page
+Returns metadata for an artifact version, without the content body.
 
-
+Use the sibling `/content` endpoint to fetch the artifact text. The
+`md5` and `size_bytes` fields here are computed over the UTF-8
+encoding of that text, so a DLP consumer can dedupe or match hashes
+without downloading every artifact.
 
-# Artifacts
+### Path parameters
 
-##### [Get artifact metadata](api/http/compliance/apps/artifacts/retrieve.md)
+- `artifact_version_id: string`
 
-GET/v1/compliance/apps/artifacts/{artifact\_version\_id}
+  The artifact version ID (tagged ID, e.g., claude_artifact_version_abc123)
 
-##### [Download artifact content](api/http/compliance/apps/artifacts/download.md)
+### Headers
 
-GET/v1/compliance/apps/artifacts/{artifact\_version\_id}/content
+- `"x-api-key": optional string`
 
-##### Models
+### Returns
 
-
+- `id: string`
 
-ArtifactRetrieveResponse object{ id, artifact\_type, claude\_chat\_id, 5 more }
+  Artifact ID e.g. 'claude_artifact_abc123'
 
-Artifact version metadata for GET /v1/compliance/apps/artifacts/{artifact\_version\_id}.
+- `artifact_type: string or null`
 
-Returns metadata only. Use the sibling `/content` endpoint to fetch the
-artifact body.
+  MIME-like artifact type e.g. 'application/vnd.ant.code'
 
-id: string
+- `claude_chat_id: string`
 
-Artifact ID e.g. 'claude\_artifact\_abc123'
+  The chat this artifact belongs to
 
-artifact\_type: string or null
+- `created_at: string`
 
-MIME-like artifact type e.g. 'application/vnd.ant.code'
+  Artifact version creation timestamp
 
-claude\_chat\_id: string
+  format: date-time
 
-The chat this artifact belongs to
+- `md5: string`
 
-
+  Lowercase hex MD5 of the artifact content (UTF-8 encoded). Matches the `content` field returned by the sibling `/content` endpoint.
 
-created\_at: string
+- `size_bytes: number`
 
-Artifact version creation timestamp
+  Size in bytes of the artifact content (UTF-8 encoded)
 
-formatdate-time
+- `title: string or null`
 
-md5: string
+  Artifact title
 
-Lowercase hex MD5 of the artifact content (UTF-8 encoded). Matches the `content` field returned by the sibling `/content` endpoint.
+- `version_id: string`
 
-size\_bytes: number
+  Artifact version ID e.g. 'claude_artifact_version_abc123'
 
-Size in bytes of the artifact content (UTF-8 encoded)
+### Example
 
-title: string or null
+```bash
+curl https://api.anthropic.com/v1/compliance/apps/artifacts/$ARTIFACT_VERSION_ID \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
 
-Artifact title
+#### Response (200)
 
-version\_id: string
+```json
+{
+  "id": "id",
+  "artifact_type": "artifact_type",
+  "claude_chat_id": "claude_chat_id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "md5": "md5",
+  "size_bytes": 0,
+  "title": "title",
+  "version_id": "version_id"
+}
+```
 
-Artifact version ID e.g. 'claude\_artifact\_version\_abc123'
+## Download artifact content
+
+**GET** `/v1/compliance/apps/artifacts/{artifact_version_id}/content`
+
+Download the content of an artifact version for compliance purposes.
+
+Returns the full text content of the artifact version.
+
+### Path parameters
+
+- `artifact_version_id: string`
+
+  The artifact version ID (tagged ID, e.g., claude_artifact_version_abc123)
+
+### Headers
+
+- `"x-api-key": optional string`
+
+### Example
+
+```bash
+curl https://api.anthropic.com/v1/compliance/apps/artifacts/$ARTIFACT_VERSION_ID/content \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+## Domain types
+
+### Artifact Retrieve Response
+
+- `ArtifactRetrieveResponse object`
+
+  Artifact version metadata for GET /v1/compliance/apps/artifacts/{artifact_version_id}.
+
+  Returns metadata only. Use the sibling `/content` endpoint to fetch the
+  artifact body.
+
+  - `id: string`
+
+    Artifact ID e.g. 'claude_artifact_abc123'
+
+  - `artifact_type: string or null`
+
+    MIME-like artifact type e.g. 'application/vnd.ant.code'
+
+  - `claude_chat_id: string`
+
+    The chat this artifact belongs to
+
+  - `created_at: string`
+
+    Artifact version creation timestamp
+
+    format: date-time
+
+  - `md5: string`
+
+    Lowercase hex MD5 of the artifact content (UTF-8 encoded). Matches the `content` field returned by the sibling `/content` endpoint.
+
+  - `size_bytes: number`
+
+    Size in bytes of the artifact content (UTF-8 encoded)
+
+  - `title: string or null`
+
+    Artifact title
+
+  - `version_id: string`
+
+    Artifact version ID e.g. 'claude_artifact_version_abc123'
 
 ---
 

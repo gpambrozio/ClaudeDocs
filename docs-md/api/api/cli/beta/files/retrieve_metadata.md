@@ -1,100 +1,94 @@
 # Get File Metadata
 
-Copy page
+`$ ant beta:files retrieve-metadata`
 
-
-
-CLI
-
-# Get File Metadata
-
-$ ant beta:files retrieve-metadata
-
-GET/v1/files/{file\_id}
+**GET** `/v1/files/{file_id}`
 
 Get File Metadata
 
-##### ParametersExpand Collapse
+## Parameters
 
---file-id: string
+- `--file-id: string`
 
-ID of the File.
+  ID of the File.
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--beta: optional array of AnthropicBeta`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `beta_file_metadata: object`
 
-file\_metadata: object { id, created\_at, filename, 5 more } 
+  - `id: string`
 
-
+    Unique object identifier.
 
-id: string
+    The format and length of IDs may change over time.
 
-Unique object identifier.
+  - `created_at: string`
 
-The format and length of IDs may change over time.
+    RFC 3339 datetime string representing when the file was created.
 
-created\_at: string
+    format: date-time
 
-RFC 3339 datetime string representing when the file was created.
+  - `filename: string`
 
-filename: string
+    Original filename of the uploaded file.
 
-Original filename of the uploaded file.
+    maxLength: 500, minLength: 1
 
-mime\_type: string
+  - `mime_type: string`
 
-MIME type of the file.
+    MIME type of the file.
 
-size\_bytes: number
+    maxLength: 255, minLength: 1
 
-Size of the file in bytes.
+  - `size_bytes: number`
 
-
+    Size of the file in bytes.
 
-type: "file"
+    minimum: 0
 
-Object type.
+  - `type: "file"`
 
-For files, this is always `"file"`.
+    Object type.
 
-downloadable: optional boolean
+    For files, this is always `"file"`.
 
-Whether the file can be downloaded.
+  - `downloadable: optional boolean`
 
-
+    Whether the file can be downloaded.
 
-scope: optional object { id, type } 
+  - `expires_at: optional string`
 
-The scope of this file, indicating the context in which it was created (e.g., a session).
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
 
-id: string
+    format: date-time
 
-The ID of the scoping resource (e.g., the session ID).
+  - `scope: optional object`
 
-type: "session"
+    The scope of this file, indicating the context in which it was created (e.g., a session).
 
-The type of scope (e.g., `"session"`).
+    - `id: string`
 
-Get File Metadata
+      The ID of the scoping resource (e.g., the session ID).
 
-CLI
+    - `type: "session"`
 
-```shiki
+      The type of scope (e.g., `"session"`).
+
+## Example
+
+```bash
 ant beta:files retrieve-metadata \
   --api-key my-anthropic-api-key \
   --file-id file_id
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "file_011CNha8iCJcU1wXNR6q4V8w",
   "created_at": "2025-04-15T18:37:24.100435Z",
@@ -103,28 +97,7 @@ Response 200
   "size_bytes": 102400,
   "type": "file",
   "downloadable": false,
-  "scope": {
-    "id": "id",
-    "type": "session"
-  }
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "created_at": "2025-04-15T18:37:24.100435Z",
-  "filename": "document.pdf",
-  "mime_type": "application/pdf",
-  "size_bytes": 102400,
-  "type": "file",
-  "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z",
   "scope": {
     "id": "id",
     "type": "session"

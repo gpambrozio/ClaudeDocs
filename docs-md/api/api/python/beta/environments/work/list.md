@@ -1,201 +1,215 @@
 # List Work Items
 
-Copy page
+`beta.environments.work.list(environment_id, **kwargs)  -> SyncPageCursor[BetaSelfHostedWork]`
 
-
-
-Python
-
-# List Work Items
-
-beta.environments.work.list(strenvironment\_id, WorkListParams\*\*kwargs)  -> SyncPageCursor[[BetaSelfHostedWork](api/beta/environments/work.md)]
-
-GET/v1/environments/{environment\_id}/work
+**GET** `/v1/environments/{environment_id}/work`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 List work items in an environment.
 
-##### ParametersExpand Collapse
+## Parameters
 
-environment\_id: str
+- `environment_id: str`
 
-limit: Optional[int]
+- `limit: Optional[int]`
 
-Maximum number of work items to return
+  Maximum number of work items to return
 
-page: Optional[str]
+  default: 20, maximum: 1000, minimum: 1
 
-Opaque cursor from previous response for pagination
+- `page: Optional[str]`
 
-
+  Opaque cursor from previous response for pagination
 
-betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
+- `betas: Optional[List[AnthropicBetaParam]]`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-One of the following:
+  - `str`
 
-str
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
 
-
+    - `"message-batches-2024-09-24"`
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]
+    - `"prompt-caching-2024-07-31"`
 
-One of the following:
+    - `"computer-use-2024-10-22"`
 
-"message-batches-2024-09-24"
+    - `"computer-use-2025-01-24"`
 
-"prompt-caching-2024-07-31"
+    - `"pdfs-2024-09-25"`
 
-"computer-use-2024-10-22"
+    - `"token-counting-2024-11-01"`
 
-"computer-use-2025-01-24"
+    - `"token-efficient-tools-2025-02-19"`
 
-"pdfs-2024-09-25"
+    - `"output-128k-2025-02-19"`
 
-"token-counting-2024-11-01"
+    - `"files-api-2025-04-14"`
 
-"token-efficient-tools-2025-02-19"
+    - `"mcp-client-2025-04-04"`
 
-"output-128k-2025-02-19"
+    - `"mcp-client-2025-11-20"`
 
-"files-api-2025-04-14"
+    - `"dev-full-thinking-2025-05-14"`
 
-"mcp-client-2025-04-04"
+    - `"interleaved-thinking-2025-05-14"`
 
-"mcp-client-2025-11-20"
+    - `"code-execution-2025-05-22"`
 
-"dev-full-thinking-2025-05-14"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"interleaved-thinking-2025-05-14"
+    - `"context-1m-2025-08-07"`
 
-"code-execution-2025-05-22"
+    - `"context-management-2025-06-27"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"context-1m-2025-08-07"
+    - `"skills-2025-10-02"`
 
-"context-management-2025-06-27"
+    - `"fast-mode-2026-02-01"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"output-300k-2026-03-24"`
 
-"skills-2025-10-02"
+    - `"user-profiles-2026-03-24"`
 
-"fast-mode-2026-02-01"
+    - `"user-profiles-2026-08-18"`
 
-"output-300k-2026-03-24"
+    - `"advisor-tool-2026-03-01"`
 
-"user-profiles-2026-03-24"
+    - `"managed-agents-2026-04-01"`
 
-"advisor-tool-2026-03-01"
+    - `"cache-diagnosis-2026-04-07"`
 
-"managed-agents-2026-04-01"
+    - `"dreaming-2026-04-21"`
 
-"cache-diagnosis-2026-04-07"
+    - `"thinking-token-count-2026-05-13"`
 
-"thinking-token-count-2026-05-13"
+    - `"server-side-fallback-2026-06-01"`
 
-"server-side-fallback-2026-06-01"
+    - `"server-side-fallback-2026-07-01"`
 
-"fallback-credit-2026-06-01"
+    - `"fallback-credit-2026-06-01"`
 
-"agent-memory-2026-07-22"
+    - `"fallback-credit-2026-07-01"`
 
-##### ReturnsExpand Collapse
+    - `"agent-memory-2026-07-22"`
 
-
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-class BetaSelfHostedWork: …
+    - `"compact-2026-01-12"`
 
-Work resource representing a unit of work in a self-hosted environment.
+    - `"computer-use-2025-11-24"`
 
-Work items are queued when sessions are created or when long-dormant sessions
-receive new messages. The environment worker polls for work to execute in a
-self-hosted sandbox.
+    - `"mcp-tunnels-2026-06-22"`
 
-id: str
+    - `"structured-outputs-2025-11-13"`
 
-Work identifier (e.g., 'work\_...')
+    - `"task-budgets-2026-03-13"`
 
-acknowledged\_at: Optional[str]
+    - `"thinking-display-updates-2026-08-18"`
 
-RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+    - `"ce-user-management-2026-07-13"`
 
-created\_at: str
+    - `"mid-conversation-output-config-2026-07-01"`
 
-RFC 3339 timestamp when work was created
+    - `"thinking-binding-controls-2026-08-01"`
 
-
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-data: [BetaSessionWorkData](api/beta/environments/work.md)
+## Returns
 
-The actual work to be performed
+- `class BetaSelfHostedWork: …`
 
-id: str
+  Work resource representing a unit of work in a self-hosted environment.
 
-Session identifier (e.g., 'session\_...')
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
 
-type: Literal["session"]
+  - `id: str`
 
-Type of work data
+    Work identifier (e.g., 'work_...')
 
-environment\_id: str
+  - `acknowledged_at: Optional[str]`
 
-Environment identifier this work belongs to (e.g., `env_...`)
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-latest\_heartbeat\_at: Optional[str]
+  - `created_at: str`
 
-RFC 3339 timestamp of the most recent heartbeat
+    RFC 3339 timestamp when work was created
 
-metadata: Dict[str, str]
+  - `data: BetaSessionWorkData`
 
-User-provided metadata key-value pairs associated with this work item
+    The actual work to be performed
 
-started\_at: Optional[str]
+    - `id: str`
 
-RFC 3339 timestamp when work execution started
+      Session identifier (e.g., 'session_...')
 
-
+    - `type: Literal["session"]`
 
-state: Literal["queued", "starting", "active", 2 more]
+      Type of work data
 
-Current state of the work item
+  - `environment_id: str`
 
-One of the following:
+    Environment identifier this work belongs to (e.g., `env_...`)
 
-"queued"
+  - `latest_heartbeat_at: Optional[str]`
 
-"starting"
+    RFC 3339 timestamp of the most recent heartbeat
 
-"active"
+  - `metadata: Dict[str, str]`
 
-"stopping"
+    User-provided metadata key-value pairs associated with this work item
 
-"stopped"
+  - `secret: Optional[str]`
 
-stop\_requested\_at: Optional[str]
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
-RFC 3339 timestamp when stop was requested
+  - `started_at: Optional[str]`
 
-stopped\_at: Optional[str]
+    RFC 3339 timestamp when work execution started
 
-RFC 3339 timestamp when work execution stopped
+  - `state: Literal["queued", "starting", "active", 2 more]`
 
-type: Literal["work"]
+    Current state of the work item
 
-The type of object (always 'work')
+    - `"queued"`
 
-List Work Items
+    - `"starting"`
 
-Python
+    - `"active"`
 
-```shiki
+    - `"stopping"`
+
+    - `"stopped"`
+
+  - `stop_requested_at: Optional[str]`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `stopped_at: Optional[str]`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `type: Literal["work"]`
+
+    The type of object (always 'work')
+
+    default: work
+
+## Example
+
+```python
 import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get(
+        "ANTHROPIC_API_KEY"
+    ),  # This is the default and can be omitted
 )
 page = client.beta.environments.work.list(
     environment_id="env_011CZkZ9X2dpNyB7HsEFoRfW",
@@ -204,11 +218,9 @@ page = page.data[0]
 print(page.id)
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
@@ -224,39 +236,7 @@ Response 200
       "metadata": {
         "foo": "string"
       },
-      "started_at": "started_at",
-      "state": "queued",
-      "stop_requested_at": "stop_requested_at",
-      "stopped_at": "stopped_at",
-      "type": "work"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "acknowledged_at": "acknowledged_at",
-      "created_at": "created_at",
-      "data": {
-        "id": "id",
-        "type": "session"
-      },
-      "environment_id": "environment_id",
-      "latest_heartbeat_at": "latest_heartbeat_at",
-      "metadata": {
-        "foo": "string"
-      },
+      "secret": "secret",
       "started_at": "started_at",
       "state": "queued",
       "stop_requested_at": "stop_requested_at",

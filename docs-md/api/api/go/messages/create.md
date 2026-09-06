@@ -1,16 +1,8 @@
 # Create a Message
 
-Copy page
+`client.Messages.New(ctx, params) (*Message, error)`
 
-
-
-Go
-
-# Create a Message
-
-client.Messages.New(ctx, params) (\*[Message](api/messages.md), error)
-
-POST/v1/messages
+**POST** `/v1/messages`
 
 Send a structured list of input messages with text and/or image content, and the model will generate the next message in the conversation.
 
@@ -18,8352 +10,4025 @@ The Messages API can be used for either single queries or stateless multi-turn c
 
 Learn more about the Messages API in our [user guide](get-started.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `params MessageNewParams`
 
-params MessageNewParams
+  - `MaxTokens param.Field[int64]`
 
-
+    Body param: The maximum number of tokens to generate before stopping.
 
-MaxTokens param.Field[int64]
+    Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-Body param: The maximum number of tokens to generate before stopping.
+    Set to `0` to populate the [prompt cache](build-with-claude/prompt-caching.md) without generating a response.
 
-Note that our models may stop *before* reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
+    Different models have different maximum values for this parameter.  See [models](about-claude/models/overview.md) for details.
 
-Set to `0` to populate the [prompt cache](build-with-claude/prompt-caching.md) without generating a response.
+    minimum: 0
 
-Different models have different maximum values for this parameter. See [models](about-claude/models/overview.md) for details.
+  - `Messages param.Field[[]MessageParamResp]`
 
-minimum0
+    Body param: Input messages.
 
-
+    Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
 
-Messages param.Field[[][MessageParamResp](api/messages.md)]
+    Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
 
-Body param: Input messages.
+    If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
 
-Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
+    Example with a single `user` message:
 
-Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
+    ```json
+    [{"role": "user", "content": "Hello, Claude"}]
+    ```
 
-If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
+    Example with multiple conversational turns:
 
-Example with a single `user` message:
+    ```json
+    [
+      {"role": "user", "content": "Hello there."},
+      {"role": "assistant", "content": "Hi, I'm Claude. How can I help you?"},
+      {"role": "user", "content": "Can you explain LLMs in plain English?"},
+    ]
+    ```
 
-```shiki
-[{"role": "user", "content": "Hello, Claude"}]
-```
+    Example with a partially-filled response from Claude:
 
-
+    ```json
+    [
+      {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+      {"role": "assistant", "content": "The best answer is ("},
+    ]
+    ```
 
-Example with multiple conversational turns:
+    Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
 
-```shiki
-[
-  {"role": "user", "content": "Hello there."},
-  {"role": "assistant", "content": "Hi, I'm Claude. How can I help you?"},
-  {"role": "user", "content": "Can you explain LLMs in plain English?"},
-]
-```
+    ```json
+    {"role": "user", "content": "Hello, Claude"}
+    ```
 
-
+    ```json
+    {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
+    ```
 
-Example with a partially-filled response from Claude:
+    See [input examples](build-with-claude/working-with-messages.md).
 
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("},
-]
-```
+    Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
-
+    There is a limit of 100,000 messages in a single request.
 
-Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
+    - `Content []ContentBlockParamUnionResp`
 
-```shiki
-{"role": "user", "content": "Hello, Claude"}
-```
+      - `[]ContentBlockParamUnionResp`
 
-
+        - `type TextBlockParamResp struct{…}`
 
-```shiki
-{"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
-```
+          - `Text string`
 
-
+            minLength: 1
 
-See [input examples](build-with-claude/working-with-messages.md).
+          - `Type Text`
 
-Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+          - `CacheControl CacheControlEphemeral Optional`
 
-There is a limit of 100,000 messages in a single request.
+            Create a cache control breakpoint at this content block.
 
-
+            - `Type Ephemeral`
 
-Content [][ContentBlockParamUnionResp](api/messages.md)
+            - `TTL CacheControlEphemeralTTL Optional`
 
-One of the following:
+              The time-to-live for the cache control breakpoint.
 
-
+              This may be one the following values:
 
-[][ContentBlockParamUnionResp](api/messages.md)
+              - `5m`: 5 minutes
+              - `1h`: 1 hour
 
-One of the following:
+              Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
 
-
+              - `const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"`
 
-type TextBlockParamResp struct{…}
+              - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
-Text string
+          - `Citations []TextCitationParamUnionResp Optional`
 
-Type Text
+            - `type CitationCharLocationParamResp struct{…}`
 
-
+              - `CitedText string`
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+              - `DocumentIndex int64`
 
-Create a cache control breakpoint at this content block.
+                minimum: 0
 
-Type Ephemeral
+              - `DocumentTitle string`
 
-
+                maxLength: 500, minLength: 1
 
-TTL CacheControlEphemeralTTLOptional
+              - `EndCharIndex int64`
 
-The time-to-live for the cache control breakpoint.
+              - `StartCharIndex int64`
 
-This may be one the following values:
+                minimum: 0
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+              - `Type CharLocation`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            - `type CitationPageLocationParamResp struct{…}`
 
-One of the following:
+              - `CitedText string`
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+              - `DocumentIndex int64`
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+                minimum: 0
 
-
+              - `DocumentTitle string`
 
-Citations [][TextCitationParamUnionResp](api/messages.md)Optional
+                maxLength: 500, minLength: 1
 
-One of the following:
+              - `EndPageNumber int64`
 
-
+              - `StartPageNumber int64`
 
-type CitationCharLocationParamResp struct{…}
+                minimum: 1
 
-CitedText string
+              - `Type PageLocation`
 
-DocumentIndex int64
+            - `type CitationContentBlockLocationParamResp struct{…}`
 
-DocumentTitle string
+              - `CitedText string`
 
-EndCharIndex int64
+                The full text of the cited block range, concatenated.
 
-StartCharIndex int64
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-Type CharLocation
+              - `DocumentIndex int64`
 
-
+                minimum: 0
 
-type CitationPageLocationParamResp struct{…}
+              - `DocumentTitle string`
 
-CitedText string
+                maxLength: 500, minLength: 1
 
-DocumentIndex int64
+              - `EndBlockIndex int64`
 
-DocumentTitle string
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-EndPageNumber int64
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-StartPageNumber int64
+              - `StartBlockIndex int64`
 
-Type PageLocation
+                0-based index of the first cited block in the source's `content` array.
 
-
+                minimum: 0
 
-type CitationContentBlockLocationParamResp struct{…}
+              - `Type ContentBlockLocation`
 
-
+            - `type CitationWebSearchResultLocationParamResp struct{…}`
 
-CitedText string
+              - `CitedText string`
 
-The full text of the cited block range, concatenated.
+              - `EncryptedIndex string`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+              - `Title string`
 
-DocumentIndex int64
+                maxLength: 512, minLength: 1
 
-DocumentTitle string
+              - `Type WebSearchResultLocation`
 
-
+              - `URL string`
 
-EndBlockIndex int64
+                minLength: 1
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+            - `type CitationSearchResultLocationParamResp struct{…}`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+              - `CitedText string`
 
-StartBlockIndex int64
+                The full text of the cited block range, concatenated.
 
-0-based index of the first cited block in the source's `content` array.
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-Type ContentBlockLocation
+              - `EndBlockIndex int64`
 
-
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-type CitationWebSearchResultLocationParamResp struct{…}
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-CitedText string
+              - `SearchResultIndex int64`
 
-EncryptedIndex string
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
-Title string
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
-Type WebSearchResultLocation
+                minimum: 0
 
-URL string
+              - `Source string`
 
-
+              - `StartBlockIndex int64`
 
-type CitationSearchResultLocationParamResp struct{…}
+                0-based index of the first cited block in the source's `content` array.
 
-
+                minimum: 0
 
-CitedText string
+              - `Title string`
 
-The full text of the cited block range, concatenated.
+              - `Type SearchResultLocation`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+        - `type ImageBlockParamResp struct{…}`
 
-
+          - `Source ImageBlockParamSourceUnionResp`
 
-EndBlockIndex int64
+            - `type Base64ImageSource struct{…}`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+              - `Data string`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+                format: byte
 
-
+              - `MediaType Base64ImageSourceMediaType`
 
-SearchResultIndex int64
+                - `const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"`
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+                - `const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"`
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+                - `const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"`
 
-minimum0
+                - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
 
-Source string
+              - `Type Base64`
 
-StartBlockIndex int64
+            - `type URLImageSource struct{…}`
 
-0-based index of the first cited block in the source's `content` array.
+              - `Type URL`
 
-Title string
+              - `URL string`
 
-Type SearchResultLocation
+            - `type FileImageSource struct{…}`
 
-
+              - `FileID string`
 
-type ImageBlockParamResp struct{…}
+              - `Type File`
 
-
+          - `Type Image`
 
-Source ImageBlockParamSourceUnionResp
+          - `CacheControl CacheControlEphemeral Optional`
 
-One of the following:
+            Create a cache control breakpoint at this content block.
 
-
+          - `Transformations ImageTransformationsParamResp Optional`
 
-type Base64ImageSource struct{…}
+            Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
 
-Data string
+            - `OversizedImage ImageTransformationsParamOversizedImage Optional`
 
-
+              What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
 
-MediaType Base64ImageSourceMediaType
+              - `const ImageTransformationsParamOversizedImageDownsize ImageTransformationsParamOversizedImage = "downsize"`
 
-One of the following:
+              - `const ImageTransformationsParamOversizedImageError ImageTransformationsParamOversizedImage = "error"`
 
-const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"
+        - `type DocumentBlockParamResp struct{…}`
 
-const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"
+          - `Source DocumentBlockParamSourceUnionResp`
 
-const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"
+            - `type Base64PDFSource struct{…}`
 
-const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"
+              - `Data string`
 
-Type Base64
+                format: byte
 
-
+              - `MediaType ApplicationPDF`
 
-type URLImageSource struct{…}
+              - `Type Base64`
 
-Type URL
+            - `type PlainTextSource struct{…}`
 
-URL string
+              - `Data string`
 
-Type Image
+              - `MediaType TextPlain`
 
-
+              - `Type Text`
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+            - `type ContentBlockSource struct{…}`
 
-Create a cache control breakpoint at this content block.
+              - `Content ContentBlockSourceContentUnion`
 
-Type Ephemeral
+                - `string`
 
-
+                - `[]ContentBlockSourceContentItemUnion`
 
-TTL CacheControlEphemeralTTLOptional
+                  - `type TextBlockParamResp struct{…}`
 
-The time-to-live for the cache control breakpoint.
+                  - `type ImageBlockParamResp struct{…}`
 
-This may be one the following values:
+              - `Type Content`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            - `type URLPDFSource struct{…}`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+              - `Type URL`
 
-One of the following:
+              - `URL string`
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+            - `type FileDocumentSource struct{…}`
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+              - `FileID string`
 
-
+              - `Type File`
 
-type DocumentBlockParamResp struct{…}
+          - `Type Document`
 
-
+          - `CacheControl CacheControlEphemeral Optional`
 
-Source DocumentBlockParamSourceUnionResp
+            Create a cache control breakpoint at this content block.
 
-One of the following:
+          - `Citations CitationsConfigParamResp Optional`
 
-
+            - `Enabled bool Optional`
 
-type Base64PDFSource struct{…}
+          - `Context string Optional`
 
-Data string
+            minLength: 1
 
-MediaType ApplicationPDF
+          - `Title string Optional`
 
-Type Base64
+            maxLength: 500, minLength: 1
 
-
+        - `type SearchResultBlockParamResp struct{…}`
 
-type PlainTextSource struct{…}
+          - `Content []TextBlockParamResp`
 
-Data string
+            - `Text string`
 
-MediaType TextPlain
+              minLength: 1
 
-Type Text
+            - `Type Text`
 
-
+            - `CacheControl CacheControlEphemeral Optional`
 
-type ContentBlockSource struct{…}
+              Create a cache control breakpoint at this content block.
 
-
+            - `Citations []TextCitationParamUnionResp Optional`
 
-Content ContentBlockSourceContentUnion
+          - `Source string`
 
-One of the following:
+          - `Title string`
 
-string
+          - `Type SearchResult`
 
-
+          - `CacheControl CacheControlEphemeral Optional`
 
-[][ContentBlockSourceContentItemUnion](api/messages.md)
+            Create a cache control breakpoint at this content block.
 
-One of the following:
+          - `Citations CitationsConfigParamResp Optional`
 
-
+        - `type ThinkingBlockParamResp struct{…}`
 
-type TextBlockParamResp struct{…}
+          - `Signature string`
 
-Text string
+            The `signature` value of this thinking block, exactly as returned by the API in a previous response. Used to verify that the block was generated by Claude.
 
-Type Text
+            Thinking blocks must be passed back unmodified and in their original order; a modified block results in a 400 `invalid_request_error`.
 
-
+          - `Thinking string`
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+            The `thinking` text of this block as returned by the API.
 
-Create a cache control breakpoint at this content block.
+          - `Type Thinking`
 
-Type Ephemeral
+        - `type RedactedThinkingBlockParamResp struct{…}`
 
-
+          - `Data string`
 
-TTL CacheControlEphemeralTTLOptional
+            The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-The time-to-live for the cache control breakpoint.
+          - `Type RedactedThinking`
 
-This may be one the following values:
+        - `type ToolUseBlockParamResp struct{…}`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          - `ID string`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            pattern: ^[a-zA-Z0-9_-]+$
 
-One of the following:
+          - `Input map[string, any]`
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+          - `Name string`
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+            maxLength: 200, minLength: 1
 
-
+          - `Type ToolUse`
 
-Citations [][TextCitationParamUnionResp](api/messages.md)Optional
+          - `CacheControl CacheControlEphemeral Optional`
 
-One of the following:
+            Create a cache control breakpoint at this content block.
 
-
+          - `Caller ToolUseBlockParamCallerUnionResp Optional`
 
-type CitationCharLocationParamResp struct{…}
+            Tool invocation directly from the model.
 
-CitedText string
+            - `type DirectCaller struct{…}`
 
-DocumentIndex int64
+              Tool invocation directly from the model.
 
-DocumentTitle string
+              - `Type Direct`
 
-EndCharIndex int64
+            - `type ServerToolCaller struct{…}`
 
-StartCharIndex int64
+              Tool invocation generated by a server-side tool.
 
-Type CharLocation
+              - `ToolID string`
 
-
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-type CitationPageLocationParamResp struct{…}
+              - `Type CodeExecution20250825`
 
-CitedText string
+            - `type ServerToolCaller20260120 struct{…}`
 
-DocumentIndex int64
+              - `ToolID string`
 
-DocumentTitle string
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-EndPageNumber int64
+              - `Type CodeExecution20260120`
 
-StartPageNumber int64
+          - `ToolsetName string Optional`
 
-Type PageLocation
+            For a toolset member tool_use, the toolset family this member belongs to.
 
-
+            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-type CitationContentBlockLocationParamResp struct{…}
+        - `type ToolResultBlockParamResp struct{…}`
 
-
+          - `ToolUseID string`
 
-CitedText string
+            pattern: ^[a-zA-Z0-9_-]+$
 
-The full text of the cited block range, concatenated.
+          - `Type ToolResult`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+          - `CacheControl CacheControlEphemeral Optional`
 
-DocumentIndex int64
+            Create a cache control breakpoint at this content block.
 
-DocumentTitle string
+          - `Content []ToolResultBlockParamContentUnionResp Optional`
 
-
+            - `[]ToolResultBlockParamContentUnionResp`
 
-EndBlockIndex int64
+              - `type TextBlockParamResp struct{…}`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+              - `type ImageBlockParamResp struct{…}`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+              - `type SearchResultBlockParamResp struct{…}`
 
-StartBlockIndex int64
+              - `type DocumentBlockParamResp struct{…}`
 
-0-based index of the first cited block in the source's `content` array.
+              - `type ToolReferenceBlockParamResp struct{…}`
 
-Type ContentBlockLocation
+                Tool reference block that can be included in tool_result content.
 
-
+                - `ToolName string`
 
-type CitationWebSearchResultLocationParamResp struct{…}
+                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-CitedText string
+                - `Type ToolReference`
 
-EncryptedIndex string
+                - `CacheControl CacheControlEphemeral Optional`
 
-Title string
+                  Create a cache control breakpoint at this content block.
 
-Type WebSearchResultLocation
+              - `type BrowserStateBlockParamResp struct{…}`
 
-URL string
+                The caller's browser state after a browser toolset member call —
+                the full inventory of open tabs, which tab is active, and any side
+                effects (tabs opened, download state changes) the call produced.
 
-
+                At most one per `tool_result`, only on a non-error result answering a
+                browser toolset member `tool_use`. The server renders the
+                model-visible text from it; the model never sees the raw fields.
 
-type CitationSearchResultLocationParamResp struct{…}
+                - `Tabs []BrowserStateTabEntry`
 
-
+                  All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
-CitedText string
+                  maxItems: 100
 
-The full text of the cited block range, concatenated.
+                  - `TabID string`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+                    The caller-assigned identifier for this tab, unique within the inventory.
 
-
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-EndBlockIndex int64
+                  - `Title string`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+                    The title of the page the tab is showing. May be empty.
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-
+                  - `URL string`
 
-SearchResultIndex int64
+                    The URL of the page the tab is showing. May be empty.
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+                  - `Active bool Optional`
 
-minimum0
+                    Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-Source string
+                - `Type BrowserState`
 
-StartBlockIndex int64
+                - `CacheControl CacheControlEphemeral Optional`
 
-0-based index of the first cited block in the source's `content` array.
+                  Create a cache control breakpoint at this content block.
 
-Title string
+                - `StateChanges []BrowserStateChangeUnion Optional`
 
-Type SearchResultLocation
+                  Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-
+                  maxItems: 200, minItems: 1
 
-type ImageBlockParamResp struct{…}
+                  - `type BrowserStateChangeTabOpened struct{…}`
 
-
+                    A tab this call's execution opened that remains open at its end —
+                    the creation delta of the `tabs` inventory, not an event log.
 
-Source ImageBlockParamSourceUnionResp
+                    Carries only the `tab_id`; the tab's `title` and `url` live on its
+                    `tabs` entry, which must include the same `tab_id`. A tab opened
+                    during a failed call gets no deferred `tab_opened`; it simply appears
+                    in the next result's `tabs` inventory.
 
-One of the following:
+                    - `TabID string`
 
-
+                      The `tab_id` of the opened tab, present in `tabs`.
 
-type Base64ImageSource struct{…}
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-Data string
+                    - `Type TabOpened`
 
-
+                  - `type BrowserStateChangeDownloadStarted struct{…}`
 
-MediaType Base64ImageSourceMediaType
+                    A file download that started during this call.
 
-One of the following:
+                    - `DownloadID string`
 
-const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"
+                    - `Type DownloadStarted`
 
-const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"
+                    - `URL string`
 
-Type Base64
+                      The final post-redirect URL the download was served from.
 
-
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-type URLImageSource struct{…}
+                  - `type BrowserStateChangeDownloadCompleted struct{…}`
 
-Type URL
+                    A file download that finished during this call, reported with the
+                    same `download_id` as its `download_started` — or without a prior
+                    `download_started`, when the download finished during the call that
+                    started it (at most one state change per `download_id` per result).
 
-URL string
+                    - `DownloadID string`
 
-Type Image
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+                    - `Type DownloadCompleted`
 
-Create a cache control breakpoint at this content block.
+                    - `URL string`
 
-Type Ephemeral
+                      The final post-redirect URL the download was served from.
 
-
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-TTL CacheControlEphemeralTTLOptional
+                    - `Path string Optional`
 
-The time-to-live for the cache control breakpoint.
+                      Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-This may be one the following values:
+                      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+                    - `SizeBytes int64 Optional`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+                      The completed download's size.
 
-One of the following:
+                      minimum: 0
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+                  - `type BrowserStateChangeDownloadFailed struct{…}`
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+                    A file download that failed — or was cancelled — during this call.
 
-Type Content
+                    - `DownloadID string`
 
-
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-type URLPDFSource struct{…}
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-Type URL
+                    - `Type DownloadFailed`
 
-URL string
+                    - `URL string`
 
-Type Document
+                      The final post-redirect URL the download was served from.
 
-
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+                    - `Error string Optional`
 
-Create a cache control breakpoint at this content block.
+                      The failure or cancellation detail, when known.
 
-Type Ephemeral
+                      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
 
-
+          - `IsError bool Optional`
 
-TTL CacheControlEphemeralTTLOptional
+          - `ToolsetName string Optional`
 
-The time-to-live for the cache control breakpoint.
+            For a toolset member tool_result, the toolset family of the paired tool_use.
 
-This may be one the following values:
+            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        - `type ServerToolUseBlockParamResp struct{…}`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          - `ID string`
 
-One of the following:
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+          - `Input map[string, any]`
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+          - `Name ServerToolUseBlockParamName`
 
-
+            - `const ServerToolUseBlockParamNameWebSearch ServerToolUseBlockParamName = "web_search"`
 
-Citations [CitationsConfigParamResp](api/messages.md)Optional
+            - `const ServerToolUseBlockParamNameWebFetch ServerToolUseBlockParamName = "web_fetch"`
 
-Enabled boolOptional
+            - `const ServerToolUseBlockParamNameCodeExecution ServerToolUseBlockParamName = "code_execution"`
 
-Context stringOptional
+            - `const ServerToolUseBlockParamNameBashCodeExecution ServerToolUseBlockParamName = "bash_code_execution"`
 
-Title stringOptional
+            - `const ServerToolUseBlockParamNameTextEditorCodeExecution ServerToolUseBlockParamName = "text_editor_code_execution"`
 
-
+            - `const ServerToolUseBlockParamNameToolSearchToolRegex ServerToolUseBlockParamName = "tool_search_tool_regex"`
 
-type SearchResultBlockParamResp struct{…}
+            - `const ServerToolUseBlockParamNameToolSearchToolBm25 ServerToolUseBlockParamName = "tool_search_tool_bm25"`
 
-
+          - `Type ServerToolUse`
 
-Content [][TextBlockParamResp](api/messages.md)
+          - `CacheControl CacheControlEphemeral Optional`
 
-Text string
+            Create a cache control breakpoint at this content block.
 
-Type Text
+          - `Caller ServerToolUseBlockParamCallerUnionResp Optional`
 
-
+            Tool invocation directly from the model.
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+            - `type DirectCaller struct{…}`
 
-Create a cache control breakpoint at this content block.
+              Tool invocation directly from the model.
 
-Type Ephemeral
+            - `type ServerToolCaller struct{…}`
 
-
+              Tool invocation generated by a server-side tool.
 
-TTL CacheControlEphemeralTTLOptional
+            - `type ServerToolCaller20260120 struct{…}`
 
-The time-to-live for the cache control breakpoint.
+        - `type WebSearchToolResultBlockParamResp struct{…}`
 
-This may be one the following values:
+          - `Content WebSearchToolResultBlockParamContentUnionResp`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            - `[]WebSearchResultBlockParamResp`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+              - `EncryptedContent string`
 
-One of the following:
+              - `Title string`
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+              - `Type WebSearchResult`
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+              - `URL string`
 
-
+              - `PageAge string Optional`
 
-Citations [][TextCitationParamUnionResp](api/messages.md)Optional
+            - `type WebSearchToolRequestError struct{…}`
 
-One of the following:
+              - `ErrorCode WebSearchToolResultErrorCode`
 
-
+                - `const WebSearchToolResultErrorCodeInvalidToolInput WebSearchToolResultErrorCode = "invalid_tool_input"`
 
-type CitationCharLocationParamResp struct{…}
+                - `const WebSearchToolResultErrorCodeUnavailable WebSearchToolResultErrorCode = "unavailable"`
 
-CitedText string
+                - `const WebSearchToolResultErrorCodeMaxUsesExceeded WebSearchToolResultErrorCode = "max_uses_exceeded"`
 
-DocumentIndex int64
+                - `const WebSearchToolResultErrorCodeTooManyRequests WebSearchToolResultErrorCode = "too_many_requests"`
 
-DocumentTitle string
+                - `const WebSearchToolResultErrorCodeQueryTooLong WebSearchToolResultErrorCode = "query_too_long"`
 
-EndCharIndex int64
+                - `const WebSearchToolResultErrorCodeRequestTooLarge WebSearchToolResultErrorCode = "request_too_large"`
 
-StartCharIndex int64
+              - `Type WebSearchToolResultError`
 
-Type CharLocation
+          - `ToolUseID string`
 
-
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-type CitationPageLocationParamResp struct{…}
+          - `Type WebSearchToolResult`
 
-CitedText string
+          - `CacheControl CacheControlEphemeral Optional`
 
-DocumentIndex int64
+            Create a cache control breakpoint at this content block.
 
-DocumentTitle string
+          - `Caller WebSearchToolResultBlockParamCallerUnionResp Optional`
 
-EndPageNumber int64
+            Tool invocation directly from the model.
 
-StartPageNumber int64
+            - `type DirectCaller struct{…}`
 
-Type PageLocation
+              Tool invocation directly from the model.
 
-
+            - `type ServerToolCaller struct{…}`
 
-type CitationContentBlockLocationParamResp struct{…}
+              Tool invocation generated by a server-side tool.
 
-
+            - `type ServerToolCaller20260120 struct{…}`
 
-CitedText string
+        - `type WebFetchToolResultBlockParamResp struct{…}`
 
-The full text of the cited block range, concatenated.
+          - `Content WebFetchToolResultBlockParamContentUnionResp`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+            - `type WebFetchToolResultErrorBlockParamResp struct{…}`
 
-DocumentIndex int64
+              - `ErrorCode WebFetchToolResultErrorCode`
 
-DocumentTitle string
+                - `const WebFetchToolResultErrorCodeInvalidToolInput WebFetchToolResultErrorCode = "invalid_tool_input"`
 
-
+                - `const WebFetchToolResultErrorCodeURLTooLong WebFetchToolResultErrorCode = "url_too_long"`
 
-EndBlockIndex int64
+                - `const WebFetchToolResultErrorCodeURLNotAllowed WebFetchToolResultErrorCode = "url_not_allowed"`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+                - `const WebFetchToolResultErrorCodeURLNotInPriorContext WebFetchToolResultErrorCode = "url_not_in_prior_context"`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+                - `const WebFetchToolResultErrorCodeURLNotAccessible WebFetchToolResultErrorCode = "url_not_accessible"`
 
-StartBlockIndex int64
+                - `const WebFetchToolResultErrorCodeUnsupportedContentType WebFetchToolResultErrorCode = "unsupported_content_type"`
 
-0-based index of the first cited block in the source's `content` array.
+                - `const WebFetchToolResultErrorCodeTooManyRequests WebFetchToolResultErrorCode = "too_many_requests"`
 
-Type ContentBlockLocation
+                - `const WebFetchToolResultErrorCodeMaxUsesExceeded WebFetchToolResultErrorCode = "max_uses_exceeded"`
 
-
+                - `const WebFetchToolResultErrorCodeUnavailable WebFetchToolResultErrorCode = "unavailable"`
 
-type CitationWebSearchResultLocationParamResp struct{…}
+              - `Type WebFetchToolResultError`
 
-CitedText string
+            - `type WebFetchBlockParamResp struct{…}`
 
-EncryptedIndex string
+              - `Content DocumentBlockParamResp`
 
-Title string
+              - `Type WebFetchResult`
 
-Type WebSearchResultLocation
+              - `URL string`
 
-URL string
+                Fetched content URL
 
-
+              - `RetrievedAt string Optional`
 
-type CitationSearchResultLocationParamResp struct{…}
+                ISO 8601 timestamp when the content was retrieved
 
-
+          - `ToolUseID string`
 
-CitedText string
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-The full text of the cited block range, concatenated.
+          - `Type WebFetchToolResult`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+          - `CacheControl CacheControlEphemeral Optional`
 
-
+            Create a cache control breakpoint at this content block.
 
-EndBlockIndex int64
+          - `Caller WebFetchToolResultBlockParamCallerUnionResp Optional`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+            Tool invocation directly from the model.
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+            - `type DirectCaller struct{…}`
 
-
+              Tool invocation directly from the model.
 
-SearchResultIndex int64
+            - `type ServerToolCaller struct{…}`
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+              Tool invocation generated by a server-side tool.
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+            - `type ServerToolCaller20260120 struct{…}`
 
-minimum0
+        - `type CodeExecutionToolResultBlockParamResp struct{…}`
 
-Source string
+          - `Content CodeExecutionToolResultBlockParamContentUnionResp`
 
-StartBlockIndex int64
+            Code execution result with encrypted stdout for PFC + web_search results.
 
-0-based index of the first cited block in the source's `content` array.
+            - `type CodeExecutionToolResultErrorParamResp struct{…}`
 
-Title string
+              - `ErrorCode CodeExecutionToolResultErrorCode`
 
-Type SearchResultLocation
+                - `const CodeExecutionToolResultErrorCodeInvalidToolInput CodeExecutionToolResultErrorCode = "invalid_tool_input"`
 
-Source string
+                - `const CodeExecutionToolResultErrorCodeUnavailable CodeExecutionToolResultErrorCode = "unavailable"`
 
-Title string
+                - `const CodeExecutionToolResultErrorCodeTooManyRequests CodeExecutionToolResultErrorCode = "too_many_requests"`
 
-Type SearchResult
+                - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-
+              - `Type CodeExecutionToolResultError`
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+            - `type CodeExecutionResultBlockParamResp struct{…}`
 
-Create a cache control breakpoint at this content block.
+              - `Content []CodeExecutionOutputBlockParamResp`
 
-Type Ephemeral
+                - `FileID string`
 
-
+                - `Type CodeExecutionOutput`
 
-TTL CacheControlEphemeralTTLOptional
+              - `ReturnCode int64`
 
-The time-to-live for the cache control breakpoint.
+              - `Stderr string`
 
-This may be one the following values:
+              - `Stdout string`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+              - `Type CodeExecutionResult`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            - `type EncryptedCodeExecutionResultBlockParamResp struct{…}`
 
-One of the following:
+              Code execution result with encrypted stdout for PFC + web_search results.
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+              - `Content []CodeExecutionOutputBlockParamResp`
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+                - `FileID string`
 
-
+                - `Type CodeExecutionOutput`
 
-Citations [CitationsConfigParamResp](api/messages.md)Optional
+              - `EncryptedStdout string`
 
-Enabled boolOptional
+              - `ReturnCode int64`
 
-
+              - `Stderr string`
 
-type ThinkingBlockParamResp struct{…}
+              - `Type EncryptedCodeExecutionResult`
 
-Signature string
+          - `ToolUseID string`
 
-Thinking string
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Type Thinking
+          - `Type CodeExecutionToolResult`
 
-
+          - `CacheControl CacheControlEphemeral Optional`
 
-type RedactedThinkingBlockParamResp struct{…}
+            Create a cache control breakpoint at this content block.
 
-Data string
+        - `type BashCodeExecutionToolResultBlockParamResp struct{…}`
 
-Type RedactedThinking
+          - `Content BashCodeExecutionToolResultBlockParamContentUnionResp`
 
-
+            - `type BashCodeExecutionToolResultErrorParamResp struct{…}`
 
-type ToolUseBlockParamResp struct{…}
+              - `ErrorCode BashCodeExecutionToolResultErrorCode`
 
-ID string
+                - `const BashCodeExecutionToolResultErrorCodeInvalidToolInput BashCodeExecutionToolResultErrorCode = "invalid_tool_input"`
 
-Input map[string, any]
+                - `const BashCodeExecutionToolResultErrorCodeUnavailable BashCodeExecutionToolResultErrorCode = "unavailable"`
 
-Name string
+                - `const BashCodeExecutionToolResultErrorCodeTooManyRequests BashCodeExecutionToolResultErrorCode = "too_many_requests"`
 
-Type ToolUse
+                - `const BashCodeExecutionToolResultErrorCodeExecutionTimeExceeded BashCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-
+                - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+              - `Type BashCodeExecutionToolResultError`
 
-Create a cache control breakpoint at this content block.
+            - `type BashCodeExecutionResultBlockParamResp struct{…}`
 
-Type Ephemeral
+              - `Content []BashCodeExecutionOutputBlockParamResp`
 
-
+                - `FileID string`
 
-TTL CacheControlEphemeralTTLOptional
+                - `Type BashCodeExecutionOutput`
 
-The time-to-live for the cache control breakpoint.
+              - `ReturnCode int64`
 
-This may be one the following values:
+              - `Stderr string`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+              - `Stdout string`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+              - `Type BashCodeExecutionResult`
 
-One of the following:
+          - `ToolUseID string`
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+          - `Type BashCodeExecutionToolResult`
 
-
+          - `CacheControl CacheControlEphemeral Optional`
 
-Caller ToolUseBlockParamCallerUnionRespOptional
+            Create a cache control breakpoint at this content block.
 
-Tool invocation directly from the model.
+        - `type TextEditorCodeExecutionToolResultBlockParamResp struct{…}`
 
-One of the following:
+          - `Content TextEditorCodeExecutionToolResultBlockParamContentUnionResp`
 
-
+            - `type TextEditorCodeExecutionToolResultErrorParamResp struct{…}`
 
-type DirectCaller struct{…}
+              - `ErrorCode TextEditorCodeExecutionToolResultErrorCode`
 
-Tool invocation directly from the model.
+                - `const TextEditorCodeExecutionToolResultErrorCodeInvalidToolInput TextEditorCodeExecutionToolResultErrorCode = "invalid_tool_input"`
 
-Type Direct
+                - `const TextEditorCodeExecutionToolResultErrorCodeUnavailable TextEditorCodeExecutionToolResultErrorCode = "unavailable"`
 
-
+                - `const TextEditorCodeExecutionToolResultErrorCodeTooManyRequests TextEditorCodeExecutionToolResultErrorCode = "too_many_requests"`
 
-type ServerToolCaller struct{…}
+                - `const TextEditorCodeExecutionToolResultErrorCodeExecutionTimeExceeded TextEditorCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-Tool invocation generated by a server-side tool.
+                - `const TextEditorCodeExecutionToolResultErrorCodeFileNotFound TextEditorCodeExecutionToolResultErrorCode = "file_not_found"`
 
-ToolID string
+              - `Type TextEditorCodeExecutionToolResultError`
 
-Type CodeExecution20250825
+              - `ErrorMessage string Optional`
 
-
+            - `type TextEditorCodeExecutionViewResultBlockParamResp struct{…}`
 
-type ServerToolCaller20260120 struct{…}
+              - `Content string`
 
-ToolID string
+              - `FileType TextEditorCodeExecutionViewResultBlockParamFileType`
 
-Type CodeExecution20260120
+                - `const TextEditorCodeExecutionViewResultBlockParamFileTypeText TextEditorCodeExecutionViewResultBlockParamFileType = "text"`
 
-
+                - `const TextEditorCodeExecutionViewResultBlockParamFileTypeImage TextEditorCodeExecutionViewResultBlockParamFileType = "image"`
 
-type ToolResultBlockParamResp struct{…}
+                - `const TextEditorCodeExecutionViewResultBlockParamFileTypePDF TextEditorCodeExecutionViewResultBlockParamFileType = "pdf"`
 
-ToolUseID string
+              - `Type TextEditorCodeExecutionViewResult`
 
-Type ToolResult
+              - `NumLines int64 Optional`
 
-
+              - `StartLine int64 Optional`
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+              - `TotalLines int64 Optional`
 
-Create a cache control breakpoint at this content block.
+            - `type TextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
 
-Type Ephemeral
+              - `IsFileUpdate bool`
 
-
+              - `Type TextEditorCodeExecutionCreateResult`
 
-TTL CacheControlEphemeralTTLOptional
+            - `type TextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
 
-The time-to-live for the cache control breakpoint.
+              - `Type TextEditorCodeExecutionStrReplaceResult`
 
-This may be one the following values:
+              - `Lines []string Optional`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+              - `NewLines int64 Optional`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+              - `NewStart int64 Optional`
 
-One of the following:
+              - `OldLines int64 Optional`
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+              - `OldStart int64 Optional`
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+          - `ToolUseID string`
 
-
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Content []ToolResultBlockParamContentUnionRespOptional
+          - `Type TextEditorCodeExecutionToolResult`
 
-One of the following:
+          - `CacheControl CacheControlEphemeral Optional`
 
-
+            Create a cache control breakpoint at this content block.
 
-[]ToolResultBlockParamContentUnionResp
+        - `type ToolSearchToolResultBlockParamResp struct{…}`
 
-One of the following:
+          - `Content ToolSearchToolResultBlockParamContentUnionResp`
 
-
+            - `type ToolSearchToolResultErrorParamResp struct{…}`
 
-type TextBlockParamResp struct{…}
+              - `ErrorCode ToolSearchToolResultErrorCode`
 
-Text string
+                - `const ToolSearchToolResultErrorCodeInvalidToolInput ToolSearchToolResultErrorCode = "invalid_tool_input"`
 
-Type Text
+                - `const ToolSearchToolResultErrorCodeUnavailable ToolSearchToolResultErrorCode = "unavailable"`
 
-
+                - `const ToolSearchToolResultErrorCodeTooManyRequests ToolSearchToolResultErrorCode = "too_many_requests"`
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+                - `const ToolSearchToolResultErrorCodeExecutionTimeExceeded ToolSearchToolResultErrorCode = "execution_time_exceeded"`
 
-Create a cache control breakpoint at this content block.
+              - `Type ToolSearchToolResultError`
 
-Type Ephemeral
+              - `ErrorMessage string Optional`
 
-
+            - `type ToolSearchToolSearchResultBlockParamResp struct{…}`
 
-TTL CacheControlEphemeralTTLOptional
+              - `ToolReferences []ToolReferenceBlockParamResp`
 
-The time-to-live for the cache control breakpoint.
+                - `ToolName string`
 
-This may be one the following values:
+                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+                - `Type ToolReference`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+                - `CacheControl CacheControlEphemeral Optional`
 
-One of the following:
+                  Create a cache control breakpoint at this content block.
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+              - `Type ToolSearchToolSearchResult`
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+          - `ToolUseID string`
 
-
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Citations [][TextCitationParamUnionResp](api/messages.md)Optional
+          - `Type ToolSearchToolResult`
 
-One of the following:
+          - `CacheControl CacheControlEphemeral Optional`
 
-
+            Create a cache control breakpoint at this content block.
 
-type CitationCharLocationParamResp struct{…}
+        - `type ContainerUploadBlockParamResp struct{…}`
 
-CitedText string
+          A content block that represents a file to be uploaded to the container
+          Files uploaded via this block will be available in the container's input directory.
 
-DocumentIndex int64
+          - `FileID string`
 
-DocumentTitle string
+          - `Type ContainerUpload`
 
-EndCharIndex int64
+          - `CacheControl CacheControlEphemeral Optional`
 
-StartCharIndex int64
+            Create a cache control breakpoint at this content block.
 
-Type CharLocation
+    - `Role MessageParamRole`
 
-
+      - `const MessageParamRoleUser MessageParamRole = "user"`
 
-type CitationPageLocationParamResp struct{…}
+      - `const MessageParamRoleAssistant MessageParamRole = "assistant"`
 
-CitedText string
+      - `const MessageParamRoleSystem MessageParamRole = "system"`
 
-DocumentIndex int64
+  - `Model param.Field[Model]`
 
-DocumentTitle string
+    Body param: The model that will complete your prompt.
 
-EndPageNumber int64
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-StartPageNumber int64
+  - `CacheControl param.Field[CacheControlEphemeral] Optional`
 
-Type PageLocation
+    Body param: Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
-
+  - `Container param.Field[MessageCreateParamsContainerUnionResp] Optional`
 
-type CitationContentBlockLocationParamResp struct{…}
+    Body param: Container identifier for reuse across requests.
 
-
+  - `InferenceGeo param.Field[string] Optional`
 
-CitedText string
+    Body param: Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
-The full text of the cited block range, concatenated.
+  - `Metadata param.Field[Metadata] Optional`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+    Body param: An object describing metadata about the request.
 
-DocumentIndex int64
+  - `OutputConfig param.Field[OutputConfig] Optional`
 
-DocumentTitle string
+    Body param: Configuration options for the model's output, such as the output format.
 
-
+  - `ServiceTier param.Field[MessageNewParamsServiceTier] Optional`
 
-EndBlockIndex int64
+    Body param: Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+    Anthropic offers different levels of service for your API requests. See [service-tiers](api/service-tiers.md) for details.
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+    - `const MessageNewParamsServiceTierAuto MessageNewParamsServiceTier = "auto"`
 
-StartBlockIndex int64
+    - `const MessageNewParamsServiceTierStandardOnly MessageNewParamsServiceTier = "standard_only"`
 
-0-based index of the first cited block in the source's `content` array.
+  - `StopSequences param.Field[[]string] Optional`
 
-Type ContentBlockLocation
+    Body param: Custom text sequences that will cause the model to stop generating.
 
-
+    Our models will normally stop when they have naturally completed their turn, which will result in a response `stop_reason` of `"end_turn"`.
 
-type CitationWebSearchResultLocationParamResp struct{…}
+    If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
 
-CitedText string
+  - `System param.Field[[]TextBlockParamResp] Optional`
 
-EncryptedIndex string
+    Body param: System prompt.
 
-Title string
+    A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
-Type WebSearchResultLocation
+    - `[]TextBlockParam`
 
-URL string
+      - `Text string`
 
-
+        minLength: 1
 
-type CitationSearchResultLocationParamResp struct{…}
+      - `Type Text`
 
-
+      - `CacheControl CacheControlEphemeral Optional`
 
-CitedText string
+        Create a cache control breakpoint at this content block.
 
-The full text of the cited block range, concatenated.
+      - `Citations []TextCitationParamUnionResp Optional`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+  - `Thinking param.Field[ThinkingConfigParamUnionResp] Optional`
 
-
+    Body param: Configuration for enabling Claude's extended thinking.
 
-EndBlockIndex int64
+    When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+    See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+  - `ToolChoice param.Field[ToolChoiceUnion] Optional`
 
-
+    Body param: How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-SearchResultIndex int64
+  - `Tools param.Field[[]ToolUnion] Optional`
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+    Body param: Definitions of tools that the model may use.
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+    If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-minimum0
+    There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
 
-Source string
+    Each tool definition includes:
 
-StartBlockIndex int64
+    * `name`: Name of the tool.
+    * `description`: Optional, but strongly-recommended description of the tool.
+    * `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
 
-0-based index of the first cited block in the source's `content` array.
+    For example, if you defined `tools` as:
 
-Title string
-
-Type SearchResultLocation
-
-
-
-type ImageBlockParamResp struct{…}
-
-
-
-Source ImageBlockParamSourceUnionResp
-
-One of the following:
-
-
-
-type Base64ImageSource struct{…}
-
-Data string
-
-
-
-MediaType Base64ImageSourceMediaType
-
-One of the following:
-
-const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"
-
-const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"
-
-const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"
-
-const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"
-
-Type Base64
-
-
-
-type URLImageSource struct{…}
-
-Type URL
-
-URL string
-
-Type Image
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-
-
-type SearchResultBlockParamResp struct{…}
-
-
-
-Content [][TextBlockParamResp](api/messages.md)
-
-Text string
-
-Type Text
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-
-
-Citations [][TextCitationParamUnionResp](api/messages.md)Optional
-
-One of the following:
-
-
-
-type CitationCharLocationParamResp struct{…}
-
-CitedText string
-
-DocumentIndex int64
-
-DocumentTitle string
-
-EndCharIndex int64
-
-StartCharIndex int64
-
-Type CharLocation
-
-
-
-type CitationPageLocationParamResp struct{…}
-
-CitedText string
-
-DocumentIndex int64
-
-DocumentTitle string
-
-EndPageNumber int64
-
-StartPageNumber int64
-
-Type PageLocation
-
-
-
-type CitationContentBlockLocationParamResp struct{…}
-
-
-
-CitedText string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-DocumentIndex int64
-
-DocumentTitle string
-
-
-
-EndBlockIndex int64
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-StartBlockIndex int64
-
-0-based index of the first cited block in the source's `content` array.
-
-Type ContentBlockLocation
-
-
-
-type CitationWebSearchResultLocationParamResp struct{…}
-
-CitedText string
-
-EncryptedIndex string
-
-Title string
-
-Type WebSearchResultLocation
-
-URL string
-
-
-
-type CitationSearchResultLocationParamResp struct{…}
-
-
-
-CitedText string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-EndBlockIndex int64
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-SearchResultIndex int64
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-Source string
-
-StartBlockIndex int64
-
-0-based index of the first cited block in the source's `content` array.
-
-Title string
-
-Type SearchResultLocation
-
-Source string
-
-Title string
-
-Type SearchResult
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-
-
-Citations [CitationsConfigParamResp](api/messages.md)Optional
-
-Enabled boolOptional
-
-
-
-type DocumentBlockParamResp struct{…}
-
-
-
-Source DocumentBlockParamSourceUnionResp
-
-One of the following:
-
-
-
-type Base64PDFSource struct{…}
-
-Data string
-
-MediaType ApplicationPDF
-
-Type Base64
-
-
-
-type PlainTextSource struct{…}
-
-Data string
-
-MediaType TextPlain
-
-Type Text
-
-
-
-type ContentBlockSource struct{…}
-
-
-
-Content ContentBlockSourceContentUnion
-
-One of the following:
-
-string
-
-
-
-[][ContentBlockSourceContentItemUnion](api/messages.md)
-
-One of the following:
-
-
-
-type TextBlockParamResp struct{…}
-
-Text string
-
-Type Text
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-
-
-Citations [][TextCitationParamUnionResp](api/messages.md)Optional
-
-One of the following:
-
-
-
-type CitationCharLocationParamResp struct{…}
-
-CitedText string
-
-DocumentIndex int64
-
-DocumentTitle string
-
-EndCharIndex int64
-
-StartCharIndex int64
-
-Type CharLocation
-
-
-
-type CitationPageLocationParamResp struct{…}
-
-CitedText string
-
-DocumentIndex int64
-
-DocumentTitle string
-
-EndPageNumber int64
-
-StartPageNumber int64
-
-Type PageLocation
-
-
-
-type CitationContentBlockLocationParamResp struct{…}
-
-
-
-CitedText string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-DocumentIndex int64
-
-DocumentTitle string
-
-
-
-EndBlockIndex int64
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-StartBlockIndex int64
-
-0-based index of the first cited block in the source's `content` array.
-
-Type ContentBlockLocation
-
-
-
-type CitationWebSearchResultLocationParamResp struct{…}
-
-CitedText string
-
-EncryptedIndex string
-
-Title string
-
-Type WebSearchResultLocation
-
-URL string
-
-
-
-type CitationSearchResultLocationParamResp struct{…}
-
-
-
-CitedText string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-EndBlockIndex int64
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-SearchResultIndex int64
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-Source string
-
-StartBlockIndex int64
-
-0-based index of the first cited block in the source's `content` array.
-
-Title string
-
-Type SearchResultLocation
-
-
-
-type ImageBlockParamResp struct{…}
-
-
-
-Source ImageBlockParamSourceUnionResp
-
-One of the following:
-
-
-
-type Base64ImageSource struct{…}
-
-Data string
-
-
-
-MediaType Base64ImageSourceMediaType
-
-One of the following:
-
-const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"
-
-const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"
-
-const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"
-
-const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"
-
-Type Base64
-
-
-
-type URLImageSource struct{…}
-
-Type URL
-
-URL string
-
-Type Image
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-Type Content
-
-
-
-type URLPDFSource struct{…}
-
-Type URL
-
-URL string
-
-Type Document
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-
-
-Citations [CitationsConfigParamResp](api/messages.md)Optional
-
-Enabled boolOptional
-
-Context stringOptional
-
-Title stringOptional
-
-
-
-type ToolReferenceBlockParamResp struct{…}
-
-Tool reference block that can be included in tool\_result content.
-
-ToolName string
-
-Type ToolReference
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-IsError boolOptional
-
-
-
-type ServerToolUseBlockParamResp struct{…}
-
-ID string
-
-Input map[string, any]
-
-
-
-Name ServerToolUseBlockParamName
-
-One of the following:
-
-const ServerToolUseBlockParamNameWebSearch ServerToolUseBlockParamName = "web\_search"
-
-const ServerToolUseBlockParamNameWebFetch ServerToolUseBlockParamName = "web\_fetch"
-
-const ServerToolUseBlockParamNameCodeExecution ServerToolUseBlockParamName = "code\_execution"
-
-const ServerToolUseBlockParamNameBashCodeExecution ServerToolUseBlockParamName = "bash\_code\_execution"
-
-const ServerToolUseBlockParamNameTextEditorCodeExecution ServerToolUseBlockParamName = "text\_editor\_code\_execution"
-
-const ServerToolUseBlockParamNameToolSearchToolRegex ServerToolUseBlockParamName = "tool\_search\_tool\_regex"
-
-const ServerToolUseBlockParamNameToolSearchToolBm25 ServerToolUseBlockParamName = "tool\_search\_tool\_bm25"
-
-Type ServerToolUse
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-
-
-Caller ServerToolUseBlockParamCallerUnionRespOptional
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-type DirectCaller struct{…}
-
-Tool invocation directly from the model.
-
-Type Direct
-
-
-
-type ServerToolCaller struct{…}
-
-Tool invocation generated by a server-side tool.
-
-ToolID string
-
-Type CodeExecution20250825
-
-
-
-type ServerToolCaller20260120 struct{…}
-
-ToolID string
-
-Type CodeExecution20260120
-
-
-
-type WebSearchToolResultBlockParamResp struct{…}
-
-
-
-Content [WebSearchToolResultBlockParamContentUnionResp](api/messages.md)
-
-One of the following:
-
-
-
-[][WebSearchResultBlockParamResp](api/messages.md)
-
-EncryptedContent string
-
-Title string
-
-Type WebSearchResult
-
-URL string
-
-PageAge stringOptional
-
-
-
-type WebSearchToolRequestError struct{…}
-
-
-
-ErrorCode [WebSearchToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-const WebSearchToolResultErrorCodeInvalidToolInput [WebSearchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
-
-const WebSearchToolResultErrorCodeUnavailable [WebSearchToolResultErrorCode](api/messages.md) = "unavailable"
-
-const WebSearchToolResultErrorCodeMaxUsesExceeded [WebSearchToolResultErrorCode](api/messages.md) = "max\_uses\_exceeded"
-
-const WebSearchToolResultErrorCodeTooManyRequests [WebSearchToolResultErrorCode](api/messages.md) = "too\_many\_requests"
-
-const WebSearchToolResultErrorCodeQueryTooLong [WebSearchToolResultErrorCode](api/messages.md) = "query\_too\_long"
-
-const WebSearchToolResultErrorCodeRequestTooLarge [WebSearchToolResultErrorCode](api/messages.md) = "request\_too\_large"
-
-Type WebSearchToolResultError
-
-ToolUseID string
-
-Type WebSearchToolResult
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-
-
-Caller WebSearchToolResultBlockParamCallerUnionRespOptional
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-type DirectCaller struct{…}
-
-Tool invocation directly from the model.
-
-Type Direct
-
-
-
-type ServerToolCaller struct{…}
-
-Tool invocation generated by a server-side tool.
-
-ToolID string
-
-Type CodeExecution20250825
-
-
-
-type ServerToolCaller20260120 struct{…}
-
-ToolID string
-
-Type CodeExecution20260120
-
-
-
-type WebFetchToolResultBlockParamResp struct{…}
-
-
-
-Content WebFetchToolResultBlockParamContentUnionResp
-
-One of the following:
-
-
-
-type WebFetchToolResultErrorBlockParamResp struct{…}
-
-
-
-ErrorCode [WebFetchToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-const WebFetchToolResultErrorCodeInvalidToolInput [WebFetchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
-
-const WebFetchToolResultErrorCodeURLTooLong [WebFetchToolResultErrorCode](api/messages.md) = "url\_too\_long"
-
-const WebFetchToolResultErrorCodeURLNotAllowed [WebFetchToolResultErrorCode](api/messages.md) = "url\_not\_allowed"
-
-const WebFetchToolResultErrorCodeURLNotInPriorContext [WebFetchToolResultErrorCode](api/messages.md) = "url\_not\_in\_prior\_context"
-
-const WebFetchToolResultErrorCodeURLNotAccessible [WebFetchToolResultErrorCode](api/messages.md) = "url\_not\_accessible"
-
-const WebFetchToolResultErrorCodeUnsupportedContentType [WebFetchToolResultErrorCode](api/messages.md) = "unsupported\_content\_type"
-
-const WebFetchToolResultErrorCodeTooManyRequests [WebFetchToolResultErrorCode](api/messages.md) = "too\_many\_requests"
-
-const WebFetchToolResultErrorCodeMaxUsesExceeded [WebFetchToolResultErrorCode](api/messages.md) = "max\_uses\_exceeded"
-
-const WebFetchToolResultErrorCodeUnavailable [WebFetchToolResultErrorCode](api/messages.md) = "unavailable"
-
-Type WebFetchToolResultError
-
-
-
-type WebFetchBlockParamResp struct{…}
-
-
-
-Content [DocumentBlockParamResp](api/messages.md)
-
-
-
-Source DocumentBlockParamSourceUnionResp
-
-One of the following:
-
-
-
-type Base64PDFSource struct{…}
-
-Data string
-
-MediaType ApplicationPDF
-
-Type Base64
-
-
-
-type PlainTextSource struct{…}
-
-Data string
-
-MediaType TextPlain
-
-Type Text
-
-
-
-type ContentBlockSource struct{…}
-
-
-
-Content ContentBlockSourceContentUnion
-
-One of the following:
-
-string
-
-
-
-[][ContentBlockSourceContentItemUnion](api/messages.md)
-
-One of the following:
-
-
-
-type TextBlockParamResp struct{…}
-
-Text string
-
-Type Text
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-
-
-Citations [][TextCitationParamUnionResp](api/messages.md)Optional
-
-One of the following:
-
-
-
-type CitationCharLocationParamResp struct{…}
-
-CitedText string
-
-DocumentIndex int64
-
-DocumentTitle string
-
-EndCharIndex int64
-
-StartCharIndex int64
-
-Type CharLocation
-
-
-
-type CitationPageLocationParamResp struct{…}
-
-CitedText string
-
-DocumentIndex int64
-
-DocumentTitle string
-
-EndPageNumber int64
-
-StartPageNumber int64
-
-Type PageLocation
-
-
-
-type CitationContentBlockLocationParamResp struct{…}
-
-
-
-CitedText string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-DocumentIndex int64
-
-DocumentTitle string
-
-
-
-EndBlockIndex int64
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-StartBlockIndex int64
-
-0-based index of the first cited block in the source's `content` array.
-
-Type ContentBlockLocation
-
-
-
-type CitationWebSearchResultLocationParamResp struct{…}
-
-CitedText string
-
-EncryptedIndex string
-
-Title string
-
-Type WebSearchResultLocation
-
-URL string
-
-
-
-type CitationSearchResultLocationParamResp struct{…}
-
-
-
-CitedText string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-EndBlockIndex int64
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-SearchResultIndex int64
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-Source string
-
-StartBlockIndex int64
-
-0-based index of the first cited block in the source's `content` array.
-
-Title string
-
-Type SearchResultLocation
-
-
-
-type ImageBlockParamResp struct{…}
-
-
-
-Source ImageBlockParamSourceUnionResp
-
-One of the following:
-
-
-
-type Base64ImageSource struct{…}
-
-Data string
-
-
-
-MediaType Base64ImageSourceMediaType
-
-One of the following:
-
-const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"
-
-const Base64ImageSourceMediaTypeImagePNG Base64ImageSourceMediaType = "image/png"
-
-const Base64ImageSourceMediaTypeImageGIF Base64ImageSourceMediaType = "image/gif"
-
-const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"
-
-Type Base64
-
-
-
-type URLImageSource struct{…}
-
-Type URL
-
-URL string
-
-Type Image
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-Type Content
-
-
-
-type URLPDFSource struct{…}
-
-Type URL
-
-URL string
-
-Type Document
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-
-
-Citations [CitationsConfigParamResp](api/messages.md)Optional
-
-Enabled boolOptional
-
-Context stringOptional
-
-Title stringOptional
-
-Type WebFetchResult
-
-URL string
-
-Fetched content URL
-
-RetrievedAt stringOptional
-
-ISO 8601 timestamp when the content was retrieved
-
-ToolUseID string
-
-Type WebFetchToolResult
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-
-
-Caller WebFetchToolResultBlockParamCallerUnionRespOptional
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-type DirectCaller struct{…}
-
-Tool invocation directly from the model.
-
-Type Direct
-
-
-
-type ServerToolCaller struct{…}
-
-Tool invocation generated by a server-side tool.
-
-ToolID string
-
-Type CodeExecution20250825
-
-
-
-type ServerToolCaller20260120 struct{…}
-
-ToolID string
-
-Type CodeExecution20260120
-
-
-
-type CodeExecutionToolResultBlockParamResp struct{…}
-
-
-
-Content [CodeExecutionToolResultBlockParamContentUnionResp](api/messages.md)
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-One of the following:
-
-
-
-type CodeExecutionToolResultErrorParamResp struct{…}
-
-
-
-ErrorCode [CodeExecutionToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-const CodeExecutionToolResultErrorCodeInvalidToolInput [CodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
-
-const CodeExecutionToolResultErrorCodeUnavailable [CodeExecutionToolResultErrorCode](api/messages.md) = "unavailable"
-
-const CodeExecutionToolResultErrorCodeTooManyRequests [CodeExecutionToolResultErrorCode](api/messages.md) = "too\_many\_requests"
-
-const CodeExecutionToolResultErrorCodeExecutionTimeExceeded [CodeExecutionToolResultErrorCode](api/messages.md) = "execution\_time\_exceeded"
-
-Type CodeExecutionToolResultError
-
-
-
-type CodeExecutionResultBlockParamResp struct{…}
-
-
-
-Content [][CodeExecutionOutputBlockParamResp](api/messages.md)
-
-FileID string
-
-Type CodeExecutionOutput
-
-ReturnCode int64
-
-Stderr string
-
-Stdout string
-
-Type CodeExecutionResult
-
-
-
-type EncryptedCodeExecutionResultBlockParamResp struct{…}
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-
-
-Content [][CodeExecutionOutputBlockParamResp](api/messages.md)
-
-FileID string
-
-Type CodeExecutionOutput
-
-EncryptedStdout string
-
-ReturnCode int64
-
-Stderr string
-
-Type EncryptedCodeExecutionResult
-
-ToolUseID string
-
-Type CodeExecutionToolResult
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-
-
-type BashCodeExecutionToolResultBlockParamResp struct{…}
-
-
-
-Content BashCodeExecutionToolResultBlockParamContentUnionResp
-
-One of the following:
-
-
-
-type BashCodeExecutionToolResultErrorParamResp struct{…}
-
-
-
-ErrorCode [BashCodeExecutionToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-const BashCodeExecutionToolResultErrorCodeInvalidToolInput [BashCodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
-
-const BashCodeExecutionToolResultErrorCodeUnavailable [BashCodeExecutionToolResultErrorCode](api/messages.md) = "unavailable"
-
-const BashCodeExecutionToolResultErrorCodeTooManyRequests [BashCodeExecutionToolResultErrorCode](api/messages.md) = "too\_many\_requests"
-
-const BashCodeExecutionToolResultErrorCodeExecutionTimeExceeded [BashCodeExecutionToolResultErrorCode](api/messages.md) = "execution\_time\_exceeded"
-
-const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge [BashCodeExecutionToolResultErrorCode](api/messages.md) = "output\_file\_too\_large"
-
-Type BashCodeExecutionToolResultError
-
-
-
-type BashCodeExecutionResultBlockParamResp struct{…}
-
-
-
-Content [][BashCodeExecutionOutputBlockParamResp](api/messages.md)
-
-FileID string
-
-Type BashCodeExecutionOutput
-
-ReturnCode int64
-
-Stderr string
-
-Stdout string
-
-Type BashCodeExecutionResult
-
-ToolUseID string
-
-Type BashCodeExecutionToolResult
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-
-
-type TextEditorCodeExecutionToolResultBlockParamResp struct{…}
-
-
-
-Content TextEditorCodeExecutionToolResultBlockParamContentUnionResp
-
-One of the following:
-
-
-
-type TextEditorCodeExecutionToolResultErrorParamResp struct{…}
-
-
-
-ErrorCode [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-const TextEditorCodeExecutionToolResultErrorCodeInvalidToolInput [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
-
-const TextEditorCodeExecutionToolResultErrorCodeUnavailable [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "unavailable"
-
-const TextEditorCodeExecutionToolResultErrorCodeTooManyRequests [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "too\_many\_requests"
-
-const TextEditorCodeExecutionToolResultErrorCodeExecutionTimeExceeded [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "execution\_time\_exceeded"
-
-const TextEditorCodeExecutionToolResultErrorCodeFileNotFound [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "file\_not\_found"
-
-Type TextEditorCodeExecutionToolResultError
-
-ErrorMessage stringOptional
-
-
-
-type TextEditorCodeExecutionViewResultBlockParamResp struct{…}
-
-Content string
-
-
-
-FileType TextEditorCodeExecutionViewResultBlockParamFileType
-
-One of the following:
-
-const TextEditorCodeExecutionViewResultBlockParamFileTypeText TextEditorCodeExecutionViewResultBlockParamFileType = "text"
-
-const TextEditorCodeExecutionViewResultBlockParamFileTypeImage TextEditorCodeExecutionViewResultBlockParamFileType = "image"
-
-const TextEditorCodeExecutionViewResultBlockParamFileTypePDF TextEditorCodeExecutionViewResultBlockParamFileType = "pdf"
-
-Type TextEditorCodeExecutionViewResult
-
-NumLines int64Optional
-
-StartLine int64Optional
-
-TotalLines int64Optional
-
-
-
-type TextEditorCodeExecutionCreateResultBlockParamResp struct{…}
-
-IsFileUpdate bool
-
-Type TextEditorCodeExecutionCreateResult
-
-
-
-type TextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}
-
-Type TextEditorCodeExecutionStrReplaceResult
-
-Lines []stringOptional
-
-NewLines int64Optional
-
-NewStart int64Optional
-
-OldLines int64Optional
-
-OldStart int64Optional
-
-ToolUseID string
-
-Type TextEditorCodeExecutionToolResult
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-
-
-type ToolSearchToolResultBlockParamResp struct{…}
-
-
-
-Content ToolSearchToolResultBlockParamContentUnionResp
-
-One of the following:
-
-
-
-type ToolSearchToolResultErrorParamResp struct{…}
-
-
-
-ErrorCode [ToolSearchToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-const ToolSearchToolResultErrorCodeInvalidToolInput [ToolSearchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
-
-const ToolSearchToolResultErrorCodeUnavailable [ToolSearchToolResultErrorCode](api/messages.md) = "unavailable"
-
-const ToolSearchToolResultErrorCodeTooManyRequests [ToolSearchToolResultErrorCode](api/messages.md) = "too\_many\_requests"
-
-const ToolSearchToolResultErrorCodeExecutionTimeExceeded [ToolSearchToolResultErrorCode](api/messages.md) = "execution\_time\_exceeded"
-
-Type ToolSearchToolResultError
-
-ErrorMessage stringOptional
-
-
-
-type ToolSearchToolSearchResultBlockParamResp struct{…}
-
-
-
-ToolReferences [][ToolReferenceBlockParamResp](api/messages.md)
-
-ToolName string
-
-Type ToolReference
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-Type ToolSearchToolSearchResult
-
-ToolUseID string
-
-Type ToolSearchToolResult
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-
-
-type ContainerUploadBlockParamResp struct{…}
-
-A content block that represents a file to be uploaded to the container
-Files uploaded via this block will be available in the container's input directory.
-
-FileID string
-
-Type ContainerUpload
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-
-
-type MidConversationSystemBlockParamResp struct{…}
-
-System instructions that appear mid-conversation.
-
-Use this block to provide or update system-level instructions at a specific
-point in the conversation, rather than only via the top-level `system` parameter.
-
-
-
-Content [][TextBlockParamResp](api/messages.md)
-
-System instruction text blocks.
-
-Text string
-
-Type Text
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-
-
-Citations [][TextCitationParamUnionResp](api/messages.md)Optional
-
-One of the following:
-
-
-
-type CitationCharLocationParamResp struct{…}
-
-CitedText string
-
-DocumentIndex int64
-
-DocumentTitle string
-
-EndCharIndex int64
-
-StartCharIndex int64
-
-Type CharLocation
-
-
-
-type CitationPageLocationParamResp struct{…}
-
-CitedText string
-
-DocumentIndex int64
-
-DocumentTitle string
-
-EndPageNumber int64
-
-StartPageNumber int64
-
-Type PageLocation
-
-
-
-type CitationContentBlockLocationParamResp struct{…}
-
-
-
-CitedText string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-DocumentIndex int64
-
-DocumentTitle string
-
-
-
-EndBlockIndex int64
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-StartBlockIndex int64
-
-0-based index of the first cited block in the source's `content` array.
-
-Type ContentBlockLocation
-
-
-
-type CitationWebSearchResultLocationParamResp struct{…}
-
-CitedText string
-
-EncryptedIndex string
-
-Title string
-
-Type WebSearchResultLocation
-
-URL string
-
-
-
-type CitationSearchResultLocationParamResp struct{…}
-
-
-
-CitedText string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-EndBlockIndex int64
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-SearchResultIndex int64
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-Source string
-
-StartBlockIndex int64
-
-0-based index of the first cited block in the source's `content` array.
-
-Title string
-
-Type SearchResultLocation
-
-Type MidConvSystem
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-
-
-Role MessageParamRole
-
-One of the following:
-
-const MessageParamRoleUser MessageParamRole = "user"
-
-const MessageParamRoleAssistant MessageParamRole = "assistant"
-
-const MessageParamRoleSystem MessageParamRole = "system"
-
-
-
-Model param.Field[Model]
-
-Body param: The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-CacheControl param.Field[[CacheControlEphemeral](api/messages.md)]Optional
-
-Body param: Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
-
-Container param.Field[string]Optional
-
-Body param: Container identifier for reuse across requests.
-
-InferenceGeo param.Field[string]Optional
-
-Body param: Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
-
-Metadata param.Field[[Metadata](api/messages.md)]Optional
-
-Body param: An object describing metadata about the request.
-
-OutputConfig param.Field[[OutputConfig](api/messages.md)]Optional
-
-Body param: Configuration options for the model's output, such as the output format.
-
-
-
-ServiceTier param.Field[[MessageNewParamsServiceTier](api/messages/create.md)]Optional
-
-Body param: Determines whether to use priority capacity (if available) or standard capacity for this request.
-
-Anthropic offers different levels of service for your API requests. See [service-tiers](api/service-tiers.md) for details.
-
-const MessageNewParamsServiceTierAuto [MessageNewParamsServiceTier](api/messages/create.md) = "auto"
-
-const MessageNewParamsServiceTierStandardOnly [MessageNewParamsServiceTier](api/messages/create.md) = "standard\_only"
-
-
-
-StopSequences param.Field[[]string]Optional
-
-Body param: Custom text sequences that will cause the model to stop generating.
-
-Our models will normally stop when they have naturally completed their turn, which will result in a response `stop_reason` of `"end_turn"`.
-
-If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
-
-
-
-System param.Field[[][TextBlockParamResp](api/messages.md)]Optional
-
-Body param: System prompt.
-
-A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
-
-
-
-[][TextBlockParam](api/messages.md)
-
-Text string
-
-Type Text
-
-
-
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
-
-Create a cache control breakpoint at this content block.
-
-Type Ephemeral
-
-
-
-TTL CacheControlEphemeralTTLOptional
-
-The time-to-live for the cache control breakpoint.
-
-This may be one the following values:
-
-- `5m`: 5 minutes
-- `1h`: 1 hour
-
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
-
-One of the following:
-
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
-
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
-
-
-
-Citations [][TextCitationParamUnionResp](api/messages.md)Optional
-
-One of the following:
-
-
-
-type CitationCharLocationParamResp struct{…}
-
-CitedText string
-
-DocumentIndex int64
-
-DocumentTitle string
-
-EndCharIndex int64
-
-StartCharIndex int64
-
-Type CharLocation
-
-
-
-type CitationPageLocationParamResp struct{…}
-
-CitedText string
-
-DocumentIndex int64
-
-DocumentTitle string
-
-EndPageNumber int64
-
-StartPageNumber int64
-
-Type PageLocation
-
-
-
-type CitationContentBlockLocationParamResp struct{…}
-
-
-
-CitedText string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-DocumentIndex int64
-
-DocumentTitle string
-
-
-
-EndBlockIndex int64
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-StartBlockIndex int64
-
-0-based index of the first cited block in the source's `content` array.
-
-Type ContentBlockLocation
-
-
-
-type CitationWebSearchResultLocationParamResp struct{…}
-
-CitedText string
-
-EncryptedIndex string
-
-Title string
-
-Type WebSearchResultLocation
-
-URL string
-
-
-
-type CitationSearchResultLocationParamResp struct{…}
-
-
-
-CitedText string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-EndBlockIndex int64
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-SearchResultIndex int64
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-Source string
-
-StartBlockIndex int64
-
-0-based index of the first cited block in the source's `content` array.
-
-Title string
-
-Type SearchResultLocation
-
-
-
-Thinking param.Field[[ThinkingConfigParamUnionResp](api/messages.md)]Optional
-
-Body param: Configuration for enabling Claude's extended thinking.
-
-When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
-
-See [extended thinking](build-with-claude/extended-thinking.md) for details.
-
-ToolChoice param.Field[[ToolChoiceUnion](api/messages.md)]Optional
-
-Body param: How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
-
-
-
-Tools param.Field[[][ToolUnion](api/messages.md)]Optional
-
-Body param: Definitions of tools that the model may use.
-
-If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
-
-There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
-
-Each tool definition includes:
-
-- `name`: Name of the tool.
-- `description`: Optional, but strongly-recommended description of the tool.
-- `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
-
-For example, if you defined `tools` as:
-
-```shiki
-[
-  {
-    "name": "get_stock_price",
-    "description": "Get the current stock price for a given ticker symbol.",
-    "input_schema": {
-      "type": "object",
-      "properties": {
-        "ticker": {
-          "type": "string",
-          "description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
+    ```json
+    [
+      {
+        "name": "get_stock_price",
+        "description": "Get the current stock price for a given ticker symbol.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "ticker": {
+              "type": "string",
+              "description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
+            }
+          },
+          "required": ["ticker"]
         }
-      },
-      "required": ["ticker"]
-    }
-  }
-]
-```
+      }
+    ]
+    ```
 
-
+    And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
 
-And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
+    ```json
+    [
+      {
+        "type": "tool_use",
+        "id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+        "name": "get_stock_price",
+        "input": { "ticker": "^GSPC" }
+      }
+    ]
+    ```
 
-```shiki
-[
-  {
-    "type": "tool_use",
-    "id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
-    "name": "get_stock_price",
-    "input": { "ticker": "^GSPC" }
-  }
-]
-```
+    You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
 
-
+    ```json
+    [
+      {
+        "type": "tool_result",
+        "tool_use_id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
+        "content": "259.75 USD"
+      }
+    ]
+    ```
 
-You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
+    Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-```shiki
-[
-  {
-    "type": "tool_result",
-    "tool_use_id": "toolu_01D7FLrfh4GYq7yT1ULFeyMV",
-    "content": "259.75 USD"
-  }
-]
-```
+    See our [guide](agents-and-tools/tool-use/overview.md) for more details.
 
-
+    - `type Tool struct{…}`
 
-Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
+      - `InputSchema ToolInputSchema`
 
-See our [guide](agents-and-tools/tool-use/overview.md) for more details.
+        [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
-
+        This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-type Tool struct{…}
+        - `Type Object`
 
-
+        - `Properties map[string, any] Optional`
 
-InputSchema ToolInputSchema
+        - `Required []string Optional`
 
-[JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
+      - `Name string`
 
-This defines the shape of the `input` that your tool accepts and that the model will produce.
+        Name of the tool.
 
-Type Object
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Properties map[string, any]Optional
+        maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-Required []stringOptional
+      - `AllowedCallers []string Optional`
 
-
+        - `const ToolAllowedCallerDirect ToolAllowedCaller = "direct"`
 
-Name string
+        - `const ToolAllowedCallerCodeExecution20250825 ToolAllowedCaller = "code_execution_20250825"`
 
-Name of the tool.
+        - `const ToolAllowedCallerCodeExecution20260120 ToolAllowedCaller = "code_execution_20260120"`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        - `const ToolAllowedCallerCodeExecution20260521 ToolAllowedCaller = "code_execution_20260521"`
 
-maxLength128
+      - `CacheControl CacheControlEphemeral Optional`
 
-minLength1
+        Create a cache control breakpoint at this content block.
 
-
+      - `DeferLoading bool Optional`
 
-AllowedCallers []stringOptional
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-One of the following:
+      - `Description string Optional`
 
-const ToolAllowedCallerDirect ToolAllowedCaller = "direct"
+        Description of what this tool does.
 
-const ToolAllowedCallerCodeExecution20250825 ToolAllowedCaller = "code\_execution\_20250825"
+        Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-const ToolAllowedCallerCodeExecution20260120 ToolAllowedCaller = "code\_execution\_20260120"
+      - `EagerInputStreaming bool Optional`
 
-const ToolAllowedCallerCodeExecution20260521 ToolAllowedCaller = "code\_execution\_20260521"
+        Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-
+      - `InputExamples []map[string, any] Optional`
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+      - `Strict bool Optional`
 
-Create a cache control breakpoint at this content block.
+        When true, guarantees schema validation on tool names and inputs
 
-Type Ephemeral
+      - `Type ToolType Optional`
 
-
+    - `type ToolBash20250124 struct{…}`
 
-TTL CacheControlEphemeralTTLOptional
+      - `Name Bash`
 
-The time-to-live for the cache control breakpoint.
+        Name of the tool.
 
-This may be one the following values:
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      - `Type Bash20250124`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      - `AllowedCallers []string Optional`
 
-One of the following:
+        - `const ToolBash20250124AllowedCallerDirect ToolBash20250124AllowedCaller = "direct"`
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+        - `const ToolBash20250124AllowedCallerCodeExecution20250825 ToolBash20250124AllowedCaller = "code_execution_20250825"`
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+        - `const ToolBash20250124AllowedCallerCodeExecution20260120 ToolBash20250124AllowedCaller = "code_execution_20260120"`
 
-DeferLoading boolOptional
+        - `const ToolBash20250124AllowedCallerCodeExecution20260521 ToolBash20250124AllowedCaller = "code_execution_20260521"`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      - `CacheControl CacheControlEphemeral Optional`
 
-
+        Create a cache control breakpoint at this content block.
 
-Description stringOptional
+      - `DeferLoading bool Optional`
 
-Description of what this tool does.
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+      - `InputExamples []map[string, any] Optional`
 
-EagerInputStreaming boolOptional
+      - `Strict bool Optional`
 
-Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
+        When true, guarantees schema validation on tool names and inputs
 
-InputExamples []map[string, any]Optional
+    - `type CodeExecutionTool20250522 struct{…}`
 
-Strict boolOptional
+      - `Name CodeExecution`
 
-When true, guarantees schema validation on tool names and inputs
+        Name of the tool.
 
-Type ToolTypeOptional
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-
+      - `Type CodeExecution20250522`
 
-type ToolBash20250124 struct{…}
+      - `AllowedCallers []string Optional`
 
-
+        - `const CodeExecutionTool20250522AllowedCallerDirect CodeExecutionTool20250522AllowedCaller = "direct"`
 
-Name Bash
+        - `const CodeExecutionTool20250522AllowedCallerCodeExecution20250825 CodeExecutionTool20250522AllowedCaller = "code_execution_20250825"`
 
-Name of the tool.
+        - `const CodeExecutionTool20250522AllowedCallerCodeExecution20260120 CodeExecutionTool20250522AllowedCaller = "code_execution_20260120"`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        - `const CodeExecutionTool20250522AllowedCallerCodeExecution20260521 CodeExecutionTool20250522AllowedCaller = "code_execution_20260521"`
 
-Type Bash20250124
+      - `CacheControl CacheControlEphemeral Optional`
 
-
+        Create a cache control breakpoint at this content block.
 
-AllowedCallers []stringOptional
+      - `DeferLoading bool Optional`
 
-One of the following:
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-const ToolBash20250124AllowedCallerDirect ToolBash20250124AllowedCaller = "direct"
+      - `Strict bool Optional`
 
-const ToolBash20250124AllowedCallerCodeExecution20250825 ToolBash20250124AllowedCaller = "code\_execution\_20250825"
+        When true, guarantees schema validation on tool names and inputs
 
-const ToolBash20250124AllowedCallerCodeExecution20260120 ToolBash20250124AllowedCaller = "code\_execution\_20260120"
+    - `type CodeExecutionTool20250825 struct{…}`
 
-const ToolBash20250124AllowedCallerCodeExecution20260521 ToolBash20250124AllowedCaller = "code\_execution\_20260521"
+      - `Name CodeExecution`
 
-
+        Name of the tool.
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Create a cache control breakpoint at this content block.
+      - `Type CodeExecution20250825`
 
-Type Ephemeral
+      - `AllowedCallers []string Optional`
 
-
+        - `const CodeExecutionTool20250825AllowedCallerDirect CodeExecutionTool20250825AllowedCaller = "direct"`
 
-TTL CacheControlEphemeralTTLOptional
+        - `const CodeExecutionTool20250825AllowedCallerCodeExecution20250825 CodeExecutionTool20250825AllowedCaller = "code_execution_20250825"`
 
-The time-to-live for the cache control breakpoint.
+        - `const CodeExecutionTool20250825AllowedCallerCodeExecution20260120 CodeExecutionTool20250825AllowedCaller = "code_execution_20260120"`
 
-This may be one the following values:
+        - `const CodeExecutionTool20250825AllowedCallerCodeExecution20260521 CodeExecutionTool20250825AllowedCaller = "code_execution_20260521"`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      - `CacheControl CacheControlEphemeral Optional`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        Create a cache control breakpoint at this content block.
 
-One of the following:
+      - `DeferLoading bool Optional`
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+      - `Strict bool Optional`
 
-DeferLoading boolOptional
+        When true, guarantees schema validation on tool names and inputs
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+    - `type CodeExecutionTool20260120 struct{…}`
 
-InputExamples []map[string, any]Optional
+      Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-Strict boolOptional
+      - `Name CodeExecution`
 
-When true, guarantees schema validation on tool names and inputs
+        Name of the tool.
 
-
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-type CodeExecutionTool20250522 struct{…}
+      - `Type CodeExecution20260120`
 
-
+      - `AllowedCallers []string Optional`
 
-Name CodeExecution
+        - `const CodeExecutionTool20260120AllowedCallerDirect CodeExecutionTool20260120AllowedCaller = "direct"`
 
-Name of the tool.
+        - `const CodeExecutionTool20260120AllowedCallerCodeExecution20250825 CodeExecutionTool20260120AllowedCaller = "code_execution_20250825"`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        - `const CodeExecutionTool20260120AllowedCallerCodeExecution20260120 CodeExecutionTool20260120AllowedCaller = "code_execution_20260120"`
 
-Type CodeExecution20250522
+        - `const CodeExecutionTool20260120AllowedCallerCodeExecution20260521 CodeExecutionTool20260120AllowedCaller = "code_execution_20260521"`
 
-
+      - `CacheControl CacheControlEphemeral Optional`
 
-AllowedCallers []stringOptional
+        Create a cache control breakpoint at this content block.
 
-One of the following:
+      - `DeferLoading bool Optional`
 
-const CodeExecutionTool20250522AllowedCallerDirect CodeExecutionTool20250522AllowedCaller = "direct"
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-const CodeExecutionTool20250522AllowedCallerCodeExecution20250825 CodeExecutionTool20250522AllowedCaller = "code\_execution\_20250825"
+      - `Strict bool Optional`
 
-const CodeExecutionTool20250522AllowedCallerCodeExecution20260120 CodeExecutionTool20250522AllowedCaller = "code\_execution\_20260120"
+        When true, guarantees schema validation on tool names and inputs
 
-const CodeExecutionTool20250522AllowedCallerCodeExecution20260521 CodeExecutionTool20250522AllowedCaller = "code\_execution\_20260521"
+    - `type CodeExecutionTool20260521 struct{…}`
 
-
+      Code execution tool with REPL state persistence.
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+      - `Name CodeExecution`
 
-Create a cache control breakpoint at this content block.
+        Name of the tool.
 
-Type Ephemeral
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-
+      - `Type CodeExecution20260521`
 
-TTL CacheControlEphemeralTTLOptional
+      - `AllowedCallers []string Optional`
 
-The time-to-live for the cache control breakpoint.
+        - `const CodeExecutionTool20260521AllowedCallerDirect CodeExecutionTool20260521AllowedCaller = "direct"`
 
-This may be one the following values:
+        - `const CodeExecutionTool20260521AllowedCallerCodeExecution20250825 CodeExecutionTool20260521AllowedCaller = "code_execution_20250825"`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        - `const CodeExecutionTool20260521AllowedCallerCodeExecution20260120 CodeExecutionTool20260521AllowedCaller = "code_execution_20260120"`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        - `const CodeExecutionTool20260521AllowedCallerCodeExecution20260521 CodeExecutionTool20260521AllowedCaller = "code_execution_20260521"`
 
-One of the following:
+      - `CacheControl CacheControlEphemeral Optional`
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+        Create a cache control breakpoint at this content block.
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+      - `DeferLoading bool Optional`
 
-DeferLoading boolOptional
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      - `Strict bool Optional`
 
-Strict boolOptional
+        When true, guarantees schema validation on tool names and inputs
 
-When true, guarantees schema validation on tool names and inputs
+    - `type BrowserToolset20260801 struct{…}`
 
-
+      The browser toolset: a single `tools[]` entry (carrying no
+      `name`) that declares the browser tool family. The model is served
+      the family's tool with any members disabled via `configs` removed
+      from its schema.
 
-type CodeExecutionTool20250825 struct{…}
+      - `Type BrowserToolset20260801`
 
-
+      - `CacheControl CacheControlEphemeral Optional`
 
-Name CodeExecution
+        Create a cache control breakpoint at this content block.
 
-Name of the tool.
+      - `Configs BrowserToolsetConfigs Optional`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        Per-member configuration for `browser_toolset_20260801`: one
+        optional field per member tool, keyed by the member name — the same
+        name the member's `tool_use` blocks carry. Every member is an
+        accepted key, and a member's defaults apply wherever its key is
+        absent. Unknown keys are rejected: the field set is this toolset
+        version's complete member set.
 
-Type CodeExecution20250825
+        - `CloseTab BrowserCloseTabConfig Optional`
 
-
+          `close_tab`'s config overrides.
 
-AllowedCallers []stringOptional
+          - `DeferLoading bool Optional`
 
-One of the following:
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-const CodeExecutionTool20250825AllowedCallerDirect CodeExecutionTool20250825AllowedCaller = "direct"
+          - `Enabled bool Optional`
 
-const CodeExecutionTool20250825AllowedCallerCodeExecution20250825 CodeExecutionTool20250825AllowedCaller = "code\_execution\_20250825"
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-const CodeExecutionTool20250825AllowedCallerCodeExecution20260120 CodeExecutionTool20250825AllowedCaller = "code\_execution\_20260120"
+        - `DoubleClick BrowserDoubleClickConfig Optional`
 
-const CodeExecutionTool20250825AllowedCallerCodeExecution20260521 CodeExecutionTool20250825AllowedCaller = "code\_execution\_20260521"
+          `double_click`'s config overrides.
 
-
+          - `DeferLoading bool Optional`
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Create a cache control breakpoint at this content block.
+          - `Enabled bool Optional`
 
-Type Ephemeral
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+        - `FileUpload BrowserFileUploadConfig Optional`
 
-TTL CacheControlEphemeralTTLOptional
+          `file_upload`'s config overrides.
 
-The time-to-live for the cache control breakpoint.
+          - `DeferLoading bool Optional`
 
-This may be one the following values:
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          - `Enabled bool Optional`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-One of the following:
+        - `Find BrowserFindConfig Optional`
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+          `find`'s config overrides.
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+          - `DeferLoading bool Optional`
 
-DeferLoading boolOptional
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          - `Enabled bool Optional`
 
-Strict boolOptional
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-When true, guarantees schema validation on tool names and inputs
+        - `FormInput BrowserFormInputConfig Optional`
 
-
+          `form_input`'s config overrides.
 
-type CodeExecutionTool20260120 struct{…}
+          - `DeferLoading bool Optional`
 
-Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Enabled bool Optional`
 
-Name CodeExecution
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Name of the tool.
+        - `GetPageText BrowserGetPageTextConfig Optional`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          `get_page_text`'s config overrides.
 
-Type CodeExecution20260120
+          - `DeferLoading bool Optional`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-AllowedCallers []stringOptional
+          - `Enabled bool Optional`
 
-One of the following:
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-const CodeExecutionTool20260120AllowedCallerDirect CodeExecutionTool20260120AllowedCaller = "direct"
+        - `HoldKey BrowserHoldKeyConfig Optional`
 
-const CodeExecutionTool20260120AllowedCallerCodeExecution20250825 CodeExecutionTool20260120AllowedCaller = "code\_execution\_20250825"
+          `hold_key`'s config overrides.
 
-const CodeExecutionTool20260120AllowedCallerCodeExecution20260120 CodeExecutionTool20260120AllowedCaller = "code\_execution\_20260120"
+          - `DeferLoading bool Optional`
 
-const CodeExecutionTool20260120AllowedCallerCodeExecution20260521 CodeExecutionTool20260120AllowedCaller = "code\_execution\_20260521"
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Enabled bool Optional`
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Create a cache control breakpoint at this content block.
+        - `Hover BrowserHoverConfig Optional`
 
-Type Ephemeral
+          `hover`'s config overrides.
 
-
+          - `DeferLoading bool Optional`
 
-TTL CacheControlEphemeralTTLOptional
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-The time-to-live for the cache control breakpoint.
+          - `Enabled bool Optional`
 
-This may be one the following values:
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        - `JavascriptExec BrowserJavascriptExecConfig Optional`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          `javascript_exec`'s config overrides.
 
-One of the following:
+          - `DeferLoading bool Optional`
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+          - `Enabled bool Optional`
 
-DeferLoading boolOptional
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+        - `Key BrowserKeyConfig Optional`
 
-Strict boolOptional
+          `key`'s config overrides.
 
-When true, guarantees schema validation on tool names and inputs
+          - `DeferLoading bool Optional`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-type CodeExecutionTool20260521 struct{…}
+          - `Enabled bool Optional`
 
-Code execution tool with REPL state persistence.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+        - `LeftClick BrowserLeftClickConfig Optional`
 
-Name CodeExecution
+          `left_click`'s config overrides.
 
-Name of the tool.
+          - `DeferLoading bool Optional`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Type CodeExecution20260521
+          - `Enabled bool Optional`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-AllowedCallers []stringOptional
+        - `LeftClickDrag BrowserLeftClickDragConfig Optional`
 
-One of the following:
+          `left_click_drag`'s config overrides.
 
-const CodeExecutionTool20260521AllowedCallerDirect CodeExecutionTool20260521AllowedCaller = "direct"
+          - `DeferLoading bool Optional`
 
-const CodeExecutionTool20260521AllowedCallerCodeExecution20250825 CodeExecutionTool20260521AllowedCaller = "code\_execution\_20250825"
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-const CodeExecutionTool20260521AllowedCallerCodeExecution20260120 CodeExecutionTool20260521AllowedCaller = "code\_execution\_20260120"
+          - `Enabled bool Optional`
 
-const CodeExecutionTool20260521AllowedCallerCodeExecution20260521 CodeExecutionTool20260521AllowedCaller = "code\_execution\_20260521"
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+        - `LeftMouseDown BrowserLeftMouseDownConfig Optional`
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+          `left_mouse_down`'s config overrides.
 
-Create a cache control breakpoint at this content block.
+          - `DeferLoading bool Optional`
 
-Type Ephemeral
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Enabled bool Optional`
 
-TTL CacheControlEphemeralTTLOptional
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-The time-to-live for the cache control breakpoint.
+        - `LeftMouseUp BrowserLeftMouseUpConfig Optional`
 
-This may be one the following values:
+          `left_mouse_up`'s config overrides.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          - `DeferLoading bool Optional`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-One of the following:
+          - `Enabled bool Optional`
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+        - `ListTabs BrowserListTabsConfig Optional`
 
-DeferLoading boolOptional
+          `list_tabs`'s config overrides.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          - `DeferLoading bool Optional`
 
-Strict boolOptional
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-When true, guarantees schema validation on tool names and inputs
+          - `Enabled bool Optional`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-type MemoryTool20250818 struct{…}
+        - `MiddleClick BrowserMiddleClickConfig Optional`
 
-
+          `middle_click`'s config overrides.
 
-Name Memory
+          - `DeferLoading bool Optional`
 
-Name of the tool.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          - `Enabled bool Optional`
 
-Type Memory20250818
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+        - `MouseMove BrowserMouseMoveConfig Optional`
 
-AllowedCallers []stringOptional
+          `mouse_move`'s config overrides.
 
-One of the following:
+          - `DeferLoading bool Optional`
 
-const MemoryTool20250818AllowedCallerDirect MemoryTool20250818AllowedCaller = "direct"
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-const MemoryTool20250818AllowedCallerCodeExecution20250825 MemoryTool20250818AllowedCaller = "code\_execution\_20250825"
+          - `Enabled bool Optional`
 
-const MemoryTool20250818AllowedCallerCodeExecution20260120 MemoryTool20250818AllowedCaller = "code\_execution\_20260120"
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-const MemoryTool20250818AllowedCallerCodeExecution20260521 MemoryTool20250818AllowedCaller = "code\_execution\_20260521"
+        - `Navigate BrowserNavigateConfig Optional`
 
-
+          `navigate`'s config overrides.
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+          - `DeferLoading bool Optional`
 
-Create a cache control breakpoint at this content block.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Type Ephemeral
+          - `Enabled bool Optional`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-TTL CacheControlEphemeralTTLOptional
+        - `NewTab BrowserNewTabConfig Optional`
 
-The time-to-live for the cache control breakpoint.
+          `new_tab`'s config overrides.
 
-This may be one the following values:
+          - `DeferLoading bool Optional`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          - `Enabled bool Optional`
 
-One of the following:
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+        - `ReadConsole BrowserReadConsoleConfig Optional`
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+          `read_console`'s config overrides.
 
-DeferLoading boolOptional
+          - `DeferLoading bool Optional`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-InputExamples []map[string, any]Optional
+          - `Enabled bool Optional`
 
-Strict boolOptional
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-When true, guarantees schema validation on tool names and inputs
+        - `ReadNetwork BrowserReadNetworkConfig Optional`
 
-
+          `read_network`'s config overrides.
 
-type ToolTextEditor20250124 struct{…}
+          - `DeferLoading bool Optional`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Name StrReplaceEditor
+          - `Enabled bool Optional`
 
-Name of the tool.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        - `ReadPage BrowserReadPageConfig Optional`
 
-Type TextEditor20250124
+          `read_page`'s config overrides.
 
-
+          - `DeferLoading bool Optional`
 
-AllowedCallers []stringOptional
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-One of the following:
+          - `Enabled bool Optional`
 
-const ToolTextEditor20250124AllowedCallerDirect ToolTextEditor20250124AllowedCaller = "direct"
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-const ToolTextEditor20250124AllowedCallerCodeExecution20250825 ToolTextEditor20250124AllowedCaller = "code\_execution\_20250825"
+        - `RightClick BrowserRightClickConfig Optional`
 
-const ToolTextEditor20250124AllowedCallerCodeExecution20260120 ToolTextEditor20250124AllowedCaller = "code\_execution\_20260120"
+          `right_click`'s config overrides.
 
-const ToolTextEditor20250124AllowedCallerCodeExecution20260521 ToolTextEditor20250124AllowedCaller = "code\_execution\_20260521"
+          - `DeferLoading bool Optional`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+          - `Enabled bool Optional`
 
-Create a cache control breakpoint at this content block.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Type Ephemeral
+        - `Screenshot BrowserScreenshotConfig Optional`
 
-
+          `screenshot`'s config overrides.
 
-TTL CacheControlEphemeralTTLOptional
+          - `DeferLoading bool Optional`
 
-The time-to-live for the cache control breakpoint.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-This may be one the following values:
+          - `Enabled bool Optional`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        - `Scroll BrowserScrollConfig Optional`
 
-One of the following:
+          `scroll`'s config overrides.
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+          - `DeferLoading bool Optional`
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-DeferLoading boolOptional
+          - `Enabled bool Optional`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-InputExamples []map[string, any]Optional
+        - `ScrollTo BrowserScrollToConfig Optional`
 
-Strict boolOptional
+          `scroll_to`'s config overrides.
 
-When true, guarantees schema validation on tool names and inputs
+          - `DeferLoading bool Optional`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-type ToolTextEditor20250429 struct{…}
+          - `Enabled bool Optional`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Name StrReplaceBasedEditTool
+        - `SwitchTab BrowserSwitchTabConfig Optional`
 
-Name of the tool.
+          `switch_tab`'s config overrides.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          - `DeferLoading bool Optional`
 
-Type TextEditor20250429
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Enabled bool Optional`
 
-AllowedCallers []stringOptional
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-One of the following:
+        - `TripleClick BrowserTripleClickConfig Optional`
 
-const ToolTextEditor20250429AllowedCallerDirect ToolTextEditor20250429AllowedCaller = "direct"
+          `triple_click`'s config overrides.
 
-const ToolTextEditor20250429AllowedCallerCodeExecution20250825 ToolTextEditor20250429AllowedCaller = "code\_execution\_20250825"
+          - `DeferLoading bool Optional`
 
-const ToolTextEditor20250429AllowedCallerCodeExecution20260120 ToolTextEditor20250429AllowedCaller = "code\_execution\_20260120"
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-const ToolTextEditor20250429AllowedCallerCodeExecution20260521 ToolTextEditor20250429AllowedCaller = "code\_execution\_20260521"
+          - `Enabled bool Optional`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+        - `Type BrowserTypeConfig Optional`
 
-Create a cache control breakpoint at this content block.
+          `type`'s config overrides.
 
-Type Ephemeral
+          - `DeferLoading bool Optional`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-TTL CacheControlEphemeralTTLOptional
+          - `Enabled bool Optional`
 
-The time-to-live for the cache control breakpoint.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-This may be one the following values:
+        - `Wait BrowserWaitConfig Optional`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+          `wait`'s config overrides.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          - `DeferLoading bool Optional`
 
-One of the following:
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+          - `Enabled bool Optional`
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-DeferLoading boolOptional
+        - `Zoom BrowserZoomConfig Optional`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          `zoom`'s config overrides.
 
-InputExamples []map[string, any]Optional
+          - `DeferLoading bool Optional`
 
-Strict boolOptional
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-When true, guarantees schema validation on tool names and inputs
+          - `Enabled bool Optional`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-type ToolTextEditor20250728 struct{…}
+    - `type MemoryTool20250818 struct{…}`
 
-
+      - `Name Memory`
 
-Name StrReplaceBasedEditTool
+        Name of the tool.
 
-Name of the tool.
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      - `Type Memory20250818`
 
-Type TextEditor20250728
+      - `AllowedCallers []string Optional`
 
-
+        - `const MemoryTool20250818AllowedCallerDirect MemoryTool20250818AllowedCaller = "direct"`
 
-AllowedCallers []stringOptional
+        - `const MemoryTool20250818AllowedCallerCodeExecution20250825 MemoryTool20250818AllowedCaller = "code_execution_20250825"`
 
-One of the following:
+        - `const MemoryTool20250818AllowedCallerCodeExecution20260120 MemoryTool20250818AllowedCaller = "code_execution_20260120"`
 
-const ToolTextEditor20250728AllowedCallerDirect ToolTextEditor20250728AllowedCaller = "direct"
+        - `const MemoryTool20250818AllowedCallerCodeExecution20260521 MemoryTool20250818AllowedCaller = "code_execution_20260521"`
 
-const ToolTextEditor20250728AllowedCallerCodeExecution20250825 ToolTextEditor20250728AllowedCaller = "code\_execution\_20250825"
+      - `CacheControl CacheControlEphemeral Optional`
 
-const ToolTextEditor20250728AllowedCallerCodeExecution20260120 ToolTextEditor20250728AllowedCaller = "code\_execution\_20260120"
+        Create a cache control breakpoint at this content block.
 
-const ToolTextEditor20250728AllowedCallerCodeExecution20260521 ToolTextEditor20250728AllowedCaller = "code\_execution\_20260521"
+      - `DeferLoading bool Optional`
 
-
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+      - `InputExamples []map[string, any] Optional`
 
-Create a cache control breakpoint at this content block.
+      - `Strict bool Optional`
 
-Type Ephemeral
+        When true, guarantees schema validation on tool names and inputs
 
-
+    - `type ComputerToolset20260801 struct{…}`
 
-TTL CacheControlEphemeralTTLOptional
+      The computer toolset: a single `tools[]` entry (carrying no
+      `name`) that declares the computer tool family. The model is
+      served the family's tool with any members disabled via `configs`
+      removed from its schema. Every member is enabled by default, zoom
+      included. The single-tool options `display_number` and
+      `enable_zoom` are not fields of a toolset entry — it carries only
+      `type`, `configs`, and `cache_control`; zoom is controlled
+      via `configs.zoom.enabled`.
 
-The time-to-live for the cache control breakpoint.
+      - `Type ComputerToolset20260801`
 
-This may be one the following values:
+      - `CacheControl CacheControlEphemeral Optional`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        Create a cache control breakpoint at this content block.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      - `Configs ComputerToolsetConfigs Optional`
 
-One of the following:
+        Per-member configuration for `computer_toolset_20260801`: one
+        optional field per member tool, keyed by the member name — the same
+        name the member's `tool_use` blocks carry. Every member is an
+        accepted key, and a member's defaults apply wherever its key is
+        absent. Unknown keys are rejected: the field set is this toolset
+        version's complete member set.
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+        - `CursorPosition ComputerCursorPositionConfig Optional`
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+          `cursor_position`'s config overrides.
 
-DeferLoading boolOptional
+          - `DeferLoading bool Optional`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-InputExamples []map[string, any]Optional
+          - `Enabled bool Optional`
 
-MaxCharacters int64Optional
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
+        - `DoubleClick ComputerDoubleClickConfig Optional`
 
-Strict boolOptional
+          `double_click`'s config overrides.
 
-When true, guarantees schema validation on tool names and inputs
+          - `DeferLoading bool Optional`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-type WebSearchTool20250305 struct{…}
+          - `Enabled bool Optional`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Name WebSearch
+        - `HoldKey ComputerHoldKeyConfig Optional`
 
-Name of the tool.
+          `hold_key`'s config overrides.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+          - `DeferLoading bool Optional`
 
-Type WebSearch20250305
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Enabled bool Optional`
 
-AllowedCallers []stringOptional
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-One of the following:
+        - `Key ComputerKeyConfig Optional`
 
-const WebSearchTool20250305AllowedCallerDirect WebSearchTool20250305AllowedCaller = "direct"
+          `key`'s config overrides.
 
-const WebSearchTool20250305AllowedCallerCodeExecution20250825 WebSearchTool20250305AllowedCaller = "code\_execution\_20250825"
+          - `DeferLoading bool Optional`
 
-const WebSearchTool20250305AllowedCallerCodeExecution20260120 WebSearchTool20250305AllowedCaller = "code\_execution\_20260120"
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-const WebSearchTool20250305AllowedCallerCodeExecution20260521 WebSearchTool20250305AllowedCaller = "code\_execution\_20260521"
+          - `Enabled bool Optional`
 
-AllowedDomains []stringOptional
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+        - `LeftClick ComputerLeftClickConfig Optional`
 
-BlockedDomains []stringOptional
+          `left_click`'s config overrides.
 
-If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+          - `DeferLoading bool Optional`
 
-
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+          - `Enabled bool Optional`
 
-Create a cache control breakpoint at this content block.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Type Ephemeral
+        - `LeftClickDrag ComputerLeftClickDragConfig Optional`
 
-
+          `left_click_drag`'s config overrides.
 
-TTL CacheControlEphemeralTTLOptional
+          - `DeferLoading bool Optional`
 
-The time-to-live for the cache control breakpoint.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-This may be one the following values:
+          - `Enabled bool Optional`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        - `LeftMouseDown ComputerLeftMouseDownConfig Optional`
 
-One of the following:
+          `left_mouse_down`'s config overrides.
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+          - `DeferLoading bool Optional`
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-DeferLoading boolOptional
+          - `Enabled bool Optional`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-MaxUses int64Optional
+        - `LeftMouseUp ComputerLeftMouseUpConfig Optional`
 
-Maximum number of times the tool can be used in the API request.
+          `left_mouse_up`'s config overrides.
 
-Strict boolOptional
+          - `DeferLoading bool Optional`
 
-When true, guarantees schema validation on tool names and inputs
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Enabled bool Optional`
 
-UserLocation [UserLocation](api/messages.md)Optional
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Parameters for the user's location. Used to provide more relevant search results.
+        - `MiddleClick ComputerMiddleClickConfig Optional`
 
-Type Approximate
+          `middle_click`'s config overrides.
 
-City stringOptional
+          - `DeferLoading bool Optional`
 
-The city of the user.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Country stringOptional
+          - `Enabled bool Optional`
 
-The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Region stringOptional
+        - `MouseMove ComputerMouseMoveConfig Optional`
 
-The region of the user.
+          `mouse_move`'s config overrides.
 
-Timezone stringOptional
+          - `DeferLoading bool Optional`
 
-The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Enabled bool Optional`
 
-type WebFetchTool20250910 struct{…}
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-
+        - `RightClick ComputerRightClickConfig Optional`
 
-Name WebFetch
+          `right_click`'s config overrides.
 
-Name of the tool.
+          - `DeferLoading bool Optional`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-Type WebFetch20250910
+          - `Enabled bool Optional`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-AllowedCallers []stringOptional
+        - `Screenshot ComputerScreenshotConfig Optional`
 
-One of the following:
+          `screenshot`'s config overrides.
 
-const WebFetchTool20250910AllowedCallerDirect WebFetchTool20250910AllowedCaller = "direct"
+          - `DeferLoading bool Optional`
 
-const WebFetchTool20250910AllowedCallerCodeExecution20250825 WebFetchTool20250910AllowedCaller = "code\_execution\_20250825"
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-const WebFetchTool20250910AllowedCallerCodeExecution20260120 WebFetchTool20250910AllowedCaller = "code\_execution\_20260120"
+          - `Enabled bool Optional`
 
-const WebFetchTool20250910AllowedCallerCodeExecution20260521 WebFetchTool20250910AllowedCaller = "code\_execution\_20260521"
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-AllowedDomains []stringOptional
+        - `Scroll ComputerScrollConfig Optional`
 
-List of domains to allow fetching from
+          `scroll`'s config overrides.
 
-BlockedDomains []stringOptional
+          - `DeferLoading bool Optional`
 
-List of domains to block fetching from
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-
+          - `Enabled bool Optional`
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Create a cache control breakpoint at this content block.
+        - `TripleClick ComputerTripleClickConfig Optional`
 
-Type Ephemeral
+          `triple_click`'s config overrides.
 
-
+          - `DeferLoading bool Optional`
 
-TTL CacheControlEphemeralTTLOptional
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-The time-to-live for the cache control breakpoint.
+          - `Enabled bool Optional`
 
-This may be one the following values:
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        - `Type ComputerTypeConfig Optional`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+          `type`'s config overrides.
 
-One of the following:
+          - `DeferLoading bool Optional`
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+          - `Enabled bool Optional`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Citations [CitationsConfigParamResp](api/messages.md)Optional
+        - `Wait ComputerWaitConfig Optional`
 
-Citations configuration for fetched documents. Citations are disabled by default.
+          `wait`'s config overrides.
 
-Enabled boolOptional
+          - `DeferLoading bool Optional`
 
-DeferLoading boolOptional
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          - `Enabled bool Optional`
 
-MaxContentTokens int64Optional
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+        - `Zoom ComputerZoomConfig Optional`
 
-MaxUses int64Optional
+          `zoom`'s config overrides.
 
-Maximum number of times the tool can be used in the API request.
+          - `DeferLoading bool Optional`
 
-Strict boolOptional
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-When true, guarantees schema validation on tool names and inputs
+          - `Enabled bool Optional`
 
-
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-type WebSearchTool20260209 struct{…}
+    - `type ToolTextEditor20250124 struct{…}`
 
-
+      - `Name StrReplaceEditor`
 
-Name WebSearch
+        Name of the tool.
 
-Name of the tool.
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      - `Type TextEditor20250124`
 
-Type WebSearch20260209
+      - `AllowedCallers []string Optional`
 
-
+        - `const ToolTextEditor20250124AllowedCallerDirect ToolTextEditor20250124AllowedCaller = "direct"`
 
-AllowedCallers []stringOptional
+        - `const ToolTextEditor20250124AllowedCallerCodeExecution20250825 ToolTextEditor20250124AllowedCaller = "code_execution_20250825"`
 
-One of the following:
+        - `const ToolTextEditor20250124AllowedCallerCodeExecution20260120 ToolTextEditor20250124AllowedCaller = "code_execution_20260120"`
 
-const WebSearchTool20260209AllowedCallerDirect WebSearchTool20260209AllowedCaller = "direct"
+        - `const ToolTextEditor20250124AllowedCallerCodeExecution20260521 ToolTextEditor20250124AllowedCaller = "code_execution_20260521"`
 
-const WebSearchTool20260209AllowedCallerCodeExecution20250825 WebSearchTool20260209AllowedCaller = "code\_execution\_20250825"
+      - `CacheControl CacheControlEphemeral Optional`
 
-const WebSearchTool20260209AllowedCallerCodeExecution20260120 WebSearchTool20260209AllowedCaller = "code\_execution\_20260120"
+        Create a cache control breakpoint at this content block.
 
-const WebSearchTool20260209AllowedCallerCodeExecution20260521 WebSearchTool20260209AllowedCaller = "code\_execution\_20260521"
+      - `DeferLoading bool Optional`
 
-AllowedDomains []stringOptional
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+      - `InputExamples []map[string, any] Optional`
 
-BlockedDomains []stringOptional
+      - `Strict bool Optional`
 
-If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+        When true, guarantees schema validation on tool names and inputs
 
-
+    - `type ToolTextEditor20250429 struct{…}`
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+      - `Name StrReplaceBasedEditTool`
 
-Create a cache control breakpoint at this content block.
+        Name of the tool.
 
-Type Ephemeral
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-
+      - `Type TextEditor20250429`
 
-TTL CacheControlEphemeralTTLOptional
+      - `AllowedCallers []string Optional`
 
-The time-to-live for the cache control breakpoint.
+        - `const ToolTextEditor20250429AllowedCallerDirect ToolTextEditor20250429AllowedCaller = "direct"`
 
-This may be one the following values:
+        - `const ToolTextEditor20250429AllowedCallerCodeExecution20250825 ToolTextEditor20250429AllowedCaller = "code_execution_20250825"`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        - `const ToolTextEditor20250429AllowedCallerCodeExecution20260120 ToolTextEditor20250429AllowedCaller = "code_execution_20260120"`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        - `const ToolTextEditor20250429AllowedCallerCodeExecution20260521 ToolTextEditor20250429AllowedCaller = "code_execution_20260521"`
 
-One of the following:
+      - `CacheControl CacheControlEphemeral Optional`
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+        Create a cache control breakpoint at this content block.
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+      - `DeferLoading bool Optional`
 
-DeferLoading boolOptional
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+      - `InputExamples []map[string, any] Optional`
 
-MaxUses int64Optional
+      - `Strict bool Optional`
 
-Maximum number of times the tool can be used in the API request.
+        When true, guarantees schema validation on tool names and inputs
 
-Strict boolOptional
+    - `type ToolTextEditor20250728 struct{…}`
 
-When true, guarantees schema validation on tool names and inputs
+      - `Name StrReplaceBasedEditTool`
 
-
+        Name of the tool.
 
-UserLocation [UserLocation](api/messages.md)Optional
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Parameters for the user's location. Used to provide more relevant search results.
+      - `Type TextEditor20250728`
 
-Type Approximate
+      - `AllowedCallers []string Optional`
 
-City stringOptional
+        - `const ToolTextEditor20250728AllowedCallerDirect ToolTextEditor20250728AllowedCaller = "direct"`
 
-The city of the user.
+        - `const ToolTextEditor20250728AllowedCallerCodeExecution20250825 ToolTextEditor20250728AllowedCaller = "code_execution_20250825"`
 
-Country stringOptional
+        - `const ToolTextEditor20250728AllowedCallerCodeExecution20260120 ToolTextEditor20250728AllowedCaller = "code_execution_20260120"`
 
-The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+        - `const ToolTextEditor20250728AllowedCallerCodeExecution20260521 ToolTextEditor20250728AllowedCaller = "code_execution_20260521"`
 
-Region stringOptional
+      - `CacheControl CacheControlEphemeral Optional`
 
-The region of the user.
+        Create a cache control breakpoint at this content block.
 
-Timezone stringOptional
+      - `DeferLoading bool Optional`
 
-The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-
+      - `InputExamples []map[string, any] Optional`
 
-type WebFetchTool20260209 struct{…}
+      - `MaxCharacters int64 Optional`
 
-
+        Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-Name WebFetch
+        minimum: 1
 
-Name of the tool.
+      - `Strict bool Optional`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        When true, guarantees schema validation on tool names and inputs
 
-Type WebFetch20260209
+    - `type WebSearchTool20250305 struct{…}`
 
-
+      - `Name WebSearch`
 
-AllowedCallers []stringOptional
+        Name of the tool.
 
-One of the following:
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-const WebFetchTool20260209AllowedCallerDirect WebFetchTool20260209AllowedCaller = "direct"
+      - `Type WebSearch20250305`
 
-const WebFetchTool20260209AllowedCallerCodeExecution20250825 WebFetchTool20260209AllowedCaller = "code\_execution\_20250825"
+      - `AllowedCallers []string Optional`
 
-const WebFetchTool20260209AllowedCallerCodeExecution20260120 WebFetchTool20260209AllowedCaller = "code\_execution\_20260120"
+        - `const WebSearchTool20250305AllowedCallerDirect WebSearchTool20250305AllowedCaller = "direct"`
 
-const WebFetchTool20260209AllowedCallerCodeExecution20260521 WebFetchTool20260209AllowedCaller = "code\_execution\_20260521"
+        - `const WebSearchTool20250305AllowedCallerCodeExecution20250825 WebSearchTool20250305AllowedCaller = "code_execution_20250825"`
 
-AllowedDomains []stringOptional
+        - `const WebSearchTool20250305AllowedCallerCodeExecution20260120 WebSearchTool20250305AllowedCaller = "code_execution_20260120"`
 
-List of domains to allow fetching from
+        - `const WebSearchTool20250305AllowedCallerCodeExecution20260521 WebSearchTool20250305AllowedCaller = "code_execution_20260521"`
 
-BlockedDomains []stringOptional
+      - `AllowedDomains []string Optional`
 
-List of domains to block fetching from
+        If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-
+      - `BlockedDomains []string Optional`
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+        If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-Create a cache control breakpoint at this content block.
+      - `CacheControl CacheControlEphemeral Optional`
 
-Type Ephemeral
+        Create a cache control breakpoint at this content block.
 
-
+      - `DeferLoading bool Optional`
 
-TTL CacheControlEphemeralTTLOptional
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-The time-to-live for the cache control breakpoint.
+      - `MaxUses int64 Optional`
 
-This may be one the following values:
+        Maximum number of times the tool can be used in the API request.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        exclusiveMinimum: 0
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      - `Strict bool Optional`
 
-One of the following:
+        When true, guarantees schema validation on tool names and inputs
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+      - `UserLocation UserLocation Optional`
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+        Parameters for the user's location. Used to provide more relevant search results.
 
-
+        - `Type Approximate`
 
-Citations [CitationsConfigParamResp](api/messages.md)Optional
+        - `City string Optional`
 
-Citations configuration for fetched documents. Citations are disabled by default.
+          The city of the user.
 
-Enabled boolOptional
+          maxLength: 255, minLength: 1
 
-DeferLoading boolOptional
+        - `Country string Optional`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+          The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-MaxContentTokens int64Optional
+          maxLength: 2, minLength: 2
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+        - `Region string Optional`
 
-MaxUses int64Optional
+          The region of the user.
 
-Maximum number of times the tool can be used in the API request.
+          maxLength: 255, minLength: 1
 
-Strict boolOptional
+        - `Timezone string Optional`
 
-When true, guarantees schema validation on tool names and inputs
+          The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-
+          maxLength: 255, minLength: 1
 
-type WebFetchTool20260309 struct{…}
+    - `type WebFetchTool20250910 struct{…}`
 
-Web fetch tool with use\_cache parameter for bypassing cached content.
+      - `Name WebFetch`
 
-
+        Name of the tool.
 
-Name WebFetch
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Name of the tool.
+      - `Type WebFetch20250910`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      - `AllowedCallers []string Optional`
 
-Type WebFetch20260309
+        - `const WebFetchTool20250910AllowedCallerDirect WebFetchTool20250910AllowedCaller = "direct"`
 
-
+        - `const WebFetchTool20250910AllowedCallerCodeExecution20250825 WebFetchTool20250910AllowedCaller = "code_execution_20250825"`
 
-AllowedCallers []stringOptional
+        - `const WebFetchTool20250910AllowedCallerCodeExecution20260120 WebFetchTool20250910AllowedCaller = "code_execution_20260120"`
 
-One of the following:
+        - `const WebFetchTool20250910AllowedCallerCodeExecution20260521 WebFetchTool20250910AllowedCaller = "code_execution_20260521"`
 
-const WebFetchTool20260309AllowedCallerDirect WebFetchTool20260309AllowedCaller = "direct"
+      - `AllowedDomains []string Optional`
 
-const WebFetchTool20260309AllowedCallerCodeExecution20250825 WebFetchTool20260309AllowedCaller = "code\_execution\_20250825"
+        List of domains to allow fetching from
 
-const WebFetchTool20260309AllowedCallerCodeExecution20260120 WebFetchTool20260309AllowedCaller = "code\_execution\_20260120"
+      - `BlockedDomains []string Optional`
 
-const WebFetchTool20260309AllowedCallerCodeExecution20260521 WebFetchTool20260309AllowedCaller = "code\_execution\_20260521"
+        List of domains to block fetching from
 
-AllowedDomains []stringOptional
+      - `CacheControl CacheControlEphemeral Optional`
 
-List of domains to allow fetching from
+        Create a cache control breakpoint at this content block.
 
-BlockedDomains []stringOptional
+      - `Citations CitationsConfigParamResp Optional`
 
-List of domains to block fetching from
+        Citations configuration for fetched documents. Citations are disabled by default.
 
-
+      - `DeferLoading bool Optional`
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-Create a cache control breakpoint at this content block.
+      - `MaxContentTokens int64 Optional`
 
-Type Ephemeral
+        Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-
+        exclusiveMinimum: 0
 
-TTL CacheControlEphemeralTTLOptional
+      - `MaxUses int64 Optional`
 
-The time-to-live for the cache control breakpoint.
+        Maximum number of times the tool can be used in the API request.
 
-This may be one the following values:
+        exclusiveMinimum: 0
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      - `Strict bool Optional`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        When true, guarantees schema validation on tool names and inputs
 
-One of the following:
+    - `type WebSearchTool20260209 struct{…}`
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+      - `Name WebSearch`
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+        Name of the tool.
 
-
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Citations [CitationsConfigParamResp](api/messages.md)Optional
+      - `Type WebSearch20260209`
 
-Citations configuration for fetched documents. Citations are disabled by default.
+      - `AllowedCallers []string Optional`
 
-Enabled boolOptional
+        - `const WebSearchTool20260209AllowedCallerDirect WebSearchTool20260209AllowedCaller = "direct"`
 
-DeferLoading boolOptional
+        - `const WebSearchTool20260209AllowedCallerCodeExecution20250825 WebSearchTool20260209AllowedCaller = "code_execution_20250825"`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+        - `const WebSearchTool20260209AllowedCallerCodeExecution20260120 WebSearchTool20260209AllowedCaller = "code_execution_20260120"`
 
-MaxContentTokens int64Optional
+        - `const WebSearchTool20260209AllowedCallerCodeExecution20260521 WebSearchTool20260209AllowedCaller = "code_execution_20260521"`
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+      - `AllowedDomains []string Optional`
 
-MaxUses int64Optional
+        If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-Maximum number of times the tool can be used in the API request.
+      - `BlockedDomains []string Optional`
 
-Strict boolOptional
+        If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-When true, guarantees schema validation on tool names and inputs
+      - `CacheControl CacheControlEphemeral Optional`
 
-UseCache boolOptional
+        Create a cache control breakpoint at this content block.
 
-Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+      - `DeferLoading bool Optional`
 
-
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-type WebSearchTool20260318 struct{…}
+      - `MaxUses int64 Optional`
 
-
+        Maximum number of times the tool can be used in the API request.
 
-Name WebSearch
+        exclusiveMinimum: 0
 
-Name of the tool.
+      - `Strict bool Optional`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        When true, guarantees schema validation on tool names and inputs
 
-Type WebSearch20260318
+      - `UserLocation UserLocation Optional`
 
-
+        Parameters for the user's location. Used to provide more relevant search results.
 
-AllowedCallers []stringOptional
+    - `type WebFetchTool20260209 struct{…}`
 
-One of the following:
+      - `Name WebFetch`
 
-const WebSearchTool20260318AllowedCallerDirect WebSearchTool20260318AllowedCaller = "direct"
+        Name of the tool.
 
-const WebSearchTool20260318AllowedCallerCodeExecution20250825 WebSearchTool20260318AllowedCaller = "code\_execution\_20250825"
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-const WebSearchTool20260318AllowedCallerCodeExecution20260120 WebSearchTool20260318AllowedCaller = "code\_execution\_20260120"
+      - `Type WebFetch20260209`
 
-const WebSearchTool20260318AllowedCallerCodeExecution20260521 WebSearchTool20260318AllowedCaller = "code\_execution\_20260521"
+      - `AllowedCallers []string Optional`
 
-AllowedDomains []stringOptional
+        - `const WebFetchTool20260209AllowedCallerDirect WebFetchTool20260209AllowedCaller = "direct"`
 
-If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
+        - `const WebFetchTool20260209AllowedCallerCodeExecution20250825 WebFetchTool20260209AllowedCaller = "code_execution_20250825"`
 
-BlockedDomains []stringOptional
+        - `const WebFetchTool20260209AllowedCallerCodeExecution20260120 WebFetchTool20260209AllowedCaller = "code_execution_20260120"`
 
-If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
+        - `const WebFetchTool20260209AllowedCallerCodeExecution20260521 WebFetchTool20260209AllowedCaller = "code_execution_20260521"`
 
-
+      - `AllowedDomains []string Optional`
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+        List of domains to allow fetching from
 
-Create a cache control breakpoint at this content block.
+      - `BlockedDomains []string Optional`
 
-Type Ephemeral
+        List of domains to block fetching from
 
-
+      - `CacheControl CacheControlEphemeral Optional`
 
-TTL CacheControlEphemeralTTLOptional
+        Create a cache control breakpoint at this content block.
 
-The time-to-live for the cache control breakpoint.
+      - `Citations CitationsConfigParamResp Optional`
 
-This may be one the following values:
+        Citations configuration for fetched documents. Citations are disabled by default.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      - `DeferLoading bool Optional`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-One of the following:
+      - `MaxContentTokens int64 Optional`
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+        Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+        exclusiveMinimum: 0
 
-DeferLoading boolOptional
+      - `MaxUses int64 Optional`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+        Maximum number of times the tool can be used in the API request.
 
-MaxUses int64Optional
+        exclusiveMinimum: 0
 
-Maximum number of times the tool can be used in the API request.
+      - `Strict bool Optional`
 
-
+        When true, guarantees schema validation on tool names and inputs
 
-ResponseInclusion WebSearchTool20260318ResponseInclusionOptional
+    - `type WebFetchTool20260309 struct{…}`
 
-How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+      Web fetch tool with use_cache parameter for bypassing cached content.
 
-One of the following:
+      - `Name WebFetch`
 
-const WebSearchTool20260318ResponseInclusionFull WebSearchTool20260318ResponseInclusion = "full"
+        Name of the tool.
 
-const WebSearchTool20260318ResponseInclusionExcluded WebSearchTool20260318ResponseInclusion = "excluded"
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-Strict boolOptional
+      - `Type WebFetch20260309`
 
-When true, guarantees schema validation on tool names and inputs
+      - `AllowedCallers []string Optional`
 
-
+        - `const WebFetchTool20260309AllowedCallerDirect WebFetchTool20260309AllowedCaller = "direct"`
 
-UserLocation [UserLocation](api/messages.md)Optional
+        - `const WebFetchTool20260309AllowedCallerCodeExecution20250825 WebFetchTool20260309AllowedCaller = "code_execution_20250825"`
 
-Parameters for the user's location. Used to provide more relevant search results.
+        - `const WebFetchTool20260309AllowedCallerCodeExecution20260120 WebFetchTool20260309AllowedCaller = "code_execution_20260120"`
 
-Type Approximate
+        - `const WebFetchTool20260309AllowedCallerCodeExecution20260521 WebFetchTool20260309AllowedCaller = "code_execution_20260521"`
 
-City stringOptional
+      - `AllowedDomains []string Optional`
 
-The city of the user.
+        List of domains to allow fetching from
 
-Country stringOptional
+      - `BlockedDomains []string Optional`
 
-The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+        List of domains to block fetching from
 
-Region stringOptional
+      - `CacheControl CacheControlEphemeral Optional`
 
-The region of the user.
+        Create a cache control breakpoint at this content block.
 
-Timezone stringOptional
+      - `Citations CitationsConfigParamResp Optional`
 
-The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+        Citations configuration for fetched documents. Citations are disabled by default.
 
-
+      - `DeferLoading bool Optional`
 
-type WebFetchTool20260318 struct{…}
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-
+      - `MaxContentTokens int64 Optional`
 
-Name WebFetch
+        Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-Name of the tool.
+        exclusiveMinimum: 0
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      - `MaxUses int64 Optional`
 
-Type WebFetch20260318
+        Maximum number of times the tool can be used in the API request.
 
-
+        exclusiveMinimum: 0
 
-AllowedCallers []stringOptional
+      - `Strict bool Optional`
 
-One of the following:
+        When true, guarantees schema validation on tool names and inputs
 
-const WebFetchTool20260318AllowedCallerDirect WebFetchTool20260318AllowedCaller = "direct"
+      - `UseCache bool Optional`
 
-const WebFetchTool20260318AllowedCallerCodeExecution20250825 WebFetchTool20260318AllowedCaller = "code\_execution\_20250825"
+        Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-const WebFetchTool20260318AllowedCallerCodeExecution20260120 WebFetchTool20260318AllowedCaller = "code\_execution\_20260120"
+    - `type WebSearchTool20260318 struct{…}`
 
-const WebFetchTool20260318AllowedCallerCodeExecution20260521 WebFetchTool20260318AllowedCaller = "code\_execution\_20260521"
+      - `Name WebSearch`
 
-AllowedDomains []stringOptional
+        Name of the tool.
 
-List of domains to allow fetching from
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-BlockedDomains []stringOptional
+      - `Type WebSearch20260318`
 
-List of domains to block fetching from
+      - `AllowedCallers []string Optional`
 
-
+        - `const WebSearchTool20260318AllowedCallerDirect WebSearchTool20260318AllowedCaller = "direct"`
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+        - `const WebSearchTool20260318AllowedCallerCodeExecution20250825 WebSearchTool20260318AllowedCaller = "code_execution_20250825"`
 
-Create a cache control breakpoint at this content block.
+        - `const WebSearchTool20260318AllowedCallerCodeExecution20260120 WebSearchTool20260318AllowedCaller = "code_execution_20260120"`
 
-Type Ephemeral
+        - `const WebSearchTool20260318AllowedCallerCodeExecution20260521 WebSearchTool20260318AllowedCaller = "code_execution_20260521"`
 
-
+      - `AllowedDomains []string Optional`
 
-TTL CacheControlEphemeralTTLOptional
+        If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-The time-to-live for the cache control breakpoint.
+      - `BlockedDomains []string Optional`
 
-This may be one the following values:
+        If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+      - `CacheControl CacheControlEphemeral Optional`
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        Create a cache control breakpoint at this content block.
 
-One of the following:
+      - `DeferLoading bool Optional`
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+      - `MaxUses int64 Optional`
 
-
+        Maximum number of times the tool can be used in the API request.
 
-Citations [CitationsConfigParamResp](api/messages.md)Optional
+        exclusiveMinimum: 0
 
-Citations configuration for fetched documents. Citations are disabled by default.
+      - `ResponseInclusion WebSearchTool20260318ResponseInclusion Optional`
 
-Enabled boolOptional
+        How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
-DeferLoading boolOptional
+        - `const WebSearchTool20260318ResponseInclusionFull WebSearchTool20260318ResponseInclusion = "full"`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+        - `const WebSearchTool20260318ResponseInclusionExcluded WebSearchTool20260318ResponseInclusion = "excluded"`
 
-MaxContentTokens int64Optional
+      - `Strict bool Optional`
 
-Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
+        When true, guarantees schema validation on tool names and inputs
 
-MaxUses int64Optional
+      - `UserLocation UserLocation Optional`
 
-Maximum number of times the tool can be used in the API request.
+        Parameters for the user's location. Used to provide more relevant search results.
 
-
+    - `type WebFetchTool20260318 struct{…}`
 
-ResponseInclusion WebFetchTool20260318ResponseInclusionOptional
+      - `Name WebFetch`
 
-How this tool's result blocks appear in the API response when the result was consumed by a completed code\_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server\_tool\_use and result block pair entirely. Results from direct calls, or from code\_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+        Name of the tool.
 
-One of the following:
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-const WebFetchTool20260318ResponseInclusionFull WebFetchTool20260318ResponseInclusion = "full"
+      - `Type WebFetch20260318`
 
-const WebFetchTool20260318ResponseInclusionExcluded WebFetchTool20260318ResponseInclusion = "excluded"
+      - `AllowedCallers []string Optional`
 
-Strict boolOptional
+        - `const WebFetchTool20260318AllowedCallerDirect WebFetchTool20260318AllowedCaller = "direct"`
 
-When true, guarantees schema validation on tool names and inputs
+        - `const WebFetchTool20260318AllowedCallerCodeExecution20250825 WebFetchTool20260318AllowedCaller = "code_execution_20250825"`
 
-UseCache boolOptional
+        - `const WebFetchTool20260318AllowedCallerCodeExecution20260120 WebFetchTool20260318AllowedCaller = "code_execution_20260120"`
 
-Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
+        - `const WebFetchTool20260318AllowedCallerCodeExecution20260521 WebFetchTool20260318AllowedCaller = "code_execution_20260521"`
 
-
+      - `AllowedDomains []string Optional`
 
-type ToolSearchToolBm25\_20251119 struct{…}
+        List of domains to allow fetching from
 
-
+      - `BlockedDomains []string Optional`
 
-Name ToolSearchToolBm25
+        List of domains to block fetching from
 
-Name of the tool.
+      - `CacheControl CacheControlEphemeral Optional`
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+        Create a cache control breakpoint at this content block.
 
-
+      - `Citations CitationsConfigParamResp Optional`
 
-Type ToolSearchToolBm25\_20251119Type
+        Citations configuration for fetched documents. Citations are disabled by default.
 
-One of the following:
+      - `DeferLoading bool Optional`
 
-const ToolSearchToolBm25\_20251119TypeToolSearchToolBm25\_20251119 ToolSearchToolBm25\_20251119Type = "tool\_search\_tool\_bm25\_20251119"
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-const ToolSearchToolBm25\_20251119TypeToolSearchToolBm25 ToolSearchToolBm25\_20251119Type = "tool\_search\_tool\_bm25"
+      - `MaxContentTokens int64 Optional`
 
-
+        Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-AllowedCallers []stringOptional
+        exclusiveMinimum: 0
 
-One of the following:
+      - `MaxUses int64 Optional`
 
-const ToolSearchToolBm25\_20251119AllowedCallerDirect ToolSearchToolBm25\_20251119AllowedCaller = "direct"
+        Maximum number of times the tool can be used in the API request.
 
-const ToolSearchToolBm25\_20251119AllowedCallerCodeExecution20250825 ToolSearchToolBm25\_20251119AllowedCaller = "code\_execution\_20250825"
+        exclusiveMinimum: 0
 
-const ToolSearchToolBm25\_20251119AllowedCallerCodeExecution20260120 ToolSearchToolBm25\_20251119AllowedCaller = "code\_execution\_20260120"
+      - `ResponseInclusion WebFetchTool20260318ResponseInclusion Optional`
 
-const ToolSearchToolBm25\_20251119AllowedCallerCodeExecution20260521 ToolSearchToolBm25\_20251119AllowedCaller = "code\_execution\_20260521"
+        How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
-
+        - `const WebFetchTool20260318ResponseInclusionFull WebFetchTool20260318ResponseInclusion = "full"`
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+        - `const WebFetchTool20260318ResponseInclusionExcluded WebFetchTool20260318ResponseInclusion = "excluded"`
 
-Create a cache control breakpoint at this content block.
+      - `Strict bool Optional`
 
-Type Ephemeral
+        When true, guarantees schema validation on tool names and inputs
 
-
+      - `UseCache bool Optional`
 
-TTL CacheControlEphemeralTTLOptional
+        Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-The time-to-live for the cache control breakpoint.
+    - `type ToolSearchToolBm25_20251119 struct{…}`
 
-This may be one the following values:
+      - `Name ToolSearchToolBm25`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+        Name of the tool.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-One of the following:
+      - `Type ToolSearchToolBm25_20251119Type`
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+        - `const ToolSearchToolBm25_20251119TypeToolSearchToolBm25_20251119 ToolSearchToolBm25_20251119Type = "tool_search_tool_bm25_20251119"`
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+        - `const ToolSearchToolBm25_20251119TypeToolSearchToolBm25 ToolSearchToolBm25_20251119Type = "tool_search_tool_bm25"`
 
-DeferLoading boolOptional
+      - `AllowedCallers []string Optional`
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+        - `const ToolSearchToolBm25_20251119AllowedCallerDirect ToolSearchToolBm25_20251119AllowedCaller = "direct"`
 
-Strict boolOptional
+        - `const ToolSearchToolBm25_20251119AllowedCallerCodeExecution20250825 ToolSearchToolBm25_20251119AllowedCaller = "code_execution_20250825"`
 
-When true, guarantees schema validation on tool names and inputs
+        - `const ToolSearchToolBm25_20251119AllowedCallerCodeExecution20260120 ToolSearchToolBm25_20251119AllowedCaller = "code_execution_20260120"`
 
-
+        - `const ToolSearchToolBm25_20251119AllowedCallerCodeExecution20260521 ToolSearchToolBm25_20251119AllowedCaller = "code_execution_20260521"`
 
-type ToolSearchToolRegex20251119 struct{…}
+      - `CacheControl CacheControlEphemeral Optional`
 
-
+        Create a cache control breakpoint at this content block.
 
-Name ToolSearchToolRegex
+      - `DeferLoading bool Optional`
 
-Name of the tool.
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-This is how the tool will be called by the model and in `tool_use` blocks.
+      - `Strict bool Optional`
 
-
+        When true, guarantees schema validation on tool names and inputs
 
-Type ToolSearchToolRegex20251119Type
+    - `type ToolSearchToolRegex20251119 struct{…}`
 
-One of the following:
+      - `Name ToolSearchToolRegex`
 
-const ToolSearchToolRegex20251119TypeToolSearchToolRegex20251119 ToolSearchToolRegex20251119Type = "tool\_search\_tool\_regex\_20251119"
+        Name of the tool.
 
-const ToolSearchToolRegex20251119TypeToolSearchToolRegex ToolSearchToolRegex20251119Type = "tool\_search\_tool\_regex"
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
-
+      - `Type ToolSearchToolRegex20251119Type`
 
-AllowedCallers []stringOptional
+        - `const ToolSearchToolRegex20251119TypeToolSearchToolRegex20251119 ToolSearchToolRegex20251119Type = "tool_search_tool_regex_20251119"`
 
-One of the following:
+        - `const ToolSearchToolRegex20251119TypeToolSearchToolRegex ToolSearchToolRegex20251119Type = "tool_search_tool_regex"`
 
-const ToolSearchToolRegex20251119AllowedCallerDirect ToolSearchToolRegex20251119AllowedCaller = "direct"
+      - `AllowedCallers []string Optional`
 
-const ToolSearchToolRegex20251119AllowedCallerCodeExecution20250825 ToolSearchToolRegex20251119AllowedCaller = "code\_execution\_20250825"
+        - `const ToolSearchToolRegex20251119AllowedCallerDirect ToolSearchToolRegex20251119AllowedCaller = "direct"`
 
-const ToolSearchToolRegex20251119AllowedCallerCodeExecution20260120 ToolSearchToolRegex20251119AllowedCaller = "code\_execution\_20260120"
+        - `const ToolSearchToolRegex20251119AllowedCallerCodeExecution20250825 ToolSearchToolRegex20251119AllowedCaller = "code_execution_20250825"`
 
-const ToolSearchToolRegex20251119AllowedCallerCodeExecution20260521 ToolSearchToolRegex20251119AllowedCaller = "code\_execution\_20260521"
+        - `const ToolSearchToolRegex20251119AllowedCallerCodeExecution20260120 ToolSearchToolRegex20251119AllowedCaller = "code_execution_20260120"`
 
-
+        - `const ToolSearchToolRegex20251119AllowedCallerCodeExecution20260521 ToolSearchToolRegex20251119AllowedCaller = "code_execution_20260521"`
 
-CacheControl [CacheControlEphemeral](api/messages.md)Optional
+      - `CacheControl CacheControlEphemeral Optional`
 
-Create a cache control breakpoint at this content block.
+        Create a cache control breakpoint at this content block.
 
-Type Ephemeral
+      - `DeferLoading bool Optional`
 
-
+        If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-TTL CacheControlEphemeralTTLOptional
+      - `Strict bool Optional`
 
-The time-to-live for the cache control breakpoint.
+        When true, guarantees schema validation on tool names and inputs
 
-This may be one the following values:
+  - `UserProfileID param.Field[string] Optional`
 
-- `5m`: 5 minutes
-- `1h`: 1 hour
+    Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
-Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+  - `Temperature param.Field[float64] Optional`
 
-One of the following:
+    **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+    Body param: Amount of randomness injected into the response.
 
-const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+    Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
 
-DeferLoading boolOptional
+    Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
-If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+    maximum: 1, minimum: 0
 
-Strict boolOptional
+  - `TopK param.Field[int64] Optional`
 
-When true, guarantees schema validation on tool names and inputs
+    **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not accept top_k; any value will be rejected with a 400 error.
 
-UserProfileID param.Field[string]Optional
+    Body param: Only sample from the top K options for each subsequent token.
 
-Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+    Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-
+    Recommended for advanced use cases only.
 
-Temperature param.Field[float64]⁠DeprecatedOptional
+    minimum: 0
 
-Body param: Amount of randomness injected into the response.
+  - `TopP param.Field[float64] Optional`
 
-Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+    **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting top_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
+    Body param: Use nucleus sampling.
 
-Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
+    In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-maximum1
+    Recommended for advanced use cases only.
 
-minimum0
+    maximum: 1, minimum: 0
 
-
+## Returns
 
-TopK param.Field[int64]⁠DeprecatedOptional
+- `type Message struct{…}`
 
-Body param: Only sample from the top K options for each subsequent token.
+  - `ID string`
 
-Deprecated. Models released after Claude Opus 4.6 do not accept top\_k; any value will be rejected with a 400 error.
+    Unique object identifier.
 
-Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
+    The format and length of IDs may change over time.
 
-Recommended for advanced use cases only.
+  - `Container Container`
 
-minimum0
+    Information about the container used in the request (for the code execution tool)
 
-
+    - `ID string`
 
-TopP param.Field[float64]⁠DeprecatedOptional
+      Identifier for the container used in this request
 
-Body param: Use nucleus sampling.
+    - `ExpiresAt Time`
 
-Deprecated. Models released after Claude Opus 4.6 do not support setting top\_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+      The time at which the container will expire.
 
-In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
+      format: date-time
 
-Recommended for advanced use cases only.
+    - `Skills []ContainerSkill`
 
-maximum1
+      Skills loaded in the container
 
-minimum0
+      - `SkillID string`
 
-##### ReturnsExpand Collapse
+        Skill ID
 
-
+        maxLength: 64, minLength: 1
 
-type Message struct{…}
+      - `Type ContainerSkillType`
 
-
+        Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-ID string
+        - `const ContainerSkillTypeAnthropic ContainerSkillType = "anthropic"`
 
-Unique object identifier.
+        - `const ContainerSkillTypeCustom ContainerSkillType = "custom"`
 
-The format and length of IDs may change over time.
+      - `Version string`
 
-
+        The resolved version: a skill version ID for custom skills.
 
-Container [Container](api/messages.md)
+        maxLength: 64, minLength: 1
 
-Information about the container used in the request (for the code execution tool)
+  - `Content []ContentBlockUnion`
 
-ID string
+    Content generated by the model.
 
-Identifier for the container used in this request
+    This is an array of content blocks, each of which has a `type` that determines its shape.
 
-ExpiresAt Time
+    Example:
 
-The time at which the container will expire.
+    ```json
+    [{"type": "text", "text": "Hi, I'm Claude."}]
+    ```
 
-
+    If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
 
-Content [][ContentBlockUnion](api/messages.md)
+    For example, if the input `messages` were:
 
-Content generated by the model.
+    ```json
+    [
+      {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
+      {"role": "assistant", "content": "The best answer is ("}
+    ]
+    ```
 
-This is an array of content blocks, each of which has a `type` that determines its shape.
+    Then the response `content` might be:
 
-Example:
+    ```json
+    [{"type": "text", "text": "B)"}]
+    ```
 
-```shiki
-[{"type": "text", "text": "Hi, I'm Claude."}]
-```
+    - `type TextBlock struct{…}`
 
-
+      - `Citations []TextCitationUnion`
 
-If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
+        Citations supporting the text block.
 
-For example, if the input `messages` were:
+        The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("}
-]
-```
+        - `type CitationCharLocation struct{…}`
 
-
+          - `CitedText string`
 
-Then the response `content` might be:
+          - `DocumentIndex int64`
 
-```shiki
-[{"type": "text", "text": "B)"}]
-```
+            minimum: 0
 
-
+          - `DocumentTitle string`
 
-One of the following:
+          - `EndCharIndex int64`
 
-
+          - `FileID string`
 
-type TextBlock struct{…}
+          - `StartCharIndex int64`
 
-
+            minimum: 0
 
-Citations [][TextCitationUnion](api/messages.md)
+          - `Type CharLocation`
 
-Citations supporting the text block.
+            default: char_location
 
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+        - `type CitationPageLocation struct{…}`
 
-One of the following:
+          - `CitedText string`
 
-
+          - `DocumentIndex int64`
 
-type CitationCharLocation struct{…}
+            minimum: 0
 
-CitedText string
+          - `DocumentTitle string`
 
-DocumentIndex int64
+          - `EndPageNumber int64`
 
-DocumentTitle string
+          - `FileID string`
 
-EndCharIndex int64
+          - `StartPageNumber int64`
 
-FileID string
+            minimum: 1
 
-StartCharIndex int64
+          - `Type PageLocation`
 
-Type CharLocation
+            default: page_location
 
-
+        - `type CitationContentBlockLocation struct{…}`
 
-type CitationPageLocation struct{…}
+          - `CitedText string`
 
-CitedText string
+            The full text of the cited block range, concatenated.
 
-DocumentIndex int64
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-DocumentTitle string
+          - `DocumentIndex int64`
 
-EndPageNumber int64
+            minimum: 0
 
-FileID string
+          - `DocumentTitle string`
 
-StartPageNumber int64
+          - `EndBlockIndex int64`
 
-Type PageLocation
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-type CitationContentBlockLocation struct{…}
+          - `FileID string`
 
-
+          - `StartBlockIndex int64`
 
-CitedText string
+            0-based index of the first cited block in the source's `content` array.
 
-The full text of the cited block range, concatenated.
+            minimum: 0
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+          - `Type ContentBlockLocation`
 
-DocumentIndex int64
+            default: content_block_location
 
-DocumentTitle string
+        - `type CitationsWebSearchResultLocation struct{…}`
 
-
+          - `CitedText string`
 
-EndBlockIndex int64
+          - `EncryptedIndex string`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+          - `Title string`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+            maxLength: 512
 
-FileID string
+          - `Type WebSearchResultLocation`
 
-StartBlockIndex int64
+            default: web_search_result_location
 
-0-based index of the first cited block in the source's `content` array.
+          - `URL string`
 
-Type ContentBlockLocation
+        - `type CitationsSearchResultLocation struct{…}`
 
-
+          - `CitedText string`
 
-type CitationsWebSearchResultLocation struct{…}
+            The full text of the cited block range, concatenated.
 
-CitedText string
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-EncryptedIndex string
+          - `EndBlockIndex int64`
 
-Title string
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-Type WebSearchResultLocation
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-URL string
+          - `SearchResultIndex int64`
 
-
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
-type CitationsSearchResultLocation struct{…}
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
-
+            minimum: 0
 
-CitedText string
+          - `Source string`
 
-The full text of the cited block range, concatenated.
+          - `StartBlockIndex int64`
 
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+            0-based index of the first cited block in the source's `content` array.
 
-
+            minimum: 0
 
-EndBlockIndex int64
+          - `Title string`
 
-Exclusive 0-based end index of the cited block range in the source's `content` array.
+          - `Type SearchResultLocation`
 
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+            default: search_result_location
 
-
+      - `Text string`
 
-SearchResultIndex int64
+        maxLength: 5000000, minLength: 0
 
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+      - `Type Text`
 
-Counted separately from `document_index`; server-side web search results are not included in this count.
+        default: text
 
-minimum0
+    - `type ThinkingBlock struct{…}`
 
-Source string
+      - `Signature string`
 
-StartBlockIndex int64
+        A value used to verify that this thinking block was generated by Claude when it is passed back to the API.
 
-0-based index of the first cited block in the source's `content` array.
+        This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-Title string
+        See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-Type SearchResultLocation
+      - `Thinking string`
 
-Text string
+        The text of Claude's thinking process for this block.
 
-Type Text
+      - `Type Thinking`
 
-
+        default: thinking
 
-type ThinkingBlock struct{…}
+    - `type RedactedThinkingBlock struct{…}`
 
-Signature string
+      - `Data string`
 
-Thinking string
+        The contents of this redacted thinking block, returned when portions of the model's thinking were safety-redacted. This field is opaque and encrypted, with no readable content.
 
-Type Thinking
+        Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-
+        See [extended thinking](build-with-claude/extended-thinking.md) for details.
 
-type RedactedThinkingBlock struct{…}
+      - `Type RedactedThinking`
 
-Data string
+        default: redacted_thinking
 
-Type RedactedThinking
+    - `type ToolUseBlock struct{…}`
 
-
+      - `ID string`
 
-type ToolUseBlock struct{…}
+        pattern: ^[a-zA-Z0-9_-]+$
 
-ID string
+      - `Caller ToolUseBlockCallerUnion`
 
-
+        Tool invocation directly from the model.
 
-Caller ToolUseBlockCallerUnion
+        default: {"type":"direct"}
 
-Tool invocation directly from the model.
+        - `type DirectCaller struct{…}`
 
-One of the following:
+          Tool invocation directly from the model.
 
-
+          - `Type Direct`
 
-type DirectCaller struct{…}
+        - `type ServerToolCaller struct{…}`
 
-Tool invocation directly from the model.
+          Tool invocation generated by a server-side tool.
 
-Type Direct
+          - `ToolID string`
 
-
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-type ServerToolCaller struct{…}
+          - `Type CodeExecution20250825`
 
-Tool invocation generated by a server-side tool.
+        - `type ServerToolCaller20260120 struct{…}`
 
-ToolID string
+          - `ToolID string`
 
-Type CodeExecution20250825
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-
+          - `Type CodeExecution20260120`
 
-type ServerToolCaller20260120 struct{…}
+      - `Input map[string, any]`
 
-ToolID string
+      - `Name string`
 
-Type CodeExecution20260120
+        minLength: 1
 
-Input map[string, any]
+      - `Type ToolUse`
 
-Name string
+        default: tool_use
 
-Type ToolUse
+      - `ToolsetName string Optional`
 
-
+        For a toolset member tool_use, the toolset family.
 
-type ServerToolUseBlock struct{…}
+        maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-ID string
+    - `type ServerToolUseBlock struct{…}`
 
-
+      - `ID string`
 
-Caller ServerToolUseBlockCallerUnion
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Tool invocation directly from the model.
+      - `Caller ServerToolUseBlockCallerUnion`
 
-One of the following:
+        Tool invocation directly from the model.
 
-
+        default: {"type":"direct"}
 
-type DirectCaller struct{…}
+        - `type DirectCaller struct{…}`
 
-Tool invocation directly from the model.
+          Tool invocation directly from the model.
 
-Type Direct
+        - `type ServerToolCaller struct{…}`
 
-
+          Tool invocation generated by a server-side tool.
 
-type ServerToolCaller struct{…}
+        - `type ServerToolCaller20260120 struct{…}`
 
-Tool invocation generated by a server-side tool.
+      - `Input map[string, any]`
 
-ToolID string
+      - `Name ServerToolUseBlockName`
 
-Type CodeExecution20250825
+        - `const ServerToolUseBlockNameWebSearch ServerToolUseBlockName = "web_search"`
 
-
+        - `const ServerToolUseBlockNameWebFetch ServerToolUseBlockName = "web_fetch"`
 
-type ServerToolCaller20260120 struct{…}
+        - `const ServerToolUseBlockNameCodeExecution ServerToolUseBlockName = "code_execution"`
 
-ToolID string
+        - `const ServerToolUseBlockNameBashCodeExecution ServerToolUseBlockName = "bash_code_execution"`
 
-Type CodeExecution20260120
+        - `const ServerToolUseBlockNameTextEditorCodeExecution ServerToolUseBlockName = "text_editor_code_execution"`
 
-Input map[string, any]
+        - `const ServerToolUseBlockNameToolSearchToolRegex ServerToolUseBlockName = "tool_search_tool_regex"`
 
-
+        - `const ServerToolUseBlockNameToolSearchToolBm25 ServerToolUseBlockName = "tool_search_tool_bm25"`
 
-Name ServerToolUseBlockName
+      - `Type ServerToolUse`
 
-One of the following:
+        default: server_tool_use
 
-const ServerToolUseBlockNameWebSearch ServerToolUseBlockName = "web\_search"
+    - `type WebSearchToolResultBlock struct{…}`
 
-const ServerToolUseBlockNameWebFetch ServerToolUseBlockName = "web\_fetch"
+      - `Caller WebSearchToolResultBlockCallerUnion`
 
-const ServerToolUseBlockNameCodeExecution ServerToolUseBlockName = "code\_execution"
+        Tool invocation directly from the model.
 
-const ServerToolUseBlockNameBashCodeExecution ServerToolUseBlockName = "bash\_code\_execution"
+        default: {"type":"direct"}
 
-const ServerToolUseBlockNameTextEditorCodeExecution ServerToolUseBlockName = "text\_editor\_code\_execution"
+        - `type DirectCaller struct{…}`
 
-const ServerToolUseBlockNameToolSearchToolRegex ServerToolUseBlockName = "tool\_search\_tool\_regex"
+          Tool invocation directly from the model.
 
-const ServerToolUseBlockNameToolSearchToolBm25 ServerToolUseBlockName = "tool\_search\_tool\_bm25"
+        - `type ServerToolCaller struct{…}`
 
-Type ServerToolUse
+          Tool invocation generated by a server-side tool.
 
-
+        - `type ServerToolCaller20260120 struct{…}`
 
-type WebSearchToolResultBlock struct{…}
+      - `Content WebSearchToolResultBlockContentUnion`
 
-
+        - `type WebSearchToolResultError struct{…}`
 
-Caller WebSearchToolResultBlockCallerUnion
+          - `ErrorCode WebSearchToolResultErrorCode`
 
-Tool invocation directly from the model.
+            - `const WebSearchToolResultErrorCodeInvalidToolInput WebSearchToolResultErrorCode = "invalid_tool_input"`
 
-One of the following:
+            - `const WebSearchToolResultErrorCodeUnavailable WebSearchToolResultErrorCode = "unavailable"`
 
-
+            - `const WebSearchToolResultErrorCodeMaxUsesExceeded WebSearchToolResultErrorCode = "max_uses_exceeded"`
 
-type DirectCaller struct{…}
+            - `const WebSearchToolResultErrorCodeTooManyRequests WebSearchToolResultErrorCode = "too_many_requests"`
 
-Tool invocation directly from the model.
+            - `const WebSearchToolResultErrorCodeQueryTooLong WebSearchToolResultErrorCode = "query_too_long"`
 
-Type Direct
+            - `const WebSearchToolResultErrorCodeRequestTooLarge WebSearchToolResultErrorCode = "request_too_large"`
 
-
+          - `Type WebSearchToolResultError`
 
-type ServerToolCaller struct{…}
+            default: web_search_tool_result_error
 
-Tool invocation generated by a server-side tool.
+        - `type WebSearchToolResultBlockContentArray []WebSearchResultBlock`
 
-ToolID string
+          - `EncryptedContent string`
 
-Type CodeExecution20250825
+          - `PageAge string`
 
-
+          - `Title string`
 
-type ServerToolCaller20260120 struct{…}
+          - `Type WebSearchResult`
 
-ToolID string
+            default: web_search_result
 
-Type CodeExecution20260120
+          - `URL string`
 
-
+      - `ToolUseID string`
 
-Content [WebSearchToolResultBlockContentUnion](api/messages.md)
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-One of the following:
+      - `Type WebSearchToolResult`
 
-
+        default: web_search_tool_result
 
-type WebSearchToolResultError struct{…}
+    - `type WebFetchToolResultBlock struct{…}`
 
-
+      - `Caller WebFetchToolResultBlockCallerUnion`
 
-ErrorCode [WebSearchToolResultErrorCode](api/messages.md)
+        Tool invocation directly from the model.
 
-One of the following:
+        default: {"type":"direct"}
 
-const WebSearchToolResultErrorCodeInvalidToolInput [WebSearchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
+        - `type DirectCaller struct{…}`
 
-const WebSearchToolResultErrorCodeUnavailable [WebSearchToolResultErrorCode](api/messages.md) = "unavailable"
+          Tool invocation directly from the model.
 
-const WebSearchToolResultErrorCodeMaxUsesExceeded [WebSearchToolResultErrorCode](api/messages.md) = "max\_uses\_exceeded"
+        - `type ServerToolCaller struct{…}`
 
-const WebSearchToolResultErrorCodeTooManyRequests [WebSearchToolResultErrorCode](api/messages.md) = "too\_many\_requests"
+          Tool invocation generated by a server-side tool.
 
-const WebSearchToolResultErrorCodeQueryTooLong [WebSearchToolResultErrorCode](api/messages.md) = "query\_too\_long"
+        - `type ServerToolCaller20260120 struct{…}`
 
-const WebSearchToolResultErrorCodeRequestTooLarge [WebSearchToolResultErrorCode](api/messages.md) = "request\_too\_large"
+      - `Content WebFetchToolResultBlockContentUnion`
 
-Type WebSearchToolResultError
+        - `type WebFetchToolResultErrorBlock struct{…}`
 
-
+          - `ErrorCode WebFetchToolResultErrorCode`
 
-type WebSearchToolResultBlockContentArray [][WebSearchResultBlock](api/messages.md)
+            - `const WebFetchToolResultErrorCodeInvalidToolInput WebFetchToolResultErrorCode = "invalid_tool_input"`
 
-EncryptedContent string
+            - `const WebFetchToolResultErrorCodeURLTooLong WebFetchToolResultErrorCode = "url_too_long"`
 
-PageAge string
+            - `const WebFetchToolResultErrorCodeURLNotAllowed WebFetchToolResultErrorCode = "url_not_allowed"`
 
-Title string
+            - `const WebFetchToolResultErrorCodeURLNotInPriorContext WebFetchToolResultErrorCode = "url_not_in_prior_context"`
 
-Type WebSearchResult
+            - `const WebFetchToolResultErrorCodeURLNotAccessible WebFetchToolResultErrorCode = "url_not_accessible"`
 
-URL string
+            - `const WebFetchToolResultErrorCodeUnsupportedContentType WebFetchToolResultErrorCode = "unsupported_content_type"`
 
-ToolUseID string
+            - `const WebFetchToolResultErrorCodeTooManyRequests WebFetchToolResultErrorCode = "too_many_requests"`
 
-Type WebSearchToolResult
+            - `const WebFetchToolResultErrorCodeMaxUsesExceeded WebFetchToolResultErrorCode = "max_uses_exceeded"`
 
-
+            - `const WebFetchToolResultErrorCodeUnavailable WebFetchToolResultErrorCode = "unavailable"`
 
-type WebFetchToolResultBlock struct{…}
+          - `Type WebFetchToolResultError`
 
-
+            default: web_fetch_tool_result_error
 
-Caller WebFetchToolResultBlockCallerUnion
+        - `type WebFetchBlock struct{…}`
 
-Tool invocation directly from the model.
+          - `Content DocumentBlock`
 
-One of the following:
+            - `Citations CitationsConfig`
 
-
+              Citation configuration for the document
 
-type DirectCaller struct{…}
+              - `Enabled bool`
 
-Tool invocation directly from the model.
+                default: false
 
-Type Direct
+            - `Source DocumentBlockSourceUnion`
 
-
+              - `type Base64PDFSource struct{…}`
 
-type ServerToolCaller struct{…}
+                - `Data string`
 
-Tool invocation generated by a server-side tool.
+                  format: byte
 
-ToolID string
+                - `MediaType ApplicationPDF`
 
-Type CodeExecution20250825
+                - `Type Base64`
 
-
+              - `type PlainTextSource struct{…}`
 
-type ServerToolCaller20260120 struct{…}
+                - `Data string`
 
-ToolID string
+                - `MediaType TextPlain`
 
-Type CodeExecution20260120
+                - `Type Text`
 
-
+            - `Title string`
 
-Content WebFetchToolResultBlockContentUnion
+              The title of the document
 
-One of the following:
+            - `Type Document`
 
-
+              default: document
 
-type WebFetchToolResultErrorBlock struct{…}
+          - `RetrievedAt string`
 
-
+            ISO 8601 timestamp when the content was retrieved
 
-ErrorCode [WebFetchToolResultErrorCode](api/messages.md)
+          - `Type WebFetchResult`
 
-One of the following:
+            default: web_fetch_result
 
-const WebFetchToolResultErrorCodeInvalidToolInput [WebFetchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
+          - `URL string`
 
-const WebFetchToolResultErrorCodeURLTooLong [WebFetchToolResultErrorCode](api/messages.md) = "url\_too\_long"
+            Fetched content URL
 
-const WebFetchToolResultErrorCodeURLNotAllowed [WebFetchToolResultErrorCode](api/messages.md) = "url\_not\_allowed"
+      - `ToolUseID string`
 
-const WebFetchToolResultErrorCodeURLNotInPriorContext [WebFetchToolResultErrorCode](api/messages.md) = "url\_not\_in\_prior\_context"
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-const WebFetchToolResultErrorCodeURLNotAccessible [WebFetchToolResultErrorCode](api/messages.md) = "url\_not\_accessible"
+      - `Type WebFetchToolResult`
 
-const WebFetchToolResultErrorCodeUnsupportedContentType [WebFetchToolResultErrorCode](api/messages.md) = "unsupported\_content\_type"
+        default: web_fetch_tool_result
 
-const WebFetchToolResultErrorCodeTooManyRequests [WebFetchToolResultErrorCode](api/messages.md) = "too\_many\_requests"
+    - `type CodeExecutionToolResultBlock struct{…}`
 
-const WebFetchToolResultErrorCodeMaxUsesExceeded [WebFetchToolResultErrorCode](api/messages.md) = "max\_uses\_exceeded"
+      - `Content CodeExecutionToolResultBlockContentUnion`
 
-const WebFetchToolResultErrorCodeUnavailable [WebFetchToolResultErrorCode](api/messages.md) = "unavailable"
+        Code execution result with encrypted stdout for PFC + web_search results.
 
-Type WebFetchToolResultError
+        - `type CodeExecutionToolResultError struct{…}`
 
-
+          - `ErrorCode CodeExecutionToolResultErrorCode`
 
-type WebFetchBlock struct{…}
+            - `const CodeExecutionToolResultErrorCodeInvalidToolInput CodeExecutionToolResultErrorCode = "invalid_tool_input"`
 
-
+            - `const CodeExecutionToolResultErrorCodeUnavailable CodeExecutionToolResultErrorCode = "unavailable"`
 
-Content [DocumentBlock](api/messages.md)
+            - `const CodeExecutionToolResultErrorCodeTooManyRequests CodeExecutionToolResultErrorCode = "too_many_requests"`
 
-
+            - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-Citations [CitationsConfig](api/messages.md)
+          - `Type CodeExecutionToolResultError`
 
-Citation configuration for the document
+            default: code_execution_tool_result_error
 
-Enabled bool
+        - `type CodeExecutionResultBlock struct{…}`
 
-
+          - `Content []CodeExecutionOutputBlock`
 
-Source DocumentBlockSourceUnion
+            - `FileID string`
 
-One of the following:
+            - `Type CodeExecutionOutput`
 
-
+              default: code_execution_output
 
-type Base64PDFSource struct{…}
+          - `ReturnCode int64`
 
-Data string
+          - `Stderr string`
 
-MediaType ApplicationPDF
+          - `Stdout string`
 
-Type Base64
+          - `Type CodeExecutionResult`
 
-
+            default: code_execution_result
 
-type PlainTextSource struct{…}
+        - `type EncryptedCodeExecutionResultBlock struct{…}`
 
-Data string
+          Code execution result with encrypted stdout for PFC + web_search results.
 
-MediaType TextPlain
+          - `Content []CodeExecutionOutputBlock`
 
-Type Text
+            - `FileID string`
 
-Title string
+            - `Type CodeExecutionOutput`
 
-The title of the document
+              default: code_execution_output
 
-Type Document
+          - `EncryptedStdout string`
 
-RetrievedAt string
+          - `ReturnCode int64`
 
-ISO 8601 timestamp when the content was retrieved
+          - `Stderr string`
 
-Type WebFetchResult
+          - `Type EncryptedCodeExecutionResult`
 
-URL string
+            default: encrypted_code_execution_result
 
-Fetched content URL
+      - `ToolUseID string`
 
-ToolUseID string
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Type WebFetchToolResult
+      - `Type CodeExecutionToolResult`
 
-
+        default: code_execution_tool_result
 
-type CodeExecutionToolResultBlock struct{…}
+    - `type BashCodeExecutionToolResultBlock struct{…}`
 
-
+      - `Content BashCodeExecutionToolResultBlockContentUnion`
 
-Content [CodeExecutionToolResultBlockContentUnion](api/messages.md)
+        - `type BashCodeExecutionToolResultError struct{…}`
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+          - `ErrorCode BashCodeExecutionToolResultErrorCode`
 
-One of the following:
+            - `const BashCodeExecutionToolResultErrorCodeInvalidToolInput BashCodeExecutionToolResultErrorCode = "invalid_tool_input"`
 
-
+            - `const BashCodeExecutionToolResultErrorCodeUnavailable BashCodeExecutionToolResultErrorCode = "unavailable"`
 
-type CodeExecutionToolResultError struct{…}
+            - `const BashCodeExecutionToolResultErrorCodeTooManyRequests BashCodeExecutionToolResultErrorCode = "too_many_requests"`
 
-
+            - `const BashCodeExecutionToolResultErrorCodeExecutionTimeExceeded BashCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-ErrorCode [CodeExecutionToolResultErrorCode](api/messages.md)
+            - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
 
-One of the following:
+          - `Type BashCodeExecutionToolResultError`
 
-const CodeExecutionToolResultErrorCodeInvalidToolInput [CodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
+            default: bash_code_execution_tool_result_error
 
-const CodeExecutionToolResultErrorCodeUnavailable [CodeExecutionToolResultErrorCode](api/messages.md) = "unavailable"
+        - `type BashCodeExecutionResultBlock struct{…}`
 
-const CodeExecutionToolResultErrorCodeTooManyRequests [CodeExecutionToolResultErrorCode](api/messages.md) = "too\_many\_requests"
+          - `Content []BashCodeExecutionOutputBlock`
 
-const CodeExecutionToolResultErrorCodeExecutionTimeExceeded [CodeExecutionToolResultErrorCode](api/messages.md) = "execution\_time\_exceeded"
+            - `FileID string`
 
-Type CodeExecutionToolResultError
+            - `Type BashCodeExecutionOutput`
 
-
+              default: bash_code_execution_output
 
-type CodeExecutionResultBlock struct{…}
+          - `ReturnCode int64`
 
-
+          - `Stderr string`
 
-Content [][CodeExecutionOutputBlock](api/messages.md)
+          - `Stdout string`
 
-FileID string
+          - `Type BashCodeExecutionResult`
 
-Type CodeExecutionOutput
+            default: bash_code_execution_result
 
-ReturnCode int64
+      - `ToolUseID string`
 
-Stderr string
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Stdout string
+      - `Type BashCodeExecutionToolResult`
 
-Type CodeExecutionResult
+        default: bash_code_execution_tool_result
 
-
+    - `type TextEditorCodeExecutionToolResultBlock struct{…}`
 
-type EncryptedCodeExecutionResultBlock struct{…}
+      - `Content TextEditorCodeExecutionToolResultBlockContentUnion`
 
-Code execution result with encrypted stdout for PFC + web\_search results.
+        - `type TextEditorCodeExecutionToolResultError struct{…}`
 
-
+          - `ErrorCode TextEditorCodeExecutionToolResultErrorCode`
 
-Content [][CodeExecutionOutputBlock](api/messages.md)
+            - `const TextEditorCodeExecutionToolResultErrorCodeInvalidToolInput TextEditorCodeExecutionToolResultErrorCode = "invalid_tool_input"`
 
-FileID string
+            - `const TextEditorCodeExecutionToolResultErrorCodeUnavailable TextEditorCodeExecutionToolResultErrorCode = "unavailable"`
 
-Type CodeExecutionOutput
+            - `const TextEditorCodeExecutionToolResultErrorCodeTooManyRequests TextEditorCodeExecutionToolResultErrorCode = "too_many_requests"`
 
-EncryptedStdout string
+            - `const TextEditorCodeExecutionToolResultErrorCodeExecutionTimeExceeded TextEditorCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-ReturnCode int64
+            - `const TextEditorCodeExecutionToolResultErrorCodeFileNotFound TextEditorCodeExecutionToolResultErrorCode = "file_not_found"`
 
-Stderr string
+          - `ErrorMessage string`
 
-Type EncryptedCodeExecutionResult
+          - `Type TextEditorCodeExecutionToolResultError`
 
-ToolUseID string
+            default: text_editor_code_execution_tool_result_error
 
-Type CodeExecutionToolResult
+        - `type TextEditorCodeExecutionViewResultBlock struct{…}`
 
-
+          - `Content string`
 
-type BashCodeExecutionToolResultBlock struct{…}
+          - `FileType TextEditorCodeExecutionViewResultBlockFileType`
 
-
+            - `const TextEditorCodeExecutionViewResultBlockFileTypeText TextEditorCodeExecutionViewResultBlockFileType = "text"`
 
-Content BashCodeExecutionToolResultBlockContentUnion
+            - `const TextEditorCodeExecutionViewResultBlockFileTypeImage TextEditorCodeExecutionViewResultBlockFileType = "image"`
 
-One of the following:
+            - `const TextEditorCodeExecutionViewResultBlockFileTypePDF TextEditorCodeExecutionViewResultBlockFileType = "pdf"`
 
-
+          - `NumLines int64`
 
-type BashCodeExecutionToolResultError struct{…}
+          - `StartLine int64`
 
-
+          - `TotalLines int64`
 
-ErrorCode [BashCodeExecutionToolResultErrorCode](api/messages.md)
+          - `Type TextEditorCodeExecutionViewResult`
 
-One of the following:
+            default: text_editor_code_execution_view_result
 
-const BashCodeExecutionToolResultErrorCodeInvalidToolInput [BashCodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
+        - `type TextEditorCodeExecutionCreateResultBlock struct{…}`
 
-const BashCodeExecutionToolResultErrorCodeUnavailable [BashCodeExecutionToolResultErrorCode](api/messages.md) = "unavailable"
+          - `IsFileUpdate bool`
 
-const BashCodeExecutionToolResultErrorCodeTooManyRequests [BashCodeExecutionToolResultErrorCode](api/messages.md) = "too\_many\_requests"
+          - `Type TextEditorCodeExecutionCreateResult`
 
-const BashCodeExecutionToolResultErrorCodeExecutionTimeExceeded [BashCodeExecutionToolResultErrorCode](api/messages.md) = "execution\_time\_exceeded"
+            default: text_editor_code_execution_create_result
 
-const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge [BashCodeExecutionToolResultErrorCode](api/messages.md) = "output\_file\_too\_large"
+        - `type TextEditorCodeExecutionStrReplaceResultBlock struct{…}`
 
-Type BashCodeExecutionToolResultError
+          - `Lines []string`
 
-
+          - `NewLines int64`
 
-type BashCodeExecutionResultBlock struct{…}
+          - `NewStart int64`
 
-
+          - `OldLines int64`
 
-Content [][BashCodeExecutionOutputBlock](api/messages.md)
+          - `OldStart int64`
 
-FileID string
+          - `Type TextEditorCodeExecutionStrReplaceResult`
 
-Type BashCodeExecutionOutput
+            default: text_editor_code_execution_str_replace_result
 
-ReturnCode int64
+      - `ToolUseID string`
 
-Stderr string
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Stdout string
+      - `Type TextEditorCodeExecutionToolResult`
 
-Type BashCodeExecutionResult
+        default: text_editor_code_execution_tool_result
 
-ToolUseID string
+    - `type ToolSearchToolResultBlock struct{…}`
 
-Type BashCodeExecutionToolResult
+      - `Content ToolSearchToolResultBlockContentUnion`
 
-
+        - `type ToolSearchToolResultError struct{…}`
 
-type TextEditorCodeExecutionToolResultBlock struct{…}
+          - `ErrorCode ToolSearchToolResultErrorCode`
 
-
+            - `const ToolSearchToolResultErrorCodeInvalidToolInput ToolSearchToolResultErrorCode = "invalid_tool_input"`
 
-Content TextEditorCodeExecutionToolResultBlockContentUnion
+            - `const ToolSearchToolResultErrorCodeUnavailable ToolSearchToolResultErrorCode = "unavailable"`
 
-One of the following:
+            - `const ToolSearchToolResultErrorCodeTooManyRequests ToolSearchToolResultErrorCode = "too_many_requests"`
 
-
+            - `const ToolSearchToolResultErrorCodeExecutionTimeExceeded ToolSearchToolResultErrorCode = "execution_time_exceeded"`
 
-type TextEditorCodeExecutionToolResultError struct{…}
+          - `ErrorMessage string`
 
-
+          - `Type ToolSearchToolResultError`
 
-ErrorCode [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
+            default: tool_search_tool_result_error
 
-One of the following:
+        - `type ToolSearchToolSearchResultBlock struct{…}`
 
-const TextEditorCodeExecutionToolResultErrorCodeInvalidToolInput [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
+          - `ToolReferences []ToolReferenceBlock`
 
-const TextEditorCodeExecutionToolResultErrorCodeUnavailable [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "unavailable"
+            - `ToolName string`
 
-const TextEditorCodeExecutionToolResultErrorCodeTooManyRequests [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "too\_many\_requests"
+              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-const TextEditorCodeExecutionToolResultErrorCodeExecutionTimeExceeded [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "execution\_time\_exceeded"
+            - `Type ToolReference`
 
-const TextEditorCodeExecutionToolResultErrorCodeFileNotFound [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "file\_not\_found"
+              default: tool_reference
 
-ErrorMessage string
+          - `Type ToolSearchToolSearchResult`
 
-Type TextEditorCodeExecutionToolResultError
+            default: tool_search_tool_search_result
 
-
+      - `ToolUseID string`
 
-type TextEditorCodeExecutionViewResultBlock struct{…}
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-Content string
+      - `Type ToolSearchToolResult`
 
-
+        default: tool_search_tool_result
 
-FileType TextEditorCodeExecutionViewResultBlockFileType
+    - `type ContainerUploadBlock struct{…}`
 
-One of the following:
+      Response model for a file uploaded to the container.
 
-const TextEditorCodeExecutionViewResultBlockFileTypeText TextEditorCodeExecutionViewResultBlockFileType = "text"
+      - `FileID string`
 
-const TextEditorCodeExecutionViewResultBlockFileTypeImage TextEditorCodeExecutionViewResultBlockFileType = "image"
+      - `Type ContainerUpload`
 
-const TextEditorCodeExecutionViewResultBlockFileTypePDF TextEditorCodeExecutionViewResultBlockFileType = "pdf"
+        default: container_upload
 
-NumLines int64
+  - `Model Model`
 
-StartLine int64
+    The model that will complete your prompt.
 
-TotalLines int64
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Type TextEditorCodeExecutionViewResult
+    - `type Model string`
 
-
+      The model that will complete your prompt.
 
-type TextEditorCodeExecutionCreateResultBlock struct{…}
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-IsFileUpdate bool
+      - `const ModelClaudeFable5_1 Model = "claude-fable-5-1"`
 
-Type TextEditorCodeExecutionCreateResult
+        Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
-
+      - `const ModelClaudeMythos5_1 Model = "claude-mythos-5-1"`
 
-type TextEditorCodeExecutionStrReplaceResultBlock struct{…}
+        Our most capable model for cybersecurity and biology research, available through trusted access programs
 
-Lines []string
+      - `const ModelClaudeSonnet5 Model = "claude-sonnet-5"`
 
-NewLines int64
+        High-performance model for coding and agents
 
-NewStart int64
+      - `const ModelClaudeFable5 Model = "claude-fable-5"`
 
-OldLines int64
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
-OldStart int64
+      - `const ModelClaudeMythos5 Model = "claude-mythos-5"`
 
-Type TextEditorCodeExecutionStrReplaceResult
+        Most capable model for cybersecurity and biology research
 
-ToolUseID string
+      - `const ModelClaudeOpus5 Model = "claude-opus-5"`
 
-Type TextEditorCodeExecutionToolResult
+        Powerful intelligence for long-running agents and coding
 
-
+      - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
-type ToolSearchToolResultBlock struct{…}
+        Powerful intelligence for long-running agents and coding
 
-
+      - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
-Content ToolSearchToolResultBlockContentUnion
+        Powerful intelligence for long-running agents and coding
 
-One of the following:
+      - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
 
-
+        New class of intelligence, strongest in coding and cybersecurity
 
-type ToolSearchToolResultError struct{…}
+      - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
 
-
+        Powerful intelligence for long-running agents and coding
 
-ErrorCode [ToolSearchToolResultErrorCode](api/messages.md)
+      - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
-One of the following:
+        Best combination of speed and intelligence
 
-const ToolSearchToolResultErrorCodeInvalidToolInput [ToolSearchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
+      - `const ModelClaudeHaiku4_5 Model = "claude-haiku-4-5"`
 
-const ToolSearchToolResultErrorCodeUnavailable [ToolSearchToolResultErrorCode](api/messages.md) = "unavailable"
+        Fastest model with near-frontier intelligence
 
-const ToolSearchToolResultErrorCodeTooManyRequests [ToolSearchToolResultErrorCode](api/messages.md) = "too\_many\_requests"
+      - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
 
-const ToolSearchToolResultErrorCodeExecutionTimeExceeded [ToolSearchToolResultErrorCode](api/messages.md) = "execution\_time\_exceeded"
+        Fastest model with near-frontier intelligence
 
-ErrorMessage string
+      - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
-Type ToolSearchToolResultError
+        Powerful intelligence for long-running agents and coding
 
-
+      - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-type ToolSearchToolSearchResultBlock struct{…}
+        Powerful intelligence for long-running agents and coding
 
-
+      - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
-ToolReferences [][ToolReferenceBlock](api/messages.md)
+        High-performance model for agents and coding
 
-ToolName string
+      - `const ModelClaudeSonnet4_5_20250929 Model = "claude-sonnet-4-5-20250929"`
 
-Type ToolReference
+        High-performance model for agents and coding
 
-Type ToolSearchToolSearchResult
+    - `string`
 
-ToolUseID string
+  - `Role Assistant`
 
-Type ToolSearchToolResult
+    Conversational role of the generated message.
 
-
+    This will always be `"assistant"`.
 
-type ContainerUploadBlock struct{…}
+    default: assistant
 
-Response model for a file uploaded to the container.
+  - `StopDetails RefusalStopDetails`
 
-FileID string
+    Structured information about a refusal.
 
-Type ContainerUpload
+    - `Category RefusalStopDetailsCategory`
 
-
+      The policy category that triggered a refusal.
 
-Model Model
+      - `const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"`
 
-The model that will complete your prompt.
+        The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+      - `const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"`
 
-One of the following:
+        The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
-
+      - `const RefusalStopDetailsCategoryFrontierLLM RefusalStopDetailsCategory = "frontier_llm"`
 
-type Model string
+        The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
 
-The model that will complete your prompt.
+      - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
 
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+        The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
 
-One of the following:
+      - `const RefusalStopDetailsCategoryGeneralHarms RefusalStopDetailsCategory = "general_harms"`
 
-const ModelClaudeSonnet5 Model = "claude-sonnet-5"
+        The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-High-performance model for coding and agents
+    - `Explanation string`
 
-const ModelClaudeFable5 Model = "claude-fable-5"
+      Human-readable explanation of the refusal.
 
-Next generation of intelligence for the hardest knowledge work and coding problems
+      This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-const ModelClaudeMythos5 Model = "claude-mythos-5"
+    - `Type Refusal`
 
-Most capable model for cybersecurity and biology research
+      default: refusal
 
-const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+  - `StopReason StopReason`
 
-Frontier intelligence for long-running agents and coding
+    The reason that we stopped.
 
-const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+    This may be one the following values:
 
-Frontier intelligence for long-running agents and coding
+    * `"end_turn"`: the model reached a natural stopping point
+    * `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
+    * `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
+    * `"tool_use"`: the model invoked one or more tools
+    * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
+    * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+    * `"model_context_window_exceeded"`: we exceeded the model's context window
 
-const ModelClaudeMythosPreview Model = "claude-mythos-preview"
+    In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-New class of intelligence, strongest in coding and cybersecurity
+    - `const StopReasonEndTurn StopReason = "end_turn"`
 
-const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+    - `const StopReasonMaxTokens StopReason = "max_tokens"`
 
-Frontier intelligence for long-running agents and coding
+    - `const StopReasonStopSequence StopReason = "stop_sequence"`
 
-const ModelClaudeSonnet4\_6 Model = "claude-sonnet-4-6"
+    - `const StopReasonToolUse StopReason = "tool_use"`
 
-Best combination of speed and intelligence
+    - `const StopReasonPauseTurn StopReason = "pause_turn"`
 
-const ModelClaudeHaiku4\_5 Model = "claude-haiku-4-5"
+    - `const StopReasonRefusal StopReason = "refusal"`
 
-Fastest model with near-frontier intelligence
+    - `const StopReasonModelContextWindowExceeded StopReason = "model_context_window_exceeded"`
 
-const ModelClaudeHaiku4\_5\_20251001 Model = "claude-haiku-4-5-20251001"
+  - `StopSequence string`
 
-Fastest model with near-frontier intelligence
+    Which custom stop sequence was generated, if any.
 
-const ModelClaudeOpus4\_5 Model = "claude-opus-4-5"
+    This value will be a non-null string if one of your custom stop sequences was generated.
 
-Premium model combining maximum intelligence with practical performance
+  - `Type Message`
 
-const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
+    Object type.
 
-Premium model combining maximum intelligence with practical performance
+    For Messages, this is always `"message"`.
 
-const ModelClaudeSonnet4\_5 Model = "claude-sonnet-4-5"
+    default: message
 
-High-performance model for agents and coding
+  - `Usage Usage`
 
-const ModelClaudeSonnet4\_5\_20250929 Model = "claude-sonnet-4-5-20250929"
+    Billing and rate-limit usage.
 
-High-performance model for agents and coding
+    Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
 
-const ModelClaudeOpus4\_1 Model = "claude-opus-4-1"
+    Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
 
-Exceptional model for specialized complex tasks
+    For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
 
-const ModelClaudeOpus4\_1\_20250805 Model = "claude-opus-4-1-20250805"
+    Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-Exceptional model for specialized complex tasks
+    - `CacheCreation CacheCreation`
 
-string
+      Breakdown of cached tokens by TTL
 
-
+      - `Ephemeral1hInputTokens int64`
 
-Role Assistant
+        The number of input tokens used to create the 1 hour cache entry.
 
-Conversational role of the generated message.
+        default: 0, minimum: 0
 
-This will always be `"assistant"`.
+      - `Ephemeral5mInputTokens int64`
 
-
+        The number of input tokens used to create the 5 minute cache entry.
 
-StopDetails [RefusalStopDetails](api/messages.md)
+        default: 0, minimum: 0
 
-Structured information about a refusal.
+    - `CacheCreationInputTokens int64`
 
-
+      The number of input tokens used to create the cache entry.
 
-Category RefusalStopDetailsCategory
+      minimum: 0
 
-The policy category that triggered a refusal.
+    - `CacheReadInputTokens int64`
 
-One of the following:
+      The number of input tokens read from the cache.
 
-const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"
+      minimum: 0
 
-const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"
+    - `InferenceGeo string`
 
-const RefusalStopDetailsCategoryFrontierLLM RefusalStopDetailsCategory = "frontier\_llm"
+      The geographic region where inference was performed for this request.
 
-const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning\_extraction"
+    - `InputTokens int64`
 
-
+      The number of input tokens which were used.
 
-Explanation string
+      minimum: 0
 
-Human-readable explanation of the refusal.
+    - `OutputTokens int64`
 
-This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+      The number of output tokens which were used.
 
-Type Refusal
+      minimum: 0
 
-
+    - `OutputTokensDetails OutputTokensDetails`
 
-StopReason [StopReason](api/messages.md)
+      Breakdown of output tokens by category.
 
-The reason that we stopped.
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
 
-This may be one the following values:
+      - `ThinkingTokens int64`
 
-- `"end_turn"`: the model reached a natural stopping point
-- `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
-- `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
-- `"tool_use"`: the model invoked one or more tools
-- `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
-- `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
 
-In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
-One of the following:
+        default: 0, minimum: 0
 
-const StopReasonEndTurn [StopReason](api/messages.md) = "end\_turn"
+    - `ServerToolUse ServerToolUsage`
 
-const StopReasonMaxTokens [StopReason](api/messages.md) = "max\_tokens"
+      The number of server tool requests.
 
-const StopReasonStopSequence [StopReason](api/messages.md) = "stop\_sequence"
+      - `WebFetchRequests int64`
 
-const StopReasonToolUse [StopReason](api/messages.md) = "tool\_use"
+        The number of web fetch tool requests.
 
-const StopReasonPauseTurn [StopReason](api/messages.md) = "pause\_turn"
+        default: 0, minimum: 0
 
-const StopReasonRefusal [StopReason](api/messages.md) = "refusal"
+      - `WebSearchRequests int64`
 
-
+        The number of web search tool requests.
 
-StopSequence string
+        default: 0, minimum: 0
 
-Which custom stop sequence was generated, if any.
+    - `ServiceTier UsageServiceTier`
 
-This value will be a non-null string if one of your custom stop sequences was generated.
+      If the request used the priority, standard, or batch tier.
 
-
+      - `const UsageServiceTierStandard UsageServiceTier = "standard"`
 
-Type Message
+      - `const UsageServiceTierPriority UsageServiceTier = "priority"`
 
-Object type.
+      - `const UsageServiceTierBatch UsageServiceTier = "batch"`
 
-For Messages, this is always `"message"`.
+- `type MessageStreamEventUnion interface{…}`
 
-
+  - `type MessageStartEvent struct{…}`
 
-Usage [Usage](api/messages.md)
+    - `Message Message`
 
-Billing and rate-limit usage.
+    - `Type MessageStart`
 
-Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+      default: message_start
 
-Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+  - `type MessageDeltaEvent struct{…}`
 
-For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+    - `Delta MessageDeltaEventDelta`
 
-Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+      - `Container Container`
 
-
+        Information about the container used in the request (for the code execution tool)
 
-CacheCreation [CacheCreation](api/messages.md)
+      - `StopDetails RefusalStopDetails`
 
-Breakdown of cached tokens by TTL
+        Structured information about a refusal.
 
-Ephemeral1hInputTokens int64
+      - `StopReason StopReason`
 
-The number of input tokens used to create the 1 hour cache entry.
+      - `StopSequence string`
 
-Ephemeral5mInputTokens int64
+    - `Type MessageDelta`
 
-The number of input tokens used to create the 5 minute cache entry.
+      default: message_delta
 
-CacheCreationInputTokens int64
+    - `Usage MessageDeltaUsage`
 
-The number of input tokens used to create the cache entry.
+      Billing and rate-limit usage.
 
-CacheReadInputTokens int64
+      Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
 
-The number of input tokens read from the cache.
+      Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
 
-InferenceGeo string
+      For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
 
-The geographic region where inference was performed for this request.
+      Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-InputTokens int64
+      - `CacheCreationInputTokens int64`
 
-The number of input tokens which were used.
+        The cumulative number of input tokens used to create the cache entry.
 
-OutputTokens int64
+        minimum: 0
 
-The number of output tokens which were used.
+      - `CacheReadInputTokens int64`
 
-
+        The cumulative number of input tokens read from the cache.
 
-OutputTokensDetails [OutputTokensDetails](api/messages.md)
+        minimum: 0
 
-Breakdown of output tokens by category.
+      - `InputTokens int64`
 
-`output_tokens` remains the inclusive, authoritative total used for billing.
-This object provides a read-only decomposition for observability — for example,
-how many of the billed output tokens were spent on internal reasoning that may
-have been summarized before being returned to you.
+        The cumulative number of input tokens which were used.
 
-
+        minimum: 0
 
-ThinkingTokens int64
+      - `OutputTokens int64`
 
-Number of output tokens the model generated as internal reasoning, including
-the thinking-block delimiter tokens.
+        The cumulative number of output tokens which were used.
 
-Reflects the raw reasoning the model produced, not the (possibly shorter)
-summarized thinking text returned in the response body. Computed by
-re-tokenizing the raw reasoning text, so it may differ from the model's exact
-generation count by a small number of tokens. Always ≤ `output_tokens`;
-`output_tokens - thinking_tokens` approximates the non-reasoning output.
+      - `OutputTokensDetails OutputTokensDetails`
 
-minimum0
+        Breakdown of output tokens by category.
 
-
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
 
-ServerToolUse [ServerToolUsage](api/messages.md)
+      - `ServerToolUse ServerToolUsage`
 
-The number of server tool requests.
+        The number of server tool requests.
 
-WebFetchRequests int64
+  - `type MessageStopEvent struct{…}`
 
-The number of web fetch tool requests.
+    - `Type MessageStop`
 
-WebSearchRequests int64
+      default: message_stop
 
-The number of web search tool requests.
+  - `type ContentBlockStartEvent struct{…}`
 
-
+    - `ContentBlock ContentBlockStartEventContentBlockUnion`
 
-ServiceTier UsageServiceTier
+      Response model for a file uploaded to the container.
 
-If the request used the priority, standard, or batch tier.
+      - `type TextBlock struct{…}`
 
-One of the following:
+      - `type ThinkingBlock struct{…}`
 
-const UsageServiceTierStandard UsageServiceTier = "standard"
+      - `type RedactedThinkingBlock struct{…}`
 
-const UsageServiceTierPriority UsageServiceTier = "priority"
+      - `type ToolUseBlock struct{…}`
 
-const UsageServiceTierBatch UsageServiceTier = "batch"
+      - `type ServerToolUseBlock struct{…}`
 
-
+      - `type WebSearchToolResultBlock struct{…}`
 
-type MessageStreamEventUnion interface{…}
+      - `type WebFetchToolResultBlock struct{…}`
 
-One of the following:
+      - `type CodeExecutionToolResultBlock struct{…}`
 
-
+      - `type BashCodeExecutionToolResultBlock struct{…}`
 
-type MessageStartEvent struct{…}
+      - `type TextEditorCodeExecutionToolResultBlock struct{…}`
 
-
+      - `type ToolSearchToolResultBlock struct{…}`
 
-Message [Message](api/messages.md)
+      - `type ContainerUploadBlock struct{…}`
 
-
+        Response model for a file uploaded to the container.
 
-ID string
+    - `Index int64`
 
-Unique object identifier.
+    - `Type ContentBlockStart`
 
-The format and length of IDs may change over time.
+      default: content_block_start
 
-
+  - `type ContentBlockDeltaEvent struct{…}`
 
-Container [Container](api/messages.md)
+    - `Delta RawContentBlockDeltaUnion`
 
-Information about the container used in the request (for the code execution tool)
+      - `type TextDelta struct{…}`
 
-ID string
+        - `Text string`
 
-Identifier for the container used in this request
+        - `Type TextDelta`
 
-ExpiresAt Time
+          default: text_delta
 
-The time at which the container will expire.
+      - `type InputJSONDelta struct{…}`
 
-
+        - `PartialJSON string`
 
-Content [][ContentBlockUnion](api/messages.md)
+        - `Type InputJSONDelta`
 
-Content generated by the model.
+          default: input_json_delta
 
-This is an array of content blocks, each of which has a `type` that determines its shape.
+      - `type CitationsDelta struct{…}`
 
-Example:
+        - `Citation CitationsDeltaCitationUnion`
 
-```shiki
-[{"type": "text", "text": "Hi, I'm Claude."}]
-```
+          - `type CitationCharLocation struct{…}`
 
-
+          - `type CitationPageLocation struct{…}`
 
-If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
+          - `type CitationContentBlockLocation struct{…}`
 
-For example, if the input `messages` were:
+          - `type CitationsWebSearchResultLocation struct{…}`
 
-```shiki
-[
-  {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-  {"role": "assistant", "content": "The best answer is ("}
-]
-```
+          - `type CitationsSearchResultLocation struct{…}`
 
-
+        - `Type CitationsDelta`
 
-Then the response `content` might be:
+          default: citations_delta
 
-```shiki
-[{"type": "text", "text": "B)"}]
-```
+      - `type ThinkingDelta struct{…}`
 
-
+        - `Thinking string`
 
-One of the following:
+          The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-
+        - `Type ThinkingDelta`
 
-type TextBlock struct{…}
+          default: thinking_delta
 
-
+      - `type SignatureDelta struct{…}`
 
-Citations [][TextCitationUnion](api/messages.md)
+        - `Signature string`
 
-Citations supporting the text block.
+          The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
+        - `Type SignatureDelta`
 
-One of the following:
+          default: signature_delta
 
-
+    - `Index int64`
 
-type CitationCharLocation struct{…}
+    - `Type ContentBlockDelta`
 
-CitedText string
+      default: content_block_delta
 
-DocumentIndex int64
+  - `type ContentBlockStopEvent struct{…}`
 
-DocumentTitle string
+    - `Index int64`
 
-EndCharIndex int64
+    - `Type ContentBlockStop`
 
-FileID string
+      default: content_block_stop
 
-StartCharIndex int64
+## Example
 
-Type CharLocation
-
-
-
-type CitationPageLocation struct{…}
-
-CitedText string
-
-DocumentIndex int64
-
-DocumentTitle string
-
-EndPageNumber int64
-
-FileID string
-
-StartPageNumber int64
-
-Type PageLocation
-
-
-
-type CitationContentBlockLocation struct{…}
-
-
-
-CitedText string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-DocumentIndex int64
-
-DocumentTitle string
-
-
-
-EndBlockIndex int64
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-FileID string
-
-StartBlockIndex int64
-
-0-based index of the first cited block in the source's `content` array.
-
-Type ContentBlockLocation
-
-
-
-type CitationsWebSearchResultLocation struct{…}
-
-CitedText string
-
-EncryptedIndex string
-
-Title string
-
-Type WebSearchResultLocation
-
-URL string
-
-
-
-type CitationsSearchResultLocation struct{…}
-
-
-
-CitedText string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-EndBlockIndex int64
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-SearchResultIndex int64
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-Source string
-
-StartBlockIndex int64
-
-0-based index of the first cited block in the source's `content` array.
-
-Title string
-
-Type SearchResultLocation
-
-Text string
-
-Type Text
-
-
-
-type ThinkingBlock struct{…}
-
-Signature string
-
-Thinking string
-
-Type Thinking
-
-
-
-type RedactedThinkingBlock struct{…}
-
-Data string
-
-Type RedactedThinking
-
-
-
-type ToolUseBlock struct{…}
-
-ID string
-
-
-
-Caller ToolUseBlockCallerUnion
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-type DirectCaller struct{…}
-
-Tool invocation directly from the model.
-
-Type Direct
-
-
-
-type ServerToolCaller struct{…}
-
-Tool invocation generated by a server-side tool.
-
-ToolID string
-
-Type CodeExecution20250825
-
-
-
-type ServerToolCaller20260120 struct{…}
-
-ToolID string
-
-Type CodeExecution20260120
-
-Input map[string, any]
-
-Name string
-
-Type ToolUse
-
-
-
-type ServerToolUseBlock struct{…}
-
-ID string
-
-
-
-Caller ServerToolUseBlockCallerUnion
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-type DirectCaller struct{…}
-
-Tool invocation directly from the model.
-
-Type Direct
-
-
-
-type ServerToolCaller struct{…}
-
-Tool invocation generated by a server-side tool.
-
-ToolID string
-
-Type CodeExecution20250825
-
-
-
-type ServerToolCaller20260120 struct{…}
-
-ToolID string
-
-Type CodeExecution20260120
-
-Input map[string, any]
-
-
-
-Name ServerToolUseBlockName
-
-One of the following:
-
-const ServerToolUseBlockNameWebSearch ServerToolUseBlockName = "web\_search"
-
-const ServerToolUseBlockNameWebFetch ServerToolUseBlockName = "web\_fetch"
-
-const ServerToolUseBlockNameCodeExecution ServerToolUseBlockName = "code\_execution"
-
-const ServerToolUseBlockNameBashCodeExecution ServerToolUseBlockName = "bash\_code\_execution"
-
-const ServerToolUseBlockNameTextEditorCodeExecution ServerToolUseBlockName = "text\_editor\_code\_execution"
-
-const ServerToolUseBlockNameToolSearchToolRegex ServerToolUseBlockName = "tool\_search\_tool\_regex"
-
-const ServerToolUseBlockNameToolSearchToolBm25 ServerToolUseBlockName = "tool\_search\_tool\_bm25"
-
-Type ServerToolUse
-
-
-
-type WebSearchToolResultBlock struct{…}
-
-
-
-Caller WebSearchToolResultBlockCallerUnion
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-type DirectCaller struct{…}
-
-Tool invocation directly from the model.
-
-Type Direct
-
-
-
-type ServerToolCaller struct{…}
-
-Tool invocation generated by a server-side tool.
-
-ToolID string
-
-Type CodeExecution20250825
-
-
-
-type ServerToolCaller20260120 struct{…}
-
-ToolID string
-
-Type CodeExecution20260120
-
-
-
-Content [WebSearchToolResultBlockContentUnion](api/messages.md)
-
-One of the following:
-
-
-
-type WebSearchToolResultError struct{…}
-
-
-
-ErrorCode [WebSearchToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-const WebSearchToolResultErrorCodeInvalidToolInput [WebSearchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
-
-const WebSearchToolResultErrorCodeUnavailable [WebSearchToolResultErrorCode](api/messages.md) = "unavailable"
-
-const WebSearchToolResultErrorCodeMaxUsesExceeded [WebSearchToolResultErrorCode](api/messages.md) = "max\_uses\_exceeded"
-
-const WebSearchToolResultErrorCodeTooManyRequests [WebSearchToolResultErrorCode](api/messages.md) = "too\_many\_requests"
-
-const WebSearchToolResultErrorCodeQueryTooLong [WebSearchToolResultErrorCode](api/messages.md) = "query\_too\_long"
-
-const WebSearchToolResultErrorCodeRequestTooLarge [WebSearchToolResultErrorCode](api/messages.md) = "request\_too\_large"
-
-Type WebSearchToolResultError
-
-
-
-type WebSearchToolResultBlockContentArray [][WebSearchResultBlock](api/messages.md)
-
-EncryptedContent string
-
-PageAge string
-
-Title string
-
-Type WebSearchResult
-
-URL string
-
-ToolUseID string
-
-Type WebSearchToolResult
-
-
-
-type WebFetchToolResultBlock struct{…}
-
-
-
-Caller WebFetchToolResultBlockCallerUnion
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-type DirectCaller struct{…}
-
-Tool invocation directly from the model.
-
-Type Direct
-
-
-
-type ServerToolCaller struct{…}
-
-Tool invocation generated by a server-side tool.
-
-ToolID string
-
-Type CodeExecution20250825
-
-
-
-type ServerToolCaller20260120 struct{…}
-
-ToolID string
-
-Type CodeExecution20260120
-
-
-
-Content WebFetchToolResultBlockContentUnion
-
-One of the following:
-
-
-
-type WebFetchToolResultErrorBlock struct{…}
-
-
-
-ErrorCode [WebFetchToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-const WebFetchToolResultErrorCodeInvalidToolInput [WebFetchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
-
-const WebFetchToolResultErrorCodeURLTooLong [WebFetchToolResultErrorCode](api/messages.md) = "url\_too\_long"
-
-const WebFetchToolResultErrorCodeURLNotAllowed [WebFetchToolResultErrorCode](api/messages.md) = "url\_not\_allowed"
-
-const WebFetchToolResultErrorCodeURLNotInPriorContext [WebFetchToolResultErrorCode](api/messages.md) = "url\_not\_in\_prior\_context"
-
-const WebFetchToolResultErrorCodeURLNotAccessible [WebFetchToolResultErrorCode](api/messages.md) = "url\_not\_accessible"
-
-const WebFetchToolResultErrorCodeUnsupportedContentType [WebFetchToolResultErrorCode](api/messages.md) = "unsupported\_content\_type"
-
-const WebFetchToolResultErrorCodeTooManyRequests [WebFetchToolResultErrorCode](api/messages.md) = "too\_many\_requests"
-
-const WebFetchToolResultErrorCodeMaxUsesExceeded [WebFetchToolResultErrorCode](api/messages.md) = "max\_uses\_exceeded"
-
-const WebFetchToolResultErrorCodeUnavailable [WebFetchToolResultErrorCode](api/messages.md) = "unavailable"
-
-Type WebFetchToolResultError
-
-
-
-type WebFetchBlock struct{…}
-
-
-
-Content [DocumentBlock](api/messages.md)
-
-
-
-Citations [CitationsConfig](api/messages.md)
-
-Citation configuration for the document
-
-Enabled bool
-
-
-
-Source DocumentBlockSourceUnion
-
-One of the following:
-
-
-
-type Base64PDFSource struct{…}
-
-Data string
-
-MediaType ApplicationPDF
-
-Type Base64
-
-
-
-type PlainTextSource struct{…}
-
-Data string
-
-MediaType TextPlain
-
-Type Text
-
-Title string
-
-The title of the document
-
-Type Document
-
-RetrievedAt string
-
-ISO 8601 timestamp when the content was retrieved
-
-Type WebFetchResult
-
-URL string
-
-Fetched content URL
-
-ToolUseID string
-
-Type WebFetchToolResult
-
-
-
-type CodeExecutionToolResultBlock struct{…}
-
-
-
-Content [CodeExecutionToolResultBlockContentUnion](api/messages.md)
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-One of the following:
-
-
-
-type CodeExecutionToolResultError struct{…}
-
-
-
-ErrorCode [CodeExecutionToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-const CodeExecutionToolResultErrorCodeInvalidToolInput [CodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
-
-const CodeExecutionToolResultErrorCodeUnavailable [CodeExecutionToolResultErrorCode](api/messages.md) = "unavailable"
-
-const CodeExecutionToolResultErrorCodeTooManyRequests [CodeExecutionToolResultErrorCode](api/messages.md) = "too\_many\_requests"
-
-const CodeExecutionToolResultErrorCodeExecutionTimeExceeded [CodeExecutionToolResultErrorCode](api/messages.md) = "execution\_time\_exceeded"
-
-Type CodeExecutionToolResultError
-
-
-
-type CodeExecutionResultBlock struct{…}
-
-
-
-Content [][CodeExecutionOutputBlock](api/messages.md)
-
-FileID string
-
-Type CodeExecutionOutput
-
-ReturnCode int64
-
-Stderr string
-
-Stdout string
-
-Type CodeExecutionResult
-
-
-
-type EncryptedCodeExecutionResultBlock struct{…}
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-
-
-Content [][CodeExecutionOutputBlock](api/messages.md)
-
-FileID string
-
-Type CodeExecutionOutput
-
-EncryptedStdout string
-
-ReturnCode int64
-
-Stderr string
-
-Type EncryptedCodeExecutionResult
-
-ToolUseID string
-
-Type CodeExecutionToolResult
-
-
-
-type BashCodeExecutionToolResultBlock struct{…}
-
-
-
-Content BashCodeExecutionToolResultBlockContentUnion
-
-One of the following:
-
-
-
-type BashCodeExecutionToolResultError struct{…}
-
-
-
-ErrorCode [BashCodeExecutionToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-const BashCodeExecutionToolResultErrorCodeInvalidToolInput [BashCodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
-
-const BashCodeExecutionToolResultErrorCodeUnavailable [BashCodeExecutionToolResultErrorCode](api/messages.md) = "unavailable"
-
-const BashCodeExecutionToolResultErrorCodeTooManyRequests [BashCodeExecutionToolResultErrorCode](api/messages.md) = "too\_many\_requests"
-
-const BashCodeExecutionToolResultErrorCodeExecutionTimeExceeded [BashCodeExecutionToolResultErrorCode](api/messages.md) = "execution\_time\_exceeded"
-
-const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge [BashCodeExecutionToolResultErrorCode](api/messages.md) = "output\_file\_too\_large"
-
-Type BashCodeExecutionToolResultError
-
-
-
-type BashCodeExecutionResultBlock struct{…}
-
-
-
-Content [][BashCodeExecutionOutputBlock](api/messages.md)
-
-FileID string
-
-Type BashCodeExecutionOutput
-
-ReturnCode int64
-
-Stderr string
-
-Stdout string
-
-Type BashCodeExecutionResult
-
-ToolUseID string
-
-Type BashCodeExecutionToolResult
-
-
-
-type TextEditorCodeExecutionToolResultBlock struct{…}
-
-
-
-Content TextEditorCodeExecutionToolResultBlockContentUnion
-
-One of the following:
-
-
-
-type TextEditorCodeExecutionToolResultError struct{…}
-
-
-
-ErrorCode [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-const TextEditorCodeExecutionToolResultErrorCodeInvalidToolInput [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
-
-const TextEditorCodeExecutionToolResultErrorCodeUnavailable [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "unavailable"
-
-const TextEditorCodeExecutionToolResultErrorCodeTooManyRequests [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "too\_many\_requests"
-
-const TextEditorCodeExecutionToolResultErrorCodeExecutionTimeExceeded [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "execution\_time\_exceeded"
-
-const TextEditorCodeExecutionToolResultErrorCodeFileNotFound [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "file\_not\_found"
-
-ErrorMessage string
-
-Type TextEditorCodeExecutionToolResultError
-
-
-
-type TextEditorCodeExecutionViewResultBlock struct{…}
-
-Content string
-
-
-
-FileType TextEditorCodeExecutionViewResultBlockFileType
-
-One of the following:
-
-const TextEditorCodeExecutionViewResultBlockFileTypeText TextEditorCodeExecutionViewResultBlockFileType = "text"
-
-const TextEditorCodeExecutionViewResultBlockFileTypeImage TextEditorCodeExecutionViewResultBlockFileType = "image"
-
-const TextEditorCodeExecutionViewResultBlockFileTypePDF TextEditorCodeExecutionViewResultBlockFileType = "pdf"
-
-NumLines int64
-
-StartLine int64
-
-TotalLines int64
-
-Type TextEditorCodeExecutionViewResult
-
-
-
-type TextEditorCodeExecutionCreateResultBlock struct{…}
-
-IsFileUpdate bool
-
-Type TextEditorCodeExecutionCreateResult
-
-
-
-type TextEditorCodeExecutionStrReplaceResultBlock struct{…}
-
-Lines []string
-
-NewLines int64
-
-NewStart int64
-
-OldLines int64
-
-OldStart int64
-
-Type TextEditorCodeExecutionStrReplaceResult
-
-ToolUseID string
-
-Type TextEditorCodeExecutionToolResult
-
-
-
-type ToolSearchToolResultBlock struct{…}
-
-
-
-Content ToolSearchToolResultBlockContentUnion
-
-One of the following:
-
-
-
-type ToolSearchToolResultError struct{…}
-
-
-
-ErrorCode [ToolSearchToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-const ToolSearchToolResultErrorCodeInvalidToolInput [ToolSearchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
-
-const ToolSearchToolResultErrorCodeUnavailable [ToolSearchToolResultErrorCode](api/messages.md) = "unavailable"
-
-const ToolSearchToolResultErrorCodeTooManyRequests [ToolSearchToolResultErrorCode](api/messages.md) = "too\_many\_requests"
-
-const ToolSearchToolResultErrorCodeExecutionTimeExceeded [ToolSearchToolResultErrorCode](api/messages.md) = "execution\_time\_exceeded"
-
-ErrorMessage string
-
-Type ToolSearchToolResultError
-
-
-
-type ToolSearchToolSearchResultBlock struct{…}
-
-
-
-ToolReferences [][ToolReferenceBlock](api/messages.md)
-
-ToolName string
-
-Type ToolReference
-
-Type ToolSearchToolSearchResult
-
-ToolUseID string
-
-Type ToolSearchToolResult
-
-
-
-type ContainerUploadBlock struct{…}
-
-Response model for a file uploaded to the container.
-
-FileID string
-
-Type ContainerUpload
-
-
-
-Model Model
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-
-
-type Model string
-
-The model that will complete your prompt.
-
-See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-One of the following:
-
-const ModelClaudeSonnet5 Model = "claude-sonnet-5"
-
-High-performance model for coding and agents
-
-const ModelClaudeFable5 Model = "claude-fable-5"
-
-Next generation of intelligence for the hardest knowledge work and coding problems
-
-const ModelClaudeMythos5 Model = "claude-mythos-5"
-
-Most capable model for cybersecurity and biology research
-
-const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
-
-Frontier intelligence for long-running agents and coding
-
-const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
-
-Frontier intelligence for long-running agents and coding
-
-const ModelClaudeMythosPreview Model = "claude-mythos-preview"
-
-New class of intelligence, strongest in coding and cybersecurity
-
-const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
-
-Frontier intelligence for long-running agents and coding
-
-const ModelClaudeSonnet4\_6 Model = "claude-sonnet-4-6"
-
-Best combination of speed and intelligence
-
-const ModelClaudeHaiku4\_5 Model = "claude-haiku-4-5"
-
-Fastest model with near-frontier intelligence
-
-const ModelClaudeHaiku4\_5\_20251001 Model = "claude-haiku-4-5-20251001"
-
-Fastest model with near-frontier intelligence
-
-const ModelClaudeOpus4\_5 Model = "claude-opus-4-5"
-
-Premium model combining maximum intelligence with practical performance
-
-const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
-
-Premium model combining maximum intelligence with practical performance
-
-const ModelClaudeSonnet4\_5 Model = "claude-sonnet-4-5"
-
-High-performance model for agents and coding
-
-const ModelClaudeSonnet4\_5\_20250929 Model = "claude-sonnet-4-5-20250929"
-
-High-performance model for agents and coding
-
-const ModelClaudeOpus4\_1 Model = "claude-opus-4-1"
-
-Exceptional model for specialized complex tasks
-
-const ModelClaudeOpus4\_1\_20250805 Model = "claude-opus-4-1-20250805"
-
-Exceptional model for specialized complex tasks
-
-string
-
-
-
-Role Assistant
-
-Conversational role of the generated message.
-
-This will always be `"assistant"`.
-
-
-
-StopDetails [RefusalStopDetails](api/messages.md)
-
-Structured information about a refusal.
-
-
-
-Category RefusalStopDetailsCategory
-
-The policy category that triggered a refusal.
-
-One of the following:
-
-const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"
-
-const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"
-
-const RefusalStopDetailsCategoryFrontierLLM RefusalStopDetailsCategory = "frontier\_llm"
-
-const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning\_extraction"
-
-
-
-Explanation string
-
-Human-readable explanation of the refusal.
-
-This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-Type Refusal
-
-
-
-StopReason [StopReason](api/messages.md)
-
-The reason that we stopped.
-
-This may be one the following values:
-
-- `"end_turn"`: the model reached a natural stopping point
-- `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
-- `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
-- `"tool_use"`: the model invoked one or more tools
-- `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
-- `"refusal"`: when streaming classifiers intervene to handle potential policy violations
-
-In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
-
-One of the following:
-
-const StopReasonEndTurn [StopReason](api/messages.md) = "end\_turn"
-
-const StopReasonMaxTokens [StopReason](api/messages.md) = "max\_tokens"
-
-const StopReasonStopSequence [StopReason](api/messages.md) = "stop\_sequence"
-
-const StopReasonToolUse [StopReason](api/messages.md) = "tool\_use"
-
-const StopReasonPauseTurn [StopReason](api/messages.md) = "pause\_turn"
-
-const StopReasonRefusal [StopReason](api/messages.md) = "refusal"
-
-
-
-StopSequence string
-
-Which custom stop sequence was generated, if any.
-
-This value will be a non-null string if one of your custom stop sequences was generated.
-
-
-
-Type Message
-
-Object type.
-
-For Messages, this is always `"message"`.
-
-
-
-Usage [Usage](api/messages.md)
-
-Billing and rate-limit usage.
-
-Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
-
-Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
-
-For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
-
-Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
-
-
-
-CacheCreation [CacheCreation](api/messages.md)
-
-Breakdown of cached tokens by TTL
-
-Ephemeral1hInputTokens int64
-
-The number of input tokens used to create the 1 hour cache entry.
-
-Ephemeral5mInputTokens int64
-
-The number of input tokens used to create the 5 minute cache entry.
-
-CacheCreationInputTokens int64
-
-The number of input tokens used to create the cache entry.
-
-CacheReadInputTokens int64
-
-The number of input tokens read from the cache.
-
-InferenceGeo string
-
-The geographic region where inference was performed for this request.
-
-InputTokens int64
-
-The number of input tokens which were used.
-
-OutputTokens int64
-
-The number of output tokens which were used.
-
-
-
-OutputTokensDetails [OutputTokensDetails](api/messages.md)
-
-Breakdown of output tokens by category.
-
-`output_tokens` remains the inclusive, authoritative total used for billing.
-This object provides a read-only decomposition for observability — for example,
-how many of the billed output tokens were spent on internal reasoning that may
-have been summarized before being returned to you.
-
-
-
-ThinkingTokens int64
-
-Number of output tokens the model generated as internal reasoning, including
-the thinking-block delimiter tokens.
-
-Reflects the raw reasoning the model produced, not the (possibly shorter)
-summarized thinking text returned in the response body. Computed by
-re-tokenizing the raw reasoning text, so it may differ from the model's exact
-generation count by a small number of tokens. Always ≤ `output_tokens`;
-`output_tokens - thinking_tokens` approximates the non-reasoning output.
-
-minimum0
-
-
-
-ServerToolUse [ServerToolUsage](api/messages.md)
-
-The number of server tool requests.
-
-WebFetchRequests int64
-
-The number of web fetch tool requests.
-
-WebSearchRequests int64
-
-The number of web search tool requests.
-
-
-
-ServiceTier UsageServiceTier
-
-If the request used the priority, standard, or batch tier.
-
-One of the following:
-
-const UsageServiceTierStandard UsageServiceTier = "standard"
-
-const UsageServiceTierPriority UsageServiceTier = "priority"
-
-const UsageServiceTierBatch UsageServiceTier = "batch"
-
-Type MessageStart
-
-
-
-type MessageDeltaEvent struct{…}
-
-
-
-Delta MessageDeltaEventDelta
-
-
-
-Container [Container](api/messages.md)
-
-Information about the container used in the request (for the code execution tool)
-
-ID string
-
-Identifier for the container used in this request
-
-ExpiresAt Time
-
-The time at which the container will expire.
-
-
-
-StopDetails [RefusalStopDetails](api/messages.md)
-
-Structured information about a refusal.
-
-
-
-Category RefusalStopDetailsCategory
-
-The policy category that triggered a refusal.
-
-One of the following:
-
-const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"
-
-const RefusalStopDetailsCategoryBio RefusalStopDetailsCategory = "bio"
-
-const RefusalStopDetailsCategoryFrontierLLM RefusalStopDetailsCategory = "frontier\_llm"
-
-const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning\_extraction"
-
-
-
-Explanation string
-
-Human-readable explanation of the refusal.
-
-This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-Type Refusal
-
-
-
-StopReason [StopReason](api/messages.md)
-
-One of the following:
-
-const StopReasonEndTurn [StopReason](api/messages.md) = "end\_turn"
-
-const StopReasonMaxTokens [StopReason](api/messages.md) = "max\_tokens"
-
-const StopReasonStopSequence [StopReason](api/messages.md) = "stop\_sequence"
-
-const StopReasonToolUse [StopReason](api/messages.md) = "tool\_use"
-
-const StopReasonPauseTurn [StopReason](api/messages.md) = "pause\_turn"
-
-const StopReasonRefusal [StopReason](api/messages.md) = "refusal"
-
-StopSequence string
-
-Type MessageDelta
-
-
-
-Usage [MessageDeltaUsage](api/messages.md)
-
-Billing and rate-limit usage.
-
-Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
-
-Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
-
-For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
-
-Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
-
-CacheCreationInputTokens int64
-
-The cumulative number of input tokens used to create the cache entry.
-
-CacheReadInputTokens int64
-
-The cumulative number of input tokens read from the cache.
-
-InputTokens int64
-
-The cumulative number of input tokens which were used.
-
-OutputTokens int64
-
-The cumulative number of output tokens which were used.
-
-
-
-OutputTokensDetails [OutputTokensDetails](api/messages.md)
-
-Breakdown of output tokens by category.
-
-`output_tokens` remains the inclusive, authoritative total used for billing.
-This object provides a read-only decomposition for observability — for example,
-how many of the billed output tokens were spent on internal reasoning that may
-have been summarized before being returned to you.
-
-
-
-ThinkingTokens int64
-
-Number of output tokens the model generated as internal reasoning, including
-the thinking-block delimiter tokens.
-
-Reflects the raw reasoning the model produced, not the (possibly shorter)
-summarized thinking text returned in the response body. Computed by
-re-tokenizing the raw reasoning text, so it may differ from the model's exact
-generation count by a small number of tokens. Always ≤ `output_tokens`;
-`output_tokens - thinking_tokens` approximates the non-reasoning output.
-
-minimum0
-
-
-
-ServerToolUse [ServerToolUsage](api/messages.md)
-
-The number of server tool requests.
-
-WebFetchRequests int64
-
-The number of web fetch tool requests.
-
-WebSearchRequests int64
-
-The number of web search tool requests.
-
-
-
-type MessageStopEvent struct{…}
-
-Type MessageStop
-
-
-
-type ContentBlockStartEvent struct{…}
-
-
-
-ContentBlock ContentBlockStartEventContentBlockUnion
-
-Response model for a file uploaded to the container.
-
-One of the following:
-
-
-
-type TextBlock struct{…}
-
-
-
-Citations [][TextCitationUnion](api/messages.md)
-
-Citations supporting the text block.
-
-The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-One of the following:
-
-
-
-type CitationCharLocation struct{…}
-
-CitedText string
-
-DocumentIndex int64
-
-DocumentTitle string
-
-EndCharIndex int64
-
-FileID string
-
-StartCharIndex int64
-
-Type CharLocation
-
-
-
-type CitationPageLocation struct{…}
-
-CitedText string
-
-DocumentIndex int64
-
-DocumentTitle string
-
-EndPageNumber int64
-
-FileID string
-
-StartPageNumber int64
-
-Type PageLocation
-
-
-
-type CitationContentBlockLocation struct{…}
-
-
-
-CitedText string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-DocumentIndex int64
-
-DocumentTitle string
-
-
-
-EndBlockIndex int64
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-FileID string
-
-StartBlockIndex int64
-
-0-based index of the first cited block in the source's `content` array.
-
-Type ContentBlockLocation
-
-
-
-type CitationsWebSearchResultLocation struct{…}
-
-CitedText string
-
-EncryptedIndex string
-
-Title string
-
-Type WebSearchResultLocation
-
-URL string
-
-
-
-type CitationsSearchResultLocation struct{…}
-
-
-
-CitedText string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-EndBlockIndex int64
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-SearchResultIndex int64
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-Source string
-
-StartBlockIndex int64
-
-0-based index of the first cited block in the source's `content` array.
-
-Title string
-
-Type SearchResultLocation
-
-Text string
-
-Type Text
-
-
-
-type ThinkingBlock struct{…}
-
-Signature string
-
-Thinking string
-
-Type Thinking
-
-
-
-type RedactedThinkingBlock struct{…}
-
-Data string
-
-Type RedactedThinking
-
-
-
-type ToolUseBlock struct{…}
-
-ID string
-
-
-
-Caller ToolUseBlockCallerUnion
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-type DirectCaller struct{…}
-
-Tool invocation directly from the model.
-
-Type Direct
-
-
-
-type ServerToolCaller struct{…}
-
-Tool invocation generated by a server-side tool.
-
-ToolID string
-
-Type CodeExecution20250825
-
-
-
-type ServerToolCaller20260120 struct{…}
-
-ToolID string
-
-Type CodeExecution20260120
-
-Input map[string, any]
-
-Name string
-
-Type ToolUse
-
-
-
-type ServerToolUseBlock struct{…}
-
-ID string
-
-
-
-Caller ServerToolUseBlockCallerUnion
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-type DirectCaller struct{…}
-
-Tool invocation directly from the model.
-
-Type Direct
-
-
-
-type ServerToolCaller struct{…}
-
-Tool invocation generated by a server-side tool.
-
-ToolID string
-
-Type CodeExecution20250825
-
-
-
-type ServerToolCaller20260120 struct{…}
-
-ToolID string
-
-Type CodeExecution20260120
-
-Input map[string, any]
-
-
-
-Name ServerToolUseBlockName
-
-One of the following:
-
-const ServerToolUseBlockNameWebSearch ServerToolUseBlockName = "web\_search"
-
-const ServerToolUseBlockNameWebFetch ServerToolUseBlockName = "web\_fetch"
-
-const ServerToolUseBlockNameCodeExecution ServerToolUseBlockName = "code\_execution"
-
-const ServerToolUseBlockNameBashCodeExecution ServerToolUseBlockName = "bash\_code\_execution"
-
-const ServerToolUseBlockNameTextEditorCodeExecution ServerToolUseBlockName = "text\_editor\_code\_execution"
-
-const ServerToolUseBlockNameToolSearchToolRegex ServerToolUseBlockName = "tool\_search\_tool\_regex"
-
-const ServerToolUseBlockNameToolSearchToolBm25 ServerToolUseBlockName = "tool\_search\_tool\_bm25"
-
-Type ServerToolUse
-
-
-
-type WebSearchToolResultBlock struct{…}
-
-
-
-Caller WebSearchToolResultBlockCallerUnion
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-type DirectCaller struct{…}
-
-Tool invocation directly from the model.
-
-Type Direct
-
-
-
-type ServerToolCaller struct{…}
-
-Tool invocation generated by a server-side tool.
-
-ToolID string
-
-Type CodeExecution20250825
-
-
-
-type ServerToolCaller20260120 struct{…}
-
-ToolID string
-
-Type CodeExecution20260120
-
-
-
-Content [WebSearchToolResultBlockContentUnion](api/messages.md)
-
-One of the following:
-
-
-
-type WebSearchToolResultError struct{…}
-
-
-
-ErrorCode [WebSearchToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-const WebSearchToolResultErrorCodeInvalidToolInput [WebSearchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
-
-const WebSearchToolResultErrorCodeUnavailable [WebSearchToolResultErrorCode](api/messages.md) = "unavailable"
-
-const WebSearchToolResultErrorCodeMaxUsesExceeded [WebSearchToolResultErrorCode](api/messages.md) = "max\_uses\_exceeded"
-
-const WebSearchToolResultErrorCodeTooManyRequests [WebSearchToolResultErrorCode](api/messages.md) = "too\_many\_requests"
-
-const WebSearchToolResultErrorCodeQueryTooLong [WebSearchToolResultErrorCode](api/messages.md) = "query\_too\_long"
-
-const WebSearchToolResultErrorCodeRequestTooLarge [WebSearchToolResultErrorCode](api/messages.md) = "request\_too\_large"
-
-Type WebSearchToolResultError
-
-
-
-type WebSearchToolResultBlockContentArray [][WebSearchResultBlock](api/messages.md)
-
-EncryptedContent string
-
-PageAge string
-
-Title string
-
-Type WebSearchResult
-
-URL string
-
-ToolUseID string
-
-Type WebSearchToolResult
-
-
-
-type WebFetchToolResultBlock struct{…}
-
-
-
-Caller WebFetchToolResultBlockCallerUnion
-
-Tool invocation directly from the model.
-
-One of the following:
-
-
-
-type DirectCaller struct{…}
-
-Tool invocation directly from the model.
-
-Type Direct
-
-
-
-type ServerToolCaller struct{…}
-
-Tool invocation generated by a server-side tool.
-
-ToolID string
-
-Type CodeExecution20250825
-
-
-
-type ServerToolCaller20260120 struct{…}
-
-ToolID string
-
-Type CodeExecution20260120
-
-
-
-Content WebFetchToolResultBlockContentUnion
-
-One of the following:
-
-
-
-type WebFetchToolResultErrorBlock struct{…}
-
-
-
-ErrorCode [WebFetchToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-const WebFetchToolResultErrorCodeInvalidToolInput [WebFetchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
-
-const WebFetchToolResultErrorCodeURLTooLong [WebFetchToolResultErrorCode](api/messages.md) = "url\_too\_long"
-
-const WebFetchToolResultErrorCodeURLNotAllowed [WebFetchToolResultErrorCode](api/messages.md) = "url\_not\_allowed"
-
-const WebFetchToolResultErrorCodeURLNotInPriorContext [WebFetchToolResultErrorCode](api/messages.md) = "url\_not\_in\_prior\_context"
-
-const WebFetchToolResultErrorCodeURLNotAccessible [WebFetchToolResultErrorCode](api/messages.md) = "url\_not\_accessible"
-
-const WebFetchToolResultErrorCodeUnsupportedContentType [WebFetchToolResultErrorCode](api/messages.md) = "unsupported\_content\_type"
-
-const WebFetchToolResultErrorCodeTooManyRequests [WebFetchToolResultErrorCode](api/messages.md) = "too\_many\_requests"
-
-const WebFetchToolResultErrorCodeMaxUsesExceeded [WebFetchToolResultErrorCode](api/messages.md) = "max\_uses\_exceeded"
-
-const WebFetchToolResultErrorCodeUnavailable [WebFetchToolResultErrorCode](api/messages.md) = "unavailable"
-
-Type WebFetchToolResultError
-
-
-
-type WebFetchBlock struct{…}
-
-
-
-Content [DocumentBlock](api/messages.md)
-
-
-
-Citations [CitationsConfig](api/messages.md)
-
-Citation configuration for the document
-
-Enabled bool
-
-
-
-Source DocumentBlockSourceUnion
-
-One of the following:
-
-
-
-type Base64PDFSource struct{…}
-
-Data string
-
-MediaType ApplicationPDF
-
-Type Base64
-
-
-
-type PlainTextSource struct{…}
-
-Data string
-
-MediaType TextPlain
-
-Type Text
-
-Title string
-
-The title of the document
-
-Type Document
-
-RetrievedAt string
-
-ISO 8601 timestamp when the content was retrieved
-
-Type WebFetchResult
-
-URL string
-
-Fetched content URL
-
-ToolUseID string
-
-Type WebFetchToolResult
-
-
-
-type CodeExecutionToolResultBlock struct{…}
-
-
-
-Content [CodeExecutionToolResultBlockContentUnion](api/messages.md)
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-One of the following:
-
-
-
-type CodeExecutionToolResultError struct{…}
-
-
-
-ErrorCode [CodeExecutionToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-const CodeExecutionToolResultErrorCodeInvalidToolInput [CodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
-
-const CodeExecutionToolResultErrorCodeUnavailable [CodeExecutionToolResultErrorCode](api/messages.md) = "unavailable"
-
-const CodeExecutionToolResultErrorCodeTooManyRequests [CodeExecutionToolResultErrorCode](api/messages.md) = "too\_many\_requests"
-
-const CodeExecutionToolResultErrorCodeExecutionTimeExceeded [CodeExecutionToolResultErrorCode](api/messages.md) = "execution\_time\_exceeded"
-
-Type CodeExecutionToolResultError
-
-
-
-type CodeExecutionResultBlock struct{…}
-
-
-
-Content [][CodeExecutionOutputBlock](api/messages.md)
-
-FileID string
-
-Type CodeExecutionOutput
-
-ReturnCode int64
-
-Stderr string
-
-Stdout string
-
-Type CodeExecutionResult
-
-
-
-type EncryptedCodeExecutionResultBlock struct{…}
-
-Code execution result with encrypted stdout for PFC + web\_search results.
-
-
-
-Content [][CodeExecutionOutputBlock](api/messages.md)
-
-FileID string
-
-Type CodeExecutionOutput
-
-EncryptedStdout string
-
-ReturnCode int64
-
-Stderr string
-
-Type EncryptedCodeExecutionResult
-
-ToolUseID string
-
-Type CodeExecutionToolResult
-
-
-
-type BashCodeExecutionToolResultBlock struct{…}
-
-
-
-Content BashCodeExecutionToolResultBlockContentUnion
-
-One of the following:
-
-
-
-type BashCodeExecutionToolResultError struct{…}
-
-
-
-ErrorCode [BashCodeExecutionToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-const BashCodeExecutionToolResultErrorCodeInvalidToolInput [BashCodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
-
-const BashCodeExecutionToolResultErrorCodeUnavailable [BashCodeExecutionToolResultErrorCode](api/messages.md) = "unavailable"
-
-const BashCodeExecutionToolResultErrorCodeTooManyRequests [BashCodeExecutionToolResultErrorCode](api/messages.md) = "too\_many\_requests"
-
-const BashCodeExecutionToolResultErrorCodeExecutionTimeExceeded [BashCodeExecutionToolResultErrorCode](api/messages.md) = "execution\_time\_exceeded"
-
-const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge [BashCodeExecutionToolResultErrorCode](api/messages.md) = "output\_file\_too\_large"
-
-Type BashCodeExecutionToolResultError
-
-
-
-type BashCodeExecutionResultBlock struct{…}
-
-
-
-Content [][BashCodeExecutionOutputBlock](api/messages.md)
-
-FileID string
-
-Type BashCodeExecutionOutput
-
-ReturnCode int64
-
-Stderr string
-
-Stdout string
-
-Type BashCodeExecutionResult
-
-ToolUseID string
-
-Type BashCodeExecutionToolResult
-
-
-
-type TextEditorCodeExecutionToolResultBlock struct{…}
-
-
-
-Content TextEditorCodeExecutionToolResultBlockContentUnion
-
-One of the following:
-
-
-
-type TextEditorCodeExecutionToolResultError struct{…}
-
-
-
-ErrorCode [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-const TextEditorCodeExecutionToolResultErrorCodeInvalidToolInput [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
-
-const TextEditorCodeExecutionToolResultErrorCodeUnavailable [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "unavailable"
-
-const TextEditorCodeExecutionToolResultErrorCodeTooManyRequests [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "too\_many\_requests"
-
-const TextEditorCodeExecutionToolResultErrorCodeExecutionTimeExceeded [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "execution\_time\_exceeded"
-
-const TextEditorCodeExecutionToolResultErrorCodeFileNotFound [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "file\_not\_found"
-
-ErrorMessage string
-
-Type TextEditorCodeExecutionToolResultError
-
-
-
-type TextEditorCodeExecutionViewResultBlock struct{…}
-
-Content string
-
-
-
-FileType TextEditorCodeExecutionViewResultBlockFileType
-
-One of the following:
-
-const TextEditorCodeExecutionViewResultBlockFileTypeText TextEditorCodeExecutionViewResultBlockFileType = "text"
-
-const TextEditorCodeExecutionViewResultBlockFileTypeImage TextEditorCodeExecutionViewResultBlockFileType = "image"
-
-const TextEditorCodeExecutionViewResultBlockFileTypePDF TextEditorCodeExecutionViewResultBlockFileType = "pdf"
-
-NumLines int64
-
-StartLine int64
-
-TotalLines int64
-
-Type TextEditorCodeExecutionViewResult
-
-
-
-type TextEditorCodeExecutionCreateResultBlock struct{…}
-
-IsFileUpdate bool
-
-Type TextEditorCodeExecutionCreateResult
-
-
-
-type TextEditorCodeExecutionStrReplaceResultBlock struct{…}
-
-Lines []string
-
-NewLines int64
-
-NewStart int64
-
-OldLines int64
-
-OldStart int64
-
-Type TextEditorCodeExecutionStrReplaceResult
-
-ToolUseID string
-
-Type TextEditorCodeExecutionToolResult
-
-
-
-type ToolSearchToolResultBlock struct{…}
-
-
-
-Content ToolSearchToolResultBlockContentUnion
-
-One of the following:
-
-
-
-type ToolSearchToolResultError struct{…}
-
-
-
-ErrorCode [ToolSearchToolResultErrorCode](api/messages.md)
-
-One of the following:
-
-const ToolSearchToolResultErrorCodeInvalidToolInput [ToolSearchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
-
-const ToolSearchToolResultErrorCodeUnavailable [ToolSearchToolResultErrorCode](api/messages.md) = "unavailable"
-
-const ToolSearchToolResultErrorCodeTooManyRequests [ToolSearchToolResultErrorCode](api/messages.md) = "too\_many\_requests"
-
-const ToolSearchToolResultErrorCodeExecutionTimeExceeded [ToolSearchToolResultErrorCode](api/messages.md) = "execution\_time\_exceeded"
-
-ErrorMessage string
-
-Type ToolSearchToolResultError
-
-
-
-type ToolSearchToolSearchResultBlock struct{…}
-
-
-
-ToolReferences [][ToolReferenceBlock](api/messages.md)
-
-ToolName string
-
-Type ToolReference
-
-Type ToolSearchToolSearchResult
-
-ToolUseID string
-
-Type ToolSearchToolResult
-
-
-
-type ContainerUploadBlock struct{…}
-
-Response model for a file uploaded to the container.
-
-FileID string
-
-Type ContainerUpload
-
-Index int64
-
-Type ContentBlockStart
-
-
-
-type ContentBlockDeltaEvent struct{…}
-
-
-
-Delta [RawContentBlockDeltaUnion](api/messages.md)
-
-One of the following:
-
-
-
-type TextDelta struct{…}
-
-Text string
-
-Type TextDelta
-
-
-
-type InputJSONDelta struct{…}
-
-PartialJSON string
-
-Type InputJSONDelta
-
-
-
-type CitationsDelta struct{…}
-
-
-
-Citation CitationsDeltaCitationUnion
-
-One of the following:
-
-
-
-type CitationCharLocation struct{…}
-
-CitedText string
-
-DocumentIndex int64
-
-DocumentTitle string
-
-EndCharIndex int64
-
-FileID string
-
-StartCharIndex int64
-
-Type CharLocation
-
-
-
-type CitationPageLocation struct{…}
-
-CitedText string
-
-DocumentIndex int64
-
-DocumentTitle string
-
-EndPageNumber int64
-
-FileID string
-
-StartPageNumber int64
-
-Type PageLocation
-
-
-
-type CitationContentBlockLocation struct{…}
-
-
-
-CitedText string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-DocumentIndex int64
-
-DocumentTitle string
-
-
-
-EndBlockIndex int64
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-FileID string
-
-StartBlockIndex int64
-
-0-based index of the first cited block in the source's `content` array.
-
-Type ContentBlockLocation
-
-
-
-type CitationsWebSearchResultLocation struct{…}
-
-CitedText string
-
-EncryptedIndex string
-
-Title string
-
-Type WebSearchResultLocation
-
-URL string
-
-
-
-type CitationsSearchResultLocation struct{…}
-
-
-
-CitedText string
-
-The full text of the cited block range, concatenated.
-
-Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-
-
-EndBlockIndex int64
-
-Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-
-
-SearchResultIndex int64
-
-0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-Counted separately from `document_index`; server-side web search results are not included in this count.
-
-minimum0
-
-Source string
-
-StartBlockIndex int64
-
-0-based index of the first cited block in the source's `content` array.
-
-Title string
-
-Type SearchResultLocation
-
-Type CitationsDelta
-
-
-
-type ThinkingDelta struct{…}
-
-Thinking string
-
-Type ThinkingDelta
-
-
-
-type SignatureDelta struct{…}
-
-Signature string
-
-Type SignatureDelta
-
-Index int64
-
-Type ContentBlockDelta
-
-
-
-type ContentBlockStopEvent struct{…}
-
-Index int64
-
-Type ContentBlockStop
-
-Create a Message
-
-Go
-
-```shiki
+```go
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-    MaxTokens: 1024,
-    Messages: []anthropic.MessageParam{anthropic.MessageParam{
-      Content: []anthropic.ContentBlockParamUnion{anthropic.ContentBlockParamUnion{
-        OfText: &anthropic.TextBlockParam{
-          Text: "x",
-        },
-      }},
-      Role: anthropic.MessageParamRoleUser,
-    }},
-    Model: anthropic.ModelClaudeOpus4_6,
-  })
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", message.ID)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		MaxTokens: 1024,
+		Messages: []anthropic.MessageParam{anthropic.MessageParam{
+			Content: []anthropic.ContentBlockParamUnion{anthropic.ContentBlockParamUnion{
+				OfText: &anthropic.TextBlockParam{
+					Text: "x",
+				},
+			}},
+			Role: anthropic.MessageParamRoleUser,
+		}},
+		Model: anthropic.ModelClaudeOpus5,
+	})
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", message.ID)
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
   "container": {
-    "id": "id",
-    "expires_at": "2019-12-27T18:11:19.117Z"
+    "id": "container_011CpZohnwH4vuy7gazohgSP",
+    "expires_at": "2019-12-27T18:11:19.117Z",
+    "skills": [
+      {
+        "skill_id": "pdf",
+        "type": "anthropic",
+        "version": "latest"
+      }
+    ]
   },
   "content": [
     {
       "citations": [
         {
-          "cited_text": "cited_text",
+          "cited_text": "The grass is green. The sky is blue.",
           "document_index": 0,
-          "document_title": "document_title",
+          "document_title": "My Document",
           "end_char_index": 0,
-          "file_id": "file_id",
+          "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
           "start_char_index": 0,
           "type": "char_location"
         }
@@ -8372,11 +4037,11 @@ Response 200
       "type": "text"
     }
   ],
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-5",
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
-    "explanation": "explanation",
+    "explanation": "This request was declined because it conflicts with Anthropic's Usage Policy.",
     "type": "refusal"
   },
   "stop_reason": "end_turn",
@@ -8389,69 +4054,7 @@ Response 200
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
-    "inference_geo": "inference_geo",
-    "input_tokens": 2095,
-    "output_tokens": 503,
-    "output_tokens_details": {
-      "thinking_tokens": 0
-    },
-    "server_tool_use": {
-      "web_fetch_requests": 2,
-      "web_search_requests": 0
-    },
-    "service_tier": "standard"
-  }
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
-  "container": {
-    "id": "id",
-    "expires_at": "2019-12-27T18:11:19.117Z"
-  },
-  "content": [
-    {
-      "citations": [
-        {
-          "cited_text": "cited_text",
-          "document_index": 0,
-          "document_title": "document_title",
-          "end_char_index": 0,
-          "file_id": "file_id",
-          "start_char_index": 0,
-          "type": "char_location"
-        }
-      ],
-      "text": "Hi! My name is Claude.",
-      "type": "text"
-    }
-  ],
-  "model": "claude-opus-4-6",
-  "role": "assistant",
-  "stop_details": {
-    "category": "cyber",
-    "explanation": "explanation",
-    "type": "refusal"
-  },
-  "stop_reason": "end_turn",
-  "stop_sequence": null,
-  "type": "message",
-  "usage": {
-    "cache_creation": {
-      "ephemeral_1h_input_tokens": 0,
-      "ephemeral_5m_input_tokens": 0
-    },
-    "cache_creation_input_tokens": 2051,
-    "cache_read_input_tokens": 2051,
-    "inference_geo": "inference_geo",
+    "inference_geo": "global",
     "input_tokens": 2095,
     "output_tokens": 503,
     "output_tokens_details": {

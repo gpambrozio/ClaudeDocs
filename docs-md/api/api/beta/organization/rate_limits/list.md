@@ -1,14 +1,6 @@
 # List Organization Rate Limits
 
-Copy page
-
-
-
-cURL
-
-# List Organization Rate Limits
-
-GET/v1/organizations/rate\_limits
+**GET** `/v1/organizations/rate_limits`
 
 List Messages API rate limits for your organization.
 
@@ -20,153 +12,103 @@ When `limit` is omitted, every matching entry is returned in a single
 page; when `limit` truncates the result, follow `next_page` to fetch
 the remaining entries.
 
-##### Query parameters
+## Query parameters
 
-
+- `group_type: optional "batch" or "files" or "model_group" or 3 more`
 
-group\_type: optional "batch" or "files" or "model\_group" or 3 more
+  Filter by group type.
 
-Filter by group type.
+  - `"batch"`
 
-One of the following:
+  - `"files"`
 
-"batch"
+  - `"model_group"`
 
-"files"
+  - `"skills"`
 
-"model\_group"
+  - `"token_count"`
 
-"skills"
+  - `"web_search"`
 
-"token\_count"
+- `limit: optional number`
 
-"web\_search"
+  Maximum number of items to return per page. Ranges from `1` to `1000`.
 
-
+  When omitted, every remaining entry is returned in a single page and `next_page` is `null`.
 
-limit: optional number
+  maximum: 1000, minimum: 1
 
-Maximum number of items to return per page. Ranges from `1` to `1000`.
+- `model: optional string`
 
-When omitted, every remaining entry is returned in a single page and `next_page` is `null`.
+  Filter to the single entry containing this model. Accepts full model names and aliases. Returns 404 if the model is not found or has no rate limits for this organization.
 
-maximum1000
+- `page: optional string`
 
-minimum1
+  Opaque cursor from a previous response's `next_page`.
 
-model: optional string
+## Returns
 
-Filter to the single entry containing this model. Accepts full model names and aliases. Returns 404 if the model is not found or has no rate limits for this organization.
+- `data: array of BetaOrganizationRateLimit`
 
-page: optional string
+  Rate-limit entries for the organization, one per group.
 
-Opaque cursor from a previous response's `next_page`.
+  - `id: string`
 
-##### Returns
+    Stable identifier for this rate-limit group within the organization.
 
-
+  - `group_type: "batch" or "files" or "model_group" or 3 more`
 
-data: array of [BetaOrganizationRateLimit](api/http/beta/organization/rate_limits.md) { id, group\_type, limits, 2 more }
+    The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
 
-Rate-limit entries for the organization, one per group.
+    - `"batch"`
 
-id: string
+    - `"files"`
 
-Stable identifier for this rate-limit group within the organization.
+    - `"model_group"`
 
-
+    - `"skills"`
 
-group\_type: "batch" or "files" or "model\_group" or 3 more
+    - `"token_count"`
 
-The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
+    - `"web_search"`
 
-One of the following:
+  - `limits: array of BetaOrganizationRateLimitValue`
 
-"batch"
+    The limiter values that apply to this group.
 
-"files"
+    - `type: string`
 
-"model\_group"
+      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
 
-"skills"
+    - `value: number`
 
-"token\_count"
+      The configured limit value for this limiter type.
 
-"web\_search"
+  - `models: array of string or null`
 
-
+    Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
 
-limits: array of [BetaOrganizationRateLimitValue](api/http/beta/organization/rate_limits.md) { type, value }
+  - `type: "rate_limit"`
 
-The limiter values that apply to this group.
+    Object type. Always `rate_limit` for organization rate-limit entries.
 
-type: string
+    default: rate_limit
 
-The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+- `next_page: string or null`
 
-value: number
+  Opaque cursor for the next page of results, or `null` when no entries remain beyond this response.
 
-The configured limit value for this limiter type.
+## Example
 
-models: array of string or null
-
-Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
-
-
-
-type: "rate\_limit"
-
-Object type. Always `rate_limit` for organization rate-limit entries.
-
-defaultrate\_limit
-
-next\_page: string or null
-
-Opaque cursor for the next page of results, or `null` when no entries remain beyond this response.
-
-List Organization Rate Limits
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/rate_limits \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "id",
-      "group_type": "batch",
-      "limits": [
-        {
-          "type": "type",
-          "value": 0
-        }
-      ],
-      "models": [
-        "string"
-      ],
-      "type": "rate_limit"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

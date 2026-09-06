@@ -1,95 +1,59 @@
 # Delete Skill Version
 
-Copy page
+`$ ant beta:skills:versions delete`
 
-
-
-CLI
-
-# Delete Skill Version
-
-$ ant beta:skills:versions delete
-
-DELETE/v1/skills/{skill\_id}/versions/{version}
+**DELETE** `/v1/skills/{skill_id}/versions/{version}`
 
 Delete Skill Version
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `--skill-id: string`
 
---skill-id: string
+  Path param: Unique identifier for the skill.
 
-Path param: Unique identifier for the skill.
+  The format and length of IDs may change over time.
 
-The format and length of IDs may change over time.
+- `--version: string`
 
-
+  Path param: Identifies the skill version by its version ID.
 
---version: string
+  Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
-Path param: Version identifier for the skill.
+- `--beta: optional array of AnthropicBeta`
 
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+  Header param: Optional header to specify the beta version(s) you want to use.
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+## Returns
 
-Header param: Optional header to specify the beta version(s) you want to use.
+- `beta_deleted_skill_version: object`
 
-##### ReturnsExpand Collapse
+  - `id: string`
 
-
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
 
-BetaSkillVersionDeleteResponse: object { id, type } 
+  - `type: "skill_version_deleted"`
 
-
+    Deleted object type.
 
-id: string
+    For Skill Versions, this is always `"skill_version_deleted"`.
 
-Version identifier for the skill.
+## Example
 
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
-
-
-
-type: string
-
-Deleted object type.
-
-For Skill Versions, this is always `"skill_version_deleted"`.
-
-Delete Skill Version
-
-CLI
-
-```shiki
+```bash
 ant beta:skills:versions delete \
   --api-key my-anthropic-api-key \
   --skill-id skill_id \
   --version version
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
-  "id": "1759178010641129",
-  "type": "type"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "id": "1759178010641129",
-  "type": "type"
+  "id": "id",
+  "type": "skill_version_deleted"
 }
 ```
 

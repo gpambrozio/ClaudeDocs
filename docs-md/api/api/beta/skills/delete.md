@@ -1,186 +1,145 @@
 # Delete Skill
 
-Copy page
-
-
-
-cURL
-
-# Delete Skill
-
-DELETE/v1/skills/{skill\_id}
+**DELETE** `/v1/skills/{skill_id}`
 
 Delete Skill
 
-##### Path parameters
+## Path parameters
 
-
+- `skill_id: string`
 
-skill\_id: string
+  Unique identifier for the skill.
 
-Unique identifier for the skill.
+  The format and length of IDs may change over time.
 
-The format and length of IDs may change over time.
+## Headers
 
-##### Headers
+- `"anthropic-beta": optional array of AnthropicBeta`
 
-
+  Optional header to specify the beta version(s) you want to use.
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+  - `string`
 
-Optional header to specify the beta version(s) you want to use.
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
-One of the following:
+    - `"message-batches-2024-09-24"`
 
-string
+    - `"prompt-caching-2024-07-31"`
 
-
+    - `"computer-use-2024-10-22"`
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
+    - `"computer-use-2025-01-24"`
 
-One of the following:
+    - `"pdfs-2024-09-25"`
 
-"message-batches-2024-09-24"
+    - `"token-counting-2024-11-01"`
 
-"prompt-caching-2024-07-31"
+    - `"token-efficient-tools-2025-02-19"`
 
-"computer-use-2024-10-22"
+    - `"output-128k-2025-02-19"`
 
-"computer-use-2025-01-24"
+    - `"files-api-2025-04-14"`
 
-"pdfs-2024-09-25"
+    - `"mcp-client-2025-04-04"`
 
-"token-counting-2024-11-01"
+    - `"mcp-client-2025-11-20"`
 
-"token-efficient-tools-2025-02-19"
+    - `"dev-full-thinking-2025-05-14"`
 
-"output-128k-2025-02-19"
+    - `"interleaved-thinking-2025-05-14"`
 
-"files-api-2025-04-14"
+    - `"code-execution-2025-05-22"`
 
-"mcp-client-2025-04-04"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"mcp-client-2025-11-20"
+    - `"context-1m-2025-08-07"`
 
-"dev-full-thinking-2025-05-14"
+    - `"context-management-2025-06-27"`
 
-"interleaved-thinking-2025-05-14"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"code-execution-2025-05-22"
+    - `"skills-2025-10-02"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"fast-mode-2026-02-01"`
 
-"context-1m-2025-08-07"
+    - `"output-300k-2026-03-24"`
 
-"context-management-2025-06-27"
+    - `"user-profiles-2026-03-24"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"user-profiles-2026-08-18"`
 
-"skills-2025-10-02"
+    - `"advisor-tool-2026-03-01"`
 
-"fast-mode-2026-02-01"
+    - `"managed-agents-2026-04-01"`
 
-"output-300k-2026-03-24"
+    - `"cache-diagnosis-2026-04-07"`
 
-"user-profiles-2026-03-24"
+    - `"dreaming-2026-04-21"`
 
-"user-profiles-2026-08-18"
+    - `"thinking-token-count-2026-05-13"`
 
-"advisor-tool-2026-03-01"
+    - `"server-side-fallback-2026-06-01"`
 
-"managed-agents-2026-04-01"
+    - `"server-side-fallback-2026-07-01"`
 
-"cache-diagnosis-2026-04-07"
+    - `"fallback-credit-2026-06-01"`
 
-"dreaming-2026-04-21"
+    - `"fallback-credit-2026-07-01"`
 
-"thinking-token-count-2026-05-13"
+    - `"agent-memory-2026-07-22"`
 
-"server-side-fallback-2026-06-01"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-"server-side-fallback-2026-07-01"
+    - `"compact-2026-01-12"`
 
-"fallback-credit-2026-06-01"
+    - `"computer-use-2025-11-24"`
 
-"fallback-credit-2026-07-01"
+    - `"mcp-tunnels-2026-06-22"`
 
-"agent-memory-2026-07-22"
+    - `"structured-outputs-2025-11-13"`
 
-"mid-conversation-tool-changes-2026-07-01"
+    - `"task-budgets-2026-03-13"`
 
-"compact-2026-01-12"
+    - `"thinking-display-updates-2026-08-18"`
 
-"computer-use-2025-11-24"
+    - `"ce-user-management-2026-07-13"`
 
-"mcp-tunnels-2026-06-22"
+    - `"mid-conversation-output-config-2026-07-01"`
 
-"structured-outputs-2025-11-13"
+    - `"thinking-binding-controls-2026-08-01"`
 
-"task-budgets-2026-03-13"
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"thinking-display-updates-2026-08-18"
+## Returns
 
-"ce-user-management-2026-07-13"
+- `BetaDeletedSkill object`
 
-"mid-conversation-output-config-2026-07-01"
+  - `id: string`
 
-"thinking-binding-controls-2026-08-01"
+    Unique identifier for the skill.
 
-"mid-conversation-system-clear-at-2026-08-21"
+    The format and length of IDs may change over time.
 
-##### Returns
+  - `type: "skill_deleted"`
 
-
+    Deleted object type.
 
-BetaDeletedSkill object{ id, type }
+    For Skills, this is always `"skill_deleted"`.
 
-
+    default: skill_deleted
 
-id: string
+## Example
 
-Unique identifier for the skill.
-
-The format and length of IDs may change over time.
-
-
-
-type: "skill\_deleted"
-
-Deleted object type.
-
-For Skills, this is always `"skill_deleted"`.
-
-defaultskill\_deleted
-
-Delete Skill
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/skills/$SKILL_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "skill_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "skill_01JAbcdefghijklmnopqrstuvw",
   "type": "skill_deleted"

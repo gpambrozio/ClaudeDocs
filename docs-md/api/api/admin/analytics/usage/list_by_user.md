@@ -1,12 +1,6 @@
 # Get Per-User Token Usage
 
-Copy page
-
-
-
-# Get Per-User Token Usage
-
-GET/v1/organizations/analytics/user\_usage\_report
+**GET** `/v1/organizations/analytics/user_usage_report`
 
 Get per-user token usage across a date range.
 
@@ -18,320 +12,363 @@ API-key and automation traffic, use the bucketed
 organizations on a Claude Enterprise plan. Requires an API key with the
 `read:analytics` scope.
 
-##### Query parameters
+## Query parameters
 
-
+- `starting_at: string`
 
-starting\_at: string
+  Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
 
-Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
+  format: date-time
 
-formatdate-time
+- `bucket_width: optional "1d" or "1h" or "1m"`
 
-
+  Time-bucket granularity. When set, each row's `starting_at` and `ending_at` are populated and one actor may span several rows (one per time bucket with usage). The time bucket counts toward `limit`, so one page can return multiple rows for the same actor. `ending_at` is required when `bucket_width` is set, and with `bucket_width="1m"` the range may span at most 24 hours. When omitted, each row aggregates the full `[starting_at, ending_at)` range.
 
-bucket\_width: optional "1d" or "1h" or "1m"
+  - `"1d"`
 
-Time-bucket granularity. When set, each row's `starting_at` and `ending_at` are populated and one actor may span several rows (one per time bucket with usage). The time bucket counts toward `limit`, so one page can return multiple rows for the same actor. `ending_at` is required when `bucket_width` is set, and with `bucket_width="1m"` the range may span at most 24 hours. When omitted, each row aggregates the full `[starting_at, ending_at)` range.
+  - `"1h"`
 
-One of the following:
+  - `"1m"`
 
-"1d"
+- `claude_tag_categories: optional array of "dm" or "engaged" or "monitoring" or 2 more`
 
-"1h"
+  Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage with no category never matches. `dm` usage is reported under the user's product rather than `claude-tag`, so combining this filter with `products[]=claude-tag` excludes it. Use `group_by[]=claude_tag_category` to break out per-category values.
 
-"1m"
+  maxItems: 100
 
-
+  - `"dm"`
 
-claude\_tag\_categories: optional array of "dm" or "engaged" or "monitoring" or 2 more
+  - `"engaged"`
 
-Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage with no category never matches. `dm` usage is reported under the user's product rather than `claude-tag`, so combining this filter with `products[]=claude-tag` excludes it. Use `group_by[]=claude_tag_category` to break out per-category values.
+  - `"monitoring"`
 
-maxItems100
+  - `"proactive"`
 
-One of the following:
+  - `"scheduled"`
 
-"dm"
+- `claude_tag_user_ids: optional array of string`
 
-"engaged"
+  Filter to Claude Tag (Claude in Slack) usage attributed to specific Slack users, by Slack user ID (for example `U0123ABCDEF`), not claude.ai user ID. Usage that is not Claude Tag, and Claude Tag usage not attributed to a single user, never matches. Use `group_by[]=claude_tag_user_id` to break out per-user values.
 
-"monitoring"
+  maxItems: 100
 
-"proactive"
+- `context_windows: optional array of "0-200k" or "200k-1M"`
 
-"scheduled"
+  Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
 
-
+  maxItems: 100
 
-claude\_tag\_user\_ids: optional array of string
+  - `"0-200k"`
 
-Filter to Claude Tag (Claude in Slack) usage attributed to specific Slack users, by Slack user ID (for example `U0123ABCDEF`), not claude.ai user ID. Usage that is not Claude Tag, and Claude Tag usage not attributed to a single user, never matches. Use `group_by[]=claude_tag_user_id` to break out per-user values.
+  - `"200k-1M"`
 
-maxItems100
+- `ending_at: optional string`
 
-
+  End of range, exclusive. When omitted, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
 
-context\_windows: optional array of "0-200k" or "200k-1M"
+  format: date-time
 
-Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
+- `exclude_deleted_users: optional boolean`
 
-maxItems100
+  If true, omit rows for users who are deleted (`deleted: true`). A page may contain fewer than `limit` rows; use `has_more` and `next_page` to paginate as usual.
 
-One of the following:
+  default: false
 
-"0-200k"
+- `group_by: optional array of "claude_tag_category" or "claude_tag_user_id" or "context_window" or 6 more`
 
-"200k-1M"
+  Break each actor's row out by the given dimensions. Accepts the same values as the bucketed `/usage_report` endpoint. `limit` bounds (actor × time bucket × dimension) rows — with dimensions or `bucket_width` present, one actor may span several rows.
 
-
+  maxItems: 100
 
-ending\_at: optional string
+  - `"claude_tag_category"`
 
-End of range, exclusive. When omitted, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
+  - `"claude_tag_user_id"`
 
-formatdate-time
+  - `"context_window"`
 
-
+  - `"inference_geo"`
 
-exclude\_deleted\_users: optional boolean
+  - `"model"`
 
-If true, omit rows for users who are deleted (`deleted: true`). A page may contain fewer than `limit` rows; use `has_more` and `next_page` to paginate as usual.
+  - `"product"`
 
-defaultfalse
+  - `"rbac_group_id"`
 
-
+  - `"slack_channel_id"`
 
-group\_by: optional array of "claude\_tag\_category" or "claude\_tag\_user\_id" or "context\_window" or 6 more
+  - `"speed"`
 
-Break each actor's row out by the given dimensions. Accepts the same values as the bucketed `/usage_report` endpoint. `limit` bounds (actor × time bucket × dimension) rows — with dimensions or `bucket_width` present, one actor may span several rows.
+- `inference_geos: optional array of "global" or "not_available" or "us"`
 
-maxItems100
+  Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
 
-One of the following:
+  maxItems: 100
 
-"claude\_tag\_category"
+  - `"global"`
 
-"claude\_tag\_user\_id"
+  - `"not_available"`
 
-"context\_window"
+  - `"us"`
 
-"inference\_geo"
+- `limit: optional number`
 
-"model"
+  Number of rows per page (1-1000, default 20). One row per actor unless `group_by[]` or `bucket_width` splits an actor across rows; `cost_type`/`token_type` fan-out rows (cost endpoint only) are the exception — they do not count toward this limit, so `data` can exceed it.
 
-"product"
+  default: 20, maximum: 1000, minimum: 1
 
-"rbac\_group\_id"
+- `models: optional array of string`
 
-"slack\_channel\_id"
+  Models to include. Defaults to all models. Use `group_by[]=model` to break out per-model values.
 
-"speed"
+  maxItems: 100
 
-
+- `order: optional "asc" or "desc"`
 
-inference\_geos: optional array of "global" or "not\_available" or "us"
+  Sort direction. Defaults to `desc`.
 
-Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
+  default: desc
 
-maxItems100
+  - `"asc"`
 
-One of the following:
+  - `"desc"`
 
-"global"
+- `order_by: optional "output_tokens" or "requests" or "total_tokens" or "uncached_input_tokens"`
 
-"not\_available"
+  Metric to rank actors by. Defaults to `total_tokens`.
 
-"us"
+  default: total_tokens
 
-
+  - `"output_tokens"`
 
-limit: optional number
+  - `"requests"`
 
-Number of rows per page (1-1000, default 20). One row per actor unless `group_by[]` or `bucket_width` splits an actor across rows; `cost_type`/`token_type` fan-out rows (cost endpoint only) are the exception — they do not count toward this limit, so `data` can exceed it.
+  - `"total_tokens"`
 
-default20
+  - `"uncached_input_tokens"`
 
-maximum1000
+- `page: optional string`
 
-minimum1
+  Opaque cursor from a previous response's `next_page` field.
 
-
+- `products: optional array of "chat" or "claude-tag" or "claude_code" or 4 more`
 
-models: optional array of string
+  Product surfaces to include. Defaults to all products.
 
-Models to include. Defaults to all models. Use `group_by[]=model` to break out per-model values.
+  maxItems: 100
 
-maxItems100
+  - `"chat"`
 
-
+  - `"claude-tag"`
 
-order: optional "asc" or "desc"
+  - `"claude_code"`
 
-Sort direction. Defaults to `desc`.
+  - `"claude_design"`
 
-defaultdesc
+  - `"claude_in_chrome"`
 
-One of the following:
+  - `"cowork"`
 
-"asc"
+  - `"office_agent"`
 
-"desc"
+- `rbac_group_ids: optional array of string`
 
-
+  Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
 
-order\_by: optional "output\_tokens" or "requests" or "total\_tokens" or "uncached\_input\_tokens"
+  maxItems: 100
 
-Metric to rank actors by. Defaults to `total_tokens`.
+- `slack_channel_ids: optional array of string`
 
-defaulttotal\_tokens
+  Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
 
-One of the following:
+  maxItems: 100
 
-"output\_tokens"
+- `speeds: optional array of "fast" or "standard"`
 
-"requests"
+  Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
 
-"total\_tokens"
+  maxItems: 100
 
-"uncached\_input\_tokens"
+  - `"fast"`
 
-page: optional string
+  - `"standard"`
 
-Opaque cursor from a previous response's `next_page` field.
+- `user_ids: optional array of string`
 
-
+  Filter to specific users by tagged user ID.
 
-products: optional array of "chat" or "claude-tag" or "claude\_code" or 4 more
+  maxItems: 100
 
-Product surfaces to include. Defaults to all products.
+## Returns
 
-maxItems100
+- `UserUsage object`
 
-One of the following:
+  - `data: array of object`
 
-"chat"
+    Rows for this page, ranked by `order_by` in the `order` direction. One row per user, or several per user when `group_by[]` or `bucket_width` breaks that user's usage or cost out across rows. Rows split out by `cost_type` or `token_type` (cost endpoint only) stay adjacent and are ranked as one unit.
 
-"claude-tag"
+    - `actor: AnalyticsUserActor`
 
-"claude\_code"
+      The user this row's usage or cost is attributed to. Always a `user_actor`.
 
-"claude\_design"
+      - `deleted: boolean`
 
-"claude\_in\_chrome"
+        True when the account has been deleted, or when the user is no longer a member of the organization or its associated organizations (for example, their membership was removed or they were deprovisioned via your identity provider). `email` stays populated for removed users and is null when the account has been deleted. `name` follows the rules described on that field. The `user_id` is still populated for reconciliation.
 
-"cowork"
+      - `email: string or null`
 
-"office\_agent"
+        The user's email address, including for users who are no longer members of the organization or its associated organizations. Null when the account has been deleted (check `deleted`) and for system-minted service accounts, which have no person's mailbox behind them (check `name`).
 
-
+      - `name: string or null`
 
-rbac\_group\_ids: optional array of string
+        The user's full name. Null when the user has not set a name. Returns `"Deleted User"` when the account itself has been deleted, or when the user is no longer a member of the organization or its associated organizations and the organization has chosen to hide the names of removed users. Otherwise, the name stays populated for removed users. Rows for system-minted service accounts render the service name (for example, `"Claude Security"` for usage by Anthropic's security-patching service) or null.
 
-Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
+      - `type: "user_actor"`
 
-maxItems100
+        Actor type. Always `"user_actor"`.
 
-
+      - `user_id: string`
 
-slack\_channel\_ids: optional array of string
+        Tagged user ID.
 
-Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
+    - `cache_creation: object`
 
-maxItems100
+      The number of input tokens for cache creation.
 
-
+      - `ephemeral_1h_input_tokens: number`
 
-speeds: optional array of "fast" or "standard"
+        The number of input tokens used to create the 1 hour cache entry.
 
-Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
+      - `ephemeral_5m_input_tokens: number`
 
-maxItems100
+        The number of input tokens used to create the 5 minute cache entry.
 
-One of the following:
+    - `cache_read_input_tokens: number`
 
-"fast"
+      The number of input tokens read from the cache.
 
-"standard"
+    - `claude_tag_category: "dm" or "engaged" or "monitoring" or 2 more or null`
 
-
+      Claude Tag (Claude in Slack) spend category: `engaged` (a person addressed Claude in a channel or thread), `proactive` (Claude responded without being addressed), `scheduled` (a scheduled routine ran), `monitoring` (Claude watching a channel it was asked to monitor), or `dm` (direct messages with Claude). Populated only when `claude_tag_category` is in `group_by[]`; null for usage that is not Claude Tag. Direct-message usage is billed to the individual user and is reported under that user's product, not under `claude-tag`. New categories may be added over time.
 
-user\_ids: optional array of string
+      - `"dm"`
 
-Filter to specific users by tagged user ID.
+      - `"engaged"`
 
-maxItems100
+      - `"monitoring"`
 
-##### Returns
+      - `"proactive"`
 
-
+      - `"scheduled"`
 
-UserUsage object{ data, data\_refreshed\_at, has\_more, 2 more }
+    - `claude_tag_user_id: string or null`
 
-Get Per-User Token Usage
+      Slack user ID (for example `U0123ABCDEF`) of the member the Claude Tag (Claude in Slack) usage is attributed to, not a claude.ai user ID. Populated only when `claude_tag_user_id` is in `group_by[]`; null for usage that is not Claude Tag and for Claude Tag usage that is not attributed to a single user (for example `monitoring`, and `proactive` usage Claude initiated), so per-user rows can sum to less than the Claude Tag total. Cannot be combined with `group_by[]=rbac_group_id` or the `rbac_group_ids[]` filter.
 
-cURL
+    - `context_window: "0-200k" or "200k-1M" or null`
 
-```shiki
+      Context-window pricing tier of the usage or cost. Null unless `context_window` is in `group_by[]`; it can also be null on grouped rows with no context-window tier, such as code execution.
+
+      - `"0-200k"`
+
+      - `"200k-1M"`
+
+    - `ending_at: string or null`
+
+      End of the row's UTC time bucket (exclusive), as an RFC 3339 timestamp; equal to `starting_at` plus one `bucket_width`. Null unless `bucket_width` is set.
+
+      format: date-time
+
+    - `inference_geo: "global" or "us" or null`
+
+      Inference region of the usage or cost. Null unless `inference_geo` is in `group_by[]`; it can also be null on grouped rows where the region is not set (the rows that `inference_geos[]=not_available` matches).
+
+      - `"global"`
+
+      - `"us"`
+
+    - `model: string or null`
+
+      Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
+
+    - `output_tokens: number`
+
+      The number of output tokens generated.
+
+    - `product: string or null`
+
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, and `claude-tag`. `claude-tag` is Claude Tag, the Claude product in Slack. Some unattributed usage is reported as "other".
+
+    - `rbac_group_id: string or null`
+
+      RBAC group (team) the usage is attributed to, in the public tagged `rbac_group_...` spelling — the same spelling the activity resources use for this key, so the same team has one id across resources and it round-trips as an `rbac_group_ids[]` filter value. Populated only when `rbac_group_id` is in `group_by[]`. Any-membership semantics: a user in several groups contributes their full usage to each of those groups' rows, so the named-group rows overlap and their sum can exceed the org total. A null value is the single unassigned row: users in no group on that (UTC) day. For the true org total, run the same query without `group_by[]`.
+
+    - `requests: number or null`
+
+      Number of API requests in this row's scope. For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
+
+    - `server_tool_use: object`
+
+      Server-side tool usage metrics.
+
+      - `web_search_requests: number`
+
+        The number of web search requests made.
+
+    - `slack_channel_id: string or null`
+
+      Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
+
+    - `speed: "fast" or "standard" or null`
+
+      Inference speed mode of the usage or cost: `fast` or `standard`. Null unless `speed` is in `group_by[]`.
+
+      - `"fast"`
+
+      - `"standard"`
+
+    - `starting_at: string or null`
+
+      Start of the row's UTC time bucket (inclusive), as an RFC 3339 timestamp. Null unless `bucket_width` is set; without `bucket_width`, each row aggregates the full requested range.
+
+      format: date-time
+
+    - `total_tokens: number`
+
+      Total token count across all token types. This is the value the default `order_by` (`total_tokens`) sorts on.
+
+    - `uncached_input_tokens: number`
+
+      The number of uncached input tokens processed.
+
+  - `data_refreshed_at: string or null`
+
+    RFC 3339 timestamp of the export this response was served from. Null when no export yet covers any part of the requested range, in which case `data` is empty. Data beyond this watermark is incomplete; for stable results, set `ending_at` to this value or earlier. Data is typically refreshed every 4 hours but not final until about 30 days after the usage date (late-arriving events, reconciliation adjustments).
+
+    format: date-time
+
+  - `has_more: boolean`
+
+    Whether another page is available. When true, pass `next_page` as the `page` parameter to fetch it.
+
+  - `next_page: string or null`
+
+    Opaque cursor for the next page, or null when `has_more` is false. Pass it as the `page` parameter, keeping the other parameters unchanged. A cursor can expire after the underlying data refreshes; the request then returns HTTP 410 and pagination must restart from the first page.
+
+  - `organization_id: string`
+
+    ID of the Organization.
+
+## Example
+
+```bash
 curl https://api.anthropic.com/v1/organizations/analytics/user_usage_report \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "actor": {
-        "deleted": true,
-        "email": "jane@example.com",
-        "name": "Jane Smith",
-        "type": "user_actor",
-        "user_id": "user_01AbCdEfGhIjKlMnOpQrSt"
-      },
-      "cache_creation": {
-        "ephemeral_1h_input_tokens": 1000,
-        "ephemeral_5m_input_tokens": 500
-      },
-      "cache_read_input_tokens": 3200000,
-      "claude_tag_category": "dm",
-      "claude_tag_user_id": "U0123ABCDEF",
-      "context_window": "0-200k",
-      "ending_at": "2019-12-27T18:11:19.117Z",
-      "inference_geo": "global",
-      "model": "claude-opus-5",
-      "output_tokens": 891000,
-      "product": "chat",
-      "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
-      "requests": 128,
-      "server_tool_use": {
-        "web_search_requests": 10
-      },
-      "slack_channel_id": "C0123ABCDEF",
-      "speed": "fast",
-      "starting_at": "2019-12-27T18:11:19.117Z",
-      "total_tokens": 5377000,
-      "uncached_input_tokens": 1284500
-    }
-  ],
-  "data_refreshed_at": "2019-12-27T18:11:19.117Z",
-  "has_more": true,
-  "next_page": "next_page",
-  "organization_id": "org_013FP9SaFPBg7Kw7fetjn6cF"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

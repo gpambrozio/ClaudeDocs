@@ -1,154 +1,132 @@
 # Create Enrollment URL
 
-Copy page
-
-
-
-cURL
-
-# Create Enrollment URL
-
-POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
+**POST** `/v1/user_profiles/{user_profile_id}/enrollment_url`
 
 Create Enrollment URL
 
-##### Path parameters
+## Path parameters
 
-user\_profile\_id: string
+- `user_profile_id: string`
 
-##### Headers
+## Headers
 
-
+- `"anthropic-beta": optional array of AnthropicBeta`
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+  Optional header to specify the beta version(s) you want to use.
 
-Optional header to specify the beta version(s) you want to use.
+  - `string`
 
-One of the following:
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
-string
+    - `"message-batches-2024-09-24"`
 
-
+    - `"prompt-caching-2024-07-31"`
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
+    - `"computer-use-2024-10-22"`
 
-One of the following:
+    - `"computer-use-2025-01-24"`
 
-"message-batches-2024-09-24"
+    - `"pdfs-2024-09-25"`
 
-"prompt-caching-2024-07-31"
+    - `"token-counting-2024-11-01"`
 
-"computer-use-2024-10-22"
+    - `"token-efficient-tools-2025-02-19"`
 
-"computer-use-2025-01-24"
+    - `"output-128k-2025-02-19"`
 
-"pdfs-2024-09-25"
+    - `"files-api-2025-04-14"`
 
-"token-counting-2024-11-01"
+    - `"mcp-client-2025-04-04"`
 
-"token-efficient-tools-2025-02-19"
+    - `"mcp-client-2025-11-20"`
 
-"output-128k-2025-02-19"
+    - `"dev-full-thinking-2025-05-14"`
 
-"files-api-2025-04-14"
+    - `"interleaved-thinking-2025-05-14"`
 
-"mcp-client-2025-04-04"
+    - `"code-execution-2025-05-22"`
 
-"mcp-client-2025-11-20"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"dev-full-thinking-2025-05-14"
+    - `"context-1m-2025-08-07"`
 
-"interleaved-thinking-2025-05-14"
+    - `"context-management-2025-06-27"`
 
-"code-execution-2025-05-22"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"skills-2025-10-02"`
 
-"context-1m-2025-08-07"
+    - `"fast-mode-2026-02-01"`
 
-"context-management-2025-06-27"
+    - `"output-300k-2026-03-24"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"user-profiles-2026-03-24"`
 
-"skills-2025-10-02"
+    - `"user-profiles-2026-08-18"`
 
-"fast-mode-2026-02-01"
+    - `"advisor-tool-2026-03-01"`
 
-"output-300k-2026-03-24"
+    - `"managed-agents-2026-04-01"`
 
-"user-profiles-2026-03-24"
+    - `"cache-diagnosis-2026-04-07"`
 
-"user-profiles-2026-08-18"
+    - `"dreaming-2026-04-21"`
 
-"advisor-tool-2026-03-01"
+    - `"thinking-token-count-2026-05-13"`
 
-"managed-agents-2026-04-01"
+    - `"server-side-fallback-2026-06-01"`
 
-"cache-diagnosis-2026-04-07"
+    - `"server-side-fallback-2026-07-01"`
 
-"dreaming-2026-04-21"
+    - `"fallback-credit-2026-06-01"`
 
-"thinking-token-count-2026-05-13"
+    - `"fallback-credit-2026-07-01"`
 
-"server-side-fallback-2026-06-01"
+    - `"agent-memory-2026-07-22"`
 
-"server-side-fallback-2026-07-01"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-"fallback-credit-2026-06-01"
+    - `"compact-2026-01-12"`
 
-"fallback-credit-2026-07-01"
+    - `"computer-use-2025-11-24"`
 
-"agent-memory-2026-07-22"
+    - `"mcp-tunnels-2026-06-22"`
 
-"mid-conversation-tool-changes-2026-07-01"
+    - `"structured-outputs-2025-11-13"`
 
-"compact-2026-01-12"
+    - `"task-budgets-2026-03-13"`
 
-"computer-use-2025-11-24"
+    - `"thinking-display-updates-2026-08-18"`
 
-"mcp-tunnels-2026-06-22"
+    - `"ce-user-management-2026-07-13"`
 
-"structured-outputs-2025-11-13"
+    - `"mid-conversation-output-config-2026-07-01"`
 
-"task-budgets-2026-03-13"
+    - `"thinking-binding-controls-2026-08-01"`
 
-"thinking-display-updates-2026-08-18"
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"ce-user-management-2026-07-13"
+## Returns
 
-"mid-conversation-output-config-2026-07-01"
+- `BetaUserProfileEnrollmentURL object`
 
-"thinking-binding-controls-2026-08-01"
+  - `expires_at: string`
 
-"mid-conversation-system-clear-at-2026-08-21"
+    A timestamp in RFC 3339 format
 
-##### Returns
+    format: date-time
 
-
+  - `type: "enrollment_url"`
 
-BetaUserProfileEnrollmentURL object{ expires\_at, type, url }
+    Object type. Always `enrollment_url`.
 
-
+  - `url: string`
 
-expires\_at: string
+    Enrollment URL to send to the end user. Valid until `expires_at`.
 
-A timestamp in RFC 3339 format
+## Example
 
-formatdate-time
-
-type: "enrollment\_url"
-
-Object type. Always `enrollment_url`.
-
-url: string
-
-Enrollment URL to send to the end user. Valid until `expires_at`.
-
-Create Enrollment URL
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID/enrollment_url \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
@@ -156,25 +134,9 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID/enrollment_url 
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "expires_at": "2026-03-15T10:15:00Z",
-  "type": "enrollment_url",
-  "url": "https://platform.claude.com/user-profiles/enrollment/M3J0bGJxZ2ppMnptbnB1"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "expires_at": "2026-03-15T10:15:00Z",
   "type": "enrollment_url",

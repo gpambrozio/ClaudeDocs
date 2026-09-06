@@ -1,331 +1,1286 @@
 # Work
 
-Copy page
+## Get Work Item
 
-
+`$ ant beta:environments:work retrieve`
 
-CLI
+**GET** `/v1/environments/{environment_id}/work/{work_id}`
 
-# Work
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
-##### [Get Work Item](api/beta/environments/work/retrieve.md)
+Retrieve detailed information about a specific work item.
 
-$ ant beta:environments:work retrieve
+### Parameters
 
-GET/v1/environments/{environment\_id}/work/{work\_id}
+- `--environment-id: string`
 
-##### [Poll for Work](api/beta/environments/work/poll.md)
+  Path param
 
-$ ant beta:environments:work poll
+- `--work-id: string`
 
-GET/v1/environments/{environment\_id}/work/poll
+  Path param
 
-##### [Acknowledge Work](api/beta/environments/work/ack.md)
+- `--beta: optional array of AnthropicBeta`
 
-$ ant beta:environments:work ack
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/ack
+### Returns
 
-##### [Record Heartbeat](api/beta/environments/work/heartbeat.md)
+- `beta_self_hosted_work: object`
 
-$ ant beta:environments:work heartbeat
+  Work resource representing a unit of work in a self-hosted environment.
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/heartbeat
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
 
-##### [Stop Work](api/beta/environments/work/stop.md)
+  - `id: string`
 
-$ ant beta:environments:work stop
+    Work identifier (e.g., 'work_...')
 
-POST/v1/environments/{environment\_id}/work/{work\_id}/stop
+  - `acknowledged_at: string`
 
-##### [List Work Items](api/beta/environments/work/list.md)
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-$ ant beta:environments:work list
+  - `created_at: string`
 
-GET/v1/environments/{environment\_id}/work
+    RFC 3339 timestamp when work was created
 
-##### [Update Work Item](api/beta/environments/work/update.md)
+  - `data: object`
 
-$ ant beta:environments:work update
+    The actual work to be performed
 
-POST/v1/environments/{environment\_id}/work/{work\_id}
+    - `id: string`
 
-##### [Get Queue Statistics](api/beta/environments/work/stats.md)
+      Session identifier (e.g., 'session_...')
 
-$ ant beta:environments:work stats
+    - `type: "session"`
 
-GET/v1/environments/{environment\_id}/work/stats
+      Type of work data
 
-##### ModelsExpand Collapse
+  - `environment_id: string`
 
-
+    Environment identifier this work belongs to (e.g., `env_...`)
 
-beta\_self\_hosted\_work: object { id, acknowledged\_at, created\_at, 9 more } 
+  - `latest_heartbeat_at: string`
 
-Work resource representing a unit of work in a self-hosted environment.
+    RFC 3339 timestamp of the most recent heartbeat
 
-Work items are queued when sessions are created or when long-dormant sessions
-receive new messages. The environment worker polls for work to execute in a
-self-hosted sandbox.
+  - `metadata: map[string]`
 
-id: string
+    User-provided metadata key-value pairs associated with this work item
 
-Work identifier (e.g., 'work\_...')
+  - `secret: string`
 
-acknowledged\_at: string
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
-RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+  - `started_at: string`
 
-created\_at: string
+    RFC 3339 timestamp when work execution started
 
-RFC 3339 timestamp when work was created
+  - `state: "queued" or "starting" or "active" or 2 more`
 
-
+    Current state of the work item
 
-data: object { id, type } 
+    - `"queued"`
 
-The actual work to be performed
+    - `"starting"`
 
-id: string
+    - `"active"`
 
-Session identifier (e.g., 'session\_...')
+    - `"stopping"`
 
-type: "session"
+    - `"stopped"`
 
-Type of work data
+  - `stop_requested_at: string`
 
-environment\_id: string
+    RFC 3339 timestamp when stop was requested
 
-Environment identifier this work belongs to (e.g., `env_...`)
+  - `stopped_at: string`
 
-latest\_heartbeat\_at: string
+    RFC 3339 timestamp when work execution stopped
 
-RFC 3339 timestamp of the most recent heartbeat
+  - `type: "work"`
 
-metadata: map[string]
+    The type of object (always 'work')
 
-User-provided metadata key-value pairs associated with this work item
+### Example
 
-started\_at: string
+```bash
+ant beta:environments:work retrieve \
+  --api-key my-anthropic-api-key \
+  --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW \
+  --work-id work_id
+```
 
-RFC 3339 timestamp when work execution started
+#### Response (200)
 
-
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
 
-state: "queued" or "starting" or "active" or 2 more
+## Poll for Work
 
-Current state of the work item
+`$ ant beta:environments:work poll`
 
-"queued"
+**GET** `/v1/environments/{environment_id}/work/poll`
 
-"starting"
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
-"active"
+Long poll for work items in the queue.
 
-"stopping"
+### Parameters
 
-"stopped"
+- `--environment-id: string`
 
-stop\_requested\_at: string
+  Path param
 
-RFC 3339 timestamp when stop was requested
+- `--block-ms: optional number`
 
-stopped\_at: string
+  Query param: How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
 
-RFC 3339 timestamp when work execution stopped
+  minimum: 1
 
-type: "work"
+- `--reclaim-older-than-ms: optional number`
 
-The type of object (always 'work')
+  Query param: Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
 
-
+  minimum: 1
 
-beta\_self\_hosted\_work\_heartbeat\_response: object { last\_heartbeat, lease\_extended, state, 2 more } 
+- `--beta: optional array of AnthropicBeta`
 
-Response after recording a heartbeat for a work item.
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-last\_heartbeat: string
+- `--anthropic-worker-id: optional string`
 
-RFC 3339 timestamp of the actual heartbeat from DB
+  Header param: Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
 
-lease\_extended: boolean
+### Returns
 
-Whether the heartbeat succeeded in extending the lease
+- `beta_self_hosted_work: object`
 
-
+  Work resource representing a unit of work in a self-hosted environment.
 
-state: "queued" or "starting" or "active" or 2 more
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
 
-Current state of the work item (active/stopping/stopped)
+  - `id: string`
 
-"queued"
+    Work identifier (e.g., 'work_...')
 
-"starting"
+  - `acknowledged_at: string`
 
-"active"
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-"stopping"
+  - `created_at: string`
 
-"stopped"
+    RFC 3339 timestamp when work was created
 
-ttl\_seconds: number
+  - `data: object`
 
-Effective TTL applied to the lease
+    The actual work to be performed
 
-type: "work\_heartbeat"
+    - `id: string`
 
-The type of response
+      Session identifier (e.g., 'session_...')
 
-
+    - `type: "session"`
 
-beta\_self\_hosted\_work\_list\_response: object { data, next\_page } 
+      Type of work data
 
-Response when listing work items with cursor-based pagination.
+  - `environment_id: string`
 
-
+    Environment identifier this work belongs to (e.g., `env_...`)
 
-data: array of [BetaSelfHostedWork](api/beta/environments/work.md) { id, acknowledged\_at, created\_at, 9 more } 
+  - `latest_heartbeat_at: string`
 
-List of work items
+    RFC 3339 timestamp of the most recent heartbeat
 
-id: string
+  - `metadata: map[string]`
 
-Work identifier (e.g., 'work\_...')
+    User-provided metadata key-value pairs associated with this work item
 
-acknowledged\_at: string
+  - `secret: string`
 
-RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
-created\_at: string
+  - `started_at: string`
 
-RFC 3339 timestamp when work was created
+    RFC 3339 timestamp when work execution started
 
-
+  - `state: "queued" or "starting" or "active" or 2 more`
 
-data: object { id, type } 
+    Current state of the work item
 
-The actual work to be performed
+    - `"queued"`
 
-id: string
+    - `"starting"`
 
-Session identifier (e.g., 'session\_...')
+    - `"active"`
 
-type: "session"
+    - `"stopping"`
 
-Type of work data
+    - `"stopped"`
 
-environment\_id: string
+  - `stop_requested_at: string`
 
-Environment identifier this work belongs to (e.g., `env_...`)
+    RFC 3339 timestamp when stop was requested
 
-latest\_heartbeat\_at: string
+  - `stopped_at: string`
 
-RFC 3339 timestamp of the most recent heartbeat
+    RFC 3339 timestamp when work execution stopped
 
-metadata: map[string]
+  - `type: "work"`
 
-User-provided metadata key-value pairs associated with this work item
+    The type of object (always 'work')
 
-started\_at: string
+### Example
 
-RFC 3339 timestamp when work execution started
+```bash
+ant beta:environments:work poll \
+  --api-key my-anthropic-api-key \
+  --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
+```
 
-
+#### Response (200)
 
-state: "queued" or "starting" or "active" or 2 more
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
 
-Current state of the work item
+## Acknowledge Work
 
-"queued"
+`$ ant beta:environments:work ack`
 
-"starting"
+**POST** `/v1/environments/{environment_id}/work/{work_id}/ack`
 
-"active"
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
-"stopping"
+Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting' and removing it from the queue.
 
-"stopped"
+### Parameters
 
-stop\_requested\_at: string
+- `--environment-id: string`
 
-RFC 3339 timestamp when stop was requested
+  Path param
 
-stopped\_at: string
+- `--work-id: string`
 
-RFC 3339 timestamp when work execution stopped
+  Path param
 
-type: "work"
+- `--beta: optional array of AnthropicBeta`
 
-The type of object (always 'work')
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-next\_page: string
+### Returns
 
-Opaque cursor for fetching the next page of results
+- `beta_self_hosted_work: object`
 
-
+  Work resource representing a unit of work in a self-hosted environment.
 
-beta\_self\_hosted\_work\_queue\_stats: object { depth, oldest\_queued\_at, pending, 2 more } 
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
 
-Statistics about the work queue for an environment.
+  - `id: string`
 
-Uses Redis Stream consumer group metrics for O(1) queries.
+    Work identifier (e.g., 'work_...')
 
-depth: number
+  - `acknowledged_at: string`
 
-Number of work items waiting to be picked up (lag from consumer group)
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-oldest\_queued\_at: string
+  - `created_at: string`
 
-RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
+    RFC 3339 timestamp when work was created
 
-pending: number
+  - `data: object`
 
-Number of work items being processed (polled but not acknowledged)
+    The actual work to be performed
 
-type: "work\_queue\_stats"
+    - `id: string`
 
-The type of object
+      Session identifier (e.g., 'session_...')
 
-workers\_polling: number
+    - `type: "session"`
 
-Number of workers that have polled for work in the last 30 seconds. Requires worker\_id to be sent with poll requests.
+      Type of work data
 
-
+  - `environment_id: string`
 
-beta\_self\_hosted\_work\_stop\_request: object { force } 
+    Environment identifier this work belongs to (e.g., `env_...`)
 
-Request to stop a work item.
+  - `latest_heartbeat_at: string`
 
-force: optional boolean
+    RFC 3339 timestamp of the most recent heartbeat
 
-If true, immediately stop work without graceful shutdown
+  - `metadata: map[string]`
 
-
+    User-provided metadata key-value pairs associated with this work item
 
-beta\_self\_hosted\_work\_update\_request: object { metadata } 
+  - `secret: string`
 
-Request to update work item metadata.
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
-metadata: map[string]
+  - `started_at: string`
 
-Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
+    RFC 3339 timestamp when work execution started
 
-
+  - `state: "queued" or "starting" or "active" or 2 more`
 
-beta\_session\_work\_data: object { id, type } 
+    Current state of the work item
 
-Work data for session work items.
+    - `"queued"`
 
-This resource type is used when work represents a session that needs to be executed
-in a self-hosted environment.
+    - `"starting"`
 
-id: string
+    - `"active"`
 
-Session identifier (e.g., 'session\_...')
+    - `"stopping"`
 
-type: "session"
+    - `"stopped"`
 
-Type of work data
+  - `stop_requested_at: string`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `stopped_at: string`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `type: "work"`
+
+    The type of object (always 'work')
+
+### Example
+
+```bash
+ant beta:environments:work ack \
+  --api-key my-anthropic-api-key \
+  --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW \
+  --work-id work_id
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+## Record Heartbeat
+
+`$ ant beta:environments:work heartbeat`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Record a heartbeat for a work item to maintain the lease.
+
+### Parameters
+
+- `--environment-id: string`
+
+  Path param
+
+- `--work-id: string`
+
+  Path param
+
+- `--desired-ttl-seconds: optional number`
+
+  Query param: Desired TTL in seconds
+
+- `--expected-last-heartbeat: optional string`
+
+  Query param: Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_self_hosted_work_heartbeat_response: object`
+
+  Response after recording a heartbeat for a work item.
+
+  - `last_heartbeat: string`
+
+    RFC 3339 timestamp of the actual heartbeat from DB
+
+  - `lease_extended: boolean`
+
+    Whether the heartbeat succeeded in extending the lease
+
+  - `state: "queued" or "starting" or "active" or 2 more`
+
+    Current state of the work item (active/stopping/stopped)
+
+    - `"queued"`
+
+    - `"starting"`
+
+    - `"active"`
+
+    - `"stopping"`
+
+    - `"stopped"`
+
+  - `ttl_seconds: number`
+
+    Effective TTL applied to the lease
+
+  - `type: "work_heartbeat"`
+
+    The type of response
+
+### Example
+
+```bash
+ant beta:environments:work heartbeat \
+  --api-key my-anthropic-api-key \
+  --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW \
+  --work-id work_id
+```
+
+#### Response (200)
+
+```json
+{
+  "last_heartbeat": "last_heartbeat",
+  "lease_extended": true,
+  "state": "queued",
+  "ttl_seconds": 0,
+  "type": "work_heartbeat"
+}
+```
+
+## Stop Work
+
+`$ ant beta:environments:work stop`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}/stop`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Stop a work item, initiating graceful or forced shutdown.
+
+### Parameters
+
+- `--environment-id: string`
+
+  Path param
+
+- `--work-id: string`
+
+  Path param
+
+- `--force: optional boolean`
+
+  Body param: If true, immediately stop work without graceful shutdown
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_self_hosted_work: object`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `id: string`
+
+    Work identifier (e.g., 'work_...')
+
+  - `acknowledged_at: string`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `created_at: string`
+
+    RFC 3339 timestamp when work was created
+
+  - `data: object`
+
+    The actual work to be performed
+
+    - `id: string`
+
+      Session identifier (e.g., 'session_...')
+
+    - `type: "session"`
+
+      Type of work data
+
+  - `environment_id: string`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `latest_heartbeat_at: string`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `metadata: map[string]`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `secret: string`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `started_at: string`
+
+    RFC 3339 timestamp when work execution started
+
+  - `state: "queued" or "starting" or "active" or 2 more`
+
+    Current state of the work item
+
+    - `"queued"`
+
+    - `"starting"`
+
+    - `"active"`
+
+    - `"stopping"`
+
+    - `"stopped"`
+
+  - `stop_requested_at: string`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `stopped_at: string`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `type: "work"`
+
+    The type of object (always 'work')
+
+### Example
+
+```bash
+ant beta:environments:work stop \
+  --api-key my-anthropic-api-key \
+  --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW \
+  --work-id work_id
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+## List Work Items
+
+`$ ant beta:environments:work list`
+
+**GET** `/v1/environments/{environment_id}/work`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+List work items in an environment.
+
+### Parameters
+
+- `--environment-id: string`
+
+  Path param
+
+- `--limit: optional number`
+
+  Query param: Maximum number of work items to return
+
+  maximum: 1000, minimum: 1
+
+- `--page: optional string`
+
+  Query param: Opaque cursor from previous response for pagination
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_self_hosted_work_list_response: object`
+
+  Response when listing work items with cursor-based pagination.
+
+  - `data: array of BetaSelfHostedWork`
+
+    List of work items
+
+    - `id: string`
+
+      Work identifier (e.g., 'work_...')
+
+    - `acknowledged_at: string`
+
+      RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+    - `created_at: string`
+
+      RFC 3339 timestamp when work was created
+
+    - `data: object`
+
+      The actual work to be performed
+
+      - `id: string`
+
+        Session identifier (e.g., 'session_...')
+
+      - `type: "session"`
+
+        Type of work data
+
+    - `environment_id: string`
+
+      Environment identifier this work belongs to (e.g., `env_...`)
+
+    - `latest_heartbeat_at: string`
+
+      RFC 3339 timestamp of the most recent heartbeat
+
+    - `metadata: map[string]`
+
+      User-provided metadata key-value pairs associated with this work item
+
+    - `secret: string`
+
+      Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+    - `started_at: string`
+
+      RFC 3339 timestamp when work execution started
+
+    - `state: "queued" or "starting" or "active" or 2 more`
+
+      Current state of the work item
+
+      - `"queued"`
+
+      - `"starting"`
+
+      - `"active"`
+
+      - `"stopping"`
+
+      - `"stopped"`
+
+    - `stop_requested_at: string`
+
+      RFC 3339 timestamp when stop was requested
+
+    - `stopped_at: string`
+
+      RFC 3339 timestamp when work execution stopped
+
+    - `type: "work"`
+
+      The type of object (always 'work')
+
+  - `next_page: string`
+
+    Opaque cursor for fetching the next page of results
+
+### Example
+
+```bash
+ant beta:environments:work list \
+  --api-key my-anthropic-api-key \
+  --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "acknowledged_at": "acknowledged_at",
+      "created_at": "created_at",
+      "data": {
+        "id": "id",
+        "type": "session"
+      },
+      "environment_id": "environment_id",
+      "latest_heartbeat_at": "latest_heartbeat_at",
+      "metadata": {
+        "foo": "string"
+      },
+      "secret": "secret",
+      "started_at": "started_at",
+      "state": "queued",
+      "stop_requested_at": "stop_requested_at",
+      "stopped_at": "stopped_at",
+      "type": "work"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Update Work Item
+
+`$ ant beta:environments:work update`
+
+**POST** `/v1/environments/{environment_id}/work/{work_id}`
+
+Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
+
+Update work item metadata with merge semantics.
+
+### Parameters
+
+- `--environment-id: string`
+
+  Path param
+
+- `--work-id: string`
+
+  Path param
+
+- `--metadata: map[string]`
+
+  Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_self_hosted_work: object`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `id: string`
+
+    Work identifier (e.g., 'work_...')
+
+  - `acknowledged_at: string`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `created_at: string`
+
+    RFC 3339 timestamp when work was created
+
+  - `data: object`
+
+    The actual work to be performed
+
+    - `id: string`
+
+      Session identifier (e.g., 'session_...')
+
+    - `type: "session"`
+
+      Type of work data
+
+  - `environment_id: string`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `latest_heartbeat_at: string`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `metadata: map[string]`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `secret: string`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `started_at: string`
+
+    RFC 3339 timestamp when work execution started
+
+  - `state: "queued" or "starting" or "active" or 2 more`
+
+    Current state of the work item
+
+    - `"queued"`
+
+    - `"starting"`
+
+    - `"active"`
+
+    - `"stopping"`
+
+    - `"stopped"`
+
+  - `stop_requested_at: string`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `stopped_at: string`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `type: "work"`
+
+    The type of object (always 'work')
+
+### Example
+
+```bash
+ant beta:environments:work update \
+  --api-key my-anthropic-api-key \
+  --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW \
+  --work-id work_id \
+  --metadata '{foo: string}'
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "secret": "secret",
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
+```
+
+## Get Queue Statistics
+
+`$ ant beta:environments:work stats`
+
+**GET** `/v1/environments/{environment_id}/work/stats`
+
+Get statistics about the work queue for an environment.
+
+### Parameters
+
+- `--environment-id: string`
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_self_hosted_work_queue_stats: object`
+
+  Statistics about the work queue for an environment.
+
+  Uses Redis Stream consumer group metrics for O(1) queries.
+
+  - `depth: number`
+
+    Number of work items waiting to be picked up (lag from consumer group)
+
+  - `oldest_queued_at: string`
+
+    RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
+
+  - `pending: number`
+
+    Number of work items being processed (polled but not acknowledged)
+
+  - `type: "work_queue_stats"`
+
+    The type of object
+
+  - `workers_polling: number`
+
+    Number of workers that have polled for work in the last 30 seconds. Requires worker_id to be sent with poll requests.
+
+### Example
+
+```bash
+ant beta:environments:work stats \
+  --api-key my-anthropic-api-key \
+  --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
+```
+
+#### Response (200)
+
+```json
+{
+  "depth": 0,
+  "oldest_queued_at": "oldest_queued_at",
+  "pending": 0,
+  "type": "work_queue_stats",
+  "workers_polling": 0
+}
+```
+
+## Domain types
+
+### Beta Self Hosted Work
+
+- `beta_self_hosted_work: object`
+
+  Work resource representing a unit of work in a self-hosted environment.
+
+  Work items are queued when sessions are created or when long-dormant sessions
+  receive new messages. The environment worker polls for work to execute in a
+  self-hosted sandbox.
+
+  - `id: string`
+
+    Work identifier (e.g., 'work_...')
+
+  - `acknowledged_at: string`
+
+    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+  - `created_at: string`
+
+    RFC 3339 timestamp when work was created
+
+  - `data: object`
+
+    The actual work to be performed
+
+    - `id: string`
+
+      Session identifier (e.g., 'session_...')
+
+    - `type: "session"`
+
+      Type of work data
+
+  - `environment_id: string`
+
+    Environment identifier this work belongs to (e.g., `env_...`)
+
+  - `latest_heartbeat_at: string`
+
+    RFC 3339 timestamp of the most recent heartbeat
+
+  - `metadata: map[string]`
+
+    User-provided metadata key-value pairs associated with this work item
+
+  - `secret: string`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+  - `started_at: string`
+
+    RFC 3339 timestamp when work execution started
+
+  - `state: "queued" or "starting" or "active" or 2 more`
+
+    Current state of the work item
+
+    - `"queued"`
+
+    - `"starting"`
+
+    - `"active"`
+
+    - `"stopping"`
+
+    - `"stopped"`
+
+  - `stop_requested_at: string`
+
+    RFC 3339 timestamp when stop was requested
+
+  - `stopped_at: string`
+
+    RFC 3339 timestamp when work execution stopped
+
+  - `type: "work"`
+
+    The type of object (always 'work')
+
+### Beta Self Hosted Work Heartbeat Response
+
+- `beta_self_hosted_work_heartbeat_response: object`
+
+  Response after recording a heartbeat for a work item.
+
+  - `last_heartbeat: string`
+
+    RFC 3339 timestamp of the actual heartbeat from DB
+
+  - `lease_extended: boolean`
+
+    Whether the heartbeat succeeded in extending the lease
+
+  - `state: "queued" or "starting" or "active" or 2 more`
+
+    Current state of the work item (active/stopping/stopped)
+
+    - `"queued"`
+
+    - `"starting"`
+
+    - `"active"`
+
+    - `"stopping"`
+
+    - `"stopped"`
+
+  - `ttl_seconds: number`
+
+    Effective TTL applied to the lease
+
+  - `type: "work_heartbeat"`
+
+    The type of response
+
+### Beta Self Hosted Work List Response
+
+- `beta_self_hosted_work_list_response: object`
+
+  Response when listing work items with cursor-based pagination.
+
+  - `data: array of BetaSelfHostedWork`
+
+    List of work items
+
+    - `id: string`
+
+      Work identifier (e.g., 'work_...')
+
+    - `acknowledged_at: string`
+
+      RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+
+    - `created_at: string`
+
+      RFC 3339 timestamp when work was created
+
+    - `data: object`
+
+      The actual work to be performed
+
+      - `id: string`
+
+        Session identifier (e.g., 'session_...')
+
+      - `type: "session"`
+
+        Type of work data
+
+    - `environment_id: string`
+
+      Environment identifier this work belongs to (e.g., `env_...`)
+
+    - `latest_heartbeat_at: string`
+
+      RFC 3339 timestamp of the most recent heartbeat
+
+    - `metadata: map[string]`
+
+      User-provided metadata key-value pairs associated with this work item
+
+    - `secret: string`
+
+      Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
+    - `started_at: string`
+
+      RFC 3339 timestamp when work execution started
+
+    - `state: "queued" or "starting" or "active" or 2 more`
+
+      Current state of the work item
+
+      - `"queued"`
+
+      - `"starting"`
+
+      - `"active"`
+
+      - `"stopping"`
+
+      - `"stopped"`
+
+    - `stop_requested_at: string`
+
+      RFC 3339 timestamp when stop was requested
+
+    - `stopped_at: string`
+
+      RFC 3339 timestamp when work execution stopped
+
+    - `type: "work"`
+
+      The type of object (always 'work')
+
+  - `next_page: string`
+
+    Opaque cursor for fetching the next page of results
+
+### Beta Self Hosted Work Queue Stats
+
+- `beta_self_hosted_work_queue_stats: object`
+
+  Statistics about the work queue for an environment.
+
+  Uses Redis Stream consumer group metrics for O(1) queries.
+
+  - `depth: number`
+
+    Number of work items waiting to be picked up (lag from consumer group)
+
+  - `oldest_queued_at: string`
+
+    RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
+
+  - `pending: number`
+
+    Number of work items being processed (polled but not acknowledged)
+
+  - `type: "work_queue_stats"`
+
+    The type of object
+
+  - `workers_polling: number`
+
+    Number of workers that have polled for work in the last 30 seconds. Requires worker_id to be sent with poll requests.
+
+### Beta Self Hosted Work Stop Request
+
+- `beta_self_hosted_work_stop_request: object`
+
+  Request to stop a work item.
+
+  - `force: optional boolean`
+
+    If true, immediately stop work without graceful shutdown
+
+### Beta Self Hosted Work Update Request
+
+- `beta_self_hosted_work_update_request: object`
+
+  Request to update work item metadata.
+
+  - `metadata: map[string]`
+
+    Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
+
+### Beta Session Work Data
+
+- `beta_session_work_data: object`
+
+  Work data for session work items.
+
+  This resource type is used when work represents a session that needs to be executed
+  in a self-hosted environment.
+
+  - `id: string`
+
+    Session identifier (e.g., 'session_...')
+
+  - `type: "session"`
+
+    Type of work data
 
 ---
 

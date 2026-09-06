@@ -1,16 +1,8 @@
 # Delete a Message Batch
 
-Copy page
+`$client->beta->messages->batches->delete(string messageBatchID, ?list<AnthropicBeta> betas): DeletedMessageBatch`
 
-
-
-PHP
-
-# Delete a Message Batch
-
-$client->beta->messages->batches->delete(string messageBatchID, ?list<AnthropicBeta> betas): [DeletedMessageBatch](api/beta/messages/batches.md)
-
-DELETE/v1/messages/batches/{message\_batch\_id}
+**DELETE** `/v1/messages/batches/{message_batch_id}`
 
 Delete a Message Batch.
 
@@ -18,39 +10,33 @@ Message Batches can only be deleted once they've finished processing. If you'd l
 
 Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
-messageBatchID: string
+- `messageBatchID: string`
 
-ID of the Message Batch.
+  ID of the Message Batch.
 
-betas?:optional list<AnthropicBeta>
+- `betas?:optional list<AnthropicBeta>`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `DeletedMessageBatch`
 
-[DeletedMessageBatch](api/beta/messages/batches.md)
+  - `string id`
 
-string id
+    ID of the Message Batch.
 
-ID of the Message Batch.
+  - `"message_batch_deleted" type`
 
-
+    Deleted object type.
 
-"message\_batch\_deleted" type
+    For Message Batches, this is always `"message_batch_deleted"`.
 
-Deleted object type.
+## Example
 
-For Message Batches, this is always `"message_batch_deleted"`.
-
-Delete a Message Batch
-
-PHP
-
-```shiki
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -58,30 +44,15 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaDeletedMessageBatch = $client->beta->messages->batches->delete(
-  'message_batch_id', betas: ['message-batches-2024-09-24']
+  'message_batch_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
 );
 
 var_dump($betaDeletedMessageBatch);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-  "type": "message_batch_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
   "type": "message_batch_deleted"

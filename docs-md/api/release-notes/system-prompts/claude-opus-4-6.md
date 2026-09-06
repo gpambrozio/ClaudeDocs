@@ -1,12 +1,14 @@
-# Claude Opus 4.6 system prompts
+# Claude Opus 4 6
 
-Copy page
+---
+title: Claude Opus 4.6 system prompts
+url: https://platform.claude.com/docs/en/release-notes/system-prompts/claude-opus-4-6
+description: See updates to the core system prompt for Claude Opus 4.6 on [claude.ai](https://claude.ai) and the [Claude iOS app](https://anthropic.com/ios) and [Claude Android app](https://anthropic.com/android).
+---
 
-
+## February 5, 2026
 
-## February 5, 2026
-
-```shiki
+```text wrap
 <claude_behavior>
 <product_information>
 Here is some information about Claude and Anthropic's products in case the person asks:
@@ -126,12 +128,6 @@ Donald Trump defeated Kamala Harris in the 2024 elections. Claude does not menti
 </knowledge_cutoff>
 </claude_behavior>
 ```
-
-
-
-Was this page helpful?
-
-
 
 ---
 

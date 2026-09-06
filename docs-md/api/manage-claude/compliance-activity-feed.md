@@ -1,27 +1,27 @@
-# Query the Activity Feed
+# Fetch the first page (newest activities first) and capture its trailing cursor.
 
-Copy page
+---
+title: Query the Activity Feed
+url: https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed
+description: Retrieve, filter, and paginate your organization's Compliance API Activity Feed.
+---
 
-
+To enable the Compliance API, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
+
+**Required scope:** `read:compliance_activities` on the Compliance Access Key or Admin API key.
+
+Both Compliance Access Keys (`sk-ant-api01-...`) carrying this scope and Admin API keys (`sk-ant-admin01-...`) can call the Activity Feed. See [Set up the Compliance API](manage-claude/compliance-api-access.md) for the conditions under which each key type carries the scope.
 
 The Activity Feed records authentication, chat, file, project, administrative, and platform activity across your organization and returns it in reverse chronological order. Activities are queryable within 1 minute of occurring and are retained for 6 years. Recording is not retroactive: it begins when the Compliance API is first enabled for your organization, and activity from before enablement is not backfilled.
 
-cURL
-
-
-
-```shiki
+```bash cURL
 curl --fail-with-body -sS \
   "https://api.anthropic.com/v1/compliance/activities?limit=1" \
   --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
   --header "anthropic-version: 2023-06-01"
 ```
 
-Response
-
-
-
-```shiki
+```json Response
 {
   "data": [
     {
@@ -47,17 +47,13 @@ Response
 }
 ```
 
-## Filter activities
+## Filter activities
 
 Filter by organization, actor, activity type, or a `created_at` time window using the dotted sub-parameters `created_at.gte`, `.gt`, `.lte`, and `.lt`. See the [API reference](api/compliance/activities/list.md) for each parameter's type and accepted values.
 
 Repeatable parameters use array-bracket query syntax: pass `activity_types[]=...`, `actor_ids[]=...`, or `organization_ids[]=...` once for each value.
 
-cURL
-
-
-
-```shiki
+```bash cURL
 curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/activities" \
   --data-urlencode "activity_types[]=claude_file_uploaded" \
@@ -69,18 +65,18 @@ curl --fail-with-body -sS -G \
 
 The Activity Feed produces hundreds of distinct activity types. See [Query compliance activities](api/compliance/activities/list.md) in the API reference for the full list of values that `activity_types[]` accepts.
 
-## Paginate results
+## Paginate results
 
 Activities are returned newest first, with ties in `created_at` broken by activity ID, and capped at `limit` results in each response (default 100, max 5,000). See the [API reference](api/compliance/activities/list.md) for the full response schema.
 
 The Compliance API uses two pagination schemes depending on the endpoint family:
 
-| Endpoint family | Sort order | Scheme | Parameters |
-| --- | --- | --- | --- |
-| Activities | Newest first | Cursor | `after_id`, `before_id` (returned as `first_id`, `last_id`) |
-| Chats and chat messages | Oldest first | Cursor | `after_id`, `before_id` (returned as `first_id`, `last_id`) |
-| Organizations, projects, project attachments, users, roles, role permissions, groups, group members | Endpoint-specific | Page token | `page` (returned as `next_page`) |
-| Local and remote sessions and session messages | Sessions newest first; messages oldest first by default | Page token | `page` (returned as `next_page`) |
+| Endpoint family                                                                                     | Sort order                                              | Scheme     | Parameters                                                  |
+| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | ---------- | ----------------------------------------------------------- |
+| Activities                                                                                          | Newest first                                            | Cursor     | `after_id`, `before_id` (returned as `first_id`, `last_id`) |
+| Chats and chat messages                                                                             | Oldest first                                            | Cursor     | `after_id`, `before_id` (returned as `first_id`, `last_id`) |
+| Organizations, projects, project attachments, users, roles, role permissions, groups, group members | Endpoint-specific                                       | Page token | `page` (returned as `next_page`)                            |
+| Local and remote sessions and session messages                                                      | Sessions newest first; messages oldest first by default | Page token | `page` (returned as `next_page`)                            |
 
 Files do not paginate: they are retrieved individually by ID.
 
@@ -88,17 +84,17 @@ Pagination cursors and page tokens are opaque strings: pass them back unchanged.
 
 To page through activities:
 
-- Pass the response's `last_id` as `after_id` to advance to the next page in result order. With activities sorted newest first, the next page contains older entries.
-- Pass `first_id` as `before_id` to return to the previous page.
-- Stop when `has_more` is `false`.
+* Pass the response's `last_id` as `after_id` to advance to the next page in result order. With activities sorted newest first, the next page contains older entries.
+* Pass `first_id` as `before_id` to return to the previous page.
+* Stop when `has_more` is `false`.
 
 The cursor parameter sets the page direction; the endpoint's sort order sets the time direction. The same `after_id` parameter reaches older activities here. Chats sort oldest first; see [Retrieve and delete chats, files, and projects](manage-claude/compliance-content-data.md) for the cursor semantics there.
 
-cURL
+**Cursors are safe to reuse on retry.** A cursor or page token from a successfully returned page remains valid; a request that fails (5xx, timeout, network error) does not advance your position. Retry the same request with the same cursor. Only move to the next cursor after you have stored the page it points past.
 
-
+Page tokens on the local session endpoints are the exception over longer pauses. On the [local session messages endpoint](manage-claude/compliance-sessions.md), a walk's `page` tokens expire 24 hours after its first page (a walk is one pass through the pages), so finish or resume within that window, or restart without the `page` parameter. On the [local session list](manage-claude/compliance-sessions.md), an older `page` token is still accepted but is re-evaluated against the current retention boundary and can skip sessions, so complete list walks within 24 hours as well.
 
-```shiki
+```bash cURL
 # Fetch the first page (newest activities first) and capture its trailing cursor.
 last_id=$(curl --fail-with-body -sS \
   "https://api.anthropic.com/v1/compliance/activities?limit=2" \
@@ -120,7 +116,7 @@ A production **backfill** loop pages through older activities by driving iterati
 2. Page through with `after_id=<last_id>` until `has_more` is `false`.
 3. Persist the final `last_id` only after you've stored every page it covers.
 
-```inline-block
+```text
 cursor = stored_cursor
 loop:
   if cursor is not null:
@@ -134,56 +130,52 @@ loop:
 persist(cursor)
 ```
 
-
-
-## Understand the Activity object
+## Understand the Activity object
 
 Every entry in `data` is an Activity with this top-level shape:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `id` | string | Unique identifier for the activity. |
-| `created_at` | RFC 3339 string | When the activity occurred. |
-| `organization_id` | string or null | Organization where the activity occurred, or `null` for events not tied to an organization (sign-in, sign-out, Compliance API calls). |
-| `organization_uuid` | string or null | Same scoping as `organization_id`, expressed as a UUID. |
-| `actor` | Actor union | Who or what performed the activity. See the following actor table. |
-| `type` | string | The activity type, for example `claude_chat_created`. |
-| *additional fields* | varies | Type-specific fields, for example `claude_chat_id` on chat events or `filename` on file events. See [Query compliance activities](api/compliance/activities/list.md) in the API reference for the per-type field list. |
+| Field               | Type            | Description                                                                                                                                                                                                                                             |
+| ------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                | string          | Unique identifier for the activity.                                                                                                                                                                                                                     |
+| `created_at`        | RFC 3339 string | When the activity occurred.                                                                                                                                                                                                                             |
+| `organization_id`   | string or null  | Organization where the activity occurred, or `null` for events not tied to an organization (sign-in, sign-out, Compliance API calls).                                                                                                                   |
+| `organization_uuid` | string or null  | Same scoping as `organization_id`, expressed as a UUID.                                                                                                                                                                                                 |
+| `actor`             | Actor union     | Who or what performed the activity. See the following actor table.                                                                                                                                                                                      |
+| `type`              | string          | The activity type, for example `claude_chat_created`.                                                                                                                                                                                                   |
+| *additional fields* | varies          | Type-specific fields, for example `claude_chat_id` on chat events or `filename` on file events. See [Query compliance activities](api/compliance/activities/list.md) in the API reference for the per-type field list. |
 
 The `actor` field is a discriminated union. The `type` discriminator tells you which other fields are present:
 
-| `actor.type` | When it appears | Key fields |
-| --- | --- | --- |
-| `user_actor` | A signed-in claude.ai or Claude Console user took the action. | `email_address`, `user_id`, `ip_address`, `user_agent` |
-| `api_actor` | A request called the Claude API or the Compliance API with a customer-issued API key. Compliance API calls produce this actor type for both Compliance Access Keys and Admin API keys. | `api_key_id`, `ip_address`, `user_agent` |
-| `admin_api_key_actor` | An organization admin used an Admin API key to manage users, invites, workspaces, or API keys. | `admin_api_key_id`, `ip_address`, `user_agent` |
-| `unauthenticated_user_actor` | An action occurred before sign-in completed, for example `sso_login_initiated`. | `unauthenticated_email_address`, `ip_address`, `user_agent` |
-| `anthropic_actor` | Anthropic acted on the organization, for example through internal tooling. | `email_address` (always `null`; present for shape consistency with `user_actor`, because Anthropic operators are not represented by individual email) |
-| `scim_directory_sync_actor` | An identity provider (such as Okta, Microsoft Entra ID, or JumpCloud) pushed a change through SCIM directory sync. | `workos_event_id`, `directory_id`, `idp_connection_type` (nullable; for example `OktaSCIMV2`, `AzureSCIMV2`) |
+| `actor.type`                 | When it appears                                                                                                                                                                        | Key fields                                                                                                                                            |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `user_actor`                 | A signed-in claude.ai or Claude Console user took the action.                                                                                                                          | `email_address`, `user_id`, `ip_address`, `user_agent`                                                                                                |
+| `api_actor`                  | A request called the Claude API or the Compliance API with a customer-issued API key. Compliance API calls produce this actor type for both Compliance Access Keys and Admin API keys. | `api_key_id`, `ip_address`, `user_agent`                                                                                                              |
+| `admin_api_key_actor`        | An organization admin used an Admin API key to manage users, invites, workspaces, or API keys.                                                                                         | `admin_api_key_id`, `ip_address`, `user_agent`                                                                                                        |
+| `unauthenticated_user_actor` | An action occurred before sign-in completed, for example `sso_login_initiated`.                                                                                                        | `unauthenticated_email_address`, `ip_address`, `user_agent`                                                                                           |
+| `anthropic_actor`            | Anthropic acted on the organization, for example through internal tooling.                                                                                                             | `email_address` (always `null`; present for shape consistency with `user_actor`, because Anthropic operators are not represented by individual email) |
+| `scim_directory_sync_actor`  | An identity provider (such as Okta, Microsoft Entra ID, or JumpCloud) pushed a change through SCIM directory sync.                                                                     | `workos_event_id`, `directory_id`, `idp_connection_type` (nullable; for example `OktaSCIMV2`, `AzureSCIMV2`)                                          |
 
 A `claude_*_viewed` activity means a Claude app loaded content, not that a person viewed it. Types such as `claude_chat_viewed`, `claude_file_viewed`, and `claude_project_viewed` are recorded each time a Claude app loads the chat, file, or project from Anthropic's servers. Repeated loads are not deduplicated. The web, desktop, and mobile apps load content at different moments, sometimes in the background, and can display a cached copy without loading it. Counts of these activities vary by platform as a result, and they do not correspond to messages sent or screens viewed.
 
-## Next steps
+**Build forward-compatible handlers.** Pass through unrecognized `type` and `actor.type` values, and ignore fields your handler does not expect, so your integration keeps working when new activity types ship.
 
-[API reference](api/compliance/activities/list.md)
+## Next steps
+
+**API reference**
 
 The full request and response schema for `GET /v1/compliance/activities`, including every supported `activity_types[]` value.
 
-[Retrieve and delete chats, files, and projects](manage-claude/compliance-content-data.md)
+**Retrieve and delete chats, files, and projects**
 
 Query and delete the underlying content for activities you find in the feed (Compliance Access Key required).
 
-[Design your compliance integration](manage-claude/compliance-integration-patterns.md)
+**Design your compliance integration**
 
 Choose a polling or batch consumption pattern and plan SIEM correlation.
 
-[Handle Compliance API errors](manage-claude/compliance-errors.md)
+**Handle Compliance API errors**
 
 The full error catalog.
-
-Was this page helpful?
-
-
 
 ---
 

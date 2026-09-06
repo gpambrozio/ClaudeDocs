@@ -1,75 +1,44 @@
 # Delete Vault
 
-Copy page
+`$ ant beta:vaults delete`
 
-
-
-CLI
-
-# Delete Vault
-
-$ ant beta:vaults delete
-
-DELETE/v1/vaults/{vault\_id}
+**DELETE** `/v1/vaults/{vault_id}`
 
 Delete Vault
 
-##### ParametersExpand Collapse
+## Parameters
 
---vault-id: string
+- `--vault-id: string`
 
-Path parameter vault\_id
+  Path parameter vault_id
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--beta: optional array of AnthropicBeta`
 
-Optional header to specify the beta version(s) you want to use.
+  Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `beta_managed_agents_deleted_vault: object`
 
-beta\_managed\_agents\_deleted\_vault: object { id, type } 
+  Confirmation of a deleted vault.
 
-Confirmation of a deleted vault.
+  - `id: string`
 
-id: string
+    Unique identifier of the deleted vault.
 
-Unique identifier of the deleted vault.
+  - `type: "vault_deleted"`
 
-
+## Example
 
-type: "vault\_deleted"
-
-"vault\_deleted"
-
-Delete Vault
-
-CLI
-
-```shiki
+```bash
 ant beta:vaults delete \
   --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
-  "type": "vault_deleted"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
   "type": "vault_deleted"

@@ -1,84 +1,80 @@
 # List User Profiles
 
-Copy page
+`$client->beta->userProfiles->list(?int limit, ?Order order, ?OrderBy orderBy, ?string page, ?list<AnthropicBeta> betas): PageCursor<BetaUserProfile>`
 
-
-
-PHP
-
-# List User Profiles
-
-$client->beta->userProfiles->list(?int limit, ?[Order](api/beta/user_profiles/list.md) order, ?string page, ?list<AnthropicBeta> betas): PageCursor<[BetaUserProfile](api/beta/user_profiles.md)>
-
-GET/v1/user\_profiles
+**GET** `/v1/user_profiles`
 
 List User Profiles
 
-##### ParametersExpand Collapse
+## Parameters
 
-limit?:optional int
+- `limit?:optional int`
 
-Query parameter for limit
+  Query parameter for limit
 
-order?:optional [Order](api/beta/user_profiles/list.md)
+- `order?:optional Order`
 
-Query parameter for order
+  Query parameter for order
 
-page?:optional string
+- `orderBy?:optional OrderBy`
 
-Query parameter for page
+  Query parameter for order_by
 
-betas?:optional list<AnthropicBeta>
+- `page?:optional string`
 
-Optional header to specify the beta version(s) you want to use.
+  Query parameter for page
 
-##### ReturnsExpand Collapse
+- `betas?:optional list<AnthropicBeta>`
 
-
+  Optional header to specify the beta version(s) you want to use.
 
-[BetaUserProfile](api/beta/user_profiles.md)
+## Returns
 
-string id
+- `BetaUserProfile`
 
-Unique identifier for this user profile, prefixed `uprof_`.
+  - `string id`
 
-\Datetime createdAt
+    Unique identifier for this user profile, prefixed `uprof_`.
 
-A timestamp in RFC 3339 format
+  - `\Datetime createdAt`
 
-array<string,string> metadata
+    A timestamp in RFC 3339 format
 
-Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+  - `array<string,string> metadata`
 
-Relationship relationship
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+  - `array<string,BetaUserProfileTrustGrant> trustGrants`
 
-array<string,[BetaUserProfileTrustGrant](api/beta/user_profiles.md)> trustGrants
+    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
-Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
+  - `Type type`
 
-Type type
+    Object type. Always `user_profile`.
 
-Object type. Always `user_profile`.
+  - `\Datetime updatedAt`
 
-\Datetime updatedAt
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+  - `?AccessType accessType`
 
-?string externalID
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
-Platform's own identifier for this user. Not enforced unique.
+  - `?string externalID`
 
-?string name
+    Platform's own identifier for this user. Not enforced unique.
 
-Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+  - `?\Datetime externalUserOnboardedAt`
 
-List User Profiles
+    A timestamp in RFC 3339 format
 
-PHP
+  - `?string name`
 
-```shiki
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
+
+## Example
+
+```php
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -86,24 +82,25 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->userProfiles->list(
-  limit: 0, order: 'asc', page: 'page', betas: ['message-batches-2024-09-24']
+  limit: 0,
+  order: 'asc',
+  orderBy: 'created_at',
+  page: 'page',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($page);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
       "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
       "created_at": "2026-03-15T10:00:00Z",
       "metadata": {},
-      "relationship": "external",
       "trust_grants": {
         "cyber": {
           "status": "active"
@@ -111,36 +108,9 @@ Response 200
       },
       "type": "user_profile",
       "updated_at": "2026-03-15T10:00:00Z",
+      "access_type": "application",
       "external_id": "user_12345",
-      "name": "Example User"
-    }
-  ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
-      "created_at": "2026-03-15T10:00:00Z",
-      "metadata": {},
-      "relationship": "external",
-      "trust_grants": {
-        "cyber": {
-          "status": "active"
-        }
-      },
-      "type": "user_profile",
-      "updated_at": "2026-03-15T10:00:00Z",
-      "external_id": "user_12345",
+      "external_user_onboarded_at": "2024-11-02T08:15:00Z",
       "name": "Example User"
     }
   ],

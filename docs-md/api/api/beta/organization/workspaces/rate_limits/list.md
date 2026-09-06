@@ -1,14 +1,6 @@
 # List Workspace Rate Limits
 
-Copy page
-
-
-
-cURL
-
-# List Workspace Rate Limits
-
-GET/v1/organizations/workspaces/{workspace\_id}/rate\_limits
+**GET** `/v1/organizations/workspaces/{workspace_id}/rate_limits`
 
 List rate-limit overrides configured for a workspace.
 
@@ -20,165 +12,113 @@ When `limit` is omitted, every matching entry is returned in a single
 page; when `limit` truncates the result, follow `next_page` to fetch
 the remaining entries.
 
-##### Path parameters
+## Path parameters
 
-workspace\_id: string
+- `workspace_id: string`
 
-The ID of the workspace.
+  The ID of the workspace.
 
-##### Query parameters
+## Query parameters
 
-
+- `group_type: optional "batch" or "files" or "model_group" or 3 more`
 
-group\_type: optional "batch" or "files" or "model\_group" or 3 more
+  Filter by group type.
 
-Filter by group type.
+  - `"batch"`
 
-One of the following:
+  - `"files"`
 
-"batch"
+  - `"model_group"`
 
-"files"
+  - `"skills"`
 
-"model\_group"
+  - `"token_count"`
 
-"skills"
+  - `"web_search"`
 
-"token\_count"
+- `limit: optional number`
 
-"web\_search"
+  Maximum number of items to return per page. Ranges from `1` to `1000`.
 
-
+  When omitted, every remaining entry is returned in a single page and `next_page` is `null`.
 
-limit: optional number
+  maximum: 1000, minimum: 1
 
-Maximum number of items to return per page. Ranges from `1` to `1000`.
+- `page: optional string`
 
-When omitted, every remaining entry is returned in a single page and `next_page` is `null`.
+  Opaque cursor from a previous response's `next_page`.
 
-maximum1000
+## Returns
 
-minimum1
+- `data: array of BetaWorkspaceRateLimit`
 
-page: optional string
+  Rate-limit entries for the workspace, one per group that has at least one override.
 
-Opaque cursor from a previous response's `next_page`.
+  - `group_type: "batch" or "files" or "model_group" or 3 more`
 
-##### Returns
+    The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
 
-
+    - `"batch"`
 
-data: array of [BetaWorkspaceRateLimit](api/http/beta/organization/workspaces/rate_limits.md) { group\_type, limits, models, 3 more }
+    - `"files"`
 
-Rate-limit entries for the workspace, one per group that has at least one override.
+    - `"model_group"`
 
-
+    - `"skills"`
 
-group\_type: "batch" or "files" or "model\_group" or 3 more
+    - `"token_count"`
 
-The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
+    - `"web_search"`
 
-One of the following:
+  - `limits: array of BetaWorkspaceRateLimitValue`
 
-"batch"
+    The limiter values overridden for this group in this workspace. Limiter types without a workspace override are omitted and inherit the organization value.
 
-"files"
+    - `org_limit: number or null`
 
-"model\_group"
+      The organization-level value for the same limiter type, for reference. `null` when the organization has no limit configured for this limiter type.
 
-"skills"
+    - `type: string`
 
-"token\_count"
+      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
 
-"web\_search"
+    - `value: number`
 
-
+      The workspace-level override value for this limiter type.
 
-limits: array of [BetaWorkspaceRateLimitValue](api/http/beta/organization/workspaces/rate_limits.md) { org\_limit, type, value }
+  - `models: array of string or null`
 
-The limiter values overridden for this group in this workspace. Limiter types without a workspace override are omitted and inherit the organization value.
+    Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
 
-org\_limit: number or null
+  - `rate_limit_id: string`
 
-The organization-level value for the same limiter type, for reference. `null` when the organization has no limit configured for this limiter type.
+    The `id` of the RateLimit group this override applies to.
 
-type: string
+  - `type: "workspace_rate_limit"`
 
-The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+    Object type. Always `workspace_rate_limit` for workspace rate-limit entries.
 
-value: number
+    default: workspace_rate_limit
 
-The workspace-level override value for this limiter type.
+  - `workspace_id: string`
 
-models: array of string or null
+    ID of the Workspace this override applies to.
 
-Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
+- `next_page: string or null`
 
-rate\_limit\_id: string
+  Opaque cursor for the next page of results, or `null` when no entries remain beyond this response.
 
-The `id` of the RateLimit group this override applies to.
+## Example
 
-
-
-type: "workspace\_rate\_limit"
-
-Object type. Always `workspace_rate_limit` for workspace rate-limit entries.
-
-defaultworkspace\_rate\_limit
-
-workspace\_id: string
-
-ID of the Workspace this override applies to.
-
-next\_page: string or null
-
-Opaque cursor for the next page of results, or `null` when no entries remain beyond this response.
-
-List Workspace Rate Limits
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/rate_limits \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "group_type": "batch",
-      "limits": [
-        {
-          "org_limit": 0,
-          "type": "type",
-          "value": 0
-        }
-      ],
-      "models": [
-        "string"
-      ],
-      "rate_limit_id": "rate_limit_id",
-      "type": "workspace_rate_limit",
-      "workspace_id": "workspace_id"
-    }
-  ],
-  "next_page": "next_page"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

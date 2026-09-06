@@ -1,18 +1,18 @@
-# Compliance API
+# Compliance Api
 
-Copy page
-
-
+---
+title: Compliance API
+url: https://platform.claude.com/docs/en/manage-claude/compliance-api
+description: Programmatic access to your organization's Claude activity, chats, files, projects, sessions in Claude apps, and users for compliance, audit, and governance.
+---
 
 The Compliance API gives Claude Enterprise and Claude Console customers programmatic access to their organization's Activity Feed. For Claude Enterprise organizations, it also covers the directory of users, roles, and groups across every linked organization; the effective settings in force for each organization; the underlying chats, files, and projects in claude.ai organizations; and Cowork, Claude Code, Claude Science, and Claude for Microsoft 365 sessions. Security, legal, and compliance teams use it to audit activity, retrieve or delete content, and feed events into downstream tooling.
 
+Two key types unlock the Compliance API. A **Compliance Access Key** (created in claude.ai) reaches every endpoint, and an **Admin API key** (created in Claude Console) reaches the Activity Feed only. See [Which key do you need?](manage-claude/compliance-api-access.md) for the full key-type comparison.
+
 The following call returns the most recent activity event in your organization. Any key with the `read:compliance_activities` scope can make it. To create a key and grant it that scope, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
 
-cURL
-
-
-
-```shiki
+```bash cURL
 curl --fail-with-body -sS \
   "https://api.anthropic.com/v1/compliance/activities?limit=1" \
   --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
@@ -21,11 +21,7 @@ curl --fail-with-body -sS \
 
 A successful response returns a JSON object containing `data` (an array of `Activity` records), `has_more`, `first_id`, and `last_id`:
 
-Response
-
-
-
-```shiki
+```json Response
 {
   "data": [
     {
@@ -51,9 +47,9 @@ Response
 }
 ```
 
----
+***
 
-## How the Compliance API works
+## How the Compliance API works
 
 Every endpoint lives under `/v1/compliance/*` on `https://api.anthropic.com`, authenticates through the `x-api-key` header, and takes the [`anthropic-version`](api/versioning.md) header on every request. To provision a key, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
 
@@ -63,77 +59,73 @@ A Claude Enterprise tenant has one parent organization (the top-level container 
 
 All `/v1/compliance/*` endpoints share a rate limit of 600 requests per minute per parent organization (for a standalone Claude Console organization, per organization). The local session endpoints count only against that shared limit, and the remote session endpoints carry a second request budget on top. See [429 Too Many Requests](manage-claude/compliance-errors.md) for the response headers and retry contract.
 
----
+***
 
-## Versioning
+## Versioning
 
 Send the `anthropic-version` header on every request; see [API versions](api/versioning.md) for the available versions.
 
----
+***
 
-## Compliance API versus related features
+## Compliance API versus related features
 
 A few adjacent features overlap with the Compliance API; here is how to choose.
 
-### Export audit logs
+### Export audit logs
 
 The audit log export is a separate feature in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls) that lets owners and primary owners download a CSV of organization events. It's significantly narrower than the Compliance API: a capped lookback window, CSV download only, and no access to chat, file, or project content. Standardize on the Compliance API for ongoing programmatic use.
 
-### Analytics API
+### Analytics API
 
 Anthropic provides two analytics APIs: the Claude Enterprise Analytics API and the [Claude Code Analytics API](manage-claude/claude-code-analytics-api.md). Both return aggregated usage and cost figures for IT, FinOps, and platform teams, whereas the Compliance API returns per-event records for security, legal, and compliance teams. The two API families answer different questions, use different keys, and are provisioned separately.
 
-### OpenTelemetry logging
+### OpenTelemetry logging
 
 [Cowork's OpenTelemetry logging](https://support.claude.com/en/articles/14477985-monitor-claude-cowork-activity-with-opentelemetry) and [Claude Code monitoring](monitoring-usage.md) stream per-event telemetry, including token, cost, and host metadata, to a collector you run as activity happens, whereas the Compliance API returns retained per-session transcripts from Anthropic on request and works with your existing Compliance Access Key. OpenTelemetry logging can also capture prompts and responses, but Anthropic recommends the Compliance API for retrieving the content of Cowork and Claude Code sessions. For a table comparing local sessions, remote sessions, and OpenTelemetry logging, see the introduction to [Retrieve session transcripts](manage-claude/compliance-sessions.md).
 
-### Inference hooks
+### Inference hooks
 
 [Inference hooks](manage-claude/inference-hooks.md) (beta) act inline: your organization's AI security server receives each governed prompt before inference and can deny it in real time, whereas the Compliance API retrieves records after the fact and returns richer data, such as organization settings and full non-text files.
 
----
+***
 
-## In this section
+## In this section
 
-[Set up the Compliance API](manage-claude/compliance-api-access.md)
+**Set up the Compliance API**
 
 Enable the Compliance API for your organization, then create a Compliance Access Key (with scoped permissions) or an Admin API key, and learn which to use.
 
-[Query the Activity Feed](manage-claude/compliance-activity-feed.md)
+**Query the Activity Feed**
 
 Retrieve, filter, and paginate the shared Activity Feed. Supported by both key types.
 
-[Retrieve and delete chats, files, and projects](manage-claude/compliance-content-data.md)
+**Retrieve and delete chats, files, and projects**
 
 Read chat content, files, and project attachments; delete chats, files, and projects on demand. Compliance Access Key required.
 
-[Retrieve session transcripts](manage-claude/compliance-sessions.md)
+**Retrieve session transcripts**
 
 List the sessions your users run in Claude apps and agents, such as Cowork and Claude Code, and retrieve their transcripts. Compliance Access Key required.
 
-[List organizations, users, roles, groups, and settings](manage-claude/compliance-org-data.md)
+**List organizations, users, roles, groups, and settings**
 
 Enumerate linked organizations, members, roles, and directory groups, and read each organization's effective settings.
 
-[Design your compliance integration](manage-claude/compliance-integration-patterns.md)
+**Design your compliance integration**
 
 Choose a feed-consumption pattern, plan SIEM correlation, and decide your retention approach.
 
-[Handle Compliance API errors](manage-claude/compliance-errors.md)
+**Handle Compliance API errors**
 
 Every 400, 401, 403, 404, 409, 429, and 5xx response the Compliance API returns, with the fix for each.
 
-[API reference](api/compliance.md)
+**API reference**
 
 Endpoint paths, parameters, and response schemas for every Compliance API call.
 
-[Compliance API FAQ](manage-claude/compliance-faq.md)
+**Compliance API FAQ**
 
 Answers to common key, scope, availability, and integration questions.
-
-Was this page helpful?
-
-
 
 ---
 

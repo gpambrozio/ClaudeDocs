@@ -1,20 +1,22 @@
-# Vision
+# First, upload your image to the Files API
 
-Copy page
-
-
+---
+title: Vision
+url: https://platform.claude.com/docs/en/build-with-claude/vision
+description: Claude's vision capabilities allow it to understand and analyze images, opening up exciting possibilities for multimodal interaction.
+---
 
 This guide describes how to send images to Claude, the limits and costs that apply, and where to find guidance for [coordinate-based workflows](build-with-claude/vision-coordinates.md).
 
----
+***
 
-## Send images to Claude
+## Send images to Claude
 
 Use Claude's vision capabilities through:
 
-- [claude.ai](https://claude.ai/). Upload an image like you would a file, or drag and drop an image directly into the chat window.
-- [Playground](/playground) in the Claude Console. Add images directly to any User message block.
-- API request. See the following examples.
+* [claude.ai](https://claude.ai/). Upload an image like you would a file, or drag and drop an image directly into the chat window.
+* [Playground](https://platform.claude.com/playground) in the Claude Console. Add images directly to any User message block.
+* API request. See the following examples.
 
 On the API, provide images to Claude as `image` content blocks using one of three source types:
 
@@ -22,13 +24,65 @@ On the API, provide images to Claude as `image` content blocks using one of thre
 2. A URL reference to an image hosted online
 3. A `file_id` returned by the [Files API](build-with-claude/files.md) (upload once, reference many times)
 
-### Base64-encoded image example
+On Amazon Bedrock and Google Cloud, only base64-encoded sources are currently available.
 
-cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+Just as [placing long documents before your query](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) improves results in text prompts, Claude works best when images come before text. Images placed after text or interpolated with text still perform well, but if your use case allows it, prefer an image-then-text structure.
 
-
+### Base64-encoded image example
 
-```shiki
+```bash cURL
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -d @- <<EOF
+{
+  "model": "claude-opus-5",
+  "max_tokens": 1024,
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "image",
+          "source": {
+            "type": "base64",
+            "media_type": "image/jpeg",
+            "data": "$BASE64_IMAGE_DATA"
+          }
+        },
+        {
+          "type": "text",
+          "text": "Describe this image."
+        }
+      ]
+    }
+  ]
+}
+EOF
+```
+
+```bash CLI
+curl -sSo ./vision-example.jpg \
+  https://platform.claude.com/docs/images/vision-example.jpg
+
+ant messages create <<'YAML'
+model: claude-opus-5
+max_tokens: 1024
+messages:
+  - role: user
+    content:
+      - type: image
+        source:
+          type: base64
+          media_type: image/jpeg
+          data: "@./vision-example.jpg"
+      - type: text
+        text: Describe this image.
+YAML
+```
+
+```python Python
 image1_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
 image1_media_type = "image/png"
 
@@ -56,13 +110,231 @@ message = client.messages.create(
 print(message)
 ```
 
-### URL-based image example
+```typescript TypeScript
+const anthropic = new Anthropic();
 
-cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+const message = await anthropic.messages.create({
+  model: "claude-opus-5",
+  max_tokens: 1024,
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "image",
+          source: {
+            type: "base64",
+            media_type: "image/jpeg",
+            data: imageData // Base64-encoded image data as string
+          }
+        },
+        {
+          type: "text",
+          text: "Describe this image."
+        }
+      ]
+    }
+  ]
+});
 
-
+console.log(message);
+```
 
-```shiki
+```csharp C#
+using System.Collections.Generic;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+AnthropicClient client = new();
+
+string imageData = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC";
+
+var message = await client.Messages.Create(new MessageCreateParams
+{
+    Model = Model.ClaudeOpus5,
+    MaxTokens = 1024,
+    Messages =
+    [
+        new()
+        {
+            Role = Role.User,
+            Content = new MessageParamContent(new List<ContentBlockParam>
+            {
+                new ContentBlockParam(new ImageBlockParam(
+                    new ImageBlockParamSource(new Base64ImageSource()
+                    {
+                        Data = imageData,
+                        MediaType = MediaType.ImagePng,
+                    })
+                )),
+                new ContentBlockParam(new TextBlockParam("Describe this image.")),
+            }),
+        }
+    ]
+});
+
+Console.WriteLine(message);
+```
+
+```go Go
+client := anthropic.NewClient()
+
+imageData := "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+
+message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+	Model:     anthropic.ModelClaudeOpus5,
+	MaxTokens: 1024,
+	Messages: []anthropic.MessageParam{
+		anthropic.NewUserMessage(
+			anthropic.NewImageBlockBase64("image/png", imageData),
+			anthropic.NewTextBlock("Describe this image."),
+		),
+	},
+})
+if err != nil {
+	log.Fatal(err)
+}
+
+fmt.Println(message)
+```
+
+```java Java
+AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+String imageData =
+  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC";
+
+List<ContentBlockParam> contentBlockParams = List.of(
+  ContentBlockParam.ofImage(
+    ImageBlockParam.builder()
+      .source(
+        Base64ImageSource.builder()
+          .mediaType(Base64ImageSource.MediaType.IMAGE_PNG)
+          .data(imageData)
+          .build()
+      )
+      .build()
+  ),
+  ContentBlockParam.ofText(TextBlockParam.builder().text("Describe this image.").build())
+);
+Message message = client
+  .messages()
+  .create(
+    MessageCreateParams.builder()
+      .model(Model.CLAUDE_OPUS_5)
+      .maxTokens(1024)
+      .addUserMessageOfBlockParams(contentBlockParams)
+      .build()
+  );
+
+IO.println(message);
+```
+
+```php PHP
+$client = new Client();
+
+$imageData = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC";
+
+$message = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        [
+            'role' => 'user',
+            'content' => [
+                [
+                    'type' => 'image',
+                    'source' => [
+                        'type' => 'base64',
+                        'media_type' => 'image/png',
+                        'data' => $imageData,
+                    ],
+                ],
+                ['type' => 'text', 'text' => 'Describe this image.'],
+            ],
+        ],
+    ],
+    model: 'claude-opus-5',
+);
+
+echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
+```
+
+```ruby Ruby
+client = Anthropic::Client.new
+
+image_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+
+message = client.messages.create(
+  model: "claude-opus-5",
+  max_tokens: 1024,
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "image",
+          source: {
+            type: "base64",
+            media_type: "image/png",
+            data: image_data
+          }
+        },
+        { type: "text", text: "Describe this image." }
+      ]
+    }
+  ]
+)
+
+puts message
+```
+
+### URL-based image example
+
+```bash cURL
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-5",
+    "max_tokens": 1024,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "image",
+            "source": {
+              "type": "url",
+              "url": "https://platform.claude.com/docs/images/vision-example.jpg"
+            }
+          },
+          {
+            "type": "text",
+            "text": "Describe this image."
+          }
+        ]
+      }
+    ]
+  }'
+```
+
+```bash CLI
+ant messages create <<'YAML'
+model: claude-opus-5
+max_tokens: 1024
+messages:
+  - role: user
+    content:
+      - type: image
+        source:
+          type: url
+          url: https://platform.claude.com/docs/images/vision-example.jpg
+      - type: text
+        text: Describe this image.
+YAML
+```
+
+```python Python
 client = anthropic.Anthropic()
 message = client.messages.create(
     model="claude-opus-5",
@@ -86,15 +358,240 @@ message = client.messages.create(
 print(message)
 ```
 
-### Files API image example
+```typescript TypeScript
+const anthropic = new Anthropic();
+
+const message = await anthropic.messages.create({
+  model: "claude-opus-5",
+  max_tokens: 1024,
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "image",
+          source: {
+            type: "url",
+            url: "https://platform.claude.com/docs/images/vision-example.jpg"
+          }
+        },
+        {
+          type: "text",
+          text: "Describe this image."
+        }
+      ]
+    }
+  ]
+});
+
+console.log(message);
+```
+
+```csharp C#
+using System.Collections.Generic;
+using Anthropic;
+using Anthropic.Models.Messages;
+
+AnthropicClient client = new();
+
+var message = await client.Messages.Create(new MessageCreateParams
+{
+    Model = Model.ClaudeOpus5,
+    MaxTokens = 1024,
+    Messages =
+    [
+        new()
+        {
+            Role = Role.User,
+            Content = new MessageParamContent(new List<ContentBlockParam>
+            {
+                new ContentBlockParam(new ImageBlockParam(
+                    new ImageBlockParamSource(new UrlImageSource()
+                    {
+                        Url = "https://platform.claude.com/docs/images/vision-example.jpg",
+                    })
+                )),
+                new ContentBlockParam(new TextBlockParam("Describe this image.")),
+            }),
+        }
+    ]
+});
+
+Console.WriteLine(message);
+```
+
+```go Go
+client := anthropic.NewClient()
+
+message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+	Model:     anthropic.ModelClaudeOpus5,
+	MaxTokens: 1024,
+	Messages: []anthropic.MessageParam{
+		anthropic.NewUserMessage(
+			anthropic.NewImageBlock(anthropic.URLImageSourceParam{
+				URL: "https://platform.claude.com/docs/images/vision-example.jpg",
+			}),
+			anthropic.NewTextBlock("Describe this image."),
+		),
+	},
+})
+if err != nil {
+	log.Fatal(err)
+}
+
+fmt.Println(message)
+```
+
+```java Java
+AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+List<ContentBlockParam> contentBlockParams = List.of(
+  ContentBlockParam.ofImage(
+    ImageBlockParam.builder()
+      .source(
+        UrlImageSource.builder()
+          .url("https://platform.claude.com/docs/images/vision-example.jpg")
+          .build()
+      )
+      .build()
+  ),
+  ContentBlockParam.ofText(TextBlockParam.builder().text("Describe this image.").build())
+);
+Message message = client
+  .messages()
+  .create(
+    MessageCreateParams.builder()
+      .model(Model.CLAUDE_OPUS_5)
+      .maxTokens(1024)
+      .addUserMessageOfBlockParams(contentBlockParams)
+      .build()
+  );
+System.out.println(message);
+```
+
+```php PHP
+$client = new Client();
+
+$message = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        [
+            'role' => 'user',
+            'content' => [
+                [
+                    'type' => 'image',
+                    'source' => [
+                        'type' => 'url',
+                        'url' => 'https://platform.claude.com/docs/images/vision-example.jpg',
+                    ],
+                ],
+                ['type' => 'text', 'text' => 'Describe this image.'],
+            ],
+        ],
+    ],
+    model: 'claude-opus-5',
+);
+
+echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
+```
+
+```ruby Ruby
+client = Anthropic::Client.new
+
+message = client.messages.create(
+  model: "claude-opus-5",
+  max_tokens: 1024,
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "image",
+          source: {
+            type: "url",
+            url: "https://platform.claude.com/docs/images/vision-example.jpg"
+          }
+        },
+        { type: "text", text: "Describe this image." }
+      ]
+    }
+  ]
+)
+
+puts message
+```
+
+### Files API image example
 
 For images you'll use repeatedly or when you want to avoid encoding overhead, use the [Files API](build-with-claude/files.md). Upload the image once, then reference the returned `file_id` in subsequent messages instead of resending base64 data.
 
-cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+In multi-turn conversations and agentic workflows, each request resends the full conversation history. If images are base64-encoded, the full image bytes are included in the payload on every turn, which can significantly increase request size and latency as the conversation grows. Uploading images to the Files API and referencing them by `file_id` keeps request payloads small regardless of how many images accumulate in the conversation history.
 
-
+```bash cURL
+# First, upload your image to the Files API
+FILE_ID=$(curl -sS -X POST https://api.anthropic.com/v1/files \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -F "file=@vision-example.jpg" | jq -r '.id')
 
-```shiki
+# Then use the returned file_id in your message
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -d @- <<EOF
+{
+  "model": "claude-opus-5",
+  "max_tokens": 1024,
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "image",
+          "source": {
+            "type": "file",
+            "file_id": "$FILE_ID"
+          }
+        },
+        {
+          "type": "text",
+          "text": "Describe this image."
+        }
+      ]
+    }
+  ]
+}
+EOF
+```
+
+```bash CLI
+curl -sSo vision-example.jpg \
+  https://platform.claude.com/docs/images/vision-example.jpg
+
+# First, upload your image to the Files API
+FILE_ID=$(ant files upload \
+  --file ./vision-example.jpg \
+  --transform id --raw-output)
+
+# Then use the returned file_id in your message
+ant messages create \
+  --transform content --format yaml <<YAML
+model: claude-opus-5
+max_tokens: 1024
+messages:
+  - role: user
+    content:
+      - type: image
+        source:
+          type: file
+          file_id: $FILE_ID
+      - type: text
+        text: Describe this image.
+YAML
+```
+
+```python Python
 client = anthropic.Anthropic()
 
 # Upload the image file
@@ -122,17 +619,311 @@ message = client.messages.create(
 print(message.content)
 ```
 
+```typescript TypeScript
+import Anthropic, { toFile } from "@anthropic-ai/sdk";
+import fs from "node:fs";
+
+const anthropic = new Anthropic();
+
+// Upload the image file
+const fileUpload = await anthropic.files.upload({
+  file: await toFile(fs.createReadStream("vision-example.jpg"), undefined, {
+    type: "image/jpeg"
+  })
+});
+
+// Use the uploaded file in a message
+const response = await anthropic.messages.create({
+  model: "claude-opus-5",
+  max_tokens: 1024,
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "image",
+          source: {
+            type: "file",
+            file_id: fileUpload.id
+          }
+        },
+        {
+          type: "text",
+          text: "Describe this image."
+        }
+      ]
+    }
+  ]
+});
+
+console.log(response);
+```
+
+```csharp C#
+using System.Collections.Generic;
+using Anthropic;
+using Anthropic.Core;
+using Anthropic.Models.Files;
+using Anthropic.Models.Messages;
+
+AnthropicClient client = new();
+
+// Upload the image file
+var fileUpload = await client.Files.Upload(new FileUploadParams
+{
+    File = new BinaryContent
+    {
+        Stream = File.OpenRead("vision-example.jpg"),
+        FileName = "vision-example.jpg",
+        ContentType = new("image/jpeg"),
+    },
+});
+
+// Use the uploaded file in a message
+var response = await client.Messages.Create(new MessageCreateParams
+{
+    Model = Model.ClaudeOpus5,
+    MaxTokens = 1024,
+    Messages =
+    [
+        new()
+        {
+            Role = Role.User,
+            Content = new MessageParamContent(new List<ContentBlockParam>
+            {
+                new ContentBlockParam(new ImageBlockParam(
+                    new ImageBlockParamSource(new FileImageSource(fileUpload.ID))
+                )),
+                new ContentBlockParam(new TextBlockParam("Describe this image.")),
+            }),
+        }
+    ]
+});
+
+Console.WriteLine(response);
+```
+
+```go Go
+client := anthropic.NewClient()
+
+// Upload the image file
+file, err := os.Open("vision-example.jpg")
+if err != nil {
+	log.Fatal(err)
+}
+defer file.Close()
+
+fileUpload, err := client.Files.Upload(context.Background(),
+	anthropic.FileUploadParams{
+		File: anthropic.File(file, "vision-example.jpg", "image/jpeg"),
+	})
+if err != nil {
+	log.Fatal(err)
+}
+
+// Use the uploaded file in a message
+message, err := client.Messages.New(context.Background(),
+	anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus5,
+		MaxTokens: 1024,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(
+				anthropic.NewImageBlock(anthropic.FileImageSourceParam{
+					FileID: fileUpload.ID,
+				}),
+				anthropic.NewTextBlock("Describe this image."),
+			),
+		},
+	})
+if err != nil {
+	log.Fatal(err)
+}
+
+fmt.Println(message.Content)
+```
+
+```java Java
+import com.anthropic.core.MultipartField;
+import com.anthropic.models.files.FileMetadata;
+import com.anthropic.models.files.FileUploadParams;
+// ...
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+    // Upload the image file
+    FileMetadata file = client.files().upload(
+      FileUploadParams.builder()
+        .file(
+          MultipartField.<InputStream>builder()
+            .value(Files.newInputStream(Path.of("vision-example.jpg")))
+            .filename("vision-example.jpg")
+            .contentType("image/jpeg")
+            .build()
+        )
+        .build()
+    );
+
+    // Use the uploaded file in a message
+    ImageBlockParam imageParam = ImageBlockParam.builder().fileSource(file.id()).build();
+
+    MessageCreateParams params = MessageCreateParams.builder()
+      .model(Model.CLAUDE_OPUS_5)
+      .maxTokens(1024)
+      .addUserMessageOfBlockParams(
+        List.of(
+          ContentBlockParam.ofImage(imageParam),
+          ContentBlockParam.ofText(
+            TextBlockParam.builder().text("Describe this image.").build()
+          )
+        )
+      )
+      .build();
+
+    Message message = client.messages().create(params);
+    System.out.println(message.content());
+```
+
+```php PHP
+use Anthropic\Core\FileParam;
+
+$client = new Client();
+
+// Upload the image file
+$fileUpload = $client->files->upload(
+    file: FileParam::fromResource(fopen('vision-example.jpg', 'rb'), contentType: 'image/jpeg'),
+);
+
+// Use the uploaded file in a message
+$message = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        [
+            'role' => 'user',
+            'content' => [
+                [
+                    'type' => 'image',
+                    'source' => ['type' => 'file', 'fileID' => $fileUpload->id],
+                ],
+                ['type' => 'text', 'text' => 'Describe this image.'],
+            ],
+        ],
+    ],
+    model: 'claude-opus-5',
+);
+
+echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
+```
+
+```ruby Ruby
+client = Anthropic::Client.new
+
+# Upload the image file
+file_upload = client.files.upload(
+  file: Anthropic::FilePart.new(
+    File.open("vision-example.jpg", "rb"),
+    content_type: "image/jpeg"
+  )
+)
+
+# Use the uploaded file in a message
+message = client.messages.create(
+  model: "claude-opus-5",
+  max_tokens: 1024,
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "image",
+          source: { type: "file", file_id: file_upload.id }
+        },
+        { type: "text", text: "Describe this image." }
+      ]
+    }
+  ]
+)
+
+puts message.content
+```
+
 See [Messages API examples](api/messages/create.md) for more example code and parameter details.
 
-### Multiple images
+### Multiple images
 
 You can include multiple images in a single request, and Claude analyzes them jointly. This is useful for comparing images, asking about differences, or working with a sequence such as pages of a document. When sending several images, introduce each one with a short text label (`Image 1:`, `Image 2:`, and so on) so you can refer to them by name in your prompt and in follow-up turns.
 
-cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+```bash cURL
+curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "model": "claude-opus-5",
+    "max_tokens": 1024,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "Image 1:"
+          },
+          {
+            "type": "image",
+            "source": {
+              "type": "base64",
+              "media_type": "image/png",
+              "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+            }
+          },
+          {
+            "type": "text",
+            "text": "Image 2:"
+          },
+          {
+            "type": "image",
+            "source": {
+              "type": "base64",
+              "media_type": "image/png",
+              "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC"
+            }
+          },
+          {
+            "type": "text",
+            "text": "How are these images different?"
+          }
+        ]
+      }
+    ]
+  }'
+```
 
-
+```bash CLI
+ant messages create <<'YAML'
+model: claude-opus-5
+max_tokens: 1024
+messages:
+  - role: user
+    content:
+      - type: text
+        text: "Image 1:"
+      - type: image
+        source:
+          type: base64
+          media_type: image/png
+          data: iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC
+      - type: text
+        text: "Image 2:"
+      - type: image
+        source:
+          type: base64
+          media_type: image/png
+          data: iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC
+      - type: text
+        text: How are these images different?
+YAML
+```
 
-```shiki
+```python Python
 image1_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
 image2_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC"
 
@@ -170,19 +961,265 @@ message = client.messages.create(
 print(message)
 ```
 
+```typescript TypeScript
+const anthropic = new Anthropic();
+
+const image1Data =
+  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC";
+const image2Data =
+  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC";
+
+const message = await anthropic.messages.create({
+  model: "claude-opus-5",
+  max_tokens: 1024,
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "text",
+          text: "Image 1:"
+        },
+        {
+          type: "image",
+          source: {
+            type: "base64",
+            media_type: "image/png",
+            data: image1Data
+          }
+        },
+        {
+          type: "text",
+          text: "Image 2:"
+        },
+        {
+          type: "image",
+          source: {
+            type: "base64",
+            media_type: "image/png",
+            data: image2Data
+          }
+        },
+        {
+          type: "text",
+          text: "How are these images different?"
+        }
+      ]
+    }
+  ]
+});
+
+console.log(message);
+```
+
+```csharp C#
+AnthropicClient client = new();
+
+string image1Data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC";
+string image2Data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC";
+
+var message = await client.Messages.Create(new MessageCreateParams
+{
+    Model = Model.ClaudeOpus5,
+    MaxTokens = 1024,
+    Messages =
+    [
+        new()
+        {
+            Role = Role.User,
+            Content = new MessageParamContent(new List<ContentBlockParam>
+            {
+                new ContentBlockParam(new TextBlockParam("Image 1:")),
+                new ContentBlockParam(new ImageBlockParam(
+                    new ImageBlockParamSource(new Base64ImageSource()
+                    {
+                        Data = image1Data,
+                        MediaType = MediaType.ImagePng,
+                    })
+                )),
+                new ContentBlockParam(new TextBlockParam("Image 2:")),
+                new ContentBlockParam(new ImageBlockParam(
+                    new ImageBlockParamSource(new Base64ImageSource()
+                    {
+                        Data = image2Data,
+                        MediaType = MediaType.ImagePng,
+                    })
+                )),
+                new ContentBlockParam(new TextBlockParam("How are these images different?")),
+            }),
+        }
+    ]
+});
+
+Console.WriteLine(message);
+```
+
+```go Go
+client := anthropic.NewClient()
+
+image1Data := "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+image2Data := "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC"
+
+message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+	Model:     anthropic.ModelClaudeOpus5,
+	MaxTokens: 1024,
+	Messages: []anthropic.MessageParam{
+		anthropic.NewUserMessage(
+			anthropic.NewTextBlock("Image 1:"),
+			anthropic.NewImageBlockBase64("image/png", image1Data),
+			anthropic.NewTextBlock("Image 2:"),
+			anthropic.NewImageBlockBase64("image/png", image2Data),
+			anthropic.NewTextBlock("How are these images different?"),
+		),
+	},
+})
+if err != nil {
+	log.Fatal(err)
+}
+
+fmt.Println(message)
+```
+
+```java Java
+AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+String image1Data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC";
+String image2Data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC";
+
+List<ContentBlockParam> contentBlockParams = List.of(
+    ContentBlockParam.ofText(TextBlockParam.builder().text("Image 1:").build()),
+    ContentBlockParam.ofImage(
+        ImageBlockParam.builder()
+            .source(
+                Base64ImageSource.builder()
+                    .mediaType(Base64ImageSource.MediaType.IMAGE_PNG)
+                    .data(image1Data)
+                    .build()
+            )
+            .build()
+    ),
+    ContentBlockParam.ofText(TextBlockParam.builder().text("Image 2:").build()),
+    ContentBlockParam.ofImage(
+        ImageBlockParam.builder()
+            .source(
+                Base64ImageSource.builder()
+                    .mediaType(Base64ImageSource.MediaType.IMAGE_PNG)
+                    .data(image2Data)
+                    .build()
+            )
+            .build()
+    ),
+    ContentBlockParam.ofText(
+        TextBlockParam.builder().text("How are these images different?").build()
+    )
+);
+
+Message message = client
+    .messages()
+    .create(
+        MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_5)
+            .maxTokens(1024)
+            .addUserMessageOfBlockParams(contentBlockParams)
+            .build()
+    );
+
+IO.println(message);
+```
+
+```php PHP
+$client = new Client();
+
+$image1Data = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC';
+$image2Data = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC';
+
+$message = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        [
+            'role' => 'user',
+            'content' => [
+                ['type' => 'text', 'text' => 'Image 1:'],
+                [
+                    'type' => 'image',
+                    'source' => [
+                        'type' => 'base64',
+                        'media_type' => 'image/png',
+                        'data' => $image1Data,
+                    ],
+                ],
+                ['type' => 'text', 'text' => 'Image 2:'],
+                [
+                    'type' => 'image',
+                    'source' => [
+                        'type' => 'base64',
+                        'media_type' => 'image/png',
+                        'data' => $image2Data,
+                    ],
+                ],
+                ['type' => 'text', 'text' => 'How are these images different?'],
+            ],
+        ],
+    ],
+    model: 'claude-opus-5',
+);
+
+echo $message;
+```
+
+```ruby Ruby
+client = Anthropic::Client.new
+
+image1_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+image2_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC"
+
+message = client.messages.create(
+  model: "claude-opus-5",
+  max_tokens: 1024,
+  messages: [
+    {
+      role: "user",
+      content: [
+        { type: "text", text: "Image 1:" },
+        {
+          type: "image",
+          source: {
+            type: "base64",
+            media_type: "image/png",
+            data: image1_data
+          }
+        },
+        { type: "text", text: "Image 2:" },
+        {
+          type: "image",
+          source: {
+            type: "base64",
+            media_type: "image/png",
+            data: image2_data
+          }
+        },
+        { type: "text", text: "How are these images different?" }
+      ]
+    }
+  ]
+)
+
+puts message
+```
+
 In a multi-turn conversation, add new images in later `user` turns the same way. Claude has access to every image from earlier turns, so follow-up questions such as "Are these similar to the first two?" work without including the earlier images again in the new turn's content.
 
----
+***
 
-## Image limits and costs
+## Image limits and costs
 
-### Request limits
+### Request limits
 
 The maximum number of images per message or request is:
 
-- 20 per message on [claude.ai](https://claude.ai/).
-- 100 per request on the API, for models with a 200k-token context window.
-- 600 per request on the API, for all other models.
+* 20 per message on [claude.ai](https://claude.ai/).
+* 100 per request on the API, for models with a 200k-token context window.
+* 600 per request on the API, for all other models.
 
 The maximum dimensions per image are 8000x8000 px.
 
@@ -190,37 +1227,41 @@ If a single API request contains more than 20 images, a stricter per-image dimen
 
 The maximum size per image is:
 
-- 10 MB (base64-encoded) when using the Claude API directly.
-- 5 MB (base64-encoded) on Amazon Bedrock and Google Cloud.
-- 10 MB on [claude.ai](https://claude.ai/).
+* 10 MB (base64-encoded) when using the Claude API directly.
+* 5 MB (base64-encoded) on Amazon Bedrock and Google Cloud.
+* 10 MB on [claude.ai](https://claude.ai/).
 
-### Supported formats
+Although the API supports up to 600 images per request, [request size limits](api/overview.md) (32 MB for standard endpoints; lower on some partner-operated platforms, for example, Amazon Bedrock and Google Cloud) can be reached first. For many images, consider uploading with the [Files API](build-with-claude/vision.md) and referencing by `file_id` to keep request payloads small.
+
+Even when using the Files API, requests with many large images can fail before reaching the 600-image count. Reduce image dimensions or file sizes (for example, by downsampling) before uploading (see [Resolution and token cost](build-with-claude/vision.md)).
+
+### Supported formats
 
 Claude supports JPEG, PNG, GIF, and WebP images (`image/jpeg`, `image/png`, `image/gif`, `image/webp`). Animations are unsupported, and only the first frame is used.
 
-### Resolution and token cost
+### Resolution and token cost
 
 Claude views images in patches instead of pixels. Each patch is a 28×28-pixel block of the image, referred to as a visual token. An image, therefore, costs `⌈width / 28⌉ × ⌈height / 28⌉` visual tokens.
 
 Each model has a maximum native image resolution, expressed as a long-edge limit and a visual-token limit. Images larger than either limit are downscaled before processing; see [How Claude resizes and pads images](build-with-claude/vision-coordinates.md) for the exact rule. The exception is screenshots and zoom images that you return to the [computer use](agents-and-tools/tool-use/computer-use-tool.md) and [browser use](agents-and-tools/tool-use/browser-use-tool.md) toolsets: the API rejects a `tool_result` image that exceeds the model's limits with a validation error instead of downscaling it, so resize those images in your application before returning them. To have any other oversized image rejected with an error instead of downscaled, set the image block's [`transformations` field](build-with-claude/vision-coordinates.md).
 
-| Resolution tier | Models | Max long edge | Max visual tokens |
-| --- | --- | --- | --- |
-| High-resolution | Claude 4.7 and later models | 2576 px | 4784 |
-| Standard | All other models | 1568 px | 1568 |
+| Resolution tier | Models                      | Max long edge | Max visual tokens |
+| --------------- | --------------------------- | ------------- | ----------------- |
+| High-resolution | Claude 4.7 and later models | 2576 px       | 4784              |
+| Standard        | All other models            | 1568 px       | 1568              |
 
 High-resolution support is automatic on the listed models and requires no beta header or client-side opt-in.
 
 The following table shows the downsized resolution and visual-token cost for several image sizes on each tier:
 
-| Image size | Standard tier: downsized to | Standard tier: tokens | High-resolution tier: downsized to | High-resolution tier: tokens |
-| --- | --- | --- | --- | --- |
-| 200x200 px (0.04 megapixels) | Not resized | 64 | Not resized | 64 |
-| 1000x1000 px (1 megapixel) | Not resized | 1296 | Not resized | 1296 |
-| 1092x1092 px (1.19 megapixels) | Not resized | 1521 | Not resized | 1521 |
-| 1920x1080 px (2.07 megapixels) | 1456x819 px | 1560 | Not resized | 2691 |
-| 2000x1500 px (3 megapixels) | 1269x952 px | 1564 | Not resized | 3888 |
-| 3840x2160 px (8.29 megapixels) | 1456x819 px | 1560 | 2576x1449 px | 4784 |
+| Image size                     | Standard tier: downsized to | Standard tier: tokens | High-resolution tier: downsized to | High-resolution tier: tokens |
+| ------------------------------ | --------------------------- | --------------------- | ---------------------------------- | ---------------------------- |
+| 200x200 px (0.04 megapixels)   | Not resized                 | 64                    | Not resized                        | 64                           |
+| 1000x1000 px (1 megapixel)     | Not resized                 | 1296                  | Not resized                        | 1296                         |
+| 1092x1092 px (1.19 megapixels) | Not resized                 | 1521                  | Not resized                        | 1521                         |
+| 1920x1080 px (2.07 megapixels) | 1456x819 px                 | 1560                  | Not resized                        | 2691                         |
+| 2000x1500 px (3 megapixels)    | 1269x952 px                 | 1564                  | Not resized                        | 3888                         |
+| 3840x2160 px (8.29 megapixels) | 1456x819 px                 | 1560                  | 2576x1449 px                       | 4784                         |
 
 When an image is downsized, Claude scales it to the largest size that fits the tier's limits while preserving its aspect ratio. This caps the token cost. For the precise rule and a reference implementation, see [How Claude resizes and pads images](build-with-claude/vision-coordinates.md).
 
@@ -228,74 +1269,70 @@ To estimate cost, multiply the token count by the [per-token price of the model]
 
 High-resolution images can use up to roughly three times more visual tokens than the same image on a standard-tier model. If you don't need the additional fidelity that high resolution provides for computer use, screenshot understanding, and dense documents, downsample images before sending to control token costs. To minimize latency and to simplify [coordinate-based workflows](build-with-claude/vision-coordinates.md), prefer resizing images before uploading them.
 
-### Image quality guidance
+### Image quality guidance
 
 When providing images to Claude, keep the following in mind for best results:
 
-- **Image clarity:** Ensure images are clear and not too blurry or pixelated.
-- **Text:** If the image contains important text, make sure it's legible and not too small. Avoid cropping out key visual context solely to enlarge the text.
-- **Resizing:** Take into account that your image might be resized if it is too large (see [Resolution and token cost](#evaluate-image-size)); this might, for example, make text less legible. Consider pre-resizing your images, cropping them, or both. To have an oversized image rejected with an error instead of resized (important for [coordinate workflows](build-with-claude/vision-coordinates.md)), mark the image block with [`"oversized_image": "error"`](build-with-claude/vision-coordinates.md).
-- **Image compression:** Compressing images before sending them, using a lossy format such as JPEG or WebP (lossy mode), can reduce latency by reducing the size of requests. However, this can introduce artifacts that are detrimental to model performance, especially when multiple compression passes are applied. For example, heavy JPEG compression can make text difficult to read. Confirm your compression settings are appropriate for the task by inspecting the actual images sent to the API.
+* **Image clarity:** Ensure images are clear and not too blurry or pixelated.
+* **Text:** If the image contains important text, make sure it's legible and not too small. Avoid cropping out key visual context solely to enlarge the text.
+* **Resizing:** Take into account that your image might be resized if it is too large (see [Resolution and token cost](build-with-claude/vision.md)); this might, for example, make text less legible. Consider pre-resizing your images, cropping them, or both. To have an oversized image rejected with an error instead of resized (important for [coordinate workflows](build-with-claude/vision-coordinates.md)), mark the image block with [`"oversized_image": "error"`](build-with-claude/vision-coordinates.md).
+* **Image compression:** Compressing images before sending them, using a lossy format such as JPEG or WebP (lossy mode), can reduce latency by reducing the size of requests. However, this can introduce artifacts that are detrimental to model performance, especially when multiple compression passes are applied. For example, heavy JPEG compression can make text difficult to read. Confirm your compression settings are appropriate for the task by inspecting the actual images sent to the API.
 
----
+***
 
-## Coordinates and bounding boxes
+## Coordinates and bounding boxes
 
 For bounding boxes, points, and pixel coordinates, see [Coordinates and bounding boxes](build-with-claude/vision-coordinates.md). Claude returns absolute pixel coordinates relative to the image it sees after resizing; that guide covers how Claude resizes and pads images and how to pre-resize or rescale so coordinates line up with your original image.
 
----
+***
 
-## Limitations
+## Limitations
 
 Although Claude's image understanding capabilities are cutting-edge, there are some limitations to be aware of:
 
-- **People identification:** Claude [cannot be used](https://www.anthropic.com/legal/aup) to name people in images and refuses to do so.
-- **Accuracy:** Claude might hallucinate or make mistakes when interpreting low-quality, rotated, or very small images under 200 pixels.
-- **Spatial reasoning:** Claude's coordinate and localization outputs are approximate. Follow the guidance in [Coordinates and bounding boxes](build-with-claude/vision-coordinates.md) and verify outputs before relying on them.
-- **Counting:** Claude can give approximate counts of objects in an image but might not always be precisely accurate, especially with large numbers of small objects.
-- **AI-generated images:** Claude cannot determine whether an image is AI-generated and might be incorrect if asked. Do not rely on it to detect fake or synthetic images.
-- **Inappropriate content:** Claude does not process inappropriate or explicit images that violate the [Acceptable Use Policy](https://www.anthropic.com/legal/aup).
-- **Healthcare applications:** Although Claude can analyze general medical images, it is not designed to interpret complex diagnostic scans such as CTs or MRIs. Claude's outputs should not be considered a substitute for professional medical advice or diagnosis.
+* **People identification:** Claude [cannot be used](https://www.anthropic.com/legal/aup) to name people in images and refuses to do so.
+* **Accuracy:** Claude might hallucinate or make mistakes when interpreting low-quality, rotated, or very small images under 200 pixels.
+* **Spatial reasoning:** Claude's coordinate and localization outputs are approximate. Follow the guidance in [Coordinates and bounding boxes](build-with-claude/vision-coordinates.md) and verify outputs before relying on them.
+* **Counting:** Claude can give approximate counts of objects in an image but might not always be precisely accurate, especially with large numbers of small objects.
+* **AI-generated images:** Claude cannot determine whether an image is AI-generated and might be incorrect if asked. Do not rely on it to detect fake or synthetic images.
+* **Inappropriate content:** Claude does not process inappropriate or explicit images that violate the [Acceptable Use Policy](https://www.anthropic.com/legal/aup).
+* **Healthcare applications:** Although Claude can analyze general medical images, it is not designed to interpret complex diagnostic scans such as CTs or MRIs. Claude's outputs should not be considered a substitute for professional medical advice or diagnosis.
 
 Always carefully review and verify Claude's image interpretations, especially for high-stakes use cases. Do not use Claude for tasks requiring perfect precision or sensitive image analysis without human oversight.
 
----
+***
 
-## FAQ
+## FAQ
 
-### What image file types does Claude support?
+**What image file types does Claude support?**
 
-JPEG, PNG, GIF, and WebP. See [Supported formats](#supported-formats).
+JPEG, PNG, GIF, and WebP. See [Supported formats](build-with-claude/vision.md).
 
-### Can Claude read image URLs?
+**Can Claude read image URLs?**
 
-Yes. Use the `url` source type instead of `base64` in the `image` content block. See the [URL-based image example](#url-based-image-example).
+Yes. Use the `url` source type instead of `base64` in the `image` content block. See the [URL-based image example](build-with-claude/vision.md).
 
-### Is there a limit to the image file size I can upload?
+**Is there a limit to the image file size I can upload?**
 
-Yes. See [Request limits](#request-limits) for per-image and overall request size limits across the Claude API, Amazon Bedrock, Google Cloud, and claude.ai.
+Yes. See [Request limits](build-with-claude/vision.md) for per-image and overall request size limits across the Claude API, Amazon Bedrock, Google Cloud, and claude.ai.
 
-### How many images can I include in one request?
+**How many images can I include in one request?**
 
-Up to 600 per API request (100 for models with a 200k-token context window) and 20 per turn on claude.ai. See [Request limits](#request-limits) for details and the lower per-image dimension limit that applies above 20 images.
+Up to 600 per API request (100 for models with a 200k-token context window) and 20 per turn on claude.ai. See [Request limits](build-with-claude/vision.md) for details and the lower per-image dimension limit that applies above 20 images.
 
-### Does Claude read image metadata?
+**Does Claude read image metadata?**
 
 No, Claude does not parse or receive any metadata from images passed to it.
 
-### Can I delete images I've uploaded?
+**Can I delete images I've uploaded?**
 
-No. Image uploads are ephemeral and not stored beyond the duration of the API
-request. Uploaded images are automatically deleted after they have been
-processed.
+No. Image uploads are ephemeral and not stored beyond the duration of the API request. Uploaded images are automatically deleted after they have been processed.
 
-### Where can I find details on data privacy for image uploads?
+**Where can I find details on data privacy for image uploads?**
 
-Refer to the Anthropic privacy policy page for information on how uploaded
-images and other data are handled. Anthropic does not use uploaded images to
-train models.
+Refer to the Anthropic privacy policy page for information on how uploaded images and other data are handled. Anthropic does not use uploaded images to train models.
 
-### What if Claude's image interpretation seems wrong?
+**What if Claude's image interpretation seems wrong?**
 
 If Claude's image interpretation seems incorrect:
 
@@ -305,29 +1342,21 @@ If Claude's image interpretation seems incorrect:
 
 Your feedback helps improve Claude!
 
-### Can Claude generate or edit images?
+**Can Claude generate or edit images?**
 
 No, Claude is an image understanding model only. It can interpret and analyze images, but it cannot generate, produce, edit, manipulate, or create images.
 
----
+***
 
-## Next steps
+## Next steps
 
-
-
-[Multimodal cookbook](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision)
+**Multimodal cookbook**
 
 Get tips and best-practice techniques for tasks such as interpreting charts and extracting content from forms.
 
-
-
-[API reference](api/messages/create.md)
+**API reference**
 
 See the Messages API documentation, including example API calls involving images.
-
-Was this page helpful?
-
-
 
 ---
 

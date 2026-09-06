@@ -1,168 +1,164 @@
 # Get Queue Statistics
 
-Copy page
+`client.beta.environments.work.stats(environmentID, params?, options?): BetaSelfHostedWorkQueueStats`
 
-
-
-TypeScript
-
-# Get Queue Statistics
-
-client.beta.environments.work.stats(stringenvironmentID, WorkStatsParams { betas } params?, RequestOptionsoptions?): [BetaSelfHostedWorkQueueStats](api/beta/environments/work.md) { depth, oldest\_queued\_at, pending, 2 more }
-
-GET/v1/environments/{environment\_id}/work/stats
+**GET** `/v1/environments/{environment_id}/work/stats`
 
 Get statistics about the work queue for an environment.
 
-##### ParametersExpand Collapse
+## Parameters
 
-environmentID: string
+- `environmentID: string`
 
-
+- `params: WorkStatsParams`
 
-params: WorkStatsParams { betas } 
+  - `betas?: Array<AnthropicBeta>`
 
-
+    Optional header to specify the beta version(s) you want to use.
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+    - `(string & {})`
 
-Optional header to specify the beta version(s) you want to use.
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
 
-One of the following:
+      - `"message-batches-2024-09-24"`
 
-(string & {})
+      - `"prompt-caching-2024-07-31"`
 
-
+      - `"computer-use-2024-10-22"`
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more
+      - `"computer-use-2025-01-24"`
 
-"message-batches-2024-09-24"
+      - `"pdfs-2024-09-25"`
 
-"prompt-caching-2024-07-31"
+      - `"token-counting-2024-11-01"`
 
-"computer-use-2024-10-22"
+      - `"token-efficient-tools-2025-02-19"`
 
-"computer-use-2025-01-24"
+      - `"output-128k-2025-02-19"`
 
-"pdfs-2024-09-25"
+      - `"files-api-2025-04-14"`
 
-"token-counting-2024-11-01"
+      - `"mcp-client-2025-04-04"`
 
-"token-efficient-tools-2025-02-19"
+      - `"mcp-client-2025-11-20"`
 
-"output-128k-2025-02-19"
+      - `"dev-full-thinking-2025-05-14"`
 
-"files-api-2025-04-14"
+      - `"interleaved-thinking-2025-05-14"`
 
-"mcp-client-2025-04-04"
+      - `"code-execution-2025-05-22"`
 
-"mcp-client-2025-11-20"
+      - `"extended-cache-ttl-2025-04-11"`
 
-"dev-full-thinking-2025-05-14"
+      - `"context-1m-2025-08-07"`
 
-"interleaved-thinking-2025-05-14"
+      - `"context-management-2025-06-27"`
 
-"code-execution-2025-05-22"
+      - `"model-context-window-exceeded-2025-08-26"`
 
-"extended-cache-ttl-2025-04-11"
+      - `"skills-2025-10-02"`
 
-"context-1m-2025-08-07"
+      - `"fast-mode-2026-02-01"`
 
-"context-management-2025-06-27"
+      - `"output-300k-2026-03-24"`
 
-"model-context-window-exceeded-2025-08-26"
+      - `"user-profiles-2026-03-24"`
 
-"skills-2025-10-02"
+      - `"user-profiles-2026-08-18"`
 
-"fast-mode-2026-02-01"
+      - `"advisor-tool-2026-03-01"`
 
-"output-300k-2026-03-24"
+      - `"managed-agents-2026-04-01"`
 
-"user-profiles-2026-03-24"
+      - `"cache-diagnosis-2026-04-07"`
 
-"advisor-tool-2026-03-01"
+      - `"dreaming-2026-04-21"`
 
-"managed-agents-2026-04-01"
+      - `"thinking-token-count-2026-05-13"`
 
-"cache-diagnosis-2026-04-07"
+      - `"server-side-fallback-2026-06-01"`
 
-"thinking-token-count-2026-05-13"
+      - `"server-side-fallback-2026-07-01"`
 
-"server-side-fallback-2026-06-01"
+      - `"fallback-credit-2026-06-01"`
 
-"fallback-credit-2026-06-01"
+      - `"fallback-credit-2026-07-01"`
 
-"agent-memory-2026-07-22"
+      - `"agent-memory-2026-07-22"`
 
-##### ReturnsExpand Collapse
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
-
+      - `"compact-2026-01-12"`
 
-BetaSelfHostedWorkQueueStats { depth, oldest\_queued\_at, pending, 2 more } 
+      - `"computer-use-2025-11-24"`
 
-Statistics about the work queue for an environment.
+      - `"mcp-tunnels-2026-06-22"`
 
-Uses Redis Stream consumer group metrics for O(1) queries.
+      - `"structured-outputs-2025-11-13"`
 
-depth: number
+      - `"task-budgets-2026-03-13"`
 
-Number of work items waiting to be picked up (lag from consumer group)
+      - `"thinking-display-updates-2026-08-18"`
 
-oldest\_queued\_at: string | null
+      - `"ce-user-management-2026-07-13"`
 
-RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
+      - `"mid-conversation-output-config-2026-07-01"`
 
-pending: number
+      - `"thinking-binding-controls-2026-08-01"`
 
-Number of work items being processed (polled but not acknowledged)
+      - `"mid-conversation-system-clear-at-2026-08-21"`
 
-type: "work\_queue\_stats"
+## Returns
 
-The type of object
+- `BetaSelfHostedWorkQueueStats`
 
-workers\_polling: number | null
+  Statistics about the work queue for an environment.
 
-Number of workers that have polled for work in the last 30 seconds. Requires worker\_id to be sent with poll requests.
+  Uses Redis Stream consumer group metrics for O(1) queries.
 
-Get Queue Statistics
+  - `depth: number`
 
-TypeScript
+    Number of work items waiting to be picked up (lag from consumer group)
 
-```shiki
-import Anthropic from '@anthropic-ai/sdk';
+  - `oldest_queued_at: string | null`
+
+    RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
+
+  - `pending: number`
+
+    Number of work items being processed (polled but not acknowledged)
+
+    default: 0
+
+  - `type: "work_queue_stats"`
+
+    The type of object
+
+    default: work_queue_stats
+
+  - `workers_polling: number | null`
+
+    Number of workers that have polled for work in the last 30 seconds. Requires worker_id to be sent with poll requests.
+
+## Example
+
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 const betaSelfHostedWorkQueueStats = await client.beta.environments.work.stats(
-  'env_011CZkZ9X2dpNyB7HsEFoRfW',
+  "env_011CZkZ9X2dpNyB7HsEFoRfW"
 );
 
 console.log(betaSelfHostedWorkQueueStats.depth);
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "depth": 0,
-  "oldest_queued_at": "oldest_queued_at",
-  "pending": 0,
-  "type": "work_queue_stats",
-  "workers_polling": 0
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "depth": 0,
   "oldest_queued_at": "oldest_queued_at",

@@ -1,241 +1,201 @@
 # List Skill Versions
 
-Copy page
+`client.beta.skills.versions.list(skillID, params?, options?): PageCursor<BetaSkillVersion>`
 
-
-
-TypeScript
-
-# List Skill Versions
-
-client.beta.skills.versions.list(stringskillID, VersionListParams { limit, page, betas } params?, RequestOptionsoptions?): PageCursor<[VersionListResponse](api/beta/skills/versions.md) { id, created\_at, description, 5 more } >
-
-GET/v1/skills/{skill\_id}/versions
+**GET** `/v1/skills/{skill_id}/versions`
 
 List Skill Versions
 
-##### ParametersExpand Collapse
+## Parameters
 
-
+- `skillID: string`
 
-skillID: string
+  Unique identifier for the skill.
 
-Unique identifier for the skill.
+  The format and length of IDs may change over time.
 
-The format and length of IDs may change over time.
+- `params: VersionListParams`
 
-
+  - `limit?: number | null`
 
-params: VersionListParams { limit, page, betas } 
+    Query param: Number of results to return per page.
 
-
+    Ranges from `1` to `1000`. Defaults to `20`.
 
-limit?: number | null
+    minimum: 1, maximum: 1000
 
-Query param: Number of items to return per page.
+  - `page?: string | null`
 
-Defaults to `20`. Ranges from `1` to `1000`.
+    Query param: Optionally set to the `next_page` token from the previous response.
 
-page?: string | null
+  - `betas?: Array<AnthropicBeta>`
 
-Query param: Optionally set to the `next_page` token from the previous response.
+    Header param: Optional header to specify the beta version(s) you want to use.
 
-
+    - `(string & {})`
 
-betas?: Array<[AnthropicBeta](api/beta.md)>
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+      - `"message-batches-2024-09-24"`
 
-One of the following:
+      - `"prompt-caching-2024-07-31"`
 
-(string & {})
+      - `"computer-use-2024-10-22"`
 
-
+      - `"computer-use-2025-01-24"`
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more
+      - `"pdfs-2024-09-25"`
 
-"message-batches-2024-09-24"
+      - `"token-counting-2024-11-01"`
 
-"prompt-caching-2024-07-31"
+      - `"token-efficient-tools-2025-02-19"`
 
-"computer-use-2024-10-22"
+      - `"output-128k-2025-02-19"`
 
-"computer-use-2025-01-24"
+      - `"files-api-2025-04-14"`
 
-"pdfs-2024-09-25"
+      - `"mcp-client-2025-04-04"`
 
-"token-counting-2024-11-01"
+      - `"mcp-client-2025-11-20"`
 
-"token-efficient-tools-2025-02-19"
+      - `"dev-full-thinking-2025-05-14"`
 
-"output-128k-2025-02-19"
+      - `"interleaved-thinking-2025-05-14"`
 
-"files-api-2025-04-14"
+      - `"code-execution-2025-05-22"`
 
-"mcp-client-2025-04-04"
+      - `"extended-cache-ttl-2025-04-11"`
 
-"mcp-client-2025-11-20"
+      - `"context-1m-2025-08-07"`
 
-"dev-full-thinking-2025-05-14"
+      - `"context-management-2025-06-27"`
 
-"interleaved-thinking-2025-05-14"
+      - `"model-context-window-exceeded-2025-08-26"`
 
-"code-execution-2025-05-22"
+      - `"skills-2025-10-02"`
 
-"extended-cache-ttl-2025-04-11"
+      - `"fast-mode-2026-02-01"`
 
-"context-1m-2025-08-07"
+      - `"output-300k-2026-03-24"`
 
-"context-management-2025-06-27"
+      - `"user-profiles-2026-03-24"`
 
-"model-context-window-exceeded-2025-08-26"
+      - `"user-profiles-2026-08-18"`
 
-"skills-2025-10-02"
+      - `"advisor-tool-2026-03-01"`
 
-"fast-mode-2026-02-01"
+      - `"managed-agents-2026-04-01"`
 
-"output-300k-2026-03-24"
+      - `"cache-diagnosis-2026-04-07"`
 
-"user-profiles-2026-03-24"
+      - `"dreaming-2026-04-21"`
 
-"advisor-tool-2026-03-01"
+      - `"thinking-token-count-2026-05-13"`
 
-"managed-agents-2026-04-01"
+      - `"server-side-fallback-2026-06-01"`
 
-"cache-diagnosis-2026-04-07"
+      - `"server-side-fallback-2026-07-01"`
 
-"thinking-token-count-2026-05-13"
+      - `"fallback-credit-2026-06-01"`
 
-"server-side-fallback-2026-06-01"
+      - `"fallback-credit-2026-07-01"`
 
-"fallback-credit-2026-06-01"
+      - `"agent-memory-2026-07-22"`
 
-"agent-memory-2026-07-22"
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
-##### ReturnsExpand Collapse
+      - `"compact-2026-01-12"`
 
-
+      - `"computer-use-2025-11-24"`
 
-VersionListResponse { id, created\_at, description, 5 more } 
+      - `"mcp-tunnels-2026-06-22"`
 
-
+      - `"structured-outputs-2025-11-13"`
 
-id: string
+      - `"task-budgets-2026-03-13"`
 
-Unique identifier for the skill version.
+      - `"thinking-display-updates-2026-08-18"`
 
-The format and length of IDs may change over time.
+      - `"ce-user-management-2026-07-13"`
 
-created\_at: string
+      - `"mid-conversation-output-config-2026-07-01"`
 
-ISO 8601 timestamp of when the skill version was created.
+      - `"thinking-binding-controls-2026-08-01"`
 
-
+      - `"mid-conversation-system-clear-at-2026-08-21"`
 
-description: string
+## Returns
 
-Description of the skill version.
+- `BetaSkillVersion`
 
-This is extracted from the SKILL.md file in the skill upload.
+  - `id: string`
 
-
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
 
-directory: string
+  - `created_at: string`
 
-Directory name of the skill version.
+    ISO 8601 timestamp of when the skill was created.
 
-This is the top-level directory name that was extracted from the uploaded files.
+    format: date-time
 
-
+  - `description: string`
 
-name: string
+    Description of the skill version.
 
-Human-readable name of the skill version.
+    This is extracted from the SKILL.md file in the skill upload.
 
-This is extracted from the SKILL.md file in the skill upload.
+  - `name: string`
 
-skill\_id: string
+    The Skill's immutable kebab-case slug, set at creation from the first
+    upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
+    later upload must resolve to the same value. Also the top-level directory
+    of the Skill's mounted files and the base name of a downloaded archive.
 
-Identifier for the skill that this version belongs to.
+  - `skill_id: string`
 
-
+    Unique identifier for the skill.
 
-type: string
+    The format and length of IDs may change over time.
 
-Object type.
+  - `type: "skill_version"`
 
-For Skill Versions, this is always `"skill_version"`.
+    Object type.
 
-
+    For Skill Versions, this is always `"skill_version"`.
 
-version: string
+    default: skill_version
 
-Version identifier for the skill.
+## Example
 
-Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
-
-List Skill Versions
-
-TypeScript
-
-```shiki
-import Anthropic from '@anthropic-ai/sdk';
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 // Automatically fetches more pages as needed.
-for await (const versionListResponse of client.beta.skills.versions.list('skill_id')) {
-  console.log(versionListResponse.id);
+for await (const betaSkillVersion of client.beta.skills.versions.list("skill_id")) {
+  console.log(betaSkillVersion.id);
 }
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
+```json
 {
   "data": [
     {
-      "id": "skillver_01JAbcdefghijklmnopqrstuvw",
+      "id": "id",
       "created_at": "2024-10-30T23:58:27.427722Z",
-      "description": "A custom skill for doing something useful",
-      "directory": "my-skill",
-      "name": "my-skill",
+      "description": "description",
+      "name": "name",
       "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-      "type": "type",
-      "version": "1759178010641129"
+      "type": "skill_version"
     }
   ],
-  "has_more": true,
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "skillver_01JAbcdefghijklmnopqrstuvw",
-      "created_at": "2024-10-30T23:58:27.427722Z",
-      "description": "A custom skill for doing something useful",
-      "directory": "my-skill",
-      "name": "my-skill",
-      "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-      "type": "type",
-      "version": "1759178010641129"
-    }
-  ],
-  "has_more": true,
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+  "next_page": "next_page"
 }
 ```
 

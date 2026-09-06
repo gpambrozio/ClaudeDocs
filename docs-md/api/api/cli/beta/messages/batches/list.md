@@ -1,217 +1,157 @@
 # List Message Batches
 
-Copy page
+`$ ant beta:messages:batches list`
 
-
-
-CLI
-
-# List Message Batches
-
-$ ant beta:messages:batches list
-
-GET/v1/messages/batches
+**GET** `/v1/messages/batches`
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
 Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
 
-##### ParametersExpand Collapse
+## Parameters
 
---after-id: optional string
+- `--after-id: optional string`
 
-Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+  Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
---before-id: optional string
+- `--before-id: optional string`
 
-Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+  Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-
+- `--limit: optional number`
 
---limit: optional number
+  Query param: Number of items to return per page.
 
-Query param: Number of items to return per page.
+  Defaults to `20`. Ranges from `1` to `1000`.
 
-Defaults to `20`. Ranges from `1` to `1000`.
+  maximum: 1000, minimum: 1
 
---beta: optional array of [AnthropicBeta](api/beta.md)
+- `--beta: optional array of AnthropicBeta`
 
-Header param: Optional header to specify the beta version(s) you want to use.
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-##### ReturnsExpand Collapse
+## Returns
 
-
+- `BetaListResponse_MessageBatch_: object`
 
-BetaListResponse\_MessageBatch\_: object { data, first\_id, has\_more, last\_id } 
+  - `data: array of BetaMessageBatch`
 
-
+    - `id: string`
 
-data: array of [BetaMessageBatch](api/beta/messages/batches.md) { id, archived\_at, cancel\_initiated\_at, 7 more } 
+      Unique object identifier.
 
-
+      The format and length of IDs may change over time.
 
-id: string
+    - `archived_at: string`
 
-Unique object identifier.
+      RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
-The format and length of IDs may change over time.
+      format: date-time
 
-archived\_at: string
+    - `cancel_initiated_at: string`
 
-RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+      RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
-cancel\_initiated\_at: string
+      format: date-time
 
-RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
+    - `created_at: string`
 
-created\_at: string
+      RFC 3339 datetime string representing the time at which the Message Batch was created.
 
-RFC 3339 datetime string representing the time at which the Message Batch was created.
+      format: date-time
 
-
+    - `ended_at: string`
 
-ended\_at: string
+      RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
-RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
+      Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
-Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
+      format: date-time
 
-expires\_at: string
+    - `expires_at: string`
 
-RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+      RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
-
+      format: date-time
 
-processing\_status: "in\_progress" or "canceling" or "ended"
+    - `processing_status: "in_progress" or "canceling" or "ended"`
 
-Processing status of the Message Batch.
+      Processing status of the Message Batch.
 
-"in\_progress"
+      - `"in_progress"`
 
-"canceling"
+      - `"canceling"`
 
-"ended"
+      - `"ended"`
 
-
+    - `request_counts: object`
 
-request\_counts: object { canceled, errored, expired, 2 more } 
+      Tallies requests within the Message Batch, categorized by their status.
 
-Tallies requests within the Message Batch, categorized by their status.
+      Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
+      - `canceled: number`
 
-
+        Number of requests in the Message Batch that have been canceled.
 
-canceled: number
+        This is zero until processing of the entire Message Batch has ended.
 
-Number of requests in the Message Batch that have been canceled.
+      - `errored: number`
 
-This is zero until processing of the entire Message Batch has ended.
+        Number of requests in the Message Batch that encountered an error.
 
-
+        This is zero until processing of the entire Message Batch has ended.
 
-errored: number
+      - `expired: number`
 
-Number of requests in the Message Batch that encountered an error.
+        Number of requests in the Message Batch that have expired.
 
-This is zero until processing of the entire Message Batch has ended.
+        This is zero until processing of the entire Message Batch has ended.
 
-
+      - `processing: number`
 
-expired: number
+        Number of requests in the Message Batch that are processing.
 
-Number of requests in the Message Batch that have expired.
+      - `succeeded: number`
 
-This is zero until processing of the entire Message Batch has ended.
+        Number of requests in the Message Batch that have completed successfully.
 
-processing: number
+        This is zero until processing of the entire Message Batch has ended.
 
-Number of requests in the Message Batch that are processing.
+    - `results_url: string`
 
-
+      URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
-succeeded: number
+      Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Number of requests in the Message Batch that have completed successfully.
+    - `type: "message_batch"`
 
-This is zero until processing of the entire Message Batch has ended.
+      Object type.
 
-
+      For Message Batches, this is always `"message_batch"`.
 
-results\_url: string
+  - `first_id: string`
 
-URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
+    First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
-Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+  - `has_more: boolean`
 
-
+    Indicates if there are more results in the requested page direction.
 
-type: "message\_batch"
+  - `last_id: string`
 
-Object type.
+    Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
-For Message Batches, this is always `"message_batch"`.
+## Example
 
-first\_id: string
-
-First ID in the `data` list. Can be used as the `before_id` for the previous page.
-
-has\_more: boolean
-
-Indicates if there are more results in the requested page direction.
-
-last\_id: string
-
-Last ID in the `data` list. Can be used as the `after_id` for the next page.
-
-List Message Batches
-
-CLI
-
-```shiki
+```bash
 ant beta:messages:batches list \
   --api-key my-anthropic-api-key
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "data": [
-    {
-      "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
-      "archived_at": "2024-08-20T18:37:24.100435Z",
-      "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
-      "created_at": "2024-08-20T18:37:24.100435Z",
-      "ended_at": "2024-08-20T18:37:24.100435Z",
-      "expires_at": "2024-08-20T18:37:24.100435Z",
-      "processing_status": "in_progress",
-      "request_counts": {
-        "canceled": 10,
-        "errored": 30,
-        "expired": 10,
-        "processing": 100,
-        "succeeded": 50
-      },
-      "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
-      "type": "message_batch"
-    }
-  ],
-  "first_id": "first_id",
-  "has_more": true,
-  "last_id": "last_id"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "data": [
     {

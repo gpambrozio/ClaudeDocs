@@ -1,190 +1,162 @@
 # Create Tunnel Certificate
 
-Copy page
-
-
-
-cURL
-
-# Create Tunnel Certificate
-
-POST/v1/tunnels/{tunnel\_id}/certificates
+**POST** `/v1/tunnels/{tunnel_id}/certificates`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
 Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's server certificate against this CA when it terminates the inner TLS session. A tunnel holds at most two non-archived certificates.
 
-##### Path parameters
+## Path parameters
 
-tunnel\_id: string
+- `tunnel_id: string`
 
-##### Headers
+## Headers
 
-
+- `"anthropic-beta": optional array of AnthropicBeta`
 
-"anthropic-beta": optional array of [AnthropicBeta](api/http/beta.md)
+  Optional header to specify the beta version(s) you want to use.
 
-Optional header to specify the beta version(s) you want to use.
+  - `string`
 
-One of the following:
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
-string
+    - `"message-batches-2024-09-24"`
 
-
+    - `"prompt-caching-2024-07-31"`
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more
+    - `"computer-use-2024-10-22"`
 
-One of the following:
+    - `"computer-use-2025-01-24"`
 
-"message-batches-2024-09-24"
+    - `"pdfs-2024-09-25"`
 
-"prompt-caching-2024-07-31"
+    - `"token-counting-2024-11-01"`
 
-"computer-use-2024-10-22"
+    - `"token-efficient-tools-2025-02-19"`
 
-"computer-use-2025-01-24"
+    - `"output-128k-2025-02-19"`
 
-"pdfs-2024-09-25"
+    - `"files-api-2025-04-14"`
 
-"token-counting-2024-11-01"
+    - `"mcp-client-2025-04-04"`
 
-"token-efficient-tools-2025-02-19"
+    - `"mcp-client-2025-11-20"`
 
-"output-128k-2025-02-19"
+    - `"dev-full-thinking-2025-05-14"`
 
-"files-api-2025-04-14"
+    - `"interleaved-thinking-2025-05-14"`
 
-"mcp-client-2025-04-04"
+    - `"code-execution-2025-05-22"`
 
-"mcp-client-2025-11-20"
+    - `"extended-cache-ttl-2025-04-11"`
 
-"dev-full-thinking-2025-05-14"
+    - `"context-1m-2025-08-07"`
 
-"interleaved-thinking-2025-05-14"
+    - `"context-management-2025-06-27"`
 
-"code-execution-2025-05-22"
+    - `"model-context-window-exceeded-2025-08-26"`
 
-"extended-cache-ttl-2025-04-11"
+    - `"skills-2025-10-02"`
 
-"context-1m-2025-08-07"
+    - `"fast-mode-2026-02-01"`
 
-"context-management-2025-06-27"
+    - `"output-300k-2026-03-24"`
 
-"model-context-window-exceeded-2025-08-26"
+    - `"user-profiles-2026-03-24"`
 
-"skills-2025-10-02"
+    - `"user-profiles-2026-08-18"`
 
-"fast-mode-2026-02-01"
+    - `"advisor-tool-2026-03-01"`
 
-"output-300k-2026-03-24"
+    - `"managed-agents-2026-04-01"`
 
-"user-profiles-2026-03-24"
+    - `"cache-diagnosis-2026-04-07"`
 
-"user-profiles-2026-08-18"
+    - `"dreaming-2026-04-21"`
 
-"advisor-tool-2026-03-01"
+    - `"thinking-token-count-2026-05-13"`
 
-"managed-agents-2026-04-01"
+    - `"server-side-fallback-2026-06-01"`
 
-"cache-diagnosis-2026-04-07"
+    - `"server-side-fallback-2026-07-01"`
 
-"dreaming-2026-04-21"
+    - `"fallback-credit-2026-06-01"`
 
-"thinking-token-count-2026-05-13"
+    - `"fallback-credit-2026-07-01"`
 
-"server-side-fallback-2026-06-01"
+    - `"agent-memory-2026-07-22"`
 
-"server-side-fallback-2026-07-01"
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
-"fallback-credit-2026-06-01"
+    - `"compact-2026-01-12"`
 
-"fallback-credit-2026-07-01"
+    - `"computer-use-2025-11-24"`
 
-"agent-memory-2026-07-22"
+    - `"mcp-tunnels-2026-06-22"`
 
-"mid-conversation-tool-changes-2026-07-01"
+    - `"structured-outputs-2025-11-13"`
 
-"compact-2026-01-12"
+    - `"task-budgets-2026-03-13"`
 
-"computer-use-2025-11-24"
+    - `"thinking-display-updates-2026-08-18"`
 
-"mcp-tunnels-2026-06-22"
+    - `"ce-user-management-2026-07-13"`
 
-"structured-outputs-2025-11-13"
+    - `"mid-conversation-output-config-2026-07-01"`
 
-"task-budgets-2026-03-13"
+    - `"thinking-binding-controls-2026-08-01"`
 
-"thinking-display-updates-2026-08-18"
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
-"ce-user-management-2026-07-13"
+## Body parameters
 
-"mid-conversation-output-config-2026-07-01"
+- `ca_certificate_pem: string`
 
-"thinking-binding-controls-2026-08-01"
+  PEM-encoded X.509 CA certificate. Must contain exactly one certificate and no private-key material. Maximum 8KB.
 
-"mid-conversation-system-clear-at-2026-08-21"
+  maxLength: 8192
 
-##### Body
+## Returns
 
-
+- `BetaTunnelCertificate object`
 
-ca\_certificate\_pem: string
+  A CA certificate attached to a tunnel.
 
-PEM-encoded X.509 CA certificate. Must contain exactly one certificate and no private-key material. Maximum 8KB.
+  - `id: string`
 
-maxLength8192
+    Unique identifier for the certificate, prefixed with `tcrt_`.
 
-##### Returns
+  - `archived_at: string or null`
 
-
+    A timestamp in RFC 3339 format
 
-BetaTunnelCertificate object{ id, archived\_at, created\_at, 4 more }
+    format: date-time
 
-A CA certificate attached to a tunnel.
+  - `created_at: string`
 
-id: string
+    A timestamp in RFC 3339 format
 
-Unique identifier for the certificate, prefixed with `tcrt_`.
+    format: date-time
 
-
+  - `expires_at: string or null`
 
-archived\_at: string or null
+    A timestamp in RFC 3339 format
 
-A timestamp in RFC 3339 format
+    format: date-time
 
-formatdate-time
+  - `fingerprint: string`
 
-
+    Lowercase hex SHA-256 fingerprint of the certificate's DER encoding.
 
-created\_at: string
+  - `tunnel_id: string`
 
-A timestamp in RFC 3339 format
+    ID of the tunnel the certificate is registered against.
 
-formatdate-time
+  - `type: "tunnel_certificate"`
 
-
+## Example
 
-expires\_at: string or null
-
-A timestamp in RFC 3339 format
-
-formatdate-time
-
-fingerprint: string
-
-Lowercase hex SHA-256 fingerprint of the certificate's DER encoding.
-
-tunnel\_id: string
-
-ID of the tunnel the certificate is registered against.
-
-type: "tunnel\_certificate"
-
-Create Tunnel Certificate
-
-cURL
-
-```shiki
+```bash
 curl https://api.anthropic.com/v1/tunnels/$TUNNEL_ID/certificates \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -195,29 +167,9 @@ curl https://api.anthropic.com/v1/tunnels/$TUNNEL_ID/certificates \
         }'
 ```
 
-Response 200
+### Response (200)
 
-
-
-```shiki
-{
-  "id": "id",
-  "archived_at": "2019-12-27T18:11:19.117Z",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "expires_at": "2019-12-27T18:11:19.117Z",
-  "fingerprint": "fingerprint",
-  "tunnel_id": "tunnel_id",
-  "type": "tunnel_certificate"
-}
-```
-
-##### Returns Examples
-
-Response 200
-
-
-
-```shiki
+```json
 {
   "id": "id",
   "archived_at": "2019-12-27T18:11:19.117Z",

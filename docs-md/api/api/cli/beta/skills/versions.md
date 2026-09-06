@@ -1,42 +1,443 @@
 # Versions
 
-Copy page
+## Create Skill Version
 
-
+`$ ant beta:skills:versions create`
 
-CLI
+**POST** `/v1/skills/{skill_id}/versions`
 
-# Versions
+Create Skill Version
 
-##### [Create Skill Version](api/beta/skills/versions/create.md)
+### Parameters
 
-$ ant beta:skills:versions create
+- `--skill-id: string`
 
-POST/v1/skills/{skill\_id}/versions
+  Path param: Unique identifier for the skill.
 
-##### [List Skill Versions](api/beta/skills/versions/list.md)
+  The format and length of IDs may change over time.
 
-$ ant beta:skills:versions list
+- `--file: array of string`
 
-GET/v1/skills/{skill\_id}/versions
+  Body param: Files to upload for the skill.
 
-##### [Download Skill Version Content](api/beta/skills/versions/download.md)
+  All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
-$ ant beta:skills:versions download
+- `--beta: optional array of AnthropicBeta`
 
-GET/v1/skills/{skill\_id}/versions/{version}/content
+  Header param: Optional header to specify the beta version(s) you want to use.
 
-##### [Get Skill Version](api/beta/skills/versions/retrieve.md)
+### Returns
 
-$ ant beta:skills:versions retrieve
+- `beta_skill_version: object`
 
-GET/v1/skills/{skill\_id}/versions/{version}
+  - `id: string`
 
-##### [Delete Skill Version](api/beta/skills/versions/delete.md)
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
 
-$ ant beta:skills:versions delete
+  - `created_at: string`
 
-DELETE/v1/skills/{skill\_id}/versions/{version}
+    ISO 8601 timestamp of when the skill was created.
+
+    format: date-time
+
+  - `description: string`
+
+    Description of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `name: string`
+
+    The Skill's immutable kebab-case slug, set at creation from the first
+    upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
+    later upload must resolve to the same value. Also the top-level directory
+    of the Skill's mounted files and the base name of a downloaded archive.
+
+  - `skill_id: string`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `type: "skill_version"`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
+
+### Example
+
+```bash
+ant beta:skills:versions create \
+  --api-key my-anthropic-api-key \
+  --skill-id skill_id \
+  --file 'Example data'
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "description": "description",
+  "name": "name",
+  "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "skill_version"
+}
+```
+
+## List Skill Versions
+
+`$ ant beta:skills:versions list`
+
+**GET** `/v1/skills/{skill_id}/versions`
+
+List Skill Versions
+
+### Parameters
+
+- `--skill-id: string`
+
+  Path param: Unique identifier for the skill.
+
+  The format and length of IDs may change over time.
+
+- `--limit: optional number`
+
+  Query param: Number of results to return per page.
+
+  Ranges from `1` to `1000`. Defaults to `20`.
+
+  minimum: 1, maximum: 1000
+
+- `--page: optional string`
+
+  Query param: Optionally set to the `next_page` token from the previous response.
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaListSkillVersionsResponse: object`
+
+  - `data: array of BetaSkillVersion`
+
+    List of skills.
+
+    - `id: string`
+
+      Unique identifier for this Skill Version. The id addresses the version in
+      paths and pins it in references.
+
+    - `created_at: string`
+
+      ISO 8601 timestamp of when the skill was created.
+
+      format: date-time
+
+    - `description: string`
+
+      Description of the skill version.
+
+      This is extracted from the SKILL.md file in the skill upload.
+
+    - `name: string`
+
+      The Skill's immutable kebab-case slug, set at creation from the first
+      upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
+      later upload must resolve to the same value. Also the top-level directory
+      of the Skill's mounted files and the base name of a downloaded archive.
+
+    - `skill_id: string`
+
+      Unique identifier for the skill.
+
+      The format and length of IDs may change over time.
+
+    - `type: "skill_version"`
+
+      Object type.
+
+      For Skill Versions, this is always `"skill_version"`.
+
+  - `next_page: string`
+
+    Token for fetching the next page of results.
+
+    If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
+
+### Example
+
+```bash
+ant beta:skills:versions list \
+  --api-key my-anthropic-api-key \
+  --skill-id skill_id
+```
+
+#### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2024-10-30T23:58:27.427722Z",
+      "description": "description",
+      "name": "name",
+      "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
+      "type": "skill_version"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Download Skill Version Content
+
+`$ ant beta:skills:versions download`
+
+**GET** `/v1/skills/{skill_id}/versions/{version}/content`
+
+Download a skill version's content as a zip archive.
+
+### Parameters
+
+- `--skill-id: string`
+
+  Path param: Unique identifier for the skill.
+
+  The format and length of IDs may change over time.
+
+- `--version: string`
+
+  Path param: Identifies the skill version by its version ID.
+
+  Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `unnamed_schema_2: file path`
+
+### Example
+
+```bash
+ant beta:skills:versions download \
+  --api-key my-anthropic-api-key \
+  --skill-id skill_id \
+  --version version
+```
+
+## Get Skill Version
+
+`$ ant beta:skills:versions retrieve`
+
+**GET** `/v1/skills/{skill_id}/versions/{version}`
+
+Get Skill Version
+
+### Parameters
+
+- `--skill-id: string`
+
+  Path param: Unique identifier for the skill.
+
+  The format and length of IDs may change over time.
+
+- `--version: string`
+
+  Path param: Identifies the skill version: a version ID, or the literal `latest` for the skill's most recent version.
+
+  Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_skill_version: object`
+
+  - `id: string`
+
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
+
+  - `created_at: string`
+
+    ISO 8601 timestamp of when the skill was created.
+
+    format: date-time
+
+  - `description: string`
+
+    Description of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `name: string`
+
+    The Skill's immutable kebab-case slug, set at creation from the first
+    upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
+    later upload must resolve to the same value. Also the top-level directory
+    of the Skill's mounted files and the base name of a downloaded archive.
+
+  - `skill_id: string`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `type: "skill_version"`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
+
+### Example
+
+```bash
+ant beta:skills:versions retrieve \
+  --api-key my-anthropic-api-key \
+  --skill-id skill_id \
+  --version version
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "description": "description",
+  "name": "name",
+  "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "skill_version"
+}
+```
+
+## Delete Skill Version
+
+`$ ant beta:skills:versions delete`
+
+**DELETE** `/v1/skills/{skill_id}/versions/{version}`
+
+Delete Skill Version
+
+### Parameters
+
+- `--skill-id: string`
+
+  Path param: Unique identifier for the skill.
+
+  The format and length of IDs may change over time.
+
+- `--version: string`
+
+  Path param: Identifies the skill version by its version ID.
+
+  Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_deleted_skill_version: object`
+
+  - `id: string`
+
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
+
+  - `type: "skill_version_deleted"`
+
+    Deleted object type.
+
+    For Skill Versions, this is always `"skill_version_deleted"`.
+
+### Example
+
+```bash
+ant beta:skills:versions delete \
+  --api-key my-anthropic-api-key \
+  --skill-id skill_id \
+  --version version
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "id",
+  "type": "skill_version_deleted"
+}
+```
+
+## Domain types
+
+### Beta Deleted Skill Version
+
+- `beta_deleted_skill_version: object`
+
+  - `id: string`
+
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
+
+  - `type: "skill_version_deleted"`
+
+    Deleted object type.
+
+    For Skill Versions, this is always `"skill_version_deleted"`.
+
+### Beta Skill Version
+
+- `beta_skill_version: object`
+
+  - `id: string`
+
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
+
+  - `created_at: string`
+
+    ISO 8601 timestamp of when the skill was created.
+
+    format: date-time
+
+  - `description: string`
+
+    Description of the skill version.
+
+    This is extracted from the SKILL.md file in the skill upload.
+
+  - `name: string`
+
+    The Skill's immutable kebab-case slug, set at creation from the first
+    upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
+    later upload must resolve to the same value. Also the top-level directory
+    of the Skill's mounted files and the base name of a downloaded archive.
+
+  - `skill_id: string`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `type: "skill_version"`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
 
 ---
 
