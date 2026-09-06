@@ -34,8 +34,13 @@ COPYRIGHT_NOTICE = "\n\n---\n\n*Copyright © Anthropic. All rights reserved.*\n"
 # The changelog page is generated from the same CHANGELOG.md that
 # sync_changelog.py splits into versions/, so mirroring it here would duplicate
 # every release entry within a single sync commit.
+#
+# llms.txt lists whats-new/index, which serves the same page as whats-new. It
+# is a real URL rather than a redirect, so only an explicit skip keeps the
+# mirror from carrying the page twice.
 SKIP_URLS = {
     "https://code.claude.com/docs/en/changelog",
+    "https://code.claude.com/docs/en/whats-new/index",
 }
 
 # Documentation sites to crawl
