@@ -38,7 +38,12 @@ COPYRIGHT_NOTICE = "\n\n---\n\n*Copyright © Anthropic. All rights reserved.*\n"
 # llms.txt lists whats-new/index, which serves the same page as whats-new. It
 # is a real URL rather than a redirect, so only an explicit skip keeps the
 # mirror from carrying the page twice.
+#
+# The bare /docs/en seed serves the same page as /docs/en/overview. Only
+# overview is indexed and linked to, so the seed is skipped and the overview
+# page is what gets mirrored.
 SKIP_URLS = {
+    "https://code.claude.com/docs/en",
     "https://code.claude.com/docs/en/changelog",
     "https://code.claude.com/docs/en/whats-new/index",
 }
